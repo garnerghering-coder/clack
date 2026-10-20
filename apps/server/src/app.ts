@@ -14,16 +14,18 @@ declare module 'fastify' {
 }
 
 export function buildApp(db: Db, opts: { logger?: boolean } = {}) {
-  // Per-request logs are noise for a local demo; errors and startup are still logged.
-  const app = Fastify({ logger: opts.logger ?? false, disableRequestLogging: true });
+  const app = Fastify({ logger: opts.logger ?? false });
   app.decorateRequest('userId', '');
   // No accounts in Phase 1: every request acts as the seeded local user.
   app.addHook('onRequest', async (req) => {
     req.userId = LOCAL_USER_ID;
   });
-  app.register(healthRoutes(db), { prefix: '/api' });
-  app.register(settingsRoutes(db), { prefix: '/api' });
-  app.register(stationRoutes(db), { prefix: '/api' });
-  app.register(importStatusRoutes(db), { prefix: '/api' });
+  // Per-request logs are noise for a local demo: API routes log at warn, so only problems show.
+  // Startup and import messages still log at info.
+  const api = { prefix: '/api', logLevel: 'warn' } as const;
+  app.register(healthRoutes(db), api);
+  app.register(settingsRoutes(db), api);
+  app.register(stationRoutes(db), api);
+  app.register(importStatusRoutes(db), api);
   return app;
 }
