@@ -9,6 +9,7 @@ import { importStatusRoutes } from './routes/importStatus.js';
 import { searchRoutes } from './routes/search.js';
 import { legRoutes } from './routes/legs.js';
 import { mapRoutes } from './routes/map.js';
+import { liveRoutes } from './routes/live.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -33,5 +34,6 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(searchRoutes(db), api);
   app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   app.register(mapRoutes(db), api);
+  app.register(liveRoutes(), api);
   return app;
 }

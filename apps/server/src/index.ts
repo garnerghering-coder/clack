@@ -5,6 +5,7 @@ import { bootstrap } from './import/run.js';
 import { startScheduler } from './jobs/scheduler.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
+import { startLiveTracker } from './live/tracker.js';
 
 const db = openDb(config.databasePath);
 let log = (msg: string) => console.log(msg);
@@ -25,4 +26,6 @@ if (process.env.JOBS !== 'off') {
     .catch((e) => log(`actual times catch-up failed: ${(e as Error).message}`))
     .then(() => bootstrap(db, log))
     .then(() => startScheduler(db, log));
+  // Live tracking runs alongside the imports (it only needs saved trips).
+  startLiveTracker(db, { log });
 }

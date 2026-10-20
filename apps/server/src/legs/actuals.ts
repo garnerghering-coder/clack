@@ -158,6 +158,9 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         .set({
           actualArr: m.actualArr === null ? null : new Date(m.actualArr),
           actualDep: m.actualDep === null ? null : new Date(m.actualDep),
+          // Estimates only matter until the real time is known.
+          estimatedArr: m.actualArr === null && m.estimatedArr !== null ? new Date(m.estimatedArr) : null,
+          estimatedDep: m.actualDep === null && m.estimatedDep !== null ? new Date(m.estimatedDep) : null,
           platform: m.platform,
           canceled: m.canceled,
           deviations: m.deviations,

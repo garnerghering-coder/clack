@@ -7,6 +7,7 @@ import { legStops, legs, operators, stations } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
 import { tripStops, type TripStop } from '../search/timetable.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
+import { liveFor, liveForMany } from '../live/tracker.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
 
@@ -133,7 +134,7 @@ const legColumns = {
   notes: legs.notes,
 };
 
-function attachRefs(db: Db, rows: { operatorId: string | null; originStationId: string; destStationId: string }[]) {
+function attachRefs<T extends { operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
   const ops = new Map(db.select().from(operators).all().map((o) => [o.id, o]));
   const ids = [...new Set(rows.flatMap((r) => [r.originStationId, r.destStationId]))];
   const st = new Map(
@@ -156,7 +157,8 @@ function attachRefs(db: Db, rows: { operatorId: string | null; originStationId: 
 
 export function listLegs(db: Db, userId: string) {
   const rows = db.select(legColumns).from(legs).where(eq(legs.userId, userId)).orderBy(desc(legs.schedDep)).all();
-  return attachRefs(db, rows);
+  const live = liveForMany(db, rows.map((r) => r.id));
+  return attachRefs(db, rows).map((r) => ({ ...r, live: live.get(r.id) ?? null }));
 }
 
 export function getLeg(db: Db, userId: string, id: string) {
@@ -179,6 +181,8 @@ export function getLeg(db: Db, userId: string, id: string) {
       schedDep: legStops.schedDep,
       actualArr: legStops.actualArr,
       actualDep: legStops.actualDep,
+      estimatedArr: legStops.estimatedArr,
+      estimatedDep: legStops.estimatedDep,
       platform: legStops.platform,
       canceled: legStops.canceled,
       deviations: legStops.deviations,
@@ -188,7 +192,7 @@ export function getLeg(db: Db, userId: string, id: string) {
     .where(eq(legStops.legId, id))
     .orderBy(asc(legStops.seq))
     .all();
-  return { ...leg!, geometry, stops };
+  return { ...leg!, geometry, stops, ...liveFor(db, id) };
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {

@@ -195,6 +195,9 @@ export const legStops = sqliteTable(
     schedDep: timestamp('sched_dep'),
     actualArr: timestamp('actual_arr'),
     actualDep: timestamp('actual_dep'),
+    /** Trafikverket's live estimate while the train runs (cleared once an actual time exists). */
+    estimatedArr: timestamp('estimated_arr'),
+    estimatedDep: timestamp('estimated_dep'),
     platform: text('platform'),
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
     /** Stops between origin and destination. */
@@ -234,6 +237,15 @@ export const liveState = sqliteTable('live_state', {
   speedKmh: real('speed_kmh'),
   /** gps | estimated */
   positionSource: text('position_source'),
+  /** When the GPS fix was taken (Trafikverket TimeStamp); null for estimates. */
+  positionAt: timestamp('position_at'),
+  /** Share of the ridden route travelled, 0–1 (splits the map line and fills the progress bar). */
+  progress: real('progress'),
+  prevStopId: text('prev_stop_id'),
   nextStopId: text('next_stop_id'),
+  /** Expected time at the next stop. */
   eta: timestamp('eta'),
+  /** Expected arrival where you get off. */
+  arrivalEta: timestamp('arrival_eta'),
+  arrivalDelayMin: integer('arrival_delay_min'),
 });
