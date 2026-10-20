@@ -1,33 +1,141 @@
 {
   "app": {
-    "name": "Clack"
+    "name": "clack"
   },
   "nav": {
+    "label": "Main",
     "trips": "Trips",
     "passport": "Passport",
     "settings": "Settings",
-    "label": "Main",
-    "add": "Add trip"
+    "addTrain": "Add train"
   },
   "trips": {
     "title": "Trips",
-    "add": "Add trip",
-    "empty": {
-      "title": "No trips yet",
-      "body": "Tap the search button to add a train you've ridden, or one you're about to take."
-    }
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "whereNext": "Where to next?",
+    "whereNextBody": "Add the train you're taking, or one you've already ridden.",
+    "emptyTitle": "No trains yet",
+    "emptyBody": "Add the train you took today, or one from years ago.",
+    "noUpcoming": "Nothing coming up.",
+    "noPast": "No past trains yet.",
+    "departsIn": "Departs in {{time}}",
+    "boarding": "Boarding",
+    "liveNow": "Live now",
+    "arrived": "Arrived",
+    "platform": "Platform {{platform}}",
+    "approxDistance": "≈ {{distance}}",
+    "loadError": "Couldn't load your trips.",
+    "retry": "Retry"
+  },
+  "add": {
+    "title": "Add a train",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "pickDate": "Pick date",
+    "pastTrip": "Past trip",
+    "placeholder": "Train number, route, or operator",
+    "examples": "Try",
+    "stations": "Stations",
+    "popular": "Popular stations",
+    "trainNumber": "train {{number}}",
+    "filterAll": "All",
+    "filterLong": "Long-distance",
+    "filterRegional": "Regional",
+    "filterCommuter": "Commuter",
+    "noDirect": "No direct train found. Add each train separately.",
+    "noTrain": "No train {{number}} on this date.",
+    "outsideTimetable": "Searching old timetables comes in a later step. For now, choose a date from yesterday onwards.",
+    "searchError": "Timetable search needs a connection to the Clack server.",
+    "alsoKnownAs": "also {{numbers}}",
+    "stopsBetween_one": "{{count}} stop",
+    "stopsBetween_other": "{{count}} stops",
+    "direct": "Direct",
+    "confirmTitle": "Where did you get on and off?",
+    "from": "From",
+    "to": "To",
+    "addToClack": "Add to Clack",
+    "duplicate": "You already added this train on this date.",
+    "addAnyway": "Add anyway",
+    "cancel": "Cancel",
+    "saveError": "Couldn't save: {{message}}",
+    "added": "Added",
+    "viewTrip": "View trip",
+    "addAnother": "Add another",
+    "back": "Back to results",
+    "noBoarding": "no boarding",
+    "noAlighting": "no alighting",
+    "tapFrom": "Tap the stop where you got on.",
+    "tapTo": "Tap the stop where you got off.",
+    "tapToChoose": "Choose where you got on and off"
+  },
+  "products": {
+    "high_speed": "High-speed",
+    "intercity": "InterCity",
+    "night": "Night",
+    "regional": "Regional",
+    "commuter": "Commuter",
+    "heritage": "Heritage"
+  },
+  "status": {
+    "planned": "Upcoming",
+    "completed": "Arrived",
+    "snapshotted": "Arrived",
+    "cancelled": "Cancelled"
+  },
+  "delay": {
+    "on_time": "On time",
+    "cancelled": "Cancelled",
+    "unknown": "—",
+    "explainLate_one": "Arrived {{count}} minute after the timetable.",
+    "explainLate_other": "Arrived {{count}} minutes after the timetable.",
+    "explainEarly_one": "Arrived {{count}} minute early.",
+    "explainEarly_other": "Arrived {{count}} minutes early.",
+    "explainOnTime": "Arrived on time.",
+    "explainUnknown": "We don't have an actual arrival time for this trip."
+  },
+  "detail": {
+    "departure": "Departure",
+    "arrival": "Arrival",
+    "distance": "Distance",
+    "duration": "Duration",
+    "delay": "Delay",
+    "stops": "Stops",
+    "showFullRoute": "Show full route",
+    "hideFullRoute": "Hide full route",
+    "gotOn": "You got on here",
+    "gotOff": "You got off here",
+    "quality": {
+      "full": "Actual times",
+      "partial": "Some actual times",
+      "scheduled_only": "Scheduled times only",
+      "manual": "Manual"
+    },
+    "qualityNote": {
+      "partial": "Some actual times are missing (for example at stations outside Sweden).",
+      "scheduled_only": "Scheduled times only; we couldn't find actual times for this trip.",
+      "manual": "Added manually."
+    },
+    "source": "Times: Trafikverket · Timetable: Trafiklab (CC0)",
+    "estimatedDistance": "Straight-line distance between stops; real track distance comes with the map.",
+    "refresh": "Refresh times",
+    "delete": "Delete trip",
+    "deleteConfirm": "Delete this trip?",
+    "notFound": "This trip doesn't exist any more."
   },
   "passport": {
     "title": "Passport",
-    "empty": "Your stats appear here once you've added a trip."
+    "empty": "Your rail passport fills up as you add trains."
   },
   "settings": {
     "title": "Settings",
+    "displayName": "Your name",
+    "displayNamePlaceholder": "Optional",
     "language": "Language",
     "languages": {
       "en": "English"
     },
-    "distanceUnit": "Distance",
+    "distanceUnit": "Units",
     "units": {
       "km": "Kilometres",
       "mi": "Miles"
@@ -37,49 +145,35 @@
       "24h": "24-hour",
       "12h": "12-hour"
     },
-    "co2Comparison": "Compare CO₂ with",
+    "co2Comparison": "Default CO₂ comparison",
     "co2": {
-      "flight": "Domestic flight",
-      "car_1": "Car, 1 person",
-      "car_2": "Car, 2 people",
-      "car_3": "Car, 3 people",
-      "car_avg": "Car, average occupancy",
-      "ev_1": "Electric car, 1 person",
-      "coach": "Long-distance coach"
+      "flight": "Flying",
+      "car_1": "Car (solo)",
+      "car_2": "Car (2 people)",
+      "car_3": "Car (3 people)",
+      "car_avg": "Car (average)",
+      "ev_1": "Electric car",
+      "coach": "Coach"
     },
-    "includeCommuter": "Count commuter trains in stats",
-    "showRailNetwork": "Show rail network on maps",
-    "about": "About & data sources",
-    "saveError": "Couldn't save. Is the server running?",
-    "displayName": "Your name",
-    "displayNamePlaceholder": "Shown as initials"
+    "includeCommuter": "Include commuter trains by default",
+    "showRailNetwork": "Show rail network on maps by default",
+    "about": "Sources & methodology",
+    "saveError": "Couldn't save. Is the server running?"
   },
   "about": {
-    "title": "About & data sources",
+    "title": "Sources & methodology",
     "intro": "Clack logs the trains you ride. Timetables, actual times and maps come from open data.",
     "sourcesTitle": "Data sources",
     "sources": {
-      "trafikverket": "Trafikverket Open API: actual times, delays, platforms and stations.",
+      "trafikverket": "Trafikverket Open API: actual times, delays, platforms, stations and live positions.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): current timetables.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historical timetables back to 2012.",
       "osm": "Rail network © OpenStreetMap contributors (ODbL)."
     },
+    "delaysTitle": "Delay colours",
+    "delaysBody": "Green: on time or early. Yellow: 1–15 min late. Amber: 16–30 min. Red: more than 30 min. A train counts as on time in your stats when it arrives at most {{max}} minutes late.",
     "co2Title": "How we calculate CO₂",
     "co2Body": "Distance along the track × (comparison factor − train factor). Factors are well-to-wheel g CO₂e per passenger-km from IVL Swedish Environmental Research Institute, report U11173 (2026)."
-  },
-  "common": {
-    "back": "Back",
-    "loading": "Loading…",
-    "offline": "Can't reach the server.",
-    "close": "Close"
-  },
-  "add": {
-    "title": "Add Trip",
-    "subtitle": "Enter a train, station, or route",
-    "placeholder": "SJ 523, Göteborg, or Malmö to Lund",
-    "popular": "Popular stations",
-    "stations": "Stations",
-    "noResults": "No stations found."
   },
   "countries": {
     "SE": "Sweden",
@@ -87,5 +181,11 @@
     "NO": "Norway",
     "DE": "Germany",
     "AT": "Austria"
+  },
+  "common": {
+    "back": "Back",
+    "close": "Close",
+    "loading": "Loading…",
+    "offline": "Can't reach the Clack server."
   }
 }

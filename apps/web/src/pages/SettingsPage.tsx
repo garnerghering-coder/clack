@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_COMPARISONS, LANGUAGES, type Settings } from '@clack/shared';
 import { useSettings } from '../settings';
-import { Sheet } from '../components/Sheet';
-import { CloseIcon, ChevronRight } from '../components/icons';
+import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 function Choice<K extends keyof Settings>({ field, options, label }: { field: K; options: readonly Settings[K][]; label: (v: Settings[K]) => string }) {
@@ -51,15 +50,10 @@ export function SettingsPage() {
   const { t } = useTranslation();
   const { error } = useSettings();
   return (
-    <Sheet
-      full
-      title={t('settings.title')}
-      actions={
-        <Link to="/" className="round-button" aria-label={t('common.close')}>
-          <CloseIcon size={30} />
-        </Link>
-      }
-    >
+    <main className="page">
+      <header className="page-header">
+        <h1>{t('settings.title')}</h1>
+      </header>
       {error && <p className="banner error">{t('settings.saveError')}</p>}
       <section className="card">
         <NameField />
@@ -75,9 +69,9 @@ export function SettingsPage() {
       <section className="card">
         <Link className="row link" to="/about">
           <span>{t('settings.about')}</span>
-          <ChevronRight />
+          <ChevronRight size={18} />
         </Link>
       </section>
-    </Sheet>
+    </main>
   );
 }

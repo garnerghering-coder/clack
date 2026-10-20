@@ -14,7 +14,7 @@ export interface StationHit {
   name: string;
   code: string | null;
   country: string;
-  score: number;
+  score?: number;
 }
 
 interface Entry {
@@ -61,11 +61,11 @@ function scoreName(q: string, qTokens: string[], name: { norm: string; tokens: s
   return fuzzy ? 40 : 0;
 }
 
-export function searchStations(index: StationIndex, query: string, limit = 8): StationHit[] {
+export function searchStations(index: StationIndex, query: string, limit = 8): (StationHit & { score: number })[] {
   const q = normName(query);
   const qTokens = q.split(' ').filter(Boolean);
   if (!qTokens.length) return [];
-  const hits: StationHit[] = [];
+  const hits: (StationHit & { score: number })[] = [];
   for (const e of index.entries) {
     let score = Math.max(...e.names.map((n) => scoreName(q, qTokens, n)));
     // Typing a Trafikverket signature ("Cst", "G") finds that station directly.

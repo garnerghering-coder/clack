@@ -40,9 +40,10 @@ const flags: Record<string, ReactElement> = {
   ),
 };
 
-export function Flag({ country, size = 44 }: { country: string; size?: number }) {
+/** `decorative` hides it from screen readers when the country is already written next to it. */
+export function Flag({ country, size = 44, decorative = false }: { country: string; size?: number; decorative?: boolean }) {
   return (
-    <svg className="flag" viewBox="0 0 32 32" width={size} height={size} role="img" aria-label={country}>
+    <svg className="flag" viewBox="0 0 32 32" width={size} height={size} {...(decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': country })}>
       <defs>
         <clipPath id={`flag-clip-${country}`}>
           <circle cx="16" cy="16" r="16" />

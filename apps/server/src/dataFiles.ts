@@ -17,6 +17,8 @@ export interface Brand {
   color: string;
   country: string;
   gtfs_operators: string[];
+  /** What people type in search ("sj", "mtrx", "pågatågen"). */
+  aliases: string[];
 }
 export interface StationOverride {
   name: string;

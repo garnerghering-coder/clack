@@ -1,23 +1,13 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { and, eq, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
-import { importLog, stations } from '../db/schema.js';
-import { loadStationAliases } from '../dataFiles.js';
-import { buildStationIndex, searchStations, type StationIndex } from '../search/stations.js';
+import { searchStations } from '../search/stations.js';
+import { stationIndexCache } from '../search/stationIndexCache.js';
 
 export const stationRoutes =
   (db: Db): FastifyPluginAsync =>
   async (app) => {
-    // The index is small (~700 stations); rebuild it whenever an import has run since it was built.
-    let cache: { version: number; index: StationIndex } | null = null;
-    const currentIndex = () => {
-      const version = db.select({ v: sql<number>`coalesce(max(id), 0)` }).from(importLog).get()?.v ?? 0;
-      if (!cache || cache.version !== version) {
-        const rows = db.select().from(stations).where(and(eq(stations.kind, 'rail_station'))).all();
-        cache = { version, index: buildStationIndex(rows, loadStationAliases()) };
-      }
-      return cache.index;
-    };
+    const currentIndex = stationIndexCache(db);
 
     app.get<{ Querystring: { q?: string; limit?: string } }>('/stations/search', async (req) => {
       const limit = Math.min(Number(req.query.limit) || 8, 20);

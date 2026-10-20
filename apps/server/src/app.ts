@@ -6,6 +6,8 @@ import { healthRoutes } from './routes/health.js';
 import { settingsRoutes } from './routes/settings.js';
 import { stationRoutes } from './routes/stations.js';
 import { importStatusRoutes } from './routes/importStatus.js';
+import { searchRoutes } from './routes/search.js';
+import { legRoutes } from './routes/legs.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -13,7 +15,7 @@ declare module 'fastify' {
   }
 }
 
-export function buildApp(db: Db, opts: { logger?: boolean } = {}) {
+export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void } = {}) {
   const app = Fastify({ logger: opts.logger ?? false });
   app.decorateRequest('userId', '');
   // No accounts in Phase 1: every request acts as the seeded local user.
@@ -27,5 +29,7 @@ export function buildApp(db: Db, opts: { logger?: boolean } = {}) {
   app.register(settingsRoutes(db), api);
   app.register(stationRoutes(db), api);
   app.register(importStatusRoutes(db), api);
+  app.register(searchRoutes(db), api);
+  app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   return app;
 }

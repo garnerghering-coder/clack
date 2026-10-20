@@ -199,8 +199,41 @@ export const legStops = sqliteTable(
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
     /** Stops between origin and destination. */
     passedThrough: integer('passed_through', { mode: 'boolean' }).notNull().default(false),
+    /** before | board | through | alight | after: the whole trip is kept so the timeline can show the full route. */
+    role: text('role').notNull().default('through'),
+    /** Trafikverket train number that matched this stop (numbers can change mid-journey). */
+    trvTrainNumber: text('trv_train_number'),
     /** JSON array of Trafikverket deviation texts shown as notices / delay reasons. */
     deviations: text('deviations', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),
   },
   (t) => [primaryKey({ columns: [t.legId, t.seq] })],
 );
+
+/** Things that happened to a leg (SPEC §7, DESIGN §9.3). Payload is JSON so push notifications can reuse it later. */
+export const legEvents = sqliteTable(
+  'leg_events',
+  {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    legId: text('leg_id').notNull().references(() => legs.id, { onDelete: 'cascade' }),
+    ts: timestamp('ts').notNull(),
+    // delayed | platform_changed | cancelled | short_turned | departed | arrived
+    type: text('type').notNull(),
+    payload: text('payload', { mode: 'json' }).$type<Record<string, unknown>>().notNull().default(sql`'{}'`),
+  },
+  (t) => [index('leg_events_leg').on(t.legId, t.ts)],
+);
+
+/** Latest live view of a tracked leg (SPEC §7). */
+export const liveState = sqliteTable('live_state', {
+  legId: text('leg_id').primaryKey().references(() => legs.id, { onDelete: 'cascade' }),
+  updatedAt: timestamp('updated_at').notNull(),
+  status: text('status').notNull(),
+  lat: real('lat'),
+  lon: real('lon'),
+  bearing: real('bearing'),
+  speedKmh: real('speed_kmh'),
+  /** gps | estimated */
+  positionSource: text('position_source'),
+  nextStopId: text('next_stop_id'),
+  eta: timestamp('eta'),
+});
