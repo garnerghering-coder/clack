@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_COMPARISONS, LANGUAGES, type Settings } from '@clack/shared';
 import { useSettings } from '../settings';
+import { Sheet } from '../components/Sheet';
+import { CloseIcon, ChevronRight } from '../components/icons';
+import { useEffect, useState } from 'react';
 
 function Choice<K extends keyof Settings>({ field, options, label }: { field: K; options: readonly Settings[K][]; label: (v: Settings[K]) => string }) {
   const { t } = useTranslation();
@@ -31,16 +34,35 @@ function Toggle({ field }: { field: 'includeCommuter' | 'showRailNetwork' }) {
   );
 }
 
+function NameField() {
+  const { t } = useTranslation();
+  const { settings, update } = useSettings();
+  const [value, setValue] = useState(settings.displayName);
+  useEffect(() => setValue(settings.displayName), [settings.displayName]);
+  return (
+    <label className="row">
+      <span>{t('settings.displayName')}</span>
+      <input className="text-input" aria-label={t('settings.displayName')} placeholder={t('settings.displayNamePlaceholder')} value={value} maxLength={60} onChange={(e) => setValue(e.target.value)} onBlur={() => value !== settings.displayName && update({ displayName: value })} />
+    </label>
+  );
+}
+
 export function SettingsPage() {
   const { t } = useTranslation();
   const { error } = useSettings();
   return (
-    <main className="page">
-      <header className="page-header">
-        <h1>{t('settings.title')}</h1>
-      </header>
+    <Sheet
+      full
+      title={t('settings.title')}
+      actions={
+        <Link to="/" className="round-button" aria-label={t('common.close')}>
+          <CloseIcon size={30} />
+        </Link>
+      }
+    >
       {error && <p className="banner error">{t('settings.saveError')}</p>}
       <section className="card">
+        <NameField />
         <Choice field="language" options={LANGUAGES} label={(v) => t(`settings.languages.${v}`)} />
         <Choice field="distanceUnit" options={['km', 'mi'] as const} label={(v) => t(`settings.units.${v}`)} />
         <Choice field="clock" options={['24h', '12h'] as const} label={(v) => t(`settings.clocks.${v}`)} />
@@ -53,9 +75,9 @@ export function SettingsPage() {
       <section className="card">
         <Link className="row link" to="/about">
           <span>{t('settings.about')}</span>
-          <span aria-hidden="true">›</span>
+          <ChevronRight />
         </Link>
       </section>
-    </main>
+    </Sheet>
   );
 }

@@ -18,6 +18,8 @@ export const LANGUAGES = ['en'] as const;
 export type Language = (typeof LANGUAGES)[number];
 
 export interface Settings {
+  /** Shown as initials in the avatar (Flighty-style). Empty = no initials. */
+  displayName: string;
   language: Language;
   distanceUnit: 'km' | 'mi';
   clock: '24h' | '12h';
@@ -29,6 +31,7 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
+  displayName: '',
   language: 'en',
   distanceUnit: 'km',
   clock: '24h',
@@ -44,6 +47,10 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
   const next: Settings = { ...current };
   for (const [key, value] of Object.entries(p)) {
     switch (key) {
+      case 'displayName':
+        if (typeof value !== 'string' || value.length > 60) throw new Error('displayName must be a string of at most 60 characters');
+        next.displayName = value.trim();
+        break;
       case 'language':
         if (!LANGUAGES.includes(value as Language)) throw new Error(`invalid language: ${String(value)}`);
         next.language = value as Language;

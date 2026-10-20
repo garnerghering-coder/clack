@@ -45,6 +45,7 @@ CREATE TABLE `legs` (
 	`trv_train_numbers` text DEFAULT '[]' NOT NULL,
 	`category` text,
 	`timetable_trip_key` text,
+	`service_date` text,
 	`origin_station_id` text NOT NULL,
 	`dest_station_id` text NOT NULL,
 	`sched_dep` integer,
@@ -90,6 +91,8 @@ CREATE TABLE `stations` (
 	`gtfs_stop_ids` text DEFAULT '[]' NOT NULL,
 	`coord_source` text DEFAULT 'gtfs' NOT NULL,
 	`historical_only` integer DEFAULT false NOT NULL,
+	`kind` text DEFAULT 'rail_station' NOT NULL,
+	`departures_per_day` real DEFAULT 0 NOT NULL,
 	`needs_review` integer DEFAULT false NOT NULL
 );
 --> statement-breakpoint
@@ -97,29 +100,40 @@ CREATE TABLE `timetable_stop_times` (
 	`trip_key` text NOT NULL,
 	`seq` integer NOT NULL,
 	`station_id` text NOT NULL,
-	`sched_arr` integer,
-	`sched_dep` integer,
+	`arr_sec` integer,
+	`dep_sec` integer,
 	`no_pickup` integer DEFAULT false NOT NULL,
 	`no_dropoff` integer DEFAULT false NOT NULL,
 	PRIMARY KEY(`trip_key`, `seq`),
-	FOREIGN KEY (`trip_key`) REFERENCES `timetable_trips`(`id`) ON UPDATE no action ON DELETE cascade,
+	FOREIGN KEY (`trip_key`) REFERENCES `timetable_trips`(`key`) ON UPDATE no action ON DELETE cascade,
 	FOREIGN KEY (`station_id`) REFERENCES `stations`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE INDEX `stop_times_station` ON `timetable_stop_times` (`station_id`,`sched_dep`);--> statement-breakpoint
+CREATE INDEX `stop_times_station` ON `timetable_stop_times` (`station_id`);--> statement-breakpoint
+CREATE TABLE `timetable_trip_dates` (
+	`trip_key` text NOT NULL,
+	`service_date` text NOT NULL,
+	PRIMARY KEY(`trip_key`, `service_date`),
+	FOREIGN KEY (`trip_key`) REFERENCES `timetable_trips`(`key`) ON UPDATE no action ON DELETE cascade
+);
+--> statement-breakpoint
+CREATE INDEX `trip_dates_date` ON `timetable_trip_dates` (`service_date`);--> statement-breakpoint
 CREATE TABLE `timetable_trips` (
-	`id` text PRIMARY KEY NOT NULL,
+	`key` text PRIMARY KEY NOT NULL,
 	`source` text NOT NULL,
 	`trip_id` text NOT NULL,
-	`service_date` text NOT NULL,
 	`train_number` text,
 	`operator_id` text,
+	`gtfs_operator` text,
 	`route_name` text,
+	`route_type` text NOT NULL,
 	`category` text NOT NULL,
+	`tz` text NOT NULL,
+	`feed_version` text,
 	FOREIGN KEY (`operator_id`) REFERENCES `operators`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE INDEX `timetable_trips_date_number` ON `timetable_trips` (`service_date`,`train_number`);--> statement-breakpoint
+CREATE INDEX `timetable_trips_number` ON `timetable_trips` (`train_number`);--> statement-breakpoint
 CREATE TABLE `track_segments` (
 	`from_station_id` text NOT NULL,
 	`to_station_id` text NOT NULL,
@@ -127,6 +141,18 @@ CREATE TABLE `track_segments` (
 	`length_m` real NOT NULL,
 	`is_estimated` integer DEFAULT false NOT NULL,
 	PRIMARY KEY(`from_station_id`, `to_station_id`)
+);
+--> statement-breakpoint
+CREATE TABLE `trv_locations` (
+	`signature` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`short_name` text,
+	`official_name` text,
+	`country` text NOT NULL,
+	`lat` real,
+	`lon` real,
+	`advertised` integer NOT NULL,
+	`modified_at` integer
 );
 --> statement-breakpoint
 CREATE TABLE `users` (

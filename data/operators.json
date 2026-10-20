@@ -1,0 +1,25 @@
+{
+  "_comment": "Brands shown in the app (owner decision: brand over operating company). 'gtfs_operators' lists GTFS attributions.txt organization_name values (or agency names) that map to the brand. Colours are placeholders close to each brand until logos/permissions are sorted (spec §18).",
+  "brands": [
+    { "id": "sj", "name": "SJ", "short_name": "SJ", "color": "#3b5ba5", "country": "SE", "gtfs_operators": ["SJ AB", "SJ", "SJ Norge"] },
+    { "id": "snalltaget", "name": "Snälltåget", "short_name": "SN", "color": "#2f8f4e", "country": "SE", "gtfs_operators": ["Snälltåget"] },
+    { "id": "vr", "name": "VR Snabbtåg", "short_name": "VR", "color": "#00b140", "country": "SE", "gtfs_operators": ["MTR Express AB"] },
+    { "id": "vy", "name": "Vy", "short_name": "Vy", "color": "#00866f", "country": "NO", "gtfs_operators": ["Vygruppen AS", "Vy Tåg AB", "Vy Tåg"] },
+    { "id": "oresundstag", "name": "Öresundståg", "short_name": "ÖT", "color": "#8a96a3", "country": "SE", "gtfs_operators": ["Öresundståg", "VR Sverige AB"] },
+    { "id": "pagatag", "name": "Pågatåg", "short_name": "PÅ", "color": "#8e44ad", "country": "SE", "gtfs_operators": ["Pågatåg"] },
+    { "id": "vasttagen", "name": "Västtågen", "short_name": "VT", "color": "#0a79c2", "country": "SE", "gtfs_operators": ["Västtågen"] },
+    { "id": "sl", "name": "SL", "short_name": "SL", "color": "#0089ca", "country": "SE", "gtfs_operators": ["SL", "Transdev", "AB Stockholms Spårvägar"] },
+    { "id": "malartag", "name": "Mälartåg", "short_name": "MÄ", "color": "#00a19a", "country": "SE", "gtfs_operators": ["Mälartåg"] },
+    { "id": "arlanda-express", "name": "Arlanda Express", "short_name": "AE", "color": "#f2c500", "country": "SE", "gtfs_operators": ["Arlanda Express"] },
+    { "id": "tib", "name": "Tåg i Bergslagen", "short_name": "TiB", "color": "#f39200", "country": "SE", "gtfs_operators": ["Tåg i Bergslagen"] },
+    { "id": "krosatag", "name": "Krösatåg", "short_name": "KR", "color": "#d9a400", "country": "SE", "gtfs_operators": ["Krösa Nord", "Krösatåg Öst", "Krösatågen Syd", "Krösatåg KLT"] },
+    { "id": "ostgotapendeln", "name": "Östgötapendeln", "short_name": "ÖP", "color": "#c8102e", "country": "SE", "gtfs_operators": ["Östgötapendeln"] },
+    { "id": "norrtag", "name": "Norrtåg", "short_name": "NT", "color": "#4fb3e2", "country": "SE", "gtfs_operators": ["Norrtåg"] },
+    { "id": "varmlandstrafik", "name": "Värmlandstrafik", "short_name": "VÄ", "color": "#d6006f", "country": "SE", "gtfs_operators": ["Värmlandstrafik AB", "Svenska Tågkompaniet AB", "Värmlandstrafik"] },
+    { "id": "x-taget", "name": "X-Tåget", "short_name": "X", "color": "#e8a317", "country": "SE", "gtfs_operators": ["X-Tåget"] },
+    { "id": "tagab", "name": "Tågab", "short_name": "TÅ", "color": "#2b4fa2", "country": "SE", "gtfs_operators": ["Tågab"] },
+    { "id": "inlandsbanan", "name": "Inlandsbanan", "short_name": "IB", "color": "#b5302b", "country": "SE", "gtfs_operators": ["Inlandsbanan"] },
+    { "id": "lennakatten", "name": "Lennakatten", "short_name": "LK", "color": "#8d6e63", "country": "SE", "gtfs_operators": ["Lennakatten"] },
+    { "id": "tjf", "name": "TJF Smalspåret", "short_name": "TJF", "color": "#795548", "country": "SE", "gtfs_operators": ["TJF Smalspåret", "TJF"] }
+  ]
+}

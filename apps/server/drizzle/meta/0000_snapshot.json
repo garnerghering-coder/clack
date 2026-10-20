@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "89692da4-b712-4789-ab20-7dbeda9710b7",
+  "id": "38b322ba-e403-47c9-866d-f5e920c4088c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "import_log": {
@@ -319,6 +319,13 @@
         },
         "timetable_trip_key": {
           "name": "timetable_trip_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "service_date": {
+          "name": "service_date",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -656,6 +663,22 @@
           "autoincrement": false,
           "default": false
         },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'rail_station'"
+        },
+        "departures_per_day": {
+          "name": "departures_per_day",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
         "needs_review": {
           "name": "needs_review",
           "type": "integer",
@@ -695,15 +718,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "sched_arr": {
-          "name": "sched_arr",
+        "arr_sec": {
+          "name": "arr_sec",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "sched_dep": {
-          "name": "sched_dep",
+        "dep_sec": {
+          "name": "dep_sec",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -730,22 +753,21 @@
         "stop_times_station": {
           "name": "stop_times_station",
           "columns": [
-            "station_id",
-            "sched_dep"
+            "station_id"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
-        "timetable_stop_times_trip_key_timetable_trips_id_fk": {
-          "name": "timetable_stop_times_trip_key_timetable_trips_id_fk",
+        "timetable_stop_times_trip_key_timetable_trips_key_fk": {
+          "name": "timetable_stop_times_trip_key_timetable_trips_key_fk",
           "tableFrom": "timetable_stop_times",
           "tableTo": "timetable_trips",
           "columnsFrom": [
             "trip_key"
           ],
           "columnsTo": [
-            "id"
+            "key"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -776,11 +798,65 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
+    "timetable_trip_dates": {
+      "name": "timetable_trip_dates",
+      "columns": {
+        "trip_key": {
+          "name": "trip_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "service_date": {
+          "name": "service_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "trip_dates_date": {
+          "name": "trip_dates_date",
+          "columns": [
+            "service_date"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "timetable_trip_dates_trip_key_timetable_trips_key_fk": {
+          "name": "timetable_trip_dates_trip_key_timetable_trips_key_fk",
+          "tableFrom": "timetable_trip_dates",
+          "tableTo": "timetable_trips",
+          "columnsFrom": [
+            "trip_key"
+          ],
+          "columnsTo": [
+            "key"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "timetable_trip_dates_trip_key_service_date_pk": {
+          "columns": [
+            "trip_key",
+            "service_date"
+          ],
+          "name": "timetable_trip_dates_trip_key_service_date_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "timetable_trips": {
       "name": "timetable_trips",
       "columns": {
-        "id": {
-          "name": "id",
+        "key": {
+          "name": "key",
           "type": "text",
           "primaryKey": true,
           "notNull": true,
@@ -800,13 +876,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "service_date": {
-          "name": "service_date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "train_number": {
           "name": "train_number",
           "type": "text",
@@ -821,11 +890,25 @@
           "notNull": false,
           "autoincrement": false
         },
+        "gtfs_operator": {
+          "name": "gtfs_operator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "route_name": {
           "name": "route_name",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
+          "autoincrement": false
+        },
+        "route_type": {
+          "name": "route_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
           "autoincrement": false
         },
         "category": {
@@ -834,13 +917,26 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "tz": {
+          "name": "tz",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "feed_version": {
+          "name": "feed_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "timetable_trips_date_number": {
-          "name": "timetable_trips_date_number",
+        "timetable_trips_number": {
+          "name": "timetable_trips_number",
           "columns": [
-            "service_date",
             "train_number"
           ],
           "isUnique": false
@@ -916,6 +1012,79 @@
           "name": "track_segments_from_station_id_to_station_id_pk"
         }
       },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "trv_locations": {
+      "name": "trv_locations",
+      "columns": {
+        "signature": {
+          "name": "signature",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "short_name": {
+          "name": "short_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "official_name": {
+          "name": "official_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lat": {
+          "name": "lat",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "lon": {
+          "name": "lon",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "advertised": {
+          "name": "advertised",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "modified_at": {
+          "name": "modified_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
     },

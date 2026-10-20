@@ -5,14 +5,16 @@
   "nav": {
     "trips": "Trips",
     "passport": "Passport",
-    "settings": "Settings"
+    "settings": "Settings",
+    "label": "Main",
+    "add": "Add trip"
   },
   "trips": {
     "title": "Trips",
     "add": "Add trip",
     "empty": {
       "title": "No trips yet",
-      "body": "Add a train you've ridden, or one you're about to take."
+      "body": "Tap the search button to add a train you've ridden, or one you're about to take."
     }
   },
   "passport": {
@@ -48,7 +50,9 @@
     "includeCommuter": "Count commuter trains in stats",
     "showRailNetwork": "Show rail network on maps",
     "about": "About & data sources",
-    "saveError": "Couldn't save. Is the server running?"
+    "saveError": "Couldn't save. Is the server running?",
+    "displayName": "Your name",
+    "displayNamePlaceholder": "Shown as initials"
   },
   "about": {
     "title": "About & data sources",
@@ -66,6 +70,22 @@
   "common": {
     "back": "Back",
     "loading": "Loading…",
-    "offline": "Can't reach the server."
+    "offline": "Can't reach the server.",
+    "close": "Close"
+  },
+  "add": {
+    "title": "Add Trip",
+    "subtitle": "Enter a train, station, or route",
+    "placeholder": "SJ 523, Göteborg, or Malmö to Lund",
+    "popular": "Popular stations",
+    "stations": "Stations",
+    "noResults": "No stations found."
+  },
+  "countries": {
+    "SE": "Sweden",
+    "DK": "Denmark",
+    "NO": "Norway",
+    "DE": "Germany",
+    "AT": "Austria"
   }
 }

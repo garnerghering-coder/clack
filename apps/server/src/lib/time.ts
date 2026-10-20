@@ -1,0 +1,52 @@
+// Time-zone maths without a date library. GTFS times are "HH:MM:SS" counted from noon minus 12 h on the
+// service day in the agency's time zone, so they stay correct across DST changes and can exceed 24:00.
+
+/** Offset of `tz` from UTC at instant `ms`, in milliseconds (e.g. +7_200_000 for CEST). */
+export function tzOffsetMs(ms: number, tz: string): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: tz,
+    hourCycle: 'h23',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }).formatToParts(new Date(ms));
+  const get = (t: string) => Number(parts.find((p) => p.type === t)!.value);
+  const asUtc = Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'), get('second'));
+  return asUtc - Math.floor(ms / 1000) * 1000;
+}
+
+/** UTC instant of a wall-clock time in `tz`. For non-existent/ambiguous DST times, picks the earlier offset. */
+export function zonedToUtc(y: number, mo: number, d: number, h: number, mi: number, s: number, tz: string): number {
+  const guess = Date.UTC(y, mo - 1, d, h, mi, s);
+  let ms = guess - tzOffsetMs(guess, tz);
+  ms = guess - tzOffsetMs(ms, tz);
+  return ms;
+}
+
+export function parseGtfsTime(t: string): number | null {
+  if (!t) return null;
+  const [h, m, s] = t.split(':').map(Number);
+  if (h === undefined || m === undefined || s === undefined || [h, m, s].some(Number.isNaN)) return null;
+  return h * 3600 + m * 60 + s;
+}
+
+/** GTFS service date (YYYY-MM-DD) + seconds since "noon minus 12h" -> UTC epoch ms. */
+export function serviceTimeToUtc(serviceDate: string, seconds: number, tz: string): number {
+  const [y, mo, d] = serviceDate.split('-').map(Number) as [number, number, number];
+  const noon = zonedToUtc(y, mo, d, 12, 0, 0, tz);
+  return noon - 12 * 3600_000 + seconds * 1000;
+}
+
+export const ymdToIso = (ymd: string) => `${ymd.slice(0, 4)}-${ymd.slice(4, 6)}-${ymd.slice(6, 8)}`;
+
+/** Today's date in `tz` as YYYY-MM-DD. */
+export function todayIn(tz: string, now = Date.now()): string {
+  return new Date(now + tzOffsetMs(now, tz)).toISOString().slice(0, 10);
+}
+
+export function addDays(isoDate: string, days: number): string {
+  return new Date(Date.parse(`${isoDate}T12:00:00Z`) + days * 86400_000).toISOString().slice(0, 10);
+}

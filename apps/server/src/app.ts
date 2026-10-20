@@ -4,6 +4,8 @@ import type { Db } from './db/client.js';
 import { LOCAL_USER_ID } from './db/client.js';
 import { healthRoutes } from './routes/health.js';
 import { settingsRoutes } from './routes/settings.js';
+import { stationRoutes } from './routes/stations.js';
+import { importStatusRoutes } from './routes/importStatus.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -21,5 +23,7 @@ export function buildApp(db: Db, opts: { logger?: boolean } = {}) {
   });
   app.register(healthRoutes(db), { prefix: '/api' });
   app.register(settingsRoutes(db), { prefix: '/api' });
+  app.register(stationRoutes(db), { prefix: '/api' });
+  app.register(importStatusRoutes(db), { prefix: '/api' });
   return app;
 }

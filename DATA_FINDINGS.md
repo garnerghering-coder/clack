@@ -136,7 +136,7 @@ Three independent methods, cross-checked:
 1. **official** — `stop_areas.txt` (GTFS station → rikshållplats) plus Trafiklab's keyless [`trafikverket_stops.txt`](https://api.trafiklab.se/v2/samtrafiken/gtfs/extra/trafikverket_stops.txt) (rikshållplats → signature, 1,038 rows, upper-case signatures).
 2. **geo_name** — the spec's method: nearest Trafikverket station ≤ 300 m with a similar accent-insensitive name ("Centralstation" ≈ "C").
 3. **timetable** — for trains matched by number on a date, the Trafikverket location whose advertised time equals the GTFS stop time. Trusted only with ≥ 3 votes, ≥ 60% share and ≤ 2 km. Coincidental votes happen: Östervik got "Cst" from 2 votes.
-4. **geo_only** (fallback) — nearest Trafikverket location ≤ 100 m whatever its name. This catches Danish stations (Trafikverket uses Swedish names: "Köpenhamn H") and `x`-prefixed halts (Lennakatten, Roslagsbanan).
+4. **geo_only** (fallback) — nearest Trafikverket location ≤ 100 m whatever its name. This catches Danish stations (Trafikverket uses Swedish names: "Köpenhamn H") and `x`-prefixed halts (Lennakatten, Roslagsbanan). **Risky:** it matched Göteborg's replacement-bus terminal (Nils Ericson Terminalen) to Trafikverket's bus location "Göteborgs Central" 73 m away. Phase 1 import fixed it with an override; new `geo_only` matches should be reviewed.
 
 | Result | Stations | Share |
 |---|---|---|
@@ -145,6 +145,7 @@ Three independent methods, cross-checked:
 | via timetable evidence | 553 | 75.2% |
 | via official file | 581 | 79.0% |
 | via geo+name ≤ 300 m | 621 | 84.5% |
+| via distance only (≤ 100 m, any name) | 13 | 1.8%. An earlier version of this report said 55: it also counted unmatched stations |
 | via hand-checked override | 4 | `data/station_overrides.json` |
 | All available methods agree | 686 | 93.3% |
 | Conflicts | 3 | Stockholm City (geo picked Cst), Ramlösa (Hbgb vs Ram), Nyköping C (Nk vs Nkc). The timetable choice is right in all three |

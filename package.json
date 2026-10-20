@@ -13,7 +13,8 @@
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "db:generate": "npm run db:generate -w @clack/server",
-    "dev:phone": "concurrently -k -n server,web -c cyan,magenta \"npm run dev -w @clack/server\" \"npm run dev -w @clack/web -- --host\""
+    "dev:phone": "concurrently -k -n server,web -c cyan,magenta \"npm run dev -w @clack/server\" \"npm run dev -w @clack/web -- --host\"",
+    "import": "npm run import -w @clack/server --"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

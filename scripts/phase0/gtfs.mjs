@@ -40,7 +40,7 @@ export async function* readGtfs(zipPath, entry) {
   let header;
   for await (let line of rl) {
     if (!header) {
-      header = parseCsvLine(line.replace(/^﻿/, ''));
+      header = parseCsvLine(line.replace(/^\uFEFF/, ''));
       continue;
     }
     if (!line) continue;

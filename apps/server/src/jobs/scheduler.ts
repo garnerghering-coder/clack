@@ -1,0 +1,22 @@
+// In-process scheduler (spec §4/§8). Runs only while the server runs; bootstrap() catches up on start.
+import cron from 'node-cron';
+import type { Db } from '../db/client.js';
+import { refreshTrvStations, runGtfsImport } from '../import/run.js';
+
+export function startScheduler(db: Db, log: (m: string) => void) {
+  const wrap = (name: string, fn: () => Promise<unknown>) => async () => {
+    try {
+      await fn();
+    } catch (e) {
+      log(`${name} failed: ${(e as Error).message}`);
+    }
+  };
+  // Samtrafiken publishes ~05:00-06:00; the download guard keeps this to one call per day.
+  const daily = cron.schedule('35 6 * * *', wrap('daily GTFS import', () => runGtfsImport(db, { log })), { timezone: 'Europe/Stockholm' });
+  // TrainStation rarely changes.
+  const weekly = cron.schedule('10 7 * * 1', wrap('weekly Trafikverket stations', () => refreshTrvStations(db, log)), { timezone: 'Europe/Stockholm' });
+  return () => {
+    void daily.stop();
+    void weekly.stop();
+  };
+}

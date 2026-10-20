@@ -1,0 +1,39 @@
+{
+  "_comment": "Extra search terms per Trafikverket signature (English and other common names). Accents and case don't matter; city names already find their main station by popularity, so only add names that differ from the station name.",
+  "aliases": {
+    "G": [
+      "Gothenburg",
+      "Goteborg",
+      "Gbg"
+    ],
+    "Cst": [
+      "Stockholm",
+      "Stockholm Central",
+      "Sthlm"
+    ],
+    "Dk.kh": [
+      "Copenhagen",
+      "Kobenhavn",
+      "Copenhagen Central",
+      "København H"
+    ],
+    "Dk.kk": [
+      "Østerport",
+      "Osterport"
+    ],
+    "Arnc": [
+      "Arlanda",
+      "Stockholm Arlanda",
+      "ARN"
+    ],
+    "Mc": [
+      "Malmo",
+      "Malmö"
+    ],
+    "Dk.cph": [
+      "Kastrup",
+      "CPH",
+      "Kobenhavns Lufthavn"
+    ]
+  }
+}

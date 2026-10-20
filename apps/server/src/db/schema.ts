@@ -25,6 +25,10 @@ export const stations = sqliteTable('stations', {
   coordSource: text('coord_source').notNull().default('gtfs'),
   /** Only seen in historical (Sverige 2) timetables, e.g. closed stations. */
   historicalOnly: integer('historical_only', { mode: 'boolean' }).notNull().default(false),
+  /** rail_station | bus_stop (a bus stop inside a "rail" trip; such trips are excluded). */
+  kind: text('kind').notNull().default('rail_station'),
+  /** Average scheduled rail departures per day over the import window; ranks search results. */
+  departuresPerDay: real('departures_per_day').notNull().default(0),
   /** Flagged by the import for a human to check (spec §8.4). */
   needsReview: integer('needs_review', { mode: 'boolean' }).notNull().default(false),
 });
@@ -40,36 +44,68 @@ export const operators = sqliteTable('operators', {
   logoPath: text('logo_path'),
 });
 
+/**
+ * One row per distinct GTFS trip pattern. Keyed by `${source}:${trip_id}:${hash of stops+times}`, so a trip whose
+ * timetable changes in a later feed gets a new key and past dates keep the times they actually had.
+ */
 export const timetableTrips = sqliteTable(
   'timetable_trips',
   {
-    /** `${source}:${tripId}:${serviceDate}` */
-    id: text('id').primaryKey(),
+    key: text('key').primaryKey(),
     source: text('source').notNull(), // gtfs_se3 | gtfs_sv2
     tripId: text('trip_id').notNull(),
-    serviceDate: text('service_date').notNull(), // YYYY-MM-DD
     trainNumber: text('train_number'),
     operatorId: text('operator_id').references(() => operators.id),
+    /** Operator name as given in GTFS (attributions.txt), kept for reference. */
+    gtfsOperator: text('gtfs_operator'),
     routeName: text('route_name'),
+    routeType: text('route_type').notNull(),
     category: text('category').notNull(),
+    /** Agency time zone the stop times are relative to. */
+    tz: text('tz').notNull(),
+    feedVersion: text('feed_version'),
   },
-  (t) => [index('timetable_trips_date_number').on(t.serviceDate, t.trainNumber)],
+  (t) => [index('timetable_trips_number').on(t.trainNumber)],
 );
 
+/** The service dates each trip pattern runs on. Past dates are never deleted on import. */
+export const timetableTripDates = sqliteTable(
+  'timetable_trip_dates',
+  {
+    tripKey: text('trip_key').notNull().references(() => timetableTrips.key, { onDelete: 'cascade' }),
+    serviceDate: text('service_date').notNull(), // YYYY-MM-DD
+  },
+  (t) => [primaryKey({ columns: [t.tripKey, t.serviceDate] }), index('trip_dates_date').on(t.serviceDate)],
+);
+
+/** Times are seconds after "noon minus 12h" of the service day (GTFS semantics, may exceed 24h). */
 export const timetableStopTimes = sqliteTable(
   'timetable_stop_times',
   {
-    tripKey: text('trip_key').notNull().references(() => timetableTrips.id, { onDelete: 'cascade' }),
+    tripKey: text('trip_key').notNull().references(() => timetableTrips.key, { onDelete: 'cascade' }),
     seq: integer('seq').notNull(),
     stationId: text('station_id').notNull().references(() => stations.id),
-    schedArr: timestamp('sched_arr'),
-    schedDep: timestamp('sched_dep'),
+    arrSec: integer('arr_sec'),
+    depSec: integer('dep_sec'),
     /** GTFS pickup_type/drop_off_type = 1: boarding/alighting not allowed here. */
     noPickup: integer('no_pickup', { mode: 'boolean' }).notNull().default(false),
     noDropoff: integer('no_dropoff', { mode: 'boolean' }).notNull().default(false),
   },
-  (t) => [primaryKey({ columns: [t.tripKey, t.seq] }), index('stop_times_station').on(t.stationId, t.schedDep)],
+  (t) => [primaryKey({ columns: [t.tripKey, t.seq] }), index('stop_times_station').on(t.stationId)],
 );
+
+/** Trafikverket TrainStation locations (refreshed weekly). */
+export const trvLocations = sqliteTable('trv_locations', {
+  signature: text('signature').primaryKey(),
+  name: text('name').notNull(),
+  shortName: text('short_name'),
+  officialName: text('official_name'),
+  country: text('country').notNull(),
+  lat: real('lat'),
+  lon: real('lon'),
+  advertised: integer('advertised', { mode: 'boolean' }).notNull(),
+  modifiedAt: timestamp('modified_at'),
+});
 
 /** Routed track geometry per station pair (stored with from < to). */
 export const trackSegments = sqliteTable(
@@ -127,6 +163,7 @@ export const legs = sqliteTable(
     trvTrainNumbers: text('trv_train_numbers', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),
     category: text('category'),
     timetableTripKey: text('timetable_trip_key'),
+    serviceDate: text('service_date'),
     originStationId: text('origin_station_id').notNull().references(() => stations.id),
     destStationId: text('dest_station_id').notNull().references(() => stations.id),
     schedDep: timestamp('sched_dep'),

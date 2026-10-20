@@ -8,7 +8,7 @@ import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
 import { DEFAULT_SETTINGS } from '@clack/shared';
 import * as schema from './schema.js';
 
-export type Db = BetterSQLite3Database<typeof schema>;
+export type Db = BetterSQLite3Database<typeof schema> & { $client: Database.Database };
 
 /** Phase 1 is single-user; every user-owned query still goes through a user id. */
 export const LOCAL_USER_ID = 'local';

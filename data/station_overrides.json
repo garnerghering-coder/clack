@@ -1,11 +1,81 @@
 {
   "_comment": "Hand-checked station mapping overrides (Phase 0, 2026-10-20). Keyed by GTFS Sweden 3 parent stop_id. trv_signature null = not a Trafikverket location. kind: rail_station | bus_stop | foreign_not_in_trv. Applied by scripts/phase0/q3-station-mapping.mjs after the automatic methods.",
-  "25317": { "name": "København Østerport", "trv_signature": "Dk.kk", "kind": "rail_station", "note": "Trafikverket 'Österport'; its coordinate is ~1 km north of the real station, so geo matching fails" },
-  "68899": { "name": "Moga hållplats Lennakatten", "trv_signature": "xMg", "kind": "rail_station", "note": "Trafikverket 'Moga' (not advertised), 873 m apart" },
-  "72900": { "name": "Zell am See", "trv_signature": "At.zel", "kind": "rail_station", "note": "Snälltåget to Austria; 577 m apart" },
-  "72892": { "name": "Dresden Hbf (Strehlener Str.)", "trv_signature": "De.dh", "kind": "rail_station", "note": "Trafikverket 'Dresden', 247 m. 'Strehlener Str.' is the station's south side; used by Snälltåget 300/301 variants" },
-  "622": { "name": "Cityterminalen", "trv_signature": null, "kind": "bus_stop", "note": "Stockholm bus terminal; SJ 6xxxx replacement buses" },
-  "24116": { "name": "Kungsplan", "trv_signature": null, "kind": "bus_stop", "note": "Karlskrona bus stop; Snälltåget connecting bus 9030x/9394x" },
-  "20758": { "name": "Centrum väst", "trv_signature": null, "kind": "bus_stop", "note": "Ronneby bus stop; Snälltåget connecting bus" },
-  "70766": { "name": "Nyckelbyvägen", "trv_signature": null, "kind": "bus_stop", "note": "MTRX replacement bus stop (Ålgård area)" }
+  "25317": {
+    "name": "København Østerport",
+    "trv_signature": "Dk.kk",
+    "kind": "rail_station",
+    "note": "Trafikverket 'Österport'; its coordinate is ~1 km north of the real station, so geo matching fails"
+  },
+  "68899": {
+    "name": "Moga hållplats Lennakatten",
+    "trv_signature": "xMg",
+    "kind": "rail_station",
+    "note": "Trafikverket 'Moga' (not advertised), 873 m apart"
+  },
+  "72900": {
+    "name": "Zell am See",
+    "trv_signature": "At.zel",
+    "kind": "rail_station",
+    "note": "Snälltåget to Austria; 577 m apart"
+  },
+  "72892": {
+    "name": "Dresden Hbf (Strehlener Str.)",
+    "trv_signature": "De.dh",
+    "kind": "rail_station",
+    "note": "Trafikverket 'Dresden', 247 m. 'Strehlener Str.' is the station's south side; used by Snälltåget 300/301 variants"
+  },
+  "622": {
+    "name": "Cityterminalen",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Stockholm bus terminal; SJ 6xxxx replacement buses"
+  },
+  "24116": {
+    "name": "Kungsplan",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Karlskrona bus stop; Snälltåget connecting bus 9030x/9394x"
+  },
+  "20758": {
+    "name": "Centrum väst",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Ronneby bus stop; Snälltåget connecting bus"
+  },
+  "70766": {
+    "name": "Nyckelbyvägen",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "MTRX replacement bus stop (Ålgård area)"
+  },
+  "18362": {
+    "name": "Brinellgymnasiet",
+    "trv_signature": "Brin",
+    "kind": "rail_station",
+    "note": "Nässjö school halt; Phase 0 timetable evidence (44 votes), 175 m"
+  },
+  "39696": {
+    "name": "Rottneros",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Replacement-bus stop ~1 km from the station. Trafikverket files its buses under the station's signature, which fooled Phase 0's timetable votes; the real station is a separate GTFS stop with the official mapping."
+  },
+  "40694": {
+    "name": "Såneby, Rottneros",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Replacement-bus stop ~1 km from the station. Trafikverket files its buses under the station's signature, which fooled Phase 0's timetable votes; the real station is a separate GTFS stop with the official mapping."
+  },
+  "39672": {
+    "name": "Bäckebron, Västra Ämtervik",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Replacement-bus stop ~1 km from the station. Trafikverket files its buses under the station's signature, which fooled Phase 0's timetable votes; the real station is a separate GTFS stop with the official mapping."
+  },
+  "38983": {
+    "name": "Nils Ericson Terminalen",
+    "trv_signature": null,
+    "kind": "bus_stop",
+    "note": "Göteborg bus terminal used by SJ replacement buses (6xxxx). Trafikverket's 'Gc' (Göteborgs Central) is 73 m away and is the bus location, not the railway station; found when it showed up in station search."
+  }
 }

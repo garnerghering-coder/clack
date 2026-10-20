@@ -1,15 +1,13 @@
 import { useTranslation } from 'react-i18next';
+import { Avatar, Sheet } from '../components/Sheet';
 
 export function PassportPage() {
   const { t } = useTranslation();
   return (
-    <main className="page">
-      <header className="page-header">
-        <h1>{t('passport.title')}</h1>
-      </header>
+    <Sheet title={t('passport.title')} actions={<Avatar />}>
       <div className="empty">
         <p>{t('passport.empty')}</p>
       </div>
-    </main>
+    </Sheet>
   );
 }

@@ -10,7 +10,17 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+export interface StationHit {
+  id: string;
+  name: string;
+  /** Trafikverket signature, e.g. "Cst". */
+  code: string | null;
+  country: string;
+}
+
 export const api = {
   getSettings: () => request<Settings>('/settings'),
   updateSettings: (patch: Partial<Settings>) => request<Settings>('/settings', { method: 'PATCH', body: JSON.stringify(patch) }),
+  searchStations: (q: string, signal?: AbortSignal) => request<StationHit[]>(`/stations/search?q=${encodeURIComponent(q)}`, { signal }),
+  popularStations: () => request<StationHit[]>('/stations/popular'),
 };

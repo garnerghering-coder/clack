@@ -1,19 +1,14 @@
 import { useTranslation } from 'react-i18next';
+import { Avatar, Sheet } from '../components/Sheet';
 
 export function TripsPage() {
   const { t } = useTranslation();
   return (
-    <main className="page">
-      <header className="page-header">
-        <h1>{t('trips.title')}</h1>
-        <button className="icon-button" aria-label={t('trips.add')} disabled>
-          +
-        </button>
-      </header>
+    <Sheet title={t('trips.title')} actions={<Avatar />}>
       <div className="empty">
         <h2>{t('trips.empty.title')}</h2>
         <p>{t('trips.empty.body')}</p>
       </div>
-    </main>
+    </Sheet>
   );
 }

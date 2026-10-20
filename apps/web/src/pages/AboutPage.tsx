@@ -1,28 +1,32 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Sheet } from '../components/Sheet';
+import { ChevronLeft } from '../components/icons';
 
 export function AboutPage() {
   const { t } = useTranslation();
   const sources = ['trafikverket', 'gtfsSweden3', 'gtfsSverige2', 'osm'] as const;
   return (
-    <main className="page">
-      <header className="page-header">
-        <Link to="/settings" className="back">
-          ‹ {t('common.back')}
+    <Sheet
+      full
+      title={t('about.title')}
+      actions={
+        <Link to="/settings" className="round-button" aria-label={t('common.back')}>
+          <ChevronLeft size={28} />
         </Link>
-        <h1>{t('about.title')}</h1>
-      </header>
+      }
+    >
       <section className="card prose">
         <p>{t('about.intro')}</p>
-        <h2>{t('about.sourcesTitle')}</h2>
+        <h2 className="section-header">{t('about.sourcesTitle')}</h2>
         <ul>
           {sources.map((s) => (
             <li key={s}>{t(`about.sources.${s}`)}</li>
           ))}
         </ul>
-        <h2>{t('about.co2Title')}</h2>
+        <h2 className="section-header">{t('about.co2Title')}</h2>
         <p>{t('about.co2Body')}</p>
       </section>
-    </main>
+    </Sheet>
   );
 }

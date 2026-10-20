@@ -11,7 +11,7 @@ import { readAll, readGtfs, parseCsvLine } from './gtfs.mjs';
 import { haversine, nameSim } from './geo.mjs';
 
 const riksToSig = {};
-for (const line of fs.readFileSync(path.join(CACHE, 'sv2_extra/trafikverket_stops.txt'), 'utf8').replace(/^﻿/, '').split('\n').slice(1)) {
+for (const line of fs.readFileSync(path.join(CACHE, 'sv2_extra/trafikverket_stops.txt'), 'utf8').replace(/^\uFEFF/, '').split('\n').slice(1)) {
   const [id, sig] = line.trim().split(',');
   if (id && sig) riksToSig[id] ??= sig;
 }
