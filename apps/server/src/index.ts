@@ -4,6 +4,7 @@ import { buildApp } from './app.js';
 import { bootstrap } from './import/run.js';
 import { startScheduler } from './jobs/scheduler.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
+import { backfillLegGeometry } from './geo/trackSegments.js';
 
 const db = openDb(config.databasePath);
 let log = (msg: string) => console.log(msg);
@@ -14,6 +15,8 @@ const app = buildApp(db, {
 });
 await app.listen({ port: config.port, host: config.host });
 log = (msg: string) => app.log.info(msg);
+// Trips saved before routing existed get their track lines now (fast: cached per station pair).
+backfillLegGeometry(db, log);
 
 if (process.env.JOBS !== 'off') {
   // Catch up in the background (first run imports stations and timetables; legs get any actuals they missed),

@@ -7,6 +7,7 @@ import { DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js
 import { importGtfsSweden3, lastImportedFeed, type ImportSummary } from './gtfs-se3.js';
 import { loadOfficialMapping } from './official-mapping.js';
 import { importTrvStations, trvLocationCount } from './trv-stations.js';
+import { basemapInfo, extractBasemap } from './basemap.js';
 
 export interface RunOptions {
   forceDownload?: boolean;
@@ -68,5 +69,14 @@ export async function bootstrap(db: Db, log: (m: string) => void = console.log) 
     await runGtfsImport(db, { log });
   } catch (e) {
     log(`import skipped: ${(e as Error).message}`);
+  }
+  // The map's basemap is a one-off download (no quota); later runs just reuse the file.
+  if (!basemapInfo()) {
+    try {
+      log('Basemap: first run, downloading the Nordic map tiles (a few minutes, once)…');
+      await extractBasemap({ log });
+    } catch (e) {
+      log(`basemap download failed (maps show without a background until it works): ${(e as Error).message}`);
+    }
   }
 }

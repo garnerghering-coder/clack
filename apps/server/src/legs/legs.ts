@@ -6,6 +6,7 @@ import type { Db } from '../db/client.js';
 import { legStops, legs, operators, stations } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
 import { tripStops, type TripStop } from '../search/timetable.js';
+import { attachLegGeometry } from '../geo/trackSegments.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
 
@@ -27,7 +28,7 @@ export function roleOf(seq: number, boardSeq: number, alightSeq: number): StopRo
   return 'after';
 }
 
-/** Straight-line distance along the ridden stops. Routed track geometry replaces this in step 6. */
+/** Straight-line distance along the ridden stops; the fallback until the leg is routed on the rail network. */
 export function straightLineDistanceM(stops: Pick<TripStop, 'lat' | 'lon'>[]): number {
   let d = 0;
   for (let i = 1; i < stops.length; i++) d += haversineM(stops[i - 1]!.lat, stops[i - 1]!.lon, stops[i]!.lat, stops[i]!.lon);
@@ -162,6 +163,7 @@ export function getLeg(db: Db, userId: string, id: string) {
   const row = db.select(legColumns).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
   if (!row) return null;
   const [leg] = attachRefs(db, [row]);
+  const geometry = db.select({ g: legs.geometry }).from(legs).where(eq(legs.id, id)).get()?.g ?? null;
   const stops = db
     .select({
       seq: legStops.seq,
@@ -186,7 +188,7 @@ export function getLeg(db: Db, userId: string, id: string) {
     .where(eq(legStops.legId, id))
     .orderBy(asc(legStops.seq))
     .all();
-  return { ...leg!, stops };
+  return { ...leg!, geometry, stops };
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {
