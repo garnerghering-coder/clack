@@ -108,7 +108,9 @@ export function pointAt(line: LatLon[], cum: number[], m: number): { lat: number
   const lat = a[0] + t * (b[0] - a[0]);
   const lon = a[1] + t * (b[1] - a[1]);
   const y = Math.sin(((b[1] - a[1]) * Math.PI) / 180) * Math.cos((b[0] * Math.PI) / 180);
-  const x = Math.cos((a[0] * Math.PI) / 180) * Math.sin((b[0] * Math.PI) / 180) - Math.sin((a[0] * Math.PI) / 180) * Math.cos((b[0] * Math.PI) / 180) * Math.cos(((b[1] - a[1]) * Math.PI) / 180);
+  const x =
+    Math.cos((a[0] * Math.PI) / 180) * Math.sin((b[0] * Math.PI) / 180) -
+    Math.sin((a[0] * Math.PI) / 180) * Math.cos((b[0] * Math.PI) / 180) * Math.cos(((b[1] - a[1]) * Math.PI) / 180);
   return { lat, lon, bearing: ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360 };
 }
 
@@ -122,7 +124,10 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
   const alight = stops.at(-1)!;
   const depAt = times[0]!.dep ?? times[0]!.arr ?? 0;
   const arrAt = times.at(-1)!.arr ?? times.at(-1)!.dep ?? 0;
-  const arrivalDelayMin = delayMinutes(alight.schedArr ?? alight.schedDep, alight.actualArr ?? alight.estimatedArr ?? (alight.schedArr === null ? null : times.at(-1)!.arr));
+  const arrivalDelayMin = delayMinutes(
+    alight.schedArr ?? alight.schedDep,
+    alight.actualArr ?? alight.estimatedArr ?? (alight.schedArr === null ? null : times.at(-1)!.arr),
+  );
   const base: LiveView = {
     status: 'scheduled',
     prevStopId: null,
@@ -142,7 +147,18 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
 
   const departed = board.actualDep !== null || now >= depAt;
   const arrived = alight.actualArr !== null || (now >= arrAt && arrAt > 0);
-  if (arrived) return { ...base, status: 'arrived', prevStopId: alight.stationId, nextStopId: null, eta: null, progress: 1, lat: alight.lat, lon: alight.lon, positionSource: null };
+  if (arrived)
+    return {
+      ...base,
+      status: 'arrived',
+      prevStopId: alight.stationId,
+      nextStopId: null,
+      eta: null,
+      progress: 1,
+      lat: alight.lat,
+      lon: alight.lon,
+      positionSource: null,
+    };
   if (!departed) return { ...base, status: now >= depAt - BOARDING_MS ? 'boarding' : 'scheduled' };
 
   // Last stop the train has reached and the next one ahead.
@@ -180,9 +196,19 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
   const fresh = gps && now - gps.at <= GPS_FRESH_MS;
   if (fresh && line.length > 1) {
     const gm = locate(line, cum, gps);
-    return { ...out, progress: total ? gm / total : null, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, positionSource: 'gps', positionAt: gps.at };
+    return {
+      ...out,
+      progress: total ? gm / total : null,
+      lat: gps.lat,
+      lon: gps.lon,
+      bearing: gps.bearing,
+      speedKmh: gps.speedKmh,
+      positionSource: 'gps',
+      positionAt: gps.at,
+    };
   }
-  if (fresh) return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, positionSource: 'gps', positionAt: gps.at, progress: null };
+  if (fresh)
+    return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, positionSource: 'gps', positionAt: gps.at, progress: null };
   if (line.length < 2) return { ...out, progress: null };
   const p = pointAt(line, cum, m);
   return { ...out, progress: total ? m / total : null, lat: p.lat, lon: p.lon, bearing: p.bearing, positionSource: 'estimated' };
@@ -214,7 +240,8 @@ export function diffEvents(before: LegSummary, after: LegSummary): LegEvent[] {
   if (before.arrivedAt === null && after.arrivedAt !== null) out.push({ type: 'arrived', payload: { at: after.arrivedAt, delayMin: after.arrivalDelayMin } });
   const d0 = before.arrivalDelayMin ?? 0;
   const d1 = after.arrivalDelayMin ?? 0;
-  if (after.arrivedAt === null && after.arrivalDelayMin !== null && Math.abs(d1 - d0) >= 3) out.push({ type: 'delayed', payload: { delayMin: d1, previousDelayMin: before.arrivalDelayMin } });
+  if (after.arrivedAt === null && after.arrivalDelayMin !== null && Math.abs(d1 - d0) >= 3)
+    out.push({ type: 'delayed', payload: { delayMin: d1, previousDelayMin: before.arrivalDelayMin } });
   for (const [key, which] of [
     ['depPlatform', 'departure'],
     ['arrPlatform', 'arrival'],

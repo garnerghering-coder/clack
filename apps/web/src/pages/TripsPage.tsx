@@ -7,13 +7,17 @@ import { api, ms, type Leg } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { useSettings } from '../settings';
+import { LiveChip, LiveModule } from '../components/Live';
+import { isLive, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDay, fmtDistance, fmtMonth, fmtTime } from '../format';
 
 const tzOf = (leg: Leg) => leg.origin?.tz ?? 'Europe/Stockholm';
-const arrivalOf = (leg: Leg) => ms(leg.actualArr) ?? ms(leg.schedArr) ?? 0;
+// A late train that is still running counts as upcoming until it actually arrives.
+const arrivalOf = (leg: Leg) => ms(leg.actualArr) ?? Math.max(ms(leg.schedArr) ?? 0, isLive(leg.live) ? (ms(leg.live?.arrivalEta) ?? 0) : 0);
 
 export function countdown(t: (k: string, o?: Record<string, unknown>) => string, leg: Leg, now: number): string {
   const dep = ms(leg.actualDep) ?? ms(leg.schedDep) ?? 0;
+  if (leg.canceled || leg.live?.status === 'cancelled') return t('status.cancelled');
   if (now >= arrivalOf(leg)) return t('trips.arrived');
   if (now >= dep) return t('trips.liveNow');
   if (dep - now <= 30 * 60_000) return t('trips.boarding');
@@ -60,14 +64,14 @@ export function LegRow({ leg }: { leg: Leg }) {
   );
 }
 
+/** The list API has no stop list; names for the live module come from the hero's own fetch of the leg. */
+const stopNames = new Map<string, { stationId: string; name: string; tz: string }[]>();
+const heroStops = (leg: Leg) => stopNames.get(leg.id) ?? [];
+
 function Hero({ leg }: { leg?: Leg }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), 30_000);
-    return () => clearInterval(timer);
-  }, []);
+  const now = useNow(leg && isLive(leg.live) ? 1000 : 30_000);
   if (!leg)
     return (
       <section className="hero hero-empty">
@@ -97,11 +101,21 @@ function Hero({ leg }: { leg?: Leg }) {
       <div className="hero-times tabular">
         {fmtTime(ms(leg.schedDep), tzOf(leg), settings.clock)} → {fmtTime(ms(leg.schedArr), leg.destination?.tz ?? tzOf(leg), settings.clock)}
       </div>
-      <div className="hero-bottom">
-        <span className="pill">{countdown(t, leg, now)}</span>
-        {leg.depPlatform && <span className="chip">{t('trips.platform', { platform: leg.depPlatform })}</span>}
-        {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
-      </div>
+      {leg.live && isLive(leg.live) && leg.live.status !== 'boarding' ? (
+        <>
+          <div className="hero-bottom">
+            <LiveChip live={leg.live} now={now} />
+            <DelayPill delay={leg.live.arrivalDelayMin} canceled={leg.canceled} />
+          </div>
+          <LiveModule leg={leg} live={leg.live} stops={heroStops(leg)} now={now} compact />
+        </>
+      ) : (
+        <div className="hero-bottom">
+          <span className="pill">{countdown(t, leg, now)}</span>
+          {leg.depPlatform && <span className="chip">{t('trips.platform', { platform: leg.depPlatform })}</span>}
+          {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
+        </div>
+      )}
     </Link>
   );
 }
@@ -116,10 +130,23 @@ export function TripsPage() {
     api.legs().then(setLegs, () => setError(true));
   }, []);
   useEffect(load, [load]);
+  // Live ticks: merge the new live state into the list, so the hero's progress moves without a reload.
+  useLiveUpdates((u) => setLegs((ls) => ls && ls.map((l) => (l.id === u.legId ? { ...l, live: u.live } : l))));
+  const liveId = legs?.find((l) => isLive(l.live))?.id;
+  const [, setNamesReady] = useState(0);
+  useEffect(() => {
+    if (!liveId || stopNames.has(liveId)) return;
+    api.leg(liveId).then((d) => {
+      stopNames.set(liveId, d.stops);
+      setNamesReady((n) => n + 1);
+    });
+  }, [liveId]);
 
   const now = Date.now();
   const upcoming = useMemo(() => (legs ?? []).filter((l) => arrivalOf(l) > now).sort((a, b) => (ms(a.schedDep) ?? 0) - (ms(b.schedDep) ?? 0)), [legs, now]);
   const past = useMemo(() => (legs ?? []).filter((l) => arrivalOf(l) <= now).sort((a, b) => (ms(b.schedDep) ?? 0) - (ms(a.schedDep) ?? 0)), [legs, now]);
+  // The hero is the train you're on right now, else the next one.
+  const hero = upcoming.find((l) => isLive(l.live)) ?? upcoming[0];
   const months = useMemo(() => {
     const groups: { label: string; legs: Leg[] }[] = [];
     for (const l of past) {
@@ -168,8 +195,8 @@ export function TripsPage() {
       )}
       {legs && legs.length > 0 && tab === 'upcoming' && (
         <>
-          <Hero leg={upcoming[0]} />
-          <div className="list">{upcoming.slice(1).map((l) => <LegRow key={l.id} leg={l} />)}</div>
+          <Hero leg={hero} />
+          <div className="list">{upcoming.filter((l) => l !== hero).map((l) => <LegRow key={l.id} leg={l} />)}</div>
         </>
       )}
       {legs && legs.length > 0 && tab === 'past' && (

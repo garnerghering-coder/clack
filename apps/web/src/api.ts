@@ -124,6 +124,40 @@ export interface Leg {
   origin: StationRef | null;
   destination: StationRef | null;
   notes: string | null;
+  live: LiveState | null;
+}
+
+export type LiveStatus = 'scheduled' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
+
+/** Times are ISO strings from the REST API and epoch ms from the live stream; use ms() on either. */
+export interface LiveState {
+  updatedAt: string | number;
+  status: LiveStatus;
+  lat: number | null;
+  lon: number | null;
+  bearing: number | null;
+  speedKmh: number | null;
+  positionSource: 'gps' | 'estimated' | null;
+  positionAt: string | number | null;
+  progress: number | null;
+  prevStopId: string | null;
+  nextStopId: string | null;
+  eta: string | number | null;
+  arrivalEta: string | number | null;
+  arrivalDelayMin: number | null;
+}
+
+export interface LegEvent {
+  id?: number;
+  type: 'delayed' | 'platform_changed' | 'cancelled' | 'short_turned' | 'departed' | 'arrived';
+  ts: string | number;
+  payload: Record<string, unknown>;
+}
+
+export interface LiveUpdate {
+  legId: string;
+  live: LiveState;
+  events: LegEvent[];
 }
 
 export interface LegStop {
@@ -140,6 +174,8 @@ export interface LegStop {
   schedDep: string | null;
   actualArr: string | null;
   actualDep: string | null;
+  estimatedArr: string | null;
+  estimatedDep: string | null;
   platform: string | null;
   canceled: boolean;
   deviations: string[];
@@ -149,13 +185,14 @@ export interface LegDetail extends Leg {
   /** Encoded polyline of the ridden route along the track (null until routed). */
   geometry: string | null;
   stops: LegStop[];
+  events: LegEvent[];
 }
 
 export interface TripGeometry {
   segments: { fromSeq: number; toSeq: number; polyline: string; lengthM: number; estimated: boolean }[];
 }
 
-export const ms = (iso: string | null | undefined) => (iso ? Date.parse(iso) : null);
+export const ms = (t: string | number | null | undefined) => (t === null || t === undefined || t === '' ? null : typeof t === 'number' ? t : Date.parse(t));
 
 export const api = {
   getSettings: () => request<Settings>('/settings'),

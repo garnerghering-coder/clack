@@ -166,7 +166,11 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     if (!l.ridden.length) continue;
     const nums = l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [];
     // With a number change mid-journey, use whichever matched number has the newest fix.
-    const gps = nums.map((n) => fixes.get(n)).filter((f): f is GpsFix => !!f).sort((a, b) => b.at - a.at)[0] ?? null;
+    const gps =
+      nums
+        .map((n) => fixes.get(n))
+        .filter((f): f is GpsFix => !!f)
+        .sort((a, b) => b.at - a.at)[0] ?? null;
     const view = liveView(l.ridden, l.line, gps, now);
     const row = {
       legId: l.leg.id,
@@ -188,7 +192,10 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     const events = diffEvents(before.get(l.leg.id) ?? summary(l), summary(l));
     db.transaction((tx) => {
       tx.insert(liveState).values(row).onConflictDoUpdate({ target: liveState.legId, set: row }).run();
-      for (const e of events) tx.insert(legEvents).values({ legId: l.leg.id, ts: new Date(now), type: e.type, payload: e.payload }).run();
+      for (const e of events)
+        tx.insert(legEvents)
+          .values({ legId: l.leg.id, ts: new Date(now), type: e.type, payload: e.payload })
+          .run();
     });
     const u: LiveUpdate = { legId: l.leg.id, live: { ...view, updatedAt: now }, events: events.map((e) => ({ ...e, ts: now })) };
     updates.push(u);
@@ -230,5 +237,12 @@ export function liveFor(db: Db, legId: string) {
 
 export function liveForMany(db: Db, legIds: string[]) {
   if (!legIds.length) return new Map<string, typeof liveState.$inferSelect>();
-  return new Map(db.select().from(liveState).where(inArray(liveState.legId, legIds)).all().map((r) => [r.legId, r]));
+  return new Map(
+    db
+      .select()
+      .from(liveState)
+      .where(inArray(liveState.legId, legIds))
+      .all()
+      .map((r) => [r.legId, r]),
+  );
 }

@@ -1,14 +1,17 @@
-// Trip detail (DESIGN §6): the route map on top, then times, tiles, the stop timeline and details.
-import { useEffect, useMemo, useState } from 'react';
+// Trip detail (DESIGN §6): the route map on top, then times, the live module while the train runs, tiles, the stop
+// timeline, the activity log and details.
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, RefreshCw, Repeat, Trash2 } from 'lucide-react';
 import { decodePolyline, delayMinutes, type LatLon } from '@clack/shared';
-import { api, ms, type LegDetail, type LegStop } from '../api';
+import { api, ms, type LegDetail, type LegEvent, type LegStop, type LiveState } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill, delayClass } from '../components/DelayPill';
 import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
+import { ActivityLog, LiveChip, LiveModule, eventText } from '../components/Live';
+import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 
 function TimeBlock({
@@ -54,7 +57,10 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
   const { settings } = useSettings();
   const ridden = s.role === 'board' || s.role === 'through' || s.role === 'alight';
   const sched = s.role === 'board' ? (ms(s.schedDep) ?? ms(s.schedArr)) : (ms(s.schedArr) ?? ms(s.schedDep));
-  const actual = s.role === 'board' ? ms(s.actualDep) : (ms(s.actualArr) ?? ms(s.actualDep));
+  const real = s.role === 'board' ? ms(s.actualDep) : (ms(s.actualArr) ?? ms(s.actualDep));
+  // While the train runs, Trafikverket's estimate stands in (shown in italics) until the real time is known.
+  const estimate = s.role === 'board' ? ms(s.estimatedDep) : (ms(s.estimatedArr) ?? ms(s.estimatedDep));
+  const actual = real ?? estimate;
   const delay = delayMinutes(sched, actual);
   const platformChanged = s.deviations.includes('Spårändrat');
   return (
@@ -70,7 +76,9 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
       </span>
       <span className="tl-times tabular">
         <span className={actual !== null ? 'tl-sched small' : 'tl-sched'}>{fmtTime(sched, s.tz, settings.clock)}</span>
-        {actual !== null && <span className={delayClass(delay, s.canceled)}>{fmtTime(actual, s.tz, settings.clock)}</span>}
+        {actual !== null && (
+          <span className={`${delayClass(delay, s.canceled)} ${real === null ? 'estimate' : ''}`}>{fmtTime(actual, s.tz, settings.clock)}</span>
+        )}
       </span>
       <span className="tl-platform tabular">
         {s.platform ?? ''}
@@ -90,6 +98,9 @@ export function TripDetailPage() {
   const [fullRoute, setFullRoute] = useState(false);
   const [explain, setExplain] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [live, setLive] = useState<LiveState | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  const now = useNow(1000);
   const geo = useMemo(() => {
     if (!leg) return null;
     const ridden = leg.stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
@@ -98,9 +109,31 @@ export function TripDetailPage() {
     return { route, stops };
   }, [leg]);
 
-  useEffect(() => {
-    if (id) api.leg(id).then(setLeg, () => setMissing(true));
+  const load = useCallback(() => {
+    if (id)
+      api.leg(id).then(
+        (l) => {
+          setLeg(l);
+          setLive(l.live);
+        },
+        () => setMissing(true),
+      );
   }, [id]);
+  useEffect(load, [load]);
+
+  // Every live tick: move the marker straight away, then refetch the leg so stop times and the log stay current.
+  useLiveUpdates((u) => {
+    if (u.legId !== id) return;
+    setLive(u.live);
+    load();
+    const shown = u.events.find((e: LegEvent) => e.type !== 'departed');
+    if (shown && leg) setToast(eventText(t, shown, leg, leg.stops));
+  });
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 6000);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   if (missing)
     return (
@@ -138,6 +171,15 @@ export function TripDetailPage() {
           ? t('delay.explainEarly', { count: -arrDelay })
           : t('delay.explainOnTime');
 
+  const status = statusKey(leg, live, now);
+  const boardStop = leg.stops.find((x) => x.role === 'board');
+  const boardEstimate = ms(boardStop?.estimatedDep);
+  const tracking = isLive(live) && live !== null;
+  const train =
+    tracking && live.lat !== null && live.lon !== null
+      ? { lat: live.lat, lon: live.lon, bearing: live.bearing, estimated: live.positionSource !== 'gps' }
+      : null;
+
   const refresh = async () => {
     setBusy(true);
     try {
@@ -162,6 +204,8 @@ export function TripDetailPage() {
             stops={geo.stops}
             animate
             railNetwork={settings.showRailNetwork}
+            train={train}
+            progress={tracking ? live.progress : null}
             label={t('detail.mapLabel', { from: leg.origin?.name, to: leg.destination?.name })}
           />
         )}
@@ -175,8 +219,13 @@ export function TripDetailPage() {
           <OperatorBadge operator={leg.operator} size={32} />
           <span className="strong">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</span>
           {leg.category && <span className="chip">{t(`products.${leg.category}`)}</span>}
-          <span className={`chip status-${leg.canceled ? 'cancelled' : leg.status}`}>{t(`status.${leg.canceled ? 'cancelled' : leg.status}`)}</span>
+          {tracking ? <LiveChip live={live} now={now} /> : <span className={`chip status-${status}`}>{t(`status.${status}`)}</span>}
         </div>
+        {toast && (
+          <p className="toast" role="status">
+            {toast}
+          </p>
+        )}
         <h1 className="detail-route">
           {leg.origin?.name} → {leg.destination?.name}
         </h1>
@@ -186,23 +235,25 @@ export function TripDetailPage() {
           <TimeBlock
             label={t('detail.departure')}
             sched={schedDep}
-            actual={ms(leg.actualDep)}
+            actual={ms(leg.actualDep) ?? (tracking ? boardEstimate : null)}
             tz={tz}
             platform={leg.depPlatform}
-            delay={leg.depDelayMin}
+            delay={leg.depDelayMin ?? (tracking ? delayMinutes(schedDep, boardEstimate) : null)}
             canceled={leg.canceled}
           />
           <TimeBlock
             label={t('detail.arrival')}
             sched={schedArr}
-            actual={ms(leg.actualArr)}
+            actual={ms(leg.actualArr) ?? (tracking ? ms(live.arrivalEta) : null)}
             tz={dtz}
             platform={leg.arrPlatform}
-            delay={leg.arrDelayMin}
+            delay={leg.arrDelayMin ?? (tracking ? live.arrivalDelayMin : null)}
             canceled={leg.canceled}
             extraDays={extraDays}
           />
         </section>
+
+        {tracking && <LiveModule leg={leg} live={live} stops={leg.stops} now={now} />}
 
         <section className="tiles">
           <div className="tile">
@@ -219,7 +270,7 @@ export function TripDetailPage() {
           <button className="tile" onClick={() => setExplain(!explain)}>
             <span className="caption upper">{t('detail.delay')}</span>
             <span className="tile-value">
-              <DelayPill delay={arrDelay} canceled={leg.canceled} />
+              <DelayPill delay={arrDelay ?? (tracking ? live.arrivalDelayMin : null)} canceled={leg.canceled} />
             </span>
           </button>
         </section>
@@ -238,6 +289,8 @@ export function TripDetailPage() {
             </button>
           )}
         </section>
+
+        {(tracking || leg.events.length > 0) && <ActivityLog leg={leg} events={leg.events} stops={leg.stops} />}
 
         <section className="card details">
           {leg.dataQuality !== 'full' && (

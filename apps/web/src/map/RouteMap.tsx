@@ -1,10 +1,11 @@
 // A route map (DESIGN §2.4): dark basemap, the ridden route as a glowing line in the operator colour, stop dots,
-// an optional faint rest-of-route, the rail-network toggle and a draw-on animation. MapLibre loads lazily so the
-// rest of the app stays light.
+// an optional faint rest-of-route, the rail-network toggle and a draw-on animation. While a train is live it also
+// shows the train marker, the part still ahead as a dimmed dashed line, and Follow train. MapLibre loads lazily so
+// the rest of the app stays light.
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Layers, LocateFixed } from 'lucide-react';
-import type { GeoJSONSource, Map as MlMap } from 'maplibre-gl';
+import { Layers, LocateFixed, Navigation } from 'lucide-react';
+import type { GeoJSONSource, Map as MlMap, Marker } from 'maplibre-gl';
 import type { LatLon } from '@clack/shared';
 import { RAIL_NETWORK_URL, baseStyle, railNetworkLayers, routeLayers } from './style';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -29,6 +30,10 @@ interface Props {
   railNetwork?: boolean;
   className?: string;
   label?: string;
+  /** Live train position; estimated positions draw as a hollow marker (DESIGN §2.4). */
+  train?: { lat: number; lon: number; bearing: number | null; estimated: boolean } | null;
+  /** Share of the route already travelled (0–1): splits the line into travelled and ahead. */
+  progress?: number | null;
 }
 
 let statusPromise: Promise<{ basemap: unknown }> | null = null;
@@ -40,12 +45,14 @@ const mapStatus = () =>
 
 let protocolReady: Promise<typeof import('maplibre-gl')> | null = null;
 function loadMaplibre() {
-  protocolReady ??= Promise.all([import('maplibre-gl'), import('pmtiles'), import('maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url')]).then(([ml, pm, worker]) => {
-    // MapLibre finds its worker relative to its own file, which bundling moves; point it at Vite's worker build.
-    ml.setWorkerUrl(worker.default);
-    ml.addProtocol('pmtiles', new pm.Protocol().tile);
-    return ml;
-  });
+  protocolReady ??= Promise.all([import('maplibre-gl'), import('pmtiles'), import('maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url')]).then(
+    ([ml, pm, worker]) => {
+      // MapLibre finds its worker relative to its own file, which bundling moves; point it at Vite's worker build.
+      ml.setWorkerUrl(worker.default);
+      ml.addProtocol('pmtiles', new pm.Protocol().tile);
+      return ml;
+    },
+  );
   return protocolReady;
 }
 
@@ -106,6 +113,16 @@ function partOf(pts: LatLon[], frac: number): LatLon[] {
 }
 
 // DESIGN: fit with 48 px; extra room at the top for the floating buttons and at the sides for station labels.
+/** The route split at a share of its length: [travelled, ahead]. */
+export function splitAt(pts: LatLon[], frac: number): [LatLon[], LatLon[]] {
+  const before = partOf(pts, Math.max(0, Math.min(1, frac)));
+  if (before.length < 2 || frac >= 1) return [pts, []];
+  const cut = before.at(-1)!;
+  const rest = pts.slice(before.length - 1);
+  rest[0] = cut;
+  return [before, rest];
+}
+
 const PADDING = { top: 72, bottom: 96, left: 64, right: 72 };
 const MINI_PADDING = { top: 28, bottom: 28, left: 56, right: 56 };
 const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -121,6 +138,8 @@ export function RouteMap({
   railNetwork = false,
   className = '',
   label,
+  train = null,
+  progress = null,
 }: Props) {
   const { t } = useTranslation();
   const el = useRef<HTMLDivElement>(null);
@@ -128,9 +147,12 @@ export function RouteMap({
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [showRail, setShowRail] = useState(railNetwork);
+  const [follow, setFollow] = useState(false);
+  const marker = useRef<Marker | null>(null);
+  const ml = useRef<typeof import('maplibre-gl') | null>(null);
   const fitPoints = route.length ? route : stops.map((s) => [s.lat, s.lon] as LatLon);
-  const latest = useRef({ route, context, stops, fitPoints });
-  latest.current = { route, context, stops, fitPoints };
+  const latest = useRef({ route, context, stops, fitPoints, progress });
+  latest.current = { route, context, stops, fitPoints, progress };
 
   const fit = (animateCamera: boolean) => {
     const m = map.current;
@@ -144,12 +166,13 @@ export function RouteMap({
     let cancelled = false;
     let frame = 0;
     (async () => {
-      const [ml, status] = await Promise.all([loadMaplibre(), mapStatus()]);
+      const [lib, status] = await Promise.all([loadMaplibre(), mapStatus()]);
       if (cancelled || !el.current) return;
+      ml.current = lib;
       let m: MlMap;
       try {
         const b = boundsOf(latest.current.fitPoints);
-        m = new ml.Map({
+        m = new lib.Map({
           container: el.current,
           style: baseStyle(Boolean(status.basemap)),
           attributionControl: false,
@@ -162,11 +185,14 @@ export function RouteMap({
         return;
       }
       map.current = m;
+      // Dragging the map means you want to look around: stop following the train.
+      m.on('dragstart', () => setFollow(false));
       m.on('load', () => {
         if (cancelled) return;
         const { route: r, context: c, stops: s } = latest.current;
-        const draw = animate && !reducedMotion() && r.length > 1;
+        const draw = animate && !reducedMotion() && r.length > 1 && latest.current.progress === null;
         m.addSource('route-context', { type: 'geojson', data: lines(c) });
+        m.addSource('route-ahead', { type: 'geojson', data: lines([]) });
         m.addSource('route', { type: 'geojson', data: lines([draw ? r.slice(0, 1) : r]) });
         m.addSource('stops', { type: 'geojson', data: points(draw ? s.filter((x) => x.kind === 'end').slice(0, 1) : s) });
         for (const layer of routeLayers(color)) m.addLayer(layer);
@@ -187,6 +213,8 @@ export function RouteMap({
     return () => {
       cancelled = true;
       cancelAnimationFrame(frame);
+      marker.current?.remove();
+      marker.current = null;
       map.current?.remove();
       map.current = null;
     };
@@ -199,12 +227,51 @@ export function RouteMap({
   useEffect(() => {
     const m = map.current;
     if (!m || !ready) return;
-    (m.getSource('route') as GeoJSONSource | undefined)?.setData(lines([route]));
     (m.getSource('route-context') as GeoJSONSource | undefined)?.setData(lines(context));
     (m.getSource('stops') as GeoJSONSource | undefined)?.setData(points(stops));
-    fit(true);
+    if (!follow) fit(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeKey, ready]);
+
+  // Travelled vs ahead (live) or the whole line.
+  const progressKey = progress === null ? 'none' : progress.toFixed(4);
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !ready) return;
+    const [done, ahead] = progress === null ? [route, []] : splitAt(route, progress);
+    (m.getSource('route') as GeoJSONSource | undefined)?.setData(lines([done]));
+    (m.getSource('route-ahead') as GeoJSONSource | undefined)?.setData(lines([ahead]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeKey, progressKey, ready]);
+
+  // The train marker: operator dot with a heading chevron and pulsing halo; hollow when estimated.
+  useEffect(() => {
+    const m = map.current;
+    const lib = ml.current;
+    if (!m || !lib || !ready) return;
+    if (!train) {
+      marker.current?.remove();
+      marker.current = null;
+      return;
+    }
+    if (!marker.current) {
+      const node = document.createElement('div');
+      node.className = 'train-marker';
+      node.innerHTML = '<span class="train-halo"></span><span class="train-chevron"></span><span class="train-dot"></span>';
+      node.style.setProperty('--op', color);
+      marker.current = new lib.Marker({ element: node }).setLngLat([train.lon, train.lat]).addTo(m);
+    }
+    const node = marker.current.getElement();
+    node.classList.toggle('estimated', train.estimated);
+    node.title = train.estimated ? t('live.estimatedPosition') : t('live.livePosition');
+    const chevron = node.querySelector<HTMLElement>('.train-chevron');
+    if (chevron) {
+      chevron.style.display = train.bearing === null ? 'none' : '';
+      chevron.style.transform = `rotate(${train.bearing ?? 0}deg)`;
+    }
+    marker.current.setLngLat([train.lon, train.lat]);
+    if (follow) m.easeTo({ center: [train.lon, train.lat], duration: reducedMotion() ? 0 : 800 });
+  }, [train?.lat, train?.lon, train?.bearing, train?.estimated, ready, follow, color, t, train]);
 
   // Rail network layer, fetched the first time it's switched on.
   useEffect(() => {
@@ -232,7 +299,26 @@ export function RouteMap({
           >
             <Layers size={18} />
           </button>
-          <button className="map-button map-recenter" aria-label={t('map.recenter')} title={t('map.recenter')} onClick={() => fit(true)}>
+          {train && (
+            <button
+              className="map-button map-follow"
+              aria-pressed={follow}
+              aria-label={t('live.follow')}
+              title={t('live.follow')}
+              onClick={() => setFollow(!follow)}
+            >
+              <Navigation size={18} />
+            </button>
+          )}
+          <button
+            className="map-button map-recenter"
+            aria-label={t('map.recenter')}
+            title={t('map.recenter')}
+            onClick={() => {
+              setFollow(false);
+              fit(true);
+            }}
+          >
             <LocateFixed size={18} />
           </button>
         </>

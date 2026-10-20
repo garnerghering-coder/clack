@@ -81,7 +81,9 @@
     "planned": "Upcoming",
     "completed": "Arrived",
     "snapshotted": "Arrived",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "boarding": "Boarding",
+    "live": "Live"
   },
   "delay": {
     "on_time": "On time",
@@ -195,5 +197,37 @@
     "railNetwork": "Show rail network",
     "recenter": "Re-center",
     "noBasemap": "Map background is still downloading. Routes show without it."
+  },
+  "live": {
+    "chip": "Live",
+    "stale": "Stale · updated {{ago}}",
+    "updated": "Updated {{ago}}",
+    "justNow": "just now",
+    "secondsAgo": "{{n}} s ago",
+    "minutesAgo": "{{n}} min ago",
+    "between": "Between {{a}} and {{b}}",
+    "atStop": "At {{name}}",
+    "boardingAt": "Boarding at {{name}}",
+    "nextStop": "Next stop: {{name}} {{time}}",
+    "arrives": "Arrives {{time}}",
+    "livePosition": "Live position",
+    "estimatedPosition": "Estimated position",
+    "noPosition": "Position not available for this train",
+    "follow": "Follow train",
+    "trainHere": "The train is here",
+    "progressLabel": "{{percent}}% of the way to {{name}}"
+  },
+  "activity": {
+    "title": "Activity",
+    "empty": "Live updates appear here while the train runs.",
+    "departed": "Departed {{station}}",
+    "arrived": "Arrived at {{station}}",
+    "arrivedLate": "Arrived at {{station}}, {{delay}} min late",
+    "delayed": "Now expected {{delay}} at {{station}}",
+    "delayedOnTime": "Back on time to {{station}}",
+    "platformDeparture": "Departure platform changed {{from}} → {{to}}",
+    "platformArrival": "Arrival platform changed {{from}} → {{to}}",
+    "cancelled": "Train cancelled",
+    "shortTurned": "Cancelled at {{stations}}"
   }
 }
