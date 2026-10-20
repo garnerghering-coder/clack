@@ -8,6 +8,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CACHE } from './lib.mjs';
 import { load, serviceDates, stopTimesByTrip, tripOperators, P0 } from './p0data.mjs';
+import { ROOT } from './lib.mjs';
+import { parseCsvLine } from './gtfs.mjs';
 
 const date = (process.argv[2] ?? '2026-10-20').replaceAll('-', '');
 const hav = (a, b, c, d) => {
@@ -92,6 +94,26 @@ function route(srcs, dsts, limitM) {
 
 // ---- station pairs for the date
 const stops = Object.fromEntries(load('stops.json').map((s) => [s.stop_id, s]));
+// GTFS station coordinates are occasionally wrong (Notviken is 54 km off). When GTFS and Trafikverket
+// disagree by > 300 m, use whichever point is closer to the rail network.
+{
+  const trvPos = Object.fromEntries(load('trv_stations.json').map((t) => { const m = t.Geometry?.WGS84?.match(/POINT \(([-\d.]+) ([-\d.]+)\)/); return [t.LocationSignature, m && [+m[2], +m[1]]]; }));
+  const csv = fs.readFileSync(path.join(ROOT, 'data/station_mapping.draft.csv'), 'utf8').trim().split('\n');
+  const head = parseCsvLine(csv[0]);
+  let fixed = 0;
+  for (const line of csv.slice(1)) {
+    const r = Object.fromEntries(head.map((h, i) => [h, parseCsvLine(line)[i]]));
+    const tp = trvPos[r.trv_signature];
+    if (!tp || !(+r.dist_m > 300) || !stops[r.gtfs_stop_id]) continue;
+    const g = snap(+r.lat, +r.lon, 5000), t = snap(tp[0], tp[1], 5000);
+    if (t && (!g || t.d + 50 < g.d)) {
+      console.log(`  coordinate fix: ${r.gtfs_name} GTFS ${g ? Math.round(g.d) : '>5000'} m from track, Trafikverket ${Math.round(t.d)} m -> using Trafikverket`);
+      stops[r.gtfs_stop_id] = { ...stops[r.gtfs_stop_id], stop_lat: String(tp[0]), stop_lon: String(tp[1]) };
+      fixed++;
+    }
+  }
+  console.log(`coordinate fixes applied: ${fixed}`);
+}
 const parent = (id) => stops[id].parent_station || id;
 const sd = serviceDates();
 const st = stopTimesByTrip();

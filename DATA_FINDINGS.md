@@ -16,7 +16,7 @@ downloads live in `data/cache/` (gitignored).
 |---|---|---|---|
 | A | §10: fetch actuals "when the app is opened" | **Trafikverket keeps only ~4 days of history** | A small server-side job snapshots every leg that arrived in the last 3 days (**decided**, see Decisions). |
 | B | §5.3: GTFS Sverige 2 fetched with a key, packaging unknown | Keyless public **archive of daily snapshots back to Aug 2012** at `data.samtrafiken.se` | Use the archive for history (no quota). The key is only needed for the newest snapshot. |
-| C | §12: prefer GTFS shapes if good | GTFS rail shapes are **straight stop-to-stop lines** for ~95% of trips | OSM routing is the primary geometry. It works for 94% of station pairs today; cross-border needs DK/NO/DE OSM data too. |
+| C | §12: prefer GTFS shapes if good | GTFS rail shapes are **straight stop-to-stop lines** for ~95% of trips | OSM routing is the primary geometry: **99.1% of station pairs** route along real track with SE+DK+NO data (the rest are Germany and bus stops). |
 | D | §8: rolling window −7 days from GTFS Sweden 3 | GTFS Sweden 3 starts at **yesterday** (runs to Dec 2027) | Never delete past days on import (keep our own history); older dates come from the Sverige 2 archive. |
 | E | §11: classify by route_type/agency/name | **Replacement buses are filed under rail route_types and train numbers** | Exclude using Trafikverket `TypeOfTraffic = Buss` and "trip calls at a non-railway stop". |
 | F | §5.2: GTFS file is "a download" | `sweden.zip` is **804 MB** (3.9 GB unzipped; `shapes.txt` alone is 3.0 GB) | The import must stream and should skip `shapes.txt`. |
@@ -32,7 +32,7 @@ Script: `trv-history-window.mjs`, plus a global oldest/newest query.
 
 - **Oldest row in the whole `TrainAnnouncement` dataset:** 2026-10-16 00:00 local, i.e. **00:00 four days ago**. Nothing exists before that, for any train.
 - **Newest row:** 2026-11-04 (≈ **15 days ahead**).
-- Within the window, every past advertised stop has `TimeAtLocation` (actual) and `TrackAtLocation` (platform). Example: SJ 523 on 2026-10-17/18/19 had 16/16 advertised rows with actual times and tracks.
+- Within the window, past advertised stops normally have `TimeAtLocation` (actual) and `TrackAtLocation` (platform). Example: SJ 523 on 2026-10-17/18/19 had 16/16 advertised rows with actual times and tracks. Some regional lines have gaps; see "How complete are actual times?" below.
 
 | days ago | 1 | 2 | 3 | 5 | 7 | 30 | 90 | 365 |
 |---|---|---|---|---|---|---|---|---|
@@ -42,7 +42,7 @@ Script: `trv-history-window.mjs`, plus a global oldest/newest query.
 
 **Implications**
 - "Full delay data" ends **~3 full days after the trip**. A leg added later than that, or a past leg whose actuals were never fetched in time, becomes `scheduled_only`.
-- Waiting for the user to open the app (spec §10) will lose data whenever they don't open it within 3 days. **Recommendation:** a server cron (node-cron, already in the stack) that runs a few times a day and snapshots all `planned` legs whose scheduled arrival has passed. It costs 1 Trafikverket request per leg.
+- Waiting for the user to open the app (spec §10) will lose data whenever they don't open it within 3 days. **Decided:** a server cron (node-cron, already in the stack) that runs a few times a day and snapshots all `planned` legs whose scheduled arrival has passed. It costs about 1 Trafikverket request per leg.
 - Every row also carries non-advertised technical passage points (`Advertised=false`) with actual times. That's useful later for "passed through" and progress, but filter on `Advertised=true` for the stop list.
 - Schema versions: **`TrainAnnouncement` 1.9** and **`TrainStation` 1.4** are the newest accepted (1.10 / 1.5 rejected). Times come with offsets (`+02:00`/`+01:00`), so convert to UTC on ingest.
 - Useful extra fields not in the spec: `TimeAtLocationWithSeconds`, `TypeOfTraffic` (Tåg/Pendeltåg/Buss), `ProductInformation` (e.g. "SJ Snabbtåg"), `OperationalTrainNumber`, `TrainComposition`, `Deleted`.
@@ -86,13 +86,13 @@ Script: `q2-train-numbers.mjs`, run for 2026-10-19 and 2026-10-20.
 | `trip_short_name` | 300/4157 | 291 (7.0%) |
 | `route_short_name` | 4157/4157 | 2388 (57.4%) |
 
-Per operator (2026-10-19), using `samtrafiken_internal_trip_number`:
+First pass, number only (2026-10-19), using `samtrafiken_internal_trip_number`. This is superseded by the final method below:
 - **100% match:** Västtågen, SL Pendeltåg, Pågatåg, Mälartåg, SJ, VR Sverige (Öresundståg), Tåg i Bergslagen, Krösatåg (all), Östgötapendeln, Norrtåg, Värmlandstrafik, Tågkompaniet, X-Tåget, Vygruppen.
 - **0% (expected: not in Trafikverket at all):**
   - Roslagsbanan (Transdev, 493 trips) and Saltsjöbanan (AB Stockholms Spårvägar, 231). These are not on Trafikverket's network.
   - **Arlanda Express** (180). Trafikverket's own station text says "Arlanda Express visas ej".
   - These will always be `scheduled_only`.
-- **Partial:** Snälltåget 57% and a few Öresundståg/MTRX. GTFS uses a leading extra digit for date or route variants (`90306`, `10300`, `93940`, `51053`). After dropping the first digit of a 5-digit number they match Trafikverket's `306`, `300`, `3940`, `1053` with matching times. Rule: exact match first, then prefix-stripped with time validation.
+- **Partial:** Snälltåget 57% and a few Öresundståg/MTRX. GTFS uses a leading extra digit for date or route variants (`90306`, `10300`, `93940`, `51053`). Dropping the first digit finds Trafikverket's `306`, `300`, `3940`, `1053`. But `90306` is actually a connecting bus on another route and `10300` continues as `3940`, so stripping alone is unsafe. The final method below requires matching stations *and* times.
 - 229–305 Trafikverket trains per day have no GTFS counterpart. They're mostly short-notice Västtågen variants (`63594`…), buses (`TypeOfTraffic=Buss`) and the Järnvägsmuseet railbus. A train-number search should therefore also query Trafikverket for dates inside its window.
 
 **Final matching method (`q2-match.mjs`).** Three things make "number on a date" unreliable on its own:
@@ -241,41 +241,53 @@ Scripts: `q6-shape-stats.mjs`, `osm_rail_extract.py`, `q6-osm-route.mjs`, `plot_
 
 **GTFS Sweden 3 shapes are not usable as track geometry for most trains.** For 25,531 rail shapes:
 - Västtågen, Pågatåg, SL Pendeltåg, Mälartåg, Arlanda Express, Norrtåg, Snälltåget, MTRX, Krösatåg, Öresundståg (106) and most SJ have **no more points than stops** (0.0–0.3 points/km, median gaps 8–350 km). They are straight lines between stations.
-- Detailed shapes exist only for VR Sverige (Öresundståg, 11 pts/km), Roslagsbanan (55), Saltsjöbanan (64), Tågkompaniet (22) and a few SJ. Where present they're **track-accurate**: median 6–21 m from OSM track.
+- Detailed shapes exist only for VR Sverige (Öresundståg, 11 pts/km), Roslagsbanan (55), Saltsjöbanan (64), Tågkompaniet (22) and a few SJ. Where present they're **track-accurate** (see the OSM comparison below).
 - Some shapes contain bogus far-away points (gaps up to ~5,900 km), so validate before using any.
 
-**OSM routing works** (Sweden extract from `download.openstreetmap.fr`, dated 2026-10-19, 1.0 GB). Keeping `railway=rail|light_rail|narrow_gauge` gives 25,352 ways and 313k nodes, 11.5 MB as JSON.
-- **Service track** (`service=yard|siding|spur`) must stay in the graph with a cost penalty. Dropping it disconnects Borlänge–Falun and Hallsberg–Kumla inside stations.
-- **All 867 station pairs used on 2026-10-20:**
-  - **817 (94.2%) route cleanly.** Track length is a median 1.07× the straight line (p95 1.32×).
-  - **41 fail to snap.** All are stations outside Sweden (Norway, Copenhagen side of Öresund, Germany) or bus stops, so they need DK/NO/DE OSM extracts.
-  - **1 has no path:** Halden–Ed, which crosses into Norway.
-  - **8 have suspicious detours.** Sundsvall area ×1.6–1.8, Älvkarleby–Skutskär ×1.7, Oleby–Torsby. These need snapping/tuning in Phase 1.
-- **Example: SJ 423 Stockholm C → Göteborg C routes 453.3 km** (real line ≈ 455 km). Straight stop-to-stop GTFS geometry gives 397.5 km, which would understate distance and CO₂ by ~12%. SJ 523 → Malmö: 596.6 km routed vs 533.3 km straight. See `docs/phase0/route_sample.png`.
+**OSM routing works.** Extracts from `download.openstreetmap.fr` dated 2026-10-19: Sweden 1.0 GB, Denmark 0.55 GB, Norway 1.4 GB. Keeping `railway=rail|light_rail|narrow_gauge` across all three gives 47,984 ways and 552k nodes, 25 MB as JSON. It took ~15 min to build with pyosmium.
+
+Lessons from tuning the router (`q6-osm-route.mjs`):
+- **Keep service track** (`service=yard|siding|spur`) in the graph with a 5× cost penalty. Dropping it disconnects Borlänge–Falun and Hallsberg–Kumla inside stations.
+- **Snap each station to every running-line node within 400 m**, and run one multi-source/multi-target Dijkstra with the snap distance added to the cost. Snapping to only the nearest node sometimes picked a parallel or freight line and produced detours.
+- **Fix bad station coordinates first.** GTFS puts Notviken (Luleå) 54 km away, and Rottneros, Såneby, Sunne and Bäckebron 0.6–1.5 km off. When GTFS and Trafikverket disagree by > 300 m, use whichever point is closer to the track. That applied to 6 stations; the import should do the same and log it.
+
+**Result for all 867 station pairs used on 2026-10-20:**
+
+| Outcome | Pairs | Notes |
+|---|---|---|
+| Routed cleanly | **859 (99.1%)** | track length median 1.01×, p95 1.26× the straight line |
+| Long but correct | 4 | Oleby–Torsby (the line loops north before entering Torsby), Sundsvall C–Timrå and Timrå–Sundsvalls västra (round the bay via the western triangle), Boden–Kalix (via Morjärv). Checked against the OSM plot |
+| Station not near track | 4 | Köbenhavn Syd–Berlin (Germany not loaded) and Snälltåget's Tingsryd bus stops (correctly not rail) |
+| No path | 0 | Halden–Ed and the Copenhagen/Oslo segments work with DK+NO data |
+
+- **Example: SJ 423 Stockholm C → Göteborg C routes 451.9 km** (real line ≈ 455 km). Straight stop-to-stop GTFS geometry gives 397.5 km, which would understate distance and CO₂ by ~12%. SJ 523 → Malmö: 592.5 km routed vs 533.3 km straight. See `docs/phase0/route_sample.png`.
+- **The detailed GTFS shapes are track-accurate** once Denmark and Norway are loaded: median 6–12 m from OSM track for every operator that has them, p95 18–93 m.
 - **Decision:** OSM routing is the primary geometry (spec §12 step 2), cached per station pair in `track_segments`. Use GTFS shapes only when detailed (≥ 50 points and validated against OSM). Fall back to straight lines with `is_estimated_geometry`.
-- **Environment note:** `download.geofabrik.de` connections were reset from this cloud environment. `download.openstreetmap.fr` worked. For cross-border coverage add Denmark, Norway and northern Germany extracts (or a single clipped Nordic extract).
+- **Germany/Austria:** only Snälltåget's few Berlin/Salzburg night trains need them. The mirror offers only a full Germany file (~4.5 GB) and Austria (0.97 GB). Same method; add them when those trains matter.
+- **Environment note:** `download.geofabrik.de` connections were reset from this cloud environment. `download.openstreetmap.fr` worked.
 
 ## 7. Quotas and caching
 
 | Source | Documented limit | Used in Phase 0 | Notes |
 |---|---|---|---|
-| GTFS Sweden 3 static (`opendata.samtrafiken.se`) | Bronze 10/min, **50/month** (Silver 250). `sweden_extra.zip` counts against the same quota | **1** | The owner says this key allows 60; the guard assumes 50 until confirmed. Updated daily ~05:00–06:00 (the 2026-10-20 file was `Last-Modified 03:24 UTC`) |
+| GTFS Sweden 3 static (`opendata.samtrafiken.se`) | Bronze 10/min, **50/month** (Silver 250). `sweden_extra.zip` counts against the same quota | **1** | The owner says this key allows 60; the guard assumes 50 (decided). Updated daily ~05:00–06:00 (the 2026-10-20 file was `Last-Modified 03:24 UTC`) |
 | GTFS Sverige 2 API (`api.resrobot.se`) | Bronze **1/min, 50/month** | **1** | Only needed for the newest feed. The archive is keyless |
-| GTFS Sverige 2 archive (`data.samtrafiken.se`) | none | 6 files | Plain HTTP directory listing |
+| GTFS Sverige 2 archive (`data.samtrafiken.se`) | none | ~25 files + 180 listings | Plain HTTP directory listing |
 | Trafiklab extras (`api.trafiklab.se/.../extra/*.txt`) | none (keyless) | 2 | `trafikverket_stops.txt`, `agency_stops.txt` |
-| Trafikverket Open API | no hard quota; fair use (Trafiklab support: only sustained abuse, e.g. tens of req/s, gets keys disabled) | ~40 queries | A full day of announcements is ~100k rows, fine in 5 queries |
+| Trafikverket Open API | no hard quota; fair use (Trafiklab support: only sustained abuse, e.g. tens of req/s, gets keys disabled) | ~70 queries | A full day of announcements is ~100k rows, fine in 5 queries |
 
 **Caching works:**
 - `scripts/phase0/download.mjs` refuses to re-download a dataset fetched < 20 h ago without `--force`. This was verified: a second `se3` call printed "Cached copy is 0.0h old … Not downloading".
 - It logs every call, including failures (they still count), to `data/cache/downloads.log` with timestamp, status and bytes.
 - It counts calls per month per quota group.
+- It streams to disk. That was verified byte-identical on a keyless archive file, using ~22 MB of memory. The 804 MB first download in this session was buffered in memory before this fix.
 
 ---
 
 ## Other things worth knowing
 
 - **Node + proxy:** Node's `fetch` ignores `HTTPS_PROXY`. Run scripts with `NODE_USE_ENV_PROXY=1` when behind a proxy, as in this cloud environment.
-- **Copenhagen:** Öresundståg runs into Denmark on most trips. Trafikverket covers the Danish stops (`Dk.kh` …), but the Swedish OSM extract doesn't. This matters before Phase 2 as well.
+- **Copenhagen / Oslo:** Öresundståg runs into Denmark on most trips. `TrainStation` lists Danish locations (`Dk.kh` …), but **`TrainAnnouncement` has no rows at Danish stops at all**; they appear only as `ToLocation`. On 2026-10-19 there were just 11 Norwegian rows, none with an actual time. So a leg ending in Copenhagen or Oslo gets no actual arrival from Trafikverket; it needs Rejseplanen (Phase 2) or Norwegian data. Routing is fine: the Denmark and Norway extracts are included.
 - **DST:** GTFS times are local service-day times (can exceed 24:00); Trafikverket times carry an offset. Convert both to UTC with the station's tz (`Europe/Stockholm` for all Swedish stations).
 - **Sizes for the import:** rail-only extract of GTFS Sweden 3 = 34,796 trips, 400k stop_times, 735 stations (~90 MB of JSON). Parsing the full zip by streaming takes ~2.5 min.
 
