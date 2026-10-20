@@ -2,7 +2,7 @@
 
 Real data saved for tests, mostly because Trafikverket deletes everything after ~4 days.
 
-## `trv/2026-10-20/` — the owner's own trips (captured with `scripts/fixtures/capture-trv.mjs`)
+## `trv/2026-10-20/` — sample trips (captured with `scripts/fixtures/capture-trv.mjs`)
 
 | File | Trip | Why it's a useful test |
 |---|---|---|

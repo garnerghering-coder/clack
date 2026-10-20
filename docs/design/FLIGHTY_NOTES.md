@@ -1,8 +1,8 @@
 # Design reference: follow Flighty very closely
 
-The owner wants the app to look and feel almost identical to Flighty (decided 2026-10-20). Screenshots are in
-[`reference/`](reference/). **They are Flighty's artwork: keep them out of any public repo, and before public
-launch review the design so it's "in the style of", with our own name, icon and colours.**
+The owner wants the app to look and feel almost identical to Flighty (decided 2026-10-20). The screenshots are
+**not in git** (they show personal account details and are Flighty's artwork); see [`reference/README.md`](reference/README.md).
+Before public launch, review the design so it's "in the style of", with our own name, icon and colours.
 
 ## Structure (every main screen)
 
