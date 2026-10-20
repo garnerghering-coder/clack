@@ -1,0 +1,71 @@
+{
+  "app": {
+    "name": "Clack"
+  },
+  "nav": {
+    "trips": "Trips",
+    "passport": "Passport",
+    "settings": "Settings"
+  },
+  "trips": {
+    "title": "Trips",
+    "add": "Add trip",
+    "empty": {
+      "title": "No trips yet",
+      "body": "Add a train you've ridden, or one you're about to take."
+    }
+  },
+  "passport": {
+    "title": "Passport",
+    "empty": "Your stats appear here once you've added a trip."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languages": {
+      "en": "English"
+    },
+    "distanceUnit": "Distance",
+    "units": {
+      "km": "Kilometres",
+      "mi": "Miles"
+    },
+    "clock": "Clock",
+    "clocks": {
+      "24h": "24-hour",
+      "12h": "12-hour"
+    },
+    "co2Comparison": "Compare CO₂ with",
+    "co2": {
+      "flight": "Domestic flight",
+      "car_1": "Car, 1 person",
+      "car_2": "Car, 2 people",
+      "car_3": "Car, 3 people",
+      "car_avg": "Car, average occupancy",
+      "ev_1": "Electric car, 1 person",
+      "coach": "Long-distance coach"
+    },
+    "includeCommuter": "Count commuter trains in stats",
+    "showRailNetwork": "Show rail network on maps",
+    "about": "About & data sources",
+    "saveError": "Couldn't save. Is the server running?"
+  },
+  "about": {
+    "title": "About & data sources",
+    "intro": "Clack logs the trains you ride. Timetables, actual times and maps come from open data.",
+    "sourcesTitle": "Data sources",
+    "sources": {
+      "trafikverket": "Trafikverket Open API: actual times, delays, platforms and stations.",
+      "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): current timetables.",
+      "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historical timetables back to 2012.",
+      "osm": "Rail network © OpenStreetMap contributors (ODbL)."
+    },
+    "co2Title": "How we calculate CO₂",
+    "co2Body": "Distance along the track × (comparison factor − train factor). Factors are well-to-wheel g CO₂e per passenger-km from IVL Swedish Environmental Research Institute, report U11173 (2026)."
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading…",
+    "offline": "Can't reach the server."
+  }
+}

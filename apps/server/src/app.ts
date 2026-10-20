@@ -1,0 +1,25 @@
+// Builds the Fastify app. Kept separate from index.ts so tests can use app.inject().
+import Fastify from 'fastify';
+import type { Db } from './db/client.js';
+import { LOCAL_USER_ID } from './db/client.js';
+import { healthRoutes } from './routes/health.js';
+import { settingsRoutes } from './routes/settings.js';
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    userId: string;
+  }
+}
+
+export function buildApp(db: Db, opts: { logger?: boolean } = {}) {
+  // Per-request logs are noise for a local demo; errors and startup are still logged.
+  const app = Fastify({ logger: opts.logger ?? false, disableRequestLogging: true });
+  app.decorateRequest('userId', '');
+  // No accounts in Phase 1: every request acts as the seeded local user.
+  app.addHook('onRequest', async (req) => {
+    req.userId = LOCAL_USER_ID;
+  });
+  app.register(healthRoutes(db), { prefix: '/api' });
+  app.register(settingsRoutes(db), { prefix: '/api' });
+  return app;
+}
