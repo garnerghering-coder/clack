@@ -1,6 +1,6 @@
 # Phase 0 — Data findings (Sweden)
 
-Run on **2026-10-20** against live data. All numbers below come from the scripts in
+Run on **2026-10-20** against live data. Questions 1–7 come from the original SPEC; 8–9 (live positions, streaming) were added with the updated SPEC and DESIGN.md. All numbers below come from the scripts in
 [`scripts/phase0/`](scripts/phase0/README.md). Raw outputs are reproducible from those scripts. Cached
 downloads live in `data/cache/` (gitignored).
 
@@ -22,6 +22,8 @@ downloads live in `data/cache/` (gitignored).
 | F | §5.2: GTFS file is "a download" | `sweden.zip` is **804 MB** (3.9 GB unzipped; `shapes.txt` alone is 3.0 GB) | The import must stream and should skip `shapes.txt`. |
 | G | §5.2: Bronze = 50 calls/month | Docs say Bronze = 50/month. The owner says this key allows 60 | Guard assumes 50 (**decided**). |
 | H | §10: match by `AdvertisedTrainIdent = train_number` on that date | Train numbers **change mid-journey** (odd/even switches, night train 300 → 3940), **collide** across operators, and GTFS service days ≠ Trafikverket dates after midnight | Match Trafikverket rows by **(station signature, activity, advertised local time)**, using the number only to choose between candidates. |
+| J | §5.5: live tracking by polling every 20–30 s, or streaming | **Trafikverket SSE streaming works** for `TrainAnnouncement` and `TrainPosition`. It's faster than polling (median 3–5 s behind vs ~7–17 s). After a reconnect it doesn't replay what was missed | One stream per object type covering all tracked trains, plus a catch-up query after each reconnect. `changeid` polling is the fallback (§9) |
+| K | §5.5: "not every train reports a position" | **86% of running trains report GPS** (`TrainPosition` 1.1), refreshed about every 30 s. Parked trains keep stale positions | Use positions younger than ~2 min; otherwise use the estimated position (§8) |
 | I | §7: stations keyed by GTFS stop ids | GTFS Sweden 3 platform ids are feed-specific; Sverige 2 uses **rikshållplats ids**, stable 2012 → 2026 | Key `stations` by rikshållplats id (`stop_area_id`); attach Trafikverket signature and GTFS ids as attributes. |
 
 ---
@@ -283,6 +285,48 @@ Lessons from tuning the router (`q6-osm-route.mjs`):
 - It counts calls per month per quota group.
 - It streams to disk. That was verified byte-identical on a keyless archive file, using ~22 MB of memory. The 804 MB first download in this session was buffered in memory before this fix.
 
+## 8. Live positions (`TrainPosition`)
+
+Script: `q8-train-position.mjs` (4 samples, 30 s apart, Tuesday 2026-10-20 ~23:00, a quiet hour).
+
+- **Object:** `TrainPosition`, **namespace `järnväg.trafikinfo`, schema 1.1**. Fields: `Train.AdvertisedTrainNumber` / `OperationalTrainNumber` / `…DepartureDate`, `Position.WGS84` (`POINT (lon lat)`), `TimeStamp`, `Bearing`, `Speed` (km/h, often absent when slow), `Status.Active`, `ModifiedTime`.
+- **Coverage:** of 192 trains with an advertised stop within ±20 min, **150 had a position (78%)**. The 17 replacement buses never report; **excluding them, 150/175 = 86%**. By product:
+  - **100%:** Mälartåg, Norrtåg, TiB, SJ Snabbtåg, SJ InterCity, VR Snabbtåg, X-Tåget, SL Pendeltåg 40/48.
+  - **73–90%:** Öresundståg, Pågatåg, SL 41/43, Västtågen, Östgötapendeln, SJ Nattåg.
+  - **Lower** on this small sample: SJ Regional 60%, Krösatåg 1/2, VTAB 0/1.
+- **Freshness:** median position age **15 s**. That suggests updates about every 30 s (successive samples moved a median 31 s, p90 47 s). The p90 age of ~10 min comes from parked/finished trains (`Status.Active=false`), which keep their last position; 44 trains never changed across the samples.
+- **For the app:**
+  - Show "Live position" only when `TimeStamp` is under ~2 min old and `Active` is true. Otherwise fall back to the estimated position (interpolated along the leg geometry, DESIGN §9.2). Never present an estimate as GPS.
+  - Positions are keyed by train number + departure date, so the same number-changing caveats as §2 apply. Match on the Trafikverket numbers we stored for the leg.
+
+## 9. Streaming vs polling
+
+Scripts: `q9-stream-vs-poll.mjs` (150 s, 8 running trains), `q9-reconnect.mjs`.
+
+- **Streaming:** adding `sseurl="true"` to a `<QUERY>` returns the normal result plus `INFO.SSEURL`. A GET on that URL with `Accept: text/event-stream` gives a standard SSE stream:
+  - It starts with `:Connected`, uses CRLF line endings, and sends `id:` + `data:` events.
+  - Each event holds a normal `RESPONSE.RESULT` with only the changed objects.
+- **Polling:** adding `changeid="<last>"` returns only rows changed since the previous call, plus `INFO.LASTCHANGEID`. This makes polling cheap.
+
+Side by side on the same 8 trains:
+
+| | SSE `TrainAnnouncement` | Polling every 20 s with `changeid` | SSE `TrainPosition` |
+|---|---|---|---|
+| Changes received | 13 rows in 11 events | the same 13 rows in 7 calls | 131 rows in 28 events |
+| Lag behind `ModifiedTime` | **median 3.2 s, p90 4.8 s** | median 7.3 s, p90 17.0 s | median 4.7 s, p90 7.1 s |
+| Errors | none | none | none |
+
+- **Concurrency:** two streams (announcements + positions) ran at once from one key without trouble. No documented hard limit (§7: fair use).
+- **Reconnect:**
+  - The `SSEURL` can be reconnected to, and reused later.
+  - Sending `Last-Event-ID` was accepted, but there's **no sign that missed events are replayed**: the first data after a 20 s gap was only ~2 s old.
+  - So after any reconnect, run one catch-up query (the same filter, or a `changeid` poll) before trusting the stream.
+- **Recommendation for live tracking (SPEC §5.5, DESIGN §9.2):**
+  - One server-side SSE stream for `TrainAnnouncement` and one for `TrainPosition`, each filtered with an `OR` over the Trafikverket train numbers of all currently tracked legs. That keeps "one poller per train per date", shared by all users.
+  - Re-create the streams when the tracked set changes.
+  - On error or reconnect, catch up with a query. If streaming fails repeatedly, fall back to `changeid` polling every 20 s.
+  - Pause when nothing is tracked.
+
 ---
 
 ## Other things worth knowing
@@ -306,3 +350,18 @@ The owner chose brand display and delegated the rest to Claude's judgement:
    - **Arlanda Express = regional**, so the commuter toggle doesn't hide airport trips.
    - **Västtågen** is commuter only for the Göteborg commuter lines. That's detected by "every stop is in the commuter station set", which reproduced Trafikverket's Pendeltåg label exactly on a held-out day (303/303, 0 false positives) and works for historical legs.
 5. **GTFS Sweden 3 quota: plan for 50 calls/month** (the documented Bronze limit), even though the key may allow 60. Normal use is ~31/month (one per day).
+
+## Conflicts between SPEC.md / DESIGN.md and earlier decisions (2026-10-20)
+
+`DESIGN.md` wins on UI, `SPEC.md` on data and architecture. Where either disagrees with what was already decided or
+found, this is what the build does:
+
+| Topic | Spec/design says | Build does | Why |
+|---|---|---|---|
+| Look and navigation | DESIGN §2–3: own tokens (bg `#0B0E13`, accent `#4C8DFF`), Inter, tabs Trips · Passport · Settings, "+" button | **Follows DESIGN.md.** The earlier Flighty-mirroring styles (`docs/design/FLIGHTY_NOTES.md`) only fill gaps DESIGN.md leaves (sheet-over-map composition, large titles, round flags) | DESIGN.md is newer and says it wins on UI |
+| Fetching actuals | SPEC §10: when the app is opened | Also a server job while it runs, plus catch-up on start | Trafikverket keeps ~4 days (§1) |
+| Matching to Trafikverket | SPEC §10: `AdvertisedTrainIdent = train_number` | Station + advertised time, number as a hint | Numbers change mid-journey and collide (§2) |
+| Data quality | `full` / `scheduled_only` / `manual` | Adds `partial` (actual departure or arrival missing) | ~4% of stop events have no actual time (§1) |
+| OSM source | SPEC §5.4: Geofabrik | `download.openstreetmap.fr` | Geofabrik connections reset from the cloud environment (§6) |
+| Timetable window | SPEC §8: −7 to +60 days | Yesterday to +90 days, past days never deleted | GTFS Sweden 3 starts at yesterday (§4) |
+| Live tracking transport | SPEC §5.5: SSE if it works, else poll | SSE with catch-up on reconnect, `changeid` polling as fallback | §9 |

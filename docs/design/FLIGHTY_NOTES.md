@@ -1,5 +1,8 @@
 # Design reference: follow Flighty very closely
 
+> **Superseded where it conflicts with [`DESIGN.md`](../../DESIGN.md)** (colours, fonts, navigation). DESIGN.md is the owner's
+> newer spec and wins on UI; these notes still guide what DESIGN.md leaves open.
+
 The owner wants the app to look and feel almost identical to Flighty (decided 2026-10-20). The screenshots are
 **not in git** (they show personal account details and are Flighty's artwork); see [`reference/README.md`](reference/README.md).
 Before public launch, review the design so it's "in the style of", with our own name, icon and colours.

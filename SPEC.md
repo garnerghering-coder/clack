@@ -1,8 +1,8 @@
-# Train Passport — Product & Build Spec (Phase 1: Sweden)
+# Clack — Product & Build Spec (Phase 1: Sweden)
 
-> Working title. A Flighty-style app for trains: log every train you ride, see it drawn on the real tracks, and build a "Passport" of your rail history with stats and CO₂ savings.
+> **Clack** is the chosen name (pending domain and trademark checks before launch). A Flighty-style app for trains: log every train you ride, see it drawn on the real tracks, and build a "Passport" of your rail history with stats and CO₂ savings.
 >
-> **For Claude Code:** read this whole file before writing code. Start with **Phase 0** (data verification) — do not build app features until Phase 0's findings are written up. Where this spec and live API documentation disagree, trust the live docs, note the difference in `DATA_FINDINGS.md`, and tell the owner. Ask before making large deviations from this spec.
+> **For Claude Code:** read this whole file **and `DESIGN.md`** (screens, visual design, live tracking behavior) before writing code. If the two conflict, `DESIGN.md` wins on UI/UX and this file wins on data and architecture; tell the owner about any conflict. Start with **Phase 0** (data verification) — do not build app features until Phase 0's findings are written up. Where this spec and live API documentation disagree, trust the live docs, note the difference in `DATA_FINDINGS.md`, and tell the owner. Ask before making large deviations from this spec.
 
 ---
 
@@ -32,8 +32,10 @@
 4. Passport (stats + map of everything)
 5. CO₂ comparisons with toggles
 6. Settings (language, units, clock format, CO₂ comparison, commuter filter)
+7. **Live tracking while the app is open** (live delays, platforms, cancellations, train position or estimated position, activity log). See `DESIGN.md` §9.
+8. Journeys (grouping legs) and the "Add another" fast-entry flow.
 
-**Out of scope for Phase 1 (planned later):** live tracking, push alerts, booking-email import, year-in-review, share cards, friends, accounts/login, hosting, other countries.
+**Out of scope for Phase 1 (planned later):** push notifications, lock-screen Live Activities and tracking while the server/app is closed (need hosting), booking-email import, CSV/bulk import, year-in-review, share cards, friends, accounts/login, hosting, other countries.
 
 ## 4. Tech stack
 
@@ -88,8 +90,14 @@ TRAFIKLAB_GTFS_SVERIGE2_KEY=
 - **License:** ODbL. **Attribution required** ("© OpenStreetMap contributors") on the map.
 - **First check GTFS `shapes.txt`:** if GTFS Sweden 3 provides good shapes for rail trips, prefer those (simpler). OSM routing is the fallback/upgrade path. Phase 0 decides.
 
-### 5.5 Not used in Phase 1 (possibly later)
-KoDa (regional historical realtime since Feb 2020), Oxyfi (live train positions), GTFS Sweden 3 Realtime / GTFS Regional realtime, ResRobot, NeTEx, SIRI.
+### 5.5 Live tracking data (Trafikverket, same key as 5.1)
+- **Delays, platforms, cancellations:** `TrainAnnouncement`, via query + streaming (server-sent events) if it works well, otherwise polling every 20–30 s for tracked legs only.
+- **Position:** `TrainPosition` (v1.1 appears in the API's object list). Not every train reports a position; handle absence. When absent, estimate position by interpolating along the leg geometry between the last confirmed stop passage and the next estimated stop time, and label it "Estimated".
+- **One poller per train per date**, shared across users; the backend pushes updates to clients over SSE/WebSocket. Clients never call Trafikverket directly.
+- Phase 0 must confirm schema versions, streaming vs polling behavior, connection/rate limits, and which operators actually report positions.
+
+### 5.6 Not used in Phase 1 (possibly later)
+KoDa (regional historical realtime since Feb 2020), Oxyfi realtime positioning (limited to a few regional operators, one websocket per key, server must relay), GTFS Sweden 3 Realtime / GTFS Regional realtime, ResRobot, NeTEx, SIRI.
 
 ## 6. Phase 0 — Data verification spike (do this first)
 
@@ -102,6 +110,8 @@ Build small scripts in `scripts/phase0/` and write results to **`DATA_FINDINGS.m
 5. **Rail filtering:** list the `route_type` values used for trains in GTFS Sweden 3 (many may be the generic `100`) and identify how to tell intercity / regional / commuter / heritage apart (route_type, agency, route names).
 6. **Shapes:** do rail trips in GTFS Sweden 3 have `shapes.txt` geometry? Is it track-accurate?
 7. **Quota sanity:** confirm the Bronze limits and that caching works.
+8. **Live position availability:** query `TrainPosition` while trains are running. Which trains and operators report positions (SJ, regional, commuter)? How fresh are they? Document the fields and update interval.
+9. **Streaming vs polling:** test Trafikverket's SSE streaming for `TrainAnnouncement` against plain polling. Report reliability, reconnect behavior, any connection or rate limits, and recommend one approach for tracking several trains at once.
 
 Deliverable: `DATA_FINDINGS.md` + the draft station mapping file. Then stop and summarise for the owner before Phase 1 features.
 
@@ -121,6 +131,8 @@ Use UTC timestamps everywhere; store each station's IANA time zone and render in
 - `legs` — id, user_id, journey_id, status (`planned` | `completed` | `snapshotted`), data_quality (`full` | `scheduled_only` | `manual`), country codes[], operator_id, train_number, category, origin_station_id, dest_station_id, sched_dep, sched_arr, actual_dep, actual_arr, dep_delay_min, arr_delay_min, dep_platform, arr_platform, canceled, distance_m, geometry, is_estimated_geometry, notes, created_at
 - `leg_stops` — leg_id, seq, station_id, sched_arr, sched_dep, actual_arr, actual_dep, platform, canceled, passed_through (bool, for stops between origin and destination)
 - `journeys` — id, user_id, title (auto, editable), created_at
+- `leg_events` — id, leg_id, ts, type (`delayed` | `platform_changed` | `cancelled` | `short_turned` | `departed` | `arrived`), payload (JSON)
+- `live_state` — leg_id, updated_at, status, lat, lon, bearing, speed_kmh, position_source (`gps` | `estimated`), next_stop_id, eta
 
 ## 8. Daily import pipeline
 
@@ -196,7 +208,7 @@ All stats are plain SQL aggregations over the user's legs, filterable by **year 
 - Stations visited (count + list), countries visited, border crossings (counted when a leg's stops span two countries)
 - Operators ridden (with counts), train categories / products (X2000, Regional, InterCity…)
 - Longest leg (distance and duration), most-ridden route, most-used station
-- Delay stats (only legs with `full` data): total minutes delayed, on-time % (define on-time as arriving < 5 min late; make the threshold a constant), average delay, worst delay, cancellations
+- Delay stats (only legs with `full` data): total minutes delayed, on-time % (on time = arriving ≤ 5 min late by default; constant `ON_TIME_MAX_DELAY_MIN`; delay color bands are defined in `DESIGN.md` §2.1: green ≤0, yellow 1–15, amber 16–30, red 31+), average delay, worst delay, cancellations
 - CO₂ (see §15)
 - Map of all legs ever ridden
 
@@ -245,16 +257,17 @@ Mobile-first layout (it will become an iPhone app), works on desktop too. Dark t
 
 ## 19. Build order & acceptance criteria
 
-1. **Phase 0 — data verification** (§6). Done when `DATA_FINDINGS.md` answers all seven questions.
+1. **Phase 0 — data verification** (§6). Done when `DATA_FINDINGS.md` answers all nine questions.
 2. **Skeleton:** monorepo, server, web, SQLite, i18n, `.env` handling, dark theme shell. Done when both apps run with one command.
 3. **Import:** GTFS Sweden 3 import with quota guard; station mapping; Trafikverket `TrainStation` import. Done when stations are searchable via autocomplete.
 4. **Search & add:** smart search, results list, save leg with stops. Done when "SJ 523" and "Stockholm → Göteborg" both find real trains on a chosen date.
 5. **Actuals & snapshot:** Trafikverket integration. Done when a past train shows real delays and platforms per stop.
 6. **Map & geometry:** basemap, routed track lines, rail-network toggle. Done when a leg draws along the real tracks.
-7. **Trip list, trip detail, journeys.**
-8. **Passport & CO₂.**
-9. **Historical search** via GTFS Sverige 2 and manual fallback.
-10. **Polish:** settings, about/sources page, empty states, error states (API down, quota reached, no results).
+7. **Live tracking:** server-side poller/stream per tracked train, `leg_events` and `live_state`, SSE to the client, LIVE chip, progress module, train marker (GPS or estimated), activity log. Done when a train that is currently running shows live delays and a moving marker in the app.
+8. **Trip list, trip detail, journeys** (per `DESIGN.md` §4, §6, §7).
+9. **Passport & CO₂** (per `DESIGN.md` §8).
+10. **Historical search** via GTFS Sverige 2 and manual fallback.
+11. **Polish:** settings, about/sources page, first-run flow, split-flap and other motion, stamps (P2), empty/error/offline states, accessibility pass.
 
 Write tests for: search input parsing, station fuzzy matching, delay calculation, journey grouping, distance calculation, CO₂ calculation, and stat aggregations.
 
@@ -269,7 +282,7 @@ Write tests for: search input parsing, station fuzzy matching, delay calculation
 ## 21. Future phases
 
 - **Phase 2: Denmark** via Rejseplanen API 2.0 (access ID requested separately; free non-commercial tier is ~50,000 calls/month). New adapter, Danish station data, Danish rail CO₂ factor, Öresund border-crossing logic.
-- **Then:** Germany, UK. Live tracking, alerts, booking-email import, year-in-review and share cards, iOS app via Capacitor (Live Activities would need a native plugin).
+- **Then:** Germany, UK. Push alerts and lock-screen Live Activities (need hosting), booking-email import, bulk/CSV import, year-in-review and share cards, iOS app via Capacitor (Live Activities would need a native plugin).
 
 ## 22. Open questions (resolved by Phase 0)
 
@@ -278,3 +291,4 @@ Write tests for: search input parsing, station fuzzy matching, delay calculation
 - Train-number field in GTFS and match rate to Trafikverket
 - Whether GTFS shapes are good enough or OSM routing is needed
 - Rail category classification rules and overrides
+- Which trains report live GPS positions, and whether Trafikverket streaming or polling is the better live-tracking approach
