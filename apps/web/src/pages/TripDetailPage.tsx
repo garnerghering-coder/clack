@@ -1,16 +1,35 @@
-// Trip detail (DESIGN §6). The map half arrives with step 6; this is the sheet content.
-import { useEffect, useState } from 'react';
+// Trip detail (DESIGN §6): the route map on top, then times, tiles, the stop timeline and details.
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, RefreshCw, Repeat, Trash2 } from 'lucide-react';
-import { delayMinutes } from '@clack/shared';
+import { decodePolyline, delayMinutes, type LatLon } from '@clack/shared';
 import { api, ms, type LegDetail, type LegStop } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill, delayClass } from '../components/DelayPill';
 import { useSettings } from '../settings';
+import { RouteMap, type MapStop } from '../map/RouteMap';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 
-function TimeBlock({ label, sched, actual, tz, platform, delay, canceled, extraDays }: { label: string; sched: number | null; actual: number | null; tz: string; platform: string | null; delay: number | null; canceled: boolean; extraDays?: number }) {
+function TimeBlock({
+  label,
+  sched,
+  actual,
+  tz,
+  platform,
+  delay,
+  canceled,
+  extraDays,
+}: {
+  label: string;
+  sched: number | null;
+  actual: number | null;
+  tz: string;
+  platform: string | null;
+  delay: number | null;
+  canceled: boolean;
+  extraDays?: number;
+}) {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const changed = actual !== null && sched !== null && Math.floor(actual / 60000) !== Math.floor(sched / 60000);
@@ -45,7 +64,9 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
         <span className={`tl-name ${s.canceled ? 'struck' : ''}`}>{s.name}</span>
         {s.role === 'board' && <span className="caption accent-text">{t('detail.gotOn')}</span>}
         {s.role === 'alight' && <span className="caption accent-text">{t('detail.gotOff')}</span>}
-        {s.deviations.filter((d) => d !== 'Spårändrat').length > 0 && <span className="caption">{s.deviations.filter((d) => d !== 'Spårändrat').join(' · ')}</span>}
+        {s.deviations.filter((d) => d !== 'Spårändrat').length > 0 && (
+          <span className="caption">{s.deviations.filter((d) => d !== 'Spårändrat').join(' · ')}</span>
+        )}
       </span>
       <span className="tl-times tabular">
         <span className={actual !== null ? 'tl-sched small' : 'tl-sched'}>{fmtTime(sched, s.tz, settings.clock)}</span>
@@ -69,6 +90,13 @@ export function TripDetailPage() {
   const [fullRoute, setFullRoute] = useState(false);
   const [explain, setExplain] = useState(false);
   const [busy, setBusy] = useState(false);
+  const geo = useMemo(() => {
+    if (!leg) return null;
+    const ridden = leg.stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
+    const route: LatLon[] = leg.geometry ? decodePolyline(leg.geometry) : ridden.map((s) => [s.lat, s.lon]);
+    const stops: MapStop[] = ridden.map((s) => ({ lat: s.lat, lon: s.lon, name: s.name, kind: s.role === 'through' ? 'mid' : 'end' }));
+    return { route, stops };
+  }, [leg]);
 
   useEffect(() => {
     if (id) api.leg(id).then(setLeg, () => setMissing(true));
@@ -83,7 +111,12 @@ export function TripDetailPage() {
         <p className="muted">{t('detail.notFound')}</p>
       </main>
     );
-  if (!leg) return <main className="page"><div className="skeleton-card" /></main>;
+  if (!leg)
+    return (
+      <main className="page">
+        <div className="skeleton-card" />
+      </main>
+    );
 
   const tz = leg.origin?.tz ?? 'Europe/Stockholm';
   const dtz = leg.destination?.tz ?? tz;
@@ -97,7 +130,13 @@ export function TripDetailPage() {
   const hasHidden = leg.stops.some((s) => s.role === 'before' || s.role === 'after');
   const arrDelay = leg.arrDelayMin;
   const explainText =
-    arrDelay === null ? t('delay.explainUnknown') : arrDelay > 0 ? t('delay.explainLate', { count: arrDelay }) : arrDelay < 0 ? t('delay.explainEarly', { count: -arrDelay }) : t('delay.explainOnTime');
+    arrDelay === null
+      ? t('delay.explainUnknown')
+      : arrDelay > 0
+        ? t('delay.explainLate', { count: arrDelay })
+        : arrDelay < 0
+          ? t('delay.explainEarly', { count: -arrDelay })
+          : t('delay.explainOnTime');
 
   const refresh = async () => {
     setBusy(true);
@@ -114,77 +153,114 @@ export function TripDetailPage() {
   };
 
   return (
-    <main className="page detail">
-      <Link to="/" className="link-button back-link">
-        <ArrowLeft size={18} /> {t('nav.trips')}
-      </Link>
-      <div className="detail-head">
-        <OperatorBadge operator={leg.operator} size={32} />
-        <span className="strong">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</span>
-        {leg.category && <span className="chip">{t(`products.${leg.category}`)}</span>}
-        <span className={`chip status-${leg.canceled ? 'cancelled' : leg.status}`}>{t(`status.${leg.canceled ? 'cancelled' : leg.status}`)}</span>
+    <>
+      <div className="detail-map">
+        {geo && (
+          <RouteMap
+            color={color}
+            route={geo.route}
+            stops={geo.stops}
+            animate
+            railNetwork={settings.showRailNetwork}
+            label={t('detail.mapLabel', { from: leg.origin?.name, to: leg.destination?.name })}
+          />
+        )}
+        <Link to="/" className="map-button map-back" aria-label={t('nav.trips')}>
+          <ArrowLeft size={18} />
+        </Link>
+        {leg.isEstimatedGeometry && <span className="map-chip caption">{t('detail.estimatedRoute')}</span>}
       </div>
-      <h1 className="detail-route">
-        {leg.origin?.name} → {leg.destination?.name}
-      </h1>
-      {schedDep && <p className="muted">{fmtLongDate(schedDep, tz)}</p>}
-
-      <section className="times-row">
-        <TimeBlock label={t('detail.departure')} sched={schedDep} actual={ms(leg.actualDep)} tz={tz} platform={leg.depPlatform} delay={leg.depDelayMin} canceled={leg.canceled} />
-        <TimeBlock label={t('detail.arrival')} sched={schedArr} actual={ms(leg.actualArr)} tz={dtz} platform={leg.arrPlatform} delay={leg.arrDelayMin} canceled={leg.canceled} extraDays={extraDays} />
-      </section>
-
-      <section className="tiles">
-        <div className="tile">
-          <span className="caption upper">{t('detail.distance')}</span>
-          <span className="tile-value tabular">
-            {leg.isEstimatedGeometry ? '≈ ' : ''}
-            {fmtDistance(leg.distanceM, settings.distanceUnit)}
-          </span>
+      <main className="page detail">
+        <div className="detail-head">
+          <OperatorBadge operator={leg.operator} size={32} />
+          <span className="strong">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</span>
+          {leg.category && <span className="chip">{t(`products.${leg.category}`)}</span>}
+          <span className={`chip status-${leg.canceled ? 'cancelled' : leg.status}`}>{t(`status.${leg.canceled ? 'cancelled' : leg.status}`)}</span>
         </div>
-        <div className="tile">
-          <span className="caption upper">{t('detail.duration')}</span>
-          <span className="tile-value tabular">{dep && arr ? fmtDuration((arr - dep) / 60000) : '—'}</span>
+        <h1 className="detail-route">
+          {leg.origin?.name} → {leg.destination?.name}
+        </h1>
+        {schedDep && <p className="muted">{fmtLongDate(schedDep, tz)}</p>}
+
+        <section className="times-row">
+          <TimeBlock
+            label={t('detail.departure')}
+            sched={schedDep}
+            actual={ms(leg.actualDep)}
+            tz={tz}
+            platform={leg.depPlatform}
+            delay={leg.depDelayMin}
+            canceled={leg.canceled}
+          />
+          <TimeBlock
+            label={t('detail.arrival')}
+            sched={schedArr}
+            actual={ms(leg.actualArr)}
+            tz={dtz}
+            platform={leg.arrPlatform}
+            delay={leg.arrDelayMin}
+            canceled={leg.canceled}
+            extraDays={extraDays}
+          />
+        </section>
+
+        <section className="tiles">
+          <div className="tile">
+            <span className="caption upper">{t('detail.distance')}</span>
+            <span className="tile-value tabular">
+              {leg.isEstimatedGeometry ? '≈ ' : ''}
+              {fmtDistance(leg.distanceM, settings.distanceUnit)}
+            </span>
+          </div>
+          <div className="tile">
+            <span className="caption upper">{t('detail.duration')}</span>
+            <span className="tile-value tabular">{dep && arr ? fmtDuration((arr - dep) / 60000) : '—'}</span>
+          </div>
+          <button className="tile" onClick={() => setExplain(!explain)}>
+            <span className="caption upper">{t('detail.delay')}</span>
+            <span className="tile-value">
+              <DelayPill delay={arrDelay} canceled={leg.canceled} />
+            </span>
+          </button>
+        </section>
+        {explain && <p className="caption">{explainText}</p>}
+
+        <section className="card">
+          <h2 className="section-header">{t('detail.stops')}</h2>
+          <ol className="timeline">
+            {stops.map((s) => (
+              <StopRow key={s.seq} s={s} color={color} />
+            ))}
+          </ol>
+          {hasHidden && (
+            <button className="link-button" onClick={() => setFullRoute(!fullRoute)}>
+              {fullRoute ? t('detail.hideFullRoute') : t('detail.showFullRoute')}
+            </button>
+          )}
+        </section>
+
+        <section className="card details">
+          {leg.dataQuality !== 'full' && (
+            <p>
+              <span className="chip">{t(`detail.quality.${leg.dataQuality}`)}</span>{' '}
+              <span className="caption">{t(`detail.qualityNote.${leg.dataQuality}`)}</span>
+            </p>
+          )}
+          {leg.isEstimatedGeometry && <p className="caption">{t('detail.estimatedDistance')}</p>}
+          <p className="caption">{t('detail.source')}</p>
+        </section>
+
+        <div className="actions">
+          {leg.status !== 'snapshotted' && (
+            <button className="button" onClick={refresh} disabled={busy}>
+              <RefreshCw size={16} /> {t('detail.refresh')}
+            </button>
+          )}
+          <button className="button danger" onClick={remove}>
+            <Trash2 size={16} /> {t('detail.delete')}
+          </button>
         </div>
-        <button className="tile" onClick={() => setExplain(!explain)}>
-          <span className="caption upper">{t('detail.delay')}</span>
-          <span className="tile-value">
-            <DelayPill delay={arrDelay} canceled={leg.canceled} />
-          </span>
-        </button>
-      </section>
-      {explain && <p className="caption">{explainText}</p>}
-
-      <section className="card">
-        <h2 className="section-header">{t('detail.stops')}</h2>
-        <ol className="timeline">{stops.map((s) => <StopRow key={s.seq} s={s} color={color} />)}</ol>
-        {hasHidden && (
-          <button className="link-button" onClick={() => setFullRoute(!fullRoute)}>
-            {fullRoute ? t('detail.hideFullRoute') : t('detail.showFullRoute')}
-          </button>
-        )}
-      </section>
-
-      <section className="card details">
-        {leg.dataQuality !== 'full' && (
-          <p>
-            <span className="chip">{t(`detail.quality.${leg.dataQuality}`)}</span> <span className="caption">{t(`detail.qualityNote.${leg.dataQuality}`)}</span>
-          </p>
-        )}
-        {leg.isEstimatedGeometry && <p className="caption">{t('detail.estimatedDistance')}</p>}
-        <p className="caption">{t('detail.source')}</p>
-      </section>
-
-      <div className="actions">
-        {leg.status !== 'snapshotted' && (
-          <button className="button" onClick={refresh} disabled={busy}>
-            <RefreshCw size={16} /> {t('detail.refresh')}
-          </button>
-        )}
-        <button className="button danger" onClick={remove}>
-          <Trash2 size={16} /> {t('detail.delete')}
-        </button>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

@@ -32,7 +32,10 @@ npm run dev
 Open <http://localhost:5173>. Stop with Ctrl+C.
 
 - **First start is slow.** The server downloads the timetable (~800 MB, one use of the monthly GTFS Sweden 3 quota)
-  and imports it. Station search stays empty until the Terminal prints `imported in … s`. Later starts are quick.
+  and imports it. Station search stays empty until the Terminal prints `imported in … s`. It then downloads the map
+  background once (~470 MB from Protomaps' free map build, kept as ~80 MB in `data/cache/basemap/`; the Terminal prints
+  `Basemap: wrote …` when done). Maps still draw your routes before that, just on a plain dark background. Later
+  starts are quick. To fetch the map background by hand: `npm run import -- basemap`.
 - **On your iPhone:** run `npm run dev:phone`, click **Allow** if the Mac asks about incoming connections, and open the
   "Network" address Vite prints (e.g. `http://192.168.1.20:5173`) in Safari on the same Wi-Fi. Installing it as a
   home-screen app needs HTTPS, which comes later.

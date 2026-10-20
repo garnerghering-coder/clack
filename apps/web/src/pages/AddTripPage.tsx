@@ -3,11 +3,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, X } from 'lucide-react';
-import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripResult } from '../api';
+import { decodePolyline, type LatLon } from '@clack/shared';
+import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { Flag } from '../components/Flag';
 import { useOperators } from '../data';
 import { useSettings } from '../settings';
+import { RouteMap, type MapStop } from '../map/RouteMap';
 import { addDaysIso, dayOffset, fmtDay, fmtDistance, fmtDuration, fmtTime, isoToNoonMs, todayIso } from '../format';
 
 const EXAMPLES = ['SJ 523', 'Stockholm → Göteborg', 'Snälltåget Stockholm Malmö'];
@@ -109,8 +111,11 @@ function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () =
   const [duplicate, setDuplicate] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [geometry, setGeometry] = useState<TripGeometry | null>(null);
   useEffect(() => {
     api.timetableTrip(result.key, result.serviceDate).then(setTrip, (e: Error) => setError(e.message));
+    // The mini map is a nice-to-have: without it the summary falls back to straight-line distance.
+    api.timetableTripGeometry(result.key, result.serviceDate).then(setGeometry, () => setGeometry(null));
   }, [result]);
 
   const tap = (seq: number) => {
@@ -130,7 +135,16 @@ function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () =
   const from = trip?.stops.find((s) => s.seq === fromSeq);
   const to = trip?.stops.find((s) => s.seq === toSeq);
   const ridden = trip?.stops.filter((s) => s.seq >= fromSeq && s.seq <= toSeq) ?? [];
-  const distance = ridden.slice(1).reduce((d, s, i) => d + haversineM(ridden[i]!, s), 0);
+  const decoded = useMemo(() => geometry?.segments.map((g) => ({ ...g, points: decodePolyline(g.polyline) })) ?? null, [geometry]);
+  const inside = decoded?.filter((g) => g.fromSeq >= fromSeq && g.toSeq <= toSeq) ?? null;
+  const distance = inside ? inside.reduce((d, g) => d + g.lengthM, 0) : ridden.slice(1).reduce((d, s, i) => d + haversineM(ridden[i]!, s), 0);
+  const approx = !inside || inside.some((g) => g.estimated);
+  const join = (segs: { points: LatLon[] }[]) => segs.flatMap((g, i) => (i ? g.points.slice(1) : g.points));
+  const mapRoute: LatLon[] = inside ? join(inside) : ridden.map((s) => [s.lat, s.lon]);
+  const mapContext: LatLon[][] = decoded
+    ? [join(decoded.filter((g) => g.toSeq <= fromSeq)), join(decoded.filter((g) => g.fromSeq >= toSeq))]
+    : [];
+  const mapStops: MapStop[] = ridden.map((s) => ({ lat: s.lat, lon: s.lon, name: s.name, kind: s.seq === fromSeq || s.seq === toSeq ? 'end' : 'mid' }));
   const dep = from?.dep ?? from?.arr ?? null;
   const arr = to?.arr ?? to?.dep ?? null;
 
@@ -154,6 +168,17 @@ function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () =
         <ArrowLeft size={18} /> {t('add.back')}
       </button>
       <h2 className="section-title">{t('add.confirmTitle')}</h2>
+      {trip && (
+        <RouteMap
+          className="mini"
+          color={op?.brandColor ?? '#4C8DFF'}
+          route={mapRoute}
+          context={mapContext}
+          stops={mapStops}
+          interactive={false}
+          label={from && to ? t('detail.mapLabel', { from: from.name, to: to.name }) : undefined}
+        />
+      )}
       <div className="confirm-head">
         <OperatorBadge operator={op} size={30} />
         <span className="strong">{[op?.name, result.trainNumber].filter(Boolean).join(' ')}</span>
@@ -164,7 +189,8 @@ function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () =
           <span className="strong">
             {from.name} → {to.name}
           </span>{' '}
-          · ≈ {fmtDistance(distance, settings.distanceUnit)} · {fmtDuration((arr - dep) / 60000)}
+          · {approx ? '≈ ' : ''}
+          {fmtDistance(distance, settings.distanceUnit)} · {fmtDuration((arr - dep) / 60000)}
         </p>
       )}
       <div className="segmented end-picker" role="tablist" aria-label={t('add.tapToChoose')}>

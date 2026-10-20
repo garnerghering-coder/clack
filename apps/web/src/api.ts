@@ -134,6 +134,8 @@ export interface LegStop {
   code: string | null;
   country: string;
   tz: string;
+  lat: number;
+  lon: number;
   schedArr: string | null;
   schedDep: string | null;
   actualArr: string | null;
@@ -144,7 +146,13 @@ export interface LegStop {
 }
 
 export interface LegDetail extends Leg {
+  /** Encoded polyline of the ridden route along the track (null until routed). */
+  geometry: string | null;
   stops: LegStop[];
+}
+
+export interface TripGeometry {
+  segments: { fromSeq: number; toSeq: number; polyline: string; lengthM: number; estimated: boolean }[];
 }
 
 export const ms = (iso: string | null | undefined) => (iso ? Date.parse(iso) : null);
@@ -155,6 +163,7 @@ export const api = {
   popularStations: () => request<StationHit[]>('/stations/popular'),
   search: (q: string, date: string, signal?: AbortSignal) => request<SearchResponse>(`/search?q=${encodeURIComponent(q)}&date=${date}`, { signal }),
   timetableTrip: (key: string, date: string) => request<TimetableTrip>(`/timetable/trips/${encodeURIComponent(key)}?date=${date}`),
+  timetableTripGeometry: (key: string, date: string) => request<TripGeometry>(`/timetable/trips/${encodeURIComponent(key)}/geometry?date=${date}`),
   operators: () => request<Operator[]>('/operators'),
   legs: () => request<Leg[]>('/legs'),
   leg: (id: string) => request<LegDetail>(`/legs/${id}`),

@@ -365,3 +365,5 @@ found, this is what the build does:
 | OSM source | SPEC §5.4: Geofabrik | `download.openstreetmap.fr` | Geofabrik connections reset from the cloud environment (§6) |
 | Timetable window | SPEC §8: −7 to +60 days | Yesterday to +90 days, past days never deleted | GTFS Sweden 3 starts at yesterday (§4) |
 | Live tracking transport | SPEC §5.5: SSE if it works, else poll | SSE with catch-up on reconnect, `changeid` polling as fallback | §9 |
+| Rail graph delivery | SPEC §5.4: download and extract OSM | A compact derived graph is **committed** (`data/osm/rail-graph.json.gz`, 1.2 MB, ODbL) and refreshed by hand | Building it needs ~3 GB of downloads and Python; rail lines change rarely |
+| Basemap | SPEC §4: self-hosted Protomaps PMTiles | Cut from Protomaps' free daily planet build with range requests (plain Node, `npm run import -- basemap`), Nordics + northern Germany to z10, slimmed to the layers DESIGN §2.4 draws (land, water, places, borders, motorways): ~470 MB download once, ~80 MB on disk. MapLibre over-zooms beyond z10 | No tools to install, zero cost; the full tiles would be ~2 GB at z11 |

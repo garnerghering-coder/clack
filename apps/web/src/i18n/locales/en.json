@@ -117,11 +117,13 @@
       "manual": "Added manually."
     },
     "source": "Times: Trafikverket · Timetable: Trafiklab (CC0)",
-    "estimatedDistance": "Straight-line distance between stops; real track distance comes with the map.",
+    "estimatedDistance": "Part of this route couldn't be matched to the rail network, so it's drawn as straight lines and the distance is approximate.",
     "refresh": "Refresh times",
     "delete": "Delete trip",
     "deleteConfirm": "Delete this trip?",
-    "notFound": "This trip doesn't exist any more."
+    "notFound": "This trip doesn't exist any more.",
+    "estimatedRoute": "Estimated route",
+    "mapLabel": "Map of the route from {{from}} to {{to}}"
   },
   "passport": {
     "title": "Passport",
@@ -168,7 +170,7 @@
       "trafikverket": "Trafikverket Open API: actual times, delays, platforms, stations and live positions.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): current timetables.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historical timetables back to 2012.",
-      "osm": "Rail network © OpenStreetMap contributors (ODbL)."
+      "osm": "Rail network and map data © OpenStreetMap contributors (ODbL). Basemap tiles by Protomaps."
     },
     "delaysTitle": "Delay colours",
     "delaysBody": "Green: on time or early. Yellow: 1–15 min late. Amber: 16–30 min. Red: more than 30 min. A train counts as on time in your stats when it arrives at most {{max}} minutes late.",
@@ -187,5 +189,11 @@
     "close": "Close",
     "loading": "Loading…",
     "offline": "Can't reach the Clack server."
+  },
+  "map": {
+    "unavailable": "The map can't be shown on this device.",
+    "railNetwork": "Show rail network",
+    "recenter": "Re-center",
+    "noBasemap": "Map background is still downloading. Routes show without it."
   }
 }
