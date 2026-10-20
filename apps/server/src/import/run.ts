@@ -43,7 +43,7 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
     if (!trvLocationCount(db)) log(`Trafikverket: ${await importTrvStations(db)} locations`);
     let zip = opts.zip;
     if (!zip) {
-      const r = await ensureDataset(db, DATASETS.gtfs_se3, { force: opts.forceDownload });
+      const r = await ensureDataset(db, DATASETS.gtfs_se3, { force: opts.forceDownload, log });
       log(`GTFS Sweden 3: ${r.reason}`);
       zip = r.file;
     }
@@ -57,6 +57,7 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
       log(`GTFS Sweden 3 feed ${version} already imported; skipping`);
       return null;
     }
+    log('GTFS Sweden 3: importing rail trips (about a minute)…');
     return importGtfsSweden3(db, zip, { officialSigs, log });
   });
 }

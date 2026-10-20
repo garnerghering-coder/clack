@@ -2,7 +2,7 @@
 // because failed calls still count against the monthly quota.
 import fs from 'node:fs';
 import path from 'node:path';
-import { Readable } from 'node:stream';
+import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { and, desc, eq, gte } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
@@ -35,6 +35,9 @@ export const MIN_HOURS_BETWEEN_DOWNLOADS = 20;
 
 export class QuotaError extends Error {}
 
+/** A download with no data for this long is treated as failed. */
+const STALL_MS = 60_000;
+
 export function callsThisMonth(db: Db, source: string, now = Date.now()): number {
   const d = new Date(now);
   const monthStart = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1);
@@ -64,7 +67,12 @@ export interface EnsureResult {
  * Make sure a fresh-enough copy of `ds` is on disk. Uses the cached file if it is < 20 h old (by the download log, or
  * by file age when the log is empty), refuses if the monthly quota is used up, and otherwise downloads once.
  */
-export async function ensureDataset(db: Db, ds: Dataset, opts: { force?: boolean; now?: number; fetchImpl?: typeof fetch } = {}): Promise<EnsureResult> {
+export async function ensureDataset(
+  db: Db,
+  ds: Dataset,
+  opts: { force?: boolean; now?: number; fetchImpl?: typeof fetch; log?: (msg: string) => void } = {},
+): Promise<EnsureResult> {
+  const log = opts.log ?? (() => {});
   const now = opts.now ?? Date.now();
   const cachedExists = fs.existsSync(ds.file);
   const last = lastDownload(db, ds.source);
@@ -85,26 +93,58 @@ export async function ensureDataset(db: Db, ds: Dataset, opts: { force?: boolean
 
   fs.mkdirSync(path.dirname(ds.file), { recursive: true });
   const startedAt = new Date(now);
-  const log = (status: string, bytes: number | null, notes: string) =>
+  const record = (status: string, bytes: number | null, notes: string) =>
     db.insert(importLog).values({ source: `download:${ds.source}`, startedAt, finishedAt: new Date(), status, bytes, notes }).run();
+  log(`${ds.source}: downloading (${used + 1}/${ds.monthlyQuota} this month)…`);
+  // Abort if no data arrives for a minute, so a stalled connection fails loudly instead of hanging forever.
+  const abort = new AbortController();
+  let idle: NodeJS.Timeout | undefined;
+  const touch = () => {
+    clearTimeout(idle);
+    idle = setTimeout(() => abort.abort(new Error(`no data for ${STALL_MS / 1000} s`)), STALL_MS);
+  };
+  touch();
   let res: Response;
   try {
-    res = await (opts.fetchImpl ?? fetch)(`${ds.url}?key=${ds.key()}`);
+    res = await (opts.fetchImpl ?? fetch)(`${ds.url}?key=${ds.key()}`, { signal: abort.signal });
   } catch (e) {
-    log('failed', null, String(e));
+    clearTimeout(idle);
+    record('failed', null, String(e));
     throw e;
   }
   if (!res.ok || !res.body) {
+    clearTimeout(idle);
     const text = await res.text().catch(() => '');
-    log('failed', null, `HTTP ${res.status} ${text.slice(0, 200)}`);
+    record('failed', null, `HTTP ${res.status} ${text.slice(0, 200)}`);
     throw new Error(`${ds.source} download failed: HTTP ${res.status}`);
   }
-  // Stream to disk: sweden.zip is ~800 MB.
+  // Stream to disk: sweden.zip is ~800 MB. Log progress so a long download doesn't look frozen.
   const tmp = `${ds.file}.part`;
-  await pipeline(Readable.fromWeb(res.body as import('node:stream/web').ReadableStream), fs.createWriteStream(tmp));
+  const total = Number(res.headers.get('content-length')) || 0;
+  let received = 0;
+  let nextReport = 100e6;
+  const progress = new Transform({
+    transform(chunk: Buffer, _enc, done) {
+      received += chunk.length;
+      touch();
+      if (received >= nextReport) {
+        log(`${ds.source}: ${(received / 1e6).toFixed(0)} MB${total ? ` of ${(total / 1e6).toFixed(0)} MB` : ''} downloaded`);
+        nextReport += 100e6;
+      }
+      done(null, chunk);
+    },
+  });
+  try {
+    await pipeline(Readable.fromWeb(res.body as import('node:stream/web').ReadableStream), progress, fs.createWriteStream(tmp));
+  } catch (e) {
+    record('failed', received, `stream interrupted after ${received} bytes: ${String(e)}`);
+    throw new Error(`${ds.source} download stopped after ${(received / 1e6).toFixed(0)} MB (${String((e as Error).message ?? e)}); it will retry on the next start or tomorrow`);
+  } finally {
+    clearTimeout(idle);
+  }
   fs.renameSync(tmp, ds.file);
   const bytes = fs.statSync(ds.file).size;
-  log('ok', bytes, `Last-Modified: ${res.headers.get('last-modified') ?? '-'}`);
+  record('ok', bytes, `Last-Modified: ${res.headers.get('last-modified') ?? '-'}`);
   return { file: ds.file, downloaded: true, reason: `downloaded ${(bytes / 1e6).toFixed(0)} MB (${used + 1}/${ds.monthlyQuota} this month)` };
 }
 

@@ -56,3 +56,20 @@ describe('quota-guarded downloads', () => {
     expect(db.select().from(importLog).all()).toHaveLength(0);
   });
 });
+
+describe('download progress', () => {
+  it('reports progress every 100 MB and records the bytes', async () => {
+    const big = new Uint8Array(250e6 / 10);
+    const body = new ReadableStream({
+      start(c) {
+        for (let i = 0; i < 10; i++) c.enqueue(big);
+        c.close();
+      },
+    });
+    const lines: string[] = [];
+    const fetchImpl = (async () => new Response(body, { headers: { 'content-length': String(250e6) } })) as unknown as typeof fetch;
+    const r = await ensureDataset(db, ds, { now: NOW, fetchImpl, log: (m) => lines.push(m) });
+    expect(r.downloaded).toBe(true);
+    expect(lines).toEqual(['test: downloading (1/3 this month)…', 'test: 100 MB of 250 MB downloaded', 'test: 200 MB of 250 MB downloaded']);
+  });
+});
