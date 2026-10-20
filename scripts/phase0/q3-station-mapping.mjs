@@ -14,34 +14,10 @@ import path from 'node:path';
 import { ROOT, CACHE } from './lib.mjs';
 import { load, serviceDates, stopTimesByTrip } from './p0data.mjs';
 import { gtfsTimeToSec } from './gtfs.mjs';
+import { haversine, nameSim } from './geo.mjs';
 
 const dates = process.argv.slice(2);
 const RADIUS_M = 300;
-
-export function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371008.8, rad = Math.PI / 180;
-  const a = Math.sin(((lat2 - lat1) * rad) / 2) ** 2 + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin(((lon2 - lon1) * rad) / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(a));
-}
-
-/** Accent-insensitive, abbreviation-normalised station name. */
-export function normName(s) {
-  return s
-    .toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/\bcentralstation\b|\bcentral\b|\bcentralen\b/g, 'c')
-    .replace(/\bstation\b|\bstn\b|\btagstation\b|\bjarnvagsstation\b/g, '')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
-const tokens = (s) => new Set(normName(s).split(' ').filter(Boolean));
-function nameSim(a, b) {
-  const A = tokens(a), B = tokens(b);
-  if (normName(a) === normName(b)) return 1;
-  let inter = 0;
-  for (const t of A) if (B.has(t)) inter++;
-  return inter / Math.max(A.size, B.size);
-}
 
 // --- GTFS rail stations (parents of the platforms used by rail stop_times)
 const stops = load('stops.json');
@@ -103,6 +79,9 @@ for (const date of dates) {
   }
 }
 
+// --- Hand-checked overrides (data/station_overrides.json) win over everything
+const overrides = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/station_overrides.json'), 'utf8'));
+
 // --- Combine
 const rows = [];
 for (const [pid, nStopTimes] of usedParents) {
@@ -139,24 +118,30 @@ for (const [pid, nStopTimes] of usedParents) {
   const country = area.startsWith('74') ? 'SE' : area.startsWith('86') ? 'DK' : area.startsWith('76') ? 'NO' : area.startsWith('80') ? 'DE' : area ? '?' : 'unknown';
 
   // Decision: timetable evidence wins, then official, then geo_name.
-  const chosen = tt ?? official[0] ?? geo?.sig ?? geoOnly ?? null;
+  let chosen = tt ?? official[0] ?? geo?.sig ?? geoOnly ?? null;
   const methods = [];
   if (tt && chosen === tt) methods.push('timetable');
   if (official.includes(chosen)) methods.push('official');
   if (geo?.sig === chosen) methods.push('geo_name');
   if (!methods.length && geoOnly === chosen) methods.push('geo_only');
   const conflict = new Set([tt, official[0], geo?.sig].filter(Boolean)).size > 1;
+  const ov = overrides[pid];
+  if (ov) {
+    chosen = ov.trv_signature ? ov.trv_signature.toLowerCase() : null;
+    methods.length = 0;
+    methods.push('override');
+  }
   const t = chosen ? trvBySig[chosen] : null;
   rows.push({
     gtfs_stop_id: pid, gtfs_name: p.stop_name, lat, lon, stop_area_id: area, stop_times: nStopTimes,
     trv_signature: t ? t.LocationSignature : '', trv_name: t?.AdvertisedLocationName ?? '',
     dist_m: t?.lat != null ? Math.round(haversine(lat, lon, t.lat, t.lon)) : '',
-    methods: methods.join('+'), conflict: conflict ? 'yes' : '',
+    methods: methods.join('+'), conflict: conflict && !ov ? 'yes' : '',
     official_sig: official.join('|') + (officialMissing.length ? ` (not in TrainStation: ${officialMissing.join('|')})` : ''),
     geo_sig: geo?.sig ?? '', timetable_sig: tt ?? '', timetable_votes: vs.map(([s, n]) => `${s}:${n}`).slice(0, 3).join(' '),
     timetable_share: ttShare ? ttShare.toFixed(2) : '',
     country,
-    kind: chosen ? 'rail_station' : nearest && nearest.d > 1000 ? (country === 'SE' ? 'bus_stop_or_unknown' : 'foreign_not_in_trv') : 'needs_review',
+    kind: ov ? ov.kind : chosen ? 'rail_station' : nearest && nearest.d > 1000 ? (country === 'SE' ? 'bus_stop_or_unknown' : 'foreign_not_in_trv') : 'needs_review',
     nearest_trv: nearest ? `${nearest.sig}@${Math.round(nearest.d)}m` : '',
   });
 }
@@ -175,11 +160,12 @@ console.log(`mapped (any method):            ${pct(cnt((r) => r.trv_signature))}
 console.log(`  via timetable evidence:       ${pct(cnt((r) => r.timetable_sig))}`);
 console.log(`  via official file:            ${pct(cnt((r) => r.official_sig && !r.official_sig.startsWith(' (')))}`);
 console.log(`  via geo+name (≤${RADIUS_M} m):       ${pct(cnt((r) => r.geo_sig))}`);
+console.log(`  via override:                 ${pct(cnt((r) => r.methods === 'override' && r.trv_signature))}`);
 console.log(`  via geo_only (≤100 m):        ${pct(cnt((r) => r.methods === 'geo_only'))}`);
 console.log(`all available methods agree:    ${pct(cnt((r) => r.trv_signature && !r.conflict))}`);
 console.log(`conflicts between methods:      ${cnt((r) => r.conflict)}`);
 console.log(`unmatched:                      ${cnt((r) => !r.trv_signature)}`);
-for (const k of ['bus_stop_or_unknown', 'foreign_not_in_trv', 'needs_review']) console.log(`  ${k}: ${cnt((r) => r.kind === k)}`);
+for (const k of ['bus_stop', 'bus_stop_or_unknown', 'foreign_not_in_trv', 'needs_review']) console.log(`  ${k}: ${cnt((r) => r.kind === k)}`);
 const w = (f) => rows.filter(f).reduce((s, r) => s + r.stop_times, 0);
 console.log(`stop_times-weighted match rate: ${((100 * w((r) => r.trv_signature)) / w(() => true)).toFixed(2)}%`);
 console.log(`\nConflicts:`);

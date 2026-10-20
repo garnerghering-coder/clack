@@ -5,7 +5,8 @@ Run on **2026-10-20** against live data. All numbers below come from the scripts
 downloads live in `data/cache/` (gitignored).
 
 **Deliverables:** this file, [`data/station_mapping.draft.csv`](data/station_mapping.draft.csv),
-[`data/category_overrides.json`](data/category_overrides.json) (draft), [`docs/phase0/route_sample.png`](docs/phase0/route_sample.png).
+[`data/station_overrides.json`](data/station_overrides.json), [`data/category_overrides.json`](data/category_overrides.json),
+[`docs/phase0/route_sample.png`](docs/phase0/route_sample.png).
 
 ---
 
@@ -13,13 +14,15 @@ downloads live in `data/cache/` (gitignored).
 
 | # | Spec assumption | What the data says | Proposed change |
 |---|---|---|---|
-| A | §10: fetch actuals "when the app is opened" | **Trafikverket keeps only ~4 days of history** | Add a small server-side daily job that snapshots every leg that arrived in the last 3 days. *Needs owner OK (spec says no background tracking in Phase 1).* |
+| A | §10: fetch actuals "when the app is opened" | **Trafikverket keeps only ~4 days of history** | A small server-side job snapshots every leg that arrived in the last 3 days (**decided**, see Decisions). |
 | B | §5.3: GTFS Sverige 2 fetched with a key, packaging unknown | Keyless public **archive of daily snapshots back to Aug 2012** at `data.samtrafiken.se` | Use the archive for history (no quota). The key is only needed for the newest snapshot. |
 | C | §12: prefer GTFS shapes if good | GTFS rail shapes are **straight stop-to-stop lines** for ~95% of trips | OSM routing is the primary geometry. It works for 94% of station pairs today; cross-border needs DK/NO/DE OSM data too. |
 | D | §8: rolling window −7 days from GTFS Sweden 3 | GTFS Sweden 3 starts at **yesterday** (runs to Dec 2027) | Never delete past days on import (keep our own history); older dates come from the Sverige 2 archive. |
 | E | §11: classify by route_type/agency/name | **Replacement buses are filed under rail route_types and train numbers** | Exclude using Trafikverket `TypeOfTraffic = Buss` and "trip calls at a non-railway stop". |
 | F | §5.2: GTFS file is "a download" | `sweden.zip` is **804 MB** (3.9 GB unzipped; `shapes.txt` alone is 3.0 GB) | The import must stream and should skip `shapes.txt`. |
-| G | §5.2: Bronze = 50 calls/month | Docs say Bronze = 50/month. The owner says this key allows 60 | Guard assumes 50 until confirmed. |
+| G | §5.2: Bronze = 50 calls/month | Docs say Bronze = 50/month. The owner says this key allows 60 | Guard assumes 50 (**decided**). |
+| H | §10: match by `AdvertisedTrainIdent = train_number` on that date | Train numbers **change mid-journey** (odd/even switches, night train 300 → 3940), **collide** across operators, and GTFS service days ≠ Trafikverket dates after midnight | Match Trafikverket rows by **(station signature, activity, advertised local time)**, using the number only to choose between candidates. |
+| I | §7: stations keyed by GTFS stop ids | GTFS Sweden 3 platform ids are feed-specific; Sverige 2 uses **rikshållplats ids**, stable 2012 → 2026 | Key `stations` by rikshållplats id (`stop_area_id`); attach Trafikverket signature and GTFS ids as attributes. |
 
 ---
 
@@ -43,7 +46,33 @@ Script: `trv-history-window.mjs`, plus a global oldest/newest query.
 - Every row also carries non-advertised technical passage points (`Advertised=false`) with actual times. That's useful later for "passed through" and progress, but filter on `Advertised=true` for the stop list.
 - Schema versions: **`TrainAnnouncement` 1.9** and **`TrainStation` 1.4** are the newest accepted (1.10 / 1.5 rejected). Times come with offsets (`+02:00`/`+01:00`), so convert to UTC on ingest.
 - Useful extra fields not in the spec: `TimeAtLocationWithSeconds`, `TypeOfTraffic` (Tåg/Pendeltåg/Buss), `ProductInformation` (e.g. "SJ Snabbtåg"), `OperationalTrainNumber`, `TrainComposition`, `Deleted`.
-- `TrainStation` has 1,756 locations with WGS84 points (`"POINT (lon lat)"`) and includes foreign stations (`Dk.kh`, `No.osl`, `De.dh`, …).
+- `TrainStation` has 1,756 locations with WGS84 points (`"POINT (lon lat)"`) and includes foreign stations (`Dk.kh`, `No.osl`, `De.dh`, …). It has no deleted objects: closed stations (old Båstad, old Kiruna C) are simply gone.
+
+**How complete are actual times?** (2026-10-19, a fully past day)
+- Restricted to trains (not buses), **2.5% of advertised rows have no `TimeAtLocation`**. The gaps are concentrated:
+
+  | Product | Rows without actual |
+  |---|---|
+  | VTAB (Värmland) | 33% |
+  | Västtågen | 11% |
+  | Krösatågen | 10% |
+  | TiB | 3% |
+  | SJ, SL Pendeltåg, Pågatåg, Mälartåg | < 1% |
+
+  These look like stations without train detection (Trafikverket only knows times where track reporting exists). Only 2 trains (the Järnvägsmuseet railbus) had no actuals at all.
+- Per GTFS stop event (see §2), **95.5–96.3% of Swedish stop events have an actual time**. So data quality must be **per stop**: a leg can have an actual departure but no actual arrival.
+- **Data quality per leg should be:**
+  - `full` = actual departure at origin **and** actual arrival at destination.
+  - Otherwise the leg is partial. It still counts for distance and CO₂, but is excluded from delay stats when the destination arrival is missing.
+
+**Cancellations and delay reasons**
+- `Canceled` is **per stop row**, so partial cancellations exist. That's 1.0–2.5k cancelled rows per day across 112–241 trains. Cancelled rows show `TrackAtLocation: "x"`, and a few (≈2%) still carry a `TimeAtLocation`, so don't treat "has actual" as "ran".
+- `Deviation` (code + text) mixes real **delay reasons** with **passenger notices**:
+  - Reasons: `ANA015 Elfel`, `ANA034 Fordonsfel`, `ANA050 Signalfel`, `ANA063 Tågkö`, `ANA003 Banarbete`, `ANA040 Obeh. i spår`.
+  - Notices: `ANA031 Kort tåg`, `ANA055 Spårändrat`, `ANA012 Dörr 2-13`, `ANA282 Hpl C`.
+  - Replacement buses: `ANA006 Buss`, `ANA007 Buss ersätter`, `ANA274 Buss 22K`.
+- **`ReasonCode` (schema 1) exists**: 787 codes with a 3-level hierarchy (`Level1Description` "Avvikelse" …). Phase 1 should keep a small whitelist of codes shown as "delay reason" and treat the rest as notices.
+- `EstimatedTimeAtLocation` is present on ~24% of rows that lack an actual. `Prel. tid` marks preliminary times.
 
 ## 2. Train number in GTFS Sweden 3
 
@@ -66,6 +95,36 @@ Per operator (2026-10-19), using `samtrafiken_internal_trip_number`:
 - **Partial:** Snälltåget 57% and a few Öresundståg/MTRX. GTFS uses a leading extra digit for date or route variants (`90306`, `10300`, `93940`, `51053`). After dropping the first digit of a 5-digit number they match Trafikverket's `306`, `300`, `3940`, `1053` with matching times. Rule: exact match first, then prefix-stripped with time validation.
 - 229–305 Trafikverket trains per day have no GTFS counterpart. They're mostly short-notice Västtågen variants (`63594`…), buses (`TypeOfTraffic=Buss`) and the Järnvägsmuseet railbus. A train-number search should therefore also query Trafikverket for dates inside its window.
 
+**Final matching method (`q2-match.mjs`).** Three things make "number on a date" unreliable on its own:
+1. **Numbers change mid-journey.**
+   - Swedish trains switch between odd and even numbers at certain points (SJ 158 ↔ 159, Tågkompaniet 8901 ↔ 8906).
+   - Snälltåget's Berlin night train is GTFS `10300` but Trafikverket `300` (Malmö arrival only) and then `3940` (Malmö 08:18 → Stockholm 13:17).
+2. **Numbers collide.** Roslagsbanan has its own trip `2031` on the same day as MTRX train 2031.
+3. **Service day vs calendar day.** GTFS puts Öresundståg's after-midnight run on the previous service day as `51168` at "26:27"; Trafikverket files it as `1168` on the calendar day at 02:27.
+
+So the matcher keys on **(Trafikverket signature, Ankomst/Avgang, advertised local minute)** from the station mapping and accepts any Trafikverket train sharing ≥ 2 such events with the GTFS trip. The GTFS number, or the number minus its first digit, is tried first. Events at stops where boarding is forbidden (`pickup_type=1`) or alighting is forbidden (`drop_off_type=1`) are skipped, because Trafikverket doesn't advertise them either (e.g. Norrtåg at Umeå C).
+
+| Date | Trips matched* | Swedish stop events matched | …with an actual time |
+|---|---|---|---|
+| 2026-10-18 | 2173/2196 (99.0%) | 99.41% | 96.30% |
+| 2026-10-19 | 3235/3245 (99.7%) | 99.22% | 95.46% |
+| 2026-10-20 | 3313/3321 (99.8%) | 99.52% | (day not finished) |
+
+\*Excludes Roslagsbanan, Saltsjöbanan and Arlanda Express, which aren't in Trafikverket.
+
+- **Remaining unmatched events:**
+  - Värmlandstrafik and SJ replacement-bus segments.
+  - Snälltåget night-train running days where GTFS and Trafikverket disagree (GTFS says `10300` runs on days Trafikverket doesn't list).
+  - Small timetable differences (MTRX 2031: GTFS Alingsås 15:00 vs Trafikverket 14:58).
+- **Lowest actual-time coverage:**
+  - Värmlandstrafik 40–63% and Tågkompaniet 57–62%.
+  - Krösatåg KLT 66–76% and Krösa Nord 84–87%.
+  - Västtågen 88–93%.
+- **Replacement buses by number:**
+  - On 2026-10-20 **all 224 Trafikverket bus numbers were 5-digit numbers starting with 5–9**. Only 2 trains used such numbers (`7xxxx`); 391 other 5-digit trains start with 1–3.
+  - GTFS rail trips with such numbers were buses whenever Trafikverket knew them (Värmlandstrafik 25–28 per day, SJ 14–16 per day).
+  - But GTFS `51168` (5-prefix) is a real train, so the prefix is a strong hint, not a rule. Trafikverket `TypeOfTraffic` decides inside its window.
+
 **Operator vs brand:** `attributions.txt` (`organization_name`) is the reliable operator field. `agency.txt` names are often just numbers ("187", "110"). The two sources disagree on Öresundståg: GTFS says "VR Sverige AB", Trafikverket says "ARRIVA". **Display the brand/product** (Öresundståg, Pågatåg, SJ Snabbtåg) and keep the company as secondary data.
 
 ## 3. Station ID mapping
@@ -81,23 +140,38 @@ Three independent methods, cross-checked:
 
 | Result | Stations | Share |
 |---|---|---|
-| Mapped (any method) | **685 / 735** | **93.2%** |
-| …weighted by stop visits | | **99.51%** |
+| Mapped (any method, incl. overrides) | **689 / 735** | **93.7%** |
+| …weighted by stop visits | | **99.83%** |
 | via timetable evidence | 553 | 75.2% |
 | via official file | 581 | 79.0% |
 | via geo+name ≤ 300 m | 621 | 84.5% |
-| All available methods agree | 682 | 92.8% |
+| via hand-checked override | 4 | `data/station_overrides.json` |
+| All available methods agree | 686 | 93.3% |
 | Conflicts | 3 | Stockholm City (geo picked Cst), Ramlösa (Hbgb vs Ram), Nyköping C (Nk vs Nkc). The timetable choice is right in all three |
 
-**Unmatched (50):**
+**Unmatched (46), none left for review:**
 - **20 foreign, not in Trafikverket:** Norwegian stations (Fredrikstad, Rygge, Meråker…) and Austrian ones (Snälltåget to Salzburg).
-- **22 bus stops inside "rail" trips:** ski buses (Funäsdalen, Ramundberget, Vemdalsskalet, Lindvallen…) and replacement-bus stops (Tingsryd terminal, Linnedal Kil). These identify buses (see §5).
-- **8 need review:**
-  - København Østerport (Trafikverket `Dk.kk`? 981 m away)
-  - Cityterminalen, Kungsplan, Centrum väst, Nyckelbyvägen (bus stops close to stations)
-  - Dresden Hbf (Strehlener Str.), Zell am See, Moga hållplats (Lennakatten, 873 m)
+- **26 bus stops inside "rail" trips:**
+  - Ski buses: Funäsdalen, Ramundberget, Vemdalsskalet, Lindvallen…
+  - Replacement/connecting-bus stops: Tingsryd terminal, Linnedal Kil, Cityterminalen, Kungsplan, Centrum väst, Nyckelbyvägen.
+  - These identify buses (see §5).
+- **The 8 review cases are resolved** in [`data/station_overrides.json`](data/station_overrides.json). Østerport → `Dk.kk`: Trafikverket's coordinate is ~1 km off, so only the name matches. Moga → `xMg`, Zell am See → `At.zel`, Dresden → `De.dh`, and the four stops above are marked bus stops.
 
-**Recommendation for the import:** use official + timetable + geo, and add a hand-maintained `data/station_overrides.json` for the review list. Flag new unmatched stations on each import (spec §8.4). The 300 m radius is tight for big stations: Stockholm C's parent stop is 218 m from Trafikverket's point. Keep ≤ 300 m with a name match, and ≤ 100 m without.
+**Historical stations (`q3-historical.mjs`, `q3-riks-stability.mjs`).** Sverige 2 `stop_id`s are rikshållplats ids (7 digits until 2016, `74xxxxx` → `7400xxxxx`):
+
+| Snapshot | Rail stops | Mapped to a Trafikverket signature | Stop events mapped |
+|---|---|---|---|
+| 2012-08-31 | 619 | 96.9% | 98.30% |
+| 2016-06-01 | 654 | 96.5% | 99.63% |
+| 2019-06-03 | 671 | 97.5% | 99.82% |
+| 2026-10-18 | 714 | 96.9% | 99.92% |
+
+- **Unmapped:** foreign stations, plus stations since closed or moved (old Båstad, old Kiruna C, Norberg, Högfors), which Trafikverket no longer lists.
+- **That's acceptable:** historical legs never get actual times, so they only need a stable station identity and coordinates.
+- **The rikshållplats id is stable.** Where a 2012 id still exists in 2026, 99% have a similar name and lie within 500 m. ~10% of 2012 rail-stop ids no longer exist (closures, and Danish/Norwegian ids renumbered).
+- **Consequence:** the `stations` table is **keyed by rikshållplats id**, and must accept history-only stations created from the snapshot's own `stops.txt`.
+
+**Recommendation for the import:** use official + timetable + geo, plus the hand-maintained overrides. Flag new unmatched stations on each import (spec §8.4). The 300 m radius is tight for big stations: Stockholm C's parent stop is 218 m from Trafikverket's point. Keep ≤ 300 m with a name match, and ≤ 100 m without.
 
 ## 4. GTFS Sverige 2 (history)
 
@@ -121,9 +195,16 @@ Script: `q4-sverige2-inspect.mjs`.
 - **The key works.** One test call to `api.resrobot.se/gtfs/sweden.zip` returned the 2026-10-20 feed (62.5 MB). Bronze is 1 call/minute, 50/month.
 - **On-demand rule:** for a past date D outside GTFS Sweden 3, download the latest archive snapshot dated ≤ D (≈ 50 MB), cache it, and parse only rail trips active on D. Most windows are ≥ 2.5 months, so one snapshot serves many nearby dates.
 
+**Archive completeness (`q4-archive-survey.mjs`):**
+- **2,858 snapshots from 2012-08-31 to 2026-10-18.** Per year: 21 (2012), 78–134 (2013–2017), 220–350 (2018 onward).
+- **Largest gaps between snapshots:** 123 days (2016-12-30 → 2017-05-02), then 23 days (May 2023). All others are ≤ 17 days.
+- **Windows per snapshot:** one snapshot per year was sampled, plus those before the largest gaps. They cover 62–315 days, starting 1–21 days *before* the snapshot date. The 2016-12-30 snapshot runs to 2017-06-11, which bridges the 123-day gap.
+- **So every date from 2012-08-10 to today is covered** by "latest snapshot ≤ D". Nothing before 2012-08-10 exists.
+- **2019 train numbers:** `trip_short_name` is filled on 65%; adding `trips_technical.txt` from the extra zip brings it to **86.8%**. The only gap is **2019 SL Pendeltåg**, which had no train numbers, so historical commuter legs are found by route, not number.
+
 ## 5. Rail filtering and categories
 
-Script: `q5-categories.mjs`. Draft rules: [`data/category_overrides.json`](data/category_overrides.json).
+Scripts: `q5-categories.mjs` (inventory), `q5-classify.mjs` (runs the rules). Rules: [`data/category_overrides.json`](data/category_overrides.json).
 
 - **GTFS Sweden 3 route_types in use:**
   - 100 (generic railway), 101 (high speed), 103 (inter-regional), 105 (sleeper), 106 (regional)
@@ -143,9 +224,16 @@ Script: `q5-categories.mjs`. Draft rules: [`data/category_overrides.json`](data/
   - A Värmlandstrafik on-demand **taxi** ("Anrop") filed as route_type 100.
 - **Detection rules:** Trafikverket `TypeOfTraffic = Buss` inside its window, otherwise "the trip calls at a stop with no railway station within 1 km" (from the station mapping).
 - **Heritage:** Lennakatten and TJF Smalspåret (GTFS), and Järnvägsmuseet "Rälsbuss" (Trafikverket only). Inlandsbanan appears in Sverige 2 but not in Sweden 3 this week.
-- **Open for the owner:**
-  - Is Pågatåg / Östgötapendeln "commuter"? Spec §11 says Pågatåg is; Trafikverket calls both "Tåg".
-  - Arlanda Express: regional or commuter?
+- **The rules file runs cleanly.** `q5-classify.mjs` gives every rail trip on 2026-10-20 a category, with 0 unclassified:
+
+  | Category | Operators |
+  |---|---|
+  | intercity | SJ Snabbtåg/InterCity/Nattåg, MTRX, Snälltåget, Vy |
+  | regional | Mälartåg, Krösatåg, Norrtåg, Öresundståg, TiB, X-Tåget, Värmland, Arlanda Express, SJ Regional |
+  | commuter | SL Pendeltåg, Roslagsbanan, Saltsjöbanan, Pågatåg, Östgötapendeln, and 300 of 620 Västtågen |
+  | excluded | 14 SJ, 25 Värmlandstrafik and 4 Snälltåget buses, plus 8 taxi trips |
+
+- **Live vs historical classification** (the same trips classified without Trafikverket facts) differs on only 39 trips. All 39 are replacement buses calling at real stations, which only Trafikverket can identify. For historical legs those would be kept as trains, roughly 1% of trips.
 
 ## 6. Shapes / geometry
 
@@ -191,10 +279,16 @@ Scripts: `q6-shape-stats.mjs`, `osm_rail_extract.py`, `q6-osm-route.mjs`, `plot_
 - **DST:** GTFS times are local service-day times (can exceed 24:00); Trafikverket times carry an offset. Convert both to UTC with the station's tz (`Europe/Stockholm` for all Swedish stations).
 - **Sizes for the import:** rail-only extract of GTFS Sweden 3 = 34,796 trips, 400k stop_times, 735 stations (~90 MB of JSON). Parsing the full zip by streaming takes ~2.5 min.
 
-## Decisions needed from the owner
+## Decisions (owner, 2026-10-20)
 
-1. **Background snapshot job** (A): OK to add a server-side cron that fetches actuals within 3 days, given Trafikverket's 4-day window?
-2. **Sverige 2 via the keyless archive** (B): OK to use the archive as the primary history source?
-3. **Categories:** are Pågatåg and Östgötapendeln "commuter"? Where does Arlanda Express go?
-4. **Display brand rather than operating company** (Öresundståg rather than VR Sverige/Arriva)?
-5. **GTFS Sweden 3 quota:** 50 or 60 calls/month on this key?
+The owner chose brand display and delegated the rest to Claude's judgement:
+
+1. **Brand over operating company** (owner). Show "Öresundståg", "Pågatåg", "SJ Snabbtåg". The company (VR Sverige, Arriva, SJ AB) is stored but secondary. Recorded in `data/category_overrides.json` → `display`.
+2. **Background snapshot job: yes.** The server runs a small scheduled job (node-cron, a few times a day) that fetches Trafikverket actuals for every `planned` leg whose scheduled arrival has passed, while still inside the ~4-day window. Opening the app also triggers it. This changes spec §10, which said Phase 1 has no background tracking; without it, delay data is lost for any trip not opened within ~3 days.
+3. **History from the keyless Sverige 2 archive: yes.** `data.samtrafiken.se/trafiklab/gtfs-sverige-2/` is the primary source for dates before GTFS Sweden 3's window. The keyed endpoint is used only when the newest snapshot is needed.
+4. **Categories:**
+   - **Pågatåg = commuter** (as spec §11 says).
+   - **Östgötapendeln = commuter.**
+   - **Arlanda Express = regional**, so the commuter toggle doesn't hide airport trips.
+   - **Västtågen** is commuter only for the Göteborg commuter lines. That's detected by "every stop is in the commuter station set", which reproduced Trafikverket's Pendeltåg label exactly on a held-out day (303/303, 0 false positives) and works for historical legs.
+5. **GTFS Sweden 3 quota: plan for 50 calls/month** (the documented Bronze limit), even though the key may allow 60. Normal use is ~31/month (one per day).

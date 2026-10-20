@@ -49,25 +49,42 @@ function snap(la, lo, maxM = 1000) {
   }
   return bd <= maxM ? { node: best, d: bd } : null;
 }
-// binary-heap Dijkstra
-function route(s, t, limitM) {
-  const dist = new Map([[s, 0]]), prev = new Map();
-  const heap = [[0, s]];
+/** All running-line nodes within maxM (nearest first, capped); stations often sit between parallel
+ * lines or next to a freight bypass, so routing from several candidates beats "nearest node". */
+function snapCandidates(la, lo, maxM = 400, cap = 40) {
+  const out = [];
+  const ci = Math.floor(la / CELL), cj = Math.floor(lo / (CELL * 2));
+  for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {
+    for (const i of grid.get(`${ci + di},${cj + dj}`) ?? []) { const d = hav(la, lo, lat[i], lon[i]); if (d <= maxM) out.push({ node: i, d }); }
+  }
+  out.sort((a, b) => a.d - b.d);
+  if (!out.length) { const s = snap(la, lo, 1000); return s ? [s] : []; }
+  return out.slice(0, cap);
+}
+
+// Multi-source / multi-target Dijkstra; each candidate's snap distance is added to the cost.
+function route(srcs, dsts, limitM) {
+  const dist = new Map(), prev = new Map();
+  const heap = [];
   const push = (x) => { heap.push(x); let i = heap.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
   const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length) { heap[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let m = i; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r; if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top; };
+  for (const c of srcs) if (c.d < (dist.get(c.node) ?? Infinity)) { dist.set(c.node, c.d); push([c.d, c.node]); }
+  const target = new Map(dsts.map((c) => [c.node, c.d]));
+  let best = Infinity, bestNode = -1;
   while (heap.length) {
     const [d, u] = pop();
-    if (u === t) break;
+    if (d >= best) break;
     if (d > (dist.get(u) ?? Infinity) || d > limitM) continue;
+    if (target.has(u) && d + target.get(u) < best) { best = d + target.get(u); bestNode = u; }
     const a = adj[u];
     for (let k = 0; k < a.length; k += 2) {
       const v = a[k], nd = d + a[k + 1];
       if (nd < (dist.get(v) ?? Infinity)) { dist.set(v, nd); prev.set(v, u); push([nd, v]); }
     }
   }
-  if (!dist.has(t)) return null;
-  const pathNodes = [t];
-  while (pathNodes[0] !== s) pathNodes.unshift(prev.get(pathNodes[0]));
+  if (bestNode < 0) return null;
+  const pathNodes = [bestNode];
+  while (prev.has(pathNodes[0])) pathNodes.unshift(prev.get(pathNodes[0]));
   let length = 0;
   for (let i = 1; i < pathNodes.length; i++) length += hav(lat[pathNodes[i - 1]], lon[pathNodes[i - 1]], lat[pathNodes[i]], lon[pathNodes[i]]);
   return { length, nodes: pathNodes };
@@ -87,7 +104,8 @@ for (const t of load('trips.json')) {
     const a = parent(s[i - 1][2]), b = parent(s[i][2]);
     if (a === b) continue;
     const k = a < b ? `${a}|${b}` : `${b}|${a}`;
-    const e = pairs.get(k) ?? pairs.set(k, { a, b, ops: new Set() }).get(k);
+    // Stored in sorted order: segments are routed min -> max and reversed on use when needed.
+    const e = pairs.get(k) ?? pairs.set(k, { a: a < b ? a : b, b: a < b ? b : a, ops: new Set() }).get(k);
     e.ops.add(ops[t.trip_id]);
   }
 }
@@ -98,9 +116,9 @@ const segs = new Map();
 for (const [k, e] of pairs) {
   const A = stops[e.a], B = stops[e.b];
   const gc = hav(+A.stop_lat, +A.stop_lon, +B.stop_lat, +B.stop_lon);
-  const sa = snap(+A.stop_lat, +A.stop_lon), sb = snap(+B.stop_lat, +B.stop_lon);
-  if (!sa || !sb) { res.snapFail++; failures.push(`snap: ${A.stop_name} – ${B.stop_name} (${[...e.ops].join('/')})`); continue; }
-  const r = route(sa.node, sb.node, Math.max(gc * 3, 20000));
+  const sa = snapCandidates(+A.stop_lat, +A.stop_lon), sb = snapCandidates(+B.stop_lat, +B.stop_lon);
+  if (!sa.length || !sb.length) { res.snapFail++; failures.push(`snap: ${A.stop_name} – ${B.stop_name} (${[...e.ops].join('/')})`); continue; }
+  const r = route(sa, sb, Math.max(gc * 3, 20000));
   if (!r) { res.noPath++; failures.push(`no path: ${A.stop_name} – ${B.stop_name} (${[...e.ops].join('/')})`); continue; }
   const ratio = r.length / Math.max(gc, 1);
   ratios.push(ratio);

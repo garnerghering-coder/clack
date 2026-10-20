@@ -1,34 +1,238 @@
 {
-  "_comment": "DRAFT from Phase 0 (2026-10-20). Rules are evaluated top to bottom; first match wins. Matching fields: gtfs_route_type, gtfs_operator (attributions.txt organization_name), gtfs_route_short_name, trv_product (TrainAnnouncement.ProductInformation), trv_type_of_traffic (Tåg | Pendeltåg | Buss). Trafikverket fields are only available for trains within its ~4-day history / ~15-day future window; GTFS-only rules must stand on their own for historical legs. See DATA_FINDINGS.md §5.",
+  "_comment": "Phase 0 (2026-10-20), owner decisions applied. Rules are evaluated top to bottom; first match wins. Matching fields: gtfs_route_type, gtfs_operator (attributions.txt organization_name), gtfs_route_short_name, trv_product (TrainAnnouncement.ProductInformation), trv_type_of_traffic (Tåg | Pendeltåg | Buss). Trafikverket fields are only available for trains within its ~4-day history / ~15-day future window; GTFS-only rules must stand on their own for historical legs. See DATA_FINDINGS.md §5.",
   "version": 1,
-  "categories": ["intercity", "regional", "commuter", "heritage"],
+  "categories": [
+    "intercity",
+    "regional",
+    "commuter",
+    "heritage"
+  ],
   "exclude": [
-    { "match": { "trv_type_of_traffic": "Buss" }, "reason": "Replacement/connecting bus filed under a train number" },
-    { "match": { "gtfs_operator": "Taxi" }, "reason": "Värmlandstrafik on-demand taxi (route 'Anrop') filed as route_type 100" },
-    { "match": { "gtfs_route_type": ["401", "700", "702", "1000", "1501"] }, "reason": "Metro, bus, ferry, taxi" },
-    { "match": { "gtfs_route_type": "900", "not_gtfs_route_short_name": ["25", "26", "27", "27S", "28", "28S", "29"] }, "reason": "Trams/light rail (Lidingöbanan, Nockebybanan, Tvärbanan, Spårväg City, Göteborg/Norrköping/Lund trams)" },
-    { "match": { "has_non_rail_stop": true }, "reason": "Trip calls at stops with no railway station nearby (e.g. SJ 6xxxx buses via Cityterminalen, Snälltåget ski buses). Computed from the station mapping." }
+    {
+      "match": {
+        "trv_type_of_traffic": "Buss"
+      },
+      "reason": "Replacement/connecting bus filed under a train number"
+    },
+    {
+      "match": {
+        "gtfs_operator": "Taxi"
+      },
+      "reason": "Värmlandstrafik on-demand taxi (route 'Anrop') filed as route_type 100"
+    },
+    {
+      "match": {
+        "gtfs_route_type": [
+          "401",
+          "700",
+          "702",
+          "1000",
+          "1501"
+        ]
+      },
+      "reason": "Metro, bus, ferry, taxi"
+    },
+    {
+      "match": {
+        "gtfs_route_type": "900",
+        "not_gtfs_route_short_name": [
+          "25",
+          "26",
+          "27",
+          "27S",
+          "28",
+          "28S",
+          "29"
+        ]
+      },
+      "reason": "Trams/light rail (Lidingöbanan, Nockebybanan, Tvärbanan, Spårväg City, Göteborg/Norrköping/Lund trams)"
+    },
+    {
+      "match": {
+        "has_non_rail_stop": true
+      },
+      "reason": "Trip calls at stops with no railway station nearby (e.g. SJ 6xxxx buses via Cityterminalen, Snälltåget ski buses). Computed from the station mapping."
+    }
   ],
   "rules": [
-    { "match": { "gtfs_operator": ["Lennakatten", "TJF Smalspåret"] }, "category": "heritage" },
-    { "match": { "trv_product": "Rälsbuss" }, "category": "heritage", "note": "Järnvägsmuseet railbus runs" },
-
-    { "match": { "trv_type_of_traffic": "Pendeltåg" }, "category": "commuter", "note": "SL Pendeltåg 40–48 and commuter Västtågen" },
-    { "match": { "gtfs_operator": "SL", "gtfs_route_type": "106" }, "category": "commuter", "note": "SL Pendeltåg (route_short_name is the line number, not the train number)" },
-    { "match": { "gtfs_route_type": "900", "gtfs_route_short_name": ["25", "26"] }, "category": "commuter", "note": "Saltsjöbanan (AB Stockholms Spårvägar). Not in Trafikverket: legs will be scheduled_only" },
-    { "match": { "gtfs_route_type": "900", "gtfs_route_short_name": ["27", "27S", "28", "28S", "29"] }, "category": "commuter", "note": "Roslagsbanan (Transdev). Not in Trafikverket: legs will be scheduled_only" },
-    { "match": { "gtfs_operator": ["Pågatåg", "Östgötapendeln"] }, "category": "commuter", "note": "Spec §11 lists Pågatåg as commuter. OWNER TO CONFIRM: Trafikverket reports both as 'Tåg', not 'Pendeltåg'" },
-
-    { "match": { "gtfs_route_type": ["101", "102", "103", "105"] }, "category": "intercity", "note": "High speed, long distance, inter-regional, sleeper" },
-    { "match": { "gtfs_route_type": "100", "gtfs_operator": ["SJ AB", "Snälltåget", "MTR Express AB"] }, "category": "intercity" },
-    { "match": { "trv_product": ["SJ Snabbtåg", "SJ InterCity", "SJ Nattåg", "Snälltåget", "VR Snabbtåg", "Vy Snabbtåg", "RDC EuroNight"] }, "category": "intercity" },
-
-    { "match": { "gtfs_operator": "Arlanda Express" }, "category": "regional", "note": "GTFS files it as route_type 101 (high speed). OWNER TO CONFIRM category. Not in Trafikverket ('Arlanda Express visas ej'): legs will be scheduled_only" },
-    { "match": { "gtfs_route_type": ["100", "106"] }, "category": "regional", "note": "Default for remaining rail: Västtågen, Mälartåg, Krösatåg*, Öresundståg (VR Sverige AB), Tåg i Bergslagen, Norrtåg, X-Tåget, Värmlandstrafik, Tågab, SJ Norge, SJ Regional" }
+    {
+      "match": {
+        "gtfs_operator": [
+          "Lennakatten",
+          "TJF Smalspåret"
+        ]
+      },
+      "category": "heritage"
+    },
+    {
+      "match": {
+        "trv_product": "Rälsbuss"
+      },
+      "category": "heritage",
+      "note": "Järnvägsmuseet railbus runs"
+    },
+    {
+      "match": {
+        "trv_type_of_traffic": "Pendeltåg"
+      },
+      "category": "commuter",
+      "note": "SL Pendeltåg 40–48 and commuter Västtågen"
+    },
+    {
+      "match": {
+        "gtfs_operator": "Västtågen",
+        "all_stops_trv_signature_in": [
+          "A",
+          "Ag",
+          "Apn",
+          "Asd",
+          "Bhs",
+          "Fd",
+          "G",
+          "Gas",
+          "Gsv",
+          "Jv",
+          "Kb",
+          "Khe",
+          "Krd",
+          "Ldo",
+          "Lis",
+          "Lr",
+          "Mdn",
+          "Nol",
+          "Ns",
+          "Nöe",
+          "P",
+          "Sn",
+          "Sue",
+          "Vbd",
+          "Än"
+        ]
+      },
+      "category": "commuter",
+      "note": "Göteborg commuter trains (Kungsbacka/Alingsås/Älvängen lines). Station set learned from Trafikverket 'Pendeltåg' Västtågen on 2026-10-19; on 2026-10-20 it reproduced Trafikverket exactly (303 commuter, 320 regional, 0 errors). Works for historical legs without Trafikverket data."
+    },
+    {
+      "match": {
+        "gtfs_operator": "SL",
+        "gtfs_route_type": "106"
+      },
+      "category": "commuter",
+      "note": "SL Pendeltåg (route_short_name is the line number, not the train number)"
+    },
+    {
+      "match": {
+        "gtfs_route_type": "900",
+        "gtfs_route_short_name": [
+          "25",
+          "26"
+        ]
+      },
+      "category": "commuter",
+      "note": "Saltsjöbanan (AB Stockholms Spårvägar). Not in Trafikverket: legs will be scheduled_only"
+    },
+    {
+      "match": {
+        "gtfs_route_type": "900",
+        "gtfs_route_short_name": [
+          "27",
+          "27S",
+          "28",
+          "28S",
+          "29"
+        ]
+      },
+      "category": "commuter",
+      "note": "Roslagsbanan (Transdev). Not in Trafikverket: legs will be scheduled_only"
+    },
+    {
+      "match": {
+        "gtfs_operator": [
+          "Pågatåg",
+          "Östgötapendeln"
+        ]
+      },
+      "category": "commuter",
+      "note": "Owner decision 2026-10-20 (owner delegated): commuter, per spec §11 for Pågatåg; Östgötapendeln is a commuter service by name and pattern. Trafikverket labels both 'Tåg'."
+    },
+    {
+      "match": {
+        "gtfs_operator": "Arlanda Express"
+      },
+      "category": "regional",
+      "note": "Owner decision 2026-10-20 (owner delegated): regional, so the commuter toggle does not hide airport trips. GTFS files it as route_type 101. Not in Trafikverket ('Arlanda Express visas ej'): legs will be scheduled_only"
+    },
+    {
+      "match": {
+        "trv_product": [
+          "SJ Snabbtåg",
+          "SJ InterCity",
+          "SJ Nattåg",
+          "Snälltåget",
+          "VR Snabbtåg",
+          "Vy Snabbtåg",
+          "RDC EuroNight"
+        ]
+      },
+      "category": "intercity"
+    },
+    {
+      "match": {
+        "trv_product": [
+          "SJ Regional",
+          "Mälartåg",
+          "Krösatågen",
+          "Öresundståg",
+          "TiB",
+          "Norrtåg",
+          "VTAB",
+          "X-Tåget"
+        ]
+      },
+      "category": "regional",
+      "note": "Trafikverket regional products, checked before GTFS route_type (SJ files some regional trains as route_type 100)"
+    },
+    {
+      "match": {
+        "gtfs_route_type": [
+          "101",
+          "102",
+          "103",
+          "105"
+        ]
+      },
+      "category": "intercity",
+      "note": "High speed, long distance, inter-regional, sleeper"
+    },
+    {
+      "match": {
+        "gtfs_route_type": "100",
+        "gtfs_operator": [
+          "SJ AB",
+          "Snälltåget",
+          "MTR Express AB"
+        ]
+      },
+      "category": "intercity"
+    },
+    {
+      "match": {
+        "gtfs_route_type": [
+          "100",
+          "106"
+        ]
+      },
+      "category": "regional",
+      "note": "Default for remaining rail: Västtågen, Mälartåg, Krösatåg*, Öresundståg (VR Sverige AB), Tåg i Bergslagen, Norrtåg, X-Tåget, Värmlandstrafik, Tågab, SJ Norge, SJ Regional"
+    }
   ],
   "train_number": {
     "gtfs_se3_field": "trips.samtrafiken_internal_trip_number",
     "gtfs_sv2_field": "extra.zip/trips_technical.txt technical_trip_number (2017+), trips.trip_short_name (2012–2016)",
     "fallback": "If no exact match in Trafikverket for the date, retry with the leading digit removed for 5-digit numbers (Snälltåget 90306 → 306, Öresundståg 51053 → 1053) and accept only if an advertised time matches."
+  },
+  "display": {
+    "show": "brand",
+    "note": "Owner decision 2026-10-20: show the brand/product (Öresundståg, Pågatåg, SJ Snabbtåg), keep the operating company as secondary data. GTFS attributions and Trafikverket Operator disagree on companies (Öresundståg: VR Sverige AB vs ARRIVA)."
   }
 }

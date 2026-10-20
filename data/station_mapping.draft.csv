@@ -104,7 +104,7 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 710,Kallhäll,59.452387,17.807122,740000710,1237,Khä,Kallhäll,11,timetable+official+geo_name,,khä,khä,khä,khä:796,1.00,SE,rail_station,khä@11m
 1614,Östra Grevie station,55.467061,13.133416,740001614,1237,Ög,Östra Grevie,303,timetable+official,,ög,,ög,ög:300,1.00,SE,rail_station,ög@303m
 25318,København Nørreport,55.684016,12.572808,860000646,1236,Dk.kn,Nörreport,42,geo_only,, (not in TrainStation: zkn),,,,,DK,rail_station,dk.kn@42m
-25317,København Østerport,55.692882,12.588034,860000650,1236,,,,geo_only,, (not in TrainStation: zkk),,,,,DK,needs_review,dk.kk@981m
+25317,København Østerport,55.692882,12.588034,860000650,1236,Dk.kk,Österport,981,override,, (not in TrainStation: zkk),,,,,DK,rail_station,dk.kk@981m
 1615,Västra Ingelstad station,55.490259,13.108327,740001615,1235,Vid,Västra Ingelstad,183,timetable+official+geo_name,,vid,vid,vid,vid:302,1.00,SE,rail_station,vid@183m
 183,Töreboda resecentrum (tåg),58.706108,14.128479,740000183,1232,T,Töreboda,187,timetable+official,,t,,t,t:142,1.00,SE,rail_station,t@187m
 200,Kristianstad Centralstation,56.031875,14.151364,740000200,1215,Cr,Kristianstad C,51,timetable+official+geo_name,,cr,cr,cr,cr:312,1.00,SE,rail_station,cr@51m
@@ -579,7 +579,7 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 324,Gällö järnvägsstation,62.911291,15.229137,740000324,68,Gö,Gällö,19,timetable+official+geo_name,,gö,gö,gö,gö:60,1.00,SE,rail_station,gö@19m
 653,Pilgrimstad järnvägsstation,62.955101,15.040348,740000653,68,Pl,Pilgrimstad,14,timetable+official+geo_name,,pl,pl,pl,pl:60,1.00,SE,rail_station,pl@14m
 526,Brunflo järnvägsstation,63.076578,14.832078,740000526,68,Bf,Brunflo,72,timetable+official+geo_name,,bf,bf,bf,bf:60,1.00,SE,rail_station,bf@72m
-622,Cityterminalen,59.332161,18.054308,740000622,65,,,,geo_only,, (not in TrainStation: xsct),,,,,SE,needs_review,cst@296m
+622,Cityterminalen,59.332161,18.054308,740000622,65,,,,override,, (not in TrainStation: xsct),,,,,SE,bus_stop,cst@296m
 1607,Fjälkinge station,56.043397,14.278578,740001607,65,Fki,Fjälkinge,1231,timetable+official,,fki,,fki,fki:92,1.00,SE,rail_station,fki@1231m
 57766,Notviken Station,65.130612,22.001116,740002953,64,Nvn,Notviken,53656,official,,nvn,,,nvn:28,1.00,SE,rail_station,ptå@32416m
 268,Murjek Järnvägsstation,66.484518,20.880567,740000268,63,Mk,Murjek,44,timetable+official+geo_name,,mk,mk,mk,mk:32,1.00,SE,rail_station,mk@44m
@@ -631,8 +631,8 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 372,Haparanda Jvstn,65.828367,24.131894,740000372,28,Hp,Haparanda,45,timetable+official+geo_name,,hp,hp,hp,hp:12,1.00,SE,rail_station,hpa@34m
 704,Fors TÅG,60.209087,16.313714,740000704,28,Fs,Fors,312,timetable+official,,fs,,fs,fs:8,1.00,SE,rail_station,fs@312m
 71171,Torsåker station,60.514148,16.489165,740001563,28,Tså,Torsåker,77,timetable+official+geo_name,,tså,tså,tså,tså:8,1.00,SE,rail_station,tså@77m
-24116,Kungsplan,56.165202,15.586844,740020510,27,,,,geo_only,, (not in TrainStation: ckkp),,,,,SE,needs_review,ck@229m
-20758,Centrum väst,56.169103,14.86107,740040991,27,,,,geo_only,,,,,,,SE,needs_review,kh@952m
+24116,Kungsplan,56.165202,15.586844,740020510,27,,,,override,, (not in TrainStation: ckkp),,,,,SE,bus_stop,ck@229m
+20758,Centrum väst,56.169103,14.86107,740040991,27,,,,override,,,,,,,SE,bus_stop,kh@952m
 385,Tingsryd terminal,56.523997,14.975528,740000385,27,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,sru@29452m
 620,Huskvarna station,57.782274,14.265783,740000620,25,Hka,Huskvarna,61,official+geo_name,,hka,hka,,,,SE,rail_station,hka@61m
 72976,Padborg,54.82351,9.35876,860000100,25,Dk.pa,Padborg,27,geo_name,, (not in TrainStation: zpa),dk.pa,,,,DK,rail_station,dk.pa@27m
@@ -648,7 +648,7 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 186,Skinnskatteberg jvstn,59.83263,15.692642,740000186,20,Skb,Skinnskatteberg,58,timetable+official+geo_name,,skb,skb,skb,skb:8,1.00,SE,rail_station,skb@58m
 1560,Iggesund station,61.645492,17.081184,740001560,19,Id,Iggesund,79,timetable+official+geo_name,,id,id,id,id:4,1.00,SE,rail_station,id@79m
 5217,Marielunds station (Uppsala),59.84257,17.875307,740012812,19,xMl,Marielund,37,geo_only,,,,,,,SE,rail_station,xml@37m
-72892,Dresden Hbf (Strehlener Str.),51.0386,13.7339,800001305,19,,,,geo_only,,,,,,,DE,needs_review,de.dh@247m
+72892,Dresden Hbf (Strehlener Str.),51.0386,13.7339,800001305,19,De.dh,Dresden,247,override,,,,,,,DE,rail_station,de.dh@247m
 72584,Sörumsand,59.9858,11.24054,760000305,17,,,,geo_only,, (not in TrainStation: xsör),,,,,NO,foreign_not_in_trv,no.lls@11443m
 82,Västervik Resecentrum,57.75537,16.643266,740000082,17,Vk,Västervik,37,timetable+official+geo_name,,vk,vk,vk,vk:12,1.00,SE,rail_station,vk@37m
 68894,Fyrislund hållplats Lennakatten,59.858395,17.68202,740076850,15,xFl,Fyrislund,6,geo_only,,,,,,,SE,rail_station,xfl@6m
@@ -661,7 +661,7 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 68898,Löt hållplats Lennakatten,59.866132,17.943758,740076847,15,xLöt,Löt,4,geo_only,,,,,,,SE,rail_station,xlöt@4m
 68887,Länna station Lennakatten,59.871707,17.958969,740020998,15,xLna,Länna,21,geo_name,,,xlna,,,,SE,rail_station,xlna@21m
 68889,Almunge station Lennakatten,59.875893,18.044508,740021000,15,xAlg,Almunge,6,geo_name,,,xalg,,,,SE,rail_station,xalg@6m
-68899,Moga hållplats Lennakatten,59.895995,18.062076,740076849,15,,,,geo_only,,,,,,,SE,needs_review,xmg@873m
+68899,Moga hållplats Lennakatten,59.895995,18.062076,740076849,15,xMg,Moga,873,override,,,,,,,SE,rail_station,xmg@873m
 5283,Faringe station (Uppsala),59.920688,18.116213,740020999,15,xFrg,Faringe,115,geo_name,,,xfrg,,,,SE,rail_station,xfrg@115m
 1589,Höga Kusten Flygplats,63.052827,17.744814,740001589,15,Väy,Västeraspby,348,timetable+official,,väy,,väy,väy:24,1.00,SE,rail_station,väy@348m
 37,Ånn järnvägsstation,63.321568,12.539168,740000037,15,Ånn,Ånn,25,timetable+official+geo_name,,ånn,ånn,ånn,ånn:12,1.00,SE,rail_station,ånn@25m
@@ -696,7 +696,7 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 72906,Jenbach,47.3883,11.7783,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@24082m
 72901,Kitzbuehel,47.4542,12.3911,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@25057m
 73660,St Johann in Tirol,47.5197,12.4308,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@27931m
-72900,Zell am See,47.3206,12.7967,,7,,,,geo_only,,,,,,,unknown,needs_review,at.zel@577m
+72900,Zell am See,47.3206,12.7967,,7,At.zel,Zell am See,577,override,,,,,,,unknown,rail_station,at.zel@577m
 72899,St Johann im Pongau,47.3483,13.195,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.sch@4496m
 72888,Höje Taastrup,55.6486,12.2694,,7,Dk.htå,Höje Taastrup,27,geo_name,,,dk.htå,,,,unknown,rail_station,dk.htå@27m
 59438,Klövsjö skidområde,62.50298,14.17932,740062751,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn@9611m
@@ -732,5 +732,5 @@ gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,di
 907,Ankarsrum station,57.699541,16.334477,740000907,2,xAkm,Ankarsrum,35,geo_name,, (not in TrainStation: akm),xakm,,,,SE,rail_station,xakm@35m
 347,Storfors busstation,59.533348,14.272973,740000347,2,Sf,Storfors,79,official+geo_name,,sf,sf,,,,SE,rail_station,sf@79m
 170,Eskilstuna Centralstation,59.369866,16.504571,740000170,2,Et,Eskilstuna C,73,official+geo_name,,et,et,,,,SE,rail_station,et@73m
-70766,Nyckelbyvägen,59.415733,15.716161,740050689,1,,,,geo_only,,,,,,,SE,needs_review,ålg@335m
+70766,Nyckelbyvägen,59.415733,15.716161,740050689,1,,,,override,,,,,,,SE,bus_stop,ålg@335m
 70739,Fellingsbro jvstn,59.433523,15.592064,740000175,1,Feb,Fellingsbro,185,official+geo_name,,feb,feb,,,,SE,rail_station,feb@185m
