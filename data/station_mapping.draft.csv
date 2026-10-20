@@ -1,0 +1,736 @@
+gtfs_stop_id,gtfs_name,lat,lon,stop_area_id,stop_times,trv_signature,trv_name,dist_m,methods,conflict,official_sig,geo_sig,timetable_sig,timetable_votes,timetable_share,country,kind,nearest_trv
+3,Malmö Centralstation,55.608777,13.000216,740000003,8823,Mc,Malmö C,105,timetable+official+geo_name,,mc,mc,mc,mc:2218,1.00,SE,rail_station,mc@105m
+2,Göteborg Centralstation,57.709299,11.973659,740000002,8090,G,Göteborg C,46,timetable+official+geo_name,,g,g,g,g:1238,1.00,SE,rail_station,g@46m
+120,Lund Centralstation,55.706384,13.187015,740000120,7985,Lu,Lund C,100,timetable+official+geo_name,,lu,lu,lu,lu:1774,1.00,SE,rail_station,lu@100m
+1,Stockholm Centralstation,59.331537,18.054943,740000001,6875,Cst,Stockholm C,218,timetable+official+geo_name,,cst,cst,cst,cst:915,1.00,SE,rail_station,cst@218m
+937,Burlöv station,55.640808,13.080157,740000937,5375,Blv,Burlöv,19,timetable+official+geo_name,,blv,blv,blv,blv:1384,1.00,SE,rail_station,blv@19m
+1586,Malmö Hyllie,55.562792,12.975828,740001586,4978,Hie,Hyllie,51,timetable+official+geo_name,,hie,hie,hie,hie:1716 tri:1,1.00,SE,rail_station,hie@51m
+1587,Malmö Triangeln,55.594285,13.000711,740001587,4885,Tri,Triangeln,203,timetable+official+geo_name,,tri,tri,tri,tri:1902,1.00,SE,rail_station,tri@203m
+1375,Klostergården station,55.695077,13.172165,740001375,3799,Kgå,Klostergården,100,timetable+official+geo_name,,kgå,kgå,kgå,kgå:634,1.00,SE,rail_station,kgå@100m
+942,Hjärup station,55.673822,13.136595,740000942,3799,Hjp,Hjärup,26,timetable+official+geo_name,,hjp,hjp,hjp,hjp:634,1.00,SE,rail_station,hjp@26m
+960,Åkarp station,55.655956,13.106487,740000960,3799,Åk,Åkarp,184,timetable+official+geo_name,,åk,åk,åk,åk:634,1.00,SE,rail_station,åk@184m
+44,Helsingborg Centralstation,56.043055,12.69498,740000044,3522,Hb,Helsingborg C,55,timetable+official+geo_name,,hb,hb,hb,hb:712,1.00,SE,rail_station,hb@55m
+6,Hässleholm Centralstation,56.15804,13.763268,740000006,3473,Hm,Hässleholm,15,timetable+official+geo_name,,hm,hm,hm,hm:873,1.00,SE,rail_station,hm@15m
+1617,Stockholm City,59.331139,18.059447,740001617,3245,Sci,Stockholm City,336,timetable+official,yes,sci,cst,sci,sci:1970,1.00,SE,rail_station,cst@179m
+789,Älvsjö,59.278549,18.010451,740000789,2987,Äs,Älvsjö,47,timetable+official+geo_name,,äs,äs,äs,äs:1968,1.00,SE,rail_station,äs@47m
+1618,Stockholm Odenplan,59.343213,18.04572,740001618,2957,Sod,Stockholm Odenplan,141,timetable+official+geo_name,,sod,sod,sod,sod:1968,1.00,SE,rail_station,sod@141m
+765,Stockholms södra,59.313578,18.06192,740000765,2916,Sst,Stockholms S,82,timetable+official+geo_name,,sst,sst,sst,sst:1968,1.00,SE,rail_station,sst@82m
+10787,Årstaberg,59.299684,18.028338,740024920,2914,Åbe,Årstaberg,47,timetable+official+geo_name,,åbe,åbe,åbe,åbe:1968,1.00,SE,rail_station,åbe@47m
+945,Kävlinge station,55.79459,13.111332,740000945,2904,Kg,Kävlinge,11,timetable+official+geo_name,,kg,kg,kg,kg:676,1.00,SE,rail_station,kg@11m
+773,Sundbyberg,59.360944,17.971237,740000773,2724,Sub,Sundbyberg,35,timetable+official+geo_name,,sub,sub,sub,sub:1077,1.00,SE,rail_station,sub@35m
+31,Flemingsberg,59.219028,17.947176,740000031,2593,Flb,Flemingsberg,46,timetable+official+geo_name,,flb,flb,flb,flb:1566,1.00,SE,rail_station,flb@46m
+260,Eslöv station,55.837448,13.305171,740000260,2359,E,Eslöv,29,timetable+official+geo_name,,e,e,e,e:782,1.00,SE,rail_station,e@29m
+1590,Gamlestaden Station,57.727327,12.004174,740001590,2275,Gas,Gamlestaden,51,timetable+official+geo_name,,gas,gas,gas,gas:703,1.00,SE,rail_station,gas@51m
+941,Lund Gunnesbo station,55.726523,13.167866,740000941,2248,Gnb,Gunnesbo,95,timetable+official+geo_name,,gnb,gnb,gnb,gnb:462,1.00,SE,rail_station,gnb@95m
+77,Hallsbergs resecentrum,59.066661,15.110266,740000077,2235,Hpbg,Hallsberg,75,timetable+official+geo_name,,hpbg,hpbg,hpbg,hpbg:384,1.00,SE,rail_station,hpbg@75m
+99,Västerås Centralstation,59.608554,16.553497,740000099,2191,Vå,Västerås C,101,timetable+official+geo_name,,vå,vå,vå,vå:493,1.00,SE,rail_station,vå@101m
+660,Bålsta station (SL-pendeln) (Håbo),59.568497,17.533543,740000660,2166,Bål,Bålsta,140,timetable+official,,bål,,bål,bål:378,1.00,SE,rail_station,bål@140m
+556,Arlanda central,59.649357,17.928567,740000556,2133,Arnc,Arlanda C,32,timetable+official+geo_name,,arnc,arnc,arnc,arnc:724,1.00,SE,rail_station,arnc@32m
+1270,Ramlösa station,56.023359,12.727951,740001270,2097,Hbgb,Ramlösa,562,timetable+official,yes,hbgb,ram,hbgb,hbgb:590,1.00,SE,rail_station,ram@79m
+161,Kungsbacka station,57.490553,12.079614,740000161,2065,Kb,Kungsbacka,117,timetable+official+geo_name,,kb,kb,kb,kb:550,1.00,SE,rail_station,kb@117m
+7,Norrköping Centralstation,58.59639,16.184393,740000007,2054,Nr,Norrköping C,158,timetable+official+geo_name,,nr,nr,nr,nr:644,1.00,SE,rail_station,nr@158m
+315,Mölndal station,57.65605,12.018859,740000315,2053,Mdn,Mölndal,826,timetable+official,,mdn,,mdn,mdn:796,1.00,SE,rail_station,mdö@769m
+8,Skövde Centralstation,58.390912,13.852688,740000008,2015,Sk,Skövde C,214,timetable+official+geo_name,,sk,sk,sk,sk:224,1.00,SE,rail_station,sk@214m
+1554,Landskrona station,55.879012,12.856617,740001554,1984,Lkö,Landskrona,47,timetable+official+geo_name,,lkö,lkö,lkö,lkö:596,1.00,SE,rail_station,lkö@47m
+9,Linköping Centralstation,58.417119,15.624071,740000009,1973,Lp,Linköping C,18,timetable+official+geo_name,,lp,lp,lp,lp:679,1.00,SE,rail_station,lp@18m
+73651,Bohus,57.864006,12.019564,740001600,1894,Bhs,Bohus,0,timetable+official+geo_name,,bhs,bhs,bhs,bhs:608,1.00,SE,rail_station,bhs@0m
+4,Alvesta station,56.898911,14.55679,740000004,1850,Av,Alvesta,105,timetable+official+geo_name,,av,av,av,av:568,1.00,SE,rail_station,av@105m
+185,Höör station,55.937055,13.541204,740000185,1824,Hö,Höör,129,timetable+official+geo_name,,hö,hö,hö,hö:558,1.00,SE,rail_station,hö@129m
+1564,Älvängen resecentrum,57.957748,12.116696,740001564,1810,Än,Älvängen,701,timetable+official,,än,,än,än:440,1.00,SE,rail_station,än@701m
+28,Ystad station,55.427543,13.825779,740000028,1785,Y,Ystad,28,timetable+official+geo_name,,y,y,y,y:247,1.00,SE,rail_station,y@28m
+759,Solna station,59.366504,18.009571,740000759,1772,So,Solna,117,timetable+official+geo_name,,so,so,so,so:1008,1.00,SE,rail_station,so@117m
+781,Ulriksdal,59.3799,18.001071,740000781,1756,Udl,Ulriksdal,19,timetable+official+geo_name,,udl,udl,udl,udl:1008,1.00,SE,rail_station,udl@19m
+11423,Helenelund,59.409402,17.962018,740000701,1755,Hel,Helenelund,28,timetable+official+geo_name,,hel,hel,hel,hel:1008,1.00,SE,rail_station,hel@28m
+12553,Sollentuna station,59.429645,17.948142,740000758,1755,Sol,Sollentuna,47,timetable+official+geo_name,,sol,sol,sol,sol:1008,1.00,SE,rail_station,sol@47m
+58587,Katrineholm Central (TÅG),58.996655,16.208238,740000166,1754,K,Katrineholm C,56,timetable+official+geo_name,,k,k,k,k:467,1.00,SE,rail_station,k@56m
+703,Häggvik,59.443548,17.933176,740000703,1746,Hgv,Häggvik,46,timetable+official+geo_name,,hgv,hgv,hgv,hgv:1008,1.00,SE,rail_station,hgv@46m
+623,Rotebro,59.476565,17.914091,740000623,1746,R,Rotebro,135,timetable+official+geo_name,,r,r,r,r:1008,1.00,SE,rail_station,r@135m
+718,Norrviken,59.457997,17.924576,740000718,1744,Nvk,Norrviken,152,timetable+official+geo_name,,nvk,nvk,nvk,nvk:1008,1.00,SE,rail_station,nvk@152m
+133,Örebro Centralstation,59.277438,15.210546,740000133,1741,Ör,Örebro C,89,timetable+official+geo_name,,ör,ör,ör,ör:428,1.00,SE,rail_station,ör@89m
+782,Upplands Väsby,59.521641,17.899546,740000782,1731,Upv,Upplands Väsby,130,timetable+official+geo_name,,upv,upv,upv,upv:952,1.00,SE,rail_station,upv@130m
+49,Södertälje hamn station,59.179044,17.64629,740000049,1663,Söd,Södertälje hamn,165,timetable+official+geo_name,,söd,söd,söd,söd:946,1.00,SE,rail_station,söd@165m
+397,Svedala station,55.506943,13.233022,740000397,1645,Sea,Svedala,62,timetable+official+geo_name,,sea,sea,sea,sea:288,1.00,SE,rail_station,sea@62m
+138,Skurup station,55.480082,13.498144,740000138,1644,Srp,Skurup,14,timetable+official+geo_name,,srp,srp,srp,srp:292,1.00,SE,rail_station,srp@14m
+415,Rydsgård station,55.474067,13.588783,740000415,1641,Rdg,Rydsgård,27,timetable+official+geo_name,,rdg,rdg,rdg,rdg:280,1.00,SE,rail_station,rdg@27m
+28024,Svarte station,55.428308,13.717347,740020759,1638,Ste,Svarte,44,timetable+official+geo_name,,ste,ste,ste,ste:284,1.00,SE,rail_station,ste@44m
+5,Uppsala Centralstation,59.857739,17.647666,740000005,1624,U,Uppsala C,60,timetable+official+geo_name,,u,u,u,u:521,1.00,SE,rail_station,u@60m
+1546,Malmö Svågertorp,55.548283,12.991168,740001546,1590,Stp,Svågertorp,175,timetable+official+geo_name,,stp,stp,stp,stp:582,1.00,SE,rail_station,stp@175m
+721,Södertälje centrum station,59.192067,17.627291,740000721,1585,Söc,Södertälje Centrum,119,timetable+official+geo_name,,söc,söc,söc,söc:472,1.00,SE,rail_station,söc@119m
+27087,Oxie station,55.541487,13.096181,740020760,1566,Ox,Oxie,19,timetable+official+geo_name,,ox,ox,ox,ox:284,1.00,SE,rail_station,ox@19m
+40,Herrljunga station,58.078747,13.020134,740000040,1538,Hrc,Herrljunga C,59,timetable+official+geo_name,,hrc,hrc,hrc,hrc:136,1.00,SE,rail_station,hrc@59m
+1601,Surte station,57.824818,12.014143,740001601,1538,Sue,Surte,45,timetable+official+geo_name,,sue,sue,sue,sue:372,1.00,SE,rail_station,sue@45m
+11948,Djursholms Ösby,59.398706,18.05924,740001038,1534,xDjö,Djursholms Ösby,218,geo_name,,,xdjö,,,,SE,rail_station,xdjö@218m
+191,Trollhättan station,58.287772,12.298775,740000191,1512,Thn,Trollhättan,19,timetable+official+geo_name,,thn,thn,thn,thn:406,1.00,SE,rail_station,thn@19m
+72,Enköping station (Enköping),59.644324,17.086745,740000072,1495,Ep,Enköping,111,timetable+official+geo_name,,ep,ep,ep,ep:226,1.00,SE,rail_station,ep@111m
+699,Handen station,59.168195,18.135053,740000699,1485,Hnd,Handen,219,timetable+official+geo_name,,hnd,hnd,hnd,hnd:930,1.00,SE,rail_station,hnd@219m
+692,Farsta strand,59.236656,18.101952,740000692,1484,Fas,Farsta strand,124,timetable+official+geo_name,,fas,fas,fas,fas:988,1.00,SE,rail_station,fas@124m
+262,Arboga Resecentrum,59.396729,15.841553,740000262,1483,Arb,Arboga,77,timetable+official+geo_name,,arb,arb,arb,arb:270,1.00,SE,rail_station,arb@77m
+38337,Öxnered station (tåg),58.359191,12.274529,740000173,1479,Öx,Öxnered,291,timetable+official+geo_name,,öx,öx,öx,öx:364,1.00,SE,rail_station,öx@291m
+81,Nödinge station,57.892768,12.043899,740000081,1460,Nöe,Nödinge,67,timetable+official+geo_name,,nöe,nöe,nöe,nöe:380,1.00,SE,rail_station,nöe@67m
+11129,Mörby,59.392343,18.047453,740020867,1458,xMöb,Mörby,30,geo_name,,,xmöb,,,,SE,rail_station,xmöb@30m
+702,Huddinge station,59.235823,17.977971,740000702,1456,Hu,Huddinge,10,timetable+official+geo_name,,hu,hu,hu,hu:980,1.00,SE,rail_station,hu@10m
+66,Nol station,57.91846,12.061953,740000066,1456,Nol,Nol,120,timetable+official+geo_name,,nol,nol,nol,nol:376,1.00,SE,rail_station,nol@120m
+776,Tumba station,59.19965,17.837078,740000776,1431,Tu,Tumba,76,timetable+official+geo_name,,tu,tu,tu,tu:870,1.00,SE,rail_station,tu@76m
+12036,Västerhaninge,59.12293,18.102915,740000787,1425,Vhe,Västerhaninge,28,timetable+official+geo_name,,vhe,vhe,vhe,vhe:586,1.00,SE,rail_station,vhe@28m
+772,Stuvsta,59.254543,17.99666,740000772,1424,Sta,Stuvsta,33,timetable+official+geo_name,,sta,sta,sta,sta:972,1.00,SE,rail_station,sta@33m
+775,Tullinge,59.205408,17.903804,740000775,1423,Tul,Tullinge,89,timetable+official+geo_name,,tul,tul,tul,tul:980,1.00,SE,rail_station,tul@89m
+55,Södertälje syd station,59.162354,17.643625,740000055,1388,Söö,Södertälje Syd,269,timetable+official+geo_name,,söö|söu,söö,söö,söö:198,1.00,SE,rail_station,söu@159m
+73609,Herrljunga central,58.079057,13.020949,740000040,1388,Hrc,Herrljunga C,0,timetable+official+geo_name,,hrc,hrc,hrc,hrc:296,1.00,SE,rail_station,hrc@0m
+757,Skogås,59.218418,18.154231,740000757,1355,Skg,Skogås,111,timetable+official+geo_name,,skg,skg,skg,skg:748,1.00,SE,rail_station,skg@111m
+774,Trångsund,59.227594,18.131059,740000774,1354,Tåd,Trångsund,32,timetable+official+geo_name,,tåd,tåd,tåd,tåd:748,1.00,SE,rail_station,tåd@32m
+12315,Vega,59.18628,18.1356,740074572,1353,Vga,Vega,60,timetable+official+geo_name,,vga,vga,vga,vga:748,1.00,SE,rail_station,vga@60m
+25314,CPH Airport,55.629429,12.649696,860000858,1342,Dk.cph,Copenhagen Airport,157,geo_name,, (not in TrainStation: zcph),dk.cph,,,,DK,rail_station,dk.cph@157m
+25315,København H,55.672692,12.564631,860000626,1341,Dk.kh,Köpenhamn H,43,geo_only,, (not in TrainStation: zkh),,,,,DK,rail_station,dk.kh@43m
+18,Alingsås station,57.926887,12.531764,740000018,1336,A,Alingsås,25,timetable+official+geo_name,,a,a,a,a:98,1.00,SE,rail_station,a@25m
+23657,Tårnby,55.629746,12.601651,860000857,1309,Dk.tåt,Tårnby,12,geo_name,, (not in TrainStation: ztåt),dk.tåt,,,,DK,rail_station,dk.tåt@12m
+25313,Ørestad,55.628681,12.579547,860000856,1309,Dk.öre,Örestad,37,geo_only,, (not in TrainStation: zöre),,,,,DK,rail_station,dk.öre@37m
+167,Köping Jvstn,59.506768,16.005295,740000167,1304,Kp,Köping,96,timetable+official+geo_name,,kp,kp,kp,kp:164,1.00,SE,rail_station,kp@96m
+705,Jakobsberg station,59.423702,17.832965,740000705,1302,Jkb,Jakobsberg,14,timetable+official+geo_name,,jkb,jkb,jkb,jkb:956,1.00,SE,rail_station,jkb@14m
+706,Jordbro,59.142316,18.126365,740000706,1295,Jbo,Jordbro,15,timetable+official+geo_name,,jbo,jbo,jbo,jbo:628,1.00,SE,rail_station,jbo@15m
+241,Vänersborg central,58.377559,12.318324,740000241,1290,Vg,Vänersborg C,21,timetable+official+geo_name,,vg,vg,vg,vg:210,1.00,SE,rail_station,vg@21m
+939,Dösjebro station,55.823084,13.031853,740000939,1285,Dös,Dösjebro,66,timetable+official+geo_name,,dös,dös,dös,dös:276,1.00,SE,rail_station,dös@66m
+1547,Häljarp station,55.860986,12.91143,740001547,1285,Häp,Häljarp,73,timetable+official+geo_name,,häp,häp,häp,häp:276,1.00,SE,rail_station,häp@73m
+748,Rönninge,59.193594,17.75151,740000748,1268,Rön,Rönninge,42,timetable+official+geo_name,,rön,rön,rön,rön:760,1.00,SE,rail_station,rön@42m
+791,Östertälje,59.183788,17.661441,740000791,1268,Öte,Östertälje,219,timetable+official+geo_name,,öte,öte,öte,öte:760,1.00,SE,rail_station,öte@219m
+1558,Glumslöv station,55.944573,12.813441,740001558,1251,Glv,Glumslöv,77,timetable+official+geo_name,,glv,glv,glv,glv:276,1.00,SE,rail_station,glv@77m
+1557,Rydebäck station,55.965836,12.784114,740001557,1251,Ryä,Rydebäck,35,timetable+official+geo_name,,ryä,ryä,ryä,ryä:276,1.00,SE,rail_station,ryä@35m
+140,Nässjö Resecentrum,57.652625,14.693759,740000140,1248,N,Nässjö C,152,timetable+official+geo_name,,n,n,n,n:150,1.00,SE,rail_station,n@152m
+12604,Barkarby,59.405456,17.863626,740000383,1248,Bkb,Barkarby,3,timetable+official+geo_name,,bkb,bkb,bkb,bkb:964,1.00,SE,rail_station,bkb@3m
+88,Trelleborg C,55.371691,13.160428,740000088,1243,Trg,Trelleborg,49,timetable+official+geo_name,,trg,trg,trg,trg:157,1.00,SE,rail_station,trg@49m
+559,Knivsta station (Knivsta),59.726062,17.787278,740000559,1242,Kn,Knivsta,73,timetable+official+geo_name,,kn,kn,kn,kn:638,1.00,SE,rail_station,kn@73m
+764,Spånga,59.383847,17.897736,740000764,1242,Spå,Spånga,39,timetable+official+geo_name,,spå,spå,spå,spå:964,1.00,SE,rail_station,spå@39m
+70103,Kumla resecentrum,59.126265,15.140177,740000192,1240,Kla,Kumla,149,timetable+official+geo_name,,kla,kla,kla,kla:152,1.00,SE,rail_station,kla@149m
+71077,Södra station,59.269574,15.202722,740000361,1238,Öb,Örebro S,49,timetable+official+geo_name,,öb,öb,öb,öb:150,1.00,SE,rail_station,öb@49m
+710,Kallhäll,59.452387,17.807122,740000710,1237,Khä,Kallhäll,11,timetable+official+geo_name,,khä,khä,khä,khä:796,1.00,SE,rail_station,khä@11m
+1614,Östra Grevie station,55.467061,13.133416,740001614,1237,Ög,Östra Grevie,303,timetable+official,,ög,,ög,ög:300,1.00,SE,rail_station,ög@303m
+25318,København Nørreport,55.684016,12.572808,860000646,1236,Dk.kn,Nörreport,42,geo_only,, (not in TrainStation: zkn),,,,,DK,rail_station,dk.kn@42m
+25317,København Østerport,55.692882,12.588034,860000650,1236,,,,geo_only,, (not in TrainStation: zkk),,,,,DK,needs_review,dk.kk@981m
+1615,Västra Ingelstad station,55.490259,13.108327,740001615,1235,Vid,Västra Ingelstad,183,timetable+official+geo_name,,vid,vid,vid,vid:302,1.00,SE,rail_station,vid@183m
+183,Töreboda resecentrum (tåg),58.706108,14.128479,740000183,1232,T,Töreboda,187,timetable+official,,t,,t,t:142,1.00,SE,rail_station,t@187m
+200,Kristianstad Centralstation,56.031875,14.151364,740000200,1215,Cr,Kristianstad C,51,timetable+official+geo_name,,cr,cr,cr,cr:312,1.00,SE,rail_station,cr@51m
+9179,Stocksund,59.385103,18.043924,740021643,1208,xSsu,Stocksund,24,geo_name,,,xssu,,,,SE,rail_station,xssu@24m
+11951,Universitetet,59.365088,18.050983,740024787,1208,xUnv,Universitetet,38,geo_name,,,xunv,,,,SE,rail_station,xunv@38m
+11965,Stockholms östra,59.3468,18.070054,740020750,1208,xÖst,Stockholms östra,24,geo_name,,,xöst,,,,SE,rail_station,xöst@24m
+194,Laxå jvstn,58.989116,14.616945,740000194,1196,Lå,Laxå,136,timetable+official+geo_name,,lå,lå,lå,lå:148,1.00,SE,rail_station,lå@136m
+335,Kållered station,57.610809,12.048858,740000335,1188,Krd,Kållered,542,timetable+official,,krd,,krd,krd:476,1.00,SE,rail_station,krd@542m
+25304,Anneberg,57.538458,12.100757,740000285,1187,Ag,Anneberg,19,timetable+official+geo_name,,ag,ag,ag,ag:476,1.00,SE,rail_station,ag@19m
+557,Lindome station,57.575967,12.078717,740000557,1187,Ldo,Lindome,7,timetable+official+geo_name,,ldo,ldo,ldo,ldo:476,1.00,SE,rail_station,ldo@7m
+1144,Kungsbacka Hede station,57.513401,12.083344,740001144,1186,Khe,Hede,101,timetable+official+geo_name,,khe,khe,khe,khe:476,1.00,SE,rail_station,khe@101m
+80,Halmstad Centralstation,56.669271,12.864841,740000080,1172,Hd,Halmstad C,37,timetable+official+geo_name,,hd,hd,hd,hd:312,1.00,SE,rail_station,hd@37m
+73642,Liseberg,57.699504,11.996704,740001230,1155,Lis,Liseberg,0,timetable+official+geo_name,,lis,lis,lis,lis:540,1.00,SE,rail_station,lis@0m
+11952,Roslags Näsby,59.435218,18.057396,740000740,1131,xRnb,Roslags Näsby,62,geo_name,,,xrnb,,,,SE,rail_station,xrnb@62m
+11950,Enebyberg,59.425888,18.051219,740024372,1131,xEnb,Enebyberg,7,geo_name,,,xenb,,,,SE,rail_station,xenb@7m
+11130,Djursholms Ekeby,59.412892,18.057667,740020870,1131,xDje,Djursholms Ekeby,12,geo_name,,,xdje,,,,SE,rail_station,xdje@12m
+11949,Bråvallavägen,59.405588,18.060602,740024795,1131,xBvv,Bråvallavägen,13,geo_name,,,xbvv,,,,SE,rail_station,xbvv@13m
+37324,Uddevalla central (tåg),58.354192,11.923268,740000119,1121,Uv,Uddevalla C,10,timetable+official+geo_name,,uv,uv,uv,uv:181,1.00,SE,rail_station,uv@10m
+70,Karlstad Centralstation,59.377949,13.497998,740000070,1109,Ksc,Karlstad C,59,timetable+official+geo_name,,ksc,ksc,ksc,ksc:417,1.00,SE,rail_station,ksc@59m
+952,Stehag station,55.900309,13.393174,740000952,1104,Sg,Stehag,16,timetable+official+geo_name,,sg,sg,sg,sg:290,1.00,SE,rail_station,sg@16m
+834,Stångby station,55.751113,13.200171,740000834,1102,Stb,Stångby,173,timetable+official+geo_name,,stb,stb,stb,stb:290,1.00,SE,rail_station,stb@173m
+961,Örtofta station,55.778652,13.243736,740000961,1102,Ö,Örtofta,66,timetable+official+geo_name,,ö,ö,ö,ö:290,1.00,SE,rail_station,ö@66m
+1591,Lödöse södra station,58.01496,12.163454,740001591,1061,Les,Lödöse Södra,96,timetable+official+geo_name,,les,les,les,les:280,1.00,SE,rail_station,les@96m
+284,Kungsängen,59.478001,17.752902,740000284,1060,Kän,Kungsängen,14,timetable+official+geo_name,,kän,kän,kän,kän:498,1.00,SE,rail_station,kän@14m
+71218,Uppsala Centralstation Tåg,59.858592,17.647053,740000005,1048,U,Uppsala C,121,timetable+official+geo_name,,u,u,u,u:248,1.00,SE,rail_station,u@121m
+60,Falköping resecentrum,58.175968,13.553595,740000060,1048,F,Falköping C,96,timetable+official+geo_name,,f|fkc,f,f,f:96,1.00,SE,rail_station,f@96m
+12241,Södertälje syd,59.162404,17.645478,740000055,1028,Söö,Södertälje Syd,173,timetable+official+geo_name,,söö|söu,söö,söö,söö:448 söu:192,0.70,SE,rail_station,söu@113m
+71471,Alingsås,57.926947,12.532367,740000018,1016,A,Alingsås,12,timetable+official+geo_name,,a,a,a,a:191,1.00,SE,rail_station,a@12m
+71661,Vårgårda Station,58.031272,12.810553,740000569,982,Vgå,Vårgårda,78,timetable+official+geo_name,,vgå,vgå,vgå,vgå:88,1.00,SE,rail_station,vgå@78m
+11,Teckomatorp station,55.870823,13.08574,740000011,970,Tp,Teckomatorp,203,timetable+official+geo_name,,tp,tp,tp,tp:289,1.00,SE,rail_station,tp@203m
+27,Märsta,59.627523,17.861107,740000027,949,Mr,Märsta,33,timetable+official+geo_name,,mr,mr,mr,mr:444,1.00,SE,rail_station,mr@33m
+12603,Barkarby station,59.403991,17.86661,740000383,923,Bkb,Barkarby,232,official+geo_name,,bkb,bkb,,,,SE,rail_station,bkb@232m
+74020,Varbergs central,57.112654,12.249593,740000110,913,Vbc,Varberg C,0,timetable+official+geo_name,,vbc,vbc,vbc,vbc:176,1.00,SE,rail_station,vbc@0m
+71463,Vara,58.260546,12.95188,740000016,905,Vaa,Vara,51,timetable+official+geo_name,,vaa,vaa,vaa,vaa:172,1.00,SE,rail_station,vaa@51m
+1611,Tjörnarp station,56.00023,13.629966,740001611,904,Tö,Tjörnarp,159,timetable+official+geo_name,,tö,tö,tö,tö:170,1.00,SE,rail_station,tö@159m
+1334,Sösdala station,56.036488,13.68043,740001334,904,Söla,Sösdala,23,timetable+official+geo_name,,söla,söla,söla,söla:170,1.00,SE,rail_station,söla@23m
+323,Tomelilla station,55.546609,13.948636,740000323,891,Tli,Tomelilla,108,timetable+official+geo_name,,tli,tli,tli,tli:200,1.00,SE,rail_station,tli@108m
+946,Köpingebro station,55.456284,13.934278,740000946,888,Köp,Köpingebro,75,timetable+official+geo_name,,köp,köp,köp,köp:202,1.00,SE,rail_station,köp@75m
+179,Vinslöv station,56.104928,13.916541,740000179,872,Vöv,Vinslöv,1,timetable+official+geo_name,,vöv,vöv,vöv,vöv:231,1.00,SE,rail_station,vöv@1m
+1606,Önnestad station,56.060572,14.029126,740001606,872,Önd,Önnestad,1026,timetable+official,,önd,,önd,önd:232,1.00,SE,rail_station,önd@1026m
+155,Åstorp station,56.134302,12.949692,740000155,865,Åp,Åstorp,142,timetable+official+geo_name,,åp,åp,åp,åp:306,1.00,SE,rail_station,åp@142m
+210,Gävle Centralstation,60.67604,17.151052,740000210,860,Gä,Gävle C,38,timetable+official+geo_name,,gä,gä,gä,gä:194,1.00,SE,rail_station,gä@38m
+742,Gärsnäs station,55.546221,14.181036,740000742,854,Gss,Gärsnäs,45,timetable+official+geo_name,,gss,gss,gss,gss:198,1.00,SE,rail_station,gss@45m
+169,Simrishamn station,55.554461,14.352913,740000169,854,Si,Simrishamn,148,timetable+official+geo_name,,si,si,si,si:99,1.00,SE,rail_station,si@148m
+64,Ängelholm station,56.245732,12.854202,740000064,835,Ä,Ängelholm,24,timetable+official+geo_name,,ä,ä,ä,ä:388,1.00,SE,rail_station,ä@24m
+1234,Lunnarp station,55.540966,14.043374,740001234,806,Lup,Lunnarp,83,timetable+official+geo_name,,lup,lup,lup,lup:150,1.00,SE,rail_station,lup@83m
+1307,Smedstorp station,55.549644,14.116718,740001307,806,Smp,Smedstorp,54,timetable+official+geo_name,,smp,smp,smp,smp:150,1.00,SE,rail_station,smp@54m
+31076,Falköping resecentrum (tåg),58.175985,13.551945,740000060,799,F,Falköping C,27,timetable+official,,f|fkc,,f,f:321,1.00,SE,rail_station,f@27m
+739,Rosersberg,59.583033,17.880233,740000739,798,Rs,Rosersberg,149,timetable+official+geo_name,,rs,rs,rs,rs:568,1.00,SE,rail_station,rs@149m
+250,Växjö station,56.877051,14.805993,740000250,778,Vö,Växjö,59,timetable+official+geo_name,,vö,vö,vö,vö:274,1.00,SE,rail_station,vö@59m
+73628,Borås central,57.720332,12.931025,740000300,770,Bsc,Borås C,0,timetable+official+geo_name,,bsc,bsc,bsc,bsc:138,1.00,SE,rail_station,bsc@0m
+71307,Skövde C,58.389461,13.852143,740000008,765,Sk,Skövde C,50,timetable+official+geo_name,,sk,sk,sk,sk:200,1.00,SE,rail_station,sk@50m
+386,Vedum station,58.169198,12.999195,740000386,760,Ved,Vedum,38,timetable+official+geo_name,,ved,ved,ved,ved:164,1.00,SE,rail_station,ved@38m
+203,Floda station,57.809673,12.361202,740000203,730,Fd,Floda,40,timetable+official+geo_name,,fd,fd,fd,fd:237,1.00,SE,rail_station,fd@40m
+73635,Lerum,57.769402,12.272804,740000540,727,Lr,Lerum,0,timetable+official+geo_name,,lr,lr,lr,lr:300,1.00,SE,rail_station,lr@0m
+206,Kil resecentrum,59.504805,13.316746,740000206,725,Kil,Kil,49,timetable+official+geo_name,,kil,kil,kil,kil:494,1.00,SE,rail_station,kil@49m
+12222,Krigslida,59.109076,18.06596,740030026,724,Kda,Krigslida,30,timetable+official+geo_name,,kda,kda,kda,kda:304,1.00,SE,rail_station,kda@30m
+12223,Tungelsta,59.102499,18.045256,740000777,724,Ts,Tungelsta,81,timetable+official+geo_name,,ts,ts,ts,ts:304,1.00,SE,rail_station,ts@81m
+11931,Hemfosa,59.068894,17.976549,740030017,717,Hfa,Hemfosa,12,timetable+official+geo_name,,hfa,hfa,hfa,hfa:304,1.00,SE,rail_station,hfa@12m
+9665,Segersäng,59.028296,17.926213,740030043,717,Ssä,Segersäng,144,timetable+official+geo_name,,ssä,ssä,ssä,ssä:304,1.00,SE,rail_station,ssä@144m
+73639,Ösmo,58.984514,17.902644,740000790,717,Öso,Ösmo,0,timetable+official+geo_name,,öso,öso,öso,öso:304,1.00,SE,rail_station,öso@0m
+9666,Nynäsgård,58.913462,17.942513,740030036,717,Ngd,Nynäsgård,31,timetable+official+geo_name,,ngd,ngd,ngd,ngd:304,1.00,SE,rail_station,ngd@31m
+9667,Gröndalsviken,58.898924,17.93188,740046004,717,Gdv,Gröndalsviken,38,timetable+official+geo_name,,gdv,gdv,gdv,gdv:304,1.00,SE,rail_station,gdv@38m
+727,Nynäshamn,58.900964,17.95089,740000727,717,Nyc,Nynäshamn,108,timetable+official+geo_name,,nyc,nyc,nyc,nyc:152,1.00,SE,rail_station,nyc@108m
+132,Partille station,57.741066,12.103657,740000132,717,P,Partille,72,timetable+official+geo_name,,p,p,p,p:292,1.00,SE,rail_station,p@72m
+1315,Stenkullen station,57.791325,12.313438,740001315,717,Sn,Stenkullen,84,timetable+official+geo_name,,sn,sn,sn,sn:292,1.00,SE,rail_station,sn@84m
+1012,Aspen station,57.754462,12.240324,740001012,709,Apn,Aspen,12,timetable+official+geo_name,,apn,apn,apn,apn:292,1.00,SE,rail_station,apn@12m
+45,Älmhult station,56.550769,14.137583,740000045,694,Äh,Älmhult,102,timetable+official+geo_name,,äh,äh,äh,äh:264,1.00,SE,rail_station,äh@102m
+1579,Falkenberg Station,56.919583,12.507361,740001579,684,Fabp,Falkenberg,83,timetable+official+geo_name,,fabp,fabp,fabp,fabp:232,1.00,SE,rail_station,fabp@83m
+687,Bro,59.512244,17.633251,740000687,667,Bro,Bro,18,timetable+official+geo_name,,bro,bro,bro,bro:336,1.00,SE,rail_station,bro@18m
+301,Tierp station (Tierp),60.345734,17.512583,740000301,651,Tip,Tierp,27,timetable+official+geo_name,,tip,tip,tip,tip:360,1.00,SE,rail_station,tip@27m
+222,Kristinehamn resecentrum,59.316542,14.108061,740000222,629,Khn,Kristinehamn,109,timetable+official+geo_name,,khn,khn,khn,khn:152 ksc:2,0.99,SE,rail_station,khn@109m
+38830,Borås central,57.720651,12.931376,740000300,615,Bsc,Borås C,41,timetable+official+geo_name,,bsc,bsc,bsc,bsc:32,1.00,SE,rail_station,bsc@41m
+130,Sundsvall Centralstation,62.387237,17.316055,740000130,611,Suc,Sundsvall C,95,timetable+official+geo_name,,suc,suc,suc,suc:214,1.00,SE,rail_station,suc@95m
+1603,Båstad station,56.431787,12.906894,740001603,605,Bån,Båstad,148,timetable+official+geo_name,,bån,bån,bån,bån:208,1.00,SE,rail_station,bån@148m
+924,Stenstorp station,58.273992,13.715212,740000924,605,Ss,Stenstorp,191,timetable+official+geo_name,,ss,ss,ss,ss:246,1.00,SE,rail_station,ss@191m
+73622,Gävle central,60.676086,17.15175,740000210,573,Gä,Gävle C,0,timetable+official+geo_name,,gä,gä,gä,gä:241,1.00,SE,rail_station,gä@0m
+10512,Ormsta,59.546354,18.079666,740020112,569,xOta,Ormsta,20,geo_name,,,xota,,,,SE,rail_station,xota@20m
+783,Vallentuna,59.533752,18.079842,740000783,569,xVlt,Vallentuna,47,geo_name,,,xvlt,,,,SE,rail_station,xvlt@47m
+11862,Bällsta,59.523716,18.071743,740024800,569,xBäl,Bällsta,93,geo_name,,,xbäl,,,,SE,rail_station,xbäl@93m
+10693,Kragstalund,59.510263,18.075736,740020873,569,xKgl,Kragstalund,5,geo_name,,,xkgl,,,,SE,rail_station,xkgl@5m
+11028,Täby kyrkby,59.49299,18.06622,740001153,569,xTäb,Täby kyrkby,7,geo_name,,,xtäb,,,,SE,rail_station,xtäb@7m
+10692,Visinge,59.462733,18.063211,740024370,569,xVis,Visinge,20,geo_name,,,xvis,,,,SE,rail_station,xvis@20m
+13058,Ensta,59.451945,18.063619,740024799,569,xEsa,Ensta,12,geo_name,,,xesa,,,,SE,rail_station,xesa@12m
+12318,Tibble,59.442138,18.062573,740020872,569,xTbl,Tibble,13,geo_name,,,xtbl,,,,SE,rail_station,xtbl@13m
+11942,Åkersberga,59.479001,18.299775,740000788,562,xÅbg,Åkersberga,36,geo_name,,,xåbg,,,,SE,rail_station,xåbg@36m
+11940,Åkers Runö,59.480647,18.270416,740023174,562,xÅru,Åkers Runö,9,geo_name,,,xåru,,,,SE,rail_station,xåru@9m
+11941,Täljö,59.473224,18.235397,740024805,562,xTäl,Täljö,6,geo_name,,,xtäl,,,,SE,rail_station,xtäl@6m
+11945,Rydbo,59.465407,18.185861,740020871,562,xRdb,Rydbo,61,geo_name,,,xrdb,,,,SE,rail_station,xrdb@61m
+12789,Arninge,59.458864,18.141348,740020656,562,xAre,Arninge,32,geo_name,,,xare,,,,SE,rail_station,xare@32m
+11944,Hägernäs,59.450916,18.125228,740020192,562,xHgä,Hägernäs,23,geo_name,,,xhgä,,,,SE,rail_station,xhgä@23m
+11947,Viggbyholm,59.449255,18.104215,740020110,562,xVbm,Viggbyholm,5,geo_name,,,xvbm,,,,SE,rail_station,xvbm@5m
+11946,Galoppfältet,59.446904,18.08516,740024798,562,xGpf,Galoppfältet,42,geo_name,,,xgpf,,,,SE,rail_station,xgpf@42m
+12142,Täby centrum,59.444335,18.07463,740000779,562,xTäc,Täby Centrum,9,geo_name,,,xtäc,,,,SE,rail_station,xtäc@9m
+245,Ljung station,57.986749,13.053379,740000245,551,Lju,Ljung,33,timetable+official+geo_name,,lju,lju,lju,lju:112,1.00,SE,rail_station,lju@33m
+143,Borgstena station,57.883204,13.015123,740000143,551,Boa,Borgstena,31,timetable+official+geo_name,,boa,boa,boa,boa:112,1.00,SE,rail_station,boa@31m
+109,Fristad station,57.827087,13.008897,740000109,551,Fra,Fristad,41,timetable+official+geo_name,,fra,fra,fra,fra:112,1.00,SE,rail_station,fra@41m
+1426,Knalleland station,57.733727,12.942556,740001426,551,Knl,Knalleland,37,timetable+official+geo_name,,knl,knl,knl,knl:112,1.00,SE,rail_station,knl@37m
+96,Emmaboda station,56.629871,15.535141,740000096,539,Em,Emmaboda,15,timetable+official+geo_name,,em,em,em,em:240,1.00,SE,rail_station,em@15m
+71462,Lidköping,58.504649,13.163714,740000148,538,Lkp,Lidköping,85,timetable+official+geo_name,,lkp,lkp,lkp,lkp:84,1.00,SE,rail_station,lkp@85m
+73616,Nässjö central,57.651359,14.694735,740000140,537,N,Nässjö C,0,timetable+official+geo_name,,n,n,n,n:311,1.00,SE,rail_station,n@0m
+52,Värnamo Central,57.186075,14.036212,740000052,533,Väc,Värnamo C,36,timetable+official+geo_name,,väc,väc,väc,väc:152,1.00,SE,rail_station,väc@36m
+1261,Norsesund station,57.861834,12.439023,740001261,531,Ns,Norsesund,56,timetable+official+geo_name,,ns,ns,ns,ns:154,1.00,SE,rail_station,ns@56m
+1387,Västra Bodarna station,57.887973,12.47435,740001387,531,Vbd,Västra Bodarne,48,timetable+official+geo_name,,vbd,vbd,vbd,vbd:154,1.00,SE,rail_station,vbd@48m
+28878,Lomma station,55.674346,13.074675,740013359,522,Lma,Lomma,373,timetable+official,,lma,,lma,lma:312,1.00,SE,rail_station,lma@373m
+1011,Aspedalen station,57.762506,12.258543,740001011,522,Asd,Aspedalen,5,timetable+official+geo_name,,asd,asd,asd,asd:130,1.00,SE,rail_station,asd@5m
+35171,Jonsered station,57.749894,12.173787,740015675,522,Jv,Jonsered,11,timetable+official+geo_name,,jv,jv,jv,jv:130,1.00,SE,rail_station,jv@11m
+73645,Göteborg Sävenäs,57.724729,12.018618,740001330,517,Gsv,Göteborg Sävenäs,0,timetable+official+geo_name,,gsv,gsv,gsv,gsv:130,1.00,SE,rail_station,gsv@0m
+58589,Gnesta Järnvägsstation,59.048539,17.312684,740000694,513,Gn,Gnesta,9,timetable+official+geo_name,,gn,gn,gn,gn:196,1.00,SE,rail_station,gn@9m
+59150,Arlanda södra,59.64682,17.928329,740000492,512,Arns,Arlanda S,0,official+geo_name,,arns,arns,,,,SE,rail_station,arns@0m
+59152,Arlanda norra,59.651522,17.929839,740000708,512,Arnn,Arlanda N,0,official+geo_name,,arnn,arnn,,,,SE,rail_station,arnn@0m
+71678,Eskilstuna C,59.369113,16.506033,740000170,510,Et,Eskilstuna C,45,timetable+official+geo_name,,et,et,et,et:348,1.00,SE,rail_station,et@45m
+90,Jönköping Centralstation,57.784285,14.164131,740000090,507,Jö,Jönköping C,33,timetable+official+geo_name,,jö,jö,jö,jö:284,1.00,SE,rail_station,jö@33m
+14,Stenungsunds station,58.071929,11.823338,740000014,506,Snu,Stenungsund,117,timetable+official,,snu,,snu,snu:70,1.00,SE,rail_station,snu@117m
+159,Viskafors station,57.629287,12.845572,740000159,501,Vfo,Viskafors,27,timetable+official+geo_name,,vfo,vfo,vfo,vfo:100,1.00,SE,rail_station,vfo@27m
+353,Fritsla station,57.55833,12.789965,740000353,501,Frl,Fritsla,66,timetable+official+geo_name,,frl,frl,frl,frl:100,1.00,SE,rail_station,frl@66m
+553,Kinna resecentrum,57.505793,12.697136,740000553,501,Kin,Kinna,25,timetable+official+geo_name,,kin,kin,kin,kin:100,1.00,SE,rail_station,kin@25m
+286,Assberg station,57.494454,12.668828,740000286,501,Asb,Assberg,18,timetable+official+geo_name,,asb,asb,asb,asb:100,1.00,SE,rail_station,asb@18m
+34408,Skene station tåg,57.488381,12.649509,740000314,501,See,Skene,7,timetable+official+geo_name,,see,see,see,see:98,1.00,SE,rail_station,see@7m
+934,Billeberga station,55.883761,12.995391,740000934,488,Bib,Billeberga,29,timetable+official+geo_name,,bib,bib,bib,bib:152,1.00,SE,rail_station,bib@29m
+1556,Tågarp station,55.926726,12.9511,740001556,488,Tgp,Tågarp,244,timetable+official+geo_name,,tgp,tgp,tgp,tgp:152,1.00,SE,rail_station,tgp@244m
+25453,Vallåkra station,55.963798,12.861684,740016940,488,Våk,Vallåkra,34,timetable+official+geo_name,,våk,våk,våk,våk:152,1.00,SE,rail_station,våk@34m
+26191,Furulund station,55.775847,13.095824,740016624,487,Fud,Furulund,120,timetable+official+geo_name,,fud,fud,fud,fud:312,1.00,SE,rail_station,fud@120m
+107,Grästorp resecentrum,58.334619,12.684733,740000107,487,Gop,Grästorp,61,timetable+official+geo_name,,gop,gop,gop,gop:88,1.00,SE,rail_station,gop@61m
+214,Sala Resecentrum,59.924961,16.605446,740000214,479,Sl,Sala,97,timetable+official+geo_name,,sl,sl,sl,sl:232,1.00,SE,rail_station,sl@97m
+1604,Åsa station,57.363476,12.135283,740001604,472,Åsa,Åsa,92,timetable+official+geo_name,,åsa,åsa,åsa,åsa:176,1.00,SE,rail_station,åsa@92m
+339,Berghem station,57.46742,12.598706,740000339,466,Bgm,Berghem,47,timetable+official+geo_name,,bgm,bgm,bgm,bgm:96,1.00,SE,rail_station,bgm@47m
+981,Björketorps station,57.427508,12.523756,740000981,466,Bjo,Björketorp,48,timetable+official,,bjo,,bjo,bjo:96,1.00,SE,rail_station,bjo@48m
+34415,Horred station (tåg),57.353245,12.477171,740000402,466,Hre,Horred,60,timetable+official+geo_name,,hre,hre,hre,hre:96,1.00,SE,rail_station,hre@60m
+363,Veddige station,57.267646,12.336733,740000363,466,Vdi,Veddige,107,timetable+official+geo_name,,vdi,vdi,vdi,vdi:96,1.00,SE,rail_station,vdi@107m
+271,Derome,57.230675,12.31869,740000271,464,Dre,Derome,89,timetable+official+geo_name,,dre,dre,dre,dre:96,1.00,SE,rail_station,dre@89m
+225,Tofta station,57.17354,12.300663,740000225,464,Tof,Tofta,27,timetable+official+geo_name,,tof,tof,tof,tof:96,1.00,SE,rail_station,tof@27m
+189,Nybro station,56.742387,15.908042,740000189,461,Nyb,Nybro,56,timetable+official+geo_name,,nyb,nyb,nyb,nyb:200,1.00,SE,rail_station,nyb@56m
+12020,Österskär,59.460755,18.311586,740001303,459,xÖsk,Österskär,71,geo_name,,,xösk,,,,SE,rail_station,xösk@71m
+11943,Tunagård,59.468753,18.307305,740024804,459,xTug,Tunagård,6,geo_name,,,xtug,,,,SE,rail_station,xtug@6m
+1555,Gantofta station,55.99036,12.805109,740001555,453,Gan,Gantofta,283,timetable+official+geo_name,,gan,gan,gan,gan:152,1.00,SE,rail_station,gan@283m
+58751,Svalöv station,55.911952,13.109591,740012207,445,Sal,Svalöv,183,timetable+official+geo_name,,sal,sal,sal,sal:138,1.00,SE,rail_station,sal@183m
+1480,Kågeröd station,55.998623,13.083465,740001480,445,Kd,Kågeröd,327,timetable+official,,kd,,kd,kd:138,1.00,SE,rail_station,kd@327m
+935,Billesholm station,56.056299,12.976951,740000935,445,Bih,Billesholm,14,timetable+official+geo_name,,bih,bih,bih,bih:138,1.00,SE,rail_station,bih@14m
+98,Ljungskile tåg,58.224414,11.920309,740000098,443,Lj,Ljungskile,57,timetable+official+geo_name,,lj,lj,lj,lj:140,1.00,SE,rail_station,lj@57m
+73629,Svenshögen,58.144717,11.936141,740000320,442,Svg,Svenshögen,0,timetable+official+geo_name,,svg,svg,svg,svg:140,1.00,SE,rail_station,svg@0m
+1486,Malmö Persborg,55.580705,13.028996,740001486,439,Mpb,Persborg,25,timetable+official+geo_name,,mpb,mpb,mpb,mpb:262,1.00,SE,rail_station,mpb@25m
+1621,Malmö Rosengård station,55.589438,13.031727,740001621,439,Rog,Rosengård,77,timetable+official+geo_name,,rog,rog,rog,rog:262,1.00,SE,rail_station,rog@77m
+37387,Uddevalla östra,58.351125,11.94494,740020037,438,Uö,Uddevalla Ö,86,timetable+official+geo_name,,uö,uö,uö,uö:140,1.00,SE,rail_station,uö@86m
+154,Söderhamn resecentrum,61.298983,17.033454,740000154,435,Shv,Söderhamn,90,timetable+official+geo_name,,shv,shv,shv,shv:160,1.00,SE,rail_station,shv@90m
+187,Hudiksvalls station,61.724895,17.10843,740000187,435,Hkl,Hudiksvall,47,timetable+official,,hkl,,hkl,hkl:160,1.00,SE,rail_station,hkl@47m
+59221,Östervärn,55.606815,13.03356,740001483,433,Övn,Östervärn,0,timetable+official+geo_name,,övn,övn,övn,övn:262,1.00,SE,rail_station,övn@0m
+71470,Vårgårda,58.03116,12.810376,740000569,431,Vgå,Vårgårda,66,timetable+official+geo_name,,vgå,vgå,vgå,vgå:148,1.00,SE,rail_station,vgå@66m
+511,Hovmantorp station,56.785779,15.142511,740000511,430,Hvp,Hovmantorp,185,timetable+official+geo_name,,hvp,hvp,hvp,hvp:152,1.00,SE,rail_station,hvp@185m
+235,Lessebo station,56.749735,15.259642,740000235,430,Lo,Lessebo,114,timetable+official+geo_name,,lo,lo,lo,lo:152,1.00,SE,rail_station,lo@114m
+71310,Floby,58.139164,13.334869,740000036,427,Fby,Floby,162,timetable+official+geo_name,,fby,fby,fby,fby:140,1.00,SE,rail_station,fby@162m
+34049,Mariestad resecentrum (tåg),58.711338,13.825594,740000216,421,Mst,Mariestad,10,timetable+official,,mst,,mst,mst:64,1.00,SE,rail_station,mst@10m
+110,Varberg bussterminal,57.109551,12.250791,740000110,420,Vbc,Varberg C,353,timetable+official,,vbc,,vbc,vbc:152,1.00,SE,rail_station,vbc@353m
+1616,Marieholm station,55.864837,13.156878,740001616,419,Mar,Marieholm,68,timetable+official+geo_name,,mar,mar,mar,mar:152,1.00,SE,rail_station,mar@68m
+585,Ytterby station,57.862615,11.918143,740000585,407,Yb,Ytterby,54,official+geo_name,,yb,yb,,,,SE,rail_station,yb@54m
+11962,Näsbypark,59.430306,18.095616,740001052,403,xNbp,Näsbypark,19,geo_name,,,xnbp,,,,SE,rail_station,xnbp@19m
+11964,Näsby allé,59.427396,18.085667,740020869,403,xNbe,Näsbyallé,29,geo_only,,,,,,,SE,rail_station,xnbe@29m
+11963,Lahäll,59.424205,18.074266,740024371,403,xLhl,Lahäll,21,geo_name,,,xlhl,,,,SE,rail_station,xlhl@21m
+11960,Altorp,59.410938,18.072904,740020868,403,xAlp,Altorp,7,geo_name,,,xalp,,,,SE,rail_station,xalp@7m
+11961,Östberga,59.404227,18.073953,740024797,403,xÖga,Östberga,27,geo_name,,,xöga,,,,SE,rail_station,xöga@27m
+11959,Vendevägen,59.399947,18.067978,740024796,403,xVev,Vendevägen,20,geo_name,,,xvev,,,,SE,rail_station,xvev@20m
+221,Arvika station,59.653635,12.591126,740000221,403,Ar,Arvika,18,timetable+official+geo_name,,ar,ar,ar,ar:144,1.00,SE,rail_station,ar@18m
+456,Kode station,57.944145,11.850757,740000456,403,Kde,Kode,37,official+geo_name,,kde,kde,,,,SE,rail_station,kde@37m
+859,Stora Höga station,58.019246,11.835804,740000859,403,Sth,Stora Höga,63,official+geo_name,,sth,sth,,,,SE,rail_station,sth@63m
+295,Osby station,56.380586,13.995503,740000295,402,O,Osby,67,timetable+official+geo_name,,o,o,o,o:232,1.00,SE,rail_station,o@67m
+12,Vargön station,58.359409,12.391888,740000012,402,Vag,Vargön,57,timetable+official+geo_name,,vag,vag,vag,vag:80,1.00,SE,rail_station,vag@57m
+1054,Framnäs city,58.508274,13.147076,740001054,400,Fc,Framnäs city,64,timetable+official+geo_name,,fc,fc,fc,fc:80,1.00,SE,rail_station,fc@64m
+442,Järpås station,58.379044,12.97034,740000442,396,Jps,Järpås,24,timetable+official+geo_name,,jps,jps,jps,jps:80,1.00,SE,rail_station,jps@24m
+76,Åmål station,59.046329,12.698745,740000076,395,Ål,Åmål,26,timetable+official+geo_name,,ål,ål,ål,ål:146,1.00,SE,rail_station,ål@26m
+1154,Lindholmen,59.583546,18.108922,740001154,391,xLdm,Lindholmen,85,geo_name,,,xldm,,,,SE,rail_station,xldm@85m
+12806,Vedalund,59.568242,18.098429,740077793,391,xVdl,Vedalund,5,geo_name,,,xvdl,,,,SE,rail_station,xvdl@5m
+12335,Molnby,59.557211,18.084958,740024801,391,xMnb,Molnby,27,geo_name,,,xmnb,,,,SE,rail_station,xmnb@27m
+23,Säffle resecentrum,59.131898,12.916517,740000023,390,Sfl,Säffle,53,timetable+official+geo_name,,sfl,sfl,sfl,sfl:124,1.00,SE,rail_station,sfl@53m
+20,Kalmar Centralstation,56.661555,16.359288,740000020,389,Kac,Kalmar C,69,timetable+official+geo_name,,kac,kac,kac,kac:68,1.00,SE,rail_station,kac@69m
+1610,Kvidinge station,56.137171,13.045386,740001610,383,Kvi,Kvidinge,47,timetable+official+geo_name,,kvi,kvi,kvi,kvi:232,1.00,SE,rail_station,kvi@47m
+121,Klippan station,56.130959,13.128028,740000121,383,Kl,Klippan,128,timetable+official+geo_name,,kl,kl,kl,kl:232,1.00,SE,rail_station,kl@128m
+22,Perstorp station,56.136456,13.397091,740000022,383,Pt,Perstorp,93,timetable+official+geo_name,,pt,pt,pt,pt:232,1.00,SE,rail_station,pt@93m
+290,Tyringe station,56.15959,13.599035,740000290,383,Ty,Tyringe,39,timetable+official+geo_name,,ty,ty,ty,ty:232,1.00,SE,rail_station,ty@39m
+58,Laholm Järnvägsstationen,56.501928,12.999294,740000058,382,Laov,Laholm,85,timetable+official+geo_name,,laov,laov,laov,laov:152,1.00,SE,rail_station,laov@85m
+427,Hällekis,58.630145,13.433829,740000427,373,Hlk,Hällekis,48,timetable+official+geo_name,,hlk,hlk,hlk,hlk:88,1.00,SE,rail_station,hlk@48m
+478,Källby station,58.510806,13.302215,740000478,373,Kll,Källby,33,timetable+official+geo_name,,kll,kll,kll,kll:88,1.00,SE,rail_station,kll@33m
+709,Järna,59.093459,17.567198,740000709,354,Jn,Järna,79,timetable+official+geo_name,,jn,jn,jn,jn:192,1.00,SE,rail_station,jn@79m
+1544,Kattarp station,56.144698,12.778113,740001544,353,Ka,Kattarp,437,timetable+official,,ka,,ka,ka:240,1.00,SE,rail_station,ka@437m
+11199,Igelboda,59.289995,18.275324,740020876,347,xIgb,Igelboda,9,geo_name,,,xigb,,söö:4,1.00,SE,rail_station,xigb@9m
+39,Mellerud station,58.70192,12.464314,740000039,343,Ml,Mellerud,29,timetable+official+geo_name,,ml,ml,ml,ml:88,1.00,SE,rail_station,ml@29m
+73636,Huskvarna,57.782366,14.264765,740000620,342,Hka,Huskvarna,0,timetable+official+geo_name,,hka,hka,hka,hka:290,1.00,SE,rail_station,hka@0m
+171,Tenhult station,57.705461,14.326252,740000171,342,Th,Tenhult,34,timetable+official+geo_name,,th,th,th,th:290,1.00,SE,rail_station,th@34m
+34,Forserum station,57.697728,14.474967,740000034,342,Fm,Forserum,53,timetable+official+geo_name,,fm,fm,fm,fm:290,1.00,SE,rail_station,fm@53m
+1542,Maria station,56.075547,12.710597,740001542,335,Mia,Maria,452,timetable+official,,mia,,mia,mia:240,1.00,SE,rail_station,mia@452m
+1543,Ödåkra station,56.105547,12.745332,740001543,335,Öda,Ödåkra,171,timetable+official+geo_name,,öda,öda,öda,öda:240,1.00,SE,rail_station,öda@171m
+288,Flen station,59.05682,16.58784,740000288,330,Fle,Flen,147,timetable+official+geo_name,,fle,fle,fle,fle:229,1.00,SE,rail_station,fle@147m
+1051,Forshem station,58.618035,13.49157,740001051,329,Fhm,Forshem,16,timetable+official+geo_name,,fhm,fhm,fhm,fhm:84,1.00,SE,rail_station,fhm@16m
+36,Floby station,58.139094,13.335047,740000036,325,Fby,Floby,170,timetable+official+geo_name,,fby,fby,fby,fby:28,1.00,SE,rail_station,fby@170m
+361,Södra station,59.269566,15.203002,740000361,324,Öb,Örebro S,56,timetable+official+geo_name,,öb,öb,öb,öb:198,1.00,SE,rail_station,öb@56m
+73618,Borlänge central,60.482943,15.425472,740000160,324,Blgc,Borlänge C,0,timetable+official+geo_name,,blgc,blgc,blgc,blgc:182,1.00,SE,rail_station,blgc@0m
+217,Grums resecentrum,59.352536,13.112798,740000217,322,Gms,Grums,75,timetable+official+geo_name,,gms,gms,gms,gms:122,1.00,SE,rail_station,gms@75m
+83,Håkantorp station,58.307081,12.907366,740000083,319,Håp,Håkantorp,49,timetable+official+geo_name,,håp,håp,håp,håp:84,1.00,SE,rail_station,håp@49m
+466,Lugnås station,58.644305,13.702099,740000466,319,Lnå,Lugnås,11,timetable+official+geo_name,,lnå,lnå,lnå,lnå:80,1.00,SE,rail_station,lnå@11m
+1022,Blomberg station,58.54018,13.32057,740001022,319,Bmb,Blomberg,4,timetable+official+geo_name,,bmb,bmb,bmb,bmb:80,1.00,SE,rail_station,bmb@4m
+72581,Oslo S,59.91099,10.75349,760000100,318,No.osl,Oslo,57,timetable+geo_name,, (not in TrainStation: xosl),no.osl,no.osl,no.osl:12,1.00,NO,rail_station,no.osl@57m
+73610,Nyköpings central (Nkc),58.756613,16.997085,740000050,318,Nk,Nyköping C,0,timetable+official,yes,nk|nkc,nkc,nk,nk:144,1.00,SE,rail_station,nk@0m
+1537,Bergåsa station,56.182633,15.601351,740001537,317,Båa,Bergåsa,101,timetable+official+geo_name,,båa,båa,båa,båa:264,1.00,SE,rail_station,båa@101m
+605,Vagnhärad station,58.945744,17.49734,740000605,317,Vhd,Vagnhärad,83,timetable+official+geo_name,,vhd,vhd,vhd,vhd:154,1.00,SE,rail_station,vhd@83m
+180,Mjölby resecentrum,58.322435,15.132219,740000180,316,My,Mjölby,35,timetable+official+geo_name,,my,my,my,my:32,1.00,SE,rail_station,my@35m
+70172,Degerfors jvstn,59.229313,14.441042,740000129,315,Dg,Degerfors,62,timetable+official+geo_name,,dg,dg,dg,dg:60,1.00,SE,rail_station,dg@62m
+1581,Umeå Östra,63.817478,20.293482,740001581,308,Uåö,Umeå Ö,83,timetable+official+geo_name,,uåö,uåö,uåö,uåö:150,1.00,SE,rail_station,uåö@83m
+1233,Lovene station,58.440878,13.047668,740001233,301,Lve,Lovene,97,timetable+official+geo_name,,lve,lve,lve,lve:72,1.00,SE,rail_station,lve@97m
+813,Stora Levene station,58.326161,12.925963,740000813,301,Stlv,Stora Levene,29,timetable+official+geo_name,,stlv,stlv,stlv,stlv:72,1.00,SE,rail_station,stlv@29m
+37078,Trollhättan resecentrum,58.287123,12.298671,740000191,300,Thn,Trollhättan,56,timetable+official+geo_name,,thn,thn,thn,thn:68,1.00,SE,rail_station,thn@56m
+10374,Mölnbo,59.047498,17.4183,740000715,300,Mö,Mölnbo,15,timetable+official+geo_name,,mö,mö,mö,mö:192,1.00,SE,rail_station,mö@15m
+73643,Råbäck,58.610608,13.37662,740001280,297,Rbk,Råbäck,0,timetable+official+geo_name,,rbk,rbk,rbk,rbk:76,1.00,SE,rail_station,rbk@0m
+123,Östersund Centralstation,63.171076,14.637229,740000123,294,Ös,Östersund C,126,timetable+official+geo_name,,ös,ös,ös,ös:78,1.00,SE,rail_station,ös@126m
+1613,Barkåkra station,56.287997,12.828227,740001613,293,Baa,Barkåkra,667,timetable+official,,baa,,baa,baa:240,1.00,SE,rail_station,baa@667m
+1612,Förslöv station,56.354836,12.801263,740001612,293,För,Förslöv,67,timetable+official+geo_name,,för,för,för,för:148,1.00,SE,rail_station,för@67m
+73619,Mjölby,58.322746,15.132101,740000180,290,My,Mjölby,0,timetable+official+geo_name,,my,my,my,my:437,1.00,SE,rail_station,my@0m
+1398,Äskekärr station,58.625923,13.608889,740001398,290,Äsr,Äskekärr,15,timetable+official+geo_name,,äsr,äsr,äsr,äsr:72,1.00,SE,rail_station,äsr@15m
+1405,Österäng station,58.634385,13.560717,740001405,290,Öäg,Österäng,60,timetable+official+geo_name,,öäg,öäg,öäg,öäg:72,1.00,SE,rail_station,öäg@60m
+1352,Trolmen station,58.594883,13.348027,740001352,290,Trm,Trolmen,8,timetable+official+geo_name,,trm,trm,trm,trm:72,1.00,SE,rail_station,trm@8m
+1048,Filsbäck station,58.493179,13.247252,740001048,290,Fiä,Filsbäck,3,timetable+official+geo_name,,fiä,fiä,fiä,fiä:72,1.00,SE,rail_station,fiä@3m
+38983,Nils Ericson Terminalen,57.710463,11.972353,740020483,289,Gc,Göteborgs Central,73,geo_only,, (not in TrainStation: xgnt),,,,,SE,rail_station,gc@73m
+291,Ludvika resecentrum,60.150273,15.183684,740000291,288,La,Ludvika,79,timetable+official+geo_name,,la,la,la,la:151,1.00,SE,rail_station,la@79m
+198,Ljusdals resecentrum,61.826583,16.098123,740000198,285,Ls,Ljusdal,88,timetable+official,,ls,,ls,ls:72,1.00,SE,rail_station,ls@88m
+50816,Bollnäs resecentrum,61.35051,16.392692,740000128,285,Bn,Bollnäs,125,timetable+official+geo_name,,bn,bn,bn,bn:128,1.00,SE,rail_station,bn@125m
+1570,Örnsköldsvik ReseC,63.287705,18.707857,740001570,283,Ök,Örnsköldsvik C,178,timetable+official+geo_name,,ök,ök,ök,ök:170,1.00,SE,rail_station,ök@178m
+100,Limmared station,57.535958,13.353539,740000100,282,Lme,Limmared,220,timetable+official+geo_name,,lme,lme,lme,lme:32,1.00,SE,rail_station,lme@220m
+89,Hestra station,57.443141,13.595897,740000089,282,Het,Hestra,9,timetable+official+geo_name,,het,het,het,het:32,1.00,SE,rail_station,het@9m
+112,Gnosjö station,57.35807,13.735733,740000112,282,Gnö,Gnosjö,66,timetable+official+geo_name,,gnö,gnö,gnö,gnö:32,1.00,SE,rail_station,gnö@66m
+108,Strängnäs Resecentrum,59.371158,17.026022,740000108,280,Sgs,Strängnäs,156,timetable+official+geo_name,,sgs,sgs,sgs,sgs:190,1.00,SE,rail_station,sgs@156m
+58581,Läggesta jvstn,59.248131,17.16801,740000067,280,Lg,Läggesta,90,timetable+official+geo_name,,lg,lg,lg,lg:190,1.00,SE,rail_station,lg@90m
+149,Nykvarns station,59.178443,17.432165,740000149,280,Nkv,Nykvarn,33,timetable+official,,nkv,,nkv,nkv:190,1.00,SE,rail_station,nkv@33m
+392,Storvreta station (Uppsala),59.95709,17.706563,740000392,279,Srv,Storvreta,89,timetable+official+geo_name,,srv,srv,srv,srv:288,1.00,SE,rail_station,srv@89m
+458,Vattholma station (Uppsala),60.025022,17.731129,740000458,279,Vha,Vattholma,18,timetable+official+geo_name,,vha,vha,vha,vha:288,1.00,SE,rail_station,vha@18m
+438,Skyttorp station (Uppsala),60.080146,17.738008,740000438,279,Syt,Skyttorp,105,timetable+official+geo_name,,syt,syt,syt,syt:288,1.00,SE,rail_station,syt@105m
+476,Örbyhus station (Tierp),60.228584,17.704716,740000476,279,Öh,Örbyhus,107,timetable+official+geo_name,,öh,öh,öh,öh:288,1.00,SE,rail_station,öh@107m
+1345,Tobo station (Tierp),60.257806,17.638315,740001345,279,Tbo,Tobo,286,timetable+official+geo_name,,tbo,tbo,tbo,tbo:288,1.00,SE,rail_station,tbo@286m
+253,Härnösand Central,62.634786,17.928882,740000253,272,Hsd,Härnösand C,60,timetable+official+geo_name,,hsd,hsd,hsd,hsd:160,1.00,SE,rail_station,hsd@60m
+69,Ronneby Resecentrum,56.206433,15.283852,740000069,272,Rb,Ronneby,16,timetable+official+geo_name,,rb,rb,rb,rb:144,1.00,SE,rail_station,rb@16m
+173,Öxnered station,58.359417,12.274135,740000173,271,Öx,Öxnered,306,timetable+official,,öx,,öx,öx:64,1.00,SE,rail_station,öx@306m
+122,Moheda station,57.002944,14.575719,740000122,269,Mo,Moheda,56,timetable+official+geo_name,,mo,mo,mo,mo:88,1.00,SE,rail_station,mo@56m
+73,Karlshamn Resecentrum,56.175808,14.867539,740000073,268,Kh,Karlshamn,164,timetable+official+geo_name,,kh,kh,kh,kh:176,1.00,SE,rail_station,kh@164m
+68228,Mörrum station,56.186854,14.742953,740000366,268,Mru,Mörrum,0,timetable+official+geo_name,,mru,mru,mru,mru:208,1.00,SE,rail_station,mru@0m
+79,Sölvesborgs Resecentrum,56.050294,14.583853,740000079,268,Sög,Sölvesborg,105,timetable+official,,sög,,sög,sög:208,1.00,SE,rail_station,sög@105m
+141,Bromölla station,56.067266,14.479264,740000141,265,Bml,Bromölla,147,timetable+official+geo_name,,bml,bml,bml,bml:222,1.00,SE,rail_station,bml@147m
+552,Torpåkra station,57.940884,13.029526,740000552,260,Top,Torpåkra,26,timetable+official+geo_name,,top,top,top,top:44,1.00,SE,rail_station,top@26m
+32354,Mollaryd station,57.906699,13.022638,740000546,260,Moy,Mollaryd,54,timetable+official+geo_name,,moy,moy,moy,moy:44,1.00,SE,rail_station,moy@54m
+71173,Krylbo resecentrum,60.129614,16.216163,740000111,259,Avky,Avesta Krylbo,9,timetable+official+geo_name,,avky,avky,avky,avky:90,1.00,SE,rail_station,avky@9m
+1545,Kolmårdens station,58.673496,16.362999,740001545,251,Kon,Kolmården,136,timetable+official,,kon,,kon,kon:136,1.00,SE,rail_station,kon@136m
+321,Kolbäck Jvstn,59.564305,16.231683,740000321,247,Kbä,Kolbäck,100,timetable+official+geo_name,,kbä,kbä,kbä,kbä:228,1.00,SE,rail_station,kbä@100m
+87,Munkedal station,58.465179,11.677135,740000087,247,Mkl,Munkedal,227,timetable+official+geo_name,,mkl,mkl,mkl,mkl:44,1.00,SE,rail_station,mkln@91m
+42745,Kumla jvstn,59.126535,15.140171,740000192,242,Kla,Kumla,121,timetable+official+geo_name,,kla,kla,kla,kla:200,1.00,SE,rail_station,kla@121m
+32,Bräcke järnvägsstation,62.750011,15.418181,740000032,237,Bä,Bräcke,29,timetable+official+geo_name,,bä,bä,bä,bä:98,1.00,SE,rail_station,bä@29m
+142,Undersåker järnvägsstation,63.315227,13.238472,740000142,236,Un,Undersåker,26,timetable+official+geo_name,,un,un,un,un:63,1.00,SE,rail_station,un@26m
+368,Bräkne Hoby,56.2308,15.115637,740000368,235,Bhb,Bräkne-Hoby,69,timetable+official+geo_name,,bhb,bhb,bhb,bhb:144,1.00,SE,rail_station,bhb@69m
+677,Kvicksund station,59.451295,16.320689,740000677,235,Ksus,Kvicksund,58,timetable+official+geo_name,,ksus,ksus,ksus,ksus:228,1.00,SE,rail_station,ksus@58m
+105,Ånge bstn,62.523485,15.659747,740000105,232,Åg,Ånge,151,timetable+official+geo_name,,åg,åg,åg,åg:108,1.00,SE,rail_station,åg@151m
+172,Motala Central,58.537411,15.047813,740000172,232,Mot,Motala C,24,timetable+official+geo_name,,mot,mot,mot,mot:193,1.00,SE,rail_station,mot@24m
+70714,Frövi Resecentrum,59.467595,15.362706,740000293,232,Fv,Frövi,56,timetable+official+geo_name,,fv,fv,fv,fv:180,1.00,SE,rail_station,fv@56m
+230,Karlskrona Centralstation,56.166709,15.585387,740000230,230,Ck,Karlskrona C,40,timetable+official+geo_name,,ck,ck,ck,ck:68,1.00,SE,rail_station,ck@40m
+42,Hedemora resecentrum,60.274413,15.980067,740000042,228,Hdm,Hedemora,36,timetable+official+geo_name,,hdm,hdm,hdm,hdm:78,1.00,SE,rail_station,hdm@36m
+26,Säter station,60.346724,15.757814,740000026,228,St,Säter,43,timetable+official+geo_name,,st,st,st,st:78,1.00,SE,rail_station,st@43m
+41,Tranås station,58.038384,14.97559,740000041,227,Tns,Tranås,43,timetable+official+geo_name,,tns,tns,tns,tns:146,1.00,SE,rail_station,tns@43m
+72587,Kongsvinger,60.18772,12.00385,760000318,227,No.kvg,Kongsvinger,15,timetable+geo_name,, (not in TrainStation: xkvg),no.kvg,no.kvg,no.kvg:8,1.00,NO,rail_station,no.kvg@15m
+115,Åre Resecentrum,63.399026,13.07648,740000115,226,Åre,Åre,91,timetable+official+geo_name,,åre,åre,åre,åre:59,1.00,SE,rail_station,åre@91m
+1255,Mörarp station,56.056128,12.873066,740001255,226,Mör,Mörarp,92,official+geo_name,,mör,mör,,,,SE,rail_station,mör@92m
+102,Bjuv station,56.083496,12.912574,740000102,226,Bjuv,Bjuv,139,official+geo_name,,bjuv,bjuv,,,,SE,rail_station,bjuv@139m
+49970,Sundsvalls västra jvstn,62.390049,17.291582,740020045,224,Suv,Sundsvall V,111,timetable+official+geo_name,,suv,suv,suv,suv:124,1.00,SE,rail_station,suv@111m
+545,Skänninge station,58.392974,15.092024,740000545,224,Skn,Skänninge,47,timetable+official+geo_name,,skn,skn,skn,skn:346,1.00,SE,rail_station,skn@47m
+5921,Skutskär station (Älvkarleby),60.623626,17.405841,740021861,222,Sur,Skutskär,277,timetable+official+geo_name,,sur,sur,sur,sur:216,1.00,SE,rail_station,sur@277m
+160,Borlänge resecentrum,60.482623,15.42696,740000160,220,Blgc,Borlänge C,89,timetable+official+geo_name,,blgc,blgc,blgc,blgc:66,1.00,SE,rail_station,blgc@89m
+1578,Älvkarleby station (Älvkarleby),60.555221,17.427657,740001578,220,Äkb,Älvkarleby,41,timetable+official+geo_name,,äkb (not in TrainStation: äby),äkb,äkb,äkb:216,1.00,SE,rail_station,äkb@41m
+215,Mullsjö Resecentrum,57.914905,13.882207,740000215,219,Mu,Mullsjö,51,timetable+official+geo_name,,mu,mu,mu,mu:166,1.00,SE,rail_station,mu@51m
+520,Påarp station,56.029357,12.817214,740000520,218,Påa,Påarp,10,official+geo_name,,påa,påa,,,,SE,rail_station,påa@10m
+65,Dingle station,58.529534,11.579324,740000065,218,Dl,Dingle,13,timetable+official+geo_name,,dl,dl,dl,dl:22,1.00,SE,rail_station,dl@13m
+231,Habo station,57.906613,14.076783,740000231,217,Ho,Habo,26,timetable+official+geo_name,,ho,ho,ho,ho:166,1.00,SE,rail_station,ho@26m
+839,Vingåker station,59.042343,15.874862,740000839,216,Vr,Vingåker,98,timetable+official+geo_name,,vr,vr,vr,vr:100,1.00,SE,rail_station,vr@98m
+977,Bankeryd station,57.860275,14.127699,740000977,216,Bry,Bankeryd,33,timetable+official+geo_name,,bry,bry,bry,bry:166,1.00,SE,rail_station,bry@33m
+244,Storvik station,60.582487,16.534628,740000244,215,Sv,Storvik,70,timetable+official+geo_name,,sv,sv,sv,sv:138,1.00,SE,rail_station,sv@70m
+195,Sandviken resecentrum,60.614842,16.778972,740000195,213,Snv,Sandviken,102,timetable+official+geo_name,,snv,snv,snv,snv:138,1.00,SE,rail_station,snv@102m
+70630,Lindesberg Resecentrum,59.595009,15.227725,740000093,212,Ld,Lindesberg,75,timetable+official+geo_name,,ld,ld,ld,ld:144,1.00,SE,rail_station,ld@75m
+1573,Mehedeby station (Tierp),60.45061,17.401305,740001573,210,Meh,Mehedeby,35,timetable+official+geo_name,,meh,meh,meh,meh:200,1.00,SE,rail_station,meh@35m
+38872,Sandhem station,57.988565,13.772012,740024005,210,Sm,Sandhem,51,timetable+official+geo_name,,sm,sm,sm,sm:154,1.00,SE,rail_station,sm@51m
+266,Fagersta Central,59.990032,15.8159,740000266,208,Fgc,Fagersta C,62,timetable+official+geo_name,,fgc,fgc,fgc,fgc:120,1.00,SE,rail_station,fgc@62m
+1061,Furuvik (Gävle),60.65114,17.331907,740001061,203,Fvk,Furuvik,125,timetable+official+geo_name,,fvk,fvk,fvk,fvk:180,1.00,SE,rail_station,fvk@125m
+627,Marma station (Älvkarleby),60.491245,17.430557,740000627,201,Maa,Marma,33,timetable+official+geo_name,,maa,maa,maa,maa:180,1.00,SE,rail_station,maa@33m
+9478,Tippen,59.284111,18.277285,740020878,198,xTip,Tippen,4,geo_name,,,xtip,,söö:4,1.00,SE,rail_station,xtip@4m
+11200,Tattby,59.279621,18.28026,740020879,198,xTab,Tattby,113,geo_name,,,xtab,,kon:4,1.00,SE,rail_station,xtab@113m
+9477,Erstaviksbadet,59.272955,18.284968,740024812,198,xEvb,Erstaviksbadet,6,geo_name,,,xevb,,,,SE,rail_station,xevb@6m
+1150,Solsidan,59.270912,18.29554,740001150,198,xSln,Solsidan,30,geo_name,,,xsln,,flb:4 arnc:2,0.67,SE,rail_station,xsln@30m
+73620,Umeå central,63.830145,20.267003,740000190,195,Uå,Umeå C,0,timetable+official+geo_name,,uå,uå,uå,uå:138,1.00,SE,rail_station,uå@0m
+146,Järvsö station,61.715453,16.171515,740000146,191,Jr,Järvsö,41,timetable+official+geo_name,,jr,jr,jr,jr:120,1.00,SE,rail_station,jr@41m
+205,Mölnlycke station,57.656767,12.117575,740000205,191,Myk,Mölnlycke,71,timetable+official+geo_name,,myk,myk,myk,myk:64,1.00,SE,rail_station,myk@71m
+207,Hindås station,57.704505,12.451588,740000207,191,Hås,Hindås,38,timetable+official+geo_name,,hås,hås,hås,hås:64,1.00,SE,rail_station,hås@38m
+238,Rävlanda station,57.654424,12.500179,740000238,191,Rd,Rävlanda,6,timetable+official+geo_name,,rd,rd,rd,rd:64,1.00,SE,rail_station,rd@6m
+30948,Bollebygd station tåg,57.667605,12.570626,740000243,191,Boy,Bollebygd,38,timetable+official+geo_name,,boy,boy,boy,boy:64,1.00,SE,rail_station,boy@38m
+272,Sandared station tåg,57.709676,12.790704,740000272,191,Sae,Sandared,107,timetable+official+geo_name,,sae,sae,sae,sae:64,1.00,SE,rail_station,sae@107m
+1605,Killeberg station,56.475159,14.098624,740001605,190,Kr,Killeberg,37,timetable+official+geo_name,,kr,kr,kr,kr:96,1.00,SE,rail_station,kr@37m
+28920,Hästveda station,56.287309,13.935556,740064282,190,Hv,Hästveda,148,timetable+official+geo_name,,hv,hv,hv,hv:96,1.00,SE,rail_station,hv@148m
+1441,Ballingslöv station,56.214123,13.848319,740001441,190,Bl,Ballingslöv,11,timetable+official+geo_name,,bl,bl,bl,bl:96,1.00,SE,rail_station,bl@11m
+410,Edane station,59.626981,12.829742,740000410,189,En,Edane,30,timetable+official+geo_name,,en,en,en,en:112,1.00,SE,rail_station,en@30m
+73608,Falun central,60.603247,15.641727,740000030,188,Fln,Falun C,0,timetable+official+geo_name,,fln,fln,fln,fln:130,1.00,SE,rail_station,fln@0m
+218,Hofors station,60.569769,16.266145,740000218,188,Hfr,Hofors,21,timetable+official+geo_name,,hfr,hfr,hfr,hfr:130,1.00,SE,rail_station,hfr@21m
+676,Kungsör järnvägsstation,59.427352,16.101249,740000676,187,Kör,Kungsör,116,timetable+official+geo_name,,kör,kör,kör,kör:142,1.00,SE,rail_station,kör@116m
+713,Kårsta,59.656756,18.267532,740000713,186,xKår,Kårsta,11,geo_name,,,xkår,,,,SE,rail_station,xkår@11m
+10511,Ekskogen,59.638967,18.226997,740024803,186,xEkg,Ekskogen,43,geo_name,,,xekg,,,,SE,rail_station,xekg@43m
+11560,Frösunda,59.62423,18.170483,740024802,186,xFsu,Frösunda,18,geo_name,,,xfsu,,,,SE,rail_station,xfsu@18m
+41301,Välsviken station,59.391385,13.582858,740025002,185,Kvä,Välsviken,52,timetable+official+geo_name,,kvä,kvä,kvä,kvä:148,1.00,SE,rail_station,kvä@52m
+162,Grängesberg jvstn,60.076037,15.005543,740000162,185,Gg,Grängesberg,161,timetable+official+geo_name,,gg,gg,gg,gg:116,1.00,SE,rail_station,gg@161m
+59165,Fagersta Norra,60.008642,15.775345,740020094,185,Fgn,Fagersta Norra,0,timetable+official+geo_name,,fgn,fgn,fgn,fgn:110,1.00,SE,rail_station,fgn@0m
+287,Väse station,59.380547,13.851422,740000287,183,Ve,Väse,159,timetable+official+geo_name,,ve,ve,ve,ve:136,1.00,SE,rail_station,ve@159m
+59161,Duved,63.389765,12.917488,740000308,183,Du,Duved,0,timetable+official+geo_name,,du,du,du,du:34,1.00,SE,rail_station,du@0m
+1333,Dingtuna,59.571793,16.38969,740001333,183,Dt,Dingtuna,26,timetable+official+geo_name,,dt,dt,dt,dt:152,1.00,SE,rail_station,dt@26m
+673,Hallstahammar Jvstn,59.615877,16.21942,740000673,183,Hh,Hallstahammar,143,timetable+official+geo_name,,hh,hh,hh,hh:152,1.00,SE,rail_station,hh@143m
+384,Surahammar Jvstn,59.705975,16.221098,740000384,183,Shr,Surahammar,106,timetable+official+geo_name,,shr,shr,shr,shr:152,1.00,SE,rail_station,shr@106m
+46,Ramnäs Nya Jvstn,59.769532,16.207399,740000046,183,Rmn,Ramnäs,38,timetable+official,,rmn,,rmn,rmn:152,1.00,SE,rail_station,rmn@38m
+196,Virsbo Jvstn,59.872677,16.084796,740000196,183,Vso,Virsbo,96,timetable+official+geo_name,,vso,vso,vso,vso:152,1.00,SE,rail_station,vso@96m
+135,Ängelsbergs Jvstn,59.958462,16.009393,740000135,183,Äbg,Ängelsberg,165,timetable+official,,äbg,,äbg,äbg:152,1.00,SE,rail_station,äbg@165m
+418,Högboda station,59.557519,13.050958,740000418,181,Hbd,Högboda,11,timetable+official+geo_name,,hbd,hbd,hbd,hbd:118,1.00,SE,rail_station,hbd@11m
+426,Fagerås resecentrum,59.519587,13.220535,740000426,181,Fgå,Fagerås,135,timetable+official+geo_name,,fgå,fgå,fgå,fgå:124,1.00,SE,rail_station,fgå@135m
+68991,Storå,59.713368,15.143318,740001567,181,Sr,Storå,0,timetable+official+geo_name,,sr,sr,sr,sr:116,1.00,SE,rail_station,sr@0m
+73627,Kopparberg,59.872635,14.986891,740000280,181,Kpg,Kopparberg,0,timetable+official+geo_name,,kpg,kpg,kpg,kpg:116,1.00,SE,rail_station,kpg@0m
+638,Ställdalens jvstn,59.93445,14.94319,740000638,181,Stl,Ställdalen,82,timetable+official,,stl,,stl,stl:116,1.00,SE,rail_station,stl@82m
+73607,Kalmar central,56.661314,16.360325,740000020,180,Kac,Kalmar C,0,timetable+official+geo_name,,kac,kac,kac,kac:60,1.00,SE,rail_station,kac@0m
+388,Gemla station,56.870061,14.644831,740000388,178,Gm,Gemla,116,timetable+official+geo_name,,gm,gm,gm,gm:227,1.00,SE,rail_station,gm@116m
+1422,Lene station,59.544157,13.120609,740001422,177,Len,Lene,10,timetable+official+geo_name,,len,len,len,len:122,1.00,SE,rail_station,len@10m
+190,Umeå Centralstation,63.830182,20.26608,740000190,174,Uå,Umeå C,45,timetable+official+geo_name,,uå,uå,uå,uå:24,1.00,SE,rail_station,uå@45m
+220,Kramfors ReseC,62.928233,17.779697,740000220,174,Krf,Kramfors,114,timetable+official+geo_name,,krf,krf,krf,krf:40,1.00,SE,rail_station,krf@114m
+277,Ockelbo station,60.891904,16.720788,740000277,174,Ob,Ockelbo,83,timetable+official+geo_name,,ob,ob,ob,ob:112,1.00,SE,rail_station,ob@83m
+302,Mora resecentrum,61.009001,14.560175,740000302,171,Mrc,Mora C,66,timetable+official+geo_name,,mrc,mrc,mrc,mrc:58,1.00,SE,rail_station,mrc@66m
+158,Rättvik resecentrum,60.885305,15.115734,740000158,171,Rv,Rättvik,68,timetable+official+geo_name,,rv,rv,rv,rv:116,1.00,SE,rail_station,rv@68m
+97,Tällberg station,60.817963,15.01872,740000097,171,Tlg,Tällberg,127,timetable+official+geo_name,,tlg,tlg,tlg,tlg:116,1.00,SE,rail_station,tlg@127m
+19,Leksand resecentrum,60.734327,15.002311,740000019,171,Lsd,Leksand,50,timetable+official+geo_name,,lsd,lsd,lsd,lsd:116,1.00,SE,rail_station,lsd@50m
+322,Gagnef station,60.598294,15.08148,740000322,171,Gnf,Gagnef,57,timetable+official+geo_name,,gnf,gnf,gnf,gnf:116,1.00,SE,rail_station,gnf@57m
+303,Djurås resecentrum,60.560119,15.137774,740000303,171,Då,Djurås,43,timetable+official+geo_name,,då,då,då,då:116,1.00,SE,rail_station,då@43m
+679,Ransta jvstn,59.810025,16.63942,740000679,171,Rt,Ransta,35,timetable+official+geo_name,,rt,rt,rt,rt:128,1.00,SE,rail_station,rt@35m
+48,Charlottenberg resecentrum,59.884065,12.298423,740000048,170,Cg,Charlottenberg,114,timetable+official+geo_name,,cg,cg,cg,cg:74,1.00,SE,rail_station,cg@114m
+232,Vaggeryd station,57.498204,14.145088,740000232,168,Vgd,Vaggeryd,19,timetable+official+geo_name,,vgd,vgd,vgd,vgd:136,1.00,SE,rail_station,vgd@19m
+635,Lingbo station,61.044847,16.672847,740000635,167,Lb,Lingbo,11,timetable+official+geo_name,,lb,lb,lb,lb:108,1.00,SE,rail_station,lb@11m
+632,Holmsveden station,61.118356,16.720942,740000632,167,Hdn,Holmsveden,180,timetable+official+geo_name,,hdn,hdn,hdn,hdn:108,1.00,SE,rail_station,hdn@180m
+345,Kilafors station,61.230495,16.570003,740000345,167,Kls,Kilafors,30,timetable+official+geo_name,,kls,kls,kls,kls:108,1.00,SE,rail_station,kls@30m
+615,Arbrå station,61.470754,16.37953,740000615,167,Ab,Arbrå,35,timetable+official+geo_name,,ab,ab,ab,ab:108,1.00,SE,rail_station,ab@35m
+307,Åmotfors station,59.768765,12.366827,740000307,165,Åt,Åmotfors,47,timetable+official+geo_name,,åt,åt,åt,åt:94,1.00,SE,rail_station,åt@47m
+753,Vallsta station,61.518173,16.367495,740000753,162,Vl,Vallsta,12,timetable+official+geo_name,,vl,vl,vl,vl:104,1.00,SE,rail_station,vl@12m
+71,Gårdsjö station,58.87228,14.333313,740000071,162,Gdö,Gårdsjö,33,timetable+official+geo_name,,gdö,gdö,gdö,gdö:40,1.00,SE,rail_station,gdö@33m
+484,Hova station,58.854868,14.215364,740000484,162,Hova,Hova,15,timetable+official+geo_name,,hova,hova,hova,hova:40,1.00,SE,rail_station,hova@15m
+468,Lyrestad station,58.805112,14.057073,740000468,162,Lyd,Lyrestad,35,timetable+official+geo_name,,lyd,lyd,lyd,lyd:40,1.00,SE,rail_station,lyd@35m
+1079,Hasslerör station,58.750312,13.939795,740001079,162,Hsr,Hasslerör,20,timetable+official+geo_name,,hsr,hsr,hsr,hsr:40,1.00,SE,rail_station,hsr@20m
+868,Vikingstad station,58.383639,15.432992,740000868,162,Vsd,Vikingstad,18,timetable+official+geo_name,,vsd,vsd,vsd,vsd:376,1.00,SE,rail_station,vsd@18m
+616,Mantorps station,58.34821,15.28809,740000616,161,Mt,Mantorp,25,timetable+official,,mt,,mt,mt:376,1.00,SE,rail_station,mt@25m
+359,Ottebol station,59.696075,12.469364,740000359,160,Ot,Ottebol,484,timetable+official,,ot,,ot,ot:94,1.00,SE,rail_station,ot@484m
+233,Tanum station,58.713697,11.295695,740000233,159,Tnu,Tanum,15,official+geo_name,,tnu,tnu,,,,SE,rail_station,tnu@15m
+299,Rabbalshede station,58.610003,11.470773,740000299,159,Rbh,Rabbalshede,11,official+geo_name,,rbh,rbh,,,,SE,rail_station,rbh@11m
+54,Hällevadsholm station,58.580561,11.535341,740000054,159,Hlv,Hällevadsholm,62,official+geo_name,,hlv,hlv,,,,SE,rail_station,hlv@62m
+95,Strömstad station,58.936611,11.173806,740000095,157,Smd,Strömstad,27,official+geo_name,,smd,smd,,,,SE,rail_station,smd@27m
+75,Skee station,58.922417,11.263222,740000075,157,Ske,Skee,129,official+geo_name,,ske,ske,,,,SE,rail_station,ske@129m
+56,Överby,58.84334,11.259369,740000056,157,Övb,Överby,45,official+geo_name,,övb,övb,,,,SE,rail_station,övb@45m
+126,Järpen järnvägsstation,63.342649,13.472366,740000126,155,Jpn,Järpen,29,timetable+official+geo_name,,jpn,jpn,jpn,jpn:63,1.00,SE,rail_station,jpn@29m
+849,Linghems station,58.436414,15.786557,740000849,155,Lgm,Linghem,84,timetable+official,,lgm,,lgm,lgm:372,1.00,SE,rail_station,lgm@84m
+16773,Kimstad station,58.54599,15.971726,740068883,155,Kms,Kimstad,1094,timetable+official,,kms,,kms,kms:372,1.00,SE,rail_station,kms@1094m
+1423,Brunsberg station,59.617677,12.961134,740001423,154,Buk,Brunsberg,11,timetable+official+geo_name,,buk,buk,buk,buk:86,1.00,SE,rail_station,buk@11m
+9476,Saltsjö-Järla,59.30682,18.149444,740020874,152,xSjl,Saltsjö-Järla,15,geo_name,,,xsjl,,,,SE,rail_station,xsjl@15m
+9475,Lillängen,59.305216,18.160942,740024808,152,xLiä,Lillängen,30,geo_name,,,xliä,,,,SE,rail_station,xliä@30m
+9474,Storängen,59.305642,18.177787,740024809,152,xStä,Storängen,11,geo_name,,,xstä,,,,SE,rail_station,xstä@11m
+9473,Saltsjö-Duvnäs,59.30052,18.198606,740020875,152,xSdn,Saltsjö-Duvnäs,8,geo_name,,,xsdn,,,,SE,rail_station,xsdn@8m
+9472,Östervik,59.29487,18.23528,740024810,152,xÖsv,Östervik,32,geo_name,,,xösv,,cst:2,1.00,SE,rail_station,xösv@32m
+693,Fisksätra,59.29408,18.255817,740000693,152,xFsä,Fisksätra,12,geo_name,,,xfsä,,,,SE,rail_station,xfsä@12m
+11198,Neglinge,59.288461,18.291901,740020877,149,xNeg,Neglinge,17,geo_name,,,xneg,,st:4 thn:4,0.50,SE,rail_station,xneg@17m
+9471,Ringvägen,59.283244,18.302039,740024811,148,xRvä,Ringvägen,14,geo_name,,,xrvä,,,,SE,rail_station,xrvä@14m
+751,Saltsjöbaden,59.279121,18.311442,740000751,148,xSbn,Saltsjöbaden,91,geo_name,,,xsbn,,,,SE,rail_station,xsbn@91m
+47485,Falun resecentrum,60.603808,15.640453,740000030,145,Fln,Falun C,93,timetable+official+geo_name,,fln,fln,fln,fln:25,1.00,SE,rail_station,fln@93m
+490,Klevshult,57.351986,14.097983,740000490,144,Kvh,Klevshult,61,timetable+official+geo_name,,kvh,kvh,kvh,kvh:120,1.00,SE,rail_station,kvh@61m
+164,Skillingaryd station,57.428559,14.090837,740000164,144,Syd,Skillingaryd,17,timetable+official+geo_name,,syd,syd,syd,syd:120,1.00,SE,rail_station,syd@17m
+1583,Nordmaling Resecentrum,63.57833,19.485703,740001583,143,Nog,Nordmaling,168,timetable+official+geo_name,,nog,nog,nog,nog:148,1.00,SE,rail_station,nog@168m
+504,Västra Ämtervik station,59.727593,13.147096,740000504,139,Vät,Västra Ämtervik,16,timetable+official+geo_name,,vät,vät,vät,vät:156,1.00,SE,rail_station,vät@16m
+1209,Kolsnäs station,59.82593,13.141256,740001209,139,Kns,Kolsnäs,24,timetable+official+geo_name,,kns,kns,kns,kns:150,1.00,SE,rail_station,kns@24m
+738,Hälleforsnäs station,59.161719,16.504188,740000738,133,Hnä,Hälleforsnäs,98,timetable+official+geo_name,,hnä,hnä,hnä,hnä:129,1.00,SE,rail_station,hnä@98m
+35361,Skövde resecentrum (tåg),58.389544,13.85239,740000008,131,Sk,Skövde C,64,timetable+official,,sk,,sk,sk:68,1.00,SE,rail_station,sk@64m
+144,Luleå Centralstation,65.584124,22.165185,740000144,130,Le,Luleå,20,timetable+official+geo_name,,le,le,le,le:36,1.00,SE,rail_station,le@20m
+71659,Alingsås,57.926997,12.531856,740000018,130,A,Alingsås,22,timetable+official+geo_name,,a,a,a,a:34,1.00,SE,rail_station,a@22m
+239,Vindeln Resecentrum,64.203334,19.713907,740000239,128,Vdn,Vindeln,85,timetable+official+geo_name,,vdn,vdn,vdn,vdn:82,1.00,SE,rail_station,vdn@85m
+57764,Sunderby Station,65.671301,21.940871,740022983,128,Sus,Sunderby sjukhus,334,timetable+official,,sus,,sus,sus:64,1.00,SE,rail_station,sus@334m
+242,Timrå jvg,62.486153,17.329916,740000242,127,Trå,Timrå,33,timetable+official+geo_name,,trå,trå,trå,trå:128,1.00,SE,rail_station,trå@33m
+348,Hultsfred Resecentrum,57.486551,15.845828,740000348,127,Hf,Hultsfred,105,timetable+official+geo_name,,hf (not in TrainStation: hfp),hf,hf,hf:60,1.00,SE,rail_station,hf@105m
+351,Vimmerby Resecentrum,57.663999,15.856676,740000351,127,Vib,Vimmerby,151,timetable+official+geo_name,,vib,vib,vib,vib:62,1.00,SE,rail_station,vib@151m
+736,Morgongåva station (Heby),59.932876,16.959818,740000736,126,Må,Morgongåva,86,timetable+official+geo_name,,må,må,må,må:112,1.00,SE,rail_station,må@86m
+674,Heby station (Heby),59.940482,16.850735,740000674,124,Hy,Heby,135,timetable+official+geo_name,,hy,hy,hy,hy:112,1.00,SE,rail_station,hy@135m
+73633,Berga,57.216533,16.033443,740000500,121,Bg,Berga,0,timetable+official+geo_name,,bg,bg,bg,bg:56,1.00,SE,rail_station,bg@0m
+228,Krokom järnvägsstation,63.325399,14.448502,740000228,120,Krm,Krokom,69,timetable+official+geo_name,,krm,krm,krm,krm:57,1.00,SE,rail_station,krm@69m
+344,Kisa resecentrum,57.985606,15.633502,740000344,119,Kisa,Kisa,114,timetable+official+geo_name,,kisa,kisa,kisa,kisa:60,1.00,SE,rail_station,kisa@114m
+365,Rimforsa station,58.135932,15.681358,740000365,119,Rf,Rimforsa,72,timetable+official+geo_name,,rf,rf,rf,rf:60,1.00,SE,rail_station,rf@72m
+508,Tolita station,59.577703,13.240259,740000508,118,Tlt,Tolita,14,timetable+official+geo_name,,tlt,tlt,tlt,tlt:150,1.00,SE,rail_station,tlt@14m
+1419,Frykåsen station,59.626447,13.184783,740001419,118,Frå,Frykåsen,1,timetable+official+geo_name,,frå,frå,frå,frå:150,1.00,SE,rail_station,frå@1m
+542,Bäckebron station,59.661479,13.165878,740000542,118,Bäb,Bäckebron,52,timetable+official+geo_name,,bäb,bäb,bäb,bäb:135,1.00,SE,rail_station,bäb@52m
+1417,Öjervik station,59.774098,13.122915,740001417,118,Öjr,Öjervik,54,timetable+official+geo_name,,öjr,öjr,öjr,öjr:152,1.00,SE,rail_station,öjr@54m
+501,Rottneros station,59.79509,13.129283,740000501,118,Rts,Rottneros,34,timetable+official+geo_name,,rts,rts,rts,rts:152,1.00,SE,rail_station,rts@34m
+184,Sunne resecentrum,59.835122,13.148568,740000184,118,Sun,Sunne,56,timetable+official+geo_name,,sun,sun,sun,sun:132,1.00,SE,rail_station,sun@56m
+1415,Edsbjörke station,59.902354,13.171566,740001415,115,Ebk,Edsbjörke,127,timetable+official+geo_name,,ebk,ebk,ebk,ebk:112,1.00,SE,rail_station,ebk@127m
+433,Lysvik station,60.015741,13.13759,740000433,115,Lyv,Lysvik,26,timetable+official+geo_name,,lyv,lyv,lyv,lyv:108,1.00,SE,rail_station,lyv@26m
+1411,Oleby station,60.130176,13.038638,740001411,115,Ol,Oleby,35,timetable+official+geo_name,,ol,ol,ol,ol:108,1.00,SE,rail_station,ol@35m
+274,Torsby resecentrum,60.136567,13.0018,740000274,115,Toy,Torsby,53,timetable+official+geo_name,,toy,toy,toy,toy:60,1.00,SE,rail_station,toy@53m
+1569,Örnsköldsvik norra,63.306091,18.724879,740001569,109,Ökn,Örnsköldsvik N,0,timetable+official+geo_name,,ökn,ökn,ökn,ökn:130,1.00,SE,rail_station,ökn@0m
+1584,Husum ReseC,63.34389,19.156282,740001584,109,Hum,Husum,57,timetable+official+geo_name,,hum,hum,hum,hum:140,1.00,SE,rail_station,hum@57m
+1582,Hörnefors Resecentrum,63.633113,19.909884,740001582,109,Höf,Hörnefors,122,timetable+official+geo_name,,höf,höf,höf,höf:140,1.00,SE,rail_station,höf@122m
+73641,Blomstermåla,56.980711,16.332114,740001000,108,Bma,Blomstermåla,0,timetable+official+geo_name,,bma,bma,bma,bma:56,1.00,SE,rail_station,bma@0m
+923,Högsby Resecentrum,57.165241,16.027889,740000923,108,Höy,Högsby,72,timetable+official+geo_name,,höy,höy,höy,höy:56,1.00,SE,rail_station,höy@72m
+1254,Månsarp station,57.654152,14.070117,740001254,106,Måp,Månsarp,58,timetable+official+geo_name,,måp,måp,måp,måp:112,1.00,SE,rail_station,måp@58m
+202,Insjön TÅG,60.676005,15.094004,740000202,100,In,Insjön,59,timetable+official+geo_name,,in,in,in,in:100,1.00,SE,rail_station,in@59m
+72887,Köbenhavn Syd,55.6525,12.5167,860000783,99,Dk.nel,Köpenhamn syd,35,geo_name,,,dk.nel,,,,DK,rail_station,dk.nel@35m
+71667,Herrljunga,58.078795,13.02022,740000040,99,Hrc,Herrljunga C,52,timetable+official+geo_name,,hrc,hrc,hrc,hrc:48,1.00,SE,rail_station,hrc@52m
+1559,Ljusne station,61.212599,17.112061,740001559,98,Lse,Ljusne,12,timetable+official+geo_name,,lse,lse,lse,lse:60,1.00,SE,rail_station,lse@12m
+602,Gnarp station,62.055433,17.246445,740000602,98,Gnp,Gnarp,184,timetable+official+geo_name,,gnp,gnp,gnp,gnp:60,1.00,SE,rail_station,gnp@184m
+73623,Kramfors,62.929016,17.778237,740000220,98,Krf,Kramfors,0,timetable+official+geo_name,,krf,krf,krf,krf:120,1.00,SE,rail_station,krf@0m
+47178,Vad station,60.032323,15.642931,740000683,98,Vad,Vad,76,timetable+official+geo_name,,vad,vad,vad,vad:64,1.00,SE,rail_station,vad@76m
+46521,Söderbärke (Tåg),60.071321,15.537763,740000024,98,Sre,Söderbärke,135,timetable+official+geo_name,,sre,sre,sre,sre:64,1.00,SE,rail_station,sre@135m
+62,Smedjebacken resecentrum,60.136547,15.406513,740000062,98,Smj,Smedjebacken,50,timetable+official+geo_name,,smj,smj,smj,smj:64,1.00,SE,rail_station,smj@50m
+539,Taberg station,57.678757,14.08708,740000539,96,Tag,Taberg,11,timetable+official+geo_name,,tag,tag,tag,tag:112,1.00,SE,rail_station,tag@11m
+533,Norrahammar station,57.703944,14.11615,740000533,96,Nhr,Norrahammar,49,timetable+official+geo_name,,nhr,nhr,nhr,nhr:112,1.00,SE,rail_station,nhr@49m
+1084,Hovslätt station,57.734778,14.123208,740001084,96,Hvs,Hovslätt,46,timetable+official+geo_name,,hvs,hvs,hvs,hvs:112,1.00,SE,rail_station,hvs@46m
+312,Torup station,56.957429,13.080208,740000312,96,Tou,Torup,45,timetable+official+geo_name,,tou,tou,tou,tou:40,1.00,SE,rail_station,tou@45m
+21,Kinnared,57.026157,13.105521,740000021,96,Kid,Kinnared,140,timetable+official+geo_name,,kid,kid,kid,kid:40,1.00,SE,rail_station,kid@140m
+116,Landeryd station,57.076913,13.265537,740000116,96,Lrd,Landeryd,21,timetable+official+geo_name,,lrd,lrd,lrd,lrd:40,1.00,SE,rail_station,lrd@21m
+289,Smålandsstenar station,57.161355,13.414393,740000289,96,Sdr,Smålandsstenar,37,timetable+official+geo_name,,sdr,sdr,sdr,sdr:40,1.00,SE,rail_station,sdr@37m
+212,Reftele station,57.175899,13.593126,740000212,96,Rft,Reftele,22,timetable+official+geo_name,,rft,rft,rft,rft:40,1.00,SE,rail_station,rft@22m
+59151,Bredaryd station,57.176335,13.737608,740000465,96,Bdy,Bredaryd,23,timetable+official+geo_name,,bdy,bdy,bdy,bdy:40,1.00,SE,rail_station,bdy@23m
+439,Forsheda station,57.163474,13.832474,740000439,96,Fod,Forsheda,35,timetable+official+geo_name,,fod,fod,fod,fod:40,1.00,SE,rail_station,fod@35m
+150,Boden Resecentrum Tät,65.82873,21.707011,740000150,95,Bdn,Boden C,48,timetable+official,,bdn,,bdn,bdn:16,1.00,SE,rail_station,bdn@48m
+1277,Rocksjön,57.775054,14.198503,740001277,95,Rkö,Rocksjön,19,timetable+official+geo_name,,rkö,rkö,rkö,rkö:112,1.00,SE,rail_station,rkö@19m
+156,Älvsbyn Resecentrum,65.677972,20.994974,740000156,94,Äy,Älvsbyn,81,timetable+official+geo_name,,äy,äy,äy,äy:32,1.00,SE,rail_station,äy@81m
+282,Jörn Station,65.054364,20.030951,740000282,94,Jrn,Jörn,138,timetable+official+geo_name,,jrn,jrn,jrn,jrn:32,1.00,SE,rail_station,jrn@138m
+59116,Njurunda Resec,62.2682,17.376956,740001622,89,Njb,Njurundabommen,81,timetable+official,,njb,,njb,njb:60,1.00,SE,rail_station,njb@81m
+59210,Vännäsby,63.915223,19.817416,740013770,87,Vby,Vännäsby,0,timetable+official+geo_name,,vby,vby,vby,vby:124,1.00,SE,rail_station,vby@0m
+842,Erikslund,62.528143,15.923581,740000842,87,Ei,Erikslund,0,timetable+official+geo_name,,ei,ei,ei,ei:80,1.00,SE,rail_station,ei@0m
+325,Ljungaverk jvg,62.496139,16.068131,740000325,87,Ljv,Ljungaverk,72,timetable+official+geo_name,,ljv,ljv,ljv,ljv:80,1.00,SE,rail_station,ljv@72m
+378,Fränsta jvg,62.496616,16.16778,740000378,87,Ft,Fränsta,69,timetable+official+geo_name,,ft,ft,ft,ft:80,1.00,SE,rail_station,ft@69m
+688,Torpshammar,62.472711,16.335401,740000688,87,To,Torpshammar,0,timetable+official+geo_name,,to,to,to,to:80,1.00,SE,rail_station,to@0m
+380,Stöde jvg,62.419959,16.598598,740000380,87,Std,Stöde,33,timetable+official+geo_name,,std,std,std,std:80,1.00,SE,rail_station,std@33m
+73624,Karlskrona central,56.167057,15.585251,740000230,87,Ck,Karlskrona C,0,timetable+official+geo_name,,ck,ck,ck,ck:64,1.00,SE,rail_station,ck@0m
+72986,Fredrikstad,59.208976,10.950663,760000522,86,,,,geo_only,, (not in TrainStation: xfre),,,,,NO,foreign_not_in_trv,no.sbo@12808m
+72987,Sarpsborg,59.286018,11.118195,760000527,86,No.sbo,Sarpsborg,16,geo_name,, (not in TrainStation: xsbo),no.sbo,,,,NO,rail_station,no.sbo@16m
+31032,Ed station,58.913527,11.932938,740000283,84,Ed,Ed,6,timetable+official+geo_name,,ed,ed,ed,ed:36,1.00,SE,rail_station,ed@6m
+73617,Boden central,65.828802,21.708053,740000150,82,Bdn,Boden C,0,timetable+official+geo_name,,bdn,bdn,bdn,bdn:64,1.00,SE,rail_station,bdn@0m
+379,Aneby Resecentrum,57.837175,14.811954,740000379,82,Any,Aneby,29,timetable+official+geo_name,,any,any,any,any:112,1.00,SE,rail_station,any@29m
+59212,Tvärålund,64.099664,19.677608,740001609,80,Tvä,Tvärålund,0,timetable+official+geo_name,,tvä,tvä,tvä,tvä:116,1.00,SE,rail_station,tvä@0m
+145,Vislanda station,56.786283,14.456927,740000145,80,Vs,Vislanda,265,timetable+official+geo_name,,vs,vs,vs,vs:96,1.00,SE,rail_station,vs@265m
+20879,Diö station,56.633941,14.214994,740010243,80,Dis,Diö,106,timetable+official+geo_name,,dis,dis,dis,dis:96,1.00,SE,rail_station,dis@106m
+72983,Moss,59.43185,10.657334,760000516,79,No.mos,Moss,16,geo_name,, (not in TrainStation: xmos),no.mos,,,,NO,rail_station,no.mos@16m
+73649,Iggesund,61.644788,17.081364,740001560,79,Id,Iggesund,0,timetable+official+geo_name,,id,id,id,id:56,1.00,SE,rail_station,id@0m
+63,Enafors järnvägsstation,63.289569,12.337502,740000063,77,Ens,Enafors,25,timetable+official+geo_name,,ens,ens,ens,ens:12 hlr:8,0.60,SE,rail_station,ens@25m
+73646,Vissefjärda,56.538017,15.582586,740001380,77,Vfa,Vissefjärda,0,timetable+official+geo_name,,vfa,vfa,vfa,vfa:128,1.00,SE,rail_station,vfa@0m
+24373,Holmsjö,56.421646,15.542088,740000771,77,Hmö,Holmsjö,67,timetable+official+geo_name,,hmö,hmö,hmö,hmö:128,1.00,SE,rail_station,hmö@67m
+19370,Lammhult station,57.170584,14.584918,740037092,77,Lh,Lammhult,147,timetable+official+geo_name,,lh,lh,lh,lh:88,1.00,SE,rail_station,lh@147m
+1318,Stockaryd Järnvägsparken,57.317651,14.591928,740001318,77,Sy,Stockaryd,868,timetable+official,,sy,,sy,sy:88,1.00,SE,rail_station,sy@868m
+78,Sävsjö station,57.402623,14.66513,740000078,77,Sä,Sävsjö,42,timetable+official+geo_name,,sä,sä,sä,sä:88,1.00,SE,rail_station,sä@42m
+963,Bodafors station,57.506206,14.695198,740000963,77,Bdf,Bodafors,28,timetable+official+geo_name,,bdf,bdf,bdf,bdf:88,1.00,SE,rail_station,bdf@28m
+181,Vännäs Resecentrum,63.908755,19.750704,740000181,76,Vns,Vännäs,188,timetable+official+geo_name,,vns,vns,vns,vns:120,1.00,SE,rail_station,vns@188m
+59197,Rörstorp,57.172379,14.064479,740024861,74,Röp,Rörstorp,23,timetable+official+geo_name,,röp,röp,röp,röp:80,1.00,SE,rail_station,röp@23m
+1024,Bor station,57.115783,14.168783,740001024,74,Bor,Bor,40,timetable+official+geo_name,,bor,bor,bor,bor:80,1.00,SE,rail_station,bor@40m
+342,Rydaholm station,56.985492,14.312367,740000342,74,Rym,Rydaholm,115,timetable+official+geo_name,,rym,rym,rym,rym:80,1.00,SE,rail_station,rym@115m
+59175,Kiruna malmbangård,67.868263,20.199231,740001602,72,Kmb,Kiruna,0,timetable+official+geo_name,,kmb,kmb,kmb,kmb:20,1.00,SE,rail_station,kmb@0m
+254,Gällivare C/Resecentrum,67.133938,20.651386,740000254,72,Gvc,Gällivare C,69,timetable+official+geo_name,,gvc (not in TrainStation: gv),gvc,gvc,gvc:32,1.00,SE,rail_station,gvc@69m
+22071,Smedby station,56.677633,16.23299,740038527,72,Sdy,Smedby,18,timetable+official+geo_name,,sdy,sdy,sdy,sdy:64,1.00,SE,rail_station,sdy@18m
+22115,Trekanten station,56.701908,16.11736,740038526,72,Tre,Trekanten,265,timetable+official+geo_name,,tre,tre,tre,tre:64,1.00,SE,rail_station,tre@265m
+22386,Örsjö station,56.696625,15.749739,740038520,72,Örs,Örsjö,12,timetable+official+geo_name,,örs,örs,örs,örs:64,1.00,SE,rail_station,örs@12m
+48535,Insjön station,60.675448,15.095681,740000202,71,In,Insjön,70,timetable+official+geo_name,,in,in,in,in:16,1.00,SE,rail_station,in@70m
+1290,Sannarp station,56.68599,12.892613,740001290,71,Sarp,Sannarp,68,timetable+official+geo_name,,sarp,sarp,sarp,sarp:40,1.00,SE,rail_station,sarp@68m
+59191,Oskarström,56.806501,12.971984,740000313,71,Om,Oskarström,0,timetable+official+geo_name,,om,om,om,om:40,1.00,SE,rail_station,om@0m
+129,Degerfors jvstn,59.229313,14.441042,740000129,70,Dg,Degerfors,62,timetable+official+geo_name,,dg,dg,dg,dg:4,1.00,SE,rail_station,dg@62m
+72982,Ski,59.718536,10.833792,760000508,69,No.ski,Ski,87,geo_name,, (not in TrainStation: xski),no.ski,,,,NO,rail_station,no.ski@87m
+72984,Rygge,59.377894,10.747896,760000518,69,,,,geo_only,, (not in TrainStation: xryg),,,,,NO,foreign_not_in_trv,no.mos@7904m
+72985,Råde,59.347389,10.866209,760000519,69,,,,geo_only,, (not in TrainStation: xråd),,,,,NO,foreign_not_in_trv,no.mos@15117m
+34892,Halden stasjon,59.120545,11.384855,760000546,69,No.hld,Halden,47,geo_name,, (not in TrainStation: xhld),no.hld,,,,NO,rail_station,no.hld@47m
+59207,Stavre,62.826105,15.311814,740000686,68,Stv,Stavre,0,timetable+official+geo_name,,stv,stv,stv,stv:60,1.00,SE,rail_station,stv@0m
+324,Gällö järnvägsstation,62.911291,15.229137,740000324,68,Gö,Gällö,19,timetable+official+geo_name,,gö,gö,gö,gö:60,1.00,SE,rail_station,gö@19m
+653,Pilgrimstad järnvägsstation,62.955101,15.040348,740000653,68,Pl,Pilgrimstad,14,timetable+official+geo_name,,pl,pl,pl,pl:60,1.00,SE,rail_station,pl@14m
+526,Brunflo järnvägsstation,63.076578,14.832078,740000526,68,Bf,Brunflo,72,timetable+official+geo_name,,bf,bf,bf,bf:60,1.00,SE,rail_station,bf@72m
+622,Cityterminalen,59.332161,18.054308,740000622,65,,,,geo_only,, (not in TrainStation: xsct),,,,,SE,needs_review,cst@296m
+1607,Fjälkinge station,56.043397,14.278578,740001607,65,Fki,Fjälkinge,1231,timetable+official,,fki,,fki,fki:92,1.00,SE,rail_station,fki@1231m
+57766,Notviken Station,65.130612,22.001116,740002953,64,Nvn,Notviken,53656,official,,nvn,,,nvn:28,1.00,SE,rail_station,ptå@32416m
+268,Murjek Järnvägsstation,66.484518,20.880567,740000268,63,Mk,Murjek,44,timetable+official+geo_name,,mk,mk,mk,mk:32,1.00,SE,rail_station,mk@44m
+56485,Bastuträsk Station,64.789753,20.04213,740000294,61,Bst,Bastuträsk,85,timetable+official+geo_name,,bst,bst,bst,bst:8,1.00,SE,rail_station,bst@85m
+48715,Morastrand,61.005011,14.542252,740020170,61,Mras,Morastrand,25,timetable+official+geo_name,,mras,mras,mras,mras:30,1.00,SE,rail_station,mras@25m
+311,Malmbäck station,57.577883,14.459888,740000311,60,Mbä,Malmbäck,34,timetable+official+geo_name,,mbä,mbä,mbä,mbä:40,1.00,SE,rail_station,mbä@34m
+252,Hok station,57.513999,14.27554,740000252,60,Hok,Hok,51,timetable+official+geo_name,,hok,hok,hok,hok:40,1.00,SE,rail_station,hok@51m
+1608,Bjärnum station,56.291439,13.706872,740001608,57,Bjm,Bjärnum,240,timetable+official+geo_name,,bjm,bjm,bjm,bjm:80,1.00,SE,rail_station,bjm@240m
+432,Vittsjö station,56.342112,13.663264,740000432,57,Vsj,Vittsjö,30,timetable+official+geo_name,,vsj,vsj,vsj,vsj:80,1.00,SE,rail_station,vsj@30m
+258,Markaryd station,56.457996,13.593725,740000258,57,Mrd,Markaryd,181,timetable+official+geo_name,,mrd,mrd,mrd,mrd:40,1.00,SE,rail_station,mrd@181m
+15,Boxholms station,58.194477,15.055168,740000015,55,Bx,Boxholm,195,timetable+official,,bx,,bx,bx:150,1.00,SE,rail_station,bx@195m
+25,Storlien järnvägsstation,63.316329,12.100245,740000025,53,Str,Storlien,46,timetable+official+geo_name,,str,str,str,str:10,1.00,SE,rail_station,str@46m
+72599,Narvik station,68.4417,17.44183,760002402,51,No.nk,Narvik,41,geo_name,, (not in TrainStation: xnk),no.nk,,,,NO,rail_station,no.nk@41m
+59155,Björkliden,68.408387,18.686353,740000059,51,Bln,Björkliden,0,timetable+official+geo_name,,bln,bln,bln,bln:8,1.00,SE,rail_station,bln@0m
+114,Abisko Turist E10,68.358164,18.78011,740000114,51,Akt,Abisko turiststation,160,timetable+official,,akt,,akt,akt:8,1.00,SE,rail_station,akt@160m
+229,Riksgränsen station,68.42573,18.12742,740000229,49,Rgn,Riksgränsen,392,timetable+official,,rgn,,rgn,rgn:8,1.00,SE,rail_station,rgn@392m
+59149,Abisko östra,68.348641,18.830346,740000151,49,Ak,Abisko Östra,0,timetable+official+geo_name,,ak,ak,ak,ak:8,1.00,SE,rail_station,ak@0m
+1348,Torved station,58.825601,14.100109,740001348,49,Tvd,Torved,79,timetable+official+geo_name,,tvd,tvd,tvd,tvd:16,1.00,SE,rail_station,tvd@79m
+58586,Eskilstuna järnvägsstation,59.369486,16.505196,740000170,47,Et,Eskilstuna C,18,official+geo_name,,et,et,,,,SE,rail_station,et@18m
+72893,Berlin Hbf (Tief),52.5256,13.3694,800010100,46,De.bl,Berlin Hbf,46,geo_name,, (not in TrainStation: zbln),de.bl,,,,DE,rail_station,de.bl@46m
+84,Eksjö Resecentrum,57.664107,14.976456,740000084,46,Ek,Eksjö,73,timetable+official+geo_name,,ek,ek,ek,ek:22,1.00,SE,rail_station,ek@73m
+59194,Ormaryd,57.664851,14.832659,740000547,46,Ory,Ormaryd,114,timetable+official+geo_name,,ory,ory,ory,ory:44,1.00,SE,rail_station,ory@114m
+18362,Brinellgymnasiet,57.667858,14.701302,740032989,46,Brin,Brinellskolan,175,timetable,,,,brin,brin:44,1.00,SE,rail_station,brin@175m
+1013,Astrid Lindgrens värld,57.674025,15.840568,740001013,45,Alv,Astrid Lindgrens värld,150,official+geo_name,,alv,alv,,,,SE,rail_station,alv@150m
+72601,Katterat,68.39762,17.96588,760002405,42,No.kat,Katterat,25,geo_name,, (not in TrainStation: xkat),no.kat,,,,NO,rail_station,no.kat@25m
+72604,Sösterbekk,68.43523,18.00326,760012405,42,No.sös,Sösterbekk,16,geo_name,, (not in TrainStation: xsös),no.sös,,,,NO,rail_station,no.sös@16m
+72602,Björnfjell station,68.43213,18.07183,760002406,42,Bjf,Bjørnfjell,30,geo_only,, (not in TrainStation: xbjf),,,,,NO,rail_station,bjf@30m
+59176,Katterjåkk,68.420158,18.160849,740001432,42,Kjå,Katterjåkk,0,timetable+official+geo_name,,kjå,kjå,kjå,kjå:8,1.00,SE,rail_station,kjå@0m
+219,Hällnäs Station,64.306129,19.625469,740000219,42,Hls,Hällnäs,76,timetable+official+geo_name,,hls,hls,hls,hls:32,1.00,SE,rail_station,hls@76m
+265,Nattavaara Station,66.753645,20.948603,740000265,41,Ntv,Nattavaara,96,timetable+official+geo_name,,ntv,ntv,ntv,ntv:32,1.00,SE,rail_station,ntv@96m
+1336,Tannefors station,58.400421,15.660226,740001336,41,Tn,Tannefors,3,timetable+official+geo_name,,tn,tn,tn,tn:14,1.00,SE,rail_station,tn@3m
+308,Duved järnvägsstation,63.390238,12.916865,740000308,40,Du,Duved,61,official+geo_name,,du,du,,,,SE,rail_station,du@61m
+59217,Västra Station,63.178655,14.631523,740020168,40,Ösv,Östersund V,23,timetable+official+geo_name,,ösv (not in TrainStation: ösvi),ösv,ösv,ösv:34,1.00,SE,rail_station,ösv@23m
+165,Nälden,63.350609,14.263058,740000165,40,Nä,Nälden,0,timetable+official+geo_name,,nä,nä,nä,nä:34,1.00,SE,rail_station,nä@0m
+153,Mörsil järnvägsstation,63.308898,13.657063,740000153,40,Mi,Mörsil,52,timetable+official+geo_name,,mi,mi,mi,mi:34,1.00,SE,rail_station,mi@52m
+72600,Rombak,68.40377,17.79104,760002404,39,No.rom,Rombak,94,geo_name,, (not in TrainStation: xrom),no.rom,,,,NO,rail_station,no.rom@94m
+72894,Berlin Gesundbrunnen,52.5489,13.3886,800010102,36,De.bgs,Berlin-Gesundbrunnen,163,geo_name,, (not in TrainStation: zbgb),de.bgs,,,,DE,rail_station,de.bgs@163m
+166,Katrineholm Resecentrum,58.996399,16.206948,740000166,34,K,Katrineholm C,129,official+geo_name,,k,k,,,,SE,rail_station,k@129m
+294,Bastuträsk Station,64.789743,20.042171,740000294,33,Bst,Bastuträsk,84,timetable+official+geo_name,,bst,bst,bst,bst:24,1.00,SE,rail_station,bst@84m
+73099,Sunne,59.842683,13.16415,740000184,33,Sun,Sunne,1155,timetable+official,,sun,,sun,sun:8,1.00,SE,rail_station,sun@1155m
+58760,Laholm Station,56.502224,12.999239,740000058,32,Laov,Laholm,52,timetable+official+geo_name,,laov,laov,laov,laov:56,1.00,SE,rail_station,laov@52m
+72885,Kolding,55.4906,9.4808,860000083,32,Dk.kd,Kolding,36,geo_name,,,dk.kd,,,,DK,rail_station,dk.kd@36m
+72886,Odense,55.4017,10.3867,860000512,32,Dk.od,Odense,125,geo_name,, (not in TrainStation: zod),dk.od,,,,DK,rail_station,dk.od@125m
+86,Vetlanda Resecentrum,57.426349,15.081305,740000086,32,Vta,Vetlanda,50,timetable+official+geo_name,,vta,vta,vta,vta:24,1.00,SE,rail_station,vta@50m
+59162,Ekenässjön station,57.489322,15.019778,740000510,32,Esn,Ekenässjön,141,timetable+official+geo_name,,esn,esn,esn,esn:48,1.00,SE,rail_station,esn@141m
+18912,Björköby station,57.520996,14.911032,740000962,32,Bjy,Björköby,29,timetable+official+geo_name,,bjy,bjy,bjy,bjy:48,1.00,SE,rail_station,bjy@29m
+974,Stensjön station,57.582376,14.822358,740000974,32,Snö,Stensjön,84,timetable+official+geo_name,,snö,snö,snö,snö:48,1.00,SE,rail_station,snö@84m
+73653,Kalix Västra,65.864874,23.143069,740001620,28,Klxv,Kalix Västra,0,timetable+official+geo_name,,klxv,klxv,klxv,klxv:24,1.00,SE,rail_station,klxv@0m
+372,Haparanda Jvstn,65.828367,24.131894,740000372,28,Hp,Haparanda,45,timetable+official+geo_name,,hp,hp,hp,hp:12,1.00,SE,rail_station,hpa@34m
+704,Fors TÅG,60.209087,16.313714,740000704,28,Fs,Fors,312,timetable+official,,fs,,fs,fs:8,1.00,SE,rail_station,fs@312m
+71171,Torsåker station,60.514148,16.489165,740001563,28,Tså,Torsåker,77,timetable+official+geo_name,,tså,tså,tså,tså:8,1.00,SE,rail_station,tså@77m
+24116,Kungsplan,56.165202,15.586844,740020510,27,,,,geo_only,, (not in TrainStation: ckkp),,,,,SE,needs_review,ck@229m
+20758,Centrum väst,56.169103,14.86107,740040991,27,,,,geo_only,,,,,,,SE,needs_review,kh@952m
+385,Tingsryd terminal,56.523997,14.975528,740000385,27,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,sru@29452m
+620,Huskvarna station,57.782274,14.265783,740000620,25,Hka,Huskvarna,61,official+geo_name,,hka,hka,,,,SE,rail_station,hka@61m
+72976,Padborg,54.82351,9.35876,860000100,25,Dk.pa,Padborg,27,geo_name,, (not in TrainStation: zpa),dk.pa,,,,DK,rail_station,dk.pa@27m
+46506,Mora (Tåg),61.008608,14.558397,,24,Mrc,Mora C,39,geo_name,,,mrc,,,,unknown,rail_station,mrc@39m
+903,Karbenning Station,60.036941,16.072058,740000903,23,Kbn,Karbenning,65,timetable+official+geo_name,,kbn,kbn,kbn,kbn:16,1.00,SE,rail_station,kbn@65m
+47172,Avesta centrum (Tåg),60.147413,16.169958,740001568,22,Acm,Avesta centrum,38,timetable+official+geo_name,,acm,acm,acm,acm:12,1.00,SE,rail_station,acm@38m
+39696,Rottneros,59.793495,13.101844,740024498,21,Rts,Rottneros,1513,timetable,,,,rts,rts:6,1.00,SE,rail_station,rts@1513m
+40694,"Såneby, Rottneros",59.776306,13.096592,740011571,21,Öjr,Öjervik,1478,timetable,,,,öjr,öjr:6,1.00,SE,rail_station,öjr@1478m
+39672,"Bäckebron, Västra Ämtervik",59.662222,13.154638,740024500,21,Bäb,Bäckebron,661,timetable,,,,bäb,bäb:6,1.00,SE,rail_station,bäb@661m
+39341,"Linnedal, Kil",59.614384,13.154316,740004320,21,,,,geo_only,,,,,frå:6,1.00,SE,bus_stop_or_unknown,frå@2177m
+39342,"Lövåsen, Kil",59.577738,13.174589,740056953,21,,,,geo_only,,,,,tlt:6,1.00,SE,bus_stop_or_unknown,tlt@3686m
+72582,Lilleström,59.95321,11.04468,760000207,20,No.lls,Lilleström,49,geo_name,, (not in TrainStation: xlls),no.lls,,,,NO,rail_station,no.lls@49m
+186,Skinnskatteberg jvstn,59.83263,15.692642,740000186,20,Skb,Skinnskatteberg,58,timetable+official+geo_name,,skb,skb,skb,skb:8,1.00,SE,rail_station,skb@58m
+1560,Iggesund station,61.645492,17.081184,740001560,19,Id,Iggesund,79,timetable+official+geo_name,,id,id,id,id:4,1.00,SE,rail_station,id@79m
+5217,Marielunds station (Uppsala),59.84257,17.875307,740012812,19,xMl,Marielund,37,geo_only,,,,,,,SE,rail_station,xml@37m
+72892,Dresden Hbf (Strehlener Str.),51.0386,13.7339,800001305,19,,,,geo_only,,,,,,,DE,needs_review,de.dh@247m
+72584,Sörumsand,59.9858,11.24054,760000305,17,,,,geo_only,, (not in TrainStation: xsör),,,,,NO,foreign_not_in_trv,no.lls@11443m
+82,Västervik Resecentrum,57.75537,16.643266,740000082,17,Vk,Västervik,37,timetable+official+geo_name,,vk,vk,vk,vk:12,1.00,SE,rail_station,vk@37m
+68894,Fyrislund hållplats Lennakatten,59.858395,17.68202,740076850,15,xFl,Fyrislund,6,geo_only,,,,,,,SE,rail_station,xfl@6m
+4194,Jordgubbsgatan (Uppsala),59.864274,17.702193,740007361,15,xÅs,Årsta,27,geo_only,,,,,,,SE,rail_station,xås@27m
+68989,Skölsta hållplats Lennakatten,59.874397,17.744028,740007603,15,xSa,Skölsta,6,geo_only,,,,,,,SE,rail_station,xsa@6m
+68892,Bärby station Lennakatten,59.85707,17.815482,740072893,15,xB,Bärby,7,geo_name,,,xb,,,,SE,rail_station,xb@7m
+68893,Gunsta hållplats Lennakatten,59.852759,17.834295,740029588,15,xGa,Gunsta,7,geo_only,,,,,,,SE,rail_station,xga@7m
+68897,Lövstahagen hållplats Lennakatten,59.846887,17.886456,740076848,15,xLh,Lövstahagen,49,geo_only,,,,,,,SE,rail_station,xlh@49m
+5243,Selknä (Uppsala),59.855971,17.905626,740007085,15,xSlä,Selknä,183,geo_name,,,xslä,,,,SE,rail_station,xslä@183m
+68898,Löt hållplats Lennakatten,59.866132,17.943758,740076847,15,xLöt,Löt,4,geo_only,,,,,,,SE,rail_station,xlöt@4m
+68887,Länna station Lennakatten,59.871707,17.958969,740020998,15,xLna,Länna,21,geo_name,,,xlna,,,,SE,rail_station,xlna@21m
+68889,Almunge station Lennakatten,59.875893,18.044508,740021000,15,xAlg,Almunge,6,geo_name,,,xalg,,,,SE,rail_station,xalg@6m
+68899,Moga hållplats Lennakatten,59.895995,18.062076,740076849,15,,,,geo_only,,,,,,,SE,needs_review,xmg@873m
+5283,Faringe station (Uppsala),59.920688,18.116213,740020999,15,xFrg,Faringe,115,geo_name,,,xfrg,,,,SE,rail_station,xfrg@115m
+1589,Höga Kusten Flygplats,63.052827,17.744814,740001589,15,Väy,Västeraspby,348,timetable+official,,väy,,väy,väy:24,1.00,SE,rail_station,väy@348m
+37,Ånn järnvägsstation,63.321568,12.539168,740000037,15,Ånn,Ånn,25,timetable+official+geo_name,,ånn,ånn,ånn,ånn:12,1.00,SE,rail_station,ånn@25m
+404,Gamleby station,57.896666,16.41033,740000404,15,Gal,Gamleby,55,timetable+official+geo_name,,gal,gal,gal,gal:24,1.00,SE,rail_station,gal@55m
+17285,Överums Bruk,57.988996,16.31775,740030062,15,Övmb,Överums Bruk,133,timetable+official+geo_name,,övmb,övmb,övmb,övmb:24,1.00,SE,rail_station,övmb@133m
+496,Falerums station,58.143389,16.20773,740000496,15,Fal,Falerum,42,timetable+official,,fal,,fal,fal:24,1.00,SE,rail_station,fal@42m
+338,Åtvidabergs resecentrum,58.203439,16.002547,740000338,15,Åvg,Åtvidaberg,37,timetable+official,,åvg,,åvg,åvg:24,1.00,SE,rail_station,åvg@37m
+74474,Röjan station,62.4792,14.3592,,14,Rjn,Röjan,2,geo_name,,,rjn,,,,unknown,rail_station,rjn@2m
+448,Edsåsdalen,63.315254,13.086994,740000448,14,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,un@7564m
+71201,Trillevallen,63.259967,13.186264,740029938,14,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,un@6652m
+455,Vålådalens fjällstation,63.148743,12.965211,740000455,14,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,un@23000m
+58782,Varberg Station,57.111203,12.250104,740000110,13,Vbc,Varberg C,164,official+geo_name,,vbc,vbc,,,,SE,rail_station,vbc@164m
+59178,Kaitum,67.542577,20.103269,740000326,12,Ktm,Kaitum,0,timetable+official+geo_name,,ktm,ktm,ktm,ktm:8,1.00,SE,rail_station,ktm@0m
+59198,Sjisjka,67.62589,20.234529,740001437,12,Sjka,Sjisjka,0,timetable+official+geo_name,,sjka,sjka,sjka,sjka:8,1.00,SE,rail_station,sjka@0m
+60049,Solna station norra,59.36879,18.009422,740000759,12,So,Solna,367,timetable+official,,so,,so,so:8,1.00,SE,rail_station,so@367m
+68127,Örebro Centralstation,59.277429,15.210546,740000133,12,Ör,Örebro C,90,official+geo_name,,ör,ör,,,,SE,rail_station,ör@90m
+69841,Trondheim,63.436617,10.399535,760001126,10,No.tnd,Trondheim,69,geo_name,, (not in TrainStation: xtnd),no.tnd,,,,NO,rail_station,no.tnd@69m
+69842,Vikhammar,63.438795,10.623477,760001204,10,,,,geo_only,, (not in TrainStation: xvhr),,,,,NO,foreign_not_in_trv,no.tnd@11201m
+69843,Hommelvik,63.411651,10.793942,760001207,10,,,,geo_only,, (not in TrainStation: xhmv),,,,,NO,foreign_not_in_trv,no.hel@6494m
+69844,Hell,63.445814,10.896206,760001208,10,No.hel,Hell,163,geo_name,, (not in TrainStation: xhel),no.hel,,,,NO,rail_station,no.hel@163m
+69845,Hegra,63.460968,11.103615,760001210,10,,,,geo_only,, (not in TrainStation: xhra),,,,,NO,foreign_not_in_trv,no.hel@10281m
+69846,Gudå,63.443627,11.618327,760001213,10,,,,geo_only,, (not in TrainStation: xgu),,,,,NO,foreign_not_in_trv,stgr@24951m
+69847,Meråker,63.422483,11.76004,760001214,10,,,,geo_only,, (not in TrainStation: xmer),,,,,NO,foreign_not_in_trv,stgr@17668m
+69848,Kopperå,63.391999,11.848475,760001215,10,,,,geo_only,, (not in TrainStation: xkpr),,,,,NO,foreign_not_in_trv,stgr@12149m
+59183,Låktatjåkka,68.423687,18.324742,740001433,9,Låk,Låktatjåkka,0,timetable+official+geo_name,,låk,låk,låk,låk:8,1.00,SE,rail_station,låk@0m
+208,Vassijaure station,68.42883,18.2604,740000208,9,Vj,Vassijaure,139,timetable+official+geo_name,,vj,vj,vj,vj:8,1.00,SE,rail_station,vj@139m
+72585,Årnes,60.1239,11.46496,760000311,9,,,,geo_only,, (not in TrainStation: xårn),,,,,NO,foreign_not_in_trv,no.lls@30051m
+72586,Skarnes,60.25381,11.68055,760000315,9,,,,geo_only,, (not in TrainStation: xska),,,,,NO,foreign_not_in_trv,no.kvg@19319m
+59166,Fjällåsen,67.519357,20.093703,740000414,8,Fjå,Fjällåsen,0,official+geo_name,,fjå,fjå,,,,SE,rail_station,fjå@0m
+60165,Östersund Västra Station,63.178022,14.631225,740020168,7,Ösv,Östersund V,58,official+geo_name,,ösv (not in TrainStation: ösvi),ösv,,ösv:1,1.00,SE,rail_station,ösv@58m
+72907,Innsbruck Hbf,47.2633,11.4006,,7,At.inn,Innsbruck,150,geo_name,,,at.inn,,,,unknown,rail_station,at.inn@150m
+72906,Jenbach,47.3883,11.7783,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@24082m
+72901,Kitzbuehel,47.4542,12.3911,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@25057m
+73660,St Johann in Tirol,47.5197,12.4308,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.wör@27931m
+72900,Zell am See,47.3206,12.7967,,7,,,,geo_only,,,,,,,unknown,needs_review,at.zel@577m
+72899,St Johann im Pongau,47.3483,13.195,,7,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.sch@4496m
+72888,Höje Taastrup,55.6486,12.2694,,7,Dk.htå,Höje Taastrup,27,geo_name,,,dk.htå,,,,unknown,rail_station,dk.htå@27m
+59438,Klövsjö skidområde,62.50298,14.17932,740062751,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn@9611m
+67960,"Storhogna, M",62.494388,14.114145,740072520,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn@12702m
+59391,Storhogna hotell,62.50396,14.0985,740023989,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@13592m
+59457,Vemdalsskalet Skistar Gästserv,62.48145,13.97516,740074532,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@6846m
+54390,Skalspasset/Pass Express,62.49155,13.9474,740064292,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@6486m
+59392,Björnrike centrat,62.42322,13.95427,740023990,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@5439m
+67954,"Björnrike, Torg",62.413043,13.949891,740074657,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@5922m
+491,Funäsdalen busstation,62.545106,12.545373,740000491,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,rjn.vd@68526m
+53542,Bruksvallarna Stig Myhrs,62.641367,12.417472,740013432,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,ens@72214m
+506,Ramundberget,62.700778,12.389353,740000506,7,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,ens@65547m
+1016,Basthagen station,58.205518,15.974409,740001016,7,Bth,Basthagen,14,timetable+official+geo_name,,bth,bth,bth,bth:4,1.00,SE,rail_station,bth@14m
+59388,Storulvån Fjällstation,63.16968,12.36344,740023497,6,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,ens@13418m
+30,Falun TÅG,60.603137,15.642209,740000030,4,Fln,Falun C,29,official+geo_name,,fln,fln,,,,SE,rail_station,fln@29m
+419,Hällefors Resecentrum,59.780803,14.519342,740000419,4,Hlf,Hällefors,348,official,,hlf (not in TrainStation: hlfn),,,,,SE,rail_station,hlf@348m
+59167,Grythyttan,59.703842,14.530485,740000482,4,Ghy,Grythyttan,0,official+geo_name,,ghy,ghy,,,,SE,rail_station,ghy@0m
+43248,Munktorp,59.53265,16.133078,740011085,3,Morp,Munktorp,85,geo_name,,,morp,,,,SE,rail_station,morp@85m
+74508,Gol,60.6992,8.9714,,2,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,no.osl@131643m
+72904,Salzburg Hbf,47.8131,13.0458,,2,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,at.sal@1963m
+648,Lindvallen Snöcentret,61.155181,13.205494,740000648,2,,,,geo_only,, (not in TrainStation: lisb),,,,,SE,bus_stop_or_unknown,mäk@46858m
+72550,Sälen Lindvallen Fjällvägen,61.16394,13.19154,,2,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,mäk@47501m
+656,Högfjällshotellet,61.15761,13.118003,740000656,2,,,,geo_only,, (not in TrainStation: shfb),,,,,SE,bus_stop_or_unknown,mäk@51495m
+72551,"Sälen Tandådalen, Tandådalstorget",61.17542,12.99563,,2,,,,geo_only,,,,,,,unknown,foreign_not_in_trv,mfs@57197m
+646,Hundfjället hotellet,61.178002,12.965423,740000646,2,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,mfs@58315m
+1160,Stöten Hotellet,61.266745,12.887839,740001160,2,,,,geo_only,, (not in TrainStation: stöb),,,,,SE,bus_stop_or_unknown,mäk@63909m
+522,Tjustskolan station,57.752868,16.630477,740000522,2,Tjsk,Tjustskolan,8,official+geo_name,,tjsk (not in TrainStation: tjsp),tjsk,,,,SE,rail_station,tjsk@8m
+63001,Jenny,57.761776,16.579364,740010008,2,Jy,Jenny,0,official+geo_name,,jy,jy,,,,SE,rail_station,jy@0m
+67583,Verkebäck,57.728693,16.515768,740024957,2,Vbä,Verkebäck,0,official+geo_name,,vbä (not in TrainStation: xvbä),vbä,,,,SE,rail_station,vbä@0m
+1574,Valstad,57.73546,16.48367,740001574,2,xVas,Valstad,4,geo_name,, (not in TrainStation: vas),xvas,,,,SE,rail_station,xvas@4m
+68997,Fårhult station,57.73766,16.41995,740024958,2,xFåt,Fårhult,9,geo_name,, (not in TrainStation: fåt),xfåt,,,,SE,rail_station,xfåt@9m
+23250,Tjursbo,57.722695,16.397998,740053427,2,,,,geo_only,,,,,,,SE,bus_stop_or_unknown,xfåt@2123m
+907,Ankarsrum station,57.699541,16.334477,740000907,2,xAkm,Ankarsrum,35,geo_name,, (not in TrainStation: akm),xakm,,,,SE,rail_station,xakm@35m
+347,Storfors busstation,59.533348,14.272973,740000347,2,Sf,Storfors,79,official+geo_name,,sf,sf,,,,SE,rail_station,sf@79m
+170,Eskilstuna Centralstation,59.369866,16.504571,740000170,2,Et,Eskilstuna C,73,official+geo_name,,et,et,,,,SE,rail_station,et@73m
+70766,Nyckelbyvägen,59.415733,15.716161,740050689,1,,,,geo_only,,,,,,,SE,needs_review,ålg@335m
+70739,Fellingsbro jvstn,59.433523,15.592064,740000175,1,Feb,Fellingsbro,185,official+geo_name,,feb,feb,,,,SE,rail_station,feb@185m
