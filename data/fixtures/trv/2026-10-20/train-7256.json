@@ -1,0 +1,1670 @@
+{
+ "captured_at": "2026-10-20T17:23:54.909Z",
+ "date": "2026-10-20",
+ "train": "7256",
+ "source": "Trafikverket TrainAnnouncement 1.9",
+ "rows": [
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b145890",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:20:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:20:00.000+02:00",
+   "LocationSignature": "N",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:20:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:20:19.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "7",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-20T17:20:50.319Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b1b7fd5",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:30:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:31:00.000+02:00",
+   "LocationSignature": "Fm",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.027Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b191cfd",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:30:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:30:00.000+02:00",
+   "LocationSignature": "Fm",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:22.995Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b204443",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:38:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:39:00.000+02:00",
+   "LocationSignature": "Th",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.077Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b1de279",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:38:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:38:00.000+02:00",
+   "LocationSignature": "Th",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.064Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b25099d",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:45:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:46:00.000+02:00",
+   "LocationSignature": "Hka",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.132Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b204445",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:45:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:45:00.000+02:00",
+   "LocationSignature": "Hka",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.115Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b29ce04",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:51:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:51:00.000+02:00",
+   "LocationSignature": "Jö",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2a",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.165Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b2c399b",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:01:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:01:00.000+02:00",
+   "LocationSignature": "Jö",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2a",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "F",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.186Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b30f4e6",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:08:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:08:00.000+02:00",
+   "LocationSignature": "Bry",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.231Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b33574e",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:09:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:09:00.000+02:00",
+   "LocationSignature": "Bry",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "F",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.258Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b381c99",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:14:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:14:00.000+02:00",
+   "LocationSignature": "Ho",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.276Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b3f42f1",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:15:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:15:00.000+02:00",
+   "LocationSignature": "Ho",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "F",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.291Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b4687aa",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:23:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:23:00.000+02:00",
+   "LocationSignature": "Mu",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.313Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b4da899",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:23:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:24:00.000+02:00",
+   "LocationSignature": "Mu",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "F",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.329Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b526dde",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:31:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:31:00.000+02:00",
+   "LocationSignature": "Sm",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.347Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b573261",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:31:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:32:00.000+02:00",
+   "LocationSignature": "Sm",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "F",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.362Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b5e781c",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:44:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:44:00.000+02:00",
+   "LocationSignature": "F",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1a",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.418Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b6802b7",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:46:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:46:00.000+02:00",
+   "LocationSignature": "F",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1a",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.432Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b6cc73e",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:53:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:53:00.000+02:00",
+   "LocationSignature": "Ss",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.453Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b71962c",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:54:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T20:54:00.000+02:00",
+   "LocationSignature": "Ss",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.466Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b78b32f",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T21:02:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T21:02:00.000+02:00",
+   "LocationSignature": "Sk",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3b",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-06T18:12:23.486Z"
+  }
+ ]
+}

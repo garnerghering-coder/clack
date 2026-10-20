@@ -1,0 +1,3250 @@
+{
+ "captured_at": "2026-10-20T17:23:55.065Z",
+ "date": "2026-10-20",
+ "train": "3940",
+ "source": "Trafikverket TrainAnnouncement 1.9",
+ "rows": [
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e4",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:18:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T08:18:00.000+02:00",
+   "LocationSignature": "Mc",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T08:18:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:18:53.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "9",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 2,
+     "Order": 0
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 3,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 4,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T06:18:54.355Z"
+  },
+  {
+   "ActivityId": "6fbad5b4-c1fc-39c4-23bd-f47ef0695f37",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:21:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mgb",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:22:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:22:23.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:22:53.847Z"
+  },
+  {
+   "ActivityId": "34bbd4cb-e86b-ca5b-df35-49960f4909f6",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:22:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Al",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:23:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:23:27.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:23:42.936Z"
+  },
+  {
+   "ActivityId": "44f965d2-ac26-0f56-d3d7-d9ff535f0c63",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:22:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Blv",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:24:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:24:01.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:24:12.523Z"
+  },
+  {
+   "ActivityId": "37de2971-45d2-0ccd-d111-9cadd646df1e",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:23:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Åk",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:24:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:24:55.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:24:55.742Z"
+  },
+  {
+   "ActivityId": "3a49edc0-9022-44d7-5078-42db27e241e6",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:24:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Hjp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:26:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:26:03.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:26:03.714Z"
+  },
+  {
+   "ActivityId": "03acdc09-3f31-3d49-f6b6-69596691f49e",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:26:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Kgå",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:27:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:27:36.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:27:46.710Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e5",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:28:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T08:29:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T08:28:00.000+02:00",
+   "LocationSignature": "Lu",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T08:29:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:29:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "4",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T06:28:31.287Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e6",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:30:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T08:31:00.000+02:00",
+   "LocationSignature": "Lu",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T08:32:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:32:40.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "4",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 0
+    },
+    {
+     "LocationName": "Av",
+     "Priority": 4,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 3,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T06:32:51.107Z"
+  },
+  {
+   "ActivityId": "dba77de3-29d3-e0ac-567a-5d05e53c7ffe",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:34:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Stb",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:35:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:35:14.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:35:45.316Z"
+  },
+  {
+   "ActivityId": "48b0bcda-ca7b-f1e1-68d7-a9f7a692a0f8",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:34:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Thl",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:34:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:34:50.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:35:10.416Z"
+  },
+  {
+   "ActivityId": "30dc9c6f-86da-4e52-b5cb-86720425bb18",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:36:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Ö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:37:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:37:11.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:37:26.545Z"
+  },
+  {
+   "ActivityId": "ebcb777f-2ea9-98f6-dcdb-248ef207491f",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:38:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Dat",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:38:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:38:37.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:38:47.537Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e7",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:41:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T08:41:00.000+02:00",
+   "LocationSignature": "E",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T08:40:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:40:27.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T06:39:58.394Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e8",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:41:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T08:42:00.000+02:00",
+   "LocationSignature": "E",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T08:42:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:42:25.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "3",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 0
+    },
+    {
+     "LocationName": "Av",
+     "Priority": 4,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 3,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T06:43:11.646Z"
+  },
+  {
+   "ActivityId": "de4dfebb-0dd1-0faa-699c-d639253b6305",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:47:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sg",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:46:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:46:46.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:46:56.752Z"
+  },
+  {
+   "ActivityId": "2f45b635-8904-0135-8766-0514b752df18",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:50:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Hö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:50:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:50:32.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:50:42.701Z"
+  },
+  {
+   "ActivityId": "3d413a18-675a-8315-dc41-03ec31ba3dde",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:54:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Tö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:53:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:53:38.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:53:54.107Z"
+  },
+  {
+   "ActivityId": "9141160d-fb91-054f-98e0-ffbea4fadf22",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:55:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Väd",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:54:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:54:43.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:55:03.449Z"
+  },
+  {
+   "ActivityId": "a6a3f759-a297-0b3b-cb0f-b9dd83154444",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:56:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Söla",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:55:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:55:14.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:55:44.519Z"
+  },
+  {
+   "ActivityId": "ef9662a3-c339-8acc-b1d7-b9ae3ee40e95",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T08:58:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mlb",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T08:57:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T08:57:19.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T06:57:29.470Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613e9",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:03:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T09:03:00.000+02:00",
+   "LocationSignature": "Hm",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T09:02:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:02:00.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "4",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "E",
+     "Priority": 2,
+     "Order": 1
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T07:01:11.291Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613ea",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:05:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T09:06:00.000+02:00",
+   "LocationSignature": "Hm",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T09:04:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:04:56.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "4",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Av",
+     "Priority": 3,
+     "Order": 0
+    },
+    {
+     "LocationName": "N",
+     "Priority": 4,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 2,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T07:05:27.730Z"
+  },
+  {
+   "ActivityId": "00da2343-562c-6988-1236-986ffecf3825",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:10:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Bl",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:09:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:09:22.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:10:07.809Z"
+  },
+  {
+   "ActivityId": "a7db8dd2-d472-0ac8-6a12-0d34e7a4034d",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:10:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mud",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:09:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:09:48.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:09:59.218Z"
+  },
+  {
+   "ActivityId": "e3d56f0f-5c8e-f2d6-d25d-59b263f45423",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:14:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Hv",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:13:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:13:10.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:13:20.885Z"
+  },
+  {
+   "ActivityId": "d7aa3c21-883a-ca6c-6c17-a6ac46a38e94",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:19:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "O",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:16:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:16:15.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:17:45.848Z"
+  },
+  {
+   "ActivityId": "2084d2d2-22f6-e708-7442-a26a3c7fe6c4",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:21:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Tun",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:20:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:20:24.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:20:24.984Z"
+  },
+  {
+   "ActivityId": "7cc2f54c-d8a9-d59d-52e2-4a85dcc77086",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:22:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Kr",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:21:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:21:32.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:21:22.770Z"
+  },
+  {
+   "ActivityId": "27ad5a7e-1a76-97ec-dee4-87864019f038",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:26:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Äh",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:24:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:24:10.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:24:25.554Z"
+  },
+  {
+   "ActivityId": "3ba37409-da7d-50ec-bce8-27bd82b426dd",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:29:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Diö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:27:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:27:50.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:28:01.289Z"
+  },
+  {
+   "ActivityId": "905f8c86-96e1-a53c-61a0-8a752a76aca0",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:29:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Dis",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:27:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:27:50.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:27:50.916Z"
+  },
+  {
+   "ActivityId": "c52c8fa6-9df8-25cf-d457-ca87a36a0ee9",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:33:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Era",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:31:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:31:26.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:31:26.691Z"
+  },
+  {
+   "ActivityId": "4305f499-667b-d6d8-8031-329a08b59833",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:37:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Vs",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:34:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:34:34.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:34:55.193Z"
+  },
+  {
+   "ActivityId": "d9c3a65d-b071-c42c-f32e-7907ae4f7bba",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:39:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Bld",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:37:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:37:51.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:38:02.448Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4613eb",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:45:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T09:45:00.000+02:00",
+   "LocationSignature": "Av",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T09:44:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:44:09.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "E",
+     "Priority": 3,
+     "Order": 1
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 2
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T07:42:59.822Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876cd",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:45:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T09:48:00.000+02:00",
+   "LocationSignature": "Av",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T09:47:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:47:33.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 3,
+     "Order": 0
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 1
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 2,
+     "Order": 2
+    },
+    {
+     "LocationName": "Söö",
+     "Priority": 4,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T07:47:54.055Z"
+  },
+  {
+   "ActivityId": "8ea2b727-8108-14af-2c8a-b748e6b76b98",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:51:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gåp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:51:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:51:27.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:51:28.179Z"
+  },
+  {
+   "ActivityId": "22c00ef6-6159-8aea-649e-5a20b81b4a79",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:54:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mo",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:53:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:53:57.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:53:57.580Z"
+  },
+  {
+   "ActivityId": "6130cd2e-102a-89bd-a812-3bd6ab70f286",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T09:56:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Lns",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:56:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:56:29.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:56:39.791Z"
+  },
+  {
+   "ActivityId": "a977569d-4eb6-2533-40ce-9a98ae3d1c43",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:00:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Grd",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T09:59:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T09:59:42.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T07:59:43.332Z"
+  },
+  {
+   "ActivityId": "3e6f059d-774a-3e1d-1a0c-d0a9c9e03c99",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:01:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Lh",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:00:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:00:46.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:00:56.724Z"
+  },
+  {
+   "ActivityId": "1f3f4fdb-7443-5ba9-687f-7b3af318b108",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:03:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Rk",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:02:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:02:45.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:02:55.548Z"
+  },
+  {
+   "ActivityId": "c47eb5b1-12c7-3352-1b83-265e9b6b5204",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:07:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sy",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:05:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:05:35.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:06:05.411Z"
+  },
+  {
+   "ActivityId": "13529a95-d7a7-c557-02fe-ae6da86e6e37",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:10:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Ahm",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:09:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:09:27.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:09:38.210Z"
+  },
+  {
+   "ActivityId": "d2e338f5-58d7-0e42-7518-7a633a5fe3bf",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:11:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sä",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:09:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:09:27.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:10:13.255Z"
+  },
+  {
+   "ActivityId": "701e592b-e908-d196-6a9d-903cb4a58e29",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:14:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Utp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:12:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:12:43.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:12:53.424Z"
+  },
+  {
+   "ActivityId": "2808b64c-423c-9ac4-deeb-2a84c7350873",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:15:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Bdf",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:13:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:13:42.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:13:57.714Z"
+  },
+  {
+   "ActivityId": "5cc0bf85-37b1-bd41-1679-70cc52229a9e",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:17:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gt",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:15:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:15:59.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:15:59.553Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876ce",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:23:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T10:23:00.000+02:00",
+   "LocationSignature": "N",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T10:20:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:20:26.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "5",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "E",
+     "Priority": 4,
+     "Order": 1
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 2
+    },
+    {
+     "LocationName": "Av",
+     "Priority": 3,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T08:20:16.991Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876cf",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:25:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T10:26:00.000+02:00",
+   "LocationSignature": "N",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T10:28:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:28:43.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "5",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 2,
+     "Order": 1
+    },
+    {
+     "LocationName": "Söö",
+     "Priority": 3,
+     "Order": 2
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T08:29:03.988Z"
+  },
+  {
+   "ActivityId": "612907c9-db68-4bad-06e8-213945de0c66",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:29:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gmp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:31:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:31:50.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:32:06.385Z"
+  },
+  {
+   "ActivityId": "542e4357-006c-5c25-5582-b840ac39d368",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:30:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Vim",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:32:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:32:49.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:32:59.983Z"
+  },
+  {
+   "ActivityId": "c4b8b35a-0a7f-41fc-8f34-9de77b922c80",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:35:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Fls",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:37:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:37:19.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:37:29.350Z"
+  },
+  {
+   "ActivityId": "26c92652-0659-1f44-9123-40cae214a0b9",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:37:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Any",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:39:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:39:42.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:39:52.494Z"
+  },
+  {
+   "ActivityId": "de78ea6f-1d53-804f-efb3-19f6fe7dc09f",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:39:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Ras",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:41:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:41:28.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:41:43.934Z"
+  },
+  {
+   "ActivityId": "7a73cb55-c363-152a-9cda-3cfb7f1398b5",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:42:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Frd",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:44:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:44:02.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:44:12.534Z"
+  },
+  {
+   "ActivityId": "80edd718-7be6-1a87-f787-e2c965af983c",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:45:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:47:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:47:00.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:47:15.630Z"
+  },
+  {
+   "ActivityId": "58958b60-01b5-586c-cbc7-9125b79ac3cc",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:50:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Tns",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:51:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:51:18.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:51:33.691Z"
+  },
+  {
+   "ActivityId": "06150686-686a-6162-4e57-d5fc015567c6",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:55:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Smn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:56:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:56:04.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:56:15.138Z"
+  },
+  {
+   "ActivityId": "96b50b45-0105-21cb-ca30-eea83d80fcbf",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T10:58:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Bx",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T10:59:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T10:59:32.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T08:59:47.910Z"
+  },
+  {
+   "ActivityId": "96d9087e-fe22-cfa3-a607-842aba106b16",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:01:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Lkn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:02:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:02:42.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:02:57.609Z"
+  },
+  {
+   "ActivityId": "d48b593e-962a-113b-c986-c19f89a7fef6",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:05:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "My",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:06:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:06:43.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:06:49.160Z"
+  },
+  {
+   "ActivityId": "041ef9f8-85bc-4d05-7caf-5b84821755cd",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:10:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mt",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:10:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:10:55.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:11:05.572Z"
+  },
+  {
+   "ActivityId": "652f5318-5472-5004-0148-c7a359a21f95",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:14:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Vsd",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:13:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:13:38.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:13:53.526Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d0",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:20:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T11:20:00.000+02:00",
+   "LocationSignature": "Lp",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T11:19:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:19:37.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 1
+    },
+    {
+     "LocationName": "Av",
+     "Priority": 3,
+     "Order": 2
+    },
+    {
+     "LocationName": "N",
+     "Priority": 4,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T09:19:15.288Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d1",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:21:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T11:23:00.000+02:00",
+   "LocationSignature": "Lp",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T11:23:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:23:05.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "2",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Nr",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "Söö",
+     "Priority": 2,
+     "Order": 1
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T09:23:36.123Z"
+  },
+  {
+   "ActivityId": "b381a24c-5663-3606-a98e-73fee58d1631",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:28:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Lgm",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:28:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:28:55.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:29:05.929Z"
+  },
+  {
+   "ActivityId": "f7593c02-a39a-b588-bfaa-2270158dc8d0",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:31:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gi",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:32:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:32:17.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:32:33.163Z"
+  },
+  {
+   "ActivityId": "fe5458d9-38ae-fae5-9b7b-764f6c568e49",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:36:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Kms",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:37:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:37:29.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:38:00.193Z"
+  },
+  {
+   "ActivityId": "98984a54-47e5-b923-5530-5a59726ebcb9",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:43:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Fi",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:44:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:44:01.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:44:11.867Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d2",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:47:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T11:47:00.000+02:00",
+   "LocationSignature": "Nr",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T11:47:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:47:12.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "7a",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 1
+    },
+    {
+     "LocationName": "Av",
+     "Priority": 4,
+     "Order": 2
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 3,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T09:46:23.708Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d3",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:48:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Booking": [
+    {
+     "Code": "BNA024",
+     "Description": "Obligatorisk platsreservering."
+    }
+   ],
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T11:49:00.000+02:00",
+   "LocationSignature": "Nr",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "OtherInformation": [
+    {
+     "Code": "ONA181",
+     "Description": "Movingo gäller ej."
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T11:50:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:50:25.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "7a",
+   "TrainComposition": [
+    {
+     "Code": "TNA001",
+     "Description": "Vagnsordning 218,217,216,14,13,12,11,10,9"
+    }
+   ],
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Söö",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T09:50:46.274Z"
+  },
+  {
+   "ActivityId": "cb53d0d6-6e8d-d91d-d714-33dc32df12a0",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T11:54:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Åbs",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T11:55:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T11:55:27.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T09:55:53.152Z"
+  },
+  {
+   "ActivityId": "6130b646-7e48-98f6-18bc-97fc4f5044f3",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:01:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Smt",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:02:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:02:40.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:02:50.562Z"
+  },
+  {
+   "ActivityId": "347f7916-2e97-61d5-0853-c35630986399",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:08:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Stö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:08:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:08:30.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:08:40.776Z"
+  },
+  {
+   "ActivityId": "2a265667-2c36-ecb3-07d4-9c30e2615a61",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:13:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "K",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:12:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:12:59.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:13:25.054Z"
+  },
+  {
+   "ActivityId": "f110107d-5293-ac9a-2215-6ddcfd8a7d51",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:18:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Spn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:18:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:18:08.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:18:19.093Z"
+  },
+  {
+   "ActivityId": "5c53e5a5-4749-90ac-186f-caf182a0cf42",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:20:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sde",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:20:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:20:38.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:20:48.601Z"
+  },
+  {
+   "ActivityId": "eac22ce5-9219-5ea0-5c2e-1f838410a4a2",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:23:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Fle",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:23:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:23:52.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:24:07.417Z"
+  },
+  {
+   "ActivityId": "08aa8c3c-4b79-da31-39ee-8d3aa48720dc",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:26:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Skv",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:27:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:27:07.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:27:22.485Z"
+  },
+  {
+   "ActivityId": "287c1ab0-e977-d3c9-3901-493c0b6d9890",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:29:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sp",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:30:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:30:02.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:30:12.508Z"
+  },
+  {
+   "ActivityId": "952580e0-67e9-88ca-0e02-c430c5711f02",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:30:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Nsj",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:31:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:31:13.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:31:23.713Z"
+  },
+  {
+   "ActivityId": "c4921a26-ead1-a2f1-a97c-52f9d9d0e631",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:34:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sh",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:34:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:34:29.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:34:54.393Z"
+  },
+  {
+   "ActivityId": "2654f844-36de-d41b-4d8b-07d820360290",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:38:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "B",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:38:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:38:38.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:38:49.167Z"
+  },
+  {
+   "ActivityId": "0d84b906-cc29-f8c6-23be-c30759a697e9",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:40:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Koe",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:39:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:39:55.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:40:35.437Z"
+  },
+  {
+   "ActivityId": "f7ddbd08-2616-cff1-f0c7-ce299ed0b7dc",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:42:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Gn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:42:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:42:37.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:42:43.160Z"
+  },
+  {
+   "ActivityId": "687f5822-890e-6332-10e5-d82dfe1ff535",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:45:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Mö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:45:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:45:26.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T10:45:37.175Z"
+  },
+  {
+   "ActivityId": "434c12f7-6c94-57af-1926-f6b56dc5e08b",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:51:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Jn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T12:53:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T12:53:45.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:09:15.522Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d4",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:55:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T13:00:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T12:55:00.000+02:00",
+   "LocationSignature": "Söö",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "OtherInformation": [
+    {
+     "Code": "ONA181",
+     "Description": "Movingo gäller ej."
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T13:00:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:00:24.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "6",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 1,
+     "Order": 0
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 2,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 3,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 4,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T11:02:58.746Z"
+  },
+  {
+   "ActivityId": "7bce2c70-da74-dfb7-efdd-050ae56c044f",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T12:57:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Söö",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:02:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:02:53.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:02:58.524Z"
+  },
+  {
+   "ActivityId": "5cb2f834-a064-40ca-7fdf-b4484139c3b5",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:01:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Msj",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:07:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:07:12.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:07:22.856Z"
+  },
+  {
+   "ActivityId": "4ca6dc4b-242b-fd18-6d65-5107edec0835",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:06:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Bjn",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:11:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:11:18.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:11:28.872Z"
+  },
+  {
+   "ActivityId": "c7289170-a0d6-2018-d176-1c1613370db9",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:07:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Flb",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:12:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:12:38.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:12:57.593Z"
+  },
+  {
+   "ActivityId": "ec15dbb7-0503-3a35-04b7-b56c8cad6c00",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:08:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Hu",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:14:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:14:07.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:14:09.178Z"
+  },
+  {
+   "ActivityId": "dbcb111f-41d4-4d0a-5d85-0753411ba49e",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:09:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sta",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:14:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:14:50.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:15:15.831Z"
+  },
+  {
+   "ActivityId": "4f7d039b-485d-60da-f9e2-8761f5ad48c4",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:10:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Äs",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:16:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:16:26.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:16:50.700Z"
+  },
+  {
+   "ActivityId": "52deb2e3-e782-c030-be05-998d264c257a",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:11:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Åbe",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:17:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:17:51.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:18:16.502Z"
+  },
+  {
+   "ActivityId": "d3be3355-ba13-db45-c177-6f8eba136a80",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:13:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Sst",
+   "OperationalTrainNumber": "3940",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T13:19:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:19:40.000+02:00",
+   "TrainOwner": "SNÄLL",
+   "ModifiedTime": "2026-10-20T11:19:46.359Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-5c23-08df-2355cf4876d5",
+   "ActivityType": "Ankomst",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T13:17:00.000+02:00",
+   "AdvertisedTrainIdent": "3940",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T13:21:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "Mc",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "Snälltåget",
+   "LocationDateTimeOTN": "2026-10-20T13:16:00.000+02:00",
+   "LocationSignature": "Cst",
+   "NewEquipment": 0,
+   "Operator": "SNÄLL",
+   "OperationalTrainNumber": "3940",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "PR",
+     "Company": "3178",
+     "Core": "------860279",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "TR",
+     "Company": "3051",
+     "Core": "--------3940",
+     "Variant": "00",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------8421",
+     "Variant": "51",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA069",
+     "Description": "Snälltåget"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "Service": [
+    {
+     "Code": "SNA006",
+     "Description": "Krog"
+    }
+   ],
+   "TimeAtLocation": "2026-10-20T13:21:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T13:21:30.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Cst",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "19",
+   "TrainOwner": "SNÄLL",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaFromLocation": [
+    {
+     "LocationName": "Lu",
+     "Priority": 2,
+     "Order": 0
+    },
+    {
+     "LocationName": "Hm",
+     "Priority": 3,
+     "Order": 1
+    },
+    {
+     "LocationName": "Lp",
+     "Priority": 1,
+     "Order": 2
+    },
+    {
+     "LocationName": "Nr",
+     "Priority": 4,
+     "Order": 3
+    }
+   ],
+   "WebLink": "http://www.snalltaget.se",
+   "WebLinkName": "Snälltåget",
+   "ModifiedTime": "2026-10-20T11:21:13.038Z"
+  }
+ ]
+}

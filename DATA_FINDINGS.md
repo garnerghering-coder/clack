@@ -296,7 +296,8 @@ Lessons from tuning the router (`q6-osm-route.mjs`):
 The owner chose brand display and delegated the rest to Claude's judgement:
 
 1. **Brand over operating company** (owner). Show "Öresundståg", "Pågatåg", "SJ Snabbtåg". The company (VR Sverige, Arriva, SJ AB) is stored but secondary. Recorded in `data/category_overrides.json` → `display`.
-2. **Background snapshot job: yes.** The server runs a small scheduled job (node-cron, a few times a day) that fetches Trafikverket actuals for every `planned` leg whose scheduled arrival has passed, while still inside the ~4-day window. Opening the app also triggers it. This changes spec §10, which said Phase 1 has no background tracking; without it, delay data is lost for any trip not opened within ~3 days.
+2. **Background snapshot job: yes, while the server runs.** The server runs a small scheduled job (node-cron, a few times a day) that fetches Trafikverket actuals for every `planned` leg whose scheduled arrival has passed, while still inside the ~4-day window. It also runs on server start, to catch up. This extends spec §10, which said Phase 1 has no background tracking.
+6. **Phase 1 is a laptop demo with zero running costs** (owner). No hosting until the concept is proven. Consequence: delay data is only saved while the laptop server runs, so a leg not caught within ~3 days becomes `scheduled_only`. To soften this, the app catches up on start and shows a warning on legs whose delay data expires soon. Moving to an always-on server later (~€5–6/month) needs no rebuild.
 3. **History from the keyless Sverige 2 archive: yes.** `data.samtrafiken.se/trafiklab/gtfs-sverige-2/` is the primary source for dates before GTFS Sweden 3's window. The keyed endpoint is used only when the newest snapshot is needed.
 4. **Categories:**
    - **Pågatåg = commuter** (as spec §11 says).
