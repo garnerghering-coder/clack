@@ -82,6 +82,21 @@ export function nearestOnLine(line: LatLon[], p: LatLon, from = 0): { index: num
   return { index: best.index, point: best.point };
 }
 
+/** Stations are small rounded squares, so they never read as a train's round dot. */
+function stationImage(fill: string, line: string): ImageData {
+  const c = document.createElement('canvas');
+  c.width = c.height = 20;
+  const g = c.getContext('2d')!;
+  g.fillStyle = fill;
+  g.strokeStyle = line;
+  g.lineWidth = 3;
+  g.beginPath();
+  g.roundRect(3, 3, 14, 14, 3);
+  g.fill();
+  g.stroke();
+  return g.getImageData(0, 0, 20, 20);
+}
+
 function headingImage(): ImageData {
   const c = document.createElement('canvas');
   c.width = c.height = 32;
@@ -250,13 +265,14 @@ function LiveMap() {
           ['==', ['get', 'kind'], 'station'],
           ['>=', ['coalesce', ['get', 'dpd'], 0], ['step', ['zoom'], 60, 6.5, 25, 8, 8, 9.5, 0]],
         ];
+        m.addImage('station', stationImage(C.bg, C.text), { pixelRatio: 2 });
         m.addLayer({
           id: 'live-stations',
-          type: 'circle',
+          type: 'symbol',
           source: 'rail-network',
           minzoom: 5,
           filter: stationFilter,
-          paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 2.5, 9, 3.5, 13, 5], 'circle-color': C.bg, 'circle-stroke-color': C.text, 'circle-stroke-width': 1.6 },
+          layout: { 'icon-image': 'station', 'icon-size': ['interpolate', ['linear'], ['zoom'], 5, 0.55, 9, 0.75, 13, 1], 'icon-allow-overlap': true, 'icon-ignore-placement': true },
         });
         m.addLayer({
           id: 'live-station-labels',

@@ -40,9 +40,10 @@ export function iconCandidates(html: string, base: string): string[] {
   const links: IconLink[] = [];
   for (const m of html.matchAll(/<link\b[^>]*>/gi)) {
     const tag = m[0];
-    const rel = /rel=["']([^"']+)["']/i.exec(tag)?.[1]?.toLowerCase() ?? '';
+    // Quoted or not (krosatagen.se writes href=/assets/… bare).
+    const rel = /rel=(?:["']([^"']+)["']|([^\s>]+))/i.exec(tag)?.slice(1).find(Boolean)?.toLowerCase() ?? '';
     if (!rel.includes('icon')) continue;
-    const href = /href=["']([^"']+)["']/i.exec(tag)?.[1];
+    const href = /href=(?:["']([^"']+)["']|([^\s>"']+))/i.exec(tag)?.slice(1).find(Boolean);
     if (!href) continue;
     const size = Number(/sizes=["'](\d+)x\d+["']/i.exec(tag)?.[1] ?? 0);
     links.push({ href: new URL(href.replace(/&amp;/g, '&'), base).toString(), rel, size, type: /type=["']([^"']+)["']/i.exec(tag)?.[1] ?? '' });

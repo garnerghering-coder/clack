@@ -591,7 +591,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-legend p { display: flex; align-items: center; gap: 8px; }
 .lg-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .lg-dot.solid { background: var(--text-2); box-shadow: 0 0 0 1px var(--marker-ring); }
-.lg-station { width: 9px; height: 9px; border-radius: 50%; flex: none; background: var(--bg); border: 1.6px solid var(--text); }
+.lg-station { width: 9px; height: 9px; border-radius: 2px; flex: none; background: var(--bg); border: 1.6px solid var(--text); }
 .lg-line { width: 22px; height: 0; flex: none; border-top: 4px solid var(--accent); border-radius: 2px; }
 .lg-line.dashed { border-top-style: dashed; }
 .live-attrib { bottom: 6px; left: 12px; }
