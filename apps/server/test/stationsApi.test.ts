@@ -20,7 +20,7 @@ describe('stations API', () => {
 
   it('autocompletes accent-insensitively and hides bus stops', async () => {
     const res = await app.inject({ url: '/api/stations/search?q=goteb' });
-    expect(res.json()).toEqual([{ id: '740000002', name: 'Göteborg C', code: 'G', country: 'SE' }]);
+    expect(res.json()).toEqual([{ id: '740000002', name: 'Göteborg C', code: 'G', country: 'SE', county: null }]);
     expect((await app.inject({ url: '/api/stations/search?q=funasdalen' })).json()).toEqual([]);
   });
 
