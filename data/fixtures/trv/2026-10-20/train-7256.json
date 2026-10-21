@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-10-20T17:23:54.909Z",
+ "captured_at": "2026-10-21T07:01:36.068Z",
  "date": "2026-10-20",
  "train": "7256",
  "source": "Trafikverket TrainAnnouncement 1.9",
@@ -88,85 +88,38 @@
    "ModifiedTime": "2026-10-20T17:20:50.319Z"
   },
   {
-   "ActivityId": "1500adde-1c5d-f923-08df-23600b1b7fd5",
+   "ActivityId": "306e3a01-45cc-9492-fa1e-4dbeb16b3101",
    "ActivityType": "Avgang",
-   "Advertised": true,
-   "AdvertisedTimeAtLocation": "2026-10-20T19:30:00.000+02:00",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:25:00.000+02:00",
    "AdvertisedTrainIdent": "7256",
    "Canceled": false,
    "Deleted": false,
    "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
-   "EstimatedTimeIsPreliminary": false,
-   "FromLocation": [
-    {
-     "LocationName": "N",
-     "Priority": 1,
-     "Order": 0
-    }
-   ],
-   "InformationOwner": "www.vasttrafik.se",
-   "LocationDateTimeOTN": "2026-10-20T19:31:00.000+02:00",
-   "LocationSignature": "Fm",
-   "MobileWebLink": "https://www.vasttrafik.se/",
-   "NewEquipment": 0,
-   "Operator": "SJ",
+   "LocationSignature": "Äng",
    "OperationalTrainNumber": "7256",
-   "OperationalTransportIdentifiers": [
-    {
-     "ObjectType": "TR",
-     "Company": "3197",
-     "Core": "--------7256",
-     "Variant": "01",
-     "TimetableYear": 2026,
-     "StartDate": "2026-10-20"
-    },
-    {
-     "ObjectType": "PA",
-     "Company": "0074",
-     "Core": "--------3339",
-     "Variant": "1N",
-     "TimetableYear": 2026,
-     "StartDate": "2026-10-20"
-    }
-   ],
-   "PlannedEstimatedTimeAtLocationIsValid": false,
-   "ProductInformation": [
-    {
-     "Code": "PNA041",
-     "Description": "Västtågen"
-    }
-   ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
-   "ToLocation": [
-    {
-     "LocationName": "Sk",
-     "Priority": 1,
-     "Order": 0
-    }
-   ],
-   "TrackAtLocation": "1",
+   "TimeAtLocation": "2026-10-20T19:26:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:26:00.000+02:00",
    "TrainOwner": "VASTTRAF",
-   "TypeOfTraffic": [
-    {
-     "Code": "YNA001",
-     "Description": "Tåg"
-    }
-   ],
-   "ViaToLocation": [
-    {
-     "LocationName": "Jö",
-     "Priority": 0,
-     "Order": 0
-    },
-    {
-     "LocationName": "F",
-     "Priority": 1,
-     "Order": 1
-    }
-   ],
-   "WebLink": "https://www.vasttrafik.se/",
-   "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.027Z"
+   "ModifiedTime": "2026-10-20T17:26:10.633Z"
+  },
+  {
+   "ActivityId": "0cfc4263-8fdd-0c02-b520-dbce8e623e3e",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:28:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Kröb",
+   "OperationalTrainNumber": "7256",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:27:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:27:21.000+02:00",
+   "TrainOwner": "VASTTRAF",
+   "ModifiedTime": "2026-10-20T17:29:17.343Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b191cfd",
@@ -218,6 +171,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:30:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:30:00.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -235,13 +190,13 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:22.995Z"
+   "ModifiedTime": "2026-10-20T17:29:25.998Z"
   },
   {
-   "ActivityId": "1500adde-1c5d-f923-08df-23600b204443",
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b1b7fd5",
    "ActivityType": "Avgang",
    "Advertised": true,
-   "AdvertisedTimeAtLocation": "2026-10-20T19:38:00.000+02:00",
+   "AdvertisedTimeAtLocation": "2026-10-20T19:30:00.000+02:00",
    "AdvertisedTrainIdent": "7256",
    "Canceled": false,
    "Deleted": false,
@@ -255,8 +210,8 @@
     }
    ],
    "InformationOwner": "www.vasttrafik.se",
-   "LocationDateTimeOTN": "2026-10-20T19:39:00.000+02:00",
-   "LocationSignature": "Th",
+   "LocationDateTimeOTN": "2026-10-20T19:31:00.000+02:00",
+   "LocationSignature": "Fm",
    "MobileWebLink": "https://www.vasttrafik.se/",
    "NewEquipment": 0,
    "Operator": "SJ",
@@ -287,6 +242,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:34:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:34:22.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -316,7 +273,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.077Z"
+   "ModifiedTime": "2026-10-20T17:35:08.824Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b1de279",
@@ -327,6 +284,7 @@
    "Canceled": false,
    "Deleted": false,
    "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T19:41:00.000+02:00",
    "EstimatedTimeIsPreliminary": false,
    "FromLocation": [
     {
@@ -368,6 +326,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:41:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:41:33.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -385,7 +345,91 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.064Z"
+   "ModifiedTime": "2026-10-20T17:40:54.750Z"
+  },
+  {
+   "ActivityId": "1500adde-1c5d-f923-08df-23600b204443",
+   "ActivityType": "Avgang",
+   "Advertised": true,
+   "AdvertisedTimeAtLocation": "2026-10-20T19:38:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T19:41:00.000+02:00",
+   "EstimatedTimeIsPreliminary": false,
+   "FromLocation": [
+    {
+     "LocationName": "N",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "InformationOwner": "www.vasttrafik.se",
+   "LocationDateTimeOTN": "2026-10-20T19:39:00.000+02:00",
+   "LocationSignature": "Th",
+   "MobileWebLink": "https://www.vasttrafik.se/",
+   "NewEquipment": 0,
+   "Operator": "SJ",
+   "OperationalTrainNumber": "7256",
+   "OperationalTransportIdentifiers": [
+    {
+     "ObjectType": "TR",
+     "Company": "3197",
+     "Core": "--------7256",
+     "Variant": "01",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    },
+    {
+     "ObjectType": "PA",
+     "Company": "0074",
+     "Core": "--------3339",
+     "Variant": "1N",
+     "TimetableYear": 2026,
+     "StartDate": "2026-10-20"
+    }
+   ],
+   "PlannedEstimatedTimeAtLocationIsValid": false,
+   "ProductInformation": [
+    {
+     "Code": "PNA041",
+     "Description": "Västtågen"
+    }
+   ],
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:42:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:42:21.000+02:00",
+   "ToLocation": [
+    {
+     "LocationName": "Sk",
+     "Priority": 1,
+     "Order": 0
+    }
+   ],
+   "TrackAtLocation": "1",
+   "TrainOwner": "VASTTRAF",
+   "TypeOfTraffic": [
+    {
+     "Code": "YNA001",
+     "Description": "Tåg"
+    }
+   ],
+   "ViaToLocation": [
+    {
+     "LocationName": "Jö",
+     "Priority": 0,
+     "Order": 0
+    },
+    {
+     "LocationName": "F",
+     "Priority": 1,
+     "Order": 1
+    }
+   ],
+   "WebLink": "https://www.vasttrafik.se/",
+   "WebLinkName": "www.vasttrafik.se",
+   "ModifiedTime": "2026-10-20T17:42:47.219Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b25099d",
@@ -396,6 +440,7 @@
    "Canceled": false,
    "Deleted": false,
    "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T19:47:00.000+02:00",
    "EstimatedTimeIsPreliminary": false,
    "FromLocation": [
     {
@@ -437,6 +482,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:48:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:48:58.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -466,7 +513,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.132Z"
+   "ModifiedTime": "2026-10-20T17:49:19.810Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b204445",
@@ -477,6 +524,7 @@
    "Canceled": false,
    "Deleted": false,
    "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T19:47:00.000+02:00",
    "EstimatedTimeIsPreliminary": false,
    "FromLocation": [
     {
@@ -518,6 +566,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:48:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:48:07.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -535,7 +585,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.115Z"
+   "ModifiedTime": "2026-10-20T17:47:08.192Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b29ce04",
@@ -546,6 +596,7 @@
    "Canceled": false,
    "Deleted": false,
    "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "EstimatedTimeAtLocation": "2026-10-20T19:54:00.000+02:00",
    "EstimatedTimeIsPreliminary": false,
    "FromLocation": [
     {
@@ -587,6 +638,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T19:54:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T19:54:06.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -604,7 +657,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.165Z"
+   "ModifiedTime": "2026-10-20T17:53:32.050Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b2c399b",
@@ -656,6 +709,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:01:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:01:37.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -680,7 +735,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.186Z"
+   "ModifiedTime": "2026-10-20T18:02:17.872Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b30f4e6",
@@ -732,6 +787,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:08:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:08:06.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -756,7 +813,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.231Z"
+   "ModifiedTime": "2026-10-20T18:07:17.050Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b33574e",
@@ -808,6 +865,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:08:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:08:58.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -832,7 +891,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.258Z"
+   "ModifiedTime": "2026-10-20T18:09:29.334Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b381c99",
@@ -884,6 +943,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:14:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:14:17.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -908,7 +969,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.276Z"
+   "ModifiedTime": "2026-10-20T18:13:32.797Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b3f42f1",
@@ -960,6 +1021,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:15:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:15:03.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -984,7 +1047,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.291Z"
+   "ModifiedTime": "2026-10-20T18:15:34.105Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b4687aa",
@@ -1036,6 +1099,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:22:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:22:37.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1060,7 +1125,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.313Z"
+   "ModifiedTime": "2026-10-20T18:22:08.710Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b4da899",
@@ -1112,6 +1177,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:23:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:23:53.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1136,7 +1203,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.329Z"
+   "ModifiedTime": "2026-10-20T18:24:29.535Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b526dde",
@@ -1188,6 +1255,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:31:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:31:03.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1212,7 +1281,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.347Z"
+   "ModifiedTime": "2026-10-20T18:30:14.292Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b573261",
@@ -1264,6 +1333,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:31:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:31:54.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1288,7 +1359,24 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.362Z"
+   "ModifiedTime": "2026-10-20T18:32:24.894Z"
+  },
+  {
+   "ActivityId": "033fb8d6-c123-75f0-9faf-427ec2b8b3ff",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:38:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Vf",
+   "OperationalTrainNumber": "7256",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:38:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:38:22.000+02:00",
+   "TrainOwner": "VASTTRAF",
+   "ModifiedTime": "2026-10-20T18:38:33.091Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b5e781c",
@@ -1340,6 +1428,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:44:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:44:03.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1364,7 +1454,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.418Z"
+   "ModifiedTime": "2026-10-20T18:43:44.368Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b6802b7",
@@ -1416,6 +1506,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:46:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:46:24.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1433,7 +1525,24 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.432Z"
+   "ModifiedTime": "2026-10-20T18:46:49.823Z"
+  },
+  {
+   "ActivityId": "c4299522-03e3-8ab4-640f-526b26f73304",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:47:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Fn",
+   "OperationalTrainNumber": "7256",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:47:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:47:52.000+02:00",
+   "TrainOwner": "VASTTRAF",
+   "ModifiedTime": "2026-10-20T18:48:08.382Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b6cc73e",
@@ -1485,6 +1594,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:53:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:53:45.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1514,7 +1625,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.453Z"
+   "ModifiedTime": "2026-10-20T18:52:41.431Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b71962c",
@@ -1566,6 +1677,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:54:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:54:35.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1583,7 +1696,24 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.466Z"
+   "ModifiedTime": "2026-10-20T18:55:10.602Z"
+  },
+  {
+   "ActivityId": "1f237d19-358b-480c-38e3-b58b971bb01c",
+   "ActivityType": "Avgang",
+   "Advertised": false,
+   "AdvertisedTimeAtLocation": "2026-10-20T20:57:00.000+02:00",
+   "AdvertisedTrainIdent": "7256",
+   "Canceled": false,
+   "Deleted": false,
+   "DepartureDateOTN": "2026-10-20T00:00:00.000+02:00",
+   "LocationSignature": "Rmtp",
+   "OperationalTrainNumber": "7256",
+   "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T20:57:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T20:57:46.000+02:00",
+   "TrainOwner": "VASTTRAF",
+   "ModifiedTime": "2026-10-20T18:57:56.355Z"
   },
   {
    "ActivityId": "1500adde-1c5d-f923-08df-23600b78b32f",
@@ -1635,6 +1765,8 @@
     }
    ],
    "ScheduledDepartureDateTime": "2026-10-20T00:00:00.000+02:00",
+   "TimeAtLocation": "2026-10-20T21:03:00.000+02:00",
+   "TimeAtLocationWithSeconds": "2026-10-20T21:03:05.000+02:00",
    "ToLocation": [
     {
      "LocationName": "Sk",
@@ -1664,7 +1796,7 @@
    ],
    "WebLink": "https://www.vasttrafik.se/",
    "WebLinkName": "www.vasttrafik.se",
-   "ModifiedTime": "2026-10-06T18:12:23.486Z"
+   "ModifiedTime": "2026-10-20T19:02:35.838Z"
   }
  ]
 }
