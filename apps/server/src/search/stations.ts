@@ -34,7 +34,8 @@ export function buildStationIndex(stations: SearchableStation[], aliases: Record
   const aliasBySig = new Map(Object.entries(aliases).map(([sig, list]) => [sig.toLowerCase(), list]));
   return {
     entries: stations.map((station) => {
-      const extra = station.trvSignature ? (aliasBySig.get(station.trvSignature.toLowerCase()) ?? []) : [];
+      // Aliases are keyed by Trafikverket signature, or by station id for stations without one (Norway).
+      const extra = [...(station.trvSignature ? (aliasBySig.get(station.trvSignature.toLowerCase()) ?? []) : []), ...(aliasBySig.get(station.id.toLowerCase()) ?? [])];
       return {
         station,
         code: station.trvSignature?.toLowerCase() ?? null,

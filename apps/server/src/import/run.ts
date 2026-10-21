@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { importLog, stations } from '../db/schema.js';
-import { DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { DATASETS, ENTUR_DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { importGtfsNorway, lastNorwayImport } from './gtfs-no.js';
 import { importGtfsSweden3, lastImportedFeed, refreshStationPopularity, type ImportSummary } from './gtfs-se3.js';
 import { loadOfficialMapping } from './official-mapping.js';
 import { hasBaseTracks, importTrvStations, trvLocationCount } from './trv-stations.js';
@@ -64,6 +65,35 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
   });
 }
 
+/**
+ * Norway (NORWAY_DATA_FINDINGS.md): Entur's four rail feeds, each downloaded at most once a day, imported together
+ * when one of them changed (or nothing from Norway is in yet). A feed that fails keeps its cached copy.
+ */
+export function runNorwayImport(db: Db, opts: RunOptions = {}) {
+  const log = opts.log ?? console.log;
+  return exclusive(async () => {
+    const files: string[] = [];
+    let fresh = false;
+    for (const ds of ENTUR_DATASETS) {
+      try {
+        const r = await ensureDataset(db, ds, { force: opts.forceDownload, log });
+        fresh ||= r.downloaded;
+        files.push(r.file);
+      } catch (e) {
+        log(`${ds.source}: ${(e as Error).message}`);
+        if (fs.existsSync(ds.file)) files.push(ds.file);
+      }
+    }
+    if (!files.length) return null;
+    if (!fresh && !opts.reimport && lastNorwayImport(db)) {
+      log('Norway: timetable unchanged since the last import; skipping');
+      return null;
+    }
+    log('Norway: importing rail trips…');
+    return importGtfsNorway(db, files, { log });
+  });
+}
+
 /** On server start: make sure there is something to search, without spending quota when a cached feed exists. */
 export async function bootstrap(db: Db, log: (m: string) => void = console.log) {
   try {
@@ -77,6 +107,8 @@ export async function bootstrap(db: Db, log: (m: string) => void = console.log) 
   } catch (e) {
     log(`import skipped: ${(e as Error).message}`);
   }
+  // Norway after Sweden, so Norwegian stops can reuse the stations Sweden's cross-border trains already made.
+  await runNorwayImport(db, { log }).catch((e) => log(`Norway import skipped: ${(e as Error).message}`));
   // Operator logos: each brand's app icon from its website (skipped when already downloaded this month).
   await refreshLogos(log).catch((e) => log(`logos skipped: ${(e as Error).message}`));
   // The map's basemap is a one-off download (no quota); later runs just reuse the file.

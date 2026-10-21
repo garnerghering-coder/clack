@@ -12,10 +12,14 @@ import { REPO_ROOT, config } from '../env.js';
 export interface Dataset {
   source: string;
   url: string;
-  key: () => string;
+  /** API key appended as ?key= (Trafiklab). Keyless sources (Entur) leave it out. */
+  key?: () => string;
+  headers?: () => Record<string, string>;
   file: string;
   monthlyQuota: number;
 }
+
+
 
 export const CACHE_DIR = path.join(REPO_ROOT, 'data/cache');
 
@@ -29,6 +33,16 @@ export const DATASETS = {
     monthlyQuota: 50,
   },
 } satisfies Record<string, Dataset>;
+
+/** Entur's rail GTFS, one file per operator (NORWAY_DATA_FINDINGS.md). No key; at most one download a day each. */
+const entur = (code: string): Dataset => ({
+  source: `entur_${code}`,
+  url: `https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_${code}-aggregated-gtfs.zip`,
+  headers: () => ({ 'ET-Client-Name': config.enturClientName }),
+  file: path.join(CACHE_DIR, `entur/rb_${code}.zip`),
+  monthlyQuota: 40,
+});
+export const ENTUR_DATASETS = ['vyg', 'goa', 'sjn', 'flt'].map(entur);
 
 /** Don't download again within this many hours unless forced (spec §5.2). */
 export const MIN_HOURS_BETWEEN_DOWNLOADS = 20;
@@ -89,7 +103,7 @@ export async function ensureDataset(
   if (used >= ds.monthlyQuota && !opts.force) {
     throw new QuotaError(`${ds.source}: ${used} of ${ds.monthlyQuota} monthly downloads used; not downloading`);
   }
-  if (!ds.key()) throw new QuotaError(`${ds.source}: API key missing in .env`);
+  if (ds.key && !ds.key()) throw new QuotaError(`${ds.source}: API key missing in .env`);
 
   fs.mkdirSync(path.dirname(ds.file), { recursive: true });
   const startedAt = new Date(now);
@@ -106,7 +120,7 @@ export async function ensureDataset(
   touch();
   let res: Response;
   try {
-    res = await (opts.fetchImpl ?? fetch)(`${ds.url}?key=${ds.key()}`, { signal: abort.signal });
+    res = await (opts.fetchImpl ?? fetch)(ds.key ? `${ds.url}?key=${ds.key()}` : ds.url, { signal: abort.signal, headers: ds.headers?.() });
   } catch (e) {
     clearTimeout(idle);
     record('failed', null, String(e));

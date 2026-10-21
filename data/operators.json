@@ -66,7 +66,8 @@
       "gtfs_operators": [
         "Vygruppen AS",
         "Vy Tåg AB",
-        "Vy Tåg"
+        "Vy Tåg",
+        "Vy"
       ],
       "aliases": [
         "Vy",
@@ -325,6 +326,52 @@
         "TJF",
         "Smalspåret"
       ]
+    },
+    {
+      "id": "go-ahead-norge",
+      "name": "Go-Ahead Nordic",
+      "short_name": "GA",
+      "color": "#e4003b",
+      "country": "NO",
+      "gtfs_operators": [
+        "Go-Ahead Norge AS",
+        "Go-Ahead Nordic AS"
+      ],
+      "aliases": [
+        "Go-Ahead",
+        "Go-Ahead Norge",
+        "Sørtoget"
+      ],
+      "website": "https://www.go-aheadnordic.no"
+    },
+    {
+      "id": "sj-nord",
+      "name": "SJ Nord",
+      "short_name": "SJN",
+      "color": "#0b6e3a",
+      "country": "NO",
+      "gtfs_operators": [
+        "SJ Nord"
+      ],
+      "aliases": [
+        "SJ Norge"
+      ],
+      "website": "https://www.sj.no"
+    },
+    {
+      "id": "flytoget",
+      "name": "Flytoget",
+      "short_name": "FLY",
+      "color": "#e30613",
+      "country": "NO",
+      "gtfs_operators": [
+        "Flytoget",
+        "Flytoget AS"
+      ],
+      "aliases": [
+        "Airport Express Train"
+      ],
+      "website": "https://flytoget.no"
     }
   ]
 }

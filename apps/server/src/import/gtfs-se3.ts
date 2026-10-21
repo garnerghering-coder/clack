@@ -195,7 +195,7 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
     const upsertStation = sqlite.prepare(
       `insert into stations (id, name, country, lat, lon, tz, trv_signature, gtfs_stop_ids, coord_source, historical_only, kind, needs_review)
        values (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)
-       on conflict(id) do update set name = excluded.name, country = excluded.country, lat = excluded.lat, lon = excluded.lon, tz = excluded.tz,
+       on conflict(id) do update set name = case when stations.country = 'NO' then stations.name else excluded.name end, country = excluded.country, lat = excluded.lat, lon = excluded.lon, tz = excluded.tz,
          trv_signature = excluded.trv_signature, gtfs_stop_ids = excluded.gtfs_stop_ids, coord_source = excluded.coord_source,
          historical_only = 0, kind = excluded.kind, needs_review = excluded.needs_review`,
     );

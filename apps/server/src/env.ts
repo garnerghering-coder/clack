@@ -15,4 +15,6 @@ export const config = {
   trafikverketApiKey: process.env.TRAFIKVERKET_API_KEY ?? '',
   gtfsSweden3Key: process.env.TRAFIKLAB_GTFS_SWEDEN3_KEY ?? '',
   gtfsSverige2Key: process.env.TRAFIKLAB_GTFS_SVERIGE2_KEY ?? '',
+  /** Entur asks every client to identify itself as <company>-<application> (no key needed). */
+  enturClientName: process.env.ENTUR_CLIENT_NAME ?? 'garner-clack',
 };
