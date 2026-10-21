@@ -44,7 +44,8 @@
     "exploreTrains": "Utforska tåg i trafik",
     "following": "Följer",
     "followingNote": "Tåg du följer i Utforska. Att följa ett tåg lägger inte till det i dina resor eller ditt pass.",
-    "notRunning": "Går inte just nu"
+    "notRunning": "Går inte just nu",
+    "followingChip": "Följer"
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -492,7 +493,10 @@
     "following": "Följer",
     "follow": "Följ tåget",
     "inYourTrips": "I dina resor",
-    "plan": "Planera en resa"
+    "plan": "Planera en resa",
+    "notRunningTitle": "Tåget går inte just nu.",
+    "notRunningBody": "Det har kanske inte börjat än, har gått klart för dagen eller går inte i dag. Det syns här när det går.",
+    "unfollow": "Sluta följa"
   },
   "onboard": {
     "title": "Ombord",

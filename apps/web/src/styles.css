@@ -793,3 +793,35 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .share-preview { display: grid; place-items: center; }
 .share-preview img { width: 100%; max-width: 360px; aspect-ratio: 4 / 5; border-radius: 16px; border: 1px solid var(--hairline); }
 .share-pick { min-height: 40px; border-radius: 10px; background: var(--surface-raised); color: var(--text); border: 1px solid var(--hairline); padding: 0 10px; font: inherit; }
+/* The journey half of the featured card keeps the original hero's operator-colour gradient. */
+.featured-body {
+  background:
+    radial-gradient(120% 90% at 85% 10%, color-mix(in srgb, var(--op, var(--accent)) 30%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--surface-raised), var(--surface));
+}
+/* Smaller gradient pills for the trips after it, and for followed trains. */
+.pill-list { display: grid; gap: 8px; margin-top: 12px; }
+.leg-pill {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; border: 1px solid var(--hairline);
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--op, var(--accent)) 16%, transparent), transparent 65%),
+    var(--surface);
+}
+.leg-pill-main { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.leg-pill-route { font-weight: 700; overflow-wrap: anywhere; }
+.following { display: grid; gap: 8px; margin-top: 18px; }
+.following-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; }
+.live-sheet-actions { display: flex; align-items: stretch; }
+.live-sheet-actions .button { flex: 1 1 0; min-height: 48px; }
+/* Milestone medals */
+.medals { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 8px; }
+.medal-tile { display: grid; justify-items: center; text-align: center; gap: 2px; }
+.medal-label { font-weight: 700; font-size: 13px; line-height: 17px; overflow-wrap: anywhere; }
+.medal { overflow: visible; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35)); }
+.medal.locked .medal-body, .medal.locked polygon { filter: grayscale(1); opacity: 0.38; }
+.medal-number { font-family: 'Space Grotesk', sans-serif; font-weight: 800; fill: rgba(0, 0, 0, 0.72); }
+@media (prefers-reduced-motion: no-preference) {
+  .medals li { animation: medal-in 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both; animation-delay: calc(var(--i, 0) * 60ms); }
+  .medal-tile:hover .medal { transform: translateY(-2px) rotate(-3deg); transition: transform 0.2s; }
+}
+@keyframes medal-in { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }

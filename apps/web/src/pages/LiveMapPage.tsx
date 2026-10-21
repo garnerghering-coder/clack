@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check, ChevronDown, ChevronUp, Eye, Info, Search, SlidersHorizontal, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Eye, EyeOff, Info, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { FilterSpecification, GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
 import { decodePolyline, type LatLon } from '@clack/shared';
 import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry } from '../api';
@@ -150,6 +150,7 @@ function LiveMap() {
   const [searching, setSearching] = useState(false);
   const [stationHits, setStationHits] = useState<StationHit[]>([]);
   const [zoom, setZoom] = useState(4.2);
+  const [notRunning, setNotRunning] = useState<{ number: string; date: string | null } | null>(null);
   const focus = params.get('train');
   const now = useNow(5000);
   const followKeys = useMemo(() => new Set(follows.map((f) => `${f.trainNumber}|${f.serviceDate}`)), [follows]);
@@ -504,13 +505,22 @@ function LiveMap() {
     }
   };
 
-  // Opened from a board row ("Show on map"): select that train once it's on the map.
+  // Opened from a board row or a followed train: select it once it's on the map; if the first full picture of the
+  // map doesn't have it, say it isn't running (and offer to unfollow).
+  const focusDate = params.get('date');
+  const focusDone = useRef(false);
   useEffect(() => {
-    if (!focus || !ready || selected) return;
-    const tr = [...trains.current.values()].find((x) => x.number === focus);
-    if (tr) select(tr.id);
+    if (!focus || !ready || selected || focusDone.current) return;
+    const tr = [...trains.current.values()].find((x) => x.number === focus && (!focusDate || x.date === focusDate));
+    if (tr) {
+      focusDone.current = true;
+      select(tr.id);
+    } else if (loaded) {
+      focusDone.current = true;
+      setNotRunning({ number: focus, date: focusDate });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focus, ready, count.total]);
+  }, [focus, ready, count.total, loaded]);
 
   const clearRoute = () => {
     const m = map.current;
@@ -734,6 +744,18 @@ function LiveMap() {
       )}
       <span className="map-attrib live-attrib">© OpenStreetMap contributors · Protomaps · Trafikverket</span>
 
+      {notRunning && !sel && (
+        <NotRunningSheet
+          follow={follows.find((f) => f.trainNumber === notRunning.number && (!notRunning.date || f.serviceDate === notRunning.date)) ?? null}
+          number={notRunning.number}
+          onUnfollow={async (f) => {
+            await api.unfollow(f.trainNumber, f.serviceDate).catch(() => undefined);
+            setFollows(await api.follows().catch(() => follows));
+            setNotRunning(null);
+          }}
+          onClose={() => setNotRunning(null)}
+        />
+      )}
       {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
         <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'}>
@@ -845,6 +867,37 @@ function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
         })}
       </ol>
     </div>
+  );
+}
+
+/** A train you asked for that isn't on the map: not started yet, finished, or not running today. */
+function NotRunningSheet({ follow, number, onUnfollow, onClose }: { follow: Follow | null; number: string; onUnfollow: (f: Follow) => void; onClose: () => void }) {
+  const { t } = useTranslation();
+  const ops = useOperators();
+  const op = follow?.operatorId ? ops.get(follow.operatorId) : undefined;
+  return (
+    <section className="live-sheet card" aria-live="polite">
+      <header className="board-sheet-head">
+        <OperatorBadge operator={op} size={32} />
+        <span className="strong">{[op?.name, number].filter(Boolean).join(' ') || t('liveMap.train', { number })}</span>
+        <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
+          <X size={18} />
+        </button>
+      </header>
+      {follow?.label && <p className="strong">{follow.label}</p>}
+      <p>{t('liveMap.notRunningTitle')}</p>
+      <p className="caption">{t('liveMap.notRunningBody')}</p>
+      <div className="sheet-actions row-actions live-sheet-actions">
+        {follow && (
+          <button className="button" onClick={() => onUnfollow(follow)}>
+            <EyeOff size={16} /> {t('liveMap.unfollow')}
+          </button>
+        )}
+        <button className="button primary" onClick={onClose}>
+          {t('common.close')}
+        </button>
+      </div>
+    </section>
   );
 }
 

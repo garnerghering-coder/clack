@@ -1,9 +1,10 @@
-// Passport (DESIGN §8, product brief §9): everything you've ridden, by year and with or without commuter trains.
+// Passport (DESIGN §8, product brief §9): everything you've ridden, by year; commuter trains per the setting.
 // Collection first: the summary and your map, milestones, collections, records and the log, then the detailed
 // statistics. Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
 import { useEffect, useMemo, useState } from 'react';
 import { SettingsLink } from '../components/AppShell';
 import { ShareSheet } from '../share/ShareSheet';
+import { Medal } from '../components/Medal';
 import { Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -71,11 +72,12 @@ function Milestones({ data }: { data: Passport }) {
     <section className="card">
       <h2 className="section-header">{t('passport.milestones')}</h2>
       {achieved.length > 0 && (
-        <ul className="milestones">
-          {achieved.slice(0, all ? undefined : 6).map((m) => (
-            <li key={`${m.family}:${m.target}`}>
-              <Link to={`/trips/${m.legId}`} className="milestone">
-                <span className="strong">{milestoneLabel(t, m)}</span>
+        <ul className="medals">
+          {achieved.slice(0, all ? undefined : 6).map((m, i) => (
+            <li key={`${m.family}:${m.target}`} style={{ ['--i' as string]: i }}>
+              <Link to={`/trips/${m.legId}`} className="medal-tile" aria-label={milestoneLabel(t, m)}>
+                <Medal m={m} />
+                <span className="medal-label">{milestoneLabel(t, m)}</span>
                 <span className="caption">{m.at ? new Date(m.at).toLocaleDateString(locale(), { month: 'short', year: 'numeric', timeZone: tz }) : ''}</span>
               </Link>
             </li>
@@ -88,20 +90,20 @@ function Milestones({ data }: { data: Passport }) {
         </button>
       )}
       {next.length > 0 && (
-        <div className="milestone-next">
+        <>
           <span className="caption upper">{t('passport.nextMilestones')}</span>
-          {next.map((m) => (
-            <div key={`${m.family}:${m.target}`} className="milestone-progress">
-              <span className="bar-label">
-                <span className="strong">{milestoneLabel(t, m)}</span>
-                <span className="caption tabular">{t('passport.progressOf', { value: Math.floor(m.value ?? 0).toLocaleString(locale()), target: m.target.toLocaleString(locale()) })}</span>
-              </span>
-              <span className="bar-track">
-                <span className="bar-fill" style={{ width: `${Math.min(100, (100 * (m.value ?? 0)) / m.target)}%`, background: 'var(--accent)' }} />
-              </span>
-            </div>
-          ))}
-        </div>
+          <ul className="medals">
+            {next.map((m) => (
+              <li key={`${m.family}:${m.target}`}>
+                <div className="medal-tile" aria-label={`${milestoneLabel(t, m)}: ${t('passport.progressOf', { value: Math.floor(m.value ?? 0), target: m.target })}`}>
+                  <Medal m={m} locked />
+                  <span className="medal-label">{milestoneLabel(t, m)}</span>
+                  <span className="caption tabular">{t('passport.progressOf', { value: Math.floor(m.value ?? 0).toLocaleString(locale()), target: m.target.toLocaleString(locale()) })}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
       <p className="caption">{t('passport.milestonesNote')}</p>
     </section>
@@ -129,7 +131,8 @@ export function PassportPage() {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const [year, setYear] = useState<number | null>(null);
-  const [commuter, setCommuter] = useState(settings.includeCommuter);
+  // Commuter trains follow the setting (Settings → Include commuter trains); no switch on this page.
+  const commuter = settings.includeCommuter;
   const [comparison, setComparison] = useState<Co2Comparison>(settings.co2Comparison);
   const [data, setData] = useState<Passport | null>(null);
   const [legs, setLegs] = useState<Leg[]>([]);
@@ -223,10 +226,6 @@ export function PassportPage() {
             </button>
           ))}
         </div>
-        <label className="switch-row">
-          <input type="checkbox" role="switch" checked={commuter} onChange={(e) => setCommuter(e.target.checked)} />
-          <span>{t('passport.includeCommuter')}</span>
-        </label>
       </div>
 
       {data.review.length > 0 && (

@@ -17,6 +17,7 @@ import { isActive } from '../landing';
 import { dayOffset, fmtDay, fmtDistance, fmtDuration, fmtMonth, fmtTime } from '../format';
 import { opColor } from '../map/style';
 import { ConnectionChip, useConnection } from '../components/Connection';
+import { useOperators } from '../data';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { SettingsLink } from '../components/AppShell';
 import { isFresh } from '../live';
@@ -75,6 +76,33 @@ export function LegRow({ leg }: { leg: Leg }) {
         {leg.ride === 'not_taken' && <span className="chip">{t('record.notTaken')}</span>}
         <DelayPill delay={leg.dataQuality === 'scheduled_only' && leg.status === 'planned' ? undefined : leg.arrDelayMin} canceled={leg.canceled} />
         <span className="caption">{leg.isEstimatedGeometry ? t('trips.approxDistance', { distance: fmtDistance(leg.distanceM, settings.distanceUnit) }) : fmtDistance(leg.distanceM, settings.distanceUnit)}</span>
+      </span>
+    </Link>
+  );
+}
+
+/** An upcoming trip below the featured one: the same gradient card, smaller and quieter. */
+function LegPill({ leg }: { leg: Leg }) {
+  const { t } = useTranslation();
+  const now = useNow(60_000);
+  const dep = ms(leg.schedDep);
+  const service = [leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ');
+  return (
+    <Link to={`/trips/${leg.id}`} className="leg-pill" style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }}>
+      <OperatorBadge operator={leg.operator} size={30} />
+      <span className="leg-pill-main">
+        <span className="leg-pill-route">
+          {leg.origin?.name} → {leg.destination?.name}
+        </span>
+        <span className="leg-row-meta">
+          {dep ? fmtDay(dep, tzOf(leg)) : null} · <Times leg={leg} />
+          {dep && ms(leg.schedArr) ? ` · ${fmtDuration(((ms(leg.schedArr) ?? 0) - dep) / 60_000)}` : ''}
+        </span>
+        <span className="leg-row-meta">{[service || null, leg.depPlatform ? t('trips.platform', { platform: leg.depPlatform }) : null].filter(Boolean).join(' · ')}</span>
+      </span>
+      <span className="leg-row-side">
+        <span className="caption">{countdown(t, leg, now)}</span>
+        {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
       </span>
     </Link>
   );
@@ -196,25 +224,36 @@ function NothingAhead() {
 function Following({ follows }: { follows: Follow[] }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
+  const ops = useOperators();
   if (!follows.length) return null;
   return (
     <section className="following">
       <h3 className="month-header">{t('trips.following')}</h3>
-      <p className="caption">{t('trips.followingNote')}</p>
-      {follows.map((f) => (
-        <Link key={`${f.trainNumber}|${f.serviceDate}`} to={`/explore?${new URLSearchParams({ train: f.trainNumber })}`} className="leg-row">
-          <span className="poi-badge" aria-hidden="true">
-            <Eye size={16} />
-          </span>
-          <span className="leg-row-main">
-            <span className="leg-row-route">{f.label ?? t('liveMap.train', { number: f.trainNumber })}</span>
-            <span className="leg-row-meta">
-              {[t('liveMap.train', { number: f.trainNumber }), f.train?.next ? t('live.nextStop', { name: f.train.next, time: fmtTime(f.train.nextEta, 'Europe/Stockholm', settings.clock) }) : t('trips.notRunning')].join(' · ')}
+      {follows.map((f) => {
+        const op = f.operatorId ? ops.get(f.operatorId) : undefined;
+        return (
+          <Link
+            key={`${f.trainNumber}|${f.serviceDate}`}
+            to={`/explore?${new URLSearchParams({ train: f.trainNumber, date: f.serviceDate })}`}
+            className="leg-pill following-pill"
+            style={{ ['--op' as string]: opColor(op?.brandColor) }}
+          >
+            <OperatorBadge operator={op} size={30} />
+            <span className="leg-pill-main">
+              <span className="leg-pill-route">{f.label ?? t('liveMap.train', { number: f.trainNumber })}</span>
+              <span className="leg-row-meta">{[op?.name, f.trainNumber].filter(Boolean).join(' ')}</span>
+              <span className="leg-row-meta">{f.train?.next ? t('live.nextStop', { name: f.train.next, time: fmtTime(f.train.nextEta, 'Europe/Stockholm', settings.clock) }) : t('trips.notRunning')}</span>
             </span>
-          </span>
-          {f.train && <DelayPill delay={f.train.delayMin} />}
-        </Link>
-      ))}
+            <span className="leg-row-side">
+              <span className="chip following-chip">
+                <Eye size={12} /> {t('trips.followingChip')}
+              </span>
+              {f.train && <DelayPill delay={f.train.delayMin} />}
+            </span>
+          </Link>
+        );
+      })}
+      <p className="caption">{t('trips.followingNote')}</p>
     </section>
   );
 }
@@ -366,11 +405,12 @@ export function TripsPage() {
           </div>
         </section>
       )}
+      {legs && legs.length === 0 && tab === 'upcoming' && <Following follows={follows} />}
       {legs && legs.length > 0 && tab === 'upcoming' && (
         <>
           {hero ? <Featured leg={hero} state={heroState} next={heroState === 'active' ? nextInJourney(legs, hero) : undefined} /> : <NothingAhead />}
           {hero && !upcoming.length && <NothingAhead />}
-          <div className="list">{upcoming.filter((l) => l !== hero).map((l) => <LegRow key={l.id} leg={l} />)}</div>
+          <div className="pill-list">{upcoming.filter((l) => l !== hero).map((l) => <LegPill key={l.id} leg={l} />)}</div>
           <Following follows={follows} />
         </>
       )}
