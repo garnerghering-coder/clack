@@ -71,5 +71,6 @@ describe('download progress', () => {
     const r = await ensureDataset(db, ds, { now: NOW, fetchImpl, log: (m) => lines.push(m) });
     expect(r.downloaded).toBe(true);
     expect(lines).toEqual(['test: downloading (1/3 this month)…', 'test: 100 MB of 250 MB downloaded', 'test: 200 MB of 250 MB downloaded']);
-  });
+    // Writes 250 MB to disk, which can pass the default 5 s when every test file runs at once.
+  }, 30_000);
 });
