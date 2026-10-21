@@ -46,8 +46,10 @@
     "followingNote": "Tåg du följer i Utforska. Att följa ett tåg lägger inte till det i dina resor eller ditt pass.",
     "notRunning": "Går inte just nu",
     "followingChip": "Följer",
-    "layover": "{{time}} byte i {{station}}",
-    "layoverMissed": "Nästa tåg går från {{station}} innan det här är framme"
+    "layoverMissed": "Nästa tåg går från {{station}} innan det här är framme",
+    "layoverAt": "byte i {{station}}",
+    "layoverMap": "Stationskarta",
+    "layoverOpen": "Öppna stationskartan för bytet i {{station}}"
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -227,7 +229,7 @@
     "howWeCalculate": "Så räknar vi",
     "co2Modes": {
       "flight": "flyg",
-      "car_1": "en bensin- eller dieselbil",
+      "car_1": "en bensinbil",
       "car_2": "bil (2)",
       "car_3": "bil (3)",
       "car_avg": "bil (snitt)",
@@ -269,11 +271,7 @@
     "showAllMilestones": "Visa alla {{count}}",
     "co2Compare": "Jämför med",
     "co2Flying": "Flyg",
-    "co2Car": "Bil",
-    "carTypes": {
-      "car_1": "Bensin eller diesel",
-      "ev_1": "Elbil"
-    },
+    "co2Car": "Bensinbil",
     "railPassport": "Clack tågpass"
   },
   "settings": {
@@ -298,7 +296,7 @@
     "co2Comparison": "Standardjämförelse för CO₂",
     "co2": {
       "flight": "Flyg",
-      "car_1": "Bensin- eller dieselbil",
+      "car_1": "Bensinbil",
       "car_2": "Bil (2 personer)",
       "car_3": "Bil (3 personer)",
       "car_avg": "Bil (snitt)",
@@ -380,7 +378,9 @@
     "noPosition": "Position saknas för det här tåget",
     "follow": "Följ tåget",
     "trainHere": "Tåget är här",
-    "progressLabel": "{{percent}} % av vägen till {{name}}"
+    "progressLabel": "{{percent}} % av vägen till {{name}}",
+    "nextStopName": "Nästa station: {{name}}",
+    "arrivesLabel": "Ankomst"
   },
   "activity": {
     "title": "Händelser",

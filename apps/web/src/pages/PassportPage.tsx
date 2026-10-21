@@ -8,7 +8,7 @@ import { Medal } from '../components/Medal';
 import { Share2, TrainFront } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CAR_CHOICES, CO2_CHOICES, type Co2Comparison } from '@clack/shared';
+import { CO2_CHOICES, type Co2Comparison } from '@clack/shared';
 import { api, type CountRow, type Leg, type LegRef, type Milestone, type Passport } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { TrainArt } from '../components/TrainArt';
@@ -155,10 +155,9 @@ export function PassportPage() {
   const [year, setYear] = useState<number | null>(null);
   // Commuter trains follow the setting (Settings → Include commuter trains); no switch on this page.
   const commuter = settings.includeCommuter;
-  // Old settings may hold a comparison no longer offered; show it as a petrol or diesel car.
+  // Old settings may hold a comparison no longer offered; show it as a petrol car.
   const initial: Co2Comparison = (CO2_CHOICES as readonly string[]).includes(settings.co2Comparison) ? settings.co2Comparison : 'car_1';
   const [comparison, setComparison] = useState<Co2Comparison>(initial);
-  const [lastCar, setLastCar] = useState<Co2Comparison>(initial === 'flight' ? 'car_1' : initial);
   const [data, setData] = useState<Passport | null>(null);
   const [legs, setLegs] = useState<Leg[]>([]);
   const [error, setError] = useState(false);
@@ -518,24 +517,14 @@ export function PassportPage() {
               {Math.round(data.co2.savedKg).toLocaleString(locale())} <small>kg</small>
             </span>
             <span className="caption">{t('passport.co2Saved', { mode: t(`passport.co2Modes.${data.co2.comparison}`) })}</span>
-            {/* Flying, or a car of your choice (owner feedback 2026-10-21). */}
+            {/* Flying or a petrol car (owner feedback 2026-10-21). */}
             <div className="segmented small" role="tablist" aria-label={t('passport.co2Compare')}>
-              <button role="tab" aria-selected={comparison === 'flight'} className={comparison === 'flight' ? 'active' : ''} onClick={() => setComparison('flight')}>
-                {t('passport.co2Flying')}
-              </button>
-              <button role="tab" aria-selected={comparison !== 'flight'} className={comparison !== 'flight' ? 'active' : ''} onClick={() => setComparison(lastCar)}>
-                {t('passport.co2Car')}
-              </button>
+              {CO2_CHOICES.map((c) => (
+                <button key={c} role="tab" aria-selected={comparison === c} className={comparison === c ? 'active' : ''} onClick={() => setComparison(c)}>
+                  {c === 'flight' ? t('passport.co2Flying') : t('passport.co2Car')}
+                </button>
+              ))}
             </div>
-            {comparison !== 'flight' && (
-              <div className="chip-row">
-                {CAR_CHOICES.map((c) => (
-                  <button key={c} className={c === comparison ? 'chip-button active' : 'chip-button'} aria-pressed={c === comparison} onClick={() => { setComparison(c); setLastCar(c); }}>
-                    {t(`passport.carTypes.${c}`)}
-                  </button>
-                ))}
-              </div>
-            )}
             <p className="caption">
               {t('passport.co2Detail', {
                 train: data.co2.trainKg < 10 ? data.co2.trainKg.toFixed(1) : Math.round(data.co2.trainKg),

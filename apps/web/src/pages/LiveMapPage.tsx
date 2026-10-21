@@ -10,11 +10,12 @@ import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, t
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
+import { FlapTime } from '../components/SplitFlap';
 import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
-import { baseStyle, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
+import { baseStyle, lighten, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
 import { loadMaplibre, mapStatus } from '../map/RouteMap';
 import { currentTheme, useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -82,6 +83,60 @@ export function nearestOnLine(line: LatLon[], p: LatLon, from = 0): { index: num
     if (d < best.d) best = { index: i, point: q, d };
   }
   return { index: best.index, point: best.point };
+}
+
+/** Mixes a hex colour toward black. */
+function darken(hex: string, amount: number): string {
+  const n = parseInt(hex.replace('#', ''), 16);
+  const ch = (shift: number) => Math.round(((n >> shift) & 0xff) * (1 - amount)).toString(16).padStart(2, '0');
+  return `#${ch(16)}${ch(8)}${ch(0)}`;
+}
+
+/** A train: the operator colour as a lit gradient bead with a soft glow, like the trip pills (not a flat dot). */
+function trainDotImage(color: string, light: boolean): ImageData {
+  const c = document.createElement('canvas');
+  c.width = c.height = 40;
+  const g = c.getContext('2d')!;
+  g.shadowColor = `${color}99`;
+  g.shadowBlur = 6;
+  const grad = g.createRadialGradient(16, 15, 1, 20, 20, 13);
+  grad.addColorStop(0, lighten(color, 0.55));
+  grad.addColorStop(0.55, color);
+  grad.addColorStop(1, darken(color, 0.28));
+  g.fillStyle = grad;
+  g.beginPath();
+  g.arc(20, 20, 12.5, 0, Math.PI * 2);
+  g.fill();
+  g.shadowBlur = 0;
+  g.lineWidth = 2;
+  g.strokeStyle = light ? 'rgba(255,255,255,0.95)' : 'rgba(10,10,10,0.75)';
+  g.stroke();
+  return g.getImageData(0, 0, 40, 40);
+}
+
+/** Several trains: a glass bubble with a signal-yellow gradient ring (the count is drawn on top). */
+function clusterImage(light: boolean): ImageData {
+  const c = document.createElement('canvas');
+  c.width = c.height = 76;
+  const g = c.getContext('2d')!;
+  g.shadowColor = 'rgba(248,214,74,0.45)';
+  g.shadowBlur = 10;
+  const fill = g.createRadialGradient(30, 28, 2, 38, 38, 30);
+  fill.addColorStop(0, light ? '#ffffff' : '#333333');
+  fill.addColorStop(1, light ? '#ececec' : '#121212');
+  g.fillStyle = fill;
+  g.beginPath();
+  g.arc(38, 38, 28, 0, Math.PI * 2);
+  g.fill();
+  g.shadowBlur = 0;
+  const ring = g.createLinearGradient(10, 10, 66, 66);
+  ring.addColorStop(0, '#fff0a0');
+  ring.addColorStop(0.5, '#f8d64a');
+  ring.addColorStop(1, '#c8920c');
+  g.lineWidth = 4;
+  g.strokeStyle = ring;
+  g.stroke();
+  return g.getImageData(0, 0, 76, 76);
 }
 
 /** Stations are small rounded squares, so they never read as a train's round dot. */
@@ -265,13 +320,7 @@ function LiveMap() {
         setBbox([b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map((v) => v.toFixed(3)).join(','));
       };
       const light = currentTheme() === 'light';
-      const C = {
-        ...mapColors(),
-        // Clusters in the theme's strong colour: yellow on the dark map, black on the light one.
-        cluster: light ? '#0a0a0a' : '#f8d64a',
-        clusterLine: light ? '#ffffff' : '#0a0a0a',
-        clusterText: light ? '#ffffff' : '#0a0a0a',
-      };
+      const C = mapColors();
       m.on('load', () => {
         m.addImage('heading', headingImage(), { pixelRatio: 2 });
         m.addSource('rail-network', { type: 'geojson', data: RAIL_NETWORK_URL() });
@@ -302,20 +351,27 @@ function LiveMap() {
           paint: { 'text-color': C.label, 'text-halo-color': C.bg, 'text-halo-width': 1.2 },
         });
         m.addSource('trains', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, cluster: true, clusterMaxZoom: 6, clusterRadius: 36 });
-        m.addLayer({
-          id: 'clusters',
-          type: 'circle',
-          source: 'trains',
-          filter: ['has', 'point_count'],
-          paint: { 'circle-color': C.cluster, 'circle-stroke-color': C.clusterLine, 'circle-stroke-width': 1, 'circle-radius': ['step', ['get', 'point_count'], 12, 10, 16, 50, 21] },
+        // Gradient markers (owner feedback 2026-10-21: one identity with the trip pills, no flat solid circles).
+        m.addImage('cluster', clusterImage(light), { pixelRatio: 2 });
+        m.on('styleimagemissing', (e: { id: string }) => {
+          if (e.id.startsWith('tdot-') && !m.hasImage(e.id)) m.addImage(e.id, trainDotImage(e.id.slice(5), light), { pixelRatio: 2 });
         });
         m.addLayer({
-          id: 'cluster-count',
+          id: 'clusters',
           type: 'symbol',
           source: 'trains',
           filter: ['has', 'point_count'],
-          layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Medium'], 'text-size': 11, 'text-allow-overlap': true },
-          paint: { 'text-color': C.clusterText },
+          layout: {
+            'icon-image': 'cluster',
+            'icon-size': ['step', ['get', 'point_count'], 0.85, 10, 1.05, 50, 1.3],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+            'text-field': ['get', 'point_count_abbreviated'],
+            'text-font': ['Noto Sans Medium'],
+            'text-size': ['step', ['get', 'point_count'], 11, 10, 12, 50, 14],
+            'text-allow-overlap': true,
+          },
+          paint: { 'text-color': light ? '#0a0a0a' : '#f8d64a' },
         });
         const single: ['!', ['has', string]] = ['!', ['has', 'point_count']];
         // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
@@ -323,17 +379,17 @@ function LiveMap() {
         m.addLayer({ id: 'train-mine', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'mine'], true]], paint: { 'circle-radius': 13, 'circle-color': 'rgba(248,214,74,0.28)', 'circle-stroke-color': '#f8d64a', 'circle-stroke-width': 2 } });
         m.addLayer({
           id: 'train-dot',
-          type: 'circle',
+          type: 'symbol',
           source: 'trains',
           filter: single,
-          // Your own trains are drawn on top.
-          layout: { 'circle-sort-key': ['case', ['==', ['get', 'mine'], true], 1, 0] },
-          paint: {
-            'circle-radius': ['case', ['==', ['get', 'mine'], true], 6.5, 5],
-            // No rings or fading (owner feedback 2026-10-21): delay and GPS / estimate are in the train's sheet.
-            'circle-color': ['get', 'color'],
-            'circle-stroke-color': C.bg,
-            'circle-stroke-width': 1,
+          // No rings or fading (owner feedback 2026-10-21): delay and GPS / estimate are in the train's sheet.
+          // Your own trains are a little bigger and drawn on top.
+          layout: {
+            'icon-image': ['concat', 'tdot-', ['get', 'color']],
+            'icon-size': ['case', ['==', ['get', 'mine'], true], 1.25, 1],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+            'symbol-sort-key': ['case', ['==', ['get', 'mine'], true], 1, 0],
           },
         });
         // The selected train: a larger marker under its dot (ADDITIONS_01 A, "the marker enlarges").
@@ -758,7 +814,7 @@ function LiveMap() {
       )}
       {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
-        <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'}>
+        <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'} style={{ ['--op' as string]: opColor(selOp?.brandColor) }}>
           <header className="board-sheet-head">
             <OperatorBadge operator={selOp} size={32} />
             <button className="live-sheet-title" onClick={() => setCollapsed(!collapsed)} aria-expanded={!collapsed}>
@@ -781,7 +837,11 @@ function LiveMap() {
             </p>
           )}
           {!sel.origin && !sel.destination && !sel.next && <p className="caption">{t('liveMap.detailsLoading')}</p>}
-          {sel.next && <p>{t('live.nextStop', { name: sel.next, time: fmtTime(sel.nextEta, TZ, settings.clock) })}</p>}
+          {sel.next && (
+            <p className="next-stop">
+              {t('live.nextStopName', { name: sel.next })} <FlapTime time={sel.nextEta} tz={TZ} clock={settings.clock} />
+            </p>
+          )}
           <div className="chip-row">
             {sel.delayMin !== null && <DelayPill delay={sel.delayMin} />}
             <span className={sel.estimated || posAge > GPS_FRESH_MS ? 'chip' : 'chip live-pos'}>{posLabel}</span>
@@ -845,15 +905,11 @@ function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
           const cls = ['stop-row', s.passed ? 'passed' : '', i === nextIdx ? 'next' : '', s.canceled ? 'canceled' : ''].filter(Boolean).join(' ');
           return (
             <li key={s.seq} ref={i === nextIdx ? next : undefined} className={cls}>
-              <span className="stop-time tabular">
-                {late !== 0 && real !== null ? (
-                  <>
-                    <span className={late > 0 ? 'stop-new late' : 'stop-new early'}>{fmtTime(real, TZ, settings.clock)}</span>
-                    <s className="stop-old">{fmtTime(planned, TZ, settings.clock)}</s>
-                  </>
-                ) : (
-                  fmtTime(planned, TZ, settings.clock)
-                )}
+              <span className="stop-time">
+                <span className={`flap-colored ${late > 0 && real !== null ? 'stop-new late' : late < 0 && real !== null ? 'stop-new early' : 'stop-new'}`}>
+                  <FlapTime time={real ?? planned} tz={TZ} clock={settings.clock} />
+                </span>
+                {late !== 0 && real !== null && <s className="stop-old">{fmtTime(planned, TZ, settings.clock)}</s>}
               </span>
               <span className="stop-mark" aria-hidden="true" />
               <span className="stop-name">
@@ -942,7 +998,7 @@ function LiveStationSheet({ id, name, onClose }: { id: string; name: string; onC
         <ul className="live-station-deps">
           {rows.map((r) => (
             <li key={r.id}>
-              <span className="tabular strong">{fmtTime(r.estimated ?? r.advertised, TZ, settings.clock)}</span>
+              <FlapTime time={r.estimated ?? r.advertised} sched={r.advertised} tz={TZ} clock={settings.clock} />
               <OperatorBadge operator={r.operatorId ? ops.get(r.operatorId) : undefined} size={18} />
               <span className="live-station-dest">{r.endpoints.join(', ')}</span>
               {r.platform && <span className="caption">{t('trips.platform', { platform: r.platform })}</span>}

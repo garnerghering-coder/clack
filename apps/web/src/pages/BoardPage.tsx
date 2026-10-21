@@ -7,7 +7,7 @@ import { ArrowLeft, Map as MapIcon, Star, X } from 'lucide-react';
 import { api, type Board, type BoardRow, type BoardType, type StationInfo, type TimetableTrip } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
-import { SplitFlap } from '../components/SplitFlap';
+import { FlapTime, SplitFlap } from '../components/SplitFlap';
 import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
@@ -75,7 +75,7 @@ function RowSheet({ row, type, station, onClose }: { row: BoardRow; type: BoardT
               const time = s.dep ?? s.arr;
               return (
                 <li key={s.seq} className={here ? 'here' : ''}>
-                  <span className="tabular caption">{fmtTime(time, s.tz, settings.clock)}</span>
+                  <FlapTime time={time} tz={s.tz} clock={settings.clock} />
                   <span className={here ? 'strong' : ''}>{s.name}</span>
                 </li>
               );

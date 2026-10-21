@@ -46,8 +46,10 @@
     "followingNote": "Trains you watch on Explore. Following a train doesn’t add it to your trips or Passport.",
     "notRunning": "Not running right now",
     "followingChip": "Following",
-    "layover": "{{time}} layover at {{station}}",
-    "layoverMissed": "The next train leaves {{station}} before this one arrives"
+    "layoverMissed": "The next train leaves {{station}} before this one arrives",
+    "layoverAt": "layover at {{station}}",
+    "layoverMap": "Station map",
+    "layoverOpen": "Open the station map for the change at {{station}}"
   },
   "add": {
     "title": "Add a train",
@@ -227,7 +229,7 @@
     "howWeCalculate": "How we calculate this",
     "co2Modes": {
       "flight": "flying",
-      "car_1": "a petrol or diesel car",
+      "car_1": "a petrol car",
       "car_2": "car (2)",
       "car_3": "car (3)",
       "car_avg": "car (average)",
@@ -269,11 +271,7 @@
     "showAllMilestones": "Show all {{count}}",
     "co2Compare": "Compare with",
     "co2Flying": "Flying",
-    "co2Car": "Car",
-    "carTypes": {
-      "car_1": "Petrol or diesel",
-      "ev_1": "Electric"
-    },
+    "co2Car": "Petrol car",
     "railPassport": "Clack rail passport"
   },
   "settings": {
@@ -298,7 +296,7 @@
     "co2Comparison": "Default CO₂ comparison",
     "co2": {
       "flight": "Flying",
-      "car_1": "Petrol or diesel car",
+      "car_1": "Petrol car",
       "car_2": "Car (2 people)",
       "car_3": "Car (3 people)",
       "car_avg": "Car (average)",
@@ -380,7 +378,9 @@
     "noPosition": "Position not available for this train",
     "follow": "Follow train",
     "trainHere": "The train is here",
-    "progressLabel": "{{percent}}% of the way to {{name}}"
+    "progressLabel": "{{percent}}% of the way to {{name}}",
+    "nextStopName": "Next stop: {{name}}",
+    "arrivesLabel": "Arrives"
   },
   "activity": {
     "title": "Activity",

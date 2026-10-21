@@ -55,7 +55,7 @@ export function Medal({ m, locked = false, size = 92, bare = false }: { m: Miles
   const Icon = m.target >= 40_000 ? Globe2 : ICON[m.family];
   const text = centre(m);
   const progress = locked && m.value !== undefined ? Math.min(1, m.value / m.target) : null;
-  const ring = 2 * Math.PI * 49;
+  const ring = 2 * Math.PI * 38.5;
   return (
     <svg className={locked ? 'medal locked' : 'medal'} data-medal={`${m.family}:${m.target}`} xmlns="http://www.w3.org/2000/svg" width={size} height={size * 1.25} viewBox="0 0 120 150" aria-hidden="true">
       <defs>
@@ -73,13 +73,6 @@ export function Medal({ m, locked = false, size = 92, bare = false }: { m: Miles
       <polygon points="30,0 54,0 70,62 48,66" fill={f1} />
       <polygon points="90,0 66,0 50,62 72,66" fill={f0} />
       <polygon points="54,0 66,0 60,24" fill="rgba(0,0,0,0.18)" />
-      {/* Progress ring for an upcoming medal */}
-      {progress !== null && (
-        <>
-          <circle cx="60" cy="96" r="49" fill="none" stroke="var(--hairline)" strokeWidth="5" />
-          <circle cx="60" cy="96" r="49" fill="none" stroke="var(--accent)" strokeWidth="5" strokeLinecap="round" strokeDasharray={`${ring * progress} ${ring}`} transform="rotate(-90 60 96)" />
-        </>
-      )}
       <g className="medal-body">
         <circle cx="60" cy="96" r="43" fill={`url(#rim${id})`} />
         <circle cx="60" cy="96" r="34" fill={`url(#face${id})`} />
@@ -98,6 +91,10 @@ export function Medal({ m, locked = false, size = 92, bare = false }: { m: Miles
         {/* Shine */}
         <ellipse cx="46" cy="74" rx="18" ry="9" fill="rgba(255,255,255,0.28)" transform="rotate(-30 46 74)" />
       </g>
+      {/* An upcoming medal fills its own rim as you get closer (drawn over the greyed body, in colour). */}
+      {progress !== null && progress > 0 && (
+        <circle cx="60" cy="96" r="38.5" fill="none" stroke="var(--accent)" strokeWidth="8.5" strokeLinecap="round" strokeDasharray={`${ring * progress} ${ring}`} transform="rotate(-90 60 96)" />
+      )}
     </svg>
   );
 }

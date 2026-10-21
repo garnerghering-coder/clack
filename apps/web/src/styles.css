@@ -864,10 +864,55 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .pill-list .month-header { margin-top: 10px; }
 /* Inside a journey card the legs sit flat; the card carries the colour. */
 .journey-card .leg-pill { background: none; border: 0; padding: 8px 0; }
-/* The layover between two connecting trips. */
-.layover { display: flex; align-items: center; gap: 10px; padding: 2px 0 2px 28px; color: var(--text-2); font-size: 14px; font-weight: 600; }
-.layover-line { width: 2px; height: 26px; background: repeating-linear-gradient(to bottom, var(--text-3) 0 3px, transparent 3px 7px); }
-.layover-text { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+/* The layover between two connecting trips: the same gap above and below (the list's gap does the spacing). */
+.pill-list { gap: 10px; margin-top: 10px; }
+.layover { display: flex; align-items: center; gap: 12px; padding: 4px 12px 4px 28px; border-radius: 14px; color: var(--text-2); font-size: 14px; font-weight: 600; }
+.layover.linked { background: color-mix(in srgb, var(--surface) 60%, transparent); border: 1px dashed var(--hairline); }
+.layover.linked:hover { border-color: var(--accent-line); }
+.layover-line { align-self: stretch; width: 2px; min-height: 34px; background: repeating-linear-gradient(to bottom, var(--text-3) 0 3px, transparent 3px 7px); }
+.layover-main { display: grid; gap: 4px; flex: 1; min-width: 0; padding: 4px 0; }
+.layover-text { display: block; line-height: 20px; }
+.layover-text svg { vertical-align: -2px; margin-right: 6px; }
+.layover-text s { margin-right: 4px; }
+.layover-times { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.layover-open { display: inline-flex; align-items: center; gap: 4px; flex: none; color: var(--accent-ink); font-size: 13px; }
 .layover.at-risk { color: var(--very-late); }
 .offscreen { position: fixed; left: -10000px; top: 0; pointer-events: none; }
 .share-skeleton { width: 100%; max-width: 360px; aspect-ratio: 4 / 5; }
+/* Times on flip cards (FlapTime), in three sizes; a changed time shows the old one struck and the new one in yellow. */
+.flap-time { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; }
+.flap-time .flap { font-weight: 700; }
+.flap-sm .flap { font-size: 14px; line-height: 20px; }
+.flap-sm .flap-tile { min-width: 0.64em; padding: 0 1px; border-radius: 3px; }
+.flap-md .flap { font-size: 22px; line-height: 30px; gap: 2px; }
+.flap-md .flap-tile { min-width: 0.64em; padding: 0 2px; border-radius: 5px; }
+.flap-lg .flap { font-size: 30px; line-height: 40px; gap: 3px; }
+.flap-lg .flap-tile { min-width: 0.66em; padding: 0 2px; border-radius: 6px; }
+.flap-time.changed .flap-tile { color: var(--accent-ink); }
+.flap-old { font-size: 0.8em; color: var(--text-3); font-weight: 500; }
+.flap-sm .flap-old { font-size: 12px; }
+.flap-range { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.flap-range-sep { color: var(--text-3); }
+/*
+ * One surface identity (owner feedback 2026-10-21): cards and sheets carry the same quiet lit gradient as the trip
+ * pills instead of a flat fill; things tied to an operator tint it with the operator's colour (--op).
+ */
+.card, .board-sheet {
+  background:
+    radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--op, var(--accent)) 7%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--surface-raised), var(--surface) 55%);
+}
+.live-train-sheet {
+  background:
+    radial-gradient(110% 60% at 100% 0%, color-mix(in srgb, var(--op, var(--accent)) 22%, transparent), transparent 62%),
+    linear-gradient(160deg, var(--surface-raised), var(--surface) 55%);
+}
+.live-sheet-actions { background: transparent; }
+.station-map-bottom.card { background: var(--glass-strong); }
+/* Flip cards that take the colour of their delay band (stop lists). */
+.flap-colored .flap-tile { color: inherit; }
+.stop-time { display: grid; justify-items: start; gap: 1px; }
+.stop-row { grid-template-columns: 58px 16px 1fr; }
+.stop-new { color: var(--flap-text); }
+.next-stop { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tl-times { display: grid; justify-items: end; gap: 1px; }

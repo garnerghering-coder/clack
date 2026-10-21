@@ -3,6 +3,7 @@
 // a departure board. Only changed characters flip; `intro` flips every tile in once on first show. Reduced motion:
 // no flip.
 import { useEffect, useRef } from 'react';
+import { fmtTime } from '../format';
 
 export function SplitFlap({ value, className = '', label, intro = false }: { value: string; className?: string; label?: string; intro?: boolean }) {
   const prev = useRef<string>(intro ? ' '.repeat(value.length) : value);
@@ -46,6 +47,38 @@ export function SplitFlap({ value, className = '', label, intro = false }: { val
           </span>
         );
       })}
+    </span>
+  );
+}
+
+/**
+ * A time on flip cards, everywhere times are shown (owner feedback 2026-10-21). When the expected time differs from
+ * the timetable, the timetabled one is struck through beside it and the new one is drawn in the accent colour.
+ */
+export function FlapTime({
+  time,
+  sched,
+  tz,
+  clock,
+  size = 'sm',
+  intro = false,
+}: {
+  /** The time to show (expected or actual), ms. */
+  time: number | null;
+  /** The timetabled time, ms: struck through when it differs by a minute or more. */
+  sched?: number | null;
+  tz: string;
+  clock: '24h' | '12h';
+  size?: 'sm' | 'md' | 'lg';
+  intro?: boolean;
+}) {
+  const fmt = (v: number) => fmtTime(v, tz, clock);
+  if (time === null) return <span className="flap-missing">—</span>;
+  const changed = sched !== null && sched !== undefined && Math.floor(sched / 60_000) !== Math.floor(time / 60_000);
+  return (
+    <span className={`flap-time flap-${size}${changed ? ' changed' : ''}`}>
+      {changed && <s className="flap-old">{fmt(sched!)}</s>}
+      <SplitFlap value={fmt(time)} intro={intro} label={changed ? `${fmt(time)} (${fmt(sched!)})` : fmt(time)} />
     </span>
   );
 }

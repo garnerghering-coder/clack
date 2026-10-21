@@ -19,7 +19,7 @@ import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../fo
 import { opColor } from '../map/style';
 import { Onboard } from '../components/Onboard';
 import { JourneyConnections } from '../components/Connection';
-import { SplitFlap } from '../components/SplitFlap';
+import { FlapTime, SplitFlap } from '../components/SplitFlap';
 
 function TimeBlock({
   label,
@@ -86,11 +86,12 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
           <span className="caption">{s.deviations.filter((d) => d !== 'Spårändrat').join(' · ')}</span>
         )}
       </span>
+      {/* The time on flip cards, coloured by delay; the timetabled one struck under it when it changed. */}
       <span className="tl-times tabular">
-        <span className={actual !== null ? 'tl-sched small' : 'tl-sched'}>{fmtTime(sched, s.tz, settings.clock)}</span>
-        {actual !== null && (
-          <span className={`${delayClass(delay, s.canceled)} ${real === null ? 'estimate' : ''}`}>{fmtTime(actual, s.tz, settings.clock)}</span>
-        )}
+        <span className={`flap-colored ${actual !== null ? delayClass(delay, s.canceled) : ''} ${actual !== null && real === null ? 'estimate' : ''}`}>
+          <FlapTime time={actual ?? sched} tz={s.tz} clock={settings.clock} />
+        </span>
+        {actual !== null && sched !== null && Math.floor(actual / 60_000) !== Math.floor(sched / 60_000) && <s className="tl-sched small">{fmtTime(sched, s.tz, settings.clock)}</s>}
       </span>
       <span className="tl-platform tabular">
         {s.platform ?? ''}

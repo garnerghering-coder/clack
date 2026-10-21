@@ -5,7 +5,7 @@ import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { Clock, Compass, Eye, Plus, Search, Stamp } from 'lucide-react';
+import { Clock, Compass, Eye, Map as MapIcon, Plus, Search, Stamp } from 'lucide-react';
 import { api, ms, type Follow, type Leg, type LegDetail } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
@@ -16,7 +16,8 @@ import { isLive, useLiveUpdates, useNow } from '../live';
 import { isActive } from '../landing';
 import { dayOffset, fmtDay, fmtDistance, fmtDuration, fmtMonth, fmtTime } from '../format';
 import { opColor } from '../map/style';
-import { ConnectionChip, connectionTimes, useConnection } from '../components/Connection';
+import { ConnectionChip, connectionTimes, stationMapHref, useConnection, useStationMap } from '../components/Connection';
+import { FlapTime } from '../components/SplitFlap';
 import { useOperators } from '../data';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { SettingsLink } from '../components/AppShell';
@@ -39,16 +40,30 @@ export function countdown(t: (k: string, o?: Record<string, unknown>) => string,
   return t('trips.departsIn', { time: d ? `${d}d ${h}h` : h ? `${h}h ${m}m` : `${m} min` });
 }
 
-function Times({ leg }: { leg: Leg }) {
+/** Best-known departure and arrival: actual, else the live estimate, else the timetable shifted by the known delay. */
+function expected(leg: Leg) {
+  const dep = ms(leg.schedDep);
+  const arr = ms(leg.schedArr);
+  return {
+    dep: ms(leg.actualDep) ?? (dep !== null ? dep + (leg.depDelayMin ?? 0) * 60_000 : null),
+    arr: ms(leg.actualArr) ?? ms(leg.live?.arrivalEta) ?? (arr !== null ? arr + (leg.arrDelayMin ?? 0) * 60_000 : null),
+  };
+}
+
+/** Departure – arrival on flip cards; a changed time shows the timetabled one struck through. */
+function Times({ leg, size = 'sm', intro = false }: { leg: Leg; size?: 'sm' | 'md' | 'lg'; intro?: boolean }) {
   const { settings } = useSettings();
   const dep = ms(leg.schedDep);
   const arr = ms(leg.schedArr);
+  const x = expected(leg);
   const plus = dep && arr && leg.destination ? dayOffset(dep, tzOf(leg), arr, leg.destination.tz) : 0;
   return (
-    <>
-      {fmtTime(dep, tzOf(leg), settings.clock)}–{fmtTime(arr, leg.destination?.tz ?? tzOf(leg), settings.clock)}
+    <span className="flap-range">
+      <FlapTime time={x.dep} sched={dep} tz={tzOf(leg)} clock={settings.clock} size={size} intro={intro} />
+      <span className="flap-range-sep">–</span>
+      <FlapTime time={x.arr} sched={arr} tz={leg.destination?.tz ?? tzOf(leg)} clock={settings.clock} size={size} intro={intro} />
       {plus > 0 && <sup>+{plus}</sup>}
-    </>
+    </span>
   );
 }
 
@@ -92,22 +107,60 @@ export function LegRow({ leg, upcoming = false }: { leg: Leg; upcoming?: boolean
   );
 }
 
-/** Between two trips that meet at a station (brief §7): how long you have there, and the tracks when known. */
+/**
+ * Between two trips that meet at a station (brief §7): how long you have there, the arrival and departure on flip
+ * cards (a delay strikes the timetabled time), the tracks when known. With a station map it opens the Layover
+ * Guide: the walk, the time left, and what's open on the way.
+ */
 function Layover({ a, b }: { a: Leg; b: Leg }) {
   const { t } = useTranslation();
+  const { settings } = useSettings();
+  const stationId = a.destination?.id ?? null;
+  const { info } = useStationMap(stationId);
   const { arrival, departure } = connectionTimes(a, b);
   if (arrival === null || departure === null) return null;
   const min = Math.round((departure - arrival) / 60_000);
+  const schedA = ms(a.schedArr);
+  const schedB = ms(b.schedDep);
+  const schedMin = schedA !== null && schedB !== null ? Math.round((schedB - schedA) / 60_000) : null;
   const tracks = a.arrPlatform || b.depPlatform ? t('connection.tracks', { from: a.arrPlatform ?? '?', to: b.depPlatform ?? '?' }) : null;
-  return (
-    <div className={min < 0 ? 'layover at-risk' : 'layover'}>
+  const tz = a.destination?.tz ?? 'Europe/Stockholm';
+  const body = (
+    <>
       <span className="layover-line" aria-hidden="true" />
-      <span className="layover-text">
-        <Clock size={14} aria-hidden="true" />
-        {min < 0 ? t('trips.layoverMissed', { station: a.destination?.name ?? '' }) : t('trips.layover', { time: fmtDuration(min), station: a.destination?.name ?? '' })}
-        {tracks && <span className="caption"> · {tracks}</span>}
+      <span className="layover-main">
+        <span className="layover-text">
+          <Clock size={14} aria-hidden="true" />
+          {min < 0 ? (
+            t('trips.layoverMissed', { station: a.destination?.name ?? '' })
+          ) : (
+            <>
+              {schedMin !== null && schedMin !== min && <s className="flap-old">{fmtDuration(schedMin)}</s>}
+              <span className={schedMin !== null && schedMin !== min ? 'accent-text' : undefined}>{fmtDuration(min)}</span> {t('trips.layoverAt', { station: a.destination?.name ?? '' })}
+            </>
+          )}
+        </span>
+        <span className="layover-times caption">
+          <FlapTime time={arrival} sched={schedA} tz={tz} clock={settings.clock} />
+          <span>→</span>
+          <FlapTime time={departure} sched={schedB} tz={tz} clock={settings.clock} />
+          {tracks && <span>· {tracks}</span>}
+        </span>
+        {info?.hasMap && (
+          <span className="layover-open">
+            <MapIcon size={14} /> {t('trips.layoverMap')} ›
+          </span>
+        )}
       </span>
-    </div>
+    </>
+  );
+  const cls = min < 0 ? 'layover at-risk' : 'layover';
+  return info?.hasMap && stationId ? (
+    <Link to={stationMapHref(stationId, a, b)} className={`${cls} linked`} aria-label={t('trips.layoverOpen', { station: a.destination?.name ?? '' })}>
+      {body}
+    </Link>
+  ) : (
+    <div className={cls}>{body}</div>
   );
 }
 
@@ -179,7 +232,7 @@ function Featured({ leg, next, state }: { leg: Leg; next?: Leg; state: 'upcoming
           {leg.origin?.name} → {leg.destination?.name}
         </h2>
         <div className="hero-times tabular">
-          <Times leg={leg} />
+          <Times leg={leg} size="lg" intro />
         </div>
         {state === 'active' && live ? (
           <>

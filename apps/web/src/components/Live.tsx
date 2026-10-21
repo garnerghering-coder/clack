@@ -1,5 +1,6 @@
 // Live tracking pieces (DESIGN §9.5): the LIVE chip, the live module with progress, and the activity log.
 import { useTranslation } from 'react-i18next';
+import { FlapTime } from './SplitFlap';
 import { ms, type Leg, type LegEvent, type LiveState } from '../api';
 import { agoKey, isFresh } from '../live';
 import { useSettings } from '../settings';
@@ -44,9 +45,11 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
           : '';
   const delay = live.arrivalDelayMin;
   const next =
-    live.nextStopId && live.status !== 'boarding'
-      ? t('live.nextStop', { name: name(live.nextStopId), time: fmtTime(ms(live.eta), tzOf(live.nextStopId), settings.clock) })
-      : null;
+    live.nextStopId && live.status !== 'boarding' ? (
+      <span className="next-stop">
+        {t('live.nextStopName', { name: name(live.nextStopId) })} <FlapTime time={ms(live.eta)} tz={tzOf(live.nextStopId)} clock={settings.clock} />
+      </span>
+    ) : null;
   const source =
     live.positionSource === 'gps' ? t('live.livePosition') : live.positionSource === 'estimated' ? t('live.estimatedPosition') : t('live.noPosition');
 
@@ -67,7 +70,7 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
       {next && <p>{next}</p>}
       {!compact && (
         <p className="live-arrives">
-          {t('live.arrives', { time: fmtTime(ms(live.arrivalEta), destTz, settings.clock) })} <DelayPill delay={delay} />
+          {t('live.arrivesLabel')} <FlapTime time={ms(live.arrivalEta)} tz={destTz} clock={settings.clock} /> <DelayPill delay={delay} />
         </p>
       )}
       <p className="caption">
