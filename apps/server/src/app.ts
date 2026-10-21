@@ -11,6 +11,8 @@ import { legRoutes } from './routes/legs.js';
 import { mapRoutes } from './routes/map.js';
 import { liveRoutes } from './routes/live.js';
 import { passportRoutes } from './routes/passport.js';
+import { boardRoutes } from './routes/boards.js';
+import { BoardHub, type BoardHubOptions } from './boards/hub.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -18,7 +20,7 @@ declare module 'fastify' {
   }
 }
 
-export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void } = {}) {
+export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions } = {}) {
   const app = Fastify({ logger: opts.logger ?? false });
   app.decorateRequest('userId', '');
   // No accounts in Phase 1: every request acts as the seeded local user.
@@ -37,5 +39,8 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(mapRoutes(db), api);
   app.register(liveRoutes(), api);
   app.register(passportRoutes(db), api);
+  const hub = new BoardHub(db, { log: (m) => app.log.warn(m), ...opts.boards });
+  app.addHook('onClose', async () => hub.close());
+  app.register(boardRoutes(db, hub), api);
   return app;
 }

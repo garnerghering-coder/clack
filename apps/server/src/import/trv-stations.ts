@@ -19,6 +19,7 @@ export async function importTrvStations(db: Db, fetchImpl?: typeof fetch): Promi
         lat: pos?.[0] ?? null,
         lon: pos?.[1] ?? null,
         advertised: s.Advertised,
+        countyNo: s.CountyNo?.[0] ?? null,
         modifiedAt: s.ModifiedTime ? new Date(s.ModifiedTime) : null,
       };
       tx.insert(trvLocations).values(values).onConflictDoUpdate({ target: trvLocations.signature, set: values }).run();

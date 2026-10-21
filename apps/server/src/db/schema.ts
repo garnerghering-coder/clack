@@ -104,6 +104,8 @@ export const trvLocations = sqliteTable('trv_locations', {
   lat: real('lat'),
   lon: real('lon'),
   advertised: integer('advertised', { mode: 'boolean' }).notNull(),
+  /** Swedish county (län) number from TrainStation.CountyNo, first listed. */
+  countyNo: integer('county_no'),
   modifiedAt: timestamp('modified_at'),
 });
 
@@ -252,4 +254,34 @@ export const liveState = sqliteTable('live_state', {
   /** Expected arrival where you get off. */
   arrivalEta: timestamp('arrival_eta'),
   arrivalDelayMin: integer('arrival_delay_min'),
+});
+
+// ---------- Stations (ADDITIONS_01) ----------
+
+export const stationFavorites = sqliteTable(
+  'station_favorites',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    stationId: text('station_id').notNull().references(() => stations.id),
+    createdAt: createdAt(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.stationId] })],
+);
+
+export const stationRecent = sqliteTable(
+  'station_recent',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    stationId: text('station_id').notNull().references(() => stations.id),
+    lastViewed: timestamp('last_viewed').notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.stationId] })],
+);
+
+/** "I'd like a map of this station" — counts demand for station maps (ADDITIONS_01 C). */
+export const stationRequests = sqliteTable('station_requests', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  stationId: text('station_id').notNull().references(() => stations.id),
+  createdAt: createdAt(),
 });

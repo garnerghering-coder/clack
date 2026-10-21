@@ -6,9 +6,22 @@ import '@fontsource/space-grotesk/700.css';
 import './i18n';
 import './styles.css';
 import { App } from './App';
+import { PhoneFrame, PhoneViewButton, readLayout } from './PhoneFrame';
+
+// Inside the phone frame (an iframe) the app renders normally; on a wide screen the top window shows the frame.
+const inFrame = window.self !== window.top;
+const wide = window.matchMedia('(min-width: 700px)').matches;
+const layout = readLayout();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    {!inFrame && wide && layout === 'phone' ? (
+      <PhoneFrame />
+    ) : (
+      <>
+        <App />
+        {!inFrame && wide && <PhoneViewButton />}
+      </>
+    )}
   </StrictMode>,
 );

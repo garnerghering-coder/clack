@@ -224,3 +224,38 @@ export function tripStops(db: Db, key: string, serviceDate: string): { trip: Tri
   }));
   return { trip, stops };
 }
+
+export interface StationCall {
+  tripKey: string;
+  serviceDate: string;
+  seq: number;
+  trainNumber: string | null;
+  operatorId: string | null;
+  product: Product;
+  category: string;
+  arr: number | null;
+  dep: number | null;
+}
+
+/** Every timetabled call at a station on these local dates (and after-midnight runs of the day before). */
+export function callsAtStation(db: Db, stationId: string, dates: string[]): StationCall[] {
+  const all = [...new Set(dates.flatMap((d) => [addDays(d, -1), d]))];
+  const rows = db.all<TripRow & { seq: number; arr_sec: number | null; dep_sec: number | null }>(sql`
+    select t.key, d.service_date, t.train_number, t.operator_id, t.category, t.route_type, t.route_name, t.tz,
+           st.seq, st.arr_sec, st.dep_sec
+    from timetable_stop_times st
+    join timetable_trips t on t.key = st.trip_key
+    join timetable_trip_dates d on d.trip_key = t.key
+    where st.station_id = ${stationId} and d.service_date in (${sql.join(all.map((d) => sql`${d}`), sql`, `)})`);
+  return rows.map((r) => ({
+    tripKey: r.key,
+    serviceDate: r.service_date,
+    seq: r.seq,
+    trainNumber: r.train_number,
+    operatorId: r.operator_id,
+    product: productOf(r.route_type, r.category),
+    category: r.category,
+    arr: utc(r, r.arr_sec),
+    dep: utc(r, r.dep_sec),
+  }));
+}

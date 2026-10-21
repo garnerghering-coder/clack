@@ -23,6 +23,7 @@ export interface TrvStation {
   AdvertisedShortLocationName?: string;
   OfficialLocationName?: string;
   CountryCode?: string;
+  CountyNo?: number[];
   Advertised: boolean;
   Deleted?: boolean;
   Geometry?: { WGS84?: string };
@@ -39,4 +40,20 @@ export async function fetchTrainStations(fetchImpl?: typeof fetch): Promise<TrvS
 export function parseWgs84(point?: string): [number, number] | null {
   const m = point?.match(/POINT \(([-\d.]+) ([-\d.]+)\)/);
   return m ? [Number(m[2]), Number(m[1])] : null;
+}
+
+/**
+ * Actual times as epoch ms, guarding against a Trafikverket data fault seen on 2026-10-21: `TimeAtLocation` arrived as
+ * the UTC clock time labelled with the Swedish offset ("10:00+02:00" for a departure at 12:00 local), i.e. two hours
+ * early. Trains don't leave or arrive 45+ minutes ahead of the timetable, so when that's what the time says and reading
+ * the clock as UTC gives a sensible delay, the UTC reading is used. Correct data passes through unchanged.
+ */
+export function actualTime(value: string | undefined, advertised: string | number): number | null {
+  if (!value) return null;
+  const parsed = Date.parse(value);
+  const adv = typeof advertised === 'number' ? advertised : Date.parse(advertised);
+  const EARLY = 45 * 60_000;
+  if (parsed - adv > -EARLY) return parsed;
+  const asUtc = Date.parse(`${value.slice(0, 19)}Z`);
+  return asUtc - adv > -EARLY && asUtc - adv < 12 * 3600_000 ? asUtc : parsed;
 }

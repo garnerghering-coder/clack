@@ -423,3 +423,11 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .transfer.tight .caption { color: var(--slight); }
 .transfer.missed .caption { color: var(--very-late); }
 .journey-map { height: 240px; }
+
+/* ---------- Phone frame on laptops (owner request 2026-10-21) ---------- */
+.phone-stage { min-height: 100dvh; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #161d2a 0%, #07090d 70%); overflow: hidden; }
+.phone-device { position: relative; padding: 12px; border-radius: 60px; background: #05070a; box-shadow: 0 0 0 2px #2a3140, 0 30px 80px rgba(0, 0, 0, 0.6); transform-origin: center center; flex: none; }
+.phone-screen { display: block; border: 0; border-radius: 48px; background: var(--bg); }
+.phone-toggle { position: fixed; top: 16px; right: 16px; z-index: 50; display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text-2); font-size: 13px; font-weight: 600; }
+.phone-toggle:hover { color: var(--text); }
+.phone-toggle.floating { top: auto; bottom: 16px; right: auto; left: 16px; }

@@ -4,7 +4,7 @@ import { and, eq, gt, lt, ne, sql } from 'drizzle-orm';
 import { delayMinutes } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations } from '../db/schema.js';
-import { trvQuery } from '../trafikverket/client.js';
+import { actualTime, trvQuery } from '../trafikverket/client.js';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
 export const TRV_HISTORY_MS = 4 * 86400_000;
@@ -80,7 +80,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     const a =
       out.get(e.seq) ??
       out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null }).get(e.seq)!;
-    const actual = row.TimeAtLocation ? Date.parse(row.TimeAtLocation) : null;
+    const actual = actualTime(row.TimeAtLocation, row.AdvertisedTimeAtLocation);
     const estimated = row.EstimatedTimeAtLocation ? Date.parse(row.EstimatedTimeAtLocation) : null;
     if (e.activity === 'Ankomst') {
       a.actualArr = actual;

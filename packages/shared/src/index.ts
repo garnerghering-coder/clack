@@ -1,5 +1,6 @@
 export * from './delay';
 export * from './polyline';
+export * from './counties';
 
 // Types and constants shared by the web app and the server.
 

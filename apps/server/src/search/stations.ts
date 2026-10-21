@@ -7,6 +7,8 @@ export interface SearchableStation {
   trvSignature: string | null;
   country: string;
   departuresPerDay: number;
+  /** County (län) or town, shown under the name in results. */
+  county?: string | null;
 }
 
 export interface StationHit {
@@ -14,6 +16,7 @@ export interface StationHit {
   name: string;
   code: string | null;
   country: string;
+  county?: string | null;
   score?: number;
 }
 
@@ -73,7 +76,7 @@ export function searchStations(index: StationIndex, query: string, limit = 8): (
     if (!score) continue;
     // Busier stations win ties: "Stockholm" -> Stockholm C before smaller "Stockholm …" halts.
     score += Math.log10(1 + e.station.departuresPerDay) * 4;
-    hits.push({ id: e.station.id, name: e.station.name, code: e.station.trvSignature, country: e.station.country, score });
+    hits.push({ id: e.station.id, name: e.station.name, code: e.station.trvSignature, country: e.station.country, county: e.station.county ?? null, score });
   }
   return hits.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'sv')).slice(0, limit);
 }
