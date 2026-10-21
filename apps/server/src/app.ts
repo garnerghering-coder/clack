@@ -10,6 +10,7 @@ import { searchRoutes } from './routes/search.js';
 import { legRoutes } from './routes/legs.js';
 import { mapRoutes } from './routes/map.js';
 import { liveRoutes } from './routes/live.js';
+import { passportRoutes } from './routes/passport.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -35,5 +36,6 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   app.register(mapRoutes(db), api);
   app.register(liveRoutes(), api);
+  app.register(passportRoutes(db), api);
   return app;
 }

@@ -7,6 +7,7 @@ import { legStops, legs, operators, stations, timetableTrips } from '../db/schem
 import { haversineM } from '../lib/geo.js';
 import { productOf, tripStops, type TripStop } from '../search/timetable.js';
 import { typicalTrainType } from './trainTypes.js';
+import { regroupJourneys } from './journeys.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
 import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
@@ -112,6 +113,7 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
   });
   // Track geometry and distance along the rail network (cached per station pair, so this is quick).
   attachLegGeometry(db, id);
+  regroupJourneys(db, userId);
   return id;
 }
 
@@ -136,6 +138,7 @@ const legColumns = {
   trainType: legs.trainType,
   trainTypeSource: legs.trainTypeSource,
   countryCodes: legs.countryCodes,
+  journeyId: legs.journeyId,
   operatorId: legs.operatorId,
   originStationId: legs.originStationId,
   destStationId: legs.destStationId,
@@ -216,5 +219,23 @@ export function setTrainType(db: Db, userId: string, id: string, trainType: stri
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {
-  return db.delete(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).run().changes > 0;
+  const gone = db.delete(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).run().changes > 0;
+  if (gone) regroupJourneys(db, userId);
+  return gone;
+}
+
+/** A journey's legs in order, each with its track geometry (for the combined map). */
+export function getJourney(db: Db, userId: string, journeyId: string) {
+  const list = listLegs(db, userId).filter((l) => l.journeyId === journeyId);
+  if (!list.length) return null;
+  const geo = new Map(
+    db
+      .select({ id: legs.id, geometry: legs.geometry })
+      .from(legs)
+      .where(eq(legs.journeyId, journeyId))
+      .all()
+      .map((r) => [r.id, r.geometry]),
+  );
+  const ordered = list.sort((a, b) => (a.schedDep?.getTime() ?? 0) - (b.schedDep?.getTime() ?? 0)).map((l) => ({ ...l, geometry: geo.get(l.id) ?? null }));
+  return { id: journeyId, legs: ordered };
 }

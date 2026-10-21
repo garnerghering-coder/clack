@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { createLeg, deleteLeg, getLeg, LegError, listLegs, setTrainType, type CreateLegInput } from '../legs/legs.js';
+import { createLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setTrainType, type CreateLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { withLogo } from '../import/brands.js';
@@ -43,6 +43,8 @@ export const legRoutes =
       if (!setTrainType(db, req.userId, req.params.id, t)) return reply.code(404).send({ error: 'not found' });
       return getLeg(db, req.userId, req.params.id);
     });
+
+    app.get<{ Params: { id: string } }>('/journeys/:id', async (req, reply) => getJourney(db, req.userId, req.params.id) ?? reply.code(404).send({ error: 'not found' }));
 
     app.get('/train-types', async () => trainTypeCatalog().types);
 

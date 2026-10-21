@@ -1,5 +1,5 @@
 import { config } from './env.js';
-import { openDb } from './db/client.js';
+import { LOCAL_USER_ID, openDb } from './db/client.js';
 import { buildApp } from './app.js';
 import { bootstrap } from './import/run.js';
 import { startScheduler } from './jobs/scheduler.js';
@@ -8,6 +8,7 @@ import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
 import { syncBrands } from './import/brands.js';
 import { backfillTrainTypes } from './legs/trainTypes.js';
+import { regroupJourneys } from './legs/journeys.js';
 
 const db = openDb(config.databasePath);
 syncBrands(db);
@@ -22,6 +23,7 @@ log = (msg: string) => app.log.info(msg);
 // Trips saved before routing existed get their track lines now (fast: cached per station pair).
 backfillLegGeometry(db, log);
 backfillTrainTypes(db);
+regroupJourneys(db, LOCAL_USER_ID);
 
 if (process.env.JOBS !== 'off') {
   // Catch up in the background (first run imports stations and timetables; legs get any actuals they missed),

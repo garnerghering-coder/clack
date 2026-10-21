@@ -37,14 +37,15 @@ interface Props {
 }
 
 let statusPromise: Promise<{ basemap: unknown }> | null = null;
-const mapStatus = () =>
+/** Shared with the other maps. */
+export const mapStatus = () =>
   (statusPromise ??= fetch('/api/map/status').then(
     (r) => (r.ok ? r.json() : { basemap: null }),
     () => ({ basemap: null }),
   ));
 
 let protocolReady: Promise<typeof import('maplibre-gl')> | null = null;
-function loadMaplibre() {
+export function loadMaplibre() {
   protocolReady ??= Promise.all([import('maplibre-gl'), import('pmtiles'), import('maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url')]).then(
     ([ml, pm, worker]) => {
       // MapLibre finds its worker relative to its own file, which bundling moves; point it at Vite's worker build.

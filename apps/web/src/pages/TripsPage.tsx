@@ -8,6 +8,7 @@ import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { useSettings } from '../settings';
 import { LiveChip, LiveModule } from '../components/Live';
+import { JourneyCard } from '../components/Journey';
 import { isLive, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDay, fmtDistance, fmtMonth, fmtTime } from '../format';
 
@@ -148,11 +149,19 @@ export function TripsPage() {
   // The hero is the train you're on right now, else the next one.
   const hero = upcoming.find((l) => isLive(l.live)) ?? upcoming[0];
   const months = useMemo(() => {
-    const groups: { label: string; legs: Leg[] }[] = [];
+    // Legs of one journey are shown together in a journey card, in travel order (DESIGN §4).
+    const byJourney = new Map<string, Leg[]>();
+    for (const l of past) if (l.journeyId) (byJourney.get(l.journeyId) ?? byJourney.set(l.journeyId, []).get(l.journeyId)!).push(l);
+    const groups: { label: string; items: Leg[][] }[] = [];
+    const done = new Set<string>();
     for (const l of past) {
-      const label = fmtMonth(ms(l.schedDep) ?? 0, tzOf(l));
-      if (groups.at(-1)?.label !== label) groups.push({ label, legs: [] });
-      groups.at(-1)!.legs.push(l);
+      if (done.has(l.id)) continue;
+      const together = (l.journeyId && byJourney.get(l.journeyId)) || [l];
+      const item = [...together].sort((a, b) => (ms(a.schedDep) ?? 0) - (ms(b.schedDep) ?? 0));
+      for (const x of item) done.add(x.id);
+      const label = fmtMonth(ms(item[0]!.schedDep) ?? 0, tzOf(item[0]!));
+      if (groups.at(-1)?.label !== label) groups.push({ label, items: [] });
+      groups.at(-1)!.items.push(item);
     }
     return groups;
   }, [past]);
@@ -205,9 +214,7 @@ export function TripsPage() {
           {months.map((m) => (
             <section key={m.label}>
               <h3 className="month-header">{m.label}</h3>
-              {m.legs.map((l) => (
-                <LegRow key={l.id} leg={l} />
-              ))}
+              {m.items.map((it) => (it.length > 1 ? <JourneyCard key={it[0]!.id} legs={it} /> : <LegRow key={it[0]!.id} leg={it[0]!} />))}
             </section>
           ))}
         </div>

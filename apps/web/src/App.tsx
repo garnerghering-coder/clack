@@ -5,6 +5,7 @@ import { PassportPage } from './pages/PassportPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { AboutPage } from './pages/AboutPage';
 import { AddTripPage } from './pages/AddTripPage';
+import { JourneyPage } from './pages/JourneyPage';
 import { TripDetailPage } from './pages/TripDetailPage';
 import { SettingsProvider } from './settings';
 
@@ -16,6 +17,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<TripsPage />} />
             <Route path="/trips/:id" element={<TripDetailPage />} />
+            <Route path="/journeys/:id" element={<JourneyPage />} />
             <Route path="/passport" element={<PassportPage />} />
             <Route path="/add" element={<AddTripPage />} />
             <Route path="/settings" element={<SettingsPage />} />

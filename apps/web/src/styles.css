@@ -372,3 +372,54 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .check-draw path { stroke-dashoffset: 0; }
 }
+
+/* ---------- Passport (DESIGN §8) ---------- */
+.passport-controls { position: sticky; top: 0; z-index: 5; display: grid; gap: 10px; padding: 8px 0; background: var(--bg); }
+.year-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.switch-row { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.passport-hero { display: grid; gap: 10px; padding: 20px; border-radius: 24px; background: linear-gradient(140deg, #10205c, #0a1a4f 55%, #1b0f4a); border: 1px solid rgba(255, 255, 255, 0.08); }
+.passport-hero .caption.upper { color: #b9b4ff; }
+.passport-distance { font-family: 'Space Grotesk', var(--font, sans-serif); font-size: 56px; line-height: 60px; font-weight: 700; letter-spacing: -0.02em; }
+.passport-distance small, .passport-big small { font-size: 22px; color: var(--text-2); font-weight: 600; }
+.passport-big { font-family: 'Space Grotesk', sans-serif; font-size: 40px; line-height: 44px; font-weight: 700; }
+.flavor { text-align: left; color: #d7d3ff; font-weight: 600; }
+.passport-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 6px; }
+.passport-tiles > div { display: grid; gap: 2px; padding: 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.07); }
+.passport-tiles .caption.upper { color: #b9b4ff; }
+.map-card { padding: 0; overflow: hidden; }
+.passport-map { height: 280px; }
+.records { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.record { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; background: var(--surface-raised); min-width: 0; }
+.record .strong, .record .caption { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bars, .type-list, .country-list, .band-legend { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.bar-row { display: flex; align-items: center; gap: 12px; }
+.bar-main { flex: 1; display: grid; gap: 6px; min-width: 0; }
+.bar-label { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.bar-track { height: 6px; border-radius: 3px; background: var(--hairline); overflow: hidden; }
+.bar-fill { display: block; height: 100%; border-radius: 3px; }
+.type-row { display: flex; align-items: center; gap: 12px; overflow: hidden; }
+.type-art { flex: none; width: 120px; display: flex; justify-content: flex-start; overflow: hidden; }
+.type-art .train-art { max-width: 120px; height: auto; }
+.type-row .bar-label { flex: 1; min-width: 0; flex-direction: column; gap: 2px; }
+.country-list li { display: flex; align-items: center; gap: 10px; }
+.country-list .caption { margin-left: auto; }
+.delay-hero { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.band-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; }
+.band { display: block; min-width: 6px; }
+.band-legend { gap: 4px; }
+.band-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+.band.band-on_time, .dot.band-on_time { background: var(--on-time); }
+.band.band-slight, .dot.band-slight { background: var(--slight); }
+.band.band-late, .dot.band-late { background: var(--late); }
+.band.band-very_late, .dot.band-very_late { background: var(--very-late); }
+.co2-card .chip-row { flex-wrap: wrap; }
+
+/* ---------- Journeys (DESIGN §4, §7) ---------- */
+.journey-card { display: grid; padding: 4px 14px 6px; border-radius: var(--r-card); background: var(--surface); border: 1px solid var(--hairline); margin-bottom: 10px; }
+.journey-card .leg-row { border-bottom: 0; }
+.journey-head { display: grid; gap: 2px; padding: 10px 0 4px; }
+.transfer { display: flex; align-items: center; gap: 10px; padding: 2px 0 2px 17px; }
+.transfer-line { width: 2px; height: 22px; border-radius: 1px; background: repeating-linear-gradient(to bottom, var(--text-3) 0 3px, transparent 3px 6px); }
+.transfer.tight .caption { color: var(--slight); }
+.transfer.missed .caption { color: var(--very-late); }
+.journey-map { height: 240px; }

@@ -1,0 +1,15 @@
+{
+  "_comment": "CO2 factors (SPEC §15), g CO2e per passenger-km, well-to-wheel, keyed by country. Source for SE: IVL Swedish Environmental Research Institute, 'Typvärden för klimatpåverkande utsläpp från långväga personresor i Sverige', report U11173, May 2026 (commissioned by SJ AB); electric car: Trafikverket rural WTW value, excludes vehicle manufacturing. Values as given in SPEC.md §15; re-check against the report before any public launch.",
+  "SE": {
+    "train": { "g_per_pkm": 0.27, "source": "IVL U11173 (2026), average SJ train", "year": 2026 },
+    "comparisons": {
+      "flight": { "g_per_pkm": 170, "source": "IVL U11173 (2026), domestic flight incl. high-altitude effect", "year": 2026 },
+      "car_1": { "g_per_pkm": 190, "source": "IVL U11173 (2026), average Swedish car, rural, 1 person", "year": 2026 },
+      "car_2": { "g_per_pkm": 95, "source": "IVL U11173 (2026), 2 people", "year": 2026 },
+      "car_3": { "g_per_pkm": 63, "source": "IVL U11173 (2026), 3 people", "year": 2026 },
+      "car_avg": { "g_per_pkm": 130, "source": "IVL U11173 (2026), average occupancy 1.45", "year": 2026 },
+      "ev_1": { "g_per_pkm": 10, "source": "Trafikverket rural WTW; excludes vehicle manufacturing", "year": 2026 },
+      "coach": { "g_per_pkm": 15, "source": "IVL U11173 (2026), long-distance coach", "year": 2026 }
+    }
+  }
+}

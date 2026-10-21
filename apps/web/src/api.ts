@@ -128,7 +128,13 @@ export interface Leg {
   origin: StationRef | null;
   destination: StationRef | null;
   notes: string | null;
+  journeyId: string | null;
   live: LiveState | null;
+}
+
+export interface Journey {
+  id: string;
+  legs: (Leg & { geometry: string | null })[];
 }
 
 export type LiveStatus = 'scheduled' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
@@ -206,6 +212,46 @@ export interface TrainType {
   about: string;
 }
 
+export interface LegRef {
+  legId: string;
+  from: string;
+  to: string;
+  distanceM: number;
+  minutes: number;
+  dep: number;
+  arr: number;
+  delayMin: number | null;
+}
+export interface CountRow {
+  key: string;
+  count: number;
+  distanceM: number;
+}
+export interface Passport {
+  years: number[];
+  scope: { year: number | null; includeCommuter: boolean };
+  totals: { distanceM: number; minutes: number; trains: number; journeys: number; stations: number; countries: number; borderCrossings: number; cancellations: number };
+  flavor: { earthLaps: number; swedenLengths: number; topRoute: { route: string; count: number } | null; busiestMonth: { month: string; count: number } | null; lateMinutes: number };
+  records: {
+    longestDistance: LegRef | null;
+    longestDuration: LegRef | null;
+    biggestDelay: LegRef | null;
+    mostRiddenRoute: { route: string; count: number } | null;
+    busiestStation: { id: string; name: string; count: number } | null;
+    earliestDeparture: LegRef | null;
+    latestArrival: LegRef | null;
+  };
+  operators: CountRow[];
+  products: CountRow[];
+  trainTypes: CountRow[];
+  delays: { basedOn: number; onTimePct: number | null; totalLateMin: number; averageMin: number | null; worst: LegRef | null; bands: Record<'on_time' | 'slight' | 'late' | 'very_late', number>; cancellations: number };
+  countries: { code: string; legs: number }[];
+  stations: { id: string; name: string; country: string; lat: number; lon: number; count: number }[];
+  co2: { comparison: string; trainKg: number; comparisonKg: number; savedKg: number };
+  map: { legId: string; operatorId: string | null; geometry: string | null; stops: [number, number][] }[];
+  refs: { operators: Record<string, Operator>; trainTypes: Record<string, TrainType> };
+}
+
 export const ms = (t: string | number | null | undefined) => (t === null || t === undefined || t === '' ? null : typeof t === 'number' ? t : Date.parse(t));
 
 export const api = {
@@ -220,7 +266,10 @@ export const api = {
   leg: (id: string) => request<LegDetail>(`/legs/${id}`),
   createLeg: (body: { tripKey: string; serviceDate: string; fromSeq: number; toSeq: number; force?: boolean }) => request<LegDetail>('/legs', { method: 'POST', body: JSON.stringify(body) }),
   refreshLeg: (id: string) => request<LegDetail>(`/legs/${id}/refresh`, { method: 'POST' }),
+  journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
   trainTypes: () => request<TrainType[]>('/train-types'),
+  passport: (q: { year: number | null; commuter: boolean; comparison?: string }) =>
+    request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),
 };
