@@ -29,7 +29,7 @@ cd clack
 npm run dev
 ```
 
-Open <http://localhost:5173>. Stop with Ctrl+C.
+Wait for the green **✓ Clack is ready** box in Terminal, then open <http://localhost:5173>. Stop with Ctrl+C.
 
 - **First start is slow.** The server downloads the timetable (~800 MB, one use of the monthly GTFS Sweden 3 quota)
   and imports it. Station search stays empty until the Terminal prints `imported in … s`. It then downloads the map

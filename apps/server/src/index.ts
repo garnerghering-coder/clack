@@ -10,6 +10,14 @@ import { syncBrands } from './import/brands.js';
 import { backfillTrainTypes } from './legs/trainTypes.js';
 import { regroupJourneys } from './legs/journeys.js';
 
+// Plain lines among the JSON log, so start-up has a clear beginning and end in the Terminal.
+const banner = (lines: string[]) => {
+  const w = Math.max(...lines.map((l) => l.length)) + 4;
+  const bar = '═'.repeat(w);
+  console.log(`\n\x1b[1;32m╔${bar}╗\n${lines.map((l) => `║  ${l.padEnd(w - 2)}║`).join('\n')}\n╚${bar}╝\x1b[0m\n`);
+};
+const ready = () => banner(['✓ Clack is ready', 'Open http://localhost:5173 in your browser', 'Stop with Ctrl+C']);
+
 const db = openDb(config.databasePath);
 syncBrands(db);
 let log = (msg: string) => console.log(msg);
@@ -28,10 +36,12 @@ regroupJourneys(db, LOCAL_USER_ID);
 if (process.env.JOBS !== 'off') {
   // Catch up in the background (first run imports stations and timetables; legs get any actuals they missed),
   // then keep to the schedule.
+  console.log('\n\x1b[1;33m… Starting up: checking timetables, logos and map tiles. Wait for "Clack is ready".\x1b[0m\n');
   void refreshDueLegs(db, log)
     .catch((e) => log(`actual times catch-up failed: ${(e as Error).message}`))
     .then(() => bootstrap(db, log))
-    .then(() => startScheduler(db, log));
+    .then(() => startScheduler(db, log))
+    .then(ready);
   // Live tracking runs alongside the imports (it only needs saved trips).
   startLiveTracker(db, { log });
-}
+} else ready();
