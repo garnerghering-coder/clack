@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CO2_COMPARISONS, LANGUAGES, type Settings, THEMES } from '@clack/shared';
+import { CO2_CHOICES, LANGUAGES, type Settings, THEMES } from '@clack/shared';
 import { useSettings } from '../settings';
 import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -81,7 +81,7 @@ export function SettingsPage() {
         <Choice field="language" options={LANGUAGES} label={(v) => t(`settings.languages.${v}`)} />
         <Choice field="distanceUnit" options={['km', 'mi'] as const} label={(v) => t(`settings.units.${v}`)} />
         <Choice field="clock" options={['24h', '12h'] as const} label={(v) => t(`settings.clocks.${v}`)} />
-        <Choice field="co2Comparison" options={CO2_COMPARISONS} label={(v) => t(`settings.co2.${v}`)} />
+        <Choice field="co2Comparison" options={CO2_CHOICES} label={(v) => t(`settings.co2.${v}`)} />
       </section>
       <section className="card">
         <Toggle field="includeCommuter" />

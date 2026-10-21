@@ -55,8 +55,12 @@ isn't (2026-10-21).
   - They are all-time and use counted trips only. Each records the trip that reached it, and the next three are shown with progress.
 - **Share cards (§10):**
   - 1080 × 1350 PNG, with a preview before saving or sharing.
+  - Four cards: Year in Rail, All-time, Featured Journey and Medal (one milestone as a token).
+  - The map is a real one: an off-screen snapshot of the app's dark basemap and rail network with your routes, with a lines-only fallback.
+  - Each card carries the medals that belong to it: that year's, all time, or the ones that trip earned.
   - Cards show distance, counts, time on board, operator and month and year.
   - They never include times, ticket details, train numbers or your current position.
+- **CO₂:** you compare with flying, or a car of your choice (petrol or diesel, or electric).
 
 ## Acceptance checklist
 
@@ -92,7 +96,7 @@ isn't (2026-10-21).
 - [x] Every statistic comes from counted trips. The empty state explains how trips get in.
 
 **Share cards**
-- [x] Year in Rail, All-time Passport and Featured Journey are all built, each with a preview, save and share. They cope with long names (shrink, then wrap) and a missing map (a drawn motif instead).
+- [x] Year in Rail, All-time Passport, Featured Journey and Medal are all built, each with a preview, save and share. They cope with long names (shrink, then wrap) and a missing map (lines only, or a drawn motif).
 
 **General**
 - [x] Existing features kept. Tests cover:
@@ -109,6 +113,6 @@ isn't (2026-10-21).
 - **Explore search:** train numbers only find trains running right now, because they're looked up on the live map. Stations search the station index. Route search ("Göteborg → Stockholm") isn't on Explore yet; Add train covers it.
 - **Followed trains:** kept for their operating day and the next, matched by train number and date. They don't follow a train across a change of number.
 - **Featured map position:** the train marker uses the trip tracker's position. With an estimated position it says so; with no fresh position the card falls back to the route preview.
-- **Share card maps:** they draw your routes only, with no basemap, so they stay readable at small sizes and need no tile download.
+- **Share card maps:** they need the basemap download (first start). Without it they show the rail network and your routes on a plain background.
 - **Matching:** uses Trafikverket only. Foreign stops have no reports, so a trip that ends abroad (for example Kolding) shows as `partial_reports` and is asked about unless you saved it after it ran.
 - **Accessibility:** large text sizes were checked by layout, not with a screen reader pass.

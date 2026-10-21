@@ -1,11 +1,11 @@
 // Trips home (DESIGN §4, product brief §5): Upcoming | Past. Upcoming leads with one featured card (route map on
 // top, the journey under it) for the train you're on, else the next one; the rest are compact rows. Past is grouped
 // by month.
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { Compass, Eye, Plus, Search, Stamp } from 'lucide-react';
+import { Clock, Compass, Eye, Plus, Search, Stamp } from 'lucide-react';
 import { api, ms, type Follow, type Leg, type LegDetail } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
@@ -16,7 +16,7 @@ import { isLive, useLiveUpdates, useNow } from '../live';
 import { isActive } from '../landing';
 import { dayOffset, fmtDay, fmtDistance, fmtDuration, fmtMonth, fmtTime } from '../format';
 import { opColor } from '../map/style';
-import { ConnectionChip, useConnection } from '../components/Connection';
+import { ConnectionChip, connectionTimes, useConnection } from '../components/Connection';
 import { useOperators } from '../data';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { SettingsLink } from '../components/AppShell';
@@ -52,45 +52,21 @@ function Times({ leg }: { leg: Leg }) {
   );
 }
 
-export function LegRow({ leg }: { leg: Leg }) {
+/**
+ * A trip as a gradient pill (the featured card's look, smaller and quieter): used for upcoming trips under the
+ * featured one, past trips, the Passport log and journeys. Upcoming ones lead with the countdown.
+ */
+export function LegRow({ leg, upcoming = false }: { leg: Leg; upcoming?: boolean }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
-  const dep = ms(leg.schedDep);
-  return (
-    <Link to={`/trips/${leg.id}`} className={leg.ride === 'not_taken' ? 'leg-row not-taken' : 'leg-row'}>
-      <OperatorBadge operator={leg.operator} />
-      <span className="leg-row-main">
-        <span className="leg-row-route">
-          {leg.origin?.name} → {leg.destination?.name}
-        </span>
-        <span className="leg-row-meta">
-          {dep ? fmtDay(dep, tzOf(leg)) : null} · <Times leg={leg} />
-          {dep && ms(leg.schedArr) ? ` · ${fmtDuration(((ms(leg.schedArr) ?? 0) - dep) / 60_000)}` : ''}
-        </span>
-        <span className="leg-row-meta">
-          {[[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ') || null, leg.depPlatform && leg.status === 'planned' ? t('trips.platform', { platform: leg.depPlatform }) : null].filter(Boolean).join(' · ')}
-        </span>
-      </span>
-      <span className="leg-row-side">
-        {leg.ride === 'review' && <span className="chip review-chip">{t('record.needsCheck')}</span>}
-        {leg.ride === 'not_taken' && <span className="chip">{t('record.notTaken')}</span>}
-        <DelayPill delay={leg.dataQuality === 'scheduled_only' && leg.status === 'planned' ? undefined : leg.arrDelayMin} canceled={leg.canceled} />
-        <span className="caption">{leg.isEstimatedGeometry ? t('trips.approxDistance', { distance: fmtDistance(leg.distanceM, settings.distanceUnit) }) : fmtDistance(leg.distanceM, settings.distanceUnit)}</span>
-      </span>
-    </Link>
-  );
-}
-
-/** An upcoming trip below the featured one: the same gradient card, smaller and quieter. */
-function LegPill({ leg }: { leg: Leg }) {
-  const { t } = useTranslation();
   const now = useNow(60_000);
   const dep = ms(leg.schedDep);
   const service = [leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ');
   return (
-    <Link to={`/trips/${leg.id}`} className="leg-pill" style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }}>
-      <OperatorBadge operator={leg.operator} size={30} />
+    <Link to={`/trips/${leg.id}`} className={leg.ride === 'not_taken' ? 'leg-pill not-taken' : 'leg-pill'} style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }}>
+      <OperatorBadge operator={leg.operator} size={32} />
       <span className="leg-pill-main">
+        {upcoming && <span className="leg-pill-when">{countdown(t, leg, now)}</span>}
         <span className="leg-pill-route">
           {leg.origin?.name} → {leg.destination?.name}
         </span>
@@ -98,14 +74,49 @@ function LegPill({ leg }: { leg: Leg }) {
           {dep ? fmtDay(dep, tzOf(leg)) : null} · <Times leg={leg} />
           {dep && ms(leg.schedArr) ? ` · ${fmtDuration(((ms(leg.schedArr) ?? 0) - dep) / 60_000)}` : ''}
         </span>
-        <span className="leg-row-meta">{[service || null, leg.depPlatform ? t('trips.platform', { platform: leg.depPlatform }) : null].filter(Boolean).join(' · ')}</span>
+        <span className="leg-row-meta">{[service || null, upcoming && leg.depPlatform ? t('trips.platform', { platform: leg.depPlatform }) : null].filter(Boolean).join(' · ')}</span>
       </span>
       <span className="leg-row-side">
-        <span className="caption">{countdown(t, leg, now)}</span>
-        {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
+        {leg.ride === 'review' && <span className="chip review-chip">{t('record.needsCheck')}</span>}
+        {leg.ride === 'not_taken' && <span className="chip">{t('record.notTaken')}</span>}
+        {upcoming ? (
+          leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />
+        ) : (
+          <>
+            <DelayPill delay={leg.dataQuality === 'scheduled_only' && leg.status === 'planned' ? undefined : leg.arrDelayMin} canceled={leg.canceled} />
+            <span className="caption">{leg.isEstimatedGeometry ? t('trips.approxDistance', { distance: fmtDistance(leg.distanceM, settings.distanceUnit) }) : fmtDistance(leg.distanceM, settings.distanceUnit)}</span>
+          </>
+        )}
       </span>
     </Link>
   );
+}
+
+/** Between two trips that meet at a station (brief §7): how long you have there, and the tracks when known. */
+function Layover({ a, b }: { a: Leg; b: Leg }) {
+  const { t } = useTranslation();
+  const { arrival, departure } = connectionTimes(a, b);
+  if (arrival === null || departure === null) return null;
+  const min = Math.round((departure - arrival) / 60_000);
+  const tracks = a.arrPlatform || b.depPlatform ? t('connection.tracks', { from: a.arrPlatform ?? '?', to: b.depPlatform ?? '?' }) : null;
+  return (
+    <div className={min < 0 ? 'layover at-risk' : 'layover'}>
+      <span className="layover-line" aria-hidden="true" />
+      <span className="layover-text">
+        <Clock size={14} aria-hidden="true" />
+        {min < 0 ? t('trips.layoverMissed', { station: a.destination?.name ?? '' }) : t('trips.layover', { time: fmtDuration(min), station: a.destination?.name ?? '' })}
+        {tracks && <span className="caption"> · {tracks}</span>}
+      </span>
+    </div>
+  );
+}
+
+/** Do these two trips meet: off one and onto the next at the same station, within half a day? */
+export function meets(a: Leg, b: Leg): boolean {
+  if (!a.destination || a.destination.id !== b.origin?.id) return false;
+  const arr = ms(a.actualArr) ?? ms(a.schedArr);
+  const dep = ms(b.schedDep);
+  return arr !== null && dep !== null && dep - arr < 12 * 3600_000 && dep - arr > -2 * 3600_000;
 }
 
 /** The featured card's full leg (stops for the live module, geometry for the map), fetched once per leg. */
@@ -227,7 +238,7 @@ function Following({ follows }: { follows: Follow[] }) {
   const ops = useOperators();
   if (!follows.length) return null;
   return (
-    <section className="following">
+    <section className="following-section">
       <h3 className="month-header">{t('trips.following')}</h3>
       {follows.map((f) => {
         const op = f.operatorId ? ops.get(f.operatorId) : undefined;
@@ -410,12 +421,26 @@ export function TripsPage() {
         <>
           {hero ? <Featured leg={hero} state={heroState} next={heroState === 'active' ? nextInJourney(legs, hero) : undefined} /> : <NothingAhead />}
           {hero && !upcoming.length && <NothingAhead />}
-          <div className="pill-list">{upcoming.filter((l) => l !== hero).map((l) => <LegPill key={l.id} leg={l} />)}</div>
+          <div className="pill-list">
+            {(() => {
+              // A layover line between trips that meet at a station, including from the featured one.
+              const rest = upcoming.filter((l) => l !== hero);
+              return rest.map((l, i) => {
+                const before = i === 0 ? hero : rest[i - 1];
+                return (
+                  <Fragment key={l.id}>
+                    {before && meets(before, l) && <Layover a={before} b={l} />}
+                    <LegRow leg={l} upcoming />
+                  </Fragment>
+                );
+              });
+            })()}
+          </div>
           <Following follows={follows} />
         </>
       )}
       {legs && legs.length > 0 && tab === 'past' && (
-        <div className="list">
+        <div className="pill-list">
           {past.filter((l) => l.ride === 'review').map((l) => (
             <ReviewCard key={`r${l.id}`} leg={l} onAnswer={(d) => setLegs((ls) => ls && ls.map((x) => (x.id === d.id ? { ...x, ride: d.ride, rideReason: d.rideReason } : x)))} />
           ))}

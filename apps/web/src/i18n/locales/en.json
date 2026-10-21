@@ -45,7 +45,9 @@
     "following": "Following",
     "followingNote": "Trains you watch on Explore. Following a train doesn’t add it to your trips or Passport.",
     "notRunning": "Not running right now",
-    "followingChip": "Following"
+    "followingChip": "Following",
+    "layover": "{{time}} layover at {{station}}",
+    "layoverMissed": "The next train leaves {{station}} before this one arrives"
   },
   "add": {
     "title": "Add a train",
@@ -225,11 +227,11 @@
     "howWeCalculate": "How we calculate this",
     "co2Modes": {
       "flight": "flying",
-      "car_1": "car (solo)",
+      "car_1": "a petrol or diesel car",
       "car_2": "car (2)",
       "car_3": "car (3)",
       "car_avg": "car (average)",
-      "ev_1": "electric car",
+      "ev_1": "an electric car",
       "coach": "coach"
     },
     "log": "Train log",
@@ -264,7 +266,15 @@
       "nightTrains_one": "First night train",
       "nightTrains_other": "{{count}} night trains"
     },
-    "showAllMilestones": "Show all {{count}}"
+    "showAllMilestones": "Show all {{count}}",
+    "co2Compare": "Compare with",
+    "co2Flying": "Flying",
+    "co2Car": "Car",
+    "carTypes": {
+      "car_1": "Petrol or diesel",
+      "ev_1": "Electric"
+    },
+    "railPassport": "Clack rail passport"
   },
   "settings": {
     "title": "Settings",
@@ -288,7 +298,7 @@
     "co2Comparison": "Default CO₂ comparison",
     "co2": {
       "flight": "Flying",
-      "car_1": "Car (solo)",
+      "car_1": "Petrol or diesel car",
       "car_2": "Car (2 people)",
       "car_3": "Car (3 people)",
       "car_avg": "Car (average)",
@@ -710,7 +720,8 @@
     "year": "Year",
     "variant": {
       "all": "All time",
-      "journey": "Journey"
+      "journey": "Journey",
+      "medal": "Medal"
     },
     "pickJourney": "Choose a journey",
     "previewAlt": "Preview of the share card",
@@ -718,6 +729,9 @@
     "privacy": "Only what’s on the card is shared: no times, ticket details, train numbers or where you are now. Nothing leaves your device until you save or share it.",
     "save": "Save image",
     "share": "Share",
-    "savedInstead": "Sharing isn’t available in this browser, so the image was saved instead."
+    "savedInstead": "Sharing isn’t available in this browser, so the image was saved instead.",
+    "medalKicker": "Milestone unlocked",
+    "unlocked": "Unlocked {{date}}",
+    "pickMedal": "Choose a medal"
   }
 }

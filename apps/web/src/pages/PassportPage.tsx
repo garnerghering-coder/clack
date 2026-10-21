@@ -1,14 +1,14 @@
 // Passport (DESIGN §8, product brief §9): everything you've ridden, by year; commuter trains per the setting.
 // Collection first: the summary and your map, milestones, collections, records and the log, then the detailed
 // statistics. Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SettingsLink } from '../components/AppShell';
 import { ShareSheet } from '../share/ShareSheet';
 import { Medal } from '../components/Medal';
-import { Share2 } from 'lucide-react';
+import { Share2, TrainFront } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CO2_COMPARISONS, type Co2Comparison } from '@clack/shared';
+import { CAR_CHOICES, CO2_CHOICES, type Co2Comparison } from '@clack/shared';
 import { api, type CountRow, type Leg, type LegRef, type Milestone, type Passport } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { TrainArt } from '../components/TrainArt';
@@ -110,6 +110,28 @@ function Milestones({ data }: { data: Passport }) {
   );
 }
 
+/** The Passport's top card: a passport page (gradient, guilloche, sheen) that tilts a little under the pointer. */
+function PassportCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLElement>(null);
+  const move = (e: React.PointerEvent) => {
+    const el = ref.current;
+    if (!el || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--rx', `${((e.clientY - r.top) / r.height - 0.5) * -6}deg`);
+    el.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * 8}deg`);
+    el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+  };
+  const leave = () => {
+    ref.current?.style.setProperty('--rx', '0deg');
+    ref.current?.style.setProperty('--ry', '0deg');
+  };
+  return (
+    <section ref={ref} className="passport-hero" onPointerMove={move} onPointerLeave={leave}>
+      {children}
+    </section>
+  );
+}
+
 function Record({ label, value, sub, to }: { label: string; value: string; sub?: string; to?: string }) {
   const body = (
     <>
@@ -133,7 +155,10 @@ export function PassportPage() {
   const [year, setYear] = useState<number | null>(null);
   // Commuter trains follow the setting (Settings → Include commuter trains); no switch on this page.
   const commuter = settings.includeCommuter;
-  const [comparison, setComparison] = useState<Co2Comparison>(settings.co2Comparison);
+  // Old settings may hold a comparison no longer offered; show it as a petrol or diesel car.
+  const initial: Co2Comparison = (CO2_CHOICES as readonly string[]).includes(settings.co2Comparison) ? settings.co2Comparison : 'car_1';
+  const [comparison, setComparison] = useState<Co2Comparison>(initial);
+  const [lastCar, setLastCar] = useState<Co2Comparison>(initial === 'flight' ? 'car_1' : initial);
   const [data, setData] = useState<Passport | null>(null);
   const [legs, setLegs] = useState<Leg[]>([]);
   const [error, setError] = useState(false);
@@ -248,8 +273,16 @@ export function PassportPage() {
         </section>
       ) : (
         <>
-          <section className="passport-hero">
-            <span className="caption upper">{year ? t('passport.yearPassport', { year }) : t('passport.allTimePassport')}</span>
+          <PassportCard>
+            <div className="passport-hero-head">
+              <span className="passport-hero-brand">
+                <span className="caption upper">{t('passport.railPassport')}</span>
+                <span className="passport-hero-kind">{year ? t('passport.yearPassport', { year }) : t('passport.allTimePassport')}</span>
+              </span>
+              <span className="passport-emblem" aria-hidden="true">
+                <TrainFront size={22} strokeWidth={2} />
+              </span>
+            </div>
             <span className="passport-distance tabular">
               {Math.round(unit === 'mi' ? km / 1.609344 : km).toLocaleString(locale())}
               <small> {unit}</small>
@@ -277,7 +310,11 @@ export function PassportPage() {
                 <span className="caption upper">{t('passport.stations')}</span>
               </div>
             </div>
-          </section>
+            {/* A machine-readable-zone look, spelled out from your own totals (decoration; nothing personal). */}
+            <span className="passport-mrz" aria-hidden="true">
+              {`P<CLACK<<${year ?? 'ALL'}<<KM${Math.round(km)}<<J${tot.journeys}<<S${tot.stations}<<C${tot.countries}`.padEnd(44, '<').slice(0, 44)}
+            </span>
+          </PassportCard>
 
           <section className="card map-card">
             <MultiRouteMap
@@ -481,13 +518,24 @@ export function PassportPage() {
               {Math.round(data.co2.savedKg).toLocaleString(locale())} <small>kg</small>
             </span>
             <span className="caption">{t('passport.co2Saved', { mode: t(`passport.co2Modes.${data.co2.comparison}`) })}</span>
-            <div className="chip-row">
-              {CO2_COMPARISONS.map((c) => (
-                <button key={c} className={c === comparison ? 'chip-button active' : 'chip-button'} onClick={() => setComparison(c)}>
-                  {t(`passport.co2Modes.${c}`)}
-                </button>
-              ))}
+            {/* Flying, or a car of your choice (owner feedback 2026-10-21). */}
+            <div className="segmented small" role="tablist" aria-label={t('passport.co2Compare')}>
+              <button role="tab" aria-selected={comparison === 'flight'} className={comparison === 'flight' ? 'active' : ''} onClick={() => setComparison('flight')}>
+                {t('passport.co2Flying')}
+              </button>
+              <button role="tab" aria-selected={comparison !== 'flight'} className={comparison !== 'flight' ? 'active' : ''} onClick={() => setComparison(lastCar)}>
+                {t('passport.co2Car')}
+              </button>
             </div>
+            {comparison !== 'flight' && (
+              <div className="chip-row">
+                {CAR_CHOICES.map((c) => (
+                  <button key={c} className={c === comparison ? 'chip-button active' : 'chip-button'} aria-pressed={c === comparison} onClick={() => { setComparison(c); setLastCar(c); }}>
+                    {t(`passport.carTypes.${c}`)}
+                  </button>
+                ))}
+              </div>
+            )}
             <p className="caption">
               {t('passport.co2Detail', {
                 train: data.co2.trainKg < 10 ? data.co2.trainKg.toFixed(1) : Math.round(data.co2.trainKg),

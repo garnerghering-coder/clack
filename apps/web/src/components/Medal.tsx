@@ -41,13 +41,14 @@ function metalFor(m: Milestone) {
 }
 
 /** "1k", "2.5k", "10k"; the first ones and once-around-the-Earth get an icon instead of a number. */
-function centre(m: Milestone): string | null {
+export function centre(m: Milestone): string | null {
   if (m.target === 1 || m.target >= 40_000) return null;
   if (m.target >= 1000) return `${(m.target / 1000).toLocaleString('en', { maximumFractionDigits: 1 })}k`;
   return String(m.target);
 }
 
-export function Medal({ m, locked = false, size = 92 }: { m: Milestone; locked?: boolean; size?: number }) {
+/** bare: no number (share cards draw it in their own font after turning the SVG into an image). */
+export function Medal({ m, locked = false, size = 92, bare = false }: { m: Milestone; locked?: boolean; size?: number; bare?: boolean }) {
   const id = useId().replace(/:/g, '');
   const [f0, f1] = FACE[m.family];
   const [m0, m1] = metalFor(m);
@@ -56,7 +57,7 @@ export function Medal({ m, locked = false, size = 92 }: { m: Milestone; locked?:
   const progress = locked && m.value !== undefined ? Math.min(1, m.value / m.target) : null;
   const ring = 2 * Math.PI * 49;
   return (
-    <svg className={locked ? 'medal locked' : 'medal'} width={size} height={size * 1.25} viewBox="0 0 120 150" aria-hidden="true">
+    <svg className={locked ? 'medal locked' : 'medal'} data-medal={`${m.family}:${m.target}`} xmlns="http://www.w3.org/2000/svg" width={size} height={size * 1.25} viewBox="0 0 120 150" aria-hidden="true">
       <defs>
         <linearGradient id={`rim${id}`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor={m0} />
@@ -86,9 +87,9 @@ export function Medal({ m, locked = false, size = 92 }: { m: Milestone; locked?:
         <circle cx="60" cy="96" r="38.5" fill="none" stroke="rgba(0,0,0,0.18)" strokeWidth="1" />
         {text ? (
           <>
-            <text x="60" y={text.length > 3 ? 113 : 115} textAnchor="middle" className="medal-number" fontSize={text.length > 3 ? 21 : 26}>
+            {!bare && <text x="60" y={text.length > 3 ? 113 : 115} textAnchor="middle" className="medal-number" fontSize={text.length > 3 ? 21 : 26}>
               {text}
-            </text>
+            </text>}
             <Icon x={53} y={68} width={14} height={14} strokeWidth={2.4} color="rgba(0,0,0,0.55)" />
           </>
         ) : (

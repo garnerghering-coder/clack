@@ -791,7 +791,7 @@ function LiveMap() {
           {!collapsed && <StopList stops={stops} />}
           {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
           <div className="sheet-actions row-actions live-sheet-actions">
-            <button className={followKeys.has(followKey(sel)) ? 'button following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
+            <button className={followKeys.has(followKey(sel)) ? 'button is-following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
               {followKeys.has(followKey(sel)) ? <Check size={16} /> : <Eye size={16} />} {followKeys.has(followKey(sel)) ? t('liveMap.following') : t('liveMap.follow')}
             </button>
             {selected?.legId ? (

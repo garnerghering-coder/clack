@@ -45,7 +45,9 @@
     "following": "Följer",
     "followingNote": "Tåg du följer i Utforska. Att följa ett tåg lägger inte till det i dina resor eller ditt pass.",
     "notRunning": "Går inte just nu",
-    "followingChip": "Följer"
+    "followingChip": "Följer",
+    "layover": "{{time}} byte i {{station}}",
+    "layoverMissed": "Nästa tåg går från {{station}} innan det här är framme"
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -225,11 +227,11 @@
     "howWeCalculate": "Så räknar vi",
     "co2Modes": {
       "flight": "flyg",
-      "car_1": "bil (ensam)",
+      "car_1": "en bensin- eller dieselbil",
       "car_2": "bil (2)",
       "car_3": "bil (3)",
       "car_avg": "bil (snitt)",
-      "ev_1": "elbil",
+      "ev_1": "en elbil",
       "coach": "buss"
     },
     "log": "Tåglogg",
@@ -264,7 +266,15 @@
       "nightTrains_one": "Första nattåget",
       "nightTrains_other": "{{count}} nattåg"
     },
-    "showAllMilestones": "Visa alla {{count}}"
+    "showAllMilestones": "Visa alla {{count}}",
+    "co2Compare": "Jämför med",
+    "co2Flying": "Flyg",
+    "co2Car": "Bil",
+    "carTypes": {
+      "car_1": "Bensin eller diesel",
+      "ev_1": "Elbil"
+    },
+    "railPassport": "Clack tågpass"
   },
   "settings": {
     "title": "Inställningar",
@@ -288,7 +298,7 @@
     "co2Comparison": "Standardjämförelse för CO₂",
     "co2": {
       "flight": "Flyg",
-      "car_1": "Bil (ensam)",
+      "car_1": "Bensin- eller dieselbil",
       "car_2": "Bil (2 personer)",
       "car_3": "Bil (3 personer)",
       "car_avg": "Bil (snitt)",
@@ -710,7 +720,8 @@
     "year": "År",
     "variant": {
       "all": "Totalt",
-      "journey": "Resa"
+      "journey": "Resa",
+      "medal": "Medalj"
     },
     "pickJourney": "Välj en resa",
     "previewAlt": "Förhandsvisning av delningskortet",
@@ -718,6 +729,9 @@
     "privacy": "Bara det som står på kortet delas: inga tider, biljettuppgifter, tågnummer eller var du är nu. Inget lämnar enheten förrän du sparar eller delar.",
     "save": "Spara bild",
     "share": "Dela",
-    "savedInstead": "Delning finns inte i den här webbläsaren, så bilden sparades i stället."
+    "savedInstead": "Delning finns inte i den här webbläsaren, så bilden sparades i stället.",
+    "medalKicker": "Milstolpe upplåst",
+    "unlocked": "Upplåst {{date}}",
+    "pickMedal": "Välj en medalj"
   }
 }

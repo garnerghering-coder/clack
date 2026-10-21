@@ -38,7 +38,7 @@ const LIGHT: typeof DARK = {
 export const opColor = (brandColor: string | null | undefined) => brandColor || mapColors().fallback;
 
 /** Map colours for the theme in effect. Maps are re-created when the theme changes, so reading once is enough. */
-export const mapColors = () => (currentTheme() === 'light' ? LIGHT : DARK);
+export const mapColors = (theme: 'light' | 'dark' = currentTheme()) => (theme === 'light' ? LIGHT : DARK);
 
 export const BASEMAP_URL = () => `pmtiles://${window.location.origin}/api/map/basemap.pmtiles`;
 export const RAIL_NETWORK_URL = () => `${window.location.origin}/api/map/rail-network.geojson`;
@@ -57,8 +57,8 @@ export function lighten(hex: string, amount: number): string {
 
 const nameExpr = ['coalesce', ['get', 'name'], ['get', 'name:en']] as unknown as string;
 
-function basemapLayers(): LayerSpecification[] {
-  const MAP_COLORS = mapColors();
+function basemapLayers(theme?: 'light' | 'dark'): LayerSpecification[] {
+  const MAP_COLORS = mapColors(theme);
   return [
     { id: 'earth', type: 'fill', source: 'basemap', 'source-layer': 'earth', paint: { 'fill-color': MAP_COLORS.land } },
     {
@@ -115,21 +115,21 @@ function basemapLayers(): LayerSpecification[] {
 }
 
 /** Base style: the basemap when it's available, otherwise just the dark background (routes still draw). */
-export function baseStyle(withBasemap: boolean): StyleSpecification {
-  const MAP_COLORS = mapColors();
+export function baseStyle(withBasemap: boolean, theme?: 'light' | 'dark'): StyleSpecification {
+  const MAP_COLORS = mapColors(theme);
   return {
     version: 8,
     glyphs: `${window.location.origin}/map/fonts/{fontstack}/{range}.pbf`,
     sources: withBasemap ? { basemap: { type: 'vector', url: BASEMAP_URL(), attribution: '' } } : {},
     layers: [
       { id: 'background', type: 'background', paint: { 'background-color': withBasemap ? MAP_COLORS.water : MAP_COLORS.land } },
-      ...(withBasemap ? basemapLayers() : []),
+      ...(withBasemap ? basemapLayers(theme) : []),
     ],
   };
 }
 
-export function railNetworkLayers(): LayerSpecification[] {
-  const MAP_COLORS = mapColors();
+export function railNetworkLayers(theme?: 'light' | 'dark'): LayerSpecification[] {
+  const MAP_COLORS = mapColors(theme);
   return [
     {
       id: 'rail-network',

@@ -19,6 +19,9 @@ export type LegStatus = (typeof LEG_STATUSES)[number];
 
 /** CO₂ comparison modes; factors live in data/co2_factors.json. */
 export const CO2_COMPARISONS = ['flight', 'car_1', 'car_2', 'car_3', 'car_avg', 'ev_1', 'coach'] as const;
+/** What the app offers (owner feedback 2026-10-21: flying, or a car of your choice); the rest stay valid for old settings. */
+export const CO2_CHOICES = ['flight', 'car_1', 'ev_1'] as const satisfies readonly (typeof CO2_COMPARISONS)[number][];
+export const CAR_CHOICES = ['car_1', 'ev_1'] as const;
 export type Co2Comparison = (typeof CO2_COMPARISONS)[number];
 
 export const LANGUAGES = ['en', 'sv'] as const;
