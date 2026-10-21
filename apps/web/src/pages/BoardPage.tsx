@@ -84,8 +84,13 @@ function RowSheet({ row, type, station, onClose }: { row: BoardRow; type: BoardT
         ) : (
           <p className="caption">{t('board.notInTimetable')}</p>
         )}
-        <div className="sheet-actions">
-          <button className="button primary wide" onClick={add} disabled={!row.trip}>
+        <div className="sheet-actions row-actions">
+          {!row.done && !row.canceled && (
+            <button className="button" onClick={() => navigate(`/live?train=${encodeURIComponent(row.trainNumber)}`)}>
+              {t('liveMap.showOnMap')}
+            </button>
+          )}
+          <button className="button primary" onClick={add} disabled={!row.trip}>
             {t('board.addToTrips')}
           </button>
         </div>

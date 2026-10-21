@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Radar, Search } from 'lucide-react';
 import { api, ms, type Leg } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
@@ -171,6 +171,9 @@ export function TripsPage() {
       <header className="page-header">
         <h1>{t('trips.title')}</h1>
         <span className="header-actions">
+          <Link to="/live" className="icon-button" aria-label={t('nav.live')} title={t('nav.live')}>
+            <Radar size={20} />
+          </Link>
           <Link to="/stations" className="icon-button" aria-label={t('nav.stations')} title={t('nav.stations')}>
             <Search size={20} />
           </Link>

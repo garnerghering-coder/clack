@@ -336,6 +336,22 @@ Side by side on the same 8 trains:
 - **DST:** GTFS times are local service-day times (can exceed 24:00); Trafikverket times carry an offset. Convert both to UTC with the station's tz (`Europe/Stockholm` for all Swedish stations).
 - **Sizes for the import:** rail-only extract of GTFS Sweden 3 = 34,796 trips, 400k stop_times, 735 stations (~90 MB of JSON). Parsing the full zip by streaming takes ~2.5 min.
 
+## Seen in live use (2026-10-21)
+
+- **Mislabelled actual times.** Some `TimeAtLocation` values carry the right clock time but the wrong offset:
+  a UTC time labelled `+02:00` (so the train looks two hours early), and on a few rows shifted twice (SL 2731 at
+  Solna: advertised 11:14, reported `07:16+02:00`), mixed with correct rows for the same train. `actualTime()` in
+  `trafikverket/client.ts` reads a time more than 45 min early as shifted by one, then two, times the stated offset,
+  and keeps the first plausible reading. A genuinely late train is left alone. Used everywhere actual times are read.
+- **Nationwide queries are slow.** A `TrainAnnouncement` query over all of Sweden takes 10–60 s whatever its
+  size (half an hour of ID-only rows: 50 s; the same with all fields: 57 s; a `ModifiedTime` filter: 12 s), and
+  past about a minute it fails with `500 General Failure / Internal error`. One station is under a second; tiny
+  queries take ~150 ms. The live map therefore loads its window in parallel half-hour slices, retries each once,
+  uses slices as they arrive and keeps what it knew when one fails. Every request now gives up after 90 s.
+- **GPS coverage, live map.** Of ~260 running passenger trains on a weekday midday, ~246 had a fresh GPS fix; the
+  rest (Krösatåg, Tåg i Bergslagen, Mälartåg, Västtågen, Öresundståg, one SJ) are drawn at an estimated position.
+  A full window (an hour back, two ahead) is ~10,000 announcement rows.
+
 ## Decisions (owner, 2026-10-20)
 
 The owner chose brand display and delegated the rest to Claude's judgement:

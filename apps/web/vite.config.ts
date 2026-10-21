@@ -28,6 +28,7 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
-    proxy: { '/api': 'http://127.0.0.1:3001' },
+    // CLACK_API lets a second copy (say, a simulation server on another port) run side by side.
+    proxy: { '/api': process.env.CLACK_API ?? 'http://127.0.0.1:3001' },
   },
 });

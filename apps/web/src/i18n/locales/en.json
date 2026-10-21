@@ -215,7 +215,8 @@
     "displayNamePlaceholder": "Optional",
     "language": "Language",
     "languages": {
-      "en": "English"
+      "en": "English",
+      "sv": "Svenska"
     },
     "distanceUnit": "Units",
     "units": {
@@ -367,5 +368,27 @@
     "addToTrips": "Add to my trips",
     "notInTimetable": "This train isn't in the timetable we have, so it can't be added to your trips.",
     "openBoard": "Departures from {{station}}"
+  },
+  "liveMap": {
+    "operators": "Operators",
+    "operatorsN_one": "{{count}} operator",
+    "operatorsN_other": "{{count}} operators",
+    "onlyDelayed": "Only delayed",
+    "onlyMine": "My trains",
+    "trainsLive_one": "{{count}} train live",
+    "trainsLive_other": "{{count}} trains live",
+    "delayedData": "Delayed data · {{ago}}",
+    "legend": "What the markers mean",
+    "legendGps": "Filled: GPS position from the train",
+    "legendEstimated": "Hollow: estimated position",
+    "legendSlight": "Ring: 1–15 min late",
+    "legendLate": "Ring: 16–30 min late",
+    "legendVeryLate": "Ring: more than 30 min late",
+    "legendNote": "No ring: on time. Cancelled trains and freight are not shown. Your own trains have a blue halo.",
+    "openDetail": "Open my trip",
+    "showOnMap": "Show on live map",
+    "train": "Train {{number}}",
+    "detailsLoading": "Route and delay are still loading from Trafikverket.",
+    "showAll": "Show all trains"
   }
 }

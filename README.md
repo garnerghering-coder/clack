@@ -44,6 +44,34 @@ Open <http://localhost:5173>. Stop with Ctrl+C.
   running and catches up when it starts, so start the app at least every few days.
 - **Updating:** `git pull`, then `npm install` if dependencies changed.
 
+## How often it asks Trafikverket
+
+Everything is shared on the server: two browser tabs (or, later, two people) looking at the same thing cost the same
+as one. Nothing polls while nobody is looking, except your own trips.
+
+| What | Requests | When |
+|---|---|---|
+| Your trips (live tracking) | 1 TrainAnnouncement + 1 TrainPosition per live trip every 20 s | An hour before departure until 30 min after arrival |
+| Delay catch-up | 1 TrainAnnouncement per trip | At start, for trips of the last 4 days |
+| Station board | 1 TrainAnnouncement per station and direction every `BOARD_POLL_MS` | While the board is open, plus 60 s |
+| Live map: positions | 1 TrainPosition stream (Trafikverket SSE) for the whole country; 1 catch-up query per reconnect. After 3 failed streams in a row it polls every `LIVE_MAP_POLL_MS` instead | While the map is open, plus 60 s |
+| Live map: delays and destinations | 1 TrainAnnouncement change query every `LIVE_MAP_ANNOUNCE_MS`; a full reload of the window (an hour back to two ahead, ~10,000 rows) every 20 min | Same |
+
+Optional settings in `.env` (defaults shown):
+
+```sh
+BOARD_POLL_MS=20000           # station boards
+LIVE_MAP_ANNOUNCE_MS=30000    # live map delay/destination refresh
+LIVE_MAP_POLL_MS=20000        # live map positions, only if the stream keeps failing
+LIVE_MAP_INCLUDE_ESTIMATED=1  # 0: live map shows GPS positions only, no estimates
+LIVE_MAP_SIMULATE=0           # e.g. 1000: fake trains along real track instead of Trafikverket (demo, load test)
+```
+
+The live map shows passenger trains that are running. Freight, empty runs and trains that have parked are left out.
+About 1 in 7 trains sends no GPS (Phase 0); those are drawn hollow, at a position worked out from their last stop,
+next stop and delay, along the track. For the first minute after the server starts, while the announcements load,
+trains show without destination or delay, and no estimated trains appear yet.
+
 ## Layout
 
 | Path | What |

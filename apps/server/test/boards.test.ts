@@ -145,6 +145,8 @@ describe("Trafikverket's mislabelled actual times (2026-10-21)", () => {
     expect(new Date(actualTime('2026-10-21T12:03:00.000+02:00', adv)!).toISOString()).toBe('2026-10-21T10:03:00.000Z');
     // A genuinely very late train stays as reported.
     expect(new Date(actualTime('2026-10-21T15:00:00.000+02:00', adv)!).toISOString()).toBe('2026-10-21T13:00:00.000Z');
+    // Shifted twice (seen on SL 2731 at Solna: advertised 11:14, reported 07:16+02:00).
+    expect(new Date(actualTime('2026-10-21T07:16:00.000+02:00', '2026-10-21T11:14:00.000+02:00')!).toISOString()).toBe('2026-10-21T09:16:00.000Z');
     expect(actualTime(undefined, adv)).toBeNull();
   });
 });

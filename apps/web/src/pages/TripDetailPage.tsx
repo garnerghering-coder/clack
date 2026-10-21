@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, RefreshCw, Repeat, Trash2 } from 'lucide-react';
+import { ArrowLeft, Radar, RefreshCw, Repeat, Trash2 } from 'lucide-react';
 import { decodePolyline, delayMinutes, type LatLon } from '@clack/shared';
 import { api, ms, type LegDetail, type LegEvent, type LegStop, type LiveState } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
@@ -214,6 +214,15 @@ export function TripDetailPage() {
         )}
         <Link to="/" className="map-button map-back" aria-label={t('nav.trips')}>
           <ArrowLeft size={18} />
+        </Link>
+        {/* Show all trains (ADDITIONS_01 A): the live map, with this train selected when it's running. */}
+        <Link
+          to={tracking && leg.trainNumber ? `/live?${new URLSearchParams({ train: leg.trainNumber })}` : '/live'}
+          className="map-button map-alltrains"
+          aria-label={t('liveMap.showAll')}
+          title={t('liveMap.showAll')}
+        >
+          <Radar size={18} />
         </Link>
         {leg.isEstimatedGeometry && <span className="map-chip caption">{t('detail.estimatedRoute')}</span>}
       </div>

@@ -326,6 +326,7 @@ export const api = {
   stationViewed: (id: string) => request<void>(`/stations/${id}/viewed`, { method: 'POST' }),
   favoriteStations: () => request<StationHit[]>('/stations/favorites'),
   recentStations: () => request<StationHit[]>('/stations/recent'),
+  liveTrain: (id: string) => request<{ train: never; trip: { key: string; serviceDate: string } | null; legId: string | null }>(`/live/trains/${encodeURIComponent(id)}`),
   journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
   trainTypes: () => request<TrainType[]>('/train-types'),
