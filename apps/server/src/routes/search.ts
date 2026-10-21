@@ -3,7 +3,8 @@ import type { Db } from '../db/client.js';
 import { todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
-import { tripStops } from '../search/timetable.js';
+import { productOf, tripStops } from '../search/timetable.js';
+import { typicalTrainType } from '../legs/trainTypes.js';
 import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
 
@@ -25,7 +26,17 @@ export const searchRoutes =
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
       const found = tripStops(db, req.params.key, date);
       if (!found) return reply.code(404).send({ error: 'trip not found on that date' });
-      return { key: found.trip.key, serviceDate: found.trip.service_date, trainNumber: found.trip.train_number, operatorId: found.trip.operator_id, category: found.trip.category, stops: found.stops };
+      const product = productOf(found.trip.route_type, found.trip.category);
+      return {
+        key: found.trip.key,
+        serviceDate: found.trip.service_date,
+        trainNumber: found.trip.train_number,
+        operatorId: found.trip.operator_id,
+        category: found.trip.category,
+        product,
+        trainType: typicalTrainType(found.trip.operator_id, product, found.trip.train_number),
+        stops: found.stops,
+      };
     });
 
     // Track for every stop-to-stop pair of a trip: the confirm step's mini map shows the whole route and

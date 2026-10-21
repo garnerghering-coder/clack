@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
 import { api, ms, type Leg } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
@@ -170,9 +170,14 @@ export function TripsPage() {
     <main className="page">
       <header className="page-header">
         <h1>{t('trips.title')}</h1>
-        <Link to="/add" className="icon-button" aria-label={t('nav.addTrain')}>
-          <Plus size={22} />
-        </Link>
+        <span className="header-actions">
+          <Link to="/stations" className="icon-button" aria-label={t('nav.stations')} title={t('nav.stations')}>
+            <Search size={20} />
+          </Link>
+          <Link to="/add" className="icon-button" aria-label={t('nav.addTrain')}>
+            <Plus size={22} />
+          </Link>
+        </span>
       </header>
       <div className="segmented" role="tablist">
         {(['upcoming', 'past'] as const).map((k) => (

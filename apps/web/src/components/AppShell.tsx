@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus, Settings, Stamp, TrainFront } from 'lucide-react';
+import { Plus, Search, Settings, Stamp, TrainFront } from 'lucide-react';
 
 const tabs = [
   { to: '/', key: 'trips', Icon: TrainFront },
@@ -31,6 +31,10 @@ export function AppShell({ children }: { children: ReactNode }) {
               {t(`nav.${key}`)}
             </NavLink>
           ))}
+          <NavLink to="/stations" className={({ isActive }) => (isActive ? 'side-link active' : 'side-link')}>
+            <Search size={20} strokeWidth={1.75} />
+            {t('nav.stations')}
+          </NavLink>
         </nav>
         <Link to="/add" className="button primary wide">
           <Plus size={20} strokeWidth={2} />

@@ -68,7 +68,9 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
     <li className={`tl-stop ${s.role} ${ridden ? 'ridden' : 'dim'}`} style={{ ['--op' as string]: color }}>
       <span className="tl-dot" />
       <span className="tl-main">
-        <span className={`tl-name ${s.canceled ? 'struck' : ''}`}>{s.name}</span>
+        <Link to={`/stations/${s.stationId}`} className={`tl-name ${s.canceled ? 'struck' : ''}`} title={t('board.openBoard', { station: s.name })}>
+          {s.name}
+        </Link>
         {s.role === 'board' && <span className="caption accent-text">{t('detail.gotOn')}</span>}
         {s.role === 'alight' && <span className="caption accent-text">{t('detail.gotOff')}</span>}
         {s.deviations.filter((d) => d !== 'Spårändrat').length > 0 && (

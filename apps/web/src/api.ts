@@ -11,7 +11,9 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, { ...init, headers: { 'Content-Type': 'application/json', ...init?.headers } });
+  // Only declare JSON when there is a body: Fastify rejects an empty body labelled application/json.
+  const headers = init?.body ? { 'Content-Type': 'application/json', ...init.headers } : init?.headers;
+  const res = await fetch(`/api${path}`, { ...init, headers });
   if (res.status === 204) return undefined as T;
   const body = await res.json().catch(() => ({}));
   if (!res.ok) throw new ApiError(res.status, body);
@@ -24,6 +26,7 @@ export interface StationHit {
   /** Trafikverket signature, e.g. "Cst". */
   code: string | null;
   country: string;
+  county?: string | null;
 }
 
 export interface Operator {
@@ -92,6 +95,8 @@ export interface TimetableTrip {
   trainNumber: string | null;
   operatorId: string | null;
   category: string;
+  product: Product;
+  trainType: string | null;
   stops: TripStop[];
 }
 
@@ -252,6 +257,53 @@ export interface Passport {
   refs: { operators: Record<string, Operator>; trainTypes: Record<string, TrainType> };
 }
 
+export interface StationInfo {
+  id: string;
+  name: string;
+  code: string | null;
+  country: string;
+  tz: string;
+  lat: number;
+  lon: number;
+  county: string | null;
+  hasBoard: boolean;
+  hasMap: boolean;
+  favorite: boolean;
+}
+
+export type BoardType = 'departures' | 'arrivals';
+
+export interface BoardRow {
+  id: string;
+  trainNumber: string;
+  advertised: number;
+  estimated: number | null;
+  actual: number | null;
+  done: boolean;
+  delayMin: number | null;
+  platform: string | null;
+  platformChange: { from: string | null; at: number | null } | null;
+  canceled: boolean;
+  deviations: string[];
+  endpoints: string[];
+  via: string[];
+  operatorId: string | null;
+  productName: string | null;
+  product: Product;
+  trainType: string | null;
+  trip: { key: string; serviceDate: string; seq: number } | null;
+}
+
+export interface Board {
+  stationId: string;
+  signature: string;
+  type: BoardType;
+  from: number;
+  to: number;
+  updatedAt: number;
+  rows: BoardRow[];
+}
+
 export const ms = (t: string | number | null | undefined) => (t === null || t === undefined || t === '' ? null : typeof t === 'number' ? t : Date.parse(t));
 
 export const api = {
@@ -266,6 +318,14 @@ export const api = {
   leg: (id: string) => request<LegDetail>(`/legs/${id}`),
   createLeg: (body: { tripKey: string; serviceDate: string; fromSeq: number; toSeq: number; force?: boolean }) => request<LegDetail>('/legs', { method: 'POST', body: JSON.stringify(body) }),
   refreshLeg: (id: string) => request<LegDetail>(`/legs/${id}/refresh`, { method: 'POST' }),
+  station: (id: string) => request<StationInfo>(`/stations/${id}`),
+  searchStations: (q: string, signal?: AbortSignal) => request<StationHit[]>(`/stations/search?q=${encodeURIComponent(q)}&limit=12`, { signal }),
+  board: (id: string, type: BoardType, window?: { from: number; to: number }) =>
+    request<Board>(`/stations/${id}/board?type=${type}${window ? `&from=${window.from}&to=${window.to}` : ''}`),
+  setFavorite: (id: string, on: boolean) => request<{ favorite: boolean }>(`/stations/${id}/favorite`, { method: on ? 'PUT' : 'DELETE' }),
+  stationViewed: (id: string) => request<void>(`/stations/${id}/viewed`, { method: 'POST' }),
+  favoriteStations: () => request<StationHit[]>('/stations/favorites'),
+  recentStations: () => request<StationHit[]>('/stations/recent'),
   journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
   trainTypes: () => request<TrainType[]>('/train-types'),

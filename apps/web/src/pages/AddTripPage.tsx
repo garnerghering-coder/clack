@@ -1,12 +1,12 @@
 // Add a train (DESIGN §5): date → one smart search field → results → "Where did you get on and off?" → saved.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, X } from 'lucide-react';
 import { decodePolyline, type LatLon } from '@clack/shared';
 import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
-import { Flag } from '../components/Flag';
+import { StationRow } from '../components/StationRow';
 import { useOperators, useTrainTypes } from '../data';
 import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
@@ -116,23 +116,7 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
   );
 }
 
-function StationRow({ s, onPick }: { s: StationHit; onPick: () => void }) {
-  const { t } = useTranslation();
-  return (
-    <li>
-      <button className="station-row" onClick={onPick}>
-        <Flag country={s.country} size={32} decorative />
-        <span className="station-text">
-          <span className="station-name">{s.name}</span>
-          {/* Trafikverket's codes for foreign stations ("Dk.kd") are internal, so show them for Swedish stations only. */}
-          <span className="caption">{[s.code && !s.code.includes('.') ? s.code : null, t(`countries.${s.country}`, { defaultValue: s.country })].filter(Boolean).join(' • ')}</span>
-        </span>
-      </button>
-    </li>
-  );
-}
-
-function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () => void; onSaved: (leg: LegDetail) => void }) {
+function Confirm({ result, onBack, onSaved, backLabel }: { result: TripResult; onBack: () => void; onSaved: (leg: LegDetail) => void; backLabel?: string }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const ops = useOperators();
@@ -198,7 +182,7 @@ function Confirm({ result, onBack, onSaved }: { result: TripResult; onBack: () =
   return (
     <>
       <button className="link-button back-link" onClick={onBack}>
-        <ArrowLeft size={18} /> {t('add.back')}
+        <ArrowLeft size={18} /> {backLabel ?? t('add.back')}
       </button>
       <h2 className="section-title">{t('add.confirmTitle')}</h2>
       {trip && (
@@ -316,6 +300,39 @@ export function AddTripPage() {
   const [picked, setPicked] = useState<TripResult | null>(null);
   const [saved, setSaved] = useState<LegDetail | null>(null);
   const input = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  // Opened from a station board ("Add to my trips"): go straight to the confirm step for that train.
+  const prefill = params.get('trip');
+  useEffect(() => {
+    const key = params.get('trip');
+    const day = params.get('date');
+    if (!key || !day) return;
+    api.timetableTrip(key, day).then((trip) => {
+      const pick = (seq: string | null, fallback: TimetableTrip['stops'][number]) => trip.stops.find((s) => String(s.seq) === seq) ?? fallback;
+      const from = pick(params.get('from'), trip.stops[0]!);
+      const to = pick(params.get('to'), trip.stops.at(-1)!);
+      const ref = (s: TimetableTrip['stops'][number], time: number | null) => ({ seq: s.seq, stationId: s.stationId, name: s.name, code: s.code, country: s.country, tz: s.tz, time: time ?? 0 });
+      const dep = from.dep ?? from.arr;
+      const arr = to.arr ?? to.dep;
+      setDate(day);
+      setPicked({
+        key: trip.key,
+        serviceDate: trip.serviceDate,
+        trainNumber: trip.trainNumber,
+        operatorId: trip.operatorId,
+        category: trip.category,
+        product: trip.product,
+        trainType: trip.trainType,
+        routeName: null,
+        from: ref(from, dep),
+        to: ref(to, arr),
+        durationMin: dep && arr ? Math.round((arr - dep) / 60_000) : 0,
+        stopsBetween: trip.stops.filter((s) => s.seq > from.seq && s.seq < to.seq).length,
+        alsoKnownAs: [],
+      });
+    }, () => setError(true));
+  }, [params]);
 
   useEffect(() => {
     input.current?.focus();
@@ -385,7 +402,7 @@ export function AddTripPage() {
           {saved ? (
             <Done leg={saved} onAnother={reset} />
           ) : picked ? (
-            <Confirm result={picked} onBack={() => setPicked(null)} onSaved={setSaved} />
+            <Confirm result={picked} onBack={() => (prefill ? navigate(-1) : setPicked(null))} backLabel={prefill ? t('common.back') : undefined} onSaved={setSaved} />
           ) : (
             <>
               <DateRow date={date} setDate={setDate} />

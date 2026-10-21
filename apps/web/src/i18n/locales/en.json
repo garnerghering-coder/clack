@@ -7,7 +7,9 @@
     "trips": "Trips",
     "passport": "Passport",
     "settings": "Settings",
-    "addTrain": "Add train"
+    "addTrain": "Add train",
+    "stations": "Stations",
+    "live": "Live map"
   },
   "trips": {
     "title": "Trips",
@@ -329,5 +331,41 @@
     "doorToDoor": "Door to door",
     "mapLabel": "Map of the whole journey",
     "notFound": "This journey no longer exists."
+  },
+  "stations": {
+    "title": "Stations",
+    "placeholder": "Search a station, e.g. Göteborg",
+    "noMatch": "No station by that name.",
+    "favorites": "Favourites",
+    "recent": "Recent",
+    "popular": "Big stations",
+    "favorite": "Add to favourites",
+    "unfavorite": "Remove from favourites"
+  },
+  "board": {
+    "departures": "Departures",
+    "arrivals": "Arrivals",
+    "window": {
+      "1h": "Next hour",
+      "3h": "Next 3 h",
+      "day": "Rest of day"
+    },
+    "commuter": "Commuter trains",
+    "via": "Via {{stops}}",
+    "from": "From {{stops}}",
+    "platformChanged": "Platform changed",
+    "changed": "Changed",
+    "departed": "Departed",
+    "arrived": "Arrived",
+    "showEarlier": "Show earlier",
+    "empty": "No trains in this window.",
+    "widen": "Show a longer window",
+    "loading": "Fetching the board from Trafikverket…",
+    "error": "Couldn't load the board. Retrying…",
+    "noBoard": "Trafikverket has no departure board for this station.",
+    "notFound": "Station not found.",
+    "addToTrips": "Add to my trips",
+    "notInTimetable": "This train isn't in the timetable we have, so it can't be added to your trips.",
+    "openBoard": "Departures from {{station}}"
   }
 }
