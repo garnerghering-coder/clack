@@ -399,5 +399,42 @@
     "train": "Tåg {{number}}",
     "detailsLoading": "Sträcka och försening hämtas fortfarande från Trafikverket.",
     "showAll": "Visa alla tåg"
+  },
+  "onboard": {
+    "title": "Ombord",
+    "typically": "Brukar finnas på tåget",
+    "unknown": "Vi vet inte vad som finns ombord på det här tåget.",
+    "partial": "{{what}} (delvis)",
+    "source": "Från",
+    "checked": "kontrollerat {{date}}",
+    "cateringInCar": "{{what}} i vagn {{car}}",
+    "catering": {
+      "bistro": "Bistro",
+      "cafe": "Café",
+      "kiosk": "Kiosk",
+      "refreshments": "Servering",
+      "restaurant": "Restaurangvagn"
+    },
+    "notices": {
+      "no_catering": "Ingen servering i dag",
+      "no_toilet": "Ingen toalett i dag",
+      "no_bikes": "Inga cyklar i dag",
+      "no_first_class": "Ingen 1:a klass i dag",
+      "changed_type": "Annan tågtyp i dag"
+    },
+    "keys": {
+      "catering": "Servering",
+      "wifi": "Wifi",
+      "power": "Eluttag",
+      "quiet_car": "Tyst avdelning",
+      "first_class": "1:a klass",
+      "family_area": "Familjeavdelning",
+      "pets_area": "Djur tillåtna",
+      "bikes": "Cyklar",
+      "wheelchair_space": "Rullstolsplats",
+      "step_free": "Insteg utan trappsteg",
+      "accessible_toilet": "Tillgänglig toalett",
+      "sleeper": "Sovvagnar"
+    }
   }
 }

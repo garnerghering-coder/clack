@@ -12,6 +12,7 @@ import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
+import { Onboard } from '../components/Onboard';
 
 type Window = '1h' | '3h' | 'day';
 const WINDOW_MS: Record<Window, number> = { '1h': 3600_000, '3h': 3 * 3600_000, day: 24 * 3600_000 };
@@ -66,6 +67,7 @@ function RowSheet({ row, type, station, onClose }: { row: BoardRow; type: BoardT
           {row.trainType && types.get(row.trainType) && <span className="chip">{types.get(row.trainType)!.name}</span>}
         </div>
         {row.deviations.length > 0 && <p className="caption">{row.deviations.join(' · ')}</p>}
+        {type === 'departures' && <Onboard facts={row.onboard} operatorId={row.operatorId} trainType={row.trainType} compact />}
         {trip ? (
           <ol className="sheet-stops">
             {trip.stops.map((s) => {

@@ -15,6 +15,7 @@ import { TrainCard } from '../components/TrainCard';
 import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 import { opColor } from '../map/style';
+import { Onboard } from '../components/Onboard';
 
 function TimeBlock({
   label,
@@ -304,6 +305,11 @@ export function TripDetailPage() {
         </section>
 
         <TrainCard leg={leg} onChange={setLeg} />
+
+        <section className="card">
+          <h2 className="section-header">{t('onboard.title')}</h2>
+          <Onboard facts={leg.onboard} operatorId={leg.operator?.id ?? null} trainType={leg.trainType} />
+        </section>
 
         {(tracking || leg.events.length > 0) && <ActivityLog leg={leg} events={leg.events} stops={leg.stops} />}
 

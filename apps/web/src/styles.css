@@ -589,3 +589,12 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .segmented.small { flex: 0 1 260px; }
 .segmented.small button { min-height: 32px; font-size: 14px; padding: 0 10px; }
 .segmented button.active { background: var(--accent); color: var(--on-accent); }
+
+/* ---------- On board (ADDITIONS_01 D) ---------- */
+.onboard { display: grid; gap: 8px; }
+.onboard-fact { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.onboard-notice { display: inline-flex; align-items: center; gap: 6px; background: var(--warn-bg); color: var(--warn-text); font-weight: 600; }
+.onboard-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 12px; }
+.onboard-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; line-height: 18px; }
+.onboard-list li svg { flex: none; margin-top: 1px; color: var(--text-2); }
+.onboard.compact .onboard-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }

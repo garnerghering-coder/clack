@@ -47,6 +47,8 @@ export const legRoutes =
     app.get<{ Params: { id: string } }>('/journeys/:id', async (req, reply) => getJourney(db, req.userId, req.params.id) ?? reply.code(404).send({ error: 'not found' }));
 
     app.get('/train-types', async () => trainTypeCatalog().types);
+    // Typical on-board amenities per operator and train type, each with its source and check date.
+    app.get('/amenities', async () => trainTypeCatalog().amenities ?? []);
 
     app.delete<{ Params: { id: string } }>('/legs/:id', async (req, reply) => (deleteLeg(db, req.userId, req.params.id) ? reply.code(204).send() : reply.code(404).send({ error: 'not found' })));
 

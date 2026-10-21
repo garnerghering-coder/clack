@@ -7,6 +7,8 @@ import { legStops, legs, stations, timetableTrips } from '../db/schema.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import { parseComposition, typeFromComposition, type Composition } from './trainTypes.js';
 import { productOf } from '../search/timetable.js';
+import { onboardFromRow } from './onboard.js';
+import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
 export const TRV_HISTORY_MS = 4 * 86400_000;
@@ -25,6 +27,7 @@ export interface AnnouncementRow {
   Deviation?: { Code?: string; Description: string }[];
   TypeOfTraffic?: { Description: string }[];
   TrainComposition?: (string | { Description?: string })[];
+  Service?: { Code?: string; Description?: string }[];
 }
 
 export interface StopForMatch {
@@ -47,6 +50,8 @@ export interface StopActuals {
   trvTrainNumber: string | null;
   /** Planned coach order on the departure row ("Vagnsordning 1-3-4-5-6-7"). */
   composition: Composition | null;
+  /** On-board facts from the departure row (catering, day-of notices). */
+  onboard: OnboardFacts | null;
 }
 
 const minuteKey = (sig: string, activity: string, ms: number) => `${sig.toLowerCase()}|${activity}|${Math.floor(ms / 60000)}`;
@@ -84,7 +89,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     if (!row) continue;
     const a =
       out.get(e.seq) ??
-      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null }).get(e.seq)!;
+      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null }).get(e.seq)!;
     const actual = actualTime(row.TimeAtLocation, row.AdvertisedTimeAtLocation);
     const estimated = row.EstimatedTimeAtLocation ? Date.parse(row.EstimatedTimeAtLocation) : null;
     if (e.activity === 'Ankomst') {
@@ -99,12 +104,15 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     a.canceled ||= Boolean(row.Canceled);
     for (const d of row.Deviation ?? []) if (!a.deviations.includes(d.Description)) a.deviations.push(d.Description);
     a.trvTrainNumber ??= row.AdvertisedTrainIdent;
-    if (e.activity === 'Avgang') a.composition ??= parseComposition(row.TrainComposition);
+    if (e.activity === 'Avgang') {
+      a.composition ??= parseComposition(row.TrainComposition);
+      a.onboard ??= onboardFromRow(row);
+    }
   }
   return out;
 }
 
-const FIELDS = ['AdvertisedTrainIdent', 'LocationSignature', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation', 'TrackAtLocation', 'Canceled', 'Deviation', 'TypeOfTraffic', 'TrainComposition'];
+const FIELDS = ['AdvertisedTrainIdent', 'LocationSignature', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation', 'TrackAtLocation', 'Canceled', 'Deviation', 'TypeOfTraffic', 'TrainComposition', 'Service'];
 
 async function fetchAnnouncements(events: ReturnType<typeof eventsFor>, fetchImpl?: typeof fetch): Promise<AnnouncementRow[]> {
   const rows: AnnouncementRow[] = [];
@@ -193,6 +201,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         canceled: Boolean(b?.canceled || a?.canceled),
         trvTrainNumbers: [...new Set([...matched.values()].map((m) => m.trvTrainNumber).filter((n): n is string => !!n))],
         ...(composedType ? { trainType: composedType, trainTypeSource: 'composition' } : {}),
+        ...(b?.onboard ? { onboard: b.onboard } : {}),
       })
       .where(eq(legs.id, legId))
       .run();

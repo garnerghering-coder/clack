@@ -399,5 +399,42 @@
     "train": "Train {{number}}",
     "detailsLoading": "Route and delay are still loading from Trafikverket.",
     "showAll": "Show all trains"
+  },
+  "onboard": {
+    "title": "On board",
+    "typically": "Typically on this train",
+    "unknown": "We don't know what's on board this train.",
+    "partial": "{{what}} (partly)",
+    "source": "From",
+    "checked": "checked {{date}}",
+    "cateringInCar": "{{what}} in car {{car}}",
+    "catering": {
+      "bistro": "Bistro",
+      "cafe": "Café",
+      "kiosk": "Kiosk",
+      "refreshments": "Refreshments",
+      "restaurant": "Restaurant car"
+    },
+    "notices": {
+      "no_catering": "No catering today",
+      "no_toilet": "No toilet today",
+      "no_bikes": "No bikes today",
+      "no_first_class": "No 1st class today",
+      "changed_type": "Different train type today"
+    },
+    "keys": {
+      "catering": "Catering",
+      "wifi": "Wi-Fi",
+      "power": "Power sockets",
+      "quiet_car": "Quiet carriage",
+      "first_class": "1st class",
+      "family_area": "Family area",
+      "pets_area": "Pets allowed area",
+      "bikes": "Bikes",
+      "wheelchair_space": "Wheelchair space",
+      "step_free": "Step-free boarding",
+      "accessible_toilet": "Accessible toilet",
+      "sleeper": "Sleeper cars"
+    }
   }
 }

@@ -137,6 +137,7 @@ const legColumns = {
   isEstimatedGeometry: legs.isEstimatedGeometry,
   trainType: legs.trainType,
   trainTypeSource: legs.trainTypeSource,
+  onboard: legs.onboard,
   countryCodes: legs.countryCodes,
   journeyId: legs.journeyId,
   operatorId: legs.operatorId,

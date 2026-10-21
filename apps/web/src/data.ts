@@ -1,5 +1,6 @@
 // Small shared caches for reference data.
 import { useEffect, useState } from 'react';
+import type { AmenityEntry } from '@clack/shared';
 import { api, type Operator, type TrainType } from './api';
 
 let operatorsPromise: Promise<Map<string, Operator>> | null = null;
@@ -24,4 +25,17 @@ export function useTrainTypes(): Map<string, TrainType> {
     });
   }, []);
   return types;
+}
+
+let amenitiesPromise: Promise<AmenityEntry[]> | null = null;
+/** The typical-amenities table (operator + train type → sourced claims). */
+export function useAmenities(): AmenityEntry[] {
+  const [table, setTable] = useState<AmenityEntry[]>([]);
+  useEffect(() => {
+    amenitiesPromise ??= api.amenities();
+    amenitiesPromise.then(setTable, () => {
+      amenitiesPromise = null;
+    });
+  }, []);
+  return table;
 }

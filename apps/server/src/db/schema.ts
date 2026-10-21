@@ -3,6 +3,7 @@
 // User-owned rows always carry user_id so the app is multi-user ready.
 import { sql } from 'drizzle-orm';
 import { index, integer, primaryKey, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import type { OnboardFacts } from '@clack/shared';
 
 const timestamp = (name: string) => integer(name, { mode: 'timestamp_ms' });
 const createdAt = () => timestamp('created_at').notNull().default(sql`(unixepoch() * 1000)`);
@@ -183,8 +184,10 @@ export const legs = sqliteTable(
     isEstimatedGeometry: integer('is_estimated_geometry', { mode: 'boolean' }).notNull().default(false),
     /** Rolling stock id from data/train_types.json. */
     trainType: text('train_type'),
-    /** typical (guessed from operator/product) | user (chosen by the owner) */
+    /** typical (guessed from operator/product) | composition (Trafikverket's planned coach order) | user (the owner's choice) */
     trainTypeSource: text('train_type_source'),
+    /** Trafikverket's on-board facts for the departure where you boarded (catering, day-of notices). */
+    onboard: text('onboard', { mode: 'json' }).$type<OnboardFacts>(),
     notes: text('notes'),
     createdAt: createdAt(),
   },

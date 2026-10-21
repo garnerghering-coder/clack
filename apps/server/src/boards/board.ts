@@ -2,11 +2,12 @@
 // activity, normalised into board rows: estimated vs advertised time, platform (with change detection), delay,
 // cancellation, destination/origin and via, brand, train type, and a link to the timetable trip so a row can be
 // added to your trips. normalizeBoard is pure; fetchBoardRows talks to Trafikverket.
-import { delayMinutes } from '@clack/shared';
+import { delayMinutes, type OnboardFacts } from '@clack/shared';
 import { normName } from '../lib/geo.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import type { Product, StationCall } from '../search/timetable.js';
 import { parseComposition, trainTypeFor } from '../legs/trainTypes.js';
+import { onboardFromRow } from '../legs/onboard.js';
 
 export type BoardType = 'departures' | 'arrivals';
 
@@ -39,6 +40,7 @@ export interface TrvBoardRow {
   OtherInformation?: Desc[];
   Operator?: string;
   TrainComposition?: Desc[];
+  Service?: Desc[];
 }
 
 export interface BoardRow {
@@ -62,6 +64,8 @@ export interface BoardRow {
   productName: string | null;
   product: Product;
   trainType: string | null;
+  /** On-board facts for this departure from Trafikverket (null on arrivals). */
+  onboard: OnboardFacts | null;
   trip: { key: string; serviceDate: string; seq: number } | null;
 }
 
@@ -172,6 +176,7 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
       productName,
       product,
       trainType: trainTypeFor(operatorId, product, call?.trainNumber ?? n, parseComposition(r.TrainComposition)),
+      onboard: dep ? onboardFromRow(r) : null,
       trip: call ? { key: call.tripKey, serviceDate: call.serviceDate, seq: call.seq } : null,
     });
   }
@@ -198,6 +203,7 @@ const FIELDS = [
   'OtherInformation',
   'Operator',
   'TrainComposition',
+  'Service',
 ];
 
 export async function fetchBoardRows(signature: string, type: BoardType, from: number, to: number, fetchImpl?: typeof fetch): Promise<TrvBoardRow[]> {

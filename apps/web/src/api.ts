@@ -1,5 +1,5 @@
 // The front end only ever talks to our own server (keys stay server-side).
-import type { Settings } from '@clack/shared';
+import type { AmenityEntry, OnboardFacts, Settings } from '@clack/shared';
 
 export class ApiError extends Error {
   constructor(
@@ -128,6 +128,8 @@ export interface Leg {
   isEstimatedGeometry: boolean;
   trainType: string | null;
   trainTypeSource: 'typical' | 'composition' | 'user' | null;
+  /** Trafikverket's on-board facts where you boarded (catering, day-of notices). */
+  onboard: OnboardFacts | null;
   countryCodes: string[];
   operator: Operator | null;
   origin: StationRef | null;
@@ -291,6 +293,7 @@ export interface BoardRow {
   productName: string | null;
   product: Product;
   trainType: string | null;
+  onboard: OnboardFacts | null;
   trip: { key: string; serviceDate: string; seq: number } | null;
 }
 
@@ -330,6 +333,7 @@ export const api = {
   journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
   trainTypes: () => request<TrainType[]>('/train-types'),
+  amenities: () => request<AmenityEntry[]>('/amenities'),
   passport: (q: { year: number | null; commuter: boolean; comparison?: string }) =>
     request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),

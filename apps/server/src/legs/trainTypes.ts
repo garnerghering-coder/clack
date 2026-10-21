@@ -2,6 +2,7 @@
 // so a leg starts with the typical type for its operator and product. Once Trafikverket's planned coach order is
 // fetched it can pin the type down (SJ: X2000 or SJ 3000), and the owner can always correct it.
 import { and, eq, isNull } from 'drizzle-orm';
+import type { AmenityEntry } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legs, timetableTrips } from '../db/schema.js';
 import { readDataFile } from '../dataFiles.js';
@@ -28,6 +29,7 @@ interface Catalog {
   types: TrainType[];
   rules: Rule[];
   composition_rules?: CompositionRule[];
+  amenities?: AmenityEntry[];
 }
 
 let catalog: Catalog | null = null;
