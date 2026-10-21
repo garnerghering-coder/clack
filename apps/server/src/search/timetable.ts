@@ -134,7 +134,14 @@ function candidateTrips(db: Db, date: string, where: ReturnType<typeof sql>): Tr
  * prefix digit (Phase 0: 51168 = 1168), so those match too. Optionally limited to trains that call at from/to.
  */
 export function searchByNumber(db: Db, number: string, date: string, opts: { operatorId?: string; fromId?: string; toId?: string } = {}): TripResult[] {
-  const variant = number.length <= 4 ? sql`or (length(t.train_number) = 5 and cast(substr(t.train_number, 2) as integer) = ${Number(number)})` : sql``;
+  // Five-digit numbers carry a prefix digit on one side but not the other: Trafikverket's 1378 can be GTFS's 21378,
+  // and (Öresundståg via Denmark) Trafikverket's 21378 is GTFS's 1378. Exact matches are listed first.
+  const variant =
+    number.length <= 4
+      ? sql`or (length(t.train_number) = 5 and cast(substr(t.train_number, 2) as integer) = ${Number(number)})`
+      : number.length === 5
+        ? sql`or t.train_number = ${String(Number(number.slice(1)))}`
+        : sql``;
   const op = opts.operatorId ? sql`and t.operator_id = ${opts.operatorId}` : sql``;
   const trips = candidateTrips(db, date, sql`(t.train_number = ${number} ${variant}) ${op}`);
   const stopsByTrip = loadStops(db, trips.map((t) => t.key));
@@ -151,7 +158,7 @@ export function searchByNumber(db: Db, number: string, date: string, opts: { ope
     if (depLocal !== date && !(trip.service_date !== date && touchesDate)) continue;
     results.push(toResult(trip, stops, from, to));
   }
-  return dedupe(results);
+  return dedupe(results).sort((a, b) => Number(b.trainNumber === number) - Number(a.trainNumber === number));
 }
 
 /** Direct trains calling at `fromId` and later at `toId`, departing on local date `date`. */

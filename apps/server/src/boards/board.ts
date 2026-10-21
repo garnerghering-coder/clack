@@ -151,7 +151,9 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
     // Link to the timetable: same minute, preferring the same train number (also with GTFS's 5-digit prefix).
     const candidates = byMinute.get(minute(advertised)) ?? [];
     const n = r.AdvertisedTrainIdent;
-    const sameNumber = candidates.filter((c) => c.trainNumber === n || (c.trainNumber?.length === 5 && String(Number(c.trainNumber.slice(1))) === n));
+    const sameNumber = candidates.filter(
+      (c) => c.trainNumber === n || (c.trainNumber?.length === 5 && String(Number(c.trainNumber.slice(1))) === n) || (n.length === 5 && c.trainNumber === String(Number(n.slice(1)))),
+    );
     const call = sameNumber[0] ?? (candidates.length === 1 && (!brand || candidates[0]!.operatorId === brand) ? candidates[0] : undefined);
 
     const product = call?.product ?? productFromTrv(r, brand);

@@ -2,9 +2,9 @@
 import fs from 'node:fs';
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
-import { stations } from '../db/schema.js';
+import { importLog, stations } from '../db/schema.js';
 import { DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js';
-import { importGtfsSweden3, lastImportedFeed, type ImportSummary } from './gtfs-se3.js';
+import { importGtfsSweden3, lastImportedFeed, refreshStationPopularity, type ImportSummary } from './gtfs-se3.js';
 import { loadOfficialMapping } from './official-mapping.js';
 import { hasBaseTracks, importTrvStations, trvLocationCount } from './trv-stations.js';
 import { basemapInfo, extractBasemap } from './basemap.js';
@@ -67,7 +67,13 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
 /** On server start: make sure there is something to search, without spending quota when a cached feed exists. */
 export async function bootstrap(db: Db, log: (m: string) => void = console.log) {
   try {
-    await runGtfsImport(db, { log });
+    const imported = await runGtfsImport(db, { log });
+    // Re-rank stations for search with the current weighting (a fresh import already did); the log row makes the
+    // search index rebuild.
+    if (!imported && trvLocationCount(db)) {
+      refreshStationPopularity(db);
+      db.insert(importLog).values({ source: 'station_popularity', startedAt: new Date(), finishedAt: new Date(), status: 'ok', notes: null }).run();
+    }
   } catch (e) {
     log(`import skipped: ${(e as Error).message}`);
   }

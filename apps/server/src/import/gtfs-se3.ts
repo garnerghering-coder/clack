@@ -234,16 +234,7 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
       )
       .run();
 
-    // Popularity for search ranking: boardable departures per day over the window.
-    sqlite
-      .prepare(
-        `update stations set departures_per_day = coalesce((
-           select count(*) * 1.0 / ? from timetable_stop_times st
-           join timetable_trip_dates d on d.trip_key = st.trip_key
-           where st.station_id = stations.id and st.dep_sec is not null and st.no_pickup = 0 and d.service_date between ? and ?
-         ), 0)`,
-      )
-      .run(8, today, addDays(today, 7));
+    refreshStationPopularity(db, today);
 
     db.insert(importLog)
       .values({ source: SOURCE, startedAt: new Date(t0), finishedAt: new Date(), status: 'ok', notes: JSON.stringify({ feedVersion, trips: patterns.length, window: [windowStart, windowEnd] }) })
@@ -269,3 +260,27 @@ export function lastImportedFeed(db: Db): string | null {
   const row = db.all<{ notes: string }>(sql`select notes from import_log where source = ${SOURCE} and status = 'ok' order by started_at desc limit 1`)[0];
   return row ? (JSON.parse(row.notes).feedVersion as string) : null;
 }
+
+/**
+ * Popularity for search ranking: boardable departures per day over the next week, with a commuter train counting a
+ * third, so "stoc" puts Stockholm C (308 departures, mostly long-distance and regional) above Stockholm City (460,
+ * all pendeltåg). One grouped query; also run at start-up so older databases get the weighting.
+ */
+export function refreshStationPopularity(db: Db, today = new Date().toISOString().slice(0, 10)) {
+  const sqlite = db.$client;
+  sqlite.exec('drop table if exists temp.station_pop');
+  sqlite
+    .prepare(
+      `create temp table station_pop as
+       select st.station_id, sum(case when t.category = 'commuter' then 0.33 else 1.0 end) / 8.0 as w
+       from timetable_stop_times st
+       join timetable_trip_dates d on d.trip_key = st.trip_key
+       join timetable_trips t on t.key = st.trip_key
+       where st.dep_sec is not null and st.no_pickup = 0 and d.service_date between ? and ?
+       group by st.station_id`,
+    )
+    .run(today, addDays(today, 7));
+  sqlite.exec(`update stations set departures_per_day = coalesce((select w from temp.station_pop p where p.station_id = stations.id), 0)`);
+  sqlite.exec('drop table temp.station_pop');
+}
+

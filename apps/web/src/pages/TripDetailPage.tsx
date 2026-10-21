@@ -17,6 +17,7 @@ import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../fo
 import { opColor } from '../map/style';
 import { Onboard } from '../components/Onboard';
 import { JourneyConnections } from '../components/Connection';
+import { SplitFlap } from '../components/SplitFlap';
 
 function TimeBlock({
   label,
@@ -45,7 +46,7 @@ function TimeBlock({
       <span className="caption upper">{label}</span>
       {changed && <span className="sched-struck tabular">{fmtTime(sched, tz, settings.clock)}</span>}
       <span className={`time-big tabular ${canceled ? 'struck' : ''}`}>
-        {fmtTime(actual ?? sched, tz, settings.clock)}
+        <SplitFlap value={fmtTime(actual ?? sched, tz, settings.clock)} className="time-flap" intro />
         {extraDays ? <sup>+{extraDays}</sup> : null}
       </span>
       <span className="time-block-meta">

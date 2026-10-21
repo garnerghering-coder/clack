@@ -540,8 +540,20 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .flap { display: inline-flex; gap: 1px; font-family: 'Space Grotesk', sans-serif; font-variant-numeric: tabular-nums; }
 .flap-tile { position: relative; display: inline-block; min-width: 0.62em; padding: 0 1px; text-align: center; border-radius: 4px; background: linear-gradient(to bottom, var(--flap-top) 0 49%, var(--flap-bottom) 51% 100%); color: var(--flap-text); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4); }
 .flap-tile::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--flap-hinge); }
-.flap-tile.flip { animation: flap-flip 280ms ease-out both; transform-origin: 50% 50%; }
-@keyframes flap-flip { 0% { transform: rotateX(-90deg); opacity: 0.4; } 100% { transform: rotateX(0); opacity: 1; } }
+/* A flipping tile: halves underneath (new top, old bottom), and two leaves that turn over it. */
+.flap-tile.flipping { perspective: 240px; }
+.flap-tile.flipping .flap-sizer { visibility: hidden; }
+.flap-half, .flap-leaf { position: absolute; inset: 0; display: block; text-align: center; border-radius: inherit; background: linear-gradient(to bottom, var(--flap-top) 0 49%, var(--flap-bottom) 51% 100%); backface-visibility: hidden; }
+.flap-half.top, .flap-leaf.top { clip-path: inset(0 0 50% 0); }
+.flap-half.bottom, .flap-leaf.bottom { clip-path: inset(50% 0 0 0); }
+.flap-leaf.top { transform-origin: 50% 50%; animation: flap-top 180ms ease-in var(--d, 0ms) both; z-index: 2; }
+.flap-leaf.bottom { transform-origin: 50% 50%; animation: flap-bottom 180ms ease-out calc(var(--d, 0ms) + 180ms) both; z-index: 2; }
+@keyframes flap-top { from { transform: rotateX(0); } to { transform: rotateX(-90deg); } }
+@keyframes flap-bottom { from { transform: rotateX(90deg); } to { transform: rotateX(0); } }
+@media (prefers-reduced-motion: reduce) { .flap-leaf { animation: none !important; display: none; } .flap-half.bottom { display: none; } }
+.time-flap { font-size: 34px; line-height: 44px; font-weight: 700; letter-spacing: 0; display: inline-flex; gap: 3px; }
+.time-flap .flap-tile { min-width: 0.66em; padding: 0 2px; border-radius: 7px; }
+.time-flap .flap-sep { padding: 0 1px; }
 .flap-sep { padding: 0 1px; color: var(--text-2); }
 .board-flap { font-size: 18px; font-weight: 700; line-height: 24px; }
 
@@ -575,7 +587,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-legend p { display: flex; align-items: center; gap: 8px; }
 .lg-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .lg-dot.solid { background: var(--text-2); box-shadow: 0 0 0 1px var(--marker-ring); }
-.lg-dot.hollow { border: 2px solid var(--text-2); }
+.lg-dot.hollow { background: var(--text-2); opacity: 0.45; }
 .lg-ring { width: 12px; height: 12px; border-radius: 50%; border: 2px solid; flex: none; }
 .live-attrib { bottom: 6px; left: 12px; }
 .live-sheet { position: absolute; z-index: 5; left: 12px; right: 12px; bottom: 12px; max-width: 460px; box-shadow: var(--shadow); }
@@ -678,3 +690,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .connection-estimate { display: inline-flex; align-items: center; gap: 6px; }
 .connection .button.small { justify-self: start; display: inline-flex; align-items: center; gap: 6px; }
 .hero-connection { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-weight: 600; font-size: 14px; }
+.live-station-deps { list-style: none; padding: 0; display: grid; gap: 8px; }
+.live-station-deps li { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.live-station-dest { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

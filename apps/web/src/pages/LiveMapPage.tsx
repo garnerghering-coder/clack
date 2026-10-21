@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Info, X } from 'lucide-react';
-import type { GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
+import type { FilterSpecification, GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
 import { decodePolyline, delayBand, type LatLon } from '@clack/shared';
-import { api, type TripGeometry } from '../api';
+import { api, type BoardRow, type StationInfo, type TripGeometry } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
@@ -51,6 +51,8 @@ interface Detail {
 const BAND_COLORS: Record<string, string> = { slight: '#F5D90A', late: '#FF9500', very_late: '#FF453A' };
 const PRODUCTS = ['high_speed', 'intercity', 'regional', 'commuter', 'night'] as const;
 const GLIDE_MS = 1500;
+/** Smaller delays don't get a ring on the map (the train's sheet still shows them). */
+const RING_MIN_DELAY = 6;
 const STALE_MS = 60_000;
 const TZ = 'Europe/Stockholm';
 
@@ -92,6 +94,7 @@ function LiveMap() {
   const [upstreamAt, setUpstreamAt] = useState(0);
   const [bbox, setBbox] = useState<string | null>(null);
   const [selected, setSelected] = useState<Detail | null>(null);
+  const [stationSheet, setStationSheet] = useState<{ id: string; name: string } | null>(null);
   const [legend, setLegend] = useState(false);
   const [productFilter, setProductFilter] = useState<Set<string>>(new Set());
   const [opFilter, setOpFilter] = useState<Set<string>>(new Set());
@@ -143,7 +146,7 @@ function LiveMap() {
           number: tr.number,
           label: tr.destination ? `${tr.number} · ${tr.destination}` : tr.number,
           color: opColor(tr.operatorId ? opsRef.current.get(tr.operatorId)?.brandColor : null),
-          ring: BAND_COLORS[band] ?? '',
+          ring: (tr.delayMin ?? 0) >= RING_MIN_DELAY ? (BAND_COLORS[band] ?? '') : '',
           estimated: tr.estimated,
           mine: tr.mine,
           bearing: tr.bearing ?? 0,
@@ -206,6 +209,23 @@ function LiveMap() {
         m.addImage('heading', headingImage(), { pixelRatio: 2 });
         m.addSource('rail-network', { type: 'geojson', data: RAIL_NETWORK_URL() });
         for (const layer of railNetworkLayers()) m.addLayer(layer);
+        // Stations you can tap: the big ones from region zoom, every station closer in, under the trains.
+        const stationFilter: FilterSpecification = [
+          'all',
+          ['==', ['get', 'kind'], 'station'],
+          ['>=', ['coalesce', ['get', 'dpd'], 0], ['step', ['zoom'], 120, 8, 40, 9.5, 0]],
+        ];
+        m.addLayer({ id: 'live-stations', type: 'circle', source: 'rail-network', minzoom: 6.5, filter: stationFilter, paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2, 12, 3.5], 'circle-color': C.bg, 'circle-stroke-color': C.label, 'circle-stroke-width': 1.2 } });
+        m.addLayer({
+          id: 'live-station-labels',
+          type: 'symbol',
+          source: 'rail-network',
+          minzoom: 8,
+          // Names of the bigger stations first; all of them only close in, so train numbers stay readable.
+          filter: ['all', ['==', ['get', 'kind'], 'station'], ['>=', ['coalesce', ['get', 'dpd'], 0], ['step', ['zoom'], 120, 9, 40, 11, 0]]],
+          layout: { 'text-field': ['get', 'name'], 'text-font': ['Noto Sans Regular'], 'text-size': 10.5, 'text-offset': [0, 0.8], 'text-anchor': 'top', 'text-optional': true },
+          paint: { 'text-color': C.label, 'text-halo-color': C.bg, 'text-halo-width': 1.2 },
+        });
         m.addSource('trains', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, cluster: true, clusterMaxZoom: 6, clusterRadius: 36 });
         m.addLayer({
           id: 'clusters',
@@ -224,13 +244,14 @@ function LiveMap() {
         });
         const single: ['!', ['has', string]] = ['!', ['has', 'point_count']];
         m.addLayer({ id: 'train-mine', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'mine'], true]], paint: { 'circle-radius': 13, 'circle-color': 'rgba(248,214,74,0.28)', 'circle-stroke-color': '#f8d64a', 'circle-stroke-width': 2 } });
-        m.addLayer({ id: 'train-glow', type: 'circle', source: 'trains', filter: single, paint: { 'circle-radius': 9, 'circle-color': ['get', 'color'], 'circle-opacity': 0.22, 'circle-blur': 0.6 } });
+        // One ring at most: a delay of 6 min or more, in the delay band's colour (owner feedback 2026-10-21: the
+        // glow, hollow estimate and ring on top of each other were too much).
         m.addLayer({
           id: 'train-ring',
           type: 'circle',
           source: 'trains',
           filter: ['all', single, ['!=', ['get', 'ring'], '']],
-          paint: { 'circle-radius': 7.5, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': ['get', 'ring'], 'circle-stroke-width': 2 },
+          paint: { 'circle-radius': 8, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': ['get', 'ring'], 'circle-stroke-width': 2.2 },
         });
         m.addLayer({
           id: 'train-dot',
@@ -241,9 +262,12 @@ function LiveMap() {
           layout: { 'circle-sort-key': ['case', ['==', ['get', 'mine'], true], 1, 0] },
           paint: {
             'circle-radius': ['case', ['==', ['get', 'mine'], true], 6.5, 5],
-            'circle-color': ['case', ['==', ['get', 'estimated'], true], C.bg, ['get', 'color']],
-            'circle-stroke-color': ['case', ['==', ['get', 'estimated'], true], ['get', 'color'], '#ffffff'],
-            'circle-stroke-width': ['case', ['==', ['get', 'estimated'], true], 2, 1],
+            'circle-color': ['get', 'color'],
+            // Estimated (no GPS): the same dot, faded.
+            'circle-opacity': ['case', ['==', ['get', 'estimated'], true], 0.45, 1],
+            'circle-stroke-color': C.bg,
+            'circle-stroke-width': 1,
+            'circle-stroke-opacity': ['case', ['==', ['get', 'estimated'], true], 0.45, 1],
           },
         });
         // The selected train: a larger marker under its dot (ADDITIONS_01 A, "the marker enlarges").
@@ -292,7 +316,25 @@ function LiveMap() {
           const best = hits.sort((a, b) => dist(a) - dist(b))[0];
           if (best) select(String(best.properties.id));
         });
-        for (const l of ['train-dot', 'clusters']) {
+        // Station names go on top so they're placed before train numbers and don't get crowded out.
+        m.moveLayer('live-station-labels');
+        // A station's name always opens it (its dot can sit under a train).
+        m.on('click', 'live-station-labels', (e: MapMouseEvent) => {
+          const f = m.queryRenderedFeatures(e.point, { layers: ['live-station-labels'] })[0];
+          const id = f?.properties?.id as string | undefined;
+          if (id) setStationSheet({ id, name: String(f!.properties!.name) });
+        });
+        m.on('click', 'live-stations', (e: MapMouseEvent) => {
+          const box: [[number, number], [number, number]] = [
+            [e.point.x - 10, e.point.y - 10],
+            [e.point.x + 10, e.point.y + 10],
+          ];
+          if (m.queryRenderedFeatures(box, { layers: ['train-dot', 'clusters'] }).length) return;
+          const f = m.queryRenderedFeatures(box, { layers: ['live-stations'] })[0];
+          const id = f?.properties?.id as string | undefined;
+          if (id) setStationSheet({ id, name: String(f!.properties!.name) });
+        });
+        for (const l of ['train-dot', 'clusters', 'live-stations', 'live-station-labels']) {
           m.on('mouseenter', l, () => (m.getCanvas().style.cursor = 'pointer'));
           m.on('mouseleave', l, () => (m.getCanvas().style.cursor = ''));
         }
@@ -368,6 +410,7 @@ function LiveMap() {
       return;
     }
     setSelected(d);
+    setStationSheet(null);
     const m = map.current;
     if (!m) return;
     m.setFilter('train-selected', ['==', ['get', 'id'], id]);
@@ -486,6 +529,7 @@ function LiveMap() {
       )}
       <span className="map-attrib live-attrib">© OpenStreetMap contributors · Protomaps · Trafikverket</span>
 
+      {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
         <section className="live-sheet card" aria-live="polite">
           <header className="board-sheet-head">
@@ -540,3 +584,65 @@ export function LiveMapPage() {
   const theme = useResolvedTheme();
   return <LiveMap key={theme} />;
 }
+
+/** A station tapped on the live map: its next departures, the board and its map. */
+function LiveStationSheet({ id, name, onClose }: { id: string; name: string; onClose: () => void }) {
+  const { t } = useTranslation();
+  const { settings } = useSettings();
+  const ops = useOperators();
+  const [info, setInfo] = useState<StationInfo | null>(null);
+  const [rows, setRows] = useState<BoardRow[] | null>(null);
+  useEffect(() => {
+    setInfo(null);
+    setRows(null);
+    api.station(id).then((s) => {
+      setInfo(s);
+      if (s.hasBoard)
+        api.board(id, 'departures').then(
+          (b) => setRows(b.rows.filter((r) => !r.done && !r.canceled).sort((x, y) => (x.estimated ?? x.advertised) - (y.estimated ?? y.advertised)).slice(0, 4)),
+          () => setRows([]),
+        );
+      else setRows([]);
+    }, () => undefined);
+  }, [id]);
+  return (
+    <section className="live-sheet card" aria-live="polite">
+      <header className="board-sheet-head">
+        <span className="strong">{name}</span>
+        <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
+          <X size={18} />
+        </button>
+      </header>
+      {info?.county && <p className="caption">{info.county}</p>}
+      {rows === null ? (
+        <p className="caption">{t('common.loading')}</p>
+      ) : rows.length ? (
+        <ul className="live-station-deps">
+          {rows.map((r) => (
+            <li key={r.id}>
+              <span className="tabular strong">{fmtTime(r.estimated ?? r.advertised, TZ, settings.clock)}</span>
+              <OperatorBadge operator={r.operatorId ? ops.get(r.operatorId) : undefined} size={18} />
+              <span className="live-station-dest">{r.endpoints.join(', ')}</span>
+              {r.platform && <span className="caption">{t('trips.platform', { platform: r.platform })}</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        info?.hasBoard && <p className="caption">{t('board.empty')}</p>
+      )}
+      <div className="sheet-actions row-actions">
+        {info?.hasBoard && (
+          <Link className="button" to={`/stations/${id}`}>
+            {t('stationMap.departures')}
+          </Link>
+        )}
+        {info?.hasMap && (
+          <Link className="button primary" to={`/stations/${id}/map`}>
+            {t('stationMap.open')}
+          </Link>
+        )}
+      </div>
+    </section>
+  );
+}
+

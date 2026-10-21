@@ -51,7 +51,7 @@ export function railNetworkGeoJson(db: Db, graph: RailGraph) {
     lines.push(simplify(pts, SIMPLIFY_M));
   }
   const st = db
-    .select({ name: stations.name, lat: stations.lat, lon: stations.lon })
+    .select({ id: stations.id, name: stations.name, lat: stations.lat, lon: stations.lon, dpd: stations.departuresPerDay })
     .from(stations)
     .where(eq(stations.kind, 'rail_station'))
     .all();
@@ -59,7 +59,8 @@ export function railNetworkGeoJson(db: Db, graph: RailGraph) {
     type: 'FeatureCollection',
     features: [
       { type: 'Feature', properties: { kind: 'rail' }, geometry: { type: 'MultiLineString', coordinates: lines } },
-      ...st.map((s) => ({ type: 'Feature', properties: { kind: 'station', name: s.name }, geometry: { type: 'Point', coordinates: [r5(s.lon), r5(s.lat)] } })),
+      // id for tapping through to the station; dpd (weighted departures a day) decides from which zoom it shows.
+      ...st.map((s) => ({ type: 'Feature', properties: { kind: 'station', id: s.id, name: s.name, dpd: Math.round(s.dpd) }, geometry: { type: 'Point', coordinates: [r5(s.lon), r5(s.lat)] } })),
     ],
   };
 }

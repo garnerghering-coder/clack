@@ -75,7 +75,8 @@ export const liveMapRoutes =
     app.get<{ Params: { id: string } }>('/live/trains/:id', async (req, reply) => {
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
-      const trip = t.date === 'sim' ? undefined : searchByNumber(db, t.number, t.date)[0];
+      // The operator narrows it down where two companies share a number (Öresundståg 1378 and Pågatåg 1378).
+      const trip = t.date === 'sim' ? undefined : (t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId })[0] : undefined) ?? searchByNumber(db, t.number, t.date)[0];
       const mine = t.mine
         ? db
             .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers })
