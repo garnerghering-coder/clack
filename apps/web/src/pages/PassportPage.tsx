@@ -3,6 +3,8 @@
 // statistics. Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
 import { useEffect, useMemo, useState } from 'react';
 import { SettingsLink } from '../components/AppShell';
+import { ShareSheet } from '../share/ShareSheet';
+import { Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_COMPARISONS, type Co2Comparison } from '@clack/shared';
@@ -134,6 +136,7 @@ export function PassportPage() {
   const [error, setError] = useState(false);
   const [flavorIx, setFlavorIx] = useState(0);
   const [showAllStations, setShowAllStations] = useState(false);
+  const [sharing, setSharing] = useState(false);
   const unit = settings.distanceUnit;
 
   useEffect(() => {
@@ -200,6 +203,11 @@ export function PassportPage() {
       <header className="page-header">
         <h1>{t('passport.title')}</h1>
         <span className="header-actions">
+          {tot.trains > 0 && (
+            <button className="icon-button" onClick={() => setSharing(true)} aria-label={t('share.title')} title={t('share.title')}>
+              <Share2 size={20} />
+            </button>
+          )}
           <SettingsLink />
         </span>
       </header>
@@ -495,6 +503,7 @@ export function PassportPage() {
 
         </>
       )}
+      {sharing && <ShareSheet year={year} commuter={commuter} legs={legs} onClose={() => setSharing(false)} />}
     </main>
   );
 }

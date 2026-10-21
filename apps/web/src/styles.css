@@ -788,3 +788,8 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .milestone-progress { display: grid; gap: 6px; }
 .station-collection { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .station-collection li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); font-size: 14px; }
+/* Share card preview (brief §10) */
+.share-sheet { max-height: 92dvh; }
+.share-preview { display: grid; place-items: center; }
+.share-preview img { width: 100%; max-width: 360px; aspect-ratio: 4 / 5; border-radius: 16px; border: 1px solid var(--hairline); }
+.share-pick { min-height: 40px; border-radius: 10px; background: var(--surface-raised); color: var(--text); border: 1px solid var(--hairline); padding: 0 10px; font: inherit; }
