@@ -12,6 +12,7 @@ import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { addDaysIso, dayOffset, fmtDay, fmtDistance, fmtDuration, fmtTime, isoToNoonMs, todayIso } from '../format';
+import { opColor } from '../map/style';
 
 const EXAMPLES = ['SJ 523', 'Stockholm → Göteborg', 'Snälltåget Stockholm Malmö'];
 const SEPARATOR = /\s*(?:→|->|=>|>|–|—|\s-\s|\bto\b|\btill\b)\s*.*$/i;
@@ -100,7 +101,7 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
       </div>
       {type && (
         <div className="result-train">
-          <TrainArt art={type.art} color={op?.brandColor ?? '#4C8DFF'} height={22} />
+          <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
           <span className="caption">{type.name}</span>
         </div>
       )}
@@ -188,7 +189,7 @@ function Confirm({ result, onBack, onSaved, backLabel }: { result: TripResult; o
       {trip && (
         <RouteMap
           className="mini"
-          color={op?.brandColor ?? '#4C8DFF'}
+          color={opColor(op?.brandColor)}
           route={mapRoute}
           context={mapContext}
           stops={mapStops}
@@ -228,7 +229,7 @@ function Confirm({ result, onBack, onSaved, backLabel }: { result: TripResult; o
           const restriction = picking === 'from' && s.noPickup && s.seq < toSeq ? t('add.noBoarding') : picking === 'to' && s.noDropoff && s.seq > fromSeq ? t('add.noAlighting') : null;
           return (
             <li key={s.seq}>
-              <button className={`stop-pick ${role}`} onClick={() => tap(s.seq)} disabled={!selectable && role !== 'from' && role !== 'to'} style={{ ['--op' as string]: op?.brandColor ?? '#4C8DFF' }}>
+              <button className={`stop-pick ${role}`} onClick={() => tap(s.seq)} disabled={!selectable && role !== 'from' && role !== 'to'} style={{ ['--op' as string]: opColor(op?.brandColor) }}>
                 <span className="stop-dot" />
                 <span className="stop-name">{s.name}</span>
                 {(role === 'from' || role === 'to') && <span className="chip accent">{t(`add.${role}`)}</span>}

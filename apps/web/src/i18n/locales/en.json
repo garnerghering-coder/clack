@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "clack"
+    "name": "clack",
+    "tagline": "EVERY TRAIN. EVERY TRIP."
   },
   "nav": {
     "label": "Main",
@@ -241,7 +242,13 @@
     "includeCommuter": "Include commuter trains by default",
     "showRailNetwork": "Show rail network on maps by default",
     "about": "Sources & methodology",
-    "saveError": "Couldn't save. Is the server running?"
+    "saveError": "Couldn't save. Is the server running?",
+    "theme": "Appearance",
+    "themes": {
+      "system": "System",
+      "dark": "Dark",
+      "light": "Light"
+    }
   },
   "about": {
     "title": "Sources & methodology",
@@ -386,7 +393,7 @@
     "legendSlight": "Ring: 1–15 min late",
     "legendLate": "Ring: 16–30 min late",
     "legendVeryLate": "Ring: more than 30 min late",
-    "legendNote": "No ring: on time. Cancelled trains and freight are not shown. Your own trains have a blue halo.",
+    "legendNote": "No ring: on time. Cancelled trains and freight are not shown. Your own trains have a yellow halo.",
     "openDetail": "Open my trip",
     "showOnMap": "Show on live map",
     "train": "Train {{number}}",

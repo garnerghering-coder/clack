@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
+import { Splash } from './components/Brand';
 import { TripsPage } from './pages/TripsPage';
 import { PassportPage } from './pages/PassportPage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -15,6 +16,7 @@ import { SettingsProvider } from './settings';
 export function App() {
   return (
     <SettingsProvider>
+      <Splash />
       <BrowserRouter>
         <AppShell>
           <Routes>

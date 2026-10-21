@@ -21,6 +21,10 @@ export type Co2Comparison = (typeof CO2_COMPARISONS)[number];
 export const LANGUAGES = ['en', 'sv'] as const;
 export type Language = (typeof LANGUAGES)[number];
 
+/** Colour theme: follow the phone, or always dark / light. */
+export const THEMES = ['system', 'dark', 'light'] as const;
+export type Theme = (typeof THEMES)[number];
+
 export interface Settings {
   /** Shown as initials in the avatar (Flighty-style). Empty = no initials. */
   displayName: string;
@@ -32,6 +36,7 @@ export interface Settings {
   includeCommuter: boolean;
   /** Map: show the faint rail-network layer by default. */
   showRailNetwork: boolean;
+  theme: Theme;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -43,6 +48,7 @@ export const DEFAULT_SETTINGS: Settings = {
   includeCommuter: true,
   // Owner's choice (2026-10-21): all rail lines dimmed under your route, as in a transit map.
   showRailNetwork: true,
+  theme: 'dark',
 };
 
 /** Validate and merge a partial settings update; unknown keys and invalid values are rejected. */
@@ -55,6 +61,10 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
       case 'displayName':
         if (typeof value !== 'string' || value.length > 60) throw new Error('displayName must be a string of at most 60 characters');
         next.displayName = value.trim();
+        break;
+      case 'theme':
+        if (!THEMES.includes(value as Theme)) throw new Error(`invalid theme: ${String(value)}`);
+        next.theme = value as Theme;
         break;
       case 'language':
         if (!LANGUAGES.includes(value as Language)) throw new Error(`invalid language: ${String(value)}`);

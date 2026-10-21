@@ -11,6 +11,7 @@ import { LiveChip, LiveModule } from '../components/Live';
 import { JourneyCard } from '../components/Journey';
 import { isLive, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDay, fmtDistance, fmtMonth, fmtTime } from '../format';
+import { opColor } from '../map/style';
 
 const tzOf = (leg: Leg) => leg.origin?.tz ?? 'Europe/Stockholm';
 // A late train that is still running counts as upcoming until it actually arrives.
@@ -88,7 +89,7 @@ function Hero({ leg }: { leg?: Leg }) {
         </Link>
       </section>
     );
-  const color = leg.operator?.brandColor ?? '#4C8DFF';
+  const color = opColor(leg.operator?.brandColor);
   return (
     <Link to={`/trips/${leg.id}`} className="hero" style={{ ['--op' as string]: color }}>
       <div className="hero-top">

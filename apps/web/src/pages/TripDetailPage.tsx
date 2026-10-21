@@ -14,6 +14,7 @@ import { ActivityLog, LiveChip, LiveModule, eventText } from '../components/Live
 import { TrainCard } from '../components/TrainCard';
 import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
+import { opColor } from '../map/style';
 
 function TimeBlock({
   label,
@@ -156,7 +157,7 @@ export function TripDetailPage() {
 
   const tz = leg.origin?.tz ?? 'Europe/Stockholm';
   const dtz = leg.destination?.tz ?? tz;
-  const color = leg.operator?.brandColor ?? '#4C8DFF';
+  const color = opColor(leg.operator?.brandColor);
   const schedDep = ms(leg.schedDep);
   const schedArr = ms(leg.schedArr);
   const dep = ms(leg.actualDep) ?? schedDep;

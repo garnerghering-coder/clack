@@ -11,6 +11,7 @@ import { LegRow } from './TripsPage';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
 import { fmtDistance, fmtDuration, fmtTime, locale } from '../format';
+import { opColor } from '../map/style';
 
 function Bars({
   rows,
@@ -199,7 +200,7 @@ export function PassportPage() {
           <section className="card map-card">
             <MultiRouteMap
               className="passport-map"
-              routes={data.map.map((m) => ({ color: (m.operatorId && ops[m.operatorId]?.brandColor) || '#4C8DFF', geometry: m.geometry, stops: m.stops }))}
+              routes={data.map.map((m) => ({ color: opColor(m.operatorId ? ops[m.operatorId]?.brandColor : null), geometry: m.geometry, stops: m.stops }))}
               stations={data.stations.map((s) => ({ lat: s.lat, lon: s.lon, name: s.name, count: s.count }))}
               railNetwork={settings.showRailNetwork}
               label={t('passport.mapLabel', { count: tot.trains })}
@@ -272,7 +273,7 @@ export function PassportPage() {
               rows={data.operators}
               unit={unit}
               label={(r) => ops[r.key]?.name ?? r.key}
-              color={(r) => ops[r.key]?.brandColor ?? '#4C8DFF'}
+              color={(r) => opColor(ops[r.key]?.brandColor)}
               lead={(r) => <OperatorBadge operator={ops[r.key]} size={30} />}
             />
           </section>
@@ -285,7 +286,7 @@ export function PassportPage() {
                   const type = types[r.key];
                   return (
                     <li key={r.key} className="type-row">
-                      <span className="type-art">{type && <TrainArt art={type.art} color="#4C8DFF" height={22} />}</span>
+                      <span className="type-art">{type && <TrainArt art={type.art} color={opColor(null)} height={22} />}</span>
                       <span className="bar-label">
                         <span className="strong">{type?.name ?? r.key}</span>
                         <span className="caption tabular">

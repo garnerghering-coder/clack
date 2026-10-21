@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CO2_COMPARISONS, LANGUAGES, type Settings } from '@clack/shared';
+import { CO2_COMPARISONS, LANGUAGES, type Settings, THEMES } from '@clack/shared';
 import { useSettings } from '../settings';
 import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -46,6 +46,24 @@ function NameField() {
   );
 }
 
+/** Appearance: a three-way switch rather than a menu, since it's the one people flip to compare. */
+function ThemeSwitch() {
+  const { t } = useTranslation();
+  const { settings, update } = useSettings();
+  return (
+    <div className="row theme-row">
+      <span id="theme-label">{t('settings.theme')}</span>
+      <div className="segmented small" role="radiogroup" aria-labelledby="theme-label">
+        {THEMES.map((v) => (
+          <button key={v} role="radio" aria-checked={settings.theme === v} className={settings.theme === v ? 'active' : ''} onClick={() => update({ theme: v })}>
+            {t(`settings.themes.${v}`)}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function SettingsPage() {
   const { t } = useTranslation();
   const { error } = useSettings();
@@ -55,6 +73,9 @@ export function SettingsPage() {
         <h1>{t('settings.title')}</h1>
       </header>
       {error && <p className="banner error">{t('settings.saveError')}</p>}
+      <section className="card">
+        <ThemeSwitch />
+      </section>
       <section className="card">
         <NameField />
         <Choice field="language" options={LANGUAGES} label={(v) => t(`settings.languages.${v}`)} />

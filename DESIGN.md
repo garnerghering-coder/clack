@@ -18,18 +18,23 @@ Clack is a Flighty-style app for trains: calm, dark, precise, a little playful. 
 
 ## 2. Visual language
 
-### 2.1 Colors (dark theme first; light theme is P2)
+### 2.1 Colors (owner, 2026-10-21: monochrome with signal yellow, dark and light)
 
-| Token | Value | Use |
-|---|---|---|
-| `bg` | `#0B0E13` | App background |
-| `surface` | `#141922` | Cards, sheets |
-| `surface-raised` | `#1B2230` | Chips, inputs, pressed states |
-| `hairline` | `rgba(255,255,255,0.08)` | Dividers, card borders (1px) |
-| `text-primary` | `#F2F4F8` | Main text |
-| `text-secondary` | `#9AA4B2` | Secondary text |
-| `text-tertiary` | `#6B7686` | Hints, disabled |
-| `accent` | `#4C8DFF` | Buttons, links, selection (signal blue) |
+Black, white and greys carry the interface; **signal yellow** is the one accent. Yellow is a *fill* (primary buttons, the selected segment or chip, the Passport hero card, the "k" tile) with black type on it. Where the accent has to be text or an icon, use `accent-ink`: yellow on dark, black on light (yellow text on white is unreadable). Both themes are tokens in `styles.css`; the user picks System / Dark / Light in Settings (default Dark).
+
+| Token | Dark | Light | Use |
+|---|---|---|---|
+| `bg` | `#0A0A0A` | `#FFFFFF` | App background |
+| `surface` | `#151515` | `#F4F4F4` | Cards, sheets |
+| `surface-raised` | `#1F1F1F` | `#E9E9E9` | Chips, inputs, pressed states |
+| `hairline` | `rgba(255,255,255,0.09)` | `rgba(0,0,0,0.09)` | Dividers, card borders (1px) |
+| `text` | `#FFFFFF` | `#0A0A0A` | Main text |
+| `text-2` | `#A3A3A3` | `#5C5C5C` | Secondary text |
+| `text-3` | `#6E6E6E` | `#8A8A8A` | Hints, disabled |
+| `accent` | `#F8D64A` | `#F8D64A` | Signal yellow fills; black type on top (`on-accent` `#0A0A0A`) |
+| `accent-ink` | `#F8D64A` | `#0A0A0A` | Accent as text or icon (links, active tab icon) |
+
+Maps follow the theme (dark: `#151515` land on `#0A0A0A` water; light: `#F7F7F7` land on `#DFE2E5` water). The strong colour for unknown operators and live-map clusters is yellow on dark and black on light; your own train on the live map always gets a yellow halo.
 
 **Delay colors (final, owner-approved bands).** Applied to delay badges, stop times, timeline segments and the Passport delay chart. *Always* show the number or word too (e.g. "+8"), never color alone.
 
@@ -55,7 +60,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 ### 2.3 Shape, spacing, depth
 - 4px spacing grid; 16px screen gutters on mobile; 24px on tablet/desktop.
 - Radii: cards 16, sheets 24 (top corners), chips/badges full pill, inputs 12, operator badge 10.
-- Depth is mostly color and hairlines, not shadows. Floating elements (FAB, sheet) get a soft shadow `0 8px 24px rgba(0,0,0,0.4)`.
+- Depth is mostly color and hairlines, not shadows. Floating elements (FAB, sheet) get a soft shadow (`0 8px 24px` at 45% black on dark, 12% on light).
 - Icons: Lucide, 20px, 1.75 stroke.
 
 ### 2.4 Map style (the signature visual)
@@ -246,7 +251,7 @@ All motion obeys `prefers-reduced-motion` (replace with fades or no animation).
 
 ## 11. Screen: Settings — P0
 
-Grouped list: **Language** (English; structure ready for more), **Units** (km / miles), **Clock** (24h / 12h), **Default CO₂ comparison**, **Include commuter trains by default**, **Show rail network on maps by default**, **Data** (Export my data as JSON/CSV; Delete all data), **About** (Sources & methodology, data attributions, version). Changes apply instantly.
+Grouped list: **Appearance** (System / Dark / Light), **Language** (English, Svenska), **Units** (km / miles), **Clock** (24h / 12h), **Default CO₂ comparison**, **Include commuter trains by default**, **Show rail network on maps by default**, **Data** (Export my data as JSON/CSV; Delete all data), **About** (Sources & methodology, data attributions, version). Changes apply instantly.
 
 ## 12. Screen: Sources & methodology — P1
 
@@ -261,8 +266,10 @@ No sign-up in Phase 1.
 
 ## 14. Brand
 
-- **Name:** Clack (lowercase wordmark "clack" in a heavy rounded grotesk).
-- **Logo / app icon:** a rounded-square dark tile (`#141922`) containing one split-flap tile showing a white "C" with the horizontal flap hairline across the middle, and a short glowing signal-blue dotted track line beneath. Provide SVG source and 1024px PNG.
+- **Name:** Clack. Tagline **"EVERY TRAIN. EVERY TRIP."** (Swedish: "VARJE TÅG. VARJE RESA.").
+- **Wordmark** (owner's design, 2026-10-21): lowercase "clack" on five split-flap tiles, each with the hinge line across the middle; the first four tiles are black/graphite with white letters, the **"k" tile is signal yellow with a black letter**. A rule underneath on the launch screen: yellow on black, black on white or yellow. Component: `components/Brand.tsx` (`Wordmark`, `Splash`).
+- **Launch screen:** the wordmark flips in tile by tile, the rule, the tagline near the bottom; on the theme's background. Three colourways exist (black, signal yellow, white); the app uses black or white with the theme.
+- **App icon:** one signal-yellow split-flap tile with a black "c" on black (`public/icons/`, `public/favicon.svg`).
 - Name availability and trademark checks are still pending (see SPEC §20).
 
 ## 15. States & edge cases checklist

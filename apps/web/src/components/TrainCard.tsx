@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { api, type LegDetail } from '../api';
 import { useTrainTypes } from '../data';
 import { TrainArt } from './TrainArt';
+import { opColor } from '../map/style';
 
 export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: LegDetail) => void }) {
   const { t } = useTranslation();
   const types = useTrainTypes();
   const [picking, setPicking] = useState(false);
   const [saving, setSaving] = useState(false);
-  const color = leg.operator?.brandColor ?? '#4C8DFF';
+  const color = opColor(leg.operator?.brandColor);
   const type = leg.trainType ? types.get(leg.trainType) : undefined;
 
   const choose = async (id: string | null) => {

@@ -9,6 +9,7 @@ import { TransferChip } from '../components/Journey';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
 import { fmtDistance, fmtDuration, fmtLongDate } from '../format';
+import { opColor } from '../map/style';
 
 export function JourneyPage() {
   const { id } = useParams();
@@ -68,7 +69,7 @@ export function JourneyPage() {
       <section className="card map-card">
         <MultiRouteMap
           className="journey-map"
-          routes={j.legs.map((l) => ({ color: l.operator?.brandColor ?? '#4C8DFF', geometry: l.geometry, stops: [] }))}
+          routes={j.legs.map((l) => ({ color: opColor(l.operator?.brandColor), geometry: l.geometry, stops: [] }))}
           stations={[]}
           railNetwork={settings.showRailNetwork}
           label={t('journey.mapLabel')}

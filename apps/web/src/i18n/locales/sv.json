@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "clack"
+    "name": "clack",
+    "tagline": "VARJE TÅG. VARJE RESA."
   },
   "nav": {
     "label": "Huvudmeny",
@@ -241,7 +242,13 @@
     "includeCommuter": "Ta med pendeltåg som standard",
     "showRailNetwork": "Visa järnvägsnätet på kartor som standard",
     "about": "Källor och metod",
-    "saveError": "Kunde inte spara. Är servern igång?"
+    "saveError": "Kunde inte spara. Är servern igång?",
+    "theme": "Utseende",
+    "themes": {
+      "system": "System",
+      "dark": "Mörkt",
+      "light": "Ljust"
+    }
   },
   "about": {
     "title": "Källor och metod",
@@ -386,7 +393,7 @@
     "legendSlight": "Ring: 1–15 min sent",
     "legendLate": "Ring: 16–30 min sent",
     "legendVeryLate": "Ring: mer än 30 min sent",
-    "legendNote": "Ingen ring: i tid. Inställda tåg och godståg visas inte. Dina egna tåg har ett blått sken runt sig.",
+    "legendNote": "Ingen ring: i tid. Inställda tåg och godståg visas inte. Dina egna tåg har ett gult sken runt sig.",
     "openDetail": "Öppna min resa",
     "showOnMap": "Visa på livekartan",
     "train": "Tåg {{number}}",

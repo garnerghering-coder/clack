@@ -14,8 +14,9 @@ import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
-import { baseStyle, MAP_COLORS, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
+import { baseStyle, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
 import { loadMaplibre, mapStatus, splitAt } from '../map/RouteMap';
+import { currentTheme, useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 interface LiveTrain {
@@ -74,7 +75,7 @@ function headingImage(): ImageData {
   return g.getImageData(0, 0, 32, 32);
 }
 
-export function LiveMapPage() {
+function LiveMap() {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const ops = useOperators();
@@ -141,7 +142,7 @@ export function LiveMapPage() {
           id: tr.id,
           number: tr.number,
           label: tr.destination ? `${tr.number} · ${tr.destination}` : tr.number,
-          color: (tr.operatorId && opsRef.current.get(tr.operatorId)?.brandColor) || '#4C8DFF',
+          color: opColor(tr.operatorId ? opsRef.current.get(tr.operatorId)?.brandColor : null),
           ring: BAND_COLORS[band] ?? '',
           estimated: tr.estimated,
           mine: tr.mine,
@@ -193,6 +194,14 @@ export function LiveMapPage() {
         const b = m.getBounds();
         setBbox([b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map((v) => v.toFixed(3)).join(','));
       };
+      const light = currentTheme() === 'light';
+      const C = {
+        ...mapColors(),
+        // Clusters in the theme's strong colour: yellow on the dark map, black on the light one.
+        cluster: light ? 'rgba(10,10,10,0.82)' : 'rgba(248,214,74,0.2)',
+        clusterLine: light ? '#0a0a0a' : 'rgba(248,214,74,0.75)',
+        clusterText: light ? '#ffffff' : '#ffffff',
+      };
       m.on('load', () => {
         m.addImage('heading', headingImage(), { pixelRatio: 2 });
         m.addSource('rail-network', { type: 'geojson', data: RAIL_NETWORK_URL() });
@@ -203,7 +212,7 @@ export function LiveMapPage() {
           type: 'circle',
           source: 'trains',
           filter: ['has', 'point_count'],
-          paint: { 'circle-color': 'rgba(76,141,255,0.22)', 'circle-stroke-color': 'rgba(76,141,255,0.7)', 'circle-stroke-width': 1, 'circle-radius': ['step', ['get', 'point_count'], 12, 10, 16, 50, 21] },
+          paint: { 'circle-color': C.cluster, 'circle-stroke-color': C.clusterLine, 'circle-stroke-width': 1, 'circle-radius': ['step', ['get', 'point_count'], 12, 10, 16, 50, 21] },
         });
         m.addLayer({
           id: 'cluster-count',
@@ -211,10 +220,10 @@ export function LiveMapPage() {
           source: 'trains',
           filter: ['has', 'point_count'],
           layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['Noto Sans Medium'], 'text-size': 11, 'text-allow-overlap': true },
-          paint: { 'text-color': '#F2F4F8' },
+          paint: { 'text-color': C.clusterText },
         });
         const single: ['!', ['has', string]] = ['!', ['has', 'point_count']];
-        m.addLayer({ id: 'train-mine', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'mine'], true]], paint: { 'circle-radius': 13, 'circle-color': 'rgba(76,141,255,0.25)', 'circle-stroke-color': '#4C8DFF', 'circle-stroke-width': 1.5 } });
+        m.addLayer({ id: 'train-mine', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'mine'], true]], paint: { 'circle-radius': 13, 'circle-color': 'rgba(248,214,74,0.28)', 'circle-stroke-color': '#f8d64a', 'circle-stroke-width': 2 } });
         m.addLayer({ id: 'train-glow', type: 'circle', source: 'trains', filter: single, paint: { 'circle-radius': 9, 'circle-color': ['get', 'color'], 'circle-opacity': 0.22, 'circle-blur': 0.6 } });
         m.addLayer({
           id: 'train-ring',
@@ -232,7 +241,7 @@ export function LiveMapPage() {
           layout: { 'circle-sort-key': ['case', ['==', ['get', 'mine'], true], 1, 0] },
           paint: {
             'circle-radius': ['case', ['==', ['get', 'mine'], true], 6.5, 5],
-            'circle-color': ['case', ['==', ['get', 'estimated'], true], MAP_COLORS.bg, ['get', 'color']],
+            'circle-color': ['case', ['==', ['get', 'estimated'], true], C.bg, ['get', 'color']],
             'circle-stroke-color': ['case', ['==', ['get', 'estimated'], true], ['get', 'color'], '#ffffff'],
             'circle-stroke-width': ['case', ['==', ['get', 'estimated'], true], 2, 1],
           },
@@ -264,7 +273,7 @@ export function LiveMapPage() {
             'text-anchor': 'top',
             'text-optional': true,
           },
-          paint: { 'text-color': '#F2F4F8', 'text-halo-color': MAP_COLORS.bg, 'text-halo-width': 1.4 },
+          paint: { 'text-color': C.text, 'text-halo-color': C.bg, 'text-halo-width': 1.4 },
         });
         m.on('click', 'clusters', (e: MapMouseEvent) => m.easeTo({ center: e.lngLat, zoom: m.getZoom() + 2 }));
         // Trains bunch up at stations: of the dots under the finger, take the one nearest to it.
@@ -382,7 +391,7 @@ export function LiveMapPage() {
       }
     });
     const [done, ahead] = splitAt(line, best / (line.length - 1));
-    const color = (d.train.operatorId && opsRef.current.get(d.train.operatorId)?.brandColor) || '#4C8DFF';
+    const color = opColor(d.train.operatorId ? opsRef.current.get(d.train.operatorId)?.brandColor : null);
     const fc = (pts: LatLon[]) => ({ type: 'FeatureCollection' as const, features: pts.length > 1 ? [{ type: 'Feature' as const, properties: {}, geometry: { type: 'LineString' as const, coordinates: pts.map(([la, lo]) => [lo, la]) } }] : [] });
     clearRoute();
     m.addSource('route-context', { type: 'geojson', data: fc([]) });
@@ -488,7 +497,7 @@ export function LiveMapPage() {
           </header>
           {selType && (
             <div className="live-sheet-art">
-              <TrainArt art={selType.art} color={selOp?.brandColor ?? '#4C8DFF'} height={22} />
+              <TrainArt art={selType.art} color={opColor(selOp?.brandColor)} height={22} />
               <span className="caption">{selType.name}</span>
             </div>
           )}
@@ -524,4 +533,10 @@ export function LiveMapPage() {
       )}
     </div>
   );
+}
+
+/** Re-created when the theme changes (map colours come from it). */
+export function LiveMapPage() {
+  const theme = useResolvedTheme();
+  return <LiveMap key={theme} />;
 }

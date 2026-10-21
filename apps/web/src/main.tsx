@@ -7,6 +7,9 @@ import './i18n';
 import './styles.css';
 import { App } from './App';
 import { PhoneFrame, PhoneViewButton, readLayout } from './PhoneFrame';
+import { watchTheme } from './theme';
+
+watchTheme();
 
 // Inside the phone frame (an iframe) the app renders normally; on a wide screen the top window shows the frame.
 const inFrame = window.self !== window.top;

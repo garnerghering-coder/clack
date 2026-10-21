@@ -8,6 +8,7 @@ import { Layers, LocateFixed, Navigation } from 'lucide-react';
 import type { GeoJSONSource, Map as MlMap, Marker } from 'maplibre-gl';
 import type { LatLon } from '@clack/shared';
 import { RAIL_NETWORK_URL, baseStyle, railNetworkLayers, routeLayers } from './style';
+import { useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 export interface MapStop {
@@ -128,7 +129,7 @@ const PADDING = { top: 72, bottom: 96, left: 64, right: 72 };
 const MINI_PADDING = { top: 28, bottom: 28, left: 56, right: 56 };
 const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
-export function RouteMap({
+function RouteMapInner({
   color,
   route,
   context = [],
@@ -327,4 +328,10 @@ export function RouteMap({
       <span className="map-attrib">© OpenStreetMap contributors · Protomaps</span>
     </div>
   );
+}
+
+/** Re-created when the theme changes: the basemap and every layer take their colours from it. */
+export function RouteMap(props: Props) {
+  const theme = useResolvedTheme();
+  return <RouteMapInner key={theme} {...props} />;
 }

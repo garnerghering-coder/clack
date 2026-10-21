@@ -12,8 +12,8 @@ export default defineConfig({
         name: 'Clack',
         short_name: 'Clack',
         description: 'Log every train you ride.',
-        theme_color: '#0b0f14',
-        background_color: '#0b0f14',
+        theme_color: '#0a0a0a',
+        background_color: '#0a0a0a',
         display: 'standalone',
         start_url: '/',
         icons: [

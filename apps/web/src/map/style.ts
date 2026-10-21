@@ -1,14 +1,44 @@
-// The dark Clack basemap and route styling (DESIGN §2.4), as MapLibre style objects.
+// The Clack basemap and route styling (DESIGN §2.4), dark and light, as MapLibre style objects.
 // The basemap is our own slimmed Protomaps extract (land, water, places, borders, motorways).
 import type { StyleSpecification, LayerSpecification } from 'maplibre-gl';
+import { currentTheme } from '../theme';
 
-export const MAP_COLORS = {
-  land: '#10151D',
-  water: '#0A0D12',
-  bg: '#0B0E13',
-  label: '#9AA4B2',
-  labelHalo: '#0B0E13',
+const DARK = {
+  land: '#151515',
+  water: '#0a0a0a',
+  bg: '#0a0a0a',
+  label: '#9a9a9a',
+  labelHalo: '#0a0a0a',
+  text: '#ffffff',
+  border: 'rgba(255,255,255,0.12)',
+  road: 'rgba(255,255,255,0.06)',
+  rail: 'rgba(255,255,255,0.13)',
+  railStation: 'rgba(255,255,255,0.35)',
+  stopFill: '#ffffff',
+  /** Routes and trains of an unknown operator. */
+  fallback: '#f8d64a',
 };
+const LIGHT: typeof DARK = {
+  land: '#f7f7f7',
+  water: '#dfe2e5',
+  bg: '#ffffff',
+  label: '#6b6b6b',
+  labelHalo: '#ffffff',
+  text: '#0a0a0a',
+  border: 'rgba(0,0,0,0.18)',
+  road: 'rgba(0,0,0,0.07)',
+  rail: 'rgba(0,0,0,0.16)',
+  railStation: 'rgba(0,0,0,0.4)',
+  stopFill: '#ffffff',
+  // Signal yellow is too faint on a light map; black is the light theme's strong colour.
+  fallback: '#0a0a0a',
+};
+
+/** An operator's brand colour, or the theme's strong colour when we don't know the operator. */
+export const opColor = (brandColor: string | null | undefined) => brandColor || mapColors().fallback;
+
+/** Map colours for the theme in effect. Maps are re-created when the theme changes, so reading once is enough. */
+export const mapColors = () => (currentTheme() === 'light' ? LIGHT : DARK);
 
 export const BASEMAP_URL = () => `pmtiles://${window.location.origin}/api/map/basemap.pmtiles`;
 export const RAIL_NETWORK_URL = () => `${window.location.origin}/api/map/rail-network.geojson`;
@@ -28,6 +58,7 @@ export function lighten(hex: string, amount: number): string {
 const nameExpr = ['coalesce', ['get', 'name'], ['get', 'name:en']] as unknown as string;
 
 function basemapLayers(): LayerSpecification[] {
+  const MAP_COLORS = mapColors();
   return [
     { id: 'earth', type: 'fill', source: 'basemap', 'source-layer': 'earth', paint: { 'fill-color': MAP_COLORS.land } },
     {
@@ -44,7 +75,7 @@ function basemapLayers(): LayerSpecification[] {
       source: 'basemap',
       'source-layer': 'boundaries',
       filter: ['==', ['get', 'kind'], 'country'],
-      paint: { 'line-color': 'rgba(255,255,255,0.10)', 'line-width': 1, 'line-dasharray': [3, 2] },
+      paint: { 'line-color': MAP_COLORS.border, 'line-width': 1, 'line-dasharray': [3, 2] },
     },
     {
       id: 'motorways',
@@ -52,7 +83,7 @@ function basemapLayers(): LayerSpecification[] {
       source: 'basemap',
       'source-layer': 'roads',
       minzoom: 6,
-      paint: { 'line-color': 'rgba(255,255,255,0.06)', 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 0.5, 12, 1.5] },
+      paint: { 'line-color': MAP_COLORS.road, 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 0.5, 12, 1.5] },
     },
     {
       id: 'towns',
@@ -85,6 +116,7 @@ function basemapLayers(): LayerSpecification[] {
 
 /** Base style: the basemap when it's available, otherwise just the dark background (routes still draw). */
 export function baseStyle(withBasemap: boolean): StyleSpecification {
+  const MAP_COLORS = mapColors();
   return {
     version: 8,
     glyphs: `${window.location.origin}/map/fonts/{fontstack}/{range}.pbf`,
@@ -97,13 +129,14 @@ export function baseStyle(withBasemap: boolean): StyleSpecification {
 }
 
 export function railNetworkLayers(): LayerSpecification[] {
+  const MAP_COLORS = mapColors();
   return [
     {
       id: 'rail-network',
       type: 'line',
       source: 'rail-network',
       filter: ['==', ['geometry-type'], 'LineString'],
-      paint: { 'line-color': 'rgba(255,255,255,0.12)', 'line-width': 1 },
+      paint: { 'line-color': MAP_COLORS.rail, 'line-width': 1 },
     },
     {
       id: 'rail-stations',
@@ -111,13 +144,14 @@ export function railNetworkLayers(): LayerSpecification[] {
       source: 'rail-network',
       minzoom: 9,
       filter: ['==', ['geometry-type'], 'Point'],
-      paint: { 'circle-radius': 1.6, 'circle-color': 'rgba(255,255,255,0.35)' },
+      paint: { 'circle-radius': 1.6, 'circle-color': MAP_COLORS.railStation },
     },
   ];
 }
 
 /** Glow, body and core strokes (DESIGN §2.4) for the ridden route; a faint line for the rest of the train's route. */
 export function routeLayers(color: string): LayerSpecification[] {
+  const MAP_COLORS = mapColors();
   const round = { 'line-cap': 'round', 'line-join': 'round' } as const;
   return [
     {
@@ -142,7 +176,7 @@ export function routeLayers(color: string): LayerSpecification[] {
       type: 'circle',
       source: 'stops',
       filter: ['==', ['get', 'kind'], 'mid'],
-      paint: { 'circle-radius': 3, 'circle-color': '#ffffff', 'circle-stroke-color': MAP_COLORS.bg, 'circle-stroke-width': 1.5 },
+      paint: { 'circle-radius': 3, 'circle-color': MAP_COLORS.stopFill, 'circle-stroke-color': currentTheme() === 'light' ? MAP_COLORS.text : MAP_COLORS.bg, 'circle-stroke-width': 1.5 },
     },
     {
       id: 'stops-end',
@@ -164,7 +198,7 @@ export function routeLayers(color: string): LayerSpecification[] {
         'text-radial-offset': 0.9,
         'text-justify': 'auto',
       },
-      paint: { 'text-color': '#F2F4F8', 'text-halo-color': MAP_COLORS.bg, 'text-halo-width': 1.5 },
+      paint: { 'text-color': MAP_COLORS.text, 'text-halo-color': MAP_COLORS.bg, 'text-halo-width': 1.5 },
     },
   ];
 }

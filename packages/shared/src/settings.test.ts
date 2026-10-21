@@ -10,7 +10,9 @@ describe('mergeSettings', () => {
     });
   });
   it('rejects unknown keys and bad values', () => {
-    expect(() => mergeSettings(DEFAULT_SETTINGS, { theme: 'light' })).toThrow('unknown setting');
+    expect(() => mergeSettings(DEFAULT_SETTINGS, { fontSize: 'large' })).toThrow('unknown setting');
+    expect(() => mergeSettings(DEFAULT_SETTINGS, { theme: 'sepia' })).toThrow();
+    expect(mergeSettings(DEFAULT_SETTINGS, { theme: 'light' }).theme).toBe('light');
     expect(() => mergeSettings(DEFAULT_SETTINGS, { clock: '25h' })).toThrow('invalid clock');
     expect(() => mergeSettings(DEFAULT_SETTINGS, { showRailNetwork: 'yes' })).toThrow('boolean');
     expect(() => mergeSettings(DEFAULT_SETTINGS, null)).toThrow('object');

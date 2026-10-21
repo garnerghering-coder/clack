@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { DEFAULT_SETTINGS, type Settings } from '@clack/shared';
 import { api } from './api';
 import i18n from './i18n';
+import { applyTheme } from './theme';
 
 interface SettingsState {
   settings: Settings;
@@ -28,6 +29,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     void i18n.changeLanguage(settings.language);
   }, [settings.language]);
+
+  // Until the server answers, keep the theme index.html applied from the last visit.
+  useEffect(() => {
+    if (loaded) applyTheme(settings.theme);
+  }, [settings.theme, loaded]);
 
   const update = useCallback(async (patch: Partial<Settings>) => {
     const previous = settings;

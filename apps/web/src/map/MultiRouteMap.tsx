@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Map as MlMap } from 'maplibre-gl';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { RAIL_NETWORK_URL, baseStyle, railNetworkLayers } from './style';
+import { RAIL_NETWORK_URL, baseStyle, mapColors, railNetworkLayers } from './style';
+import { useResolvedTheme } from '../theme';
 import { loadMaplibre, mapStatus } from './RouteMap';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -21,19 +22,15 @@ export interface MultiStation {
   count: number;
 }
 
-export function MultiRouteMap({
-  routes,
-  stations,
-  railNetwork,
-  className = '',
-  label,
-}: {
+interface MultiRouteMapProps {
   routes: MultiRoute[];
   stations: MultiStation[];
   railNetwork: boolean;
   className?: string;
   label?: string;
-}) {
+}
+
+function MultiRouteMapInner({ routes, stations, railNetwork, className = '', label }: MultiRouteMapProps) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<MlMap | null>(null);
   const [failed, setFailed] = useState(false);
@@ -110,8 +107,8 @@ export function MultiRouteMap({
           source: 'stations',
           paint: {
             'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 3, 10, 7, 50, 11],
-            'circle-color': '#ffffff',
-            'circle-stroke-color': '#0B0E13',
+            'circle-color': mapColors().stopFill,
+            'circle-stroke-color': mapColors().bg,
             'circle-stroke-width': 1.5,
           },
         });
@@ -133,4 +130,10 @@ export function MultiRouteMap({
       <span className="map-attrib">© OpenStreetMap contributors · Protomaps</span>
     </div>
   );
+}
+
+/** Re-created when the theme changes (map colours come from it). */
+export function MultiRouteMap(props: MultiRouteMapProps) {
+  const theme = useResolvedTheme();
+  return <MultiRouteMapInner key={theme} {...props} />;
 }

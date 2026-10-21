@@ -3,20 +3,13 @@ import type { ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Plus, Radar, Search, Settings, Stamp, TrainFront } from 'lucide-react';
+import { Wordmark } from './Brand';
 
 const tabs = [
   { to: '/', key: 'trips', Icon: TrainFront },
   { to: '/passport', key: 'passport', Icon: Stamp },
   { to: '/settings', key: 'settings', Icon: Settings },
 ] as const;
-
-export function Wordmark() {
-  return (
-    <span className="wordmark" aria-label="clack">
-      <span className="wordmark-tile">c</span>lack
-    </span>
-  );
-}
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
