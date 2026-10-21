@@ -162,6 +162,9 @@ export interface Leg {
   notes: string | null;
   journeyId: string | null;
   live: LiveState | null;
+  /** Did you ride it: pending | auto | confirmed | review | not_taken (server legs/recording.ts). */
+  ride: 'pending' | 'auto' | 'confirmed' | 'review' | 'not_taken';
+  rideReason: string | null;
 }
 
 export interface Journey {
@@ -259,7 +262,18 @@ export interface CountRow {
   count: number;
   distanceM: number;
 }
+export interface Milestone {
+  family: 'journeys' | 'distanceKm' | 'stations' | 'operators' | 'countries' | 'borderCrossings' | 'nightTrains';
+  target: number;
+  at?: number;
+  legId?: string;
+  value?: number;
+}
+
 export interface Passport {
+  milestones: { achieved: Milestone[]; next: Milestone[] };
+  /** Trips waiting for "Did you take this train?". */
+  review: { legId: string; reason: string | null; dep: number | null; from: string; to: string; trainNumber: string | null }[];
   years: number[];
   scope: { year: number | null; includeCommuter: boolean };
   totals: { distanceM: number; minutes: number; trains: number; journeys: number; stations: number; countries: number; borderCrossings: number; cancellations: number };
@@ -368,5 +382,6 @@ export const api = {
   amenities: () => request<AmenityEntry[]>('/amenities'),
   passport: (q: { year: number | null; commuter: boolean; comparison?: string }) =>
     request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
+  answerRide: (id: string, answer: 'yes' | 'no' | 'undo') => request<LegDetail>(`/legs/${id}/ride`, { method: 'POST', body: JSON.stringify({ answer }) }),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),
 };

@@ -774,3 +774,17 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .following { display: grid; gap: 2px; margin-top: 18px; }
 .live-sheet-actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .stage-card { margin: 10px 0; }
+/* Trip records (brief §8) and the collection-first Passport (brief §9). */
+.review-card { margin: 8px 0; border-color: var(--accent-line); }
+.review-chip { background: var(--warn-bg); color: var(--text); }
+.leg-row.not-taken { opacity: 0.55; }
+.record-line { font-size: 14px; }
+.record-line.record-review { color: var(--late); }
+.review-banner { display: block; margin: 8px 0 12px; font-weight: 600; }
+.passport-group { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); margin: 22px 0 6px; }
+.milestones { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.milestone { display: grid; gap: 2px; padding: 10px 12px; border-radius: 14px; background: var(--surface-raised); border: 1px solid var(--accent-line); min-width: 120px; }
+.milestone-next { display: grid; gap: 10px; }
+.milestone-progress { display: grid; gap: 6px; }
+.station-collection { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.station-collection li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); font-size: 14px; }

@@ -1,10 +1,12 @@
-// Passport (DESIGN §8): everything you've ridden, by year and with or without commuter trains.
+// Passport (DESIGN §8, product brief §9): everything you've ridden, by year and with or without commuter trains.
+// Collection first: the summary and your map, milestones, collections, records and the log, then the detailed
+// statistics. Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
 import { useEffect, useMemo, useState } from 'react';
 import { SettingsLink } from '../components/AppShell';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_COMPARISONS, type Co2Comparison } from '@clack/shared';
-import { api, type CountRow, type Leg, type LegRef, type Passport } from '../api';
+import { api, type CountRow, type Leg, type LegRef, type Milestone, type Passport } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { TrainArt } from '../components/TrainArt';
 import { Flag } from '../components/Flag';
@@ -51,6 +53,59 @@ function Bars({
   );
 }
 
+/** What a milestone takes, in words ("10 journeys", "1,000 km", "First border crossing"). */
+export function milestoneLabel(t: (k: string, o?: Record<string, unknown>) => string, m: Milestone): string {
+  if (m.family === 'distanceKm') return m.target >= 40_000 ? t('passport.milestone.earth') : t('passport.milestone.distanceKm', { n: m.target.toLocaleString(locale()) });
+  if (m.family === 'journeys' && m.target === 1) return t('passport.milestone.firstJourney');
+  return t(`passport.milestone.${m.family}`, { count: m.target });
+}
+
+function Milestones({ data }: { data: Passport }) {
+  const { t } = useTranslation();
+  const tz = 'Europe/Stockholm';
+  const { achieved, next } = data.milestones;
+  const [all, setAll] = useState(false);
+  return (
+    <section className="card">
+      <h2 className="section-header">{t('passport.milestones')}</h2>
+      {achieved.length > 0 && (
+        <ul className="milestones">
+          {achieved.slice(0, all ? undefined : 6).map((m) => (
+            <li key={`${m.family}:${m.target}`}>
+              <Link to={`/trips/${m.legId}`} className="milestone">
+                <span className="strong">{milestoneLabel(t, m)}</span>
+                <span className="caption">{m.at ? new Date(m.at).toLocaleDateString(locale(), { month: 'short', year: 'numeric', timeZone: tz }) : ''}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+      {achieved.length > 6 && (
+        <button className="link-button" onClick={() => setAll(!all)}>
+          {all ? t('passport.showFewer') : t('passport.showAllMilestones', { count: achieved.length })}
+        </button>
+      )}
+      {next.length > 0 && (
+        <div className="milestone-next">
+          <span className="caption upper">{t('passport.nextMilestones')}</span>
+          {next.map((m) => (
+            <div key={`${m.family}:${m.target}`} className="milestone-progress">
+              <span className="bar-label">
+                <span className="strong">{milestoneLabel(t, m)}</span>
+                <span className="caption tabular">{t('passport.progressOf', { value: Math.floor(m.value ?? 0).toLocaleString(locale()), target: m.target.toLocaleString(locale()) })}</span>
+              </span>
+              <span className="bar-track">
+                <span className="bar-fill" style={{ width: `${Math.min(100, (100 * (m.value ?? 0)) / m.target)}%`, background: 'var(--accent)' }} />
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+      <p className="caption">{t('passport.milestonesNote')}</p>
+    </section>
+  );
+}
+
 function Record({ label, value, sub, to }: { label: string; value: string; sub?: string; to?: string }) {
   const body = (
     <>
@@ -78,6 +133,7 @@ export function PassportPage() {
   const [legs, setLegs] = useState<Leg[]>([]);
   const [error, setError] = useState(false);
   const [flavorIx, setFlavorIx] = useState(0);
+  const [showAllStations, setShowAllStations] = useState(false);
   const unit = settings.distanceUnit;
 
   useEffect(() => {
@@ -118,7 +174,12 @@ export function PassportPage() {
   const types = data.refs.trainTypes;
   const km = tot.distanceM / 1000;
   const flavors = [
-    data.flavor.earthLaps >= 0.01 ? t('passport.flavor.earth', { n: data.flavor.earthLaps.toFixed(2) }) : null,
+    // Under one lap a share reads better than "0.04×"; tiny distances get no comparison at all.
+    data.flavor.earthLaps >= 1
+      ? t('passport.flavor.earth', { n: data.flavor.earthLaps.toFixed(1) })
+      : data.flavor.earthLaps >= 0.01
+        ? t('passport.flavor.earthPct', { pct: Math.round(data.flavor.earthLaps * 100) })
+        : null,
     data.flavor.swedenLengths >= 0.05 ? t('passport.flavor.sweden', { n: data.flavor.swedenLengths.toFixed(1) }) : null,
     tot.minutes ? t('passport.flavor.time', { time: fmtDuration(tot.minutes) }) : null,
     data.flavor.topRoute ? t('passport.flavor.route', { route: data.flavor.topRoute.route, count: data.flavor.topRoute.count }) : null,
@@ -160,13 +221,23 @@ export function PassportPage() {
         </label>
       </div>
 
+      {data.review.length > 0 && (
+        <Link to="/?tab=past" className="banner review-banner">
+          {t('passport.reviewBanner', { count: data.review.length })}
+        </Link>
+      )}
       {tot.trains === 0 ? (
         <section className="empty">
           <h2>{t('passport.emptyTitle')}</h2>
-          <p>{t('passport.empty')}</p>
-          <Link to="/add" className="button primary">
-            {t('nav.addTrain')}
-          </Link>
+          <p>{t('passport.emptyHow')}</p>
+          <div className="empty-actions">
+            <Link to="/add" className="button primary">
+              {t('trips.findTrain')}
+            </Link>
+            <Link to="/explore" className="button">
+              {t('trips.exploreTrains')}
+            </Link>
+          </div>
         </section>
       ) : (
         <>
@@ -211,6 +282,81 @@ export function PassportPage() {
             />
           </section>
 
+          <Milestones data={data} />
+
+          <h2 className="passport-group">{t('passport.collections')}</h2>
+          <section className="card">
+            <h2 className="section-header">{t('passport.operators')}</h2>
+            <Bars
+              rows={data.operators}
+              unit={unit}
+              label={(r) => ops[r.key]?.name ?? r.key}
+              color={(r) => opColor(ops[r.key]?.brandColor)}
+              lead={(r) => <OperatorBadge operator={ops[r.key]} size={30} />}
+            />
+          </section>
+
+          {data.trainTypes.length > 0 && (
+            <section className="card">
+              <h2 className="section-header">{t('passport.trainTypes')}</h2>
+              <ul className="type-list">
+                {data.trainTypes.map((r) => {
+                  const type = types[r.key];
+                  return (
+                    <li key={r.key} className="type-row">
+                      <span className="type-art">{type && <TrainArt art={type.art} color={opColor(null)} height={22} />}</span>
+                      <span className="bar-label">
+                        <span className="strong">{type?.name ?? r.key}</span>
+                        <span className="caption tabular">
+                          {t('passport.trainsCount', { count: r.count })} · {fmtDistance(r.distanceM, unit)}
+                        </span>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="caption">{t('passport.typesNote')}</p>
+            </section>
+          )}
+
+          <section className="card">
+            <h2 className="section-header">{t('passport.countries')}</h2>
+            <ul className="country-list">
+              {data.countries.map((c) => (
+                <li key={c.code}>
+                  <Flag country={c.code} size={24} decorative />
+                  <span className="strong">{t(`countries.${c.code}`, { defaultValue: c.code })}</span>
+                  <span className="caption">{t('passport.trainsCount', { count: c.legs })}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="caption">{t('passport.borders', { count: tot.borderCrossings })}</p>
+          </section>
+
+          <section className="card">
+            <h2 className="section-header">{t('passport.stationsVisited')}</h2>
+            <ul className="station-collection">
+              {data.stations.slice(0, showAllStations ? undefined : 12).map((st) => (
+                <li key={st.id}>
+                  <Link to={`/stations/${st.id}`}>{st.name}</Link>
+                  <span className="caption tabular">×{st.count}</span>
+                </li>
+              ))}
+            </ul>
+            {data.stations.length > 12 && (
+              <button className="link-button" onClick={() => setShowAllStations(!showAllStations)}>
+                {showAllStations ? t('passport.showFewer') : t('passport.showAllStations', { count: data.stations.length })}
+              </button>
+            )}
+            <p className="caption">{t('passport.stationsNote')}</p>
+          </section>
+          <section className="card">
+            <h2 className="section-header">{t('passport.products')}</h2>
+            <Bars rows={data.products} unit={unit} label={(r) => t(`products.${r.key}`)} color={() => 'var(--accent)'} />
+          </section>
+
+
+          <h2 className="passport-group">{t('passport.recordsAndLog')}</h2>
           <section className="card">
             <h2 className="section-header">{t('passport.records')}</h2>
             <div className="records">
@@ -272,44 +418,15 @@ export function PassportPage() {
           </section>
 
           <section className="card">
-            <h2 className="section-header">{t('passport.operators')}</h2>
-            <Bars
-              rows={data.operators}
-              unit={unit}
-              label={(r) => ops[r.key]?.name ?? r.key}
-              color={(r) => opColor(ops[r.key]?.brandColor)}
-              lead={(r) => <OperatorBadge operator={ops[r.key]} size={30} />}
-            />
+            <h2 className="section-header">{t('passport.log')}</h2>
+            <div className="list">
+              {log.map((l) => (
+                <LegRow key={l.id} leg={l} />
+              ))}
+            </div>
           </section>
 
-          {data.trainTypes.length > 0 && (
-            <section className="card">
-              <h2 className="section-header">{t('passport.trainTypes')}</h2>
-              <ul className="type-list">
-                {data.trainTypes.map((r) => {
-                  const type = types[r.key];
-                  return (
-                    <li key={r.key} className="type-row">
-                      <span className="type-art">{type && <TrainArt art={type.art} color={opColor(null)} height={22} />}</span>
-                      <span className="bar-label">
-                        <span className="strong">{type?.name ?? r.key}</span>
-                        <span className="caption tabular">
-                          {t('passport.trainsCount', { count: r.count })} · {fmtDistance(r.distanceM, unit)}
-                        </span>
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <p className="caption">{t('passport.typesNote')}</p>
-            </section>
-          )}
-
-          <section className="card">
-            <h2 className="section-header">{t('passport.products')}</h2>
-            <Bars rows={data.products} unit={unit} label={(r) => t(`products.${r.key}`)} color={() => 'var(--accent)'} />
-          </section>
-
+          <h2 className="passport-group">{t('passport.moreStats')}</h2>
           <section className="card">
             <h2 className="section-header">{t('passport.delays')}</h2>
             {data.delays.basedOn === 0 ? (
@@ -351,20 +468,6 @@ export function PassportPage() {
             )}
           </section>
 
-          <section className="card">
-            <h2 className="section-header">{t('passport.countries')}</h2>
-            <ul className="country-list">
-              {data.countries.map((c) => (
-                <li key={c.code}>
-                  <Flag country={c.code} size={24} decorative />
-                  <span className="strong">{t(`countries.${c.code}`, { defaultValue: c.code })}</span>
-                  <span className="caption">{t('passport.trainsCount', { count: c.legs })}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="caption">{t('passport.borders', { count: tot.borderCrossings })}</p>
-          </section>
-
           <section className="card co2-card">
             <h2 className="section-header">{t('passport.co2')}</h2>
             <span className="passport-big tabular">
@@ -390,14 +493,6 @@ export function PassportPage() {
             </p>
           </section>
 
-          <section className="card">
-            <h2 className="section-header">{t('passport.log')}</h2>
-            <div className="list">
-              {log.map((l) => (
-                <LegRow key={l.id} leg={l} />
-              ))}
-            </div>
-          </section>
         </>
       )}
     </main>

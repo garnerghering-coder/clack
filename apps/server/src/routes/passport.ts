@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { CO2_COMPARISONS, DEFAULT_SETTINGS, type Co2Comparison, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { users } from '../db/schema.js';
-import { computePassport, loadPassportLegs, passportRefs } from '../stats/passport.js';
+import { computeMilestones, computePassport, loadPassportLegs, passportRefs, reviewQueue } from '../stats/passport.js';
 
 export const passportRoutes =
   (db: Db): FastifyPluginAsync =>
@@ -18,6 +18,8 @@ export const passportRoutes =
       const comparison = (req.query.comparison ?? settings.co2Comparison) as Co2Comparison;
       if (!CO2_COMPARISONS.includes(comparison)) return reply.code(400).send({ error: `unknown comparison: ${comparison}` });
       const includeCommuter = req.query.commuter === undefined ? settings.includeCommuter : req.query.commuter === 'true';
-      return { ...computePassport(loadPassportLegs(db, req.userId), { year, includeCommuter, comparison }), refs: passportRefs(db) };
+      const all = loadPassportLegs(db, req.userId);
+      // Milestones are all-time and every counted trip, whatever the year and commuter filters show.
+      return { ...computePassport(all, { year, includeCommuter, comparison }), milestones: computeMilestones(all), review: reviewQueue(db, req.userId), refs: passportRefs(db) };
     });
   };

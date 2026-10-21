@@ -3,6 +3,7 @@ import type { Db } from '../db/client.js';
 import { createLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setTrainType, type CreateLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
+import { answerRide } from '../legs/recording.js';
 import { withLogo } from '../import/brands.js';
 import { CONTENT_TYPES, logoFile } from '../import/logos.js';
 import fs from 'node:fs';
@@ -32,6 +33,14 @@ export const legRoutes =
     app.post<{ Params: { id: string } }>('/legs/:id/refresh', async (req, reply) => {
       if (!getLeg(db, req.userId, req.params.id)) return reply.code(404).send({ error: 'not found' });
       await refreshLegActuals(db, req.params.id);
+      return getLeg(db, req.userId, req.params.id);
+    });
+
+    // "Did you take this train?": yes, no, or undo. Statistics are derived from the records, so they follow at once.
+    app.post<{ Params: { id: string }; Body: { answer?: string } }>('/legs/:id/ride', async (req, reply) => {
+      const a = req.body?.answer;
+      if (a !== 'yes' && a !== 'no' && a !== 'undo') return reply.code(400).send({ error: 'answer must be yes, no or undo' });
+      if (!answerRide(db, req.userId, req.params.id, a)) return reply.code(404).send({ error: 'not found' });
       return getLeg(db, req.userId, req.params.id);
     });
 

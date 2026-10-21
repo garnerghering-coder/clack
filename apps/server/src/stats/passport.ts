@@ -1,6 +1,7 @@
 // Passport (SPEC §14, DESIGN §8): stats over the trains you've ridden, filtered by year and the commuter toggle.
 // computePassport is pure (tests feed it legs directly); loadPassportLegs reads them from the database.
-import { asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, eq, inArray } from 'drizzle-orm';
+import { countedRide } from '../legs/recording.js';
 import { ON_TIME_MAX_DELAY_MIN, delayBand, type Co2Comparison } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, operators, stations, timetableTrips } from '../db/schema.js';
@@ -196,7 +197,84 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
   };
 }
 
-/** Legs you've ridden (arrived by now), with their ridden stops. */
+// ---------- Milestones (product brief §9.3): explicit criteria, all-time, from counted trips only ----------
+
+/** Each family's thresholds. The label says exactly what earns it ("10 journeys", "1,000 km"). */
+export const MILESTONES = {
+  journeys: [1, 10, 25, 50, 100, 250],
+  distanceKm: [100, 500, 1000, 2500, 5000, 10_000, EARTH_KM],
+  stations: [10, 25, 50, 100, 200],
+  operators: [3, 5, 10],
+  countries: [2, 3, 5],
+  borderCrossings: [1],
+  nightTrains: [1],
+} as const;
+export type MilestoneFamily = keyof typeof MILESTONES;
+
+export interface Milestone {
+  family: MilestoneFamily;
+  target: number;
+  /** When and on which trip it was reached (achieved ones only). */
+  at?: number;
+  legId?: string;
+  /** Where you are now towards it (upcoming ones). */
+  value?: number;
+}
+
+export function computeMilestones(all: PassportLeg[]): { achieved: Milestone[]; next: Milestone[] } {
+  const rides = [...all].filter((l) => !l.canceled).sort((a, b) => a.dep - b.dep);
+  const journeys = new Set<string>();
+  const stations = new Set<string>();
+  const operators = new Set<string>();
+  const countries = new Set<string>();
+  let km = 0;
+  let borders = 0;
+  let nights = 0;
+  const value = (f: MilestoneFamily) =>
+    ({ journeys: journeys.size, distanceKm: km, stations: stations.size, operators: operators.size, countries: countries.size, borderCrossings: borders, nightTrains: nights })[f];
+  const achieved: Milestone[] = [];
+  const reached = new Set<string>();
+  for (const l of rides) {
+    journeys.add(l.journeyId ?? l.id);
+    km += l.distanceM / 1000;
+    for (const st of l.stops) if (st.role === 'board' || st.role === 'alight') stations.add(st.stationId);
+    if (l.operatorId) operators.add(l.operatorId);
+    for (const st of l.stops) countries.add(st.country);
+    for (let i = 1; i < l.stops.length; i++) if (l.stops[i]!.country !== l.stops[i - 1]!.country) borders++;
+    if (l.product === 'night') nights++;
+    for (const f of Object.keys(MILESTONES) as MilestoneFamily[])
+      for (const target of MILESTONES[f]) {
+        const k = `${f}:${target}`;
+        // Visiting one country isn't a milestone; "countries" starts at 2.
+        if (!reached.has(k) && value(f) >= target) {
+          reached.add(k);
+          achieved.push({ family: f, target, at: l.arr, legId: l.id });
+        }
+      }
+  }
+  // The next step in each family, nearest first.
+  const next = (Object.keys(MILESTONES) as MilestoneFamily[])
+    .map((f) => {
+      const target = MILESTONES[f].find((x) => value(f) < x);
+      return target === undefined ? null : ({ family: f, target, value: Math.floor(value(f) * 10) / 10 } as Milestone & { value: number });
+    })
+    .filter((m): m is Milestone & { value: number } => m !== null)
+    .sort((a, b) => b.value / b.target - a.value / a.target);
+  return { achieved: achieved.reverse(), next: next.slice(0, 3) };
+}
+
+/** Trips waiting for "Did you take this train?". */
+export function reviewQueue(db: Db, userId: string) {
+  const rows = db
+    .select({ id: legs.id, reason: legs.rideReason, schedDep: legs.schedDep, from: legs.originStationId, to: legs.destStationId, trainNumber: legs.trainNumber })
+    .from(legs)
+    .where(and(eq(legs.userId, userId), eq(legs.ride, 'review')))
+    .all();
+  const names = new Map(db.select({ id: stations.id, name: stations.name }).from(stations).where(inArray(stations.id, [...new Set(rows.flatMap((r) => [r.from, r.to]))].concat(['']))).all().map((x) => [x.id, x.name]));
+  return rows.map((r) => ({ legId: r.id, reason: r.reason, dep: r.schedDep?.getTime() ?? null, from: names.get(r.from) ?? '', to: names.get(r.to) ?? '', trainNumber: r.trainNumber }));
+}
+
+/** Legs you've ridden: arrived, and recorded as travelled (auto from Trafikverket's reports, or confirmed by you). */
 export function loadPassportLegs(db: Db, userId: string, now = Date.now()): PassportLeg[] {
   const rows = db
     .select({ l: legs, routeType: timetableTrips.routeType })
@@ -204,7 +282,7 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
     .leftJoin(timetableTrips, eq(timetableTrips.key, legs.timetableTripKey))
     .where(eq(legs.userId, userId))
     .all()
-    .filter(({ l }) => (l.actualArr ?? l.schedArr)!.getTime() <= now);
+    .filter(({ l }) => (l.actualArr ?? l.schedArr)!.getTime() <= now && countedRide(l.ride));
   if (!rows.length) return [];
   const stops = db
     .select({

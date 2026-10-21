@@ -9,6 +9,7 @@ import { startLiveTracker } from './live/tracker.js';
 import { syncBrands } from './import/brands.js';
 import { backfillTrainTypes } from './legs/trainTypes.js';
 import { regroupJourneys } from './legs/journeys.js';
+import { updateRides } from './legs/recording.js';
 
 // Plain lines among the JSON log, so start-up has a clear beginning and end in the Terminal.
 const banner = (lines: string[]) => {
@@ -32,6 +33,8 @@ log = (msg: string) => app.log.info(msg);
 backfillLegGeometry(db, log);
 backfillTrainTypes(db);
 regroupJourneys(db, LOCAL_USER_ID);
+// Trip records (did you ride it?) for trips saved before records existed, and any whose wait is over.
+updateRides(db);
 
 if (process.env.JOBS !== 'off') {
   // Catch up in the background (first run imports stations and timetables; legs get any actuals they missed),

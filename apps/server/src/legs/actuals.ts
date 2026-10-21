@@ -8,6 +8,7 @@ import { actualTime, trvQuery } from '../trafikverket/client.js';
 import { parseComposition, typeFromComposition, type Composition } from './trainTypes.js';
 import { productOf } from '../search/timetable.js';
 import { onboardFromRow } from './onboard.js';
+import { updateRides } from './recording.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
@@ -206,6 +207,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       .where(eq(legs.id, legId))
       .run();
   });
+  updateRides(db, { legId, now });
   return dataQuality;
 }
 
@@ -234,6 +236,9 @@ export async function refreshDueLegs(db: Db, log: (m: string) => void = () => {}
       log(`actuals for leg ${id} failed: ${(e as Error).message}`);
     }
   }
+  // Trips that finished without clear reports move to "Did you take this train?" once the wait is over.
+  const asked = updateRides(db, { now });
+  if (asked) log(`trip records: ${asked} updated`);
   if (due.length || expired) log(`actual times: refreshed ${ok}/${due.length} legs${expired ? `, ${expired} expired as scheduled-only` : ''}`);
   void sql;
 }

@@ -176,7 +176,8 @@
       "route_other": "Your most-ridden line: {{route}} ({{count}} times)",
       "month_one": "Busiest month: {{month}} ({{count}} train)",
       "month_other": "Busiest month: {{month}} ({{count}} trains)",
-      "late": "You've spent {{time}} on late trains. Hang in there."
+      "late": "You've spent {{time}} on late trains. Hang in there.",
+      "earthPct": "{{pct}}% of the way around the Earth"
     },
     "records": "Records",
     "longestTrip": "Longest trip",
@@ -230,7 +231,39 @@
       "ev_1": "electric car",
       "coach": "coach"
     },
-    "log": "Train log"
+    "log": "Train log",
+    "collections": "Collections",
+    "recordsAndLog": "Records and log",
+    "moreStats": "More statistics",
+    "stationsVisited": "Stations",
+    "stationsNote": "Where you got on or off; passing through doesn’t count.",
+    "showAllStations": "Show all {{count}}",
+    "showFewer": "Show fewer",
+    "milestones": "Milestones",
+    "nextMilestones": "Next",
+    "progressOf": "{{value}} of {{target}}",
+    "milestonesNote": "Counted from trips recorded as travelled, all time.",
+    "reviewBanner_one": "1 trip needs a check before it counts →",
+    "reviewBanner_other": "{{count}} trips need a check before they count →",
+    "emptyHow": "Trips land here once they’ve happened: automatically when Trafikverket reports the train at your stops, or when you confirm them. Planned and followed trains don’t count.",
+    "milestone": {
+      "firstJourney": "First journey",
+      "journeys_one": "{{count}} journey",
+      "journeys_other": "{{count}} journeys",
+      "distanceKm": "{{n}} km",
+      "earth": "Once around the Earth (40,075 km)",
+      "stations_one": "{{count}} station",
+      "stations_other": "{{count}} stations",
+      "operators_one": "{{count}} operator",
+      "operators_other": "{{count}} operators",
+      "countries_one": "{{count}} country",
+      "countries_other": "{{count}} countries",
+      "borderCrossings_one": "First border crossing",
+      "borderCrossings_other": "{{count}} border crossings",
+      "nightTrains_one": "First night train",
+      "nightTrains_other": "{{count}} night trains"
+    },
+    "showAllMilestones": "Show all {{count}}"
   },
   "settings": {
     "title": "Settings",
@@ -632,5 +665,31 @@
     },
     "marginSpare": "{{min}} min margin",
     "timetableOnly": "Based on the timetable: real-time times for both trains aren’t in yet."
+  },
+  "record": {
+    "needsCheck": "Needs a check",
+    "notTaken": "Didn't take",
+    "question": "Did you take this train?",
+    "yes": "Yes, I took it",
+    "no": "No, I didn't",
+    "correctNo": "Didn't take this train?",
+    "undo": "I did take it after all",
+    "why": {
+      "cancelled": "It was cancelled where you got on or off: maybe you took a replacement.",
+      "partial_reports": "Trafikverket only reported part of the trip.",
+      "no_reports": "Trafikverket reported no times for this train.",
+      "waiting_reports": "Waiting for Trafikverket’s reports.",
+      "not_arrived": "Not arrived yet.",
+      "actual_times": "Trafikverket reported it leaving where you got on and arriving where you got off.",
+      "added_after": "You added it after it ran.",
+      "you": "Your answer."
+    },
+    "state": {
+      "pending": "Not recorded yet. {{why}}",
+      "auto": "In your Passport: {{why}}",
+      "confirmed": "In your Passport. {{why}}",
+      "review": "Needs a check: {{why}}",
+      "not_taken": "Not counted: you said you didn’t take it."
+    }
   }
 }

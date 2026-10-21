@@ -191,6 +191,14 @@ export const legs = sqliteTable(
     /** Trafikverket's on-board facts for the departure where you boarded (catering, day-of notices). */
     onboard: text('onboard', { mode: 'json' }).$type<OnboardFacts>(),
     notes: text('notes'),
+    /**
+     * Did you ride it (product brief §8)? pending (not over yet, or waiting for reports) | auto (Trafikverket
+     * reported it leaving where you got on and arriving where you got off) | confirmed (you said so, or logged it
+     * after the fact) | review (unclear: we ask) | not_taken (you said no). Only auto and confirmed reach the Passport.
+     */
+    ride: text('ride').notNull().default('pending'),
+    /** Why, for showing and testing: actual_times, added_after, you, cancelled, partial_reports, no_reports, waiting_reports, not_arrived. */
+    rideReason: text('ride_reason'),
     createdAt: createdAt(),
   },
   (t) => [index('legs_user_dep').on(t.userId, t.schedDep)],

@@ -176,7 +176,8 @@
       "route_other": "Din mest åkta linje: {{route}} ({{count}} gånger)",
       "month_one": "Flitigaste månaden: {{month}} ({{count}} tåg)",
       "month_other": "Flitigaste månaden: {{month}} ({{count}} tåg)",
-      "late": "Du har tillbringat {{time}} på försenade tåg. Håll ut."
+      "late": "Du har tillbringat {{time}} på försenade tåg. Håll ut.",
+      "earthPct": "{{pct}} % av ett varv runt jorden"
     },
     "records": "Rekord",
     "longestTrip": "Längsta resan",
@@ -230,7 +231,39 @@
       "ev_1": "elbil",
       "coach": "buss"
     },
-    "log": "Tåglogg"
+    "log": "Tåglogg",
+    "collections": "Samlingar",
+    "recordsAndLog": "Rekord och logg",
+    "moreStats": "Mer statistik",
+    "stationsVisited": "Stationer",
+    "stationsNote": "Där du klev på eller av; att åka förbi räknas inte.",
+    "showAllStations": "Visa alla {{count}}",
+    "showFewer": "Visa färre",
+    "milestones": "Milstolpar",
+    "nextMilestones": "Nästa",
+    "progressOf": "{{value}} av {{target}}",
+    "milestonesNote": "Räknat från resor registrerade som åkta, totalt.",
+    "reviewBanner_one": "1 resa behöver kollas innan den räknas →",
+    "reviewBanner_other": "{{count}} resor behöver kollas innan de räknas →",
+    "emptyHow": "Resor hamnar här när de har hänt: automatiskt när Trafikverket rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte.",
+    "milestone": {
+      "firstJourney": "Första resan",
+      "journeys_one": "{{count}} resa",
+      "journeys_other": "{{count}} resor",
+      "distanceKm": "{{n}} km",
+      "earth": "Ett varv runt jorden (40 075 km)",
+      "stations_one": "{{count}} station",
+      "stations_other": "{{count}} stationer",
+      "operators_one": "{{count}} operatör",
+      "operators_other": "{{count}} operatörer",
+      "countries_one": "{{count}} land",
+      "countries_other": "{{count}} länder",
+      "borderCrossings_one": "Första gränspassagen",
+      "borderCrossings_other": "{{count}} gränspassager",
+      "nightTrains_one": "Första nattåget",
+      "nightTrains_other": "{{count}} nattåg"
+    },
+    "showAllMilestones": "Visa alla {{count}}"
   },
   "settings": {
     "title": "Inställningar",
@@ -632,5 +665,31 @@
     },
     "marginSpare": "{{min}} min marginal",
     "timetableOnly": "Enligt tidtabellen: realtid för båda tågen finns inte än."
+  },
+  "record": {
+    "needsCheck": "Behöver kollas",
+    "notTaken": "Åkte inte",
+    "question": "Åkte du med det här tåget?",
+    "yes": "Ja, jag åkte",
+    "no": "Nej",
+    "correctNo": "Åkte du inte med tåget?",
+    "undo": "Jag åkte ändå",
+    "why": {
+      "cancelled": "Det var inställt där du skulle på eller av: du kanske tog en ersättning.",
+      "partial_reports": "Trafikverket rapporterade bara en del av resan.",
+      "no_reports": "Trafikverket rapporterade inga tider för tåget.",
+      "waiting_reports": "Väntar på Trafikverkets rapporter.",
+      "not_arrived": "Inte framme än.",
+      "actual_times": "Trafikverket rapporterade avgång där du klev på och ankomst där du klev av.",
+      "added_after": "Du lade till den efter resan.",
+      "you": "Ditt svar."
+    },
+    "state": {
+      "pending": "Inte registrerad än. {{why}}",
+      "auto": "I ditt pass: {{why}}",
+      "confirmed": "I ditt pass. {{why}}",
+      "review": "Behöver kollas: {{why}}",
+      "not_taken": "Räknas inte: du sa att du inte åkte."
+    }
   }
 }

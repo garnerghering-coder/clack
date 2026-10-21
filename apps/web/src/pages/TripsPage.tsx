@@ -2,7 +2,7 @@
 // top, the journey under it) for the train you're on, else the next one; the rest are compact rows. Past is grouped
 // by month.
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { decodePolyline, type LatLon } from '@clack/shared';
 import { Compass, Eye, Plus, Search, Stamp } from 'lucide-react';
@@ -56,7 +56,7 @@ export function LegRow({ leg }: { leg: Leg }) {
   const { settings } = useSettings();
   const dep = ms(leg.schedDep);
   return (
-    <Link to={`/trips/${leg.id}`} className="leg-row">
+    <Link to={`/trips/${leg.id}`} className={leg.ride === 'not_taken' ? 'leg-row not-taken' : 'leg-row'}>
       <OperatorBadge operator={leg.operator} />
       <span className="leg-row-main">
         <span className="leg-row-route">
@@ -71,6 +71,8 @@ export function LegRow({ leg }: { leg: Leg }) {
         </span>
       </span>
       <span className="leg-row-side">
+        {leg.ride === 'review' && <span className="chip review-chip">{t('record.needsCheck')}</span>}
+        {leg.ride === 'not_taken' && <span className="chip">{t('record.notTaken')}</span>}
         <DelayPill delay={leg.dataQuality === 'scheduled_only' && leg.status === 'planned' ? undefined : leg.arrDelayMin} canceled={leg.canceled} />
         <span className="caption">{leg.isEstimatedGeometry ? t('trips.approxDistance', { distance: fmtDistance(leg.distanceM, settings.distanceUnit) }) : fmtDistance(leg.distanceM, settings.distanceUnit)}</span>
       </span>
@@ -217,6 +219,40 @@ function Following({ follows }: { follows: Follow[] }) {
   );
 }
 
+/** "Did you take this train?" (brief §8.3): trips whose reports don't settle it, with a one-tap answer. */
+export function ReviewCard({ leg, onAnswer }: { leg: Leg; onAnswer: (l: Leg) => void }) {
+  const { t } = useTranslation();
+  const [busy, setBusy] = useState(false);
+  const answer = async (a: 'yes' | 'no') => {
+    setBusy(true);
+    try {
+      onAnswer(await api.answerRide(leg.id, a));
+    } finally {
+      setBusy(false);
+    }
+  };
+  const dep = ms(leg.schedDep);
+  return (
+    <div className="review-card card">
+      <span className="caption upper">{t('record.question')}</span>
+      <Link to={`/trips/${leg.id}`} className="strong">
+        {[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')} · {leg.origin?.name} → {leg.destination?.name}
+      </Link>
+      <span className="caption">
+        {dep ? fmtDay(dep, tzOf(leg)) : ''} · {t(`record.why.${leg.rideReason ?? 'no_reports'}`)}
+      </span>
+      <div className="chip-row">
+        <button className="button primary small" disabled={busy} onClick={() => answer('yes')}>
+          {t('record.yes')}
+        </button>
+        <button className="button small" disabled={busy} onClick={() => answer('no')}>
+          {t('record.no')}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /** The leg you change to after this one, if they're one journey and meet at the same station. */
 function nextInJourney(legs: Leg[], leg: Leg): Leg | undefined {
   if (!leg.journeyId) return undefined;
@@ -244,7 +280,8 @@ export function TripsPage() {
   const { t } = useTranslation();
   const [legs, setLegs] = useState<Leg[] | null>(null);
   const [error, setError] = useState(false);
-  const [tab, setTab] = useState<'upcoming' | 'past'>('upcoming');
+  const [params] = useSearchParams();
+  const [tab, setTab] = useState<'upcoming' | 'past'>(params.get('tab') === 'past' ? 'past' : 'upcoming');
   const [follows, setFollows] = useState<Follow[]>([]);
   useEffect(() => {
     api.follows().then(setFollows, () => undefined);
@@ -339,6 +376,9 @@ export function TripsPage() {
       )}
       {legs && legs.length > 0 && tab === 'past' && (
         <div className="list">
+          {past.filter((l) => l.ride === 'review').map((l) => (
+            <ReviewCard key={`r${l.id}`} leg={l} onAnswer={(d) => setLegs((ls) => ls && ls.map((x) => (x.id === d.id ? { ...x, ride: d.ride, rideReason: d.rideReason } : x)))} />
+          ))}
           {past.length === 0 && <p className="muted">{t('trips.noPast')}</p>}
           {months.map((m) => (
             <section key={m.label}>

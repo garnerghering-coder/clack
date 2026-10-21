@@ -203,6 +203,7 @@ export function TripDetailPage() {
       setBusy(false);
     }
   };
+  const answer = async (a: 'yes' | 'no' | 'undo') => setLeg(await api.answerRide(leg.id, a));
   const remove = async () => {
     if (!window.confirm(t('detail.deleteConfirm'))) return;
     await api.deleteLeg(leg.id);
@@ -275,9 +276,35 @@ export function TripDetailPage() {
                 {leg.canceled ? t('status.cancelled') : ms(leg.actualArr) ? t('trips.arrivedAt', { time: fmtTime(ms(leg.actualArr), dtz, settings.clock) }) : t('detail.scheduledArrival', { time: fmtTime(schedArr, dtz, settings.clock) })}
               </p>
               <p className="caption">{ms(leg.actualArr) ? t('detail.actualTimes') : t('detail.scheduledOnlyNote')}</p>
-              <Link to="/passport" className="link-button">
-                <Stamp size={14} /> {t('detail.seePassport')}
-              </Link>
+              {/* The trip's record (brief §8): why it counts, or why it doesn't, and how to correct it. */}
+              <p className={`record-line record-${leg.ride}`}>{t(`record.state.${leg.ride}`, { why: t(`record.why.${leg.rideReason ?? 'no_reports'}`) })}</p>
+              <div className="chip-row">
+                {leg.ride === 'review' && (
+                  <>
+                    <button className="button primary small" onClick={() => answer('yes')}>
+                      {t('record.yes')}
+                    </button>
+                    <button className="button small" onClick={() => answer('no')}>
+                      {t('record.no')}
+                    </button>
+                  </>
+                )}
+                {(leg.ride === 'auto' || leg.ride === 'confirmed') && (
+                  <>
+                    <Link to="/passport" className="link-button">
+                      <Stamp size={14} /> {t('detail.seePassport')}
+                    </Link>
+                    <button className="link-button" onClick={() => answer('no')}>
+                      {t('record.correctNo')}
+                    </button>
+                  </>
+                )}
+                {leg.ride === 'not_taken' && (
+                  <button className="link-button" onClick={() => answer('undo')}>
+                    {t('record.undo')}
+                  </button>
+                )}
+              </div>
             </>
           )}
         </section>

@@ -11,6 +11,7 @@ import { regroupJourneys } from './journeys.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
 import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
+import { updateRides } from './recording.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
 
@@ -111,6 +112,8 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
         .run();
     }
   });
+  // A trip saved after it arrived is you saying you rode it; a future one waits for the evidence.
+  updateRides(db, { legId: id, now });
   // Track geometry and distance along the rail network (cached per station pair, so this is quick).
   attachLegGeometry(db, id);
   regroupJourneys(db, userId);
@@ -144,6 +147,8 @@ const legColumns = {
   originStationId: legs.originStationId,
   destStationId: legs.destStationId,
   notes: legs.notes,
+  ride: legs.ride,
+  rideReason: legs.rideReason,
 };
 
 function attachRefs<T extends { operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
