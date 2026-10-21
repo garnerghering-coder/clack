@@ -51,7 +51,7 @@ function expected(leg: Leg) {
 }
 
 /** Departure – arrival on flip cards; a changed time shows the timetabled one struck through. */
-function Times({ leg, size = 'sm', intro = false }: { leg: Leg; size?: 'sm' | 'md' | 'lg'; intro?: boolean }) {
+function Times({ leg, size = 'text', intro = false }: { leg: Leg; size?: 'text' | 'sm' | 'md' | 'lg'; intro?: boolean }) {
   const { settings } = useSettings();
   const dep = ms(leg.schedDep);
   const arr = ms(leg.schedArr);

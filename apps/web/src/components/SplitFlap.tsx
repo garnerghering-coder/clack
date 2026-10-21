@@ -52,15 +52,16 @@ export function SplitFlap({ value, className = '', label, intro = false }: { val
 }
 
 /**
- * A time on flip cards, everywhere times are shown (owner feedback 2026-10-21). When the expected time differs from
- * the timetable, the timetabled one is struck through beside it and the new one is drawn in the accent colour.
+ * A time, on flip cards for the main time on a screen (the featured trip, a trip's departure and arrival, boards)
+ * and as plain text elsewhere (owner feedback 2026-10-21). When the expected time differs from the timetable, the
+ * timetabled one is struck through beside it and the new one is drawn in the accent colour.
  */
 export function FlapTime({
   time,
   sched,
   tz,
   clock,
-  size = 'sm',
+  size = 'text',
   intro = false,
 }: {
   /** The time to show (expected or actual), ms. */
@@ -69,12 +70,20 @@ export function FlapTime({
   sched?: number | null;
   tz: string;
   clock: '24h' | '12h';
-  size?: 'sm' | 'md' | 'lg';
+  /** text: plain digits (secondary places); sm/md/lg: flip cards (the main time on a screen). */
+  size?: 'text' | 'sm' | 'md' | 'lg';
   intro?: boolean;
 }) {
   const fmt = (v: number) => fmtTime(v, tz, clock);
   if (time === null) return <span className="flap-missing">—</span>;
   const changed = sched !== null && sched !== undefined && Math.floor(sched / 60_000) !== Math.floor(time / 60_000);
+  if (size === 'text')
+    return (
+      <span className={`flap-text tabular${changed ? ' changed' : ''}`}>
+        {changed && <s className="flap-old">{fmt(sched!)}</s>}
+        <span className="flap-new">{fmt(time)}</span>
+      </span>
+    );
   return (
     <span className={`flap-time flap-${size}${changed ? ' changed' : ''}`}>
       {changed && <s className="flap-old">{fmt(sched!)}</s>}

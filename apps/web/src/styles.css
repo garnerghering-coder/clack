@@ -71,6 +71,12 @@
   --flap-bottom: #0c0c0c;
   --flap-hinge: rgba(255, 255, 255, 0.18);
   --flap-text: #ffffff;
+  /* Time flip cards in light mode: pale tiles with dark digits (the logo keeps its black tiles). */
+  --tflap-top: #fdfdfd;
+  --tflap-bottom: #efefef;
+  --tflap-hinge: rgba(0, 0, 0, 0.12);
+  --tflap-text: #0a0a0a;
+  --tflap-edge: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.08);
   --marker-ring: #ffffff;
   --unknown: #8a8a8a;
   --error-bg: rgba(255, 69, 58, 0.12);
@@ -574,12 +580,12 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 
 /* Split-flap digits */
 .flap { display: inline-flex; gap: 1px; font-family: 'Space Grotesk', sans-serif; font-variant-numeric: tabular-nums; }
-.flap-tile { position: relative; display: inline-block; min-width: 0.62em; padding: 0 1px; text-align: center; border-radius: 4px; background: linear-gradient(to bottom, var(--flap-top) 0 49%, var(--flap-bottom) 51% 100%); color: var(--flap-text); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4); }
-.flap-tile::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--flap-hinge); }
+.flap-tile { position: relative; display: inline-block; min-width: 0.62em; padding: 0 1px; text-align: center; border-radius: 4px; background: linear-gradient(to bottom, var(--tflap-top, var(--flap-top)) 0 49%, var(--tflap-bottom, var(--flap-bottom)) 51% 100%); color: var(--tflap-text, var(--flap-text)); box-shadow: var(--tflap-edge, inset 0 -1px 0 rgba(0, 0, 0, 0.4)); }
+.flap-tile::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--tflap-hinge, var(--flap-hinge)); }
 /* A flipping tile: halves underneath (new top, old bottom), and two leaves that turn over it. */
 .flap-tile.flipping { perspective: 240px; }
 .flap-tile.flipping .flap-sizer { visibility: hidden; }
-.flap-half, .flap-leaf { position: absolute; inset: 0; display: block; text-align: center; border-radius: inherit; background: linear-gradient(to bottom, var(--flap-top) 0 49%, var(--flap-bottom) 51% 100%); backface-visibility: hidden; }
+.flap-half, .flap-leaf { position: absolute; inset: 0; display: block; text-align: center; border-radius: inherit; background: linear-gradient(to bottom, var(--tflap-top, var(--flap-top)) 0 49%, var(--tflap-bottom, var(--flap-bottom)) 51% 100%); backface-visibility: hidden; }
 .flap-half.top, .flap-leaf.top { clip-path: inset(0 0 50% 0); }
 .flap-half.bottom, .flap-leaf.bottom { clip-path: inset(50% 0 0 0); }
 .flap-leaf.top { transform-origin: 50% 50%; animation: flap-top 180ms ease-in var(--d, 0ms) both; z-index: 2; }
@@ -865,7 +871,9 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 /* Inside a journey card the legs sit flat; the card carries the colour. */
 .journey-card .leg-pill { background: none; border: 0; padding: 8px 0; }
 /* The layover between two connecting trips: the same gap above and below (the list's gap does the spacing). */
-.pill-list { gap: 10px; margin-top: 10px; }
+.pill-list { gap: 16px; margin-top: 0; }
+.flap-text.changed .flap-new { color: var(--accent-ink); font-weight: 700; }
+.flap-text .flap-old { margin-right: 4px; }
 .layover { display: flex; align-items: center; gap: 12px; padding: 4px 12px 4px 28px; border-radius: 14px; color: var(--text-2); font-size: 14px; font-weight: 600; }
 .layover.linked { background: color-mix(in srgb, var(--surface) 60%, transparent); border: 1px dashed var(--hairline); }
 .layover.linked:hover { border-color: var(--accent-line); }
@@ -913,6 +921,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .flap-colored .flap-tile { color: inherit; }
 .stop-time { display: grid; justify-items: start; gap: 1px; }
 .stop-row { grid-template-columns: 58px 16px 1fr; }
-.stop-new { color: var(--flap-text); }
+.stop-new { color: var(--text); }
 .next-stop { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .tl-times { display: grid; justify-items: end; gap: 1px; }
