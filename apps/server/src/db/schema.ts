@@ -261,6 +261,24 @@ export const liveState = sqliteTable('live_state', {
   arrivalDelayMin: integer('arrival_delay_min'),
 });
 
+// ---------- Followed trains (product brief §6.2, §8.1) ----------
+
+/** A train you're watching on the map. Not a trip: it never counts as travelled and never enters the Passport. */
+export const followedTrains = sqliteTable(
+  'followed_trains',
+  {
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    trainNumber: text('train_number').notNull(),
+    /** Trafikverket's operating day for the train. */
+    serviceDate: text('service_date').notNull(),
+    operatorId: text('operator_id'),
+    /** "Göteborg C → Stockholm C", as shown when followed (the train may be off the map later). */
+    label: text('label'),
+    createdAt: createdAt(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.trainNumber, t.serviceDate] })],
+);
+
 // ---------- Stations (ADDITIONS_01) ----------
 
 export const stationFavorites = sqliteTable(

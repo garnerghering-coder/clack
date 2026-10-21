@@ -3,10 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Info, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Eye, Info, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { FilterSpecification, GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { api, type BoardRow, type LiveTrainStop, type StationInfo, type TripGeometry } from '../api';
+import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
@@ -51,6 +51,8 @@ interface Detail {
 const PRODUCTS = ['high_speed', 'intercity', 'regional', 'commuter', 'night'] as const;
 const GLIDE_MS = 1500;
 const STALE_MS = 60_000;
+/** A GPS fix older than this is shown as old, not as the train's position now (matches the server's GPS_FRESH_MS). */
+const GPS_FRESH_MS = 2 * 60_000;
 const TZ = 'Europe/Stockholm';
 
 /** Where each marker is drawn: glides from the previous position to the new one. */
@@ -123,6 +125,7 @@ function LiveMap() {
   const trains = useRef(new Map<string, LiveTrain>());
   const anims = useRef(new Map<string, Anim>());
   const frame = useRef(0);
+  const lastMsg = useRef(0);
   const selRoute = useRef<{ id: string; line: LatLon[]; from: number } | null>(null);
   const [ready, setReady] = useState(false);
   const [count, setCount] = useState<{ shown: number; total: number }>({ shown: 0, total: 0 });
@@ -136,17 +139,29 @@ function LiveMap() {
   const [opFilter, setOpFilter] = useState<Set<string>>(new Set());
   const [onlyDelayed, setOnlyDelayed] = useState(false);
   const [onlyMine, setOnlyMine] = useState(false);
-  const [showOps, setShowOps] = useState(false);
+  const [onlyFollowed, setOnlyFollowed] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const [follows, setFollows] = useState<Follow[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [streamDown, setStreamDown] = useState(false);
+  const [mode, setMode] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [searching, setSearching] = useState(false);
+  const [stationHits, setStationHits] = useState<StationHit[]>([]);
+  const [zoom, setZoom] = useState(4.2);
   const focus = params.get('train');
   const now = useNow(5000);
-  const filters = useRef({ productFilter, opFilter, onlyDelayed, onlyMine });
-  filters.current = { productFilter, opFilter, onlyDelayed, onlyMine };
+  const followKeys = useMemo(() => new Set(follows.map((f) => `${f.trainNumber}|${f.serviceDate}`)), [follows]);
+  const filters = useRef({ productFilter, opFilter, onlyDelayed, onlyMine, onlyFollowed, followKeys });
+  filters.current = { productFilter, opFilter, onlyDelayed, onlyMine, onlyFollowed, followKeys };
   const opsRef = useRef(ops);
   opsRef.current = ops;
 
   const visible = (tr: LiveTrain) => {
     const f = filters.current;
     if (f.onlyMine && !tr.mine) return false;
+    if (f.onlyFollowed && !f.followKeys.has(`${tr.number}|${tr.date}`)) return false;
     if (f.onlyDelayed && !((tr.delayMin ?? 0) > 5)) return false;
     if (f.productFilter.size && !f.productFilter.has(tr.product)) return false;
     if (f.opFilter.size && (!tr.operatorId || !f.opFilter.has(tr.operatorId))) return false;
@@ -182,6 +197,7 @@ function LiveMap() {
           label: tr.destination ? `${tr.number} · ${tr.destination}` : tr.number,
           color: opColor(tr.operatorId ? opsRef.current.get(tr.operatorId)?.brandColor : null),
           mine: tr.mine,
+          followed: filters.current.followKeys.has(`${tr.number}|${tr.date}`),
           bearing: tr.bearing ?? 0,
           hasBearing: tr.bearing !== null,
         },
@@ -301,6 +317,8 @@ function LiveMap() {
           paint: { 'text-color': C.clusterText },
         });
         const single: ['!', ['has', string]] = ['!', ['has', 'point_count']];
+        // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
+        m.addLayer({ id: 'train-followed', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'followed'], true]], paint: { 'circle-radius': 10, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': C.text, 'circle-stroke-width': 2 } });
         m.addLayer({ id: 'train-mine', type: 'circle', source: 'trains', filter: ['all', single, ['==', ['get', 'mine'], true]], paint: { 'circle-radius': 13, 'circle-color': 'rgba(248,214,74,0.28)', 'circle-stroke-color': '#f8d64a', 'circle-stroke-width': 2 } });
         m.addLayer({
           id: 'train-dot',
@@ -386,6 +404,7 @@ function LiveMap() {
           m.on('mouseleave', l, () => (m.getCanvas().style.cursor = ''));
         }
         m.on('moveend', updateBbox);
+        m.on('zoomend', () => setZoom(m.getZoom()));
         updateBbox();
         setReady(true);
       });
@@ -406,8 +425,16 @@ function LiveMap() {
     let es: EventSource | null = null;
     const timer = setTimeout(() => {
       es = new EventSource(`/api/live/trains/stream?bbox=${bbox}`);
+      // EventSource retries by itself; meanwhile say live data is unavailable rather than show old dots as live.
+      // A dropped connection that EventSource is already re-opening is only "down" if nothing arrives for a while.
+      es.onerror = () => setStreamDown(true);
+      es.onopen = () => setStreamDown(false);
       es.addEventListener('snapshot', (e) => {
-        const d = JSON.parse((e as MessageEvent<string>).data) as { trains: LiveTrain[]; total: number; upstreamAt: number };
+        const d = JSON.parse((e as MessageEvent<string>).data) as { trains: LiveTrain[]; total: number; upstreamAt: number; mode?: string };
+        setLoaded(true);
+        lastMsg.current = Date.now();
+        setStreamDown(false);
+        setMode(d.mode ?? null);
         apply(d.trains, [], true);
         setCount((c) => ({ ...c, total: d.total }));
         setUpstreamAt(d.upstreamAt);
@@ -419,6 +446,8 @@ function LiveMap() {
           const old = trains.current.get(id);
           return old ? [{ ...old, lat, lon, bearing, speedKmh, at, estimated }] : [];
         });
+        lastMsg.current = Date.now();
+        setStreamDown(false);
         apply([...d.changed, ...movedTrains], d.removed, false);
         setCount((c) => ({ ...c, total: d.total }));
         setUpstreamAt(d.upstreamAt);
@@ -432,7 +461,48 @@ function LiveMap() {
   }, [ready, bbox]);
 
   // Filters change what's drawn.
-  useEffect(() => scheduleRender(), [productFilter, opFilter, onlyDelayed, onlyMine, ops]);
+  useEffect(() => scheduleRender(), [productFilter, opFilter, onlyDelayed, onlyMine, onlyFollowed, followKeys, ops]);
+
+  useEffect(() => {
+    api.follows().then(setFollows, () => undefined);
+  }, []);
+
+  // Search: trains on the map by number, and stations by name.
+  const q = query.trim();
+  useEffect(() => {
+    if (q.length < 2 || /^\d+$/.test(q)) return setStationHits([]);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => api.searchStations(q, ctrl.signal).then((r) => setStationHits(r.slice(0, 5)), () => undefined), 200);
+    return () => {
+      clearTimeout(timer);
+      ctrl.abort();
+    };
+  }, [q]);
+  const trainHits = q ? [...trains.current.values()].filter((x) => x.number.startsWith(q.replace(/\D/g, '') || '#')).slice(0, 6) : [];
+  const openStation = async (h: StationHit) => {
+    setSearching(false);
+    setQuery('');
+    deselect();
+    try {
+      const info = await api.station(h.id);
+      if (info.lat !== undefined && info.lon !== undefined) map.current?.easeTo({ center: [info.lon, info.lat], zoom: Math.max(map.current.getZoom(), 10) });
+    } catch {
+      // The sheet still opens.
+    }
+    setStationSheet({ id: h.id, name: h.name });
+  };
+
+  const followKey = (tr: LiveTrain) => `${tr.number}|${tr.date}`;
+  const toggleFollow = async (tr: LiveTrain) => {
+    const on = followKeys.has(followKey(tr));
+    try {
+      if (on) await api.unfollow(tr.number, tr.date);
+      else await api.follow({ trainNumber: tr.number, serviceDate: tr.date, operatorId: tr.operatorId, label: tr.origin && tr.destination ? `${tr.origin} → ${tr.destination}` : null });
+      setFollows(await api.follows());
+    } catch {
+      // Unchanged; the button shows the real state.
+    }
+  };
 
   // Opened from a board row ("Show on map"): select that train once it's on the map.
   useEffect(() => {
@@ -458,6 +528,7 @@ function LiveMap() {
       return;
     }
     setSelected(d);
+    setCollapsed(false);
     setStops(d.trip ? null : 'none');
     setStationSheet(null);
     const m = map.current;
@@ -513,34 +584,89 @@ function LiveMap() {
     apply_(n);
   };
   const stale = upstreamAt > 0 && now - upstreamAt > STALE_MS;
-  const sel = selected?.train;
+  // The latest from the stream, not the copy from when it was tapped.
+  const sel = selected ? (trains.current.get(selected.train.id) ?? selected.train) : undefined;
+  const filterCount = productFilter.size + opFilter.size + (onlyDelayed ? 1 : 0) + (onlyMine ? 1 : 0) + (onlyFollowed ? 1 : 0);
+  // Position status (brief §6.2): GPS only while fresh; an old fix says how old; estimates say so.
+  const posAge = sel ? now - sel.at : 0;
+  const posLabel = !sel ? '' : sel.estimated ? t('liveMap.posEstimated') : posAge > GPS_FRESH_MS ? t('liveMap.posOld', { min: Math.round(posAge / 60_000) }) : t('liveMap.posGps');
   const selOp = sel?.operatorId ? ops.get(sel.operatorId) : undefined;
   const selType = sel?.trainType ? types.get(sel.trainType) : undefined;
 
   return (
     <div className="live-page">
       <div ref={el} className="live-canvas" />
-      <Link to="/" className="map-button live-back" aria-label={t('nav.trips')}>
-        <ArrowLeft size={18} />
-      </Link>
-      <div className="live-filters chip-row">
-        {PRODUCTS.map((p) => (
-          <button key={p} className={productFilter.has(p) ? 'chip-button active' : 'chip-button'} onClick={() => toggle(productFilter, p, setProductFilter)} aria-pressed={productFilter.has(p)}>
-            {t(`products.${p}`)}
-          </button>
-        ))}
-        <button className={opFilter.size ? 'chip-button active' : 'chip-button'} onClick={() => setShowOps(!showOps)} aria-expanded={showOps}>
-          {opFilter.size ? t('liveMap.operatorsN', { count: opFilter.size }) : t('liveMap.operators')}
-        </button>
-        <button className={onlyDelayed ? 'chip-button active' : 'chip-button'} onClick={() => setOnlyDelayed(!onlyDelayed)} aria-pressed={onlyDelayed}>
-          {t('liveMap.onlyDelayed')}
-        </button>
-        <button className={onlyMine ? 'chip-button active' : 'chip-button'} onClick={() => setOnlyMine(!onlyMine)} aria-pressed={onlyMine}>
-          {t('liveMap.onlyMine')}
+      <div className="live-top">
+        <label className="live-search">
+          <Search size={16} aria-hidden="true" />
+          <input
+            type="search"
+            value={query}
+            placeholder={t('liveMap.searchPlaceholder')}
+            aria-label={t('liveMap.search')}
+            onFocus={() => setSearching(true)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSearching(true);
+            }}
+          />
+        </label>
+        <button className={filterCount ? 'map-button filters-button active' : 'map-button filters-button'} onClick={() => setShowFilters(!showFilters)} aria-expanded={showFilters} aria-label={t('liveMap.filters')} title={t('liveMap.filters')}>
+          <SlidersHorizontal size={18} />
+          {filterCount > 0 && <span className="filters-count">{filterCount}</span>}
         </button>
       </div>
-      {showOps && (
+      {searching && q && (
+        <div className="live-results card">
+          {trainHits.map((x) => (
+            <button
+              key={x.id}
+              className="live-result"
+              onClick={() => {
+                setSearching(false);
+                setQuery('');
+                select(x.id);
+              }}
+            >
+              <OperatorBadge operator={x.operatorId ? ops.get(x.operatorId) : undefined} size={22} />
+              <span className="strong">{[x.productName ?? (x.operatorId ? ops.get(x.operatorId)?.name : null), x.number].filter(Boolean).join(' ')}</span>
+              <span className="caption">{[x.origin, x.destination].filter(Boolean).join(' → ')}</span>
+            </button>
+          ))}
+          {stationHits.map((h) => (
+            <button key={h.id} className="live-result" onClick={() => openStation(h)}>
+              <span className="lg-station" aria-hidden="true" />
+              <span className="strong">{h.name}</span>
+              <span className="caption">{t('liveMap.station')}</span>
+            </button>
+          ))}
+          {!trainHits.length && !stationHits.length && <p className="caption">{/^\d+$/.test(q) ? t('liveMap.noTrainMatch', { q }) : t('liveMap.noMatch', { q })}</p>}
+          <button className="link-button" onClick={() => setSearching(false)}>
+            {t('common.close')}
+          </button>
+        </div>
+      )}
+      {showFilters && (
         <div className="live-ops card">
+          <div className="chip-row">
+            {PRODUCTS.map((p) => (
+              <button key={p} className={productFilter.has(p) ? 'chip-button active' : 'chip-button'} onClick={() => toggle(productFilter, p, setProductFilter)} aria-pressed={productFilter.has(p)}>
+                {t(`products.${p}`)}
+              </button>
+            ))}
+          </div>
+          <div className="chip-row">
+            <button className={onlyDelayed ? 'chip-button active' : 'chip-button'} onClick={() => setOnlyDelayed(!onlyDelayed)} aria-pressed={onlyDelayed}>
+              {t('liveMap.onlyDelayed')}
+            </button>
+            <button className={onlyMine ? 'chip-button active' : 'chip-button'} onClick={() => setOnlyMine(!onlyMine)} aria-pressed={onlyMine}>
+              {t('liveMap.onlyMine')}
+            </button>
+            <button className={onlyFollowed ? 'chip-button active' : 'chip-button'} onClick={() => setOnlyFollowed(!onlyFollowed)} aria-pressed={onlyFollowed}>
+              {t('liveMap.onlyFollowed')}
+            </button>
+          </div>
+          <span className="caption upper">{t('liveMap.operators')}</span>
           {operatorsShown.map((o) => (
             <label key={o} className="switch-row">
               <input type="checkbox" checked={opFilter.has(o)} onChange={() => toggle(opFilter, o, setOpFilter)} />
@@ -548,15 +674,41 @@ function LiveMap() {
               <span>{ops.get(o)?.name ?? o}</span>
             </label>
           ))}
+          <div className="chip-row">
+            {filterCount > 0 && (
+              <button
+                className="chip-button"
+                onClick={() => {
+                  setProductFilter(new Set());
+                  setOpFilter(new Set());
+                  setOnlyDelayed(false);
+                  setOnlyMine(false);
+                  setOnlyFollowed(false);
+                }}
+              >
+                {t('liveMap.clearFilters')}
+              </button>
+            )}
+            <button className="chip-button" onClick={() => setShowFilters(false)}>
+              {t('common.done')}
+            </button>
+          </div>
         </div>
       )}
       <div className="live-counter">
-        {stale ? (
+        {/* Map states (brief §6.3): loading, live data down, delayed data, nothing in view, or trains running. */}
+        {!loaded && !streamDown ? (
+          <span className="chip">{t('liveMap.loading')}</span>
+        ) : (streamDown && now - lastMsg.current > 20_000) || mode === 'stopped' ? (
+          <span className="chip stale-chip">{t('liveMap.unavailable')}</span>
+        ) : stale ? (
           <span className="chip stale-chip">{t('liveMap.delayedData', { ago: agoKey(t, upstreamAt, now) })}</span>
+        ) : count.shown === 0 && zoom >= 6.5 ? (
+          <span className="chip">{filterCount ? t('liveMap.noneMatch') : t('liveMap.noneHere')}</span>
         ) : (
           <span className="chip live-chip">
             <span className="live-dot" aria-hidden="true" />
-            {t('liveMap.trainsLive', { count: count.total })}
+            {mode === 'simulate' ? t('liveMap.simulated', { count: count.total }) : t('liveMap.trainsRunning', { count: count.total })}
           </span>
         )}
         <button className="map-button small" onClick={() => setLegend(!legend)} aria-expanded={legend} aria-label={t('liveMap.legend')}>
@@ -584,15 +736,18 @@ function LiveMap() {
 
       {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
-        <section className="live-sheet live-train-sheet card">
+        <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'}>
           <header className="board-sheet-head">
             <OperatorBadge operator={selOp} size={32} />
-            <span className="strong">{sel.productName || selOp ? [sel.productName ?? selOp?.name, sel.number].join(' ') : t('liveMap.train', { number: sel.number })}</span>
+            <button className="live-sheet-title" onClick={() => setCollapsed(!collapsed)} aria-expanded={!collapsed}>
+              <span className="strong">{sel.productName || selOp ? [sel.productName ?? selOp?.name, sel.number].join(' ') : t('liveMap.train', { number: sel.number })}</span>
+              {collapsed ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
+            </button>
             <button className="icon-button small" onClick={deselect} aria-label={t('common.close')}>
               <X size={18} />
             </button>
           </header>
-          {selType && (
+          {!collapsed && selType && (
             <div className="live-sheet-art">
               <TrainArt art={selType.art} color={opColor(selOp?.brandColor)} height={22} />
               <span className="caption">{selType.name}</span>
@@ -607,26 +762,31 @@ function LiveMap() {
           {sel.next && <p>{t('live.nextStop', { name: sel.next, time: fmtTime(sel.nextEta, TZ, settings.clock) })}</p>}
           <div className="chip-row">
             {sel.delayMin !== null && <DelayPill delay={sel.delayMin} />}
-            {sel.speedKmh !== null && <span className="chip tabular">{sel.speedKmh} km/h</span>}
-            <span className="chip">{sel.estimated ? t('live.estimatedPosition') : t('live.livePosition')}</span>
+            <span className={sel.estimated || posAge > GPS_FRESH_MS ? 'chip' : 'chip live-pos'}>{posLabel}</span>
+            {!collapsed && sel.speedKmh !== null && !sel.estimated && <span className="chip tabular">{sel.speedKmh} km/h</span>}
             <span className="caption">{t('live.updated', { ago: agoKey(t, sel.at, now) })}</span>
           </div>
-          <StopList stops={stops} />
+          {!collapsed && <StopList stops={stops} />}
+          {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
           <div className="sheet-actions row-actions live-sheet-actions">
-            {selected?.legId && (
-              <button className="button" onClick={() => navigate(`/trips/${selected.legId}`)}>
-                {t('liveMap.openDetail')}
+            <button className={followKeys.has(followKey(sel)) ? 'button following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
+              {followKeys.has(followKey(sel)) ? <Check size={16} /> : <Eye size={16} />} {followKeys.has(followKey(sel)) ? t('liveMap.following') : t('liveMap.follow')}
+            </button>
+            {selected?.legId ? (
+              <button className="button primary" onClick={() => navigate(`/trips/${selected.legId}`)}>
+                {t('liveMap.inYourTrips')}
+              </button>
+            ) : (
+              <button
+                className="button primary"
+                disabled={!selected?.trip}
+                onClick={() => selected?.trip && navigate(`/add?${new URLSearchParams({ trip: selected.trip.key, date: selected.trip.serviceDate })}`)}
+              >
+                {t('liveMap.plan')}
               </button>
             )}
-            <button
-              className="button primary"
-              disabled={!selected?.trip}
-              onClick={() => selected?.trip && navigate(`/add?${new URLSearchParams({ trip: selected.trip.key, date: selected.trip.serviceDate })}`)}
-            >
-              {t('board.addToTrips')}
-            </button>
           </div>
-          {!selected?.trip && <p className="caption">{t('board.notInTimetable')}</p>}
+          {!collapsed && !selected?.trip && <p className="caption">{t('board.notInTimetable')}</p>}
         </section>
       )}
     </div>

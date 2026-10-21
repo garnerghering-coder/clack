@@ -583,7 +583,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-filters { position: absolute; z-index: 3; top: calc(12px + env(safe-area-inset-top)); left: 66px; right: 12px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
 .live-filters .chip-button:not(.active) { background: var(--glass); }
 .live-filters .chip-button { flex: none; backdrop-filter: blur(8px); }
-.live-ops { position: absolute; z-index: 4; top: calc(56px + env(safe-area-inset-top)); left: 16px; right: 16px; max-height: 50%; overflow-y: auto; gap: 8px; }
+.live-ops { position: absolute; z-index: 4; top: calc(64px + env(safe-area-inset-top)); max-width: 460px; left: 16px; right: 16px; max-height: 50%; overflow-y: auto; gap: 8px; }
 .live-counter { position: absolute; z-index: 3; left: 12px; bottom: 28px; display: flex; gap: 8px; align-items: center; }
 .live-counter .chip { background: var(--glass); }
 .map-button.small { position: static; width: 32px; height: 32px; }
@@ -755,3 +755,22 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .featured-link { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; color: var(--accent-ink); font-weight: 600; }
 .empty-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .side-settings { margin-top: auto; }
+/* Explore top bar: one search field and a Filters button instead of a row of chips (brief §6.3). */
+.live-top { position: absolute; z-index: 4; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; display: flex; gap: 8px; }
+.live-top .map-button { position: static; flex: none; }
+.live-search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 22px; background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); color: var(--text-2); }
+.live-search input { flex: 1; min-width: 0; background: none; border: 0; color: var(--text); font: inherit; font-size: 16px; outline: none; }
+.filters-button { position: relative; }
+.filters-button.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.filters-count { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--text); color: var(--bg); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+.live-results { position: absolute; z-index: 5; top: calc(64px + env(safe-area-inset-top)); left: 12px; right: 12px; max-width: 460px; max-height: 55%; overflow-y: auto; gap: 2px; box-shadow: var(--shadow); }
+.live-result { display: grid; grid-template-columns: 26px 1fr; column-gap: 10px; align-items: center; text-align: left; padding: 8px 2px; border-bottom: 1px solid var(--hairline); min-height: 44px; }
+.live-result .caption { grid-column: 2; }
+.live-result .lg-station { justify-self: center; }
+.live-sheet-title { display: flex; align-items: center; gap: 6px; min-width: 0; text-align: left; flex: 1; min-height: 44px; }
+.live-train-sheet.collapsed { max-height: none; }
+.chip.live-pos { background: rgba(61, 220, 132, 0.16); color: var(--on-time); }
+.button.following { border-color: var(--accent); }
+.following { display: grid; gap: 2px; margin-top: 18px; }
+.live-sheet-actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.stage-card { margin: 10px 0; }

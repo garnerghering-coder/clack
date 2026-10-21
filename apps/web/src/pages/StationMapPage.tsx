@@ -123,7 +123,7 @@ export function StationMapPage() {
   else if (toE) pins.push({ x: toE.poi?.x ?? toE.node.x, y: toE.poi?.y ?? toE.node.y, level: toE.node.level, label: label(toE), kind: 'to' });
   const conn =
     layover && from && to && fromE?.kind === 'track' && toE?.kind === 'track'
-      ? connectionStatus({ arrival: arr, departure: dep, arrivalPlatform: from, departurePlatform: to, canceledA: params.get('xa') === '1', canceledB: params.get('xb') === '1', walkSeconds: route?.seconds ?? null, sizeClass: info?.sizeClass ?? 'large' })
+      ? connectionStatus({ arrival: arr, departure: dep, arrivalPlatform: from, departurePlatform: to, canceledA: params.get('xa') === '1', canceledB: params.get('xb') === '1', walkSeconds: route?.seconds ?? null, sizeClass: info?.sizeClass ?? 'large', timesLive: params.get('live') === '1' })
       : null;
   const steps = route ? instructions(map, route, fromE, toE) : [];
   const setRoute = (f: string | null, tt: string | null) => {

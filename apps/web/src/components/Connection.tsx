@@ -28,20 +28,22 @@ export function useStationMap(stationId: string | null | undefined): { map: Stat
 
 export const profileOf = (s: { walkPace: WalkProfile['pace']; stepFree: boolean; heavyLuggage: boolean }): WalkProfile => ({ pace: s.walkPace, stepFree: s.stepFree, luggage: s.heavyLuggage });
 
-/** Best current estimate of when leg A arrives and leg B leaves. */
+/** Best current estimate of when leg A arrives and leg B leaves, and whether both come from real-time data. */
 export function connectionTimes(a: Leg, b: Leg) {
-  const arrival = ms(a.actualArr) ?? ms(a.live?.arrivalEta) ?? (ms(a.schedArr) !== null ? ms(a.schedArr)! + (a.arrDelayMin ?? 0) * 60_000 : null);
+  const liveArr = ms(a.actualArr) ?? ms(a.live?.arrivalEta);
+  const arrival = liveArr ?? (ms(a.schedArr) !== null ? ms(a.schedArr)! + (a.arrDelayMin ?? 0) * 60_000 : null);
   // Before it leaves, a live leg's next stop is the one you board at: its ETA is the expected departure.
   const boardingEta = b.live && (b.live.status === 'scheduled' || b.live.status === 'boarding') ? ms(b.live.eta) : null;
-  const departure = ms(b.actualDep) ?? boardingEta ?? (ms(b.schedDep) !== null ? ms(b.schedDep)! + (b.depDelayMin ?? 0) * 60_000 : null);
-  return { arrival, departure };
+  const liveDep = ms(b.actualDep) ?? boardingEta;
+  const departure = liveDep ?? (ms(b.schedDep) !== null ? ms(b.schedDep)! + (b.depDelayMin ?? 0) * 60_000 : null);
+  return { arrival, departure, live: liveArr !== null && liveDep !== null };
 }
 
 export function useConnection(a: Leg, b: Leg): { result: ConnectionResult; map: StationMap | null; stationId: string | null; noPath: boolean } {
   const { settings } = useSettings();
   const stationId = a.destination?.id ?? null;
   const { map, info } = useStationMap(stationId);
-  const { arrival, departure } = connectionTimes(a, b);
+  const { arrival, departure, live } = connectionTimes(a, b);
   const route = map ? routeTracks(map, a.arrPlatform, b.depPlatform, profileOf(settings)) : null;
   // A map that can't connect the two platforms falls back to the size estimate (and is a data bug to fix).
   const noPath = Boolean(map && a.arrPlatform && b.depPlatform && !route);
@@ -55,6 +57,7 @@ export function useConnection(a: Leg, b: Leg): { result: ConnectionResult; map: 
     canceledB: b.canceled,
     walkSeconds: route ? route.seconds : null,
     sizeClass: info?.sizeClass ?? (map ? 'large' : 'medium'),
+    timesLive: live,
   });
   return { result, map, stationId, noPath };
 }
@@ -65,20 +68,23 @@ const BAND: Record<ConnectionResult['status'], string> = {
   miss: 'very_late',
   broken: 'very_late',
   unknown: 'unknown',
-  check_signs: 'unknown',
-  probably_ok: 'slight',
+  margin: 'unknown',
 };
 
 export function ConnectionChip({ result }: { result: ConnectionResult }) {
   const { t } = useTranslation();
-  const spare = result.slackSeconds !== null && result.slackSeconds >= 0 && result.status !== 'broken' ? ` · ${t('connection.spare', { min: Math.floor(result.slackSeconds / 60) })}` : '';
+  const spareMin = result.slackSeconds !== null ? Math.floor(result.slackSeconds / 60) : null;
+  // A margin is just the number (brief §7); the others say what they are, then the minutes.
+  if (result.status === 'margin' && spareMin !== null) return <span className={`delay-pill band-${BAND.margin} connection-chip`}>{t('connection.marginSpare', { min: spareMin })}</span>;
+  const spare = spareMin !== null && spareMin >= 0 && result.status !== 'broken' ? ` · ${t('connection.spare', { min: spareMin })}` : '';
   return <span className={`delay-pill band-${BAND[result.status]} connection-chip`}>{t(`connection.status.${result.status}`) + spare}</span>;
 }
 
 /** Map link with everything the Layover Guide needs. */
 export function stationMapHref(stationId: string, a: Leg, b: Leg) {
-  const { arrival, departure } = connectionTimes(a, b);
+  const { arrival, departure, live } = connectionTimes(a, b);
   const q = new URLSearchParams();
+  if (live) q.set('live', '1');
   if (a.arrPlatform) q.set('from', a.arrPlatform);
   if (b.depPlatform) q.set('to', b.depPlatform);
   if (arrival) q.set('arr', String(arrival));
@@ -93,6 +99,7 @@ export function stationMapHref(stationId: string, a: Leg, b: Leg) {
 export function ConnectionCard({ a, b, compact = false }: { a: Leg; b: Leg; compact?: boolean }) {
   const { t } = useTranslation();
   const { result, map, stationId } = useConnection(a, b);
+  const { live } = connectionTimes(a, b);
   const walkMin = result.walkSeconds !== null ? Math.max(1, Math.round(result.walkSeconds / 60)) : null;
   const tracks = a.arrPlatform || b.depPlatform ? t('connection.tracks', { from: a.arrPlatform ?? '?', to: b.depPlatform ?? '?' }) : null;
   return (
@@ -111,6 +118,7 @@ export function ConnectionCard({ a, b, compact = false }: { a: Leg; b: Leg; comp
           <Footprints size={13} /> {t('connection.estimated')}
         </p>
       )}
+      {!live && result.status !== 'broken' && <p className="caption">{t('connection.timetableOnly')}</p>}
       {result.status === 'broken' && <p className="banner error">{t('connection.brokenBanner')}</p>}
       {map && stationId && (
         <Link className="button small" to={stationMapHref(stationId, a, b)}>

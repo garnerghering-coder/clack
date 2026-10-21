@@ -5,8 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { Compass, Plus, Search, Stamp } from 'lucide-react';
-import { api, ms, type Leg, type LegDetail } from '../api';
+import { Compass, Eye, Plus, Search, Stamp } from 'lucide-react';
+import { api, ms, type Follow, type Leg, type LegDetail } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { useSettings } from '../settings';
@@ -190,6 +190,33 @@ function NothingAhead() {
   );
 }
 
+/** Trains you follow on Explore: watched, not travelled, so they sit apart from your trips and never count. */
+function Following({ follows }: { follows: Follow[] }) {
+  const { t } = useTranslation();
+  const { settings } = useSettings();
+  if (!follows.length) return null;
+  return (
+    <section className="following">
+      <h3 className="month-header">{t('trips.following')}</h3>
+      <p className="caption">{t('trips.followingNote')}</p>
+      {follows.map((f) => (
+        <Link key={`${f.trainNumber}|${f.serviceDate}`} to={`/explore?${new URLSearchParams({ train: f.trainNumber })}`} className="leg-row">
+          <span className="poi-badge" aria-hidden="true">
+            <Eye size={16} />
+          </span>
+          <span className="leg-row-main">
+            <span className="leg-row-route">{f.label ?? t('liveMap.train', { number: f.trainNumber })}</span>
+            <span className="leg-row-meta">
+              {[t('liveMap.train', { number: f.trainNumber }), f.train?.next ? t('live.nextStop', { name: f.train.next, time: fmtTime(f.train.nextEta, 'Europe/Stockholm', settings.clock) }) : t('trips.notRunning')].join(' · ')}
+            </span>
+          </span>
+          {f.train && <DelayPill delay={f.train.delayMin} />}
+        </Link>
+      ))}
+    </section>
+  );
+}
+
 /** The leg you change to after this one, if they're one journey and meet at the same station. */
 function nextInJourney(legs: Leg[], leg: Leg): Leg | undefined {
   if (!leg.journeyId) return undefined;
@@ -218,6 +245,10 @@ export function TripsPage() {
   const [legs, setLegs] = useState<Leg[] | null>(null);
   const [error, setError] = useState(false);
   const [tab, setTab] = useState<'upcoming' | 'past'>('upcoming');
+  const [follows, setFollows] = useState<Follow[]>([]);
+  useEffect(() => {
+    api.follows().then(setFollows, () => undefined);
+  }, []);
   const load = useCallback(() => {
     setError(false);
     api.legs().then(setLegs, () => setError(true));
@@ -303,6 +334,7 @@ export function TripsPage() {
           {hero ? <Featured leg={hero} state={heroState} next={heroState === 'active' ? nextInJourney(legs, hero) : undefined} /> : <NothingAhead />}
           {hero && !upcoming.length && <NothingAhead />}
           <div className="list">{upcoming.filter((l) => l !== hero).map((l) => <LegRow key={l.id} leg={l} />)}</div>
+          <Following follows={follows} />
         </>
       )}
       {legs && legs.length > 0 && tab === 'past' && (

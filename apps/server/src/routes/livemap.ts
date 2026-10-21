@@ -1,8 +1,8 @@
 // Live map of all trains (ADDITIONS_01 A): snapshot + viewport-filtered SSE deltas from the shared ingest.
 import type { FastifyPluginAsync } from 'fastify';
-import { inArray } from 'drizzle-orm';
+import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
-import { legs } from '../db/schema.js';
+import { followedTrains, legs } from '../db/schema.js';
 import { LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
 import { searchByNumber } from '../search/timetable.js';
 import { trainStops } from '../livemap/trainStops.js';
@@ -100,6 +100,29 @@ export const liveMapRoutes =
       const stops = trip ? await trainStops(db, trip, t.number) : null;
       if (!stops) return reply.code(404).send({ error: 'train not in the timetable' });
       return { stops };
+    });
+
+    // Followed trains (brief §6.2): watching a train, which is not travelling on it. Kept for its day and the next.
+    const stockholmDate = (ms: number) => new Date(ms).toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+    app.get('/follows', async (req) => {
+      const cutoff = stockholmDate(Date.now() - 86400_000);
+      db.delete(followedTrains).where(and(eq(followedTrains.userId, req.userId), lt(followedTrains.serviceDate, cutoff))).run();
+      const rows = db.select().from(followedTrains).where(eq(followedTrains.userId, req.userId)).all();
+      const onMap = new Map([...ingest.trains.values()].map((t) => [`${t.number}|${t.date}`, t]));
+      return rows.map((r) => ({ trainNumber: r.trainNumber, serviceDate: r.serviceDate, operatorId: r.operatorId, label: r.label, train: onMap.get(`${r.trainNumber}|${r.serviceDate}`) ?? null }));
+    });
+    app.put<{ Body: { trainNumber?: string; serviceDate?: string; operatorId?: string | null; label?: string | null } }>('/follows', async (req, reply) => {
+      const { trainNumber, serviceDate, operatorId = null, label = null } = req.body ?? {};
+      if (!trainNumber || !/^\d{1,6}$/.test(trainNumber) || !serviceDate || !/^\d{4}-\d{2}-\d{2}$/.test(serviceDate)) return reply.code(400).send({ error: 'trainNumber and serviceDate (YYYY-MM-DD) are required' });
+      // Following twice is still one follow.
+      db.insert(followedTrains).values({ userId: req.userId, trainNumber, serviceDate, operatorId, label }).onConflictDoNothing().run();
+      return { following: true };
+    });
+    app.delete<{ Params: { number: string; date: string } }>('/follows/:number/:date', async (req) => {
+      db.delete(followedTrains)
+        .where(and(eq(followedTrains.userId, req.userId), eq(followedTrains.trainNumber, req.params.number), eq(followedTrains.serviceDate, req.params.date)))
+        .run();
+      return { following: false };
     });
 
     app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows }));

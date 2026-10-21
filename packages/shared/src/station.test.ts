@@ -118,10 +118,13 @@ describe('connection status (Layover Guide)', () => {
     expect(connectionStatus({ ...base, departurePlatform: null }).status).toBe('unknown');
     expect(connectionStatus({ ...base, canceledB: true }).status).toBe('broken');
   });
-  it('never green on an estimate (no station map)', () => {
+  it('never green on an estimate (no station map) or on timetable-only times: just the margin', () => {
     const est = { ...base, walkSeconds: null, sizeClass: 'large' as const };
-    expect(connectionStatus(est)).toMatchObject({ status: 'check_signs', estimated: true, walkSeconds: 420 });
-    expect(connectionStatus({ ...est, departure: t(40) }).status).toBe('probably_ok');
+    expect(connectionStatus(est)).toMatchObject({ status: 'margin', estimated: true, walkSeconds: 420 });
+    expect(connectionStatus({ ...est, departure: t(40) }).status).toBe('margin');
+    expect(connectionStatus({ ...est, departure: t(12) }).status).toBe('tight');
     expect(connectionStatus({ ...est, departure: t(5) }).status).toBe('miss');
+    expect(connectionStatus({ ...base, timesLive: false }).status).toBe('margin');
+    expect(connectionStatus({ ...base, departure: t(6), timesLive: false }).status).toBe('tight');
   });
 });

@@ -1,9 +1,10 @@
-// Trip detail (DESIGN §6): the route map on top, then times, the live module while the train runs, tiles, the stop
-// timeline, the activity log and details.
+// Trip detail (DESIGN §6, product brief §7): the route map on top, then a card for the stage you're in (before
+// departure: countdown, platform, status; on the train: the live module; after: how it ended and the Passport), the
+// times, tiles, the stop timeline, the activity log and details.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Radar, RefreshCw, Repeat, Trash2 } from 'lucide-react';
+import { ArrowLeft, Radar, RefreshCw, Repeat, Stamp, Trash2 } from 'lucide-react';
 import { decodePolyline, delayMinutes, type LatLon } from '@clack/shared';
 import { api, ms, type LegDetail, type LegEvent, type LegStop, type LiveState } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
@@ -12,7 +13,8 @@ import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { ActivityLog, LiveChip, LiveModule, eventText } from '../components/Live';
 import { TrainCard } from '../components/TrainCard';
-import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
+import { agoKey, isLive, statusKey, useLiveUpdates, useNow } from '../live';
+import { countdown } from './TripsPage';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 import { opColor } from '../map/style';
 import { Onboard } from '../components/Onboard';
@@ -185,6 +187,9 @@ export function TripDetailPage() {
   const boardStop = leg.stops.find((x) => x.role === 'board');
   const boardEstimate = ms(boardStop?.estimatedDep);
   const tracking = isLive(live) && live !== null;
+  const arrivedBy = ms(leg.actualArr) ?? (tracking ? ms(live.arrivalEta) : null) ?? schedArr ?? 0;
+  const stage: 'before' | 'during' | 'after' =
+    live?.status === 'en_route' || live?.status === 'at_stop' ? 'during' : live?.status === 'arrived' || leg.actualArr || now > arrivedBy ? 'after' : 'before';
   const train =
     tracking && live.lat !== null && live.lon !== null
       ? { lat: live.lat, lon: live.lon, bearing: live.bearing, estimated: live.positionSource !== 'gps' }
@@ -250,6 +255,33 @@ export function TripDetailPage() {
         </h1>
         {schedDep && <p className="muted">{fmtLongDate(schedDep, tz)}</p>}
 
+        {/* What matters now (brief §7): before departure, on the train, or after arrival. */}
+        <section className={`stage-card card stage-${stage}`}>
+          {stage === 'before' && (
+            <>
+              <div className="hero-bottom">
+                <span className="pill">{countdown(t, leg, now)}</span>
+                {leg.depPlatform ? <span className="chip">{t('trips.platform', { platform: leg.depPlatform })}</span> : <span className="caption">{t('detail.platformLater')}</span>}
+                {!leg.canceled && (leg.depDelayMin ?? (tracking ? delayMinutes(schedDep, boardEstimate) : null)) !== null && <DelayPill delay={leg.depDelayMin ?? delayMinutes(schedDep, boardEstimate)} />}
+              </div>
+              {leg.canceled && <p className="banner error">{t('detail.canceledBanner')}</p>}
+              <p className="caption">{live ? t('live.updated', { ago: agoKey(t, ms(live.updatedAt) ?? now, now) }) : t('detail.timetableOnly')}</p>
+            </>
+          )}
+          {stage === 'during' && live && <LiveModule leg={leg} live={live} stops={leg.stops} now={now} />}
+          {stage === 'after' && (
+            <>
+              <p className="strong">
+                {leg.canceled ? t('status.cancelled') : ms(leg.actualArr) ? t('trips.arrivedAt', { time: fmtTime(ms(leg.actualArr), dtz, settings.clock) }) : t('detail.scheduledArrival', { time: fmtTime(schedArr, dtz, settings.clock) })}
+              </p>
+              <p className="caption">{ms(leg.actualArr) ? t('detail.actualTimes') : t('detail.scheduledOnlyNote')}</p>
+              <Link to="/passport" className="link-button">
+                <Stamp size={14} /> {t('detail.seePassport')}
+              </Link>
+            </>
+          )}
+        </section>
+
         <section className="times-row">
           <TimeBlock
             label={t('detail.departure')}
@@ -272,7 +304,6 @@ export function TripDetailPage() {
           />
         </section>
 
-        {tracking && <LiveModule leg={leg} live={live} stops={leg.stops} now={now} />}
 
         <section className="tiles">
           <div className="tile">

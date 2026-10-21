@@ -362,7 +362,12 @@ export const sizeClass = (baseTracks: number): SizeClass => (baseTracks <= 4 ? '
 export const DEBOARD_SECONDS = 60;
 export const BOARD_SECONDS = 30;
 
-export type ConnectionStatus = 'easy' | 'tight' | 'miss' | 'unknown' | 'broken' | 'check_signs' | 'probably_ok';
+/**
+ * easy: mapped walk, live times, ≥ 5 min spare. tight: under 5 min spare. miss: no time left. margin: enough time
+ * on paper, but the walk is an estimate or the times aren't live yet, so it's stated as a margin, not a promise
+ * (product brief §7). broken: a train is cancelled. unknown: not enough to say.
+ */
+export type ConnectionStatus = 'easy' | 'tight' | 'miss' | 'unknown' | 'broken' | 'margin';
 export interface ConnectionInput {
   /** Expected arrival of the first train and departure of the second (best estimate, ms). */
   arrival: number | null;
@@ -375,6 +380,8 @@ export interface ConnectionInput {
   walkSeconds: number | null;
   /** Fallback when walkSeconds is null. */
   sizeClass?: SizeClass | null;
+  /** Both times come from real-time data (actuals or Trafikverket's estimates), not just the timetable. Default true. */
+  timesLive?: boolean;
 }
 export interface ConnectionResult {
   status: ConnectionStatus;
@@ -387,8 +394,8 @@ export interface ConnectionResult {
 
 /**
  * Pure, so a platform change or delay can recompute it instantly (and push notifications can reuse it):
- * slack = layover − walk − deboard − board buffers. Green ≥ 5 min, yellow 0–5, red < 0. Estimated walks are
- * never green: under 15 min of slack it's "check signs" (grey), above it "probably fine" (yellow).
+ * slack = layover − walk − deboard − board buffers. Green ≥ 5 min only with a mapped walk and live times; yellow
+ * 0–5; red < 0. With an estimated walk or timetable-only times it's a neutral "margin" with the minutes.
  */
 export function connectionStatus(c: ConnectionInput): ConnectionResult {
   const layover = c.arrival !== null && c.departure !== null ? Math.round((c.departure - c.arrival) / 1000) : null;
@@ -400,7 +407,8 @@ export function connectionStatus(c: ConnectionInput): ConnectionResult {
   const slack = layover - walk - DEBOARD_SECONDS - BOARD_SECONDS;
   let status: ConnectionStatus;
   if (slack < 0) status = 'miss';
-  else if (estimated) status = slack >= 15 * 60 ? 'probably_ok' : 'check_signs';
-  else status = slack >= 5 * 60 ? 'easy' : 'tight';
+  else if (slack < 5 * 60) status = 'tight';
+  else if (estimated || c.timesLive === false) status = 'margin';
+  else status = 'easy';
   return { status, layoverSeconds: layover, walkSeconds: walk, slackSeconds: slack, estimated };
 }

@@ -41,7 +41,10 @@
     "scheduledTimes": "Scheduled times",
     "inPassport": "In your Passport",
     "findTrain": "Find a train",
-    "exploreTrains": "Explore live trains"
+    "exploreTrains": "Explore live trains",
+    "following": "Following",
+    "followingNote": "Trains you watch on Explore. Following a train doesn’t add it to your trips or Passport.",
+    "notRunning": "Not running right now"
   },
   "add": {
     "title": "Add a train",
@@ -140,7 +143,14 @@
     "deleteConfirm": "Delete this trip?",
     "notFound": "This trip doesn't exist any more.",
     "estimatedRoute": "Estimated route",
-    "mapLabel": "Map of the route from {{from}} to {{to}}"
+    "mapLabel": "Map of the route from {{from}} to {{to}}",
+    "platformLater": "Platform not announced yet",
+    "canceledBanner": "This train is cancelled. Check the operator for replacement buses or other trains.",
+    "timetableOnly": "Timetable only so far: real-time data appears closer to departure.",
+    "scheduledArrival": "Due {{time}} (scheduled)",
+    "actualTimes": "Actual times from Trafikverket.",
+    "scheduledOnlyNote": "No actual times were reported, so these are the scheduled times.",
+    "seePassport": "See your Passport"
   },
   "passport": {
     "title": "Passport",
@@ -300,7 +310,8 @@
     "back": "Back",
     "close": "Close",
     "loading": "Loading…",
-    "offline": "Can't reach the Clack server."
+    "offline": "Can't reach the Clack server.",
+    "done": "Done"
   },
   "map": {
     "unavailable": "The map can't be shown on this device.",
@@ -408,8 +419,6 @@
     "operatorsN_other": "{{count}} operators",
     "onlyDelayed": "Only delayed",
     "onlyMine": "My trains",
-    "trainsLive_one": "{{count}} train live",
-    "trainsLive_other": "{{count}} trains live",
     "delayedData": "Delayed data · {{ago}}",
     "legend": "What the markers mean",
     "legendNote": "Tap a train for its delay and stops. Cancelled trains and freight are not shown. Your own trains have a yellow halo.",
@@ -427,7 +436,30 @@
     "stopsNone": "Stops not available for this train.",
     "passed": "Passed",
     "track": "Track {{track}}",
-    "canceledStop": "Cancelled"
+    "canceledStop": "Cancelled",
+    "searchPlaceholder": "Train number or station",
+    "search": "Search trains and stations",
+    "filters": "Filters",
+    "station": "Station",
+    "noTrainMatch": "No train {{q}} running in Sweden right now.",
+    "noMatch": "Nothing matches “{{q}}”.",
+    "onlyFollowed": "Followed",
+    "clearFilters": "Clear filters",
+    "loading": "Loading trains…",
+    "unavailable": "Live data unavailable · retrying",
+    "noneMatch": "No trains here match the filters",
+    "noneHere": "No trains in this area right now",
+    "simulated_one": "{{count}} train · simulated",
+    "simulated_other": "{{count}} trains · simulated",
+    "trainsRunning_one": "{{count}} train running",
+    "trainsRunning_other": "{{count}} trains running",
+    "posEstimated": "Estimated position (no GPS)",
+    "posOld": "GPS {{min}} min old",
+    "posGps": "GPS position",
+    "following": "Following",
+    "follow": "Follow train",
+    "inYourTrips": "In your trips",
+    "plan": "Plan a journey"
   },
   "onboard": {
     "title": "On board",
@@ -587,7 +619,7 @@
     "walk": "{{min}} min walk",
     "layover": "{{min}} min to change",
     "spare": "{{min}} min to spare",
-    "estimated": "Estimated, no station map",
+    "estimated": "Walk estimated from the station’s size (no station map)",
     "openMap": "Open station map",
     "brokenBanner": "Connection broken: one of the trains is cancelled.",
     "status": {
@@ -596,8 +628,9 @@
       "miss": "Likely to miss",
       "unknown": "Unknown",
       "broken": "Connection broken",
-      "check_signs": "Check signs",
-      "probably_ok": "Probably fine"
-    }
+      "margin": "Margin"
+    },
+    "marginSpare": "{{min}} min margin",
+    "timetableOnly": "Based on the timetable: real-time times for both trains aren’t in yet."
   }
 }

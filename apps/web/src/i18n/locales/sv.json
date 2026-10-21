@@ -41,7 +41,10 @@
     "scheduledTimes": "Tider enligt tidtabell",
     "inPassport": "I ditt pass",
     "findTrain": "Hitta ett tåg",
-    "exploreTrains": "Utforska tåg i trafik"
+    "exploreTrains": "Utforska tåg i trafik",
+    "following": "Följer",
+    "followingNote": "Tåg du följer i Utforska. Att följa ett tåg lägger inte till det i dina resor eller ditt pass.",
+    "notRunning": "Går inte just nu"
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -140,7 +143,14 @@
     "deleteConfirm": "Ta bort den här resan?",
     "notFound": "Den här tågresan finns inte längre.",
     "estimatedRoute": "Uppskattad sträcka",
-    "mapLabel": "Karta över sträckan från {{from}} till {{to}}"
+    "mapLabel": "Karta över sträckan från {{from}} till {{to}}",
+    "platformLater": "Spåret är inte annonserat än",
+    "canceledBanner": "Tåget är inställt. Kolla med operatören om ersättningsbussar eller andra tåg.",
+    "timetableOnly": "Bara tidtabellen hittills: realtid kommer närmare avgång.",
+    "scheduledArrival": "Ankomst {{time}} (enligt tidtabell)",
+    "actualTimes": "Faktiska tider från Trafikverket.",
+    "scheduledOnlyNote": "Inga faktiska tider rapporterades, så det här är tidtabellens tider.",
+    "seePassport": "Se ditt pass"
   },
   "passport": {
     "title": "Pass",
@@ -300,7 +310,8 @@
     "back": "Tillbaka",
     "close": "Stäng",
     "loading": "Läser in…",
-    "offline": "Kan inte nå Clack-servern."
+    "offline": "Kan inte nå Clack-servern.",
+    "done": "Klar"
   },
   "map": {
     "unavailable": "Kartan kan inte visas på den här enheten.",
@@ -408,8 +419,6 @@
     "operatorsN_other": "{{count}} tågbolag",
     "onlyDelayed": "Bara försenade",
     "onlyMine": "Mina tåg",
-    "trainsLive_one": "{{count}} tåg live",
-    "trainsLive_other": "{{count}} tåg live",
     "delayedData": "Fördröjd data · {{ago}}",
     "legend": "Vad markörerna betyder",
     "legendNote": "Tryck på ett tåg för förseningar och stationer. Inställda tåg och godståg visas inte. Dina egna tåg har ett gult sken.",
@@ -427,7 +436,30 @@
     "stopsNone": "Stationerna finns inte för det här tåget.",
     "passed": "Passerad",
     "track": "Spår {{track}}",
-    "canceledStop": "Inställt"
+    "canceledStop": "Inställt",
+    "searchPlaceholder": "Tågnummer eller station",
+    "search": "Sök tåg och stationer",
+    "filters": "Filter",
+    "station": "Station",
+    "noTrainMatch": "Inget tåg {{q}} går i Sverige just nu.",
+    "noMatch": "Inget matchar ”{{q}}”.",
+    "onlyFollowed": "Följda",
+    "clearFilters": "Rensa filter",
+    "loading": "Hämtar tåg…",
+    "unavailable": "Livedata saknas · försöker igen",
+    "noneMatch": "Inga tåg här matchar filtren",
+    "noneHere": "Inga tåg i området just nu",
+    "simulated_one": "{{count}} tåg · simulerat",
+    "simulated_other": "{{count}} tåg · simulerat",
+    "trainsRunning_one": "{{count}} tåg i trafik",
+    "trainsRunning_other": "{{count}} tåg i trafik",
+    "posEstimated": "Uppskattad position (ingen GPS)",
+    "posOld": "GPS {{min}} min gammal",
+    "posGps": "GPS-position",
+    "following": "Följer",
+    "follow": "Följ tåget",
+    "inYourTrips": "I dina resor",
+    "plan": "Planera en resa"
   },
   "onboard": {
     "title": "Ombord",
@@ -587,7 +619,7 @@
     "walk": "{{min}} min promenad",
     "layover": "{{min}} min bytestid",
     "spare": "{{min}} min marginal",
-    "estimated": "Uppskattat, ingen stationskarta",
+    "estimated": "Gångtid uppskattad efter stationens storlek (ingen stationskarta)",
     "openMap": "Öppna stationskartan",
     "brokenBanner": "Bytet går inte: ett av tågen är inställt.",
     "status": {
@@ -596,8 +628,9 @@
       "miss": "Hinner troligen inte",
       "unknown": "Okänt",
       "broken": "Bytet går inte",
-      "check_signs": "Följ skyltarna",
-      "probably_ok": "Bör gå bra"
-    }
+      "margin": "Marginal"
+    },
+    "marginSpare": "{{min}} min marginal",
+    "timetableOnly": "Enligt tidtabellen: realtid för båda tågen finns inte än."
   }
 }
