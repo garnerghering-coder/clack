@@ -15,7 +15,7 @@ import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
-import { baseStyle, lighten, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
+import { baseStyle, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
 import { loadMaplibre, mapStatus } from '../map/RouteMap';
 import { currentTheme, useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -85,56 +85,57 @@ export function nearestOnLine(line: LatLon[], p: LatLon, from = 0): { index: num
   return { index: best.index, point: best.point };
 }
 
-/** Mixes a hex colour toward black. */
-function darken(hex: string, amount: number): string {
-  const n = parseInt(hex.replace('#', ''), 16);
-  const ch = (shift: number) => Math.round(((n >> shift) & 0xff) * (1 - amount)).toString(16).padStart(2, '0');
-  return `#${ch(16)}${ch(8)}${ch(0)}`;
-}
-
-/** A train: the operator colour as a lit gradient bead with a soft glow, like the trip pills (not a flat dot). */
-function trainDotImage(color: string, light: boolean): ImageData {
+/**
+ * A train, in Apple Maps' language (owner feedback 2026-10-21: "Apple, not Android"): a flat disc in the operator
+ * colour with a white ring and a soft shadow, no gloss. With a known heading it carries the translucent heading
+ * cone Apple uses for your own location, pointing up here and rotated to the bearing on the map. The disc's centre is
+ * the image centre, so the train stays on the line whichever way it points. 96 px at pixel ratio 2.
+ */
+function trainMarkerImage(color: string, heading: boolean): ImageData {
   const c = document.createElement('canvas');
-  c.width = c.height = 40;
+  c.width = c.height = 96;
   const g = c.getContext('2d')!;
-  g.shadowColor = `${color}99`;
+  if (heading) {
+    const cone = g.createRadialGradient(48, 48, 10, 48, 48, 46);
+    cone.addColorStop(0, `${color}80`);
+    cone.addColorStop(1, `${color}00`);
+    g.fillStyle = cone;
+    g.beginPath();
+    g.moveTo(48, 48);
+    g.arc(48, 48, 46, -Math.PI / 2 - 0.55, -Math.PI / 2 + 0.55);
+    g.closePath();
+    g.fill();
+  }
+  g.shadowColor = 'rgba(0, 0, 0, 0.35)';
   g.shadowBlur = 6;
-  const grad = g.createRadialGradient(16, 15, 1, 20, 20, 13);
-  grad.addColorStop(0, lighten(color, 0.55));
-  grad.addColorStop(0.55, color);
-  grad.addColorStop(1, darken(color, 0.28));
-  g.fillStyle = grad;
+  g.shadowOffsetY = 1.5;
   g.beginPath();
-  g.arc(20, 20, 12.5, 0, Math.PI * 2);
+  g.arc(48, 48, 15.5, 0, Math.PI * 2);
+  g.fillStyle = '#ffffff';
   g.fill();
-  g.shadowBlur = 0;
-  g.lineWidth = 2;
-  g.strokeStyle = light ? 'rgba(255,255,255,0.95)' : 'rgba(10,10,10,0.75)';
-  g.stroke();
-  return g.getImageData(0, 0, 40, 40);
+  g.shadowColor = 'transparent';
+  g.beginPath();
+  g.arc(48, 48, 12, 0, Math.PI * 2);
+  g.fillStyle = color;
+  g.fill();
+  return g.getImageData(0, 0, 96, 96);
 }
 
-/** Several trains: a glass bubble with a signal-yellow gradient ring (the count is drawn on top). */
+/** Several trains: a flat material circle with a hairline white edge and a soft shadow (the count is drawn on top). */
 function clusterImage(light: boolean): ImageData {
   const c = document.createElement('canvas');
   c.width = c.height = 76;
   const g = c.getContext('2d')!;
-  g.shadowColor = 'rgba(248,214,74,0.45)';
-  g.shadowBlur = 10;
-  const fill = g.createRadialGradient(30, 28, 2, 38, 38, 30);
-  fill.addColorStop(0, light ? '#ffffff' : '#333333');
-  fill.addColorStop(1, light ? '#ececec' : '#121212');
-  g.fillStyle = fill;
+  g.shadowColor = 'rgba(0, 0, 0, 0.3)';
+  g.shadowBlur = 8;
+  g.shadowOffsetY = 2;
   g.beginPath();
-  g.arc(38, 38, 28, 0, Math.PI * 2);
+  g.arc(38, 38, 27, 0, Math.PI * 2);
+  g.fillStyle = light ? 'rgba(255, 255, 255, 0.96)' : 'rgba(44, 44, 46, 0.94)';
   g.fill();
-  g.shadowBlur = 0;
-  const ring = g.createLinearGradient(10, 10, 66, 66);
-  ring.addColorStop(0, '#fff0a0');
-  ring.addColorStop(0.5, '#f8d64a');
-  ring.addColorStop(1, '#c8920c');
-  g.lineWidth = 4;
-  g.strokeStyle = ring;
+  g.shadowColor = 'transparent';
+  g.lineWidth = 2;
+  g.strokeStyle = light ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.55)';
   g.stroke();
   return g.getImageData(0, 0, 76, 76);
 }
@@ -154,19 +155,6 @@ function stationImage(fill: string, line: string): ImageData {
   return g.getImageData(0, 0, 20, 20);
 }
 
-function headingImage(): ImageData {
-  const c = document.createElement('canvas');
-  c.width = c.height = 32;
-  const g = c.getContext('2d')!;
-  g.fillStyle = '#ffffff';
-  g.beginPath();
-  g.moveTo(16, 1);
-  g.lineTo(21, 9);
-  g.lineTo(11, 9);
-  g.closePath();
-  g.fill();
-  return g.getImageData(0, 0, 32, 32);
-}
 
 function LiveMap() {
   const { t } = useTranslation();
@@ -322,7 +310,6 @@ function LiveMap() {
       const light = currentTheme() === 'light';
       const C = mapColors();
       m.on('load', () => {
-        m.addImage('heading', headingImage(), { pixelRatio: 2 });
         m.addSource('rail-network', { type: 'geojson', data: RAIL_NETWORK_URL() });
         for (const layer of railNetworkLayers()) m.addLayer(layer);
         // Stations you can tap: the big ones from region zoom, every station closer in, under the trains.
@@ -354,7 +341,9 @@ function LiveMap() {
         // Gradient markers (owner feedback 2026-10-21: one identity with the trip pills, no flat solid circles).
         m.addImage('cluster', clusterImage(light), { pixelRatio: 2 });
         m.on('styleimagemissing', (e: { id: string }) => {
-          if (e.id.startsWith('tdot-') && !m.hasImage(e.id)) m.addImage(e.id, trainDotImage(e.id.slice(5), light), { pixelRatio: 2 });
+          if (m.hasImage(e.id)) return;
+          if (e.id.startsWith('tdot-')) m.addImage(e.id, trainMarkerImage(e.id.slice(5), false), { pixelRatio: 2 });
+          if (e.id.startsWith('tpuck-')) m.addImage(e.id, trainMarkerImage(e.id.slice(6), true), { pixelRatio: 2 });
         });
         m.addLayer({
           id: 'clusters',
@@ -368,10 +357,10 @@ function LiveMap() {
             'icon-ignore-placement': true,
             'text-field': ['get', 'point_count_abbreviated'],
             'text-font': ['Noto Sans Medium'],
-            'text-size': ['step', ['get', 'point_count'], 11, 10, 12, 50, 14],
+            'text-size': ['step', ['get', 'point_count'], 12, 10, 13, 50, 15],
             'text-allow-overlap': true,
           },
-          paint: { 'text-color': light ? '#0a0a0a' : '#f8d64a' },
+          paint: { 'text-color': light ? '#0a0a0a' : '#ffffff' },
         });
         const single: ['!', ['has', string]] = ['!', ['has', 'point_count']];
         // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
@@ -385,8 +374,18 @@ function LiveMap() {
           // No rings or fading (owner feedback 2026-10-21): delay and GPS / estimate are in the train's sheet.
           // Your own trains are a little bigger and drawn on top.
           layout: {
-            'icon-image': ['concat', 'tdot-', ['get', 'color']],
-            'icon-size': ['case', ['==', ['get', 'mine'], true], 1.25, 1],
+            // With a heading cone (rotated to the bearing) when the direction is known, a plain disc when it isn't.
+            'icon-image': ['case', ['==', ['get', 'hasBearing'], true], ['concat', 'tpuck-', ['get', 'color']], ['concat', 'tdot-', ['get', 'color']]],
+            'icon-rotate': ['get', 'bearing'],
+            'icon-rotation-alignment': 'map',
+            'icon-pitch-alignment': 'map',
+            // The disc is 15.5 px at size 1; it grows a little as you zoom in, and your own trains a bit more.
+            'icon-size': [
+              'interpolate', ['linear'], ['zoom'],
+              5, ['case', ['==', ['get', 'mine'], true], 0.72, 0.6],
+              9, ['case', ['==', ['get', 'mine'], true], 0.9, 0.78],
+              13, ['case', ['==', ['get', 'mine'], true], 1.1, 0.95],
+            ],
             'icon-allow-overlap': true,
             'icon-ignore-placement': true,
             'symbol-sort-key': ['case', ['==', ['get', 'mine'], true], 1, 0],
@@ -397,14 +396,6 @@ function LiveMap() {
           { id: 'train-selected', type: 'circle', source: 'trains', filter: ['==', ['get', 'id'], ''], paint: { 'circle-radius': 11, 'circle-color': ['get', 'color'], 'circle-opacity': 0.35, 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 2 } },
           'train-dot',
         );
-        m.addLayer({
-          id: 'train-heading',
-          type: 'symbol',
-          source: 'trains',
-          minzoom: 7,
-          filter: ['all', single, ['==', ['get', 'hasBearing'], true]],
-          layout: { 'icon-image': 'heading', 'icon-rotate': ['get', 'bearing'], 'icon-rotation-alignment': 'map', 'icon-allow-overlap': true, 'icon-ignore-placement': true, 'icon-size': 0.9 },
-        });
         m.addLayer({
           id: 'train-label',
           type: 'symbol',

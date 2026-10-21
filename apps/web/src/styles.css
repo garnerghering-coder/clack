@@ -910,11 +910,10 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
     radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--op, var(--accent)) 7%, transparent), transparent 60%),
     linear-gradient(160deg, var(--surface-raised), var(--surface) 55%);
 }
-.live-train-sheet {
-  background:
-    radial-gradient(110% 60% at 100% 0%, color-mix(in srgb, var(--op, var(--accent)) 22%, transparent), transparent 62%),
-    linear-gradient(160deg, var(--surface-raised), var(--surface) 55%);
-}
+/* Explore's sheets are iOS-style material: frosted, neutral, with a grabber (owner feedback: "Apple, not Android"). */
+.live-sheet, .live-train-sheet { background: var(--glass); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-color: var(--hairline); }
+.live-sheet::before { content: ''; display: block; width: 36px; height: 5px; border-radius: 3px; background: var(--text-3); opacity: 0.6; margin: -6px auto 2px; }
+.live-train-sheet::before { flex: none; }
 .live-sheet-actions { background: transparent; }
 .station-map-bottom.card { background: var(--glass-strong); }
 /* Flip cards that take the colour of their delay band (stop lists). */
