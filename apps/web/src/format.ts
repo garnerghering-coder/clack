@@ -1,5 +1,9 @@
 // Display formatting. Times are shown in the station's own time zone (SPEC §7).
 import type { Settings } from '@clack/shared';
+import i18n from './i18n';
+
+/** Dates and numbers in the app's language: "tis 21 okt" in Swedish, "Tue 21 Oct" in English. */
+export const locale = () => (i18n.language === 'sv' ? 'sv-SE' : 'en-GB');
 
 export function fmtTime(ms: number | null | undefined, tz: string, clock: Settings['clock']): string {
   if (ms === null || ms === undefined) return '--:--';
@@ -10,15 +14,15 @@ export function fmtTime(ms: number | null | undefined, tz: string, clock: Settin
 /** "Fri 17 Oct" (adds the year when it isn't the current one). */
 export function fmtDay(ms: number, tz: string, now = Date.now()): string {
   const sameYear = new Intl.DateTimeFormat('en-GB', { timeZone: tz, year: 'numeric' }).format(ms) === new Intl.DateTimeFormat('en-GB', { timeZone: tz, year: 'numeric' }).format(now);
-  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short', ...(sameYear ? {} : { year: 'numeric' }) }).format(ms).replace(',', '');
+  return new Intl.DateTimeFormat(locale(), { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short', ...(sameYear ? {} : { year: 'numeric' }) }).format(ms).replace(',', '');
 }
 
 export function fmtLongDate(ms: number, tz: string): string {
-  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(ms).replace(',', '');
+  return new Intl.DateTimeFormat(locale(), { timeZone: tz, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(ms).replace(',', '');
 }
 
 export function fmtMonth(ms: number, tz: string): string {
-  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, month: 'long', year: 'numeric' }).format(ms);
+  return new Intl.DateTimeFormat(locale(), { timeZone: tz, month: 'long', year: 'numeric' }).format(ms);
 }
 
 /** Local calendar date (YYYY-MM-DD) of an instant in a time zone. */
@@ -41,7 +45,7 @@ export function fmtDuration(minutes: number): string {
 export function fmtDistance(meters: number | null | undefined, unit: Settings['distanceUnit']): string {
   if (meters === null || meters === undefined) return '—';
   const v = unit === 'mi' ? meters / 1609.344 : meters / 1000;
-  return `${Math.round(v).toLocaleString('en-GB')} ${unit}`;
+  return `${Math.round(v).toLocaleString(locale())} ${unit}`;
 }
 
 export function fmtDelay(min: number | null | undefined): string {

@@ -18,7 +18,7 @@ export type LegStatus = (typeof LEG_STATUSES)[number];
 export const CO2_COMPARISONS = ['flight', 'car_1', 'car_2', 'car_3', 'car_avg', 'ev_1', 'coach'] as const;
 export type Co2Comparison = (typeof CO2_COMPARISONS)[number];
 
-export const LANGUAGES = ['en'] as const;
+export const LANGUAGES = ['en', 'sv'] as const;
 export type Language = (typeof LANGUAGES)[number];
 
 export interface Settings {

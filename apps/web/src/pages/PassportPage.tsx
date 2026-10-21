@@ -10,7 +10,7 @@ import { Flag } from '../components/Flag';
 import { LegRow } from './TripsPage';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
-import { fmtDistance, fmtDuration, fmtTime } from '../format';
+import { fmtDistance, fmtDuration, fmtTime, locale } from '../format';
 
 function Bars({
   rows,
@@ -122,7 +122,7 @@ export function PassportPage() {
     data.flavor.topRoute ? t('passport.flavor.route', { route: data.flavor.topRoute.route, count: data.flavor.topRoute.count }) : null,
     data.flavor.busiestMonth
       ? t('passport.flavor.month', {
-          month: new Date(`${data.flavor.busiestMonth.month}-15`).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }),
+          month: new Date(`${data.flavor.busiestMonth.month}-15`).toLocaleDateString(locale(), { month: 'long', year: 'numeric' }),
           count: data.flavor.busiestMonth.count,
         })
       : null,
@@ -168,7 +168,7 @@ export function PassportPage() {
           <section className="passport-hero">
             <span className="caption upper">{year ? t('passport.yearPassport', { year }) : t('passport.allTimePassport')}</span>
             <span className="passport-distance tabular">
-              {Math.round(unit === 'mi' ? km / 1.609344 : km).toLocaleString('en-GB')}
+              {Math.round(unit === 'mi' ? km / 1.609344 : km).toLocaleString(locale())}
               <small> {unit}</small>
             </span>
             {flavors.length > 0 && (
@@ -363,7 +363,7 @@ export function PassportPage() {
           <section className="card co2-card">
             <h2 className="section-header">{t('passport.co2')}</h2>
             <span className="passport-big tabular">
-              {Math.round(data.co2.savedKg).toLocaleString('en-GB')} <small>kg</small>
+              {Math.round(data.co2.savedKg).toLocaleString(locale())} <small>kg</small>
             </span>
             <span className="caption">{t('passport.co2Saved', { mode: t(`passport.co2Modes.${data.co2.comparison}`) })}</span>
             <div className="chip-row">
@@ -376,7 +376,7 @@ export function PassportPage() {
             <p className="caption">
               {t('passport.co2Detail', {
                 train: data.co2.trainKg < 10 ? data.co2.trainKg.toFixed(1) : Math.round(data.co2.trainKg),
-                other: Math.round(data.co2.comparisonKg).toLocaleString('en-GB'),
+                other: Math.round(data.co2.comparisonKg).toLocaleString(locale()),
                 mode: t(`passport.co2Modes.${data.co2.comparison}`),
               })}{' '}
               <Link to="/about" className="accent-text">
