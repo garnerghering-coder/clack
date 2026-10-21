@@ -1,18 +1,25 @@
-// Trips home (DESIGN §4): Upcoming | Past, a hero card for the next leg, rows grouped by month for the past.
+// Trips home (DESIGN §4, product brief §5): Upcoming | Past. Upcoming leads with one featured card (route map on
+// top, the journey under it) for the train you're on, else the next one; the rest are compact rows. Past is grouped
+// by month.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus, Radar, Search } from 'lucide-react';
-import { api, ms, type Leg } from '../api';
+import { decodePolyline, type LatLon } from '@clack/shared';
+import { Compass, Plus, Search, Stamp } from 'lucide-react';
+import { api, ms, type Leg, type LegDetail } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { useSettings } from '../settings';
 import { LiveChip, LiveModule } from '../components/Live';
 import { JourneyCard } from '../components/Journey';
 import { isLive, useLiveUpdates, useNow } from '../live';
-import { dayOffset, fmtDay, fmtDistance, fmtMonth, fmtTime } from '../format';
+import { isActive } from '../landing';
+import { dayOffset, fmtDay, fmtDistance, fmtDuration, fmtMonth, fmtTime } from '../format';
 import { opColor } from '../map/style';
 import { ConnectionChip, useConnection } from '../components/Connection';
+import { RouteMap, type MapStop } from '../map/RouteMap';
+import { SettingsLink } from '../components/AppShell';
+import { isFresh } from '../live';
 
 const tzOf = (leg: Leg) => leg.origin?.tz ?? 'Europe/Stockholm';
 // A late train that is still running counts as upcoming until it actually arrives.
@@ -56,7 +63,11 @@ export function LegRow({ leg }: { leg: Leg }) {
           {leg.origin?.name} → {leg.destination?.name}
         </span>
         <span className="leg-row-meta">
-          {[[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ') || null, dep ? fmtDay(dep, tzOf(leg)) : null].filter(Boolean).join(' · ')} · <Times leg={leg} />
+          {dep ? fmtDay(dep, tzOf(leg)) : null} · <Times leg={leg} />
+          {dep && ms(leg.schedArr) ? ` · ${fmtDuration(((ms(leg.schedArr) ?? 0) - dep) / 60_000)}` : ''}
+        </span>
+        <span className="leg-row-meta">
+          {[[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ') || null, leg.depPlatform && leg.status === 'planned' ? t('trips.platform', { platform: leg.depPlatform }) : null].filter(Boolean).join(' · ')}
         </span>
       </span>
       <span className="leg-row-side">
@@ -67,59 +78,115 @@ export function LegRow({ leg }: { leg: Leg }) {
   );
 }
 
-/** The list API has no stop list; names for the live module come from the hero's own fetch of the leg. */
-const stopNames = new Map<string, { stationId: string; name: string; tz: string }[]>();
-const heroStops = (leg: Leg) => stopNames.get(leg.id) ?? [];
+/** The featured card's full leg (stops for the live module, geometry for the map), fetched once per leg. */
+const details = new Map<string, LegDetail>();
 
-function Hero({ leg, next }: { leg?: Leg; next?: Leg }) {
+/** How long after arriving a trip stays featured (as "arrived", with its Passport link) when nothing is ahead. */
+const RECENT_ARRIVAL_MS = 6 * 3600_000;
+
+/** The featured journey (brief §5.2): one tappable card, route map on top, the journey under it. */
+function Featured({ leg, next, state }: { leg: Leg; next?: Leg; state: 'upcoming' | 'active' | 'arrived' }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
-  const now = useNow(leg && isLive(leg.live) ? 1000 : 30_000);
-  if (!leg)
-    return (
-      <section className="hero hero-empty">
-        <svg className="dotted-line" viewBox="0 0 300 60" aria-hidden="true">
-          <path d="M10 45 C 80 5, 200 70, 290 15" />
-          <circle cx="10" cy="45" r="5" />
-          <circle cx="290" cy="15" r="5" />
-        </svg>
-        <h2>{t('trips.whereNext')}</h2>
-        <p>{t('trips.whereNextBody')}</p>
-        <Link to="/add" className="button primary">
-          <Plus size={18} /> {t('nav.addTrain')}
-        </Link>
-      </section>
-    );
+  const now = useNow(state === 'active' ? 1000 : 30_000);
+  const [detail, setDetail] = useState<LegDetail | undefined>(details.get(leg.id));
+  useEffect(() => {
+    if (details.has(leg.id)) return setDetail(details.get(leg.id));
+    let live = true;
+    api.leg(leg.id).then((d) => {
+      details.set(leg.id, d);
+      if (live) setDetail(d);
+    }, () => undefined);
+    return () => {
+      live = false;
+    };
+  }, [leg.id]);
   const color = opColor(leg.operator?.brandColor);
+  const geo = useMemo(() => {
+    if (!detail) return null;
+    const ridden = detail.stops.filter((x) => x.role === 'board' || x.role === 'through' || x.role === 'alight');
+    const route: LatLon[] = detail.geometry ? decodePolyline(detail.geometry) : ridden.map((x) => [x.lat, x.lon]);
+    const ends: MapStop[] = ridden.filter((x) => x.role !== 'through').map((x) => ({ lat: x.lat, lon: x.lon, name: x.name, kind: 'end' }));
+    return { route, stops: ends };
+  }, [detail]);
+  const live = leg.live;
+  // Only a fresh position draws the train, and only then is the route split into travelled and ahead (brief §5.2).
+  const grounded = state === 'active' && live && isFresh(live, now) && live.lat !== null && live.lon !== null && live.positionSource !== null;
+  const train = grounded ? { lat: live!.lat!, lon: live!.lon!, bearing: live!.bearing, estimated: live!.positionSource === 'estimated' } : null;
+  const service = [leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ');
   return (
-    <Link to={`/trips/${leg.id}`} className="hero" style={{ ['--op' as string]: color }}>
-      <div className="hero-top">
-        <OperatorBadge operator={leg.operator} size={30} />
-        <span className="hero-number">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</span>
-        {leg.category && <span className="chip">{t(`products.${leg.category}`)}</span>}
+    <Link to={`/trips/${leg.id}`} className={`featured ${state}`} style={{ ['--op' as string]: color }} aria-label={t('trips.viewJourney', { from: leg.origin?.name, to: leg.destination?.name })}>
+      <div className="featured-map" aria-hidden="true">
+        {geo && geo.route.length > 1 ? (
+          <RouteMap color={color} route={geo.route} stops={geo.stops} interactive={false} controls={false} train={train} progress={grounded ? live!.progress : null} />
+        ) : (
+          <div className="featured-map-empty" />
+        )}
+        <span className="featured-map-tag caption">
+          {state === 'upcoming' ? t('trips.routePreview') : state === 'arrived' ? t('trips.routeSummary') : grounded ? (train!.estimated ? t('live.estimatedPosition') : t('live.livePosition')) : t('trips.noPositionShort')}
+        </span>
       </div>
-      <h2 className="hero-route">
-        {leg.origin?.name} → {leg.destination?.name}
-      </h2>
-      <div className="hero-times tabular">
-        {fmtTime(ms(leg.schedDep), tzOf(leg), settings.clock)} → {fmtTime(ms(leg.schedArr), leg.destination?.tz ?? tzOf(leg), settings.clock)}
-      </div>
-      {leg.live && isLive(leg.live) && leg.live.status !== 'boarding' ? (
-        <>
-          <div className="hero-bottom">
-            <LiveChip live={leg.live} now={now} />
-            <DelayPill delay={leg.live.arrivalDelayMin} canceled={leg.canceled} />
-          </div>
-          {next ? <HeroConnection a={leg} b={next} /> : <LiveModule leg={leg} live={leg.live} stops={heroStops(leg)} now={now} compact />}
-        </>
-      ) : (
-        <div className="hero-bottom">
-          <span className="pill">{countdown(t, leg, now)}</span>
-          {leg.depPlatform && <span className="chip">{t('trips.platform', { platform: leg.depPlatform })}</span>}
-          {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
+      <div className="featured-body">
+        <div className="hero-top">
+          <OperatorBadge operator={leg.operator} size={28} />
+          <span className="hero-number">{service || t('trips.train')}</span>
+          {state === 'upcoming' && <span className="chip">{t('trips.planned')}</span>}
+          {state === 'arrived' && <span className="chip">{t('trips.arrived')}</span>}
+          {state === 'active' && live && <LiveChip live={live} now={now} />}
         </div>
-      )}
+        <h2 className="hero-route">
+          {leg.origin?.name} → {leg.destination?.name}
+        </h2>
+        <div className="hero-times tabular">
+          <Times leg={leg} />
+        </div>
+        {state === 'active' && live ? (
+          <>
+            <div className="hero-bottom">
+              <DelayPill delay={live.arrivalDelayMin} canceled={leg.canceled} />
+            </div>
+            {next ? <HeroConnection a={leg} b={next} /> : <LiveModule leg={leg} live={live} stops={detail?.stops ?? []} now={now} compact />}
+          </>
+        ) : state === 'arrived' ? (
+          <div className="hero-bottom">
+            <span className="caption">{leg.actualArr ? t('trips.arrivedAt', { time: fmtTime(ms(leg.actualArr), leg.destination?.tz ?? tzOf(leg), settings.clock) }) : t('trips.scheduledTimes')}</span>
+            <span className="featured-link caption">
+              <Stamp size={14} /> {t('trips.inPassport')}
+            </span>
+          </div>
+        ) : (
+          <div className="hero-bottom">
+            <span className="pill">{countdown(t, leg, now)}</span>
+            {leg.depPlatform && <span className="chip">{t('trips.platform', { platform: leg.depPlatform })}</span>}
+            {leg.depDelayMin !== null && <DelayPill delay={leg.depDelayMin} canceled={leg.canceled} />}
+          </div>
+        )}
+      </div>
     </Link>
+  );
+}
+
+/** Nothing featured: say so, and offer the two ways on. */
+function NothingAhead() {
+  const { t } = useTranslation();
+  return (
+    <section className="hero hero-empty">
+      <svg className="dotted-line" viewBox="0 0 300 60" aria-hidden="true">
+        <path d="M10 45 C 80 5, 200 70, 290 15" />
+        <circle cx="10" cy="45" r="5" />
+        <circle cx="290" cy="15" r="5" />
+      </svg>
+      <h2>{t('trips.whereNext')}</h2>
+      <p>{t('trips.whereNextBody')}</p>
+      <div className="empty-actions">
+        <Link to="/add" className="button primary">
+          <Plus size={18} /> {t('trips.findTrain')}
+        </Link>
+        <Link to="/explore" className="button">
+          <Compass size={18} /> {t('trips.exploreTrains')}
+        </Link>
+      </div>
+    </section>
   );
 }
 
@@ -158,21 +225,14 @@ export function TripsPage() {
   useEffect(load, [load]);
   // Live ticks: merge the new live state into the list, so the hero's progress moves without a reload.
   useLiveUpdates((u) => setLegs((ls) => ls && ls.map((l) => (l.id === u.legId ? { ...l, live: u.live } : l))));
-  const liveId = legs?.find((l) => isLive(l.live))?.id;
-  const [, setNamesReady] = useState(0);
-  useEffect(() => {
-    if (!liveId || stopNames.has(liveId)) return;
-    api.leg(liveId).then((d) => {
-      stopNames.set(liveId, d.stops);
-      setNamesReady((n) => n + 1);
-    });
-  }, [liveId]);
-
   const now = Date.now();
   const upcoming = useMemo(() => (legs ?? []).filter((l) => arrivalOf(l) > now).sort((a, b) => (ms(a.schedDep) ?? 0) - (ms(b.schedDep) ?? 0)), [legs, now]);
   const past = useMemo(() => (legs ?? []).filter((l) => arrivalOf(l) <= now).sort((a, b) => (ms(b.schedDep) ?? 0) - (ms(a.schedDep) ?? 0)), [legs, now]);
-  // The hero is the train you're on right now, else the next one.
-  const hero = upcoming.find((l) => isLive(l.live)) ?? upcoming[0];
+  // Featured (brief §5.2): the train you're on, else the next departure, else one that arrived in the last hours.
+  const active = upcoming.find((l) => isActive(l, now));
+  const recent = past.find((l) => !l.canceled && now - arrivalOf(l) < RECENT_ARRIVAL_MS);
+  const hero = active ?? upcoming[0] ?? recent;
+  const heroState: 'upcoming' | 'active' | 'arrived' = hero === active && active ? 'active' : hero && hero === recent && !upcoming.includes(hero) ? 'arrived' : 'upcoming';
   const months = useMemo(() => {
     // Legs of one journey are shown together in a journey card, in travel order (DESIGN §4).
     const byJourney = new Map<string, Leg[]>();
@@ -196,15 +256,13 @@ export function TripsPage() {
       <header className="page-header">
         <h1>{t('trips.title')}</h1>
         <span className="header-actions">
-          <Link to="/live" className="icon-button" aria-label={t('nav.live')} title={t('nav.live')}>
-            <Radar size={20} />
-          </Link>
           <Link to="/stations" className="icon-button" aria-label={t('nav.stations')} title={t('nav.stations')}>
             <Search size={20} />
           </Link>
-          <Link to="/add" className="icon-button" aria-label={t('nav.addTrain')}>
+          <Link to="/add" className="icon-button" aria-label={t('nav.addTrain')} title={t('nav.addTrain')}>
             <Plus size={22} />
           </Link>
+          <SettingsLink />
         </span>
       </header>
       <div className="segmented" role="tablist">
@@ -230,14 +288,20 @@ export function TripsPage() {
           </svg>
           <h2>{t('trips.emptyTitle')}</h2>
           <p>{t('trips.emptyBody')}</p>
-          <Link to="/add" className="button primary">
-            <Plus size={18} /> {t('nav.addTrain')}
-          </Link>
+          <div className="empty-actions">
+            <Link to="/add" className="button primary">
+              <Plus size={18} /> {t('trips.findTrain')}
+            </Link>
+            <Link to="/explore" className="button">
+              <Compass size={18} /> {t('trips.exploreTrains')}
+            </Link>
+          </div>
         </section>
       )}
       {legs && legs.length > 0 && tab === 'upcoming' && (
         <>
-          <Hero leg={hero} next={hero ? nextInJourney(legs, hero) : undefined} />
+          {hero ? <Featured leg={hero} state={heroState} next={heroState === 'active' ? nextInJourney(legs, hero) : undefined} /> : <NothingAhead />}
+          {hero && !upcoming.length && <NothingAhead />}
           <div className="list">{upcoming.filter((l) => l !== hero).map((l) => <LegRow key={l.id} leg={l} />)}</div>
         </>
       )}
@@ -252,9 +316,6 @@ export function TripsPage() {
           ))}
         </div>
       )}
-      <Link to="/add" className="fab" aria-label={t('nav.addTrain')}>
-        <Plus size={26} />
-      </Link>
     </main>
   );
 }

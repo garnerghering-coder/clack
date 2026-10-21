@@ -88,7 +88,7 @@ function RowSheet({ row, type, station, onClose }: { row: BoardRow; type: BoardT
         )}
         <div className="sheet-actions row-actions">
           {!row.done && !row.canceled && (
-            <button className="button" onClick={() => navigate(`/live?train=${encodeURIComponent(row.trainNumber)}`)}>
+            <button className="button" onClick={() => navigate(`/explore?train=${encodeURIComponent(row.trainNumber)}`)}>
               {t('liveMap.showOnMap')}
             </button>
           )}

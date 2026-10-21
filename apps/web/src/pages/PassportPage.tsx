@@ -1,5 +1,6 @@
 // Passport (DESIGN §8): everything you've ridden, by year and with or without commuter trains.
 import { useEffect, useMemo, useState } from 'react';
+import { SettingsLink } from '../components/AppShell';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_COMPARISONS, type Co2Comparison } from '@clack/shared';
@@ -137,6 +138,9 @@ export function PassportPage() {
     <main className="page passport">
       <header className="page-header">
         <h1>{t('passport.title')}</h1>
+        <span className="header-actions">
+          <SettingsLink />
+        </span>
       </header>
 
       <div className="passport-controls">

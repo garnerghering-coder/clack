@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
 import { Splash } from './components/Brand';
 import { TripsPage } from './pages/TripsPage';
@@ -14,6 +14,12 @@ import { StationMapPage } from './pages/StationMapPage';
 import { TripDetailPage } from './pages/TripDetailPage';
 import { SettingsProvider } from './settings';
 
+/** Old links to the live map keep working (with their ?train=). */
+function ToExplore() {
+  const { search } = useLocation();
+  return <Navigate to={`/explore${search}`} replace />;
+}
+
 export function App() {
   return (
     <SettingsProvider>
@@ -26,7 +32,8 @@ export function App() {
             <Route path="/journeys/:id" element={<JourneyPage />} />
             <Route path="/passport" element={<PassportPage />} />
             <Route path="/stations" element={<StationsPage />} />
-            <Route path="/live" element={<LiveMapPage />} />
+            <Route path="/explore" element={<LiveMapPage />} />
+            <Route path="/live" element={<ToExplore />} />
             <Route path="/stations/:id" element={<BoardPage />} />
             <Route path="/stations/:id/map" element={<StationMapPage />} />
             {/* Dev preview for checking hand edits: pick two platforms, see the path and time (ADDITIONS_01 C). */}

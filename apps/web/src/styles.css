@@ -272,7 +272,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .list { display: grid; }
 .leg-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); min-height: 64px; }
 .leg-row-main { display: grid; gap: 2px; min-width: 0; flex: 1; }
-.leg-row-route { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.leg-row-route { font-weight: 600; overflow-wrap: anywhere; }
 .leg-row-meta { font-size: 13px; line-height: 18px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
 .leg-row-side { display: grid; justify-items: end; gap: 4px; flex-shrink: 0; }
 
@@ -742,3 +742,16 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-station-deps { list-style: none; padding: 0; display: grid; gap: 8px; }
 .live-station-deps li { display: flex; align-items: center; gap: 8px; font-size: 14px; }
 .live-station-dest { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- Featured journey (product brief §5.2): route map on top, the journey under it, one card ---------- */
+.featured { display: grid; border-radius: var(--r-card); overflow: hidden; border: 1px solid var(--hairline); background: linear-gradient(160deg, var(--surface-raised), var(--surface)); }
+.featured:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.featured-map { position: relative; height: 140px; background: var(--map-bg); border-bottom: 1px solid var(--hairline); pointer-events: none; }
+@media (min-width: 600px) { .featured-map { height: 160px; } }
+.featured-map-empty { position: absolute; inset: 0; background: var(--map-bg); }
+.featured-map-tag { position: absolute; left: 10px; top: 8px; padding: 2px 8px; border-radius: 8px; background: var(--glass); font-size: 11px; line-height: 16px; }
+.featured-body { display: grid; gap: 8px; padding: 14px 16px 16px; }
+.featured .hero-times { font-size: 28px; line-height: 34px; }
+.featured-link { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; color: var(--accent-ink); font-weight: 600; }
+.empty-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.side-settings { margin-top: auto; }

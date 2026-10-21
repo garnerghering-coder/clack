@@ -224,7 +224,7 @@ export function TripDetailPage() {
         </Link>
         {/* Show all trains (ADDITIONS_01 A): the live map, with this train selected when it's running. */}
         <Link
-          to={tracking && leg.trainNumber ? `/live?${new URLSearchParams({ train: leg.trainNumber })}` : '/live'}
+          to={tracking && leg.trainNumber ? `/explore?${new URLSearchParams({ train: leg.trainNumber })}` : '/explore'}
           className="map-button map-alltrains"
           aria-label={t('liveMap.showAll')}
           title={t('liveMap.showAll')}

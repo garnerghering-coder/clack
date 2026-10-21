@@ -10,7 +10,8 @@
     "settings": "Settings",
     "addTrain": "Add train",
     "stations": "Stations",
-    "live": "Live map"
+    "live": "Live map",
+    "explore": "Explore"
   },
   "trips": {
     "title": "Trips",
@@ -29,7 +30,18 @@
     "platform": "Platform {{platform}}",
     "approxDistance": "≈ {{distance}}",
     "loadError": "Couldn't load your trips.",
-    "retry": "Retry"
+    "retry": "Retry",
+    "viewJourney": "View journey: {{from}} to {{to}}",
+    "routePreview": "Route preview",
+    "routeSummary": "Route",
+    "noPositionShort": "No live position",
+    "train": "Train",
+    "planned": "Planned",
+    "arrivedAt": "Arrived {{time}}",
+    "scheduledTimes": "Scheduled times",
+    "inPassport": "In your Passport",
+    "findTrain": "Find a train",
+    "exploreTrains": "Explore live trains"
   },
   "add": {
     "title": "Add a train",

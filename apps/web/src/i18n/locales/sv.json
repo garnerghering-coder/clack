@@ -10,7 +10,8 @@
     "settings": "Inställningar",
     "addTrain": "Lägg till tåg",
     "stations": "Stationer",
-    "live": "Livekarta"
+    "live": "Livekarta",
+    "explore": "Utforska"
   },
   "trips": {
     "title": "Resor",
@@ -29,7 +30,18 @@
     "platform": "Spår {{platform}}",
     "approxDistance": "≈ {{distance}}",
     "loadError": "Kunde inte läsa in dina resor.",
-    "retry": "Försök igen"
+    "retry": "Försök igen",
+    "viewJourney": "Visa resan: {{from}} till {{to}}",
+    "routePreview": "Förhandsvisning av sträckan",
+    "routeSummary": "Sträcka",
+    "noPositionShort": "Ingen liveposition",
+    "train": "Tåg",
+    "planned": "Planerad",
+    "arrivedAt": "Framme {{time}}",
+    "scheduledTimes": "Tider enligt tidtabell",
+    "inPassport": "I ditt pass",
+    "findTrain": "Hitta ett tåg",
+    "exploreTrains": "Utforska tåg i trafik"
   },
   "add": {
     "title": "Lägg till ett tåg",

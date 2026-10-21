@@ -199,7 +199,7 @@ export function StationMapPage() {
         <Link className="map-button" to={`/stations/${map.station_id}`} aria-label={t('stationMap.departures')} title={t('stationMap.departures')}>
           <TrainFront size={18} />
         </Link>
-        <Link className="map-button" to="/live" aria-label={t('liveMap.showAll')} title={t('liveMap.showAll')}>
+        <Link className="map-button" to="/explore" aria-label={t('liveMap.showAll')} title={t('liveMap.showAll')}>
           <Radar size={18} />
         </Link>
       </header>
