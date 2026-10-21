@@ -1,5 +1,5 @@
 {
-  "_comment": "Train types (rolling stock). Trafikverket and GTFS don't say which vehicle runs a train (Phase 0 recheck 2026-10-21: TrainAnnouncement.NewEquipment is always 0, no vehicle field), so each leg gets the TYPICAL type for its operator/product/train number from 'rules' (first match wins), labelled 'Typical' in the app, and the owner can change it per trip. Rules reflect the usual fleet in 2026 and will sometimes be wrong (substitutions, mixed fleets). 'art' picks the drawing in apps/web/src/components/TrainArt.tsx.",
+  "_comment": "Train types (rolling stock). Trafikverket and GTFS don't say which vehicle runs a train (Phase 0 recheck 2026-10-21: TrainAnnouncement.NewEquipment is always 0, no vehicle field), so each leg gets the type from 'composition_rules' when Trafikverket's planned coach order (TrainAnnouncement.TrainComposition, e.g. 'Vagnsordning 1-3-4-5-6-7') pins it down, otherwise the TYPICAL type for its operator/product/train number from 'rules' (first match wins), labelled 'Typical' in the app, and the owner can change it per trip. Rules reflect the usual fleet in 2026 and will sometimes be wrong (substitutions, mixed fleets). 'art' picks the drawing in apps/web/src/components/TrainArt.tsx.",
   "types": [
     { "id": "x2000", "name": "X2000", "builder": "ABB / Adtranz", "max_kmh": 200, "since": 1990, "art": "x2000", "about": "Sweden's tilting high-speed train: a power car at one end, a driving coach at the other." },
     { "id": "x55", "name": "SJ 3000 (X55)", "builder": "Bombardier", "max_kmh": 200, "since": 2011, "art": "regina", "about": "Four-car Regina 250 for SJ's faster northern and western lines." },
@@ -48,5 +48,13 @@
     { "match": { "operator": "lennakatten" }, "type": "heritage" },
     { "match": { "operator": "tjf" }, "type": "heritage" },
     { "match": { "product": "heritage" }, "type": "heritage" }
+  ],
+  "_composition_comment": "Checked against the coach order of every SJ departure at Cst, G, M, Sund, Ö and U on 2026-10-21 (ONBOARD_DATA_FINDINGS.md §2). 'cars' counts the numbered cars of one unit; a locomotive ('Lok-') is not counted, and doubled sets ('1-3-4-5-6-7, 8-10-11-12-13-14') count per unit. First match wins; no match falls back to 'rules'.",
+  "composition_rules": [
+    { "match": { "operator": "sj", "product": "high_speed", "locomotive": false, "cars": 6 }, "type": "x2000" },
+    { "match": { "operator": "sj", "product": "high_speed", "locomotive": false, "cars": 4 }, "type": "x55" },
+    { "match": { "operator": "sj", "product": "night", "locomotive": true }, "type": "rc6_sleeper" },
+    { "match": { "operator": "sj", "locomotive": true }, "type": "rc6_coaches" },
+    { "match": { "operator": "sj", "product": "regional", "locomotive": false, "cars_max": 3 }, "type": "x40" }
   ]
 }

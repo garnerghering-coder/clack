@@ -46,4 +46,21 @@ describe('matching Trafikverket announcements to a leg', () => {
     const only = matchAnnouncements(leg306, [intruder], '306');
     expect(only.size).toBe(0);
   });
+
+  it('keeps the planned coach order of the departure, not the arrival', () => {
+    const sx = (sig: string, type: 'Ankomst' | 'Avgang', hhmm: string, comp?: string): AnnouncementRow => ({
+      AdvertisedTrainIdent: '582',
+      LocationSignature: sig,
+      ActivityType: type,
+      AdvertisedTimeAtLocation: `2026-10-20T${hhmm}:00.000+02:00`,
+      ...(comp ? { TrainComposition: [{ Description: comp }] } : {}),
+    });
+    const leg: StopForMatch[] = [
+      { seq: 1, role: 'board', sig: 'Cst', schedArr: null, schedDep: at('10:00') },
+      { seq: 2, role: 'alight', sig: 'U', schedArr: at('10:40'), schedDep: null },
+    ];
+    const got = matchAnnouncements(leg, [sx('Cst', 'Avgang', '10:00', 'Vagnsordning 4-3-2-1'), sx('U', 'Ankomst', '10:40')], '582');
+    expect(got.get(1)!.composition).toEqual({ locomotive: false, cars: 4, units: 1 });
+    expect(got.get(2)!.composition).toBeNull();
+  });
 });

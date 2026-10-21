@@ -1,5 +1,6 @@
 // Train types (rolling stock). No open source says which vehicle ran a train (data/train_types.json explains),
-// so a leg starts with the typical type for its operator and product, and the owner can correct it.
+// so a leg starts with the typical type for its operator and product. Once Trafikverket's planned coach order is
+// fetched it can pin the type down (SJ: X2000 or SJ 3000), and the owner can always correct it.
 import { and, eq, isNull } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { legs, timetableTrips } from '../db/schema.js';
@@ -19,9 +20,65 @@ interface Rule {
   match: { operator?: string; product?: string; number_min?: number; number_max?: number };
   type: string;
 }
+interface CompositionRule {
+  match: { operator?: string; product?: string; locomotive?: boolean; cars?: number; cars_max?: number };
+  type: string;
+}
+interface Catalog {
+  types: TrainType[];
+  rules: Rule[];
+  composition_rules?: CompositionRule[];
+}
 
-let catalog: { types: TrainType[]; rules: Rule[] } | null = null;
-export const trainTypeCatalog = () => (catalog ??= readDataFile<{ types: TrainType[]; rules: Rule[] }>('train_types.json'));
+let catalog: Catalog | null = null;
+export const trainTypeCatalog = () => (catalog ??= readDataFile<Catalog>('train_types.json'));
+
+export interface Composition {
+  locomotive: boolean;
+  /** Numbered cars in the first unit (doubled sets list each unit). */
+  cars: number;
+  units: number;
+}
+
+/**
+ * Trafikverket's planned coach order, e.g. "Vagnsordning 1-3-4-5-6-7, 8-10-11-12-13-14" (two X2000 sets) or
+ * "Vagnsordning Lok-[-6]-5-4-3-2". Other lines in the field ("Långt tåg.", "Café i vagn B") are ignored.
+ */
+export function parseComposition(texts: (string | { Description?: string })[] | undefined | null): Composition | null {
+  for (const t of texts ?? []) {
+    const s = typeof t === 'string' ? t : (t.Description ?? '');
+    const m = s.match(/^\s*Vagnsordning\s+(.+)$/i);
+    if (!m) continue;
+    // Snälltåget lists cars with commas ("9,10,11"): only ", " (with a space) separates units.
+    const units = m[1]!.split(/,\s+/).map((u) => u.split(/[-,]/).map((c) => c.replace(/[[\]]/g, '').trim()).filter(Boolean));
+    const first = units[0] ?? [];
+    const locomotive = first.some((c) => /^lok$/i.test(c));
+    const cars = first.filter((c) => !/^lok$/i.test(c)).length;
+    if (!cars) continue;
+    return { locomotive, cars, units: units.length };
+  }
+  return null;
+}
+
+/** The type the coach order pins down, if a composition rule covers it. */
+export function typeFromComposition(operatorId: string | null, product: string, comp: Composition | null): string | null {
+  if (!comp) return null;
+  for (const r of trainTypeCatalog().composition_rules ?? []) {
+    const m = r.match;
+    if (m.operator && m.operator !== operatorId) continue;
+    if (m.product && m.product !== product) continue;
+    if (m.locomotive !== undefined && m.locomotive !== comp.locomotive) continue;
+    if (m.cars !== undefined && m.cars !== comp.cars) continue;
+    if (m.cars_max !== undefined && comp.cars > m.cars_max) continue;
+    return r.type;
+  }
+  return null;
+}
+
+/** Best type known for a departure: from its coach order when that decides it, else the typical one. */
+export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null) {
+  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber);
+}
 
 export function typicalTrainType(operatorId: string | null, product: string, trainNumber: string | null): string | null {
   const n = trainNumber ? Number(trainNumber) : NaN;

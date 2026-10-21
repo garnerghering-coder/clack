@@ -9,7 +9,7 @@ import { stations, trvLocations } from '../db/schema.js';
 import { parseWgs84, trvQuery } from '../trafikverket/client.js';
 import { brandMatcher } from '../boards/board.js';
 import { loadBrands } from '../dataFiles.js';
-import { typicalTrainType } from '../legs/trainTypes.js';
+import { trainTypeFor } from '../legs/trainTypes.js';
 import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
@@ -262,7 +262,7 @@ export class LiveMapIngest extends EventEmitter {
       operatorId: brand,
       productName: info?.productName ?? null,
       product,
-      trainType: typicalTrainType(brand, product, number),
+      trainType: trainTypeFor(brand, product, number, info?.composition ?? null),
       origin: this.name(info?.originSig ?? null),
       destination: this.name(info?.destinationSig ?? null),
       next: this.name(info?.nextSig ?? null),

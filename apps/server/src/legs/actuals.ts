@@ -3,8 +3,10 @@
 import { and, eq, gt, lt, ne, sql } from 'drizzle-orm';
 import { delayMinutes } from '@clack/shared';
 import type { Db } from '../db/client.js';
-import { legStops, legs, stations } from '../db/schema.js';
+import { legStops, legs, stations, timetableTrips } from '../db/schema.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
+import { parseComposition, typeFromComposition, type Composition } from './trainTypes.js';
+import { productOf } from '../search/timetable.js';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
 export const TRV_HISTORY_MS = 4 * 86400_000;
@@ -22,6 +24,7 @@ export interface AnnouncementRow {
   Canceled?: boolean;
   Deviation?: { Code?: string; Description: string }[];
   TypeOfTraffic?: { Description: string }[];
+  TrainComposition?: (string | { Description?: string })[];
 }
 
 export interface StopForMatch {
@@ -42,6 +45,8 @@ export interface StopActuals {
   canceled: boolean;
   deviations: string[];
   trvTrainNumber: string | null;
+  /** Planned coach order on the departure row ("Vagnsordning 1-3-4-5-6-7"). */
+  composition: Composition | null;
 }
 
 const minuteKey = (sig: string, activity: string, ms: number) => `${sig.toLowerCase()}|${activity}|${Math.floor(ms / 60000)}`;
@@ -79,7 +84,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     if (!row) continue;
     const a =
       out.get(e.seq) ??
-      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null }).get(e.seq)!;
+      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null }).get(e.seq)!;
     const actual = actualTime(row.TimeAtLocation, row.AdvertisedTimeAtLocation);
     const estimated = row.EstimatedTimeAtLocation ? Date.parse(row.EstimatedTimeAtLocation) : null;
     if (e.activity === 'Ankomst') {
@@ -94,11 +99,12 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     a.canceled ||= Boolean(row.Canceled);
     for (const d of row.Deviation ?? []) if (!a.deviations.includes(d.Description)) a.deviations.push(d.Description);
     a.trvTrainNumber ??= row.AdvertisedTrainIdent;
+    if (e.activity === 'Avgang') a.composition ??= parseComposition(row.TrainComposition);
   }
   return out;
 }
 
-const FIELDS = ['AdvertisedTrainIdent', 'LocationSignature', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation', 'TrackAtLocation', 'Canceled', 'Deviation', 'TypeOfTraffic'];
+const FIELDS = ['AdvertisedTrainIdent', 'LocationSignature', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation', 'TrackAtLocation', 'Canceled', 'Deviation', 'TypeOfTraffic', 'TrainComposition'];
 
 async function fetchAnnouncements(events: ReturnType<typeof eventsFor>, fetchImpl?: typeof fetch): Promise<AnnouncementRow[]> {
   const rows: AnnouncementRow[] = [];
@@ -152,6 +158,11 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const snapshot = (actualArr !== null && now - actualArr > SNAPSHOT_AFTER_MS) || Boolean(tooOld);
   const status = snapshot ? 'snapshotted' : arr && now > arrived ? 'completed' : 'planned';
 
+  // The coach order where you boarded can pin down the train type (SJ: X2000 or SJ 3000). Never over the owner's choice.
+  const trip = leg.timetableTripKey ? db.select({ routeType: timetableTrips.routeType }).from(timetableTrips).where(eq(timetableTrips.key, leg.timetableTripKey)).get() : undefined;
+  const composedType =
+    leg.trainTypeSource === 'user' ? null : typeFromComposition(leg.operatorId, productOf(trip?.routeType ?? '', leg.category ?? ''), b?.composition ?? null);
+
   db.transaction((tx) => {
     for (const m of matched.values()) {
       tx.update(legStops)
@@ -181,6 +192,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         arrPlatform: a?.platform ?? null,
         canceled: Boolean(b?.canceled || a?.canceled),
         trvTrainNumbers: [...new Set([...matched.values()].map((m) => m.trvTrainNumber).filter((n): n is string => !!n))],
+        ...(composedType ? { trainType: composedType, trainTypeSource: 'composition' } : {}),
       })
       .where(eq(legs.id, legId))
       .run();

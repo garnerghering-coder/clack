@@ -6,7 +6,7 @@ import { delayMinutes } from '@clack/shared';
 import { normName } from '../lib/geo.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import type { Product, StationCall } from '../search/timetable.js';
-import { typicalTrainType } from '../legs/trainTypes.js';
+import { parseComposition, trainTypeFor } from '../legs/trainTypes.js';
 
 export type BoardType = 'departures' | 'arrivals';
 
@@ -38,6 +38,7 @@ export interface TrvBoardRow {
   Deviation?: Desc[];
   OtherInformation?: Desc[];
   Operator?: string;
+  TrainComposition?: Desc[];
 }
 
 export interface BoardRow {
@@ -170,7 +171,7 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
       operatorId,
       productName,
       product,
-      trainType: typicalTrainType(operatorId, product, call?.trainNumber ?? n),
+      trainType: trainTypeFor(operatorId, product, call?.trainNumber ?? n, parseComposition(r.TrainComposition)),
       trip: call ? { key: call.tripKey, serviceDate: call.serviceDate, seq: call.seq } : null,
     });
   }
@@ -196,6 +197,7 @@ const FIELDS = [
   'Deviation',
   'OtherInformation',
   'Operator',
+  'TrainComposition',
 ];
 
 export async function fetchBoardRows(signature: string, type: BoardType, from: number, to: number, fetchImpl?: typeof fetch): Promise<TrvBoardRow[]> {

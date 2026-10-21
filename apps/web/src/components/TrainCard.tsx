@@ -34,9 +34,10 @@ export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: Leg
           </div>
           <p className="train-name">
             <span className="strong">{type.name}</span>{' '}
-            <span className="chip">{leg.trainTypeSource === 'user' ? t('train.yourChoice') : t('train.typical')}</span>
+            <span className="chip">{t(leg.trainTypeSource === 'user' ? 'train.yourChoice' : leg.trainTypeSource === 'composition' ? 'train.planned' : 'train.typical')}</span>
           </p>
           <p className="caption">{type.about}</p>
+          {leg.trainTypeSource !== 'user' && <p className="caption muted">{t(leg.trainTypeSource === 'composition' ? 'train.plannedNote' : 'train.typicalNote')}</p>}
           <dl className="train-facts">
             {type.max_kmh && (
               <div>

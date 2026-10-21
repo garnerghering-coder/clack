@@ -4,6 +4,7 @@
 import { delayMinutes } from '@clack/shared';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import { isTrain, type TrvBoardRow } from '../boards/board.js';
+import { parseComposition, type Composition } from '../legs/trainTypes.js';
 
 interface AnnRow extends TrvBoardRow {
   LocationSignature: string;
@@ -27,6 +28,8 @@ export interface TrainInfo {
   nextEta: number | null;
   delayMin: number | null;
   canceled: boolean;
+  /** Planned coach order, from the first departure that has one. */
+  composition: Composition | null;
 }
 
 const BEFORE_MS = 60 * 60_000;
@@ -49,6 +52,7 @@ const FIELDS = [
   'TypeOfTraffic',
   'Operator',
   'ScheduledDepartureDateTime',
+  'TrainComposition',
 ];
 
 export const trainKey = (number: string, date: string) => `${number}|${date}`;
@@ -82,6 +86,7 @@ export function summarizeTrain(rows: AnnRow[], now: number): TrainInfo | null {
     nextEta: est ?? (nextAdv !== null ? nextAdv + (lastDelay ?? 0) * 60_000 : null),
     delayMin,
     // Everything still ahead is cancelled (and something is ahead): the train isn't running any more.
+    composition: sorted.map((r) => (r.ActivityType === 'Avgang' ? parseComposition(r.TrainComposition) : null)).find(Boolean) ?? null,
     canceled: ahead.length > 0 && ahead.every((r) => r.Canceled) && now < Date.parse(ahead.at(-1)!.AdvertisedTimeAtLocation) + 30 * 60_000,
   };
 }

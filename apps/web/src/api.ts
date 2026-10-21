@@ -127,7 +127,7 @@ export interface Leg {
   distanceM: number | null;
   isEstimatedGeometry: boolean;
   trainType: string | null;
-  trainTypeSource: 'typical' | 'user' | null;
+  trainTypeSource: 'typical' | 'composition' | 'user' | null;
   countryCodes: string[];
   operator: Operator | null;
   origin: StationRef | null;
