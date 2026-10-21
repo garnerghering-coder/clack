@@ -9,7 +9,14 @@ import { CACHE_DIR } from './downloads.js';
 export const LOGO_DIR = path.join(CACHE_DIR, 'logos');
 const MAX_BYTES = 1_000_000;
 const REFRESH_DAYS = 30;
-const TYPES: Record<string, string> = { 'image/png': 'png', 'image/svg+xml': 'svg', 'image/x-icon': 'ico', 'image/vnd.microsoft.icon': 'ico', 'image/jpeg': 'jpg', 'image/webp': 'webp' };
+const TYPES: Record<string, string> = {
+  'image/png': 'png',
+  'image/svg+xml': 'svg',
+  'image/x-icon': 'ico',
+  'image/vnd.microsoft.icon': 'ico',
+  'image/jpeg': 'jpg',
+  'image/webp': 'webp',
+};
 export const CONTENT_TYPES: Record<string, string> = { png: 'image/png', svg: 'image/svg+xml', ico: 'image/x-icon', jpg: 'image/jpeg', webp: 'image/webp' };
 
 /** The logo file for a brand, if one has been downloaded. */

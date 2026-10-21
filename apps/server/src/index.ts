@@ -7,6 +7,7 @@ import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
 import { syncBrands } from './import/brands.js';
+import { backfillTrainTypes } from './legs/trainTypes.js';
 
 const db = openDb(config.databasePath);
 syncBrands(db);
@@ -20,6 +21,7 @@ await app.listen({ port: config.port, host: config.host });
 log = (msg: string) => app.log.info(msg);
 // Trips saved before routing existed get their track lines now (fast: cached per station pair).
 backfillLegGeometry(db, log);
+backfillTrainTypes(db);
 
 if (process.env.JOBS !== 'off') {
   // Catch up in the background (first run imports stations and timetables; legs get any actuals they missed),

@@ -3,9 +3,10 @@
 import crypto from 'node:crypto';
 import { and, asc, desc, eq, sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
-import { legStops, legs, operators, stations } from '../db/schema.js';
+import { legStops, legs, operators, stations, timetableTrips } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
-import { tripStops, type TripStop } from '../search/timetable.js';
+import { productOf, tripStops, type TripStop } from '../search/timetable.js';
+import { typicalTrainType } from './trainTypes.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
 import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
@@ -89,6 +90,8 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
         schedArr: schedArr === null ? null : new Date(schedArr),
         distanceM: straightLineDistanceM(ridden),
         isEstimatedGeometry: true,
+        trainType: typicalTrainType(trip.operator_id, productOf(trip.route_type, trip.category), trip.train_number),
+        trainTypeSource: 'typical',
         createdAt: new Date(now),
       })
       .run();
@@ -130,6 +133,8 @@ const legColumns = {
   canceled: legs.canceled,
   distanceM: legs.distanceM,
   isEstimatedGeometry: legs.isEstimatedGeometry,
+  trainType: legs.trainType,
+  trainTypeSource: legs.trainTypeSource,
   countryCodes: legs.countryCodes,
   operatorId: legs.operatorId,
   originStationId: legs.originStationId,
@@ -196,6 +201,18 @@ export function getLeg(db: Db, userId: string, id: string) {
     .orderBy(asc(legStops.seq))
     .all();
   return { ...leg!, geometry, stops, ...liveFor(db, id) };
+}
+
+/** The owner says which train it actually was (null resets to the typical type). */
+export function setTrainType(db: Db, userId: string, id: string, trainType: string | null): boolean {
+  const leg = db.select({ operatorId: legs.operatorId, trainNumber: legs.trainNumber, key: legs.timetableTripKey }).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
+  if (!leg) return false;
+  if (trainType === null) {
+    const trip = leg.key ? db.select().from(timetableTrips).where(eq(timetableTrips.key, leg.key)).get() : undefined;
+    const typical = typicalTrainType(leg.operatorId, productOf(trip?.routeType ?? '', trip?.category ?? ''), leg.trainNumber);
+    db.update(legs).set({ trainType: typical, trainTypeSource: 'typical' }).where(eq(legs.id, id)).run();
+  } else db.update(legs).set({ trainType, trainTypeSource: 'user' }).where(eq(legs.id, id)).run();
+  return true;
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {

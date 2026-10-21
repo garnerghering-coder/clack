@@ -179,6 +179,10 @@ export const legs = sqliteTable(
     /** Encoded polyline of the whole leg. */
     geometry: text('geometry'),
     isEstimatedGeometry: integer('is_estimated_geometry', { mode: 'boolean' }).notNull().default(false),
+    /** Rolling stock id from data/train_types.json. */
+    trainType: text('train_type'),
+    /** typical (guessed from operator/product) | user (chosen by the owner) */
+    trainTypeSource: text('train_type_source'),
     notes: text('notes'),
     createdAt: createdAt(),
   },

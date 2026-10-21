@@ -11,6 +11,7 @@ import { DelayPill, delayClass } from '../components/DelayPill';
 import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { ActivityLog, LiveChip, LiveModule, eventText } from '../components/Live';
+import { TrainCard } from '../components/TrainCard';
 import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 
@@ -289,6 +290,8 @@ export function TripDetailPage() {
             </button>
           )}
         </section>
+
+        <TrainCard leg={leg} onChange={setLeg} />
 
         {(tracking || leg.events.length > 0) && <ActivityLog leg={leg} events={leg.events} stops={leg.stops} />}
 

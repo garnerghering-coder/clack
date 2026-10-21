@@ -2,6 +2,7 @@
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
+import { typicalTrainType } from '../legs/trainTypes.js';
 
 export type Product = 'high_speed' | 'intercity' | 'night' | 'regional' | 'commuter' | 'heritage';
 
@@ -23,6 +24,8 @@ export interface TripResult {
   operatorId: string | null;
   category: string;
   product: Product;
+  /** Typical rolling stock (data/train_types.json). */
+  trainType: string | null;
   routeName: string | null;
   from: StopRef;
   to: StopRef;
@@ -108,6 +111,7 @@ function toResult(trip: TripRow, stops: StopRow[], from: StopRow, to: StopRow): 
     operatorId: trip.operator_id,
     category: trip.category,
     product: productOf(trip.route_type, trip.category),
+    trainType: typicalTrainType(trip.operator_id, productOf(trip.route_type, trip.category), trip.train_number),
     routeName: trip.route_name,
     from: ref(from, dep),
     to: ref(to, arr),

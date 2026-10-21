@@ -7,7 +7,8 @@ import { decodePolyline, type LatLon } from '@clack/shared';
 import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { Flag } from '../components/Flag';
-import { useOperators } from '../data';
+import { useOperators, useTrainTypes } from '../data';
+import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { addDaysIso, dayOffset, fmtDay, fmtDistance, fmtDuration, fmtTime, isoToNoonMs, todayIso } from '../format';
@@ -79,7 +80,9 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const ops = useOperators();
+  const types = useTrainTypes();
   const op = r.operatorId ? ops.get(r.operatorId) : undefined;
+  const type = r.trainType ? types.get(r.trainType) : undefined;
   const plus = dayOffset(r.from.time, r.from.tz, r.to.time, r.to.tz);
   return (
     <button className="result-card" onClick={onPick}>
@@ -95,6 +98,12 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
         <span>{r.from.name}</span>
         <span>{r.to.name}</span>
       </div>
+      {type && (
+        <div className="result-train">
+          <TrainArt art={type.art} color={op?.brandColor ?? '#4C8DFF'} height={22} />
+          <span className="caption">{type.name}</span>
+        </div>
+      )}
       <div className="result-meta">
         <OperatorBadge operator={op} size={26} />
         <span className="result-op">{op?.name ?? r.routeName}</span>

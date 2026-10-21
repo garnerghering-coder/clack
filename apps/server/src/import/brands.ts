@@ -11,7 +11,10 @@ export function syncBrands(db: Db) {
   for (const b of loadBrands())
     db.insert(operators)
       .values({ id: b.id, name: b.name, shortName: b.short_name, country: b.country, brandColor: b.color })
-      .onConflictDoUpdate({ target: operators.id, set: { name: sql`excluded.name`, shortName: sql`excluded.short_name`, country: sql`excluded.country`, brandColor: sql`excluded.brand_color` } })
+      .onConflictDoUpdate({
+        target: operators.id,
+        set: { name: sql`excluded.name`, shortName: sql`excluded.short_name`, country: sql`excluded.country`, brandColor: sql`excluded.brand_color` },
+      })
       .run();
 }
 

@@ -253,6 +253,17 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .duration::before { content: ''; position: absolute; left: 6%; right: 6%; top: 50%; border-top: 1px dashed var(--text-3); z-index: 0; }
 .duration { background: none; }
 .result-stations { display: flex; justify-content: space-between; gap: 10px; font-weight: 600; font-size: 14px; color: var(--text-2); }
+.train-card { display: grid; gap: 10px; }
+.train-art-wrap { overflow-x: auto; padding: 6px 0 2px; scrollbar-width: none; }
+.train-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 18px; }
+.train-facts { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; }
+.train-facts dd { margin: 2px 0 0; font-weight: 600; }
+.train-picker { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.train-option { width: 100%; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 10px; background: var(--surface-raised); border: 1px solid var(--hairline); text-align: left; overflow: hidden; }
+.train-option .train-art { max-width: 150px; height: auto; }
+.train-option.active { border-color: var(--accent); }
+.result-train { display: flex; align-items: center; gap: 10px; overflow: hidden; }
+.train-art { flex: none; display: block; }
 .result-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .result-op { font-weight: 600; font-size: 14px; }
 

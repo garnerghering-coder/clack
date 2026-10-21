@@ -1,6 +1,7 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { createLeg, deleteLeg, getLeg, LegError, listLegs, type CreateLegInput } from '../legs/legs.js';
+import { createLeg, deleteLeg, getLeg, LegError, listLegs, setTrainType, type CreateLegInput } from '../legs/legs.js';
+import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { withLogo } from '../import/brands.js';
 import { CONTENT_TYPES, logoFile } from '../import/logos.js';
@@ -33,6 +34,17 @@ export const legRoutes =
       await refreshLegActuals(db, req.params.id);
       return getLeg(db, req.userId, req.params.id);
     });
+
+    // Edits the owner can make to a saved trip. Only the train type for now.
+    app.patch<{ Params: { id: string }; Body: { trainType?: string | null } }>('/legs/:id', async (req, reply) => {
+      const t = req.body?.trainType;
+      if (t === undefined) return reply.code(400).send({ error: 'nothing to change' });
+      if (t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
+      if (!setTrainType(db, req.userId, req.params.id, t)) return reply.code(404).send({ error: 'not found' });
+      return getLeg(db, req.userId, req.params.id);
+    });
+
+    app.get('/train-types', async () => trainTypeCatalog().types);
 
     app.delete<{ Params: { id: string } }>('/legs/:id', async (req, reply) => (deleteLeg(db, req.userId, req.params.id) ? reply.code(204).send() : reply.code(404).send({ error: 'not found' })));
 

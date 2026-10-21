@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { REPO_ROOT } from './env.js';
 
-const read = <T>(name: string): T => JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'data', name), 'utf8')) as T;
+export const readDataFile = <T>(name: string): T => JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'data', name), 'utf8')) as T;
+const read = readDataFile;
 
 export type Match = Record<string, unknown>;
 export interface CategoryRules {

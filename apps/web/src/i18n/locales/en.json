@@ -229,5 +229,18 @@
     "platformArrival": "Arrival platform changed {{from}} → {{to}}",
     "cancelled": "Train cancelled",
     "shortTurned": "Cancelled at {{stations}}"
+  },
+  "train": {
+    "title": "Train",
+    "typical": "Typical",
+    "yourChoice": "Your choice",
+    "topSpeed": "Top speed",
+    "since": "In service since",
+    "builder": "Built by",
+    "unknown": "We don't know which train type runs this service.",
+    "change": "Was it a different train? Change it",
+    "cancel": "Cancel",
+    "resetTypical": "Use the typical train again",
+    "typicalNote": "Typical train for this service. Operators sometimes swap trains, so you can change it."
   }
 }

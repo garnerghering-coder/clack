@@ -54,6 +54,7 @@ export interface TripResult {
   operatorId: string | null;
   category: string;
   product: Product;
+  trainType: string | null;
   routeName: string | null;
   from: StopRef;
   to: StopRef;
@@ -120,6 +121,8 @@ export interface Leg {
   canceled: boolean;
   distanceM: number | null;
   isEstimatedGeometry: boolean;
+  trainType: string | null;
+  trainTypeSource: 'typical' | 'user' | null;
   countryCodes: string[];
   operator: Operator | null;
   origin: StationRef | null;
@@ -193,6 +196,16 @@ export interface TripGeometry {
   segments: { fromSeq: number; toSeq: number; polyline: string; lengthM: number; estimated: boolean }[];
 }
 
+export interface TrainType {
+  id: string;
+  name: string;
+  builder: string | null;
+  max_kmh: number | null;
+  since: number | null;
+  art: string;
+  about: string;
+}
+
 export const ms = (t: string | number | null | undefined) => (t === null || t === undefined || t === '' ? null : typeof t === 'number' ? t : Date.parse(t));
 
 export const api = {
@@ -207,5 +220,7 @@ export const api = {
   leg: (id: string) => request<LegDetail>(`/legs/${id}`),
   createLeg: (body: { tripKey: string; serviceDate: string; fromSeq: number; toSeq: number; force?: boolean }) => request<LegDetail>('/legs', { method: 'POST', body: JSON.stringify(body) }),
   refreshLeg: (id: string) => request<LegDetail>(`/legs/${id}/refresh`, { method: 'POST' }),
+  setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
+  trainTypes: () => request<TrainType[]>('/train-types'),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),
 };
