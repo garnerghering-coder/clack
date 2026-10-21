@@ -31,7 +31,8 @@ export interface Operator {
   name: string;
   shortName: string;
   brandColor: string;
-  logoPath: string | null;
+  /** Set when the brand's app icon has been downloaded to this computer. */
+  logoUrl?: string | null;
 }
 
 export type Product = 'high_speed' | 'intercity' | 'night' | 'regional' | 'commuter' | 'heritage';

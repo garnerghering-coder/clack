@@ -40,7 +40,8 @@ export const DEFAULT_SETTINGS: Settings = {
   clock: '24h',
   co2Comparison: 'car_1',
   includeCommuter: true,
-  showRailNetwork: false,
+  // Owner's choice (2026-10-21): all rail lines dimmed under your route, as in a transit map.
+  showRailNetwork: true,
 };
 
 /** Validate and merge a partial settings update; unknown keys and invalid values are rejected. */

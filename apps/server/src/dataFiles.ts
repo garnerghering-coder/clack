@@ -19,6 +19,10 @@ export interface Brand {
   gtfs_operators: string[];
   /** What people type in search ("sj", "mtrx", "pågatågen"). */
   aliases: string[];
+  /** Site whose app icon is used as the logo (downloaded locally, see import/logos.ts). */
+  website?: string;
+  /** Direct icon URL when the site's own links don't point at a good one. */
+  icon_url?: string;
 }
 export interface StationOverride {
   name: string;

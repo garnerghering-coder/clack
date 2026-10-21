@@ -2,6 +2,9 @@ import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
 import { createLeg, deleteLeg, getLeg, LegError, listLegs, type CreateLegInput } from '../legs/legs.js';
 import { refreshLegActuals } from '../legs/actuals.js';
+import { withLogo } from '../import/brands.js';
+import { CONTENT_TYPES, logoFile } from '../import/logos.js';
+import fs from 'node:fs';
 
 export const legRoutes =
   (db: Db, hooks: { afterCreate?: (legId: string) => void } = {}): FastifyPluginAsync =>
@@ -33,5 +36,12 @@ export const legRoutes =
 
     app.delete<{ Params: { id: string } }>('/legs/:id', async (req, reply) => (deleteLeg(db, req.userId, req.params.id) ? reply.code(204).send() : reply.code(404).send({ error: 'not found' })));
 
-    app.get('/operators', async () => db.query.operators.findMany());
+    app.get('/operators', async () => (await db.query.operators.findMany()).map(withLogo));
+
+    app.get<{ Params: { id: string } }>('/operators/:id/logo', async (req, reply) => {
+      const f = /^[a-z0-9-]+$/.test(req.params.id) ? logoFile(req.params.id) : null;
+      if (!f) return reply.code(404).send({ error: 'no logo' });
+      const ext = f.split('.').pop()!;
+      return reply.header('Content-Type', CONTENT_TYPES[ext]).header('Cache-Control', 'max-age=86400').send(fs.readFileSync(f));
+    });
   };

@@ -7,6 +7,7 @@ import { legStops, legs, operators, stations } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
 import { tripStops, type TripStop } from '../search/timetable.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
+import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
@@ -106,6 +107,8 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
         .run();
     }
   });
+  // Track geometry and distance along the rail network (cached per station pair, so this is quick).
+  attachLegGeometry(db, id);
   return id;
 }
 
@@ -149,7 +152,7 @@ function attachRefs<T extends { operatorId: string | null; originStationId: stri
   );
   return rows.map((r) => ({
     ...r,
-    operator: r.operatorId ? (ops.get(r.operatorId) ?? null) : null,
+    operator: r.operatorId && ops.get(r.operatorId) ? withLogo(ops.get(r.operatorId)!) : null,
     origin: st.get(r.originStationId) ?? null,
     destination: st.get(r.destStationId) ?? null,
   }));

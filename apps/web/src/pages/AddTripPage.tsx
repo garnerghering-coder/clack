@@ -31,6 +31,20 @@ function DateRow({ date, setDate }: { date: string; setDate: (d: string) => void
   const picker = useRef<HTMLInputElement>(null);
   const isToday = date === today;
   const isTomorrow = date === addDaysIso(today, 1);
+  const [manual, setManual] = useState(false);
+  const openPicker = () => {
+    const el = picker.current;
+    try {
+      if (el && typeof el.showPicker === 'function') {
+        el.showPicker();
+        return;
+      }
+    } catch {
+      // Some browsers refuse showPicker (e.g. inside iframes); fall back to the visible field.
+    }
+    setManual(true);
+    setTimeout(() => el?.focus(), 0);
+  };
   return (
     <div className="date-row">
       <button className={isToday ? 'chip-button active' : 'chip-button'} onClick={() => setDate(today)}>
@@ -39,10 +53,20 @@ function DateRow({ date, setDate }: { date: string; setDate: (d: string) => void
       <button className={isTomorrow ? 'chip-button active' : 'chip-button'} onClick={() => setDate(addDaysIso(today, 1))}>
         {t('add.tomorrow')}
       </button>
-      <label className={!isToday && !isTomorrow ? 'chip-button active' : 'chip-button'}>
+      <button className={!isToday && !isTomorrow ? 'chip-button active' : 'chip-button'} onClick={openPicker}>
         {t('add.pickDate')}
-        <input ref={picker} type="date" value={date} onChange={(e) => e.target.value && setDate(e.target.value)} className="date-input" aria-label={t('add.pickDate')} />
-      </label>
+      </button>
+      {/* Opened from the button; shown as a plain field only where the browser can't open its picker programmatically. */}
+      <input
+        ref={picker}
+        type="date"
+        value={date}
+        max={addDaysIso(today, 365)}
+        onChange={(e) => e.target.value && setDate(e.target.value)}
+        className={manual ? 'date-field' : 'date-input'}
+        aria-label={t('add.pickDate')}
+        tabIndex={manual ? 0 : -1}
+      />
       <span className="date-label">
         {fmtDay(isoToNoonMs(date), 'UTC')}
         {date < today && <span className="hint"> · {t('add.pastTrip')}</span>}

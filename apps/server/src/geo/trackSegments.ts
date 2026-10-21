@@ -1,5 +1,5 @@
 // Track geometry for station pairs, cached in track_segments (SPEC §12), and whole legs built from them.
-import { and, asc, eq, isNull } from 'drizzle-orm';
+import { and, asc, eq, isNull, ne, or } from 'drizzle-orm';
 import { decodePolyline, encodePolyline, type LatLon } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations, trackSegments } from '../db/schema.js';
@@ -84,12 +84,27 @@ export function attachLegGeometry(db: Db, legId: string, graph: RailGraph | null
   return true;
 }
 
-/** Legs saved before routing existed (or while the graph was missing). */
+/**
+ * Legs without track geometry (saved before routing existed or while the graph was missing), and legs drawn as
+ * straight lines whose stations may route now. Straight-line cache entries are retried too; they're few and cheap.
+ */
 export function backfillLegGeometry(db: Db, log: (m: string) => void = () => {}): number {
   const graph = railGraph();
-  if (!graph) return 0;
-  const todo = db.select({ id: legs.id }).from(legs).where(isNull(legs.geometry)).all();
-  for (const { id } of todo) attachLegGeometry(db, id, graph);
-  if (todo.length) log(`Routed ${todo.length} saved trip(s) along the rail network`);
-  return todo.length;
+  if (!graph) {
+    log('Rail network file missing (data/osm/rail-graph.json.gz): trips are drawn as straight lines');
+    return 0;
+  }
+  db.delete(trackSegments).where(eq(trackSegments.isEstimated, true)).run();
+  const todo = db
+    .select({ id: legs.id })
+    .from(legs)
+    .where(or(isNull(legs.geometry), and(eq(legs.isEstimatedGeometry, true), ne(legs.dataQuality, 'manual'))))
+    .all();
+  let fixed = 0;
+  for (const { id } of todo) {
+    attachLegGeometry(db, id, graph);
+    if (!db.select({ e: legs.isEstimatedGeometry }).from(legs).where(eq(legs.id, id)).get()?.e) fixed++;
+  }
+  if (todo.length) log(`Rail network: routed ${fixed} of ${todo.length} trip(s) along the tracks`);
+  return fixed;
 }

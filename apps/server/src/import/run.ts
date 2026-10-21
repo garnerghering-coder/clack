@@ -8,6 +8,7 @@ import { importGtfsSweden3, lastImportedFeed, type ImportSummary } from './gtfs-
 import { loadOfficialMapping } from './official-mapping.js';
 import { importTrvStations, trvLocationCount } from './trv-stations.js';
 import { basemapInfo, extractBasemap } from './basemap.js';
+import { refreshLogos } from './logos.js';
 
 export interface RunOptions {
   forceDownload?: boolean;
@@ -70,6 +71,8 @@ export async function bootstrap(db: Db, log: (m: string) => void = console.log) 
   } catch (e) {
     log(`import skipped: ${(e as Error).message}`);
   }
+  // Operator logos: each brand's app icon from its website (skipped when already downloaded this month).
+  await refreshLogos(log).catch((e) => log(`logos skipped: ${(e as Error).message}`));
   // The map's basemap is a one-off download (no quota); later runs just reuse the file.
   if (!basemapInfo()) {
     try {

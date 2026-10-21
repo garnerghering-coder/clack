@@ -6,8 +6,10 @@ import { startScheduler } from './jobs/scheduler.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
+import { syncBrands } from './import/brands.js';
 
 const db = openDb(config.databasePath);
+syncBrands(db);
 let log = (msg: string) => console.log(msg);
 const app = buildApp(db, {
   logger: true,
