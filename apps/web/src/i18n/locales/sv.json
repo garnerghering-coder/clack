@@ -248,7 +248,17 @@
       "system": "System",
       "dark": "Mörkt",
       "light": "Ljust"
-    }
+    },
+    "changing": "Byten",
+    "walkPace": "Gångtakt",
+    "paces": {
+      "relaxed": "Lugn",
+      "normal": "Normal",
+      "brisk": "Rask"
+    },
+    "stepFree": "Bara vägar utan trappor",
+    "heavyLuggage": "Tungt bagage",
+    "changingNote": "Används för gångtider mellan plattformar. Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor."
   },
   "about": {
     "title": "Källor och metod",
@@ -258,7 +268,9 @@
       "trafikverket": "Trafikverket Open API: faktiska tider, förseningar, spår, stationer och livepositioner.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): aktuella tidtabeller.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historiska tidtabeller tillbaka till 2012.",
-      "osm": "Järnvägsnät och kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta från Protomaps."
+      "osm": "Järnvägsnät och kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta från Protomaps.",
+      "stationMaps": "Stationskartor: utkast från OpenStreetMap (© OpenStreetMaps bidragsgivare), handredigerade; kartdatan erbjuds under ODbL precis som OpenStreetMap. Gångtiderna räknas fram ur kartan, de är inte uppmätta på plats. Öppettider enligt uppgift; kan avvika på helgdagar.",
+      "onboard": "Ombord: servering och dagens avvikelser kommer från Trafikverket för varje avgång; allt som står under \"Brukar finnas\" kommer från operatörens egna sidor, med datum då det kontrollerades."
     },
     "delaysTitle": "Förseningsfärger",
     "delaysBody": "Grönt: i tid eller tidigt. Gult: 1–15 min sent. Orange: 16–30 min. Rött: mer än 30 min. I din statistik räknas ett tåg som i tid om det kommer fram högst {{max}} minuter sent.",
@@ -435,6 +447,103 @@
       "step_free": "Insteg utan trappsteg",
       "accessible_toilet": "Tillgänglig toalett",
       "sleeper": "Sovvagnar"
+    }
+  },
+  "stationMap": {
+    "title": "Stationskarta",
+    "none": "Den här stationen har ingen karta än.",
+    "open": "Stationskarta",
+    "quality": {
+      "osm_draft": "Utkast från OpenStreetMap · inte kontrollerat på plats",
+      "hand_curated": "Handgranskad · kontrollerad {{date}}"
+    },
+    "departures": "Avgångar",
+    "list": "Lista",
+    "map": "Karta",
+    "now": "Nu",
+    "pickTime": "Välj en tid",
+    "filters": {
+      "toilets": "Toaletter",
+      "food": "Mat",
+      "shops": "Butiker",
+      "tickets": "Biljetter",
+      "lockers": "Förvaring",
+      "info": "Info"
+    },
+    "state": {
+      "open": "Öppet",
+      "closing_soon": "Stänger snart",
+      "closed": "Stängt",
+      "unknown": "Okända tider"
+    },
+    "closesAt": "Stänger {{time}}",
+    "hours": "Öppettider",
+    "hoursUnverified": "Öppettiderna är inte kontrollerade",
+    "hoursNote": "Öppettider enligt uppgift; kan avvika på helgdagar",
+    "fromOsm": "Öppettider från OpenStreetMap, inte kontrollerade av en person",
+    "verified": "Kontrollerat {{date}}",
+    "stale": "Kan vara inaktuellt",
+    "free": "Gratis",
+    "fee": "{{amount}} kr",
+    "cat": {
+      "toilet": "Toalett",
+      "cafe": "Kafé",
+      "restaurant": "Restaurang",
+      "kiosk": "Kiosk",
+      "shop": "Butik",
+      "ticket": "Biljetter",
+      "locker": "Förvaringsskåp",
+      "waiting": "Väntsal",
+      "info": "Information",
+      "pharmacy": "Apotek",
+      "atm": "Bankomat",
+      "taxi": "Taxi",
+      "bus": "Buss",
+      "other": "Övrigt"
+    },
+    "planChange": "Planera ett byte",
+    "fromTrack": "Från spår",
+    "toTrack": "Till spår",
+    "walk": "{{min}} min promenad",
+    "noRoute": "Ingen väg mellan plattformarna på kartan.",
+    "noStepFree": "Ingen väg utan trappor mellan plattformarna på kartan.",
+    "layover": "Bytestid {{from}} – {{to}} · {{min}} min",
+    "steps": "Vägbeskrivning",
+    "alongPath": "Längs min väg",
+    "detour": "+{{min}} min omväg",
+    "arriveChip": "Ankomst · Spår {{track}} · {{time}}",
+    "departChip": "Avgång · Spår {{track}} · {{time}}",
+    "fromChip": "Från spår {{track}}",
+    "toChip": "Till spår {{track}}",
+    "step": {
+      "leave": "Lämna spår {{track}}",
+      "walk": "Gå i cirka {{min}} min",
+      "stairs_up": "Ta trappan upp till {{level}}",
+      "stairs_down": "Ta trappan ner till {{level}}",
+      "escalator_up": "Ta rulltrappan upp till {{level}}",
+      "escalator_down": "Ta rulltrappan ner till {{level}}",
+      "lift_up": "Ta hissen upp till {{level}}",
+      "lift_down": "Ta hissen ner till {{level}}",
+      "arrive": "Framme vid spår {{track}}"
+    }
+  },
+  "connection": {
+    "changeAt": "Byte i {{station}}",
+    "tracks": "Spår {{from}} → {{to}}",
+    "walk": "{{min}} min promenad",
+    "layover": "{{min}} min bytestid",
+    "spare": "{{min}} min marginal",
+    "estimated": "Uppskattat, ingen stationskarta",
+    "openMap": "Öppna stationskartan",
+    "brokenBanner": "Bytet går inte: ett av tågen är inställt.",
+    "status": {
+      "easy": "Lätt byte",
+      "tight": "Snävt",
+      "miss": "Hinner troligen inte",
+      "unknown": "Okänt",
+      "broken": "Bytet går inte",
+      "check_signs": "Följ skyltarna",
+      "probably_ok": "Bör gå bra"
     }
   }
 }

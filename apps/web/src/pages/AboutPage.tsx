@@ -5,7 +5,7 @@ import { ON_TIME_MAX_DELAY_MIN } from '@clack/shared';
 
 export function AboutPage() {
   const { t } = useTranslation();
-  const sources = ['trafikverket', 'gtfsSweden3', 'gtfsSverige2', 'osm'] as const;
+  const sources = ['trafikverket', 'gtfsSweden3', 'gtfsSverige2', 'osm', 'stationMaps', 'onboard'] as const;
   return (
     <main className="page">
       <Link to="/settings" className="link-button back-link">

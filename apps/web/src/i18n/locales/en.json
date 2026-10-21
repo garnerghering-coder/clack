@@ -248,7 +248,17 @@
       "system": "System",
       "dark": "Dark",
       "light": "Light"
-    }
+    },
+    "changing": "Changing trains",
+    "walkPace": "Walking pace",
+    "paces": {
+      "relaxed": "Relaxed",
+      "normal": "Normal",
+      "brisk": "Brisk"
+    },
+    "stepFree": "Step-free routes only",
+    "heavyLuggage": "Heavy luggage",
+    "changingNote": "Used for walking times between platforms. Step-free avoids stairs and escalators; heavy luggage adds time on stairs."
   },
   "about": {
     "title": "Sources & methodology",
@@ -258,7 +268,9 @@
       "trafikverket": "Trafikverket Open API: actual times, delays, platforms, stations and live positions.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): current timetables.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historical timetables back to 2012.",
-      "osm": "Rail network and map data © OpenStreetMap contributors (ODbL). Basemap tiles by Protomaps."
+      "osm": "Rail network and map data © OpenStreetMap contributors (ODbL). Basemap tiles by Protomaps.",
+      "stationMaps": "Station maps: drafted from OpenStreetMap (© OpenStreetMap contributors) and edited by hand; the map data is offered under the ODbL like OpenStreetMap itself. Walking times are worked out from the map, not timed on site. Opening hours are as listed and may differ on holidays.",
+      "onboard": "On board: catering and same-day notices come from Trafikverket for each departure; everything marked \"Typically\" comes from the operator's own pages, with the date it was checked."
     },
     "delaysTitle": "Delay colours",
     "delaysBody": "Green: on time or early. Yellow: 1–15 min late. Amber: 16–30 min. Red: more than 30 min. A train counts as on time in your stats when it arrives at most {{max}} minutes late.",
@@ -435,6 +447,103 @@
       "step_free": "Step-free boarding",
       "accessible_toilet": "Accessible toilet",
       "sleeper": "Sleeper cars"
+    }
+  },
+  "stationMap": {
+    "title": "Station map",
+    "none": "There's no map for this station yet.",
+    "open": "Station map",
+    "quality": {
+      "osm_draft": "Draft from OpenStreetMap · not checked on site",
+      "hand_curated": "Hand-curated · checked {{date}}"
+    },
+    "departures": "Departures",
+    "list": "List",
+    "map": "Map",
+    "now": "Now",
+    "pickTime": "Pick a time",
+    "filters": {
+      "toilets": "Toilets",
+      "food": "Food",
+      "shops": "Shops",
+      "tickets": "Tickets",
+      "lockers": "Lockers",
+      "info": "Info"
+    },
+    "state": {
+      "open": "Open",
+      "closing_soon": "Closes soon",
+      "closed": "Closed",
+      "unknown": "Hours unknown"
+    },
+    "closesAt": "Closes {{time}}",
+    "hours": "Opening hours",
+    "hoursUnverified": "Hours unverified",
+    "hoursNote": "Opening hours as listed; may differ on holidays",
+    "fromOsm": "Hours from OpenStreetMap, not checked by a person",
+    "verified": "Checked {{date}}",
+    "stale": "May be out of date",
+    "free": "Free",
+    "fee": "{{amount}} kr",
+    "cat": {
+      "toilet": "Toilet",
+      "cafe": "Café",
+      "restaurant": "Restaurant",
+      "kiosk": "Kiosk",
+      "shop": "Shop",
+      "ticket": "Tickets",
+      "locker": "Lockers",
+      "waiting": "Waiting room",
+      "info": "Information",
+      "pharmacy": "Pharmacy",
+      "atm": "Cash machine",
+      "taxi": "Taxi",
+      "bus": "Bus",
+      "other": "Other"
+    },
+    "planChange": "Plan a change",
+    "fromTrack": "From track",
+    "toTrack": "To track",
+    "walk": "{{min}} min walk",
+    "noRoute": "No route between these platforms on the map.",
+    "noStepFree": "No step-free route between these platforms on the map.",
+    "layover": "Layover {{from}} – {{to}} · {{min}} min",
+    "steps": "Directions",
+    "alongPath": "Along my path",
+    "detour": "+{{min}} min detour",
+    "arriveChip": "Arrive · Track {{track}} · {{time}}",
+    "departChip": "Depart · Track {{track}} · {{time}}",
+    "fromChip": "From track {{track}}",
+    "toChip": "To track {{track}}",
+    "step": {
+      "leave": "Leave track {{track}}",
+      "walk": "Walk about {{min}} min",
+      "stairs_up": "Take the stairs up to {{level}}",
+      "stairs_down": "Take the stairs down to {{level}}",
+      "escalator_up": "Take the escalator up to {{level}}",
+      "escalator_down": "Take the escalator down to {{level}}",
+      "lift_up": "Take the lift up to {{level}}",
+      "lift_down": "Take the lift down to {{level}}",
+      "arrive": "Arrive at track {{track}}"
+    }
+  },
+  "connection": {
+    "changeAt": "Change at {{station}}",
+    "tracks": "Track {{from}} → {{to}}",
+    "walk": "{{min}} min walk",
+    "layover": "{{min}} min to change",
+    "spare": "{{min}} min to spare",
+    "estimated": "Estimated, no station map",
+    "openMap": "Open station map",
+    "brokenBanner": "Connection broken: one of the trains is cancelled.",
+    "status": {
+      "easy": "Easy connection",
+      "tight": "Tight",
+      "miss": "Likely to miss",
+      "unknown": "Unknown",
+      "broken": "Connection broken",
+      "check_signs": "Check signs",
+      "probably_ok": "Probably fine"
     }
   }
 }

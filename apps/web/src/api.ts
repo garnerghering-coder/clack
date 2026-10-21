@@ -1,5 +1,5 @@
 // The front end only ever talks to our own server (keys stay server-side).
-import type { AmenityEntry, OnboardFacts, Settings } from '@clack/shared';
+import type { AmenityEntry, OnboardFacts, Settings, SizeClass, StationMap } from '@clack/shared';
 
 export class ApiError extends Error {
   constructor(
@@ -270,6 +270,8 @@ export interface StationInfo {
   county: string | null;
   hasBoard: boolean;
   hasMap: boolean;
+  /** For walk estimates when there's no station map. */
+  sizeClass: SizeClass | null;
   favorite: boolean;
 }
 
@@ -322,6 +324,7 @@ export const api = {
   createLeg: (body: { tripKey: string; serviceDate: string; fromSeq: number; toSeq: number; force?: boolean }) => request<LegDetail>('/legs', { method: 'POST', body: JSON.stringify(body) }),
   refreshLeg: (id: string) => request<LegDetail>(`/legs/${id}/refresh`, { method: 'POST' }),
   station: (id: string) => request<StationInfo>(`/stations/${id}`),
+  stationMap: (id: string) => request<StationMap>(`/stations/${id}/map`),
   searchStations: (q: string, signal?: AbortSignal) => request<StationHit[]>(`/stations/search?q=${encodeURIComponent(q)}&limit=12`, { signal }),
   board: (id: string, type: BoardType, window?: { from: number; to: number }) =>
     request<Board>(`/stations/${id}/board?type=${type}${window ? `&from=${window.from}&to=${window.to}` : ''}`),

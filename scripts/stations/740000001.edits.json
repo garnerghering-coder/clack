@@ -1,0 +1,173 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Stockholm C (scripts/stations/draft_from_osm.py). Pilot scope: the main-line station (tracks 1–19, the halls); Stockholm City and T-Centralen come later.",
+  "radius": 420,
+  "levels": [
+    {
+      "osm": "2",
+      "id": "L2",
+      "name": "Upper hall and bridge",
+      "order": 2
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Mezzanine",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platforms and main hall",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Lower hall and tunnels",
+      "order": -1
+    }
+  ],
+  "rotation": 35,
+  "connections": [
+    {
+      "from": {
+        "platform": "10",
+        "near": [
+          138,
+          163
+        ]
+      },
+      "to": {
+        "at": [
+          138,
+          163
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the hall corridor stops 8 m short of platform 10."
+    },
+    {
+      "from": {
+        "platform": "2",
+        "near": [
+          122,
+          37
+        ]
+      },
+      "to": {
+        "at": [
+          122,
+          37
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the south ends of the northern platforms meet the hall's north side."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          122,
+          37
+        ]
+      },
+      "to": {
+        "at": [
+          122,
+          37
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "platform": "4",
+        "near": [
+          129,
+          68
+        ]
+      },
+      "to": {
+        "at": [
+          129,
+          68
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "platform": "5",
+        "near": [
+          125,
+          75
+        ]
+      },
+      "to": {
+        "at": [
+          125,
+          75
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "platform": "6",
+        "near": [
+          125,
+          75
+        ]
+      },
+      "to": {
+        "at": [
+          125,
+          75
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          114,
+          193
+        ],
+        "level": "-1"
+      },
+      "to": {
+        "platform": "15",
+        "near": [
+          114,
+          193
+        ]
+      },
+      "kind": "stairs",
+      "seconds": 25,
+      "meters": 12,
+      "note": "Assumed: stairs from the tunnel below to the 15/16 platform, like the other islands. OSM maps none here; no lift is assumed, so step-free routes to 15/16 are 'not mapped'."
+    }
+  ],
+  "drop_platforms": [
+    "E6;E7"
+  ],
+  "drop_pois": [],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-21",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract) with 7 hand connections for gaps in OSM; see connections[].note."
+    }
+  ]
+}

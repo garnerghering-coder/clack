@@ -30,6 +30,8 @@ export interface TrvStation {
   OfficialLocationName?: string;
   CountryCode?: string;
   CountyNo?: number[];
+  /** Track ids at the station ("1", "2a", "2b"…). */
+  PlatformLine?: string[];
   Advertised: boolean;
   Deleted?: boolean;
   Geometry?: { WGS84?: string };

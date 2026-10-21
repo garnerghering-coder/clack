@@ -598,3 +598,83 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .onboard-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; line-height: 18px; }
 .onboard-list li svg { flex: none; margin-top: 1px; color: var(--text-2); }
 .onboard.compact .onboard-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+
+/* ---------- Station map and Layover Guide (ADDITIONS_01 C) ---------- */
+:root { --path: #f8d64a; --path-glow: rgba(248, 214, 74, 0.28); --platform-fill: #2a2a2a; --hall-fill: #1b1b1b; --shop-fill: #222; }
+:root[data-theme='light'] { --path: #0a0a0a; --path-glow: rgba(248, 214, 74, 0.55); --platform-fill: #dcdcdc; --hall-fill: #efefef; --shop-fill: #e6e6e6; }
+.station-map-page { position: fixed; inset: 0 0 calc(var(--tabbar-h) + env(safe-area-inset-bottom)) 0; z-index: 1; background: var(--map-bg); overflow: hidden; }
+@media (min-width: 1024px) { .station-map-page { left: 240px; bottom: 0; } }
+.station-scene { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; user-select: none; cursor: grab; }
+.station-scene:active { cursor: grabbing; }
+.station-building { fill: var(--surface); stroke: var(--hairline); stroke-linejoin: round; }
+.station-hall, .station-room { fill: var(--hall-fill); stroke: var(--hairline); }
+.station-shop { fill: var(--shop-fill); stroke: var(--hairline); }
+.station-ghost { fill: var(--text); opacity: 0.05; }
+.station-platform { fill: var(--platform-fill); stroke: var(--hairline); stroke-linejoin: round; }
+.station-walk { fill: none; stroke: var(--text-3); opacity: 0.45; stroke-linecap: round; stroke-linejoin: round; }
+.station-vertical { fill: var(--text-2); opacity: 0.7; }
+.station-vertical.lift { fill: var(--text); }
+.station-platform-chip rect { fill: var(--surface-raised); stroke: var(--hairline); stroke-width: 1; }
+.station-platform-chip text { fill: var(--text); font-size: 12px; font-weight: 700; text-anchor: middle; font-variant-numeric: tabular-nums; }
+.station-platform-chip.marked rect { stroke: #fff; stroke-width: 1.5; }
+.station-platform-chip.marked text { fill: #fff; font-size: 11.5px; }
+.station-path-glow { fill: none; stroke: var(--path-glow); stroke-linecap: round; stroke-linejoin: round; }
+.station-path-dots { fill: none; stroke: var(--path); stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) { .station-path-dots { animation: march 0.9s linear infinite; } }
+@keyframes march { to { stroke-dashoffset: -1.2; } }
+.station-level-change circle { fill: var(--path); }
+.station-level-change svg { color: var(--bg); }
+.station-poi { cursor: pointer; }
+.station-poi > circle:first-child { fill: var(--surface-raised); stroke: var(--hairline); stroke-width: 1; }
+.station-poi > svg { color: var(--text); }
+.station-poi.dim { opacity: 0.32; }
+.station-poi-dot { stroke: var(--surface-raised); stroke-width: 1.5; }
+.station-poi-dot.open { fill: var(--on-time); }
+.station-poi-dot.closing_soon { fill: var(--late); }
+.station-poi-dot.closed { fill: var(--unknown); }
+.station-poi-q { fill: var(--text-2); font-size: 11px; font-weight: 800; }
+.station-map-head { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; display: flex; gap: 8px; align-items: center; z-index: 3; }
+.station-map-head .map-button { position: static; flex: none; }
+.station-map-title { flex: 1; min-width: 0; padding: 6px 12px; border-radius: 14px; background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); }
+.station-map-title h1 { font-size: 17px; line-height: 22px; }
+.station-map-title .caption { display: block; font-size: 11px; line-height: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.station-map-filters { position: absolute; top: calc(72px + env(safe-area-inset-top)); left: 12px; right: 12px; z-index: 3; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.station-map-filters .chip-button { flex: none; backdrop-filter: blur(8px); }
+.station-map-filters .chip-button:not(.active) { background: var(--glass); }
+.station-map-side { position: absolute; right: 12px; top: calc(120px + env(safe-area-inset-top)); z-index: 3; display: grid; gap: 6px; }
+.station-map-side .map-button { position: static; }
+.level-chip { min-width: 40px; min-height: 34px; padding: 0 8px; border-radius: 10px; background: var(--glass); border: 1px solid var(--hairline); font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--text-2); }
+.level-chip.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.level-chip.small { min-height: 28px; font-size: 12px; font-weight: 600; }
+.station-map-level { position: absolute; left: 14px; top: calc(118px + env(safe-area-inset-top)); z-index: 2; padding: 2px 8px; border-radius: 8px; background: var(--glass); }
+.station-map-bottom { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 3; background: var(--glass-strong); backdrop-filter: blur(12px); gap: 8px; max-height: 55%; overflow-y: auto; }
+.walk-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.walk-big { font-family: 'Space Grotesk', sans-serif; font-size: 26px; line-height: 30px; font-weight: 700; }
+.walk-head .icon-button { margin-left: auto; }
+.walk-steps { padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.plan-change { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.plan-change label { display: grid; gap: 4px; }
+.plan-change select { min-height: 38px; border-radius: 10px; background: var(--surface-raised); color: var(--text); border: 1px solid var(--hairline); padding: 0 8px; font: inherit; }
+.time-chip { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+.time-chip input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.map-attrib-inline { font-size: 10.5px; line-height: 13px; color: var(--text-3); }
+.station-list-view { position: absolute; inset: 0; overflow-y: auto; padding-top: calc(170px + env(safe-area-inset-top)); padding-bottom: 180px; background: var(--bg); }
+.poi-list { list-style: none; padding: 0; display: grid; gap: 2px; }
+.poi-row { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 4px; text-align: left; border-bottom: 1px solid var(--hairline); }
+.poi-row.closed { opacity: 0.55; }
+.poi-main { flex: 1; display: grid; min-width: 0; }
+.poi-badge { display: inline-grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 50%; background: var(--surface-raised); border: 1px solid var(--hairline); }
+.poi-state { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.poi-state.open { color: var(--on-time); }
+.poi-state.closing_soon { color: var(--late); }
+.poi-state.closed, .poi-state.unknown { color: var(--text-3); }
+.chip.poi-state.open { background: rgba(61, 220, 132, 0.16); }
+.chip.poi-state.closing_soon { background: var(--warn-bg); }
+/* Connection card (journeys, trip detail) */
+.connection { display: grid; gap: 6px; }
+.connection.card { margin: 8px 0; }
+.connection-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.connection-chip { min-width: 0; white-space: nowrap; }
+.connection-estimate { display: inline-flex; align-items: center; gap: 6px; }
+.connection .button.small { justify-self: start; display: inline-flex; align-items: center; gap: 6px; }
+.hero-connection { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-weight: 600; font-size: 14px; }

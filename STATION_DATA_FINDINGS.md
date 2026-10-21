@@ -191,3 +191,16 @@ This assumes `draft-from-osm` and the preview page already exist. It covers data
 6. **Tracks are preliminary** and `x` means none (replacement bus or cancelled). The Layover chip must handle both: show "Unknown".
 7. **Lift outages** exist only as free text in `TrainStationMessage`. This is P2. It must not drive step-free routing automatically.
 8. **Ownership:** not verified for Hässleholm, Norrköping, Lund and Västerås. It only matters if we approach owners for data.
+
+## Decisions (owner, 2026-10-21)
+
+- **Pilot:** Stockholm C, main-line station first (tracks 1–19, halls); Stockholm City later.
+- **No site work:** walking times come from the map (distance, stairs, escalators, lifts) and are labelled as
+  estimates from the map, not timed on site. `quality` stays `osm_draft` until someone checks it in person.
+- **Licence:** accepted. `data/stations/*.json` is offered under the ODbL with OpenStreetMap attribution
+  (`data/stations/README.md`, the Sources page, and on the map).
+- **Jernhusen:** used to check facts by hand only; nothing copied in bulk.
+- **Gaps in OSM** are filled in `scripts/stations/740000001.edits.json` with a note on each: platform 10 and the
+  south ends of 2–6 joined to the hall, and stairs assumed from the tunnel to the 15/16 island (no lift assumed, so
+  step-free routes there show as "not mapped").
+

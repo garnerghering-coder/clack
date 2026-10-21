@@ -14,7 +14,9 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "db:generate": "npm run db:generate -w @clack/server",
     "dev:phone": "concurrently -k -n server,web -c cyan,magenta \"npm run dev -w @clack/server\" \"npm run dev -w @clack/web -- --host\"",
-    "import": "npm run import -w @clack/server --"
+    "import": "npm run import -w @clack/server --",
+    "stations:validate": "tsx scripts/stations/validate.ts",
+    "stations:draft": "python3 scripts/stations/draft_from_osm.py"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

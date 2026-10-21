@@ -107,6 +107,8 @@ export const trvLocations = sqliteTable('trv_locations', {
   advertised: integer('advertised', { mode: 'boolean' }).notNull(),
   /** Swedish county (län) number from TrainStation.CountyNo, first listed. */
   countyNo: integer('county_no'),
+  /** Distinct base tracks in TrainStation.PlatformLine ("1", "2a", "2b" = 2): the station's size class for walks without a map. */
+  baseTracks: integer('base_tracks'),
   modifiedAt: timestamp('modified_at'),
 });
 

@@ -6,6 +6,7 @@ import type { Db } from '../db/client.js';
 import { stationFavorites, stationRecent, stations, trvLocations } from '../db/schema.js';
 import { BoardHub } from '../boards/hub.js';
 import type { BoardType } from '../boards/board.js';
+import { hasStationMap, stationMap, stationSize } from '../stations/maps.js';
 
 const TYPES = new Set(['departures', 'arrivals']);
 const MAX_SPAN_MS = 24 * 3600_000;
@@ -24,6 +25,7 @@ export const boardRoutes =
           lat: stations.lat,
           lon: stations.lon,
           countyNo: trvLocations.countyNo,
+          baseTracks: trvLocations.baseTracks,
         })
         .from(stations)
         .leftJoin(trvLocations, sql`lower(${trvLocations.signature}) = lower(${stations.trvSignature})`)
@@ -41,7 +43,8 @@ export const boardRoutes =
         ...s,
         county: s.countyNo ? (SE_COUNTIES[s.countyNo] ?? null) : null,
         hasBoard: Boolean(s.code && !s.code.includes('.')),
-        hasMap: false,
+        hasMap: hasStationMap(id),
+        sizeClass: stationSize(s.baseTracks),
         favorite,
       };
     };
@@ -50,6 +53,9 @@ export const boardRoutes =
       '/stations/:id',
       async (req, reply) => stationInfo(req.params.id, req.userId) ?? reply.code(404).send({ error: 'not found' }),
     );
+
+    // The station map (ADDITIONS_01 C1): data, validated; the app draws and routes it.
+    app.get<{ Params: { id: string } }>('/stations/:id/map', async (req, reply) => stationMap(req.params.id, (m) => app.log.warn(m)) ?? reply.code(404).send({ error: 'no map for this station' }));
 
     app.get<{ Params: { id: string }; Querystring: { type?: string; from?: string; to?: string } }>('/stations/:id/board', async (req, reply) => {
       const type = (req.query.type ?? 'departures') as BoardType;

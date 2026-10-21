@@ -22,7 +22,7 @@ function Choice<K extends keyof Settings>({ field, options, label }: { field: K;
   );
 }
 
-function Toggle({ field }: { field: 'includeCommuter' | 'showRailNetwork' }) {
+function Toggle({ field }: { field: 'includeCommuter' | 'showRailNetwork' | 'stepFree' | 'heavyLuggage' }) {
   const { t } = useTranslation();
   const { settings, update } = useSettings();
   return (
@@ -86,6 +86,13 @@ export function SettingsPage() {
       <section className="card">
         <Toggle field="includeCommuter" />
         <Toggle field="showRailNetwork" />
+      </section>
+      <section className="card">
+        <h2 className="section-header">{t('settings.changing')}</h2>
+        <Choice field="walkPace" options={['relaxed', 'normal', 'brisk'] as const} label={(v) => t(`settings.paces.${v}`)} />
+        <Toggle field="stepFree" />
+        <Toggle field="heavyLuggage" />
+        <p className="caption">{t('settings.changingNote')}</p>
       </section>
       <section className="card">
         <Link className="row link" to="/about">

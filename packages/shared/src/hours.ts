@@ -24,7 +24,8 @@ export function parseHours(text: string | null | undefined): Hours | null {
   const src = text.trim();
   if (src === '24/7') return { rules: [], always: true };
   const rules: Rule[] = [];
-  for (const part of src.split(';').map((p) => p.trim()).filter(Boolean)) {
+  // Rules are separated by ";", or by ", " before a weekday ("Su-Th 09:00-03:00, Fr,Sa 09:00-05:00").
+  for (const part of src.split(/;|,\s+(?=(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)\b)/).map((p) => p.trim()).filter(Boolean)) {
     const m = part.match(/^((?:(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?)(?:\s*,\s*(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?)*)?\s*(.*)$/);
     if (!m) return null;
     const days = new Set<number | 'PH'>();

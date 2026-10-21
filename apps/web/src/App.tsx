@@ -10,6 +10,7 @@ import { JourneyPage } from './pages/JourneyPage';
 import { StationsPage } from './pages/StationsPage';
 import { BoardPage } from './pages/BoardPage';
 import { LiveMapPage } from './pages/LiveMapPage';
+import { StationMapPage } from './pages/StationMapPage';
 import { TripDetailPage } from './pages/TripDetailPage';
 import { SettingsProvider } from './settings';
 
@@ -27,6 +28,9 @@ export function App() {
             <Route path="/stations" element={<StationsPage />} />
             <Route path="/live" element={<LiveMapPage />} />
             <Route path="/stations/:id" element={<BoardPage />} />
+            <Route path="/stations/:id/map" element={<StationMapPage />} />
+            {/* Dev preview for checking hand edits: pick two platforms, see the path and time (ADDITIONS_01 C). */}
+            {import.meta.env.DEV && <Route path="/dev/station/:id" element={<StationMapPage />} />}
             <Route path="/add" element={<AddTripPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/about" element={<AboutPage />} />

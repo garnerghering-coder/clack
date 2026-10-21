@@ -16,6 +16,7 @@ import { isLive, statusKey, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDistance, fmtDuration, fmtLongDate, fmtTime } from '../format';
 import { opColor } from '../map/style';
 import { Onboard } from '../components/Onboard';
+import { JourneyConnections } from '../components/Connection';
 
 function TimeBlock({
   label,
@@ -289,6 +290,8 @@ export function TripDetailPage() {
           </button>
         </section>
         {explain && <p className="caption">{explainText}</p>}
+
+        <JourneyConnections legId={leg.id} journeyId={leg.journeyId} />
 
         <section className="card">
           <h2 className="section-header">{t('detail.stops')}</h2>

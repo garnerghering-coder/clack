@@ -1,0 +1,1 @@
+ALTER TABLE `trv_locations` ADD `base_tracks` integer;

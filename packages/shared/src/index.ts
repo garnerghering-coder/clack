@@ -3,6 +3,7 @@ export * from './polyline';
 export * from './counties';
 export * from './onboard';
 export * from './hours';
+export * from './station';
 
 // Types and constants shared by the web app and the server.
 
@@ -39,6 +40,10 @@ export interface Settings {
   /** Map: show the faint rail-network layer by default. */
   showRailNetwork: boolean;
   theme: Theme;
+  /** Changing trains (ADDITIONS_01 C3): walking pace, step-free routes only, heavy luggage. */
+  walkPace: 'relaxed' | 'normal' | 'brisk';
+  stepFree: boolean;
+  heavyLuggage: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -51,6 +56,9 @@ export const DEFAULT_SETTINGS: Settings = {
   // Owner's choice (2026-10-21): all rail lines dimmed under your route, as in a transit map.
   showRailNetwork: true,
   theme: 'dark',
+  walkPace: 'normal',
+  stepFree: false,
+  heavyLuggage: false,
 };
 
 /** Validate and merge a partial settings update; unknown keys and invalid values are rejected. */
@@ -63,6 +71,15 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
       case 'displayName':
         if (typeof value !== 'string' || value.length > 60) throw new Error('displayName must be a string of at most 60 characters');
         next.displayName = value.trim();
+        break;
+      case 'walkPace':
+        if (value !== 'relaxed' && value !== 'normal' && value !== 'brisk') throw new Error(`invalid walkPace: ${String(value)}`);
+        next.walkPace = value;
+        break;
+      case 'stepFree':
+      case 'heavyLuggage':
+        if (typeof value !== 'boolean') throw new Error(`${key} must be true or false`);
+        next[key] = value;
         break;
       case 'theme':
         if (!THEMES.includes(value as Theme)) throw new Error(`invalid theme: ${String(value)}`);

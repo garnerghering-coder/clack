@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Star, X } from 'lucide-react';
+import { ArrowLeft, Map as MapIcon, Star, X } from 'lucide-react';
 import { api, type Board, type BoardRow, type BoardType, type StationInfo, type TimetableTrip } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
@@ -251,6 +251,11 @@ export function BoardPage() {
           <h1 className="detail-route">{station?.name ?? ' '}</h1>
           {station?.county && <p className="caption">{station.county}</p>}
         </div>
+        {station?.hasMap && (
+          <Link className="icon-button" to={`/stations/${station.id}/map`} aria-label={t('stationMap.open')} title={t('stationMap.open')}>
+            <MapIcon size={20} />
+          </Link>
+        )}
         {station && (
           <button
             className={`icon-button ${station.favorite ? 'fav-on' : ''}`}

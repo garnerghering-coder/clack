@@ -9,6 +9,11 @@ describe('opening hours', () => {
     expect(parseHours('24/7')).toEqual({ rules: [], always: true });
     expect(parseHours('Mo-Fr 06:00-22:00; Sa,Su 08:00-20:00')!.rules).toHaveLength(2);
     expect(parseHours('Mo-Fr 06:00-22:00 "except in summer"')).toBeNull();
+    // ", " before a weekday starts a new rule; between times it doesn't.
+    const h = parseHours('Su-Th 09:00-03:00, Fr,Sa 09:00-05:00')!;
+    expect(h.rules).toHaveLength(2);
+    expect(isOpenAt(h, at('2026-10-24T04:30:00+02:00'))).toBe(true); // Saturday 04:30, from Friday night
+    expect(parseHours('Mo-Fr 06:00-10:00, 12:00-14:00')!.rules).toHaveLength(1);
     expect(parseHours('sunrise-sunset')).toBeNull();
     expect(parseHours('')).toBeNull();
   });

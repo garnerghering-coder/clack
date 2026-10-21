@@ -6,7 +6,7 @@ import { stations } from '../db/schema.js';
 import { DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js';
 import { importGtfsSweden3, lastImportedFeed, type ImportSummary } from './gtfs-se3.js';
 import { loadOfficialMapping } from './official-mapping.js';
-import { importTrvStations, trvLocationCount } from './trv-stations.js';
+import { hasBaseTracks, importTrvStations, trvLocationCount } from './trv-stations.js';
 import { basemapInfo, extractBasemap } from './basemap.js';
 import { refreshLogos } from './logos.js';
 
@@ -42,7 +42,7 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
   const log = opts.log ?? console.log;
   return exclusive(async () => {
     importLegacyDownloadLog(db);
-    if (!trvLocationCount(db)) log(`Trafikverket: ${await importTrvStations(db)} locations`);
+    if (!trvLocationCount(db) || !hasBaseTracks(db)) log(`Trafikverket: ${await importTrvStations(db)} locations`);
     let zip = opts.zip;
     if (!zip) {
       const r = await ensureDataset(db, DATASETS.gtfs_se3, { force: opts.forceDownload, log });

@@ -12,6 +12,7 @@ import { JourneyCard } from '../components/Journey';
 import { isLive, useLiveUpdates, useNow } from '../live';
 import { dayOffset, fmtDay, fmtDistance, fmtMonth, fmtTime } from '../format';
 import { opColor } from '../map/style';
+import { ConnectionChip, useConnection } from '../components/Connection';
 
 const tzOf = (leg: Leg) => leg.origin?.tz ?? 'Europe/Stockholm';
 // A late train that is still running counts as upcoming until it actually arrives.
@@ -70,7 +71,7 @@ export function LegRow({ leg }: { leg: Leg }) {
 const stopNames = new Map<string, { stationId: string; name: string; tz: string }[]>();
 const heroStops = (leg: Leg) => stopNames.get(leg.id) ?? [];
 
-function Hero({ leg }: { leg?: Leg }) {
+function Hero({ leg, next }: { leg?: Leg; next?: Leg }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const now = useNow(leg && isLive(leg.live) ? 1000 : 30_000);
@@ -109,7 +110,7 @@ function Hero({ leg }: { leg?: Leg }) {
             <LiveChip live={leg.live} now={now} />
             <DelayPill delay={leg.live.arrivalDelayMin} canceled={leg.canceled} />
           </div>
-          <LiveModule leg={leg} live={leg.live} stops={heroStops(leg)} now={now} compact />
+          {next ? <HeroConnection a={leg} b={next} /> : <LiveModule leg={leg} live={leg.live} stops={heroStops(leg)} now={now} compact />}
         </>
       ) : (
         <div className="hero-bottom">
@@ -119,6 +120,29 @@ function Hero({ leg }: { leg?: Leg }) {
         </div>
       )}
     </Link>
+  );
+}
+
+/** The leg you change to after this one, if they're one journey and meet at the same station. */
+function nextInJourney(legs: Leg[], leg: Leg): Leg | undefined {
+  if (!leg.journeyId) return undefined;
+  const arr = ms(leg.schedArr) ?? 0;
+  return legs
+    .filter((l) => l.journeyId === leg.journeyId && l.id !== leg.id && (ms(l.schedDep) ?? 0) >= arr && l.origin?.id === leg.destination?.id)
+    .sort((x, y) => (ms(x.schedDep) ?? 0) - (ms(y.schedDep) ?? 0))[0];
+}
+
+/** The next event is a change (ADDITIONS_01 C3): "Change at Hässleholm · Track 2 → 5 · 6 min walk · Tight". */
+function HeroConnection({ a, b }: { a: Leg; b: Leg }) {
+  const { t } = useTranslation();
+  const { result } = useConnection(a, b);
+  const walk = result.walkSeconds !== null ? t('connection.walk', { min: Math.max(1, Math.round(result.walkSeconds / 60)) }) : null;
+  const tracks = a.arrPlatform || b.depPlatform ? t('connection.tracks', { from: a.arrPlatform ?? '?', to: b.depPlatform ?? '?' }) : null;
+  return (
+    <div className="hero-connection">
+      <span>{[t('connection.changeAt', { station: a.destination?.name ?? '' }), tracks, walk].filter(Boolean).join(' · ')}</span>
+      <ConnectionChip result={result} />
+    </div>
   );
 }
 
@@ -213,7 +237,7 @@ export function TripsPage() {
       )}
       {legs && legs.length > 0 && tab === 'upcoming' && (
         <>
-          <Hero leg={hero} />
+          <Hero leg={hero} next={hero ? nextInJourney(legs, hero) : undefined} />
           <div className="list">{upcoming.filter((l) => l !== hero).map((l) => <LegRow key={l.id} leg={l} />)}</div>
         </>
       )}

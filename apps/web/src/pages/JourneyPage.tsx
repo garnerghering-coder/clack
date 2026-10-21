@@ -1,15 +1,17 @@
 // Journey view (DESIGN §7): door-to-door summary, a combined map, and the legs joined by transfer connectors.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
 import { api, ms, type Journey } from '../api';
 import { LegRow } from './TripsPage';
 import { TransferChip } from '../components/Journey';
+import { ConnectionCard } from '../components/Connection';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
 import { fmtDistance, fmtDuration, fmtLongDate } from '../format';
 import { opColor } from '../map/style';
+import { useLiveUpdates } from '../live';
 
 export function JourneyPage() {
   const { id } = useParams();
@@ -20,6 +22,13 @@ export function JourneyPage() {
   useEffect(() => {
     if (id) api.journey(id).then(setJ, () => setMissing(true));
   }, [id]);
+  // A live update for one of its trains (delay, platform): reload, at most every 20 s, so connections recompute.
+  const lastReload = useRef(0);
+  useLiveUpdates((u) => {
+    if (!id || !j?.legs.some((l) => l.id === u.legId) || Date.now() - lastReload.current < 20_000) return;
+    lastReload.current = Date.now();
+    api.journey(id).then(setJ, () => undefined);
+  });
 
   if (missing)
     return (
@@ -78,7 +87,7 @@ export function JourneyPage() {
       <section className="journey-card">
         {j.legs.map((l, i) => (
           <div key={l.id}>
-            {i > 0 && <TransferChip prev={j.legs[i - 1]!} next={l} />}
+            {i > 0 && (j.legs[i - 1]!.destination?.id === l.origin?.id ? <ConnectionCard a={j.legs[i - 1]!} b={l} /> : <TransferChip prev={j.legs[i - 1]!} next={l} />)}
             <LegRow leg={l} />
           </div>
         ))}
