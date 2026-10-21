@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { connectionStatus, instructions, routeTracks, validateStationMap, type StationMap } from './station';
+import { connectionStatus, instructions, nearestNode, resolveEndpoint, routeBetween, routeTracks, toLocal, validateStationMap, type StationMap } from './station';
 
 // A tiny two-platform station: a tunnel below with stairs and a slower lift up to each platform.
 const map = (): StationMap => ({
@@ -67,6 +67,41 @@ describe('walking routes', () => {
   it('describes the route from templates', () => {
     const m = map();
     expect(instructions(m, routeTracks(m, '1', '2')!, '1', '2').map((i) => i.key)).toEqual(['leave', 'stairs_down', 'walk', 'stairs_up', 'arrive']);
+  });
+});
+
+describe('walks between any two points', () => {
+  const withPoi = () => {
+    const m = map();
+    m.pois.push({ id: 'wc', category: 'toilet', name: '', level: 'L-1', x: 30, y: 52, node: 'b', hours_source: null, hours_verified: null });
+    return m;
+  };
+  it('reads tracks, amenities, nodes and "me" from their URL form', () => {
+    const m = withPoi();
+    expect(resolveEndpoint(m, '2b')).toMatchObject({ kind: 'track', track: '2b', node: { id: 'p2' } });
+    expect(resolveEndpoint(m, 'p:wc')).toMatchObject({ kind: 'poi', node: { id: 'b' } });
+    expect(resolveEndpoint(m, 'n:a')).toMatchObject({ kind: 'node' });
+    expect(resolveEndpoint(m, 'me:a')).toMatchObject({ kind: 'me' });
+    expect(resolveEndpoint(m, 'p:nope')).toBeNull();
+    expect(resolveEndpoint(m, '9')).toBeNull();
+  });
+  it('routes from a track to an amenity and words the ends by kind', () => {
+    const m = withPoi();
+    const a = resolveEndpoint(m, '1');
+    const b = resolveEndpoint(m, 'p:wc');
+    const r = routeBetween(m, a, b)!;
+    expect(r.steps.map((s) => s.kind)).toEqual(['stairs', 'walk']);
+    expect(instructions(m, r, a, b).map((i) => i.key)).toEqual(['leave', 'stairs_down', 'walk', 'reach']);
+    expect(instructions(m, routeBetween(m, b, a)!, b, a).map((i) => i.key)).toEqual(['start', 'walk', 'stairs_up', 'arrive']);
+  });
+  it('snaps a position to the nearest node on its level', () => {
+    const m = map();
+    const [x, y] = toLocal(m, 59 - 50 / 110_574, 18 + 31 / (111_320 * Math.cos((59 * Math.PI) / 180)));
+    expect(x).toBeCloseTo(31, 3);
+    expect(y).toBeCloseTo(50, 3);
+    expect(nearestNode(m, 'L0', x, y)!.id).toBe('p2');
+    expect(nearestNode(m, 'L-1', x, y)!.id).toBe('b');
+    expect(nearestNode(m, 'L0', 500, 500, 100)).toBeNull();
   });
 });
 

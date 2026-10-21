@@ -18,7 +18,8 @@ export interface StationLevel {
 }
 export interface StationShape {
   level: string;
-  kind: 'building' | 'hall' | 'room' | 'shop';
+  /** "track" is an open line (rails between platforms); the others are polygons. */
+  kind: 'building' | 'hall' | 'room' | 'shop' | 'track';
   name?: string;
   points: Pt[];
 }
@@ -58,6 +59,8 @@ export interface StationEdge {
 export interface StationPoi {
   id: string;
   category: PoiCategory;
+  /** A more specific pictogram than the category ("burger", "bakery", "books"…), when the tags say. */
+  icon?: string;
   name: string;
   level: string;
   x: number;
@@ -254,23 +257,89 @@ export function platformForTrack(m: StationMap, track: string | null | undefined
 }
 
 export function routeTracks(m: StationMap, fromTrack: string | null | undefined, toTrack: string | null | undefined, p: WalkProfile = DEFAULT_PROFILE): StationRoute | null {
-  const a = platformForTrack(m, fromTrack);
-  const b = platformForTrack(m, toTrack);
+  const track = (t: string | null | undefined) => (t && !t.includes(':') ? resolveEndpoint(m, t) : null);
+  return routeBetween(m, track(fromTrack), track(toTrack), p);
+}
+
+// ---------- Endpoints: where a walk starts or ends ----------
+// As a URL value: a track ("11", "17b"), an amenity ("p:<poi id>"), any node such as an entrance ("n:<node id>"),
+// or the walker's own position snapped to the map ("me:<node id>").
+export type EndpointKind = 'track' | 'poi' | 'node' | 'me';
+export interface Endpoint {
+  spec: string;
+  kind: EndpointKind;
+  node: StationNode;
+  track?: string;
+  platform?: StationPlatform;
+  poi?: StationPoi;
+}
+
+export function resolveEndpoint(m: StationMap, spec: string | null | undefined): Endpoint | null {
+  if (!spec) return null;
+  const node = (id: string) => m.nodes.find((n) => n.id === id) ?? null;
+  const colon = spec.indexOf(':');
+  const [kind, id] = colon < 0 ? ['track', spec] : [spec.slice(0, colon), spec.slice(colon + 1)];
+  if (kind === 'track') {
+    const platform = platformForTrack(m, id);
+    const n = platform && node(platform.node);
+    return n ? { spec, kind: 'track', node: n, track: id, platform: platform! } : null;
+  }
+  if (kind === 'p') {
+    const poi = m.pois.find((p) => p.id === id);
+    const n = poi && node(poi.node);
+    return n ? { spec, kind: 'poi', node: n, poi } : null;
+  }
+  if (kind === 'n' || kind === 'me') {
+    const n = node(id);
+    return n ? { spec, kind: kind === 'n' ? 'node' : 'me', node: n } : null;
+  }
+  return null;
+}
+
+export function routeBetween(m: StationMap, a: Endpoint | null, b: Endpoint | null, p: WalkProfile = DEFAULT_PROFILE): StationRoute | null {
   if (!a || !b) return null;
-  if (a.id === b.id) return { nodes: [m.nodes.find((n) => n.id === a.node)!], steps: [], seconds: 30, meters: 0, levels: [a.level] };
-  return routeNodes(m, a.node, b.node, p);
+  // The same platform (or the same spot): no walk to speak of.
+  if ((a.platform && a.platform.id === b.platform?.id) || a.node.id === b.node.id)
+    return { nodes: [a.node], steps: [], seconds: a.platform ? 30 : 0, meters: 0, levels: [a.node.level] };
+  return routeNodes(m, a.node.id, b.node.id, p);
+}
+
+/** WGS84 to the map's local metres (x east, y south); an equirectangular step is plenty inside one station. */
+export function toLocal(m: StationMap, lat: number, lon: number): Pt {
+  const kx = 111_320 * Math.cos((m.origin.lat * Math.PI) / 180);
+  return [(lon - m.origin.lon) * kx, -(lat - m.origin.lat) * 110_574];
+}
+
+/** The walking-graph node closest to a point on a level, if one is within `maxMeters`. */
+export function nearestNode(m: StationMap, level: string, x: number, y: number, maxMeters = Infinity): StationNode | null {
+  const reachable = new Set(m.edges.flatMap((e) => [e.from, e.to]));
+  let best: StationNode | null = null;
+  let bd = maxMeters;
+  for (const n of m.nodes) {
+    if (n.level !== level || !reachable.has(n.id)) continue;
+    const d = Math.hypot(n.x - x, n.y - y);
+    if (d <= bd) [best, bd] = [n, d];
+  }
+  return best;
 }
 
 /** Directions from templates (i18n keys + values), merging consecutive walking. Never generated text. */
 export interface Instruction {
-  key: 'leave' | 'walk' | 'stairs_up' | 'stairs_down' | 'escalator_up' | 'escalator_down' | 'lift_up' | 'lift_down' | 'arrive';
+  key: 'leave' | 'start' | 'walk' | 'stairs_up' | 'stairs_down' | 'escalator_up' | 'escalator_down' | 'lift_up' | 'lift_down' | 'arrive' | 'reach';
   level?: string;
   seconds: number;
   track?: string;
+  /** For start / reach: the endpoint (the caller turns it into a name). */
+  endpoint?: Endpoint;
 }
-export function instructions(m: StationMap, r: StationRoute, fromTrack?: string | null, toTrack?: string | null): Instruction[] {
+/** `from` / `to` are tracks (as before) or endpoints; a track endpoint reads "Leave track 11", others "Start at …". */
+export function instructions(m: StationMap, r: StationRoute, from?: string | Endpoint | null, to?: string | Endpoint | null): Instruction[] {
   const order = new Map(m.levels.map((l) => [l.id, l.order]));
-  const out: Instruction[] = [{ key: 'leave', seconds: 0, ...(fromTrack ? { track: fromTrack } : {}) }];
+  const end = (e: string | Endpoint | null | undefined, track: 'leave' | 'arrive', place: 'start' | 'reach'): Instruction => {
+    if (!e || typeof e === 'string') return { key: track, seconds: 0, ...(e ? { track: e } : {}) };
+    return e.kind === 'track' ? { key: track, seconds: 0, track: e.track! } : { key: place, seconds: 0, endpoint: e };
+  };
+  const out: Instruction[] = [end(from, 'leave', 'start')];
   for (const s of r.steps) {
     const up = (order.get(s.to.level) ?? 0) > (order.get(s.from.level) ?? 0);
     const key: Instruction['key'] = s.kind === 'walk' ? 'walk' : (`${s.kind}_${up ? 'up' : 'down'}` as Instruction['key']);
@@ -279,7 +348,7 @@ export function instructions(m: StationMap, r: StationRoute, fromTrack?: string 
     else if (key !== 'walk' && last.key === key) last.seconds += s.seconds;
     else out.push({ key, seconds: s.seconds, ...(key === 'walk' ? {} : { level: s.to.level }) });
   }
-  out.push({ key: 'arrive', seconds: 0, ...(toTrack ? { track: toTrack } : {}) });
+  out.push(end(to, 'arrive', 'reach'));
   return out.map((i) => ({ ...i, seconds: Math.round(i.seconds) }));
 }
 

@@ -111,6 +111,37 @@ def category(t):
     return None
 
 
+# A more specific icon than the category, from OSM tags and well-known chains (generic pictograms, never logos).
+BRAND_ICONS = {
+    "mcdonald": "burger", "burger king": "burger", "max": "burger", "sibylla": "burger", "subway": "sandwich",
+    "espresso house": "coffee", "starbucks": "coffee", "wayne": "coffee", "joe & the juice": "juice", "pressbyrån": "kiosk",
+    "7-eleven": "convenience", "coop": "supermarket", "ica": "supermarket", "pizza hut": "pizza", "o'learys": "bar",
+}
+CUISINE_ICONS = {"burger": "burger", "pizza": "pizza", "sushi": "sushi", "japanese": "sushi", "asian": "noodles", "thai": "noodles", "chinese": "noodles",
+                 "vietnamese": "noodles", "noodle": "noodles", "ramen": "noodles", "sandwich": "sandwich", "kebab": "kebab", "chicken": "chicken",
+                 "coffee_shop": "coffee", "ice_cream": "ice_cream", "juice": "juice", "bagel": "sandwich", "salad": "salad", "donut": "donut"}
+SHOP_ICONS = {"bakery": "bakery", "pastry": "bakery", "confectionery": "candy", "chocolate": "candy", "convenience": "convenience", "kiosk": "kiosk",
+              "newsagent": "kiosk", "supermarket": "supermarket", "books": "books", "clothes": "clothes", "shoes": "shoes", "fashion_accessories": "clothes",
+              "cosmetics": "cosmetics", "perfumery": "cosmetics", "beauty": "cosmetics", "chemist": "pharmacy", "florist": "flowers", "electronics": "electronics",
+              "mobile_phone": "electronics", "computer": "electronics", "jewelry": "jewelry", "watches": "jewelry", "gift": "gift", "variety_store": "gift",
+              "hairdresser": "hairdresser", "optician": "optician", "tobacco": "kiosk", "tea": "coffee", "coffee": "coffee", "alcohol": "bar", "wine": "bar",
+              "travel_agency": "info", "bag": "clothes", "toys": "gift", "interior_decoration": "gift", "stationery": "books"}
+
+
+def poi_icon(t):
+    name = (t.get("brand") or t.get("name") or "").lower()
+    for brand, icon in BRAND_ICONS.items():
+        if name.startswith(brand):
+            return icon
+    for c in (t.get("cuisine") or "").split(";"):
+        if c.strip() in CUISINE_ICONS:
+            return CUISINE_ICONS[c.strip()]
+    if t.get("shop") in SHOP_ICONS:
+        return SHOP_ICONS[t["shop"]]
+    a = t.get("amenity")
+    return {"cafe": "coffee", "bar": "bar", "pub": "bar", "ice_cream": "ice_cream", "fast_food": "fast_food"}.get(a)
+
+
 def pip(pt, poly):
     x, y = pt
     ins = False
@@ -241,6 +272,23 @@ def main():
     by_ref = defaultdict(list)
     for p in platforms:
         by_ref[p["ref"]].append(p)
+
+    # ---- Tracks between the platforms (drawing only): rail segments near a platform, not in tunnels ----
+    plat_polys = [p["poly"] for p in platforms]
+    for wid, w in ways.items():
+        t = w["t"]
+        if t.get("railway") != "rail" or t.get("tunnel") or (t.get("layer") or "0").startswith("-"):
+            continue
+        pts = coords(w)
+        run = []
+        for q in pts + [None]:
+            close = q is not None and any(dist_to_poly(q, pp) <= 12 for pp in plat_polys)
+            if close:
+                run.append(q)
+            elif run:
+                if len(run) >= 2:
+                    shapes.append(dict(level=level_id["0"], kind="track", points=simplify(run, 0.6)))
+                run = []
 
     # ---- Walking graph from OSM ways ----
     g_nodes = {}  # vid -> dict(x, y, levels Counter, osm tags)
@@ -655,7 +703,8 @@ def main():
         if pid in drop_pois:
             continue
         fee = t.get("fee")
-        poi = dict(id=pid, category=cat, name=t.get("name") or "", level=level, x=round(p[0], 1), y=round(p[1], 1), node=nid,
+        icon = poi_icon(t)
+        poi = dict(id=pid, category=cat, name=t.get("name") or "", level=level, x=round(p[0], 1), y=round(p[1], 1), node=nid, **({"icon": icon} if icon else {}),
                    opening_hours=t.get("opening_hours"), hours_source="osm" if t.get("opening_hours") else None, hours_verified=None)
         if fee in ("no",):
             poi["fee"] = "free"
@@ -680,7 +729,7 @@ def main():
         origin=dict(lat=lat0, lon=lon0),
         view=dict(rotation=edits.get("rotation", 0)),
         levels=[dict(id=l["id"], name=l["name"], order=l["order"]) for l in edits["levels"]],
-        shapes=[s for s in shapes if len(s["points"]) >= 3],
+        shapes=[s for s in shapes if len(s["points"]) >= (2 if s["kind"] == "track" else 3)],
         platforms=[p for p in out_platforms if p["node"] in names],
         nodes=out_nodes,
         edges=out_edges,

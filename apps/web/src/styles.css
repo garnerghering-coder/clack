@@ -612,17 +612,20 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .onboard.compact .onboard-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 
 /* ---------- Station map and Layover Guide (ADDITIONS_01 C) ---------- */
-:root { --path: #f8d64a; --path-glow: rgba(248, 214, 74, 0.28); --platform-fill: #2a2a2a; --hall-fill: #1b1b1b; --shop-fill: #222; }
-:root[data-theme='light'] { --path: #0a0a0a; --path-glow: rgba(248, 214, 74, 0.55); --platform-fill: #dcdcdc; --hall-fill: #efefef; --shop-fill: #e6e6e6; }
+:root { --path: #f8d64a; --path-glow: rgba(248, 214, 74, 0.28); --platform-fill: #2a2a2a; --hall-fill: #1b1b1b; --shop-fill: #222; --me: #3b8bff; }
+:root[data-theme='light'] { --path: #0a0a0a; --path-glow: rgba(248, 214, 74, 0.55); --platform-fill: #dcdcdc; --hall-fill: #efefef; --shop-fill: #e6e6e6; --me: #1a6ff0; }
 .station-map-page { position: fixed; inset: 0 0 calc(var(--tabbar-h) + env(safe-area-inset-bottom)) 0; z-index: 1; background: var(--map-bg); overflow: hidden; }
 @media (min-width: 1024px) { .station-map-page { left: 240px; bottom: 0; } }
 .station-scene { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; user-select: none; cursor: grab; }
 .station-scene:active { cursor: grabbing; }
-.station-building { fill: var(--surface); stroke: var(--hairline); stroke-linejoin: round; }
-.station-hall, .station-room { fill: var(--hall-fill); stroke: var(--hairline); }
-.station-shop { fill: var(--shop-fill); stroke: var(--hairline); }
+.station-building { fill: var(--surface); }
+.station-hall { fill: var(--hall-fill); }
+.station-room { fill: var(--hall-fill); stroke: var(--hairline); }
+.station-shop { fill: var(--shop-fill); stroke: var(--map-bg); }
+.station-track { fill: none; stroke: var(--text-3); opacity: 0.4; stroke-linecap: round; stroke-linejoin: round; }
+.station-poi-name { fill: var(--text-2); font-size: 10px; font-weight: 600; text-anchor: middle; paint-order: stroke; stroke: var(--map-bg); stroke-width: 3px; }
 .station-ghost { fill: var(--text); opacity: 0.05; }
-.station-platform { fill: var(--platform-fill); stroke: var(--hairline); stroke-linejoin: round; }
+.station-platform { fill: var(--platform-fill); stroke: var(--platform-fill); stroke-linejoin: round; }
 .station-walk { fill: none; stroke: var(--text-3); opacity: 0.45; stroke-linecap: round; stroke-linejoin: round; }
 .station-vertical { fill: var(--text-2); opacity: 0.7; }
 .station-vertical.lift { fill: var(--text); }
@@ -645,6 +648,15 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .station-poi-dot.closing_soon { fill: var(--late); }
 .station-poi-dot.closed { fill: var(--unknown); }
 .station-poi-q { fill: var(--text-2); font-size: 11px; font-weight: 800; }
+.station-pin { pointer-events: none; }
+.station-pin-dot { fill: var(--text); stroke: var(--map-bg); stroke-width: 2.5; }
+.station-pin rect { fill: var(--text); }
+.station-pin text { fill: var(--bg); font-size: 11.5px; font-weight: 700; text-anchor: middle; }
+.station-pin.to .station-pin-dot, .station-pin.to rect { fill: var(--accent); }
+.station-pin.to text { fill: var(--on-accent); }
+.station-pin.me .station-pin-dot, .station-pin.me rect { fill: var(--me); }
+.station-pin.me text { fill: #fff; }
+.station-pin-halo { fill: var(--me); opacity: 0.2; }
 .station-map-head { position: absolute; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; display: flex; gap: 8px; align-items: center; z-index: 3; }
 .station-map-head .map-button { position: static; flex: none; }
 .station-map-title { flex: 1; min-width: 0; padding: 6px 12px; border-radius: 14px; background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); }
@@ -664,9 +676,16 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .walk-big { font-family: 'Space Grotesk', sans-serif; font-size: 26px; line-height: 30px; font-weight: 700; }
 .walk-head .icon-button { margin-left: auto; }
 .walk-steps { padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
-.plan-change { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.plan-change label { display: grid; gap: 4px; }
-.plan-change select { min-height: 38px; border-radius: 10px; background: var(--surface-raised); color: var(--text); border: 1px solid var(--hairline); padding: 0 8px; font: inherit; }
+.route-ends { display: grid; grid-template-columns: 1fr auto; gap: 6px 8px; align-items: center; }
+.route-end { display: flex; align-items: center; gap: 8px; min-height: 42px; min-width: 0; padding: 0 12px; border-radius: 12px; background: var(--surface-raised); border: 1px solid var(--hairline); text-align: left; }
+.route-end .caption { flex: none; width: 38px; }
+.route-end-value { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.route-end-value.placeholder { color: var(--text-3); font-weight: 500; }
+.place-search { height: 80dvh; max-height: 80dvh; align-content: start; }
+.place-group { display: grid; gap: 6px; }
+.track-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.track-pick { min-width: 44px; justify-content: center; font-variant-numeric: tabular-nums; font-weight: 700; }
+.poi-badge.me { background: var(--me); border-color: var(--me); color: #fff; }
 .time-chip { position: relative; display: inline-flex; align-items: center; gap: 6px; }
 .time-chip input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .map-attrib-inline { font-size: 10.5px; line-height: 13px; color: var(--text-3); }

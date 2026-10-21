@@ -6,6 +6,31 @@ import {
   Armchair,
   ArrowUpDown,
   Banknote,
+  Beef,
+  Beer,
+  BookOpen,
+  Candy,
+  Croissant,
+  CupSoda,
+  Donut,
+  Drumstick,
+  Fish,
+  Flower2,
+  Footprints,
+  Gem,
+  Gift,
+  Glasses,
+  IceCreamCone,
+  Pizza,
+  Salad,
+  Sandwich,
+  Scissors,
+  Shirt,
+  ShoppingBasket,
+  ShoppingCart,
+  Smartphone,
+  Soup,
+  Sparkles,
   Bus,
   CarTaxiFront,
   Coffee,
@@ -39,10 +64,55 @@ export const POI_ICONS: Record<PoiCategory, LucideIcon> = {
   other: MapPin,
 };
 
+/** Pictograms for a place's type, more specific than its category (generic symbols, not brand logos). */
+export const KIND_ICONS: Record<string, LucideIcon> = {
+  burger: Beef,
+  pizza: Pizza,
+  sushi: Fish,
+  noodles: Soup,
+  sandwich: Sandwich,
+  kebab: Drumstick,
+  chicken: Drumstick,
+  salad: Salad,
+  donut: Donut,
+  fast_food: Sandwich,
+  coffee: Coffee,
+  bakery: Croissant,
+  ice_cream: IceCreamCone,
+  juice: CupSoda,
+  bar: Beer,
+  candy: Candy,
+  kiosk: Newspaper,
+  convenience: ShoppingBasket,
+  supermarket: ShoppingCart,
+  books: BookOpen,
+  clothes: Shirt,
+  shoes: Footprints,
+  cosmetics: Sparkles,
+  pharmacy: Pill,
+  flowers: Flower2,
+  electronics: Smartphone,
+  jewelry: Gem,
+  gift: Gift,
+  hairdresser: Scissors,
+  optician: Glasses,
+  info: Info,
+};
+export const poiIcon = (p: { category: PoiCategory; icon?: string }): LucideIcon => (p.icon && KIND_ICONS[p.icon]) || POI_ICONS[p.category];
+
 export interface PlatformMark {
   platformId: string;
   label: string;
   color: string;
+}
+
+/** A walk's start or end that isn't a platform: an amenity, an entrance, or the walker ("me"). */
+export interface PlacePin {
+  x: number;
+  y: number;
+  level: string;
+  label: string;
+  kind: 'from' | 'to' | 'me';
 }
 
 interface View {
@@ -69,17 +139,19 @@ export function StationScene({
   level,
   route,
   marks,
+  pins = [],
   poiState,
   dimPoi,
   onPoi,
   onPlatform,
   fitTo,
-  insets = { top: 130, bottom: 140 },
+  insets: insetsIn = { top: 130, bottom: 140 },
 }: {
   map: StationMap;
   level: string;
   route: StationRoute | null;
   marks: PlatformMark[];
+  pins?: PlacePin[];
   poiState: (p: StationPoi) => OpenState;
   dimPoi: (p: StationPoi) => boolean;
   onPoi: (p: StationPoi) => void;
@@ -87,8 +159,10 @@ export function StationScene({
   /** Change this to re-fit the view (e.g. when a route appears). */
   fitTo: string;
   /** Screen space taken by overlays at the top and bottom, kept clear when fitting. */
-  insets?: { top: number; bottom: number };
+  insets?: { top: number; bottom: number; right?: number };
 }) {
+  // The floor buttons down the right-hand side.
+  const insets = { right: 60, ...insetsIn };
   const el = useRef<SVGSVGElement>(null);
   const rot = map.view?.rotation ?? 0;
   const [size, setSize] = useState({ w: 393, h: 700 });
@@ -107,7 +181,16 @@ export function StationScene({
   useEffect(() => {
     // The halls are where the amenities are; the outline of the whole station runs far along the tracks.
     const pois = map.pois.map((p) => [p.x, p.y] as Pt);
-    const pts: Pt[] = route?.nodes.length ? route.nodes.map((n) => [n.x, n.y] as Pt) : pois.length ? pois : map.platforms.flatMap((p) => p.geometry.flat());
+    // Just one end chosen so far: centre on it (and its chip) with some of the surroundings.
+    const ends: Pt[] = [
+      ...pins.filter((p) => p.level === level).map((p) => [p.x, p.y] as Pt),
+      ...marks.flatMap((mk) => {
+        const pl = map.platforms.find((x) => x.id === mk.platformId);
+        const n = pl && pl.level === level ? map.nodes.find((x) => x.id === pl.node) : null;
+        return n ? [[n.x, n.y] as Pt] : [];
+      }),
+    ];
+    const pts: Pt[] = route?.nodes.length ? route.nodes.map((n) => [n.x, n.y] as Pt) : ends.length ? ends : pois.length ? pois : map.platforms.flatMap((p) => p.geometry.flat());
     if (!pts.length) return;
     const r = pts.map((p) => rotate(p, rot));
     const xs = r.map((p) => p[0]).sort((a, b) => a - b);
@@ -116,13 +199,17 @@ export function StationScene({
     const q = (v: number[], f: number) => v[Math.min(v.length - 1, Math.max(0, Math.round(f * (v.length - 1))))]!;
     const [x0, x1, y0, y1] = route?.nodes.length
       ? [xs[0]!, xs.at(-1)!, ys[0]!, ys.at(-1)!]
-      : [q(xs, 0.15) - 25, q(xs, 0.85) + 25, q(ys, 0.15) - 25, q(ys, 0.85) + 25];
-    const pad = route ? 40 : 16;
-    const h = size.h - insets.top - insets.bottom - pad * 2;
-    const k = Math.min(Math.max(0.5, (size.w - pad * 2) / Math.max(x1 - x0, 20)), Math.max(0.5, h / Math.max(y1 - y0, 20)));
-    setView({ k, tx: size.w / 2 - ((x0 + x1) / 2) * k, ty: insets.top + pad + h / 2 - ((y0 + y1) / 2) * k });
+      : ends.length
+        ? [xs[0]! - 60, xs.at(-1)! + 60, ys[0]! - 60, ys.at(-1)! + 60]
+        : [q(xs, 0.15) - 25, q(xs, 0.85) + 25, q(ys, 0.15) - 25, q(ys, 0.85) + 25];
+    // Routes leave room at the sides for the arrive / depart chips; a short walk isn't zoomed in all the way.
+    const [padX, padY] = route ? [marks.length ? 110 : 70, 40] : [16, 16];
+    const w = size.w - insets.right - padX * 2;
+    const h = size.h - insets.top - insets.bottom - padY * 2;
+    const k = Math.min(route ? 9 : 40, Math.max(0.5, w / Math.max(x1 - x0, 20)), Math.max(0.5, h / Math.max(y1 - y0, 20)));
+    setView({ k, tx: padX + w / 2 - ((x0 + x1) / 2) * k, ty: insets.top + padY + h / 2 - ((y0 + y1) / 2) * k });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fitTo, size.w, size.h, map, insets.top, insets.bottom]);
+  }, [fitTo, size.w, size.h, map, insets.top, insets.bottom, insets.right]);
 
   // ---- Pan and zoom: one finger pans, two pinch, the wheel zooms around the pointer ----
   const pointers = useRef(new Map<number, { x: number; y: number }>());
@@ -209,7 +296,19 @@ export function StationScene({
       taken.add(cell);
       out.add(p.id);
     }
-    return out;
+    // Names only when zoomed in, and only where one fits: one per 96 × 30 px cell, below its pin.
+    const named = new Set<string>();
+    if (view.k > 3.2) {
+      const slots = new Set<string>();
+      for (const p of [...map.pois].filter((p) => out.has(p.id) && p.name).sort((a, b) => rank(a) - rank(b))) {
+        const [x, y] = rotate([p.x, p.y], rot);
+        const cell = `${Math.round((x * view.k) / 96)},${Math.round((y * view.k + 24) / 30)}`;
+        if (slots.has(cell)) continue;
+        slots.add(cell);
+        named.add(p.id);
+      }
+    }
+    return { shown: out, named };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, level, view.k, rot, poiState, dimPoi]);
 
@@ -255,15 +354,20 @@ export function StationScene({
         })}
         {/* Amenities: open = bright with a green dot, closing soon = amber dot, closed = dim, unknown = "?". */}
         {map.pois
-          .filter((p) => p.level === level && shownPois.has(p.id))
+          .filter((p) => p.level === level && shownPois.shown.has(p.id))
           .map((p) => {
             const st = poiState(p);
-            const Icon = POI_ICONS[p.category];
+            const Icon = poiIcon(p);
             const dim = dimPoi(p) || st === 'closed';
             return (
               <g key={p.id} transform={at(p.x, p.y)} className={`station-poi cat-${p.category}${dim ? ' dim' : ''}`} onClick={tap(() => onPoi(p))} role="button" aria-label={p.name || p.category}>
                 <circle r={12} />
                 <Icon x={-7.5} y={-7.5} width={15} height={15} strokeWidth={2} />
+                {shownPois.named.has(p.id) && (
+                  <text y={24} className="station-poi-name">
+                    {p.name.length > 18 ? `${p.name.slice(0, 17)}…` : p.name}
+                  </text>
+                )}
                 {st === 'unknown' ? (
                   <text x={9} y={-6} className="station-poi-q">
                     ?
@@ -274,6 +378,22 @@ export function StationScene({
               </g>
             );
           })}
+        {/* Start / end pins for points that aren't platforms, drawn on top. */}
+        {pins
+          .filter((p) => p.level === level)
+          .map((p, i) => {
+            const w = Math.min(190, p.label.length * 6.4 + 18);
+            return (
+              <g key={`pin${i}`} transform={at(p.x, p.y)} className={`station-pin ${p.kind}`}>
+                {p.kind === 'me' && <circle r={16} className="station-pin-halo" />}
+                <circle r={6.5} className="station-pin-dot" />
+                <g transform="translate(0 -24)">
+                  <rect x={-w / 2} y={-11} width={w} height={22} rx={11} />
+                  <text y={4}>{p.label.length > 28 ? `${p.label.slice(0, 27)}…` : p.label}</text>
+                </g>
+              </g>
+            );
+          })}
       </g>
     </svg>
   );
@@ -281,43 +401,37 @@ export function StationScene({
 
 /** The static plan of a level (memoised: panning doesn't redraw it). Other levels show as a faint ghost. */
 const Plan = memo(function Plan({ map, level, k }: { map: StationMap; level: string; k: number }): ReactElement {
-  const byId = useMemo(() => new Map(map.nodes.map((n) => [n.id, n])), [map]);
   const poly = (pts: Pt[]) => pts.map((p) => p.join(',')).join(' ');
+  const onLevel = map.shapes.filter((s) => s.level === level);
   return (
     <g>
       {map.shapes
         .filter((s) => s.kind === 'building')
         .map((s, i) => (
-          <polygon key={`b${i}`} points={poly(s.points)} className="station-building" strokeWidth={1 / k} />
+          <polygon key={`b${i}`} points={poly(s.points)} className="station-building" />
         ))}
       {/* Other levels' platforms, for orientation. */}
       {map.platforms
         .filter((p) => p.level !== level)
         .flatMap((p) => p.geometry.map((g, i) => <polygon key={`g${p.id}${i}`} points={poly(g)} className="station-ghost" />))}
-      {map.shapes
-        .filter((s) => s.kind !== 'building' && s.level === level)
+      {onLevel
+        .filter((s) => s.kind === 'hall' || s.kind === 'room' || s.kind === 'shop')
         .map((s, i) => (
-          <polygon key={`s${i}`} points={poly(s.points)} className={`station-${s.kind}`} strokeWidth={0.8 / k} />
+          <polygon key={`s${i}`} points={poly(s.points)} className={`station-${s.kind}`} strokeWidth={0.6 / k} />
         ))}
+      {onLevel
+        .filter((s) => s.kind === 'track')
+        .map((s, i) => (
+          <polyline key={`t${i}`} points={poly(s.points)} className="station-track" strokeWidth={1.1 / k} />
+        ))}
+      {/* Platform pieces in one fill with no outline, so a platform reads as one shape. */}
       {map.platforms
         .filter((p) => p.level === level)
-        .flatMap((p) => p.geometry.map((g, i) => <polygon key={`p${p.id}${i}`} points={poly(g)} className="station-platform" strokeWidth={1 / k} />))}
-      {map.edges
-        .filter((e) => byId.get(e.from)?.level === level && byId.get(e.to)?.level === level && e.kind === 'walk')
-        .map((e, i) => {
-          const a = byId.get(e.from)!;
-          const b = byId.get(e.to)!;
-          const pts: Pt[] = e.geometry ?? [
-            [a.x, a.y],
-            [b.x, b.y],
-          ];
-          return <polyline key={`e${i}`} points={poly(pts)} className="station-walk" strokeWidth={1.6 / k} />;
-        })}
-      {map.nodes
-        .filter((n) => n.level === level && (n.type === 'stairs' || n.type === 'escalator' || n.type === 'lift'))
-        .map((n) => (
-          <rect key={n.id} x={n.x - 3 / k} y={n.y - 3 / k} width={6 / k} height={6 / k} rx={1.5 / k} className={`station-vertical ${n.type}`} />
-        ))}
+        .flatMap((p) => p.geometry.map((g, i) => <polygon key={`p${p.id}${i}`} points={poly(g)} className="station-platform" strokeWidth={0.5 / k} />))}
+      {k > 2.2 &&
+        map.nodes
+          .filter((n) => n.level === level && (n.type === 'stairs' || n.type === 'escalator' || n.type === 'lift'))
+          .map((n) => <rect key={n.id} x={n.x - 2.5 / k} y={n.y - 2.5 / k} width={5 / k} height={5 / k} rx={1.2 / k} className={`station-vertical ${n.type}`} />)}
     </g>
   );
 });
