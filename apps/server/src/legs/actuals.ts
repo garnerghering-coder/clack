@@ -114,7 +114,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
 
 const FIELDS = ['AdvertisedTrainIdent', 'LocationSignature', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation', 'TrackAtLocation', 'Canceled', 'Deviation', 'TypeOfTraffic', 'TrainComposition', 'Service'];
 
-async function fetchAnnouncements(events: ReturnType<typeof eventsFor>, fetchImpl?: typeof fetch): Promise<AnnouncementRow[]> {
+export async function fetchAnnouncements(events: ReturnType<typeof eventsFor>, fetchImpl?: typeof fetch): Promise<AnnouncementRow[]> {
   const rows: AnnouncementRow[] = [];
   // One query per ~40 events keeps the request small.
   for (let i = 0; i < events.length; i += 40) {

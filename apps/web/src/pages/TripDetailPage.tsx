@@ -42,17 +42,20 @@ function TimeBlock({
   const { settings } = useSettings();
   const changed = actual !== null && sched !== null && Math.floor(actual / 60000) !== Math.floor(sched / 60000);
   return (
+    // Fixed rows (label + delay, old time, time, platform) so the two cards line up side by side.
     <div className="time-block">
-      <span className="caption upper">{label}</span>
-      {changed && <span className="sched-struck tabular">{fmtTime(sched, tz, settings.clock)}</span>}
+      <span className="time-block-head">
+        <span className="caption upper">{label}</span>
+        <DelayPill delay={delay} canceled={canceled} />
+      </span>
+      <span className={`sched-struck tabular${changed ? '' : ' placeholder'}`} aria-hidden={!changed}>
+        {fmtTime(sched, tz, settings.clock)}
+      </span>
       <span className={`time-big tabular ${canceled ? 'struck' : ''}`}>
         <SplitFlap value={fmtTime(actual ?? sched, tz, settings.clock)} className="time-flap" intro />
         {extraDays ? <sup>+{extraDays}</sup> : null}
       </span>
-      <span className="time-block-meta">
-        {platform && <span className="chip">{t('trips.platform', { platform })}</span>}
-        <DelayPill delay={delay} canceled={canceled} />
-      </span>
+      <span className="time-block-meta">{platform ? <span className="chip">{t('trips.platform', { platform })}</span> : <span className="chip placeholder">–</span>}</span>
     </div>
   );
 }

@@ -89,6 +89,22 @@ export interface TripStop {
   noDropoff: boolean;
 }
 
+/** One call of a live-map train, with what Trafikverket reports for it. */
+export interface LiveTrainStop {
+  seq: number;
+  stationId: string;
+  name: string;
+  arr: number | null;
+  dep: number | null;
+  actualArr: number | null;
+  actualDep: number | null;
+  estimatedArr: number | null;
+  estimatedDep: number | null;
+  platform: string | null;
+  canceled: boolean;
+  passed: boolean;
+}
+
 export interface TimetableTrip {
   key: string;
   serviceDate: string;
@@ -333,6 +349,7 @@ export const api = {
   favoriteStations: () => request<StationHit[]>('/stations/favorites'),
   recentStations: () => request<StationHit[]>('/stations/recent'),
   liveTrain: (id: string) => request<{ train: never; trip: { key: string; serviceDate: string } | null; legId: string | null }>(`/live/trains/${encodeURIComponent(id)}`),
+  liveTrainStops: (id: string) => request<{ stops: LiveTrainStop[] }>(`/live/trains/${encodeURIComponent(id)}/stops`),
   journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),
   trainTypes: () => request<TrainType[]>('/train-types'),

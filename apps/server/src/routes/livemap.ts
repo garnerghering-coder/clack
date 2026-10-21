@@ -5,6 +5,7 @@ import type { Db } from '../db/client.js';
 import { legs } from '../db/schema.js';
 import { LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
 import { searchByNumber } from '../search/timetable.js';
+import { trainStops } from '../livemap/trainStops.js';
 
 type Bbox = [number, number, number, number];
 
@@ -71,12 +72,15 @@ export const liveMapRoutes =
       });
     });
 
+    // The operator narrows it down where two companies share a number (Öresundståg 1378 and Pågatåg 1378).
+    const tripOf = (t: LiveTrain) =>
+      t.date === 'sim' ? undefined : ((t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId })[0] : undefined) ?? searchByNumber(db, t.number, t.date)[0]);
+
     // One train, with its timetable trip so the map can draw its route and "Add to my trips" works.
     app.get<{ Params: { id: string } }>('/live/trains/:id', async (req, reply) => {
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
-      // The operator narrows it down where two companies share a number (Öresundståg 1378 and Pågatåg 1378).
-      const trip = t.date === 'sim' ? undefined : (t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId })[0] : undefined) ?? searchByNumber(db, t.number, t.date)[0];
+      const trip = tripOf(t);
       const mine = t.mine
         ? db
             .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers })
@@ -86,6 +90,16 @@ export const liveMapRoutes =
             .find((l) => l.trainNumber === t.number || l.trv.includes(t.number))
         : undefined;
       return { train: t, trip: trip ? { key: trip.key, serviceDate: trip.serviceDate, from: trip.from, to: trip.to } : null, legId: mine?.id ?? null };
+    });
+
+    // Its whole route, stop by stop, with actual and expected times (the train sheet's list).
+    app.get<{ Params: { id: string } }>('/live/trains/:id/stops', async (req, reply) => {
+      const t = ingest.trains.get(req.params.id);
+      if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
+      const trip = tripOf(t);
+      const stops = trip ? await trainStops(db, trip, t.number) : null;
+      if (!stops) return reply.code(404).send({ error: 'train not in the timetable' });
+      return { stops };
     });
 
     app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows }));

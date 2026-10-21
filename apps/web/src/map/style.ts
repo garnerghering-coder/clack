@@ -161,12 +161,12 @@ export function routeLayers(color: string): LayerSpecification[] {
       layout: round,
       paint: { 'line-color': color, 'line-opacity': 0.3, 'line-width': 2, 'line-dasharray': [2, 2] },
     },
-    // The part still ahead of a live train: same colour, dimmed and dashed (6 px dash, 6 px gap at 4 px width).
+    // The part still ahead of a live train: same colour, dashed (6 px dash, 6 px gap at 4 px width).
     {
       id: 'route-ahead',
       type: 'line',
       source: 'route-ahead',
-      paint: { 'line-color': color, 'line-opacity': 0.35, 'line-width': 4, 'line-dasharray': [1.5, 1.5] },
+      paint: { 'line-color': color, 'line-opacity': 0.8, 'line-width': 4, 'line-dasharray': [1.5, 1.5] },
     },
     { id: 'route-glow', type: 'line', source: 'route', layout: round, paint: { 'line-color': color, 'line-opacity': 0.35, 'line-width': 12, 'line-blur': 6 } },
     { id: 'route-body', type: 'line', source: 'route', layout: round, paint: { 'line-color': color, 'line-opacity': 0.85, 'line-width': 4 } },
