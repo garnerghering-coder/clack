@@ -203,14 +203,15 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 /* ---------- Controls ---------- */
 .button {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
-  border-radius: 999px; background: var(--surface-raised); color: var(--text); font-weight: 600;
+  border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); font-weight: 600;
 }
-.button.primary { background: var(--accent); color: var(--on-accent); }
+/* Same outline as the chips and inputs, so secondary buttons read as one family with them (owner, 2026-10-22). */
+.button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .button.danger { color: var(--very-late); }
 .button.small { min-height: 34px; padding: 0 14px; font-size: 14px; }
 .button.wide { width: 100%; }
 .button:disabled { opacity: 0.45; cursor: default; }
-.icon-button { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-raised); color: var(--text); }
+.icon-button { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); }
 .link-button { color: var(--accent-ink); font-weight: 600; }
 :root[data-theme='light'] .link-button, :root[data-theme='light'] .back-link { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .fab {
@@ -814,7 +815,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-sheet-title { display: flex; align-items: center; gap: 6px; min-width: 0; text-align: left; flex: 1; min-height: 44px; }
 .live-train-sheet.collapsed { max-height: none; }
 .chip.live-pos { background: rgba(61, 220, 132, 0.16); color: var(--on-time); }
-.button.is-following { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.button.is-following { border-color: var(--accent); box-shadow: inset 0 0 0 0.5px var(--accent); }
 .live-sheet-actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .stage-card { margin: 10px 0; }
 /* Trip records (brief §8) and the collection-first Passport (brief §9). */
