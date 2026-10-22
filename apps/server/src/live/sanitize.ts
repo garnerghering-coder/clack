@@ -3,7 +3,9 @@
 // speed can come with a fix that doesn't match how the train moved. Those are dropped here, never smoothed over:
 // what passes is a real report, unchanged.
 import { haversineM } from '../lib/geo.js';
-import type { GpsFix } from './progress.js';
+import { SPEED_FRESH_MS, shownSpeed, type GpsFix } from '@clack/shared';
+
+export { SPEED_FRESH_MS, shownSpeed };
 
 /** No passenger train in Sweden or Norway runs faster than ~210 km/h (X2000, SJ 3000, Flytoget); GPS noise needs room. */
 export const MAX_IMPLIED_KMH = 300;
@@ -11,8 +13,6 @@ export const MAX_IMPLIED_KMH = 300;
 export const MAX_REPORTED_KMH = 250;
 /** Moves shorter than this are GPS noise, whatever speed they imply over a few seconds. */
 const NOISE_M = 500;
-/** A speed is shown only from a fix this fresh (fixes come every ~30 s). */
-export const SPEED_FRESH_MS = 60_000;
 /** Where our trains run: Sweden, Norway, Denmark and the night trains' way south. */
 const AREA = { minLat: 53, maxLat: 72, minLon: 4, maxLon: 32 };
 
@@ -103,6 +103,3 @@ export class FixFilter {
     return false;
   }
 }
-
-/** A speed worth showing: from a fresh fix that passed the checks. */
-export const shownSpeed = (f: GpsFix | null, now: number): number | null => (f && now - (f.speedAt ?? f.at) <= SPEED_FRESH_MS ? f.speedKmh : null);

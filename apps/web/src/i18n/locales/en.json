@@ -859,5 +859,11 @@
     "reached": "Reached",
     "welcome": "Welcome to {{station}}",
     "welcomeBody": "Arrived {{time}} with {{train}}."
+  },
+  "offline": {
+    "estimated": "No connection · estimated from the last report",
+    "tripNotKept": "No connection, and this trip isn't saved on this phone yet. It will be once it has opened with a connection.",
+    "banner": "No connection · showing saved data",
+    "chip": "No connection"
   }
 }

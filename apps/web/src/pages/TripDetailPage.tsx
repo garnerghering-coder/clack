@@ -6,7 +6,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Radar, RefreshCw, Repeat, Stamp, Trash2 } from 'lucide-react';
 import { decodePolyline, delayMinutes, type LatLon } from '@clack/shared';
-import { api, ms, type LegDetail, type LegEvent, type LegStop, type LiveState } from '../api';
+import { api, ApiError, ms, type LegDetail, type LegEvent, type LegStop, type LiveState } from '../api';
+import { LOCAL_AFTER_MS, localLive } from '../offline';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill, delayClass } from '../components/DelayPill';
 import { useSettings } from '../settings';
@@ -112,6 +113,8 @@ export function TripDetailPage() {
   const navigate = useNavigate();
   const [leg, setLeg] = useState<LegDetail | null>(null);
   const [missing, setMissing] = useState(false);
+  /** Couldn't load and nothing kept on the phone (no connection the first time this trip was opened). */
+  const [unreachable, setUnreachable] = useState(false);
   const [fullRoute, setFullRoute] = useState(false);
   const [explain, setExplain] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -132,8 +135,10 @@ export function TripDetailPage() {
         (l) => {
           setLeg(l);
           setLive(l.live);
+          setUnreachable(false);
         },
-        () => setMissing(true),
+        // A refetch that fails (no connection) keeps what's on screen; only a trip that's gone says so.
+        (e) => (e instanceof ApiError && e.status === 404 ? setMissing(true) : setUnreachable(true)),
       );
   }, [id]);
   useEffect(load, [load]);
@@ -164,7 +169,7 @@ export function TripDetailPage() {
   if (!leg)
     return (
       <main className="page">
-        <div className="skeleton-card" />
+        {unreachable ? <p className="muted">{t('offline.tripNotKept')}</p> : <div className="skeleton-card" />}
       </main>
     );
 
@@ -197,12 +202,14 @@ export function TripDetailPage() {
   const beyond = [...new Set(ridden.filter((s) => s.reportSource === null).map((s) => s.country))];
   const borderId = leg.borderEvidence?.alight?.stationId ?? leg.borderEvidence?.board?.stationId;
   const borderAt = borderId ? leg.stops.find((s) => s.stationId === borderId)?.name : undefined;
+  // No live update for a while (no connection, or the server is restarting): the phone moves the train itself.
+  const shown = tracking && now - (ms(live.updatedAt) ?? now) > LOCAL_AFTER_MS ? localLive(leg, live, now) : live;
   const arrivedBy = ms(leg.actualArr) ?? (tracking ? ms(live.arrivalEta) : null) ?? schedArr ?? 0;
   const stage: 'before' | 'during' | 'after' =
-    live?.status === 'en_route' || live?.status === 'at_stop' ? 'during' : live?.status === 'arrived' || leg.actualArr || now > arrivedBy ? 'after' : 'before';
+    shown?.status === 'en_route' || shown?.status === 'at_stop' ? 'during' : shown?.status === 'arrived' || leg.actualArr || now > arrivedBy ? 'after' : 'before';
   const train =
-    tracking && live.lat !== null && live.lon !== null
-      ? { lat: live.lat, lon: live.lon, bearing: live.bearing, estimated: live.positionSource !== 'gps' }
+    tracking && shown && shown.lat !== null && shown.lon !== null
+      ? { lat: shown.lat, lon: shown.lon, bearing: shown.bearing, estimated: shown.positionSource !== 'gps' || !!shown.localEstimate }
       : null;
 
   const refresh = async () => {
@@ -254,7 +261,7 @@ export function TripDetailPage() {
           <OperatorBadge operator={leg.operator} size={32} />
           <span className="strong">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</span>
           {leg.category && <span className="chip">{t(`products.${leg.category}`)}</span>}
-          {tracking ? <LiveChip live={live} now={now} /> : <span className={`chip status-${status}`}>{t(`status.${status}`)}</span>}
+          {tracking && shown ? <LiveChip live={shown} now={now} /> : <span className={`chip status-${status}`}>{t(`status.${status}`)}</span>}
         </div>
         {toast && (
           <p className="toast" role="status">
@@ -292,7 +299,7 @@ export function TripDetailPage() {
               <p className="caption">{live ? t('live.updated', { ago: agoKey(t, ms(live.updatedAt) ?? now, now) }) : t('detail.timetableOnly')}</p>
             </>
           )}
-          {stage === 'during' && live && <LiveModule leg={leg} live={live} stops={leg.stops} now={now} />}
+          {stage === 'during' && shown && <LiveModule leg={leg} live={shown} stops={leg.stops} now={now} />}
           {stage === 'after' && (
             <>
               <p className="strong">

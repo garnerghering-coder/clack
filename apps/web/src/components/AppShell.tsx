@@ -4,7 +4,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Compass, Plus, Search, Settings, Stamp, TrainFront } from 'lucide-react';
+import { Compass, Plus, Search, Settings, Stamp, TrainFront, WifiOff } from 'lucide-react';
 import { Wordmark } from './Brand';
 import { api } from '../api';
 import { readLastTab, resolveLanding, saveLastTab, TAB_PATHS, tabForPath } from '../landing';
@@ -71,12 +71,19 @@ export function SettingsLink() {
 }
 
 import { TicketReturnPrompt } from './Tickets';
+import { useOffline } from '../offline';
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
   useLanding();
+  const offline = useOffline();
   return (
     <div className="app">
+      {offline && (
+        <div className="offline-banner" role="status">
+          <WifiOff size={14} aria-hidden="true" /> {t('offline.banner')}
+        </div>
+      )}
       <aside className="sidebar">
         <Wordmark />
         <nav aria-label={t('nav.label')}>

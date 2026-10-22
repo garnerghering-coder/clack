@@ -1022,3 +1022,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-where { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .speedo { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); font-size: 13px; font-weight: 700; line-height: 18px; color: var(--text); }
 .speedo svg { color: var(--text-2); }
+
+/* No connection: a thin strip at the top; the app keeps showing what the phone has kept. */
+.offline-banner { position: fixed; top: env(safe-area-inset-top, 0); left: 50%; transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); color: var(--text-2); font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }

@@ -5,6 +5,7 @@ export * from './onboard';
 export * from './hours';
 export * from './station';
 export * from './disruption';
+export * from './progress';
 
 // Types and constants shared by the web app and the server.
 

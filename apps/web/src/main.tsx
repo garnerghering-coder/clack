@@ -28,3 +28,7 @@ createRoot(document.getElementById('root')!).render(
     )}
   </StrictMode>,
 );
+
+// The app shell kept for opening offline (public/sw.js). Browsers only allow this on https or localhost; elsewhere
+// (a phone on the laptop's address) trip data is still kept by the app itself.
+if ('serviceWorker' in navigator && window.isSecureContext) void navigator.serviceWorker.register('/sw.js').catch(() => {});

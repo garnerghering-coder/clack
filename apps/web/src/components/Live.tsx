@@ -12,6 +12,7 @@ import { opColor } from '../map/style';
 export function LiveChip({ live, now }: { live: LiveState; now: number }) {
   const { t } = useTranslation();
   const fresh = isFresh(live, now);
+  if (live.localEstimate) return <span className="chip stale-chip">{t('offline.chip')}</span>;
   if (fresh)
     return (
       <span className="chip live-chip">
@@ -51,8 +52,13 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
         {t('live.nextStopName', { name: name(live.nextStopId) })} <FlapTime time={ms(live.eta)} tz={tzOf(live.nextStopId)} clock={settings.clock} />
       </span>
     ) : null;
-  const source =
-    live.positionSource === 'gps' ? t('live.livePosition') : live.positionSource === 'estimated' ? t('live.estimatedPosition') : t('live.noPosition');
+  const source = live.localEstimate
+    ? t('offline.estimated')
+    : live.positionSource === 'gps'
+      ? t('live.livePosition')
+      : live.positionSource === 'estimated'
+        ? t('live.estimatedPosition')
+        : t('live.noPosition');
 
   return (
     <section className={`live-module ${compact ? 'compact' : ''}`} style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }} aria-live="polite">
@@ -65,12 +71,12 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
         aria-label={t('live.progressLabel', { percent: Math.round(progress * 100), name: leg.destination?.name })}
       >
         <span className="live-progress-fill" style={{ width: `${progress * 100}%` }} />
-        <span className={`live-progress-dot ${live.positionSource === 'estimated' ? 'hollow' : ''}`} style={{ left: `${progress * 100}%` }} />
+        <span className={`live-progress-dot ${live.positionSource === 'estimated' || live.localEstimate ? 'hollow' : ''}`} style={{ left: `${progress * 100}%` }} />
       </div>
       {where && (
         <p className="strong live-where">
           {where}
-          <Speedometer kmh={live.positionSource === 'gps' ? live.speedKmh : null} at={ms(live.positionAt)} now={now} />
+          <Speedometer kmh={live.positionSource === 'gps' && !live.localEstimate ? live.speedKmh : null} at={ms(live.positionAt)} now={now} />
         </p>
       )}
       {next && <p>{next}</p>}

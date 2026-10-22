@@ -1,5 +1,6 @@
 // The front end only ever talks to our own server (keys stay server-side).
 import type { AmenityEntry, OnboardFacts, Settings, SizeClass, StationMap } from '@clack/shared';
+import { keepOffline, recall, remember, setOffline } from './offline';
 
 export class ApiError extends Error {
   constructor(
@@ -10,13 +11,32 @@ export class ApiError extends Error {
   }
 }
 
+/** A request that hasn't answered in this long is treated like no connection (a train in a dead zone hangs, not fails). */
+const GET_TIMEOUT_MS = 15_000;
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   // Only declare JSON when there is a body: Fastify rejects an empty body labelled application/json.
   const headers = init?.body ? { 'Content-Type': 'application/json', ...init.headers } : init?.headers;
-  const res = await fetch(`/api${path}`, { ...init, headers });
+  const isGet = !init?.method || init.method === 'GET';
+  let res: Response;
+  try {
+    const timeout = isGet && typeof AbortSignal.timeout === 'function' ? AbortSignal.timeout(GET_TIMEOUT_MS) : undefined;
+    const signal = timeout && init?.signal && typeof AbortSignal.any === 'function' ? AbortSignal.any([init.signal, timeout]) : (init?.signal ?? timeout);
+    res = await fetch(`/api${path}`, { ...init, headers, signal });
+  } catch (e) {
+    // Cancelled by the page itself: not a connection problem.
+    if (init?.signal?.aborted) throw e;
+    setOffline(true);
+    // No connection: what the phone kept from last time, if anything.
+    const kept = isGet && keepOffline(path) ? recall<T>(path) : undefined;
+    if (kept !== undefined) return kept;
+    throw e;
+  }
+  setOffline(false);
   if (res.status === 204) return undefined as T;
   const body = await res.json().catch(() => ({}));
   if (!res.ok) throw new ApiError(res.status, body);
+  if (isGet && keepOffline(path)) remember(path, body);
   return body as T;
 }
 
@@ -237,6 +257,8 @@ export interface LiveState {
   arrivalDelayMin: number | null;
   /** Last time Trafikverket or Entur answered for this trip; freshness goes by this, not by our own tick. */
   reportedAt?: string | number | null;
+  /** Worked out on the phone from the last report, because no update has come for a while (offline.ts). */
+  localEstimate?: boolean;
 }
 
 export interface LegEvent {
