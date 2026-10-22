@@ -1,0 +1,108 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Kristianstad C (scripts/stations/draft_from_osm.py). One level: platform 1 runs along the station building, tracks 1 and 2 end at buffer stops at its south end, and the island platform (tracks 2–3) is reached on foot round the track ends (OSM footways 364818760 and 309804767). Skånetrafiken's terminal map (December 2025) shows no lifts or stairs. It draws the island platform starting level with the station building's north end, about 160 m shorter than OSM's; OSM's length is kept, because it has mid-platform signals and Trafikverket announces a/b sectors on all three tracks.",
+  "radius": 300,
+  "path_radius": 5,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platforms and street",
+      "order": 0
+    }
+  ],
+  "rotation": 0,
+  "connections": [],
+  "drop_pois": [],
+  "pois": [
+    {
+      "id": "osm10606004686",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": 21.4,
+      "y": 30.0,
+      "icon": "coffee",
+      "opening_hours": "Mo-Fr 05:00-19:00; Sa 06:00-19:00; Su 07:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm3447206559",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 30.4,
+      "y": 44.9,
+      "icon": "kiosk",
+      "opening_hours": "Mo-Fr 05:30-21:00; Sa 07:00-21:00; Su 08:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "plan-cr-kundcenter",
+      "category": "ticket",
+      "name": "Skånetrafiken Kundcenter",
+      "level": "0",
+      "x": 9.0,
+      "y": 2.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "plan-cr-ticket-1",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": -4.5,
+      "y": -8.2,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "plan-cr-ticket-2",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": 5.3,
+      "y": 54.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "_pois_notes": {
+    "osm10606004686": "Place from OSM; hours from Jernhusen (2026-10-22), which replace OSM's Mo-Fr 06:00-19:00, Sa-Su 08:00-18:00.",
+    "osm3447206559": "Place from OSM; hours from Jernhusen (2026-10-22), which replace OSM's (until 22:00).",
+    "plan-cr-kundcenter": "In the station building; position from Skånetrafiken's terminal map of Kristianstad C (updated December 2025), fitted to OSM's outline of the building (0.3 m).",
+    "plan-cr-ticket-1": "Ticket machine on platform 1 at the north end of the station building, from Skånetrafiken's terminal map of Kristianstad C (updated December 2025); not in OSM.",
+    "plan-cr-ticket-2": "Ticket machine at the south end of the island platform (tracks 2–3), from Skånetrafiken's terminal map of Kristianstad C (updated December 2025); not in OSM."
+  },
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Skånetrafiken's terminal map of Kristianstad C (updated December 2025) (PDF 90042_kristianstadc_terminalkarta_a3, supplied by the owner): track numbers, no lifts or stairs, the Kundcenter and two ticket machines. Placed by fitting its outline of the station building to OpenStreetMap's (0.3 m off). Not ODbL: ask Skånetrafiken before publishing beyond the demo; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/kristianstads-centralstation/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen: Espresso House and Pressbyrån with hours, toilet and accessible toilet (card payment; not placed, no source gives where), Skånetrafiken's kundcenter. Facts checked by hand."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-22",
+      "note": "TrainStation.PlatformLine for Cr: 1, 2, 3 (each with a/b sectors)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (extract of 2026-10-20), checked against Skånetrafiken's terminal map (December 2025); Espresso House and Pressbyrån hours from Jernhusen (2026-10-22); Kundcenter and 2 ticket machines placed from the terminal map."
+    }
+  ]
+}

@@ -9,7 +9,11 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
   in OSM) use opt-in edits keys: `paths_by_layer` (an untagged tunnel's or bridge's layer is its level, and a lift
   with no level tag serves the levels of the paths it joins), `path_radius` (untagged paths within that many metres
   of a platform are kept, not only those inside the station building), `platform_refs` (`{"<way id>": "2"}` for
-  platforms OSM left unnumbered) and `drop_platform_ways`. Check a draft against the station's plan with
+  platforms OSM left unnumbered) and `drop_platform_ways`. Also: `drop_ways` (OSM way ids left out of the walking
+  graph), `drop_entrances` (entrance-tagged nodes that aren't exits), `attach: [x, y]` on a hand-added place (where it
+  joins the graph, for buildings with no mapped paths), `multipolygons` (platforms and buildings mapped as
+  multipolygon relations, as at Gävle C), `walk_cycleways` (shared foot and cycle paths are walking routes, as
+  Katrineholm's Lövatunneln) and `platform_levels` (`{"<way id>": "1"}` for platforms with no level tag). Check a draft against the station's plan with
   `python3 scripts/stations/preview.py <station_id> [--level L0] [--labels] [--box x0 x1 y0 y1]`.
 - **Checked by** `npm run stations:validate` and `npm test`: every platform and amenity must be reachable, and every
   walking edge needs seconds.
@@ -18,7 +22,9 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
   (`[{ "poi": id, "points": [[x, y], …] }]`), or whole places with an `outline` in its `pois`.
 - **Station plans the owner supplied** (Jernhusen's Stockholm C plan, January 2026; the regional transport
   authorities' terminal maps, among them Länstrafiken Kronoberg's for Alvesta, December 2023, and Växjö, February
-  2026, Jönköpings länstrafik's for Jönköping C, December 2025, and Hallandstrafiken's for Halmstad C, August 2025)
+  2026, Jönköpings länstrafik's for Jönköping C, December 2025, Hallandstrafiken's for Halmstad C, August 2025,
+  Skånetrafiken's for Lund C, Helsingborg C, Kristianstad C and Hässleholm, December 2025, UL's for Uppsala C, winter
+  2026, Region Gävleborg's for Gävle C, August 2025, and Sörmlandstrafiken's for Katrineholm C, February 2025)
   are used, at the owner's decision (2026-10-22), for which shop is in which unit, the
   units' outlines, and for checking platforms, lifts, stairs and entrances. Each map's `sources` says which plan
   and how it was placed. Those parts are **not** covered by the ODbL below: the plans' owners haven't licensed them,

@@ -1,0 +1,389 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Lund C (scripts/stations/draft_from_osm.py). OSM has no level tags here: Mittelbron and the north footbridge (Skyttelbron) are taken from their bridge layer (1) and Rydes undergång from its tunnel layer (-1). No path_radius: Skyttelbron's deck is on layer 2, which the draft would otherwise turn into a ground-level path across the tracks, so platform 1's ground-level links to Bangatan and the station building are hand connections that follow OSM's footways. Lifts, stairs and exits checked against Skånetrafiken's terminal map (December 2025), supplied by the owner. Tram stops A and B (railway=platform in OSM) are left out.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridges (Mittelbron, Skyttelbron)",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platforms and street",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Rydes undergång (tunnel)",
+      "order": -1
+    }
+  ],
+  "rotation": 0,
+  "platform_refs": {
+    "334180528": "6",
+    "334180529": "6",
+    "334190521": "6",
+    "334180530": "1",
+    "334180531": "1"
+  },
+  "drop_platforms": [
+    "A",
+    "B"
+  ],
+  "drop_ways": [
+    "223970288"
+  ],
+  "drop_entrances": [
+    "4140350867"
+  ],
+  "connections": [
+    {
+      "from": {
+        "at": [
+          -82.0,
+          -244.8
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -80.0,
+          -252.3
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "North footbridge (Skyttelbron, 'Norra övergången'): OSM maps the deck at layer 2 and the stubs to its lifts and stairs at layer 1, so the deck is joined here by hand along the bridge (OSM way 232485441)."
+    },
+    {
+      "from": {
+        "at": [
+          -80.0,
+          -252.3
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -68.9,
+          -252.4
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          -68.9,
+          -252.4
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -67.0,
+          -252.3
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          -67.0,
+          -252.3
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -53.4,
+          -252.4
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          -53.4,
+          -252.4
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -51.5,
+          -252.5
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          -51.5,
+          -252.5
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -38.0,
+          -252.5
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "at": [
+          -38.0,
+          -252.5
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -34.9,
+          -245.9
+        ],
+        "level": "1"
+      },
+      "kind": "walk",
+      "note": "As above."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -14,
+          -72
+        ]
+      },
+      "to": {
+        "at": [
+          -14.0,
+          -72.0
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "note": "Lift from platform 1 up to Mittelbron: OSM node 2328068830 (level 0;1) sits at the end of the bridge, with no ground-level way, so the draft can't place its lower end; the lift is on Skånetrafiken's terminal map of Lund C (updated December 2025)."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -16.0,
+          -69.4
+        ]
+      },
+      "to": {
+        "at": [
+          -0.4,
+          -68.5
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "Platform 1 is level with Bangatan: OSM footway 223970300 to the foot of Mittelbron's east stairs (the draft keeps only paths inside station buildings here)."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -2.2,
+          81.7
+        ]
+      },
+      "to": {
+        "at": [
+          16.7,
+          105.7
+        ],
+        "level": "0"
+      },
+      "kind": "stairs",
+      "seconds": 33,
+      "meters": 40,
+      "note": "South end of platform 1 to the station building's east door: OSM steps 223970296 (3 steps) and footways 334199099, 341914191, 541958998. Not step-free."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -4.0,
+          30.0
+        ]
+      },
+      "to": {
+        "at": [
+          16.7,
+          105.7
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "meters": 101,
+      "note": "Step-free way from platform 1 to the station building's east door: OSM ramp 223970290, footways 412668606, 341914191 and 541958998 along Bangatan."
+    },
+    {
+      "from": {
+        "platform": "6",
+        "near": [
+          -51.5,
+          90.8
+        ]
+      },
+      "to": {
+        "at": [
+          -54.8,
+          112.4
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "seconds": 64,
+      "meters": 28,
+      "note": "Lift between the tunnel and platform 6 at Västra station: OSM node 3412964910 (levels -2 to 1, so the draft drops it) with footways 334199104, 147007371 and 334199105; Skånetrafiken's terminal map of Lund C (updated December 2025) shows a lift for this platform. Time: 45 s lift plus ~25 m."
+    },
+    {
+      "from": {
+        "platform": "6",
+        "near": [
+          -51.5,
+          90.8
+        ]
+      },
+      "to": {
+        "at": [
+          -69.1,
+          112.2
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "meters": 78,
+      "note": "Step-free way from the south end of platform 6 round to Västra station's door: OSM footways 334199105, 334199107, 97574597, 97574593."
+    }
+  ],
+  "drop_pois": [],
+  "pois": [
+    {
+      "id": "osm2064743889",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": 14.0,
+      "y": 138.5,
+      "icon": "coffee",
+      "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 08:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm2328052032",
+      "category": "ticket",
+      "name": "",
+      "level": "-1",
+      "x": -53.0,
+      "y": 109.4,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm2328052029",
+      "category": "ticket",
+      "name": "",
+      "level": "-1",
+      "x": -51.1,
+      "y": 110.7,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm2328052044",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": -5.7,
+      "y": -73.3,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm2328052046",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": -2.4,
+      "y": -73.4,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm1225220912",
+      "category": "atm",
+      "name": "Bankomat",
+      "level": "0",
+      "x": 16.9,
+      "y": 115.4,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Skånetrafiken's terminal map of Lund C, updated December 2025 (PDF 81216_lundc_terminalkarta_a3, supplied by the owner): track numbers, which platforms have lifts and stairs at Skyttelbron, Mittelbron and Rydes undergång, and ticket machines. Placed by fitting its lift symbols to OpenStreetMap's lifts (median 2 m off); used to check the map, not copied. Not ODbL: ask Skånetrafiken before publishing beyond the demo; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/lunds-centralstation/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's station pages: which cafés, shops and services are at the station, Espresso House's hours, card-paid toilets, code lockers, a cash machine in the station building; Rydes undergång open 05.00–00.00, the north footbridge always open. Facts checked by hand, nothing copied in bulk."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-22",
+      "note": "TrainStation.PlatformLine for Lu: 1, 2, 3 (3a, 3b), 4, 5, 6."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (extract of 2026-10-20) with 15 hand connections (north footbridge deck, platform 1's lift and ground-level links, platform 6's lift at Västra station), checked against Skånetrafiken's terminal map (December 2025). Amenities checked against Jernhusen (2026-10-22): Espresso House hours updated; 4 ticket machines and the cash machine added from OSM."
+    }
+  ],
+  "_pois_notes": {
+    "osm2064743889": "Place from OSM; hours from Jernhusen (2026-10-22), which replace OSM's older Mo-Fr 05:00-18:00.",
+    "osm2328052032": "Skånetrafiken ticket machine in the tunnel (OSM, level -1, checked 2026-07-09); also on the terminal map.",
+    "osm2328052029": "As above.",
+    "osm2328052044": "Skånetrafiken ticket machine at the foot of Mittelbron's east stairs (OSM, checked 2024-05-12).",
+    "osm2328052046": "As above.",
+    "osm1225220912": "OSM (checked 2026-05-07); Jernhusen lists a cash machine in the station building."
+  }
+}

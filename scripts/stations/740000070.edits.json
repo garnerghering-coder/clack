@@ -1,0 +1,95 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Karlstad C (scripts/stations/draft_from_osm.py). Three floors: the Trädgårdslänken footbridge at the east end (1), street, station house and platforms (0) and the pedestrian tunnel at the west end of the station house (-1), from OSM's layers. OSM splits platform 1 into 1b (west), an unnumbered middle piece and 1a (east), and the island into 3a/3b and 4a/4b; they are merged into platforms 1, 3 and 4, because Trafikverket announces 1a/1b/3a/... and the app matches on the base track. Track 21 is the north face of the west end of platform 1 (Trafikverket uses it; seen on the live board 2026-10-22). NOT CHECKED AGAINST A STATION PLAN: the owner's Värmlandstrafik image isn't available as a file, so the tunnel and footbridge stairs and lifts are as OSM maps them (no hand connections were needed). OSM's escalator from platform 1 into the tunnel (way 1483484348) is tagged access=no and stays out. OSM maps the tunnel lifts twice (a lift node and a lift outline 2 m apart), so two lift edges show at each; harmless for routing.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 40,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Trädgårdslänken footbridge",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street, station house and platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Pedestrian tunnel",
+      "order": -1
+    }
+  ],
+  "connections": [],
+  "rotation": -92,
+  "platform_refs": {
+    "311343695": "1",
+    "100636353": "1",
+    "100636377": "1",
+    "1338126950": "3",
+    "1274171383": "3",
+    "1274171382": "4",
+    "1337832543": "4"
+  },
+  "drop_platforms": [],
+  "drop_pois": [],
+  "sources": [
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/karlstads-centralstation/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen: the station's one kiosk is Pressbyrån (matches OSM's kiosk on platform 1); one accessible toilet, card payment (OSM: 10 SEK, cards). Lockers are mentioned but no source places them."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract): platform pieces merged into 1, 3, 4 and 21; Pressbyrån's kiosk kept with its outline; checked against Jernhusen's pages (2026-10-22). Not checked against a station plan."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm1331120046",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 109.5,
+      "y": -7.5,
+      "icon": "kiosk",
+      "opening_hours": "Mo-Fr 05:45-20:00; Sa 09:00-19:00; Su 09:00-20:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "outline": [
+        [
+          102.2,
+          -4.6
+        ],
+        [
+          102.3,
+          -10.8
+        ],
+        [
+          114.4,
+          -10.5
+        ],
+        [
+          114.4,
+          -9.6
+        ],
+        [
+          116.9,
+          -9.6
+        ],
+        [
+          116.8,
+          -4.2
+        ]
+      ]
+    }
+  ],
+  "quality": "osm_draft"
+}

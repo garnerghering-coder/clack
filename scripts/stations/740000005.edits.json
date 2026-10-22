@@ -1,0 +1,134 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Uppsala C (scripts/stations/draft_from_osm.py). Two floors: street, station hall and platforms (OSM level 0) and Centralpassagen, the passage under the tracks (-1). Platform 1 is beside the station house; one long island has tracks 2/3 and 4/7 south of the passage (3 and 4 are bay tracks) and 5/6 north of it; the 8 island is on the east side. Checked against UL's Resecentrum i Uppsala map (winter 2026) supplied by the owner: track numbers, the three lifts (station house, island north of the passage, 8 island), the stairs from the passage up to the island and up to the east side all match OSM. Not modelled: the plan's up escalator beside the island stairs (edges have no direction, and the stairs next to it are in the graph) and OSM's platforms 9 and 10, which are the museum railway Lennakatten's narrow-gauge platforms (not on the plan's track list).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 40,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street, station hall and platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Centralpassagen",
+      "order": -1
+    }
+  ],
+  "rotation": 42,
+  "connections": [
+    {
+      "from": {
+        "at": [
+          14.9,
+          22.7
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          17.7,
+          25.5
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "OSM gap: the island lift north of the passage (node 12626518111, level 0;-1; HISS on UL's map) has no way on the passage side, so the draft can't join its two floors."
+    },
+    {
+      "from": {
+        "at": [
+          -5.1,
+          43.9
+        ],
+        "level": "-1"
+      },
+      "to": {
+        "at": [
+          -2.9,
+          47.9
+        ],
+        "level": "-1"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the station-house lift (node 12626024022, level 0;-1) opens into the passage at a door node that isn't joined to the passage footway (OSM has two separate door nodes at the same spot)."
+    }
+  ],
+  "drop_platforms": [
+    "9",
+    "10"
+  ],
+  "drop_pois": [
+    "osm12040079450"
+  ],
+  "sources": [
+    {
+      "type": "operator_map",
+      "title": "UL, Resecentrum i Uppsala (winter 2026 map, PDF of 2025-11-07)",
+      "note": "Supplied by the owner; used to check track numbers, lifts, stairs, the passage and ticket machines, not copied. Not ODbL; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/uppsala-centralstation/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list of shops and cafés with opening hours (Subway's and DOZ Apotek's hours taken from it; it is newer than OSM's). Its toilet page says the toilets are on the upper floor, card payment."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract), checked against UL's Resecentrum i Uppsala map (winter 2026): the island lift and the station-house lift's passage door joined by hand, Lennakatten's platforms 9 and 10 and a bookshop in its station left out, two ticket machines in the passage added from OSM, Subway's and DOZ Apotek's hours from Jernhusen (2026-10-22)."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm11898125106",
+      "category": "restaurant",
+      "name": "Subway",
+      "level": "0",
+      "x": -34.8,
+      "y": 50.5,
+      "icon": "sandwich",
+      "opening_hours": "Mo-Su 07:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm2775883286",
+      "category": "pharmacy",
+      "name": "DOZ Apotek",
+      "level": "0",
+      "x": -23.0,
+      "y": 31.8,
+      "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm12076098240",
+      "category": "ticket",
+      "name": "",
+      "level": "-1",
+      "x": 22.9,
+      "y": 35.6,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm12090553591",
+      "category": "ticket",
+      "name": "",
+      "level": "-1",
+      "x": 28.2,
+      "y": 31.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "quality": "osm_draft"
+}

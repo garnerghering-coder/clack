@@ -1,0 +1,274 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Helsingborg C (scripts/stations/draft_from_osm.py). Platforms 1–4 are underground (level -1 in OSM) under Knutpunkten and the bus terminal; platforms 6–7 are at street level south of the tunnel portal. OSM has no station-building outline here, so street-level paths come from path_radius and the amenities are listed by hand in pois. Lifts and stairs checked against Skånetrafiken's terminal map (December 2025), supplied by the owner.",
+  "radius": 400,
+  "path_radius": 25,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Upper floor",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street level and Knutpunkten hall",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Platforms 1–4 (underground)",
+      "order": -1
+    }
+  ],
+  "rotation": 0,
+  "drop_ways": [
+    "1188415004"
+  ],
+  "connections": [
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          1.2,
+          -69.9
+        ]
+      },
+      "to": {
+        "at": [
+          1.2,
+          -69.9
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "note": "Middle exit (bus terminal) lift (tracks 1–2): OSM node 3418254922 (levels -1;0;1) sits on the platform outline and a street-level footway, so the draft can't join it; the lift is on Skånetrafiken's terminal map of Helsingborg C (updated December 2025). Only its platform and street-level stops are modelled."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          -13.7,
+          -60.9
+        ]
+      },
+      "to": {
+        "at": [
+          -13.7,
+          -60.9
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "note": "Middle exit (bus terminal) lift (tracks 3–4): OSM node 3418254911 (levels -1;0;1) sits on the platform outline and a street-level footway, so the draft can't join it; the lift is on Skånetrafiken's terminal map of Helsingborg C (updated December 2025). Only its platform and street-level stops are modelled."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -44.3,
+          -145.8
+        ]
+      },
+      "to": {
+        "at": [
+          -44.3,
+          -145.8
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "note": "Knutpunkten hall lift (tracks 1–2): OSM node 3418255406 (levels -1;0;1) sits on the platform outline and a street-level footway, so the draft can't join it; the lift is on Skånetrafiken's terminal map of Helsingborg C (updated December 2025). Only its platform and street-level stops are modelled."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          -59.2,
+          -137.1
+        ]
+      },
+      "to": {
+        "at": [
+          -59.2,
+          -137.1
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "note": "Knutpunkten hall lift (tracks 3–4): OSM node 3418255396 (levels -1;0;1) sits on the platform outline and a street-level footway, so the draft can't join it; the lift is on Skånetrafiken's terminal map of Helsingborg C (updated December 2025). Only its platform and street-level stops are modelled."
+    }
+  ],
+  "drop_pois": [],
+  "pois": [
+    {
+      "id": "osm1492519544",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": -40.2,
+      "y": -154.7,
+      "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:00-23:00; Su 07:30-23:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "kiosk"
+    },
+    {
+      "id": "osm1492519604",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": -64.3,
+      "y": -129.8,
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-21:00; Su 09:00-21:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "kiosk"
+    },
+    {
+      "id": "osm1501505869",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": -21.0,
+      "y": -75.6,
+      "opening_hours": "Mo-Fr 06:00-19:00; Sa 09:00-19:00; Su 10:00-19:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "kiosk"
+    },
+    {
+      "id": "osm1492519595",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": -58.9,
+      "y": -120.0,
+      "opening_hours": "Mo-Fr 05:30-20:00; Sa 08:00-18:00; Su 09:00-17:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "coffee"
+    },
+    {
+      "id": "osm1492519662",
+      "category": "restaurant",
+      "name": "McDonald's",
+      "level": "0",
+      "x": -31.6,
+      "y": -136.2,
+      "opening_hours": "Su-Th 06:30-24:00; Fr-Sa 06:30-04:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "burger"
+    },
+    {
+      "id": "osm1492519633",
+      "category": "pharmacy",
+      "name": "Apoteket",
+      "level": "0",
+      "x": -75.9,
+      "y": -128.9,
+      "opening_hours": "Mo-Fr 07:30-19:00",
+      "hours_source": "osm",
+      "hours_verified": null
+    },
+    {
+      "id": "osm1492519540",
+      "category": "atm",
+      "name": "Bankomat",
+      "level": "0",
+      "x": -87.9,
+      "y": -135.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm3240422736",
+      "category": "locker",
+      "name": "",
+      "level": "0",
+      "x": -83.0,
+      "y": -131.6,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm1492519580",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": -43.1,
+      "y": -128.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm6244825022",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 1.8,
+      "y": -37.6,
+      "opening_hours": "24/7",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "fee": {
+        "amount": 10,
+        "currency": "SEK"
+      }
+    },
+    {
+      "id": "plan-hb-kundcenter",
+      "category": "ticket",
+      "name": "Skånetrafiken Kundcenter",
+      "level": "0",
+      "x": -69.9,
+      "y": -113.5,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "_pois_notes": {
+    "osm-places": "Places from OSM that a current source names (Wihlborgs' Helsingborg C page, 2026-10-22: Pressbyrån, Espresso House, McDonalds, Apoteket, Bankomat; Jernhusen: lockers) and whose OSM node was edited after the 2018–2020 rebuild (2022–2026). Their hours are OSM's, not checked.",
+    "osm6244825022": "Public toilet at the bus terminal (OSM, from Helsingborgs stad's open data; 10 kr, 24/7; edited 2025-06-20).",
+    "osm1492519580": "Skånetrafiken ticket machine in Knutpunkten (OSM, edited 2020-06-07); the terminal map shows one about 10 m away.",
+    "plan-hb-kundcenter": "Position from Skånetrafiken's terminal map of Helsingborg C (updated December 2025) (placed by the fit, about ±5 m); not in OSM."
+  },
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Skånetrafiken's terminal map of Helsingborg C (updated December 2025) (PDF 83241_helsingborgc_terminalkarta_a3, supplied by the owner): track numbers, the lifts and stairs at Knutpunkten, the bus terminal and the south exit, ticket machines and the Kundcenter. Placed by fitting its lift and stair symbols to OpenStreetMap's (median 2.8 m off); used to check the map, and for the Kundcenter's position. Not ODbL: ask Skånetrafiken before publishing beyond the demo; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.wihlborgs.se/sv/projekt/helsingborg/helsingborg-c/",
+      "retrieved": "2026-10-22",
+      "note": "Wihlborgs (owner of Helsingborg C; Jernhusen's food and shops page links here): names Lakritsfabriken, City Barbershop, Forex, Pressbyrån, Espresso House, McDonalds, Apoteket, Bankomat and Brödernas (upper floor). Only the ones OSM places, with an edit since the rebuild, are on the map."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/helsingborgs-centralstation/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen: station open 24 h, toilet and accessible toilet (card payment), lockers (QR code or card). Facts checked by hand."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-22",
+      "note": "TrainStation.PlatformLine for Hb: 1–4 (with a/b sectors), 6, 7."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (extract of 2026-10-20): 4 lifts joined by hand (OSM maps them as nodes on the platform outlines), checked against Skånetrafiken's terminal map (December 2025); 11 amenities from OSM and the terminal map, checked against Wihlborgs and Jernhusen (2026-10-22). The south-end steps of platforms 6–7 are left out (the draft put their foot on the underground level)."
+    }
+  ]
+}

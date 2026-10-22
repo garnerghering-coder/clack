@@ -1,0 +1,162 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Katrineholm C (scripts/stations/draft_from_osm.py). NEEDS THE DRAFT SCRIPT'S walk_cycleways OPTION: the only way under the tracks, Lövatunneln, is a cycleway with foot=designated, which the script otherwise skips. Two floors: street, station and platforms (0) and Lövatunneln (-1, from its layer). Platform 1 is beside the station building, 3/4 is an island and 5 is on the south side by bus stop D. Checked against Sörmlandstrafiken's Katrineholm resecentrum map (2025-02-25) supplied by the owner: tracks 1, 3, 4, 5, the tunnel, its covered stairs up to the island and to platform 5 (in OSM) and three lifts. OSM has none of the lifts; the island's and platform 5's are added from the map's symbols (about ±5 m). The map's third lift, at the tunnel's north end by platform 1, isn't added: its symbol sits 13 m from the tunnel and it isn't clear where it comes down; the cycle ramp beside it already gives a step-free way up to platform 1 and Stationsplan.",
+  "radius": 400,
+  "walk_cycleways": true,
+  "paths_by_layer": true,
+  "path_radius": 40,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street, station and platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Lövatunneln",
+      "order": -1
+    }
+  ],
+  "rotation": -98,
+  "connections": [
+    {
+      "from": {
+        "at": [
+          -63.6,
+          -17.5
+        ],
+        "level": "-1"
+      },
+      "to": {
+        "at": [
+          -63.6,
+          -17.6
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "Lövatunneln's north end: OSM's tunnel (way 444809214) meets the cycleway up to Stationsplan (way 106547371) at one node, which the draft splits into its two levels. A cycle path, so a ramp with no steps."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          -58.9,
+          3.0
+        ]
+      },
+      "to": {
+        "at": [
+          -66.0,
+          2.1
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "Lift to the 3/4 island: on Sörmlandstrafiken's plan (2025-02-25), not in OSM. Placed from the plan's symbol, 7 m east of the tunnel, about ±5 m."
+    },
+    {
+      "from": {
+        "platform": "5",
+        "near": [
+          -61.6,
+          22.7
+        ]
+      },
+      "to": {
+        "at": [
+          -68.3,
+          21.1
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "Lift to platform 5 and bus stop D: on the plan, not in OSM; placed the same way."
+    },
+    {
+      "from": {
+        "at": [
+          -67.3,
+          33.8
+        ],
+        "level": "-1"
+      },
+      "to": {
+        "at": [
+          -67.3,
+          33.8
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "South of the tracks the tunnel runs on in an open cut (way 444809215, layer -1 but not a tunnel) to the Fabriksgatan tunnel; the draft reads the cut as street level, so its ends are joined by hand (flat, no steps)."
+    },
+    {
+      "from": {
+        "at": [
+          -70.1,
+          47.8
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          -70.1,
+          47.8
+        ],
+        "level": "-1"
+      },
+      "kind": "walk",
+      "note": "Same, at the cut's south end, into the tunnel under Fabriksgatan (way 444809213)."
+    }
+  ],
+  "drop_platforms": [],
+  "drop_pois": [],
+  "sources": [
+    {
+      "type": "operator_map",
+      "title": "Sörmlandstrafiken, Katrineholm resecentrum (map version 2025-02-25)",
+      "note": "Supplied by the owner; used to check tracks, the tunnel and stairs, to place two lifts and the waiting room (fitted to OSM's tunnel and tracks; about ±5 m). Its base map is OpenStreetMap; the symbols are Sörmlandstrafiken's. Not ODbL; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/toalett/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen: toilet and accessible toilet, card payment (matches OSM). Its shop list names only Katrineholm Turistinformation (Stationsplan 4, Mon–Fri 11–15), which no source places, so it isn't on the map."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract, foot-designated cycleways included), checked against Sörmlandstrafiken's map (2025-02-25): tunnel ends joined by hand, lifts to the 3/4 island and platform 5 and the waiting room added from the map, Pressbyrån (OSM, the map's kiosk) added."
+    }
+  ],
+  "pois": [
+    {
+      "id": "plan-k-waiting",
+      "category": "waiting",
+      "name": "",
+      "level": "0",
+      "x": -23.5,
+      "y": -17.9,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm3017854633",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": -77.5,
+      "y": -39.1,
+      "icon": "kiosk",
+      "opening_hours": "Mo-Fr 05:45-19:00; Sa 09:00-17:00; Su 10:00-17:00",
+      "hours_source": "osm",
+      "hours_verified": null
+    }
+  ],
+  "quality": "osm_draft"
+}

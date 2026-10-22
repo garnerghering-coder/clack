@@ -1,0 +1,266 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Hässleholm C (scripts/stations/draft_from_osm.py). Three island platforms (tracks 1–2/3, 4/5–6, 7–8) under one footbridge (OSM bridge layer 1, from paths_by_layer) between Magasinsgatan and the station building. Tracks 2/3 and 4/5 are the two ends of one platform face each, and 1, 6, 7 and 8 have a/b sectors in OSM: each face is one platform here (platform_refs), with its node in the middle, as Trafikverket's base track numbers need. OSM's platform piece east of track 1 (way 415061503, along bus stops A–E) is left out: the terminal map draws that strip as the bus terminal and Wikipedia gives 3 platforms; with it, the draft joined it across track 1 to the island. The footways 423426538 and 419690691 are dropped for the same reason (the draft snapped their dead ends across track 1). The 5 lifts are on Skånetrafiken's terminal map (December 2025) and missing in OSM.",
+  "radius": 300,
+  "paths_by_layer": true,
+  "path_radius": 40,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridge",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platforms and street",
+      "order": 0
+    }
+  ],
+  "rotation": 0,
+  "platform_refs": {
+    "415061494": "1",
+    "415061507": "1",
+    "415061508": "2;3",
+    "415061499": "2;3",
+    "415061497": "4;5",
+    "415061509": "4;5",
+    "415061506": "6",
+    "418841380": "6",
+    "415061504": "7",
+    "418841381": "7",
+    "415061505": "8",
+    "418841382": "8"
+  },
+  "drop_platform_ways": [
+    "415061503"
+  ],
+  "drop_ways": [
+    "423426538",
+    "419690691"
+  ],
+  "connections": [
+    {
+      "from": {
+        "at": [
+          -56.1,
+          -37.3
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -55.6,
+          -34.3
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 50,
+      "meters": 8,
+      "note": "Lift at the footbridge's west end (Magasinsgatan): on Skånetrafiken's terminal map of Hässleholm C (updated December 2025), missing in OSM; joined to the footway under the bridge (OSM 423426536). Time estimated."
+    },
+    {
+      "from": {
+        "platform": "7",
+        "near": [
+          -23.7,
+          -22.0
+        ]
+      },
+      "to": {
+        "at": [
+          -18.6,
+          -24.9
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "note": "Lift from the tracks 7–8 island up to the footbridge: on Skånetrafiken's terminal map of Hässleholm C (updated December 2025), missing in OSM; placed beside the island's stairs, time estimated."
+    },
+    {
+      "from": {
+        "platform": "6",
+        "near": [
+          -7.1,
+          -17.9
+        ]
+      },
+      "to": {
+        "at": [
+          -4.0,
+          -20.1
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "note": "Lift from the tracks 4/5–6 island up to the footbridge: on Skånetrafiken's terminal map of Hässleholm C (updated December 2025), missing in OSM; placed beside the island's stairs, time estimated."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          14.4,
+          -11.5
+        ]
+      },
+      "to": {
+        "at": [
+          14.9,
+          -14.2
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "note": "Lift from the tracks 1–2/3 island up to the footbridge: on Skånetrafiken's terminal map of Hässleholm C (updated December 2025), missing in OSM; placed beside the island's stairs, time estimated."
+    },
+    {
+      "from": {
+        "at": [
+          24.8,
+          -11.2
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          38.3,
+          -17.1
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 55,
+      "meters": 15,
+      "note": "Lift between the footbridge and the station building's ground floor (main entrance): on Skånetrafiken's terminal map of Hässleholm C (updated December 2025), missing in OSM. Time estimated."
+    }
+  ],
+  "drop_pois": [],
+  "pois": [
+    {
+      "id": "osm5714913207",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": 25.4,
+      "y": 12.9,
+      "icon": "coffee",
+      "attach": [
+        38.3,
+        -17.1
+      ],
+      "opening_hours": "Mo-Fr 06:00-20:00; Sa 08:00-18:00; Su 09:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm5714913208",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 23.6,
+      "y": 19.4,
+      "icon": "kiosk",
+      "attach": [
+        38.3,
+        -17.1
+      ],
+      "opening_hours": "Mo-Fr 05:30-22:00; Sa 08:00-22:00; Su 09:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm11513113019",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 23.6,
+      "y": 11.7,
+      "attach": [
+        38.3,
+        -17.1
+      ],
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm12872609087",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 25.3,
+      "y": -13.5,
+      "attach": [
+        38.3,
+        -17.1
+      ],
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "plan-hm-ticket-1",
+      "category": "ticket",
+      "name": "",
+      "level": "1",
+      "x": 6.5,
+      "y": -18.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "plan-hm-ticket-2",
+      "category": "ticket",
+      "name": "",
+      "level": "0",
+      "x": 38.9,
+      "y": -21.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "_pois_notes": {
+    "osm5714913207": "Place from OSM (checked 2025-06-12); hours from Jernhusen (2026-10-22), which replace OSM's.",
+    "osm5714913208": "Place from OSM (checked 2025-06-12); hours from Jernhusen (2026-10-22), which replace OSM's (Sa 07:00).",
+    "osm11513113019": "Toilet in the station building (OSM, checked 2024-01-13; card payment per Jernhusen).",
+    "osm12872609087": "Accessible toilet in the station building (OSM; Jernhusen lists a universal toilet).",
+    "attach": "OSM maps no paths inside the station building, so its places are joined to the walking graph at the main entrance (attach); the few metres inside aren't counted.",
+    "plan-hm-ticket-1": "Ticket machine on the footbridge, from Skånetrafiken's terminal map of Hässleholm C (updated December 2025); not in OSM.",
+    "plan-hm-ticket-2": "Ticket machine at the station building's main entrance, from Skånetrafiken's terminal map of Hässleholm C (updated December 2025); not in OSM."
+  },
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Skånetrafiken's terminal map of Hässleholm C (updated December 2025) (PDF 93070_hassleholmc_terminalkarta_a3, supplied by the owner): track numbers, the footbridge's stairs and 5 lifts, 2 ticket machines. Placed by fitting its stair symbols to the tops of OSM's stairs (median 1.7 m off). Not ODbL: ask Skånetrafiken before publishing beyond the demo; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/hassleholms-centralstation/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen: Espresso House and Pressbyrån with hours, toilet and accessible toilet (card payment), code lockers (not placed: no source gives where), station open 03.50–02.45. Facts checked by hand."
+    },
+    {
+      "type": "website",
+      "url": "https://www.trafikverket.se/om-oss/nyheter/lansnyheter/skane/2026/april/arbeten-pa-plattform-i-hassleholm-under-veckorna-1518/",
+      "retrieved": "2026-10-22",
+      "note": "Trafikverket, 7 April 2026: parts of the platform at track 1 are being demolished for a new switch, so platform 1's ends in OSM (2023) may be out of date."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-22",
+      "note": "TrainStation.PlatformLine for Hm: 1 (1a, 1b), 2, 3, 4, 5, 6 (6a, 6b), 7 (7a, 7b), 8 (8a, 8b)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (extract of 2026-10-20): sector pieces joined into one platform per face; 5 lifts from Skånetrafiken's terminal map (December 2025); the strip east of track 1 and two footways left out (see _comment). Amenities checked against Jernhusen (2026-10-22): Espresso House and Pressbyrån hours updated; 2 ticket machines from the terminal map."
+    }
+  ]
+}

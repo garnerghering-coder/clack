@@ -19,7 +19,7 @@ import sqlite3
 import sys
 from collections import Counter, defaultdict
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT = os.environ.get("CLACK_ROOT") or os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WALK_SPEED = 1.3  # m/s, normal pace, no luggage
 STAIRS_SPEED = 0.55  # m/s along the stair's footprint
 ESCALATOR_SPEED = 0.75  # standing plus a few steps
@@ -77,9 +77,75 @@ def load_osm(pbf, lat0, lon0, radius, cache):
     h = H()
     h.apply_file(pbf, locations=True, filters=[osmium.filter.KeyFilter(*keys)])
     out = dict(retrieved=datetime.date.fromtimestamp(os.path.getmtime(pbf)).isoformat(), nodes={str(k): v for k, v in h.nodes.items()}, ways={str(k): v for k, v in h.ways.items()})
+
+    # Multipolygon relations (Gävle C maps its platforms and station house this way): their outer rings, kept apart
+    # in "relation_ways" and read only by stations whose edits ask for "multipolygons".
+    class Rels(osmium.SimpleHandler):
+        def __init__(s):
+            super().__init__()
+            s.rels = {}
+
+        def relation(s, r):
+            if r.tags.get("type") == "multipolygon":
+                s.rels[r.id] = dict(t=dict(r.tags), m=[m.ref for m in r.members if m.type == "w" and m.role in ("outer", "")])
+
+    rh = Rels()
+    rh.apply_file(pbf, filters=[osmium.filter.KeyFilter(*keys)])
+    want = {ref for v in rh.rels.values() for ref in v["m"]}
+
+    class Members(osmium.SimpleHandler):
+        def __init__(s):
+            super().__init__()
+            s.ways = {}
+
+        def way(s, w):
+            if w.id in want:
+                pts = []
+                for nd in w.nodes:
+                    try:
+                        pts.append((nd.ref, nd.location.lat, nd.location.lon))
+                    except osmium.InvalidLocationError:
+                        pass
+                s.ways[w.id] = pts
+
+    mh = Members()
+    mh.apply_file(pbf, locations=True)
+    add_relation_rings(out, {rid: dict(t=v["t"], members=[mh.ways.get(ref) for ref in v["m"]]) for rid, v in rh.rels.items()}, inside)
     os.makedirs(os.path.dirname(cache), exist_ok=True)
     json.dump(out, open(cache, "w"))
     return out
+
+
+def add_relation_rings(out, rels, inside):
+    """Join each multipolygon's outer member ways into closed rings, kept in out["relation_ways"] as "r<id>[_<k>]"."""
+    for rid, v in rels.items():
+        parts = [list(p) for p in v["members"] if p and len(p) >= 2]
+        if not any(inside(q[1], q[2]) for p in parts for q in p):
+            continue
+        rings = []
+        while parts:
+            ring = parts.pop(0)
+            grown = True
+            while ring[0][0] != ring[-1][0] and grown:
+                grown = False
+                for i, p in enumerate(parts):
+                    if p[0][0] == ring[-1][0]:
+                        ring += p[1:]
+                    elif p[-1][0] == ring[-1][0]:
+                        ring += p[::-1][1:]
+                    elif p[-1][0] == ring[0][0]:
+                        ring = p[:-1] + ring
+                    elif p[0][0] == ring[0][0]:
+                        ring = p[::-1][:-1] + ring
+                    else:
+                        continue
+                    parts.pop(i)
+                    grown = True
+                    break
+            if ring[0][0] == ring[-1][0] and len(ring) >= 4:
+                rings.append(ring)
+        for k, ring in enumerate(rings):
+            out.setdefault("relation_ways", {})[f"r{rid}" + (f"_{k}" if len(rings) > 1 else "")] = dict(t=v["t"], nd=ring)
 
 
 def category(t):
@@ -207,6 +273,9 @@ def main():
     xy = lambda la, lo: (round((lo - lon0) * K, 2), round(-(la - lat0) * 111320, 2))
     osm = load_osm(args.pbf, lat0, lon0, edits.get("radius", 400), os.path.join(ROOT, f"data/cache/stations/{sid}-osm.json"))
     nodes, ways = osm["nodes"], osm["ways"]
+    if edits.get("multipolygons"):
+        # Platforms and station houses OSM maps as multipolygon relations: their outer rings, as ways "r<id>".
+        ways = {**ways, **osm.get("relation_ways", {})}
     keep_levels = {str(l["osm"]) for l in edits["levels"]}
     level_id = {str(l["osm"]): l["id"] for l in edits["levels"]}
     limit = edits.get("radius", 400)
@@ -216,10 +285,10 @@ def main():
     def coords(w):
         return [xy(p[1], p[2]) for p in w["nd"]]
 
-    def platform_levels(t):
+    def platform_levels(t, wid=None):
         """A platform's level tag; or, with "layer_as_level" in the edits, its layer (Malmö C's underground platforms
         carry layer=-2 and no level); otherwise ground level."""
-        lv = parse_levels(t.get("level"))
+        lv = parse_levels(t.get("level")) or parse_levels(edits.get("platform_levels", {}).get(wid))
         if lv is None and edits.get("layer_as_level"):
             lv = parse_levels(t.get("layer"))
         return lv or ["0"]
@@ -258,7 +327,7 @@ def main():
         t = w["t"]
         if not (t.get("railway") == "platform" or (t.get("public_transport") == "platform" and t.get("train") == "yes")):
             continue
-        lv = platform_levels(t)
+        lv = platform_levels(t, wid)
         if lv[0] not in keep_levels or t.get("subway") == "yes":
             continue
         # A platform OSM left without a number: named by way id in the edits ("platform_refs": {"123": "2"}).
@@ -318,7 +387,10 @@ def main():
         t = w["t"]
         hw = t.get("highway")
         walky = hw in WALK_HIGHWAYS or t.get("indoor") == "corridor" or t.get("conveying")
-        if not walky or t.get("access") in ("private", "no"):
+        # With "walk_cycleways" in the edits: shared foot and cycle paths (Katrineholm's Lövatunneln is a cycleway with
+        # foot=designated) are walking routes too.
+        walky = walky or (edits.get("walk_cycleways") and hw == "cycleway" and t.get("foot") in ("yes", "designated", "permissive"))
+        if not walky or t.get("access") in ("private", "no") or wid in edits.get("drop_ways", []):
             continue
         pts = coords(w)
         if not any(near(q) for q in pts):
@@ -357,7 +429,7 @@ def main():
     for wid, w in ways.items():
         t = w["t"]
         if t.get("railway") == "platform" or (t.get("public_transport") == "platform" and t.get("train") == "yes"):
-            lv = platform_levels(t)
+            lv = platform_levels(t, wid)
             if lv[0] in keep_levels and t.get("subway") != "yes":
                 for p in w["nd"]:
                     platform_node_level[p[0]] = lv[0]
@@ -531,6 +603,8 @@ def main():
     # ---- Entrances ----
     for nid, n in nodes.items():
         t = n["t"]
+        if nid in edits.get("drop_entrances", []):
+            continue
         if t.get("railway") == "train_station_entrance" or t.get("entrance") in ("main", "yes", "entrance"):
             for k, v in V.items():
                 if v["osm"] == int(nid):
@@ -620,6 +694,9 @@ def main():
             nbrs[e["b"]].add(e["a"])
     deg = Counter({k: len(v) for k, v in nbrs.items()})
     special = {e["a"] for e in E if e["kind"] != "walk"} | {e["b"] for e in E if e["kind"] != "walk"}
+    # A hand connection's ends stay nodes: joined to a dead end, the end has two neighbours and was folded into a
+    # pass-through point, which dropped the connection.
+    special |= {e["a"] for e in E if e.get("manual")} | {e["b"] for e in E if e.get("manual")}
     is_key = lambda k: deg[k] != 2 or V[k].get("type") in keep_types or k in special
     inc = defaultdict(list)
     for i, e in enumerate(E):
@@ -794,7 +871,10 @@ def main():
     for p in edits.get("pois", []):
         p = dict(p)
         p["level"] = level_id[str(p["level"])]
-        p["node"] = names.get(nearest(p["x"], p["y"], p["level"])[0]) or min(((math.hypot(n["x"] - p["x"], n["y"] - p["y"]), n["id"]) for n in out_nodes if n["level"] == p["level"]))[1]
+        # "attach": [x, y] joins the place to the walking graph there instead of at its pin (a shop inside a building
+        # with no mapped paths, whose nearest node would otherwise be across a track).
+        ax, ay = p.pop("attach", None) or (p["x"], p["y"])
+        p["node"] = names.get(nearest(ax, ay, p["level"])[0]) or min(((math.hypot(n["x"] - ax, n["y"] - ay), n["id"]) for n in out_nodes if n["level"] == p["level"]))[1]
         pois = [q for q in pois if q["id"] != p["id"]] + [p]
 
     out = dict(

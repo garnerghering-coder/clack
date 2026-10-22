@@ -1,0 +1,251 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Gävle C (scripts/stations/draft_from_osm.py). NEEDS THE DRAFT SCRIPT'S MULTIPOLYGON SUPPORT: OSM maps Gävle C's platforms 1, 2, 3, 4S and the station house as multipolygon relations (r7327577–r7327595, r7327580), which the script reads as ways \"r<id>\". Two floors: street, station house and platforms (0) and the tunnel under the tracks (-1, from OSM's layer). Platform 1 is beside the station house, 2/3 is an island (OSM's 2N/2S and 3N/3S halves are merged: Trafikverket announces 2n/2s, and the app matches on the base track), 4 is on the bus-terminal side and 5 is a short platform at the north-east end. Checked against the region's plan Busshållplatser Gävle Central (2025-08-18) supplied by the owner: the tunnel with stairs on both sides and a lift at each of platforms 1, 2/3 and 4, the tunnel's open south end at the bus terminal, the toilets (station house and bus terminal) and track numbers match; OSM's tunnel lifts are single nodes in the tunnel, so their platform ends and the stairs to platform 4 are joined by hand. The platform pieces on the bridges over Norra and Södra Strandgatan are left out (drop_platform_ways): drawn flat, they touched the streets under the bridge and made a false way across. The plan's east underpass (Drottninggatan end) has no stairs to the platforms and isn't part of the graph. OSM has no station entrance nodes here, so the map has no named exits.",
+  "radius": 400,
+  "multipolygons": true,
+  "paths_by_layer": true,
+  "path_radius": 25,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street, station house and platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Tunnel",
+      "order": -1
+    }
+  ],
+  "rotation": 29,
+  "platform_refs": {
+    "r7327577": "3",
+    "r7327578": "2",
+    "r7327583": "4",
+    "r7327584": "2",
+    "r7327585": "2",
+    "r7327586": "1",
+    "r7327587": "1",
+    "r7327589": "3",
+    "r7327590": "2",
+    "r7327591": "4",
+    "r7327592": "3",
+    "r7327593": "3",
+    "r7327594": "4",
+    "r7327595": "1",
+    "59282313": "4"
+  },
+  "drop_platform_ways": [
+    "r7327587",
+    "r7327585",
+    "r7327593",
+    "r7327594"
+  ],
+  "connections": [
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          14.0,
+          32.4
+        ]
+      },
+      "to": {
+        "at": [
+          14.0,
+          32.4
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "OSM maps the tunnel lift to platform 1 as one untagged node in the tunnel (node 274285407); the platform end is added by hand where the region's plan shows the lift."
+    },
+    {
+      "from": {
+        "platform": "2",
+        "near": [
+          27.1,
+          24.6
+        ]
+      },
+      "to": {
+        "at": [
+          27.1,
+          24.6
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "Same for the lift to the 2/3 island (node 1189137381)."
+    },
+    {
+      "from": {
+        "platform": "4",
+        "near": [
+          38.0,
+          18.2
+        ]
+      },
+      "to": {
+        "at": [
+          38.0,
+          18.2
+        ],
+        "level": "-1"
+      },
+      "kind": "lift",
+      "note": "Same for the lift to platform 4 (node 4911637960)."
+    },
+    {
+      "from": {
+        "platform": "4",
+        "near": [
+          32.4,
+          0.6
+        ]
+      },
+      "to": {
+        "at": [
+          41.1,
+          16.4
+        ],
+        "level": "-1"
+      },
+      "kind": "stairs",
+      "note": "OSM's stairs from the tunnel up to platform 4 (way 44123272) start where the open south end of the tunnel begins, which the draft reads as street level and drops; joined by hand."
+    },
+    {
+      "from": {
+        "platform": "4",
+        "near": [
+          48.2,
+          30.5
+        ]
+      },
+      "to": {
+        "at": [
+          41.1,
+          16.4
+        ],
+        "level": "-1"
+      },
+      "kind": "stairs",
+      "note": "Same for the other flight to platform 4 (way 25162077)."
+    },
+    {
+      "from": {
+        "at": [
+          40.2,
+          16.9
+        ],
+        "level": "-1"
+      },
+      "to": {
+        "at": [
+          46.9,
+          13.0
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "The tunnel opens at ground level on the south side (bus terminal), without steps (OSM ways 25162044/25162046; the plan shows the tunnel running out to the bus terminal)."
+    }
+  ],
+  "drop_platforms": [],
+  "drop_pois": [
+    "osm534827437"
+  ],
+  "sources": [
+    {
+      "type": "operator_map",
+      "title": "Busshållplatser Gävle Central (PDF of 2025-08-18, X-trafik/Region Gävleborg)",
+      "note": "Supplied by the owner; used to check the tunnel, lifts, stairs and track numbers and to place the two toilets (placed by fitting the plan's lifts to OSM's; about 5 m accuracy). Not ODbL; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list of places at the station with opening hours (WHSmith's and Järnvägskrogen's hours from it). It also names Subway and Habesha Restaurang Bar, which no source places, so they aren't on the map; Bistro Nord (OSM, no date) isn't on it and is left out. Toilet page: toilet and accessible toilet, card payment."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract, with its multipolygon platforms), checked against the region's Gävle Central plan (2025-08-18): three tunnel lifts, two flights of stairs and the tunnel's south end joined by hand; bridge pieces of the platforms left out; toilets placed from the plan; WHSmith's and Järnvägskrogen's hours from Jernhusen (2026-10-22); Bistro Nord, not on Jernhusen's list, removed."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm560670424",
+      "category": "kiosk",
+      "name": "WHSmith",
+      "level": "0",
+      "x": -20.5,
+      "y": 1.7,
+      "icon": "kiosk",
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 07:00-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm220637472",
+      "category": "restaurant",
+      "name": "Järnvägskrogen",
+      "level": "0",
+      "x": -30.6,
+      "y": -23.7,
+      "opening_hours": "Mo-Th 10:30-21:30; Fr 10:30-22:00; Sa 11:30-22:00; Su 12:00-21:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "plan-gav-wc1",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 10.3,
+      "y": 47.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "plan-gav-wc2",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 33.7,
+      "y": -5.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm7195742906",
+      "category": "ticket",
+      "name": "",
+      "level": "-1",
+      "x": 34.7,
+      "y": 22.7,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm9003098296",
+      "category": "locker",
+      "name": "",
+      "level": "0",
+      "x": 2.6,
+      "y": 42.3,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ],
+  "quality": "osm_draft"
+}
