@@ -912,7 +912,7 @@ function LiveMap() {
           intro={
             <>
               {!collapsed && selType && (
-                <div className={hasDetailedArt(selType.id) ? 'live-sheet-art side' : 'live-sheet-art'}>
+                <div className={hasDetailedArt(selType.id, sel.operatorId) ? 'live-sheet-art side' : 'live-sheet-art'}>
                   <TrainPicture type={selType} operatorId={sel.operatorId} color={opColor(selOp?.brandColor)} height={22} />
                   <span className="caption">{selType.name}</span>
                 </div>
@@ -1184,7 +1184,7 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
       intro={
         <>
           {!collapsed && type && (
-            <div className={hasDetailedArt(type.id) ? 'live-sheet-art side' : 'live-sheet-art'}>
+            <div className={hasDetailedArt(type.id, view.operatorId) ? 'live-sheet-art side' : 'live-sheet-art'}>
               <TrainPicture type={type} operatorId={view.operatorId} color={opColor(op?.brandColor)} height={22} />
               <span className="caption">{type.name}</span>
             </div>

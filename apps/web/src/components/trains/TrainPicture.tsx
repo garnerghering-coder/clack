@@ -19,6 +19,8 @@ interface Detailed {
   component: Side;
   /** Operators whose livery is drawn for this model; any other operator gets the unpainted version. */
   liveries: string[];
+  /** Operators whose trains of this type look different from the drawing (e.g. other door layout): simple outline. */
+  notFor?: string[];
 }
 
 /** Keyed by train type id (data/train_types.json), not by art family: Flytoget shares the X3's simple outline. */
@@ -27,7 +29,7 @@ const DETAILED: Record<string, Detailed> = {
   x40: { component: X40Side as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
-  x61: { component: X61Side as Side, liveries: ['pagatag'] },
+  x61: { component: X61Side as Side, liveries: ['pagatag'], notFor: ['vasttagen'] }, // Västtåg's X61s have 7 door pairs
   x31: { component: X31Side as Side, liveries: ['oresundstag'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
@@ -39,11 +41,12 @@ const DETAILED: Record<string, Detailed> = {
   no_type76: { component: NoType76Side as Side, liveries: [] },
 };
 
-export const hasDetailedArt = (typeId: string | null | undefined) => !!typeId && typeId in DETAILED;
+export const hasDetailedArt = (typeId: string | null | undefined, operatorId?: string | null) =>
+  !!typeId && typeId in DETAILED && !(operatorId && DETAILED[typeId]!.notFor?.includes(operatorId));
 
 export function TrainPicture({ type, operatorId, color, height, label }: { type: { id: string; art: string; name: string }; operatorId: string | null | undefined; color: string; height: number; label?: string }) {
   const d = DETAILED[type.id];
-  if (!d) return <TrainArt art={type.art} color={color} height={height} label={label} />;
+  if (!d || !hasDetailedArt(type.id, operatorId)) return <TrainArt art={type.art} color={color} height={height} label={label} />;
   const Picture = d.component;
   return <Picture livery={operatorId && d.liveries.includes(operatorId) ? operatorId : 'plain'} className="train-side" label={label} />;
 }
