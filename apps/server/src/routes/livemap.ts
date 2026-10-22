@@ -93,7 +93,7 @@ export const liveMapRoutes =
         ? db
             .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers })
             .from(legs)
-            .where(inArray(legs.status, ['planned', 'completed']))
+            .where(and(eq(legs.userId, req.userId), inArray(legs.status, ['planned', 'completed'])))
             .all()
             .find((l) => l.trainNumber === t.number || l.trv.includes(t.number))
         : undefined;

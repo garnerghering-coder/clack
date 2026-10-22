@@ -3,6 +3,8 @@ import cron from 'node-cron';
 import type { Db } from '../db/client.js';
 import { refreshTrvStations, runGtfsImport, runNorwayImport } from '../import/run.js';
 import { refreshDueLegs } from '../legs/actuals.js';
+import { runAudit } from '../audit/audit.js';
+import { sampleTrains, SAMPLE_PER_HOUR } from '../audit/sample.js';
 
 export function startScheduler(db: Db, log: (m: string) => void) {
   const wrap = (name: string, fn: () => Promise<unknown>) => async () => {
@@ -20,7 +22,13 @@ export function startScheduler(db: Db, log: (m: string) => void) {
   const weekly = cron.schedule('10 7 * * 1', wrap('weekly Trafikverket stations', () => refreshTrvStations(db, log)), { timezone: 'Europe/Stockholm' });
   // Trafikverket keeps actual times ~4 days: keep legs fresh while they run, then freeze them (SPEC §10).
   const actuals = cron.schedule('*/5 * * * *', wrap('actual times', () => refreshDueLegs(db, log)), { timezone: 'Europe/Stockholm' });
+  // The accuracy audit: trips that finished at least an hour ago, checked once each; the report is rewritten hourly.
+  const audit = cron.schedule('20 * * * *', wrap('accuracy audit', () => runAudit(db, { log })), { timezone: 'Europe/Stockholm' });
+  // Its sample: a couple of real trains every hour from 05 to 22, followed by a hidden user (AUDIT_SAMPLE_PER_HOUR).
+  const sample = SAMPLE_PER_HOUR > 0 ? cron.schedule('5 5-22 * * *', wrap('audit sample', async () => sampleTrains(db, { log })), { timezone: 'Europe/Stockholm' }) : null;
   return () => {
+    void audit.stop();
+    void sample?.stop();
     void daily.stop();
     void norway.stop();
     void weekly.stop();

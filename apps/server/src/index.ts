@@ -10,6 +10,7 @@ import { syncBrands } from './import/brands.js';
 import { backfillTrainTypes } from './legs/trainTypes.js';
 import { regroupJourneys } from './legs/journeys.js';
 import { updateRides } from './legs/recording.js';
+import { sampleTrains } from './audit/sample.js';
 
 // Plain lines among the JSON log, so start-up has a clear beginning and end in the Terminal.
 const banner = (lines: string[]) => {
@@ -44,6 +45,8 @@ if (process.env.JOBS !== 'off') {
     .catch((e) => log(`actual times catch-up failed: ${(e as Error).message}`))
     .then(() => bootstrap(db, log))
     .then(() => startScheduler(db, log))
+    // The accuracy audit's first sample trains, rather than waiting for the hour.
+    .then(() => sampleTrains(db, { log }))
     .then(ready);
   // Live tracking runs alongside the imports (it only needs saved trips).
   startLiveTracker(db, { log });

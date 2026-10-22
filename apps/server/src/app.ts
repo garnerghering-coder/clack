@@ -52,7 +52,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     log: (m) => app.log.warn(m),
     // Your own trains are drawn on top (ADDITIONS_01 A): numbers of legs inside their live-tracking window.
     myNumbers: () => {
-      const ids = trackedLegIds(db, Date.now());
+      const ids = trackedLegIds(db, Date.now(), LOCAL_USER_ID);
       if (!ids.length) return new Set();
       const rows = db.select({ n: legs.trainNumber, trv: legs.trvTrainNumbers }).from(legs).where(inArray(legs.id, ids)).all();
       return new Set(rows.flatMap((r) => [...(r.n ? [r.n] : []), ...r.trv]));

@@ -1,9 +1,10 @@
-// Manual imports: npm run import -- <gtfs|trv-stations|basemap|logos|bootstrap> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import { config } from './env.js';
 import { openDb } from './db/client.js';
 import { bootstrap, refreshTrvStations, runGtfsImport } from './import/run.js';
 import { extractBasemap } from './import/basemap.js';
 import { refreshLogos } from './import/logos.js';
+import { AUDIT_DIR, runAudit } from './audit/audit.js';
 
 const [cmd = 'bootstrap', ...flags] = process.argv.slice(2);
 const flag = (name: string) => flags.includes(`--${name}`);
@@ -22,7 +23,10 @@ if (cmd === 'gtfs') {
   await refreshLogos(console.log, { force: flag('force') });
 } else if (cmd === 'bootstrap') {
   await bootstrap(db);
+} else if (cmd === 'audit') {
+  const r = await runAudit(db, { log: console.log });
+  console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | trv-stations | basemap | logos | bootstrap`);
+  console.error(`unknown command "${cmd}"; use gtfs | trv-stations | basemap | logos | bootstrap | audit`);
   process.exitCode = 1;
 }

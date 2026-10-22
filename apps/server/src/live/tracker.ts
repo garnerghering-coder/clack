@@ -133,11 +133,18 @@ export async function fetchNorwayPositions(tripIds: string[], now: number, fetch
 const ms = (d: Date | null) => d?.getTime() ?? null;
 
 /** Legs to poll now: not frozen, and between an hour before departure and half an hour after arrival. */
-export function trackedLegIds(db: Db, now: number): string[] {
+export function trackedLegIds(db: Db, now: number, userId?: string): string[] {
   return db
     .select({ id: legs.id, schedArr: legs.schedArr, actualArr: legs.actualArr })
     .from(legs)
-    .where(and(ne(legs.status, 'snapshotted'), lt(legs.schedDep, new Date(now + BEFORE_MS)), gt(legs.schedArr, new Date(now - AFTER_MS - 6 * 3600_000))))
+    .where(
+      and(
+        ne(legs.status, 'snapshotted'),
+        lt(legs.schedDep, new Date(now + BEFORE_MS)),
+        gt(legs.schedArr, new Date(now - AFTER_MS - 6 * 3600_000)),
+        userId ? eq(legs.userId, userId) : undefined,
+      ),
+    )
     .all()
     .filter((l) => {
       // Late trains stay tracked until they've actually arrived (+30 min).

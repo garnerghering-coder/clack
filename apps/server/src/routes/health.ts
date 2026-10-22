@@ -1,8 +1,10 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { sql } from 'drizzle-orm';
+import { gt, sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { feedHealth } from '../lib/health.js';
 import { trackerFixes } from '../live/tracker.js';
+import { legAudits } from '../db/schema.js';
+import { summarize, type LegAudit } from '../audit/audit.js';
 
 export const healthRoutes =
   (db: Db): FastifyPluginAsync =>
@@ -20,4 +22,15 @@ export const healthRoutes =
         gps: trackerFixes.stats,
       };
     });
+    // The last week's accuracy audit in numbers (the readable report is data/audit/latest.md).
+    app.get('/audit', async () =>
+      summarize(
+        db
+          .select()
+          .from(legAudits)
+          .where(gt(legAudits.auditedAt, new Date(Date.now() - 7 * 86400_000)))
+          .all()
+          .map((r) => r.result as unknown as LegAudit),
+      ),
+    );
   };
