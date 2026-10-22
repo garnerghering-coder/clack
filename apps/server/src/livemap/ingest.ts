@@ -463,7 +463,7 @@ export class LiveMapIngest extends EventEmitter {
         operatorId: n.operatorId,
         productName: null,
         product,
-        trainType: trainTypeFor(n.operatorId, product, n.number, null, [n.origin, n.destination]),
+        trainType: trainTypeFor(n.operatorId, product, n.number, null, [n.origin, n.destination], n.vehicle),
         origin: n.origin,
         destination: n.destination,
         next: n.next,

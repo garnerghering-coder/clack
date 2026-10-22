@@ -28,6 +28,8 @@
     { "id": "no_type93", "name": "Type 93", "builder": "Bombardier", "max_kmh": 140, "since": 2000, "art": "railcar", "about": "Diesel Talent railcar on Norway's unelectrified branch lines." },
     { "id": "x11_x14", "name": "X11 or X14", "builder": "ASEA", "max_kmh": 160, "since": 1981, "art": "contessa", "about": "Older electric units Krösatåg runs on its electrified lines; no source says which train is which." },
     { "id": "itino_y2", "name": "Itino (Y31/Y32) or Y2", "builder": null, "max_kmh": 140, "since": null, "art": "railcar", "about": "Diesel railcars Krösatåg runs on its unelectrified lines; no source says which train is which." },
+    { "id": "flytoget71", "name": "Flytoget Type 71", "builder": "Adtranz", "max_kmh": 210, "since": 1998, "art": "x3", "about": "Flytoget's original airport express sets, between Oslo Airport, Oslo S and Drammen." },
+    { "id": "flytoget78", "name": "Flytoget Type 78", "builder": "CAF", "max_kmh": null, "since": null, "art": "x3", "about": "Flytoget's newer CAF Oaris sets, on the same airport express lines." },
     { "id": "di4_coaches", "name": "Di 4 + coaches", "builder": "Henschel", "max_kmh": 140, "since": 1980, "art": "loco", "about": "Diesel locomotive with coaches on the unelectrified Nordland Line to Bodø." },
     { "id": "flytoget", "name": "Flytoget (Type 71 / 78)", "builder": "Adtranz / CAF", "max_kmh": 210, "since": 1998, "art": "x3", "about": "Airport express between Oslo Airport, Oslo S and Drammen." }
   ],
@@ -47,6 +49,8 @@
     { "match": { "operator": "vy", "product": "regional" }, "type": "no_flirt" },
     { "match": { "operator": "vy", "product": "commuter" }, "type": "no_flirt" },
     { "match": { "operator": "vy" }, "type": "loco_coaches" },
+    { "_source": "Entur's Flytoget vehicle positions name the set (\"71-xx\", \"78-xx\"); both types run every day (8 and 4 sets on 2026-10-22).", "match": { "operator": "flytoget", "vehicle_prefix": "71" }, "type": "flytoget71" },
+    { "match": { "operator": "flytoget", "vehicle_prefix": "78" }, "type": "flytoget78" },
     { "match": { "operator": "flytoget" }, "type": "flytoget" },
     { "match": { "operator": "go-ahead-norge", "product": "night" }, "type": "loco_sleeper" },
     { "match": { "operator": "go-ahead-norge", "product": "intercity" }, "type": "no_type73" },

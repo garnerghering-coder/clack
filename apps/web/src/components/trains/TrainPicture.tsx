@@ -3,6 +3,8 @@
 import type { ComponentType } from 'react';
 import { TrainArt } from '../TrainArt';
 import { Er1Side } from './Er1';
+import { Flytoget71Side } from './Flytoget71';
+import { Flytoget78Side } from './Flytoget78';
 import { NoFlirtSide } from './NoFlirt';
 import { NoType72Side } from './NoType72';
 import { NoType73Side } from './NoType73';
@@ -38,6 +40,9 @@ const DETAILED: Record<string, Detailed> = {
   // DSB's ETs ran in Öresundståg paint before going to Skåne (2022–23); its 2000 blue-band livery is gone.
   x31: { component: X31Side as Side, liveries: ['oresundstag', 'dsb'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
+  // Picked per train from the set the live feed names; without it ('flytoget') the simple outline.
+  flytoget71: { component: Flytoget71Side as Side, liveries: ['flytoget'] },
+  flytoget78: { component: Flytoget78Side as Side, liveries: ['flytoget'] },
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
   regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget'] },
   no_flirt: { component: NoFlirtSide as Side, liveries: ['vy'] },

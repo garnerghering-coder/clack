@@ -26,6 +26,8 @@ interface Pos {
   bearing: number | null;
   speedKmh: number | null;
   at: number;
+  /** The set's id when the feed names it (Flytoget: "71-xx", "78-xx"). */
+  vehicle?: string | null;
 }
 
 interface Update {
@@ -79,6 +81,8 @@ export interface NorwayTrain {
   delayMin: number | null;
   /** Calls at a Swedish station too, so Trafikverket may have the same train. */
   crossBorder: boolean;
+  /** The set running it, when the feed names it. */
+  vehicle: string | null;
 }
 
 /** GTFS-RT start dates come as "20261022" or "2026-10-22". */
@@ -149,7 +153,7 @@ export class NorwayFeed {
       // Protobuf sends 0 for a missing bearing; only Flytoget sends real ones, so 0 is treated as none.
       const raw: Pos = { lat: v.position.latitude, lon: v.position.longitude, bearing: v.position.bearing || null, speedKmh: v.position.speed ? Math.round(v.position.speed * 3.6) : null, at };
       if (!this.fixes.push(k, raw)) continue;
-      const pos: Pos = { ...raw, speedKmh: this.fixes.current(k)?.speedKmh ?? null };
+      const pos: Pos = { ...raw, speedKmh: this.fixes.current(k)?.speedKmh ?? null, vehicle: v.vehicle?.label || v.vehicle?.id || null };
       if (old && haversineM(old.lat, old.lon, pos.lat, pos.lon) > 25) this.previous.set(k, old);
       this.positions.set(k, pos);
     }
@@ -294,6 +298,7 @@ export class NorwayFeed {
         nextEta: now > lastArr ? null : nextEta,
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: stops.some((s) => s.country !== 'NO'),
+        vehicle: gps?.vehicle ?? null,
       });
     }
     return out;

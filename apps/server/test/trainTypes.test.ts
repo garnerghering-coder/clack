@@ -44,6 +44,12 @@ describe('typical train types', () => {
     expect(typicalTrainType('krosatag', 'regional', '1', ['Värnamo C', 'Alvesta'])).toBeNull();
   });
 
+  it("picks Flytoget's type from the set the live feed names, and says both without it", () => {
+    expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '71-03')).toBe('flytoget71');
+    expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '78-05')).toBe('flytoget78');
+    expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'])).toBe('flytoget');
+  });
+
   it("puts SJ's Storlien–Trondheim trains under SJ Nord, who runs them", () => {
     expect(brandOnLine('sj', ['Storlien', 'Trondheim S'])).toBe('sj-nord');
     expect(brandOnLine('sj', ['Stockholm C', 'Storlien'])).toBe('sj');

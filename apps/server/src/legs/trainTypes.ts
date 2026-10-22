@@ -23,7 +23,7 @@ interface Rule {
    * `ends`: the trip starts or ends at one of these stations; `both_ends`: it starts and ends at them (a line's
    * stations, so a trip that leaves the line doesn't match). For lines an operator runs with a different type.
    */
-  match: { operator?: string; product?: string; number_min?: number; number_max?: number; ends?: string[]; both_ends?: string[] };
+  match: { operator?: string; product?: string; number_min?: number; number_max?: number; ends?: string[]; both_ends?: string[]; vehicle_prefix?: string };
   type: string;
 }
 interface CompositionRule {
@@ -89,15 +89,18 @@ export function brandOnLine(operatorId: string | null, ends: (string | null | un
 }
 
 /** Best type known for a departure: from its coach order when that decides it, else the typical one. */
-export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null, ends?: (string | null | undefined)[]) {
-  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber, ends);
+export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null, ends?: (string | null | undefined)[], vehicle?: string | null) {
+  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber, ends, vehicle);
 }
 
 /** A station name for matching ends: feeds differ on the "C" ("Hässleholm" / "Hässleholm C"). */
 const endKey = (name: string) => normName(name).replace(/ c$/, '');
 
-/** `ends`: the trip's first and last stations, where known (a rule with `ends` is skipped without them). */
-export function typicalTrainType(operatorId: string | null, product: string, trainNumber: string | null, ends?: (string | null | undefined)[]): string | null {
+/**
+ * `ends`: the trip's first and last stations, where known (a rule with `ends` is skipped without them). `vehicle`: the
+ * set running it, where the live feed names it (a `vehicle_prefix` rule is skipped without it).
+ */
+export function typicalTrainType(operatorId: string | null, product: string, trainNumber: string | null, ends?: (string | null | undefined)[], vehicle?: string | null): string | null {
   const n = trainNumber ? Number(trainNumber) : NaN;
   const endNames = new Set((ends ?? []).filter((e): e is string => !!e).map(endKey));
   for (const r of trainTypeCatalog().rules) {
@@ -107,6 +110,7 @@ export function typicalTrainType(operatorId: string | null, product: string, tra
     if (m.number_min !== undefined && !(n >= m.number_min)) continue;
     if (m.number_max !== undefined && !(n <= m.number_max)) continue;
     if (m.ends && !m.ends.some((e) => endNames.has(endKey(e)))) continue;
+    if (m.vehicle_prefix && !vehicle?.startsWith(m.vehicle_prefix)) continue;
     if (m.both_ends && !(endNames.size && [...endNames].every((e) => m.both_ends!.some((b) => endKey(b) === e)))) continue;
     return r.type;
   }
