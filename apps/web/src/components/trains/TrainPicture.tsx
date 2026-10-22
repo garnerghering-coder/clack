@@ -3,6 +3,7 @@
 import type { ComponentType } from 'react';
 import { TrainArt } from '../TrainArt';
 import { NoFlirtSide } from './NoFlirt';
+import { NoType73Side } from './NoType73';
 import { NoType76Side } from './NoType76';
 import { X3Side } from './X3';
 
@@ -18,6 +19,8 @@ interface Detailed {
 const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
   no_flirt: { component: NoFlirtSide as Side, liveries: ['vy'] },
+  // Go-Ahead's stripes are seen only at an angle and Vy's 73Bs are mid-repaint (red to green): both unpainted.
+  no_type73: { component: NoType73Side as Side, liveries: ['sj-nord'] },
   // SJ Nord's livery isn't drawn yet: its curved edge shows only on photos too oblique to measure.
   no_type76: { component: NoType76Side as Side, liveries: [] },
 };
