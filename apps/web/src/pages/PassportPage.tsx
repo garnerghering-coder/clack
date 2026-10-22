@@ -1,6 +1,6 @@
 // Passport (DESIGN §8, product brief §9): everything you've ridden, by year; commuter trains per the setting.
-// Collection first: the summary and your map, milestones, collections, records and the log, then the detailed
-// statistics. Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
+// Collection first: the summary and your map, milestones, collections and records, then the detailed statistics
+// (the trips themselves are on Trips). Every number comes from trips recorded as travelled (see apps/server/src/legs/recording.ts).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SettingsLink } from '../components/AppShell';
 import { ShareSheet } from '../share/ShareSheet';
@@ -13,7 +13,6 @@ import { api, type CountRow, type Leg, type LegRef, type Milestone, type Passpor
 import { OperatorBadge } from '../components/OperatorBadge';
 import { TrainArt } from '../components/TrainArt';
 import { Flag } from '../components/Flag';
-import { LegRow } from './TripsPage';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
 import { fmtDistance, fmtDuration, fmtTime, locale } from '../format';
@@ -174,11 +173,6 @@ export function PassportPage() {
     api.legs().then(setLegs, () => undefined);
   }, []);
 
-  const log = useMemo(() => {
-    if (!data) return [];
-    const ids = new Set(data.map.map((m) => m.legId));
-    return legs.filter((l) => ids.has(l.id));
-  }, [data, legs]);
 
   if (error)
     return (
@@ -399,7 +393,7 @@ export function PassportPage() {
           </section>
 
 
-          <h2 className="passport-group">{t('passport.recordsAndLog')}</h2>
+          <h2 className="passport-group">{t('passport.records')}</h2>
           <section className="card">
             <h2 className="section-header">{t('passport.records')}</h2>
             <div className="records">
@@ -457,15 +451,6 @@ export function PassportPage() {
                   to={legLink(data.records.latestArrival)}
                 />
               )}
-            </div>
-          </section>
-
-          <section className="card">
-            <h2 className="section-header">{t('passport.log')}</h2>
-            <div className="list">
-              {log.map((l) => (
-                <LegRow key={l.id} leg={l} />
-              ))}
             </div>
           </section>
 

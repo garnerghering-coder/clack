@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ms, type Leg } from '../api';
 import { LegRow } from '../pages/TripsPage';
+import { opColor } from '../map/style';
 
 /** Planned transfer, and whether the real times made it tight or missed (DESIGN §7). */
 export function transferOf(prev: Leg, next: Leg) {
@@ -35,8 +36,12 @@ export function JourneyCard({ legs }: { legs: Leg[] }) {
   const { t } = useTranslation();
   const first = legs[0]!;
   const last = legs.at(-1)!;
+  // Each train's operator colour glows beside its own row and blends into the next: one card, no pills inside it.
+  const glow = legs
+    .map((l, i) => `radial-gradient(75% ${Math.round(110 / legs.length)}% at 100% ${Math.round(((i + 0.6) / legs.length) * 100)}%, color-mix(in srgb, ${opColor(l.operator?.brandColor)} 18%, transparent), transparent 70%)`)
+    .join(', ');
   return (
-    <section className="journey-card">
+    <section className="journey-card" style={{ background: `${glow}, var(--surface)` }}>
       <Link to={`/journeys/${first.journeyId}`} className="journey-head">
         <span className="caption upper">{t('journey.label', { count: legs.length })}</span>
         <span className="strong">

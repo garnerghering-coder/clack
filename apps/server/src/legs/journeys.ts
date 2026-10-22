@@ -1,5 +1,6 @@
 // Journeys (SPEC §13): consecutive legs become one journey when the next train leaves from the station the previous
-// one arrived at, on the same day, within 4 hours. Regrouped whenever legs change; manual split/merge comes later.
+// one arrived at within 4 hours, also past midnight (owner, 2026-10-22: SJ 547 into Malmö C at 23:53 and the 00:35
+// to the airport are one journey; an overnight stay is longer than 4 hours anyway). Regrouped whenever legs change.
 import { and, eq, inArray, notInArray } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { journeys, legs } from '../db/schema.js';
@@ -14,8 +15,6 @@ export interface GroupableLeg {
   arr: number;
 }
 
-const localDay = (ms: number) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Stockholm' }).format(ms);
-
 /** Legs in departure order, split into journeys. Pure, for tests. */
 export function groupLegs(list: GroupableLeg[]): GroupableLeg[][] {
   const sorted = [...list].sort((a, b) => a.dep - b.dep);
@@ -24,7 +23,7 @@ export function groupLegs(list: GroupableLeg[]): GroupableLeg[][] {
     const cur = out.at(-1);
     const prev = cur?.at(-1);
     const gap = prev ? l.dep - prev.arr : Infinity;
-    if (cur && prev && prev.destStationId === l.originStationId && gap >= 0 && gap <= MAX_TRANSFER_MS && localDay(prev.arr) === localDay(l.dep)) cur.push(l);
+    if (cur && prev && prev.destStationId === l.originStationId && gap >= 0 && gap <= MAX_TRANSFER_MS) cur.push(l);
     else out.push([l]);
   }
   return out;

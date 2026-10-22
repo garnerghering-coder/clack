@@ -105,6 +105,8 @@ function MultiRouteMapInner({ routes, stations, railNetwork, className = '', lab
           id: 'stations',
           type: 'circle',
           source: 'stations',
+          // Busier (bigger) stations on top, so a small dot never sits over a big one.
+          layout: { 'circle-sort-key': ['get', 'count'] },
           paint: {
             'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 3, 10, 7, 50, 11],
             'circle-color': mapColors().stopFill,
