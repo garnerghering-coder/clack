@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Footprints, Map as MapIcon } from 'lucide-react';
+import { Map as MapIcon } from 'lucide-react';
 import { connectionStatus, routeTracks, type ConnectionResult, type StationMap, type WalkProfile } from '@clack/shared';
 import { api, ms, type Leg, type StationInfo } from '../api';
 import { useSettings } from '../settings';
@@ -113,11 +113,6 @@ export function ConnectionCard({ a, b, compact = false }: { a: Leg; b: Leg; comp
           .filter(Boolean)
           .join(' · ')}
       </p>
-      {result.estimated && result.status !== 'broken' && (
-        <p className="caption connection-estimate">
-          <Footprints size={13} /> {t('connection.estimated')}
-        </p>
-      )}
       {!live && result.status !== 'broken' && <p className="caption">{t('connection.timetableOnly')}</p>}
       {result.status === 'broken' && <p className="banner error">{t('connection.brokenBanner')}</p>}
       {map && stationId && (

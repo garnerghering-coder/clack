@@ -886,7 +886,21 @@ function LiveMap() {
           onClose={closeScheduled}
         />
       )}
-      {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
+      {stationSheet && !sel && (
+        <LiveStationSheet
+          id={stationSheet.id}
+          name={stationSheet.name}
+          onClose={() => setStationSheet(null)}
+          onTrain={(r) => {
+            // The same train view as a marker: live when it's on the map, otherwise from the timetable.
+            setStationSheet(null);
+            const date = r.trip?.serviceDate ?? todayIso(TZ);
+            const tr = [...trains.current.values()].find((x) => x.number === r.trainNumber && x.date === date);
+            if (tr) void select(tr.id);
+            else void openScheduled(r.trainNumber, date, r.trip?.key ?? null);
+          }}
+        />
+      )}
       {sel && (
         <TrainSheet
           op={selOp}
@@ -1151,7 +1165,7 @@ export function LiveMapPage() {
 }
 
 /** A station tapped on the live map: its next departures, the board and its map. */
-function LiveStationSheet({ id, name, onClose }: { id: string; name: string; onClose: () => void }) {
+function LiveStationSheet({ id, name, onClose, onTrain }: { id: string; name: string; onClose: () => void; onTrain: (row: BoardRow) => void }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
   const ops = useOperators();
@@ -1185,10 +1199,12 @@ function LiveStationSheet({ id, name, onClose }: { id: string; name: string; onC
         <ul className="live-station-deps">
           {rows.map((r) => (
             <li key={r.id}>
-              <FlapTime time={r.estimated ?? r.advertised} sched={r.advertised} tz={TZ} clock={settings.clock} />
-              <OperatorBadge operator={r.operatorId ? ops.get(r.operatorId) : undefined} size={18} />
-              <span className="live-station-dest">{r.endpoints.join(', ')}</span>
-              {r.platform && <span className="caption">{t('trips.platform', { platform: r.platform })}</span>}
+              <button className="live-station-dep" onClick={() => onTrain(r)}>
+                <FlapTime time={r.estimated ?? r.advertised} sched={r.advertised} tz={TZ} clock={settings.clock} />
+                <OperatorBadge operator={r.operatorId ? ops.get(r.operatorId) : undefined} size={18} />
+                <span className="live-station-dest">{r.endpoints.join(', ')}</span>
+                {r.platform && <span className="caption">{t('trips.platform', { platform: r.platform })}</span>}
+              </button>
             </li>
           ))}
         </ul>
@@ -1198,7 +1214,7 @@ function LiveStationSheet({ id, name, onClose }: { id: string; name: string; onC
       <div className="sheet-actions row-actions">
         {info?.hasBoard && (
           <Link className="button" to={`/stations/${id}`}>
-            {t('stationMap.departures')}
+            {t('liveMap.allDepartures')}
           </Link>
         )}
         {info?.hasMap && (

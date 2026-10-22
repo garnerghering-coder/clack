@@ -526,7 +526,8 @@
     "plan": "Plan a journey",
     "notRunningTitle": "This train isn’t running right now.",
     "notRunningBody": "It may not have started yet, may have finished for the day, or doesn’t run today. It will show here when it does.",
-    "unfollow": "Unfollow"
+    "unfollow": "Unfollow",
+    "allDepartures": "View all departures"
   },
   "onboard": {
     "title": "On board",
@@ -782,7 +783,7 @@
     "buyAt": "Buy ticket at {{site}}",
     "searchFor": "Opens the operator’s own site. Search for {{from}} → {{to}}, {{day}} {{time}} ({{train}}).",
     "backTitle": "Back from {{site}}",
-    "backBody": "Add {{from}} → {{to}} (train {{train}}) to your trips? Only if you’re going: opening the site doesn’t mean you bought a ticket.",
+    "backBody": "Add {{from}} → {{to}} (train {{train}}) to your trips?",
     "notNow": "Not now",
     "addToTrips": "Add to my trips",
     "added": "Added to your trips.",

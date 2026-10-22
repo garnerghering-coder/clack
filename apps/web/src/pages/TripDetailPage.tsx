@@ -299,8 +299,8 @@ export function TripDetailPage() {
                 {leg.canceled ? t('status.cancelled') : ms(leg.actualArr) ? t('trips.arrivedAt', { time: fmtTime(ms(leg.actualArr), dtz, settings.clock) }) : t('detail.scheduledArrival', { time: fmtTime(schedArr, dtz, settings.clock) })}
               </p>
               <p className="caption">{ms(leg.actualArr) ? t('detail.actualTimes') : t('detail.scheduledOnlyNote')}</p>
-              {/* The trip's record (brief §8): why it counts, or why it doesn't, and how to correct it. */}
-              <p className={`record-line record-${leg.ride}`}>{t(`record.state.${leg.ride}`, { why: t(`record.why.${leg.rideReason ?? 'no_reports'}`) })}</p>
+              {/* Why it doesn't count (or needs a check); a trip that counts needs no line about it. */}
+              {leg.ride !== 'auto' && leg.ride !== 'confirmed' && <p className={`record-line record-${leg.ride}`}>{t(`record.state.${leg.ride}`, { why: t(`record.why.${leg.rideReason ?? 'no_reports'}`) })}</p>}
               <div className="chip-row">
                 {leg.ride === 'review' && (
                   <>
