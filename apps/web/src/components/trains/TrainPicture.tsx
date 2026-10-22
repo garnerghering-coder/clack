@@ -13,6 +13,7 @@ import { X3Side } from './X3';
 import { X40Side } from './X40';
 import { X60Side } from './X60';
 import { X61Side } from './X61';
+import { X62Side } from './X62';
 
 type Side = ComponentType<{ livery: string; muted?: boolean; className?: string; label?: string }>;
 
@@ -31,6 +32,7 @@ const DETAILED: Record<string, Detailed> = {
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
   x61: { component: X61Side as Side, liveries: ['pagatag'], notFor: ['vasttagen'] }, // Västtåg's X61s have 7 door pairs
+  x62: { component: X62Side as Side, liveries: ['norrtag'] },
   x31: { component: X31Side as Side, liveries: ['oresundstag'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
