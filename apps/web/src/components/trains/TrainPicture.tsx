@@ -9,7 +9,6 @@ import { NoType73Side } from './NoType73';
 import { NoType76Side } from './NoType76';
 import { ReginaSide } from './Regina';
 import { X31Side } from './X31';
-import { X2000Side } from './X2000';
 import { X3Side } from './X3';
 import { X40Side } from './X40';
 import { X60Side } from './X60';
@@ -28,8 +27,6 @@ interface Detailed {
 /** Keyed by train type id (data/train_types.json), not by art family: Flytoget shares the X3's simple outline. */
 const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
-  // Unpainted: the rebuilt X2C's dark front is seen only at an angle; unrebuilt X2s are bare stainless anyway.
-  x2000: { component: X2000Side as Side, liveries: [] },
   x40: { component: X40Side as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
