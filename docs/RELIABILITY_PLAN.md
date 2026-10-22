@@ -65,7 +65,19 @@ Swedish operators' live data in Norway today.
    Chromium: a page reload offline still shows the trip).
 5. **Better estimates: built.** After GPS goes quiet the train is carried on at its last speed for up to 5 min,
    never past the next stop and never back behind its last fix. Segment speeds from history: not yet.
-6. **Inbound train sets:** being checked.
+6. **Inbound train sets: not buildable on real data; not shipped.** Checked 2026-10-22: no public source says in
+   advance which trip a physical train set runs next.
+   - GTFS Sweden 3 and every cached Sverige 2 feed (2019–2026) have no `block_id`; the 2012/2016 feeds have the
+     column but it's empty.
+   - Trafikverket has no vehicle, set or circulation object among its 74 object types. TrainComposition is coach
+     order only (2,259 rows, 308 trains). Every other id is per train (2,458 checked).
+   - Entur's GTFS and NeTEx have no blocks. Journey Planner's `aimedVehicleId` was empty on all 1,708 rail
+     journeys, and `expectedVehicleId` is just the train number.
+   - Only Go-Ahead's and Flytoget's GPS carry real unit ids (e.g. unit 71-03: train 3943 to Oslo lufthavn, then
+     3768 back after a 21-minute turnaround). But a unit shows up on its next trip only once the previous one has
+     ended (4 min before to 3 min after departure), too late to warn about anything.
+   - Guessing the next trip from earlier days would be made-up data. Not tested: Oxyfi's Trainpos (unit ids for
+     five Swedish regional fleets, needs its own key) and GTFS Sweden 3 realtime (our key gets a 403).
 7. **Congestion: built as an observation.** Within two hours of leaving, the trains that left your station your
    way in the last hour and how late they are now; a warning when at least two, and half, are 10+ min late. No
    single-track or platform-capacity rules: we have no reliable data on track counts, and the owner's rule is no
