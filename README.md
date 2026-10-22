@@ -47,6 +47,15 @@ Wait for the green **✓ Clack is ready** box in Terminal, then open <http://loc
 - **Delay data:** Trafikverket keeps actual times for only ~4 days, and Entur only for the day the train runs. The server saves them for your trips while it's
   running and catches up when it starts, so start the app at least every few days.
 - **Updating:** `git pull`, then `npm install` if dependencies changed.
+- **If something goes wrong** the server restarts itself: after a crash, or if it stops answering for five minutes
+  (Terminal shows a yellow `[supervisor]` line saying which). `http://localhost:3001/api/health` shows how Trafikverket
+  and Entur are answering.
+- **Accuracy audit:** every hour the server checks trips that finished at least an hour ago against Trafikverket's
+  final record and writes `data/audit/latest.md` (numbers at `/api/audit`; by hand: `npm run import -- audit`). To
+  have numbers from the first day, it also follows two real trains an hour, 05–22, as a hidden user you never see
+  (`AUDIT_SAMPLE_PER_HOUR=0` in `.env` turns that off). See [`docs/RELIABILITY_PLAN.md`](docs/RELIABILITY_PLAN.md).
+- **No connection on the train:** trips you've opened are kept on the phone, and the train keeps moving from its last
+  report, marked as an estimate, until the connection is back.
 
 ## How often it asks Trafikverket and Entur
 
@@ -56,6 +65,7 @@ as one. Nothing polls while nobody is looking, except your own trips.
 | What | Requests | When |
 |---|---|---|
 | Your trips (live tracking) | 1 TrainAnnouncement + 1 TrainPosition per live trip every 20 s | An hour before departure until 30 min after arrival |
+| Accuracy audit sample | The same, for 2 sample trains an hour; 1 TrainAnnouncement per finished trip | 05–22 |
 | Delay catch-up | 1 TrainAnnouncement per trip | At start, for trips of the last 4 days |
 | Station board | 1 TrainAnnouncement per station and direction every `BOARD_POLL_MS` | While the board is open, plus 60 s |
 | Live map: positions | 1 TrainPosition stream (Trafikverket SSE) for the whole country; 1 catch-up query per reconnect. After 3 failed streams in a row it polls every `LIVE_MAP_POLL_MS` instead | While the map is open, plus 60 s |

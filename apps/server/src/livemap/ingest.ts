@@ -87,7 +87,7 @@ export interface IngestOptions {
   fetchImpl?: typeof fetch;
   now?: () => number;
   log?: (m: string) => void;
-  /** Train numbers of the owner's legs that are live now. */
+  /** The owner's legs that are live now: "number|date" (Trafikverket's trains) and "trip:key|date" (Norway's). */
   myNumbers?: () => Set<string>;
   /** Synthetic trains instead of Trafikverket (demo and load testing). */
   simulate?: number;
@@ -324,7 +324,7 @@ export class LiveMapIngest extends EventEmitter {
       next: abroadNext !== undefined ? (abroadNext?.name ?? null) : this.name(info?.nextSig ?? null),
       nextEta: abroadNext !== undefined ? (abroadNext?.eta ?? null) : (info?.nextEta ?? null),
       delayMin: info?.delayMin ?? null,
-      mine: this.opts.myNumbers?.().has(number) ?? false,
+      mine: this.opts.myNumbers?.().has(`${number}|${date}`) ?? false,
     };
     this.trains.set(k, t);
     this.changed.add(k);
@@ -467,7 +467,7 @@ export class LiveMapIngest extends EventEmitter {
         next: n.next,
         nextEta: n.nextEta,
         delayMin: n.delayMin,
-        mine: this.opts.myNumbers?.().has(n.number) ?? false,
+        mine: ((mine) => !!mine && (mine.has(`trip:${n.tripKey}|${n.date}`) || (n.crossBorder && mine.has(`${n.number}|${n.date}`))))(this.opts.myNumbers?.()),
         tripKey: n.tripKey,
       };
       this.trains.set(id, t);

@@ -50,6 +50,8 @@ export function checkedSpeed(prev: GpsFix | null, f: GpsFix): number | null {
 export interface FilterStats {
   accepted: number;
   rejected: number;
+  /** The last few dropped fixes, to check the filter against (shown on /api/health). */
+  recent: { key: string; at: string; reason: 'area' | 'jump'; meters?: number; seconds?: number; kmh?: number }[];
 }
 
 /**
@@ -59,11 +61,11 @@ export interface FilterStats {
  */
 export class FixFilter {
   private state = new Map<string, { last: GpsFix; doubt: GpsFix | null }>();
-  readonly stats: FilterStats = { accepted: 0, rejected: 0 };
+  readonly stats: FilterStats = { accepted: 0, rejected: 0, recent: [] };
 
   /** Offer a fix; true if it's now the train's current one. Fixes no newer than the current one are ignored. */
   push(key: string, raw: GpsFix): boolean {
-    if (!inArea(raw)) return this.reject();
+    if (!inArea(raw)) return this.reject({ key, at: new Date(raw.at).toISOString(), reason: 'area' });
     const st = this.state.get(key);
     if (st && raw.at <= st.last.at) return false;
     if (!st || plausibleMove(st.last, raw) || (st.doubt && raw.at > st.doubt.at && plausibleMove(st.doubt, raw))) {
@@ -78,7 +80,9 @@ export class FixFilter {
       return true;
     }
     st.doubt = raw;
-    return this.reject();
+    const meters = Math.round(haversineM(st.last.lat, st.last.lon, raw.lat, raw.lon));
+    const seconds = Math.round((raw.at - st.last.at) / 1000);
+    return this.reject({ key, at: new Date(raw.at).toISOString(), reason: 'jump', meters, seconds, kmh: seconds > 0 ? Math.round((meters / seconds) * 3.6) : undefined });
   }
 
   current(key: string): GpsFix | null {
@@ -98,8 +102,10 @@ export class FixFilter {
     return this.state.size;
   }
 
-  private reject() {
+  private reject(why: FilterStats['recent'][number]) {
     this.stats.rejected++;
+    this.stats.recent.push(why);
+    if (this.stats.recent.length > 20) this.stats.recent.shift();
     return false;
   }
 }

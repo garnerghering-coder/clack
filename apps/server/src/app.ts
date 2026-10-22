@@ -50,12 +50,23 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(boardRoutes(db, hub), api);
   const ingest = new LiveMapIngest(db, {
     log: (m) => app.log.warn(m),
-    // Your own trains are drawn on top (ADDITIONS_01 A): numbers of legs inside their live-tracking window.
+    // Your own trains are drawn on top (ADDITIONS_01 A): legs inside their live-tracking window, as "number|date" for
+    // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's, whose feed names the trip. A number
+    // alone isn't enough: SJ 441 and SJ Nord's 441 run on the same day.
     myNumbers: () => {
       const ids = trackedLegIds(db, Date.now(), LOCAL_USER_ID);
       if (!ids.length) return new Set();
-      const rows = db.select({ n: legs.trainNumber, trv: legs.trvTrainNumbers }).from(legs).where(inArray(legs.id, ids)).all();
-      return new Set(rows.flatMap((r) => [...(r.n ? [r.n] : []), ...r.trv]));
+      const rows = db
+        .select({ n: legs.trainNumber, trv: legs.trvTrainNumbers, date: legs.serviceDate, key: legs.timetableTripKey, countries: legs.countryCodes })
+        .from(legs)
+        .where(inArray(legs.id, ids))
+        .all();
+      return new Set(
+        rows.flatMap((r) => [
+          ...(r.countries.includes('SE') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
+          ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
+        ]),
+      );
     },
     simulate: Number(process.env.LIVE_MAP_SIMULATE ?? 0) || undefined,
     includeEstimated: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_INCLUDE_ESTIMATED ?? ''),

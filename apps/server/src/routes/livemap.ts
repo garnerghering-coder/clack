@@ -4,7 +4,8 @@ import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
 import { LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
-import { searchByNumber } from '../search/timetable.js';
+import { searchByNumber, tripStops } from '../search/timetable.js';
+import { matchTrip } from '../livemap/match.js';
 import { trainStops } from '../livemap/trainStops.js';
 
 type Bbox = [number, number, number, number];
@@ -74,14 +75,18 @@ export const liveMapRoutes =
 
     // The operator narrows it down where two companies share a number (Öresundståg 1378 and Pågatåg 1378).
     // Norway's feed names the exact trip.
+    /** The timetable trip of a train on the map: Norway's feed names it; otherwise the one that runs where it is. */
     const tripOf = (t: LiveTrain) => {
       if (t.date === 'sim') return undefined;
-      const all = t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId }) : [];
+      const all = searchByNumber(db, t.number, t.date);
       if (t.tripKey) {
-        const exact = (all.length ? all : searchByNumber(db, t.number, t.date)).find((r) => r.key === t.tripKey);
+        const exact = all.find((r) => r.key === t.tripKey);
         if (exact) return exact;
       }
-      return all[0] ?? searchByNumber(db, t.number, t.date)[0];
+      return matchTrip(
+        t,
+        all.map((r) => ({ ...r, stops: tripStops(db, r.key, r.serviceDate)?.stops ?? [] })),
+      );
     };
 
     // One train, with its timetable trip so the map can draw its route and "Add to my trips" works.
@@ -91,11 +96,11 @@ export const liveMapRoutes =
       const trip = tripOf(t);
       const mine = t.mine
         ? db
-            .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers })
+            .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers, key: legs.timetableTripKey })
             .from(legs)
-            .where(and(eq(legs.userId, req.userId), inArray(legs.status, ['planned', 'completed'])))
+            .where(and(eq(legs.userId, req.userId), eq(legs.serviceDate, t.date), inArray(legs.status, ['planned', 'completed'])))
             .all()
-            .find((l) => l.trainNumber === t.number || l.trv.includes(t.number))
+            .find((l) => (l.trainNumber === t.number || l.trv.includes(t.number)) && (!trip || !l.key || l.key === trip.key))
         : undefined;
       return { train: t, trip: trip ? { key: trip.key, serviceDate: trip.serviceDate, from: trip.from, to: trip.to } : null, legId: mine?.id ?? null };
     });
@@ -116,17 +121,22 @@ export const liveMapRoutes =
     app.get<{ Params: { number: string; date: string }; Querystring: { key?: string } }>('/trains/:number/:date', async (req, reply) => {
       const { number, date } = req.params;
       if (!/^\d{1,6}$/.test(number) || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return reply.code(400).send({ error: 'train number and date (YYYY-MM-DD) are required' });
-      const live = [...ingest.trains.values()].find((x) => x.number === number && x.date === date) ?? null;
       const found = searchByNumber(db, number, date);
-      const trip = (req.query.key && found.find((r) => r.key === req.query.key)) || (live ? tripOf(live) : undefined) || found[0];
+      // Several trains can share a number (SJ 441 in Sweden, SJ Nord 441 in Norway): the trip and the train on the
+      // map must be the same one, so each map train is paired with its own trip, never another's.
+      const onMap = [...ingest.trains.values()].filter((x) => x.number === number && x.date === date).map((t) => ({ t, trip: tripOf(t) }));
+      const byKey = req.query.key ? found.find((r) => r.key === req.query.key) : undefined;
+      const pair = byKey ? onMap.find((x) => x.trip?.key === byKey.key) : onMap.find((x) => x.trip) ?? onMap[0];
+      const live = pair?.t ?? null;
+      const trip = byKey ?? pair?.trip ?? (found.length === 1 ? found[0] : undefined);
       if (!trip && !live) return reply.code(404).send({ error: 'no such train on that day' });
       const stops = trip ? await trainStops(db, { key: trip.key, serviceDate: trip.serviceDate }, number) : null;
       const leg = db
-        .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers, serviceDate: legs.serviceDate })
+        .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers, serviceDate: legs.serviceDate, key: legs.timetableTripKey })
         .from(legs)
         .where(and(eq(legs.userId, req.userId), eq(legs.serviceDate, date)))
         .all()
-        .find((l) => l.trainNumber === number || l.trv.includes(number));
+        .find((l) => (l.trainNumber === number || l.trv.includes(number)) && (!trip || !l.key || l.key === trip.key));
       return {
         number,
         date,

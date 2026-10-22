@@ -23,7 +23,8 @@ describe('GPS jumps', () => {
     expect(f.push('t', fix(60.5, 60))).toBe(false);
     expect(f.current('t')!.lat).toBe(59.01);
     expect(f.push('t', fix(59.02, 90))).toBe(true);
-    expect(f.stats).toEqual({ accepted: 3, rejected: 1 });
+    expect(f.stats).toMatchObject({ accepted: 3, rejected: 1 });
+    expect(f.stats.recent[0]).toMatchObject({ key: 't', reason: 'jump', seconds: 30 });
   });
 
   it('follows two fixes that agree with each other over a stale one (the train moved while the feed was quiet)', () => {
