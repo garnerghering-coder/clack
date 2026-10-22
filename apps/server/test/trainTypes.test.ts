@@ -44,6 +44,15 @@ describe('typical train types', () => {
     expect(typicalTrainType('krosatag', 'regional', '1', ['Värnamo C', 'Alvesta'])).toBeNull();
   });
 
+  it('tells Göteborg pendeltåg and the Itino lines from Västtåg and Värmlandstrafik Reginas', () => {
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Alingsås', 'Göteborg C'])).toBe('x61');
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Göteborg C', 'Kungsbacka'])).toBe('x61');
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Hallsberg', 'Lidköping'])).toBe('y31');
+    expect(typicalTrainType('varmlandstrafik', 'regional', '1', ['Karlstad C', 'Torsby'])).toBe('y31');
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Göteborg C', 'Töreboda'])).toBe('regina');
+    expect(typicalTrainType('varmlandstrafik', 'regional', '1', ['Charlottenberg', 'Karlstad C'])).toBe('regina');
+  });
+
   it("picks Flytoget's type from the set the live feed names, and says both without it", () => {
     expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '71-03')).toBe('flytoget71');
     expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '78-05')).toBe('flytoget78');
