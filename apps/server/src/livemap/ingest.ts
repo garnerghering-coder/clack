@@ -14,7 +14,7 @@ import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js'
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
-import { productOf, type Product } from '../search/timetable.js';
+import { productOf, searchByNumber, tripStops, type Product } from '../search/timetable.js';
 import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
 
 export interface LiveTrain {
@@ -98,6 +98,14 @@ export interface IngestOptions {
 }
 
 type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
+interface TailStop {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+  arr: number | null;
+  dep: number | null;
+}
 
 export class LiveMapIngest extends EventEmitter {
   readonly trains = new Map<string, LiveTrain>();
@@ -115,6 +123,10 @@ export class LiveMapIngest extends EventEmitter {
   private noIds = new Set<string>();
   /** Swedish keys of cross-border trains drawn from Norway's GPS instead of a Swedish estimate. */
   private norwayGps = new Set<string>();
+  /** Timetabled stops abroad after a train's last Trafikverket report, per train (cached 10 minutes). */
+  private tails = new Map<string, { at: number; stops: TailStop[] }>();
+  /** The same before a train's first Trafikverket report (København H → Hyllie). */
+  private heads = new Map<string, { at: number; stops: TailStop[] }>();
   private users = 0;
   private running = false;
   private abort: AbortController | null = null;
@@ -279,7 +291,7 @@ export class LiveMapIngest extends EventEmitter {
   }
 
   /** Train k at this position, with what the announcements say about it; or off the map if it shouldn't show. */
-  private put(k: string, fix: Fix) {
+  private put(k: string, fix: Fix, abroadNext?: { name: string; eta: number | null } | null) {
     const [number, date] = k.split('|') as [string, string];
     const info = this.ann.info(number, date);
     if (!this.shows(info)) {
@@ -299,8 +311,8 @@ export class LiveMapIngest extends EventEmitter {
       trainType: trainTypeFor(brand, product, number, info?.composition ?? null),
       origin: this.name(info?.originSig ?? null),
       destination: this.name(info?.destinationSig ?? null),
-      next: this.name(info?.nextSig ?? null),
-      nextEta: info?.nextEta ?? null,
+      next: abroadNext !== undefined ? (abroadNext?.name ?? null) : this.name(info?.nextSig ?? null),
+      nextEta: abroadNext !== undefined ? (abroadNext?.eta ?? null) : (info?.nextEta ?? null),
       delayMin: info?.delayMin ?? null,
       mine: this.opts.myNumbers?.().has(number) ?? false,
     };
@@ -316,7 +328,42 @@ export class LiveMapIngest extends EventEmitter {
   private shows(info: TrainInfo | null): boolean {
     if (!info) return !this.ann.complete;
     if (info.canceled || !info.isTrain) return false;
-    return !(info.nextSig === null && info.lastAt !== null && this.now() - info.lastAt > FINISHED_MS);
+    if (!(info.nextSig === null && info.lastAt !== null && this.now() - info.lastAt > FINISHED_MS)) return true;
+    // Past its last Swedish stop: still running if its timetable goes on abroad.
+    const tail = this.tail(info);
+    const end = tail.at(-1)?.arr ?? tail.at(-1)?.dep ?? null;
+    return end !== null && this.now() <= end + FINISHED_MS;
+  }
+
+  /**
+   * The stops abroad after a train's last Trafikverket report (Hyllie → København H, Arvika → Oslo S), from the
+   * timetable, shifted by its last known delay. Empty for a train that ends in Sweden. Trafikverket's GPS and
+   * reports stop at the border, so these are what the map can estimate from.
+   */
+  private tail(info: TrainInfo): TailStop[] {
+    const k = trainKey(info.number, info.date);
+    const hit = this.tails.get(k);
+    if (hit && this.now() - hit.at < 10 * 60_000) return hit.stops;
+    let stops: TailStop[] = [];
+    const last = info.lastSig?.toLowerCase();
+    // Only trains Trafikverket says end abroad (a foreign destination such as "Dk.kh"), to keep lookups few.
+    for (const r of last && info.destinationSig?.includes('.') ? searchByNumber(this.db, info.number, info.date) : []) {
+      const found = tripStops(this.db, r.key, r.serviceDate);
+      const i = found?.stops.findIndex((x) => x.code?.toLowerCase() === last) ?? -1;
+      if (!found || i < 0) continue;
+      const after = found.stops.slice(i + 1);
+      if (!after.length || after.some((x) => x.country === 'SE' && x.code && !x.code.includes('.'))) continue;
+      const delay = Math.max(0, (info.delayMin ?? 0) * 60_000);
+      const from = found.stops[i]!;
+      stops = [
+        { id: from.stationId, name: from.name, lat: from.lat, lon: from.lon, arr: null, dep: info.lastAt },
+        ...after.map((x) => ({ id: x.stationId, name: x.name, lat: x.lat, lon: x.lon, arr: x.arr === null ? null : x.arr + delay, dep: x.dep === null ? null : x.dep + delay })),
+      ];
+      break;
+    }
+    this.tails.set(k, { at: this.now(), stops });
+    if (this.tails.size > 2000) this.tails.delete(this.tails.keys().next().value!);
+    return stops;
   }
 
   /**
@@ -335,7 +382,17 @@ export class LiveMapIngest extends EventEmitter {
       if (gps && now - Date.parse(gps.TimeStamp) <= GPS_FRESH_MS) continue;
       if (this.norwayGps.has(k)) continue;
       const info = this.ann.info(number, date);
-      if (!info || !this.shows(info) || info.lastAt === null || !info.nextSig || info.nextEta === null) continue;
+      if (!info || !this.shows(info)) continue;
+      if (!info.nextSig || info.lastAt === null) {
+        const fix = this.estimateAbroad(info, now, graph);
+        if (fix) {
+          seen.add(k);
+          this.estimatedKeys.add(k);
+          this.put(k, fix.fix, fix.next);
+        }
+        continue;
+      }
+      if (info.nextEta === null) continue;
       const a = this.point(info.lastSig);
       const b = this.point(info.nextSig);
       if (!a || !b) continue;
@@ -410,6 +467,59 @@ export class LiveMapIngest extends EventEmitter {
     for (const id of this.noIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
     this.noIds = seen;
     this.norwayGps = taken;
+  }
+
+  /**
+   * The stops abroad before a train's first Trafikverket report (København H → … → Hyllie), from the timetable,
+   * shifted by the delay expected at that first Swedish stop. Empty for a train that starts in Sweden.
+   */
+  private head(info: TrainInfo): TailStop[] {
+    const k = trainKey(info.number, info.date);
+    const hit = this.heads.get(k);
+    if (hit && this.now() - hit.at < 10 * 60_000) return hit.stops;
+    let stops: TailStop[] = [];
+    const next = info.nextSig?.toLowerCase();
+    for (const r of next && info.lastAt === null && info.originSig?.includes('.') ? searchByNumber(this.db, info.number, info.date) : []) {
+      const found = tripStops(this.db, r.key, r.serviceDate);
+      const i = found?.stops.findIndex((x) => x.code?.toLowerCase() === next) ?? -1;
+      if (!found || i <= 0) continue;
+      const before = found.stops.slice(0, i);
+      if (before.some((x) => x.country === 'SE' && x.code && !x.code.includes('.'))) continue;
+      const to = found.stops[i]!;
+      const planned = to.arr ?? to.dep;
+      const delay = info.nextEta !== null && planned !== null ? Math.max(0, info.nextEta - planned) : 0;
+      stops = [
+        ...before.map((x) => ({ id: x.stationId, name: x.name, lat: x.lat, lon: x.lon, arr: x.arr === null ? null : x.arr + delay, dep: x.dep === null ? null : x.dep + delay })),
+        { id: to.stationId, name: to.name, lat: to.lat, lon: to.lon, arr: info.nextEta ?? planned, dep: null },
+      ];
+      break;
+    }
+    this.heads.set(k, { at: this.now(), stops });
+    if (this.heads.size > 2000) this.heads.delete(this.heads.keys().next().value!);
+    return stops;
+  }
+
+  /** Where a train is abroad, between two of its timetabled stops there (or standing at one). */
+  private estimateAbroad(info: TrainInfo, now: number, graph: RailGraph | null): { fix: Fix; next: { name: string; eta: number | null } | null } | null {
+    const tail = info.lastAt === null ? this.head(info) : this.tail(info);
+    if (info.lastAt === null && tail.length >= 2 && now < (tail[0]!.dep ?? tail[0]!.arr ?? Infinity)) return null;
+    if (tail.length < 2) return null;
+    const leaves = (x: TailStop) => x.dep ?? x.arr;
+    const i = tail.findIndex((x, j) => j > 0 && (x.arr ?? x.dep ?? 0) > now);
+    if (i < 0) {
+      const end = tail.at(-1)!;
+      return { fix: { lat: end.lat, lon: end.lon, bearing: null, speedKmh: null, at: now, estimated: true }, next: null };
+    }
+    const a = tail[i - 1]!;
+    const b = tail[i]!;
+    const left = leaves(a);
+    if (left === null || now < left) return { fix: { lat: a.lat, lon: a.lon, bearing: null, speedKmh: null, at: now, estimated: true }, next: { name: b.name, eta: b.arr ?? b.dep } };
+    const seg = segmentBetween(this.db, { id: a.id, lat: a.lat, lon: a.lon }, { id: b.id, lat: b.lat, lon: b.lon }, graph);
+    const cum = cumulative(seg.points);
+    const arrive = b.arr ?? b.dep!;
+    const f = Math.min(0.95, Math.max(0, (now - left) / Math.max(1, arrive - left)));
+    const pt = pointAt(seg.points, cum, f * cum.at(-1)!);
+    return { fix: { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: null, at: now, estimated: true }, next: { name: b.name, eta: arrive } };
   }
 
   /** New announcement data: refresh every train's delay/next stop. */
