@@ -73,8 +73,16 @@ export const liveMapRoutes =
     });
 
     // The operator narrows it down where two companies share a number (Öresundståg 1378 and Pågatåg 1378).
-    const tripOf = (t: LiveTrain) =>
-      t.date === 'sim' ? undefined : ((t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId })[0] : undefined) ?? searchByNumber(db, t.number, t.date)[0]);
+    // Norway's feed names the exact trip.
+    const tripOf = (t: LiveTrain) => {
+      if (t.date === 'sim') return undefined;
+      const all = t.operatorId ? searchByNumber(db, t.number, t.date, { operatorId: t.operatorId }) : [];
+      if (t.tripKey) {
+        const exact = (all.length ? all : searchByNumber(db, t.number, t.date)).find((r) => r.key === t.tripKey);
+        if (exact) return exact;
+      }
+      return all[0] ?? searchByNumber(db, t.number, t.date)[0];
+    };
 
     // One train, with its timetable trip so the map can draw its route and "Add to my trips" works.
     app.get<{ Params: { id: string } }>('/live/trains/:id', async (req, reply) => {
@@ -125,5 +133,5 @@ export const liveMapRoutes =
       return { following: false };
     });
 
-    app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows }));
+    app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows, norwayAt: ingest.norwayAt }));
   };

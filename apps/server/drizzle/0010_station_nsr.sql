@@ -1,0 +1,1 @@
+ALTER TABLE `stations` ADD `nsr_id` text;

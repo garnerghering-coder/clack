@@ -60,6 +60,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     simulate: Number(process.env.LIVE_MAP_SIMULATE ?? 0) || undefined,
     includeEstimated: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_INCLUDE_ESTIMATED ?? ''),
     graph: railGraph,
+    norway: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_NORWAY ?? ''),
     simulateTracks: () => (railGraph()?.edges ?? []).filter((e) => e.length > 8000).map((e) => Array.from({ length: e.pts.length / 2 }, (_, i) => [e.pts[2 * i]!, e.pts[2 * i + 1]!] as [number, number])),
     ...opts.liveMap,
   });

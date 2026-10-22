@@ -3,6 +3,9 @@
 import type { Db } from '../db/client.js';
 import { eventsFor, fetchAnnouncements, matchAnnouncements, type StopActuals, type StopForMatch } from '../legs/actuals.js';
 import { tripStops } from '../search/timetable.js';
+import { callsToActuals, serviceJourneyCalls, serviceJourneyFor } from '../entur/calls.js';
+import { stations } from '../db/schema.js';
+import { inArray } from 'drizzle-orm';
 
 export interface TrainStopView {
   seq: number;
@@ -22,12 +25,15 @@ export interface TrainStopView {
 
 type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null };
 
-/** Lay actuals over the planned calls. A stop with no report but a later one that has been passed counts as passed. Pure, for tests. */
-export function mergeStops(planned: Planned[], actuals: Map<number, StopActuals>): TrainStopView[] {
+/**
+ * Lay actuals over the planned calls. A stop with no report counts as passed when a later one has been passed, or
+ * (with `now`) when its expected departure is a couple of minutes gone: feeds skip a report now and then. Pure.
+ */
+export function mergeStops(planned: Planned[], actuals: Map<number, StopActuals>, now?: number): TrainStopView[] {
   const out = planned.map((s, i): TrainStopView => {
     const a = actuals.get(s.seq);
     const last = i === planned.length - 1;
-    return {
+    const view: TrainStopView = {
       ...s,
       actualArr: a?.actualArr ?? null,
       actualDep: a?.actualDep ?? null,
@@ -37,6 +43,9 @@ export function mergeStops(planned: Planned[], actuals: Map<number, StopActuals>
       canceled: a?.canceled ?? false,
       passed: Boolean(last ? a?.actualArr : a?.actualDep),
     };
+    const expected = last ? a?.estimatedArr : a?.estimatedDep;
+    if (now !== undefined && !view.passed && expected != null && now - expected > 2 * 60_000) view.passed = true;
+    return view;
   });
   let seen = false;
   for (let i = out.length - 1; i >= 0; i--) {
@@ -65,9 +74,29 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
   } catch {
     // Trafikverket down: the plan alone is still worth showing.
   }
+  // Norwegian stops from Entur, where Trafikverket has nothing.
+  try {
+    const id = serviceJourneyFor(db, trip.key, trainNumber, trip.serviceDate);
+    if (id) {
+      const nsr = new Map(
+        db
+          .select({ id: stations.id, nsr: stations.nsrId })
+          .from(stations)
+          .where(inArray(stations.id, stops.map((s) => s.stationId)))
+          .all()
+          .map((r) => [r.id, r.nsr]),
+      );
+      const own = trip.key.startsWith('no:');
+      const forCalls = stops.map((s) => ({ seq: s.seq, schedArr: s.arr, schedDep: s.dep, nsrId: nsr.get(s.stationId) ?? null })).filter((s) => own || s.nsrId);
+      for (const [seq, a] of callsToActuals(forCalls, await serviceJourneyCalls(id, trip.serviceDate, opts))) if (!actuals.has(seq)) actuals.set(seq, a);
+    }
+  } catch {
+    // Entur down or over quota: as above.
+  }
   const out = mergeStops(
     stops.map((s) => ({ seq: s.seq, stationId: s.stationId, name: s.name, arr: s.arr, dep: s.dep })),
     actuals,
+    now,
   );
   cache.set(k, { at: now, stops: out });
   if (cache.size > 200) cache.delete(cache.keys().next().value!);

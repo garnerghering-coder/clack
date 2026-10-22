@@ -9,10 +9,13 @@ import { parseComposition, typeFromComposition, type Composition } from './train
 import { productOf } from '../search/timetable.js';
 import { onboardFromRow } from './onboard.js';
 import { updateRides } from './recording.js';
+import { callsToActuals, serviceJourneyCalls, serviceJourneyFor } from '../entur/calls.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
 export const TRV_HISTORY_MS = 4 * 86400_000;
+/** Journey Planner keeps a Norwegian train's actual times for its operating day only. */
+const ENTUR_HISTORY_MS = 30 * 3600_000;
 /** Freeze a leg this long after it actually arrived. */
 const SNAPSHOT_AFTER_MS = 30 * 60_000;
 
@@ -143,7 +146,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const leg = db.select().from(legs).where(eq(legs.id, legId)).get();
   if (!leg || leg.status === 'snapshotted') return leg?.dataQuality ?? null;
   const stops = db
-    .select({ seq: legStops.seq, role: legStops.role, sig: stations.trvSignature, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
+    .select({ seq: legStops.seq, role: legStops.role, sig: stations.trvSignature, nsrId: stations.nsrId, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
     .where(eq(legStops.legId, legId))
@@ -155,6 +158,23 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const events = eventsFor(stops);
   let matched = new Map<number, StopActuals>();
   if (!tooOld && events.length) matched = matchAnnouncements(stops, await fetchAnnouncements(events, opts.fetchImpl), leg.trainNumber);
+  // Norwegian stops: Entur's Journey Planner, for the stops Trafikverket doesn't cover.
+  if (arr && now - arr < ENTUR_HISTORY_MS && leg.serviceDate) {
+    try {
+      for (const [seq, a] of await norwayActuals(db, leg, stops, opts)) {
+        const have = matched.get(seq);
+        if (!have) matched.set(seq, a);
+        else {
+          have.actualArr ??= a.actualArr;
+          have.actualDep ??= a.actualDep;
+          have.platform ??= a.platform;
+          have.canceled ||= a.canceled;
+        }
+      }
+    } catch {
+      // Entur down or over quota: Trafikverket's part still stands, and the next refresh tries again.
+    }
+  }
 
   const board = stops.find((s) => s.role === 'board');
   const alight = stops.find((s) => s.role === 'alight');
@@ -209,6 +229,25 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   });
   updateRides(db, { legId, now });
   return dataQuality;
+}
+
+/**
+ * Actual times from Journey Planner for the ridden stops of a Norwegian train (or the Norwegian part of a cross-border
+ * one). A twin found by number only gets to fill Norwegian stops, and only by exact stop place and minute.
+ */
+async function norwayActuals(
+  db: Db,
+  leg: { timetableTripKey: string | null; trainNumber: string | null; serviceDate: string | null },
+  stops: { seq: number; role: string; nsrId: string | null; schedArr: number | null; schedDep: number | null }[],
+  opts: { now?: number; fetchImpl?: typeof fetch },
+): Promise<Map<number, StopActuals>> {
+  const ridden = stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
+  if (!leg.serviceDate || !ridden.some((s) => s.nsrId)) return new Map();
+  const own = leg.timetableTripKey?.startsWith('no:') ?? false;
+  const id = serviceJourneyFor(db, leg.timetableTripKey, leg.trainNumber, leg.serviceDate);
+  if (!id) return new Map();
+  const calls = await serviceJourneyCalls(id, leg.serviceDate, opts);
+  return callsToActuals(own ? ridden : ridden.filter((s) => s.nsrId), calls);
 }
 
 /**

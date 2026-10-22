@@ -108,6 +108,7 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
   let matched = 0;
   const renamed = new Map<string, string>();
   const merged = new Map<string, string>();
+  const nsrOf = new Map<string, string>();
   let excluded = 0;
   let numbersMissing = 0;
   const usedBrands = new Map<string, Brand>();
@@ -153,6 +154,8 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
         // A Norwegian station from Sweden's feed takes Norway's spelling ("Lilleström" → "Lillestrøm"), but only when
         // it's the same name: a neighbouring place matched by distance ("Oslo S Trelastgata") doesn't rename it.
         if (same.country === 'NO' && sameSpelling(same.name, at.name)) renamed.set(id, cleanStopName(at.name));
+        // Its Entur stop place, for boards and live data: the same-named one if several places matched.
+        if (!nsrOf.has(id) || sameSpelling(same.name, at.name)) nsrOf.set(id, place);
       } else {
         // NSR sometimes has two places for one station (Oslo lufthavn's airport-train quay sits in its own place):
         // the same name within a kilometre is one station. Different names are never merged.
@@ -215,11 +218,13 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
     );
     for (const b of usedBrands.values()) upsertOperator.run(b.id, b.name, b.short_name, b.country, b.color);
     const insertStation = sqlite.prepare(
-      `insert into stations (id, name, country, lat, lon, tz, trv_signature, gtfs_stop_ids, coord_source, historical_only, kind, needs_review)
-       values (?, ?, 'NO', ?, ?, ?, null, ?, 'gtfs', 0, 'rail_station', 0)
-       on conflict(id) do update set name = excluded.name, lat = excluded.lat, lon = excluded.lon, gtfs_stop_ids = excluded.gtfs_stop_ids`,
+      `insert into stations (id, name, country, lat, lon, tz, trv_signature, gtfs_stop_ids, coord_source, historical_only, kind, needs_review, nsr_id)
+       values (?, ?, 'NO', ?, ?, ?, null, ?, 'gtfs', 0, 'rail_station', 0, ?)
+       on conflict(id) do update set name = excluded.name, lat = excluded.lat, lon = excluded.lon, gtfs_stop_ids = excluded.gtfs_stop_ids, nsr_id = excluded.nsr_id`,
     );
-    for (const s of newStations.values()) insertStation.run(s.id, s.name, s.lat, s.lon, TZ, JSON.stringify([s.id, ...new Set(s.stopIds)]));
+    for (const s of newStations.values()) insertStation.run(s.id, s.name, s.lat, s.lon, TZ, JSON.stringify([s.id, ...new Set(s.stopIds)]), s.id);
+    const setNsr = sqlite.prepare(`update stations set nsr_id = ? where id = ?`);
+    for (const [id, place] of nsrOf) setNsr.run(place, id);
     const rename = sqlite.prepare(`update stations set name = ?, tz = ? where id = ?`);
     for (const [id, name] of renamed) rename.run(name, TZ, id);
     sqlite.prepare(`delete from timetable_trip_dates where service_date >= ? and trip_key in (select key from timetable_trips where source = ?)`).run(windowStart, SOURCE);

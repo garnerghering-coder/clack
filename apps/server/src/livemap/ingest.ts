@@ -14,7 +14,8 @@ import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js'
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
-import type { Product } from '../search/timetable.js';
+import { productOf, type Product } from '../search/timetable.js';
+import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
 
 export interface LiveTrain {
   id: string;
@@ -38,6 +39,8 @@ export interface LiveTrain {
   delayMin: number | null;
   /** One of the owner's tracked trains. */
   mine: boolean;
+  /** The timetable trip, when the feed names it (Norway's does). */
+  tripKey?: string | null;
 }
 
 export interface LiveDelta {
@@ -90,6 +93,8 @@ export interface IngestOptions {
   includeEstimated?: boolean;
   /** Rail network for estimated positions; straight lines between stations without it. */
   graph?: () => RailGraph | null;
+  /** Norway's trains from Entur (the server turns this on; never while simulating). */
+  norway?: boolean;
 }
 
 type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
@@ -105,6 +110,11 @@ export class LiveMapIngest extends EventEmitter {
   private points: Map<string, StationPoint> | null = null;
   /** Trains currently drawn from an estimate rather than GPS. */
   private estimatedKeys = new Set<string>();
+  private no: NorwayFeed | null;
+  /** Norwegian trains on the map now. */
+  private noIds = new Set<string>();
+  /** Swedish keys of cross-border trains drawn from Norway's GPS instead of a Swedish estimate. */
+  private norwayGps = new Set<string>();
   private users = 0;
   private running = false;
   private abort: AbortController | null = null;
@@ -125,6 +135,12 @@ export class LiveMapIngest extends EventEmitter {
     super();
     this.setMaxListeners(200);
     this.ann = new AnnouncementCache({ fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log });
+    this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
+  }
+
+  /** Last time Entur's feeds answered (0 without Norway). */
+  get norwayAt() {
+    return this.no?.upstreamAt ?? 0;
   }
 
   private now() {
@@ -194,6 +210,24 @@ export class LiveMapIngest extends EventEmitter {
       void refreshAnn();
       this.timers.push(setInterval(refreshAnn, ANNOUNCE_MS));
       if (this.opts.includeEstimated !== false) this.timers.push(setInterval(() => this.estimateAll(), ESTIMATE_MS));
+      if (this.no) {
+        const no = this.no;
+        let polling = false;
+        const pollNorway = () => {
+          if (polling) return;
+          polling = true;
+          no.poll()
+            .then(() => this.applyNorway())
+            .catch((e) => this.opts.log?.(`live map: Norway failed: ${(e as Error).message}`))
+            .finally(() => {
+              polling = false;
+            });
+        };
+        pollNorway();
+        this.timers.push(setInterval(pollNorway, NORWAY_POLL_MS));
+        // Estimated Norwegian trains move between polls too.
+        this.timers.push(setInterval(() => this.applyNorway(), ESTIMATE_MS));
+      }
     }
     this.timers.push(setInterval(() => this.flush(), FLUSH_MS));
     this.timers.push(setInterval(() => this.prune(), PRUNE_MS));
@@ -299,6 +333,7 @@ export class LiveMapIngest extends EventEmitter {
       const k = trainKey(number, date);
       const gps = this.positions.get(k);
       if (gps && now - Date.parse(gps.TimeStamp) <= GPS_FRESH_MS) continue;
+      if (this.norwayGps.has(k)) continue;
       const info = this.ann.info(number, date);
       if (!info || !this.shows(info) || info.lastAt === null || !info.nextSig || info.nextEta === null) continue;
       const a = this.point(info.lastSig);
@@ -325,6 +360,56 @@ export class LiveMapIngest extends EventEmitter {
         this.estimatedKeys.delete(k);
         if (this.trains.get(k)?.estimated && this.trains.delete(k)) this.removed.add(k);
       }
+  }
+
+  /**
+   * Norway's trains onto the map. A cross-border train Trafikverket also reports is drawn once: Trafikverket's GPS
+   * wins, then Norway's GPS, then Trafikverket's estimate (it knows the Swedish stops' real times).
+   */
+  applyNorway() {
+    if (!this.no) return;
+    const seen = new Set<string>();
+    const taken = new Set<string>();
+    for (const n of this.no.trains()) {
+      const id = `no:${n.number}|${n.date}`;
+      if (n.crossBorder) {
+        const sk = trainKey(n.number, n.date);
+        const swe = this.trains.get(sk);
+        if (swe && (!swe.estimated || n.estimated)) continue;
+        if (swe && this.trains.delete(sk)) this.removed.add(sk);
+        if (!n.estimated) taken.add(sk);
+      }
+      seen.add(id);
+      const product = productOf(n.routeType, n.category);
+      const t: LiveTrain = {
+        id,
+        number: n.number,
+        date: n.date,
+        lat: n.lat,
+        lon: n.lon,
+        bearing: n.bearing,
+        speedKmh: n.speedKmh,
+        at: n.at,
+        estimated: n.estimated,
+        operatorId: n.operatorId,
+        productName: null,
+        product,
+        trainType: trainTypeFor(n.operatorId, product, n.number, null),
+        origin: n.origin,
+        destination: n.destination,
+        next: n.next,
+        nextEta: n.nextEta,
+        delayMin: n.delayMin,
+        mine: this.opts.myNumbers?.().has(n.number) ?? false,
+        tripKey: n.tripKey,
+      };
+      this.trains.set(id, t);
+      this.changed.add(id);
+      this.removed.delete(id);
+    }
+    for (const id of this.noIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
+    this.noIds = seen;
+    this.norwayGps = taken;
   }
 
   /** New announcement data: refresh every train's delay/next stop. */

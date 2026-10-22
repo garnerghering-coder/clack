@@ -32,6 +32,8 @@ export const stations = sqliteTable('stations', {
   departuresPerDay: real('departures_per_day').notNull().default(0),
   /** Flagged by the import for a human to check (spec §8.4). */
   needsReview: integer('needs_review', { mode: 'boolean' }).notNull().default(false),
+  /** Entur's stop place (NSR:StopPlace:…) for stations Norway's feeds serve, for boards and live data. */
+  nsrId: text('nsr_id'),
 });
 
 /** One row per brand (Öresundståg, Pågatåg, SJ …); the operating company is secondary. */
