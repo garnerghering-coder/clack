@@ -2,6 +2,8 @@
 // in the operator's livery when it's been drawn, unpainted when it hasn't; otherwise the simple silhouette (TrainArt).
 import type { ComponentType } from 'react';
 import { TrainArt } from '../TrainArt';
+import { NoFlirtSide } from './NoFlirt';
+import { NoType76Side } from './NoType76';
 import { X3Side } from './X3';
 
 type Side = ComponentType<{ livery: string; muted?: boolean; className?: string; label?: string }>;
@@ -15,6 +17,9 @@ interface Detailed {
 /** Keyed by train type id (data/train_types.json), not by art family: Flytoget shares the X3's simple outline. */
 const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
+  no_flirt: { component: NoFlirtSide as Side, liveries: ['vy'] },
+  // SJ Nord's livery isn't drawn yet: its curved edge shows only on photos too oblique to measure.
+  no_type76: { component: NoType76Side as Side, liveries: [] },
 };
 
 export const hasDetailedArt = (typeId: string | null | undefined) => !!typeId && typeId in DETAILED;
