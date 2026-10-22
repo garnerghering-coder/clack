@@ -54,7 +54,7 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
     live.positionSource === 'gps' ? t('live.livePosition') : live.positionSource === 'estimated' ? t('live.estimatedPosition') : t('live.noPosition');
 
   return (
-    <section className={`live-module ${compact ? 'compact' : 'card'}`} style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }} aria-live="polite">
+    <section className={`live-module ${compact ? 'compact' : ''}`} style={{ ['--op' as string]: opColor(leg.operator?.brandColor) }} aria-live="polite">
       <div
         className="live-progress"
         role="progressbar"

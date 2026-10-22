@@ -639,12 +639,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 @media (min-width: 1024px) { .live-sheet { left: auto; right: 16px; bottom: 16px; width: 380px; } }
 .live-sheet-art { display: flex; align-items: center; gap: 10px; }
 /* A train's sheet scrolls through its stops; the buttons stay at the bottom. */
-.live-train-sheet { display: flex; flex-direction: column; max-height: min(72%, 660px); }
-.live-train-sheet > * { flex: none; }
-.live-train-sheet > .live-stops { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-.live-sheet-actions { margin: 0 -16px; padding: 10px 16px 0; border-top: 1px solid var(--hairline); }
 .live-stops { display: grid; gap: 6px; }
-.stop-timeline { list-style: none; padding: 0; margin: 0; flex: 1 1 auto; min-height: 110px; overflow-y: auto; overscroll-behavior: contain; position: relative; }
 .stop-row { display: grid; grid-template-columns: 52px 16px 1fr; gap: 10px; align-items: start; min-height: 40px; position: relative; }
 .stop-time { display: grid; font-size: 14px; line-height: 18px; font-weight: 600; padding-top: 1px; }
 .stop-new.late { color: var(--late); }
@@ -982,3 +977,18 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .welcome-card { display: grid; gap: 10px; border-left: 3px solid var(--accent); }
 .welcome-card h2 { font-size: 24px; line-height: 30px; font-weight: 800; }
 .progress-unlocked .medals { grid-template-columns: repeat(auto-fit, minmax(96px, 120px)); justify-content: center; width: 100%; }
+
+/* Train sheet (live or timetable): fixed header and actions, one scrolling body between them. */
+.stop-timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+.live-train-sheet { display: flex; flex-direction: column; max-height: min(74%, 680px); padding: 0; gap: 0; overflow: hidden; }
+.live-train-sheet::before { margin: 8px auto 0; }
+.train-sheet-head { flex: none; display: flex; align-items: center; gap: 10px; padding: 8px 16px 10px; border-bottom: 1px solid transparent; transition: padding 0.2s ease, border-color 0.2s ease; }
+.train-sheet-head .op-badge { transition: transform 0.2s ease; transform-origin: left center; }
+.train-sheet-head .icon-button { margin-left: auto; }
+.live-train-sheet.scrolled .train-sheet-head { padding-top: 4px; padding-bottom: 6px; border-bottom-color: var(--hairline); }
+.live-train-sheet.scrolled .train-sheet-head .op-badge { transform: scale(0.8); }
+.train-sheet-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: grid; gap: 12px; align-content: start; padding: 0 16px 14px; }
+.train-sheet-body > * { margin: 0; }
+.train-sheet-actions { flex: none; display: flex; gap: 10px; padding: 10px 16px 14px; border-top: 1px solid var(--hairline); }
+.train-sheet-actions .button { flex: 1 1 0; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.live-train-sheet.collapsed .train-sheet-body { overflow: visible; }

@@ -1,12 +1,12 @@
 // Live map of all trains (ADDITIONS_01 A): a calm radar view. Positions come from the server's single Trafikverket
 // stream, filtered to what this map shows; markers glide between updates instead of jumping.
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Check, ChevronDown, ChevronUp, Eye, EyeOff, Info, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { FilterSpecification, GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry, type TrainView } from '../api';
+import { api, type BoardRow, type Operator, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry, type TrainView } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
@@ -888,68 +888,72 @@ function LiveMap() {
       )}
       {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
-        <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'} style={{ ['--op' as string]: opColor(selOp?.brandColor) }}>
-          <header className="board-sheet-head">
-            <OperatorBadge operator={selOp} size={32} />
-            <button className="live-sheet-title" onClick={() => setCollapsed(!collapsed)} aria-expanded={!collapsed}>
-              <span className="strong">{sel.productName || selOp ? [sel.productName ?? selOp?.name, sel.number].join(' ') : t('liveMap.train', { number: sel.number })}</span>
-              {collapsed ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
-            </button>
-            <button className="icon-button small" onClick={deselect} aria-label={t('common.close')}>
-              <X size={18} />
-            </button>
-          </header>
-          {!collapsed && selType && (
-            <div className="live-sheet-art">
-              <TrainArt art={selType.art} color={opColor(selOp?.brandColor)} height={22} />
-              <span className="caption">{selType.name}</span>
-            </div>
-          )}
-          {(sel.origin || sel.destination) && (
-            <p className="strong">
-              {sel.origin ?? '…'} → {sel.destination ?? '…'}
-            </p>
-          )}
-          {!sel.origin && !sel.destination && !sel.next && <p className="caption">{t('liveMap.detailsLoading')}</p>}
-          {sel.next && (
-            <p className="next-stop">
-              {t('live.nextStopName', { name: sel.next })} <FlapTime time={sel.nextEta} tz={TZ} clock={settings.clock} />
-            </p>
-          )}
-          <div className="chip-row">
-            {sel.delayMin !== null && <DelayPill delay={sel.delayMin} />}
-            <span className={sel.estimated || posAge > GPS_FRESH_MS ? 'chip' : 'chip live-pos'}>{posLabel}</span>
-            {!collapsed && sel.speedKmh !== null && !sel.estimated && <span className="chip tabular">{sel.speedKmh} km/h</span>}
-            <span className="caption">{t('live.updated', { ago: agoKey(t, sel.at, now) })}</span>
-          </div>
-          {!collapsed && <Onboard facts={null} operatorId={sel.operatorId} trainType={sel.trainType} compact />}
-          {!collapsed && <StopList stops={stops} />}
-          {!collapsed && Array.isArray(stops) && stops.length > 1 && (() => {
-            // From the next stop on: the part of the train you could still catch.
-            const from = stops.find((s) => !s.passed && !s.canceled && s !== stops.at(-1));
-            return from ? <BuyTicket trip={ticketTrip(sel.operatorId, sel.number, from, stops.at(-1)!, selected?.trip ?? null)} inTrips={Boolean(selected?.legId)} /> : null;
-          })()}
-          {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
-          <div className="sheet-actions row-actions live-sheet-actions">
-            <button className={followKeys.has(followKey(sel)) ? 'button is-following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
-              {followKeys.has(followKey(sel)) ? <Check size={16} /> : <Eye size={16} />} {followKeys.has(followKey(sel)) ? t('liveMap.following') : t('liveMap.follow')}
-            </button>
-            {selected?.legId ? (
-              <button className="button primary" onClick={() => navigate(`/trips/${selected.legId}`)}>
-                {t('liveMap.inYourTrips')}
+        <TrainSheet
+          op={selOp}
+          title={sel.productName || selOp ? [sel.productName ?? selOp?.name, sel.number].join(' ') : t('liveMap.train', { number: sel.number })}
+          collapsed={collapsed}
+          onCollapse={() => setCollapsed(!collapsed)}
+          onClose={deselect}
+          intro={
+            <>
+              {!collapsed && selType && (
+                <div className="live-sheet-art">
+                  <TrainArt art={selType.art} color={opColor(selOp?.brandColor)} height={22} />
+                  <span className="caption">{selType.name}</span>
+                </div>
+              )}
+              {(sel.origin || sel.destination) && (
+                <p className="strong">
+                  {sel.origin ?? '…'} → {sel.destination ?? '…'}
+                </p>
+              )}
+              {!sel.origin && !sel.destination && !sel.next && <p className="caption">{t('liveMap.detailsLoading')}</p>}
+              {sel.next && (
+                <p className="next-stop">
+                  {t('live.nextStopName', { name: sel.next })} <FlapTime time={sel.nextEta} tz={TZ} clock={settings.clock} />
+                </p>
+              )}
+              <div className="chip-row">
+                {sel.delayMin !== null && <DelayPill delay={sel.delayMin} />}
+                <span className={sel.estimated || posAge > GPS_FRESH_MS ? 'chip' : 'chip live-pos'}>{posLabel}</span>
+                {!collapsed && sel.speedKmh !== null && !sel.estimated && <span className="chip tabular">{sel.speedKmh} km/h</span>}
+              </div>
+              <p className="caption">{t('live.updated', { ago: agoKey(t, sel.at, now) })}</p>
+            </>
+          }
+          actions={
+            <>
+              {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
+              <button className={followKeys.has(followKey(sel)) ? 'button is-following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
+                {followKeys.has(followKey(sel)) ? <Check size={16} /> : <Eye size={16} />} {followKeys.has(followKey(sel)) ? t('liveMap.following') : t('liveMap.follow')}
               </button>
-            ) : (
-              <button
-                className="button primary"
-                disabled={!selected?.trip}
-                onClick={() => selected?.trip && navigate(`/add?${new URLSearchParams({ trip: selected.trip.key, date: selected.trip.serviceDate })}`)}
-              >
-                {t('liveMap.plan')}
-              </button>
-            )}
-          </div>
-          {!collapsed && !selected?.trip && <p className="caption">{t('board.notInTimetable')}</p>}
-        </section>
+              {selected?.legId ? (
+                <button className="button primary" onClick={() => navigate(`/trips/${selected.legId}`)}>
+                  {t('liveMap.inYourTrips')}
+                </button>
+              ) : (
+                <button
+                  className="button primary"
+                  disabled={!selected?.trip}
+                  onClick={() => selected?.trip && navigate(`/add?${new URLSearchParams({ trip: selected.trip.key, date: selected.trip.serviceDate })}`)}
+                >
+                  {t('liveMap.plan')}
+                </button>
+              )}
+            </>
+          }
+        >
+          <StopList stops={stops} />
+          <Onboard facts={null} operatorId={sel.operatorId} trainType={sel.trainType} compact />
+          {Array.isArray(stops) &&
+            stops.length > 1 &&
+            (() => {
+              // From the next stop on: the part of the train you could still catch.
+              const from = stops.find((s) => !s.passed && !s.canceled && s !== stops.at(-1));
+              return from ? <BuyTicket trip={ticketTrip(sel.operatorId, sel.number, from, stops.at(-1)!, selected?.trip ?? null)} inTrips={Boolean(selected?.legId)} /> : null;
+            })()}
+          {!selected?.trip && <p className="caption">{t('board.notInTimetable')}</p>}
+        </TrainSheet>
       )}
     </div>
   );
@@ -965,28 +969,46 @@ const ticketTrip = (operatorId: string | null, number: string, from: LiveTrainSt
   serviceDate: trip?.serviceDate ?? null,
 });
 
+/**
+ * A train's sheet, live or from the timetable: a header with just the operator and train (it tightens once you
+ * scroll), one scrolling body (the journey, its stops, what's on board, tickets) and the actions pinned below.
+ */
+function TrainSheet({ op, title, collapsed, onCollapse, onClose, intro, actions, children }: { op: Operator | undefined; title: string; collapsed: boolean; onCollapse: () => void; onClose: () => void; intro: ReactNode; actions: ReactNode; children: ReactNode }) {
+  const { t } = useTranslation();
+  const [scrolled, setScrolled] = useState(false);
+  return (
+    <section className={['live-sheet live-train-sheet card', collapsed ? 'collapsed' : '', scrolled && !collapsed ? 'scrolled' : ''].filter(Boolean).join(' ')} style={{ ['--op' as string]: opColor(op?.brandColor) }} aria-live="polite">
+      <header className="train-sheet-head">
+        <OperatorBadge operator={op} size={32} />
+        <button className="live-sheet-title" onClick={onCollapse} aria-expanded={!collapsed}>
+          <span className="strong">{title}</span>
+          {collapsed ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
+        </button>
+        <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
+          <X size={18} />
+        </button>
+      </header>
+      <div className="train-sheet-body" onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 6)}>
+        {intro}
+        {!collapsed && children}
+      </div>
+      <footer className="train-sheet-actions">{actions}</footer>
+    </section>
+  );
+}
+
 /** The train's whole route: passed stops dimmed with a filled dot, the next one marked, later ones ahead. */
 function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
-  const box = useRef<HTMLOListElement>(null);
-  const next = useRef<HTMLLIElement>(null);
-  const scrolled = useRef(false);
   const list = Array.isArray(stops) ? stops : null;
   const nextIdx = list ? list.findIndex((s) => !s.passed && !s.canceled) : -1;
-  // Open at the next stop once, then leave the scrolling to you.
-  useEffect(() => {
-    if (!list || scrolled.current || !next.current || !box.current) return;
-    scrolled.current = true;
-    // Within the list only, with a stop or two already passed showing above.
-    box.current.scrollTop = Math.max(0, next.current.offsetTop - box.current.offsetTop - 80);
-  }, [list]);
   if (stops === 'none') return <p className="caption">{t('liveMap.stopsNone')}</p>;
   if (!list) return <p className="caption">{t('liveMap.stopsLoading')}</p>;
   return (
     <div className="live-stops">
       <span className="caption upper">{t('liveMap.stops')}</span>
-      <ol className="stop-timeline" ref={box}>
+      <ol className="stop-timeline">
         {list.map((s, i) => {
           const last = i === list.length - 1;
           const planned = last ? s.arr : (s.dep ?? s.arr);
@@ -994,7 +1016,7 @@ function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
           const late = planned !== null && real !== null ? Math.round((real - planned) / 60_000) : 0;
           const cls = ['stop-row', s.passed ? 'passed' : '', i === nextIdx ? 'next' : '', s.canceled ? 'canceled' : ''].filter(Boolean).join(' ');
           return (
-            <li key={s.seq} ref={i === nextIdx ? next : undefined} className={cls}>
+            <li key={s.seq} className={cls}>
               <span className="stop-time">
                 <span className={`flap-colored ${late > 0 && real !== null ? 'stop-new late' : late < 0 && real !== null ? 'stop-new early' : 'stop-new'}`}>
                   <FlapTime time={real ?? planned} tz={TZ} clock={settings.clock} />
@@ -1042,50 +1064,52 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
         ? t('train.statusDeparts', { time: fmtTime(departs, TZ, settings.clock) })
         : t('train.statusNoPosition');
   return (
-    <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'} style={{ ['--op' as string]: opColor(op?.brandColor) }} aria-live="polite">
-      <header className="board-sheet-head">
-        <OperatorBadge operator={op} size={32} />
-        <button className="live-sheet-title" onClick={onCollapse} aria-expanded={!collapsed}>
-          <span className="strong">{[view.productName ?? op?.name, view.number].filter(Boolean).join(' ')}</span>
-          {collapsed ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
-        </button>
-        <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
-          <X size={18} />
-        </button>
-      </header>
-      {!collapsed && type && (
-        <div className="live-sheet-art">
-          <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
-          <span className="caption">{type.name}</span>
-        </div>
-      )}
-      {first && last && (
-        <p className="strong">
-          {first.name} → {last.name}
-        </p>
-      )}
-      <div className="chip-row">
-        <span className={allCanceled ? 'chip cancel-chip' : 'chip'}>{status}</span>
-        <span className="caption">{anyLive ? t('train.liveTimes') : t('train.timetableOnly')}</span>
-      </div>
-      {!collapsed && <Onboard facts={null} operatorId={view.operatorId} trainType={view.trainType} compact />}
-      {!collapsed && <StopList stops={view.stops ?? 'none'} />}
-      {!collapsed && first && last && <BuyTicket trip={ticketTrip(view.operatorId, view.number, first, last, view.trip)} inTrips={Boolean(view.legId)} />}
-      <div className="sheet-actions row-actions live-sheet-actions">
-        <button className={following ? 'button is-following' : 'button'} onClick={onFollow} aria-pressed={following}>
-          {following ? <Check size={16} /> : <Eye size={16} />} {following ? t('liveMap.following') : t('liveMap.follow')}
-        </button>
-        {view.legId ? (
-          <button className="button primary" onClick={() => navigate(`/trips/${view.legId}`)}>
-            {t('liveMap.inYourTrips')}
+    <TrainSheet
+      op={op}
+      title={[view.productName ?? op?.name, view.number].filter(Boolean).join(' ')}
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+      onClose={onClose}
+      intro={
+        <>
+          {!collapsed && type && (
+            <div className="live-sheet-art">
+              <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
+              <span className="caption">{type.name}</span>
+            </div>
+          )}
+          {first && last && (
+            <p className="strong">
+              {first.name} → {last.name}
+            </p>
+          )}
+          <div className="chip-row">
+            <span className={allCanceled ? 'chip cancel-chip' : 'chip'}>{status}</span>
+          </div>
+          <p className="caption">{anyLive ? t('train.liveTimes') : t('train.timetableOnly')}</p>
+        </>
+      }
+      actions={
+        <>
+          <button className={following ? 'button is-following' : 'button'} onClick={onFollow} aria-pressed={following}>
+            {following ? <Check size={16} /> : <Eye size={16} />} {following ? t('liveMap.following') : t('liveMap.follow')}
           </button>
-        ) : (
-          <button className="button primary" disabled={!view.trip} onClick={() => view.trip && navigate(`/add?${new URLSearchParams({ trip: view.trip.key, date: view.trip.serviceDate })}`)}>
-            {t('liveMap.plan')}
-          </button>
-        )}
-      </div>
-    </section>
+          {view.legId ? (
+            <button className="button primary" onClick={() => navigate(`/trips/${view.legId}`)}>
+              {t('liveMap.inYourTrips')}
+            </button>
+          ) : (
+            <button className="button primary" disabled={!view.trip} onClick={() => view.trip && navigate(`/add?${new URLSearchParams({ trip: view.trip.key, date: view.trip.serviceDate })}`)}>
+              {t('liveMap.plan')}
+            </button>
+          )}
+        </>
+      }
+    >
+      <StopList stops={view.stops ?? 'none'} />
+      <Onboard facts={null} operatorId={view.operatorId} trainType={view.trainType} compact />
+      {first && last && <BuyTicket trip={ticketTrip(view.operatorId, view.number, first, last, view.trip)} inTrips={Boolean(view.legId)} />}
+    </TrainSheet>
   );
 }
 
