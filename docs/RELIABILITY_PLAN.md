@@ -55,10 +55,19 @@ Swedish operators' live data in Norway today.
    actual times never go back to "not yet"; a future "actual" is an estimate; an estimate jump of 15+ min waits for
    the next answer. `/api/health` reports each feed (ok / degraded / down) and the last dropped fixes; a trip's
    freshness goes by when the feeds last answered for it.
-3. **Process reliability: built, being tested.** `scripts/supervise.mjs` restarts the server after a crash or five
+3. **Process reliability: built and soak-tested.** `scripts/supervise.mjs` restarts the server after a crash or five
    minutes without a health answer (tested with a crashing and a frozen server), restarts on code changes in
    development, and shuts down cleanly. Catch-up after downtime was already there (actual times for the last 4 days,
-   the live map's full query after reconnecting, imports on start). Soak and replay: see below.
+   the live map's full query after reconnecting, imports on start).
+   - **Soak (2026-10-22, 109 min, a copy of the database on its own port):** no restarts, every health check answered,
+     no stream drops, memory flat (RSS 730–745 MB, heap ~90 MB), both feeds ok throughout.
+   - It found a real bug: 7% of GPS fixes were dropped (176 of 2,556). Two causes:
+     - Trains that change number on the way (SL 2855/2858, Värmlandstrafik 8929/8930). The other number is another
+       train elsewhere at the time. The tracker now uses only the numbers reported at the stops either side.
+     - Fast trains with fixes seconds apart (SJ 582), where each fix's error is a large share of the move. The rule
+       is now 250 km/h times the time between the fixes, plus 600 m for the two fixes' error.
+   - Replay test: an afternoon of feed answers for two real trips is being recorded, to replay through the tracker
+     and check that times never go backwards and positions never jump. Passing on the part recorded so far.
 4. **Offline: built.** Trips, stops, track, operators and station maps are kept on the phone; with no live update
    for a minute the phone moves the train itself (shared position code, same rules as the server), marked as an
    estimate; a "No connection" strip; on https/localhost the app shell is kept too, so it opens offline (tested in
