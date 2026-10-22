@@ -14,6 +14,9 @@ describe('GPS jumps', () => {
     expect(plausibleMove(fix(59, 0), fix(59.01, 30))).toBe(true); // 1.1 km in 30 s: 133 km/h
     expect(plausibleMove(fix(59, 0), fix(59.1, 30))).toBe(false); // 11 km in 30 s: 1,330 km/h
     expect(plausibleMove(fix(59, 0), fix(59.004, 1))).toBe(true); // 450 m of noise between close fixes
+    // A fast train with fixes seconds apart: each fix's error is a big share of the move (SJ 582, 2026-10-22).
+    expect(plausibleMove(fix(59, 0), fix(59.011, 14))).toBe(true); // 1.2 km in 14 s: 315 km/h implied, within the error
+    expect(plausibleMove(fix(59, 0), fix(59.049, 11))).toBe(false); // 5.4 km in 11 s
   });
 
   it('keeps the train where it was when one fix jumps away, then follows it back', () => {

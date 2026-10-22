@@ -176,6 +176,7 @@ function loadLeg(db: Db, legId: string) {
       estimatedDep: legStops.estimatedDep,
       platform: legStops.platform,
       canceled: legStops.canceled,
+      trvTrainNumber: legStops.trvTrainNumber,
     })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
@@ -270,7 +271,7 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
   const updates: LiveUpdate[] = [];
   for (const l of loaded) {
     if (!l.ridden.length) continue;
-    const nums = l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [];
+    const nums = numbersNow(l.ridden, l.line, now, l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : []);
     // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
     const jk = journeyOf.get(l.leg.id);
     const candidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : [])].sort(
@@ -339,6 +340,19 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
   }
   trackerFixes.prune(now - 60 * 60_000);
   return updates;
+}
+
+/**
+ * The train numbers the train carries where it is now. A trip can change number on the way (SL 2855 runs as 2858
+ * for part of it), and the other number can be another train elsewhere the same day, so only the numbers
+ * Trafikverket reported at the stops either side of the train count. Without per-stop numbers yet, all of them.
+ */
+export function numbersNow(ridden: (LiveStop & { trvTrainNumber?: string | null })[], line: LatLon[], now: number, all: string[]): string[] {
+  if (all.length < 2) return all;
+  const v = liveView(ridden, line, null, now);
+  const near = ridden.filter((s) => s.stationId === v.prevStopId || s.stationId === v.nextStopId || (!v.prevStopId && s === ridden[0]));
+  const nums = [...new Set(near.map((s) => s.trvTrainNumber).filter((n): n is string => !!n))];
+  return nums.length ? nums : all;
 }
 
 /** Last value recorded per leg|seq|field, so only changes are written. Loaded from the database on first sight. */

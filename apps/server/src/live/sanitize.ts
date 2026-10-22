@@ -7,7 +7,11 @@ import { SPEED_FRESH_MS, shownSpeed, type GpsFix } from '@clack/shared';
 
 export { SPEED_FRESH_MS, shownSpeed };
 
-/** No passenger train in Sweden or Norway runs faster than ~210 km/h (X2000, SJ 3000, Flytoget); GPS noise needs room. */
+/** No passenger train in Sweden or Norway runs faster than ~210 km/h (X2000, SJ 3000, Flytoget); with margin. */
+export const MAX_TRAIN_KMH = 250;
+/** Two fixes can each be this far off (seen: 0.6–1.2 km "too far" for SJ 582 at speed over 7–14 s). */
+const PAIR_ERROR_M = 600;
+/** For reports and tests: the implied speed above which a move is impossible however the fixes err. */
 export const MAX_IMPLIED_KMH = 300;
 /** A reported speed above this is a broken reading. */
 export const MAX_REPORTED_KMH = 250;
@@ -19,12 +23,12 @@ const AREA = { minLat: 53, maxLat: 72, minLon: 4, maxLon: 32 };
 export const inArea = (f: { lat: number; lon: number }) =>
   Number.isFinite(f.lat) && Number.isFinite(f.lon) && f.lat >= AREA.minLat && f.lat <= AREA.maxLat && f.lon >= AREA.minLon && f.lon <= AREA.maxLon;
 
-/** Could a train have gone from a to b in the time between them? */
+/** Could a train have gone from a to b in the time between them, allowing for both fixes' error? */
 export function plausibleMove(a: GpsFix, b: GpsFix): boolean {
   const m = haversineM(a.lat, a.lon, b.lat, b.lon);
   if (m <= NOISE_M) return true;
   const s = Math.abs(b.at - a.at) / 1000;
-  return s > 0 && (m / s) * 3.6 <= MAX_IMPLIED_KMH;
+  return m <= (MAX_TRAIN_KMH / 3.6) * s + PAIR_ERROR_M;
 }
 
 /** How far a fix can be off (fixes for SJ 441 on 2026-10-22, 8–15 s apart, implied 65–276 km/h at a steady 150). */
