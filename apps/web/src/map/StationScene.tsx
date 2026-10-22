@@ -90,6 +90,7 @@ export function StationScene({
   onPoi,
   onPlatform,
   fitTo,
+  selectedPoi = null,
   insets: insetsIn = { top: 130, bottom: 140 },
 }: {
   map: StationMap;
@@ -103,6 +104,8 @@ export function StationScene({
   onPlatform: (platformId: string) => void;
   /** Change this to re-fit the view (e.g. when a route appears). */
   fitTo: string;
+  /** The place whose sheet is open: its outline (when it has one) is highlighted. */
+  selectedPoi?: string | null;
   /** Screen space taken by overlays at the top and bottom, kept clear when fitting. */
   insets?: { top: number; bottom: number; right?: number };
 }) {
@@ -261,6 +264,12 @@ export function StationScene({
     <svg ref={el} className="station-scene" onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} role="img" aria-label={map.name}>
       <g transform={transform}>
         <Plan map={map} level={level} k={view.k} />
+        {/* The open place's unit, outlined over the plan. */}
+        {map.pois
+          .filter((p) => p.id === selectedPoi && p.level === level && p.outline)
+          .map((p) => (
+            <polygon key={`sel${p.id}`} points={p.outline!.map((q) => q.join(',')).join(' ')} className="station-unit selected" strokeWidth={2 / view.k} />
+          ))}
         {/* The route: dots marching toward the destination (static with reduced motion). */}
         {routeOnLevel.length > 0 && (
           <g className="station-path">
@@ -368,6 +377,12 @@ const Plan = memo(function Plan({ map, level, k }: { map: StationMap; level: str
         .filter((s) => s.kind === 'track')
         .map((s, i) => (
           <polyline key={`t${i}`} points={poly(s.points)} className="station-track" strokeWidth={1.1 / k} />
+        ))}
+      {/* Places mapped as their own unit (a shop's room) are drawn in their real shape, tinted by kind. */}
+      {map.pois
+        .filter((p) => p.level === level && p.outline)
+        .map((p) => (
+          <polygon key={`u${p.id}`} points={poly(p.outline!)} className={`station-unit cat-${p.category}`} strokeWidth={0.6 / k} />
         ))}
       {/* Platform pieces in one fill with no outline, so a platform reads as one shape. */}
       {map.platforms

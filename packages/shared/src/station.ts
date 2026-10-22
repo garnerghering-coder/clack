@@ -72,6 +72,8 @@ export interface StationPoi {
   hours_source: 'osm' | 'manual' | 'website' | null;
   /** When a person last checked the hours; null = taken from OpenStreetMap as is. */
   hours_verified: string | null;
+  /** The place's own outline (a shop's unit), when it is mapped as one; otherwise it's drawn as a pin. */
+  outline?: Pt[];
 }
 export interface StationMap {
   station_id: string;

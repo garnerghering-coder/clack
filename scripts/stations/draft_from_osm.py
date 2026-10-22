@@ -227,6 +227,7 @@ def main():
     # ---- Station buildings: shapes, and the area where untagged in-station paths count as ground level ----
     station_polys = []
     shapes = []
+    indoor_shapes = []
     for wid, w in ways.items():
         t = w["t"]
         if w["nd"][0][0] != w["nd"][-1][0]:
@@ -243,8 +244,12 @@ def main():
             s = dict(level=level_id[lv[0]], kind=kind, points=simplify(p, 0.5))
             if t.get("name"):
                 s["name"] = t["name"]
-            shapes.append(s)
+            indoor_shapes.append(s)
     in_station = lambda p: any(pip(p, poly) for poly in station_polys)
+    # Indoor rooms only inside the station: the radius also sweeps in neighbours (Hötorgshallen's stalls, 600 m from
+    # Stockholm C), which aren't part of it.
+    centre_of = lambda pts: (sum(q[0] for q in pts) / len(pts), sum(q[1] for q in pts) / len(pts))
+    shapes += [s for s in indoor_shapes if in_station(centre_of(s["points"]))]
 
     # ---- Platforms (one per track side; OSM maps island platforms as two halves with local_ref) ----
     platforms = []
@@ -581,11 +586,14 @@ def main():
 
     # ---- Collapse plain pass-through vertices into edge geometry ----
     keep_types = {"platform", "platform_access", "entrance"}
-    deg = Counter()
+    # Distinct neighbours, not edges: the same way drawn twice mustn't make a junction look like a pass-through point
+    # (which lost real paths, differently from run to run).
+    nbrs = defaultdict(set)
     for e in E:
-        if e["a"] in main and e["b"] in main:
-            deg[e["a"]] += 1
-            deg[e["b"]] += 1
+        if e["a"] in main and e["b"] in main and e["a"] != e["b"]:
+            nbrs[e["a"]].add(e["b"])
+            nbrs[e["b"]].add(e["a"])
+    deg = Counter({k: len(v) for k, v in nbrs.items()})
     special = {e["a"] for e in E if e["kind"] != "walk"} | {e["b"] for e in E if e["kind"] != "walk"}
     is_key = lambda k: deg[k] != 2 or V[k].get("type") in keep_types or k in special
     inc = defaultdict(list)
@@ -599,7 +607,8 @@ def main():
         pts = e["pts"] or [(V[e["a"]]["x"], V[e["a"]]["y"]), (V[e["b"]]["x"], V[e["b"]]["y"])]
         return list(pts) if start == e["a"] else list(pts)[::-1]
 
-    for k in [k for k in main if is_key(k)]:
+    # Sorted, so the same OSM data always gives the same map.
+    for k in sorted(k for k in main if is_key(k)):
         for ei in inc[k]:
             if ei in used:
                 continue
@@ -613,7 +622,7 @@ def main():
             pts = edge_pts(e, k)
             cur = e["b"] if e["a"] == k else e["a"]
             while not is_key(cur):
-                nxt = [j for j in inc[cur] if j not in used]
+                nxt = [j for j in inc[cur] if j not in used and (E[j]["b"] if E[j]["a"] == cur else E[j]["a"]) != cur]
                 if not nxt:
                     break
                 used.add(nxt[0])
@@ -638,7 +647,7 @@ def main():
             node["name"] = v["name"]
         out_nodes.append(node)
     vertical_types = {"stairs": "stairs", "escalator": "escalator", "lift": "lift"}
-    out_edges, seen_pairs = [], set()
+    out_edges, seen_pairs = [], {}
     for e in final_edges:
         if e["a"] not in names or e["b"] not in names or e["a"] == e["b"]:
             continue
@@ -658,15 +667,18 @@ def main():
             lv = e.get("levels") or []
             secs = LIFT_SECONDS + max(0, len(lv) - 2) * LIFT_PER_EXTRA_LEVEL
         key = (min(names[e["a"]], names[e["b"]]), max(names[e["a"]], names[e["b"]]), kind)
-        if key in seen_pairs:
+        # Two paths between the same two points (parallel corridors): keep the shorter.
+        if key in seen_pairs and seen_pairs[key]["meters"] <= round(meters, 1):
             continue
-        seen_pairs.add(key)
+        if key in seen_pairs:
+            out_edges.remove(seen_pairs[key])
         edge = dict(**{"from": names[e["a"]], "to": names[e["b"]]}, seconds=max(1, round(secs)), step_free=kind in ("walk", "lift"), kind=kind, meters=round(meters, 1))
         g = simplify([(round(x, 1), round(y, 1)) for x, y in pts], 0.4)
         if len(g) > 2:
             edge["geometry"] = [list(p) for p in g]
         edge["source"] = "manual" if e.get("manual") else "osm"
         out_edges.append(edge)
+        seen_pairs[key] = edge
     # Mark the vertical ends.
     by_name = {n["id"]: n for n in out_nodes}
     for e in out_edges:
@@ -683,11 +695,14 @@ def main():
         cat = category(t)
         if not cat or not t.get("name") and cat not in ("toilet", "atm", "ticket", "locker", "info", "waiting"):
             continue
+        outline = None
         if "lat" in obj:
             p = xy(obj["lat"], obj["lon"])
         else:
             cs = coords(obj)
             p = (sum(q[0] for q in cs) / len(cs), sum(q[1] for q in cs) / len(cs))
+            # A shop mapped as its room: keep the room's outline, so the map can draw the shop's real shape.
+            outline = [list(q) for q in simplify(cs, 0.4)]
         lv = parse_levels(t.get("level"))
         if lv is None:
             if not in_station(p):
@@ -719,7 +734,14 @@ def main():
         elif fee:
             m = re.search(r"(\d+)\s*(kr|SEK)", t.get("charge", "") or "")
             poi["fee"] = dict(amount=int(m.group(1)), currency="SEK") if m else None
+        if outline and len(outline) >= 4:
+            poi["outline"] = outline
         pois.append(poi)
+    # Hand-drawn outlines for places OSM maps only as points (a source's plan the owner cleared, or a survey).
+    for o in edits.get("outlines", []):
+        for q in pois:
+            if q["id"] == o["poi"]:
+                q["outline"] = o["points"]
     for p in edits.get("pois", []):
         p = dict(p)
         p["level"] = level_id[str(p["level"])]

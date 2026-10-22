@@ -7,6 +7,9 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
   dropped objects). Edit the edits file and re-run the draft; don't hand-edit the JSON, or the next draft loses it.
 - **Checked by** `npm run stations:validate` and `npm test`: every platform and amenity must be reachable, and every
   walking edge needs seconds.
+- **Shop outlines:** a place mapped in OSM as its own room (a shop's unit) keeps that outline (`outline` on the POI)
+  and is drawn in its real shape; others are pins. Hand-drawn outlines go in the edits file's `outlines`
+  (`[{ "poi": id, "points": [[x, y], …] }]`), only from a source we may use (a survey, or a plan whose owner agreed).
 - **Walking seconds** are normal pace without luggage: 1.3 m/s on foot, stairs at least 18 s a flight, escalators
   20 s, lifts 45 s. They're worked out from the map, not timed on site.
 

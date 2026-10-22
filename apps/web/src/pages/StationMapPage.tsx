@@ -182,6 +182,7 @@ export function StationMapPage() {
           poiState={poiState}
           dimPoi={dimPoi}
           onPoi={setPoi}
+          selectedPoi={poi?.id ?? null}
           onPlatform={() => undefined}
           fitTo={`${from}|${to}|${level}`}
           insets={{ top: 140, bottom: layover ? 250 : from || to || planning ? 320 : 150 }}
