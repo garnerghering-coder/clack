@@ -35,7 +35,8 @@ const DETAILED: Record<string, Detailed> = {
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
   x61: { component: X61Side as Side, liveries: ['pagatag'], notFor: ['vasttagen'] }, // Västtåg's X61s have 7 door pairs
   x62: { component: X62Side as Side, liveries: ['norrtag'] },
-  x31: { component: X31Side as Side, liveries: ['oresundstag'] },
+  // DSB's ETs ran in Öresundståg paint before going to Skåne (2022–23); its 2000 blue-band livery is gone.
+  x31: { component: X31Side as Side, liveries: ['oresundstag', 'dsb'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
   regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget'] },
