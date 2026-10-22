@@ -15,6 +15,7 @@ import { X31Side } from './X31';
 import { X2000Side } from './X2000';
 import { X3Side } from './X3';
 import { X40Side } from './X40';
+import { X55Side } from './X55';
 import { X60Side } from './X60';
 import { X61Side } from './X61';
 import { X62Side } from './X62';
@@ -35,6 +36,7 @@ const DETAILED: Record<string, Detailed> = {
   // Unpainted: the rebuilt X2C's dark front is seen only at an angle; unrebuilt X2s are bare stainless anyway.
   x2000: { component: X2000Side as Side, liveries: [] },
   x40: { component: X40Side as Side, liveries: ['sj'] },
+  x55: { component: X55Side as Side, liveries: ['sj'] },
   rc6_coaches: { component: Rc6CoachesSide as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
