@@ -21,6 +21,13 @@ const banner = (lines: string[]) => {
 const ready = () => banner(['✓ Clack is ready', 'Open http://localhost:5173 in your browser', 'Stop with Ctrl+C']);
 
 const db = openDb(config.databasePath);
+// A failed promise somewhere (a feed timing out mid-request) is logged and the server carries on; a thrown error
+// nobody caught leaves things in an unknown state, so the server stops and the supervisor starts it again.
+process.on('unhandledRejection', (e) => console.error('unhandled rejection:', e));
+process.on('uncaughtException', (e) => {
+  console.error('uncaught exception, restarting:', e);
+  process.exit(1);
+});
 syncBrands(db);
 let log = (msg: string) => console.log(msg);
 const app = buildApp(db, {
@@ -29,6 +36,17 @@ const app = buildApp(db, {
   afterLegCreated: (id) => void refreshLegActuals(db, id).catch((e) => log(`actuals for new leg failed: ${(e as Error).message}`)),
 });
 await app.listen({ port: config.port, host: config.host });
+// Stopped (Ctrl+C, or the supervisor restarting it): finish what's in flight and close the database cleanly.
+for (const sig of ['SIGINT', 'SIGTERM'] as const)
+  process.once(sig, () => {
+    void app
+      .close()
+      .catch(() => {})
+      .finally(() => {
+        db.$client.close();
+        process.exit(0);
+      });
+  });
 log = (msg: string) => app.log.info(msg);
 // Trips saved before routing existed get their track lines now (fast: cached per station pair).
 backfillLegGeometry(db, log);

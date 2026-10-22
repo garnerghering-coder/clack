@@ -3,11 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --clear-screen=false src/index.ts",
-    "start": "tsx src/index.ts",
+    "dev": "node ../../scripts/supervise.mjs --watch=src --watch=../../packages/shared/src --health=/api/health -- tsx src/index.ts",
+    "start": "node ../../scripts/supervise.mjs --health=/api/health -- tsx src/index.ts",
     "typecheck": "tsc -p .",
     "db:generate": "drizzle-kit generate",
-    "import": "tsx src/cli.ts"
+    "import": "tsx src/cli.ts",
+    "start:once": "tsx src/index.ts"
   },
   "dependencies": {
     "@clack/shared": "*",
