@@ -1,0 +1,250 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Malmö C (scripts/stations/draft_from_osm.py). OSM has no level tags here: the City Tunnel platforms (tracks 1–4) are taken from their layer (-2), and their three exits (Anna Lindhs plats, Posthusplatsen by the main building, and the east end) are joined to street level by hand, at the places Skånetrafiken's terminal map (June 2026) shows stairs and lifts. No in-between floors are modelled.",
+  "radius": 400,
+  "layer_as_level": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street and main hall",
+      "order": 0
+    },
+    {
+      "osm": "-2",
+      "id": "L-2",
+      "name": "City Tunnel (tracks 1–4)",
+      "order": -2
+    }
+  ],
+  "rotation": 0,
+  "connections": [
+    {
+      "from": {
+        "platform": "5",
+        "near": [
+          37,
+          -77
+        ]
+      },
+      "to": {
+        "at": [
+          4,
+          -65
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 5 isn't joined to the hall walkway in front of the tracks."
+    },
+    {
+      "from": {
+        "platform": "6",
+        "near": [
+          41,
+          -61
+        ]
+      },
+      "to": {
+        "at": [
+          9,
+          -47
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 6/7 isn't joined to the hall walkway in front of the tracks."
+    },
+    {
+      "from": {
+        "platform": "8",
+        "near": [
+          47,
+          -44
+        ]
+      },
+      "to": {
+        "at": [
+          13,
+          -31
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 8/9 isn't joined to the hall walkway in front of the tracks."
+    },
+    {
+      "from": {
+        "platform": "10",
+        "near": [
+          51,
+          -27
+        ]
+      },
+      "to": {
+        "at": [
+          18,
+          -14
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 10/11 isn't joined to the hall walkway in front of the tracks."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -160,
+          -57
+        ]
+      },
+      "to": {
+        "at": [
+          -221,
+          -41
+        ],
+        "level": "0"
+      },
+      "kind": "escalator",
+      "seconds": 110,
+      "meters": 75,
+      "note": "West exit to Anna Lindhs plats (escalators up from the platform end; Skånetrafiken terminal map, June 2026). Time estimated for a ~25 m climb."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -160,
+          -57
+        ]
+      },
+      "to": {
+        "at": [
+          -221,
+          -41
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 100,
+      "meters": 75,
+      "note": "West exit lift to Anna Lindhs plats (Skånetrafiken terminal map, June 2026)."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          -155,
+          -40
+        ]
+      },
+      "to": {
+        "at": [
+          -221,
+          -41
+        ],
+        "level": "0"
+      },
+      "kind": "escalator",
+      "seconds": 110,
+      "meters": 75,
+      "note": "West exit to Anna Lindhs plats, from the tracks 3–4 platform."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          -10,
+          -107
+        ]
+      },
+      "to": {
+        "at": [
+          -7,
+          -102
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "meters": 25,
+      "note": "Middle exit (Posthusplatsen), tracks 1–2. Lift shown on Skånetrafiken's terminal map (June 2026) but missing in OSM; time estimated."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          1,
+          -88
+        ]
+      },
+      "to": {
+        "at": [
+          -7,
+          -90
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "meters": 25,
+      "note": "Middle exit (Posthusplatsen), tracks 3–4. Lift shown on Skånetrafiken's terminal map (June 2026) but missing in OSM; time estimated."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          75,
+          -134
+        ]
+      },
+      "to": {
+        "at": [
+          98,
+          -141
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "meters": 25,
+      "note": "East exit, tracks 1–2. Lift shown on Skånetrafiken's terminal map (June 2026) but missing in OSM; time estimated."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          80,
+          -114
+        ]
+      },
+      "to": {
+        "at": [
+          103,
+          -120
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "meters": 25,
+      "note": "East exit, tracks 3–4. Lift shown on Skånetrafiken's terminal map (June 2026) but missing in OSM; time estimated."
+    }
+  ],
+  "drop_platforms": [],
+  "drop_pois": [],
+  "sources": [
+    {
+      "type": "operator_map",
+      "title": "Skånetrafiken, Malmö C terminal map (June 2026)",
+      "note": "Supplied by the owner; used to place exits, stairs and lifts, not copied."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract): City Tunnel platforms from their layer, 4 hand connections for platform heads 3 for the west exit and 4 lifts at the middle and east exits, placed from Skånetrafiken's terminal map (June 2026) supplied by the owner."
+    }
+  ]
+}

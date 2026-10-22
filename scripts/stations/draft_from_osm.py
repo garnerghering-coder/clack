@@ -216,6 +216,14 @@ def main():
     def coords(w):
         return [xy(p[1], p[2]) for p in w["nd"]]
 
+    def platform_levels(t):
+        """A platform's level tag; or, with "layer_as_level" in the edits, its layer (Malmö C's underground platforms
+        carry layer=-2 and no level); otherwise ground level."""
+        lv = parse_levels(t.get("level"))
+        if lv is None and edits.get("layer_as_level"):
+            lv = parse_levels(t.get("layer"))
+        return lv or ["0"]
+
     # ---- Station buildings: shapes, and the area where untagged in-station paths count as ground level ----
     station_polys = []
     shapes = []
@@ -245,7 +253,7 @@ def main():
         t = w["t"]
         if not (t.get("railway") == "platform" or (t.get("public_transport") == "platform" and t.get("train") == "yes")):
             continue
-        lv = parse_levels(t.get("level")) or ["0"]
+        lv = platform_levels(t)
         if lv[0] not in keep_levels or t.get("subway") == "yes":
             continue
         ref = t.get("local_ref") or t.get("ref")
@@ -335,7 +343,7 @@ def main():
     for wid, w in ways.items():
         t = w["t"]
         if t.get("railway") == "platform" or (t.get("public_transport") == "platform" and t.get("train") == "yes"):
-            lv = parse_levels(t.get("level")) or ["0"]
+            lv = platform_levels(t)
             if lv[0] in keep_levels and t.get("subway") != "yes":
                 for p in w["nd"]:
                     platform_node_level[p[0]] = lv[0]
