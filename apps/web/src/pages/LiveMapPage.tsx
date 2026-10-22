@@ -987,13 +987,107 @@ const ticketTrip = (operatorId: string | null, number: string, from: LiveTrainSt
 /**
  * A train's sheet, live or from the timetable: a header with just the operator and train (it tightens once you
  * scroll), one scrolling body (the journey, its stops, what's on board, tickets) and the actions pinned below.
+ * The handle on top drags it between three sizes (just the train, the usual half, nearly the whole screen) and
+ * it settles on the nearest one when let go; a flick goes one size further. A tap folds it like the title does.
  */
+type SheetSize = 'small' | 'mid' | 'full';
+
 function TrainSheet({ op, title, collapsed, onCollapse, onClose, intro, actions, children }: { op: Operator | undefined; title: string; collapsed: boolean; onCollapse: () => void; onClose: () => void; intro: ReactNode; actions: ReactNode; children: ReactNode }) {
   const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
+  const [full, setFull] = useState(false);
+  /** Height in px while dragging or settling; null when the sheet sizes itself. */
+  const [height, setHeight] = useState<number | null>(null);
+  const [settling, setSettling] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const head = useRef<HTMLElement>(null);
+  const body = useRef<HTMLDivElement>(null);
+  const foot = useRef<HTMLElement>(null);
+  const drag = useRef<{ y0: number; h0: number; lastY: number; lastT: number; v: number; moved: boolean; from: SheetSize } | null>(null);
+  const size: SheetSize = collapsed ? 'small' : full ? 'full' : 'mid';
+
+  /** The height each size settles at, from the space there is and what the sheet holds. */
+  const targets = () => {
+    const room = (ref.current?.offsetParent as HTMLElement | null)?.clientHeight ?? window.innerHeight;
+    const content = (head.current?.offsetHeight ?? 0) + (body.current?.scrollHeight ?? 0) + (foot.current?.offsetHeight ?? 0) + 14;
+    const fullH = room - 24;
+    const mid = Math.min(content, Math.min(room * 0.74, 680), fullH);
+    const small = Math.min((head.current?.offsetHeight ?? 60) + (foot.current?.offsetHeight ?? 74) + 120, mid);
+    return { small, mid, full: fullH };
+  };
+  const settle = (to: SheetSize) => {
+    setHeight(targets()[to]);
+    setSettling(true);
+    if ((to === 'small') !== collapsed) onCollapse();
+    setFull(to === 'full');
+    window.setTimeout(() => {
+      setSettling(false);
+      setHeight(null);
+    }, 230);
+  };
+
+  const onDown = (e: React.PointerEvent) => {
+    if (!ref.current) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const h0 = ref.current.getBoundingClientRect().height;
+    drag.current = { y0: e.clientY, h0, lastY: e.clientY, lastT: e.timeStamp, v: 0, moved: false, from: size };
+  };
+  const onMove = (e: React.PointerEvent) => {
+    const d = drag.current;
+    if (!d) return;
+    const dy = e.clientY - d.y0;
+    if (Math.abs(dy) > 4) d.moved = true;
+    if (!d.moved) return;
+    const dt = Math.max(1, e.timeStamp - d.lastT);
+    d.v = 0.7 * d.v + 0.3 * ((e.clientY - d.lastY) / dt);
+    d.lastY = e.clientY;
+    d.lastT = e.timeStamp;
+    const { full: max } = targets();
+    // Dragging up from the small size shows the rest of the sheet straight away.
+    if (collapsed && dy < -24) onCollapse();
+    setHeight(Math.max(96, Math.min(max, d.h0 - dy)));
+  };
+  const onUp = (e: React.PointerEvent) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d) return;
+    if (!d.moved) return onCollapse();
+    const h = Math.max(96, d.h0 - (e.clientY - d.y0));
+    const tg = targets();
+    const order: SheetSize[] = ['small', 'mid', 'full'];
+    const nearest = order.reduce((a, b) => (Math.abs(tg[b] - h) < Math.abs(tg[a] - h) ? b : a));
+    // A flick (faster than about half a pixel a millisecond) goes at least one size on from where the drag began.
+    const from = order.indexOf(d.from);
+    const near = order.indexOf(nearest);
+    const to = d.v < -0.5 ? Math.max(near, Math.min(2, from + 1)) : d.v > 0.5 ? Math.min(near, Math.max(0, from - 1)) : near;
+    settle(order[to]!);
+  };
+
   return (
-    <section className={['live-sheet live-train-sheet card', collapsed ? 'collapsed' : '', scrolled && !collapsed ? 'scrolled' : ''].filter(Boolean).join(' ')} style={{ ['--op' as string]: opColor(op?.brandColor) }} aria-live="polite">
-      <header className="train-sheet-head">
+    <section
+      ref={ref}
+      className={['live-sheet live-train-sheet card', collapsed ? 'collapsed' : '', full && !collapsed ? 'full' : '', scrolled && !collapsed ? 'scrolled' : '', height !== null ? 'sized' : '', settling ? 'settling' : ''].filter(Boolean).join(' ')}
+      style={{ ['--op' as string]: opColor(op?.brandColor), ...(height !== null ? { height, maxHeight: 'none' } : {}) }}
+      aria-live="polite"
+    >
+      <div
+        className="sheet-grabber"
+        role="button"
+        tabIndex={0}
+        aria-label={t(collapsed ? 'liveMap.expandSheet' : 'liveMap.collapseSheet')}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerCancel={() => (drag.current = null)}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowUp') settle(size === 'small' ? 'mid' : 'full');
+          else if (e.key === 'ArrowDown') settle(size === 'full' ? 'mid' : 'small');
+          else if (e.key === 'Enter' || e.key === ' ') onCollapse();
+        }}
+      >
+        <span aria-hidden="true" />
+      </div>
+      <header className="train-sheet-head" ref={head}>
         <OperatorBadge operator={op} size={32} />
         <button className="live-sheet-title" onClick={onCollapse} aria-expanded={!collapsed}>
           <span className="strong">{title}</span>
@@ -1003,11 +1097,13 @@ function TrainSheet({ op, title, collapsed, onCollapse, onClose, intro, actions,
           <X size={18} />
         </button>
       </header>
-      <div className="train-sheet-body" onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 6)}>
+      <div className="train-sheet-body" ref={body} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 6)}>
         {intro}
         {!collapsed && children}
       </div>
-      <footer className="train-sheet-actions">{actions}</footer>
+      <footer className="train-sheet-actions" ref={foot}>
+        {actions}
+      </footer>
     </section>
   );
 }

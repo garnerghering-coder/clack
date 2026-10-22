@@ -1025,3 +1025,15 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 
 /* No connection: a thin strip at the top; the app keeps showing what the phone has kept. */
 .offline-banner { position: fixed; top: env(safe-area-inset-top, 0); left: 50%; transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); color: var(--text-2); font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+
+/* The train sheet's handle: drag it between three sizes (LiveMapPage TrainSheet). A wide, tall touch target. */
+.live-train-sheet::before { display: none; }
+.sheet-grabber { flex: none; display: flex; justify-content: center; align-items: center; height: 22px; margin-bottom: -4px; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
+.sheet-grabber:active { cursor: grabbing; }
+.sheet-grabber span { width: 36px; height: 5px; border-radius: 3px; background: var(--text-3); opacity: 0.6; transition: opacity 0.15s ease, width 0.15s ease; }
+.sheet-grabber:hover span, .sheet-grabber:active span { opacity: 0.9; width: 44px; }
+.sheet-grabber:focus-visible { outline: none; }
+.sheet-grabber:focus-visible span { outline: 2px solid var(--accent); outline-offset: 3px; }
+.live-train-sheet.full { height: calc(100% - 24px); max-height: calc(100% - 24px); }
+.live-train-sheet.sized .train-sheet-body { overflow-y: auto; }
+.live-train-sheet.settling { transition: height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
