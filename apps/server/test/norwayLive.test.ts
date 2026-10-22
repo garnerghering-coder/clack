@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { expectedStops, rtDate } from '../src/livemap/norway.js';
 import { callsToActuals, type NorwayCall } from '../src/entur/calls.js';
 import { resetAt } from '../src/entur/client.js';
+import { normalizeNorwayBoard, type JpBoardCall } from '../src/boards/norway.js';
 
 const T = (hm: string) => Date.parse(`2026-10-22T${hm}:00Z`);
 
@@ -53,5 +54,38 @@ describe('Norway live data', () => {
     expect(resetAt(new Headers({ 'rate-limit-expiry-time': 'Thu Oct 22 2026 01:01:30 GMT-0000 (GMT)' }), now)).toBe(now + 90_000);
     expect(resetAt(new Headers({ 'retry-after': '20' }), now)).toBe(now + 20_000);
     expect(resetAt(new Headers(), now)).toBe(now + 60_000);
+  });
+});
+
+describe('Norwegian boards', () => {
+  const jp = (p: Partial<JpBoardCall>): JpBoardCall => ({
+    aimedArrivalTime: null,
+    aimedDepartureTime: '2026-10-22T08:00:00+02:00',
+    expectedArrivalTime: null,
+    expectedDepartureTime: '2026-10-22T08:04:00+02:00',
+    actualArrivalTime: null,
+    actualDepartureTime: null,
+    cancellation: false,
+    quay: { publicCode: '3' },
+    destinationDisplay: { frontText: 'Bergen', via: ['Voss'] },
+    situations: [{ summary: [{ value: 'Forsinkelse', language: 'no' }, { value: 'Delay', language: 'en' }] }],
+    serviceJourney: { id: 'VYG:ServiceJourney:61-LOD_1-R', privateCode: '61', quays: [{ name: 'Oslo S' }] },
+    date: '2026-10-22',
+    ...p,
+  });
+
+  it('turns Journey Planner calls into board rows linked to the timetable', () => {
+    const memory = new Map();
+    const tripCall = { tripKey: 'no:VYG:ServiceJourney:61-LOD_1-R:abc', serviceDate: '2026-10-22', seq: 1, trainNumber: '61', operatorId: 'vy', product: 'intercity' as const, category: 'intercity', arr: null, dep: Date.parse('2026-10-22T06:00:00Z') };
+    const [row] = normalizeNorwayBoard([jp({})], { type: 'departures', now: 0, calls: [tripCall], memory });
+    expect(row).toMatchObject({ trainNumber: '61', operatorId: 'vy', platform: '3', delayMin: 4, endpoints: ['Bergen'], via: ['Voss'], deviations: ['Delay'], trip: { seq: 1 } });
+    // The track changes between polls.
+    const [moved] = normalizeNorwayBoard([jp({ quay: { publicCode: '5' } })], { type: 'departures', now: 1, calls: [tripCall], memory });
+    expect(moved!.platformChange).toEqual({ from: '3', at: 1 });
+  });
+
+  it('shows where an arriving train came from, and cancellations without a delay', () => {
+    const [row] = normalizeNorwayBoard([jp({ aimedArrivalTime: '2026-10-22T08:00:00+02:00', cancellation: true, serviceJourney: { id: 'GOA:ServiceJourney:705-X', privateCode: '705', quays: [{ name: 'Stavanger stasjon' }] } })], { type: 'arrivals', now: 0, calls: [], memory: new Map() });
+    expect(row).toMatchObject({ operatorId: 'go-ahead-norge', endpoints: ['Stavanger'], canceled: true, delayMin: null, trip: null });
   });
 });

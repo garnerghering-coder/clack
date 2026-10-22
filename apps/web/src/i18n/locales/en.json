@@ -137,11 +137,11 @@
       "manual": "Manual"
     },
     "qualityNote": {
-      "partial": "Some actual times are missing (for example at stations outside Sweden).",
+      "partial": "Some actual times are missing (for example at stations outside Sweden and Norway).",
       "scheduled_only": "Scheduled times only; we couldn't find actual times for this trip.",
       "manual": "Added manually."
     },
-    "source": "Times: Trafikverket · Timetable: Trafiklab (CC0)",
+    "source": "Times: Trafikverket, Entur (NLOD) · Timetable: Trafiklab (CC0), Entur (NLOD)",
     "estimatedDistance": "Part of this route couldn't be matched to the rail network, so it's drawn as straight lines and the distance is approximate.",
     "refresh": "Refresh times",
     "delete": "Delete trip",
@@ -153,7 +153,7 @@
     "canceledBanner": "This train is cancelled. Check the operator for replacement buses or other trains.",
     "timetableOnly": "Timetable only so far: real-time data appears closer to departure.",
     "scheduledArrival": "Due {{time}} (scheduled)",
-    "actualTimes": "Actual times from Trafikverket.",
+    "actualTimes": "Actual times from Trafikverket (Sweden) and Entur (Norway).",
     "scheduledOnlyNote": "No actual times were reported, so these are the scheduled times.",
     "seePassport": "See your Passport"
   },
@@ -205,7 +205,7 @@
     "typesNote": "Typical train types unless you changed them on the trip.",
     "products": "Kinds of train",
     "delays": "Delays",
-    "noDelayData": "Delay stats appear once trains have real arrival times from Trafikverket.",
+    "noDelayData": "Delay stats appear once trains have real arrival times from Trafikverket or Entur.",
     "onTime": "on time (arrived at most 5 min late)",
     "bands": {
       "on_time": "On time or early",
@@ -250,7 +250,7 @@
     "milestonesNote": "Counted from trips recorded as travelled, all time.",
     "reviewBanner_one": "1 trip needs a check before it counts →",
     "reviewBanner_other": "{{count}} trips need a check before they count →",
-    "emptyHow": "Trips land here once they’ve happened: automatically when Trafikverket reports the train at your stops, or when you confirm them. Planned and followed trains don’t count.",
+    "emptyHow": "Trips land here once they’ve happened: automatically when Trafikverket (Sweden) or Entur (Norway) reports the train at your stops, or when you confirm them. Planned and followed trains don’t count.",
     "milestone": {
       "firstJourney": "First journey",
       "journeys_one": "{{count}} journey",
@@ -332,6 +332,7 @@
       "trafikverket": "Trafikverket Open API: actual times, delays, platforms, stations and live positions.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): current timetables.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historical timetables back to 2012.",
+      "entur": "Entur (Norway), under the Norwegian Licence for Open Government Data (NLOD): rail timetables, stations, live positions, delays, actual times and departure boards.",
       "osm": "Rail network and map data © OpenStreetMap contributors (ODbL). Basemap tiles by Protomaps.",
       "stationMaps": "Station maps: drafted from OpenStreetMap (© OpenStreetMap contributors) and edited by hand; the map data is offered under the ODbL like OpenStreetMap itself. Walking times are worked out from the map, not timed on site. Opening hours are as listed and may differ on holidays.",
       "onboard": "On board: catering and same-day notices come from Trafikverket for each departure; everything marked \"Typically\" comes from the operator's own pages, with the date it was checked."
@@ -339,7 +340,7 @@
     "delaysTitle": "Delay colours",
     "delaysBody": "Green: on time or early. Yellow: 1–15 min late. Amber: 16–30 min. Red: more than 30 min. A train counts as on time in your stats when it arrives at most {{max}} minutes late.",
     "co2Title": "How we calculate CO₂",
-    "co2Body": "Distance along the track × (comparison factor − train factor). Factors are well-to-wheel g CO₂e per passenger-km from IVL Swedish Environmental Research Institute, report U11173 (2026)."
+    "co2Body": "Distance along the track × (comparison factor − train factor). Factors are well-to-wheel g CO₂e per passenger-km from IVL Swedish Environmental Research Institute, report U11173 (2026). Norwegian trips use the same factors for now: we haven’t yet checked a Norwegian source."
   },
   "countries": {
     "SE": "Sweden",
@@ -449,9 +450,9 @@
     "showEarlier": "Show earlier",
     "empty": "No trains in this window.",
     "widen": "Show a longer window",
-    "loading": "Fetching the board from Trafikverket…",
+    "loading": "Fetching the board…",
     "error": "Couldn't load the board. Retrying…",
-    "noBoard": "Trafikverket has no departure board for this station.",
+    "noBoard": "There’s no live departure board for this station.",
     "notFound": "Station not found.",
     "addToTrips": "Add to my trips",
     "notInTimetable": "This train isn't in the timetable we have, so it can't be added to your trips.",
@@ -469,7 +470,7 @@
     "openDetail": "Open my trip",
     "showOnMap": "Show on live map",
     "train": "Train {{number}}",
-    "detailsLoading": "Route and delay are still loading from Trafikverket.",
+    "detailsLoading": "Route and delay are still loading.",
     "showAll": "Show all trains",
     "legendTrain": "Dot: a train, in its operator’s colour",
     "legendStation": "Square: a station (tap for departures and its map)",
@@ -485,7 +486,7 @@
     "search": "Search trains and stations",
     "filters": "Filters",
     "station": "Station",
-    "noTrainMatch": "No train {{q}} running in Sweden right now.",
+    "noTrainMatch": "No train {{q}} running in Sweden or Norway right now.",
     "noMatch": "Nothing matches “{{q}}”.",
     "onlyFollowed": "Followed",
     "clearFilters": "Clear filters",
@@ -690,11 +691,11 @@
     "undo": "I did take it after all",
     "why": {
       "cancelled": "It was cancelled where you got on or off: maybe you took a replacement.",
-      "partial_reports": "Trafikverket only reported part of the trip.",
-      "no_reports": "Trafikverket reported no times for this train.",
-      "waiting_reports": "Waiting for Trafikverket’s reports.",
+      "partial_reports": "Only part of the trip was reported.",
+      "no_reports": "No times were reported for this train.",
+      "waiting_reports": "Waiting for the reports.",
       "not_arrived": "Not arrived yet.",
-      "actual_times": "Trafikverket reported it leaving where you got on and arriving where you got off.",
+      "actual_times": "It was reported leaving where you got on and arriving where you got off.",
       "added_after": "You added it after it ran.",
       "you": "Your answer."
     },

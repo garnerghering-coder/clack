@@ -7,6 +7,7 @@ import { callsAtStation } from '../search/timetable.js';
 import { loadBrands } from '../dataFiles.js';
 import { stations, trvLocations } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
+import { fetchNorwayCalls, normalizeNorwayBoard } from './norway.js';
 
 export const BOARD_POLL_MS = Number(process.env.BOARD_POLL_MS ?? 20_000);
 /** Kept warm this long after the last viewer leaves (quick back-and-forth navigation stays cheap). */
@@ -60,31 +61,37 @@ export class BoardHub {
     return this.db.select({ sig: stations.trvSignature }).from(stations).where(eq(stations.id, stationId)).get()?.sig ?? null;
   }
 
+  /**
+   * Where a station's board comes from: Trafikverket for Swedish stations (its codes for foreign ones, "No.osl",
+   * have no announcements), Entur's Journey Planner for stations Norway's feeds serve.
+   */
+  sourceOf(stationId: string): { kind: 'trv'; id: string } | { kind: 'entur'; id: string } | null {
+    const s = this.db.select({ sig: stations.trvSignature, nsr: stations.nsrId }).from(stations).where(eq(stations.id, stationId)).get();
+    if (s?.sig && !s.sig.includes('.')) return { kind: 'trv', id: s.sig };
+    if (s?.nsr) return { kind: 'entur', id: s.nsr };
+    return null;
+  }
+
   /** Fetch and normalise a board for any window (used by the poller and for "Show earlier"). */
   async load(stationId: string, type: BoardType, from: number, to: number, memory: PlatformMemory = new Map()): Promise<Board> {
-    const signature = this.signatureOf(stationId);
-    if (!signature) throw new Error('This station has no Trafikverket departures');
+    const source = this.sourceOf(stationId);
+    if (!source) throw new Error('This station has no live departures');
     this.upstreamCalls++;
-    const rows = await fetchBoardRows(signature, type, from, to, this.opts.fetchImpl);
     const now = this.now();
     const dates = [...new Set([localDate(from), localDate(now), localDate(to)])];
-    const board: Board = {
-      stationId,
-      signature,
-      type,
-      from,
-      to,
-      updatedAt: now,
-      rows: normalizeBoard(rows, {
-        type,
-        now,
-        names: (s) => this.stationName(s),
-        matchBrand: this.matchBrand,
-        calls: callsAtStation(this.db, stationId, dates),
-        memory,
-      }),
-    };
-    return board;
+    const calls = callsAtStation(this.db, stationId, dates);
+    const rows =
+      source.kind === 'trv'
+        ? normalizeBoard(await fetchBoardRows(source.id, type, from, to, this.opts.fetchImpl), {
+            type,
+            now,
+            names: (s) => this.stationName(s),
+            matchBrand: this.matchBrand,
+            calls,
+            memory,
+          })
+        : normalizeNorwayBoard(await fetchNorwayCalls(source.id, type, from, to, this.opts.fetchImpl), { type, now, calls, memory });
+    return { stationId, signature: source.id, type, from, to, updatedAt: now, rows } satisfies Board;
   }
 
   private key(stationId: string, type: BoardType) {

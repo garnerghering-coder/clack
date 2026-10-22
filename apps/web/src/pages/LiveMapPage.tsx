@@ -789,7 +789,7 @@ function LiveMap() {
           <p>{t('liveMap.legendNote')}</p>
         </div>
       )}
-      <span className="map-attrib live-attrib">© OpenStreetMap contributors · Protomaps · Trafikverket</span>
+      <span className="map-attrib live-attrib">© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD)</span>
 
       {notRunning && !sel && (
         <NotRunningSheet

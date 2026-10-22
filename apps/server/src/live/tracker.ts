@@ -12,6 +12,9 @@ import type { Db } from '../db/client.js';
 import { legEvents, legStops, legs, liveState, stations } from '../db/schema.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { parseWgs84, trvQuery } from '../trafikverket/client.js';
+import { gtfsRt, RT_DATASOURCES, type RtDatasource } from '../entur/client.js';
+import { serviceJourneyFor } from '../entur/calls.js';
+import { rtDate } from '../livemap/norway.js';
 import { diffEvents, liveView, type GpsFix, type LegSummary, type LiveStop, type LiveView } from './progress.js';
 
 export const POLL_MS = 20_000;
@@ -55,6 +58,27 @@ export async function fetchPositions(numbers: string[], now: number, fetchImpl?:
     const at = Date.parse(p.TimeStamp);
     if ((out.get(n)?.at ?? 0) >= at) continue;
     out.set(n, { lat: ll[0], lon: ll[1], at, bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null });
+  }
+  return out;
+}
+
+/**
+ * Newest fix per Entur service journey ("<trip id>|<date>"), for Norwegian trains. One vehicle-positions request
+ * per operator involved; protobuf's 0 for a missing bearing is treated as none.
+ */
+export async function fetchNorwayPositions(tripIds: string[], now: number, fetchImpl?: typeof fetch): Promise<Map<string, GpsFix>> {
+  const out = new Map<string, GpsFix>();
+  const sources = [...new Set(tripIds.map((id) => id.split(':')[0]))].filter((c): c is RtDatasource => (RT_DATASOURCES as readonly string[]).includes(c!));
+  for (const ds of sources) {
+    const feed = await gtfsRt('vehicle-positions', ds, fetchImpl);
+    for (const e of feed.entity) {
+      const v = e.vehicle;
+      const date = rtDate(v?.trip?.startDate);
+      if (!v?.position || !v.trip?.tripId || !date) continue;
+      const at = Number(v.timestamp ?? 0) * 1000;
+      if (now - at > 10 * 60_000) continue;
+      out.set(`${v.trip.tripId}|${date}`, { lat: v.position.latitude, lon: v.position.longitude, at, bearing: v.position.bearing || null, speedKmh: v.position.speed ? Math.round(v.position.speed * 3.6) : null });
+    }
   }
   return out;
 }
@@ -161,14 +185,28 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     opts.log?.(`live: positions failed: ${(e as Error).message}`);
   }
 
+  // Norwegian trains (and the Norwegian part of cross-border ones): Entur's GPS, by service journey.
+  const journeyOf = new Map<string, string>();
+  for (const l of loaded) {
+    const id = l.leg.serviceDate ? serviceJourneyFor(db, l.leg.timetableTripKey, l.leg.trainNumber, l.leg.serviceDate) : null;
+    if (id) journeyOf.set(l.leg.id, `${id}|${l.leg.serviceDate}`);
+  }
+  let noFixes = new Map<string, GpsFix>();
+  if (journeyOf.size)
+    try {
+      noFixes = await fetchNorwayPositions([...journeyOf.values()].map((k) => k.split('|')[0]!), now, opts.fetchImpl);
+    } catch (e) {
+      opts.log?.(`live: Norway positions failed: ${(e as Error).message}`);
+    }
+
   const updates: LiveUpdate[] = [];
   for (const l of loaded) {
     if (!l.ridden.length) continue;
     const nums = l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [];
-    // With a number change mid-journey, use whichever matched number has the newest fix.
+    // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
+    const jk = journeyOf.get(l.leg.id);
     const gps =
-      nums
-        .map((n) => fixes.get(n))
+      [...nums.map((n) => fixes.get(n)), jk ? noFixes.get(jk) : undefined]
         .filter((f): f is GpsFix => !!f)
         .sort((a, b) => b.at - a.at)[0] ?? null;
     const view = liveView(l.ridden, l.line, gps, now);

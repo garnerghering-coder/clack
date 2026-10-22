@@ -112,16 +112,20 @@ export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[]): Map<
 
 /**
  * The Entur service journey for a timetable trip: its own id for Norway's feed, or the Norwegian twin of a
- * cross-border train in Sweden's feed (same number, same day, through a Norwegian station).
+ * cross-border train in Sweden's feed: same number, same day, and a stop at the same station and minute (so SJ 103
+ * is never taken for Vy 103).
  */
 export function serviceJourneyFor(db: Db, tripKey: string | null, trainNumber: string | null, serviceDate: string): string | null {
-  if (tripKey) {
-    const own = db.all<{ source: string; trip_id: string }>(sql`select source, trip_id from timetable_trips where key = ${tripKey}`)[0];
-    if (own?.source === 'gtfs_no') return own.trip_id;
-  }
-  if (!trainNumber) return null;
+  if (!tripKey) return null;
+  const own = db.all<{ source: string; trip_id: string }>(sql`select source, trip_id from timetable_trips where key = ${tripKey}`)[0];
+  if (own?.source === 'gtfs_no') return own.trip_id;
+  if (!own || !trainNumber) return null;
   const twin = db.all<{ trip_id: string }>(sql`
-    select t.trip_id from timetable_trips t join timetable_trip_dates d on d.trip_key = t.key
-    where t.source = 'gtfs_no' and t.train_number = ${trainNumber} and d.service_date = ${serviceDate} limit 1`)[0];
+    select t.trip_id from timetable_trips t
+    join timetable_trip_dates d on d.trip_key = t.key and d.service_date = ${serviceDate}
+    join timetable_stop_times a on a.trip_key = t.key
+    join timetable_stop_times b on b.trip_key = ${tripKey} and b.station_id = a.station_id
+      and coalesce(b.dep_sec, b.arr_sec) = coalesce(a.dep_sec, a.arr_sec)
+    where t.source = 'gtfs_no' and t.train_number = ${trainNumber} limit 1`)[0];
   return twin?.trip_id ?? null;
 }

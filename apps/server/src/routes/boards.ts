@@ -26,6 +26,7 @@ export const boardRoutes =
           lon: stations.lon,
           countyNo: trvLocations.countyNo,
           baseTracks: trvLocations.baseTracks,
+          nsrId: stations.nsrId,
         })
         .from(stations)
         .leftJoin(trvLocations, sql`lower(${trvLocations.signature}) = lower(${stations.trvSignature})`)
@@ -39,10 +40,12 @@ export const boardRoutes =
           .where(and(eq(stationFavorites.userId, userId), eq(stationFavorites.stationId, id)))
           .get(),
       );
+      const { nsrId, ...rest } = s;
       return {
-        ...s,
+        ...rest,
         county: s.countyNo ? (SE_COUNTIES[s.countyNo] ?? null) : null,
-        hasBoard: Boolean(s.code && !s.code.includes('.')),
+        // Trafikverket's own stations, or Norway's through Entur.
+        hasBoard: Boolean((s.code && !s.code.includes('.')) || nsrId),
         hasMap: hasStationMap(id),
         sizeClass: stationSize(s.baseTracks),
         favorite,
@@ -75,7 +78,7 @@ export const boardRoutes =
     // Live updates while a board is open: the full board after every shared poll.
     app.get<{ Params: { id: string }; Querystring: { type?: string } }>('/stations/:id/board/stream', (req, reply) => {
       const type = (req.query.type ?? 'departures') as BoardType;
-      if (!TYPES.has(type) || !hub.signatureOf(req.params.id)) return reply.code(404).send({ error: 'no board' });
+      if (!TYPES.has(type) || !hub.sourceOf(req.params.id)) return reply.code(404).send({ error: 'no board' });
       reply.hijack();
       const res = reply.raw;
       res.writeHead(200, {

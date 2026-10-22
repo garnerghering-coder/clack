@@ -137,11 +137,11 @@
       "manual": "Manuell"
     },
     "qualityNote": {
-      "partial": "Vissa faktiska tider saknas (till exempel på stationer utanför Sverige).",
+      "partial": "Vissa faktiska tider saknas (till exempel på stationer utanför Sverige och Norge).",
       "scheduled_only": "Bara tidtabellstider; vi hittade inga faktiska tider för den här resan.",
       "manual": "Tillagd manuellt."
     },
-    "source": "Tider: Trafikverket · Tidtabell: Trafiklab (CC0)",
+    "source": "Tider: Trafikverket, Entur (NLOD) · Tidtabell: Trafiklab (CC0), Entur (NLOD)",
     "estimatedDistance": "En del av sträckan kunde inte matchas mot järnvägsnätet, så den ritas som raka linjer och avståndet är ungefärligt.",
     "refresh": "Uppdatera tider",
     "delete": "Ta bort resan",
@@ -153,7 +153,7 @@
     "canceledBanner": "Tåget är inställt. Kolla med operatören om ersättningsbussar eller andra tåg.",
     "timetableOnly": "Bara tidtabellen hittills: realtid kommer närmare avgång.",
     "scheduledArrival": "Ankomst {{time}} (enligt tidtabell)",
-    "actualTimes": "Faktiska tider från Trafikverket.",
+    "actualTimes": "Faktiska tider från Trafikverket (Sverige) och Entur (Norge).",
     "scheduledOnlyNote": "Inga faktiska tider rapporterades, så det här är tidtabellens tider.",
     "seePassport": "Se ditt pass"
   },
@@ -205,7 +205,7 @@
     "typesNote": "Typiska tågtyper, om du inte har ändrat dem på resan.",
     "products": "Tågkategorier",
     "delays": "Förseningar",
-    "noDelayData": "Förseningsstatistik visas när tågen har faktiska ankomsttider från Trafikverket.",
+    "noDelayData": "Förseningsstatistik visas när tågen har faktiska ankomsttider från Trafikverket eller Entur.",
     "onTime": "i tid (kom fram högst 5 min sent)",
     "bands": {
       "on_time": "I tid eller tidigt",
@@ -250,7 +250,7 @@
     "milestonesNote": "Räknat från resor registrerade som åkta, totalt.",
     "reviewBanner_one": "1 resa behöver kollas innan den räknas →",
     "reviewBanner_other": "{{count}} resor behöver kollas innan de räknas →",
-    "emptyHow": "Resor hamnar här när de har hänt: automatiskt när Trafikverket rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte.",
+    "emptyHow": "Resor hamnar här när de har hänt: automatiskt när Trafikverket (Sverige) eller Entur (Norge) rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte.",
     "milestone": {
       "firstJourney": "Första resan",
       "journeys_one": "{{count}} resa",
@@ -332,6 +332,7 @@
       "trafikverket": "Trafikverket Open API: faktiska tider, förseningar, spår, stationer och livepositioner.",
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): aktuella tidtabeller.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historiska tidtabeller tillbaka till 2012.",
+      "entur": "Entur (Norge), under Norsk lisens for offentlige data (NLOD): tidtabeller, stationer, livepositioner, förseningar, faktiska tider och avgångstavlor för tåg.",
       "osm": "Järnvägsnät och kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta från Protomaps.",
       "stationMaps": "Stationskartor: utkast från OpenStreetMap (© OpenStreetMaps bidragsgivare), handredigerade; kartdatan erbjuds under ODbL precis som OpenStreetMap. Gångtiderna räknas fram ur kartan, de är inte uppmätta på plats. Öppettider enligt uppgift; kan avvika på helgdagar.",
       "onboard": "Ombord: servering och dagens avvikelser kommer från Trafikverket för varje avgång; allt som står under \"Brukar finnas\" kommer från operatörens egna sidor, med datum då det kontrollerades."
@@ -339,7 +340,7 @@
     "delaysTitle": "Förseningsfärger",
     "delaysBody": "Grönt: i tid eller tidigt. Gult: 1–15 min sent. Orange: 16–30 min. Rött: mer än 30 min. I din statistik räknas ett tåg som i tid om det kommer fram högst {{max}} minuter sent.",
     "co2Title": "Så räknar vi CO₂",
-    "co2Body": "Sträcka längs spåret × (jämförelsefaktor − tågfaktor). Faktorerna är well-to-wheel g CO₂e per personkilometer från IVL Svenska Miljöinstitutet, rapport U11173 (2026)."
+    "co2Body": "Sträcka längs spåret × (jämförelsefaktor − tågfaktor). Faktorerna är well-to-wheel g CO₂e per personkilometer från IVL Svenska Miljöinstitutet, rapport U11173 (2026). Norska resor räknas tills vidare med samma faktorer: vi har inte kontrollerat någon norsk källa än."
   },
   "countries": {
     "SE": "Sverige",
@@ -449,9 +450,9 @@
     "showEarlier": "Visa tidigare",
     "empty": "Inga tåg i det här tidsfönstret.",
     "widen": "Visa ett längre tidsfönster",
-    "loading": "Hämtar tavlan från Trafikverket…",
+    "loading": "Hämtar tavlan…",
     "error": "Kunde inte läsa in tavlan. Försöker igen…",
-    "noBoard": "Trafikverket har ingen avgångstavla för den här stationen.",
+    "noBoard": "Det finns ingen live-tavla för den här stationen.",
     "notFound": "Stationen hittades inte.",
     "addToTrips": "Lägg till i mina resor",
     "notInTimetable": "Tåget finns inte i vår tidtabell, så det går inte att lägga till i dina resor.",
@@ -469,7 +470,7 @@
     "openDetail": "Öppna min resa",
     "showOnMap": "Visa på livekartan",
     "train": "Tåg {{number}}",
-    "detailsLoading": "Sträcka och försening hämtas fortfarande från Trafikverket.",
+    "detailsLoading": "Sträcka och försening hämtas fortfarande.",
     "showAll": "Visa alla tåg",
     "legendTrain": "Punkt: ett tåg, i operatörens färg",
     "legendStation": "Fyrkant: en station (tryck för avgångar och karta)",
@@ -485,7 +486,7 @@
     "search": "Sök tåg och stationer",
     "filters": "Filter",
     "station": "Station",
-    "noTrainMatch": "Inget tåg {{q}} går i Sverige just nu.",
+    "noTrainMatch": "Inget tåg {{q}} går i Sverige eller Norge just nu.",
     "noMatch": "Inget matchar ”{{q}}”.",
     "onlyFollowed": "Följda",
     "clearFilters": "Rensa filter",
@@ -690,11 +691,11 @@
     "undo": "Jag åkte ändå",
     "why": {
       "cancelled": "Det var inställt där du skulle på eller av: du kanske tog en ersättning.",
-      "partial_reports": "Trafikverket rapporterade bara en del av resan.",
-      "no_reports": "Trafikverket rapporterade inga tider för tåget.",
-      "waiting_reports": "Väntar på Trafikverkets rapporter.",
+      "partial_reports": "Bara en del av resan rapporterades.",
+      "no_reports": "Inga tider rapporterades för tåget.",
+      "waiting_reports": "Väntar på rapporterna.",
       "not_arrived": "Inte framme än.",
-      "actual_times": "Trafikverket rapporterade avgång där du klev på och ankomst där du klev av.",
+      "actual_times": "Tåget rapporterades avgå där du klev på och ankomma där du klev av.",
       "added_after": "Du lade till den efter resan.",
       "you": "Ditt svar."
     },
