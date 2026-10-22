@@ -841,13 +841,15 @@
     "kind": {
       "route_now": "Now",
       "station_now": "Now",
-      "train_pattern": "Past days"
+      "train_pattern": "Past days",
+      "ahead": "Ahead of you"
     },
     "routeNow": "In the last {{window}} min, {{late}} of {{trains}} trains along your route left 10+ min late ({{canceled}} cancelled; median {{median}} min). Your train may be affected.",
     "stationNow": "In the last {{window}} min, {{late}} of {{trains}} departures from {{station}} left 10+ min late (median {{median}} min).",
     "pattern": "It left {{station}} 5+ min late on {{late}} of the {{days}} days Clack has seen it (median {{median}} min). A past pattern, not a forecast for today.",
     "change": "Your {{min}}-minute change at {{station}} leaves little room if this continues.",
-    "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports."
+    "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports.",
+    "ahead": "Of the {{trains}} trains that left {{station}} towards {{toward}} in the last {{window}} min, {{late}} are running 10+ min late now ({{delays}} min). Trains queue on the line, so yours may be held too."
   },
   "progress": {
     "notCounted": "It goes into your Passport once it’s recorded as travelled.",

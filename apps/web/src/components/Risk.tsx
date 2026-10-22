@@ -40,6 +40,7 @@ export function RiskCard({ leg }: { leg: LegDetail }) {
   if (!risk.warnings.length) return null;
   const line = (w: RiskWarning) => {
     if (w.kind === 'route_now') return t('risk.routeNow', { late: w.late, trains: w.trains, canceled: w.canceled, median: w.medianMin, window: w.windowMin });
+    if (w.kind === 'ahead') return t('risk.ahead', { trains: w.trains, station: w.station, toward: w.toward, window: w.windowMin, late: w.late, delays: w.delays.join(', ') });
     if (w.kind === 'station_now') return t('risk.stationNow', { station: w.station, late: w.late, trains: w.trains, median: w.medianMin, window: w.windowMin });
     return t('risk.pattern', { station: w.station, late: w.lateDays, days: w.days, median: w.medianMin });
   };

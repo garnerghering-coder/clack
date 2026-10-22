@@ -2,6 +2,8 @@
 // never a prediction dressed up: three kinds of evidence, each said for what it is.
 // - Now, along your route: how trains have left the stations you'll pass in the last hour (Trafikverket's actual times).
 // - Now, at your station: the same for departures from where you get on.
+// - Ahead of you: the trains that left your station the same way in the last hour, and how late they are now (a
+//   queue on the line reaches yours too). The count of trains and their delays, nothing guessed about yours.
 // - Past pattern for your train: how it left your station on earlier days, from what this computer has seen (boards
 //   and these checks record it; Trafikverket keeps only about a day back). Silent until there's enough of it.
 // Weak, stale or irrelevant evidence gives no warning (a trip more than 6 hours off gets no "right now" warning).
@@ -22,6 +24,7 @@ export interface Departure {
 export type RiskWarning =
   | { kind: 'route_now'; trains: number; late: number; canceled: number; medianMin: number; windowMin: number }
   | { kind: 'station_now'; station: string; trains: number; late: number; medianMin: number; windowMin: number }
+  | { kind: 'ahead'; station: string; toward: string; trains: number; late: number; delays: number[]; windowMin: number }
   | { kind: 'train_pattern'; station: string; days: number; lateDays: number; medianMin: number };
 
 export const LATE_MIN = 10;
@@ -52,6 +55,48 @@ export function nowWarnings(deps: Departure[], boardSig: string | null, boardNam
     const hereLate = here.filter((x) => x >= LATE_MIN).length;
     if (here.length >= 4 && hereLate / here.length >= 0.5 && !out.length)
       out.push({ kind: 'station_now', station: boardName, trains: here.length, late: hereLate, medianMin: median(here), windowMin: WINDOW_MIN });
+  }
+  return out;
+}
+
+/**
+ * The trains that left your station before yours, the same way, with their latest delay: a warning when at least two
+ * of them, and at least half, are running 10+ min late. Pure.
+ */
+export function aheadWarning(ahead: { delayMin: number }[], station: string, toward: string): RiskWarning | null {
+  const late = ahead.filter((a) => a.delayMin >= LATE_MIN);
+  if (late.length < 2 || late.length / ahead.length < 0.5) return null;
+  return { kind: 'ahead', station, toward, trains: ahead.length, late: late.length, delays: late.map((a) => a.delayMin).sort((a, b) => a - b), windowMin: WINDOW_MIN };
+}
+
+interface TrvCall extends TrvDep {
+  EstimatedTimeAtLocation?: string;
+  ActivityType?: string;
+}
+
+/**
+ * Of the trains that left `boardSig` in the last hour, the ones that also call at `nextSig` afterwards (so: your way),
+ * each with its latest delay: at `nextSig` if reported or expected there, else as it left your station.
+ */
+export async function trainsAhead(deps: Departure[], boardSig: string, nextSig: string, now: number, fetchImpl?: typeof fetch): Promise<{ trainNumber: string; delayMin: number }[]> {
+  const left = deps.filter((d) => d.signature.toLowerCase() === boardSig.toLowerCase() && d.actual !== null);
+  if (!left.length) return [];
+  const r = await trvQuery<{ TrainAnnouncement?: TrvCall[] }>(
+    `<QUERY objecttype="TrainAnnouncement" schemaversion="1.9"><FILTER><EQ name="Advertised" value="true"/><EQ name="LocationSignature" value="${nextSig}"/>` +
+      `<IN name="AdvertisedTrainIdent" value="${[...new Set(left.map((d) => d.trainNumber))].join(',')}"/>` +
+      `<GTE name="AdvertisedTimeAtLocation" value="${new Date(now - WINDOW_MIN * 60_000).toISOString()}"/><LTE name="AdvertisedTimeAtLocation" value="${new Date(now + 3 * 3600_000).toISOString()}"/></FILTER>` +
+      ['AdvertisedTrainIdent', 'ActivityType', 'AdvertisedTimeAtLocation', 'TimeAtLocation', 'EstimatedTimeAtLocation'].map((f) => `<INCLUDE>${f}</INCLUDE>`).join('') +
+      `</QUERY>`,
+    fetchImpl,
+  );
+  const out: { trainNumber: string; delayMin: number }[] = [];
+  for (const d of left) {
+    const there = (r.TrainAnnouncement ?? []).filter((a) => a.AdvertisedTrainIdent === d.trainNumber && Date.parse(a.AdvertisedTimeAtLocation) > d.advertised);
+    if (!there.length) continue;
+    const arr = there.find((a) => a.ActivityType === 'Ankomst') ?? there[0]!;
+    const latest = arr.TimeAtLocation ?? arr.EstimatedTimeAtLocation;
+    const delay = latest ? Math.round((Date.parse(latest) - Date.parse(arr.AdvertisedTimeAtLocation)) / 60_000) : delayOf(d)!;
+    out.push({ trainNumber: d.trainNumber, delayMin: Math.max(0, delay) });
   }
   return out;
 }
@@ -147,7 +192,19 @@ export async function legRisk(db: Db, userId: string, legId: string, opts: { now
       const deps = await recentDepartures(sigs, now, opts.fetchImpl);
       recordObservations(db, deps.map((d) => ({ ...d, serviceDate: todayIn('Europe/Stockholm', d.advertised) })));
       // Your own train's earlier stops aren't "other trains": its own delay is shown on the trip already.
-      risk.warnings.push(...nowWarnings(deps.filter((d) => d.trainNumber !== leg.trainNumber), boardSig, board?.name ?? ''));
+      const others = deps.filter((d) => d.trainNumber !== leg.trainNumber);
+      const now_ = nowWarnings(others, boardSig, board?.name ?? '');
+      // The trains ahead of yours, the same way: only shortly before you leave, when it can still matter.
+      const next = stops.find((s) => s.seq > (board?.seq ?? Infinity) && s.sig && !s.sig.includes('.'));
+      let ahead: RiskWarning | null = null;
+      if (boardSig && next && dep - now <= 2 * 3600_000 && dep > now)
+        try {
+          ahead = aheadWarning(await trainsAhead(others, boardSig, next.sig!, now, opts.fetchImpl), board?.name ?? '', next.name);
+        } catch {
+          // The rest of the check stands.
+        }
+      // Said once: the trains your way say more than all of your station's departures.
+      risk.warnings.push(...(ahead ? [...now_.filter((w) => w.kind !== 'station_now'), ahead] : now_));
     } catch {
       risk.limits.push('no_live_data');
     }

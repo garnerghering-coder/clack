@@ -43,3 +43,42 @@ describe("a train's past pattern", () => {
     expect(patternWarning([0, 1, 6, 2].map((d) => ({ delayMin: d, canceled: false })), 'Nässjö C')).toBeNull();
   });
 });
+
+describe('trains ahead of yours', () => {
+  it('warns when at least two, and at least half, of the trains your way are running 10+ min late', async () => {
+    const { aheadWarning } = await import('../src/legs/risk.js');
+    expect(aheadWarning([{ delayMin: 12 }, { delayMin: 18 }, { delayMin: 2 }], 'Stockholm C', 'Södertälje Syd')).toEqual({
+      kind: 'ahead',
+      station: 'Stockholm C',
+      toward: 'Södertälje Syd',
+      trains: 3,
+      late: 2,
+      delays: [12, 18],
+      windowMin: 60,
+    });
+    expect(aheadWarning([{ delayMin: 25 }, { delayMin: 1 }, { delayMin: 0 }], 'Stockholm C', 'Södertälje Syd')).toBeNull();
+    expect(aheadWarning([{ delayMin: 12 }, { delayMin: 14 }, { delayMin: 0 }, { delayMin: 1 }, { delayMin: 3 }], 'Stockholm C', 'Södertälje Syd')).toBeNull();
+  });
+
+  it('keeps only trains that call at your next stop after leaving yours, with their delay there', async () => {
+    process.env.TRAFIKVERKET_API_KEY ||= 'test';
+    const { trainsAhead } = await import('../src/legs/risk.js');
+    const fetchImpl = (async () =>
+      new Response(
+        JSON.stringify({
+          RESPONSE: {
+            RESULT: [
+              {
+                TrainAnnouncement: [
+                  // 10: your way, now 14 min late at Södertälje Syd. 20 went another way (no call there).
+                  { AdvertisedTrainIdent: '10', ActivityType: 'Ankomst', AdvertisedTimeAtLocation: '2026-10-22T12:20:00Z', EstimatedTimeAtLocation: '2026-10-22T12:34:00Z' },
+                ],
+              },
+            ],
+          },
+        }),
+      )) as unknown as typeof fetch;
+    const deps = [dep(10, 'Cst', 3), dep(20, 'Cst', 1)];
+    expect(await trainsAhead(deps, 'Cst', 'Söc', T + 600_000, fetchImpl)).toEqual([{ trainNumber: '10', delayMin: 14 }]);
+  });
+});

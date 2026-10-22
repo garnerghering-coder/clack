@@ -225,6 +225,7 @@ export interface Leg {
 export type RiskWarning =
   | { kind: 'route_now'; trains: number; late: number; canceled: number; medianMin: number; windowMin: number }
   | { kind: 'station_now'; station: string; trains: number; late: number; medianMin: number; windowMin: number }
+  | { kind: 'ahead'; station: string; toward: string; trains: number; late: number; delays: number[]; windowMin: number }
   | { kind: 'train_pattern'; station: string; days: number; lateDays: number; medianMin: number };
 export interface LegRisk {
   checkedAt: number;
