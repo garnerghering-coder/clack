@@ -1,0 +1,101 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Göteborg C (scripts/stations/draft_from_osm.py). A ground-level terminus: tracks 1–16 and the hall; the upper level is the walkway to Nils Ericson Terminalen. Tram and bus stops (A–D) are left out.",
+  "radius": 450,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Upper walkway",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platforms and hall",
+      "order": 0
+    }
+  ],
+  "rotation": 0,
+  "connections": [
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          36,
+          48
+        ]
+      },
+      "to": {
+        "at": [
+          15,
+          49
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 1/2 isn't joined to the hall walkway."
+    },
+    {
+      "from": {
+        "platform": "3",
+        "near": [
+          32,
+          35
+        ]
+      },
+      "to": {
+        "at": [
+          15,
+          49
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 3/4 isn't joined to the hall walkway."
+    },
+    {
+      "from": {
+        "platform": "5",
+        "near": [
+          28,
+          22
+        ]
+      },
+      "to": {
+        "at": [
+          -10,
+          24
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the head of platform 5/6 isn't joined to the hall walkway."
+    }
+  ],
+  "drop_platforms": [
+    "A",
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "A6",
+    "B",
+    "B1",
+    "B2",
+    "C",
+    "C1",
+    "C2",
+    "D1",
+    "D2"
+  ],
+  "drop_pois": [],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First draft from OSM (2026-10-19 extract) with 3 hand connections for gaps in OSM; see connections[].note."
+    }
+  ]
+}
