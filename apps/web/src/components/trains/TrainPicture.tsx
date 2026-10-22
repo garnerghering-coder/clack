@@ -28,13 +28,16 @@ interface Detailed {
   liveries: string[];
   /** Operators whose trains of this type look different from the drawing (e.g. other door layout): simple outline. */
   notFor?: string[];
+  /** Operators whose livery has its own id in the drawing (one operator, two schemes: the more common one). */
+  liveryOf?: Record<string, string>;
 }
 
 /** Keyed by train type id (data/train_types.json), not by art family: Flytoget shares the X3's simple outline. */
 const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
-  // Unpainted: the rebuilt X2C's dark front is seen only at an angle; unrebuilt X2s are bare stainless anyway.
-  x2000: { component: X2000Side as Side, liveries: [] },
+  // Two SJ schemes: unrebuilt X2 (grey, about 21 sets in Dec 2025) and rebuilt X2C (dark front, about 10 then, 4–5 more a
+  // year; Järnvägar.nu 2025-12-03). Nothing says which set runs which train: the more common one.
+  x2000: { component: X2000Side as Side, liveries: ['sj'], liveryOf: { sj: 'sj-x2' } },
   x40: { component: X40Side as Side, liveries: ['sj'] },
   x55: { component: X55Side as Side, liveries: ['sj'] },
   rc6_coaches: { component: Rc6CoachesSide as Side, liveries: ['sj'] },
@@ -66,5 +69,6 @@ export function TrainPicture({ type, operatorId, color, height, label }: { type:
   const d = DETAILED[type.id];
   if (!d || !hasDetailedArt(type.id, operatorId)) return <TrainArt art={type.art} color={color} height={height} label={label} />;
   const Picture = d.component;
-  return <Picture livery={operatorId && d.liveries.includes(operatorId) ? operatorId : 'plain'} className="train-side" label={label} />;
+  const livery = operatorId && d.liveries.includes(operatorId) ? (d.liveryOf?.[operatorId] ?? operatorId) : 'plain';
+  return <Picture livery={livery} className="train-side" label={label} />;
 }
