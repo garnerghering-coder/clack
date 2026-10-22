@@ -2,7 +2,7 @@
 
 Owner, 2026-10-22: Clack is only as strong as its backend. Someone should be able to make a whole train journey
 with only the app, and nothing shown may be made up. This notes the honest state of things and the agreed order of
-work. Nothing here is built yet unless it says so.
+work. See **Status** for what's built.
 
 ## Confidence today
 
@@ -42,6 +42,40 @@ work. Nothing here is built yet unless it says so.
 
 **Owner decisions pending:** a Rejseplanen key for Danish live data (may be paid). There's no public source for
 Swedish operators' live data in Norway today.
+
+## Status (2026-10-22)
+
+1. **Accuracy audit: built.** What each tracked trip showed (expected times, tracks) is recorded on every change;
+   an hour after a trip ends it's scored at 60/30/15/5 min before each event against the final record, the stored
+   actual times are checked against Trafikverket asked by train number, and GPS coverage, feed failures and dropped
+   fixes are counted. Hourly report in `data/audit/latest.md`, numbers at `/api/audit`. A hidden user follows two
+   real trains an hour (05–22, rotating long-distance, regional, commuter, Norway) so there are numbers from day one.
+2. **Sanitization and feed health: built.** GPS jump filter (two agreeing fixes win over a stale one) on the trip
+   tracker, the live map and Norway; reported speed kept only if it fits the movement (allowing ±250 m per fix);
+   actual times never go back to "not yet"; a future "actual" is an estimate; an estimate jump of 15+ min waits for
+   the next answer. `/api/health` reports each feed (ok / degraded / down) and the last dropped fixes; a trip's
+   freshness goes by when the feeds last answered for it.
+3. **Process reliability: built, being tested.** `scripts/supervise.mjs` restarts the server after a crash or five
+   minutes without a health answer (tested with a crashing and a frozen server), restarts on code changes in
+   development, and shuts down cleanly. Catch-up after downtime was already there (actual times for the last 4 days,
+   the live map's full query after reconnecting, imports on start). Soak and replay: see below.
+4. **Offline: built.** Trips, stops, track, operators and station maps are kept on the phone; with no live update
+   for a minute the phone moves the train itself (shared position code, same rules as the server), marked as an
+   estimate; a "No connection" strip; on https/localhost the app shell is kept too, so it opens offline (tested in
+   Chromium: a page reload offline still shows the trip).
+5. **Better estimates: built.** After GPS goes quiet the train is carried on at its last speed for up to 5 min,
+   never past the next stop and never back behind its last fix. Segment speeds from history: not yet.
+6. **Inbound train sets:** being checked.
+7. **Congestion: built as an observation.** Within two hours of leaving, the trains that left your station your
+   way in the last hour and how late they are now; a warning when at least two, and half, are 10+ min late. No
+   single-track or platform-capacity rules: we have no reliable data on track counts, and the owner's rule is no
+   probabilities we can't back.
+
+**Found on the way:** SJ 441 and SJ Nord's 441 share a number and a brand on the same day, and the train sheet
+could show one's header with the other's stops. Map trains are now paired only with a trip that runs where they are.
+
+**Speedometer: built.** A small gauge with km/h on the train sheet and the trip's live panel, only from a fresh
+(under a minute) fix whose reported speed passed the check. Sweden only (Norway sends no speeds).
 
 ## Speedometer on a live train (checked 2026-10-22)
 
