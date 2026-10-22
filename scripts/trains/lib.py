@@ -88,15 +88,22 @@ class Drawing:
                 only,
             )
 
-    def bogie(self, cx, axle_m=2.5, wheel_m=0.9):
+    def bogie(self, cx, axle_m=2.5, wheel_m=0.9, top=None, wc=None):
+        """A bogie as the photos show one: the wheels behind a dark side frame that covers their upper half, axle boxes
+        at the wheel centres. `top`: where the frame starts (default the body's underside; pass the raised underside
+        where the body is cut away over the bogie); `wc`: the wheel centres' y (default 13 units below the underside).
+        Owner, 2026-10-22: full wheel circles on a thin bar read as huge, cartoon wheels."""
         s = axle_m * self.M / 2
         r = wheel_m * self.M / 2
-        B = self.BASE
-        self.add(f'<rect x="{cx - s - 14:.1f}" y="{B}" width="{2 * s + 28:.1f}" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" stroke-width="1.2"/>')
+        top = self.BASE - 1 if top is None else top
+        wc = self.BASE + 13 if wc is None else wc
         for d in (-s, s):
-            self.add(f'<circle cx="{cx + d:.1f}" cy="{B + 13}" r="{r:.1f}" fill="#1b1f25" stroke="#4d5560" stroke-width="2"/>')
-            self.add(f'<circle cx="{cx + d:.1f}" cy="{B + 13}" r="5" fill="#6d7681"/>')
-        self.add(f'<line x1="{cx - 12:.1f}" y1="{B + 6}" x2="{cx + 12:.1f}" y2="{B + 3}" stroke="#6d7681" stroke-width="2.4" stroke-linecap="round"/>')
+            self.add(f'<circle cx="{cx + d:.1f}" cy="{wc:.1f}" r="{r:.1f}" fill="#1b1f25" stroke="#727b86" stroke-width="1.8"/>')
+        tw, bw = s + r * 0.55, s + r * 0.95
+        self.add(f'<path d="M{cx - tw:.1f},{top:.1f} H{cx + tw:.1f} L{cx + bw:.1f},{wc + 1:.1f} H{cx - bw:.1f} Z" fill="#363c44"/>')
+        self.add(f'<rect x="{cx - s - 6:.1f}" y="{wc - 4:.1f}" width="{2 * s + 12:.1f}" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" stroke-width="0.8"/>')
+        for d in (-s, s):
+            self.add(f'<rect x="{cx + d - 6:.1f}" y="{wc - 5:.1f}" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" stroke-width="0.8"/>')
 
     def gangway(self):
         g = self.REAR - self.SECOND_END

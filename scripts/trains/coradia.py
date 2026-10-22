@@ -163,5 +163,8 @@ class Coradia:
     def running_gear(self):
         """Bogies: cab bogie at 4.34 m (2.4 m wheelbase), shared bogie under the gangway (2.7 m); wheels 0.85 m."""
         d = self.d
-        d.bogie(self.x(4.34), axle_m=2.4, wheel_m=0.85)
-        d.bogie((d.REAR + d.SECOND_END) / 2, axle_m=2.7, wheel_m=0.85)
+        # Wheel centres and rail as Norrtåg's X62 drawing has them (rail 18.3 units below the underside); the frame
+        # fills the raised underside over each bogie.
+        wc = d.BASE + 18.3 - 0.85 * d.M / 2
+        d.bogie(self.x(4.34), axle_m=2.4, wheel_m=0.85, top=d.y(0.878), wc=wc)
+        d.bogie((d.REAR + d.SECOND_END) / 2, axle_m=2.7, wheel_m=0.85, top=d.y(0.868), wc=wc)

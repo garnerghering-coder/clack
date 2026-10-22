@@ -100,24 +100,24 @@ export function X3Side({ livery, muted = false, className, label }: { livery: X3
         </g>
         <rect x="130.0" y="172" width="800.0" height="6" fill="#4b5158" />
         <rect x="0.0" y="172" width="34.0" height="6" fill="#4b5158" />
-        <rect x="876.8" y="172" width="130.4" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="890.8" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="890.8" cy="185" r="5" fill="#6d7681" />
-        <circle cx="993.2" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="993.2" cy="185" r="5" fill="#6d7681" />
-        <line x1="930.0" y1="178" x2="954.0" y2="175" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="128.8" y="172" width="130.4" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="142.8" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="142.8" cy="185" r="5" fill="#6d7681" />
-        <circle cx="245.2" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="245.2" cy="185" r="5" fill="#6d7681" />
-        <line x1="182.0" y1="178" x2="206.0" y2="175" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="-95.2" y="172" width="130.4" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="-81.2" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="-81.2" cy="185" r="5" fill="#6d7681" />
-        <circle cx="21.2" cy="185" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="21.2" cy="185" r="5" fill="#6d7681" />
-        <line x1="-42.0" y1="178" x2="-18.0" y2="175" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="890.8" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="993.2" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M880.7,171.0 H1003.3 L1010.7,186.0 H873.3 Z" fill="#363c44" />
+        <rect x="884.8" y="181.0" width="114.4" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="884.8" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="987.2" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="142.8" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="245.2" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M132.7,171.0 H255.3 L262.7,186.0 H125.3 Z" fill="#363c44" />
+        <rect x="136.8" y="181.0" width="114.4" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="136.8" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="239.2" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="-81.2" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="21.2" cy="185.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M-91.3,171.0 H31.3 L38.7,186.0 H-98.7 Z" fill="#363c44" />
+        <rect x="-87.2" y="181.0" width="114.4" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="-87.2" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="15.2" y="180.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
         <path d="M998.0,172 H1084 Q1088,172 1084,180 L1066.0,184 H998.0 Z" fill="#3b4148" />
       </g>
     </svg>

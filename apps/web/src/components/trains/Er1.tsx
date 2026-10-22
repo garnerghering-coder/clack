@@ -126,24 +126,24 @@ export function Er1Side({ livery, muted = false, className, label }: { livery: E
           <rect x="1035.2" y="97.4" width="22.4" height="74.7" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
           <rect x="1041.0" y="105.1" width="10.8" height="28.7" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
         </g>
-        <rect x="892.0" y="196" width="128.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="906.0" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="906.0" cy="209" r="5" fill="#6d7681" />
-        <circle cx="1006.0" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="1006.0" cy="209" r="5" fill="#6d7681" />
-        <line x1="944.0" y1="202" x2="968.0" y2="199" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="152.8" y="196" width="128.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="166.8" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="166.8" cy="209" r="5" fill="#6d7681" />
-        <circle cx="266.8" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="266.8" cy="209" r="5" fill="#6d7681" />
-        <line x1="204.8" y1="202" x2="228.8" y2="199" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="-104.0" y="196" width="128.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="-90.0" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="-90.0" cy="209" r="5" fill="#6d7681" />
-        <circle cx="10.0" cy="209" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="10.0" cy="209" r="5" fill="#6d7681" />
-        <line x1="-52.0" y1="202" x2="-28.0" y2="199" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="906.0" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="1006.0" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M895.9,195.0 H1016.1 L1023.5,210.0 H888.5 Z" fill="#363c44" />
+        <rect x="900.0" y="205.0" width="112.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="900.0" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="1000.0" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="166.8" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="266.8" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M156.7,195.0 H276.9 L284.3,210.0 H149.3 Z" fill="#363c44" />
+        <rect x="160.8" y="205.0" width="112.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="160.8" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="260.8" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="-90.0" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="10.0" cy="209.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M-100.1,195.0 H20.1 L27.5,210.0 H-107.5 Z" fill="#363c44" />
+        <rect x="-96.0" y="205.0" width="112.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="-96.0" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="4.0" y="204.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
         <path d="M1098.0,196.0 L1098.0,204.6 L1116.8,218.9 L1145.6,219.9 Q1142.0,211.6 1143.6,196.0 Z" fill="#3b4148" />
         <rect x="1145.6" y="169.2" width="26.4" height="25.0" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
       </g>

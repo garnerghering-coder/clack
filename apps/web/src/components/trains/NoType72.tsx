@@ -58,12 +58,12 @@ export function NoType72Side({ livery, muted = false, className, label }: { live
       <g opacity={muted ? 0.35 : 1} filter={muted ? `url(#${p}mute)` : undefined}>
         <rect x="144.0" y="160" width="506.0" height="6" fill="#4b5158" />
         <rect x="0.0" y="160" width="29.0" height="6" fill="#4b5158" />
-        <rect x="680.6" y="160" width="133.2" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="694.6" cy="173" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="694.6" cy="173" r="5" fill="#6d7681" />
-        <circle cx="799.8" cy="173" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="799.8" cy="173" r="5" fill="#6d7681" />
-        <line x1="735.2" y1="166" x2="759.2" y2="163" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="694.6" cy="173.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="799.8" cy="173.0" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M684.5,159.0 H809.9 L817.3,174.0 H677.1 Z" fill="#363c44" />
+        <rect x="688.6" y="169.0" width="117.2" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="688.6" y="168.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="793.8" y="168.0" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
         <rect x="110.0" y="160" width="32" height="10" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
         <circle cx="126.0" cy="173" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
         <circle cx="126.0" cy="173" r="5" fill="#6d7681" />

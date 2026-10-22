@@ -101,18 +101,18 @@ export function X61Side({ livery, muted = false, className, label }: { livery: X
           <path d="M858.0,117.3 L874.8,134.3" stroke="#4b4f55" strokeWidth="7" strokeLinecap="round" />
           <path d="M858.0,117.3 L874.8,134.3" stroke="#f7f9fb" strokeWidth="4.4" strokeLinecap="round" />
         </g>
-        <rect x="642.4" y="173" width="124.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="656.4" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="656.4" cy="186" r="5" fill="#6d7681" />
-        <circle cx="752.4" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="752.4" cy="186" r="5" fill="#6d7681" />
-        <line x1="692.4" y1="179" x2="716.4" y2="176" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="16.0" y="173" width="136.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="30.0" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="30.0" cy="186" r="5" fill="#6d7681" />
-        <circle cx="138.0" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="138.0" cy="186" r="5" fill="#6d7681" />
-        <line x1="72.0" y1="179" x2="96.0" y2="176" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="656.4" cy="174.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="752.4" cy="174.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M647.0,157.3 H761.8 L768.5,175.3 H640.2 Z" fill="#363c44" />
+        <rect x="650.4" y="170.3" width="108.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="650.4" y="169.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="746.4" y="169.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="30.0" cy="174.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="138.0" cy="174.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M20.6,156.0 H147.3 L154.2,175.3 H13.8 Z" fill="#363c44" />
+        <rect x="24.0" y="170.3" width="120.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="24.0" y="169.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="132.0" y="169.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
       </g>
     </svg>
   );
