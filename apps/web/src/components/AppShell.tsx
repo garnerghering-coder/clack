@@ -70,6 +70,8 @@ export function SettingsLink() {
   );
 }
 
+import { TicketReturnPrompt } from './Tickets';
+
 export function AppShell({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
   useLanding();
@@ -99,6 +101,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </NavLink>
       </aside>
       <div className="main">{children}</div>
+      <TicketReturnPrompt />
       <nav className="tabbar" aria-label={t('nav.label')}>
         {tabs.map(({ to, key, Icon }) => (
           <NavLink key={key} to={to} end={to === '/'} className={({ isActive }) => (isActive ? 'tab active' : 'tab')}>

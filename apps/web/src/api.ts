@@ -36,6 +36,10 @@ export interface Operator {
   brandColor: string;
   /** Set when the brand's app icon has been downloaded to this computer. */
   logoUrl?: string | null;
+  /** The operator's own booking page (no agents or affiliates); null when it has none. */
+  ticketUrl?: string | null;
+  /** A checked link format that fills in the journey ({from}, {to}, {date}, {time}). */
+  ticketDeepLink?: string | null;
 }
 
 export type Product = 'high_speed' | 'intercity' | 'night' | 'regional' | 'commuter' | 'heritage';

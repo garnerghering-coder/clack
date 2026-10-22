@@ -944,3 +944,8 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .walk-steps li.here { color: var(--text); font-weight: 600; }
 .walk-steps li:not(.here) { color: var(--text-2); }
 .conn-leg > .caption:last-child { flex-basis: 100%; padding-left: 30px; }
+
+/* Buying a ticket on the operator's own site, and the offer to add the train when you're back. */
+.buy-ticket { display: grid; gap: 4px; justify-items: start; margin-top: 8px; }
+.ticket-return { position: fixed; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 12px); width: min(560px, calc(100% - 24px)); display: grid; gap: 8px; box-shadow: var(--shadow); }
+.ticket-return .row-actions { display: flex; gap: 8px; justify-content: flex-end; }

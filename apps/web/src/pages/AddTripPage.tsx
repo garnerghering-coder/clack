@@ -8,6 +8,7 @@ import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, ty
 import { OperatorBadge } from '../components/OperatorBadge';
 import { StationRow } from '../components/StationRow';
 import { ManualTrip } from '../components/ManualTrip';
+import { BuyTicket } from '../components/Tickets';
 import { useOperators, useTrainTypes } from '../data';
 import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
@@ -195,6 +196,9 @@ function ConfirmConnection({ c, onBack, onSaved }: { c: Connection; onBack: () =
       <h2 className="section-title">{t('add.connectionTitle')}</h2>
       <ConnectionCard c={c} onPick={() => undefined} />
       <p className="caption">{t('add.connectionNote')}</p>
+      {legs.map((r) => (
+        <BuyTicket key={r.key} trip={{ operatorId: r.operatorId, trainNumber: r.trainNumber, from: { ...r.from }, to: { ...r.to }, tripKey: r.key, serviceDate: r.serviceDate }} />
+      ))}
       {dupes.length > 0 && (
         <div className="banner warn">
           {dupes.length === legs.length ? t('add.duplicate') : t('add.duplicateOne', { train: legs[dupes[0]!]!.trainNumber ?? '' })}
@@ -356,6 +360,11 @@ function Confirm({ result, onBack, onSaved, backLabel }: { result: TripResult; o
         </div>
       )}
       {error && <p className="banner error">{t('add.saveError', { message: error })}</p>}
+      {from && to && dep !== null && arr !== null && dep > Date.now() && (
+        <BuyTicket
+          trip={{ operatorId: result.operatorId, trainNumber: result.trainNumber, from: { name: from.name, time: dep, tz: from.tz, seq: from.seq }, to: { name: to.name, time: arr, tz: to.tz, seq: to.seq }, tripKey: result.key, serviceDate: result.serviceDate }}
+        />
+      )}
       <div className="sticky-actions">
         <button className="button primary wide" onClick={() => save(false)} disabled={!trip || saving || duplicate}>
           {t('add.addToClack')}

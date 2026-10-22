@@ -11,6 +11,7 @@ import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
 import { Onboard } from '../components/Onboard';
+import { BuyTicket, type TicketTrip } from '../components/Tickets';
 import { FlapTime } from '../components/SplitFlap';
 import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
@@ -923,6 +924,11 @@ function LiveMap() {
           </div>
           {!collapsed && <Onboard facts={null} operatorId={sel.operatorId} trainType={sel.trainType} compact />}
           {!collapsed && <StopList stops={stops} />}
+          {!collapsed && Array.isArray(stops) && stops.length > 1 && (() => {
+            // From the next stop on: the part of the train you could still catch.
+            const from = stops.find((s) => !s.passed && !s.canceled && s !== stops.at(-1));
+            return from ? <BuyTicket trip={ticketTrip(sel.operatorId, sel.number, from, stops.at(-1)!, selected?.trip ?? null)} inTrips={Boolean(selected?.legId)} /> : null;
+          })()}
           {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
           <div className="sheet-actions row-actions live-sheet-actions">
             <button className={followKeys.has(followKey(sel)) ? 'button is-following' : 'button'} onClick={() => toggleFollow(sel)} aria-pressed={followKeys.has(followKey(sel))}>
@@ -948,6 +954,16 @@ function LiveMap() {
     </div>
   );
 }
+
+/** A train's stops as the journey a ticket is bought for. */
+const ticketTrip = (operatorId: string | null, number: string, from: LiveTrainStop, to: LiveTrainStop, trip: { key: string; serviceDate: string } | null): TicketTrip => ({
+  operatorId,
+  trainNumber: number,
+  from: { name: from.name, time: from.dep ?? from.arr ?? 0, tz: TZ, seq: from.seq },
+  to: { name: to.name, time: to.arr ?? to.dep ?? 0, tz: TZ, seq: to.seq },
+  tripKey: trip?.key ?? null,
+  serviceDate: trip?.serviceDate ?? null,
+});
 
 /** The train's whole route: passed stops dimmed with a filled dot, the next one marked, later ones ahead. */
 function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
@@ -1054,6 +1070,7 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
       </div>
       {!collapsed && <Onboard facts={null} operatorId={view.operatorId} trainType={view.trainType} compact />}
       {!collapsed && <StopList stops={view.stops ?? 'none'} />}
+      {!collapsed && first && last && <BuyTicket trip={ticketTrip(view.operatorId, view.number, first, last, view.trip)} inTrips={Boolean(view.legId)} />}
       <div className="sheet-actions row-actions live-sheet-actions">
         <button className={following ? 'button is-following' : 'button'} onClick={onFollow} aria-pressed={following}>
           {following ? <Check size={16} /> : <Eye size={16} />} {following ? t('liveMap.following') : t('liveMap.follow')}

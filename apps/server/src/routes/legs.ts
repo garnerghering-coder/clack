@@ -5,6 +5,7 @@ import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
 import { withLogo } from '../import/brands.js';
+import { loadBrands } from '../dataFiles.js';
 import { CONTENT_TYPES, logoFile } from '../import/logos.js';
 import fs from 'node:fs';
 
@@ -73,7 +74,14 @@ export const legRoutes =
 
     app.delete<{ Params: { id: string } }>('/legs/:id', async (req, reply) => (deleteLeg(db, req.userId, req.params.id) ? reply.code(204).send() : reply.code(404).send({ error: 'not found' })));
 
-    app.get('/operators', async () => (await db.query.operators.findMany()).map(withLogo));
+    // Ticket links (owner, 2026-10-22): always the operator's own site, never an agent or affiliate.
+    const brands = new Map(loadBrands().map((b) => [b.id, b]));
+    app.get('/operators', async () =>
+      (await db.query.operators.findMany()).map((o) => {
+        const b = brands.get(o.id);
+        return { ...withLogo(o), ticketUrl: b?.tickets === null ? null : (b?.tickets?.url ?? b?.website ?? null), ticketDeepLink: b?.tickets?.deep_link ?? null };
+      }),
+    );
 
     app.get<{ Params: { id: string } }>('/operators/:id/logo', async (req, reply) => {
       const f = /^[a-z0-9-]+$/.test(req.params.id) ? logoFile(req.params.id) : null;

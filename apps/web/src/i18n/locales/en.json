@@ -776,5 +776,16 @@
     },
     "timesNote": "Times are local at each station. An arrival earlier than the departure counts as the next day.",
     "save": "Add trip"
+  },
+  "tickets": {
+    "buyAt": "Buy ticket at {{site}}",
+    "searchFor": "Opens the operator’s own site. Search for {{from}} → {{to}}, {{day}} {{time}} ({{train}}).",
+    "backTitle": "Back from {{site}}",
+    "backBody": "Add {{from}} → {{to}} (train {{train}}) to your trips? Only if you’re going: opening the site doesn’t mean you bought a ticket.",
+    "notNow": "Not now",
+    "addToTrips": "Add to my trips",
+    "added": "Added to your trips.",
+    "already": "It’s already in your trips.",
+    "failed": "Couldn’t add it. Try again from the train."
   }
 }

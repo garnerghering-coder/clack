@@ -776,5 +776,16 @@
     },
     "timesNote": "Tiderna är lokala vid varje station. En ankomst före avgången räknas som nästa dag.",
     "save": "Lägg till resa"
+  },
+  "tickets": {
+    "buyAt": "Köp biljett på {{site}}",
+    "searchFor": "Öppnar operatörens egen webbplats. Sök {{from}} → {{to}}, {{day}} {{time}} ({{train}}).",
+    "backTitle": "Tillbaka från {{site}}",
+    "backBody": "Lägga till {{from}} → {{to}} (tåg {{train}}) i dina resor? Bara om du ska åka: att öppna sidan betyder inte att du har köpt en biljett.",
+    "notNow": "Inte nu",
+    "addToTrips": "Lägg till i mina resor",
+    "added": "Tillagd i dina resor.",
+    "already": "Den finns redan i dina resor.",
+    "failed": "Kunde inte lägga till den. Försök igen från tåget."
   }
 }

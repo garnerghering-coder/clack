@@ -24,6 +24,11 @@ export interface Brand {
   website?: string;
   /** Direct icon URL when the site's own links don't point at a good one. */
   icon_url?: string;
+  /**
+   * Where to buy a ticket: the operator's own booking page (default: its website). `deep_link` is a template with
+   * {from}, {to}, {date} (YYYY-MM-DD) and {time} (HH:MM), only once someone has checked the operator's site takes it.
+   */
+  tickets?: { url?: string; deep_link?: string; checked?: string } | null;
 }
 export interface StationOverride {
   name: string;
