@@ -4,6 +4,7 @@ import type { ComponentType } from 'react';
 import { TrainArt } from '../TrainArt';
 import { Er1Side } from './Er1';
 import { NoFlirtSide } from './NoFlirt';
+import { NoType72Side } from './NoType72';
 import { NoType73Side } from './NoType73';
 import { NoType76Side } from './NoType76';
 import { ReginaSide } from './Regina';
@@ -35,6 +36,8 @@ const DETAILED: Record<string, Detailed> = {
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
   regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget'] },
   no_flirt: { component: NoFlirtSide as Side, liveries: ['vy'] },
+  // Both still run the paint the sets were delivered in (not Vy's green).
+  no_type72: { component: NoType72Side as Side, liveries: ['go-ahead-norge', 'vy'] },
   // Go-Ahead's stripes are seen only at an angle and Vy's 73Bs are mid-repaint (red to green): both unpainted.
   no_type73: { component: NoType73Side as Side, liveries: ['sj-nord'] },
   // SJ Nord's livery isn't drawn yet: its curved edge shows only on photos too oblique to measure.
