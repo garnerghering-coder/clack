@@ -1,7 +1,7 @@
 // Train types (rolling stock). No open source says which vehicle ran a train (data/train_types.json explains),
 // so a leg starts with the typical type for its operator and product. Once Trafikverket's planned coach order is
 // fetched it can pin the type down (SJ: X2000 or SJ 3000), and the owner can always correct it.
-import { and, eq, isNull } from 'drizzle-orm';
+import { and, eq, isNull, or } from 'drizzle-orm';
 import type { AmenityEntry } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legs, timetableTrips } from '../db/schema.js';
@@ -95,18 +95,26 @@ export function typicalTrainType(operatorId: string | null, product: string, tra
   return null;
 }
 
-/** Fills in the typical type for legs saved before train types existed. Never overrides the owner's choice. */
+/**
+ * Fills in the typical type for legs saved before train types existed, and re-derives the ones that are only
+ * typical, so a corrected rule reaches trips already saved. Never overrides the owner's choice or a coach order.
+ */
 export function backfillTrainTypes(db: Db): number {
   const todo = db
-    .select({ id: legs.id, operatorId: legs.operatorId, trainNumber: legs.trainNumber, routeType: timetableTrips.routeType, category: timetableTrips.category })
+    .select({ id: legs.id, trainType: legs.trainType, operatorId: legs.operatorId, trainNumber: legs.trainNumber, routeType: timetableTrips.routeType, category: timetableTrips.category })
     .from(legs)
     .leftJoin(timetableTrips, eq(timetableTrips.key, legs.timetableTripKey))
-    .where(and(isNull(legs.trainType), isNull(legs.trainTypeSource)))
+    .where(or(and(isNull(legs.trainType), isNull(legs.trainTypeSource)), eq(legs.trainTypeSource, 'typical')))
     .all();
   let n = 0;
   for (const l of todo) {
     const type = typicalTrainType(l.operatorId, productOf(l.routeType ?? '', l.category ?? ''), l.trainNumber);
-    if (!type) continue;
+    if (type === l.trainType) continue;
+    if (!type) {
+      db.update(legs).set({ trainType: null, trainTypeSource: null }).where(eq(legs.id, l.id)).run();
+      n++;
+      continue;
+    }
     db.update(legs).set({ trainType: type, trainTypeSource: 'typical' }).where(eq(legs.id, l.id)).run();
     n++;
   }

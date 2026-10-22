@@ -14,6 +14,8 @@ describe('typical train types', () => {
 
   it('returns nothing for an unknown operator rather than guessing', () => {
     expect(typicalTrainType('nobody', 'regional', '1')).toBeNull();
+    // Krösatåg runs Itinos on some lines and older electric units on others: no single typical type.
+    expect(typicalTrainType('krosatag', 'regional', '7600')).toBeNull();
   });
 
   it('only refers to types and operators that exist', () => {
