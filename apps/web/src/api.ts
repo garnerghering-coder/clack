@@ -167,6 +167,8 @@ export interface Leg {
   /** Did you ride it: pending | auto | confirmed | review | not_taken (server legs/recording.ts). */
   ride: 'pending' | 'auto' | 'confirmed' | 'review' | 'not_taken';
   rideReason: string | null;
+  /** The reported stop nearest an unreported end abroad (Hyllie for København H), as evidence the train ran. */
+  borderEvidence?: { board?: { stationId: string; at: number }; alight?: { stationId: string; at: number } } | null;
 }
 
 export interface Journey {
@@ -226,6 +228,8 @@ export interface LegStop {
   platform: string | null;
   canceled: boolean;
   deviations: string[];
+  /** Who reports this stop live; null: nobody can (Denmark, SJ in Norway), so its times are the timetable's. */
+  reportSource?: 'trafikverket' | 'entur' | null;
 }
 
 export interface LegDetail extends Leg {

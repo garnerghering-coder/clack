@@ -158,7 +158,10 @@
     "scheduledArrival": "Ankomst {{time}} (enligt tidtabell)",
     "actualTimes": "Faktiska tider från Trafikverket (Sverige) och Entur (Norge).",
     "scheduledOnlyNote": "Inga faktiska tider rapporterades, så det här är tidtabellens tider.",
-    "seePassport": "Se ditt pass"
+    "seePassport": "Se ditt pass",
+    "noLiveData": "Ingen realtidsdata här",
+    "beyondLiveData": "Det finns ingen realtidsdata för tåget i {{countries}}. Tiderna där är tidtabellens, och väntade tider följer förseningen vid {{station}}.",
+    "beyondLiveDataNoReport": "Det finns ingen realtidsdata för tåget i {{countries}}, så tiderna där är tidtabellens."
   },
   "passport": {
     "title": "Pass",
@@ -700,7 +703,8 @@
       "not_arrived": "Inte framme än.",
       "actual_times": "Tåget rapporterades avgå där du klev på och ankomma där du klev av.",
       "added_after": "Du lade till den efter resan.",
-      "you": "Ditt svar."
+      "you": "Ditt svar.",
+      "border_reports": "Rapporterat fram till gränsen. Det finns ingen realtidsdata efter den, så tiden utomlands är väntad, inte rapporterad."
     },
     "state": {
       "pending": "Inte registrerad än. {{why}}",

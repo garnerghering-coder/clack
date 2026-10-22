@@ -16,6 +16,13 @@
     },
     {
       "match": {
+        "gtfs_operator": ["SJ AB", "SJ"],
+        "train_number_pattern": "^[678]\\d{4}$"
+      },
+      "reason": "SJ replacement bus: 6, 7 or 8 plus the number of the train it replaces (60621, 70621, 80621 for 621). Checked 2026-10-22: every SJ 6/7/8xxxx trip Trafikverket has for the next two weeks is TypeOfTraffic Buss."
+    },
+    {
+      "match": {
         "gtfs_operator": "Taxi"
       },
       "reason": "Värmlandstrafik on-demand taxi (route 'Anrop') filed as route_type 100"

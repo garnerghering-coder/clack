@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { expectedStops, rtDate } from '../src/livemap/norway.js';
-import { callsToActuals, type NorwayCall } from '../src/entur/calls.js';
+import { callsByPlace, callsToActuals, type NorwayCall } from '../src/entur/calls.js';
 import { resetAt } from '../src/entur/client.js';
 import { normalizeNorwayBoard, type JpBoardCall } from '../src/boards/norway.js';
 
@@ -63,6 +63,28 @@ describe('Norway live data', () => {
     );
     expect(m.get(1)).toMatchObject({ actualDep: T('07:00') });
     expect(m.get(2)).toMatchObject({ actualArr: null, estimatedArr: T('07:19') });
+  });
+
+  it('matches another feed\'s train by stop place and takes that country\'s published time', () => {
+    // SJ 645 to Oslo: SJ's Swedish timetable says Oslo S 00:02, Norway's says 00:14; Entur has no live data for it.
+    const calls = [
+      call({ pos: 8, stopPlace: 'NSR:StopPlace:Kongsvinger', aimedArr: T('20:45'), aimedDep: T('20:45'), realtime: false }),
+      call({ pos: 9, stopPlace: 'NSR:StopPlace:337', aimedArr: T('22:14'), realtime: false }),
+    ];
+    const m = callsByPlace(
+      [
+        { seq: 1, schedArr: null, schedDep: T('16:19'), nsrId: null },
+        { seq: 9, schedArr: T('20:43'), schedDep: T('20:45'), nsrId: 'NSR:StopPlace:Kongsvinger' },
+        { seq: 10, schedArr: T('22:02'), schedDep: null, nsrId: 'NSR:StopPlace:337' },
+      ],
+      calls,
+      T('23:00'),
+    );
+    expect(m.get(10)).toMatchObject({ advertisedArr: T('22:14'), actualArr: null, source: null });
+    expect(m.get(9)).toMatchObject({ advertisedArr: T('20:45') });
+    expect(m.has(1)).toBe(false);
+    // Hours away is not the same call.
+    expect(callsByPlace([{ seq: 10, schedArr: T('18:02'), schedDep: null, nsrId: 'NSR:StopPlace:337' }], calls, T('23:00')).size).toBe(0);
   });
 
   it('waits for Entur\'s reset time after a quota hit', () => {

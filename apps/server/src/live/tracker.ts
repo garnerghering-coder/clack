@@ -13,7 +13,7 @@ import { legEvents, legStops, legs, liveState, stations } from '../db/schema.js'
 import { refreshLegActuals } from '../legs/actuals.js';
 import { parseWgs84, trvQuery } from '../trafikverket/client.js';
 import { gtfsRt, RT_DATASOURCES, type RtDatasource } from '../entur/client.js';
-import { serviceJourneyFor } from '../entur/calls.js';
+import { enturJourneyFor } from '../entur/calls.js';
 import { rtDate } from '../livemap/norway.js';
 import { diffEvents, liveView, type GpsFix, type LegSummary, type LiveStop, type LiveView } from './progress.js';
 
@@ -151,6 +151,8 @@ function loadLeg(db: Db, legId: string) {
       name: stations.name,
       lat: stations.lat,
       lon: stations.lon,
+      nsrId: stations.nsrId,
+      country: stations.country,
       schedArr: legStops.schedArr,
       schedDep: legStops.schedDep,
       actualArr: legStops.actualArr,
@@ -179,7 +181,8 @@ function loadLeg(db: Db, legId: string) {
   const line: LatLon[] = leg.geometry ? decodePolyline(leg.geometry) : ridden.map((s) => [s.lat, s.lon]);
   // The whole trip, stop to stop, including before you board: where the train may be on its way to you.
   const route: LatLon[] = all.map((s) => [s.lat, s.lon]);
-  return { leg, ridden, line, route };
+  const forEntur = all.map((s) => ({ nsrId: s.nsrId, country: s.country, schedArr: ms(s.schedArr), schedDep: ms(s.schedDep) }));
+  return { leg, ridden, line, route, forEntur };
 }
 
 function summary(loaded: NonNullable<ReturnType<typeof loadLeg>>): LegSummary {
@@ -230,8 +233,14 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
   // Norwegian trains (and the Norwegian part of cross-border ones): Entur's GPS, by service journey.
   const journeyOf = new Map<string, string>();
   for (const l of loaded) {
-    const id = l.leg.serviceDate ? serviceJourneyFor(db, l.leg.timetableTripKey, l.leg.trainNumber, l.leg.serviceDate) : null;
-    if (id) journeyOf.set(l.leg.id, `${id}|${l.leg.serviceDate}`);
+    try {
+      const j = l.leg.serviceDate
+        ? await enturJourneyFor(db, { tripKey: l.leg.timetableTripKey, trainNumber: l.leg.trainNumber, serviceDate: l.leg.serviceDate, stops: l.forEntur }, { now, fetchImpl: opts.fetchImpl })
+        : null;
+      if (j) journeyOf.set(l.leg.id, `${j.id}|${j.date}`);
+    } catch (e) {
+      opts.log?.(`live: Entur lookup failed: ${(e as Error).message}`);
+    }
   }
   let noFixes = new Map<string, GpsFix>();
   if (journeyOf.size)

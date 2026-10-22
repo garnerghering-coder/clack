@@ -108,27 +108,113 @@ export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[], now =
       trvTrainNumber: null,
       composition: null,
       onboard: null,
+      source: c.realtime || actualArr !== null || actualDep !== null ? 'entur' : null,
     });
   }
   return out;
 }
 
-/**
- * The Entur service journey for a timetable trip: its own id for Norway's feed, or the Norwegian twin of a
- * cross-border train in Sweden's feed: same number, same day, and a stop at the same station and minute (so SJ 103
- * is never taken for Vy 103).
- */
-export function serviceJourneyFor(db: Db, tripKey: string | null, trainNumber: string | null, serviceDate: string): string | null {
-  if (!tripKey) return null;
-  const own = db.all<{ source: string; trip_id: string }>(sql`select source, trip_id from timetable_trips where key = ${tripKey}`)[0];
-  if (own?.source === 'gtfs_no') return own.trip_id;
-  if (!own || !trainNumber) return null;
-  const twin = db.all<{ trip_id: string }>(sql`
-    select t.trip_id from timetable_trips t
-    join timetable_trip_dates d on d.trip_key = t.key and d.service_date = ${serviceDate}
-    join timetable_stop_times a on a.trip_key = t.key
-    join timetable_stop_times b on b.trip_key = ${tripKey} and b.station_id = a.station_id
-      and coalesce(b.dep_sec, b.arr_sec) = coalesce(a.dep_sec, a.arr_sec)
-    where t.source = 'gtfs_no' and t.train_number = ${trainNumber} limit 1`)[0];
-  return twin?.trip_id ?? null;
+export interface StopForPlace extends StopForCalls {
+  nsrId: string | null;
 }
+
+/** How far a stop's time in another country's timetable may be from ours and still be the same call. */
+const PLACE_MATCH_MS = 90 * 60_000;
+
+/**
+ * Per-stop data for a train from another feed (SJ, Snälltåget or Vy Tåg in Norway): calls matched to our stops by
+ * stop place, in order, within 90 minutes of our time. The call's aimed time is that country's published time for
+ * the stop (advertisedArr/Dep). Pure, for tests.
+ */
+export function callsByPlace(stops: StopForPlace[], calls: NorwayCall[], now = Date.now()): Map<number, StopActuals> {
+  const real = (t: number | null) => (t !== null && t <= now ? t : null);
+  const out = new Map<number, StopActuals>();
+  const ordered = [...calls].sort((a, b) => a.pos - b.pos);
+  let from = 0;
+  for (const s of stops) {
+    if (!s.nsrId) continue;
+    const ours = s.schedDep ?? s.schedArr;
+    const i = ordered.findIndex((c, j) => j >= from && c.stopPlace === s.nsrId && (ours === null || Math.abs((c.aimedDep ?? c.aimedArr ?? ours) - ours) <= PLACE_MATCH_MS));
+    if (i < 0) continue;
+    from = i + 1;
+    const c = ordered[i]!;
+    const [actualArr, actualDep] = [real(c.actualArr), real(c.actualDep)];
+    out.set(s.seq, {
+      seq: s.seq,
+      actualArr,
+      actualDep,
+      estimatedArr: actualArr === null && c.realtime ? (c.expectedArr ?? c.actualArr) : null,
+      estimatedDep: actualDep === null && c.realtime ? (c.expectedDep ?? c.actualDep) : null,
+      platform: c.platform,
+      canceled: c.canceled,
+      deviations: [],
+      trvTrainNumber: null,
+      composition: null,
+      onboard: null,
+      source: c.realtime || actualArr !== null || actualDep !== null ? 'entur' : null,
+      advertisedArr: c.aimedArr,
+      advertisedDep: c.aimedDep,
+    });
+  }
+  return out;
+}
+
+const FIND_QUERY = `query($id: String!, $start: DateTime!) { stopPlace(id: $id) { estimatedCalls(startTime: $start, timeRange: 10800,
+  numberOfDepartures: 500, arrivalDeparture: both, whiteListedModes: [rail], includeCancelledTrips: true) {
+  date aimedArrivalTime aimedDepartureTime serviceJourney { id privateCode } } } }`;
+const found = new Map<string, { at: number; hit: { id: string; date: string } | null }>();
+
+/**
+ * A train's Entur service journey: its own trip id for Norway's feed; otherwise looked up at its first Norwegian stop
+ * by train number, the call nearest our time (within 90 minutes). Covers every operator Entur knows (SJ, Snälltåget,
+ * Vy Tåg), not just the four feeds we import. Cached 30 minutes.
+ */
+export async function enturJourneyFor(
+  db: Db,
+  ref: { tripKey: string | null; trainNumber: string | null; serviceDate: string; stops: { nsrId: string | null; country: string; schedArr: number | null; schedDep: number | null }[] },
+  opts: { now?: number; fetchImpl?: typeof fetch } = {},
+): Promise<{ id: string; date: string; own: boolean } | null> {
+  if (ref.tripKey) {
+    const own = db.all<{ source: string; trip_id: string }>(sql`select source, trip_id from timetable_trips where key = ${ref.tripKey}`)[0];
+    if (own?.source === 'gtfs_no') return { id: own.trip_id, date: ref.serviceDate, own: true };
+  }
+  const at = ref.stops.find((s) => s.nsrId && s.country === 'NO' && (s.schedDep ?? s.schedArr) !== null);
+  if (!at || !ref.trainNumber) return null;
+  const ours = (at.schedDep ?? at.schedArr)!;
+  const now = opts.now ?? Date.now();
+  const key = `${at.nsrId}|${ref.trainNumber}|${ref.serviceDate}`;
+  const hit = found.get(key);
+  if (hit && now - hit.at < 30 * 60_000) return hit.hit ? { ...hit.hit, own: false } : null;
+  const data = await jpQuery<{ stopPlace: { estimatedCalls: { date: string; aimedArrivalTime: string | null; aimedDepartureTime: string | null; serviceJourney: { id: string; privateCode: string | null } }[] } | null }>(
+    FIND_QUERY,
+    { id: at.nsrId, start: new Date(ours - PLACE_MATCH_MS).toISOString() },
+    opts.fetchImpl,
+  );
+  const number = String(Number(ref.trainNumber));
+  const best = (data.stopPlace?.estimatedCalls ?? [])
+    .filter((c) => c.serviceJourney.privateCode && String(Number(c.serviceJourney.privateCode)) === number)
+    .map((c) => ({ c, d: Math.abs((ms(c.aimedDepartureTime) ?? ms(c.aimedArrivalTime) ?? 0) - ours) }))
+    .filter((x) => x.d <= PLACE_MATCH_MS)
+    .sort((a, b) => a.d - b.d)[0];
+  const result = best ? { id: best.c.serviceJourney.id, date: best.c.date } : null;
+  found.set(key, { at: now, hit: result });
+  if (found.size > 500) found.delete(found.keys().next().value!);
+  return result ? { ...result, own: false } : null;
+}
+
+/**
+ * Entur's data for a train's stops: an own Norwegian trip by its calls' minutes, any other train by stop place
+ * (so SJ's Oslo S gets Norway's published time and, where Entur has it, live data).
+ */
+export async function enturStops(
+  db: Db,
+  ref: { tripKey: string | null; trainNumber: string | null; serviceDate: string; stops: (StopForPlace & { country: string })[] },
+  opts: { now?: number; fetchImpl?: typeof fetch } = {},
+): Promise<Map<number, StopActuals>> {
+  if (!ref.stops.some((s) => s.nsrId)) return new Map();
+  const j = await enturJourneyFor(db, ref, opts);
+  if (!j) return new Map();
+  const calls = await serviceJourneyCalls(j.id, j.date, opts);
+  return j.own ? callsToActuals(ref.stops, calls, opts.now) : callsByPlace(ref.stops, calls, opts.now);
+}
+

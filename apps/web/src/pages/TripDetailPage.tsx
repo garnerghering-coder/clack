@@ -82,6 +82,7 @@ function StopRow({ s, color }: { s: LegStop; color: string }) {
         </Link>
         {s.role === 'board' && <span className="caption accent-text">{t('detail.gotOn')}</span>}
         {s.role === 'alight' && <span className="caption accent-text">{t('detail.gotOff')}</span>}
+        {ridden && s.reportSource === null && <span className="caption">{t('detail.noLiveData')}</span>}
         {s.deviations.filter((d) => d !== 'Spårändrat').length > 0 && (
           <span className="caption">{s.deviations.filter((d) => d !== 'Spårändrat').join(' · ')}</span>
         )}
@@ -188,6 +189,11 @@ export function TripDetailPage() {
   const boardStop = leg.stops.find((x) => x.role === 'board');
   const boardEstimate = ms(boardStop?.estimatedDep);
   const tracking = isLive(live) && live !== null;
+  // Ridden stops nobody reports live (Denmark, SJ in Norway), by country, and the report the estimates there follow.
+  const ridden = leg.stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
+  const beyond = [...new Set(ridden.filter((s) => s.reportSource === null).map((s) => s.country))];
+  const borderId = leg.borderEvidence?.alight?.stationId ?? leg.borderEvidence?.board?.stationId;
+  const borderAt = borderId ? leg.stops.find((s) => s.stationId === borderId)?.name : undefined;
   const arrivedBy = ms(leg.actualArr) ?? (tracking ? ms(live.arrivalEta) : null) ?? schedArr ?? 0;
   const stage: 'before' | 'during' | 'after' =
     live?.status === 'en_route' || live?.status === 'at_stop' ? 'during' : live?.status === 'arrived' || leg.actualArr || now > arrivedBy ? 'after' : 'before';
@@ -384,6 +390,14 @@ export function TripDetailPage() {
             <p>
               <span className="chip">{t(`detail.quality.${leg.dataQuality}`)}</span>{' '}
               <span className="caption">{t(`detail.qualityNote.${leg.dataQuality}`)}</span>
+            </p>
+          )}
+          {beyond.length > 0 && (
+            <p className="caption">
+              {t(borderAt ? 'detail.beyondLiveData' : 'detail.beyondLiveDataNoReport', {
+                countries: beyond.map((c) => t(`countries.${c}`, { defaultValue: c })).join(', '),
+                station: borderAt ?? '',
+              })}
             </p>
           )}
           {leg.isEstimatedGeometry && <p className="caption">{t('detail.estimatedDistance')}</p>}

@@ -219,6 +219,7 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
       gtfs_route_type: route.route_type!,
       gtfs_operator: agency,
       gtfs_route_short_name: route.route_short_name,
+      train_number: trip.trip_short_name || technical.get(trip.trip_id!) || trip.samtrafiken_internal_trip_number || null,
       has_non_rail_stop: stops.some((x) => kindOf.get(x.station) === 'bus_stop'),
       stop_sigs: [],
     });

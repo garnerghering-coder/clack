@@ -28,6 +28,11 @@ describe('category rules', () => {
   });
   it('excludes buses, taxis and trams', () => {
     expect(cat({ gtfs_operator: 'SJ AB', has_non_rail_stop: true })).toBe('EXCLUDED');
+    // SJ's replacement buses carry 6, 7 or 8 plus the train's number, even when they only call at stations.
+    expect(cat({ gtfs_route_type: '101', gtfs_operator: 'SJ AB', train_number: '60621' })).toBe('EXCLUDED');
+    expect(cat({ gtfs_route_type: '101', gtfs_operator: 'SJ AB', train_number: '80621' })).toBe('EXCLUDED');
+    expect(cat({ gtfs_route_type: '101', gtfs_operator: 'SJ AB', train_number: '621' })).toBe('intercity');
+    expect(cat({ gtfs_route_type: '106', gtfs_operator: 'SJ AB', train_number: '10344' })).not.toBe('EXCLUDED');
     expect(cat({ gtfs_route_type: '100', gtfs_operator: 'Taxi' })).toBe('EXCLUDED');
     expect(cat({ trv_type_of_traffic: ['Buss'] })).toBe('EXCLUDED');
     expect(cat({ gtfs_route_type: '900', gtfs_route_short_name: '7' })).toBe('EXCLUDED');

@@ -9,7 +9,7 @@ import { parseComposition, typeFromComposition, type Composition } from './train
 import { productOf } from '../search/timetable.js';
 import { onboardFromRow } from './onboard.js';
 import { updateRides } from './recording.js';
-import { callsToActuals, serviceJourneyCalls, serviceJourneyFor } from '../entur/calls.js';
+import { enturStops } from '../entur/calls.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
@@ -56,6 +56,11 @@ export interface StopActuals {
   composition: Composition | null;
   /** On-board facts from the departure row (catering, day-of notices). */
   onboard: OnboardFacts | null;
+  /** Who reports this stop live: Trafikverket, Entur, or nobody (a timetable-only match). */
+  source?: 'trafikverket' | 'entur' | null;
+  /** The time the stop's own country publishes for it, when it differs from our timetable (Norway's for SJ at Oslo S). */
+  advertisedArr?: number | null;
+  advertisedDep?: number | null;
 }
 
 const minuteKey = (sig: string, activity: string, ms: number) => `${sig.toLowerCase()}|${activity}|${Math.floor(ms / 60000)}`;
@@ -93,7 +98,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     if (!row) continue;
     const a =
       out.get(e.seq) ??
-      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null }).get(e.seq)!;
+      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null, source: 'trafikverket' }).get(e.seq)!;
     const actual = actualTime(row.TimeAtLocation, row.AdvertisedTimeAtLocation);
     const estimated = row.EstimatedTimeAtLocation ? Date.parse(row.EstimatedTimeAtLocation) : null;
     if (e.activity === 'Ankomst') {
@@ -153,10 +158,11 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
     return 'manual';
   }
   const stops = db
-    .select({ seq: legStops.seq, role: legStops.role, sig: stations.trvSignature, nsrId: stations.nsrId, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
+    .select({ seq: legStops.seq, role: legStops.role, stationId: legStops.stationId, sig: stations.trvSignature, nsrId: stations.nsrId, country: stations.country, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
     .where(eq(legStops.legId, legId))
+    .orderBy(legStops.seq)
     .all()
     .map((s) => ({ ...s, schedArr: s.schedArr?.getTime() ?? null, schedDep: s.schedDep?.getTime() ?? null }));
 
@@ -165,34 +171,81 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const events = eventsFor(stops);
   let matched = new Map<number, StopActuals>();
   if (!tooOld && events.length) matched = matchAnnouncements(stops, await fetchAnnouncements(events, opts.fetchImpl), leg.trainNumber);
-  // Norwegian stops: Entur's Journey Planner, for the stops Trafikverket doesn't cover.
+  // Norwegian stops: Entur, for what Trafikverket doesn't cover, and Norway's own published times for them.
+  let entur = new Map<number, StopActuals>();
   if (arr && now - arr < ENTUR_HISTORY_MS && leg.serviceDate) {
     try {
-      for (const [seq, a] of await norwayActuals(db, leg, stops, opts)) {
-        const have = matched.get(seq);
-        if (!have) matched.set(seq, a);
-        else {
-          have.actualArr ??= a.actualArr;
-          have.actualDep ??= a.actualDep;
-          have.platform ??= a.platform;
-          have.canceled ||= a.canceled;
-        }
-      }
+      entur = await enturStops(db, { tripKey: leg.timetableTripKey, trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops }, opts);
     } catch {
       // Entur down or over quota: Trafikverket's part still stands, and the next refresh tries again.
     }
   }
+  for (const [seq, e] of entur) {
+    const have = matched.get(seq);
+    if (!have) matched.set(seq, e);
+    else {
+      have.actualArr ??= e.actualArr;
+      have.actualDep ??= e.actualDep;
+      have.platform ??= e.platform;
+      have.canceled ||= e.canceled;
+    }
+  }
 
+  // Who can report each stop: Trafikverket in Sweden, Entur where it has live data, otherwise nobody (Denmark,
+  // Germany, and SJ's or Snälltåget's trains in Norway): those stops stay on the timetable and say so.
+  const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | null =>
+    s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? null);
+  // Norway's published time for a Norwegian stop of another country's train (SJ 645: Oslo S 00:14, not SJ's 00:02).
+  const adjusted = new Map<number, { arr: number | null; dep: number | null }>();
+  for (const s of stops) {
+    const e = entur.get(s.seq);
+    if (s.country !== 'NO' || !e || (e.advertisedArr === undefined && e.advertisedDep === undefined)) continue;
+    const arrT = s.schedArr === null ? null : (e.advertisedArr ?? s.schedArr);
+    const depT = s.schedDep === null ? null : (e.advertisedDep ?? s.schedDep);
+    if (arrT !== s.schedArr || depT !== s.schedDep) adjusted.set(s.seq, { arr: arrT, dep: depT });
+  }
+  for (const [seq, t] of adjusted) Object.assign(stops.find((s) => s.seq === seq)!, { schedArr: t.arr, schedDep: t.dep });
+
+  const ridden = stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
   const board = stops.find((s) => s.role === 'board');
   const alight = stops.find((s) => s.role === 'alight');
   const b = board ? matched.get(board.seq) : undefined;
   const a = alight ? matched.get(alight.seq) : undefined;
   const actualDep = b?.actualDep ?? null;
   const actualArr = a?.actualArr ?? null;
+  // Beyond live data: the stop nearest the unreported end that was reported, as evidence the train ran there.
+  const reported = (s: (typeof stops)[number]) => {
+    const m = matched.get(s.seq);
+    return m ? (m.actualDep ?? m.actualArr) : null;
+  };
+  const borderEvidence: NonNullable<typeof leg.borderEvidence> = {};
+  if (board && !sourceOf(board)) {
+    const first = ridden.find((s) => s !== board && sourceOf(s) && reported(s) !== null);
+    if (first) borderEvidence.board = { stationId: first.stationId, at: reported(first)! };
+  }
+  if (alight && !sourceOf(alight)) {
+    const last = [...ridden].reverse().find((s) => s !== alight && sourceOf(s) && reported(s) !== null);
+    if (last) borderEvidence.alight = { stationId: last.stationId, at: reported(last)! };
+  }
+  // Stops beyond live data after the last report: expected times from the delay there, never as actual times.
+  const lastReported = [...stops].reverse().find((s) => sourceOf(s) && reported(s) !== null);
+  if (lastReported) {
+    const m = matched.get(lastReported.seq)!;
+    const delay = m.actualDep !== null && lastReported.schedDep !== null ? m.actualDep - lastReported.schedDep : m.actualArr !== null && lastReported.schedArr !== null ? m.actualArr - lastReported.schedArr : null;
+    if (delay !== null)
+      for (const s of stops.filter((x) => x.seq > lastReported.seq && !sourceOf(x) && !matched.get(x.seq)?.actualArr && !matched.get(x.seq)?.actualDep)) {
+        const e =
+          matched.get(s.seq) ??
+          matched.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null, source: null }).get(s.seq)!;
+        e.estimatedArr = s.schedArr === null ? null : s.schedArr + Math.max(0, delay);
+        e.estimatedDep = s.schedDep === null ? null : s.schedDep + Math.max(0, delay);
+      }
+  }
   const dataQuality = actualDep !== null && actualArr !== null ? 'full' : actualDep !== null || actualArr !== null ? 'partial' : 'scheduled_only';
-  const arrived = actualArr !== null ? actualArr : arr;
+  const schedArrNow = alight?.schedArr ?? alight?.schedDep ?? arr;
+  const arrived = actualArr !== null ? actualArr : schedArrNow;
   const snapshot = (actualArr !== null && now - actualArr > SNAPSHOT_AFTER_MS) || Boolean(tooOld);
-  const status = snapshot ? 'snapshotted' : arr && now > arrived ? 'completed' : 'planned';
+  const status = snapshot ? 'snapshotted' : schedArrNow && now > arrived ? 'completed' : 'planned';
 
   // The coach order where you boarded can pin down the train type (SJ: X2000 or SJ 3000). Never over the owner's choice.
   const trip = leg.timetableTripKey ? db.select({ routeType: timetableTrips.routeType }).from(timetableTrips).where(eq(timetableTrips.key, leg.timetableTripKey)).get() : undefined;
@@ -216,6 +269,13 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         .where(and(eq(legStops.legId, legId), eq(legStops.seq, m.seq)))
         .run();
     }
+    for (const s of stops) {
+      const t = adjusted.get(s.seq);
+      tx.update(legStops)
+        .set({ reportSource: sourceOf(s), ...(t ? { schedArr: t.arr === null ? null : new Date(t.arr), schedDep: t.dep === null ? null : new Date(t.dep) } : {}) })
+        .where(and(eq(legStops.legId, legId), eq(legStops.seq, s.seq)))
+        .run();
+    }
     tx.update(legs)
       .set({
         status,
@@ -228,6 +288,10 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         arrPlatform: a?.platform ?? null,
         canceled: Boolean(b?.canceled || a?.canceled),
         trvTrainNumbers: [...new Set([...matched.values()].map((m) => m.trvTrainNumber).filter((n): n is string => !!n))],
+        borderEvidence: borderEvidence.board || borderEvidence.alight ? borderEvidence : null,
+        // Norway's published times for the stops you got on or off at, when they differ from our timetable.
+        ...(board && adjusted.has(board.seq) && board.schedDep !== null ? { schedDep: new Date(board.schedDep) } : {}),
+        ...(alight && adjusted.has(alight.seq) && alight.schedArr !== null ? { schedArr: new Date(alight.schedArr) } : {}),
         ...(composedType ? { trainType: composedType, trainTypeSource: 'composition' } : {}),
         ...(b?.onboard ? { onboard: b.onboard } : {}),
       })
@@ -236,25 +300,6 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   });
   updateRides(db, { legId, now });
   return dataQuality;
-}
-
-/**
- * Actual times from Journey Planner for the ridden stops of a Norwegian train (or the Norwegian part of a cross-border
- * one). A twin found by number only gets to fill Norwegian stops, and only by exact stop place and minute.
- */
-async function norwayActuals(
-  db: Db,
-  leg: { timetableTripKey: string | null; trainNumber: string | null; serviceDate: string | null },
-  stops: { seq: number; role: string; nsrId: string | null; schedArr: number | null; schedDep: number | null }[],
-  opts: { now?: number; fetchImpl?: typeof fetch },
-): Promise<Map<number, StopActuals>> {
-  const ridden = stops.filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight');
-  if (!leg.serviceDate || !ridden.some((s) => s.nsrId)) return new Map();
-  const own = leg.timetableTripKey?.startsWith('no:') ?? false;
-  const id = serviceJourneyFor(db, leg.timetableTripKey, leg.trainNumber, leg.serviceDate);
-  if (!id) return new Map();
-  const calls = await serviceJourneyCalls(id, leg.serviceDate, opts);
-  return callsToActuals(own ? ridden : ridden.filter((s) => s.nsrId), calls, opts.now);
 }
 
 /**

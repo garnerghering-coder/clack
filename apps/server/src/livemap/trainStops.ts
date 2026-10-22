@@ -1,9 +1,10 @@
-// A live-map train's whole route, stop by stop: the timetable's calls with Trafikverket's actual, estimated and
-// platform data laid over them, so the train's sheet can list where it has been and where it's going.
+// A live-map train's whole route, stop by stop: the timetable's calls with Trafikverket's (Sweden) and Entur's (Norway)
+// actual, estimated and platform data laid over them, so the train's sheet can list where it has been and where it's
+// going, and which stops nobody reports live (abroad), so those read as timetable times.
 import type { Db } from '../db/client.js';
 import { eventsFor, fetchAnnouncements, matchAnnouncements, type StopActuals, type StopForMatch } from '../legs/actuals.js';
 import { tripStops } from '../search/timetable.js';
-import { callsToActuals, serviceJourneyCalls, serviceJourneyFor } from '../entur/calls.js';
+import { enturStops } from '../entur/calls.js';
 import { stations } from '../db/schema.js';
 import { inArray } from 'drizzle-orm';
 
@@ -21,9 +22,11 @@ export interface TrainStopView {
   canceled: boolean;
   /** The train has left this stop (or, at the last one, arrived). */
   passed: boolean;
+  /** Who reports this stop live; null: nobody does (Denmark, SJ in Norway), so its times are the timetable's. */
+  source: 'trafikverket' | 'entur' | null;
 }
 
-type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null };
+type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null; source?: TrainStopView['source'] };
 
 /**
  * Lay actuals over the planned calls. A stop with no report counts as passed when a later one has been passed, or
@@ -35,6 +38,7 @@ export function mergeStops(planned: Planned[], actuals: Map<number, StopActuals>
     const last = i === planned.length - 1;
     const view: TrainStopView = {
       ...s,
+      source: s.source ?? null,
       actualArr: a?.actualArr ?? null,
       actualDep: a?.actualDep ?? null,
       estimatedArr: a?.estimatedArr ?? null,
@@ -74,27 +78,38 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
   } catch {
     // Trafikverket down: the plan alone is still worth showing.
   }
-  // Norwegian stops from Entur, where Trafikverket has nothing.
+  // Norwegian stops from Entur, where Trafikverket has nothing, with Norway's own published times for them.
+  let entur = new Map<number, StopActuals>();
   try {
-    const id = serviceJourneyFor(db, trip.key, trainNumber, trip.serviceDate);
-    if (id) {
-      const nsr = new Map(
-        db
-          .select({ id: stations.id, nsr: stations.nsrId })
-          .from(stations)
-          .where(inArray(stations.id, stops.map((s) => s.stationId)))
-          .all()
-          .map((r) => [r.id, r.nsr]),
-      );
-      const own = trip.key.startsWith('no:');
-      const forCalls = stops.map((s) => ({ seq: s.seq, schedArr: s.arr, schedDep: s.dep, nsrId: nsr.get(s.stationId) ?? null })).filter((s) => own || s.nsrId);
-      for (const [seq, a] of callsToActuals(forCalls, await serviceJourneyCalls(id, trip.serviceDate, opts), now)) if (!actuals.has(seq)) actuals.set(seq, a);
-    }
+    const nsr = new Map(
+      db
+        .select({ id: stations.id, nsr: stations.nsrId })
+        .from(stations)
+        .where(inArray(stations.id, stops.map((s) => s.stationId)))
+        .all()
+        .map((r) => [r.id, r.nsr]),
+    );
+    entur = await enturStops(
+      db,
+      { tripKey: trip.key, trainNumber, serviceDate: trip.serviceDate, stops: stops.map((s) => ({ seq: s.seq, schedArr: s.arr, schedDep: s.dep, nsrId: nsr.get(s.stationId) ?? null, country: s.country })) },
+      opts,
+    );
+    for (const [seq, a] of entur) if (!actuals.has(seq)) actuals.set(seq, a);
   } catch {
     // Entur down or over quota: as above.
   }
   const out = mergeStops(
-    stops.map((s) => ({ seq: s.seq, stationId: s.stationId, name: s.name, arr: s.arr, dep: s.dep })),
+    stops.map((s) => {
+      const e = s.country === 'NO' ? entur.get(s.seq) : undefined;
+      return {
+        seq: s.seq,
+        stationId: s.stationId,
+        name: s.name,
+        arr: s.arr === null ? null : (e?.advertisedArr ?? s.arr),
+        dep: s.dep === null ? null : (e?.advertisedDep ?? s.dep),
+        source: s.code && !s.code.includes('.') && s.country === 'SE' ? 'trafikverket' : (e?.source ?? null),
+      };
+    }),
     actuals,
     now,
   );

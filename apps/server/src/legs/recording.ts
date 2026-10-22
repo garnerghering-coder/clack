@@ -1,9 +1,10 @@
 // Did you ride it? (product brief §8.) A saved trip is a plan; it only counts as travelled with evidence. The
 // evidence and the thresholds live here, in one pure function, so they can be tested and tuned in one place.
 //
-// Evidence used: Trafikverket's actual departure at the stop you got on and actual arrival at the stop you got off
-// (matched by station, activity and minute, so it is this train), cancellations, and your own answers. A train's
-// position never counts as you being on it, and following a train on the map is not a trip at all.
+// Evidence used: the actual departure at the stop you got on and actual arrival at the stop you got off, from
+// Trafikverket (Sweden) or Entur (Norway), matched by station and time so it is this train; for a stop abroad with no
+// live data, the report at the nearest stop that has one (the border evidence); cancellations; and your own answers.
+// A train's position never counts as you being on it, and following a train on the map is not a trip at all.
 import { and, eq, ne, or } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { legs } from '../db/schema.js';
@@ -30,6 +31,12 @@ export interface RideEvidence {
   createdAt: number;
   /** Trafikverket no longer has the train (older than its ~4-day history): no more reports will come. */
   reportsGone: boolean;
+  /**
+   * Where you got on or off abroad, beyond live data (Copenhagen, SJ at Oslo S): when the train was reported at the
+   * nearest stop that has it (Hyllie, Arvika), as evidence it ran there.
+   */
+  borderBoard?: number | null;
+  borderAlight?: number | null;
   now: number;
 }
 
@@ -42,6 +49,8 @@ export function evaluateRide(e: RideEvidence): { ride: Ride; reason: string } {
   // Cancelled where you got on or off: maybe you took a replacement bus or another train. Ask.
   if (e.canceled) return { ride: 'review', reason: 'cancelled' };
   if (e.actualDep !== null && e.actualArr !== null) return { ride: 'auto', reason: 'actual_times' };
+  // Reported up to the border (and from it, boarding abroad): it ran, though the time abroad is the timetable's.
+  if ((e.actualDep ?? e.borderBoard ?? null) !== null && (e.actualArr ?? e.borderAlight ?? null) !== null) return { ride: 'auto', reason: 'border_reports' };
   if (!e.reportsGone && e.now - arrival < RECORDING.reviewAfterMs) return { ride: 'pending', reason: 'waiting_reports' };
   return { ride: 'review', reason: e.actualDep !== null || e.actualArr !== null ? 'partial_reports' : 'no_reports' };
 }
@@ -50,12 +59,14 @@ export function evaluateRide(e: RideEvidence): { ride: Ride; reason: string } {
 export function updateRides(db: Db, opts: { legId?: string; now?: number } = {}): number {
   const now = opts.now ?? Date.now();
   const rows = db
-    .select({ id: legs.id, ride: legs.ride, rideReason: legs.rideReason, schedArr: legs.schedArr, actualDep: legs.actualDep, actualArr: legs.actualArr, canceled: legs.canceled, createdAt: legs.createdAt, status: legs.status })
+    .select({ id: legs.id, ride: legs.ride, rideReason: legs.rideReason, schedArr: legs.schedArr, actualDep: legs.actualDep, actualArr: legs.actualArr, canceled: legs.canceled, createdAt: legs.createdAt, status: legs.status, border: legs.borderEvidence })
     .from(legs)
     .where(opts.legId ? eq(legs.id, opts.legId) : and(ne(legs.ride, 'confirmed'), ne(legs.ride, 'not_taken')))
     .all();
   let changed = 0;
   for (const r of rows) {
+    // Your answers (and a trip saved after it ran) stand as recorded.
+    if ((r.ride === 'confirmed' || r.ride === 'not_taken') && r.rideReason) continue;
     const next = evaluateRide({
       current: r.ride as Ride,
       schedArr: r.schedArr?.getTime() ?? null,
@@ -64,6 +75,8 @@ export function updateRides(db: Db, opts: { legId?: string; now?: number } = {})
       canceled: r.canceled,
       createdAt: r.createdAt.getTime(),
       reportsGone: r.status === 'snapshotted',
+      borderBoard: r.border?.board?.at ?? null,
+      borderAlight: r.border?.alight?.at ?? null,
       now,
     });
     if (next.ride === r.ride && next.reason === r.rideReason) continue;

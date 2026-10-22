@@ -20,6 +20,16 @@ describe('did you ride it: the rules', () => {
     // Reports can't come any more: ask straight away.
     expect(evaluateRide({ ...base, actualDep: null, actualArr: null, reportsGone: true, now: arr + 60_000 })).toEqual({ ride: 'review', reason: 'no_reports' });
   });
+  it('counts a trip that ends abroad, beyond live data, from the report at the border', () => {
+    // Malmö → København H: Denmark has no live data; Hyllie reported the train leaving.
+    const abroad = { ...base, actualArr: null, borderAlight: arr - 15 * 60_000 };
+    expect(evaluateRide(abroad)).toEqual({ ride: 'auto', reason: 'border_reports' });
+    // Boarding abroad works the same way, from the first reported stop.
+    expect(evaluateRide({ ...base, actualDep: null, borderBoard: arr - 30 * 60_000 })).toEqual({ ride: 'auto', reason: 'border_reports' });
+    // Not before the timetabled arrival, and a cancellation still asks.
+    expect(evaluateRide({ ...abroad, now: arr - 60_000 })).toEqual({ ride: 'pending', reason: 'not_arrived' });
+    expect(evaluateRide({ ...abroad, canceled: true })).toEqual({ ride: 'review', reason: 'cancelled' });
+  });
   it('asks about a cancelled train (a replacement bus is possible)', () => {
     expect(evaluateRide({ ...base, canceled: true })).toEqual({ ride: 'review', reason: 'cancelled' });
   });

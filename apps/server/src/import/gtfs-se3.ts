@@ -152,6 +152,7 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
       gtfs_route_type: route.route_type!,
       gtfs_operator: operator,
       gtfs_route_short_name: route.route_short_name,
+      train_number: trip.samtrafiken_internal_trip_number || trip.trip_short_name || null,
       has_non_rail_stop: stops.some((s) => stationById.get(s.station)?.kind === 'bus_stop'),
       stop_sigs: stops.map((s) => stationById.get(s.station)?.trvSignature ?? undefined),
     });

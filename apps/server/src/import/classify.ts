@@ -7,6 +7,8 @@ export interface TripFacts {
   gtfs_route_type: string;
   gtfs_operator?: string;
   gtfs_route_short_name?: string;
+  /** The public train number (replacement buses have their own ranges, e.g. SJ 6xxxx). */
+  train_number?: string | null;
   /** Trafikverket ProductInformation / TypeOfTraffic, only known inside Trafikverket's window. */
   trv_product?: string[];
   trv_type_of_traffic?: string[];
@@ -32,6 +34,9 @@ export function matches(match: Match, f: TripFacts): boolean {
         if (!asList(have).some((h) => asList(want).includes(h))) return false;
         break;
       }
+      case 'train_number_pattern':
+        if (!f.train_number || !new RegExp(String(want)).test(f.train_number)) return false;
+        break;
       case 'not_gtfs_route_short_name':
         if (asList(want).includes(f.gtfs_route_short_name)) return false;
         break;

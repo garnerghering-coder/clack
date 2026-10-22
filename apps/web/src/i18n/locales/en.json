@@ -158,7 +158,10 @@
     "scheduledArrival": "Due {{time}} (scheduled)",
     "actualTimes": "Actual times from Trafikverket (Sweden) and Entur (Norway).",
     "scheduledOnlyNote": "No actual times were reported, so these are the scheduled times.",
-    "seePassport": "See your Passport"
+    "seePassport": "See your Passport",
+    "noLiveData": "No live data here",
+    "beyondLiveData": "There’s no live data for this train in {{countries}}. Times there are the timetable’s, and expected times follow the delay reported at {{station}}.",
+    "beyondLiveDataNoReport": "There’s no live data for this train in {{countries}}, so times there are the timetable’s."
   },
   "passport": {
     "title": "Passport",
@@ -700,7 +703,8 @@
       "not_arrived": "Not arrived yet.",
       "actual_times": "It was reported leaving where you got on and arriving where you got off.",
       "added_after": "You added it after it ran.",
-      "you": "Your answer."
+      "you": "Your answer.",
+      "border_reports": "Reported up to the border. There’s no live data beyond it, so the time abroad is expected, not reported."
     },
     "state": {
       "pending": "Not recorded yet. {{why}}",

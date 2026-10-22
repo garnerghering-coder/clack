@@ -201,6 +201,11 @@ export const legs = sqliteTable(
     ride: text('ride').notNull().default('pending'),
     /** Why, for showing and testing: actual_times, added_after, you, cancelled, partial_reports, no_reports, waiting_reports, not_arrived. */
     rideReason: text('ride_reason'),
+    /**
+     * Where the trip runs beyond live data (abroad): the last (or first) stop that was reported, as evidence that the
+     * train ran; e.g. { alight: { stationId: Hyllie, at } } for a trip to Copenhagen.
+     */
+    borderEvidence: text('border_evidence', { mode: 'json' }).$type<{ board?: { stationId: string; at: number }; alight?: { stationId: string; at: number } } | null>(),
     createdAt: createdAt(),
   },
   (t) => [index('legs_user_dep').on(t.userId, t.schedDep)],
@@ -229,6 +234,8 @@ export const legStops = sqliteTable(
     trvTrainNumber: text('trv_train_number'),
     /** JSON array of Trafikverket deviation texts shown as notices / delay reasons. */
     deviations: text('deviations', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),
+    /** Who reports this stop live: trafikverket | entur; null when nobody can (Denmark, SJ in Norway). */
+    reportSource: text('report_source'),
   },
   (t) => [primaryKey({ columns: [t.legId, t.seq] })],
 );

@@ -10,6 +10,7 @@ import { loadOfficialMapping } from './official-mapping.js';
 import { hasBaseTracks, importTrvStations, trvLocationCount } from './trv-stations.js';
 import { basemapInfo, extractBasemap } from './basemap.js';
 import { refreshLogos } from './logos.js';
+import { dropTrafikverketBuses } from './busCheck.js';
 
 export interface RunOptions {
   forceDownload?: boolean;
@@ -56,12 +57,15 @@ export function runGtfsImport(db: Db, opts: RunOptions = {}): Promise<ImportSumm
     const { readAll } = await import('../lib/zip.js');
     const version = (await readAll(zip, 'feed_info.txt'))[0]?.feed_version;
     const hasStations = (db.select({ n: sql<number>`count(*)` }).from(stations).get()?.n ?? 0) > 0;
-    if (!opts.reimport && hasStations && version && version === lastImportedFeed(db)) {
-      log(`GTFS Sweden 3 feed ${version} already imported; skipping`);
-      return null;
+    let summary: ImportSummary | null = null;
+    if (!opts.reimport && hasStations && version && version === lastImportedFeed(db)) log(`GTFS Sweden 3 feed ${version} already imported; skipping`);
+    else {
+      log('GTFS Sweden 3: importing rail trips (about a minute)…');
+      summary = await importGtfsSweden3(db, zip, { officialSigs, log });
     }
-    log('GTFS Sweden 3: importing rail trips (about a minute)…');
-    return importGtfsSweden3(db, zip, { officialSigs, log });
+    // Every day, whether or not the feed changed: Trafikverket's word on which of those "trains" are buses.
+    await dropTrafikverketBuses(db, { log }).catch((e) => log(`Replacement-bus check skipped: ${(e as Error).message}`));
+    return summary;
   });
 }
 

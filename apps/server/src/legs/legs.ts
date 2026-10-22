@@ -226,6 +226,7 @@ const legColumns = {
   notes: legs.notes,
   ride: legs.ride,
   rideReason: legs.rideReason,
+  borderEvidence: legs.borderEvidence,
 };
 
 function attachRefs<T extends { operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
@@ -280,6 +281,7 @@ export function getLeg(db: Db, userId: string, id: string) {
       platform: legStops.platform,
       canceled: legStops.canceled,
       deviations: legStops.deviations,
+      reportSource: legStops.reportSource,
     })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
