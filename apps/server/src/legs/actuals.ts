@@ -254,7 +254,7 @@ async function norwayActuals(
   const id = serviceJourneyFor(db, leg.timetableTripKey, leg.trainNumber, leg.serviceDate);
   if (!id) return new Map();
   const calls = await serviceJourneyCalls(id, leg.serviceDate, opts);
-  return callsToActuals(own ? ridden : ridden.filter((s) => s.nsrId), calls);
+  return callsToActuals(own ? ridden : ridden.filter((s) => s.nsrId), calls, opts.now);
 }
 
 /**

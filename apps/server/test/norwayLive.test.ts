@@ -43,10 +43,26 @@ describe('Norway live data', () => {
         { seq: 3, schedArr: T('06:23'), schedDep: null, nsrId: 'NSR:StopPlace:9' },
       ],
       calls,
+      T('23:59'),
     );
     expect(m.get(1)).toMatchObject({ actualDep: T('23:04'), platform: '3' });
     expect(m.get(2)).toMatchObject({ actualArr: null, estimatedArr: T('06:25') });
     expect(m.has(3)).toBe(false);
+  });
+
+  it('treats an "actual" time still in the future as expected, not as reported', () => {
+    // Flytoget's calls carry actual times for stops the train hasn't reached yet.
+    const calls = [call({ aimedDep: T('07:00'), actualDep: T('07:00') }), call({ pos: 1, aimedArr: T('07:19'), actualArr: T('07:19'), realtime: false })];
+    const m = callsToActuals(
+      [
+        { seq: 1, schedArr: null, schedDep: T('07:00') },
+        { seq: 2, schedArr: T('07:19'), schedDep: null },
+      ],
+      calls,
+      T('07:05'),
+    );
+    expect(m.get(1)).toMatchObject({ actualDep: T('07:00') });
+    expect(m.get(2)).toMatchObject({ actualArr: null, estimatedArr: T('07:19') });
   });
 
   it('waits for Entur\'s reset time after a quota hit', () => {

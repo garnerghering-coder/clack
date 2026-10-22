@@ -88,7 +88,7 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
       );
       const own = trip.key.startsWith('no:');
       const forCalls = stops.map((s) => ({ seq: s.seq, schedArr: s.arr, schedDep: s.dep, nsrId: nsr.get(s.stationId) ?? null })).filter((s) => own || s.nsrId);
-      for (const [seq, a] of callsToActuals(forCalls, await serviceJourneyCalls(id, trip.serviceDate, opts))) if (!actuals.has(seq)) actuals.set(seq, a);
+      for (const [seq, a] of callsToActuals(forCalls, await serviceJourneyCalls(id, trip.serviceDate, opts), now)) if (!actuals.has(seq)) actuals.set(seq, a);
     }
   } catch {
     // Entur down or over quota: as above.

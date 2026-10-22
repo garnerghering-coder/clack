@@ -79,9 +79,11 @@ const minute = (t: number | null) => (t === null ? null : Math.floor(t / 60_000)
 /**
  * Per-stop actuals from the calls: a call belongs to a stop when its aimed arrival or departure is the stop's
  * scheduled minute (and it's the same stop place, when we know it). Expected times only count while the train runs
- * on real-time data. Pure, for tests.
+ * on real-time data. An "actual" time still in the future isn't one: Flytoget's calls carry them for stops the train
+ * hasn't reached (seen 2026-10-22), so those count as expected times instead. Pure, for tests.
  */
-export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[]): Map<number, StopActuals> {
+export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[], now = Date.now()): Map<number, StopActuals> {
+  const real = (t: number | null) => (t !== null && t <= now ? t : null);
   const out = new Map<number, StopActuals>();
   const used = new Set<NorwayCall>();
   for (const s of stops) {
@@ -93,12 +95,13 @@ export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[]): Map<
     );
     if (!c) continue;
     used.add(c);
+    const [actualArr, actualDep] = [real(c.actualArr), real(c.actualDep)];
     out.set(s.seq, {
       seq: s.seq,
-      actualArr: c.actualArr,
-      actualDep: c.actualDep,
-      estimatedArr: c.realtime && c.actualArr === null ? c.expectedArr : null,
-      estimatedDep: c.realtime && c.actualDep === null ? c.expectedDep : null,
+      actualArr,
+      actualDep,
+      estimatedArr: actualArr === null && (c.realtime || c.actualArr !== null) ? (c.expectedArr ?? c.actualArr) : null,
+      estimatedDep: actualDep === null && (c.realtime || c.actualDep !== null) ? (c.expectedDep ?? c.actualDep) : null,
       platform: c.platform,
       canceled: c.canceled,
       deviations: [],
