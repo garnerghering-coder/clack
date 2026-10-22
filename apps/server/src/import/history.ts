@@ -93,7 +93,32 @@ async function unpackInner(zipPath: string, name: string, out: string) {
 function coveredDates(db: Db): Set<string> {
   const out = new Set<string>();
   for (const r of db.$client.prepare(`select notes from import_log where source = ? and status = 'ok'`).all(HISTORY_SOURCE) as { notes: string }[])
-    for (const d of (JSON.parse(r.notes) as { dates?: string[] }).dates ?? []) out.add(d);
+    for (const d of trustedDates(JSON.parse(r.notes) as ImportNotes)) out.add(d);
+  return out;
+}
+
+interface ImportNotes {
+  snapshot?: string;
+  dates?: string[];
+}
+/**
+ * The dates an import really filled. A snapshot only holds its own day and later in full (one from 28 Sept has a
+ * third of the 25th's trains), so earlier imports that also took the days before their snapshot don't count for
+ * those days: they're imported again from the right snapshot. Pure.
+ */
+export function trustedDates(notes: ImportNotes): string[] {
+  const from = notes.snapshot ? ymdToIso(notes.snapshot) : null;
+  return (notes.dates ?? []).filter((d) => !from || d >= from);
+}
+
+/** The days to import around `date` from a snapshot of `snapshotDate`: from the snapshot's day on, up to two weeks
+ * either side of the asked-for date, not yet covered and before the current feed's first day. Pure. */
+export function datesToFill(date: string, snapshotDate: string, firstCurrent: string, covered: Set<string>): string[] {
+  const out: string[] = [];
+  for (let i = -SPAN_DAYS; i <= SPAN_DAYS; i++) {
+    const d = addDays(date, i);
+    if (d >= ARCHIVE_START && d >= snapshotDate && d < firstCurrent && !covered.has(d)) out.push(d);
+  }
   return out;
 }
 
@@ -101,7 +126,8 @@ function coveredDates(db: Db): Set<string> {
 export function hasSwedishTimetable(db: Db, date: string): boolean {
   if (coveredDates(db).has(date)) return true;
   return Boolean(
-    db.all(sql`select 1 from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where d.service_date = ${date} and t.source in ('gtfs_se3', ${HISTORY_SOURCE}) limit 1`).length,
+    // Only the current feed here: archive trips on a date can be a partial day (see trustedDates).
+    db.all(sql`select 1 from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where d.service_date = ${date} and t.source = 'gtfs_se3' limit 1`).length,
   );
 }
 
@@ -120,7 +146,7 @@ export interface HistorySummary {
 
 /**
  * Import the archive's timetable around `date`: from the snapshot for that date, its rail trips on the days within
- * SPAN_DAYS that have no Swedish timetable yet (and are before GTFS Sweden 3's first day).
+ * SPAN_DAYS, from the snapshot's own day on, that have no Swedish timetable yet (and are before GTFS Sweden 3's first day).
  */
 export async function importHistory(db: Db, date: string, opts: { fetchImpl?: typeof fetch; log?: (m: string) => void } = {}): Promise<HistorySummary | null> {
   const t0 = Date.now();
@@ -144,12 +170,7 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
 
   // The dates to fill: around the requested one, not yet covered, before the current feed's first day.
   const firstCurrent = (db.all<{ d: string | null }>(sql`select min(d.service_date) as d from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where t.source = 'gtfs_se3'`)[0]?.d ?? '9999-12-31');
-  const covered = coveredDates(db);
-  const wanted: string[] = [];
-  for (let i = -SPAN_DAYS; i <= SPAN_DAYS; i++) {
-    const d = addDays(date, i);
-    if (d >= ARCHIVE_START && d < firstCurrent && !covered.has(d)) wanted.push(d);
-  }
+  const wanted = datesToFill(date, ymdToIso(snap.ymd), firstCurrent, coveredDates(db));
   if (!wanted.length) return { snapshot: snap.ymd, dates: [], trips: 0, stationsAdded: 0, ms: Date.now() - t0 };
   const [from, to] = [wanted[0]!.replaceAll('-', ''), wanted.at(-1)!.replaceAll('-', '')];
   const wantedSet = new Set(wanted);
@@ -258,6 +279,10 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
     );
     const insertStop = sqlite.prepare(`insert or ignore into timetable_stop_times (trip_key, seq, station_id, arr_sec, dep_sec, no_pickup, no_dropoff) values (?, ?, ?, ?, ?, ?, ?)`);
     const insertDate = sqlite.prepare(`insert or ignore into timetable_trip_dates (trip_key, service_date) values (?, ?)`);
+    // A partial day left by an earlier import from a later snapshot: its trips come off these dates (the trips stay,
+    // for trips already saved against them) before this snapshot's full day goes in.
+    const clearDay = sqlite.prepare(`delete from timetable_trip_dates where service_date = ? and trip_key in (select key from timetable_trips where source = ?)`);
+    for (const d of wanted) clearDay.run(d, HISTORY_SOURCE);
     for (const p of patterns) {
       insertTrip.run(p.key, HISTORY_SOURCE, p.trip.trip_id, p.number, p.brand?.id ?? null, p.agency, p.route.route_long_name || p.route.route_short_name || null, p.route.route_type, p.category, snap.ymd);
       p.stops.forEach((x, i) => insertStop.run(p.key, i + 1, x.station, x.s[2], x.s[3], x.s[4] ? 1 : 0, x.s[5] ? 1 : 0));
