@@ -25,6 +25,8 @@ export interface AmenityClaim {
   note?: string;
   source: string;
   verified: string;
+  /** "owner": the owner read the source page and passed it on, because the page blocks automated reading. */
+  via?: 'owner';
 }
 export interface AmenityEntry {
   match: { operator: string; type?: string };

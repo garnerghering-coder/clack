@@ -1,12 +1,16 @@
 // Operator logos (SPEC §18): each brand's own app icon, downloaded from its website onto this computer.
 // Logos are trademarks, so they're fetched locally (data/cache/logos/) rather than committed to the repo.
-// Brands without a reachable icon keep the coloured initials badge.
+// Brands without a reachable icon keep the coloured initials badge. A few the owner supplied (because the brand's
+// website refuses automated downloads) live in data/logos/ and are used as they are.
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadBrands, type Brand } from '../dataFiles.js';
 import { CACHE_DIR } from './downloads.js';
+import { REPO_ROOT } from '../env.js';
 
 export const LOGO_DIR = path.join(CACHE_DIR, 'logos');
+/** Logos the owner supplied, committed with the app (Go-Ahead Nordic, whose site blocks downloads). */
+export const BUNDLED_LOGO_DIR = path.join(REPO_ROOT, 'data/logos');
 const MAX_BYTES = 1_000_000;
 const REFRESH_DAYS = 30;
 const TYPES: Record<string, string> = {
@@ -19,12 +23,13 @@ const TYPES: Record<string, string> = {
 };
 export const CONTENT_TYPES: Record<string, string> = { png: 'image/png', svg: 'image/svg+xml', ico: 'image/x-icon', jpg: 'image/jpeg', webp: 'image/webp' };
 
-/** The logo file for a brand, if one has been downloaded. */
+/** The logo file for a brand: downloaded, or else supplied with the app. */
 export function logoFile(id: string, dir = LOGO_DIR): string | null {
-  for (const ext of Object.keys(CONTENT_TYPES)) {
-    const f = path.join(dir, `${id}.${ext}`);
-    if (fs.existsSync(f)) return f;
-  }
+  for (const d of dir === LOGO_DIR ? [dir, BUNDLED_LOGO_DIR] : [dir])
+    for (const ext of Object.keys(CONTENT_TYPES)) {
+      const f = path.join(d, `${id}.${ext}`);
+      if (fs.existsSync(f)) return f;
+    }
   return null;
 }
 
@@ -106,6 +111,7 @@ export async function refreshLogos(log: (m: string) => void = () => {}, opts: { 
   for (const b of loadBrands()) {
     if (!b.website && !b.icon_url) continue;
     const existing = logoFile(b.id);
+    if (existing?.startsWith(BUNDLED_LOGO_DIR)) continue;
     if (existing && !opts.force && Date.now() - fs.statSync(existing).mtimeMs < REFRESH_DAYS * 86400_000) continue;
     try {
       if (await fetchLogo(b, { fetchImpl: opts.fetchImpl })) got++;
