@@ -107,6 +107,14 @@ isn't (2026-10-21).
   - the existing suites
 - [x] Tap targets are at least 44 px, and the sheets sit above the tab bar and safe areas.
 
+## Backend round (2026-10-22)
+
+- **Older trips:** Swedish dates back to 2012-08-10 come from the Sverige 2 archive on demand (`import/history.ts`); Norwegian or anything else no timetable has can be added by hand (`POST /legs/manual`, `components/ManualTrip.tsx`).
+- **Which train is yours:** the trip tracker takes a GPS fix only if it runs on the trip's date and is on or near its route (`pickFix` in `live/tracker.ts`); Norwegian trains are matched by Entur's service-journey id; a Swedish trip's Norwegian twin must share a stop at the same minute.
+- **Search:** a route with no trains also tries the towns' other stations (Stockholm → Stockholm City for commuter trains); station rows no longer show Trafikverket codes.
+- **Amenities:** Norwegian operators' typical amenities, each from the operator's own page.
+- **Station maps:** Göteborg C added; walk steps name their level and switch the plan to it.
+
 ## Known limits
 
 - **Native iOS:** not started, by owner decision. The web app installs to the home screen.
@@ -121,5 +129,7 @@ isn't (2026-10-21).
   - On the live map, a train without GPS is placed only when Entur sends a trip update for it (SJ Nord sent neither at night on 2026-10-22; to recheck in daytime).
   - CO₂ uses Sweden's factors until a Norwegian source is checked.
   - Train types are typical ones from the line and operator.
-  - Go-Ahead's website refuses the logo download, so it shows initials.
+  - Go-Ahead's website refuses automated requests, so it shows initials and has no amenity claims.
+- **Station maps:** Stockholm C and Göteborg C. Malmö C's OSM data has no level tags (its underground platforms can't be placed from it), and Oslo S maps tracks as `platform_edge` lines, which the draft script doesn't read yet.
+- **Archive timetables:** the first search in a new period downloads a ~50 MB snapshot (about half a minute); snapshots are kept in `data/cache/sverige2/`.
 - **Accessibility:** large text sizes were checked by layout, not with a screen reader pass.
