@@ -7,7 +7,7 @@ describe('typical train types', () => {
     expect(typicalTrainType('sj', 'high_speed', '423')).toBe('x2000');
     expect(typicalTrainType('sj', 'night', '1')).toBe('rc6_sleeper');
     expect(typicalTrainType('sl', 'commuter', '2580')).toBe('x60');
-    expect(typicalTrainType('vasttagen', 'commuter', '3592')).toBe('x61');
+    expect(typicalTrainType('vasttagen', 'commuter', '3592')).toBe('x61_vt');
     expect(typicalTrainType('vasttagen', 'regional', '7256')).toBe('regina');
     expect(typicalTrainType('snalltaget', 'intercity', '306')).toBe('loco_coaches');
   });
@@ -45,8 +45,8 @@ describe('typical train types', () => {
   });
 
   it('tells Göteborg pendeltåg and the Itino lines from Västtåg and Värmlandstrafik Reginas', () => {
-    expect(typicalTrainType('vasttagen', 'regional', '1', ['Alingsås', 'Göteborg C'])).toBe('x61');
-    expect(typicalTrainType('vasttagen', 'regional', '1', ['Göteborg C', 'Kungsbacka'])).toBe('x61');
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Alingsås', 'Göteborg C'])).toBe('x61_vt');
+    expect(typicalTrainType('vasttagen', 'regional', '1', ['Göteborg C', 'Kungsbacka'])).toBe('x61_vt');
     expect(typicalTrainType('vasttagen', 'regional', '1', ['Hallsberg', 'Lidköping'])).toBe('y31');
     expect(typicalTrainType('varmlandstrafik', 'regional', '1', ['Karlstad C', 'Torsby'])).toBe('y31');
     expect(typicalTrainType('vasttagen', 'regional', '1', ['Göteborg C', 'Töreboda'])).toBe('regina');

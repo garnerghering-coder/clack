@@ -18,6 +18,7 @@ import { X40Side } from './X40';
 import { X55Side } from './X55';
 import { X60Side } from './X60';
 import { X61Side } from './X61';
+import { X61VTSide } from './X61VT';
 import { X62Side } from './X62';
 
 type Side = ComponentType<{ livery: string; muted?: boolean; className?: string; label?: string }>;
@@ -43,7 +44,10 @@ const DETAILED: Record<string, Detailed> = {
   rc6_coaches: { component: Rc6CoachesSide as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
-  x61: { component: X61Side as Side, liveries: ['pagatag'], notFor: ['vasttagen'] }, // Västtåg's X61s have 7 door pairs
+  x61: { component: X61Side as Side, liveries: ['pagatag'] },
+  // Västtrafik's X61s: the X60's door layout. Unpainted while the yellow-to-blue repaint is under way and no side-on
+  // photo of the blue one exists.
+  x61_vt: { component: X61VTSide as Side, liveries: [] },
   x62: { component: X62Side as Side, liveries: ['norrtag'] },
   // DSB's ETs ran in Öresundståg paint before going to Skåne (2022–23); its 2000 blue-band livery is gone.
   x31: { component: X31Side as Side, liveries: ['oresundstag', 'dsb'] },
