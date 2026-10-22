@@ -1,5 +1,7 @@
 // Turns one free-text query + date into an interpretation (shown as chips), station suggestions and train results.
 import type { Db } from '../db/client.js';
+import { normName } from '../lib/geo.js';
+import type { HistoryState } from '../import/history.js';
 import { loadBrands } from '../dataFiles.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { buildOperatorMatcher, parseQuery } from './parse.js';
@@ -25,9 +27,11 @@ export interface SmartSearchResult {
   results: TripResult[] | null;
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
+  /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
+  history?: HistoryState['state'];
 }
 
-export function createSmartSearch(db: Db, index: () => StationIndex) {
+export function createSmartSearch(db: Db, index: () => StationIndex, history: (date: string) => HistoryState = () => ({ state: 'unavailable' })) {
   const matchOperator = buildOperatorMatcher(loadBrands());
   const best = (text: string | undefined, min = RESOLVE) => {
     if (!text?.trim()) return undefined;
@@ -35,6 +39,15 @@ export function createSmartSearch(db: Db, index: () => StationIndex) {
     return hit && hit.score >= min ? hit : undefined;
   };
   const strip = <T extends { score?: number }>(h: T | undefined) => (h ? (({ score, ...rest }) => (void score, rest))(h) : undefined) as StationHit | undefined;
+
+  /** Up to two other stations named after the same town, busiest first. */
+  const sameTown = (s: StationHit): StationHit[] => {
+    const town = normName(s.name.split(/\s+/)[0]!);
+    return searchStations(index(), town, 8)
+      .filter((h) => h.id !== s.id && normName(h.name).startsWith(`${town} `))
+      .slice(0, 2)
+      .map((h) => strip(h)!);
+  };
 
   return (query: string, date: string): SmartSearchResult => {
     const q = parseQuery(query, matchOperator);
@@ -75,12 +88,36 @@ export function createSmartSearch(db: Db, index: () => StationIndex) {
 
     const windowStart = addDays(todayIn('Europe/Stockholm'), -1);
     if (date < windowStart && (q.trainNumber || (from && to))) {
-      out.outsideTimetable = true;
-      out.results = [];
-      return out;
+      // Older days come from the archive, fetched the first time a day is asked for.
+      const h = history(date);
+      out.history = h.state;
+      if (h.state !== 'ready') {
+        out.outsideTimetable = true;
+        out.results = [];
+        return out;
+      }
     }
     if (q.trainNumber) out.results = searchByNumber(db, q.trainNumber, date, { operatorId: q.operatorId, fromId: from?.id, toId: to?.id });
-    else if (from && to) out.results = searchByRoute(db, from.id, to.id, date, { operatorId: q.operatorId });
+    else if (from && to) {
+      out.results = searchByRoute(db, from.id, to.id, date, { operatorId: q.operatorId });
+      // Nothing between those two stations: try the town's other stations ("Stockholm" for a commuter train means
+      // Stockholm City, not Stockholm C; "Södertälje" may be Södertälje Centrum).
+      if (!out.results.length) {
+        const seen = new Set<string>();
+        const merged = [];
+        for (const a of [from, ...sameTown(from)])
+          for (const b of [to, ...sameTown(to)]) {
+            if (a.id === from.id && b.id === to.id) continue;
+            for (const r of searchByRoute(db, a.id, b.id, date, { operatorId: q.operatorId }))
+              // One row per train: the first (busiest) pair of stations that has it.
+              if (!seen.has(`${r.key}|${r.serviceDate}`)) {
+                seen.add(`${r.key}|${r.serviceDate}`);
+                merged.push(r);
+              }
+          }
+        out.results = merged.sort((x, y) => x.from.time - y.from.time);
+      }
+    }
     return out;
   };
 }

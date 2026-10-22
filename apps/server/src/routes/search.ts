@@ -2,6 +2,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
 import { todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
+import { ensureHistory } from '../import/history.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
 import { productOf, tripStops } from '../search/timetable.js';
 import { typicalTrainType } from '../legs/trainTypes.js';
@@ -13,7 +14,7 @@ const DATE = /^\d{4}-\d{2}-\d{2}$/;
 export const searchRoutes =
   (db: Db): FastifyPluginAsync =>
   async (app) => {
-    const search = createSmartSearch(db, stationIndexCache(db));
+    const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log: (m) => app.log.warn(m) }));
 
     app.get<{ Querystring: { q?: string; date?: string } }>('/search', async (req, reply) => {
       const date = req.query.date ?? todayIn('Europe/Stockholm');

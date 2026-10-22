@@ -72,6 +72,8 @@ export interface SearchResponse {
   suggestions: StationHit[];
   results: TripResult[] | null;
   outsideTimetable: boolean;
+  /** Before the current timetable: the archive timetable for that day is ready, loading, failed or unavailable (before 2012-08-10). */
+  history?: 'ready' | 'loading' | 'failed' | 'unavailable';
 }
 
 export interface TripStop {

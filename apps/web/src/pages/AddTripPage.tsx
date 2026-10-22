@@ -298,6 +298,8 @@ export function AddTripPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [filter, setFilter] = useState<Filter>('all');
+  // Bumped to ask again while an older day's timetable is fetched from the archive.
+  const [retry, setRetry] = useState(0);
   const [picked, setPicked] = useState<TripResult | null>(null);
   const [saved, setSaved] = useState<LegDetail | null>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -366,7 +368,14 @@ export function AddTripPage() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [query, date]);
+  }, [query, date, retry]);
+
+  // An older day's timetable is on its way: ask again until it's in.
+  useEffect(() => {
+    if (resp?.history !== 'loading' && resp?.history !== 'failed') return;
+    const timer = setTimeout(() => setRetry((n) => n + 1), resp.history === 'loading' ? 3000 : 15_000);
+    return () => clearTimeout(timer);
+  }, [resp]);
 
   const interp = resp?.interpretation;
   const pickStation = (s: StationHit) => {
@@ -470,7 +479,11 @@ export function AddTripPage() {
                 </>
               )}
 
-              {resp?.outsideTimetable && <p className="banner">{t('add.outsideTimetable')}</p>}
+              {resp?.outsideTimetable && (
+                <p className="banner" role="status">
+                  {t(resp.history === 'loading' ? 'add.historyLoading' : resp.history === 'failed' ? 'add.historyFailed' : 'add.historyUnavailable')}
+                </p>
+              )}
               {resp?.results && resp.results.length > 0 && (
                 <>
                   <div className="chip-row filters">

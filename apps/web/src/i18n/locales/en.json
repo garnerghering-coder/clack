@@ -68,7 +68,6 @@
     "filterCommuter": "Commuter",
     "noDirect": "No direct train found. Add each train separately.",
     "noTrain": "No train {{number}} on this date.",
-    "outsideTimetable": "Searching old timetables comes in a later step. For now, choose a date from yesterday onwards.",
     "searchError": "Timetable search needs a connection to the Clack server.",
     "alsoKnownAs": "also {{numbers}}",
     "stopsBetween_one": "{{count}} stop",
@@ -90,7 +89,10 @@
     "noAlighting": "no alighting",
     "tapFrom": "Tap the stop where you got on.",
     "tapTo": "Tap the stop where you got off.",
-    "tapToChoose": "Choose where you got on and off"
+    "tapToChoose": "Choose where you got on and off",
+    "historyLoading": "Fetching this day’s timetable from Trafiklab’s archive. The first search in a new month takes about half a minute.",
+    "historyFailed": "Couldn’t fetch the archive timetable for this day. Trying again shortly…",
+    "historyUnavailable": "Timetables go back to 10 August 2012. For an earlier trip, add it by hand."
   },
   "products": {
     "high_speed": "High-speed",

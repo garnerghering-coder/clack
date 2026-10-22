@@ -68,7 +68,6 @@
     "filterCommuter": "Pendeltåg",
     "noDirect": "Inget direkttåg hittades. Lägg till varje tåg för sig.",
     "noTrain": "Inget tåg {{number}} det här datumet.",
-    "outsideTimetable": "Sökning i gamla tidtabeller kommer i ett senare steg. Välj tills vidare ett datum från i går och framåt.",
     "searchError": "Tidtabellssökningen behöver anslutning till Clack-servern.",
     "alsoKnownAs": "även {{numbers}}",
     "stopsBetween_one": "{{count}} stopp",
@@ -90,7 +89,10 @@
     "noAlighting": "ingen avstigning",
     "tapFrom": "Tryck på stationen där du klev på.",
     "tapTo": "Tryck på stationen där du klev av.",
-    "tapToChoose": "Välj var du klev på och av"
+    "tapToChoose": "Välj var du klev på och av",
+    "historyLoading": "Hämtar dagens tidtabell från Trafiklabs arkiv. Första sökningen i en ny månad tar ungefär en halv minut.",
+    "historyFailed": "Kunde inte hämta arkivets tidtabell för den här dagen. Försöker igen strax…",
+    "historyUnavailable": "Tidtabellerna går tillbaka till 10 augusti 2012. Lägg till en tidigare resa för hand."
   },
   "products": {
     "high_speed": "Snabbtåg",
