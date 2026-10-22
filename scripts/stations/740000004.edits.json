@@ -1,0 +1,246 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Alvesta (scripts/stations/draft_from_osm.py). Two island platforms, tracks 1/2 and 3/4, under one footbridge (OSM: layer 1). OSM maps the bridge and its stairs and escalators down to both islands (escalators surveyed on site with StreetComplete, June 2026), but not the stair towers at the bridge's two street ends (west by the station building and bus stops A–C, east on Sjögatan) nor any lift. Länstrafiken Kronoberg's station page lists four lifts (west stair tower, east stair tower, and one from the bridge down to each island) and its terminal map (December 2023) shows stairs and lifts at both ends and in the middle; those are added by hand. OSM's 3a/3b and 4a/4b halves are joined as platforms 3 and 4, because the app matches tracks without their sector letter. path_radius 55 keeps the footways on the Sjögatan side. No underpass, so no L-1.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 55,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridge over tracks 1–4",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street and platforms",
+      "order": 0
+    }
+  ],
+  "rotation": -29,
+  "connections": [
+    {
+      "from": {
+        "at": [
+          -11.7,
+          11.7
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          -11.7,
+          11.7
+        ],
+        "level": "1"
+      },
+      "kind": "stairs",
+      "seconds": 40,
+      "note": "West end of the footbridge, by the station building and bus stops A–C: stairs up to the bridge (Länstrafiken Kronoberg's terminal map, December 2023); OSM joins the footway to the bridge with no stairs. Time like the OSM stairs down to the platforms (~7 m climb).",
+      "meters": 20
+    },
+    {
+      "from": {
+        "at": [
+          -11.7,
+          11.7
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          -11.7,
+          11.7
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "note": "Lift 1, in the west stair tower by the station building (Länstrafiken Kronoberg's station page and terminal map, December 2023); missing in OSM."
+    },
+    {
+      "from": {
+        "at": [
+          71.7,
+          54.4
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          71.7,
+          54.4
+        ],
+        "level": "1"
+      },
+      "kind": "stairs",
+      "seconds": 40,
+      "note": "East end of the footbridge, on Sjögatan: stairs up to the bridge (Länstrafiken Kronoberg's terminal map, December 2023); OSM joins the footway to the bridge with no stairs. Time like the OSM stairs down to the platforms.",
+      "meters": 20
+    },
+    {
+      "from": {
+        "at": [
+          71.7,
+          54.4
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          71.7,
+          54.4
+        ],
+        "level": "1"
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "note": "Lift 4, in the east stair tower on Sjögatan (Länstrafiken Kronoberg's station page and terminal map, December 2023); missing in OSM."
+    },
+    {
+      "from": {
+        "at": [
+          8.3,
+          22.0
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "1",
+        "near": [
+          11,
+          17
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "note": "Lift from the footbridge down to the tracks 1/2 island (Länstrafiken Kronoberg's station page: lifts 2 and 3 go from the bridge down to the two islands); missing in OSM, placed under the bridge."
+    },
+    {
+      "from": {
+        "at": [
+          21.2,
+          27.9
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "3",
+        "near": [
+          24,
+          23
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "note": "Lift from the footbridge down to the tracks 3/4 island (Länstrafiken Kronoberg's station page: lifts 2 and 3 go from the bridge down to the two islands); missing in OSM, placed under the bridge."
+    }
+  ],
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Länstrafiken Kronoberg, 'Avgångsplatser och service, Alvesta station' (valid from 10 December 2023; PDF supplied by the owner, also linked from Jernhusen's station page): track order, the footbridge's stairs and lifts at both ends and in the middle, and the waiting room, toilets, ticket machines and shop in the station building. Read off the plan, nothing traced. Not ODbL: Länstrafiken hasn't licensed the plan; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://lanstrafikenkron.se/alvesta-station",
+      "retrieved": "2026-10-22",
+      "note": "Länstrafiken Kronoberg's Alvesta station page: four lifts (lift 1 in the west stair tower, lifts 2 and 3 from the bridge to the two islands, lift 4 in the east stair tower), ticket machines in the waiting room and on the bridge, two toilets, waiting-room hours Mo-Fr 03.30-01.00, Sa 03.30-23.45, Su 06.30-01.00 (Jernhusen's page gives the station 03.15 instead of 03.30 on weekdays and Saturdays; the later time is used). Lift positions on the islands are not given and are placed under the bridge."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/alvesta-station/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list of shops in the station building (Antikvariatet Bokpärlan, Alvesta kommuns utställningshall, Pressbyrån) and their hours; toilet page (toilet and accessible toilet, card payment; its accessibility page says coins, so the fee is left unknown). Pressbyrån is placed at OpenStreetMap's point; the other places in the building are not placed in any source, so they are pins near the middle of the building."
+    },
+    {
+      "type": "trafikverket",
+      "retrieved": "2026-10-22",
+      "note": "Trafikverket TrainStation (Av) PlatformLine 1–4 with sectors, and TrackAtLocation values of 2026-10-21 (1b, 2, 3a/3b, 4a/4b), checked against OSM's platform refs and stop positions."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First map from OSM (2026-10-20 extract): the bridge's stair towers and the 4 lifts added by hand from Länstrafiken Kronoberg's station page and terminal map (6 connections); OSM's 3a/3b and 4a/4b halves joined as platforms 3 and 4; levels named; map turned so the tracks run up the screen. Waiting room, toilets, 2 ticket machines and 2 shops added from Länstrafiken's and Jernhusen's pages (Pressbyrån from OSM)."
+    }
+  ],
+  "platform_refs": {
+    "110582081": "3",
+    "360040467": "3",
+    "360040468": "4",
+    "360040469": "4"
+  },
+  "pois": [
+    {
+      "id": "lk-av-waiting",
+      "category": "waiting",
+      "name": "Waiting room",
+      "level": "0",
+      "x": 6.0,
+      "y": -21.0,
+      "opening_hours": "Mo-Fr 03:30-01:00; Sa 03:30-23:45; Su 06:30-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "jh-av-bokparlan",
+      "category": "shop",
+      "name": "Antikvariatet Bokpärlan",
+      "level": "0",
+      "x": 9.0,
+      "y": -26.0,
+      "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22",
+      "icon": "books"
+    },
+    {
+      "id": "jh-av-utstallningshall",
+      "category": "other",
+      "name": "Alvesta kommuns utställningshall",
+      "level": "0",
+      "x": 12.0,
+      "y": -31.0,
+      "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "lk-av-toilets",
+      "category": "toilet",
+      "name": "Toilets",
+      "level": "0",
+      "x": 2.0,
+      "y": -14.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "fee": null
+    },
+    {
+      "id": "lk-av-ticket-hall",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "0",
+      "x": 4.0,
+      "y": -17.5,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "lk-av-ticket-bridge",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "1",
+      "x": 14.5,
+      "y": 25.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ]
+}

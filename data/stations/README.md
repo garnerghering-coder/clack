@@ -17,10 +17,14 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
   and is drawn in its real shape; others are pins. Hand-drawn outlines go in the edits file's `outlines`
   (`[{ "poi": id, "points": [[x, y], …] }]`), or whole places with an `outline` in its `pois`.
 - **Station plans the owner supplied** (Jernhusen's Stockholm C plan, January 2026; the regional transport
-  authorities' terminal maps) are used, at the owner's decision (2026-10-22), for which shop is in which unit, the
+  authorities' terminal maps, among them Länstrafiken Kronoberg's for Alvesta, December 2023, and Växjö, February
+  2026, Jönköpings länstrafik's for Jönköping C, December 2025, and Hallandstrafiken's for Halmstad C, August 2025)
+  are used, at the owner's decision (2026-10-22), for which shop is in which unit, the
   units' outlines, and for checking platforms, lifts, stairs and entrances. Each map's `sources` says which plan
   and how it was placed. Those parts are **not** covered by the ODbL below: the plans' owners haven't licensed them,
   so ask them before the maps are published beyond this demo.
+- **Operators' station pages** (Länstrafiken Kronoberg, JLT and others) are read by hand for lifts, ticket machines
+  and toilets; each map's `sources` lists the ones used, with the date.
 - **Walking seconds** are normal pace without luggage: 1.3 m/s on foot, stairs at least 18 s a flight, escalators
   20 s, lifts 45 s. They're worked out from the map, not timed on site.
 

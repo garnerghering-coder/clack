@@ -1,0 +1,138 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Jönköping C (scripts/stations/draft_from_osm.py). One long platform at street level beside the station hall and the bus terminal: track 2 along its north side (OSM pieces 2a and 2b, joined as platform 2 because the app matches tracks without their sector letter) and track 1 along the south side of its east end. OSM joins neither of the two doors onto the platform (from the station hall and at the east end of the bus terminal) to the platform; those are added by hand. The upper floor and the footbridges (over the tracks to the lake side, and over Järnvägsgatan to Juneporten) are left out: OSM maps them, and JLT says the station has a lift and an escalator, but no source shows where the hall connects to the upper floor, and the platform doesn't need them.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Station, bus terminal and platform",
+      "order": 0
+    }
+  ],
+  "rotation": -102,
+  "platform_refs": {
+    "39376130": "2",
+    "39376131": "2"
+  },
+  "connections": [
+    {
+      "from": {
+        "platform": "2",
+        "near": [
+          -95.5,
+          -27
+        ]
+      },
+      "to": {
+        "at": [
+          -83.9,
+          -20.9
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "Door from the station hall onto the platform (OSM entrance node 4035652613 on the hall's platform side); OSM doesn't join it to the hall's corridor or the platform."
+    },
+    {
+      "from": {
+        "platform": "2",
+        "near": [
+          80,
+          0
+        ]
+      },
+      "to": {
+        "at": [
+          77.0,
+          4.5
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "Door at the east end of the bus terminal (OSM entrance node 2195817729), beside the platform; OSM doesn't join it to the platform."
+    },
+    {
+      "from": {
+        "at": [
+          -40.9,
+          -9.6
+        ],
+        "level": "0"
+      },
+      "to": {
+        "at": [
+          -41.0,
+          -13.2
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "OSM gap: the station's and the bus terminal's corridors end 3.5 m apart at the door between the two buildings."
+    },
+    {
+      "from": {
+        "platform": "1",
+        "near": [
+          93,
+          5
+        ]
+      },
+      "to": {
+        "at": [
+          77.0,
+          4.5
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "note": "The same east door of the bus terminal, to the west end of the track 1 side of the platform, 15 m away; OSM doesn't join them."
+    }
+  ],
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Jönköpings länstrafik, terminal map 'Jönköping Resecentrum' (valid from December 2025; PDF supplied by the owner, also linked from Jernhusen's station page): track order (2a, 2b, 1) and the station and bus terminal along the platform; it shows no stairs, lifts or shops. Not ODbL: JLT hasn't licensed the plan; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/jonkoping-resecentrum/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list of food and shops (Espresso House, Pressbyrån; no hours given) and toilet page (toilet and accessible toilet, card payment). Places are positioned from OpenStreetMap's points."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jlt.se/res-med-oss/tillganglighet--ledsagning/tillganglighet-pa-vara-stationer/",
+      "retrieved": "2026-10-22",
+      "note": "JLT's station accessibility list: lift and escalator yes (positions not given), ticket machine 'opposite the café' (not placed: which side isn't clear), accessible toilet paid by SMS or coins (Jernhusen says card; fee left unknown)."
+    },
+    {
+      "type": "trafikverket",
+      "retrieved": "2026-10-22",
+      "note": "Trafikverket TrainStation (Jö) PlatformLine 1, 2, 2a, 2b, and TrackAtLocation values of 2026-10-21 (1, 2a, 2b), matched to OSM's platform refs."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First map from OSM (2026-10-20 extract): platform pieces 2a/2b joined as platform 2; the hall's and the bus terminal's doors joined to the platform by hand (4 connections); upper floor and footbridges left out. Toilets named; shops checked against Jernhusen's list (both in OSM)."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm14045774891",
+      "category": "toilet",
+      "name": "Toilets",
+      "level": "0",
+      "x": -30.1,
+      "y": -18.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "fee": null
+    }
+  ]
+}

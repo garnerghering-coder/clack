@@ -1,0 +1,317 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Växjö (scripts/stations/draft_from_osm.py). Three platforms (OSM leaves them unnumbered; numbered here from OSM's stop positions and Trafikverket's tracks): track 1 on the station side, an island for tracks 2 and 3, and track 4 on the south side. Two footbridges cross the tracks: Klosterbron from the stations- och kommunhus (stairs to all three platforms) and Västerbron at the west end (stairs to the island). Platform 1 is reached at street level from the hall's south door. OSM maps no lifts; Länstrafiken Kronoberg's station page says there are lifts from both bridges to the tracks, so lifts are added next to OSM's stairs where a bridge meets a platform. OSM's escalator from Klosterbron down into the hall, and the stairs at Västerbron's north end, are added by hand because the draft can't tell their levels.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridges (Klosterbron, Västerbron)",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street, station hall and platforms",
+      "order": 0
+    }
+  ],
+  "rotation": -87,
+  "platform_refs": {
+    "147190433": "1",
+    "333033981": "2;3",
+    "941072883": "4"
+  },
+  "connections": [
+    {
+      "from": {
+        "at": [
+          49.3,
+          28.9
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          30.8,
+          25.1
+        ],
+        "level": "0"
+      },
+      "kind": "escalator",
+      "seconds": 28,
+      "meters": 19,
+      "note": "OSM's escalator (way 1069574905) from the north end of Klosterbron down into the hall; the draft can't tell its levels because its top is on an untagged footway. Jernhusen's cash-machine page (2026-10-22) also places the cash machine 'by the escalator'."
+    },
+    {
+      "from": {
+        "at": [
+          -165.1,
+          33.5
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          -160.3,
+          28.8
+        ],
+        "level": "0"
+      },
+      "kind": "stairs",
+      "seconds": 45,
+      "meters": 37,
+      "note": "OSM's stairs (way 941072889) from the north end of Västerbron down to the street at the west end of platform 1; the draft drops them because their foot isn't on a kept path, so they are joined to the nearest footway, 5 m away. Time: the same ~7 m climb as the 43-step platform stairs (~34 s) plus the landings."
+    },
+    {
+      "from": {
+        "at": [
+          47.2,
+          47.1
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "1",
+        "near": [
+          40,
+          47
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "meters": 5,
+      "note": "Lift from Klosterbron to platform 1: Länstrafiken Kronoberg's Växjö station page (retrieved 2026-10-22) says there are lifts to all tracks from both bridges; OSM maps none, so it is placed next to OSM's stairs (exact position not known)."
+    },
+    {
+      "from": {
+        "at": [
+          45.6,
+          63.3
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "2–3",
+        "near": [
+          43,
+          64
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "meters": 5,
+      "note": "Lift from Klosterbron to the tracks 2/3 island; source and placement as for platform 1."
+    },
+    {
+      "from": {
+        "at": [
+          43.3,
+          81.1
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "4",
+        "near": [
+          41,
+          81
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "meters": 5,
+      "note": "Lift from Klosterbron to platform 4; source and placement as for platform 1."
+    },
+    {
+      "from": {
+        "at": [
+          -165.7,
+          49.2
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "2–3",
+        "near": [
+          -163,
+          50
+        ]
+      },
+      "kind": "lift",
+      "seconds": 45,
+      "meters": 5,
+      "note": "Lift from Västerbron to the tracks 2/3 island; source as for platform 1, placed next to OSM's stairs. Länstrafiken also says Västerbron has lifts to the other tracks, but OSM maps no stairs or landing from Västerbron to platforms 1 or 4, so those aren't modelled."
+    }
+  ],
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Länstrafiken Kronoberg, 'Avgångsplatser Växjö station' (valid from 23 February 2026; PDF supplied by the owner, also linked from Jernhusen's station page): track order, the two footbridges, the Kundcenter's place in the hall and the ticket machines on Västerbron and Klosterbron, read off the plan (positions approximate, nothing traced). Not ODbL: Länstrafiken hasn't licensed the plan; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://lanstrafikenkron.se/vaxjo-station",
+      "retrieved": "2026-10-22",
+      "note": "Länstrafiken Kronoberg's Växjö station page: lifts from both footbridges to the tracks, ticket machines (in the hall, outside towards track 1, on both bridges), two toilets in the station, Kundcenter hours (Mo-Fr 6-19, Sa 8-14, Su 12-18; the same as Jernhusen's page)."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/vaxjo-station/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list of shops and food at Växjö station (Espresso House, Nutella Crepes House, Pressbyrån, Subway) and their hours; also its toilet (card payment), cash-machine ('in the station by the escalator') and car-hire (Sixt) pages. Places are positioned from OpenStreetMap's points; no shop outlines are mapped in OSM or the plan, so they are pins."
+    },
+    {
+      "type": "trafikverket",
+      "retrieved": "2026-10-22",
+      "note": "Trafikverket TrainStation (Vö) PlatformLine 1–4 with sectors a–c, and the TrackAtLocation values of 2026-10-21, matched to OSM's stop positions to number the platforms."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First map from OSM (2026-10-20 extract): platforms numbered 1, 2–3 and 4 from OSM's stop positions; 4 lifts (Länstrafiken Kronoberg's station page), OSM's hall escalator and Västerbron's north stairs added by hand; shops, food and services checked against Jernhusen's and Länstrafiken's pages and the February 2026 plan (12 places)."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm9135019575",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": 20.9,
+      "y": 8.3,
+      "opening_hours": "Mo-Fr 06:00-20:00; Sa 08:30-19:00; Su 08:00-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22",
+      "icon": "coffee"
+    },
+    {
+      "id": "osm9547866817",
+      "category": "restaurant",
+      "name": "Nutella Crepes House",
+      "level": "0",
+      "x": 96.5,
+      "y": 31.1,
+      "opening_hours": "Mo-Th 12:00-21:00; Fr,Sa 13:00-23:00; Su 13:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm9135019574",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 43.7,
+      "y": 11.1,
+      "opening_hours": "Mo-Fr 05:30-22:00; Sa 07:00-22:00; Su 07:45-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22",
+      "icon": "kiosk"
+    },
+    {
+      "id": "osm13081387518",
+      "category": "restaurant",
+      "name": "Subway",
+      "level": "0",
+      "x": 10.9,
+      "y": 6.8,
+      "opening_hours": "Mo-Th 08:30-20:00; Fr 08:30-03:30; Sa 09:30-03:30; Su 10:00-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22",
+      "icon": "sandwich"
+    },
+    {
+      "id": "lk-vo-kundcenter",
+      "category": "ticket",
+      "name": "Länstrafiken Kronoberg Kundcenter",
+      "level": "0",
+      "x": 6.0,
+      "y": 14.0,
+      "opening_hours": "Mo-Fr 06:00-19:00; Sa 08:00-14:00; Su 12:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm9547866821",
+      "category": "other",
+      "name": "Sixt car hire",
+      "level": "0",
+      "x": 3.6,
+      "y": 2.1,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm13144173664",
+      "category": "toilet",
+      "name": "Toilets",
+      "level": "0",
+      "x": 96.7,
+      "y": 13.4,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "fee": null
+    },
+    {
+      "id": "osm10542633409",
+      "category": "atm",
+      "name": "Cash machine (Bankomat)",
+      "level": "0",
+      "x": 44.4,
+      "y": 24.7,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm13081317027",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "0",
+      "x": 37.0,
+      "y": 24.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "osm13081309498",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "0",
+      "x": 28.9,
+      "y": 27.3,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "lk-vo-ticket-vasterbron",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "1",
+      "x": -165.0,
+      "y": 37.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "lk-vo-ticket-klosterbron",
+      "category": "ticket",
+      "name": "Ticket machine",
+      "level": "1",
+      "x": 46.0,
+      "y": 57.0,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    }
+  ]
+}

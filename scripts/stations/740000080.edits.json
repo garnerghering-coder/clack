@@ -1,0 +1,160 @@
+{
+  "_comment": "Hand edits applied on top of the OpenStreetMap draft of Halmstad C (scripts/stations/draft_from_osm.py). Two island platforms at street level, tracks 1/2 and 3/4, reached over the barriered crossing at their south ends (OSM footway with railway=crossing; the plan's walking route). The footbridge (OSM: layer 1, with stairs and a lift at each end) joins the station side to the bus terminal; it has no stairs down to the platforms. OSM's platform 3;4a;4b is renumbered 3;4, because the app matches tracks without their sector letter. OSM tags the east stairs layer 1 down to their foot, so the foot is joined to the street by hand.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "levels": [
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridge",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street and platforms",
+      "order": 0
+    }
+  ],
+  "rotation": -8,
+  "platform_refs": {
+    "48557754": "3;4"
+  },
+  "connections": [
+    {
+      "from": {
+        "at": [
+          27.7,
+          -29.1
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          25.8,
+          -27.9
+        ],
+        "level": "0"
+      },
+      "kind": "walk",
+      "seconds": 2,
+      "meters": 2.3,
+      "note": "OSM gap: the east stairs of the footbridge are tagged layer 1 down to their foot, so the foot isn't joined to the street footway 2 m away."
+    }
+  ],
+  "sources": [
+    {
+      "type": "manual",
+      "retrieved": "2026-10-22",
+      "note": "Hallandstrafiken, 'Halmstad resecentrum' map (18 August 2025; PDF supplied by the owner, also linked from Jernhusen's station page): two island platforms (1a/1b with 2, 3 with 4a/4b), the walking route over the crossing at the platforms' south end, the footbridge with stairs and a lift at each end, the ticket machine at the station house and the ticket office in the building south of it. Read off the drawing, nothing traced. Not ODbL: Hallandstrafiken hasn't licensed it; see data/stations/README.md."
+    },
+    {
+      "type": "website",
+      "url": "https://www.jernhusen.se/hitta-din-station/halmstad-centralstation/mat-och-butiker/",
+      "retrieved": "2026-10-22",
+      "note": "Jernhusen's list (Dressinen café, Pressbyrån; no hours given, so OSM's are kept), station hours (used for the waiting room), Hallandstrafiken's ticket-office hours, toilet page (toilet and accessible toilet, card payment; not placed: no source says where). Pressbyrån's outline is its own building in OpenStreetMap."
+    },
+    {
+      "type": "trafikverket",
+      "retrieved": "2026-10-22",
+      "note": "Trafikverket TrainStation (Hd) PlatformLine 1, 1a, 1b, 2, 3, 4, 4a, 4b, TrackAtLocation values of 2026-10-21, and OSM's stop positions: tracks 1–4 west to east."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "First map from OSM (2026-10-20 extract): platform 3;4a;4b renumbered 3;4; the east footbridge stairs joined to the street; ticket office, ticket machine, waiting room and Pressbyrån (with its OSM outline) added from Hallandstrafiken's August 2025 map and Jernhusen's pages."
+    }
+  ],
+  "pois": [
+    {
+      "id": "osm6236229233",
+      "category": "cafe",
+      "name": "Café Dressinen",
+      "level": "0",
+      "x": -31.1,
+      "y": -19.0,
+      "opening_hours": "Mo-Fr 11:00-20:00; Sa-Su 11:00-19:00",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "coffee"
+    },
+    {
+      "id": "osm375499370",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": -65.5,
+      "y": 39.0,
+      "opening_hours": "Mo-Fr 05:30-21:30; Sa 07:30-20:30; Su 07:30-21:30",
+      "hours_source": "osm",
+      "hours_verified": null,
+      "icon": "kiosk",
+      "outline": [
+        [
+          -60.1,
+          32.1
+        ],
+        [
+          -61.4,
+          39.2
+        ],
+        [
+          -64.3,
+          38.6
+        ],
+        [
+          -64.9,
+          41.7
+        ],
+        [
+          -66.1,
+          47.5
+        ],
+        [
+          -72.0,
+          46.1
+        ],
+        [
+          -68.9,
+          30.3
+        ]
+      ]
+    },
+    {
+      "id": "ht-hd-biljettkontor",
+      "category": "ticket",
+      "name": "Hallandstrafiken ticket office",
+      "level": "0",
+      "x": -52.0,
+      "y": 47.5,
+      "opening_hours": "Mo-Fr 07:00-17:00; Sa 08:30-14:00; Su 10:30-16:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    },
+    {
+      "id": "osm3788629985",
+      "category": "ticket",
+      "name": "Ticket machine (Hallandstrafiken)",
+      "level": "0",
+      "x": -47.4,
+      "y": 39.7,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null
+    },
+    {
+      "id": "jh-hd-waiting",
+      "category": "waiting",
+      "name": "Waiting room",
+      "level": "0",
+      "x": -38.0,
+      "y": 5.0,
+      "opening_hours": "Mo-Fr 04:45-22:30; Sa 06:00-22:30; Su 07:30-22:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-22"
+    }
+  ]
+}

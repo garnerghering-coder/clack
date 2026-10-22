@@ -332,7 +332,7 @@ def main():
         vertical_way = hw in ("steps", "elevator") or bool(t.get("conveying"))
         if lv is None and vertical_way and t.get("level") is None:
             # Stairs without a level: worked out below from what their ends touch.
-            untagged_vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs"), incline=t.get("incline")))
+            untagged_vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs"), incline=t.get("incline"), step_count=t.get("step_count")))
             continue
         if lv is None:
             # Untagged paths count inside the station building (as ground level), and with "path_radius" in the edits
@@ -374,6 +374,13 @@ def main():
         la, lb = known(first), known(last)
         up = e["incline"] in ("up", "yes") or (e["incline"] or "").startswith(("+",))
         down = e["incline"] == "down" or (e["incline"] or "").startswith("-")
+        # A few steps at a door (step_count <= 6, or under 2.5 m drawn) aren't a change of floor: keep them on the
+        # level of the end that is known.
+        sc = e.get("step_count")
+        if e["kind"] == "stairs" and bool(la) != bool(lb) and ((sc or "").isdigit() and int(sc) <= 6 or polylen(e["pts"]) < 2.5):
+            L = la or lb
+            vertical.append(dict(ids=e["ids"], pts=e["pts"], kind="stairs", levels=[L], ends=(L, L), short=True))
+            continue
         if la and not lb and (up or down):
             lb = step_level(la, 1 if up else -1)
         elif lb and not la and (up or down):
@@ -417,7 +424,7 @@ def main():
             la, lb = lo, hi
         a = vertex(e["ids"][0], la, *e["pts"][0])
         b = vertex(e["ids"][-1], lb, *e["pts"][-1])
-        E.append(dict(a=a, b=b, kind=e["kind"], pts=e["pts"], levels=e["levels"]))
+        E.append(dict(a=a, b=b, kind=e["kind"], pts=e["pts"], levels=e["levels"], short=e.get("short")))
     # Lift nodes (a single node tagged highway=elevator with level "-1;0"): one vertex per level, joined by lift edges.
     for nid, n in nodes.items():
         t = n["t"]
@@ -515,7 +522,11 @@ def main():
                 continue
             close = min(dist_to_poly(q, pb) for pa in a["geometry"] for q in pa for pb in b["geometry"])
             if close <= 1.5:
-                E.append(dict(a=a["node"], b=b["node"], kind="walk", pts=None, seconds=PLATFORM_CROSS_SECONDS, meters=6, island=True))
+                # At least the walk between the two platform nodes: halves of different lengths (a short bay beside a
+                # long platform) can have their middles 100 m or more apart.
+                na, nb = V[a["node"]], V[b["node"]]
+                d = math.hypot(na["x"] - nb["x"], na["y"] - nb["y"])
+                E.append(dict(a=a["node"], b=b["node"], kind="walk", pts=None, seconds=max(PLATFORM_CROSS_SECONDS, round(d / WALK_SPEED)), meters=max(6, round(d, 1)), island=True))
 
     # ---- Entrances ----
     for nid, n in nodes.items():
@@ -672,6 +683,8 @@ def main():
             secs = e["seconds"]
         elif kind == "walk":
             secs = meters / WALK_SPEED
+        elif kind == "stairs" and e.get("short"):
+            secs = meters / STAIRS_SPEED + 3  # a few steps at a door
         elif kind == "stairs":
             # A flight between two floors takes at least ~18 s, however short its drawn footprint.
             secs = max(meters / STAIRS_SPEED + 3, STAIRS_MIN_SECONDS)
