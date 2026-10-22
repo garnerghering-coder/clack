@@ -59,8 +59,10 @@ about one photo pixel) and every feature compared, in the drawing's units:
 - gangway bellows 1315.24-1327.01, 70.17-130.75, ribs at 1316.56 + 1.98 k; next car's end 1315.58, raised underside
   130.75 from 1277.72 (sloping from 1258.26), yellow 62.90-69.00, light band 90.97-122.93.
 - bogies: cab bogie centre 1697.78 (Norrtåg; 4.21 m from the tip), shared bogie 1320.27; wheelbases 2.4 and 2.7 m and
-  wheels 0.85 m from Railway Gazette (Norrtåg draws 2.07 m; the Kramfors photo shows about 2.33 m), wheel centres on a
-  rail at 151.88.
+  wheels 0.85 m from Railway Gazette (Norrtåg draws 2.07 m and 0.84 m; the Kramfors photo shows about 2.33 m), wheel
+  centres on a rail at 151.88. As in Norrtåg's drawing and every photo, a dark frame fills the space under the raised
+  body down to y 140.88 (Norrtåg's trapezoid: 1637.41-1758.17 at 128.34, 1624.98-1775.06 at 140.88; the same shape under
+  the shared bogie), so only the lower half of each wheel shows; Kramfors and Umeå show the bogies dark.
 Colours: Norrtåg's drawing #1653b4/#13428d (blue), #3b92e1 (lighter band), #f4bc41 (yellow); the 2025 Åre photo
 (overcast) #0069cf lit, #ffaf00 yellow. Drawn between the two.
 Not drawn: the coupler (it stands 1.05 m ahead of the nose, outside the kit's frame), headlights (not in Norrtåg's
@@ -179,18 +181,22 @@ NT_DOOR = '#0e2a63'  # door and seam lines on the blue
 WHITE_LINE = '#f4f6f8'
 
 
-def bogie(cx_u, axle_m, wheel_m=0.85, top_u=131.32):
-    """To scale: wheel centres on the rail (Norrtåg y 151.88), frame from the raised underside down to the axles."""
+def bogie(cx_u, axle_m, wheel_m=0.85):
+    """To scale, as Norrtåg's drawing and the photos show it: wheel centres on the rail (Norrtåg y 151.88); a frame
+    (Norrtåg's trapezoid, 120.8 u wide at the top (y 128.34), 150.1 u at the bottom (y 140.88), centred on the bogie)
+    fills the space under the raised body and hides the top half of each wheel; axle boxes at the wheel centres."""
     cx, s, r = X(cx_u), axle_m * M / 2, wheel_m * M / 2
     wc = Y(151.88) - r
-    d.add(f'<rect x="{cx - s - 14:.1f}" y="{Y(top_u):.1f}" width="{2 * s + 28:.1f}" height="{wc - 2 - Y(top_u):.1f}" rx="3" fill="#2a2f36" stroke="#3f464f" stroke-width="1.2"/>')
     for o in (-s, s):
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="{r:.1f}" fill="#1b1f25" stroke="#4d5560" stroke-width="2"/>')
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="5" fill="#6d7681"/>')
+        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="{r:.1f}" fill="#1b1f25" stroke="#727b86" stroke-width="1.8"/>')
+    d.add(poly([(cx_u - 75.04, 140.88), (cx_u - 60.38, 128.34), (cx_u + 60.38, 128.34), (cx_u + 75.04, 140.88)], fill='#363c44'))
+    d.add(f'<rect x="{cx - s - 6:.1f}" y="{Y(138.2):.1f}" width="{2 * s + 12:.1f}" height="{Y(140.9) - Y(138.2):.1f}" rx="1.5" fill="#2a2f36" stroke="#4a515a" stroke-width="0.8"/>')
+    for o in (-s, s):
+        d.add(f'<rect x="{cx + o - 6:.1f}" y="{wc - 5:.1f}" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" stroke-width="0.8"/>')
 
 
 # Bogies first: the body hides the top of the wheels, as on the real train.
-bogie(1320.27, 2.7, top_u=130.6)
+bogie(1320.27, 2.7)
 bogie(1697.78, 2.4)
 
 # Roof equipment (behind the body's top edge).

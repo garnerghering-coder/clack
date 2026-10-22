@@ -56,16 +56,18 @@ export function X62Side({ livery, muted = false, className, label }: { livery: X
         <feColorMatrix type="saturate" values="0" />
       </filter>
       <g opacity={muted ? 0.35 : 1} filter={muted ? `url(#${p}mute)` : undefined}>
-        <rect x="13.8" y="158.0" width="136.0" height="16.3" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="27.8" cy="176.3" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="27.8" cy="176.3" r="5" fill="#6d7681" />
-        <circle cx="135.8" cy="176.3" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="135.8" cy="176.3" r="5" fill="#6d7681" />
-        <rect x="646.6" y="159.2" width="124.0" height="15.1" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="660.6" cy="176.3" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="660.6" cy="176.3" r="5" fill="#6d7681" />
-        <circle cx="756.6" cy="176.3" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="756.6" cy="176.3" r="5" fill="#6d7681" />
+        <circle cx="27.8" cy="176.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="135.8" cy="176.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M-42.8,175.1 L-18.5,154.3 L182.0,154.3 L206.4,175.1 Z" fill="#363c44" />
+        <rect x="21.8" y="170.6" width="120.0" height="4.5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="21.8" y="171.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="129.8" y="171.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="660.6" cy="176.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="756.6" cy="176.3" r="17.0" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M584.0,175.1 L608.4,154.3 L808.9,154.3 L833.2,175.1 Z" fill="#363c44" />
+        <rect x="654.6" y="170.6" width="108.0" height="4.5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="654.6" y="171.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="750.6" y="171.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
         <path d="M167.7,46.0 L167.7,26.2 L203.5,26.2 L203.5,46.0 Z" fill={`url(#${p}box)`} stroke="#7d858e" strokeWidth="0.8" />
         <path d="M218.4,45.7 L218.4,35.0 L275.0,35.0 L275.0,45.7 Z" fill={`url(#${p}box)`} stroke="#7d858e" strokeWidth="0.8" />
         <path d="M282.9,45.7 L282.9,35.0 L338.9,35.0 L338.9,45.7 Z" fill={`url(#${p}box)`} stroke="#7d858e" strokeWidth="0.8" />
