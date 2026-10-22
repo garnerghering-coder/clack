@@ -356,9 +356,10 @@
   },
   "countries": {
     "SE": "Sverige",
-    "DK": "Danmark",
     "NO": "Norge",
+    "DK": "Danmark",
     "DE": "Tyskland",
+    "FI": "Finland",
     "AT": "Österrike"
   },
   "common": {
@@ -841,5 +842,16 @@
     "change": "Ditt byte på {{min}} minuter i {{station}} har lite marginal om det fortsätter.",
     "honest": "Från Trafikverkets rapporterade avgångar, kontrollerat {{time}}. Det här är observationer, inte en prognos; ditt tågs egna tider ovan är vad det rapporterar.",
     "noLiveData": "Kunde inte kontrollera hur tågen går längs din sträcka just nu."
+  },
+  "progress": {
+    "notCounted": "Den kommer med i ditt pass när den är registrerad som åkt.",
+    "unlockedOne": "Ny milstolpe",
+    "unlocked": "{{count}} nya milstolpar",
+    "firstStation": "Första gången i {{name}}",
+    "firstOperator": "Första resan med {{name}}",
+    "firstCountry": "Nytt land: {{name}}",
+    "reached": "Uppnått",
+    "welcome": "Välkommen till {{station}}",
+    "welcomeBody": "Framme {{time}} med {{train}}."
   }
 }

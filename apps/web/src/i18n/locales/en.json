@@ -356,9 +356,10 @@
   },
   "countries": {
     "SE": "Sweden",
-    "DK": "Denmark",
     "NO": "Norway",
+    "DK": "Denmark",
     "DE": "Germany",
+    "FI": "Finland",
     "AT": "Austria"
   },
   "common": {
@@ -841,5 +842,16 @@
     "change": "Your {{min}}-minute change at {{station}} leaves little room if this continues.",
     "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports.",
     "noLiveData": "Couldn’t check how trains are running along your route right now."
+  },
+  "progress": {
+    "notCounted": "It goes into your Passport once it’s recorded as travelled.",
+    "unlockedOne": "Milestone unlocked",
+    "unlocked": "{{count}} milestones unlocked",
+    "firstStation": "First time at {{name}}",
+    "firstOperator": "First trip with {{name}}",
+    "firstCountry": "New country: {{name}}",
+    "reached": "Reached",
+    "welcome": "Welcome to {{station}}",
+    "welcomeBody": "Arrived {{time}} with {{train}}."
   }
 }

@@ -263,6 +263,64 @@ export function computeMilestones(all: PassportLeg[]): { achieved: Milestone[]; 
   return { achieved: achieved.reverse(), next: next.slice(0, 3) };
 }
 
+/** Running totals behind the milestones (same counting as computeMilestones). */
+function milestoneTotals(all: PassportLeg[]): Record<MilestoneFamily, number> {
+  const rides = all.filter((l) => !l.canceled);
+  const stations = new Set<string>();
+  const countries = new Set<string>();
+  let borders = 0;
+  for (const l of rides) {
+    for (const st of l.stops) if (st.role === 'board' || st.role === 'alight') stations.add(st.stationId);
+    for (const st of l.stops) countries.add(st.country);
+    for (let i = 1; i < l.stops.length; i++) if (l.stops[i]!.country !== l.stops[i - 1]!.country) borders++;
+  }
+  return {
+    journeys: new Set(rides.map((l) => l.journeyId ?? l.id)).size,
+    distanceKm: Math.floor((rides.reduce((d, l) => d + l.distanceM, 0) / 1000) * 10) / 10,
+    stations: stations.size,
+    operators: new Set(rides.map((l) => l.operatorId).filter(Boolean)).size,
+    countries: countries.size,
+    borderCrossings: borders,
+    nightTrains: rides.filter((l) => l.product === 'night').length,
+  };
+}
+
+/**
+ * What one trip did for your Passport (the moment after adding it, or arriving): milestones it unlocked, how far each
+ * family moved, and its firsts (stations, operator, countries you hadn't been to). Everything from counted trips only;
+ * a trip that doesn't count (yet) says so instead. Pure.
+ */
+export function tripProgress(all: PassportLeg[], legId: string) {
+  const leg = all.find((l) => l.id === legId);
+  if (!leg || leg.canceled) return { counted: false as const };
+  const others = all.filter((l) => l.id !== legId);
+  const before = milestoneTotals(others);
+  const after = milestoneTotals(all);
+  const had = new Set(computeMilestones(others).achieved.map((m) => `${m.family}:${m.target}`));
+  const unlocked = computeMilestones(all).achieved.filter((m) => !had.has(`${m.family}:${m.target}`));
+  // Each family that moved, against its next target (or the one just reached).
+  const moved = (Object.keys(MILESTONES) as MilestoneFamily[])
+    .filter((f) => after[f] > before[f])
+    .map((f) => {
+      const target = MILESTONES[f].find((x) => after[f] < x) ?? [...MILESTONES[f]].reverse().find((x) => after[f] >= x)!;
+      return { family: f, before: before[f], after: after[f], target };
+    })
+    .sort((a, b) => b.after / b.target - a.after / a.target);
+  const seenStations = new Set(others.flatMap((l) => l.stops.filter((s) => s.role === 'board' || s.role === 'alight').map((s) => s.stationId)));
+  const seenCountries = new Set(others.flatMap((l) => l.stops.map((s) => s.country)));
+  const ends = leg.stops.filter((s) => s.role === 'board' || s.role === 'alight');
+  return {
+    counted: true as const,
+    unlocked,
+    moved: moved.slice(0, 4),
+    firsts: {
+      stations: [...new Map(ends.filter((s) => !seenStations.has(s.stationId)).map((s) => [s.stationId, s.name])).values()],
+      operator: leg.operatorId && !others.some((l) => l.operatorId === leg.operatorId) ? leg.operatorId : null,
+      countries: [...new Set(leg.stops.map((s) => s.country).filter((c) => !seenCountries.has(c)))],
+    },
+  };
+}
+
 /** Trips waiting for "Did you take this train?". */
 export function reviewQueue(db: Db, userId: string) {
   const rows = db

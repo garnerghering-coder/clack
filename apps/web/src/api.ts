@@ -317,6 +317,16 @@ export interface Milestone {
   value?: number;
 }
 
+/** What one trip did for your Passport (server stats/passport.ts tripProgress). */
+export type TripProgress =
+  | { counted: false }
+  | {
+      counted: true;
+      unlocked: Milestone[];
+      moved: { family: Milestone['family']; before: number; after: number; target: number }[];
+      firsts: { stations: string[]; operator: string | null; countries: string[] };
+    };
+
 export interface Passport {
   milestones: { achieved: Milestone[]; next: Milestone[] };
   /** Trips waiting for "Did you take this train?". */
@@ -435,6 +445,7 @@ export const api = {
     request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
   alternatives: (from: string, to: string, after: number, exclude: string | null) =>
     request<{ direct: TripResult[]; connections: Connection[] }>(`/alternatives?${new URLSearchParams({ from, to, after: String(Math.round(after)), ...(exclude ? { exclude } : {}) })}`),
+  tripProgress: (id: string) => request<TripProgress>(`/legs/${id}/progress`),
   legRisk: (id: string) => request<LegRisk>(`/legs/${id}/risk`),
   answerRide: (id: string, answer: 'yes' | 'no' | 'undo') => request<LegDetail>(`/legs/${id}/ride`, { method: 'POST', body: JSON.stringify({ answer }) }),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),

@@ -21,6 +21,7 @@ import { Onboard } from '../components/Onboard';
 import { JourneyConnections } from '../components/Connection';
 import { DisruptionCard } from '../components/Disruption';
 import { RiskCard } from '../components/Risk';
+import { TripProgress } from '../components/TripProgress';
 import { FlapTime, SplitFlap } from '../components/SplitFlap';
 
 function TimeBlock({
@@ -264,6 +265,15 @@ export function TripDetailPage() {
           {leg.origin?.name} → {leg.destination?.name}
         </h1>
         {schedDep && <p className="muted">{fmtLongDate(schedDep, tz)}</p>}
+
+        {/* Just arrived: welcome, and what the trip did for your Passport. */}
+        {stage === 'after' && !leg.canceled && now - (ms(leg.actualArr) ?? schedArr ?? 0) < 60 * 60_000 && (
+          <section className="card welcome-card">
+            <h2>{t('progress.welcome', { station: leg.destination?.name ?? '' })}</h2>
+            <p className="caption">{t('progress.welcomeBody', { time: fmtTime(ms(leg.actualArr) ?? schedArr, dtz, settings.clock), train: [leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ') })}</p>
+            <TripProgress legId={leg.id} quietIfNothing />
+          </section>
+        )}
 
         {/* Something wrong with this train or the change after it: what happened, what to do, what you're owed. */}
         <DisruptionCard leg={leg} />

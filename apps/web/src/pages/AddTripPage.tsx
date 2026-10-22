@@ -4,11 +4,12 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, X } from 'lucide-react';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult, type Connection } from '../api';
+import { ApiError, api, ms, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult, type Connection } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { StationRow } from '../components/StationRow';
 import { ManualTrip } from '../components/ManualTrip';
 import { BuyTicket } from '../components/Tickets';
+import { TripProgress } from '../components/TripProgress';
 import { useOperators, useTrainTypes } from '../data';
 import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
@@ -388,6 +389,8 @@ function Done({ leg, onAnother }: { leg: LegDetail; onAnother: () => void }) {
         {leg.origin?.name} → {leg.destination?.name}
       </p>
       <p className="caption">{[leg.operator?.name, leg.trainNumber].filter(Boolean).join(' ')}</p>
+      {/* A trip that already happened: what it did for your Passport. */}
+      {(ms(leg.actualArr) ?? ms(leg.schedArr) ?? Infinity) <= Date.now() && <TripProgress legId={leg.id} />}
       <div className="done-actions">
         <button className="button primary" onClick={() => navigate(`/trips/${leg.id}`)}>
           {t('add.viewTrip')}

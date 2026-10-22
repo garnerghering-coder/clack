@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { CO2_COMPARISONS, DEFAULT_SETTINGS, type Co2Comparison, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { users } from '../db/schema.js';
-import { computeMilestones, computePassport, loadPassportLegs, passportRefs, reviewQueue } from '../stats/passport.js';
+import { computeMilestones, computePassport, loadPassportLegs, passportRefs, reviewQueue, tripProgress } from '../stats/passport.js';
 
 export const passportRoutes =
   (db: Db): FastifyPluginAsync =>
@@ -22,4 +22,7 @@ export const passportRoutes =
       // Milestones are all-time and every counted trip, whatever the year and commuter filters show.
       return { ...computePassport(all, { year, includeCommuter, comparison }), milestones: computeMilestones(all), review: reviewQueue(db, req.userId), refs: passportRefs(db) };
     });
+
+    // What one trip did for your Passport: unlocked milestones, progress, firsts.
+    app.get<{ Params: { id: string } }>('/legs/:id/progress', async (req) => tripProgress(loadPassportLegs(db, req.userId), req.params.id));
   };
