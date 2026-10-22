@@ -17,7 +17,19 @@ const DETAILED: Record<string, Detailed> = {
 
 export const hasDetailedArt = (typeId: string | null | undefined) => !!typeId && typeId in DETAILED;
 
-export function TrainPicture({ type, operatorId, color, height, label }: { type: { id: string; art: string; name: string }; operatorId: string | null | undefined; color: string; height: number; label?: string }) {
+export function TrainPicture({
+  type,
+  operatorId,
+  color,
+  height,
+  label,
+}: {
+  type: { id: string; art: string; name: string };
+  operatorId: string | null | undefined;
+  color: string;
+  height: number;
+  label?: string;
+}) {
   const d = DETAILED[type.id];
   if (!d) return <TrainArt art={type.art} color={color} height={height} label={label} />;
   const livery = operatorId && d.liveries.includes(operatorId) ? operatorId : 'plain';
