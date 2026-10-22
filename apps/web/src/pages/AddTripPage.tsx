@@ -7,6 +7,7 @@ import { decodePolyline, type LatLon } from '@clack/shared';
 import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { StationRow } from '../components/StationRow';
+import { ManualTrip } from '../components/ManualTrip';
 import { useOperators, useTrainTypes } from '../data';
 import { TrainArt } from '../components/TrainArt';
 import { useSettings } from '../settings';
@@ -300,6 +301,7 @@ export function AddTripPage() {
   const [filter, setFilter] = useState<Filter>('all');
   // Bumped to ask again while an older day's timetable is fetched from the archive.
   const [retry, setRetry] = useState(0);
+  const [manual, setManual] = useState(false);
   const [picked, setPicked] = useState<TripResult | null>(null);
   const [saved, setSaved] = useState<LegDetail | null>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -394,6 +396,7 @@ export function AddTripPage() {
 
   const reset = () => {
     setSaved(null);
+    setManual(false);
     setPicked(null);
     setQuery('');
     setTimeout(() => input.current?.focus(), 0);
@@ -411,6 +414,8 @@ export function AddTripPage() {
         <div className="sheet-body">
           {saved ? (
             <Done leg={saved} onAnother={reset} />
+          ) : manual ? (
+            <ManualTrip date={date} from={interp?.from} to={interp?.to} onBack={() => setManual(false)} onSaved={setSaved} />
           ) : picked ? (
             <Confirm result={picked} onBack={() => (prefill ? navigate(-1) : setPicked(null))} backLabel={prefill ? t('common.back') : undefined} onSaved={setSaved} />
           ) : (
@@ -481,7 +486,7 @@ export function AddTripPage() {
 
               {resp?.outsideTimetable && (
                 <p className="banner" role="status">
-                  {t(resp.history === 'loading' ? 'add.historyLoading' : resp.history === 'failed' ? 'add.historyFailed' : 'add.historyUnavailable')}
+                  {t(resp.history === 'loading' ? 'add.historyLoading' : resp.history === 'failed' ? 'add.historyFailed' : resp.history === 'norway' ? 'add.historyNorway' : 'add.historyUnavailable')}
                 </p>
               )}
               {resp?.results && resp.results.length > 0 && (
@@ -498,6 +503,11 @@ export function AddTripPage() {
               )}
               {resp?.results && resp.results.length === 0 && !resp.outsideTimetable && (
                 <p className="muted">{interp?.trainNumber ? t('add.noTrain', { number: interp.trainNumber }) : t('add.noDirect')}</p>
+              )}
+              {query && resp && (resp.outsideTimetable ? resp.history !== 'loading' : resp.results !== null) && (
+                <button className="link-button manual-link" onClick={() => setManual(true)}>
+                  {t('manual.cta')}
+                </button>
               )}
               {loading && !resp && <div className="skeleton-list">{[0, 1].map((i) => <div key={i} className="skeleton-card" />)}</div>}
             </>

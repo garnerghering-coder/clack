@@ -92,7 +92,8 @@
     "tapToChoose": "Välj var du klev på och av",
     "historyLoading": "Hämtar dagens tidtabell från Trafiklabs arkiv. Första sökningen i en ny månad tar ungefär en halv minut.",
     "historyFailed": "Kunde inte hämta arkivets tidtabell för den här dagen. Försöker igen strax…",
-    "historyUnavailable": "Tidtabellerna går tillbaka till 10 augusti 2012. Lägg till en tidigare resa för hand."
+    "historyUnavailable": "Tidtabellerna går tillbaka till 10 augusti 2012. Lägg till en tidigare resa för hand.",
+    "historyNorway": "Norges tidtabeller går bara tillbaka till i går. Lägg till en äldre norsk resa för hand."
   },
   "products": {
     "high_speed": "Snabbtåg",
@@ -736,5 +737,28 @@
     "medalKicker": "Milstolpe upplåst",
     "unlocked": "Upplåst {{date}}",
     "pickMedal": "Välj en medalj"
+  },
+  "manual": {
+    "cta": "Hittar du inte tåget? Lägg till det för hand",
+    "title": "Lägg till en resa för hand",
+    "intro": "För tåg som inte finns i våra tidtabeller: Norge före i går, ett museitåg, ett tåg utomlands. Sträckan ritas längs järnvägsnätet.",
+    "from": "Klev på i",
+    "to": "Klev av i",
+    "change": "Byt {{station}}",
+    "dep": "Avgick",
+    "arr": "Ankom",
+    "operator": "Operatör",
+    "unknown": "Vet inte",
+    "number": "Tågnummer",
+    "kind": "Typ av tåg",
+    "kinds": {
+      "intercity": "Fjärrtåg",
+      "regional": "Regionaltåg",
+      "commuter": "Pendeltåg",
+      "night": "Nattåg",
+      "heritage": "Museitåg"
+    },
+    "timesNote": "Tiderna är lokala vid varje station. En ankomst före avgången räknas som nästa dag.",
+    "save": "Lägg till resa"
   }
 }

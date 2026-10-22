@@ -92,7 +92,8 @@
     "tapToChoose": "Choose where you got on and off",
     "historyLoading": "Fetching this day’s timetable from Trafiklab’s archive. The first search in a new month takes about half a minute.",
     "historyFailed": "Couldn’t fetch the archive timetable for this day. Trying again shortly…",
-    "historyUnavailable": "Timetables go back to 10 August 2012. For an earlier trip, add it by hand."
+    "historyUnavailable": "Timetables go back to 10 August 2012. For an earlier trip, add it by hand.",
+    "historyNorway": "Norway’s timetables only go back to yesterday. Add an older Norwegian trip by hand."
   },
   "products": {
     "high_speed": "High-speed",
@@ -736,5 +737,28 @@
     "medalKicker": "Milestone unlocked",
     "unlocked": "Unlocked {{date}}",
     "pickMedal": "Choose a medal"
+  },
+  "manual": {
+    "cta": "Can’t find your train? Add it by hand",
+    "title": "Add a trip by hand",
+    "intro": "For a train our timetables don’t have: Norway before yesterday, a heritage run, a train abroad. The route is drawn along the rail network.",
+    "from": "Got on at",
+    "to": "Got off at",
+    "change": "Change {{station}}",
+    "dep": "Departed",
+    "arr": "Arrived",
+    "operator": "Operator",
+    "unknown": "Not sure",
+    "number": "Train number",
+    "kind": "Kind of train",
+    "kinds": {
+      "intercity": "Long-distance",
+      "regional": "Regional",
+      "commuter": "Commuter",
+      "night": "Night train",
+      "heritage": "Heritage"
+    },
+    "timesNote": "Times are local at each station. An arrival earlier than the departure counts as the next day.",
+    "save": "Add trip"
   }
 }

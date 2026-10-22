@@ -12,6 +12,7 @@ import { attachLegGeometry } from '../geo/trackSegments.js';
 import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
 import { updateRides } from './recording.js';
+import { zonedToUtc } from '../lib/time.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
 
@@ -115,6 +116,82 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
   // A trip saved after it arrived is you saying you rode it; a future one waits for the evidence.
   updateRides(db, { legId: id, now });
   // Track geometry and distance along the rail network (cached per station pair, so this is quick).
+  attachLegGeometry(db, id);
+  regroupJourneys(db, userId);
+  return id;
+}
+
+export interface ManualLegInput {
+  fromStationId: string;
+  toStationId: string;
+  /** Local date where you got on, YYYY-MM-DD. */
+  date: string;
+  /** Local times, HH:MM, in each station's own time zone. An arrival before the departure is the next day. */
+  dep: string;
+  arr: string;
+  operatorId?: string | null;
+  trainNumber?: string | null;
+  category?: string | null;
+}
+
+const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
+const CATEGORIES = new Set(['high_speed', 'intercity', 'night', 'regional', 'commuter', 'heritage']);
+
+/**
+ * A trip added by hand, for a train no timetable we have can find (Norway before yesterday, a heritage run, a train
+ * abroad). Only where you got on and off; the route is drawn along the rail network. Kept as "manual" data, and
+ * counted as travelled once its time has passed, since you're the one saying you took it.
+ */
+export function createManualLeg(db: Db, userId: string, input: ManualLegInput, now = Date.now()): string {
+  const st = (id: string) => db.select().from(stations).where(eq(stations.id, id)).get();
+  const from = st(input.fromStationId);
+  const to = st(input.toStationId);
+  if (!from || !to) throw new LegError('Choose both stations', 400);
+  if (from.id === to.id) throw new LegError('Choose two different stations', 400);
+  const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input.date ?? '');
+  const dm = HHMM.exec(input.dep ?? '');
+  const am = HHMM.exec(input.arr ?? '');
+  if (!d || !dm || !am) throw new LegError('Date must be YYYY-MM-DD and times HH:MM', 400);
+  const [y, mo, day] = [Number(d[1]), Number(d[2]), Number(d[3])];
+  const dep = zonedToUtc(y, mo, day, Number(dm[1]), Number(dm[2]), 0, from.tz);
+  let arr = zonedToUtc(y, mo, day, Number(am[1]), Number(am[2]), 0, to.tz);
+  // Overnight: arriving "earlier" than leaving means the next day.
+  while (arr <= dep) arr += 86400_000;
+  if (arr - dep > 48 * 3600_000) throw new LegError('That trip is longer than two days', 400);
+  if (input.operatorId && !db.select({ id: operators.id }).from(operators).where(eq(operators.id, input.operatorId)).get()) throw new LegError('Unknown operator', 400);
+  const trainNumber = input.trainNumber?.trim() || null;
+  if (trainNumber && !/^[\w-]{1,10}$/.test(trainNumber)) throw new LegError('Train numbers are letters and digits only', 400);
+  const category = input.category && CATEGORIES.has(input.category) ? input.category : 'regional';
+
+  const id = crypto.randomUUID();
+  db.transaction((tx) => {
+    tx.insert(legs)
+      .values({
+        id,
+        userId,
+        status: arr < now ? 'completed' : 'planned',
+        dataQuality: 'manual',
+        countryCodes: [...new Set([from.country, to.country])],
+        operatorId: input.operatorId ?? null,
+        trainNumber,
+        category,
+        timetableTripKey: null,
+        serviceDate: input.date,
+        originStationId: from.id,
+        destStationId: to.id,
+        schedDep: new Date(dep),
+        schedArr: new Date(arr),
+        distanceM: straightLineDistanceM([from, to]),
+        isEstimatedGeometry: true,
+        trainType: typicalTrainType(input.operatorId ?? null, category, trainNumber),
+        trainTypeSource: 'typical',
+        createdAt: new Date(now),
+      })
+      .run();
+    tx.insert(legStops).values({ legId: id, seq: 1, stationId: from.id, schedArr: null, schedDep: new Date(dep), passedThrough: false, role: 'board' }).run();
+    tx.insert(legStops).values({ legId: id, seq: 2, stationId: to.id, schedArr: new Date(arr), schedDep: null, passedThrough: false, role: 'alight' }).run();
+  });
+  updateRides(db, { legId: id, now });
   attachLegGeometry(db, id);
   regroupJourneys(db, userId);
   return id;

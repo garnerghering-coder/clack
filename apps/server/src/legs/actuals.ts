@@ -145,6 +145,13 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const now = opts.now ?? Date.now();
   const leg = db.select().from(legs).where(eq(legs.id, legId)).get();
   if (!leg || leg.status === 'snapshotted') return leg?.dataQuality ?? null;
+  // A trip added by hand has no timetable to match reports against: it only moves from planned to completed.
+  if (leg.dataQuality === 'manual') {
+    const done = leg.schedArr !== null && now > leg.schedArr.getTime();
+    if (done && leg.status === 'planned') db.update(legs).set({ status: 'completed' }).where(eq(legs.id, legId)).run();
+    updateRides(db, { legId, now });
+    return 'manual';
+  }
   const stops = db
     .select({ seq: legStops.seq, role: legStops.role, sig: stations.trvSignature, nsrId: stations.nsrId, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
     .from(legStops)

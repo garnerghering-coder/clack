@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { createLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setTrainType, type CreateLegInput } from '../legs/legs.js';
+import { createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setTrainType, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
@@ -21,6 +21,18 @@ export const legRoutes =
         return reply.code(400).send({ error: 'tripKey, serviceDate, fromSeq and toSeq are required' });
       try {
         const id = createLeg(db, req.userId, b);
+        hooks.afterCreate?.(id);
+        return reply.code(201).send(getLeg(db, req.userId, id));
+      } catch (e) {
+        if (e instanceof LegError) return reply.code(e.status).send({ error: e.message, ...e.body });
+        throw e;
+      }
+    });
+
+    // A trip added by hand (no timetable has it).
+    app.post<{ Body: ManualLegInput }>('/legs/manual', async (req, reply) => {
+      try {
+        const id = createManualLeg(db, req.userId, req.body ?? ({} as ManualLegInput));
         hooks.afterCreate?.(id);
         return reply.code(201).send(getLeg(db, req.userId, id));
       } catch (e) {

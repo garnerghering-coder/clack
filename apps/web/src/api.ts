@@ -73,7 +73,7 @@ export interface SearchResponse {
   results: TripResult[] | null;
   outsideTimetable: boolean;
   /** Before the current timetable: the archive timetable for that day is ready, loading, failed or unavailable (before 2012-08-10). */
-  history?: 'ready' | 'loading' | 'failed' | 'unavailable';
+  history?: 'ready' | 'loading' | 'failed' | 'unavailable' | 'norway';
 }
 
 export interface TripStop {
@@ -363,6 +363,8 @@ export const api = {
   legs: () => request<Leg[]>('/legs'),
   leg: (id: string) => request<LegDetail>(`/legs/${id}`),
   createLeg: (body: { tripKey: string; serviceDate: string; fromSeq: number; toSeq: number; force?: boolean }) => request<LegDetail>('/legs', { method: 'POST', body: JSON.stringify(body) }),
+  createManualLeg: (body: { fromStationId: string; toStationId: string; date: string; dep: string; arr: string; operatorId: string | null; trainNumber: string | null; category: string }) =>
+    request<LegDetail>('/legs/manual', { method: 'POST', body: JSON.stringify(body) }),
   refreshLeg: (id: string) => request<LegDetail>(`/legs/${id}/refresh`, { method: 'POST' }),
   station: (id: string) => request<StationInfo>(`/stations/${id}`),
   stationMap: (id: string) => request<StationMap>(`/stations/${id}/map`),

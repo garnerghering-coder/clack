@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { openDb, LOCAL_USER_ID } from '../src/db/client.js';
 import { stations, timetableStopTimes, timetableTripDates, timetableTrips } from '../src/db/schema.js';
-import { createLeg, getLeg, LegError } from '../src/legs/legs.js';
+import { createLeg, createManualLeg, getLeg, LegError } from '../src/legs/legs.js';
 
 // SJ 1 as the owner rode it on 2026-10-21: Nässjö C 03:14 → Alvesta 04:03 (service date 2026-10-20).
 function setup() {
@@ -39,5 +39,27 @@ describe('saving a leg', () => {
     const db = setup();
     createLeg(db, LOCAL_USER_ID, { tripKey: 'k1', serviceDate: '2026-10-20', fromSeq: 4, toSeq: 5 });
     expect(() => createLeg(db, LOCAL_USER_ID, { tripKey: 'k1', serviceDate: '2026-10-20', fromSeq: 4, toSeq: 5 })).toThrow(LegError);
+  });
+});
+
+describe('adding a trip by hand', () => {
+  it('times it in the stations\' zone, routes it, and counts it once it has run', () => {
+    const db = setup();
+    const id = createManualLeg(db, LOCAL_USER_ID, { fromStationId: '740000140', toStationId: '740000004', date: '2015-07-01', dep: '23:30', arr: '00:20', trainNumber: '1' }, Date.parse('2026-10-22T10:00:00Z'));
+    const leg = getLeg(db, LOCAL_USER_ID, id)!;
+    // Summer time in Sweden is UTC+2; the arrival is after midnight, so the next day.
+    expect(leg.schedDep).toEqual(new Date('2015-07-01T21:30:00Z'));
+    expect(leg.schedArr).toEqual(new Date('2015-07-01T22:20:00Z'));
+    expect(leg.dataQuality).toBe('manual');
+    expect(leg.isEstimatedGeometry).toBe(false);
+    expect(leg.ride).toBe('confirmed');
+  });
+
+  it('refuses the same station twice and bad times', () => {
+    const db = setup();
+    const base = { fromStationId: '740000140', toStationId: '740000004', date: '2015-07-01', dep: '10:00', arr: '11:00' };
+    expect(() => createManualLeg(db, LOCAL_USER_ID, { ...base, toStationId: '740000140' })).toThrow(LegError);
+    expect(() => createManualLeg(db, LOCAL_USER_ID, { ...base, dep: '25:00' })).toThrow(LegError);
+    expect(() => createManualLeg(db, LOCAL_USER_ID, { ...base, fromStationId: 'nope' })).toThrow(LegError);
   });
 });

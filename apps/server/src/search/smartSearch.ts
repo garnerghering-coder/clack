@@ -28,7 +28,7 @@ export interface SmartSearchResult {
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
-  history?: HistoryState['state'];
+  history?: HistoryState['state'] | 'norway';
 }
 
 export function createSmartSearch(db: Db, index: () => StationIndex, history: (date: string) => HistoryState = () => ({ state: 'unavailable' })) {
@@ -88,8 +88,9 @@ export function createSmartSearch(db: Db, index: () => StationIndex, history: (d
 
     const windowStart = addDays(todayIn('Europe/Stockholm'), -1);
     if (date < windowStart && (q.trainNumber || (from && to))) {
-      // Older days come from the archive, fetched the first time a day is asked for.
-      const h = history(date);
+      // Older days come from Sweden's archive, fetched the first time a day is asked for. Norway has no archive.
+      const norwayOnly = from?.country === 'NO' && to?.country === 'NO';
+      const h: HistoryState | { state: 'norway' } = norwayOnly ? { state: 'norway' } : history(date);
       out.history = h.state;
       if (h.state !== 'ready') {
         out.outsideTimetable = true;
