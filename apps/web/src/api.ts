@@ -235,6 +235,8 @@ export interface LiveState {
   eta: string | number | null;
   arrivalEta: string | number | null;
   arrivalDelayMin: number | null;
+  /** Last time Trafikverket or Entur answered for this trip; freshness goes by this, not by our own tick. */
+  reportedAt?: string | number | null;
 }
 
 export interface LegEvent {

@@ -6,16 +6,17 @@
 // needs no reconnect/catch-up logic, and lags only ~7 s more (Phase 0 §9). One poll covers each leg once, so trains
 // shared by several users later are still fetched once per tick.
 import { EventEmitter } from 'node:events';
-import { and, asc, desc, eq, gt, inArray, lt, ne } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, inArray, lt, ne, sql } from 'drizzle-orm';
 import { decodePolyline, type LatLon } from '@clack/shared';
 import type { Db } from '../db/client.js';
-import { legEvents, legStops, legs, liveState, stations } from '../db/schema.js';
+import { legEvents, legStops, legs, liveQuality, liveState, shownValues, stations } from '../db/schema.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { parseWgs84, trvQuery } from '../trafikverket/client.js';
 import { gtfsRt, RT_DATASOURCES, type RtDatasource } from '../entur/client.js';
 import { enturJourneyFor } from '../entur/calls.js';
 import { rtDate } from '../livemap/norway.js';
-import { diffEvents, liveView, type GpsFix, type LegSummary, type LiveStop, type LiveView } from './progress.js';
+import { diffEvents, expectedTimes, liveView, type GpsFix, type LegSummary, type LiveStop, type LiveView } from './progress.js';
+import { FixFilter } from './sanitize.js';
 
 export const POLL_MS = 20_000;
 /** Track from an hour before departure until half an hour after arrival. */
@@ -24,9 +25,12 @@ const AFTER_MS = 30 * 60_000;
 
 export interface LiveUpdate {
   legId: string;
-  live: LiveView & { updatedAt: number };
+  live: LiveView & { updatedAt: number; reportedAt: number | null };
   events: { type: string; ts: number; payload: Record<string, unknown> }[];
 }
+
+/** Every tracked leg's GPS goes through here (one train per leg), so a jump never reaches the map or the trip. */
+export const trackerFixes = new FixFilter();
 
 /** Open SSE connections listen here. */
 export const liveBus = new EventEmitter();
@@ -95,11 +99,14 @@ export const NEAR_ROUTE_M = 15_000;
  * is on or near its route. A same-numbered train elsewhere in the country is never taken for yours. Pure.
  */
 export function pickFix(fixes: DatedFix[], trip: { serviceDate: string | null; line: LatLon[]; route: LatLon[] }): GpsFix | null {
-  for (const f of fixes) {
-    if (f.date && trip.serviceDate && f.date !== trip.serviceDate) continue;
-    if (distanceToLineM(f, trip.line) <= ON_ROUTE_M || distanceToLineM(f, trip.route) <= NEAR_ROUTE_M) return f;
-  }
-  return null;
+  return tripFixes(fixes, trip)[0] ?? null;
+}
+
+/** All of the fixes that can be this trip's train, newest first. Pure. */
+export function tripFixes(fixes: DatedFix[], trip: { serviceDate: string | null; line: LatLon[]; route: LatLon[] }): DatedFix[] {
+  return fixes.filter(
+    (f) => !(f.date && trip.serviceDate && f.date !== trip.serviceDate) && (distanceToLineM(f, trip.line) <= ON_ROUTE_M || distanceToLineM(f, trip.route) <= NEAR_ROUTE_M),
+  );
 }
 
 /**
@@ -146,6 +153,7 @@ function loadLeg(db: Db, legId: string) {
   if (!leg) return null;
   const all = db
     .select({
+      seq: legStops.seq,
       role: legStops.role,
       stationId: legStops.stationId,
       name: stations.name,
@@ -167,7 +175,7 @@ function loadLeg(db: Db, legId: string) {
     .where(eq(legStops.legId, legId))
     .orderBy(asc(legStops.seq))
     .all();
-  const ridden: LiveStop[] = all
+  const ridden: (LiveStop & { seq: number })[] = all
     .filter((s) => s.role === 'board' || s.role === 'through' || s.role === 'alight')
     .map((s) => ({
       ...s,
@@ -212,11 +220,13 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
   const ids = trackedLegIds(db, now);
   if (!ids.length) return [];
   const before = new Map<string, LegSummary>();
+  const answered = new Set<string>();
   for (const id of ids) {
     const l = loadLeg(db, id);
     if (l) before.set(id, summary(l));
     try {
       await refreshLegActuals(db, id, { now, fetchImpl: opts.fetchImpl });
+      answered.add(id);
     } catch (e) {
       opts.log?.(`live: times for leg ${id} failed: ${(e as Error).message}`);
     }
@@ -256,11 +266,17 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     const nums = l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [];
     // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
     const jk = journeyOf.get(l.leg.id);
-    const gps =
-      [...nums.map((n) => pickFix(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), jk ? noFixes.get(jk) : undefined]
-        .filter((f): f is GpsFix => !!f)
-        .sort((a, b) => b.at - a.at)[0] ?? null;
+    const candidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : [])].sort(
+      (a, b) => a.at - b.at,
+    );
+    // Oldest first through the filter: a fix the train couldn't have reached is dropped, not shown.
+    const rejectedBefore = trackerFixes.stats.rejected;
+    for (const f of candidates) trackerFixes.push(l.leg.id, { lat: f.lat, lon: f.lon, at: f.at, bearing: f.bearing, speedKmh: f.speedKmh });
+    const rejected = trackerFixes.stats.rejected - rejectedBefore;
+    const gps = trackerFixes.current(l.leg.id);
     const view = liveView(l.ridden, l.line, gps, now);
+    const prevRow = db.select({ reportedAt: liveState.reportedAt }).from(liveState).where(eq(liveState.legId, l.leg.id)).get();
+    const reportedAt = answered.has(l.leg.id) ? now : (prevRow?.reportedAt?.getTime() ?? null);
     const row = {
       legId: l.leg.id,
       updatedAt: new Date(now),
@@ -277,6 +293,7 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
       eta: view.eta === null ? null : new Date(view.eta),
       arrivalEta: view.arrivalEta === null ? null : new Date(view.arrivalEta),
       arrivalDelayMin: view.arrivalDelayMin,
+      reportedAt: reportedAt === null ? null : new Date(reportedAt),
     };
     const events = diffEvents(before.get(l.leg.id) ?? summary(l), summary(l));
     db.transaction((tx) => {
@@ -285,12 +302,63 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
         tx.insert(legEvents)
           .values({ legId: l.leg.id, ts: new Date(now), type: e.type, payload: e.payload })
           .run();
+      recordShown(tx as unknown as Db, l.leg.id, l.ridden, now);
+      const enRoute = view.status === 'en_route' || view.status === 'at_stop';
+      const q = {
+        ticks: 1,
+        gpsTicks: enRoute && view.positionSource === 'gps' ? 1 : 0,
+        estimatedTicks: enRoute && view.positionSource === 'estimated' ? 1 : 0,
+        failedTicks: answered.has(l.leg.id) ? 0 : 1,
+        rejectedFixes: rejected,
+      };
+      tx.insert(liveQuality)
+        .values({ legId: l.leg.id, ...q, firstAt: new Date(now), lastAt: new Date(now) })
+        .onConflictDoUpdate({
+          target: liveQuality.legId,
+          set: {
+            ticks: sql`${liveQuality.ticks} + ${q.ticks}`,
+            gpsTicks: sql`${liveQuality.gpsTicks} + ${q.gpsTicks}`,
+            estimatedTicks: sql`${liveQuality.estimatedTicks} + ${q.estimatedTicks}`,
+            failedTicks: sql`${liveQuality.failedTicks} + ${q.failedTicks}`,
+            rejectedFixes: sql`${liveQuality.rejectedFixes} + ${q.rejectedFixes}`,
+            lastAt: new Date(now),
+          },
+        })
+        .run();
     });
-    const u: LiveUpdate = { legId: l.leg.id, live: { ...view, updatedAt: now }, events: events.map((e) => ({ ...e, ts: now })) };
+    const u: LiveUpdate = { legId: l.leg.id, live: { ...view, updatedAt: now, reportedAt }, events: events.map((e) => ({ ...e, ts: now })) };
     updates.push(u);
     liveBus.emit('update', u);
   }
+  trackerFixes.prune(now - 60 * 60_000);
   return updates;
+}
+
+/** Last value recorded per leg|seq|field, so only changes are written. Loaded from the database on first sight. */
+const lastShown = new Map<string, string | null>();
+
+/** What the trip shows for each ridden stop (expected times, track), written whenever it changes (the audit's input). */
+export function recordShown(db: Db, legId: string, ridden: (LiveStop & { seq: number })[], now: number) {
+  if (!ridden.length) return;
+  if (!lastShown.has(`${legId}|loaded`)) {
+    lastShown.set(`${legId}|loaded`, '1');
+    const rows = db.select().from(shownValues).where(eq(shownValues.legId, legId)).orderBy(asc(shownValues.shownAt)).all();
+    for (const r of rows) lastShown.set(`${legId}|${r.seq}|${r.field}`, r.value);
+  }
+  const times = expectedTimes(ridden);
+  ridden.forEach((s, i) => {
+    for (const [field, v] of [
+      ['arr', times[i]!.arr],
+      ['dep', times[i]!.dep],
+      ['platform', s.platform],
+    ] as const) {
+      const value = v === null ? null : String(v);
+      const k = `${legId}|${s.seq}|${field}`;
+      if (lastShown.has(k) && lastShown.get(k) === value) continue;
+      lastShown.set(k, value);
+      db.insert(shownValues).values({ legId, seq: s.seq, field, value, shownAt: new Date(now) }).onConflictDoNothing().run();
+    }
+  });
 }
 
 /** Runs trackOnce every POLL_MS; ticks don't overlap. */

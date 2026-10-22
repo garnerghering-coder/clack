@@ -28,6 +28,6 @@ describe('settings API', () => {
 
   it('health check works', async () => {
     const res = await app.inject({ method: 'GET', url: '/api/health' });
-    expect(res.json()).toEqual({ ok: true });
+    expect(res.json()).toMatchObject({ ok: true, feeds: {}, gps: { accepted: 0, rejected: 0 } });
   });
 });

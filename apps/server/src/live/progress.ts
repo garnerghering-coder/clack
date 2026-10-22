@@ -1,6 +1,7 @@
 // Where a tracked train is and what changed (DESIGN §9). Pure functions, so they're easy to test.
 import { delayMinutes, type LatLon } from '@clack/shared';
 import { haversineM } from '../lib/geo.js';
+import { shownSpeed } from './sanitize.js';
 
 export type LiveStatus = 'scheduled' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
 
@@ -25,6 +26,8 @@ export interface GpsFix {
   at: number;
   bearing: number | null;
   speedKmh: number | null;
+  /** When the speed was read, if earlier than the fix (a fix that came without one keeps the last reading). */
+  speedAt?: number;
 }
 
 export interface LiveView {
@@ -48,6 +51,11 @@ export interface LiveView {
 export const BOARDING_MS = 30 * 60_000;
 /** A GPS fix older than this isn't shown as live (Phase 0 §8). */
 export const GPS_FRESH_MS = 2 * 60_000;
+/**
+ * After the GPS goes quiet (a tunnel, a gap in the feed), the train is carried on from its last fix at its last
+ * speed for this long, never past the next stop; after that the timetable estimate takes over again.
+ */
+export const DEAD_RECKONING_MS = 5 * 60_000;
 
 /**
  * Best-known times at each ridden stop: actual, else Trafikverket's estimate, else the timetable shifted by the
@@ -202,14 +210,21 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
       lat: gps.lat,
       lon: gps.lon,
       bearing: gps.bearing,
-      speedKmh: gps.speedKmh,
+      speedKmh: shownSpeed(gps, now),
       positionSource: 'gps',
       positionAt: gps.at,
     };
   }
   if (fresh)
-    return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, positionSource: 'gps', positionAt: gps.at, progress: null };
+    return { ...out, lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: shownSpeed(gps, now), positionSource: 'gps', positionAt: gps.at, progress: null };
   if (line.length < 2) return { ...out, progress: null };
+  if (gps && status === 'en_route' && now - gps.at <= 30 * 60_000) {
+    // Where the GPS last put it: an estimate never moves the train back behind that.
+    const last = locate(line, cum, gps);
+    const cap = stopM[next]!;
+    const recent = now - gps.at <= DEAD_RECKONING_MS && gps.speedKmh !== null && gps.speedKmh > 0;
+    m = Math.min(cap, Math.max(recent ? last + (gps.speedKmh! / 3.6) * ((now - gps.at) / 1000) : m, last));
+  }
   const p = pointAt(line, cum, m);
   return { ...out, progress: total ? m / total : null, lat: p.lat, lon: p.lon, bearing: p.bearing, positionSource: 'estimated' };
 }

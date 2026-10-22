@@ -1,5 +1,6 @@
 // Trafikverket Open API client. The key never leaves the server.
 import { config } from '../env.js';
+import { feedFailed, feedOk } from '../lib/health.js';
 
 const URL = 'https://api.trafikinfo.trafikverket.se/v2/data.json';
 
@@ -15,9 +16,22 @@ const TIMEOUT_MS = 90_000;
 export async function trvQuery<T = Record<string, unknown[]>>(query: string, fetchImpl: typeof fetch = fetch): Promise<T> {
   if (!config.trafikverketApiKey) throw new TrafikverketError('TRAFIKVERKET_API_KEY is not set in .env');
   const body = `<REQUEST><LOGIN authenticationkey="${config.trafikverketApiKey}" />${query}</REQUEST>`;
-  const res = await fetchImpl(URL, { method: 'POST', headers: { 'Content-Type': 'text/xml' }, body, signal: AbortSignal.timeout(TIMEOUT_MS) });
-  const text = await res.text();
-  if (!res.ok) throw new TrafikverketError(`Trafikverket ${res.status}: ${text.slice(0, 300)}`);
+  let res: Response;
+  let text: string;
+  try {
+    res = await fetchImpl(URL, { method: 'POST', headers: { 'Content-Type': 'text/xml' }, body, signal: AbortSignal.timeout(TIMEOUT_MS) });
+    text = await res.text();
+  } catch (e) {
+    feedFailed('trafikverket', e);
+    throw e;
+  }
+  if (!res.ok) {
+    const e = new TrafikverketError(`Trafikverket ${res.status}: ${text.slice(0, 300)}`);
+    // A 4xx is our query's fault, not the feed's.
+    if (res.status >= 500 || res.status === 429) feedFailed('trafikverket', e);
+    throw e;
+  }
+  feedOk('trafikverket');
   const result = JSON.parse(text).RESPONSE.RESULT[0];
   if (result.ERROR) throw new TrafikverketError(`Trafikverket: ${result.ERROR.MESSAGE}`);
   return result as T;

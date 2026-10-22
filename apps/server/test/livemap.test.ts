@@ -90,9 +90,13 @@ describe('live map ingest', () => {
   afterEach(() => ingest?.stop());
 
   it('keeps the newest position per train and drops stale ones', () => {
-    ingest = new LiveMapIngest(openDb(':memory:'), { now: () => ms('11:05') });
+    ingest = new LiveMapIngest(openDb(':memory:'), { now: () => ms('11:00') + 30_000 });
     ingest.ingest([pos('270', 59.9, 17.6, '11:00'), pos('270', 59.0, 17.0, '10:59')]);
     expect(ingest.trains.get('270|2026-10-21')).toMatchObject({ lat: 59.9, lon: 17.6, bearing: 10, speedKmh: 120 });
+    // A speed is only passed on from a fresh fix.
+    ingest = new LiveMapIngest(openDb(':memory:'), { now: () => ms('11:05') });
+    ingest.ingest([pos('270', 59.9, 17.6, '11:00')]);
+    expect(ingest.trains.get('270|2026-10-21')).toMatchObject({ lat: 59.9, speedKmh: null });
     (ingest as unknown as { opts: { now: () => number } }).opts.now = () => ms('11:20');
     (ingest as unknown as { prune(): void }).prune();
     expect(ingest.trains.size).toBe(0);

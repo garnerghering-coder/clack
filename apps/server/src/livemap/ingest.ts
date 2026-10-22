@@ -16,6 +16,7 @@ import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
 import { productOf, searchByNumber, tripStops, type Product } from '../search/timetable.js';
 import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
+import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
 
 export interface LiveTrain {
   id: string;
@@ -59,6 +60,8 @@ interface TrvPos {
   Speed?: number;
   Status?: { Active?: boolean };
   Deleted?: boolean;
+  /** Ours: when Speed was read (earlier than TimeStamp when this fix came without one). */
+  speedAt?: number;
 }
 
 export const POSITION_MAX_AGE_MS = 10 * 60_000;
@@ -110,6 +113,8 @@ interface TailStop {
 export class LiveMapIngest extends EventEmitter {
   readonly trains = new Map<string, LiveTrain>();
   private positions = new Map<string, TrvPos>();
+  /** Every position report passes through here first: impossible jumps are dropped, speeds checked. */
+  readonly fixes = new FixFilter();
   private changed = new Set<string>();
   private removed = new Set<string>();
   private ann: AnnouncementCache;
@@ -274,7 +279,11 @@ export class LiveMapIngest extends EventEmitter {
         if (this.trains.delete(k)) this.removed.add(k);
         continue;
       }
-      this.positions.set(k, p);
+      const ll = parseWgs84(p.Position?.WGS84);
+      if (!ll) continue;
+      if (!this.fixes.push(k, { lat: ll[0], lon: ll[1], at: Date.parse(p.TimeStamp), bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null })) continue;
+      const cur = this.fixes.current(k);
+      this.positions.set(k, { ...p, Speed: cur?.speedKmh ?? undefined, speedAt: cur?.speedAt });
       this.derive(k);
     }
   }
@@ -287,7 +296,8 @@ export class LiveMapIngest extends EventEmitter {
     // A stale fix is left to the estimate (if that's on); a fresh one always wins over it.
     if (this.opts.includeEstimated !== false && this.now() - at > GPS_FRESH_MS && this.estimatedKeys.has(k)) return;
     this.estimatedKeys.delete(k);
-    this.put(k, { lat: ll[0], lon: ll[1], bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null, at, estimated: false });
+    // A speed only from a fresh fix: an old one says nothing about how fast it's going now.
+    this.put(k, { lat: ll[0], lon: ll[1], bearing: p.Bearing ?? null, speedKmh: this.now() - (p.speedAt ?? at) <= SPEED_FRESH_MS ? (p.Speed ?? null) : null, at, estimated: false });
   }
 
   /** Train k at this position, with what the announcements say about it; or off the map if it shouldn't show. */
@@ -530,6 +540,7 @@ export class LiveMapIngest extends EventEmitter {
 
   private prune() {
     const cutoff = this.now() - POSITION_MAX_AGE_MS;
+    this.fixes.prune(this.now() - 60 * 60_000);
     for (const [k, p] of this.positions)
       if (Date.parse(p.TimeStamp) < cutoff) {
         this.positions.delete(k);

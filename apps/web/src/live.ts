@@ -47,7 +47,13 @@ export function useNow(everyMs = 1000) {
 /** Live data older than this shows as stale (DESIGN §9.5). */
 export const STALE_MS = 2 * 60_000;
 
-export const isFresh = (live: LiveState | null | undefined, now: number) => !!live && now - (ms(live.updatedAt) ?? 0) < STALE_MS;
+/** When the trip's data last came from the feeds (our server ticks on even when they don't answer). */
+export const dataAt = (live: LiveState) => ms(live.reportedAt ?? null) ?? ms(live.updatedAt) ?? 0;
+
+export const isFresh = (live: LiveState | null | undefined, now: number) => !!live && now - dataAt(live) < STALE_MS;
+
+/** Speeds come with GPS fixes about every 30 s; one older than this isn't shown. */
+export const SPEED_FRESH_MS = 60_000;
 
 /** Is this leg being followed live right now (tracked and not yet arrived)? */
 export const isLive = (live: LiveState | null | undefined) => !!live && (live.status === 'boarding' || live.status === 'en_route' || live.status === 'at_stop');

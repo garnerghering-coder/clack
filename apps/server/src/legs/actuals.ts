@@ -19,6 +19,45 @@ const ENTUR_HISTORY_MS = 30 * 3600_000;
 /** Freeze a leg this long after it actually arrived. */
 const SNAPSHOT_AFTER_MS = 30 * 60_000;
 
+/**
+ * Sanity rules between the feeds and the trip (docs/RELIABILITY_PLAN.md §2), applied to what a refresh found against
+ * what's stored. Real reports pass unchanged; only these are held back:
+ * - an actual time never goes back to "not yet" (a later answer that lacks it is a gap, not news);
+ * - an "actual" time still in the future is an estimate at best;
+ * - an estimate that jumps 15 min or more from the stored one waits for the next answer to say the same.
+ */
+export const JUMP_MS = 15 * 60_000;
+const FUTURE_SLACK_MS = 2 * 60_000;
+const held = new Map<string, { value: number; at: number }>();
+
+export function resetHeldEstimates() {
+  held.clear();
+}
+
+export function sanitizeStop(
+  key: string,
+  found: { actual: number | null; estimated: number | null },
+  stored: { actual: number | null; estimated: number | null },
+  now: number,
+): { actual: number | null; estimated: number | null } {
+  let actual = found.actual;
+  let estimated = found.estimated;
+  if (actual !== null && actual > now + FUTURE_SLACK_MS) {
+    estimated ??= actual;
+    actual = null;
+  }
+  if (actual === null && stored.actual !== null) return { actual: stored.actual, estimated: null };
+  if (actual === null && estimated !== null && stored.estimated !== null && Math.abs(estimated - stored.estimated) >= JUMP_MS) {
+    const h = held.get(key);
+    if (h && Math.abs(h.value - estimated) <= 2 * 60_000 && now - h.at <= 10 * 60_000) held.delete(key);
+    else {
+      held.set(key, { value: estimated, at: now });
+      estimated = stored.estimated;
+    }
+  } else held.delete(key);
+  return { actual, estimated };
+}
+
 export interface AnnouncementRow {
   AdvertisedTrainIdent: string;
   LocationSignature: string;
@@ -158,13 +197,27 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
     return 'manual';
   }
   const stops = db
-    .select({ seq: legStops.seq, role: legStops.role, stationId: legStops.stationId, sig: stations.trvSignature, nsrId: stations.nsrId, country: stations.country, schedArr: legStops.schedArr, schedDep: legStops.schedDep })
+    .select({
+      seq: legStops.seq,
+      role: legStops.role,
+      stationId: legStops.stationId,
+      sig: stations.trvSignature,
+      nsrId: stations.nsrId,
+      country: stations.country,
+      schedArr: legStops.schedArr,
+      schedDep: legStops.schedDep,
+      storedActualArr: legStops.actualArr,
+      storedActualDep: legStops.actualDep,
+      storedEstimatedArr: legStops.estimatedArr,
+      storedEstimatedDep: legStops.estimatedDep,
+    })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
     .where(eq(legStops.legId, legId))
     .orderBy(legStops.seq)
     .all()
     .map((s) => ({ ...s, schedArr: s.schedArr?.getTime() ?? null, schedDep: s.schedDep?.getTime() ?? null }));
+  const storedOf = new Map(stops.map((s) => [s.seq, s]));
 
   const arr = leg.schedArr?.getTime() ?? 0;
   const tooOld = arr && now - arr > TRV_HISTORY_MS;
@@ -189,6 +242,13 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       have.platform ??= e.platform;
       have.canceled ||= e.canceled;
     }
+  }
+  for (const m of matched.values()) {
+    const st = storedOf.get(m.seq);
+    const ms = (d: Date | null | undefined) => d?.getTime() ?? null;
+    const arr = sanitizeStop(`${legId}|${m.seq}|arr`, { actual: m.actualArr, estimated: m.estimatedArr }, { actual: ms(st?.storedActualArr), estimated: ms(st?.storedEstimatedArr) }, now);
+    const dep = sanitizeStop(`${legId}|${m.seq}|dep`, { actual: m.actualDep, estimated: m.estimatedDep }, { actual: ms(st?.storedActualDep), estimated: ms(st?.storedEstimatedDep) }, now);
+    Object.assign(m, { actualArr: arr.actual, estimatedArr: arr.estimated, actualDep: dep.actual, estimatedDep: dep.estimated });
   }
 
   // Who can report each stop: Trafikverket in Sweden, Entur where it has live data, otherwise nobody (Denmark,

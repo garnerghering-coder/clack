@@ -9,6 +9,7 @@ import { haversineM } from '../lib/geo.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
+import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
 import { gtfsRt, RT_DATASOURCES, ScheduleRelationship, StopScheduleRelationship, type FeedMessage } from '../entur/client.js';
 
 const TZ = 'Europe/Oslo';
@@ -105,6 +106,8 @@ function bearingOf(a: { lat: number; lon: number }, b: { lat: number; lon: numbe
 
 export class NorwayFeed {
   private positions = new Map<string, Pos>();
+  /** Impossible jumps dropped and speeds checked, as for Sweden's GPS. */
+  readonly fixes = new FixFilter();
   /** The fix before the current one, for a heading when the feed sends none (only Flytoget does). */
   private previous = new Map<string, Pos>();
   private updates = new Map<string, Update>();
@@ -144,7 +147,9 @@ export class NorwayFeed {
       const old = this.positions.get(k);
       if (old && old.at >= at) continue;
       // Protobuf sends 0 for a missing bearing; only Flytoget sends real ones, so 0 is treated as none.
-      const pos: Pos = { lat: v.position.latitude, lon: v.position.longitude, bearing: v.position.bearing || null, speedKmh: v.position.speed ? Math.round(v.position.speed * 3.6) : null, at };
+      const raw: Pos = { lat: v.position.latitude, lon: v.position.longitude, bearing: v.position.bearing || null, speedKmh: v.position.speed ? Math.round(v.position.speed * 3.6) : null, at };
+      if (!this.fixes.push(k, raw)) continue;
+      const pos: Pos = { ...raw, speedKmh: this.fixes.current(k)?.speedKmh ?? null };
       if (old && haversineM(old.lat, old.lon, pos.lat, pos.lon) > 25) this.previous.set(k, old);
       this.positions.set(k, pos);
     }
@@ -224,6 +229,7 @@ export class NorwayFeed {
         this.positions.delete(k);
         this.previous.delete(k);
       }
+    this.fixes.prune(now - 60 * 60_000);
     const graph = this.opts.graph?.() ?? null;
     const out: NorwayTrain[] = [];
     for (const trip of this.running(now)) {
@@ -253,7 +259,7 @@ export class NorwayFeed {
       let fix: Pick<NorwayTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
       if (fresh) {
         const prev = this.previous.get(rk);
-        fix = { lat: gps.lat, lon: gps.lon, bearing: gps.bearing ?? (prev ? bearingOf(prev, gps) : bearingOf(gps, next)), speedKmh: gps.speedKmh, at: gps.at, estimated: false };
+        fix = { lat: gps.lat, lon: gps.lon, bearing: gps.bearing ?? (prev ? bearingOf(prev, gps) : bearingOf(gps, next)), speedKmh: now - gps.at <= SPEED_FRESH_MS ? gps.speedKmh : null, at: gps.at, estimated: false };
       } else {
         let j = i - 1;
         while (j > 0 && exp[j]!.skipped) j--;

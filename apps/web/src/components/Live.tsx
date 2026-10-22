@@ -2,7 +2,8 @@
 import { useTranslation } from 'react-i18next';
 import { FlapTime } from './SplitFlap';
 import { ms, type Leg, type LegEvent, type LiveState } from '../api';
-import { agoKey, isFresh } from '../live';
+import { Gauge } from 'lucide-react';
+import { agoKey, dataAt, isFresh, SPEED_FRESH_MS } from '../live';
 import { useSettings } from '../settings';
 import { fmtDelay, fmtTime } from '../format';
 import { DelayPill } from './DelayPill';
@@ -18,7 +19,7 @@ export function LiveChip({ live, now }: { live: LiveState; now: number }) {
         {t('live.chip')}
       </span>
     );
-  return <span className="chip stale-chip">{t('live.stale', { ago: agoKey(t, ms(live.updatedAt) ?? now, now) })}</span>;
+  return <span className="chip stale-chip">{t('live.stale', { ago: agoKey(t, dataAt(live), now) })}</span>;
 }
 
 interface StopName {
@@ -66,7 +67,12 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
         <span className="live-progress-fill" style={{ width: `${progress * 100}%` }} />
         <span className={`live-progress-dot ${live.positionSource === 'estimated' ? 'hollow' : ''}`} style={{ left: `${progress * 100}%` }} />
       </div>
-      {where && <p className="strong">{where}</p>}
+      {where && (
+        <p className="strong live-where">
+          {where}
+          <Speedometer kmh={live.positionSource === 'gps' ? live.speedKmh : null} at={ms(live.positionAt)} now={now} />
+        </p>
+      )}
       {next && <p>{next}</p>}
       {!compact && (
         <p className="live-arrives">
@@ -74,7 +80,7 @@ export function LiveModule({ leg, live, stops, now, compact = false }: { leg: Le
         </p>
       )}
       <p className="caption">
-        {t('live.updated', { ago: agoKey(t, ms(live.updatedAt) ?? now, now) })} · {source}
+        {t('live.updated', { ago: agoKey(t, dataAt(live), now) })} · {source}
       </p>
     </section>
   );
@@ -124,5 +130,16 @@ export function ActivityLog({ leg, events, stops }: { leg: Leg; events: LegEvent
         </ol>
       )}
     </section>
+  );
+}
+
+/** The train's speed from its GPS, only when it's fresh and passed the server's checks; otherwise nothing. */
+export function Speedometer({ kmh, at, now }: { kmh: number | null | undefined; at: number | null; now: number }) {
+  if (kmh === null || kmh === undefined || at === null || now - at > SPEED_FRESH_MS) return null;
+  return (
+    <span className="speedo tabular">
+      <Gauge size={14} aria-hidden="true" />
+      {Math.round(kmh)} km/h
+    </span>
   );
 }

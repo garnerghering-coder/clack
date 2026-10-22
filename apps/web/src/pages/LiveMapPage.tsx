@@ -9,6 +9,7 @@ import { decodePolyline, type LatLon } from '@clack/shared';
 import { api, type BoardRow, type Operator, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry, type TrainView } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
+import { Speedometer } from '../components/Live';
 import { TrainArt } from '../components/TrainArt';
 import { Onboard } from '../components/Onboard';
 import { BuyTicket, type TicketTrip } from '../components/Tickets';
@@ -930,7 +931,7 @@ function LiveMap() {
               <div className="chip-row">
                 {sel.delayMin !== null && <DelayPill delay={sel.delayMin} />}
                 <span className={sel.estimated || posAge > GPS_FRESH_MS ? 'chip' : 'chip live-pos'}>{posLabel}</span>
-                {!collapsed && sel.speedKmh !== null && !sel.estimated && <span className="chip tabular">{sel.speedKmh} km/h</span>}
+                {!collapsed && !sel.estimated && <Speedometer kmh={sel.speedKmh} at={sel.at} now={now} />}
               </div>
               <p className="caption">{t('live.updated', { ago: agoKey(t, sel.at, now) })}</p>
             </>

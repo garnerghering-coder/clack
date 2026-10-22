@@ -1017,3 +1017,8 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .alert-why { font-weight: 600; }
 .alt-toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--tone) 40%, var(--hairline)); background: var(--surface-raised); font-weight: 700; text-align: left; }
 .alt-toggle:disabled { opacity: 0.7; cursor: default; }
+
+/* Speed from the train's GPS, beside where it is (only when fresh and checked). */
+.live-where { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.speedo { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); font-size: 13px; font-weight: 700; line-height: 18px; color: var(--text); }
+.speedo svg { color: var(--text-2); }

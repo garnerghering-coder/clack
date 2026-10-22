@@ -276,6 +276,8 @@ export const liveState = sqliteTable('live_state', {
   /** Expected arrival where you get off. */
   arrivalEta: timestamp('arrival_eta'),
   arrivalDelayMin: integer('arrival_delay_min'),
+  /** Last time Trafikverket or Entur answered for this leg; the app says when this goes quiet. */
+  reportedAt: timestamp('reported_at'),
 });
 
 // ---------- Followed trains (product brief §6.2, §8.1) ----------
@@ -343,3 +345,46 @@ export const delayObservations = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.trainNumber, t.signature, t.serviceDate] })],
 );
+
+// ---------- Accuracy audit (docs/RELIABILITY_PLAN.md §1) ----------
+
+/** What the app showed for a tracked leg's stop, each time it changed: expected times and the track. */
+export const shownValues = sqliteTable(
+  'shown_values',
+  {
+    legId: text('leg_id')
+      .notNull()
+      .references(() => legs.id, { onDelete: 'cascade' }),
+    seq: integer('seq').notNull(),
+    /** arr | dep | platform */
+    field: text('field').notNull(),
+    /** Epoch ms for times, the track for platform; null when nothing was shown. */
+    value: text('value'),
+    shownAt: timestamp('shown_at').notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.legId, t.seq, t.field, t.shownAt] })],
+);
+
+/** Per tracked leg: how its position was shown, tick by tick. */
+export const liveQuality = sqliteTable('live_quality', {
+  legId: text('leg_id')
+    .primaryKey()
+    .references(() => legs.id, { onDelete: 'cascade' }),
+  ticks: integer('ticks').notNull().default(0),
+  /** En route with a fresh GPS fix, with an estimate, and ticks where the leg's feed didn't answer. */
+  gpsTicks: integer('gps_ticks').notNull().default(0),
+  estimatedTicks: integer('estimated_ticks').notNull().default(0),
+  failedTicks: integer('failed_ticks').notNull().default(0),
+  rejectedFixes: integer('rejected_fixes').notNull().default(0),
+  firstAt: timestamp('first_at'),
+  lastAt: timestamp('last_at'),
+});
+
+/** The audit of one leg after it ran: what we showed against the final record. */
+export const legAudits = sqliteTable('leg_audits', {
+  legId: text('leg_id')
+    .primaryKey()
+    .references(() => legs.id, { onDelete: 'cascade' }),
+  auditedAt: timestamp('audited_at').notNull(),
+  result: text('result', { mode: 'json' }).$type<Record<string, unknown>>().notNull(),
+});

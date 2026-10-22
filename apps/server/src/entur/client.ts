@@ -2,6 +2,7 @@
 // is never retried inside its window: we wait for the reset time Entur sends.
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings';
 import { config } from '../env.js';
+import { feedFailed, feedOk } from '../lib/health.js';
 
 const JP_URL = 'https://api.entur.io/journey-planner/v3/graphql';
 const RT_URL = 'https://api.entur.io/realtime/v1/gtfs-rt';
@@ -32,16 +33,29 @@ export function resetAt(headers: Headers, now = Date.now()): number {
 
 async function enturFetch(url: string, init: RequestInit = {}, fetchImpl: typeof fetch = fetch): Promise<Response> {
   if (Date.now() < blockedUntil) throw new EnturRateLimited(blockedUntil);
-  const res = await fetchImpl(url, {
-    ...init,
-    headers: { 'ET-Client-Name': config.enturClientName, ...(init.headers as Record<string, string> | undefined) },
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-  });
+  let res: Response;
+  try {
+    res = await fetchImpl(url, {
+      ...init,
+      headers: { 'ET-Client-Name': config.enturClientName, ...(init.headers as Record<string, string> | undefined) },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+  } catch (e) {
+    feedFailed('entur', e);
+    throw e;
+  }
   if (res.status === 429) {
     blockedUntil = resetAt(res.headers);
-    throw new EnturRateLimited(blockedUntil);
+    const e = new EnturRateLimited(blockedUntil);
+    feedFailed('entur', e);
+    throw e;
   }
-  if (!res.ok) throw new EnturError(`Entur ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  if (!res.ok) {
+    const e = new EnturError(`Entur ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    if (res.status >= 500) feedFailed('entur', e);
+    throw e;
+  }
+  feedOk('entur');
   return res;
 }
 
