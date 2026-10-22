@@ -5,7 +5,7 @@
     {
       "osm": "2",
       "id": "L2",
-      "name": "Upper hall and bridge",
+      "name": "Övre hallen (upper hall)",
       "order": 2
     },
     {
@@ -17,13 +17,13 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Platforms and main hall",
+      "name": "Centralhallen (main hall, platforms)",
       "order": 0
     },
     {
       "osm": "-1",
       "id": "L-1",
-      "name": "Lower hall and tunnels",
+      "name": "Nedre hallen (lower hall)",
       "order": -1
     }
   ],
@@ -168,6 +168,11 @@
       "date": "2026-10-21",
       "who": "Claude (for the owner)",
       "what": "First draft from OSM (2026-10-19 extract) with 7 hand connections for gaps in OSM; see connections[].note."
+    },
+    {
+      "date": "2026-10-22",
+      "who": "Claude (for the owner)",
+      "what": "Level names checked against Jernhusen's station plan (Centralhallen, Nedre hallen, Övre hallen)."
     }
   ]
 }
