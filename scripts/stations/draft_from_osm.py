@@ -737,6 +737,28 @@ def main():
         if outline and len(outline) >= 4:
             poi["outline"] = outline
         pois.append(poi)
+    # A place mapped as a point inside a room (or a kiosk's own small building) takes that room's outline, when it's
+    # the only place in there: a shared room's outline would claim the whole room for one of them.
+    units = []
+    for wid, w in ways.items():
+        t = w["t"]
+        if w["nd"][0][0] != w["nd"][-1][0] or not (t.get("indoor") in ("room", "area") or t.get("building") in ("kiosk", "retail", "yes")):
+            continue
+        if t.get("building") in ("train_station", "transportation") or t.get("railway") == "station" or t.get("public_transport"):
+            continue
+        cs = coords(w)
+        a = abs(sum(cs[i - 1][0] * cs[i][1] - cs[i][0] * cs[i - 1][1] for i in range(len(cs)))) / 2
+        if not 4 <= a <= (600 if t.get("indoor") else 150):
+            continue
+        lv = parse_levels(t.get("level"))
+        if lv is None and t.get("indoor"):
+            lv = ["0"]
+        units.append(dict(pts=cs, area=a, levels={level_id[x] for x in (lv or ["0"]) if x in level_id}))
+    for u in sorted(units, key=lambda u: u["area"]):
+        inside = [q for q in pois if q["level"] in u["levels"] and pip((q["x"], q["y"]), u["pts"])]
+        ring = [list(q) for q in simplify(u["pts"], 0.4)]
+        if len(inside) == 1 and not inside[0].get("outline") and len(ring) >= 4:
+            inside[0]["outline"] = ring
     # Hand-drawn outlines for places OSM maps only as points (a source's plan the owner cleared, or a survey).
     for o in edits.get("outlines", []):
         for q in pois:
