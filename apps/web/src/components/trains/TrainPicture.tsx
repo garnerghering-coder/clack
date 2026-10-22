@@ -7,6 +7,7 @@ import { NoFlirtSide } from './NoFlirt';
 import { NoType73Side } from './NoType73';
 import { NoType76Side } from './NoType76';
 import { ReginaSide } from './Regina';
+import { X31Side } from './X31';
 import { X3Side } from './X3';
 import { X40Side } from './X40';
 import { X60Side } from './X60';
@@ -24,6 +25,7 @@ const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
   x40: { component: X40Side as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
+  x31: { component: X31Side as Side, liveries: ['oresundstag'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
   // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
   regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget'] },
