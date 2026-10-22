@@ -201,6 +201,17 @@ export interface Leg {
   borderEvidence?: { board?: { stationId: string; at: number }; alight?: { stationId: string; at: number } } | null;
 }
 
+/** Warnings from observed data (server legs/risk.ts): now along the route, now at your station, or this train's past. */
+export type RiskWarning =
+  | { kind: 'route_now'; trains: number; late: number; canceled: number; medianMin: number; windowMin: number }
+  | { kind: 'station_now'; station: string; trains: number; late: number; medianMin: number; windowMin: number }
+  | { kind: 'train_pattern'; station: string; days: number; lateDays: number; medianMin: number };
+export interface LegRisk {
+  checkedAt: number;
+  limits: ('too_far' | 'abroad' | 'no_live_data' | 'no_history')[];
+  warnings: RiskWarning[];
+}
+
 export interface Journey {
   id: string;
   legs: (Leg & { geometry: string | null })[];
@@ -424,6 +435,7 @@ export const api = {
     request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
   alternatives: (from: string, to: string, after: number, exclude: string | null) =>
     request<{ direct: TripResult[]; connections: Connection[] }>(`/alternatives?${new URLSearchParams({ from, to, after: String(Math.round(after)), ...(exclude ? { exclude } : {}) })}`),
+  legRisk: (id: string) => request<LegRisk>(`/legs/${id}/risk`),
   answerRide: (id: string, answer: 'yes' | 'no' | 'undo') => request<LegDetail>(`/legs/${id}/ride`, { method: 'POST', body: JSON.stringify({ answer }) }),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),
 };

@@ -963,3 +963,4 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .rights-links { display: flex; flex-wrap: wrap; gap: 12px; }
 .rights-links a { color: var(--accent-ink); font-weight: 600; }
 .alt-main .strong { white-space: nowrap; }
+.risk-card { display: grid; gap: 8px; border-left: 3px solid var(--slight); }

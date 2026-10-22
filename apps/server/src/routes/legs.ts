@@ -6,6 +6,7 @@ import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
 import { withLogo } from '../import/brands.js';
 import { loadBrands } from '../dataFiles.js';
+import { legRisk } from '../legs/risk.js';
 import { CONTENT_TYPES, logoFile } from '../import/logos.js';
 import fs from 'node:fs';
 
@@ -76,6 +77,9 @@ export const legRoutes =
 
     // Ticket links (owner, 2026-10-22): always the operator's own site, never an agent or affiliate.
     const brands = new Map(loadBrands().map((b) => [b.id, b]));
+    // Journey risk: warnings from the last hour along the route and this train's own past (legs/risk.ts).
+    app.get<{ Params: { id: string } }>('/legs/:id/risk', async (req, reply) => (await legRisk(db, req.userId, req.params.id)) ?? reply.code(404).send({ error: 'not found' }));
+
     app.get('/operators', async () =>
       (await db.query.operators.findMany()).map((o) => {
         const b = brands.get(o.id);

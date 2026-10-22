@@ -826,5 +826,20 @@
     "linkSe": "Konsumentverket: försenat eller inställt tåg",
     "linkOperator": "{{operator}}",
     "passportNote": "Ett inställt tåg räknas bara i ditt pass om du säger att du åkte med det."
+  },
+  "risk": {
+    "titleNow": "Förseningar längs din sträcka just nu",
+    "titlePattern": "Det här tåget har ofta gått sent",
+    "kind": {
+      "route_now": "Nu",
+      "station_now": "Nu",
+      "train_pattern": "Tidigare dagar"
+    },
+    "routeNow": "De senaste {{window}} min gick {{late}} av {{trains}} tåg längs din sträcka 10+ min sent ({{canceled}} inställda; median {{median}} min). Ditt tåg kan påverkas.",
+    "stationNow": "De senaste {{window}} min gick {{late}} av {{trains}} avgångar från {{station}} 10+ min sent (median {{median}} min).",
+    "pattern": "Det gick från {{station}} 5+ min sent {{late}} av de {{days}} dagar Clack har sett det (median {{median}} min). Ett mönster bakåt, inte en prognos för i dag.",
+    "change": "Ditt byte på {{min}} minuter i {{station}} har lite marginal om det fortsätter.",
+    "honest": "Från Trafikverkets rapporterade avgångar, kontrollerat {{time}}. Det här är observationer, inte en prognos; ditt tågs egna tider ovan är vad det rapporterar.",
+    "noLiveData": "Kunde inte kontrollera hur tågen går längs din sträcka just nu."
   }
 }

@@ -8,6 +8,7 @@ import { loadBrands } from '../dataFiles.js';
 import { stations, trvLocations } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
 import { fetchNorwayCalls, normalizeNorwayBoard } from './norway.js';
+import { recordObservations } from '../legs/risk.js';
 
 export const BOARD_POLL_MS = Number(process.env.BOARD_POLL_MS ?? 20_000);
 /** Kept warm this long after the last viewer leaves (quick back-and-forth navigation stays cheap). */
@@ -91,6 +92,12 @@ export class BoardHub {
             memory,
           })
         : normalizeNorwayBoard(await fetchNorwayCalls(source.id, type, from, to, this.opts.fetchImpl), { type, now, calls, memory });
+    // What left, and how late: the history behind "this train has often left late" (legs/risk.ts).
+    if (source.kind === 'trv' && type === 'departures')
+      recordObservations(
+        this.db,
+        rows.filter((r) => r.done || r.canceled).map((r) => ({ trainNumber: r.trainNumber, signature: source.id, advertised: r.advertised, actual: r.actual, canceled: r.canceled, serviceDate: r.trip?.serviceDate ?? localDate(r.advertised) })),
+      );
     return { stationId, signature: source.id, type, from, to, updatedAt: now, rows } satisfies Board;
   }
 

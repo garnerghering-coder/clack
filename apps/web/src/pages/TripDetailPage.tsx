@@ -20,6 +20,7 @@ import { opColor } from '../map/style';
 import { Onboard } from '../components/Onboard';
 import { JourneyConnections } from '../components/Connection';
 import { DisruptionCard } from '../components/Disruption';
+import { RiskCard } from '../components/Risk';
 import { FlapTime, SplitFlap } from '../components/SplitFlap';
 
 function TimeBlock({
@@ -266,6 +267,7 @@ export function TripDetailPage() {
 
         {/* Something wrong with this train or the change after it: what happened, what to do, what you're owed. */}
         <DisruptionCard leg={leg} />
+        {stage === 'before' && <RiskCard leg={leg} />}
 
         {/* What matters now (brief §7): before departure, on the train, or after arrival. */}
         <section className={`stage-card card stage-${stage}`}>

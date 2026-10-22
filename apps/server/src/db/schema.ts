@@ -325,3 +325,21 @@ export const stationRequests = sqliteTable('station_requests', {
   stationId: text('station_id').notNull().references(() => stations.id),
   createdAt: createdAt(),
 });
+
+/**
+ * Departure delays Clack has seen (boards and route checks), for "this train has often left late" patterns. Trafikverket
+ * only keeps about a day back, so the history is what this computer has observed; kept 30 days.
+ */
+export const delayObservations = sqliteTable(
+  'delay_observations',
+  {
+    trainNumber: text('train_number').notNull(),
+    /** Trafikverket location signature. */
+    signature: text('signature').notNull(),
+    serviceDate: text('service_date').notNull(),
+    advertised: timestamp('advertised').notNull(),
+    delayMin: integer('delay_min'),
+    canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
+  },
+  (t) => [primaryKey({ columns: [t.trainNumber, t.signature, t.serviceDate] })],
+);
