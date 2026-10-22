@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Activity } from 'lucide-react';
+import { AlertCard } from './Alert';
 import { api, ms, type Leg, type LegDetail, type LegRisk, type RiskWarning } from '../api';
 import { fmtTime } from '../format';
 import { useSettings } from '../settings';
@@ -35,21 +36,15 @@ export function RiskCard({ leg }: { leg: LegDetail }) {
   // A short planned change is what a late-running line puts at risk.
   const change = next ? Math.round(((ms(next.schedDep) ?? 0) - (ms(leg.schedArr) ?? 0)) / 60_000) : null;
   const changeAtRisk = nowWarn && change !== null && change < 10;
-  if (!risk.warnings.length) {
-    // Say when a check that matters couldn't be done, rather than imply all is well.
-    return risk.limits.includes('no_live_data') ? <p className="caption">{t('risk.noLiveData')}</p> : null;
-  }
+  // Nothing to warn about (or nothing could be checked): nothing to show.
+  if (!risk.warnings.length) return null;
   const line = (w: RiskWarning) => {
     if (w.kind === 'route_now') return t('risk.routeNow', { late: w.late, trains: w.trains, canceled: w.canceled, median: w.medianMin, window: w.windowMin });
     if (w.kind === 'station_now') return t('risk.stationNow', { station: w.station, late: w.late, trains: w.trains, median: w.medianMin, window: w.windowMin });
     return t('risk.pattern', { station: w.station, late: w.lateDays, days: w.days, median: w.medianMin });
   };
   return (
-    <section className="card risk-card" aria-live="polite">
-      <header className="disruption-head">
-        <Activity size={18} aria-hidden="true" />
-        <h2 className="section-title">{nowWarn ? t('risk.titleNow') : t('risk.titlePattern')}</h2>
-      </header>
+    <AlertCard tone="watch" icon={<Activity size={16} />} title={nowWarn ? t('risk.titleNow') : t('risk.titlePattern')} dismissKey={`risk:${leg.id}:${risk.warnings.map((w) => w.kind).join(',')}`}>
       <ul className="disruption-lines">
         {risk.warnings.map((w) => (
           <li key={w.kind}>
@@ -59,6 +54,6 @@ export function RiskCard({ leg }: { leg: LegDetail }) {
         {changeAtRisk && next && <li>{t('risk.change', { min: change, station: next.origin?.name ?? '' })}</li>}
       </ul>
       <p className="caption">{t('risk.honest', { time: fmtTime(risk.checkedAt, 'Europe/Stockholm', settings.clock) })}</p>
-    </section>
+    </AlertCard>
   );
 }

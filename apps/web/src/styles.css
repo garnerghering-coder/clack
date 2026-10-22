@@ -946,8 +946,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .ticket-return .row-actions { display: flex; gap: 8px; justify-content: flex-end; }
 
 /* Disruption help: calm, with the urgency carried by the edge colour rather than alarm. */
-.disruption { display: grid; gap: 10px; }
-.disruption-head { display: flex; align-items: center; gap: 8px; }
 .disruption-lines { display: grid; gap: 4px; padding-left: 18px; margin: 0; }
 .disruption-alts, .disruption-rights { display: grid; gap: 6px; }
 .alt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
@@ -958,7 +956,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .rights-links { display: flex; flex-wrap: wrap; gap: 12px; }
 .rights-links a { color: var(--accent-ink); font-weight: 600; }
 .alt-main .strong { white-space: nowrap; }
-.risk-card { display: grid; gap: 8px; }
 
 /* A trip's effect on your Passport: unlocked medals pop in, progress fills from where you were. */
 .trip-progress { display: grid; gap: 12px; text-align: left; width: 100%; }
@@ -994,3 +991,29 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-train-sheet.collapsed .train-sheet-body { overflow: visible; }
 .live-station-dep { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 40px; text-align: left; }
 .live-station-dep .caption { margin-left: auto; }
+
+/* Alerts (disruption help, delay warnings): a tinted header band and body in the alert's tone, unlike other cards. */
+.alert-card { --tone: var(--text-2); padding: 0; gap: 0; overflow: hidden; border-color: color-mix(in srgb, var(--tone) 50%, var(--hairline));
+  /* The same lit gradient as every card and trip pill, glowing in the alert's tone instead of the operator's. */
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--tone) 22%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--tone) 8%, var(--surface-raised)), var(--surface) 60%);
+}
+.alert-severe { --tone: var(--very-late); }
+.alert-warn { --tone: var(--late); }
+.alert-watch {
+  --tone: var(--slight); border-color: color-mix(in srgb, var(--tone) 30%, var(--hairline));
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--tone) 12%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--surface-raised), var(--surface) 60%);
+}
+.alert-head { display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; background: linear-gradient(100deg, color-mix(in srgb, var(--tone) 34%, transparent), color-mix(in srgb, var(--tone) 8%, transparent)); }
+.alert-watch .alert-head { background: linear-gradient(100deg, color-mix(in srgb, var(--tone) 18%, transparent), color-mix(in srgb, var(--tone) 4%, transparent)); }
+.alert-head h2 { flex: 1; min-width: 0; font-size: 17px; line-height: 22px; font-weight: 800; }
+.alert-icon { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--tone); color: #0b0e13; }
+.alert-severe .alert-icon { color: #fff; }
+.alert-close { flex: none; background: transparent; border-color: transparent; }
+.alert-body { display: grid; gap: 12px; padding: 14px 16px 16px; }
+.alert-why { font-weight: 600; }
+.alt-toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--tone) 40%, var(--hairline)); background: var(--surface-raised); font-weight: 700; text-align: left; }
+.alt-toggle:disabled { opacity: 0.7; cursor: default; }

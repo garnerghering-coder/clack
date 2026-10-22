@@ -808,7 +808,6 @@
     "delayed": "Expected about {{min}} min late at {{station}}.",
     "connectionMissed": "On current times you reach {{station}} after {{next}} leaves at {{time}}.",
     "connectionAtRisk": "Under 5 minutes to change at {{station}} on current times.",
-    "trafikverketSays": "Trafikverket: {{text}}",
     "journeyContinues": "Your journey continues to {{station}}: the options below go all the way there.",
     "otherWays": "Other ways to {{to}}",
     "looking": "Looking in the timetable…",
@@ -829,7 +828,12 @@
     "linkSe": "Konsumentverket: delayed or cancelled trains",
     "linkOperator": "{{operator}}",
     "passportNote": "A cancelled train only counts in your Passport if you tell us you travelled on it.",
-    "arrivedLate": "Arrived {{min}} min late at {{station}}."
+    "arrivedLate": "Arrived {{min}} min late at {{station}}.",
+    "why": "Why: {{reasons}} (Trafikverket).",
+    "and": " and ",
+    "viewSuggested": "View suggested alternatives",
+    "hideSuggested": "Hide suggested alternatives",
+    "noAlternatives": "No alternatives found"
   },
   "risk": {
     "titleNow": "Delays along your route right now",
@@ -843,8 +847,7 @@
     "stationNow": "In the last {{window}} min, {{late}} of {{trains}} departures from {{station}} left 10+ min late (median {{median}} min).",
     "pattern": "It left {{station}} 5+ min late on {{late}} of the {{days}} days Clack has seen it (median {{median}} min). A past pattern, not a forecast for today.",
     "change": "Your {{min}}-minute change at {{station}} leaves little room if this continues.",
-    "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports.",
-    "noLiveData": "Couldn’t check how trains are running along your route right now."
+    "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports."
   },
   "progress": {
     "notCounted": "It goes into your Passport once it’s recorded as travelled.",

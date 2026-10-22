@@ -808,7 +808,6 @@
     "delayed": "Väntas vara cirka {{min}} min sent i {{station}}.",
     "connectionMissed": "Med nuvarande tider kommer du till {{station}} efter att {{next}} har gått {{time}}.",
     "connectionAtRisk": "Under 5 minuter att byta i {{station}} med nuvarande tider.",
-    "trafikverketSays": "Trafikverket: {{text}}",
     "journeyContinues": "Din resa fortsätter till {{station}}: alternativen nedan går hela vägen dit.",
     "otherWays": "Andra sätt att ta sig till {{to}}",
     "looking": "Letar i tidtabellen…",
@@ -829,7 +828,12 @@
     "linkSe": "Konsumentverket: försenat eller inställt tåg",
     "linkOperator": "{{operator}}",
     "passportNote": "Ett inställt tåg räknas bara i ditt pass om du säger att du åkte med det.",
-    "arrivedLate": "Kom fram {{min}} min sent till {{station}}."
+    "arrivedLate": "Kom fram {{min}} min sent till {{station}}.",
+    "why": "Orsak: {{reasons}} (Trafikverket).",
+    "and": " och ",
+    "viewSuggested": "Visa förslag på alternativ",
+    "hideSuggested": "Dölj förslag på alternativ",
+    "noAlternatives": "Inga alternativ hittades"
   },
   "risk": {
     "titleNow": "Förseningar längs din sträcka just nu",
@@ -843,8 +847,7 @@
     "stationNow": "De senaste {{window}} min gick {{late}} av {{trains}} avgångar från {{station}} 10+ min sent (median {{median}} min).",
     "pattern": "Det gick från {{station}} 5+ min sent {{late}} av de {{days}} dagar Clack har sett det (median {{median}} min). Ett mönster bakåt, inte en prognos för i dag.",
     "change": "Ditt byte på {{min}} minuter i {{station}} har lite marginal om det fortsätter.",
-    "honest": "Från Trafikverkets rapporterade avgångar, kontrollerat {{time}}. Det här är observationer, inte en prognos; ditt tågs egna tider ovan är vad det rapporterar.",
-    "noLiveData": "Kunde inte kontrollera hur tågen går längs din sträcka just nu."
+    "honest": "Från Trafikverkets rapporterade avgångar, kontrollerat {{time}}. Det här är observationer, inte en prognos; ditt tågs egna tider ovan är vad det rapporterar."
   },
   "progress": {
     "notCounted": "Den kommer med i ditt pass när den är registrerad som åkt.",
