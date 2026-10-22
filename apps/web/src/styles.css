@@ -951,8 +951,10 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .disruption-lines { display: grid; gap: 4px; padding-left: 18px; margin: 0; }
 .disruption-alts, .disruption-rights { display: grid; gap: 6px; }
 .alt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.alt-row { display: flex; align-items: center; gap: 8px; }
-.alt-main { display: grid; flex: 1; min-width: 0; }
+.alt-row { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 6px 10px; padding-bottom: 10px; border-bottom: 1px solid var(--hairline); }
+.alt-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.alt-main { display: grid; min-width: 0; }
+.alt-actions { grid-column: 2; display: flex; gap: 8px; flex-wrap: wrap; }
 .rights-links { display: flex; flex-wrap: wrap; gap: 12px; }
 .rights-links a { color: var(--accent-ink); font-weight: 600; }
 .alt-main .strong { white-space: nowrap; }

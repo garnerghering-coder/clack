@@ -9,7 +9,7 @@ import { AlertTriangle, Info } from 'lucide-react';
 import { assessDisruption, passengerRights, RIGHTS_LINKS, type DisruptionKind } from '@clack/shared';
 import { api, ms, type Connection, type Leg, type LegDetail, type TripResult } from '../api';
 import { useOperators } from '../data';
-import { fmtTime } from '../format';
+import { fmtDay, fmtTime } from '../format';
 import { useNow } from '../live';
 import { useSettings } from '../settings';
 import { useConnection } from './Connection';
@@ -31,7 +31,10 @@ export function DisruptionCard({ leg }: { leg: LegDetail }) {
 
 function WithChange({ leg, next, journey }: { leg: LegDetail; next: Leg; journey: Leg[] }) {
   const { result } = useConnection(leg, next);
-  return <Card leg={leg} next={next} connection={result.status} journey={journey} />;
+  // A change the operators planned is theirs to judge: only a delay (or a cancellation) makes it a disruption here,
+  // not our walking estimate on its own.
+  const delayed = (leg.arrDelayMin ?? 0) > 0 || (ms(leg.actualArr) ?? 0) > (ms(leg.schedArr) ?? Infinity) || (next.depDelayMin ?? 0) < 0 || next.canceled;
+  return <Card leg={leg} next={next} connection={delayed || result.status === 'broken' ? result.status : null} journey={journey} />;
 }
 
 function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | undefined; connection: string | null; journey: Leg[] }) {
@@ -76,6 +79,9 @@ function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | 
   const finalDelay = final.id === leg.id ? leg.arrDelayMin : final.arrDelayMin;
   const rights = passengerRights({ countries, journeyKm: km, arrDelayMin: kinds.includes('connection_missed') ? null : finalDelay, canceled: leg.canceled });
   const tz = board?.tz ?? 'Europe/Stockholm';
+  // Alternatives can be tomorrow's: say so rather than show 04:55 as if it were today.
+  const localDay = (when: number, zone: string) => new Intl.DateTimeFormat('en-CA', { timeZone: zone }).format(when);
+  const otherDay = (when: number, zone: string) => (localDay(when, zone) !== localDay(Math.max(now, schedDep), tz) ? fmtDay(when, zone) : null);
   const line = (k: DisruptionKind) => {
     switch (k) {
       case 'canceled':
@@ -87,7 +93,9 @@ function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | 
       case 'replacement':
         return t('disruption.replacement');
       case 'delayed':
-        return t('disruption.delayed', { min: Math.max(leg.depDelayMin ?? 0, leg.arrDelayMin ?? 0), station: alight?.name ?? '' });
+        return arrived && leg.arrDelayMin !== null
+          ? t('disruption.arrivedLate', { min: leg.arrDelayMin, station: alight?.name ?? '' })
+          : t('disruption.delayed', { min: Math.max(leg.depDelayMin ?? 0, leg.arrDelayMin ?? 0), station: alight?.name ?? '' });
       case 'connection_missed':
         return t('disruption.connectionMissed', { station: next?.origin?.name ?? '', next: [next?.operator?.name, next?.trainNumber].filter(Boolean).join(' '), time: fmtTime(ms(next?.schedDep ?? null), tz, settings.clock) });
       case 'connection_at_risk':
@@ -98,7 +106,7 @@ function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | 
     <section className={`card disruption urgency-${urgency}`} aria-live="polite">
       <header className="disruption-head">
         {urgency === 'info' ? <Info size={18} aria-hidden="true" /> : <AlertTriangle size={18} aria-hidden="true" />}
-        <h2 className="section-title">{t(`disruption.title.${kinds[0]}`)}</h2>
+        <h2 className="section-title">{t(arrived && kinds[0] === 'delayed' ? 'disruption.title.delayed_past' : `disruption.title.${kinds[0]}`)}</h2>
       </header>
       <ul className="disruption-lines">
         {kinds.map((k) => (
@@ -124,14 +132,16 @@ function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | 
                     <span className="strong tabular">
                       {fmtTime(r.from.time, r.from.tz, settings.clock)} → {fmtTime(r.to.time, r.to.tz, settings.clock)}
                     </span>
-                    <span className="caption">{[r.operatorId ? ops.get(r.operatorId)?.name : r.routeName, r.trainNumber].filter(Boolean).join(' ')}</span>
+                    <span className="caption">{[[r.operatorId ? ops.get(r.operatorId)?.name : r.routeName, r.trainNumber].filter(Boolean).join(' '), otherDay(r.from.time, r.from.tz)].filter(Boolean).join(' · ')}</span>
                   </span>
-                  <Link className="button small" to={`/explore?${new URLSearchParams({ train: r.trainNumber ?? '', date: r.serviceDate, key: r.key })}`}>
-                    {t('disruption.live')}
-                  </Link>
-                  <Link className="button small primary" to={`/add?${new URLSearchParams({ trip: r.key, date: r.serviceDate, from: String(r.from.seq), to: String(r.to.seq), replace: leg.id })}`}>
-                    {t('disruption.useInstead')}
-                  </Link>
+                  <span className="alt-actions">
+                    <Link className="button small" to={`/explore?${new URLSearchParams({ train: r.trainNumber ?? '', date: r.serviceDate, key: r.key })}`}>
+                      {t('disruption.live')}
+                    </Link>
+                    <Link className="button small primary" to={`/add?${new URLSearchParams({ trip: r.key, date: r.serviceDate, from: String(r.from.seq), to: String(r.to.seq), replace: leg.id })}`}>
+                      {t('disruption.useInstead')}
+                    </Link>
+                  </span>
                 </li>
               ))}
               {alts.connections.map((c) => (
@@ -141,11 +151,13 @@ function Card({ leg, next, connection, journey }: { leg: LegDetail; next: Leg | 
                     <span className="strong tabular">
                       {fmtTime(c.first.from.time, c.first.from.tz, settings.clock)} → {fmtTime(c.second.to.time, c.second.to.tz, settings.clock)}
                     </span>
-                    <span className="caption">{t('add.changeAt', { station: c.changeAt.name, min: c.changeMin })}</span>
+                    <span className="caption">{[t('add.changeAt', { station: c.changeAt.name, min: c.changeMin }), otherDay(c.first.from.time, c.first.from.tz)].filter(Boolean).join(' · ')}</span>
                   </span>
-                  <Link className="button small" to={`/explore?${new URLSearchParams({ train: c.first.trainNumber ?? '', date: c.first.serviceDate, key: c.first.key })}`}>
-                    {t('disruption.live')}
-                  </Link>
+                  <span className="alt-actions">
+                    <Link className="button small" to={`/explore?${new URLSearchParams({ train: c.first.trainNumber ?? '', date: c.first.serviceDate, key: c.first.key })}`}>
+                      {t('disruption.live')}
+                    </Link>
+                  </span>
                 </li>
               ))}
             </ul>

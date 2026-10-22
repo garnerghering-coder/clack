@@ -798,7 +798,8 @@
       "replacement": "Bussar ersätter en del av ditt tåg",
       "delayed": "Ditt tåg är försenat",
       "connection_missed": "Du missar troligen ditt byte",
-      "connection_at_risk": "Ditt byte är snävt"
+      "connection_at_risk": "Ditt byte är snävt",
+      "delayed_past": "Ditt tåg kom fram sent"
     },
     "canceled": "Trafikverket rapporterar {{train}} som inställt.",
     "skipsBoard": "{{train}} går, men stannar inte i {{station}}.",
@@ -827,7 +828,8 @@
     "linkEu": "EU:s rättigheter för tågresenärer",
     "linkSe": "Konsumentverket: försenat eller inställt tåg",
     "linkOperator": "{{operator}}",
-    "passportNote": "Ett inställt tåg räknas bara i ditt pass om du säger att du åkte med det."
+    "passportNote": "Ett inställt tåg räknas bara i ditt pass om du säger att du åkte med det.",
+    "arrivedLate": "Kom fram {{min}} min sent till {{station}}."
   },
   "risk": {
     "titleNow": "Förseningar längs din sträcka just nu",

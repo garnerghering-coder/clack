@@ -798,7 +798,8 @@
       "replacement": "Buses replace part of your train",
       "delayed": "Your train is running late",
       "connection_missed": "You’ll likely miss your change",
-      "connection_at_risk": "Your change is tight"
+      "connection_at_risk": "Your change is tight",
+      "delayed_past": "Your train arrived late"
     },
     "canceled": "Trafikverket reports {{train}} as cancelled.",
     "skipsBoard": "{{train}} runs, but won’t stop at {{station}}.",
@@ -827,7 +828,8 @@
     "linkEu": "EU rail passenger rights",
     "linkSe": "Konsumentverket: delayed or cancelled trains",
     "linkOperator": "{{operator}}",
-    "passportNote": "A cancelled train only counts in your Passport if you tell us you travelled on it."
+    "passportNote": "A cancelled train only counts in your Passport if you tell us you travelled on it.",
+    "arrivedLate": "Arrived {{min}} min late at {{station}}."
   },
   "risk": {
     "titleNow": "Delays along your route right now",
