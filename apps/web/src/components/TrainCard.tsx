@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { api, type LegDetail } from '../api';
 import { useTrainTypes } from '../data';
 import { TrainArt } from './TrainArt';
+import { TrainPicture } from './trains/TrainPicture';
 import { opColor } from '../map/style';
 
 export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: LegDetail) => void }) {
@@ -31,7 +32,7 @@ export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: Leg
       {type ? (
         <>
           <div className="train-art-wrap">
-            <TrainArt art={type.art} color={color} height={46} label={type.name} />
+            <TrainPicture type={type} operatorId={leg.operator?.id} color={color} height={46} label={type.name} />
           </div>
           <p className="train-name">
             <span className="strong">{type.name}</span>{' '}

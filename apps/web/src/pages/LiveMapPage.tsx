@@ -10,7 +10,7 @@ import { api, type BoardRow, type Operator, type Follow, type LiveTrainStop, typ
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { Speedometer } from '../components/Live';
-import { TrainArt } from '../components/TrainArt';
+import { TrainPicture, hasDetailedArt } from '../components/trains/TrainPicture';
 import { Onboard } from '../components/Onboard';
 import { BuyTicket, type TicketTrip } from '../components/Tickets';
 import { FlapTime } from '../components/SplitFlap';
@@ -912,8 +912,8 @@ function LiveMap() {
           intro={
             <>
               {!collapsed && selType && (
-                <div className="live-sheet-art">
-                  <TrainArt art={selType.art} color={opColor(selOp?.brandColor)} height={22} />
+                <div className={hasDetailedArt(selType.id) ? 'live-sheet-art side' : 'live-sheet-art'}>
+                  <TrainPicture type={selType} operatorId={sel.operatorId} color={opColor(selOp?.brandColor)} height={22} />
                   <span className="caption">{selType.name}</span>
                 </div>
               )}
@@ -1184,8 +1184,8 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
       intro={
         <>
           {!collapsed && type && (
-            <div className="live-sheet-art">
-              <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
+            <div className={hasDetailedArt(type.id) ? 'live-sheet-art side' : 'live-sheet-art'}>
+              <TrainPicture type={type} operatorId={view.operatorId} color={opColor(op?.brandColor)} height={22} />
               <span className="caption">{type.name}</span>
             </div>
           )}

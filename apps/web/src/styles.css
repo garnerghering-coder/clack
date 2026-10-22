@@ -1037,3 +1037,9 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-train-sheet.full { height: calc(100% - 24px); max-height: calc(100% - 24px); }
 .live-train-sheet.sized .train-sheet-body { overflow-y: auto; }
 .live-train-sheet.settling { transition: height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* Detailed side views (components/trains): the picture spans the sheet or card, the type's name below it. */
+.train-side { display: block; width: 100%; height: auto; }
+.live-sheet-art.side { display: grid; gap: 2px; }
+.live-sheet-art.side .train-side { max-width: 420px; margin: 2px 0 0; }
+.train-art-wrap .train-side { max-width: 560px; }
