@@ -7,6 +7,7 @@ import type { Db } from '../db/client.js';
 import { legs, timetableTrips } from '../db/schema.js';
 import { readDataFile } from '../dataFiles.js';
 import { productOf } from '../search/timetable.js';
+import { normName } from '../lib/geo.js';
 
 export interface TrainType {
   id: string;
@@ -18,7 +19,8 @@ export interface TrainType {
   about: string;
 }
 interface Rule {
-  match: { operator?: string; product?: string; number_min?: number; number_max?: number };
+  /** `ends`: the trip starts or ends at one of these stations (for lines an operator runs with a different type). */
+  match: { operator?: string; product?: string; number_min?: number; number_max?: number; ends?: string[] };
   type: string;
 }
 interface CompositionRule {
@@ -77,19 +79,28 @@ export function typeFromComposition(operatorId: string | null, product: string, 
   return null;
 }
 
-/** Best type known for a departure: from its coach order when that decides it, else the typical one. */
-export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null) {
-  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber);
+/** SJ's Storlien–Trondheim trains come through Trafikverket as "SJ", but SJ Nord runs them (jernbane.net 2026; Norske tog). */
+export function brandOnLine(operatorId: string | null, ends: (string | null | undefined)[]): string | null {
+  if (operatorId === 'sj' && ends.some((e) => e && normName(e).startsWith('trondheim'))) return 'sj-nord';
+  return operatorId;
 }
 
-export function typicalTrainType(operatorId: string | null, product: string, trainNumber: string | null): string | null {
+/** Best type known for a departure: from its coach order when that decides it, else the typical one. */
+export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null, ends?: (string | null | undefined)[]) {
+  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber, ends);
+}
+
+/** `ends`: the trip's first and last stations, where known (a rule with `ends` is skipped without them). */
+export function typicalTrainType(operatorId: string | null, product: string, trainNumber: string | null, ends?: (string | null | undefined)[]): string | null {
   const n = trainNumber ? Number(trainNumber) : NaN;
+  const endNames = new Set((ends ?? []).filter((e): e is string => !!e).map(normName));
   for (const r of trainTypeCatalog().rules) {
     const m = r.match;
     if (m.operator && m.operator !== operatorId) continue;
     if (m.product && m.product !== product) continue;
     if (m.number_min !== undefined && !(n >= m.number_min)) continue;
     if (m.number_max !== undefined && !(n <= m.number_max)) continue;
+    if (m.ends && !m.ends.some((e) => endNames.has(normName(e)))) continue;
     return r.type;
   }
   return null;

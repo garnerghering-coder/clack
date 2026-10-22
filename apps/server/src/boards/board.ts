@@ -6,7 +6,7 @@ import { delayMinutes, type OnboardFacts } from '@clack/shared';
 import { normName } from '../lib/geo.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import type { Product, StationCall } from '../search/timetable.js';
-import { parseComposition, trainTypeFor } from '../legs/trainTypes.js';
+import { brandOnLine, parseComposition, trainTypeFor } from '../legs/trainTypes.js';
 import { onboardFromRow } from '../legs/onboard.js';
 
 export type BoardType = 'departures' | 'arrivals';
@@ -157,8 +157,8 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
     const call = sameNumber[0] ?? (candidates.length === 1 && (!brand || candidates[0]!.operatorId === brand) ? candidates[0] : undefined);
 
     const product = call?.product ?? productFromTrv(r, brand);
-    const operatorId = call?.operatorId ?? brand;
     const ends = (dep ? r.ToLocation : r.FromLocation) ?? [];
+    const operatorId = brandOnLine(call?.operatorId ?? brand, ends.map((l) => ctx.names(l.LocationName)));
     const via = [...((dep ? r.ViaToLocation : r.ViaFromLocation) ?? [])].sort((a, b) => (a.Order ?? 0) - (b.Order ?? 0));
     out.push({
       id: r.ActivityId,
@@ -177,7 +177,7 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
       operatorId,
       productName,
       product,
-      trainType: trainTypeFor(operatorId, product, call?.trainNumber ?? n, parseComposition(r.TrainComposition)),
+      trainType: trainTypeFor(operatorId, product, call?.trainNumber ?? n, parseComposition(r.TrainComposition), ends.map((l) => ctx.names(l.LocationName))),
       onboard: dep ? onboardFromRow(r) : null,
       trip: call ? { key: call.tripKey, serviceDate: call.serviceDate, seq: call.seq } : null,
     });

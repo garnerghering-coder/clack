@@ -9,7 +9,7 @@ import { stations, trvLocations } from '../db/schema.js';
 import { parseWgs84, trvQuery } from '../trafikverket/client.js';
 import { brandMatcher } from '../boards/board.js';
 import { loadBrands } from '../dataFiles.js';
-import { trainTypeFor } from '../legs/trainTypes.js';
+import { brandOnLine, trainTypeFor } from '../legs/trainTypes.js';
 import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
@@ -308,7 +308,9 @@ export class LiveMapIngest extends EventEmitter {
       if (this.trains.delete(k)) this.removed.add(k);
       return;
     }
-    const brand = (info?.productName && this.matchBrand(info.productName)) || (info?.operatorText && this.matchBrand(info.operatorText)) || null;
+    const origin = this.name(info?.originSig ?? null);
+    const destination = this.name(info?.destinationSig ?? null);
+    const brand = brandOnLine((info?.productName && this.matchBrand(info.productName)) || (info?.operatorText && this.matchBrand(info.operatorText)) || null, [origin, destination]);
     const product = productOfText(info?.productName ?? null, brand);
     const t: LiveTrain = {
       id: k,
@@ -318,9 +320,9 @@ export class LiveMapIngest extends EventEmitter {
       operatorId: brand,
       productName: info?.productName ?? null,
       product,
-      trainType: trainTypeFor(brand, product, number, info?.composition ?? null),
-      origin: this.name(info?.originSig ?? null),
-      destination: this.name(info?.destinationSig ?? null),
+      trainType: trainTypeFor(brand, product, number, info?.composition ?? null, [origin, destination]),
+      origin,
+      destination,
       next: abroadNext !== undefined ? (abroadNext?.name ?? null) : this.name(info?.nextSig ?? null),
       nextEta: abroadNext !== undefined ? (abroadNext?.eta ?? null) : (info?.nextEta ?? null),
       delayMin: info?.delayMin ?? null,
@@ -461,7 +463,7 @@ export class LiveMapIngest extends EventEmitter {
         operatorId: n.operatorId,
         productName: null,
         product,
-        trainType: trainTypeFor(n.operatorId, product, n.number, null),
+        trainType: trainTypeFor(n.operatorId, product, n.number, null, [n.origin, n.destination]),
         origin: n.origin,
         destination: n.destination,
         next: n.next,

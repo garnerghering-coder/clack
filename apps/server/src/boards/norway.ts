@@ -92,7 +92,7 @@ export function normalizeNorwayBoard(calls: JpBoardCall[], ctx: { type: BoardTyp
       operatorId,
       productName: null,
       product,
-      trainType: trainTypeFor(operatorId, product, number, null),
+      trainType: trainTypeFor(operatorId, product, number, null, dep ? [c.destinationDisplay?.frontText] : [origin ? cleanStopName(origin) : null]),
       onboard: null,
       trip: call ? { key: call.tripKey, serviceDate: call.serviceDate, seq: call.seq } : null,
     });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseComposition, trainTypeCatalog, trainTypeFor, typicalTrainType } from '../src/legs/trainTypes.js';
+import { brandOnLine, parseComposition, trainTypeCatalog, trainTypeFor, typicalTrainType } from '../src/legs/trainTypes.js';
 import { loadBrands } from '../src/dataFiles.js';
 
 describe('typical train types', () => {
@@ -16,6 +16,25 @@ describe('typical train types', () => {
     expect(typicalTrainType('nobody', 'regional', '1')).toBeNull();
     // Krösatåg runs Itinos on some lines and older electric units on others: no single typical type.
     expect(typicalTrainType('krosatag', 'regional', '7600')).toBeNull();
+  });
+
+  it('tells Vy and SJ Nord lines apart by where the train starts or ends (Norske tog, jernbane.net, 2026-10-22)', () => {
+    expect(typicalTrainType('vy', 'regional', '1027', ['Asker', 'Kongsvinger'])).toBe('no_flirt');
+    expect(typicalTrainType('vy', 'intercity', '141', ['Oslo S', 'Göteborg C'])).toBe('no_type73');
+    expect(typicalTrainType('vy', 'intercity', '61', ['Oslo S', 'Bergen'])).toBe('no_flirt');
+    expect(typicalTrainType('vy', 'commuter', '2253', ['Lillestrøm', 'Spikkestad'])).toBe('no_type72');
+    expect(typicalTrainType('vy', 'commuter', '2755', ['Stabekk', 'Ski'])).toBe('no_type69_72');
+    expect(typicalTrainType('vy', 'regional', '2487', ['Notodden', 'Porsgrunn'])).toBe('no_type69');
+    expect(typicalTrainType('sj-nord', 'regional', '1308', ['Storlien', 'Trondheim S'])).toBe('no_type73');
+    expect(typicalTrainType('sj-nord', 'regional', '2380', ['Dombås', 'Åndalsnes'])).toBe('no_type93');
+    // Without the ends, a line rule doesn't apply: the operator's typical type.
+    expect(typicalTrainType('vy', 'commuter', '2253')).toBe('no_flirt');
+  });
+
+  it("puts SJ's Storlien–Trondheim trains under SJ Nord, who runs them", () => {
+    expect(brandOnLine('sj', ['Storlien', 'Trondheim S'])).toBe('sj-nord');
+    expect(brandOnLine('sj', ['Stockholm C', 'Storlien'])).toBe('sj');
+    expect(brandOnLine('vy', ['Trondheim S'])).toBe('vy');
   });
 
   it('only refers to types and operators that exist', () => {
