@@ -58,7 +58,7 @@ while (Date.now() < end) {
   const now = Date.now();
   calls = [];
   try {
-    const u = await trackOnce(db, { now: () => now, log: (m) => console.log(m) });
+    const u = await trackOnce(db, { now: () => now, fetchImpl: recording, log: (m) => console.log(m) });
     for (const x of u) console.log(new Date(now).toISOString(), x.legId.slice(0, 8), x.live.status, x.live.positionSource, x.live.speedKmh, x.live.arrivalDelayMin);
   } catch (e) {
     console.log('tick failed', (e as Error).message);
