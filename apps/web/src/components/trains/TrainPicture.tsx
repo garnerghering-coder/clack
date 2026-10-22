@@ -7,6 +7,7 @@ import { NoFlirtSide } from './NoFlirt';
 import { NoType72Side } from './NoType72';
 import { NoType73Side } from './NoType73';
 import { NoType76Side } from './NoType76';
+import { Rc6CoachesSide } from './Rc6Coaches';
 import { ReginaSide } from './Regina';
 import { X31Side } from './X31';
 import { X3Side } from './X3';
@@ -29,6 +30,7 @@ interface Detailed {
 const DETAILED: Record<string, Detailed> = {
   x3: { component: X3Side as Side, liveries: ['arlanda-express'] },
   x40: { component: X40Side as Side, liveries: ['sj'] },
+  rc6_coaches: { component: Rc6CoachesSide as Side, liveries: ['sj'] },
   x60: { component: X60Side as Side, liveries: ['sl'] },
   // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units: unpainted.
   x61: { component: X61Side as Side, liveries: ['pagatag'], notFor: ['vasttagen'] }, // Västtåg's X61s have 7 door pairs
