@@ -34,6 +34,17 @@ GANGWAY_M = 0.49
 BODY_M = 3.23
 WIN = (0.383, 0.663)  # passenger window frames, Norrtåg drawing (X60 photo: 0.39-0.67)
 
+# The cab end as photographed side-on (X60, Södertälje hamn 2024; numbers and method in x60.py). The X61 photos (järnväg.net
+# X61 064 Hässleholm 2018, X61 094 Lund 2023, Östgötapendeln at Motala 2026) show the same cab: a full-height cab door
+# with one window, the bowed cab side window and the same nose, where both operator drawings show a shorter cab door.
+NOSE = [(2.36, 0.0), (2.28, -0.04), (2.06, -0.05), (1.80, -0.03), (1.50, 0.02), (1.42, 0.057), (1.24, 0.134), (0.96, 0.234), (0.74, 0.334), (0.51, 0.449), (0.29, 0.563), (0.08, 0.69), (0, 0.75)]
+SKIRT = (4.66, 5.96)
+CAB_DOOR = (2.62, 3.61, 0.206, 0.983)
+CAB_DOOR_WIN = (2.80, 3.35, 0.286, 0.583)
+CAB_WIN = dict(back=2.26, top=0.283, bottom=0.577, top_front=1.81, front=1.64, knee=0.577, bulge=0.06)
+PANEL = dict(m=0.71, top=0.563, bottom=0.977)
+HEADLIGHT = ((0.50, 0.568), (0.08, 0.70))
+
 
 def smooth(pts):
     """A Catmull-Rom curve through the points, as SVG cubic segments (after an M to pts[0])."""
@@ -50,7 +61,8 @@ def smooth(pts):
 
 class Coradia:
     def __init__(self, liveries):
-        self.d = d = Drawing(car_m=CAR_M, body_m=BODY_M, gangway_m=GANGWAY_M, liveries=liveries)
+        # roof=44 (the kit's default is 40) so the tallest roof equipment (0.56 m) fits inside the kit's viewBox.
+        self.d = d = Drawing(car_m=CAR_M, body_m=BODY_M, gangway_m=GANGWAY_M, liveries=liveries, roof=44)
         self.x, self.y, self.M = d.x, d.y, d.M
 
     def p(self, m, f):
@@ -103,11 +115,12 @@ class Coradia:
         Defaults: Norrtåg drawing."""
         P, x, y = self.p, self.x, self.y
 
-        def shape(i):  # i = inset of the glass inside the black frame, in drawing units
+        def shape(i):  # i = inset of the glass inside the black frame, in drawing units (x grows towards the nose)
             mid = ((top_front + front) / 2 - bulge, (top + knee) / 2)
-            a, b = f'{x(top_front) + i * 0.6:.1f},{y(top) + i:.1f}', f'{x(front) + i:.1f},{y(knee) + i * 0.3:.1f}'
-            edge = f'Q{x(mid[0]) + i:.1f},{y(mid[1]):.1f} {b}' if bulge else f'L{b}'
-            return f'M{x(back) - i:.1f},{y(top) + i:.1f} L{a} {edge} L{x(front) + i:.1f},{y(bottom) - i:.1f} L{x(back) - i:.1f},{y(bottom) - i:.1f} Z'
+            a = f'{x(top_front) - i * 0.6:.1f},{y(top) + i:.1f}'
+            b = f'{x(front) - i:.1f},{min(y(knee) + i * 0.3, y(bottom) - i):.1f}'
+            edge = f'Q{x(mid[0]) - i:.1f},{y(mid[1]):.1f} {b}' if bulge else f'L{b}'
+            return f'M{x(back) + i:.1f},{y(top) + i:.1f} L{a} {edge} L{x(front) - i:.1f},{y(bottom) - i:.1f} L{x(back) + i:.1f},{y(bottom) - i:.1f} Z'
 
         self.d.add(f'<path d="{shape(0)}" fill="#0b0d10"/>')
         self.d.add(f'<path d="{shape(2.4)}" fill="url(#glass)"/>')
@@ -133,6 +146,19 @@ class Coradia:
                 f'<rect x="{x0 + left * w:.1f}" y="{self.y(t):.1f}" width="{ww * w:.1f}" height="{self.y(b) - self.y(t):.1f}" rx="3" fill="url(#glass)" stroke="#0b0d10" stroke-width="2"/>',
                 only,
             )
+
+    def cab_end(self):
+        """Cab door, seam, cab side window, front panel line and headlight (the photographed cab, above)."""
+        d, x = self.d, self.x
+        a, b, t, bt = CAB_DOOR
+        wa, wb, wt, wbt = CAB_DOOR_WIN
+        d.door(x(b), (b - a) * self.M, t, bt, win=((b - wb) / (b - a), (b - wa) / (b - a), wt, wbt))
+        self.seam()
+        self.cab_window(**CAB_WIN)
+        self.front_panel(**PANEL)
+        h0, h1 = self.pt(*HEADLIGHT[0]), self.pt(*HEADLIGHT[1])
+        for colour, width in (('#4b4f55', 7), ('#f7f9fb', 4.4)):
+            d.add(f'<path d="M{h0[0]:.1f},{h0[1]:.1f} L{h1[0]:.1f},{h1[1]:.1f}" stroke="{colour}" stroke-width="{width}" stroke-linecap="round"/>')
 
     def running_gear(self):
         """Bogies: cab bogie at 4.34 m (2.4 m wheelbase), shared bogie under the gangway (2.7 m); wheels 0.85 m."""

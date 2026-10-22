@@ -48,7 +48,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from coradia import WIN, Coradia, smooth  # noqa: E402
+from coradia import NOSE, SKIRT, WIN, Coradia, smooth  # noqa: E402
 from lib import main  # noqa: E402
 
 SL = 'sl'
@@ -73,9 +73,8 @@ def stripes(x0, x1):
 c.second_car(paint=stripes, windows=[(20.58, 21.68)])
 
 # Cab car.
-# Nose profile off the Södertälje hamn photo (the operator drawings' nose is up to 0.24 m fuller; see the docstring).
-NOSE = [(2.36, 0.0), (2.28, -0.04), (2.06, -0.05), (1.80, -0.03), (1.50, 0.02), (1.42, 0.057), (1.24, 0.134), (0.96, 0.234), (0.74, 0.334), (0.51, 0.449), (0.29, 0.563), (0.08, 0.69), (0, 0.75)]
-d.clip('c1', c.nose_path(NOSE, skirt=(4.66, 5.96)))
+# Nose profile and cab end off the Södertälje hamn photo (coradia.py holds these numbers; see the docstring).
+d.clip('c1', c.nose_path(NOSE, skirt=SKIRT))
 d.group('c1')
 d.add(f'<rect x="{d.REAR}" y="{d.ROOF - 16}" width="{d.TIP - d.REAR + 10}" height="{d.H + 20}" fill="url(#body)"/>')
 d.add(f'<rect x="{d.REAR}" y="{d.ROOF}" width="{x(3.9) - d.REAR:.1f}" height="5" fill="url(#roof)"/>')
@@ -93,14 +92,8 @@ for a, b in WINDOWS:
     d.windows(x(b), x(a), 1, *WIN)
 for a, b in DOORS:
     c.door2(a, b, *DOOR, LEAF_WINS)
-d.door(x(3.61), 0.99 * M, 0.206, 0.983, win=(0.263, 0.818, 0.286, 0.583))
-c.seam()
 d.add(f'<path d="M{x(2.34):.1f},{y(0.117):.1f} H{x(3.61):.1f}" stroke="#3a4149" stroke-width="1.3"/>')
-c.cab_window(back=2.26, top=0.283, bottom=0.577, top_front=1.81, front=1.64, knee=0.577, bulge=0.06)
-c.front_panel(m=0.71, top=0.563, bottom=0.977)
-hl = [pt(0.50, 0.568), pt(0.08, 0.70)]
-d.add(f'<path d="M{hl[0][0]:.1f},{hl[0][1]:.1f} L{hl[1][0]:.1f},{hl[1][1]:.1f}" stroke="#4b4f55" stroke-width="7" stroke-linecap="round"/>')
-d.add(f'<path d="M{hl[0][0]:.1f},{hl[0][1]:.1f} L{hl[1][0]:.1f},{hl[1][1]:.1f}" stroke="#f7f9fb" stroke-width="4.4" stroke-linecap="round"/>')
+c.cab_end()
 d.end()
 c.running_gear()
 

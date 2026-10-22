@@ -32,10 +32,10 @@ export function X60Side({ livery, muted = false, className, label }: { livery: X
           <stop offset="1" stopColor="#0767bd" />
         </linearGradient>
         <clipPath id={`${p}c2`}>
-          <path d="M0.0,40 H70.0 Q74.0,40 74.0,44 V152.0 H0.0 Z" />
+          <path d="M0.0,44 H70.0 Q74.0,44 74.0,48 V156.0 H0.0 Z" />
         </clipPath>
         <clipPath id={`${p}c1`}>
-          <path d="M94.0,152.0 V44 Q94.0,40 98.0,40 H783.6 C784.1,39.1 784.8,35.9 786.8,34.8 C788.8,33.8 792.4,33.3 795.6,33.5 C798.8,33.8 802.3,34.6 806.0,36.1 C809.7,37.6 815.5,40.7 818.0,42.6 C820.5,44.5 819.5,44.9 821.2,47.4 C822.9,49.8 825.3,53.5 828.4,57.3 C831.5,61.1 836.3,65.9 839.6,70.2 C842.9,74.5 845.4,78.5 848.4,83.1 C851.4,87.7 854.6,93.0 857.6,97.9 C860.6,102.8 863.5,107.4 866.4,112.6 C869.3,117.8 872.9,125.0 874.8,129.0 C876.7,133.0 877.5,135.5 878.0,136.8 V157.1 C878.0,162.6 877.0,169.0 858.6,169.0 H691.6 V153.3 H639.6 L604.8,169 H187.6 L156.0,152.0 Z" />
+          <path d="M94.0,156.0 V48 Q94.0,44 98.0,44 H783.6 C784.1,43.1 784.8,39.9 786.8,38.8 C788.8,37.8 792.4,37.3 795.6,37.5 C798.8,37.8 802.3,38.6 806.0,40.1 C809.7,41.6 815.5,44.7 818.0,46.6 C820.5,48.5 819.5,48.9 821.2,51.4 C822.9,53.8 825.3,57.5 828.4,61.3 C831.5,65.1 836.3,69.9 839.6,74.2 C842.9,78.5 845.4,82.5 848.4,87.1 C851.4,91.7 854.6,97.0 857.6,101.9 C860.6,106.8 863.5,111.4 866.4,116.6 C869.3,121.8 872.9,129.0 874.8,133.0 C876.7,137.0 877.5,139.5 878.0,140.8 V161.1 C878.0,166.6 877.0,173.0 858.6,173.0 H691.6 V157.3 H639.6 L604.8,173 H187.6 L156.0,156.0 Z" />
         </clipPath>
       </defs>
       <filter id={`${p}mute`}>
@@ -43,81 +43,81 @@ export function X60Side({ livery, muted = false, className, label }: { livery: X
       </filter>
       <g opacity={muted ? 0.35 : 1} filter={muted ? `url(#${p}mute)` : undefined}>
         <g clipPath={`url(#${p}c2)`}>
-          <rect x="0.0" y="40" width="74.0" height="129" fill={`url(#${p}body)`} />
-          <rect x="0.0" y="40" width="74.0" height="5" fill={`url(#${p}roof)`} />
-          <path d="M0.0,55.1 H74.0" stroke="#3a4149" strokeWidth="1.3" />
-          {livery === 'sl' && <rect x="0.0" y="59.7" width="74.0" height="4.1" fill={`url(#${p}slblue)`} />}
-          {livery === 'sl' && <rect x="0.0" y="72.4" width="74.0" height="3.2" fill={`url(#${p}slblue)`} />}
-          <rect x="10.8" y="89.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="14.3" y="91.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="0.0" y="44" width="74.0" height="129" fill={`url(#${p}body)`} />
+          <rect x="0.0" y="44" width="74.0" height="5" fill={`url(#${p}roof)`} />
+          <path d="M0.0,59.1 H74.0" stroke="#3a4149" strokeWidth="1.3" />
+          {livery === 'sl' && <rect x="0.0" y="63.7" width="74.0" height="4.1" fill={`url(#${p}slblue)`} />}
+          {livery === 'sl' && <rect x="0.0" y="76.4" width="74.0" height="3.2" fill={`url(#${p}slblue)`} />}
+          <rect x="10.8" y="93.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="14.3" y="95.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
         </g>
-        <rect x="74.0" y="48" width="20.0" height="115" fill="#2b3037" />
-        <line x1="77.0" y1="50" x2="77.0" y2="161" stroke="#41474f" strokeWidth="1.5" />
-        <line x1="81.0" y1="50" x2="81.0" y2="161" stroke="#41474f" strokeWidth="1.5" />
-        <line x1="85.0" y1="50" x2="85.0" y2="161" stroke="#41474f" strokeWidth="1.5" />
-        <line x1="89.0" y1="50" x2="89.0" y2="161" stroke="#41474f" strokeWidth="1.5" />
+        <rect x="74.0" y="52" width="20.0" height="115" fill="#2b3037" />
+        <line x1="77.0" y1="54" x2="77.0" y2="165" stroke="#41474f" strokeWidth="1.5" />
+        <line x1="81.0" y1="54" x2="81.0" y2="165" stroke="#41474f" strokeWidth="1.5" />
+        <line x1="85.0" y1="54" x2="85.0" y2="165" stroke="#41474f" strokeWidth="1.5" />
+        <line x1="89.0" y1="54" x2="89.0" y2="165" stroke="#41474f" strokeWidth="1.5" />
         <g clipPath={`url(#${p}c1)`}>
-          <rect x="94.0" y="24" width="794.0" height="149" fill={`url(#${p}body)`} />
-          <rect x="94.0" y="40" width="628.0" height="5" fill={`url(#${p}roof)`} />
-          <path d="M94.0,55.1 H733.6" stroke="#3a4149" strokeWidth="1.3" />
-          {livery === 'sl' && <rect x="94.0" y="59.7" width="639.6" height="4.1" fill={`url(#${p}slblue)`} />}
-          {livery === 'sl' && <rect x="94.0" y="72.4" width="639.6" height="3.2" fill={`url(#${p}slblue)`} />}
+          <rect x="94.0" y="28" width="794.0" height="149" fill={`url(#${p}body)`} />
+          <rect x="94.0" y="44" width="628.0" height="5" fill={`url(#${p}roof)`} />
+          <path d="M94.0,59.1 H733.6" stroke="#3a4149" strokeWidth="1.3" />
+          {livery === 'sl' && <rect x="94.0" y="63.7" width="639.6" height="4.1" fill={`url(#${p}slblue)`} />}
+          {livery === 'sl' && <rect x="94.0" y="76.4" width="639.6" height="3.2" fill={`url(#${p}slblue)`} />}
           {livery === 'sl' && (
             <path
-              d="M733.2,56.3 C741.3,56.6 769.9,57.9 781.6,58.4 C793.3,59.0 797.2,58.8 803.2,59.5 C809.2,60.1 814.0,61.2 817.6,62.4 C821.2,63.7 822.4,65.6 824.8,67.2 C827.2,68.8 829.5,70.1 832.0,72.1 C834.5,74.1 837.1,76.5 839.6,79.1 C842.1,81.7 844.4,84.7 846.8,87.6 C849.2,90.5 851.6,93.3 854.0,96.4 C856.4,99.4 858.8,102.2 861.2,105.9 C863.6,109.6 863.6,113.4 868.4,118.6 C873.2,123.7 886.4,133.7 890.0,136.8 L890.0,143.2 C887.0,141.0 876.8,134.4 872.0,130.3 C867.2,126.2 864.2,121.7 861.2,118.6 C858.2,115.4 856.4,113.8 854.0,111.5 C851.6,109.1 849.2,106.8 846.8,104.5 C844.4,102.2 842.1,100.3 839.6,97.9 C837.1,95.5 834.5,92.2 832.0,90.2 C829.5,88.2 827.2,87.5 824.8,86.1 C822.4,84.6 821.2,83.3 817.6,81.7 C814.0,80.1 809.2,77.6 803.2,76.5 C797.2,75.4 793.3,75.3 781.6,75.0 C769.9,74.7 741.3,74.7 733.2,74.7 Z"
+              d="M733.2,60.3 C741.3,60.6 769.9,61.9 781.6,62.4 C793.3,63.0 797.2,62.8 803.2,63.5 C809.2,64.1 814.0,65.2 817.6,66.4 C821.2,67.7 822.4,69.6 824.8,71.2 C827.2,72.8 829.5,74.1 832.0,76.1 C834.5,78.1 837.1,80.5 839.6,83.1 C842.1,85.7 844.4,88.7 846.8,91.6 C849.2,94.5 851.6,97.3 854.0,100.4 C856.4,103.4 858.8,106.2 861.2,109.9 C863.6,113.6 863.6,117.4 868.4,122.6 C873.2,127.7 886.4,137.7 890.0,140.8 L890.0,147.2 C887.0,145.0 876.8,138.4 872.0,134.3 C867.2,130.2 864.2,125.7 861.2,122.6 C858.2,119.4 856.4,117.8 854.0,115.5 C851.6,113.1 849.2,110.8 846.8,108.5 C844.4,106.2 842.1,104.3 839.6,101.9 C837.1,99.5 834.5,96.2 832.0,94.2 C829.5,92.2 827.2,91.5 824.8,90.1 C822.4,88.6 821.2,87.3 817.6,85.7 C814.0,84.1 809.2,81.6 803.2,80.5 C797.2,79.4 793.3,79.3 781.6,79.0 C769.9,78.7 741.3,78.7 733.2,78.7 Z"
               fill={`url(#${p}slblue)`}
             />
           )}
           {livery === 'sl' && (
             <path
-              d="M886.0,145.8 C884.7,146.0 882.1,144.7 878.0,146.8 C873.9,149.0 865.5,155.2 861.2,158.7 C856.9,162.2 854.5,164.8 852.0,167.8 C849.5,170.8 847.0,175.3 846.0,176.7 L890.0,176.7 Z"
+              d="M886.0,149.8 C884.7,150.0 882.1,148.7 878.0,150.8 C873.9,153.0 865.5,159.2 861.2,162.7 C856.9,166.2 854.5,168.8 852.0,171.8 C849.5,174.8 847.0,179.3 846.0,180.7 L890.0,180.7 Z"
               fill="#5b6b7c"
             />
           )}
-          {livery === 'sl' && <rect x="515.4" y="72.4" width="60.4" height="95.3" fill={`url(#${p}slblue)`} />}
-          {livery === 'sl' && <rect x="245.8" y="72.4" width="60.4" height="95.3" fill={`url(#${p}slblue)`} />}
-          <rect x="663.2" y="89.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="666.7" y="91.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="596.0" y="89.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="599.5" y="91.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="452.8" y="89.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="456.3" y="91.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="387.2" y="89.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="390.7" y="91.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="321.2" y="89.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="324.7" y="91.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="176.4" y="89.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="179.9" y="91.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="109.6" y="89.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
-          <rect x="113.1" y="91.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="514.4" y="75.5" width="62.4" height="89.7" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="525.0" y="84.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          <rect x="548.1" y="84.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          <rect x="244.8" y="75.5" width="62.4" height="89.7" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="255.4" y="84.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          <rect x="278.5" y="84.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          <rect x="733.6" y="66.6" width="39.6" height="100.2" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="744.0" y="76.9" width="22.0" height="38.3" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          <path d="M784.4,28.4 V169.0" stroke="#8d949c" strokeWidth="1.4" />
-          <path d="M784.4,55.1 H733.6" stroke="#3a4149" strokeWidth="1.3" />
-          <path d="M787.6,76.5 L805.6,76.5 Q811.4,95.5 812.4,114.4 L812.4,114.4 L787.6,114.4 Z" fill="#0b0d10" />
-          <path d="M785.2,78.9 L807.0,78.9 Q813.8,95.5 814.8,115.2 L814.8,112.0 L785.2,112.0 Z" fill={`url(#${p}glass)`} />
-          <path d="M865.3,112.6 H851.4 Q849.6,112.6 849.6,117.8 V166.0" fill="none" stroke="#000" strokeOpacity="0.16" strokeWidth="1.2" />
-          <path d="M858.0,113.3 L874.8,130.3" stroke="#4b4f55" strokeWidth="7" strokeLinecap="round" />
-          <path d="M858.0,113.3 L874.8,130.3" stroke="#f7f9fb" strokeWidth="4.4" strokeLinecap="round" />
+          {livery === 'sl' && <rect x="515.4" y="76.4" width="60.4" height="95.3" fill={`url(#${p}slblue)`} />}
+          {livery === 'sl' && <rect x="245.8" y="76.4" width="60.4" height="95.3" fill={`url(#${p}slblue)`} />}
+          <rect x="663.2" y="93.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="666.7" y="95.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="596.0" y="93.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="599.5" y="95.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="452.8" y="93.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="456.3" y="95.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="387.2" y="93.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="390.7" y="95.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="321.2" y="93.4" width="42.4" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="324.7" y="95.9" width="35.4" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="176.4" y="93.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="179.9" y="95.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="109.6" y="93.4" width="44.0" height="36.1" rx="3" fill="#0b0d10" />
+          <rect x="113.1" y="95.9" width="37.0" height="31.1" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="514.4" y="79.5" width="62.4" height="89.7" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="525.0" y="88.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <rect x="548.1" y="88.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <rect x="244.8" y="79.5" width="62.4" height="89.7" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="255.4" y="88.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <rect x="278.5" y="88.6" width="18.1" height="35.3" rx="3" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <path d="M784.4,59.1 H733.6" stroke="#3a4149" strokeWidth="1.3" />
+          <rect x="733.6" y="70.6" width="39.6" height="100.2" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="744.0" y="80.9" width="22.0" height="38.3" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <path d="M784.4,32.4 V173.0" stroke="#8d949c" strokeWidth="1.4" />
+          <path d="M787.6,80.5 L805.6,80.5 Q811.4,99.5 812.4,118.4 L812.4,118.4 L787.6,118.4 Z" fill="#0b0d10" />
+          <path d="M790.0,82.9 L804.2,82.9 Q809.0,99.5 810.0,116.0 L810.0,116.0 L790.0,116.0 Z" fill={`url(#${p}glass)`} />
+          <path d="M865.3,116.6 H851.4 Q849.6,116.6 849.6,121.8 V170.0" fill="none" stroke="#000" strokeOpacity="0.16" strokeWidth="1.2" />
+          <path d="M858.0,117.3 L874.8,134.3" stroke="#4b4f55" strokeWidth="7" strokeLinecap="round" />
+          <path d="M858.0,117.3 L874.8,134.3" stroke="#f7f9fb" strokeWidth="4.4" strokeLinecap="round" />
         </g>
-        <rect x="642.4" y="169" width="124.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="656.4" cy="182" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="656.4" cy="182" r="5" fill="#6d7681" />
-        <circle cx="752.4" cy="182" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="752.4" cy="182" r="5" fill="#6d7681" />
-        <line x1="692.4" y1="175" x2="716.4" y2="172" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="16.0" y="169" width="136.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="30.0" cy="182" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="30.0" cy="182" r="5" fill="#6d7681" />
-        <circle cx="138.0" cy="182" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="138.0" cy="182" r="5" fill="#6d7681" />
-        <line x1="72.0" y1="175" x2="96.0" y2="172" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <rect x="642.4" y="173" width="124.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
+        <circle cx="656.4" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
+        <circle cx="656.4" cy="186" r="5" fill="#6d7681" />
+        <circle cx="752.4" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
+        <circle cx="752.4" cy="186" r="5" fill="#6d7681" />
+        <line x1="692.4" y1="179" x2="716.4" y2="176" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
+        <rect x="16.0" y="173" width="136.0" height="11" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
+        <circle cx="30.0" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
+        <circle cx="30.0" cy="186" r="5" fill="#6d7681" />
+        <circle cx="138.0" cy="186" r="17.0" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
+        <circle cx="138.0" cy="186" r="5" fill="#6d7681" />
+        <line x1="72.0" y1="179" x2="96.0" y2="176" stroke="#6d7681" strokeWidth="2.4" strokeLinecap="round" />
       </g>
     </svg>
   );
