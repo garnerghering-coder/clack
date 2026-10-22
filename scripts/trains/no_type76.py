@@ -5,7 +5,7 @@ What it is: a bimodal (electric + diesel) FLIRT, BMa + BPa + BC + XDe + BPb + BM
 run by SJ Norge (brand SJ Nord) on Trønderbanen (R70), Rørosbanen (R60) and Meråkerbanen (R71). no.wikipedia
 "Type 76 (motorvognsett)", retrieved 2026-10-22.
 
-Drawn: the BMa cab car (cab facing right) and the end of BPa. Unpainted only (see Livery below).
+Drawn: the BMa cab car (cab facing right) and the end of BPa; liveries `sj-nord` and unpainted.
 
 Sources (retrieved 2026-10-22):
 - Norske tog side elevations: https://www.norsketog.no/uploads/trains/filled/motor-coach/Type76/type76_BMa76.svg and
@@ -31,11 +31,27 @@ there). What differs on BMa76, converted at 68.1 px/m from the nose and 72.2 px/
   at y 159.9 and two insulators (0.4-0.6 m from the car end). The elevation shows it raised 1.25 m above the roof,
   which is above the picture's frame; the sets run mostly on diesel, and no source shows the lowered pantograph's
   shape, so only the base and insulators are drawn.
-Livery: SJ Nord's design (dark navy body, a brighter blue cab end behind a curved magenta line, magenta frames on the
-door sides and tops) is on every Type 76 photo from 2025-26. The frames are clear on the side-on BC 76314, but the cab
-end's curved line is only on oblique photos (the door there is ~40 px wide), and a curve read off them would be a guess;
-so the livery is left out until a side-on photo of a cab car turns up. (Earlier sets ran in Norske tog's dark grey
-with orange door frames, 2021-23.)
+Livery `sj-nord` (current: every Type 76 photo from 2025-26; earlier sets ran in Norske tog's dark grey with orange
+door frames, 2021-23). Measured on two near-side-on Flickr photos, retrieved 2026-10-22, each rectified onto the
+elevation with a homography fitted to door-window, window and cab-window corners (residuals 2-5 px = 0.03-0.07 m):
+  - 76107 at Trondheim, 2025-06-16, https://www.flickr.com/photos/123594177@N08/54778110760 (4096 px; mirrored, cab right)
+  - 76503 at Trondheim, 2026-04-01, https://www.flickr.com/photos/buraeepp/55188047067 (2048 px; BMb, same front section)
+  Both show what Garner's photos show (via the coordinator): navy cab end, dark grey body, a pink stripe slanting from
+  the roof edge down and forward, pink door frames.
+- the stripe is straight on the flat of the side (rms 0.2 px off a line in both photos); it bends only where the roof
+  and the lower body curve away from the plane. After removing the photos' residual shear (door edges lean 0.05-0.07),
+  its rear edge is x = 1151.3 + 0.958 (y - 280) (the two photos agree to 0.017 in slope and 1 px in position), pink
+  20.1 px wide, then a light grey band 9.2 px wide on its front edge; from the roof edge (y 178.5) down until the body
+  ends (it meets the bogie arch at about x 1240, y 373).
+- the cab end in front of it is navy, its roof too (the roof boundary continues the line); behind it the body is dark
+  grey and the roof grey. Colours from the photos (overcast, so dull) and Garner's #2b3f7a: navy #2d4381, grey #3b4247,
+  pink #ee5870, band #c3c7cf.
+- door frames: pink, 10.5 px wide up both sides of the door leaf and over its top (y 203.5-214.5), sides ending at y
+  389.3; door leaves in body grey.
+Overlays (scratchpad): every edge coincides on the elevation; on both rectified photos the stripe, door frames, windows
+and roof colour edge coincide (the noses differ: the photos see the front in perspective).
+Bogies: lib.py's bogie() (wheels behind a side frame), as both photos show them; drawn before the body so the skirt
+hides the wheel tops, the frame from the underside (y 373 in the arch under the cab).
 Not drawn: logo, numbers, lettering.
 """
 import os
@@ -47,7 +63,8 @@ from lib import Drawing, main  # noqa: E402
 
 PXM = 74.4  # BMa74 elevation px per metre
 EN, ER, EB = 1584.1, 128.7, 411.6  # BMa74: nose tip x, roof line y, body underside y
-d = Drawing(car_m=(EN - 0.8) / PXM, body_m=(EB - ER) / PXM, gangway_m=38.2 / PXM)
+SJ = 'sj-nord'
+d = Drawing(car_m=(EN - 0.8) / PXM, body_m=(EB - ER) / PXM, gangway_m=38.2 / PXM, liveries=[SJ])
 M, ROOF, BASE, TIP, REAR, S = d.M, d.ROOF, d.BASE, d.TIP, d.REAR, d.SECOND_END
 K = M / PXM
 
@@ -130,6 +147,32 @@ DOOR_W, DOOR_Y, DOOR_WIN_Y = 116.1, (214.3, 396.0), (230.4, 331.2)
 SEAM, CAB_JOINT = 185.9, 1377.9
 
 
+# SJ Nord (measured on two rectified photos, see the docstring).
+d.gradient('sjblue', ['#3a5394', '#2d4381', '#23356b'], stops=(0, 0.55, 1))
+d.gradient('sjgrey', ['#4d555b', '#3b4247', '#2c3236'], stops=(0, 0.55, 1))
+d.gradient('sjroof', ['#7d848c', '#999fa6'])
+d.gradient('sjroofblue', ['#4a6099', '#3a508a'])
+SJ_PINK, SJ_BAND = '#ee5870', '#c3c7cf'
+SJ_PAINT_TOP = 178.5  # roof colour down to here
+
+
+def sj_rear(y):
+    """The stripe's rear edge (elevation px): x = 1151.3 + 0.958 (y - 280)."""
+    return 1151.3 + 0.958 * (y - 280)
+
+
+SJ_PINK_W, SJ_BAND_W = 20.1, 9.2  # px, measured horizontally
+FRAME_W, FRAME_TOP, FRAME_BOTTOM = 10.5, 203.5, 389.3
+
+
+def door_frame(x0):
+    """SJ Nord's pink frame up the door's sides and over its top, 10.5 px wide, sides ending at y 389.3."""
+    l, r, t, b, rr = x0 - FRAME_W, x0 + DOOR_W + FRAME_W, FRAME_TOP, FRAME_BOTTOM, 8
+    pts = (f'M{ex(l):.1f},{ey(b):.1f} V{ey(t + rr):.1f} Q{ex(l):.1f},{ey(t):.1f} {ex(l + rr):.1f},{ey(t):.1f} H{ex(r - rr):.1f} '
+           f'Q{ex(r):.1f},{ey(t):.1f} {ex(r):.1f},{ey(t + rr):.1f} V{ey(b):.1f} H{ex(x0 + DOOR_W):.1f} V{ey(DOOR_Y[0]):.1f} H{ex(x0):.1f} V{ey(b):.1f} Z')
+    d.paint(f'<path d="{pts}" fill="{SJ_PINK}"/>', SJ)
+
+
 def door(x0):
     x, w = ex(x0), DOOR_W * K
     d.door(x, w, f(DOOR_Y[0]), f(DOOR_Y[1]))
@@ -138,24 +181,20 @@ def door(x0):
         d.add(f'<rect x="{x + l * w:.1f}" y="{ey(DOOR_WIN_Y[0]):.1f}" width="{(r - l) * w:.1f}" height="{ey(DOOR_WIN_Y[1]) - ey(DOOR_WIN_Y[0]):.1f}" rx="4" fill="url(#glass)" stroke="#0b0d10" stroke-width="2"/>')
 
 
-def bogie(cx_px, axle_m, wheel_m=0.92):
-    """The kit's bogie style, placed to scale (wheel centres at elevation y 413.8, frame from y 373)."""
-    cx, s, r, wc = ex(cx_px), axle_m * M / 2, wheel_m * M / 2, ey(413.8)
-    d.add(f'<rect x="{cx - s - 14:.1f}" y="{ey(373):.1f}" width="{2 * s + 28:.1f}" height="{wc - 2 - ey(373):.1f}" rx="3" fill="#2a2f36" stroke="#3f464f" stroke-width="1.2"/>')
-    for o in (-s, s):
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="{r:.1f}" fill="#1b1f25" stroke="#4d5560" stroke-width="2"/>')
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="5" fill="#6d7681"/>')
-
-
-bogie(-17.6, 2.75)
-bogie(1229.5, 2.5)
+# Bogies first, so the body skirt hides the wheel tops as on the train (lib.py's style: wheels behind a side frame), to scale: wheel centres at elevation y 413.8; the frame starts
+# at the body's underside there (401.2 under the gangway, 373 in the arch under the cab). Jacobs bogie axles 2.75 m,
+# motor bogie 2.5 m, wheels 0.92 m.
+d.bogie(ex(-17.6), axle_m=2.75, wheel_m=0.92, top=ey(401.2), wc=ey(413.8))
+d.bogie(ex(1229.5), axle_m=2.5, wheel_m=0.92, top=ey(373), wc=ey(413.8))
 
 # BPa end: roof step, pantograph base plate and insulators (BPa76, converted).
 d.clip('c2', epath(BPA_BODY, BPA_DX))
 d.group('c2')
 d.add(f'<rect x="{d.VB_X - 10:.1f}" y="{ROOF - 10}" width="{S - d.VB_X + 10:.1f}" height="{d.H + 20}" fill="url(#body)"/>')
 d.add(f'<rect x="{d.VB_X - 10:.1f}" y="{ROOF - 10}" width="{S - d.VB_X + 10:.1f}" height="{ey(SEAM) - ROOF + 10:.1f}" fill="url(#roof)"/>')
-d.add(f'<line x1="{d.VB_X - 10:.1f}" y1="{ey(SEAM):.1f}" x2="{S:.1f}" y2="{ey(SEAM):.1f}" stroke="#000" stroke-opacity="0.13" stroke-width="1.2"/>')
+d.add(f'<line x1="{d.VB_X - 10:.1f}" y1="{ey(SEAM):.1f}" x2="{S:.1f}" y2="{ey(SEAM):.1f}" stroke="#000" stroke-opacity="0.13" stroke-width="1.2"/>', 'plain')
+d.paint(f'<rect x="{d.VB_X - 10:.1f}" y="{ROOF - 10}" width="{S - d.VB_X + 10:.1f}" height="{d.H + 20}" fill="url(#sjgrey)"/>', SJ)
+d.paint(f'<rect x="{d.VB_X - 10:.1f}" y="{ROOF - 10}" width="{S - d.VB_X + 10:.1f}" height="{ey(SJ_PAINT_TOP) - ROOF + 10:.1f}" fill="url(#sjroof)"/>', SJ)
 d.end()
 base_y = e76y(159.9)
 d.add(f'<rect x="{ex(b76x(1138.4) + BPA_DX):.1f}" y="{ey(base_y) - 1.5:.1f}" width="{(b76x(1191.6) - b76x(1138.4)) * K:.1f}" height="{ey(154.9) - ey(base_y) + 1.5:.1f}" rx="1" fill="#59616a"/>')
@@ -176,7 +215,20 @@ d.defs['c1'] = f'<clipPath id="c1"><path d="{epath(BODY_UPPER)}"/><path d="{epat
 d.group('c1')
 d.add(f'<rect x="{REAR - 2}" y="{ROOF - 10}" width="{TIP - REAR + 14}" height="{d.H + 20}" fill="url(#body)"/>')
 d.add(f'<rect x="{REAR - 2}" y="{ROOF - 10}" width="{ex(CAB_JOINT) - REAR + 2:.1f}" height="{ey(SEAM) - ROOF + 10:.1f}" fill="url(#roof)"/>')
-d.add(f'<line x1="{REAR}" y1="{ey(SEAM):.1f}" x2="{ex(CAB_JOINT):.1f}" y2="{ey(SEAM):.1f}" stroke="#000" stroke-opacity="0.13" stroke-width="1.2"/>')
+d.add(f'<line x1="{REAR}" y1="{ey(SEAM):.1f}" x2="{ex(CAB_JOINT):.1f}" y2="{ey(SEAM):.1f}" stroke="#000" stroke-opacity="0.13" stroke-width="1.2"/>', 'plain')
+# SJ Nord: grey body and roof; the cab end navy (its roof too) in front of a straight pink stripe with a light band
+# on its front edge, from the roof edge down to the sill (clipped by the body, so it stops at the bogie arch).
+yt, yb = SJ_PAINT_TOP, 430.0
+d.paint(f'<rect x="{REAR - 2}" y="{ROOF - 10}" width="{TIP - REAR + 14}" height="{d.H + 20}" fill="url(#sjgrey)"/>', SJ)
+d.paint(f'<rect x="{REAR - 2}" y="{ROOF - 10}" width="{TIP - REAR + 14}" height="{ey(yt) - ROOF + 10:.1f}" fill="url(#sjroof)"/>', SJ)
+bf = lambda y: sj_rear(y) + SJ_PINK_W + SJ_BAND_W  # noqa: E731
+d.paint(f'<path d="M{ex(bf(100)):.1f},{ey(100):.1f} L{ex(bf(yb)):.1f},{ey(yb):.1f} H{TIP + 12} V{ey(100):.1f} Z" fill="url(#sjblue)"/>', SJ)
+d.paint(f'<path d="M{ex(bf(100)):.1f},{ey(100):.1f} L{ex(bf(yt)):.1f},{ey(yt):.1f} H{ex(CAB_JOINT):.1f} V{ey(100):.1f} Z" fill="url(#sjroofblue)"/>', SJ)
+for x0, w, colour in ((0, SJ_PINK_W, SJ_PINK), (SJ_PINK_W, SJ_BAND_W, SJ_BAND)):
+    a0, a1 = sj_rear(yt) + x0, sj_rear(yb) + x0
+    d.paint(f'<path d="M{ex(a0):.1f},{ey(yt):.1f} L{ex(a1):.1f},{ey(yb):.1f} H{ex(a1 + w):.1f} L{ex(a0 + w):.1f},{ey(yt):.1f} Z" fill="{colour}"/>', SJ)
+for x0 in DOORS:
+    door_frame(x0)
 d.add(f'<line x1="{ex(CAB_JOINT):.1f}" y1="{ey(123):.1f}" x2="{ex(CAB_JOINT):.1f}" y2="{ey(409):.1f}" stroke="#000" stroke-opacity="0.18" stroke-width="1.2"/>')
 d.add(f'<path d="{epath(LOWER_SEAM)}" fill="none" stroke="#000" stroke-opacity="0.18" stroke-width="1.2"/>')
 for x0, x1, y0, y1 in ROOF76_GRILLES:

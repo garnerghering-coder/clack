@@ -54,16 +54,18 @@ export function NoFlirtSide({ livery, muted = false, className, label }: { liver
         <feColorMatrix type="saturate" values="0" />
       </filter>
       <g opacity={muted ? 0.35 : 1} filter={muted ? `url(#${p}mute)` : undefined}>
-        <rect x="15.9" y="171.3" width="138.0" height="19.9" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="29.9" cy="193.3" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="29.9" cy="193.3" r="5" fill="#6d7681" />
-        <circle cx="139.9" cy="193.3" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="139.9" cy="193.3" r="5" fill="#6d7681" />
-        <rect x="691.4" y="171.3" width="128.0" height="19.9" rx="3" fill="#2a2f36" stroke="#3f464f" strokeWidth="1.2" />
-        <circle cx="705.4" cy="193.3" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="705.4" cy="193.3" r="5" fill="#6d7681" />
-        <circle cx="805.4" cy="193.3" r="18.4" fill="#1b1f25" stroke="#4d5560" strokeWidth="2" />
-        <circle cx="805.4" cy="193.3" r="5" fill="#6d7681" />
+        <circle cx="29.9" cy="193.3" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="139.9" cy="193.3" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M19.8,186.5 H150.0 L157.4,194.3 H12.4 Z" fill="#363c44" />
+        <rect x="23.9" y="189.3" width="122.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="23.9" y="188.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="133.9" y="188.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <circle cx="705.4" cy="193.3" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <circle cx="805.4" cy="193.3" r="18.4" fill="#1b1f25" stroke="#727b86" strokeWidth="1.8" />
+        <path d="M695.2,171.3 H815.5 L822.8,194.3 H687.9 Z" fill="#363c44" />
+        <rect x="699.4" y="189.3" width="112.0" height="5" rx="1.5" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="699.4" y="188.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
+        <rect x="799.4" y="188.3" width="12" height="10" rx="2" fill="#2a2f36" stroke="#4a515a" strokeWidth="0.8" />
         <g clipPath={`url(#${p}c2)`}>
           <rect x="-0.2" y="30" width="74.0" height="172" fill={`url(#${p}body)`} />
           <rect x="-0.2" y="30" width="74.0" height="40.8" fill={`url(#${p}roof)`} />

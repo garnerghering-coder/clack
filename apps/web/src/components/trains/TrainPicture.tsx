@@ -58,8 +58,7 @@ const DETAILED: Record<string, Detailed> = {
   no_type72: { component: NoType72Side as Side, liveries: ['go-ahead-norge', 'vy'] },
   // Go-Ahead's stripes are seen only at an angle and Vy's 73Bs are mid-repaint (red to green): both unpainted.
   no_type73: { component: NoType73Side as Side, liveries: ['sj-nord'] },
-  // SJ Nord's livery isn't drawn yet: its curved edge shows only on photos too oblique to measure.
-  no_type76: { component: NoType76Side as Side, liveries: [] },
+  no_type76: { component: NoType76Side as Side, liveries: ['sj-nord'] },
 };
 
 export const hasDetailedArt = (typeId: string | null | undefined, operatorId?: string | null) =>

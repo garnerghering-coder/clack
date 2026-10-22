@@ -45,6 +45,8 @@ silver roof, door, door windows, pinstripe heights and wheels coincide (the phot
   shows) the upper one is the long one: from 443 px behind the nose tip back along the whole train, stopping at windows
   and doors; the lower one is a dash 207-260 px behind the tip. (On the other side the two swap, 74520.)
 - the Vy logo between them is a trademark and isn't drawn.
+Bogies: lib.py's bogie() (wheels behind a side frame, as the photos show), drawn before the body so the skirt hides
+the wheel tops; the frame from the underside (y 373 in the arch under the cab, 401.2 under the gangway).
 Not drawn: pantograph (on BPb, car 4, out of view); logo, numbers, lettering.
 """
 import os
@@ -146,19 +148,11 @@ def door(x0):
         d.add(f'<rect x="{x + l * w:.1f}" y="{ey(DOOR_WIN_Y[0]):.1f}" width="{(r - l) * w:.1f}" height="{ey(DOOR_WIN_Y[1]) - ey(DOOR_WIN_Y[0]):.1f}" rx="4" fill="url(#glass)" stroke="#0b0d10" stroke-width="2"/>')
 
 
-def bogie(cx_px, axle_m, wheel_m=0.92):
-    """The kit's bogie style, placed to scale: wheel centres at elevation y 413.8 (behind the body skirt), frame from
-    y 373 (the top of the bogie in the elevation, which fills the arch under the cab)."""
-    cx, s, r, wc = ex(cx_px), axle_m * M / 2, wheel_m * M / 2, ey(413.8)
-    d.add(f'<rect x="{cx - s - 14:.1f}" y="{ey(373):.1f}" width="{2 * s + 28:.1f}" height="{wc - 2 - ey(373):.1f}" rx="3" fill="#2a2f36" stroke="#3f464f" stroke-width="1.2"/>')
-    for o in (-s, s):
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="{r:.1f}" fill="#1b1f25" stroke="#4d5560" stroke-width="2"/>')
-        d.add(f'<circle cx="{cx + o:.1f}" cy="{wc:.1f}" r="5" fill="#6d7681"/>')
-
-
-# Bogies first: the body skirt hides the top of the wheels, as on the real train.
-bogie(-17.6, 2.75)
-bogie(1229.5, 2.5)
+# Bogies first, so the body skirt hides the wheel tops as on the train (lib.py's style: wheels behind a side frame), to scale: wheel centres at elevation y 413.8; the frame starts
+# at the body's underside there (401.2 under the gangway, 373 in the arch under the cab). Jacobs bogie axles 2.75 m,
+# motor bogie 2.5 m, wheels 0.92 m.
+d.bogie(ex(-17.6), axle_m=2.75, wheel_m=0.92, top=ey(401.2), wc=ey(413.8))
+d.bogie(ex(1229.5), axle_m=2.5, wheel_m=0.92, top=ey(373), wc=ey(413.8))
 
 # BPa, the end next to the cab car.
 d.clip('c2', epath(BPA_BODY, BPA_DX))
