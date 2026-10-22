@@ -66,11 +66,20 @@ export interface TripResult {
   alsoKnownAs: string[];
 }
 
+/** Two trains with one change, when no single train runs between the stations (timetable only). */
+export interface Connection {
+  first: TripResult;
+  second: TripResult;
+  changeAt: { stationId: string; name: string };
+  changeMin: number;
+}
+
 export interface SearchResponse {
   date: string;
   interpretation: { operator?: { id: string; text: string }; trainNumber?: string; from?: StationHit; to?: StationHit; typing: 'from' | 'to' | null };
   suggestions: StationHit[];
   results: TripResult[] | null;
+  connections?: Connection[];
   outsideTimetable: boolean;
   /** Before the current timetable: the archive timetable for that day is ready, loading, failed or unavailable (before 2012-08-10). */
   history?: 'ready' | 'loading' | 'failed' | 'unavailable' | 'norway';

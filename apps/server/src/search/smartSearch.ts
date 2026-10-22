@@ -6,7 +6,7 @@ import { loadBrands } from '../dataFiles.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { buildOperatorMatcher, parseQuery } from './parse.js';
 import { searchStations, type StationHit, type StationIndex } from './stations.js';
-import { searchByNumber, searchByRoute, type TripResult } from './timetable.js';
+import { searchByNumber, searchByRoute, searchConnections, type Connection, type TripResult } from './timetable.js';
 
 /** A station text resolves to its best match only above this score (60 = every word is a prefix of the name). */
 const RESOLVE = 60;
@@ -25,6 +25,8 @@ export interface SmartSearchResult {
   };
   suggestions: StationHit[];
   results: TripResult[] | null;
+  /** No direct train between the two stations: trains with one change (timetable only). */
+  connections?: Connection[];
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
@@ -118,6 +120,8 @@ export function createSmartSearch(db: Db, index: () => StationIndex, history: (d
           }
         out.results = merged.sort((x, y) => x.from.time - y.from.time);
       }
+      // Still nothing: two trains with a change (Alvesta → Rocksjön is Alvesta → Värnamo, then Värnamo → Rocksjön).
+      if (!out.results.length) out.connections = searchConnections(db, from.id, to.id, date, { operatorId: q.operatorId });
     }
     return out;
   };

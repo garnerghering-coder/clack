@@ -4,7 +4,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, X } from 'lucide-react';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult } from '../api';
+import { ApiError, api, type LegDetail, type SearchResponse, type StationHit, type TimetableTrip, type TripGeometry, type TripResult, type Connection } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { StationRow } from '../components/StationRow';
 import { ManualTrip } from '../components/ManualTrip';
@@ -118,6 +118,107 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
   );
 }
 
+/** Two trains and the change between them, as one option. */
+function ConnectionCard({ c, onPick }: { c: Connection; onPick: () => void }) {
+  const { t } = useTranslation();
+  const { settings } = useSettings();
+  const ops = useOperators();
+  const total = Math.round((c.second.to.time - c.first.from.time) / 60_000);
+  const plus = dayOffset(c.first.from.time, c.first.from.tz, c.second.to.time, c.second.to.tz);
+  return (
+    <button className="result-card" onClick={onPick}>
+      <div className="result-times tabular">
+        <span className="big-time">{fmtTime(c.first.from.time, c.first.from.tz, settings.clock)}</span>
+        <span className="duration">{fmtDuration(total)}</span>
+        <span className="big-time">
+          {fmtTime(c.second.to.time, c.second.to.tz, settings.clock)}
+          {plus > 0 && <sup>+{plus}</sup>}
+        </span>
+      </div>
+      {[c.first, c.second].map((r, i) => {
+        const op = r.operatorId ? ops.get(r.operatorId) : undefined;
+        return (
+          <div key={i} className="result-meta conn-leg">
+            <OperatorBadge operator={op} size={22} />
+            <span className="result-op">{op?.name ?? r.routeName}</span>
+            <span className="caption strong">{r.trainNumber}</span>
+            <span className="caption">
+              {fmtTime(r.from.time, r.from.tz, settings.clock)} {r.from.name} → {fmtTime(r.to.time, r.to.tz, settings.clock)} {r.to.name}
+            </span>
+          </div>
+        );
+      })}
+      <span className="caption">{t('add.changeAt', { station: c.changeAt.name, min: c.changeMin })}</span>
+    </button>
+  );
+}
+
+/** Saving both trains of a connection: each checked for a duplicate like a single train. */
+function ConfirmConnection({ c, onBack, onSaved }: { c: Connection; onBack: () => void; onSaved: (leg: LegDetail) => void }) {
+  const { t } = useTranslation();
+  const [saving, setSaving] = useState(false);
+  const [dupes, setDupes] = useState<number[]>([]);
+  const [kept, setKept] = useState<LegDetail | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const legs = [c.first, c.second];
+  const save = async (force: boolean) => {
+    setSaving(true);
+    setError(null);
+    const already: number[] = [];
+    let last: LegDetail | null = null;
+    try {
+      for (const [i, r] of legs.entries()) {
+        // Adding anyway: only the ones that were already there (the other one is saved).
+        if (force && dupes.length && !dupes.includes(i)) continue;
+        try {
+          last = await api.createLeg({ tripKey: r.key, serviceDate: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, force });
+        } catch (e) {
+          if (e instanceof ApiError && e.status === 409) already.push(i);
+          else throw e;
+        }
+      }
+      if (already.length && !force) {
+        setDupes(already);
+        setKept(last);
+      } else if (last) onSaved(last);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  };
+  return (
+    <>
+      <button className="link-button back-link" onClick={onBack}>
+        <ArrowLeft size={18} /> {t('add.back')}
+      </button>
+      <h2 className="section-title">{t('add.connectionTitle')}</h2>
+      <ConnectionCard c={c} onPick={() => undefined} />
+      <p className="caption">{t('add.connectionNote')}</p>
+      {dupes.length > 0 && (
+        <div className="banner warn">
+          {dupes.length === legs.length ? t('add.duplicate') : t('add.duplicateOne', { train: legs[dupes[0]!]!.trainNumber ?? '' })}
+          <div className="banner-actions">
+            {kept && (
+              <button className="button small" onClick={() => onSaved(kept)}>
+                {t('add.keepAsIs')}
+              </button>
+            )}
+            <button className="button primary small" onClick={() => save(true)} disabled={saving}>
+              {t('add.addAnyway')}
+            </button>
+          </div>
+        </div>
+      )}
+      {error && <p className="banner error">{t('add.saveError', { message: error })}</p>}
+      <div className="sticky-actions">
+        <button className="button primary wide" onClick={() => save(false)} disabled={saving || dupes.length > 0}>
+          {t('add.addBoth')}
+        </button>
+      </div>
+    </>
+  );
+}
 function Confirm({ result, onBack, onSaved, backLabel }: { result: TripResult; onBack: () => void; onSaved: (leg: LegDetail) => void; backLabel?: string }) {
   const { t } = useTranslation();
   const { settings } = useSettings();
@@ -303,6 +404,7 @@ export function AddTripPage() {
   const [retry, setRetry] = useState(0);
   const [manual, setManual] = useState(false);
   const [picked, setPicked] = useState<TripResult | null>(null);
+  const [pickedConn, setPickedConn] = useState<Connection | null>(null);
   const [saved, setSaved] = useState<LegDetail | null>(null);
   const input = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -398,6 +500,7 @@ export function AddTripPage() {
     setSaved(null);
     setManual(false);
     setPicked(null);
+    setPickedConn(null);
     setQuery('');
     setTimeout(() => input.current?.focus(), 0);
   };
@@ -416,6 +519,8 @@ export function AddTripPage() {
             <Done leg={saved} onAnother={reset} />
           ) : manual ? (
             <ManualTrip date={date} from={interp?.from} to={interp?.to} onBack={() => setManual(false)} onSaved={setSaved} />
+          ) : pickedConn ? (
+            <ConfirmConnection c={pickedConn} onBack={() => setPickedConn(null)} onSaved={setSaved} />
           ) : picked ? (
             <Confirm result={picked} onBack={() => (prefill ? navigate(-1) : setPicked(null))} backLabel={prefill ? t('common.back') : undefined} onSaved={setSaved} />
           ) : (
@@ -502,7 +607,17 @@ export function AddTripPage() {
                 </>
               )}
               {resp?.results && resp.results.length === 0 && !resp.outsideTimetable && (
-                <p className="muted">{interp?.trainNumber ? t('add.noTrain', { number: interp.trainNumber }) : t('add.noDirect')}</p>
+                <p className="muted">{interp?.trainNumber ? t('add.noTrain', { number: interp.trainNumber }) : resp.connections?.length ? t('add.noDirectChange') : t('add.noDirect')}</p>
+              )}
+              {resp?.results?.length === 0 && resp.connections && resp.connections.length > 0 && (
+                <>
+                  <h2 className="section-header">{t('add.withChange')}</h2>
+                  <div className="results">
+                    {resp.connections.map((c) => (
+                      <ConnectionCard key={`${c.first.key}:${c.first.serviceDate}:${c.second.key}`} c={c} onPick={() => setPickedConn(c)} />
+                    ))}
+                  </div>
+                </>
               )}
               {query && resp && (resp.outsideTimetable ? resp.history !== 'loading' : resp.results !== null) && (
                 <button className="link-button manual-link" onClick={() => setManual(true)}>

@@ -186,6 +186,90 @@ export function searchByRoute(db: Db, fromId: string, toId: string, date: string
   return dedupe(results);
 }
 
+export interface Connection {
+  /** The first train, from your station to the change. */
+  first: TripResult;
+  /** The second train, from the change to your destination. */
+  second: TripResult;
+  changeAt: { stationId: string; name: string };
+  changeMin: number;
+}
+
+/** Shortest change counted as possible between two trains at the same station (most Swedish stations allow 4–5). */
+export const MIN_CHANGE_MIN = 5;
+export const MAX_CHANGE_MIN = 120;
+
+/**
+ * Two trains with one change, when no single train runs between the stations: every train from `fromId` that day,
+ * every train into `toId`, joined at a shared station with 5–120 minutes to change. For each first train, the
+ * earliest arrival (at the station with the most time to change); options that leave earlier and arrive later than
+ * another are dropped. Timetable only: whether a change works on the day is for live data to say.
+ */
+export function searchConnections(db: Db, fromId: string, toId: string, date: string, opts: { operatorId?: string; limit?: number; minChangeMin?: number } = {}): Connection[] {
+  if (fromId === toId) return [];
+  const minChange = (opts.minChangeMin ?? MIN_CHANGE_MIN) * 60_000;
+  const callsAt = (station: string, flag: 'no_pickup' | 'no_dropoff') =>
+    sql`t.key in (select trip_key from timetable_stop_times where station_id = ${station} and ${sql.raw(flag)} = 0)`;
+  const firsts = candidateTrips(db, date, callsAt(fromId, 'no_pickup'));
+  // Second trains may run into the next day (a late change), or have started the day before.
+  const seconds = [...candidateTrips(db, date, callsAt(toId, 'no_dropoff')), ...candidateTrips(db, addDays(date, 1), callsAt(toId, 'no_dropoff'))];
+  const stops = loadStops(db, [...new Set([...firsts, ...seconds].map((x) => x.key))]);
+  // Arrivals of first trains at each possible change station.
+  const arrivals = new Map<string, { trip: TripRow; from: StopRow; at: StopRow; time: number }[]>();
+  for (const trip of firsts) {
+    const ss = stops.get(trip.key) ?? [];
+    const from = ss.find((s) => s.station_id === fromId && !s.no_pickup);
+    if (!from || todayIn(from.stz, utc(trip, from.dep_sec ?? from.arr_sec)!) !== date) continue;
+    if (ss.some((s) => s.seq > from.seq && s.station_id === toId && !s.no_dropoff)) continue; // direct
+    for (const s of ss) {
+      if (s.seq <= from.seq || s.no_dropoff || s.station_id === toId) continue;
+      const time = utc(trip, s.arr_sec ?? s.dep_sec);
+      if (time === null) continue;
+      (arrivals.get(s.station_id) ?? arrivals.set(s.station_id, []).get(s.station_id)!).push({ trip, from, at: s, time });
+    }
+  }
+  // Cheap comparisons first; the full results only for the winners (building them is most of the cost).
+  type Cand = { a: { trip: TripRow; from: StopRow; at: StopRow; time: number }; trip: TripRow; ss: StopRow[]; s: StopRow; to: StopRow; gap: number; arr: number };
+  const best = new Map<string, Cand>();
+  const seen = new Set<string>();
+  for (const trip of seconds) {
+    const id = `${trip.key}|${trip.service_date}`;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const ss = stops.get(trip.key) ?? [];
+    const to = [...ss].reverse().find((s) => s.station_id === toId && !s.no_dropoff);
+    if (!to) continue;
+    let arr: number | null = null;
+    for (const s of ss) {
+      if (s.seq >= to.seq || s.no_pickup || s.station_id === fromId) continue;
+      const here = arrivals.get(s.station_id);
+      if (!here) continue;
+      const dep = utc(trip, s.dep_sec ?? s.arr_sec);
+      if (dep === null) continue;
+      for (const a of here) {
+        const gap = dep - a.time;
+        if (a.trip.key === trip.key || gap < minChange || gap > MAX_CHANGE_MIN * 60_000) continue;
+        if (opts.operatorId && a.trip.operator_id !== opts.operatorId && trip.operator_id !== opts.operatorId) continue;
+        arr ??= utc(trip, to.arr_sec ?? to.dep_sec)!;
+        const k = `${a.trip.key}|${a.trip.service_date}`;
+        const cur = best.get(k);
+        // The earliest arrival; between changes onto the same train, the first place they meet with time to change.
+        if (!cur || arr < cur.arr || (arr === cur.arr && cur.trip.key === trip.key ? s.seq < cur.s.seq : arr === cur.arr && gap > cur.gap)) best.set(k, { a, trip, ss, s, to, gap, arr });
+      }
+    }
+  }
+  const results: Connection[] = [...best.values()].map((c) => ({
+    first: toResult(c.a.trip, stops.get(c.a.trip.key) ?? [], c.a.from, c.a.at),
+    second: toResult(c.trip, c.ss, c.s, c.to),
+    changeAt: { stationId: c.s.station_id, name: c.s.name },
+    changeMin: Math.round(c.gap / 60_000),
+  }));
+  const all = results.sort((x, y) => x.first.from.time - y.first.from.time || x.second.to.time - y.second.to.time);
+  // Drop options that another beats: it leaves no earlier and arrives earlier (or the same, leaving later).
+  const kept = all.filter((c) => !all.some((d) => d !== c && d.first.from.time >= c.first.from.time && d.second.to.time <= c.second.to.time && (d.first.from.time > c.first.from.time || d.second.to.time < c.second.to.time)));
+  return kept.slice(0, opts.limit ?? 12);
+}
+
 /**
  * One physical train can appear several times for the same segment: as duplicate GTFS patterns, or under two numbers
  * (Snälltåget's Berlin night train is 10301 abroad and 3943 within Sweden), or in both countries' feeds (Vy's
