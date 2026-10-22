@@ -261,8 +261,9 @@ def main():
         lv = platform_levels(t)
         if lv[0] not in keep_levels or t.get("subway") == "yes":
             continue
-        ref = t.get("local_ref") or t.get("ref")
-        if not ref or ref in drop:
+        # A platform OSM left without a number: named by way id in the edits ("platform_refs": {"123": "2"}).
+        ref = edits.get("platform_refs", {}).get(wid) or t.get("local_ref") or t.get("ref")
+        if not ref or ref in drop or wid in edits.get("drop_platform_ways", []):
             continue
         p = coords(w)
         if not any(near(q) for q in p):
@@ -323,14 +324,22 @@ def main():
         if not any(near(q) for q in pts):
             continue
         lv = parse_levels(t.get("level"))
+        if lv is None and t.get("level") is None and edits.get("paths_by_layer") and (t.get("tunnel") or t.get("bridge") or t.get("covered")) and t.get("layer"):
+            # Untagged tunnels and footbridges (most small stations): their layer is the level.
+            lv = parse_levels(t.get("layer"))
+            if lv and lv[0] not in keep_levels:
+                lv = None
         vertical_way = hw in ("steps", "elevator") or bool(t.get("conveying"))
         if lv is None and vertical_way and t.get("level") is None:
             # Stairs without a level: worked out below from what their ends touch.
             untagged_vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs"), incline=t.get("incline")))
             continue
         if lv is None:
-            # Untagged paths count only inside the station building (as ground level).
-            if t.get("level") is not None or not in_station(pts[len(pts) // 2]):
+            # Untagged paths count inside the station building (as ground level), and with "path_radius" in the edits
+            # also near the platforms (stations whose platforms are reached from the street, not a hall).
+            mid = pts[len(pts) // 2]
+            near_platform = edits.get("path_radius") and any(dist_to_poly(q, pp) <= edits["path_radius"] for q in (pts[0], mid, pts[-1]) for pp in plat_polys)
+            if t.get("level") is not None or not (in_station(mid) or near_platform):
                 continue
             lv = ["0"]
         if not set(lv) <= keep_levels:
@@ -415,9 +424,12 @@ def main():
         if t.get("highway") != "elevator":
             continue
         lv = parse_levels(t.get("level"))
+        here = [k for k in V if V[k]["osm"] == int(nid)]
+        if not lv and edits.get("paths_by_layer") and len({V[k]["level"] for k in here}) >= 2:
+            # A lift without a level tag that joins paths on different levels: it serves those levels.
+            lv = sorted({next(o for o, i in level_id.items() if i == V[k]["level"]) for k in here})
         if not lv or not set(lv) <= keep_levels:
             continue
-        here = [k for k in V if V[k]["osm"] == int(nid)]
         if len(here) < 2:
             continue
         for i in range(len(here)):
@@ -578,6 +590,8 @@ def main():
             stack.extend(adj[n])
     if os.environ.get("STATION_DEBUG"):
         json.dump(dict(V=V, E=[dict(a=e["a"], b=e["b"], kind=e["kind"], pts=e["pts"]) for e in E], comp=comp, platforms=out_platforms, shapes=shapes), open(os.environ["STATION_DEBUG"], "w"))
+    if not out_platforms:
+        sys.exit(f"{name}: no numbered platforms in OSM; name them in the edits file's platform_refs (way id -> number)")
     main_start = max(out_platforms, key=lambda p: sum(1 for k in comp if comp[k] == comp.get(p["node"])))["node"]
     main = {k for k, c in comp.items() if c == comp[main_start]}
     for p in out_platforms:
