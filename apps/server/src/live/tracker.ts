@@ -33,7 +33,7 @@ export const liveBus = new EventEmitter();
 liveBus.setMaxListeners(100);
 
 interface TrvPosition {
-  Train: { AdvertisedTrainNumber?: string; OperationalTrainNumber?: string };
+  Train: { AdvertisedTrainNumber?: string; OperationalTrainNumber?: string; JourneyPlanDepartureDate?: string };
   Position: { WGS84?: string };
   TimeStamp: string;
   Status?: { Active?: boolean };
@@ -41,9 +41,14 @@ interface TrvPosition {
   Speed?: number;
 }
 
-/** Newest active GPS fix per advertised train number. */
-export async function fetchPositions(numbers: string[], now: number, fetchImpl?: typeof fetch): Promise<Map<string, GpsFix>> {
-  const out = new Map<string, GpsFix>();
+export type DatedFix = GpsFix & { date: string | null };
+
+/**
+ * Active GPS fixes of the last 10 minutes per advertised train number, newest first. Several trains can share a
+ * number (Öresundståg 1378 and Pågatåg 1378), so the caller picks the one that fits the trip (pickFix).
+ */
+export async function fetchPositions(numbers: string[], now: number, fetchImpl?: typeof fetch): Promise<Map<string, DatedFix[]>> {
+  const out = new Map<string, DatedFix[]>();
   if (!numbers.length) return out;
   const r = await trvQuery<{ TrainPosition?: TrvPosition[] }>(
     `<QUERY objecttype="TrainPosition" namespace="järnväg.trafikinfo" schemaversion="1.1"><FILTER>` +
@@ -55,11 +60,46 @@ export async function fetchPositions(numbers: string[], now: number, fetchImpl?:
     const n = p.Train.AdvertisedTrainNumber;
     const ll = parseWgs84(p.Position.WGS84);
     if (!n || !ll || p.Status?.Active === false) continue;
-    const at = Date.parse(p.TimeStamp);
-    if ((out.get(n)?.at ?? 0) >= at) continue;
-    out.set(n, { lat: ll[0], lon: ll[1], at, bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null });
+    const list = out.get(n) ?? out.set(n, []).get(n)!;
+    list.push({ lat: ll[0], lon: ll[1], at: Date.parse(p.TimeStamp), bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null, date: p.Train.JourneyPlanDepartureDate?.slice(0, 10) ?? null });
   }
+  for (const list of out.values()) list.sort((a, b) => b.at - a.at);
   return out;
+}
+
+/** Shortest distance from a point to a polyline, in metres (flat-earth per segment; fine at these scales). */
+export function distanceToLineM(p: { lat: number; lon: number }, line: LatLon[]): number {
+  if (!line.length) return Infinity;
+  const kx = 111_320 * Math.cos((p.lat * Math.PI) / 180);
+  const ky = 110_540;
+  let best = Infinity;
+  for (let i = 0; i < line.length; i++) {
+    const a = line[i]!;
+    const b = line[Math.min(i + 1, line.length - 1)]!;
+    const [ax, ay, bx, by] = [(a[1] - p.lon) * kx, (a[0] - p.lat) * ky, (b[1] - p.lon) * kx, (b[0] - p.lat) * ky];
+    const dx = bx - ax;
+    const dy = by - ay;
+    const len = dx * dx + dy * dy;
+    const t = len ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len)) : 0;
+    best = Math.min(best, Math.hypot(ax + t * dx, ay + t * dy));
+  }
+  return best;
+}
+
+/** On the ridden track (3 km), or near the train's whole route on its way to you (15 km, straight lines between stops). */
+export const ON_ROUTE_M = 3_000;
+export const NEAR_ROUTE_M = 15_000;
+
+/**
+ * Which GPS fix is this trip's train: the newest one for its number that runs on its date (when the feed says) and
+ * is on or near its route. A same-numbered train elsewhere in the country is never taken for yours. Pure.
+ */
+export function pickFix(fixes: DatedFix[], trip: { serviceDate: string | null; line: LatLon[]; route: LatLon[] }): GpsFix | null {
+  for (const f of fixes) {
+    if (f.date && trip.serviceDate && f.date !== trip.serviceDate) continue;
+    if (distanceToLineM(f, trip.line) <= ON_ROUTE_M || distanceToLineM(f, trip.route) <= NEAR_ROUTE_M) return f;
+  }
+  return null;
 }
 
 /**
@@ -137,7 +177,9 @@ function loadLeg(db: Db, legId: string) {
       estimatedDep: ms(s.estimatedDep),
     }));
   const line: LatLon[] = leg.geometry ? decodePolyline(leg.geometry) : ridden.map((s) => [s.lat, s.lon]);
-  return { leg, ridden, line };
+  // The whole trip, stop to stop, including before you board: where the train may be on its way to you.
+  const route: LatLon[] = all.map((s) => [s.lat, s.lon]);
+  return { leg, ridden, line, route };
 }
 
 function summary(loaded: NonNullable<ReturnType<typeof loadLeg>>): LegSummary {
@@ -178,7 +220,7 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
   }
   const loaded = ids.map((id) => loadLeg(db, id)).filter((l): l is NonNullable<typeof l> => l !== null);
   const numbers = [...new Set(loaded.flatMap((l) => (l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [])))];
-  let fixes = new Map<string, GpsFix>();
+  let fixes = new Map<string, DatedFix[]>();
   try {
     fixes = await fetchPositions(numbers, now, opts.fetchImpl);
   } catch (e) {
@@ -206,7 +248,7 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
     const jk = journeyOf.get(l.leg.id);
     const gps =
-      [...nums.map((n) => fixes.get(n)), jk ? noFixes.get(jk) : undefined]
+      [...nums.map((n) => pickFix(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), jk ? noFixes.get(jk) : undefined]
         .filter((f): f is GpsFix => !!f)
         .sort((a, b) => b.at - a.at)[0] ?? null;
     const view = liveView(l.ridden, l.line, gps, now);
