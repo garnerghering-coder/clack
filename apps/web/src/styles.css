@@ -949,3 +949,17 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .buy-ticket { display: grid; gap: 4px; justify-items: start; margin-top: 8px; }
 .ticket-return { position: fixed; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 12px); width: min(560px, calc(100% - 24px)); display: grid; gap: 8px; box-shadow: var(--shadow); }
 .ticket-return .row-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+/* Disruption help: calm, with the urgency carried by the edge colour rather than alarm. */
+.disruption { display: grid; gap: 10px; border-left: 3px solid var(--text-2); }
+.disruption.urgency-act_now { border-left-color: var(--very-late); }
+.disruption.urgency-heads_up { border-left-color: var(--late); }
+.disruption-head { display: flex; align-items: center; gap: 8px; }
+.disruption-lines { display: grid; gap: 4px; padding-left: 18px; margin: 0; }
+.disruption-alts, .disruption-rights { display: grid; gap: 6px; }
+.alt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.alt-row { display: flex; align-items: center; gap: 8px; }
+.alt-main { display: grid; flex: 1; min-width: 0; }
+.rights-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.rights-links a { color: var(--accent-ink); font-weight: 600; }
+.alt-main .strong { white-space: nowrap; }

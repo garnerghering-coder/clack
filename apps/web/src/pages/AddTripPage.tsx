@@ -420,6 +420,13 @@ export function AddTripPage() {
   const [params] = useSearchParams();
   // Opened from a station board ("Add to my trips"): go straight to the confirm step for that train.
   const prefill = params.get('trip');
+  // Chosen instead of a cancelled or missed train (disruption help): that one is marked as not taken, which you
+  // asked for by choosing this one; it stays in your trips, and can be undone there.
+  const replace = params.get('replace');
+  const savedReplacing = (leg: LegDetail) => {
+    if (replace && replace !== leg.id) void api.answerRide(replace, 'no').catch(() => undefined);
+    setSaved(leg);
+  };
   useEffect(() => {
     const key = params.get('trip');
     const day = params.get('date');
@@ -531,7 +538,7 @@ export function AddTripPage() {
           ) : pickedConn ? (
             <ConfirmConnection c={pickedConn} onBack={() => setPickedConn(null)} onSaved={setSaved} />
           ) : picked ? (
-            <Confirm result={picked} onBack={() => (prefill ? navigate(-1) : setPicked(null))} backLabel={prefill ? t('common.back') : undefined} onSaved={setSaved} />
+            <Confirm result={picked} onBack={() => (prefill ? navigate(-1) : setPicked(null))} backLabel={prefill ? t('common.back') : undefined} onSaved={savedReplacing} />
           ) : (
             <>
               <DateRow date={date} setDate={setDate} />

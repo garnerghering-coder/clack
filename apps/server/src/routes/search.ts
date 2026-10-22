@@ -1,10 +1,10 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { todayIn } from '../lib/time.js';
+import { addDays, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
 import { ensureHistory } from '../import/history.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
-import { productOf, tripStops } from '../search/timetable.js';
+import { productOf, searchByRoute, searchConnections, tripStops } from '../search/timetable.js';
 import { typicalTrainType } from '../legs/trainTypes.js';
 import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
@@ -20,6 +20,28 @@ export const searchRoutes =
       const date = req.query.date ?? todayIn('Europe/Stockholm');
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
       return search(req.query.q ?? '', date);
+    });
+
+    // Other ways to get there (disruption help): direct trains leaving `from` for `to` at or after `after`, today and
+    // tomorrow, without the train you can't take; with one change when there are none. Timetable only: the client
+    // says so and links each one to its live view.
+    app.get<{ Querystring: { from?: string; to?: string; after?: string; exclude?: string } }>('/alternatives', async (req, reply) => {
+      const { from, to, exclude } = req.query;
+      const after = Number(req.query.after);
+      if (!from || !to || !Number.isFinite(after)) return reply.code(400).send({ error: 'from, to and after (ms) are required' });
+      const day = todayIn('Europe/Stockholm', after);
+      const direct = [day, addDays(day, 1)]
+        .flatMap((d) => searchByRoute(db, from, to, d))
+        .filter((r) => r.from.time >= after && r.key !== exclude)
+        .sort((a, b) => a.from.time - b.from.time)
+        .slice(0, 4);
+      const connections = direct.length
+        ? []
+        : [day, addDays(day, 1)]
+            .flatMap((d) => searchConnections(db, from, to, d))
+            .filter((c) => c.first.from.time >= after && c.first.key !== exclude)
+            .slice(0, 3);
+      return { direct, connections };
     });
 
     app.get<{ Params: { key: string }; Querystring: { date?: string } }>('/timetable/trips/:key', async (req, reply) => {

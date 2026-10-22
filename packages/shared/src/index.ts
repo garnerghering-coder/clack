@@ -4,6 +4,7 @@ export * from './counties';
 export * from './onboard';
 export * from './hours';
 export * from './station';
+export * from './disruption';
 
 // Types and constants shared by the web app and the server.
 

@@ -191,6 +191,8 @@ export interface Leg {
   destination: StationRef | null;
   notes: string | null;
   journeyId: string | null;
+  /** The timetable trip it was saved from (null for trips added by hand). */
+  timetableTripKey?: string | null;
   live: LiveState | null;
   /** Did you ride it: pending | auto | confirmed | review | not_taken (server legs/recording.ts). */
   ride: 'pending' | 'auto' | 'confirmed' | 'review' | 'not_taken';
@@ -420,6 +422,8 @@ export const api = {
   amenities: () => request<AmenityEntry[]>('/amenities'),
   passport: (q: { year: number | null; commuter: boolean; comparison?: string }) =>
     request<Passport>(`/passport?year=${q.year ?? 'all'}&commuter=${q.commuter}${q.comparison ? `&comparison=${q.comparison}` : ''}`),
+  alternatives: (from: string, to: string, after: number, exclude: string | null) =>
+    request<{ direct: TripResult[]; connections: Connection[] }>(`/alternatives?${new URLSearchParams({ from, to, after: String(Math.round(after)), ...(exclude ? { exclude } : {}) })}`),
   answerRide: (id: string, answer: 'yes' | 'no' | 'undo') => request<LegDetail>(`/legs/${id}/ride`, { method: 'POST', body: JSON.stringify({ answer }) }),
   deleteLeg: (id: string) => request<void>(`/legs/${id}`, { method: 'DELETE' }),
 };

@@ -220,6 +220,7 @@ const legColumns = {
   onboard: legs.onboard,
   countryCodes: legs.countryCodes,
   journeyId: legs.journeyId,
+  timetableTripKey: legs.timetableTripKey,
   operatorId: legs.operatorId,
   originStationId: legs.originStationId,
   destStationId: legs.destStationId,
