@@ -1,5 +1,5 @@
 {
-  "_comment": "Extra search terms per Trafikverket signature (English and other common names). Accents and case don't matter; city names already find their main station by popularity, so only add names that differ from the station name.",
+  "_comment": "Extra search terms per Trafikverket signature (or station id, for Norway's NSR stations) (English and other common names). Accents and case don't matter; city names already find their main station by popularity, so only add names that differ from the station name.",
   "aliases": {
     "G": [
       "Gothenburg",
@@ -34,6 +34,29 @@
       "Kastrup",
       "CPH",
       "Kobenhavns Lufthavn"
+    ],
+    "No.osl": [
+      "Oslo",
+      "Oslo Central",
+      "Oslo Sentralstasjon"
+    ],
+    "No.tnd": [
+      "Trondheim",
+      "Trondheim Central",
+      "Trondheim Sentralstasjon"
+    ],
+    "NSR:StopPlace:269": [
+      "Gardermoen",
+      "Oslo Airport",
+      "Oslo Gardermoen"
+    ],
+    "NSR:StopPlace:456": [
+      "Værnes",
+      "Trondheim Airport"
+    ],
+    "NSR:StopPlace:672": [
+      "Sandefjord Torp",
+      "Torp Airport"
     ]
   }
 }

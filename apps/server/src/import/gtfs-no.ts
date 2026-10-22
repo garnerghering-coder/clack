@@ -107,6 +107,7 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
   const newStations = new Map<string, { id: string; name: string; lat: number; lon: number; stopIds: string[] }>();
   let matched = 0;
   const renamed = new Map<string, string>();
+  const merged = new Map<string, string>();
   let excluded = 0;
   let numbersMissing = 0;
   const usedBrands = new Map<string, Brand>();
@@ -153,9 +154,13 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
         // it's the same name: a neighbouring place matched by distance ("Oslo S Trelastgata") doesn't rename it.
         if (same.country === 'NO' && sameSpelling(same.name, at.name)) renamed.set(id, cleanStopName(at.name));
       } else {
-        // NSR ids are already one per place, so new Norwegian stations are never merged with each other.
-        id = place;
-        newStations.set(id, { id, name: cleanStopName(at.name), lat: at.lat, lon: at.lon, stopIds: [] });
+        // NSR sometimes has two places for one station (Oslo lufthavn's airport-train quay sits in its own place):
+        // the same name within a kilometre is one station. Different names are never merged.
+        const name = cleanStopName(at.name);
+        const twin = [...newStations.values()].find((n) => normName(n.name) === normName(name) && haversineM(n.lat, n.lon, at.lat, at.lon) <= 1000);
+        id = twin?.id ?? place;
+        if (twin) merged.set(place, twin.id);
+        else newStations.set(id, { id, name, lat: at.lat, lon: at.lon, stopIds: [] });
       }
       stationOfPlace.set(place, id);
       return id;
@@ -231,6 +236,18 @@ export async function importGtfsNorway(db: Db, zips: string[], opts: { today?: s
       for (const d of p.dates) tripDates += insertDate.run(p.key, d).changes;
     }
     sqlite.prepare(`delete from timetable_trips where source = ? and key not in (select trip_key from timetable_trip_dates)`).run(SOURCE);
+    // A place merged into its twin may be a station from an earlier import: point its kept trips at the twin, and
+    // drop it unless something of the user's (a leg, a favourite) still refers to it.
+    const repoint = sqlite.prepare(`update timetable_stop_times set station_id = ? where station_id = ?`);
+    const dropStation = sqlite.prepare(`delete from stations where id = ?`);
+    for (const [place, id] of merged) {
+      repoint.run(id, place);
+      try {
+        sqlite.transaction(() => dropStation.run(place))();
+      } catch {
+        // Still referenced: it stays, harmlessly.
+      }
+    }
     refreshStationPopularity(db, today);
     db.insert(importLog)
       .values({ source: SOURCE, startedAt: new Date(t0), finishedAt: new Date(), status: 'ok', notes: JSON.stringify({ trips: patterns.length, window: [windowStart, windowEnd] }) })

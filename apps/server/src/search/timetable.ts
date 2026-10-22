@@ -188,7 +188,8 @@ export function searchByRoute(db: Db, fromId: string, toId: string, date: string
 
 /**
  * One physical train can appear several times for the same segment: as duplicate GTFS patterns, or under two numbers
- * (Snälltåget's Berlin night train is 10301 abroad and 3943 within Sweden). Keep one, preferring the plain (≤ 4 digit)
+ * (Snälltåget's Berlin night train is 10301 abroad and 3943 within Sweden), or in both countries' feeds (Vy's
+ * Oslo–Göteborg trains). Keep one, preferring the feed of the country you board in, then the plain (≤ 4 digit)
  * number, and list the others.
  */
 function dedupe(results: TripResult[]): TripResult[] {
@@ -199,7 +200,8 @@ function dedupe(results: TripResult[]): TripResult[] {
   }
   const out: TripResult[] = [];
   for (const group of groups.values()) {
-    const rank = (r: TripResult) => (r.trainNumber && r.trainNumber.length <= 4 ? 0 : 1);
+    const foreignFeed = (r: TripResult) => Number(r.key.startsWith('no:') !== (r.from.country === 'NO'));
+    const rank = (r: TripResult) => foreignFeed(r) * 2 + (r.trainNumber && r.trainNumber.length <= 4 ? 0 : 1);
     group.sort((a, b) => rank(a) - rank(b));
     const keep = { ...group[0]! };
     keep.alsoKnownAs = [...new Set(group.slice(1).map((r) => r.trainNumber).filter((n): n is string => !!n && n !== keep.trainNumber))];
