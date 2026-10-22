@@ -1,8 +1,9 @@
 # Clack
 
 Log every train you ride, see it on the real tracks, and build a passport of your rail history.
-Phase 1 is a single-user demo for Sweden that runs on your laptop. See [`SPEC.md`](SPEC.md) for the plan
-and [`DATA_FINDINGS.md`](DATA_FINDINGS.md) for what Phase 0 learned about the data.
+Phase 1 is a single-user demo for Sweden and Norway that runs on your laptop. See [`SPEC.md`](SPEC.md) for the plan,
+[`DATA_FINDINGS.md`](DATA_FINDINGS.md) for what Phase 0 learned about Sweden's data and
+[`NORWAY_DATA_FINDINGS.md`](NORWAY_DATA_FINDINGS.md) for Norway's.
 
 ## Run it (macOS)
 
@@ -40,11 +41,14 @@ Wait for the green **✓ Clack is ready** box in Terminal, then open <http://loc
 - **On your iPhone:** run `npm run dev:phone`, click **Allow** if the Mac asks about incoming connections, and open the
   "Network" address Vite prints (e.g. `http://192.168.1.20:5173`) in Safari on the same Wi-Fi. Installing it as a
   home-screen app needs HTTPS, which comes later.
-- **Delay data:** Trafikverket keeps actual times for only ~4 days. The server saves them for your trips while it's
+- **Norway** needs no key. Entur's rail timetables (~100 MB for Vy, Go-Ahead, SJ Nord and Flytoget) download on
+  first start and at most once a day after that. Every request to Entur names the app (`ENTUR_CLIENT_NAME`, default
+  `garner-clack`), as Entur asks.
+- **Delay data:** Trafikverket keeps actual times for only ~4 days, and Entur only for the day the train runs. The server saves them for your trips while it's
   running and catches up when it starts, so start the app at least every few days.
 - **Updating:** `git pull`, then `npm install` if dependencies changed.
 
-## How often it asks Trafikverket
+## How often it asks Trafikverket and Entur
 
 Everything is shared on the server: two browser tabs (or, later, two people) looking at the same thing cost the same
 as one. Nothing polls while nobody is looking, except your own trips.
@@ -56,6 +60,12 @@ as one. Nothing polls while nobody is looking, except your own trips.
 | Station board | 1 TrainAnnouncement per station and direction every `BOARD_POLL_MS` | While the board is open, plus 60 s |
 | Live map: positions | 1 TrainPosition stream (Trafikverket SSE) for the whole country; 1 catch-up query per reconnect. After 3 failed streams in a row it polls every `LIVE_MAP_POLL_MS` instead | While the map is open, plus 60 s |
 | Live map: delays and destinations | 1 TrainAnnouncement change query every `LIVE_MAP_ANNOUNCE_MS`; a full reload of the window (an hour back to two ahead, ~10,000 rows) every 20 min | Same |
+| Live map: Norway | Entur GTFS-RT vehicle positions + trip updates for the 4 rail operators (8 requests) every `LIVE_MAP_NORWAY_POLL_MS` | Same |
+| Norwegian trips | 1 Journey Planner query per live trip (cached 30 s) + 1 vehicle-positions request per operator, every 20 s | Same window as Swedish trips |
+| Norwegian station board | 1 Journey Planner query per station and direction every `BOARD_POLL_MS` | While the board is open, plus 60 s |
+
+Entur allows 1,000 requests a minute with the client name; if it ever answers "too many", nothing is sent to it again
+until the reset time it gives.
 
 Optional settings in `.env` (defaults shown):
 
@@ -65,6 +75,9 @@ LIVE_MAP_ANNOUNCE_MS=30000    # live map delay/destination refresh
 LIVE_MAP_POLL_MS=20000        # live map positions, only if the stream keeps failing
 LIVE_MAP_INCLUDE_ESTIMATED=1  # 0: live map shows GPS positions only, no estimates
 LIVE_MAP_SIMULATE=0           # e.g. 1000: fake trains along real track instead of Trafikverket (demo, load test)
+LIVE_MAP_NORWAY=1             # 0: no Norwegian trains on the live map
+LIVE_MAP_NORWAY_POLL_MS=20000 # Norway's live map feeds (Entur refreshes them every 15 s)
+ENTUR_CLIENT_NAME=garner-clack
 ```
 
 The live map shows passenger trains that are running. Freight, empty runs and trains that have parked are left out.

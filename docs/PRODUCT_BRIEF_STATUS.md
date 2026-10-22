@@ -114,5 +114,12 @@ isn't (2026-10-21).
 - **Followed trains:** kept for their operating day and the next, matched by train number and date. They don't follow a train across a change of number.
 - **Featured map position:** the train marker uses the trip tracker's position. With an estimated position it says so; with no fresh position the card falls back to the route preview.
 - **Share card maps:** they need the basemap download (first start). Without it they show the rail network and your routes on a plain background.
-- **Matching:** uses Trafikverket only. Foreign stops have no reports, so a trip that ends abroad (for example Kolding) shows as `partial_reports` and is asked about unless you saved it after it ran.
+- **Matching:** uses Trafikverket for Swedish stops and Entur's Journey Planner for Norwegian ones (matched by stop place and minute). Other foreign stops (for example Kolding) have no reports, so such a trip shows as `partial_reports` and is asked about unless you saved it after it ran. SJ's own Stockholm–Oslo trains aren't in Entur's data, so their Norwegian stops have no reports either.
+- **Norway:**
+  - Journey Planner keeps actual times only for the day the train runs, so a Norwegian trip first seen later stays scheduled-only and is asked about.
+  - Norwegian trips older than yesterday can't come from a timetable (Entur has no archive).
+  - On the live map, a train without GPS is placed only when Entur sends a trip update for it (SJ Nord sent neither at night on 2026-10-22; to recheck in daytime).
+  - CO₂ uses Sweden's factors until a Norwegian source is checked.
+  - Train types are typical ones from the line and operator.
+  - Go-Ahead's website refuses the logo download, so it shows initials.
 - **Accessibility:** large text sizes were checked by layout, not with a screen reader pass.

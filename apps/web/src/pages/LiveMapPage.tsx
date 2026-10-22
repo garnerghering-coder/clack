@@ -299,7 +299,8 @@ function LiveMap() {
     (async () => {
       const [ml, status] = await Promise.all([loadMaplibre(), mapStatus()]);
       if (cancelled || !el.current) return;
-      const m = new ml.Map({ container: el.current, style: baseStyle(Boolean(status.basemap)), attributionControl: false, center: [15.5, 61.5], zoom: 4.2, fadeDuration: 0 });
+      // Opens on Sweden and Norway, Bergen to the Finnish border, Malmö to Narvik.
+      const m = new ml.Map({ container: el.current, style: baseStyle(Boolean(status.basemap)), attributionControl: false, bounds: [[4.5, 55.3], [24.5, 68.6]], fadeDuration: 0 });
       map.current = m;
       // Dev builds only: lets browser tests read the map (markers are drawn on a canvas, not in the DOM).
       if (import.meta.env.DEV) (window as unknown as { __liveMap?: MlMap }).__liveMap = m;
