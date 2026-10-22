@@ -50,22 +50,20 @@ export function X3Side({
             <stop offset="1" stopColor="#e3e6ea" />
           </linearGradient>
         </defs>
-        <rect x="646" y="34" width="76" height="7" rx="2" fill="#b9bfc6" />
-        <rect x="370" y="35" width="120" height="6" rx="2" fill="#b9bfc6" />
-        <rect x="30" y="35" width="96" height="6" rx="2" fill="#b9bfc6" />
+        <rect x="738" y="34" width="72" height="7" rx="2" fill="#b9bfc6" />
         <clipPath id={`${p}c2`}>
           <path d="M100.0,40 H170.0 Q174.0,40 174.0,44 V172 H100.0 Z" />
         </clipPath>
         <g clipPath={`url(#${p}c2)`}>
           <rect x="100.0" y="40" width="74.0" height="132" fill={`url(#${p}body)`} />
           <rect x="100.0" y="40" width="74.0" height="5" fill={`url(#${p}roof)`} />
-          <rect x="-6.0" y="79.6" width="166.0" height="37.6" rx="3" fill="#0b0d10" />
-          <rect x="-2.5" y="82.1" width="51.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="51.5" y="82.1" width="51.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="105.5" y="82.1" width="51.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="-50.0" y="54.5" width="38.0" height="96.4" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="-40.9" y="79.6" width="19.8" height="47.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          {!plain && <rect x="-48.5" y="137.7" width="35.0" height="12.5" fill={`url(#${p}yellow)`} />}
+          <rect x="-6.0" y="83.6" width="166.0" height="37.0" rx="3" fill="#0b0d10" />
+          <rect x="-2.5" y="86.1" width="51.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="51.5" y="86.1" width="51.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="105.5" y="86.1" width="51.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="-50.0" y="54.5" width="38.0" height="103.0" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="-41.6" y="82.2" width="21.3" height="51.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          {!plain && <rect x="-48.5" y="143.0" width="35.0" height="13.9" fill={`url(#${p}yellow)`} />}
           <rect x="100.0" y="162.8" width="74.0" height="9.2" fill={`url(#${p}steel)`} />
         </g>
         <rect x="174.0" y="48" width="16" height="118" fill="#2b3037" />
@@ -78,7 +76,7 @@ export function X3Side({
         <g clipPath={`url(#${p}c1)`}>
           <rect x="190.0" y="36" width="1010.0" height="140" fill={`url(#${p}body)`} />
           <rect x="190.0" y="40" width="902.0" height="5" fill={`url(#${p}roof)`} />
-          {!plain && <path d="M844.0,36 L844.0,45.2 L1008.0,60.5 L1188,172 L1200,172 V36 Z" fill={`url(#${p}yellow)`} />}
+          {!plain && <path d="M844.0,36 L844.0,45.2 L1008.0,60.5 L1156.0,172 L1200,172 V36 Z" fill={`url(#${p}yellow)`} />}
           <path d="M1018.0,36 H1200 V102.0 C1168.0,92.8 1140.0,69.0 1116.0,51.9 C1098.0,44.0 1062.0,43 1018.0,42 Z" fill="#14181e" />
           <path
             d="M1118.0,57.2 C1138.0,69.0 1158.0,83.6 1176.0,92.8"
@@ -90,28 +88,28 @@ export function X3Side({
           />
           <path d="M1156.0,103.4 V172" stroke="#000" strokeOpacity={0.13} strokeWidth="1.2" />
           <ellipse cx="1178.8" cy="127.1" rx="5" ry="3" fill="#f7f9fb" stroke="#4b4f55" strokeWidth="1" />
-          <rect x="208.0" y="79.6" width="164.0" height="37.6" rx="3" fill="#0b0d10" />
-          <rect x="211.5" y="82.1" width="50.3" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="264.8" y="82.1" width="50.3" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="318.2" y="82.1" width="50.3" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="380.0" y="54.5" width="38.0" height="96.4" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="389.1" y="79.6" width="19.8" height="47.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          {!plain && <rect x="381.5" y="137.7" width="35.0" height="12.5" fill={`url(#${p}yellow)`} />}
-          <rect x="430.0" y="79.6" width="354.0" height="37.6" rx="3" fill="#0b0d10" />
-          <rect x="433.5" y="82.1" width="67.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="503.5" y="82.1" width="67.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="573.5" y="82.1" width="67.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="643.5" y="82.1" width="67.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="713.5" y="82.1" width="67.0" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="796.0" y="54.5" width="57.199999999999996" height="96.4" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="809.7" y="79.6" width="29.7" height="47.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
-          {!plain && <rect x="797.5" y="137.7" width="54.199999999999996" height="12.5" fill={`url(#${p}yellow)`} />}
-          <rect x="866.0" y="79.6" width="144.0" height="37.6" rx="3" fill="#0b0d10" />
-          <rect x="869.5" y="82.1" width="43.7" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="916.2" y="82.1" width="43.7" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="962.8" y="82.1" width="43.7" height="32.6" rx="2" fill={`url(#${p}glass)`} />
-          <rect x="1026.0" y="54.5" width="38.0" height="96.4" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
-          <rect x="1035.1" y="79.6" width="19.8" height="47.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          <rect x="208.0" y="83.6" width="164.0" height="37.0" rx="3" fill="#0b0d10" />
+          <rect x="211.5" y="86.1" width="50.3" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="264.8" y="86.1" width="50.3" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="318.2" y="86.1" width="50.3" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="380.0" y="54.5" width="38.0" height="103.0" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="388.4" y="82.2" width="21.3" height="51.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          {!plain && <rect x="381.5" y="143.0" width="35.0" height="13.9" fill={`url(#${p}yellow)`} />}
+          <rect x="430.0" y="83.6" width="354.0" height="37.0" rx="3" fill="#0b0d10" />
+          <rect x="433.5" y="86.1" width="67.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="503.5" y="86.1" width="67.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="573.5" y="86.1" width="67.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="643.5" y="86.1" width="67.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="713.5" y="86.1" width="67.0" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="796.0" y="54.5" width="57.199999999999996" height="103.0" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="815.2" y="82.2" width="28.0" height="51.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
+          {!plain && <rect x="797.5" y="143.0" width="54.199999999999996" height="13.9" fill={`url(#${p}yellow)`} />}
+          <rect x="866.0" y="83.6" width="144.0" height="37.0" rx="3" fill="#0b0d10" />
+          <rect x="869.5" y="86.1" width="43.7" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="916.2" y="86.1" width="43.7" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="962.8" y="86.1" width="43.7" height="32.0" rx="2" fill={`url(#${p}glass)`} />
+          <rect x="1026.0" y="54.5" width="38.0" height="103.0" rx="3" fill="none" stroke="#8d949c" strokeWidth="1.6" />
+          <rect x="1034.4" y="82.2" width="21.3" height="51.5" rx="4" fill={`url(#${p}glass)`} stroke="#0b0d10" strokeWidth="2" />
           <rect x="190.0" y="162.8" width="898.0" height="9.2" fill={`url(#${p}steel)`} />
         </g>
         <rect x="230.0" y="172" width="800.0" height="6" fill="#4b5158" />
