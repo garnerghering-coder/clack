@@ -9,7 +9,12 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
   walking edge needs seconds.
 - **Shop outlines:** a place mapped in OSM as its own room (a shop's unit) keeps that outline (`outline` on the POI)
   and is drawn in its real shape; others are pins. Hand-drawn outlines go in the edits file's `outlines`
-  (`[{ "poi": id, "points": [[x, y], …] }]`), only from a source we may use (a survey, or a plan whose owner agreed).
+  (`[{ "poi": id, "points": [[x, y], …] }]`), or whole places with an `outline` in its `pois`.
+- **Station plans the owner supplied** (Jernhusen's Stockholm C plan, January 2026; the regional transport
+  authorities' terminal maps) are used, at the owner's decision (2026-10-22), for which shop is in which unit, the
+  units' outlines, and for checking platforms, lifts, stairs and entrances. Each map's `sources` says which plan
+  and how it was placed. Those parts are **not** covered by the ODbL below: the plans' owners haven't licensed them,
+  so ask them before the maps are published beyond this demo.
 - **Walking seconds** are normal pace without luggage: 1.3 m/s on foot, stairs at least 18 s a flight, escalators
   20 s, lifts 45 s. They're worked out from the map, not timed on site.
 

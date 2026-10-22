@@ -53,7 +53,7 @@ def main():
             for g in p["geometry"]:
                 ax.add_patch(Polygon(g, closed=True, fc="#fde9a8", ec="#c9a227", lw=0.6, zorder=2))
             mid = nodes[p["node"]]
-            ax.text(mid["x"], mid["y"], p["ref"], fontsize=9, weight="bold", ha="center", va="center", zorder=6)
+            ax.text(mid["x"], mid["y"], p["ref"], fontsize=9, weight="bold", ha="center", va="center", zorder=6, clip_on=True)
         for e in m["edges"]:
             a, b = nodes[e["from"]], nodes[e["to"]]
             if a["level"] != L and b["level"] != L:
@@ -69,7 +69,7 @@ def main():
             elif n["type"] in ("stairs", "escalator", "lift"):
                 ax.plot(n["x"], n["y"], marker="o", color=EDGE_COLOURS[n["type"]], ms=3, zorder=5)
             if args.labels:
-                ax.text(n["x"], n["y"], n["id"], fontsize=5, color="#333", zorder=7)
+                ax.text(n["x"], n["y"], n["id"], fontsize=5, color="#333", zorder=7, clip_on=True)
         for p in m["pois"]:
             if p["level"] != L:
                 continue
@@ -77,7 +77,7 @@ def main():
             if p.get("outline"):
                 ax.add_patch(Polygon(p["outline"], closed=True, fc=c, alpha=0.35, ec=c, lw=0.8, zorder=4))
             ax.plot(p["x"], p["y"], marker="v", color=c, ms=5, zorder=6)
-            ax.text(p["x"] + 1, p["y"] - 1, (p["name"] or p["category"])[:18], fontsize=6, color=c, zorder=7)
+            ax.text(p["x"] + 1, p["y"] - 1, (p["name"] or p["category"])[:18], fontsize=6, color=c, zorder=7, clip_on=True)
         ax.set_xlim(box[0], box[1])
         ax.set_ylim(box[3], box[2])  # y points south
         ax.set_aspect("equal")
