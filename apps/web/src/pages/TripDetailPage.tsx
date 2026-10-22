@@ -386,7 +386,7 @@ export function TripDetailPage() {
         {(tracking || leg.events.length > 0) && <ActivityLog leg={leg} events={leg.events} stops={leg.stops} />}
 
         <section className="card details">
-          {leg.dataQuality !== 'full' && (
+          {leg.dataQuality !== 'full' && !(leg.dataQuality === 'partial' && beyond.length > 0) && (
             <p>
               <span className="chip">{t(`detail.quality.${leg.dataQuality}`)}</span>{' '}
               <span className="caption">{t(`detail.qualityNote.${leg.dataQuality}`)}</span>
