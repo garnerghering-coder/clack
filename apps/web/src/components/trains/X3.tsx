@@ -1,8 +1,9 @@
-// Arlanda Express X3 (Alstom Coradia, 4 cars), side view: the cab car and part of the next, facing right.
-// Drawn from a photo of an X3 at Stockholm C (Wikimedia Commons, "X3 Stockholm Central.jpg"): silver body, the
-// yellow nose sweeping back over the cab to the first door, black windscreen band, yellow step markers on the doors,
-// dark skirt. Pantograph and roof equipment are left off: no source shows which car carries them. No lettering or
-// logos. "plain" is the same train unpainted, for an operator whose livery we don't know.
+// Arlanda Express X3 (Alstom Coradia, 4 cars), side view to scale (1 m = 40 units): the cab car and the front of the
+// next, facing right. Generated from the owner's photos of X3s (side-on at speed, and 3/4 at Stockholm C): three doors
+// on the cab car (a wide one mid-car), black-framed window groups, a short steep nose, the yellow wedge from the roof
+// above the wide door to the foot of the nose, black cap and windscreen, yellow step panels on the doors, stainless
+// lower edge. Axles 2.56 m apart, 0.92 m wheels (sv.wikipedia X3). No lettering or logos; pantograph not drawn (no
+// source shows which car has it). "plain" is the same train unpainted, for an operator whose livery we don't know.
 import { useId } from "react";
 
 export function X3Side({
@@ -18,11 +19,10 @@ export function X3Side({
 }) {
   const p = useId().replace(/:/g, "");
   const plain = livery === "plain";
-  const paint = plain ? `url(#${p}body)` : `url(#${p}yellow)`;
   return (
     <svg
       className={className}
-      viewBox="0 54 1000 200"
+      viewBox="110 22 1088 196"
       role={label ? "img" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
@@ -35,335 +35,534 @@ export function X3Side({
         filter={muted ? `url(#${p}mute)` : undefined}
       >
         <defs>
-          {/* Silver body: light at the top, cooler towards the floor, as in the photo under station lights. */}
           <linearGradient id={`${p}body`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#f7f8fa" />
-            <stop offset="0.55" stopColor="#e3e6ea" />
-            <stop offset="1" stopColor="#b9bfc7" />
+            <stop offset="0" stopColor="#fbfbfc" />
+            <stop offset="0.6" stopColor="#eceef1" />
+            <stop offset="1" stopColor="#d5d9de" />
           </linearGradient>
           <linearGradient id={`${p}yellow`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#f6dc3a" />
-            <stop offset="0.6" stopColor="#ecd02c" />
-            <stop offset="1" stopColor="#d7b81e" />
+            <stop offset="0" stopColor="#ffe24a" />
+            <stop offset="0.6" stopColor="#f6d72f" />
+            <stop offset="1" stopColor="#e6c420" />
           </linearGradient>
           <linearGradient id={`${p}glass`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#0b0e12" />
-            <stop offset="0.7" stopColor="#1f262f" />
-            <stop offset="1" stopColor="#3a4552" />
+            <stop offset="0" stopColor="#1b2128" />
+            <stop offset="0.65" stopColor="#2b343e" />
+            <stop offset="1" stopColor="#4a5562" />
           </linearGradient>
-          <linearGradient id={`${p}skirt`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#6c737c" />
-            <stop offset="1" stopColor="#4a5058" />
+          <linearGradient id={`${p}steel`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#d9dde1" />
+            <stop offset="1" stopColor="#a9b0b8" />
           </linearGradient>
-          <linearGradient id={`${p}roofsheen`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#ffffff" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+          <linearGradient id={`${p}roof`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#c7ccd2" />
+            <stop offset="1" stopColor="#e3e6ea" />
           </linearGradient>
-          {/* Cab car outline: flat roof, then the long nose sloping down to the coupler. */}
-          <clipPath id={`${p}cab`}>
-            <path
-              id={`${p}cabpath`}
-              d="M372,72 H812 C860,72 900,86 932,112 C962,136 984,160 992,184 C995,194 994,204 988,210 L984,214 H372 Z"
-            />
-          </clipPath>
-          <clipPath id={`${p}mid`}>
-            <path d="M-10,72 H352 Q358,72 358,78 V214 H-10 Z" />
-          </clipPath>
         </defs>
-
-        {/* ===== Second car (cut off at the left, like SJ's drawings) ===== */}
-        <g clipPath={`url(#${p}mid)`}>
+        <rect x="646" y="34" width="76" height="7" rx="2" fill="#b9bfc6" />
+        <rect x="370" y="35" width="120" height="6" rx="2" fill="#b9bfc6" />
+        <rect x="30" y="35" width="96" height="6" rx="2" fill="#b9bfc6" />
+        <clipPath id={`${p}c2`}>
+          <path d="M-44.0,40 H170.0 Q174.0,40 174.0,44 V172 H-44.0 Z" />
+        </clipPath>
+        <g clipPath={`url(#${p}c2)`}>
           <rect
-            x="-10"
-            y="72"
-            width="370"
-            height="142"
+            x="-44.0"
+            y="40"
+            width="218.0"
+            height="132"
             fill={`url(#${p}body)`}
           />
           <rect
-            x="-10"
-            y="72"
-            width="370"
-            height="10"
-            fill={`url(#${p}roofsheen)`}
-            opacity="0.6"
+            x="-44.0"
+            y="40"
+            width="218.0"
+            height="5"
+            fill={`url(#${p}roof)`}
           />
-          {/* windows */}
           <rect
-            x="18"
-            y="106"
-            width="78"
-            height="44"
-            rx="6"
+            x="-6.0"
+            y="79.6"
+            width="166.0"
+            height="37.6"
+            rx="3"
+            fill="#0b0d10"
+          />
+          <rect
+            x="-2.5"
+            y="82.1"
+            width="51.0"
+            height="32.6"
+            rx="2"
             fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
           />
           <rect
-            x="104"
-            y="106"
-            width="78"
-            height="44"
-            rx="6"
+            x="51.5"
+            y="82.1"
+            width="51.0"
+            height="32.6"
+            rx="2"
             fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
           />
           <rect
-            x="190"
-            y="106"
-            width="78"
-            height="44"
-            rx="6"
+            x="105.5"
+            y="82.1"
+            width="51.0"
+            height="32.6"
+            rx="2"
             fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
           />
-          {/* door near the car end, with the yellow step marker */}
           <rect
-            x="296"
-            y="88"
-            width="40"
-            height="118"
-            rx="4"
+            x="-50.0"
+            y="54.5"
+            width="38.0"
+            height="96.4"
+            rx="3"
             fill="none"
-            stroke="#9aa1aa"
+            stroke="#8d949c"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="-40.9"
+            y="79.6"
+            width="19.8"
+            height="47.5"
+            rx="4"
+            fill={`url(#${p}glass)`}
+            stroke="#0b0d10"
             strokeWidth="2"
           />
-          <rect
-            x="309"
-            y="102"
-            width="14"
-            height="46"
-            rx="4"
-            fill={`url(#${p}glass)`}
-          />
           {!plain && (
-            <rect x="300" y="182" width="32" height="20" rx="2" fill={paint} />
+            <rect
+              x="-48.5"
+              y="137.7"
+              width="35.0"
+              height="12.5"
+              fill={`url(#${p}yellow)`}
+            />
           )}
-          <rect x="-10" y="160" width="370" height="2" fill="#c3c8cf" />
-          <rect x="-10" y="72" width="370" height="5" fill="#d3d7dc" />
-          {/* lower skirt */}
           <rect
-            x="-10"
-            y="196"
-            width="370"
-            height="18"
-            fill={`url(#${p}skirt)`}
+            x="-44.0"
+            y="162.8"
+            width="218.0"
+            height="9.2"
+            fill={`url(#${p}steel)`}
           />
         </g>
-        {/* gangway bellows between the cars */}
-        <rect x="356" y="84" width="18" height="128" rx="3" fill="#2a2f36" />
-        <g stroke="#3d434b" strokeWidth="2">
-          <line x1="360" y1="88" x2="360" y2="208" />
-          <line x1="365" y1="88" x2="365" y2="208" />
-          <line x1="370" y1="88" x2="370" y2="208" />
-        </g>
-
-        {/* ===== Cab car ===== */}
-        <g clipPath={`url(#${p}cab)`}>
+        <rect x="174.0" y="48" width="16" height="118" fill="#2b3037" />
+        <line
+          x1="178.0"
+          y1="50"
+          x2="178.0"
+          y2="164"
+          stroke="#41474f"
+          strokeWidth="1.5"
+        />
+        <line
+          x1="182.0"
+          y1="50"
+          x2="182.0"
+          y2="164"
+          stroke="#41474f"
+          strokeWidth="1.5"
+        />
+        <line
+          x1="186.0"
+          y1="50"
+          x2="186.0"
+          y2="164"
+          stroke="#41474f"
+          strokeWidth="1.5"
+        />
+        <clipPath id={`${p}c1`}>
+          <path d="M190.0,172 V44 Q190.0,40 194.0,40 H1082.0 Q1092.0,40 1100.0,46 C1120.0,55.8 1162.0,99.4 1184.0,143.0 Q1190,156.2 1190,165.4 L1188,172 Z" />
+        </clipPath>
+        <g clipPath={`url(#${p}c1)`}>
           <rect
-            x="360"
-            y="60"
-            width="650"
-            height="160"
+            x="190.0"
+            y="36"
+            width="1010.0"
+            height="140"
             fill={`url(#${p}body)`}
           />
           <rect
-            x="372"
-            y="72"
-            width="460"
-            height="10"
-            fill={`url(#${p}roofsheen)`}
-            opacity="0.6"
+            x="190.0"
+            y="40"
+            width="902.0"
+            height="5"
+            fill={`url(#${p}roof)`}
           />
-          {/* belt line under the windows and the roof edge */}
-          <rect x="360" y="160" width="620" height="2" fill="#c3c8cf" />
-          <rect x="360" y="72" width="460" height="5" fill="#d3d7dc" />
-          {/* yellow nose: covers the front and sweeps back over the cab roof to the cab door, then down and forward to
-         the front bogie (photo: X3 at Stockholm C) */}
+          {!plain && (
+            <path
+              d="M840.0,36 L840.0,40.0 C843.7,41.5 845.0,45.5 862.0,49.2 C879.0,53.0 915.3,57.4 942.0,62.4 C968.7,67.5 1002.7,71.2 1022.0,79.6 C1041.3,88.0 1049.7,101.2 1058.0,112.6 C1066.3,124.0 1069.0,137.7 1072.0,148.2 C1075.0,158.8 1075.3,171.4 1076.0,176.0 H1200 V36 Z"
+              fill={`url(#${p}yellow)`}
+            />
+          )}
+          {!plain && (
+            <path
+              d="M840.0,40.0 C843.7,41.5 845.0,45.5 862.0,49.2 C879.0,53.0 915.3,57.4 942.0,62.4 C968.7,67.5 1002.7,71.2 1022.0,79.6 C1041.3,88.0 1049.7,101.2 1058.0,112.6 C1066.3,124.0 1069.0,137.7 1072.0,148.2 C1075.0,158.8 1075.3,171.4 1076.0,176.0"
+              fill="none"
+              stroke="#c8a91a"
+              strokeWidth="1.2"
+              opacity="0.7"
+            />
+          )}
+          {!plain && (
+            <path
+              d="M1074.0,154.8 C1114.0,150.9 1158.0,152.2 1200,158.8 V176 H1070.0 Z"
+              fill={`url(#${p}body)`}
+            />
+          )}
+          {!plain && (
+            <path
+              d="M1074.0,154.8 C1114.0,150.9 1158.0,152.2 1200,158.8"
+              fill="none"
+              stroke="#1a1d21"
+              strokeWidth="1.6"
+            />
+          )}
           <path
-            d="M690,60 C720,60 748,66 770,80 C820,112 870,160 908,214 H1010 V60 Z"
-            fill={paint}
+            d="M1018.0,36 H1200 V102.0 C1168.0,92.8 1140.0,69.0 1116.0,51.9 C1098.0,44.0 1062.0,43 1018.0,42 Z"
+            fill="#14181e"
           />
           <path
-            d="M690,60 C720,60 748,66 770,80 C820,112 870,160 908,214"
-            fill="none"
-            stroke={plain ? "#c3c8cf" : "#b99d14"}
-            strokeWidth="1.6"
-            opacity="0.55"
-          />
-          {/* windscreen and the black cap above it: one dark area over the front of the cab */}
-          <path
-            d="M846,74 C884,78 912,92 936,114 C956,132 970,150 978,168 C960,165 944,160 930,152 C910,136 886,121 856,110 C850,98 848,86 846,74 Z"
-            fill={`url(#${p}glass)`}
-          />
-          <path
-            d="M864,98 C890,106 912,120 930,136"
+            d="M1118.0,57.2 C1138.0,69.0 1158.0,83.6 1176.0,92.8"
             fill="none"
             stroke="#ffffff"
             strokeOpacity="0.18"
-            strokeWidth="3"
+            strokeWidth="2.2"
             strokeLinecap="round"
           />
-          {/* passenger windows */}
-          <rect
-            x="452"
-            y="106"
-            width="78"
-            height="44"
-            rx="6"
-            fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
+          <path
+            d="M1156.0,103.4 V172"
+            stroke="#000"
+            strokeOpacity={0.13}
+            strokeWidth="1.2"
           />
-          <rect
-            x="538"
-            y="106"
-            width="78"
-            height="44"
-            rx="6"
-            fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
-          />
-          <rect
-            x="624"
-            y="106"
-            width="64"
-            height="44"
-            rx="6"
-            fill={`url(#${p}glass)`}
-            stroke="#5b6672"
-            strokeWidth="1.5"
-          />
-          {/* doors: one at the car's inner end (yellow step marker), one just behind the cab */}
-          <rect
-            x="400"
-            y="88"
-            width="40"
-            height="118"
-            rx="4"
-            fill="none"
-            stroke="#9aa1aa"
-            strokeWidth="2"
-          />
-          <rect
-            x="413"
-            y="102"
-            width="14"
-            height="46"
-            rx="4"
-            fill={`url(#${p}glass)`}
-          />
-          {!plain && (
-            <rect x="404" y="182" width="32" height="20" rx="2" fill={paint} />
-          )}
-          <rect
-            x="712"
-            y="84"
-            width="40"
-            height="122"
-            rx="4"
-            fill="none"
-            stroke="#9aa1aa"
-            strokeWidth="2"
-          />
-          <rect
-            x="725"
-            y="98"
-            width="14"
-            height="50"
-            rx="4"
-            fill={`url(#${p}glass)`}
-          />
-          {/* headlight */}
           <ellipse
-            cx="968"
-            cy="182"
-            rx="10"
-            ry="5"
-            fill="#fbfcfd"
-            stroke={plain ? "#9aa1aa" : "#8a7a1a"}
+            cx="1178.8"
+            cy="127.1"
+            rx="5"
+            ry="3"
+            fill="#f7f9fb"
+            stroke="#4b4f55"
             strokeWidth="1"
           />
-          {/* lower skirt, and the white chevrons on it */}
           <rect
-            x="360"
-            y="196"
-            width="650"
-            height="18"
-            fill={`url(#${p}skirt)`}
+            x="208.0"
+            y="79.6"
+            width="164.0"
+            height="37.6"
+            rx="3"
+            fill="#0b0d10"
           />
-          <g fill="#e8ebee" opacity="0.85">
-            <path d="M560,198 l8,0 l-8,14 l-8,0 z" />
-            <path d="M572,198 l8,0 l-8,14 l-8,0 z" />
-            <path d="M584,198 l8,0 l-8,14 l-8,0 z" />
-          </g>
+          <rect
+            x="211.5"
+            y="82.1"
+            width="50.3"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="264.8"
+            y="82.1"
+            width="50.3"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="318.2"
+            y="82.1"
+            width="50.3"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="380.0"
+            y="54.5"
+            width="38.0"
+            height="96.4"
+            rx="3"
+            fill="none"
+            stroke="#8d949c"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="389.1"
+            y="79.6"
+            width="19.8"
+            height="47.5"
+            rx="4"
+            fill={`url(#${p}glass)`}
+            stroke="#0b0d10"
+            strokeWidth="2"
+          />
+          {!plain && (
+            <rect
+              x="381.5"
+              y="137.7"
+              width="35.0"
+              height="12.5"
+              fill={`url(#${p}yellow)`}
+            />
+          )}
+          <rect
+            x="430.0"
+            y="79.6"
+            width="354.0"
+            height="37.6"
+            rx="3"
+            fill="#0b0d10"
+          />
+          <rect
+            x="433.5"
+            y="82.1"
+            width="67.0"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="503.5"
+            y="82.1"
+            width="67.0"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="573.5"
+            y="82.1"
+            width="67.0"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="643.5"
+            y="82.1"
+            width="67.0"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="713.5"
+            y="82.1"
+            width="67.0"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="796.0"
+            y="54.5"
+            width="57.199999999999996"
+            height="96.4"
+            rx="3"
+            fill="none"
+            stroke="#8d949c"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="809.7"
+            y="79.6"
+            width="29.7"
+            height="47.5"
+            rx="4"
+            fill={`url(#${p}glass)`}
+            stroke="#0b0d10"
+            strokeWidth="2"
+          />
+          {!plain && (
+            <rect
+              x="797.5"
+              y="137.7"
+              width="54.199999999999996"
+              height="12.5"
+              fill={`url(#${p}yellow)`}
+            />
+          )}
+          <rect
+            x="866.0"
+            y="79.6"
+            width="144.0"
+            height="37.6"
+            rx="3"
+            fill="#0b0d10"
+          />
+          <rect
+            x="869.5"
+            y="82.1"
+            width="43.7"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="916.2"
+            y="82.1"
+            width="43.7"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="962.8"
+            y="82.1"
+            width="43.7"
+            height="32.6"
+            rx="2"
+            fill={`url(#${p}glass)`}
+          />
+          <rect
+            x="1026.0"
+            y="54.5"
+            width="38.0"
+            height="96.4"
+            rx="3"
+            fill="none"
+            stroke="#8d949c"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="1035.1"
+            y="79.6"
+            width="19.8"
+            height="47.5"
+            rx="4"
+            fill={`url(#${p}glass)`}
+            stroke="#0b0d10"
+            strokeWidth="2"
+          />
+          <rect
+            x="190.0"
+            y="162.8"
+            width="898.0"
+            height="9.2"
+            fill={`url(#${p}steel)`}
+          />
         </g>
-        {/* nose fairing below the coupler line */}
-        <path
-          d="M900,214 H984 C990,214 992,220 986,226 L960,232 H900 Z"
-          fill="#3a4048"
+        <rect x="230.0" y="172" width="800.0" height="6" fill="#4b5158" />
+        <rect x="-44.0" y="172" width="178.0" height="6" fill="#4b5158" />
+        <rect
+          x="976.8"
+          y="172"
+          width="130.4"
+          height="11"
+          rx="3"
+          fill="#2a2f36"
+          stroke="#3f464f"
+          strokeWidth="1.2"
         />
-
-        {/* ===== Bogies and wheels ===== */}
-        <g>
-          {/* second car: one bogie visible */}
-          <rect
-            x="200"
-            y="208"
-            width="120"
-            height="20"
-            rx="5"
-            fill="#22272e"
-            stroke="#3b424b"
-            strokeWidth="1.5"
-          />
-          {/* cab car */}
-          <rect
-            x="440"
-            y="208"
-            width="120"
-            height="20"
-            rx="5"
-            fill="#22272e"
-            stroke="#3b424b"
-            strokeWidth="1.5"
-          />
-          <rect
-            x="800"
-            y="208"
-            width="120"
-            height="20"
-            rx="5"
-            fill="#22272e"
-            stroke="#3b424b"
-            strokeWidth="1.5"
-          />
-          <g fill="#1a1e24" stroke="#4a525c" strokeWidth="2">
-            <circle cx="228" cy="230" r="18" />
-            <circle cx="292" cy="230" r="18" />
-            <circle cx="468" cy="230" r="18" />
-            <circle cx="532" cy="230" r="18" />
-            <circle cx="828" cy="230" r="18" />
-            <circle cx="892" cy="230" r="18" />
-          </g>
-          <g fill="#6b747f">
-            <circle cx="228" cy="230" r="6" />
-            <circle cx="292" cy="230" r="6" />
-            <circle cx="468" cy="230" r="6" />
-            <circle cx="532" cy="230" r="6" />
-            <circle cx="828" cy="230" r="6" />
-            <circle cx="892" cy="230" r="6" />
-          </g>
-          {/* axlebox / damper detail */}
-          <g stroke="#59616b" strokeWidth="3" strokeLinecap="round">
-            <line x1="250" y1="216" x2="270" y2="212" />
-            <line x1="490" y1="216" x2="510" y2="212" />
-            <line x1="850" y1="216" x2="870" y2="212" />
-          </g>
-        </g>
+        <circle
+          cx="990.8"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="990.8" cy="185" r="5" fill="#6d7681" />
+        <circle
+          cx="1093.2"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="1093.2" cy="185" r="5" fill="#6d7681" />
+        <line
+          x1="1030.0"
+          y1="178"
+          x2="1054.0"
+          y2="175"
+          stroke="#6d7681"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+        <rect
+          x="228.8"
+          y="172"
+          width="130.4"
+          height="11"
+          rx="3"
+          fill="#2a2f36"
+          stroke="#3f464f"
+          strokeWidth="1.2"
+        />
+        <circle
+          cx="242.8"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="242.8" cy="185" r="5" fill="#6d7681" />
+        <circle
+          cx="345.2"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="345.2" cy="185" r="5" fill="#6d7681" />
+        <line
+          x1="282.0"
+          y1="178"
+          x2="306.0"
+          y2="175"
+          stroke="#6d7681"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+        <rect
+          x="4.8"
+          y="172"
+          width="130.4"
+          height="11"
+          rx="3"
+          fill="#2a2f36"
+          stroke="#3f464f"
+          strokeWidth="1.2"
+        />
+        <circle
+          cx="18.8"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="18.8" cy="185" r="5" fill="#6d7681" />
+        <circle
+          cx="121.2"
+          cy="185"
+          r="18.4"
+          fill="#1b1f25"
+          stroke="#4d5560"
+          strokeWidth="2"
+        />
+        <circle cx="121.2" cy="185" r="5" fill="#6d7681" />
+        <line
+          x1="58.0"
+          y1="178"
+          x2="82.0"
+          y2="175"
+          stroke="#6d7681"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+        <path
+          d="M1098.0,172 H1184 Q1188,172 1184,180 L1166.0,184 H1098.0 Z"
+          fill="#3b4148"
+        />
       </g>
     </svg>
   );
