@@ -54,3 +54,12 @@ The first X3 went to the owner three times before it was right: the nose was a g
 as the real proportions, the yellow edge a curve with an outline instead of the photo's straight lines, the door and
 window heights eyeballed, roof equipment invented. Each was caught by the owner, not by us. Measuring from the
 photo and the overlay check (steps 2 and 5) catch all of these.
+
+## Lessons (X2000, 2026-10-22)
+
+Rejected by the owner: "huge wheels and messed up front". The kit's `bogie()` draws full, exposed wheel circles on a
+thin bar, which only suits the smaller wheels of multiple units. On a power car or locomotive (1.1–1.3 m wheels) the
+wheels sit behind deep side frames, axle boxes and springs, with the body or skirt coming down over them; draw the
+bogie as the photos show it. A nose is one continuous outline measured from a side-on source, never assembled from
+pieces (a hump, a cut-out, a slash for the windscreen). Before showing anything, compare the picture at app size
+(about 54 px tall) side by side with a photo or a published side elevation at the same scale, not only the overlay.
