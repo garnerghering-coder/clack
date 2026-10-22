@@ -126,6 +126,9 @@ export function StationMapPage() {
       ? connectionStatus({ arrival: arr, departure: dep, arrivalPlatform: from, departurePlatform: to, canceledA: params.get('xa') === '1', canceledB: params.get('xb') === '1', walkSeconds: route?.seconds ?? null, sizeClass: info?.sizeClass ?? 'large', timesLive: params.get('live') === '1' })
       : null;
   const steps = route ? instructions(map, route, fromE, toE) : [];
+  // The level each step happens on: where the walk starts, then wherever the last stairs, escalator or lift went.
+  const stepLevels: string[] = [];
+  for (const s of steps) stepLevels.push(s.level && s.key !== 'walk' ? s.level : (stepLevels.at(-1) ?? route?.levels[0] ?? level ?? ''));
   const setRoute = (f: string | null, tt: string | null) => {
     const q = new URLSearchParams(params);
     if (f) q.set('from', f);
@@ -271,21 +274,24 @@ export function StationMapPage() {
             )}
             {showSteps && route && (
               <ol className="walk-steps">
-                {steps.map((s, i) => (
-                  <li key={i}>
-                    {t(`stationMap.step.${s.key}`, { track: s.track, place: s.endpoint ? label(s.endpoint) : '', level: s.level ? levelName(s.level) : '', min: Math.max(1, Math.round(s.seconds / 60)) })}
-                  </li>
-                ))}
+                {steps.map((s, i) => {
+                  const text = t(`stationMap.step.${s.key}`, { track: s.track, place: s.endpoint ? label(s.endpoint) : '', level: s.level ? levelName(s.level) : '', min: Math.max(1, Math.round(s.seconds / 60)) });
+                  // On a walk that changes level, each step shows its level on the plan when tapped.
+                  return (
+                    <li key={i} className={route.levels.length > 1 && stepLevels[i] === level ? 'here' : undefined}>
+                      {route.levels.length > 1 ? (
+                        <button className="step-button" onClick={() => setLevel(stepLevels[i]!)} aria-pressed={stepLevels[i] === level}>
+                          {text}
+                          {/* Stairs, escalators and lifts already name the level they go to. */}
+                          {!s.level && <span className="caption"> · {levelName(stepLevels[i]!)}</span>}
+                        </button>
+                      ) : (
+                        text
+                      )}
+                    </li>
+                  );
+                })}
               </ol>
-            )}
-            {showSteps && route && route.levels.length > 1 && (
-              <div className="chip-row">
-                {route.levels.map((l, i) => (
-                  <button key={i} className={l === level ? 'level-chip active small' : 'level-chip small'} onClick={() => setLevel(l)}>
-                    {i + 1}. {levelName(l)}
-                  </button>
-                ))}
-              </div>
             )}
           </>
         ) : (

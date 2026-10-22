@@ -932,3 +932,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .manual-trip .row .chip-button { max-width: 60%; }
 .manual-trip .row input[type='time'] { width: auto; min-width: 7.5em; }
 .manual-link { justify-self: center; margin: 8px 0 4px; }
+.walk-steps .step-button { all: unset; cursor: pointer; display: block; line-height: 1.4; }
+.walk-steps .step-button:focus-visible { outline: 2px solid var(--accent); border-radius: 4px; }
+.walk-steps li.here { color: var(--text); font-weight: 600; }
+.walk-steps li:not(.here) { color: var(--text-2); }
