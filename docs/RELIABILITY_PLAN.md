@@ -62,12 +62,19 @@ Swedish operators' live data in Norway today.
    - **Soak (2026-10-22, 109 min, a copy of the database on its own port):** no restarts, every health check answered,
      no stream drops, memory flat (RSS 730–745 MB, heap ~90 MB), both feeds ok throughout.
    - It found a real bug: 7% of GPS fixes were dropped (176 of 2,556). Two causes:
-     - Trains that change number on the way (SL 2855/2858, Värmlandstrafik 8929/8930). The other number is another
-       train elsewhere at the time. The tracker now uses only the numbers reported at the stops either side.
+     - **A train meeting ours was taken for ours** (SL 2855/2858, Värmlandstrafik 8929/8930: odd and even, opposite
+       directions). Actual times are matched to Trafikverket's rows by station and minute, and a train needed two
+       matches. A train crossing ours at a station matches twice there (arrival and departure), so its number was
+       added to the trip, its actual time could be shown at that stop, and its GPS (going the other way) was mixed
+       with ours. Now a train must match two different stops, and where two share a minute ours wins. The tracker
+       also uses only the numbers reported at the stops either side of the train, for trips that really do change
+       number.
      - Fast trains with fixes seconds apart (SJ 582), where each fix's error is a large share of the move. The rule
        is now 250 km/h times the time between the fixes, plus 600 m for the two fixes' error.
-   - Replay test: an afternoon of feed answers for two real trips is being recorded, to replay through the tracker
-     and check that times never go backwards and positions never jump. Passing on the part recorded so far.
+   - Replay test: two real trips (SL 2855 Kungsängen–Västerhaninge, 8970), recorded for two hours on 2026-10-22,
+     are replayed through the tracker every 20 s, checking that actual times never vanish, progress and status never
+     go back and positions never jump (`data/fixtures/replay/`, gzipped). It caught the meeting-train bug above:
+     SL 2858's GPS moved the trip 1.4 km backwards at Vega.
 4. **Offline: built.** Trips, stops, track, operators and station maps are kept on the phone; with no live update
    for a minute the phone moves the train itself (shared position code, same rules as the server), marked as an
    estimate; a "No connection" strip; on https/localhost the app shell is kept too, so it opens offline (tested in

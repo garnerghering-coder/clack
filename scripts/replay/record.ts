@@ -2,9 +2,10 @@
 // (docs/RELIABILITY_PLAN.md §3). Copies the legs from the app's database into a scratch one, runs the live tracker
 // against it every 20 s as the server would, and saves every request and answer (the API key is never written).
 //
-//   npx tsx --env-file=.env scripts/replay/record.ts <leg id>... [--out=data/fixtures/replay/name.json]
+//   npx tsx --env-file=.env scripts/replay/record.ts <leg id>... [--out=data/fixtures/replay/name.json.gz]
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import { eq, inArray } from 'drizzle-orm';
 import { LOCAL_USER_ID, openDb } from '../../apps/server/src/db/client.js';
 import { legStops, legs, stations } from '../../apps/server/src/db/schema.js';
@@ -12,7 +13,7 @@ import { trackOnce, POLL_MS } from '../../apps/server/src/live/tracker.js';
 import { REPO_ROOT } from '../../apps/server/src/env.js';
 
 const ids = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-const out = process.argv.find((a) => a.startsWith('--out='))?.slice(6) ?? path.join(REPO_ROOT, 'data/fixtures/replay', `${new Date().toISOString().slice(0, 10)}.json`);
+const out = process.argv.find((a) => a.startsWith('--out='))?.slice(6) ?? path.join(REPO_ROOT, 'data/fixtures/replay', `${new Date().toISOString().slice(0, 10)}.json.gz`);
 const src = openDb(path.join(REPO_ROOT, 'data/app.db'));
 const db = openDb(':memory:');
 // Only the trips are copied, not the operators and timetables they point at.
@@ -52,7 +53,8 @@ const end = Math.max(...legRows.map((l) => (l.schedArr?.getTime() ?? 0) + 20 * 6
 console.log(`recording ${ids.length} trip(s) until ${new Date(end).toISOString()} → ${out}`);
 const save = () => {
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, JSON.stringify({ recordedAt: new Date().toISOString(), legs: fresh, stops: freshStops, stations: stationRows, ticks }));
+  const json = JSON.stringify({ recordedAt: new Date().toISOString(), legs: fresh, stops: freshStops, stations: stationRows, ticks });
+  fs.writeFileSync(out, out.endsWith('.gz') ? zlib.gzipSync(json, { level: 9 }) : json);
 };
 while (Date.now() < end) {
   const now = Date.now();

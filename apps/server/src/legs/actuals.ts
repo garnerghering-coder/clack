@@ -124,16 +124,23 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     const k = minuteKey(r.LocationSignature, r.ActivityType, Date.parse(r.AdvertisedTimeAtLocation));
     (byKey.get(k) ?? byKey.set(k, []).get(k)!).push(r);
   }
-  // Count matched events per Trafikverket train; accept trains with >= 2 (or our own number).
-  const hits = new Map<string, number>();
-  for (const e of events) for (const r of byKey.get(minuteKey(e.sig, e.activity, e.at)) ?? []) hits.set(r.AdvertisedTrainIdent, (hits.get(r.AdvertisedTrainIdent) ?? 0) + 1);
+  // Count the stops (not events) each Trafikverket train matches; accept trains at >= 2 stops (or our own number).
+  // A train meeting ours at a station has its arrival and departure in the same minutes as ours: that's one stop
+  // (found 2026-10-22: northbound SL 2858 taken for southbound 2855 at Vega, and its GPS then used as ours).
+  const hitStops = new Map<string, Set<number>>();
+  for (const e of events)
+    for (const r of byKey.get(minuteKey(e.sig, e.activity, e.at)) ?? []) (hitStops.get(r.AdvertisedTrainIdent) ?? hitStops.set(r.AdvertisedTrainIdent, new Set()).get(r.AdvertisedTrainIdent)!).add(e.seq);
+  const hits = new Map([...hitStops].map(([n, seqs]) => [n, seqs.size]));
   const stripped = trainNumber && trainNumber.length === 5 ? String(Number(trainNumber.slice(1))) : null;
-  const need = Math.min(2, events.length);
-  const accepted = new Set([...hits].filter(([n, c]) => c >= need || n === trainNumber || n === stripped).map(([n]) => n));
+  const own = (n: string) => n === trainNumber || n === stripped;
+  const need = Math.min(2, new Set(events.map((e) => e.seq)).size);
+  const accepted = new Set([...hits].filter(([n, c]) => c >= need || own(n)).map(([n]) => n));
+  // Where several accepted trains share a stop's minute, ours first, then the one matching the most stops.
+  const rank = (r: AnnouncementRow) => (own(r.AdvertisedTrainIdent) ? Infinity : (hits.get(r.AdvertisedTrainIdent) ?? 0));
 
   const out = new Map<number, StopActuals>();
   for (const e of events) {
-    const row = (byKey.get(minuteKey(e.sig, e.activity, e.at)) ?? []).find((r) => accepted.has(r.AdvertisedTrainIdent));
+    const row = (byKey.get(minuteKey(e.sig, e.activity, e.at)) ?? []).filter((r) => accepted.has(r.AdvertisedTrainIdent)).sort((a, b) => rank(b) - rank(a))[0];
     if (!row) continue;
     const a =
       out.get(e.seq) ??

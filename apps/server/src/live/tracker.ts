@@ -343,9 +343,9 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
 }
 
 /**
- * The train numbers the train carries where it is now. A trip can change number on the way (SL 2855 runs as 2858
- * for part of it), and the other number can be another train elsewhere the same day, so only the numbers
- * Trafikverket reported at the stops either side of the train count. Without per-stop numbers yet, all of them.
+ * The train numbers the train carries where it is now. A trip that changes number on the way has more than one,
+ * and the other number can be another train elsewhere at the time, so only the numbers Trafikverket reported at
+ * the stops either side of the train count. Without per-stop numbers yet, all of them.
  */
 export function numbersNow(ridden: (LiveStop & { trvTrainNumber?: string | null })[], line: LatLon[], now: number, all: string[]): string[] {
   if (all.length < 2) return all;

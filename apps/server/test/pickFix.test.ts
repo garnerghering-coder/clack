@@ -35,7 +35,7 @@ describe('which GPS fix is your train', () => {
 });
 
 describe('which train number counts now', () => {
-  // SL 2855 runs as 2858 for part of the trip; 2855 is another train elsewhere by then (2026-10-22).
+  // A trip that changes number from 2855 to 2858 on the way; each number can be another train elsewhere meanwhile.
   const at = (h: string) => Date.parse(`2026-10-22T${h}:00Z`);
   const stop = (id: string, lon: number, sched: string, num: string | null) => ({
     stationId: id, name: id, lat: 59, lon, schedArr: at(sched), schedDep: at(sched), actualArr: null, actualDep: null,

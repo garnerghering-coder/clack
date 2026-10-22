@@ -47,6 +47,23 @@ describe('matching Trafikverket announcements to a leg', () => {
     expect(only.size).toBe(0);
   });
 
+  it('ignores a train meeting ours at a station: its arrival and departure there are one stop, not two', () => {
+    // SL 2855 southbound and 2858 northbound both call at Vega at 16:15 (2026-10-22).
+    const row = (n: string, sig: string, type: 'Ankomst' | 'Avgang', hhmm: string): AnnouncementRow => ({
+      AdvertisedTrainIdent: n, LocationSignature: sig, ActivityType: type, AdvertisedTimeAtLocation: `2026-10-20T${hhmm}:00.000+02:00`, TimeAtLocation: `2026-10-20T${hhmm}:30.000+02:00`,
+    });
+    const leg: StopForMatch[] = [
+      { seq: 1, role: 'board', sig: 'Skg', schedArr: null, schedDep: at('16:11') },
+      { seq: 2, role: 'through', sig: 'Vga', schedArr: at('16:15'), schedDep: at('16:15') },
+      { seq: 3, role: 'alight', sig: 'Hnd', schedArr: at('16:18'), schedDep: null },
+    ];
+    const rows = [row('2858', 'Vga', 'Ankomst', '16:15'), row('2858', 'Vga', 'Avgang', '16:15'), row('2855', 'Skg', 'Avgang', '16:11'), row('2855', 'Vga', 'Ankomst', '16:15'), row('2855', 'Vga', 'Avgang', '16:15'), row('2855', 'Hnd', 'Ankomst', '16:18')];
+    const got = matchAnnouncements(leg, rows, '2855');
+    expect([...got.values()].map((g) => g.trvTrainNumber)).toEqual(['2855', '2855', '2855']);
+    // Without our number to go by (e.g. a 5-digit timetable number), the train matching more stops wins.
+    expect([...matchAnnouncements(leg, rows, null).values()].map((g) => g.trvTrainNumber)).toEqual(['2855', '2855', '2855']);
+  });
+
   it('keeps the planned coach order of the departure, not the arrival', () => {
     const sx = (sig: string, type: 'Ankomst' | 'Avgang', hhmm: string, comp?: string): AnnouncementRow => ({
       AdvertisedTrainIdent: '582',

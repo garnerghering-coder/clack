@@ -3,6 +3,7 @@
 // the train going backwards or jumping, the status going back, an event twice.
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import { describe, expect, it } from 'vitest';
 import { eq } from 'drizzle-orm';
 import { REPO_ROOT } from '../src/env.js';
@@ -13,7 +14,10 @@ import { haversineM } from '../src/lib/geo.js';
 import { MAX_IMPLIED_KMH, MAX_REPORTED_KMH } from '../src/live/sanitize.js';
 
 const DIR = path.join(REPO_ROOT, 'data/fixtures/replay');
-const fixtures = fs.existsSync(DIR) ? fs.readdirSync(DIR).filter((f) => f.endsWith('.json')) : [];
+const fixtures = fs.existsSync(DIR) ? fs.readdirSync(DIR).filter((f) => /\.json(\.gz)?$/.test(f)) : [];
+
+/** Fixtures are kept gzipped (12 MB of JSON → 0.5 MB). */
+const readFixture = (f: string) => (f.endsWith('.gz') ? zlib.gunzipSync(fs.readFileSync(f)) : fs.readFileSync(f)).toString('utf8');
 
 interface Call {
   url: string;
@@ -35,13 +39,33 @@ const revive = <T extends Record<string, unknown>>(row: T): T =>
 
 const normal = (body: string | null) => (body ?? '').replace(/<LOGIN [^>]*\/>/, '<LOGIN/>');
 
+const POSITION_NUMBERS = /(<IN name="Train\.AdvertisedTrainNumber" value=")([^"]*)(")/;
+/**
+ * A position request for fewer trains than one recorded (the tracker now asks for fewer, e.g. after a fix to which
+ * trains are ours): answered from the recording, keeping only the trains asked for.
+ */
+function positionsSubset(body: string, calls: Call[]): number {
+  const want = body.match(POSITION_NUMBERS)?.[2]?.split(',');
+  if (!want) return -1;
+  return calls.findIndex((c) => {
+    const had = normal(c.body).match(POSITION_NUMBERS)?.[2]?.split(',');
+    return !!had && want.every((n) => had.includes(n)) && normal(c.body).replace(POSITION_NUMBERS, '$1$3') === body.replace(POSITION_NUMBERS, '$1$3');
+  });
+}
+const onlyTrains = (response: string, body: string) => {
+  const want = new Set(body.match(POSITION_NUMBERS)![2]!.split(','));
+  const d = JSON.parse(response) as { RESPONSE: { RESULT: { TrainPosition?: { Train?: { AdvertisedTrainNumber?: string } }[] }[] } };
+  for (const r of d.RESPONSE.RESULT) if (r.TrainPosition) r.TrainPosition = r.TrainPosition.filter((p) => want.has(p.Train?.AdvertisedTrainNumber ?? ''));
+  return JSON.stringify(d);
+};
+
 const STATUS_ORDER = ['scheduled', 'boarding', 'en_route', 'at_stop', 'arrived'];
 
 describe.skipIf(!fixtures.length)('replaying recorded trips through the live tracker', () => {
   for (const file of fixtures)
     it(`never shows an impossible state (${file})`, async () => {
       process.env.TRAFIKVERKET_API_KEY ||= 'replay';
-      const fx = JSON.parse(fs.readFileSync(path.join(DIR, file), 'utf8')) as Fixture;
+      const fx = JSON.parse(readFixture(path.join(DIR, file))) as Fixture;
       const db = openDb(':memory:');
       db.$client.pragma('foreign_keys = OFF');
       db.insert(stations).values(fx.stations).onConflictDoNothing().run();
@@ -59,6 +83,11 @@ describe.skipIf(!fixtures.length)('replaying recorded trips through the live tra
           const body = normal(typeof init?.body === 'string' ? init.body : null);
           const i = pending.findIndex((c) => c.url === url && normal(c.body) === body);
           if (i < 0) {
+            const j = positionsSubset(body, pending);
+            if (j >= 0) {
+              const [c] = pending.splice(j, 1);
+              return new Response(onlyTrains(c!.response, body), { status: c!.status });
+            }
             unmatched++;
             throw new TypeError('not recorded');
           }
