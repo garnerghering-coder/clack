@@ -110,6 +110,21 @@ export interface Follow {
 }
 
 /** One call of a live-map train, with what Trafikverket reports for it. */
+/** One train on one day, opened from a board, a follow or the map: on the map or not. Looking, not following. */
+export interface TrainView {
+  number: string;
+  date: string;
+  /** Its position on the live map, when it has one. */
+  live: { id: string } | null;
+  trip: { key: string; serviceDate: string; from: StopRef; to: StopRef } | null;
+  operatorId: string | null;
+  productName: string | null;
+  product: string | null;
+  trainType: string | null;
+  stops: LiveTrainStop[] | null;
+  legId: string | null;
+}
+
 export interface LiveTrainStop {
   seq: number;
   stationId: string;
@@ -392,6 +407,8 @@ export const api = {
   follows: () => request<Follow[]>('/follows'),
   follow: (body: { trainNumber: string; serviceDate: string; operatorId: string | null; label: string | null }) => request<{ following: boolean }>('/follows', { method: 'PUT', body: JSON.stringify(body) }),
   unfollow: (number: string, date: string) => request<{ following: boolean }>(`/follows/${encodeURIComponent(number)}/${date}`, { method: 'DELETE' }),
+  train: (number: string, date: string, key?: string | null) =>
+    request<TrainView>(`/trains/${encodeURIComponent(number)}/${date}${key ? `?key=${encodeURIComponent(key)}` : ''}`),
   liveTrainStops: (id: string) => request<{ stops: LiveTrainStop[] }>(`/live/trains/${encodeURIComponent(id)}/stops`),
   journey: (id: string) => request<Journey>(`/journeys/${id}`),
   setTrainType: (id: string, trainType: string | null) => request<LegDetail>(`/legs/${id}`, { method: 'PATCH', body: JSON.stringify({ trainType }) }),

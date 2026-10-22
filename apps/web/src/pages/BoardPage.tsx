@@ -7,12 +7,11 @@ import { ArrowLeft, Map as MapIcon, Star, X } from 'lucide-react';
 import { api, type Board, type BoardRow, type BoardType, type StationInfo, type TimetableTrip } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
-import { FlapTime, SplitFlap } from '../components/SplitFlap';
+import { SplitFlap } from '../components/SplitFlap';
 import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
-import { Onboard } from '../components/Onboard';
 
 type Window = '1h' | '3h' | 'day';
 const WINDOW_MS: Record<Window, number> = { '1h': 3600_000, '3h': 3 * 3600_000, day: 24 * 3600_000 };
@@ -24,82 +23,12 @@ const TZ = 'Europe/Stockholm';
 const shownTime = (r: BoardRow) => r.actual ?? r.estimated ?? r.advertised;
 const minuteOf = (ms: number) => Math.floor(ms / 60_000);
 
-function RowSheet({ row, type, station, onClose }: { row: BoardRow; type: BoardType; station: StationInfo; onClose: () => void }) {
-  const { t } = useTranslation();
-  const { settings } = useSettings();
-  const ops = useOperators();
-  const types = useTrainTypes();
-  const navigate = useNavigate();
-  const [trip, setTrip] = useState<TimetableTrip | null>(null);
-  useEffect(() => {
-    if (row.trip) api.timetableTrip(row.trip.key, row.trip.serviceDate).then(setTrip, () => undefined);
-  }, [row]);
-  const op = row.operatorId ? ops.get(row.operatorId) : undefined;
-  const add = () => {
-    if (!row.trip) return;
-    const q = new URLSearchParams({ trip: row.trip.key, date: row.trip.serviceDate });
-    // Departures: you get on here. Arrivals: you get off here.
-    q.set(type === 'departures' ? 'from' : 'to', String(row.trip.seq));
-    navigate(`/add?${q}`);
-  };
-  return (
-    <div className="sheet-backdrop" onClick={onClose}>
-      <section
-        className="board-sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${row.productName ?? ''} ${row.trainNumber}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <header className="board-sheet-head">
-          <OperatorBadge operator={op} size={32} />
-          <span className="strong">{[row.productName ?? op?.name, row.trainNumber].filter(Boolean).join(' ')}</span>
-          <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
-            <X size={18} />
-          </button>
-        </header>
-        <h2 className="board-sheet-title">
-          {type === 'departures' ? `${station.name} → ${row.endpoints.join(', ')}` : `${row.endpoints.join(', ')} → ${station.name}`}
-        </h2>
-        <div className="chip-row">
-          {row.platform && <span className="chip">{t('trips.platform', { platform: row.platform })}</span>}
-          {(row.delayMin !== null || row.canceled) && <DelayPill delay={row.delayMin} canceled={row.canceled} />}
-          {row.trainType && types.get(row.trainType) && <span className="chip">{types.get(row.trainType)!.name}</span>}
-        </div>
-        {row.deviations.length > 0 && <p className="caption">{row.deviations.join(' · ')}</p>}
-        {type === 'departures' && <Onboard facts={row.onboard} operatorId={row.operatorId} trainType={row.trainType} compact />}
-        {trip ? (
-          <ol className="sheet-stops">
-            {trip.stops.map((s) => {
-              const here = s.seq === row.trip?.seq;
-              const time = s.dep ?? s.arr;
-              return (
-                <li key={s.seq} className={here ? 'here' : ''}>
-                  <FlapTime time={time} tz={s.tz} clock={settings.clock} />
-                  <span className={here ? 'strong' : ''}>{s.name}</span>
-                </li>
-              );
-            })}
-          </ol>
-        ) : row.trip ? (
-          <div className="skeleton-row" />
-        ) : (
-          <p className="caption">{t('board.notInTimetable')}</p>
-        )}
-        <div className="sheet-actions row-actions">
-          {!row.done && !row.canceled && (
-            <button className="button" onClick={() => navigate(`/explore?train=${encodeURIComponent(row.trainNumber)}`)}>
-              {t('liveMap.showOnMap')}
-            </button>
-          )}
-          <button className="button primary" onClick={add} disabled={!row.trip}>
-            {t('board.addToTrips')}
-          </button>
-        </div>
-      </section>
-    </div>
-  );
-}
+/** A board row opens the train in Explore, the same view as tapping it on the map (looking, not following). */
+const trainHref = (row: BoardRow) => {
+  const q = new URLSearchParams({ train: row.trainNumber, date: row.trip?.serviceDate ?? new Date(row.advertised).toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' }) });
+  if (row.trip) q.set('key', row.trip.key);
+  return `/explore?${q}`;
+};
 
 function Row({ row, type, now, onOpen }: { row: BoardRow; type: BoardType; now: number; onOpen: () => void }) {
   const { t } = useTranslation();
@@ -153,6 +82,7 @@ function Row({ row, type, now, onOpen }: { row: BoardRow; type: BoardType; now: 
 
 export function BoardPage() {
   const { id = '' } = useParams();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { settings } = useSettings();
   const ops = useOperators();
@@ -168,7 +98,6 @@ export function BoardPage() {
   const [commuter, setCommuter] = useState(settings.includeCommuter);
   const [opFilter, setOpFilter] = useState<Set<string>>(new Set());
   const [productFilter, setProductFilter] = useState<Set<string>>(new Set());
-  const [open, setOpen] = useState<BoardRow | null>(null);
   const now = useNow(1000);
 
   useEffect(() => {
@@ -347,7 +276,7 @@ export function BoardPage() {
           {rows.length ? (
             <ul className="board-list">
               {rows.map((r) => (
-                <Row key={r.id} row={r} type={type} now={now} onOpen={() => setOpen(r)} />
+                <Row key={r.id} row={r} type={type} now={now} onOpen={() => navigate(trainHref(r))} />
               ))}
             </ul>
           ) : (
@@ -362,7 +291,6 @@ export function BoardPage() {
           )}
         </>
       )}
-      {open && station && <RowSheet row={open} type={type} station={station} onClose={() => setOpen(null)} />}
     </main>
   );
 }

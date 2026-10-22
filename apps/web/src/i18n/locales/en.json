@@ -421,7 +421,13 @@
     "resetTypical": "Use the typical train again",
     "typicalNote": "Typical train for this service. Operators sometimes swap trains, so you can change it.",
     "planned": "Planned",
-    "plannedNote": "From Trafikverket's planned coach order for this departure. A last-minute swap won't show here, so you can still change it."
+    "plannedNote": "From Trafikverket's planned coach order for this departure. A last-minute swap won't show here, so you can still change it.",
+    "statusCanceled": "Cancelled",
+    "statusArrived": "Arrived",
+    "statusDeparts": "Departs {{time}}",
+    "statusNoPosition": "Running · no position yet",
+    "liveTimes": "Times from live data where shown",
+    "timetableOnly": "Timetable times: live data appears once the train reports"
   },
   "journey": {
     "label_one": "Journey · {{count}} train",

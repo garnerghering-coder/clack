@@ -421,7 +421,13 @@
     "resetTypical": "Använd det typiska tåget igen",
     "typicalNote": "Typiskt tåg för den här avgången. Tågbolag byter ibland tåg, så du kan ändra det.",
     "planned": "Planerat",
-    "plannedNote": "Enligt Trafikverkets planerade vagnsordning för avgången. Ett byte i sista stund syns inte här, så du kan fortfarande ändra."
+    "plannedNote": "Enligt Trafikverkets planerade vagnsordning för avgången. Ett byte i sista stund syns inte här, så du kan fortfarande ändra.",
+    "statusCanceled": "Inställt",
+    "statusArrived": "Framme",
+    "statusDeparts": "Avgår {{time}}",
+    "statusNoPosition": "I trafik · ingen position ännu",
+    "liveTimes": "Tider från realtidsdata där de visas",
+    "timetableOnly": "Tidtabellens tider: realtid visas när tåget rapporterar"
   },
   "journey": {
     "label_one": "Resa · {{count}} tåg",

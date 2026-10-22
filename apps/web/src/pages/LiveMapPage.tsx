@@ -6,15 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { Check, ChevronDown, ChevronUp, Eye, EyeOff, Info, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { FilterSpecification, GeoJSONSource, Map as MlMap, MapMouseEvent } from 'maplibre-gl';
 import { decodePolyline, type LatLon } from '@clack/shared';
-import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry } from '../api';
+import { api, type BoardRow, type Follow, type LiveTrainStop, type StationHit, type StationInfo, type TripGeometry, type TrainView } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
 import { DelayPill } from '../components/DelayPill';
 import { TrainArt } from '../components/TrainArt';
+import { Onboard } from '../components/Onboard';
 import { FlapTime } from '../components/SplitFlap';
 import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
-import { fmtTime } from '../format';
+import { fmtTime, todayIso } from '../format';
 import { baseStyle, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, routeLayers } from '../map/style';
 import { loadMaplibre, mapStatus } from '../map/RouteMap';
 import { currentTheme, useResolvedTheme } from '../theme';
@@ -194,6 +195,8 @@ function LiveMap() {
   const [stationHits, setStationHits] = useState<StationHit[]>([]);
   const [zoom, setZoom] = useState(4.2);
   const [notRunning, setNotRunning] = useState<{ number: string; date: string | null } | null>(null);
+  // A train opened from a board or a follow that has no position on the map (not started, finished, or not reporting).
+  const [scheduled, setScheduled] = useState<TrainView | null>(null);
   const focus = params.get('train');
   const now = useNow(5000);
   const followKeys = useMemo(() => new Set(follows.map((f) => `${f.trainNumber}|${f.serviceDate}`)), [follows]);
@@ -557,18 +560,25 @@ function LiveMap() {
   // map doesn't have it, say it isn't running (and offer to unfollow).
   const focusDate = params.get('date');
   const focusDone = useRef(false);
+  // Without a first full picture of the map (live data down), stop waiting for the train to show up on it.
+  const [focusWaited, setFocusWaited] = useState(false);
+  useEffect(() => {
+    if (!focus) return;
+    const timer = setTimeout(() => setFocusWaited(true), 4000);
+    return () => clearTimeout(timer);
+  }, [focus]);
   useEffect(() => {
     if (!focus || !ready || selected || focusDone.current) return;
     const tr = [...trains.current.values()].find((x) => x.number === focus && (!focusDate || x.date === focusDate));
     if (tr) {
       focusDone.current = true;
       select(tr.id);
-    } else if (loaded) {
+    } else if (loaded || focusWaited) {
       focusDone.current = true;
-      setNotRunning({ number: focus, date: focusDate });
+      openScheduled(focus, focusDate ?? todayIso(TZ), params.get('key'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focus, ready, count.total, loaded]);
+  }, [focus, ready, count.total, loaded, focusWaited]);
 
   const clearRoute = () => {
     const m = map.current;
@@ -613,6 +623,56 @@ function LiveMap() {
     selRoute.current = { id, line, from: 0 };
     drawSplit(trains.current.get(id) ?? d.train);
   };
+  /** A train with no position: its timetable route drawn as "ahead", its stops with whatever live data exists. */
+  const openScheduled = async (number: string, date: string, key: string | null) => {
+    let v: TrainView;
+    try {
+      v = await api.train(number, date, key);
+    } catch {
+      setNotRunning({ number, date });
+      return;
+    }
+    if (v.live && trains.current.has(v.live.id)) return select(v.live.id);
+    setScheduled(v);
+    setCollapsed(false);
+    setStationSheet(null);
+    const m = map.current;
+    if (!m || !v.trip) return;
+    clearRoute();
+    const geo: TripGeometry = await api.timetableTripGeometry(v.trip.key, v.trip.serviceDate).catch(() => ({ segments: [] }) as unknown as TripGeometry);
+    const line: LatLon[] = geo.segments.flatMap((s, i) => {
+      const p = decodePolyline(s.polyline);
+      return i ? p.slice(1) : p;
+    });
+    if (line.length < 2 || !map.current) return;
+    m.addSource('route-context', { type: 'geojson', data: lineFc([]) });
+    m.addSource('route-ahead', { type: 'geojson', data: lineFc(line) });
+    m.addSource('route', { type: 'geojson', data: lineFc([]) });
+    m.addSource('stops', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    for (const layer of routeLayers(opColor(v.operatorId ? opsRef.current.get(v.operatorId)?.brandColor : null))) m.addLayer(layer, 'train-mine');
+    const lats = line.map((q) => q[0]);
+    const lons = line.map((q) => q[1]);
+    m.fitBounds(
+      [
+        [Math.min(...lons), Math.min(...lats)],
+        [Math.max(...lons), Math.max(...lats)],
+      ],
+      { padding: { top: 90, bottom: Math.min(420, m.getContainer().clientHeight * 0.5), left: 40, right: 40 }, duration: 600 },
+    );
+  };
+  const closeScheduled = () => {
+    setScheduled(null);
+    clearRoute();
+  };
+  // Its stops stay fresh while it's open, like a train on the map.
+  const schedKey = scheduled ? `${scheduled.number}|${scheduled.date}|${scheduled.trip?.key ?? ''}` : null;
+  useEffect(() => {
+    if (!schedKey) return;
+    const [number, date, key] = schedKey.split('|');
+    const timer = setInterval(() => api.train(number!, date!, key || null).then((v) => setScheduled((cur) => (cur && cur.number === v.number ? v : cur)), () => undefined), 30_000);
+    return () => clearInterval(timer);
+  }, [schedKey]);
+
   // The selected train's stops, kept fresh while its sheet is open.
   const selId = selected?.train.id;
   const hasTrip = Boolean(selected?.trip);
@@ -804,6 +864,27 @@ function LiveMap() {
           onClose={() => setNotRunning(null)}
         />
       )}
+      {scheduled && !sel && (
+        <ScheduledSheet
+          view={scheduled}
+          now={now}
+          following={followKeys.has(`${scheduled.number}|${scheduled.date}`)}
+          collapsed={collapsed}
+          onCollapse={() => setCollapsed(!collapsed)}
+          onFollow={async () => {
+            const on = followKeys.has(`${scheduled.number}|${scheduled.date}`);
+            const label = scheduled.stops?.length ? `${scheduled.stops[0]!.name} → ${scheduled.stops.at(-1)!.name}` : null;
+            try {
+              if (on) await api.unfollow(scheduled.number, scheduled.date);
+              else await api.follow({ trainNumber: scheduled.number, serviceDate: scheduled.date, operatorId: scheduled.operatorId, label });
+              setFollows(await api.follows());
+            } catch {
+              // Unchanged; the button shows the real state.
+            }
+          }}
+          onClose={closeScheduled}
+        />
+      )}
       {stationSheet && !sel && <LiveStationSheet id={stationSheet.id} name={stationSheet.name} onClose={() => setStationSheet(null)} />}
       {sel && (
         <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'} style={{ ['--op' as string]: opColor(selOp?.brandColor) }}>
@@ -840,6 +921,7 @@ function LiveMap() {
             {!collapsed && sel.speedKmh !== null && !sel.estimated && <span className="chip tabular">{sel.speedKmh} km/h</span>}
             <span className="caption">{t('live.updated', { ago: agoKey(t, sel.at, now) })}</span>
           </div>
+          {!collapsed && <Onboard facts={null} operatorId={sel.operatorId} trainType={sel.trainType} compact />}
           {!collapsed && <StopList stops={stops} />}
           {/* Two separate things (brief §6.2): watching a train, and planning to travel on it. */}
           <div className="sheet-actions row-actions live-sheet-actions">
@@ -915,6 +997,78 @@ function StopList({ stops }: { stops: LiveTrainStop[] | null | 'none' }) {
         })}
       </ol>
     </div>
+  );
+}
+
+/**
+ * A train with no position on the map, opened from a board or a follow: the same sheet as a running train, with its
+ * timetable route and stops. Says plainly where times are only the timetable's, and what state the train is in.
+ */
+function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow, onClose }: { view: TrainView; now: number; following: boolean; collapsed: boolean; onCollapse: () => void; onFollow: () => void; onClose: () => void }) {
+  const { t } = useTranslation();
+  const { settings } = useSettings();
+  const navigate = useNavigate();
+  const ops = useOperators();
+  const types = useTrainTypes();
+  const op = view.operatorId ? ops.get(view.operatorId) : undefined;
+  const type = view.trainType ? types.get(view.trainType) : undefined;
+  const stops = view.stops ?? [];
+  const first = stops[0];
+  const last = stops.at(-1);
+  const anyLive = stops.some((s) => s.actualArr !== null || s.actualDep !== null || s.estimatedArr !== null || s.estimatedDep !== null);
+  const allCanceled = stops.length > 0 && stops.every((s) => s.canceled);
+  const departs = first ? (first.actualDep ?? first.estimatedDep ?? first.dep) : null;
+  const status = allCanceled
+    ? t('train.statusCanceled')
+    : last?.passed
+      ? t('train.statusArrived')
+      : departs !== null && departs > now
+        ? t('train.statusDeparts', { time: fmtTime(departs, TZ, settings.clock) })
+        : t('train.statusNoPosition');
+  return (
+    <section className={collapsed ? 'live-sheet live-train-sheet card collapsed' : 'live-sheet live-train-sheet card'} style={{ ['--op' as string]: opColor(op?.brandColor) }} aria-live="polite">
+      <header className="board-sheet-head">
+        <OperatorBadge operator={op} size={32} />
+        <button className="live-sheet-title" onClick={onCollapse} aria-expanded={!collapsed}>
+          <span className="strong">{[view.productName ?? op?.name, view.number].filter(Boolean).join(' ')}</span>
+          {collapsed ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
+        </button>
+        <button className="icon-button small" onClick={onClose} aria-label={t('common.close')}>
+          <X size={18} />
+        </button>
+      </header>
+      {!collapsed && type && (
+        <div className="live-sheet-art">
+          <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
+          <span className="caption">{type.name}</span>
+        </div>
+      )}
+      {first && last && (
+        <p className="strong">
+          {first.name} → {last.name}
+        </p>
+      )}
+      <div className="chip-row">
+        <span className={allCanceled ? 'chip cancel-chip' : 'chip'}>{status}</span>
+        <span className="caption">{anyLive ? t('train.liveTimes') : t('train.timetableOnly')}</span>
+      </div>
+      {!collapsed && <Onboard facts={null} operatorId={view.operatorId} trainType={view.trainType} compact />}
+      {!collapsed && <StopList stops={view.stops ?? 'none'} />}
+      <div className="sheet-actions row-actions live-sheet-actions">
+        <button className={following ? 'button is-following' : 'button'} onClick={onFollow} aria-pressed={following}>
+          {following ? <Check size={16} /> : <Eye size={16} />} {following ? t('liveMap.following') : t('liveMap.follow')}
+        </button>
+        {view.legId ? (
+          <button className="button primary" onClick={() => navigate(`/trips/${view.legId}`)}>
+            {t('liveMap.inYourTrips')}
+          </button>
+        ) : (
+          <button className="button primary" disabled={!view.trip} onClick={() => view.trip && navigate(`/add?${new URLSearchParams({ trip: view.trip.key, date: view.trip.serviceDate })}`)}>
+            {t('liveMap.plan')}
+          </button>
+        )}
+      </div>
+    </section>
   );
 }
 

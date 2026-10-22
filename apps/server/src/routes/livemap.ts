@@ -110,6 +110,37 @@ export const liveMapRoutes =
       return { stops };
     });
 
+    // Any train by number and day, on the map or not (a board row, a followed train that hasn't left yet): its
+    // timetable trip, whole route with whatever live data there is, and its live position if it has one. Opening a
+    // train is only looking at it: nothing here follows it or adds it to your trips.
+    app.get<{ Params: { number: string; date: string }; Querystring: { key?: string } }>('/trains/:number/:date', async (req, reply) => {
+      const { number, date } = req.params;
+      if (!/^\d{1,6}$/.test(number) || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return reply.code(400).send({ error: 'train number and date (YYYY-MM-DD) are required' });
+      const live = [...ingest.trains.values()].find((x) => x.number === number && x.date === date) ?? null;
+      const found = searchByNumber(db, number, date);
+      const trip = (req.query.key && found.find((r) => r.key === req.query.key)) || (live ? tripOf(live) : undefined) || found[0];
+      if (!trip && !live) return reply.code(404).send({ error: 'no such train on that day' });
+      const stops = trip ? await trainStops(db, { key: trip.key, serviceDate: trip.serviceDate }, number) : null;
+      const leg = db
+        .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers, serviceDate: legs.serviceDate })
+        .from(legs)
+        .where(and(eq(legs.userId, req.userId), eq(legs.serviceDate, date)))
+        .all()
+        .find((l) => l.trainNumber === number || l.trv.includes(number));
+      return {
+        number,
+        date,
+        live,
+        trip: trip ? { key: trip.key, serviceDate: trip.serviceDate, from: trip.from, to: trip.to } : null,
+        operatorId: live?.operatorId ?? trip?.operatorId ?? null,
+        productName: live?.productName ?? null,
+        product: trip?.product ?? live?.product ?? null,
+        trainType: live?.trainType ?? trip?.trainType ?? null,
+        stops,
+        legId: leg?.id ?? null,
+      };
+    });
+
     // Followed trains (brief §6.2): watching a train, which is not travelling on it. Kept for its day and the next.
     const stockholmDate = (ms: number) => new Date(ms).toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
     app.get('/follows', async (req) => {
