@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { openDb, type Db } from '../src/db/client.js';
 import { importLog } from '../src/db/schema.js';
 import { QuotaError, callsThisMonth, ensureDataset, type Dataset } from '../src/import/downloads.js';
@@ -16,12 +16,15 @@ const fakeFetch = (status = 200) =>
     return new Response(status === 200 ? 'zipbytes' : 'nope', { status });
   }) as unknown as typeof fetch;
 
+let dir = '';
 beforeEach(() => {
   db = openDb(':memory:');
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'clack-dl-'));
+  dir = fs.mkdtempSync(path.join(os.tmpdir(), 'clack-dl-'));
   ds = { source: 'test', url: 'https://example.invalid/feed.zip', key: () => 'k', file: path.join(dir, 'feed.zip'), monthlyQuota: 3 };
   calls = 0;
 });
+// The progress test writes 250 MB: every run left it behind in the temp folder until the disk filled.
+afterEach(() => fs.rmSync(dir, { recursive: true, force: true }));
 
 describe('quota-guarded downloads', () => {
   it('downloads when nothing is cached, logs it, and then serves the cache', async () => {
