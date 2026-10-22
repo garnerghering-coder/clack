@@ -527,7 +527,7 @@
     "notRunningTitle": "Tåget går inte just nu.",
     "notRunningBody": "Det har kanske inte börjat än, har gått klart för dagen eller går inte i dag. Det syns här när det går.",
     "unfollow": "Sluta följa",
-    "allDepartures": "Visa alla avgångar",
+    "allDepartures": "Tidtabell",
     "expandSheet": "Visa mer om tåget",
     "collapseSheet": "Visa mindre om tåget"
   },
@@ -572,10 +572,6 @@
     "title": "Stationskarta",
     "none": "Den här stationen har ingen karta än.",
     "open": "Stationskarta",
-    "quality": {
-      "osm_draft": "Utkast från OpenStreetMap · inte kontrollerat på plats",
-      "hand_curated": "Handgranskad · kontrollerad {{date}}"
-    },
     "departures": "Avgångar",
     "list": "Lista",
     "map": "Karta",
@@ -597,11 +593,7 @@
     },
     "closesAt": "Stänger {{time}}",
     "hours": "Öppettider",
-    "hoursUnverified": "Öppettiderna är inte kontrollerade",
     "hoursNote": "Öppettider enligt uppgift; kan avvika på helgdagar",
-    "fromOsm": "Öppettider från OpenStreetMap, inte kontrollerade av en person",
-    "verified": "Kontrollerat {{date}}",
-    "stale": "Kan vara inaktuellt",
     "free": "Gratis",
     "fee": "{{amount}} kr",
     "cat": {

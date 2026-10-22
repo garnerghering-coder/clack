@@ -28,7 +28,7 @@ import { api, type StationInfo } from '../api';
 import { useOperators } from '../data';
 import { useNow } from '../live';
 import { useSettings } from '../settings';
-import { fmtDay, fmtTime } from '../format';
+import { fmtTime } from '../format';
 import { opColor } from '../map/style';
 import { poiIcon, StationScene, type PlacePin, type PlatformMark } from '../map/StationScene';
 import { ConnectionChip, profileOf } from '../components/Connection';
@@ -44,7 +44,6 @@ const FILTERS: Record<string, PoiCategory[]> = {
 };
 /** "Along my path": amenities at most this many seconds' walk from the route. */
 const ALONG_SECONDS = 40;
-const STALE_DAYS = 365;
 /** "My location" only counts when it's this close to the walking graph: further out, you're not in the station. */
 const NEAR_METERS = 120;
 
@@ -154,7 +153,6 @@ export function StationMapPage() {
     setAlong(false);
     setShowSteps(false);
   };
-  const quality = map.quality === 'hand_curated' ? t('stationMap.quality.hand_curated', { date: fmtDay(Date.parse(map.updated), TZ) }) : t('stationMap.quality.osm_draft');
   const poisSorted = [...map.pois].sort((a, b) => {
     const rank = (p: StationPoi) => ({ open: 0, closing_soon: 1, unknown: 2, closed: 3 })[poiState(p)];
     return rank(a) - rank(b) || a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
@@ -195,7 +193,6 @@ export function StationMapPage() {
         </button>
         <div className="station-map-title">
           <h1>{map.name}</h1>
-          <span className="caption">{quality}</span>
         </div>
         <button className="map-button" onClick={() => setPicking('find')} aria-label={t('stationMap.search')} title={t('stationMap.search')}>
           <Search size={18} />
@@ -569,7 +566,6 @@ function PoiSheet({
   const { t } = useTranslation();
   const { settings } = useSettings();
   const Icon = poiIcon(p);
-  const stale = p.hours_verified ? Date.now() - Date.parse(p.hours_verified) > STALE_DAYS * 86400_000 : false;
   const fee = p.fee === 'free' ? t('stationMap.free') : p.fee ? t('stationMap.fee', { amount: p.fee.amount }) : null;
   return createPortal(
     <div className="sheet-backdrop" onClick={onClose}>
@@ -590,20 +586,14 @@ function PoiSheet({
           {fee && <span className="chip">{fee}</span>}
           {detour !== null && detour <= ALONG_SECONDS && <span className="chip">{t('stationMap.detour', { min: Math.max(1, Math.ceil((detour * 2) / 60)) })}</span>}
         </div>
-        {p.opening_hours ? (
+        {p.opening_hours && (
           <p>
             <span className="caption upper">{t('stationMap.hours')}</span>
             <br />
             <span className="tabular">{parseHours(p.opening_hours) ? p.opening_hours.replace(/;\s*/g, ' · ') : p.opening_hours}</span>
           </p>
-        ) : (
-          <p className="caption">{t('stationMap.hoursUnverified')}</p>
         )}
-        <p className="caption">
-          {p.hours_verified ? t('stationMap.verified', { date: fmtDay(Date.parse(p.hours_verified), TZ) }) : p.hours_source === 'osm' ? t('stationMap.fromOsm') : t('stationMap.hoursUnverified')}
-          {stale ? ` · ${t('stationMap.stale')}` : ''}
-        </p>
-        <p className="caption">{t('stationMap.hoursNote')}</p>
+        {p.opening_hours && <p className="caption">{t('stationMap.hoursNote')}</p>}
         <div className="chip-row">
           <button className="button small" onClick={() => onRoute('to')}>
             <RouteIcon size={14} /> {t('stationMap.routeHere')}

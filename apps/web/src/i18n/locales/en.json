@@ -527,7 +527,7 @@
     "notRunningTitle": "This train isn’t running right now.",
     "notRunningBody": "It may not have started yet, may have finished for the day, or doesn’t run today. It will show here when it does.",
     "unfollow": "Unfollow",
-    "allDepartures": "View all departures",
+    "allDepartures": "Timetable",
     "expandSheet": "Show more of the train",
     "collapseSheet": "Show less of the train"
   },
@@ -572,10 +572,6 @@
     "title": "Station map",
     "none": "There's no map for this station yet.",
     "open": "Station map",
-    "quality": {
-      "osm_draft": "Draft from OpenStreetMap · not checked on site",
-      "hand_curated": "Hand-curated · checked {{date}}"
-    },
     "departures": "Departures",
     "list": "List",
     "map": "Map",
@@ -597,11 +593,7 @@
     },
     "closesAt": "Closes {{time}}",
     "hours": "Opening hours",
-    "hoursUnverified": "Hours unverified",
     "hoursNote": "Opening hours as listed; may differ on holidays",
-    "fromOsm": "Hours from OpenStreetMap, not checked by a person",
-    "verified": "Checked {{date}}",
-    "stale": "May be out of date",
     "free": "Free",
     "fee": "{{amount}} kr",
     "cat": {
