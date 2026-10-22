@@ -5,6 +5,12 @@ One file per station, `<station_id>.json`, in the format of `packages/shared/src
 - **Made by** `npm run stations:draft -- <station_id>` (`scripts/stations/draft_from_osm.py`) from the OpenStreetMap
   extract, plus the hand edits in `scripts/stations/<station_id>.edits.json` (missing connections, level names,
   dropped objects). Edit the edits file and re-run the draft; don't hand-edit the JSON, or the next draft loses it.
+- **Stations without level tags** (most smaller ones: tunnels and footbridges are only `tunnel`/`bridge` + `layer`
+  in OSM) use opt-in edits keys: `paths_by_layer` (an untagged tunnel's or bridge's layer is its level, and a lift
+  with no level tag serves the levels of the paths it joins), `path_radius` (untagged paths within that many metres
+  of a platform are kept, not only those inside the station building), `platform_refs` (`{"<way id>": "2"}` for
+  platforms OSM left unnumbered) and `drop_platform_ways`. Check a draft against the station's plan with
+  `python3 scripts/stations/preview.py <station_id> [--level L0] [--labels] [--box x0 x1 y0 y1]`.
 - **Checked by** `npm run stations:validate` and `npm test`: every platform and amenity must be reachable, and every
   walking edge needs seconds.
 - **Shop outlines:** a place mapped in OSM as its own room (a shop's unit) keeps that outline (`outline` on the POI)
