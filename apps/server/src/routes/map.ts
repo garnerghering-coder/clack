@@ -1,11 +1,37 @@
-// Map data for the web app: the local basemap (PMTiles, served with HTTP range requests), the rail-network
-// layer and a status check so the UI can say when the basemap is still downloading.
+// Map data for the apps: the local basemap (PMTiles, served with HTTP range requests, and as plain z/x/y tiles for
+// map libraries that don't read PMTiles), the label fonts, the rail-network layer and a status check so the UI can
+// say when the basemap is still downloading.
 import fs from 'node:fs';
+import path from 'node:path';
 import type { FastifyPluginAsync } from 'fastify';
+import { PMTiles, type RangeResponse, type Source } from 'pmtiles';
+import { REPO_ROOT } from '../env.js';
 import type { Db } from '../db/client.js';
 import { BASEMAP_FILE, basemapInfo } from '../import/basemap.js';
 import { railGraph } from '../geo/railGraph.js';
 import { railNetworkGz } from '../geo/railNetwork.js';
+
+/** Reads a PMTiles archive from disk (the pmtiles library fetches over HTTP otherwise). */
+class FileSource implements Source {
+  constructor(private file: string) {}
+  getKey() {
+    return this.file;
+  }
+  async getBytes(offset: number, length: number): Promise<RangeResponse> {
+    const fd = await fs.promises.open(this.file, 'r');
+    try {
+      const buf = Buffer.alloc(length);
+      const { bytesRead } = await fd.read(buf, 0, length, offset);
+      return { data: buf.buffer.slice(buf.byteOffset, buf.byteOffset + bytesRead) };
+    } finally {
+      await fd.close();
+    }
+  }
+}
+
+/** The map labels' glyphs (Noto Sans, OFL), the same files the web app serves itself. */
+const FONTS_DIR = path.join(REPO_ROOT, 'apps/web/public/map/fonts');
+const FONT_STACKS = new Set(['Noto Sans Regular', 'Noto Sans Medium']);
 
 export const mapRoutes =
   (db: Db, opts: { basemapFile?: string } = {}): FastifyPluginAsync =>
@@ -31,6 +57,31 @@ export const mapRoutes =
         .header('Content-Range', `bytes ${start}-${end}/${size}`)
         .header('Content-Length', end - start + 1)
         .send(fs.createReadStream(file, { start, end }));
+    });
+
+    // The basemap as ordinary vector tiles (Mapbox Vector Tile, uncompressed), for MapLibre Native on the iPhone:
+    // source { type: 'vector', tiles: ['<base>/api/map/tiles/{z}/{x}/{y}.mvt'], maxzoom: 10 }. Above z10 the map
+    // library over-zooms. 204 where the archive has no tile (open sea, outside the Nordics above z4).
+    let archive: { file: string; mtime: number; pm: PMTiles } | null = null;
+    app.get<{ Params: { z: string; x: string; y: string } }>('/map/tiles/:z/:x/:y.mvt', async (req, reply) => {
+      if (!fs.existsSync(file)) return reply.code(404).send({ error: 'basemap not downloaded yet' });
+      const [z, x, y] = [req.params.z, req.params.x, req.params.y].map(Number) as [number, number, number];
+      if (![z, x, y].every(Number.isInteger) || z < 0 || z > 22 || x < 0 || y < 0 || x >= 2 ** z || y >= 2 ** z) {
+        return reply.code(400).send({ error: 'z/x/y must be tile coordinates' });
+      }
+      const mtime = fs.statSync(file).mtimeMs;
+      if (!archive || archive.file !== file || archive.mtime !== mtime) archive = { file, mtime, pm: new PMTiles(new FileSource(file)) };
+      const tile = await archive.pm.getZxy(z, x, y);
+      if (!tile) return reply.code(204).header('Cache-Control', 'max-age=86400').send();
+      return reply.header('Content-Type', 'application/vnd.mapbox-vector-tile').header('Cache-Control', 'max-age=86400').send(Buffer.from(tile.data));
+    });
+
+    app.get<{ Params: { stack: string; range: string } }>('/map/fonts/:stack/:range', async (req, reply) => {
+      const { stack, range } = req.params;
+      if (!FONT_STACKS.has(stack) || !/^\d+-\d+\.pbf$/.test(range)) return reply.code(404).send({ error: 'no such glyphs' });
+      const f = path.join(FONTS_DIR, stack, range);
+      if (!fs.existsSync(f)) return reply.code(404).send({ error: 'no such glyphs' });
+      return reply.header('Content-Type', 'application/x-protobuf').header('Cache-Control', 'max-age=604800').send(fs.createReadStream(f));
     });
 
     app.get('/map/rail-network.geojson', async (_req, reply) => {
