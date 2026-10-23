@@ -68,7 +68,19 @@ const DETAILED: Record<string, Detailed> = {
 export const hasDetailedArt = (typeId: string | null | undefined, operatorId?: string | null) =>
   !!typeId && typeId in DETAILED && !(operatorId && DETAILED[typeId]!.notFor?.includes(operatorId));
 
-export function TrainPicture({ type, operatorId, color, height, label }: { type: { id: string; art: string; name: string }; operatorId: string | null | undefined; color: string; height: number; label?: string }) {
+/**
+ * Defaults when we know less (owner, 2026-10-22: "a livery-less version" and "a dimmed placeholder"):
+ * - a drawn model run by an operator whose livery isn't drawn: the model unpainted;
+ * - a type without a drawing: its family's simple outline in the operator's colour;
+ * - a type that names two models (no source says which) or no type at all: a dimmed, grey outline.
+ */
+export function TrainPicture({ type, operatorId, color, height, label }: { type: { id: string; art: string; name: string; uncertain?: boolean } | null | undefined; operatorId: string | null | undefined; color: string; height: number; label?: string }) {
+  if (!type || type.uncertain)
+    return (
+      <span className="train-art-unknown">
+        <TrainArt art={type?.art ?? ''} color="#8a8a8a" height={height} label={label} />
+      </span>
+    );
   const d = DETAILED[type.id];
   if (!d || !hasDetailedArt(type.id, operatorId)) return <TrainArt art={type.art} color={color} height={height} label={label} />;
   const Picture = d.component;

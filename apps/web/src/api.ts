@@ -317,6 +317,8 @@ export interface TrainType {
   since: number | null;
   art: string;
   about: string;
+  /** Names two or more models: no source says which runs a given train. */
+  uncertain?: boolean;
 }
 
 export interface LegRef {

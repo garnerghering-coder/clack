@@ -1044,3 +1044,5 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 /* 0.8 of the first version's size (owner, 2026-10-22), set by height so every model reads the same size. */
 .live-sheet-art.side .train-side { width: auto; height: 54px; max-width: 100%; margin: 2px 0 0; }
 .train-art-wrap .train-side { width: auto; height: 56px; max-width: 100%; }
+/* A train whose model we don't know (or can't tell between two): the family outline, dimmed and without colour. */
+.train-art-unknown { display: inline-flex; opacity: 0.45; filter: grayscale(1); }

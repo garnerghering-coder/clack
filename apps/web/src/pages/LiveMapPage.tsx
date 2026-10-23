@@ -911,10 +911,10 @@ function LiveMap() {
           onClose={deselect}
           intro={
             <>
-              {!collapsed && selType && (
-                <div className={hasDetailedArt(selType.id, sel.operatorId) ? 'live-sheet-art side' : 'live-sheet-art'}>
+              {!collapsed && (
+                <div className={hasDetailedArt(selType?.id, sel.operatorId) && !selType?.uncertain ? 'live-sheet-art side' : 'live-sheet-art'}>
                   <TrainPicture type={selType} operatorId={sel.operatorId} color={opColor(selOp?.brandColor)} height={22} />
-                  <span className="caption">{selType.name}</span>
+                  <span className="caption">{selType?.name ?? t('liveMap.typeUnknown')}</span>
                 </div>
               )}
               {(sel.origin || sel.destination) && (
@@ -1183,10 +1183,10 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
       onClose={onClose}
       intro={
         <>
-          {!collapsed && type && (
-            <div className={hasDetailedArt(type.id, view.operatorId) ? 'live-sheet-art side' : 'live-sheet-art'}>
+          {!collapsed && (
+            <div className={hasDetailedArt(type?.id, view.operatorId) && !type?.uncertain ? 'live-sheet-art side' : 'live-sheet-art'}>
               <TrainPicture type={type} operatorId={view.operatorId} color={opColor(op?.brandColor)} height={22} />
-              <span className="caption">{type.name}</span>
+              <span className="caption">{type?.name ?? t('liveMap.typeUnknown')}</span>
             </div>
           )}
           {first && last && (
