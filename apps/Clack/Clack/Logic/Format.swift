@@ -114,6 +114,11 @@ nonisolated enum Format {
         return localDate(shifted, tz: "UTC")
     }
 
+    /// Midnight UTC of a `YYYY-MM-DD` date, in epoch ms (what JavaScript's `Date.parse` gives); nil when it isn't a date.
+    static func isoToMidnightMs(_ iso: String) -> Double? {
+        Instant.parse("\(iso)T00:00:00Z").map { $0.timeIntervalSince1970 * 1000 }
+    }
+
     /// Noon UTC of a `YYYY-MM-DD` date, in epoch ms; nil when it isn't a date.
     static func isoToNoonMs(_ iso: String) -> Double? {
         Instant.parse("\(iso)T12:00:00Z").map { $0.timeIntervalSince1970 * 1000 }

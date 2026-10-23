@@ -131,3 +131,49 @@ nonisolated struct Settings: Codable, Hashable, Sendable {
         heavyLuggage: false
     )
 }
+
+/// A change to the settings: only the fields that are set are sent (`PATCH /api/settings`). The server validates the
+/// same way (`mergeSettings`); this checks what the app can know before sending.
+nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
+    var displayName: String?
+    var language: Language?
+    var distanceUnit: DistanceUnit?
+    var clock: ClockFormat?
+    var co2Comparison: Co2Comparison?
+    var includeCommuter: Bool?
+    var showRailNetwork: Bool?
+    var theme: ThemeSetting?
+    var walkPace: WalkPace?
+    var stepFree: Bool?
+    var heavyLuggage: Bool?
+}
+
+nonisolated extension Settings {
+    /// The longest `displayName` the server accepts.
+    static let displayNameMaxLength = 60
+
+    /// What the app offers for the CO₂ comparison (owner, 2026-10-21: flying or a petrol car); the rest stay valid
+    /// for old settings.
+    static let co2Choices: [Co2Comparison] = [.flight, .car1]
+
+    /// These settings with `patch` applied, as the server will merge it. A name is trimmed, and one over 60
+    /// characters is refused (nil) like the server does.
+    func applying(_ patch: SettingsPatch) -> Settings? {
+        var next = self
+        if let name = patch.displayName {
+            guard name.count <= Self.displayNameMaxLength else { return nil }
+            next.displayName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        if let value = patch.language { next.language = value }
+        if let value = patch.distanceUnit { next.distanceUnit = value }
+        if let value = patch.clock { next.clock = value }
+        if let value = patch.co2Comparison { next.co2Comparison = value }
+        if let value = patch.includeCommuter { next.includeCommuter = value }
+        if let value = patch.showRailNetwork { next.showRailNetwork = value }
+        if let value = patch.theme { next.theme = value }
+        if let value = patch.walkPace { next.walkPace = value }
+        if let value = patch.stepFree { next.stepFree = value }
+        if let value = patch.heavyLuggage { next.heavyLuggage = value }
+        return next
+    }
+}

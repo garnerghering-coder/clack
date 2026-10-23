@@ -171,6 +171,13 @@ nonisolated struct LiveStateRow: Codable, Hashable, Sendable {
     let arrivalEta: Instant?
     let arrivalDelayMin: Int?
     let reportedAt: Instant?
+    /// Worked out on the phone from the last report because updates stopped (never sent by the server).
+    var localEstimate = false
+
+    enum CodingKeys: String, CodingKey {
+        case legId, updatedAt, status, lat, lon, bearing, speedKmh, positionSource, positionAt, progress
+        case prevStopId, nextStopId, eta, arrivalEta, arrivalDelayMin, reportedAt
+    }
 }
 
 /// One saved train ride, as `GET /api/legs` sends it (docs/swift-port/API.md §2.6).
@@ -214,4 +221,145 @@ nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     let origin: StationRef?
     let destination: StationRef?
     let live: LiveStateRow?
+}
+
+/// Where a stop sits in a leg: the trip's stops before you board and after you get off are kept for context.
+nonisolated enum StopRole: OpenEnum {
+    case before, board, through, alight, after
+    case unknown(String)
+
+    static let knownCases: [StopRole] = [.before, .board, .through, .alight, .after]
+    init(unknown: String) { self = .unknown(unknown) }
+    var rawValue: String {
+        switch self {
+        case .before: "before"
+        case .board: "board"
+        case .through: "through"
+        case .alight: "alight"
+        case .after: "after"
+        case .unknown(let raw): raw
+        }
+    }
+
+    /// The stops you ride: board, the ones between, and alight.
+    var isRidden: Bool { self == .board || self == .through || self == .alight }
+}
+
+/// Who reports a stop's times live; nil means nobody does, so its times are the timetable.
+nonisolated enum ReportSource: OpenEnum {
+    case trafikverket, entur
+    case unknown(String)
+
+    static let knownCases: [ReportSource] = [.trafikverket, .entur]
+    init(unknown: String) { self = .unknown(unknown) }
+    var rawValue: String {
+        switch self {
+        case .trafikverket: "trafikverket"
+        case .entur: "entur"
+        case .unknown(let raw): raw
+        }
+    }
+}
+
+/// One stop of the whole trip, with its role in this leg (`GET /api/legs/:id`).
+nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
+    let seq: Int
+    let role: StopRole
+    let stationId: String
+    let name: String
+    let code: String?
+    let country: String
+    let tz: String
+    let lat: Double
+    let lon: Double
+    let schedArr: Instant?
+    let schedDep: Instant?
+    let actualArr: Instant?
+    let actualDep: Instant?
+    let estimatedArr: Instant?
+    let estimatedDep: Instant?
+    let platform: String?
+    let canceled: Bool
+    /// Trafikverket's Swedish deviation texts.
+    let deviations: [String]
+    let reportSource: ReportSource?
+
+    var id: Int { seq }
+}
+
+nonisolated enum LegEventType: OpenEnum {
+    case delayed, platformChanged, cancelled, shortTurned, departed, arrived
+    case unknown(String)
+
+    static let knownCases: [LegEventType] = [.delayed, .platformChanged, .cancelled, .shortTurned, .departed, .arrived]
+    init(unknown: String) { self = .unknown(unknown) }
+    var rawValue: String {
+        switch self {
+        case .delayed: "delayed"
+        case .platformChanged: "platform_changed"
+        case .cancelled: "cancelled"
+        case .shortTurned: "short_turned"
+        case .departed: "departed"
+        case .arrived: "arrived"
+        case .unknown(let raw): raw
+        }
+    }
+}
+
+/// What an event carries; which fields are set depends on its type (docs/swift-port/API.md §2.6).
+nonisolated struct LegEventPayload: Codable, Hashable, Sendable {
+    /// `delayed` and `arrived`: the arrival delay in minutes.
+    var delayMin: Int?
+    /// `delayed`: what it was before.
+    var previousDelayMin: Int?
+    /// `platform_changed`: `departure` or `arrival`, and the tracks.
+    var which: String?
+    var from: String?
+    var to: String?
+    /// `short_turned`: the stations it no longer reaches.
+    var stationIds: [String]?
+    /// `departed` and `arrived`: when.
+    var at: Instant?
+}
+
+nonisolated struct LegEvent: Codable, Hashable, Sendable, Identifiable {
+    let id: Int
+    let legId: String?
+    let ts: Instant
+    let type: LegEventType
+    let payload: LegEventPayload
+}
+
+/// A leg with everything the detail screen needs (`GET /api/legs/:id`): all of `Leg`, plus the route line, every
+/// stop of the trip and the latest events.
+nonisolated struct LegDetail: Codable, Hashable, Sendable, Identifiable {
+    let leg: Leg
+    /// An encoded polyline of the ridden route along the track.
+    let geometry: String?
+    /// The whole trip, ordered by `seq`.
+    let stops: [LegStop]
+    /// Newest first, at most 50.
+    let events: [LegEvent]
+
+    var id: String { leg.id }
+
+    private enum ExtraKeys: String, CodingKey {
+        case geometry, stops, events
+    }
+
+    init(from decoder: Decoder) throws {
+        leg = try Leg(from: decoder)
+        let container = try decoder.container(keyedBy: ExtraKeys.self)
+        geometry = try container.decodeIfPresent(String.self, forKey: .geometry)
+        stops = try container.decode([LegStop].self, forKey: .stops)
+        events = try container.decode([LegEvent].self, forKey: .events)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        try leg.encode(to: encoder)
+        var container = encoder.container(keyedBy: ExtraKeys.self)
+        try container.encodeIfPresent(geometry, forKey: .geometry)
+        try container.encode(stops, forKey: .stops)
+        try container.encode(events, forKey: .events)
+    }
 }
