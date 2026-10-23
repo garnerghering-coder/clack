@@ -88,4 +88,32 @@ extension APIClient {
         query["comparison"] = comparison.rawValue
         return try await get(["passport"], query: query)
     }
+
+    // MARK: station lists and boards
+
+    func favoriteStations() async throws -> [StationHit] { try await get(["stations", "favorites"]) }
+    func recentStations() async throws -> [StationHit] { try await get(["stations", "recent"]) }
+    func stationViewed(_ id: String) async throws { try await perform("POST", ["stations", id, "viewed"]) }
+
+    nonisolated struct FavoriteAnswer: Decodable, Sendable { let favorite: Bool }
+
+    func setFavorite(_ id: String, _ on: Bool) async throws -> Bool {
+        let answer: FavoriteAnswer = try await send(on ? "PUT" : "DELETE", ["stations", id, "favorite"])
+        return answer.favorite
+    }
+
+    /// The board once; `window` asks for another span of time (the "show earlier" rows).
+    func board(_ id: String, arrivals: Bool, from: Double? = nil, to: Double? = nil) async throws -> Board {
+        var query = ["type": arrivals ? "arrivals" : "departures"]
+        if let from, let to {
+            query["from"] = String(Int64(from))
+            query["to"] = String(Int64(to))
+        }
+        return try await get(["stations", id, "board"], query: query)
+    }
+
+    /// `GET /api/stations/:id/board/stream`: the current board at once, then after every shared poll.
+    func boardStream(_ id: String, arrivals: Bool) -> AsyncThrowingStream<SSEEvent, Error> {
+        EventStream.events(url: url(["stations", id, "board", "stream"], query: ["type": arrivals ? "arrivals" : "departures"]), userID: userID)
+    }
 }

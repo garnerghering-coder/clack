@@ -127,3 +127,49 @@ nonisolated struct ManualLegBody: Encodable, Sendable {
         case fromStationId, toStationId, date, dep, arr, operatorId, trainNumber, category
     }
 }
+
+/// One departure or arrival on a station board (`GET /api/stations/:id/board`). Times are epoch milliseconds.
+nonisolated struct BoardRow: Codable, Hashable, Sendable, Identifiable {
+    nonisolated struct PlatformChange: Codable, Hashable, Sendable {
+        let from: String?
+        let at: Double?
+    }
+
+    nonisolated struct Trip: Codable, Hashable, Sendable {
+        let key: String
+        let serviceDate: String
+        let seq: Int
+    }
+
+    let id: String
+    let trainNumber: String
+    let advertised: Double
+    let estimated: Double?
+    let actual: Double?
+    let done: Bool
+    let delayMin: Int?
+    let platform: String?
+    let platformChange: PlatformChange?
+    let canceled: Bool
+    let deviations: [String]
+    let endpoints: [String]
+    let via: [String]
+    let operatorId: String?
+    let productName: String?
+    /// `high_speed`, `intercity`, `regional`, `commuter`, `night` (or something newer).
+    let product: String
+    let trainType: String?
+    let trip: Trip?
+
+    /// What the board shows: when it happened, else when it's expected, else the timetable.
+    var shown: Double { actual ?? estimated ?? advertised }
+}
+
+nonisolated struct Board: Codable, Hashable, Sendable {
+    let stationId: String
+    let type: String
+    let from: Double
+    let to: Double
+    let updatedAt: Double
+    let rows: [BoardRow]
+}

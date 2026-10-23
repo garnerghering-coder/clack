@@ -72,12 +72,14 @@ final class Router {
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
             if raw == "settings" { tripsPath = [.settings] }
+            if raw == "stations" { tripsPath = [.stations] }
             if raw == "about" { tripsPath = [.settings, .about] }
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
                 if parts[0] == "journey" { tripsPath = [.journey(parts[1])] }
+                if parts[0] == "board" { tripsPath = [.stations, .board(stationId: parts[1], arrivals: false)] }
             }
         }
         #endif
@@ -125,6 +127,11 @@ final class Router {
         case .explore: explorePath = path
         case .passport: passportPath = path
         }
+    }
+
+    /// Pushes a screen on the tab that is showing.
+    func push(_ route: AppRoute) {
+        setPath(path(for: tab) + [route], for: tab)
     }
 
     /// Opens a train on Explore (from a board row, a follow, or a link).
