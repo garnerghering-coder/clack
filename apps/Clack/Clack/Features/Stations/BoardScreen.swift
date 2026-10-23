@@ -39,7 +39,9 @@ struct BoardScreen: View {
                 content
             }
         }
-        .refreshable { if let station, station.hasBoard { board = try? await app.client.board(stationId, arrivals: arrivals) ?? board } }
+        .refreshable {
+            if let station, station.hasBoard, let fresh = try? await app.client.board(stationId, arrivals: arrivals) { board = fresh }
+        }
         .task {
             filter.commuter = app.settings.includeCommuter
             station = await app.stations.info(stationId)

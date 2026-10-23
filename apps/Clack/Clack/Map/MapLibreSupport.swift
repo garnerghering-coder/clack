@@ -39,7 +39,7 @@ extension MLNMapView {
             sw: CLLocationCoordinate2D(latitude: b.south, longitude: b.west),
             ne: CLLocationCoordinate2D(latitude: b.north, longitude: b.east)
         )
-        setVisibleCoordinateBounds(box, edgePadding: padding, animated: animated)
+        setVisibleCoordinateBounds(box, edgePadding: padding, animated: animated, completionHandler: nil)
         if zoomLevel > maxZoom { setZoomLevel(maxZoom, animated: false) }
     }
 }
