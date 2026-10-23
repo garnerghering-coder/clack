@@ -38,10 +38,22 @@ export interface LiveTrain {
   next: string | null;
   nextEta: number | null;
   delayMin: number | null;
-  /** One of the owner's tracked trains. */
+  /** One of the asking user's tracked trains. False in the shared ingest; the routes set it per user (isMine). */
   mine: boolean;
-  /** The timetable trip, when the feed names it (Norway's does). */
+  /** The timetable trip, when the feed names it (Norway's does). Set (maybe null) on Norway's trains only. */
   tripKey?: string | null;
+  /** A Norwegian train that also runs in Sweden, where Trafikverket knows it by number. */
+  crossBorder?: boolean;
+}
+
+/**
+ * Whether a train on the map is one of a user's tracked trains. keys: "number|date" for Trafikverket's trains, and
+ * "trip:key|date" for Norway's, whose feed names the trip. A number alone isn't enough there: SJ 441 and SJ Nord's 441
+ * run on the same day.
+ */
+export function isMine(t: LiveTrain, keys: Set<string>): boolean {
+  if (t.tripKey !== undefined) return keys.has(`trip:${t.tripKey}|${t.date}`) || (!!t.crossBorder && keys.has(`${t.number}|${t.date}`));
+  return keys.has(`${t.number}|${t.date}`);
 }
 
 export interface LiveDelta {
@@ -87,8 +99,6 @@ export interface IngestOptions {
   fetchImpl?: typeof fetch;
   now?: () => number;
   log?: (m: string) => void;
-  /** The owner's legs that are live now: "number|date" (Trafikverket's trains) and "trip:key|date" (Norway's). */
-  myNumbers?: () => Set<string>;
   /** Synthetic trains instead of Trafikverket (demo and load testing). */
   simulate?: number;
   simulateTracks?: () => [number, number][][];
@@ -326,7 +336,7 @@ export class LiveMapIngest extends EventEmitter {
       next: abroadNext !== undefined ? (abroadNext?.name ?? null) : this.name(info?.nextSig ?? null),
       nextEta: abroadNext !== undefined ? (abroadNext?.eta ?? null) : (info?.nextEta ?? null),
       delayMin: info?.delayMin ?? null,
-      mine: this.opts.myNumbers?.().has(`${number}|${date}`) ?? false,
+      mine: false,
     };
     this.trains.set(k, t);
     this.changed.add(k);
@@ -469,8 +479,9 @@ export class LiveMapIngest extends EventEmitter {
         next: n.next,
         nextEta: n.nextEta,
         delayMin: n.delayMin,
-        mine: ((mine) => !!mine && (mine.has(`trip:${n.tripKey}|${n.date}`) || (n.crossBorder && mine.has(`${n.number}|${n.date}`))))(this.opts.myNumbers?.()),
+        mine: false,
         tripKey: n.tripKey,
+        ...(n.crossBorder ? { crossBorder: true } : {}),
       };
       this.trains.set(id, t);
       this.changed.add(id);

@@ -77,31 +77,13 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(searchRoutes(db), api);
   app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   app.register(mapRoutes(db), api);
-  app.register(liveRoutes(), api);
+  app.register(liveRoutes(db), api);
   app.register(passportRoutes(db), api);
   const hub = new BoardHub(db, { log: (m) => app.log.warn(m), ...opts.boards });
   app.addHook('onClose', async () => hub.close());
   app.register(boardRoutes(db, hub), api);
   const ingest = new LiveMapIngest(db, {
     log: (m) => app.log.warn(m),
-    // Your own trains are drawn on top (ADDITIONS_01 A): legs inside their live-tracking window, as "number|date" for
-    // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's, whose feed names the trip. A number
-    // alone isn't enough: SJ 441 and SJ Nord's 441 run on the same day.
-    myNumbers: () => {
-      const ids = trackedLegIds(db, Date.now(), LOCAL_USER_ID);
-      if (!ids.length) return new Set();
-      const rows = db
-        .select({ n: legs.trainNumber, trv: legs.trvTrainNumbers, date: legs.serviceDate, key: legs.timetableTripKey, countries: legs.countryCodes })
-        .from(legs)
-        .where(inArray(legs.id, ids))
-        .all();
-      return new Set(
-        rows.flatMap((r) => [
-          ...(r.countries.includes('SE') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
-          ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
-        ]),
-      );
-    },
     simulate: Number(process.env.LIVE_MAP_SIMULATE ?? 0) || undefined,
     includeEstimated: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_INCLUDE_ESTIMATED ?? ''),
     graph: railGraph,
@@ -110,6 +92,23 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     ...opts.liveMap,
   });
   app.addHook('onClose', async () => ingest.stop());
-  app.register(liveMapRoutes(db, ingest), api);
+  // Your own trains are drawn on top (ADDITIONS_01 A): legs inside their live-tracking window, as "number|date" for
+  // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's (isMine in livemap/ingest.ts).
+  const myTrainKeys = (userId: string) => {
+    const ids = trackedLegIds(db, Date.now(), userId);
+    if (!ids.length) return new Set<string>();
+    const rows = db
+      .select({ n: legs.trainNumber, trv: legs.trvTrainNumbers, date: legs.serviceDate, key: legs.timetableTripKey, countries: legs.countryCodes })
+      .from(legs)
+      .where(inArray(legs.id, ids))
+      .all();
+    return new Set(
+      rows.flatMap((r) => [
+        ...(r.countries.includes('SE') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
+        ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
+      ]),
+    );
+  };
+  app.register(liveMapRoutes(db, ingest, myTrainKeys), api);
   return app;
 }

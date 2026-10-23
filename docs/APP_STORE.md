@@ -41,6 +41,7 @@ Each item says who does it and where:
 | **The app's pages are in the app bundle**, not loaded from a website, and no code is downloaded later. Map tiles and train data are data, not code. | 2.5.2 |
 | **Ticket links open the operator's own site in Safari.** Train tickets are physical services, so no in-app purchase rules apply. | 3.1.3(e) |
 | **App icon** (1024 px, no transparency) and launch screen from the Clack logo. | 2.3 |
+| **Each phone sees only its own trips live.** Live trip updates go only to the phone whose trip it is, and "your train" on the live map is worked out per phone. Before, every listener got every tracked trip's updates. | 5.1.1 |
 | **Portrait iPhone app.** iPads run it in iPhone mode, which Apple allows. | 2.4.1 |
 
 ## Should do: strengthens the review, not strictly required
@@ -50,7 +51,6 @@ Each item says who does it and where:
 | **Make it feel native, not like a website in a box.** The main risk for an app built this way is 4.2 "Minimum Functionality: elevate it beyond a repackaged website". Clack is a long way past that: offline trips, live maps, live tracking, share cards. Native touches make it obvious: the iOS share sheet for share cards, haptics, a home-screen widget, a Live Activity for the train you're on, and delay notifications. All of these are planned (IOS.md, "Widgets, Live Activities and notifications"). | 4.2 | Code + Xcode |
 | **Privacy manifest** (`PrivacyInfo.xcprivacy`) for the app target, declaring no tracking. Capacitor's own frameworks ship theirs. In Xcode: File > New > File > App Privacy. | Apple privacy manifests | Xcode |
 | **Swedish purpose string.** The location question shows in English for now. Add `sv.lproj/InfoPlist.strings` with `NSLocationWhenInUseUsageDescription` in Swedish (Xcode: Info.plist > Localize). | 5.1.1(ii) clarity | Xcode |
-| **Your own trains on the live map.** On the shared server, "your train" highlighting on the live map still looks only at the laptop user. Make the live-map stream use the asking phone's id. | n/a | Code |
 | **Rate limits** on the server: ids are anonymous, so add basic per-id and per-IP request limits before the app is public. | 1.6 | Code |
 | **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket and Entur, and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
 

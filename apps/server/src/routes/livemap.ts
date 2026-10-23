@@ -3,7 +3,7 @@ import type { FastifyPluginAsync } from 'fastify';
 import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
-import { LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
+import { isMine, LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
 import { searchByNumber, tripStops } from '../search/timetable.js';
 import { matchTrip } from '../livemap/match.js';
 import { trainStops } from '../livemap/trainStops.js';
@@ -29,15 +29,22 @@ const r5 = (v: number) => Math.round(v * 1e5) / 1e5;
 export type MovedTuple = [string, number, number, number | null, number | null, number, boolean];
 const moved = (t: LiveTrain): MovedTuple => [t.id, r5(t.lat), r5(t.lon), t.bearing, t.speedKmh, t.at, t.estimated];
 
+/** How often a live-map stream re-reads which trains are the viewer's (adding a trip shows up within this). */
+const MINE_REFRESH_MS = 10_000;
+
 export const liveMapRoutes =
-  (db: Db, ingest: LiveMapIngest): FastifyPluginAsync =>
+  (db: Db, ingest: LiveMapIngest, myTrainKeys: (userId: string) => Set<string> = () => new Set()): FastifyPluginAsync =>
   async (app) => {
+    // The shared ingest doesn't know who's looking: "mine" is set here, per user.
+    const forUser = (keys: Set<string>) => (t: LiveTrain): LiveTrain => (isMine(t, keys) === t.mine ? t : { ...t, mine: !t.mine });
+
     app.get<{ Querystring: { bbox?: string } }>('/live/trains', async (req) => {
       // A one-off look keeps the ingest warm for a minute, like a short visit to the map.
       ingest.acquire();
       ingest.release();
       const b = parseBbox(req.query.bbox);
-      return { trains: [...ingest.trains.values()].filter((t) => inside(t, b)), total: ingest.trains.size, upstreamAt: ingest.upstreamAt, mode: ingest.mode };
+      const mine = forUser(myTrainKeys(req.userId));
+      return { trains: [...ingest.trains.values()].filter((t) => inside(t, b)).map(mine), total: ingest.trains.size, upstreamAt: ingest.upstreamAt, mode: ingest.mode };
     });
 
     app.get<{ Querystring: { bbox?: string } }>('/live/trains/stream', (req, reply) => {
@@ -49,14 +56,25 @@ export const liveMapRoutes =
       ingest.acquire();
       // Trains this client has (and what it knows about each), so it can be told when one leaves its view.
       const sent = new Map<string, string>();
-      const snapshot = [...ingest.trains.values()].filter((t) => inside(t, b));
+      let mine = forUser(myTrainKeys(req.userId));
+      let mineAt = Date.now();
+      const snapshot = [...ingest.trains.values()].filter((t) => inside(t, b)).map(mine);
       for (const t of snapshot) sent.set(t.id, infoOf(t));
       res.write(`event: snapshot\ndata: ${JSON.stringify({ trains: snapshot, total: ingest.trains.size, upstreamAt: ingest.upstreamAt, mode: ingest.mode })}\n\n`);
       const onDelta = (d: LiveDelta) => {
         const changed: LiveTrain[] = [];
         const move: MovedTuple[] = [];
         const removed: string[] = d.removed.filter((id) => sent.delete(id));
-        for (const t of d.changed) {
+        let changes = d.changed;
+        if (Date.now() - mineAt >= MINE_REFRESH_MS) {
+          mine = forUser(myTrainKeys(req.userId));
+          mineAt = Date.now();
+          // Trains that became (or stopped being) yours without moving still need telling.
+          const ids = new Set(changes.map((t) => t.id));
+          changes = [...changes, ...[...ingest.trains.values()].filter((t) => !ids.has(t.id) && sent.has(t.id))];
+        }
+        for (const raw of changes) {
+          const t = mine(raw);
           if (inside(t, b)) {
             const info = infoOf(t);
             if (sent.get(t.id) === info) move.push(moved(t));
@@ -94,7 +112,8 @@ export const liveMapRoutes =
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
       const trip = tripOf(t);
-      const mine = t.mine
+      const yours = isMine(t, myTrainKeys(req.userId));
+      const mine = yours
         ? db
             .select({ id: legs.id, trainNumber: legs.trainNumber, trv: legs.trvTrainNumbers, key: legs.timetableTripKey })
             .from(legs)
@@ -102,7 +121,7 @@ export const liveMapRoutes =
             .all()
             .find((l) => (l.trainNumber === t.number || l.trv.includes(t.number)) && (!trip || !l.key || l.key === trip.key))
         : undefined;
-      return { train: t, trip: trip ? { key: trip.key, serviceDate: trip.serviceDate, from: trip.from, to: trip.to } : null, legId: mine?.id ?? null };
+      return { train: yours === t.mine ? t : { ...t, mine: yours }, trip: trip ? { key: trip.key, serviceDate: trip.serviceDate, from: trip.from, to: trip.to } : null, legId: mine?.id ?? null };
     });
 
     // Its whole route, stop by stop, with actual and expected times (the train sheet's list).
@@ -127,7 +146,7 @@ export const liveMapRoutes =
       const onMap = [...ingest.trains.values()].filter((x) => x.number === number && x.date === date).map((t) => ({ t, trip: tripOf(t) }));
       const byKey = req.query.key ? found.find((r) => r.key === req.query.key) : undefined;
       const pair = byKey ? onMap.find((x) => x.trip?.key === byKey.key) : onMap.find((x) => x.trip) ?? onMap[0];
-      const live = pair?.t ?? null;
+      const live = pair ? forUser(myTrainKeys(req.userId))(pair.t) : null;
       const trip = byKey ?? pair?.trip ?? (found.length === 1 ? found[0] : undefined);
       if (!trip && !live) return reply.code(404).send({ error: 'no such train on that day' });
       const stops = trip ? await trainStops(db, { key: trip.key, serviceDate: trip.serviceDate }, number) : null;
@@ -157,7 +176,8 @@ export const liveMapRoutes =
       const cutoff = stockholmDate(Date.now() - 86400_000);
       db.delete(followedTrains).where(and(eq(followedTrains.userId, req.userId), lt(followedTrains.serviceDate, cutoff))).run();
       const rows = db.select().from(followedTrains).where(eq(followedTrains.userId, req.userId)).all();
-      const onMap = new Map([...ingest.trains.values()].map((t) => [`${t.number}|${t.date}`, t]));
+      const mine = forUser(myTrainKeys(req.userId));
+      const onMap = new Map([...ingest.trains.values()].map((t) => [`${t.number}|${t.date}`, mine(t)]));
       return rows.map((r) => ({ trainNumber: r.trainNumber, serviceDate: r.serviceDate, operatorId: r.operatorId, label: r.label, train: onMap.get(`${r.trainNumber}|${r.serviceDate}`) ?? null }));
     });
     app.put<{ Body: { trainNumber?: string; serviceDate?: string; operatorId?: string | null; label?: string | null } }>('/follows', async (req, reply) => {
