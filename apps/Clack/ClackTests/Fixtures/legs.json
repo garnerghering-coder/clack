@@ -1,0 +1,130 @@
+[
+    {
+        "id": "705bbd07-749f-41ab-b23a-40941ec18b71",
+        "status": "completed",
+        "dataQuality": "full",
+        "trainNumber": "163",
+        "category": "regional",
+        "serviceDate": "2026-10-23",
+        "schedDep": "2026-10-23T05:14:00.000Z",
+        "schedArr": "2026-10-23T10:30:00.000Z",
+        "actualDep": "2026-10-23T05:14:00.000Z",
+        "actualArr": "2026-10-23T10:29:00.000Z",
+        "depDelayMin": 0,
+        "arrDelayMin": -1,
+        "depPlatform": "17b",
+        "arrPlatform": "3",
+        "canceled": false,
+        "distanceM": 483848.6885519331,
+        "isEstimatedGeometry": false,
+        "trainType": "x40",
+        "trainTypeSource": "composition",
+        "onboard": {
+            "catering": null,
+            "cateringCar": null,
+            "sleeper": false,
+            "notices": []
+        },
+        "countryCodes": [
+            "SE"
+        ],
+        "journeyId": "j-705bbd07-749f-41ab-b23a-40941ec18b71",
+        "timetableTripKey": "se3:740163001231000001:e9f4bde942",
+        "operatorId": "sj",
+        "originStationId": "740000001",
+        "destStationId": "740000002",
+        "notes": null,
+        "ride": "confirmed",
+        "rideReason": "added_after",
+        "borderEvidence": null,
+        "operator": {
+            "id": "sj",
+            "name": "SJ",
+            "shortName": "SJ",
+            "company": null,
+            "country": "SE",
+            "brandColor": "#1fb14f",
+            "logoPath": null,
+            "logoUrl": "/api/operators/sj/logo?v=1792750160007"
+        },
+        "origin": {
+            "id": "740000001",
+            "name": "Stockholm C",
+            "code": "Cst",
+            "country": "SE",
+            "tz": "Europe/Stockholm"
+        },
+        "destination": {
+            "id": "740000002",
+            "name": "G\u00f6teborg C",
+            "code": "G",
+            "country": "SE",
+            "tz": "Europe/Stockholm"
+        },
+        "live": null
+    },
+    {
+        "id": "9551cff7-0c65-47e7-9aab-d006a0e1a9d3",
+        "status": "snapshotted",
+        "dataQuality": "full",
+        "trainNumber": "421",
+        "category": "intercity",
+        "serviceDate": "2026-10-23",
+        "schedDep": "2026-10-23T04:04:00.000Z",
+        "schedArr": "2026-10-23T07:47:00.000Z",
+        "actualDep": "2026-10-23T04:05:00.000Z",
+        "actualArr": "2026-10-23T07:46:00.000Z",
+        "depDelayMin": 1,
+        "arrDelayMin": -1,
+        "depPlatform": "10",
+        "arrPlatform": "4",
+        "canceled": false,
+        "distanceM": 453257.88044012774,
+        "isEstimatedGeometry": false,
+        "trainType": "x2000",
+        "trainTypeSource": "composition",
+        "onboard": {
+            "catering": "bistro",
+            "cateringCar": null,
+            "sleeper": false,
+            "notices": []
+        },
+        "countryCodes": [
+            "SE"
+        ],
+        "journeyId": "j-9551cff7-0c65-47e7-9aab-d006a0e1a9d3",
+        "timetableTripKey": "se3:740421051589000001:27cebdf868",
+        "operatorId": "sj",
+        "originStationId": "740000001",
+        "destStationId": "740000002",
+        "notes": null,
+        "ride": "confirmed",
+        "rideReason": "added_after",
+        "borderEvidence": null,
+        "operator": {
+            "id": "sj",
+            "name": "SJ",
+            "shortName": "SJ",
+            "company": null,
+            "country": "SE",
+            "brandColor": "#1fb14f",
+            "logoPath": null,
+            "logoUrl": "/api/operators/sj/logo?v=1792750160007"
+        },
+        "origin": {
+            "id": "740000001",
+            "name": "Stockholm C",
+            "code": "Cst",
+            "country": "SE",
+            "tz": "Europe/Stockholm"
+        },
+        "destination": {
+            "id": "740000002",
+            "name": "G\u00f6teborg C",
+            "code": "G",
+            "country": "SE",
+            "tz": "Europe/Stockholm"
+        },
+        "live": null
+    }
+]
