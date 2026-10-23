@@ -4,12 +4,18 @@ import { useState } from 'react';
 import type { Operator } from '../api';
 import { apiUrl } from '../apiBase';
 
+/**
+ * Operators' logos are their trademarks (App Review 5.2.1): the App Store build turns them off (VITE_OPERATOR_LOGOS=false
+ * in .env.ios) and shows the initials badge, until an operator gives permission.
+ */
+const LOGOS = import.meta.env.VITE_OPERATOR_LOGOS !== 'false';
+
 export function OperatorBadge({ operator, size = 36 }: { operator: Operator | null | undefined; size?: number }) {
   const [broken, setBroken] = useState(false);
   const color = operator?.brandColor ?? '#3a4555';
   const label = operator?.shortName ?? '?';
   const radius = Math.round(size * 0.28);
-  if (operator?.logoUrl && !broken)
+  if (LOGOS && operator?.logoUrl && !broken)
     return (
       <img
         className="op-badge op-logo"

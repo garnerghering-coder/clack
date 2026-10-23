@@ -2,6 +2,7 @@
 // before the app loads (no flash) and keeps the laptop phone frame and the app inside it in step.
 import { useEffect, useState } from 'react';
 import type { Theme } from '@clack/shared';
+import { syncStatusBar } from './native';
 
 export type ResolvedTheme = 'dark' | 'light';
 const KEY = 'clack.theme';
@@ -31,6 +32,7 @@ export function applyTheme(t: Theme) {
   }
   const resolved = resolveTheme(t);
   const root = document.documentElement;
+  syncStatusBar(resolved);
   if (root.dataset.theme === resolved) return;
   root.dataset.theme = resolved;
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', resolved === 'light' ? '#ffffff' : '#0a0a0a');
