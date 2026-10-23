@@ -105,7 +105,8 @@ struct SegmentedControl<Value: Hashable>: View {
                         .clack(small ? .buttonSmall : .button)
                         .foregroundStyle(active ? Ink.onAccent : Ink.text2)
                         .lineLimit(1)
-                        .padding(.horizontal, small ? 10 : 0)
+                        .minimumScaleFactor(0.8)
+                        .padding(.horizontal, small ? 6 : 0)
                         .frame(maxWidth: .infinity, minHeight: small ? 32 : 36)
                         .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }

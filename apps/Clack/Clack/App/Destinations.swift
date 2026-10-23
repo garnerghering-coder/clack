@@ -37,6 +37,8 @@ private struct DestinationView: View {
         case .trip(let id): TripDetailScreen(id: id)
         case .journey(let id): JourneyScreen(id: id)
         case .settings: SettingsScreen()
+        case .about: AboutScreen()
+        case .privacy: PrivacyScreen()
         case .stations: ComingSoonScreen(title: l10n.t("nav.stations"))
         case .board: ComingSoonScreen(title: l10n.t("nav.stations"))
         case .stationMap: ComingSoonScreen(title: l10n.t("nav.stations"))

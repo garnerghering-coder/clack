@@ -36,6 +36,8 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case trip(String)
     case journey(String)
     case settings
+    case about
+    case privacy
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
@@ -69,6 +71,9 @@ final class Router {
         }
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
+            if raw == "settings" { tripsPath = [.settings] }
+            if raw == "about" { tripsPath = [.settings, .about] }
+            if raw == "privacy" { tripsPath = [.settings, .privacy] }
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }

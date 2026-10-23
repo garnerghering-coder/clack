@@ -9,6 +9,12 @@ import Foundation
 /// `APIClient.url` percent-encodes every segment.
 extension APIClient {
     func settings() async throws -> Settings { try await get(["settings"]) }
+
+    /// Changes some settings; the answer is the full merged settings.
+    func updateSettings(_ patch: SettingsPatch) async throws -> Settings { try await send("PATCH", ["settings"], body: patch) }
+
+    /// "Delete my data": everything the server keeps under this phone's id.
+    func deleteMyData() async throws { try await perform("DELETE", ["me"]) }
     func operators() async throws -> [Operator] { try await get(["operators"]) }
     func trainTypes() async throws -> [TrainType] { try await get(["train-types"]) }
     func amenities() async throws -> [AmenityEntry] { try await get(["amenities"]) }

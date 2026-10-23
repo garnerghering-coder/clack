@@ -17,13 +17,16 @@ final class AppModel {
         case failed
     }
 
-    let identity: String
-    let client: APIClient
+    private(set) var identity: String
+    private(set) var client: APIClient
     let l10n: L10n
     let connection: ConnectionState
     let offlineCache: OfflineCache
-    @ObservationIgnored let live: LiveHub
-    @ObservationIgnored let stations: StationDirectory
+    @ObservationIgnored private(set) var live: LiveHub
+    @ObservationIgnored private(set) var stations: StationDirectory
+
+    /// The last change to settings couldn't be saved.
+    private(set) var saveFailed = false
 
     private(set) var state: LoadState = .loading
     private(set) var settings: Settings = .defaults
@@ -66,7 +69,11 @@ final class AppModel {
         self.client = client
         self.live = LiveHub(client: client)
         self.stations = StationDirectory(client: client)
+        // The theme paints before the server answers: the last one is kept on the phone (SPEC: no flash).
+        if let raw = UserDefaults.standard.string(forKey: Self.themeKey) { settings.theme = ThemeSetting.knownCases.first { $0.rawValue == raw } ?? .dark }
     }
+
+    private static let themeKey = "clack.theme"
 
     /// The colour scheme the `theme` setting asks for: `system` follows the phone, the default is dark.
     var colorScheme: ColorScheme? {
@@ -92,6 +99,7 @@ final class AppModel {
             async let amenities = client.amenities()
             let loaded = try await (settings, operators, trainTypes, amenities)
             self.settings = loaded.0
+            UserDefaults.standard.set(loaded.0.theme.rawValue, forKey: Self.themeKey)
             self.operators = loaded.1
             self.operatorsById = Dictionary(loaded.1.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
             self.trainTypes = loaded.2
@@ -101,6 +109,54 @@ final class AppModel {
         } catch {
             state = .failed
         }
+    }
+
+    /// Changes settings: shown at once, then saved; if saving fails the change is undone and the error is shown.
+    func update(_ patch: SettingsPatch) async {
+        guard let optimistic = settings.applying(patch) else { return }
+        let previous = settings
+        settings = optimistic
+        l10n.language = optimistic.language
+        saveFailed = false
+        do {
+            let saved = try await client.updateSettings(patch)
+            settings = saved
+            l10n.language = saved.language
+            UserDefaults.standard.set(saved.theme.rawValue, forKey: Self.themeKey)
+        } catch {
+            settings = previous
+            l10n.language = previous.language
+            saveFailed = true
+        }
+    }
+
+    /// App Review 5.1.1(v): whatever the server keeps for this phone, and the copies on it, are deleted at once. The
+    /// phone then starts over with a new id, as on a fresh install. Returns whether the server confirmed.
+    func deleteMyData() async -> Bool {
+        do {
+            try await client.deleteMyData()
+        } catch {
+            return false
+        }
+        await offlineCache.clear()
+        for key in UserDefaults.standard.dictionaryRepresentation().keys where key.hasPrefix("clack.") {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        Identity.delete()
+        let fresh = Identity.current()
+        let cache = offlineCache
+        let connection = connection
+        identity = fresh
+        client = APIClient(userID: fresh, cache: cache) { reachable in
+            Task { @MainActor in connection.report(reachable: reachable) }
+        }
+        live = LiveHub(client: client)
+        stations = StationDirectory(client: client)
+        legDetails = [:]
+        settings = .defaults
+        l10n.language = .en
+        await load()
+        return true
     }
 }
 
