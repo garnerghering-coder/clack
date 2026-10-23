@@ -116,4 +116,31 @@ extension APIClient {
     func boardStream(_ id: String, arrivals: Bool) -> AsyncThrowingStream<SSEEvent, Error> {
         EventStream.events(url: url(["stations", id, "board", "stream"], query: ["type": arrivals ? "arrivals" : "departures"]), userID: userID)
     }
+
+    // MARK: live map
+
+    func liveTrain(_ id: String) async throws -> LiveTrainDetail { try await get(["live", "trains", id]) }
+    func liveTrainStops(_ id: String) async throws -> [LiveTrainStop] {
+        let answer: LiveStopsAnswer = try await get(["live", "trains", id, "stops"])
+        return answer.stops
+    }
+
+    func train(number: String, date: String, key: String?) async throws -> TrainView {
+        try await get(["trains", number, date], query: key.map { ["key": $0] } ?? [:])
+    }
+
+    nonisolated struct FollowingAnswer: Decodable, Sendable { let following: Bool }
+
+    func follow(_ body: FollowBody) async throws {
+        let _: FollowingAnswer = try await send("PUT", ["follows"], body: body)
+    }
+
+    func unfollow(number: String, date: String) async throws {
+        try await perform("DELETE", ["follows", number, date])
+    }
+
+    /// `GET /api/live/trains/stream?bbox=W,S,E,N`: a snapshot, then a delta every 2 s.
+    func liveTrainStream(bbox: String) -> AsyncThrowingStream<SSEEvent, Error> {
+        EventStream.events(url: url(["live", "trains", "stream"], query: ["bbox": bbox]), userID: userID)
+    }
 }

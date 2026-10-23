@@ -1,0 +1,281 @@
+//
+//  LiveMapView.swift
+//  Clack
+//
+
+import MapLibre
+import SwiftUI
+import UIKit
+
+/// One train as the map source holds it.
+struct TrainPoint {
+    var id: String
+    var number: String
+    var label: String
+    var color: String
+    var mine: Bool
+    var followed: Bool
+    var bearing: Double?
+    var lat: Double
+    var lon: Double
+}
+
+/// What the Explore screen does to its map, and what the map tells the screen.
+@MainActor
+final class LiveMapController {
+    weak var mapView: MLNMapView?
+    private(set) var ready = false
+    var onTapTrain: (String) -> Void = { _ in }
+    var onTapStation: (_ id: String, _ name: String) -> Void = { _, _ in }
+    /// The visible area as "W,S,E,N" (3 decimals) and the zoom, after the map settles.
+    var onViewChange: (_ bbox: String, _ zoom: Double) -> Void = { _, _ in }
+    var onReady: () -> Void = {}
+
+    private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
+
+    fileprivate func markReady() {
+        ready = true
+        onReady()
+        reportView()
+    }
+
+    fileprivate func reportView() {
+        guard let map = mapView, map.bounds.width > 0 else { return }
+        let b = map.visibleCoordinateBounds
+        let bbox = [b.sw.longitude, b.sw.latitude, b.ne.longitude, b.ne.latitude].map { String(format: "%.3f", $0) }.joined(separator: ",")
+        onViewChange(bbox, map.zoomLevel)
+    }
+
+    var zoom: Double { mapView?.zoomLevel ?? 4 }
+
+    /// Every visible train, at the position it is drawn at now.
+    func setTrains(_ points: [TrainPoint]) {
+        guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
+        let features = points.map { p -> MLNPointFeature in
+            let f = MLNPointFeature()
+            f.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
+            f.attributes = [
+                "id": p.id, "number": p.number, "label": p.label, "color": p.color, "mine": p.mine, "followed": p.followed,
+                "bearing": p.bearing ?? 0, "hasBearing": p.bearing != nil,
+            ]
+            return f
+        }
+        source.shape = MLNShapeCollectionFeature(shapes: features)
+    }
+
+    func setSelected(_ id: String?) {
+        (mapView?.style?.layer(withIdentifier: "train-selected") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", id ?? "")
+    }
+
+    /// The route in the train's colour: travelled part solid, the rest dashed.
+    func setRoute(done: [LatLon], ahead: [LatLon]) {
+        mapView?.setShape(MapGeometry.lines([done]), source: "route")
+        mapView?.setShape(MapGeometry.lines([ahead]), source: "route-ahead")
+    }
+
+    func clearRoute() {
+        for id in ["route", "route-ahead", "route-context"] { mapView?.setShape(MapGeometry.lines([]), source: id) }
+    }
+
+    func setRouteColor(_ hex: String) {
+        guard let style = mapView?.style else { return }
+        let color = UIColor(cssColor: hex)
+        for id in ["route-context", "route-ahead", "route-glow", "route-body"] {
+            (style.layer(withIdentifier: id) as? MLNLineStyleLayer)?.lineColor = NSExpression(forConstantValue: color)
+        }
+        (style.layer(withIdentifier: "route-core") as? MLNLineStyleLayer)?.lineColor = NSExpression(forConstantValue: UIColor(cssColor: MapStyle.lighten(hex, 0.55)))
+        (style.layer(withIdentifier: "stops-end") as? MLNCircleStyleLayer)?.circleColor = NSExpression(forConstantValue: color)
+    }
+
+    /// Eases to a train, up into the free space above its sheet: at least `minZoom`, with the point `offset` points above
+    /// the middle.
+    func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat) {
+        guard let map = mapView else { return }
+        let z = max(map.zoomLevel, minZoom)
+        let metersPerPoint = map.metersPerPoint(atLatitude: c.latitude) * pow(2, map.zoomLevel - z)
+        let shifted = CLLocationCoordinate2D(latitude: c.latitude - Double(offset) * metersPerPoint / 111_320, longitude: c.longitude)
+        map.setCenter(shifted, zoomLevel: z, animated: !reduceMotion)
+    }
+
+    func fit(_ points: [LatLon], padding: UIEdgeInsets) {
+        mapView?.fit(points, padding: padding, maxZoom: 14, animated: !reduceMotion)
+    }
+
+    var height: CGFloat { mapView?.bounds.height ?? 600 }
+
+    /// Whether any train marker is inside the current view (for deciding who glides).
+    func contains(_ lat: Double, _ lon: Double) -> Bool {
+        guard let b = mapView?.visibleCoordinateBounds else { return false }
+        return lat >= b.sw.latitude && lat <= b.ne.latitude && lon >= b.sw.longitude && lon <= b.ne.longitude
+    }
+}
+
+/// The live map (LiveMapPage.tsx): the basemap and rail network, stations you can tap, every running train as a marker
+/// (clustered when zoomed out) and the selected train's route.
+struct LiveMapView: UIViewRepresentable {
+    let controller: LiveMapController
+    let base: URL
+    let withBasemap: Bool
+    let dark: Bool
+
+    func makeCoordinator() -> Coordinator { Coordinator(controller: controller, dark: dark) }
+
+    func makeUIView(context: Context) -> MLNMapView {
+        let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: true, kind: .live)
+        let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
+        let map = MLNMapView(frame: .zero, styleURL: url)
+        map.applyClackDefaults()
+        map.delegate = context.coordinator
+        // Opens on Sweden and Norway, Bergen to the Finnish border, Malmö to Narvik.
+        map.setCenter(CLLocationCoordinate2D(latitude: 62, longitude: 14.5), zoomLevel: 4.2, animated: false)
+        controller.mapView = map
+        let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped(_:)))
+        for recognizer in map.gestureRecognizers ?? [] where recognizer is UITapGestureRecognizer {
+            tap.require(toFail: recognizer)
+        }
+        map.addGestureRecognizer(tap)
+        return map
+    }
+
+    func updateUIView(_ map: MLNMapView, context: Context) {}
+
+    @MainActor
+    final class Coordinator: NSObject, MLNMapViewDelegate {
+        let controller: LiveMapController
+        let dark: Bool
+
+        init(controller: LiveMapController, dark: Bool) {
+            self.controller = controller
+            self.dark = dark
+        }
+
+        func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
+            if let box = Optional(MLNCoordinateBounds(sw: CLLocationCoordinate2D(latitude: 55.3, longitude: 4.5), ne: CLLocationCoordinate2D(latitude: 68.6, longitude: 24.5))), controller.ready == false {
+                mapView.setVisibleCoordinateBounds(box, animated: false)
+            }
+            controller.markReady()
+        }
+
+        func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
+            controller.reportView()
+        }
+
+        // MARK: images, drawn on demand (the web's `styleimagemissing`)
+
+        func mapView(_ mapView: MLNMapView, didFailToLoadImage imageName: String) -> UIImage? {
+            let c = MapStyle.colors(dark: dark)
+            if imageName == "station" { return LiveMapImages.station(fill: UIColor(cssColor: c.bg), line: UIColor(cssColor: c.text)) }
+            if imageName == "cluster" { return LiveMapImages.cluster(light: !dark) }
+            if imageName.hasPrefix("tdot-") { return LiveMapImages.train(color: UIColor(cssColor: String(imageName.dropFirst(5))), heading: false) }
+            if imageName.hasPrefix("tpuck-") { return LiveMapImages.train(color: UIColor(cssColor: String(imageName.dropFirst(6))), heading: true) }
+            return nil
+        }
+
+        // MARK: taps
+
+        @objc func tapped(_ gesture: UITapGestureRecognizer) {
+            guard let map = gesture.view as? MLNMapView else { return }
+            let point = gesture.location(in: map)
+            let box = CGRect(x: point.x - 10, y: point.y - 10, width: 20, height: 20)
+            // Clusters zoom in two levels at the tap.
+            if !map.visibleFeatures(at: point, styleLayerIdentifiers: ["clusters"]).isEmpty {
+                let at = map.convert(point, toCoordinateFrom: map)
+                map.setCenter(at, zoomLevel: map.zoomLevel + 2, animated: !UIAccessibility.isReduceMotionEnabled)
+                return
+            }
+            // Trains bunch up at stations: of the dots under the finger, take the one nearest to it.
+            let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot"])
+            if let best = trains.min(by: { distance($0, point, map) < distance($1, point, map) }), let id = best.attribute(forKey: "id") as? String {
+                controller.onTapTrain(id)
+                return
+            }
+            // A station's name always opens it (its square can sit under a train).
+            func station(_ layer: String, in area: CGRect) -> (String, String)? {
+                guard let f = map.visibleFeatures(in: area, styleLayerIdentifiers: [layer]).first,
+                      let id = f.attribute(forKey: "id") as? String else { return nil }
+                return (id, (f.attribute(forKey: "name") as? String) ?? "")
+            }
+            if let (id, name) = station("live-station-labels", in: CGRect(x: point.x, y: point.y, width: 0.1, height: 0.1)) {
+                controller.onTapStation(id, name)
+            } else if let (id, name) = station("live-stations", in: box) {
+                controller.onTapStation(id, name)
+            }
+        }
+
+        private func distance(_ f: MLNFeature, _ point: CGPoint, _ map: MLNMapView) -> CGFloat {
+            let p = map.convert(f.coordinate, toPointTo: map)
+            return hypot(p.x - point.x, p.y - point.y)
+        }
+    }
+}
+
+/// The marker pictures (LiveMapPage.tsx `trainMarkerImage`, `clusterImage`, `stationImage`), drawn at pixel ratio 2.
+enum LiveMapImages {
+    private static func render(_ size: CGFloat, _ draw: (CGContext) -> Void) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 2
+        format.opaque = false
+        return UIGraphicsImageRenderer(size: CGSize(width: size / 2, height: size / 2), format: format).image { ctx in
+            // Drawn in the web's canvas pixels.
+            ctx.cgContext.scaleBy(x: 0.5, y: 0.5)
+            draw(ctx.cgContext)
+        }
+    }
+
+    /// A train, in Apple Maps' language: a flat disc in the operator colour with a white ring and a soft shadow, no
+    /// gloss. With a known heading it carries the translucent cone Apple uses for your own location, pointing up and
+    /// rotated to the bearing on the map. The disc's centre is the image centre. 96 px.
+    static func train(color: UIColor, heading: Bool) -> UIImage {
+        render(96) { g in
+            let c = CGPoint(x: 48, y: 48)
+            if heading {
+                g.saveGState()
+                let wedge = UIBezierPath()
+                wedge.move(to: c)
+                wedge.addArc(withCenter: c, radius: 46, startAngle: -.pi / 2 - 0.55, endAngle: -.pi / 2 + 0.55, clockwise: true)
+                wedge.close()
+                g.addPath(wedge.cgPath)
+                g.clip()
+                let colors = [color.withAlphaComponent(0.5).cgColor, color.withAlphaComponent(0).cgColor] as CFArray
+                if let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors, locations: [0, 1]) {
+                    g.drawRadialGradient(gradient, startCenter: c, startRadius: 10, endCenter: c, endRadius: 46, options: [])
+                }
+                g.restoreGState()
+            }
+            g.saveGState()
+            g.setShadow(offset: CGSize(width: 0, height: -1.5), blur: 6, color: UIColor.black.withAlphaComponent(0.35).cgColor)
+            g.setFillColor(UIColor.white.cgColor)
+            g.fillEllipse(in: CGRect(x: c.x - 15.5, y: c.y - 15.5, width: 31, height: 31))
+            g.restoreGState()
+            g.setFillColor(color.cgColor)
+            g.fillEllipse(in: CGRect(x: c.x - 12, y: c.y - 12, width: 24, height: 24))
+        }
+    }
+
+    /// Several trains: a flat material circle with a hairline white edge and a soft shadow (the count is drawn on top).
+    static func cluster(light: Bool) -> UIImage {
+        render(76) { g in
+            let rect = CGRect(x: 38 - 27, y: 38 - 27, width: 54, height: 54)
+            g.saveGState()
+            g.setShadow(offset: CGSize(width: 0, height: -2), blur: 8, color: UIColor.black.withAlphaComponent(0.3).cgColor)
+            g.setFillColor((light ? UIColor.white.withAlphaComponent(0.96) : UIColor(red: 44 / 255, green: 44 / 255, blue: 46 / 255, alpha: 0.94)).cgColor)
+            g.fillEllipse(in: rect)
+            g.restoreGState()
+            g.setLineWidth(2)
+            g.setStrokeColor((light ? UIColor.black.withAlphaComponent(0.08) : UIColor.white.withAlphaComponent(0.55)).cgColor)
+            g.strokeEllipse(in: rect)
+        }
+    }
+
+    /// Stations are small rounded squares, so they never read as a train's round dot. 20 px.
+    static func station(fill: UIColor, line: UIColor) -> UIImage {
+        render(20) { g in
+            let path = UIBezierPath(roundedRect: CGRect(x: 3, y: 3, width: 14, height: 14), cornerRadius: 3)
+            g.setFillColor(fill.cgColor)
+            g.setStrokeColor(line.cgColor)
+            g.setLineWidth(3)
+            g.addPath(path.cgPath)
+            g.drawPath(using: .fillStroke)
+        }
+    }
+}

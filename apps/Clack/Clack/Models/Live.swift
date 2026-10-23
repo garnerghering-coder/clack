@@ -11,14 +11,14 @@ nonisolated struct LiveTrain: Codable, Hashable, Sendable, Identifiable {
     let id: String
     let number: String
     let date: String
-    let lat: Double
-    let lon: Double
-    let bearing: Double?
-    let speedKmh: Double?
+    var lat: Double
+    var lon: Double
+    var bearing: Double?
+    var speedKmh: Double?
     /// When the fix was taken.
-    let at: Instant
+    var at: Instant
     /// Position worked out from the timetable, not GPS.
-    let estimated: Bool
+    var estimated: Bool
     let operatorId: String?
     let productName: String?
     let product: String?

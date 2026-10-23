@@ -170,6 +170,92 @@ nonisolated enum MapStyle {
         ]
     }
 
+    /// The Explore map's own layers (LiveMapPage.tsx): stations you can tap, and the trains, clustered when zoomed out.
+    /// Images (`station`, `cluster`, `tdot-<colour>`, `tpuck-<colour>`) are drawn on demand by the map's delegate.
+    private static func liveStationLayers(_ c: Colors) -> [[String: Any]] {
+        let dpd: [Any] = ["coalesce", ["get", "dpd"], 0]
+        return [
+            [
+                "id": "live-stations", "type": "symbol", "source": "rail-network", "minzoom": 5,
+                "filter": ["all", ["==", ["get", "kind"], "station"], [">=", dpd, ["step", ["zoom"], 60, 6.5, 25, 8, 8, 9.5, 0]]],
+                "layout": [
+                    "icon-image": "station", "icon-size": ["interpolate", ["linear"], ["zoom"], 5, 0.55, 9, 0.75, 13, 1],
+                    "icon-allow-overlap": true, "icon-ignore-placement": true,
+                ],
+            ],
+        ]
+    }
+
+    private static func liveStationLabelLayer(_ c: Colors) -> [String: Any] {
+        let dpd: [Any] = ["coalesce", ["get", "dpd"], 0]
+        // Names of the bigger stations first; all of them only close in, so train numbers stay readable.
+        return [
+            "id": "live-station-labels", "type": "symbol", "source": "rail-network", "minzoom": 6,
+            "filter": ["all", ["==", ["get", "kind"], "station"], [">=", dpd, ["step", ["zoom"], 90, 7.5, 40, 9, 15, 11, 0]]],
+            "layout": [
+                "text-field": ["get", "name"], "text-font": ["Noto Sans Regular"], "text-size": 10.5, "text-offset": [0, 0.8],
+                "text-anchor": "top", "text-optional": true,
+            ],
+            "paint": ["text-color": c.label, "text-halo-color": c.bg, "text-halo-width": 1.2],
+        ]
+    }
+
+    private static func liveTrainLayers(_ c: Colors, dark isDark: Bool, route: [[String: Any]]) -> [[String: Any]] {
+        let single: [Any] = ["!", ["has", "point_count"]]
+        let mine: [Any] = ["==", ["get", "mine"], true]
+        func size(_ a: Double, _ b: Double) -> [Any] { ["case", mine, b, a] }
+        var layers: [[String: Any]] = [
+            [
+                "id": "clusters", "type": "symbol", "source": "trains", "filter": ["has", "point_count"],
+                "layout": [
+                    "icon-image": "cluster", "icon-size": ["step", ["get", "point_count"], 0.85, 10, 1.05, 50, 1.3],
+                    "icon-allow-overlap": true, "icon-ignore-placement": true, "text-field": ["get", "point_count_abbreviated"],
+                    "text-font": ["Noto Sans Medium"], "text-size": ["step", ["get", "point_count"], 12, 10, 13, 50, 15],
+                    "text-allow-overlap": true,
+                ],
+                "paint": ["text-color": isDark ? "#ffffff" : "#0a0a0a"],
+            ],
+            // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
+            [
+                "id": "train-followed", "type": "circle", "source": "trains", "filter": ["all", single, ["==", ["get", "followed"], true]],
+                "paint": ["circle-radius": 10, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.text, "circle-stroke-width": 2],
+            ],
+        ]
+        layers += route
+        layers += [
+            [
+                "id": "train-mine", "type": "circle", "source": "trains", "filter": ["all", single, mine],
+                "paint": ["circle-radius": 13, "circle-color": "rgba(248,214,74,0.28)", "circle-stroke-color": "#f8d64a", "circle-stroke-width": 2],
+            ],
+            // The selected train: a larger marker under its dot.
+            [
+                "id": "train-selected", "type": "circle", "source": "trains", "filter": ["==", ["get", "id"], ""],
+                "paint": ["circle-radius": 11, "circle-color": ["get", "color"], "circle-opacity": 0.35, "circle-stroke-color": "#ffffff", "circle-stroke-width": 2],
+            ],
+            [
+                "id": "train-dot", "type": "symbol", "source": "trains", "filter": single,
+                "layout": [
+                    // With a heading cone (rotated to the bearing) when the direction is known, a plain disc when it isn't.
+                    "icon-image": ["case", ["==", ["get", "hasBearing"], true], ["concat", "tpuck-", ["get", "color"]], ["concat", "tdot-", ["get", "color"]]],
+                    "icon-rotate": ["get", "bearing"], "icon-rotation-alignment": "map", "icon-pitch-alignment": "map",
+                    "icon-size": ["interpolate", ["linear"], ["zoom"], 5, size(0.6, 0.72), 9, size(0.78, 0.9), 13, size(0.95, 1.1)],
+                    "icon-allow-overlap": true, "icon-ignore-placement": true,
+                    "symbol-sort-key": ["case", mine, 1, 0],
+                ],
+            ],
+            [
+                "id": "train-label", "type": "symbol", "source": "trains", "minzoom": 9, "filter": single,
+                "layout": [
+                    "text-field": ["step", ["zoom"], ["get", "number"], 11, ["get", "label"]], "text-font": ["Noto Sans Medium"],
+                    "text-size": 11, "text-offset": [0, 1.3], "text-anchor": "top", "text-optional": true,
+                ],
+                "paint": ["text-color": c.text, "text-halo-color": c.bg, "text-halo-width": 1.4],
+            ],
+            liveStationLabelLayer(c),
+        ]
+        return layers
+    }
+
     // MARK: whole styles
 
     enum Kind: Sendable {
@@ -177,6 +263,8 @@ nonisolated enum MapStyle {
         case route(color: String)
         /// Many routes and the stations they pass.
         case multiRoute
+        /// Explore: every running train, stations, and the selected train's route.
+        case live
     }
 
     /// The style object: the basemap when it's available, otherwise just the background (routes still draw).
@@ -193,7 +281,9 @@ nonisolated enum MapStyle {
             ] as [String: Any]
             layers += basemapLayers(c)
         }
-        if railNetwork {
+        var withRail = railNetwork
+        if case .live = kind { withRail = true }
+        if withRail {
             sources["rail-network"] = ["type": "geojson", "data": "\(origin)/api/map/rail-network.geojson"] as [String: Any]
             layers += railNetworkLayers(c)
         }
@@ -204,6 +294,13 @@ nonisolated enum MapStyle {
         case .multiRoute:
             for id in ["routes", "stations"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             layers += multiRouteLayers(c)
+        case .live:
+            for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
+            sources["trains"] = [
+                "type": "geojson", "data": emptyCollection(), "cluster": true, "clusterMaxZoom": 6, "clusterRadius": 36,
+            ] as [String: Any]
+            layers += liveStationLayers(c)
+            layers += liveTrainLayers(c, dark: isDark, route: routeLayers(color: c.fallback, c, dark: isDark))
         }
         return ["version": 8, "glyphs": "\(origin)/api/map/fonts/{fontstack}/{range}.pbf", "sources": sources, "layers": layers]
     }

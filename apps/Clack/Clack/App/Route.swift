@@ -69,6 +69,14 @@ final class Router {
                 addRequest = AddRequest(link: AddTrainLink(tripKey: parts[0], date: parts[1], fromSeq: parts.count > 2 ? Int(parts[2]) : nil, toSeq: parts.count > 3 ? Int(parts[3]) : nil))
             }
         }
+        // `-train <number>|<date>[|<key>]` opens that train on Explore, as a board row does.
+        if let raw = value("-train") {
+            let parts = raw.split(separator: "|").map(String.init)
+            if parts.count >= 2 {
+                pendingTrain = PendingTrain(number: parts[0], date: parts[1], key: parts.count > 2 ? parts[2] : nil)
+                tab = .explore
+            }
+        }
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
             if raw == "settings" { tripsPath = [.settings] }

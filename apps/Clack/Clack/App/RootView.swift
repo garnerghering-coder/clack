@@ -19,14 +19,17 @@ struct RootView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Ink.bg.ignoresSafeArea()
-            Group {
-                switch router.tab {
-                case .trips: stack(.trips) { TripsScreen() }
-                case .explore: stack(.explore) { ExploreScreen() }
-                case .passport: stack(.passport) { PassportScreen() }
+            // The screens get the space above the tab bar, so full-bleed ones (the maps) end at it.
+            VStack(spacing: 0) {
+                Group {
+                    switch router.tab {
+                    case .trips: stack(.trips) { TripsScreen() }
+                    case .explore: stack(.explore) { ExploreScreen() }
+                    case .passport: stack(.passport) { PassportScreen() }
+                    }
                 }
+                TabBar(selection: $router.tab)
             }
-            .safeAreaInset(edge: .bottom, spacing: 0) { TabBar(selection: $router.tab) }
 
             if app.isOffline {
                 OfflineBanner().transition(.opacity)

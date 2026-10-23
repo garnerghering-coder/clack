@@ -45,9 +45,6 @@ struct StationMapScreen: View {
     @State private var seeded = false
     @State private var cardHeight: CGFloat = 0
 
-    /// The tab bar's height: this full-bleed screen is laid out under it.
-    private static let tabBarHeight: CGFloat = 64
-
     private var tz: String { "Europe/Stockholm" }
     private var clock: ClockFormat { app.settings.clock }
 
@@ -202,7 +199,7 @@ struct StationMapScreen: View {
                 StationSceneView(
                     map: map, level: level, route: route, marks: marks, pins: pins, poiState: state, dimPoi: dim,
                     onPoi: { poi = $0 }, fitKey: "\(from ?? "")|\(to ?? "")|\(level)", selectedPoi: poi?.id,
-                    insets: .init(top: 140, bottom: (layover ? 250 : planningOrSet ? 320 : 150) + Self.tabBarHeight)
+                    insets: .init(top: 140, bottom: (layover ? 250 : planningOrSet ? 320 : 150))
                 )
             }
             header(map)
@@ -299,7 +296,7 @@ struct StationMapScreen: View {
                     PoiRow(poi: p, state: state(p), level: levelName(map, p.level), detour: detours?[p.node]) { poi = p }
                 }
             }
-            .padding(.horizontal, 16).padding(.top, 168).padding(.bottom, 220 + Self.tabBarHeight)
+            .padding(.horizontal, 16).padding(.top, 168).padding(.bottom, 220)
         }
         .background(Ink.bg)
     }
@@ -388,7 +385,7 @@ struct StationMapScreen: View {
         .background(Ink.glassStrong, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
-        .padding(.horizontal, 12).padding(.bottom, 12 + Self.tabBarHeight)
+        .padding(.horizontal, 12).padding(.bottom, 12)
     }
 
     private func stepRow(_ map: StationMap, _ step: Instruction, index: Int, level: String, stepLevel: String, multi: Bool) -> some View {
