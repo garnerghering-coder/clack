@@ -8,6 +8,7 @@ import SwiftUI
 @main
 struct ClackApp: App {
     @State private var app = AppModel()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
     var body: some Scene {
         WindowGroup {

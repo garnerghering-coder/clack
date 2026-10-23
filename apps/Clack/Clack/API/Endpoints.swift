@@ -15,6 +15,30 @@ extension APIClient {
 
     /// "Delete my data": everything the server keeps under this phone's id.
     func deleteMyData() async throws { try await perform("DELETE", ["me"]) }
+    /// This phone can receive alerts (`PUT /api/devices`): Apple's address for it, and whether it is a debug build.
+    func registerDevice(token: String, environment: String, startToken: String?) async throws {
+        struct Body: Encodable, Sendable {
+            let token: String
+            let environment: String
+            let startToken: String?
+        }
+        try await perform("PUT", ["devices"], body: Body(token: token, environment: environment, startToken: startToken))
+    }
+
+    func forgetDevice(_ token: String) async throws { try await perform("DELETE", ["devices", token]) }
+
+    /// A Live Activity is running for this trip: where the server sends its updates.
+    func registerActivity(token: String, legId: String, environment: String) async throws {
+        struct Body: Encodable, Sendable {
+            let token: String
+            let legId: String
+            let environment: String
+        }
+        try await perform("PUT", ["live-activities"], body: Body(token: token, legId: legId, environment: environment))
+    }
+
+    func forgetActivity(_ token: String) async throws { try await perform("DELETE", ["live-activities", token]) }
+
     func operators() async throws -> [Operator] { try await get(["operators"]) }
     func trainTypes() async throws -> [TrainType] { try await get(["train-types"]) }
     func amenities() async throws -> [AmenityEntry] { try await get(["amenities"]) }

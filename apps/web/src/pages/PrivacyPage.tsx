@@ -8,7 +8,7 @@ const CONTACT = import.meta.env.VITE_SUPPORT_EMAIL as string | undefined;
 
 export function PrivacyPage() {
   const { t } = useTranslation();
-  const parts = ['stored', 'phone', 'location', 'notCollected', 'sharing', 'deletion'] as const;
+  const parts = ['stored', 'phone', 'alerts', 'location', 'notCollected', 'sharing', 'deletion'] as const;
   return (
     <main className="page">
       <Link to="/settings" className="link-button back-link">

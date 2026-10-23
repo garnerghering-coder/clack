@@ -343,7 +343,28 @@
     "privacy": "Privacy",
     "deleteData": "Delete my data",
     "deleteConfirm": "Delete all your trips, followed trains and settings? This can't be undone.",
-    "deleted": "Your data was deleted."
+    "deleted": "Your data was deleted.",
+    "alerts": {
+      "title": "Alerts",
+      "master": "Alerts for your trains",
+      "note": "Reminders, platforms, delays and changes, even when Clack is closed. The platform and times come from the same live data as the trip.",
+      "denied": "Alerts are turned off for Clack in iPhone Settings.",
+      "openSettings": "Open Settings",
+      "lead": "Remind me before departure",
+      "leads": {
+        "0": "Off",
+        "30": "30 minutes",
+        "60": "1 hour",
+        "120": "2 hours",
+        "180": "3 hours"
+      },
+      "platform": "Platform announced or changed",
+      "delay": "Delays of 5 minutes or more",
+      "cancel": "Cancellations",
+      "change": "Changes between trains",
+      "getOff": "Time to get off",
+      "arrival": "Welcome at your destination"
+    }
   },
   "about": {
     "title": "Sources & methodology",
@@ -416,7 +437,9 @@
     "platformDeparture": "Departure platform changed {{from}} → {{to}}",
     "platformArrival": "Arrival platform changed {{from}} → {{to}}",
     "cancelled": "Train cancelled",
-    "shortTurned": "Cancelled at {{stations}}"
+    "shortTurned": "Cancelled at {{stations}}",
+    "platformSetDeparture": "Platform {{to}} announced for departure.",
+    "platformSetArrival": "Platform {{to}} announced for arrival."
   },
   "train": {
     "title": "Train",
@@ -890,7 +913,9 @@
     "deletionBody": "Your data stays until you delete it. \"Delete my data\" in Settings removes everything our server has under your code at once, and the copies on your phone.",
     "contactTitle": "Contact",
     "contactBody": "Questions about your data:",
-    "updated": "Last updated {{date}}"
+    "updated": "Last updated {{date}}",
+    "alertsTitle": "Alerts",
+    "alertsBody": "Only if you turn alerts on: Apple's address for your phone (a long code Apple gives the app so it can be sent notifications), kept with your random code and your alert settings. It is used only to send you the alerts you chose and to update the trip card on your lock screen, and it is removed when you turn alerts off or delete your data."
   },
   "arrival": {
     "arrived": "Arrived",

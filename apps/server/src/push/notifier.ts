@@ -271,7 +271,7 @@ export class Notifier {
             event: 'start',
             'content-state': Notifier.state(L, this.now()),
             'attributes-type': 'TripActivityAttributes',
-            attributes: { legId: f.legId, journeyId: f.journeyId, train: f.train, from: f.from, to: f.to, color: L.operatorColor },
+            attributes: { legId: f.legId, journeyId: f.journeyId, train: f.train, from: f.from, to: f.to, fromTz: f.fromTz, toTz: f.toTz, color: L.operatorColor },
             'input-push-token': 1,
             alert: { title: t(L.lang, 'route', { from: f.from, to: f.to }), body: f.depPlatform ? t(L.lang, 'reminderPlatform', { time: new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: f.fromTz }).format(new Date(f.expDep)), platform: f.depPlatform }) : '' },
           },

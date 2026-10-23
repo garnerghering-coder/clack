@@ -93,6 +93,8 @@ extension TripDetailLogic {
         case .delayed:
             if let delay = p.delayMin, delay <= 0 { return l10n.t("activity.delayedOnTime", ["station": leg.destination?.name ?? ""]) }
             return l10n.t("activity.delayed", ["delay": Format.delay(p.delayMin), "station": leg.destination?.name ?? ""])
+        case .platformSet:
+            return l10n.t(p.which == "departure" ? "activity.platformSetDeparture" : "activity.platformSetArrival", ["to": p.to ?? ""])
         case .platformChanged:
             return l10n.t(p.which == "departure" ? "activity.platformDeparture" : "activity.platformArrival", ["from": p.from ?? "", "to": p.to ?? ""])
         case .cancelled:

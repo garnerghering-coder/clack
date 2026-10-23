@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+		Push needs the paid Apple Developer Program team; a Personal Team can't have these two. Once the team is active,
+		add them back (Signing & Capabilities: Push Notifications, Time Sensitive Notifications):
+		aps-environment = development, com.apple.developer.usernotifications.time-sensitive = true
+	-->
+</dict>
+</plist>

@@ -115,6 +115,20 @@ nonisolated struct Settings: Codable, Hashable, Sendable {
     var walkPace: WalkPace
     var stepFree: Bool
     var heavyLuggage: Bool
+    /// Alerts (owner, 2026-10-23). The master switch is off until the person turns it on and allows notifications.
+    var notify: Bool
+    /// Minutes before departure for the reminder: 0 (none), 30, 60, 120 or 180.
+    var notifyLeadMin: Int
+    var notifyPlatform: Bool
+    /// A delay change of 5 minutes or more.
+    var notifyDelay: Bool
+    var notifyCancel: Bool
+    var notifyChange: Bool
+    var notifyGetOff: Bool
+    var notifyArrival: Bool
+
+    /// The reminder lead times the server accepts (`LEAD_CHOICES`).
+    static let leadChoices = [0, 30, 60, 120, 180]
 
     /// The server's defaults (`DEFAULT_SETTINGS`), used until the real settings have loaded.
     static let defaults = Settings(
@@ -128,8 +142,49 @@ nonisolated struct Settings: Codable, Hashable, Sendable {
         theme: .dark,
         walkPace: .normal,
         stepFree: false,
-        heavyLuggage: false
+        heavyLuggage: false,
+        notify: false,
+        notifyLeadMin: 60,
+        notifyPlatform: true,
+        notifyDelay: true,
+        notifyCancel: true,
+        notifyChange: true,
+        notifyGetOff: true,
+        notifyArrival: true
     )
+}
+
+nonisolated extension Settings {
+    private enum Keys: String, CodingKey {
+        case displayName, language, distanceUnit, clock, co2Comparison, includeCommuter, showRailNetwork, theme, walkPace
+        case stepFree, heavyLuggage, notify, notifyLeadMin, notifyPlatform, notifyDelay, notifyCancel, notifyChange
+        case notifyGetOff, notifyArrival
+    }
+
+    /// A copy saved before the alert settings existed still loads: the missing ones take their defaults.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: Keys.self)
+        let d = Settings.defaults
+        displayName = try c.decode(String.self, forKey: .displayName)
+        language = try c.decode(Language.self, forKey: .language)
+        distanceUnit = try c.decode(DistanceUnit.self, forKey: .distanceUnit)
+        clock = try c.decode(ClockFormat.self, forKey: .clock)
+        co2Comparison = try c.decode(Co2Comparison.self, forKey: .co2Comparison)
+        includeCommuter = try c.decode(Bool.self, forKey: .includeCommuter)
+        showRailNetwork = try c.decode(Bool.self, forKey: .showRailNetwork)
+        theme = try c.decode(ThemeSetting.self, forKey: .theme)
+        walkPace = try c.decode(WalkPace.self, forKey: .walkPace)
+        stepFree = try c.decode(Bool.self, forKey: .stepFree)
+        heavyLuggage = try c.decode(Bool.self, forKey: .heavyLuggage)
+        notify = try c.decodeIfPresent(Bool.self, forKey: .notify) ?? d.notify
+        notifyLeadMin = try c.decodeIfPresent(Int.self, forKey: .notifyLeadMin) ?? d.notifyLeadMin
+        notifyPlatform = try c.decodeIfPresent(Bool.self, forKey: .notifyPlatform) ?? d.notifyPlatform
+        notifyDelay = try c.decodeIfPresent(Bool.self, forKey: .notifyDelay) ?? d.notifyDelay
+        notifyCancel = try c.decodeIfPresent(Bool.self, forKey: .notifyCancel) ?? d.notifyCancel
+        notifyChange = try c.decodeIfPresent(Bool.self, forKey: .notifyChange) ?? d.notifyChange
+        notifyGetOff = try c.decodeIfPresent(Bool.self, forKey: .notifyGetOff) ?? d.notifyGetOff
+        notifyArrival = try c.decodeIfPresent(Bool.self, forKey: .notifyArrival) ?? d.notifyArrival
+    }
 }
 
 /// A change to the settings: only the fields that are set are sent (`PATCH /api/settings`). The server validates the
@@ -146,6 +201,14 @@ nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
     var walkPace: WalkPace?
     var stepFree: Bool?
     var heavyLuggage: Bool?
+    var notify: Bool?
+    var notifyLeadMin: Int?
+    var notifyPlatform: Bool?
+    var notifyDelay: Bool?
+    var notifyCancel: Bool?
+    var notifyChange: Bool?
+    var notifyGetOff: Bool?
+    var notifyArrival: Bool?
 }
 
 nonisolated extension Settings {
@@ -174,6 +237,17 @@ nonisolated extension Settings {
         if let value = patch.walkPace { next.walkPace = value }
         if let value = patch.stepFree { next.stepFree = value }
         if let value = patch.heavyLuggage { next.heavyLuggage = value }
+        if let value = patch.notify { next.notify = value }
+        if let value = patch.notifyLeadMin {
+            guard Self.leadChoices.contains(value) else { return nil }
+            next.notifyLeadMin = value
+        }
+        if let value = patch.notifyPlatform { next.notifyPlatform = value }
+        if let value = patch.notifyDelay { next.notifyDelay = value }
+        if let value = patch.notifyCancel { next.notifyCancel = value }
+        if let value = patch.notifyChange { next.notifyChange = value }
+        if let value = patch.notifyGetOff { next.notifyGetOff = value }
+        if let value = patch.notifyArrival { next.notifyArrival = value }
         return next
     }
 }

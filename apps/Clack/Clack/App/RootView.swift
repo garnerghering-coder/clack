@@ -82,6 +82,21 @@ struct RootView: View {
                 .environment(app.l10n)
                 .environment(router)
         }
+        // Alerts: tell the server this phone's address whenever it changes or alerts are switched on.
+        .task(id: "\(scenePhase == .active)|\(app.settings.notify)|\(app.notifications.token ?? "")|\(app.notifications.startToken ?? "")") {
+            guard scenePhase == .active else { return }
+            await app.notifications.refresh()
+            await app.notifications.sync(app.client, enabled: app.settings.notify)
+            LiveActivityManager.shared.resume(client: app.client)
+        }
+        // Tapping an alert opens its trip (a change opens the whole journey).
+        .onChange(of: app.notifications.openRequest) { _, request in
+            guard let request else { return }
+            app.notifications.openRequest = nil
+            router.addRequest = nil
+            router.tab = .trips
+            router.push(request.kind == "change" ? (request.journeyId.map(AppRoute.journey) ?? .trip(request.legId)) : .trip(request.legId))
+        }
         // Watches for a journey ending while the app is in front.
         .task(id: scenePhase) {
             guard scenePhase == .active else { return }

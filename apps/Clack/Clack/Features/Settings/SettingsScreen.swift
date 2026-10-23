@@ -132,6 +132,7 @@ struct SettingsScreen: View {
                 SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage, last: true) { value in change(SettingsPatch(heavyLuggage: value)) }
                 Text(l10n.t("settings.changingNote")).clack(.caption).foregroundStyle(Ink.text2)
             }
+            AlertsCard(change: change)
             Card {
                 LinkRow(label: l10n.t("settings.about"), route: .about, last: true)
             }
@@ -145,6 +146,55 @@ struct SettingsScreen: View {
                 .buttonStyle(.clack(wide: true))
             #endif
         }
+    }
+}
+
+/// Alerts (owner, 2026-10-23): one switch (which asks iOS for permission), when the reminder comes, and what to be told.
+private struct AlertsCard: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(\.openURL) private var openURL
+    let change: (SettingsPatch) -> Void
+    private var manager: NotificationManager { app.notifications }
+
+    var body: some View {
+        let s = app.settings
+        Card {
+            Text(l10n.t("settings.alerts.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            SettingsToggle(label: l10n.t("settings.alerts.master"), isOn: s.notify, last: !s.notify) { value in
+                if value {
+                    Task {
+                        // The switch turns on only if iOS says yes.
+                        if await manager.requestPermission() { change(SettingsPatch(notify: true)) }
+                    }
+                } else {
+                    change(SettingsPatch(notify: false))
+                    Task { await manager.forget(app.client) }
+                }
+            }
+            if s.notify {
+                SettingsRow(label: l10n.t("settings.alerts.lead")) {
+                    ChoiceMenu(label: l10n.t("settings.alerts.lead"), options: Settings.leadChoices.map { ($0, l10n.t("settings.alerts.leads.\($0)")) }, selection: s.notifyLeadMin) { value in
+                        change(SettingsPatch(notifyLeadMin: value))
+                    }
+                }
+                SettingsToggle(label: l10n.t("settings.alerts.platform"), isOn: s.notifyPlatform) { change(SettingsPatch(notifyPlatform: $0)) }
+                SettingsToggle(label: l10n.t("settings.alerts.delay"), isOn: s.notifyDelay) { change(SettingsPatch(notifyDelay: $0)) }
+                SettingsToggle(label: l10n.t("settings.alerts.cancel"), isOn: s.notifyCancel) { change(SettingsPatch(notifyCancel: $0)) }
+                SettingsToggle(label: l10n.t("settings.alerts.change"), isOn: s.notifyChange) { change(SettingsPatch(notifyChange: $0)) }
+                SettingsToggle(label: l10n.t("settings.alerts.getOff"), isOn: s.notifyGetOff) { change(SettingsPatch(notifyGetOff: $0)) }
+                SettingsToggle(label: l10n.t("settings.alerts.arrival"), isOn: s.notifyArrival, last: true) { change(SettingsPatch(notifyArrival: $0)) }
+            }
+            Text(l10n.t("settings.alerts.note")).clack(.caption).foregroundStyle(Ink.text2)
+            if manager.denied {
+                Text(l10n.t("settings.alerts.denied")).clack(.caption).foregroundStyle(Ink.text2)
+                Button(l10n.t("settings.alerts.openSettings")) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                }
+                .buttonStyle(ClackButtonStyle(small: true))
+            }
+        }
+        .task { await manager.refresh() }
     }
 }
 
@@ -273,7 +323,7 @@ struct AboutScreen: View {
 struct PrivacyScreen: View {
     @Environment(L10n.self) private var l10n
 
-    private static let parts = ["stored", "phone", "location", "notCollected", "sharing", "deletion"]
+    private static let parts = ["stored", "phone", "alerts", "location", "notCollected", "sharing", "deletion"]
 
     var body: some View {
         Page {

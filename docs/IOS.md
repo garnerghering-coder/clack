@@ -276,24 +276,33 @@ Fill in the listing and answers prepared in [APP_STORE.md](APP_STORE.md) (privac
 review notes), choose the build, and click **Add for Review**. Review usually takes one to three days. If it's
 rejected, the message names the guideline; ask Claude to fix it, upload a new build and reply in App Store Connect.
 
-## Widgets, Live Activities and notifications
+## Alerts, Live Activities and widgets
 
-All three are native iOS features, built in Swift inside the same Xcode project. Plan, in order:
+All native Swift, in the same Xcode project (owner's plan 2026-10-23, Flighty-style).
 
-1. **Notifications (local first).** Departure reminders and "your platform changed" while the app is open or just
-   closed, with Capacitor's Local Notifications plugin. No server changes. Good first step.
-2. **Push notifications** for delays and cancellations when the app is closed. Needs:
-   - an **APNs key** (Apple Developer > Keys > +, enable Apple Push Notifications service; download the .p8 file once
-     and keep it like a password: it goes in the server's `.env`);
-   - the **Push Notifications** capability (Xcode > Signing & Capabilities > + Capability);
-   - the app sending its push token to the server;
-   - the server sending a push when its live tracker sees a change. The tracker already detects these.
-3. **Live Activity** for the train you're on: the Lock Screen and Dynamic Island show the next stop, delay and
-   platform, updated by push from the server (ActivityKit). Needs a **Widget Extension** target (Xcode >
-   File > New > Target > Widget Extension, tick "Include Live Activity") and a small bridge so the app can start
-   it. It reuses the push setup from 2.
-4. **Home-screen widget**: your next trip, or a station's departures. Same Widget Extension; the app shares data
-   with it through an **App Group** (Signing & Capabilities > + App Groups).
+**Built.**
+- The server (`apps/server/src/push/`) watches every saved trip and sends: a departure reminder at the lead time chosen
+  in Settings (off, 30 min, 1 h, 2 h, 3 h; default 1 h), platform announced or changed, delays of 5+ min,
+  cancellations and short-turns (time-sensitive), changes between trains ("arrive platform 3, leave platform 5, 11 min
+  to spare", tight or likely missed), "get off soon", and a welcome at the end of a whole journey. A `push_log` table
+  keeps any alert from going out twice. Texts are in English and Swedish (`push/text.ts`).
+- The app (`App/Notifications.swift`, Settings > Alerts) asks iOS for permission only when the person turns alerts on,
+  tells the server the phone's Apple address (`PUT /api/devices`; removed with Delete my data) and opens the trip
+  when an alert is tapped.
+- The trip card (Live Activity: `App/LiveActivities.swift` and the `ClackWidgets` extension) shows the route, delay,
+  next stop, platform and a line along the way, on the Lock Screen and in the Dynamic Island. The server updates it
+  by push and, on iOS 17.2+, can start it itself half an hour before departure. Without push the app starts it.
+- Push stays off until the key is in the server's `.env`: `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_KEY_PATH` (the .p8
+  file, kept like a password) and `APNS_TOPIC=com.garnerghering.Clack`.
+
+**Needs the paid Apple Developer Program team.** A Personal Team can't have Push Notifications or Time Sensitive
+Notifications, so the two entitlements are not in `Clack.entitlements` yet (the file says which). When the team is
+active: add them in Xcode (Signing & Capabilities > + Capability), create the APNs key (Apple Developer > Keys > +,
+Apple Push Notifications service; download the .p8 once), put it on the server, restart. Debug builds use Apple's
+sandbox, TestFlight and App Store builds production; the app tells the server which.
+
+**Not built.** A home-screen widget (needs an App Group), walking times inside change alerts (the walk routing lives
+in the app), and quiet hours.
 
 Guidelines to keep in mind: widgets and notifications must relate to the app (2.5.16); the app must work without
 push permission (4.5.4); no marketing pushes without opt-in.

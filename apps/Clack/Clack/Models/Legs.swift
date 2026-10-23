@@ -289,14 +289,15 @@ nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
 }
 
 nonisolated enum LegEventType: OpenEnum {
-    case delayed, platformChanged, cancelled, shortTurned, departed, arrived
+    case delayed, platformSet, platformChanged, cancelled, shortTurned, departed, arrived
     case unknown(String)
 
-    static let knownCases: [LegEventType] = [.delayed, .platformChanged, .cancelled, .shortTurned, .departed, .arrived]
+    static let knownCases: [LegEventType] = [.delayed, .platformSet, .platformChanged, .cancelled, .shortTurned, .departed, .arrived]
     init(unknown: String) { self = .unknown(unknown) }
     var rawValue: String {
         switch self {
         case .delayed: "delayed"
+        case .platformSet: "platform_set"
         case .platformChanged: "platform_changed"
         case .cancelled: "cancelled"
         case .shortTurned: "short_turned"
@@ -313,7 +314,7 @@ nonisolated struct LegEventPayload: Codable, Hashable, Sendable {
     var delayMin: Int?
     /// `delayed`: what it was before.
     var previousDelayMin: Int?
-    /// `platform_changed`: `departure` or `arrival`, and the tracks.
+    /// `platform_set` and `platform_changed`: `departure` or `arrival`, and the tracks.
     var which: String?
     var from: String?
     var to: String?

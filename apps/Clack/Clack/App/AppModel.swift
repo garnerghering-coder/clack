@@ -24,6 +24,7 @@ final class AppModel {
     let offlineCache: OfflineCache
     @ObservationIgnored private(set) var live: LiveHub
     let arrivals = ArrivalWatcher()
+    let notifications = NotificationManager.shared
     @ObservationIgnored private(set) var stations: StationDirectory
 
     /// The last change to settings couldn't be saved.
