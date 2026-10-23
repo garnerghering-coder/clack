@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { CO2_CHOICES, type Co2Comparison } from '@clack/shared';
 import { api, type CountRow, type Leg, type LegRef, type Milestone, type Passport } from '../api';
 import { OperatorBadge } from '../components/OperatorBadge';
-import { TrainArt } from '../components/TrainArt';
+import { TrainPicture } from '../components/trains/TrainPicture';
 import { Flag } from '../components/Flag';
 import { MultiRouteMap } from '../map/MultiRouteMap';
 import { useSettings } from '../settings';
@@ -341,7 +341,7 @@ export function PassportPage() {
                   const type = types[r.key];
                   return (
                     <li key={r.key} className="type-row">
-                      <span className="type-art">{type && <TrainArt art={type.art} color={opColor(null)} height={22} />}</span>
+                      <span className="type-art"><TrainPicture type={type} operatorId={null} /></span>
                       <span className="bar-label">
                         <span className="strong">{type?.name ?? r.key}</span>
                         <span className="caption tabular">

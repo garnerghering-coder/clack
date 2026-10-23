@@ -360,7 +360,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .train-facts dd { margin: 2px 0 0; font-weight: 600; }
 .train-picker { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .train-option { width: 100%; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 10px; background: var(--surface-raised); border: 1px solid var(--hairline); text-align: left; overflow: hidden; }
-.train-option .train-art { max-width: 150px; height: auto; }
 .train-option.active { border-color: var(--accent-line); }
 .result-train { display: flex; align-items: center; gap: 10px; overflow: hidden; }
 .train-art { flex: none; display: block; }
@@ -536,7 +535,6 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .bar-fill { display: block; height: 100%; border-radius: 3px; }
 .type-row { display: flex; align-items: center; gap: 12px; overflow: hidden; }
 .type-art { flex: none; width: 120px; display: flex; justify-content: flex-start; overflow: hidden; }
-.type-art .train-art { max-width: 120px; height: auto; }
 .type-row .bar-label { flex: 1; min-width: 0; flex-direction: column; gap: 2px; }
 .country-list li { display: flex; align-items: center; gap: 10px; }
 .country-list .caption { margin-left: auto; }
@@ -1063,4 +1061,10 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-sheet-art.side .train-side { width: auto; height: 54px; max-width: 100%; margin: 2px 0 0; }
 .train-art-wrap .train-side { width: auto; height: 56px; max-width: 100%; }
 /* A train whose model we don't know (or can't tell between two): the family outline, dimmed and without colour. */
-.train-art-unknown { display: inline-flex; opacity: 0.45; filter: grayscale(1); }
+/* A stand-in for a model that isn't drawn: the nearest drawn one, unpainted, fading out from the back like SJ's app.
+   Unknown trains fainter still. */
+.train-stand-in { display: block; -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60%); mask-image: linear-gradient(to right, transparent 0%, #000 60%); opacity: 0.8; }
+.train-stand-in.unknown { opacity: 0.45; }
+.train-option-art { flex: none; display: block; width: 110px; }
+.result-train-art { flex: none; display: block; width: 120px; }
+.type-art .train-side { width: 100%; height: auto; }

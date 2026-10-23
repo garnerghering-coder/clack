@@ -11,7 +11,7 @@ import { ManualTrip } from '../components/ManualTrip';
 import { BuyTicket } from '../components/Tickets';
 import { TripProgress } from '../components/TripProgress';
 import { useOperators, useTrainTypes } from '../data';
-import { TrainArt } from '../components/TrainArt';
+import { TrainPicture } from '../components/trains/TrainPicture';
 import { useSettings } from '../settings';
 import { RouteMap, type MapStop } from '../map/RouteMap';
 import { addDaysIso, dayOffset, fmtDay, fmtDistance, fmtDuration, fmtTime, isoToNoonMs, todayIso } from '../format';
@@ -104,7 +104,9 @@ function ResultCard({ r, onPick }: { r: TripResult; onPick: () => void }) {
       </div>
       {type && (
         <div className="result-train">
-          <TrainArt art={type.art} color={opColor(op?.brandColor)} height={22} />
+          <span className="result-train-art">
+            <TrainPicture type={type} operatorId={r.operatorId} />
+          </span>
           <span className="caption">{type.name}</span>
         </div>
       )}

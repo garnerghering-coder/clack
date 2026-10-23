@@ -914,7 +914,7 @@ function LiveMap() {
             <>
               {!collapsed && (
                 <div className={hasDetailedArt(selType?.id, sel.operatorId) && !selType?.uncertain ? 'live-sheet-art side' : 'live-sheet-art'}>
-                  <TrainPicture type={selType} operatorId={sel.operatorId} color={opColor(selOp?.brandColor)} height={22} />
+                  <TrainPicture type={selType} operatorId={sel.operatorId} />
                   <span className="caption">{selType?.name ?? t('liveMap.typeUnknown')}</span>
                 </div>
               )}
@@ -1186,7 +1186,7 @@ function ScheduledSheet({ view, now, following, collapsed, onCollapse, onFollow,
         <>
           {!collapsed && (
             <div className={hasDetailedArt(type?.id, view.operatorId) && !type?.uncertain ? 'live-sheet-art side' : 'live-sheet-art'}>
-              <TrainPicture type={type} operatorId={view.operatorId} color={opColor(op?.brandColor)} height={22} />
+              <TrainPicture type={type} operatorId={view.operatorId} />
               <span className="caption">{type?.name ?? t('liveMap.typeUnknown')}</span>
             </div>
           )}

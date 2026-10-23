@@ -1,7 +1,7 @@
 // The train's picture: a detailed side view where one has been drawn for that model (scripts/trains, docs/TRAIN_ART.md),
-// in the operator's livery when it's been drawn, unpainted when it hasn't; otherwise the simple silhouette (TrainArt).
+// in the operator's livery when it's been drawn, unpainted when it hasn't; otherwise the nearest drawn model, unpainted
+// and faded, as a stand-in.
 import type { ComponentType } from 'react';
-import { TrainArt } from '../TrainArt';
 import { Er1Side } from './Er1';
 import { Flytoget71Side } from './Flytoget71';
 import { Flytoget78Side } from './Flytoget78';
@@ -30,7 +30,7 @@ interface Detailed {
   component: Side;
   /** Operators whose livery is drawn for this model; any other operator gets the unpainted version. */
   liveries: string[];
-  /** Operators whose trains of this type look different from the drawing (e.g. other door layout): simple outline. */
+  /** Operators whose trains of this type look different from the drawing (e.g. other door layout): a stand-in. */
   notFor?: string[];
   /** Operators whose livery has its own id in the drawing (one operator, two schemes: the more common one). */
   liveryOf?: Record<string, string>;
@@ -76,21 +76,43 @@ export const hasDetailedArt = (typeId: string | null | undefined, operatorId?: s
   !!typeId && typeId in DETAILED && !(operatorId && DETAILED[typeId]!.notFor?.includes(operatorId));
 
 /**
- * Defaults when we know less (owner, 2026-10-22: "a livery-less version" and "a dimmed placeholder"):
- * - a drawn model run by an operator whose livery isn't drawn: the model unpainted;
- * - a type without a drawing: its family's simple outline in the operator's colour;
- * - a type that names two models (no source says which) or no type at all: a dimmed, grey outline.
+ * The drawn model nearest to each family ("art" in data/train_types.json), shown unpainted and faded when the train's
+ * own model isn't drawn (owner, 2026-10-23: "an unbranded version of one of the trains we already have based on
+ * whatever is closest"). Steam and night trains have no closer drawing than a locomotive with coaches.
  */
-export function TrainPicture({ type, operatorId, color, height, label }: { type: { id: string; art: string; name: string; uncertain?: boolean } | null | undefined; operatorId: string | null | undefined; color: string; height: number; label?: string }) {
-  if (!type || type.uncertain)
-    return (
-      <span className="train-art-unknown">
-        <TrainArt art={type?.art ?? ''} color="#8a8a8a" height={height} label={label} />
-      </span>
-    );
-  const d = DETAILED[type.id];
-  if (!d || !hasDetailedArt(type.id, operatorId)) return <TrainArt art={type.art} color={color} height={height} label={label} />;
-  const Picture = d.component;
-  const livery = operatorId && d.liveries.includes(operatorId) ? (d.liveryOf?.[operatorId] ?? operatorId) : 'plain';
-  return <Picture livery={livery} className="train-side" label={label} />;
+const STAND_IN: Record<string, string> = {
+  x2000: 'x2000',
+  x3: 'x3',
+  coradia: 'x60',
+  regina: 'regina',
+  contessa: 'x11',
+  flirt: 'no_flirt',
+  double_deck: 'x40',
+  railcar: 'y31',
+  loco: 'rc6_coaches',
+  loco_sleeper: 'rc6_coaches',
+  steam: 'rc6_coaches',
+};
+/** No type at all: the most common kind of train here, a regional electric unit. */
+const UNKNOWN_STAND_IN = 'x60';
+
+/**
+ * Defaults when we know less (owner, 2026-10-22 and 2026-10-23):
+ * - a drawn model run by an operator whose livery isn't drawn: the model unpainted;
+ * - a type without a drawing: the nearest drawn model (STAND_IN), unpainted and faded;
+ * - a type that names two models (no source says which) or no type at all: the same, fainter.
+ */
+export function TrainPicture({ type, operatorId, label }: { type: { id: string; art: string; name: string; uncertain?: boolean } | null | undefined; operatorId: string | null | undefined; label?: string }) {
+  const d = type && !type.uncertain ? DETAILED[type.id] : undefined;
+  if (d && hasDetailedArt(type!.id, operatorId)) {
+    const livery = operatorId && d.liveries.includes(operatorId) ? (d.liveryOf?.[operatorId] ?? operatorId) : 'plain';
+    return <d.component livery={livery} className="train-side" label={label} />;
+  }
+  const standIn = DETAILED[(type && STAND_IN[type.art]) ?? UNKNOWN_STAND_IN] ?? DETAILED[UNKNOWN_STAND_IN]!;
+  const Picture = standIn.component;
+  return (
+    <span className={`train-stand-in ${!type || type.uncertain ? 'unknown' : ''}`}>
+      <Picture livery="plain" className="train-side" label={label} />
+    </span>
+  );
 }

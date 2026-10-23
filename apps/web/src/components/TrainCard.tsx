@@ -4,16 +4,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api, type LegDetail } from '../api';
 import { useTrainTypes } from '../data';
-import { TrainArt } from './TrainArt';
 import { TrainPicture } from './trains/TrainPicture';
-import { opColor } from '../map/style';
 
 export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: LegDetail) => void }) {
   const { t } = useTranslation();
   const types = useTrainTypes();
   const [picking, setPicking] = useState(false);
   const [saving, setSaving] = useState(false);
-  const color = opColor(leg.operator?.brandColor);
   const type = leg.trainType ? types.get(leg.trainType) : undefined;
 
   const choose = async (id: string | null) => {
@@ -32,7 +29,7 @@ export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: Leg
       {type ? (
         <>
           <div className="train-art-wrap">
-            <TrainPicture type={type} operatorId={leg.operator?.id} color={color} height={46} label={type.name} />
+            <TrainPicture type={type} operatorId={leg.operator?.id} label={type.name} />
           </div>
           <p className="train-name">
             <span className="strong">{type.name}</span>{' '}
@@ -72,7 +69,9 @@ export function TrainCard({ leg, onChange }: { leg: LegDetail; onChange: (l: Leg
           {[...types.values()].map((x) => (
             <li key={x.id}>
               <button className={`train-option ${x.id === leg.trainType ? 'active' : ''}`} onClick={() => choose(x.id)} disabled={saving}>
-                <TrainArt art={x.art} color={color} height={18} />
+                <span className="train-option-art">
+                  <TrainPicture type={x} operatorId={leg.operator?.id} />
+                </span>
                 <span>{x.name}</span>
               </button>
             </li>
