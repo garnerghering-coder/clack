@@ -59,7 +59,9 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 
 ### 2.3 Shape, spacing, depth
 - 4px spacing grid; 16px screen gutters on mobile; 24px on tablet/desktop.
-- Radii: cards 16, sheets 24 (top corners), chips/badges full pill, inputs 12, operator badge 10.
+- Radii, one scale (owner, 2026-10-23): tags (platform) 6, small controls (34 px buttons, filter chips, date field) 10, buttons/inputs/segmented controls 12, cards 16, sheets 24 (top corners), operator badge 10. Circles only for icon buttons, the FAB and dots. Nothing is a full pill.
+- Status is written, not boxed (owner, 2026-10-23: "tiny pill box with a bit of text"): delay, Live, GPS/estimated, speed, Planned/Arrived, category, notices are coloured or grey text in a line, with a dot or icon where it helps. Delay colours have darker "ink" versions for light mode. Only over a map does a status get a backing (a glass label, radius 10).
+- Buttons: primary is a yellow fill, secondary a raised surface with a hairline; both radius 12, the same as inputs and the segmented control.
 - Depth is mostly color and hairlines, not shadows. Floating elements (FAB, sheet) get a soft shadow (`0 8px 24px` at 45% black on dark, 12% on light).
 - Icons: Lucide, 20px, 1.75 stroke.
 

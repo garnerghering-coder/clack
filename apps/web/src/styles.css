@@ -37,9 +37,18 @@
   --error-text: #ff8a82;
   --warn-bg: rgba(255, 149, 0, 0.14);
   --warn-text: #ffc066;
+  /* One radius scale (owner, 2026-10-23: buttons were rounded unlike everything else). Round only for icon buttons
+     and dots; nothing is a 999px pill. */
+  --r-tag: 6px;
+  --r-control-sm: 10px;
+  --r-input: 12px;
   --r-card: 16px;
   --r-sheet: 24px;
-  --r-input: 12px;
+  /* Delay bands as text (status is written, not boxed). Same as the fills in dark mode. */
+  --on-time-ink: var(--on-time);
+  --slight-ink: var(--slight);
+  --late-ink: var(--late);
+  --very-late-ink: var(--very-late);
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   --tabbar-h: 64px;
   font-family: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -84,6 +93,11 @@
   --warn-bg: rgba(255, 149, 0, 0.14);
   --warn-text: #9a5800;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* The band colours are fills; as text on white they need to be darker to be read. */
+  --on-time-ink: #12813f;
+  --slight-ink: #8a6a00;
+  --late-ink: #b4570a;
+  --very-late-ink: #c4271c;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -175,7 +189,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .map-back { top: calc(12px + env(safe-area-inset-top)); left: 16px; }
 .map-layers { top: calc(12px + env(safe-area-inset-top)); right: 16px; }
 .map-recenter { right: 16px; bottom: 16px; }
-.map-chip { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); top: calc(18px + env(safe-area-inset-top)); padding: 4px 10px; border-radius: 999px; background: var(--glass); border: 1px solid var(--hairline); }
+.map-chip { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); top: calc(18px + env(safe-area-inset-top)); padding: 4px 10px; border-radius: var(--r-control-sm); background: var(--glass); border: 1px solid var(--hairline); }
 .detail-map { position: relative; height: min(55dvh, 520px); }
 /* The sheet below overlaps the map by 24 px. */
 .detail-map .map-attrib { bottom: 30px; }
@@ -203,12 +217,12 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 /* ---------- Controls ---------- */
 .button {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
-  border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); font-weight: 600;
+  border-radius: var(--r-input); background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); font-weight: 600;
 }
 /* Same outline as the chips and inputs, so secondary buttons read as one family with them (owner, 2026-10-22). */
 .button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .button.danger { color: var(--very-late); }
-.button.small { min-height: 34px; padding: 0 14px; font-size: 14px; }
+.button.small { min-height: 34px; padding: 0 14px; font-size: 14px; border-radius: var(--r-control-sm); }
 .button.wide { width: 100%; }
 .button:disabled { opacity: 0.45; cursor: default; }
 .icon-button { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); }
@@ -219,33 +233,35 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
   width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); box-shadow: var(--shadow);
 }
 
-.segmented { display: flex; padding: 3px; gap: 3px; background: var(--surface); border-radius: 12px; border: 1px solid var(--hairline); }
+.segmented { display: flex; padding: 3px; gap: 3px; background: var(--surface); border-radius: var(--r-input); border: 1px solid var(--hairline); }
 .segmented button { flex: 1; min-height: 36px; border-radius: 9px; font-weight: 600; color: var(--text-2); }
 .segmented button.active { background: var(--surface-raised); color: var(--text); }
 
-.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 999px; background: var(--surface-raised); font-size: 13px; font-weight: 600; color: var(--text-2); white-space: nowrap; }
-.chip.accent { background: var(--accent-soft); color: var(--text); }
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+/* A status or fact in a line of text: no box (owner, 2026-10-23, on the tiny pills). Colour and a dot carry meaning. */
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--text-2); white-space: nowrap; }
+.chip.accent { color: var(--text); }
+.chip.accent::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-line); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
 .chip-button {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 14px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 14px; border-radius: var(--r-control-sm);
   background: var(--surface-raised); border: 1px solid var(--hairline); color: var(--text); font-weight: 600; font-size: 14px; position: relative;
 }
 .chip-button.active { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .chip-button.removable svg { color: var(--text-2); }
-.pill { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: var(--fill-soft); font-weight: 600; font-size: 14px; }
+.pill { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--r-control-sm); background: var(--fill-soft); font-weight: 600; font-size: 14px; }
 
-.delay-pill { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 13px; color: #0b0e13; }
-.band-on_time.delay-pill { background: var(--on-time); }
-.band-slight.delay-pill { background: var(--slight); }
-.band-late.delay-pill { background: var(--late); }
-.band-very_late.delay-pill { background: var(--very-late); color: #fff; }
-.band-cancelled.delay-pill { background: transparent; border: 1.5px solid var(--very-late); color: var(--very-late); }
-.band-unknown.delay-pill { background: var(--surface-raised); color: var(--unknown); }
-.delay-text.band-on_time { color: var(--on-time); }
-.delay-text.band-slight { color: var(--slight); }
-.delay-text.band-late { color: var(--late); }
-.delay-text.band-very_late { color: var(--very-late); }
-.delay-text.band-cancelled { color: var(--very-late); text-decoration: line-through; }
+.delay-pill { display: inline-flex; align-items: center; font-weight: 700; font-size: 14px; line-height: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.band-on_time.delay-pill { color: var(--on-time-ink); }
+.band-slight.delay-pill { color: var(--slight-ink); }
+.band-late.delay-pill { color: var(--late-ink); }
+.band-very_late.delay-pill { color: var(--very-late-ink); }
+.band-cancelled.delay-pill { color: var(--very-late-ink); }
+.band-unknown.delay-pill { color: var(--text-3); font-weight: 600; }
+.delay-text.band-on_time { color: var(--on-time-ink); }
+.delay-text.band-slight { color: var(--slight-ink); }
+.delay-text.band-late { color: var(--late-ink); }
+.delay-text.band-very_late { color: var(--very-late-ink); }
+.delay-text.band-cancelled { color: var(--very-late-ink); text-decoration: line-through; }
 
 .op-logo { object-fit: cover; background: #fff; box-shadow: inset 0 0 0 1px var(--hairline); }
 .op-badge { display: inline-grid; place-items: center; flex-shrink: 0; color: #fff; font-weight: 800; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
@@ -310,7 +326,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .date-row { position: relative; }
 /* Kept rendered (showPicker needs it) but invisible; the "Pick date" button opens it. */
 .date-input { position: absolute; left: 0; bottom: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.date-field { height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--accent); background: var(--surface-raised); color: var(--text); font: inherit; font-weight: 600; color-scheme: dark; }
+.date-field { height: 34px; padding: 0 12px; border-radius: var(--r-control-sm); border: 1px solid var(--accent); background: var(--surface-raised); color: var(--text); font: inherit; font-weight: 600; color-scheme: dark; }
 .date-label { font-weight: 600; margin-left: 4px; }
 .date-label .hint { color: var(--slight); font-weight: 500; }
 
@@ -387,7 +403,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .status-live { color: var(--on-time); }
 
 /* ---------- Live tracking (DESIGN §9.5) ---------- */
-.live-chip { background: rgba(61, 220, 132, 0.16); color: var(--on-time); letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; }
+.live-chip { color: var(--on-time-ink); }
 .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--on-time); animation: live-blink 1.8s ease-in-out infinite; }
 /* An expanding ring around the dot read as a pill inside the pill (owner feedback): the dot just fades in and out. */
 @keyframes live-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -574,7 +590,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .board-dev { color: var(--slight); }
 .board-meta { display: flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden; white-space: nowrap; }
 .board-side { display: grid; gap: 4px; justify-items: end; }
-.platform-chip { display: inline-flex; gap: 4px; align-items: baseline; min-width: 34px; justify-content: center; padding: 2px 8px; border-radius: 8px; background: var(--surface-raised); font-weight: 700; }
+.platform-chip { display: inline-flex; gap: 4px; align-items: baseline; min-width: 34px; justify-content: center; padding: 2px 8px; border-radius: var(--r-tag); background: var(--surface-raised); font-weight: 700; }
 .platform-chip.changed { background: rgba(255, 149, 0, 0.18); color: var(--late); }
 .platform-chip s { color: var(--text-3); font-weight: 500; }
 .changed-label { color: var(--late); }
@@ -625,7 +641,8 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-filters .chip-button { flex: none; backdrop-filter: blur(8px); }
 .live-ops { position: absolute; z-index: 4; top: calc(64px + env(safe-area-inset-top)); max-width: 460px; left: 16px; right: 16px; max-height: 50%; overflow-y: auto; gap: 8px; }
 .live-counter { position: absolute; z-index: 3; left: 12px; bottom: 28px; display: flex; gap: 8px; align-items: center; }
-.live-counter .chip { background: var(--glass); }
+/* Over the map a status needs a backing to be read: a glass label, not a pill. */
+.live-counter .chip { padding: 6px 10px; border-radius: var(--r-control-sm); background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); }
 .map-button.small { position: static; width: 32px; height: 32px; }
 .live-legend { position: absolute; z-index: 3; left: 12px; bottom: 70px; max-width: 280px; gap: 6px; }
 .live-legend p { display: flex; align-items: center; gap: 8px; }
@@ -669,8 +686,9 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 
 /* ---------- On board (ADDITIONS_01 D) ---------- */
 .onboard { display: grid; gap: 8px; }
-.onboard-fact { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--on-accent); font-weight: 600; }
-.onboard-notice { display: inline-flex; align-items: center; gap: 6px; background: var(--warn-bg); color: var(--warn-text); font-weight: 600; }
+.onboard-fact { color: var(--text); }
+.onboard-fact svg { color: var(--text-2); }
+.onboard-notice { color: var(--warn-text); }
 .onboard-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 12px; }
 .onboard-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; line-height: 18px; }
 .onboard-list li svg { flex: none; margin-top: 1px; color: var(--text-2); }
@@ -798,7 +816,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 /* Explore top bar: one search field and a Filters button instead of a row of chips (brief §6.3). */
 .live-top { position: absolute; z-index: 4; top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; display: flex; gap: 8px; }
 .live-top .map-button { position: static; flex: none; }
-.live-search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 22px; background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); color: var(--text-2); }
+.live-search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: var(--r-input); background: var(--glass); border: 1px solid var(--hairline); backdrop-filter: blur(10px); color: var(--text-2); }
 .live-search input { flex: 1; min-width: 0; background: none; border: 0; color: var(--text); font: inherit; font-size: 16px; outline: none; }
 .filters-button { position: relative; }
 .filters-button.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
@@ -809,13 +827,13 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .live-result .lg-station { justify-self: center; }
 .live-sheet-title { display: flex; align-items: center; gap: 6px; min-width: 0; text-align: left; flex: 1; min-height: 44px; }
 .live-train-sheet.collapsed { max-height: none; }
-.chip.live-pos { background: rgba(61, 220, 132, 0.16); color: var(--on-time); }
+.chip.live-pos { color: var(--on-time-ink); }
 .button.is-following { border-color: var(--accent); box-shadow: inset 0 0 0 0.5px var(--accent); }
 .live-sheet-actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .stage-card { margin: 10px 0; }
 /* Trip records (brief §8) and the collection-first Passport (brief §9). */
 .review-card { margin: 8px 0; border-color: var(--accent-line); }
-.review-chip { background: var(--warn-bg); color: var(--text); }
+.review-chip { color: var(--warn-text); }
 .leg-row.not-taken { opacity: 0.55; }
 .record-line { font-size: 14px; }
 .record-line.record-review { color: var(--late); }
@@ -826,7 +844,7 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 .milestone-next { display: grid; gap: 10px; }
 .milestone-progress { display: grid; gap: 6px; }
 .station-collection { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.station-collection li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--hairline); font-size: 14px; }
+.station-collection li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: var(--r-control-sm); background: var(--surface-raised); border: 1px solid var(--hairline); font-size: 14px; }
 /* Share card preview (brief §10) */
 .share-sheet { max-height: 92dvh; }
 .share-preview { display: grid; place-items: center; }
@@ -1020,11 +1038,11 @@ sup { font-size: 0.6em; margin-left: 2px; color: var(--text-2); }
 
 /* Speed from the train's GPS, beside where it is (only when fresh and checked). */
 .live-where { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.speedo { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); font-size: 13px; font-weight: 700; line-height: 18px; color: var(--text); }
+.speedo { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 700; line-height: 18px; font-variant-numeric: tabular-nums; color: var(--text); }
 .speedo svg { color: var(--text-2); }
 
 /* No connection: a thin strip at the top; the app keeps showing what the phone has kept. */
-.offline-banner { position: fixed; top: env(safe-area-inset-top, 0); left: 50%; transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-raised); color: var(--text-2); font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+.offline-banner { position: fixed; top: env(safe-area-inset-top, 0); left: 50%; transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 12px; border-radius: var(--r-control-sm); border: 1px solid var(--hairline); background: var(--surface-raised); color: var(--text-2); font-size: 12px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
 
 /* The train sheet's handle: drag it between three sizes (LiveMapPage TrainSheet). A wide, tall touch target. */
 .live-train-sheet::before { display: none; }
