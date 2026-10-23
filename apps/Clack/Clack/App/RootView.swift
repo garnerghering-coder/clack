@@ -31,6 +31,10 @@ struct RootView: View {
             if app.isOffline {
                 OfflineBanner().transition(.opacity)
             }
+            VStack {
+                Spacer()
+                TicketReturnPrompt().padding(.bottom, 64)
+            }
             if !splashGone {
                 Splash()
                     .opacity(hideSplash ? 0 : 1)
@@ -40,6 +44,13 @@ struct RootView: View {
         }
         .environment(app.l10n)
         .environment(router)
+        .sheet(item: $router.addRequest) { request in
+            AddTrainSheet(request: request)
+                .environment(app)
+                .environment(app.l10n)
+                .environment(router)
+                .preferredColorScheme(app.colorScheme)
+        }
         .preferredColorScheme(app.colorScheme)
         // Any touch before the landing rule has decided cancels it.
         .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in touched = true })

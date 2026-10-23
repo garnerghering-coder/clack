@@ -38,7 +38,6 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case settings
     case stations
     case board(stationId: String, arrivals: Bool)
-    case addTrain(AddTrainLink?)
     case stationMap(StationMapLink)
 }
 
@@ -60,6 +59,14 @@ final class Router {
         }
         if let raw = value("-tab"), let tab = PrimaryTab(rawValue: raw) { self.tab = tab }
         if let raw = value("-tripsTab"), let tab = TripsTab(rawValue: raw) { tripsTab = tab }
+        // `-add` opens the Add a train sheet; `-addTrip <key>|<date>|<from>|<to>` at its confirm step.
+        if args.contains("-add") { addRequest = AddRequest(link: nil) }
+        if let raw = value("-addTrip") {
+            let parts = raw.split(separator: "|").map(String.init)
+            if parts.count >= 2 {
+                addRequest = AddRequest(link: AddTrainLink(tripKey: parts[0], date: parts[1], fromSeq: parts.count > 2 ? Int(parts[2]) : nil, toSeq: parts.count > 3 ? Int(parts[3]) : nil))
+            }
+        }
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
@@ -73,6 +80,22 @@ final class Router {
     var tripsPath: [AppRoute] = []
     var explorePath: [AppRoute] = []
     var passportPath: [AppRoute] = []
+    /// The Add a train sheet, when it's open: a full-height sheet over everything, tab bar included.
+    var addRequest: AddRequest?
+
+    struct AddRequest: Identifiable, Hashable {
+        let id = UUID()
+        var link: AddTrainLink?
+    }
+
+    func openAdd(_ link: AddTrainLink? = nil) {
+        addRequest = AddRequest(link: link)
+    }
+
+    func closeAdd() {
+        addRequest = nil
+    }
+
     /// A train Explore should open when it appears (`/explore?train=N&date=D&key=K`; the Explore screen reads and clears it).
     var pendingTrain: PendingTrain?
 

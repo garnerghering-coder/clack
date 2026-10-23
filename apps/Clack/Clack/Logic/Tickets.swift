@@ -6,8 +6,8 @@
 import Foundation
 
 /// The journey a ticket link searches for (apps/web/src/components/Tickets.tsx).
-nonisolated struct TicketTrip: Hashable, Sendable {
-    nonisolated struct Stop: Hashable, Sendable {
+nonisolated struct TicketTrip: Codable, Hashable, Sendable {
+    nonisolated struct Stop: Codable, Hashable, Sendable {
         let name: String
         /// Epoch ms.
         let time: Double

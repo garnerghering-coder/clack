@@ -240,8 +240,8 @@ private struct DisruptionBody: View {
                 HStack(spacing: 8) {
                     Button(l10n.t("disruption.live")) { router.openTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
                         .buttonStyle(.clack(small: true))
-                    NavigationLink(value: AppRoute.addTrain(AddTrainLink(tripKey: r.key, date: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, replaceLegId: leg.id))) {
-                        Text(l10n.t("disruption.useInstead"))
+                    Button(l10n.t("disruption.useInstead")) {
+                        router.openAdd(AddTrainLink(tripKey: r.key, date: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, replaceLegId: leg.id))
                     }
                     .buttonStyle(.clack(.primary, small: true))
                 }

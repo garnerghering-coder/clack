@@ -52,4 +52,27 @@ extension APIClient {
         if let exclude { query["exclude"] = exclude }
         return try await get(["alternatives"], query: query)
     }
+
+    func search(_ text: String, date: String) async throws -> SearchResponse {
+        try await get(["search"], query: ["q": text, "date": date])
+    }
+
+    func popularStations() async throws -> [StationHit] { try await get(["stations", "popular"]) }
+
+    func searchStations(_ text: String, limit: Int = 12) async throws -> [StationHit] {
+        try await get(["stations", "search"], query: ["q": text, "limit": String(limit)])
+    }
+
+    func timetableTrip(_ key: String, date: String) async throws -> TimetableTrip {
+        try await get(["timetable", "trips", key], query: ["date": date])
+    }
+
+    func timetableTripGeometry(_ key: String, date: String) async throws -> TripGeometry {
+        try await get(["timetable", "trips", key, "geometry"], query: ["date": date])
+    }
+
+    /// Saves a timetable trip; a 409 (`APIError.duplicateOf`) means the same train is already saved on that date.
+    func createLeg(_ body: CreateLegBody) async throws -> LegDetail { try await send("POST", ["legs"], body: body) }
+
+    func createManualLeg(_ body: ManualLegBody) async throws -> LegDetail { try await send("POST", ["legs", "manual"], body: body) }
 }
