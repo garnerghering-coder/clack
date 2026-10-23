@@ -24,6 +24,15 @@ struct TripActivityAttributes: ActivityAttributes {
         var departAt: Double?
         var arriveAt: Double?
         var canceled: Bool
+        /// The moment the trip is in, decided by the server (apps/server/src/push/rules.ts momentOf): scheduled, leaveSoon,
+        /// approaching, boarding, enRoute, getOffSoon, changing, arrived or cancelled. Nil from an older server: the widget works it
+        /// out from `status`.
+        var phase: String? = nil
+        /// `platformChanged` for ten minutes after a platform change.
+        var note: String? = nil
+        /// While changing trains: the next train's platform, and when it leaves (ms since 1970).
+        var changePlatform: String? = nil
+        var changeAt: Double? = nil
     }
 
     var legId: String
@@ -35,8 +44,4 @@ struct TripActivityAttributes: ActivityAttributes {
     var toTz: String
     /// The operator's colour, `#rrggbb`.
     var color: String?
-    /// The train's drawing (an image in the widget's asset catalog), for the picture on the card. Optional.
-    var art: String? = nil
-    /// The route as `[lat, lon]` pairs, a few dozen points, for the sketch of the line on the card. Optional.
-    var route: [[Double]]? = nil
 }

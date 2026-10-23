@@ -402,8 +402,25 @@ private struct PassportCard: View {
         .onAppear { sheen = true }
     }
 
-    /// Signal yellow deepening to amber, lit from the top left like a passport cover under a lamp, with guilloche lines
-    /// and a sheen.
+    /// A holographic foil: a rainbow that slides across the cover as the phone moves, strongest along the guilloche lines (like foil
+    /// stamped into a real passport) with a faint wash over the rest. Still with Reduce Motion.
+    private var foil: some View {
+        let t = reduceMotion ? 0.5 : motion.shine
+        let rainbow = LinearGradient(
+            colors: [Color(hex: "#ff4fd8")!, Color(hex: "#7a5cff")!, Color(hex: "#27d3ff")!, Color(hex: "#39e58c")!, Color(hex: "#fff04a")!, Color(hex: "#ff9a3c")!, Color(hex: "#ff4fd8")!],
+            startPoint: UnitPoint(x: t - 0.6, y: 0), endPoint: UnitPoint(x: t + 0.6, y: 1)
+        )
+        return ZStack {
+            rainbow.opacity(0.24)
+            rainbow.mask(Guilloche()).opacity(0.85)
+        }
+        .blendMode(.overlay)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    /// Signal yellow deepening to amber, lit from the top left like a passport cover under a lamp, with guilloche lines,
+    /// holographic foil and a sheen.
     private var cover: some View {
         ZStack {
             CSSLinearGradient(angle: 155, stops: [
@@ -412,11 +429,12 @@ private struct PassportCard: View {
             CSSRadialGradient(rx: 0.9, ry: 0.9, cx: 1, cy: 1, stops: [.init(color: Color(hex: "#d99a00")!, location: 0), .init(color: Color(hex: "#d99a00")!.opacity(0), location: 0.6)])
             CSSRadialGradient(rx: 1.2, ry: 0.8, cx: 0, cy: 0, stops: [.init(color: Color(hex: "#fff3b0")!, location: 0), .init(color: Color(hex: "#fff3b0")!.opacity(0), location: 0.55)])
             Guilloche().opacity(0.16)
+            foil
             GeometryReader { proxy in
-                LinearGradient(stops: [.init(color: .clear, location: 0.3), .init(color: .white.opacity(0.45), location: 0.45), .init(color: .clear, location: 0.6)], startPoint: .leading, endPoint: .trailing)
+                LinearGradient(stops: [.init(color: .clear, location: 0.3), .init(color: .white.opacity(0.75), location: 0.45), .init(color: .clear, location: 0.6)], startPoint: .leading, endPoint: .trailing)
                     .frame(width: proxy.size.width * 2.5)
                     .offset(x: sheen || reduceMotion ? -proxy.size.width * 2.5 * 0.45 + proxy.size.width * (reduceMotion ? 0.3 : motion.shine) : proxy.size.width * 0.4)
-                    .blendMode(.softLight)
+                    .blendMode(.overlay)
                     .animation(reduceMotion ? nil : .easeOut(duration: 1.6).delay(0.3), value: sheen)
             }
         }

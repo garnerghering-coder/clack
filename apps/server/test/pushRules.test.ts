@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_SETTINGS } from '@clack/shared';
-import { change, fromEvents, getOff, reminder, spareMinutes, type Prefs, type TripFacts } from '../src/push/rules.js';
+import { change, fromEvents, getOff, momentOf, reminder, spareMinutes, type Prefs, type TripFacts } from '../src/push/rules.js';
 
 const T = (hhmm: string) => Date.parse(`2026-10-20T${hhmm}:00+02:00`);
 const prefs: Prefs = { ...DEFAULT_SETTINGS, notify: true };
@@ -118,5 +118,43 @@ describe('changes', () => {
   it('measures the spare time', () => {
     expect(spareMinutes(a, b())).toBe(12);
     expect(spareMinutes({ ...a, expArr: null }, b())).toBeNull();
+  });
+});
+
+describe('the moment a trip is in (card and island)', () => {
+  const run = { status: 'en_route', nextStopId: 'X', eta: T('14:30') };
+  const live = (status: string, over: Partial<typeof run> = {}) => ({ ...run, status, ...over });
+  const next = (over: Partial<TripFacts> = {}) => facts({ legId: 'B', from: 'Kolding', to: 'Odense', expDep: T('19:20'), depPlatform: '5', ...over });
+
+  it('is scheduled far off and leaveSoon in the last 30 minutes', () => {
+    expect(momentOf(facts(), null, null, null, T('12:00')).phase).toBe('scheduled');
+    expect(momentOf(facts(), null, null, null, T('13:05')).phase).toBe('leaveSoon');
+  });
+  it('follows the live status: approaching, boarding, running', () => {
+    expect(momentOf(facts(), live('approaching'), null, null, T('13:10')).phase).toBe('approaching');
+    expect(momentOf(facts(), live('boarding'), null, null, T('13:25')).phase).toBe('boarding');
+    expect(momentOf(facts({ departed: true }), live('en_route'), null, null, T('14:00')).phase).toBe('enRoute');
+  });
+  it('says get off soon only when the next stop is where you get off, within ten minutes', () => {
+    const f = facts({ departed: true });
+    expect(momentOf(f, live('en_route', { nextStopId: 'KD', eta: T('18:45') }), null, null, T('18:34')).phase).toBe('enRoute');
+    expect(momentOf(f, live('en_route', { nextStopId: 'KD', eta: T('18:45') }), null, null, T('18:36')).phase).toBe('getOffSoon');
+    expect(momentOf(f, live('en_route', { nextStopId: 'OTHER', eta: T('18:45') }), null, null, T('18:40')).phase).toBe('enRoute');
+  });
+  it('notes a platform change for ten minutes, before the train has left', () => {
+    expect(momentOf(facts(), null, null, T('13:00'), T('13:05')).note).toBe('platformChanged');
+    expect(momentOf(facts(), null, null, T('13:00'), T('13:15')).note).toBeNull();
+    expect(momentOf(facts({ departed: true }), live('en_route'), null, T('13:00'), T('13:05')).note).toBeNull();
+  });
+  it('is changing trains once arrived with the next train leaving within the hour, else arrived', () => {
+    const arrived = facts({ arrived: true, departed: true });
+    const m = momentOf(arrived, null, next({ expDep: T('19:20') }), null, T('18:55'));
+    expect(m).toMatchObject({ phase: 'changing', changePlatform: '5', changeAt: T('19:20') });
+    expect(momentOf(arrived, null, next({ expDep: T('21:00') }), null, T('18:55')).phase).toBe('arrived');
+    expect(momentOf(arrived, null, next({ departed: true }), null, T('19:30')).phase).toBe('arrived');
+    expect(momentOf(arrived, null, null, null, T('18:55')).phase).toBe('arrived');
+  });
+  it('cancelled wins over everything', () => {
+    expect(momentOf(facts({ canceled: true, arrived: true }), live('boarding'), next(), T('13:00'), T('13:05')).phase).toBe('cancelled');
   });
 });

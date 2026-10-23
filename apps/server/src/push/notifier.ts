@@ -1,13 +1,13 @@
 // Turns the live tracker's changes into alerts and Live Activity updates on people's phones (owner, 2026-10-23).
 // Listens to the tracker, and every minute looks at the trips about to leave or running. What is due and what it says
 // are in rules.ts; this loads the facts, sends once per alert (push_log), and forgets phones Apple says are gone.
-import { and, asc, eq, gt, inArray, lt, ne } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, lt, ne } from 'drizzle-orm';
 import { DEFAULT_SETTINGS, type Language, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
-import { devices, legs, liveActivities, liveState, operators, pushLog, stations, users } from '../db/schema.js';
+import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, users } from '../db/schema.js';
 import { liveBus, type LiveUpdate } from '../live/tracker.js';
 import { alertPayload, type ApnsClient } from './apns.js';
-import { change, fromEvents, getOff, reminder, type Alert, type Prefs, type TripFacts } from './rules.js';
+import { change, fromEvents, getOff, momentOf, reminder, type Alert, type Moment, type Prefs, type TripFacts } from './rules.js';
 import { t } from './text.js';
 
 const MIN = 60_000;
@@ -26,6 +26,13 @@ export interface ActivityState {
   departAt: number | null;
   arriveAt: number | null;
   canceled: boolean;
+  /** The moment the trip is in (rules.ts momentOf): scheduled | leaveSoon | approaching | boarding | enRoute | getOffSoon | changing | arrived | cancelled. */
+  phase: string;
+  /** platformChanged for ten minutes after a platform change. */
+  note: string | null;
+  /** While changing trains: the next train's platform and when it leaves (ms). */
+  changePlatform: string | null;
+  changeAt: number | null;
 }
 
 interface Loaded {
@@ -38,6 +45,8 @@ interface Loaded {
   live: { status: string; nextStopId: string | null; eta: number | null; progress: number | null } | null;
   nextStopName: string | null;
   operatorColor: string | null;
+  /** When the departure platform last changed (ms), if it has. */
+  lastPlatformChangeAt: number | null;
   /** Operator and train number, the line under an alert's title ("SJ 547"). */
   subtitle: string | undefined;
 }
@@ -110,6 +119,7 @@ export class Notifier {
       next: nextRow ? this.factsOf(nextRow, siblings) : null,
       live: lv ? { status: lv.status, nextStopId: lv.nextStopId, eta: ms(lv.eta), progress: lv.progress } : null,
       nextStopName: lv?.nextStopId ? (this.station(lv.nextStopId)?.name ?? null) : null,
+      lastPlatformChangeAt: ms(this.db.select({ ts: legEvents.ts }).from(legEvents).where(and(eq(legEvents.legId, legId), eq(legEvents.type, 'platform_changed'))).orderBy(desc(legEvents.ts)).limit(1).get()?.ts),
       subtitle: [row.operatorId ? (this.db.select({ n: operators.shortName }).from(operators).where(eq(operators.id, row.operatorId)).get()?.n ?? null) : null, facts.train].filter(Boolean).join(' ') || undefined,
       operatorColor: row.operatorId ? (this.db.select({ c: operators.brandColor }).from(operators).where(eq(operators.id, row.operatorId)).get()?.c ?? null) : null,
     };
@@ -121,7 +131,7 @@ export class Notifier {
     if (!L) return;
     for (const a of fromEvents(L.facts, u.events, L.prefs, L.lang)) await this.deliver(L, a);
     await this.checks(L);
-    await this.pushActivity(L, u.events.some((e) => e.type === 'arrived') ? 'end' : 'update');
+    await this.pushActivity(L);
   }
 
   /** Reminders, "get off soon", changes, and starting Live Activities: things that happen with the clock, not an event. */
@@ -155,6 +165,13 @@ export class Notifier {
       if (!L || !L.prefs.notify) continue;
       await this.checks(L);
       await this.startActivity(L);
+    }
+    // Cards that are still up for trips the tracker has let go (changing trains, just arrived): move them on, end them when over.
+    const running = new Set(rows.map((r) => r.id));
+    for (const a of this.db.select({ legId: liveActivities.legId }).from(liveActivities).all()) {
+      if (running.has(a.legId)) continue;
+      const L = this.load(a.legId);
+      if (L) await this.pushActivity(L);
     }
   }
 
@@ -221,15 +238,23 @@ export class Notifier {
       departAt: f.expDep,
       arriveAt: f.expArr,
       canceled: f.canceled,
+      ...Notifier.moment(L, now),
     };
   }
 
+  static moment(L: Loaded, now: number): { phase: string; note: string | null; changePlatform: string | null; changeAt: number | null } {
+    const m: Moment = momentOf(L.facts, L.live, L.next, L.lastPlatformChangeAt, now);
+    return { phase: m.phase, note: m.note, changePlatform: m.changePlatform, changeAt: m.changeAt };
+  }
+
   /** The live card for a trip that already has one running: new numbers only when something a person reads changed. */
-  async pushActivity(L: Loaded, event: 'update' | 'end') {
+  async pushActivity(L: Loaded) {
     if (!this.apns || !L.prefs.notify) return;
     const rows = this.db.select().from(liveActivities).where(eq(liveActivities.legId, L.facts.legId)).all();
     const now = this.now();
     const state = Notifier.state(L, now);
+    // The card ends once the trip is over: arrived with no change to make, or cancelled. While changing trains it stays, showing the next platform.
+    const event: 'update' | 'end' = state.phase === 'arrived' || state.phase === 'cancelled' ? 'end' : 'update';
     for (const row of rows) {
       const { progress: _p, ...shown } = state;
       const json = JSON.stringify(shown);
@@ -242,7 +267,7 @@ export class Notifier {
         environment: row.environment as 'sandbox' | 'production',
         pushType: 'liveactivity',
         priority: 10,
-        payload: { aps: { timestamp: sec, event, 'content-state': state, 'stale-date': sec + 15 * 60, ...(event === 'end' ? { 'dismissal-date': sec + 10 * 60 } : {}) } },
+        payload: { aps: { timestamp: sec, event, 'content-state': state, 'stale-date': sec + 5 * 60, ...(event === 'end' ? { 'dismissal-date': sec + 10 * 60 } : {}) } },
       });
       if (r.ok) this.lastActivity.set(row.token, { json, at: now });
       if (event === 'end' || r.dead) {

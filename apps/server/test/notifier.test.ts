@@ -107,7 +107,8 @@ describe('notifier', () => {
     expect(la.headers['apns-topic']).toBe('com.example.Clack.push-type.liveactivity');
     const aps = (JSON.parse(la.body) as { aps: { event: string; 'content-state': Record<string, unknown> } }).aps;
     expect(aps.event).toBe('update');
-    expect(aps['content-state']).toMatchObject({ status: 'en_route', delayMin: 6, nextStop: 'Jönköping C', progress: 0.4, platformFor: 'departure' });
+    expect(aps['content-state']).toMatchObject({ status: 'en_route', delayMin: 6, nextStop: 'Jönköping C', progress: 0.4, platformFor: 'departure', phase: 'getOffSoon' });
+    db.update(legs).set({ actualDep: new Date(NOW - 30 * 60_000), actualArr: new Date(NOW) }).run();
     await notifier.onUpdate({ legId: 'L1', live: { status: 'arrived' } as LiveUpdate['live'], events: [{ type: 'arrived', ts: NOW, payload: { at: NOW } }] });
     expect(sent.filter((r) => r.headers['apns-push-type'] === 'liveactivity').map((r) => (JSON.parse(r.body) as { aps: { event: string } }).aps.event)).toEqual(['update', 'end']);
     expect(db.select().from(liveActivities).all()).toHaveLength(0);

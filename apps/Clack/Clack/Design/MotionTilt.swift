@@ -39,14 +39,15 @@ final class MotionTilt {
         let base = reference ?? (roll, p)
         reference = base
         let rad = 180 / Double.pi
-        // A few degrees of tilt is enough: the card tips up to 6 degrees about the vertical axis and 5 about the horizontal.
-        let targetYaw = ((roll - base.roll) * rad * 0.25).clamped(-6, 6)
-        let targetPitch = ((p - base.pitch) * rad * 0.2).clamped(-5, 5)
-        let targetShine = (0.5 + (roll - base.roll) * rad / 50).clamped(0, 1)
+        // Clearly visible: the card tips up to 14 degrees about the vertical axis and 10 about the horizontal, and the light
+        // crosses the whole card within about 30 degrees of roll.
+        let targetYaw = ((roll - base.roll) * rad * 0.55).clamped(-14, 14)
+        let targetPitch = ((p - base.pitch) * rad * 0.45).clamped(-10, 10)
+        let targetShine = (0.5 + (roll - base.roll) * rad / 30).clamped(0, 1)
         // Low-pass: move a fraction of the way each time.
-        yaw += (targetYaw - yaw) * 0.18
-        pitch += (targetPitch - pitch) * 0.18
-        shine += (targetShine - shine) * 0.18
+        yaw += (targetYaw - yaw) * 0.22
+        pitch += (targetPitch - pitch) * 0.22
+        shine += (targetShine - shine) * 0.22
     }
 }
 

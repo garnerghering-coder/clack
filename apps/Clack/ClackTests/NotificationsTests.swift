@@ -55,3 +55,20 @@ struct NotificationsTests {
         #expect(types == [.platformSet])
     }
 }
+
+struct CardPhaseTests {
+    @Test func theCardStateDecodesTheServersMomentAndStillReadsAnOlderOne() throws {
+        let json = """
+        {"status":"arrived","delayMin":0,"nextStop":null,"nextStopAt":null,"platform":"3","platformFor":"arrival","progress":1,
+        "departAt":1,"arriveAt":2,"canceled":false,"phase":"changing","note":null,"changePlatform":"5","changeAt":1791651120000}
+        """
+        let s = try JSONDecoder().decode(TripActivityAttributes.ContentState.self, from: Data(json.utf8))
+        #expect(s.phase == "changing")
+        #expect(s.changePlatform == "5")
+        #expect(s.changeAt == 1_791_651_120_000)
+        let old = """
+        {"status":"en_route","delayMin":6,"nextStop":"Alvesta","nextStopAt":1,"platform":"5","platformFor":"arrival","progress":0.4,"departAt":1,"arriveAt":2,"canceled":false}
+        """
+        #expect(try JSONDecoder().decode(TripActivityAttributes.ContentState.self, from: Data(old.utf8)).phase == nil)
+    }
+}

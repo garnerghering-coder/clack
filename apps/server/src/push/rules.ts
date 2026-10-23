@@ -128,3 +128,44 @@ export function change(a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: 
   const body = t(lang, a.arrPlatform && b.depPlatform ? 'changeBoth' : a.arrPlatform ? 'changeArrOnly' : b.depPlatform ? 'changeDepOnly' : 'changeNone', { a: a.arrPlatform ?? '', b: b.depPlatform ?? '', spare });
   return { kind: 'change', key, title: t(lang, spare < 5 ? 'changeTight' : 'changeTitle', { station }), body };
 }
+
+/** Where a trip is, for the card on the Lock Screen and the Dynamic Island (owner, 2026-10-24). */
+export type Phase = 'scheduled' | 'leaveSoon' | 'approaching' | 'boarding' | 'enRoute' | 'getOffSoon' | 'changing' | 'arrived' | 'cancelled';
+
+export interface Moment {
+  phase: Phase;
+  /** `platformChanged` for ten minutes after the platform changed, before the train has left. */
+  note: 'platformChanged' | null;
+  /** In the `changing` phase: where the next train leaves from and when. */
+  changePlatform: string | null;
+  changeAt: number | null;
+}
+
+/**
+ * The one moment the trip is in, in order of importance: cancelled, changing trains (arrived, and the next train leaves within an
+ * hour), arrived, boarding, approaching (the train is on its way to your stop), the last ten minutes before you get off, running,
+ * about to leave (30 minutes), and further off. Pure, so the server, the card and the tests agree.
+ */
+export function momentOf(
+  f: TripFacts,
+  live: { status: string; nextStopId: string | null; eta: number | null } | null,
+  next: TripFacts | null,
+  lastPlatformChangeAt: number | null,
+  now: number,
+): Moment {
+  const base = { note: null, changePlatform: null, changeAt: null } as const;
+  if (f.canceled) return { ...base, phase: 'cancelled' };
+  if (f.arrived) {
+    const changing = next && !next.canceled && !next.departed && next.expDep !== null && next.expDep > now && next.expDep - now <= 60 * MIN;
+    return changing ? { phase: 'changing', note: null, changePlatform: next.depPlatform, changeAt: next.expDep } : { ...base, phase: 'arrived' };
+  }
+  const changedRecently = lastPlatformChangeAt !== null && now - lastPlatformChangeAt <= 10 * MIN && !f.departed;
+  const note = changedRecently ? 'platformChanged' : null;
+  if (live?.status === 'boarding') return { ...base, phase: 'boarding', note };
+  if (live?.status === 'approaching') return { ...base, phase: 'approaching', note };
+  if (live?.status === 'en_route' || live?.status === 'at_stop') {
+    const soon = live.nextStopId === f.toStationId && live.eta !== null && live.eta - now <= 10 * MIN && live.eta - now >= 0;
+    return { ...base, phase: soon ? 'getOffSoon' : 'enRoute' };
+  }
+  return { ...base, phase: f.expDep !== null && f.expDep - now <= 30 * MIN ? 'leaveSoon' : 'scheduled', note };
+}

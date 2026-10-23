@@ -71,7 +71,7 @@ final class TestAlertsModel {
 
     // MARK: notifications
 
-    func fire(_ sample: Sample, type: TrainType?) async {
+    func fire(_ sample: Sample) async {
         let center = UNUserNotificationCenter.current()
         if await NotificationManager.shared.authorization == .notDetermined { _ = await NotificationManager.shared.requestPermission() }
         await NotificationManager.shared.refresh()
@@ -84,7 +84,6 @@ final class TestAlertsModel {
         content.body = sample.body
         content.subtitle = swedish ? "SJ Snabbtåg 7205 · spår \(sample.id.hasPrefix("platform") ? "7" : "5")" : "SJ Snabbtåg 7205 · platform \(sample.id.hasPrefix("platform") ? "7" : "5")"
         content.sound = NotificationArt.sound
-        if let art = NotificationArt.attachment(type: type, operatorId: "sj", colorHex: "#2ea44f") { content.attachments = [art] }
         content.threadIdentifier = "debug"
         content.interruptionLevel = sample.timeSensitive ? .timeSensitive : .active
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, delay), repeats: false)
@@ -92,98 +91,62 @@ final class TestAlertsModel {
         message = "\(label(sample.id)): arrives in \(Int(max(1, delay))) s. Lock the phone to see it there."
     }
 
-    // MARK: the trip card
+    // MARK: the trip card: one sample per moment
 
-    enum CardState: String, CaseIterable {
-        case scheduled = "Upcoming (platform 5)", approaching = "On its way to my stop (+9)", boarding = "Boarding", enRoute = "En route (45%)"
-        case late = "Late +12", platform = "Platform changed to 7", cancelled = "Cancelled", arrived = "Arrived"
+    /// One button per moment the card and the island can be in; each starts the card, or moves it to that moment.
+    enum Moment: String, CaseIterable {
+        case scheduled = "Far off (leaves in 2 h)", leaveSoon = "Leaving soon (platform 5)", platformChanged = "Platform changed to 7"
+        case approaching = "Train on its way to my stop (+9)", boarding = "Boarding", enRoute = "On the way (45%)", late = "On the way, late (+12)"
+        case getOffSoon = "Get off soon (8 min)", changing = "Changing trains (platform 5, 11 min)", arrived = "Arrived", cancelled = "Cancelled"
     }
 
-    private func state(_ s: CardState) -> TripActivityAttributes.ContentState {
-        let dep = Date(timeIntervalSinceNow: 25 * 60).timeIntervalSince1970 * 1000
-        let arr = Date(timeIntervalSinceNow: 58 * 60).timeIntervalSince1970 * 1000
-        func next(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
-        switch s {
+    private func state(_ m: Moment) -> TripActivityAttributes.ContentState {
+        func at(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
+        typealias S = TripActivityAttributes.ContentState
+        switch m {
         case .scheduled:
-            return .init(status: "scheduled", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "5", platformFor: "departure", progress: 0, departAt: dep, arriveAt: arr, canceled: false)
+            return S(status: "scheduled", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: nil, platformFor: "departure", progress: 0, departAt: at(120), arriveAt: at(153), canceled: false, phase: "scheduled")
+        case .leaveSoon:
+            return S(status: "scheduled", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "5", platformFor: "departure", progress: 0, departAt: at(22), arriveAt: at(55), canceled: false, phase: "leaveSoon")
+        case .platformChanged:
+            return S(status: "scheduled", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "7", platformFor: "departure", progress: 0, departAt: at(18), arriveAt: at(51), canceled: false, phase: "leaveSoon", note: "platformChanged")
         case .approaching:
-            return .init(status: "approaching", delayMin: 9, nextStop: from, nextStopAt: next(8), platform: "5", platformFor: "departure", progress: 0, departAt: dep + 9 * 60_000, arriveAt: arr + 9 * 60_000, canceled: false)
+            return S(status: "approaching", delayMin: 9, nextStop: from, nextStopAt: at(8), platform: "5", platformFor: "departure", progress: 0, departAt: at(17), arriveAt: at(50), canceled: false, phase: "approaching")
         case .boarding:
-            return .init(status: "boarding", delayMin: 0, nextStop: from, nextStopAt: dep, platform: "5", platformFor: "departure", progress: 0, departAt: dep, arriveAt: arr, canceled: false)
+            return S(status: "boarding", delayMin: 0, nextStop: from, nextStopAt: at(4), platform: "5", platformFor: "departure", progress: 0, departAt: at(4), arriveAt: at(37), canceled: false, phase: "boarding")
         case .enRoute:
-            return .init(status: "en_route", delayMin: 2, nextStop: "Alvesta", nextStopAt: next(14), platform: "3", platformFor: "arrival", progress: 0.45, departAt: next(-15), arriveAt: next(18), canceled: false)
+            return S(status: "en_route", delayMin: 2, nextStop: "Alvesta", nextStopAt: at(14), platform: "3", platformFor: "arrival", progress: 0.45, departAt: at(-15), arriveAt: at(18), canceled: false, phase: "enRoute")
         case .late:
-            return .init(status: "en_route", delayMin: 12, nextStop: "Alvesta", nextStopAt: next(20), platform: "3", platformFor: "arrival", progress: 0.5, departAt: next(-15), arriveAt: next(30), canceled: false)
-        case .platform:
-            return .init(status: "boarding", delayMin: 0, nextStop: from, nextStopAt: dep, platform: "7", platformFor: "departure", progress: 0, departAt: dep, arriveAt: arr, canceled: false)
-        case .cancelled:
-            return .init(status: "cancelled", delayMin: nil, nextStop: nil, nextStopAt: nil, platform: nil, platformFor: "departure", progress: 0, departAt: dep, arriveAt: arr, canceled: true)
+            return S(status: "en_route", delayMin: 12, nextStop: "Alvesta", nextStopAt: at(20), platform: "3", platformFor: "arrival", progress: 0.5, departAt: at(-15), arriveAt: at(30), canceled: false, phase: "enRoute")
+        case .getOffSoon:
+            return S(status: "en_route", delayMin: 0, nextStop: to, nextStopAt: at(8), platform: "3", platformFor: "arrival", progress: 0.92, departAt: at(-32), arriveAt: at(8), canceled: false, phase: "getOffSoon")
+        case .changing:
+            return S(status: "arrived", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "3", platformFor: "arrival", progress: 1, departAt: at(-40), arriveAt: at(-1), canceled: false, phase: "changing", changePlatform: "5", changeAt: at(11))
         case .arrived:
-            return .init(status: "arrived", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "3", platformFor: "arrival", progress: 1, departAt: next(-30), arriveAt: next(0), canceled: false)
+            return S(status: "arrived", delayMin: 0, nextStop: nil, nextStopAt: nil, platform: "3", platformFor: "arrival", progress: 1, departAt: at(-33), arriveAt: at(0), canceled: false, phase: "arrived")
+        case .cancelled:
+            return S(status: "cancelled", delayMin: nil, nextStop: nil, nextStopAt: nil, platform: nil, platformFor: "departure", progress: 0, departAt: at(25), arriveAt: at(58), canceled: true, phase: "cancelled")
         }
     }
 
-    func show(_ s: CardState) async {
+    func show(_ m: Moment) async {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             message = "Live Activities are off for Clack in iPhone Settings."
             return
         }
-        let content = ActivityContent(state: state(s), staleDate: Date(timeIntervalSinceNow: 3600))
+        let content = ActivityContent(state: state(m), staleDate: Date(timeIntervalSinceNow: 3600))
         if let activity {
             await activity.update(content)
-            message = "Trip card: \(s.rawValue)"
+            message = "Trip card: \(m.rawValue)"
             return
         }
         let attributes = TripActivityAttributes(legId: "debug-sample", journeyId: nil, train: "7205", from: from, to: to, fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm", color: "#2ea44f")
         do {
             activity = try Activity.request(attributes: attributes, content: content, pushType: nil)
-            message = "Trip card started: \(s.rawValue). Lock the phone, or go Home to see it in the Dynamic Island."
+            message = "Trip card started: \(m.rawValue). Lock the phone, or press Home and hold the island."
         } catch {
             message = "Couldn't start the trip card: \(error.localizedDescription)"
         }
-    }
-
-    // MARK: demo cards: the same card with a picture of the train, a sketch of the route, or both
-
-    /// Stockholm to Malmö, roughly (a few stations along the line), as a route sketch would carry it.
-    private let demoRoute: [[Double]] = [
-        [59.330, 18.058], [59.196, 17.626], [59.000, 16.200], [58.590, 16.185], [58.416, 15.625],
-        [57.652, 14.697], [56.899, 14.553], [56.158, 13.766], [55.705, 13.187], [55.609, 13.001],
-    ]
-    private var demoProgress = 0.35
-
-    func startDemo(picture: Bool, route: Bool) async {
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            message = "Live Activities are off for Clack in iPhone Settings."
-            return
-        }
-        await endCard()
-        demoProgress = 0.35
-        let attributes = TripActivityAttributes(
-            legId: "debug-sample", journeyId: nil, train: "547", from: "Stockholm C", to: "Malmö C", fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm",
-            color: "#2ea44f", art: picture ? "x2000-sj" : nil, route: route ? demoRoute : nil
-        )
-        do {
-            activity = try Activity.request(attributes: attributes, content: ActivityContent(state: demoState(), staleDate: Date(timeIntervalSinceNow: 3600)), pushType: nil)
-            message = "Demo card started (\(picture && route ? "picture and route" : picture ? "train picture" : "route sketch")). Lock the phone. Use 'Move the train forward' to see it travel."
-        } catch {
-            message = "Couldn't start the card: \(error.localizedDescription)"
-        }
-    }
-
-    private func demoState() -> TripActivityAttributes.ContentState {
-        func at(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
-        return .init(status: "en_route", delayMin: 9, nextStop: "Hässleholm C", nextStopAt: at(14), platform: "3", platformFor: "arrival", progress: demoProgress, departAt: at(-70), arriveAt: at(115), canceled: false)
-    }
-
-    func advanceDemo() async {
-        guard let activity else {
-            message = "Start a demo card first."
-            return
-        }
-        demoProgress = min(1, demoProgress + 0.12)
-        await activity.update(ActivityContent(state: demoState(), staleDate: Date(timeIntervalSinceNow: 3600)))
-        message = "Train at \(Int(demoProgress * 100))%."
     }
 
     func endCard() async {
@@ -211,7 +174,7 @@ struct TestAlertsScreen: View {
                 Text("Alert in").clack(.sectionHeader).foregroundStyle(Ink.text2)
                 SegmentedControl(selection: Binding(get: { model.delay }, set: { model.delay = $0 }), options: [(5, "5 s"), (15, "15 s"), (30, "30 s")], small: true)
                 ForEach(model.samples(language: app.settings.language)) { sample in
-                    Button { Task { await model.fire(sample, type: app.trainTypes.first { $0.id == "x2000" } ?? app.trainTypes.first) } } label: {
+                    Button { Task { await model.fire(sample) } } label: {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(model.label(sample.id)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(sample.body).clack(.caption).foregroundStyle(Ink.text2).multilineTextAlignment(.leading)
@@ -224,20 +187,12 @@ struct TestAlertsScreen: View {
 
             Card {
                 Text("Trip card (Lock Screen and Dynamic Island)").clack(.sectionHeader).foregroundStyle(Ink.text2)
-                ForEach(TestAlertsModel.CardState.allCases, id: \.self) { s in
-                    Button(s.rawValue) { Task { await model.show(s) } }.buttonStyle(.clack(wide: true))
+                Text("Press a moment to start the card there, then another to move it. Compare the small island on each.")
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                ForEach(TestAlertsModel.Moment.allCases, id: \.self) { m in
+                    Button(m.rawValue) { Task { await model.show(m) } }.buttonStyle(.clack(wide: true))
                 }
                 Button("End the trip card") { Task { await model.endCard() } }.buttonStyle(.clack(.danger, wide: true))
-            }
-
-            Card {
-                Text("Lock Screen card: picture and map demos").clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Text("Same card, with a drawing of the train, a sketch of the route with the train as a dot, or both. Lock the phone to see it.")
-                    .clack(.caption).foregroundStyle(Ink.text2)
-                Button("A: with the train picture") { Task { await model.startDemo(picture: true, route: false) } }.buttonStyle(.clack(wide: true))
-                Button("B: with the route sketch") { Task { await model.startDemo(picture: false, route: true) } }.buttonStyle(.clack(wide: true))
-                Button("A + B: both") { Task { await model.startDemo(picture: true, route: true) } }.buttonStyle(.clack(wide: true))
-                Button("Move the train forward") { Task { await model.advanceDemo() } }.buttonStyle(.clack(wide: true))
             }
 
             Card {
