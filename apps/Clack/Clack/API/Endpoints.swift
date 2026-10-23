@@ -81,4 +81,11 @@ extension APIClient {
     func createLeg(_ body: CreateLegBody) async throws -> LegDetail { try await send("POST", ["legs"], body: body) }
 
     func createManualLeg(_ body: ManualLegBody) async throws -> LegDetail { try await send("POST", ["legs", "manual"], body: body) }
+
+    /// The Passport for a year (nil = all time). Commuter trains and the CO2 comparison are asked for explicitly.
+    func passport(year: Int?, commuter: Bool, comparison: Co2Comparison) async throws -> Passport {
+        var query = ["year": year.map(String.init) ?? "all", "commuter": commuter ? "true" : "false"]
+        query["comparison"] = comparison.rawValue
+        return try await get(["passport"], query: query)
+    }
 }
