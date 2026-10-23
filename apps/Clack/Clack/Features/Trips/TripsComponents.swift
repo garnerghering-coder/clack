@@ -67,7 +67,8 @@ struct FlapTimes: View {
         let arr = leg.schedArr?.ms
         let plus = (dep != nil && arr != nil && leg.destination != nil)
             ? Format.dayOffset(from: dep!, fromTz: TripsLogic.tz(leg), to: arr!, toTz: leg.destination!.tz) : 0
-        HStack(spacing: 6) {
+        // Wraps onto a second line when both struck and new times don't fit, as the web's inline times do.
+        FlowLayout(spacing: 6, lineSpacing: 2) {
             FlapTime(time: x.dep, sched: dep, tz: TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro)
             Text("–").foregroundStyle(Ink.text3)
             FlapTime(

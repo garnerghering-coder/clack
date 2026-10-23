@@ -20,6 +20,13 @@ struct PassportScreen: View {
     @State private var showAllStations = false
     @State private var sharing = false
 
+    init() {
+        #if DEBUG
+        // `-share` opens the share sheet straight away, to check the cards.
+        _sharing = State(initialValue: CommandLine.arguments.contains("-share"))
+        #endif
+    }
+
     private var settings: Settings { app.settings }
     /// Old settings may hold a comparison no longer offered; it shows as a petrol car.
     private var activeComparison: Co2Comparison { comparison ?? (Settings.co2Choices.contains(settings.co2Comparison) ? settings.co2Comparison : .car1) }

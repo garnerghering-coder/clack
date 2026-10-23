@@ -226,6 +226,8 @@ struct FlapTime: View {
                         .strikethrough()
                         .font(ClackFont.inter(style == .sm ? 12 : fontSize * 0.8, .medium))
                         .foregroundStyle(Ink.text3)
+                        .lineLimit(1)
+                        .fixedSize()
                 }
                 if style == .text {
                     Text(text)

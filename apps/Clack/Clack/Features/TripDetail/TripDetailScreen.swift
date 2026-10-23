@@ -117,7 +117,10 @@ struct TripDetailScreen: View {
     }
 
     private func remove() async {
-        if (try? await app.client.deleteLeg(id)) != nil { dismiss() }
+        if (try? await app.client.deleteLeg(id)) != nil {
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            dismiss()
+        }
     }
 
     // MARK: the screen

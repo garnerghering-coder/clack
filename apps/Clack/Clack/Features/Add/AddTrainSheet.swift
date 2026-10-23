@@ -25,6 +25,7 @@ struct AddTrainSheet: View {
         }
         .task(id: model.searchKey) { await model.runSearch(app.client) }
         .task(id: model.response?.history) { await model.waitForHistory() }
+        .sensoryFeedback(.success, trigger: model.saved?.id)
     }
 
     @ViewBuilder

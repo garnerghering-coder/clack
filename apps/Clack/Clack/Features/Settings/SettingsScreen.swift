@@ -226,6 +226,7 @@ private struct DeleteMyDataRow: View {
                     .padding(.vertical, 8)
             }
         }
+        .sensoryFeedback(.warning, trigger: phase == .done)
         .confirmationDialog(l10n.t("settings.deleteConfirm"), isPresented: $confirming, titleVisibility: .visible) {
             Button(l10n.t("settings.deleteData"), role: .destructive) {
                 phase = .busy

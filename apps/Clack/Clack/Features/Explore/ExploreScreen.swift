@@ -59,6 +59,7 @@ struct ExploreScreen: View {
             }
         }
         .onDisappear { model.stop() }
+        .sensoryFeedback(.selection, trigger: model.follows.count)
     }
 
     // MARK: top bar

@@ -27,6 +27,7 @@ struct ShareSheet: View {
     @State private var medalKey: String?
     @State private var image: Image?
     @State private var file: ShareImage?
+    @State private var snapshots: [String: ShareMapSnapshot?] = [:]
 
     private var unit: DistanceUnit { app.settings.distanceUnit }
     private var language: Language { app.settings.language }
@@ -86,7 +87,7 @@ struct ShareSheet: View {
         .task(id: year ?? base.years.first) {
             if let y = shownYear, let p = try? await app.client.passport(year: y, commuter: commuter, comparison: app.settings.co2Comparison) { yearData = p }
         }
-        .task(id: CardKey(variant: variant, legId: legId, medalKey: medalKey, haveAll: all != nil, haveYear: yearData != nil, legs: legs.count)) { render() }
+        .task(id: CardKey(variant: variant, legId: legId, medalKey: medalKey, haveAll: all != nil, haveYear: yearData != nil, legs: legs.count)) { await render() }
     }
 
     private struct CardKey: Hashable { var variant: Variant; var legId: String?; var medalKey: String?; var haveAll: Bool; var haveYear: Bool; var legs: Int }
@@ -165,10 +166,26 @@ struct ShareSheet: View {
         }
     }
 
-    private func render() {
+    /// The cards' real maps are slow-ish (a second or two), so each set of routes is drawn once per sheet.
+    private func snapshot(for card: ShareCardView) async -> ShareMapSnapshot? {
+        let lines = card.routes.map { $0.geometry.map(Polyline.decode) ?? $0.ends }
+        guard lines.contains(where: { $0.count > 1 }) else { return nil }
+        let key = "\(variant.rawValue)|\(lines.map { "\($0.count):\($0.first?.lat ?? 0),\($0.last?.lon ?? 0)" }.joined(separator: ";"))"
+        if let cached = snapshots[key] { return cached }
+        let made = await ShareMapSnapshotter.make(
+            lines: lines, ends: card.routes.flatMap(\.ends), points: card.labels.map(\.at),
+            size: CGSize(width: ShareCardView.mapBox.width / 2, height: ShareCardView.mapBox.height / 2),
+            base: Config.apiBase, withBasemap: await app.mapHasBasemap()
+        )
+        snapshots[key] = .some(made)
+        return made
+    }
+
+    private func render() async {
         image = nil
         file = nil
-        guard let card else { return }
+        guard var card else { return }
+        card.map = await snapshot(for: card)
         let renderer = ImageRenderer(content: card.environment(\.colorScheme, .dark))
         renderer.scale = 1
         renderer.proposedSize = ProposedViewSize(width: ShareCardView.width, height: ShareCardView.height)
@@ -197,6 +214,8 @@ struct ShareImage: Transferable {
 struct ShareCardView: View {
     static let width: CGFloat = 1080
     static let height: CGFloat = 1350
+    /// The map's box on a stats card, in card pixels (the snapshot is taken at half this, at pixel ratio 2).
+    static let mapBox = CGSize(width: 952, height: 500)
     private static let margin: CGFloat = 64
     private static let accent = Color(hex: "#f8d64a")!
     private static let text2 = Color(hex: "#a6a6a6")!
@@ -218,6 +237,8 @@ struct ShareCardView: View {
     var labels: [Label]
     var medals: [CardMedal]
     var tagline: String
+    /// The real map behind the routes, when one could be drawn.
+    var map: ShareMapSnapshot?
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -262,7 +283,7 @@ struct ShareCardView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title).font(ClackFont.grotesk(72)).fontWeight(.heavy).foregroundStyle(.white)
                 .lineLimit(2).minimumScaleFactor(0.6).padding(.top, 14)
-            RouteMap(routes: routes, labels: labels)
+            RouteMap(routes: routes, labels: labels, snapshot: map)
                 .frame(height: medals.isEmpty ? 540 : 500)
                 .padding(.top, 30)
             HStack(alignment: .firstTextBaseline, spacing: 12) {
@@ -315,10 +336,23 @@ struct ShareCardView: View {
 private struct RouteMap: View {
     let routes: [ShareCardView.Route]
     let labels: [ShareCardView.Label]
+    var snapshot: ShareMapSnapshot?
 
     var body: some View {
         Canvas { context, size in
             let accent = Color(hex: "#f8d64a")!
+            // The real map covers the box, keeping its aspect; labels sit at where their stations landed on it.
+            if let snapshot {
+                let s = max(size.width / snapshot.size.width, size.height / snapshot.size.height)
+                let (dw, dh) = (snapshot.size.width * s, snapshot.size.height * s)
+                let (ox, oy) = ((size.width - dw) / 2, (size.height - dh) / 2)
+                context.draw(Image(uiImage: snapshot.image), in: CGRect(x: ox, y: oy, width: dw, height: dh))
+                for (i, label) in labels.enumerated() where i < snapshot.points.count {
+                    let at = CGPoint(x: ox + snapshot.points[i].x * s, y: oy + snapshot.points[i].y * s)
+                    drawLabel(&context, label.text, at: at, size: size)
+                }
+                return
+            }
             let lines = routes.map { r -> [LatLon] in r.geometry.map(Polyline.decode) ?? r.ends }.filter { $0.count > 1 }
             let all = lines.flatMap { $0 }
             guard all.count >= 2 else {
@@ -345,18 +379,24 @@ private struct RouteMap: View {
                     context.stroke(path, with: .color(accent.opacity(alpha)), style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
                 }
             }
-            for label in labels {
-                let at = to(label.at)
-                let text = Text(label.text).font(ClackFont.inter(28, .bold)).foregroundStyle(Color.white)
-                let resolved = context.resolve(text)
-                let measured = resolved.measure(in: CGSize(width: size.width * 0.45, height: 60))
-                let lx = max(20, min(at.x - measured.width / 2, size.width - measured.width - 20))
-                let ly = at.y + (at.y < size.height / 2 ? -22 : 46) - measured.height
-                context.draw(resolved, at: CGPoint(x: lx, y: ly), anchor: .topLeading)
-            }
+            for label in labels { drawLabel(&context, label.text, at: to(label.at), size: size) }
         }
         .background(Color(hex: "#161616")!)
         .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 32, style: .continuous).strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
+    }
+
+    /// A station's name under or over its dot (the web draws it white with a dark outline).
+    private func drawLabel(_ context: inout GraphicsContext, _ text: String, at: CGPoint, size: CGSize) {
+        let outline = context.resolve(Text(text).font(ClackFont.inter(28, .bold)).foregroundStyle(Color(red: 10 / 255, green: 10 / 255, blue: 10 / 255).opacity(0.85)))
+        let fill = context.resolve(Text(text).font(ClackFont.inter(28, .bold)).foregroundStyle(Color.white))
+        let measured = fill.measure(in: CGSize(width: size.width * 0.45, height: 60))
+        let lx = max(20, min(at.x - measured.width / 2, size.width - measured.width - 20))
+        // The baseline sits 22 above the dot (upper half of the box) or 46 below it.
+        let ly = at.y + (at.y < size.height / 2 ? -22 : 46)
+        for (dx, dy) in [(-2.5, 0.0), (2.5, 0.0), (0.0, -2.5), (0.0, 2.5), (-1.8, -1.8), (1.8, 1.8), (-1.8, 1.8), (1.8, -1.8)] {
+            context.draw(outline, at: CGPoint(x: lx + dx, y: ly + dy), anchor: .bottomLeading)
+        }
+        context.draw(fill, at: CGPoint(x: lx, y: ly), anchor: .bottomLeading)
     }
 }
