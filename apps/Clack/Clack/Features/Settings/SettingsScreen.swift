@@ -141,6 +141,7 @@ struct SettingsScreen: View {
                 LinkRow(label: l10n.t("settings.privacy"), route: .privacy)
                 DeleteMyDataRow()
             }
+            VersionFooter()
             #if DEBUG
             NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
                 .buttonStyle(.clack(wide: true))
@@ -195,6 +196,30 @@ private struct AlertsCard: View {
             }
         }
         .task { await manager.refresh() }
+    }
+}
+
+/// Which version of the app this is, and which commit the server runs, so it is easy to tell an update has arrived.
+private struct VersionFooter: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @State private var server: String?
+
+    private var version: String {
+        l10n.t("settings.version", [
+            "version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?",
+            "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "?",
+        ])
+    }
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(version).clack(.caption).foregroundStyle(Ink.text3)
+            if let server { Text(l10n.t("settings.serverVersion", ["version": server])).clack(.caption).foregroundStyle(Ink.text3) }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 4)
+        .task { server = try? await app.client.serverVersion() }
     }
 }
 

@@ -39,6 +39,13 @@ extension APIClient {
 
     func forgetActivity(_ token: String) async throws { try await perform("DELETE", ["live-activities", token]) }
 
+    /// The commit the server runs (`GET /api/health`), shown at the bottom of Settings.
+    func serverVersion() async throws -> String {
+        nonisolated struct Health: Decodable, Sendable { let version: String? }
+        let health: Health = try await get(["health"])
+        return health.version ?? "unknown"
+    }
+
     func operators() async throws -> [Operator] { try await get(["operators"]) }
     func trainTypes() async throws -> [TrainType] { try await get(["train-types"]) }
     func amenities() async throws -> [AmenityEntry] { try await get(["amenities"]) }

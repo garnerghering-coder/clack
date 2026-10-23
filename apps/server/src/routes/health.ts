@@ -4,6 +4,7 @@ import type { Db } from '../db/client.js';
 import { feedHealth } from '../lib/health.js';
 import { trackerFixes } from '../live/tracker.js';
 import { legAudits } from '../db/schema.js';
+import { SERVER_VERSION } from '../lib/version.js';
 import { summarize, type LegAudit } from '../audit/audit.js';
 
 export const healthRoutes =
@@ -14,6 +15,7 @@ export const healthRoutes =
       const mem = process.memoryUsage();
       return {
         ok: true,
+        version: SERVER_VERSION,
         uptimeS: Math.round(process.uptime()),
         memoryMb: { rss: Math.round(mem.rss / 1e6), heap: Math.round(mem.heapUsed / 1e6) },
         // Each upstream feed: last answer, last failure, failures in a row (ok | degraded | down | unknown).
