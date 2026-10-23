@@ -45,7 +45,7 @@ Maps follow the theme (dark: `#151515` land on `#0A0A0A` water; light: `#F7F7F7`
 | Late | 16–30 min | amber `#FF9500` | "+22" |
 | Very late | 31+ min | red `#FF453A` | "+47" |
 | Cancelled | — | red outline + strikethrough times | "Cancelled" |
-| Unknown / no data | — | grey `#8E99A8` | "—" |
+| Unknown / no data | — | grey `#8E8E8E` dark, `#8A8A8A` light (monochrome theme) | "—" |
 
 Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on-time % stat** in the Passport uses a separate constant `ON_TIME_MAX_DELAY_MIN = 5` (a common rail punctuality convention; configurable), and the Passport also shows the four-color distribution so strictness is visible.
 
@@ -66,21 +66,21 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 - Icons: Lucide, 20px, 1.75 stroke.
 
 ### 2.4 Map style (the signature visual)
-- **Basemap:** very dark, low-contrast (land `#10151D`, water `#0A0D12`, no roads except major motorways at 6% white, minimal labels: only large cities and the stations in the current view, in `text-secondary`). Self-hosted PMTiles via MapLibre (see SPEC §4).
+- **Basemap:** low-contrast, following the theme (land and water colours in §2.1; no roads except major motorways at 6% white, minimal labels: only large cities and the stations in the current view, in `text-secondary`). Self-hosted PMTiles via MapLibre (see SPEC §4).
 - **Route line (three stacked strokes):**
   1. Glow: operator color at 35% opacity, 12px wide, Gaussian blur ~6px.
   2. Body: operator color at 85% opacity, 4px wide, round caps and joins.
   3. Core: operator color lightened 55% toward white, 1.5px wide.
-- **Past vs future (live trips):** the part already travelled is full brightness; the part ahead is the same color at 35% opacity with a dashed pattern (6px dash, 6px gap).
+- **Past vs future (live trips):** the part already travelled is full brightness; the part ahead is the same color at 80% opacity, dashed (1.5 × line width dash and gap).
 - **Stops:** intermediate stops = 6px white dot with 1.5px `bg` ring. Origin/destination (your boarding/alighting) = 12px operator-color dot with 2px white ring, with name labels. Stops you passed through but didn't ride are not drawn on the map (only in the timeline).
-- **Rail network layer (toggle, off by default):** all rail lines as 1px `rgba(255,255,255,0.12)` lines under the route; stations as tiny dots at zoom ≥ 9.
-- **Train marker (live):** 14px operator-color circle with white 2px ring, a small heading chevron, and a pulsing halo (scale 1→2.4, opacity .5→0, 1.8s loop). If the position is **estimated** (no GPS), the marker is hollow (ring only) and the label says "Estimated position".
+- **Rail network layer (toggle, on by default; owner 2026-10-21):** all rail lines as 1px `rgba(255,255,255,0.12)` lines under the route; stations as tiny dots at zoom ≥ 9.
+- **Train marker (live):** on the trip map, a 14px operator-color circle with white 2px ring, a small heading chevron, and a pulsing halo (scale 1→2.4, opacity .5→0, 1.8s loop). On the Explore map, a flat Apple-Maps-style disc (white rim, operator-colour centre, a soft heading cone), no rings or pulse (owner 2026-10-21); your own train gets a yellow halo, a followed one a ring. If the position is **estimated** (no GPS), the marker is hollow (ring only) and the label says "Estimated position".
 - **Draw-on animation:** when a trip detail opens, the route line draws from origin to destination over ~1.2s (ease-out) while the camera fits the bounds with 48px padding. Skip if `prefers-reduced-motion`.
 - **Attribution:** small "© OpenStreetMap contributors" bottom-left, in `text-tertiary`.
 
 ## 3. Navigation & layout
 
-**Mobile:** bottom tab bar with three tabs: **Trips**, **Passport**, **Settings**. Trips has a "+" button in the header and a floating "+" bottom-right above the tab bar. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
+**Mobile:** bottom tab bar with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
 
 **Tablet/desktop (≥ 1024px):** left sidebar (logo, Trips, Passport, Settings, big "Add train" button). Trips screen becomes a split view: list on the left (400px), selected trip's map + details on the right. Passport and Settings are centered content (max width 960px). Add trip opens as a centered modal (560px wide).
 
@@ -241,7 +241,7 @@ Store each event with a type, timestamp and payload so that push notifications c
 
 | Interaction | Behavior |
 |---|---|
-| Split-flap | Each digit is a two-half tile; the top half flips down revealing the next digit; 280ms per digit, 40ms stagger left→right; used for times, delays, Passport hero numbers. On live updates, only changed digits flip. |
+| Split-flap | Each digit is a two-half tile; the top half flips down revealing the next digit; two 180ms halves per digit, 50ms stagger left→right; used for times, delays, Passport hero numbers. On live updates, only changed digits flip. |
 | Route draw-on | 1.2s ease-out line draw with camera fit (trip detail first open). |
 | Marker pulse | 1.8s loop, halo scale 1→2.4 and fade. |
 | Sheet | Spring snap between peek/half/full. |
