@@ -322,3 +322,18 @@ train found, ticked by default, and "Add N trains" saves them (`Logic/TicketRead
   timetable's 7205).
 - Limit: iOS lists Clack for files, not for plain text, so share the PDF attachment, not the email's text.
 - Debug: `-ticket <path>` opens a file as if it had been shared.
+
+## Working offline
+
+Live data is the truth when there is a connection; without one the app shows what it kept and estimates the rest, labelled
+"estimated" (owner, 2026-10-24).
+- **Kept on the phone** (`API/OfflineCache.swift`): trips, journeys, stations and their maps, operators, settings, the Passport (per year and
+  setting) and whether the server has a basemap. While online the app fetches and **pins** the details of every trip running or leaving
+  within 36 hours (`App/ArrivalWatcher.swift`), so they are not dropped by the 60-entry limit.
+- **Estimated** (`Logic/OfflineEstimate.swift`, `Logic/Progress.swift`): when the phone is offline, or updates for a tracked trip stop for a
+  minute, the Trips tab and the trip page work out status and progress from the stops it kept (or the leg's times alone), the last delays
+  and dead reckoning from the last GPS fix. A trip that never went live is estimated too. With fresh server updates nothing is estimated.
+- **Maps** (`Map/OfflineMaps.swift`): MapLibre's tile cache is 250 MB, and while online the map around each trip in the next 36 hours is
+  downloaded (zoom 0 to 10, 9 for long routes). Settings shows how many are saved and can clear them.
+- **Not kept:** station boards, search and live positions of other trains; the Live Activity can't receive pushes offline, so its line and
+  countdowns run by themselves and it says "estimated" when it goes stale (5 minutes after the last push).

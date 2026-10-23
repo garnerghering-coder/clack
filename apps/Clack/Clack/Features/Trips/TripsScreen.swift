@@ -12,6 +12,8 @@ final class TripsModel {
     private(set) var legs: [Leg]?
     private(set) var failed = false
     private(set) var follows: [Follow] = []
+    /// The kept details (stops and route) of the trips in the next day and a half, so they can be estimated offline.
+    private var details: [String: LegDetail] = [:]
 
     func load(_ client: APIClient) async {
         failed = false
@@ -19,6 +21,24 @@ final class TripsModel {
             legs = try await client.legs()
         } catch {
             failed = true
+        }
+    }
+
+    /// Fetches (online) or reads from the phone's copy (offline) the details of trips that are running or leave within 36 hours.
+    func loadDetails(_ client: APIClient, now: Double) async {
+        for leg in legs ?? [] where !leg.canceled && leg.actualArr == nil {
+            guard let dep = leg.schedDep?.ms, let arr = leg.schedArr?.ms, dep - now < 36 * 3_600_000, arr > now - 3_600_000 else { continue }
+            if let detail = try? await client.leg(leg.id) { details[leg.id] = detail }
+        }
+    }
+
+    /// The legs with an estimate in place of live state that has stopped coming (or that never came, offline).
+    func estimated(_ all: [Leg], offline: Bool, now: Double) -> [Leg] {
+        all.map { leg in
+            guard let estimate = OfflineEstimate.live(for: leg, detail: details[leg.id], offline: offline, now: now) else { return leg }
+            var copy = leg
+            copy.live = estimate
+            return copy
         }
     }
 
@@ -103,6 +123,7 @@ struct TripsScreen: View {
             content(now: context.date.timeIntervalSince1970 * 1000)
         }
         .task { await model.load(app.client) }
+        .task(id: app.isOffline) { await model.loadDetails(app.client, now: Date.now.timeIntervalSince1970 * 1000) }
         .task { await model.loadFollows(app.client) }
         .task { await model.listen(app.live) }
     }
@@ -110,7 +131,8 @@ struct TripsScreen: View {
     @ViewBuilder
     private func content(now: Double) -> some View {
         @Bindable var router = router
-        let legs = model.legs ?? []
+        let shown = model.legs.map { model.estimated($0, offline: app.isOffline, now: now) }
+        let legs = shown ?? []
         let (upcoming, past) = TripsLogic.partition(legs, now: now)
         let hero = TripsLogic.hero(upcoming: upcoming, past: past, now: now)
         Page {
@@ -140,7 +162,7 @@ struct TripsScreen: View {
                     Skeleton()
                 }
             }
-            if let all = model.legs {
+            if let all = shown {
                 if all.isEmpty {
                     emptyState
                     if router.tripsTab == .upcoming { FollowingSection(follows: model.follows) }

@@ -368,7 +368,12 @@
       "arrival": "Välkommen till din destination"
     },
     "version": "Version {{version}} (bygge {{build}})",
-    "serverVersion": "Server {{version}}"
+    "serverVersion": "Server {{version}}",
+    "offlineMaps": "Kartor sparade offline",
+    "offlineMapsNote": "Kartan längs dina resor det närmaste dygnet sparas medan du är uppkopplad, så rutter och tåget syns även utan täckning.",
+    "offlineMapsCount_one": "{{count}} resa sparad",
+    "offlineMapsCount_other": "{{count}} resor sparade",
+    "offlineMapsClear": "Rensa sparade kartor"
   },
   "about": {
     "title": "Källor och metod",

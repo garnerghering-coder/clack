@@ -42,10 +42,10 @@ private func temporaryDirectory() -> URL {
 
 struct OfflineCacheTests {
     @Test func keepsTheSamePathsTheWebKeeps() {
-        for path in ["/legs", "/legs/abc", "/journeys/j-1", "/operators", "/train-types", "/settings", "/amenities", "/stations/740000001", "/stations/740000001/map"] {
+        for path in ["/legs", "/legs/abc", "/journeys/j-1", "/operators", "/train-types", "/settings", "/amenities", "/stations/740000001", "/stations/740000001/map", "/passport", "/passport?year=all&commuter=true", "/map/status"] {
             #expect(OfflineCache.isCacheable(path), "\(path)")
         }
-        for path in ["/legs/abc/risk", "/legs/abc/progress", "/stations/1/board", "/passport", "/follows", "/search", "/live/trains"] {
+        for path in ["/legs/abc/risk", "/legs/abc/progress", "/stations/1/board", "/follows", "/search", "/live/trains"] {
             #expect(!OfflineCache.isCacheable(path), "\(path)")
         }
     }
@@ -59,8 +59,9 @@ struct OfflineCacheTests {
 
     @Test func neverStoresWhatTheWebWouldNot() async {
         let cache = OfflineCache(directory: temporaryDirectory())
-        await cache.store("/passport", Data("x".utf8))
-        #expect(await cache.read("/passport") == nil)
+        await cache.store("/follows", Data("x".utf8))
+        await cache.store("/search?q=a", Data("x".utf8))
+        #expect(await cache.read("/follows") == nil)
         #expect(await cache.paths().isEmpty)
     }
 

@@ -23,6 +23,8 @@ final class ArrivalWatcher {
     private(set) var pending: ArrivalMoment?
     @ObservationIgnored private var legs: [Leg] = []
     @ObservationIgnored private var lastFetch: Double = 0
+    @ObservationIgnored private var fetched: [String: Double] = [:]
+    @ObservationIgnored private var detailCache: [String: LegDetail] = [:]
 
     private static let watchKey = "clack.arrivalWatch"
     private static let shownKey = "clack.arrivalShown"
@@ -76,9 +78,34 @@ final class ArrivalWatcher {
             let manager = LiveActivityManager.shared
             for leg in fresh { manager.start(for: leg, enabled: app.settings.notify, client: app.client) }
             await manager.endFinished(legs: fresh)
+            await prefetch(fresh, app: app)
         }
         lastFetch = Self.nowMs()
         evaluate()
+    }
+
+    /// While online, keeps the details of the trips that are running or leave within 36 hours on the phone (and pinned there), so
+    /// the app can show and estimate them with no connection (owner, 2026-10-24).
+    private func prefetch(_ legs: [Leg], app: AppModel) async {
+        let client = app.client
+        let now = Self.nowMs()
+        let soon = legs.filter { leg in
+            guard !leg.canceled, leg.actualArr == nil, let dep = leg.schedDep?.ms, let arr = leg.schedArr?.ms else { return false }
+            return dep - now < 36 * 3_600_000 && arr > now - 3_600_000
+        }
+        var pinned: Set<String> = ["/legs", "/operators", "/train-types", "/settings", "/amenities", "/map/status"]
+        for leg in soon {
+            pinned.insert("/legs/\(leg.id)")
+            if let journey = leg.journeyId { pinned.insert("/journeys/\(journey)") }
+            // Not again within ten minutes: the live updates carry the changes.
+            if let last = fetched[leg.id], now - last < 10 * 60_000 { continue }
+            fetched[leg.id] = now
+            if let detail = try? await client.leg(leg.id) { detailCache[leg.id] = detail }
+            if let journey = leg.journeyId { _ = try? await client.journey(journey) }
+        }
+        await client.pin(pinned)
+        // The map around each of those trips, for when there is no connection.
+        if await app.mapHasBasemap() { await OfflineMaps.ensure(soon.compactMap { detailCache[$0.id] }, keep: Set(soon.map(\.id))) }
     }
 
     private func evaluate() {

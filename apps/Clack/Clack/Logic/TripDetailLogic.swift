@@ -15,7 +15,10 @@ nonisolated enum TripDetailLogic {
 
     /// The live state to show. No live update for a while (no connection, or the server is restarting): the phone moves
     /// the train itself.
-    static func shown(_ leg: LegDetail, live: LiveStateRow?, now: Double) -> LiveStateRow? {
+    static func shown(_ leg: LegDetail, live: LiveStateRow?, now: Double, offline: Bool = false) -> LiveStateRow? {
+        // Offline (or updates stopped): the phone works out where the train is, from the stops it has kept, even for a trip
+        // that had not gone live before the signal went.
+        if offline || live.map(isTracking) == true, let estimate = OfflineEstimate.live(for: leg.leg, detail: leg, offline: offline, now: now) { return estimate }
         guard let live, isTracking(live) else { return live }
         if now - live.updatedAt.ms > Progress.localAfterMs { return Progress.localLive(leg: leg, live: live, now: now) }
         return live

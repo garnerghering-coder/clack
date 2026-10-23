@@ -94,6 +94,15 @@ nonisolated struct APIClient: Sendable {
         return data
     }
 
+    /// The path a copy is kept under: the path itself, and for the Passport its query too (sorted, so the same choices match).
+    nonisolated static func cacheKey(_ path: String, _ query: [String: String]) -> String {
+        guard path == "/passport", !query.isEmpty else { return path }
+        return path + "?" + query.sorted { $0.key < $1.key }.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
+    }
+
+    /// Leaves these kept copies alone when old ones are dropped (the trips about to be ridden).
+    func pin(_ paths: Set<String>) async { await cache?.setPinned(paths) }
+
     /// A GET, decoded. When the server can't be reached, the kept copy of the same path is used if there is one.
     func get<T: Decodable & Sendable>(_ segments: [String], query: [String: String] = [:]) async throws -> T {
         let path = "/" + segments.joined(separator: "/")
@@ -102,10 +111,11 @@ nonisolated struct APIClient: Sendable {
             data = try await request("GET", segments, query: query)
         } catch let error as URLError where error.code != .cancelled {
             // Any HTTP answer, even an error, is not served from the cache; only a failure to reach the server is.
-            guard let cache, let kept = await cache.read(path) else { throw error }
+            guard let cache, let kept = await cache.read(Self.cacheKey(path, query)) else { throw error }
             return try JSONDecoder().decode(T.self, from: kept)
         }
-        if query.isEmpty { await cache?.store(path, data) }
+        // Responses without a query are kept; so is the Passport, per year and setting (its query is part of the key).
+        if query.isEmpty || path == "/passport" { await cache?.store(Self.cacheKey(path, query), data) }
         return try JSONDecoder().decode(T.self, from: data)
     }
 

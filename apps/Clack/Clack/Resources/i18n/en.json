@@ -368,7 +368,12 @@
       "arrival": "Welcome at your destination"
     },
     "version": "Version {{version}} (build {{build}})",
-    "serverVersion": "Server {{version}}"
+    "serverVersion": "Server {{version}}",
+    "offlineMaps": "Maps saved for offline",
+    "offlineMapsNote": "The map along your trips in the next day and a half is saved while you're online, so routes and the train still show with no signal.",
+    "offlineMapsCount_one": "{{count}} trip saved",
+    "offlineMapsCount_other": "{{count}} trips saved",
+    "offlineMapsClear": "Clear saved maps"
   },
   "about": {
     "title": "Sources & methodology",

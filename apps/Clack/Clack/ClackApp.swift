@@ -27,6 +27,7 @@ struct ClackApp: App {
             .environment(app)
             .environment(app.l10n)
             .task { await app.load() }
+            .task { OfflineMaps.configure() }
         }
     }
 }

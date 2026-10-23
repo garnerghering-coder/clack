@@ -133,6 +133,7 @@ struct SettingsScreen: View {
                 Text(l10n.t("settings.changingNote")).clack(.caption).foregroundStyle(Ink.text2)
             }
             AlertsCard(change: change)
+            OfflineMapsCard()
             Card {
                 LinkRow(label: l10n.t("settings.about"), route: .about, last: true)
             }
@@ -149,6 +150,30 @@ struct SettingsScreen: View {
                 .buttonStyle(.clack(wide: true))
             #endif
         }
+    }
+}
+
+/// The maps saved for when there is no signal (owner, 2026-10-24).
+private struct OfflineMapsCard: View {
+    @Environment(L10n.self) private var l10n
+    @State private var count = OfflineMaps.savedCount
+
+    var body: some View {
+        Card {
+            Text(l10n.t("settings.offlineMaps")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            Text(l10n.t("settings.offlineMapsCount", count: count, ["count": String(count)])).clack(.body).foregroundStyle(Ink.text)
+            Text(l10n.t("settings.offlineMapsNote")).clack(.caption).foregroundStyle(Ink.text2)
+            if count > 0 {
+                Button(l10n.t("settings.offlineMapsClear")) {
+                    Task {
+                        await OfflineMaps.clear()
+                        count = OfflineMaps.savedCount
+                    }
+                }
+                .buttonStyle(ClackButtonStyle(small: true))
+            }
+        }
+        .task { count = OfflineMaps.savedCount }
     }
 }
 

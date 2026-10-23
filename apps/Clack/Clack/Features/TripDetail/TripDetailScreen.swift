@@ -128,16 +128,16 @@ struct TripDetailScreen: View {
     @ViewBuilder
     private func detail(_ detail: LegDetail, now: Double, proxy: GeometryProxy) -> some View {
         let l = detail.leg
-        let shown = TripDetailLogic.shown(detail, live: live, now: now)
-        let tracking = TripDetailLogic.isTracking(live)
-        let stage = TripDetailLogic.stage(l, live: live, shown: shown, now: now)
+        let shown = TripDetailLogic.shown(detail, live: live, now: now, offline: app.isOffline)
+        let tracking = TripDetailLogic.isTracking(shown)
+        let stage = TripDetailLogic.stage(l, live: shown, shown: shown, now: now)
         let status = LiveRules.statusKey(l, live: live, now: now)
         let mapHeight = min(proxy.size.height * 0.55 + proxy.safeAreaInsets.top, 520)
         ScrollViewReader { scroller in
         ScrollView {
             VStack(spacing: 0) {
                 mapArea(detail, tracking: tracking, height: mapHeight, top: proxy.safeAreaInsets.top)
-                content(detail, live: live, shown: shown, tracking: tracking, stage: stage, status: status, now: now)
+                content(detail, live: shown, shown: shown, tracking: tracking, stage: stage, status: status, now: now)
                     .padding(.top, 20)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
@@ -185,13 +185,13 @@ struct TripDetailScreen: View {
     @ViewBuilder
     private func tripMap(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         let geo = detail.mapRoute()
-        let shown = TripDetailLogic.shown(detail, live: live, now: Date.now.timeIntervalSince1970 * 1000)
+        let shown = TripDetailLogic.shown(detail, live: live, now: Date.now.timeIntervalSince1970 * 1000, offline: app.isOffline)
         let train: MapTrain? = (tracking ? shown : nil).flatMap { s in
             s.lat.flatMap { lat in s.lon.map { MapTrain(lat: lat, lon: $0, bearing: s.bearing, estimated: s.positionSource != .gps || s.localEstimate) } }
         }
         RouteMapView(
             color: MapStyle.opColor(detail.leg.operator?.brandColor, dark: scheme == .dark), route: geo.route, stops: geo.stops,
-            animate: true, railNetwork: app.settings.showRailNetwork, train: train, fitTrain: shown?.status == .approaching, progress: tracking ? live?.progress : nil,
+            animate: true, railNetwork: app.settings.showRailNetwork, train: train, fitTrain: shown?.status == .approaching, progress: tracking ? shown?.progress : nil,
             label: l10n.t("detail.mapLabel", ["from": detail.leg.origin?.name ?? "", "to": detail.leg.destination?.name ?? ""]),
             topInset: top + 48, bottomInset: 30
         )
