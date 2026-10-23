@@ -97,3 +97,28 @@ struct StationSceneLogicTests {
         #expect(zoomed.named.isSubset(of: zoomed.shown))
     }
 }
+
+@MainActor
+struct StationMapSpeedTests {
+    private func stockholm() throws -> StationMap {
+        let url = try #require(Bundle(for: SceneBundleToken.self).url(forResource: "station-map", withExtension: "json"))
+        return try JSONDecoder().decode(StationMap.self, from: Data(contentsOf: url))
+    }
+
+    /// The map asks for every place's open state on every frame of a pan. With the answers kept, a whole station's
+    /// pins cost next to nothing the second time (Stockholm C was unusably slow without it).
+    @Test func aPanReusesThePinsWorkedOutForTheZoom() throws {
+        let map = try stockholm()
+        let states = PoiStateCache()
+        let now = Date().timeIntervalSince1970 * 1000
+        let cache = SceneLayoutCache()
+        let level = try #require(map.levels.first { $0.order == 0 }).id
+        func layout() { _ = cache.layout(map: map, level: level, marks: [], k: 3, state: { states.state($0, from: now, to: now) }, dim: { _ in false }) }
+        let clock = ContinuousClock()
+        let first = clock.measure { layout() }
+        let second = clock.measure { for _ in 0..<60 { layout() } }
+        #expect(first < .seconds(1))
+        // Sixty frames of panning in well under a second.
+        #expect(second < .milliseconds(300))
+    }
+}

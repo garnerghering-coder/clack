@@ -221,13 +221,22 @@ Phones need the server at a public https address. This is the free route; a smal
    ```
    sudo tee /etc/caddy/Caddyfile >/dev/null <<'EOF'
    clack-garner.duckdns.org {
-     encode gzip
+     # The live streams go through uncompressed: compressing them holds events back until a block fills, and the
+     # live map then takes ten seconds to show its trains.
+     @streams path /api/live/stream /api/live/trains/stream /api/stations/*/board/stream
+     handle @streams {
+       reverse_proxy 127.0.0.1:3001 {
+         flush_interval -1
+       }
+     }
      handle /api/* {
+       encode gzip
        reverse_proxy 127.0.0.1:3001 {
          flush_interval -1
        }
      }
      handle {
+       encode gzip
        root * /home/ubuntu/clack/apps/web/dist
        try_files {path} /index.html
        file_server

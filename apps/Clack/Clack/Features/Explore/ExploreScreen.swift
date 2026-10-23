@@ -17,6 +17,9 @@ struct ExploreScreen: View {
     @State private var now = Date().timeIntervalSince1970 * 1000
     @FocusState private var searchFocused: Bool
 
+    /// This tab is the one showing (the screen stays built while another is).
+    private var active: Bool { router.tab == .explore }
+
     var body: some View {
         ZStack(alignment: .topLeading) {
             Ink.mapBg
@@ -35,16 +38,19 @@ struct ExploreScreen: View {
         .environment(model)
         .task {
             model.attach(app)
+            model.active = active
             model.dark = scheme == .dark
             basemap = await app.mapHasBasemap()
             await model.loadFollows()
         }
         .onChange(of: scheme) { model.dark = scheme == .dark }
-        // The stream follows what's in view.
-        .task(id: "\(model.ready)|\(model.bbox ?? "")") {
-            guard model.ready, let bbox = model.bbox else { return }
+        // The stream follows what's in view. While another tab is showing it is closed (after the first full picture has
+        // arrived), and it opens again, with a fresh snapshot, when you come back.
+        .task(id: "\(model.ready)|\(model.bbox ?? "")|\(active || !model.loaded)") {
+            guard model.ready, let bbox = model.bbox, active || !model.loaded else { return }
             await model.runStream(bbox: bbox)
         }
+        .onChange(of: active) { model.active = active }
         // A train opened from a board row, a follow or a link.
         .task(id: router.pendingTrain) {
             guard let target = router.pendingTrain else { return }
@@ -58,7 +64,6 @@ struct ExploreScreen: View {
                 now = Date().timeIntervalSince1970 * 1000
             }
         }
-        .onDisappear { model.stop() }
         .sensoryFeedback(.selection, trigger: model.follows.count)
     }
 

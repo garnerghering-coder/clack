@@ -27,19 +27,15 @@ struct OperatorBadge: View {
         let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
         Group {
             if Config.showOperatorLogos, let url = logoURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image.resizable().scaledToFill()
-                            .frame(width: size, height: size)
-                            .background(.white)
-                            .clipShape(shape)
-                            .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
-                    case .failure:
-                        initials(shape)
-                    default:
-                        Color.clear
-                    }
+                if let image = LogoStore.shared.image(for: url) {
+                    Image(uiImage: image).resizable().scaledToFill()
+                        .frame(width: size, height: size)
+                        .background(.white)
+                        .clipShape(shape)
+                        .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
+                } else {
+                    // Initials until the logo is here (it is fetched at launch), never an empty square.
+                    initials(shape).task { await LogoStore.shared.load(url) }
                 }
             } else {
                 initials(shape)

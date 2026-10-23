@@ -21,10 +21,16 @@ struct RootView: View {
             Ink.bg.ignoresSafeArea()
             // The screens get the space above the tab bar, so full-bleed ones (the maps) end at it.
             VStack(spacing: 0) {
-                Group {
+                ZStack {
+                    // Explore is built at launch and kept: its map, trains and where you were are there the moment
+                    // you open it, instead of starting from scratch each time.
+                    stack(.explore) { ExploreScreen() }
+                        .opacity(router.tab == .explore ? 1 : 0)
+                        .allowsHitTesting(router.tab == .explore)
+                        .accessibilityHidden(router.tab != .explore)
                     switch router.tab {
                     case .trips: stack(.trips) { TripsScreen() }
-                    case .explore: stack(.explore) { ExploreScreen() }
+                    case .explore: EmptyView()
                     case .passport: stack(.passport) { PassportScreen() }
                     }
                 }
@@ -47,6 +53,8 @@ struct RootView: View {
         }
         .environment(app.l10n)
         .environment(router)
+        // Text can be held and selected, as anywhere on iOS (the controls turn it off for themselves).
+        .textSelection(.enabled)
         .sheet(item: $router.addRequest) { request in
             AddTrainSheet(request: request)
                 .environment(app)
@@ -60,6 +68,12 @@ struct RootView: View {
         .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }
         .task {
             try? await Task.sleep(for: .milliseconds(900))
+            // The logos come in while the splash is up (at most 2.5 s more), so no badge appears empty.
+            var waited = 0
+            while !app.logosSettled && waited < 25 {
+                try? await Task.sleep(for: .milliseconds(100))
+                waited += 1
+            }
             splashMinDone = true
         }
         .onChange(of: hideSplash) { _, hide in

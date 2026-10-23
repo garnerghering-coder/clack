@@ -147,7 +147,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
     func makeUIView(context ctx: Context) -> MLNMapView {
         let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: showRail, kind: .route(color: color))
         let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
-        let map = MLNMapView(frame: .zero, styleURL: url)
+        let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
         map.delegate = ctx.coordinator
         map.isUserInteractionEnabled = interactive
@@ -204,6 +204,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
             // Dragging the map means you want to look around: stop following the train.
             if reason.contains(.gesturePan) || reason.contains(.gesturePinch) {
+                (mapView as? ClackMapView)?.markMoved()
                 DispatchQueue.main.async { self.parent.follow = false }
             }
         }

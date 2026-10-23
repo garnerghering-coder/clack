@@ -53,6 +53,14 @@ final class ExploreModel {
     var query = ""
     var searching = false
     private(set) var stationHits: [StationHit] = []
+    /// The Explore tab is showing. When it isn't, the map is hidden and the markers stop gliding.
+    var active = true {
+        didSet {
+            controller.mapView?.isHidden = !active
+            if active { scheduleRender() }
+        }
+    }
+
     /// The theme the map is drawn in (colours of markers and routes).
     var dark = true
 
@@ -109,7 +117,8 @@ final class ExploreModel {
 
     /// Subscribes to the trains in view; re-subscribes (debounced 400 ms) when you pan or zoom.
     func runStream(bbox: String) async {
-        try? await Task.sleep(for: .milliseconds(400))
+        // Panning waits 400 ms for the map to settle; the first picture doesn't wait at all.
+        if loaded { try? await Task.sleep(for: .milliseconds(400)) }
         guard !Task.isCancelled, let client = app?.client else { return }
         while !Task.isCancelled {
             do {
@@ -169,7 +178,7 @@ final class ExploreModel {
     // MARK: drawing the trains
 
     func scheduleRender() {
-        guard renderTask == nil else { return }
+        guard renderTask == nil, active else { return }
         renderTask = Task { [weak self] in
             while let self, !Task.isCancelled {
                 let moving = self.render()
@@ -251,7 +260,20 @@ final class ExploreModel {
     // MARK: selecting a train
 
     func select(_ id: String) async {
-        guard let client = app?.client, let detail = try? await client.liveTrain(id) else { return }
+        guard let client = app?.client else { return }
+        // The ring shows at once, so the tap is seen before the details arrive.
+        controller.setSelected(id)
+        UISelectionFeedbackGenerator().selectionChanged()
+        // A tap that doesn't answer is worse than a slow one: one more try before giving up.
+        var fetched = try? await client.liveTrain(id)
+        if fetched == nil {
+            try? await Task.sleep(for: .milliseconds(400))
+            fetched = try? await client.liveTrain(id)
+        }
+        guard let detail = fetched else {
+            if selected == nil { controller.setSelected(nil) }
+            return
+        }
         selected = detail
         scheduled = nil
         collapsed = false

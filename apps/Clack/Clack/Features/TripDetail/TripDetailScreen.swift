@@ -167,13 +167,6 @@ struct TripDetailScreen: View {
             tripMap(detail, tracking: tracking, height: height, top: top)
             MapButton(icon: "arrow-left", label: l10n.t("nav.trips")) { dismiss() }
                 .padding(.leading, 16).padding(.top, top + 12)
-            MapButton(icon: "radar", label: l10n.t("liveMap.showAll")) {
-                if tracking, let number = detail.leg.trainNumber {
-                    router.pendingTrain = Router.PendingTrain(number: number, date: detail.leg.serviceDate ?? "", key: nil)
-                }
-                router.tab = .explore
-            }
-            .padding(.leading, 16).padding(.top, top + 60)
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
@@ -244,7 +237,7 @@ struct TripDetailScreen: View {
                 Text(explanationText(l.arrDelayMin)).clack(.caption).foregroundStyle(Ink.text2)
             }
             JourneyConnections(legId: l.id, journeyId: l.journeyId)
-            stopsCard(detail, color: color).id("stops")
+            stopsCard(detail, color: color, shown: shown, stage: stage, now: now).id("stops")
             TrainCard(leg: detail) { leg = $0 }.id("train")
             Card {
                 Text(l10n.t("onboard.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
@@ -409,13 +402,21 @@ struct TripDetailScreen: View {
 
     // MARK: stops, details, actions
 
-    private func stopsCard(_ detail: LegDetail, color: Color) -> some View {
+    private func stopsCard(_ detail: LegDetail, color: Color, shown: LiveStateRow?, stage: TripDetailLogic.Stage, now: Double) -> some View {
         let stops = TripDetailLogic.visibleStops(detail.stops, fullRoute: fullRoute)
+        // How far along the line the train is, so the rail shows it between the stops too.
+        let fills = TripDetailLogic.segmentFills(stops: stops, route: detail.mapRoute().route, shown: shown, stage: stage, now: now)
+        let halves = TripDetailLogic.railHalves(stops: stops, fills: fills, showTrain: stage == .during)
         let hasHidden = detail.stops.contains { $0.role == .before || $0.role == .after }
         return Card {
             Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             VStack(spacing: 0) {
-                ForEach(stops) { stop in StopRow(stop: stop, color: color) }
+                ForEach(Array(stops.enumerated()), id: \.element.id) { i, stop in
+                    StopRow(
+                        stop: stop, color: color, tense: TripDetailLogic.tense(of: stop, shown: shown, stage: stage),
+                        above: halves[i].above, below: halves[i].below
+                    )
+                }
             }
             if hasHidden {
                 Button(fullRoute ? l10n.t("detail.hideFullRoute") : l10n.t("detail.showFullRoute")) { fullRoute.toggle() }
@@ -527,6 +528,9 @@ struct StopRow: View {
     @Environment(L10n.self) private var l10n
     let stop: LegStop
     let color: Color
+    var tense = TripDetailLogic.StopTense.past
+    var above = TripDetailLogic.RailHalf()
+    var below = TripDetailLogic.RailHalf()
 
     var body: some View {
         let times = TripDetailLogic.stopTimes(stop)
@@ -537,7 +541,7 @@ struct StopRow: View {
         let band = DelayBand(delayMin: times.delay, canceled: stop.canceled)
         let showSched = actual != nil && times.sched != nil && floor(actual! / 60_000) != floor(times.sched! / 60_000)
         HStack(spacing: 10) {
-            rail(ridden: ridden).frame(width: 20)
+            rail().frame(width: 20)
             VStack(alignment: .leading, spacing: 1) {
                 NavigationLink(value: AppRoute.board(stationId: stop.stationId, arrivals: false)) {
                     Text(stop.name)
@@ -546,8 +550,8 @@ struct StopRow: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(l10n.t("board.openBoard", ["station": stop.name]))
-                if stop.role == .board { Text(l10n.t("detail.gotOn")).clack(.caption).foregroundStyle(Ink.accentInk) }
-                if stop.role == .alight { Text(l10n.t("detail.gotOff")).clack(.caption).foregroundStyle(Ink.accentInk) }
+                if stop.role == .board { Text(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn")).clack(.caption).foregroundStyle(Ink.accentInk) }
+                if stop.role == .alight { Text(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff")).clack(.caption).foregroundStyle(Ink.accentInk) }
                 if ridden && stop.reportSource == nil { Text(l10n.t("detail.noLiveData")).clack(.caption).foregroundStyle(Ink.text2) }
                 if !deviations.isEmpty { Text(deviations.joined(separator: " · ")).clack(.caption).foregroundStyle(Ink.text2) }
             }
@@ -574,21 +578,51 @@ struct StopRow: View {
         .frame(minHeight: 48)
     }
 
-    /// The vertical rail: hairline for unridden stops, the operator colour for ridden ones; it starts at the middle of
-    /// the stop you got on and ends at the middle of the one you got off.
-    private func rail(ridden: Bool) -> some View {
-        let railColor = ridden ? color : Ink.hairline
+    /// The vertical rail. Where the train has been it is the operator's colour; the rest of the ride is a dotted grey line
+    /// still to go; stretches you didn't ride are a hairline. It starts at the middle of the stop you got on and ends at
+    /// the middle of the one you got off, and a small dot shows the train between stops while it's under way.
+    private func rail() -> some View {
         let big = stop.role == .board || stop.role == .alight
+        let ridden = stop.role.isRidden
         return ZStack {
             VStack(spacing: 0) {
-                (stop.role == .board ? Color.clear : railColor).frame(maxHeight: .infinity)
-                (stop.role == .alight ? Color.clear : railColor).frame(maxHeight: .infinity)
+                if stop.role == .board { Color.clear.frame(maxHeight: .infinity) } else { half(above).frame(maxHeight: .infinity) }
+                if stop.role == .alight { Color.clear.frame(maxHeight: .infinity) } else { half(below).frame(maxHeight: .infinity) }
             }
-            .frame(width: 2)
+            .frame(width: 14)
             Circle()
-                .fill(big ? color : (ridden ? Ink.text : Ink.text3))
+                .fill(big ? color : (ridden ? (covered ? color : Ink.text) : Ink.text3))
                 .frame(width: big ? 14 : 10, height: big ? 14 : 10)
                 .overlay(Circle().strokeBorder(big ? Ink.text : Ink.bg, lineWidth: 2).padding(-2))
+        }
+    }
+
+    /// A stop the train has passed: the line below it has started to fill.
+    private var covered: Bool { below.fill > 0 || above.fill >= 1 }
+
+    private func half(_ half: TripDetailLogic.RailHalf) -> some View {
+        GeometryReader { proxy in
+            let h = proxy.size.height
+            ZStack(alignment: .top) {
+                if half.ridden {
+                    // Still to go: dotted.
+                    Path { p in
+                        p.move(to: CGPoint(x: 7, y: 0))
+                        p.addLine(to: CGPoint(x: 7, y: h))
+                    }
+                    .stroke(Ink.text3, style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
+                    if half.fill > 0 { color.frame(width: 2, height: h * half.fill).frame(maxWidth: .infinity) }
+                } else {
+                    Ink.hairline.frame(width: 2).frame(maxWidth: .infinity)
+                }
+                if let train = half.train {
+                    Circle().fill(color).frame(width: 10, height: 10)
+                        .overlay(Circle().strokeBorder(Color.white, lineWidth: 2))
+                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
+                        .frame(maxWidth: .infinity)
+                        .offset(y: h * train - 5)
+                }
+            }
         }
     }
 }

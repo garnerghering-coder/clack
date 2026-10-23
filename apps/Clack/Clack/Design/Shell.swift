@@ -29,6 +29,7 @@ struct TabBar: View {
                             .clack(.tab)
                             .foregroundStyle(active ? Ink.text : Ink.text3)
                     }
+                    .textSelection(.disabled)
                     .frame(maxWidth: .infinity, minHeight: 64)
                     .contentShape(Rectangle())
                 }

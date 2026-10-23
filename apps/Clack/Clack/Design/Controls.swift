@@ -28,6 +28,7 @@ struct ClackButtonStyle: ButtonStyle {
             .background(fill, in: RoundedRectangle(cornerRadius: radius, style: .continuous))
             .hairlineBorder(radius: radius, color: border)
             .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.45)
+            .textSelection(.disabled)
     }
 }
 
@@ -85,6 +86,7 @@ struct LinkButtonStyle: ButtonStyle {
             .foregroundStyle(Ink.accentInk)
             .underline(scheme == .light, color: Ink.accent)
             .opacity(configuration.isPressed ? 0.7 : 1)
+            .textSelection(.disabled)
     }
 }
 
@@ -106,6 +108,7 @@ struct SegmentedControl<Value: Hashable>: View {
                         .foregroundStyle(active ? Ink.onAccent : Ink.text2)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
+                        .textSelection(.disabled)
                         .padding(.horizontal, small ? 6 : 0)
                         .frame(maxWidth: .infinity, minHeight: small ? 32 : 36)
                         .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
@@ -157,6 +160,7 @@ struct ChipButton: View {
             }
             .clack(.chipButton)
             .foregroundStyle(active ? Ink.onAccent : Ink.text)
+            .textSelection(.disabled)
             .padding(.horizontal, 14)
             .frame(minHeight: 34)
             .background(active ? Ink.accent : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))

@@ -30,24 +30,29 @@ struct StationSceneView: View {
 
     @State private var size = CGSize(width: 393, height: 700)
     @State private var view = StationSceneLogic.View()
-    @State private var panBase: StationSceneLogic.View?
-    @State private var pinchBase: StationSceneLogic.View?
 
     private var rotation: Double { map.view?.rotation ?? 0 }
 
+    /// What the pins and chips are at a zoom: worked out once for each zoom, not for each frame of a pan.
+    @State private var layouts = SceneLayoutCache()
+
     var body: some View {
-        let chips = StationSceneLogic.platformChips(map: map, level: level, marks: marks, k: view.k)
-        let shown = StationSceneLogic.shownPois(map: map, level: level, k: view.k, state: poiState, dim: dimPoi)
+        let layout = layouts.layout(map: map, level: level, marks: marks, k: view.k, state: poiState, dim: dimPoi)
+        let chips = layout.chips
+        let shown = layout.pois
         let levelChanges = route?.steps.filter { $0.from.level != $0.to.level && ($0.from.level == level || $0.to.level == level) } ?? []
         ZStack(alignment: .topLeading) {
+            // One finger pans, two pinch around their midpoint: iOS's own recognizers, which handle both at once.
+            SceneGestureLayer(
+                onPan: { delta in view.tx += delta.width; view.ty += delta.height },
+                onPinch: { factor, anchor in view = StationSceneLogic.zoom(view, by: factor, aroundX: anchor.x, y: anchor.y) }
+            )
             TimelineView(.animation(paused: reduceMotion || route == nil)) { timeline in
                 Canvas { context, _ in
                     draw(&context, phase: reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 0.9) / 0.9)
                 }
             }
-            .contentShape(Rectangle())
-            .gesture(pan)
-            .simultaneousGesture(pinch)
+            .allowsHitTesting(false)
             .accessibilityLabel(map.name)
             .accessibilityAddTraits(.isImage)
 
@@ -90,28 +95,6 @@ struct StationSceneView: View {
     private func screen(_ x: Double, _ y: Double) -> CGPoint {
         let r = StationSceneLogic.rotate(x, y, degrees: rotation)
         return CGPoint(x: view.tx + r.x * view.k, y: view.ty + r.y * view.k)
-    }
-
-    // MARK: gestures: one finger pans, two pinch around their midpoint
-
-    private var pan: some Gesture {
-        DragGesture(minimumDistance: 1)
-            .onChanged { value in
-                let base = panBase ?? view
-                panBase = base
-                view = StationSceneLogic.View(tx: base.tx + value.translation.width, ty: base.ty + value.translation.height, k: base.k)
-            }
-            .onEnded { _ in panBase = nil }
-    }
-
-    private var pinch: some Gesture {
-        MagnifyGesture()
-            .onChanged { value in
-                let base = pinchBase ?? view
-                pinchBase = base
-                view = StationSceneLogic.zoom(base, by: value.magnification, aroundX: value.startLocation.x, y: value.startLocation.y)
-            }
-            .onEnded { _ in pinchBase = nil }
     }
 
     // MARK: the plan
@@ -247,6 +230,91 @@ struct StationSceneView: View {
                 .background(fill, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
                 .offset(y: -24)
         }
+    }
+}
+
+/// Catches the finger on the plan: a pan and a pinch, reported as small steps so each adds to the view.
+struct SceneGestureLayer: UIViewRepresentable {
+    var onPan: (CGSize) -> Void
+    var onPinch: (_ factor: Double, _ anchor: CGPoint) -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .clear
+        let pan = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.pan(_:)))
+        pan.maximumNumberOfTouches = 2
+        let pinch = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.pinch(_:)))
+        pan.delegate = context.coordinator
+        pinch.delegate = context.coordinator
+        view.addGestureRecognizer(pan)
+        view.addGestureRecognizer(pinch)
+        return view
+    }
+
+    func updateUIView(_ view: UIView, context: Context) {
+        context.coordinator.onPan = onPan
+        context.coordinator.onPinch = onPinch
+    }
+
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var onPan: (CGSize) -> Void = { _ in }
+        var onPinch: (Double, CGPoint) -> Void = { _, _ in }
+
+        @objc func pan(_ g: UIPanGestureRecognizer) {
+            let t = g.translation(in: g.view)
+            onPan(CGSize(width: t.x, height: t.y))
+            g.setTranslation(.zero, in: g.view)
+        }
+
+        @objc func pinch(_ g: UIPinchGestureRecognizer) {
+            guard g.numberOfTouches >= 2 || g.state == .changed else { return }
+            onPinch(Double(g.scale), g.location(in: g.view))
+            g.scale = 1
+        }
+
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer) -> Bool { true }
+    }
+}
+
+/// The chips and pins for one zoom, kept while the zoom, floor, chips and filters stay the same (panning changes
+/// none of them), so a pan only moves what is already worked out.
+@MainActor
+final class SceneLayoutCache {
+    struct Layout {
+        var chips: [StationSceneLogic.PlatformChip]
+        var pois: (shown: Set<String>, named: Set<String>)
+    }
+
+    private var key: Key?
+    private var cached: Layout?
+
+    private struct Key: Equatable {
+        var k: Double
+        var level: String
+        var marks: [StationSceneLogic.PlatformMark]
+        var states: [String: Int]
+        var dimmed: Set<String>
+    }
+
+    func layout(map: StationMap, level: String, marks: [StationSceneLogic.PlatformMark], k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool) -> Layout {
+        // The inputs that decide the pins: each place on this floor with its open state and whether it's dimmed.
+        var states: [String: Int] = [:]
+        var dimmed = Set<String>()
+        for p in map.pois where p.level == level {
+            states[p.id] = StationSceneLogic.stateRank(state(p))
+            if dim(p) { dimmed.insert(p.id) }
+        }
+        let next = Key(k: k, level: level, marks: marks, states: states, dimmed: dimmed)
+        if let cached, key == next { return cached }
+        let layout = Layout(
+            chips: StationSceneLogic.platformChips(map: map, level: level, marks: marks, k: k),
+            pois: StationSceneLogic.shownPois(map: map, level: level, k: k, state: state, dim: dim)
+        )
+        key = next
+        cached = layout
+        return layout
     }
 }
 

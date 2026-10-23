@@ -77,6 +77,20 @@ nonisolated enum OpeningHours {
     /// Parse; nil when the text uses syntax we don't evaluate (shown as "hours unverified").
     static func parse(_ text: String?) -> Hours? {
         guard let text, !text.isEmpty else { return nil }
+        parseLock.lock()
+        if let known = parseCache[text] { parseLock.unlock(); return known }
+        parseLock.unlock()
+        let parsed = parseUncached(text)
+        parseLock.lock()
+        parseCache[text] = .some(parsed)
+        parseLock.unlock()
+        return parsed
+    }
+
+    private static let parseLock = NSLock()
+    nonisolated(unsafe) private static var parseCache: [String: Hours?] = [:]
+
+    private static func parseUncached(_ text: String) -> Hours? {
         let source = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if source == "24/7" { return Hours(rules: [], always: true) }
         var rules: [Hours.Rule] = []
@@ -200,10 +214,14 @@ nonisolated enum OpeningHours {
 
     // MARK: Evaluation
 
-    private static func local(_ ms: Double) -> (date: String, weekday: Int, minute: Int) {
+    private static let stockholm: Calendar = {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = zone
-        let parts = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date(timeIntervalSince1970: ms / 1000))
+        return calendar
+    }()
+
+    private static func local(_ ms: Double) -> (date: String, weekday: Int, minute: Int) {
+        let parts = stockholm.dateComponents([.year, .month, .day, .hour, .minute], from: Date(timeIntervalSince1970: ms / 1000))
         let y = parts.year ?? 1970, m = parts.month ?? 1, d = parts.day ?? 1
         return (
             String(format: "%04d-%02d-%02d", y, m, d), weekday(epochDay: epochDay(y, m, d)),

@@ -14,6 +14,10 @@ nonisolated enum Identity {
 
     /// The stored id, or a new one saved on first launch.
     static func current() -> String {
+        #if DEBUG
+        // `-userId <uuid>` as a launch argument acts as that phone, to look at a screen with known trips.
+        if let override = UserDefaults.standard.string(forKey: "userId"), !override.isEmpty { return override.lowercased() }
+        #endif
         if let existing = load() { return existing }
         let fresh = UUID().uuidString.lowercased()
         save(fresh)

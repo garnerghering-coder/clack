@@ -75,7 +75,7 @@ private struct MultiRouteRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> MLNMapView {
         let style = MapStyle.style(base: Config.apiBase, withBasemap: withBasemap, dark: dark, railNetwork: railNetwork, kind: .multiRoute)
         let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
-        let map = MLNMapView(frame: .zero, styleURL: url)
+        let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
         map.delegate = context.coordinator
         map.setCenter(CLLocationCoordinate2D(latitude: 62, longitude: 15), zoomLevel: 4, animated: false)

@@ -32,8 +32,10 @@ extension MLNMapView {
         source.shape = shape
     }
 
-    /// Fits the points in the view (zoom no further in than `maxZoom`).
+    /// Fits the points in the view (zoom no further in than `maxZoom`). A map that hasn't been laid out yet remembers the
+    /// fit and applies it as soon as it has a size (`ClackMapView`), so it never stays on the default view.
     func fit(_ points: [LatLon], padding: UIEdgeInsets, maxZoom: Double, animated: Bool) {
+        (self as? ClackMapView)?.wantedFit = ClackMapView.Fit(points: points, padding: padding, maxZoom: maxZoom)
         guard let b = MapGeometry.bounds(points), bounds.width > 0, bounds.height > 0 else { return }
         let box = MLNCoordinateBounds(
             sw: CLLocationCoordinate2D(latitude: b.south, longitude: b.west),
@@ -41,6 +43,33 @@ extension MLNMapView {
         )
         setVisibleCoordinateBounds(box, edgePadding: padding, animated: animated, completionHandler: nil)
         if zoomLevel > maxZoom { setZoomLevel(maxZoom, animated: false) }
+    }
+}
+
+/// A map that keeps to the framing it was given (a trip's route, a journey) until the person moves it: if the view had
+/// no size when the framing was asked for, or its size changes (the card grows, the phone turns), the framing is
+/// applied again. Without this a map could stay on the default view of Sweden.
+final class ClackMapView: MLNMapView {
+    struct Fit {
+        var points: [LatLon]
+        var padding: UIEdgeInsets
+        var maxZoom: Double
+    }
+
+    var wantedFit: Fit?
+    private var laidOutSize = CGSize.zero
+    private var moved = false
+
+    /// The person panned or zoomed: stop re-applying the framing.
+    func markMoved() { moved = true }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard bounds.width > 0, bounds.height > 0, bounds.size != laidOutSize else { return }
+        laidOutSize = bounds.size
+        if let wantedFit, !moved {
+            fit(wantedFit.points, padding: wantedFit.padding, maxZoom: wantedFit.maxZoom, animated: false)
+        }
     }
 }
 

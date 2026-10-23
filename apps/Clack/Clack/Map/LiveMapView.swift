@@ -91,6 +91,7 @@ final class LiveMapController {
     /// the middle.
     func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat) {
         guard let map = mapView else { return }
+        (map as? ClackMapView)?.markMoved()
         let z = max(map.zoomLevel, minZoom)
         let metersPerPoint = map.metersPerPoint(atLatitude: c.latitude) * pow(2, map.zoomLevel - z)
         let shifted = CLLocationCoordinate2D(latitude: c.latitude - Double(offset) * metersPerPoint / 111_320, longitude: c.longitude)
@@ -98,6 +99,7 @@ final class LiveMapController {
     }
 
     func fit(_ points: [LatLon], padding: UIEdgeInsets) {
+        (mapView as? ClackMapView)?.markMoved()
         mapView?.fit(points, padding: padding, maxZoom: 14, animated: !reduceMotion)
     }
 
@@ -123,15 +125,22 @@ struct LiveMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MLNMapView {
         let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: true, kind: .live)
         let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
-        let map = MLNMapView(frame: .zero, styleURL: url)
+        let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
         map.delegate = context.coordinator
-        // Opens on Sweden and Norway, Bergen to the Finnish border, Malmö to Narvik.
+        // Opens on Sweden and Norway, Bergen to the Finnish border, Malmö to Narvik. The map may be built before it has a
+        // size (Explore is built at launch), so the framing is kept and applied when it gets one.
         map.setCenter(CLLocationCoordinate2D(latitude: 62, longitude: 14.5), zoomLevel: 4.2, animated: false)
+        map.wantedFit = ClackMapView.Fit(points: [LatLon(55.3, 4.5), LatLon(68.6, 24.5)], padding: .zero, maxZoom: 14)
         controller.mapView = map
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped(_:)))
-        for recognizer in map.gestureRecognizers ?? [] where recognizer is UITapGestureRecognizer {
-            tap.require(toFail: recognizer)
+        tap.delegate = context.coordinator
+        // Only a double tap (zoom) and a two-finger tap (zoom out) may win over a tap. The map's own single tap
+        // recognizer (it selects annotations) succeeds on every tap, so waiting for it to fail would swallow ours.
+        for recognizer in map.gestureRecognizers ?? [] {
+            if let other = recognizer as? UITapGestureRecognizer, other.numberOfTapsRequired > 1 || other.numberOfTouchesRequired > 1 {
+                tap.require(toFail: other)
+            }
         }
         map.addGestureRecognizer(tap)
         return map
@@ -140,7 +149,7 @@ struct LiveMapView: UIViewRepresentable {
     func updateUIView(_ map: MLNMapView, context: Context) {}
 
     @MainActor
-    final class Coordinator: NSObject, MLNMapViewDelegate {
+    final class Coordinator: NSObject, MLNMapViewDelegate, UIGestureRecognizerDelegate {
         let controller: LiveMapController
         let dark: Bool
 
@@ -150,10 +159,14 @@ struct LiveMapView: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MLNMapView, didFinishLoading style: MLNStyle) {
-            if let box = Optional(MLNCoordinateBounds(sw: CLLocationCoordinate2D(latitude: 55.3, longitude: 4.5), ne: CLLocationCoordinate2D(latitude: 68.6, longitude: 24.5))), controller.ready == false {
-                mapView.setVisibleCoordinateBounds(box, animated: false)
-            }
             controller.markReady()
+        }
+
+        func mapView(_ mapView: MLNMapView, regionWillChangeWith reason: MLNCameraChangeReason, animated: Bool) {
+            // The person moved the map: it keeps where they put it.
+            if reason.contains(.gesturePan) || reason.contains(.gesturePinch) || reason.contains(.gestureZoomIn) || reason.contains(.gestureZoomOut) {
+                (mapView as? ClackMapView)?.markMoved()
+            }
         }
 
         func mapView(_ mapView: MLNMapView, regionDidChangeAnimated animated: Bool) {
@@ -173,10 +186,13 @@ struct LiveMapView: UIViewRepresentable {
 
         // MARK: taps
 
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer) -> Bool { true }
+
         @objc func tapped(_ gesture: UITapGestureRecognizer) {
             guard let map = gesture.view as? MLNMapView else { return }
             let point = gesture.location(in: map)
-            let box = CGRect(x: point.x - 10, y: point.y - 10, width: 20, height: 20)
+            // A fingertip is wider than the dot: 32 pt square, and the nearest dot to the finger wins.
+            let box = CGRect(x: point.x - 16, y: point.y - 16, width: 32, height: 32)
             // Clusters zoom in two levels at the tap.
             if !map.visibleFeatures(at: point, styleLayerIdentifiers: ["clusters"]).isEmpty {
                 let at = map.convert(point, toCoordinateFrom: map)

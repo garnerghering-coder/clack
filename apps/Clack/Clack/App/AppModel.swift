@@ -50,6 +50,17 @@ final class AppModel {
         return await task.value
     }
 
+    /// The operators' logos have been fetched (or the attempt gave up): badges can show them from the first frame.
+    private(set) var logosSettled = false
+
+    /// Fetches every operator's logo into the logo store, so badges show them at once instead of after a download.
+    func prefetchLogos() async {
+        let base = Config.apiBase.absoluteString.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        let urls = operators.compactMap { $0.logoUrl }.compactMap { URL(string: base + $0) }
+        await LogoStore.shared.prefetch(urls)
+        logosSettled = true
+    }
+
     /// The landing rule has run for this launch (it runs once).
     var hasLanded = false
 
@@ -106,6 +117,7 @@ final class AppModel {
             self.amenities = loaded.3
             l10n.language = loaded.0.language
             state = .ready
+            Task { await prefetchLogos() }
         } catch {
             state = .failed
         }

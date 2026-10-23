@@ -44,6 +44,7 @@ struct StationMapScreen: View {
     @State private var live = false
     @State private var seeded = false
     @State private var cardHeight: CGFloat = 0
+    @State private var stateCache = PoiStateCache()
 
     private var tz: String { "Europe/Stockholm" }
     private var clock: ClockFormat { app.settings.clock }
@@ -108,9 +109,11 @@ struct StationMapScreen: View {
         return (t, t)
     }
 
+    /// Whether a place is open at the time being looked at. Worked out once per place per minute: the map asks for
+    /// it for every pin on every frame of a pan, and each answer means walking the opening hours minute by minute.
     private func state(_ p: StationPoi) -> OpenState {
         let w = window()
-        return OpeningHours.openState(p.openingHours, from: w.0, to: w.1).state
+        return stateCache.state(p, from: w.0, to: w.1)
     }
 
     private func levelName(_ map: StationMap, _ id: String) -> String { map.levels.first { $0.id == id }?.name ?? id }
@@ -242,7 +245,6 @@ struct StationMapScreen: View {
                 .accessibilityAddTraits(.isHeader)
             MapButton(icon: "search", label: l10n.t("stationMap.search")) { picking = .find }
             MapButton(icon: "train-front", label: l10n.t("stationMap.departures")) { router.push(.board(stationId: map.stationId, arrivals: false)) }
-            MapButton(icon: "radar", label: l10n.t("liveMap.showAll")) { router.tab = .explore }
         }
         .padding(.horizontal, 12).padding(.top, 12)
     }
@@ -438,6 +440,25 @@ struct StationMapScreen: View {
 
 private extension Int {
     var asDouble: Double { Double(self) }
+}
+
+/// Opening state per place, kept for the minute being asked about.
+@MainActor
+final class PoiStateCache {
+    private var window = ""
+    private var states: [String: OpenState] = [:]
+
+    func state(_ p: StationPoi, from: Double, to: Double) -> OpenState {
+        let key = "\(Int(from / 60_000))|\(Int(to / 60_000))"
+        if key != window {
+            window = key
+            states = [:]
+        }
+        if let known = states[p.id] { return known }
+        let computed = OpeningHours.openState(p.openingHours, from: from, to: to).state
+        states[p.id] = computed
+        return computed
+    }
 }
 
 /// One end of a walk: its caption, and what it is or "Choose…".
