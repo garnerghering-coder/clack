@@ -161,7 +161,7 @@ struct TripDetailScreen: View {
 
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
-            MapPlaceholder(height: height)
+            tripMap(detail, tracking: tracking, height: height, top: top)
             MapButton(icon: "arrow-left", label: l10n.t("nav.trips")) { dismiss() }
                 .padding(.leading, 16).padding(.top, top + 12)
             MapButton(icon: "radar", label: l10n.t("liveMap.showAll")) {
@@ -183,6 +183,23 @@ struct TripDetailScreen: View {
         }
         .frame(height: height)
         .frame(maxWidth: .infinity)
+    }
+
+    /// The interactive route map: draw-on, the rail network per setting, the train marker and the split while tracking.
+    @ViewBuilder
+    private func tripMap(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
+        let geo = detail.mapRoute()
+        let shown = TripDetailLogic.shown(detail, live: live, now: Date.now.timeIntervalSince1970 * 1000)
+        let train: MapTrain? = (tracking ? shown : nil).flatMap { s in
+            s.lat.flatMap { lat in s.lon.map { MapTrain(lat: lat, lon: $0, bearing: s.bearing, estimated: s.positionSource != .gps || s.localEstimate) } }
+        }
+        RouteMapView(
+            color: MapStyle.opColor(detail.leg.operator?.brandColor, dark: scheme == .dark), route: geo.route, stops: geo.stops,
+            animate: true, railNetwork: app.settings.showRailNetwork, train: train, progress: tracking ? live?.progress : nil,
+            label: l10n.t("detail.mapLabel", ["from": detail.leg.origin?.name ?? "", "to": detail.leg.destination?.name ?? ""]),
+            topInset: top + 48, bottomInset: 30
+        )
+        .frame(height: height)
     }
 
     @ViewBuilder

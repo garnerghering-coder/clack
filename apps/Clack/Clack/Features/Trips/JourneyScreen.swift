@@ -13,6 +13,7 @@ struct JourneyScreen: View {
     @State private var journey: Journey?
     @State private var missing = false
     @State private var lastReload: Date = .distantPast
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         Page {
@@ -33,7 +34,13 @@ struct JourneyScreen: View {
                     Tile(title: l10n.t("passport.trains"), value: String(legs.count))
                     Tile(title: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
                 }
-                MapPlaceholder(height: 240)
+                MultiRouteMapView(
+                    routes: (journey?.legs ?? []).map {
+                        MultiRoute(color: MapStyle.opColor($0.leg.operator?.brandColor, dark: scheme == .dark), geometry: $0.geometry, stops: [])
+                    },
+                    stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
+                )
+                .frame(height: 240)
                     .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                     .hairlineBorder(radius: Radius.card)
                 VStack(alignment: .leading, spacing: 0) {

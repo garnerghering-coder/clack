@@ -35,6 +35,18 @@ final class AppModel {
     /// The full leg for a trip, fetched once per leg for the session (the featured card's stops and route).
     @ObservationIgnored var legDetails: [String: LegDetail] = [:]
 
+    /// Whether the server has a basemap to draw (`GET /api/map/status`), asked once per session. Without one the maps
+    /// show just their background, with the routes on it.
+    @ObservationIgnored private var basemapTask: Task<Bool, Never>?
+
+    func mapHasBasemap() async -> Bool {
+        if let basemapTask { return await basemapTask.value }
+        let client = client
+        let task = Task<Bool, Never> { ((try? await client.get(["map", "status"])) as MapStatus?)?.basemap != nil }
+        basemapTask = task
+        return await task.value
+    }
+
     /// The landing rule has run for this launch (it runs once).
     var hasLanded = false
 
@@ -90,4 +102,10 @@ final class AppModel {
             state = .failed
         }
     }
+}
+
+/// `GET /api/map/status`: the basemap's details when it has been downloaded, else null.
+nonisolated struct MapStatus: Decodable, Sendable {
+    nonisolated struct Basemap: Decodable, Sendable {}
+    let basemap: Basemap?
 }

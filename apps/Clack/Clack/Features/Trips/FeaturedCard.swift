@@ -60,7 +60,7 @@ struct FeaturedCard: View {
         }()
         return VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
-                MapPlaceholder(height: 140)
+                featuredMap(grounded: grounded, now: now, op: op)
                 Text(tag)
                     .font(ClackFont.inter(11, .regular)).foregroundStyle(Ink.text2)
                     .padding(.vertical, 2).padding(.horizontal, 8)
@@ -93,6 +93,27 @@ struct FeaturedCard: View {
         .background(Surface.Hero(op: op))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
+    }
+
+    /// The route strip: not interactive, without controls. The train and the travelled/ahead split only when the
+    /// position is fresh; fewer than two points is an empty map.
+    @ViewBuilder
+    private func featuredMap(grounded: Bool, now: Double, op: Color) -> some View {
+        let geo = detail?.mapRoute(endsOnly: true)
+        let live = leg.live
+        Group {
+            if let geo, geo.route.count > 1 {
+                RouteMapView(
+                    color: MapStyle.opColor(leg.operator?.brandColor, dark: scheme == .dark), route: geo.route, stops: geo.stops,
+                    interactive: false, controls: false,
+                    train: grounded ? live.flatMap { l in l.lat.flatMap { lat in l.lon.map { MapTrain(lat: lat, lon: $0, bearing: l.bearing, estimated: l.positionSource == .estimated) } } } : nil,
+                    progress: grounded ? live?.progress : nil
+                )
+            } else {
+                Ink.mapBg
+            }
+        }
+        .frame(height: 140)
     }
 
     @ViewBuilder
