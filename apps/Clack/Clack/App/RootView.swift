@@ -12,6 +12,7 @@ struct RootView: View {
     @State private var splashMinDone = false
     @State private var splashGone = false
     @State private var touched = false
+    @Environment(\.scenePhase) private var scenePhase
 
     /// The splash goes once the settings have loaded (or failed to) and the tiles have had time to flip in.
     private var hideSplash: Bool { app.state != .loading && splashMinDone }
@@ -63,6 +64,21 @@ struct RootView: View {
                 .preferredColorScheme(app.colorScheme)
         }
         .preferredColorScheme(app.colorScheme)
+        // The end of a journey: held back until the splash is gone and the Add sheet is closed.
+        .fullScreenCover(item: Binding(
+            get: { splashGone && router.addRequest == nil ? app.arrivals.pending : nil },
+            set: { if $0 == nil { app.arrivals.dismiss() } }
+        )) { moment in
+            ArrivalScreen(moment: moment)
+                .environment(app)
+                .environment(app.l10n)
+                .environment(router)
+        }
+        // Watches for a journey ending while the app is in front.
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
+            await app.arrivals.run(app)
+        }
         // Any touch before the landing rule has decided cancels it.
         .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in touched = true })
         .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }

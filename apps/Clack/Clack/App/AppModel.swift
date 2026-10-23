@@ -23,6 +23,7 @@ final class AppModel {
     let connection: ConnectionState
     let offlineCache: OfflineCache
     @ObservationIgnored private(set) var live: LiveHub
+    let arrivals = ArrivalWatcher()
     @ObservationIgnored private(set) var stations: StationDirectory
 
     /// The last change to settings couldn't be saved.

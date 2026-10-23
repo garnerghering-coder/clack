@@ -14,6 +14,8 @@ struct TripProgressView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let legId: String
     var quietIfNothing = false
+    /// Progress already worked out (a whole journey's), instead of the trip's own.
+    var given: TripProgress?
     @State private var progress: TripProgress?
     @State private var filled = false
     @State private var shown = false
@@ -25,7 +27,11 @@ struct TripProgressView: View {
             if let progress { content(progress) }
         }
         .task(id: legId) {
-            progress = try? await app.client.tripProgress(legId)
+            if let given {
+                progress = given
+            } else {
+                progress = try? await app.client.tripProgress(legId)
+            }
             try? await Task.sleep(for: .milliseconds(120))
             shown = true
             filled = true

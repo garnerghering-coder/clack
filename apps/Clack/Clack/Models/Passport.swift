@@ -58,6 +58,13 @@ nonisolated struct TripProgress: Codable, Hashable, Sendable {
     let moved: [Moved]
     let firsts: Firsts?
 
+    init(counted: Bool, unlocked: [Milestone], moved: [Moved], firsts: Firsts?) {
+        self.counted = counted
+        self.unlocked = unlocked
+        self.moved = moved
+        self.firsts = firsts
+    }
+
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         counted = try c.decode(Bool.self, forKey: .counted)
