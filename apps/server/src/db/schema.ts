@@ -247,7 +247,7 @@ export const legEvents = sqliteTable(
     id: integer('id').primaryKey({ autoIncrement: true }),
     legId: text('leg_id').notNull().references(() => legs.id, { onDelete: 'cascade' }),
     ts: timestamp('ts').notNull(),
-    // delayed | platform_changed | cancelled | short_turned | departed | arrived
+    // delayed | platform_set | platform_changed | cancelled | short_turned | departed | arrived
     type: text('type').notNull(),
     payload: text('payload', { mode: 'json' }).$type<Record<string, unknown>>().notNull().default(sql`'{}'`),
   },
@@ -279,6 +279,49 @@ export const liveState = sqliteTable('live_state', {
   /** Last time Trafikverket or Entur answered for this leg; the app says when this goes quiet. */
   reportedAt: timestamp('reported_at'),
 });
+
+// ---------- Push (alerts and Live Activities) ----------
+
+/** A phone that can be sent alerts: Apple's address for it. Gone with the user ("Delete my data"). */
+export const devices = sqliteTable(
+  'devices',
+  {
+    token: text('token').primaryKey(),
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    /** Debug builds are sandbox, TestFlight and App Store builds production: each has its own Apple host. */
+    environment: text('environment').notNull(), // sandbox | production
+    /** iOS 17.2+: lets the server start a Live Activity while the app is closed. */
+    startToken: text('start_token'),
+    createdAt: createdAt(),
+    lastSeenAt: timestamp('last_seen_at').notNull(),
+  },
+  (t) => [index('devices_user').on(t.userId)],
+);
+
+/** A running Live Activity for a trip: Apple's address for updating it. */
+export const liveActivities = sqliteTable(
+  'live_activities',
+  {
+    token: text('token').primaryKey(),
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    legId: text('leg_id').notNull().references(() => legs.id, { onDelete: 'cascade' }),
+    environment: text('environment').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [index('live_activities_leg').on(t.legId)],
+);
+
+/** What has been sent for a trip, so an alert never repeats (also after a restart). `key` tells repeats of one kind apart. */
+export const pushLog = sqliteTable(
+  'push_log',
+  {
+    legId: text('leg_id').notNull().references(() => legs.id, { onDelete: 'cascade' }),
+    kind: text('kind').notNull(),
+    key: text('key').notNull().default(''),
+    sentAt: timestamp('sent_at').notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.legId, t.kind, t.key] })],
+);
 
 // ---------- Followed trains (product brief §6.2, §8.1) ----------
 

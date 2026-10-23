@@ -48,7 +48,25 @@ export interface Settings {
   walkPace: 'relaxed' | 'normal' | 'brisk';
   stepFree: boolean;
   heavyLuggage: boolean;
+  /** Alerts (owner, 2026-10-23): the master switch is off until the person turns it on and allows notifications. */
+  notify: boolean;
+  /** Minutes before departure for the reminder; 0 = no reminder. One of LEAD_CHOICES. */
+  notifyLeadMin: number;
+  notifyPlatform: boolean;
+  /** A delay change of at least DELAY_ALERT_MIN. */
+  notifyDelay: boolean;
+  /** Cancellations and short-turns. */
+  notifyCancel: boolean;
+  /** Changes between trains of one journey, and a missed or tight one. */
+  notifyChange: boolean;
+  notifyGetOff: boolean;
+  notifyArrival: boolean;
 }
+
+/** Lead times the reminder can be set to, in minutes (0 = off). */
+export const LEAD_CHOICES = [0, 30, 60, 120, 180] as const;
+/** Smallest delay worth an alert. */
+export const DELAY_ALERT_MIN = 5;
 
 export const DEFAULT_SETTINGS: Settings = {
   displayName: '',
@@ -63,6 +81,14 @@ export const DEFAULT_SETTINGS: Settings = {
   walkPace: 'normal',
   stepFree: false,
   heavyLuggage: false,
+  notify: false,
+  notifyLeadMin: 60,
+  notifyPlatform: true,
+  notifyDelay: true,
+  notifyCancel: true,
+  notifyChange: true,
+  notifyGetOff: true,
+  notifyArrival: true,
 };
 
 /** Validate and merge a partial settings update; unknown keys and invalid values are rejected. */
@@ -80,8 +106,19 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
         if (value !== 'relaxed' && value !== 'normal' && value !== 'brisk') throw new Error(`invalid walkPace: ${String(value)}`);
         next.walkPace = value;
         break;
+      case 'notifyLeadMin':
+        if (!LEAD_CHOICES.includes(value as (typeof LEAD_CHOICES)[number])) throw new Error(`invalid notifyLeadMin: ${String(value)}`);
+        next.notifyLeadMin = value as number;
+        break;
       case 'stepFree':
       case 'heavyLuggage':
+      case 'notify':
+      case 'notifyPlatform':
+      case 'notifyDelay':
+      case 'notifyCancel':
+      case 'notifyChange':
+      case 'notifyGetOff':
+      case 'notifyArrival':
         if (typeof value !== 'boolean') throw new Error(`${key} must be true or false`);
         next[key] = value;
         break;

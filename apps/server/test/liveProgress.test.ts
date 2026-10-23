@@ -97,9 +97,10 @@ describe('leg events', () => {
     expect(diffEvents(base, { ...base, arrivedAt: 5, arrivalDelayMin: 2 }).map((e) => e.type)).toEqual(['arrived']);
   });
 
-  it('ignores small wobbles and first platform assignments', () => {
+  it('ignores small wobbles, and reports a platform being announced for the first time (owner, 2026-10-23: alerts)', () => {
     expect(diffEvents(base, { ...base, arrivalDelayMin: 2 })).toEqual([]);
-    expect(diffEvents({ ...base, depPlatform: null }, base)).toEqual([]);
+    expect(diffEvents({ ...base, depPlatform: null }, base)).toEqual([{ type: 'platform_set', payload: { which: 'departure', to: '3' } }]);
+    expect(diffEvents(base, { ...base, depPlatform: null })).toEqual([]);
   });
 
   it('tells a cancellation from a short-turn', () => {

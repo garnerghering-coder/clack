@@ -27,7 +27,7 @@ export interface LegSummary {
 }
 
 export interface LegEvent {
-  type: 'delayed' | 'platform_changed' | 'cancelled' | 'short_turned' | 'departed' | 'arrived';
+  type: 'delayed' | 'platform_set' | 'platform_changed' | 'cancelled' | 'short_turned' | 'departed' | 'arrived';
   payload: Record<string, unknown>;
 }
 
@@ -48,5 +48,6 @@ export function diffEvents(before: LegSummary, after: LegSummary): LegEvent[] {
     ['arrPlatform', 'arrival'],
   ] as const)
     if (before[key] && after[key] && before[key] !== after[key]) out.push({ type: 'platform_changed', payload: { which, from: before[key], to: after[key] } });
+    else if (!before[key] && after[key]) out.push({ type: 'platform_set', payload: { which, to: after[key] } });
   return out;
 }

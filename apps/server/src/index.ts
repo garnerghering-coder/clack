@@ -6,6 +6,8 @@ import { startScheduler } from './jobs/scheduler.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
+import { ApnsClient, loadApnsConfig } from './push/apns.js';
+import { Notifier } from './push/notifier.js';
 import { syncBrands } from './import/brands.js';
 import { backfillTrainTypes } from './legs/trainTypes.js';
 import { regroupJourneys } from './legs/journeys.js';
@@ -68,4 +70,10 @@ if (process.env.JOBS !== 'off') {
     .then(ready);
   // Live tracking runs alongside the imports (it only needs saved trips).
   startLiveTracker(db, { log });
+  // Alerts and Live Activities: only when the Apple key is set up (APNS_KEY_ID, APNS_TEAM_ID, APNS_KEY_PATH, APNS_TOPIC).
+  const apns = loadApnsConfig();
+  if (apns) {
+    new Notifier(db, new ApnsClient(apns), { log }).start();
+    log('push: alerts on');
+  } else log('push: alerts off (no Apple key in .env)');
 } else ready();
