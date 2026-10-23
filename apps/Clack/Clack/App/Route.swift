@@ -79,6 +79,14 @@ final class Router {
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
                 if parts[0] == "journey" { tripsPath = [.journey(parts[1])] }
+                if parts[0] == "map" { tripsPath = [.stations, .board(stationId: parts[1], arrivals: false), .stationMap(StationMapLink(stationId: parts[1]))] }
+                if parts[0] == "layover" {
+                    // `-open layover:<station>|<from track>|<to track>|<arrive ms>|<depart ms>`
+                    let p = parts[1].split(separator: "|").map(String.init)
+                    if p.count == 5 {
+                        tripsPath = [.stationMap(StationMapLink(stationId: p[0], from: p[1], to: p[2], arrival: Double(p[3]), departure: Double(p[4]), live: true))]
+                    }
+                }
                 if parts[0] == "board" { tripsPath = [.stations, .board(stationId: parts[1], arrivals: false)] }
             }
         }

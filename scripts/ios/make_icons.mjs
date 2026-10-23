@@ -24,6 +24,8 @@ const ICONS = [
   'map-pin', 'maximize-2', 'moon', 'navigation', 'paw-print', 'plug', 'plus', 'radar', 'refresh-cw', 'repeat', 'route',
   'search', 'settings', 'share-2', 'sliders-horizontal', 'smartphone', 'stamp', 'star', 'ticket', 'toilet', 'train-front',
   'trash', 'volume-x', 'wifi', 'wifi-off', 'x',
+  // Station map pictograms (StationScene.tsx POI_ICONS).
+  'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];
 

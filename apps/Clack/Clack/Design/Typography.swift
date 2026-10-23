@@ -65,6 +65,7 @@ struct TextRole {
     // Big numbers, in Space Grotesk
     static let passportDistance = TextRole(size: 56, lineHeight: 60, tracking: -0.02, display: true, style: .largeTitle)
     static let passportBig = TextRole(size: 40, lineHeight: 44, display: true, style: .largeTitle)
+    static let walkBig = TextRole(size: 26, lineHeight: 30, display: true, style: .title)
     static let timeBig = TextRole(size: 36, lineHeight: 40, display: true, style: .largeTitle)
     static let heroTimes = TextRole(size: 34, lineHeight: 40, tracking: -0.01, display: true, style: .largeTitle)
     static let bigTime = TextRole(size: 26, lineHeight: 30, display: true, style: .title)

@@ -41,7 +41,7 @@ private struct DestinationView: View {
         case .privacy: PrivacyScreen()
         case .stations: StationsScreen()
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
-        case .stationMap: ComingSoonScreen(title: l10n.t("nav.stations"))
+        case .stationMap(let link): StationMapScreen(link: link)
         }
     }
 }
