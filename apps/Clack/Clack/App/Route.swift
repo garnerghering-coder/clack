@@ -105,6 +105,8 @@ final class Router {
     var passportPath: [AppRoute] = []
     /// The Add a train sheet, when it's open: a full-height sheet over everything, tab bar included.
     var addRequest: AddRequest?
+    /// A ticket shared to Clack, waiting to be read.
+    var ticketFile: TicketFile?
 
     struct AddRequest: Identifiable, Hashable {
         let id = UUID()

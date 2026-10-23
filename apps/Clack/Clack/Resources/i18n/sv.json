@@ -896,5 +896,18 @@
     "arrived": "Framme",
     "welcomeTo": "Välkommen till",
     "seeJourney": "Visa resan"
+  },
+  "ticketImport": {
+    "title": "Från din biljett",
+    "unreadable": "Clack kunde inte läsa den här biljetten. Den läser SJ:s biljetter och kvitton, som PDF eller som mejl med PDF:en bifogad.",
+    "addByHand": "Lägg till ett tåg",
+    "matching": "Letar efter tåget…",
+    "found": "Hittat i tidtabellen",
+    "notFound": "Tåget finns inte i tidtabellen",
+    "already": "Finns redan i dina resor",
+    "added": "Tillagd",
+    "failed": "Kunde inte lägga till tåget",
+    "add_one": "Lägg till {{count}} tåg",
+    "add_other": "Lägg till {{count}} tåg"
   }
 }

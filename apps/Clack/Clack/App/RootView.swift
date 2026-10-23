@@ -63,6 +63,14 @@ struct RootView: View {
                 .environment(router)
                 .preferredColorScheme(app.colorScheme)
         }
+        .sheet(item: $router.ticketFile) { file in
+            TicketImportSheet(file: file)
+                .environment(app)
+                .environment(app.l10n)
+                .environment(router)
+                .preferredColorScheme(app.colorScheme)
+        }
+        .onOpenURL { url in openTicket(url) }
         .preferredColorScheme(app.colorScheme)
         // The end of a journey: held back until the splash is gone and the Add sheet is closed.
         .fullScreenCover(item: Binding(
@@ -104,6 +112,25 @@ struct RootView: View {
             }
         }
         .task { await land() }
+        #if DEBUG
+        // `-ticket <path>` opens a file as if it had been shared to Clack.
+        .task {
+            if let at = CommandLine.arguments.firstIndex(of: "-ticket"), at + 1 < CommandLine.arguments.count {
+                try? await Task.sleep(for: .seconds(2))
+                openTicket(URL(fileURLWithPath: CommandLine.arguments[at + 1]))
+            }
+        }
+        #endif
+    }
+
+    /// A file shared to Clack ("Open in Clack"): copied at once, since the system's copy may go away, then read.
+    private func openTicket(_ url: URL) {
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        let copy = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString)-\(url.lastPathComponent)")
+        guard (try? FileManager.default.copyItem(at: url, to: copy)) != nil else { return }
+        router.addRequest = nil
+        router.ticketFile = TicketFile(url: copy, name: url.lastPathComponent)
     }
 
     /// One tab's stack: its root screen, and whatever has been pushed onto it (kept when you switch tabs).

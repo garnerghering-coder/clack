@@ -297,3 +297,19 @@ All three are native iOS features, built in Swift inside the same Xcode project.
 
 Guidelines to keep in mind: widgets and notifications must relate to the app (2.5.16); the app must work without
 push permission (4.5.4); no marketing pushes without opt-in.
+
+## Sharing a ticket to Clack
+
+Clack is listed in the iOS share sheet for PDF files and emails (`CFBundleDocumentTypes` in `apps/Clack/Clack/Info.plist`,
+rank Alternate). Tapping it opens Clack, which copies the file, reads it on the phone and shows "From your ticket": each
+train found, ticked by default, and "Add N trains" saves them (`Logic/TicketReader.swift`,
+`Features/Add/TicketImportSheet.swift`). The file is never sent anywhere or kept; only the trips you choose are saved.
+
+- Read so far, from real documents: SJ ticket PDFs (Swedish and English, one train per page) and SJ receipts (no train
+  number), also as an .eml with the PDF attached. Anything else says it couldn't read it and offers Add a train.
+  Not yet seen, so not read: Wallet passes and other operators' tickets.
+- A train is found in the timetable by its two stations, the date and the exact departure minute. The train number is
+  only a tie-break: SJ's printed number can differ from the timetable's for regional trains (a ticket's 7225 was the
+  timetable's 7205).
+- Limit: iOS lists Clack for files, not for plain text, so share the PDF attachment, not the email's text.
+- Debug: `-ticket <path>` opens a file as if it had been shared.

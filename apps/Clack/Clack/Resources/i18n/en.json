@@ -896,5 +896,18 @@
     "arrived": "Arrived",
     "welcomeTo": "Welcome to",
     "seeJourney": "See journey"
+  },
+  "ticketImport": {
+    "title": "From your ticket",
+    "unreadable": "Clack couldn't read this ticket. It reads SJ tickets and receipts, as PDF files or emails with the PDF attached.",
+    "addByHand": "Add a train",
+    "matching": "Looking for the train…",
+    "found": "Found in the timetable",
+    "notFound": "This train isn't in the timetable",
+    "already": "Already in your trips",
+    "added": "Added",
+    "failed": "Couldn't add this train",
+    "add_one": "Add {{count}} train",
+    "add_other": "Add {{count}} trains"
   }
 }
