@@ -6,23 +6,22 @@
 import Foundation
 
 nonisolated enum Config {
-    /// Where the Clack server is. Debug in the simulator: the server on this Mac. Debug on a phone: the Mac by
-    /// name, through Vite's proxy (`npm run dev:phone`). Release: the hosted server (docs/IOS.md step 9).
+    /// Where the Clack server is: the hosted one, on the internet, for every build on a phone. Only a debug build in the
+    /// simulator uses the server running on this Mac (`npm run dev`), because that is where it is being worked on.
+    /// `-apiBase https://...` as a launch argument points a debug build anywhere else.
     static let apiBase: URL = {
+        let hosted = URL(string: "https://clack-garner.duckdns.org")!
         #if DEBUG
-        // `-apiBase https://...` as a launch argument points a debug build at another server (the hosted one).
         if let override = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: override) { return url }
         #if targetEnvironment(simulator)
         return URL(string: "http://localhost:3001")!
         #else
-        return URL(string: "http://\(macHostName).local:5173")!
+        return hosted
         #endif
         #else
-        return URL(string: "https://clack-garner.duckdns.org")!
+        return hosted
         #endif
     }()
-    /// The Mac's local name: System Settings > General > Sharing > Local hostname, without ".local".
-    static let macHostName = "Garners-MacBook-Air"
     /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
     static let showOperatorLogos = true
     /// Shown on the Privacy screen when set (docs/APP_STORE.md, 1.5).
