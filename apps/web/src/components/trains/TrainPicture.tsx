@@ -14,6 +14,8 @@ import { ReginaSide } from './Regina';
 import { X31Side } from './X31';
 import { X2000Side } from './X2000';
 import { X3Side } from './X3';
+import { X74Side } from './X74';
+import { Y31Side } from './Y31';
 import { X40Side } from './X40';
 import { X55Side } from './X55';
 import { X60Side } from './X60';
@@ -50,6 +52,9 @@ const DETAILED: Record<string, Detailed> = {
   x61_vt: { component: X61VTSide as Side, liveries: [] },
   x62: { component: X62Side as Side, liveries: ['norrtag'] },
   // DSB's ETs ran in Öresundståg paint before going to Skåne (2022–23); its 2000 blue-band livery is gone.
+  x74: { component: X74Side as Side, liveries: ['vr'] },
+  // Värmlandstrafik's: the newest dated photos (2016–20) show the old paint, and its repaint started in 2026: unpainted.
+  y31: { component: Y31Side as Side, liveries: ['krosatag', 'vasttagen'] },
   x31: { component: X31Side as Side, liveries: ['oresundstag', 'dsb'] },
   er1: { component: Er1Side as Side, liveries: ['malartag'] },
   // Picked per train from the set the live feed names; without it ('flytoget') the simple outline.
