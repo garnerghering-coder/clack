@@ -46,6 +46,7 @@ shown to the owner until step 5 passes.
 
 - `scripts/trains/<model>.py`: the drawing, with the measured numbers and their sources. Prints the SVG.
 - `scripts/trains/lib.py`: the shared kit (body, doors, windows, bogies, livery layers). `python3 scripts/trains/<model>.py <livery>` prints one livery's SVG for the overlay; `--tsx` writes the component with every livery.
+- `scripts/trains/export_svg.py`: writes every model and livery as a standalone SVG file to `assets/trains/` (`<model>-<livery>.svg`, `plain` = unpainted). Rerun it after changing a drawing, together with `--tsx`.
 - `apps/web/src/components/trains/TrainPicture.tsx`: which train types have a drawing, and which operators' liveries.
 
 ## Lessons (X3, 2026-10-22)

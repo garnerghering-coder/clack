@@ -165,9 +165,12 @@ export function {component}({{ livery, muted = false, className, label }}: {{ li
 
 
 def main(d, component, comment, out_tsx):
-    """Command line for a model script: `<livery>` prints that livery's SVG; `--tsx` writes the component."""
+    """Command line for a model script: `<livery>` prints that livery's SVG; `--tsx` writes the component; `--liveries`
+    lists the liveries (for export_svg.py)."""
     arg = sys.argv[1] if len(sys.argv) > 1 else PLAIN
-    if arg == '--tsx':
+    if arg == '--liveries':
+        print(json.dumps(d.liveries))
+    elif arg == '--tsx':
         t = ' | '.join(json.dumps(l) for l in d.liveries)
         open(out_tsx, 'w').write(d.tsx(component, comment, t))
         print(f'wrote {out_tsx}')

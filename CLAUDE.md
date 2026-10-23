@@ -40,7 +40,8 @@ history. The owner is Garner (he/him).
 - `npm test`: all tests (vitest). `npm run typecheck`.
 - `cd apps/web && npm run ios`: build the web app for the phone and copy it into the Xcode project; then Cmd+R in
   Xcode. `CLACK_DEV_URL=http://localhost:5173 npx cap sync ios` makes the simulator load the live dev server instead.
-- `python3 scripts/trains/<model>.py`: regenerate a train drawing.
+- `python3 scripts/trains/<model>.py --tsx`: regenerate a train drawing's component; then
+  `python3 scripts/trains/export_svg.py` to refresh the SVG files in `assets/trains/`.
 
 ## Commits
 
