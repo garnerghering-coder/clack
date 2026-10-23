@@ -59,6 +59,12 @@
 	<!-- Only "My location" on a station map asks; the position stays on the phone (Privacy page). -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Clack uses your location only when you tap My location on a station map, to show where you are in the station. It stays on your phone.</string>
+	<!-- Plain http only to this Mac on the local network, while developing (docs/IOS.md, step 6); the real server is https. -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<!-- Only standard HTTPS: exempt from export compliance documentation. -->
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>

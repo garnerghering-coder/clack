@@ -28,6 +28,8 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
+    // The iOS app in development loads this server by the Mac's Bonjour name (docs/IOS.md, step 6).
+    allowedHosts: ['.local'],
     // CLACK_API lets a second copy (say, a simulation server on another port) run side by side.
     proxy: { '/api': process.env.CLACK_API ?? 'http://127.0.0.1:3001' },
   },

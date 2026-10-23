@@ -18,6 +18,10 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: { launchShowDuration: 0, backgroundColor: '#0a0a0a' },
   },
+  // Trying the app before the server is online (docs/IOS.md, step 6): CLACK_DEV_URL=http://<your-mac>.local:5173 npx cap
+  // sync ios makes the app load the dev server on the Mac (npm run dev:phone), which also passes /api on to the local
+  // server. Leave it unset for a real build: the app then uses its own copy of the pages.
+  ...(process.env.CLACK_DEV_URL ? { server: { url: process.env.CLACK_DEV_URL, cleartext: true } } : {}),
 };
 
 export default config;
