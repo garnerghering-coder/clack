@@ -35,4 +35,8 @@ struct TripActivityAttributes: ActivityAttributes {
     var toTz: String
     /// The operator's colour, `#rrggbb`.
     var color: String?
+    /// The train's drawing (an image in the widget's asset catalog), for the picture on the card. Optional.
+    var art: String? = nil
+    /// The route as `[lat, lon]` pairs, a few dozen points, for the sketch of the line on the card. Optional.
+    var route: [[Double]]? = nil
 }

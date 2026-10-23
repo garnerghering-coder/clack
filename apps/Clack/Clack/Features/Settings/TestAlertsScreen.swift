@@ -143,6 +143,49 @@ final class TestAlertsModel {
         }
     }
 
+    // MARK: demo cards: the same card with a picture of the train, a sketch of the route, or both
+
+    /// Stockholm to Malmö, roughly (a few stations along the line), as a route sketch would carry it.
+    private let demoRoute: [[Double]] = [
+        [59.330, 18.058], [59.196, 17.626], [59.000, 16.200], [58.590, 16.185], [58.416, 15.625],
+        [57.652, 14.697], [56.899, 14.553], [56.158, 13.766], [55.705, 13.187], [55.609, 13.001],
+    ]
+    private var demoProgress = 0.35
+
+    func startDemo(picture: Bool, route: Bool) async {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+            message = "Live Activities are off for Clack in iPhone Settings."
+            return
+        }
+        await endCard()
+        demoProgress = 0.35
+        let attributes = TripActivityAttributes(
+            legId: "debug-sample", journeyId: nil, train: "547", from: "Stockholm C", to: "Malmö C", fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm",
+            color: "#2ea44f", art: picture ? "x2000-sj" : nil, route: route ? demoRoute : nil
+        )
+        do {
+            activity = try Activity.request(attributes: attributes, content: ActivityContent(state: demoState(), staleDate: Date(timeIntervalSinceNow: 3600)), pushType: nil)
+            message = "Demo card started (\(picture && route ? "picture and route" : picture ? "train picture" : "route sketch")). Lock the phone. Use 'Move the train forward' to see it travel."
+        } catch {
+            message = "Couldn't start the card: \(error.localizedDescription)"
+        }
+    }
+
+    private func demoState() -> TripActivityAttributes.ContentState {
+        func at(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
+        return .init(status: "en_route", delayMin: 9, nextStop: "Hässleholm C", nextStopAt: at(14), platform: "3", platformFor: "arrival", progress: demoProgress, departAt: at(-70), arriveAt: at(115), canceled: false)
+    }
+
+    func advanceDemo() async {
+        guard let activity else {
+            message = "Start a demo card first."
+            return
+        }
+        demoProgress = min(1, demoProgress + 0.12)
+        await activity.update(ActivityContent(state: demoState(), staleDate: Date(timeIntervalSinceNow: 3600)))
+        message = "Train at \(Int(demoProgress * 100))%."
+    }
+
     func endCard() async {
         for a in Activity<TripActivityAttributes>.activities where a.attributes.legId == "debug-sample" { await a.end(nil, dismissalPolicy: .immediate) }
         activity = nil
@@ -185,6 +228,16 @@ struct TestAlertsScreen: View {
                     Button(s.rawValue) { Task { await model.show(s) } }.buttonStyle(.clack(wide: true))
                 }
                 Button("End the trip card") { Task { await model.endCard() } }.buttonStyle(.clack(.danger, wide: true))
+            }
+
+            Card {
+                Text("Lock Screen card: picture and map demos").clack(.sectionHeader).foregroundStyle(Ink.text2)
+                Text("Same card, with a drawing of the train, a sketch of the route with the train as a dot, or both. Lock the phone to see it.")
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                Button("A: with the train picture") { Task { await model.startDemo(picture: true, route: false) } }.buttonStyle(.clack(wide: true))
+                Button("B: with the route sketch") { Task { await model.startDemo(picture: false, route: true) } }.buttonStyle(.clack(wide: true))
+                Button("A + B: both") { Task { await model.startDemo(picture: true, route: true) } }.buttonStyle(.clack(wide: true))
+                Button("Move the train forward") { Task { await model.advanceDemo() } }.buttonStyle(.clack(wide: true))
             }
 
             Card {

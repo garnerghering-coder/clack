@@ -100,6 +100,80 @@ private struct RouteLine: View {
     }
 }
 
+/// The route drawn as a line (no map tiles: a Live Activity can't hold a live map), with the stretch travelled in the operator's
+/// colour, the stations at its ends and the train as a dot where it is.
+private struct RouteSketch: View {
+    let route: [[Double]]
+    let progress: Double
+    let colour: Color
+
+    var body: some View {
+        GeometryReader { g in
+            let points = project(in: g.size)
+            ZStack {
+                Path { p in
+                    guard let first = points.first else { return }
+                    p.move(to: first)
+                    points.dropFirst().forEach { p.addLine(to: $0) }
+                }
+                .stroke(Board.track, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                Path { p in
+                    let part = travelled(points)
+                    guard let first = part.first else { return }
+                    p.move(to: first)
+                    part.dropFirst().forEach { p.addLine(to: $0) }
+                }
+                .stroke(colour, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                if let start = points.first { Circle().fill(Board.text2).frame(width: 7, height: 7).position(start) }
+                if let end = points.last { Circle().strokeBorder(Board.text, lineWidth: 2).background(Circle().fill(Board.bg)).frame(width: 10, height: 10).position(end) }
+                if let train = trainPoint(points) {
+                    Circle().fill(colour).frame(width: 12, height: 12).overlay(Circle().strokeBorder(Board.text, lineWidth: 2)).position(train)
+                }
+            }
+        }
+        .accessibilityHidden(true)
+    }
+
+    /// The route fitted to the box, true to shape (east-west is stretched by the latitude), with a small margin.
+    private func project(in size: CGSize) -> [CGPoint] {
+        guard route.count > 1, size.width > 0, size.height > 0 else { return [] }
+        let lats = route.map { $0[0] }, lons = route.map { $0[1] }
+        let k = cos((lats.reduce(0, +) / Double(lats.count)) * .pi / 180)
+        let w = max((lons.max()! - lons.min()!) * k, 0.0001), h = max(lats.max()! - lats.min()!, 0.0001)
+        let pad = 8.0
+        let scale = min((size.width - 2 * pad) / w, (size.height - 2 * pad) / h)
+        let ox = (size.width - w * scale) / 2, oy = (size.height - h * scale) / 2
+        return route.map { CGPoint(x: ox + ($0[1] - lons.min()!) * k * scale, y: oy + (lats.max()! - $0[0]) * scale) }
+    }
+
+    private func lengths(_ pts: [CGPoint]) -> (cum: [Double], total: Double) {
+        var cum = [0.0]
+        for i in 1..<pts.count { cum.append(cum[i - 1] + Double(hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y))) }
+        return (cum, cum.last ?? 0)
+    }
+
+    private func at(_ pts: [CGPoint], _ d: Double) -> (point: CGPoint, index: Int) {
+        let (cum, total) = lengths(pts)
+        let target = min(max(d, 0), total)
+        var i = 1
+        while i < pts.count - 1, cum[i] < target { i += 1 }
+        let span = cum[i] - cum[i - 1]
+        let t = span > 0 ? (target - cum[i - 1]) / span : 0
+        return (CGPoint(x: pts[i - 1].x + (pts[i].x - pts[i - 1].x) * t, y: pts[i - 1].y + (pts[i].y - pts[i - 1].y) * t), i)
+    }
+
+    private func trainPoint(_ pts: [CGPoint]) -> CGPoint? {
+        guard pts.count > 1 else { return nil }
+        return at(pts, lengths(pts).total * min(max(progress, 0), 1)).point
+    }
+
+    private func travelled(_ pts: [CGPoint]) -> [CGPoint] {
+        guard pts.count > 1 else { return [] }
+        let (point, i) = at(pts, lengths(pts).total * min(max(progress, 0), 1))
+        return Array(pts[..<i]) + [point]
+    }
+}
+
 private struct LockScreen: View {
     let attributes: TripActivityAttributes
     let state: TripActivityAttributes.ContentState
@@ -107,36 +181,50 @@ private struct LockScreen: View {
     var body: some View {
         let s = status(state)
         let line = Color(hex: attributes.color) ?? Board.accent
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("\(attributes.from) → \(attributes.to)")
-                    .font(.custom("InterVariable", size: 16).weight(.heavy))
-                    .foregroundStyle(Board.text).lineLimit(1).minimumScaleFactor(0.7)
-                Spacer(minLength: 8)
-                if let train = attributes.train {
-                    Text(train).font(.custom("SpaceGrotesk-Bold", size: 15)).foregroundStyle(Board.text2)
+        let sketch = (attributes.route?.count ?? 0) > 1
+        // A Lock Screen card is at most about 160 points tall: the text on the left, the picture and sketch in a column on the right.
+        HStack(alignment: .center, spacing: 14) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text("\(attributes.from) → \(attributes.to)")
+                        .font(.custom("InterVariable", size: 16).weight(.heavy))
+                        .foregroundStyle(Board.text).lineLimit(1).minimumScaleFactor(0.7)
+                    if let train = attributes.train {
+                        Text(train).font(.custom("SpaceGrotesk-Bold", size: 15)).foregroundStyle(Board.text2)
+                    }
+                }
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Text(s.text).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(s.colour)
+                    if let next = state.nextStop, state.status == "en_route" || state.status == "at_stop" {
+                        Text("·").foregroundStyle(Board.text2)
+                        Text(Words.next(next)).font(.custom("InterVariable", size: 14)).foregroundStyle(Board.text2).lineLimit(1)
+                    }
+                }
+                if !sketch { RouteLine(state: state, colour: line) }
+                HStack {
+                    Text(time(state.departAt, tz: attributes.fromTz)).font(.custom("SpaceGrotesk-Bold", size: 18)).foregroundStyle(Board.text)
+                    Spacer(minLength: 6)
+                    if let p = state.platform {
+                        Text(Words.platform(p)).font(.custom("InterVariable", size: 13).weight(.bold)).foregroundStyle(Board.accent)
+                    }
+                    Spacer(minLength: 6)
+                    Text(time(state.arriveAt, tz: attributes.toTz)).font(.custom("SpaceGrotesk-Bold", size: 18)).foregroundStyle(Board.text)
                 }
             }
-            HStack(alignment: .firstTextBaseline) {
-                Text(s.text).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(s.colour)
-                if let next = state.nextStop, state.status == "en_route" || state.status == "at_stop" {
-                    Text("·").foregroundStyle(Board.text2)
-                    Text(Words.next(next)).font(.custom("InterVariable", size: 14)).foregroundStyle(Board.text2).lineLimit(1)
-                    if let at = state.nextStopAt { Text(time(at, tz: attributes.toTz)).font(.custom("SpaceGrotesk-Bold", size: 14)).foregroundStyle(Board.text2) }
+            if attributes.art != nil || sketch {
+                VStack(spacing: 6) {
+                    if let art = attributes.art {
+                        Image(art).resizable().scaledToFit().frame(height: sketch ? 26 : 38)
+                    }
+                    if sketch, let route = attributes.route {
+                        RouteSketch(route: route, progress: state.progress ?? (state.status == "arrived" ? 1 : 0), colour: line)
+                            .frame(width: 84, height: attributes.art != nil ? 70 : 84)
+                    }
                 }
-            }
-            RouteLine(state: state, colour: line)
-            HStack {
-                Text(time(state.departAt, tz: attributes.fromTz)).font(.custom("SpaceGrotesk-Bold", size: 18)).foregroundStyle(Board.text)
-                Spacer()
-                if let p = state.platform {
-                    Text(Words.platform(p)).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(Board.accent)
-                }
-                Spacer()
-                Text(time(state.arriveAt, tz: attributes.toTz)).font(.custom("SpaceGrotesk-Bold", size: 18)).foregroundStyle(Board.text)
+                .frame(width: 84)
             }
         }
-        .padding(16)
+        .padding(14)
     }
 }
 
