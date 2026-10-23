@@ -34,7 +34,7 @@ describe('typical train types', () => {
   it("labels Krösatåg by line: electric units on the electrified lines, railcars on the rest (owner's research, 2026-10-22)", () => {
     expect(typicalTrainType('krosatag', 'regional', '1', ['Tranås', 'Jönköping C'])).toBe('x11_x14');
     expect(typicalTrainType('krosatag', 'regional', '1', ['Hässleholm', 'Växjö'])).toBe('x11_x14');
-    expect(typicalTrainType('krosatag', 'regional', '1', ['Karlskrona C', 'Emmaboda'])).toBe('x11_x14');
+    expect(typicalTrainType('krosatag', 'regional', '1', ['Karlskrona C', 'Emmaboda'])).toBe('x11');
     expect(typicalTrainType('krosatag', 'regional', '1', ['Nässjö C', 'Halmstad C'])).toBe('itino_y2');
     expect(typicalTrainType('krosatag', 'regional', '1', ['Linköping C', 'Västervik'])).toBe('itino_y2');
     expect(typicalTrainType('krosatag', 'regional', '1', ['Kalmar C', 'Vimmerby'])).toBe('itino_y2');
