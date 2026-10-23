@@ -214,13 +214,14 @@ nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     let originStationId: String
     let destStationId: String
     let notes: String?
-    let ride: Ride
-    let rideReason: String?
+    var ride: Ride
+    var rideReason: String?
     let borderEvidence: BorderEvidence?
     let `operator`: LegOperator?
     let origin: StationRef?
     let destination: StationRef?
-    let live: LiveStateRow?
+    /// Replaced as live updates arrive.
+    var live: LiveStateRow?
 }
 
 /// Where a stop sits in a leg: the trip's stops before you board and after you get off are kept for context.

@@ -21,9 +21,9 @@ struct RootView: View {
             Ink.bg.ignoresSafeArea()
             Group {
                 switch router.tab {
-                case .trips: TripsScreen()
-                case .explore: ExploreScreen()
-                case .passport: PassportScreen()
+                case .trips: stack(.trips) { TripsScreen() }
+                case .explore: stack(.explore) { ExploreScreen() }
+                case .passport: stack(.passport) { PassportScreen() }
                 }
             }
             .safeAreaInset(edge: .bottom, spacing: 0) { TabBar(selection: $router.tab) }
@@ -39,6 +39,7 @@ struct RootView: View {
             }
         }
         .environment(app.l10n)
+        .environment(router)
         .preferredColorScheme(app.colorScheme)
         // Any touch before the landing rule has decided cancels it.
         .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in touched = true })
@@ -57,6 +58,15 @@ struct RootView: View {
         .task { await land() }
     }
 
+    /// One tab's stack: its root screen, and whatever has been pushed onto it (kept when you switch tabs).
+    private func stack<Root: View>(_ tab: PrimaryTab, @ViewBuilder root: () -> Root) -> some View {
+        NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
+            root()
+                .toolbar(.hidden, for: .navigationBar)
+                .appDestinations()
+        }
+    }
+
     /// Once per app start: open where it matters (a train running or about to leave opens Trips, else the tab you
     /// used last, else Explore), and never after you've touched anything.
     private func land() async {
@@ -65,13 +75,11 @@ struct RootView: View {
         let lastTab = Landing.readLastTab()
         do {
             let legs: [Leg] = try await app.client.get(["legs"])
-            app.noteSuccess()
             let tab = Landing.resolve(
                 legs: legs.map(Landing.LegTimes.init), now: Date.now.timeIntervalSince1970 * 1000, lastTab: lastTab
             )
             if !touched, tab != .trips, router.tab == .trips { router.tab = tab }
         } catch {
-            app.noteFailure(error)
             if !touched, let lastTab, lastTab != .trips, router.tab == .trips { router.tab = lastTab }
         }
     }

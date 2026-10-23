@@ -27,14 +27,23 @@ nonisolated struct APIClient: Sendable {
     let base: URL
     let userID: String
     let session: URLSession
+    /// Kept copies of the GETs the web keeps, served when the server can't be reached. Nil in tests.
+    let cache: OfflineCache?
+    /// Told after every request whether the server answered (true) or couldn't be reached (false).
+    let reachability: (@Sendable (Bool) -> Void)?
 
     /// GETs time out after 15 s (the web client does the same).
     static let getTimeout: TimeInterval = 15
 
-    init(base: URL = Config.apiBase, userID: String, session: URLSession = .shared) {
+    init(
+        base: URL = Config.apiBase, userID: String, session: URLSession = .shared, cache: OfflineCache? = nil,
+        reachability: (@Sendable (Bool) -> Void)? = nil
+    ) {
         self.base = base
         self.userID = userID
         self.session = session
+        self.cache = cache
+        self.reachability = reachability
     }
 
     /// A URL under `/api`. Every segment is percent-encoded, including `:` (trip keys) and `|` (live-map ids).
@@ -64,7 +73,15 @@ nonisolated struct APIClient: Sendable {
             request.httpBody = try JSONEncoder().encode(body)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-        let (data, response) = try await session.data(for: request)
+        let (data, response): (Data, URLResponse)
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch {
+            // A network failure or the 15 s timeout means offline; a request the page cancelled doesn't.
+            if (error as? URLError)?.code != .cancelled { reachability?(false) }
+            throw error
+        }
+        reachability?(true)
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         guard (200..<300).contains(http.statusCode) else {
             let parsed = try? JSONDecoder().decode(APIErrorBody.self, from: data)
@@ -77,8 +94,31 @@ nonisolated struct APIClient: Sendable {
         return data
     }
 
+    /// A GET, decoded. When the server can't be reached, the kept copy of the same path is used if there is one.
     func get<T: Decodable & Sendable>(_ segments: [String], query: [String: String] = [:]) async throws -> T {
-        let data = try await request("GET", segments, query: query)
+        let path = "/" + segments.joined(separator: "/")
+        let data: Data
+        do {
+            data = try await request("GET", segments, query: query)
+        } catch let error as URLError where error.code != .cancelled {
+            // Any HTTP answer, even an error, is not served from the cache; only a failure to reach the server is.
+            guard let cache, let kept = await cache.read(path) else { throw error }
+            return try JSONDecoder().decode(T.self, from: kept)
+        }
+        if query.isEmpty { await cache?.store(path, data) }
         return try JSONDecoder().decode(T.self, from: data)
+    }
+
+    /// A request with a JSON body whose answer is decoded (`POST /legs`, `PATCH /legs/:id`, ...).
+    func send<T: Decodable & Sendable>(
+        _ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil
+    ) async throws -> T {
+        let data = try await request(method, segments, query: query, body: body)
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+
+    /// A request whose answer has no body of interest (a 204, or a flag we don't read).
+    func perform(_ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil) async throws {
+        _ = try await request(method, segments, query: query, body: body)
     }
 }

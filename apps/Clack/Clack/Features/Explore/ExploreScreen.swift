@@ -10,11 +10,8 @@ struct ExploreScreen: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        NavigationStack {
-            Page {
-                PageHeader(title: l10n.t("nav.explore")) { SettingsLink() }
-            }
-            .toolbar(.hidden, for: .navigationBar)
+        Page {
+            PageHeader(title: l10n.t("nav.explore")) { SettingsLink() }
         }
     }
 }

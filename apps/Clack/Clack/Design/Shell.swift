@@ -79,6 +79,8 @@ extension PageHeader where Trailing == EmptyView {
 struct BackLink: View {
     @Environment(L10n.self) private var l10n
     @Environment(\.dismiss) private var dismiss
+    /// What it says; "Back" when not given.
+    var label: String?
 
     var body: some View {
         Button {
@@ -86,7 +88,7 @@ struct BackLink: View {
         } label: {
             HStack(spacing: 6) {
                 LucideIcon(name: "arrow-left", size: 18)
-                Text(l10n.t("common.back"))
+                Text(label ?? l10n.t("common.back"))
             }
         }
         .buttonStyle(LinkButtonStyle())
@@ -99,7 +101,8 @@ struct Page<Content: View>: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            // Lazy, with pinned section headers: the month headers stick to the top as they do on the web.
+            LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
                 content
             }
             .frame(maxWidth: 720, alignment: .leading)

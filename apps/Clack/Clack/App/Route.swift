@@ -1,0 +1,97 @@
+//
+//  Route.swift
+//  Clack
+//
+
+import Foundation
+import Observation
+import SwiftUI
+
+/// The Layover Guide's inputs from a connection (the web's `/stations/:id/map?from=&to=&arr=&dep=&a=&b=&xa=&xb=&live=`).
+nonisolated struct StationMapLink: Hashable, Sendable {
+    var stationId: String
+    var from: String?
+    var to: String?
+    var arrival: Double?
+    var departure: Double?
+    var operatorA: String?
+    var operatorB: String?
+    var canceledA = false
+    var canceledB = false
+    var live = false
+}
+
+/// Where a tap goes: the in-app equivalents of the web's URLs (docs/swift-port/SCREENS.md §1.5).
+nonisolated enum AppRoute: Hashable, Sendable {
+    case trip(String)
+    case journey(String)
+    case settings
+    case stations
+    case board(stationId: String, arrivals: Bool)
+    case addTrain
+    case stationMap(StationMapLink)
+}
+
+/// Which tab is showing and what each tab has pushed. The last tab is remembered for the next launch
+/// (`Landing.saveLastTab`).
+@MainActor
+@Observable
+final class Router {
+    var tab: PrimaryTab = .trips
+    /// Which part of Trips shows (Passport links to Past).
+    var tripsTab: TripsTab = .upcoming
+
+    init() {
+        #if DEBUG
+        // Launch arguments for checking a screen without tapping: `-tab explore`, `-tripsTab past`.
+        let args = CommandLine.arguments
+        func value(_ flag: String) -> String? {
+            args.firstIndex(of: flag).flatMap { args.indices.contains($0 + 1) ? args[$0 + 1] : nil }
+        }
+        if let raw = value("-tab"), let tab = PrimaryTab(rawValue: raw) { self.tab = tab }
+        if let raw = value("-tripsTab"), let tab = TripsTab(rawValue: raw) { tripsTab = tab }
+        // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
+        if let raw = value("-open") {
+            let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
+            if parts.count == 2 {
+                if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
+                if parts[0] == "journey" { tripsPath = [.journey(parts[1])] }
+            }
+        }
+        #endif
+    }
+    var tripsPath: [AppRoute] = []
+    var explorePath: [AppRoute] = []
+    var passportPath: [AppRoute] = []
+    /// A train Explore should open when it appears (`/explore?train=N&date=D&key=K`; the Explore screen reads and clears it).
+    var pendingTrain: PendingTrain?
+
+    struct PendingTrain: Hashable, Sendable {
+        var number: String
+        var date: String
+        var key: String?
+    }
+
+    /// The path of a tab, for a `NavigationStack` binding.
+    func path(for tab: PrimaryTab) -> [AppRoute] {
+        switch tab {
+        case .trips: tripsPath
+        case .explore: explorePath
+        case .passport: passportPath
+        }
+    }
+
+    func setPath(_ path: [AppRoute], for tab: PrimaryTab) {
+        switch tab {
+        case .trips: tripsPath = path
+        case .explore: explorePath = path
+        case .passport: passportPath = path
+        }
+    }
+
+    /// Opens a train on Explore (from a board row, a follow, or a link).
+    func openTrain(number: String, date: String, key: String? = nil) {
+        pendingTrain = PendingTrain(number: number, date: date, key: key)
+        tab = .explore
+    }
+}

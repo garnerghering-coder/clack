@@ -10,9 +10,7 @@ struct SettingsLink: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        NavigationLink {
-            SettingsScreen()
-        } label: {
+        NavigationLink(value: AppRoute.settings) {
             LucideIcon(name: "settings", size: 20)
                 .foregroundStyle(Ink.text)
                 .frame(width: 44, height: 44)
@@ -33,10 +31,9 @@ struct SettingsScreen: View {
             BackLink()
             PageHeader(title: l10n.t("settings.title"))
             #if DEBUG
-            NavigationLink("Design") { DesignGalleryView() }
+            NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
                 .buttonStyle(.clack(wide: true))
             #endif
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
 }

@@ -77,7 +77,7 @@ nonisolated struct Instruction: Hashable, Sendable {
     var endpoint: Endpoint?
 }
 
-nonisolated enum SizeClass: String, Sendable {
+nonisolated enum SizeClass: String, Codable, Sendable {
     case small, medium, large
 }
 

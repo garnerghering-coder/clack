@@ -124,6 +124,8 @@ struct SegmentedControl<Value: Hashable>: View {
 struct Chip: View {
     let text: String
     var accent = false
+    /// A different text colour (the review chip is warn-text, a stale chip text-3).
+    var tint: Color?
 
     var body: some View {
         HStack(spacing: 5) {
@@ -133,7 +135,7 @@ struct Chip: View {
             Text(text).lineLimit(1)
         }
         .clack(.chip)
-        .foregroundStyle(accent ? Ink.text : Ink.text2)
+        .foregroundStyle(tint ?? (accent ? Ink.text : Ink.text2))
     }
 }
 

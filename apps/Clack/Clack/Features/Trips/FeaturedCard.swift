@@ -1,0 +1,135 @@
+//
+//  FeaturedCard.swift
+//  Clack
+//
+
+import SwiftUI
+
+/// The map strip of a trip card, until the real map arrives in step 8: the map's background with its tag.
+struct MapPlaceholder: View {
+    var height: CGFloat
+
+    var body: some View {
+        Ink.mapBg.frame(height: height)
+    }
+}
+
+/// The featured journey (brief §5.2): one tappable card, route map on top, the journey under it.
+struct FeaturedCard: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(\.colorScheme) private var scheme
+    let leg: Leg
+    let state: TripsLogic.HeroState
+    /// The leg you change to next, if this one is part of a journey with a change ahead.
+    let next: Leg?
+    @State private var detail: LegDetail?
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: state == .active ? 1 : 30)) { context in
+            let now = context.date.timeIntervalSince1970 * 1000
+            NavigationLink(value: AppRoute.trip(leg.id)) { card(now: now) }
+                .buttonStyle(.plain)
+                .accessibilityLabel(l10n.t("trips.viewJourney", ["from": leg.origin?.name ?? "", "to": leg.destination?.name ?? ""]))
+        }
+        .task(id: leg.id) {
+            if let cached = app.legDetails[leg.id] {
+                detail = cached
+            } else if let fetched = try? await app.client.leg(leg.id) {
+                app.legDetails[leg.id] = fetched
+                detail = fetched
+            }
+        }
+    }
+
+    private func card(now: Double) -> some View {
+        let op = operatorColor(leg.operator?.brandColor, scheme: scheme)
+        let live = leg.live
+        // Only a fresh position draws the train, and only then is the route split into travelled and ahead.
+        let grounded = state == .active && live != nil && LiveRules.isFresh(live, now: now)
+            && live?.lat != nil && live?.lon != nil && live?.positionSource != nil
+        let service = [leg.operator?.name, leg.trainNumber].compactMap { $0 }.joined(separator: " ")
+        let tag: String = {
+            switch state {
+            case .upcoming: return l10n.t("trips.routePreview")
+            case .arrived: return l10n.t("trips.routeSummary")
+            case .active:
+                guard grounded else { return l10n.t("trips.noPositionShort") }
+                return live?.positionSource == .estimated ? l10n.t("live.estimatedPosition") : l10n.t("live.livePosition")
+            }
+        }()
+        return VStack(spacing: 0) {
+            ZStack(alignment: .topLeading) {
+                MapPlaceholder(height: 140)
+                Text(tag)
+                    .font(ClackFont.inter(11, .regular)).foregroundStyle(Ink.text2)
+                    .padding(.vertical, 2).padding(.horizontal, 8)
+                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .padding(.leading, 10).padding(.top, 8)
+            }
+            .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 10) {
+                    OperatorBadge(op: leg.operator, size: 28)
+                    Text(service.isEmpty ? l10n.t("trips.train") : service).fontWeight(.bold).foregroundStyle(Ink.text)
+                    switch state {
+                    case .upcoming: Chip(text: l10n.t("trips.planned"))
+                    case .arrived: Chip(text: l10n.t("trips.arrived"))
+                    case .active: if let live { LiveChip(live: live, now: now) }
+                    }
+                }
+                Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
+                    .clack(.headline).foregroundStyle(Ink.text)
+                    .fixedSize(horizontal: false, vertical: true)
+                FlapTimes(leg: leg, style: .lg, intro: true)
+                bottom(now: now, live: live)
+            }
+            .padding(.top, 14).padding(.bottom, 16).padding(.horizontal, 16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Surface.Hero(op: op))
+        }
+        .background(Surface.Hero(op: op))
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+    }
+
+    @ViewBuilder
+    private func bottom(now: Double, live: LiveStateRow?) -> some View {
+        switch state {
+        case .active:
+            if let live {
+                DelayText(delay: live.arrivalDelayMin, canceled: leg.canceled)
+                if let next {
+                    HeroConnection(a: leg, b: next)
+                } else {
+                    LiveModule(
+                        leg: leg, live: live,
+                        stops: (detail?.stops ?? []).map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) },
+                        now: now, compact: true
+                    )
+                }
+            }
+        case .arrived:
+            HStack(spacing: 8) {
+                Text(leg.actualArr != nil
+                    ? l10n.t("trips.arrivedAt", ["time": Format.time(leg.actualArr?.ms, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock)])
+                    : l10n.t("trips.scheduledTimes"))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                Spacer(minLength: 0)
+                HStack(spacing: 4) {
+                    LucideIcon(name: "stamp", size: 14)
+                    Text(l10n.t("trips.inPassport"))
+                }
+                .clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.accentInk)
+            }
+        case .upcoming:
+            HStack(spacing: 8) {
+                Pill(text: TripsLogic.countdown(l10n, leg, now: now))
+                if let platform = leg.depPlatform { Chip(text: l10n.t("trips.platform", ["platform": platform])) }
+                if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
+            }
+        }
+    }
+}

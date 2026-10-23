@@ -20,7 +20,7 @@ nonisolated enum Config {
         #endif
     }()
     /// The Mac's local name: System Settings > General > Sharing > Local hostname, without ".local".
-    static let macHostName = "REPLACE-WITH-MAC-NAME"
+    static let macHostName = "Garners-MacBook-Air"
     /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
     static let showOperatorLogos = true
     /// Shown on the Privacy screen when set (docs/APP_STORE.md, 1.5).
