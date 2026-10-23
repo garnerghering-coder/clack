@@ -175,17 +175,22 @@ extension TripDetailLogic {
     /// The two halves of each stop's rail, from the fills: a stretch between two stops is drawn half in the row above
     /// and half in the row below, so the train can be shown between stops.
     static func railHalves(stops: [LegStop], fills: [Double], showTrain: Bool) -> [(above: RailHalf, below: RailHalf)] {
-        stops.indices.map { i in
+        railHalves(count: stops.count, fills: fills, showTrain: showTrain) { stops[$0].role.isRidden }
+    }
+
+    /// The same for any list of stops: `ridden(i)` says whether stop i is part of the ride.
+    static func railHalves(count: Int, fills: [Double], showTrain: Bool, ridden: (Int) -> Bool) -> [(above: RailHalf, below: RailHalf)] {
+        (0..<count).map { i in
             var above = RailHalf(), below = RailHalf()
             if i > 0, i - 1 < fills.count {
                 let f = fills[i - 1]
-                above.ridden = stops[i - 1].role.isRidden && stops[i].role.isRidden
+                above.ridden = ridden(i - 1) && ridden(i)
                 above.fill = min(1, max(0, 2 * f - 1))
                 if showTrain, f > 0.5, f < 1 { above.train = 2 * f - 1 }
             }
             if i < fills.count {
                 let f = fills[i]
-                below.ridden = stops[i].role.isRidden && stops[i + 1].role.isRidden
+                below.ridden = ridden(i) && ridden(i + 1)
                 below.fill = min(1, max(0, 2 * f))
                 if showTrain, f > 0, f <= 0.5 { below.train = 2 * f }
             }

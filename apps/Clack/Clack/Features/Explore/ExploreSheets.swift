@@ -169,6 +169,9 @@ struct StopList: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     let stops: ExploreModel.StopsState
+    /// The operator's colour: the rail is filled with it where the train has been.
+    var color: Color = Ink.accent
+    var now: Double = Date.now.timeIntervalSince1970 * 1000
 
     var body: some View {
         switch stops {
@@ -178,25 +181,27 @@ struct StopList: View {
             Text(l10n.t("liveMap.stopsLoading")).clack(.caption).foregroundStyle(Ink.text2)
         case .list(let list):
             let next = ExploreLogic.nextStopIndex(list)
+            // The train is drawn between the stops it has left and the one it is heading for, as on a trip's page.
+            let halves = TripDetailLogic.railHalves(count: list.count, fills: ExploreLogic.railFills(list, now: now), showTrain: true) { _ in true }
             VStack(alignment: .leading, spacing: 6) {
                 Text(l10n.t("liveMap.stops")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 VStack(spacing: 0) {
                     ForEach(Array(list.enumerated()), id: \.element.seq) { i, stop in
-                        row(stop, index: i, count: list.count, isNext: i == next)
+                        row(stop, index: i, count: list.count, isNext: i == next, above: halves[i].above, below: halves[i].below)
                     }
                 }
             }
         }
     }
 
-    private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool) -> some View {
+    private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
         let passed = stop.passed
         let clock = app.settings.clock
         let tz = "Europe/Stockholm"
         let late = times.lateMinutes
         let tint: Color = late > 0 && times.real != nil ? Ink.late : late < 0 && times.real != nil ? Ink.onTime : Ink.text
-        return HStack(alignment: .top, spacing: 10) {
+        return HStack(alignment: .center, spacing: 10) {
             VStack(alignment: .leading, spacing: 1) {
                 FlapTime(time: times.shown, tz: tz, clock: clock, style: .text)
                     .foregroundStyle(passed ? Ink.text3 : tint)
@@ -206,41 +211,18 @@ struct StopList: View {
             }
             .font(ClackFont.inter(14, .semibold)).monospacedDigit()
             .frame(width: 58, alignment: .leading)
-            StopMark(first: i == 0, last: i == count - 1, passed: passed, next: isNext)
-                .frame(width: 16)
+            StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below)
             VStack(alignment: .leading, spacing: 0) {
                 Text(stop.name).font(ClackFont.inter(16, isNext ? .bold : .regular)).foregroundStyle(passed ? Ink.text3 : Ink.text)
                     .strikethrough(stop.canceled)
                 let note = [stop.canceled ? l10n.t("liveMap.canceledStop") : nil, stop.platform.map { l10n.t("liveMap.track", ["track": $0]) }].compactMap { $0 }.joined(separator: " · ")
                 if !note.isEmpty { Text(note).clack(.caption).foregroundStyle(Ink.text2) }
             }
+            .padding(.vertical, 4)
             Spacer(minLength: 0)
         }
-        .frame(minHeight: 40, alignment: .top)
+        .frame(minHeight: 44)
         .accessibilityElement(children: .combine)
-    }
-}
-
-/// The dot and line beside a stop: a hollow dot ahead, filled in the accent colour once passed, a thick ring for the
-/// next one; the line is a hairline, accent where it's been.
-private struct StopMark: View {
-    let first: Bool
-    let last: Bool
-    let passed: Bool
-    let next: Bool
-
-    var body: some View {
-        GeometryReader { proxy in
-            ZStack(alignment: .topLeading) {
-                Rectangle().fill(passed ? Ink.accent : Ink.hairline).frame(width: 2)
-                    .frame(height: last ? 6 : proxy.size.height - (first ? 6 : 0))
-                    .offset(x: 7, y: first ? 6 : 0)
-                Circle().fill(passed ? Ink.accent : Ink.surface)
-                    .overlay(Circle().strokeBorder(passed || next ? Ink.accent : Ink.text2, lineWidth: next ? 3 : 2))
-                    .frame(width: next ? 14 : 10, height: next ? 14 : 10)
-                    .offset(x: next ? 1 : 3, y: next ? 1 : 3)
-            }
-        }
     }
 }
 

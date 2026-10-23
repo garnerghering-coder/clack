@@ -37,6 +37,8 @@ struct RouteMapView: View {
     var controls = true
     var railNetwork = false
     var train: MapTrain?
+    /// Keep the train in view even when it is off the route (a train still on its way to the stop you board at).
+    var fitTrain = false
     /// Share of the route already travelled (0 to 1): splits the line into travelled and ahead.
     var progress: Double?
     var label: String?
@@ -52,7 +54,7 @@ struct RouteMapView: View {
 
     init(
         color: String, route: [LatLon], context: [[LatLon]] = [], stops: [MapStop], animate: Bool = false, interactive: Bool = true,
-        controls: Bool = true, railNetwork: Bool = false, train: MapTrain? = nil, progress: Double? = nil, label: String? = nil,
+        controls: Bool = true, railNetwork: Bool = false, train: MapTrain? = nil, fitTrain: Bool = false, progress: Double? = nil, label: String? = nil,
         topInset: CGFloat = 0, bottomInset: CGFloat = 0
     ) {
         self.color = color
@@ -64,6 +66,7 @@ struct RouteMapView: View {
         self.controls = controls
         self.railNetwork = railNetwork
         self.train = train
+        self.fitTrain = fitTrain
         self.progress = progress
         self.label = label
         self.topInset = topInset
@@ -78,7 +81,7 @@ struct RouteMapView: View {
                 RouteMapRepresentable(
                     handle: handle, base: Config.apiBase, color: color, route: route, context: context, stops: stops,
                     animate: animate, interactive: interactive, controls: controls, showRail: showRail, follow: $follow,
-                    train: train, progress: progress, withBasemap: basemap, dark: scheme == .dark
+                    train: train, fitTrain: fitTrain, progress: progress, withBasemap: basemap, dark: scheme == .dark
                 )
                 // Re-created when the theme changes: the basemap and every layer take their colours from it.
                 .id("\(scheme == .dark)-\(basemap)")
@@ -138,9 +141,17 @@ private struct RouteMapRepresentable: UIViewRepresentable {
     let showRail: Bool
     @Binding var follow: Bool
     let train: MapTrain?
+    let fitTrain: Bool
     let progress: Double?
     let withBasemap: Bool
     let dark: Bool
+
+    /// What the map frames: the route (else the stops), and the train when it should stay in view.
+    var framed: [LatLon] {
+        let base = route.isEmpty ? stops.map { LatLon($0.lat, $0.lon) } : route
+        if fitTrain, let train { return base + [LatLon(train.lat, train.lon)] }
+        return base
+    }
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
@@ -155,7 +166,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         ctx.coordinator.map = map
         handle.mapView = map
         handle.padding = controls && interactive ? MapPadding.interactive : MapPadding.mini
-        handle.fitPoints = route.isEmpty ? stops.map { LatLon($0.lat, $0.lon) } : route
+        handle.fitPoints = framed
         return map
     }
 
@@ -195,7 +206,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
             mapView.setShape(MapGeometry.lines([draw ? Array(p.route.prefix(1)) : p.route]), source: "route")
             mapView.setShape(MapGeometry.points(draw ? Array(p.stops.filter { $0.kind == .end }.prefix(1)) : p.stops), source: "stops")
             lastRouteKey = routeKey(p)
-            let fitPoints = p.route.isEmpty ? p.stops.map { LatLon($0.lat, $0.lon) } : p.route
+            let fitPoints = p.framed
             mapView.fit(fitPoints, padding: p.controls && p.interactive ? MapPadding.interactive : MapPadding.mini, maxZoom: 13, animated: false)
             if draw { startDrawOn(mapView) } else { applyProgress(mapView) }
             updateTrain(mapView)
@@ -221,7 +232,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         }
 
         private func routeKey(_ p: RouteMapRepresentable) -> String {
-            "\(p.route.count):\(p.route.first.map { "\($0.lat),\($0.lon)" } ?? ""):\(p.route.last.map { "\($0.lat),\($0.lon)" } ?? ""):\(p.context.count):\(p.stops.count)"
+            "\(p.route.count):\(p.route.first.map { "\($0.lat),\($0.lon)" } ?? ""):\(p.route.last.map { "\($0.lat),\($0.lon)" } ?? ""):\(p.context.count):\(p.stops.count):\(p.fitTrain && p.train != nil)"
         }
 
         func update(_ map: MLNMapView) {
@@ -232,7 +243,7 @@ private struct RouteMapRepresentable: UIViewRepresentable {
                 lastRouteKey = key
                 map.setShape(MapGeometry.lines(p.context), source: "route-context")
                 map.setShape(MapGeometry.points(p.stops), source: "stops")
-                let fitPoints = p.route.isEmpty ? p.stops.map { LatLon($0.lat, $0.lon) } : p.route
+                let fitPoints = p.framed
                 p.handle.fitPoints = fitPoints
                 if !p.follow { map.fit(fitPoints, padding: p.handle.padding, maxZoom: 13, animated: !reduceMotion) }
                 applyProgress(map)

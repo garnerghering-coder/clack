@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { LatLon } from '@clack/shared';
+import type { GpsFix, LatLon } from '@clack/shared';
 import { diffEvents, expectedTimes, liveView, type LegSummary, type LiveStop } from '../src/live/progress.js';
 
 const T = (hhmm: string) => Date.parse(`2026-10-20T${hhmm}:00+02:00`);
@@ -84,6 +84,49 @@ describe('live view', () => {
     const c = stops();
     c[2]!.canceled = true;
     expect(liveView(c, line, null, T('10:05')).status).toBe('cancelled');
+  });
+});
+
+describe('a train still on its way to the stop you board at (owner, 2026-10-23: SJ 547 into Hässleholm)', () => {
+  // You board at B (scheduled 10:10, leaving 10:12) and the train is running 20 min late into it.
+  const board = (extra: Partial<LiveStop> = {}) => [stop('B', 14.1, '10:10', '10:12', { estimatedArr: T('10:30'), ...extra }), stop('C', 14.2, '10:22', null, { estimatedArr: T('10:42') })];
+  const ridden: LatLon[] = [
+    [57, 14.1],
+    [57, 14.2],
+  ];
+  const fix = (lon: number, at: string): GpsFix => ({ lat: 57, lon, at: T(at), bearing: 90, speedKmh: 120 });
+
+  it('is not boarding just because the departure is within 30 minutes: the train has not got there', () => {
+    // 10:05 is 27 min before the late departure (10:32), but the train arrives at 10:30.
+    const v = liveView(board(), ridden, null, T('10:05'));
+    expect(v.status).toBe('approaching');
+    expect(v.eta).toBe(T('10:30'));
+  });
+
+  it('is boarding once the train has arrived, or is about to', () => {
+    expect(liveView(board(), ridden, null, T('10:29')).status).toBe('boarding');
+    expect(liveView(board({ actualArr: T('10:28') }), ridden, null, T('10:29')).status).toBe('boarding');
+  });
+
+  it('shows where the train is while it is on its way, and does not call it departed when a late estimate passes', () => {
+    // 26 km before the stop; the estimated departure (10:32) has passed in the schedule's eyes at 10:33.
+    const v = liveView(board({ estimatedDep: T('10:32') }), ridden, fix(13.7, '10:32'), T('10:32'));
+    expect(v.status).toBe('approaching');
+    expect(v.positionSource).toBe('gps');
+    expect(v.lon).toBeCloseTo(13.7, 3);
+    expect(v.progress).toBe(0);
+    expect(v.nextStopId).toBe('B');
+  });
+
+  it('is boarding when the train is at the stop, and departed once it is on the ride', () => {
+    expect(liveView(board(), ridden, fix(14.1, '10:29'), T('10:29')).status).toBe('boarding');
+    expect(liveView(board({ actualDep: T('10:31') }), ridden, fix(14.12, '10:34'), T('10:34')).status).toBe('en_route');
+  });
+
+  it('a train that starts at your stop boards 30 minutes before, as before', () => {
+    const origin = [stop('B', 14.1, null, '10:12'), stop('C', 14.2, '10:22', null)];
+    expect(liveView(origin, ridden, null, T('09:40')).status).toBe('scheduled');
+    expect(liveView(origin, ridden, null, T('09:45')).status).toBe('boarding');
   });
 });
 

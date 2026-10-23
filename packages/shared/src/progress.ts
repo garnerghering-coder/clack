@@ -15,7 +15,8 @@ export const SPEED_FRESH_MS = 60_000;
 /** A speed worth showing: from a fresh fix that passed the server's checks. */
 export const shownSpeed = (f: GpsFix | null, now: number): number | null => (f && now - (f.speedAt ?? f.at) <= SPEED_FRESH_MS ? f.speedKmh : null);
 
-export type LiveStatus = 'scheduled' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
+/** `approaching`: the train is on its way to where you board and hasn't reached it yet (owner, 2026-10-23). */
+export type LiveStatus = 'scheduled' | 'approaching' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
 
 export interface LiveStop {
   stationId: string;
@@ -61,6 +62,13 @@ export interface LiveView {
 
 /** Boarding starts this long before departure (DESIGN §9.3). */
 export const BOARDING_MS = 30 * 60_000;
+/**
+ * A train this far from your boarding stop, and no further along your ride than its start, hasn't reached you: it
+ * isn't boarding yet, and a late estimate passing doesn't make it "departed".
+ */
+export const APPROACH_M = 2000;
+/** Boarding starts a little before the train's expected arrival at your stop. */
+export const REACHED_SLACK_MS = 2 * 60_000;
 /** A GPS fix older than this isn't shown as live (Phase 0 §8). */
 export const GPS_FRESH_MS = 2 * 60_000;
 /**
@@ -165,7 +173,17 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
   };
   if (board.canceled || alight.canceled) return { ...base, status: 'cancelled', progress: null };
 
-  const departed = board.actualDep !== null || now >= depAt;
+  // Where the train is relative to the stop you board at. A train that started earlier is on its way to you until it
+  // gets there: not boarding (however close the departure time), and not departed just because a late estimate passed.
+  const cum = cumulative(line);
+  const total = cum.at(-1) ?? 0;
+  const gpsFresh = gps !== null && now - gps.at <= GPS_FRESH_MS;
+  const upstream =
+    gpsFresh && line.length > 1 && haversineM(gps!.lat, gps!.lon, board.lat, board.lon) > APPROACH_M && locate(line, cum, gps!) < 500;
+  const arrBoard = times[0]!.arr;
+  const reached = board.actualArr !== null || arrBoard === null || now >= arrBoard - REACHED_SLACK_MS;
+
+  const departed = board.actualDep !== null || (now >= depAt && !upstream);
   const arrived = alight.actualArr !== null || (now >= arrAt && arrAt > 0);
   if (arrived)
     return {
@@ -179,7 +197,15 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
       lon: alight.lon,
       positionSource: null,
     };
-  if (!departed) return { ...base, status: now >= depAt - BOARDING_MS ? 'boarding' : 'scheduled' };
+  if (!departed) {
+    const inWindow = now >= depAt - BOARDING_MS;
+    const approaching = upstream || (inWindow && !reached);
+    const out: LiveView = { ...base, status: approaching ? 'approaching' : inWindow ? 'boarding' : 'scheduled', eta: approaching ? (arrBoard ?? depAt) : base.eta };
+    // On its way to you, and seen: show where it is.
+    if (upstream)
+      return { ...out, lat: gps!.lat, lon: gps!.lon, bearing: gps!.bearing, speedKmh: shownSpeed(gps!, now), positionSource: 'gps', positionAt: gps!.at };
+    return out;
+  }
 
   // Last stop the train has reached and the next one ahead.
   let prev = 0;
@@ -193,8 +219,6 @@ export function liveView(stops: LiveStop[], line: LatLon[], gps: GpsFix | null, 
   const leftPrev = stops[prev]!.actualDep !== null || (prevT.dep ?? prevT.arr ?? 0) <= now;
   const status: LiveStatus = leftPrev ? 'en_route' : 'at_stop';
 
-  const cum = cumulative(line);
-  const total = cum.at(-1) ?? 0;
   const stopM: number[] = [];
   for (const s of stops) stopM.push(line.length > 1 ? locate(line, cum, s, stopM.at(-1) ?? 0) : 0);
 

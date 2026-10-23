@@ -74,14 +74,16 @@ nonisolated enum Ride: OpenEnum {
 }
 
 nonisolated enum LiveStatus: OpenEnum {
-    case scheduled, boarding, enRoute, atStop, arrived, cancelled
+    /// `approaching`: the train is on its way to the stop you board at and hasn't reached it (owner, 2026-10-23).
+    case scheduled, approaching, boarding, enRoute, atStop, arrived, cancelled
     case unknown(String)
 
-    static let knownCases: [LiveStatus] = [.scheduled, .boarding, .enRoute, .atStop, .arrived, .cancelled]
+    static let knownCases: [LiveStatus] = [.scheduled, .approaching, .boarding, .enRoute, .atStop, .arrived, .cancelled]
     init(unknown: String) { self = .unknown(unknown) }
     var rawValue: String {
         switch self {
         case .scheduled: "scheduled"
+        case .approaching: "approaching"
         case .boarding: "boarding"
         case .enRoute: "en_route"
         case .atStop: "at_stop"

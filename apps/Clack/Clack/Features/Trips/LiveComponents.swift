@@ -93,6 +93,7 @@ struct LiveModule: View {
 
     private var where_: String {
         switch live.status {
+        case .approaching: return l10n.t("live.approachingTo", ["name": name(live.nextStopId)])
         case .boarding: return l10n.t("live.boardingAt", ["name": leg.origin?.name ?? ""])
         case .atStop: return l10n.t("live.atStop", ["name": name(live.prevStopId)])
         default:

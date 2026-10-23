@@ -49,7 +49,8 @@
     "layoverMissed": "Nästa tåg går från {{station}} innan det här är framme",
     "layoverAt": "byte i {{station}}",
     "layoverMap": "Stationskarta",
-    "layoverOpen": "Öppna stationskartan för bytet i {{station}}"
+    "layoverOpen": "Öppna stationskartan för bytet i {{station}}",
+    "approaching": "På väg"
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -117,7 +118,8 @@
     "snapshotted": "Framme",
     "cancelled": "Inställd",
     "boarding": "Påstigning",
-    "live": "Live"
+    "live": "Live",
+    "approaching": "På väg"
   },
   "delay": {
     "on_time": "I tid",
@@ -424,7 +426,9 @@
     "trainHere": "Tåget är här",
     "progressLabel": "{{percent}} % av vägen till {{name}}",
     "nextStopName": "Nästa station: {{name}}",
-    "arrivesLabel": "Ankomst"
+    "arrivesLabel": "Ankomst",
+    "approachingTo": "På väg till {{name}}",
+    "arrivesAtLabel": "Ankommer till ditt stopp"
   },
   "activity": {
     "title": "Händelser",

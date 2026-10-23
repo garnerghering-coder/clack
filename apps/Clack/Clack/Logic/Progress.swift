@@ -84,6 +84,10 @@ nonisolated enum Progress {
     static let speedFreshMs: Double = 60_000
     /// Boarding starts this long before departure (DESIGN §9.3).
     static let boardingMs: Double = 30 * 60_000
+    /// A train this far from the stop you board at, and no further along your ride than its start, hasn't reached you.
+    static let approachM: Double = 2000
+    /// Boarding starts a little before the train's expected arrival at your stop.
+    static let reachedSlackMs: Double = 2 * 60_000
     /// A GPS fix older than this isn't shown as live.
     static let gpsFreshMs: Double = 2 * 60_000
     /// After the GPS goes quiet the train is carried on from its last fix at its last speed for this long, never past
@@ -203,7 +207,19 @@ nonisolated enum Progress {
             return base
         }
 
-        let departed = board.actualDep != nil || now >= depAt
+        // Where the train is relative to the stop you board at. A train that started earlier is on its way to you until it
+        // gets there: not boarding (however close the departure time), and not departed because a late estimate passed.
+        let cum = cumulative(line)
+        let total = cum.last ?? 0
+        let gpsFresh = gps.map { now - $0.at <= gpsFreshMs } ?? false
+        var upstream = false
+        if gpsFresh, let gps, line.count > 1 {
+            upstream = haversineM(gps.lat, gps.lon, board.lat, board.lon) > approachM && locate(line, cum, lat: gps.lat, lon: gps.lon) < 500
+        }
+        let arrBoard = times[0].arr
+        let reached = board.actualArr != nil || arrBoard == nil || now >= arrBoard! - reachedSlackMs
+
+        let departed = board.actualDep != nil || (now >= depAt && !upstream)
         let arrived = alight.actualArr != nil || (now >= arrAt && arrAt > 0)
         if arrived {
             base.status = .arrived
@@ -217,7 +233,19 @@ nonisolated enum Progress {
             return base
         }
         if !departed {
-            base.status = now >= depAt - boardingMs ? .boarding : .scheduled
+            let inWindow = now >= depAt - boardingMs
+            let approaching = upstream || (inWindow && !reached)
+            base.status = approaching ? .approaching : inWindow ? .boarding : .scheduled
+            if approaching { base.eta = arrBoard ?? depAt }
+            // On its way to you, and seen: show where it is.
+            if upstream, let gps {
+                base.lat = gps.lat
+                base.lon = gps.lon
+                base.bearing = gps.bearing
+                base.speedKmh = shownSpeed(gps, now: now)
+                base.positionSource = .gps
+                base.positionAt = gps.at
+            }
             return base
         }
 
@@ -233,8 +261,6 @@ nonisolated enum Progress {
         let leftPrev = stops[prev].actualDep != nil || (prevT.dep ?? prevT.arr ?? 0) <= now
         let status: LiveStatus = leftPrev ? .enRoute : .atStop
 
-        let cum = cumulative(line)
-        let total = cum.last ?? 0
         var stopM: [Double] = []
         for stop in stops {
             stopM.append(line.count > 1 ? locate(line, cum, lat: stop.lat, lon: stop.lon, from: stopM.last ?? 0) : 0)

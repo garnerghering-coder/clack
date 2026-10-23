@@ -191,7 +191,7 @@ struct TripDetailScreen: View {
         }
         RouteMapView(
             color: MapStyle.opColor(detail.leg.operator?.brandColor, dark: scheme == .dark), route: geo.route, stops: geo.stops,
-            animate: true, railNetwork: app.settings.showRailNetwork, train: train, progress: tracking ? live?.progress : nil,
+            animate: true, railNetwork: app.settings.showRailNetwork, train: train, fitTrain: shown?.status == .approaching, progress: tracking ? live?.progress : nil,
             label: l10n.t("detail.mapLabel", ["from": detail.leg.origin?.name ?? "", "to": detail.leg.destination?.name ?? ""]),
             topInset: top + 48, bottomInset: 30
         )
@@ -267,7 +267,7 @@ struct TripDetailScreen: View {
 
     private func statusColor(_ status: LiveRules.TripStatus) -> Color {
         switch status {
-        case .planned: Ink.accentInk
+        case .planned, .approaching: Ink.accentInk
         case .cancelled: Ink.veryLate
         case .boarding: Ink.slight
         case .live: Ink.onTime
@@ -297,6 +297,17 @@ struct TripDetailScreen: View {
                     if !l.canceled, derived != nil { DelayText(delay: derived) }
                 }
                 if l.canceled { Banner(kind: .error) { Text(l10n.t("detail.canceledBanner")) } }
+                // The train started earlier and is on its way to where you get on: where it is, and when it gets there.
+                if let shown, shown.status == .approaching, let board {
+                    HStack(spacing: 8) {
+                        Text(l10n.t("live.approachingTo", ["name": board.name])).clack(.rowTitle).foregroundStyle(Ink.text)
+                        if shown.positionSource == .gps, !shown.localEstimate { Speedometer(kmh: shown.speedKmh, at: shown.positionAt?.ms, now: now).clack(.caption) }
+                    }
+                    HStack(spacing: 6) {
+                        Text(l10n.t("live.arrivesAtLabel")).clack(.body).foregroundStyle(Ink.text)
+                        FlapTime(time: shown.eta?.ms, tz: board.tz, clock: app.settings.clock).clack(.body).foregroundStyle(Ink.text)
+                    }
+                }
                 Text(live.map { l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: $0.updatedAt.ms, now: now)]) } ?? l10n.t("detail.timetableOnly"))
                     .clack(.caption).foregroundStyle(Ink.text2)
             case .during:
@@ -541,7 +552,7 @@ struct StopRow: View {
         let band = DelayBand(delayMin: times.delay, canceled: stop.canceled)
         let showSched = actual != nil && times.sched != nil && floor(actual! / 60_000) != floor(times.sched! / 60_000)
         HStack(spacing: 10) {
-            rail().frame(width: 20)
+            rail()
             VStack(alignment: .leading, spacing: 1) {
                 NavigationLink(value: AppRoute.board(stationId: stop.stationId, arrivals: false)) {
                     Text(stop.name)
@@ -578,16 +589,34 @@ struct StopRow: View {
         .frame(minHeight: 48)
     }
 
-    /// The vertical rail. Where the train has been it is the operator's colour; the rest of the ride is a dotted grey line
-    /// still to go; stretches you didn't ride are a hairline. It starts at the middle of the stop you got on and ends at
-    /// the middle of the one you got off, and a small dot shows the train between stops while it's under way.
     private func rail() -> some View {
-        let big = stop.role == .board || stop.role == .alight
-        let ridden = stop.role.isRidden
-        return ZStack {
+        StopRail(
+            color: color, big: stop.role == .board || stop.role == .alight, ridden: stop.role.isRidden,
+            startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below
+        )
+    }
+}
+
+/// The vertical rail beside a stop. Where the train has been it is the operator's colour; the rest of the ride is a dotted
+/// grey line still to go; stretches you didn't ride are a hairline. It starts at the middle of the stop you got on and
+/// ends at the middle of the one you got off, and a small dot shows the train between stops while it's under way. The
+/// trip's stop list and the Explore train sheet draw it the same way.
+struct StopRail: View {
+    let color: Color
+    /// Where you got on or off (a bigger dot in the operator's colour).
+    var big = false
+    var ridden = true
+    /// No line above (the first stop of the ride) or below (the last).
+    var startsHere = false
+    var endsHere = false
+    var above = TripDetailLogic.RailHalf()
+    var below = TripDetailLogic.RailHalf()
+
+    var body: some View {
+        ZStack {
             VStack(spacing: 0) {
-                if stop.role == .board { Color.clear.frame(maxHeight: .infinity) } else { half(above).frame(maxHeight: .infinity) }
-                if stop.role == .alight { Color.clear.frame(maxHeight: .infinity) } else { half(below).frame(maxHeight: .infinity) }
+                if startsHere { Color.clear.frame(maxHeight: .infinity) } else { half(above).frame(maxHeight: .infinity) }
+                if endsHere { Color.clear.frame(maxHeight: .infinity) } else { half(below).frame(maxHeight: .infinity) }
             }
             .frame(width: 14)
             Circle()
@@ -595,6 +624,7 @@ struct StopRow: View {
                 .frame(width: big ? 14 : 10, height: big ? 14 : 10)
                 .overlay(Circle().strokeBorder(big ? Ink.text : Ink.bg, lineWidth: 2).padding(-2))
         }
+        .frame(width: 20)
     }
 
     /// A stop the train has passed: the line below it has started to fill.

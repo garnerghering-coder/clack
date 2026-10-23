@@ -30,6 +30,7 @@ private enum Words {
     static var cancelled: String { t("Cancelled", "Inställt") }
     static var arrived: String { t("Arrived", "Framme") }
     static var boarding: String { t("Boarding", "Påstigning") }
+    static var onItsWay: String { t("On its way", "På väg") }
     static func late(_ n: Int) -> String { t("\(n) min late", "\(n) min försenat") }
     static func platform(_ p: String) -> String { t("Platform \(p)", "Spår \(p)") }
     static func next(_ s: String) -> String { t("Next: \(s)", "Nästa: \(s)") }
@@ -54,6 +55,7 @@ private func status(_ s: TripActivityAttributes.ContentState) -> (text: String, 
     if s.canceled || s.status == "cancelled" { return (Words.cancelled, Board.cancelled) }
     if s.status == "arrived" { return (Words.arrived, Board.onTime) }
     if let d = s.delayMin, d >= 5 { return (Words.late(d), d >= 16 ? Board.late : Board.accent) }
+    if s.status == "approaching" { return (Words.onItsWay, Board.text) }
     if s.status == "boarding" { return (Words.boarding, Board.text) }
     return (Words.onTime, Board.onTime)
 }

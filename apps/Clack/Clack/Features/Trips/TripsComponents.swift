@@ -86,11 +86,18 @@ struct FlapTimes: View {
 extension TripsLogic {
     @MainActor
     static func countdown(_ l10n: L10n, _ leg: Leg, now: Double) -> String {
-        let dep = leg.actualDep?.ms ?? leg.schedDep?.ms ?? 0
+        let dep = LiveRules.expectedDeparture(leg)
         if leg.canceled || leg.live?.status == .cancelled { return l10n.t("status.cancelled") }
         if now >= arrivalOf(leg) { return l10n.t("trips.arrived") }
+        // The live state knows where the train is: on its way to your stop, at it, or yet to be 30 minutes from leaving.
+        let fresh = leg.live.map { LiveRules.isFresh($0, now: now) } ?? false
+        if fresh, let status = leg.live?.status {
+            if status == .approaching { return l10n.t("trips.approaching") }
+            if status == .boarding { return l10n.t("trips.boarding") }
+        }
         if now >= dep { return l10n.t("trips.liveNow") }
-        if dep - now <= 30 * 60_000 { return l10n.t("trips.boarding") }
+        // With no live data (or none fresh) the timetable, moved by the delay known so far, decides.
+        if !fresh, dep - now <= 30 * 60_000 { return l10n.t("trips.boarding") }
         let mins = Int(((dep - now) / 60_000).rounded())
         let d = mins / 1440
         let h = (mins % 1440) / 60

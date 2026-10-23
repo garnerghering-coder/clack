@@ -26,22 +26,31 @@ nonisolated enum LiveRules {
     /// Is this leg being followed live right now (tracked and not yet arrived)?
     static func isLive(_ live: LiveStateRow?) -> Bool {
         guard let live else { return false }
-        return live.status == .boarding || live.status == .enRoute || live.status == .atStop
+        return live.status == .approaching || live.status == .boarding || live.status == .enRoute || live.status == .atStop
     }
 
     /// The status written on a trip (DESIGN §6): Upcoming, Boarding, Live, Arrived or Cancelled.
     enum TripStatus: String, Sendable {
-        case planned, boarding, live, completed, cancelled
+        case planned, approaching, boarding, live, completed, cancelled
+    }
+
+    /// When the trip leaves: the actual time, else the timetable plus the delay known so far (a train 20 minutes late
+    /// into your stop leaves 20 minutes late).
+    static func expectedDeparture(_ leg: Leg) -> Double {
+        if let actual = leg.actualDep?.ms { return actual }
+        return (leg.schedDep?.ms ?? 0) + Double(max(0, leg.depDelayMin ?? 0)) * 60_000
     }
 
     static func statusKey(_ leg: Leg, live: LiveStateRow?, now: Double) -> TripStatus {
         if leg.canceled || live?.status == .cancelled { return .cancelled }
         if let live, isFresh(live, now: now) {
+            if live.status == .approaching { return .approaching }
+            if live.status == .scheduled { return .planned }
             if live.status == .boarding { return .boarding }
             if live.status == .enRoute || live.status == .atStop { return .live }
             if live.status == .arrived { return .completed }
         }
-        let dep = leg.actualDep?.ms ?? leg.schedDep?.ms ?? 0
+        let dep = expectedDeparture(leg)
         let arr = leg.actualArr?.ms ?? leg.schedArr?.ms ?? 0
         if leg.status != .planned || now >= arr { return .completed }
         if now >= dep { return .live }

@@ -209,4 +209,19 @@ nonisolated enum ExploreLogic {
         guard stops.count > 1, let last = stops.last else { return nil }
         return stops.first { !$0.passed && !$0.canceled && $0.seq != last.seq }
     }
+
+    /// For each stop but the last: how far the train is along the stretch to the next one, 0 to 1 (the Explore sheet draws
+    /// it as the trip view does). Worked out from the times: a stretch is fully covered once the next stop is passed, the
+    /// stretch the train is on is placed by the time since it left the stop behind, and a stop the train is standing at
+    /// (arrived, not yet left) has the stretch into it fully covered.
+    static func railFills(_ stops: [LiveTrainStop], now: Double) -> [Double] {
+        guard stops.count > 1 else { return [] }
+        return (0..<(stops.count - 1)).map { i in
+            let a = stops[i], b = stops[i + 1]
+            if b.passed || b.actualArr != nil { return 1 }
+            guard a.passed else { return 0 }
+            guard let dep = a.actualDep ?? a.estimatedDep ?? a.dep, let arr = b.actualArr ?? b.estimatedArr ?? b.arr, arr > dep else { return 0.05 }
+            return min(0.95, max(0.05, (now - dep) / (arr - dep)))
+        }
+    }
 }

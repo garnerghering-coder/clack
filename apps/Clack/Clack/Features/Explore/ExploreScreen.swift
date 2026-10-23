@@ -368,7 +368,7 @@ struct ExploreScreen: View {
             }
             Text(l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: train.at.ms, now: now)])).clack(.caption).foregroundStyle(Ink.text2)
         } content: {
-            StopList(stops: model.stops)
+            StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
             if case .list(let stops) = model.stops, let from = ExploreLogic.catchableFrom(stops), let last = stops.last {
                 BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: train.operatorId, number: train.number, from: from, to: last, trip: detail.trip), inTrips: detail.legId != nil)
@@ -408,7 +408,7 @@ struct ExploreScreen: View {
             Chip(text: status, tint: allCanceled ? Ink.veryLateInk : nil)
             Text(l10n.t(anyLive ? "train.liveTimes" : "train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2)
         } content: {
-            StopList(stops: view.stops.map { .list($0) } ?? .none)
+            StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
             if let first, let last {
                 BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: view.operatorId, number: view.number, from: first, to: last, trip: view.trip), inTrips: view.legId != nil)

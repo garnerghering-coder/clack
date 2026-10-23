@@ -240,7 +240,7 @@ export interface Journey {
   legs: (Leg & { geometry: string | null })[];
 }
 
-export type LiveStatus = 'scheduled' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
+export type LiveStatus = 'scheduled' | 'approaching' | 'boarding' | 'en_route' | 'at_stop' | 'arrived' | 'cancelled';
 
 /** Times are ISO strings from the REST API and epoch ms from the live stream; use ms() on either. */
 export interface LiveState {

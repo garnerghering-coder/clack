@@ -225,7 +225,7 @@ For any leg that is upcoming within 24 hours, in progress, or finished within th
 6. Pause polling when no client is viewing and no leg is within its tracking window.
 
 ### 9.3 Leg status state machine
-`scheduled → boarding (T−30 min) → departed → en route → arrived → snapshotted`, with side events `delayed`, `platform_changed`, `cancelled`, `short_turned`. Each event is stored in `leg_events` (SPEC §7) and appears in the Activity log and as an in-app toast/banner while the app is open. On `arrived` plus final actuals, run the permanent snapshot (SPEC §10).
+`scheduled → boarding (T−30 min) → departed → en route → arrived → snapshotted`. Boarding means the train is at the stop you get on at: a train that started earlier and is still on its way to you is `approaching` (shown as "On its way to {stop}", with its position when seen), however close the departure time, and a late estimate passing does not make it departed while GPS puts it short of you (owner, 2026-10-23). Side events: `delayed`, `platform_set`, `platform_changed`, `cancelled`, `short_turned`. Each event is stored in `leg_events` (SPEC §7) and appears in the Activity log and as an in-app toast/banner while the app is open. On `arrived` plus final actuals, run the permanent snapshot (SPEC §10).
 
 ### 9.4 Forward compatibility
 Store each event with a type, timestamp and payload so that push notifications can later be sent from the same event stream. Keep the poller as a server-side job independent of any browser session.
