@@ -86,6 +86,10 @@ struct RootView: View {
     private func land() async {
         guard !app.hasLanded else { return }
         app.hasLanded = true
+        #if DEBUG
+        // A `-tab` launch argument says where to look; the landing rule leaves it alone.
+        if CommandLine.arguments.contains("-tab") { return }
+        #endif
         let lastTab = Landing.readLastTab()
         do {
             let legs: [Leg] = try await app.client.get(["legs"])
