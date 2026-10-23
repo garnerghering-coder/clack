@@ -21,6 +21,16 @@ nonisolated struct StationMapLink: Hashable, Sendable {
     var live = false
 }
 
+/// Opens Add a train straight at the confirm step for a timetable trip (`/add?trip=K&date=D&from=&to=&replace=`).
+nonisolated struct AddTrainLink: Hashable, Sendable {
+    var tripKey: String
+    var date: String
+    var fromSeq: Int?
+    var toSeq: Int?
+    /// A leg to mark "not taken" once this one is saved (replacing a cancelled train).
+    var replaceLegId: String?
+}
+
 /// Where a tap goes: the in-app equivalents of the web's URLs (docs/swift-port/SCREENS.md §1.5).
 nonisolated enum AppRoute: Hashable, Sendable {
     case trip(String)
@@ -28,7 +38,7 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case settings
     case stations
     case board(stationId: String, arrivals: Bool)
-    case addTrain
+    case addTrain(AddTrainLink?)
     case stationMap(StationMapLink)
 }
 

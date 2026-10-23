@@ -26,4 +26,30 @@ extension APIClient {
         struct Body: Encodable, Sendable { let answer: RideAnswer }
         return try await send("POST", ["legs", legId, "ride"], body: Body(answer: answer))
     }
+
+    func refreshLeg(_ id: String) async throws -> LegDetail { try await send("POST", ["legs", id, "refresh"]) }
+    func deleteLeg(_ id: String) async throws { try await perform("DELETE", ["legs", id]) }
+
+    /// Sets the train type of a trip; nil goes back to the typical one.
+    func setTrainType(_ legId: String, _ trainType: String?) async throws -> LegDetail {
+        struct Body: Encodable, Sendable {
+            let trainType: String?
+            // The key must be present even when null: a missing key means "nothing to change".
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(trainType, forKey: .trainType)
+            }
+            enum CodingKeys: String, CodingKey { case trainType }
+        }
+        return try await send("PATCH", ["legs", legId], body: Body(trainType: trainType))
+    }
+
+    func legRisk(_ id: String) async throws -> LegRisk { try await get(["legs", id, "risk"]) }
+    func tripProgress(_ id: String) async throws -> TripProgress { try await get(["legs", id, "progress"]) }
+
+    func alternatives(from: String, to: String, after: Double, exclude: String?) async throws -> Alternatives {
+        var query = ["from": from, "to": to, "after": String(Int(after.rounded()))]
+        if let exclude { query["exclude"] = exclude }
+        return try await get(["alternatives"], query: query)
+    }
 }

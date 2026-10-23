@@ -81,7 +81,7 @@ struct LinkButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .fontWeight(.semibold)
+            .font(ClackFont.inter(16, .semibold))
             .foregroundStyle(Ink.accentInk)
             .underline(scheme == .light, color: Ink.accent)
             .opacity(configuration.isPressed ? 0.7 : 1)
@@ -200,5 +200,30 @@ struct PlatformChip: View {
         .padding(.horizontal, 8)
         .frame(minWidth: 34)
         .background(changed ? Color(hex: "#ff9500")!.opacity(0.18) : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+    }
+}
+
+/// `.map-button`: a 40 pt glass circle floating over a map; pressed or toggled on it turns yellow.
+struct MapButton: View {
+    let icon: String
+    let label: String
+    var pressed = false
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            LucideIcon(name: icon, size: 18)
+                .foregroundStyle(pressed ? Ink.onAccent : Ink.text)
+                .frame(width: 40, height: 40)
+                .background {
+                    Circle().fill(pressed ? Ink.accent : Ink.glass)
+                    if !pressed { Circle().fill(.ultraThinMaterial).opacity(0.5) }
+                }
+                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
+                .clackShadow()
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+        .accessibilityAddTraits(pressed ? .isSelected : [])
     }
 }

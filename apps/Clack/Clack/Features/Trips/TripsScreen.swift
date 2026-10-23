@@ -97,7 +97,7 @@ struct TripsScreen: View {
             PageHeader(title: l10n.t("trips.title")) {
                 HStack(spacing: 8) {
                     IconLink(icon: "search", label: l10n.t("nav.stations"), route: .stations)
-                    IconLink(icon: "plus", label: l10n.t("nav.addTrain"), route: .addTrain, size: 22)
+                    IconLink(icon: "plus", label: l10n.t("nav.addTrain"), route: .addTrain(nil), size: 22)
                     SettingsLink()
                 }
             }

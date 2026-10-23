@@ -410,7 +410,7 @@ struct EmptyActions: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            NavigationLink(value: AppRoute.addTrain) {
+            NavigationLink(value: AppRoute.addTrain(nil)) {
                 HStack(spacing: 8) {
                     LucideIcon(name: "plus", size: 18)
                     Text(l10n.t("trips.findTrain"))

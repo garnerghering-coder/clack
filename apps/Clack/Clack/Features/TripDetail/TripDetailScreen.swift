@@ -1,0 +1,597 @@
+//
+//  TripDetailScreen.swift
+//  Clack
+//
+
+import SwiftUI
+
+/// Trip detail (DESIGN §6, product brief §7): the route map on top, then a card for the stage you're in (before
+/// departure: countdown, platform, status; on the train: the live module; after: how it ended and the Passport), the
+/// times, tiles, the stop timeline, the activity log and details.
+struct TripDetailScreen: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var scheme
+    let id: String
+
+    @State private var leg: LegDetail?
+    @State private var live: LiveStateRow?
+    @State private var missing = false
+    /// Couldn't load and nothing kept on the phone (no connection the first time this trip was opened).
+    @State private var unreachable = false
+    @State private var fullRoute = false
+    @State private var explain = false
+    @State private var busy = false
+    @State private var toast: String?
+    @State private var confirmDelete = false
+
+    var body: some View {
+        GeometryReader { proxy in
+            Group {
+                if missing {
+                    Page {
+                        BackLink(label: l10n.t("nav.trips"))
+                        Text(l10n.t("detail.notFound")).clack(.body).foregroundStyle(Ink.text2)
+                    }
+                } else if let leg {
+                    TimelineView(.periodic(from: .now, by: 1)) { context in
+                        detail(leg, now: context.date.timeIntervalSince1970 * 1000, proxy: proxy)
+                    }
+                } else {
+                    Page {
+                        if unreachable {
+                            Text(l10n.t("offline.tripNotKept")).clack(.body).foregroundStyle(Ink.text2)
+                        } else {
+                            Skeleton(height: 120)
+                        }
+                    }
+                }
+            }
+        }
+        .background(Ink.bg)
+        .overlay(alignment: .top) {
+            if let toast {
+                Text(toast)
+                    .clack(.body).fontWeight(.semibold).foregroundStyle(Ink.text)
+                    .padding(.vertical, 10).padding(.horizontal, 16)
+                    .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+                    .hairlineBorder(radius: Radius.input)
+                    .clackShadow()
+                    .padding(.horizontal, 16).padding(.top, 12)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .accessibilityAddTraits(.updatesFrequently)
+            }
+        }
+        .task(id: id) { await load() }
+        .task(id: id) { await listen() }
+        .task(id: toast) {
+            guard toast != nil else { return }
+            try? await Task.sleep(for: .seconds(6))
+            withAnimation(.easeOut(duration: 0.25)) { toast = nil }
+        }
+        .confirmationDialog(l10n.t("detail.deleteConfirm"), isPresented: $confirmDelete, titleVisibility: .visible) {
+            Button(l10n.t("detail.delete"), role: .destructive) { Task { await remove() } }
+            Button(l10n.t("common.close"), role: .cancel) {}
+        }
+    }
+
+    // MARK: loading
+
+    private func load() async {
+        do {
+            let loaded = try await app.client.leg(id)
+            leg = loaded
+            live = loaded.leg.live
+            unreachable = false
+        } catch let error as APIError where error.status == 404 {
+            missing = true
+        } catch {
+            // A refetch that fails (no connection) keeps what's on screen; only a trip that's gone says so.
+            if leg == nil { unreachable = true }
+        }
+    }
+
+    /// Every live tick: move the marker straight away, then refetch the leg so stop times and the log stay current.
+    private func listen() async {
+        for await update in app.live.updates() {
+            guard update.legId == id else { continue }
+            live = update.live
+            await load()
+            if let shown = update.events.first(where: { $0.type != .departed }), let leg {
+                let stops = leg.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }
+                withAnimation(.easeOut(duration: 0.25)) { toast = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops) }
+            }
+        }
+    }
+
+    private func answer(_ answer: RideAnswer) async {
+        if let updated = try? await app.client.answerRide(id, answer) { leg = updated }
+    }
+
+    private func refresh() async {
+        busy = true
+        if let updated = try? await app.client.refreshLeg(id) { leg = updated }
+        busy = false
+    }
+
+    private func remove() async {
+        if (try? await app.client.deleteLeg(id)) != nil { dismiss() }
+    }
+
+    // MARK: the screen
+
+    @ViewBuilder
+    private func detail(_ detail: LegDetail, now: Double, proxy: GeometryProxy) -> some View {
+        let l = detail.leg
+        let shown = TripDetailLogic.shown(detail, live: live, now: now)
+        let tracking = TripDetailLogic.isTracking(live)
+        let stage = TripDetailLogic.stage(l, live: live, shown: shown, now: now)
+        let status = LiveRules.statusKey(l, live: live, now: now)
+        let mapHeight = min(proxy.size.height * 0.55 + proxy.safeAreaInsets.top, 520)
+        ScrollViewReader { scroller in
+        ScrollView {
+            VStack(spacing: 0) {
+                mapArea(detail, tracking: tracking, height: mapHeight, top: proxy.safeAreaInsets.top)
+                content(detail, live: live, shown: shown, tracking: tracking, stage: stage, status: status, now: now)
+                    .padding(.top, 20)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
+                    .frame(maxWidth: 720)
+                    .frame(maxWidth: .infinity)
+                    .background(Ink.bg, in: UnevenRoundedRectangle(topLeadingRadius: Radius.sheet, topTrailingRadius: Radius.sheet))
+                    .padding(.top, -24)
+            }
+        }
+        .ignoresSafeArea(edges: .top)
+        .scrollBounceBehavior(.basedOnSize)
+        .refreshable { await load() }
+        #if DEBUG
+        // `-scrollTo stops` (or times, train, onboard, activity, details) scrolls there on launch, to check a section.
+        .task {
+            let args = CommandLine.arguments
+            guard let index = args.firstIndex(of: "-scrollTo"), args.indices.contains(index + 1) else { return }
+            try? await Task.sleep(for: .seconds(2))
+            scroller.scrollTo(args[index + 1], anchor: .top)
+        }
+        #endif
+        }
+    }
+
+    private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
+        ZStack(alignment: .topLeading) {
+            MapPlaceholder(height: height)
+            MapButton(icon: "arrow-left", label: l10n.t("nav.trips")) { dismiss() }
+                .padding(.leading, 16).padding(.top, top + 12)
+            MapButton(icon: "radar", label: l10n.t("liveMap.showAll")) {
+                if tracking, let number = detail.leg.trainNumber {
+                    router.pendingTrain = Router.PendingTrain(number: number, date: detail.leg.serviceDate ?? "", key: nil)
+                }
+                router.tab = .explore
+            }
+            .padding(.leading, 16).padding(.top, top + 60)
+            if detail.leg.isEstimatedGeometry {
+                Text(l10n.t("detail.estimatedRoute"))
+                    .clack(.caption).foregroundStyle(Ink.text)
+                    .padding(.vertical, 4).padding(.horizontal, 10)
+                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                    .hairlineBorder(radius: Radius.controlSm)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, top + 18)
+            }
+        }
+        .frame(height: height)
+        .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private func content(
+        _ detail: LegDetail, live: LiveStateRow?, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage,
+        status: LiveRules.TripStatus, now: Double
+    ) -> some View {
+        let l = detail.leg
+        let tz = l.origin?.tz ?? "Europe/Stockholm"
+        let dtz = l.destination?.tz ?? tz
+        let color = operatorColor(l.operator?.brandColor, scheme: scheme)
+        let schedDep = l.schedDep?.ms
+        let schedArr = l.schedArr?.ms
+        VStack(alignment: .leading, spacing: 16) {
+            head(l, live: shown, tracking: tracking, status: status, now: now)
+            Text("\(l.origin?.name ?? "") → \(l.destination?.name ?? "")")
+                .clack(.detailRoute).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
+            if let schedDep {
+                Text(Format.longDate(schedDep, tz: tz, language: app.settings.language)).clack(.body).foregroundStyle(Ink.text2)
+            }
+            // Just arrived: welcome, and what the trip did for your Passport.
+            if stage == .after, !l.canceled, now - (l.actualArr?.ms ?? schedArr ?? 0) < 60 * 60_000 {
+                Card {
+                    Text(l10n.t("progress.welcome", ["station": l.destination?.name ?? ""])).clack(.welcomeTitle).foregroundStyle(Ink.text)
+                    Text(l10n.t("progress.welcomeBody", [
+                        "time": Format.time(l.actualArr?.ms ?? schedArr, tz: dtz, clock: app.settings.clock),
+                        "train": [l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " "),
+                    ])).clack(.caption).foregroundStyle(Ink.text2)
+                    TripProgressView(legId: l.id, quietIfNothing: true)
+                }
+            }
+            // Something wrong with this train or the change after it: what happened, what to do, what you're owed.
+            DisruptionCard(leg: detail)
+            if stage == .before { RiskCard(leg: detail) }
+            stageCard(detail, live: live, shown: shown, tracking: tracking, stage: stage, now: now)
+            timesRow(detail, live: live, tracking: tracking).id("times")
+            tiles(detail, live: live, tracking: tracking)
+            if explain {
+                Text(explanationText(l.arrDelayMin)).clack(.caption).foregroundStyle(Ink.text2)
+            }
+            JourneyConnections(legId: l.id, journeyId: l.journeyId)
+            stopsCard(detail, color: color).id("stops")
+            TrainCard(leg: detail) { leg = $0 }.id("train")
+            Card {
+                Text(l10n.t("onboard.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                OnboardView(facts: l.onboard, operatorId: l.operator?.id, trainType: l.trainType)
+            }
+            .id("onboard")
+            if tracking || !detail.events.isEmpty {
+                ActivityLog(leg: l, events: detail.events, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) })
+            }
+            detailsCard(detail).id("details")
+            actions(l)
+        }
+    }
+
+    private func head(_ l: Leg, live: LiveStateRow?, tracking: Bool, status: LiveRules.TripStatus, now: Double) -> some View {
+        FlowLayout(spacing: 10, lineSpacing: 6) {
+            OperatorBadge(op: l.operator, size: 32)
+            Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
+            if let category = l.category { Chip(text: l10n.t("products.\(category)")) }
+            if tracking, let live {
+                LiveChip(live: live, now: now)
+            } else {
+                Text(l10n.t("status.\(status.rawValue)")).clack(.chip).foregroundStyle(statusColor(status))
+            }
+        }
+    }
+
+    private func statusColor(_ status: LiveRules.TripStatus) -> Color {
+        switch status {
+        case .planned: Ink.accentInk
+        case .cancelled: Ink.veryLate
+        case .boarding: Ink.slight
+        case .live: Ink.onTime
+        case .completed: Ink.text2
+        }
+    }
+
+    // MARK: the stage card
+
+    @ViewBuilder
+    private func stageCard(_ detail: LegDetail, live: LiveStateRow?, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage, now: Double) -> some View {
+        let l = detail.leg
+        let schedDep = l.schedDep?.ms
+        let board = detail.stops.first { $0.role == .board }
+        let dtz = l.destination?.tz ?? "Europe/Stockholm"
+        Card {
+            switch stage {
+            case .before:
+                let derived = l.depDelayMin ?? (tracking ? Delay.minutes(advertised: schedDep, actual: board?.estimatedDep?.ms) : nil)
+                HStack(spacing: 8) {
+                    Pill(text: TripsLogic.countdown(l10n, l, now: now))
+                    if let platform = l.depPlatform {
+                        Chip(text: l10n.t("trips.platform", ["platform": platform]))
+                    } else {
+                        Text(l10n.t("detail.platformLater")).clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                    if !l.canceled, derived != nil { DelayText(delay: derived) }
+                }
+                if l.canceled { Banner(kind: .error) { Text(l10n.t("detail.canceledBanner")) } }
+                Text(live.map { l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: $0.updatedAt.ms, now: now)]) } ?? l10n.t("detail.timetableOnly"))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+            case .during:
+                if let shown {
+                    LiveModule(leg: l, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
+                }
+            case .after:
+                let text: String = l.canceled ? l10n.t("status.cancelled")
+                    : l.actualArr != nil ? l10n.t("trips.arrivedAt", ["time": Format.time(l.actualArr?.ms, tz: dtz, clock: app.settings.clock)])
+                    : l10n.t("detail.scheduledArrival", ["time": Format.time(l.schedArr?.ms, tz: dtz, clock: app.settings.clock)])
+                Text(text).clack(.rowTitle).foregroundStyle(Ink.text)
+                Text(l.actualArr != nil ? l10n.t("detail.actualTimes") : l10n.t("detail.scheduledOnlyNote")).clack(.caption).foregroundStyle(Ink.text2)
+                // Why it doesn't count (or needs a check); a trip that counts needs no line about it.
+                if l.ride != .auto && l.ride != .confirmed {
+                    Text(l10n.t("record.state.\(l.ride.rawValue)", ["why": l10n.t("record.why.\(l.rideReason ?? "no_reports")")]))
+                        .clack(.stopName).foregroundStyle(l.ride == .review ? Ink.late : Ink.text)
+                }
+                HStack(spacing: 14) {
+                    if l.ride == .review {
+                        Button(l10n.t("record.yes")) { Task { await answer(.yes) } }.buttonStyle(.clack(.primary, small: true))
+                        Button(l10n.t("record.no")) { Task { await answer(.no) } }.buttonStyle(.clack(small: true))
+                    }
+                    if l.ride == .auto || l.ride == .confirmed {
+                        Button {
+                            router.tab = .passport
+                        } label: {
+                            HStack(spacing: 4) {
+                                LucideIcon(name: "stamp", size: 14)
+                                Text(l10n.t("detail.seePassport"))
+                            }
+                        }
+                        .buttonStyle(LinkButtonStyle())
+                        Button(l10n.t("record.correctNo")) { Task { await answer(.no) } }.buttonStyle(LinkButtonStyle())
+                    }
+                    if l.ride == .notTaken {
+                        Button(l10n.t("record.undo")) { Task { await answer(.undo) } }.buttonStyle(LinkButtonStyle())
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: times and tiles
+
+    private func timesRow(_ detail: LegDetail, live: LiveStateRow?, tracking: Bool) -> some View {
+        let l = detail.leg
+        let tz = l.origin?.tz ?? "Europe/Stockholm"
+        let dtz = l.destination?.tz ?? tz
+        let board = detail.stops.first { $0.role == .board }
+        let schedDep = l.schedDep?.ms
+        let schedArr = l.schedArr?.ms
+        let extraDays = (schedDep != nil && schedArr != nil) ? Format.dayOffset(from: schedDep!, fromTz: tz, to: schedArr!, toTz: dtz) : 0
+        return HStack(alignment: .top, spacing: 12) {
+            TimeBlock(
+                label: l10n.t("detail.departure"), sched: schedDep, actual: l.actualDep?.ms ?? (tracking ? board?.estimatedDep?.ms : nil),
+                tz: tz, platform: l.depPlatform,
+                delay: l.depDelayMin ?? (tracking ? Delay.minutes(advertised: schedDep, actual: board?.estimatedDep?.ms) : nil),
+                canceled: l.canceled
+            )
+            TimeBlock(
+                label: l10n.t("detail.arrival"), sched: schedArr, actual: l.actualArr?.ms ?? (tracking ? live?.arrivalEta?.ms : nil),
+                tz: dtz, platform: l.arrPlatform, delay: l.arrDelayMin ?? (tracking ? live?.arrivalDelayMin : nil),
+                canceled: l.canceled, extraDays: extraDays
+            )
+        }
+    }
+
+    private func tiles(_ detail: LegDetail, live: LiveStateRow?, tracking: Bool) -> some View {
+        let l = detail.leg
+        let dep = l.actualDep?.ms ?? l.schedDep?.ms
+        let arr = l.actualArr?.ms ?? l.schedArr?.ms
+        return HStack(spacing: 10) {
+            Tile(
+                title: l10n.t("detail.distance"),
+                value: (l.isEstimatedGeometry ? "≈ " : "") + Format.distance(l.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)
+            )
+            Tile(title: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000) : "—")
+            Button {
+                explain.toggle()
+            } label: {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(l10n.t("detail.delay")).clack(.captionUpper).foregroundStyle(Ink.text2)
+                    DelayText(delay: l.arrDelayMin ?? (tracking ? live?.arrivalDelayMin : nil), canceled: l.canceled)
+                        .frame(minHeight: 22, alignment: .leading)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                .hairlineBorder(radius: Radius.card)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private func explanationText(_ arrDelay: Int?) -> String {
+        switch TripDetailLogic.explanation(arrDelayMin: arrDelay) {
+        case .unknown: l10n.t("delay.explainUnknown")
+        case .late(let n): l10n.t("delay.explainLate", count: n)
+        case .early(let n): l10n.t("delay.explainEarly", count: n)
+        case .onTime: l10n.t("delay.explainOnTime")
+        }
+    }
+
+    // MARK: stops, details, actions
+
+    private func stopsCard(_ detail: LegDetail, color: Color) -> some View {
+        let stops = TripDetailLogic.visibleStops(detail.stops, fullRoute: fullRoute)
+        let hasHidden = detail.stops.contains { $0.role == .before || $0.role == .after }
+        return Card {
+            Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            VStack(spacing: 0) {
+                ForEach(stops) { stop in StopRow(stop: stop, color: color) }
+            }
+            if hasHidden {
+                Button(fullRoute ? l10n.t("detail.hideFullRoute") : l10n.t("detail.showFullRoute")) { fullRoute.toggle() }
+                    .buttonStyle(LinkButtonStyle())
+            }
+        }
+    }
+
+    private func detailsCard(_ detail: LegDetail) -> some View {
+        let l = detail.leg
+        let beyond = TripDetailLogic.beyondCountries(detail.stops)
+        let borderAt = TripDetailLogic.borderStation(detail)
+        return Card(spacing: 8) {
+            if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))
+                    Text(l10n.t("detail.qualityNote.\(l.dataQuality.rawValue)")).clack(.caption).foregroundStyle(Ink.text2)
+                }
+            }
+            if !beyond.isEmpty {
+                let countries = beyond.map { code -> String in
+                    let key = "countries.\(code)"
+                    let name = l10n.t(key)
+                    return name == key ? code : name
+                }.joined(separator: ", ")
+                Text(l10n.t(borderAt != nil ? "detail.beyondLiveData" : "detail.beyondLiveDataNoReport", ["countries": countries, "station": borderAt ?? ""]))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+            }
+            if l.isEstimatedGeometry { Text(l10n.t("detail.estimatedDistance")).clack(.caption).foregroundStyle(Ink.text2) }
+            Text(l10n.t("detail.source")).clack(.caption).foregroundStyle(Ink.text2)
+        }
+    }
+
+    private func actions(_ l: Leg) -> some View {
+        HStack(spacing: 10) {
+            if l.status != .snapshotted {
+                Button {
+                    Task { await refresh() }
+                } label: {
+                    HStack(spacing: 8) {
+                        LucideIcon(name: "refresh-cw", size: 16)
+                        Text(l10n.t("detail.refresh"))
+                    }
+                }
+                .buttonStyle(.clack())
+                .disabled(busy)
+            }
+            Button {
+                confirmDelete = true
+            } label: {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "trash", size: 16)
+                    Text(l10n.t("detail.delete"))
+                }
+            }
+            .buttonStyle(.clack(.danger))
+        }
+    }
+}
+
+/// One of the two time blocks: label and delay, the timetabled time struck through when it changed, the big flap time,
+/// and the platform. Fixed rows so the two cards line up side by side.
+struct TimeBlock: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    let label: String
+    let sched: Double?
+    let actual: Double?
+    let tz: String
+    let platform: String?
+    let delay: Int?
+    let canceled: Bool
+    var extraDays = 0
+
+    var body: some View {
+        let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 6) {
+                Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
+                Spacer(minLength: 0)
+                DelayText(delay: delay, canceled: canceled)
+            }
+            .frame(minHeight: 26)
+            Text(Format.time(sched, tz: tz, clock: app.settings.clock))
+                .font(ClackFont.inter(14)).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                .opacity(changed ? 1 : 0)
+                .accessibilityHidden(!changed)
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                SplitFlap(value: Format.time(actual ?? sched, tz: tz, clock: app.settings.clock), size: .time, intro: true)
+                    .opacity(canceled ? 0.6 : 1)
+                    .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
+                if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+            }
+            HStack(spacing: 6) {
+                if let platform { Chip(text: l10n.t("trips.platform", ["platform": platform])) } else { Chip(text: "–").hidden() }
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+    }
+}
+
+/// One stop of the timeline: a rail, a dot (the operator's colour where you got on and off), the name with its notes,
+/// the time coloured by delay, and the platform.
+struct StopRow: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    let stop: LegStop
+    let color: Color
+
+    var body: some View {
+        let times = TripDetailLogic.stopTimes(stop)
+        let ridden = stop.role.isRidden
+        let deviations = stop.deviations.filter { $0 != "Spårändrat" }
+        let platformChanged = stop.deviations.contains("Spårändrat")
+        let actual = times.actual
+        let band = DelayBand(delayMin: times.delay, canceled: stop.canceled)
+        let showSched = actual != nil && times.sched != nil && floor(actual! / 60_000) != floor(times.sched! / 60_000)
+        HStack(spacing: 10) {
+            rail(ridden: ridden).frame(width: 20)
+            VStack(alignment: .leading, spacing: 1) {
+                NavigationLink(value: AppRoute.board(stationId: stop.stationId, arrivals: false)) {
+                    Text(stop.name)
+                        .font(ClackFont.inter(16, ridden ? .semibold : .medium)).foregroundStyle(ridden ? Ink.text : Ink.text3)
+                        .strikethrough(stop.canceled).opacity(stop.canceled ? 0.6 : 1)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(l10n.t("board.openBoard", ["station": stop.name]))
+                if stop.role == .board { Text(l10n.t("detail.gotOn")).clack(.caption).foregroundStyle(Ink.accentInk) }
+                if stop.role == .alight { Text(l10n.t("detail.gotOff")).clack(.caption).foregroundStyle(Ink.accentInk) }
+                if ridden && stop.reportSource == nil { Text(l10n.t("detail.noLiveData")).clack(.caption).foregroundStyle(Ink.text2) }
+                if !deviations.isEmpty { Text(deviations.joined(separator: " · ")).clack(.caption).foregroundStyle(Ink.text2) }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 6)
+            VStack(alignment: .trailing, spacing: 0) {
+                Text(Format.time(actual ?? times.sched, tz: stop.tz, clock: app.settings.clock))
+                    .clack(.rowTitle).monospacedDigit()
+                    .foregroundStyle(actual != nil ? band.ink : Ink.text)
+                    .strikethrough(actual != nil && stop.canceled)
+                    .italic(actual != nil && times.real == nil)
+                if showSched, let sched = times.sched {
+                    Text(Format.time(sched, tz: stop.tz, clock: app.settings.clock))
+                        .font(ClackFont.inter(12, .medium)).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                }
+            }
+            HStack(spacing: 3) {
+                Text(stop.platform ?? "").monospacedDigit()
+                if platformChanged { LucideIcon(name: "repeat", size: 12).accessibilityLabel("Platform changed") }
+            }
+            .clack(.stopName).foregroundStyle(Ink.text2)
+            .frame(width: 44, alignment: .trailing)
+        }
+        .frame(minHeight: 48)
+    }
+
+    /// The vertical rail: hairline for unridden stops, the operator colour for ridden ones; it starts at the middle of
+    /// the stop you got on and ends at the middle of the one you got off.
+    private func rail(ridden: Bool) -> some View {
+        let railColor = ridden ? color : Ink.hairline
+        let big = stop.role == .board || stop.role == .alight
+        return ZStack {
+            VStack(spacing: 0) {
+                (stop.role == .board ? Color.clear : railColor).frame(maxHeight: .infinity)
+                (stop.role == .alight ? Color.clear : railColor).frame(maxHeight: .infinity)
+            }
+            .frame(width: 2)
+            Circle()
+                .fill(big ? color : (ridden ? Ink.text : Ink.text3))
+                .frame(width: big ? 14 : 10, height: big ? 14 : 10)
+                .overlay(Circle().strokeBorder(big ? Ink.text : Ink.bg, lineWidth: 2).padding(-2))
+        }
+    }
+}
+
+/// On a trip's page: the change into it and out of it, when it's part of a journey (ADDITIONS_01 C3).
+struct JourneyConnections: View {
+    @Environment(AppModel.self) private var app
+    let legId: String
+    let journeyId: String?
+    @State private var legs: [Leg]?
+
+    var body: some View {
+        Group {
+            if let legs, let i = legs.firstIndex(where: { $0.id == legId }) {
+                VStack(spacing: 8) {
+                    if i > 0, legs[i - 1].destination?.id == legs[i].origin?.id { ConnectionCard(a: legs[i - 1], b: legs[i]) }
+                    if i < legs.count - 1, legs[i].destination?.id == legs[i + 1].origin?.id { ConnectionCard(a: legs[i], b: legs[i + 1]) }
+                }
+            }
+        }
+        .task(id: journeyId) {
+            guard let journeyId else { return }
+            legs = (try? await app.client.journey(journeyId))?.legs.map(\.leg)
+        }
+    }
+}
