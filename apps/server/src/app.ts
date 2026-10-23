@@ -29,6 +29,13 @@ declare module 'fastify' {
 
 /** A device's id: a random UUID (v4 from crypto.randomUUID on the phone). */
 const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+/**
+ * On a server phones share, a request without a phone id must not fall back to the local user (whose trips are the
+ * laptop owner's): CLACK_REQUIRE_USER=1 refuses it. Shared, user-free data stays open: health, the map files (MapLibre
+ * fetches them itself) and operator logos.
+ */
+const requireUser = /^(1|true|yes|on)$/i.test(process.env.CLACK_REQUIRE_USER ?? '');
+const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|operators\/[a-z0-9-]+\/logo$)/;
 /** Pages allowed to call the API from another origin: the iOS app (Capacitor serves it from capacitor://localhost). */
 const allowedOrigins = new Set((process.env.CLACK_ALLOWED_ORIGINS ?? 'capacitor://localhost').split(',').map((o) => o.trim()).filter(Boolean));
 
@@ -49,7 +56,11 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
       if (req.method === 'OPTIONS') return reply.code(204).send();
     }
     const raw = (req.headers['x-clack-user'] as string | undefined) ?? (req.query as { u?: string } | undefined)?.u;
-    const id = raw && USER_ID.test(raw) ? raw.toLowerCase() : LOCAL_USER_ID;
+    const valid = !!raw && USER_ID.test(raw);
+    if (!valid && requireUser && req.url.startsWith('/api/') && !OPEN_WITHOUT_USER.test(req.url.split('?')[0]!)) {
+      return reply.code(401).send({ error: 'missing or invalid X-Clack-User' });
+    }
+    const id = valid ? raw.toLowerCase() : LOCAL_USER_ID;
     if (!known.has(id)) {
       db.insert(users).values({ id, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();
       known.add(id);

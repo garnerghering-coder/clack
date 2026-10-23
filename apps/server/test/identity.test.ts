@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { buildApp } from '../src/app.js';
 import { openDb } from '../src/db/client.js';
 
@@ -29,6 +29,21 @@ describe('per-device identity', () => {
     expect((await app.inject({ method: 'DELETE', url: '/api/me', headers: { 'x-clack-user': A } })).statusCode).toBe(204);
     expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': A } })).json().displayName).not.toBe('A');
     expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': B } })).json().displayName).toBe('B');
+  });
+
+  it('refuses requests without a phone id when the server is shared (CLACK_REQUIRE_USER)', async () => {
+    process.env.CLACK_REQUIRE_USER = '1';
+    vi.resetModules();
+    const { buildApp: build } = await import('../src/app.js');
+    app = build(openDb(':memory:'));
+    delete process.env.CLACK_REQUIRE_USER;
+    expect((await app.inject({ url: '/api/settings' })).statusCode).toBe(401);
+    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': 'local' } })).statusCode).toBe(401);
+    expect((await app.inject({ url: '/api/settings', headers: { 'x-clack-user': A } })).statusCode).toBe(200);
+    expect((await app.inject({ url: `/api/legs?u=${A}` })).statusCode).toBe(200);
+    // Shared files that hold nobody's data stay open.
+    expect((await app.inject({ url: '/api/health' })).statusCode).toBe(200);
+    expect((await app.inject({ url: '/api/map/status' })).statusCode).toBe(200);
   });
 
   it('lets the iOS app call it (CORS for capacitor://localhost only)', async () => {

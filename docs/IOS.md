@@ -189,7 +189,8 @@ Phones need the server at a public https address. This is the free route; a smal
    git clone https://github.com/garnerghering-coder/clack.git && cd clack && npm ci && nano .env
    ```
 
-   Paste the same keys as in step 5, add `CLACK_ALLOWED_ORIGINS=capacitor://localhost`, save with Ctrl+O, Return,
+   Paste the same keys as in step 5, add `CLACK_ALLOWED_ORIGINS=capacitor://localhost` and `CLACK_REQUIRE_USER=1` (the server then refuses
+   requests that don't say which phone they're from, so nobody can read the laptop user's trips), save with Ctrl+O, Return,
    Ctrl+X. Then build the web pages (they serve the privacy page and the web version):
    `npm run build -w @clack/web`.
 

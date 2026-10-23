@@ -42,6 +42,7 @@ Each item says who does it and where:
 | **Ticket links open the operator's own site in Safari.** Train tickets are physical services, so no in-app purchase rules apply. | 3.1.3(e) |
 | **App icon** (1024 px, no transparency) and launch screen from the Clack logo. | 2.3 |
 | **Each phone sees only its own trips live.** Live trip updates go only to the phone whose trip it is, and "your train" on the live map is worked out per phone. Before, every listener got every tracked trip's updates. | 5.1.1 |
+| **A shared server refuses requests without a phone id** (`CLACK_REQUIRE_USER=1`, IOS.md step 9), so the laptop user's trips can't be read through it. | 5.1.1 |
 | **Portrait iPhone app.** iPads run it in iPhone mode, which Apple allows. | 2.4.1 |
 
 ## Should do: strengthens the review, not strictly required
