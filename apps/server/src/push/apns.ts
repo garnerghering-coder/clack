@@ -149,11 +149,14 @@ export class ApnsClient {
 }
 
 /** The JSON for an alert on the lock screen. `timeSensitive` breaks through Focus (cancellations, missed changes). */
-export function alertPayload(a: { title: string; body: string; legId: string; kind: string; journeyId?: string | null; timeSensitive?: boolean }): Record<string, unknown> {
+/** The alert sound: SBB's jingle, bundled with the app (Resources/Sounds). */
+export const ALERT_SOUND = 'sbb_jingle.wav';
+
+export function alertPayload(a: { title: string; subtitle?: string; body: string; legId: string; kind: string; journeyId?: string | null; timeSensitive?: boolean }): Record<string, unknown> {
   return {
     aps: {
-      alert: { title: a.title, body: a.body },
-      sound: 'default',
+      alert: { title: a.title, ...(a.subtitle ? { subtitle: a.subtitle } : {}), body: a.body },
+      sound: ALERT_SOUND,
       'thread-id': a.legId,
       'interruption-level': a.timeSensitive ? 'time-sensitive' : 'active',
     },

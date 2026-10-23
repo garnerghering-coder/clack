@@ -60,11 +60,34 @@ private func status(_ s: TripActivityAttributes.ContentState) -> (text: String, 
     return (Words.onTime, Board.onTime)
 }
 
+/// The line along the trip. With a position (`progress`) it is drawn there. Without one, a train that is running gets a bar that
+/// fills by itself between its departure and arrival times, so it keeps moving between updates.
 private struct RouteLine: View {
-    let progress: Double
+    let state: TripActivityAttributes.ContentState
     let colour: Color
 
+    private var running: Bool { state.status == "en_route" || state.status == "at_stop" }
+
+    private var window: ClosedRange<Date>? {
+        guard let dep = state.departAt, let arr = state.arriveAt, arr > dep else { return nil }
+        return Date(timeIntervalSince1970: dep / 1000)...Date(timeIntervalSince1970: arr / 1000)
+    }
+
     var body: some View {
+        Group {
+            if state.progress == nil, running, let window {
+                ProgressView(timerInterval: window, countsDown: false) { EmptyView() } currentValueLabel: { EmptyView() }
+                    .progressViewStyle(.linear)
+                    .tint(colour)
+            } else {
+                bar(state.progress ?? (state.status == "arrived" ? 1 : 0))
+            }
+        }
+        .frame(height: 12)
+        .accessibilityHidden(true)
+    }
+
+    private func bar(_ progress: Double) -> some View {
         GeometryReader { g in
             ZStack(alignment: .leading) {
                 Capsule().fill(Board.track).frame(height: 4)
@@ -74,8 +97,6 @@ private struct RouteLine: View {
             }
             .frame(maxHeight: .infinity)
         }
-        .frame(height: 12)
-        .accessibilityHidden(true)
     }
 }
 
@@ -104,7 +125,7 @@ private struct LockScreen: View {
                     if let at = state.nextStopAt { Text(time(at, tz: attributes.toTz)).font(.custom("SpaceGrotesk-Bold", size: 14)).foregroundStyle(Board.text2) }
                 }
             }
-            RouteLine(progress: state.progress ?? (state.status == "arrived" ? 1 : 0), colour: line)
+            RouteLine(state: state, colour: line)
             HStack {
                 Text(time(state.departAt, tz: attributes.fromTz)).font(.custom("SpaceGrotesk-Bold", size: 18)).foregroundStyle(Board.text)
                 Spacer()
@@ -129,29 +150,33 @@ struct TripLiveActivity: Widget {
             let s = status(context.state)
             let line = Color(hex: context.attributes.color) ?? Board.accent
             return DynamicIsland {
+                // Beside the camera: only small things (the camera cut-out hides anything wide). The destination goes below it.
                 DynamicIslandExpandedRegion(.leading) {
-                    Text(context.attributes.to).font(.custom("InterVariable", size: 15).weight(.heavy)).foregroundStyle(Board.text).lineLimit(1)
+                    Image(systemName: "tram.fill").font(.system(size: 17)).foregroundStyle(Board.accent)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     if let p = context.state.platform {
-                        Text(Words.platform(p)).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(Board.accent)
+                        Text(p).font(.custom("SpaceGrotesk-Bold", size: 20)).foregroundStyle(Board.accent)
+                            .accessibilityLabel(Words.platform(p))
                     }
                 }
                 DynamicIslandExpandedRegion(.center) {
-                    Text(s.text).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(s.colour)
+                    Text(context.attributes.to).font(.custom("InterVariable", size: 16).weight(.heavy)).foregroundStyle(Board.text).lineLimit(1).minimumScaleFactor(0.7)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    VStack(spacing: 6) {
-                        RouteLine(progress: context.state.progress ?? 0, colour: line)
+                    VStack(spacing: 8) {
+                        Text(s.text).font(.custom("InterVariable", size: 14).weight(.bold)).foregroundStyle(s.colour)
+                        RouteLine(state: context.state, colour: line)
                         HStack {
                             Text(time(context.state.departAt, tz: context.attributes.fromTz))
                             Spacer()
-                            if let next = context.state.nextStop { Text(Words.next(next)).lineLimit(1) }
+                            if let next = context.state.nextStop, context.state.status == "en_route" || context.state.status == "at_stop" { Text(next).lineLimit(1) }
                             Spacer()
                             Text(time(context.state.arriveAt, tz: context.attributes.toTz))
                         }
                         .font(.custom("SpaceGrotesk-Bold", size: 14)).foregroundStyle(Board.text2)
                     }
+                    .padding(.top, 4)
                 }
             } compactLeading: {
                 Image(systemName: "tram.fill").foregroundStyle(Board.accent)
@@ -162,6 +187,38 @@ struct TripLiveActivity: Widget {
                 Image(systemName: "tram.fill").foregroundStyle(s.colour)
             }
             .keylineTint(line)
+            // Even margins, kept inside the island's rounded corners.
+            .contentMargins([.leading, .trailing], 18, for: .expanded)
+            .contentMargins(.bottom, 16, for: .expanded)
+            .contentMargins(.top, 6, for: .expanded)
         }
     }
 }
+
+#if DEBUG
+private let previewAttributes = TripActivityAttributes(legId: "preview", journeyId: nil, train: "547", from: "Stockholm C", to: "Malmö C", fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm", color: "#2ea44f")
+private func previewState(_ status: String, delay: Int?, progress: Double?) -> TripActivityAttributes.ContentState {
+    let now = Date().timeIntervalSince1970 * 1000
+    return .init(status: status, delayMin: delay, nextStop: "Hässleholm C", nextStopAt: now + 14 * 60_000, platform: "3", platformFor: "arrival", progress: progress, departAt: now - 120 * 60_000, arriveAt: now + 90 * 60_000, canceled: false)
+}
+
+#Preview("Lock Screen", as: .content, using: previewAttributes) {
+    TripLiveActivity()
+} contentStates: {
+    previewState("en_route", delay: 0, progress: 0.6)
+    previewState("en_route", delay: 12, progress: nil)
+    previewState("approaching", delay: 9, progress: 0)
+}
+
+#Preview("Island expanded", as: .dynamicIsland(.expanded), using: previewAttributes) {
+    TripLiveActivity()
+} contentStates: {
+    previewState("en_route", delay: 12, progress: 0.6)
+}
+
+#Preview("Island compact", as: .dynamicIsland(.compact), using: previewAttributes) {
+    TripLiveActivity()
+} contentStates: {
+    previewState("en_route", delay: 12, progress: 0.6)
+}
+#endif

@@ -44,7 +44,8 @@ describe('notifier', () => {
     expect(sent).toHaveLength(1);
     expect(sent[0]!.path).toBe(`/3/device/${TOKEN}`);
     expect(sent[0]!.host).toBe('api.sandbox.push.apple.com');
-    expect(bodies(sent)[0]!.aps.alert).toEqual({ title: 'Nässjö C → Jönköping C', body: 'Leaves 14:00 from platform 5.' });
+    expect(bodies(sent)[0]!.aps.alert).toEqual({ title: 'Nässjö C → Jönköping C', subtitle: '7205', body: 'Leaves 14:00 from platform 5.' });
+    expect((JSON.parse(sent[0]!.body) as { aps: { sound: string } }).aps.sound).toBe('sbb_jingle.wav');
   });
 
   it('says nothing to someone who has alerts off, or before the lead time', async () => {

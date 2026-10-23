@@ -71,7 +71,7 @@ final class TestAlertsModel {
 
     // MARK: notifications
 
-    func fire(_ sample: Sample, after seconds: Double? = nil) async {
+    func fire(_ sample: Sample, type: TrainType?) async {
         let center = UNUserNotificationCenter.current()
         if await NotificationManager.shared.authorization == .notDetermined { _ = await NotificationManager.shared.requestPermission() }
         await NotificationManager.shared.refresh()
@@ -82,21 +82,14 @@ final class TestAlertsModel {
         let content = UNMutableNotificationContent()
         content.title = sample.title
         content.body = sample.body
-        content.sound = .default
+        content.subtitle = swedish ? "SJ Snabbtåg 7205 · spår \(sample.id.hasPrefix("platform") ? "7" : "5")" : "SJ Snabbtåg 7205 · platform \(sample.id.hasPrefix("platform") ? "7" : "5")"
+        content.sound = NotificationArt.sound
+        if let art = NotificationArt.attachment(type: type, operatorId: "sj", colorHex: "#2ea44f") { content.attachments = [art] }
         content.threadIdentifier = "debug"
         content.interruptionLevel = sample.timeSensitive ? .timeSensitive : .active
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, seconds ?? delay), repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, delay), repeats: false)
         try? await center.add(UNNotificationRequest(identifier: "debug-\(sample.id)-\(UUID().uuidString)", content: content, trigger: trigger))
-        message = "\(label(sample.id)): arrives in \(Int(max(1, seconds ?? delay))) s. Lock the phone to see it there."
-    }
-
-    func fireAll(language: Language) async {
-        var wait = delay
-        for sample in samples(language: language) {
-            await fire(sample, after: wait)
-            wait += 6
-        }
-        message = "All \(samples(language: language).count) alerts: the first in \(Int(delay)) s, then one every 6 s."
+        message = "\(label(sample.id)): arrives in \(Int(max(1, delay))) s. Lock the phone to see it there."
     }
 
     // MARK: the trip card
@@ -174,10 +167,8 @@ struct TestAlertsScreen: View {
             Card {
                 Text("Alert in").clack(.sectionHeader).foregroundStyle(Ink.text2)
                 SegmentedControl(selection: Binding(get: { model.delay }, set: { model.delay = $0 }), options: [(5, "5 s"), (15, "15 s"), (30, "30 s")], small: true)
-                Button("Send all alerts, 6 s apart") { Task { await model.fireAll(language: app.settings.language) } }
-                    .buttonStyle(.clack(.primary, wide: true))
                 ForEach(model.samples(language: app.settings.language)) { sample in
-                    Button { Task { await model.fire(sample) } } label: {
+                    Button { Task { await model.fire(sample, type: app.trainTypes.first { $0.id == "x2000" } ?? app.trainTypes.first) } } label: {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(model.label(sample.id)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(sample.body).clack(.caption).foregroundStyle(Ink.text2).multilineTextAlignment(.leading)

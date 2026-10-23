@@ -569,11 +569,10 @@ struct StopRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 6)
             VStack(alignment: .trailing, spacing: 0) {
-                Text(Format.time(actual ?? times.sched, tz: stop.tz, clock: app.settings.clock))
-                    .clack(.rowTitle).monospacedDigit()
-                    .foregroundStyle(actual != nil ? band.ink : Ink.text)
-                    .strikethrough(actual != nil && stop.canceled)
-                    .italic(actual != nil && times.real == nil)
+                // The stop's time on the tick board, like the big times; coloured by delay once it is known.
+                SplitFlap(value: Format.time(actual ?? times.sched, tz: stop.tz, clock: app.settings.clock), size: .sm, colour: actual != nil ? band.ink : nil)
+                    .opacity(stop.canceled ? 0.5 : 1)
+                    .overlay { if stop.canceled { Rectangle().fill(Ink.text2).frame(height: 1.5) } }
                 if showSched, let sched = times.sched {
                     Text(Format.time(sched, tz: stop.tz, clock: app.settings.clock))
                         .font(ClackFont.inter(12, .medium)).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)

@@ -38,6 +38,8 @@ interface Loaded {
   live: { status: string; nextStopId: string | null; eta: number | null; progress: number | null } | null;
   nextStopName: string | null;
   operatorColor: string | null;
+  /** Operator and train number, the line under an alert's title ("SJ 547"). */
+  subtitle: string | undefined;
 }
 
 export interface NotifierOptions {
@@ -108,6 +110,7 @@ export class Notifier {
       next: nextRow ? this.factsOf(nextRow, siblings) : null,
       live: lv ? { status: lv.status, nextStopId: lv.nextStopId, eta: ms(lv.eta), progress: lv.progress } : null,
       nextStopName: lv?.nextStopId ? (this.station(lv.nextStopId)?.name ?? null) : null,
+      subtitle: [row.operatorId ? (this.db.select({ n: operators.shortName }).from(operators).where(eq(operators.id, row.operatorId)).get()?.n ?? null) : null, facts.train].filter(Boolean).join(' ') || undefined,
       operatorColor: row.operatorId ? (this.db.select({ c: operators.brandColor }).from(operators).where(eq(operators.id, row.operatorId)).get()?.c ?? null) : null,
     };
   }
@@ -192,7 +195,7 @@ export class Notifier {
         pushType: 'alert',
         collapseId: `${L.facts.legId}:${a.kind}`,
         expiration: Math.floor(this.now() / 1000) + 3600,
-        payload: alertPayload({ ...a, legId: L.facts.legId, journeyId: L.facts.journeyId }),
+        payload: alertPayload({ ...a, subtitle: L.subtitle, legId: L.facts.legId, journeyId: L.facts.journeyId }),
       });
       if (r.ok) delivered = true;
       else if (r.dead) this.forget(d.token);

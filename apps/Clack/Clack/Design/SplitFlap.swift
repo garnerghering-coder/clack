@@ -214,6 +214,8 @@ struct FlapTime: View {
     let clock: ClockFormat
     var style: Style = .text
     var intro = false
+    /// Show the timetabled time struck through beside a changed one (inside a trip), or only the new one (the Trips tab).
+    var strikeOld = true
 
     var body: some View {
         if let time {
@@ -221,7 +223,7 @@ struct FlapTime: View {
             let text = Format.time(time, tz: tz, clock: clock)
             let schedText = sched.map { Format.time($0, tz: tz, clock: clock) }
             HStack(spacing: 6) {
-                if changed, let schedText {
+                if changed, strikeOld, let schedText {
                     Text(schedText)
                         .strikethrough()
                         .font(ClackFont.inter(style == .sm ? 12 : fontSize * 0.8, .medium))

@@ -38,12 +38,7 @@ enum TimesText {
         }
         let changed = sched.map { floor($0 / 60_000) != floor(time / 60_000) } ?? false
         var out = AttributedString()
-        if changed, let sched {
-            var old = AttributedString(Format.time(sched, tz: tz, clock: clock) + " ")
-            old.strikethroughStyle = .single
-            old.foregroundColor = Ink.text3
-            out += old
-        }
+        // One time, in yellow when it differs from the timetable; the old one is struck through only inside the trip.
         var new = AttributedString(Format.time(time, tz: tz, clock: clock))
         if changed {
             new.foregroundColor = Ink.accentInk
@@ -69,10 +64,10 @@ struct FlapTimes: View {
             ? Format.dayOffset(from: dep!, fromTz: TripsLogic.tz(leg), to: arr!, toTz: leg.destination!.tz) : 0
         // Wraps onto a second line when both struck and new times don't fit, as the web's inline times do.
         FlowLayout(spacing: 6, lineSpacing: 2) {
-            FlapTime(time: x.dep, sched: dep, tz: TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro)
+            FlapTime(time: x.dep, sched: dep, tz: TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false)
             Text("–").foregroundStyle(Ink.text3)
             FlapTime(
-                time: x.arr, sched: arr, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro
+                time: x.arr, sched: arr, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false
             )
             if plus > 0 {
                 Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2).baselineOffset(10)

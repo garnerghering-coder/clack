@@ -18,7 +18,7 @@ struct ArrivalScreen: View {
 
     @State private var journey: Journey?
     @State private var progress: TripProgress?
-    @State private var stamped = false
+    @State private var settled = false
 
     private var legs: [Leg] { journey?.legs.map(\.leg) ?? [] }
 
@@ -43,7 +43,7 @@ struct ArrivalScreen: View {
             }
         }
         .preferredColorScheme(.dark)
-        .sensoryFeedback(.impact(weight: .heavy), trigger: stamped)
+        .sensoryFeedback(.impact(weight: .heavy), trigger: settled)
         .sensoryFeedback(.success, trigger: progress?.unlocked.count ?? 0)
         .task {
             app.arrivals.markShown(moment)
@@ -58,16 +58,7 @@ struct ArrivalScreen: View {
             Text("\(l10n.t("arrival.arrived")) · \(Format.time(arr, tz: destination.tz, clock: app.settings.clock))")
                 .clack(.captionUpper).foregroundStyle(Ink.accent)
             Text(l10n.t("arrival.welcomeTo")).clack(.welcomeTitle).foregroundStyle(Ink.text)
-            SplitFlap(value: name, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm), intro: true)
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(destination.name)
-            Stamp(name: destination.name, date: Format.longDate(arr, tz: destination.tz, language: app.settings.language), landed: stamped || reduceMotion)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .task {
-                    // After the flaps have settled.
-                    try? await Task.sleep(for: .milliseconds(reduceMotion ? 0 : 1400))
-                    withAnimation(.timingCurve(0.2, 1.4, 0.4, 1, duration: 0.45)) { stamped = true }
-                }
+            ArrivalBoard(name: name, plain: destination.name) { settled = true }
         }
     }
 
@@ -100,12 +91,25 @@ struct ArrivalScreen: View {
             routes: journey.legs.map {
                 MultiRoute(color: MapStyle.opColor($0.leg.operator?.brandColor, dark: scheme == .dark), geometry: $0.geometry, stops: [])
             },
-            stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
+            stations: stations(journey), railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
         )
         .frame(height: 200)
         .allowsHitTesting(false)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
+    }
+
+    /// A dot at each station the journey used: where each train was boarded and left, a change counting for both.
+    private func stations(_ journey: Journey) -> [MultiStation] {
+        var out: [MultiStation] = []
+        for leg in journey.legs {
+            guard let points = leg.geometry.map(Polyline.decode), let first = points.first, let last = points.last else { continue }
+            for (point, name) in [(first, leg.leg.origin?.name), (last, leg.leg.destination?.name)] {
+                guard let name else { continue }
+                if let i = out.firstIndex(where: { $0.name == name }) { out[i].count += 1 } else { out.append(MultiStation(lat: point.lat, lon: point.lon, name: name, count: 1)) }
+            }
+        }
+        return out
     }
 
     private var actions: some View {
@@ -141,24 +145,47 @@ struct ArrivalScreen: View {
     }
 }
 
-/// A passport stamp: the station and the date in a ring, set down at a slight tilt (DESIGN §10: scale 1.4 to 1).
-private struct Stamp: View {
+/// The destination on a split-flap board that clatters through letters before it settles on the name, as a board does
+/// when it changes (owner, 2026-10-24). With Reduce Motion it just shows the name.
+private struct ArrivalBoard: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let name: String
-    let date: String
-    let landed: Bool
+    let plain: String
+    let onSettled: () -> Void
+    @State private var shown: String
+
+    init(name: String, plain: String, onSettled: @escaping () -> Void) {
+        self.name = name
+        self.plain = plain
+        self.onSettled = onSettled
+        _shown = State(initialValue: String(repeating: " ", count: name.count))
+    }
+
+    private static let letters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ")
+
+    private func scramble() -> String {
+        String(name.map { $0 == " " ? " " : Self.letters.randomElement() ?? "A" })
+    }
 
     var body: some View {
-        VStack(spacing: 2) {
-            Text(name.uppercased()).clack(.captionUpper).fontWeight(.heavy).lineLimit(2).multilineTextAlignment(.center)
-            Text(date).clack(.captionUpper)
-        }
-        .foregroundStyle(Ink.accent)
-        .padding(14)
-        .frame(maxWidth: 190)
-        .overlay(RoundedRectangle(cornerRadius: Radius.card, style: .continuous).stroke(Ink.accent, lineWidth: 2))
-        .rotationEffect(.degrees(landed ? -6 : -14))
-        .scaleEffect(landed ? 1 : 1.4)
-        .opacity(landed ? 1 : 0)
-        .accessibilityHidden(true)
+        SplitFlap(value: shown, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm))
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(plain)
+            .task {
+                guard !reduceMotion else {
+                    shown = name
+                    onSettled()
+                    return
+                }
+                // Blank, then two rounds of letters, then the name: each change flips the tiles left to right.
+                try? await Task.sleep(for: .milliseconds(450))
+                shown = scramble()
+                try? await Task.sleep(for: .milliseconds(850))
+                shown = scramble()
+                try? await Task.sleep(for: .milliseconds(850))
+                shown = name
+                try? await Task.sleep(for: .milliseconds(700))
+                onSettled()
+            }
     }
 }

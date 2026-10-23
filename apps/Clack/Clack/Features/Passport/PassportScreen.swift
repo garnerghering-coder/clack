@@ -328,7 +328,8 @@ struct PassportScreen: View {
 
 // MARK: pieces
 
-/// The Passport's top card: a passport page (gradient, guilloche, sheen) that tilts a little under your finger.
+/// The Passport's top card: a passport page (gradient, guilloche, sheen) that tilts and catches the light as you move the
+/// phone. It has no touch handling, so the page scrolls from anywhere on it.
 private struct PassportCard: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -336,9 +337,8 @@ private struct PassportCard: View {
     let data: Passport
     let year: Int?
     @Binding var flavorIndex: Int
-    @State private var tilt = CGSize.zero
+    @State private var motion = MotionTilt()
     @State private var sheen = false
-    @State private var touch: CGFloat = 0.3
 
     var body: some View {
         let t = data.totals
@@ -395,15 +395,10 @@ private struct PassportCard: View {
         .background { cover }
         .clipShape(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
         .shadow(color: Color(hex: "#f8d64a")!.opacity(0.55), radius: 20, y: 14)
-        .rotation3DEffect(.degrees(tilt.height), axis: (x: 1, y: 0, z: 0), perspective: 1 / 3)
-        .rotation3DEffect(.degrees(tilt.width), axis: (x: 0, y: 1, z: 0), perspective: 1 / 3)
-        .animation(.easeOut(duration: 0.25), value: tilt)
-        .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { value in
-            guard !reduceMotion else { return }
-            // Up to 3 degrees about the horizontal axis and 4 about the vertical, from where the finger is.
-            tilt = CGSize(width: Double((value.location.x / 360 - 0.5) * 8).clamped(-4, 4), height: Double((value.location.y / 300 - 0.5) * -6).clamped(-3, 3))
-            touch = value.location.x / 360
-        }.onEnded { _ in tilt = .zero })
+        .rotation3DEffect(.degrees(reduceMotion ? 0 : motion.pitch), axis: (x: 1, y: 0, z: 0), perspective: 1 / 3)
+        .rotation3DEffect(.degrees(reduceMotion ? 0 : motion.yaw), axis: (x: 0, y: 1, z: 0), perspective: 1 / 3)
+        .onAppear { if !reduceMotion { motion.start() } }
+        .onDisappear { motion.stop() }
         .onAppear { sheen = true }
     }
 
@@ -420,7 +415,7 @@ private struct PassportCard: View {
             GeometryReader { proxy in
                 LinearGradient(stops: [.init(color: .clear, location: 0.3), .init(color: .white.opacity(0.45), location: 0.45), .init(color: .clear, location: 0.6)], startPoint: .leading, endPoint: .trailing)
                     .frame(width: proxy.size.width * 2.5)
-                    .offset(x: sheen || reduceMotion ? -proxy.size.width * 2.5 * 0.45 + proxy.size.width * touch : proxy.size.width * 0.4)
+                    .offset(x: sheen || reduceMotion ? -proxy.size.width * 2.5 * 0.45 + proxy.size.width * (reduceMotion ? 0.3 : motion.shine) : proxy.size.width * 0.4)
                     .blendMode(.softLight)
                     .animation(reduceMotion ? nil : .easeOut(duration: 1.6).delay(0.3), value: sheen)
             }
