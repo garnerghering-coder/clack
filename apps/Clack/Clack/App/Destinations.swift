@@ -42,6 +42,9 @@ private struct DestinationView: View {
         case .stations: StationsScreen()
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
         case .stationMap(let link): StationMapScreen(link: link)
+        #if DEBUG
+        case .testAlerts: TestAlertsScreen()
+        #endif
         }
     }
 }

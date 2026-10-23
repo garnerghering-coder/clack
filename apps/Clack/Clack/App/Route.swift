@@ -41,6 +41,10 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
+    #if DEBUG
+    /// Settings > Test alerts (debug builds only).
+    case testAlerts
+    #endif
 }
 
 /// Which tab is showing and what each tab has pushed. The last tab is remembered for the next launch
@@ -83,6 +87,7 @@ final class Router {
             if raw == "stations" { tripsPath = [.stations] }
             if raw == "about" { tripsPath = [.settings, .about] }
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
+            if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }

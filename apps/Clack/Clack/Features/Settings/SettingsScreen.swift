@@ -143,6 +143,8 @@ struct SettingsScreen: View {
             }
             VersionFooter()
             #if DEBUG
+            NavigationLink("Test alerts", value: AppRoute.testAlerts)
+                .buttonStyle(.clack(wide: true))
             NavigationLink("Design") { DesignGalleryView().toolbar(.hidden, for: .navigationBar) }
                 .buttonStyle(.clack(wide: true))
             #endif

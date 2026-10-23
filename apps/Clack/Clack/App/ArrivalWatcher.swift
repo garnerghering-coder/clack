@@ -95,6 +95,11 @@ final class ArrivalWatcher {
         Self.add(moment.legId, to: Self.shownKey)
     }
 
+    #if DEBUG
+    /// Settings > Test alerts: show the arrival screen for a trip now.
+    func preview(_ moment: ArrivalMoment) { pending = moment }
+    #endif
+
     func dismiss() {
         pending = nil
         evaluate()
