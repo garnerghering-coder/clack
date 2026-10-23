@@ -7,7 +7,8 @@ history. The owner is Garner (he/him).
 
 - `apps/server`: Fastify + SQLite (Drizzle), run with tsx. Train data from Trafikverket, Trafiklab and Entur.
 - `apps/web`: React 19 + Vite + MapLibre. The same build is the iPhone app.
-- `apps/web/ios`: the Xcode project (Capacitor 8). Open `apps/web/ios/App/App.xcodeproj`.
+- `apps/Clack`: the native SwiftUI iPhone app (being built: docs/SWIFT_PORT.md). Open `apps/Clack/Clack.xcodeproj`.
+- `apps/web/ios`: the earlier Capacitor wrapper of the web app; removed once the Swift app ships.
 - `packages/shared`: types and constants both apps use.
 - `data/`: hand-made data (operators, train types, station maps), each fact with its source.
 - `scripts/`: imports, station-map tools, and `scripts/trains/*.py`, which generate the train drawings.
@@ -18,6 +19,7 @@ history. The owner is Garner (he/him).
   either.
 - `docs/TRAIN_ART.md`: how train drawings are made (measured from photos, never guessed). Read it before touching
   `scripts/trains` or `apps/web/src/components/trains`.
+- `docs/SWIFT_PORT.md`: the plan for the native app, step by step, with its references in `docs/swift-port/`.
 - `docs/IOS.md`: the iPhone app, the server online, widgets and notifications. `docs/APP_STORE.md`: what App Review
   needs, what's done and what's still open.
 - `*_FINDINGS.md`: what was learned about each data source. Check there before assuming what a feed contains.

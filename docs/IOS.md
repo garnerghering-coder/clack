@@ -1,5 +1,9 @@
 # Clack on iPhone: from this repository to the App Store
 
+> **Update 2026-10-23:** the iPhone app is being rebuilt natively in SwiftUI. To set up the Mac and work with Claude
+> from there, follow [SWIFT_PORT.md](SWIFT_PORT.md) Part A. This file still covers putting the server online (step 9),
+> TestFlight and submitting (steps 10 and 11), and the widgets plan.
+
 This guide assumes a Mac with nothing installed and no Xcode experience. Follow it top to bottom; each step says
 exactly what to click or type. Commands go in **Terminal** (Applications > Utilities > Terminal): paste the line,
 press Return, and wait until it finishes.
