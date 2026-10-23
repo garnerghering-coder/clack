@@ -11,9 +11,21 @@ struct ClackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(app)
-                .task { await app.load() }
+            Group {
+                #if DEBUG
+                // `-design` opens the design gallery straight away (docs/SWIFT_PORT.md step 4).
+                if CommandLine.arguments.contains("-design") {
+                    NavigationStack { DesignGalleryView() }
+                } else {
+                    RootView()
+                }
+                #else
+                RootView()
+                #endif
+            }
+            .environment(app)
+            .environment(app.l10n)
+            .task { await app.load() }
         }
     }
 }
