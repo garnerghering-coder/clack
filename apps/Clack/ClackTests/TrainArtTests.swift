@@ -37,6 +37,20 @@ struct TrainArtTests {
         #expect(picture(nil) == .init(asset: "x60-plain", isStandIn: true, isUnknown: true))
     }
 
+    /// Owner's policy (2026-10-23): when a type names two or three models and one of them is drawn in this operator's
+    /// livery, the picture shows it (the type's name still says "X11 or X14").
+    @Test func anUncertainTypeShowsTheDrawnCandidateInTheOperatorsLivery() {
+        #expect(picture("x11_x14", "contessa", uncertain: true, "krosatag") == .init(asset: "x11-krosatag", isStandIn: false, isUnknown: false))
+        #expect(picture("itino_y2", "railcar", uncertain: true, "krosatag").asset == "y31-krosatag")
+        #expect(picture("no_type69_72", "contessa", uncertain: true, "vy").asset == "no_type72-vy")
+        #expect(picture("flytoget", "x3", uncertain: true, "flytoget").asset == "flytoget71-flytoget")
+    }
+
+    @Test func anUncertainTypeWithNoDrawnCandidateInThatLiveryStaysTheFaintStandIn() {
+        #expect(picture("x11_x14", "contessa", uncertain: true, "vasttagen").isUnknown)
+        #expect(picture("x11_x14", "contessa", uncertain: true, nil).isStandIn)
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")

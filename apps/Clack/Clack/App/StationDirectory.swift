@@ -25,6 +25,15 @@ final class StationDirectory {
         return await task.value
     }
 
+    /// A station was favourited or un-favourited: the kept details change with it, so opening it again shows the star
+    /// as it is now and not as it was when the details were first fetched.
+    func setFavorite(_ id: String, _ on: Bool) async {
+        guard var known = await info(id) else { return }
+        known.favorite = on
+        let updated = known
+        infos[id] = Task { updated }
+    }
+
     /// The station's map, or nil when it has none.
     func map(_ id: String) async -> StationMap? {
         guard let info = await info(id), info.hasMap else { return nil }

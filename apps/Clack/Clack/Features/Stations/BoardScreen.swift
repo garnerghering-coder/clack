@@ -20,6 +20,14 @@ struct BoardScreen: View {
     @State private var earlier: [BoardRow]?
     @State private var error = false
     @State private var filter = BoardLogic.Filter()
+    /// How many rows are showing: 20 to start with, 20 more each time "Show later" is pressed.
+    @State private var limit = Self.page
+    /// Departures from 12 to 24 hours ahead, fetched the first time "Show later" needs them.
+    @State private var later: [BoardRow]?
+    @State private var loadingLater = false
+    private static let page = 20
+    /// The furthest ahead the board looks.
+    private static let reachMs = 24.0 * 3_600_000
 
     private var tz: String { station?.tz ?? "Europe/Stockholm" }
 
@@ -35,7 +43,6 @@ struct BoardScreen: View {
                     selection: $arrivals,
                     options: [(false, l10n.t("board.departures")), (true, l10n.t("board.arrivals"))]
                 )
-                filters
                 content
             }
         }
@@ -44,6 +51,8 @@ struct BoardScreen: View {
         }
         .task {
             filter.commuter = app.settings.includeCommuter
+            // The page limit and the 24 h reach decide what shows, not a window chip.
+            filter.window = .day
             station = await app.stations.info(stationId)
             if station == nil { missing = true; return }
             try? await app.client.stationViewed(stationId)
@@ -61,6 +70,8 @@ struct BoardScreen: View {
         guard station?.hasBoard == true else { return }
         board = nil
         earlier = nil
+        later = nil
+        limit = Self.page
         filter.showEarlier = false
         error = false
         while !Task.isCancelled {
@@ -78,6 +89,21 @@ struct BoardScreen: View {
         }
     }
 
+    /// "Show later": 20 more rows. When all that's loaded is showing, the hours from 12 to 24 ahead are fetched first.
+    private func showLater(more: Bool) async {
+        if !more, later == nil, let board {
+            loadingLater = true
+            defer { loadingLater = false }
+            let to = Date().timeIntervalSince1970 * 1000 + Self.reachMs
+            if to > board.to, let fetched = try? await app.client.board(stationId, arrivals: arrivals, from: board.to, to: to) {
+                later = fetched.rows
+            } else {
+                return
+            }
+        }
+        limit += Self.page
+    }
+
     private func loadEarlier() async {
         filter.showEarlier = true
         guard let board, earlier == nil else { return }
@@ -87,7 +113,10 @@ struct BoardScreen: View {
 
     private func toggleFavorite() async {
         guard let station else { return }
-        if let on = try? await app.client.setFavorite(station.id, !favoriteOverride) { favoriteOverride = on }
+        if let on = try? await app.client.setFavorite(station.id, !favoriteOverride) {
+            favoriteOverride = on
+            await app.stations.setFavorite(station.id, on)
+        }
     }
 
     // MARK: pieces
@@ -106,14 +135,21 @@ struct BoardScreen: View {
                         router.push(.stationMap(StationMapLink(stationId: station.id)))
                     }
                 }
+                // Just the star fills in, in the accent colour; the button around it stays as it is.
                 Button { Task { await toggleFavorite() } } label: {
-                    LucideIcon(name: "star", size: 20)
-                        .foregroundStyle(favoriteOverride ? Ink.onAccent : Ink.text)
-                        .frame(width: 44, height: 44)
-                        .background(favoriteOverride ? Ink.accent : Ink.surfaceRaised, in: Circle())
-                        .overlay(Circle().strokeBorder(favoriteOverride ? Ink.accent : Ink.hairline, lineWidth: 1))
+                    Group {
+                        if favoriteOverride {
+                            Image(systemName: "star.fill").font(.system(size: 20)).foregroundStyle(Ink.accent)
+                        } else {
+                            LucideIcon(name: "star", size: 20).foregroundStyle(Ink.text)
+                        }
+                    }
+                    .frame(width: 44, height: 44)
+                    .background(Ink.surfaceRaised, in: Circle())
+                    .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
                 }
                 .buttonStyle(.plain)
+                .sensoryFeedback(.selection, trigger: favoriteOverride)
                 .accessibilityLabel(l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"))
                 .accessibilityAddTraits(favoriteOverride ? .isSelected : [])
             }
@@ -137,28 +173,6 @@ struct BoardScreen: View {
         }
     }
 
-    private var filters: some View {
-        let operatorsHere = Array(Set((board?.rows ?? []).compactMap(\.operatorId))).sorted()
-        return FlowLayout(spacing: 8, lineSpacing: 8) {
-            ForEach(BoardLogic.Window.allCases, id: \.self) { window in
-                ChipButton(text: l10n.t("board.window.\(window.rawValue)"), active: filter.window == window) { filter.window = window }
-            }
-            ChipButton(text: l10n.t("board.commuter"), active: filter.commuter) { filter.commuter.toggle() }
-            ForEach(BoardLogic.filterProducts.filter { p in board?.rows.contains { $0.product == p } ?? false }, id: \.self) { product in
-                ChipButton(text: l10n.t("products.\(product)"), active: filter.products.contains(product)) { toggle(&filter.products, product) }
-            }
-            if operatorsHere.count > 1 {
-                ForEach(operatorsHere, id: \.self) { id in
-                    ChipButton(text: app.operatorsById[id]?.name ?? id, active: filter.operators.contains(id)) { toggle(&filter.operators, id) }
-                }
-            }
-        }
-    }
-
-    private func toggle(_ set: inout Set<String>, _ value: String) {
-        if set.contains(value) { set.remove(value) } else { set.insert(value) }
-    }
-
     @ViewBuilder
     private var content: some View {
         if let station, !station.hasBoard {
@@ -170,21 +184,24 @@ struct BoardScreen: View {
                 }
                 TimelineView(.periodic(from: .now, by: 1)) { context in
                     let now = context.date.timeIntervalSince1970 * 1000
-                    let rows = BoardLogic.visible((filter.showEarlier ? earlier ?? [] : []) + board.rows, now: now, filter: filter)
-                    if rows.isEmpty {
-                        VStack(spacing: 10) {
+                    let source = (filter.showEarlier ? earlier ?? [] : []) + board.rows + (later ?? [])
+                    let page = BoardLogic.page(source, now: now, filter: filter, limit: limit, reach: Self.reachMs)
+                    VStack(spacing: 0) {
+                        if page.shown.isEmpty {
                             Text(l10n.t("board.empty")).clack(.body).foregroundStyle(Ink.text2)
-                            if let wider = filter.window.wider {
-                                Button(l10n.t("board.widen")) { filter.window = wider }.buttonStyle(.clack())
-                            }
+                                .frame(maxWidth: .infinity).padding(.vertical, 24)
                         }
-                        .frame(maxWidth: .infinity).padding(.top, 24)
-                    } else {
-                        VStack(spacing: 0) {
-                            ForEach(rows) { row in
-                                BoardRowView(row: row, arrivals: arrivals, now: now, tz: tz) { open(row) }
-                                Divider().overlay(Ink.hairline)
-                            }
+                        ForEach(page.shown) { row in
+                            BoardRowView(row: row, arrivals: arrivals, now: now, tz: tz) { open(row) }
+                            Divider().overlay(Ink.hairline)
+                        }
+                        // More to show: from what's loaded, else (once) the hours from 12 to 24 ahead. Nothing past 24 h.
+                        if page.more || (later == nil && !loadingLater) {
+                            Button(l10n.t("board.showLater")) { Task { await showLater(more: page.more) } }
+                                .buttonStyle(LinkButtonStyle())
+                                .frame(maxWidth: .infinity).padding(.top, 14)
+                        } else if loadingLater {
+                            Skeleton(height: 48).padding(.top, 14)
                         }
                     }
                 }

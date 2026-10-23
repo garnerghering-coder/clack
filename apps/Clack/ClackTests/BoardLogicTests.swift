@@ -63,4 +63,28 @@ struct BoardLogicTests {
         #expect(BoardLogic.Window.threeHours.wider == .day)
         #expect(BoardLogic.Window.day.wider == nil)
     }
+
+    @Test func aPageIsTheFirstTwentyInTimeOrderWithinReachAndSaysIfThereAreMore() {
+        let hour = 3_600_000.0
+        // 30 departures, one every 20 minutes from now (the last one 9 h 40 min away).
+        let rows = (0..<30).map { row("r\($0)", advertised: now + Double($0) * hour / 3) }
+        var filter = BoardLogic.Filter()
+        filter.window = .day
+        let first = BoardLogic.page(rows, now: now, filter: filter, limit: 20, reach: 24 * hour)
+        #expect(first.shown.count == 20 && first.more)
+        #expect(first.shown.map(\.id) == (0..<20).map { "r\($0)" })
+        let all = BoardLogic.page(rows, now: now, filter: filter, limit: 40, reach: 24 * hour)
+        #expect(all.shown.count == 30 && !all.more)
+        // Nothing past the reach: with 5 hours, the first 16 (0 to 5 h, the last exactly on the limit).
+        let near = BoardLogic.page(rows, now: now, filter: filter, limit: 40, reach: 5 * hour)
+        #expect(near.shown.count == 16 && !near.more)
+    }
+
+    @Test func aPageDropsRepeatsFromTheLiveBoardAndTheLaterFetch() {
+        var filter = BoardLogic.Filter()
+        filter.window = .day
+        let a = row("same", advertised: now + 60_000)
+        let page = BoardLogic.page([a, a, row("other", advertised: now + 120_000)], now: now, filter: filter, limit: 20, reach: 24 * 3_600_000)
+        #expect(page.shown.map(\.id) == ["same", "other"])
+    }
 }

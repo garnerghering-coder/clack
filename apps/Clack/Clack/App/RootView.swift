@@ -68,6 +68,10 @@ struct RootView: View {
         .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }
         .task {
             try? await Task.sleep(for: .milliseconds(900))
+            #if DEBUG
+            // `-holdSplash` keeps the splash on screen, to look at it.
+            if CommandLine.arguments.contains("-holdSplash") { return }
+            #endif
             // The logos come in while the splash is up (at most 2.5 s more), so no badge appears empty.
             var waited = 0
             while !app.logosSettled && waited < 25 {

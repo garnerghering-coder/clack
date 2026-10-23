@@ -54,6 +54,16 @@ nonisolated enum BoardLogic {
         }
     }
 
+    /// The rows to show: the ones that pass the filter and lie within `reach` of now, in time order and without
+    /// repeats, the first `limit` of them, and whether there are more behind them.
+    static func page(_ rows: [BoardRow], now: Double, filter: Filter, limit: Int, reach: Double) -> (shown: [BoardRow], more: Bool) {
+        var seen = Set<String>()
+        let all = visible(rows, now: now, filter: filter)
+            .filter { $0.advertised <= now + reach && seen.insert($0.id).inserted }
+            .sorted { $0.advertised < $1.advertised }
+        return (Array(all.prefix(limit)), all.count > limit)
+    }
+
     /// The platform was changed recently enough to be worth flagging (or when the change happened is unknown).
     static func platformChanged(_ row: BoardRow, now: Double) -> Bool {
         guard let change = row.platformChange else { return false }

@@ -53,7 +53,7 @@ struct DesignGalleryView: View {
                 IconButton(icon: light ? "moon" : "star", label: "Theme") { light.toggle() }
             }
             section("Wordmark") {
-                Wordmark(fontSize: 64, rule: true)
+                Wordmark(fontSize: 64)
                 Wordmark(fontSize: 26)
             }
             section("Colours") {

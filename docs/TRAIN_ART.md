@@ -64,3 +64,12 @@ wheels sit behind deep side frames, axle boxes and springs, with the body or ski
 bogie as the photos show it. A nose is one continuous outline measured from a side-on source, never assembled from
 pieces (a hump, a cut-out, a slash for the windscreen). Before showing anything, compare the picture at app size
 (about 54 px tall) side by side with a photo or a published side elevation at the same scale, not only the overlay.
+
+## When the type is one of two or three (iPhone app, owner's policy 2026-10-23)
+
+Some types name more than one model because no source says which runs a given train ("X11 or X14", "Itino (Y31/Y32) or
+Y2", Vy's "Type 69 or 72", Flytoget's 71 or 78). The iPhone app shows the drawing of one of those models, in the
+operator's own livery, when one of them has been drawn in that livery (the first one listed in `TrainArt.candidates`
+wins); the name under the picture still reads "X11 or X14", so it never claims more than the data does. With no drawn
+candidate in that livery it falls back to the faint unpainted stand-in as before. The web app is not changed by this.
+

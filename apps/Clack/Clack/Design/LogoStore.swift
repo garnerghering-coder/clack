@@ -20,7 +20,11 @@ final class LogoStore {
     @ObservationIgnored private let folder: URL
 
     private init() {
-        folder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("logos", isDirectory: true)
+        let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        // "logos-2": logos are saved here, not in the old "logos" folder, which holds pictures from an earlier drawing
+        // routine that got some of them wrong (and is cleared out now).
+        try? FileManager.default.removeItem(at: caches.appendingPathComponent("logos", isDirectory: true))
+        folder = caches.appendingPathComponent("logos-2", isDirectory: true)
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
     }
 

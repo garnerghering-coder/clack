@@ -74,7 +74,30 @@ nonisolated enum TrainArt {
         let isUnknown: Bool
     }
 
+    /// The models an uncertain type names ("X11 or X14", "Itino (Y31/Y32) or Y2"), by train type id, each as the id its
+    /// drawing goes by. Only the ones that have been drawn matter: if one of them is drawn in this operator's livery
+    /// the picture shows it (owner's policy, 2026-10-23), and the type's name still says it is one of the two.
+    static let candidates: [String: [String]] = [
+        "x11_x14": ["x11"],
+        "itino_y2": ["y31"],
+        "no_type69_72": ["no_type72"],
+        "flytoget": ["flytoget71", "flytoget78"],
+    ]
+
+    /// The drawing of a candidate for an uncertain type, in the operator's own livery; nil when none has been drawn
+    /// in it (the unpainted stand-in is used then, as before). The first candidate listed wins.
+    static func candidatePicture(typeId: String?, operatorId: String?) -> Picture? {
+        guard let typeId, let operatorId, let options = candidates[typeId] else { return nil }
+        for id in options {
+            if let d = detailed[id], d.liveries.contains(operatorId), !d.notFor.contains(operatorId) {
+                return Picture(asset: "\(d.model)-\(d.liveryOf[operatorId] ?? operatorId)", isStandIn: false, isUnknown: false)
+            }
+        }
+        return nil
+    }
+
     static func picture(typeId: String?, art: String?, uncertain: Bool, operatorId: String?) -> Picture {
+        if uncertain, let candidate = candidatePicture(typeId: typeId, operatorId: operatorId) { return candidate }
         if let typeId, !uncertain, let d = detailed[typeId], hasDetailedArt(typeId: typeId, operatorId: operatorId) {
             let livery = (operatorId.flatMap { id in d.liveries.contains(id) ? (d.liveryOf[id] ?? id) : nil }) ?? "plain"
             return Picture(asset: "\(d.model)-\(livery)", isStandIn: false, isUnknown: false)

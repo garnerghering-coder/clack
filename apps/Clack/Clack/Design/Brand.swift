@@ -5,36 +5,32 @@
 
 import SwiftUI
 
-/// The Clack wordmark (owner's design, 2026-10-21): "clack" on split-flap tiles, the last one signal yellow.
-/// Sizes are in em of `fontSize`, as in the CSS: a tile is 0.92 × 1.32 em with radius 0.16 em.
+/// The Clack wordmark (owner's design, 2026-10-23): "clack" on five split-flap tiles, each two dark halves with a hinge
+/// line, the letter in IBM Plex Mono-style outlines. Drawn from the logo's own units (`WordmarkGlyphs`): the logo is
+/// 296 × 84, so a tile is 56 × 84 and one unit is `fontSize × 1.32 / 84`, which keeps the sizes the old wordmark had.
 struct Wordmark: View {
     var fontSize: CGFloat = 26
-    var rule = false
     /// Flip the tiles in one after another (the launch screen).
     var animateIn = false
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var shown = false
 
-    private let letters = ["c", "l", "a", "c", "k"]
+    private static let paths: [UIBezierPath] = WordmarkGlyphs.letters.map { SVGLogo.outline($0) ?? UIBezierPath() }
+    private static let tileTop = Color(hex: "#171717")!
+    private static let tileBottom = Color(hex: "#121212")!
+    private static let letter = Color(hex: "#F4F4F0")!
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: fontSize * 0.1) {
-                ForEach(Array(letters.enumerated()), id: \.offset) { index, letter in
-                    tile(letter, accent: index == 4)
-                        .rotation3DEffect(
-                            .degrees(animates && !shown ? -90 : 0), axis: (x: 1, y: 0, z: 0), anchor: .center, perspective: 1 / 3
-                        )
-                        .opacity(animates && !shown ? 0 : 1)
-                        .animation(.timingCurve(0.3, 0.7, 0.2, 1, duration: 0.42).delay(Double(index) * 0.06), value: shown)
-                }
-            }
-            if rule {
-                RoundedRectangle(cornerRadius: Radius.tag, style: .continuous)
-                    .fill(Ink.accentInk)
-                    .frame(height: fontSize * 0.12)
-                    .padding(.top, fontSize * 0.4)
+        let unit = fontSize * 1.32 / 84
+        HStack(spacing: 4 * unit) {
+            ForEach(0..<5, id: \.self) { index in
+                tile(index, unit: unit)
+                    .rotation3DEffect(
+                        .degrees(animates && !shown ? -90 : 0), axis: (x: 1, y: 0, z: 0), anchor: .center, perspective: 1 / 3
+                    )
+                    .opacity(animates && !shown ? 0 : 1)
+                    .animation(.timingCurve(0.3, 0.7, 0.2, 1, duration: 0.42).delay(Double(index) * 0.06), value: shown)
             }
         }
         .fixedSize()
@@ -45,52 +41,45 @@ struct Wordmark: View {
 
     private var animates: Bool { animateIn && !reduceMotion }
 
-    private func tile(_ letter: String, accent: Bool) -> some View {
-        let w = fontSize * 0.92
-        let h = fontSize * 1.32
-        let top = accent ? Color(hex: "#f8d64a")! : Ink.flapTop
-        let bottom = accent ? Color(hex: "#e9c63c")! : Ink.flapBottom
-        return ZStack {
+    private func tile(_ index: Int, unit: CGFloat) -> some View {
+        ZStack {
             LinearGradient(stops: [
-                .init(color: top, location: 0),
-                .init(color: top, location: 0.495),
-                .init(color: bottom, location: 0.505),
-                .init(color: bottom, location: 1),
+                .init(color: Self.tileTop, location: 0),
+                .init(color: Self.tileTop, location: 0.5),
+                .init(color: Self.tileBottom, location: 0.5),
+                .init(color: Self.tileBottom, location: 1),
             ], startPoint: .top, endPoint: .bottom)
-            Text(letter)
-                .font(ClackFont.inter(fontSize, .heavy))
-                .foregroundStyle(accent ? Color(hex: "#0a0a0a")! : Ink.flapText)
-                .frame(width: w, height: h)
+            WordmarkLetter(path: Self.paths[index], originX: CGFloat(60 * index)).fill(Self.letter)
+            // The hinge: a thin black line across the middle of the tile.
+            Rectangle().fill(Color.black).frame(height: unit)
         }
-        .frame(width: w, height: h)
-        .clipShape(RoundedRectangle(cornerRadius: fontSize * 0.16, style: .continuous))
-        .overlay {
-            // The hinge: a thin line across the tile with a small pin sticking out each side.
-            Rectangle()
-                .fill(accent ? Color.black.opacity(0.35) : Ink.flapHinge)
-                .frame(width: w + fontSize * 0.12, height: fontSize * 0.05)
-        }
+        .frame(width: 56 * unit, height: 84 * unit)
+        .clipShape(RoundedRectangle(cornerRadius: 10 * unit, style: .continuous))
     }
 }
 
-/// The launch screen: the wordmark, a yellow rule, the tagline. Shown until the settings have loaded and at least
-/// 900 ms have passed, then it fades out over 350 ms.
-struct Splash: View {
-    @Environment(L10n.self) private var l10n
+/// One letter of the wordmark, scaled from the logo's units to the tile it sits in.
+private struct WordmarkLetter: Shape {
+    let path: UIBezierPath
+    /// Where this letter's tile starts in the logo (the letters are drawn at their place along it).
+    let originX: CGFloat
 
+    func path(in rect: CGRect) -> Path {
+        let k = rect.width / 56
+        return Path(path.cgPath).applying(CGAffineTransform(scaleX: k, y: k).translatedBy(x: -originX, y: 0))
+    }
+}
+
+/// The launch screen: the wordmark flipping in on signal yellow (#FFD400), nothing else. Shown until the settings have
+/// loaded and at least 900 ms have passed, then it fades out over 350 ms.
+struct Splash: View {
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                Ink.bg
-                Wordmark(fontSize: 64, rule: true, animateIn: true)
-                Text(l10n.t("app.tagline"))
-                    .clack(.splashTagline)
-                    .foregroundStyle(Ink.text2)
-                    .frame(maxWidth: .infinity)
-                    .position(x: proxy.size.width / 2, y: proxy.size.height * 0.82)
-            }
-            .ignoresSafeArea()
+        ZStack {
+            Color(hex: "#FFD400")!
+            Wordmark(fontSize: 64, animateIn: true)
         }
+        .ignoresSafeArea()
+        .statusBarHidden(true)
         .accessibilityHidden(true)
     }
 }

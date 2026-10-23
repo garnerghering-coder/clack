@@ -69,7 +69,7 @@ nonisolated struct StationInfo: Codable, Hashable, Sendable, Identifiable {
     let hasMap: Bool
     /// `small`, `medium` or `large`; nil when unknown.
     let sizeClass: SizeClass?
-    let favorite: Bool
+    var favorite: Bool
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)

@@ -72,8 +72,8 @@ TOKENS = {
     'tflap-bottom': ('#1a1a1a', '#efefef'),
     'tflap-hinge': (rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.12)),
     'tflap-text': ('#ffffff', '#0a0a0a'),
-    # The launch screen, before the app has read the theme setting: dark, the default theme
-    'launch-bg': '#0a0a0a',
+    # The launch screen, before the app has read the theme setting: signal yellow, as the splash after it
+    'launch-bg': '#ffd400',
 }
 
 
