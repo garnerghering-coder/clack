@@ -27,7 +27,7 @@ interface Rule {
   type: string;
 }
 interface CompositionRule {
-  match: { operator?: string; product?: string; locomotive?: boolean; cars?: number; cars_max?: number };
+  match: { operator?: string; product?: string; locomotive?: boolean; cars?: number; cars_max?: number; both_ends?: string[] };
   type: string;
 }
 interface Catalog {
@@ -67,11 +67,16 @@ export function parseComposition(texts: (string | { Description?: string })[] | 
   return null;
 }
 
-/** The type the coach order pins down, if a composition rule covers it. */
-export function typeFromComposition(operatorId: string | null, product: string, comp: Composition | null): string | null {
+/** A station name for matching ends: feeds differ on the "C" ("Hässleholm" / "Hässleholm C"). */
+const endKey = (name: string) => normName(name).replace(/ c$/, '');
+
+/** The type the coach order pins down, if a composition rule covers it. `ends`: as for typicalTrainType. */
+export function typeFromComposition(operatorId: string | null, product: string, comp: Composition | null, ends?: (string | null | undefined)[]): string | null {
   if (!comp) return null;
+  const endNames = new Set((ends ?? []).filter((e): e is string => !!e).map(endKey));
   for (const r of trainTypeCatalog().composition_rules ?? []) {
     const m = r.match;
+    if (m.both_ends && !(endNames.size && [...endNames].every((e) => m.both_ends!.some((b) => endKey(b) === e)))) continue;
     if (m.operator && m.operator !== operatorId) continue;
     if (m.product && m.product !== product) continue;
     if (m.locomotive !== undefined && m.locomotive !== comp.locomotive) continue;
@@ -90,11 +95,8 @@ export function brandOnLine(operatorId: string | null, ends: (string | null | un
 
 /** Best type known for a departure: from its coach order when that decides it, else the typical one. */
 export function trainTypeFor(operatorId: string | null, product: string, trainNumber: string | null, comp: Composition | null, ends?: (string | null | undefined)[], vehicle?: string | null) {
-  return typeFromComposition(operatorId, product, comp) ?? typicalTrainType(operatorId, product, trainNumber, ends, vehicle);
+  return typeFromComposition(operatorId, product, comp, ends) ?? typicalTrainType(operatorId, product, trainNumber, ends, vehicle);
 }
-
-/** A station name for matching ends: feeds differ on the "C" ("Hässleholm" / "Hässleholm C"). */
-const endKey = (name: string) => normName(name).replace(/ c$/, '');
 
 /**
  * `ends`: the trip's first and last stations, where known (a rule with `ends` is skipped without them). `vehicle`: the

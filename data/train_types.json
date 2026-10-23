@@ -35,6 +35,7 @@
     { "id": "flytoget", "uncertain": true, "name": "Flytoget (Type 71 / 78)", "builder": "Adtranz / CAF", "max_kmh": 210, "since": 1998, "art": "x3", "about": "Airport express between Oslo Airport, Oslo S and Drammen." }
   ],
   "rules": [
+    { "_source": "sj.se/allt-om-resan/vara-tag (read 2026-10-22): Regina runs Karlstad–Göteborg; järnväg.net Alvhem 2026-06-18.", "match": { "operator": "sj", "both_ends": ["Göteborg C", "Trollhättan C", "Vänersborg C", "Öxnered", "Mellerud", "Åmål", "Säffle", "Kil", "Karlstad C"] }, "type": "regina" },
     { "match": { "operator": "sj", "product": "high_speed" }, "type": "x2000" },
     { "match": { "operator": "sj", "product": "night" }, "type": "rc6_sleeper" },
     { "match": { "operator": "sj", "product": "intercity" }, "type": "rc6_coaches" },
@@ -71,6 +72,7 @@
     { "match": { "operator": "vasttagen", "product": "commuter" }, "type": "x61_vt" },
     { "match": { "operator": "vasttagen" }, "type": "regina" },
     { "match": { "operator": "sl" }, "type": "x60" },
+    { "_source": "en.wikipedia Mälardalstrafik (read 2026-10-23, citing järnväg.net 2024): six X50 mainly on Linköping–Sala(–Uppsala); järnväg.net Uppsala 2025-06-24. Medium confidence: ER1s may run here too.", "match": { "operator": "malartag", "both_ends": ["Linköping C", "Norrköping C", "Västerås C", "Sala", "Uppsala C"] }, "type": "regina" },
     { "match": { "operator": "malartag" }, "type": "er1" },
     { "match": { "operator": "arlanda-express" }, "type": "x3" },
     { "_source": "Krösatåg lines by power, from the owner's research (2026-10-22): järnväg.net/krosatagen, Krösatåg's line maps (Dec 2023, 2025), Länstrafiken Kronoberg.", "match": { "operator": "krosatag", "both_ends": ["Jönköping C", "Nässjö C", "Tranås", "Växjö", "Alvesta", "Hässleholm C", "Emmaboda", "Karlskrona C"] }, "type": "x11_x14" },
@@ -92,6 +94,7 @@
     { "match": { "operator": "sj", "product": "high_speed", "locomotive": false, "cars": 4 }, "type": "x55" },
     { "match": { "operator": "sj", "product": "night", "locomotive": true }, "type": "rc6_sleeper" },
     { "match": { "operator": "sj", "locomotive": true }, "type": "rc6_coaches" },
+    { "match": { "operator": "sj", "locomotive": false, "both_ends": ["Göteborg C", "Trollhättan C", "Vänersborg C", "Öxnered", "Mellerud", "Åmål", "Säffle", "Kil", "Karlstad C"] }, "type": "regina" },
     { "match": { "operator": "sj", "product": "regional", "locomotive": false, "cars_max": 3 }, "type": "x40" }
   ],
   "_amenities_comment": "Typical on-board amenities per operator (and train type), shown as \"Typically\" in the app, never as a promise. Each claim is read on the operator's own page (source) on the date given (verified); claims older than 12 months are hidden. A missing claim means unknown; false only where the operator says so. Trafikverket's per-departure catering wins over these (ONBOARD_DATA_FINDINGS.md).",

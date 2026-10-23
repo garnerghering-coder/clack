@@ -55,13 +55,13 @@ const DETAILED: Record<string, Detailed> = {
   // Picked per train from the set the live feed names; without it ('flytoget') the simple outline.
   flytoget71: { component: Flytoget71Side as Side, liveries: ['flytoget'] },
   flytoget78: { component: Flytoget78Side as Side, liveries: ['flytoget'] },
-  // Värmlandstrafik's are mid-repaint (first in the new design March 2026): unpainted.
-  regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget'] },
+  // Värmlandstrafik's new design is drawn but only 2 of 8 units are confirmed repainted (Oct 2026): unpainted for now.
+  regina: { component: ReginaSide as Side, liveries: ['vasttagen', 'tib', 'x-taget', 'sj', 'malartag'] },
   no_flirt: { component: NoFlirtSide as Side, liveries: ['vy'] },
   // Both still run the paint the sets were delivered in (not Vy's green).
   no_type72: { component: NoType72Side as Side, liveries: ['go-ahead-norge', 'vy'] },
-  // Go-Ahead's stripes are seen only at an angle and Vy's 73Bs are mid-repaint (red to green): both unpainted.
-  no_type73: { component: NoType73Side as Side, liveries: ['sj-nord'] },
+  // Vy's 73Bs are mid-repaint (red to green): unpainted.
+  no_type73: { component: NoType73Side as Side, liveries: ['sj-nord', 'go-ahead-norge'] },
   no_type76: { component: NoType76Side as Side, liveries: ['sj-nord'] },
 };
 

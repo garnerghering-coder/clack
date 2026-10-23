@@ -53,6 +53,14 @@ describe('typical train types', () => {
     expect(typicalTrainType('varmlandstrafik', 'regional', '1', ['Charlottenberg', 'Karlstad C'])).toBe('regina');
   });
 
+  it('puts Reginas on the lines SJ and Mälartåg run them on, also when a coach order is published', () => {
+    expect(typicalTrainType('sj', 'intercity', '1', ['Karlstad C', 'Göteborg C'])).toBe('regina');
+    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1 }, ['Göteborg C', 'Karlstad C'])).toBe('regina');
+    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1 }, ['Stockholm C', 'Västerås C'])).toBe('x40');
+    expect(typicalTrainType('malartag', 'regional', '1', ['Linköping C', 'Sala'])).toBe('regina');
+    expect(typicalTrainType('malartag', 'regional', '1', ['Stockholm C', 'Uppsala C'])).toBe('er1');
+  });
+
   it("picks Flytoget's type from the set the live feed names, and says both without it", () => {
     expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '71-03')).toBe('flytoget71');
     expect(typicalTrainType('flytoget', 'airport', '3943', ['Drammen', 'Oslo lufthavn'], '78-05')).toBe('flytoget78');
