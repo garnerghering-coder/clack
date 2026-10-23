@@ -334,7 +334,12 @@
     },
     "stepFree": "Step-free routes only",
     "heavyLuggage": "Heavy luggage",
-    "changingNote": "Used for walking times between platforms. Step-free avoids stairs and escalators; heavy luggage adds time on stairs."
+    "changingNote": "Used for walking times between platforms. Step-free avoids stairs and escalators; heavy luggage adds time on stairs.",
+    "yourData": "Your data",
+    "privacy": "Privacy",
+    "deleteData": "Delete my data",
+    "deleteConfirm": "Delete all your trips, followed trains and settings? This can't be undone.",
+    "deleted": "Your data was deleted."
   },
   "about": {
     "title": "Sources & methodology",
@@ -862,5 +867,24 @@
     "tripNotKept": "No connection, and this trip isn't saved on this phone yet. It will be once it has opened with a connection.",
     "banner": "No connection · showing saved data",
     "chip": "No connection"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "intro": "Clack has no accounts, no ads, no analytics and no tracking. This is everything it keeps and why.",
+    "storedTitle": "What our server keeps",
+    "storedBody": "The trips you add (train, date, the stations you got on and off at, and any note you write), the trains you follow, and your settings, including the optional name shown on your Passport. They're kept under a random code your phone made when you first opened Clack, not your name, email or phone number, so they can be shown to you and kept up to date with live times.",
+    "phoneTitle": "What stays on your phone",
+    "phoneBody": "That random code, a copy of your trips and the maps you've opened so Clack works without a connection, and small preferences like your theme and last tab.",
+    "locationTitle": "Your location",
+    "locationBody": "Only when you tap \"My location\" on a station map. It's used on your phone to find the nearest point on the map and is never sent to our server.",
+    "notCollectedTitle": "What Clack doesn't collect",
+    "notCollectedBody": "No name, email, phone number, contacts, photos or payment details. No advertising or analytics tools, and no tracking across other apps or websites.",
+    "sharingTitle": "Who sees it",
+    "sharingBody": "No one else. To show live times our server asks Trafikverket (Sweden) and Entur (Norway) about trains by number and station; those requests say nothing about you. Ticket links open the train operator's own website.",
+    "deletionTitle": "Keeping and deleting",
+    "deletionBody": "Your data stays until you delete it. \"Delete my data\" in Settings removes everything our server has under your code at once, and the copies on your phone.",
+    "contactTitle": "Contact",
+    "contactBody": "Questions about your data:",
+    "updated": "Last updated {{date}}"
   }
 }

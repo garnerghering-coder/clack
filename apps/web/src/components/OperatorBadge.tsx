@@ -2,6 +2,7 @@
 // otherwise a rounded square in the brand colour with the short name.
 import { useState } from 'react';
 import type { Operator } from '../api';
+import { apiUrl } from '../apiBase';
 
 export function OperatorBadge({ operator, size = 36 }: { operator: Operator | null | undefined; size?: number }) {
   const [broken, setBroken] = useState(false);
@@ -12,7 +13,7 @@ export function OperatorBadge({ operator, size = 36 }: { operator: Operator | nu
     return (
       <img
         className="op-badge op-logo"
-        src={operator.logoUrl}
+        src={apiUrl(operator.logoUrl)}
         width={size}
         height={size}
         style={{ borderRadius: radius }}

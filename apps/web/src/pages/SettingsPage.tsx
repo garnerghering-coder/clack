@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CO2_CHOICES, LANGUAGES, type Settings, THEMES } from '@clack/shared';
 import { useSettings } from '../settings';
+import { api } from '../api';
+import { forgetLocalData } from '../offline';
 import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -100,6 +102,37 @@ export function SettingsPage() {
           <ChevronRight size={18} />
         </Link>
       </section>
+      <section className="card">
+        <h2 className="section-header">{t('settings.yourData')}</h2>
+        <Link className="row link" to="/privacy">
+          <span>{t('settings.privacy')}</span>
+          <ChevronRight size={18} />
+        </Link>
+        <DeleteMyData />
+      </section>
     </main>
+  );
+}
+
+/** App Review 5.1.1(v): whatever we keep for this phone can be deleted from inside the app, at once. */
+function DeleteMyData() {
+  const { t } = useTranslation();
+  const [state, setState] = useState<'idle' | 'busy' | 'done'>('idle');
+  const run = async () => {
+    if (!window.confirm(t('settings.deleteConfirm'))) return;
+    setState('busy');
+    try {
+      await api.deleteMyData();
+      forgetLocalData();
+      setState('done');
+    } catch {
+      setState('idle');
+    }
+  };
+  if (state === 'done') return <p className="caption">{t('settings.deleted')}</p>;
+  return (
+    <button className="button danger" onClick={run} disabled={state === 'busy'}>
+      {t('settings.deleteData')}
+    </button>
   );
 }

@@ -28,6 +28,15 @@ export function remember(path: string, body: unknown) {
   }
 }
 
+/** Forget everything kept on this phone for the user (after "Delete my data"): offline copies and the phone's id. */
+export function forgetLocalData() {
+  try {
+    for (const k of Object.keys(localStorage)) if (k.startsWith('clack.')) localStorage.removeItem(k);
+  } catch {
+    // Nothing kept.
+  }
+}
+
 export function recall<T>(path: string): T | undefined {
   try {
     const v = localStorage.getItem(PREFIX + path);

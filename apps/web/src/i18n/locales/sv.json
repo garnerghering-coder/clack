@@ -334,7 +334,12 @@
     },
     "stepFree": "Bara vägar utan trappor",
     "heavyLuggage": "Tungt bagage",
-    "changingNote": "Används för gångtider mellan plattformar. Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor."
+    "changingNote": "Används för gångtider mellan plattformar. Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor.",
+    "yourData": "Dina uppgifter",
+    "privacy": "Integritet",
+    "deleteData": "Radera mina uppgifter",
+    "deleteConfirm": "Radera alla dina resor, följda tåg och inställningar? Det går inte att ångra.",
+    "deleted": "Dina uppgifter har raderats."
   },
   "about": {
     "title": "Källor och metod",
@@ -862,5 +867,24 @@
     "tripNotKept": "Ingen anslutning, och resan är inte sparad på telefonen än. Det blir den när den har öppnats med anslutning.",
     "banner": "Ingen anslutning · visar sparad data",
     "chip": "Ingen anslutning"
+  },
+  "privacy": {
+    "title": "Integritet",
+    "intro": "Clack har inga konton, ingen reklam, ingen analys och ingen spårning. Här är allt den sparar och varför.",
+    "storedTitle": "Det vår server sparar",
+    "storedBody": "Resorna du lägger till (tåg, datum, stationerna du gick på och av vid och en anteckning om du skriver en), tågen du följer och dina inställningar, med det valfria namnet som visas i ditt Pass. De sparas under en slumpkod som din telefon skapade första gången du öppnade Clack, inte ditt namn, din e-post eller ditt telefonnummer, så att de kan visas för dig och hållas uppdaterade med realtid.",
+    "phoneTitle": "Det som stannar i telefonen",
+    "phoneBody": "Slumpkoden, en kopia av dina resor och kartorna du har öppnat så att Clack fungerar utan uppkoppling, och små val som tema och senaste flik.",
+    "locationTitle": "Din position",
+    "locationBody": "Bara när du trycker på \"Min plats\" på en stationskarta. Den används i telefonen för att hitta närmaste punkt på kartan och skickas aldrig till vår server.",
+    "notCollectedTitle": "Det Clack inte samlar in",
+    "notCollectedBody": "Inget namn, ingen e-post, inget telefonnummer, inga kontakter, bilder eller betaluppgifter. Inga reklam- eller analysverktyg och ingen spårning i andra appar eller på webbplatser.",
+    "sharingTitle": "Vem som ser det",
+    "sharingBody": "Ingen annan. För att visa realtid frågar vår server Trafikverket (Sverige) och Entur (Norge) om tåg utifrån nummer och station; frågorna säger inget om dig. Biljettlänkar öppnar tågbolagets egen webbplats.",
+    "deletionTitle": "Sparande och radering",
+    "deletionBody": "Dina uppgifter finns kvar tills du raderar dem. \"Radera mina uppgifter\" i Inställningar tar bort allt vår server har under din kod direkt, och kopiorna i telefonen.",
+    "contactTitle": "Kontakt",
+    "contactBody": "Frågor om dina uppgifter:",
+    "updated": "Senast uppdaterad {{date}}"
   }
 }

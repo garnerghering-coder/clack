@@ -1,6 +1,7 @@
 // Live tracking in the browser (DESIGN §9): one shared EventSource to our server, plus helpers for freshness.
 import { useEffect, useRef, useState } from 'react';
 import { ms, type Leg, type LiveState, type LiveUpdate } from './api';
+import { apiUrl } from './apiBase';
 
 type Listener = (u: LiveUpdate) => void;
 const listeners = new Set<Listener>();
@@ -9,7 +10,7 @@ let source: EventSource | null = null;
 function connect() {
   if (source || typeof EventSource === 'undefined') return;
   // EventSource reconnects on its own; the server sends a full live state every tick, so nothing needs replaying.
-  source = new EventSource('/api/live/stream');
+  source = new EventSource(apiUrl('/api/live/stream'));
   source.addEventListener('live', (e) => {
     const u = JSON.parse((e as MessageEvent<string>).data) as LiveUpdate;
     for (const l of listeners) l(u);

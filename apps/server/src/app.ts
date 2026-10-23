@@ -1,5 +1,6 @@
 // Builds the Fastify app. Kept separate from index.ts so tests can use app.inject().
 import Fastify from 'fastify';
+import { DEFAULT_SETTINGS } from '@clack/shared';
 import type { Db } from './db/client.js';
 import { LOCAL_USER_ID } from './db/client.js';
 import { healthRoutes } from './routes/health.js';
@@ -16,8 +17,8 @@ import { BoardHub, type BoardHubOptions } from './boards/hub.js';
 import { liveMapRoutes } from './routes/livemap.js';
 import { LiveMapIngest, type IngestOptions } from './livemap/ingest.js';
 import { trackedLegIds } from './live/tracker.js';
-import { legs } from './db/schema.js';
-import { inArray } from 'drizzle-orm';
+import { legs, users } from './db/schema.js';
+import { eq, inArray } from 'drizzle-orm';
 import { railGraph } from './geo/railGraph.js';
 
 declare module 'fastify' {
@@ -26,12 +27,45 @@ declare module 'fastify' {
   }
 }
 
+/** A device's id: a random UUID (v4 from crypto.randomUUID on the phone). */
+const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+/** Pages allowed to call the API from another origin: the iOS app (Capacitor serves it from capacitor://localhost). */
+const allowedOrigins = new Set((process.env.CLACK_ALLOWED_ORIGINS ?? 'capacitor://localhost').split(',').map((o) => o.trim()).filter(Boolean));
+
 export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions; liveMap?: IngestOptions } = {}) {
   const app = Fastify({ logger: opts.logger ?? false });
   app.decorateRequest('userId', '');
-  // No accounts in Phase 1: every request acts as the seeded local user.
-  app.addHook('onRequest', async (req) => {
-    req.userId = LOCAL_USER_ID;
+  // Who's asking. No sign-in (App Review 5.1.1(v): no login unless the app needs one): the iOS app makes a random id on
+  // first launch and sends it with every request (header, or ?u= where a header can't be set, as on EventSource). The
+  // id is the key to that phone's trips, so it's a long random UUID. Without one (the laptop demo) it's the local user.
+  const known = new Set<string>([LOCAL_USER_ID]);
+  app.addHook('onRequest', async (req, reply) => {
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.has(origin)) {
+      reply.header('Access-Control-Allow-Origin', origin);
+      reply.header('Vary', 'Origin');
+      reply.header('Access-Control-Allow-Headers', 'Content-Type, X-Clack-User');
+      reply.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+      if (req.method === 'OPTIONS') return reply.code(204).send();
+    }
+    const raw = (req.headers['x-clack-user'] as string | undefined) ?? (req.query as { u?: string } | undefined)?.u;
+    const id = raw && USER_ID.test(raw) ? raw.toLowerCase() : LOCAL_USER_ID;
+    if (!known.has(id)) {
+      db.insert(users).values({ id, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();
+      known.add(id);
+    }
+    req.userId = id;
+  });
+  app.addHook('onClose', async () => known.clear());
+  // Everything a user has (trips, journeys, follows, settings) goes with the user row (ON DELETE CASCADE).
+  app.delete('/api/me', { logLevel: 'warn' }, async (req, reply) => {
+    db.delete(users).where(eq(users.id, req.userId)).run();
+    known.delete(req.userId);
+    if (req.userId === LOCAL_USER_ID) {
+      db.insert(users).values({ id: LOCAL_USER_ID, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();
+      known.add(LOCAL_USER_ID);
+    }
+    return reply.code(204).send();
   });
   // Per-request logs are noise for a local demo: API routes log at warn, so only problems show.
   // Startup and import messages still log at info.

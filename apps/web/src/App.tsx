@@ -5,6 +5,7 @@ import { TripsPage } from './pages/TripsPage';
 import { PassportPage } from './pages/PassportPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { AboutPage } from './pages/AboutPage';
+import { PrivacyPage } from './pages/PrivacyPage';
 import { AddTripPage } from './pages/AddTripPage';
 import { JourneyPage } from './pages/JourneyPage';
 import { StationsPage } from './pages/StationsPage';
@@ -41,6 +42,7 @@ export function App() {
             <Route path="/add" element={<AddTripPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>
         </AppShell>
       </BrowserRouter>

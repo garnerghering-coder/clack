@@ -22,6 +22,7 @@ import { baseStyle, mapColors, opColor, RAIL_NETWORK_URL, railNetworkLayers, rou
 import { loadMaplibre, mapStatus } from '../map/RouteMap';
 import { currentTheme, useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { apiUrl } from '../apiBase';
 
 interface LiveTrain {
   id: string;
@@ -478,7 +479,7 @@ function LiveMap() {
     if (!ready || !bbox) return;
     let es: EventSource | null = null;
     const timer = setTimeout(() => {
-      es = new EventSource(`/api/live/trains/stream?bbox=${bbox}`);
+      es = new EventSource(apiUrl(`/api/live/trains/stream?bbox=${bbox}`));
       // EventSource retries by itself; meanwhile say live data is unavailable rather than show old dots as live.
       // A dropped connection that EventSource is already re-opening is only "down" if nothing arrives for a while.
       es.onerror = () => setStreamDown(true);

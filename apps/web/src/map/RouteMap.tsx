@@ -10,6 +10,7 @@ import type { LatLon } from '@clack/shared';
 import { RAIL_NETWORK_URL, baseStyle, railNetworkLayers, routeLayers } from './style';
 import { useResolvedTheme } from '../theme';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { apiUrl } from '../apiBase';
 
 export interface MapStop {
   lat: number;
@@ -40,7 +41,7 @@ interface Props {
 let statusPromise: Promise<{ basemap: unknown }> | null = null;
 /** Shared with the other maps. */
 export const mapStatus = () =>
-  (statusPromise ??= fetch('/api/map/status').then(
+  (statusPromise ??= fetch(apiUrl('/api/map/status')).then(
     (r) => (r.ok ? r.json() : { basemap: null }),
     () => ({ basemap: null }),
   ));

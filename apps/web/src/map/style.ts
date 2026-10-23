@@ -2,6 +2,7 @@
 // The basemap is our own slimmed Protomaps extract (land, water, places, borders, motorways).
 import type { StyleSpecification, LayerSpecification } from 'maplibre-gl';
 import { currentTheme } from '../theme';
+import { apiOrigin } from '../apiBase';
 
 const DARK = {
   land: '#151515',
@@ -40,8 +41,8 @@ export const opColor = (brandColor: string | null | undefined) => brandColor || 
 /** Map colours for the theme in effect. Maps are re-created when the theme changes, so reading once is enough. */
 export const mapColors = (theme: 'light' | 'dark' = currentTheme()) => (theme === 'light' ? LIGHT : DARK);
 
-export const BASEMAP_URL = () => `pmtiles://${window.location.origin}/api/map/basemap.pmtiles`;
-export const RAIL_NETWORK_URL = () => `${window.location.origin}/api/map/rail-network.geojson`;
+export const BASEMAP_URL = () => `pmtiles://${apiOrigin()}/api/map/basemap.pmtiles`;
+export const RAIL_NETWORK_URL = () => `${apiOrigin()}/api/map/rail-network.geojson`;
 
 /** Mixes a hex colour toward white (DESIGN: route core = operator colour lightened 55%). */
 export function lighten(hex: string, amount: number): string {

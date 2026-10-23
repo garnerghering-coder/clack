@@ -12,6 +12,7 @@ import { useOperators, useTrainTypes } from '../data';
 import { agoKey, useNow } from '../live';
 import { useSettings } from '../settings';
 import { fmtTime } from '../format';
+import { apiUrl } from '../apiBase';
 
 type Window = '1h' | '3h' | 'day';
 const WINDOW_MS: Record<Window, number> = { '1h': 3600_000, '3h': 3 * 3600_000, day: 24 * 3600_000 };
@@ -113,7 +114,7 @@ export function BoardPage() {
     setEarlier(null);
     setShowEarlier(false);
     setError(false);
-    const es = new EventSource(`/api/stations/${id}/board/stream?type=${type}`);
+    const es = new EventSource(apiUrl(`/api/stations/${id}/board/stream?type=${type}`));
     es.addEventListener('board', (e) => {
       setBoard(JSON.parse((e as MessageEvent<string>).data) as Board);
       setError(false);
