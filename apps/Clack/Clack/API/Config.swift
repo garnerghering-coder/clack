@@ -10,13 +10,15 @@ nonisolated enum Config {
     /// name, through Vite's proxy (`npm run dev:phone`). Release: the hosted server (docs/IOS.md step 9).
     static let apiBase: URL = {
         #if DEBUG
+        // `-apiBase https://...` as a launch argument points a debug build at another server (the hosted one).
+        if let override = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: override) { return url }
         #if targetEnvironment(simulator)
         return URL(string: "http://localhost:3001")!
         #else
         return URL(string: "http://\(macHostName).local:5173")!
         #endif
         #else
-        return URL(string: "https://REPLACE-WITH-YOUR-SERVER")!
+        return URL(string: "https://clack-garner.duckdns.org")!
         #endif
     }()
     /// The Mac's local name: System Settings > General > Sharing > Local hostname, without ".local".
