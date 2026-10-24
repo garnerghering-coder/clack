@@ -103,7 +103,8 @@ final class TestAlertsModel {
         case getOffSoon = "Get off soon (8 min)", changing = "Changing trains (platform 5, 11 min)", arrived = "Arrived", cancelled = "Cancelled"
     }
 
-    private func state(_ m: Moment) -> TripActivityAttributes.ContentState {
+    /// The card's content for a moment (also drawn by the Debug gallery, `ActivityGalleryView`).
+    func state(_ m: Moment) -> TripActivityAttributes.ContentState {
         func at(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
         typealias S = TripActivityAttributes.ContentState
         switch m {
@@ -204,8 +205,10 @@ final class TestAlertsModel {
 
     /// Runs a sample two-train journey through every moment on one card, a step every few seconds: leaving, boarding, on
     /// the way (with an unknown delay for a while), get off soon, the change, the second train, arrival, end. The second
-    /// train arrives in the content state (`legId`, `from`, `to`), as the server sends it after a change.
-    func simulateJourney(seconds: Double) {
+    /// train arrives in the content state (`legId`, `from`, `to`), as the server sends it after a change. With `expand`,
+    /// each step comes as an alert, which makes the island open to its expanded view for a moment while the app is in the
+    /// background (and the Lock Screen light up): the way to see the expanded island without holding it.
+    func simulateJourney(seconds: Double, expand: Bool = false) {
         simulation?.cancel()
         simulation = Task { [weak self] in
             guard let self else { return }
@@ -243,6 +246,9 @@ final class TestAlertsModel {
                 if let card {
                     if index == steps.count - 1 {
                         await card.end(content, dismissalPolicy: .after(.now + 60))
+                    } else if expand {
+                        let alert = AlertConfiguration(title: "\(step.1.from ?? "") → \(step.1.to ?? "")", body: "\(step.0)", sound: .default)
+                        await card.update(content, alertConfiguration: alert)
                     } else {
                         await card.update(content)
                     }
@@ -260,6 +266,17 @@ final class TestAlertsModel {
             self.message = "Journey simulated: the card ended and leaves the Lock Screen in a minute."
         }
     }
+
+    /// `-simulateJourney <seconds per step>` runs the simulated journey at launch, with each step as an alert
+    /// (`-quiet` without), so the island can be looked at in the simulator with the app in the background.
+    static let launch: TestAlertsModel? = {
+        let args = CommandLine.arguments
+        guard let at = args.firstIndex(of: "-simulateJourney") else { return nil }
+        let seconds = at + 1 < args.count ? Double(args[at + 1]) ?? 8 : 8
+        let model = TestAlertsModel()
+        model.simulateJourney(seconds: seconds, expand: !args.contains("-quiet"))
+        return model
+    }()
 }
 
 struct TestAlertsScreen: View {
@@ -267,6 +284,7 @@ struct TestAlertsScreen: View {
     @Environment(L10n.self) private var l10n
     @State private var model = TestAlertsModel()
     @State private var arrivalNote: String?
+    @State private var gallery = false
 
     var body: some View {
         Page {
@@ -299,6 +317,8 @@ struct TestAlertsScreen: View {
                     Button(m.rawValue) { Task { await model.show(m) } }.buttonStyle(.clack(wide: true))
                 }
                 Button("Simulate a journey with a change") { model.simulateJourney(seconds: 5) }.buttonStyle(.clack(wide: true))
+                Button("Simulate it, opening the island at each step") { model.simulateJourney(seconds: 8, expand: true) }.buttonStyle(.clack(wide: true))
+                Button("Every face in the island's shapes") { gallery = true }.buttonStyle(.clack(wide: true))
                 Button("End the trip card") { Task { await model.endCard() } }.buttonStyle(.clack(.danger, wide: true))
             }
 
@@ -327,6 +347,7 @@ struct TestAlertsScreen: View {
                 if let arrivalNote { Text(arrivalNote).clack(.caption).foregroundStyle(Ink.text2) }
             }
         }
+        .sheet(isPresented: $gallery) { NavigationStack { ActivityGalleryView() } }
     }
 }
 #endif

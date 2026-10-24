@@ -109,6 +109,8 @@ struct RootView: View {
                let link = DeepLink.parse(url) {
                 router.open(link, app: app)
             }
+            // `-simulateJourney <seconds>` runs the Debug trip card journey (TestAlertsModel.launch).
+            _ = TestAlertsModel.launch
             #endif
         }
         .onChange(of: app.notifications.openRequest) { _, _ in openAlert() }

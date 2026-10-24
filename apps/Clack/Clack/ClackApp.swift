@@ -29,6 +29,9 @@ struct ClackApp: App {
                 // `-design` opens the design gallery straight away (docs/SWIFT_PORT.md step 4).
                 if CommandLine.arguments.contains("-design") {
                     NavigationStack { DesignGalleryView() }
+                } else if CommandLine.arguments.contains("-activityGallery") {
+                    // The trip card's faces in the island's shapes; `-simulateJourney 8` runs one on the island itself.
+                    NavigationStack { ActivityGalleryView() }
                 } else {
                     RootView()
                 }
