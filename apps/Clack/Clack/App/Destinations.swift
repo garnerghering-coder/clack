@@ -8,18 +8,6 @@ import ClackDesign
 import SwiftUI
 import UIKit
 
-/// A screen that is built in a later step: its header and nothing else.
-struct ComingSoonScreen: View {
-    let title: String
-
-    var body: some View {
-        Page {
-            BackLink()
-            PageHeader(title: title)
-        }
-    }
-}
-
 extension View {
     /// Where each route leads. Applied to the root of every tab's stack.
     func appDestinations() -> some View {

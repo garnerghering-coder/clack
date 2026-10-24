@@ -60,31 +60,3 @@ public struct DelayText: View {
         self.canceled = canceled
     }
 }
-
-/// A line of text whose colour follows the delay band, e.g. an actual time in the stop list. Cancelled is struck
-/// through; an estimate is italic.
-public struct DelayColoured: ViewModifier {
-    public let delay: Int?
-    public var canceled = false
-    public var estimate = false
-
-    public func body(content: Content) -> some View {
-        let band = DelayBand(delayMin: delay, canceled: canceled)
-        content
-            .foregroundStyle(band.ink)
-            .strikethrough(band == .cancelled)
-            .italic(estimate)
-    }
-
-    public init(delay: Int?, canceled: Bool = false, estimate: Bool = false) {
-        self.delay = delay
-        self.canceled = canceled
-        self.estimate = estimate
-    }
-}
-
-extension View {
-    public func delayColoured(_ delay: Int?, canceled: Bool = false, estimate: Bool = false) -> some View {
-        modifier(DelayColoured(delay: delay, canceled: canceled, estimate: estimate))
-    }
-}

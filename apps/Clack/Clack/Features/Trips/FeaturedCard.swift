@@ -7,15 +7,6 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The map strip of a trip card, until the real map arrives in step 8: the map's background with its tag.
-struct MapPlaceholder: View {
-    var height: CGFloat
-
-    var body: some View {
-        Ink.mapBg.frame(height: height)
-    }
-}
-
 /// The featured journey (brief §5.2): one tappable card, route map on top, the journey under it.
 struct FeaturedCard: View {
     @Environment(AppModel.self) private var app
