@@ -87,4 +87,13 @@ struct PassengerRightsTests {
         #expect(Disruption.passengerRights(countries: ["SE"], journeyKm: 43, arrDelayMin: 12, canceled: false) == .seShort(priceReduction: false))
         #expect(Disruption.passengerRights(countries: ["NO"], journeyKm: 300, arrDelayMin: 90, canceled: false) == .operator)
     }
+
+    @Test func aTripThatStaysInFinlandGetsNeitherTheSwedishRuleNorItsLink() {
+        for km in [20.0, 150, 400] {
+            #expect(Disruption.passengerRights(countries: ["FI"], journeyKm: km, arrDelayMin: 45, canceled: false) == .operator)
+            #expect(Disruption.passengerRights(countries: ["FI"], journeyKm: km, arrDelayMin: nil, canceled: true) == .operator)
+        }
+        // Across the border (Tornio to Haparanda) it is an international journey: EU either way.
+        #expect(Disruption.passengerRights(countries: ["FI", "SE"], journeyKm: 15, arrDelayMin: 70, canceled: false) == .eu(.compensation25))
+    }
 }

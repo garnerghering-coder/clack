@@ -24,6 +24,7 @@ public nonisolated enum Config {
     }()
     /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
     public static let showOperatorLogos = true
-    /// Shown on the Privacy screen when set (docs/APP_STORE.md, 1.5).
-    public static let supportEmail: String? = nil
+    /// Shown on the Privacy screen (docs/APP_STORE.md, 1.5). The owner chose to publish it. It is displayed only: it must
+    /// never go into a request, a header or a user agent (CLAUDE.md).
+    public static let supportEmail: String? = "garnerghering@gmail.com"
 }

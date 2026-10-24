@@ -15,12 +15,12 @@ Each item says who does it and where:
 
 | # | What | Guideline | Who | Notes |
 |---|---|---|---|---|
-| 3 | **Support contact**: an email address shown on the Privacy screen (`Config.supportEmail`, still `nil`, so nothing is shown) and a **Support URL** in ASC. | 1.5 | You + Code + ASC | A simple page is enough. The privacy page itself can be the Support URL once it has the email; the hosted page (`apps/server/public/privacy`) leaves the contact out until there is one. |
+| 3 | **Support contact**: an email address shown on the Privacy screen (`Config.supportEmail` is now `garnerghering@gmail.com`, the owner's own choice to publish it; it is only displayed, never sent in a request) and a **Support URL** in ASC. | 1.5 | You + Code + ASC | A simple page is enough. The privacy page itself can be the Support URL once it has the email; the hosted page (`apps/server/public/privacy`) still leaves the contact out, so decide whether to add it there before using it as the Support URL. |
 | 4 | **Privacy policy URL** in ASC: `https://clack-garner.duckdns.org/privacy` (Swedish: `/privacy/sv`). | 5.1.1(i) | ASC | The policy is in the app (Settings > Privacy) and the same words are served by the server from `apps/server/public/privacy` (docs/SERVER.md). Enter the URL in ASC once the server has been updated with that page and it answers. |
 | 5 | **Apple Developer Program** membership, USD 99 a year. | n/a | You | Needed for TestFlight and the App Store. Running on your own iPhone from Xcode works with a free Apple ID (the app expires after 7 days). Enroll as an individual unless you have a company. |
-| 6 | **App name.** "Clack" may already be taken on the App Store; names must be unique and at most 30 characters. | 2.3.7 | You + ASC | Check when creating the app in ASC. A subtitle like "Train log for Sweden & Norway" carries the meaning. |
+| 6 | **App name.** "Clack" may already be taken on the App Store; names must be unique and at most 30 characters. | 2.3.7 | You + ASC | Check when creating the app in ASC. A subtitle like "Train log for Sweden, Norway & Finland" carries the meaning. |
 | 8 | **EU trader status.** To be listed in the EU (Sweden), ASC asks whether you're a "trader" under the Digital Services Act. A free app from a private person is usually "non-trader"; a trader's address and phone number are shown publicly. | DSA, in ASC | You + ASC | Decide before submitting; ASC asks in its Business section, and the app can't be listed in the EU until it's answered. |
-| 9 | **Data source terms for a public app.** Confirm that Trafikverket's API, Trafiklab's GTFS feeds and Entur's data allow use in a free public app, and give the attribution each requires (the About page lists all sources). | 5.2.2 | You | OpenStreetMap (ODbL) attribution is on every map. The terms differ per source; read each source's terms page. |
+| 9 | **Data source terms for a public app.** Confirm that Trafikverket's API, Trafiklab's GTFS feeds, Entur's data and Digitraffic (Fintraffic, Finland) allow use in a free public app, and give the attribution each requires (the About page lists all sources). Digitraffic is licensed CC BY 4.0 and asks for the credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY`, which the About page (`about.sources.digitraffic`) carries word for word. | 5.2.2 | You | OpenStreetMap (ODbL) attribution is on every map. The terms differ per source; read each source's terms page. |
 | 10 | **Station plans you supplied** (e.g. Jernhusen's Stockholm C plan, Jan 2026 PDF) were used to draw station maps. Those plans are someone else's copyrighted material. | 5.2.1 | You | Either get permission from the plan owners, or ship only the OpenStreetMap-based maps. The README already notes these plans are not ODbL. |
 
 ## Done in this round
@@ -31,7 +31,7 @@ Each item says who does it and where:
 | **Delete my data** (Settings > Your data): removes everything the server has for this phone at once, plus the phone's copies. | 5.1.1(v) account deletion |
 | **Privacy policy in the app** (Settings > Your data > Privacy), English and Swedish, matching what the code does. | 5.1.1(i) |
 | **Location purpose string.** Only "My location" on a station map asks; the position never leaves the phone. | 5.1.1, 5.1.5 |
-| **Operators' logos** are trademarks. Garner has the operators' approval to use them (2026-10-23), so the Swift app shows them (`Config.showOperatorLogos`). Keep the written approvals: App Review can ask for proof of permission. Without a logo the badge shows the operator's initials in its colour. | 5.2.1, 4.1(c) |
+| **Operators' logos** are trademarks. Garner has the operators' approval to use them (2026-10-23), so the Swift app shows them (`Config.showOperatorLogos`). Keep the written approvals: App Review can ask for proof of permission. Without a logo the badge shows the operator's initials in its colour. **VR (Finland) and HSL**: verbal approval, per owner, 2026-10-24; no written approval will come, so App Review has only the owner's word if it asks. | 5.2.1, 4.1(c) |
 | **No third-party analytics, ads or tracking**, so no App Tracking Transparency prompt is needed. | 5.1.2 |
 | **Standard HTTPS only**: `ITSAppUsesNonExemptEncryption = NO`, so no export-compliance paperwork with each upload. | Export rules |
 | **A native SwiftUI app built with the current Xcode** (26 or later, as required since April 2026; the project's own upgrade check is Xcode 27.1). | 2.5.1 |
@@ -52,7 +52,7 @@ Each item says who does it and where:
 
 | What | Guideline | Who |
 |---|---|---|
-| **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket and Entur, and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
+| **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket, Entur and Digitraffic (Finland, CC BY 4.0), and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
 
 ## App Store Connect answers, prepared
 
@@ -65,7 +65,7 @@ Each item says who does it and where:
 - **Category**: Travel (secondary: Navigation).
 - **Price**: free, no in-app purchases.
 - **Screenshots**: 6.9-inch iPhone screenshots (1320 × 2868 px, or 1290 × 2796). Take them in the iPhone 17 Pro Max simulator with Cmd+S. They must show the app in use (2.3.3), not marketing art. Use your own trips; no other people's data.
-- **Keywords**: describe the app ("train, rail, Sweden, Norway, delays, departures, logbook"). Don't list operator brand names to game search (2.3.7).
+- **Keywords**: describe the app ("train, rail, Sweden, Norway, Finland, delays, departures, logbook"). Don't list operator brand names to game search (2.3.7).
 
 ## Later (not needed for v1)
 

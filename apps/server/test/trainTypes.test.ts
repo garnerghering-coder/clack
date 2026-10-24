@@ -114,3 +114,47 @@ describe('train type from the planned coach order', () => {
     expect(trainTypeFor('vr', 'high_speed', '2035', parseComposition(vo('A-B-C-D-E')))).toBe(typicalTrainType('vr', 'high_speed', '2035'));
   });
 });
+
+// Digitraffic /compositions/2026-10-24 (read 2026-10-24): the unit or locomotive type per train is the `vehicle`.
+describe('Finnish train types', () => {
+  it('takes the type from the unit or locomotive the composition names', () => {
+    expect(typicalTrainType('vr-fi', 'high_speed', '47', undefined, 'Sm3')).toBe('fi_sm3');
+    expect(typicalTrainType('vr-fi', 'commuter', '9001', undefined, 'Sm5')).toBe('fi_sm5');
+    expect(typicalTrainType('hsl', 'commuter', '9001', undefined, 'Sm5')).toBe('fi_sm5');
+    expect(typicalTrainType('vr-fi', 'commuter', '9001', undefined, 'Sm4')).toBe('fi_sm4');
+    expect(typicalTrainType('vr-fi', 'commuter', '9001', undefined, 'Sm2')).toBe('fi_sm2');
+    expect(typicalTrainType('vr-fi', 'regional', '9001', undefined, 'Dm12')).toBe('fi_dm12');
+    expect(typicalTrainType('vr-fi', 'intercity', '9', undefined, 'Sr2')).toBe('fi_sr2_ic');
+    expect(typicalTrainType('vr-fi', 'intercity', '9', undefined, 'Sr3')).toBe('fi_sr3_ic');
+  });
+
+  it('has no drawing, so no type, for Pendolino Plus (Sm6), Sr1 and the night coaches', () => {
+    expect(typicalTrainType('vr-fi', 'regional', '1', undefined, 'Sr1')).toBeNull();
+    expect(typicalTrainType('vr-fi', 'night', '263')).toBeNull();
+    expect(typicalTrainType('vr-fi', 'regional', '1', undefined, 'Sm6')).toBeNull();
+  });
+
+  it('falls back to what the product usually is, and says "or" where the timetable does not decide', () => {
+    expect(typicalTrainType('vr-fi', 'high_speed', '47')).toBe('fi_sm3');
+    expect(typicalTrainType('vr-fi', 'intercity', '9')).toBe('fi_sr2_sr3');
+    expect(typicalTrainType('vr-fi', 'commuter', '9001')).toBe('fi_commuter');
+    expect(typicalTrainType('hsl', 'commuter', '9001')).toBe('fi_commuter');
+    const byId = new Map(trainTypeCatalog().types.map((t) => [t.id, t as typeof t & { uncertain?: boolean }]));
+    expect(byId.get('fi_sr2_sr3')!.uncertain).toBe(true);
+    expect(byId.get('fi_commuter')!.uncertain).toBe(true);
+  });
+
+  it('never calls an Sm4 InterCity (it only runs commuter trains) and never uses the unverified coach drawing', () => {
+    const { rules } = trainTypeCatalog();
+    for (const r of rules) {
+      if (r.match.product === 'intercity') expect(['fi_sm4', 'fi_sm2', 'fi_sm5', 'fi_commuter']).not.toContain(r.type);
+      expect(r.type).not.toBe('fi_ic_cab');
+    }
+    expect(trainTypeCatalog().types.find((t) => t.id === 'fi_sm4')!.about).toMatch(/not InterCity/);
+  });
+
+  it("does not hand the Swedish VR Snabbtåg (id 'vr') a Finnish type", () => {
+    expect(typicalTrainType('vr', 'high_speed', '2035')).toBe('x74');
+    expect(typicalTrainType('vr', 'commuter', '1')).toBe('x74');
+  });
+});

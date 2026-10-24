@@ -1,5 +1,5 @@
 {
-  "_comment": "Brands shown in the app (owner decision: brand over operating company). 'gtfs_operators' lists GTFS attributions.txt organization_name values (or agency names) that map to the brand. 'color' is the brand colour taken from its app icon, brightened where needed to read on the dark map. 'website' is where the logo (the site's app icon) is downloaded from onto this computer; logos are not committed (trademarks). Pågatåg, Västtågen and Östgötapendeln use their transit authority's icon. 'aliases' are what people type in search (accents and case don't matter).",
+  "_comment": "Brands shown in the app (owner decision: brand over operating company). 'gtfs_operators' lists GTFS attributions.txt organization_name values (or agency names) that map to the brand. 'color' is the brand colour taken from its app icon, brightened where needed to read on the dark map. 'website' is where the logo (the site's app icon) is downloaded from onto this computer; logos are not committed (trademarks). Pågatåg, Västtågen and Östgötapendeln use their transit authority's icon. Finland (2026-10-24): 'vr-fi' is VR Group, Finland (colour: theme-color of https://www.vr.fi, read 2026-10-24); 'hsl' is Helsinki Region Transport (colour: HSL's brand blue #007AC9 per its style guide tyyliopas.hsl.fi, as quoted on Wikipedia; hsl.fi itself blocks scripted requests, so its logo may not download and falls back to the initials badge). The id 'vr' is the SWEDISH VR Snabbtåg (ex-MTR Express) and is not VR Finland. 'gtfs_operators' are matched by exact string, so VR Finland's 'VR' (Digitraffic GTFS agency name) does not touch 'MTR Express AB' or 'VR Sverige AB'. VR Finland's aliases leave out 'VR', 'MTR' and 'VR Snabbtåg', which belong to the Swedish brand. 'aliases' are what people type in search (accents and case don't matter).",
   "brands": [
     {
       "id": "sj",
@@ -373,6 +373,39 @@
         "Airport Express Train"
       ],
       "website": "https://flytoget.no"
+    },
+    {
+      "id": "vr-fi",
+      "name": "VR",
+      "short_name": "VR",
+      "color": "#00a149",
+      "country": "FI",
+      "gtfs_operators": [
+        "VR"
+      ],
+      "aliases": [
+        "VR Finland",
+        "VR Group",
+        "VR Oy"
+      ],
+      "website": "https://www.vr.fi"
+    },
+    {
+      "id": "hsl",
+      "name": "HSL",
+      "short_name": "HSL",
+      "color": "#007ac9",
+      "country": "FI",
+      "gtfs_operators": [
+        "HSL"
+      ],
+      "aliases": [
+        "HSL",
+        "Helsingin seudun liikenne",
+        "HRT",
+        "Helsinki Region Transport"
+      ],
+      "website": "https://www.hsl.fi"
     }
   ]
 }

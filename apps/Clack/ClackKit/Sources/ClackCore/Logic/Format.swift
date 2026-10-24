@@ -13,9 +13,37 @@ public nonisolated enum Format {
         Locale(identifier: language == .sv ? "sv_SE" : "en_GB")
     }
 
+    /// The zone used when nothing says which one a place is in (Sweden, which most trips are in). Norway has the same
+    /// clock; Finland (Europe/Helsinki) is one hour ahead, so a Finnish place must bring its own.
+    public static let defaultZone = "Europe/Stockholm"
+
+    /// `tz` when it is a zone this phone knows, else `defaultZone`: what every formatter here falls back to.
+    public static func zone(_ tz: String?) -> String {
+        if let tz, TimeZone(identifier: tz) != nil { return tz }
+        return defaultZone
+    }
+
+    /// The zone of a country's stations (ISO 3166 alpha-2, as `StationHit.country`), `defaultZone` when unknown.
+    /// Use a station's or leg's own `tz` where there is one: this is for places that only know the country.
+    public static func zone(country: String?) -> String {
+        switch country {
+        case "FI": return "Europe/Helsinki"
+        case "NO": return "Europe/Oslo"
+        default: return defaultZone
+        }
+    }
+
+    /// The zone of a station from its id, which carries the country (`fi:HKI`, `no:...`; Swedish ids have no prefix).
+    public static func zone(stationId: String?) -> String {
+        guard let stationId else { return defaultZone }
+        if stationId.hasPrefix("fi:") { return zone(country: "FI") }
+        if stationId.hasPrefix("no:") { return zone(country: "NO") }
+        return defaultZone
+    }
+
     private static func calendar(_ tz: String) -> Calendar {
         var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: tz) ?? TimeZone(identifier: "Europe/Stockholm") ?? .gmt
+        calendar.timeZone = TimeZone(identifier: zone(tz)) ?? .gmt
         return calendar
     }
 
@@ -121,7 +149,7 @@ public nonisolated enum Format {
         return min > 0 ? "+\(min)" : "−\(abs(min))"
     }
 
-    public static func todayIso(tz: String = "Europe/Stockholm") -> String {
+    public static func todayIso(tz: String = Format.defaultZone) -> String {
         localDate(Date.now.timeIntervalSince1970 * 1000, tz: tz)
     }
 

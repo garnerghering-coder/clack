@@ -59,7 +59,7 @@ private struct SearchStep: View {
 
     var body: some View {
         @Bindable var model = model
-        DateRow(date: $model.date)
+        DateRow(date: $model.date, tz: Format.zone(country: model.interpretation?.from?.country))
         SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
             .onAppear { focused = true }
 
@@ -167,10 +167,13 @@ private struct DateRow: View {
     @Environment(L10n.self) private var l10n
     @Environment(AppModel.self) private var app
     @Binding var date: String
+    /// The zone of the station the trip starts at, when the search named it: "today" is its day (Helsinki is an hour
+    /// ahead of Stockholm).
+    var tz = Format.defaultZone
     @State private var picking = false
 
     var body: some View {
-        let today = Format.todayIso()
+        let today = Format.todayIso(tz: tz)
         let tomorrow = Format.addDaysIso(today, days: 1)
         FlowLayout(spacing: 8, lineSpacing: 8) {
             ChipButton(text: l10n.t("add.today"), active: date == today) { date = today }
@@ -186,11 +189,11 @@ private struct DateRow: View {
             .clack(.body).padding(.leading, 4)
         }
         .sheet(isPresented: $picking) {
-            let maxDate = AddTrainLogic.date(fromIso: Format.addDaysIso(today, days: 365) ?? today) ?? .now
+            let maxDate = AddTrainLogic.date(fromIso: Format.addDaysIso(today, days: 365) ?? today, tz: tz) ?? .now
             VStack(spacing: 12) {
                 DatePicker(
                     l10n.t("add.pickDate"),
-                    selection: Binding(get: { AddTrainLogic.date(fromIso: date) ?? .now }, set: { date = AddTrainLogic.iso(from: $0) }),
+                    selection: Binding(get: { AddTrainLogic.date(fromIso: date, tz: tz) ?? .now }, set: { date = AddTrainLogic.iso(from: $0, tz: tz) }),
                     in: ...maxDate, displayedComponents: .date
                 )
                 .datePickerStyle(.graphical)

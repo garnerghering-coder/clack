@@ -1,18 +1,19 @@
 # Clack: notes for Claude
 
-Clack logs the trains you ride in Sweden and Norway, shows them on the real tracks and builds a passport of your rail
+Clack logs the trains you ride in Sweden, Norway and Finland, shows them on the real tracks and builds a passport of your rail
 history. The owner is Garner (he/him).
 
 ## Layout
 
-- `apps/server`: Fastify + SQLite (Drizzle), run with tsx. Train data from Trafikverket, Trafiklab and Entur. It also
+- `apps/server`: Fastify + SQLite (Drizzle), run with tsx. Train data from Trafikverket, Trafiklab, Entur and Digitraffic (Fintraffic). It also
   serves the privacy page. The hosted copy: docs/SERVER.md.
 - `apps/Clack`: the native SwiftUI iPhone app, the only client (docs/SWIFT_PORT.md). Open `apps/Clack/Clack.xcodeproj`.
   `apps/Clack/ClackKit` is a Swift package with the targets ClackCore (logic, API, strings) and ClackDesign (tokens
   and components); code is moving into it from the app target.
 - `packages/shared`: types and constants the server uses, and `locales/{en,sv}.json`, the app's strings.
 - `data/`: hand-made data (operators, train types, station maps), each fact with its source.
-- `assets/trains`: the train drawings (SVG).
+- `assets/trains`: the train drawings (SVG). `fi_*.svg` (Finland) are hand-made and owner-supplied, with no generator
+  in `scripts/trains`; where they were measured from is not recorded here, and `export_svg.py` leaves them alone.
 - `scripts/`: imports, station-map tools, `scripts/trains/*.py` (generate the train drawings) and `scripts/ios/`
   (copy strings and drawings into the app, make its icons and colours).
 

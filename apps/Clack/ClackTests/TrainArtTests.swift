@@ -52,6 +52,41 @@ struct TrainArtTests {
         #expect(picture("x11_x14", "contessa", uncertain: true, nil).isStandIn)
     }
 
+    @Test func finnishTrainsGetTheirDrawingInVRsLivery() {
+        #expect(picture("fi_sm3", "x2000", "vr-fi") == .init(asset: "fi_sm3-vr-fi", isStandIn: false, isUnknown: false))
+        #expect(picture("fi_sr3_ic", "loco", "vr-fi").asset == "fi_sr3_ic-vr-fi")
+        #expect(picture("fi_dm12", "railcar", "vr-fi").asset == "fi_dm12-vr-fi")
+        // The Sm5 is drawn in HSL's livery only; VR's own gets the unpainted drawing.
+        #expect(picture("fi_sm5", "flirt", "hsl").asset == "fi_sm5-hsl")
+        #expect(picture("fi_sm5", "flirt", "vr-fi").asset == "fi_sm5-plain")
+        #expect(picture("fi_sm4", "coradia", "hsl").asset == "fi_sm4-plain")
+    }
+
+    @Test func aFinnishTypeForAnOperatorWithoutALiveryIsUnpainted() {
+        #expect(picture("fi_sm3", "x2000", nil).asset == "fi_sm3-plain")
+        #expect(picture("fi_sm3", "x2000", "sj").asset == "fi_sm3-plain")
+        #expect(picture("fi_sm3", "x2000", "nobody").asset == "fi_sm3-plain")
+    }
+
+    @Test func theSwedishVRIsNeverGivenAFinnishDrawing() {
+        for (typeId, d) in TrainArt.detailed where d.model.hasPrefix("fi_") {
+            #expect(!d.liveries.contains("vr"), "\(typeId)")
+            #expect(picture(typeId, nil, "vr").asset == "\(d.model)-plain", "\(typeId)")
+        }
+        #expect(picture("x74", "flirt", "vr").asset == "x74-vr")
+        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr").isStandIn)
+    }
+
+    @Test func anUncertainFinnishTypeShowsTheCandidateDrawnInTheOperatorsLivery() {
+        #expect(picture("fi_commuter", "flirt", uncertain: true, "hsl").asset == "fi_sm5-hsl")
+        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr-fi").asset == "fi_sm4-vr-fi")
+        #expect(picture("fi_sr2_sr3", "loco", uncertain: true, "vr-fi").asset == "fi_sr2_ic-vr-fi")
+    }
+
+    @Test func theRedSm2SchemeIsInTheCatalogue() {
+        #expect(UIImage(named: "fi_sm2-vr-fi-red") != nil)
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")

@@ -224,7 +224,6 @@ struct PassportScreen: View {
         let r = data.records
         let unit = settings.distanceUnit
         let lang = settings.language
-        let tz = "Europe/Stockholm"
         return LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12, alignment: .top)], spacing: 12) {
             if let leg = r.longestDistance {
                 RecordTile(label: l10n.t("passport.longestTrip"), value: Format.distance(leg.distanceM, unit: unit, language: lang), sub: "\(leg.from) → \(leg.to)", legId: leg.legId)
@@ -242,10 +241,10 @@ struct PassportScreen: View {
                 RecordTile(label: l10n.t("passport.busiestStation"), value: station.name, sub: l10n.t("passport.visitsCount", count: station.count), legId: nil)
             }
             if let leg = r.earliestDeparture {
-                RecordTile(label: l10n.t("passport.earliest"), value: Format.time(leg.dep.ms, tz: tz, clock: settings.clock), sub: leg.from, legId: leg.legId)
+                RecordTile(label: l10n.t("passport.earliest"), value: Format.time(leg.dep.ms, tz: Format.zone(leg.depTz), clock: settings.clock), sub: leg.from, legId: leg.legId)
             }
             if let leg = r.latestArrival {
-                RecordTile(label: l10n.t("passport.latest"), value: Format.time(leg.arr.ms, tz: tz, clock: settings.clock), sub: leg.to, legId: leg.legId)
+                RecordTile(label: l10n.t("passport.latest"), value: Format.time(leg.arr.ms, tz: Format.zone(leg.arrTz), clock: settings.clock), sub: leg.to, legId: leg.legId)
             }
         }
     }

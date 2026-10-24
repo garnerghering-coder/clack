@@ -204,7 +204,7 @@ struct StopList: View {
             notes: stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : [],
             rail: StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below),
             time: times.real ?? times.planned, sched: times.planned, live: times.real != nil, delay: times.real != nil ? times.lateMinutes : nil,
-            tz: "Europe/Stockholm", clock: app.settings.clock, platform: stop.platform, compact: true
+            tz: Format.zone(stationId: stop.stationId), clock: app.settings.clock, platform: stop.platform, compact: true
         )
     }
 }
@@ -293,7 +293,7 @@ struct LiveStationSheet: View {
                             Button { onTrain(row) } label: {
                                 BoardRowView(
                                     .init(
-                                        time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm",
+                                        time: row.estimated ?? row.advertised, sched: row.advertised, tz: info?.tz ?? Format.zone(stationId: id),
                                         destination: row.endpoints.joined(separator: ", "), platform: row.platform,
                                         delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil
                                     ),

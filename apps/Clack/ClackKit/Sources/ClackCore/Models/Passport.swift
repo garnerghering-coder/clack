@@ -247,8 +247,14 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
         public let dep: Instant
         public let arr: Instant
         public let delayMin: Int?
+        /// The zones of the two ends, when the server sends them (it didn't before Finland): the clock a record shows is
+        /// the station's, and Stockholm only when these are missing.
+        public var depTz: String?
+        public var arrTz: String?
 
-        public init(legId: String, from: String, to: String, distanceM: Double, minutes: Double, dep: Instant, arr: Instant, delayMin: Int?) {
+        public init(legId: String, from: String, to: String, distanceM: Double, minutes: Double, dep: Instant, arr: Instant, delayMin: Int?, depTz: String? = nil, arrTz: String? = nil) {
+            self.depTz = depTz
+            self.arrTz = arrTz
             self.legId = legId
             self.from = from
             self.to = to

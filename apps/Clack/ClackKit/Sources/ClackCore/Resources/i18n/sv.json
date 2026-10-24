@@ -158,11 +158,11 @@
       "manual": "Manuell"
     },
     "qualityNote": {
-      "partial": "Vissa faktiska tider saknas (till exempel på stationer utanför Sverige och Norge).",
+      "partial": "Vissa faktiska tider saknas (till exempel på stationer utanför Sverige, Norge och Finland).",
       "scheduled_only": "Bara tidtabellstider; vi hittade inga faktiska tider för den här resan.",
       "manual": "Tillagd manuellt."
     },
-    "source": "Tider: Trafikverket, Entur (NLOD) · Tidtabell: Trafiklab (CC0), Entur (NLOD)",
+    "source": "Tider: Trafikverket, Entur (NLOD), Digitraffic (CC BY 4.0) · Tidtabell: Trafiklab (CC0), Entur (NLOD), Digitraffic (CC BY 4.0)",
     "estimatedDistance": "Avståndet är ungefärligt.",
     "refresh": "Uppdatera tider",
     "delete": "Ta bort resan",
@@ -174,7 +174,7 @@
     "canceledBanner": "Tåget är inställt. Kolla med operatören om ersättningsbussar eller andra tåg.",
     "timetableOnly": "Bara tidtabellen hittills: realtid kommer närmare avgång.",
     "scheduledArrival": "Ankomst {{time}} (enligt tidtabell)",
-    "actualTimes": "Faktiska tider från Trafikverket (Sverige) och Entur (Norge).",
+    "actualTimes": "Faktiska tider från Trafikverket (Sverige), Entur (Norge) och Digitraffic (Finland).",
     "scheduledOnlyNote": "Inga faktiska tider rapporterades, så det här är tidtabellens tider.",
     "seePassport": "Se ditt pass",
     "noLiveData": "Ingen realtidsdata här",
@@ -236,7 +236,7 @@
     "typesNote": "Typiska tågtyper, om du inte har ändrat dem på resan.",
     "products": "Tågkategorier",
     "delays": "Förseningar",
-    "noDelayData": "Förseningsstatistik visas när tågen har faktiska ankomsttider från Trafikverket eller Entur.",
+    "noDelayData": "Förseningsstatistik visas när tågen har faktiska ankomsttider från Trafikverket, Entur eller Digitraffic.",
     "onTime": "i tid (kom fram högst 5 min sent)",
     "bands": {
       "on_time": "I tid eller tidigt",
@@ -279,7 +279,7 @@
     "milestonesNote": "Räknat från resor registrerade som åkta, totalt.",
     "reviewBanner_one": "1 resa behöver kollas innan den räknas →",
     "reviewBanner_other": "{{count}} resor behöver kollas innan de räknas →",
-    "emptyHow": "Resor hamnar här när de har hänt: automatiskt när Trafikverket (Sverige) eller Entur (Norge) rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte.",
+    "emptyHow": "Resor hamnar här när de har hänt: automatiskt när Trafikverket (Sverige), Entur (Norge) eller Digitraffic (Finland) rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte.",
     "milestone": {
       "firstJourney": "Första resan",
       "journeys_one": "{{count}} resa",
@@ -401,6 +401,7 @@
       "gtfsSweden3": "Trafiklab GTFS Sweden 3 (CC0): aktuella tidtabeller.",
       "gtfsSverige2": "Trafiklab GTFS Sverige 2 (CC0): historiska tidtabeller tillbaka till 2012.",
       "entur": "Entur (Norge), under Norsk lisens for offentlige data (NLOD): tidtabeller, stationer, livepositioner, förseningar, faktiska tider och avgångstavlor för tåg.",
+      "digitraffic": "Digitraffic (Fintraffic, Finland), CC BY 4.0: tidtabeller, stationer, livepositioner, förseningar, faktiska tider och avgångstavlor för tåg. Source: Fintraffic / digitraffic.fi, license CC 4.0 BY",
       "osm": "Järnvägsnät och kartdata © OpenStreetMap-bidragsgivare (ODbL). Bakgrundskarta från Protomaps.",
       "stationMaps": "Stationskartor: utkast från OpenStreetMap (© OpenStreetMaps bidragsgivare), handredigerade; kartdatan erbjuds under ODbL precis som OpenStreetMap. Gångtiderna räknas fram ur kartan, de är inte uppmätta på plats. Öppettider enligt uppgift; kan avvika på helgdagar.",
       "onboard": "Ombord: servering och dagens avvikelser kommer från Trafikverket för varje avgång; allt som står under \"Brukar finnas\" kommer från operatörens egna sidor, med datum då det kontrollerades."
@@ -408,7 +409,7 @@
     "delaysTitle": "Förseningsfärger",
     "delaysBody": "Grönt: i tid eller tidigt. Gult: 1–15 min sent. Orange: 16–30 min. Rött: mer än 30 min. I din statistik räknas ett tåg som i tid om det kommer fram högst {{max}} minuter sent.",
     "co2Title": "Så räknar vi CO₂",
-    "co2Body": "Sträcka längs spåret × (jämförelsefaktor − tågfaktor). Faktorerna är well-to-wheel g CO₂e per personkilometer från IVL Svenska Miljöinstitutet, rapport U11173 (2026). Norska resor räknas tills vidare med samma faktorer: vi har inte kontrollerat någon norsk källa än."
+    "co2Body": "Sträcka längs spåret × (jämförelsefaktor − tågfaktor). Faktorerna är well-to-wheel g CO₂e per personkilometer från IVL Svenska Miljöinstitutet, rapport U11173 (2026). Norska och finska resor räknas tills vidare med samma faktorer: vi har inte kontrollerat någon norsk eller finsk källa än."
   },
   "countries": {
     "SE": "Sverige",
@@ -586,7 +587,7 @@
     "search": "Sök tåg och stationer",
     "filters": "Filter",
     "station": "Station",
-    "noTrainMatch": "Inget tåg {{q}} går i Sverige eller Norge just nu.",
+    "noTrainMatch": "Inget tåg {{q}} går i Sverige, Norge eller Finland just nu.",
     "noMatch": "Inget matchar ”{{q}}”.",
     "onlyFollowed": "Följda",
     "clearFilters": "Rensa filter",
@@ -962,7 +963,7 @@
     "notCollectedTitle": "Det Clack inte samlar in",
     "notCollectedBody": "Inget namn, ingen e-post, inget telefonnummer, inga kontakter, bilder eller betaluppgifter. Inga reklam- eller analysverktyg och ingen spårning i andra appar eller på webbplatser.",
     "sharingTitle": "Vem som ser det",
-    "sharingBody": "Ingen annan. För att visa realtid frågar vår server Trafikverket (Sverige) och Entur (Norge) om tåg utifrån nummer och station; frågorna säger inget om dig. Biljettlänkar öppnar tågbolagets egen webbplats.",
+    "sharingBody": "Ingen annan. För att visa realtid frågar vår server Trafikverket (Sverige), Entur (Norge) och Digitraffic (Finland) om tåg utifrån nummer och station; frågorna säger inget om dig. Frågor till Digitraffic innehåller inga personuppgifter, bara ett fast appnamn. Biljettlänkar öppnar tågbolagets egen webbplats.",
     "deletionTitle": "Sparande och radering",
     "deletionBody": "Dina uppgifter finns kvar tills du raderar dem. \"Radera mina uppgifter\" i Inställningar tar bort allt vår server har under din kod direkt, och kopiorna i telefonen.",
     "contactTitle": "Kontakt",

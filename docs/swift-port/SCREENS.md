@@ -542,7 +542,7 @@ The whole map component is re-created when the theme changes (`:1260-1263`).
 **`LiveTrain` fields** (`:27-47`): id, number, date, lat, lon, bearing, speedKmh, at (fix time), estimated, operatorId,
 productName, product, trainType, origin, destination, next, nextEta, delayMin, mine.
 
-**Map setup** (`:303-475`). Initial bounds lon 4.5–24.5, lat 55.3–68.6 (Bergen–Finnish border, Malmö–Narvik). No
+**Map setup** (`:303-475`). Initial bounds lon 4.5–31.7, lat 55.3–70.2 (Bergen–the Finnish east border, Malmö–Nordkapp; widened for Finland, centre 63, 17 at zoom 3.8 until the fit applies). No
 attribution control (text attribution at the bottom: "© OpenStreetMap contributors · Protomaps · Trafikverket · Entur
 (NLOD)", `:856`). Layers, bottom to top:
 1. Basemap (§3.13), rail network lines (and `rail-stations` dots from z9).

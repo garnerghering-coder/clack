@@ -31,7 +31,7 @@ struct BoardScreen: View {
     /// The furthest ahead the board looks.
     private static let reachMs = 24.0 * 3_600_000
 
-    private var tz: String { station?.tz ?? "Europe/Stockholm" }
+    private var tz: String { Format.zone(station?.tz) }
 
     var body: some View {
         Page {
@@ -209,7 +209,7 @@ struct BoardScreen: View {
 
     /// A row opens the train in Explore, the same view as tapping it on the map (looking, not following).
     private func open(_ row: BoardRow) {
-        router.presentTrain(number: row.trainNumber, date: row.trip?.serviceDate ?? Format.localDate(row.advertised, tz: "Europe/Stockholm"), key: row.trip?.key)
+        router.presentTrain(number: row.trainNumber, date: row.trip?.serviceDate ?? Format.localDate(row.advertised, tz: tz), key: row.trip?.key)
     }
 }
 

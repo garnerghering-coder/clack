@@ -215,11 +215,12 @@ public nonisolated enum ExploreLogic {
     }
 
     /// A train's stops as the journey a ticket is bought for.
+    /// The stops carry no zone of their own, so it comes from the station ids (`fi:` is Finland).
     public static func ticketTrip(operatorId: String?, number: String, from: LiveTrainStop, to: LiveTrainStop, trip: TrainTrip?) -> TicketTrip {
         TicketTrip(
             operatorId: operatorId, trainNumber: number,
-            from: .init(name: from.name, time: from.dep ?? from.arr ?? 0, tz: "Europe/Stockholm", seq: from.seq),
-            to: .init(name: to.name, time: to.arr ?? to.dep ?? 0, tz: "Europe/Stockholm", seq: to.seq),
+            from: .init(name: from.name, time: from.dep ?? from.arr ?? 0, tz: Format.zone(stationId: from.stationId), seq: from.seq),
+            to: .init(name: to.name, time: to.arr ?? to.dep ?? 0, tz: Format.zone(stationId: to.stationId), seq: to.seq),
             tripKey: trip?.key, serviceDate: trip?.serviceDate
         )
     }
