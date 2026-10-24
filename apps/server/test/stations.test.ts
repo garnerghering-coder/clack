@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildStations, countryOf, type GtfsParent, type TrvLoc } from '../src/import/stations.js';
+import { buildStations, countryOf, TZ_BY_COUNTRY, type GtfsParent, type TrvLoc } from '../src/import/stations.js';
 
 const trv: TrvLoc[] = [
   { signature: 'Cst', name: 'Stockholm C', lat: 59.33, lon: 18.0573, country: 'SE' },
@@ -52,6 +52,15 @@ describe('buildStations', () => {
     expect(countryOf(null, undefined, 47.32, 12.79)).toBe('AT');
     expect(countryOf(null, undefined, 52.52, 13.37)).toBe('DE');
     expect(countryOf(null, undefined, 61.0, 14.5)).toBe('SE');
+  });
+  it('takes the source\'s own country when it states one (Finland is not Sweden)', () => {
+    expect(countryOf(null, undefined, 60.17, 24.94, 'FI')).toBe('FI');
+    expect(countryOf(null, undefined, 65.83, 24.13, 'se')).toBe('SE'); // Haparanda, as Digitraffic says
+    expect(countryOf(null, undefined, 61.0, 14.5, 'not a code')).toBe('SE'); // unusable: falls back as before
+  });
+  it('has a time zone for Finland', () => {
+    expect(TZ_BY_COUNTRY.FI).toBe('Europe/Helsinki');
+    expect(TZ_BY_COUNTRY.SE).toBe('Europe/Stockholm');
   });
 });
 

@@ -17,4 +17,8 @@ export const config = {
   gtfsSverige2Key: process.env.TRAFIKLAB_GTFS_SVERIGE2_KEY ?? '',
   /** Entur asks every client to identify itself as <company>-<application> (no key needed). */
   enturClientName: process.env.ENTUR_CLIENT_NAME ?? 'garner-clack',
+  /** Digitraffic (Finland) asks clients to name themselves in `Digitraffic-User` (no key, no personal data). */
+  digitrafficUser: process.env.DIGITRAFFIC_USER ?? 'clack',
+  /** FINLAND_IMPORT=0 turns the daily Finnish timetable import off (on by default). */
+  finlandImport: !/^(0|false|no|off)$/i.test(process.env.FINLAND_IMPORT ?? ''),
 };

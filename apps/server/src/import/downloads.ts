@@ -8,6 +8,7 @@ import { and, desc, eq, gte } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { importLog } from '../db/schema.js';
 import { REPO_ROOT, config } from '../env.js';
+import { DIGITRAFFIC_BASE, digitrafficHeaders } from '../digitraffic/client.js';
 
 export interface Dataset {
   source: string;
@@ -43,6 +44,18 @@ const entur = (code: string): Dataset => ({
   monthlyQuota: 40,
 });
 export const ENTUR_DATASETS = ['vyg', 'goa', 'sjn', 'flt'].map(entur);
+
+/**
+ * Finland's passenger-train GTFS from Digitraffic (FINLAND_DATA_FINDINGS.md): one 5 MB zip, no key. The request needs
+ * the exact `Accept-Encoding: gzip` header (digitrafficHeaders). Same once-a-day rule as the others.
+ */
+export const FINLAND_DATASET: Dataset = {
+  source: 'digitraffic_gtfs',
+  url: `${DIGITRAFFIC_BASE}trains/gtfs-passenger.zip`,
+  headers: () => digitrafficHeaders(config.digitrafficUser, '*/*'),
+  file: path.join(CACHE_DIR, 'digitraffic/gtfs-passenger.zip'),
+  monthlyQuota: 40,
+};
 
 /** Don't download again within this many hours unless forced (spec §5.2). */
 export const MIN_HOURS_BETWEEN_DOWNLOADS = 20;

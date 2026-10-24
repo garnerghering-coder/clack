@@ -3,7 +3,9 @@ import fs from 'node:fs';
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { importLog, stations } from '../db/schema.js';
-import { DATASETS, ENTUR_DATASETS, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { DATASETS, ENTUR_DATASETS, FINLAND_DATASET, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { config } from '../env.js';
+import { importGtfsFinland, lastFinlandImport } from './gtfs-fi.js';
 import { importGtfsNorway, lastNorwayImport } from './gtfs-no.js';
 import { importGtfsSweden3, lastImportedFeed, refreshStationPopularity, type ImportSummary } from './gtfs-se3.js';
 import { loadOfficialMapping } from './official-mapping.js';
@@ -98,6 +100,36 @@ export function runNorwayImport(db: Db, opts: RunOptions = {}) {
   });
 }
 
+/**
+ * Finland (FINLAND_DATA_FINDINGS.md): Digitraffic's one passenger-train GTFS, downloaded at most once a day and
+ * imported when it is new (or nothing from Finland is in yet). A failed download keeps the cached copy.
+ */
+export function runFinlandImport(db: Db, opts: RunOptions = {}) {
+  const log = opts.log ?? console.log;
+  return exclusive(async () => {
+    let zip = opts.zip;
+    let fresh = false;
+    if (!zip) {
+      try {
+        const r = await ensureDataset(db, FINLAND_DATASET, { force: opts.forceDownload, log });
+        log(`Finland: ${r.reason}`);
+        fresh = r.downloaded;
+        zip = r.file;
+      } catch (e) {
+        log(`${FINLAND_DATASET.source}: ${(e as Error).message}`);
+        if (fs.existsSync(FINLAND_DATASET.file)) zip = FINLAND_DATASET.file;
+      }
+    } else fresh = true;
+    if (!zip || !fs.existsSync(zip)) return null;
+    if (!fresh && !opts.reimport && lastFinlandImport(db)) {
+      log('Finland: timetable unchanged since the last import; skipping');
+      return null;
+    }
+    log('Finland: importing rail trips…');
+    return importGtfsFinland(db, zip, { log });
+  });
+}
+
 /** On server start: make sure there is something to search, without spending quota when a cached feed exists. */
 export async function bootstrap(db: Db, log: (m: string) => void = console.log) {
   try {
@@ -113,6 +145,8 @@ export async function bootstrap(db: Db, log: (m: string) => void = console.log) 
   }
   // Norway after Sweden, so Norwegian stops can reuse the stations Sweden's cross-border trains already made.
   await runNorwayImport(db, { log }).catch((e) => log(`Norway import skipped: ${(e as Error).message}`));
+  // Finland after Norway: Haparanda comes from Sweden's feed and is reused by the Oulu trains.
+  if (config.finlandImport) await runFinlandImport(db, { log }).catch((e) => log(`Finland import skipped: ${(e as Error).message}`));
   // Operator logos: each brand's app icon from its website (skipped when already downloaded this month).
   await refreshLogos(log).catch((e) => log(`logos skipped: ${(e as Error).message}`));
   // The map's basemap is a one-off download (no quota); later runs just reuse the file.

@@ -2,7 +2,7 @@
 // Timestamps are UTC epoch milliseconds. Each station keeps its IANA time zone for display.
 // User-owned rows always carry user_id so the app is multi-user ready.
 import { sql } from 'drizzle-orm';
-import { index, integer, primaryKey, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, primaryKey, real, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 import type { OnboardFacts } from '@clack/shared';
 
 const timestamp = (name: string) => integer(name, { mode: 'timestamp_ms' });
@@ -34,7 +34,11 @@ export const stations = sqliteTable('stations', {
   needsReview: integer('needs_review', { mode: 'boolean' }).notNull().default(false),
   /** Entur's stop place (NSR:StopPlace:…) for stations Norway's feeds serve, for boards and live data. */
   nsrId: text('nsr_id'),
-});
+  /** Digitraffic stationShortCode (HKI, TPE …) for stations Finland's feed serves (FINLAND_DATA_FINDINGS.md). */
+  fiId: text('fi_id'),
+  /** Digitraffic stationUICCode, kept to match other Finnish sources later. */
+  fiUic: integer('fi_uic'),
+}, (t) => [uniqueIndex('stations_fi_id').on(t.fiId).where(sql`${t.fiId} is not null`)]);
 
 /** One row per brand (Öresundståg, Pågatåg, SJ …); the operating company is secondary. */
 export const operators = sqliteTable('operators', {
@@ -55,7 +59,8 @@ export const timetableTrips = sqliteTable(
   'timetable_trips',
   {
     key: text('key').primaryKey(),
-    source: text('source').notNull(), // gtfs_se3 | gtfs_sv2
+    // gtfs_se3 | gtfs_sv2 | gtfs_no | gtfs_fi (Finland's keys are 'fi:<trip_id>:<hash>')
+    source: text('source').notNull(),
     tripId: text('trip_id').notNull(),
     trainNumber: text('train_number'),
     operatorId: text('operator_id').references(() => operators.id),
@@ -237,8 +242,13 @@ export const legStops = sqliteTable(
     trvTrainNumber: text('trv_train_number'),
     /** JSON array of Trafikverket deviation texts shown as notices / delay reasons. */
     deviations: text('deviations', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),
-    /** Who reports this stop live: trafikverket | entur; null when nobody can (Denmark, SJ in Norway). */
+    /** Who reports this stop live: trafikverket | entur | digitraffic (Finland); null when nobody can (Denmark, SJ in Norway). */
     reportSource: text('report_source'),
+    /**
+     * Why this stop was late, as JSON array of {src, code?, text?}; null when unknown. The import work only adds the
+     * column; the delay-cause work fills it.
+     */
+    causes: text('causes'),
   },
   (t) => [primaryKey({ columns: [t.legId, t.seq] })],
 );
@@ -266,7 +276,7 @@ export const liveState = sqliteTable('live_state', {
   lon: real('lon'),
   bearing: real('bearing'),
   speedKmh: real('speed_kmh'),
-  /** gps | estimated */
+  /** gps | estimated; the feed behind it may be trafikverket | entur | digitraffic (live map, Finland later). */
   positionSource: text('position_source'),
   /** When the GPS fix was taken (Trafikverket TimeStamp); null for estimates. */
   positionAt: timestamp('position_at'),

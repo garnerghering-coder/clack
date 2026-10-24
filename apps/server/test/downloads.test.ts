@@ -4,7 +4,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { openDb, type Db } from '../src/db/client.js';
 import { importLog } from '../src/db/schema.js';
-import { QuotaError, callsThisMonth, ensureDataset, type Dataset } from '../src/import/downloads.js';
+import { FINLAND_DATASET, MIN_HOURS_BETWEEN_DOWNLOADS, QuotaError, callsThisMonth, ensureDataset, type Dataset } from '../src/import/downloads.js';
 
 const NOW = Date.parse('2026-10-20T12:00:00Z');
 let db: Db;
@@ -76,4 +76,26 @@ describe('download progress', () => {
     expect(lines).toEqual(['test: downloading (1/3 this month)…', 'test: 100 MB of 250 MB downloaded', 'test: 200 MB of 250 MB downloaded']);
     // Writes 250 MB to disk, which can pass the default 5 s when every test file runs at once.
   }, 30_000);
+});
+
+describe('Finland dataset', () => {
+  it('is Digitraffic\'s passenger GTFS with the exact gzip header and no key', () => {
+    expect(FINLAND_DATASET.url).toBe('https://rata.digitraffic.fi/api/v1/trains/gtfs-passenger.zip');
+    expect(FINLAND_DATASET.key).toBeUndefined();
+    expect(FINLAND_DATASET.headers!()).toMatchObject({ 'Accept-Encoding': 'gzip', 'Digitraffic-User': 'clack' });
+    expect(FINLAND_DATASET.file).toMatch(/data\/cache\/digitraffic\/gtfs-passenger\.zip$/);
+    expect(FINLAND_DATASET.monthlyQuota).toBe(40);
+  });
+  it('is downloaded once a day, sending those headers', async () => {
+    const seen: (HeadersInit | undefined)[] = [];
+    const fetchImpl = (async (_u: string, init?: RequestInit) => {
+      seen.push(init?.headers);
+      return new Response('zipbytes');
+    }) as unknown as typeof fetch;
+    const fin = { ...FINLAND_DATASET, file: path.join(dir, 'gtfs-passenger.zip') };
+    expect((await ensureDataset(db, fin, { now: NOW, fetchImpl })).downloaded).toBe(true);
+    expect((await ensureDataset(db, fin, { now: NOW + (MIN_HOURS_BETWEEN_DOWNLOADS - 1) * 3600_000, fetchImpl })).downloaded).toBe(false);
+    expect(seen).toHaveLength(1);
+    expect((seen[0] as Record<string, string>)['Accept-Encoding']).toBe('gzip');
+  });
 });

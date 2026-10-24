@@ -2,7 +2,7 @@
 // how many times in a row. The clients call these; /api/health reports them, and live views use them to say when
 // data has gone quiet instead of showing old data as live.
 
-export type Feed = 'trafikverket' | 'entur';
+export type Feed = 'trafikverket' | 'entur' | 'digitraffic';
 
 interface FeedState {
   okAt: number | null;

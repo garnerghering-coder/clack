@@ -35,6 +35,10 @@ describe('stations API', () => {
     process.env.CLACK_ADMIN_TOKEN = 'test-admin-token';
     const body = (await app.inject({ url: '/api/import/status', headers: { 'x-clack-admin': 'test-admin-token' } })).json();
     delete process.env.CLACK_ADMIN_TOKEN;
-    expect(body).toMatchObject({ stations: 2, trips: 0, quota: [{ source: 'gtfs_se3', usedThisMonth: 0, monthlyQuota: 50 }] });
+    expect(body).toMatchObject({ stations: 2, trips: 0, quota: [
+        { source: 'gtfs_se3', usedThisMonth: 0, monthlyQuota: 50 },
+        { source: 'digitraffic_gtfs', usedThisMonth: 0, monthlyQuota: 40 },
+      ],
+    });
   });
 });

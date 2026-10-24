@@ -1,6 +1,7 @@
 // Builds the stations table from GTFS rail stops + Trafikverket locations (Phase 0 §3).
 import type { StationOverride } from '../dataFiles.js';
 import { haversineM, nameSimilarity } from '../lib/geo.js';
+import { COUNTRIES } from '../lib/countries.js';
 
 export interface GtfsParent {
   stopId: string;
@@ -43,6 +44,7 @@ export const TZ_BY_COUNTRY: Record<string, string> = {
   NO: 'Europe/Oslo',
   DE: 'Europe/Berlin',
   AT: 'Europe/Vienna',
+  FI: COUNTRIES.FI.tz,
 };
 
 const GEO_NAME_RADIUS_M = 300;
@@ -52,8 +54,13 @@ const COORD_DISAGREE_M = 1000;
 /** A Swedish stop with no Trafikverket location within this distance is a bus stop inside a "rail" trip. */
 const BUS_STOP_M = 1000;
 
-/** Country from a Trafikverket signature prefix ("Dk.kh"), a rikshållplats prefix, or a rough bounding box. */
-export function countryOf(sig: string | null, riks: string | undefined, lat: number, lon: number): string {
+/**
+ * Country from the source's own statement when it has one (`explicit`, e.g. Digitraffic's countryCode), else a
+ * Trafikverket signature prefix ("Dk.kh"), a rikshållplats prefix, or a rough bounding box. The box only knows
+ * Germany/Austria/Denmark/Norway and otherwise guesses Sweden, so a source that knows better must say so.
+ */
+export function countryOf(sig: string | null, riks: string | undefined, lat: number, lon: number, explicit?: string): string {
+  if (explicit && /^[A-Za-z]{2}$/.test(explicit)) return explicit.toUpperCase();
   const prefix = sig?.match(/^([A-Za-z]{2})\./)?.[1]?.toUpperCase();
   if (prefix) return prefix;
   if (riks) {
