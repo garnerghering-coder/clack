@@ -12,7 +12,7 @@ public nonisolated enum TripsLogic {
     /// How long after arriving a trip stays featured (as "arrived", with its Passport link) when nothing is ahead.
     public static let recentArrivalMs: Double = 6 * 3_600_000
 
-    public static func tz(_ leg: Leg) -> String { leg.origin?.tz ?? "Europe/Stockholm" }
+    public static func tz(_ leg: Leg) -> String { Format.zone(leg.origin?.tz) }
 
     /// A late train that is still running counts as upcoming until it actually arrives.
     public static func arrivalOf(_ leg: Leg) -> Double {

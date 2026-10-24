@@ -7,7 +7,7 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The Explore tab: a calm radar of every train running in Sweden and Norway; tap a train or station for details,
+/// The Explore tab: a calm radar of every train running in Sweden, Norway and Finland; tap a train or station for details,
 /// follow trains, plan a trip from one (pages/LiveMapPage.tsx).
 struct ExploreScreen: View {
     @Environment(AppModel.self) private var app
@@ -291,7 +291,7 @@ struct ExploreScreen: View {
                     MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
                 }
             }
-            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD)")
+            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic)")
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
         }
         .padding(.leading, 12).padding(.bottom, 8)
@@ -372,7 +372,7 @@ struct ExploreScreen: View {
                 id: station.id, name: station.name, onClose: { model.stationSheet = nil },
                 onTrain: { row in
                     model.stationSheet = nil
-                    let date = row.trip?.serviceDate ?? Format.localDate(Date().timeIntervalSince1970 * 1000, tz: "Europe/Stockholm")
+                    let date = row.trip?.serviceDate ?? Format.localDate(Date().timeIntervalSince1970 * 1000, tz: Format.zone(stationId: station.id))
                     if let train = model.liveTrain(number: row.trainNumber, date: date) {
                         Task { await model.select(train.id) }
                     } else {
@@ -403,7 +403,7 @@ struct ExploreScreen: View {
             if let next = train.next {
                 HStack(spacing: 8) {
                     Text(l10n.t("live.nextStopName", ["name": next])).clack(.body).foregroundStyle(Ink.text)
-                    FlapTime(time: train.nextEta?.ms, tz: "Europe/Stockholm", clock: app.settings.clock, style: .text)
+                    FlapTime(time: train.nextEta?.ms, tz: Format.zone(country: train.operatorId.flatMap { app.operatorsById[$0]?.country }), clock: app.settings.clock, style: .text)
                 }
             }
             FlowLayout(spacing: 12, lineSpacing: 8) {
@@ -448,7 +448,7 @@ struct ExploreScreen: View {
         let status: String
         if allCanceled { status = l10n.t("train.statusCanceled") }
         else if last?.passed == true { status = l10n.t("train.statusArrived") }
-        else if let departs, departs > now { status = l10n.t("train.statusDeparts", ["time": Format.time(departs, tz: "Europe/Stockholm", clock: app.settings.clock)]) }
+        else if let departs, departs > now { status = l10n.t("train.statusDeparts", ["time": Format.time(departs, tz: Format.zone(stationId: first?.stationId), clock: app.settings.clock)]) }
         else { status = l10n.t("train.statusNoPosition") }
         let followed = model.isFollowed(number: view.number, date: view.date)
         return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), collapsed: collapsed, onClose: { model.closeScheduled() }) {

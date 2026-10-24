@@ -102,7 +102,10 @@ public nonisolated enum Disruption {
     ///   gives a price reduction from 20 minutes late.
     /// - EU (Your Europe): arriving 60 to 119 minutes late, 25% of the ticket price; 120 or more, 50%; a cancellation
     ///   that would make you over 60 minutes late gives a refund or re-routing.
-    /// Norway isn't covered here (no rules checked yet): the operator's own terms apply.
+    /// Norway isn't covered here (no rules checked yet): the operator's own terms apply. Nor is a trip that stays in
+    /// Finland: the EU train regulation (2021/782) is EU law, so it applies there too, but which Finnish services it
+    /// covers and any national rules on top are not checked (unverified); the app points to the operator's own terms
+    /// and never to the Swedish rule. A trip that crosses a border is EU either way.
     public enum Rights: Equatable, Sendable {
         public enum EUClaim: String, Sendable { case refundOrReroute = "refund_or_reroute", compensation25 = "compensation_25", compensation50 = "compensation_50" }
         case eu(EUClaim?)
@@ -112,7 +115,7 @@ public nonisolated enum Disruption {
 
     public static func passengerRights(countries: [String], journeyKm: Double, arrDelayMin: Int?, canceled: Bool) -> Rights {
         let international = Set(countries).count > 1
-        if !international && countries.allSatisfy({ $0 == "NO" }) { return .operator }
+        if !international && (countries.allSatisfy({ $0 == "NO" }) || countries.allSatisfy({ $0 == "FI" })) { return .operator }
         let late = arrDelayMin ?? 0
         if international || journeyKm >= 150 {
             if canceled { return .eu(.refundOrReroute) }

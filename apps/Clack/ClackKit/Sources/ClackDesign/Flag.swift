@@ -28,6 +28,8 @@ public struct Flag: View {
             case "NO":
                 rect(0, 0, 32, 32, "#ba0c2f"); rect(8, 0, 8, 32, "#ffffff"); rect(0, 12, 32, 8, "#ffffff")
                 rect(10, 0, 4, 32, "#00205b"); rect(0, 14, 32, 4, "#00205b")
+            case "FI":
+                rect(0, 0, 32, 32, "#ffffff"); rect(8.5, 0, 5.5, 32, "#003580"); rect(0, 13.25, 32, 5.5, "#003580")
             case "DE":
                 rect(0, 0, 32, 11, "#000000"); rect(0, 10.67, 32, 11, "#dd0000"); rect(0, 21.33, 32, 11, "#ffce00")
             case "AT":

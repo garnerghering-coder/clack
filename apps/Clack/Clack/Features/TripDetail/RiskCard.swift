@@ -56,7 +56,7 @@ struct RiskCard: View {
                     }
                 }
                 InfoNote(
-                    l10n.t("risk.honest", ["time": Format.time(risk.checkedAt.ms, tz: "Europe/Stockholm", clock: app.settings.clock)]),
+                    l10n.t("risk.honest", ["time": Format.time(risk.checkedAt.ms, tz: Format.zone(leg.leg.origin?.tz), clock: app.settings.clock)]),
                     more: l10n.t("risk.honestMore")
                 )
             }

@@ -18,10 +18,10 @@
 1. **No AI at runtime.** Everything is deterministic code: downloads, database queries, string matching, arithmetic. No LLM calls anywhere in the app or the server.
 2. **Cheap.** Free data sources, free map data, no paid tiles or paid APIs. Respect every quota. (The Apple Developer Program and the hosted VM are the only costs; nothing in the code is paid per request.)
 3. **Native on iPhone.** The only client is the SwiftUI app in `apps/Clack`. There is no web app, no PWA and no wrapper around a web view.
-4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab or Entur itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
+4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab, Entur or Digitraffic itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
 5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again.
 6. **i18n from day one.** Every user-facing string is a key in `packages/shared/locales/en.json` and `sv.json`; English and Swedish ship together.
-7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur), so a new country plugs in without touching the core.
+7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur, Finland through Digitraffic), so a new country plugs in without touching the core.
 8. **Nothing made up.** A train type, livery, line or amenity with no source is not shown (an unpainted train, "Train type not known"), and an estimate is always labelled as one.
 
 ## 3. Scope
@@ -30,7 +30,7 @@
 1. Add a train (smart search by number or by stations, with a manual fallback), or import it from a ticket shared to Clack as a PDF or email (SJ tickets and receipts so far).
 2. Trip detail: map, stop timeline, times and delays, platforms, the train's drawing, change risk, what is on board, activity log.
 3. Trips: upcoming and past legs grouped into journeys, with the next one featured.
-4. Explore: the live map of every running passenger train in Sweden and Norway, station search, station maps and live departure and arrival boards.
+4. Explore: the live map of every running passenger train in Sweden, Norway and Finland, station search, station maps and live departure and arrival boards.
 5. Passport: stats, year filter, commuter toggle, CO₂ comparisons, map of everything, share cards.
 6. Settings: theme, language (English, Swedish), distance units, clock, CO₂ comparison, commuter filter, rail-network toggle, walking pace and step-free routing, display name, alert lead time, offline maps, privacy, about and sources, delete my data.
 7. **Live tracking:** live delays, platforms, cancellations and short-turns, train position (GPS or labelled estimate), activity log (`DESIGN.md` §9).
@@ -278,7 +278,7 @@ The server was built in this order; each step was done when its acceptance sente
 6. **Map & geometry:** basemap, routed track lines, rail-network layer. Done when a leg draws along the real tracks.
 7. **Live tracking:** server-side poller or stream per tracked train, `leg_events` and `live_state`, SSE to the app. Done when a train that is running shows live delays and a moving marker.
 8. **Trips, trip detail, journeys; Passport and CO₂; historical search** (`DESIGN.md` §4, §6, §7, §8).
-9. **Norway** through Entur: timetables, live positions, boards.
+9. **Norway** through Entur: timetables, live positions, boards. **Finland** through Digitraffic (Fintraffic, CC BY 4.0), the same scope; the Finnish data is described in `FINLAND_DATA_FINDINGS.md`.
 10. **Native app:** all of the above in SwiftUI (docs/SWIFT_PORT.md, done), then alerts, Live Activities, ticket import, offline mode and widgets (docs/IOS.md, done).
 11. **Later work** is tracked as workstreams A to J ("Clack: from ported to stellar"; docs/SWIFT_PORT.md, last section).
 

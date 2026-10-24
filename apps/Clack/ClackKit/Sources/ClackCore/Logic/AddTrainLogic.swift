@@ -151,20 +151,21 @@ public nonisolated enum AddTrainLogic {
 
     // MARK: dates
 
-    private static func calendar() -> Calendar {
+    private static func calendar(_ tz: String) -> Calendar {
         var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "Europe/Stockholm") ?? .gmt
+        calendar.timeZone = TimeZone(identifier: Format.zone(tz)) ?? .gmt
         return calendar
     }
 
-    /// A `YYYY-MM-DD` date as a `Date` at noon in Stockholm (what the date picker shows).
-    public static func date(fromIso iso: String) -> Date? {
+    /// A `YYYY-MM-DD` date as a `Date` at noon in `tz`, the zone of the station the trip starts at (Stockholm when not
+    /// known): what the date picker shows.
+    public static func date(fromIso iso: String, tz: String = Format.defaultZone) -> Date? {
         let parts = iso.split(separator: "-").compactMap { Int($0) }
         guard parts.count == 3 else { return nil }
-        return calendar().date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2], hour: 12))
+        return calendar(tz).date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2], hour: 12))
     }
 
-    public static func iso(from date: Date) -> String {
-        Format.localDate(date.timeIntervalSince1970 * 1000, tz: "Europe/Stockholm")
+    public static func iso(from date: Date, tz: String = Format.defaultZone) -> String {
+        Format.localDate(date.timeIntervalSince1970 * 1000, tz: Format.zone(tz))
     }
 }

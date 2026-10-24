@@ -4,7 +4,8 @@ Log every train you ride, see it on the real tracks, and build a passport of you
 It is a native SwiftUI iPhone app (`apps/Clack`) and a server it talks to (`apps/server`), which holds the trips and
 fetches the train data. See [`SPEC.md`](SPEC.md) for what it does, [`DESIGN.md`](DESIGN.md) for how it looks,
 [`DATA_FINDINGS.md`](DATA_FINDINGS.md) for what Phase 0 learned about Sweden's data and
-[`NORWAY_DATA_FINDINGS.md`](NORWAY_DATA_FINDINGS.md) for Norway's.
+[`NORWAY_DATA_FINDINGS.md`](NORWAY_DATA_FINDINGS.md) for Norway's and
+[`FINLAND_DATA_FINDINGS.md`](FINLAND_DATA_FINDINGS.md) for Finland's.
 
 ## Run it (macOS)
 
@@ -49,6 +50,7 @@ simulator and press Cmd+R: a debug build in the simulator talks to this server.
 - **Norway** needs no key. Entur's rail timetables (~100 MB for Vy, Go-Ahead, SJ Nord and Flytoget) download on
   first start and at most once a day after that. Every request to Entur names the app (`ENTUR_CLIENT_NAME`, default
   `garner-clack`), as Entur asks.
+- **Finland** needs no key either: data from Digitraffic (Fintraffic), licensed CC BY 4.0, credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY` (shown on the About screen).
 - **Delay data:** Trafikverket keeps actual times for only ~4 days, and Entur only for the day the train runs. The server saves them for your trips while it's
   running and catches up when it starts, so start the app at least every few days.
 - **Updating:** `git pull`, then `npm ci` if dependencies changed (the hosted server: `docs/SERVER.md`).

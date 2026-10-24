@@ -424,7 +424,7 @@ struct FollowingSection: View {
     private func row(_ follow: Follow, op: Operator?) -> some View {
         let color = operatorColor(op?.brandColor, scheme: scheme)
         let nextLine = follow.train?.next.map {
-            l10n.t("live.nextStop", ["name": $0, "time": Format.time(follow.train?.nextEta?.ms, tz: "Europe/Stockholm", clock: app.settings.clock)])
+            l10n.t("live.nextStop", ["name": $0, "time": Format.time(follow.train?.nextEta?.ms, tz: Format.zone(country: op?.country), clock: app.settings.clock)])
         } ?? l10n.t("trips.notRunning")
         return HStack(spacing: 12) {
             OperatorBadge(op: op, size: .medium)

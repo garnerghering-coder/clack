@@ -389,7 +389,7 @@ private struct DeleteMyDataRow: View {
 struct AboutScreen: View {
     @Environment(L10n.self) private var l10n
 
-    private static let sources = ["trafikverket", "gtfsSweden3", "gtfsSverige2", "entur", "osm", "stationMaps", "onboard"]
+    private static let sources = ["trafikverket", "gtfsSweden3", "gtfsSverige2", "entur", "digitraffic", "osm", "stationMaps", "onboard"]
 
     var body: some View {
         Page {
@@ -436,7 +436,7 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-10-23"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-10-24"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
     }

@@ -713,7 +713,7 @@ rotated by bearing (hidden when bearing unknown); **estimated**: dot fill `--bg`
 "Estimated position". Live split: route = travelled (full strokes), route-ahead = rest.
 
 ### 5.6 Explore (live) map (LiveMapPage.tsx:290-470)
-Opens on bounds `[[4.5, 55.3], [24.5, 68.6]]` (Bergen to the Finnish border, Malmö to Narvik). Layer order: rail
+Opens on bounds `[[4.5, 55.3], [31.7, 70.2]]` (Bergen to the Finnish east border, Malmö to Nordkapp; widened for Finland, centre 63, 17 at zoom 3.8 until the fit applies). Layer order: rail
 network → `live-stations` → `clusters` → `train-followed` → (selected route layers inserted before `train-mine`) →
 `train-mine` → `train-selected` → `train-dot` → `train-label` → `live-station-labels` (moved to top).
 
