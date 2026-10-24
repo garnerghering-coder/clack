@@ -10,10 +10,7 @@ import Testing
 private let m = 60_000.0
 
 private func leg(_ id: String, dep: Double, arr: Double) -> WidgetSnapshot.Leg {
-    WidgetSnapshot.Leg(
-        id: id, journeyId: "j", operatorName: nil, color: nil, train: nil, from: "A", to: "B", fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm",
-        depAt: dep, arrAt: arr, depPlatform: nil, arrPlatform: nil, delayMin: nil, canceled: false, status: nil, progress: nil, nextStop: nil, nextStopAt: nil
-    )
+    WidgetSnapshot.Leg(id: id, journeyId: "j", from: "A", to: "B", fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm", depAt: dep, arrAt: arr, canceled: false)
 }
 
 struct WidgetSnapshotTests {
@@ -37,9 +34,10 @@ struct WidgetSnapshotTests {
     }
 
     @Test func theSnapshotSurvivesEncoding() throws {
-        var s = WidgetSnapshot(updatedAt: 5)
+        var s = WidgetSnapshot(updatedAt: 5, language: .sv, clock: .h12)
         s.journey = legs
-        s.boards = [.init(id: "x", name: "X", rows: [])]
+        s.nextJourney = [leg("c", dep: 400 * m, arr: 500 * m)]
+        s.boards = [.init(id: "x", name: "X", tz: "Europe/Oslo", updatedAt: 7, rows: [.init(id: "r", time: 1, expected: 2, to: "Y", train: "9", canceled: false)])]
         let back = try JSONDecoder().decode(WidgetSnapshot.self, from: JSONEncoder().encode(s))
         #expect(back == s)
     }

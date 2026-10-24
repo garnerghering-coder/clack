@@ -963,5 +963,41 @@
     "failed": "Kunde inte lägga till tåget",
     "add_one": "Lägg till {{count}} tåg",
     "add_other": "Lägg till {{count}} tåg"
+  },
+  "widgets": {
+    "nextJourney": {
+      "name": "Nästa resa",
+      "description": "Din nästa resa, från perrongen till framme."
+    },
+    "passport": {
+      "name": "Pass",
+      "description": "Din tåghistorik på folie-kortet."
+    },
+    "departures": {
+      "name": "Avgångar",
+      "description": "Avgångstavlan för en station du väljer."
+    },
+    "year": {
+      "name": "Året på räls",
+      "description": "Årets summor och varje resa på en karta."
+    },
+    "stats": {
+      "name": "Statistik",
+      "description": "Tågbolag, tågtyper, stationer och länder. Tryck på pilen för nästa sida."
+    },
+    "noJourney": "Ingen resa på gång",
+    "noJourneyHint": "Lägg till ett tåg i Clack",
+    "updated": "Uppdaterad {{time}}",
+    "pickStation": "Välj en station",
+    "pickStationHint": "Följ en station i Clack, eller håll in widgeten och välj Redigera widget.",
+    "openApp": "Öppna Clack för att fylla i detta",
+    "nextMedal": "Nästa medalj",
+    "onTime": "I tid",
+    "co2Saved": "CO₂ sparat",
+    "nextPage": "Nästa sida",
+    "yearTitle": "Året på räls {{year}}",
+    "distance": "Sträcka",
+    "topRoute": "Vanligaste sträckan · {{count}}×",
+    "busiestMonth": "Mest aktiva månad · {{count}}"
   }
 }

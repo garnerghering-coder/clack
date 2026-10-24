@@ -963,5 +963,41 @@
     "failed": "Couldn't add this train",
     "add_one": "Add {{count}} train",
     "add_other": "Add {{count}} trains"
+  },
+  "widgets": {
+    "nextJourney": {
+      "name": "Next journey",
+      "description": "Your next journey, from the platform to the arrival."
+    },
+    "passport": {
+      "name": "Passport",
+      "description": "Your rail history on the foil card."
+    },
+    "departures": {
+      "name": "Departures",
+      "description": "The departure board of a station you choose."
+    },
+    "year": {
+      "name": "Year in rail",
+      "description": "This year's totals and every ride on one map."
+    },
+    "stats": {
+      "name": "Stats",
+      "description": "Operators, train types, stations and countries. Tap the arrow for the next page."
+    },
+    "noJourney": "No journey coming up",
+    "noJourneyHint": "Add a train in Clack",
+    "updated": "Updated {{time}}",
+    "pickStation": "Choose a station",
+    "pickStationHint": "Follow a station in Clack, or touch and hold this widget and choose Edit Widget.",
+    "openApp": "Open Clack to fill this in",
+    "nextMedal": "Next medal",
+    "onTime": "On time",
+    "co2Saved": "CO₂ saved",
+    "nextPage": "Next page",
+    "yearTitle": "Year in rail {{year}}",
+    "distance": "Distance",
+    "topRoute": "Top route · {{count}}×",
+    "busiestMonth": "Busiest month · {{count}}"
   }
 }
