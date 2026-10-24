@@ -202,7 +202,8 @@ public nonisolated enum WidgetData {
             depAt: dep, arrAt: arr, depPlatform: l.depPlatform, arrPlatform: l.arrPlatform,
             depDelayMin: l.depDelayMin, arrDelayMin: l.arrDelayMin ?? l.live?.arrivalDelayMin,
             canceled: l.canceled, status: l.live?.status.rawValue, progress: l.live?.progress,
-            nextStop: nextStop, nextStopAt: nextStop == nil ? nil : l.live?.eta?.ms, stops: ridden
+            nextStop: nextStop, nextStopAt: nextStop == nil ? nil : l.live?.eta?.ms, stops: ridden,
+            coach: l.coach, seat: l.seat
         )
     }
 

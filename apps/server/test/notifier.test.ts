@@ -186,6 +186,18 @@ describe('Live Activities', () => {
     expect(a['content-state']).toMatchObject({ legId: 'L1', train: '7205', from: 'Nässjö C', to: 'Jönköping C', phase: 'leaveSoon' });
   });
 
+  it('carries the coach and seat of the leg it shows, and null when none was given', async () => {
+    const w = world();
+    w.db.update(legs).set({ coach: '4', seat: '23' }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.tick();
+    const start = w.activity().find((r) => r.path.endsWith(START))!;
+    expect(w.aps(start)['content-state']).toMatchObject({ legId: 'L1', coach: '4', seat: '23' });
+    const w2 = world();
+    await w2.notifier.tick();
+    const plain = w2.activity().find((r) => r.path.endsWith(START))!;
+    expect(w2.aps(plain)['content-state']).toMatchObject({ legId: 'L1', coach: null, seat: null });
+  });
+
   it('tries a failed start again on the next tick, and logs it only once Apple took it', async () => {
     let fail = true;
     const w = world({ reply: (r) => (r.path.endsWith(START) && fail ? { status: 503, body: '{"reason":"ServiceUnavailable"}' } : { status: 200 }) });

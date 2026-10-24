@@ -35,6 +35,9 @@ export interface TripFacts {
   delayMin: number | null;
   /** Nothing follows this leg in its journey. */
   lastInJourney: boolean;
+  /** Where the owner sits on this leg, as saved ("4", "23"); absent or null when not given. */
+  coach?: string | null;
+  seat?: string | null;
 }
 
 export type Prefs = Pick<Settings, 'notify' | 'notifyLeadMin' | 'notifyPlatform' | 'notifyDelay' | 'notifyCancel' | 'notifyChange' | 'notifyGetOff' | 'notifyArrival'>;

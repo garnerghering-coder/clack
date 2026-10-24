@@ -770,7 +770,8 @@ All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactiv
 
 - **`content-state`** (`TripActivityAttributes.ContentState`): `status, delayMin, nextStop, nextStopAt, platform,
   platformFor, progress, departAt, arriveAt, canceled, phase, note, changePlatform, changeAt` as before, plus the leg the
-  card is showing now: `legId: string, train: string | null, from: string, to: string, fromTz: string, toTz: string`.
+  card is showing now: `legId: string, train: string | null, from: string, to: string, fromTz: string, toTz: string`,
+  and where the owner sits on that leg: `coach: string | null, seat: string | null` (the leg's saved `coach`/`seat`).
   Swift ignores keys it doesn't declare, so these are safe for today's app; to show the right train after a change the
   app must add them as optionals and prefer them over the fixed `attributes`.
 - **Start** (iOS 17.2+, to the device's `startToken`), once per journey, from 30 min before the leg leaves:

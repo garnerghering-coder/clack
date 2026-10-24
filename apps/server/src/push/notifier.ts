@@ -93,6 +93,9 @@ export interface ActivityState {
   to: string;
   fromTz: string;
   toTz: string;
+  /** Where the owner sits on the leg shown ("4", "23"); null when not given. */
+  coach: string | null;
+  seat: string | null;
 }
 
 /** The newest platform change on a leg: when, and what it said. */
@@ -221,6 +224,8 @@ export class Notifier {
         canceled: row.canceled,
         delayMin: live?.arrivalDelayMin ?? row.arrDelayMin,
         lastInJourney: !siblings.some((s) => s.id !== row.id && (ms(s.schedDep) ?? 0) > (dep ?? 0)),
+        coach: row.coach,
+        seat: row.seat,
       };
     };
 
@@ -458,6 +463,8 @@ export class Notifier {
       to: f.to,
       fromTz: f.fromTz,
       toTz: f.toTz,
+      coach: f.coach ?? null,
+      seat: f.seat ?? null,
     };
   }
 

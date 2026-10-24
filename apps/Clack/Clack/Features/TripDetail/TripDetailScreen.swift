@@ -285,7 +285,9 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let m = moment(detail, now: now)
         let live = m.shown, tracking = m.tracking, status = m.status
-        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
+        // Where you sit, until the trip is over.
+        let seat = m.stage == .after ? nil : Seat.label(l10n, coach: l.coach, seat: l.seat)
+        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category, seat: seat) {
             if tracking, let live {
                 LiveStatus(live: live, now: now)
             } else {
@@ -470,6 +472,7 @@ struct TripDetailScreen: View {
         let beyond = TripDetailLogic.beyondCountries(detail.stops)
         let borderAt = TripDetailLogic.borderStation(detail)
         return Card(spacing: 8) {
+            SeatEditor(leg: l) { leg = $0 }
             if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))

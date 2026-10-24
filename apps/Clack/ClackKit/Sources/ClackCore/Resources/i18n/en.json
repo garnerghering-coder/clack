@@ -978,7 +978,9 @@
     "added": "Added",
     "failed": "Couldn’t add this train",
     "add_one": "Add {{count}} train",
-    "add_other": "Add {{count}} trains"
+    "add_other": "Add {{count}} trains",
+    "addSeat": "Already in your trips; adds {{seat}}",
+    "seatAdded": "{{seat}} added to your trip"
   },
   "widgets": {
     "nextJourney": {
@@ -1015,5 +1017,15 @@
     "distance": "Distance",
     "topRoute": "Top route · {{count}}×",
     "busiestMonth": "Busiest month · {{count}}"
+  },
+  "seat": {
+    "coach": "Car {{coach}}",
+    "seat": "Seat {{seat}}",
+    "title": "Your seat",
+    "coachLabel": "Car",
+    "seatLabel": "Seat",
+    "save": "Save seat",
+    "saved": "Seat saved",
+    "failed": "Couldn’t save the seat"
   }
 }

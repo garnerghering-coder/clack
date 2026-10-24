@@ -79,12 +79,16 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
         public var nextStopAt: Double?
         /// Names of the stops ridden, in order.
         public var stops: [String] = []
+        /// Where you sit ("4", "23"), when the trip has it.
+        public var coach: String?
+        public var seat: String?
 
         public init(
             id: String, journeyId: String? = nil, operatorName: String? = nil, color: String? = nil, train: String? = nil,
             from: String, to: String, fromTz: String, toTz: String, depAt: Double, arrAt: Double, depPlatform: String? = nil,
             arrPlatform: String? = nil, depDelayMin: Int? = nil, arrDelayMin: Int? = nil, canceled: Bool, status: String? = nil,
-            progress: Double? = nil, nextStop: String? = nil, nextStopAt: Double? = nil, stops: [String] = []
+            progress: Double? = nil, nextStop: String? = nil, nextStopAt: Double? = nil, stops: [String] = [],
+            coach: String? = nil, seat: String? = nil
         ) {
             self.id = id
             self.journeyId = journeyId
@@ -107,6 +111,8 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
             self.nextStop = nextStop
             self.nextStopAt = nextStopAt
             self.stops = stops
+            self.coach = coach
+            self.seat = seat
         }
     }
 

@@ -165,7 +165,9 @@ public nonisolated enum TripCard {
             from: origin.name,
             to: destination.name,
             fromTz: origin.tz,
-            toTz: destination.tz
+            toTz: destination.tz,
+            coach: leg.coach,
+            seat: leg.seat
         )
     }
 }

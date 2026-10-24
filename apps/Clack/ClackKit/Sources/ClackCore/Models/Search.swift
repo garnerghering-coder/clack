@@ -164,13 +164,18 @@ public nonisolated struct CreateLegBody: Encodable, Sendable {
     public let toSeq: Int
     /// Save even if the same train is already saved on that date.
     public var force: Bool?
+    /// Where you sit, from a ticket ("16", "37"); left out when not known.
+    public var coach: String?
+    public var seat: String?
 
-    public init(tripKey: String, serviceDate: String, fromSeq: Int, toSeq: Int, force: Bool? = nil) {
+    public init(tripKey: String, serviceDate: String, fromSeq: Int, toSeq: Int, force: Bool? = nil, coach: String? = nil, seat: String? = nil) {
         self.tripKey = tripKey
         self.serviceDate = serviceDate
         self.fromSeq = fromSeq
         self.toSeq = toSeq
         self.force = force
+        self.coach = coach
+        self.seat = seat
     }
 }
 
@@ -187,6 +192,9 @@ public nonisolated struct ManualLegBody: Encodable, Sendable {
     public let operatorId: String?
     public let trainNumber: String?
     public let category: String?
+    /// Where you sit; left out when not known.
+    public var coach: String? = nil
+    public var seat: String? = nil
 
     public func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
@@ -198,10 +206,12 @@ public nonisolated struct ManualLegBody: Encodable, Sendable {
         try c.encode(operatorId, forKey: .operatorId)
         try c.encode(trainNumber, forKey: .trainNumber)
         try c.encode(category, forKey: .category)
+        try c.encodeIfPresent(coach, forKey: .coach)
+        try c.encodeIfPresent(seat, forKey: .seat)
     }
 
     private enum CodingKeys: String, CodingKey {
-        case fromStationId, toStationId, date, dep, arr, operatorId, trainNumber, category
+        case fromStationId, toStationId, date, dep, arr, operatorId, trainNumber, category, coach, seat
     }
 
     public init(fromStationId: String, toStationId: String, date: String, dep: String, arr: String, operatorId: String?, trainNumber: String?, category: String?) {

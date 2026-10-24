@@ -81,7 +81,7 @@ struct FeaturedCard: View {
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 8) {
-                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium) {
+                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium, seat: state == .arrived ? nil : Seat.label(l10n, coach: leg.coach, seat: leg.seat)) {
                     switch state {
                     case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
                     case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))

@@ -21,23 +21,29 @@ struct TicketFile: Identifiable, Hashable {
 @Observable
 final class TicketImportModel {
     enum Phase { case reading, unreadable, ready, saving, done }
-    enum State { case matching, found, notFound, already, added, failed }
+    /// `addSeat`: the train is already saved and the ticket says where you sit, which the trip doesn't have yet.
+    enum State { case matching, found, notFound, already, addSeat, added, seatAdded, failed }
 
     struct Row: Identifiable {
         let train: TicketTrain
         var state: State = .matching
         var match: TripResult?
+        /// The trip already saved for this train, when there is one.
+        var saved: Leg?
         var selected = false
         var id: String { train.id }
+        var choosable: Bool { state == .found || state == .addSeat }
     }
 
     private(set) var phase = Phase.reading
     private(set) var rows: [Row] = []
 
-    var chosen: Int { rows.filter { $0.selected && $0.state == .found }.count }
+    var chosen: Int { rows.filter { $0.selected && $0.choosable }.count }
+    /// Only seats to add, no new trains: the button says so.
+    var onlySeats: Bool { !rows.contains { $0.selected && $0.state == .found } }
 
     func toggle(_ id: String) {
-        guard let i = rows.firstIndex(where: { $0.id == id }), rows[i].state == .found else { return }
+        guard let i = rows.firstIndex(where: { $0.id == id }), rows[i].choosable else { return }
         rows[i].selected.toggle()
     }
 
@@ -60,9 +66,17 @@ final class TicketImportModel {
                 guard let i = rows.firstIndex(where: { $0.id == id }) else { continue }
                 rows[i].match = match
                 if let match {
-                    let saved = have.contains { $0.timetableTripKey == match.key && $0.serviceDate == match.serviceDate }
-                    rows[i].state = saved ? .already : .found
-                    rows[i].selected = !saved
+                    let saved = have.first { $0.timetableTripKey == match.key && $0.serviceDate == match.serviceDate }
+                    rows[i].saved = saved
+                    if let saved {
+                        let train = rows[i].train
+                        let seatNews = Seat.patch(coach: train.coach ?? saved.coach, seat: train.seat ?? saved.seat, was: saved) != nil
+                        rows[i].state = seatNews ? .addSeat : .already
+                        rows[i].selected = seatNews
+                    } else {
+                        rows[i].state = .found
+                        rows[i].selected = true
+                    }
                 } else {
                     rows[i].state = .notFound
                 }
@@ -85,11 +99,23 @@ final class TicketImportModel {
 
     func save(_ client: APIClient) async {
         phase = .saving
-        for i in rows.indices where rows[i].selected && rows[i].state == .found {
+        for i in rows.indices where rows[i].selected && rows[i].choosable {
             guard let m = rows[i].match else { continue }
+            let train = rows[i].train
             do {
-                _ = try await client.createLeg(CreateLegBody(tripKey: m.key, serviceDate: m.serviceDate, fromSeq: m.from.seq, toSeq: m.to.seq))
-                rows[i].state = .added
+                if rows[i].state == .addSeat, let saved = rows[i].saved {
+                    // What the ticket says, over what the trip had; a half the ticket doesn't print is left as it was.
+                    if let patch = Seat.patch(coach: train.coach ?? saved.coach, seat: train.seat ?? saved.seat, was: saved) {
+                        _ = try await client.updateLeg(saved.id, patch)
+                    }
+                    rows[i].state = .seatAdded
+                } else {
+                    _ = try await client.createLeg(CreateLegBody(
+                        tripKey: m.key, serviceDate: m.serviceDate, fromSeq: m.from.seq, toSeq: m.to.seq,
+                        coach: Seat.clean(train.coach), seat: Seat.clean(train.seat)
+                    ))
+                    rows[i].state = .added
+                }
             } catch let error as APIError where error.status == 409 {
                 rows[i].state = .already
             } catch {
@@ -146,21 +172,23 @@ struct TicketImportSheet: View {
         let times: Text = m.map {
             TimePair.text(.init(time: $0.from.time, tz: $0.from.tz), .init(time: $0.to.time, tz: $0.to.tz), clock: app.settings.clock)
         } ?? Text(row.train.dep + (row.train.arr.map { TimePair.separator + $0 } ?? "")).monospacedDigit()
-        let train = [row.train.operatorName, (m?.trainNumber ?? row.train.trainNumber).map { l10n.t("add.trainNumber", ["number": $0]) }]
-            .compactMap { $0 }.joined(separator: " · ")
+        let train = Format.join([
+            row.train.operatorName, (m?.trainNumber ?? row.train.trainNumber).map { l10n.t("add.trainNumber", ["number": $0]) },
+            Seat.label(l10n, coach: row.train.coach, seat: row.train.seat),
+        ])
         return Button {
             model.toggle(row.id)
         } label: {
             HStack(alignment: .top, spacing: 12) {
                 LucideIcon(name: row.selected ? "square-check" : "square", size: 22)
                     .foregroundStyle(row.selected ? Ink.accentInk : Ink.text3)
-                    .opacity(row.state == .found || row.selected ? 1 : 0.4)
+                    .opacity(row.choosable || row.selected ? 1 : 0.4)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("\(from) → \(to)").clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
                     (times + Text(Format.separator + Format.day(Format.isoToNoonMs(row.train.date) ?? 0, tz: m?.from.tz ?? "Europe/Stockholm", language: app.settings.language)))
                         .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                     if !train.isEmpty { Text(train).clack(.caption).foregroundStyle(Ink.text2) }
-                    Text(statusText(row.state)).clack(.caption).fontWeight(.semibold).foregroundStyle(statusColor(row.state))
+                    Text(statusText(row)).clack(.caption).fontWeight(.semibold).foregroundStyle(statusColor(row.state))
                 }
                 Spacer(minLength: 0)
             }
@@ -173,12 +201,15 @@ struct TicketImportSheet: View {
         .accessibilityAddTraits(row.selected ? .isSelected : [])
     }
 
-    private func statusText(_ state: TicketImportModel.State) -> String {
-        switch state {
+    private func statusText(_ row: TicketImportModel.Row) -> String {
+        let seat = Seat.label(l10n, coach: row.train.coach, seat: row.train.seat) ?? ""
+        return switch row.state {
         case .matching: l10n.t("ticketImport.matching")
         case .found: l10n.t("ticketImport.found")
         case .notFound: l10n.t("ticketImport.notFound")
         case .already: l10n.t("ticketImport.already")
+        case .addSeat: l10n.t("ticketImport.addSeat", ["seat": seat])
+        case .seatAdded: l10n.t("ticketImport.seatAdded", ["seat": seat])
         case .added: l10n.t("ticketImport.added")
         case .failed: l10n.t("ticketImport.failed")
         }
@@ -186,7 +217,7 @@ struct TicketImportSheet: View {
 
     private func statusColor(_ state: TicketImportModel.State) -> Color {
         switch state {
-        case .added: Ink.onTimeInk
+        case .added, .seatAdded: Ink.onTimeInk
         case .failed, .notFound: Ink.text2
         default: Ink.text2
         }
@@ -201,7 +232,7 @@ struct TicketImportSheet: View {
             }
             .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))
         } else {
-            Button(l10n.t("ticketImport.add", count: model.chosen)) {
+            Button(model.chosen > 0 && model.onlySeats ? l10n.t("seat.save") : l10n.t("ticketImport.add", count: model.chosen)) {
                 Task { await model.save(app.client) }
             }
             .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))

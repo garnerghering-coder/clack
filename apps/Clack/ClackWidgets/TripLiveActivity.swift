@@ -34,6 +34,8 @@ private struct Card {
     var fromTz: String { state.fromTz ?? attributes.fromTz }
     var toTz: String { state.toTz ?? attributes.toTz }
     var phase: String { state.moment }
+    /// "Car 4 · Seat 23" until the leg is over, when the trip has it.
+    var seat: String? { ["arrived", "cancelled"].contains(phase) ? nil : Seat.label(l10n, coach: state.coach, seat: state.seat) }
     /// The operator's colour; the signal yellow when it isn't known (the cards are always dark).
     var line: Color { operatorColor(attributes.color, scheme: .dark) }
     var url: URL? { URL(string: "clack://trip/\(legId)") }
@@ -220,6 +222,8 @@ private struct LockScreen: View {
                 Text(card.route).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1).minimumScaleFactor(0.7)
                 Spacer(minLength: 8)
                 if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text2) }
+                // Where you sit, beside the train: the card has no line to spare.
+                if let seat = card.seat { Text(seat).clack(.chip).foregroundStyle(Ink.text).lineLimit(1).layoutPriority(1) }
             }
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1) }
@@ -270,6 +274,7 @@ private struct SmallCard: View {
                 } else if let p = card.state.platform {
                     Text(card.platform(p)).clack(.chip).foregroundStyle(card.platformChanged ? Ink.accentInk : Ink.text2)
                 }
+                if let seat = card.seat { Text(seat).clack(.chip).foregroundStyle(Ink.text2).lineLimit(1).minimumScaleFactor(0.7) }
                 Spacer(minLength: 0)
                 if stale { Text(card.l10n.t("tripCard.estimated")).clack(.captionUpper).foregroundStyle(Ink.text3) }
             }

@@ -28,7 +28,7 @@ struct TicketReaderTests {
         let trains = TicketReader.trains(fromPages: swedishTicket)
         #expect(trains == [
             TicketTrain(operatorName: "Västtrafik", trainNumber: "7225", date: "2026-10-10", from: "Jönköping Central", to: "Nässjö Central", dep: "12:05", arr: "12:38"),
-            TicketTrain(operatorName: "Snälltåget", trainNumber: "307", date: "2026-10-10", from: "Nässjö Central", to: "Kolding", dep: "13:32", arr: "18:52"),
+            TicketTrain(operatorName: "Snälltåget", trainNumber: "307", date: "2026-10-10", from: "Nässjö Central", to: "Kolding", dep: "13:32", arr: "18:52", coach: "16", seat: "37"),
         ])
     }
 
@@ -40,6 +40,30 @@ struct TicketReaderTests {
         #expect(trains[0].operatorName == "Snälltåget")
         #expect(trains[1].dep == "19:20")
         #expect(trains[1].operatorName == "Västtrafik")
+        #expect(trains[0].coach == "11")
+        #expect(trains[0].seat == "105")
+        // "No seat reservation": nothing to read.
+        #expect(trains[1].coach == nil)
+        #expect(trains[1].seat == nil)
+    }
+
+    @Test func readsTheCoachAndSeatOnOneLine() {
+        let page = "Stockholm C–Göteborg C\nLördag, 10 oktober 2026\n08:03 Stockholm C\n10:51 Göteborg C\nTåg 423\nVagn 4 Plats 23\nSJ, 2 klass\n"
+        let trains = TicketReader.trains(fromPages: [page])
+        #expect(trains.count == 1)
+        #expect(trains.first?.coach == "4")
+        #expect(trains.first?.seat == "23")
+        #expect(trains.first?.operatorName == "SJ")
+        let english = TicketReader.seat(in: ["Carriage 4, Seat 12A"])
+        #expect(english.coach == "4")
+        #expect(english.seat == "12A")
+    }
+
+    @Test func wordsAfterSeatAreNotASeat() {
+        // Conditions lines say "Seat refundable" and "Sittplats": neither is a seat number.
+        let place = TicketReader.seat(in: ["Seat refundable", "Ingen platsreservation", "No seat reservation"])
+        #expect(place.coach == nil)
+        #expect(place.seat == nil)
     }
 
     @Test func readsAReceiptWithNoTrainNumber() {

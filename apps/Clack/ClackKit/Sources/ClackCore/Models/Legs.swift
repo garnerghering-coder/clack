@@ -272,6 +272,9 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     public let originStationId: String
     public let destStationId: String
     public let notes: String?
+    /// Where the owner sat, as they wrote it or the ticket said ("5", "12A"); nil when not given. At most 8 characters.
+    public let coach: String?
+    public let seat: String?
     public var ride: Ride
     public var rideReason: String?
     public let borderEvidence: BorderEvidence?
@@ -281,7 +284,7 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     /// Replaced as live updates arrive.
     public var live: LiveStateRow?
 
-    public init(id: String, status: LegStatus, dataQuality: DataQuality, trainNumber: String?, category: String?, serviceDate: String?, schedDep: Instant?, schedArr: Instant?, actualDep: Instant?, actualArr: Instant?, depDelayMin: Int?, arrDelayMin: Int?, depPlatform: String?, arrPlatform: String?, canceled: Bool, distanceM: Double?, isEstimatedGeometry: Bool, trainType: String?, trainTypeSource: TrainTypeSource?, onboard: OnboardFacts?, countryCodes: [String], journeyId: String?, timetableTripKey: String?, operatorId: String?, originStationId: String, destStationId: String, notes: String?, ride: Ride, rideReason: String? = nil, borderEvidence: BorderEvidence?, `operator`: LegOperator?, origin: StationRef?, destination: StationRef?, live: LiveStateRow? = nil) {
+    public init(id: String, status: LegStatus, dataQuality: DataQuality, trainNumber: String?, category: String?, serviceDate: String?, schedDep: Instant?, schedArr: Instant?, actualDep: Instant?, actualArr: Instant?, depDelayMin: Int?, arrDelayMin: Int?, depPlatform: String?, arrPlatform: String?, canceled: Bool, distanceM: Double?, isEstimatedGeometry: Bool, trainType: String?, trainTypeSource: TrainTypeSource?, onboard: OnboardFacts?, countryCodes: [String], journeyId: String?, timetableTripKey: String?, operatorId: String?, originStationId: String, destStationId: String, notes: String?, coach: String? = nil, seat: String? = nil, ride: Ride, rideReason: String? = nil, borderEvidence: BorderEvidence?, `operator`: LegOperator?, origin: StationRef?, destination: StationRef?, live: LiveStateRow? = nil) {
         self.id = id
         self.status = status
         self.dataQuality = dataQuality
@@ -309,6 +312,8 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
         self.originStationId = originStationId
         self.destStationId = destStationId
         self.notes = notes
+        self.coach = coach
+        self.seat = seat
         self.ride = ride
         self.rideReason = rideReason
         self.borderEvidence = borderEvidence

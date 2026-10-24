@@ -34,11 +34,13 @@ struct ServiceHeader<Status: View>: View {
     var fallback: String?
     /// The service's own name, said instead of the operator's ("SJ InterCity"; a route name when the operator isn't known).
     var name: String?
+    /// Where you sit, "Car 4 · Seat 23" (`Seat.label`), written after the service.
+    var seat: String?
     @ViewBuilder var status: Status
 
     init(
         op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, name: String? = nil, fallback: String? = nil,
-        @ViewBuilder status: () -> Status
+        seat: String? = nil, @ViewBuilder status: () -> Status
     ) {
         self.op = op
         self.number = number
@@ -46,6 +48,7 @@ struct ServiceHeader<Status: View>: View {
         self.category = category
         self.name = name
         self.fallback = fallback
+        self.seat = seat
         self.status = status()
     }
 
@@ -56,6 +59,7 @@ struct ServiceHeader<Status: View>: View {
             Text(service.isEmpty ? (fallback ?? l10n.t("trips.train")) : service)
                 .clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
             if let category { Text(l10n.t("products.\(category)")).clack(.chip).foregroundStyle(Ink.text2).lineLimit(1) }
+            if let seat { Text(seat).clack(.chip).foregroundStyle(Ink.text).lineLimit(1) }
             status
         }
         .accessibilityElement(children: .combine)
@@ -63,7 +67,7 @@ struct ServiceHeader<Status: View>: View {
 }
 
 extension ServiceHeader where Status == EmptyView {
-    init(op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, name: String? = nil, fallback: String? = nil) {
-        self.init(op: op, number: number, size: size, category: category, name: name, fallback: fallback) { EmptyView() }
+    init(op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, name: String? = nil, fallback: String? = nil, seat: String? = nil) {
+        self.init(op: op, number: number, size: size, category: category, name: name, fallback: fallback, seat: seat) { EmptyView() }
     }
 }

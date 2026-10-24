@@ -978,7 +978,9 @@
     "added": "Tillagd",
     "failed": "Kunde inte lägga till tåget",
     "add_one": "Lägg till {{count}} tåg",
-    "add_other": "Lägg till {{count}} tåg"
+    "add_other": "Lägg till {{count}} tåg",
+    "addSeat": "Redan bland dina resor; lägger till {{seat}}",
+    "seatAdded": "{{seat}} har lagts till på resan"
   },
   "widgets": {
     "nextJourney": {
@@ -1015,5 +1017,15 @@
     "distance": "Sträcka",
     "topRoute": "Vanligaste sträckan · {{count}}×",
     "busiestMonth": "Mest aktiva månad · {{count}}"
+  },
+  "seat": {
+    "coach": "Vagn {{coach}}",
+    "seat": "Plats {{seat}}",
+    "title": "Din plats",
+    "coachLabel": "Vagn",
+    "seatLabel": "Plats",
+    "save": "Spara plats",
+    "saved": "Platsen är sparad",
+    "failed": "Kunde inte spara platsen"
   }
 }

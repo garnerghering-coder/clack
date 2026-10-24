@@ -110,6 +110,13 @@ private struct NextJourneyView: View {
 
     private func service(_ l: WidgetSnapshot.Leg) -> String { [l.operatorName, l.train].compactMap { $0 }.joined(separator: " ") }
 
+    /// "Car 4 · Seat 23" while it's still ahead or under way; not once you're off. On the medium and large sizes (the
+    /// small one has no line to spare).
+    private func seat(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> String? {
+        if case .finished = s.moment { return nil }
+        return Seat.label(l10n, coach: l.coach, seat: l.seat)
+    }
+
     /// "Departs in {{time}}" with the time as a running timer (within 30 minutes) or the countdown's words.
     private func departsIn(_ l: WidgetSnapshot.Leg) -> Text {
         let template = l10n.t("trips.departsIn")
@@ -237,6 +244,7 @@ private struct NextJourneyView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     topLine(s, l)
                     headline(s, l).clack(.caption).foregroundStyle(Ink.text).lineLimit(1)
+                    if let seat = seat(s, l) { Text(seat).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
                 }
                 Spacer(minLength: 8)
                 Text(bigTime(s, l)).clack(.bigTime).monospacedDigit().foregroundStyle(Ink.text).strikethrough(l.canceled)

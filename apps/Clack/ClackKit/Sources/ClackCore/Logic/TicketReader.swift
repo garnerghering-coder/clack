@@ -20,10 +20,13 @@ public nonisolated struct TicketTrain: Hashable, Sendable, Identifiable {
     /// HH:mm, as printed (the boarding station's own clock).
     public var dep: String
     public var arr: String?
+    /// The coach ("Vagn 16", "Carriage 11") and seat ("Plats 37", "Seat 105") when the ticket has a seat reservation.
+    public var coach: String?
+    public var seat: String?
 
     public var id: String { "\(date)|\(dep)|\(from)|\(to)" }
 
-    public init(operatorName: String? = nil, trainNumber: String? = nil, date: String, from: String, to: String, dep: String, arr: String? = nil) {
+    public init(operatorName: String? = nil, trainNumber: String? = nil, date: String, from: String, to: String, dep: String, arr: String? = nil, coach: String? = nil, seat: String? = nil) {
         self.operatorName = operatorName
         self.trainNumber = trainNumber
         self.date = date
@@ -31,13 +34,17 @@ public nonisolated struct TicketTrain: Hashable, Sendable, Identifiable {
         self.to = to
         self.dep = dep
         self.arr = arr
+        self.coach = coach
+        self.seat = seat
     }
 }
 
 /// Reads trains off SJ's ticket PDFs and receipts, in Swedish and English (docs/TRAIN_ART.md's rule applies here too:
 /// nothing guessed). Built from real documents: an SJ ticket has one page per train, with a date line, two "HH:mm
 /// Station" lines and a "Tåg/Train N" line, then the operator; an SJ receipt lists "A–B", "Operator, terms" and
-/// "10 okt 2026 kl 12:05" for each train, and has no train number. Names, booking numbers and prices are never read.
+/// "10 okt 2026 kl 12:05" for each train, and has no train number. A ticket with a seat reservation has "Vagn 16" and
+/// "Plats 37" ("Carriage 11", "Seat 105") after the train line, on two lines or one; one without says "Ingen
+/// platsreservation" ("No seat reservation"). Names, booking numbers and prices are never read.
 public nonisolated enum TicketReader {
     // MARK: Files
 
@@ -120,11 +127,28 @@ public nonisolated enum TicketReader {
               let trainAt = after.firstIndex(where: { firstMatch(#"^(Tåg|Train)\s+\d+\b"#, in: $0) != nil }),
               let number = firstMatch(#"^(?:Tåg|Train)\s+(\d+)"#, in: after[trainAt])?.first else { return nil }
         let operatorLine = after[(trainAt + 1)...].first { firstMatch(seatLine, in: $0) == nil }
+        let seatLines = after[(trainAt + 1)...].prefix { firstMatch(seatLine, in: $0) != nil }
+        let place = seat(in: Array(seatLines))
         return TicketTrain(
             operatorName: operatorLine.map { String($0.split(separator: ",").first ?? "").trimmingCharacters(in: .whitespaces) },
             trainNumber: number, date: date,
-            from: stops[0][2], to: stops[1][2], dep: time(stops[0][0], stops[0][1]), arr: time(stops[1][0], stops[1][1])
+            from: stops[0][2], to: stops[1][2], dep: time(stops[0][0], stops[0][1]), arr: time(stops[1][0], stops[1][1]),
+            coach: place.coach, seat: place.seat
         )
+    }
+
+    /// The coach and seat in the lines right after "Tåg N": "Vagn 16" and "Plats 37" on their own lines, or "Vagn 4
+    /// Plats 23" on one. Only a value with a digit in it counts ("12A" does, a word does not).
+    static func seat(in lines: [String]) -> (coach: String?, seat: String?) {
+        func value(_ words: String) -> String? {
+            for line in lines {
+                guard let raw = firstMatch(#"(?i)\b(?:"# + words + #")\s*:?\s+([0-9A-Za-z]{1,8})\b"#, in: line)?.first,
+                      raw.contains(where: \.isNumber) else { continue }
+                return raw
+            }
+            return nil
+        }
+        return (value("Vagn|Carriage"), value("Plats|Seat"))
     }
 
     /// An SJ receipt: no train number, only the stations, the operator and the departure.

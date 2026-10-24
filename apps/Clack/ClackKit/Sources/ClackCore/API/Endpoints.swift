@@ -59,18 +59,14 @@ extension APIClient {
     public func refreshLeg(_ id: String) async throws -> LegDetail { try await send("POST", ["legs", id, "refresh"]) }
     public func deleteLeg(_ id: String) async throws { try await perform("DELETE", ["legs", id]) }
 
+    /// Changes a saved trip: its train type, coach or seat (`LegPatch`: what's left out stays as it is).
+    public func updateLeg(_ legId: String, _ patch: LegPatch) async throws -> LegDetail {
+        try await send("PATCH", ["legs", legId], body: patch)
+    }
+
     /// Sets the train type of a trip; nil goes back to the typical one.
     public func setTrainType(_ legId: String, _ trainType: String?) async throws -> LegDetail {
-        struct Body: Encodable, Sendable {
-            let trainType: String?
-            // The key must be present even when null: a missing key means "nothing to change".
-            func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: CodingKeys.self)
-                try container.encode(trainType, forKey: .trainType)
-            }
-            enum CodingKeys: String, CodingKey { case trainType }
-        }
-        return try await send("PATCH", ["legs", legId], body: Body(trainType: trainType))
+        try await updateLeg(legId, LegPatch(trainType: .some(trainType)))
     }
 
     public func legRisk(_ id: String) async throws -> LegRisk { try await get(["legs", id, "risk"]) }

@@ -259,6 +259,9 @@ struct DesignGalleryView: View {
                 }
             }
             ServiceHeader(op: nil, number: "8736", size: .medium)
+            ServiceHeader(op: app.operators.first, number: "423", size: .large, seat: "Car 4 · Seat 23") {
+                StatusLine(.upcoming, "Departs in 2 h")
+            }
             HStack(spacing: 12) {
                 ForEach(app.operators.prefix(6)) { OperatorBadge(op: $0, size: .large) }
                 OperatorBadge(op: nil, size: .large)
