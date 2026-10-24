@@ -15,26 +15,18 @@ extension APIClient {
 
     /// "Delete my data": everything the server keeps under this phone's id.
     public func deleteMyData() async throws { try await perform("DELETE", ["me"]) }
-    /// This phone can receive alerts (`PUT /api/devices`): Apple's address for it, and whether it is a debug build.
-    public func registerDevice(token: String, environment: String, startToken: String?) async throws {
-        struct Body: Encodable, Sendable {
-            let token: String
-            let environment: String
-            let startToken: String?
-        }
-        try await perform("PUT", ["devices"], body: Body(token: token, environment: environment, startToken: startToken))
+    /// This phone can receive alerts (`PUT /api/devices`): Apple's address for it, which of Apple's push servers it
+    /// belongs to, and the trip card's push-to-start address when known (see `DeviceRegistration`: a missing key keeps
+    /// the stored one).
+    public func registerDevice(_ body: DeviceRegistration) async throws {
+        try await perform("PUT", ["devices"], body: body)
     }
 
     public func forgetDevice(_ token: String) async throws { try await perform("DELETE", ["devices", token]) }
 
-    /// A Live Activity is running for this trip: where the server sends its updates.
-    public func registerActivity(token: String, legId: String, environment: String) async throws {
-        struct Body: Encodable, Sendable {
-            let token: String
-            let legId: String
-            let environment: String
-        }
-        try await perform("PUT", ["live-activities"], body: Body(token: token, legId: legId, environment: environment))
+    /// A Live Activity is running for this trip: where the server sends its updates, and the phone it is on.
+    public func registerActivity(_ body: ActivityRegistration) async throws {
+        try await perform("PUT", ["live-activities"], body: body)
     }
 
     public func forgetActivity(_ token: String) async throws { try await perform("DELETE", ["live-activities", token]) }
