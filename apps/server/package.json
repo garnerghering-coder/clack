@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clack/shared": "*",
+    "@fastify/rate-limit": "^11.2.1",
     "better-sqlite3": "^12.4.1",
     "drizzle-orm": "^0.45.4",
     "fastify": "^5.6.1",
