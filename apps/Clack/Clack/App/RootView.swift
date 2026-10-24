@@ -89,7 +89,7 @@ struct RootView: View {
             guard scenePhase == .active else { return }
             await app.notifications.refresh()
             await app.notifications.sync(app.client, enabled: app.settings.notify)
-            LiveActivityManager.shared.resume(client: app.client)
+            LiveActivityManager.shared.resume()
         }
         // Tapping an alert opens its trip (a change opens the whole journey).
         .onChange(of: app.notifications.openRequest) { _, request in
