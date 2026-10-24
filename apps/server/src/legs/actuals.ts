@@ -1,20 +1,29 @@
 // Actual times from Trafikverket (SPEC §10, Phase 0 §2): match each ridden stop by
 // (signature, activity, advertised minute), because train numbers change mid-journey and collide across operators.
+// Norwegian stops come from Entur, Finnish trains from Digitraffic (by station and scheduled minute, one train per
+// number and day).
 import { and, eq, gt, lt, ne, sql } from 'drizzle-orm';
 import { delayMinutes, type DelayCause } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations, timetableTrips } from '../db/schema.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
-import { parseComposition, typeFromComposition, type Composition } from './trainTypes.js';
+import { parseComposition, typeFromComposition, typeFromVehicle, type Composition } from './trainTypes.js';
 import { productOf } from '../search/timetable.js';
 import { onboardFromRow } from './onboard.js';
 import { addCauses, deviationTexts, trvCauses } from './causes.js';
 import { updateRides } from './recording.js';
 import { enturStops } from '../entur/calls.js';
+import { DIGITRAFFIC_HISTORY_MS, digitrafficFor, fetchVehicle } from '../digitraffic/trains.js';
+import { countryOfKey } from '../lib/countries.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
 export const TRV_HISTORY_MS = 4 * 86400_000;
+/**
+ * Digitraffic answers /trains/{date}/{number} for dates back to at least 2023 (measured 2026-10-24), so a Finnish leg
+ * can be filled in long after the ride. A year is what we rely on.
+ */
+export const DIGITRAFFIC_HISTORY = DIGITRAFFIC_HISTORY_MS;
 /** Journey Planner keeps a Norwegian train's actual times for its operating day only. */
 const ENTUR_HISTORY_MS = 30 * 3600_000;
 /** Freeze a leg this long after it actually arrived. */
@@ -98,8 +107,8 @@ export interface StopActuals {
   composition: Composition | null;
   /** On-board facts from the departure row (catering, day-of notices). */
   onboard: OnboardFacts | null;
-  /** Who reports this stop live: Trafikverket, Entur, or nobody (a timetable-only match). */
-  source?: 'trafikverket' | 'entur' | null;
+  /** Who reports this stop live: Trafikverket, Entur, Digitraffic (Finland), or nobody (a timetable-only match). */
+  source?: 'trafikverket' | 'entur' | 'digitraffic' | null;
   /** The time the stop's own country publishes for it, when it differs from our timetable (Norway's for SJ at Oslo S). */
   advertisedArr?: number | null;
   advertisedDep?: number | null;
@@ -214,6 +223,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       stationId: legStops.stationId,
       sig: stations.trvSignature,
       nsrId: stations.nsrId,
+      fi: stations.fiId,
       country: stations.country,
       schedArr: legStops.schedArr,
       schedDep: legStops.schedDep,
@@ -231,13 +241,17 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const storedOf = new Map(stops.map((s) => [s.seq, s]));
 
   const arr = leg.schedArr?.getTime() ?? 0;
-  const tooOld = arr && now - arr > TRV_HISTORY_MS;
-  const events = eventsFor(stops);
+  // A train from Finland's timetable is Digitraffic's alone: Trafikverket doesn't announce it (not at Haparanda either,
+  // where a Swedish train can share its number) and neither does Entur.
+  const finnish = countryOfKey(leg.timetableTripKey ?? '') === 'FI';
+  const tooOld = arr && now - arr > (finnish ? DIGITRAFFIC_HISTORY : TRV_HISTORY_MS);
+  const events = finnish ? [] : eventsFor(stops);
   let matched = new Map<number, StopActuals>();
   if (!tooOld && events.length) matched = matchAnnouncements(stops, await fetchAnnouncements(events, opts.fetchImpl), leg.trainNumber);
+  if (!tooOld && finnish && leg.serviceDate) matched = await digitrafficFor(db, { trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops }, { now, fetchImpl: opts.fetchImpl });
   // Norwegian stops: Entur, for what Trafikverket doesn't cover, and Norway's own published times for them.
   let entur = new Map<number, StopActuals>();
-  if (arr && now - arr < ENTUR_HISTORY_MS && leg.serviceDate) {
+  if (!finnish && arr && now - arr < ENTUR_HISTORY_MS && leg.serviceDate) {
     try {
       entur = await enturStops(db, { tripKey: leg.timetableTripKey, trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops }, opts);
     } catch {
@@ -266,8 +280,9 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
 
   // Who can report each stop: Trafikverket in Sweden, Entur where it has live data, otherwise nobody (Denmark,
   // Germany, and SJ's or Snälltåget's trains in Norway): those stops stay on the timetable and say so.
-  const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | null =>
-    s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? null);
+  // Finnish trains: Digitraffic, at every stop it serves (Haparanda included, whatever Trafikverket's signature says).
+  const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | 'digitraffic' | null =>
+    finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? null);
   // Norway's published time for a Norwegian stop of another country's train (SJ 645: Oslo S 00:14, not SJ's 00:02).
   const adjusted = new Map<number, { arr: number | null; dep: number | null }>();
   for (const s of stops) {
@@ -322,8 +337,16 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
 
   // The coach order where you boarded can pin down the train type (SJ: X2000 or SJ 3000). Never over the owner's choice.
   const trip = leg.timetableTripKey ? db.select({ routeType: timetableTrips.routeType }).from(timetableTrips).where(eq(timetableTrips.key, leg.timetableTripKey)).get() : undefined;
-  const composedType =
-    leg.trainTypeSource === 'user' ? null : typeFromComposition(leg.operatorId, productOf(trip?.routeType ?? '', leg.category ?? ''), b?.composition ?? null);
+  const product = productOf(trip?.routeType ?? '', leg.category ?? '');
+  let composedType = leg.trainTypeSource === 'user' ? null : typeFromComposition(leg.operatorId, product, b?.composition ?? null);
+  // Finland: Digitraffic's composition names the locomotive or unit type (Sm5, Sr3), within a day and a half of the run.
+  if (finnish && !composedType && leg.trainTypeSource !== 'user' && leg.trainTypeSource !== 'composition' && leg.trainNumber && leg.serviceDate && board?.schedDep != null && Math.abs(now - board.schedDep) <= 36 * 3600_000) {
+    try {
+      composedType = typeFromVehicle(leg.operatorId, product, await fetchVehicle(leg.serviceDate, leg.trainNumber, board.fi, { now, fetchImpl: opts.fetchImpl }));
+    } catch {
+      // No composition now: the typical type stands, and the next refresh asks again.
+    }
+  }
 
   db.transaction((tx) => {
     for (const m of matched.values()) {

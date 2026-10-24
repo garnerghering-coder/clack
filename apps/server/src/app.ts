@@ -25,6 +25,7 @@ import { eq, inArray } from 'drizzle-orm';
 import { railGraph } from './geo/railGraph.js';
 import { rateLimitPlugin } from './plugins/rateLimit.js';
 import { adminAuthPlugin } from './plugins/adminAuth.js';
+import { countryOfKey } from './lib/countries.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -102,12 +103,13 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     includeEstimated: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_INCLUDE_ESTIMATED ?? ''),
     graph: railGraph,
     norway: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_NORWAY ?? ''),
+    finland: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_FINLAND ?? ''),
     simulateTracks: () => (railGraph()?.edges ?? []).filter((e) => e.length > 8000).map((e) => Array.from({ length: e.pts.length / 2 }, (_, i) => [e.pts[2 * i]!, e.pts[2 * i + 1]!] as [number, number])),
     ...opts.liveMap,
   });
   app.addHook('onClose', async () => ingest.stop());
   // Your own trains are drawn on top (ADDITIONS_01 A): legs inside their live-tracking window, as "number|date" for
-  // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's (isMine in livemap/ingest.ts).
+  // Trafikverket's trains (Swedish legs only) and "trip:key|date" for Norway's and Finland's (isMine in livemap/ingest.ts).
   const myTrainKeys = (userId: string) => {
     const ids = trackedLegIds(db, Date.now(), userId);
     if (!ids.length) return new Set<string>();
@@ -118,8 +120,11 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
       .all();
     return new Set(
       rows.flatMap((r) => [
-        ...(r.countries.includes('SE') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
+        // Not for a Finnish train that reaches Haparanda: Trafikverket doesn't report it, and a Swedish train can share its number.
+        ...(r.countries.includes('SE') && !(r.key && countryOfKey(r.key) === 'FI') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
         ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
+        // A Finnish train whose trip the timetable doesn't have (an extra train) is found by its number (isMine).
+        ...(r.countries.includes('FI') && r.n ? [`fi:${r.n}|${r.date}`] : []),
       ]),
     );
   };

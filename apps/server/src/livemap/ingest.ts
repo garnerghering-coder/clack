@@ -16,6 +16,8 @@ import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
 import { productOf, searchByNumber, tripStops, type Product } from '../search/timetable.js';
 import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
+import { FINLAND_POLL_MS, FinlandFeed } from './finland.js';
+import { countryOfLiveId } from '../lib/countries.js';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
 
 export interface LiveTrain {
@@ -40,7 +42,7 @@ export interface LiveTrain {
   delayMin: number | null;
   /** One of the asking user's tracked trains. False in the shared ingest; the routes set it per user (isMine). */
   mine: boolean;
-  /** The timetable trip, when the feed names it (Norway's does). Set (maybe null) on Norway's trains only. */
+  /** The timetable trip, when the feed names it (Norway's does, Finland's finds it by number and day). Set (maybe null) on those trains only. */
   tripKey?: string | null;
   /** A Norwegian train that also runs in Sweden, where Trafikverket knows it by number. */
   crossBorder?: boolean;
@@ -48,11 +50,15 @@ export interface LiveTrain {
 
 /**
  * Whether a train on the map is one of a user's tracked trains. keys: "number|date" for Trafikverket's trains, and
- * "trip:key|date" for Norway's, whose feed names the trip. A number alone isn't enough there: SJ 441 and SJ Nord's 441
- * run on the same day.
+ * "trip:key|date" for Norway's and Finland's, whose feeds name (or let us find) the trip. A number alone isn't enough
+ * there: SJ 441 and SJ Nord's 441 run on the same day. A Finnish train whose trip isn't in the timetable (an extra
+ * train) is matched by "fi:number|date", which a Finnish leg adds.
  */
 export function isMine(t: LiveTrain, keys: Set<string>): boolean {
-  if (t.tripKey !== undefined) return keys.has(`trip:${t.tripKey}|${t.date}`) || (!!t.crossBorder && keys.has(`${t.number}|${t.date}`));
+  if (t.tripKey !== undefined) {
+    if (keys.has(`trip:${t.tripKey}|${t.date}`) || (!!t.crossBorder && keys.has(`${t.number}|${t.date}`))) return true;
+    return countryOfLiveId(t.id) === 'FI' && keys.has(`fi:${t.number}|${t.date}`);
+  }
   return keys.has(`${t.number}|${t.date}`);
 }
 
@@ -108,6 +114,8 @@ export interface IngestOptions {
   graph?: () => RailGraph | null;
   /** Norway's trains from Entur (the server turns this on; never while simulating). */
   norway?: boolean;
+  /** Finland's trains from Digitraffic (the same). */
+  finland?: boolean;
 }
 
 type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
@@ -134,6 +142,9 @@ export class LiveMapIngest extends EventEmitter {
   /** Trains currently drawn from an estimate rather than GPS. */
   private estimatedKeys = new Set<string>();
   private no: NorwayFeed | null;
+  private fi: FinlandFeed | null;
+  /** Finnish trains on the map now. */
+  private fiIds = new Set<string>();
   /** Norwegian trains on the map now. */
   private noIds = new Set<string>();
   /** Swedish keys of cross-border trains drawn from Norway's GPS instead of a Swedish estimate. */
@@ -163,6 +174,12 @@ export class LiveMapIngest extends EventEmitter {
     this.setMaxListeners(200);
     this.ann = new AnnouncementCache({ fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log });
     this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
+    this.fi = !opts.finland || opts.simulate ? null : new FinlandFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
+  }
+
+  /** Last time Digitraffic's feeds answered (0 without Finland). */
+  get finlandAt() {
+    return this.fi?.upstreamAt ?? 0;
   }
 
   /** Last time Entur's feeds answered (0 without Norway). */
@@ -254,6 +271,23 @@ export class LiveMapIngest extends EventEmitter {
         this.timers.push(setInterval(pollNorway, NORWAY_POLL_MS));
         // Estimated Norwegian trains move between polls too.
         this.timers.push(setInterval(() => this.applyNorway(), ESTIMATE_MS));
+      }
+      if (this.fi) {
+        const fi = this.fi;
+        let polling = false;
+        const pollFinland = () => {
+          if (polling) return;
+          polling = true;
+          fi.poll()
+            .then(() => this.applyFinland())
+            .catch((e) => this.opts.log?.(`live map: Finland failed: ${(e as Error).message}`))
+            .finally(() => {
+              polling = false;
+            });
+        };
+        pollFinland();
+        this.timers.push(setInterval(pollFinland, FINLAND_POLL_MS));
+        this.timers.push(setInterval(() => this.applyFinland(), ESTIMATE_MS));
       }
     }
     this.timers.push(setInterval(() => this.flush(), FLUSH_MS));
@@ -490,6 +524,47 @@ export class LiveMapIngest extends EventEmitter {
     for (const id of this.noIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
     this.noIds = seen;
     this.norwayGps = taken;
+  }
+
+  /**
+   * Finland's trains onto the map. Their ids start with "fi:", so they never meet Trafikverket's or Norway's. Trafikverket
+   * doesn't announce Finnish trains at Haparanda (the only Swedish station they reach), so there is no second report of
+   * the same train to choose between: a Finnish train is drawn from Digitraffic's GPS, or placed from its calls.
+   */
+  applyFinland() {
+    if (!this.fi) return;
+    const seen = new Set<string>();
+    for (const f of this.fi.trains()) {
+      const id = `fi:${f.number}|${f.date}`;
+      seen.add(id);
+      const t: LiveTrain = {
+        id,
+        number: f.number,
+        date: f.date,
+        lat: f.lat,
+        lon: f.lon,
+        bearing: f.bearing,
+        speedKmh: f.speedKmh,
+        at: f.at,
+        estimated: f.estimated,
+        operatorId: f.operatorId,
+        productName: null,
+        product: f.product,
+        trainType: trainTypeFor(f.operatorId, f.product, f.number, null, [f.origin, f.destination], f.vehicle),
+        origin: f.origin,
+        destination: f.destination,
+        next: f.next,
+        nextEta: f.nextEta,
+        delayMin: f.delayMin,
+        mine: false,
+        tripKey: f.tripKey,
+      };
+      this.trains.set(id, t);
+      this.changed.add(id);
+      this.removed.delete(id);
+    }
+    for (const id of this.fiIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
+    this.fiIds = seen;
   }
 
   /**

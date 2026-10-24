@@ -15,6 +15,8 @@ import { parseWgs84, trvQuery } from '../trafikverket/client.js';
 import { gtfsRt, RT_DATASOURCES, type RtDatasource } from '../entur/client.js';
 import { enturJourneyFor } from '../entur/calls.js';
 import { rtDate } from '../livemap/norway.js';
+import { fetchJson } from '../digitraffic/client.js';
+import { countryOfKey } from '../lib/countries.js';
 import { diffEvents, expectedTimes, liveView, type GpsFix, type LegSummary, type LiveStop, type LiveView } from './progress.js';
 import { FixFilter } from './sanitize.js';
 
@@ -130,6 +132,29 @@ export async function fetchNorwayPositions(tripIds: string[], now: number, fetch
   return out;
 }
 
+/**
+ * Newest fix per Finnish train ("<number>|<departure date>"), from Digitraffic's one list of every running train's
+ * location (about 100 trains, a few KB). Only fixes of the last 10 minutes; a location Digitraffic says isn't GPS is
+ * left out.
+ */
+export async function fetchFinlandPositions(keys: string[], now: number, fetchImpl?: typeof fetch): Promise<Map<string, GpsFix>> {
+  const out = new Map<string, GpsFix>();
+  if (!keys.length) return out;
+  const want = new Set(keys);
+  const list = await fetchJson<{ trainNumber: number; departureDate: string; timestamp: string; speed?: number; isGpsLocation?: boolean; location?: { coordinates?: [number, number] } }[]>('train-locations/latest', { fetchImpl });
+  for (const l of Array.isArray(list) ? list : []) {
+    const k = `${l.trainNumber}|${l.departureDate}`;
+    const c = l.location?.coordinates;
+    const at = Date.parse(l.timestamp);
+    if (!want.has(k) || !c || l.isGpsLocation === false || !Number.isFinite(at) || now - at > 10 * 60_000) continue;
+    out.set(k, { lat: c[1], lon: c[0], at, bearing: null, speedKmh: l.speed ?? null });
+  }
+  return out;
+}
+
+/** A leg on a Finnish train: its timetable trip is from Finland's feed. Its train is Digitraffic's alone. */
+const isFinnishLeg = (l: { leg: { timetableTripKey: string | null } }) => countryOfKey(l.leg.timetableTripKey ?? '') === 'FI';
+
 const ms = (d: Date | null) => d?.getTime() ?? null;
 
 /** Legs to poll now: not frozen, and between an hour before departure and half an hour after arrival. */
@@ -240,7 +265,8 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     }
   }
   const loaded = ids.map((id) => loadLeg(db, id)).filter((l): l is NonNullable<typeof l> => l !== null);
-  const numbers = [...new Set(loaded.flatMap((l) => (l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [])))];
+  // Finnish trains aren't Trafikverket's: a Swedish train can share their number.
+  const numbers = [...new Set(loaded.filter((l) => !isFinnishLeg(l)).flatMap((l) => (l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [])))];
   let fixes = new Map<string, DatedFix[]>();
   try {
     fixes = await fetchPositions(numbers, now, opts.fetchImpl);
@@ -268,13 +294,24 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
       opts.log?.(`live: Norway positions failed: ${(e as Error).message}`);
     }
 
+  // Finnish trains: Digitraffic's GPS, by train number and departure date.
+  const fiKeyOf = new Map<string, string>();
+  for (const l of loaded) if (isFinnishLeg(l) && l.leg.trainNumber && l.leg.serviceDate) fiKeyOf.set(l.leg.id, `${Number(l.leg.trainNumber)}|${l.leg.serviceDate}`);
+  let fiFixes = new Map<string, GpsFix>();
+  if (fiKeyOf.size)
+    try {
+      fiFixes = await fetchFinlandPositions([...fiKeyOf.values()], now, opts.fetchImpl);
+    } catch (e) {
+      opts.log?.(`live: Finland positions failed: ${(e as Error).message}`);
+    }
+
   const updates: LiveUpdate[] = [];
   for (const l of loaded) {
     if (!l.ridden.length) continue;
-    const nums = numbersNow(l.ridden, l.line, now, l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : []);
+    const nums = isFinnishLeg(l) ? [] : numbersNow(l.ridden, l.line, now, l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : []);
     // With a number change mid-journey (or two countries' feeds), use whichever fix is newest.
     const jk = journeyOf.get(l.leg.id);
-    const candidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : [])].sort(
+    const candidates = [...nums.flatMap((n) => tripFixes(fixes.get(n) ?? [], { serviceDate: l.leg.serviceDate, line: l.line, route: l.route })), ...(jk && noFixes.get(jk) ? [noFixes.get(jk)!] : []), ...(fiKeyOf.has(l.leg.id) && fiFixes.get(fiKeyOf.get(l.leg.id)!) ? [fiFixes.get(fiKeyOf.get(l.leg.id)!)!] : [])].sort(
       (a, b) => a.at - b.at,
     );
     // Oldest first through the filter: a fix the train couldn't have reached is dropped, not shown.

@@ -87,6 +87,23 @@ export function typeFromComposition(operatorId: string | null, product: string, 
   return null;
 }
 
+/**
+ * The type a named vehicle decides (Finland: /compositions gives the locomotive or unit type, "Sm5", "Sr3"): the
+ * first rule with a `vehicle_prefix` that the vehicle starts with and whose other conditions hold. Null for a vehicle
+ * no rule names, so the typical type is never passed off as a finding. Pure.
+ */
+export function typeFromVehicle(operatorId: string | null, product: string, vehicle: string | null | undefined): string | null {
+  if (!vehicle) return null;
+  for (const r of trainTypeCatalog().rules) {
+    const m = r.match;
+    if (!m.vehicle_prefix || !vehicle.startsWith(m.vehicle_prefix)) continue;
+    if (m.operator && m.operator !== operatorId) continue;
+    if (m.product && m.product !== product) continue;
+    return r.type;
+  }
+  return null;
+}
+
 /** SJ's Storlien–Trondheim trains come through Trafikverket as "SJ", but SJ Nord runs them (jernbane.net 2026; Norske tog). */
 export function brandOnLine(operatorId: string | null, ends: (string | null | undefined)[]): string | null {
   if (operatorId === 'sj' && ends.some((e) => e && normName(e).startsWith('trondheim'))) return 'sj-nord';

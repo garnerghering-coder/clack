@@ -4,6 +4,7 @@
 import type { LatLon } from '@clack/shared';
 import { distanceToLineM } from '../live/tracker.js';
 import { normName } from '../lib/geo.js';
+import { countryOfLiveId } from '../lib/countries.js';
 
 export interface TripCandidate {
   key: string;
@@ -23,7 +24,7 @@ const NEAR_M = 30_000;
 
 /** The candidate that fits the train, or undefined when none does (no trip beats the wrong one). Pure. */
 export function matchTrip<T extends TripCandidate>(train: MapTrainRef, candidates: T[]): T | undefined {
-  const country = train.id.startsWith('no:') ? 'NO' : 'SE';
+  const country = countryOfLiveId(train.id);
   let best: { c: T; score: number } | undefined;
   for (const c of candidates) {
     if (!c.stops.length) continue;

@@ -1,0 +1,46 @@
+{
+ "operatorUICCode": 10,
+ "operatorShortCode": "vr",
+ "version": 1792738076415,
+ "departureDate": "2026-10-24",
+ "trainNumber": 8192,
+ "journeySections": [
+  {
+   "beginTimeTableRow": {
+    "scheduledTime": "2026-10-24T16:46:00.000Z",
+    "stationShortCode": "LPV",
+    "stationUICCode": 68,
+    "countryCode": "FI",
+    "type": "DEPARTURE"
+   },
+   "endTimeTableRow": {
+    "scheduledTime": "2026-10-24T17:03:00.000Z",
+    "stationShortCode": "HKI",
+    "stationUICCode": 1,
+    "countryCode": "FI",
+    "type": "ARRIVAL"
+   },
+   "maximumSpeed": 160,
+   "totalLength": 75,
+   "locomotives": [
+    {
+     "location": 1,
+     "locomotiveType": "Sm5",
+     "powerType": "Electric",
+     "vehicleNumber": "94102081002-9"
+    }
+   ],
+   "wagons": [
+    {
+     "length": 7520,
+     "location": 1,
+     "salesNumber": 0,
+     "vehicleNumber": "94102081002-9",
+     "wagonType": "Sm5"
+    }
+   ]
+  }
+ ],
+ "trainCategory": "Commuter",
+ "trainType": "HL"
+}

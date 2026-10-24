@@ -17,7 +17,7 @@ export const MAX_IMPLIED_KMH = 300;
 export const MAX_REPORTED_KMH = 250;
 /** Moves shorter than this are GPS noise, whatever speed they imply over a few seconds. */
 const NOISE_M = 500;
-/** Where our trains run: Sweden, Norway, Denmark and the night trains' way south. */
+/** Where our trains run: Sweden, Norway, Finland (to Vartius at 30.9 E), Denmark and the night trains' way south. */
 const AREA = { minLat: 53, maxLat: 72, minLon: 4, maxLon: 32 };
 
 export const inArea = (f: { lat: number; lon: number }) =>

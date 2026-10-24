@@ -1,5 +1,5 @@
-// A live-map train's whole route, stop by stop: the timetable's calls with Trafikverket's (Sweden) and Entur's (Norway)
-// actual, estimated and platform data laid over them, so the train's sheet can list where it has been and where it's
+// A live-map train's whole route, stop by stop: the timetable's calls with Trafikverket's (Sweden), Entur's (Norway) and
+// Digitraffic's (Finland) actual, estimated and platform data laid over them, so the train's sheet can list where it has been and where it's
 // going, and which stops nobody reports live (abroad), so those read as timetable times.
 import type { Db } from '../db/client.js';
 import { eventsFor, fetchAnnouncements, matchAnnouncements, type StopActuals, type StopForMatch } from '../legs/actuals.js';
@@ -7,6 +7,8 @@ import { tripStops } from '../search/timetable.js';
 import { enturStops } from '../entur/calls.js';
 import { stations } from '../db/schema.js';
 import { inArray } from 'drizzle-orm';
+import { digitrafficFor, fiCodes } from '../digitraffic/trains.js';
+import { countryOfKey } from '../lib/countries.js';
 
 export interface TrainStopView {
   seq: number;
@@ -23,7 +25,7 @@ export interface TrainStopView {
   /** The train has left this stop (or, at the last one, arrived). */
   passed: boolean;
   /** Who reports this stop live; null: nobody does (Denmark, SJ in Norway), so its times are the timetable's. */
-  source: 'trafikverket' | 'entur' | null;
+  source: 'trafikverket' | 'entur' | 'digitraffic' | null;
 }
 
 type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null; source?: TrainStopView['source'] };
@@ -70,6 +72,25 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
   const found = tripStops(db, trip.key, trip.serviceDate);
   if (!found) return null;
   const stops = found.stops;
+  // A Finnish train is Digitraffic's alone: Trafikverket doesn't announce it (not even at Haparanda, where a Swedish
+  // train can share its number), and Entur has nothing on it.
+  if (countryOfKey(trip.key) === 'FI') {
+    let dt = new Map<number, StopActuals>();
+    try {
+      dt = await digitrafficFor(db, { trainNumber, serviceDate: trip.serviceDate, stops: stops.map((s) => ({ seq: s.seq, role: 'through', sig: null, schedArr: s.arr, schedDep: s.dep, stationId: s.stationId })) }, { fetchImpl: opts.fetchImpl, now });
+    } catch {
+      // Digitraffic down: the plan alone is still worth showing.
+    }
+    const codes = fiCodes(db, stops.map((s) => s.stationId));
+    const out = mergeStops(
+      stops.map((s) => ({ seq: s.seq, stationId: s.stationId, name: s.name, arr: s.arr, dep: s.dep, source: codes.get(s.stationId) ? ('digitraffic' as const) : null })),
+      dt,
+      now,
+    );
+    cache.set(k, { at: now, stops: out });
+    if (cache.size > 200) cache.delete(cache.keys().next().value!);
+    return out;
+  }
   const forMatch: StopForMatch[] = stops.map((s, i) => ({ seq: s.seq, role: i === 0 ? 'board' : i === stops.length - 1 ? 'alight' : 'through', sig: s.code, schedArr: s.arr, schedDep: s.dep }));
   const events = eventsFor(forMatch);
   let actuals = new Map<number, StopActuals>();

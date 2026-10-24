@@ -1,0 +1,86 @@
+{
+ "operatorUICCode": 10,
+ "operatorShortCode": "vr",
+ "version": 1792839396407,
+ "departureDate": "2026-10-24",
+ "trainNumber": 27,
+ "journeySections": [
+  {
+   "beginTimeTableRow": {
+    "scheduledTime": "2026-10-24T11:20:00.000Z",
+    "stationShortCode": "HKI",
+    "stationUICCode": 1,
+    "countryCode": "FI",
+    "type": "DEPARTURE"
+   },
+   "endTimeTableRow": {
+    "scheduledTime": "2026-10-24T19:45:00.000Z",
+    "stationShortCode": "ROI",
+    "stationUICCode": 364,
+    "countryCode": "FI",
+    "type": "ARRIVAL"
+   },
+   "maximumSpeed": 200,
+   "totalLength": 205,
+   "locomotives": [
+    {
+     "location": 1,
+     "locomotiveType": "Sr3",
+     "powerType": "Electric"
+    }
+   ],
+   "wagons": [
+    {
+     "length": 2650,
+     "location": 2,
+     "luggage": true,
+     "pet": true,
+     "salesNumber": 7,
+     "wagonType": "Edg"
+    },
+    {
+     "length": 2640,
+     "location": 3,
+     "salesNumber": 6,
+     "wagonType": "Ed"
+    },
+    {
+     "length": 2640,
+     "location": 4,
+     "salesNumber": 5,
+     "wagonType": "Ed"
+    },
+    {
+     "disabled": true,
+     "length": 2640,
+     "location": 5,
+     "playground": true,
+     "salesNumber": 4,
+     "wagonType": "Edfs"
+    },
+    {
+     "catering": true,
+     "length": 2640,
+     "location": 6,
+     "salesNumber": 3,
+     "wagonType": "ERd"
+    },
+    {
+     "length": 2640,
+     "location": 7,
+     "salesNumber": 2,
+     "wagonType": "CEd"
+    },
+    {
+     "length": 2740,
+     "location": 8,
+     "pet": true,
+     "salesNumber": 1,
+     "wagonType": "Edo"
+    }
+   ]
+  }
+ ],
+ "trainCategory": "Long-distance",
+ "trainType": "IC"
+}

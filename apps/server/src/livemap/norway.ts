@@ -101,7 +101,7 @@ export function expectedStops(stops: Pick<Stop, 'seq' | 'arr' | 'dep'>[], u: Upd
 }
 
 /** Bearing in degrees from a to b. */
-function bearingOf(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
+export function bearingOf(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
   const toRad = Math.PI / 180;
   const y = Math.sin((b.lon - a.lon) * toRad) * Math.cos(b.lat * toRad);
   const x = Math.cos(a.lat * toRad) * Math.sin(b.lat * toRad) - Math.sin(a.lat * toRad) * Math.cos(b.lat * toRad) * Math.cos((b.lon - a.lon) * toRad);
