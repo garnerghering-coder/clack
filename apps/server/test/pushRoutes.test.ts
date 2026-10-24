@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { buildApp } from '../src/app.js';
 import { openDb } from '../src/db/client.js';
 import { devices, liveActivities } from '../src/db/schema.js';
@@ -8,15 +8,21 @@ const V = '9a8b7c6d-5e4f-4a3b-9c2d-1e0f2a3b4c5d';
 const TOKEN = 'ab'.repeat(32);
 
 describe('push routes', () => {
-  let close: (() => Promise<unknown>) | null = null;
-  afterEach(async () => close?.());
-
-  const make = () => {
-    const db = openDb(':memory:');
-    const app = buildApp(db);
-    close = () => app.close();
-    return { db, app };
-  };
+  // One app and database for the file, emptied between tests. Building one per test made the first test pay for
+  // loading every route and the data behind it, which went past vitest's 5 s limit when other test files were running
+  // alongside.
+  let db: ReturnType<typeof openDb>;
+  let app: ReturnType<typeof buildApp>;
+  beforeAll(() => {
+    db = openDb(':memory:');
+    app = buildApp(db);
+  }, 60_000);
+  afterAll(async () => app?.close());
+  beforeEach(() => {
+    db.delete(liveActivities).run();
+    db.delete(devices).run();
+  });
+  const make = () => ({ db, app });
   const put = (app: ReturnType<typeof buildApp>, user: string, body: unknown) => app.inject({ method: 'PUT', url: '/api/devices', headers: { 'x-clack-user': user }, payload: body as object });
 
   it('saves a phone, refreshes it, and moves it to a new id', async () => {

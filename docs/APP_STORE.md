@@ -43,6 +43,7 @@ Each item says who does it and where:
 | **App icon** (1024 px, no transparency) and launch screen from the Clack logo. | 2.3 |
 | **Each phone sees only its own trips live.** Live trip updates go only to the phone whose trip it is, and "your train" on the live map is worked out per phone. Before, every listener got every tracked trip's updates. | 5.1.1 |
 | **A shared server refuses requests without a phone id** (`CLACK_REQUIRE_USER=1`, IOS.md step 9), so the laptop user's trips can't be read through it. | 5.1.1 |
+| **Rate limits** on the server: 300 requests a minute per phone id, 120 per address without an id, a larger separate allowance for map tiles; live streams exempt. The server's inside views (import status, audit, live status, health details) need an admin token. | 1.6 |
 | **Portrait iPhone app.** iPads run it in iPhone mode, which Apple allows. | 2.4.1 |
 
 ## Should do: strengthens the review, not strictly required
@@ -52,7 +53,6 @@ Each item says who does it and where:
 | **Make it feel native, not like a website in a box.** The main risk for an app built this way is 4.2 "Minimum Functionality: elevate it beyond a repackaged website". Clack is a long way past that: offline trips, live maps, live tracking, share cards. Native touches make it obvious: the iOS share sheet for share cards, haptics, a home-screen widget, a Live Activity for the train you're on, and delay notifications. All of these are planned (IOS.md, "Widgets, Live Activities and notifications"). | 4.2 | Code + Xcode |
 | **Privacy manifest** (`PrivacyInfo.xcprivacy`) for the app target, declaring no tracking. Capacitor's own frameworks ship theirs. In Xcode: File > New > File > App Privacy. | Apple privacy manifests | Xcode |
 | **Swedish purpose string.** The location question shows in English for now. Add `sv.lproj/InfoPlist.strings` with `NSLocationWhenInUseUsageDescription` in Swedish (Xcode: Info.plist > Localize). | 5.1.1(ii) clarity | Xcode |
-| **Rate limits** on the server: ids are anonymous, so add basic per-id and per-IP request limits before the app is public. | 1.6 | Code |
 | **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket and Entur, and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
 
 ## App Store Connect answers, prepared

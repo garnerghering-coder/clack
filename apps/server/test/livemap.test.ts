@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import Fastify from 'fastify';
 import { openDb } from '../src/db/client.js';
 import { trvLocations } from '../src/db/schema.js';
@@ -114,7 +114,8 @@ describe('live map ingest', () => {
     ingest.acquire();
     ingest.acquire();
     ingest.acquire();
-    await new Promise((r) => setTimeout(r, 50));
+    // Wait for the first upstream answer instead of a fixed pause: how long it takes depends on how busy the machine is.
+    await vi.waitFor(() => expect(ingest!.trains.size).toBe(1), { timeout: 5000, interval: 5 });
     expect(ingest.viewers).toBe(3);
     expect(positionQueries).toBe(1);
     expect(ingest.upstreamOpens).toBe(1);
@@ -256,7 +257,7 @@ describe('live map stream', () => {
     expect((await next('delta')).removed).toEqual(['gbg']);
 
     ctrl.abort();
-    await new Promise((r) => setTimeout(r, 50));
-    expect(fake.viewers).toBe(0);
+    // The server notices the closed connection a moment later; wait for that, with a deadline.
+    await vi.waitFor(() => expect(fake.viewers).toBe(0), { timeout: 5000, interval: 5 });
   });
 });
