@@ -73,6 +73,8 @@ TOKENS = {
     'tflap-text': ('#ffffff', '#0a0a0a'),
     # The launch screen, before the app has read the theme setting: signal yellow, as the splash after it
     'launch-bg': '#ffd400',
+    # The splash view and the app icon (owner's decision): the same signal yellow, as a token
+    'brand-yellow': '#ffd400',
 }
 
 

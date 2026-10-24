@@ -26,15 +26,21 @@ const ICONS = [
   'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];
+// Icons that also get a "-filled" version (the same outline, filled in): the favourite star, on and off.
+const FILLED = ['star'];
 
-/** The icon's drawing nodes, read from its lucide-react module (alias files re-export the real one). */
+/** The icon's drawing nodes, read from its lucide-react module's source (alias files re-export the real one). Read as
+ * text rather than imported, so React need not be installed. */
 async function nodesOf(name) {
-  const mod = await import(pathToFileURL(path.join(LUCIDE, 'dist', 'esm', 'icons', `${name}.mjs`)).href);
-  if (!mod.__iconData) throw new Error(`cannot read ${name}`);
-  return mod.__iconData.node;
+  const source = fs.readFileSync(path.join(LUCIDE, 'dist', 'esm', 'icons', `${name}.mjs`), 'utf8');
+  const literal = source.match(/const __iconData = (\{[\s\S]*?\n\});/);
+  if (literal) return new Function(`return ${literal[1]}`)().node;
+  const alias = source.match(/from '\.\/([a-z0-9-]+)\.mjs'/);
+  if (alias && alias[1] !== name) return nodesOf(alias[1]);
+  throw new Error(`cannot read ${name}`);
 }
 
-function svg(nodes, strokeWidth) {
+function svg(nodes, strokeWidth, fill = 'none') {
   const body = nodes
     .map(([tag, attrs]) => {
       const props = Object.entries(attrs)
@@ -44,7 +50,7 @@ function svg(nodes, strokeWidth) {
       return `  <${tag} ${props}/>`;
     })
     .join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">\n${body}\n</svg>\n`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="${fill}" stroke="#000000" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">\n${body}\n</svg>\n`;
 }
 
 const info = { author: 'xcode', version: 1 };
@@ -55,10 +61,15 @@ fs.writeFileSync(path.join(OUT, 'Contents.json'), JSON.stringify({ info }, null,
 let count = 0;
 for (const name of ICONS) {
   const nodes = await nodesOf(name);
-  for (const [suffix, width] of [['', 2], ...(THIN.includes(name) ? [['-thin', 1.75]] : [])]) {
+  const variants = [
+    ['', 2, 'none'],
+    ...(THIN.includes(name) ? [['-thin', 1.75, 'none']] : []),
+    ...(FILLED.includes(name) ? [['-filled', 2, '#000000']] : []),
+  ];
+  for (const [suffix, width, fill] of variants) {
     const set = path.join(OUT, `lucide-${name}${suffix}.imageset`);
     fs.mkdirSync(set);
-    fs.writeFileSync(path.join(set, `${name}${suffix}.svg`), svg(nodes, width));
+    fs.writeFileSync(path.join(set, `${name}${suffix}.svg`), svg(nodes, width, fill));
     fs.writeFileSync(
       path.join(set, 'Contents.json'),
       JSON.stringify(

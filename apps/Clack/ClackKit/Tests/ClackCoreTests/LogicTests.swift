@@ -57,6 +57,16 @@ struct FormatTests {
         #expect(Format.dayOffset(from: t, fromTz: "Europe/Stockholm", to: t + 3_600_000, toTz: "Europe/Stockholm") == 0)
     }
 
+    @Test func namesATrainAndJoinsFactsOnALine() {
+        #expect(Format.service("SJ", "529") == "SJ 529")
+        #expect(Format.service(nil, "529") == "529")
+        #expect(Format.service("Vy", nil) == "Vy")
+        #expect(Format.service(nil, nil) == "")
+        #expect(Format.join(["SJ 529", nil, "", "Platform 4"]) == "SJ 529 · Platform 4")
+        #expect(Format.join([]) == "")
+        #expect(Format.unknown == "—")
+    }
+
     @Test func localDatesAndDateArithmetic() {
         #expect(Format.localDate(ms("2026-10-20T23:30:00Z"), tz: "Europe/Stockholm") == "2026-10-21")
         #expect(Format.addDaysIso("2026-10-31", days: 1) == "2026-11-01")

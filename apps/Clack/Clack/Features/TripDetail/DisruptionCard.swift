@@ -234,7 +234,7 @@ private struct DisruptionBody: View {
             otherDay(r.from.time, zone: r.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
         return HStack(alignment: .top, spacing: 10) {
-            OperatorBadge(op: op, size: 24)
+            OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(Format.time(r.from.time, tz: r.from.tz, clock: app.settings.clock)) → \(Format.time(r.to.time, tz: r.to.tz, clock: app.settings.clock))")
                     .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
@@ -262,7 +262,7 @@ private struct DisruptionBody: View {
             otherDay(c.first.from.time, zone: c.first.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.joined(separator: " · ")
         return HStack(alignment: .top, spacing: 10) {
-            OperatorBadge(op: op, size: 24)
+            OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(Format.time(c.first.from.time, tz: c.first.from.tz, clock: app.settings.clock)) → \(Format.time(c.second.to.time, tz: c.second.to.tz, clock: app.settings.clock))")
                     .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)

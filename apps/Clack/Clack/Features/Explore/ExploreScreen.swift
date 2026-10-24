@@ -123,7 +123,7 @@ struct ExploreScreen: View {
                 ForEach(trainHits) { train in
                     let op = train.operatorId.flatMap { app.operatorsById[$0] }
                     resultRow {
-                        OperatorBadge(op: op, size: 22)
+                        OperatorBadge(op: op, size: .small)
                     } title: {
                         [train.productName ?? op?.name, train.number].compactMap { $0 }.joined(separator: " ")
                     } caption: {
@@ -221,7 +221,7 @@ struct ExploreScreen: View {
                                 .overlay(RoundedRectangle(cornerRadius: 5, style: .continuous).strokeBorder(on ? Ink.accent : Ink.hairline, lineWidth: 1))
                                 .overlay { if on { LucideIcon(name: "check", size: 14).foregroundStyle(Ink.onAccent) } }
                                 .frame(width: 22, height: 22)
-                            OperatorBadge(op: app.operatorsById[id], size: 20)
+                            OperatorBadge(op: app.operatorsById[id], size: .small)
                             Text(app.operatorsById[id]?.name ?? id).font(ClackFont.inter(16)).foregroundStyle(Ink.text)
                             Spacer(minLength: 0)
                         }

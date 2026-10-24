@@ -175,7 +175,9 @@
     "seePassport": "See your Passport",
     "noLiveData": "No live data here",
     "beyondLiveData": "There’s no live data for this train in {{countries}}. Times there are the timetable’s, and expected times follow the delay reported at {{station}}.",
-    "beyondLiveDataNoReport": "There’s no live data for this train in {{countries}}, so times there are the timetable’s."
+    "beyondLiveDataNoReport": "There’s no live data for this train in {{countries}}, so times there are the timetable’s.",
+    "platformChangedFrom": "changed from {{from}}",
+    "timetabledTime": "timetabled {{time}}"
   },
   "passport": {
     "title": "Passport",
@@ -406,7 +408,9 @@
     "close": "Close",
     "loading": "Loading…",
     "offline": "Can't reach the Clack server.",
-    "done": "Done"
+    "done": "Done",
+    "more": "Show more",
+    "less": "Show less"
   },
   "map": {
     "unavailable": "The map can't be shown on this device.",

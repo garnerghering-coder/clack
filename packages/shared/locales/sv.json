@@ -175,7 +175,9 @@
     "seePassport": "Se ditt pass",
     "noLiveData": "Ingen realtidsdata här",
     "beyondLiveData": "Det finns ingen realtidsdata för tåget i {{countries}}. Tiderna där är tidtabellens, och väntade tider följer förseningen vid {{station}}.",
-    "beyondLiveDataNoReport": "Det finns ingen realtidsdata för tåget i {{countries}}, så tiderna där är tidtabellens."
+    "beyondLiveDataNoReport": "Det finns ingen realtidsdata för tåget i {{countries}}, så tiderna där är tidtabellens.",
+    "platformChangedFrom": "ändrat från {{from}}",
+    "timetabledTime": "enligt tidtabell {{time}}"
   },
   "passport": {
     "title": "Pass",
@@ -406,7 +408,9 @@
     "close": "Stäng",
     "loading": "Läser in…",
     "offline": "Kan inte nå Clack-servern.",
-    "done": "Klar"
+    "done": "Klar",
+    "more": "Visa mer",
+    "less": "Visa mindre"
   },
   "map": {
     "unavailable": "Kartan kan inte visas på den här enheten.",

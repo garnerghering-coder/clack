@@ -255,7 +255,7 @@ private struct BoardRowView: View {
                         Text(l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")])).clack(.caption).foregroundStyle(Ink.text2)
                     }
                     HStack(spacing: 6) {
-                        OperatorBadge(op: op, size: 18)
+                        OperatorBadge(op: op, size: .small)
                         Text(([row.productName ?? op?.name, row.trainNumber].compactMap { $0 }).joined(separator: " ") + (type.map { " · \($0.name)" } ?? ""))
                             .clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
                     }
@@ -266,7 +266,7 @@ private struct BoardRowView: View {
                 Spacer(minLength: 0)
                 VStack(alignment: .trailing, spacing: 4) {
                     if let platform = row.platform {
-                        PlatformChip(platform: platform, changedFrom: changed ? (row.platformChange?.from ?? "") : nil)
+                        PlatformTag(platform: platform, changedFrom: changed ? (row.platformChange?.from ?? "") : nil)
                     }
                     if changed { Text(l10n.t("board.changed")).clack(.caption).foregroundStyle(Ink.late) }
                     if row.canceled {

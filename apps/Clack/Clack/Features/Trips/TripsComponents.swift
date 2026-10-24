@@ -130,7 +130,7 @@ struct LegRow: View {
             upcoming ? leg.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) } : nil,
         ].compactMap { $0 }.joined(separator: " · ")
         return HStack(alignment: .center, spacing: 12) {
-            OperatorBadge(op: leg.operator, size: 32)
+            OperatorBadge(op: leg.operator, size: .large)
             VStack(alignment: .leading, spacing: 2) {
                 if upcoming {
                     Text(TripsLogic.countdown(l10n, leg, now: now))
@@ -449,7 +449,7 @@ struct FollowingSection: View {
     var body: some View {
         if !follows.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text(l10n.t("trips.following")).clack(.monthHeader).foregroundStyle(Ink.text2).padding(.top, 2)
+                Text(l10n.t("trips.following")).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 2)
                 ForEach(follows, id: \.self) { follow in
                     let op = follow.operatorId.flatMap { app.operatorsById[$0] }
                     Button {
@@ -471,7 +471,7 @@ struct FollowingSection: View {
             l10n.t("live.nextStop", ["name": $0, "time": Format.time(follow.train?.nextEta?.ms, tz: "Europe/Stockholm", clock: app.settings.clock)])
         } ?? l10n.t("trips.notRunning")
         return HStack(spacing: 12) {
-            OperatorBadge(op: op, size: 30)
+            OperatorBadge(op: op, size: .medium)
             VStack(alignment: .leading, spacing: 2) {
                 Text(follow.label ?? l10n.t("liveMap.train", ["number": follow.trainNumber]))
                     .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)

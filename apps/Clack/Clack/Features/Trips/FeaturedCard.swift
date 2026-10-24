@@ -82,7 +82,7 @@ struct FeaturedCard: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 10) {
-                    OperatorBadge(op: leg.operator, size: 28)
+                    OperatorBadge(op: leg.operator, size: .medium)
                     Text(service.isEmpty ? l10n.t("trips.train") : service).fontWeight(.bold).foregroundStyle(Ink.text)
                     switch state {
                     case .upcoming: Chip(text: l10n.t("trips.planned"))

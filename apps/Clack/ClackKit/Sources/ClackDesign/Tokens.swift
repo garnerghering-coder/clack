@@ -18,6 +18,10 @@ public enum Radius {
     public static let card: CGFloat = 16
     /// Sheets (top corners on a phone).
     public static let sheet: CGFloat = 24
+    /// Progress bars and other 4 pt bars.
+    public static let bar: CGFloat = 2
+    /// The operator badge at its full 36 pt size (DESIGN §2.3); the smaller badges keep the same proportion.
+    public static let badge: CGFloat = 10
 }
 
 /// The colour tokens, named as the web's CSS custom properties (styles.css). Each is a Color Set in
@@ -69,6 +73,9 @@ public enum Ink {
     public static let tflapBottom = Color("tflap-bottom", bundle: .module)
     public static let tflapHinge = Color("tflap-hinge", bundle: .module)
     public static let tflapText = Color("tflap-text", bundle: .module)
+    // Brand
+    /// The splash and app icon's signal yellow `#FFD400` (the owner's choice for those two; the interface uses `accent`).
+    public static let brandYellow = Color("brand-yellow", bundle: .module)
 }
 
 extension Color {
@@ -89,7 +96,12 @@ extension Color {
 /// An operator's colour for lines and tints: its brand colour, or the theme's strong colour when it isn't known
 /// (`#f8d64a` dark, `#0a0a0a` light; map/style.ts `opColor`).
 public func operatorColor(_ brandColor: String?, scheme: ColorScheme) -> Color {
-    Color(hex: brandColor) ?? (scheme == .dark ? Color(hex: "#f8d64a")! : Color(hex: "#0a0a0a")!)
+    Color(hex: brandColor) ?? strongColor(scheme)
+}
+
+/// The theme's strong colour, for an operator that isn't known: yellow on dark, black on light (DESIGN §2.1).
+public func strongColor(_ scheme: ColorScheme) -> Color {
+    scheme == .dark ? Color(hex: "#f8d64a")! : Color(hex: "#0a0a0a")!
 }
 
 /// The panel shadow (`--shadow`: `0 8px 24px`, 0.45 black in dark and 0.12 in light).

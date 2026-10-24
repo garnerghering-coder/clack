@@ -110,20 +110,23 @@ enum Surface {
     }
 }
 
-/// `.card`: padding 14 / 16, radius 16, hairline, the lit surface.
+/// `.card`: padding 16, radius 16, hairline, on the surface colour. `lit` gives it the quiet glow (tinted by `op`),
+/// which belongs to hero and featured surfaces only; everything else is flat.
 struct Card<Content: View>: View {
+    var lit = false
     var op: Color = Ink.accent
-    var spacing: CGFloat = 10
+    var spacing: CGFloat = 12
     @ViewBuilder var content: Content
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             content
         }
-        .padding(.vertical, 14)
-        .padding(.horizontal, 16)
+        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Surface.Lit(op: op))
+        .background {
+            if lit { Surface.Lit(op: op) } else { Ink.surface }
+        }
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
     }

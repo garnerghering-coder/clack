@@ -101,7 +101,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
 
     private var header: some View {
         HStack(spacing: 10) {
-            OperatorBadge(op: op, size: 32)
+            OperatorBadge(op: op, size: .medium)
                 .scaleEffect(scrolled && !collapsed ? 0.8 : 1, anchor: .leading)
             Button { collapsed.toggle() } label: {
                 HStack(spacing: 6) {
@@ -113,7 +113,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
             }
             .buttonStyle(.plain)
             .accessibilityAddTraits(.isHeader)
-            IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+            IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
         }
         .padding(.horizontal, 16).padding(.top, scrolled && !collapsed ? 4 : 0).padding(.bottom, scrolled && !collapsed ? 6 : 10)
         .overlay(alignment: .bottom) { Rectangle().fill(scrolled && !collapsed ? Ink.hairline : .clear).frame(height: 1) }
@@ -263,11 +263,11 @@ struct NotRunningSheet: View {
         let op = follow?.operatorId.flatMap { app.operatorsById[$0] }
         LiveSheetCard {
             HStack(spacing: 10) {
-                OperatorBadge(op: op, size: 32)
+                OperatorBadge(op: op, size: .medium)
                 Text([op?.name, number].compactMap { $0 }.joined(separator: " ").isEmpty ? l10n.t("liveMap.train", ["number": number]) : [op?.name, number].compactMap { $0 }.joined(separator: " "))
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
-                IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let label = follow?.label { Text(label).clack(.rowTitle).foregroundStyle(Ink.text) }
             Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
@@ -301,7 +301,7 @@ struct LiveStationSheet: View {
             HStack {
                 Text(name).clack(.rowTitle).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
-                IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
             if let rows {
@@ -314,7 +314,7 @@ struct LiveStationSheet: View {
                                 HStack(spacing: 8) {
                                     FlapTime(time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm", clock: app.settings.clock, style: .text)
                                         .font(ClackFont.inter(14, .semibold))
-                                    OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: 18)
+                                    OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
                                     Text(row.endpoints.joined(separator: ", ")).font(ClackFont.inter(14)).foregroundStyle(Ink.text).lineLimit(1)
                                     Spacer(minLength: 0)
                                     if let platform = row.platform {

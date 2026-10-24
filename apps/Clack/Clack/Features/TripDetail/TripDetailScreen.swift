@@ -281,7 +281,7 @@ struct TripDetailScreen: View {
         let m = moment(detail, now: now)
         let live = m.shown, tracking = m.tracking, status = m.status
         return FlowLayout(spacing: 10, lineSpacing: 6) {
-            OperatorBadge(op: l.operator, size: 32)
+            OperatorBadge(op: l.operator, size: .large)
             Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
             if let category = l.category { Chip(text: l10n.t("products.\(category)")) }
             if tracking, let live {

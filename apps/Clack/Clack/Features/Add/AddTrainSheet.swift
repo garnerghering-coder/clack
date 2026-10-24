@@ -256,7 +256,7 @@ private struct ResultCard: View {
                     }
                 }
                 FlowLayout(spacing: 8, lineSpacing: 6) {
-                    OperatorBadge(op: op, size: 26)
+                    OperatorBadge(op: op, size: .medium)
                     Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
                     Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
                     Chip(text: l10n.t("products.\(result.product)"))
@@ -314,7 +314,7 @@ private struct ConnectionResultCard: View {
             ForEach([first, second], id: \.id) { result in
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
                 HStack(spacing: 8) {
-                    OperatorBadge(op: op, size: 22)
+                    OperatorBadge(op: op, size: .small)
                     Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
                     Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
                     Text("\(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)) \(result.from.name) → \(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)) \(result.to.name)")
@@ -391,7 +391,7 @@ private struct ConfirmStep: View {
             .hairlineBorder(radius: Radius.card)
         }
         HStack(spacing: 10) {
-            OperatorBadge(op: op, size: 30)
+            OperatorBadge(op: op, size: .medium)
             Text([op?.name, result.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
             Chip(text: l10n.t("products.\(result.product)"))
         }

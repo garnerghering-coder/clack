@@ -133,7 +133,7 @@ struct PassportScreen: View {
             groupTitle(l10n.t("passport.collections"))
             Card {
                 Text(l10n.t("passport.operators")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Bars(rows: data.operators, unit: unit, label: { ops[$0.key]?.name ?? $0.key }, color: { MapStyle.opColor(ops[$0.key]?.brandColor, dark: true) }, lead: { OperatorBadge(op: ops[$0.key], size: 30) })
+                Bars(rows: data.operators, unit: unit, label: { ops[$0.key]?.name ?? $0.key }, color: { MapStyle.opColor(ops[$0.key]?.brandColor, dark: true) }, lead: { OperatorBadge(op: ops[$0.key], size: .medium) })
             }
             if !data.trainTypes.isEmpty {
                 Card {

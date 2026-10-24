@@ -317,7 +317,7 @@ struct StationMapScreen: View {
                             Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? "—").clack(.walkBig).monospacedDigit().foregroundStyle(Ink.text)
                             if let conn = connection(fromE, toE, route) { ConnectionChip(result: conn) }
                             Spacer(minLength: 0)
-                            IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: clearRoute)
+                            IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: clearRoute)
                         }
                     } else {
                         HStack(alignment: .top, spacing: 8) {
@@ -326,8 +326,8 @@ struct StationMapScreen: View {
                                 EndButton(caption: l10n.t("stationMap.to"), value: toE.map { label(map, $0) }, me: toE?.kind == .me) { picking = .to }
                             }
                             VStack(spacing: 6) {
-                                IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: clearRoute)
-                                IconButton(icon: "arrow-down-up", label: l10n.t("stationMap.swap"), small: true) { setRoute(to, from) }
+                                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: clearRoute)
+                                IconButton(icon: "arrow-down-up", label: l10n.t("stationMap.swap"), size: .overMap) { setRoute(to, from) }
                                     .disabled(from == nil && to == nil)
                             }
                         }

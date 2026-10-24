@@ -230,7 +230,7 @@ struct TripsScreen: View {
                 }
             } header: {
                 Text(month.label)
-                    .clack(.monthHeader).foregroundStyle(Ink.text2)
+                    .clack(.sectionHeader).foregroundStyle(Ink.text2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 12).padding(.bottom, 6)
                     .background(Ink.bg)
