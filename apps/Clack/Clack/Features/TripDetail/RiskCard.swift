@@ -55,10 +55,8 @@ struct RiskCard: View {
                             .clack(.body).foregroundStyle(Ink.text)
                     }
                 }
-                InfoNote(
-                    l10n.t("risk.honest", ["time": Format.time(risk.checkedAt.ms, tz: Format.zone(leg.leg.origin?.tz), clock: app.settings.clock)]),
-                    more: l10n.t("risk.honestMore")
-                )
+                Text(l10n.t("risk.honest", ["time": Format.time(risk.checkedAt.ms, tz: Format.zone(leg.leg.origin?.tz), clock: app.settings.clock)]))
+                    .clack(.caption).foregroundStyle(Ink.text2)
             }
         }
     }

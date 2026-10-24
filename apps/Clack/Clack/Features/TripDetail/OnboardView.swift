@@ -23,11 +23,6 @@ struct OnboardView: View {
         "step_free": "door-open", "accessible_toilet": "toilet", "sleeper": "bed-double",
     ]
 
-    private func host(_ url: String) -> String {
-        guard let host = URL(string: url)?.host else { return url }
-        return host.hasPrefix("www.") ? String(host.dropFirst(4)) : host
-    }
-
     /// The amenities typical for this operator and type, with today's facts taking over for the same thing.
     private var typicalList: [(key: String, claim: AmenityClaim)] {
         let now = Date.now.timeIntervalSince1970 * 1000
@@ -60,7 +55,6 @@ struct OnboardView: View {
                             }
                         }
                     }
-                    if !compact { sourceLine(typicalList) }
                 }
             }
         }
@@ -92,24 +86,5 @@ struct OnboardView: View {
             Text(text)
         }
         .clack(.chip).foregroundStyle(tint)
-    }
-
-    private func sourceLine(_ list: [(key: String, claim: AmenityClaim)]) -> some View {
-        var seen = Set<String>()
-        let sources = list.map(\.claim).filter { seen.insert(host($0.source)).inserted }
-        let checked = sources.first.flatMap { Format.isoToMidnightMs($0.verified) }
-        var text = AttributedString(l10n.t("onboard.source") + " ")
-        for (index, claim) in sources.enumerated() {
-            if index > 0 { text += AttributedString(", ") }
-            var link = AttributedString(host(claim.source))
-            link.link = URL(string: claim.source)
-            link.foregroundColor = Ink.accentInk
-            link.font = TextRole.chip.font
-            text += link
-        }
-        if let checked {
-            text += AttributedString(" · " + l10n.t("onboard.checked", ["date": Format.day(checked, tz: "Europe/Stockholm", language: app.settings.language)]))
-        }
-        return Text(text).clack(.caption).foregroundStyle(Ink.text2)
     }
 }

@@ -462,7 +462,8 @@ struct ExploreScreen: View {
             if !collapsed.wrappedValue { art(type: type, operatorId: view.operatorId) }
             if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
             StatusLine(allCanceled ? .cancelled : .arrived, status)
-            Text(l10n.t(anyLive ? "train.liveTimes" : "train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2)
+            // Live times need no note; timetable ones say so.
+            if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)

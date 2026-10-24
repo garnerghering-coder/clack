@@ -554,10 +554,7 @@ struct TripDetailScreen: View {
             }
             SeatEditor(leg: l) { leg = $0 }
             if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))
-                    Text(l10n.t("detail.qualityNote.\(l.dataQuality.rawValue)")).clack(.caption).foregroundStyle(Ink.text2)
-                }
+                Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))
             }
             if !beyond.isEmpty {
                 let countries = beyond.map { code -> String in
@@ -565,11 +562,9 @@ struct TripDetailScreen: View {
                     let name = l10n.t(key)
                     return name == key ? code : name
                 }.joined(separator: ", ")
-                Text(l10n.t(borderAt != nil ? "detail.beyondLiveData" : "detail.beyondLiveDataNoReport", ["countries": countries, "station": borderAt ?? ""]))
+                Text(l10n.t("detail.beyondLiveData", ["countries": countries]))
                     .clack(.caption).foregroundStyle(Ink.text2)
             }
-            if l.isEstimatedGeometry { InfoNote(l10n.t("detail.estimatedDistance"), more: l10n.t("detail.estimatedDistanceMore")) }
-            Text(l10n.t("detail.source")).clack(.caption).foregroundStyle(Ink.text2)
         }
     }
 

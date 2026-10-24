@@ -32,9 +32,6 @@ struct TrainCard: View {
                     Chip(text: l10n.t(source == .user ? "train.yourChoice" : source == .composition ? "train.planned" : "train.typical"))
                 }
                 Text(type.about).clack(.caption).foregroundStyle(Ink.text2)
-                if source != .user {
-                    Text(l10n.t(source == .composition ? "train.plannedNote" : "train.typicalNote")).clack(.caption).foregroundStyle(Ink.text2)
-                }
                 HStack(alignment: .top, spacing: 24) {
                     if let top = type.maxKmh { fact(l10n.t("train.topSpeed"), "\(top) km/h") }
                     if let since = type.since { fact(l10n.t("train.since"), String(since)) }

@@ -135,7 +135,7 @@ struct Chip: View {
     }
 }
 
-/// `.chip-button`: a filter. Active is yellow; `removable` adds an x.
+/// `.chip-button`: a filter, as a small system button: the chosen one yellow, the others grey. `removable` adds an x.
 struct ChipButton: View {
     let text: String
     var active = false
@@ -147,21 +147,11 @@ struct ChipButton: View {
             HStack(spacing: 6) {
                 Text(text)
                 if removable {
-                    LucideIcon(name: "x", size: 14).foregroundStyle(active ? Ink.onAccent : Ink.text2)
+                    LucideIcon(name: "x", size: 14)
                 }
             }
-            .clack(.chipButton)
-            .foregroundStyle(active ? Ink.onAccent : Ink.text)
-            .textSelection(.disabled)
-            .padding(.horizontal, 14)
-            .frame(minHeight: 34)
-            .background(active ? Ink.accent : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-            .hairlineBorder(radius: Radius.controlSm, color: active ? Ink.accent : Ink.hairline)
-            // 34 pt to look at, 44 pt to hit.
-            .padding(.vertical, 5)
-            .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.clack(active ? .primary : .secondary, small: true))
         .accessibilityAddTraits(active ? .isSelected : [])
     }
 }

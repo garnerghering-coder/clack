@@ -891,13 +891,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fetching this day’s timetable from Trafiklab’s archive. The first search in a new month takes about half a minute."
+            "value" : "Fetching this day’s timetable. The first search in a month can take half a minute."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hämtar dagens tidtabell från Trafiklabs arkiv. Första sökningen i en ny månad tar ungefär en halv minut."
+            "value" : "Hämtar dagens tidtabell. Första sökningen i en månad kan ta en halv minut."
           }
         }
       }
@@ -4417,13 +4417,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Based on the timetable: real-time times for both trains aren’t in yet."
+            "value" : "Based on the timetable."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enligt tidtabellen: realtid för båda tågen finns inte än."
+            "value" : "Enligt tidtabellen."
           }
         }
       }
@@ -4748,23 +4748,6 @@
         }
       }
     },
-    "detail.actualTimes" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actual times from Trafikverket (Sweden), Entur (Norway) and Digitraffic (Finland)."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faktiska tider från Trafikverket (Sverige), Entur (Norge) och Digitraffic (Finland)."
-          }
-        }
-      }
-    },
     "detail.arrival" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4788,30 +4771,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There’s no live data for this train in {{countries}}. Times there are the timetable’s, and expected times follow the delay reported at {{station}}."
+            "value" : "No live data in {{countries}}: timetable times there."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Det finns ingen realtidsdata för tåget i {{countries}}. Tiderna där är tidtabellens, och väntade tider följer förseningen vid {{station}}."
-          }
-        }
-      }
-    },
-    "detail.beyondLiveDataNoReport" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There’s no live data for this train in {{countries}}, so times there are the timetable’s."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Det finns ingen realtidsdata för tåget i {{countries}}, så tiderna där är tidtabellens."
+            "value" : "Ingen realtid i {{countries}}: tidtabellens tider där."
           }
         }
       }
@@ -4965,40 +4931,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restid"
-          }
-        }
-      }
-    },
-    "detail.estimatedDistance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The distance is approximate."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avståndet är ungefärligt."
-          }
-        }
-      }
-    },
-    "detail.estimatedDistanceMore" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Part of this route couldn’t be matched to the rail network, so it’s drawn as straight lines."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En del av sträckan kunde inte matchas mot järnvägsnätet, så den ritas som raka linjer."
           }
         }
       }
@@ -5292,57 +5224,6 @@
         }
       }
     },
-    "detail.qualityNote.manual" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Added manually."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tillagd manuellt."
-          }
-        }
-      }
-    },
-    "detail.qualityNote.partial" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Some actual times are missing (for example at stations outside Sweden, Norway and Finland)."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vissa faktiska tider saknas (till exempel på stationer utanför Sverige, Norge och Finland)."
-          }
-        }
-      }
-    },
-    "detail.qualityNote.scheduled_only" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scheduled times only; we couldn’t find actual times for this trip."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bara tidtabellstider; vi hittade inga faktiska tider för den här resan."
-          }
-        }
-      }
-    },
     "detail.refresh" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5373,23 +5254,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ankomst {{time}} (enligt tidtabell)"
-          }
-        }
-      }
-    },
-    "detail.scheduledOnlyNote" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No actual times were reported, so these are the scheduled times."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inga faktiska tider rapporterades, så det här är tidtabellens tider."
           }
         }
       }
@@ -5428,23 +5292,6 @@
         }
       }
     },
-    "detail.source" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Times: Trafikverket, Entur (NLOD), Digitraffic (CC BY 4.0) · Timetable: Trafiklab (CC0), Entur (NLOD), Digitraffic (CC BY 4.0)"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tider: Trafikverket, Entur (NLOD), Digitraffic (CC BY 4.0) · Tidtabell: Trafiklab (CC0), Entur (NLOD), Digitraffic (CC BY 4.0)"
-          }
-        }
-      }
-    },
     "detail.stops" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5468,13 +5315,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timetable only so far: real-time data appears closer to departure."
+            "value" : "Live times appear closer to departure."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bara tidtabellen hittills: realtid kommer närmare avgång."
+            "value" : "Realtid visas närmare avgång."
           }
         }
       }
@@ -5604,13 +5451,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trafikverket reports {{train}} as cancelled."
+            "value" : "{{train}} is reported cancelled."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trafikverket rapporterar {{train}} som inställt."
+            "value" : "{{train}} är rapporterat inställt."
           }
         }
       }
@@ -8516,23 +8363,6 @@
         }
       }
     },
-    "onboard.checked" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "checked {{date}}"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kontrollerat {{date}}"
-          }
-        }
-      }
-    },
     "onboard.keys.accessible_toilet" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8835,23 +8665,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "{{what}} (delvis)"
-          }
-        }
-      }
-    },
-    "onboard.source" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Från"
           }
         }
       }
@@ -9471,13 +9284,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trips land here once they’ve happened: automatically when Trafikverket (Sweden), Entur (Norway) or Digitraffic (Finland) reports the train at your stops, or when you confirm them. Planned and followed trains don’t count."
+            "value" : "Trips show up here once you’ve taken them: when the train reports at your stops, or when you confirm them."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resor hamnar här när de har hänt: automatiskt när Trafikverket (Sverige), Entur (Norge) eller Digitraffic (Finland) rapporterar tåget vid dina stationer, eller när du bekräftar dem. Planerade och följda tåg räknas inte."
+            "value" : "Resor hamnar här när du har åkt dem: när tåget rapporteras vid dina stationer, eller när du bekräftar dem."
           }
         }
       }
@@ -10265,13 +10078,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delay stats appear once trains have real arrival times from Trafikverket, Entur or Digitraffic."
+            "value" : "Delay stats appear once trains have real arrival times."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Förseningsstatistik visas när tågen har faktiska ankomsttider från Trafikverket, Entur eller Digitraffic."
+            "value" : "Förseningsstatistik visas när tågen har faktiska ankomsttider."
           }
         }
       }
@@ -11755,13 +11568,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Of the {{trains}} trains that left {{station}} towards {{toward}} in the last {{window}} min, {{late}} are running 10+ min late now ({{delays}} min). Trains queue on the line, so yours may be held too."
+            "value" : "{{late}} of the last {{trains}} trains from {{station}} towards {{toward}} are 10+ min late ({{delays}} min). Yours may be held too."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Av de {{trains}} tåg som lämnat {{station}} mot {{toward}} de senaste {{window}} min är {{late}} försenade 10+ min nu ({{delays}} min). Tåg köar på banan, så ditt kan också få vänta."
+            "value" : "{{late}} av de senaste {{trains}} tågen från {{station}} mot {{toward}} är 10+ min sena ({{delays}} min). Ditt kan också få vänta."
           }
         }
       }
@@ -11789,30 +11602,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Observations, not a prediction · checked {{time}}"
+            "value" : "From recent departures, not a forecast · {{time}}"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Observationer, inte en prognos · kontrollerat {{time}}"
-          }
-        }
-      }
-    },
-    "risk.honestMore" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From Trafikverket’s reported departures. Your train’s own times above are what it reports."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Från Trafikverkets rapporterade avgångar. Ditt tågs egna tider ovan är vad det rapporterar."
+            "value" : "Från senaste avgångarna, inte en prognos · {{time}}"
           }
         }
       }
@@ -11891,13 +11687,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It left {{station}} 5+ min late on {{late}} of the {{days}} days Clack has seen it (median {{median}} min). A past pattern, not a forecast for today."
+            "value" : "Left {{station}} 5+ min late on {{late}} of {{days}} days (median {{median}} min)."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Det gick från {{station}} 5+ min sent {{late}} av de {{days}} dagar Clack har sett det (median {{median}} min). Ett mönster bakåt, inte en prognos för i dag."
+            "value" : "Gick från {{station}} 5+ min sent {{late}} av {{days}} dagar (median {{median}} min)."
           }
         }
       }
@@ -11908,13 +11704,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In the last {{window}} min, {{late}} of {{trains}} trains along your route left 10+ min late ({{canceled}} cancelled; median {{median}} min). Your train may be affected."
+            "value" : "{{late}} of {{trains}} trains on your route left 10+ min late in the last {{window}} min (median {{median}} min)."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De senaste {{window}} min gick {{late}} av {{trains}} tåg längs din sträcka 10+ min sent ({{canceled}} inställda; median {{median}} min). Ditt tåg kan påverkas."
+            "value" : "{{late}} av {{trains}} tåg på din sträcka gick 10+ min sent de senaste {{window}} min (median {{median}} min)."
           }
         }
       }
@@ -16047,23 +15843,6 @@
         }
       }
     },
-    "train.liveTimes" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Times from live data where shown"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tider från realtidsdata där de visas"
-          }
-        }
-      }
-    },
     "train.planned" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -16077,23 +15856,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Planerat"
-          }
-        }
-      }
-    },
-    "train.plannedNote" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From Trafikverket’s planned coach order for this departure. A last-minute swap won’t show here, so you can still change it."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enligt Trafikverkets planerade vagnsordning för avgången. Ett byte i sista stund syns inte här, så du kan fortfarande ändra."
           }
         }
       }
@@ -16206,13 +15968,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timetable times: live data appears once the train reports"
+            "value" : "Timetable times"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tidtabellens tider: realtid visas när tåget rapporterar"
+            "value" : "Tidtabellens tider"
           }
         }
       }
@@ -16264,23 +16026,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Typiskt"
-          }
-        }
-      }
-    },
-    "train.typicalNote" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typical train for this service. Operators sometimes swap trains, so you can change it."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typiskt tåg för den här avgången. Tågbolag byter ibland tåg, så du kan ändra det."
           }
         }
       }

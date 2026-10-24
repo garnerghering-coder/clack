@@ -84,7 +84,8 @@ struct TrainDetailSheet: View {
             TrainPicture(type: type, operatorId: view.operatorId, height: 54)
             Text(type?.name ?? l10n.t("liveMap.typeUnknown")).clack(.caption).foregroundStyle(Ink.text2)
         }
-        Text(l10n.t(anyLive ? "train.liveTimes" : "train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2)
+        // Live times need no note; timetable ones say so.
+        if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
         actions(view)
         StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
         OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)

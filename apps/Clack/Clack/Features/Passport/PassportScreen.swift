@@ -71,7 +71,16 @@ struct PassportScreen: View {
 
     @ViewBuilder
     private func content(_ data: Passport) -> some View {
-        Section {
+        // The year chips scroll away with the page (owner, 2026-10-25: no bar following you down).
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ChipButton(text: l10n.t("passport.allTime"), active: year == nil) { year = nil }
+                ForEach(data.years, id: \.self) { y in ChipButton(text: String(y), active: year == y) { year = y } }
+            }
+            .padding(.horizontal, 16)
+        }
+        .padding(.horizontal, -16)
+        Group {
             if !data.review.isEmpty {
                 Button {
                     router.tripsTab = .past
@@ -95,17 +104,6 @@ struct PassportScreen: View {
             } else {
                 full(data)
             }
-        } header: {
-            // The year chips stay at the top while you scroll (`.passport-controls`).
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ChipButton(text: l10n.t("passport.allTime"), active: year == nil) { year = nil }
-                    ForEach(data.years, id: \.self) { y in ChipButton(text: String(y), active: year == y) { year = y } }
-                }
-                .padding(.horizontal, 16)
-            }
-            .padding(.horizontal, -16).padding(.vertical, 8)
-            .background(Ink.bg)
         }
     }
 
