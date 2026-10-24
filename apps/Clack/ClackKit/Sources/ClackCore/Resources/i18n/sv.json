@@ -452,6 +452,23 @@
     "platformSetDeparture": "Spår {{to}} är meddelat för avgång.",
     "platformSetArrival": "Spår {{to}} är meddelat för ankomst."
   },
+  "tripCard": {
+    "route": "{{from}} → {{to}}",
+    "leavingSoon": "Avgår snart",
+    "boarding": "Påstigning",
+    "board": "PÅ",
+    "approaching": "På väg",
+    "getOffSoon": "Kliv av snart",
+    "changing": "Byte",
+    "arrived": "Framme",
+    "platform": "Spår {{platform}}",
+    "platformShort": "Sp {{platform}}",
+    "platformChanged": "Spårändring till {{platform}}",
+    "next": "Nästa: {{station}}",
+    "leaves": "Avgår",
+    "arrives": "Ankommer",
+    "estimated": "Uppskattat"
+  },
   "train": {
     "title": "Tåg",
     "typical": "Typiskt",
