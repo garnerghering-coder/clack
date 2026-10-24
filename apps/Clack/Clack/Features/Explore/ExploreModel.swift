@@ -127,15 +127,14 @@ final class ExploreModel {
             do {
                 for try await event in client.liveTrainStream(bbox: bbox) {
                     streamDown = false
-                    let data = Data(event.data.utf8)
-                    if event.name == "snapshot", let snapshot = try? JSONDecoder().decode(LiveSnapshot.self, from: data) {
+                    if event.name == "snapshot", let snapshot = await EventStream.decode(LiveSnapshot.self, from: event) {
                         loaded = true
                         lastMessage = now
                         mode = snapshot.mode
                         apply(snapshot.trains, removed: [], replace: true)
                         total = snapshot.total
                         upstreamAt = snapshot.upstreamAt
-                    } else if event.name == "delta", let delta = try? JSONDecoder().decode(LiveDelta.self, from: data) {
+                    } else if event.name == "delta", let delta = await EventStream.decode(LiveDelta.self, from: event) {
                         lastMessage = now
                         // A moved train only changed position: lay that over what we already have.
                         let moved = (delta.moved ?? []).compactMap { m in trains[m.id].map { ExploreLogic.applying(m, to: $0) } }

@@ -79,7 +79,7 @@ struct BoardScreen: View {
         while !Task.isCancelled {
             do {
                 for try await event in app.client.boardStream(stationId, arrivals: arrivals) where event.name == "board" {
-                    if let decoded = try? JSONDecoder().decode(Board.self, from: Data(event.data.utf8)) {
+                    if let decoded = await EventStream.decode(Board.self, from: event) {
                         board = decoded
                         error = false
                     }
