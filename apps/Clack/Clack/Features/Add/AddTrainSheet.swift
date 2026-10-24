@@ -127,7 +127,7 @@ private struct SearchStep: View {
         }
         if response.outsideTimetable {
             Banner {
-                Text(l10n.t(response.history == "loading" ? "add.historyLoading" : response.history == "failed" ? "add.historyFailed" : response.history == "norway" ? "add.historyNorway" : "add.historyUnavailable"))
+                Text(l10n.t(response.history == "loading" ? "add.historyLoading" : response.history == "failed" ? "add.historyFailed" : response.history == "norway" ? "add.historyNorway" : response.history == "finland" ? "add.historyFinland" : "add.historyUnavailable"))
             }
         }
         if let list = response.results, !list.isEmpty {
