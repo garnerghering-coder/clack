@@ -100,6 +100,20 @@ Each block: method + path, params, body, response, status codes, TS type, and th
 
 ### 2.1 Me / account
 
+#### `GET /api/me/export`
+- This user's data (by `X-Clack-User`) as JSON, sent as an attachment:
+  `Content-Disposition: attachment; filename="clack-export-YYYY-MM-DD.json"` (UTC date). `routes/export.ts`.
+- 200 `{ exportedAt: string /*ISO*/, userId: string, legs: ExportLeg[], journeys: { id, userId, title, createdAt }[],
+  follows: { userId, trainNumber, serviceDate, operatorId, label, createdAt }[], settings: Settings,
+  stationFavorites: { userId, stationId, createdAt }[], stationRecent: { userId, stationId, lastViewed }[],
+  stationRequests: { id, userId, stationId, createdAt }[] }`. Dates are ISO strings. `ExportLeg` is the raw `legs` row
+  (database column names in camelCase, including `geometry`, `coach`, `seat`, `notes`) plus `stops` (the `leg_stops`
+  rows, by `seq`) and `events` (the `leg_events` rows, by time).
+- Covers the same user-owned tables as `DELETE /api/me`: users (settings), journeys, legs with their stops and
+  events, followed trains, favourite and recent stations, station requests. Not included: the phone's Apple push
+  addresses (`devices`, `live_activities`) and server bookkeeping (`push_log`, `leg_audits`).
+- A new user gets empty arrays and default settings.
+
 #### `DELETE /api/me`
 - No body. Deletes the user row; everything (legs, journeys, follows, favourites, recents, settings) goes with it
   through `ON DELETE CASCADE` (`app.ts:61-69`). For the `local` user a fresh empty `local` row is made again.
@@ -360,6 +374,8 @@ A "leg" is one saved train ride. Leg ids are UUIDs (`crypto.randomUUID()`); jour
 - `operatorId: string | null` (**sent, not in the TS type**)
 - `originStationId: string`, `destStationId: string` (**sent, not in the TS type**)
 - `notes: string | null`
+- `coach: string | null`, `seat: string | null`: where the owner sat, as they wrote it ("5", "12A"); null when not
+  given. Set on create or with `PATCH /legs/:id`; also on the legs inside `GET /journeys/:id`.
 - `ride: "pending" | "auto" | "confirmed" | "review" | "not_taken"`
 - `rideReason: string | null` (see §4)
 - `borderEvidence: { board?: { stationId: string, at: number /*ms*/ }, alight?: { stationId: string,
@@ -432,7 +448,7 @@ plus:
 
 #### `POST /api/legs`
 - Body (`CreateLegInput`, `legs.ts:44`): `{ tripKey: string, serviceDate: string /*YYYY-MM-DD*/, fromSeq: integer,
-  toSeq: integer, force?: boolean }`. `fromSeq`/`toSeq` are `TripStop.seq` / `StopRef.seq` values. `force: true`
+  toSeq: integer, force?: boolean, coach?: string | null, seat?: string | null }`. `fromSeq`/`toSeq` are `TripStop.seq` / `StopRef.seq` values. `force: true`
   saves even if the same train number is already saved on that date.
 - 201: `LegDetail`.
 - 400 `{ error: "tripKey, serviceDate, fromSeq and toSeq are required" }`; 400
@@ -450,7 +466,7 @@ plus:
 - Body (`ManualLegInput`, `legs.ts:124`): `{ fromStationId: string, toStationId: string, date: string
   /*YYYY-MM-DD, local where you board*/, dep: string /*"HH:MM", origin's tz*/, arr: string /*"HH:MM", destination's
   tz; earlier than dep means next day*/, operatorId?: string | null, trainNumber?: string | null,
-  category?: string | null }`. The web always sends all eight keys (`api.ts:452`). `category` must be one of
+  category?: string | null, coach?: string | null, seat?: string | null }`. The web always sends all eight keys (`api.ts:452`). `category` must be one of
   `high_speed, intercity, night, regional, commuter, heritage`, otherwise it becomes `regional`. `trainNumber` must
   match `^[\w-]{1,10}$` after trimming.
 - 201: `LegDetail` (two stops, `dataQuality: "manual"`).
@@ -460,10 +476,14 @@ plus:
 - Web: `api.createManualLeg` (`api.ts:452`), manual-trip form (`components/ManualTrip.tsx:78`).
 
 #### `PATCH /api/legs/:id`
-- Body `{ trainType: string | null }` (null resets to the typical type; a string must be an id from
-  `/train-types`).
-- 200 `LegDetail`. 400 `{ error: "nothing to change" }` (key missing), 400 `{ error: "unknown train type: <id>" }`,
-  404 `{ error: "not found" }` (`routes/legs.ts:62-68`).
+- Body: any of `{ trainType?: string | null, coach?: string | null, seat?: string | null }`. A key left out is
+  unchanged; `null` clears (`trainType` null resets to the typical type; a string must be an id from `/train-types`).
+  `coach` and `seat` are trimmed text of at most 8 characters each; a blank string clears too.
+- Same `coach`/`seat` rules on `POST /legs` and `POST /legs/manual`: omitted or null means none.
+- 200 `LegDetail`. 400 `{ error: "nothing to change" }` (none of the three keys present), 400
+  `{ error: "unknown train type: <id>" }`, 400 `{ error: "coach must be text or null" }` / `"seat must be text or
+  null"` / `"coach can be at most 8 characters"` / `"seat can be at most 8 characters"`, 404
+  `{ error: "not found" }` (`routes/legs.ts`). Nothing is changed when any field is refused.
 - Web: `api.setTrainType(id, trainType)` (`api.ts:472`), Train card picker (`components/TrainCard.tsx`).
 
 #### `DELETE /api/legs/:id`
