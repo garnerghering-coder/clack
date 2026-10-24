@@ -217,6 +217,12 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
 
     public static var containerURL: URL? { FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) }
 
+    /// Deletes the stored snapshot ("Delete my data"), so the widgets don't keep showing the old trips.
+    public static func clear() {
+        guard let url = containerURL?.appendingPathComponent(fileName) else { return }
+        try? FileManager.default.removeItem(at: url)
+    }
+
     public static func load() -> WidgetSnapshot? {
         guard let url = containerURL?.appendingPathComponent(fileName), let data = try? Data(contentsOf: url) else { return nil }
         return try? JSONDecoder().decode(WidgetSnapshot.self, from: data)

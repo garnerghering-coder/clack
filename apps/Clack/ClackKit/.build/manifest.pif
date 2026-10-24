@@ -5,11 +5,11 @@
       "name" : "ClackKit",
       "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit",
       "projects" : [
-        "e5ed40c82eba079115340c0e759a4b460db353edefcda6d93b56b29d885b52f0",
+        "ff2709fd0fb854eb126c28357b0a70ebe88f918445aefc9ace4f5f8f06ed644a",
         "6dbf68c2d86919d0ea61120c4becd9e9617ec2e1c78a11ce5d086ebc8e7dde52"
       ]
     },
-    "signature" : "4f7d599005c4e4dad25916ccf1243d253dfc4fbf7b66c37fb3737a6782e2de53",
+    "signature" : "599b83a881c7fff58d010227b1d8a346fd0e4e20010b029eaa75bf14227a6b86",
     "type" : "workspace"
   },
   {
@@ -278,6 +278,14 @@
               {
                 "fileType" : "sourcecode.swift",
                 "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_8",
+                "name" : "IdentityTests.swift",
+                "path" : "IdentityTests.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_9",
                 "name" : "InstantTests.swift",
                 "path" : "InstantTests.swift",
                 "sourceTree" : "<group>",
@@ -285,7 +293,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_9",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_10",
                 "name" : "L10nTests.swift",
                 "path" : "L10nTests.swift",
                 "sourceTree" : "<group>",
@@ -293,7 +301,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_10",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_11",
                 "name" : "LogicTests.swift",
                 "path" : "LogicTests.swift",
                 "sourceTree" : "<group>",
@@ -301,7 +309,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_11",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_12",
                 "name" : "LogicTests2.swift",
                 "path" : "LogicTests2.swift",
                 "sourceTree" : "<group>",
@@ -309,7 +317,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_12",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_13",
                 "name" : "ModelsTests.swift",
                 "path" : "ModelsTests.swift",
                 "sourceTree" : "<group>",
@@ -317,7 +325,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_13",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_14",
                 "name" : "OfflineCacheTests.swift",
                 "path" : "OfflineCacheTests.swift",
                 "sourceTree" : "<group>",
@@ -325,7 +333,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_14",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_15",
                 "name" : "OfflineEstimateTests.swift",
                 "path" : "OfflineEstimateTests.swift",
                 "sourceTree" : "<group>",
@@ -333,7 +341,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_15",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_16",
                 "name" : "PassportTests.swift",
                 "path" : "PassportTests.swift",
                 "sourceTree" : "<group>",
@@ -341,7 +349,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_16",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_17",
                 "name" : "ProgressTests.swift",
                 "path" : "ProgressTests.swift",
                 "sourceTree" : "<group>",
@@ -349,7 +357,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_17",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_18",
                 "name" : "StationRoutingTests.swift",
                 "path" : "StationRoutingTests.swift",
                 "sourceTree" : "<group>",
@@ -357,7 +365,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_18",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_19",
                 "name" : "TicketPendingTests.swift",
                 "path" : "TicketPendingTests.swift",
                 "sourceTree" : "<group>",
@@ -365,7 +373,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_19",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_20",
                 "name" : "TicketReaderTests.swift",
                 "path" : "TicketReaderTests.swift",
                 "sourceTree" : "<group>",
@@ -373,7 +381,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_20",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_21",
                 "name" : "TripDetailLogicTests.swift",
                 "path" : "TripDetailLogicTests.swift",
                 "sourceTree" : "<group>",
@@ -381,7 +389,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_21",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_22",
                 "name" : "TripsLogicTests.swift",
                 "path" : "TripsLogicTests.swift",
                 "sourceTree" : "<group>",
@@ -389,7 +397,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_22",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_23",
                 "name" : "WidgetSnapshotTests.swift",
                 "path" : "WidgetSnapshotTests.swift",
                 "sourceTree" : "<group>",
@@ -1291,7 +1299,7 @@
       "projectIsPackage" : "true",
       "projectName" : "ClackKit",
       "targets" : [
-        "ad4ae8e8afd8319bcee45c36ba4dab70c937a2bea03f00160923a9077555a654",
+        "800434649cb4ce795ea668eedb274efb8cb1b7a1275009c264fc6c7e47213b53",
         "c0edbe8788b0cbdcf7973f403e19a7365ec991c0b15354f7d3442625bf829644",
         "ce8090a624ed44f5a2088bf162b631ce91ee238a41ed2f4e44905a913f036441",
         "c92cb12ce34ba686acefee0d26974ea3f3950421b512c78abb85f27ec9ac6e8f",
@@ -1305,7 +1313,7 @@
         "a73e541ab82746211ca50cce7c8ca8df9b43b96ee4b3f6dac2abe90cf6b87465"
       ]
     },
-    "signature" : "e5ed40c82eba079115340c0e759a4b460db353edefcda6d93b56b29d885b52f0",
+    "signature" : "ff2709fd0fb854eb126c28357b0a70ebe88f918445aefc9ace4f5f8f06ed644a",
     "type" : "project"
   },
   {
@@ -1722,6 +1730,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_2::REF_23",
+              "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_0::23",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_0",
@@ -1786,7 +1803,7 @@
       "productTypeIdentifier" : "com.apple.product-type.bundle.unit-test",
       "type" : "standard"
     },
-    "signature" : "ad4ae8e8afd8319bcee45c36ba4dab70c937a2bea03f00160923a9077555a654",
+    "signature" : "800434649cb4ce795ea668eedb274efb8cb1b7a1275009c264fc6c7e47213b53",
     "type" : "target"
   },
   {

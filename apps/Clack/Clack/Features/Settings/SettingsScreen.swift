@@ -389,6 +389,7 @@ struct PrivacyScreen: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text(l10n.t("privacy.\(part)Title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                         Text(l10n.t("privacy.\(part)Body")).clack(.body).foregroundStyle(Ink.text)
+                        if part == "stored" { Text(l10n.t("privacy.idSync")).clack(.body).foregroundStyle(Ink.text) }
                     }
                 }
                 if let email = Config.supportEmail {

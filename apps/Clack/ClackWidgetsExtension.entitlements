@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.garnerghering.Clack</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.garnerghering.Clack.shared</string>
+	</array>
 </dict>
 </plist>
