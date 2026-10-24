@@ -142,8 +142,10 @@ struct TicketImportSheet: View {
         let m = row.match
         let from = m?.from.name ?? row.train.from
         let to = m?.to.name ?? row.train.to
-        let times = m.map { "\(Format.time($0.from.time, tz: $0.from.tz, clock: app.settings.clock)) → \(Format.time($0.to.time, tz: $0.to.tz, clock: app.settings.clock))" }
-            ?? "\(row.train.dep)\(row.train.arr.map { " → \($0)" } ?? "")"
+        // The ticket's own times ("07:14", as printed) when no timetable match gives the real ones.
+        let times: Text = m.map {
+            TimePair.text(.init(time: $0.from.time, tz: $0.from.tz), .init(time: $0.to.time, tz: $0.to.tz), clock: app.settings.clock)
+        } ?? Text(row.train.dep + (row.train.arr.map { TimePair.separator + $0 } ?? "")).monospacedDigit()
         let train = [row.train.operatorName, (m?.trainNumber ?? row.train.trainNumber).map { l10n.t("add.trainNumber", ["number": $0]) }]
             .compactMap { $0 }.joined(separator: " · ")
         return Button {
@@ -156,7 +158,7 @@ struct TicketImportSheet: View {
                     .opacity(row.state == .found || row.selected ? 1 : 0.4)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("\(from) → \(to)").clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
-                    Text("\(times) · \(Format.day(Format.isoToNoonMs(row.train.date) ?? 0, tz: m?.from.tz ?? "Europe/Stockholm", language: app.settings.language))")
+                    (times + Text(Format.separator + Format.day(Format.isoToNoonMs(row.train.date) ?? 0, tz: m?.from.tz ?? "Europe/Stockholm", language: app.settings.language)))
                         .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                     if !train.isEmpty { Text(train).clack(.caption).foregroundStyle(Ink.text2) }
                     Text(statusText(row.state)).clack(.caption).fontWeight(.semibold).foregroundStyle(statusColor(row.state))

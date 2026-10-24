@@ -237,9 +237,9 @@ private struct ResultCard: View {
                         .clack(.caption).foregroundStyle(Ink.text2)
                         .frame(maxWidth: .infinity)
                         .background { DashedHorizontalLine() }
-                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                        if plus > 0 { Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+                        if plus > 0 { TimePair.plusText(plus) }
                     }
                 }
                 .monospacedDigit()
@@ -300,9 +300,9 @@ private struct ConnectionResultCard: View {
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                 Text(Format.duration(total)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity).background { DashedHorizontalLine() }
-                HStack(alignment: .firstTextBaseline, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text(Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    if plus > 0 { Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+                    if plus > 0 { TimePair.plusText(plus) }
                 }
             }
             .monospacedDigit()
@@ -310,7 +310,8 @@ private struct ConnectionResultCard: View {
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
                 VStack(alignment: .leading, spacing: 2) {
                     ServiceHeader(op: op, number: result.trainNumber, size: .small, name: op == nil ? result.routeName : nil)
-                    Text("\(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)) \(result.from.name) → \(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)) \(result.to.name)")
+                    (TimePair.text(.init(time: result.from.time, tz: result.from.tz), .init(time: result.to.time, tz: result.to.tz), clock: app.settings.clock)
+                        + Text(Format.separator + "\(result.from.name) → \(result.to.name)"))
                         .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
                 }
             }

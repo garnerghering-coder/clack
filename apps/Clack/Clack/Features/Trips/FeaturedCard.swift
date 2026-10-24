@@ -91,7 +91,7 @@ struct FeaturedCard: View {
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
                     .clack(.headline).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
-                FlapTimes(leg: leg, style: .lg, intro: true)
+                TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
                 bottom(now: now, live: live)
             }
             .padding(.top, 14).padding(.bottom, 16).padding(.horizontal, 16)

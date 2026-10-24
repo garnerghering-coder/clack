@@ -236,8 +236,8 @@ private struct DisruptionBody: View {
         return HStack(alignment: .top, spacing: 10) {
             OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(Format.time(r.from.time, tz: r.from.tz, clock: app.settings.clock)) → \(Format.time(r.to.time, tz: r.to.tz, clock: app.settings.clock))")
-                    .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+                TimePair(dep: .init(time: r.from.time, tz: r.from.tz), arr: .init(time: r.to.time, tz: r.to.tz), clock: app.settings.clock)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 HStack(spacing: 8) {
                     Button(l10n.t("disruption.live")) { router.openTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
@@ -264,8 +264,8 @@ private struct DisruptionBody: View {
         return HStack(alignment: .top, spacing: 10) {
             OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(Format.time(c.first.from.time, tz: c.first.from.tz, clock: app.settings.clock)) → \(Format.time(c.second.to.time, tz: c.second.to.tz, clock: app.settings.clock))")
-                    .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+                TimePair(dep: .init(time: c.first.from.time, tz: c.first.from.tz), arr: .init(time: c.second.to.time, tz: c.second.to.tz), clock: app.settings.clock)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("disruption.live")) { router.openTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
                     .buttonStyle(.clack(small: true)).padding(.top, 4)

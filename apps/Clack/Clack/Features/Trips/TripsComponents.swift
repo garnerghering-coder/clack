@@ -7,75 +7,19 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The text of a trip's times, "07:14 – 10:30 +1", as one run so it wraps with the line around it. A time that
-/// differs from the timetable by a minute or more shows the timetabled one struck through, and the new one in the
-/// accent colour (SplitFlap.tsx `FlapTime`, text form).
-enum TimesText {
-    static func attributed(_ leg: Leg, clock: ClockFormat) -> AttributedString {
-        let x = TripsLogic.expected(leg)
-        let destTz = leg.destination?.tz ?? TripsLogic.tz(leg)
-        var out = part(x.dep, sched: leg.schedDep?.ms, tz: TripsLogic.tz(leg), clock: clock)
-        var dash = AttributedString(" – ")
-        dash.foregroundColor = Ink.text3
-        out += dash
-        out += part(x.arr, sched: leg.schedArr?.ms, tz: destTz, clock: clock)
-        if let dep = leg.schedDep?.ms, let arr = leg.schedArr?.ms {
-            let plus = Format.dayOffset(from: dep, fromTz: TripsLogic.tz(leg), to: arr, toTz: destTz)
-            if plus > 0 {
-                var sup = AttributedString("+\(plus)")
-                sup.baselineOffset = 5
-                sup.font = ClackFont.inter(9, .semibold)
-                sup.foregroundColor = Ink.text2
-                out += sup
-            }
-        }
-        return out
+extension TimePair {
+    /// A trip's departure and arrival as expected now, against the timetable, each in its station's time zone.
+    init(leg: Leg, clock: ClockFormat, flap: FlapTime.Style? = nil, intro: Bool = false) {
+        let ends = TimePair.ends(leg)
+        self.init(dep: ends.dep, arr: ends.arr, clock: clock, flap: flap, intro: intro)
     }
 
-    private static func part(_ time: Double?, sched: Double?, tz: String, clock: ClockFormat) -> AttributedString {
-        guard let time else {
-            var dash = AttributedString("—")
-            dash.foregroundColor = Ink.text2
-            return dash
-        }
-        let changed = sched.map { floor($0 / 60_000) != floor(time / 60_000) } ?? false
-        var out = AttributedString()
-        // One time, in yellow when it differs from the timetable; the old one is struck through only inside the trip.
-        var new = AttributedString(Format.time(time, tz: tz, clock: clock))
-        if changed {
-            new.foregroundColor = Ink.accentInk
-            new.font = ClackFont.inter(13, .bold)
-        }
-        out += new
-        return out
-    }
-}
-
-/// Departure and arrival on flip cards: the featured trip's times (`Times size="lg" intro`).
-struct FlapTimes: View {
-    @Environment(AppModel.self) private var app
-    let leg: Leg
-    var style: FlapTime.Style = .lg
-    var intro = false
-
-    var body: some View {
+    static func ends(_ leg: Leg) -> (dep: End, arr: End) {
         let x = TripsLogic.expected(leg)
-        let dep = leg.schedDep?.ms
-        let arr = leg.schedArr?.ms
-        let plus = (dep != nil && arr != nil && leg.destination != nil)
-            ? Format.dayOffset(from: dep!, fromTz: TripsLogic.tz(leg), to: arr!, toTz: leg.destination!.tz) : 0
-        // Wraps onto a second line when both struck and new times don't fit, as the web's inline times do.
-        FlowLayout(spacing: 6, lineSpacing: 2) {
-            FlapTime(time: x.dep, sched: dep, tz: TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false)
-            Text("–").foregroundStyle(Ink.text3)
-            FlapTime(
-                time: x.arr, sched: arr, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false
-            )
-            if plus > 0 {
-                Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2).baselineOffset(10)
-            }
-        }
-        .clack(.heroTimes)
+        return (
+            End(time: x.dep, sched: leg.schedDep?.ms, tz: TripsLogic.tz(leg)),
+            End(time: x.arr, sched: leg.schedArr?.ms, tz: leg.destination?.tz ?? TripsLogic.tz(leg))
+        )
     }
 }
 
@@ -176,11 +120,12 @@ struct LegRow: View {
     /// "Fri 23 Oct · 07:14 – 10:30 · 5h 16m".
     private var metaLine: some View {
         let dep = leg.schedDep?.ms
-        var text = AttributedString()
-        if let dep { text += AttributedString(Format.day(dep, tz: TripsLogic.tz(leg), language: app.settings.language) + " · ") }
-        text += TimesText.attributed(leg, clock: app.settings.clock)
-        if let dep, let arr = leg.schedArr?.ms { text += AttributedString(" · " + Format.duration((arr - dep) / 60_000)) }
-        return Text(text).clack(.caption).foregroundStyle(Ink.text2).monospacedDigit()
+        let ends = TimePair.ends(leg)
+        var text = Text("")
+        if let dep { text = Text(Format.day(dep, tz: TripsLogic.tz(leg), language: app.settings.language) + Format.separator) }
+        text = text + TimePair.text(ends.dep, ends.arr, clock: app.settings.clock)
+        if let dep, let arr = leg.schedArr?.ms { text = text + Text(Format.separator + Format.duration((arr - dep) / 60_000)) }
+        return text.clack(.caption).foregroundStyle(Ink.text2).monospacedDigit()
     }
 
     private var side: some View {
@@ -259,13 +204,9 @@ struct Layover: View {
                         }
                     }
                     .clack(.banner).fontWeight(.semibold)
-                    HStack(spacing: 6) {
-                        FlapTime(time: arrival, sched: schedA, tz: tz, clock: app.settings.clock)
-                        Text("→")
-                        FlapTime(time: departure, sched: schedB, tz: tz, clock: app.settings.clock)
-                        if let tracks { Text("· \(tracks)") }
-                    }
-                    .clack(.caption)
+                    (TimePair.text(.init(time: arrival, sched: schedA, tz: tz), .init(time: departure, sched: schedB, tz: tz), clock: app.settings.clock)
+                        + Text(tracks.map { Format.separator + $0 } ?? ""))
+                        .clack(.caption)
                     if linked {
                         HStack(spacing: 4) {
                             LucideIcon(name: "map", size: 14)
