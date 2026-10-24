@@ -160,7 +160,7 @@ private struct NextJourneyView: View {
     private func route(_ l: WidgetSnapshot.Leg, role: TextRole = .rowTitle) -> some View {
         HStack(spacing: 4) {
             Text(l.from).lineLimit(1)
-            LucideIcon(name: "arrow-left", size: 12).rotationEffect(.degrees(180)).foregroundStyle(Ink.text2)
+            Text("→").foregroundStyle(Ink.text2)
             Text(l.to).lineLimit(1)
         }
         .clack(role)
@@ -288,7 +288,7 @@ private struct NextJourneyView: View {
 
     private func rectangular(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text("\(l.from) – \(l.to)").clack(.chip).lineLimit(1)
+            Text("\(l.from) → \(l.to)").clack(.chip).lineLimit(1)
             Text(bigTime(s, l)).clack(.boardDestination).monospacedDigit()
             headline(s, l).clack(.caption).lineLimit(1)
         }

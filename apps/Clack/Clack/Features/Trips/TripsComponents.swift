@@ -184,7 +184,7 @@ struct Layover: View {
             let schedB = b.schedDep?.ms
             let schedMin = (schedA != nil && schedB != nil) ? Int(((schedB! - schedA!) / 60_000).rounded()) : nil
             let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-                ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? "?", "to": b.depPlatform ?? "?"]) : nil
+                ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
             let tz = a.destination?.tz ?? "Europe/Stockholm"
             let atRisk = min < 0
             let body = HStack(spacing: 12) {

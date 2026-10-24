@@ -181,7 +181,7 @@ struct HeroConnection: View {
         let result = model.result(a, b, profile: app.walkProfile)
         let walk = result.walkSeconds.map { l10n.t("connection.walk", ["min": String(max(1, Int(($0 / 60).rounded())))]) }
         let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? "?", "to": b.depPlatform ?? "?"]) : nil
+            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
         let line = [l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]), tracks, walk].compactMap { $0 }.joined(separator: " · ")
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 12) {
@@ -213,7 +213,7 @@ struct ConnectionCard: View {
         let times = TripsLogic.connectionTimes(a, b)
         let walkMin = result.walkSeconds.map { max(1, Int(($0 / 60).rounded())) }
         let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? "?", "to": b.depPlatform ?? "?"]) : nil
+            ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
         let caption = [
             tracks,
             walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },

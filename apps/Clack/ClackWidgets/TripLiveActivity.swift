@@ -339,7 +339,7 @@ private struct CompactLeading: View {
             case "boarding": Text(card.l10n.t("tripCard.board")).clack(.captionUpper).fontWeight(.heavy).foregroundStyle(Ink.accentInk)
             case "enRoute": ProgressRing(progress: card.state.progress ?? 0, colour: card.line)
             case "getOffSoon": Glyph(name: "map-pin")
-            case "changing": Text(verbatim: "→ \(card.state.changePlatform ?? "–")").clack(.islandValue).foregroundStyle(Ink.accentInk)
+            case "changing": Text(verbatim: "→ \(card.state.changePlatform ?? Format.unknown)").clack(.islandValue).foregroundStyle(Ink.accentInk)
             case "arrived": Glyph(name: "check", colour: Ink.onTimeInk)
             case "cancelled": Glyph(name: "x", colour: Ink.veryLateInk)
             default: Glyph(name: "train-front", colour: card.line)
@@ -357,7 +357,7 @@ private struct CompactTrailing: View {
         } else {
             switch card.phase {
             case "leaveSoon", "boarding":
-                Text(card.state.platform.map { card.phase == "boarding" ? $0 : card.platformShort($0) } ?? "–")
+                Text(card.state.platform.map { card.phase == "boarding" ? $0 : card.platformShort($0) } ?? Format.unknown)
                     .clack(.islandValue).foregroundStyle(Ink.accentInk)
             case "approaching": TimeText(text: card.time(card.state.nextStopAt ?? card.state.departAt, tz: card.fromTz), card: card)
             case "enRoute": TimeText(text: card.arrives, card: card)
@@ -382,7 +382,7 @@ private struct MinimalGlyph: View {
         case "getOffSoon":
             Text(verbatim: "\(minutesLeft(card.state.nextStopAt ?? card.state.arriveAt) ?? 0)").clack(.islandValue).foregroundStyle(Ink.accentInk)
         case "changing", "leaveSoon", "boarding":
-            Text((card.phase == "changing" ? card.state.changePlatform : card.state.platform) ?? "–")
+            Text((card.phase == "changing" ? card.state.changePlatform : card.state.platform) ?? Format.unknown)
                 .clack(.islandValue).foregroundStyle(Ink.accentInk)
         default:
             Glyph(name: card.platformChanged ? "triangle-alert" : "train-front", colour: card.platformChanged ? Ink.accentInk : card.line)
@@ -397,7 +397,7 @@ private struct KeyValue: View {
         switch card.phase {
         case "changing":
             VStack(alignment: .trailing, spacing: 0) {
-                Text(card.platform(card.state.changePlatform ?? "–")).clack(.delay).foregroundStyle(Ink.accentInk)
+                Text(card.platform(card.state.changePlatform ?? Format.unknown)).clack(.delay).foregroundStyle(Ink.accentInk)
                 if let at = card.state.changeAt { Countdown(to: at, colour: Ink.text2) }
             }
         case "getOffSoon":

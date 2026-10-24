@@ -199,7 +199,6 @@ struct PassportScreen: View {
 
             groupTitle(l10n.t("passport.records"))
             Card {
-                Text(l10n.t("passport.records")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 records(data)
             }
 
