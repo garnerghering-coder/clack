@@ -43,6 +43,10 @@ public struct ProgressBar: View {
                     RoundedRectangle(cornerRadius: Radius.bar, style: .continuous).fill(color.opacity(0.35)).frame(width: w * Self.clamp(previous))
                 }
                 RoundedRectangle(cornerRadius: Radius.bar, style: .continuous).fill(color).frame(width: w * drawn)
+            }
+            .frame(height: Self.height)
+            // The marker rides on the bar without making it taller.
+            .overlay(alignment: .leading) {
                 if let marker {
                     Circle()
                         .fill(marker == .hollow ? Ink.bg : color)
@@ -51,7 +55,6 @@ public struct ProgressBar: View {
                         .offset(x: w * drawn - Self.markerSize / 2)
                 }
             }
-            .frame(height: Self.height)
             .frame(maxHeight: .infinity, alignment: .center)
         }
         .frame(height: marker == nil ? Self.height : Self.markerSize)
