@@ -200,6 +200,8 @@ struct RootView: View {
         let lastTab = Landing.readLastTab()
         do {
             let legs: [Leg] = try await app.client.get(["legs"])
+            // A new phone stays on Trips for the welcome.
+            if FirstRun.holdsLanding(seen: UserDefaults.standard.bool(forKey: FirstRun.welcomeSeenKey), legs: legs.count) { return }
             let tab = Landing.resolve(
                 legs: legs.map(Landing.LegTimes.init), now: Date.now.timeIntervalSince1970 * 1000, lastTab: lastTab
             )

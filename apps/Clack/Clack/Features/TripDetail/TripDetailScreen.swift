@@ -271,7 +271,7 @@ struct TripDetailScreen: View {
         case .stops: Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
         case .connections: JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId)
         case .directions: EmptyView()
-        case .alertsPrompt: EmptyView()
+        case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
         case .actions: actions(detail.leg)
         }

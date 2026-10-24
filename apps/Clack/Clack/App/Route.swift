@@ -48,6 +48,11 @@ final class Router {
         if let raw = value("-tripsTab"), let tab = TripsTab(rawValue: raw) { tripsTab = tab }
         // `-add` opens the Add a train sheet; `-addTrip <key>|<date>|<from>|<to>` at its confirm step.
         if args.contains("-add") { addRequest = AddRequest(link: nil) }
+        // `-firstRun` shows the welcome and the alerts question again, as on a new phone.
+        if args.contains("-firstRun") {
+            UserDefaults.standard.removeObject(forKey: FirstRun.welcomeSeenKey)
+            UserDefaults.standard.removeObject(forKey: FirstRun.alertsAskedKey)
+        }
         // `-sheetTrain <number>|<date>[|<key>]` opens that train in place, as a board row on Trips does.
         if let raw = value("-sheetTrain") {
             let parts = raw.split(separator: "|").map(String.init)

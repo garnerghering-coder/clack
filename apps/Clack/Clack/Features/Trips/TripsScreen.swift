@@ -79,12 +79,24 @@ struct TripsScreen: View {
     @Environment(L10n.self) private var l10n
     @Environment(Router.self) private var router
     @State private var model = TripsModel()
+    /// The welcome has been shown (`FirstRun`).
+    @AppStorage(FirstRun.welcomeSeenKey) private var welcomeSeen = false
 
     var body: some View {
         // The partition depends on the clock; once a minute is as often as anything on this screen changes class.
         TimelineView(.periodic(from: .now, by: 60)) { context in
             content(now: context.date.timeIntervalSince1970 * 1000)
         }
+        // The first time, over the empty list: what Clack does and how to start.
+        .overlay {
+            if FirstRun.showsWelcome(seen: welcomeSeen, legs: model.legs?.count) {
+                WelcomeView { welcomeSeen = true }
+                    .onDisappear { welcomeSeen = true }
+                    .transition(.opacity)
+            }
+        }
+        // Trips already there (an update, or a new phone with the same id): no welcome, now or later.
+        .onChange(of: model.legs?.isEmpty) { _, empty in if empty == false { welcomeSeen = true } }
         .task { await model.load(app.client) }
         .task(id: app.isOffline) { await model.loadDetails(app.client, now: Date.now.timeIntervalSince1970 * 1000) }
         .task { await model.loadFollows(app.client) }
