@@ -729,6 +729,35 @@ Also, for native map libraries (added 2026-10-23, `routes/map.ts`, test `mapTile
   gpsTicks, enRouteTicks, failedTicks, rejectedFixes: number } }`. Prediction keys are `"60min"`, `"30min"`,
   `"15min"`, `"5min"` (`HORIZONS_MIN`, `audit.ts:14`). Last 7 days, **all users**.
 
+### 2.13 Push: phones, Live Activities, widgets (`routes/push.ts`, `push/*`)
+
+Every token is a hex string, 32 to 400 characters (`/^[0-9a-f]{32,400}$/i`); the server lowercases it. `environment` is
+`"sandbox"` (Debug builds) or `"production"` (TestFlight, App Store).
+
+#### `PUT /api/devices`
+- Body: `{ token: string, environment: string, startToken?: string | null, widgetToken?: string | null }`.
+  - `token`: the phone's alert address (`didRegisterForRemoteNotificationsWithDeviceToken`). It is the row's key: the
+    same token again refreshes it, and moves it to the id in `X-Clack-User` if that changed.
+  - `startToken`: the Live Activity push-to-start address (`Activity<TripActivityAttributes>.pushToStartTokenUpdates`,
+    iOS 17.2+).
+  - `widgetToken`: WidgetKit's push address for this phone's widgets (`WidgetPushHandler.pushTokenDidChange`, iOS 26+).
+  - For `startToken` and `widgetToken`, **a missing key leaves the stored value as it is; `null` clears it.** Swift's
+    synthesized `Encodable` leaves out a `nil` optional, so a launch that doesn't know the address yet keeps the old
+    one. To clear one, encode an explicit `null` (`encodeNil(forKey:)`).
+- 204. 400 `{ error }` for a bad `token`/`environment`, or a `startToken`/`widgetToken` that isn't a hex string.
+
+#### `DELETE /api/devices/:token`
+- Forgets the phone (alerts switched off). Only your own. 204.
+
+#### `PUT /api/live-activities`
+- Body: `{ token: string, legId: string, environment: string, deviceToken?: string }`. `token` is the activity's
+  update address (`activity.pushTokenUpdates`); `legId` one of your legs (404 otherwise). `deviceToken` (optional, the
+  phone's own `token` from `PUT /api/devices`) ties the card to its phone, so when Apple says the phone is gone its cards
+  are forgotten too; leaving it out keeps the stored one. 204. 400 for bad tokens.
+
+#### `DELETE /api/live-activities/:token`
+- The card ended or was dismissed on the phone. Only your own. 204.
+
 ---
 
 ## 3. Streaming
