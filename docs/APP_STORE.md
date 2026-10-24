@@ -40,6 +40,7 @@ Each item says who does it and where:
 | **App icon** (1024 px, no transparency) and launch screen from the Clack logo. | 2.3 |
 | **Each phone sees only its own trips live.** Live trip updates go only to the phone whose trip it is, and "your train" on the live map is worked out per phone. Before, every listener got every tracked trip's updates. | 5.1.1 |
 | **A shared server refuses requests without a phone id** (`CLACK_REQUIRE_USER=1`, docs/SERVER.md), so the laptop user's trips can't be read through it. | 5.1.1 |
+| **Rate limits** on the server: 300 requests a minute per phone id, 120 per address without an id, a larger separate allowance for map tiles; live streams exempt. The server's inside views (import status, audit, live status, health details) need an admin token. | 1.6 |
 | **Portrait iPhone app.** iPads run it in iPhone mode, which Apple allows. | 2.4.1 |
 | **The server is online over https** and the app points at it: `Config.apiBase` is `https://clack-garner.duckdns.org` (a Hetzner VM; docs/SERVER.md). No placeholder address is left. | 2.1(a), 2.5.5 |
 | **Bundle id** `com.garnerghering.Clack` (the widgets extension is `com.garnerghering.Clack.ClackWidgets`). | n/a |
@@ -51,7 +52,6 @@ Each item says who does it and where:
 
 | What | Guideline | Who |
 |---|---|---|
-| **Rate limits** on the server: ids are anonymous, so add basic per-id and per-IP request limits before the app is public. | 1.6 | Code |
 | **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket and Entur, and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
 
 ## App Store Connect answers, prepared

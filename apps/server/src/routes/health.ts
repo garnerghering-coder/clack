@@ -10,8 +10,11 @@ import { summarize, type LegAudit } from '../audit/audit.js';
 export const healthRoutes =
   (db: Db): FastifyPluginAsync =>
   async (app) => {
-    app.get('/health', async () => {
+    app.get('/health', async (req) => {
       db.run(sql`select 1`);
+      // Public: just that it's up, and the commit (the app shows it in Settings). The inside (memory, feeds, GPS
+      // counters) is for whoever has the admin token.
+      if (!req.isAdmin) return { ok: true, version: SERVER_VERSION };
       const mem = process.memoryUsage();
       return {
         ok: true,

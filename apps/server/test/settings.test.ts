@@ -27,7 +27,11 @@ describe('settings API', () => {
   });
 
   it('health check works', async () => {
-    const res = await app.inject({ method: 'GET', url: '/api/health' });
+    // The public answer is just ok; the inside needs the admin token (adminAuth.test.ts covers the refusals).
+    expect((await app.inject({ method: 'GET', url: '/api/health' })).json()).toMatchObject({ ok: true });
+    process.env.CLACK_ADMIN_TOKEN = 'test-admin-token';
+    const res = await app.inject({ method: 'GET', url: '/api/health', headers: { 'x-clack-admin': 'test-admin-token' } });
+    delete process.env.CLACK_ADMIN_TOKEN;
     expect(res.json()).toMatchObject({ ok: true, feeds: {}, gps: { accepted: 0, rejected: 0, recent: [] } });
   });
 });

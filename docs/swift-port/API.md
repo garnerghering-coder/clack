@@ -47,6 +47,40 @@ null. "ms" = UTC epoch milliseconds (JSON number). "ISO" = an ISO-8601 UTC strin
 
 - None. The server sends no CORS headers: the only client is the native app, and a `URLSession` client sends no `Origin`.
 
+### Health
+
+- `GET /api/health` (`routes/health.ts`), no identity needed, public, never rate-limited. Response without the admin
+  header: `{ ok: true, version: string }` (the commit the server runs; Settings shows it).
+- With the admin header (see "Admin routes") it also returns:
+  - `uptimeS: number` (seconds)
+  - `memoryMb: { rss: number, heap: number }` (MB, rounded)
+  - `feeds: { [feed: "trafikverket" | "entur"]: { okAt: number | null /*ms*/, failAt: number | null /*ms*/,
+    failures: number, lastError: string | null, status: "ok" | "degraded" | "down" | "unknown" } }`. A feed key only
+    appears once that feed has been called (`lib/health.ts:34`).
+  - `gps: { accepted: number, rejected: number, recent: { key: string, at: string, reason: "area" | "jump",
+    meters?: number, seconds?: number, kmh?: number }[] }` (`live/sanitize.ts:54`; `at` is a string, format not
+    checked further: unclear).
+- The Swift app reads only `version`. Use it for a "server reachable" check.
+
+### Rate limits
+
+Per minute, in memory (`plugins/rateLimit.ts`; override with `CLACK_RATE_LIMIT`, `CLACK_RATE_LIMIT_ANON`,
+`CLACK_RATE_LIMIT_MAP`):
+
+- 300 requests per phone id (header or `?u=`, valid v4 only).
+- 120 per client address for requests without a valid id.
+- 1500 for map tiles, glyphs and operator logos (`/api/map/*`, `/api/operators/:id/logo`), counted separately.
+- Exempt: the SSE streams (`/api/live/stream`, `/api/live/trains/stream`, `/api/stations/:id/board/stream`) and
+  `/api/health`.
+- Over the limit: status **429**, body `{ "statusCode": 429, "error": "too many requests, try again in N seconds" }`,
+  plus `Retry-After` and `X-RateLimit-*` headers. A client should wait `Retry-After` seconds, not retry in a loop.
+
+### Admin routes
+
+`/api/import/status`, `/api/audit`, `/api/live/status` and the extra `/api/health` fields need the header
+`X-Clack-Admin: <CLACK_ADMIN_TOKEN>`. Without the header, with a wrong one, or when the server has no token set, they
+answer 404 like an unknown path. The app never calls them.
+
 ---
 
 ## 2. Endpoints
