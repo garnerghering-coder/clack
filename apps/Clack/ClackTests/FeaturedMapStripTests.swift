@@ -7,6 +7,7 @@ import ClackCore
 import Testing
 @testable import Clack
 
+@MainActor
 struct FeaturedMapStripTests {
     private let route = FeaturedMapStrip.Route(route: [LatLon(59, 18), LatLon(58, 16)], stops: [])
 
