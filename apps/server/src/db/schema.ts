@@ -193,6 +193,9 @@ export const legs = sqliteTable(
     /** Trafikverket's on-board facts for the departure where you boarded (catering, day-of notices). */
     onboard: text('onboard', { mode: 'json' }).$type<OnboardFacts>(),
     notes: text('notes'),
+    /** Coach (vagn) and seat the owner sat in, as they wrote them ("5", "12A"); null when not given. */
+    coach: text('coach'),
+    seat: text('seat'),
     /**
      * Did you ride it (product brief §8)? pending (not over yet, or waiting for reports) | auto (Trafikverket
      * reported it leaving where you got on and arriving where you got off) | confirmed (you said so, or logged it

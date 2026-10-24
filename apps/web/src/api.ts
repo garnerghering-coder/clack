@@ -212,6 +212,9 @@ export interface Leg {
   origin: StationRef | null;
   destination: StationRef | null;
   notes: string | null;
+  /** Where the owner sat, as they wrote it; null when not given. */
+  coach: string | null;
+  seat: string | null;
   journeyId: string | null;
   /** The timetable trip it was saved from (null for trips added by hand). */
   timetableTripKey?: string | null;
