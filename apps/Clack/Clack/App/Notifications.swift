@@ -23,14 +23,8 @@ final class NotificationManager: NSObject {
     private(set) var token: String?
     /// The Live Activity push-to-start address (iOS 17.2+), if any.
     private(set) var startToken: String?
-    /// A trip an alert pointed at, for the root view to open.
-    var openRequest: OpenRequest?
-
-    struct OpenRequest: Equatable {
-        let legId: String
-        let journeyId: String?
-        let kind: String
-    }
+    /// Where a tapped alert leads, for the root view to open (it may be set before the root view is up, on a cold start).
+    var openRequest: DeepLink?
 
     /// Debug builds talk to Apple's sandbox, TestFlight and App Store builds to production.
     static var environment: String {
@@ -95,11 +89,11 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         [.banner, .sound, .list]
     }
 
-    /// Tapping an alert opens the trip it is about (a change opens the whole journey).
+    /// Tapping an alert opens the trip it is about (a change opens the whole journey, an arrival its celebration).
     nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
         guard let legId = info["legId"] as? String else { return }
-        let request = OpenRequest(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "")
+        let request = DeepLink.forAlert(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "")
         await MainActor.run { NotificationManager.shared.openRequest = request }
     }
 }

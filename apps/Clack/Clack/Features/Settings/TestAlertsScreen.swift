@@ -206,7 +206,7 @@ struct TestAlertsScreen: View {
                             arrivalNote = "You have no trips yet."
                             return
                         }
-                        app.arrivals.preview(ArrivalMoment(legId: last.id, journeyId: last.journeyId))
+                        app.arrivals.show(ArrivalMoment(legId: last.id, journeyId: last.journeyId))
                         arrivalNote = nil
                     }
                 }

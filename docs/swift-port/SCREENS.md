@@ -130,6 +130,12 @@ equivalent internal router with these parameters:
 Future push notifications / Live Activities / widgets (docs/IOS.md §"Widgets, Live Activities and notifications")
 are **not built**; there are no notification handlers in the web code.
 
+**Native app.** The Swift app has the `clack://` scheme. The forms it opens (`trip/<legId>`, `journey/<id>`,
+`board/<stationId>?arrivals=1`, `explore?train=&date=&key=`, `tab/<trips|explore|passport>`, `trips`, `explore`,
+`passport`, `add?trip=&date=&from=&to=&replace=`, `arrival/<legId>?journey=<id>`) are listed and parsed in
+`ClackCore/Logic/DeepLink.swift`. `Router.open` (`App/Route.swift`) is the one way in, for links, alert taps and the
+`-url` launch argument.
+
 ---
 
 ## 2. Screens

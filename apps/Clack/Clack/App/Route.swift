@@ -9,16 +9,6 @@ import Observation
 import ClackDesign
 import SwiftUI
 
-/// Opens Add a train straight at the confirm step for a timetable trip (`/add?trip=K&date=D&from=&to=&replace=`).
-nonisolated struct AddTrainLink: Hashable, Sendable {
-    var tripKey: String
-    var date: String
-    var fromSeq: Int?
-    var toSeq: Int?
-    /// A leg to mark "not taken" once this one is saved (replacing a cancelled train).
-    var replaceLegId: String?
-}
-
 /// Where a tap goes: the in-app equivalents of the web's URLs (docs/swift-port/SCREENS.md §1.5).
 nonisolated enum AppRoute: Hashable, Sendable {
     case trip(String)
@@ -43,6 +33,8 @@ final class Router {
     var tab: PrimaryTab = .trips
     /// Which part of Trips shows (Passport links to Past).
     var tripsTab: TripsTab = .upcoming
+    /// Set by any touch or link before the landing rule has decided: it then leaves the tab alone.
+    var touched = false
 
     init() {
         #if DEBUG
@@ -71,6 +63,8 @@ final class Router {
         }
         // `-open trip:<id>` or `-open journey:<id>` pushes that screen on the Trips tab.
         if let raw = value("-open") {
+            // Asked for a screen: the landing rule leaves it in front, as it does for a link.
+            touched = true
             if raw == "settings" { tripsPath = [.settings] }
             if raw == "stations" { tripsPath = [.stations] }
             if raw == "about" { tripsPath = [.settings, .about] }
@@ -149,5 +143,40 @@ final class Router {
     func openTrain(number: String, date: String, key: String? = nil) {
         pendingTrain = PendingTrain(number: number, date: date, key: key)
         tab = .explore
+    }
+
+    /// The one way in from outside the app: `clack://` links (widgets, the trip card), alert taps and the `-url` launch
+    /// argument. It closes the Add sheet, shows the link's tab with only the linked screen on it, and stops the landing
+    /// rule from moving you somewhere else afterwards.
+    func open(_ link: DeepLink, app: AppModel) {
+        touched = true
+        app.hasLanded = true
+        addRequest = nil
+        // The arrival screen covers everything; another link means you want to see that instead.
+        if case .arrival = link {} else if app.arrivals.pending != nil { app.arrivals.dismiss() }
+        switch link {
+        case .trip(let id): show(.trips, [.trip(id)])
+        case .journey(let id): show(.trips, [.journey(id)])
+        case .board(let id, let arrivals): show(.explore, [.board(stationId: id, arrivals: arrivals)])
+        case .train(let number, let date, let key):
+            show(.explore, [])
+            pendingTrain = PendingTrain(number: number, date: date, key: key)
+        case .tab(let tab): show(tab, [])
+        case .add(let link): addRequest = AddRequest(link: link)
+        case .arrival(let legId, let journeyId):
+            let client = app.client
+            let arrivals = app.arrivals
+            Task {
+                // A link may carry only the leg: its journey (if it has one) is on the leg itself.
+                var journey = journeyId
+                if journey == nil { journey = (try? await client.leg(legId))?.leg.journeyId }
+                arrivals.show(ArrivalMoment(legId: legId, journeyId: journey))
+            }
+        }
+    }
+
+    private func show(_ tab: PrimaryTab, _ path: [AppRoute]) {
+        setPath(path, for: tab)
+        self.tab = tab
     }
 }

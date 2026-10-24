@@ -13,7 +13,6 @@ struct RootView: View {
     @State private var router = Router()
     @State private var splashMinDone = false
     @State private var splashGone = false
-    @State private var touched = false
     @Environment(\.scenePhase) private var scenePhase
 
     /// The splash goes once the settings have loaded (or failed to) and the tiles have had time to flip in.
@@ -72,7 +71,7 @@ struct RootView: View {
                 .environment(router)
                 .preferredColorScheme(app.colorScheme)
         }
-        .onOpenURL { url in openTicket(url) }
+        .onOpenURL { url in openURL(url) }
         .preferredColorScheme(app.colorScheme)
         // The end of a journey: held back until the splash is gone and the Add sheet is closed.
         .fullScreenCover(item: Binding(
@@ -91,21 +90,27 @@ struct RootView: View {
             await app.notifications.sync(app.client, enabled: app.settings.notify)
             LiveActivityManager.shared.resume(client: app.client)
         }
-        // Tapping an alert opens its trip (a change opens the whole journey).
-        .onChange(of: app.notifications.openRequest) { _, request in
-            guard let request else { return }
-            app.notifications.openRequest = nil
-            router.addRequest = nil
-            router.tab = .trips
-            router.push(request.kind == "change" ? (request.journeyId.map(AppRoute.journey) ?? .trip(request.legId)) : .trip(request.legId))
+        // Tapping an alert opens what it is about. On a cold start the tap arrives before this view does, so it is
+        // read when the view appears too.
+        .onAppear {
+            openAlert()
+            #if DEBUG
+            // `-url <clack://...>` opens a link as if it had been tapped.
+            let args = CommandLine.arguments
+            if let at = args.firstIndex(of: "-url"), at + 1 < args.count, let url = URL(string: args[at + 1]),
+               let link = DeepLink.parse(url) {
+                router.open(link, app: app)
+            }
+            #endif
         }
+        .onChange(of: app.notifications.openRequest) { _, _ in openAlert() }
         // Watches for a journey ending while the app is in front.
         .task(id: scenePhase) {
             guard scenePhase == .active else { return }
             await app.arrivals.run(app)
         }
         // Any touch before the landing rule has decided cancels it.
-        .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in touched = true })
+        .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in router.touched = true })
         .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }
         .task {
             try? await Task.sleep(for: .milliseconds(900))
@@ -140,17 +145,24 @@ struct RootView: View {
         #endif
     }
 
-    /// A file shared to Clack ("Open in Clack"): copied at once, since the system's copy may go away, then read.
-    private func openTicket(_ url: URL) {
-        // A widget tap: clack://trip/<id> or clack://journey/<id>.
-        if url.scheme == "clack" {
-            let id = url.lastPathComponent
-            guard !id.isEmpty else { return }
-            router.addRequest = nil
-            router.tab = .trips
-            router.push(url.host == "journey" ? .journey(id) : .trip(id))
+    private func openAlert() {
+        guard let link = app.notifications.openRequest else { return }
+        app.notifications.openRequest = nil
+        router.open(link, app: app)
+    }
+
+    /// A `clack://` link (a widget, the trip card) opens its screen; one the app doesn't know opens nothing. Anything
+    /// else is a file shared to Clack.
+    private func openURL(_ url: URL) {
+        if url.scheme?.lowercased() == DeepLink.scheme {
+            if let link = DeepLink.parse(url) { router.open(link, app: app) }
             return
         }
+        openTicket(url)
+    }
+
+    /// A file shared to Clack ("Open in Clack"): copied at once, since the system's copy may go away, then read.
+    private func openTicket(_ url: URL) {
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
         let copy = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString)-\(url.lastPathComponent)")
@@ -183,9 +195,9 @@ struct RootView: View {
             let tab = Landing.resolve(
                 legs: legs.map(Landing.LegTimes.init), now: Date.now.timeIntervalSince1970 * 1000, lastTab: lastTab
             )
-            if !touched, tab != .trips, router.tab == .trips { router.tab = tab }
+            if !router.touched, tab != .trips, router.tab == .trips { router.tab = tab }
         } catch {
-            if !touched, let lastTab, lastTab != .trips, router.tab == .trips { router.tab = lastTab }
+            if !router.touched, let lastTab, lastTab != .trips, router.tab == .trips { router.tab = lastTab }
         }
     }
 }
