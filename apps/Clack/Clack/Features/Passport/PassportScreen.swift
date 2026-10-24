@@ -375,11 +375,15 @@ private struct MilestonesCard: View {
     let data: Passport
     @State private var all = false
     @State private var shown = false
+    /// Room for a two-line title under every medal (two caption lines, 18 pt each), so a medal whose title wraps sits
+    /// at the same height as its neighbours (owner, 2026-10-24).
+    @ScaledMetric(relativeTo: .footnote) private var titleHeight: CGFloat = 36
 
     var body: some View {
         let achieved = data.milestones.achieved
         let next = data.milestones.next
-        let columns = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+        // Top-aligned cells: the medals line up along each row whatever the length of the titles under them.
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 8, alignment: .top), count: 3)
         Card {
             Text(l10n.t("passport.milestones")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if !achieved.isEmpty {
@@ -388,7 +392,7 @@ private struct MilestonesCard: View {
                         let label = l10n.milestoneLabel(milestone, language: app.settings.language)
                         let tile = VStack(spacing: 2) {
                             Medal(m: milestone)
-                            Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
+                            title(label)
                             Text(milestone.at.map { Format.month($0.ms, tz: "Europe/Stockholm", language: app.settings.language) } ?? "").clack(.caption).foregroundStyle(Ink.text2)
                         }
                         .scaleEffect(shown || reduceMotion ? 1 : 0.6).opacity(shown || reduceMotion ? 1 : 0)
@@ -408,7 +412,7 @@ private struct MilestonesCard: View {
                         let formatter = NumberFormatter()
                         VStack(spacing: 2) {
                             Medal(m: milestone, locked: true)
-                            Text(l10n.milestoneLabel(milestone, language: app.settings.language)).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
+                            title(l10n.milestoneLabel(milestone, language: app.settings.language))
                             Text(l10n.t("passport.progressOf", ["value": String(value), "target": String(Int(milestone.target))])).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                         }
                         .accessibilityElement(children: .ignore)
@@ -420,5 +424,12 @@ private struct MilestonesCard: View {
             Text(l10n.t("passport.milestonesNote")).clack(.caption).foregroundStyle(Ink.text2)
         }
         .onAppear { shown = true }
+    }
+
+    /// A medal's title: top-aligned in a box two lines tall, so the line under it starts at the same height too.
+    private func title(_ text: String) -> some View {
+        Text(text).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, minHeight: titleHeight, alignment: .top)
     }
 }

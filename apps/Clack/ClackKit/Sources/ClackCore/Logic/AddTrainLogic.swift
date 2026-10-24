@@ -74,6 +74,16 @@ public nonisolated enum AddTrainLogic {
         }
     }
 
+    /// Which end the stop picker starts on. Where you got on comes first, then where you got off (owner, 2026-10-24: a
+    /// train opened from Explore asked for the destination first). Only when the person already named where they got
+    /// on (a route search, or a link that carries the boarding stop) does it start at where they got off.
+    public static func firstEnd(originChosen: Bool) -> End { originChosen ? .to : .from }
+
+    /// The picker's first state for a result: its two stops, and the end to choose first (`firstEnd`).
+    public static func initialPick(_ result: TripResult, originChosen: Bool) -> Picked {
+        Picked(fromSeq: result.from.seq, toSeq: result.to.seq, picking: firstEnd(originChosen: originChosen))
+    }
+
     /// Tapping a stop in the picker. Picking where you got on: it must be before where you got off, and a train can't
     /// be boarded at every stop; then the next tap picks where you got off. Picking where you got off: after where
     /// you got on, and not a stop that doesn't let passengers off. Returns nil when the tap does nothing.

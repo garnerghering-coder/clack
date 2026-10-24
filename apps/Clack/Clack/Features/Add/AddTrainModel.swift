@@ -30,6 +30,9 @@ final class AddTrainModel {
     private(set) var retry = 0
     var manual = false
     var picked: TripResult?
+    /// Where the person got on was already chosen (a route search or a link with the boarding stop): the stop picker
+    /// then starts at where they got off (`AddTrainLogic.firstEnd`).
+    var originChosen = false
     var pickedConnection: TimetableConnection?
     var saved: LegDetail?
     /// Opened with a trip already chosen (from a board or a link): going back leaves instead of searching.
@@ -57,10 +60,17 @@ final class AddTrainModel {
         do {
             let trip = try await client.timetableTrip(link.tripKey, date: link.date)
             date = link.date
+            originChosen = link.fromSeq != nil
             picked = AddTrainLogic.result(from: trip, fromSeq: link.fromSeq, toSeq: link.toSeq)
         } catch {
             searchFailed = true
         }
+    }
+
+    /// A search result was chosen: the picker starts at where you got on unless the search named it.
+    func pick(_ result: TripResult) {
+        originChosen = interpretation?.from != nil
+        picked = result
     }
 
     /// Runs the search after a short pause; a newer search (or the sheet closing) cancels this one.
@@ -108,6 +118,7 @@ final class AddTrainModel {
         saved = nil
         manual = false
         picked = nil
+        originChosen = false
         pickedConnection = nil
         query = ""
     }

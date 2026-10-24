@@ -101,6 +101,7 @@ struct RootView: View {
         // Tapping an alert opens what it is about. On a cold start the tap arrives before this view does, so it is
         // read when the view appears too.
         .onAppear {
+            LaunchTiming.mark("root-appear")
             openAlert()
             #if DEBUG
             // `-url <clack://...>` opens a link as if it had been tapped.
@@ -136,9 +137,11 @@ struct RootView: View {
         }
         .onChange(of: hideSplash) { _, hide in
             guard hide else { return }
+            LaunchTiming.mark("splash-fade-start")
             Task {
                 try? await Task.sleep(for: .milliseconds(400))
                 splashGone = true
+                LaunchTiming.mark("splash-gone")
             }
         }
         .task { await land() }
