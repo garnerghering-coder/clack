@@ -44,16 +44,16 @@ final class TestAlertsModel {
         swedish = language == .sv
         let route = "\(from) → \(to)"
         return [
-            Sample(id: "reminder", title: route, body: t("Leaves \(clock(60)) from platform 5.", "Avgår \(clock(60)) från spår 5.")),
+            Sample(id: "reminder", title: route, body: t("Leaves \(clock(60)) from Platform 5.", "Avgår \(clock(60)) från spår 5.")),
             Sample(id: "reminderNone", title: route, body: t("Leaves \(clock(60)). Platform not announced yet.", "Avgår \(clock(60)). Spåret är inte meddelat än.")),
-            Sample(id: "platformSet", title: route, body: t("Leaves from platform 5.", "Avgår från spår 5.")),
-            Sample(id: "platformChanged", title: route, body: t("Platform changed: now platform 7, was 5.", "Spårändring: nu spår 7, var 5.")),
-            Sample(id: "platformArr", title: route, body: t("Arrival platform changed at \(to): now platform 3, was 2.", "Spårändring vid ankomst i \(to): nu spår 3, var 2.")),
+            Sample(id: "platformSet", title: route, body: t("Leaves from Platform 5.", "Avgår från spår 5.")),
+            Sample(id: "platformChanged", title: route, body: t("Platform changed to 7 (was 5).", "Spårändring: nu spår 7, var 5.")),
+            Sample(id: "platformArr", title: route, body: t("Now arriving at \(to) on Platform 3 (was 2).", "Spårändring vid ankomst i \(to): nu spår 3, var 2.")),
             Sample(id: "delay", title: route, body: t("12 min late, now arriving \(clock(70)).", "12 min försenat, ankommer nu \(clock(70)).")),
             Sample(id: "cancelled", title: t("Cancelled: \(route)", "Inställt: \(route)"), body: t("This train is cancelled. Check the operator for other trains or replacement buses.", "Tåget är inställt. Kolla med operatören efter andra tåg eller ersättningsbussar."), timeSensitive: true),
             Sample(id: "shortTurned", title: route, body: t("Some stops on this train are cancelled. Open Clack for the details.", "Några stopp på tåget är inställda. Öppna Clack för detaljer."), timeSensitive: true),
-            Sample(id: "changeEasy", title: t("Change at \(from)", "Byte i \(from)"), body: t("Arrive platform 3, leave platform 5. 11 min to spare.", "Kom på spår 3, fortsätt från spår 5. 11 min till godo.")),
-            Sample(id: "changeTight", title: t("Tight change at \(from)", "Snävt byte i \(from)"), body: t("Arrive platform 3, leave platform 5. 4 min to spare.", "Kom på spår 3, fortsätt från spår 5. 4 min till godo.")),
+            Sample(id: "changeEasy", title: t("Change at \(from)", "Byte i \(from)"), body: t("Arrive on Platform 3, leave from Platform 5. 11 min to spare.", "Kom på spår 3, fortsätt från spår 5. 11 min till godo.")),
+            Sample(id: "changeTight", title: t("Tight change at \(from)", "Snävt byte i \(from)"), body: t("Arrive on Platform 3, leave from Platform 5. 4 min to spare.", "Kom på spår 3, fortsätt från spår 5. 4 min till godo.")),
             Sample(id: "changeMiss", title: t("You may miss your connection", "Du kan missa din anslutning"), body: t("You arrive 3 min after the train to Kolding leaves \(from).", "Du kommer 3 min efter att tåget mot Kolding avgått från \(from)."), timeSensitive: true),
             Sample(id: "changeCancelled", title: t("Change at \(from)", "Byte i \(from)"), body: t("Your next train to Kolding is cancelled.", "Ditt nästa tåg mot Kolding är inställt."), timeSensitive: true),
             Sample(id: "getOff", title: route, body: t("Get off at \(to) in about 9 min.", "Kliv av i \(to) om cirka 9 min.")),
@@ -84,7 +84,8 @@ final class TestAlertsModel {
         let content = UNMutableNotificationContent()
         content.title = sample.title
         content.body = sample.body
-        content.subtitle = swedish ? "SJ Snabbtåg 7205 · spår \(sample.id.hasPrefix("platform") ? "7" : "5")" : "SJ Snabbtåg 7205 · platform \(sample.id.hasPrefix("platform") ? "7" : "5")"
+        // As the server sends it: the operator and the train number (notifier.ts `subtitle`).
+        content.subtitle = "SJ 7205"
         content.sound = NotificationArt.sound
         content.threadIdentifier = "debug"
         content.interruptionLevel = sample.timeSensitive ? .timeSensitive : .active

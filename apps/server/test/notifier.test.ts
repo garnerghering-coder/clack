@@ -45,7 +45,7 @@ describe('notifier', () => {
     expect(sent).toHaveLength(1);
     expect(sent[0]!.path).toBe(`/3/device/${TOKEN}`);
     expect(sent[0]!.host).toBe('api.sandbox.push.apple.com');
-    expect(bodies(sent)[0]!.aps.alert).toEqual({ title: 'Nässjö C → Jönköping C', subtitle: '7205', body: 'Leaves 14:00 from platform 5.' });
+    expect(bodies(sent)[0]!.aps.alert).toEqual({ title: 'Nässjö C → Jönköping C', subtitle: '7205', body: 'Leaves 14:00 from Platform 5.' });
     expect((JSON.parse(sent[0]!.body) as { aps: { sound: string } }).aps.sound).toBe('sbb_jingle.wav');
   });
 
@@ -70,7 +70,7 @@ describe('notifier', () => {
     await notifier.onUpdate(update);
     const platform = bodies(sent).filter((b) => b.kind === 'platform');
     expect(platform).toHaveLength(1);
-    expect(platform[0]!.aps.alert!.body).toBe('Platform changed: now platform 7, was 5.');
+    expect(platform[0]!.aps.alert!.body).toBe('Platform changed to 7 (was 5).');
   });
 
   it('forgets a phone Apple says is gone', async () => {
@@ -241,7 +241,7 @@ describe('Live Activities', () => {
     await w.notifier.onUpdate({ legId: 'L1', live: null as unknown as LiveUpdate['live'], events: [] });
     u = w.activity().at(-1)!;
     expect(u.headers['apns-priority']).toBe('10');
-    expect(w.aps(u).alert).toEqual({ title: 'Nässjö C → Jönköping C', body: 'Platform changed: now platform 7, was 5.' });
+    expect(w.aps(u).alert).toEqual({ title: 'Nässjö C → Jönköping C', body: 'Platform changed to 7 (was 5).' });
     w.clock.now += 5 * MIN_;
     await w.notifier.tick();
     u = w.activity().at(-1)!;

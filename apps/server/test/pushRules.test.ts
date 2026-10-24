@@ -15,7 +15,7 @@ describe('departure reminder', () => {
   it('waits for the lead time, then says time and platform', () => {
     expect(reminder(facts(), prefs, T('12:31'), 'en')).toBeNull();
     const a = reminder(facts(), prefs, T('12:32'), 'en')!;
-    expect(a.body).toBe('Leaves 13:32 from platform 5.');
+    expect(a.body).toBe('Leaves 13:32 from Platform 5.');
     expect(a.title).toBe('Nässjö → Kolding');
   });
   it('says so when the platform is not announced, and never guesses', () => {
@@ -37,9 +37,9 @@ describe('departure reminder', () => {
 describe('alerts from events', () => {
   it('announces a new platform and a changed one, differently', () => {
     const set = fromEvents(facts(), [{ type: 'platform_set', payload: { which: 'departure', to: '5' } }], prefs, 'en');
-    expect(set[0]!.body).toBe('Leaves from platform 5.');
+    expect(set[0]!.body).toBe('Leaves from Platform 5.');
     const changed = fromEvents(facts(), [{ type: 'platform_changed', payload: { which: 'departure', from: '5', to: '7' } }], prefs, 'en');
-    expect(changed[0]!.body).toBe('Platform changed: now platform 7, was 5.');
+    expect(changed[0]!.body).toBe('Platform changed to 7 (was 5).');
     expect(changed[0]!.key).toBe('departure:7');
     const arr = fromEvents(facts(), [{ type: 'platform_changed', payload: { which: 'arrival', from: '2', to: '3' } }], prefs, 'en');
     expect(arr[0]!.body).toContain('Kolding');
@@ -94,10 +94,10 @@ describe('changes', () => {
     expect(change(a, b(), prefs, T('13:00'), 'en')).toBeNull();
     const c = change(a, b({ expDep: T('13:31') }), prefs, T('13:10'), 'en')!;
     expect(c.title).toBe('Change at Nässjö');
-    expect(c.body).toBe('Arrive platform 3, leave platform 5. 11 min to spare.');
+    expect(c.body).toBe('Arrive on Platform 3, leave from Platform 5. 11 min to spare.');
   });
   it('leaves out a platform it does not know', () => {
-    expect(change(a, b({ depPlatform: null, expDep: T('13:31') }), prefs, T('13:10'), 'en')!.body).toBe('Arrive platform 3. 11 min to spare.');
+    expect(change(a, b({ depPlatform: null, expDep: T('13:31') }), prefs, T('13:10'), 'en')!.body).toBe('Arrive on Platform 3. 11 min to spare.');
     expect(change({ ...a, arrPlatform: null }, b({ depPlatform: null, expDep: T('13:31') }), prefs, T('13:10'), 'en')!.body).toBe('11 min to spare.');
   });
   it('calls a tight change tight and a missed one a time-sensitive warning', () => {

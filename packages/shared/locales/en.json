@@ -703,10 +703,10 @@
     "detour": "+{{min}} min detour",
     "arriveChip": "Arrive · Platform {{track}} · {{time}}",
     "departChip": "Depart · Platform {{track}} · {{time}}",
-    "fromChip": "From platform {{track}}",
-    "toChip": "To platform {{track}}",
+    "fromChip": "From Platform {{track}}",
+    "toChip": "To Platform {{track}}",
     "step": {
-      "leave": "Leave platform {{track}}",
+      "leave": "Leave Platform {{track}}",
       "walk": "Walk about {{min}} min",
       "stairs_up": "Take the stairs up to {{level}}",
       "stairs_down": "Take the stairs down to {{level}}",
@@ -714,7 +714,7 @@
       "escalator_down": "Take the escalator down to {{level}}",
       "lift_up": "Take the lift up to {{level}}",
       "lift_down": "Take the lift down to {{level}}",
-      "arrive": "Arrive at platform {{track}}",
+      "arrive": "Arrive at Platform {{track}}",
       "start": "Start at {{place}}",
       "reach": "Arrive at {{place}}"
     },

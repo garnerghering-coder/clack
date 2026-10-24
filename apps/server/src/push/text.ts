@@ -1,5 +1,7 @@
 // What the alerts say, in the two languages the app has. The phone isn't running when an alert is made, so the words
-// are made here (the app's own strings live in its i18n files; these are only the notification texts).
+// are made here (the app's own strings live in its i18n files; these are only the notification texts). In English a
+// platform is a name, "Platform 5", capitalised as on the app's cards and boards; in Swedish "spår 5" stays lower case
+// inside a sentence, as Trafikverket writes it.
 import type { Language } from '@clack/shared';
 
 type Params = Record<string, string | number>;
@@ -7,23 +9,23 @@ type Params = Record<string, string | number>;
 const TEXT: Record<Language, Record<string, string>> = {
   en: {
     route: '{from} → {to}',
-    reminderPlatform: 'Leaves {time} from platform {platform}.',
+    reminderPlatform: 'Leaves {time} from Platform {platform}.',
     reminderNoPlatform: 'Leaves {time}. Platform not announced yet.',
-    reminderLate: 'Leaves {time} ({delay} min late) from platform {platform}.',
+    reminderLate: 'Leaves {time} ({delay} min late) from Platform {platform}.',
     reminderLateNoPlatform: 'Leaves {time} ({delay} min late). Platform not announced yet.',
-    platformDepSet: 'Leaves from platform {to}.',
-    platformDepChanged: 'Platform changed: now platform {to}, was {from}.',
-    platformArrSet: 'Arrives at {station} on platform {to}.',
-    platformArrChanged: 'Arrival platform changed at {station}: now platform {to}, was {from}.',
+    platformDepSet: 'Leaves from Platform {to}.',
+    platformDepChanged: 'Platform changed to {to} (was {from}).',
+    platformArrSet: 'Arrives at {station} on Platform {to}.',
+    platformArrChanged: 'Now arriving at {station} on Platform {to} (was {from}).',
     delayed: '{delay} min late, now arriving {time}.',
     cancelledTitle: 'Cancelled: {from} → {to}',
     cancelled: 'This train is cancelled. Check the operator for other trains or replacement buses.',
     shortTurned: 'Some stops on this train are cancelled. Open Clack for the details.',
     getOff: 'Get off at {station} in about {min} min.',
     changeTitle: 'Change at {station}',
-    changeBoth: 'Arrive platform {a}, leave platform {b}. {spare} min to spare.',
-    changeArrOnly: 'Arrive platform {a}. {spare} min to spare.',
-    changeDepOnly: 'Leave platform {b}. {spare} min to spare.',
+    changeBoth: 'Arrive on Platform {a}, leave from Platform {b}. {spare} min to spare.',
+    changeArrOnly: 'Arrive on Platform {a}. {spare} min to spare.',
+    changeDepOnly: 'Leave from Platform {b}. {spare} min to spare.',
     changeNone: '{spare} min to spare.',
     changeTight: 'Tight change at {station}',
     missTitle: 'You may miss your connection',

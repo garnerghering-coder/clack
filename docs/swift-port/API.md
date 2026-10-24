@@ -777,7 +777,7 @@ All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactiv
 - **Start** (iOS 17.2+, to the device's `startToken`), once per journey, from 30 min before the leg leaves:
   `{ aps: { timestamp, event: "start", "content-state", "stale-date": now+300, "attributes-type": "TripActivityAttributes",
   attributes: { legId, journeyId, train, from, to, fromTz, toTz, color }, "input-push-token": 1, alert: { title, body } } }`,
-  priority 10. The alert is never empty: "Nässjö C → Jönköping C" / "Leaves 13:20 from platform 5." (the reminder's
+  priority 10. The alert is never empty: "Nässjö C → Jönköping C" / "Leaves 13:20 from Platform 5." (the reminder's
   words), or for a train already running the operator and number / the route. No `sound`, so it doesn't ring on top of
   the reminder alert. No `dismissal-date`: Apple documents it only for ended activities. A start Apple doesn't take
   (network, 5xx) is tried again the next minute; a dead start token (410, `BadDeviceToken`, `Unregistered`,
