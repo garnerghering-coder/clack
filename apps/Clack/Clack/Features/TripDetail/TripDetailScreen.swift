@@ -39,7 +39,7 @@ struct TripDetailScreen: View {
             Group {
                 if missing {
                     Page {
-                        BackLink(label: l10n.t("nav.trips"))
+                        BackLink(label: router.backLabel(l10n))
                         Text(l10n.t("detail.notFound")).clack(.body).foregroundStyle(Ink.text2)
                     }
                 } else if let leg {
@@ -198,7 +198,7 @@ struct TripDetailScreen: View {
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
-            MapButton(icon: "arrow-left", label: l10n.t("nav.trips")) { dismiss() }
+            MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
                 .padding(.leading, 16).padding(.top, top + 12)
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))

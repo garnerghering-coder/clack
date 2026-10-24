@@ -237,7 +237,7 @@ private struct DisruptionBody: View {
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 HStack(spacing: 8) {
-                    Button(l10n.t("disruption.live")) { router.openTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
+                    Button(l10n.t("disruption.live")) { router.presentTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
                         .buttonStyle(.clack(small: true))
                     Button(l10n.t("disruption.useInstead")) {
                         router.openAdd(AddTrainLink(tripKey: r.key, date: r.serviceDate, fromSeq: r.from.seq, toSeq: r.to.seq, replaceLegId: leg.id))
@@ -264,7 +264,7 @@ private struct DisruptionBody: View {
                 TimePair(dep: .init(time: c.first.from.time, tz: c.first.from.tz), arr: .init(time: c.second.to.time, tz: c.second.to.tz), clock: app.settings.clock)
                     .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
-                Button(l10n.t("disruption.live")) { router.openTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
+                Button(l10n.t("disruption.live")) { router.presentTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
                     .buttonStyle(.clack(small: true)).padding(.top, 4)
             }
             Spacer(minLength: 0)

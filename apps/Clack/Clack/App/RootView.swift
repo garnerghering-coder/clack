@@ -64,6 +64,14 @@ struct RootView: View {
                 .environment(router)
                 .preferredColorScheme(app.colorScheme)
         }
+        // A train tapped anywhere but Explore opens here, over the screen you're on (`Router.presentTrain`).
+        .sheet(item: $router.trainRequest) { request in
+            TrainDetailSheet(request: request)
+                .environment(app)
+                .environment(app.l10n)
+                .environment(router)
+                .preferredColorScheme(app.colorScheme)
+        }
         .sheet(item: $router.ticketFile) { file in
             TicketImportSheet(file: file)
                 .environment(app)

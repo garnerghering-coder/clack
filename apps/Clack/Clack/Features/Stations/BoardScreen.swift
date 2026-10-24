@@ -35,7 +35,7 @@ struct BoardScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: l10n.t("stations.title"))
+            BackLink(label: router.backLabel(l10n))
             if missing {
                 Text(l10n.t("board.notFound")).clack(.body).foregroundStyle(Ink.text2)
             } else {
@@ -209,7 +209,7 @@ struct BoardScreen: View {
 
     /// A row opens the train in Explore, the same view as tapping it on the map (looking, not following).
     private func open(_ row: BoardRow) {
-        router.openTrain(number: row.trainNumber, date: row.trip?.serviceDate ?? Format.localDate(row.advertised, tz: "Europe/Stockholm"), key: row.trip?.key)
+        router.presentTrain(number: row.trainNumber, date: row.trip?.serviceDate ?? Format.localDate(row.advertised, tz: "Europe/Stockholm"), key: row.trip?.key)
     }
 }
 

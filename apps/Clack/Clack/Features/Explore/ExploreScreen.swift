@@ -31,7 +31,9 @@ struct ExploreScreen: View {
                     .id("\(scheme == .dark)-\(basemap)")
             }
             top
-            if model.searching && !model.query.trimmingCharacters(in: .whitespaces).isEmpty { results }
+            if model.searching {
+                if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
+            }
             if model.showFilters { filters }
             bottomLeft
             sheets
@@ -53,6 +55,16 @@ struct ExploreScreen: View {
             await model.runStream(bbox: bbox)
         }
         .onChange(of: active) { model.active = active }
+        // "Stations" from elsewhere (old links): the search, open, with your stations under it.
+        .task(id: router.stationSearchRequest) {
+            guard router.stationSearchRequest != nil else { return }
+            router.stationSearchRequest = nil
+            model.deselect()
+            model.stationSheet = nil
+            model.query = ""
+            model.searching = true
+            searchFocused = true
+        }
         // A train opened from a board row, a follow or a link.
         .task(id: router.pendingTrain) {
             guard let target = router.pendingTrain else { return }
@@ -147,6 +159,25 @@ struct ExploreScreen: View {
         .scrollBounceBehavior(.basedOnSize)
         .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
         .frame(maxHeight: 420)
+        .background(Ink.glass).background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+        .clackShadow()
+        .padding(.horizontal, 12).padding(.top, 64)
+    }
+
+    /// The search with nothing typed: your favourite and recent stations and the big ones (what the Stations screen on
+    /// Trips used to list). A station opens its sheet on the map, with its departures.
+    private var stations: some View {
+        StationDirectoryList { hit in
+            searchFocused = false
+            Task { await model.openStation(hit) }
+        } onClose: {
+            model.searching = false
+            searchFocused = false
+        }
+        .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
+        .frame(maxHeight: 520)
         .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -329,6 +360,7 @@ struct ExploreScreen: View {
                     }
                 },
                 onBoard: { router.push(.board(stationId: station.id, arrivals: false)) },
+                onArrivals: { router.push(.board(stationId: station.id, arrivals: true)) },
                 onMap: { router.push(.stationMap(StationMapLink(stationId: station.id))) }
             )
         }

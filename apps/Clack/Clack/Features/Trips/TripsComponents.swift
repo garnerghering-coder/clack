@@ -409,7 +409,7 @@ struct FollowingSection: View {
                 ForEach(follows, id: \.self) { follow in
                     let op = follow.operatorId.flatMap { app.operatorsById[$0] }
                     Button {
-                        router.openTrain(number: follow.trainNumber, date: follow.serviceDate)
+                        router.presentTrain(number: follow.trainNumber, date: follow.serviceDate)
                     } label: {
                         row(follow, op: op)
                     }

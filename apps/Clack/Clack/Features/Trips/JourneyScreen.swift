@@ -11,6 +11,7 @@ import SwiftUI
 struct JourneyScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @Environment(Router.self) private var router
     let id: String
     @State private var journey: Journey?
     @State private var missing = false
@@ -19,7 +20,7 @@ struct JourneyScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: l10n.t("nav.trips"))
+            BackLink(label: router.backLabel(l10n))
             if missing {
                 Text(l10n.t("journey.notFound")).clack(.body).foregroundStyle(Ink.text2)
             } else if let legs = journey?.legs.map(\.leg), let first = legs.first, let last = legs.last {

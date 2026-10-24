@@ -16,6 +16,7 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case settings
     case about
     case privacy
+    /// Kept for old launch arguments and links only: opening it shows Explore's station search instead.
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
@@ -47,6 +48,11 @@ final class Router {
         if let raw = value("-tripsTab"), let tab = TripsTab(rawValue: raw) { tripsTab = tab }
         // `-add` opens the Add a train sheet; `-addTrip <key>|<date>|<from>|<to>` at its confirm step.
         if args.contains("-add") { addRequest = AddRequest(link: nil) }
+        // `-sheetTrain <number>|<date>[|<key>]` opens that train in place, as a board row on Trips does.
+        if let raw = value("-sheetTrain") {
+            let parts = raw.split(separator: "|").map(String.init)
+            if parts.count >= 2 { trainRequest = TrainRequest(number: parts[0], date: parts[1], key: parts.count > 2 ? parts[2] : nil) }
+        }
         if let raw = value("-addTrip") {
             let parts = raw.split(separator: "|").map(String.init)
             if parts.count >= 2 {
@@ -66,7 +72,8 @@ final class Router {
             // Asked for a screen: the landing rule leaves it in front, as it does for a link.
             touched = true
             if raw == "settings" { tripsPath = [.settings] }
-            if raw == "stations" { tripsPath = [.stations] }
+            // Stations live in Explore's search now.
+            if raw == "stations" { openStationSearch() }
             if raw == "about" { tripsPath = [.settings, .about] }
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
             if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
@@ -74,7 +81,10 @@ final class Router {
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
                 if parts[0] == "journey" { tripsPath = [.journey(parts[1])] }
-                if parts[0] == "map" { tripsPath = [.stations, .board(stationId: parts[1], arrivals: false), .stationMap(StationMapLink(stationId: parts[1]))] }
+                if parts[0] == "map" {
+                    tab = .explore
+                    explorePath = [.board(stationId: parts[1], arrivals: false), .stationMap(StationMapLink(stationId: parts[1]))]
+                }
                 if parts[0] == "layover" {
                     // `-open layover:<station>|<from track>|<to track>|<arrive ms>|<depart ms>`
                     let p = parts[1].split(separator: "|").map(String.init)
@@ -82,7 +92,10 @@ final class Router {
                         tripsPath = [.stationMap(StationMapLink(stationId: p[0], from: p[1], to: p[2], arrival: Double(p[3]), departure: Double(p[4]), live: true))]
                     }
                 }
-                if parts[0] == "board" { tripsPath = [.stations, .board(stationId: parts[1], arrivals: false)] }
+                if parts[0] == "board" {
+                    tab = .explore
+                    explorePath = [.board(stationId: parts[1], arrivals: false)]
+                }
             }
         }
         #endif
@@ -136,13 +149,50 @@ final class Router {
 
     /// Pushes a screen on the tab that is showing.
     func push(_ route: AppRoute) {
+        if route == .stations { return openStationSearch() }
         setPath(path(for: tab) + [route], for: tab)
     }
 
-    /// Opens a train on Explore (from a board row, a follow, or a link).
+    /// Opens a train on Explore's map (the sheet's "Show on live map", and links from outside).
     func openTrain(number: String, date: String, key: String? = nil) {
+        trainRequest = nil
         pendingTrain = PendingTrain(number: number, date: date, key: key)
         tab = .explore
+    }
+
+    /// A train tapped inside the app (a board row, a followed train, a disruption's "Live"): on Explore the map moves
+    /// to it; anywhere else its sheet opens over the screen you're on, and closing it leaves you where you were.
+    func presentTrain(number: String, date: String, key: String? = nil) {
+        switch Navigation.trainOpening(tab: tab) {
+        case .focusOnMap: openTrain(number: number, date: date, key: key)
+        case .sheet: trainRequest = TrainRequest(number: number, date: date, key: key)
+        }
+    }
+
+    /// The train sheet shown over the current screen, when there is one.
+    var trainRequest: TrainRequest?
+
+    struct TrainRequest: Identifiable, Hashable {
+        let id = UUID()
+        var number: String
+        var date: String
+        var key: String?
+    }
+
+    /// Explore's search, opened empty with your stations under it (Trips' old station directory). Explore reads and
+    /// clears it.
+    var stationSearchRequest: UUID?
+
+    func openStationSearch() {
+        trainRequest = nil
+        explorePath = []
+        tab = .explore
+        stationSearchRequest = UUID()
+    }
+
+    /// What the back button on the top screen of the showing tab says: the screen underneath, or the tab's name.
+    func backLabel(_ l10n: L10n) -> String {
+        l10n.t(Navigation.backLabelKey(below: Navigation.below(path(for: tab)).map(\.screen), tab: tab))
     }
 
     /// The one way in from outside the app: `clack://` links (widgets, the trip card), alert taps and the `-url` launch
@@ -176,7 +226,27 @@ final class Router {
     }
 
     private func show(_ tab: PrimaryTab, _ path: [AppRoute]) {
+        trainRequest = nil
         setPath(path, for: tab)
         self.tab = tab
+    }
+}
+
+extension AppRoute {
+    /// What kind of screen this is, for the back button of the one above it.
+    var screen: Navigation.Screen {
+        switch self {
+        case .trip: .trip
+        case .journey: .journey
+        case .settings: .settings
+        case .about: .about
+        case .privacy: .privacy
+        case .board: .board
+        case .stationMap: .stationMap
+        case .stations: .other
+        #if DEBUG
+        case .testAlerts: .other
+        #endif
+        }
     }
 }

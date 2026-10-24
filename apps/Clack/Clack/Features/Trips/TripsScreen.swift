@@ -101,7 +101,6 @@ struct TripsScreen: View {
         Page {
             PageHeader(title: l10n.t("trips.title")) {
                 HStack(spacing: 8) {
-                    IconLink(icon: "search", label: l10n.t("nav.stations"), value: AppRoute.stations)
                     IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
                     SettingsLink()
                 }

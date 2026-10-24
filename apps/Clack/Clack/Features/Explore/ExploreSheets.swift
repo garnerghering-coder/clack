@@ -271,6 +271,7 @@ struct LiveStationSheet: View {
     let onClose: () -> Void
     let onTrain: (BoardRow) -> Void
     let onBoard: () -> Void
+    let onArrivals: () -> Void
     let onMap: () -> Void
     @State private var info: StationInfo?
     @State private var rows: [BoardRow]?
@@ -308,13 +309,15 @@ struct LiveStationSheet: View {
             } else {
                 Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2)
             }
+            // The station's board, pushed on Explore (the Stations screen's job, now here).
             HStack(spacing: 12) {
                 if info?.hasBoard == true {
-                    Button(l10n.t("liveMap.allDepartures"), action: onBoard).buttonStyle(.clack(wide: true))
+                    Button(l10n.t("board.departures"), action: onBoard).buttonStyle(.clack(.primary, wide: true))
+                    Button(l10n.t("board.arrivals"), action: onArrivals).buttonStyle(.clack(wide: true))
                 }
-                if info?.hasMap == true {
-                    Button(l10n.t("stationMap.open"), action: onMap).buttonStyle(.clack(.primary, wide: true))
-                }
+            }
+            if info?.hasMap == true {
+                Button(l10n.t("stationMap.open"), action: onMap).buttonStyle(.clack(wide: true))
             }
         }
         .task(id: id) {

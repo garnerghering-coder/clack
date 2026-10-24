@@ -41,12 +41,25 @@ private struct DestinationView: View {
         case .settings: SettingsScreen()
         case .about: AboutScreen()
         case .privacy: PrivacyScreen()
-        case .stations: StationsScreen()
+        case .stations: StationsRedirect()
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
         case .stationMap(let link): StationMapScreen(link: link)
         #if DEBUG
         case .testAlerts: TestAlertsScreen()
         #endif
+        }
+    }
+}
+
+/// `.stations` from an old link: Explore's station search instead (the Stations screen moved there).
+private struct StationsRedirect: View {
+    @Environment(Router.self) private var router
+
+    var body: some View {
+        Color.clear.onAppear {
+            // Take this placeholder off the stack it was pushed on, then show the search.
+            for tab in PrimaryTab.allCases { router.setPath(router.path(for: tab).filter { $0 != .stations }, for: tab) }
+            router.openStationSearch()
         }
     }
 }
