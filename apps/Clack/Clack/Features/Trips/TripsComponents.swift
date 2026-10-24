@@ -415,7 +415,7 @@ struct FollowingSection: View {
                     }
                     .buttonStyle(.plain)
                 }
-                Text(l10n.t("trips.followingNote")).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("trips.followingNote"), more: l10n.t("trips.followingNoteMore"))
             }
             .padding(.top, 2)
         }

@@ -518,7 +518,7 @@ private struct ConfirmConnectionStep: View {
         .buttonStyle(LinkButtonStyle())
         Text(l10n.t("add.connectionTitle")).clack(.headline).foregroundStyle(Ink.text)
         ConnectionResultCard(connection: connection)
-        Text(l10n.t("add.connectionNote")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("add.connectionNote"), more: l10n.t("add.connectionNoteMore"))
         ForEach(legs, id: \.id) { r in
             BuyTicket(trip: TicketTrip(operatorId: r.operatorId, trainNumber: r.trainNumber, from: .init(name: r.from.name, time: r.from.time, tz: r.from.tz, seq: r.from.seq), to: .init(name: r.to.name, time: r.to.time, tz: r.to.tz, seq: r.to.seq), tripKey: r.key, serviceDate: r.serviceDate))
         }
@@ -658,7 +658,7 @@ private struct ManualTripStep: View {
     var body: some View {
         Button(l10n.t("common.back"), action: onBack).buttonStyle(LinkButtonStyle())
         Text(l10n.t("manual.title")).clack(.headline).foregroundStyle(Ink.text)
-        Text(l10n.t("manual.intro")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("manual.intro"), more: l10n.t("manual.introMore"))
         Card(spacing: 0) {
             ManualStationField(label: l10n.t("manual.from"), value: $fromStation)
             ManualStationField(label: l10n.t("manual.to"), value: $toStation)
@@ -683,7 +683,7 @@ private struct ManualTripStep: View {
                 ChipButton(text: l10n.t("manual.kinds.\(c)"), active: category == c) { category = c }
             }
         }
-        Text(l10n.t("manual.timesNote")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("manual.timesNote"), more: l10n.t("manual.timesNoteMore"))
         if let error { Banner(kind: .error) { Text(error) } }
         Button(l10n.t("manual.save")) { Task { await save() } }.buttonStyle(.clack(.primary)).disabled(!ready || saving)
             .onAppear {

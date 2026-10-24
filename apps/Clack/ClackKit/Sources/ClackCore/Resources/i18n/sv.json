@@ -43,14 +43,15 @@
     "findTrain": "Hitta ett tåg",
     "exploreTrains": "Utforska tåg i trafik",
     "following": "Följer",
-    "followingNote": "Tåg du följer i Utforska. Att följa ett tåg lägger inte till det i dina resor eller ditt pass.",
+    "followingNote": "Tåg du följer i Utforska.",
     "notRunning": "Går inte just nu",
     "followingChip": "Följer",
     "layoverMissed": "Nästa tåg går från {{station}} innan det här är framme",
     "layoverAt": "byte i {{station}}",
     "layoverMap": "Stationskarta",
     "layoverOpen": "Öppna stationskartan för bytet i {{station}}",
-    "approaching": "På väg"
+    "approaching": "På väg",
+    "followingNoteMore": "Att följa ett tåg lägger inte till det i dina resor eller ditt pass."
   },
   "add": {
     "title": "Lägg till ett tåg",
@@ -71,7 +72,7 @@
     "withChange": "Med ett byte",
     "changeAt": "Byte i {{station}} · {{min}} min",
     "connectionTitle": "Lägg till båda tågen",
-    "connectionNote": "Enligt tidtabellen. Varje tåg sparas som en egen resa; tillsammans blir de en reseväg.",
+    "connectionNote": "Enligt tidtabellen.",
     "addBoth": "Lägg till båda tågen",
     "duplicateOne": "Du har redan lagt till tåg {{train}} det datumet. Det andra är sparat.",
     "keepAsIs": "Behåll så",
@@ -102,7 +103,8 @@
     "historyLoading": "Hämtar dagens tidtabell från Trafiklabs arkiv. Första sökningen i en ny månad tar ungefär en halv minut.",
     "historyFailed": "Kunde inte hämta arkivets tidtabell för den här dagen. Försöker igen strax…",
     "historyUnavailable": "Tidtabellerna går tillbaka till 10 augusti 2012. Lägg till en tidigare resa för hand.",
-    "historyNorway": "Norges tidtabeller går bara tillbaka till i går. Lägg till en äldre norsk resa för hand."
+    "historyNorway": "Norges tidtabeller går bara tillbaka till i går. Lägg till en äldre norsk resa för hand.",
+    "connectionNoteMore": "Varje tåg sparas som en egen resa; tillsammans blir de en reseväg."
   },
   "products": {
     "high_speed": "Snabbtåg",
@@ -159,7 +161,7 @@
       "manual": "Tillagd manuellt."
     },
     "source": "Tider: Trafikverket, Entur (NLOD) · Tidtabell: Trafiklab (CC0), Entur (NLOD)",
-    "estimatedDistance": "En del av sträckan kunde inte matchas mot järnvägsnätet, så den ritas som raka linjer och avståndet är ungefärligt.",
+    "estimatedDistance": "Avståndet är ungefärligt.",
     "refresh": "Uppdatera tider",
     "delete": "Ta bort resan",
     "deleteConfirm": "Ta bort den här resan?",
@@ -177,7 +179,8 @@
     "beyondLiveData": "Det finns ingen realtidsdata för tåget i {{countries}}. Tiderna där är tidtabellens, och väntade tider följer förseningen vid {{station}}.",
     "beyondLiveDataNoReport": "Det finns ingen realtidsdata för tåget i {{countries}}, så tiderna där är tidtabellens.",
     "platformChangedFrom": "ändrat från {{from}}",
-    "timetabledTime": "enligt tidtabell {{time}}"
+    "timetabledTime": "enligt tidtabell {{time}}",
+    "estimatedDistanceMore": "En del av sträckan kunde inte matchas mot järnvägsnätet, så den ritas som raka linjer."
   },
   "passport": {
     "title": "Pass",
@@ -342,7 +345,7 @@
     },
     "stepFree": "Bara vägar utan trappor",
     "heavyLuggage": "Tungt bagage",
-    "changingNote": "Används för gångtider mellan plattformar. Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor.",
+    "changingNote": "Används för gångtider mellan plattformar.",
     "yourData": "Dina uppgifter",
     "privacy": "Integritet",
     "deleteData": "Radera mina uppgifter",
@@ -351,7 +354,7 @@
     "alerts": {
       "title": "Notiser",
       "master": "Notiser för dina tåg",
-      "note": "Påminnelser, spår, förseningar och byten, även när Clack är stängd. Spår och tider kommer från samma livedata som resan.",
+      "note": "Påminnelser, spår, förseningar och byten, även när Clack är stängd.",
       "denied": "Notiser är avstängda för Clack i iPhones inställningar.",
       "openSettings": "Öppna Inställningar",
       "lead": "Påminn mig före avgång",
@@ -367,15 +370,18 @@
       "cancel": "Inställda tåg",
       "change": "Byten mellan tåg",
       "getOff": "Dags att kliva av",
-      "arrival": "Välkommen till din destination"
+      "arrival": "Välkommen till din destination",
+      "noteMore": "Spår och tider kommer från samma livedata som resan."
     },
     "version": "Version {{version}} (bygge {{build}})",
     "serverVersion": "Server {{version}}",
     "offlineMaps": "Kartor sparade offline",
-    "offlineMapsNote": "Kartan längs dina resor det närmaste dygnet sparas medan du är uppkopplad, så rutter och tåget syns även utan täckning.",
+    "offlineMapsNote": "Kartor längs dina nästa resor fungerar utan täckning.",
     "offlineMapsCount_one": "{{count}} resa sparad",
     "offlineMapsCount_other": "{{count}} resor sparade",
-    "offlineMapsClear": "Rensa sparade kartor"
+    "offlineMapsClear": "Rensa sparade kartor",
+    "changingNoteMore": "Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor.",
+    "offlineMapsNoteMore": "Kartan längs dina resor det närmaste dygnet sparas medan du är uppkopplad, så rutter och tåget syns även utan täckning."
   },
   "about": {
     "title": "Källor och metod",
@@ -550,7 +556,7 @@
     "onlyMine": "Mina tåg",
     "delayedData": "Fördröjd data · {{ago}}",
     "legend": "Vad markörerna betyder",
-    "legendNote": "Tryck på ett tåg för förseningar och stationer. Inställda tåg och godståg visas inte. Dina egna tåg har ett gult sken.",
+    "legendNote": "Tryck på ett tåg för förseningar och stationer.",
     "openDetail": "Öppna min resa",
     "showOnMap": "Visa på livekartan",
     "train": "Tåg {{number}}",
@@ -595,7 +601,8 @@
     "unfollow": "Sluta följa",
     "allDepartures": "Tidtabell",
     "expandSheet": "Visa mer om tåget",
-    "collapseSheet": "Visa mindre om tåget"
+    "collapseSheet": "Visa mindre om tåget",
+    "legendNoteMore": "Inställda tåg och godståg visas inte. Dina egna tåg har ett gult sken."
   },
   "onboard": {
     "title": "Ombord",
@@ -808,18 +815,19 @@
     "pickJourney": "Välj en resa",
     "previewAlt": "Förhandsvisning av delningskortet",
     "nothing": "Inget att visa än: resor syns när de räknas.",
-    "privacy": "Bara det som står på kortet delas: inga tider, biljettuppgifter, tågnummer eller var du är nu. Inget lämnar enheten förrän du sparar eller delar.",
+    "privacy": "Bara det som står på kortet delas.",
     "save": "Spara bild",
     "share": "Dela",
     "savedInstead": "Delning finns inte i den här webbläsaren, så bilden sparades i stället.",
     "medalKicker": "Milstolpe upplåst",
     "unlocked": "Upplåst {{date}}",
-    "pickMedal": "Välj en medalj"
+    "pickMedal": "Välj en medalj",
+    "privacyMore": "Inga tider, biljettuppgifter, tågnummer eller var du är nu. Inget lämnar enheten förrän du sparar eller delar."
   },
   "manual": {
     "cta": "Hittar du inte tåget? Lägg till det för hand",
     "title": "Lägg till en resa för hand",
-    "intro": "För tåg som inte finns i våra tidtabeller: Norge före i går, ett museitåg, ett tåg utomlands. Sträckan ritas längs järnvägsnätet.",
+    "intro": "För tåg som inte finns i våra tidtabeller.",
     "from": "Klev på i",
     "to": "Klev av i",
     "change": "Byt {{station}}",
@@ -836,8 +844,10 @@
       "night": "Nattåg",
       "heritage": "Museitåg"
     },
-    "timesNote": "Tiderna är lokala vid varje station. En ankomst före avgången räknas som nästa dag.",
-    "save": "Lägg till resa"
+    "timesNote": "Tiderna är lokala vid varje station.",
+    "save": "Lägg till resa",
+    "introMore": "Norge före i går, ett museitåg, ett tåg utomlands. Sträckan ritas längs järnvägsnätet.",
+    "timesNoteMore": "En ankomst före avgången räknas som nästa dag."
   },
   "tickets": {
     "buyAt": "Köp biljett på {{site}}",
@@ -874,7 +884,7 @@
     "noneFound": "Inga andra tåg i tidtabellen under resten av dagen och i morgon. Fråga operatören om ersättningstrafik.",
     "live": "Realtid",
     "useInstead": "Ta det här i stället",
-    "altsNote": "Enligt tidtabellen: öppna Realtid för att se om de går. Din biljett kan gälla på ett annat tåg; fråga {{operator}} innan du köper en ny.",
+    "altsNote": "Enligt tidtabellen: öppna Realtid för att se om de går.",
     "theOperator": "operatören",
     "rightsTitle": "Återbetalning och ersättning",
     "rightsEu": "Längre resor omfattas av EU:s regler: 60 min eller mer försenad ankomst ger ersättning (25 %, eller 50 % från 2 timmar).",
@@ -893,7 +903,8 @@
     "and": " och ",
     "viewSuggested": "Visa förslag på alternativ",
     "hideSuggested": "Dölj förslag på alternativ",
-    "noAlternatives": "Inga alternativ hittades"
+    "noAlternatives": "Inga alternativ hittades",
+    "altsNoteMore": "Din biljett kan gälla på ett annat tåg; fråga {{operator}} innan du köper en ny."
   },
   "risk": {
     "titleNow": "Förseningar längs din sträcka just nu",
@@ -908,8 +919,9 @@
     "stationNow": "De senaste {{window}} min gick {{late}} av {{trains}} avgångar från {{station}} 10+ min sent (median {{median}} min).",
     "pattern": "Det gick från {{station}} 5+ min sent {{late}} av de {{days}} dagar Clack har sett det (median {{median}} min). Ett mönster bakåt, inte en prognos för i dag.",
     "change": "Ditt byte på {{min}} minuter i {{station}} har lite marginal om det fortsätter.",
-    "honest": "Från Trafikverkets rapporterade avgångar, kontrollerat {{time}}. Det här är observationer, inte en prognos; ditt tågs egna tider ovan är vad det rapporterar.",
-    "ahead": "Av de {{trains}} tåg som lämnat {{station}} mot {{toward}} de senaste {{window}} min är {{late}} försenade 10+ min nu ({{delays}} min). Tåg köar på banan, så ditt kan också få vänta."
+    "honest": "Observationer, inte en prognos · kontrollerat {{time}}",
+    "ahead": "Av de {{trains}} tåg som lämnat {{station}} mot {{toward}} de senaste {{window}} min är {{late}} försenade 10+ min nu ({{delays}} min). Tåg köar på banan, så ditt kan också få vänta.",
+    "honestMore": "Från Trafikverkets rapporterade avgångar. Ditt tågs egna tider ovan är vad det rapporterar."
   },
   "progress": {
     "notCounted": "Den kommer med i ditt pass när den är registrerad som åkt.",

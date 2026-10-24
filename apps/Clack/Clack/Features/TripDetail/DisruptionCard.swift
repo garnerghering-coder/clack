@@ -218,7 +218,7 @@ private struct DisruptionBody: View {
                     ForEach(alts.direct) { r in directRow(r, now: now, schedDep: schedDep, tz: tz) }
                     ForEach(alts.connections) { c in connectionRow(c, now: now, schedDep: schedDep, tz: tz) }
                 }
-                Text(l10n.t("disruption.altsNote", ["operator": op?.name ?? l10n.t("disruption.theOperator")])).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("disruption.altsNote"), more: l10n.t("disruption.altsNoteMore", ["operator": op?.name ?? l10n.t("disruption.theOperator")]))
             }
         }
     }

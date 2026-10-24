@@ -43,14 +43,15 @@
     "findTrain": "Find a train",
     "exploreTrains": "Explore live trains",
     "following": "Following",
-    "followingNote": "Trains you watch on Explore. Following a train doesn’t add it to your trips or Passport.",
+    "followingNote": "Trains you watch on Explore.",
     "notRunning": "Not running right now",
     "followingChip": "Following",
     "layoverMissed": "The next train leaves {{station}} before this one arrives",
     "layoverAt": "layover at {{station}}",
     "layoverMap": "Station map",
     "layoverOpen": "Open the station map for the change at {{station}}",
-    "approaching": "On its way"
+    "approaching": "On its way",
+    "followingNoteMore": "Following a train doesn’t add it to your trips or Passport."
   },
   "add": {
     "title": "Add a train",
@@ -71,7 +72,7 @@
     "withChange": "With one change",
     "changeAt": "Change at {{station}} · {{min}} min",
     "connectionTitle": "Add both trains",
-    "connectionNote": "From the timetable. Each train is saved as its own trip; together they make one journey.",
+    "connectionNote": "From the timetable.",
     "addBoth": "Add both trains",
     "duplicateOne": "You already added train {{train}} on this date. The other one is saved.",
     "keepAsIs": "Keep it that way",
@@ -102,7 +103,8 @@
     "historyLoading": "Fetching this day’s timetable from Trafiklab’s archive. The first search in a new month takes about half a minute.",
     "historyFailed": "Couldn’t fetch the archive timetable for this day. Trying again shortly…",
     "historyUnavailable": "Timetables go back to 10 August 2012. For an earlier trip, add it by hand.",
-    "historyNorway": "Norway’s timetables only go back to yesterday. Add an older Norwegian trip by hand."
+    "historyNorway": "Norway’s timetables only go back to yesterday. Add an older Norwegian trip by hand.",
+    "connectionNoteMore": "Each train is saved as its own trip; together they make one journey."
   },
   "products": {
     "high_speed": "High-speed",
@@ -159,7 +161,7 @@
       "manual": "Added manually."
     },
     "source": "Times: Trafikverket, Entur (NLOD) · Timetable: Trafiklab (CC0), Entur (NLOD)",
-    "estimatedDistance": "Part of this route couldn't be matched to the rail network, so it's drawn as straight lines and the distance is approximate.",
+    "estimatedDistance": "The distance is approximate.",
     "refresh": "Refresh times",
     "delete": "Delete trip",
     "deleteConfirm": "Delete this trip?",
@@ -177,7 +179,8 @@
     "beyondLiveData": "There’s no live data for this train in {{countries}}. Times there are the timetable’s, and expected times follow the delay reported at {{station}}.",
     "beyondLiveDataNoReport": "There’s no live data for this train in {{countries}}, so times there are the timetable’s.",
     "platformChangedFrom": "changed from {{from}}",
-    "timetabledTime": "timetabled {{time}}"
+    "timetabledTime": "timetabled {{time}}",
+    "estimatedDistanceMore": "Part of this route couldn’t be matched to the rail network, so it’s drawn as straight lines."
   },
   "passport": {
     "title": "Passport",
@@ -342,7 +345,7 @@
     },
     "stepFree": "Step-free routes only",
     "heavyLuggage": "Heavy luggage",
-    "changingNote": "Used for walking times between platforms. Step-free avoids stairs and escalators; heavy luggage adds time on stairs.",
+    "changingNote": "Used for walking times between platforms.",
     "yourData": "Your data",
     "privacy": "Privacy",
     "deleteData": "Delete my data",
@@ -351,7 +354,7 @@
     "alerts": {
       "title": "Alerts",
       "master": "Alerts for your trains",
-      "note": "Reminders, platforms, delays and changes, even when Clack is closed. The platform and times come from the same live data as the trip.",
+      "note": "Reminders, platforms, delays and changes, even when Clack is closed.",
       "denied": "Alerts are turned off for Clack in iPhone Settings.",
       "openSettings": "Open Settings",
       "lead": "Remind me before departure",
@@ -367,15 +370,18 @@
       "cancel": "Cancellations",
       "change": "Changes between trains",
       "getOff": "Time to get off",
-      "arrival": "Welcome at your destination"
+      "arrival": "Welcome at your destination",
+      "noteMore": "The platform and times come from the same live data as the trip."
     },
     "version": "Version {{version}} (build {{build}})",
     "serverVersion": "Server {{version}}",
     "offlineMaps": "Maps saved for offline",
-    "offlineMapsNote": "The map along your trips in the next day and a half is saved while you're online, so routes and the train still show with no signal.",
+    "offlineMapsNote": "Maps along your next trips work with no signal.",
     "offlineMapsCount_one": "{{count}} trip saved",
     "offlineMapsCount_other": "{{count}} trips saved",
-    "offlineMapsClear": "Clear saved maps"
+    "offlineMapsClear": "Clear saved maps",
+    "changingNoteMore": "Step-free avoids stairs and escalators; heavy luggage adds time on stairs.",
+    "offlineMapsNoteMore": "The map along your trips in the next day and a half is saved while you’re online, so routes and the train still show with no signal."
   },
   "about": {
     "title": "Sources & methodology",
@@ -550,7 +556,7 @@
     "onlyMine": "My trains",
     "delayedData": "Delayed data · {{ago}}",
     "legend": "What the markers mean",
-    "legendNote": "Tap a train for its delay and stops. Cancelled trains and freight are not shown. Your own trains have a yellow halo.",
+    "legendNote": "Tap a train for its delay and stops.",
     "openDetail": "Open my trip",
     "showOnMap": "Show on live map",
     "train": "Train {{number}}",
@@ -595,7 +601,8 @@
     "unfollow": "Unfollow",
     "allDepartures": "Timetable",
     "expandSheet": "Show more of the train",
-    "collapseSheet": "Show less of the train"
+    "collapseSheet": "Show less of the train",
+    "legendNoteMore": "Cancelled trains and freight are not shown. Your own trains have a yellow halo."
   },
   "onboard": {
     "title": "On board",
@@ -808,18 +815,19 @@
     "pickJourney": "Choose a journey",
     "previewAlt": "Preview of the share card",
     "nothing": "Nothing to show yet: trips appear once they count.",
-    "privacy": "Only what’s on the card is shared: no times, ticket details, train numbers or where you are now. Nothing leaves your device until you save or share it.",
+    "privacy": "Only what’s on the card is shared.",
     "save": "Save image",
     "share": "Share",
     "savedInstead": "Sharing isn’t available in this browser, so the image was saved instead.",
     "medalKicker": "Milestone unlocked",
     "unlocked": "Unlocked {{date}}",
-    "pickMedal": "Choose a medal"
+    "pickMedal": "Choose a medal",
+    "privacyMore": "No times, ticket details, train numbers or where you are now. Nothing leaves your device until you save or share it."
   },
   "manual": {
     "cta": "Can’t find your train? Add it by hand",
     "title": "Add a trip by hand",
-    "intro": "For a train our timetables don’t have: Norway before yesterday, a heritage run, a train abroad. The route is drawn along the rail network.",
+    "intro": "For a train our timetables don’t have.",
     "from": "Got on at",
     "to": "Got off at",
     "change": "Change {{station}}",
@@ -836,8 +844,10 @@
       "night": "Night train",
       "heritage": "Heritage"
     },
-    "timesNote": "Times are local at each station. An arrival earlier than the departure counts as the next day.",
-    "save": "Add trip"
+    "timesNote": "Times are local at each station.",
+    "save": "Add trip",
+    "introMore": "Norway before yesterday, a heritage run, a train abroad. The route is drawn along the rail network.",
+    "timesNoteMore": "An arrival earlier than the departure counts as the next day."
   },
   "tickets": {
     "buyAt": "Buy ticket at {{site}}",
@@ -874,7 +884,7 @@
     "noneFound": "No other trains in the timetable for the rest of today and tomorrow. Ask the operator about replacement transport.",
     "live": "Live",
     "useInstead": "Use this instead",
-    "altsNote": "From the timetable: open Live to see whether each one runs. Your ticket may be valid on another train; ask {{operator}} before buying a new one.",
+    "altsNote": "From the timetable: open Live to see whether each one runs.",
     "theOperator": "the operator",
     "rightsTitle": "Refunds and compensation",
     "rightsEu": "Longer journeys fall under EU rules: arriving 60 min or more late gives compensation (25%, or 50% from 2 hours).",
@@ -893,7 +903,8 @@
     "and": " and ",
     "viewSuggested": "View suggested alternatives",
     "hideSuggested": "Hide suggested alternatives",
-    "noAlternatives": "No alternatives found"
+    "noAlternatives": "No alternatives found",
+    "altsNoteMore": "Your ticket may be valid on another train; ask {{operator}} before buying a new one."
   },
   "risk": {
     "titleNow": "Delays along your route right now",
@@ -908,8 +919,9 @@
     "stationNow": "In the last {{window}} min, {{late}} of {{trains}} departures from {{station}} left 10+ min late (median {{median}} min).",
     "pattern": "It left {{station}} 5+ min late on {{late}} of the {{days}} days Clack has seen it (median {{median}} min). A past pattern, not a forecast for today.",
     "change": "Your {{min}}-minute change at {{station}} leaves little room if this continues.",
-    "honest": "From Trafikverket’s reported departures, checked {{time}}. These are observations, not a prediction; your train’s own times above are what it reports.",
-    "ahead": "Of the {{trains}} trains that left {{station}} towards {{toward}} in the last {{window}} min, {{late}} are running 10+ min late now ({{delays}} min). Trains queue on the line, so yours may be held too."
+    "honest": "Observations, not a prediction · checked {{time}}",
+    "ahead": "Of the {{trains}} trains that left {{station}} towards {{toward}} in the last {{window}} min, {{late}} are running 10+ min late now ({{delays}} min). Trains queue on the line, so yours may be held too.",
+    "honestMore": "From Trafikverket’s reported departures. Your train’s own times above are what it reports."
   },
   "progress": {
     "notCounted": "It goes into your Passport once it’s recorded as travelled.",

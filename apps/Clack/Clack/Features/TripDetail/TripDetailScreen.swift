@@ -480,7 +480,7 @@ struct TripDetailScreen: View {
                 Text(l10n.t(borderAt != nil ? "detail.beyondLiveData" : "detail.beyondLiveDataNoReport", ["countries": countries, "station": borderAt ?? ""]))
                     .clack(.caption).foregroundStyle(Ink.text2)
             }
-            if l.isEstimatedGeometry { Text(l10n.t("detail.estimatedDistance")).clack(.caption).foregroundStyle(Ink.text2) }
+            if l.isEstimatedGeometry { InfoNote(l10n.t("detail.estimatedDistance"), more: l10n.t("detail.estimatedDistanceMore")) }
             Text(l10n.t("detail.source")).clack(.caption).foregroundStyle(Ink.text2)
         }
     }

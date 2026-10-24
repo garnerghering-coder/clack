@@ -124,7 +124,7 @@ struct SettingsScreen: View {
                 }
                 SettingsToggle(label: l10n.t("settings.stepFree"), isOn: s.stepFree) { value in change(SettingsPatch(stepFree: value)) }
                 SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage, last: true) { value in change(SettingsPatch(heavyLuggage: value)) }
-                Text(l10n.t("settings.changingNote")).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("settings.changingNote"), more: l10n.t("settings.changingNoteMore"))
             }
             AlertsCard(change: change)
             OfflineMapsCard()
@@ -156,7 +156,7 @@ private struct OfflineMapsCard: View {
         Card {
             Text(l10n.t("settings.offlineMaps")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             Text(l10n.t("settings.offlineMapsCount", count: count, ["count": String(count)])).clack(.body).foregroundStyle(Ink.text)
-            Text(l10n.t("settings.offlineMapsNote")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("settings.offlineMapsNote"), more: l10n.t("settings.offlineMapsNoteMore"))
             if count > 0 {
                 Button(l10n.t("settings.offlineMapsClear")) {
                     Task {
@@ -207,7 +207,7 @@ private struct AlertsCard: View {
                 SettingsToggle(label: l10n.t("settings.alerts.getOff"), isOn: s.notifyGetOff) { change(SettingsPatch(notifyGetOff: $0)) }
                 SettingsToggle(label: l10n.t("settings.alerts.arrival"), isOn: s.notifyArrival, last: true) { change(SettingsPatch(notifyArrival: $0)) }
             }
-            Text(l10n.t("settings.alerts.note")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("settings.alerts.note"), more: l10n.t("settings.alerts.noteMore"))
             if manager.denied {
                 Text(l10n.t("settings.alerts.denied")).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("settings.alerts.openSettings")) {

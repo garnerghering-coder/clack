@@ -278,7 +278,7 @@ struct ExploreScreen: View {
             legendRow(l10n.t("liveMap.legendAhead")) {
                 Rectangle().stroke(Ink.accent, style: StrokeStyle(lineWidth: 4, dash: [4, 3])).frame(width: 22, height: 4)
             }
-            Text(l10n.t("liveMap.legendNote")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
         }
         .clack(.caption).foregroundStyle(Ink.text2)
         .padding(.vertical, 14).padding(.horizontal, 16)

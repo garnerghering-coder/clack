@@ -74,7 +74,7 @@ struct ShareSheet: View {
                     Skeleton(height: 360)
                 }
             }
-            Text(l10n.t("share.privacy")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("share.privacy"), more: l10n.t("share.privacyMore"))
             if let file {
                 ShareLink(item: file, preview: SharePreview(l10n.t("share.title"), image: file.image)) {
                     HStack(spacing: 8) { LucideIcon(name: "share-2", size: 16); Text(l10n.t("share.share")) }
