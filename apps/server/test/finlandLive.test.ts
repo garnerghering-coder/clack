@@ -55,6 +55,22 @@ describe('Finland on the live map', () => {
     expect(later.expArr! - later.arr!).toBe(delay);
   });
 
+  it('picks up Finnish stations imported after the server (and the feed) started', () => {
+    // The server starts this feed before the first Finnish import has finished; an index cached from then dropped every train.
+    resetDigitrafficCaches();
+    const db = openDb(':memory:');
+    let t = Z('2026-10-24T18:00:00Z');
+    const { fetchImpl } = fakeDigitraffic({});
+    const feed = new FinlandFeed(db, { fetchImpl, now: () => t, graph: () => null });
+    const station = (code: string) => (feed as unknown as { station: (c: string) => unknown }).station(code);
+    expect(station('HKI')).toBeUndefined();
+    seedFinland(db);
+    t += 10_000; // still inside the 30 s retry pause
+    expect(station('HKI')).toBeUndefined();
+    t += 25_000;
+    expect(station('HKI')).toMatchObject({ id: expect.any(String) });
+  });
+
   it('draws a train from its GPS, with the delay from its calls and the unit type from its composition', async () => {
     const { feed } = setup([ic27, hl8192, ic407], '2026-10-24T18:50:30Z');
     await feed.poll();

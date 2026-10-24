@@ -135,6 +135,7 @@ export class FinlandFeed {
   private loadedAt = 0;
   private trainsAt = 0;
   private stationIdx: Map<string, StationInfo> | null = null;
+  private stationIdxAt = 0;
   private trips = new Map<string, { at: number; trip: TripInfo | null }>();
   private vehicles = new Map<string, string>();
   private vehiclesAt = new Map<string, number>();
@@ -154,12 +155,19 @@ export class FinlandFeed {
     return { fetchImpl: this.opts.fetchImpl, now: this.now() };
   }
 
-  /** Digitraffic short code → our station (fi_id), loaded once. */
+  /**
+   * Digitraffic short code → our station (fi_id). Reloaded every 10 minutes, and every 30 s while it is empty: the server
+   * starts this feed before the Finnish import has put its stations in, and an index kept from before that dropped every train.
+   */
   private station = (code: string): StationInfo | undefined => {
-    if (!this.stationIdx) {
-      this.stationIdx = new Map();
+    const now = this.now();
+    const age = this.stationIdx ? now - this.stationIdxAt : Infinity;
+    if (!this.stationIdx || age > (this.stationIdx.size === 0 ? 30_000 : 10 * 60_000)) {
+      const idx = new Map<string, StationInfo>();
       for (const r of this.db.all<{ fi: string; id: string; name: string; lat: number; lon: number; country: string }>(sql`select fi_id as fi, id, name, lat, lon, country from stations where fi_id is not null`))
-        this.stationIdx.set(r.fi, { id: r.id, name: r.name, lat: r.lat, lon: r.lon, country: r.country });
+        idx.set(r.fi, { id: r.id, name: r.name, lat: r.lat, lon: r.lon, country: r.country });
+      this.stationIdx = idx;
+      this.stationIdxAt = now;
     }
     return this.stationIdx.get(code);
   };
