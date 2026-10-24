@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// A station's departure and arrival board (BoardPage.tsx). Live while open: the server polls Trafikverket once for

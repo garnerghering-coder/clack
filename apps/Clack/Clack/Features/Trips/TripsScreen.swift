@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// What the Trips screen holds: the legs, the follows, and live updates merged into the legs as they arrive.

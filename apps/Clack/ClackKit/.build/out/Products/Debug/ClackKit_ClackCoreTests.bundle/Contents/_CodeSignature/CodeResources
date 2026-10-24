@@ -3,9 +3,44 @@
 <plist version="1.0">
 <dict>
 	<key>files</key>
-	<dict/>
+	<dict>
+		<key>Resources/Fixtures/legs.json</key>
+		<data>
+		dMPNbDsOVCDJmmU5vuMyZKjCR4Y=
+		</data>
+		<key>Resources/Fixtures/passport.json</key>
+		<data>
+		R7bJ1F4noRQ/woO1qO3bFwQSLRk=
+		</data>
+		<key>Resources/Fixtures/station-map.json</key>
+		<data>
+		GwNNltW5qoQqE0/8as8R3BKt0vI=
+		</data>
+	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Resources/Fixtures/legs.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Siyk2KS5kgBsJ/ZmwtJukxfoESp1GVArQh2GJR7WHBo=
+			</data>
+		</dict>
+		<key>Resources/Fixtures/passport.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			749v6ps4ZlM1NF4ypY5hP9QC7/jVEStKdw8AORSPSb4=
+			</data>
+		</dict>
+		<key>Resources/Fixtures/station-map.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			J2b2jBzqTBE01kUOqv/Qiha2KN19N/EQBaobs89lqUo=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^Resources/</key>

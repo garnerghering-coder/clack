@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// Journey risk on an upcoming trip (owner, 2026-10-22): warnings from what can be observed, each saying what it's

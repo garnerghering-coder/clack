@@ -5,6 +5,7 @@
 
 import ClackCore
 import MapLibre
+import ClackDesign
 import SwiftUI
 
 /// What the map controls act on: the map view, once it exists.

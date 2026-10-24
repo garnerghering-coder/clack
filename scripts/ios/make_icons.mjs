@@ -1,6 +1,6 @@
 // Turns the Lucide icons the web app uses into vector template images for the Swift app, so the icons match 1:1
 // (docs/SWIFT_PORT.md B6). Reads lucide-react from node_modules (ISC licence, copied next to the app's resources) and
-// writes apps/Clack/Clack/Assets.xcassets/Icons/lucide-<name>.imageset. Names are Lucide's own kebab-case names.
+// writes apps/Clack/ClackKit/Sources/ClackDesign/Resources/Assets.xcassets/Icons/lucide-<name>.imageset. Names are Lucide's own kebab-case names.
 //
 // The three tab icons also get a "-thin" version at stroke 1.75: the web draws only the navigation icons that thin
 // (AppShell.tsx); everything else uses Lucide's default stroke 2.
@@ -13,7 +13,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LUCIDE = path.join(ROOT, 'node_modules', 'lucide-react');
-const OUT = path.join(ROOT, 'apps', 'Clack', 'Clack', 'Assets.xcassets', 'Icons');
+const OUT = path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackDesign', 'Resources', 'Assets.xcassets', 'Icons');
 
 // Every icon imported from 'lucide-react' in apps/web/src (kebab-case; the web's AlertTriangle is Lucide's
 // triangle-alert and Globe2 is globe, Trash2 is trash, under their current names).

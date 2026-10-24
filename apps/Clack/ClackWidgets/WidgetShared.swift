@@ -7,6 +7,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 import WidgetKit
 
@@ -23,13 +24,6 @@ enum WB {
 
     static func inter(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font { .custom("InterVariable", size: size).weight(weight) }
     static func digits(_ size: CGFloat) -> Font { .custom("SpaceGrotesk-Bold", size: size) }
-}
-
-extension Color {
-    init?(hex: String?) {
-        guard let hex, hex.hasPrefix("#"), hex.count == 7, let v = UInt32(hex.dropFirst(), radix: 16) else { return nil }
-        self.init(red: Double((v >> 16) & 0xFF) / 255, green: Double((v >> 8) & 0xFF) / 255, blue: Double(v & 0xFF) / 255)
-    }
 }
 
 /// Words in the phone's language (the extension can't see the app's language setting).

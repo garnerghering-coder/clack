@@ -6,6 +6,7 @@
 #if DEBUG
 import ActivityKit
 import ClackCore
+import ClackDesign
 import SwiftUI
 import UserNotifications
 
@@ -74,7 +75,7 @@ final class TestAlertsModel {
 
     func fire(_ sample: Sample) async {
         let center = UNUserNotificationCenter.current()
-        if await NotificationManager.shared.authorization == .notDetermined { _ = await NotificationManager.shared.requestPermission() }
+        if NotificationManager.shared.authorization == .notDetermined { _ = await NotificationManager.shared.requestPermission() }
         await NotificationManager.shared.refresh()
         guard NotificationManager.shared.authorization == .authorized || NotificationManager.shared.authorization == .provisional else {
             message = "Notifications are off for Clack in iPhone Settings."

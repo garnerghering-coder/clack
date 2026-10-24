@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// Trip detail (DESIGN §6, product brief §7): the route map on top, then a card for the stage you're in (before

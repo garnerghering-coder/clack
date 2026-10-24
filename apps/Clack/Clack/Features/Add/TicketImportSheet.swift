@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// A ticket file handed to Clack from the share sheet ("Open in Clack").

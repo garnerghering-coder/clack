@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// severe: you need to act (cancelled, skipped stop, missed change, buses). warn: late or tight. watch: a warning

@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// The end of a journey, on an arrivals board (owner, 2026-10-23): the destination flips in, a stamp lands, then what

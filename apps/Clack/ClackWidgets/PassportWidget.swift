@@ -6,6 +6,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 import WidgetKit
 

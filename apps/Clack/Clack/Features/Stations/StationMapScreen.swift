@@ -5,6 +5,7 @@
 
 import ClackCore
 import CoreLocation
+import ClackDesign
 import SwiftUI
 
 /// The station map and the Layover Guide (pages/StationMapPage.tsx). Opened from a station page, or from a connection

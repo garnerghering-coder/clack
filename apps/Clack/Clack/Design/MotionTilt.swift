@@ -5,6 +5,7 @@
 
 import ClackCore
 import CoreMotion
+import ClackDesign
 import SwiftUI
 
 /// How the phone is tilted, for a card that catches the light as you move it (owner, 2026-10-24: the Passport card

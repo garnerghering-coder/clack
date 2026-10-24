@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// `.button`: secondary by default, `primary` is the yellow one, `danger` writes its label in the very-late colour.
@@ -36,23 +37,6 @@ struct ClackButtonStyle: ButtonStyle {
 extension ButtonStyle where Self == ClackButtonStyle {
     static func clack(_ kind: ClackButtonStyle.Kind = .secondary, small: Bool = false, wide: Bool = false) -> ClackButtonStyle {
         ClackButtonStyle(kind: kind, small: small, wide: wide)
-    }
-}
-
-/// A Lucide icon from the asset catalog, drawn as a template in the current foreground colour.
-struct LucideIcon: View {
-    let name: String
-    var size: CGFloat = 18
-    /// The tab bar's icons are drawn at stroke 1.75; everything else at Lucide's default 2.
-    var thin = false
-
-    var body: some View {
-        Image("lucide-\(name)\(thin ? "-thin" : "")")
-            .renderingMode(.template)
-            .resizable()
-            .scaledToFit()
-            .frame(width: size, height: size)
-            .accessibilityHidden(true)
     }
 }
 

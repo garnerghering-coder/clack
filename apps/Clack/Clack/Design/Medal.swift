@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// Milestone medals (owner feedback: "like Apple Health or Duolingo"): a ribbon, a metal rim whose metal steps up with
@@ -154,7 +155,7 @@ struct Medal: View {
     }
 
     private func drawIcon(_ ctx: inout GraphicsContext, name: String, rect: CGRect, alpha: Double) {
-        var image = ctx.resolve(Image("lucide-\(name)").renderingMode(.template))
+        var image = ctx.resolve(Image("lucide-\(name)", bundle: ClackDesignBundle.bundle).renderingMode(.template))
         image.shading = .color(.black.opacity(alpha))
         ctx.draw(image, in: rect)
     }

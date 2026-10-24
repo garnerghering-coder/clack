@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// Station information and map for the station a change happens at, loaded once per station (Connection.tsx

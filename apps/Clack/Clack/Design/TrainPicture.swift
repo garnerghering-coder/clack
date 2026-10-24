@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// The train's picture: the drawn side view from the asset catalog (`scripts/ios/sync_assets.py` copies the drawings),

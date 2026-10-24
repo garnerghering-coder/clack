@@ -31,11 +31,18 @@ let package = Package(
     platforms: [.iOS(.v17), .watchOS(.v10), .macOS(.v14)],
     products: [
         .library(name: "ClackCore", targets: ["ClackCore"]),
+        .library(name: "ClackDesign", targets: ["ClackDesign"]),
     ],
     targets: [
         .target(
             name: "ClackCore",
             resources: [.process("Resources/i18n")],
+            swiftSettings: swiftSettings
+        ),
+        .target(
+            name: "ClackDesign",
+            dependencies: ["ClackCore"],
+            resources: [.process("Resources")],
             swiftSettings: swiftSettings
         ),
         .testTarget(

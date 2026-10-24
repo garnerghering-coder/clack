@@ -5,6 +5,7 @@
 
 import ClackCore
 import MapLibre
+import ClackDesign
 import SwiftUI
 
 nonisolated struct MultiRoute: Hashable, Sendable {

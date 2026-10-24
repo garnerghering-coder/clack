@@ -6,6 +6,7 @@
 import ClackCore
 import Foundation
 import Observation
+import ClackDesign
 import SwiftUI
 
 /// What the whole app shares: the phone's id, the server client, the texts, and the reference data loaded at launch

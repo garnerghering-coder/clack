@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// What happened on the way, newest first (ActivityLog in Live.tsx).

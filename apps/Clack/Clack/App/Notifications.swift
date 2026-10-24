@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 import UIKit
 import UserNotifications
@@ -52,7 +53,7 @@ final class NotificationManager: NSObject {
     /// Asks for permission (the first time) and, if allowed, registers with Apple. True when alerts can be sent.
     func requestPermission() async -> Bool {
         let center = UNUserNotificationCenter.current()
-        let granted = (try? await center.requestAuthorization(options: [.alert, .sound, .timeSensitive])) ?? false
+        let granted = (try? await center.requestAuthorization(options: [.alert, .sound])) ?? false
         await refresh()
         return granted
     }

@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		C1AC00000000000000000301 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000000402 /* MapLibre */; };
 		C1AC00000000000000007102 /* ClackCore in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007101 /* ClackCore */; };
+		C1AC00000000000000007112 /* ClackDesign in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007111 /* ClackDesign */; };
 		C1AC00000000000000007202 /* ClackCore in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007201 /* ClackCore */; };
+		C1AC00000000000000007212 /* ClackDesign in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007211 /* ClackDesign */; };
 		C1AC00000000000000007302 /* ClackCore in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007301 /* ClackCore */; };
+		C1AC00000000000000007312 /* ClackDesign in Frameworks */ = {isa = PBXBuildFile; productRef = C1AC00000000000000007311 /* ClackDesign */; };
 		FF9E4E9A308BFE390032E5D1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9E4E99308BFE390032E5D1 /* WidgetKit.framework */; };
 		FF9E4E9C308BFE390032E5D1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9E4E9B308BFE390032E5D1 /* SwiftUI.framework */; };
 		FF9E4EA7308BFE3B0032E5D1 /* ClackWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FF9E4E97308BFE390032E5D1 /* ClackWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -116,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1AC00000000000000007102 /* ClackCore in Frameworks */,
+				C1AC00000000000000007112 /* ClackDesign in Frameworks */,
 				C1AC00000000000000000301 /* MapLibre in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1AC00000000000000007202 /* ClackCore in Frameworks */,
+				C1AC00000000000000007212 /* ClackDesign in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1AC00000000000000007302 /* ClackCore in Frameworks */,
+				C1AC00000000000000007312 /* ClackDesign in Frameworks */,
 				FF9E4E9C308BFE390032E5D1 /* SwiftUI.framework in Frameworks */,
 				FF9E4E9A308BFE390032E5D1 /* WidgetKit.framework in Frameworks */,
 			);
@@ -204,6 +210,7 @@
 			name = Clack;
 			packageProductDependencies = (
 				C1AC00000000000000007101 /* ClackCore */,
+				C1AC00000000000000007111 /* ClackDesign */,
 				C1AC00000000000000000402 /* MapLibre */,
 			);
 			productName = Clack;
@@ -229,6 +236,7 @@
 			name = ClackTests;
 			packageProductDependencies = (
 				C1AC00000000000000007201 /* ClackCore */,
+				C1AC00000000000000007211 /* ClackDesign */,
 			);
 			productName = ClackTests;
 			productReference = C1AC00000000000000000022 /* ClackTests.xctest */;
@@ -273,6 +281,7 @@
 			name = ClackWidgetsExtension;
 			packageProductDependencies = (
 				C1AC00000000000000007301 /* ClackCore */,
+				C1AC00000000000000007311 /* ClackDesign */,
 			);
 			productName = ClackWidgetsExtension;
 			productReference = FF9E4E97308BFE390032E5D1 /* ClackWidgetsExtension.appex */;
@@ -880,15 +889,30 @@
 			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
 			productName = ClackCore;
 		};
+		C1AC00000000000000007111 /* ClackDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
+			productName = ClackDesign;
+		};
 		C1AC00000000000000007201 /* ClackCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
 			productName = ClackCore;
 		};
+		C1AC00000000000000007211 /* ClackDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
+			productName = ClackDesign;
+		};
 		C1AC00000000000000007301 /* ClackCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
 			productName = ClackCore;
+		};
+		C1AC00000000000000007311 /* ClackDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1AC00000000000000000403 /* XCLocalSwiftPackageReference "ClackKit" */;
+			productName = ClackDesign;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

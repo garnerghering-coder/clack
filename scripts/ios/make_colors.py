@@ -1,5 +1,5 @@
 """Writes the Swift app's colour tokens: one Color Set per CSS custom property of the web app, with Any (light) and Dark
-appearances, into apps/Clack/Clack/Assets.xcassets/Colors/.
+appearances, into apps/Clack/ClackKit/Sources/ClackDesign/Resources/Assets.xcassets/Colors/.
 
 The values are the ones in apps/web/src/styles.css (:root for dark, :root[data-theme='light'] for light), listed in
 docs/swift-port/DESIGN_SYSTEM.md section 1. Names are the CSS names without the leading dashes. Where the web leaves a
@@ -12,7 +12,7 @@ import json
 import os
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-OUT = os.path.join(ROOT, 'apps', 'Clack', 'Clack', 'Assets.xcassets', 'Colors')
+OUT = os.path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackDesign', 'Resources', 'Assets.xcassets', 'Colors')
 
 
 def hex_(value):

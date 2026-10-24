@@ -5,6 +5,7 @@
 
 #if DEBUG
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// Debug only: every design component in both themes, for checking against the web app (docs/SWIFT_PORT.md step 4).

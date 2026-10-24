@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// A multi-leg journey door to door: a summary, a combined map and the legs joined by connections (DESIGN §7).

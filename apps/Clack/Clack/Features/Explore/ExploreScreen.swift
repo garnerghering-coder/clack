@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// The Explore tab: a calm radar of every train running in Sweden and Norway; tap a train or station for details,

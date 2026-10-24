@@ -4,6 +4,7 @@
 //
 
 import ClackCore
+import ClackDesign
 import SwiftUI
 
 /// The bottom tab bar (AppShell.tsx, styles.css `.tabbar`): Trips, Explore, Passport. A glass-strong bar with a
