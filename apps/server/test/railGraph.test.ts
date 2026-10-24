@@ -66,6 +66,42 @@ describe('the committed OSM rail graph', () => {
     expect(r.lengthM / 1000).toBeGreaterThan(440);
     expect(r.lengthM / 1000).toBeLessThan(470);
   });
+  // Routed lengths recorded from the graph before Finland was added (Sweden/Denmark/Norway only); adding Finland
+  // appends edges and must not change them.
+  it('still routes Swedish and Norwegian legs exactly as before Finland was added', () => {
+    const se = real!.route([59.3303, 18.0583], [57.7089, 11.973])!;
+    expect(se.lengthM / 1000).toBeCloseTo(453.068, 2);
+    const no = real!.route([59.911, 10.7527], [60.3905, 5.3335])!;
+    expect(no.lengthM / 1000).toBeCloseTo(459.302, 2);
+  });
+  // Finnish station coordinates from Digitraffic /metadata/stations. The ranges are plausibility checks (the
+  // track is longer than the straight line, shorter than a detour), not sourced distances.
+  it('routes Finnish legs along the track: Helsinki → Tampere, Oulu, Turku, Leppävaara', () => {
+    const hki: [number, number] = [60.1719, 24.9414];
+    const tpe = real!.route(hki, [61.498236, 23.773454])!;
+    expect(tpe.lengthM / 1000).toBeGreaterThan(170);
+    expect(tpe.lengthM / 1000).toBeLessThan(205);
+    const oulu = real!.route(hki, [65.012409, 25.486121])!;
+    expect(oulu.lengthM / 1000).toBeGreaterThan(640);
+    expect(oulu.lengthM / 1000).toBeLessThan(720);
+    const tku = real!.route(hki, [60.456488, 22.260867])!;
+    expect(tku.lengthM / 1000).toBeGreaterThan(165);
+    expect(tku.lengthM / 1000).toBeLessThan(215);
+    const lpv = real!.route(hki, [60.21948, 24.813541])!;
+    expect(lpv.lengthM / 1000).toBeGreaterThan(9);
+    expect(lpv.lengthM / 1000).toBeLessThan(14);
+  });
+  it('joins the Finnish and Swedish networks at Tornio–Haparanda', () => {
+    const tornio: [number, number] = [65.84534, 24.163576];
+    const haparanda: [number, number] = [65.828367, 24.131894];
+    const r = real!.route(tornio, haparanda)!;
+    expect(r.lengthM / 1000).toBeGreaterThan(2.4);
+    expect(r.lengthM / 1000).toBeLessThan(5);
+    // Oulu → Luleå crosses the border on track (no jump over the river).
+    const oulu = real!.route([65.012409, 25.486121], [65.5843, 22.1555])!;
+    expect(oulu.lengthM / 1000).toBeGreaterThan(280);
+    expect(oulu.lengthM / 1000).toBeLessThan(380);
+  });
   it('routes across the border: Kolding → Odense (Denmark)', () => {
     const r = real!.route([55.4904, 9.4834], [55.4017, 10.3866])!;
     expect(r.lengthM / 1000).toBeGreaterThan(65);

@@ -1,6 +1,10 @@
 // Builds the compact rail graph the server routes on: data/osm/rail-graph.json.gz (committed, ODbL).
 //
-// Input: data/cache/osm/rail.json from scripts/phase0/osm_rail_extract.py (SE + DK + NO extracts).
+// Input: data/cache/osm/rail.json from scripts/phase0/osm_rail_extract.py (SE + DK + NO + FI extracts).
+// Sweden, Denmark and Norway were extracted together (2026-10-19); Finland was extracted on its own
+// (rail-finland.json) and added with --base, which keeps the committed graph's nodes and edges as they are
+// and appends the new extract's edges, joining junctions that sit on the same coordinate (the Tornio-Haparanda
+// border is joined that way). Extracting all four together and building without --base gives an equivalent graph.
 // Chains of degree-2 nodes are collapsed into edges between junctions, and each edge's geometry is
 // simplified (Douglas–Peucker, 2 m) and stored as an encoded polyline (precision 5, ~1 m).
 //
@@ -10,13 +14,17 @@
 //         bits 1–2: kind (0 rail, 1 light_rail, 2 narrow_gauge)
 //         bit 3: usage is industrial/military/tourism (hidden in the rail-network layer)
 //
-// Usage: node scripts/osm/build-rail-graph.mjs [path/to/rail.json]
+// Usage: node scripts/osm/build-rail-graph.mjs [--base data/osm/rail-graph.json.gz] [path/to/rail.json]
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 
 const ROOT = path.resolve(import.meta.dirname, '../..');
-const src = process.argv[2] ?? path.join(ROOT, 'data/cache/osm/rail.json');
+const argv = process.argv.slice(2);
+const bi = argv.indexOf('--base');
+const basePath = bi >= 0 ? path.resolve(argv[bi + 1]) : null;
+if (bi >= 0) argv.splice(bi, 2);
+const src = argv[0] ?? path.join(ROOT, 'data/cache/osm/rail.json');
 const out = path.join(ROOT, 'data/osm/rail-graph.json.gz');
 
 const SERVICE = new Set(['yard', 'siding', 'spur']);
@@ -48,20 +56,36 @@ const isKey = (n) => {
 };
 const keyIdx = new Map();
 const nodesOut = [];
+const edges = [];
+// With --base: the committed graph's junctions (found again by coordinate) and edges come first, unchanged.
+const coordIdx = new Map();
+if (basePath) {
+  const base = JSON.parse(zlib.gunzipSync(fs.readFileSync(basePath)).toString('utf8'));
+  for (let i = 0; i < base.nodes.length; i += 2) {
+    coordIdx.set(`${base.nodes[i].toFixed(6)},${base.nodes[i + 1].toFixed(6)}`, i / 2);
+    nodesOut.push(base.nodes[i], base.nodes[i + 1]);
+  }
+  edges.push(...base.edges);
+}
+const baseEdges = edges.length;
 const keyOf = (n) => {
   let i = keyIdx.get(n);
   if (i === undefined) {
-    i = keyIdx.size;
-    keyIdx.set(n, i);
     const [la, lo] = coord.get(n);
-    nodesOut.push(+la.toFixed(6), +lo.toFixed(6));
+    const ck = `${la.toFixed(6)},${lo.toFixed(6)}`;
+    i = coordIdx.get(ck);
+    if (i === undefined) {
+      i = nodesOut.length / 2;
+      coordIdx.set(ck, i);
+      nodesOut.push(+la.toFixed(6), +lo.toFixed(6));
+    }
+    keyIdx.set(n, i);
   }
   return i;
 };
 
 const seen = new Set(); // "a,b" directed half-edges already walked
 const edgeKey = (a, b) => `${a},${b}`;
-const edges = [];
 function walk(start, next) {
   if (seen.has(edgeKey(start, next))) return;
   const f = adj.get(start).get(next);
@@ -127,7 +151,9 @@ function encode(pts) {
 const graph = {
   version: 1,
   generated: new Date().toISOString(),
-  source: 'OpenStreetMap extracts (Sweden, Denmark, Norway) via download.openstreetmap.fr',
+  source:
+    'OpenStreetMap extracts: Sweden, Denmark, Norway (download.openstreetmap.fr, 2026-10-19); ' +
+    'Finland (download.geofabrik.de/europe/finland-latest.osm.pbf, OSM data of 2026-10-23)',
   attribution: '© OpenStreetMap contributors',
   license: 'ODbL-1.0 (https://opendatacommons.org/licenses/odbl/1-0/)',
   nodes: nodesOut,
@@ -136,5 +162,5 @@ const graph = {
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, zlib.gzipSync(JSON.stringify(graph), { level: 9 }));
 const pts = edges.reduce((n, e) => n + e[3].length, 0);
-console.log(`${coord.size} OSM nodes -> ${keyIdx.size} junctions, ${edges.length} edges, polyline chars ${pts}`);
+console.log(`${coord.size} OSM nodes -> ${nodesOut.length / 2} junctions, ${edges.length} edges (${baseEdges} from the base graph), polyline chars ${pts}`);
 console.log(`wrote ${path.relative(ROOT, out)} (${(fs.statSync(out).size / 1e6).toFixed(2)} MB)`);

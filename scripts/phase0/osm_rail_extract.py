@@ -5,9 +5,11 @@ is kept but flagged so the router can penalise it: dropping it disconnects lines
 (Phase 0 found Borlänge–Falun and Hallsberg–Kumla unroutable without it).
 Writes data/cache/osm/rail.json: {"nodes": {id: [lat, lon]}, "ways": [[way_id, kind, usage, service, [node ids]]]}
 
-Usage: python3 scripts/phase0/osm_rail_extract.py <country.osm.pbf>...
-Several extracts (e.g. Sweden + Denmark + Norway) are merged; OSM ids are global, so ways on a
-border that appear in two files are simply de-duplicated.
+Usage: python3 scripts/phase0/osm_rail_extract.py [--out rail.json] <country.osm.pbf>...
+Several extracts (e.g. Sweden + Denmark + Norway + Finland) are merged; OSM ids are global, so ways on a
+border that appear in two files are simply de-duplicated. --out sets the output path (default: rail.json next
+to the first extract); use it to extract one country on its own, e.g. Finland, which scripts/osm/build-rail-graph.mjs
+then adds to the committed graph (--base) without re-extracting the others.
 (pyosmium: pip install osmium). A one-off data tool; the app itself is TypeScript.
 """
 import json
@@ -43,7 +45,11 @@ class Nodes(osmium.SimpleHandler):
             self.nodes[n.id] = [round(n.location.lat, 6), round(n.location.lon, 6)]
 
 
-pbfs = sys.argv[1:]
+args = sys.argv[1:]
+out = None
+if args and args[0] == "--out":
+    out, args = args[1], args[2:]
+pbfs = args
 r = Rail()
 for pbf in pbfs:
     r.apply_file(pbf)
@@ -52,7 +58,7 @@ n = Nodes(r.need)
 for pbf in pbfs:
     n.apply_file(pbf)
 print(f"rail ways {len(r.ways)}, nodes needed {len(r.need)}, found {len(n.nodes)}")
-out = pbfs[0].rsplit("/", 1)[0] + "/rail.json"
+out = out or pbfs[0].rsplit("/", 1)[0] + "/rail.json"
 with open(out, "w") as f:
     json.dump({"nodes": n.nodes, "ways": list(r.ways.values())}, f)
 print(f"wrote {out}")
