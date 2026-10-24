@@ -3,7 +3,7 @@
 //  ClackWidgets
 //
 //  What the widgets share: the app's words in the app's language, the time helpers, the placeholder, and a few small
-//  views (the empty state, the "Updated 12:04" line, a static split-flap time). Colours, type and icons come from
+//  views (the empty state, the "Updated 12:04" line). Colours, type and icons come from
 //  ClackDesign, the same tokens as the app, so the widgets follow light and dark mode.
 //
 
@@ -95,37 +95,6 @@ struct UpdatedLine: View {
             Text(l10n.t("widgets.updated", ["time": Format.time(updatedAt, tz: TimeZone.current.identifier, clock: clock)]))
                 .clack(.captionUpper).textCase(nil).foregroundStyle(Ink.text3).lineLimit(1)
         }
-    }
-}
-
-/// A time as a small departure board: one tile per digit (static; a widget can't animate).
-struct FlapText: View {
-    var text: String
-    var role: TextRole = .boardDestination
-    var color: Color = Ink.tflapText
-
-    var body: some View {
-        HStack(spacing: 1) {
-            ForEach(Array(text.enumerated()), id: \.offset) { _, ch in
-                let isDigit = ch.isNumber
-                Text(String(ch))
-                    .font(role.font).monospacedDigit()
-                    .foregroundStyle(isDigit ? color : Ink.text2)
-                    .frame(minWidth: isDigit ? role.size * 0.66 : nil)
-                    .padding(.vertical, 1)
-                    .background {
-                        if isDigit {
-                            LinearGradient(stops: [
-                                .init(color: Ink.tflapTop, location: 0), .init(color: Ink.tflapTop, location: 0.49),
-                                .init(color: Ink.tflapHinge, location: 0.5), .init(color: Ink.tflapBottom, location: 0.51),
-                                .init(color: Ink.tflapBottom, location: 1),
-                            ], startPoint: .top, endPoint: .bottom)
-                            .clipShape(RoundedRectangle(cornerRadius: Radius.tag / 2, style: .continuous))
-                        }
-                    }
-            }
-        }
-        .fixedSize()
     }
 }
 

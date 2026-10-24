@@ -136,16 +136,14 @@ private struct DeparturesView: View {
                         UpdatedLine(updatedAt: board.updatedAt, now: entry.date, l10n: l10n, clock: entry.clock)
                     }
                     ForEach(rows) { row in
-                        HStack(spacing: 8) {
-                            FlapText(text: Format.time(row.time, tz: board.tz ?? TimeZone.current.identifier, clock: entry.clock))
-                            Text(row.to).clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text).lineLimit(1)
-                                .strikethrough(row.canceled)
-                            Spacer(minLength: 4)
-                            DelayText(delay: row.delayMin, canceled: row.canceled)
-                            if let p = row.platform {
-                                Text(p).clack(.delay).monospacedDigit().foregroundStyle(Ink.text2).frame(minWidth: 20, alignment: .trailing)
-                            }
-                        }
+                        // The board's compact row, as on a station sheet in the app.
+                        BoardRowView(
+                            .init(
+                                time: row.leaves, sched: row.time, tz: board.tz ?? TimeZone.current.identifier, destination: row.to,
+                                platform: row.platform, delay: row.delayMin, canceled: row.canceled
+                            ),
+                            clock: entry.clock, dense: true
+                        )
                     }
                     if rows.isEmpty { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                     Spacer(minLength: 0)

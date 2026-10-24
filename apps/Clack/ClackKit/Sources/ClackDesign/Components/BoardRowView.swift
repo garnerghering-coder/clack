@@ -58,15 +58,18 @@ public struct BoardRowView<Badge: View>: View {
     public let line: Line
     public let clock: ClockFormat
     public var compact = false
+    /// No 44 pt minimum: rows that can't be tapped and must fit (a widget).
+    public var dense = false
     @ViewBuilder public var badge: Badge
 
     /// The time column, growing with the text size.
     @ScaledMetric(relativeTo: .body) private var timeWidth: CGFloat = 64
 
-    public init(_ line: Line, clock: ClockFormat, compact: Bool = false, @ViewBuilder badge: () -> Badge) {
+    public init(_ line: Line, clock: ClockFormat, compact: Bool = false, dense: Bool = false, @ViewBuilder badge: () -> Badge) {
         self.line = line
         self.clock = clock
-        self.compact = compact
+        self.compact = compact || dense
+        self.dense = dense
         self.badge = badge()
     }
 
@@ -123,7 +126,7 @@ public struct BoardRowView<Badge: View>: View {
             delay
             if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) }
         }
-        .frame(minHeight: 44)
+        .frame(minHeight: dense ? nil : 44)
     }
 
     /// Cancelled, or the delay once the train has reported or been estimated; nothing from the timetable alone.
@@ -138,7 +141,7 @@ public struct BoardRowView<Badge: View>: View {
 }
 
 extension BoardRowView where Badge == EmptyView {
-    public init(_ line: Line, clock: ClockFormat, compact: Bool = false) {
-        self.init(line, clock: clock, compact: compact) { EmptyView() }
+    public init(_ line: Line, clock: ClockFormat, compact: Bool = false, dense: Bool = false) {
+        self.init(line, clock: clock, compact: compact, dense: dense) { EmptyView() }
     }
 }

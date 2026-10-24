@@ -289,20 +289,19 @@ struct LiveStationSheet: View {
                 if rows.isEmpty {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                 } else {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 0) {
                         ForEach(rows) { row in
                             Button { onTrain(row) } label: {
-                                HStack(spacing: 8) {
-                                    FlapTime(time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm", clock: app.settings.clock, style: .text)
-                                        .font(ClackFont.inter(14, .semibold))
+                                BoardRowView(
+                                    .init(
+                                        time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm",
+                                        destination: row.endpoints.joined(separator: ", "), platform: row.platform,
+                                        delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil
+                                    ),
+                                    clock: app.settings.clock, compact: true
+                                ) {
                                     OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
-                                    Text(row.endpoints.joined(separator: ", ")).font(ClackFont.inter(14)).foregroundStyle(Ink.text).lineLimit(1)
-                                    Spacer(minLength: 0)
-                                    if let platform = row.platform {
-                                        Text(l10n.t("trips.platform", ["platform": platform])).clack(.caption).foregroundStyle(Ink.text2)
-                                    }
                                 }
-                                .frame(minHeight: 40).contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                         }
