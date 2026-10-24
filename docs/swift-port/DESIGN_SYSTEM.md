@@ -1,5 +1,7 @@
 # Clack visual design system: extraction for the SwiftUI port
 
+> The web app this file cites (`apps/web`) was removed from the repository; its last state is commit `787192a`.
+
 Source of truth: `DESIGN.md` wins on visuals (CLAUDE.md, "Which document wins"). The values below are copied verbatim
 from the web app as it stands (commit `cfde6a0`). Where the code and DESIGN.md disagree, see **§0**. All `styles.css`
 references are `apps/web/src/styles.css:<line>`.
@@ -220,7 +222,7 @@ Mono: `ui-monospace, 'SF Mono', Menlo, monospace` (`.passport-mrz`, :517).
 | Inter (variable) | Bundled via npm `@fontsource-variable/inter` ^5.3.0, imported in `main.tsx:3` | variable (400-800 used) | SIL OFL 1.1 |
 | Space Grotesk | Bundled via npm `@fontsource/space-grotesk` ^5.3.0, `main.tsx:4-5` imports `600.css` and `700.css` only | 600, 700 | SIL OFL 1.1 |
 | System mono | `ui-monospace, 'SF Mono', Menlo, monospace` | system | (system) |
-| Noto Sans Regular / Medium | Map label glyph PBFs in `apps/web/public/map/fonts/` (ranges 0-255, 256-511, 512-767, 768-1023, 1024-1279, 8192-8447) + `OFL.txt` | Regular, Medium | SIL OFL 1.1 (OFL.txt: "Copyright 2022 The Noto Project Authors") |
+| Noto Sans Regular / Medium | Map label glyph PBFs in `apps/server/assets/map-fonts/` (ranges 0-255, 256-511, 512-767, 768-1023, 1024-1279, 8192-8447) + `OFL.txt` | Regular, Medium | SIL OFL 1.1 (OFL.txt: "Copyright 2022 The Noto Project Authors") |
 
 Nothing is fetched from a font CDN. For SwiftUI: bundle Inter and Space Grotesk TTF/OTF (OFL allows it); fallback is
 the system font per DESIGN §2.2 ("Inter (fallback system UI font)").
@@ -640,7 +642,7 @@ found in code); count-up 900 ms (not found); optional haptic tick on iOS for the
   feature `{kind: 'rail'}` (OSM rail graph, service/minor tracks dropped) + one Point per rail station
   `{kind: 'station', id, name, dpd}` (dpd = weighted departures/day) (apps/server/src/geo/railNetwork.ts:44-66).
 - **Glyphs**: `${window.location.origin}/map/fonts/{fontstack}/{range}.pbf` (style.ts:123), Noto Sans Regular/Medium
-  bundled in `apps/web/public/map/fonts/` (OFL).
+  bundled in `apps/server/assets/map-fonts/` (OFL).
 - No sprite; markers are images drawn on canvas at runtime.
 - **Attribution text** (exact; MapLibre's own control is off, `attributionControl: false`):
   - Route/passport maps: `© OpenStreetMap contributors · Protomaps` (RouteMap.tsx:329, MultiRouteMap.tsx:132)
@@ -798,7 +800,7 @@ with 0.2 halo, destination pin accent with `--on-accent` text, POI badges raised
   { translation: en }, sv: { translation: sv } }` (single namespace `translation`), `lng: 'en'`, `fallbackLng: 'en'`,
   `interpolation: { escapeValue: false }`. Language follows `settings.language` (`'en' | 'sv'`, default `'en'`)
   via `i18n.changeLanguage` (settings.tsx:29-31; shared index.ts:28). Note: default is English, not the device language.
-- **Files**: `apps/web/src/i18n/locales/en.json`, `sv.json`. Nested JSON, 33 top-level groups (`app, nav, trips,
+- **Files**: `packages/shared/locales/en.json`, `sv.json`. Nested JSON, 33 top-level groups (`app, nav, trips,
   add, products, status, delay, detail, passport, settings, about, countries, common, map, live, activity, train,
   journey, stations, board, liveMap, onboard, stationMap, connection, record, share, manual, tickets, disruption,
   risk, progress, offline, privacy`). **764 leaf strings per locale**; the key sets are identical and placeholders
@@ -889,16 +891,12 @@ apps/server/src/import/brands.ts:13. Logos are not committed (trademarks) and ar
 
 | Asset | Path | Notes |
 |---|---|---|
-| iOS app icon | `apps/web/ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` | 1024×1024 RGB, single universal 1024 entry (Contents.json). Black `#0a0a0a` square, one yellow split-flap tile (`#f8d64a` top / `#e9c63c` bottom) with a black "c" and dark hinge line |
-| iOS launch image | `apps/web/ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732.png`, `-1.png`, `-2.png` | 2732×2732 each (1x/2x/3x), dark only: small "c" tile centred on `#0a0a0a` |
-| Launch storyboard | `apps/web/ios/App/App/Base.lproj/LaunchScreen.storyboard` | Image "Splash", `scaleAspectFill`, view bg `systemBackgroundColor` |
-| Capacitor | `apps/web/capacitor.config.ts` | `appId: 'app.clack'`, `appName: 'Clack'`, iOS `backgroundColor: '#0a0a0a'`, `contentInset: 'never'`, SplashScreen `launchShowDuration: 0`, bg `#0a0a0a` |
-| Favicon (vector logo tile) | `apps/web/public/favicon.svg` | 64×64: rounded rect r14 `#0a0a0a`; tile 32×40 at (16,12) r6, top half `#f8d64a`, bottom `#e9c63c`; "c" Inter 800 34 `#0a0a0a`; hinge `rect x=14 y=31.4 w=36 h=1.2` black at 0.4 |
-| PWA / touch icons | `apps/web/public/icons/apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` (also maskable) | PWA manifest theme/background `#0a0a0a` (vite.config.ts:15-22) |
-| Wordmark | `apps/web/src/components/Brand.tsx` (`Wordmark`, `Splash`) | Code-drawn, no image file (§3.11) |
+| iOS app icon | `apps/Clack/Clack/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` | 1024×1024, no transparency. Made by `scripts/ios/make_icon.py` from the wordmark's tile and "c" (`Design/WordmarkGlyphs.swift`); sync_assets.py does not touch it |
+| Launch screen | `Info.plist` `UILaunchScreen` with the colour `launch-bg` | No storyboard or image |
+| Wordmark | `apps/Clack/Clack/Design/Brand.swift`, `WordmarkGlyphs.swift` | Code-drawn, no image file (§3.11) |
 | Train drawings | `assets/trains/*.svg` (54 files, `<model>-<livery>.svg`, `plain` = unpainted), generated by `scripts/trains/export_svg.py` | er1-{malartag,plain}; flytoget71-{flytoget,plain}; flytoget78-{flytoget,plain}; no_flirt-{plain,vy}; no_type72-{go-ahead-norge,plain,vy}; no_type73-{go-ahead-norge,plain,sj-nord}; no_type76-{plain,sj-nord}; rc6_coaches-{plain,sj}; regina-{malartag,plain,sj,tib,varmlandstrafik,vasttagen,x-taget}; x11-{krosatag,plain}; x2000-{plain,sj-x2,sj}; x2000_trailer-{plain,sj-x2,sj}; x3-{arlanda-express,plain}; x31-{dsb,oresundstag,plain}; x40-{plain,sj}; x55-{plain,sj}; x60-{plain,sl}; x61-{pagatag,plain}; x61vt-plain; x62-{norrtag,plain}; x74-{plain,vr}; y31-{krosatag,plain,vasttagen} |
-| Sync script | `scripts/ios/sync_assets.py` | Copies locales → `<app>/Resources/i18n/`, train SVGs → `Assets.xcassets/Trains/<name>.imageset` (preserves vector), and the AppIcon set into `apps/Clack/Clack` (default) |
-| Fonts | npm packages (Inter, Space Grotesk); map glyphs `apps/web/public/map/fonts/` | Not present as TTF files in the repo; obtain OFL TTFs for bundling |
+| Sync script | `scripts/ios/sync_assets.py` | Copies `packages/shared/locales/{en,sv}.json` into the Swift package's i18n resources and the train SVGs into `Assets.xcassets/Trains/<name>.imageset` (preserves vector). It never touches the app icon |
+| Fonts | Inter and Space Grotesk TTFs in `apps/Clack/Clack/Resources/Fonts`; map glyphs in `apps/server/assets/map-fonts/` (served at `/api/map/fonts`) | Both OFL |
 
 DESIGN §14: app icon = "one signal-yellow split-flap tile with a black 'c' on black". Launch screen: wordmark flips in
 tile by tile, the rule, tagline near the bottom, on the theme's background; colourways black / yellow / white, app uses

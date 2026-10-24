@@ -1,6 +1,6 @@
 # Train pictures: how each one is drawn
 
-The detailed side views (`apps/web/src/components/trains/`) show a real train in its real livery. Accuracy is the
+The detailed side views (SVGs in `assets/trains/`, shown by the iPhone app) show a real train in its real livery. Accuracy is the
 point (owner, 2026-10-22): a picture that's roughly right is wrong. Every model follows these steps, and nothing is
 shown to the owner until step 5 passes.
 
@@ -45,9 +45,9 @@ shown to the owner until step 5 passes.
 ## Files
 
 - `scripts/trains/<model>.py`: the drawing, with the measured numbers and their sources. Prints the SVG.
-- `scripts/trains/lib.py`: the shared kit (body, doors, windows, bogies, livery layers). `python3 scripts/trains/<model>.py <livery>` prints one livery's SVG for the overlay; `--tsx` writes the component with every livery.
-- `scripts/trains/export_svg.py`: writes every model and livery as a standalone SVG file to `assets/trains/` (`<model>-<livery>.svg`, `plain` = unpainted). Rerun it after changing a drawing, together with `--tsx`.
-- `apps/web/src/components/trains/TrainPicture.tsx`: which train types have a drawing, and which operators' liveries.
+- `scripts/trains/lib.py`: the shared kit (body, doors, windows, bogies, livery layers). `python3 scripts/trains/<model>.py <livery>` prints one livery's SVG for the overlay.
+- `scripts/trains/export_svg.py`: writes every model and livery as a standalone SVG file to `assets/trains/` (`<model>-<livery>.svg`, `plain` = unpainted). Rerun it after changing a drawing, then `python3 scripts/ios/sync_assets.py` copies them into the Xcode asset catalog.
+- `apps/Clack/Clack/Logic/TrainArt.swift`: which train types have a drawing, and which operators' liveries (`Design/TrainPicture.swift` draws it).
 
 ## Lessons (X3, 2026-10-22)
 
@@ -71,5 +71,5 @@ Some types name more than one model because no source says which runs a given tr
 Y2", Vy's "Type 69 or 72", Flytoget's 71 or 78). The iPhone app shows the drawing of one of those models, in the
 operator's own livery, when one of them has been drawn in that livery (the first one listed in `TrainArt.candidates`
 wins); the name under the picture still reads "X11 or X14", so it never claims more than the data does. With no drawn
-candidate in that livery it falls back to the faint unpainted stand-in as before. The web app is not changed by this.
+candidate in that livery it falls back to the faint unpainted stand-in as before.
 

@@ -1,5 +1,7 @@
 # Clack iPhone client: screen and behaviour inventory (for the SwiftUI port)
 
+> The web app this file cites (`apps/web`) was removed from the repository; its last state is commit `787192a`.
+
 Source of truth: `apps/web/src` as of 2026-10-23. All paths below are relative to `apps/web/src/` unless they start
 with `packages/`, `data/`, `docs/`, `assets/` or a repo-root document name. Citations are `file:line` or
 `file:start-end`. Where the code and DESIGN.md/SPEC.md disagree, the code is described (parity target) and the
@@ -47,7 +49,7 @@ background with blur and a top hairline. The tab bar stays visible on every rout
 and modal sheets (backdrop z-index 40). Explore and the station map are laid out to end above the tab bar
 (`styles.css:635, 700`).
 
-**[doc differs]** DESIGN.md §3 still lists Trips/Passport/Settings tabs; the code (and docs/PRODUCT_BRIEF_STATUS.md)
+**[doc differs]** DESIGN.md §3 still lists Trips/Passport/Settings tabs; the code (and docs/archive/PRODUCT_BRIEF_STATUS.md)
 use Trips/Explore/Passport with Settings behind a gear.
 
 Secondary entry points to non-tab screens:

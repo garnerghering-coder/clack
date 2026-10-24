@@ -1,13 +1,12 @@
 # Clack in Swift: moving to the Mac and porting the app
 
-This is the plan for rebuilding Clack's iPhone app natively in SwiftUI, on Garner's Mac, with Claude. It has two
-parts:
+This is the plan the native SwiftUI iPhone app was built from, written for Claude working on the Mac: the decisions,
+the rules and the build order. Each step was one session of work. All fifteen steps and the native-only features (B9)
+are done; later work is tracked as workstreams A to J ("Clack: from ported to stellar"), see the end of this file.
 
-- **Part A** is for Garner: one-time steps to get from "Xcode is installed" to "Claude is building the Swift app".
-- **Part B** is for Claude on the Mac: the decisions, the rules and the build order. Each step is one session of work.
-
-The server doesn't change. It keeps running exactly as it does now; the Swift app is a new client for it, the same
-way the web app is. The web app stays as the reference ("parity target") until the Swift app matches it.
+The server did not change for the port. The Swift app is the only client. The web app that came first (`apps/web`,
+removed after the port) was the "parity target": where this file or the files in `swift-port/` cite it, read its last
+state with `git show 787192a:apps/web/src/<path>`.
 
 Three reference files go with this one, written from the code on 2026-10-23 (line numbers may drift; the code wins):
 
@@ -16,205 +15,6 @@ Three reference files go with this one, written from the code on 2026-10-23 (lin
   checklist per screen.
 - [`swift-port/DESIGN_SYSTEM.md`](swift-port/DESIGN_SYSTEM.md): every colour, radius, font, animation, map style and
   icon.
-
----
-
-# Part A: from Xcode to "Claude is building it" (Garner, about an hour)
-
-Do these in order. Each step says what you should see. If something looks different, paste a screenshot to Claude
-(Part A step 7 onward) and ask.
-
-## A1. Check Xcode
-
-1. Open **Xcode** once (Applications folder). If it asks to install components or the iOS platform, say yes and let it
-   finish. Accept the licence if asked.
-2. Open **Terminal** (Cmd+Space, type "Terminal", Return) and run:
-
-   ```
-   xcodebuild -version
-   ```
-
-   You should see `Xcode 26.x`. For Claude to see Xcode's builds and errors (A6) you need **26.3 or newer**; if it's
-   older, update Xcode from the App Store first.
-
-   If it says `xcode-select: error: tool 'xcodebuild' requires Xcode`, run this once (it asks for your Mac password)
-   and try again:
-
-   ```
-   sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-   ```
-
-3. In Xcode: **Xcode > Settings > Components** (called "Platforms" in older versions). Make sure an **iOS 26**
-   simulator is installed. If not, click **Get** next to it.
-
-## A2. Install Node.js (runs the server and the tests)
-
-1. Check whether you have it: in Terminal, `node -v`. If it prints `v22` or higher, skip to A3.
-2. Otherwise download the **LTS** installer from [nodejs.org](https://nodejs.org), run it, then close Terminal and open
-   a new window. `node -v` should now print a version.
-
-## A3. Get the code onto the Mac
-
-The easiest way, with no passwords typed into Terminal, is GitHub Desktop:
-
-1. Download [GitHub Desktop](https://desktop.github.com), open it, **Sign in to GitHub.com** with the account that owns
-   `garnerghering-coder/clack`.
-2. **File > Clone Repository**, pick `garnerghering-coder/clack`, set **Local Path** to `~/Developer` (so the code ends
-   up in `~/Developer/clack`), click **Clone**.
-3. Let Claude push to GitHub from Terminal too (once): download the GitHub CLI installer for macOS from
-   [cli.github.com](https://cli.github.com) (the `.pkg`), run it, then in a **new** Terminal window:
-
-   ```
-   gh auth login
-   ```
-
-   Answer: GitHub.com, HTTPS, Yes (authenticate Git), Login with a web browser. Then:
-
-   ```
-   gh auth setup-git
-   ```
-
-   (If you skip this, Claude can still commit; you push with the **Push origin** button in GitHub Desktop.)
-
-## A4. Run Clack on the Mac (the server the Swift app talks to)
-
-1. In Terminal:
-
-   ```
-   cd ~/Developer/clack
-   cp .env.example .env
-   open -e .env
-   ```
-
-2. TextEdit opens the file. After each `=`, paste your keys (the same ones the project has used): Trafikverket's API
-   key and the two Trafiklab GTFS keys. If you need new ones: [Trafikverket's API](https://api.trafikinfo.trafikverket.se/)
-   and [Trafiklab](https://www.trafiklab.se/). Save (Cmd+S) and close TextEdit.
-3. Install and start:
-
-   ```
-   npm install
-   npm run dev
-   ```
-
-   The first start downloads and imports the timetables and the map, which takes a while (watch the messages). When
-   it's ready, open [http://localhost:5173](http://localhost:5173) in Safari: you should see Clack, the web version.
-4. **Leave this Terminal window running** whenever you work on the app. It's the server. (Ctrl+C stops it;
-   `npm run dev` starts it again.)
-
-## A5. Install Claude Code
-
-1. Open a **second** Terminal window (Cmd+N). Install Claude Code:
-
-   ```
-   curl -fsSL https://claude.ai/install.sh | bash
-   ```
-
-2. Close that window and open a new one, then:
-
-   ```
-   cd ~/Developer/clack
-   claude
-   ```
-
-   The first time, it asks you to sign in with your Claude account. After that you're talking to Claude, in the
-   project. Type `/exit` to leave for now.
-
-## A6. Let Claude see Xcode (once)
-
-1. In Terminal, in `~/Developer/clack`:
-
-   ```
-   claude mcp add --transport stdio xcode -- xcrun mcpbridge
-   ```
-
-2. In Xcode: **Xcode > Settings > Intelligence**. Turn on access for external agents (Model Context Protocol). The
-   exact wording can differ a little between Xcode versions; it's the switch that lets other tools use Xcode.
-3. From now on, keep the Clack project open in Xcode while Claude works, so it can build it and read the errors.
-
-(Optional, for small Swift jobs later: the same Settings page has **Claude Agent > Get > Install**. It works inside
-Xcode's coding panel. For the port itself use Claude Code in Terminal: it sees the whole project, including the web app
-it's translating and the server.)
-
-## A7. Create the Swift app's project in Xcode
-
-Xcode makes its project files itself; this is the one step that's easiest done by hand.
-
-1. In Xcode: **File > New > Project…** Choose **iOS** at the top, then **App**, then **Next**.
-2. Fill in:
-
-   | Field | Value |
-   |---|---|
-   | Product Name | `Clack` |
-   | Team | Your Apple ID. If it says None: **Add Account…**, sign in, then pick "(Personal Team)". |
-   | Organization Identifier | Something you own, reversed, e.g. `com.garnerghering`. It becomes the app's id, `com.garnerghering.Clack`, and can't change once the app is on the App Store, so pick it for good. |
-   | Interface | SwiftUI |
-   | Language | Swift |
-   | Testing System | Swift Testing (with XCTest for UI tests) |
-   | Storage | None |
-
-3. **Next**. In the save dialog, go to `~/Developer/clack/apps` and select the **apps** folder. At the bottom,
-   **untick "Create Git repository on my Mac"** (the project is already in one). Click **Create**.
-
-   You now have `~/Developer/clack/apps/Clack/Clack.xcodeproj` and the folder `apps/Clack/Clack/` for the code.
-
-4. Click the blue **Clack** project at the top of the left sidebar, then the **Clack** target under TARGETS:
-   - **General > Supported Destinations**: keep **iPhone**; remove iPad, Mac and Vision (select, then **−**).
-   - **General > Minimum Deployments**: **iOS 17.0**.
-   - **General > Deployment Info > iPhone Orientation**: only **Portrait** ticked.
-   - **General > Identity > Display Name**: `Clack`.
-   - **Info** tab, under **Custom iOS Target Properties**: hover any row, click **+**, and add:
-     - `App Transport Security Settings` (a dictionary). Click its arrow, then **+** inside it and add
-       `Allow Local Networking` = `YES`. This lets the app talk to the server on your Mac.
-     - `Privacy - Local Network Usage Description` = `Clack connects to the Clack server on your Mac while the app is
-       being built.`
-     - `Privacy - Location When In Use Usage Description` = `Clack uses your location only when you tap My location on
-       a station map, to show where you are in the station. It stays on your phone.`
-   - Click the **Clack project** (not the target), **Info** tab, **Localizations**: click **+** and add **Swedish**.
-     Accept the dialog as it is.
-
-5. Add the map library: **File > Add Package Dependencies…**, paste
-   `https://github.com/maplibre/maplibre-gl-native-distribution` into the search field, **Add Package**, make sure
-   the **MapLibre** product is ticked for the **Clack** target, **Add Package**.
-
-6. At the top of the window, click the device menu (next to the ▶ button) and pick **iPhone 17 Pro**. Press **Cmd+R**.
-   The simulator opens and shows "Hello, world!". That's the empty app. Stop it with **Cmd+.**
-
-## A8. Hand over to Claude
-
-In your second Terminal window:
-
-```
-cd ~/Developer/clack
-claude
-```
-
-Then paste this as your first message:
-
-> Read CLAUDE.md and docs/SWIFT_PORT.md. I've done Part A: the Xcode project is at apps/Clack, the server is running
-> with npm run dev, and Xcode is open. Do step 1 of Part B only. Build with Xcode until it builds cleanly, tell me
-> exactly what to check in the simulator, and commit when I say it looks right.
-
-From then on, one step per conversation:
-
-> Do step N of docs/SWIFT_PORT.md Part B.
-
-Type `/clear` between steps so each starts fresh. Everything Claude needs is in the files, not in the chat.
-
-## A9. The everyday loop
-
-- **Start of a session:** Terminal 1: `cd ~/Developer/clack && npm run dev`. Open `apps/Clack/Clack.xcodeproj` in
-  Xcode. Terminal 2: `cd ~/Developer/clack && claude`.
-- **Checking Claude's work:** Cmd+R in Xcode runs the app in the simulator. To show Claude a problem, take a
-  screenshot of the simulator (**Cmd+S** saves one to the Desktop) and drag it into the Terminal window with your
-  message.
-- **Permission questions:** Claude asks before running commands. For ones that come up all the time (building, running
-  tests, `git commit`) choose the option that allows it from now on.
-- **Saving to GitHub:** Claude commits after each step you approve, and pushes if you did A3 step 3. Otherwise press
-  **Push origin** in GitHub Desktop.
-- **On your own iPhone:** plug it in, pick it in the device menu instead of the simulator, Cmd+R. The first time,
-  iPhone **Settings > Privacy & Security > Developer Mode** must be on, and in **Settings > General > VPN & Device
-  Management** you trust your developer certificate. Run the server with `npm run dev:phone` instead of `npm run dev`
-  so the phone can reach it (step 2 of Part B explains how the app finds the Mac).
 
 ---
 
@@ -249,7 +49,7 @@ Type `/clear` between steps so each starts fresh. Everything Claude needs is in 
 | Concurrency | Swift 6 language mode as the Xcode template sets it; UI and models on the main actor; networking in `nonisolated` async functions or an actor | Matches the template's defaults; no data races. |
 | Networking | `URLSession` with async/await; one `APIClient`; Server-Sent Events read with `URLSession.bytes(for:)` | No dependencies. |
 | Models | `Codable` structs mirroring API.md exactly | One source of truth: the server. |
-| Maps | MapLibre Native (the package added in A7), with a style built in code from `apps/web/src/map/style.ts` | Same look and the same tiles as the web; the server serves plain z/x/y tiles and the label fonts for it (B2). |
+| Maps | MapLibre Native (a Swift package), with a style built in code from `apps/web/src/map/style.ts` | Same look and the same tiles as the web; the server serves plain z/x/y tiles and the label fonts for it (B2). |
 | Strings | The web's `en.json`/`sv.json`, read at runtime by `L10n` (B5), same keys | One set of texts for both apps; 764 strings already translated and tested. |
 | Train pictures | The SVGs in `assets/trains/`, in the asset catalog (B7) | Drawn once, used everywhere. |
 | Identity | Random UUID v4 in the Keychain, sent as `X-Clack-User` | No sign-in (App Review 5.1.1(v)); survives reinstalls. "Delete my data" removes it. |
@@ -280,25 +80,26 @@ apps/Clack/Clack/
 apps/Clack/ClackTests/      Swift Testing tests, one file per Logic/ file
 ```
 
-**Server address** (`API/Config.swift`):
+**Server address** (`API/Config.swift`, a copy of the file as it is):
 
 ```swift
-enum Config {
-    /// Where the Clack server is. Debug in the simulator: the server on this Mac. Debug on a phone: the Mac by
-    /// name, through Vite's proxy (`npm run dev:phone`). Release: the hosted server (docs/IOS.md step 9).
+nonisolated enum Config {
+    /// Where the Clack server is: the hosted one, on the internet, for every build on a phone. Only a debug build in the
+    /// simulator uses the server running on this Mac (`npm run dev`), because that is where it is being worked on.
+    /// `-apiBase https://...` as a launch argument points a debug build anywhere else.
     static let apiBase: URL = {
+        let hosted = URL(string: "https://clack-garner.duckdns.org")!
         #if DEBUG
+        if let override = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: override) { return url }
         #if targetEnvironment(simulator)
         return URL(string: "http://localhost:3001")!
         #else
-        return URL(string: "http://\(macHostName).local:5173")!
+        return hosted
         #endif
         #else
-        return URL(string: "https://REPLACE-WITH-YOUR-SERVER")!
+        return hosted
         #endif
     }()
-    /// The Mac's local name: System Settings > General > Sharing > Local hostname, without ".local".
-    static let macHostName = "REPLACE-WITH-MAC-NAME"
     /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
     static let showOperatorLogos = true
     /// Shown on the Privacy screen when set (docs/APP_STORE.md, 1.5).
@@ -443,7 +244,7 @@ use earlier ones.
 
 ### Step 2. Running on a real iPhone
 
-- Set `Config.macHostName` with Garner (his Mac's local hostname).
+- (Done) The Mac-hostname setting this step first asked for is gone: debug builds in the simulator use `localhost:3001`.
 - **Garner checks:** with `npm run dev:phone` running, the app on his iPhone shows the same list; iOS asks to allow
   local network access (allow).
 
@@ -540,16 +341,15 @@ follow, save, delete). VoiceOver labels. Dynamic Type. Reduce Motion. Launch scr
 
 ### Step 15. Ship
 
-Follow docs/APP_STORE.md and docs/IOS.md steps 9 to 11 for the Swift app instead of the Capacitor one:
-`Config.apiBase` for Release, the privacy manifest (File > New > File > App Privacy), Swedish location text
-(InfoPlist strings), TestFlight. When the Swift app has shipped, remove the Capacitor project (`apps/web/ios`, the
-`@capacitor/*` packages and the `ios` scripts in `apps/web/package.json`) in one commit.
+Follow docs/APP_STORE.md and docs/SERVER.md: `Config.apiBase` for Release (done), the privacy manifest (done), Swedish
+location text (done), TestFlight. The Capacitor wrapper and the web app were removed from the repository before
+shipping.
 
-**Don't ship the Capacitor version first.** Its phones keep their id in the web view's storage, which the Swift app
-can't read, so anyone who installed it would lose their trips when it updated to Swift.
+## B9. After the port: native-only features (done)
 
-## B9. After the port: native-only features
+Built, each as its own step: the Home Screen and Lock Screen widgets, the Live Activity for the train you are on, and
+alerts sent by the server's push (docs/IOS.md). Ticket import from the share sheet and offline mode are built too.
 
-docs/IOS.md "Widgets, Live Activities and notifications" has the plan. They come after step 15, each as its own step:
-a widget extension (next train), a Live Activity for the train you're on (driven by the same live data), and delay
-notifications (needs the server to send pushes; plan it with Garner first).
+---
+
+Later work is tracked as workstreams A to J ("Clack: from ported to stellar"), not as steps in this file.
