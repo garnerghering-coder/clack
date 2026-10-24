@@ -134,6 +134,7 @@ struct SettingsScreen: View {
             Card {
                 Text(l10n.t("settings.yourData")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 LinkRow(label: l10n.t("settings.privacy"), route: .privacy)
+                ExportDataRow()
                 DeleteMyDataRow()
             }
             VersionFooter()
@@ -299,6 +300,57 @@ private struct NameRow: View {
         }
         .onAppear { value = app.settings.displayName }
         .onChange(of: app.settings.displayName) { _, new in if !focused { value = new } }
+    }
+}
+
+/// "Export my data" (DESIGN §11): everything the server keeps for this phone, as a JSON file, shared from the phone.
+/// Fetched when you ask; then the share sheet sends it where you like.
+private struct ExportDataRow: View {
+    enum Phase: Equatable { case idle, busy, ready(URL), failed }
+
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @State private var phase = Phase.idle
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            switch phase {
+            case .ready(let file):
+                ShareLink(item: file) {
+                    HStack(spacing: 8) {
+                        LucideIcon(name: "share-2", size: 16)
+                        Text(l10n.t("settings.exportShare"))
+                    }
+                }
+                .buttonStyle(.clack(.primary))
+                Text(file.lastPathComponent).clack(.caption).foregroundStyle(Ink.text2)
+            default:
+                Button {
+                    Task { await export() }
+                } label: {
+                    HStack(spacing: 8) {
+                        LucideIcon(name: "download", size: 16)
+                        Text(l10n.t("settings.export"))
+                    }
+                }
+                .buttonStyle(.clack())
+                .disabled(phase == .busy)
+                if phase == .failed { Text(l10n.t("settings.exportFailed")).clack(.caption).foregroundStyle(Ink.veryLateInk) }
+            }
+        }
+        .padding(.vertical, 8)
+    }
+
+    private func export() async {
+        phase = .busy
+        do {
+            let data = try await app.client.exportData()
+            let file = FileManager.default.temporaryDirectory.appendingPathComponent(DataExport.fileName(now: .now))
+            try data.write(to: file, options: [.atomic, .completeFileProtection])
+            phase = .ready(file)
+        } catch {
+            phase = .failed
+        }
     }
 }
 

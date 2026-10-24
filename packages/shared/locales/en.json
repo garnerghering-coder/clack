@@ -185,7 +185,8 @@
     "estimatedDistanceMore": "Part of this route couldn’t be matched to the rail network, so it’s drawn as straight lines.",
     "getOffNext": "Your stop is next: get off at {{name}}",
     "aboutTrain": "About this train",
-    "details": "Details"
+    "details": "Details",
+    "directions": "Directions to {{station}}"
   },
   "passport": {
     "title": "Passport",
@@ -386,7 +387,10 @@
     "offlineMapsCount_other": "{{count}} trips saved",
     "offlineMapsClear": "Clear saved maps",
     "changingNoteMore": "Step-free avoids stairs and escalators; heavy luggage adds time on stairs.",
-    "offlineMapsNoteMore": "The map along your trips in the next day and a half is saved while you’re online, so routes and the train still show with no signal."
+    "offlineMapsNoteMore": "The map along your trips in the next day and a half is saved while you’re online, so routes and the train still show with no signal.",
+    "export": "Export my data",
+    "exportShare": "Share the file",
+    "exportFailed": "Couldn’t export. Is the server running?"
   },
   "about": {
     "title": "Sources & methodology",

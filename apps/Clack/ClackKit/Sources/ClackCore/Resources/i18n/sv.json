@@ -185,7 +185,8 @@
     "estimatedDistanceMore": "En del av sträckan kunde inte matchas mot järnvägsnätet, så den ritas som raka linjer.",
     "getOffNext": "Nästa station är din: gå av i {{name}}",
     "aboutTrain": "Om tåget",
-    "details": "Detaljer"
+    "details": "Detaljer",
+    "directions": "Vägbeskrivning till {{station}}"
   },
   "passport": {
     "title": "Pass",
@@ -386,7 +387,10 @@
     "offlineMapsCount_other": "{{count}} resor sparade",
     "offlineMapsClear": "Rensa sparade kartor",
     "changingNoteMore": "Utan trappor undviker trappor och rulltrappor; tungt bagage ger längre tid i trappor.",
-    "offlineMapsNoteMore": "Kartan längs dina resor det närmaste dygnet sparas medan du är uppkopplad, så rutter och tåget syns även utan täckning."
+    "offlineMapsNoteMore": "Kartan längs dina resor det närmaste dygnet sparas medan du är uppkopplad, så rutter och tåget syns även utan täckning.",
+    "export": "Exportera min data",
+    "exportShare": "Dela filen",
+    "exportFailed": "Kunde inte exportera. Är servern igång?"
   },
   "about": {
     "title": "Källor och metod",

@@ -270,7 +270,7 @@ struct TripDetailScreen: View {
         case .times: timesRow(detail, live: shown, tracking: tracking).id("times")
         case .stops: Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
         case .connections: JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId)
-        case .directions: EmptyView()
+        case .directions: directions(detail)
         case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
         case .actions: actions(detail.leg)
@@ -333,6 +333,20 @@ struct TripDetailScreen: View {
             }
             Text(shown.map { l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: $0.updatedAt.ms, now: now)]) } ?? l10n.t("detail.timetableOnly"))
                 .clack(.caption).foregroundStyle(Ink.text2)
+        }
+    }
+
+    /// "Directions to Stockholm C": Apple Maps, to the station you get on at.
+    @ViewBuilder
+    private func directions(_ detail: LegDetail) -> some View {
+        if !detail.leg.canceled, let board = Directions.target(detail.stops), let url = Directions.appleMaps(lat: board.lat, lon: board.lon) {
+            Link(destination: url) {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "navigation", size: 16)
+                    Text(l10n.t("detail.directions", ["station": board.name]))
+                }
+            }
+            .buttonStyle(.clack())
         }
     }
 
