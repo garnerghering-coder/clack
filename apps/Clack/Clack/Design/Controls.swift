@@ -31,6 +31,9 @@ struct ClackButtonStyle: ButtonStyle {
             .hairlineBorder(radius: radius, color: border)
             .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.45)
             .textSelection(.disabled)
+            // A small button stays 34 pt to look at (DESIGN §2.3) but is 44 pt to hit (DESIGN §16).
+            .padding(.vertical, small ? 5 : 0)
+            .contentShape(Rectangle())
     }
 }
 
@@ -132,6 +135,9 @@ struct ChipButton: View {
             .frame(minHeight: 34)
             .background(active ? Ink.accent : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm, color: active ? Ink.accent : Ink.hairline)
+            // 34 pt to look at, 44 pt to hit.
+            .padding(.vertical, 5)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(active ? .isSelected : [])

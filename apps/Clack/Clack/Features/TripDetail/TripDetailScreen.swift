@@ -16,6 +16,7 @@ struct TripDetailScreen: View {
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let id: String
 
     @State private var leg: LegDetail?
@@ -66,7 +67,8 @@ struct TripDetailScreen: View {
                     .hairlineBorder(radius: Radius.input)
                     .clackShadow()
                     .padding(.horizontal, 16).padding(.top, 12)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                    // Reduce Motion: it fades instead of sliding down.
+                    .transition(reduceMotion ? .opacity : .move(edge: .top).combined(with: .opacity))
                     .accessibilityAddTraits(.updatesFrequently)
             }
         }
@@ -76,7 +78,7 @@ struct TripDetailScreen: View {
         .task(id: toast) {
             guard toast != nil else { return }
             try? await Task.sleep(for: .seconds(6))
-            withAnimation(.easeOut(duration: 0.25)) { toast = nil }
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { toast = nil }
         }
         .confirmationDialog(l10n.t("detail.deleteConfirm"), isPresented: $confirmDelete, titleVisibility: .visible) {
             Button(l10n.t("detail.delete"), role: .destructive) { Task { await remove() } }
@@ -108,7 +110,10 @@ struct TripDetailScreen: View {
             await load()
             if let shown = update.events.first(where: { $0.type != .departed }), let leg {
                 let stops = leg.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }
-                withAnimation(.easeOut(duration: 0.25)) { toast = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops) }
+                let text = TripDetailLogic.eventText(l10n, shown, leg: leg.leg, stops: stops)
+                withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { toast = text }
+                // A delay or platform change is said out loud too (DESIGN §16).
+                AccessibilityNotification.Announcement(text).post()
             }
         }
     }

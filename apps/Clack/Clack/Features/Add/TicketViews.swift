@@ -56,6 +56,7 @@ struct TicketReturnPrompt: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var offer: TicketPending?
     @State private var phase = Phase.ask
 
@@ -101,7 +102,8 @@ struct TicketReturnPrompt: View {
         .clackShadow()
         .padding(.horizontal, 12)
         .padding(.bottom, 12)
-        .transition(.move(edge: .bottom).combined(with: .opacity))
+        // Reduce Motion: it fades in instead of sliding up.
+        .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
         .accessibilityElement(children: .contain)
     }
 

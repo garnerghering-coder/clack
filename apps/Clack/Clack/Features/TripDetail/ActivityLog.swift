@@ -28,7 +28,7 @@ struct ActivityLog: View {
                         HStack(alignment: .firstTextBaseline, spacing: 8) {
                             Text(Format.time(event.ts.ms, tz: tz, clock: app.settings.clock))
                                 .monospacedDigit().foregroundStyle(alarming ? Ink.veryLateInk : Ink.text2)
-                                .frame(width: 56, alignment: .leading)
+                                .frame(minWidth: 56, alignment: .leading)
                             Text(TripDetailLogic.eventText(l10n, event, leg: leg, stops: stops)).foregroundStyle(alarming ? Ink.veryLateInk : Ink.text)
                         }
                         .clack(.body)

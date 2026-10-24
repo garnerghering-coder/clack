@@ -474,7 +474,7 @@ private struct EndButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                Text(caption).clack(.caption).foregroundStyle(Ink.text2).frame(width: 38, alignment: .leading)
+                Text(caption).clack(.caption).foregroundStyle(Ink.text2).frame(minWidth: 38, alignment: .leading)
                 if me { LucideIcon(name: "locate-fixed", size: 14).foregroundStyle(Ink.text) }
                 Text(value ?? l10n.t("stationMap.choose")).clack(.body).fontWeight(value == nil ? .medium : .semibold)
                     .foregroundStyle(value == nil ? Ink.text3 : Ink.text).lineLimit(1)
