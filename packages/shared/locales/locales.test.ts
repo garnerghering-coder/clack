@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CO2_COMPARISONS, LANGUAGES } from '@clack/shared';
-import en from './locales/en.json';
-import sv from './locales/sv.json';
+import en from './en.json';
+import sv from './sv.json';
 
 describe('en locale', () => {
   it('has a label for every shared option', () => {

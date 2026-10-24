@@ -20,7 +20,7 @@ const banner = (lines: string[]) => {
   const bar = '═'.repeat(w);
   console.log(`\n\x1b[1;32m╔${bar}╗\n${lines.map((l) => `║  ${l.padEnd(w - 2)}║`).join('\n')}\n╚${bar}╝\x1b[0m\n`);
 };
-const ready = () => banner(['✓ Clack is ready', 'Open http://localhost:5173 in your browser', 'Stop with Ctrl+C']);
+const ready = () => banner(['✓ Clack server is ready', `Listening on ${config.host}:${config.port}`, 'Stop with Ctrl+C']);
 
 const db = openDb(config.databasePath);
 // A failed promise somewhere (a feed timing out mid-request) is logged and the server carries on; a thrown error

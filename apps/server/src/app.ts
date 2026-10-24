@@ -37,8 +37,7 @@ const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f
  */
 const requireUser = /^(1|true|yes|on)$/i.test(process.env.CLACK_REQUIRE_USER ?? '');
 const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|operators\/[a-z0-9-]+\/logo$)/;
-/** Pages allowed to call the API from another origin: the iOS app (Capacitor serves it from capacitor://localhost). */
-const allowedOrigins = new Set((process.env.CLACK_ALLOWED_ORIGINS ?? 'capacitor://localhost').split(',').map((o) => o.trim()).filter(Boolean));
+
 
 export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions; liveMap?: IngestOptions } = {}) {
   const app = Fastify({ logger: opts.logger ?? false });
@@ -48,14 +47,6 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   // id is the key to that phone's trips, so it's a long random UUID. Without one (the laptop demo) it's the local user.
   const known = new Set<string>([LOCAL_USER_ID]);
   app.addHook('onRequest', async (req, reply) => {
-    const origin = req.headers.origin;
-    if (origin && allowedOrigins.has(origin)) {
-      reply.header('Access-Control-Allow-Origin', origin);
-      reply.header('Vary', 'Origin');
-      reply.header('Access-Control-Allow-Headers', 'Content-Type, X-Clack-User');
-      reply.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-      if (req.method === 'OPTIONS') return reply.code(204).send();
-    }
     const raw = (req.headers['x-clack-user'] as string | undefined) ?? (req.query as { u?: string } | undefined)?.u;
     const valid = !!raw && USER_ID.test(raw);
     if (!valid && requireUser && req.url.startsWith('/api/') && !OPEN_WITHOUT_USER.test(req.url.split('?')[0]!)) {

@@ -1,12 +1,16 @@
-"""Copies what the native iPhone app shares with the web app into its Xcode project, so there is one source for each:
+"""Copies what the iPhone app shares with the rest of the repository into its Xcode project and Swift package, so
+there is one source for each:
 
-- the strings: apps/web/src/i18n/locales/{en,sv}.json -> <app>/Resources/i18n/ (read by L10n.swift, same keys)
+- the strings: packages/shared/locales/{en,sv}.json -> apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/
+  (read by L10n.swift, same keys)
 - the train drawings: assets/trains/*.svg -> <app>/Assets.xcassets/Trains/<model>-<livery>.imageset (vector, any size)
-- the app icon: apps/web/ios/App/App/Assets.xcassets/AppIcon.appiconset -> <app>/Assets.xcassets/AppIcon.appiconset
 
-Run from the repository root after changing any of them (docs/SWIFT_PORT.md, "Shared assets"):
-    python3 scripts/ios/sync_assets.py            # into apps/Clack/Clack
-    python3 scripts/ios/sync_assets.py <app dir>  # elsewhere
+The app icon is not touched: it is made by scripts/ios/make_icon.py and lives in the Xcode project.
+
+Run from the repository root after changing either source:
+    python3 scripts/ios/sync_assets.py                          # strings into ClackCore, drawings into apps/Clack/Clack
+    python3 scripts/ios/sync_assets.py <app dir>                # drawings into <app dir>, strings into <app dir>/i18n
+    python3 scripts/ios/sync_assets.py <app dir> <strings dir>  # both elsewhere
 The copies are generated: edit the originals, never the copies.
 """
 import json
@@ -16,6 +20,13 @@ import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 APP = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(ROOT, 'apps', 'Clack', 'Clack')
+I18N = (
+    os.path.abspath(sys.argv[2])
+    if len(sys.argv) > 2
+    else os.path.join(APP, 'i18n')
+    if len(sys.argv) > 1
+    else os.path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackCore', 'Resources', 'i18n')
+)
 XCODE_INFO = {'info': {'author': 'xcode', 'version': 1}}
 
 
@@ -32,16 +43,15 @@ def fresh(path):
 
 def main():
     if not os.path.isdir(APP):
-        raise SystemExit(f'{APP} does not exist: create the Xcode project first (docs/SWIFT_PORT.md, part A)')
+        raise SystemExit(f'{APP} does not exist: create the Xcode project first')
     catalog = os.path.join(APP, 'Assets.xcassets')
     os.makedirs(catalog, exist_ok=True)
     if not os.path.exists(os.path.join(catalog, 'Contents.json')):
         write_json(os.path.join(catalog, 'Contents.json'), XCODE_INFO)
 
-    i18n = os.path.join(APP, 'Resources', 'i18n')
-    fresh(i18n)
+    os.makedirs(I18N, exist_ok=True)
     for lang in ('en', 'sv'):
-        shutil.copy(os.path.join(ROOT, 'apps', 'web', 'src', 'i18n', 'locales', f'{lang}.json'), i18n)
+        shutil.copy(os.path.join(ROOT, 'packages', 'shared', 'locales', f'{lang}.json'), I18N)
 
     trains = os.path.join(catalog, 'Trains')
     fresh(trains)
@@ -58,13 +68,7 @@ def main():
             'properties': {'preserves-vector-representation': True},
         })
 
-    icon = os.path.join(catalog, 'AppIcon.appiconset')
-    fresh(icon)
-    src = os.path.join(ROOT, 'apps', 'web', 'ios', 'App', 'App', 'Assets.xcassets', 'AppIcon.appiconset')
-    for f in os.listdir(src):
-        shutil.copy(os.path.join(src, f), icon)
-
-    print(f'strings (en, sv), {len(svgs)} train drawings and the app icon -> {os.path.relpath(APP, ROOT)}')
+    print(f'strings (en, sv), {len(svgs)} train drawings -> {os.path.relpath(APP, ROOT)}, strings -> {os.path.relpath(I18N, ROOT)}')
 
 
 if __name__ == '__main__':
