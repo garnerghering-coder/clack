@@ -1,9 +1,8 @@
-// Turns the Lucide icons the web app uses into vector template images for the Swift app, so the icons match 1:1
-// (docs/SWIFT_PORT.md B6). Reads lucide-react from node_modules (ISC licence, copied next to the app's resources) and
+// Turns the Lucide icons the app uses into vector template images for the Swift app (docs/SWIFT_PORT.md B6). Reads lucide-react from node_modules (ISC licence, copied next to the app's resources) and
 // writes apps/Clack/ClackKit/Sources/ClackDesign/Resources/Assets.xcassets/Icons/lucide-<name>.imageset. Names are Lucide's own kebab-case names.
 //
-// The three tab icons also get a "-thin" version at stroke 1.75: the web draws only the navigation icons that thin
-// (AppShell.tsx); everything else uses Lucide's default stroke 2.
+// The three tab icons also get a "-thin" version at stroke 1.75: only the navigation icons are drawn that thin;
+// everything else uses Lucide's default stroke 2.
 //
 // Run from the repository root after adding an icon to ICONS:
 //     node scripts/ios/make_icons.mjs
@@ -15,8 +14,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const LUCIDE = path.join(ROOT, 'node_modules', 'lucide-react');
 const OUT = path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackDesign', 'Resources', 'Assets.xcassets', 'Icons');
 
-// Every icon imported from 'lucide-react' in apps/web/src (kebab-case; the web's AlertTriangle is Lucide's
-// triangle-alert and Globe2 is globe, Trash2 is trash, under their current names).
+// Every icon the app uses (Lucide's kebab-case names; lucide-react is a root dev dependency, ISC licence).
 const ICONS = [
   'accessibility', 'activity', 'triangle-alert', 'arrow-down-up', 'arrow-left', 'baby', 'bed-double', 'bike', 'check',
   'chevron-down', 'chevron-right', 'chevron-up', 'clock', 'coffee', 'compass', 'crown', 'door-open', 'download',
@@ -24,7 +22,7 @@ const ICONS = [
   'map-pin', 'maximize-2', 'moon', 'navigation', 'paw-print', 'plug', 'plus', 'radar', 'refresh-cw', 'repeat', 'route',
   'search', 'settings', 'share-2', 'sliders-horizontal', 'smartphone', 'stamp', 'star', 'ticket', 'toilet', 'train-front',
   'trash', 'volume-x', 'wifi', 'wifi-off', 'x',
-  // Station map pictograms (StationScene.tsx POI_ICONS).
+  // Station map pictograms (the station map's points of interest).
   'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];

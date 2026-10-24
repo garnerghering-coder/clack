@@ -1,7 +1,9 @@
 # Clack HTTP API inventory (for the SwiftUI port)
 
+> The web app this file cites (`apps/web`) was removed from the repository; its last state is commit `787192a`.
+
 Source of truth read for this: `apps/server/src/app.ts`, every `apps/server/src/routes/*.ts`, the server modules that
-build each response (cited per endpoint), `packages/shared/src/*`, `apps/web/src/api.ts`, `apiBase.ts`, `live.ts`,
+build each response (cited per endpoint), `packages/shared/src/*`, the removed web client's `apps/web/src/api.ts`, `apiBase.ts`, `live.ts`,
 `offline.ts`, and every web file that calls `fetch`, `EventSource` or `apiUrl(`.
 
 Notation: `field: Type` = always present; `field?: Type` = key may be absent; `| null` = key present, value may be
@@ -16,18 +18,14 @@ null. "ms" = UTC epoch milliseconds (JSON number). "ISO" = an ISO-8601 UTC strin
 
 ### Base URL
 
-- All endpoints live under `/api`. The web client builds `${API_BASE}/api${path}` (`apps/web/src/api.ts:27`).
-- `API_BASE` is `VITE_API_BASE` with trailing slashes removed (`apps/web/src/apiBase.ts:4`). It is empty on the laptop
-  (same origin). The iPhone build sets it to the hosted server, e.g. `https://clack-garner.duckdns.org`
-  (`docs/IOS.md` step 6/7). In production Caddy proxies `/api/*` to `127.0.0.1:3001` with `flush_interval -1`, so SSE
-  is not buffered.
+- All endpoints live under `/api`: the app builds `Config.apiBase.appending(path: "api/...")` (`apps/Clack/Clack/API/Config.swift`).
+  Release builds use the hosted server, `https://clack-garner.duckdns.org`; a debug build in the simulator uses
+  `http://localhost:3001` (override with the launch argument `-apiBase <url>`). In production Caddy proxies everything
+  to `127.0.0.1:3001`, with the live streams uncompressed and `flush_interval -1` so SSE is not buffered
+  (`docs/SERVER.md`).
 - Server port: `PORT` env, default **3001**, host `HOST` env, default `127.0.0.1` (`apps/server/src/env.ts`,
   `config.port`/`config.host`; `index.ts` calls `app.listen({ port: config.port, host: config.host })`).
-- Dev: Vite runs on **5173** and proxies `/api` to `process.env.CLACK_API ?? 'http://127.0.0.1:3001'`
-  (`apps/web/vite.config.ts`, `server.proxy`). The iPhone simulator shares the Mac's network, so a Swift client
-  there can use `http://localhost:3001` directly. A real iPhone can't reach 127.0.0.1 on the Mac: run
-  `npm run dev:phone` (Vite listens on the network) and use `http://<mac-name>.local:5173`, whose `/api` is proxied.
-- Map tile URLs need an absolute origin: `apiOrigin() = API_BASE || window.location.origin` (`apiBase.ts:18`).
+- Map tile URLs need an absolute origin: the app builds them from `Config.apiBase`.
 
 ### Identity (no login)
 
@@ -47,50 +45,7 @@ null. "ms" = UTC epoch milliseconds (JSON number). "ISO" = an ISO-8601 UTC strin
 
 ### CORS
 
-- Only for an `Origin` listed in `CLACK_ALLOWED_ORIGINS` (default `capacitor://localhost`) (`app.ts:33`, `42-50`):
-  sets `Access-Control-Allow-Origin: <origin>`, `Vary: Origin`, `Access-Control-Allow-Headers: Content-Type,
-  X-Clack-User`, `Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS`; an `OPTIONS` preflight gets
-  204.
-- A native `URLSession` client sends no `Origin`, so CORS does not apply. Nothing to do on the server for Swift.
-
-### Request conventions (from `request()`, `api.ts:18-43`)
-
-- Send `Content-Type: application/json` **only when there is a body**. Fastify rejects an empty body labelled JSON
-  (400). Bodyless POST/PUT/DELETE (`/legs/:id/refresh`, `/stations/:id/viewed`, `/stations/:id/favorite`, `/me`,
-  `/legs/:id`) must not set it.
-- GET timeout in the web client: 15 s (`GET_TIMEOUT_MS`, `api.ts:16`); a timeout or network failure is treated as
-  offline.
-- 204 means no body (`api.ts:38`).
-- Any non-2xx: the body is parsed as JSON and the client reads `error` (and `duplicateOf` for 409)
-  (`ApiError`, `api.ts:6-13`).
-- Offline cache: successful GETs whose path matches these regexes are saved to `localStorage` and returned when the
-  network fails (`offline.ts:14`): `^/legs$`, `^/legs/[^/]+$`, `^/journeys/[^/]+$`, `^/operators$`,
-  `^/train-types$`, `^/settings$`, `^/amenities$`, `^/stations/[^/?]+$`, `^/stations/[^/]+/map$`. At most 60 entries,
-  oldest dropped first (`MAX_ENTRIES`). Live data is never kept.
-
-### Error body shapes
-
-- Route-produced errors: `{ "error": string }` (English text, not localised). `POST /legs` 409 adds
-  `"duplicateOf": string` (a leg id).
-- Fastify's own errors (unhandled exception, unknown route, bad JSON):
-  `{ "statusCode": number, "error": string /* e.g. "Internal Server Error", "Not Found", "Bad Request" */,
-  "message": string, "code"?: string }`. So for a 500, `error` is the generic HTTP phrase and the detail is in
-  `message`. Upstream failures (Trafikverket or Entur down) on `/stations/:id/board`, `/legs/:id/refresh` and similar
-  come back this way as 500.
-
-### Health
-
-- `GET /api/health` (`routes/health.ts:12`), no identity needed. Response:
-  - `ok: true`
-  - `uptimeS: number` (seconds)
-  - `memoryMb: { rss: number, heap: number }` (MB, rounded)
-  - `feeds: { [feed: "trafikverket" | "entur"]: { okAt: number | null /*ms*/, failAt: number | null /*ms*/,
-    failures: number, lastError: string | null, status: "ok" | "degraded" | "down" | "unknown" } }`. A feed key only
-    appears once that feed has been called (`lib/health.ts:34`).
-  - `gps: { accepted: number, rejected: number, recent: { key: string, at: string, reason: "area" | "jump",
-    meters?: number, seconds?: number, kmh?: number }[] }` (`live/sanitize.ts:54`; `at` is a string, format not
-    checked further: unclear).
-- Not called by the web app. Use it for a "server reachable" check.
+- None. The server sends no CORS headers: the only client is the native app, and a `URLSession` client sends no `Origin`.
 
 ---
 
@@ -698,12 +653,8 @@ Also, for native map libraries (added 2026-10-23, `routes/map.ts`, test `mapTile
 - Web: raw `fetch(apiUrl('/api/map/status'))` once per app run (`map/RouteMap.tsx:44`); only `Boolean(basemap)` is
   used, to choose the basemap style. On failure treated as `{ basemap: null }`.
 
-#### `GET /api/map/basemap.pmtiles`
-- PMTiles archive with HTTP Range support: `Accept-Ranges: bytes`, `Content-Type: application/vnd.pmtiles`,
-  `Cache-Control: no-cache`. With `Range: bytes=a-b` it answers 206 with `Content-Range`; a bad range gives 416. No
-  Range header returns the whole file (200).
-- 404 `{ error: "basemap not downloaded yet" }`.
-- Web: MapLibre source `pmtiles://${apiOrigin()}/api/map/basemap.pmtiles` (`map/style.ts:44`).
+#### `GET /api/map/basemap.pmtiles` (removed)
+- Removed with the web app, which read the archive with HTTP Range requests. The app uses `GET /api/map/tiles/{z}/{x}/{y}.mvt` (B2 of SWIFT_PORT.md).
 
 #### `GET /api/map/rail-network.geojson`
 - GeoJSON FeatureCollection, sent **gzip-encoded** (`Content-Encoding: gzip`, `Content-Type: application/geo+json`,

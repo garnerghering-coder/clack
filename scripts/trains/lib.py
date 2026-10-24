@@ -2,14 +2,13 @@
 
 A model script builds one Drawing: the body, doors, windows, bogies and nose from measurements read off side-on
 photos, plus each livery's paint as layers tagged with the liveries they belong to. The same Drawing then renders
-  - an SVG for one livery (`python3 scripts/trains/<model>.py <livery>`), for the overlay check, and
-  - the React component (`python3 scripts/trains/<model>.py --tsx`), with every livery switchable by prop.
+an SVG for one livery (`python3 scripts/trains/<model>.py <livery>`), for the overlay check; `export_svg.py` writes
+them all to assets/trains/, which the iPhone app uses (scripts/ios/sync_assets.py).
 
 Coordinates: x in metres back from the nose tip (`d.x(m)`), y as a fraction of body height down from the roof
 (`d.y(f)`), 1 m = 40 drawing units. The train faces right.
 """
 import json
-import re
 import sys
 
 PLAIN = 'plain'
@@ -123,57 +122,13 @@ class Drawing:
         body = [s for s, only in self.items if only is None or livery in only]
         return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{self.viewbox()}"><defs>{"".join(self.defs.values())}</defs>\n' + '\n'.join(body) + '\n</svg>\n'
 
-    def tsx(self, component, comment, liveries_type):
-        ids = sorted(self.defs.keys(), key=len, reverse=True)
 
-        def jsx(s):
-            s = re.sub(r'\b([a-z]+(?:-[a-z]+)+)=', lambda m: m.group(1).split('-')[0] + ''.join(p.capitalize() for p in m.group(1).split('-')[1:]) + '=', s)
-            for i in ids:
-                s = s.replace(f'id="{i}"', 'id={`${p}' + i + '`}').replace(f'"url(#{i})"', '{`url(#${p}' + i + ')`}')
-            return s
-
-        lines = []
-        for s, only in self.items:
-            if only is None:
-                lines.append(jsx(s))
-            else:
-                cond = ' || '.join(f'livery === {json.dumps(l)}' for l in only)
-                lines.append('{(' + cond + ') && (' + jsx(s) + ')}' if not s.startswith('<g') and s != '</g>' else None)
-        # Groups are never livery-only (the kit opens and closes them for every livery).
-        lines = [l for l in lines if l is not None]
-        defs = jsx(''.join(self.defs.values()))
-        return f'''{comment}
-import {{ useId }} from 'react';
-
-export type {component}Livery = {liveries_type};
-
-export function {component}({{ livery, muted = false, className, label }}: {{ livery: {component}Livery; muted?: boolean; className?: string; label?: string }}) {{
-  const p = useId().replace(/:/g, '');
-  return (
-    <svg className={{className}} viewBox="{self.viewbox()}" role={{label ? 'img' : undefined}} aria-label={{label}} aria-hidden={{label ? undefined : true}}>
-      <defs>{defs}</defs>
-      <filter id={{`${{p}}mute`}}>
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <g opacity={{muted ? 0.35 : 1}} filter={{muted ? `url(#${{p}}mute)` : undefined}}>
-{chr(10).join(lines)}
-      </g>
-    </svg>
-  );
-}}
-'''
-
-
-def main(d, component, comment, out_tsx):
-    """Command line for a model script: `<livery>` prints that livery's SVG; `--tsx` writes the component; `--liveries`
-    lists the liveries (for export_svg.py)."""
+def main(d):
+    """Command line for a model script: `<livery>` prints that livery's SVG; `--liveries` lists the liveries (for
+    export_svg.py)."""
     arg = sys.argv[1] if len(sys.argv) > 1 else PLAIN
     if arg == '--liveries':
         print(json.dumps(d.liveries))
-    elif arg == '--tsx':
-        t = ' | '.join(json.dumps(l) for l in d.liveries)
-        open(out_tsx, 'w').write(d.tsx(component, comment, t))
-        print(f'wrote {out_tsx}')
     else:
         if arg not in d.liveries:
             raise SystemExit(f'unknown livery {arg}; have {d.liveries}')

@@ -45,13 +45,4 @@ describe('per-device identity', () => {
     expect((await app.inject({ url: '/api/health' })).statusCode).toBe(200);
     expect((await app.inject({ url: '/api/map/status' })).statusCode).toBe(200);
   });
-
-  it('lets the iOS app call it (CORS for capacitor://localhost only)', async () => {
-    app = buildApp(openDb(':memory:'));
-    const pre = await app.inject({ method: 'OPTIONS', url: '/api/settings', headers: { origin: 'capacitor://localhost', 'access-control-request-method': 'PATCH' } });
-    expect(pre.statusCode).toBe(204);
-    expect(pre.headers['access-control-allow-origin']).toBe('capacitor://localhost');
-    const other = await app.inject({ url: '/api/settings', headers: { origin: 'https://evil.example' } });
-    expect(other.headers['access-control-allow-origin']).toBeUndefined();
-  });
 });

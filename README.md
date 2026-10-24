@@ -1,11 +1,15 @@
 # Clack
 
 Log every train you ride, see it on the real tracks, and build a passport of your rail history.
-Phase 1 is a single-user demo for Sweden and Norway that runs on your laptop. See [`SPEC.md`](SPEC.md) for the plan,
+It is a native SwiftUI iPhone app (`apps/Clack`) and a server it talks to (`apps/server`), which holds the trips and
+fetches the train data. See [`SPEC.md`](SPEC.md) for what it does, [`DESIGN.md`](DESIGN.md) for how it looks,
 [`DATA_FINDINGS.md`](DATA_FINDINGS.md) for what Phase 0 learned about Sweden's data and
 [`NORWAY_DATA_FINDINGS.md`](NORWAY_DATA_FINDINGS.md) for Norway's.
 
 ## Run it (macOS)
+
+The app needs Xcode (26 or later). The server runs on the Mac for development; the app uses the hosted server
+(`docs/SERVER.md`) unless it is a debug build in the simulator, which uses the one on this Mac.
 
 **One-time setup**
 
@@ -30,23 +34,24 @@ cd clack
 npm run dev
 ```
 
-Wait for the green **✓ Clack is ready** box in Terminal, then open <http://localhost:5173>. Stop with Ctrl+C.
+Wait for the green **✓ Clack server is ready** box in Terminal. The server listens on <http://localhost:3001>
+(`/api/health` shows it is up). Stop with Ctrl+C. Then open `apps/Clack/Clack.xcodeproj` in Xcode, choose an iPhone
+simulator and press Cmd+R: a debug build in the simulator talks to this server.
 
 - **First start is slow.** The server downloads the timetable (~800 MB, one use of the monthly GTFS Sweden 3 quota)
   and imports it. Station search stays empty until the Terminal prints `imported in … s`. It then downloads the map
   background once (~470 MB from Protomaps' free map build, kept as ~80 MB in `data/cache/basemap/`; the Terminal prints
-  `Basemap: wrote …` when done). Maps still draw your routes before that, just on a plain dark background. Later
+  `Basemap: wrote …` when done). The app's maps still draw your routes before that, just on a plain background. Later
   starts are quick. To fetch the map background by hand: `npm run import -- basemap`. It also downloads each train
   operator's logo (their website's app icon) into `data/cache/logos/`; operators without one show coloured initials.
-- **On your iPhone:** run `npm run dev:phone`, click **Allow** if the Mac asks about incoming connections, and open the
-  "Network" address Vite prints (e.g. `http://192.168.1.20:5173`) in Safari on the same Wi-Fi. Installing it as a
-  home-screen app needs HTTPS, which comes later.
+- **On your iPhone:** a build on a phone uses the hosted server, not your Mac. To point a debug build at another
+  server, pass `-apiBase https://…` as a launch argument. Putting the server online and updating it: `docs/SERVER.md`.
 - **Norway** needs no key. Entur's rail timetables (~100 MB for Vy, Go-Ahead, SJ Nord and Flytoget) download on
   first start and at most once a day after that. Every request to Entur names the app (`ENTUR_CLIENT_NAME`, default
   `garner-clack`), as Entur asks.
 - **Delay data:** Trafikverket keeps actual times for only ~4 days, and Entur only for the day the train runs. The server saves them for your trips while it's
   running and catches up when it starts, so start the app at least every few days.
-- **Updating:** `git pull`, then `npm install` if dependencies changed.
+- **Updating:** `git pull`, then `npm ci` if dependencies changed (the hosted server: `docs/SERVER.md`).
 - **If something goes wrong** the server restarts itself: after a crash, or if it stops answering for five minutes
   (Terminal shows a yellow `[supervisor]` line saying which). `http://localhost:3001/api/health` shows how Trafikverket
   and Entur are answering.
@@ -59,7 +64,7 @@ Wait for the green **✓ Clack is ready** box in Terminal, then open <http://loc
 
 ## How often it asks Trafikverket and Entur
 
-Everything is shared on the server: two browser tabs (or, later, two people) looking at the same thing cost the same
+Everything is shared on the server: two phones looking at the same thing cost the same
 as one. Nothing polls while nobody is looking, except your own trips.
 
 | What | Requests | When |
@@ -99,19 +104,21 @@ trains show without destination or delay, and no estimated trains appear yet.
 
 | Path | What |
 |---|---|
-| `apps/web` | React + TypeScript + Vite PWA (MapLibre maps come in a later step) |
-| `apps/server` | Fastify + TypeScript API, SQLite via Drizzle (`data/app.db`) |
-| `packages/shared` | Types shared by both |
-| `scripts/` | One-off data tools (`phase0/` = data verification, `fixtures/` = saving test data) |
+| `apps/Clack` | The SwiftUI iPhone app (`Clack.xcodeproj`; the Swift package `ClackKit` with ClackCore and ClackDesign is being split out of it) |
+| `apps/server` | Fastify + TypeScript API, SQLite via Drizzle (`data/app.db`); also serves the privacy page |
+| `packages/shared` | Types and constants the server and its tests use, and the strings (`locales/en.json`, `sv.json`) the app copies |
+| `assets/trains` | The train drawings (SVG), made by `scripts/trains` |
+| `scripts/` | Data tools (`phase0/`, `fixtures/`, `stations/`), the train drawings (`trains/`) and what feeds the app (`ios/`) |
 | `data/` | Hand-maintained config (category rules, station overrides), test fixtures; downloads go to `data/cache/` |
+| `docs/` | Plans and notes: the app (`IOS.md`, `SWIFT_PORT.md`), the hosted server (`SERVER.md`), App Review (`APP_STORE.md`) |
 
 ## Other commands
 
 ```sh
-npm test              # all tests
+npm test              # server and shared tests
 npm run typecheck
-npm run build         # production build of the web app
 npm run db:generate   # after changing apps/server/src/db/schema.ts, create a migration
+python3 scripts/ios/sync_assets.py   # copy the strings and train drawings into the app
 ```
 
 Migrations run automatically when the server starts.
