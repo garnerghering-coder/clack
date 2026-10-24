@@ -18,6 +18,8 @@ struct ClackApp: App {
         // From launch, also a launch in the background: iOS wakes the app to hand over the address of a trip card the
         // server started, and that has to reach the server before any screen appears.
         LiveActivityManager.shared.observe { model.client }
+        // A silent push or a background refresh can wake the app with no screen: they refresh through this model.
+        BackgroundRefresh.shared.attach(model)
     }
 
     var body: some Scene {

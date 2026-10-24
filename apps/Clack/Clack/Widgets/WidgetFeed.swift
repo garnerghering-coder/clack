@@ -25,11 +25,12 @@ enum WidgetFeed {
 
     private static func nowMs() -> Double { Date.now.timeIntervalSince1970 * 1000 }
 
-    static func refresh(legs: [Leg], details: [String: LegDetail], app: AppModel) async {
+    /// `immediate` (the background routine, which has seconds to finish) writes now, however recent the last write.
+    static func refresh(legs: [Leg], details: [String: LegDetail], app: AppModel, immediate: Bool = false) async {
         guard WidgetSnapshot.containerURL != nil else { return }
         latest = (legs, details)
         let wait = lastRun + debounceMs - nowMs()
-        if wait > 0 {
+        if wait > 0, !immediate {
             // One write is already waiting: it will take these legs.
             guard trailing == nil else { return }
             trailing = Task { @MainActor in

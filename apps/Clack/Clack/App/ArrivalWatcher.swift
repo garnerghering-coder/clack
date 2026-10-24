@@ -72,20 +72,30 @@ final class ArrivalWatcher {
         }
     }
 
-    func refresh(_ app: AppModel) async {
-        if let fresh = try? await app.client.legs() {
+    /// Fetches the legs and brings everything that depends on them up to date. Also the background routine
+    /// (`BackgroundRefresh`): `changed` is a leg the server said changed (its details are fetched again even if just
+    /// kept), and `widgetsNow` writes the widgets' snapshot at once instead of after the 30 s debounce. True when the legs
+    /// were fetched.
+    @discardableResult
+    func refresh(_ app: AppModel, changed: String? = nil, widgetsNow: Bool = false) async -> Bool {
+        let fresh = try? await app.client.legs()
+        if let fresh {
             legs = fresh
+            if let changed { fetched[changed] = nil }
             // The trip card (Live Activity): one for a journey about to leave, ended when the journey is over.
             await LiveActivityManager.shared.refresh(legs: fresh, enabled: app.settings.notify, settings: app.settings)
-            await prefetch(fresh, app: app)
+            await prefetch(fresh, app: app, widgetsNow: widgetsNow)
         }
         lastFetch = Self.nowMs()
         evaluate()
+        // The next wake-up with the app closed: before the next departure, else the next morning.
+        BackgroundRefresh.shared.schedule(legs: legs)
+        return fresh != nil
     }
 
     /// While online, keeps the details of the trips that are running or leave within 36 hours on the phone (and pinned there), so
     /// the app can show and estimate them with no connection (owner, 2026-10-24).
-    private func prefetch(_ legs: [Leg], app: AppModel) async {
+    private func prefetch(_ legs: [Leg], app: AppModel, widgetsNow: Bool) async {
         let client = app.client
         let now = Self.nowMs()
         let soon = legs.filter { leg in
@@ -103,7 +113,7 @@ final class ArrivalWatcher {
             if let journey = leg.journeyId { _ = try? await client.journey(journey) }
         }
         await client.pin(pinned)
-        await WidgetFeed.refresh(legs: legs, details: detailCache, app: app)
+        await WidgetFeed.refresh(legs: legs, details: detailCache, app: app, immediate: widgetsNow)
         // The map around each of those trips, for when there is no connection.
         if await app.mapHasBasemap() { await OfflineMaps.ensure(soon.compactMap { detailCache[$0.id] }, keep: Set(soon.map(\.id))) }
     }

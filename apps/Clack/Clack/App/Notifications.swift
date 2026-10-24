@@ -75,17 +75,21 @@ final class NotificationManager: NSObject {
 
     private var uploaded: String?
 
-    /// Tells the server this phone's address (when alerts are on and Apple has given one), once per change. The
-    /// push-to-start address goes with it only when known: left out, the server keeps the one it has.
+    /// Tells the server this phone's address (when alerts are on and Apple has given one, in this launch or the last:
+    /// a launch in the background may come before Apple hands it over again), once per change. The push-to-start
+    /// address and the widgets' push address (`WidgetPush`, written by the widget extension) go with it only when known:
+    /// left out, the server keeps the one it has. Once registered, the extension may send a new widget address itself.
     func sync(_ client: APIClient, enabled: Bool) async {
-        guard enabled, let token else { return }
-        let key = "\(token)|\(startToken ?? "")|\(client.userID)"
+        guard enabled, let token = deviceToken else { return }
+        let widgetToken = WidgetPush.token()
+        let key = "\(token)|\(startToken ?? "")|\(widgetToken ?? "")|\(client.userID)"
         guard uploaded != key else { return }
         do {
             try await client.registerDevice(DeviceRegistration(
-                token: token, environment: Self.environment, startToken: TokenUpdate(startToken)
+                token: token, environment: Self.environment, startToken: TokenUpdate(startToken), widgetToken: TokenUpdate(widgetToken)
             ))
             uploaded = key
+            WidgetPush.setRegistered(token: token, environment: Self.environment)
         } catch {
             uploaded = nil
         }
@@ -93,7 +97,8 @@ final class NotificationManager: NSObject {
 
     /// The server forgets this phone (alerts switched off, or the data deleted).
     func forget(_ client: APIClient) async {
-        guard let token else { return }
+        WidgetPush.clearRegistered()
+        guard let token = deviceToken else { return }
         try? await client.forgetDevice(token)
         uploaded = nil
     }
@@ -114,11 +119,24 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     }
 }
 
-/// Receives what Apple sends back about this phone: the address alerts go to.
+/// Receives what Apple sends back about this phone: the address alerts go to, and the server's silent pushes.
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = NotificationManager.shared
+        BackgroundRefresh.register()
         return true
+    }
+
+    /// A silent push (`content-available`): a trip changed, so the app refreshes what the widgets and the trip card
+    /// show, within the 30 seconds iOS gives it.
+    func application(
+        _ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        guard let push = BackgroundRefresh.Push(userInfo) else { return completionHandler(.noData) }
+        Task {
+            completionHandler(await BackgroundRefresh.shared.handle(push))
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
