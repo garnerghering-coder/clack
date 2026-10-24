@@ -837,6 +837,17 @@ restart forgets it. Apple's guidance for background pushes is no more than two o
   the app's). A dead widget token is cleared, the phone kept. WidgetKit budgets these pushes and delivers them
   opportunistically; they add to timeline reloads, they don't replace them.
 
+**The app's side** (`App/BackgroundRefresh.swift`, `ClackWidgets/WidgetPushHandler.swift`, rules in ClackCore
+`RefreshSchedule` and `WidgetPush`, tested in `RefreshScheduleTests`): Info.plist `UIBackgroundModes` `fetch` and
+`remote-notification`. A background push runs the foreground refresh (`ArrivalWatcher.refresh`: legs, the named leg's
+details fetched again, trip cards, the widgets' snapshot written at once and the changed kinds reloaded, the device
+registration), cut off after 25 s. The fallback is a `BGAppRefreshTask` (`com.garnerghering.Clack.refresh`, in
+`BGTaskSchedulerPermittedIdentifiers`) asked for 45 minutes before the next departure (at least 15 minutes ahead and
+still before it leaves), else the next 06:00 in the phone's time zone, whichever comes first; it is asked for again after
+every refresh. Next journey and Departures have the push handler (iOS 26+); the extension (entitlement `aps-environment`)
+keeps its token in the App Group and sends `{ token, environment, widgetToken }` itself only when the app has registered
+the phone (alerts on); the app sends `widgetToken` with each of its own registrations when known.
+
 ---
 
 ## 3. Streaming

@@ -56,6 +56,7 @@ struct NextJourneyWidget: Widget {
         .configurationDisplayName(WidgetWords.t("widgets.nextJourney.name"))
         .description(WidgetWords.t("widgets.nextJourney.description"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
+        .freshnessPushHandler()
     }
 }
 

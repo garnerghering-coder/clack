@@ -116,6 +116,7 @@ struct DeparturesWidget: Widget {
         .configurationDisplayName(WidgetWords.t("widgets.departures.name"))
         .description(WidgetWords.t("widgets.departures.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
+        .freshnessPushHandler()
     }
 }
 
