@@ -87,6 +87,23 @@ struct TrainArtTests {
         #expect(UIImage(named: "fi_sm2-vr-fi-red") != nil)
     }
 
+    @Test func slsNarrowGaugeLinesGetTheirOwnDrawingsInSLsLivery() {
+        #expect(picture("sl_c10", nil, "sl").asset == "sl_c10-sl")
+        #expect(picture("sl_x15p", nil, "sl").asset == "x15p-sl")
+        // Roslagsbanan runs X10p and X15p and nothing says which: the first candidate drawn in SL's livery.
+        #expect(picture("sl_roslagsbanan", nil, uncertain: true, "sl").asset == "x10p-sl")
+        #expect(picture("x60", nil, "sl").asset == "x60-sl")
+    }
+
+    @Test func theNewLiveriesAreFoundForTheirOperators() {
+        #expect(picture("x61", nil, "ostgotapendeln").asset == "x61-ostgotapendeln")
+        #expect(picture("x61_vt", nil, "vasttagen").asset == "x61vt-vasttagen")
+        #expect(picture("regina", nil, "varmlandstrafik").asset == "regina-varmlandstrafik")
+        #expect(picture("no_type73", nil, "vy").asset == "no_type73-vy")
+        #expect(picture("no_type69", nil, "vy").asset == "no_type69-vy")
+        #expect(picture("no_el18", nil, "vy").asset == "no_el18-vy")
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")

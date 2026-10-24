@@ -12,6 +12,15 @@ describe('typical train types', () => {
     expect(typicalTrainType('snalltaget', 'intercity', '306')).toBe('loco_coaches');
   });
 
+  it("keeps Roslagsbanan and Saltsjöbanan off the X60 (sv/en.wikipedia, read 2026-10-24: the X60 runs the Pendeltåg only)", () => {
+    expect(typicalTrainType('sl', 'commuter', '6001', ['Stockholms östra', 'Österskär'])).toBe('sl_roslagsbanan');
+    expect(typicalTrainType('sl', 'commuter', '2201', ['Mörby', 'Kårsta'])).toBe('sl_roslagsbanan');
+    expect(typicalTrainType('sl', 'commuter', '101', ['Saltsjö-Järla', 'Solsidan'])).toBe('sl_c10');
+    // Pendeltåg: ends that are on no narrow-gauge line, so unchanged (also when the ends are not known).
+    expect(typicalTrainType('sl', 'commuter', '2580', ['Märsta', 'Södertälje centrum'])).toBe('x60');
+    expect(typicalTrainType('sl', 'commuter', '2580')).toBe('x60');
+  });
+
   it('returns nothing for an unknown operator rather than guessing', () => {
     expect(typicalTrainType('nobody', 'regional', '1')).toBeNull();
     // Krösatåg runs Itinos on some lines and older electric units on others: no single typical type.

@@ -39,9 +39,10 @@ public nonisolated enum TrainArt {
         "rc6_coaches": Detailed(model: "rc6_coaches", liveries: ["sj"]),
         "x60": Detailed(model: "x60", liveries: ["sl"]),
         // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units.
-        "x61": Detailed(model: "x61", liveries: ["pagatag"]),
+        "x61": Detailed(model: "x61", liveries: ["pagatag", "ostgotapendeln"]),
         // Västtrafik's X61s: the X60's door layout, unpainted while the repaint is under way.
-        "x61_vt": Detailed(model: "x61vt", liveries: []),
+        // The yellow scheme (`x61vt-vasttagen-yellow`) is in the catalogue; the blue one is the current one.
+        "x61_vt": Detailed(model: "x61vt", liveries: ["vasttagen"]),
         "x62": Detailed(model: "x62", liveries: ["norrtag"]),
         "x74": Detailed(model: "x74", liveries: ["vr"]),
         "y31": Detailed(model: "y31", liveries: ["krosatag", "vasttagen"]),
@@ -50,10 +51,17 @@ public nonisolated enum TrainArt {
         "er1": Detailed(model: "er1", liveries: ["malartag"]),
         "flytoget71": Detailed(model: "flytoget71", liveries: ["flytoget"]),
         "flytoget78": Detailed(model: "flytoget78", liveries: ["flytoget"]),
-        "regina": Detailed(model: "regina", liveries: ["vasttagen", "tib", "x-taget", "sj", "malartag"]),
+        "regina": Detailed(model: "regina", liveries: ["vasttagen", "tib", "x-taget", "sj", "malartag", "varmlandstrafik"]),
         "no_flirt": Detailed(model: "no_flirt", liveries: ["vy"]),
         "no_type72": Detailed(model: "no_type72", liveries: ["go-ahead-norge", "vy"]),
-        "no_type73": Detailed(model: "no_type73", liveries: ["sj-nord", "go-ahead-norge"]),
+        "no_type73": Detailed(model: "no_type73", liveries: ["sj-nord", "go-ahead-norge", "vy"]),
+        "no_type69": Detailed(model: "no_type69", liveries: ["vy", "go-ahead-norge"]),
+        "no_type93": Detailed(model: "no_type93", liveries: ["sj-nord"]),
+        "no_el18": Detailed(model: "no_el18", liveries: ["vy"]),
+        // Stockholm: SL's narrow-gauge lines (hand-made, owner-supplied drawings).
+        "sl_x10p": Detailed(model: "x10p", liveries: ["sl"]),
+        "sl_x15p": Detailed(model: "x15p", liveries: ["sl"]),
+        "sl_c10": Detailed(model: "sl_c10", liveries: ["sl"]),
         "no_type76": Detailed(model: "no_type76", liveries: ["sj-nord"]),
         // Finland: hand-made, owner-supplied drawings (docs/TRAIN_ART.md). `vr-fi` is VR Group, Finland; the Swedish
         // `vr` (VR Snabbtåg, X74) never gets one of these. Sm2 also has a red scheme (`fi_sm2-vr-fi-red`) in the
@@ -67,6 +75,8 @@ public nonisolated enum TrainArt {
         "fi_dm12": Detailed(model: "fi_dm12", liveries: ["vr-fi"]),
         // Registered but no rule uses it: which coach type (Edo?) it shows is unverified.
         "fi_ic_cab": Detailed(model: "fi_ic_cab", liveries: ["vr-fi"]),
+        // Registered, no rule uses it: which wagon types it shows is not recorded.
+        "fi_ic_coaches": Detailed(model: "fi_ic_coaches", liveries: ["vr-fi"]),
     ]
 
     /// The drawn model nearest to each family ("art" in data/train_types.json), shown unpainted and faded when the
@@ -105,7 +115,9 @@ public nonisolated enum TrainArt {
     public static let candidates: [String: [String]] = [
         "x11_x14": ["x11"],
         "itino_y2": ["y31"],
-        "no_type69_72": ["no_type72"],
+        "no_type69_72": ["no_type72", "no_type69"],
+        // Roslagsbanan: X10p or X15p run side by side and nothing says which train is which; the X10p is simply listed first.
+        "sl_roslagsbanan": ["sl_x10p", "sl_x15p"],
         "flytoget": ["flytoget71", "flytoget78"],
         // Finland: InterCity locomotive Sr2 or Sr3; Helsinki commuter Sm5, Sm4 or Sm2 (Digitraffic compositions,
         // 2026-10-24). In HSL's livery the Sm5 is drawn, in VR's the Sm4.

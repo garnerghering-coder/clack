@@ -4,7 +4,7 @@
 import { and, eq, isNull, or } from 'drizzle-orm';
 import type { AmenityEntry } from '@clack/shared';
 import type { Db } from '../db/client.js';
-import { legs, timetableTrips } from '../db/schema.js';
+import { legs, stations, timetableStopTimes, timetableTrips } from '../db/schema.js';
 import { readDataFile } from '../dataFiles.js';
 import { productOf } from '../search/timetable.js';
 import { normName } from '../lib/geo.js';
@@ -136,20 +136,35 @@ export function typicalTrainType(operatorId: string | null, product: string, tra
   return null;
 }
 
+/** The names of a trip's first and last stop (what the `ends` rules match), or none for a leg without a timetable trip. */
+function tripEnds(db: Db, tripKey: string | null): string[] {
+  if (!tripKey) return [];
+  const rows = db
+    .select({ seq: timetableStopTimes.seq, name: stations.name })
+    .from(timetableStopTimes)
+    .innerJoin(stations, eq(stations.id, timetableStopTimes.stationId))
+    .where(eq(timetableStopTimes.tripKey, tripKey))
+    .orderBy(timetableStopTimes.seq)
+    .all();
+  return rows.length ? [rows[0]!.name, rows[rows.length - 1]!.name] : [];
+}
+
 /**
  * Fills in the typical type for legs saved before train types existed, and re-derives the ones that are only
  * typical, so a corrected rule reaches trips already saved. Never overrides the owner's choice or a coach order.
  */
 export function backfillTrainTypes(db: Db): number {
   const todo = db
-    .select({ id: legs.id, trainType: legs.trainType, operatorId: legs.operatorId, trainNumber: legs.trainNumber, routeType: timetableTrips.routeType, category: timetableTrips.category })
+    .select({ id: legs.id, tripKey: legs.timetableTripKey, trainType: legs.trainType, operatorId: legs.operatorId, trainNumber: legs.trainNumber, routeType: timetableTrips.routeType, category: timetableTrips.category })
     .from(legs)
     .leftJoin(timetableTrips, eq(timetableTrips.key, legs.timetableTripKey))
     .where(or(and(isNull(legs.trainType), isNull(legs.trainTypeSource)), eq(legs.trainTypeSource, 'typical')))
     .all();
   let n = 0;
   for (const l of todo) {
-    const type = typicalTrainType(l.operatorId, productOf(l.routeType ?? '', l.category ?? ''), l.trainNumber);
+    // The trip's first and last stops, so the rules that go by end stations (SL's narrow-gauge lines, Norrtåg, ...) apply to
+    // saved legs too; without them such a leg fell through to the operator's default.
+    const type = typicalTrainType(l.operatorId, productOf(l.routeType ?? '', l.category ?? ''), l.trainNumber, tripEnds(db, l.tripKey));
     if (type === l.trainType) continue;
     if (!type) {
       db.update(legs).set({ trainType: null, trainTypeSource: null }).where(eq(legs.id, l.id)).run();
