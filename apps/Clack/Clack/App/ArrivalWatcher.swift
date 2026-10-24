@@ -75,10 +75,8 @@ final class ArrivalWatcher {
     func refresh(_ app: AppModel) async {
         if let fresh = try? await app.client.legs() {
             legs = fresh
-            // The trip card (Live Activity): start one for a trip about to leave, end the ones that are over.
-            let manager = LiveActivityManager.shared
-            for leg in fresh { manager.start(for: leg, enabled: app.settings.notify, client: app.client) }
-            await manager.endFinished(legs: fresh)
+            // The trip card (Live Activity): one for a journey about to leave, ended when the journey is over.
+            await LiveActivityManager.shared.refresh(legs: fresh, enabled: app.settings.notify, settings: app.settings)
             await prefetch(fresh, app: app)
         }
         lastFetch = Self.nowMs()

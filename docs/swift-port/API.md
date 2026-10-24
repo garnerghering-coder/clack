@@ -737,7 +737,8 @@ Also, for native map libraries (added 2026-10-23, `routes/map.ts`, test `mapTile
 ### 2.13 Push: phones, Live Activities, widgets (`routes/push.ts`, `push/*`)
 
 Every token is a hex string, 32 to 400 characters (`/^[0-9a-f]{32,400}$/i`); the server lowercases it. `environment` is
-`"sandbox"` (Debug builds) or `"production"` (TestFlight, App Store).
+`"sandbox"` (signed for development: the embedded profile's `aps-environment` is `development`; the simulator) or
+`"production"` (TestFlight, App Store, or a profile that says `production`).
 
 #### `PUT /api/devices`
 - Body: `{ token: string, environment: string, startToken?: string | null, widgetToken?: string | null }`.
@@ -796,10 +797,13 @@ All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactiv
   take an end for a passing reason the server keeps the row and tries again the next minute. Rows older than 12 hours
   (Apple's maximum: 8 hours running and 4 on the Lock Screen) are dropped.
 
-**What the app must change for this:** start a card locally only if no card of the same `journeyId` is running
-(today it checks `legId`); end cards only when the whole journey is over (today `endFinished` ends a card when its
-`attributes.legId` has arrived, which would kill the card the server just moved on); register cards with
-`deviceToken`; read the new `content-state` leg fields.
+**The app's side** (`App/LiveActivities.swift`, rules in ClackCore `TripCard`, tested in `TripCardTests`): a card is
+started locally only if no card of the same `journeyId` is running and none was started for that journey before; cards
+end only when the whole journey is over (the leg the card shows is cancelled, or the last leg arrived); every card,
+also one the server started (`Activity.activityUpdates`, watched from launch), is registered with the leg it shows now
+and `deviceToken`; the views read the `content-state` leg fields first. `startToken` is sent only when known (kept
+between launches), and `environment` comes from the `aps-environment` in the app's embedded provisioning profile (none:
+production).
 
 #### Freshness pushes: background and widgets (`push/notifier.ts` `fresh`)
 The server looks at every tracked leg each minute and on each tracker update. When one of these changes since its last

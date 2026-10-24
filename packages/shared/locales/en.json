@@ -452,6 +452,23 @@
     "platformSetDeparture": "Platform {{to}} announced for departure.",
     "platformSetArrival": "Platform {{to}} announced for arrival."
   },
+  "tripCard": {
+    "route": "{{from}} → {{to}}",
+    "leavingSoon": "Leaving soon",
+    "boarding": "Boarding",
+    "board": "BOARD",
+    "approaching": "On its way",
+    "getOffSoon": "Get off soon",
+    "changing": "Change trains",
+    "arrived": "Arrived",
+    "platform": "Platform {{platform}}",
+    "platformShort": "Pl {{platform}}",
+    "platformChanged": "Platform changed to {{platform}}",
+    "next": "Next: {{station}}",
+    "leaves": "Leaves",
+    "arrives": "Arrives",
+    "estimated": "Estimated"
+  },
   "train": {
     "title": "Train",
     "typical": "Typical",

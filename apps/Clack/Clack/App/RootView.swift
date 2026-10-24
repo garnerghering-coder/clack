@@ -88,7 +88,7 @@ struct RootView: View {
             guard scenePhase == .active else { return }
             await app.notifications.refresh()
             await app.notifications.sync(app.client, enabled: app.settings.notify)
-            LiveActivityManager.shared.resume(client: app.client)
+            LiveActivityManager.shared.resume()
         }
         // Tapping an alert opens what it is about. On a cold start the tap arrives before this view does, so it is
         // read when the view appears too.

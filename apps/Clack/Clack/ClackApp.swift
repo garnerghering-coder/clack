@@ -9,8 +9,16 @@ import SwiftUI
 
 @main
 struct ClackApp: App {
-    @State private var app = AppModel()
+    @State private var app: AppModel
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+
+    init() {
+        let model = AppModel()
+        _app = State(initialValue: model)
+        // From launch, also a launch in the background: iOS wakes the app to hand over the address of a trip card the
+        // server started, and that has to reach the server before any screen appears.
+        LiveActivityManager.shared.observe { model.client }
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -29,7 +37,6 @@ struct ClackApp: App {
             .environment(app)
             .environment(app.l10n)
             .task { await app.load() }
-            .task { OfflineMaps.configure() }
-        }
+            .task { OfflineMaps.configure() }        }
     }
 }

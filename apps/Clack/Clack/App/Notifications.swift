@@ -19,21 +19,30 @@ final class NotificationManager: NSObject {
 
     /// What iOS lets the app do: the person can turn alerts off in iPhone Settings at any time.
     private(set) var authorization: UNAuthorizationStatus = .notDetermined
-    /// Apple's address for this phone, once it has given one.
+    /// Apple's address for this phone, once it has given one in this launch.
     private(set) var token: String?
-    /// The Live Activity push-to-start address (iOS 17.2+), if any.
-    private(set) var startToken: String?
+    /// The Live Activity push-to-start address (iOS 17.2+), if any. Kept between launches: iOS hands it over only when it
+    /// changes, so the first sync of a launch sends the one from before.
+    private(set) var startToken: String? = UserDefaults.standard.string(forKey: NotificationManager.startTokenKey)
+    /// The phone's address from this launch or the last one, to tie trip cards to this phone (a launch in the
+    /// background, for a card the server started, may come before Apple hands it over again).
+    var deviceToken: String? { token ?? UserDefaults.standard.string(forKey: Self.tokenKey) }
+
+    private static let startTokenKey = "clack.liveActivityStartToken"
+    private static let tokenKey = "clack.pushToken"
     /// Where a tapped alert leads, for the root view to open (it may be set before the root view is up, on a cold start).
     var openRequest: DeepLink?
 
-    /// Debug builds talk to Apple's sandbox, TestFlight and App Store builds to production.
-    static var environment: String {
-        #if DEBUG
-        "sandbox"
+    /// Which of Apple's push servers this build's tokens belong to, read from how the app is signed: the provisioning
+    /// profile in the bundle says (a Release build run from Xcode is still development); no profile means App Store or
+    /// TestFlight, production. The simulator uses the sandbox.
+    nonisolated static let environment: String = {
+        #if targetEnvironment(simulator)
+        PushEnvironment.sandbox
         #else
-        "production"
+        PushEnvironment.resolve(profile: Bundle.main.url(forResource: "embedded", withExtension: "mobileprovision").flatMap { try? Data(contentsOf: $0) })
         #endif
-    }
+    }()
 
     var denied: Bool { authorization == .denied }
 
@@ -53,22 +62,29 @@ final class NotificationManager: NSObject {
     }
 
     func didRegister(_ data: Data) {
-        token = data.map { String(format: "%02x", $0) }.joined()
+        let hex = hexToken(data)
+        token = hex
+        UserDefaults.standard.set(hex, forKey: Self.tokenKey)
     }
 
     func setStartToken(_ data: Data) {
-        startToken = data.map { String(format: "%02x", $0) }.joined()
+        let hex = hexToken(data)
+        startToken = hex
+        UserDefaults.standard.set(hex, forKey: Self.startTokenKey)
     }
 
     private var uploaded: String?
 
-    /// Tells the server this phone's address (when alerts are on and Apple has given one), once per change.
+    /// Tells the server this phone's address (when alerts are on and Apple has given one), once per change. The
+    /// push-to-start address goes with it only when known: left out, the server keeps the one it has.
     func sync(_ client: APIClient, enabled: Bool) async {
         guard enabled, let token else { return }
         let key = "\(token)|\(startToken ?? "")|\(client.userID)"
         guard uploaded != key else { return }
         do {
-            try await client.registerDevice(token: token, environment: Self.environment, startToken: startToken)
+            try await client.registerDevice(DeviceRegistration(
+                token: token, environment: Self.environment, startToken: TokenUpdate(startToken)
+            ))
             uploaded = key
         } catch {
             uploaded = nil

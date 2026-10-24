@@ -152,9 +152,112 @@ final class TestAlertsModel {
     }
 
     func endCard() async {
-        for a in Activity<TripActivityAttributes>.activities where a.attributes.legId == "debug-sample" { await a.end(nil, dismissalPolicy: .immediate) }
+        simulation?.cancel()
+        simulation = nil
+        for a in Activity<TripActivityAttributes>.activities where a.attributes.legId.hasPrefix("debug-") { await a.end(nil, dismissalPolicy: .immediate) }
         activity = nil
         message = "Trip card ended."
+    }
+
+    // MARK: the trip card by push
+
+    /// Starts the card for your next real trip now, with push, as the app does from 30 minutes before it leaves: the
+    /// server then sends its updates (within a minute, and every 4 minutes at least). The server's own push-to-start
+    /// can't be set off from here; it starts a card by itself from 30 minutes before a leg, to the start address below.
+    func startByPush(_ app: AppModel) async {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+            message = "Live Activities are off for Clack in iPhone Settings."
+            return
+        }
+        guard let legs = try? await app.client.legs() else {
+            message = "Couldn't load your trips."
+            return
+        }
+        let now = Date.now.timeIntervalSince1970 * 1000
+        guard let next = TripsLogic.partition(legs, now: now).upcoming.first(where: { !$0.canceled && $0.actualArr == nil }) else {
+            message = "You have no upcoming trips."
+            return
+        }
+        for a in Activity<TripActivityAttributes>.activities where TripCard.sameJourney(next, a.attributes.card(a.content.state)) {
+            await a.end(nil, dismissalPolicy: .immediate)
+        }
+        guard let started = LiveActivityManager.shared.start(next, legs: legs, now: now) else {
+            message = "Couldn't start the trip card."
+            return
+        }
+        let route = "\(next.origin?.name ?? "?") → \(next.destination?.name ?? "?")"
+        message = started.push
+            ? "Trip card for \(route) started with push (\(NotificationManager.environment)). The server sends its first update within a minute."
+            : "Trip card for \(route) started without push (this build can't get a push address): the app moves it while open."
+    }
+
+    var pushDetails: String {
+        let start = NotificationManager.shared.startToken.map { "\($0.prefix(12))…" } ?? "none yet"
+        let device = NotificationManager.shared.deviceToken.map { "\($0.prefix(12))…" } ?? "none yet"
+        return "Environment: \(NotificationManager.environment). Phone address: \(device). Push-to-start address: \(start)."
+    }
+
+    // MARK: a whole journey, simulated
+
+    @ObservationIgnored private var simulation: Task<Void, Never>?
+
+    /// Runs a sample two-train journey through every moment on one card, a step every few seconds: leaving, boarding, on
+    /// the way (with an unknown delay for a while), get off soon, the change, the second train, arrival, end. The second
+    /// train arrives in the content state (`legId`, `from`, `to`), as the server sends it after a change.
+    func simulateJourney(seconds: Double) {
+        simulation?.cancel()
+        simulation = Task { [weak self] in
+            guard let self else { return }
+            guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+                self.message = "Live Activities are off for Clack in iPhone Settings."
+                return
+            }
+            for a in Activity<TripActivityAttributes>.activities where a.attributes.legId.hasPrefix("debug-") { await a.end(nil, dismissalPolicy: .immediate) }
+            self.activity = nil
+            let change = "Jönköping C"
+            let end = "Falköping C"
+            func at(_ min: Double) -> Double { Date(timeIntervalSinceNow: min * 60).timeIntervalSince1970 * 1000 }
+            typealias S = TripActivityAttributes.ContentState
+            let first = (legId: "debug-sim-1", train: "7205" as String?, from: self.from, to: change)
+            let second = (legId: "debug-sim-2", train: nil as String?, from: change, to: end)
+            func leg1(_ s: S) -> S { var s = s; s.legId = first.legId; s.train = first.train; s.from = first.from; s.to = first.to; s.fromTz = "Europe/Stockholm"; s.toTz = "Europe/Stockholm"; return s }
+            func leg2(_ s: S) -> S { var s = s; s.legId = second.legId; s.train = second.train; s.from = second.from; s.to = second.to; s.fromTz = "Europe/Stockholm"; s.toTz = "Europe/Stockholm"; return s }
+            let steps: [(String, S)] = [
+                ("Leaving soon, delay not known", leg1(S(status: "scheduled", platform: "5", platformFor: "departure", progress: 0, departAt: at(20), arriveAt: at(53), canceled: false, phase: "leaveSoon"))),
+                ("Platform changed", leg1(S(status: "scheduled", delayMin: 0, platform: "4", platformFor: "departure", progress: 0, departAt: at(15), arriveAt: at(48), canceled: false, phase: "leaveSoon", note: "platformChanged"))),
+                ("Boarding", leg1(S(status: "boarding", delayMin: 0, platform: "4", platformFor: "departure", progress: 0, departAt: at(3), arriveAt: at(36), canceled: false, phase: "boarding"))),
+                ("On the way, +3", leg1(S(status: "en_route", delayMin: 3, platform: "2", platformFor: "arrival", progress: 0.35, departAt: at(-10), arriveAt: at(23), canceled: false, phase: "enRoute"))),
+                ("On the way, no position (the line fills by itself)", leg1(S(status: "en_route", delayMin: 3, platform: "2", platformFor: "arrival", departAt: at(-18), arriveAt: at(15), canceled: false, phase: "enRoute"))),
+                ("Get off soon", leg1(S(status: "en_route", delayMin: 1, nextStop: change, nextStopAt: at(7), platform: "2", platformFor: "arrival", progress: 0.9, departAt: at(-26), arriveAt: at(7), canceled: false, phase: "getOffSoon"))),
+                ("Changing trains", leg1(S(status: "arrived", delayMin: 1, platform: "2", platformFor: "arrival", progress: 1, departAt: at(-33), arriveAt: at(0), canceled: false, phase: "changing", changePlatform: "3", changeAt: at(9)))),
+                ("The second train (card moved on)", leg2(S(status: "boarding", delayMin: 0, platform: "3", platformFor: "departure", progress: 0, departAt: at(4), arriveAt: at(40), canceled: false, phase: "boarding"))),
+                ("On the way, +6", leg2(S(status: "en_route", delayMin: 6, platform: "1", platformFor: "arrival", progress: 0.5, departAt: at(-15), arriveAt: at(21), canceled: false, phase: "enRoute"))),
+                ("Arrived", leg2(S(status: "arrived", delayMin: 6, platform: "1", platformFor: "arrival", progress: 1, departAt: at(-36), arriveAt: at(0), canceled: false, phase: "arrived"))),
+            ]
+            let attributes = TripActivityAttributes(legId: first.legId, journeyId: "debug-journey", train: first.train, from: first.from, to: first.to, fromTz: "Europe/Stockholm", toTz: "Europe/Stockholm", color: "#2ea44f")
+            var card: Activity<TripActivityAttributes>?
+            for (index, step) in steps.enumerated() {
+                if Task.isCancelled { return }
+                let content = ActivityContent(state: step.1, staleDate: Date(timeIntervalSinceNow: 3600))
+                if let card {
+                    if index == steps.count - 1 {
+                        await card.end(content, dismissalPolicy: .after(.now + 60))
+                    } else {
+                        await card.update(content)
+                    }
+                } else {
+                    do {
+                        card = try Activity.request(attributes: attributes, content: content, pushType: nil)
+                    } catch {
+                        self.message = "Couldn't start the trip card: \(error.localizedDescription)"
+                        return
+                    }
+                }
+                self.message = "Journey \(index + 1)/\(steps.count): \(step.0)"
+                try? await Task.sleep(for: .seconds(seconds))
+            }
+            self.message = "Journey simulated: the card ended and leaves the Lock Screen in a minute."
+        }
     }
 }
 
@@ -194,7 +297,16 @@ struct TestAlertsScreen: View {
                 ForEach(TestAlertsModel.Moment.allCases, id: \.self) { m in
                     Button(m.rawValue) { Task { await model.show(m) } }.buttonStyle(.clack(wide: true))
                 }
+                Button("Simulate a journey with a change") { model.simulateJourney(seconds: 5) }.buttonStyle(.clack(wide: true))
                 Button("End the trip card") { Task { await model.endCard() } }.buttonStyle(.clack(.danger, wide: true))
+            }
+
+            Card {
+                Text("Trip card by push").clack(.sectionHeader).foregroundStyle(Ink.text2)
+                Text("Starts the card for your next trip now, with push, and hands its address to the server, which then moves it. Needs a phone (not the simulator) and the server's APNs key. The server also starts a card by itself from 30 minutes before a leg, to the push-to-start address.")
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                Text(model.pushDetails).clack(.caption).foregroundStyle(Ink.text3).textSelection(.enabled)
+                Button("Start by push (next trip)") { Task { await model.startByPush(app) } }.buttonStyle(.clack(wide: true))
             }
 
             Card {
