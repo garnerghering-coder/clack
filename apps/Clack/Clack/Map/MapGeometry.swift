@@ -112,7 +112,7 @@ nonisolated enum MapGeometry {
     }
 }
 
-extension LegDetail {
+nonisolated extension LegDetail {
     /// What a route map draws for this trip: the ridden route (the routed geometry, else the stops' coordinates), and
     /// its stops. A trip's own map labels where you got on and off; `endsOnly` keeps just those two (the featured card).
     func mapRoute(endsOnly: Bool = false) -> (route: [LatLon], stops: [MapStop]) {
