@@ -10,5 +10,10 @@ import WidgetKit
 struct ClackWidgetsBundle: WidgetBundle {
     var body: some Widget {
         TripLiveActivity()
+        NextJourneyWidget()
+        PassportWidget()
+        DeparturesWidget()
+        YearWidget()
+        StatsWidget()
     }
 }

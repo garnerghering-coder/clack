@@ -337,3 +337,17 @@ Live data is the truth when there is a connection; without one the app shows wha
   downloaded (zoom 0 to 10, 9 for long routes). Settings shows how many are saved and can clear them.
 - **Not kept:** station boards, search and live positions of other trains; the Live Activity can't receive pushes offline, so its line and
   countdowns run by themselves and it says "estimated" when it goes stale (5 minutes after the last push).
+
+## Widgets
+
+Five Home Screen widgets in `ClackWidgets`: Next journey (small, medium, large, and the three Lock Screen sizes), Passport (small,
+medium, large, on the holographic foil), Departures (medium, large; the station is chosen in the widget's settings), Year in rail
+(large) and Stats (medium, large; an arrow button flips between operators, train types, stations and countries).
+
+- The app writes `WidgetSnapshot` (one JSON file) into the App Group container after each refresh (`Widgets/WidgetFeed.swift`, at most
+  every 5 minutes). The widgets read it and work out the rest from the clock, so they follow the journey with no connection.
+- **App Group:** a Personal Team can't have one, so today there is no container: the app writes nothing and the widgets show invented
+  sample data, each marked SAMPLE. When the paid team is active, add the group `group.com.garnerghering.Clack` to both the Clack and
+  ClackWidgetsExtension targets; the real data then switches on by itself.
+- `WidgetSnapshot.swift` exists twice, identical (`Clack/Widgets` and `ClackWidgets`). Tapping a widget opens `clack://trip/<id>`.
+- Not checked on a device yet.

@@ -104,6 +104,7 @@ final class ArrivalWatcher {
             if let journey = leg.journeyId { _ = try? await client.journey(journey) }
         }
         await client.pin(pinned)
+        await WidgetFeed.refresh(legs: legs, details: detailCache, app: app)
         // The map around each of those trips, for when there is no connection.
         if await app.mapHasBasemap() { await OfflineMaps.ensure(soon.compactMap { detailCache[$0.id] }, keep: Set(soon.map(\.id))) }
     }

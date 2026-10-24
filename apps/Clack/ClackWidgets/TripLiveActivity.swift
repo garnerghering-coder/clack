@@ -43,13 +43,6 @@ private enum Words {
     static var estimated: String { t("Estimated", "Uppskattat") }
 }
 
-private extension Color {
-    init?(hex: String?) {
-        guard let hex, hex.hasPrefix("#"), hex.count == 7, let v = UInt32(hex.dropFirst(), radix: 16) else { return nil }
-        self.init(red: Double((v >> 16) & 0xFF) / 255, green: Double((v >> 8) & 0xFF) / 255, blue: Double(v & 0xFF) / 255)
-    }
-}
-
 private func date(_ ms: Double) -> Date { Date(timeIntervalSince1970: ms / 1000) }
 
 private func time(_ ms: Double?, tz: String) -> String {

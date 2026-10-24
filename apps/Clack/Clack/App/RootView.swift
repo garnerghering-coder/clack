@@ -140,6 +140,15 @@ struct RootView: View {
 
     /// A file shared to Clack ("Open in Clack"): copied at once, since the system's copy may go away, then read.
     private func openTicket(_ url: URL) {
+        // A widget tap: clack://trip/<id> or clack://journey/<id>.
+        if url.scheme == "clack" {
+            let id = url.lastPathComponent
+            guard !id.isEmpty else { return }
+            router.addRequest = nil
+            router.tab = .trips
+            router.push(url.host == "journey" ? .journey(id) : .trip(id))
+            return
+        }
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
         let copy = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString)-\(url.lastPathComponent)")
