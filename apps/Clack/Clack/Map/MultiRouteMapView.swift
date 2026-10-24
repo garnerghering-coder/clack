@@ -14,6 +14,29 @@ nonisolated struct MultiRoute: Hashable, Sendable {
     var geometry: String?
     /// Fallback when there's no routed geometry: just the end stations.
     var stops: [LatLon]
+
+    /// A cheap stand-in for "is this the same route": colour and the size of the geometry (O(1) for a native string),
+    /// so the map's identity doesn't cost a pass over every polyline on each render.
+    var identity: Int {
+        var h = Hasher()
+        h.combine(color)
+        h.combine(geometry?.utf8.count ?? -1)
+        h.combine(stops.count)
+        return h.finalize()
+    }
+}
+
+extension MultiRoute {
+    /// The map is rebuilt when this changes: the theme, the basemap, or the set of routes (year and commuter filters).
+    static func mapIdentity(_ routes: [MultiRoute], stations: [MultiStation], dark: Bool, basemap: Bool, railNetwork: Bool) -> Int {
+        var h = Hasher()
+        h.combine(dark)
+        h.combine(basemap)
+        h.combine(railNetwork)
+        h.combine(stations.count)
+        for route in routes { h.combine(route.identity) }
+        return h.finalize()
+    }
 }
 
 nonisolated struct MultiStation: Hashable, Sendable {
@@ -37,12 +60,12 @@ struct MultiRouteMapView: View {
     var body: some View {
         ZStack {
             Ink.mapBg
-            if let basemap, !points.isEmpty {
+            if let basemap, hasShape {
                 MultiRouteRepresentable(
                     routes: routes, stations: stations, railNetwork: railNetwork, withBasemap: basemap, dark: scheme == .dark
                 )
                 // Rebuilt when the set of routes changes (year and commuter filters) or the theme does.
-                .id("\(scheme == .dark)-\(basemap)-\(railNetwork)-\(routes.map { $0.geometry?.count ?? 0 })-\(stations.count)")
+                .id(MultiRoute.mapIdentity(routes, stations: stations, dark: scheme == .dark, basemap: basemap, railNetwork: railNetwork))
             }
             VStack {
                 Spacer()
@@ -60,9 +83,8 @@ struct MultiRouteMapView: View {
         .task { basemap = await app.mapHasBasemap() }
     }
 
-    private var points: [LatLon] {
-        routes.flatMap { $0.geometry.map(Polyline.decode) ?? $0.stops }
-    }
+    /// Something to draw (no polyline is decoded here: the map decodes them once, when its style has loaded).
+    private var hasShape: Bool { routes.contains { $0.geometry != nil || !$0.stops.isEmpty } }
 }
 
 private struct MultiRouteRepresentable: UIViewRepresentable {

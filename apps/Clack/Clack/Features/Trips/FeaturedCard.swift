@@ -26,6 +26,8 @@ struct FeaturedCard: View {
     /// The leg you change to next, if this one is part of a journey with a change ahead.
     let next: Leg?
     @State private var detail: LegDetail?
+    /// The route strip's geometry, decoded once when the detail arrives (not every second with the clock).
+    @State private var strip: FeaturedMapStrip.Route?
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: state == .active ? 1 : 30)) { context in
@@ -36,12 +38,18 @@ struct FeaturedCard: View {
         }
         .task(id: leg.id) {
             if let cached = app.legDetails[leg.id] {
-                detail = cached
+                set(cached)
             } else if let fetched = try? await app.client.leg(leg.id) {
                 app.legDetails[leg.id] = fetched
-                detail = fetched
+                set(fetched)
             }
         }
+    }
+
+    private func set(_ detail: LegDetail) {
+        self.detail = detail
+        let geo = detail.mapRoute(endsOnly: true)
+        strip = FeaturedMapStrip.Route(route: geo.route, stops: geo.stops)
     }
 
     private func card(now: Double) -> some View {
@@ -62,7 +70,7 @@ struct FeaturedCard: View {
         }()
         return VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
-                featuredMap(grounded: grounded, now: now, op: op)
+                featuredMap(grounded: grounded)
                 Text(tag)
                     .font(ClackFont.inter(11, .regular)).foregroundStyle(Ink.text2)
                     .padding(.vertical, 2).padding(.horizontal, 8)
@@ -97,25 +105,15 @@ struct FeaturedCard: View {
         .hairlineBorder(radius: Radius.card)
     }
 
-    /// The route strip: not interactive, without controls. The train and the travelled/ahead split only when the
-    /// position is fresh; fewer than two points is an empty map.
-    @ViewBuilder
-    private func featuredMap(grounded: Bool, now: Double, op: Color) -> some View {
-        let geo = detail?.mapRoute(endsOnly: true)
+    /// The route strip, outside the clock's reach: it is redrawn only when its own inputs change.
+    private func featuredMap(grounded: Bool) -> some View {
         let live = leg.live
-        Group {
-            if let geo, geo.route.count > 1 {
-                RouteMapView(
-                    color: MapStyle.opColor(leg.operator?.brandColor, dark: scheme == .dark), route: geo.route, stops: geo.stops,
-                    interactive: false, controls: false,
-                    train: grounded ? live.flatMap { l in l.lat.flatMap { lat in l.lon.map { MapTrain(lat: lat, lon: $0, bearing: l.bearing, estimated: l.positionSource == .estimated) } } } : nil,
-                    progress: grounded ? live?.progress : nil
-                )
-            } else {
-                Ink.mapBg
-            }
-        }
-        .frame(height: 140)
+        return FeaturedMapStrip(
+            color: MapStyle.opColor(leg.operator?.brandColor, dark: scheme == .dark), geo: strip,
+            train: grounded ? live.flatMap { l in l.lat.flatMap { lat in l.lon.map { MapTrain(lat: lat, lon: $0, bearing: l.bearing, estimated: l.positionSource == .estimated) } } } : nil,
+            progress: grounded ? live?.progress : nil
+        )
+        .equatable()
     }
 
     @ViewBuilder
@@ -154,5 +152,34 @@ struct FeaturedCard: View {
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
             }
         }
+    }
+}
+
+/// The route strip of the featured card: not interactive, without controls. The train and the travelled/ahead split
+/// only when the position is fresh; fewer than two points is an empty map. `Equatable`, so the card's one-second clock
+/// doesn't make the map re-evaluate.
+struct FeaturedMapStrip: View, Equatable {
+    struct Route: Equatable {
+        var route: [LatLon]
+        var stops: [MapStop]
+    }
+
+    let color: String
+    let geo: Route?
+    let train: MapTrain?
+    let progress: Double?
+
+    var body: some View {
+        Group {
+            if let geo, geo.route.count > 1 {
+                RouteMapView(
+                    color: color, route: geo.route, stops: geo.stops, interactive: false, controls: false,
+                    train: train, progress: progress
+                )
+            } else {
+                Ink.mapBg
+            }
+        }
+        .frame(height: 140)
     }
 }

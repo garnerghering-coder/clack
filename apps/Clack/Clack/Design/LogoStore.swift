@@ -29,16 +29,9 @@ final class LogoStore {
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
     }
 
-    /// The logo if it's here already (memory, then disk).
-    func image(for url: URL) -> UIImage? {
-        let key = url.absoluteString
-        if let image = images[key] { return image }
-        if let data = try? Data(contentsOf: file(for: key)), let image = UIImage(data: data, scale: 3) {
-            images[key] = image
-            return image
-        }
-        return nil
-    }
+    /// The logo if it's in memory. Called from `OperatorBadge.body`, so it does no hashing and no disk reads: `load`
+    /// brings a logo from disk or the network off the main actor and publishes it here once.
+    func image(for url: URL) -> UIImage? { images[url.absoluteString] }
 
     /// Fetches the logos that aren't here yet, all at once.
     func prefetch(_ urls: [URL]) async {
@@ -49,28 +42,34 @@ final class LogoStore {
 
     func load(_ url: URL) async {
         let key = url.absoluteString
-        if image(for: url) != nil { return }
+        if images[key] != nil { return }
         if let task = loading[key] { return await task.value }
+        let file = Self.file(for: key, in: folder)
         let task = Task { [weak self] in
-            guard let self else { return }
-            guard let (data, response) = try? await URLSession.shared.data(from: url),
-                  (response as? HTTPURLResponse)?.statusCode == 200 else { return }
-            let image = await self.decode(data, type: response.mimeType)
-            guard let image, let png = image.pngData() else { return }
-            try? png.write(to: self.file(for: key), options: .atomic)
-            self.images[key] = UIImage(data: png, scale: 3)
+            let image = await Task.detached(priority: .utility) { await Self.fetch(url, file: file) }.value
+            if let image { self?.images[key] = image }
         }
         loading[key] = task
         await task.value
         loading[key] = nil
     }
 
-    private func file(for key: String) -> URL {
+    /// The saved picture if there is one, otherwise the download (saved for next time). Runs off the main actor.
+    private nonisolated static func fetch(_ url: URL, file: URL) async -> UIImage? {
+        if let data = try? Data(contentsOf: file), let image = UIImage(data: data, scale: 3) { return image }
+        guard let (data, response) = try? await URLSession.shared.data(from: url),
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let image = decode(data, type: response.mimeType), let png = image.pngData() else { return nil }
+        try? png.write(to: file, options: .atomic)
+        return UIImage(data: png, scale: 3)
+    }
+
+    nonisolated static func file(for key: String, in folder: URL) -> URL {
         let hash = SHA256.hash(data: Data(key.utf8)).map { String(format: "%02x", $0) }.joined()
         return folder.appendingPathComponent(hash + ".png")
     }
 
-    private func decode(_ data: Data, type: String?) async -> UIImage? {
+    private nonisolated static func decode(_ data: Data, type: String?) -> UIImage? {
         let head = String(decoding: data.prefix(200), as: UTF8.self).lowercased()
         if type?.contains("svg") == true || head.contains("<svg") { return SVGLogo.image(from: data) }
         return UIImage(data: data)

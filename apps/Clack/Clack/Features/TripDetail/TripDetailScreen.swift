@@ -28,6 +28,8 @@ struct TripDetailScreen: View {
     @State private var busy = false
     @State private var toast: String?
     @State private var confirmDelete = false
+    /// The route as the maps and the stop rail use it, decoded when the trip changes (not on every tick).
+    @State private var geo: RouteGeo?
 
     var body: some View {
         GeometryReader { proxy in
@@ -38,8 +40,10 @@ struct TripDetailScreen: View {
                         Text(l10n.t("detail.notFound")).clack(.body).foregroundStyle(Ink.text2)
                     }
                 } else if let leg {
-                    TimelineView(.periodic(from: .now, by: 1)) { context in
-                        detail(leg, now: context.date.timeIntervalSince1970 * 1000, proxy: proxy)
+                    // The page ticks every 30 s; the status line, the stage card and the stop rail have their own
+                    // one-second clocks (`Ticking`), so a second passing doesn't rebuild the whole page and its map.
+                    Ticking(every: 30) { now in
+                        detail(leg, now: now, proxy: proxy)
                     }
                 } else {
                     Page {
@@ -68,6 +72,7 @@ struct TripDetailScreen: View {
         }
         .task(id: id) { await load() }
         .task(id: id) { await listen() }
+        .onChange(of: leg, initial: true) { geo = leg.map(RouteGeo.init) }
         .task(id: toast) {
             guard toast != nil else { return }
             try? await Task.sleep(for: .seconds(6))
@@ -129,17 +134,16 @@ struct TripDetailScreen: View {
 
     @ViewBuilder
     private func detail(_ detail: LegDetail, now: Double, proxy: GeometryProxy) -> some View {
-        let l = detail.leg
-        let shown = TripDetailLogic.shown(detail, live: live, now: now, offline: app.isOffline)
-        let tracking = TripDetailLogic.isTracking(shown)
-        let stage = TripDetailLogic.stage(l, live: shown, shown: shown, now: now)
-        let status = LiveRules.statusKey(l, live: live, now: now)
+        let m = moment(detail, now: now)
+        let shown = m.shown
+        let tracking = m.tracking
+        let stage = m.stage
         let mapHeight = min(proxy.size.height * 0.55 + proxy.safeAreaInsets.top, 520)
         ScrollViewReader { scroller in
         ScrollView {
             VStack(spacing: 0) {
                 mapArea(detail, tracking: tracking, height: mapHeight, top: proxy.safeAreaInsets.top)
-                content(detail, live: shown, shown: shown, tracking: tracking, stage: stage, status: status, now: now)
+                content(detail, shown: shown, tracking: tracking, stage: stage, now: now)
                     .padding(.top, 20)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 24)
@@ -164,6 +168,24 @@ struct TripDetailScreen: View {
         }
     }
 
+    /// What the screen is showing at a moment: the live state (or the phone's estimate), whether it is tracking, the
+    /// stage of the ride and the status word.
+    private struct Moment {
+        var shown: LiveStateRow?
+        var tracking: Bool
+        var stage: TripDetailLogic.Stage
+        var status: LiveRules.TripStatus
+    }
+
+    private func moment(_ detail: LegDetail, now: Double) -> Moment {
+        let shown = TripDetailLogic.shown(detail, live: live, now: now, offline: app.isOffline)
+        return Moment(
+            shown: shown, tracking: TripDetailLogic.isTracking(shown),
+            stage: TripDetailLogic.stage(detail.leg, live: shown, shown: shown, now: now),
+            status: LiveRules.statusKey(detail.leg, live: live, now: now)
+        )
+    }
+
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
@@ -186,7 +208,7 @@ struct TripDetailScreen: View {
     /// The interactive route map: draw-on, the rail network per setting, the train marker and the split while tracking.
     @ViewBuilder
     private func tripMap(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
-        let geo = detail.mapRoute()
+        let geo = routeGeo(detail)
         let shown = TripDetailLogic.shown(detail, live: live, now: Date.now.timeIntervalSince1970 * 1000, offline: app.isOffline)
         let train: MapTrain? = (tracking ? shown : nil).flatMap { s in
             s.lat.flatMap { lat in s.lon.map { MapTrain(lat: lat, lon: $0, bearing: s.bearing, estimated: s.positionSource != .gps || s.localEstimate) } }
@@ -200,11 +222,11 @@ struct TripDetailScreen: View {
         .frame(height: height)
     }
 
+    private func routeGeo(_ detail: LegDetail) -> RouteGeo { geo?.id == detail.id ? geo! : RouteGeo(detail) }
+
     @ViewBuilder
-    private func content(
-        _ detail: LegDetail, live: LiveStateRow?, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage,
-        status: LiveRules.TripStatus, now: Double
-    ) -> some View {
+    private func content(_ detail: LegDetail, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage, now: Double) -> some View {
+        let live = shown
         let l = detail.leg
         let tz = l.origin?.tz ?? "Europe/Stockholm"
         let dtz = l.destination?.tz ?? tz
@@ -212,7 +234,7 @@ struct TripDetailScreen: View {
         let schedDep = l.schedDep?.ms
         let schedArr = l.schedArr?.ms
         VStack(alignment: .leading, spacing: 16) {
-            head(l, live: shown, tracking: tracking, status: status, now: now)
+            Ticking(every: 1) { now in head(detail, now: now) }
             Text("\(l.origin?.name ?? "") → \(l.destination?.name ?? "")")
                 .clack(.detailRoute).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
             if let schedDep {
@@ -232,14 +254,14 @@ struct TripDetailScreen: View {
             // Something wrong with this train or the change after it: what happened, what to do, what you're owed.
             DisruptionCard(leg: detail)
             if stage == .before { RiskCard(leg: detail) }
-            stageCard(detail, live: live, shown: shown, tracking: tracking, stage: stage, now: now)
+            Ticking(every: 1) { now in stageCard(detail, now: now) }
             timesRow(detail, live: live, tracking: tracking).id("times")
             tiles(detail, live: live, tracking: tracking)
             if explain {
                 Text(explanationText(l.arrDelayMin)).clack(.caption).foregroundStyle(Ink.text2)
             }
             JourneyConnections(legId: l.id, journeyId: l.journeyId)
-            stopsCard(detail, color: color, shown: shown, stage: stage, now: now).id("stops")
+            Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
             TrainCard(leg: detail) { leg = $0 }.id("train")
             Card {
                 Text(l10n.t("onboard.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
@@ -254,8 +276,11 @@ struct TripDetailScreen: View {
         }
     }
 
-    private func head(_ l: Leg, live: LiveStateRow?, tracking: Bool, status: LiveRules.TripStatus, now: Double) -> some View {
-        FlowLayout(spacing: 10, lineSpacing: 6) {
+    private func head(_ detail: LegDetail, now: Double) -> some View {
+        let l = detail.leg
+        let m = moment(detail, now: now)
+        let live = m.shown, tracking = m.tracking, status = m.status
+        return FlowLayout(spacing: 10, lineSpacing: 6) {
             OperatorBadge(op: l.operator, size: 32)
             Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
             if let category = l.category { Chip(text: l10n.t("products.\(category)")) }
@@ -280,7 +305,9 @@ struct TripDetailScreen: View {
     // MARK: the stage card
 
     @ViewBuilder
-    private func stageCard(_ detail: LegDetail, live: LiveStateRow?, shown: LiveStateRow?, tracking: Bool, stage: TripDetailLogic.Stage, now: Double) -> some View {
+    private func stageCard(_ detail: LegDetail, now: Double) -> some View {
+        let m = moment(detail, now: now)
+        let live = m.shown, shown = m.shown, tracking = m.tracking, stage = m.stage
         let l = detail.leg
         let schedDep = l.schedDep?.ms
         let board = detail.stops.first { $0.role == .board }
@@ -415,10 +442,12 @@ struct TripDetailScreen: View {
 
     // MARK: stops, details, actions
 
-    private func stopsCard(_ detail: LegDetail, color: Color, shown: LiveStateRow?, stage: TripDetailLogic.Stage, now: Double) -> some View {
+    private func stopsCard(_ detail: LegDetail, color: Color, now: Double) -> some View {
+        let m = moment(detail, now: now)
+        let shown = m.shown, stage = m.stage
         let stops = TripDetailLogic.visibleStops(detail.stops, fullRoute: fullRoute)
         // How far along the line the train is, so the rail shows it between the stops too.
-        let fills = TripDetailLogic.segmentFills(stops: stops, route: detail.mapRoute().route, shown: shown, stage: stage, now: now)
+        let fills = TripDetailLogic.segmentFills(stops: stops, route: routeGeo(detail).route, shown: shown, stage: stage, now: now)
         let halves = TripDetailLogic.railHalves(stops: stops, fills: fills, showTrain: stage == .during)
         let hasHidden = detail.stops.contains { $0.role == .before || $0.role == .after }
         return Card {
@@ -677,6 +706,33 @@ struct JourneyConnections: View {
         .task(id: journeyId) {
             guard let journeyId else { return }
             legs = (try? await app.client.journey(journeyId))?.legs.map(\.leg)
+        }
+    }
+}
+
+/// A trip's route and stops as the maps draw them.
+nonisolated struct RouteGeo: Equatable {
+    var id: String
+    var route: [LatLon]
+    var stops: [MapStop]
+
+    init(_ detail: LegDetail) {
+        let geo = detail.mapRoute()
+        id = detail.id
+        route = geo.route
+        stops = geo.stops
+    }
+}
+
+/// A part of a screen that needs the clock: it is redrawn every `every` seconds with the time in milliseconds, and the
+/// rest of the screen is not.
+struct Ticking<Content: View>: View {
+    let every: Double
+    @ViewBuilder let content: (Double) -> Content
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: every)) { context in
+            content(context.date.timeIntervalSince1970 * 1000)
         }
     }
 }

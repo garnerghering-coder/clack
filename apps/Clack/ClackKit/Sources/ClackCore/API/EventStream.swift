@@ -93,6 +93,15 @@ public nonisolated enum EventStream {
     }
 }
 
+extension EventStream {
+    /// An event's data decoded off the calling actor (a full live-map snapshot is a large JSON document and the callers
+    /// are on the main actor); nil when it doesn't decode. The caller publishes the result.
+    @concurrent
+    public static func decode<T: Decodable & Sendable>(_ type: T.Type, from event: SSEEvent) async -> T? {
+        try? JSONDecoder().decode(type, from: Data(event.data.utf8))
+    }
+}
+
 /// One shared connection to `GET /api/live/stream` while at least one screen listens (apps/web/src/live.ts): it opens
 /// with the first listener, closes after the last, and reconnects 5 s after a drop. The server sends the full live
 /// state every tick, so nothing needs replaying.
@@ -143,7 +152,7 @@ public final class LiveHub {
                 guard let self else { return }
                 do {
                     for try await event in self.open() where event.name == "live" {
-                        if let update = try? JSONDecoder().decode(LiveUpdate.self, from: Data(event.data.utf8)) {
+                        if let update = await EventStream.decode(LiveUpdate.self, from: event) {
                             self.deliver(update)
                         }
                     }

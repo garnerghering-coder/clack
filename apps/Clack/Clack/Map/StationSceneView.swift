@@ -49,14 +49,23 @@ struct StationSceneView: View {
                 onPan: { delta in view.tx += delta.width; view.ty += delta.height },
                 onPinch: { factor, anchor in view = StationSceneLogic.zoom(view, by: factor, aroundX: anchor.x, y: anchor.y) }
             )
-            TimelineView(.animation(paused: reduceMotion || route == nil)) { timeline in
-                Canvas { context, _ in
-                    draw(&context, phase: reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 0.9) / 0.9)
-                }
+            // The plan is drawn when the view or the plan changes; only the route's marching dots are on the clock (a
+            // layer of their own, at 20 frames a second), so a shown route doesn't redraw the whole plan every frame.
+            Canvas { context, _ in
+                drawPlan(&context)
             }
             .allowsHitTesting(false)
             .accessibilityLabel(map.name)
             .accessibilityAddTraits(.isImage)
+            if route != nil {
+                TimelineView(.animation(minimumInterval: 1.0 / 20, paused: reduceMotion)) { timeline in
+                    Canvas { context, _ in
+                        drawRoute(&context, phase: reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 0.9) / 0.9)
+                    }
+                }
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+            }
 
             ForEach(Array(levelChanges.enumerated()), id: \.offset) { _, step in
                 let node = step.from.level == level ? step.from : step.to
@@ -101,22 +110,28 @@ struct StationSceneView: View {
 
     // MARK: the plan
 
-    private func draw(_ context: inout GraphicsContext, phase: Double) {
-        let k = view.k
+    private func place(_ context: inout GraphicsContext) {
         context.translateBy(x: view.tx, y: view.ty)
-        context.scaleBy(x: k, y: k)
+        context.scaleBy(x: view.k, y: view.k)
         context.rotate(by: .degrees(rotation))
-        func polygon(_ points: [Pt]) -> Path {
-            var path = Path()
-            for (i, p) in points.enumerated() { i == 0 ? path.move(to: CGPoint(x: p.x, y: p.y)) : path.addLine(to: CGPoint(x: p.x, y: p.y)) }
-            path.closeSubpath()
-            return path
-        }
-        func line(_ points: [Pt]) -> Path {
-            var path = Path()
-            for (i, p) in points.enumerated() { i == 0 ? path.move(to: CGPoint(x: p.x, y: p.y)) : path.addLine(to: CGPoint(x: p.x, y: p.y)) }
-            return path
-        }
+    }
+
+    private func polygon(_ points: [Pt]) -> Path {
+        var path = Path()
+        for (i, p) in points.enumerated() { i == 0 ? path.move(to: CGPoint(x: p.x, y: p.y)) : path.addLine(to: CGPoint(x: p.x, y: p.y)) }
+        path.closeSubpath()
+        return path
+    }
+
+    private func line(_ points: [Pt]) -> Path {
+        var path = Path()
+        for (i, p) in points.enumerated() { i == 0 ? path.move(to: CGPoint(x: p.x, y: p.y)) : path.addLine(to: CGPoint(x: p.x, y: p.y)) }
+        return path
+    }
+
+    private func drawPlan(_ context: inout GraphicsContext) {
+        let k = view.k
+        place(&context)
         let onLevel = map.shapes.filter { $0.level == level }
         for shape in map.shapes where shape.kind == .building { context.fill(polygon(shape.points), with: .color(Ink.surface)) }
         // Other levels' platforms, for orientation.
@@ -163,7 +178,12 @@ struct StationSceneView: View {
             context.fill(polygon(outline), with: .color(Palette.pathGlow))
             context.stroke(polygon(outline), with: .color(Palette.path), lineWidth: 2 / k)
         }
-        // The route on this level: a glow, and dots marching toward the destination.
+    }
+
+    /// The route on this level: a glow, and dots marching toward the destination.
+    private func drawRoute(_ context: inout GraphicsContext, phase: Double) {
+        let k = view.k
+        place(&context)
         for step in route?.steps ?? [] where step.from.level == level && step.to.level == level {
             let path = line(StationSceneLogic.stepPoints(step))
             context.stroke(path, with: .color(Palette.pathGlow), style: StrokeStyle(lineWidth: 10 / k, lineCap: .round, lineJoin: .round))

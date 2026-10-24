@@ -177,6 +177,10 @@ private struct RouteMapRepresentable: UIViewRepresentable {
         ctx.coordinator.update(map)
     }
 
+    static func dismantleUIView(_ map: MLNMapView, coordinator: Coordinator) {
+        coordinator.stopDrawOn()
+    }
+
     @MainActor
     final class Coordinator: NSObject, MLNMapViewDelegate {
         var parent: RouteMapRepresentable
@@ -331,15 +335,21 @@ private struct RouteMapRepresentable: UIViewRepresentable {
             drawLink = link
         }
 
+        /// A display link retains its target, so it must be invalidated explicitly: `deinit` alone never runs while it is on.
+        func stopDrawOn() {
+            drawLink?.invalidate()
+            drawLink = nil
+            drawing = false
+        }
+
         @objc private func step() {
-            guard let map else { return }
+            // The map is gone (the screen closed mid-draw): stop, or the link would fire for ever.
+            guard let map else { return stopDrawOn() }
             let k = min(1, (CACurrentMediaTime() - drawStart) / 1.2)
             let eased = 1 - pow(1 - k, 3)
             map.setShape(MapGeometry.lines([MapGeometry.part(parent.route, eased)]), source: "route")
             if k >= 1 {
-                drawLink?.invalidate()
-                drawLink = nil
-                drawing = false
+                stopDrawOn()
                 map.setShape(MapGeometry.points(parent.stops), source: "stops")
             }
         }
