@@ -108,3 +108,14 @@ describe('the committed OSM rail graph', () => {
     expect(r.lengthM / 1000).toBeLessThan(85);
   });
 });
+
+describe('Finland has no light rail', () => {
+  it('has no light_rail edge east of 20.5°E (the Helsinki metro and the Tampere tram are not trains)', async () => {
+    const { gunzipSync } = await import('node:zlib');
+    const { readFileSync } = await import('node:fs');
+    const g = JSON.parse(gunzipSync(readFileSync(new URL('../../../data/osm/rail-graph.json.gz', import.meta.url))).toString('utf8'));
+    const lonOf = (n: number) => g.nodes[2 * n + 1] as number;
+    const lightEast = g.edges.filter((e: number[]) => ((e[2]! >> 1) & 3) === 1 && lonOf(e[0]!) >= 20.5 && lonOf(e[1]!) >= 20.5);
+    expect(lightEast.length).toBe(0);
+  });
+});

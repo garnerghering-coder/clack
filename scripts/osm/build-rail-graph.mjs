@@ -42,7 +42,12 @@ const link = (a, b, f) => {
   (adj.get(a) ?? adj.set(a, new Map()).get(a)).set(b, f);
   (adj.get(b) ?? adj.set(b, new Map()).get(b)).set(a, f);
 };
+// Finland: the Helsinki metro and the Tampere tram are tagged light_rail in OSM and are not trains (owner, 2026-10-24).
+// Sweden, Norway and Denmark keep their light rail (some of it carries timetable trains). Finland starts east of 20.5°E.
+const FINLAND_MIN_LON = 20.5;
+const isFinnishLightRail = (kind, nodes) => kind === 'light_rail' && (coord.get(nodes[0])?.[1] ?? 0) >= FINLAND_MIN_LON;
 for (const [, kind, usage, service, nodes] of osm.ways) {
+  if (isFinnishLightRail(kind, nodes)) continue;
   const f = (SERVICE.has(service) ? 1 : 0) | ((KIND[kind] ?? 0) << 1) | (MINOR_USAGE.has(usage) ? 8 : 0);
   for (let i = 1; i < nodes.length; i++) link(nodes[i - 1], nodes[i], f);
 }

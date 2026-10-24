@@ -7,7 +7,7 @@
   2026-10-23). Kept, the same for all four countries: `railway=rail|light_rail|narrow_gauge`, with service track
   flagged and industrial/military/tourism usage hidden from the map layer. Lines tagged `railway=tram|subway` are
   not kept. Note that in Finland the Helsinki metro (including the western extension to Espoo) and the Tampere tram
-  are tagged `railway=light_rail` in OSM, so they are in the graph as light rail (kind 1), as light rail is elsewhere.
+  are tagged `railway=light_rail` in OSM; they are NOT in the graph (owner, 2026-10-24: no light rail in Finland). `build-rail-graph.mjs` skips light_rail ways east of 20.5°E; the committed graph had the same edges removed. Light rail in Sweden, Norway and Denmark is kept (kind 1).
 - **License:** © OpenStreetMap contributors, available under the
   [Open Database License (ODbL) 1.0](https://opendatacommons.org/licenses/odbl/1-0/). This file is a derived
   database and is shared under the same license. The app shows "© OpenStreetMap contributors" on every map.
