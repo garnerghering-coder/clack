@@ -166,11 +166,11 @@ struct BoardScreen: View {
             let ago = LiveRules.ago(l10n, then: board.updatedAt, now: now)
             HStack(spacing: 6) {
                 if fresh {
-                    Chip(text: l10n.t("live.chip"), accent: true)
+                    StatusLine(.live, l10n.t("live.chip"))
+                    Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
                 } else {
-                    Chip(text: l10n.t("live.stale", ["ago": ago]), tint: Ink.text3)
+                    StatusLine(.stale, l10n.t("live.stale", ["ago": ago]))
                 }
-                Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
     }

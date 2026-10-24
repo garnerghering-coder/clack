@@ -138,19 +138,6 @@ struct ChipButton: View {
     }
 }
 
-/// `.pill`: a quiet label on a soft fill (radius 10, not a capsule).
-struct Pill: View {
-    let text: String
-
-    var body: some View {
-        Text(text)
-            .clack(.chipButton)
-            .padding(.vertical, 4)
-            .padding(.horizontal, 12)
-            .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-    }
-}
-
 /// `.map-button`: a 40 pt glass circle floating over a map; pressed or toggled on it turns yellow.
 struct MapButton: View {
     let icon: String

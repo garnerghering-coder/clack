@@ -285,20 +285,21 @@ struct TripDetailScreen: View {
             Text([l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
             if let category = l.category { Chip(text: l10n.t("products.\(category)")) }
             if tracking, let live {
-                LiveChip(live: live, now: now)
+                LiveStatus(live: live, now: now)
             } else {
-                Text(l10n.t("status.\(status.rawValue)")).clack(.chip).foregroundStyle(statusColor(status))
+                StatusLine(statusKind(status), l10n.t("status.\(status.rawValue)"))
             }
         }
     }
 
-    private func statusColor(_ status: LiveRules.TripStatus) -> Color {
+    private func statusKind(_ status: LiveRules.TripStatus) -> StatusLine.Kind {
         switch status {
-        case .planned, .approaching: Ink.accentInk
-        case .cancelled: Ink.veryLate
-        case .boarding: Ink.slight
-        case .live: Ink.onTime
-        case .completed: Ink.text2
+        case .planned: .upcoming
+        case .approaching: .onItsWay
+        case .cancelled: .cancelled
+        case .boarding: .boarding
+        case .live: .live
+        case .completed: .arrived
         }
     }
 
@@ -317,7 +318,7 @@ struct TripDetailScreen: View {
             case .before:
                 let derived = l.depDelayMin ?? (tracking ? Delay.minutes(advertised: schedDep, actual: board?.estimatedDep?.ms) : nil)
                 HStack(spacing: 8) {
-                    Pill(text: TripsLogic.countdown(l10n, l, now: now))
+                    CountdownLine(leg: l, now: now)
                     if let platform = l.depPlatform {
                         Chip(text: l10n.t("trips.platform", ["platform": platform]))
                     } else {

@@ -85,9 +85,9 @@ struct FeaturedCard: View {
                     OperatorBadge(op: leg.operator, size: .medium)
                     Text(service.isEmpty ? l10n.t("trips.train") : service).fontWeight(.bold).foregroundStyle(Ink.text)
                     switch state {
-                    case .upcoming: Chip(text: l10n.t("trips.planned"))
-                    case .arrived: Chip(text: l10n.t("trips.arrived"))
-                    case .active: if let live { LiveChip(live: live, now: now) }
+                    case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
+                    case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))
+                    case .active: if let live { LiveStatus(live: live, now: now) }
                     }
                 }
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
@@ -147,7 +147,7 @@ struct FeaturedCard: View {
             }
         case .upcoming:
             HStack(spacing: 8) {
-                Pill(text: TripsLogic.countdown(l10n, leg, now: now))
+                CountdownLine(leg: leg, now: now)
                 if let platform = leg.depPlatform { Chip(text: l10n.t("trips.platform", ["platform": platform])) }
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
             }

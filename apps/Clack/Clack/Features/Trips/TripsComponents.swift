@@ -83,23 +83,41 @@ struct FlapTimes: View {
 extension TripsLogic {
     @MainActor
     static func countdown(_ l10n: L10n, _ leg: Leg, now: Double) -> String {
+        countdownStatus(l10n, leg, now: now).text
+    }
+
+    /// The countdown as a written status: its words and the kind of status they are (for the ink).
+    @MainActor
+    static func countdownStatus(_ l10n: L10n, _ leg: Leg, now: Double) -> (kind: StatusLine.Kind, text: String) {
         let dep = LiveRules.expectedDeparture(leg)
-        if leg.canceled || leg.live?.status == .cancelled { return l10n.t("status.cancelled") }
-        if now >= arrivalOf(leg) { return l10n.t("trips.arrived") }
+        if leg.canceled || leg.live?.status == .cancelled { return (.cancelled, l10n.t("status.cancelled")) }
+        if now >= arrivalOf(leg) { return (.arrived, l10n.t("trips.arrived")) }
         // The live state knows where the train is: on its way to your stop, at it, or yet to be 30 minutes from leaving.
         let fresh = leg.live.map { LiveRules.isFresh($0, now: now) } ?? false
         if fresh, let status = leg.live?.status {
-            if status == .approaching { return l10n.t("trips.approaching") }
-            if status == .boarding { return l10n.t("trips.boarding") }
+            if status == .approaching { return (.onItsWay, l10n.t("trips.approaching")) }
+            if status == .boarding { return (.boarding, l10n.t("trips.boarding")) }
         }
-        if now >= dep { return l10n.t("trips.liveNow") }
+        if now >= dep { return (.live, l10n.t("trips.liveNow")) }
         // With no live data (or none fresh) the timetable, moved by the delay known so far, decides.
-        if !fresh, dep - now <= 30 * 60_000 { return l10n.t("trips.boarding") }
+        if !fresh, dep - now <= 30 * 60_000 { return (.boarding, l10n.t("trips.boarding")) }
         let mins = Int(((dep - now) / 60_000).rounded())
         let d = mins / 1440
         let h = (mins % 1440) / 60
         let m = mins % 60
-        return l10n.t("trips.departsIn", ["time": d > 0 ? "\(d)d \(h)h" : h > 0 ? "\(h)h \(m)m" : "\(m) min"])
+        return (.upcoming, l10n.t("trips.departsIn", ["time": d > 0 ? "\(d)d \(h)h" : h > 0 ? "\(h)h \(m)m" : "\(m) min"]))
+    }
+}
+
+/// A trip's countdown as one written status line ("Departs in 2h 5m", "Boarding", "Live now").
+struct CountdownLine: View {
+    @Environment(L10n.self) private var l10n
+    let leg: Leg
+    let now: Double
+
+    var body: some View {
+        let status = TripsLogic.countdownStatus(l10n, leg, now: now)
+        StatusLine(status.kind, status.text)
     }
 }
 
@@ -132,10 +150,7 @@ struct LegRow: View {
         return HStack(alignment: .center, spacing: 12) {
             OperatorBadge(op: leg.operator, size: .large)
             VStack(alignment: .leading, spacing: 2) {
-                if upcoming {
-                    Text(TripsLogic.countdown(l10n, leg, now: now))
-                        .font(ClackFont.inter(12, .bold)).tracking(0.24).foregroundStyle(Ink.accentInk)
-                }
+                if upcoming { CountdownLine(leg: leg, now: now) }
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
                     .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
@@ -304,7 +319,7 @@ struct TransferChip: View {
         if t.missed { text += " · " + l10n.t("journey.missed") } else if t.tight { text += " · " + l10n.t("journey.tight") }
         return HStack(spacing: 10) {
             DashedLine(dash: 3, gap: 3).frame(height: 22)
-            Text(text).clack(.caption).foregroundStyle(t.missed ? Ink.veryLate : (t.tight ? Ink.slight : Ink.text2))
+            StatusLine(t.missed ? .band(.veryLate) : t.tight ? .band(.slight) : .arrived, text)
         }
         .padding(.vertical, 2)
         .padding(.leading, 17)

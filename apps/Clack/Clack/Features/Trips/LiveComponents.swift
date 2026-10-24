@@ -28,29 +28,20 @@ final class ConnectionModel {
     }
 }
 
-/// The LIVE chip: a blinking green dot and "Live" while the data is fresh, otherwise how long ago it was.
-struct LiveChip: View {
+/// A trip's live status as a `StatusLine`: "Live" with the pulsing dot while the data is fresh, otherwise how long ago
+/// it was, or that it is the phone's own estimate.
+struct LiveStatus: View {
     @Environment(L10n.self) private var l10n
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let live: LiveStateRow
     let now: Double
-    @State private var dim = false
 
     var body: some View {
         if live.localEstimate {
-            Chip(text: l10n.t("offline.chip"), tint: Ink.text3)
+            StatusLine(.estimated, l10n.t("offline.chip"))
         } else if LiveRules.isFresh(live, now: now) {
-            HStack(spacing: 5) {
-                Circle().fill(Ink.onTime).frame(width: 8, height: 8)
-                    .opacity(dim ? 0.35 : 1)
-                    .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: dim)
-                Text(l10n.t("live.chip")).lineLimit(1)
-            }
-            .clack(.chip)
-            .foregroundStyle(Ink.onTimeInk)
-            .onAppear { dim = true }
+            StatusLine(.live, l10n.t("live.chip"))
         } else {
-            Chip(text: l10n.t("live.stale", ["ago": LiveRules.ago(l10n, then: LiveRules.dataAt(live), now: now)]), tint: Ink.text3)
+            StatusLine(.stale, l10n.t("live.stale", ["ago": LiveRules.ago(l10n, then: LiveRules.dataAt(live), now: now)]))
         }
     }
 }
@@ -189,11 +180,7 @@ struct ConnectionChip: View {
     }
 
     var body: some View {
-        Text(text)
-            .clack(.delay)
-            .fontWeight(band == .unknown ? .semibold : .bold)
-            .foregroundStyle(band.ink)
-            .lineLimit(1)
+        StatusLine(.band(band), text)
     }
 }
 

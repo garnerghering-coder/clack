@@ -265,12 +265,12 @@ struct ExploreScreen: View {
         )
         return Group {
             switch status {
-            case .loading: Chip(text: l10n.t("liveMap.loading"))
-            case .unavailable: Chip(text: l10n.t("liveMap.unavailable"), tint: Ink.text3)
-            case .delayed(let at): Chip(text: l10n.t("liveMap.delayedData", ["ago": LiveRules.ago(l10n, then: at, now: now)]), tint: Ink.text3)
-            case .none(let filtered): Chip(text: l10n.t(filtered ? "liveMap.noneMatch" : "liveMap.noneHere"))
+            case .loading: StatusLine(.arrived, l10n.t("liveMap.loading"))
+            case .unavailable: StatusLine(.stale, l10n.t("liveMap.unavailable"))
+            case .delayed(let at): StatusLine(.stale, l10n.t("liveMap.delayedData", ["ago": LiveRules.ago(l10n, then: at, now: now)]))
+            case .none(let filtered): StatusLine(.arrived, l10n.t(filtered ? "liveMap.noneMatch" : "liveMap.noneHere"))
             case .running(let total, let simulated):
-                Chip(text: l10n.t(simulated ? "liveMap.simulated" : "liveMap.trainsRunning", count: total, ["count": String(total)]), accent: true)
+                StatusLine(simulated ? .estimated : .live, l10n.t(simulated ? "liveMap.simulated" : "liveMap.trainsRunning", count: total, ["count": String(total)]))
             }
         }
         .padding(.vertical, 6).padding(.horizontal, 10)
@@ -368,9 +368,9 @@ struct ExploreScreen: View {
             FlowLayout(spacing: 10, lineSpacing: 6) {
                 if let delay = train.delayMin { DelayText(delay: delay) }
                 switch position {
-                case .estimated: Chip(text: l10n.t("liveMap.posEstimated"))
-                case .old(let minutes): Chip(text: l10n.t("liveMap.posOld", ["min": String(minutes)]))
-                case .gps: Chip(text: l10n.t("liveMap.posGps"), tint: Ink.onTimeInk)
+                case .estimated: StatusLine(.estimated, l10n.t("liveMap.posEstimated"))
+                case .old(let minutes): StatusLine(.stale, l10n.t("liveMap.posOld", ["min": String(minutes)]))
+                case .gps: StatusLine(.live, l10n.t("liveMap.posGps"))
                 }
                 if !collapsed.wrappedValue, !train.estimated { Speedometer(kmh: train.speedKmh, at: train.at.ms, now: now) }
             }
@@ -413,7 +413,7 @@ struct ExploreScreen: View {
         return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), collapsed: collapsed, onClose: { model.closeScheduled() }) {
             if !collapsed.wrappedValue { art(type: type, operatorId: view.operatorId) }
             if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
-            Chip(text: status, tint: allCanceled ? Ink.veryLateInk : nil)
+            StatusLine(allCanceled ? .cancelled : .arrived, status)
             Text(l10n.t(anyLive ? "train.liveTimes" : "train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2)
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
