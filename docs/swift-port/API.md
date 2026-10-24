@@ -734,6 +734,105 @@ Also, for native map libraries (added 2026-10-23, `routes/map.ts`, test `mapTile
   gpsTicks, enRouteTicks, failedTicks, rejectedFixes: number } }`. Prediction keys are `"60min"`, `"30min"`,
   `"15min"`, `"5min"` (`HORIZONS_MIN`, `audit.ts:14`). Last 7 days, **all users**.
 
+### 2.13 Push: phones, Live Activities, widgets (`routes/push.ts`, `push/*`)
+
+Every token is a hex string, 32 to 400 characters (`/^[0-9a-f]{32,400}$/i`); the server lowercases it. `environment` is
+`"sandbox"` (Debug builds) or `"production"` (TestFlight, App Store).
+
+#### `PUT /api/devices`
+- Body: `{ token: string, environment: string, startToken?: string | null, widgetToken?: string | null }`.
+  - `token`: the phone's alert address (`didRegisterForRemoteNotificationsWithDeviceToken`). It is the row's key: the
+    same token again refreshes it, and moves it to the id in `X-Clack-User` if that changed.
+  - `startToken`: the Live Activity push-to-start address (`Activity<TripActivityAttributes>.pushToStartTokenUpdates`,
+    iOS 17.2+).
+  - `widgetToken`: WidgetKit's push address for this phone's widgets (`WidgetPushHandler.pushTokenDidChange`, iOS 26+).
+  - For `startToken` and `widgetToken`, **a missing key leaves the stored value as it is; `null` clears it.** Swift's
+    synthesized `Encodable` leaves out a `nil` optional, so a launch that doesn't know the address yet keeps the old
+    one. To clear one, encode an explicit `null` (`encodeNil(forKey:)`).
+- 204. 400 `{ error }` for a bad `token`/`environment`, or a `startToken`/`widgetToken` that isn't a hex string.
+
+#### `DELETE /api/devices/:token`
+- Forgets the phone (alerts switched off). Only your own. 204.
+
+#### `PUT /api/live-activities`
+- Body: `{ token: string, legId: string, environment: string, deviceToken?: string }`. `token` is the activity's
+  update address (`activity.pushTokenUpdates`); `legId` one of your legs (404 otherwise). `deviceToken` (optional, the
+  phone's own `token` from `PUT /api/devices`) ties the card to its phone, so when Apple says the phone is gone its cards
+  are forgotten too; leaving it out keeps the stored one. 204. 400 for bad tokens.
+
+#### `DELETE /api/live-activities/:token`
+- The card ended or was dismissed on the phone. Only your own. 204.
+
+#### Live Activity pushes the phone receives (`push/notifier.ts`)
+All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactivity`. Times in `aps` are seconds since
+1970; times inside `content-state` are ms (default `JSONDecoder` coding, as Apple requires).
+
+- **`content-state`** (`TripActivityAttributes.ContentState`): `status, delayMin, nextStop, nextStopAt, platform,
+  platformFor, progress, departAt, arriveAt, canceled, phase, note, changePlatform, changeAt` as before, plus the leg the
+  card is showing now: `legId: string, train: string | null, from: string, to: string, fromTz: string, toTz: string`.
+  Swift ignores keys it doesn't declare, so these are safe for today's app; to show the right train after a change the
+  app must add them as optionals and prefer them over the fixed `attributes`.
+- **Start** (iOS 17.2+, to the device's `startToken`), once per journey, from 30 min before the leg leaves:
+  `{ aps: { timestamp, event: "start", "content-state", "stale-date": now+300, "attributes-type": "TripActivityAttributes",
+  attributes: { legId, journeyId, train, from, to, fromTz, toTz, color }, "input-push-token": 1, alert: { title, body } } }`,
+  priority 10. The alert is never empty: "Nässjö C → Jönköping C" / "Leaves 13:20 from platform 5." (the reminder's
+  words), or for a train already running the operator and number / the route. No `sound`, so it doesn't ring on top of
+  the reminder alert. No `dismissal-date`: Apple documents it only for ended activities. A start Apple doesn't take
+  (network, 5xx) is tried again the next minute; a dead start token (410, `BadDeviceToken`, `Unregistered`,
+  `DeviceTokenNotForTopic`) is cleared from the device, the phone kept.
+- **Update**: `{ aps: { timestamp, event: "update", "content-state", "stale-date": now+300, alert? } }`. Priority **5**
+  (not budgeted by Apple), or **10** only when it carries an `alert`: a platform change before leaving, the train
+  cancelled, or "Get off at X in about N min", each once per leg and only if that alert kind is on in Settings. The alert
+  has `title` and `body`, no `sound` (the normal alert notification rings). Sent when the words change, the progress
+  line at most once a minute, and the same state again every 4 minutes so the card doesn't go stale while the server
+  is up. When the server stops, the card turns stale (`ActivityState.stale`) 5 minutes after the last push.
+- **One card per journey.** Legs that share a `journeyId` share one card. When a leg arrives and a change follows at the
+  same station within an hour, `phase` is `changing` (`changePlatform`, `changeAt` = the next train). Once that train
+  is due (or the change is further off, or the next leg leaves from elsewhere) the same card moves to the next leg:
+  `content-state.legId` and the leg fields switch, the phases run again (`scheduled`, `leaveSoon`, `boarding`, ...).
+  The server moves its `live_activities` row to the new leg; the app needs to do nothing except keep the card.
+- **End**: `{ aps: { timestamp, event: "end", "content-state", "dismissal-date": now+600, alert? } }`, priority 5 (10
+  with the cancellation alert). Sent when the last leg arrived, or the leg the card shows is cancelled. If Apple doesn't
+  take an end for a passing reason the server keeps the row and tries again the next minute. Rows older than 12 hours
+  (Apple's maximum: 8 hours running and 4 on the Lock Screen) are dropped.
+
+**What the app must change for this:** start a card locally only if no card of the same `journeyId` is running
+(today it checks `legId`); end cards only when the whole journey is over (today `endFinished` ends a card when its
+`attributes.legId` has arrived, which would kill the card the server just moved on); register cards with
+`deviceToken`; read the new `content-state` leg fields.
+
+#### Freshness pushes: background and widgets (`push/notifier.ts` `fresh`)
+The server looks at every tracked leg each minute and on each tracker update. When one of these changes since its last
+look, it sends both pushes below to each of the person's phones: the delay band (`delayBand` in
+`packages/shared/src/delay.ts`: on_time, slight, late, very_late, cancelled, unknown), the departure or arrival platform,
+cancellation, or the Live Activity `phase`. The first look at a leg (also after a server restart) is only a baseline.
+
+`reason` is the most important change: `cancelled` > `finished` (the journey's last leg arrived) > `platform` >
+`delay` > `phase`.
+
+**Throttle:** at most one background push and one widget push per phone per 15 minutes. A change inside the window is
+held (the newest one wins) and sent when the window ends. A cancellation goes at once. The throttle is in memory, so a
+restart forgets it. Apple's guidance for background pushes is no more than two or three an hour; 15 minutes allows four.
+
+- **Background push** to the phone's `token`: `apns-push-type: background`, `apns-topic: <bundle id>`,
+  `apns-priority: 5`, `apns-expiration: now+3600`. Payload
+  `{ "aps": { "content-available": 1 }, "clack": { "legId": "<leg id>", "reason": "delay" | "platform" | "cancelled" | "phase" | "finished" } }`.
+  The app must have the Background Modes capability with "Remote notifications", and implement
+  `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)` (or the async form): read `clack.legId`, fetch
+  `GET /api/legs/:id` (and the journey), update its cache and the App Group store the widgets read, call
+  `WidgetCenter.shared.reloadAllTimelines()`, and finish within 30 seconds. iOS delivers these when it likes, may hold
+  them (it keeps only the newest), and drops them if the app was force-quit.
+- **Widget push** to the device's `widgetToken`: `apns-push-type: widgets`, `apns-topic: <bundle id>.push-type.widgets`,
+  no `apns-priority` (as in Apple's example), `apns-expiration: now+3600`. Payload `{ "aps": { "content-changed": true } }`.
+  WidgetKit then calls the widgets' timeline providers; the providers must fetch from the server (or read the App Group
+  store) themselves, as the push carries no data. The app must: add the Push Notifications capability to the
+  `ClackWidgetsExtension` target, implement a `WidgetPushHandler` whose `pushTokenDidChange(_:widgets:)` gets the token
+  (hex), add `.pushHandler(...)` to each widget configuration, and get the token to the server as `widgetToken` in
+  `PUT /api/devices` with the phone's `token` (from the extension itself, or through the App Group to the app). The
+  server sends to it with the phone's `environment` (unverified that the extension's push environment always matches
+  the app's). A dead widget token is cleared, the phone kept. WidgetKit budgets these pushes and delivers them
+  opportunistically; they add to timeline reloads, they don't replace them.
+
 ---
 
 ## 3. Streaming

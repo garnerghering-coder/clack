@@ -1,7 +1,8 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { buildApp } from '../src/app.js';
 import { openDb } from '../src/db/client.js';
-import { devices, liveActivities } from '../src/db/schema.js';
+import { DEFAULT_SETTINGS } from '@clack/shared';
+import { devices, legs, liveActivities, stations, users } from '../src/db/schema.js';
 
 const U = '3f1c2b4a-8d9e-4f00-a1b2-c3d4e5f60718';
 const V = '9a8b7c6d-5e4f-4a3b-9c2d-1e0f2a3b4c5d';
@@ -34,6 +35,36 @@ describe('push routes', () => {
     expect(rows[0]).toMatchObject({ userId: U, environment: 'production', startToken: 'cd'.repeat(32) });
     await put(app, V, { token: TOKEN, environment: 'production' });
     expect(db.select().from(devices).all()[0]!.userId).toBe(V);
+  });
+
+  it('keeps the start and widget addresses when a key is left out, and clears them on null', async () => {
+    const { db, app } = make();
+    const START = 'cd'.repeat(32);
+    const WIDGET = 'ef'.repeat(32);
+    await put(app, U, { token: TOKEN, environment: 'sandbox', startToken: START, widgetToken: WIDGET.toUpperCase() });
+    expect(db.select().from(devices).get()).toMatchObject({ startToken: START, widgetToken: WIDGET });
+    // The app's first registration after a launch: neither address known yet, so the keys are left out.
+    await put(app, U, { token: TOKEN, environment: 'sandbox' });
+    expect(db.select().from(devices).get()).toMatchObject({ startToken: START, widgetToken: WIDGET });
+    await put(app, U, { token: TOKEN, environment: 'sandbox', startToken: null });
+    expect(db.select().from(devices).get()).toMatchObject({ startToken: null, widgetToken: WIDGET });
+    await put(app, U, { token: TOKEN, environment: 'sandbox', widgetToken: null });
+    expect(db.select().from(devices).get()).toMatchObject({ startToken: null, widgetToken: null });
+    expect((await put(app, U, { token: TOKEN, environment: 'sandbox', widgetToken: 'zz' })).statusCode).toBe(400);
+    expect((await put(app, U, { token: TOKEN, environment: 'sandbox', widgetToken: 5 })).statusCode).toBe(400);
+  });
+
+  it('ties a Live Activity to its phone when the app says which', async () => {
+    const { db, app } = make();
+    db.insert(users).values({ id: U, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();
+    db.insert(stations).values([{ id: 'N', name: 'N', country: 'SE', lat: 57, lon: 14, tz: 'Europe/Stockholm', coordSource: 'gtfs' }]).run();
+    db.insert(legs).values({ id: 'L1', userId: U, dataQuality: 'full', originStationId: 'N', destStationId: 'N', schedDep: new Date(), schedArr: new Date() }).run();
+    const reg = (payload: object) => app.inject({ method: 'PUT', url: '/api/live-activities', headers: { 'x-clack-user': U }, payload });
+    expect((await reg({ token: 'cd'.repeat(32), legId: 'L1', environment: 'sandbox', deviceToken: TOKEN.toUpperCase() })).statusCode).toBe(204);
+    expect(db.select().from(liveActivities).get()).toMatchObject({ legId: 'L1', deviceToken: TOKEN });
+    expect((await reg({ token: 'cd'.repeat(32), legId: 'L1', environment: 'sandbox' })).statusCode).toBe(204);
+    expect(db.select().from(liveActivities).get()!.deviceToken).toBe(TOKEN);
+    expect((await reg({ token: 'cd'.repeat(32), legId: 'L1', environment: 'sandbox', deviceToken: 'no' })).statusCode).toBe(400);
   });
 
   it('refuses bad tokens and environments', async () => {

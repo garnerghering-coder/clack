@@ -36,11 +36,28 @@ export function providerToken(cfg: ApnsConfig, nowSec: number): string {
 export type Environment = 'sandbox' | 'production';
 export const HOSTS: Record<Environment, string> = { sandbox: 'api.sandbox.push.apple.com', production: 'api.push.apple.com' };
 
+export type PushType = 'alert' | 'liveactivity' | 'background' | 'widgets';
+
+/** The topic each push type goes to (Apple, "Sending notification requests to APNs", apns-push-type). */
+export function topicFor(bundleId: string, pushType: PushType): string {
+  if (pushType === 'liveactivity') return `${bundleId}.push-type.liveactivity`;
+  if (pushType === 'widgets') return `${bundleId}.push-type.widgets`;
+  return bundleId;
+}
+
 export interface PushRequest {
   token: string;
   environment: Environment;
-  pushType: 'alert' | 'liveactivity';
-  /** 10 = now, 5 = when convenient (Apple's limit for Live Activity updates is generous at 10 but budgeted). */
+  /**
+   * alert: a notification. liveactivity: start, update or end a Live Activity. background: wakes the app to refresh
+   * (`content-available`, always priority 5). widgets: tells WidgetKit to reload this app's widgets (iOS 26+).
+   */
+  pushType: PushType;
+  /**
+   * 10 = now, 5 = when convenient. Live Activity updates at 10 count against a budget; at 5 they don't. Background pushes
+   * must be 5 (Apple: "Using priority 10 is an error"), so that is forced. Widget pushes send no priority unless given,
+   * as in Apple's example request.
+   */
   priority?: 5 | 10;
   collapseId?: string;
   /** Seconds since 1970 after which Apple stops trying; 0 = try once. */
@@ -66,11 +83,12 @@ export type Transport = (r: TransportRequest) => Promise<{ status: number; body:
 
 /** The headers and body Apple wants for a request. */
 export function buildRequest(cfg: ApnsConfig, req: PushRequest, jwt: string): TransportRequest {
+  const priority = req.pushType === 'background' ? 5 : req.pushType === 'widgets' ? req.priority : (req.priority ?? 10);
   const headers: Record<string, string> = {
     authorization: `bearer ${jwt}`,
-    'apns-topic': req.pushType === 'liveactivity' ? `${cfg.topic}.push-type.liveactivity` : cfg.topic,
+    'apns-topic': topicFor(cfg.topic, req.pushType),
     'apns-push-type': req.pushType,
-    'apns-priority': String(req.priority ?? 10),
+    ...(priority !== undefined ? { 'apns-priority': String(priority) } : {}),
     'apns-expiration': String(req.expiration ?? 0),
     'content-type': 'application/json',
   };
@@ -147,6 +165,14 @@ export class ApnsClient {
     }
   }
 }
+
+/** A background push: wakes the app to fetch fresh data. `aps` holds only `content-available` (Apple's rule). */
+export function backgroundPayload(c: { legId: string; reason: string }): Record<string, unknown> {
+  return { aps: { 'content-available': 1 }, clack: { legId: c.legId, reason: c.reason } };
+}
+
+/** A WidgetKit push: WidgetKit reloads the app's widget timelines. */
+export const WIDGET_PAYLOAD: Record<string, unknown> = Object.freeze({ aps: Object.freeze({ 'content-changed': true }) });
 
 /** The JSON for an alert on the lock screen. `timeSensitive` breaks through Focus (cancellations, missed changes). */
 /** The alert sound: SBB's jingle, bundled with the app (Resources/Sounds). */

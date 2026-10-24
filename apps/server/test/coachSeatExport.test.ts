@@ -133,7 +133,7 @@ describe('migration 0015 on an existing database', () => {
     const journalPath = join(dir, 'meta', '_journal.json');
     const journal = JSON.parse(readFileSync(journalPath, 'utf8'));
     const full = JSON.stringify(journal);
-    journal.entries = journal.entries.filter((e: { tag: string }) => e.tag !== '0015_leg_coach_seat');
+    journal.entries = journal.entries.filter((e: { tag: string }) => e.tag < '0015');
     writeFileSync(journalPath, JSON.stringify(journal));
     const sqlite = new Database(join(dir, 'old.db'));
     sqlite.pragma('foreign_keys = ON');

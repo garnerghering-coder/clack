@@ -295,6 +295,8 @@ export const devices = sqliteTable(
     environment: text('environment').notNull(), // sandbox | production
     /** iOS 17.2+: lets the server start a Live Activity while the app is closed. */
     startToken: text('start_token'),
+    /** iOS 26+: WidgetKit's push address for this phone's Home Screen widgets (WidgetPushHandler). */
+    widgetToken: text('widget_token'),
     createdAt: createdAt(),
     lastSeenAt: timestamp('last_seen_at').notNull(),
   },
@@ -309,9 +311,11 @@ export const liveActivities = sqliteTable(
     userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
     legId: text('leg_id').notNull().references(() => legs.id, { onDelete: 'cascade' }),
     environment: text('environment').notNull(),
+    /** The phone it runs on (its devices.token), when the app says: a phone Apple says is gone takes its cards with it. */
+    deviceToken: text('device_token'),
     createdAt: createdAt(),
   },
-  (t) => [index('live_activities_leg').on(t.legId)],
+  (t) => [index('live_activities_leg').on(t.legId), index('live_activities_device').on(t.deviceToken)],
 );
 
 /** What has been sent for a trip, so an alert never repeats (also after a restart). `key` tells repeats of one kind apart. */
