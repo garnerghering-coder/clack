@@ -22,6 +22,7 @@ import { legs, users } from './db/schema.js';
 import { eq, inArray } from 'drizzle-orm';
 import { railGraph } from './geo/railGraph.js';
 import { rateLimitPlugin } from './plugins/rateLimit.js';
+import { adminAuthPlugin } from './plugins/adminAuth.js';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -46,6 +47,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   // requests without a phone id) is the real client. Safe while the server listens on 127.0.0.1 only; CLACK_TRUST_PROXY=0 turns it off.
   const app = Fastify({ logger: opts.logger ?? false, trustProxy: !/^(0|false|no|off)$/i.test(process.env.CLACK_TRUST_PROXY ?? '') });
   app.register(rateLimitPlugin);
+  app.register(adminAuthPlugin);
   app.decorateRequest('userId', '');
   // Who's asking. No sign-in (App Review 5.1.1(v): no login unless the app needs one): the iOS app makes a random id on
   // first launch and sends it with every request (header, or ?u= where a header can't be set, as on EventSource). The
