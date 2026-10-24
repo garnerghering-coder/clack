@@ -21,6 +21,17 @@ describe('typical train types', () => {
     expect(typicalTrainType('sl', 'commuter', '2580')).toBe('x60');
   });
 
+  it('has ER1 on the Bergslagspendeln, Regina on Norrtåg\'s northern lines and a loco-hauled SJ line to Kalmar (sv.wikipedia, jarnvagar.nu, read 2026-10-24)', () => {
+    expect(typicalTrainType('tib', 'regional', '9501', ['Västerås C', 'Ludvika'])).toBe('er1');
+    expect(typicalTrainType('tib', 'regional', '9101', ['Gävle C', 'Örebro C'])).toBe('regina');
+    expect(typicalTrainType('norrtag', 'regional', '9201', ['Luleå', 'Kiruna'])).toBe('regina');
+    expect(typicalTrainType('norrtag', 'regional', '9301', ['Umeå Ö', 'Luleå'])).toBe('regina');
+    expect(typicalTrainType('norrtag', 'regional', '9101', ['Umeå C', 'Sundsvall C'])).toBe('x62');
+    expect(typicalTrainType('sj', 'regional', '1001', ['Göteborg C', 'Kalmar C'])).toBe('loco_coaches');
+    expect(typicalTrainType('sj', 'regional', '1500', ['Göteborg C', 'Stockholm C'])).toBe('x40');
+    expect(typicalTrainType('sj', 'regional', '2301', ['Göteborg C', 'Karlstad C'])).toBe('regina');
+  });
+
   it('returns nothing for an unknown operator rather than guessing', () => {
     expect(typicalTrainType('nobody', 'regional', '1')).toBeNull();
     // Krösatåg runs Itinos on some lines and older electric units on others: no single typical type.
@@ -29,7 +40,8 @@ describe('typical train types', () => {
 
   it('tells Vy and SJ Nord lines apart by where the train starts or ends (Norske tog, jernbane.net, 2026-10-22)', () => {
     expect(typicalTrainType('vy', 'regional', '1027', ['Asker', 'Kongsvinger'])).toBe('no_flirt');
-    expect(typicalTrainType('vy', 'intercity', '141', ['Oslo S', 'Göteborg C'])).toBe('no_type73');
+    // Göteborg trains are normally Type 74 (jarnvagar.nu, jarnvag.net/vagnguide/bm74, read 2026-10-24); a 73B is only an occasional stand-in.
+    expect(typicalTrainType('vy', 'intercity', '141', ['Oslo S', 'Göteborg C'])).toBe('no_flirt');
     expect(typicalTrainType('vy', 'intercity', '61', ['Oslo S', 'Bergen'])).toBe('no_flirt');
     expect(typicalTrainType('vy', 'commuter', '2253', ['Lillestrøm', 'Spikkestad'])).toBe('no_type72');
     expect(typicalTrainType('vy', 'commuter', '2755', ['Stabekk', 'Ski'])).toBe('no_type69_72');
