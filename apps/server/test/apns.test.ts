@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import { describe, expect, it } from 'vitest';
-import { alertPayload, ApnsClient, buildRequest, providerToken, type ApnsConfig, type Transport } from '../src/push/apns.js';
+import { alertPayload, ApnsClient, backgroundPayload, buildRequest, providerToken, WIDGET_PAYLOAD, type ApnsConfig, type Transport } from '../src/push/apns.js';
 
 const { privateKey, publicKey } = crypto.generateKeyPairSync('ec', { namedCurve: 'P-256' });
 const cfg: ApnsConfig = { keyId: 'ABC123DEFG', teamId: 'TEAM123456', keyPem: privateKey.export({ type: 'pkcs8', format: 'pem' }).toString(), topic: 'com.example.Clack' };
@@ -29,6 +29,25 @@ describe('APNs', () => {
     const r = buildRequest(cfg, { token: 't', environment: 'production', pushType: 'liveactivity', payload: {} }, 'JWT');
     expect(r.host).toBe('api.push.apple.com');
     expect(r.headers['apns-topic']).toBe('com.example.Clack.push-type.liveactivity');
+  });
+
+  it('sends background pushes to the bundle id, always at priority 5', () => {
+    const r = buildRequest(cfg, { token: 't', environment: 'sandbox', pushType: 'background', priority: 10, expiration: 99, payload: backgroundPayload({ legId: 'L', reason: 'delay' }) }, 'JWT');
+    expect(r.headers['apns-topic']).toBe('com.example.Clack');
+    expect(r.headers['apns-push-type']).toBe('background');
+    expect(r.headers['apns-priority']).toBe('5');
+    expect(r.headers['apns-expiration']).toBe('99');
+    expect(JSON.parse(r.body)).toEqual({ aps: { 'content-available': 1 }, clack: { legId: 'L', reason: 'delay' } });
+  });
+
+  it('sends widget pushes to the widgets topic with content-changed', () => {
+    const r = buildRequest(cfg, { token: 'w', environment: 'production', pushType: 'widgets', expiration: 99, payload: WIDGET_PAYLOAD }, 'JWT');
+    expect(r.host).toBe('api.push.apple.com');
+    expect(r.path).toBe('/3/device/w');
+    expect(r.headers['apns-topic']).toBe('com.example.Clack.push-type.widgets');
+    expect(r.headers['apns-push-type']).toBe('widgets');
+    expect(r.headers['apns-priority']).toBeUndefined();
+    expect(JSON.parse(r.body)).toEqual({ aps: { 'content-changed': true } });
   });
 
   it('reports a dead address so it can be forgotten', async () => {
