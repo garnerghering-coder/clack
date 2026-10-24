@@ -73,7 +73,7 @@ private struct WordmarkLetter: Shape {
 }
 
 /// The launch screen: the wordmark flipping in on signal yellow (#FFD400), nothing else. Shown until the settings have
-/// loaded and at least 900 ms have passed, then it fades out over 350 ms.
+/// loaded and at least 700 ms have passed, then it fades out over 250 ms.
 struct Splash: View {
     var body: some View {
         ZStack {

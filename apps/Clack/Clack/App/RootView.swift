@@ -49,7 +49,7 @@ struct RootView: View {
             if !splashGone {
                 Splash()
                     .opacity(hideSplash ? 0 : 1)
-                    .animation(.easeInOut(duration: 0.35), value: hideSplash)
+                    .animation(.easeInOut(duration: 0.25), value: hideSplash)
                     .allowsHitTesting(!hideSplash)
             }
         }
@@ -101,7 +101,6 @@ struct RootView: View {
         // Tapping an alert opens what it is about. On a cold start the tap arrives before this view does, so it is
         // read when the view appears too.
         .onAppear {
-            LaunchTiming.mark("root-appear")
             openAlert()
             #if DEBUG
             // `-url <clack://...>` opens a link as if it had been tapped.
@@ -124,14 +123,16 @@ struct RootView: View {
         .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in router.touched = true })
         .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }
         .task {
-            try? await Task.sleep(for: .milliseconds(900))
+            // The flip takes about 0.7 s; the splash is gone by about 1 s.
+            try? await Task.sleep(for: .milliseconds(700))
             #if DEBUG
             // `-holdSplash` keeps the splash on screen, to look at it.
             if CommandLine.arguments.contains("-holdSplash") { return }
             #endif
-            // The logos come in while the splash is up (at most 2.5 s more), so no badge appears empty.
+            // The logos get a moment more (0.3 s at most, and none if the load failed); a badge without its logo yet
+            // shows initials and the logo fades in.
             var waited = 0
-            while !app.logosSettled && waited < 25 {
+            while app.state != .failed && !app.logosSettled && waited < 3 {
                 try? await Task.sleep(for: .milliseconds(100))
                 waited += 1
             }
@@ -139,11 +140,9 @@ struct RootView: View {
         }
         .onChange(of: hideSplash) { _, hide in
             guard hide else { return }
-            LaunchTiming.mark("splash-fade-start")
             Task {
-                try? await Task.sleep(for: .milliseconds(400))
+                try? await Task.sleep(for: .milliseconds(250))
                 splashGone = true
-                LaunchTiming.mark("splash-gone")
             }
         }
         .task { await land() }

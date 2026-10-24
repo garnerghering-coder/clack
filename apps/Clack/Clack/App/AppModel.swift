@@ -64,7 +64,6 @@ final class AppModel {
         let urls = operators.compactMap { $0.logoUrl }.compactMap { URL(string: base + $0) }
         await LogoStore.shared.prefetch(urls)
         logosSettled = true
-        LaunchTiming.mark("logos-settled")
     }
 
     /// The landing rule has run for this launch (it runs once).
@@ -123,11 +122,9 @@ final class AppModel {
             self.amenities = loaded.3
             l10n.language = loaded.0.language
             state = .ready
-            LaunchTiming.mark("load-ready")
             Task { await prefetchLogos() }
         } catch {
             state = .failed
-            LaunchTiming.mark("load-failed")
         }
     }
 

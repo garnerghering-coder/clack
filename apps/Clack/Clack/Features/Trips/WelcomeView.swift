@@ -18,7 +18,7 @@ struct WelcomeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             Spacer(minLength: 0)
-            Wordmark(fontSize: 44, animateIn: true)
+            Wordmark(fontSize: 44)
             Text(l10n.t("app.tagline")).clack(.splashTagline).foregroundStyle(Ink.text2)
             VStack(alignment: .leading, spacing: 16) {
                 line("ticket", l10n.t("firstRun.log"))
