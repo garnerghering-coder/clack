@@ -322,13 +322,11 @@ struct TripDetailScreen: View {
             }
             // The train started earlier and is on its way to where you get on: where it is, and when it gets there.
             if let shown, shown.status == .approaching, let board {
-                HStack(spacing: 8) {
-                    Text(l10n.t("live.approachingTo", ["name": board.name])).clack(.rowTitle).foregroundStyle(Ink.text)
-                    if shown.positionSource == .gps, !shown.localEstimate { Speedometer(kmh: shown.speedKmh, at: shown.positionAt?.ms, now: now).clack(.caption) }
-                }
+                // The status line already says "On its way"; this says when it reaches you.
                 HStack(spacing: 8) {
                     Text(l10n.t("live.arrivesAtLabel")).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: shown.eta?.ms, tz: board.tz, clock: app.settings.clock).clack(.body).foregroundStyle(Ink.text)
+                    if shown.positionSource == .gps, !shown.localEstimate { Speedometer(kmh: shown.speedKmh, at: shown.positionAt?.ms, now: now).clack(.caption) }
                 }
             }
             Text(shown.map { l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: $0.updatedAt.ms, now: now)]) } ?? l10n.t("detail.timetableOnly"))
