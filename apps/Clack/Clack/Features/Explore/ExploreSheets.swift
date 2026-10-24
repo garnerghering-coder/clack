@@ -57,7 +57,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
                     intro
                     if !collapsed { content }
                 }
-                .padding(.horizontal, 16).padding(.bottom, 14)
+                .padding(.horizontal, 16).padding(.bottom, 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .onGeometryChange(for: Double.self) { $0.size.height } action: { bodyHeight = $0 }
                 .onGeometryChange(for: Double.self) { $0.frame(in: .named("sheet-scroll")).minY } action: { scrolled = $0 < -6 }
@@ -80,7 +80,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var grabber: some View {
-        RoundedRectangle(cornerRadius: 3, style: .continuous)
+        RoundedRectangle(cornerRadius: Radius.bar, style: .continuous)
             .fill(Ink.text3.opacity(0.6))
             .frame(width: 36, height: 5)
             .frame(maxWidth: .infinity).frame(height: 28)
@@ -100,11 +100,11 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var header: some View {
-        HStack(spacing: 10) {
-            OperatorBadge(op: op, size: 32)
+        HStack(spacing: 12) {
+            OperatorBadge(op: op, size: .medium)
                 .scaleEffect(scrolled && !collapsed ? 0.8 : 1, anchor: .leading)
             Button { collapsed.toggle() } label: {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Text(title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
                     LucideIcon(name: collapsed ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text)
                     Spacer(minLength: 0)
@@ -113,7 +113,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
             }
             .buttonStyle(.plain)
             .accessibilityAddTraits(.isHeader)
-            IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+            IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
         }
         .padding(.horizontal, 16).padding(.top, scrolled && !collapsed ? 4 : 0).padding(.bottom, scrolled && !collapsed ? 6 : 10)
         .overlay(alignment: .bottom) { Rectangle().fill(scrolled && !collapsed ? Ink.hairline : .clear).frame(height: 1) }
@@ -121,8 +121,8 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var footer: some View {
-        HStack(spacing: 10) { actions }
-            .padding(.horizontal, 16).padding(.top, 10).padding(.bottom, 14)
+        HStack(spacing: 12) { actions }
+            .padding(.horizontal, 16).padding(.top, 12).padding(.bottom, 16)
             .overlay(alignment: .top) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .onGeometryChange(for: Double.self) { $0.size.height } action: { footHeight = $0 }
     }
@@ -185,7 +185,7 @@ struct StopList: View {
             let next = ExploreLogic.nextStopIndex(list)
             // The train is drawn between the stops it has left and the one it is heading for, as on a trip's page.
             let halves = TripDetailLogic.railHalves(count: list.count, fills: ExploreLogic.railFills(list, now: now), showTrain: true) { _ in true }
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(l10n.t("liveMap.stops")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 VStack(spacing: 0) {
                     ForEach(Array(list.enumerated()), id: \.element.seq) { i, stop in
@@ -198,33 +198,14 @@ struct StopList: View {
 
     private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
-        let passed = stop.passed
-        let clock = app.settings.clock
-        let tz = "Europe/Stockholm"
-        let late = times.lateMinutes
-        let tint: Color = late > 0 && times.real != nil ? Ink.late : late < 0 && times.real != nil ? Ink.onTime : Ink.text
-        return HStack(alignment: .center, spacing: 10) {
-            VStack(alignment: .leading, spacing: 1) {
-                FlapTime(time: times.shown, tz: tz, clock: clock, style: .text)
-                    .foregroundStyle(passed ? Ink.text3 : tint)
-                if late != 0, times.real != nil, let planned = times.planned {
-                    Text(Format.time(planned, tz: tz, clock: clock)).strikethrough().font(ClackFont.inter(11.5, .medium)).foregroundStyle(Ink.text3)
-                }
-            }
-            .font(ClackFont.inter(14, .semibold)).monospacedDigit()
-            .frame(width: 58, alignment: .leading)
-            StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below)
-            VStack(alignment: .leading, spacing: 0) {
-                Text(stop.name).font(ClackFont.inter(16, isNext ? .bold : .regular)).foregroundStyle(passed ? Ink.text3 : Ink.text)
-                    .strikethrough(stop.canceled)
-                let note = [stop.canceled ? l10n.t("liveMap.canceledStop") : nil, stop.platform.map { l10n.t("liveMap.track", ["track": $0]) }].compactMap { $0 }.joined(separator: " · ")
-                if !note.isEmpty { Text(note).clack(.caption).foregroundStyle(Ink.text2) }
-            }
-            .padding(.vertical, 4)
-            Spacer(minLength: 0)
-        }
-        .frame(minHeight: 44)
-        .accessibilityElement(children: .combine)
+        // The shared stop row, compact (no flaps in a sheet): passed stops dimmed, the next one in 600.
+        return StopRow(
+            name: stop.name, emphasis: stop.passed ? .dim : isNext ? .next : .plain, canceled: stop.canceled,
+            notes: stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : [],
+            rail: StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below),
+            time: times.real ?? times.planned, sched: times.planned, live: times.real != nil, delay: times.real != nil ? times.lateMinutes : nil,
+            tz: "Europe/Stockholm", clock: app.settings.clock, platform: stop.platform, compact: true
+        )
     }
 }
 
@@ -235,10 +216,10 @@ struct LiveSheetCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             content
         }
-        .padding(.horizontal, 16).padding(.vertical, 14)
+        .padding(.horizontal, 16).padding(.vertical, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.glass)
         .background(.ultraThinMaterial)
@@ -262,19 +243,17 @@ struct NotRunningSheet: View {
     var body: some View {
         let op = follow?.operatorId.flatMap { app.operatorsById[$0] }
         LiveSheetCard {
-            HStack(spacing: 10) {
-                OperatorBadge(op: op, size: 32)
-                Text([op?.name, number].compactMap { $0 }.joined(separator: " ").isEmpty ? l10n.t("liveMap.train", ["number": number]) : [op?.name, number].compactMap { $0 }.joined(separator: " "))
-                    .clack(.rowTitle).foregroundStyle(Ink.text)
+            HStack(spacing: 12) {
+                ServiceHeader(op: op, number: op == nil ? nil : number, size: .medium, fallback: l10n.t("liveMap.train", ["number": number]))
                 Spacer(minLength: 0)
-                IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let label = follow?.label { Text(label).clack(.rowTitle).foregroundStyle(Ink.text) }
             Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
             Text(l10n.t("liveMap.notRunningBody")).clack(.caption).foregroundStyle(Ink.text2)
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 if let follow {
-                    Button { onUnfollow(follow) } label: { HStack(spacing: 6) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
+                    Button { onUnfollow(follow) } label: { HStack(spacing: 8) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
                         .buttonStyle(.clack(wide: true))
                 }
                 Button(l10n.t("common.close"), action: onClose).buttonStyle(.clack(.primary, wide: true))
@@ -301,27 +280,26 @@ struct LiveStationSheet: View {
             HStack {
                 Text(name).clack(.rowTitle).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
-                IconButton(icon: "x", label: l10n.t("common.close"), small: true, action: onClose)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
             if let rows {
                 if rows.isEmpty {
                     if info?.hasBoard == true { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
                 } else {
-                    VStack(spacing: 8) {
+                    VStack(spacing: 0) {
                         ForEach(rows) { row in
                             Button { onTrain(row) } label: {
-                                HStack(spacing: 8) {
-                                    FlapTime(time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm", clock: app.settings.clock, style: .text)
-                                        .font(ClackFont.inter(14, .semibold))
-                                    OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: 18)
-                                    Text(row.endpoints.joined(separator: ", ")).font(ClackFont.inter(14)).foregroundStyle(Ink.text).lineLimit(1)
-                                    Spacer(minLength: 0)
-                                    if let platform = row.platform {
-                                        Text(l10n.t("trips.platform", ["platform": platform])).clack(.caption).foregroundStyle(Ink.text2)
-                                    }
+                                BoardRowView(
+                                    .init(
+                                        time: row.estimated ?? row.advertised, sched: row.advertised, tz: "Europe/Stockholm",
+                                        destination: row.endpoints.joined(separator: ", "), platform: row.platform,
+                                        delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil
+                                    ),
+                                    clock: app.settings.clock, compact: true
+                                ) {
+                                    OperatorBadge(op: row.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
                                 }
-                                .frame(minHeight: 40).contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                         }
@@ -330,7 +308,7 @@ struct LiveStationSheet: View {
             } else {
                 Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2)
             }
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 if info?.hasBoard == true {
                     Button(l10n.t("liveMap.allDepartures"), action: onBoard).buttonStyle(.clack(wide: true))
                 }

@@ -58,7 +58,7 @@ struct FeaturedCard: View {
         // Only a fresh position draws the train, and only then is the route split into travelled and ahead.
         let grounded = state == .active && live != nil && LiveRules.isFresh(live, now: now)
             && live?.lat != nil && live?.lon != nil && live?.positionSource != nil
-        let service = [leg.operator?.name, leg.trainNumber].compactMap { $0 }.joined(separator: " ")
+
         let tag: String = {
             switch state {
             case .upcoming: return l10n.t("trips.routePreview")
@@ -72,31 +72,29 @@ struct FeaturedCard: View {
             ZStack(alignment: .topLeading) {
                 featuredMap(grounded: grounded)
                 Text(tag)
-                    .font(ClackFont.inter(11, .regular)).foregroundStyle(Ink.text2)
+                    .clack(.micro).foregroundStyle(Ink.text2)
                     .padding(.vertical, 2).padding(.horizontal, 8)
-                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .padding(.leading, 10).padding(.top, 8)
+                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                    .padding(.leading, 12).padding(.top, 8)
             }
             .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 10) {
-                    OperatorBadge(op: leg.operator, size: 28)
-                    Text(service.isEmpty ? l10n.t("trips.train") : service).fontWeight(.bold).foregroundStyle(Ink.text)
+                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium) {
                     switch state {
-                    case .upcoming: Chip(text: l10n.t("trips.planned"))
-                    case .arrived: Chip(text: l10n.t("trips.arrived"))
-                    case .active: if let live { LiveChip(live: live, now: now) }
+                    case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
+                    case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))
+                    case .active: if let live { LiveStatus(live: live, now: now) }
                     }
                 }
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
                     .clack(.headline).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
-                FlapTimes(leg: leg, style: .lg, intro: true)
+                TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
                 bottom(now: now, live: live)
             }
-            .padding(.top, 14).padding(.bottom, 16).padding(.horizontal, 16)
+            .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Surface.Hero(op: op))
         }
@@ -147,7 +145,7 @@ struct FeaturedCard: View {
             }
         case .upcoming:
             HStack(spacing: 8) {
-                Pill(text: TripsLogic.countdown(l10n, leg, now: now))
+                CountdownLine(leg: leg, now: now)
                 if let platform = leg.depPlatform { Chip(text: l10n.t("trips.platform", ["platform": platform])) }
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
             }

@@ -22,14 +22,14 @@ struct ActivityLog: View {
             if events.isEmpty {
                 Text(l10n.t("activity.empty")).clack(.caption).foregroundStyle(Ink.text2)
             } else {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach(events) { event in
                         let alarming = event.type == .cancelled || event.type == .shortTurned
                         HStack(alignment: .firstTextBaseline, spacing: 8) {
                             Text(Format.time(event.ts.ms, tz: tz, clock: app.settings.clock))
-                                .monospacedDigit().foregroundStyle(alarming ? Ink.veryLate : Ink.text2)
-                                .frame(width: 56, alignment: .leading)
-                            Text(TripDetailLogic.eventText(l10n, event, leg: leg, stops: stops)).foregroundStyle(alarming ? Ink.veryLate : Ink.text)
+                                .monospacedDigit().foregroundStyle(alarming ? Ink.veryLateInk : Ink.text2)
+                                .frame(minWidth: 56, alignment: .leading)
+                            Text(TripDetailLogic.eventText(l10n, event, leg: leg, stops: stops)).foregroundStyle(alarming ? Ink.veryLateInk : Ink.text)
                         }
                         .clack(.body)
                     }

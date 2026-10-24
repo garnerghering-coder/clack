@@ -62,6 +62,7 @@ struct StatsWidget: Widget {
 
 private struct StatsView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.colorScheme) private var scheme
     var entry: PassportEntry
     var page: StatsPage
 
@@ -82,8 +83,8 @@ private struct StatsView: View {
     private func content(_ stats: WidgetSnapshot.StatsBits) -> some View {
         let rows = Array(page.rows(stats).prefix(family == .systemLarge ? 8 : 3))
         let top = max(1, rows.map(\.count).max() ?? 1)
-        return VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 6) {
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
                 Text(l10n.t(page.titleKey)).clack(.sectionHeader).foregroundStyle(Ink.text)
                 Spacer()
                 UpdatedLine(updatedAt: entry.snapshot.passportUpdatedAt, now: entry.date, l10n: l10n, clock: entry.snapshot.clock)
@@ -104,8 +105,8 @@ private struct StatsView: View {
                 HStack(spacing: 8) {
                     Text(row.name).clack(.chip).foregroundStyle(Ink.text).lineLimit(1).frame(width: 104, alignment: .leading)
                     GeometryReader { p in
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color(hex: row.color) ?? Ink.accent)
+                        RoundedRectangle(cornerRadius: Radius.bar)
+                            .fill(operatorColor(row.color, scheme: scheme))
                             .frame(width: max(3, p.size.width * Double(row.count) / Double(top)))
                     }
                     .frame(height: 10)

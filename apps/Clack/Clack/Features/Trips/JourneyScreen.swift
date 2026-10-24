@@ -31,10 +31,10 @@ struct JourneyScreen: View {
                     .fixedSize(horizontal: false, vertical: true)
                 Text(Format.longDate(dep, tz: first.origin?.tz ?? "Europe/Stockholm", language: app.settings.language))
                     .clack(.body).foregroundStyle(Ink.text2)
-                HStack(spacing: 10) {
-                    Tile(title: l10n.t("journey.doorToDoor"), value: Format.duration((arr - dep) / 60_000))
-                    Tile(title: l10n.t("passport.trains"), value: String(legs.count))
-                    Tile(title: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
+                HStack(spacing: 12) {
+                    Tile(label: l10n.t("journey.doorToDoor"), value: Format.duration((arr - dep) / 60_000))
+                    Tile(label: l10n.t("passport.trains"), value: String(legs.count))
+                    Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
                 }
                 MultiRouteMapView(
                     routes: (journey?.legs ?? []).map {
@@ -79,22 +79,5 @@ struct JourneyScreen: View {
                 if let fresh = try? await app.client.journey(id) { journey = fresh }
             }
         }
-    }
-}
-
-/// `.tile`: a caption over a value, on a card-radius surface.
-struct Tile: View {
-    let title: String
-    let value: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(title).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(2)
-            Text(value).font(ClackFont.inter(18, .bold)).monospacedDigit().foregroundStyle(Ink.text).lineLimit(1).minimumScaleFactor(0.7)
-        }
-        .padding(12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
     }
 }

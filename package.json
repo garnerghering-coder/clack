@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "npm run dev -w @clack/server",
     "start": "npm run start -w @clack/server",
-    "test": "vitest run",
+    "test": "python3 scripts/ios/lint_design.py && vitest run",
+    "lint:design": "python3 scripts/ios/lint_design.py",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "db:generate": "npm run db:generate -w @clack/server",
     "import": "npm run import -w @clack/server --",

@@ -34,7 +34,8 @@ private struct Card {
     var fromTz: String { state.fromTz ?? attributes.fromTz }
     var toTz: String { state.toTz ?? attributes.toTz }
     var phase: String { state.moment }
-    var line: Color { Color(hex: attributes.color) ?? Ink.accent }
+    /// The operator's colour; the signal yellow when it isn't known (the cards are always dark).
+    var line: Color { operatorColor(attributes.color, scheme: .dark) }
     var url: URL? { URL(string: "clack://trip/\(legId)") }
 
     /// A platform change in the last ten minutes, before the train leaves.
@@ -128,21 +129,12 @@ private struct RouteLine: View {
                 bar(card.state.progress ?? (card.phase == "arrived" ? 1 : 0))
             }
         }
-        .frame(height: 12)
+        .frame(height: ProgressBar.markerSize)
         .accessibilityHidden(true)
     }
 
     private func bar(_ progress: Double) -> some View {
-        GeometryReader { g in
-            let p = min(max(progress, 0), 1)
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 2, style: .continuous).fill(Ink.fillSoft).frame(height: 4)
-                RoundedRectangle(cornerRadius: 2, style: .continuous).fill(card.line).frame(width: max(4, g.size.width * p), height: 4)
-                Circle().fill(Ink.text).frame(width: 10, height: 10)
-                    .offset(x: min(max(g.size.width * p - 5, 0), g.size.width - 10))
-            }
-            .frame(maxHeight: .infinity)
-        }
+        ProgressBar(value: progress, color: card.line, marker: .solid)
     }
 }
 
@@ -223,13 +215,13 @@ private struct LockScreen: View {
     let stale: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text(card.route).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1).minimumScaleFactor(0.7)
                 Spacer(minLength: 8)
                 if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text2) }
             }
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1) }
                 Delay(card: card)
                 Detail(card: card)
@@ -347,7 +339,7 @@ private struct CompactLeading: View {
             case "boarding": Text(card.l10n.t("tripCard.board")).clack(.captionUpper).fontWeight(.heavy).foregroundStyle(Ink.accentInk)
             case "enRoute": ProgressRing(progress: card.state.progress ?? 0, colour: card.line)
             case "getOffSoon": Glyph(name: "map-pin")
-            case "changing": Text(verbatim: "→ \(card.state.changePlatform ?? "–")").clack(.islandValue).foregroundStyle(Ink.accentInk)
+            case "changing": Text(verbatim: "→ \(card.state.changePlatform ?? Format.unknown)").clack(.islandValue).foregroundStyle(Ink.accentInk)
             case "arrived": Glyph(name: "check", colour: Ink.onTimeInk)
             case "cancelled": Glyph(name: "x", colour: Ink.veryLateInk)
             default: Glyph(name: "train-front", colour: card.line)
@@ -365,7 +357,7 @@ private struct CompactTrailing: View {
         } else {
             switch card.phase {
             case "leaveSoon", "boarding":
-                Text(card.state.platform.map { card.phase == "boarding" ? $0 : card.platformShort($0) } ?? "–")
+                Text(card.state.platform.map { card.phase == "boarding" ? $0 : card.platformShort($0) } ?? Format.unknown)
                     .clack(.islandValue).foregroundStyle(Ink.accentInk)
             case "approaching": TimeText(text: card.time(card.state.nextStopAt ?? card.state.departAt, tz: card.fromTz), card: card)
             case "enRoute": TimeText(text: card.arrives, card: card)
@@ -390,7 +382,7 @@ private struct MinimalGlyph: View {
         case "getOffSoon":
             Text(verbatim: "\(minutesLeft(card.state.nextStopAt ?? card.state.arriveAt) ?? 0)").clack(.islandValue).foregroundStyle(Ink.accentInk)
         case "changing", "leaveSoon", "boarding":
-            Text((card.phase == "changing" ? card.state.changePlatform : card.state.platform) ?? "–")
+            Text((card.phase == "changing" ? card.state.changePlatform : card.state.platform) ?? Format.unknown)
                 .clack(.islandValue).foregroundStyle(Ink.accentInk)
         default:
             Glyph(name: card.platformChanged ? "triangle-alert" : "train-front", colour: card.platformChanged ? Ink.accentInk : card.line)
@@ -405,7 +397,7 @@ private struct KeyValue: View {
         switch card.phase {
         case "changing":
             VStack(alignment: .trailing, spacing: 0) {
-                Text(card.platform(card.state.changePlatform ?? "–")).clack(.delay).foregroundStyle(Ink.accentInk)
+                Text(card.platform(card.state.changePlatform ?? Format.unknown)).clack(.delay).foregroundStyle(Ink.accentInk)
                 if let at = card.state.changeAt { Countdown(to: at, colour: Ink.text2) }
             }
         case "getOffSoon":
@@ -425,7 +417,7 @@ private struct KeyValue: View {
 private struct ExpandedLeading: View {
     let card: Card
     var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 4) {
             LucideIcon(name: "train-front", size: 14).foregroundStyle(card.line)
             if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text) }
         }
@@ -437,7 +429,7 @@ private struct ExpandedBottom: View {
     let stale: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1) }
                 Delay(card: card)
                 Spacer(minLength: 4)

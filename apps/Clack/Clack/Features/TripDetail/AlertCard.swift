@@ -69,24 +69,20 @@ struct AlertCard<Content: View>: View {
             let tint = tone.color
             let watch = tone == .watch
             VStack(spacing: 0) {
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     LucideIcon(name: icon, size: 16)
-                        .foregroundStyle(tone == .severe ? Color.white : Color(hex: "#0b0e13")!)
+                        .foregroundStyle(tone == .severe ? Ink.onTint : Ink.onAccent)
                         .frame(width: 30, height: 30)
                         .background(tint, in: Circle())
                     Text(title).clack(.alertTitle).foregroundStyle(Ink.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .accessibilityAddTraits(.isHeader)
-                    Button {
+                    IconButton(icon: "x", label: l10n.t("common.close")) {
                         DismissedAlerts.dismiss(dismissKey)
                         hidden = true
-                    } label: {
-                        LucideIcon(name: "x", size: 16).foregroundStyle(Ink.text).frame(width: 34, height: 34)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(l10n.t("common.close"))
                 }
-                .padding(.vertical, 10).padding(.leading, 14).padding(.trailing, 10)
+                .padding(.vertical, 12).padding(.leading, 16).padding(.trailing, 12)
                 .background(
                     LinearGradient(
                         colors: [tint.opacity(watch ? 0.18 : 0.34), tint.opacity(watch ? 0.04 : 0.08)],
@@ -94,7 +90,7 @@ struct AlertCard<Content: View>: View {
                     )
                 )
                 VStack(alignment: .leading, spacing: 12) { content }
-                    .padding(.top, 14).padding(.bottom, 16).padding(.horizontal, 16)
+                    .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .background {

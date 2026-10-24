@@ -88,7 +88,7 @@ public nonisolated enum Format {
 
     /// `455 km` or `283 mi`; `—` when unknown.
     public static func distance(_ meters: Double?, unit: DistanceUnit, language: Language = .en) -> String {
-        guard let meters else { return "—" }
+        guard let meters else { return unknown }
         let value = unit == .mi ? meters / 1609.344 : meters / 1000
         let formatter = NumberFormatter()
         formatter.locale = locale(language)
@@ -97,9 +97,26 @@ public nonisolated enum Format {
         return "\(formatter.string(from: NSNumber(value: value.rounded())) ?? "") \(unit.rawValue)"
     }
 
+    /// What an unknown value shows, everywhere: an em dash.
+    public static let unknown = "—"
+
+    /// The separator between facts on one line.
+    public static let separator = " · "
+
+    /// Facts on one line, "SJ 529 · Platform 4 · 2h 48m": the empty and missing ones left out.
+    public static func join(_ parts: [String?], separator: String = Format.separator) -> String {
+        parts.compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: separator)
+    }
+
+    /// A train as people say it: the operator's name and the train number, "SJ 529"; either alone when the other is
+    /// unknown, and "" when both are.
+    public static func service(_ operatorName: String?, _ number: String?) -> String {
+        join([operatorName, number], separator: " ")
+    }
+
     /// `+8`, `−2` (a real minus sign), `0`, `—` when unknown.
     public static func delay(_ min: Int?) -> String {
-        guard let min else { return "—" }
+        guard let min else { return unknown }
         if min == 0 { return "0" }
         return min > 0 ? "+\(min)" : "−\(abs(min))"
     }

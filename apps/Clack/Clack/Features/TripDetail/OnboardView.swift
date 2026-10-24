@@ -54,7 +54,7 @@ struct OnboardView: View {
                         ForEach(typicalList, id: \.key) { entry in
                             HStack(alignment: .top, spacing: 8) {
                                 LucideIcon(name: Self.icons[entry.key] ?? "info", size: 16).foregroundStyle(Ink.text2).padding(.top, 1)
-                                (Text(label(entry.key, entry.claim)) + Text(entry.claim.note.map { !compact ? " · \($0)" : "" } ?? "").font(ClackFont.inter(13)).foregroundColor(Ink.text2))
+                                (Text(label(entry.key, entry.claim)) + Text(entry.claim.note.map { !compact ? " · \($0)" : "" } ?? "").font(TextRole.caption.font).foregroundStyle(Ink.text2))
                                     .clack(.stopName).foregroundStyle(Ink.text)
                                 Spacer(minLength: 0)
                             }
@@ -76,7 +76,7 @@ struct OnboardView: View {
     }
 
     private func factChips(_ facts: OnboardFacts) -> some View {
-        FlowLayout(spacing: 6, lineSpacing: 6) {
+        FlowLayout(spacing: 8, lineSpacing: 8) {
             if let catering = facts.catering {
                 let what = l10n.t("onboard.catering.\(catering)")
                 factChip("coffee", facts.cateringCar.map { l10n.t("onboard.cateringInCar", ["what": what, "car": $0]) } ?? what, tint: Ink.text)
@@ -87,7 +87,7 @@ struct OnboardView: View {
     }
 
     private func factChip(_ icon: String, _ text: String, tint: Color, iconTint: Color = Ink.text2) -> some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 4) {
             LucideIcon(name: icon, size: 14).foregroundStyle(iconTint)
             Text(text)
         }
@@ -104,51 +104,12 @@ struct OnboardView: View {
             var link = AttributedString(host(claim.source))
             link.link = URL(string: claim.source)
             link.foregroundColor = Ink.accentInk
-            link.font = ClackFont.inter(13, .semibold)
+            link.font = TextRole.chip.font
             text += link
         }
         if let checked {
             text += AttributedString(" · " + l10n.t("onboard.checked", ["date": Format.day(checked, tz: "Europe/Stockholm", language: app.settings.language)]))
         }
         return Text(text).clack(.caption).foregroundStyle(Ink.text2)
-    }
-}
-
-/// Lays its children out in rows, wrapping to the next row when one doesn't fit (flex-wrap).
-struct FlowLayout: Layout {
-    var spacing: CGFloat = 8
-    var lineSpacing: CGFloat = 8
-
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        arrange(proposal: proposal, subviews: subviews).size
-    }
-
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        let result = arrange(proposal: proposal, subviews: subviews)
-        for (index, frame) in result.frames.enumerated() {
-            subviews[index].place(at: CGPoint(x: bounds.minX + frame.minX, y: bounds.minY + frame.minY), proposal: ProposedViewSize(frame.size))
-        }
-    }
-
-    private func arrange(proposal: ProposedViewSize, subviews: Subviews) -> (size: CGSize, frames: [CGRect]) {
-        let maxWidth = proposal.width ?? .infinity
-        var frames: [CGRect] = []
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var rowHeight: CGFloat = 0
-        var width: CGFloat = 0
-        for subview in subviews {
-            let size = subview.sizeThatFits(.unspecified)
-            if x > 0 && x + size.width > maxWidth {
-                x = 0
-                y += rowHeight + lineSpacing
-                rowHeight = 0
-            }
-            frames.append(CGRect(x: x, y: y, width: size.width, height: size.height))
-            x += size.width + spacing
-            rowHeight = max(rowHeight, size.height)
-            width = max(width, x - spacing)
-        }
-        return (CGSize(width: width, height: y + rowHeight), frames)
     }
 }

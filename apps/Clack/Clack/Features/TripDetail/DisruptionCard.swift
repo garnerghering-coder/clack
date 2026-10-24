@@ -110,11 +110,8 @@ private struct DisruptionBody: View {
             ) {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(kinds, id: \.self) { kind in
-                        HStack(alignment: .firstTextBaseline, spacing: 8) {
-                            Text("•")
-                            Text(line(kind, train: train, board: board, alight: alight, next: next, arrived: arrived, tz: tz))
-                        }
-                        .clack(.body).foregroundStyle(Ink.text)
+                        Text(line(kind, train: train, board: board, alight: alight, next: next, arrived: arrived, tz: tz))
+                            .clack(.body).foregroundStyle(Ink.text)
                     }
                 }
                 if !reasons.isEmpty {
@@ -189,7 +186,7 @@ private struct DisruptionBody: View {
 
     @ViewBuilder
     private func alternatives(search: Search?, altCount: Int?, final: Leg, now: Double, schedDep: Double, tz: String, op: Operator?, tone: AlertTone) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             Button {
                 showAlts.toggle()
             } label: {
@@ -201,7 +198,7 @@ private struct DisruptionBody: View {
                     Spacer(minLength: 0)
                     if let altCount, altCount > 0 { LucideIcon(name: showAlts ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text) }
                 }
-                .padding(.horizontal, 14)
+                .padding(.horizontal, 16)
                 .frame(minHeight: 44)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                 .hairlineBorder(radius: Radius.input, color: tone.color.opacity(0.4))
@@ -218,7 +215,7 @@ private struct DisruptionBody: View {
                     ForEach(alts.direct) { r in directRow(r, now: now, schedDep: schedDep, tz: tz) }
                     ForEach(alts.connections) { c in connectionRow(c, now: now, schedDep: schedDep, tz: tz) }
                 }
-                Text(l10n.t("disruption.altsNote", ["operator": op?.name ?? l10n.t("disruption.theOperator")])).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("disruption.altsNote"), more: l10n.t("disruption.altsNoteMore", ["operator": op?.name ?? l10n.t("disruption.theOperator")]))
             }
         }
     }
@@ -233,11 +230,11 @@ private struct DisruptionBody: View {
             [op?.name ?? r.routeName, r.trainNumber].compactMap { $0 }.joined(separator: " "),
             otherDay(r.from.time, zone: r.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
-        return HStack(alignment: .top, spacing: 10) {
-            OperatorBadge(op: op, size: 24)
+        return HStack(alignment: .top, spacing: 12) {
+            OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(Format.time(r.from.time, tz: r.from.tz, clock: app.settings.clock)) → \(Format.time(r.to.time, tz: r.to.tz, clock: app.settings.clock))")
-                    .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+                TimePair(dep: .init(time: r.from.time, tz: r.from.tz), arr: .init(time: r.to.time, tz: r.to.tz), clock: app.settings.clock)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 HStack(spacing: 8) {
                     Button(l10n.t("disruption.live")) { router.openTrain(number: r.trainNumber ?? "", date: r.serviceDate, key: r.key) }
@@ -251,7 +248,7 @@ private struct DisruptionBody: View {
             }
             Spacer(minLength: 0)
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, 12)
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
     }
 
@@ -261,11 +258,11 @@ private struct DisruptionBody: View {
             l10n.t("add.changeAt", ["station": c.changeAt.name, "min": String(c.changeMin)]),
             otherDay(c.first.from.time, zone: c.first.from.tz, now: now, schedDep: schedDep, tz: tz),
         ].compactMap { $0 }.joined(separator: " · ")
-        return HStack(alignment: .top, spacing: 10) {
-            OperatorBadge(op: op, size: 24)
+        return HStack(alignment: .top, spacing: 12) {
+            OperatorBadge(op: op, size: .small)
             VStack(alignment: .leading, spacing: 2) {
-                Text("\(Format.time(c.first.from.time, tz: c.first.from.tz, clock: app.settings.clock)) → \(Format.time(c.second.to.time, tz: c.second.to.tz, clock: app.settings.clock))")
-                    .clack(.rowTitle).monospacedDigit().foregroundStyle(Ink.text)
+                TimePair(dep: .init(time: c.first.from.time, tz: c.first.from.tz), arr: .init(time: c.second.to.time, tz: c.second.to.tz), clock: app.settings.clock)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("disruption.live")) { router.openTrain(number: c.first.trainNumber ?? "", date: c.first.serviceDate, key: c.first.key) }
                     .buttonStyle(.clack(small: true)).padding(.top, 4)
@@ -285,7 +282,7 @@ private struct DisruptionBody: View {
             countries: countries, journeyKm: km, arrDelayMin: kinds.contains(.connectionMissed) ? nil : finalDelay, canceled: leg.leg.canceled
         )
         let operatorName = op?.name ?? l10n.t("disruption.theOperator")
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(l10n.t("disruption.rightsTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             Text(rightsText(rights, operatorName: operatorName)).clack(.caption).foregroundStyle(Ink.text2)
             HStack(spacing: 12) {

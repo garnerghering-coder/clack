@@ -58,19 +58,7 @@ struct StationsScreen: View {
     }
 
     private var field: some View {
-        TextField("", text: $query, prompt: Text(l10n.t("stations.placeholder")).foregroundStyle(Ink.text3).fontWeight(.medium))
-            .focused($focused)
-            .clack(.searchField)
-            .foregroundStyle(Ink.text)
-            .tint(Ink.accentLine)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .submitLabel(.search)
-            .padding(.horizontal, 14)
-            .frame(height: 52)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
-            .accessibilityLabel(l10n.t("stations.placeholder"))
+        SearchField(text: $query, prompt: l10n.t("stations.placeholder"), focus: $focused)
     }
 
     @ViewBuilder
@@ -88,7 +76,8 @@ struct StationsScreen: View {
             ForEach(stations) { station in
                 StationRow(
                     station: station,
-                    trailing: star ? AnyView(LucideIcon(name: "star", size: 16).foregroundStyle(Ink.accentInk).accessibilityLabel(l10n.t("stations.favorite"))) : nil
+                    // The same filled star as the board's favourite button.
+                    trailing: star ? AnyView(LucideIcon(name: "star", size: 16, filled: true, label: l10n.t("stations.favorite")).foregroundStyle(Ink.accentInk)) : nil
                 ) {
                     router.push(.board(stationId: station.id, arrivals: false))
                 }

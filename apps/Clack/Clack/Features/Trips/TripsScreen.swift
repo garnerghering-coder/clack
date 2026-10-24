@@ -70,45 +70,6 @@ enum TripsTab: String, Hashable {
     case upcoming, past
 }
 
-/// A header button that opens a screen (the web's `icon-button` links).
-struct IconLink: View {
-    let icon: String
-    let label: String
-    let route: AppRoute
-    var size: CGFloat = 20
-
-    var body: some View {
-        NavigationLink(value: route) {
-            LucideIcon(name: icon, size: size)
-                .foregroundStyle(Ink.text)
-                .frame(width: 44, height: 44)
-                .background(Ink.surfaceRaised, in: Circle())
-                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
-    }
-}
-
-/// A header button that does something (the web's `icon-button` buttons).
-struct IconActionButton: View {
-    let icon: String
-    let label: String
-    var size: CGFloat = 20
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            LucideIcon(name: icon, size: size)
-                .foregroundStyle(Ink.text)
-                .frame(width: 44, height: 44)
-                .background(Ink.surfaceRaised, in: Circle())
-                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
-    }
-}
 
 /// Trips home (DESIGN §4, product brief §5): Upcoming | Past. Upcoming leads with one featured card (route map on
 /// top, the journey under it) for the train you're on, else the next one; the rest are compact rows. Past is grouped
@@ -140,8 +101,8 @@ struct TripsScreen: View {
         Page {
             PageHeader(title: l10n.t("trips.title")) {
                 HStack(spacing: 8) {
-                    IconLink(icon: "search", label: l10n.t("nav.stations"), route: .stations)
-                    IconActionButton(icon: "plus", label: l10n.t("nav.addTrain"), size: 22) { router.openAdd() }
+                    IconLink(icon: "search", label: l10n.t("nav.stations"), value: AppRoute.stations)
+                    IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
                     SettingsLink()
                 }
             }
@@ -151,14 +112,14 @@ struct TripsScreen: View {
             )
             if model.failed {
                 Banner(kind: .error) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         Text(l10n.t("trips.loadError"))
                         Button(l10n.t("trips.retry")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
                     }
                 }
             }
             if model.legs == nil && !model.failed {
-                VStack(spacing: 10) {
+                VStack(spacing: 12) {
                     Skeleton()
                     Skeleton()
                     Skeleton()
@@ -182,7 +143,7 @@ struct TripsScreen: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             DottedLine()
             Text(l10n.t("trips.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("trips.emptyBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
@@ -230,9 +191,9 @@ struct TripsScreen: View {
                 }
             } header: {
                 Text(month.label)
-                    .clack(.monthHeader).foregroundStyle(Ink.text2)
+                    .clack(.sectionHeader).foregroundStyle(Ink.text2)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 12).padding(.bottom, 6)
+                    .padding(.top, 12).padding(.bottom, 8)
                     .background(Ink.bg)
             }
         }

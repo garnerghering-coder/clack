@@ -1,28 +1,35 @@
 //
 //  SplitFlap.swift
-//  Clack
+//  ClackDesign
 //
 
 import ClackCore
-import ClackDesign
 import SwiftUI
 
-/// The size of a split-flap display (styles.css `.flap-*`, `.time-flap`, `.board-flap`).
-struct FlapSize {
-    var font: CGFloat
-    var lineHeight: CGFloat
-    var gap: CGFloat
+/// The size of a split-flap display (styles.css `.flap-*`, `.time-flap`, `.board-flap`), at the default text size. The
+/// tiles grow with Dynamic Type (`@ScaledMetric`), as the digits on them do.
+public struct FlapSize: Sendable {
+    public var font: CGFloat
+    public var lineHeight: CGFloat
+    public var gap: CGFloat
     /// Minimum tile width, in em.
-    var minWidthEm: CGFloat
-    var padX: CGFloat
-    var radius: CGFloat
+    public var minWidthEm: CGFloat
+    public var padX: CGFloat
+    public var radius: CGFloat
 
-    static let board = FlapSize(font: 18, lineHeight: 24, gap: 1, minWidthEm: 0.62, padX: 1, radius: 4)
-    static let sm = FlapSize(font: 14, lineHeight: 20, gap: 1, minWidthEm: 0.64, padX: 1, radius: 3)
-    static let md = FlapSize(font: 22, lineHeight: 30, gap: 2, minWidthEm: 0.64, padX: 2, radius: 5)
-    static let lg = FlapSize(font: 30, lineHeight: 40, gap: 3, minWidthEm: 0.66, padX: 2, radius: 6)
+    public static let sm = FlapSize(font: 14, lineHeight: 20, gap: 1, minWidthEm: 0.64, padX: 1, radius: 3)
+    public static let md = FlapSize(font: 22, lineHeight: 30, gap: 2, minWidthEm: 0.64, padX: 2, radius: 5)
+    public static let lg = FlapSize(font: 30, lineHeight: 40, gap: 3, minWidthEm: 0.66, padX: 2, radius: 6)
     /// The departure and arrival times on a trip.
-    static let time = FlapSize(font: 34, lineHeight: 44, gap: 3, minWidthEm: 0.66, padX: 2, radius: 7)
+    public static let time = FlapSize(font: 34, lineHeight: 44, gap: 3, minWidthEm: 0.66, padX: 2, radius: 7)
+
+    /// The same size multiplied by a Dynamic Type factor (1 at the default size).
+    func scaled(_ factor: CGFloat) -> FlapSize {
+        FlapSize(
+            font: font * factor, lineHeight: lineHeight * factor, gap: gap * factor, minWidthEm: minWidthEm,
+            padX: padX * factor, radius: radius * factor
+        )
+    }
 }
 
 /// One tile's top and bottom halves on the board (`--tflap-*`): dark in dark mode, pale in light mode.
@@ -34,10 +41,7 @@ private struct FlapFace: View {
 
     enum Half { case whole, top, bottom }
 
-    @Environment(\.colorScheme) private var scheme
-
     var body: some View {
-        let tile = tileWidth
         ZStack {
             LinearGradient(stops: [
                 .init(color: Ink.tflapTop, location: 0),
@@ -46,15 +50,14 @@ private struct FlapFace: View {
                 .init(color: Ink.tflapBottom, location: 1),
             ], startPoint: .top, endPoint: .bottom)
             Text(char)
-                .font(ClackFont.grotesk(size.font, relativeTo: .title))
+                // The tile is already sized for Dynamic Type; the digit follows the tile, not the text style again.
+                .font(ClackFont.groteskFixed(size.font))
                 .monospacedDigit()
                 .foregroundStyle(colour ?? Ink.tflapText)
         }
-        .frame(width: tile, height: size.lineHeight)
+        .frame(width: FlapFace.width(size), height: size.lineHeight)
         .clipShape(HalfShape(half: half))
     }
-
-    private var tileWidth: CGFloat { FlapFace.width(size) }
 
     static func width(_ size: FlapSize) -> CGFloat {
         // A digit in Space Grotesk is a little wider than 0.6 em; the minimum keeps narrow ones (1) as wide as the rest.
@@ -92,6 +95,7 @@ private struct FlapTile: View {
 
     var body: some View {
         let width = FlapFace.width(size)
+        let shape = RoundedRectangle(cornerRadius: size.radius, style: .continuous)
         ZStack {
             if flipping, let from {
                 // Underneath: the new top half and the old bottom half.
@@ -113,20 +117,17 @@ private struct FlapTile: View {
             Rectangle().fill(Ink.tflapHinge).frame(height: 1).zIndex(3)
         }
         .frame(width: width, height: size.lineHeight)
-        .clipShape(RoundedRectangle(cornerRadius: size.radius, style: .continuous))
+        .clipShape(shape)
         .overlay(alignment: .bottom) {
             // The tile's edge: a dark line along the bottom in dark mode, a soft outline in light mode.
             if scheme == .dark {
-                Rectangle().fill(.black.opacity(0.4)).frame(height: 1)
-                    .clipShape(RoundedRectangle(cornerRadius: size.radius, style: .continuous))
+                Rectangle().fill(Color.black.opacity(0.4)).frame(height: 1).clipShape(shape)
             }
         }
         .overlay {
-            if scheme == .light {
-                RoundedRectangle(cornerRadius: size.radius, style: .continuous).strokeBorder(.black.opacity(0.1), lineWidth: 1)
-            }
+            if scheme == .light { shape.strokeBorder(Color.black.opacity(0.1), lineWidth: 1) }
         }
-        .shadow(color: scheme == .light ? .black.opacity(0.08) : .clear, radius: 1, y: 1)
+        .shadow(color: scheme == .light ? Color.black.opacity(0.08) : .clear, radius: 1, y: 1)
         .onAppear {
             if flipping { started = true }
         }
@@ -135,18 +136,20 @@ private struct FlapTile: View {
 
 /// Split-flap characters (DESIGN §10): each character sits on its own tile. When one changes, it flips (360 ms, 50 ms
 /// stagger left to right), as on a departure board. Only changed characters flip; `intro` flips every tile in once
-/// on first show. Reduced motion: no flip.
-struct SplitFlap: View {
-    let value: String
-    var size: FlapSize = .time
-    var intro = false
-    var colour: Color?
+/// on first show. Reduced motion: no flip. The tiles scale with Dynamic Type.
+public struct SplitFlap: View {
+    public let value: String
+    public var size: FlapSize = .time
+    public var intro = false
+    public var colour: Color?
 
+    /// 100 at the default text size; the tiles are multiplied by this / 100.
+    @ScaledMetric(relativeTo: .title) private var scale: CGFloat = 100
     @State private var previous: String
     @State private var from: String
     @State private var sequence = 0
 
-    init(value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil) {
+    public init(value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil) {
         self.value = value
         self.size = size
         self.intro = intro
@@ -162,7 +165,7 @@ struct SplitFlap: View {
         let old = Array(from)
         var count = 0
         return chars.enumerated().map { index, char in
-            guard char != ":", char != " ", char != ".", sequence > 0 else { return nil }
+            guard !Self.isSeparator(char), sequence > 0 else { return nil }
             let before = index < old.count ? old[index] : " "
             guard before != char else { return nil }
             defer { count += 1 }
@@ -170,20 +173,23 @@ struct SplitFlap: View {
         }
     }
 
-    var body: some View {
+    private static func isSeparator(_ char: Character) -> Bool { char == ":" || char == " " || char == "." }
+
+    public var body: some View {
         let chars = Array(value)
         let flips = plan(chars)
-        HStack(spacing: size.gap) {
+        let shown = size.scaled(scale / 100)
+        HStack(spacing: shown.gap) {
             ForEach(Array(chars.enumerated()), id: \.offset) { index, char in
-                if char == ":" || char == " " || char == "." {
+                if Self.isSeparator(char) {
                     Text(String(char))
-                        .font(ClackFont.grotesk(size.font, relativeTo: .title))
+                        .font(ClackFont.groteskFixed(shown.font))
                         .foregroundStyle(Ink.text2)
                         .padding(.horizontal, 1)
                 } else {
                     FlapTile(
                         char: String(char), from: flips[index].map { String($0.before) }, delay: flips[index]?.delay ?? 0,
-                        size: size, colour: colour
+                        size: shown, colour: colour
                     )
                     // A new id per change restarts the animation.
                     .id("\(index)-\(sequence)")
@@ -206,29 +212,50 @@ struct SplitFlap: View {
 
 /// A time on flip cards for the main time on a screen, and plain text elsewhere (owner feedback 2026-10-21). When the
 /// expected time differs from the timetable by a minute or more, the timetabled one is struck through beside it and
-/// the new one is drawn in the accent colour.
-struct FlapTime: View {
-    enum Style { case text, sm, md, lg, time }
+/// the new one is drawn in the accent colour (or `colour`, the delay band's ink, where a stop list asks for it).
+public struct FlapTime: View {
+    public enum Style: Sendable { case text, sm, md, lg, time }
 
-    let time: Double?
-    var sched: Double?
-    let tz: String
-    let clock: ClockFormat
-    var style: Style = .text
-    var intro = false
+    public let time: Double?
+    public var sched: Double?
+    public let tz: String
+    public let clock: ClockFormat
+    public var style: Style = .text
+    public var intro = false
     /// Show the timetabled time struck through beside a changed one (inside a trip), or only the new one (the Trips tab).
-    var strikeOld = true
+    public var strikeOld = true
+    /// The colour of a changed time; the accent ink when not given.
+    public var colour: Color?
 
-    var body: some View {
+    public init(
+        time: Double?, sched: Double? = nil, tz: String, clock: ClockFormat, style: Style = .text, intro: Bool = false,
+        strikeOld: Bool = true, colour: Color? = nil
+    ) {
+        self.time = time
+        self.sched = sched
+        self.tz = tz
+        self.clock = clock
+        self.style = style
+        self.intro = intro
+        self.strikeOld = strikeOld
+        self.colour = colour
+    }
+
+    /// Whether `time` is in a different minute from `sched`.
+    public static func changed(_ time: Double?, from sched: Double?) -> Bool {
+        guard let time, let sched else { return false }
+        return floor(sched / 60_000) != floor(time / 60_000)
+    }
+
+    public var body: some View {
         if let time {
-            let changed = sched.map { floor($0 / 60_000) != floor(time / 60_000) } ?? false
+            let changed = Self.changed(time, from: sched)
             let text = Format.time(time, tz: tz, clock: clock)
             let schedText = sched.map { Format.time($0, tz: tz, clock: clock) }
-            HStack(spacing: 6) {
+            HStack(spacing: 4) {
                 if changed, strikeOld, let schedText {
                     Text(schedText)
-                        .strikethrough()
-                        .font(ClackFont.inter(style == .sm ? 12 : fontSize * 0.8, .medium))
+                        .clack(.struck).strikethrough().monospacedDigit()
                         .foregroundStyle(Ink.text3)
                         .lineLimit(1)
                         .fixedSize()
@@ -236,19 +263,17 @@ struct FlapTime: View {
                 if style == .text {
                     Text(text)
                         .monospacedDigit()
-                        .fontWeight(changed ? .bold : .regular)
-                        .foregroundStyle(changed ? Ink.accentInk : Ink.text)
+                        .fontWeight(changed ? .bold : nil)
+                        .foregroundStyle(changed ? (colour ?? Ink.accentInk) : Ink.text)
                 } else {
-                    SplitFlap(value: text, size: flapSize, intro: intro, colour: changed ? Ink.accentInk : nil)
+                    SplitFlap(value: text, size: flapSize, intro: intro, colour: changed ? (colour ?? Ink.accentInk) : nil)
                         .accessibilityLabel(changed ? "\(text) (\(schedText ?? ""))" : text)
                 }
             }
         } else {
-            Text("—").foregroundStyle(Ink.text2)
+            Text(Format.unknown).foregroundStyle(Ink.text2)
         }
     }
-
-    private var fontSize: CGFloat { flapSize.font }
 
     private var flapSize: FlapSize {
         switch style {

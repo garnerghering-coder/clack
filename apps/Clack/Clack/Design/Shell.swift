@@ -158,7 +158,7 @@ struct SheetFrame<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 8)
             ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: 12) {
                     content
                 }
                 .padding(.top, 8)

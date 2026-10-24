@@ -12,15 +12,7 @@ struct SettingsLink: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        NavigationLink(value: AppRoute.settings) {
-            LucideIcon(name: "settings", size: 20)
-                .foregroundStyle(Ink.text)
-                .frame(width: 44, height: 44)
-                .background(Ink.surfaceRaised, in: Circle())
-                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(l10n.t("nav.settings"))
+        IconLink(icon: "settings", label: l10n.t("nav.settings"), value: AppRoute.settings)
     }
 }
 
@@ -54,12 +46,12 @@ private struct ChoiceMenu<Value: Hashable>: View {
                 ForEach(Array(options.enumerated()), id: \.offset) { _, option in Text(option.title).tag(option.value) }
             }
         } label: {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Text(options.first { $0.value == selection }?.title ?? "").lineLimit(1)
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
-            .font(ClackFont.inter(15)).foregroundStyle(Ink.text)
-            .padding(.vertical, 7).padding(.horizontal, 10)
+            .clack(.body).foregroundStyle(Ink.text)
+            .padding(.vertical, 8).padding(.horizontal, 12)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
         }
@@ -132,7 +124,7 @@ struct SettingsScreen: View {
                 }
                 SettingsToggle(label: l10n.t("settings.stepFree"), isOn: s.stepFree) { value in change(SettingsPatch(stepFree: value)) }
                 SettingsToggle(label: l10n.t("settings.heavyLuggage"), isOn: s.heavyLuggage, last: true) { value in change(SettingsPatch(heavyLuggage: value)) }
-                Text(l10n.t("settings.changingNote")).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("settings.changingNote"), more: l10n.t("settings.changingNoteMore"))
             }
             AlertsCard(change: change)
             OfflineMapsCard()
@@ -164,7 +156,7 @@ private struct OfflineMapsCard: View {
         Card {
             Text(l10n.t("settings.offlineMaps")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             Text(l10n.t("settings.offlineMapsCount", count: count, ["count": String(count)])).clack(.body).foregroundStyle(Ink.text)
-            Text(l10n.t("settings.offlineMapsNote")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("settings.offlineMapsNote"), more: l10n.t("settings.offlineMapsNoteMore"))
             if count > 0 {
                 Button(l10n.t("settings.offlineMapsClear")) {
                     Task {
@@ -215,7 +207,7 @@ private struct AlertsCard: View {
                 SettingsToggle(label: l10n.t("settings.alerts.getOff"), isOn: s.notifyGetOff) { change(SettingsPatch(notifyGetOff: $0)) }
                 SettingsToggle(label: l10n.t("settings.alerts.arrival"), isOn: s.notifyArrival, last: true) { change(SettingsPatch(notifyArrival: $0)) }
             }
-            Text(l10n.t("settings.alerts.note")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("settings.alerts.note"), more: l10n.t("settings.alerts.noteMore"))
             if manager.denied {
                 Text(l10n.t("settings.alerts.denied")).clack(.caption).foregroundStyle(Ink.text2)
                 Button(l10n.t("settings.alerts.openSettings")) {
@@ -294,8 +286,8 @@ private struct NameRow: View {
             TextField("", text: $value, prompt: Text(l10n.t("settings.displayNamePlaceholder")).foregroundStyle(Ink.text3))
                 .focused($focused)
                 .multilineTextAlignment(.trailing)
-                .font(ClackFont.inter(15)).foregroundStyle(Ink.text)
-                .padding(.vertical, 7).padding(.horizontal, 10)
+                .clack(.body).foregroundStyle(Ink.text)
+                .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(maxWidth: 200)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                 .hairlineBorder(radius: Radius.controlSm)
@@ -354,13 +346,9 @@ struct AboutScreen: View {
             Card(spacing: 12) {
                 Text(l10n.t("about.intro")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.sourcesTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     ForEach(Self.sources, id: \.self) { source in
-                        HStack(alignment: .firstTextBaseline, spacing: 8) {
-                            Text("•")
-                            Text(l10n.t("about.sources.\(source)"))
-                        }
-                        .clack(.body).foregroundStyle(Ink.text2)
+                        Text(l10n.t("about.sources.\(source)")).clack(.body).foregroundStyle(Ink.text2)
                     }
                 }
                 Text(l10n.t("about.delaysTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)

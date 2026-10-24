@@ -60,19 +60,7 @@ private struct SearchStep: View {
     var body: some View {
         @Bindable var model = model
         DateRow(date: $model.date)
-        TextField("", text: $model.query, prompt: Text(l10n.t("add.placeholder")).foregroundStyle(Ink.text3).fontWeight(.medium))
-            .focused($focused)
-            .clack(.searchField)
-            .foregroundStyle(Ink.text)
-            .tint(Ink.accentLine)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .submitLabel(.search)
-            .padding(.horizontal, 14)
-            .frame(height: 52)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
-            .accessibilityLabel(l10n.t("add.placeholder"))
+        SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
             .onAppear { focused = true }
 
         if model.query.isEmpty {
@@ -93,7 +81,7 @@ private struct SearchStep: View {
         } else if let response = model.response {
             results(response)
         } else if model.loading {
-            VStack(spacing: 10) {
+            VStack(spacing: 12) {
                 Skeleton(height: 120)
                 Skeleton(height: 120)
             }
@@ -148,7 +136,7 @@ private struct SearchStep: View {
                     ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
                 }
             }
-            VStack(spacing: 14) {
+            VStack(spacing: 16) {
                 ForEach(model.results ?? []) { result in
                     ResultCard(result: result) { model.picked = result }
                 }
@@ -161,7 +149,7 @@ private struct SearchStep: View {
         }
         if let list = response.results, list.isEmpty, let connections = response.connections, !connections.isEmpty {
             Text(l10n.t("add.withChange")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            VStack(spacing: 14) {
+            VStack(spacing: 16) {
                 ForEach(connections) { connection in ConnectionResultCard(connection: connection) { model.pickedConnection = connection } }
             }
         }
@@ -192,7 +180,7 @@ private struct DateRow: View {
                 Text(Format.day(Format.isoToNoonMs(date) ?? 0, tz: "UTC", language: app.settings.language))
                     .fontWeight(.semibold).foregroundStyle(Ink.text)
                 if date < today {
-                    Text(" · \(l10n.t("add.pastTrip"))").foregroundStyle(Ink.slight).fontWeight(.medium)
+                    Text(" · \(l10n.t("add.pastTrip"))").foregroundStyle(Ink.slightInk).fontWeight(.medium)
                 }
             }
             .clack(.body).padding(.leading, 4)
@@ -231,43 +219,38 @@ private struct ResultCard: View {
         let plus = Format.dayOffset(from: result.from.time, fromTz: result.from.tz, to: result.to.time, toTz: result.to.tz)
         Button(action: onPick) {
             VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
                     Text(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                     Text(Format.duration(Double(result.durationMin)))
                         .clack(.caption).foregroundStyle(Ink.text2)
                         .frame(maxWidth: .infinity)
                         .background { DashedHorizontalLine() }
-                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                        if plus > 0 { Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+                        if plus > 0 { TimePair.plusText(plus) }
                     }
                 }
                 .monospacedDigit()
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     Text(result.from.name)
                     Spacer(minLength: 0)
                     Text(result.to.name).multilineTextAlignment(.trailing)
                 }
-                .font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text2)
+                .clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text2)
                 if let type {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 12) {
                         TrainPicture(type: type, operatorId: result.operatorId, height: 28).frame(width: 120, alignment: .leading).clipped()
                         Text(type.name).clack(.caption).foregroundStyle(Ink.text2)
                     }
                 }
-                FlowLayout(spacing: 8, lineSpacing: 6) {
-                    OperatorBadge(op: op, size: 26)
-                    Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
-                    Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
-                    Chip(text: l10n.t("products.\(result.product)"))
-                    Text(result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"))
-                        .clack(.caption).foregroundStyle(Ink.text2)
-                    if !result.alsoKnownAs.isEmpty {
-                        Text(l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")])).clack(.caption).foregroundStyle(Ink.text2)
-                    }
-                }
+                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
+                Text(Format.join([
+                    result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
+                    result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
+                ]))
+                .clack(.caption).foregroundStyle(Ink.text2)
             }
-            .padding(14)
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
@@ -302,28 +285,27 @@ private struct ConnectionResultCard: View {
         let total = Double(Int(((second.to.time - first.from.time) / 60_000).rounded()))
         let plus = Format.dayOffset(from: first.from.time, fromTz: first.from.tz, to: second.to.time, toTz: second.to.tz)
         let card = VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 10) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(Format.time(first.from.time, tz: first.from.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
                 Text(Format.duration(total)).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity).background { DashedHorizontalLine() }
-                HStack(alignment: .firstTextBaseline, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Text(Format.time(second.to.time, tz: second.to.tz, clock: app.settings.clock)).clack(.bigTime).foregroundStyle(Ink.text)
-                    if plus > 0 { Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2) }
+                    if plus > 0 { TimePair.plusText(plus) }
                 }
             }
             .monospacedDigit()
             ForEach([first, second], id: \.id) { result in
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
-                HStack(spacing: 8) {
-                    OperatorBadge(op: op, size: 22)
-                    Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
-                    Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
-                    Text("\(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)) \(result.from.name) → \(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)) \(result.to.name)")
+                VStack(alignment: .leading, spacing: 2) {
+                    ServiceHeader(op: op, number: result.trainNumber, size: .small, name: op == nil ? result.routeName : nil)
+                    (TimePair.text(.init(time: result.from.time, tz: result.from.tz), .init(time: result.to.time, tz: result.to.tz), clock: app.settings.clock)
+                        + Text(Format.separator + "\(result.from.name) → \(result.to.name)"))
                         .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
                 }
             }
             Text(l10n.t("add.changeAt", ["station": connection.changeAt.name, "min": String(connection.changeMin)])).clack(.caption).foregroundStyle(Ink.text2)
         }
-        .padding(14)
+        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -364,13 +346,13 @@ private struct ConfirmStep: View {
     var body: some View {
         let op = result.operatorId.flatMap { app.operatorsById[$0] }
         let hex = MapStyle.opColor(op?.brandColor, dark: scheme == .dark)
-        let color = Color(hex: hex) ?? Ink.accent
+        let color = operatorColor(op?.brandColor, scheme: scheme)
         let from = trip?.stops.first { $0.seq == picked.fromSeq }
         let to = trip?.stops.first { $0.seq == picked.toSeq }
         let dep = (from?.dep ?? from?.arr)?.ms
         let arr = (to?.arr ?? to?.dep)?.ms
         Button(action: onBack) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(backLabel ?? l10n.t("add.back"))
             }
@@ -390,11 +372,7 @@ private struct ConfirmStep: View {
             .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
         }
-        HStack(spacing: 10) {
-            OperatorBadge(op: op, size: 30)
-            Text([op?.name, result.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
-            Chip(text: l10n.t("products.\(result.product)"))
-        }
+        ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
         if let from, let to, let dep, let arr, let trip {
             let d = AddTrainLogic.distance(stops: trip.stops, geometry: geometry, fromSeq: picked.fromSeq, toSeq: picked.toSeq)
             (Text("\(from.name) → \(to.name)").fontWeight(.semibold).foregroundStyle(Ink.text)
@@ -431,7 +409,7 @@ private struct ConfirmStep: View {
     }
 
     private func endPicker(from: TripStop?, to: TripStop?) -> some View {
-        HStack(spacing: 3) {
+        HStack(spacing: 4) {
             ForEach([AddTrainLogic.End.from, .to], id: \.self) { end in
                 let active = picked.picking == end
                 Button {
@@ -439,17 +417,17 @@ private struct ConfirmStep: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(l10n.t(end == .from ? "add.from" : "add.to")).clack(.captionUpper).foregroundStyle(active ? Ink.onAccent : Ink.text2)
-                        Text((end == .from ? from : to)?.name ?? "—").font(ClackFont.inter(16, .bold)).foregroundStyle(active ? Ink.onAccent : Ink.text).lineLimit(1)
+                        Text((end == .from ? from : to)?.name ?? "—").clack(.rowTitle).foregroundStyle(active ? Ink.onAccent : Ink.text).lineLimit(1)
                     }
                     .padding(.horizontal, 12).padding(.vertical, 8)
                     .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
-                    .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                    .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: Radius.input - 3, style: .continuous))
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(active ? .isSelected : [])
             }
         }
-        .padding(3)
+        .padding(4)
         .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
         .hairlineBorder(radius: Radius.input)
         .accessibilityLabel(l10n.t("add.tapToChoose"))
@@ -462,32 +440,28 @@ private struct ConfirmStep: View {
         let restriction: String? = picked.picking == .from && stop.noPickup && stop.seq < picked.toSeq ? l10n.t("add.noBoarding")
             : picked.picking == .to && stop.noDropoff && stop.seq > picked.fromSeq ? l10n.t("add.noAlighting") : nil
         let selectable = AddTrainLogic.isSelectable(stop, in: picked)
-        let railColor = (role == .between || end) ? color : Ink.hairline
+        // The ride between the two ends is drawn as travelled (the operator's colour); the rest is a hairline.
+        let inRide = role == .between || end
+        let above = TripDetailLogic.RailHalf(ridden: inRide && role != .from, fill: inRide && role != .from ? 1 : 0)
+        let below = TripDetailLogic.RailHalf(ridden: inRide && role != .to, fill: inRide && role != .to ? 1 : 0)
+        let stops = trip?.stops ?? []
+        var notes: [StopRow.Note] = []
+        if end { notes.append(.init(l10n.t(role == .from ? "add.from" : "add.to"), .accent)) }
+        if let restriction { notes.append(.init(restriction)) }
         return Button {
             if let next = AddTrainLogic.tap(stop, in: picked) {
                 picked = next
                 duplicate = false
             }
         } label: {
-            HStack(spacing: 12) {
-                ZStack {
-                    VStack(spacing: 0) {
-                        (role == .from ? Color.clear : railColor).frame(maxHeight: .infinity)
-                        (role == .to ? Color.clear : railColor).frame(maxHeight: .infinity)
-                    }
-                    .frame(width: 2)
-                    Circle()
-                        .fill(end ? color : Ink.surface)
-                        .frame(width: end ? 16 : 12, height: end ? 16 : 12)
-                        .overlay(Circle().strokeBorder(end ? Ink.markerRing : (role == .between ? color : Ink.text3), lineWidth: 2))
-                }
-                .frame(width: 20)
-                Text(stop.name).clack(.body).foregroundStyle(role == .outside ? Ink.text3 : Ink.text).frame(maxWidth: .infinity, alignment: .leading)
-                if end { Chip(text: l10n.t(role == .from ? "add.from" : "add.to"), accent: true) }
-                if let restriction { Text(restriction).clack(.caption).foregroundStyle(Ink.text2) }
-                Text(Format.time(time?.ms, tz: stop.tz, clock: app.settings.clock)).monospacedDigit().foregroundStyle(Ink.text2)
-            }
-            .frame(minHeight: 46)
+            StopRow(
+                name: stop.name, emphasis: role == .outside ? .dim : end ? .ridden : .plain, notes: notes,
+                rail: StopRail(
+                    color: color, big: end, ridden: inRide, startsHere: stop.seq == stops.first?.seq, endsHere: stop.seq == stops.last?.seq,
+                    above: above, below: below
+                ),
+                time: time?.ms, tz: stop.tz, clock: app.settings.clock, compact: true
+            )
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -536,7 +510,7 @@ private struct ConfirmConnectionStep: View {
     var body: some View {
         let legs = [connection.first, connection.second]
         Button(action: onBack) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 LucideIcon(name: "arrow-left", size: 18)
                 Text(l10n.t("add.back"))
             }
@@ -544,7 +518,7 @@ private struct ConfirmConnectionStep: View {
         .buttonStyle(LinkButtonStyle())
         Text(l10n.t("add.connectionTitle")).clack(.headline).foregroundStyle(Ink.text)
         ConnectionResultCard(connection: connection)
-        Text(l10n.t("add.connectionNote")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("add.connectionNote"), more: l10n.t("add.connectionNoteMore"))
         ForEach(legs, id: \.id) { r in
             BuyTicket(trip: TicketTrip(operatorId: r.operatorId, trainNumber: r.trainNumber, from: .init(name: r.from.name, time: r.from.time, tz: r.from.tz, seq: r.from.seq), to: .init(name: r.to.name, time: r.to.time, tz: r.to.tz, seq: r.to.seq), tripKey: r.key, serviceDate: r.serviceDate))
         }
@@ -607,7 +581,7 @@ private struct DoneStep: View {
 
     var body: some View {
         let l = leg.leg
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             ZStack {
                 Circle().stroke(Ink.onTime.opacity(0.35), lineWidth: 3)
                 CheckShape().trim(from: 0, to: drawn || reduceMotion ? 1 : 0)
@@ -623,7 +597,7 @@ private struct DoneStep: View {
             if (l.actualArr?.ms ?? l.schedArr?.ms ?? .infinity) <= Date.now.timeIntervalSince1970 * 1000 {
                 TripProgressView(legId: l.id)
             }
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 Button(l10n.t("add.viewTrip")) {
                     router.closeAdd()
                     router.tab = .trips
@@ -632,7 +606,7 @@ private struct DoneStep: View {
                 .buttonStyle(.clack(.primary))
                 Button(l10n.t("add.addAnother"), action: onAnother).buttonStyle(.clack())
             }
-            .padding(.top, 10)
+            .padding(.top, 12)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 40)
@@ -684,7 +658,7 @@ private struct ManualTripStep: View {
     var body: some View {
         Button(l10n.t("common.back"), action: onBack).buttonStyle(LinkButtonStyle())
         Text(l10n.t("manual.title")).clack(.headline).foregroundStyle(Ink.text)
-        Text(l10n.t("manual.intro")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("manual.intro"), more: l10n.t("manual.introMore"))
         Card(spacing: 0) {
             ManualStationField(label: l10n.t("manual.from"), value: $fromStation)
             ManualStationField(label: l10n.t("manual.to"), value: $toStation)
@@ -709,7 +683,7 @@ private struct ManualTripStep: View {
                 ChipButton(text: l10n.t("manual.kinds.\(c)"), active: category == c) { category = c }
             }
         }
-        Text(l10n.t("manual.timesNote")).clack(.caption).foregroundStyle(Ink.text2)
+        InfoNote(l10n.t("manual.timesNote"), more: l10n.t("manual.timesNoteMore"))
         if let error { Banner(kind: .error) { Text(error) } }
         Button(l10n.t("manual.save")) { Task { await save() } }.buttonStyle(.clack(.primary)).disabled(!ready || saving)
             .onAppear {
@@ -778,13 +752,8 @@ private struct ManualStationField: View {
                 }
                 .frame(minHeight: 52)
             } else {
-                VStack(alignment: .leading, spacing: 6) {
-                    TextField("", text: $query, prompt: Text(label).foregroundStyle(Ink.text3))
-                        .clack(.searchField).foregroundStyle(Ink.text).tint(Ink.accentLine)
-                        .textInputAutocapitalization(.never).autocorrectionDisabled()
-                        .padding(.horizontal, 14).frame(height: 52)
-                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-                        .hairlineBorder(radius: Radius.input)
+                VStack(alignment: .leading, spacing: 8) {
+                    SearchField(text: $query, prompt: label)
                     ForEach(hits) { hit in
                         StationRow(station: hit) {
                             value = hit

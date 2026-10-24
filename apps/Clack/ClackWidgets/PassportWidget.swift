@@ -62,7 +62,7 @@ struct FoilBackground: View {
             LinearGradient(colors: [Color.pink, Color.orange, Color.yellow, Color.green, Color.cyan, Color.purple, Color.pink].map { $0.opacity(0.35) },
                            startPoint: .topLeading, endPoint: .bottomTrailing)
                 .blendMode(.overlay)
-            LinearGradient(colors: [.white.opacity(0), .white.opacity(0.55), .white.opacity(0)], startPoint: UnitPoint(x: 0.1, y: 0), endPoint: UnitPoint(x: 0.7, y: 1))
+            LinearGradient(colors: [Ink.onTint.opacity(0), Ink.onTint.opacity(0.55), Ink.onTint.opacity(0)], startPoint: UnitPoint(x: 0.1, y: 0), endPoint: UnitPoint(x: 0.7, y: 1))
         }
     }
 }
@@ -115,7 +115,7 @@ private struct PassportWidgetView: View {
     }
 
     private func card(_ b: WidgetSnapshot.PassportBits) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(l10n.t("passport.title")).clack(.captionUpper).foregroundStyle(ink.opacity(0.7))
                 Spacer()
@@ -127,7 +127,7 @@ private struct PassportWidgetView: View {
                 big(number(distance(b.km)), unit, role: .passportBig)
                 big(String(b.trains), l10n.t("passport.trains"), role: .bigTime)
             case .systemMedium:
-                HStack(alignment: .center, spacing: 14) {
+                HStack(alignment: .center, spacing: 16) {
                     VStack(alignment: .leading, spacing: 8) {
                         big(number(distance(b.km)), unit, role: .passportBig)
                         HStack(spacing: 16) {
@@ -141,13 +141,13 @@ private struct PassportWidgetView: View {
                 }
             default:
                 HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 12) {
                         big(number(distance(b.km)), unit, role: .passportDistance)
-                        HStack(spacing: 18) {
+                        HStack(spacing: 16) {
                             big(String(b.trains), l10n.t("passport.trains"), role: .walkBig)
                             big(String(b.journeys), l10n.t("passport.journeys"), role: .walkBig)
                         }
-                        HStack(spacing: 18) {
+                        HStack(spacing: 16) {
                             big(String(b.stations), l10n.t("passport.stations"), role: .walkBig)
                             big(String(b.countries), l10n.t("passport.countries"), role: .walkBig)
                         }

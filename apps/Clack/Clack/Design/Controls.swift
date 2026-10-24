@@ -31,6 +31,9 @@ struct ClackButtonStyle: ButtonStyle {
             .hairlineBorder(radius: radius, color: border)
             .opacity(isEnabled ? (configuration.isPressed ? 0.85 : 1) : 0.45)
             .textSelection(.disabled)
+            // A small button stays 34 pt to look at (DESIGN §2.3) but is 44 pt to hit (DESIGN §16).
+            .padding(.vertical, small ? 5 : 0)
+            .contentShape(Rectangle())
     }
 }
 
@@ -40,38 +43,20 @@ extension ButtonStyle where Self == ClackButtonStyle {
     }
 }
 
-/// `.icon-button`: a 44 pt (34 small) circle with an icon. It needs an accessibility label from the strings.
-struct IconButton: View {
-    let icon: String
-    let label: String
-    var small = false
-    var tint: Color = Ink.text
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            LucideIcon(name: icon, size: small ? 16 : 20)
-                .foregroundStyle(tint)
-                .frame(width: small ? 34 : 44, height: small ? 34 : 44)
-                .background(Ink.surfaceRaised, in: Circle())
-                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
-    }
-}
-
-/// `.link-button`: accent-ink text; in the light theme it is underlined in yellow so it still reads as a link.
+/// `.link-button`: accent-ink text; in the light theme it is underlined in yellow so it still reads as a link. At
+/// least 44 pt high, so it is as easy to hit as any button (DESIGN §16).
 struct LinkButtonStyle: ButtonStyle {
     @Environment(\.colorScheme) private var scheme
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(ClackFont.inter(16, .semibold))
+            .clack(.button)
             .foregroundStyle(Ink.accentInk)
             .underline(scheme == .light, color: Ink.accent)
             .opacity(configuration.isPressed ? 0.7 : 1)
             .textSelection(.disabled)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
     }
 }
 
@@ -96,7 +81,7 @@ struct SegmentedControl<Value: Hashable>: View {
                         .textSelection(.disabled)
                         .padding(.horizontal, small ? 6 : 0)
                         .frame(maxWidth: .infinity, minHeight: small ? 32 : 36)
-                        .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                        .background(active ? Ink.accent : .clear, in: RoundedRectangle(cornerRadius: Radius.input - 3, style: .continuous))
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(active ? .isSelected : [])
@@ -150,46 +135,12 @@ struct ChipButton: View {
             .frame(minHeight: 34)
             .background(active ? Ink.accent : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm, color: active ? Ink.accent : Ink.hairline)
+            // 34 pt to look at, 44 pt to hit.
+            .padding(.vertical, 5)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(active ? .isSelected : [])
-    }
-}
-
-/// `.pill`: a quiet label on a soft fill (radius 10, not a capsule).
-struct Pill: View {
-    let text: String
-
-    var body: some View {
-        Text(text)
-            .clack(.chipButton)
-            .padding(.vertical, 4)
-            .padding(.horizontal, 12)
-            .background(Ink.fillSoft, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-    }
-}
-
-/// `.platform-chip`: a track number in a small box (radius 6); `changed` is orange with the old track struck.
-struct PlatformChip: View {
-    let platform: String
-    var changedFrom: String?
-
-    var body: some View {
-        let changed = changedFrom != nil
-        HStack(spacing: 4) {
-            if let changedFrom {
-                Text(changedFrom).strikethrough().foregroundStyle(Ink.text3).fontWeight(.medium)
-            }
-            Text(platform)
-        }
-        .clack(.chip)
-        .fontWeight(.bold)
-        .monospacedDigit()
-        .foregroundStyle(changed ? Ink.late : Ink.text)
-        .padding(.vertical, 2)
-        .padding(.horizontal, 8)
-        .frame(minWidth: 34)
-        .background(changed ? Color(hex: "#ff9500")!.opacity(0.18) : Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
     }
 }
 

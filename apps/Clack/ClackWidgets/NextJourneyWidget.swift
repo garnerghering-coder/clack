@@ -161,30 +161,20 @@ private struct NextJourneyView: View {
     private func route(_ l: WidgetSnapshot.Leg, role: TextRole = .rowTitle) -> some View {
         HStack(spacing: 4) {
             Text(l.from).lineLimit(1)
-            LucideIcon(name: "arrow-left", size: 12).rotationEffect(.degrees(180)).foregroundStyle(Ink.text2)
+            Text("→").foregroundStyle(Ink.text2)
             Text(l.to).lineLimit(1)
         }
         .clack(role)
         .foregroundStyle(Ink.text)
     }
 
-    private func progressBar(_ fraction: Double) -> some View {
-        GeometryReader { p in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 2).fill(Ink.fillSoft)
-                RoundedRectangle(cornerRadius: 2).fill(Ink.accent).frame(width: max(4, p.size.width * fraction))
-            }
-        }
-        .frame(height: 4)
-    }
-
     @ViewBuilder
     private func progress(_ s: WidgetTimeline.Shown) -> some View {
-        if case .onTrain(_, let p) = s.moment { progressBar(p) }
+        if case .onTrain(_, let p) = s.moment { ProgressBar(value: p, color: Ink.accent) }
     }
 
     private func topLine(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             LucideIcon(name: "train-front", size: 14).foregroundStyle(Ink.accentInk)
             Text(service(l)).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
             Spacer(minLength: 4)
@@ -204,7 +194,7 @@ private struct NextJourneyView: View {
             Text(l.from).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
             Text(l.to).clack(.rowTitle).foregroundStyle(Ink.text2).lineLimit(1)
             Spacer(minLength: 0)
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(bigTime(s, l)).clack(.bigTime).monospacedDigit().foregroundStyle(Ink.text).strikethrough(l.canceled)
                 if let p = platform(s, l) { Text(p).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
             }
@@ -217,9 +207,9 @@ private struct NextJourneyView: View {
 
     private func legRow(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, index: Int) -> some View {
         let active = s.moment.legIndex == index
-        return HStack(alignment: .center, spacing: 10) {
+        return HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Text(service(l)).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
                     DelayText(delay: l.depDelayMin, canceled: l.canceled)
                 }
@@ -242,7 +232,7 @@ private struct NextJourneyView: View {
     }
 
     private func medium(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     topLine(s, l)
@@ -259,12 +249,12 @@ private struct NextJourneyView: View {
     }
 
     private func large(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             medium(s, l)
             if !l.stops.isEmpty {
                 Rectangle().fill(Ink.hairline).frame(height: 1)
                 Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(alignment: .leading, spacing: 3) {
+                VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(l.stops.prefix(7).enumerated()), id: \.offset) { _, name in
                         let next = name == l.nextStop
                         HStack(spacing: 8) {
@@ -299,7 +289,7 @@ private struct NextJourneyView: View {
 
     private func rectangular(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text("\(l.from) – \(l.to)").clack(.chip).lineLimit(1)
+            Text("\(l.from) → \(l.to)").clack(.chip).lineLimit(1)
             Text(bigTime(s, l)).clack(.boardDestination).monospacedDigit()
             headline(s, l).clack(.caption).lineLimit(1)
         }

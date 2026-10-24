@@ -21,6 +21,11 @@ public enum ClackFont {
     public static func grotesk(_ size: CGFloat, relativeTo style: Font.TextStyle = .body) -> Font {
         .custom(grotesk, size: size, relativeTo: style)
     }
+
+    /// Space Grotesk at a size that is already scaled (a split-flap tile sized with `@ScaledMetric`).
+    public static func groteskFixed(_ size: CGFloat) -> Font {
+        .custom(grotesk, fixedSize: size)
+    }
 }
 
 /// A text role from the design scale: size, line height, weight, tracking (in em) and case (DESIGN_SYSTEM.md §2.3).
@@ -53,13 +58,19 @@ public struct TextRole {
     public static let banner = TextRole(size: 14, lineHeight: 20, weight: .medium, style: .subheadline)
     public static let delay = TextRole(size: 14, lineHeight: 18, weight: .bold, style: .subheadline)
     public static let stopName = TextRole(size: 14, lineHeight: 18, style: .subheadline)
-    public static let searchField = TextRole(size: 18, lineHeight: 22, weight: .semibold, style: .body)
+    public static let searchField = TextRole(size: 16, lineHeight: 22, weight: .medium, style: .body)
     // Small
     public static let caption = TextRole(size: 13, lineHeight: 18, style: .footnote)
     public static let chip = TextRole(size: 13, lineHeight: 18, weight: .semibold, style: .footnote)
+    /// Section and month headers (one style for both).
     public static let sectionHeader = TextRole(size: 13, lineHeight: 18, weight: .bold, tracking: 0.06, uppercase: true, style: .footnote)
-    public static let monthHeader = TextRole(size: 13, lineHeight: 18, weight: .bold, tracking: 0.05, uppercase: true, style: .footnote)
+    /// Train numbers and codes (DESIGN §2.2: caption weight 600, letter-spacing +0.02 em).
+    public static let trainNumber = TextRole(size: 13, lineHeight: 18, weight: .semibold, tracking: 0.02, style: .footnote)
+    /// A timetabled time struck through beside the new one.
+    public static let struck = TextRole(size: 12, lineHeight: 16, weight: .medium, style: .caption)
     public static let captionUpper = TextRole(size: 11, lineHeight: 14, weight: .semibold, tracking: 0.06, uppercase: true, style: .caption2)
+    /// Micro (DESIGN §2.2: 11/14): tags over maps, small counts.
+    public static let micro = TextRole(size: 11, lineHeight: 14, style: .caption2)
     public static let tab = TextRole(size: 11, lineHeight: 14, weight: .semibold, style: .caption2)
     public static let mapAttribution = TextRole(size: 10, lineHeight: 12, style: .caption2)
     public static let splashTagline = TextRole(size: 13, lineHeight: 18, weight: .semibold, tracking: 0.22, style: .footnote)
@@ -70,6 +81,8 @@ public struct TextRole {
     public static let timeBig = TextRole(size: 36, lineHeight: 40, display: true, style: .largeTitle)
     public static let heroTimes = TextRole(size: 34, lineHeight: 40, tracking: -0.01, display: true, style: .largeTitle)
     public static let bigTime = TextRole(size: 26, lineHeight: 30, display: true, style: .title)
+    /// The unit after a big number ("km", "kg"), in the display face.
+    public static let bigUnit = TextRole(size: 22, lineHeight: 26, display: true, style: .title2)
 
     public var font: Font {
         display ? ClackFont.grotesk(size, relativeTo: style) : ClackFont.inter(size, weight, relativeTo: style)

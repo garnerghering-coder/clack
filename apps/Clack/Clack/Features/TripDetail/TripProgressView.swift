@@ -19,7 +19,6 @@ struct TripProgressView: View {
     /// Progress already worked out (a whole journey's), instead of the trip's own.
     var given: TripProgress?
     @State private var progress: TripProgress?
-    @State private var filled = false
     @State private var shown = false
 
     private static let countryNames = ["SE": "Sweden", "NO": "Norway", "DK": "Denmark", "DE": "Germany", "FI": "Finland"]
@@ -36,7 +35,6 @@ struct TripProgressView: View {
             }
             try? await Task.sleep(for: .milliseconds(120))
             shown = true
-            filled = true
         }
     }
 
@@ -52,7 +50,7 @@ struct TripProgressView: View {
                         VStack(spacing: 8) {
                             Text(p.unlocked.count == 1 ? l10n.t("progress.unlockedOne") : l10n.t("progress.unlocked", count: p.unlocked.count))
                                 .clack(.captionUpper).foregroundStyle(Ink.text2)
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8)], spacing: 14) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8)], spacing: 16) {
                                 ForEach(Array(p.unlocked.enumerated()), id: \.offset) { index, milestone in
                                     VStack(spacing: 2) {
                                         Medal(m: milestone, size: 84)
@@ -68,13 +66,13 @@ struct TripProgressView: View {
                         .frame(maxWidth: .infinity)
                     }
                     if !firsts.isEmpty {
-                        FlowLayout(spacing: 14, lineSpacing: 6) {
+                        FlowLayout(spacing: 16, lineSpacing: 8) {
                             ForEach(firsts, id: \.self) { Chip(text: $0, accent: true) }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     if !p.moved.isEmpty {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 12) {
                             ForEach(Array(p.moved.enumerated()), id: \.offset) { _, moved in movedRow(moved) }
                         }
                     }
@@ -111,17 +109,8 @@ struct TripProgressView: View {
                 Text(reached ? l10n.t("progress.reached") : l10n.t("passport.progressOf", ["value": String(Int(moved.after.rounded(.down))), "target": String(Int(moved.target))]))
                     .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
             }
-            GeometryReader { proxy in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.surfaceRaised)
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.accent.opacity(0.35)).frame(width: proxy.size.width * fraction(moved.before))
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.accent)
-                        .frame(width: proxy.size.width * fraction(filled || reduceMotion ? moved.after : moved.before))
-                        .animation(reduceMotion ? nil : .timingCurve(0.2, 0.8, 0.2, 1, duration: 1.1).delay(0.3), value: filled)
-                }
-            }
-            .frame(height: 8)
-            .accessibilityHidden(true)
+            ProgressBar(value: fraction(moved.after), color: Ink.accent, previous: fraction(moved.before), animateIn: true)
+                .accessibilityHidden(true)
         }
     }
 }

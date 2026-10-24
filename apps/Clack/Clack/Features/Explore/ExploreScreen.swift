@@ -74,23 +74,12 @@ struct ExploreScreen: View {
     private var top: some View {
         @Bindable var model = model
         return HStack(spacing: 8) {
-            HStack(spacing: 8) {
-                LucideIcon(name: "search", size: 16).foregroundStyle(Ink.text2)
-                TextField("", text: $model.query, prompt: Text(l10n.t("liveMap.searchPlaceholder")).foregroundStyle(Ink.text3))
-                    .focused($searchFocused)
-                    .font(ClackFont.inter(16)).foregroundStyle(Ink.text).tint(Ink.accentLine)
-                    .textInputAutocapitalization(.never).autocorrectionDisabled().submitLabel(.search)
-                    .accessibilityLabel(l10n.t("liveMap.search"))
-                    .onChange(of: model.query) {
-                        model.searching = true
-                        model.searchChanged()
-                    }
-                    .onChange(of: searchFocused) { if searchFocused { model.searching = true } }
-            }
-            .padding(.horizontal, 14).frame(height: 44)
-            .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input)
+            SearchField(text: $model.query, prompt: l10n.t("liveMap.searchPlaceholder"), overMap: true, focus: $searchFocused)
+                .onChange(of: model.query) {
+                    model.searching = true
+                    model.searchChanged()
+                }
+                .onChange(of: searchFocused) { if searchFocused { model.searching = true } }
             Button { model.showFilters.toggle() } label: {
                 LucideIcon(name: "sliders-horizontal", size: 18)
                     .foregroundStyle(model.filteredCount > 0 ? Ink.onAccent : Ink.text)
@@ -99,9 +88,9 @@ struct ExploreScreen: View {
                     .overlay(Circle().strokeBorder(model.filteredCount > 0 ? Ink.accent : Ink.hairline, lineWidth: 1))
                     .overlay(alignment: .topTrailing) {
                         if model.filteredCount > 0 {
-                            Text("\(model.filteredCount)").font(ClackFont.inter(11, .heavy)).foregroundStyle(Ink.bg)
+                            Text("\(model.filteredCount)").clack(.micro).fontWeight(.heavy).foregroundStyle(Ink.bg)
                                 .frame(minWidth: 18, minHeight: 18).padding(.horizontal, 2)
-                                .background(Ink.text, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                                .background(Ink.text, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                                 .offset(x: 4, y: -4)
                         }
                     }
@@ -123,7 +112,7 @@ struct ExploreScreen: View {
                 ForEach(trainHits) { train in
                     let op = train.operatorId.flatMap { app.operatorsById[$0] }
                     resultRow {
-                        OperatorBadge(op: op, size: 22)
+                        OperatorBadge(op: op, size: .small)
                     } title: {
                         [train.productName ?? op?.name, train.number].compactMap { $0 }.joined(separator: " ")
                     } caption: {
@@ -137,7 +126,7 @@ struct ExploreScreen: View {
                 }
                 ForEach(model.stationHits) { hit in
                     resultRow {
-                        RoundedRectangle(cornerRadius: 2).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
+                        RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: Radius.bar).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
                     } title: {
                         hit.name
                     } caption: {
@@ -151,14 +140,14 @@ struct ExploreScreen: View {
                     Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
                         .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
                 }
-                Button(l10n.t("common.close")) { model.searching = false; searchFocused = false }.buttonStyle(LinkButtonStyle()).padding(.top, 6)
+                Button(l10n.t("common.close")) { model.searching = false; searchFocused = false }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
             }
             .padding(.horizontal, 16).padding(.vertical, 12)
         }
         .scrollBounceBehavior(.basedOnSize)
         .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
         .frame(maxHeight: 420)
-        .background(Surface.Lit(op: Ink.accent))
+        .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()
@@ -167,7 +156,7 @@ struct ExploreScreen: View {
 
     private func resultRow<Lead: View>(@ViewBuilder lead: () -> Lead, title: () -> String, caption: () -> String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 lead().frame(width: 26)
                 VStack(alignment: .leading, spacing: 0) {
                     Text(title()).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
@@ -192,7 +181,7 @@ struct ExploreScreen: View {
         }
         .frame(maxWidth: 460)
         .frame(maxHeight: 440)
-        .background(Surface.Lit(op: Ink.accent))
+        .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()
@@ -216,13 +205,13 @@ struct ExploreScreen: View {
                 ForEach(model.operatorsShown, id: \.self) { id in
                     let on = model.filters.operators.contains(id)
                     Button { toggle(&model.filters.operators, id) } label: {
-                        HStack(spacing: 10) {
-                            RoundedRectangle(cornerRadius: 5, style: .continuous).fill(on ? Ink.accent : Ink.surfaceRaised)
-                                .overlay(RoundedRectangle(cornerRadius: 5, style: .continuous).strokeBorder(on ? Ink.accent : Ink.hairline, lineWidth: 1))
+                        HStack(spacing: 12) {
+                            RoundedRectangle(cornerRadius: Radius.tag, style: .continuous).fill(on ? Ink.accent : Ink.surfaceRaised)
+                                .overlay(RoundedRectangle(cornerRadius: Radius.tag, style: .continuous).strokeBorder(on ? Ink.accent : Ink.hairline, lineWidth: 1))
                                 .overlay { if on { LucideIcon(name: "check", size: 14).foregroundStyle(Ink.onAccent) } }
                                 .frame(width: 22, height: 22)
-                            OperatorBadge(op: app.operatorsById[id], size: 20)
-                            Text(app.operatorsById[id]?.name ?? id).font(ClackFont.inter(16)).foregroundStyle(Ink.text)
+                            OperatorBadge(op: app.operatorsById[id], size: .small)
+                            Text(app.operatorsById[id]?.name ?? id).clack(.body).foregroundStyle(Ink.text)
                             Spacer(minLength: 0)
                         }
                         .frame(minHeight: 40).contentShape(Rectangle())
@@ -234,7 +223,7 @@ struct ExploreScreen: View {
                     ChipButton(text: l10n.t("common.done")) { model.showFilters = false }
                 }
             }
-            .padding(.horizontal, 16).padding(.vertical, 14)
+            .padding(.horizontal, 16).padding(.vertical, 16)
     }
 
     private func toggle(_ set: inout Set<String>, _ value: String) {
@@ -254,7 +243,7 @@ struct ExploreScreen: View {
             Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD)")
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
         }
-        .padding(.leading, 12).padding(.bottom, 6)
+        .padding(.leading, 12).padding(.bottom, 8)
     }
 
     /// Map states (brief §6.3): loading, live data down, delayed data, nothing in view, or trains running.
@@ -265,36 +254,36 @@ struct ExploreScreen: View {
         )
         return Group {
             switch status {
-            case .loading: Chip(text: l10n.t("liveMap.loading"))
-            case .unavailable: Chip(text: l10n.t("liveMap.unavailable"), tint: Ink.text3)
-            case .delayed(let at): Chip(text: l10n.t("liveMap.delayedData", ["ago": LiveRules.ago(l10n, then: at, now: now)]), tint: Ink.text3)
-            case .none(let filtered): Chip(text: l10n.t(filtered ? "liveMap.noneMatch" : "liveMap.noneHere"))
+            case .loading: StatusLine(.arrived, l10n.t("liveMap.loading"))
+            case .unavailable: StatusLine(.stale, l10n.t("liveMap.unavailable"))
+            case .delayed(let at): StatusLine(.stale, l10n.t("liveMap.delayedData", ["ago": LiveRules.ago(l10n, then: at, now: now)]))
+            case .none(let filtered): StatusLine(.arrived, l10n.t(filtered ? "liveMap.noneMatch" : "liveMap.noneHere"))
             case .running(let total, let simulated):
-                Chip(text: l10n.t(simulated ? "liveMap.simulated" : "liveMap.trainsRunning", count: total, ["count": String(total)]), accent: true)
+                StatusLine(simulated ? .estimated : .live, l10n.t(simulated ? "liveMap.simulated" : "liveMap.trainsRunning", count: total, ["count": String(total)]))
             }
         }
-        .padding(.vertical, 6).padding(.horizontal, 10)
+        .padding(.vertical, 8).padding(.horizontal, 12)
         .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
         .hairlineBorder(radius: Radius.controlSm)
     }
 
     private var legendCard: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             legendRow(l10n.t("liveMap.legendTrain")) { Circle().fill(Ink.text2).overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 1)).frame(width: 10, height: 10) }
             legendRow(l10n.t("liveMap.legendStation")) {
-                RoundedRectangle(cornerRadius: 2).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
+                RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.bg).overlay(RoundedRectangle(cornerRadius: Radius.bar).strokeBorder(Ink.text, lineWidth: 1.6)).frame(width: 9, height: 9)
             }
-            legendRow(l10n.t("liveMap.legendDone")) { Capsule().fill(Ink.accent).frame(width: 22, height: 4) }
+            legendRow(l10n.t("liveMap.legendDone")) { RoundedRectangle(cornerRadius: Radius.bar).fill(Ink.accent).frame(width: 22, height: 4) }
             legendRow(l10n.t("liveMap.legendAhead")) {
                 Rectangle().stroke(Ink.accent, style: StrokeStyle(lineWidth: 4, dash: [4, 3])).frame(width: 22, height: 4)
             }
-            Text(l10n.t("liveMap.legendNote")).clack(.caption).foregroundStyle(Ink.text2)
+            InfoNote(l10n.t("liveMap.legendNote"), more: l10n.t("liveMap.legendNoteMore"))
         }
         .clack(.caption).foregroundStyle(Ink.text2)
-        .padding(.vertical, 14).padding(.horizontal, 16)
+        .padding(.vertical, 16).padding(.horizontal, 16)
         .frame(maxWidth: 280, alignment: .leading)
-        .background(Surface.Lit(op: Ink.accent))
+        .background(Ink.glass).background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
     }
@@ -365,12 +354,12 @@ struct ExploreScreen: View {
                     FlapTime(time: train.nextEta?.ms, tz: "Europe/Stockholm", clock: app.settings.clock, style: .text)
                 }
             }
-            FlowLayout(spacing: 10, lineSpacing: 6) {
+            FlowLayout(spacing: 12, lineSpacing: 8) {
                 if let delay = train.delayMin { DelayText(delay: delay) }
                 switch position {
-                case .estimated: Chip(text: l10n.t("liveMap.posEstimated"))
-                case .old(let minutes): Chip(text: l10n.t("liveMap.posOld", ["min": String(minutes)]))
-                case .gps: Chip(text: l10n.t("liveMap.posGps"), tint: Ink.onTimeInk)
+                case .estimated: StatusLine(.estimated, l10n.t("liveMap.posEstimated"))
+                case .old(let minutes): StatusLine(.stale, l10n.t("liveMap.posOld", ["min": String(minutes)]))
+                case .gps: StatusLine(.live, l10n.t("liveMap.posGps"))
                 }
                 if !collapsed.wrappedValue, !train.estimated { Speedometer(kmh: train.speedKmh, at: train.at.ms, now: now) }
             }
@@ -413,7 +402,7 @@ struct ExploreScreen: View {
         return TrainSheet(op: op, title: [view.productName ?? op?.name, view.number].compactMap { $0 }.joined(separator: " "), collapsed: collapsed, onClose: { model.closeScheduled() }) {
             if !collapsed.wrappedValue { art(type: type, operatorId: view.operatorId) }
             if let first, let last { Text("\(first.name) → \(last.name)").clack(.rowTitle).foregroundStyle(Ink.text) }
-            Chip(text: status, tint: allCanceled ? Ink.veryLateInk : nil)
+            StatusLine(allCanceled ? .cancelled : .arrived, status)
             Text(l10n.t(anyLive ? "train.liveTimes" : "train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2)
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
@@ -442,7 +431,7 @@ struct ExploreScreen: View {
     /// Two separate things (brief §6.2): watching a train, and planning to travel on it.
     private func followButton(following: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 LucideIcon(name: following ? "check" : "eye", size: 16)
                 Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
             }

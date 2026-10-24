@@ -7,75 +7,19 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The text of a trip's times, "07:14 – 10:30 +1", as one run so it wraps with the line around it. A time that
-/// differs from the timetable by a minute or more shows the timetabled one struck through, and the new one in the
-/// accent colour (SplitFlap.tsx `FlapTime`, text form).
-enum TimesText {
-    static func attributed(_ leg: Leg, clock: ClockFormat) -> AttributedString {
-        let x = TripsLogic.expected(leg)
-        let destTz = leg.destination?.tz ?? TripsLogic.tz(leg)
-        var out = part(x.dep, sched: leg.schedDep?.ms, tz: TripsLogic.tz(leg), clock: clock)
-        var dash = AttributedString(" – ")
-        dash.foregroundColor = Ink.text3
-        out += dash
-        out += part(x.arr, sched: leg.schedArr?.ms, tz: destTz, clock: clock)
-        if let dep = leg.schedDep?.ms, let arr = leg.schedArr?.ms {
-            let plus = Format.dayOffset(from: dep, fromTz: TripsLogic.tz(leg), to: arr, toTz: destTz)
-            if plus > 0 {
-                var sup = AttributedString("+\(plus)")
-                sup.baselineOffset = 5
-                sup.font = ClackFont.inter(9, .semibold)
-                sup.foregroundColor = Ink.text2
-                out += sup
-            }
-        }
-        return out
+extension TimePair {
+    /// A trip's departure and arrival as expected now, against the timetable, each in its station's time zone.
+    init(leg: Leg, clock: ClockFormat, flap: FlapTime.Style? = nil, intro: Bool = false) {
+        let ends = TimePair.ends(leg)
+        self.init(dep: ends.dep, arr: ends.arr, clock: clock, flap: flap, intro: intro)
     }
 
-    private static func part(_ time: Double?, sched: Double?, tz: String, clock: ClockFormat) -> AttributedString {
-        guard let time else {
-            var dash = AttributedString("—")
-            dash.foregroundColor = Ink.text2
-            return dash
-        }
-        let changed = sched.map { floor($0 / 60_000) != floor(time / 60_000) } ?? false
-        var out = AttributedString()
-        // One time, in yellow when it differs from the timetable; the old one is struck through only inside the trip.
-        var new = AttributedString(Format.time(time, tz: tz, clock: clock))
-        if changed {
-            new.foregroundColor = Ink.accentInk
-            new.font = ClackFont.inter(13, .bold)
-        }
-        out += new
-        return out
-    }
-}
-
-/// Departure and arrival on flip cards: the featured trip's times (`Times size="lg" intro`).
-struct FlapTimes: View {
-    @Environment(AppModel.self) private var app
-    let leg: Leg
-    var style: FlapTime.Style = .lg
-    var intro = false
-
-    var body: some View {
+    static func ends(_ leg: Leg) -> (dep: End, arr: End) {
         let x = TripsLogic.expected(leg)
-        let dep = leg.schedDep?.ms
-        let arr = leg.schedArr?.ms
-        let plus = (dep != nil && arr != nil && leg.destination != nil)
-            ? Format.dayOffset(from: dep!, fromTz: TripsLogic.tz(leg), to: arr!, toTz: leg.destination!.tz) : 0
-        // Wraps onto a second line when both struck and new times don't fit, as the web's inline times do.
-        FlowLayout(spacing: 6, lineSpacing: 2) {
-            FlapTime(time: x.dep, sched: dep, tz: TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false)
-            Text("–").foregroundStyle(Ink.text3)
-            FlapTime(
-                time: x.arr, sched: arr, tz: leg.destination?.tz ?? TripsLogic.tz(leg), clock: app.settings.clock, style: style, intro: intro, strikeOld: false
-            )
-            if plus > 0 {
-                Text("+\(plus)").clack(.captionUpper).foregroundStyle(Ink.text2).baselineOffset(10)
-            }
-        }
-        .clack(.heroTimes)
+        return (
+            End(time: x.dep, sched: leg.schedDep?.ms, tz: TripsLogic.tz(leg)),
+            End(time: x.arr, sched: leg.schedArr?.ms, tz: leg.destination?.tz ?? TripsLogic.tz(leg))
+        )
     }
 }
 
@@ -83,23 +27,41 @@ struct FlapTimes: View {
 extension TripsLogic {
     @MainActor
     static func countdown(_ l10n: L10n, _ leg: Leg, now: Double) -> String {
+        countdownStatus(l10n, leg, now: now).text
+    }
+
+    /// The countdown as a written status: its words and the kind of status they are (for the ink).
+    @MainActor
+    static func countdownStatus(_ l10n: L10n, _ leg: Leg, now: Double) -> (kind: StatusLine.Kind, text: String) {
         let dep = LiveRules.expectedDeparture(leg)
-        if leg.canceled || leg.live?.status == .cancelled { return l10n.t("status.cancelled") }
-        if now >= arrivalOf(leg) { return l10n.t("trips.arrived") }
+        if leg.canceled || leg.live?.status == .cancelled { return (.cancelled, l10n.t("status.cancelled")) }
+        if now >= arrivalOf(leg) { return (.arrived, l10n.t("trips.arrived")) }
         // The live state knows where the train is: on its way to your stop, at it, or yet to be 30 minutes from leaving.
         let fresh = leg.live.map { LiveRules.isFresh($0, now: now) } ?? false
         if fresh, let status = leg.live?.status {
-            if status == .approaching { return l10n.t("trips.approaching") }
-            if status == .boarding { return l10n.t("trips.boarding") }
+            if status == .approaching { return (.onItsWay, l10n.t("trips.approaching")) }
+            if status == .boarding { return (.boarding, l10n.t("trips.boarding")) }
         }
-        if now >= dep { return l10n.t("trips.liveNow") }
+        if now >= dep { return (.live, l10n.t("trips.liveNow")) }
         // With no live data (or none fresh) the timetable, moved by the delay known so far, decides.
-        if !fresh, dep - now <= 30 * 60_000 { return l10n.t("trips.boarding") }
+        if !fresh, dep - now <= 30 * 60_000 { return (.boarding, l10n.t("trips.boarding")) }
         let mins = Int(((dep - now) / 60_000).rounded())
         let d = mins / 1440
         let h = (mins % 1440) / 60
         let m = mins % 60
-        return l10n.t("trips.departsIn", ["time": d > 0 ? "\(d)d \(h)h" : h > 0 ? "\(h)h \(m)m" : "\(m) min"])
+        return (.upcoming, l10n.t("trips.departsIn", ["time": d > 0 ? "\(d)d \(h)h" : h > 0 ? "\(h)h \(m)m" : "\(m) min"]))
+    }
+}
+
+/// A trip's countdown as one written status line ("Departs in 2h 5m", "Boarding", "Live now").
+struct CountdownLine: View {
+    @Environment(L10n.self) private var l10n
+    let leg: Leg
+    let now: Double
+
+    var body: some View {
+        let status = TripsLogic.countdownStatus(l10n, leg, now: now)
+        StatusLine(status.kind, status.text)
     }
 }
 
@@ -130,14 +92,11 @@ struct LegRow: View {
             upcoming ? leg.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) } : nil,
         ].compactMap { $0 }.joined(separator: " · ")
         return HStack(alignment: .center, spacing: 12) {
-            OperatorBadge(op: leg.operator, size: 32)
+            OperatorBadge(op: leg.operator, size: .large)
             VStack(alignment: .leading, spacing: 2) {
-                if upcoming {
-                    Text(TripsLogic.countdown(l10n, leg, now: now))
-                        .font(ClackFont.inter(12, .bold)).tracking(0.24).foregroundStyle(Ink.accentInk)
-                }
+                if upcoming { CountdownLine(leg: leg, now: now) }
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
-                    .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
                 metaLine
                 if !meta2.isEmpty { Text(meta2).clack(.caption).foregroundStyle(Ink.text2) }
@@ -161,11 +120,12 @@ struct LegRow: View {
     /// "Fri 23 Oct · 07:14 – 10:30 · 5h 16m".
     private var metaLine: some View {
         let dep = leg.schedDep?.ms
-        var text = AttributedString()
-        if let dep { text += AttributedString(Format.day(dep, tz: TripsLogic.tz(leg), language: app.settings.language) + " · ") }
-        text += TimesText.attributed(leg, clock: app.settings.clock)
-        if let dep, let arr = leg.schedArr?.ms { text += AttributedString(" · " + Format.duration((arr - dep) / 60_000)) }
-        return Text(text).clack(.caption).foregroundStyle(Ink.text2).monospacedDigit()
+        let ends = TimePair.ends(leg)
+        var text = Text("")
+        if let dep { text = Text(Format.day(dep, tz: TripsLogic.tz(leg), language: app.settings.language) + Format.separator) }
+        text = text + TimePair.text(ends.dep, ends.arr, clock: app.settings.clock)
+        if let dep, let arr = leg.schedArr?.ms { text = text + Text(Format.separator + Format.duration((arr - dep) / 60_000)) }
+        return text.clack(.caption).foregroundStyle(Ink.text2).monospacedDigit()
     }
 
     private var side: some View {
@@ -224,13 +184,13 @@ struct Layover: View {
             let schedB = b.schedDep?.ms
             let schedMin = (schedA != nil && schedB != nil) ? Int(((schedB! - schedA!) / 60_000).rounded()) : nil
             let tracks = (a.arrPlatform != nil || b.depPlatform != nil)
-                ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? "?", "to": b.depPlatform ?? "?"]) : nil
+                ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? Format.unknown, "to": b.depPlatform ?? Format.unknown]) : nil
             let tz = a.destination?.tz ?? "Europe/Stockholm"
             let atRisk = min < 0
             let body = HStack(spacing: 12) {
                 DashedLine(dash: 3, gap: 4).frame(minHeight: 34)
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         LucideIcon(name: "clock", size: 14)
                         if atRisk {
                             Text(l10n.t("trips.layoverMissed", ["station": station]))
@@ -244,13 +204,9 @@ struct Layover: View {
                         }
                     }
                     .clack(.banner).fontWeight(.semibold)
-                    HStack(spacing: 6) {
-                        FlapTime(time: arrival, sched: schedA, tz: tz, clock: app.settings.clock)
-                        Text("→")
-                        FlapTime(time: departure, sched: schedB, tz: tz, clock: app.settings.clock)
-                        if let tracks { Text("· \(tracks)") }
-                    }
-                    .clack(.caption)
+                    (TimePair.text(.init(time: arrival, sched: schedA, tz: tz), .init(time: departure, sched: schedB, tz: tz), clock: app.settings.clock)
+                        + Text(tracks.map { Format.separator + $0 } ?? ""))
+                        .clack(.caption)
                     if linked {
                         HStack(spacing: 4) {
                             LucideIcon(name: "map", size: 14)
@@ -262,7 +218,7 @@ struct Layover: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 4)
             }
-            .foregroundStyle(atRisk ? Ink.veryLate : Ink.text2)
+            .foregroundStyle(atRisk ? Ink.veryLateInk : Ink.text2)
             .padding(.leading, 28)
             .padding(.trailing, 12)
             .padding(.vertical, 4)
@@ -302,12 +258,12 @@ struct TransferChip: View {
         var text = l10n.t("journey.transfer", ["min": String(t.planned), "station": t.station])
         if let actual = t.actual, actual != t.planned, !t.missed { text += " · " + l10n.t("journey.actually", ["min": String(actual)]) }
         if t.missed { text += " · " + l10n.t("journey.missed") } else if t.tight { text += " · " + l10n.t("journey.tight") }
-        return HStack(spacing: 10) {
+        return HStack(spacing: 12) {
             DashedLine(dash: 3, gap: 3).frame(height: 22)
-            Text(text).clack(.caption).foregroundStyle(t.missed ? Ink.veryLate : (t.tight ? Ink.slight : Ink.text2))
+            StatusLine(t.missed ? .band(.veryLate) : t.tight ? .band(.slight) : .arrived, text)
         }
         .padding(.vertical, 2)
-        .padding(.leading, 17)
+        .padding(.leading, 16)
     }
 }
 
@@ -330,7 +286,7 @@ struct JourneyCard: View {
                             .clack(.rowTitle).foregroundStyle(Ink.text)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 10)
+                    .padding(.top, 12)
                     .padding(.bottom, 4)
                 }
                 .buttonStyle(.plain)
@@ -341,8 +297,8 @@ struct JourneyCard: View {
             }
         }
         .padding(.top, 4)
-        .padding(.bottom, 6)
-        .padding(.horizontal, 14)
+        .padding(.bottom, 8)
+        .padding(.horizontal, 16)
         .background {
             ZStack {
                 Ink.surface
@@ -359,7 +315,7 @@ struct JourneyCard: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
-        .padding(.bottom, 10)
+        .padding(.bottom, 12)
     }
 }
 
@@ -393,7 +349,7 @@ struct NothingAhead: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             DottedLine(endDots: true)
             Text(l10n.t("trips.whereNext")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("trips.whereNextBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
@@ -401,7 +357,7 @@ struct NothingAhead: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 28)
-        .padding(.horizontal, 18)
+        .padding(.horizontal, 16)
         .background(Surface.Hero())
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -414,7 +370,7 @@ struct EmptyActions: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             Button {
                 router.openAdd()
             } label: {
@@ -449,7 +405,7 @@ struct FollowingSection: View {
     var body: some View {
         if !follows.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text(l10n.t("trips.following")).clack(.monthHeader).foregroundStyle(Ink.text2).padding(.top, 2)
+                Text(l10n.t("trips.following")).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 2)
                 ForEach(follows, id: \.self) { follow in
                     let op = follow.operatorId.flatMap { app.operatorsById[$0] }
                     Button {
@@ -459,7 +415,7 @@ struct FollowingSection: View {
                     }
                     .buttonStyle(.plain)
                 }
-                Text(l10n.t("trips.followingNote")).clack(.caption).foregroundStyle(Ink.text2)
+                InfoNote(l10n.t("trips.followingNote"), more: l10n.t("trips.followingNoteMore"))
             }
             .padding(.top, 2)
         }
@@ -471,10 +427,10 @@ struct FollowingSection: View {
             l10n.t("live.nextStop", ["name": $0, "time": Format.time(follow.train?.nextEta?.ms, tz: "Europe/Stockholm", clock: app.settings.clock)])
         } ?? l10n.t("trips.notRunning")
         return HStack(spacing: 12) {
-            OperatorBadge(op: op, size: 30)
+            OperatorBadge(op: op, size: .medium)
             VStack(alignment: .leading, spacing: 2) {
                 Text(follow.label ?? l10n.t("liveMap.train", ["number": follow.trainNumber]))
-                    .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text([op?.name, follow.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2)
                 Text(nextLine).clack(.caption).foregroundStyle(Ink.text2)
             }
@@ -484,12 +440,12 @@ struct FollowingSection: View {
                     LucideIcon(name: "eye", size: 12)
                     Text(l10n.t("trips.followingChip"))
                 }
-                .font(ClackFont.inter(11, .semibold)).foregroundStyle(Ink.text2)
+                .clack(.micro).fontWeight(.semibold).foregroundStyle(Ink.text2)
                 if let train = follow.train { DelayText(delay: train.delayMin) }
             }
         }
         .padding(.vertical, 12)
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 16)
         .background(Surface.Pill(op: color))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -506,7 +462,7 @@ struct ReviewCard: View {
 
     var body: some View {
         let dep = leg.schedDep?.ms
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(l10n.t("record.question")).clack(.captionUpper).foregroundStyle(Ink.text2)
             NavigationLink(value: AppRoute.trip(leg.id)) {
                 Text("\([leg.operator?.name, leg.trainNumber].compactMap { $0 }.joined(separator: " ")) · \(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
@@ -521,10 +477,10 @@ struct ReviewCard: View {
             }
             .disabled(busy)
         }
-        .padding(.vertical, 14)
+        .padding(.vertical, 16)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Surface.Lit())
+        .background(Ink.surface)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card, color: Ink.accentLine)
         .padding(.vertical, 4)

@@ -124,7 +124,7 @@ struct BoardScreen: View {
     // MARK: pieces
 
     private var head: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(station?.name ?? " ").clack(.pageTitle).foregroundStyle(Ink.text).lineLimit(2).minimumScaleFactor(0.7)
                     .accessibilityAddTraits(.isHeader)
@@ -133,27 +133,15 @@ struct BoardScreen: View {
             Spacer(minLength: 0)
             if let station {
                 if station.hasMap {
-                    IconActionButton(icon: "map", label: l10n.t("stationMap.open")) {
+                    IconButton(icon: "map", label: l10n.t("stationMap.open")) {
                         router.push(.stationMap(StationMapLink(stationId: station.id)))
                     }
                 }
-                // Just the star fills in, in the accent colour; the button around it stays as it is.
-                Button { Task { await toggleFavorite() } } label: {
-                    Group {
-                        if favoriteOverride {
-                            Image(systemName: "star.fill").font(.system(size: 20)).foregroundStyle(Ink.accent)
-                        } else {
-                            LucideIcon(name: "star", size: 20).foregroundStyle(Ink.text)
-                        }
-                    }
-                    .frame(width: 44, height: 44)
-                    .background(Ink.surfaceRaised, in: Circle())
-                    .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-                }
-                .buttonStyle(.plain)
+                // Just the star fills in, in the accent ink; the button around it stays as it is.
+                IconButton(
+                    icon: "star", label: l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"), selected: favoriteOverride
+                ) { Task { await toggleFavorite() } }
                 .sensoryFeedback(.selection, trigger: favoriteOverride)
-                .accessibilityLabel(l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"))
-                .accessibilityAddTraits(favoriteOverride ? .isSelected : [])
             }
         }
         .padding(.top, 12)
@@ -164,13 +152,13 @@ struct BoardScreen: View {
             let now = context.date.timeIntervalSince1970 * 1000
             let fresh = now - board.updatedAt < 120_000
             let ago = LiveRules.ago(l10n, then: board.updatedAt, now: now)
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 if fresh {
-                    Chip(text: l10n.t("live.chip"), accent: true)
+                    StatusLine(.live, l10n.t("live.chip"))
+                    Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
                 } else {
-                    Chip(text: l10n.t("live.stale", ["ago": ago]), tint: Ink.text3)
+                    StatusLine(.stale, l10n.t("live.stale", ["ago": ago]))
                 }
-                Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
     }
@@ -194,23 +182,23 @@ struct BoardScreen: View {
                                 .frame(maxWidth: .infinity).padding(.vertical, 24)
                         }
                         ForEach(page.shown) { row in
-                            BoardRowView(row: row, arrivals: arrivals, now: now, tz: tz) { open(row) }
+                            StationBoardRow(row: row, arrivals: arrivals, now: now, tz: tz) { open(row) }
                             Divider().overlay(Ink.hairline)
                         }
                         // More to show: from what's loaded, else (once) the hours from 12 to 24 ahead. Nothing past 24 h.
                         if page.more || (later == nil && !loadingLater) {
                             Button(l10n.t("board.showLater")) { Task { await showLater(more: page.more) } }
                                 .buttonStyle(LinkButtonStyle())
-                                .frame(maxWidth: .infinity).padding(.top, 14)
+                                .frame(maxWidth: .infinity).padding(.top, 16)
                         } else if loadingLater {
-                            Skeleton(height: 48).padding(.top, 14)
+                            Skeleton(height: 48).padding(.top, 16)
                         }
                     }
                 }
             } else if error {
                 Banner(kind: .error) { Text(l10n.t("board.error")) }
             } else {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 12) {
                     Skeleton(height: 64)
                     Skeleton(height: 64)
                     Text(l10n.t("board.loading")).clack(.caption).foregroundStyle(Ink.text2)
@@ -225,7 +213,8 @@ struct BoardScreen: View {
     }
 }
 
-private struct BoardRowView: View {
+/// A train on the board: the shared `BoardRowView`, filled from the board's data; tapping it opens the train.
+private struct StationBoardRow: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     let row: BoardRow
@@ -238,48 +227,17 @@ private struct BoardRowView: View {
         let op = row.operatorId.flatMap { app.operatorsById[$0] }
         let type = row.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let changed = BoardLogic.platformChanged(row, now: now)
-        let moved = floor(row.shown / 60_000) != floor(row.advertised / 60_000)
+        let line = BoardRowView<OperatorBadge>.Line(
+            time: row.shown, sched: row.advertised, tz: tz, destination: row.endpoints.joined(separator: ", "),
+            via: row.via.isEmpty ? nil : l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")]),
+            service: Format.join([Format.service(row.productName ?? op?.name, row.trainNumber), type?.name]),
+            notes: row.deviations.isEmpty ? nil : Format.join(Array(row.deviations.prefix(2))),
+            platform: row.platform, platformFrom: changed ? (row.platformChange?.from ?? "") : nil,
+            delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil, canceled: row.canceled,
+            done: row.done ? l10n.t(arrivals ? "board.arrived" : "board.departed") : nil, past: BoardLogic.isPast(row, now: now)
+        )
         Button(action: action) {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading, spacing: 2) {
-                    SplitFlap(value: Format.time(row.shown, tz: tz, clock: app.settings.clock), size: .sm)
-                    if moved {
-                        Text(Format.time(row.advertised, tz: tz, clock: app.settings.clock)).strikethrough().clack(.caption).monospacedDigit().foregroundStyle(Ink.text3)
-                    }
-                }
-                .frame(minWidth: 62, alignment: .leading)
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(row.endpoints.isEmpty ? "—" : row.endpoints.joined(separator: ", ")).clack(.rowTitle).foregroundStyle(Ink.text)
-                        .strikethrough(row.canceled)
-                    if !row.via.isEmpty {
-                        Text(l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")])).clack(.caption).foregroundStyle(Ink.text2)
-                    }
-                    HStack(spacing: 6) {
-                        OperatorBadge(op: op, size: 18)
-                        Text(([row.productName ?? op?.name, row.trainNumber].compactMap { $0 }).joined(separator: " ") + (type.map { " · \($0.name)" } ?? ""))
-                            .clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
-                    }
-                    if !row.deviations.isEmpty {
-                        Text(row.deviations.prefix(2).joined(separator: " · ")).clack(.caption).foregroundStyle(Ink.accentInk)
-                    }
-                }
-                Spacer(minLength: 0)
-                VStack(alignment: .trailing, spacing: 4) {
-                    if let platform = row.platform {
-                        PlatformChip(platform: platform, changedFrom: changed ? (row.platformChange?.from ?? "") : nil)
-                    }
-                    if changed { Text(l10n.t("board.changed")).clack(.caption).foregroundStyle(Ink.late) }
-                    if row.canceled {
-                        DelayText(delay: nil, canceled: true)
-                    } else if let delay = row.delayMin, row.estimated != nil || row.actual != nil {
-                        DelayText(delay: delay)
-                    }
-                    if row.done { Text(l10n.t(arrivals ? "board.arrived" : "board.departed")).clack(.caption).foregroundStyle(Ink.text2) }
-                }
-            }
-            .padding(.vertical, 12)
-            .contentShape(Rectangle())
-            .opacity(BoardLogic.isPast(row, now: now) ? 0.55 : 1)
+            BoardRowView(line, clock: app.settings.clock) { OperatorBadge(op: op, size: .small) }
         }
         .buttonStyle(.plain)
     }

@@ -19,31 +19,34 @@ extension Operator: OperatorDisplay {}
 extension LegOperator: OperatorDisplay {}
 
 /// The operator's logo when there is one (the operators have approved it: `Config.showOperatorLogos`), otherwise a
-/// rounded square in the brand colour with the short name in white (OperatorBadge.tsx). Radius is size × 0.28.
+/// rounded square in the brand colour with the short name in white (OperatorBadge.tsx). An operator that isn't known
+/// gets the theme's strong colour (yellow on dark, black on light) with "?" in the background's colour. Three sizes
+/// only; the radius is `Radius.badge` at 36 pt and keeps its proportion below that.
 struct OperatorBadge: View {
+    @Environment(\.colorScheme) private var scheme
     let op: (any OperatorDisplay)?
-    var size: CGFloat = 36
+    var size: BadgeSize = .large
 
     var body: some View {
-        let radius = (size * 0.28).rounded()
-        let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
+        let points = size.points
+        let shape = RoundedRectangle(cornerRadius: (Radius.badge * points / BadgeSize.large.points).rounded(), style: .continuous)
         Group {
             if Config.showOperatorLogos, let url = logoURL {
                 if let image = LogoStore.shared.image(for: url) {
                     Image(uiImage: image).resizable().scaledToFill()
-                        .frame(width: size, height: size)
-                        .background(.white)
+                        .frame(width: points, height: points)
+                        .background(Color.white)
                         .clipShape(shape)
                         .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
                 } else {
                     // Initials until the logo is here (it is fetched at launch), never an empty square.
-                    initials(shape).task { await LogoStore.shared.load(url) }
+                    initials(shape, points: points).task { await LogoStore.shared.load(url) }
                 }
             } else {
-                initials(shape)
+                initials(shape, points: points)
             }
         }
-        .frame(width: size, height: size)
+        .frame(width: points, height: points)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(op?.name ?? "")
     }
@@ -53,16 +56,18 @@ struct OperatorBadge: View {
         return URL(string: Config.apiBase.absoluteString.trimmingCharacters(in: CharacterSet(charactersIn: "/")) + path)
     }
 
-    private func initials(_ shape: RoundedRectangle) -> some View {
+    private func initials(_ shape: RoundedRectangle, points: CGFloat) -> some View {
         let label = op?.shortName ?? "?"
+        let fontSize = points * (label.count > 2 ? 0.3 : 0.36)
+        let known = op.flatMap { Color(hex: $0.brandColor) }
         return Text(label)
-            .font(ClackFont.inter(size * (label.count > 2 ? 0.3 : 0.36), .heavy))
-            .tracking(size * (label.count > 2 ? 0.3 : 0.36) * 0.02)
-            .foregroundStyle(.white)
-            .shadow(color: .black.opacity(0.35), radius: 1, y: 1)
+            .font(ClackFont.inter(fontSize, .heavy))
+            .tracking(fontSize * 0.02)
+            .foregroundStyle(known != nil ? Color.white : Ink.bg)
+            .shadow(color: known != nil ? Color.black.opacity(0.35) : .clear, radius: 1, y: 1)
             .minimumScaleFactor(0.5)
             .lineLimit(1)
-            .frame(width: size, height: size)
-            .background(Color(hex: op?.brandColor) ?? Color(hex: "#3a4555")!, in: shape)
+            .frame(width: points, height: points)
+            .background(known ?? strongColor(scheme), in: shape)
     }
 }
