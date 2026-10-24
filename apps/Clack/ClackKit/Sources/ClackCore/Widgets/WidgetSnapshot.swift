@@ -5,31 +5,49 @@
 
 import Foundation
 
-/// What the app hands to the Home Screen and Lock Screen widgets (owner, 2026-10-24). The app writes it after each refresh into the
-/// App Group container, and the widgets read it, so they work between refreshes and with no connection. Both use this one
-/// definition, in ClackCore. Without the App Group (a Personal Team can't have one) there is no container: the app writes
-/// nothing and the widgets show sample data until the group `WidgetSnapshot.groupId` is added to both targets.
+/// What the Home Screen and Lock Screen widgets show (owner, 2026-10-24). The widgets fetch it themselves
+/// (`WidgetData.load`), and the app writes it after each refresh as a fast path; either way it is kept as one JSON file in
+/// the App Group container, the cache the widgets fall back to with no connection. Both use this one definition, in
+/// ClackCore. Without the App Group (a Personal Team can't have one) there is no container and nothing is kept.
 public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
     public static let groupId = "group.com.garnerghering.Clack"
-    public static let fileName = "widget-snapshot.json"
+    /// Version 2. The earlier file (`widget-snapshot.json`: one journey, no language) is not read, and is deleted.
+    public static let fileName = "widget-snapshot-2.json"
+    static let oldFileNames = ["widget-snapshot.json"]
 
+    /// When the journey part was fetched (ms since 1970); 0 = never.
     public var updatedAt: Double = 0
-    /// The next (or running) journey, its legs in order, those not finished yet.
+    /// The app's language, clock and distance settings (`GET /api/settings`), not the phone's.
+    public var language: Language = .en
+    public var clock: ClockFormat = .h24
+    public var distanceUnit: DistanceUnit = .km
+    /// The featured journey (the Trips tab's rule: running now, else the earliest upcoming, else arrived in the last 6
+    /// hours), every leg in travel order.
     public var journey: [Leg] = []
+    /// The next upcoming journey after that one, so the widget moves on to it when the first ends.
+    public var nextJourney: [Leg] = []
     public var passport: PassportBits?
     public var stats: StatsBits?
     public var year: YearBits?
+    /// When the Passport, stats and year were fetched; 0 = never.
+    public var passportUpdatedAt: Double = 0
     public var boards: [StationBoard] = []
 
     public init(
-        updatedAt: Double = 0, journey: [Leg] = [], passport: PassportBits? = nil, stats: StatsBits? = nil,
-        year: YearBits? = nil, boards: [StationBoard] = []
+        updatedAt: Double = 0, language: Language = .en, clock: ClockFormat = .h24, distanceUnit: DistanceUnit = .km, journey: [Leg] = [],
+        nextJourney: [Leg] = [], passport: PassportBits? = nil, stats: StatsBits? = nil, year: YearBits? = nil, passportUpdatedAt: Double = 0,
+        boards: [StationBoard] = []
     ) {
         self.updatedAt = updatedAt
+        self.language = language
+        self.clock = clock
+        self.distanceUnit = distanceUnit
         self.journey = journey
+        self.nextJourney = nextJourney
         self.passport = passport
         self.stats = stats
         self.year = year
+        self.passportUpdatedAt = passportUpdatedAt
         self.boards = boards
     }
 
@@ -49,11 +67,14 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
         public var arrAt: Double
         public var depPlatform: String?
         public var arrPlatform: String?
-        public var delayMin: Int?
+        /// Whole minutes, negative = early; nil when no source has said.
+        public var depDelayMin: Int?
+        public var arrDelayMin: Int?
         public var canceled: Bool
         /// The last live status the server sent (`scheduled`, `approaching`, `boarding`, `en_route`, `at_stop`, `arrived`).
         public var status: String?
         public var progress: Double?
+        /// The live next stop's name, from the leg's stops; nil when not known.
         public var nextStop: String?
         public var nextStopAt: Double?
         /// Names of the stops ridden, in order.
@@ -62,8 +83,8 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
         public init(
             id: String, journeyId: String? = nil, operatorName: String? = nil, color: String? = nil, train: String? = nil,
             from: String, to: String, fromTz: String, toTz: String, depAt: Double, arrAt: Double, depPlatform: String? = nil,
-            arrPlatform: String? = nil, delayMin: Int? = nil, canceled: Bool, status: String? = nil, progress: Double? = nil,
-            nextStop: String? = nil, nextStopAt: Double? = nil, stops: [String] = []
+            arrPlatform: String? = nil, depDelayMin: Int? = nil, arrDelayMin: Int? = nil, canceled: Bool, status: String? = nil,
+            progress: Double? = nil, nextStop: String? = nil, nextStopAt: Double? = nil, stops: [String] = []
         ) {
             self.id = id
             self.journeyId = journeyId
@@ -78,7 +99,8 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
             self.arrAt = arrAt
             self.depPlatform = depPlatform
             self.arrPlatform = arrPlatform
-            self.delayMin = delayMin
+            self.depDelayMin = depDelayMin
+            self.arrDelayMin = arrDelayMin
             self.canceled = canceled
             self.status = status
             self.progress = progress
@@ -159,6 +181,7 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
         public var trains: Int
         public var topRoute: String?
         public var topRouteCount: Int
+        /// `YYYY-MM`.
         public var busiestMonth: String?
         public var busiestMonthCount: Int
         /// Every ride as a thinned line of `[lat, lon]` points.
@@ -181,18 +204,26 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
 
     public struct Departure: Codable, Equatable, Sendable, Identifiable {
         public var id: String
+        /// The timetable time (ms since 1970), as the board prints it.
         public var time: Double
+        /// When it is expected to leave, when a source has said.
+        public var expected: Double?
         public var delayMin: Int?
         public var platform: String?
         public var to: String
         public var train: String
         public var canceled: Bool
 
+        /// When it leaves as best known: the expected time, else the timetable.
+        public var leaves: Double { expected ?? time }
+
         public init(
-            id: String, time: Double, delayMin: Int? = nil, platform: String? = nil, to: String, train: String, canceled: Bool
+            id: String, time: Double, expected: Double? = nil, delayMin: Int? = nil, platform: String? = nil, to: String, train: String,
+            canceled: Bool
         ) {
             self.id = id
             self.time = time
+            self.expected = expected
             self.delayMin = delayMin
             self.platform = platform
             self.to = to
@@ -204,11 +235,17 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
     public struct StationBoard: Codable, Equatable, Sendable, Identifiable {
         public var id: String
         public var name: String
+        /// The station's time zone (`GET /api/stations/:id`); the board's times are printed in it.
+        public var tz: String?
+        /// When the board was fetched (ms since 1970).
+        public var updatedAt: Double
         public var rows: [Departure]
 
-        public init(id: String, name: String, rows: [Departure]) {
+        public init(id: String, name: String, tz: String? = nil, updatedAt: Double = 0, rows: [Departure]) {
             self.id = id
             self.name = name
+            self.tz = tz
+            self.updatedAt = updatedAt
             self.rows = rows
         }
     }
@@ -219,8 +256,8 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
 
     /// Deletes the stored snapshot ("Delete my data"), so the widgets don't keep showing the old trips.
     public static func clear() {
-        guard let url = containerURL?.appendingPathComponent(fileName) else { return }
-        try? FileManager.default.removeItem(at: url)
+        guard let dir = containerURL else { return }
+        for name in [fileName] + oldFileNames { try? FileManager.default.removeItem(at: dir.appendingPathComponent(name)) }
     }
 
     public static func load() -> WidgetSnapshot? {
@@ -231,8 +268,9 @@ public nonisolated struct WidgetSnapshot: Codable, Equatable, Sendable {
     /// False when there is no App Group to write into.
     @discardableResult
     public func save() -> Bool {
-        guard let url = Self.containerURL?.appendingPathComponent(Self.fileName), let data = try? JSONEncoder().encode(self) else { return false }
-        return (try? data.write(to: url, options: .atomic)) != nil
+        guard let dir = Self.containerURL, let data = try? JSONEncoder().encode(self) else { return false }
+        for name in Self.oldFileNames { try? FileManager.default.removeItem(at: dir.appendingPathComponent(name)) }
+        return (try? data.write(to: dir.appendingPathComponent(Self.fileName), options: .atomic)) != nil
     }
 }
 

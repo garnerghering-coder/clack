@@ -2,8 +2,9 @@
 //  DeparturesWidget.swift
 //  ClackWidgets
 //
-//  A favourite station's departures as board rows. The station is chosen in the widget's settings (an App Intent), from the stations
-//  the app has put in the snapshot.
+//  A station's departures as board rows. The station is chosen in the widget's settings (an App Intent): your favourite
+//  stations, or any station found by name (the Stations screen's search). The widget fetches the board itself, drops each
+//  train as it leaves, and fetches again after 15 minutes.
 //
 
 import AppIntents
@@ -20,15 +21,36 @@ struct StationOption: AppEntity {
     var displayRepresentation: DisplayRepresentation { DisplayRepresentation(title: "\(name)") }
 }
 
-struct StationQuery: EntityQuery {
+struct StationQuery: EntityStringQuery {
+    /// Your favourite stations (`GET /api/stations/favorites`); offline, the stations whose boards are kept.
+    private func favourites() async -> [StationOption] {
+        if let client = WidgetData.client(), let hits = try? await client.favoriteStations() {
+            return hits.map { StationOption(id: $0.id, name: $0.name) }
+        }
+        return (WidgetSnapshot.load()?.boards ?? []).map { StationOption(id: $0.id, name: $0.name) }
+    }
+
     func entities(for identifiers: [String]) async throws -> [StationOption] {
-        all().filter { identifiers.contains($0.id) }
+        let known = await favourites() + (WidgetSnapshot.load()?.boards ?? []).map { StationOption(id: $0.id, name: $0.name) }
+        var out: [StationOption] = []
+        for id in identifiers {
+            if let hit = known.first(where: { $0.id == id }) {
+                out.append(hit)
+            } else if let client = WidgetData.client(), let info = try? await client.station(id) {
+                out.append(StationOption(id: info.id, name: info.name))
+            }
+        }
+        return out
     }
-    func suggestedEntities() async throws -> [StationOption] { all() }
-    func defaultResult() async -> StationOption? { all().first }
-    private func all() -> [StationOption] {
-        WidgetContent.current().snapshot.boards.map { StationOption(id: $0.id, name: $0.name) }
+
+    func entities(matching string: String) async throws -> [StationOption] {
+        let text = string.trimmingCharacters(in: .whitespaces)
+        guard !text.isEmpty, let client = WidgetData.client() else { return await favourites() }
+        return ((try? await client.searchStations(text)) ?? []).map { StationOption(id: $0.id, name: $0.name) }
     }
+
+    func suggestedEntities() async throws -> [StationOption] { await favourites() }
+    func defaultResult() async -> StationOption? { await favourites().first }
 }
 
 struct PickStationIntent: WidgetConfigurationIntent {
@@ -39,35 +61,60 @@ struct PickStationIntent: WidgetConfigurationIntent {
 
 struct DeparturesEntry: TimelineEntry {
     var date: Date
+    var stationId: String?
+    var stationName: String?
     var board: WidgetSnapshot.StationBoard?
-    var isSample: Bool
+    var language: Language
+    var clock: ClockFormat
+    var isPlaceholder = false
 }
 
 struct DeparturesProvider: AppIntentTimelineProvider {
-    private func entry(_ configuration: PickStationIntent) -> DeparturesEntry {
-        let c = WidgetContent.current()
-        let board = c.snapshot.boards.first { $0.id == configuration.station?.id } ?? c.snapshot.boards.first
-        return DeparturesEntry(date: .now, board: board, isSample: c.isSample)
+    func placeholder(in context: Context) -> DeparturesEntry {
+        let s = WidgetSnapshot.placeholder(now: .now)
+        return DeparturesEntry(date: .now, stationId: nil, board: s.boards.first, language: WidgetWords.language, clock: .h24, isPlaceholder: true)
     }
-    func placeholder(in context: Context) -> DeparturesEntry { entry(PickStationIntent()) }
-    func snapshot(for configuration: PickStationIntent, in context: Context) async -> DeparturesEntry { entry(configuration) }
+
+    private func cached(_ configuration: PickStationIntent) -> DeparturesEntry? {
+        guard let s = WidgetSnapshot.load() else { return nil }
+        let board = configuration.station.flatMap { option in s.boards.first { $0.id == option.id } } ?? s.boards.first
+        guard let board else { return nil }
+        return DeparturesEntry(date: .now, stationId: board.id, stationName: configuration.station?.name, board: board, language: s.language, clock: s.clock)
+    }
+
+    func snapshot(for configuration: PickStationIntent, in context: Context) async -> DeparturesEntry {
+        cached(configuration) ?? placeholder(in: context)
+    }
+
     func timeline(for configuration: PickStationIntent, in context: Context) async -> Timeline<DeparturesEntry> {
-        // A new entry each 5 minutes drops departures that have left.
-        let base = entry(configuration)
-        let entries = (0..<12).map { i in DeparturesEntry(date: .now.addingTimeInterval(Double(i) * 300), board: base.board, isSample: base.isSample) }
-        return Timeline(entries: entries, policy: .after(.now.addingTimeInterval(3600)))
+        let now = Date.now
+        var station = configuration.station
+        if station == nil { station = await StationQuery().defaultResult() }
+        guard let station else {
+            let s = WidgetSnapshot.load() ?? WidgetSnapshot()
+            let empty = DeparturesEntry(date: now, stationId: nil, board: nil, language: s.language, clock: s.clock)
+            return Timeline(entries: [empty], policy: .after(now.addingTimeInterval(WidgetTimeline.departuresReloadMs / 1000)))
+        }
+        let snapshot = await WidgetData.load(.boards, boards: [station.id], maxAge: 60_000)
+        let board = snapshot.boards.first { $0.id == station.id }
+        let entries = WidgetTimeline.departureEntries(now: wMs(now)).map { at in
+            DeparturesEntry(
+                date: wDate(at), stationId: station.id, stationName: station.name, board: board, language: snapshot.language, clock: snapshot.clock
+            )
+        }
+        return Timeline(entries: entries, policy: .after(now.addingTimeInterval(WidgetTimeline.departuresReloadMs / 1000)))
     }
 }
 
 struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: "Departures", intent: PickStationIntent.self, provider: DeparturesProvider()) { entry in
+        AppIntentConfiguration(kind: WidgetKinds.departures, intent: PickStationIntent.self, provider: DeparturesProvider()) { entry in
             DeparturesView(entry: entry)
-                .containerBackground(WB.bg, for: .widget)
-                .widgetURL(URL(string: "clack://tab/explore"))
+                .containerBackground(Ink.bg, for: .widget)
+                .widgetURL(entry.stationId.flatMap { WidgetLinks.board($0) })
         }
-        .configurationDisplayName(WW.t("Departures", "Avgångar"))
-        .description(WW.t("The departure board of a station you follow.", "Avgångstavlan för en station du följer."))
+        .configurationDisplayName(WidgetWords.t("widgets.departures.name"))
+        .description(WidgetWords.t("widgets.departures.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
@@ -76,32 +123,40 @@ private struct DeparturesView: View {
     @Environment(\.widgetFamily) private var family
     var entry: DeparturesEntry
 
+    private var l10n: L10n { WidgetWords.l10n(entry.language) }
+
     var body: some View {
-        if let board = entry.board {
-            let now = entry.date.timeIntervalSince1970 * 1000
-            let rows = board.rows.filter { $0.time > now - 60_000 }.prefix(family == .systemLarge ? 8 : 4)
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text(board.name).font(WB.inter(14, .heavy)).foregroundStyle(WB.accent).lineLimit(1)
-                    Spacer()
-                    if entry.isSample { SampleTag() }
-                }
-                ForEach(Array(rows)) { row in
-                    HStack(spacing: 8) {
-                        FlapText(text: wTime(row.time, tz: "Europe/Stockholm"), size: 14, color: (row.delayMin ?? 0) >= 1 ? WB.accent : WB.text)
-                        Text(row.to).font(WB.inter(13, .semibold)).foregroundStyle(row.canceled ? WB.cancelled : WB.text).lineLimit(1)
-                            .strikethrough(row.canceled)
-                        Spacer(minLength: 4)
-                        if row.canceled { Text(WW.cancelled).font(WB.inter(10, .bold)).foregroundStyle(WB.cancelled) }
-                        else if let n = row.delayMin, n >= 1 { Text("+\(n)").font(WB.digits(12)).foregroundStyle(WB.late) }
-                        if let p = row.platform { Text(p).font(WB.digits(14)).foregroundStyle(WB.text2).frame(minWidth: 18, alignment: .trailing) }
+        Group {
+            if let board = entry.board {
+                let rows = WidgetTimeline.departures(board.rows, at: wMs(entry.date), limit: family == .systemLarge ? 8 : 4)
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(entry.stationName ?? board.name).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1)
+                        Spacer(minLength: 6)
+                        UpdatedLine(updatedAt: board.updatedAt, now: entry.date, l10n: l10n, clock: entry.clock)
                     }
+                    ForEach(rows) { row in
+                        HStack(spacing: 8) {
+                            FlapText(text: Format.time(row.time, tz: board.tz ?? TimeZone.current.identifier, clock: entry.clock))
+                            Text(row.to).clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text).lineLimit(1)
+                                .strikethrough(row.canceled)
+                            Spacer(minLength: 4)
+                            DelayText(delay: row.delayMin, canceled: row.canceled)
+                            if let p = row.platform {
+                                Text(p).clack(.delay).monospacedDigit().foregroundStyle(Ink.text2).frame(minWidth: 20, alignment: .trailing)
+                            }
+                        }
+                    }
+                    if rows.isEmpty { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
+                    Spacer(minLength: 0)
                 }
-                if rows.isEmpty { Text(WW.noData).font(WB.inter(12)).foregroundStyle(WB.text2) }
-                Spacer(minLength: 0)
+            } else if entry.stationId != nil {
+                EmptyWidget(title: entry.stationName ?? l10n.t("board.departures"), hint: l10n.t("board.error"))
+            } else {
+                EmptyWidget(title: l10n.t("widgets.pickStation"), hint: l10n.t("widgets.pickStationHint"))
             }
-        } else {
-            EmptyWidget(title: WW.noBoard, hint: WW.noData)
         }
+        .environment(l10n)
+        .placeholder(entry.isPlaceholder)
     }
 }

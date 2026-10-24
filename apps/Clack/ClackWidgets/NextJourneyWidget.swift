@@ -2,9 +2,10 @@
 //  NextJourneyWidget.swift
 //  ClackWidgets
 //
-//  One widget for the next journey that follows it through: before (route, countdown, platform), on the train (progress, next stop,
-//  arrival), at a change (next platform, minutes to spare), and a delay or cancellation takes over the top line. Same gradient by
-//  operator colour as the featured card on the Trips tab, in every size.
+//  One widget for the next journey that follows it through: before (route, countdown, platform), on the train (next stop,
+//  arrival, progress), at a change (minutes to change, the next platform), and a cancellation takes over the top line.
+//  It fetches for itself (`WidgetData.load`); the timeline (`WidgetTimeline`) redraws it every minute around the trip,
+//  and moves on to the next journey when this one ends.
 //
 
 import ClackCore
@@ -14,253 +15,297 @@ import WidgetKit
 
 struct JourneyEntry: TimelineEntry {
     var date: Date
-    var legs: [WidgetSnapshot.Leg]
-    var isSample: Bool
+    var snapshot: WidgetSnapshot
+    var isPlaceholder = false
+    var relevance: TimelineEntryRelevance?
 }
 
 struct JourneyProvider: TimelineProvider {
     func placeholder(in context: Context) -> JourneyEntry {
-        JourneyEntry(date: .now, legs: SampleData.snapshot(now: .now).journey, isSample: true)
+        JourneyEntry(date: .now, snapshot: .placeholder(now: .now), isPlaceholder: true)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (JourneyEntry) -> Void) {
-        let c = WidgetContent.current()
-        completion(JourneyEntry(date: .now, legs: c.snapshot.journey, isSample: c.isSample))
-    }
-
-    /// One entry a minute while the journey runs (up to 3 hours ahead), so countdowns, the line and the "now" part follow the clock.
-    func getTimeline(in context: Context, completion: @escaping (Timeline<JourneyEntry>) -> Void) {
-        let c = WidgetContent.current()
-        let legs = c.snapshot.journey
-        let start = Date.now
-        guard let last = legs.last else {
-            completion(Timeline(entries: [JourneyEntry(date: start, legs: [], isSample: c.isSample)], policy: .after(start.addingTimeInterval(30 * 60))))
+        guard let cached = WidgetSnapshot.load() else {
+            completion(placeholder(in: context))
             return
         }
-        let end = min(start.addingTimeInterval(3 * 3600), wDate(last.arrAt).addingTimeInterval(60))
-        var entries: [JourneyEntry] = []
-        var d = start
-        while d <= end {
-            entries.append(JourneyEntry(date: d, legs: legs, isSample: c.isSample))
-            d = d.addingTimeInterval(60)
+        completion(JourneyEntry(date: .now, snapshot: cached))
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<JourneyEntry>) -> Void) {
+        Task {
+            // The app may have written it a moment ago (it reloads this widget when it does).
+            let snapshot = await WidgetData.load(.journey, maxAge: 60_000)
+            let now = wMs(.now)
+            let entries = WidgetTimeline.journeyEntries(snapshot, now: now).map { at in
+                JourneyEntry(date: wDate(at), snapshot: snapshot, relevance: TimelineEntryRelevance(score: WidgetTimeline.relevance(snapshot, at: at)))
+            }
+            completion(Timeline(entries: entries, policy: .after(wDate(WidgetTimeline.journeyReload(snapshot, now: now)))))
         }
-        completion(Timeline(entries: entries, policy: .after(end)))
     }
 }
 
 struct NextJourneyWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "NextJourney", provider: JourneyProvider()) { entry in
+        StaticConfiguration(kind: WidgetKinds.nextJourney, provider: JourneyProvider()) { entry in
             NextJourneyView(entry: entry)
-                .containerBackground(for: .widget) { JourneyBackground(entry: entry) }
-                .widgetURL(entry.legs.first.flatMap { URL(string: "clack://trip/\($0.id)") })
+                .containerBackground(for: .widget) { TintedBackground(hex: WidgetTimeline.shown(entry.snapshot, at: wMs(entry.date))?.leg?.color) }
+                .widgetURL(WidgetTimeline.shown(entry.snapshot, at: wMs(entry.date))?.leg.flatMap { WidgetLinks.trip($0.id) })
         }
-        .configurationDisplayName(WW.t("Next journey", "Nästa resa"))
-        .description(WW.t("Your next journey, following it from the platform to the arrival.", "Din nästa resa, från perrongen till framme."))
+        .configurationDisplayName(WidgetWords.t("widgets.nextJourney.name"))
+        .description(WidgetWords.t("widgets.nextJourney.description"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
 
 // MARK: look
 
-private struct JourneyBackground: View {
-    var entry: JourneyEntry
-    var body: some View {
-        let base = Color(hex: entry.legs.first?.color) ?? Color(red: 0.2, green: 0.2, blue: 0.22)
-        LinearGradient(colors: [base.opacity(0.95), base.opacity(0.55), WB.bg], startPoint: .topLeading, endPoint: .bottomTrailing)
-            .background(WB.bg)
-    }
-}
-
 private struct NextJourneyView: View {
     @Environment(\.widgetFamily) private var family
     var entry: JourneyEntry
 
-    private var now: Double { entry.date.timeIntervalSince1970 * 1000 }
-    private var moment: JourneyMoment { JourneyMoment.at(now, legs: entry.legs) }
-    private var leg: WidgetSnapshot.Leg? { moment.legIndex.map { entry.legs[$0] } }
+    private var now: Double { wMs(entry.date) }
+    private var l10n: L10n { WidgetWords.l10n(entry.snapshot.language) }
+    private var clock: ClockFormat { entry.snapshot.clock }
+    private var shown: WidgetTimeline.Shown? { WidgetTimeline.shown(entry.snapshot, at: now) }
 
     var body: some View {
-        if let leg {
-            switch family {
-            case .accessoryCircular: circular(leg)
-            case .accessoryRectangular: rectangular(leg)
-            case .accessoryInline: inline(leg)
-            case .systemSmall: small(leg)
-            case .systemMedium: medium
-            default: large
+        Group {
+            if let shown, let leg = shown.leg {
+                switch family {
+                case .accessoryCircular: circular(shown, leg)
+                case .accessoryRectangular: rectangular(shown, leg)
+                case .accessoryInline: inline(shown, leg)
+                case .systemSmall: small(shown, leg)
+                case .systemMedium: medium(shown, leg)
+                default: large(shown, leg)
+                }
+            } else if family == .accessoryInline {
+                Text(l10n.t("widgets.noJourney"))
+            } else if family == .accessoryCircular || family == .accessoryRectangular {
+                ZStack {
+                    AccessoryWidgetBackground()
+                    LucideIcon(name: "train-front", size: 18)
+                }
+            } else {
+                EmptyWidget(title: l10n.t("widgets.noJourney"), hint: l10n.t("widgets.noJourneyHint"))
             }
-        } else if family == .accessoryInline {
-            Text(WW.noJourney)
-        } else {
-            EmptyWidget(title: WW.noJourney, hint: WW.noJourneyHint)
         }
+        .environment(l10n)
+        .placeholder(entry.isPlaceholder)
     }
 
     // MARK: what to say
 
-    private func late(_ l: WidgetSnapshot.Leg) -> Int? { (l.delayMin ?? 0) >= 5 ? l.delayMin : nil }
+    private func time(_ ms: Double, _ tz: String) -> String { Format.time(ms, tz: tz, clock: clock) }
 
-    /// The line at the top: a cancellation or delay takes over, else the moment.
-    private func headline(_ l: WidgetSnapshot.Leg) -> (text: String, color: Color) {
-        if l.canceled { return (WW.cancelled, WB.cancelled) }
-        if let n = late(l) { return (WW.late(n), WB.late) }
-        switch moment {
-        case .before: return (l.status == "boarding" ? WW.boarding : WW.onTime, l.status == "boarding" ? WB.accent : WB.onTime)
-        case .onTrain: return (WW.onItsWay, WB.accent)
-        case .changing(_, let spare): return (WW.spare(spare), WB.accent)
-        case .finished: return ("", WB.text2)
+    /// The delay that matters now: the departure's until you leave, then the arrival's.
+    private func delay(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> Int? {
+        if case .before = s.moment { return l.depDelayMin }
+        if case .changing = s.moment { return l.depDelayMin }
+        return l.arrDelayMin
+    }
+
+    private func service(_ l: WidgetSnapshot.Leg) -> String { [l.operatorName, l.train].compactMap { $0 }.joined(separator: " ") }
+
+    /// "Departs in {{time}}" with the time as a running timer (within 30 minutes) or the countdown's words.
+    private func departsIn(_ l: WidgetSnapshot.Leg) -> Text {
+        let template = l10n.t("trips.departsIn")
+        let parts = template.components(separatedBy: "{{time}}")
+        let middle: Text
+        if l.depAt - now <= WidgetTimeline.denseBeforeMs {
+            middle = Text(timerInterval: entry.date...max(entry.date, wDate(l.depAt)), countsDown: true)
+        } else {
+            middle = Text(WidgetTimeline.text(WidgetTimeline.countdown(to: l.depAt, now: now)))
+        }
+        let before = parts.first ?? "", after = parts.count > 1 ? parts[1] : ""
+        return Text("\(before)\(middle)\(after)")
+    }
+
+    /// The line under the route: a cancellation takes over, else what the moment is.
+    private func headline(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> Text {
+        if l.canceled { return Text(l10n.t("status.cancelled")).foregroundStyle(DelayBand.cancelled.ink) }
+        switch s.moment {
+        case .before:
+            if l.status == "boarding" { return Text(l10n.t("trips.boarding")) }
+            return departsIn(l)
+        case .onTrain:
+            if let stop = l.nextStop { return Text(l10n.t("live.nextStopName", ["name": stop])) }
+            return Text(l10n.t("live.arrives", ["time": time(l.arrAt, l.toTz)]))
+        case .changing(let next, let spare):
+            return Text(l10n.t("journey.transfer", ["min": String(spare), "station": s.legs[next].from]))
+        case .finished:
+            return Text(l10n.t("trips.arrivedAt", ["time": time(l.arrAt, l.toTz)]))
         }
     }
 
-    private func platformText(_ l: WidgetSnapshot.Leg) -> String? { l.depPlatform }
+    /// The big time: departure before, arrival on the train and after.
+    private func bigTime(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> String {
+        switch s.moment {
+        case .before, .changing: time(l.depAt, l.fromTz)
+        case .onTrain, .finished: time(l.arrAt, l.toTz)
+        }
+    }
+
+    private func platform(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> String? {
+        switch s.moment {
+        case .before, .changing: l.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) }
+        case .onTrain, .finished: l.arrPlatform.map { l10n.t("trips.platform", ["platform": $0]) }
+        }
+    }
 
     // MARK: pieces
 
-    private func routeLine(_ l: WidgetSnapshot.Leg, size: CGFloat = 15) -> some View {
+    private func route(_ l: WidgetSnapshot.Leg, role: TextRole = .rowTitle) -> some View {
         HStack(spacing: 4) {
             Text(l.from).lineLimit(1)
-            Image(systemName: "arrow.right").font(.system(size: size - 4, weight: .bold))
+            LucideIcon(name: "arrow-left", size: 12).rotationEffect(.degrees(180)).foregroundStyle(Ink.text2)
             Text(l.to).lineLimit(1)
         }
-        .font(WB.inter(size, .heavy)).foregroundStyle(WB.text)
+        .clack(role)
+        .foregroundStyle(Ink.text)
     }
 
-    @ViewBuilder
-    private func line(progress: Double) -> some View {
+    private func progressBar(_ fraction: Double) -> some View {
         GeometryReader { p in
             ZStack(alignment: .leading) {
-                Capsule().fill(Color.white.opacity(0.18))
-                Capsule().fill(WB.accent).frame(width: max(4, p.size.width * progress))
+                RoundedRectangle(cornerRadius: 2).fill(Ink.fillSoft)
+                RoundedRectangle(cornerRadius: 2).fill(Ink.accent).frame(width: max(4, p.size.width * fraction))
             }
         }
         .frame(height: 4)
     }
 
-    private func footer(_ l: WidgetSnapshot.Leg) -> some View {
-        HStack {
-            if entry.isSample { SampleTag() }
-            Spacer()
+    @ViewBuilder
+    private func progress(_ s: WidgetTimeline.Shown) -> some View {
+        if case .onTrain(_, let p) = s.moment { progressBar(p) }
+    }
+
+    private func topLine(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
+        HStack(spacing: 6) {
+            LucideIcon(name: "train-front", size: 14).foregroundStyle(Ink.accentInk)
+            Text(service(l)).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
+            Spacer(minLength: 4)
+            DelayText(delay: delay(s, l), canceled: l.canceled)
         }
     }
 
-    /// The big number for the moment: countdown before, arrival on the train, spare minutes at a change.
-    @ViewBuilder
-    private func hero(_ l: WidgetSnapshot.Leg, size: CGFloat) -> some View {
-        switch moment {
-        case .before:
-            Text(timerInterval: entry.date...max(entry.date.addingTimeInterval(1), wDate(l.depAt)), countsDown: true)
-                .font(WB.digits(size)).monospacedDigit().foregroundStyle(WB.text)
-        case .onTrain:
-            FlapText(text: wTime(l.arrAt, tz: l.toTz), size: size * 0.8, color: late(l) == nil ? WB.text : WB.accent)
-        case .changing(let next, _):
-            if let p = entry.legs[next].depPlatform {
-                Text(WW.platform(p)).font(WB.digits(size)).foregroundStyle(WB.accent)
-            }
-        case .finished: EmptyView()
-        }
+    private func updated() -> some View {
+        UpdatedLine(updatedAt: entry.snapshot.updatedAt, now: entry.date, l10n: l10n, clock: clock)
     }
 
     // MARK: sizes
 
-    private func small(_ l: WidgetSnapshot.Leg) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(headline(l).text).font(WB.inter(11, .bold)).foregroundStyle(headline(l).color).lineLimit(1)
-            routeLine(l, size: 13)
+    private func small(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            topLine(s, l)
+            Text(l.from).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
+            Text(l.to).clack(.rowTitle).foregroundStyle(Ink.text2).lineLimit(1)
             Spacer(minLength: 0)
-            hero(l, size: 26)
-            if case .onTrain(_, let p) = moment { line(progress: p) }
-            else if let p = platformText(l) { Text(WW.platform(p)).font(WB.inter(12, .semibold)).foregroundStyle(WB.text) }
-            if entry.isSample { SampleTag() }
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text(bigTime(s, l)).clack(.bigTime).monospacedDigit().foregroundStyle(Ink.text).strikethrough(l.canceled)
+                if let p = platform(s, l) { Text(p).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
+            }
+            progress(s)
+            headline(s, l).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
+            updated()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
     }
 
-    private func legBlock(_ l: WidgetSnapshot.Leg, index: Int) -> some View {
-        let active = moment.legIndex == index
+    private func legRow(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg, index: Int) -> some View {
+        let active = s.moment.legIndex == index
         return HStack(alignment: .center, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
-                    Text([l.operatorName, l.train].compactMap { $0 }.joined(separator: " ")).font(WB.digits(12)).foregroundStyle(WB.text.opacity(0.75))
-                    if l.canceled { Text(WW.cancelled).font(WB.inter(11, .bold)).foregroundStyle(WB.cancelled) }
-                    else if let n = late(l) { Text(WW.late(n)).font(WB.inter(11, .bold)).foregroundStyle(WB.late) }
+                    Text(service(l)).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
+                    DelayText(delay: l.depDelayMin, canceled: l.canceled)
                 }
-                routeLine(l, size: 14)
+                route(l, role: .stopName)
             }
             Spacer(minLength: 4)
             VStack(alignment: .trailing, spacing: 2) {
-                Text(wTime(l.depAt, tz: l.fromTz)).font(WB.digits(16)).foregroundStyle(late(l) == nil ? WB.text : WB.accent)
-                if let p = l.depPlatform { Text(WW.platform(p)).font(WB.inter(11)).foregroundStyle(WB.text.opacity(0.75)) }
+                Text(time(l.depAt, l.fromTz)).clack(.boardDestination).monospacedDigit().foregroundStyle(Ink.text)
+                    .strikethrough(l.canceled)
+                if let p = l.depPlatform { Text(l10n.t("trips.platform", ["platform": p])).clack(.caption).foregroundStyle(Ink.text2) }
             }
         }
-        .opacity(active || moment.legIndex == nil ? 1 : 0.7)
+        .opacity(active || s.moment.legIndex == nil ? 1 : 0.6)
     }
 
-    private var medium: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let l = leg {
-                HStack {
-                    Text(headline(l).text).font(WB.inter(12, .bold)).foregroundStyle(headline(l).color)
-                    Spacer()
-                    hero(l, size: 22)
+    /// The legs around the one under way: it and the next (or the last two).
+    private func visibleLegs(_ s: WidgetTimeline.Shown, count: Int) -> [(Int, WidgetSnapshot.Leg)] {
+        let start = min(s.moment.legIndex ?? 0, max(0, s.legs.count - count))
+        return Array(s.legs.enumerated()).dropFirst(start).prefix(count).map { ($0.offset, $0.element) }
+    }
+
+    private func medium(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading, spacing: 2) {
+                    topLine(s, l)
+                    headline(s, l).clack(.caption).foregroundStyle(Ink.text).lineLimit(1)
                 }
-                if case .onTrain(_, let p) = moment { line(progress: p) }
-                Spacer(minLength: 0)
-                ForEach(Array(entry.legs.prefix(2).enumerated()), id: \.offset) { i, leg in legBlock(leg, index: i) }
-                if entry.isSample { SampleTag() }
+                Spacer(minLength: 8)
+                Text(bigTime(s, l)).clack(.bigTime).monospacedDigit().foregroundStyle(Ink.text).strikethrough(l.canceled)
             }
+            progress(s)
+            Spacer(minLength: 0)
+            ForEach(visibleLegs(s, count: 2), id: \.1.id) { i, leg in legRow(s, leg, index: i) }
+            updated()
         }
     }
 
-    private var large: some View {
+    private func large(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            medium
-            if let l = leg {
-                Divider().overlay(Color.white.opacity(0.2))
-                Text(WW.stops.uppercased()).font(WB.inter(10, .heavy)).tracking(0.8).foregroundStyle(WB.text.opacity(0.7))
+            medium(s, l)
+            if !l.stops.isEmpty {
+                Rectangle().fill(Ink.hairline).frame(height: 1)
+                Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 VStack(alignment: .leading, spacing: 3) {
                     ForEach(Array(l.stops.prefix(7).enumerated()), id: \.offset) { _, name in
+                        let next = name == l.nextStop
                         HStack(spacing: 8) {
-                            Circle().fill(name == l.nextStop ? WB.accent : Color.white.opacity(0.5)).frame(width: 6, height: 6)
-                            Text(name).font(WB.inter(13, name == l.nextStop ? .bold : .regular)).foregroundStyle(WB.text).lineLimit(1)
+                            Circle().fill(next ? Ink.accent : Ink.text3).frame(width: 6, height: 6)
+                            Text(name).clack(.stopName).fontWeight(next ? .bold : .regular).foregroundStyle(Ink.text).lineLimit(1)
                         }
                     }
                 }
             }
+            Spacer(minLength: 0)
         }
     }
 
     // MARK: Lock Screen
 
-    private func circular(_ l: WidgetSnapshot.Leg) -> some View {
-        ZStack {
+    private func circular(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
+        let platformCode: String? = {
+            switch s.moment {
+            case .before, .changing: l.depPlatform
+            case .onTrain, .finished: l.arrPlatform
+            }
+        }()
+        return ZStack {
             AccessoryWidgetBackground()
             VStack(spacing: 0) {
-                Image(systemName: "tram.fill").font(.system(size: 11))
-                Text(platformText(l) ?? "–").font(WB.digits(20)).minimumScaleFactor(0.6)
+                LucideIcon(name: "train-front", size: 12)
+                Text(platformCode ?? Format.delay(nil)).clack(.bigTime).minimumScaleFactor(0.5).lineLimit(1)
             }
+            .padding(4)
         }
     }
 
-    private func rectangular(_ l: WidgetSnapshot.Leg) -> some View {
+    private func rectangular(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text("\(l.from) → \(l.to)").font(WB.inter(12, .bold)).lineLimit(1)
-            switch moment {
-            case .before:
-                Text(timerInterval: entry.date...max(entry.date.addingTimeInterval(1), wDate(l.depAt)), countsDown: true).font(WB.digits(16)).monospacedDigit()
-                Text([platformText(l).map(WW.platform), late(l).map(WW.late)].compactMap { $0 }.joined(separator: " · ")).font(WB.inter(11))
-            case .onTrain:
-                Text("\(WW.arrives) \(wTime(l.arrAt, tz: l.toTz))").font(WB.digits(16))
-                Text(late(l).map(WW.late) ?? WW.onItsWay).font(WB.inter(11))
-            case .changing(let next, let spare):
-                Text(entry.legs[next].depPlatform.map(WW.platform) ?? WW.change).font(WB.digits(16))
-                Text(WW.spare(spare)).font(WB.inter(11))
-            case .finished: EmptyView()
-            }
+            Text("\(l.from) – \(l.to)").clack(.chip).lineLimit(1)
+            Text(bigTime(s, l)).clack(.boardDestination).monospacedDigit()
+            headline(s, l).clack(.caption).lineLimit(1)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func inline(_ l: WidgetSnapshot.Leg) -> some View {
-        Text("\(l.to) \(wTime(l.arrAt, tz: l.toTz))" + (platformText(l).map { " · \(WW.platform($0))" } ?? ""))
+    private func inline(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {
+        Text([l.to, bigTime(s, l), platform(s, l)].compactMap { $0 }.joined(separator: " · "))
     }
 }

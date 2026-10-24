@@ -72,12 +72,22 @@ Five Home Screen widgets in `ClackWidgets`: Next journey (small, medium, large, 
 medium, large, on the holographic foil), Departures (medium, large; the station is chosen in the widget's settings), Year in rail
 (large) and Stats (medium, large; an arrow button flips between operators, train types, stations and countries).
 
-- The app writes `WidgetSnapshot` (one JSON file) into the App Group container (`group.com.garnerghering.Clack`) after each refresh
-  (`Widgets/WidgetFeed.swift`, at most every 5 minutes). The widgets read it and work out the rest from the clock, so they follow the
-  journey with no connection. Where there is no container (the group missing from a build's entitlements) the widgets show invented
-  sample data, each marked SAMPLE.
-- `WidgetSnapshot.swift` exists twice, identical (`Clack/Widgets` and `ClackWidgets`). Tapping a widget opens `clack://trip/<id>` or `clack://journey/<id>`.
-- Not checked on a device yet (unverified).
+- The widgets fetch for themselves (`ClackCore/Widgets/WidgetData.swift`: `/settings`, `/legs`, `/legs/:id` for the featured leg
+  and the next leg of its journey, `/passport`, `/stations/:id/board`), with the phone's id read from the shared Keychain item
+  (`Identity.existing`: a widget never makes an id). Each answer is kept in `WidgetSnapshot` (one JSON file, `widget-snapshot-2.json`,
+  in the App Group container `group.com.garnerghering.Clack`); on a failure or after 8 seconds the kept copy is shown, with a grey
+  "Updated 12:04" once it is more than 30 minutes old.
+- The app writes the same file after each refresh as a fast path (`Widgets/WidgetFeed.swift`, at most every 30 s) and reloads the
+  widgets whose part changed; the Passport, Stats and Year are fetched again after a trip arrives.
+- When the widgets redraw is plain logic in `ClackCore/Widgets/WidgetTimeline.swift` (tested): Next journey every minute from 30
+  minutes before leaving to 2 minutes after arriving, otherwise when the countdown's wording changes (quarter hours within 6 h,
+  hours within a day, days beyond), 3 hours ahead, fetched again at the next departure or arrival and at least every 30 minutes; it
+  moves on to the next journey when one ends, and keeps an arrived one for 6 hours when nothing follows. Departures redraws every
+  minute for 30 minutes, dropping trains as they leave, and fetches again after 15. Passport, Stats and Year: every 6 hours.
+- Texts are the app's (`widgets.*` and existing keys) in the app's language setting. The gallery shows the shapes only (redacted);
+  nothing is invented. Taps: Next journey `clack://trip/<leg>`, Passport, Stats and Year `clack://passport`, Departures
+  `clack://board/<station>`.
+- Not checked on a device yet, and adding the widgets to a Home Screen was not tried in the simulator (unverified).
 
 ## Deep links (coming)
 

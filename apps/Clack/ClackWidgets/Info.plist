@@ -4,6 +4,11 @@
 <dict>
 	<key>ClackKeychainGroup</key>
 	<string>$(AppIdentifierPrefix)com.garnerghering.Clack.shared</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

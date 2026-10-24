@@ -14,14 +14,16 @@ import WidgetKit
 
 enum StatsPage: Int, CaseIterable {
     case operators, trainTypes, stations, countries
-    var title: String {
+
+    var titleKey: String {
         switch self {
-        case .operators: WW.operators
-        case .trainTypes: WW.trainTypes
-        case .stations: WW.topStations
-        case .countries: WW.countries
+        case .operators: "passport.operators"
+        case .trainTypes: "passport.trainTypes"
+        case .stations: "passport.stationsVisited"
+        case .countries: "passport.countries"
         }
     }
+
     func rows(_ s: WidgetSnapshot.StatsBits) -> [WidgetSnapshot.Row] {
         switch self {
         case .operators: s.operators
@@ -30,6 +32,7 @@ enum StatsPage: Int, CaseIterable {
         case .countries: s.countries
         }
     }
+
     static var current: StatsPage {
         get { StatsPage(rawValue: UserDefaults.standard.integer(forKey: "statsPage")) ?? .operators }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "statsPage") }
@@ -44,73 +47,72 @@ struct NextStatsPageIntent: AppIntent {
     }
 }
 
-struct StatsEntry: TimelineEntry {
-    var date: Date
-    var stats: WidgetSnapshot.StatsBits
-    var page: StatsPage
-    var isSample: Bool
-}
-
-struct StatsProvider: TimelineProvider {
-    private func entry() -> StatsEntry {
-        let c = WidgetContent.current()
-        return StatsEntry(date: .now, stats: c.snapshot.stats ?? SampleData.snapshot(now: .now).stats!, page: .current, isSample: c.isSample || c.snapshot.stats == nil)
-    }
-    func placeholder(in context: Context) -> StatsEntry { entry() }
-    func getSnapshot(in context: Context, completion: @escaping (StatsEntry) -> Void) { completion(entry()) }
-    func getTimeline(in context: Context, completion: @escaping (Timeline<StatsEntry>) -> Void) {
-        completion(Timeline(entries: [entry()], policy: .after(.now.addingTimeInterval(3600))))
-    }
-}
-
 struct StatsWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Stats", provider: StatsProvider()) { entry in
-            StatsView(entry: entry)
-                .containerBackground(WB.bg, for: .widget)
+        StaticConfiguration(kind: WidgetKinds.stats, provider: PassportProvider()) { entry in
+            StatsView(entry: entry, page: .current)
+                .containerBackground(Ink.bg, for: .widget)
+                .widgetURL(WidgetLinks.passport)
         }
-        .configurationDisplayName(WW.t("Stats", "Statistik"))
-        .description(WW.t("Operators, train types, stations and countries. Tap the arrow for the next page.", "Operatörer, tågtyper, stationer och länder. Tryck på pilen för nästa sida."))
+        .configurationDisplayName(WidgetWords.t("widgets.stats.name"))
+        .description(WidgetWords.t("widgets.stats.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
 
 private struct StatsView: View {
     @Environment(\.widgetFamily) private var family
-    var entry: StatsEntry
+    var entry: PassportEntry
+    var page: StatsPage
+
+    private var l10n: L10n { WidgetWords.l10n(entry.snapshot.language) }
 
     var body: some View {
-        let rows = Array(entry.page.rows(entry.stats).prefix(family == .systemLarge ? 8 : 3))
+        Group {
+            if let stats = entry.snapshot.stats {
+                content(stats)
+            } else {
+                EmptyWidget(title: l10n.t("passport.emptyTitle"), hint: l10n.t("widgets.openApp"))
+            }
+        }
+        .environment(l10n)
+        .placeholder(entry.isPlaceholder)
+    }
+
+    private func content(_ stats: WidgetSnapshot.StatsBits) -> some View {
+        let rows = Array(page.rows(stats).prefix(family == .systemLarge ? 8 : 3))
         let top = max(1, rows.map(\.count).max() ?? 1)
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Text(entry.page.title).font(WB.inter(14, .heavy)).foregroundStyle(WB.accent)
-                if entry.isSample { SampleTag() }
+        return VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Text(l10n.t(page.titleKey)).clack(.sectionHeader).foregroundStyle(Ink.text)
                 Spacer()
+                UpdatedLine(updatedAt: entry.snapshot.passportUpdatedAt, now: entry.date, l10n: l10n, clock: entry.snapshot.clock)
                 HStack(spacing: 4) {
                     ForEach(StatsPage.allCases, id: \.rawValue) { p in
-                        Circle().fill(p == entry.page ? WB.accent : WB.text2.opacity(0.4)).frame(width: 5, height: 5)
+                        Circle().fill(p == page ? Ink.accentInk : Ink.text3).frame(width: 5, height: 5)
                     }
                 }
                 Button(intent: NextStatsPageIntent()) {
-                    Image(systemName: "chevron.right").font(.system(size: 12, weight: .bold)).foregroundStyle(WB.text)
-                        .frame(width: 28, height: 24).background(WB.tile, in: RoundedRectangle(cornerRadius: 6))
+                    LucideIcon(name: "chevron-right", size: 14).foregroundStyle(Ink.text)
+                        .frame(width: 30, height: 24)
+                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(l10n.t("widgets.nextPage"))
             }
             ForEach(rows) { row in
                 HStack(spacing: 8) {
-                    Text(row.name).font(WB.inter(12, .semibold)).foregroundStyle(WB.text).lineLimit(1).frame(width: 96, alignment: .leading)
+                    Text(row.name).clack(.chip).foregroundStyle(Ink.text).lineLimit(1).frame(width: 104, alignment: .leading)
                     GeometryReader { p in
-                        Rectangle().fill(Color(hex: row.color) ?? WB.accent)
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color(hex: row.color) ?? Ink.accent)
                             .frame(width: max(3, p.size.width * Double(row.count) / Double(top)))
-                            .clipShape(RoundedRectangle(cornerRadius: 3))
                     }
-                    .frame(height: 12)
-                    Text(String(row.count)).font(WB.digits(13)).foregroundStyle(WB.text).frame(minWidth: 26, alignment: .trailing)
+                    .frame(height: 10)
+                    Text(String(row.count)).clack(.delay).monospacedDigit().foregroundStyle(Ink.text).frame(minWidth: 26, alignment: .trailing)
                 }
             }
-            if rows.isEmpty { Text(WW.noData).font(WB.inter(12)).foregroundStyle(WB.text2) }
+            if rows.isEmpty { Text(l10n.t("passport.empty")).clack(.caption).foregroundStyle(Ink.text2) }
             Spacer(minLength: 0)
         }
     }
