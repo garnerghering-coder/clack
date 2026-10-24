@@ -69,10 +69,10 @@ struct ArrivalScreen: View {
         let s = ArrivalLogic.summary(legs)
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 10) {
-                Tile(title: l10n.t("passport.timeOnTrains"), value: Format.duration(s.minutesOnBoard))
-                Tile(title: l10n.t("passport.trains"), value: String(s.trains))
+                Tile(label: l10n.t("passport.timeOnTrains"), value: Format.duration(s.minutesOnBoard))
+                Tile(label: l10n.t("passport.trains"), value: String(s.trains))
                 if let distance = s.distanceM {
-                    Tile(title: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
+                    Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
                 }
             }
             if let line = punctuality(s.arrDelayMin) {

@@ -276,11 +276,11 @@ struct DesignGalleryView: View {
         }
         section("Tile") {
             HStack(spacing: 12) {
-                ClackDesign.Tile(label: "Distance", value: "455 km")
-                ClackDesign.Tile(label: "Duration", value: "2h 48m")
-                ClackDesign.Tile(label: "Delay") { DelayText(delay: 8) }
+                Tile(label: "Distance", value: "455 km")
+                Tile(label: "Duration", value: "2h 48m")
+                Tile(label: "Delay") { DelayText(delay: 8) }
             }
-            ClackDesign.Tile(label: "Longest trip", value: "1 271 km", sub: "Stockholm C → Narvik")
+            Tile(label: "Longest trip", value: "1 271 km", sub: "Stockholm C → Narvik")
         }
         section("ProgressBar") {
             ProgressBar(value: progress, color: Color(hex: "#1fb14f")!, marker: .solid)

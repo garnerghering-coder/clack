@@ -406,26 +406,21 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let dep = l.actualDep?.ms ?? l.schedDep?.ms
         let arr = l.actualArr?.ms ?? l.schedArr?.ms
-        return HStack(spacing: 10) {
+        return HStack(alignment: .top, spacing: 12) {
             Tile(
-                title: l10n.t("detail.distance"),
+                label: l10n.t("detail.distance"),
                 value: (l.isEstimatedGeometry ? "≈ " : "") + Format.distance(l.distanceM, unit: app.settings.distanceUnit, language: app.settings.language)
             )
-            Tile(title: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000) : "—")
+            Tile(label: l10n.t("detail.duration"), value: (dep != nil && arr != nil) ? Format.duration((arr! - dep!) / 60_000) : "—")
             Button {
                 explain.toggle()
             } label: {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(l10n.t("detail.delay")).clack(.captionUpper).foregroundStyle(Ink.text2)
+                Tile(label: l10n.t("detail.delay")) {
                     DelayText(delay: l.arrDelayMin ?? (tracking ? live?.arrivalDelayMin : nil), canceled: l.canceled)
-                        .frame(minHeight: 22, alignment: .leading)
                 }
-                .padding(12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-                .hairlineBorder(radius: Radius.card)
             }
             .buttonStyle(.plain)
+            .accessibilityHint(l10n.t(explain ? "common.less" : "common.more"))
         }
     }
 
@@ -554,10 +549,7 @@ struct TimeBlock: View {
                 if let platform { Chip(text: l10n.t("trips.platform", ["platform": platform])) } else { Chip(text: "–").hidden() }
             }
         }
-        .padding(14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
+        .tileSurface()
     }
 }
 

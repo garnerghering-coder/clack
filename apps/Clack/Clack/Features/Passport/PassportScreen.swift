@@ -444,13 +444,7 @@ private struct PassportCard: View {
     }
 
     private func tile(_ value: String, _ title: String, soft: Color, ink: Color) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(value).font(ClackFont.inter(18, .bold)).monospacedDigit().foregroundStyle(ink).lineLimit(1).minimumScaleFactor(0.7)
-            Text(title).clack(.captionUpper).foregroundStyle(soft)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(12)
-        .background(Color.black.opacity(0.08), in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+        Tile(label: title, value: value, tone: .onAccent)
     }
 
     private func mrz(km: Double) -> String {
@@ -511,14 +505,7 @@ private struct RecordTile: View {
     let legId: String?
 
     var body: some View {
-        let body = VStack(alignment: .leading, spacing: 2) {
-            Text(label).clack(.captionUpper).foregroundStyle(Ink.text2)
-            Text(value).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
-            if let sub { Text(sub).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1) }
-        }
-        .padding(.vertical, 10).padding(.horizontal, 12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
+        let body = Tile(label: label, value: value, sub: sub)
         if let legId { NavigationLink(value: AppRoute.trip(legId)) { body }.buttonStyle(.plain) } else { body }
     }
 }
