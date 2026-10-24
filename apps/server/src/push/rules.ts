@@ -48,15 +48,15 @@ const live = (f: TripFacts, p: Prefs) => p.notify && !f.canceled;
 export function reminder(f: TripFacts, p: Prefs, now: number, lang: Language): Alert | null {
   if (!live(f, p) || p.notifyLeadMin <= 0 || f.departed || f.expDep === null) return null;
   if (now < f.expDep - p.notifyLeadMin * MIN || f.expDep - now < 3 * MIN) return null;
-  const time = clock(f.expDep, f.fromTz);
+  return { kind: 'reminder', key: '', title: t(lang, 'route', { from: f.from, to: f.to }), body: departureLine(f, f.expDep, lang) };
+}
+
+/** "Leaves 14:32 (6 min late) from platform 5.": the reminder's words, also the body of a Live Activity that starts by push. */
+export function departureLine(f: Pick<TripFacts, 'fromTz' | 'delayMin' | 'depPlatform'>, expDep: number, lang: Language): string {
+  const time = clock(expDep, f.fromTz);
   const late = f.delayMin !== null && f.delayMin >= DELAY_ALERT_MIN ? f.delayMin : null;
   const key = late !== null ? (f.depPlatform ? 'reminderLate' : 'reminderLateNoPlatform') : f.depPlatform ? 'reminderPlatform' : 'reminderNoPlatform';
-  return {
-    kind: 'reminder',
-    key: '',
-    title: t(lang, 'route', { from: f.from, to: f.to }),
-    body: t(lang, key, { time, delay: late ?? 0, platform: f.depPlatform ?? '' }),
-  };
+  return t(lang, key, { time, delay: late ?? 0, platform: f.depPlatform ?? '' });
 }
 
 /** Alerts for the events the live tracker just saw on a leg. */

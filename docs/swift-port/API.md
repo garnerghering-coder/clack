@@ -758,6 +758,44 @@ Every token is a hex string, 32 to 400 characters (`/^[0-9a-f]{32,400}$/i`); the
 #### `DELETE /api/live-activities/:token`
 - The card ended or was dismissed on the phone. Only your own. 204.
 
+#### Live Activity pushes the phone receives (`push/notifier.ts`)
+All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactivity`. Times in `aps` are seconds since
+1970; times inside `content-state` are ms (default `JSONDecoder` coding, as Apple requires).
+
+- **`content-state`** (`TripActivityAttributes.ContentState`): `status, delayMin, nextStop, nextStopAt, platform,
+  platformFor, progress, departAt, arriveAt, canceled, phase, note, changePlatform, changeAt` as before, plus the leg the
+  card is showing now: `legId: string, train: string | null, from: string, to: string, fromTz: string, toTz: string`.
+  Swift ignores keys it doesn't declare, so these are safe for today's app; to show the right train after a change the
+  app must add them as optionals and prefer them over the fixed `attributes`.
+- **Start** (iOS 17.2+, to the device's `startToken`), once per journey, from 30 min before the leg leaves:
+  `{ aps: { timestamp, event: "start", "content-state", "stale-date": now+300, "attributes-type": "TripActivityAttributes",
+  attributes: { legId, journeyId, train, from, to, fromTz, toTz, color }, "input-push-token": 1, alert: { title, body } } }`,
+  priority 10. The alert is never empty: "Nässjö C → Jönköping C" / "Leaves 13:20 from platform 5." (the reminder's
+  words), or for a train already running the operator and number / the route. No `sound`, so it doesn't ring on top of
+  the reminder alert. No `dismissal-date`: Apple documents it only for ended activities. A start Apple doesn't take
+  (network, 5xx) is tried again the next minute; a dead start token (410, `BadDeviceToken`, `Unregistered`,
+  `DeviceTokenNotForTopic`) is cleared from the device, the phone kept.
+- **Update**: `{ aps: { timestamp, event: "update", "content-state", "stale-date": now+300, alert? } }`. Priority **5**
+  (not budgeted by Apple), or **10** only when it carries an `alert`: a platform change before leaving, the train
+  cancelled, or "Get off at X in about N min", each once per leg and only if that alert kind is on in Settings. The alert
+  has `title` and `body`, no `sound` (the normal alert notification rings). Sent when the words change, the progress
+  line at most once a minute, and the same state again every 4 minutes so the card doesn't go stale while the server
+  is up. When the server stops, the card turns stale (`ActivityState.stale`) 5 minutes after the last push.
+- **One card per journey.** Legs that share a `journeyId` share one card. When a leg arrives and a change follows at the
+  same station within an hour, `phase` is `changing` (`changePlatform`, `changeAt` = the next train). Once that train
+  is due (or the change is further off, or the next leg leaves from elsewhere) the same card moves to the next leg:
+  `content-state.legId` and the leg fields switch, the phases run again (`scheduled`, `leaveSoon`, `boarding`, ...).
+  The server moves its `live_activities` row to the new leg; the app needs to do nothing except keep the card.
+- **End**: `{ aps: { timestamp, event: "end", "content-state", "dismissal-date": now+600, alert? } }`, priority 5 (10
+  with the cancellation alert). Sent when the last leg arrived, or the leg the card shows is cancelled. If Apple doesn't
+  take an end for a passing reason the server keeps the row and tries again the next minute. Rows older than 12 hours
+  (Apple's maximum: 8 hours running and 4 on the Lock Screen) are dropped.
+
+**What the app must change for this:** start a card locally only if no card of the same `journeyId` is running
+(today it checks `legId`); end cards only when the whole journey is over (today `endFinished` ends a card when its
+`attributes.legId` has arrived, which would kill the card the server just moved on); register cards with
+`deviceToken`; read the new `content-state` leg fields.
+
 ---
 
 ## 3. Streaming
