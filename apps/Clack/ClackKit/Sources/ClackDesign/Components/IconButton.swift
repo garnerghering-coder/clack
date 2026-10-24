@@ -13,7 +13,8 @@ public enum IconButtonSize: Sendable {
     var icon: CGFloat { self == .regular ? 20 : 16 }
 }
 
-/// The circle every icon button is drawn in: raised surface, hairline ring, the icon in the middle.
+/// The circle every icon button is drawn in: Liquid Glass on iOS 26 and later (as the system's toolbar buttons),
+/// before that a raised surface with a hairline ring; the icon in the middle.
 private struct IconCircle: View {
     let icon: String
     let size: IconButtonSize
@@ -21,12 +22,17 @@ private struct IconCircle: View {
     var filled = false
 
     var body: some View {
-        LucideIcon(name: icon, size: size.icon, filled: filled)
+        let glyph = LucideIcon(name: icon, size: size.icon, filled: filled)
             .foregroundStyle(tint)
             .frame(width: size.diameter, height: size.diameter)
-            .background(Ink.surfaceRaised, in: Circle())
-            .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
             .contentShape(Circle())
+        if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
+            glyph.glassEffect(.regular.interactive(), in: Circle())
+        } else {
+            glyph
+                .background(Ink.surfaceRaised, in: Circle())
+                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
+        }
     }
 }
 

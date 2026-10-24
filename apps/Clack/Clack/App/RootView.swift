@@ -21,23 +21,20 @@ struct RootView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Ink.bg.ignoresSafeArea()
-            // The screens get the space above the tab bar, so full-bleed ones (the maps) end at it.
-            VStack(spacing: 0) {
-                ZStack {
-                    // Explore is built at launch and kept: its map, trains and where you were are there the moment
-                    // you open it, instead of starting from scratch each time.
-                    stack(.explore) { ExploreScreen() }
-                        .opacity(router.tab == .explore ? 1 : 0)
-                        .allowsHitTesting(router.tab == .explore)
-                        .accessibilityHidden(router.tab != .explore)
-                    switch router.tab {
-                    case .trips: stack(.trips) { TripsScreen() }
-                    case .explore: EmptyView()
-                    case .passport: stack(.passport) { PassportScreen() }
-                    }
-                }
-                TabBar(selection: $router.tab)
+            // The system's tab bar (Liquid Glass on iOS 26). Each tab keeps its screen and stack while you're on another,
+            // so Explore's map and trains are there the moment you come back.
+            TabView(selection: $router.tab) {
+                stack(.trips) { TripsScreen() }
+                    .tabItem { tabLabel(.trips, icon: "train-front") }
+                    .tag(PrimaryTab.trips)
+                stack(.explore) { ExploreScreen() }
+                    .tabItem { tabLabel(.explore, icon: "compass") }
+                    .tag(PrimaryTab.explore)
+                stack(.passport) { PassportScreen() }
+                    .tabItem { tabLabel(.passport, icon: "stamp") }
+                    .tag(PrimaryTab.passport)
             }
+            .tint(Ink.accentInk)
 
             if app.isOffline {
                 OfflineBanner().transition(.opacity)
@@ -181,6 +178,15 @@ struct RootView: View {
         guard (try? FileManager.default.copyItem(at: url, to: copy)) != nil else { return }
         router.addRequest = nil
         router.ticketFile = TicketFile(url: copy, name: url.lastPathComponent)
+    }
+
+    /// A tab's label: its name and its Lucide icon (the thin cut, as before).
+    private func tabLabel(_ tab: PrimaryTab, icon: String) -> some View {
+        Label {
+            Text(app.l10n.t("nav.\(tab.rawValue)"))
+        } icon: {
+            Image("lucide-\(icon)-thin", bundle: ClackDesignBundle.bundle).renderingMode(.template)
+        }
     }
 
     /// One tab's stack: its root screen, and whatever has been pushed onto it (kept when you switch tabs).

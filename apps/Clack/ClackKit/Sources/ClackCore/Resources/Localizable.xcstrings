@@ -5139,6 +5139,23 @@
         }
       }
     },
+    "detail.more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More actions"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fler åtgärder"
+          }
+        }
+      }
+    },
     "detail.noLiveData" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11381,13 +11398,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Didn’t take this train?"
+            "value" : "I didn’t take this train"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Åkte du inte med tåget?"
+            "value" : "Jag åkte inte med tåget"
           }
         }
       }

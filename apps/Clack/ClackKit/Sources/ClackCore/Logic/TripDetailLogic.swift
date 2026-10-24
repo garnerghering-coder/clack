@@ -107,14 +107,13 @@ public nonisolated enum TripDetailLogic {
         /// "Get alerts for this train?": only before, once.
         case alertsPrompt
         case about
-        case actions
     }
 
     public static func sections(_ stage: Stage) -> [Section] {
         switch stage {
-        case .before: [.countdown, .risk, .times, .directions, .alertsPrompt, .stops, .connections, .about, .actions]
-        case .during: [.live, .times, .stops, .connections, .about, .actions]
-        case .after: [.result, .stops, .about, .actions]
+        case .before: [.countdown, .risk, .times, .directions, .alertsPrompt, .stops, .connections, .about]
+        case .during: [.live, .times, .stops, .connections, .about]
+        case .after: [.result, .stops, .about]
         }
     }
 

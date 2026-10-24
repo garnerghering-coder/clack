@@ -52,7 +52,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 **Operator colors.** Each operator has one brand color used for the route line, the badge and timeline accents. Do not guess exact brand hex values. Use this approach: ship a curated palette of 12 luminous colors that read well on dark, assign by operator id (stable), and add explicit overrides for the biggest operators (SJ, SL, Skånetrafiken, Öresundståg, Snälltåget, MTR Express, Vy, Mälartåg, Norrtåg, Västtrafik/Västtågen) after checking each operator's public brand page. Always check contrast of the color against `surface`. Operator colors never replace delay colors.
 
 ### 2.2 Typography
-- UI: **Inter** (fallback system UI font). Use `font-variant-numeric: tabular-nums` for every time, delay and stat so digits don't jitter.
+- UI text: **Inter**. Controls (buttons, chips, segmented controls, tabs, menus) use the **system font (SF)** at the system's sizes, as in Apple's own apps (owner, 2026-10-25). Use `font-variant-numeric: tabular-nums` for every time, delay and stat so digits don't jitter.
 - Big numbers (times on trip detail, Passport hero): Inter Tight or Space Grotesk, weight 600–700, in split-flap tiles (§10).
 - Scale: Display 40/44, Title 28/34, Headline 20/26, Body 16/22, Caption 13/18, Micro 11/14. Use real iOS-style large titles on the main tabs.
 - Station names: Body weight 600. Train numbers and codes: caption weight 600, letter-spacing +0.02em.
@@ -61,7 +61,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 - 4px spacing grid; 16px screen gutters.
 - Radii, one scale (owner, 2026-10-23): tags (platform) 6, small controls (34 px buttons, filter chips, date field) 10, buttons/inputs/segmented controls 12, cards 16, sheets 24 (top corners), operator badge 10. Circles only for icon buttons, the FAB and dots. Nothing is a full pill.
 - Status is written, not boxed (owner, 2026-10-23: "tiny pill box with a bit of text"): delay, Live, GPS/estimated, speed, Planned/Arrived, category, notices are coloured or grey text in a line, with a dot or icon where it helps. Delay colours have darker "ink" versions for light mode. Only over a map does a status get a backing (a glass label, radius 10).
-- Buttons: primary is a yellow fill, secondary a raised surface with a hairline; both radius 12, the same as inputs and the segmented control.
+- Buttons are the system's (owner, 2026-10-25: "they should feel like Apple buttons"): primary is bordered-prominent in signal yellow with black type, secondary bordered with a quiet grey fill, destructive bordered in red; system control sizes, radius 12 (10 small). Paired or stacked actions are the same width. Rare actions (refresh, delete, "I didn't take this train") go in the system's `…` menu, not in a row of buttons. Floating controls over a map and the header's round icon buttons are Liquid Glass (iOS 26). The segmented control and the tab bar are the system's.
 - Depth is mostly color and hairlines, not shadows. Floating elements (FAB, sheet) get a soft shadow (`0 8px 24px` at 45% black on dark, 12% on light).
 - Icons: Lucide, 20px, 1.75 stroke.
 
@@ -95,7 +95,7 @@ Shared pieces, one spec each; the screens use these instead of their own copies.
 
 ## 3. Navigation & layout
 
-Bottom tab bar with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
+The system's bottom tab bar (Liquid Glass on iOS 26) with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
 
 ## 4. Screen: Trips (home) — P0
 

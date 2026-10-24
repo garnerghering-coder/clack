@@ -105,7 +105,6 @@ struct TrainDetailSheet: View {
                         LucideIcon(name: following ? "check" : "eye", size: 16)
                         Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
                     }
-                    .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.clack(wide: true))
                 .disabled(busy)

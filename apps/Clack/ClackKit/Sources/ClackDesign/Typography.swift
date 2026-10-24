@@ -37,6 +37,8 @@ public struct TextRole {
     public var tracking: CGFloat = 0
     public var uppercase = false
     public var display = false
+    /// The system font (SF) at the text style's own size: controls (buttons, chips, segments, tabs), as in Apple's apps.
+    public var system = false
     public var style: Font.TextStyle = .body
 
     // Titles
@@ -52,9 +54,9 @@ public struct TextRole {
     public static let body = TextRole(size: 16, lineHeight: 22)
     public static let rowTitle = TextRole(size: 16, lineHeight: 22, weight: .semibold)
     public static let settingsRow = TextRole(size: 16, lineHeight: 22, weight: .medium)
-    public static let button = TextRole(size: 16, lineHeight: 22, weight: .semibold)
-    public static let buttonSmall = TextRole(size: 14, lineHeight: 20, weight: .semibold, style: .subheadline)
-    public static let chipButton = TextRole(size: 14, lineHeight: 20, weight: .semibold, style: .subheadline)
+    public static let button = TextRole(size: 17, lineHeight: 22, weight: .semibold, system: true)
+    public static let buttonSmall = TextRole(size: 15, lineHeight: 20, weight: .semibold, system: true, style: .subheadline)
+    public static let chipButton = TextRole(size: 15, lineHeight: 20, weight: .medium, system: true, style: .subheadline)
     public static let banner = TextRole(size: 14, lineHeight: 20, weight: .medium, style: .subheadline)
     public static let delay = TextRole(size: 14, lineHeight: 18, weight: .bold, style: .subheadline)
     public static let stopName = TextRole(size: 14, lineHeight: 18, style: .subheadline)
@@ -71,7 +73,7 @@ public struct TextRole {
     public static let captionUpper = TextRole(size: 11, lineHeight: 14, weight: .semibold, tracking: 0.06, uppercase: true, style: .caption2)
     /// Micro (DESIGN §2.2: 11/14): tags over maps, small counts.
     public static let micro = TextRole(size: 11, lineHeight: 14, style: .caption2)
-    public static let tab = TextRole(size: 11, lineHeight: 14, weight: .semibold, style: .caption2)
+    public static let tab = TextRole(size: 10, lineHeight: 12, weight: .semibold, system: true, style: .caption2)
     public static let mapAttribution = TextRole(size: 10, lineHeight: 12, style: .caption2)
     public static let splashTagline = TextRole(size: 13, lineHeight: 18, weight: .semibold, tracking: 0.22, style: .footnote)
     // Big numbers, in Space Grotesk
@@ -85,16 +87,18 @@ public struct TextRole {
     public static let bigUnit = TextRole(size: 22, lineHeight: 26, display: true, style: .title2)
 
     public var font: Font {
-        display ? ClackFont.grotesk(size, relativeTo: style) : ClackFont.inter(size, weight, relativeTo: style)
+        if system { return Font.system(style).weight(weight) }
+        return display ? ClackFont.grotesk(size, relativeTo: style) : ClackFont.inter(size, weight, relativeTo: style)
     }
 
-    public init(size: CGFloat, lineHeight: CGFloat, weight: Font.Weight = .regular, tracking: CGFloat = 0, uppercase: Bool = false, display: Bool = false, style: Font.TextStyle = .body) {
+    public init(size: CGFloat, lineHeight: CGFloat, weight: Font.Weight = .regular, tracking: CGFloat = 0, uppercase: Bool = false, display: Bool = false, system: Bool = false, style: Font.TextStyle = .body) {
         self.size = size
         self.lineHeight = lineHeight
         self.weight = weight
         self.tracking = tracking
         self.uppercase = uppercase
         self.display = display
+        self.system = system
         self.style = style
     }
 }
@@ -107,7 +111,7 @@ private struct RoleModifier: ViewModifier {
             .font(role.font)
             .tracking(role.tracking * role.size)
             // The web sets a line height; SwiftUI spaces lines by what's added to the font's own.
-            .lineSpacing(max(0, role.lineHeight - role.size * 1.21))
+            .lineSpacing(role.system ? 0 : max(0, role.lineHeight - role.size * 1.21))
             .textCase(role.uppercase ? .uppercase : nil)
     }
 }

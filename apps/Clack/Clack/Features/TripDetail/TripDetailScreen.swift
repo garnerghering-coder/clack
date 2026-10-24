@@ -162,7 +162,8 @@ struct TripDetailScreen: View {
         }
         .ignoresSafeArea(edges: .top)
         .scrollBounceBehavior(.basedOnSize)
-        .refreshable { await load() }
+        // Pull to refresh asks the sources for fresh times (a saved trip just reloads).
+        .refreshable { await (detail.leg.status == .snapshotted ? load() : refresh()) }
         #if DEBUG
         // `-scrollTo stops` (or times, about, train, onboard, activity, details) scrolls there on launch, to check a
         // section; the last four open "About this train" first.
@@ -200,6 +201,9 @@ struct TripDetailScreen: View {
             tripMap(detail, tracking: tracking, height: height, top: top)
             MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
                 .padding(.leading, 16).padding(.top, top + 12)
+            moreMenu(detail.leg)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing, 16).padding(.top, top + 12)
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
@@ -273,7 +277,6 @@ struct TripDetailScreen: View {
         case .directions: directions(detail)
         case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
-        case .actions: actions(detail.leg)
         }
     }
 
@@ -411,21 +414,25 @@ struct TripDetailScreen: View {
                 Button(l10n.t("record.yes")) { Task { await answer(.yes) } }.buttonStyle(.clack(.primary, small: true))
                 Button(l10n.t("record.no")) { Task { await answer(.no) } }.buttonStyle(.clack(small: true))
             }
-            if l.ride == .auto || l.ride == .confirmed {
-                Button {
-                    router.tab = .passport
-                } label: {
-                    HStack(spacing: 4) {
-                        LucideIcon(name: "stamp", size: 14)
-                        Text(l10n.t("detail.seePassport"))
-                    }
-                }
-                .buttonStyle(LinkButtonStyle())
-                Button(l10n.t("record.correctNo")) { Task { await answer(.no) } }.buttonStyle(LinkButtonStyle())
-            }
             if l.ride == .notTaken {
                 Button(l10n.t("record.undo")) { Task { await answer(.undo) } }.buttonStyle(LinkButtonStyle())
             }
+        }
+        // A trip that counts leads to the Passport, as a row (correcting it is in the … menu).
+        if l.ride == .auto || l.ride == .confirmed {
+            Button {
+                router.tab = .passport
+            } label: {
+                HStack(spacing: 10) {
+                    LucideIcon(name: "stamp", size: 18).foregroundStyle(Ink.accentInk)
+                    Text(l10n.t("detail.seePassport")).clack(.rowTitle).foregroundStyle(Ink.text)
+                    Spacer(minLength: 8)
+                    LucideIcon(name: "chevron-right", size: 16).foregroundStyle(Ink.text3)
+                }
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -566,30 +573,23 @@ struct TripDetailScreen: View {
         }
     }
 
-    private func actions(_ l: Leg) -> some View {
-        HStack(spacing: 12) {
+    /// The trip's less common actions, in the system's menu over the map: fresh times, "I didn't take this train"
+    /// and deleting the trip.
+    private func moreMenu(_ l: Leg) -> some View {
+        Menu {
             if l.status != .snapshotted {
-                Button {
-                    Task { await refresh() }
-                } label: {
-                    HStack(spacing: 8) {
-                        LucideIcon(name: "refresh-cw", size: 16)
-                        Text(l10n.t("detail.refresh"))
-                    }
-                }
-                .buttonStyle(.clack())
-                .disabled(busy)
+                Button { Task { await refresh() } } label: { Label(l10n.t("detail.refresh"), systemImage: "arrow.clockwise") }
+                    .disabled(busy)
             }
-            Button {
-                confirmDelete = true
-            } label: {
-                HStack(spacing: 8) {
-                    LucideIcon(name: "trash", size: 16)
-                    Text(l10n.t("detail.delete"))
-                }
+            if l.ride == .auto || l.ride == .confirmed {
+                Button { Task { await answer(.no) } } label: { Label(l10n.t("record.correctNo"), systemImage: "xmark.circle") }
             }
-            .buttonStyle(.clack(.danger))
+            Divider()
+            Button(role: .destructive) { confirmDelete = true } label: { Label(l10n.t("detail.delete"), systemImage: "trash") }
+        } label: {
+            MapButtonFace(icon: "", symbol: "ellipsis")
         }
+        .accessibilityLabel(l10n.t("detail.more"))
     }
 }
 

@@ -85,10 +85,11 @@ struct PassportScreen: View {
                 VStack(spacing: 12) {
                     Text(l10n.t("passport.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
                     Text(l10n.t("passport.emptyHow")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
-                    HStack(spacing: 12) {
-                        Button(l10n.t("trips.findTrain")) { router.openAdd() }.buttonStyle(.clack(.primary))
-                        Button(l10n.t("trips.exploreTrains")) { router.tab = .explore }.buttonStyle(.clack())
+                    VStack(spacing: 10) {
+                        Button(l10n.t("trips.findTrain")) { router.openAdd() }.buttonStyle(.clack(.primary, wide: true))
+                        Button(l10n.t("trips.exploreTrains")) { router.tab = .explore }.buttonStyle(.clack(wide: true))
                     }
+                    .frame(maxWidth: 320)
                 }
                 .frame(maxWidth: .infinity).padding(.top, 48)
             } else {

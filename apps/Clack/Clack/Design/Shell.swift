@@ -7,51 +7,6 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The bottom tab bar (AppShell.tsx, styles.css `.tabbar`): Trips, Explore, Passport. A glass-strong bar with a
-/// hairline on top; the active tab's label is `text`, its icon `accent-ink`; the others are `text-3`.
-struct TabBar: View {
-    @Environment(L10n.self) private var l10n
-    @Binding var selection: PrimaryTab
-
-    private static let items: [(tab: PrimaryTab, icon: String)] = [
-        (.trips, "train-front"), (.explore, "compass"), (.passport, "stamp"),
-    ]
-
-    var body: some View {
-        HStack(spacing: 0) {
-            ForEach(Self.items, id: \.tab) { item in
-                let active = item.tab == selection
-                Button {
-                    selection = item.tab
-                } label: {
-                    VStack(spacing: 3) {
-                        LucideIcon(name: item.icon, size: 22, thin: true)
-                            .foregroundStyle(active ? Ink.accentInk : Ink.text3)
-                        Text(l10n.t("nav.\(item.tab.rawValue)"))
-                            .clack(.tab)
-                            .foregroundStyle(active ? Ink.text : Ink.text3)
-                    }
-                    .textSelection(.disabled)
-                    .frame(maxWidth: .infinity, minHeight: 64)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityAddTraits(active ? .isSelected : [])
-            }
-        }
-        .background {
-            ZStack {
-                Rectangle().fill(.ultraThinMaterial)
-                Ink.glassStrong
-            }
-            .ignoresSafeArea(edges: .bottom)
-        }
-        .overlay(alignment: .top) {
-            Rectangle().fill(Ink.hairline).frame(height: 1)
-        }
-    }
-}
-
 /// `.page-header`: the large title with the actions on the right.
 struct PageHeader<Trailing: View>: View {
     let title: String

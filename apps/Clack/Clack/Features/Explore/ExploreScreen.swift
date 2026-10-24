@@ -24,12 +24,7 @@ struct ExploreScreen: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Ink.mapBg
-            if let basemap {
-                LiveMapView(controller: model.controller, base: Config.apiBase, withBasemap: basemap, dark: scheme == .dark)
-                    // Re-created when the theme changes: the basemap and every layer take their colours from it.
-                    .id("\(scheme == .dark)-\(basemap)")
-            }
+            Color.clear
             top
             if model.searching {
                 if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
@@ -40,6 +35,18 @@ struct ExploreScreen: View {
             if !model.searching { sheets }
         }
         .clipped()
+        // The map runs edge to edge, under the status bar and the glass tab bar; the controls stay in the safe area.
+        .background {
+            ZStack {
+                Ink.mapBg
+                if let basemap {
+                    LiveMapView(controller: model.controller, base: Config.apiBase, withBasemap: basemap, dark: scheme == .dark)
+                        // Re-created when the theme changes: the basemap and every layer take their colours from it.
+                        .id("\(scheme == .dark)-\(basemap)")
+                }
+            }
+            .ignoresSafeArea()
+        }
         .environment(model)
         .task {
             model.attach(app)
@@ -487,22 +494,20 @@ struct ExploreScreen: View {
                 LucideIcon(name: following ? "check" : "eye", size: 16)
                 Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
             }
-            .frame(maxWidth: .infinity, minHeight: 48)
         }
         .buttonStyle(.clack(wide: true))
-        .overlay(RoundedRectangle(cornerRadius: Radius.input, style: .continuous).strokeBorder(Ink.accent, lineWidth: following ? 1 : 0))
         .accessibilityAddTraits(following ? .isSelected : [])
     }
 
     @ViewBuilder
     private func planButton(legId: String?, trip: TrainTrip?) -> some View {
         if let legId {
-            Button { router.push(.trip(legId)) } label: { Text(l10n.t("liveMap.inYourTrips")).frame(maxWidth: .infinity, minHeight: 48) }
+            Button { router.push(.trip(legId)) } label: { Text(l10n.t("liveMap.inYourTrips")) }
                 .buttonStyle(.clack(.primary, wide: true))
         } else {
             Button {
                 if let trip { router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate)) }
-            } label: { Text(l10n.t("liveMap.plan")).frame(maxWidth: .infinity, minHeight: 48) }
+            } label: { Text(l10n.t("liveMap.plan")) }
                 .buttonStyle(.clack(.primary, wide: true))
                 .disabled(trip == nil)
         }

@@ -370,7 +370,8 @@ struct EmptyActions: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        HStack(spacing: 12) {
+        // Stacked and the same width, the main one first, as in the system's empty states.
+        VStack(spacing: 10) {
             Button {
                 router.openAdd()
             } label: {
@@ -379,7 +380,7 @@ struct EmptyActions: View {
                     Text(l10n.t("trips.findTrain"))
                 }
             }
-            .buttonStyle(.clack(.primary))
+            .buttonStyle(.clack(.primary, wide: true))
             Button {
                 router.tab = .explore
             } label: {
@@ -388,8 +389,9 @@ struct EmptyActions: View {
                     Text(l10n.t("trips.exploreTrains"))
                 }
             }
-            .buttonStyle(.clack())
+            .buttonStyle(.clack(wide: true))
         }
+        .frame(maxWidth: 320)
         .padding(.top, 4)
     }
 }
