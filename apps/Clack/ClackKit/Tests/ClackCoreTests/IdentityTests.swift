@@ -87,4 +87,16 @@ struct IdentityTests {
         let fresh = Identity.current(keychain: keychain)
         #expect(fresh != "a" && fresh != "b")
     }
+
+    @Test func theWidgetsReadTheIdButNeverMakeOne() {
+        // A widget before the app's first launch: no id, and none made (the app would then adopt it).
+        let empty = FakeKeychain()
+        #expect(Identity.existing(keychain: empty) == nil)
+        #expect(empty.sharedValue == nil && empty.legacyValue == nil)
+        #expect(Identity.existing(keychain: FakeKeychain(shared: "s", legacy: "l")) == "s")
+        // An old local id is read where it is, not moved.
+        let old = FakeKeychain(legacy: "l")
+        #expect(Identity.existing(keychain: old) == "l")
+        #expect(old.sharedValue == nil && old.legacyValue == "l")
+    }
 }

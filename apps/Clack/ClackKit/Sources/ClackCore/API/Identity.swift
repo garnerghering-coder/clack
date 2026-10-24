@@ -42,6 +42,15 @@ public nonisolated enum Identity {
         return fresh
     }
 
+    /// The id if this phone has one, without making or moving one. The widgets use this: only the app creates the id, so a
+    /// widget that can't read the Keychain shows its cache instead of fetching as a new, empty phone.
+    public static func existing(keychain: IdentityKeychain = SystemKeychain()) -> String? {
+        #if DEBUG
+        if let override = UserDefaults.standard.string(forKey: "userId"), !override.isEmpty { return override.lowercased() }
+        #endif
+        return keychain.readShared() ?? keychain.readLegacy()
+    }
+
     /// Forgets the id ("Delete my data"): the next `current()` makes a new one. Also clears the widgets' copy of the data.
     public static func delete(keychain: IdentityKeychain = SystemKeychain()) {
         keychain.deleteAll()
