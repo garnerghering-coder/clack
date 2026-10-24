@@ -5,6 +5,7 @@
 //  The year in rail: totals, top route, busiest month and every ride drawn on one map.
 //
 
+import ClackCore
 import SwiftUI
 import WidgetKit
 

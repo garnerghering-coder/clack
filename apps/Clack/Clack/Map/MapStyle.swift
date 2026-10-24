@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 
 /// The Clack basemap and route styling (DESIGN §2.4), dark and light, as MapLibre style objects: a port of

@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private let m = 60_000.0
 

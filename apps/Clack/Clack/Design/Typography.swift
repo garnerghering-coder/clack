@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Inter for text and Space Grotesk for big numbers and the split-flap digits (docs/SWIFT_PORT.md B6, DESIGN §2.2).

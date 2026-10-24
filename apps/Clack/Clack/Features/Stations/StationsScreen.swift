@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Station search (StationsPage.tsx): one field, favourites and recent stations when it's empty.

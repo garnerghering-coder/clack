@@ -1,0 +1,3170 @@
+[
+  {
+    "contents" : {
+      "guid" : "Workspace:/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit",
+      "name" : "ClackKit",
+      "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit",
+      "projects" : [
+        "c3bca92018eca2d614a841003d29ca6cfdd71b7273657e99ce4238c1b5db9b0b",
+        "44fedd9f969a1721e55b9b7f64752326c8c4e1c11715577b4762debacbf75e3f"
+      ]
+    },
+    "signature" : "71f88e65bd654c01e88324e3976fea841a6bbec2941ad895deb44916046b4ed7",
+    "type" : "workspace"
+  },
+  {
+    "contents" : {
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "CLANG_ENABLE_MODULES[__platform_filter=driverkit]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=ios-maccatalyst]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=ios;ios-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=macos]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=tvos;tvos-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=watchos;watchos-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=xros;xros-simulator]" : "YES",
+            "CODE_SIGNING_REQUIRED" : "NO",
+            "CODE_SIGN_IDENTITY" : "",
+            "COMPILER_WORKING_DIRECTORY" : "$(WORKSPACE_DIR)",
+            "COPY_PHASE_STRIP" : "NO",
+            "DEBUG_INFORMATION_FORMAT" : "dwarf",
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=driverkit]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=ios-maccatalyst]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=ios;ios-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=macos]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=tvos;tvos-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=watchos;watchos-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=xros;xros-simulator]" : "@rpath",
+            "ENABLE_NS_ASSERTIONS" : "YES",
+            "ENABLE_TESTABILITY" : "YES",
+            "ENABLE_TESTING_SEARCH_PATHS" : "YES",
+            "ENTITLEMENTS_REQUIRED" : "NO",
+            "GCC_OPTIMIZATION_LEVEL" : "0",
+            "GCC_PREPROCESSOR_DEFINITIONS" : [
+              "$(inherited)",
+              "SWIFT_PACKAGE",
+              "DEBUG=1"
+            ],
+            "INDEX_ENABLE_DATA_STORE" : "YES",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "KEEP_PRIVATE_EXTERNS" : "NO",
+            "LIBTOOL_NO_WARNING_FOR_NO_SYMBOLS" : "YES",
+            "LINKER_DRIVER" : "auto",
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "ONLY_ACTIVE_ARCH" : "YES",
+            "OTHER_CFLAGS" : [
+              "$(inherited)",
+              "-DXcode"
+            ],
+            "OTHER_LDRFLAGS" : [
+
+            ],
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-DXcode"
+            ],
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SKIP_INSTALL" : "YES",
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=ios;ios-simulator]" : [
+
+            ],
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=macos]" : [
+
+            ],
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=watchos;watchos-simulator]" : [
+
+            ],
+            "SUPPORTED_PLATFORMS" : [
+              "$(AVAILABLE_PLATFORMS)"
+            ],
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_PACKAGE",
+              "DEBUG"
+            ],
+            "SWIFT_INSTALL_OBJC_HEADER" : "NO",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "",
+            "SWIFT_OPTIMIZATION_LEVEL" : "-Onone",
+            "TARGETED_DEVICE_FAMILY" : "",
+            "TVOS_DEPLOYMENT_TARGET" : "15.0",
+            "USE_HEADERMAP" : "NO",
+            "WATCHOS_DEPLOYMENT_TARGET" : "10.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE:clackkit::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "CLANG_ENABLE_MODULES[__platform_filter=driverkit]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=ios-maccatalyst]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=ios;ios-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=macos]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=tvos;tvos-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=watchos;watchos-simulator]" : "YES",
+            "CLANG_ENABLE_MODULES[__platform_filter=xros;xros-simulator]" : "YES",
+            "CODE_SIGNING_REQUIRED" : "NO",
+            "CODE_SIGN_IDENTITY" : "",
+            "COMPILER_WORKING_DIRECTORY" : "$(WORKSPACE_DIR)",
+            "COPY_PHASE_STRIP" : "YES",
+            "DEBUG_INFORMATION_FORMAT" : "dwarf-with-dsym",
+            "DEPLOYMENT_POSTPROCESSING" : "YES",
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=driverkit]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=ios-maccatalyst]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=ios;ios-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=macos]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=tvos;tvos-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=watchos;watchos-simulator]" : "@rpath",
+            "DYLIB_INSTALL_NAME_BASE[__platform_filter=xros;xros-simulator]" : "@rpath",
+            "ENABLE_TESTING_SEARCH_PATHS" : "YES",
+            "ENTITLEMENTS_REQUIRED" : "NO",
+            "GCC_OPTIMIZATION_LEVEL" : "s",
+            "GCC_PREPROCESSOR_DEFINITIONS" : [
+              "$(inherited)",
+              "SWIFT_PACKAGE"
+            ],
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "KEEP_PRIVATE_EXTERNS" : "NO",
+            "LIBTOOL_NO_WARNING_FOR_NO_SYMBOLS" : "YES",
+            "LINKER_DRIVER" : "auto",
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "OTHER_CFLAGS" : [
+              "$(inherited)",
+              "-DXcode"
+            ],
+            "OTHER_LDRFLAGS" : [
+
+            ],
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-DXcode"
+            ],
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SKIP_INSTALL" : "YES",
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=ios;ios-simulator]" : [
+
+            ],
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=macos]" : [
+
+            ],
+            "SPECIALIZATION_SDK_OPTIONS[__platform_filter=watchos;watchos-simulator]" : [
+
+            ],
+            "SUPPORTED_PLATFORMS" : [
+              "$(AVAILABLE_PLATFORMS)"
+            ],
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_PACKAGE"
+            ],
+            "SWIFT_INSTALL_OBJC_HEADER" : "NO",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "",
+            "SWIFT_OPTIMIZATION_LEVEL" : "-Owholemodule",
+            "TARGETED_DEVICE_FAMILY" : "",
+            "TVOS_DEPLOYMENT_TARGET" : "15.0",
+            "USE_HEADERMAP" : "NO",
+            "WATCHOS_DEPLOYMENT_TARGET" : "10.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE:clackkit::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "defaultConfigurationName" : "Release",
+      "developmentRegion" : "en",
+      "groupTree" : {
+        "children" : [
+          {
+            "children" : [
+
+            ],
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_0",
+            "name" : "AdditionalFiles",
+            "path" : "/",
+            "sourceTree" : "<absolute>",
+            "type" : "group"
+          },
+          {
+            "children" : [
+
+            ],
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_1",
+            "name" : "Binaries",
+            "path" : "/",
+            "sourceTree" : "<absolute>",
+            "type" : "group"
+          },
+          {
+            "children" : [
+
+            ],
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_2",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests",
+            "sourceTree" : "<absolute>",
+            "type" : "group"
+          },
+          {
+            "fileType" : "file",
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_3",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests/Fixtures",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests/Fixtures",
+            "sourceTree" : "<absolute>",
+            "type" : "file"
+          },
+          {
+            "fileType" : "file",
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_4",
+            "name" : "$(CONFIGURATION_BUILD_DIR)/ClackKit_ClackCoreTests.bundle",
+            "path" : "$(CONFIGURATION_BUILD_DIR)/ClackKit_ClackCoreTests.bundle",
+            "sourceTree" : "<group>",
+            "type" : "file"
+          },
+          {
+            "fileType" : "file",
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_5",
+            "name" : "$(CONFIGURATION_BUILD_DIR)/ClackKit_ClackCore.bundle",
+            "path" : "$(CONFIGURATION_BUILD_DIR)/ClackKit_ClackCore.bundle",
+            "sourceTree" : "<group>",
+            "type" : "file"
+          },
+          {
+            "fileType" : "file",
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_6",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/en.json",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/en.json",
+            "sourceTree" : "<absolute>",
+            "type" : "file"
+          },
+          {
+            "fileType" : "file",
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_7",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/sv.json",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/sv.json",
+            "sourceTree" : "<absolute>",
+            "type" : "file"
+          },
+          {
+            "children" : [
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_0",
+                "name" : "API/APIClient.swift",
+                "path" : "API/APIClient.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_1",
+                "name" : "API/Config.swift",
+                "path" : "API/Config.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_2",
+                "name" : "API/Endpoints.swift",
+                "path" : "API/Endpoints.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_3",
+                "name" : "API/EventStream.swift",
+                "path" : "API/EventStream.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_4",
+                "name" : "API/Identity.swift",
+                "path" : "API/Identity.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_5",
+                "name" : "API/OfflineCache.swift",
+                "path" : "API/OfflineCache.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_6",
+                "name" : "L10n.swift",
+                "path" : "L10n.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_7",
+                "name" : "LiveActivity/TripActivityAttributes.swift",
+                "path" : "LiveActivity/TripActivityAttributes.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_8",
+                "name" : "Logic/AddTrainLogic.swift",
+                "path" : "Logic/AddTrainLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_9",
+                "name" : "Logic/ArrivalLogic.swift",
+                "path" : "Logic/ArrivalLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_10",
+                "name" : "Logic/BoardLogic.swift",
+                "path" : "Logic/BoardLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_11",
+                "name" : "Logic/Delay.swift",
+                "path" : "Logic/Delay.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_12",
+                "name" : "Logic/Disruption.swift",
+                "path" : "Logic/Disruption.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_13",
+                "name" : "Logic/ExploreLogic.swift",
+                "path" : "Logic/ExploreLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_14",
+                "name" : "Logic/Format.swift",
+                "path" : "Logic/Format.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_15",
+                "name" : "Logic/Hours.swift",
+                "path" : "Logic/Hours.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_16",
+                "name" : "Logic/Landing.swift",
+                "path" : "Logic/Landing.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_17",
+                "name" : "Logic/LiveStatus.swift",
+                "path" : "Logic/LiveStatus.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_18",
+                "name" : "Logic/OfflineEstimate.swift",
+                "path" : "Logic/OfflineEstimate.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_19",
+                "name" : "Logic/Onboard.swift",
+                "path" : "Logic/Onboard.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_20",
+                "name" : "Logic/Polyline.swift",
+                "path" : "Logic/Polyline.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_21",
+                "name" : "Logic/Progress.swift",
+                "path" : "Logic/Progress.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_22",
+                "name" : "Logic/StationRouting.swift",
+                "path" : "Logic/StationRouting.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_23",
+                "name" : "Logic/StationSceneLogic.swift",
+                "path" : "Logic/StationSceneLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_24",
+                "name" : "Logic/TicketPending.swift",
+                "path" : "Logic/TicketPending.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_25",
+                "name" : "Logic/TicketReader.swift",
+                "path" : "Logic/TicketReader.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_26",
+                "name" : "Logic/Tickets.swift",
+                "path" : "Logic/Tickets.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_27",
+                "name" : "Logic/TrainArt.swift",
+                "path" : "Logic/TrainArt.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_28",
+                "name" : "Logic/TripDetailLogic.swift",
+                "path" : "Logic/TripDetailLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_29",
+                "name" : "Logic/TripsLogic.swift",
+                "path" : "Logic/TripsLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_30",
+                "name" : "Models/Instant.swift",
+                "path" : "Models/Instant.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_31",
+                "name" : "Models/Legs.swift",
+                "path" : "Models/Legs.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_32",
+                "name" : "Models/Live.swift",
+                "path" : "Models/Live.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_33",
+                "name" : "Models/LiveMap.swift",
+                "path" : "Models/LiveMap.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_34",
+                "name" : "Models/OpenEnum.swift",
+                "path" : "Models/OpenEnum.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_35",
+                "name" : "Models/Passport.swift",
+                "path" : "Models/Passport.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_36",
+                "name" : "Models/Reference.swift",
+                "path" : "Models/Reference.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_37",
+                "name" : "Models/Search.swift",
+                "path" : "Models/Search.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_38",
+                "name" : "Models/Settings.swift",
+                "path" : "Models/Settings.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_39",
+                "name" : "Models/StationMap.swift",
+                "path" : "Models/StationMap.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_40",
+                "name" : "Models/StationMapLink.swift",
+                "path" : "Models/StationMapLink.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_41",
+                "name" : "Models/StopName.swift",
+                "path" : "Models/StopName.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_42",
+                "name" : "Models/Timetable.swift",
+                "path" : "Models/Timetable.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_43",
+                "name" : "Widgets/WidgetSnapshot.swift",
+                "path" : "Widgets/WidgetSnapshot.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              }
+            ],
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_8",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore",
+            "sourceTree" : "<absolute>",
+            "type" : "group"
+          },
+          {
+            "children" : [
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_0",
+                "name" : "API/APIClient.swift",
+                "path" : "API/APIClient.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_1",
+                "name" : "API/Config.swift",
+                "path" : "API/Config.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_2",
+                "name" : "API/Endpoints.swift",
+                "path" : "API/Endpoints.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_3",
+                "name" : "API/EventStream.swift",
+                "path" : "API/EventStream.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_4",
+                "name" : "API/Identity.swift",
+                "path" : "API/Identity.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_5",
+                "name" : "API/OfflineCache.swift",
+                "path" : "API/OfflineCache.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_6",
+                "name" : "L10n.swift",
+                "path" : "L10n.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_7",
+                "name" : "LiveActivity/TripActivityAttributes.swift",
+                "path" : "LiveActivity/TripActivityAttributes.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_8",
+                "name" : "Logic/AddTrainLogic.swift",
+                "path" : "Logic/AddTrainLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_9",
+                "name" : "Logic/ArrivalLogic.swift",
+                "path" : "Logic/ArrivalLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_10",
+                "name" : "Logic/BoardLogic.swift",
+                "path" : "Logic/BoardLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_11",
+                "name" : "Logic/Delay.swift",
+                "path" : "Logic/Delay.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_12",
+                "name" : "Logic/Disruption.swift",
+                "path" : "Logic/Disruption.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_13",
+                "name" : "Logic/ExploreLogic.swift",
+                "path" : "Logic/ExploreLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_14",
+                "name" : "Logic/Format.swift",
+                "path" : "Logic/Format.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_15",
+                "name" : "Logic/Hours.swift",
+                "path" : "Logic/Hours.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_16",
+                "name" : "Logic/Landing.swift",
+                "path" : "Logic/Landing.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_17",
+                "name" : "Logic/LiveStatus.swift",
+                "path" : "Logic/LiveStatus.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_18",
+                "name" : "Logic/OfflineEstimate.swift",
+                "path" : "Logic/OfflineEstimate.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_19",
+                "name" : "Logic/Onboard.swift",
+                "path" : "Logic/Onboard.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_20",
+                "name" : "Logic/Polyline.swift",
+                "path" : "Logic/Polyline.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_21",
+                "name" : "Logic/Progress.swift",
+                "path" : "Logic/Progress.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_22",
+                "name" : "Logic/StationRouting.swift",
+                "path" : "Logic/StationRouting.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_23",
+                "name" : "Logic/StationSceneLogic.swift",
+                "path" : "Logic/StationSceneLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_24",
+                "name" : "Logic/TicketPending.swift",
+                "path" : "Logic/TicketPending.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_25",
+                "name" : "Logic/TicketReader.swift",
+                "path" : "Logic/TicketReader.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_26",
+                "name" : "Logic/Tickets.swift",
+                "path" : "Logic/Tickets.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_27",
+                "name" : "Logic/TrainArt.swift",
+                "path" : "Logic/TrainArt.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_28",
+                "name" : "Logic/TripDetailLogic.swift",
+                "path" : "Logic/TripDetailLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_29",
+                "name" : "Logic/TripsLogic.swift",
+                "path" : "Logic/TripsLogic.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_30",
+                "name" : "Models/Instant.swift",
+                "path" : "Models/Instant.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_31",
+                "name" : "Models/Legs.swift",
+                "path" : "Models/Legs.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_32",
+                "name" : "Models/Live.swift",
+                "path" : "Models/Live.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_33",
+                "name" : "Models/LiveMap.swift",
+                "path" : "Models/LiveMap.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_34",
+                "name" : "Models/OpenEnum.swift",
+                "path" : "Models/OpenEnum.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_35",
+                "name" : "Models/Passport.swift",
+                "path" : "Models/Passport.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_36",
+                "name" : "Models/Reference.swift",
+                "path" : "Models/Reference.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_37",
+                "name" : "Models/Search.swift",
+                "path" : "Models/Search.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_38",
+                "name" : "Models/Settings.swift",
+                "path" : "Models/Settings.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_39",
+                "name" : "Models/StationMap.swift",
+                "path" : "Models/StationMap.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_40",
+                "name" : "Models/StationMapLink.swift",
+                "path" : "Models/StationMapLink.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_41",
+                "name" : "Models/StopName.swift",
+                "path" : "Models/StopName.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_42",
+                "name" : "Models/Timetable.swift",
+                "path" : "Models/Timetable.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_43",
+                "name" : "Widgets/WidgetSnapshot.swift",
+                "path" : "Widgets/WidgetSnapshot.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              }
+            ],
+            "guid" : "PACKAGE:clackkit::MAINGROUP::REF_9",
+            "name" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore",
+            "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Sources/ClackCore",
+            "sourceTree" : "<absolute>",
+            "type" : "group"
+          }
+        ],
+        "guid" : "PACKAGE:clackkit::MAINGROUP",
+        "name" : "",
+        "path" : "",
+        "sourceTree" : "<group>",
+        "type" : "group"
+      },
+      "guid" : "PACKAGE:clackkit",
+      "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Package.swift",
+      "projectDirectory" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit",
+      "projectIsPackage" : "true",
+      "projectName" : "ClackKit",
+      "targets" : [
+        "d0a62f34d542a7ff5d6f3b4a8e214b8a3a2846e7200269a3d9b2238849af84f7",
+        "c0edbe8788b0cbdcf7973f403e19a7365ec991c0b15354f7d3442625bf829644",
+        "ce8090a624ed44f5a2088bf162b631ce91ee238a41ed2f4e44905a913f036441",
+        "c92cb12ce34ba686acefee0d26974ea3f3950421b512c78abb85f27ec9ac6e8f",
+        "4a0e99fa7d65493f6d1f8cd441f576d603ec3b6383c2951d8f8c18f49d62e55b",
+        "acf06e9445788bd879149ff0cb2951a5af2a47f86d30c7803f7dcfca01811267",
+        "c4927b5256fdde0885383ba326bb7d5ee9acf8af950c9b550610aca1f3374d56",
+        "a73e541ab82746211ca50cce7c8ca8df9b43b96ee4b3f6dac2abe90cf6b87465"
+      ]
+    },
+    "signature" : "c3bca92018eca2d614a841003d29ca6cfdd71b7273657e99ce4238c1b5db9b0b",
+    "type" : "project"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "APPLE_TEST_BUNDLE_RPATH" : "$(APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE:default=NO))",
+            "APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_NO" : "@loader_path/../../..",
+            "APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_YES" : "@loader_path/../..",
+            "BUILD_SERVER_PROTOCOL_TARGET_TAGS" : [
+              "$(inherited)",
+              "test"
+            ],
+            "COREML_CODEGEN_LANGUAGE" : "Objective-C",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "HEADER_SEARCH_PATHS" : [
+              "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests/include",
+              "$(inherited)"
+            ],
+            "INDEX_ENABLE_DATA_STORE" : "YES",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "LD_RUNPATH_SEARCH_PATHS" : [
+              "$(RPATH_ORIGIN)/Frameworks",
+              "$(RPATH_ORIGIN)/../Frameworks",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=driverkit]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=ios-maccatalyst]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=ios;ios-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=macos]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=tvos;tvos-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=watchos;watchos-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=xros;xros-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCoreTests",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests",
+            "PRODUCT_MODULE_NAME" : "ClackCoreTests",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCoreTests.symbolgraphs",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCoreTests.symbolgraphs",
+            "TARGET_NAME" : "ClackCoreTests",
+            "TARGET_TEMP_DIR_SUFFIX" : "-p",
+            "TVOS_DEPLOYMENT_TARGET" : "17.0",
+            "WATCHOS_DEPLOYMENT_TARGET" : "26.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "APPLE_TEST_BUNDLE_RPATH" : "$(APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE:default=NO))",
+            "APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_NO" : "@loader_path/../../..",
+            "APPLE_TEST_BUNDLE_RPATH_SHALLOW_BUNDLE_YES" : "@loader_path/../..",
+            "BUILD_SERVER_PROTOCOL_TARGET_TAGS" : [
+              "$(inherited)",
+              "test"
+            ],
+            "COREML_CODEGEN_LANGUAGE" : "Objective-C",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "HEADER_SEARCH_PATHS" : [
+              "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Tests/ClackCoreTests/include",
+              "$(inherited)"
+            ],
+            "INDEX_ENABLE_DATA_STORE" : "YES",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "LD_RUNPATH_SEARCH_PATHS" : [
+              "$(RPATH_ORIGIN)/Frameworks",
+              "$(RPATH_ORIGIN)/../Frameworks",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=driverkit]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=ios-maccatalyst]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=ios;ios-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=macos]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=tvos;tvos-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=watchos;watchos-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "LD_RUNPATH_SEARCH_PATHS[__platform_filter=xros;xros-simulator]" : [
+              "$(APPLE_TEST_BUNDLE_RPATH)",
+              "$(inherited)"
+            ],
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCoreTests",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests",
+            "PRODUCT_MODULE_NAME" : "ClackCoreTests",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCoreTests.symbolgraphs",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCoreTests.symbolgraphs",
+            "TARGET_NAME" : "ClackCoreTests",
+            "TARGET_TEMP_DIR_SUFFIX" : "-p",
+            "TVOS_DEPLOYMENT_TARGET" : "17.0",
+            "WATCHOS_DEPLOYMENT_TARGET" : "26.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_4",
+              "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            }
+          ],
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.resources"
+        },
+        {
+          "buildFiles" : [
+            {
+              "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_1::0",
+              "platformFilters" : [
+
+              ],
+              "targetReference" : "PACKAGE-TARGET:ClackCore"
+            }
+          ],
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests::BUILDPHASE_1",
+          "type" : "com.apple.buildphase.frameworks"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-TARGET:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests",
+      "name" : "ClackCoreTests-product",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests",
+        "name" : "$(EXECUTABLE_NAME)",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.bundle.unit-test",
+      "type" : "standard"
+    },
+    "signature" : "d0a62f34d542a7ff5d6f3b4a8e214b8a3a2846e7200269a3d9b2238849af84f7",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "None",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "EXECUTABLE_NAME" : "",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "resource",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests.resources",
+            "PRODUCT_MODULE_NAME" : "ClackKit_ClackCoreTests",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackKit_ClackCoreTests",
+            "TARGET_TEMP_DIR_SUFFIX" : "-b"
+          },
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "None",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "EXECUTABLE_NAME" : "",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "resource",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests.resources",
+            "PRODUCT_MODULE_NAME" : "ClackKit_ClackCoreTests",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackKit_ClackCoreTests",
+            "TARGET_TEMP_DIR_SUFFIX" : "-b"
+          },
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_3",
+              "guid" : "PACKAGE-RESOURCE:ClackCoreTests::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false",
+              "resourceRule" : "copy"
+            }
+          ],
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.resources"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+
+      ],
+      "guid" : "PACKAGE-RESOURCE:ClackCoreTests",
+      "name" : "ClackKit_ClackCoreTests",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-RESOURCE:ClackCoreTests",
+        "name" : "ClackKit_ClackCoreTests",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.bundle",
+      "type" : "standard"
+    },
+    "signature" : "c0edbe8788b0cbdcf7973f403e19a7365ec991c0b15354f7d3442625bf829644",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "LD_RUNPATH_SEARCH_PATHS" : [
+              "$(inherited)",
+              "$(RPATH_ORIGIN)"
+            ],
+            "LINKER_DRIVER" : "swiftc",
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests-test-runner",
+            "PRODUCT_MODULE_NAME" : "ClackCoreTests_test_runner",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "NO",
+            "SWIFT_VERSION" : "5.0",
+            "TARGET_NAME" : "ClackCoreTests-test-runner",
+            "TVOS_DEPLOYMENT_TARGET" : "17.0",
+            "WATCHOS_DEPLOYMENT_TARGET" : "26.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "LD_RUNPATH_SEARCH_PATHS" : [
+              "$(inherited)",
+              "$(RPATH_ORIGIN)"
+            ],
+            "LINKER_DRIVER" : "swiftc",
+            "MACOSX_DEPLOYMENT_TARGET" : "14.0",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCoreTests-test-runner",
+            "PRODUCT_MODULE_NAME" : "ClackCoreTests_test_runner",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "NO",
+            "SWIFT_VERSION" : "5.0",
+            "TARGET_NAME" : "ClackCoreTests-test-runner",
+            "TVOS_DEPLOYMENT_TARGET" : "17.0",
+            "WATCHOS_DEPLOYMENT_TARGET" : "26.0",
+            "XROS_DEPLOYMENT_TARGET" : "1.0"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+
+          ],
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.sources"
+        },
+        {
+          "buildFiles" : [
+            {
+              "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner::BUILDPHASE_1::0",
+              "platformFilters" : [
+
+              ],
+              "targetReference" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests"
+            }
+          ],
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner::BUILDPHASE_1",
+          "type" : "com.apple.buildphase.frameworks"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner",
+      "name" : "ClackCoreTests-test-runner",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-TARGET:ClackCoreTests_test_runner",
+        "name" : "ClackCoreTests-test-runner",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.tool.swiftpm-test-runner",
+      "type" : "standard"
+    },
+    "signature" : "ce8090a624ed44f5a2088bf162b631ce91ee238a41ed2f4e44905a913f036441",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "EXECUTABLE_PREFIX" : "lib",
+            "EXECUTABLE_PREFIX[__platform_filter=windows-msvc]" : "",
+            "PRODUCT_NAME" : "ClackCore",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackCore-product",
+            "TARGET_TEMP_DIR_SUFFIX" : "-p",
+            "USES_SWIFTPM_UNSAFE_FLAGS" : "NO"
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "EXECUTABLE_PREFIX" : "lib",
+            "EXECUTABLE_PREFIX[__platform_filter=windows-msvc]" : "",
+            "PRODUCT_NAME" : "ClackCore",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackCore-product",
+            "TARGET_TEMP_DIR_SUFFIX" : "-p",
+            "USES_SWIFTPM_UNSAFE_FLAGS" : "NO"
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "targetReference" : "PACKAGE-TARGET:ClackCore"
+            }
+          ],
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.frameworks"
+        },
+        {
+          "buildFiles" : [
+
+          ],
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore::BUILDPHASE_1",
+          "type" : "com.apple.buildphase.sources"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-TARGET:ClackCore",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore",
+      "name" : "ClackCore-product",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore",
+        "name" : "$(EXECUTABLE_NAME)",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.library.static",
+      "type" : "standard"
+    },
+    "signature" : "c92cb12ce34ba686acefee0d26974ea3f3950421b512c78abb85f27ec9ac6e8f",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "Swift",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DEFINES_MODULE" : "YES",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "GENERATE_PRELINK_OBJECT_FILE" : "NO",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "MODULEMAP_FILE_CONTENTS" : "module ClackCore {\nheader \"ClackCore-Swift.h\"\nexport *\n}",
+            "MODULEMAP_PATH" : "$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCore",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore",
+            "PRODUCT_MODULE_NAME" : "ClackCore",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "STRIP_INSTALLED_PRODUCT" : "NO",
+            "SUPPORTS_TEXT_BASED_API" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_OBJC_INTERFACE_HEADER_DIR" : "$(GENERATED_MODULEMAP_DIR)",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "ClackCore-Swift.h",
+            "SWIFT_PACKAGE_NAME" : "clackkit",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TAPI_DYLIB_INSTALL_NAME" : "ClackCore",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TARGET_NAME" : "ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-t"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCore::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+              "EMBED_PACKAGE_RESOURCE_BUNDLE_NAMES" : [
+                "$(inherited)",
+                "ClackKit_ClackCore"
+              ],
+              "FRAMEWORK_SEARCH_PATHS" : [
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_RUNPATH_SEARCH_PATHS" : [
+                "$(RPATH_ORIGIN)",
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_WARN_DUPLICATE_LIBRARIES" : "NO",
+              "OTHER_CFLAGS" : [
+                "-fmodule-map-file=$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+                "$(inherited)"
+              ]
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "Swift",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DEFINES_MODULE" : "YES",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "GENERATE_PRELINK_OBJECT_FILE" : "NO",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "MODULEMAP_FILE_CONTENTS" : "module ClackCore {\nheader \"ClackCore-Swift.h\"\nexport *\n}",
+            "MODULEMAP_PATH" : "$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCore",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore",
+            "PRODUCT_MODULE_NAME" : "ClackCore",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "STRIP_INSTALLED_PRODUCT" : "NO",
+            "SUPPORTS_TEXT_BASED_API" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_OBJC_INTERFACE_HEADER_DIR" : "$(GENERATED_MODULEMAP_DIR)",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "ClackCore-Swift.h",
+            "SWIFT_PACKAGE_NAME" : "clackkit",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TAPI_DYLIB_INSTALL_NAME" : "ClackCore",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TARGET_NAME" : "ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-t"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCore::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+              "EMBED_PACKAGE_RESOURCE_BUNDLE_NAMES" : [
+                "$(inherited)",
+                "ClackKit_ClackCore"
+              ],
+              "FRAMEWORK_SEARCH_PATHS" : [
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_RUNPATH_SEARCH_PATHS" : [
+                "$(RPATH_ORIGIN)",
+                "$(inherited)"
+              ],
+              "LD_WARN_DUPLICATE_LIBRARIES" : "NO",
+              "OTHER_CFLAGS" : [
+                "-fmodule-map-file=$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+                "$(inherited)"
+              ]
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_0",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_1",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::1",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_2",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::2",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_3",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::3",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_4",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::4",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_5",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::5",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_6",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::6",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_7",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::7",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_8",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::8",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_9",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::9",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_10",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::10",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_11",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::11",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_12",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::12",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_13",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::13",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_14",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::14",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_15",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::15",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_16",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::16",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_17",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::17",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_18",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::18",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_19",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::19",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_20",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::20",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_21",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::21",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_22",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::22",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_23",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::23",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_24",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::24",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_25",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::25",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_26",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::26",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_27",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::27",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_28",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::28",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_29",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::29",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_30",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::30",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_31",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::31",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_32",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::32",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_33",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::33",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_34",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::34",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_35",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::35",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_36",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::36",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_37",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::37",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_38",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::38",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_39",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::39",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_40",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::40",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_41",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::41",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_42",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::42",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_8::REF_43",
+              "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0::43",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            }
+          ],
+          "guid" : "PACKAGE-TARGET:ClackCore::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.sources"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "dynamicTargetVariantGuid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic",
+      "guid" : "PACKAGE-TARGET:ClackCore",
+      "name" : "ClackCore",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-TARGET:ClackCore",
+        "name" : "$(EXECUTABLE_NAME)",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "org.swift.product-type.library.static",
+      "type" : "standard"
+    },
+    "signature" : "4a0e99fa7d65493f6d1f8cd441f576d603ec3b6383c2951d8f8c18f49d62e55b",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "None",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "EXECUTABLE_NAME" : "",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "resource",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore.resources",
+            "PRODUCT_MODULE_NAME" : "ClackKit_ClackCore",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackKit_ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-b"
+          },
+          "guid" : "PACKAGE-RESOURCE:ClackCore::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "None",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "EXECUTABLE_NAME" : "",
+            "GENERATE_INFOPLIST_FILE" : "YES",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "resource",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore.resources",
+            "PRODUCT_MODULE_NAME" : "ClackKit_ClackCore",
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "TARGET_NAME" : "ClackKit_ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-b"
+          },
+          "guid" : "PACKAGE-RESOURCE:ClackCore::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_6",
+              "guid" : "PACKAGE-RESOURCE:ClackCore::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false",
+              "resourceRule" : "process"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_7",
+              "guid" : "PACKAGE-RESOURCE:ClackCore::BUILDPHASE_0::1",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false",
+              "resourceRule" : "process"
+            }
+          ],
+          "guid" : "PACKAGE-RESOURCE:ClackCore::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.resources"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+
+      ],
+      "guid" : "PACKAGE-RESOURCE:ClackCore",
+      "name" : "ClackKit_ClackCore",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-RESOURCE:ClackCore",
+        "name" : "ClackKit_ClackCore",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.bundle",
+      "type" : "standard"
+    },
+    "signature" : "acf06e9445788bd879149ff0cb2951a5af2a47f86d30c7803f7dcfca01811267",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit-ClackKitPackageTests.ClackKitPackageTests::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "PACKAGE-PRODUCT:clackkit-ClackKitPackageTests.ClackKitPackageTests::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "PACKAGE-PRODUCT:clackkit-ClackKitPackageTests.ClackKitPackageTests",
+      "name" : "ClackKitPackageTests-product",
+      "type" : "aggregate"
+    },
+    "signature" : "a73e541ab82746211ca50cce7c8ca8df9b43b96ee4b3f6dac2abe90cf6b87465",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "approvedByUser" : "true",
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "Swift",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DEFINES_MODULE" : "YES",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "EXECUTABLE_PREFIX" : "lib",
+            "EXECUTABLE_PREFIX[__platform_filter=windows-msvc]" : "",
+            "GENERATE_EMBED_IN_CODE_ACCESSORS" : "YES",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "MODULEMAP_FILE_CONTENTS" : "module ClackCore {\nheader \"ClackCore-Swift.h\"\nexport *\n}",
+            "MODULEMAP_PATH" : "$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCore",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore",
+            "PRODUCT_MODULE_NAME" : "ClackCore",
+            "PRODUCT_NAME" : "ClackCore",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SUPPORTS_TEXT_BASED_API" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_OBJC_INTERFACE_HEADER_DIR" : "$(GENERATED_MODULEMAP_DIR)",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "ClackCore-Swift.h",
+            "SWIFT_PACKAGE_NAME" : "clackkit",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TARGET_NAME" : "ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-t"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+              "EMBED_PACKAGE_RESOURCE_BUNDLE_NAMES" : [
+                "$(inherited)",
+                "ClackKit_ClackCore"
+              ],
+              "FRAMEWORK_SEARCH_PATHS" : [
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_RUNPATH_SEARCH_PATHS" : [
+                "$(RPATH_ORIGIN)",
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_WARN_DUPLICATE_LIBRARIES" : "NO",
+              "OTHER_CFLAGS" : [
+                "-fmodule-map-file=$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+                "$(inherited)"
+              ]
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "COREML_CODEGEN_LANGUAGE" : "Swift",
+            "COREML_COMPILER_CONTAINER" : "swift-package",
+            "DEFINES_MODULE" : "YES",
+            "DOCC_EXTRACT_PROJECT_HEADERS_DOCUMENTATION" : "YES",
+            "EXECUTABLE_PREFIX" : "lib",
+            "EXECUTABLE_PREFIX[__platform_filter=windows-msvc]" : "",
+            "GENERATE_EMBED_IN_CODE_ACCESSORS" : "YES",
+            "GENERATE_RESOURCE_ACCESSORS" : "YES",
+            "MODULEMAP_FILE_CONTENTS" : "module ClackCore {\nheader \"ClackCore-Swift.h\"\nexport *\n}",
+            "MODULEMAP_PATH" : "$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+            "OTHER_SWIFT_FLAGS" : [
+              "$(inherited)",
+              "-enable-upcoming-feature",
+              "DisableOutwardActorInference",
+              "-enable-upcoming-feature",
+              "GlobalActorIsolatedTypesUsability",
+              "-enable-upcoming-feature",
+              "InferIsolatedConformances",
+              "-enable-upcoming-feature",
+              "InferSendableFromCaptures",
+              "-enable-upcoming-feature",
+              "NonisolatedNonsendingByDefault",
+              "-enable-upcoming-feature",
+              "MemberImportVisibility"
+            ],
+            "PACKAGE_RESOURCE_BUNDLE_NAME" : "ClackKit_ClackCore",
+            "PACKAGE_RESOURCE_TARGET_KIND" : "regular",
+            "PRODUCT_BUNDLE_IDENTIFIER" : "clackkit.ClackCore",
+            "PRODUCT_MODULE_NAME" : "ClackCore",
+            "PRODUCT_NAME" : "ClackCore",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SUPPORTS_TEXT_BASED_API" : "NO",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS" : [
+              "$(inherited)",
+              "SWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE"
+            ],
+            "SWIFT_DISABLE_PARSE_AS_LIBRARY" : "NO",
+            "SWIFT_ENABLE_BARE_SLASH_REGEX" : "NO",
+            "SWIFT_LIBRARIES_ONLY" : "YES",
+            "SWIFT_OBJC_INTERFACE_HEADER_DIR" : "$(GENERATED_MODULEMAP_DIR)",
+            "SWIFT_OBJC_INTERFACE_HEADER_NAME" : "ClackCore-Swift.h",
+            "SWIFT_PACKAGE_NAME" : "clackkit",
+            "SWIFT_VERSION" : "5",
+            "SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TAPI_EXTRACT_API_OUTPUT_DIR" : "$(TARGET_BUILD_DIR)/$(CURRENT_ARCH)/ClackCore.symbolgraphs",
+            "TARGET_NAME" : "ClackCore",
+            "TARGET_TEMP_DIR_SUFFIX" : "-t"
+          },
+          "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+              "EMBED_PACKAGE_RESOURCE_BUNDLE_NAMES" : [
+                "$(inherited)",
+                "ClackKit_ClackCore"
+              ],
+              "FRAMEWORK_SEARCH_PATHS" : [
+                "$(BUILT_PRODUCTS_DIR)/PackageFrameworks",
+                "$(inherited)"
+              ],
+              "LD_RUNPATH_SEARCH_PATHS" : [
+                "$(RPATH_ORIGIN)",
+                "$(inherited)"
+              ],
+              "LD_WARN_DUPLICATE_LIBRARIES" : "NO",
+              "OTHER_CFLAGS" : [
+                "-fmodule-map-file=$(GENERATED_MODULEMAP_DIR)/ClackCore.modulemap",
+                "$(inherited)"
+              ]
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+        {
+          "buildFiles" : [
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_0",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::0",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_1",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::1",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_2",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::2",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_3",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::3",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_4",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::4",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_5",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::5",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_6",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::6",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_7",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::7",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_8",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::8",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_9",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::9",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_10",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::10",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_11",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::11",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_12",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::12",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_13",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::13",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_14",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::14",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_15",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::15",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_16",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::16",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_17",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::17",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_18",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::18",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_19",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::19",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_20",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::20",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_21",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::21",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_22",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::22",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_23",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::23",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_24",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::24",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_25",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::25",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_26",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::26",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_27",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::27",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_28",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::28",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_29",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::29",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_30",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::30",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_31",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::31",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_32",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::32",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_33",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::33",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_34",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::34",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_35",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::35",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_36",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::36",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_37",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::37",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_38",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::38",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_39",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::39",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_40",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::40",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_41",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::41",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_42",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::42",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:clackkit::MAINGROUP::REF_9::REF_43",
+              "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0::43",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
+            }
+          ],
+          "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic::BUILDPHASE_0",
+          "type" : "com.apple.buildphase.sources"
+        }
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic",
+      "name" : "ClackCore",
+      "productReference" : {
+        "guid" : "PRODUCTREF-PACKAGE-TARGET:ClackCore-3FBD63F5707D3A70-dynamic",
+        "name" : "$(EXECUTABLE_NAME)",
+        "type" : "file"
+      },
+      "productTypeIdentifier" : "com.apple.product-type.library.dynamic",
+      "type" : "standard"
+    },
+    "signature" : "c4927b5256fdde0885383ba326bb7d5ee9acf8af950c9b550610aca1f3374d56",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "YES",
+            "SUPPORTED_PLATFORMS" : [
+              "$(AVAILABLE_PLATFORMS)"
+            ]
+          },
+          "guid" : "AGGREGATE::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+            "PRODUCT_NAME" : "$(TARGET_NAME)",
+            "SDKROOT" : "auto",
+            "SDK_VARIANT" : "auto",
+            "SKIP_INSTALL" : "YES",
+            "SUPPORTED_PLATFORMS" : [
+              "$(AVAILABLE_PLATFORMS)"
+            ]
+          },
+          "guid" : "AGGREGATE::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "defaultConfigurationName" : "Release",
+      "developmentRegion" : "en",
+      "groupTree" : {
+        "children" : [
+
+        ],
+        "guid" : "AGGREGATE::MAINGROUP",
+        "name" : "",
+        "path" : "",
+        "sourceTree" : "<group>",
+        "type" : "group"
+      },
+      "guid" : "AGGREGATE",
+      "path" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit/Package.swift",
+      "projectDirectory" : "/Users/garnerghering/Documents/GitHub/clack/apps/Clack/ClackKit",
+      "projectIsPackage" : "true",
+      "projectName" : "Aggregate",
+      "targets" : [
+        "0295b79f3e36a948b801aed5996a18e64cc441cd3faa8bc6763727aaa3c903c4",
+        "b443fc4ca4a37379e8d7d5ca87f2e95c7a212c35b7194901d2e9d6e6c2850e5f"
+      ]
+    },
+    "signature" : "44fedd9f969a1721e55b9b7f64752326c8c4e1c11715577b4762debacbf75e3f",
+    "type" : "project"
+  },
+  {
+    "contents" : {
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "ALL-INCLUDING-TESTS::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "ALL-INCLUDING-TESTS::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCoreTests.ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-TARGET:ClackCoreTests_test_runner",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-TARGET:ClackCore",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "ALL-INCLUDING-TESTS",
+      "name" : "AllIncludingTests",
+      "type" : "aggregate"
+    },
+    "signature" : "0295b79f3e36a948b801aed5996a18e64cc441cd3faa8bc6763727aaa3c903c4",
+    "type" : "target"
+  },
+  {
+    "contents" : {
+      "buildConfigurations" : [
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "ALL-EXCLUDING-TESTS::BUILDCONFIG_0",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Debug"
+        },
+        {
+          "buildSettings" : {
+
+          },
+          "guid" : "ALL-EXCLUDING-TESTS::BUILDCONFIG_1",
+          "impartedBuildProperties" : {
+            "buildSettings" : {
+
+            }
+          },
+          "name" : "Release"
+        }
+      ],
+      "buildPhases" : [
+
+      ],
+      "buildRules" : [
+
+      ],
+      "customTasks" : [
+
+      ],
+      "dependencies" : [
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCoreTests",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-PRODUCT:clackkit_ClackCore.ClackCore",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-TARGET:ClackCore",
+          "platformFilters" : [
+
+          ]
+        },
+        {
+          "guid" : "PACKAGE-RESOURCE:ClackCore",
+          "platformFilters" : [
+
+          ]
+        }
+      ],
+      "guid" : "ALL-EXCLUDING-TESTS",
+      "name" : "AllExcludingTests",
+      "type" : "aggregate"
+    },
+    "signature" : "b443fc4ca4a37379e8d7d5ca87f2e95c7a212c35b7194901d2e9d6e6c2850e5f",
+    "type" : "target"
+  }
+]

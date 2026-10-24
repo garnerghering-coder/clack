@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 import MapLibre
 import Observation

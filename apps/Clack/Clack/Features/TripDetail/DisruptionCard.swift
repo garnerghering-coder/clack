@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Disruption help on a trip (owner, 2026-10-22): when a train is cancelled, skips your stop, runs late or breaks your

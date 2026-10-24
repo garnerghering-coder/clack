@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private func hit(_ name: String, id: String = "1") -> StationHit {
     StationHit(id: id, name: name, code: nil, country: "SE", county: nil)

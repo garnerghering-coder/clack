@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The Explore tab: a calm radar of every train running in Sweden and Norway; tap a train or station for details,
@@ -181,10 +182,25 @@ struct ExploreScreen: View {
 
     // MARK: filters
 
+    /// The card hugs its content up to 440 pt, then scrolls inside that height, so nothing lies outside what's drawn
+    /// (a clipped overflow still takes taps and covered the filter button).
     private var filters: some View {
+        ViewThatFits(in: .vertical) {
+            filtersContent
+            ScrollView { filtersContent }.scrollBounceBehavior(.basedOnSize)
+        }
+        .frame(maxWidth: 460)
+        .frame(maxHeight: 440)
+        .background(Surface.Lit(op: Ink.accent))
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+        .clackShadow()
+        .padding(.horizontal, 16).padding(.top, 64)
+    }
+
+    private var filtersContent: some View {
         @Bindable var model = model
-        return ScrollView {
-            VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: 8) {
                 FlowLayout(spacing: 8, lineSpacing: 8) {
                     ForEach(ExploreLogic.products, id: \.self) { p in
                         ChipButton(text: l10n.t("products.\(p)"), active: model.filters.products.contains(p)) { toggle(&model.filters.products, p) }
@@ -218,15 +234,6 @@ struct ExploreScreen: View {
                 }
             }
             .padding(.horizontal, 16).padding(.vertical, 14)
-        }
-        .scrollBounceBehavior(.basedOnSize)
-        .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
-        .frame(maxHeight: 440)
-        .background(Surface.Lit(op: Ink.accent))
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, 16).padding(.top, 64)
     }
 
     private func toggle(_ set: inout Set<String>, _ value: String) {

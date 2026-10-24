@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 /// Answers requests from a closure, so the client can be tested without a network.
 final class StubProtocol: URLProtocol, @unchecked Sendable {

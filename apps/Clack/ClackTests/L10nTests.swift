@@ -6,7 +6,9 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
+@MainActor
 struct L10nTests {
     static let tables: [String: [String: String]] = [
         "en": [
@@ -81,7 +83,7 @@ struct L10nTests {
         #expect(L10n.flatten(object) == ["a.b": "x", "a.c.d": "y", "e": "z"])
     }
 
-    /// The real files the sync script puts in the app bundle: both load, and they have the same keys.
+    /// The real files the sync script puts in the package resources: both load, and they have the same keys.
     @Test func bundledFilesLoadWithTheSameKeys() throws {
         let en = try loadBundled("en")
         let sv = try loadBundled("sv")
@@ -95,7 +97,7 @@ struct L10nTests {
     }
 
     private func loadBundled(_ code: String) throws -> [String: String] {
-        let url = try #require(Bundle.main.url(forResource: code, withExtension: "json"))
+        let url = try #require(L10n.resources.url(forResource: code, withExtension: "json"))
         let object = try JSONSerialization.jsonObject(with: Data(contentsOf: url))
         return L10n.flatten(object)
     }

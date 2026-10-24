@@ -9,6 +9,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private func ms(_ iso: String) -> Double {
     (Instant.parse(iso)?.timeIntervalSince1970 ?? 0) * 1000

@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import CryptoKit
 import Observation
 import UIKit

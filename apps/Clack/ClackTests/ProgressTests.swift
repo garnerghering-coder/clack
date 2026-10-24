@@ -10,6 +10,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private func T(_ hhmm: String) -> Double {
     let parts = hhmm.split(separator: ":").compactMap { Double($0) }

@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Passport (DESIGN §8, product brief §9): everything you've ridden, by year; commuter trains per the setting.

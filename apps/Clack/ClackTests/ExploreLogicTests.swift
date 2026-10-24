@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct ExploreLogicTests {
     private func train(_ id: String = "1|2026-10-23", number: String = "1", product: String? = "regional", op: String? = "sj", delay: Int? = nil, mine: Bool = false, estimated: Bool = false, at: Double = 0) -> LiveTrain {

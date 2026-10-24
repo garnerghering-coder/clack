@@ -3,6 +3,7 @@
 //  ClackWidgets
 //
 
+import ClackCore
 import SwiftUI
 import WidgetKit
 

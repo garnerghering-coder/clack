@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The app's shell: the three tabs over a tab bar, the offline strip, and the launch splash (AppShell.tsx).

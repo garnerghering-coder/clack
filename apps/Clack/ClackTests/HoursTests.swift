@@ -9,6 +9,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private func at(_ utc: String) -> Double {
     (Instant.parse(utc)?.timeIntervalSince1970 ?? 0) * 1000

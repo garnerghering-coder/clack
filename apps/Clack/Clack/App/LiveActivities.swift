@@ -4,6 +4,7 @@
 //
 
 import ActivityKit
+import ClackCore
 import Foundation
 
 /// The trip card on the lock screen and in the Dynamic Island (owner, 2026-10-23). The server updates it by push, so it

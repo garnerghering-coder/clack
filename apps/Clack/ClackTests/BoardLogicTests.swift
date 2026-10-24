@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct BoardLogicTests {
     private let now = 1_800_000_000_000.0

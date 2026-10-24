@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 
 /// A journey that has just ended and is due its celebration.

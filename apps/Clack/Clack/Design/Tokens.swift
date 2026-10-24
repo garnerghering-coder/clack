@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// One radius scale (DESIGN §2.3; styles.css `--r-*`). Nothing is fully rounded except circles (dots, round buttons).

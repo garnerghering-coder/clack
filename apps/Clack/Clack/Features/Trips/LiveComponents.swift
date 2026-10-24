@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Station information and map for the station a change happens at, loaded once per station (Connection.tsx
@@ -68,13 +69,6 @@ struct Speedometer: View {
             .foregroundStyle(Ink.text2)
         }
     }
-}
-
-/// A stop's name and zone, from the trip's stops.
-struct StopName: Hashable {
-    let stationId: String
-    let name: String
-    let tz: String
 }
 
 /// Progress bar, where the train is, next stop and arrival, freshness and position source (DESIGN §9.5).

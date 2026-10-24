@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The train you rode (owner request 2026-10-21): illustration, type and a few facts. Types are typical guesses (no

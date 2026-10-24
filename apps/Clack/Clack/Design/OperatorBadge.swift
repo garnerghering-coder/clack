@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// What the badge needs from an operator: both `Operator` and the trimmed one a leg carries have it.

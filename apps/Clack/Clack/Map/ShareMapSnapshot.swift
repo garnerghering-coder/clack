@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import MapLibre
 import UIKit
 

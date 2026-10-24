@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct InstantTests {
     private func decode(_ json: String) throws -> Instant {

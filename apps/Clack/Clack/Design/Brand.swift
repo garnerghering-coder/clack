@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The Clack wordmark (owner's design, 2026-10-23): "clack" on five split-flap tiles, each two dark halves with a hinge

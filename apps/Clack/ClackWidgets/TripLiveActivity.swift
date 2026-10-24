@@ -4,6 +4,7 @@
 //
 
 import ActivityKit
+import ClackCore
 import SwiftUI
 import WidgetKit
 

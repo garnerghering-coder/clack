@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Add a train (DESIGN §5): date, one smart search field, results, "Where did you get on and off?", saved. A

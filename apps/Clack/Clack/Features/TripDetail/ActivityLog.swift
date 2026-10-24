@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// What happened on the way, newest first (ActivityLog in Live.tsx).

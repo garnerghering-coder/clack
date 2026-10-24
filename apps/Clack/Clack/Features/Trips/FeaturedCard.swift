@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The map strip of a trip card, until the real map arrives in step 8: the map's background with its tag.

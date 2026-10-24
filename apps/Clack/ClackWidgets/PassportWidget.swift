@@ -5,6 +5,7 @@
 //  The passport card on the holographic foil yellow. Static here: a widget can't read the gyroscope.
 //
 
+import ClackCore
 import SwiftUI
 import WidgetKit
 

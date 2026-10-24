@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// On board (ADDITIONS_01 D): Trafikverket's facts for this departure first, then what the train typically has,

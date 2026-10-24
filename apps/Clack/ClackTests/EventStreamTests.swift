@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct SSEParserTests {
     private func parse(_ text: String) -> [SSEEvent] {

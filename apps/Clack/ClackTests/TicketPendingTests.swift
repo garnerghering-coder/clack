@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct TicketPendingTests {
     private func defaults() throws -> UserDefaults {

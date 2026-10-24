@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// What a trip did for your Passport (owner, 2026-10-22): after adding a past trip, and on arriving. Milestones it

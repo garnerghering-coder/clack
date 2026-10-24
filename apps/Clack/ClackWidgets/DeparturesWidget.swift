@@ -7,6 +7,7 @@
 //
 
 import AppIntents
+import ClackCore
 import SwiftUI
 import WidgetKit
 

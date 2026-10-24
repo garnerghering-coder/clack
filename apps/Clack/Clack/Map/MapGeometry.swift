@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 
 /// A stop drawn on a route map: `end` is where you got on or off (a big dot with a label), `mid` a stop you rode

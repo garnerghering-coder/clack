@@ -3,12 +3,14 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 import Observation
 import SwiftUI
 
 /// What the whole app shares: the phone's id, the server client, the texts, and the reference data loaded at launch
 /// (settings, operators, train types, amenities).
+@MainActor
 @Observable
 final class AppModel {
     enum LoadState: Equatable {
@@ -69,14 +71,14 @@ final class AppModel {
     /// The server couldn't be reached on the last request: the offline strip shows.
     var isOffline: Bool { connection.isOffline }
 
-    init(identity: String = Identity.current(), l10n: L10n = L10n()) {
+    init(identity: String = Identity.current(), l10n: L10n? = nil) {
         let connection = ConnectionState()
         let cache = OfflineCache()
         let client = APIClient(userID: identity, cache: cache) { reachable in
             Task { @MainActor in connection.report(reachable: reachable) }
         }
         self.identity = identity
-        self.l10n = l10n
+        self.l10n = l10n ?? L10n()
         self.connection = connection
         self.offlineCache = cache
         self.client = client

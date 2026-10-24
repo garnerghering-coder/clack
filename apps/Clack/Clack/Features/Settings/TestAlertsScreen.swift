@@ -5,6 +5,7 @@
 
 #if DEBUG
 import ActivityKit
+import ClackCore
 import SwiftUI
 import UserNotifications
 

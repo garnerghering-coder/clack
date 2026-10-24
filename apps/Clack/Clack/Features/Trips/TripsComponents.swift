@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The text of a trip's times, "07:14 – 10:30 +1", as one run so it wraps with the line around it. A time that

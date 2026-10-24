@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import Observation
 
 /// Whether the server could be reached on the last request (the offline strip at the top shows when it couldn't).

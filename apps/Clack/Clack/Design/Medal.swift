@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// Milestone medals (owner feedback: "like Apple Health or Duolingo"): a ribbon, a metal rim whose metal steps up with

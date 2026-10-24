@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// A train's sheet, live or from the timetable: a header with just the operator and train (it tightens once you scroll),

@@ -1,0 +1,13 @@
+Target dependency graph (5 targets)
+Target 'AllExcludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'ClackKit_ClackCoreTests' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackCore-product' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackCore' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackKit_ClackCore' in project 'ClackKit'
+Target 'ClackCore-product' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackCore' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackKit_ClackCore' in project 'ClackKit'
+Target 'ClackCore' in project 'ClackKit'
+➜ Explicit dependency on target 'ClackKit_ClackCore' in project 'ClackKit'
+Target 'ClackKit_ClackCore' in project 'ClackKit' (no dependencies)
+Target 'ClackKit_ClackCoreTests' in project 'ClackKit' (no dependencies)

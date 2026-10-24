@@ -8,6 +8,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private let swedishTicket = [
     "Jönköping Central–Kolding\nXX\nSJ Prio-medlem: Prio\nBokningsnr: AAAAAAAA\nBiljettnr: 1\n\u{FFFC}\nBiljett 1 av 2\n\u{FFFC}\nLördag, 10 oktober 2026\n\u{FFFC}\n12:05 Jönköping Central\n12:38 Nässjö Central\n\u{FFFC}\nTåg 7225\n\u{FFFC}\nIngen platsreservation\nVästtrafik\nUngdom, 2 klass, kan ej återbetalas\nDin resa\n\u{FFFC}\nPlant insteg på tåget\nKöp- och resevillkor\n",

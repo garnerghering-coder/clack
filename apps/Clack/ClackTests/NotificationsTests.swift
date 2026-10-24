@@ -6,6 +6,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct NotificationsTests {
     private let oldSettings = """
@@ -48,7 +49,7 @@ struct NotificationsTests {
         #expect(try JSONDecoder().decode(TripActivityAttributes.ContentState.self, from: Data(bare.utf8)).platform == nil)
     }
 
-    @Test func theNewPlatformEventHasWords() throws {
+    @Test @MainActor func theNewPlatformEventHasWords() throws {
         let text = L10n().t("activity.platformSetDeparture", ["to": "5"])
         #expect(text == "Platform 5 announced for departure.")
         let types = try JSONDecoder().decode([LegEventType].self, from: Data(#"["platform_set"]"#.utf8))

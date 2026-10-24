@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// CSS `linear-gradient(<angle>deg, ...)` over the view's rectangle: 0° points up, 90° right, 180° down, and the

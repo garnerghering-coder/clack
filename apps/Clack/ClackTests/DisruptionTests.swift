@@ -8,6 +8,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 struct DisruptionTests {
     let now = (Instant.parse("2026-10-22T12:00:00Z")?.timeIntervalSince1970 ?? 0) * 1000

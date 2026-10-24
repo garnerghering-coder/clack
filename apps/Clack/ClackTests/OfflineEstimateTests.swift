@@ -8,6 +8,7 @@
 import Foundation
 import Testing
 @testable import Clack
+@testable import ClackCore
 
 private let day = (Instant.parse("2026-10-20T00:00:00Z")?.timeIntervalSince1970 ?? 0) * 1000
 private func T(_ hhmm: String) -> Double {

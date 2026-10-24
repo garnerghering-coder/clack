@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import SwiftUI
 
 /// The size of a split-flap display (styles.css `.flap-*`, `.time-flap`, `.board-flap`).

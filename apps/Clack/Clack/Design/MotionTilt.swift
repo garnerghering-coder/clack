@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import CoreMotion
 import SwiftUI
 

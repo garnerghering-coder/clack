@@ -6,6 +6,7 @@
 //  sample data while there is no App Group) and the plain-logic of "where is the journey now".
 //
 
+import ClackCore
 import SwiftUI
 import WidgetKit
 

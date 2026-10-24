@@ -1,0 +1,247 @@
+//
+//  ExploreLogic.swift
+//  Clack
+//
+
+import Foundation
+
+/// The live map's rules (pages/LiveMapPage.tsx): which trains show, where the selected train's route is cut, how a
+/// marker glides, what the status chip says, the train sheet's three sizes.
+public nonisolated enum ExploreLogic {
+    public static let products = ["high_speed", "intercity", "regional", "commuter", "night"]
+    public static let glideMs = 1500.0
+    public static let staleMs = 60_000.0
+    /// A GPS fix older than this is shown as old, not as the train's position now (the server's GPS_FRESH_MS).
+    public static let gpsFreshMs = 120_000.0
+
+    public struct Filters: Equatable, Sendable {
+        public var products: Set<String> = []
+        public var operators: Set<String> = []
+        public var onlyDelayed = false
+        public var onlyMine = false
+        public var onlyFollowed = false
+
+        /// What the filter button's badge counts: each product, each operator and each toggle.
+        public var count: Int { products.count + operators.count + (onlyDelayed ? 1 : 0) + (onlyMine ? 1 : 0) + (onlyFollowed ? 1 : 0) }
+
+        public init(products: Set<String> = [], operators: Set<String> = [], onlyDelayed: Bool = false, onlyMine: Bool = false, onlyFollowed: Bool = false) {
+            self.products = products
+            self.operators = operators
+            self.onlyDelayed = onlyDelayed
+            self.onlyMine = onlyMine
+            self.onlyFollowed = onlyFollowed
+        }
+    }
+
+    public static func followKey(number: String, date: String) -> String { "\(number)|\(date)" }
+
+    public static func visible(_ train: LiveTrain, _ f: Filters, followed: Set<String>) -> Bool {
+        if f.onlyMine && !train.mine { return false }
+        if f.onlyFollowed && !followed.contains(followKey(number: train.number, date: train.date)) { return false }
+        if f.onlyDelayed && !((train.delayMin ?? 0) > 5) { return false }
+        if !f.products.isEmpty && !(train.product.map(f.products.contains) ?? false) { return false }
+        if !f.operators.isEmpty && !(train.operatorId.map(f.operators.contains) ?? false) { return false }
+        return true
+    }
+
+    /// A moved train is the old one with its position fields replaced.
+    public static func applying(_ moved: MovedTrain, to train: LiveTrain) -> LiveTrain {
+        var t = train
+        t.lat = moved.lat
+        t.lon = moved.lon
+        t.bearing = moved.bearing
+        t.speedKmh = moved.speedKmh
+        t.at = Instant(ms: moved.at)
+        t.estimated = moved.estimated
+        return t
+    }
+
+    // MARK: the selected train's route
+
+    /// The point on a line closest to `p` (projected onto its segments), searching from segment `from` on.
+    public static func nearestOnLine(_ line: [LatLon], _ p: LatLon, from: Int = 0) -> (index: Int, point: LatLon) {
+        guard line.count > 1 else { return (0, line.first ?? p) }
+        let kx = cos(p.lat * .pi / 180)
+        var best = (index: min(from, line.count - 2), point: line[min(from, line.count - 1)], d: Double.infinity)
+        var i = from
+        while i < line.count - 1 {
+            let (a, b) = (line[i], line[i + 1])
+            let dx = (b.lon - a.lon) * kx
+            let dy = b.lat - a.lat
+            let len = dx * dx + dy * dy
+            let t = len > 0 ? max(0, min(1, (((p.lon - a.lon) * kx) * dx + (p.lat - a.lat) * dy) / len)) : 0
+            let q = LatLon(a.lat + dy * t, a.lon + (b.lon - a.lon) * t)
+            let d = pow((q.lon - p.lon) * kx, 2) + pow(q.lat - p.lat, 2)
+            if d < best.d { best = (i, q, d) }
+            i += 1
+        }
+        return (best.index, best.point)
+    }
+
+    /// The route split at the train: what it has done (solid) and what's ahead (dashed). `from` is where to start
+    /// searching; it comes back a little before the cut so later searches never go backwards.
+    public static func split(_ line: [LatLon], at p: LatLon, from: Int) -> (done: [LatLon], ahead: [LatLon], next: Int) {
+        let cut = nearestOnLine(line, p, from: from)
+        return (Array(line[0...cut.index]) + [cut.point], [cut.point] + Array(line[(cut.index + 1)...]), max(0, cut.index - 3))
+    }
+
+    /// Where a gliding marker is `now`: from its old spot to the new one over 1.5 s, easing out.
+    public static func glide(from: LatLon, to: LatLon, startedAt: Double, now: Double) -> (position: LatLon, done: Bool) {
+        let k = min(1, (now - startedAt) / glideMs)
+        let e = 1 - pow(1 - k, 3)
+        return (LatLon(from.lat + (to.lat - from.lat) * e, from.lon + (to.lon - from.lon) * e), k >= 1)
+    }
+
+    // MARK: status
+
+    public enum Status: Equatable, Sendable {
+        case loading
+        case unavailable
+        case delayed(upstreamAt: Double)
+        case none(filtered: Bool)
+        case running(total: Int, simulated: Bool)
+    }
+
+    /// The chip over the map, first match wins (brief §6.3).
+    public static func status(loaded: Bool, streamDown: Bool, lastMessageAt: Double, mode: String?, upstreamAt: Double, shown: Int, total: Int, zoom: Double, filtered: Bool, now: Double) -> Status {
+        if !loaded && !streamDown { return .loading }
+        if (streamDown && now - lastMessageAt > 20_000) || mode == "stopped" { return .unavailable }
+        if upstreamAt > 0 && now - upstreamAt > staleMs { return .delayed(upstreamAt: upstreamAt) }
+        if shown == 0 && zoom >= 6.5 { return .none(filtered: filtered) }
+        return .running(total: total, simulated: mode == "simulate")
+    }
+
+    public enum PositionKind: Equatable, Sendable {
+        case estimated
+        case old(minutes: Int)
+        case gps
+    }
+
+    /// Position status (brief §6.2): GPS only while fresh; an old fix says how old; estimates say so.
+    public static func position(of train: LiveTrain, now: Double) -> PositionKind {
+        if train.estimated { return .estimated }
+        let age = now - train.at.ms
+        return age > gpsFreshMs ? .old(minutes: Int((age / 60_000).rounded())) : .gps
+    }
+
+    // MARK: search
+
+    /// Running trains whose number starts with the digits typed, at most six.
+    public static func trainHits(_ trains: [LiveTrain], query: String) -> [LiveTrain] {
+        let q = query.trimmingCharacters(in: .whitespaces)
+        guard !q.isEmpty else { return [] }
+        let digits = q.filter(\.isNumber)
+        let prefix = digits.isEmpty ? "#" : digits
+        return Array(trains.filter { $0.number.hasPrefix(prefix) }.sorted { $0.number < $1.number }.prefix(6))
+    }
+
+    /// Station names are searched from two characters, and not for a bare train number.
+    public static func searchesStations(_ query: String) -> Bool {
+        let q = query.trimmingCharacters(in: .whitespaces)
+        return q.count >= 2 && !q.allSatisfy(\.isNumber)
+    }
+
+    // MARK: the train sheet
+
+    public enum SheetSize: Int, Sendable { case small, mid, full }
+
+    public struct SheetTargets: Equatable, Sendable {
+        public var small: Double
+        public var mid: Double
+        public var full: Double
+
+        public subscript(_ size: SheetSize) -> Double {
+            switch size {
+            case .small: small
+            case .mid: mid
+            case .full: full
+            }
+        }
+
+        public init(small: Double, mid: Double, full: Double) {
+            self.small = small
+            self.mid = mid
+            self.full = full
+        }
+    }
+
+    /// The height each size settles at, from the room there is and what the sheet holds (`targets`, `:1011-1018`).
+    public static func sheetTargets(room: Double, content: Double, head: Double, foot: Double) -> SheetTargets {
+        let full = room - 24
+        let mid = min(content, min(room * 0.74, 680), full)
+        let small = min(head + foot + 120, mid)
+        return SheetTargets(small: small, mid: mid, full: full)
+    }
+
+    /// Where a drag ends: the nearest size, but a flick (faster than half a point a millisecond) goes at least one
+    /// size on from where the drag began.
+    public static func settle(height: Double, velocity: Double, from: SheetSize, targets: SheetTargets) -> SheetSize {
+        let order: [SheetSize] = [.small, .mid, .full]
+        let nearest = order.reduce(SheetSize.small) { a, b in abs(targets[b] - height) < abs(targets[a] - height) ? b : a }
+        let start = from.rawValue
+        let near = nearest.rawValue
+        let to: Int
+        if velocity < -0.5 { to = max(near, min(2, start + 1)) }
+        else if velocity > 0.5 { to = min(near, max(0, start - 1)) }
+        else { to = near }
+        return order[to]
+    }
+
+    // MARK: stops
+
+    /// The stop list's per-stop facts: the time to show, how late it is, and which stop is next.
+    public struct StopTimes: Equatable, Sendable {
+        public var planned: Double?
+        public var real: Double?
+        public var lateMinutes: Int
+        public var shown: Double? { real ?? planned }
+
+        public init(planned: Double? = nil, real: Double? = nil, lateMinutes: Int) {
+            self.planned = planned
+            self.real = real
+            self.lateMinutes = lateMinutes
+        }
+    }
+
+    public static func stopTimes(_ stop: LiveTrainStop, isLast: Bool) -> StopTimes {
+        let planned = isLast ? stop.arr : (stop.dep ?? stop.arr)
+        let real = isLast ? (stop.actualArr ?? stop.estimatedArr) : (stop.actualDep ?? stop.estimatedDep ?? stop.actualArr ?? stop.estimatedArr)
+        let late = (planned != nil && real != nil) ? Int(((real! - planned!) / 60_000).rounded()) : 0
+        return StopTimes(planned: planned, real: real, lateMinutes: late)
+    }
+
+    public static func nextStopIndex(_ stops: [LiveTrainStop]) -> Int? {
+        stops.firstIndex { !$0.passed && !$0.canceled }
+    }
+
+    /// A train's stops as the journey a ticket is bought for.
+    public static func ticketTrip(operatorId: String?, number: String, from: LiveTrainStop, to: LiveTrainStop, trip: TrainTrip?) -> TicketTrip {
+        TicketTrip(
+            operatorId: operatorId, trainNumber: number,
+            from: .init(name: from.name, time: from.dep ?? from.arr ?? 0, tz: "Europe/Stockholm", seq: from.seq),
+            to: .init(name: to.name, time: to.arr ?? to.dep ?? 0, tz: "Europe/Stockholm", seq: to.seq),
+            tripKey: trip?.key, serviceDate: trip?.serviceDate
+        )
+    }
+
+    /// The part of the train you could still catch: from the next stop that isn't the last.
+    public static func catchableFrom(_ stops: [LiveTrainStop]) -> LiveTrainStop? {
+        guard stops.count > 1, let last = stops.last else { return nil }
+        return stops.first { !$0.passed && !$0.canceled && $0.seq != last.seq }
+    }
+
+    /// For each stop but the last: how far the train is along the stretch to the next one, 0 to 1 (the Explore sheet draws
+    /// it as the trip view does). Worked out from the times: a stretch is fully covered once the next stop is passed, the
+    /// stretch the train is on is placed by the time since it left the stop behind, and a stop the train is standing at
+    /// (arrived, not yet left) has the stretch into it fully covered.
+    public static func railFills(_ stops: [LiveTrainStop], now: Double) -> [Double] {
+        guard stops.count > 1 else { return [] }
+        return (0..<(stops.count - 1)).map { i in
+            let a = stops[i], b = stops[i + 1]
+            if b.passed || b.actualArr != nil { return 1 }
+            guard a.passed else { return 0 }
+            guard let dep = a.actualDep ?? a.estimatedDep ?? a.dep, let arr = b.actualArr ?? b.estimatedArr ?? b.arr, arr > dep else { return 0.05 }
+            return min(0.95, max(0.05, (now - dep) / (arr - dep)))
+        }
+    }
+}

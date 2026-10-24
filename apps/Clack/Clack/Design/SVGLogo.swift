@@ -3,6 +3,7 @@
 //  Clack
 //
 
+import ClackCore
 import UIKit
 
 /// Draws the simple SVG logos some operators publish, since `UIImage` can't read SVG: filled outlines (`<path d fill>`) and

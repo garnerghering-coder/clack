@@ -6,6 +6,7 @@
 import Testing
 import UIKit
 @testable import Clack
+@testable import ClackCore
 
 struct TrainArtTests {
     private func picture(_ type: String?, _ art: String? = nil, uncertain: Bool = false, _ op: String? = nil) -> TrainArt.Picture {

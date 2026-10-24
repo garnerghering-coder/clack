@@ -3,23 +3,10 @@
 //  Clack
 //
 
+import ClackCore
 import Foundation
 import Observation
 import SwiftUI
-
-/// The Layover Guide's inputs from a connection (the web's `/stations/:id/map?from=&to=&arr=&dep=&a=&b=&xa=&xb=&live=`).
-nonisolated struct StationMapLink: Hashable, Sendable {
-    var stationId: String
-    var from: String?
-    var to: String?
-    var arrival: Double?
-    var departure: Double?
-    var operatorA: String?
-    var operatorB: String?
-    var canceledA = false
-    var canceledB = false
-    var live = false
-}
 
 /// Opens Add a train straight at the confirm step for a timetable trip (`/add?trip=K&date=D&from=&to=&replace=`).
 nonisolated struct AddTrainLink: Hashable, Sendable {
