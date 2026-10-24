@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import table from '../../../data/delay_causes.json';
-import en from '../locales/en.json';
-import sv from '../locales/sv.json';
 import { causeText, delayReasons, resolveCause } from './delayCauses';
+import { appKeys, appString } from './strings';
 
 const keys = (): string[] => {
   const all = [...Object.values(table.trv), ...Object.values(table.trvText), ...Object.values(table.dt)] as { key: string | null }[];
@@ -12,13 +11,12 @@ const keys = (): string[] => {
 describe('the cause table', () => {
   it('has every key it uses in both languages, and no key left over', () => {
     for (const k of keys()) {
-      const name = k.replace(/^cause\./, '');
       expect(k.startsWith('cause.'), k).toBe(true);
-      expect((en.cause as Record<string, string>)[name], `en ${k}`).toBeTruthy();
-      expect((sv.cause as Record<string, string>)[name], `sv ${k}`).toBeTruthy();
+      expect(appString(k, 'en'), `en ${k}`).toBeTruthy();
+      expect(appString(k, 'sv'), `sv ${k}`).toBeTruthy();
     }
-    const names = new Set(keys().map((k) => k.replace(/^cause\./, '')));
-    for (const name of Object.keys(en.cause)) expect(names.has(name), `unused ${name}`).toBe(true);
+    const used = new Set(keys());
+    for (const k of appKeys('cause.')) expect(used.has(k), `unused ${k}`).toBe(true);
   });
   it("keeps Trafikverket's own Swedish text and marks our wording unverified", () => {
     expect(table.trv.ANA015.sv).toBe('Elfel');

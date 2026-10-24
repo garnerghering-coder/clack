@@ -76,28 +76,40 @@ struct L10nTests {
         #expect(l10n.t("no.such.key", count: 2) == "no.such.key")
     }
 
-    @Test func flattenTurnsNestedJSONIntoDotPaths() throws {
-        let json = #"{"a":{"b":"x","c":{"d":"y"}},"e":"z"}"#
-        let object = try JSONSerialization.jsonObject(with: Data(json.utf8))
-        #expect(L10n.flatten(object) == ["a.b": "x", "a.c.d": "y", "e": "z"])
-    }
-
-    /// The real files the sync script puts in the package resources: both load, and they have the same keys.
-    @Test func bundledFilesLoadWithTheSameKeys() throws {
-        let en = try loadBundled("en")
-        let sv = try loadBundled("sv")
-        #expect(en.count > 700)
-        #expect(Set(en.keys) == Set(sv.keys))
+    /// The real catalog in the package resources: it loads in both languages, plurals follow the count, and every key
+    /// has English and Swedish text with the same placeholders.
+    @Test func catalogLoadsInBothLanguages() throws {
         let l10n = L10n()
         #expect(l10n.t("trips.title") == "Trips")
+        #expect(l10n.t("passport.trainsCount", count: 1) == "1 train")
+        #expect(l10n.t("passport.trainsCount", count: 12) == "12 trains")
+        #expect(l10n.t("passport.reviewBanner", count: 1).hasPrefix("1 trip "))
+        #expect(l10n.t("passport.flavor.earthPct", ["pct": "6"]) == "6% of the way around the Earth")
         l10n.language = .sv
         #expect(l10n.t("trips.title") != "trips.title")
         #expect(l10n.t("trips.title") != "Trips")
+        #expect(l10n.t("passport.trainsCount", count: 3).hasPrefix("3 "))
     }
 
-    private func loadBundled(_ code: String) throws -> [String: String] {
-        let url = try #require(L10n.resources.url(forResource: code, withExtension: "json"))
-        let object = try JSONSerialization.jsonObject(with: Data(contentsOf: url))
-        return L10n.flatten(object)
+    @Test func catalogHasEveryKeyInBothLanguages() throws {
+        // The source file (the built bundle has only the compiled strings).
+        let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("Sources/ClackCore/Resources/Localizable.xcstrings")
+        let catalog = try #require(try JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any])
+        let strings = try #require(catalog["strings"] as? [String: [String: Any]])
+        #expect(strings.count > 700)
+        let placeholders = { (s: String) in s.matches(of: #/\{\{(\w+)\}\}|%lld/#).map { String($0.output.0) }.sorted() }
+        for (key, entry) in strings {
+            let loc = entry["localizations"] as? [String: [String: Any]] ?? [:]
+            func texts(_ code: String) -> [String] {
+                if let unit = loc[code]?["stringUnit"] as? [String: Any], let v = unit["value"] as? String { return [v] }
+                let plural = (loc[code]?["variations"] as? [String: Any])?["plural"] as? [String: [String: Any]] ?? [:]
+                return ["one", "other"].compactMap { (plural[$0]?["stringUnit"] as? [String: Any])?["value"] as? String }
+            }
+            let en = texts("en"), sv = texts("sv")
+            #expect(!en.isEmpty && en.allSatisfy { !$0.trimmingCharacters(in: .whitespaces).isEmpty }, "\(key) en")
+            #expect(sv.count == en.count, "\(key) sv")
+            if let e = en.last, let s = sv.last { #expect(placeholders(e) == placeholders(s), "\(key) placeholders") }
+        }
     }
 }

@@ -7,7 +7,7 @@ import Foundation
 
 /// Why a train is late, in the app's language. `delay_causes.json` (copied from `data/` by
 /// `scripts/ios/sync_assets.py`) maps Trafikverket's announcement codes and Digitraffic's cause codes to `cause.*`
-/// keys in the locale files; Entur gives free text only. A cause the table doesn't know shows as its source wrote it,
+/// keys in the String Catalog; Entur gives free text only. A cause the table doesn't know shows as its source wrote it,
 /// never dropped. The server side is `packages/shared/src/delayCauses.ts`, reading the same file.
 public nonisolated enum DelayCauses {
     /// `cause` says why a train is late; `notice` is a carriage, platform or service note.

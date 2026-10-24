@@ -6,70 +6,73 @@
 import Foundation
 import Observation
 
-/// The app's texts: the web app's `en.json` and `sv.json`, same keys (docs/SWIFT_PORT.md B5).
-/// Never write user-facing text in Swift; add a key to both JSON files and run `scripts/ios/sync_assets.py`.
+/// The app's texts, from the String Catalog `Resources/Localizable.xcstrings` (English and Swedish). Keys are dot paths
+/// ("trips.title"); `{{name}}` placeholders are filled in here, and plural keys use the catalog's plural variations.
+/// Never write user-facing text in Swift: add the key to the catalog, in both languages.
 @MainActor
 @Observable
 public final class L10n {
     /// The language setting from the server (`en` default, not the phone's language). Views update when it changes.
     public var language: Language
 
-    /// Flattened tables: dot path ("trips.title") to text, per language code.
+    /// Where each language's compiled strings are (`en.lproj`, `sv.lproj` in this package's resources).
+    private let bundles: [String: Bundle]
+    /// Texts given directly (tests): dot path to text, per language code. Looked up before the bundles.
     private let tables: [String: [String: String]]
 
     public init(language: Language = .en, tables: [String: [String: String]]) {
         self.language = language
         self.tables = tables
+        self.bundles = [:]
     }
 
-    /// The bundle `en.json` and `sv.json` ship in (this package's resources).
+    /// The bundle the catalog ships in (this package's resources).
     public nonisolated static var resources: Bundle { .module }
 
-    /// Loads `en.json` and `sv.json`, from this package's resources unless told otherwise.
-    public convenience init(language: Language = .en, bundle: Bundle = L10n.resources) {
-        var tables: [String: [String: String]] = [:]
+    /// Reads the catalog from this package's resources unless told otherwise.
+    public init(language: Language = .en, bundle: Bundle = L10n.resources) {
+        self.language = language
+        self.tables = [:]
+        var bundles: [String: Bundle] = [:]
         for code in ["en", "sv"] {
-            guard let url = bundle.url(forResource: code, withExtension: "json"),
-                  let data = try? Data(contentsOf: url),
-                  let object = try? JSONSerialization.jsonObject(with: data) else { continue }
-            tables[code] = Self.flatten(object)
+            if let path = bundle.path(forResource: code, ofType: "lproj"), let b = Bundle(path: path) { bundles[code] = b }
         }
-        self.init(language: language, tables: tables)
-    }
-
-    /// `{ "a": { "b": "x" } }` becomes `["a.b": "x"]`.
-    public nonisolated static func flatten(_ object: Any, prefix: String = "") -> [String: String] {
-        if let text = object as? String { return prefix.isEmpty ? [:] : [prefix: text] }
-        guard let dictionary = object as? [String: Any] else { return [:] }
-        var result: [String: String] = [:]
-        for (key, value) in dictionary {
-            result.merge(flatten(value, prefix: prefix.isEmpty ? key : "\(prefix).\(key)")) { first, _ in first }
-        }
-        return result
+        self.bundles = bundles
     }
 
     /// The text for `key` with every `{{name}}` replaced. A missing key falls back to English, then to the key itself.
     public func t(_ key: String, _ values: [String: String] = [:]) -> String {
-        interpolate(lookup(key), values)
+        interpolate(lookup(key) ?? key, values)
     }
 
-    /// The plural form: `key_one` when `count` is 1, else `key_other`; `count` is also a `{{count}}` value.
+    /// The plural form for `count` (the catalog's plural variations, by the language's rules); `count` is also a
+    /// `{{count}}` value. A key without plural forms is looked up as it is.
     public func t(_ key: String, count: Int, _ values: [String: String] = [:]) -> String {
-        let suffixed = "\(key)_\(count == 1 ? "one" : "other")"
         var all = values
         all["count"] = String(count)
-        return interpolate(lookup(suffixed, fallbackKey: key), all)
+        if let table = tables[language.rawValue] ?? tables["en"], table["\(key)_one"] != nil || table["\(key)_other"] != nil {
+            let suffixed = "\(key)_\(count == 1 ? "one" : "other")"
+            return interpolate(lookup(suffixed) ?? lookup(key) ?? key, all)
+        }
+        guard let format = lookup(key) else { return key }
+        guard format.contains("%") else { return interpolate(format, all) }
+        let code = bundles[language.rawValue] != nil ? language.rawValue : "en"
+        return interpolate(String(format: format, locale: Locale(identifier: code), count), all)
     }
 
-    /// Tries the language, then English, for `key`; then the same for `fallbackKey` (the bare key behind a plural).
-    private func lookup(_ key: String, fallbackKey: String? = nil) -> String {
-        for candidate in [key] + (fallbackKey.map { [$0] } ?? []) {
-            for code in [language.rawValue, "en"] {
-                if let text = tables[code]?[candidate] { return text }
+    /// Tries the language, then English.
+    private func lookup(_ key: String) -> String? {
+        for code in [language.rawValue, "en"] {
+            if let text = tables[code]?[key] { return text }
+            if let bundle = bundles[code] {
+                let text = bundle.localizedString(forKey: key, value: Self.missing, table: nil)
+                if text != Self.missing { return text }
             }
         }
-        return fallbackKey ?? key
+        return nil
     }
+
+    private static let missing = "\u{1}missing"
 
     private func interpolate(_ text: String, _ values: [String: String]) -> String {
         guard text.contains("{{") else { return text }

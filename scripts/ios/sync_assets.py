@@ -1,17 +1,17 @@
 """Copies what the iPhone app shares with the rest of the repository into its Xcode project and Swift package, so
 there is one source for each:
 
-- the strings: packages/shared/locales/{en,sv}.json -> apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/
-  (read by L10n.swift, same keys)
-- the delay-cause table: data/delay_causes.json -> the same strings folder (read by ClackCore/Logic/DelayCauses.swift)
+- the delay-cause table: data/delay_causes.json -> apps/Clack/ClackKit/Sources/ClackCore/Resources/ (read by
+  ClackCore/Logic/DelayCauses.swift)
 - the train drawings: assets/trains/*.svg -> <app>/Assets.xcassets/Trains/<model>-<livery>.imageset (vector, any size)
 
-The app icon is not touched: it is made by scripts/ios/make_icon.py and lives in the Xcode project.
+The strings are not copied: the app's String Catalog (ClackCore/Resources/Localizable.xcstrings) is their only
+source, edited in Xcode; the server reads it too (packages/shared/src/strings.ts). The app icon is not touched: it is made by scripts/ios/make_icon.py and lives in the Xcode project.
 
 Run from the repository root after changing either source:
-    python3 scripts/ios/sync_assets.py                          # strings into ClackCore, drawings into apps/Clack/Clack
-    python3 scripts/ios/sync_assets.py <app dir>                # drawings into <app dir>, strings into <app dir>/i18n
-    python3 scripts/ios/sync_assets.py <app dir> <strings dir>  # both elsewhere
+    python3 scripts/ios/sync_assets.py                       # the table into ClackCore, drawings into apps/Clack/Clack
+    python3 scripts/ios/sync_assets.py <app dir>             # drawings into <app dir>, the table into <app dir>/data
+    python3 scripts/ios/sync_assets.py <app dir> <table dir> # both elsewhere
 The copies are generated: edit the originals, never the copies.
 """
 import json
@@ -21,12 +21,12 @@ import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 APP = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(ROOT, 'apps', 'Clack', 'Clack')
-I18N = (
+DATA = (
     os.path.abspath(sys.argv[2])
     if len(sys.argv) > 2
-    else os.path.join(APP, 'i18n')
+    else os.path.join(APP, 'data')
     if len(sys.argv) > 1
-    else os.path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackCore', 'Resources', 'i18n')
+    else os.path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackCore', 'Resources')
 )
 XCODE_INFO = {'info': {'author': 'xcode', 'version': 1}}
 
@@ -50,10 +50,8 @@ def main():
     if not os.path.exists(os.path.join(catalog, 'Contents.json')):
         write_json(os.path.join(catalog, 'Contents.json'), XCODE_INFO)
 
-    os.makedirs(I18N, exist_ok=True)
-    for lang in ('en', 'sv'):
-        shutil.copy(os.path.join(ROOT, 'packages', 'shared', 'locales', f'{lang}.json'), I18N)
-    shutil.copy(os.path.join(ROOT, 'data', 'delay_causes.json'), I18N)
+    os.makedirs(DATA, exist_ok=True)
+    shutil.copy(os.path.join(ROOT, 'data', 'delay_causes.json'), DATA)
 
     trains = os.path.join(catalog, 'Trains')
     fresh(trains)
@@ -70,7 +68,7 @@ def main():
             'properties': {'preserves-vector-representation': True},
         })
 
-    print(f'strings (en, sv, delay causes), {len(svgs)} train drawings -> {os.path.relpath(APP, ROOT)}, strings -> {os.path.relpath(I18N, ROOT)}')
+    print(f'{len(svgs)} train drawings -> {os.path.relpath(APP, ROOT)}, delay causes -> {os.path.relpath(DATA, ROOT)}')
 
 
 if __name__ == '__main__':

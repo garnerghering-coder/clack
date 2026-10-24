@@ -115,7 +115,7 @@ trains show without destination or delay, and no estimated trains appear yet.
 |---|---|
 | `apps/Clack` | The SwiftUI iPhone app (`Clack.xcodeproj`; the Swift package `ClackKit` with ClackCore and ClackDesign is being split out of it) |
 | `apps/server` | Fastify + TypeScript API, SQLite via Drizzle (`data/app.db`); also serves the privacy page |
-| `packages/shared` | Types and constants the server and its tests use, and the strings (`locales/en.json`, `sv.json`) the app copies |
+| `packages/shared` | Types and constants the server and its tests use |
 | `assets/trains` | The train drawings (SVG), made by `scripts/trains` |
 | `scripts/` | Data tools (`phase0/`, `fixtures/`, `stations/`), the train drawings (`trains/`) and what feeds the app (`ios/`) |
 | `data/` | Hand-maintained config (category rules, station overrides), test fixtures; downloads go to `data/cache/` |
@@ -127,7 +127,7 @@ trains show without destination or delay, and no estimated trains appear yet.
 npm test              # server and shared tests
 npm run typecheck
 npm run db:generate   # after changing apps/server/src/db/schema.ts, create a migration
-python3 scripts/ios/sync_assets.py   # copy the strings and train drawings into the app
+python3 scripts/ios/sync_assets.py   # copy the train drawings and delay-cause table into the app
 ```
 
 Migrations run automatically when the server starts.

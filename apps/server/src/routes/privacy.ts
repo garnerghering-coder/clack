@@ -1,5 +1,5 @@
 // The privacy page App Review and the app's Settings link to: plain HTML in apps/server/public/privacy (English) and
-// apps/server/public/privacy/sv (Swedish), with the same words as the privacy.* strings in packages/shared/locales.
+// apps/server/public/privacy/sv (Swedish), with the same words as the privacy.* strings in the app's String Catalog.
 import fs from 'node:fs';
 import path from 'node:path';
 import type { FastifyPluginAsync } from 'fastify';

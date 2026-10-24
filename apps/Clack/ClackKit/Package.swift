@@ -36,7 +36,7 @@ let package = Package(
     targets: [
         .target(
             name: "ClackCore",
-            resources: [.process("Resources/i18n")],
+            resources: [.process("Resources")],
             swiftSettings: swiftSettings
         ),
         .target(

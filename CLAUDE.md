@@ -10,7 +10,7 @@ history. The owner is Garner (he/him).
 - `apps/Clack`: the native SwiftUI iPhone app, the only client (docs/SWIFT_PORT.md). Open `apps/Clack/Clack.xcodeproj`.
   `apps/Clack/ClackKit` is a Swift package with the targets ClackCore (logic, API, strings) and ClackDesign (tokens
   and components); code is moving into it from the app target.
-- `packages/shared`: types and constants the server uses, and `locales/{en,sv}.json`, the app's strings.
+- `packages/shared`: types and constants the server uses.
 - `data/`: hand-made data (operators, train types, station maps), each fact with its source.
 - `assets/trains`: the train drawings (SVG). `fi_*.svg` (Finland) are hand-made and owner-supplied, with no generator
   in `scripts/trains`; where they were measured from is not recorded here, and `export_svg.py` leaves them alone.
@@ -35,7 +35,9 @@ history. The owner is Garner (he/him).
   not known") rather than guess. Say what's unverified.
 - Status is written, not boxed: no pill-shaped badges, no 999px radii. Use the radius tokens (`--r-tag`,
   `--r-control-sm`, `--r-input`, `--r-card`, `--r-sheet`) and the ink colours in `apps/Clack/Clack/Design/Tokens.swift` (moving to `ClackKit/ClackDesign`).
-- Every user-facing string goes through i18n, in both `packages/shared/locales/en.json` and `sv.json`. The app copies them with `scripts/ios/sync_assets.py`.
+- Every user-facing string goes in the String Catalog `apps/Clack/ClackKit/Sources/ClackCore/Resources/Localizable.xcstrings`,
+  in English and Swedish (keys are dot paths, read with `L10n.t`). The server reads the same catalog for delay causes and
+  the privacy page (`packages/shared/src/strings.ts`).
 - API keys live only in `.env` (see `.env.example`). Never commit them.
 - Zero running costs: no paid services.
 - Don't put the owner's email address in requests, headers or user agents.
@@ -45,7 +47,7 @@ history. The owner is Garner (he/him).
 - `npm run dev`: the server (http://localhost:3001). `npm test`: all tests (vitest). `npm run typecheck`.
 - App build: `xcodebuild -project apps/Clack/Clack.xcodeproj -scheme Clack -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath /tmp/clack-sim build`;
   the same with `test` instead of `build` runs the app's tests. `swift test` in `apps/Clack/ClackKit` runs the package's.
-- `python3 scripts/ios/sync_assets.py`: copy the strings and train drawings into the app (after changing either).
+- `python3 scripts/ios/sync_assets.py`: copy the train drawings and the delay-cause table into the app (after changing either).
   `python3 scripts/ios/make_icon.py` (app icon), `python3 scripts/ios/make_colors.py` and
   `node scripts/ios/make_icons.mjs` (colours and Lucide icons) when those change.
 - `python3 scripts/ios/lint_design.py`: the design lint (coming in a later workstream; not there yet).

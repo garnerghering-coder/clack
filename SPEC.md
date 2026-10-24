@@ -20,7 +20,7 @@
 3. **Native on iPhone.** The only client is the SwiftUI app in `apps/Clack`. There is no web app, no PWA and no wrapper around a web view.
 4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab, Entur or Digitraffic itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
 5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again.
-6. **i18n from day one.** Every user-facing string is a key in `packages/shared/locales/en.json` and `sv.json`; English and Swedish ship together.
+6. **i18n from day one.** Every user-facing string is a key in the app's String Catalog (`ClackCore/Resources/Localizable.xcstrings`); English and Swedish ship together.
 7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur, Finland through Digitraffic), so a new country plugs in without touching the core.
 8. **Nothing made up.** A train type, livery, line or amenity with no source is not shown (an unpainted train, "Train type not known"), and an estimate is always labelled as one.
 
@@ -50,7 +50,7 @@
 | Backend | Node.js 22 + TypeScript, Fastify, run with tsx | One language across server, shared package and scripts |
 | Database | SQLite via Drizzle ORM (`data/app.db`); schema kept Postgres-compatible | Zero cost, one file |
 | Push | Apple Push Notification service, from the server (`apps/server/src/push`) | Alerts and Live Activity updates |
-| Strings | `packages/shared/locales/{en,sv}.json`, copied into the app by `scripts/ios/sync_assets.py` | One source for both languages |
+| Strings | The String Catalog `ClackCore/Resources/Localizable.xcstrings`; the server reads it too | One source for both languages |
 | Jobs | In-process scheduler (daily timetable import, post-trip snapshots, audit, push watcher) | No extra service |
 | Hosting | One VM behind Caddy with https (docs/SERVER.md) | Cheap, simple |
 
@@ -282,7 +282,7 @@ The server was built in this order; each step was done when its acceptance sente
 10. **Native app:** all of the above in SwiftUI (docs/SWIFT_PORT.md, done), then alerts, Live Activities, ticket import, offline mode and widgets (docs/IOS.md, done).
 11. **Later work** is tracked as workstreams A to J ("Clack: from ported to stellar"; docs/SWIFT_PORT.md, last section).
 
-Tests (vitest for the server and shared package; Swift Testing for the app) cover: search input parsing, station fuzzy matching, delay calculation, journey grouping, distance calculation, CO₂ calculation, stat aggregations, the push rules and the strings (`packages/shared/locales/locales.test.ts` checks both languages have the same keys).
+Tests (vitest for the server and shared package; Swift Testing for the app) cover: search input parsing, station fuzzy matching, delay calculation, journey grouping, distance calculation, CO₂ calculation, stat aggregations, the push rules and the strings (`ClackCoreTests/L10nTests.swift` checks every key has both languages with the same placeholders).
 
 ## 20. Launch checklist
 

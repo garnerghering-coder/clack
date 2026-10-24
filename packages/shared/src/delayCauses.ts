@@ -1,10 +1,9 @@
 // Why a train is late, in the reader's language. One table (data/delay_causes.json) maps Trafikverket's announcement
-// codes and Digitraffic's cause codes to `cause.*` keys in packages/shared/locales; Entur gives only free text. A cause
+// codes and Digitraffic's cause codes to `cause.*` keys in the app's String Catalog (strings.ts); Entur gives only free text. A cause
 // the table doesn't know is shown as the source wrote it, never dropped. The app has the same resolver in
 // ClackCore/Logic/DelayCauses.swift, reading the same file.
 import table from '../../../data/delay_causes.json';
-import en from '../locales/en.json';
-import sv from '../locales/sv.json';
+import { appString } from './strings';
 
 export type CauseSource = 'trv' | 'digitraffic' | 'entur';
 
@@ -62,13 +61,11 @@ export function resolveCause(cause: DelayCause): ResolvedCause {
   return { key: null, kind: 'cause', text };
 }
 
-const LOCALES: Record<'en' | 'sv', { cause: Record<string, string> }> = { en, sv };
-
 /** The words to show for a cause: translated when the table knows it, else as the source wrote it (null: nothing). */
 export function causeText(cause: DelayCause, lang: 'en' | 'sv' = 'en'): string | null {
   const r = resolveCause(cause);
   if (r.key) {
-    const t = LOCALES[lang].cause[r.key.replace(/^cause\./, '')] ?? LOCALES.en.cause[r.key.replace(/^cause\./, '')];
+    const t = appString(r.key, lang);
     if (t) return t;
   }
   return r.text;

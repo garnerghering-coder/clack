@@ -1,6 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import en from '../../../packages/shared/locales/en.json';
-import sv from '../../../packages/shared/locales/sv.json';
+import { appString } from '../../../packages/shared/src/strings';
 import { buildApp } from '../src/app.js';
 import { openDb } from '../src/db/client.js';
 
@@ -11,7 +10,8 @@ describe('privacy page', () => {
 
   const text = (html: string) => html.replace(/&quot;/g, '"').replace(/&#(?:x27|39);/g, "'").replace(/&amp;/g, '&');
 
-  for (const [url, lang, strings] of [['/privacy', 'en', en.privacy], ['/privacy/sv', 'sv', sv.privacy]] as const) {
+  for (const [url, lang] of [['/privacy', 'en'], ['/privacy/sv', 'sv']] as const) {
+    const strings = (key: string) => appString(`privacy.${key}`, lang)!;
     it(`serves ${url} in ${lang} with every privacy string`, async () => {
       app = buildApp(openDb(':memory:'));
       const res = await app.inject({ url });
@@ -19,9 +19,9 @@ describe('privacy page', () => {
       expect(res.headers['content-type']).toContain('text/html');
       const body = text(res.body);
       expect(body).toContain(`<html lang="${lang}">`);
-      expect(body).toContain(`<title>${strings.title} · Clack</title>`);
+      expect(body).toContain(`<title>${strings('title')} · Clack</title>`);
       for (const key of ['intro', 'storedBody', 'phoneBody', 'idSync', 'locationBody', 'notCollectedBody', 'sharingBody', 'deletionBody', 'alertsBody'] as const) {
-        expect(body, key).toContain(strings[key]);
+        expect(body, key).toContain(strings(key));
       }
     });
   }
