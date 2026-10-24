@@ -198,33 +198,14 @@ struct StopList: View {
 
     private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
-        let passed = stop.passed
-        let clock = app.settings.clock
-        let tz = "Europe/Stockholm"
-        let late = times.lateMinutes
-        let tint: Color = late > 0 && times.real != nil ? Ink.late : late < 0 && times.real != nil ? Ink.onTime : Ink.text
-        return HStack(alignment: .center, spacing: 10) {
-            VStack(alignment: .leading, spacing: 1) {
-                FlapTime(time: times.shown, tz: tz, clock: clock, style: .text)
-                    .foregroundStyle(passed ? Ink.text3 : tint)
-                if late != 0, times.real != nil, let planned = times.planned {
-                    Text(Format.time(planned, tz: tz, clock: clock)).strikethrough().font(ClackFont.inter(11.5, .medium)).foregroundStyle(Ink.text3)
-                }
-            }
-            .font(ClackFont.inter(14, .semibold)).monospacedDigit()
-            .frame(width: 58, alignment: .leading)
-            StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below)
-            VStack(alignment: .leading, spacing: 0) {
-                Text(stop.name).font(ClackFont.inter(16, isNext ? .bold : .regular)).foregroundStyle(passed ? Ink.text3 : Ink.text)
-                    .strikethrough(stop.canceled)
-                let note = [stop.canceled ? l10n.t("liveMap.canceledStop") : nil, stop.platform.map { l10n.t("liveMap.track", ["track": $0]) }].compactMap { $0 }.joined(separator: " · ")
-                if !note.isEmpty { Text(note).clack(.caption).foregroundStyle(Ink.text2) }
-            }
-            .padding(.vertical, 4)
-            Spacer(minLength: 0)
-        }
-        .frame(minHeight: 44)
-        .accessibilityElement(children: .combine)
+        // The shared stop row, compact (no flaps in a sheet): passed stops dimmed, the next one in 600.
+        return StopRow(
+            name: stop.name, emphasis: stop.passed ? .dim : isNext ? .next : .plain, canceled: stop.canceled,
+            notes: stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : [],
+            rail: StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below),
+            time: times.real ?? times.planned, sched: times.planned, live: times.real != nil, delay: times.real != nil ? times.lateMinutes : nil,
+            tz: "Europe/Stockholm", clock: app.settings.clock, platform: stop.platform, compact: true
+        )
     }
 }
 

@@ -191,38 +191,38 @@ struct DesignGalleryView: View {
         section("StopTimeline") {
             Card {
                 let color = Color(hex: "#1fb14f")!
-                ClackDesign.StopRow(
+                StopRow(
                     name: "Stockholm C", notes: [.init("You got on here", .accent)],
-                    rail: ClackDesign.StopRail(color: color, big: true, startsHere: true, below: .init(ridden: true, fill: 1)),
+                    rail: StopRail(color: color, big: true, startsHere: true, below: .init(ridden: true, fill: 1)),
                     time: t + 2 * minute, sched: t, live: true, delay: 2, tz: tz, clock: .h24, platform: "12"
                 )
-                ClackDesign.StopRow(
+                StopRow(
                     name: "Södertälje Syd",
-                    rail: ClackDesign.StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true, fill: 0.4, train: 0.4)),
+                    rail: StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true, fill: 0.4, train: 0.4)),
                     time: t + 22 * minute, sched: t + 18 * minute, live: true, delay: 4, tz: tz, clock: .h24, platform: "3", platformChanged: true
                 )
-                ClackDesign.StopRow(
+                StopRow(
                     name: "Katrineholm C", canceled: true,
-                    rail: ClackDesign.StopRail(color: color, above: .init(ridden: true), below: .init(ridden: true)),
+                    rail: StopRail(color: color, above: .init(ridden: true), below: .init(ridden: true)),
                     time: t + 52 * minute, tz: tz, clock: .h24, platform: "1"
                 )
-                ClackDesign.StopRow(
+                StopRow(
                     name: "Hallsberg", notes: [.init("You get off here", .accent)],
-                    rail: ClackDesign.StopRail(color: color, big: true, endsHere: false, above: .init(ridden: true), below: .init()),
+                    rail: StopRail(color: color, big: true, endsHere: false, above: .init(ridden: true), below: .init()),
                     time: t + 75 * minute, tz: tz, clock: .h24, platform: "4"
                 )
-                ClackDesign.StopRow(
+                StopRow(
                     name: "Örebro C", emphasis: .dim,
-                    rail: ClackDesign.StopRail(color: color, ridden: false, endsHere: true, above: .init()),
+                    rail: StopRail(color: color, ridden: false, endsHere: true, above: .init()),
                     time: t + 95 * minute, tz: tz, clock: .h24
                 )
             }
             Text("Compact").clack(.captionUpper).foregroundStyle(Ink.text2)
             Card {
                 let color = Color(hex: "#f04a3a")!
-                ClackDesign.StopRow(name: "Malmö C", rail: ClackDesign.StopRail(color: color, big: true, startsHere: true, below: .init(ridden: true, fill: 1)), time: t, tz: tz, clock: .h24, compact: true)
-                ClackDesign.StopRow(name: "Lund C", emphasis: .next, rail: ClackDesign.StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true)), time: t + 13 * minute, sched: t + 11 * minute, live: true, delay: 2, tz: tz, clock: .h24, platform: "2", compact: true)
-                ClackDesign.StopRow(name: "Hässleholm C", rail: ClackDesign.StopRail(color: color, big: true, endsHere: true, above: .init(ridden: true)), time: t + 40 * minute, tz: tz, clock: .h24, compact: true)
+                StopRow(name: "Malmö C", rail: StopRail(color: color, big: true, startsHere: true, below: .init(ridden: true, fill: 1)), time: t, tz: tz, clock: .h24, compact: true)
+                StopRow(name: "Lund C", emphasis: .next, rail: StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true)), time: t + 13 * minute, sched: t + 11 * minute, live: true, delay: 2, tz: tz, clock: .h24, platform: "2", compact: true)
+                StopRow(name: "Hässleholm C", rail: StopRail(color: color, big: true, endsHere: true, above: .init(ridden: true)), time: t + 40 * minute, tz: tz, clock: .h24, compact: true)
             }
         }
         section("BoardRow") {

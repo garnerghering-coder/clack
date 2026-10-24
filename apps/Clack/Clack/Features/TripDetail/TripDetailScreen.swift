@@ -454,7 +454,7 @@ struct TripDetailScreen: View {
             Text(l10n.t("detail.stops")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             VStack(spacing: 0) {
                 ForEach(Array(stops.enumerated()), id: \.element.id) { i, stop in
-                    StopRow(
+                    LegStopRow(
                         stop: stop, color: color, tense: TripDetailLogic.tense(of: stop, shown: shown, stage: stage),
                         above: halves[i].above, below: halves[i].below
                     )
@@ -563,11 +563,12 @@ struct TimeBlock: View {
     }
 }
 
-/// One stop of the timeline: a rail, a dot (the operator's colour where you got on and off), the name with its notes,
-/// the time coloured by delay, and the platform.
-struct StopRow: View {
+/// One stop of the trip's timeline (the shared `StopRow`): the rail in the operator's colour, where you got on and off,
+/// the time coloured by delay once it is known, the platform; the name opens the station's board.
+struct LegStopRow: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @Environment(Router.self) private var router
     let stop: LegStop
     let color: Color
     var tense = TripDetailLogic.StopTense.past
@@ -578,112 +579,20 @@ struct StopRow: View {
         let times = TripDetailLogic.stopTimes(stop)
         let ridden = stop.role.isRidden
         let deviations = stop.deviations.filter { $0 != "Spårändrat" }
-        let platformChanged = stop.deviations.contains("Spårändrat")
-        let actual = times.actual
-        let band = DelayBand(delayMin: times.delay, canceled: stop.canceled)
-        let showSched = actual != nil && times.sched != nil && floor(actual! / 60_000) != floor(times.sched! / 60_000)
-        HStack(spacing: 10) {
-            rail()
-            VStack(alignment: .leading, spacing: 1) {
-                NavigationLink(value: AppRoute.board(stationId: stop.stationId, arrivals: false)) {
-                    Text(stop.name)
-                        .font(ClackFont.inter(16, ridden ? .semibold : .medium)).foregroundStyle(ridden ? Ink.text : Ink.text3)
-                        .strikethrough(stop.canceled).opacity(stop.canceled ? 0.6 : 1)
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(l10n.t("board.openBoard", ["station": stop.name]))
-                if stop.role == .board { Text(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn")).clack(.caption).foregroundStyle(Ink.accentInk) }
-                if stop.role == .alight { Text(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff")).clack(.caption).foregroundStyle(Ink.accentInk) }
-                if ridden && stop.reportSource == nil { Text(l10n.t("detail.noLiveData")).clack(.caption).foregroundStyle(Ink.text2) }
-                if !deviations.isEmpty { Text(deviations.joined(separator: " · ")).clack(.caption).foregroundStyle(Ink.text2) }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 6)
-            VStack(alignment: .trailing, spacing: 0) {
-                // The stop's time on the tick board, like the big times; coloured by delay once it is known.
-                SplitFlap(value: Format.time(actual ?? times.sched, tz: stop.tz, clock: app.settings.clock), size: .sm, colour: actual != nil ? band.ink : nil)
-                    .opacity(stop.canceled ? 0.5 : 1)
-                    .overlay { if stop.canceled { Rectangle().fill(Ink.text2).frame(height: 1.5) } }
-                if showSched, let sched = times.sched {
-                    Text(Format.time(sched, tz: stop.tz, clock: app.settings.clock))
-                        .font(ClackFont.inter(12, .medium)).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
-                }
-            }
-            HStack(spacing: 3) {
-                Text(stop.platform ?? "").monospacedDigit()
-                if platformChanged { LucideIcon(name: "repeat", size: 12).accessibilityLabel("Platform changed") }
-            }
-            .clack(.stopName).foregroundStyle(Ink.text2)
-            .frame(width: 44, alignment: .trailing)
-        }
-        .frame(minHeight: 48)
-    }
-
-    private func rail() -> some View {
-        StopRail(
-            color: color, big: stop.role == .board || stop.role == .alight, ridden: stop.role.isRidden,
-            startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below
+        var notes: [StopRow.Note] = []
+        if stop.role == .board { notes.append(.init(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn"), .accent)) }
+        if stop.role == .alight { notes.append(.init(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff"), .accent)) }
+        if ridden && stop.reportSource == nil { notes.append(.init(l10n.t("detail.noLiveData"))) }
+        if !deviations.isEmpty { notes.append(.init(Format.join(deviations))) }
+        let end = stop.role == .board || stop.role == .alight
+        return StopRow(
+            name: stop.name, emphasis: ridden ? .ridden : .dim, canceled: stop.canceled, notes: notes,
+            rail: StopRail(color: color, big: end, ridden: ridden, startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below),
+            time: times.actual ?? times.sched, sched: times.sched, live: times.actual != nil, delay: times.delay,
+            tz: stop.tz, clock: app.settings.clock, platform: stop.platform, platformChanged: stop.deviations.contains("Spårändrat"),
+            onOpen: { router.push(.board(stationId: stop.stationId, arrivals: false)) },
+            openLabel: l10n.t("board.openBoard", ["station": stop.name])
         )
-    }
-}
-
-/// The vertical rail beside a stop. Where the train has been it is the operator's colour; the rest of the ride is a dotted
-/// grey line still to go; stretches you didn't ride are a hairline. It starts at the middle of the stop you got on and
-/// ends at the middle of the one you got off, and a small dot shows the train between stops while it's under way. The
-/// trip's stop list and the Explore train sheet draw it the same way.
-struct StopRail: View {
-    let color: Color
-    /// Where you got on or off (a bigger dot in the operator's colour).
-    var big = false
-    var ridden = true
-    /// No line above (the first stop of the ride) or below (the last).
-    var startsHere = false
-    var endsHere = false
-    var above = TripDetailLogic.RailHalf()
-    var below = TripDetailLogic.RailHalf()
-
-    var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                if startsHere { Color.clear.frame(maxHeight: .infinity) } else { half(above).frame(maxHeight: .infinity) }
-                if endsHere { Color.clear.frame(maxHeight: .infinity) } else { half(below).frame(maxHeight: .infinity) }
-            }
-            .frame(width: 14)
-            Circle()
-                .fill(big ? color : (ridden ? (covered ? color : Ink.text) : Ink.text3))
-                .frame(width: big ? 14 : 10, height: big ? 14 : 10)
-                .overlay(Circle().strokeBorder(big ? Ink.text : Ink.bg, lineWidth: 2).padding(-2))
-        }
-        .frame(width: 20)
-    }
-
-    /// A stop the train has passed: the line below it has started to fill.
-    private var covered: Bool { below.fill > 0 || above.fill >= 1 }
-
-    private func half(_ half: TripDetailLogic.RailHalf) -> some View {
-        GeometryReader { proxy in
-            let h = proxy.size.height
-            ZStack(alignment: .top) {
-                if half.ridden {
-                    // Still to go: dotted.
-                    Path { p in
-                        p.move(to: CGPoint(x: 7, y: 0))
-                        p.addLine(to: CGPoint(x: 7, y: h))
-                    }
-                    .stroke(Ink.text3, style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
-                    if half.fill > 0 { color.frame(width: 2, height: h * half.fill).frame(maxWidth: .infinity) }
-                } else {
-                    Ink.hairline.frame(width: 2).frame(maxWidth: .infinity)
-                }
-                if let train = half.train {
-                    Circle().fill(color).frame(width: 10, height: 10)
-                        .overlay(Circle().strokeBorder(Color.white, lineWidth: 2))
-                        .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
-                        .frame(maxWidth: .infinity)
-                        .offset(y: h * train - 5)
-                }
-            }
-        }
     }
 }
 

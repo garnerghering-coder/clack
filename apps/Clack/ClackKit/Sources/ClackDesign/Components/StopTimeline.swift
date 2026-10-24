@@ -205,6 +205,7 @@ public struct StopRow: View {
         let band = DelayBand(delayMin: delay, canceled: canceled)
         let tint: Color? = live ? band.ink : nil
         let shown = time ?? sched
+        if shown != nil {
         VStack(alignment: .trailing, spacing: 0) {
             if compact {
                 Text(Format.time(shown, tz: tz, clock: clock))
@@ -222,6 +223,7 @@ public struct StopRow: View {
         .overlay { if canceled { Rectangle().fill(Ink.text2).frame(height: 1.5) } }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(timeLabel(shown))
+        }
     }
 
     private func timeLabel(_ shown: Double?) -> String {

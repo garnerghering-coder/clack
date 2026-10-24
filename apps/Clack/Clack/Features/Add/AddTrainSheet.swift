@@ -462,32 +462,28 @@ private struct ConfirmStep: View {
         let restriction: String? = picked.picking == .from && stop.noPickup && stop.seq < picked.toSeq ? l10n.t("add.noBoarding")
             : picked.picking == .to && stop.noDropoff && stop.seq > picked.fromSeq ? l10n.t("add.noAlighting") : nil
         let selectable = AddTrainLogic.isSelectable(stop, in: picked)
-        let railColor = (role == .between || end) ? color : Ink.hairline
+        // The ride between the two ends is drawn as travelled (the operator's colour); the rest is a hairline.
+        let inRide = role == .between || end
+        let above = TripDetailLogic.RailHalf(ridden: inRide && role != .from, fill: inRide && role != .from ? 1 : 0)
+        let below = TripDetailLogic.RailHalf(ridden: inRide && role != .to, fill: inRide && role != .to ? 1 : 0)
+        let stops = trip?.stops ?? []
+        var notes: [StopRow.Note] = []
+        if end { notes.append(.init(l10n.t(role == .from ? "add.from" : "add.to"), .accent)) }
+        if let restriction { notes.append(.init(restriction)) }
         return Button {
             if let next = AddTrainLogic.tap(stop, in: picked) {
                 picked = next
                 duplicate = false
             }
         } label: {
-            HStack(spacing: 12) {
-                ZStack {
-                    VStack(spacing: 0) {
-                        (role == .from ? Color.clear : railColor).frame(maxHeight: .infinity)
-                        (role == .to ? Color.clear : railColor).frame(maxHeight: .infinity)
-                    }
-                    .frame(width: 2)
-                    Circle()
-                        .fill(end ? color : Ink.surface)
-                        .frame(width: end ? 16 : 12, height: end ? 16 : 12)
-                        .overlay(Circle().strokeBorder(end ? Ink.markerRing : (role == .between ? color : Ink.text3), lineWidth: 2))
-                }
-                .frame(width: 20)
-                Text(stop.name).clack(.body).foregroundStyle(role == .outside ? Ink.text3 : Ink.text).frame(maxWidth: .infinity, alignment: .leading)
-                if end { Chip(text: l10n.t(role == .from ? "add.from" : "add.to"), accent: true) }
-                if let restriction { Text(restriction).clack(.caption).foregroundStyle(Ink.text2) }
-                Text(Format.time(time?.ms, tz: stop.tz, clock: app.settings.clock)).monospacedDigit().foregroundStyle(Ink.text2)
-            }
-            .frame(minHeight: 46)
+            StopRow(
+                name: stop.name, emphasis: role == .outside ? .dim : end ? .ridden : .plain, notes: notes,
+                rail: StopRail(
+                    color: color, big: end, ridden: inRide, startsHere: stop.seq == stops.first?.seq, endsHere: stop.seq == stops.last?.seq,
+                    above: above, below: below
+                ),
+                time: time?.ms, tz: stop.tz, clock: app.settings.clock, compact: true
+            )
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
