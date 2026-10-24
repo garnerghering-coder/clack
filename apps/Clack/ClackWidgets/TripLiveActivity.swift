@@ -128,21 +128,12 @@ private struct RouteLine: View {
                 bar(card.state.progress ?? (card.phase == "arrived" ? 1 : 0))
             }
         }
-        .frame(height: 12)
+        .frame(height: ProgressBar.markerSize)
         .accessibilityHidden(true)
     }
 
     private func bar(_ progress: Double) -> some View {
-        GeometryReader { g in
-            let p = min(max(progress, 0), 1)
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 2, style: .continuous).fill(Ink.fillSoft).frame(height: 4)
-                RoundedRectangle(cornerRadius: 2, style: .continuous).fill(card.line).frame(width: max(4, g.size.width * p), height: 4)
-                Circle().fill(Ink.text).frame(width: 10, height: 10)
-                    .offset(x: min(max(g.size.width * p - 5, 0), g.size.width - 10))
-            }
-            .frame(maxHeight: .infinity)
-        }
+        ProgressBar(value: progress, color: card.line, marker: .solid)
     }
 }
 

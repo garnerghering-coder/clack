@@ -104,23 +104,8 @@ struct LiveModule: View {
         let progress = max(0, min(1, live.progress ?? 0))
         let hollow = live.positionSource == .estimated || live.localEstimate
         VStack(alignment: .leading, spacing: 6) {
-            GeometryReader { proxy in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Ink.hairline)
-                    Capsule().fill(op).frame(width: proxy.size.width * progress)
-                    Circle()
-                        .fill(hollow ? Ink.bg : op)
-                        .overlay(Circle().strokeBorder(hollow ? op : .white, lineWidth: 2))
-                        .frame(width: 14, height: 14)
-                        .offset(x: proxy.size.width * progress - 7)
-                        .animation(.linear(duration: 1), value: progress)
-                }
-                .frame(height: 4)
-                .frame(maxHeight: .infinity, alignment: .center)
-            }
-            .frame(height: 14)
-            .padding(.top, 2)
-            .padding(.bottom, 2)
+            ProgressBar(value: progress, color: op, marker: hollow ? .hollow : .solid)
+            .padding(.vertical, 2)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(l10n.t("live.progressLabel", ["percent": String(Int((progress * 100).rounded())), "name": leg.destination?.name ?? ""]))
             .accessibilityValue("\(Int((progress * 100).rounded()))%")

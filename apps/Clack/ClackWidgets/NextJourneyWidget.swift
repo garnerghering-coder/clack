@@ -167,19 +167,9 @@ private struct NextJourneyView: View {
         .foregroundStyle(Ink.text)
     }
 
-    private func progressBar(_ fraction: Double) -> some View {
-        GeometryReader { p in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 2).fill(Ink.fillSoft)
-                RoundedRectangle(cornerRadius: 2).fill(Ink.accent).frame(width: max(4, p.size.width * fraction))
-            }
-        }
-        .frame(height: 4)
-    }
-
     @ViewBuilder
     private func progress(_ s: WidgetTimeline.Shown) -> some View {
-        if case .onTrain(_, let p) = s.moment { progressBar(p) }
+        if case .onTrain(_, let p) = s.moment { ProgressBar(value: p, color: Ink.accent) }
     }
 
     private func topLine(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> some View {

@@ -133,7 +133,7 @@ struct PassportScreen: View {
             groupTitle(l10n.t("passport.collections"))
             Card {
                 Text(l10n.t("passport.operators")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Bars(rows: data.operators, unit: unit, label: { ops[$0.key]?.name ?? $0.key }, color: { MapStyle.opColor(ops[$0.key]?.brandColor, dark: true) }, lead: { OperatorBadge(op: ops[$0.key], size: .medium) })
+                Bars(rows: data.operators, unit: unit, label: { ops[$0.key]?.name ?? $0.key }, brand: { ops[$0.key]?.brandColor ?? "" }, lead: { OperatorBadge(op: ops[$0.key], size: .medium) })
             }
             if !data.trainTypes.isEmpty {
                 Card {
@@ -194,7 +194,7 @@ struct PassportScreen: View {
             }
             Card {
                 Text(l10n.t("passport.products")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Bars(rows: data.products, unit: unit, label: { l10n.t("products.\($0.key)") }, color: { _ in "accent" }, lead: { _ in EmptyView() })
+                Bars(rows: data.products, unit: unit, label: { l10n.t("products.\($0.key)") }, brand: { _ in nil }, lead: { _ in EmptyView() })
             }
 
             groupTitle(l10n.t("passport.records"))
@@ -266,17 +266,7 @@ struct PassportScreen: View {
                     Text("\(Int((d.onTimePct ?? 0).rounded()))%").clack(.passportBig).monospacedDigit().foregroundStyle(Ink.text)
                     Text(l10n.t("passport.onTime")).clack(.caption).foregroundStyle(Ink.text2)
                 }
-                HStack(spacing: 2) {
-                    ForEach(bands.filter { $0.count > 0 }, id: \.key) { band in
-                        Rectangle().fill(band.band.fill).frame(minWidth: 6).layoutPriority(Double(band.count))
-                            .frame(maxWidth: .infinity)
-                            .frame(width: nil)
-                            .containerRelativeFrame(.horizontal) { width, _ in max(6, width * Double(band.count) / Double(max(total, 1))) }
-                    }
-                }
-                .frame(height: 12)
-                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
-                .accessibilityHidden(true)
+                SegmentedBar(segments: bands.map { .init(id: $0.key, count: $0.count, color: $0.band.fill) })
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(bands, id: \.key) { band in
                         HStack(spacing: 4) {
@@ -514,11 +504,12 @@ private struct RecordTile: View {
 private struct Bars<Lead: View>: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
+    @Environment(\.colorScheme) private var scheme
     let rows: [Passport.CountRow]
     let unit: DistanceUnit
     let label: (Passport.CountRow) -> String
-    /// A hex colour, or "accent".
-    let color: (Passport.CountRow) -> String
+    /// The operator's brand colour (hex) for the bar; the accent when nil.
+    let brand: (Passport.CountRow) -> String?
     @ViewBuilder var lead: (Passport.CountRow) -> Lead
 
     var body: some View {
@@ -534,15 +525,8 @@ private struct Bars<Lead: View>: View {
                             Text("\(l10n.t("passport.trainsCount", count: row.count)) · \(Format.distance(row.distanceM, unit: unit, language: app.settings.language))")
                                 .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
                         }
-                        GeometryReader { proxy in
-                            ZStack(alignment: .leading) {
-                                RoundedRectangle(cornerRadius: 3).fill(Ink.hairline)
-                                RoundedRectangle(cornerRadius: 3)
-                                    .fill(color(row) == "accent" ? Ink.accent : (Color(hex: color(row)) ?? Ink.accent))
-                                    .frame(width: proxy.size.width * Double(row.count) / Double(most))
-                            }
-                        }
-                        .frame(height: 6)
+                        ProgressBar(value: Double(row.count) / Double(most), color: brand(row).map { operatorColor($0, scheme: scheme) } ?? Ink.accent)
+                            .accessibilityHidden(true)
                     }
                 }
             }

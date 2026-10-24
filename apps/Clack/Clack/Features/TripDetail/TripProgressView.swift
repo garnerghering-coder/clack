@@ -19,7 +19,6 @@ struct TripProgressView: View {
     /// Progress already worked out (a whole journey's), instead of the trip's own.
     var given: TripProgress?
     @State private var progress: TripProgress?
-    @State private var filled = false
     @State private var shown = false
 
     private static let countryNames = ["SE": "Sweden", "NO": "Norway", "DK": "Denmark", "DE": "Germany", "FI": "Finland"]
@@ -36,7 +35,6 @@ struct TripProgressView: View {
             }
             try? await Task.sleep(for: .milliseconds(120))
             shown = true
-            filled = true
         }
     }
 
@@ -111,17 +109,8 @@ struct TripProgressView: View {
                 Text(reached ? l10n.t("progress.reached") : l10n.t("passport.progressOf", ["value": String(Int(moved.after.rounded(.down))), "target": String(Int(moved.target))]))
                     .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
             }
-            GeometryReader { proxy in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.surfaceRaised)
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.accent.opacity(0.35)).frame(width: proxy.size.width * fraction(moved.before))
-                    RoundedRectangle(cornerRadius: 4).fill(Ink.accent)
-                        .frame(width: proxy.size.width * fraction(filled || reduceMotion ? moved.after : moved.before))
-                        .animation(reduceMotion ? nil : .timingCurve(0.2, 0.8, 0.2, 1, duration: 1.1).delay(0.3), value: filled)
-                }
-            }
-            .frame(height: 8)
-            .accessibilityHidden(true)
+            ProgressBar(value: fraction(moved.after), color: Ink.accent, previous: fraction(moved.before), animateIn: true)
+                .accessibilityHidden(true)
         }
     }
 }
