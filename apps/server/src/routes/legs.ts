@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setTrainType, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
+import { cleanSeatField, createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
@@ -58,12 +58,24 @@ export const legRoutes =
       return getLeg(db, req.userId, req.params.id);
     });
 
-    // Edits the owner can make to a saved trip. Only the train type for now.
-    app.patch<{ Params: { id: string }; Body: { trainType?: string | null } }>('/legs/:id', async (req, reply) => {
-      const t = req.body?.trainType;
-      if (t === undefined) return reply.code(400).send({ error: 'nothing to change' });
-      if (t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
-      if (!setTrainType(db, req.userId, req.params.id, t)) return reply.code(404).send({ error: 'not found' });
+    // Edits the owner can make to a saved trip: the train type, and where they sat. Absent fields stay as they are;
+    // trainType, coach and seat accept null to clear.
+    app.patch<{ Params: { id: string }; Body: { trainType?: string | null; coach?: string | null; seat?: string | null } }>('/legs/:id', async (req, reply) => {
+      const body = req.body ?? {};
+      const t = body.trainType;
+      let coach: string | null | undefined;
+      let seat: string | null | undefined;
+      try {
+        coach = cleanSeatField(body.coach, 'coach');
+        seat = cleanSeatField(body.seat, 'seat');
+      } catch (e) {
+        if (e instanceof LegError) return reply.code(e.status).send({ error: e.message });
+        throw e;
+      }
+      if (t === undefined && coach === undefined && seat === undefined) return reply.code(400).send({ error: 'nothing to change' });
+      if (t !== undefined && t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
+      if (!setCoachSeat(db, req.userId, req.params.id, { coach, seat })) return reply.code(404).send({ error: 'not found' });
+      if (t !== undefined) setTrainType(db, req.userId, req.params.id, t);
       return getLeg(db, req.userId, req.params.id);
     });
 

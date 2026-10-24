@@ -41,6 +41,22 @@ export function straightLineDistanceM(stops: Pick<TripStop, 'lat' | 'lon'>[]): n
   return d;
 }
 
+/** Longest coach or seat the owner can write ("12A", "Vagn 5" is too long: the coach is just "5"). */
+export const MAX_SEAT_FIELD = 8;
+
+/**
+ * A coach or seat from a request: undefined stays undefined (absent), null and a blank string clear it, anything else
+ * is trimmed. Not a string, or longer than 8 characters, is a 400.
+ */
+export function cleanSeatField(value: unknown, name: 'coach' | 'seat'): string | null | undefined {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  if (typeof value !== 'string') throw new LegError(`${name} must be text or null`, 400);
+  const t = value.trim();
+  if (t.length > MAX_SEAT_FIELD) throw new LegError(`${name} can be at most ${MAX_SEAT_FIELD} characters`, 400);
+  return t === '' ? null : t;
+}
+
 export interface CreateLegInput {
   tripKey: string;
   serviceDate: string;
@@ -48,9 +64,14 @@ export interface CreateLegInput {
   toSeq: number;
   /** Save even if the same train is already logged on that date. */
   force?: boolean;
+  /** Where you sat, optional. */
+  coach?: string | null;
+  seat?: string | null;
 }
 
 export function createLeg(db: Db, userId: string, input: CreateLegInput, now = Date.now()): string {
+  const coach = cleanSeatField(input.coach, 'coach') ?? null;
+  const seat = cleanSeatField(input.seat, 'seat') ?? null;
   const found = tripStops(db, input.tripKey, input.serviceDate);
   if (!found) throw new LegError('That train is not in the timetable for that date', 404);
   const { trip, stops } = found;
@@ -95,6 +116,8 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
         isEstimatedGeometry: true,
         trainType: typicalTrainType(trip.operator_id, productOf(trip.route_type, trip.category), trip.train_number),
         trainTypeSource: 'typical',
+        coach,
+        seat,
         createdAt: new Date(now),
       })
       .run();
@@ -132,6 +155,8 @@ export interface ManualLegInput {
   operatorId?: string | null;
   trainNumber?: string | null;
   category?: string | null;
+  coach?: string | null;
+  seat?: string | null;
 }
 
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -143,6 +168,8 @@ const CATEGORIES = new Set(['high_speed', 'intercity', 'night', 'regional', 'com
  * counted as travelled once its time has passed, since you're the one saying you took it.
  */
 export function createManualLeg(db: Db, userId: string, input: ManualLegInput, now = Date.now()): string {
+  const coach = cleanSeatField(input.coach, 'coach') ?? null;
+  const seat = cleanSeatField(input.seat, 'seat') ?? null;
   const st = (id: string) => db.select().from(stations).where(eq(stations.id, id)).get();
   const from = st(input.fromStationId);
   const to = st(input.toStationId);
@@ -185,6 +212,8 @@ export function createManualLeg(db: Db, userId: string, input: ManualLegInput, n
         isEstimatedGeometry: true,
         trainType: typicalTrainType(input.operatorId ?? null, category, trainNumber),
         trainTypeSource: 'typical',
+        coach,
+        seat,
         createdAt: new Date(now),
       })
       .run();
@@ -225,6 +254,8 @@ const legColumns = {
   originStationId: legs.originStationId,
   destStationId: legs.destStationId,
   notes: legs.notes,
+  coach: legs.coach,
+  seat: legs.seat,
   ride: legs.ride,
   rideReason: legs.rideReason,
   borderEvidence: legs.borderEvidence,
@@ -302,6 +333,15 @@ export function setTrainType(db: Db, userId: string, id: string, trainType: stri
     db.update(legs).set({ trainType: typical, trainTypeSource: 'typical' }).where(eq(legs.id, id)).run();
   } else db.update(legs).set({ trainType, trainTypeSource: 'user' }).where(eq(legs.id, id)).run();
   return true;
+}
+
+/** The owner's coach and seat. A field left undefined is unchanged; null clears it. */
+export function setCoachSeat(db: Db, userId: string, id: string, fields: { coach?: string | null; seat?: string | null }): boolean {
+  const set: { coach?: string | null; seat?: string | null } = {};
+  if (fields.coach !== undefined) set.coach = fields.coach;
+  if (fields.seat !== undefined) set.seat = fields.seat;
+  if (!Object.keys(set).length) return !!db.select({ id: legs.id }).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
+  return db.update(legs).set(set).where(and(eq(legs.userId, userId), eq(legs.id, id))).run().changes > 0;
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {
