@@ -122,7 +122,7 @@ struct TicketImportSheet: View {
         case .reading:
             Skeleton(height: 120)
         case .unreadable:
-            VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 16) {
                 Text(l10n.t("ticketImport.unreadable")).clack(.body).foregroundStyle(Ink.text2)
                 Button(l10n.t("ticketImport.addByHand")) {
                     router.ticketFile = nil
@@ -152,9 +152,8 @@ struct TicketImportSheet: View {
             model.toggle(row.id)
         } label: {
             HStack(alignment: .top, spacing: 12) {
-                Image(systemName: row.selected ? "checkmark.square.fill" : "square")
-                    .font(.system(size: 22))
-                    .foregroundStyle(row.selected ? Ink.accent : Ink.text3)
+                LucideIcon(name: row.selected ? "square-check" : "square", size: 22)
+                    .foregroundStyle(row.selected ? Ink.accentInk : Ink.text3)
                     .opacity(row.state == .found || row.selected ? 1 : 0.4)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("\(from) → \(to)").clack(.rowTitle).foregroundStyle(Ink.text).multilineTextAlignment(.leading)
@@ -165,7 +164,7 @@ struct TicketImportSheet: View {
                 }
                 Spacer(minLength: 0)
             }
-            .padding(14)
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)

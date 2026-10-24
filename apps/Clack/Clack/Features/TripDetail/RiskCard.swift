@@ -45,20 +45,14 @@ struct RiskCard: View {
                 tone: .watch, icon: "activity", title: l10n.t(nowWarn ? "risk.titleNow" : "risk.titlePattern"),
                 dismissKey: "risk:\(leg.id):\(risk.warnings.map(\.kind).joined(separator: ","))"
             ) {
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     ForEach(Array(risk.warnings.enumerated()), id: \.offset) { _, warning in
-                        HStack(alignment: .firstTextBaseline, spacing: 6) {
-                            Text("•")
-                            (Text(l10n.t("risk.kind.\(warning.kind)")).fontWeight(.semibold).foregroundStyle(Ink.text2) + Text(" ") + Text(line(warning)))
-                        }
-                        .clack(.body).foregroundStyle(Ink.text)
+                        (Text(l10n.t("risk.kind.\(warning.kind)")).fontWeight(.semibold).foregroundStyle(Ink.text2) + Text(" ") + Text(line(warning)))
+                            .clack(.body).foregroundStyle(Ink.text)
                     }
                     if changeAtRisk, let next, let change {
-                        HStack(alignment: .firstTextBaseline, spacing: 6) {
-                            Text("•")
-                            Text(l10n.t("risk.change", ["min": String(change), "station": next.origin?.name ?? ""]))
-                        }
-                        .clack(.body).foregroundStyle(Ink.text)
+                        Text(l10n.t("risk.change", ["min": String(change), "station": next.origin?.name ?? ""]))
+                            .clack(.body).foregroundStyle(Ink.text)
                     }
                 }
                 InfoNote(

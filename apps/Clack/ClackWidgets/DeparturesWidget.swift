@@ -129,7 +129,7 @@ private struct DeparturesView: View {
         Group {
             if let board = entry.board {
                 let rows = WidgetTimeline.departures(board.rows, at: wMs(entry.date), limit: family == .systemLarge ? 8 : 4)
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .firstTextBaseline) {
                         Text(entry.stationName ?? board.name).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1)
                         Spacer(minLength: 6)

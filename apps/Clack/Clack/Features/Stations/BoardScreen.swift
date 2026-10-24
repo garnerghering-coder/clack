@@ -124,7 +124,7 @@ struct BoardScreen: View {
     // MARK: pieces
 
     private var head: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(station?.name ?? " ").clack(.pageTitle).foregroundStyle(Ink.text).lineLimit(2).minimumScaleFactor(0.7)
                     .accessibilityAddTraits(.isHeader)
@@ -152,7 +152,7 @@ struct BoardScreen: View {
             let now = context.date.timeIntervalSince1970 * 1000
             let fresh = now - board.updatedAt < 120_000
             let ago = LiveRules.ago(l10n, then: board.updatedAt, now: now)
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 if fresh {
                     StatusLine(.live, l10n.t("live.chip"))
                     Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
@@ -189,16 +189,16 @@ struct BoardScreen: View {
                         if page.more || (later == nil && !loadingLater) {
                             Button(l10n.t("board.showLater")) { Task { await showLater(more: page.more) } }
                                 .buttonStyle(LinkButtonStyle())
-                                .frame(maxWidth: .infinity).padding(.top, 14)
+                                .frame(maxWidth: .infinity).padding(.top, 16)
                         } else if loadingLater {
-                            Skeleton(height: 48).padding(.top, 14)
+                            Skeleton(height: 48).padding(.top, 16)
                         }
                     }
                 }
             } else if error {
                 Banner(kind: .error) { Text(l10n.t("board.error")) }
             } else {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 12) {
                     Skeleton(height: 64)
                     Skeleton(height: 64)
                     Text(l10n.t("board.loading")).clack(.caption).foregroundStyle(Ink.text2)

@@ -50,7 +50,7 @@ struct TripProgressView: View {
                         VStack(spacing: 8) {
                             Text(p.unlocked.count == 1 ? l10n.t("progress.unlockedOne") : l10n.t("progress.unlocked", count: p.unlocked.count))
                                 .clack(.captionUpper).foregroundStyle(Ink.text2)
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8)], spacing: 14) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8)], spacing: 16) {
                                 ForEach(Array(p.unlocked.enumerated()), id: \.offset) { index, milestone in
                                     VStack(spacing: 2) {
                                         Medal(m: milestone, size: 84)
@@ -66,13 +66,13 @@ struct TripProgressView: View {
                         .frame(maxWidth: .infinity)
                     }
                     if !firsts.isEmpty {
-                        FlowLayout(spacing: 14, lineSpacing: 6) {
+                        FlowLayout(spacing: 16, lineSpacing: 8) {
                             ForEach(firsts, id: \.self) { Chip(text: $0, accent: true) }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     if !p.moved.isEmpty {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 12) {
                             ForEach(Array(p.moved.enumerated()), id: \.offset) { _, moved in movedRow(moved) }
                         }
                     }

@@ -96,7 +96,7 @@ struct LegRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 if upcoming { CountdownLine(leg: leg, now: now) }
                 Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
-                    .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
                 metaLine
                 if !meta2.isEmpty { Text(meta2).clack(.caption).foregroundStyle(Ink.text2) }
@@ -190,7 +190,7 @@ struct Layover: View {
             let body = HStack(spacing: 12) {
                 DashedLine(dash: 3, gap: 4).frame(minHeight: 34)
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         LucideIcon(name: "clock", size: 14)
                         if atRisk {
                             Text(l10n.t("trips.layoverMissed", ["station": station]))
@@ -218,7 +218,7 @@ struct Layover: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 4)
             }
-            .foregroundStyle(atRisk ? Ink.veryLate : Ink.text2)
+            .foregroundStyle(atRisk ? Ink.veryLateInk : Ink.text2)
             .padding(.leading, 28)
             .padding(.trailing, 12)
             .padding(.vertical, 4)
@@ -258,12 +258,12 @@ struct TransferChip: View {
         var text = l10n.t("journey.transfer", ["min": String(t.planned), "station": t.station])
         if let actual = t.actual, actual != t.planned, !t.missed { text += " · " + l10n.t("journey.actually", ["min": String(actual)]) }
         if t.missed { text += " · " + l10n.t("journey.missed") } else if t.tight { text += " · " + l10n.t("journey.tight") }
-        return HStack(spacing: 10) {
+        return HStack(spacing: 12) {
             DashedLine(dash: 3, gap: 3).frame(height: 22)
             StatusLine(t.missed ? .band(.veryLate) : t.tight ? .band(.slight) : .arrived, text)
         }
         .padding(.vertical, 2)
-        .padding(.leading, 17)
+        .padding(.leading, 16)
     }
 }
 
@@ -286,7 +286,7 @@ struct JourneyCard: View {
                             .clack(.rowTitle).foregroundStyle(Ink.text)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 10)
+                    .padding(.top, 12)
                     .padding(.bottom, 4)
                 }
                 .buttonStyle(.plain)
@@ -297,8 +297,8 @@ struct JourneyCard: View {
             }
         }
         .padding(.top, 4)
-        .padding(.bottom, 6)
-        .padding(.horizontal, 14)
+        .padding(.bottom, 8)
+        .padding(.horizontal, 16)
         .background {
             ZStack {
                 Ink.surface
@@ -315,7 +315,7 @@ struct JourneyCard: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
-        .padding(.bottom, 10)
+        .padding(.bottom, 12)
     }
 }
 
@@ -349,7 +349,7 @@ struct NothingAhead: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             DottedLine(endDots: true)
             Text(l10n.t("trips.whereNext")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("trips.whereNextBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
@@ -357,7 +357,7 @@ struct NothingAhead: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 28)
-        .padding(.horizontal, 18)
+        .padding(.horizontal, 16)
         .background(Surface.Hero())
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -370,7 +370,7 @@ struct EmptyActions: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             Button {
                 router.openAdd()
             } label: {
@@ -430,7 +430,7 @@ struct FollowingSection: View {
             OperatorBadge(op: op, size: .medium)
             VStack(alignment: .leading, spacing: 2) {
                 Text(follow.label ?? l10n.t("liveMap.train", ["number": follow.trainNumber]))
-                    .clack(.rowTitle).fontWeight(.bold).foregroundStyle(Ink.text)
+                    .clack(.rowTitle).foregroundStyle(Ink.text)
                 Text([op?.name, follow.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.caption).foregroundStyle(Ink.text2)
                 Text(nextLine).clack(.caption).foregroundStyle(Ink.text2)
             }
@@ -440,12 +440,12 @@ struct FollowingSection: View {
                     LucideIcon(name: "eye", size: 12)
                     Text(l10n.t("trips.followingChip"))
                 }
-                .font(ClackFont.inter(11, .semibold)).foregroundStyle(Ink.text2)
+                .clack(.micro).fontWeight(.semibold).foregroundStyle(Ink.text2)
                 if let train = follow.train { DelayText(delay: train.delayMin) }
             }
         }
         .padding(.vertical, 12)
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 16)
         .background(Surface.Pill(op: color))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
@@ -462,7 +462,7 @@ struct ReviewCard: View {
 
     var body: some View {
         let dep = leg.schedDep?.ms
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(l10n.t("record.question")).clack(.captionUpper).foregroundStyle(Ink.text2)
             NavigationLink(value: AppRoute.trip(leg.id)) {
                 Text("\([leg.operator?.name, leg.trainNumber].compactMap { $0 }.joined(separator: " ")) · \(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
@@ -477,10 +477,10 @@ struct ReviewCard: View {
             }
             .disabled(busy)
         }
-        .padding(.vertical, 14)
+        .padding(.vertical, 16)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Surface.Lit())
+        .background(Ink.surface)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card, color: Ink.accentLine)
         .padding(.vertical, 4)

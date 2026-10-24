@@ -72,10 +72,10 @@ struct FeaturedCard: View {
             ZStack(alignment: .topLeading) {
                 featuredMap(grounded: grounded)
                 Text(tag)
-                    .font(ClackFont.inter(11, .regular)).foregroundStyle(Ink.text2)
+                    .clack(.micro).foregroundStyle(Ink.text2)
                     .padding(.vertical, 2).padding(.horizontal, 8)
-                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .padding(.leading, 10).padding(.top, 8)
+                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                    .padding(.leading, 12).padding(.top, 8)
             }
             .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .accessibilityHidden(true)
@@ -94,7 +94,7 @@ struct FeaturedCard: View {
                 TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
                 bottom(now: now, live: live)
             }
-            .padding(.top, 14).padding(.bottom, 16).padding(.horizontal, 16)
+            .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Surface.Hero(op: op))
         }

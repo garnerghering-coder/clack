@@ -28,7 +28,7 @@ struct ArrivalScreen: View {
         ZStack {
             Ink.bg.ignoresSafeArea()
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 16) {
                     if let last = legs.last, let destination = last.destination {
                         header(last, destination)
                         summary
@@ -41,7 +41,7 @@ struct ArrivalScreen: View {
                     }
                     actions
                 }
-                .padding(20)
+                .padding(16)
             }
         }
         .preferredColorScheme(.dark)
@@ -56,7 +56,7 @@ struct ArrivalScreen: View {
     private func header(_ last: Leg, _ destination: StationRef) -> some View {
         let arr = TripsLogic.expected(last).arr ?? 0
         let name = destination.name.uppercased()
-        return VStack(alignment: .leading, spacing: 10) {
+        return VStack(alignment: .leading, spacing: 12) {
             Text("\(l10n.t("arrival.arrived")) · \(Format.time(arr, tz: destination.tz, clock: app.settings.clock))")
                 .clack(.captionUpper).foregroundStyle(Ink.accent)
             Text(l10n.t("arrival.welcomeTo")).clack(.welcomeTitle).foregroundStyle(Ink.text)
@@ -67,8 +67,8 @@ struct ArrivalScreen: View {
     @ViewBuilder
     private var summary: some View {
         let s = ArrivalLogic.summary(legs)
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
                 Tile(label: l10n.t("passport.timeOnTrains"), value: Format.duration(s.minutesOnBoard))
                 Tile(label: l10n.t("passport.trains"), value: String(s.trains))
                 if let distance = s.distanceM {

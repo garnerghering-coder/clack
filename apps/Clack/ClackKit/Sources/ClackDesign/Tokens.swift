@@ -76,6 +76,11 @@ public enum Ink {
     // Brand
     /// The splash and app icon's signal yellow `#FFD400` (the owner's choice for those two; the interface uses `accent`).
     public static let brandYellow = Color("brand-yellow", bundle: .module)
+    // Station maps
+    /// Where you are on a station map.
+    public static let me = Color("me", bundle: .module)
+    /// White type or a glyph on a coloured disc (a place's badge, a severe alert's icon), in both themes.
+    public static let onTint = Color("on-tint", bundle: .module)
 }
 
 extension Color {

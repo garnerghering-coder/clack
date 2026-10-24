@@ -112,14 +112,14 @@ struct TripsScreen: View {
             )
             if model.failed {
                 Banner(kind: .error) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         Text(l10n.t("trips.loadError"))
                         Button(l10n.t("trips.retry")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
                     }
                 }
             }
             if model.legs == nil && !model.failed {
-                VStack(spacing: 10) {
+                VStack(spacing: 12) {
                     Skeleton()
                     Skeleton()
                     Skeleton()
@@ -143,7 +143,7 @@ struct TripsScreen: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             DottedLine()
             Text(l10n.t("trips.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
             Text(l10n.t("trips.emptyBody")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
@@ -193,7 +193,7 @@ struct TripsScreen: View {
                 Text(month.label)
                     .clack(.sectionHeader).foregroundStyle(Ink.text2)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 12).padding(.bottom, 6)
+                    .padding(.top, 12).padding(.bottom, 8)
                     .background(Ink.bg)
             }
         }

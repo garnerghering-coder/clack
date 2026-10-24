@@ -21,14 +21,14 @@ struct TrainCard: View {
         let type = leg.leg.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let source = leg.leg.trainTypeSource
         let operatorId = leg.leg.operator?.id
-        Card(spacing: 10) {
+        Card(spacing: 12) {
             Text(l10n.t("train.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             if let type {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    TrainPicture(type: type, operatorId: operatorId, height: 56, label: type.name).padding(.top, 6).padding(.bottom, 2)
+                    TrainPicture(type: type, operatorId: operatorId, height: 56, label: type.name).padding(.top, 8).padding(.bottom, 2)
                 }
                 HStack(spacing: 8) {
-                    Text(type.name).font(ClackFont.inter(18, .semibold)).foregroundStyle(Ink.text)
+                    Text(type.name).clack(.headline).foregroundStyle(Ink.text)
                     Chip(text: l10n.t(source == .user ? "train.yourChoice" : source == .composition ? "train.planned" : "train.typical"))
                 }
                 Text(type.about).clack(.caption).foregroundStyle(Ink.text2)
@@ -57,7 +57,7 @@ struct TrainCard: View {
     }
 
     private func picker(current: String?, source: TrainTypeSource?, operatorId: String?) -> some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 8) {
             ForEach(app.trainTypes) { type in
                 Button { choose(type.id) } label: {
                     HStack(spacing: 12) {
@@ -65,7 +65,7 @@ struct TrainCard: View {
                         Text(type.name).clack(.body).foregroundStyle(Ink.text)
                         Spacer(minLength: 0)
                     }
-                    .padding(.vertical, 8).padding(.horizontal, 10)
+                    .padding(.vertical, 8).padding(.horizontal, 12)
                     .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm, color: type.id == current ? Ink.accentLine : Ink.hairline)
                 }
@@ -75,7 +75,7 @@ struct TrainCard: View {
                 Button { choose(nil) } label: {
                     Text(l10n.t("train.resetTypical")).clack(.body).foregroundStyle(Ink.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 8).padding(.horizontal, 10)
+                        .padding(.vertical, 8).padding(.horizontal, 12)
                         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                         .hairlineBorder(radius: Radius.controlSm)
                 }

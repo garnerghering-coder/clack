@@ -75,6 +75,9 @@ TOKENS = {
     'launch-bg': '#ffd400',
     # The splash view and the app icon (owner's decision): the same signal yellow, as a token
     'brand-yellow': '#ffd400',
+    # Station maps (styles.css :698): where you are; and white type on a coloured disc (a place's badge, an alert's icon)
+    'me': ('#3b8bff', '#1a6ff0'),
+    'on-tint': '#ffffff',
 }
 
 

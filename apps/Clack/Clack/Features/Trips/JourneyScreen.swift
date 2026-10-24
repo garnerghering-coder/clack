@@ -31,7 +31,7 @@ struct JourneyScreen: View {
                     .fixedSize(horizontal: false, vertical: true)
                 Text(Format.longDate(dep, tz: first.origin?.tz ?? "Europe/Stockholm", language: app.settings.language))
                     .clack(.body).foregroundStyle(Ink.text2)
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     Tile(label: l10n.t("journey.doorToDoor"), value: Format.duration((arr - dep) / 60_000))
                     Tile(label: l10n.t("passport.trains"), value: String(legs.count))
                     Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))

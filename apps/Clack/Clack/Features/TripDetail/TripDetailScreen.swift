@@ -61,7 +61,7 @@ struct TripDetailScreen: View {
             if let toast {
                 Text(toast)
                     .clack(.body).fontWeight(.semibold).foregroundStyle(Ink.text)
-                    .padding(.vertical, 10).padding(.horizontal, 16)
+                    .padding(.vertical, 12).padding(.horizontal, 16)
                     .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                     .hairlineBorder(radius: Radius.input)
                     .clackShadow()
@@ -194,7 +194,7 @@ struct TripDetailScreen: View {
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
-                    .padding(.vertical, 4).padding(.horizontal, 10)
+                    .padding(.vertical, 4).padding(.horizontal, 12)
                     .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                     .hairlineBorder(radius: Radius.controlSm)
                     .frame(maxWidth: .infinity)
@@ -330,7 +330,7 @@ struct TripDetailScreen: View {
                         Text(l10n.t("live.approachingTo", ["name": board.name])).clack(.rowTitle).foregroundStyle(Ink.text)
                         if shown.positionSource == .gps, !shown.localEstimate { Speedometer(kmh: shown.speedKmh, at: shown.positionAt?.ms, now: now).clack(.caption) }
                     }
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         Text(l10n.t("live.arrivesAtLabel")).clack(.body).foregroundStyle(Ink.text)
                         FlapTime(time: shown.eta?.ms, tz: board.tz, clock: app.settings.clock).clack(.body).foregroundStyle(Ink.text)
                     }
@@ -350,9 +350,9 @@ struct TripDetailScreen: View {
                 // Why it doesn't count (or needs a check); a trip that counts needs no line about it.
                 if l.ride != .auto && l.ride != .confirmed {
                     Text(l10n.t("record.state.\(l.ride.rawValue)", ["why": l10n.t("record.why.\(l.rideReason ?? "no_reports")")]))
-                        .clack(.stopName).foregroundStyle(l.ride == .review ? Ink.late : Ink.text)
+                        .clack(.stopName).foregroundStyle(l.ride == .review ? Ink.lateInk : Ink.text)
                 }
-                HStack(spacing: 14) {
+                HStack(spacing: 16) {
                     if l.ride == .review {
                         Button(l10n.t("record.yes")) { Task { await answer(.yes) } }.buttonStyle(.clack(.primary, small: true))
                         Button(l10n.t("record.no")) { Task { await answer(.no) } }.buttonStyle(.clack(small: true))
@@ -466,7 +466,7 @@ struct TripDetailScreen: View {
         let borderAt = TripDetailLogic.borderStation(detail)
         return Card(spacing: 8) {
             if l.dataQuality != .full && !(l.dataQuality == .partial && !beyond.isEmpty) {
-                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Chip(text: l10n.t("detail.quality.\(l.dataQuality.rawValue)"))
                     Text(l10n.t("detail.qualityNote.\(l.dataQuality.rawValue)")).clack(.caption).foregroundStyle(Ink.text2)
                 }
@@ -486,7 +486,7 @@ struct TripDetailScreen: View {
     }
 
     private func actions(_ l: Leg) -> some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             if l.status != .snapshotted {
                 Button {
                     Task { await refresh() }
@@ -529,14 +529,14 @@ struct TimeBlock: View {
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
         VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
                 Spacer(minLength: 0)
                 DelayText(delay: delay, canceled: canceled)
             }
             .frame(minHeight: 26)
             Text(Format.time(sched, tz: tz, clock: app.settings.clock))
-                .font(ClackFont.inter(14)).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
                 .opacity(changed ? 1 : 0)
                 .accessibilityHidden(!changed)
             HStack(alignment: .firstTextBaseline, spacing: 2) {
@@ -545,7 +545,7 @@ struct TimeBlock: View {
                     .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
                 if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
             }
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 if let platform { Chip(text: l10n.t("trips.platform", ["platform": platform])) } else { Chip(text: "–").hidden() }
             }
         }

@@ -21,7 +21,7 @@ const ICONS = [
   'external-link', 'eye', 'eye-off', 'flag', 'gauge', 'globe', 'info', 'layers', 'list', 'locate-fixed', 'map',
   'map-pin', 'maximize-2', 'moon', 'navigation', 'paw-print', 'plug', 'plus', 'radar', 'refresh-cw', 'repeat', 'route',
   'search', 'settings', 'share-2', 'sliders-horizontal', 'smartphone', 'stamp', 'star', 'ticket', 'toilet', 'train-front',
-  'trash', 'volume-x', 'wifi', 'wifi-off', 'x',
+  'trash', 'volume-x', 'wifi', 'wifi-off', 'x', 'square', 'square-check',
   // Station map pictograms (the station map's points of interest).
   'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
 ];

@@ -284,7 +284,7 @@ struct TestAlertsScreen: View {
                             Text(model.label(sample.id)).clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(sample.body).clack(.caption).foregroundStyle(Ink.text2).multilineTextAlignment(.leading)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 6)
+                        .frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 8)
                     }
                     .buttonStyle(.plain)
                 }

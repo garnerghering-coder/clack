@@ -81,6 +81,8 @@ public struct TextRole {
     public static let timeBig = TextRole(size: 36, lineHeight: 40, display: true, style: .largeTitle)
     public static let heroTimes = TextRole(size: 34, lineHeight: 40, tracking: -0.01, display: true, style: .largeTitle)
     public static let bigTime = TextRole(size: 26, lineHeight: 30, display: true, style: .title)
+    /// The unit after a big number ("km", "kg"), in the display face.
+    public static let bigUnit = TextRole(size: 22, lineHeight: 26, display: true, style: .title2)
 
     public var font: Font {
         display ? ClackFont.grotesk(size, relativeTo: style) : ClackFont.inter(size, weight, relativeTo: style)

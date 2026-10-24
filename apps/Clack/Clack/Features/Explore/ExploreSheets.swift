@@ -57,7 +57,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
                     intro
                     if !collapsed { content }
                 }
-                .padding(.horizontal, 16).padding(.bottom, 14)
+                .padding(.horizontal, 16).padding(.bottom, 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .onGeometryChange(for: Double.self) { $0.size.height } action: { bodyHeight = $0 }
                 .onGeometryChange(for: Double.self) { $0.frame(in: .named("sheet-scroll")).minY } action: { scrolled = $0 < -6 }
@@ -80,7 +80,7 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var grabber: some View {
-        RoundedRectangle(cornerRadius: 3, style: .continuous)
+        RoundedRectangle(cornerRadius: Radius.bar, style: .continuous)
             .fill(Ink.text3.opacity(0.6))
             .frame(width: 36, height: 5)
             .frame(maxWidth: .infinity).frame(height: 28)
@@ -100,11 +100,11 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var header: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             OperatorBadge(op: op, size: .medium)
                 .scaleEffect(scrolled && !collapsed ? 0.8 : 1, anchor: .leading)
             Button { collapsed.toggle() } label: {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Text(title).clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
                     LucideIcon(name: collapsed ? "chevron-up" : "chevron-down", size: 18).foregroundStyle(Ink.text)
                     Spacer(minLength: 0)
@@ -121,8 +121,8 @@ struct TrainSheet<Intro: View, Content: View, Actions: View>: View {
     }
 
     private var footer: some View {
-        HStack(spacing: 10) { actions }
-            .padding(.horizontal, 16).padding(.top, 10).padding(.bottom, 14)
+        HStack(spacing: 12) { actions }
+            .padding(.horizontal, 16).padding(.top, 12).padding(.bottom, 16)
             .overlay(alignment: .top) { Rectangle().fill(Ink.hairline).frame(height: 1) }
             .onGeometryChange(for: Double.self) { $0.size.height } action: { footHeight = $0 }
     }
@@ -185,7 +185,7 @@ struct StopList: View {
             let next = ExploreLogic.nextStopIndex(list)
             // The train is drawn between the stops it has left and the one it is heading for, as on a trip's page.
             let halves = TripDetailLogic.railHalves(count: list.count, fills: ExploreLogic.railFills(list, now: now), showTrain: true) { _ in true }
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(l10n.t("liveMap.stops")).clack(.captionUpper).foregroundStyle(Ink.text2)
                 VStack(spacing: 0) {
                     ForEach(Array(list.enumerated()), id: \.element.seq) { i, stop in
@@ -216,10 +216,10 @@ struct LiveSheetCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             content
         }
-        .padding(.horizontal, 16).padding(.vertical, 14)
+        .padding(.horizontal, 16).padding(.vertical, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Ink.glass)
         .background(.ultraThinMaterial)
@@ -251,9 +251,9 @@ struct NotRunningSheet: View {
             if let label = follow?.label { Text(label).clack(.rowTitle).foregroundStyle(Ink.text) }
             Text(l10n.t("liveMap.notRunningTitle")).clack(.body).foregroundStyle(Ink.text)
             Text(l10n.t("liveMap.notRunningBody")).clack(.caption).foregroundStyle(Ink.text2)
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 if let follow {
-                    Button { onUnfollow(follow) } label: { HStack(spacing: 6) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
+                    Button { onUnfollow(follow) } label: { HStack(spacing: 8) { LucideIcon(name: "eye-off", size: 16); Text(l10n.t("liveMap.unfollow")) }.frame(maxWidth: .infinity) }
                         .buttonStyle(.clack(wide: true))
                 }
                 Button(l10n.t("common.close"), action: onClose).buttonStyle(.clack(.primary, wide: true))
@@ -308,7 +308,7 @@ struct LiveStationSheet: View {
             } else {
                 Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2)
             }
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 if info?.hasBoard == true {
                     Button(l10n.t("liveMap.allDepartures"), action: onBoard).buttonStyle(.clack(wide: true))
                 }

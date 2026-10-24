@@ -77,7 +77,7 @@ private struct WordmarkLetter: Shape {
 struct Splash: View {
     var body: some View {
         ZStack {
-            Color(hex: "#FFD400")!
+            Ink.brandYellow
             Wordmark(fontSize: 64, animateIn: true)
         }
         .ignoresSafeArea()

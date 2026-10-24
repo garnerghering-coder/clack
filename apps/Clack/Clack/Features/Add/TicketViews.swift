@@ -93,9 +93,9 @@ struct TicketReturnPrompt: View {
                 }
             }
         }
-        .padding(.vertical, 14).padding(.horizontal, 16)
+        .padding(.vertical, 16).padding(.horizontal, 16)
         .frame(maxWidth: 560, alignment: .leading)
-        .background(Surface.Lit())
+        .background(Ink.surface)
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
         .clackShadow()

@@ -78,7 +78,7 @@ private struct YearView: View {
     }
 
     private func content(_ y: WidgetSnapshot.YearBits) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text(l10n.t("widgets.yearTitle", ["year": String(y.year)])).clack(.sectionHeader).foregroundStyle(Ink.text)
                 Spacer()

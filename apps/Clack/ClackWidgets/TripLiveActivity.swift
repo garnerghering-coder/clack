@@ -34,7 +34,8 @@ private struct Card {
     var fromTz: String { state.fromTz ?? attributes.fromTz }
     var toTz: String { state.toTz ?? attributes.toTz }
     var phase: String { state.moment }
-    var line: Color { Color(hex: attributes.color) ?? Ink.accent }
+    /// The operator's colour; the signal yellow when it isn't known (the cards are always dark).
+    var line: Color { operatorColor(attributes.color, scheme: .dark) }
     var url: URL? { URL(string: "clack://trip/\(legId)") }
 
     /// A platform change in the last ten minutes, before the train leaves.
@@ -214,13 +215,13 @@ private struct LockScreen: View {
     let stale: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text(card.route).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1).minimumScaleFactor(0.7)
                 Spacer(minLength: 8)
                 if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text2) }
             }
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1) }
                 Delay(card: card)
                 Detail(card: card)
@@ -416,7 +417,7 @@ private struct KeyValue: View {
 private struct ExpandedLeading: View {
     let card: Card
     var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 4) {
             LucideIcon(name: "train-front", size: 14).foregroundStyle(card.line)
             if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text) }
         }
@@ -428,7 +429,7 @@ private struct ExpandedBottom: View {
     let stale: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 if let word = card.word { Text(word.text).clack(.delay).foregroundStyle(word.ink).lineLimit(1) }
                 Delay(card: card)
                 Spacer(minLength: 4)

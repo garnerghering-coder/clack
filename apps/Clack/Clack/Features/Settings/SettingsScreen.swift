@@ -46,12 +46,12 @@ private struct ChoiceMenu<Value: Hashable>: View {
                 ForEach(Array(options.enumerated()), id: \.offset) { _, option in Text(option.title).tag(option.value) }
             }
         } label: {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Text(options.first { $0.value == selection }?.title ?? "").lineLimit(1)
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
-            .font(ClackFont.inter(15)).foregroundStyle(Ink.text)
-            .padding(.vertical, 7).padding(.horizontal, 10)
+            .clack(.body).foregroundStyle(Ink.text)
+            .padding(.vertical, 8).padding(.horizontal, 12)
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
             .hairlineBorder(radius: Radius.controlSm)
         }
@@ -286,8 +286,8 @@ private struct NameRow: View {
             TextField("", text: $value, prompt: Text(l10n.t("settings.displayNamePlaceholder")).foregroundStyle(Ink.text3))
                 .focused($focused)
                 .multilineTextAlignment(.trailing)
-                .font(ClackFont.inter(15)).foregroundStyle(Ink.text)
-                .padding(.vertical, 7).padding(.horizontal, 10)
+                .clack(.body).foregroundStyle(Ink.text)
+                .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(maxWidth: 200)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                 .hairlineBorder(radius: Radius.controlSm)
@@ -346,13 +346,9 @@ struct AboutScreen: View {
             Card(spacing: 12) {
                 Text(l10n.t("about.intro")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.sourcesTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     ForEach(Self.sources, id: \.self) { source in
-                        HStack(alignment: .firstTextBaseline, spacing: 8) {
-                            Text("•")
-                            Text(l10n.t("about.sources.\(source)"))
-                        }
-                        .clack(.body).foregroundStyle(Ink.text2)
+                        Text(l10n.t("about.sources.\(source)")).clack(.body).foregroundStyle(Ink.text2)
                     }
                 }
                 Text(l10n.t("about.delaysTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)

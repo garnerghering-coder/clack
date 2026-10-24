@@ -103,7 +103,7 @@ struct LiveModule: View {
         let op = operatorColor(leg.operator?.brandColor, scheme: scheme)
         let progress = max(0, min(1, live.progress ?? 0))
         let hollow = live.positionSource == .estimated || live.localEstimate
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             ProgressBar(value: progress, color: op, marker: hollow ? .hollow : .solid)
             .padding(.vertical, 2)
             .accessibilityElement(children: .ignore)
@@ -119,7 +119,7 @@ struct LiveModule: View {
                 }
             }
             if let nextId = live.nextStopId, live.status != .boarding {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Text(l10n.t("live.nextStopName", ["name": name(nextId)])).clack(.body).foregroundStyle(Ink.text)
                     FlapTime(time: live.eta?.ms, tz: tz(nextId), clock: app.settings.clock)
                         .clack(.body).foregroundStyle(Ink.text)
@@ -184,7 +184,7 @@ struct HeroConnection: View {
             ? l10n.t("connection.tracks", ["from": a.arrPlatform ?? "?", "to": b.depPlatform ?? "?"]) : nil
         let line = [l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""]), tracks, walk].compactMap { $0 }.joined(separator: " · ")
         ViewThatFits(in: .horizontal) {
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
                 Text(line).clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
                 ConnectionChip(result: result)
@@ -219,8 +219,8 @@ struct ConnectionCard: View {
             walkMin.map { l10n.t("connection.walk", ["min": String($0)]) },
             result.layoverSeconds.map { l10n.t("connection.layover", ["min": String(Int((Double($0) / 60).rounded()))]) },
         ].compactMap { $0 }.joined(separator: " · ")
-        let content = VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline, spacing: 10) {
+        let content = VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
                 ConnectionChip(result: result)
@@ -234,7 +234,7 @@ struct ConnectionCard: View {
             }
             if model.map != nil, let stationId = a.destination?.id {
                 NavigationLink(value: AppRoute.stationMap(TripsLogic.mapLink(stationId, a, b))) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: 8) {
                         LucideIcon(name: "map", size: 16)
                         Text(l10n.t("connection.openMap"))
                     }

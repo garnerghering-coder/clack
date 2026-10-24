@@ -212,8 +212,8 @@ struct StationMapScreen: View {
             side(map, level: level)
             Text(levelName(map, level)).clack(.caption).foregroundStyle(Ink.text2)
                 .padding(.vertical, 2).padding(.horizontal, 8)
-                .background(Ink.glass, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                .padding(.leading, 14).padding(.top, 118).allowsHitTesting(false)
+                .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                .padding(.leading, 16).padding(.top, 120).allowsHitTesting(false)
             VStack {
                 Spacer()
                 bottom(map, level: level, fromE: fromE, toE: toE, route: route, steps: steps, stepLevels: stepLevels, layover: layover, planningOrSet: planningOrSet)
@@ -240,9 +240,9 @@ struct StationMapScreen: View {
         HStack(spacing: 8) {
             MapButton(icon: "arrow-left", label: l10n.t("common.back")) { dismiss() }
             Text(map.name).clack(.headline).foregroundStyle(Ink.text).lineLimit(1)
-                .padding(.vertical, 6).padding(.horizontal, 12)
+                .padding(.vertical, 8).padding(.horizontal, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Ink.glass, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
                 .hairlineBorder(radius: 14)
                 .accessibilityAddTraits(.isHeader)
             MapButton(icon: "search", label: l10n.t("stationMap.search")) { picking = .find }
@@ -260,16 +260,16 @@ struct StationMapScreen: View {
             }
             .padding(.horizontal, 12)
         }
-        .padding(.top, 66)
+        .padding(.top, 64)
     }
 
     private func side(_ map: StationMap, level: String) -> some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 8) {
             if map.levels.count > 1 && !listView {
                 ForEach(map.levels.sorted { $0.order > $1.order }) { l in
                     let active = l.id == level
                     Button { self.level = l.id } label: {
-                        Text(StationSceneLogic.levelLabel(l)).font(ClackFont.inter(13, .bold)).monospacedDigit()
+                        Text(StationSceneLogic.levelLabel(l)).clack(.chip).monospacedDigit()
                             .foregroundStyle(active ? Ink.onAccent : Ink.text2)
                             .frame(minWidth: 40, minHeight: 34)
                             .background(active ? Ink.accent : Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
@@ -283,7 +283,7 @@ struct StationMapScreen: View {
             MapButton(icon: listView ? "map" : "list", label: l10n.t(listView ? "stationMap.map" : "stationMap.list")) { listView.toggle() }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.trailing, 12).padding(.top, 114)
+        .padding(.trailing, 12).padding(.top, 112)
     }
 
     /// All the places that aren't dimmed, open first (the list view).
@@ -313,7 +313,7 @@ struct StationMapScreen: View {
             VStack(alignment: .leading, spacing: 8) {
                 if planningOrSet {
                     if layover {
-                        HStack(spacing: 10) {
+                        HStack(spacing: 12) {
                             Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? "—").clack(.walkBig).monospacedDigit().foregroundStyle(Ink.text)
                             if let conn = connection(fromE, toE, route) { ConnectionChip(result: conn) }
                             Spacer(minLength: 0)
@@ -321,11 +321,11 @@ struct StationMapScreen: View {
                         }
                     } else {
                         HStack(alignment: .top, spacing: 8) {
-                            VStack(spacing: 6) {
+                            VStack(spacing: 8) {
                                 EndButton(caption: l10n.t("stationMap.from"), value: fromE.map { label(map, $0) }, me: fromE?.kind == .me) { picking = .from }
                                 EndButton(caption: l10n.t("stationMap.to"), value: toE.map { label(map, $0) }, me: toE?.kind == .me) { picking = .to }
                             }
-                            VStack(spacing: 6) {
+                            VStack(spacing: 8) {
                                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: clearRoute)
                                 IconButton(icon: "arrow-down-up", label: l10n.t("stationMap.swap"), size: .overMap) { setRoute(to, from) }
                                     .disabled(from == nil && to == nil)
@@ -349,8 +349,8 @@ struct StationMapScreen: View {
                     if let route, !route.steps.isEmpty {
                         HStack(spacing: 8) {
                             Button { showSteps.toggle() } label: {
-                                HStack(spacing: 6) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.steps")) }
-                                    .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 14).frame(minHeight: 34)
+                                HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.steps")) }
+                                    .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 16).frame(minHeight: 34)
                                     .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                                     .hairlineBorder(radius: Radius.controlSm)
                             }
@@ -368,8 +368,8 @@ struct StationMapScreen: View {
                 } else {
                     HStack(spacing: 8) {
                         Button { planning = true } label: {
-                            HStack(spacing: 6) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.directions")) }
-                                .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 14).frame(minHeight: 34)
+                            HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.directions")) }
+                                .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 16).frame(minHeight: 34)
                                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
                                 .hairlineBorder(radius: Radius.controlSm)
                         }
@@ -378,7 +378,7 @@ struct StationMapScreen: View {
                         if picked != nil { ChipButton(text: l10n.t("stationMap.now")) { picked = nil } }
                     }
                 }
-                Text("\(l10n.t("stationMap.hoursNote")) · © OpenStreetMap contributors").font(ClackFont.inter(10.5)).foregroundStyle(Ink.text3)
+                Text("\(l10n.t("stationMap.hoursNote")) · © OpenStreetMap contributors").clack(.mapAttribution).foregroundStyle(Ink.text3)
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -410,7 +410,7 @@ struct StationMapScreen: View {
                 Text("\(index + 1). \(text)")
             }
         }
-        .font(ClackFont.inter(14, here || !multi ? .semibold : .regular))
+        .clack(.stopName).fontWeight(here || !multi ? .semibold : .regular)
         .foregroundStyle(here || !multi ? Ink.text : Ink.text2)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -425,11 +425,11 @@ struct StationMapScreen: View {
 
     /// A time to look at opening hours for: the hours picker sits invisibly over the chip, as the web's time input does.
     private var timeChip: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 8) {
             LucideIcon(name: "clock", size: 14)
             Text(picked.map { Format.time($0.timeIntervalSince1970 * 1000, tz: tz, clock: clock) } ?? l10n.t("stationMap.now"))
         }
-        .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 14).frame(minHeight: 34)
+        .clack(.chipButton).foregroundStyle(Ink.text).padding(.horizontal, 16).frame(minHeight: 34)
         .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
         .hairlineBorder(radius: Radius.controlSm)
         .overlay {
@@ -476,7 +476,7 @@ private struct EndButton: View {
             HStack(spacing: 8) {
                 Text(caption).clack(.caption).foregroundStyle(Ink.text2).frame(width: 38, alignment: .leading)
                 if me { LucideIcon(name: "locate-fixed", size: 14).foregroundStyle(Ink.text) }
-                Text(value ?? l10n.t("stationMap.choose")).font(ClackFont.inter(15, value == nil ? .medium : .semibold))
+                Text(value ?? l10n.t("stationMap.choose")).clack(.body).fontWeight(value == nil ? .medium : .semibold)
                     .foregroundStyle(value == nil ? Ink.text3 : Ink.text).lineLimit(1)
                 Spacer(minLength: 0)
             }
@@ -508,10 +508,10 @@ struct PoiRow: View {
                     Text(detail).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
                 }
                 Spacer(minLength: 0)
-                Text(l10n.t("stationMap.state.\(state.rawValue)")).font(ClackFont.inter(12, .bold))
+                Text(l10n.t("stationMap.state.\(state.rawValue)")).clack(.chip)
                     .foregroundStyle(state == .open ? Ink.onTimeInk : state == .closingSoon ? Ink.lateInk : Ink.text3)
             }
-            .padding(.vertical, 10).padding(.horizontal, 4)
+            .padding(.vertical, 12).padding(.horizontal, 4)
             .opacity(state == .closed ? 0.55 : 1)
             .contentShape(Rectangle())
         }
@@ -535,7 +535,7 @@ struct PoiBadge: View {
 
     var body: some View {
         LucideIcon(name: icon ?? StationSceneLogic.icon(category ?? .other), size: 16)
-            .foregroundStyle(tint != nil ? Color.white : Ink.text)
+            .foregroundStyle(tint != nil ? Ink.onTint : Ink.text)
             .frame(width: 32, height: 32)
             .background(tint ?? Ink.surfaceRaised, in: Circle())
             .overlay(Circle().strokeBorder(tint ?? Ink.hairline, lineWidth: 1))
@@ -600,20 +600,20 @@ private struct PlaceSearchSheet: View {
             if mode != .find && q.isEmpty {
                 Button { Task { await locate() } } label: {
                     HStack(spacing: 12) {
-                        PoiBadge(icon: "locate-fixed", tint: Color(hex: "#3b8bff"))
+                        PoiBadge(icon: "locate-fixed", tint: Ink.me)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(l10n.t("stationMap.myLocation")).clack(.rowTitle).foregroundStyle(Ink.text)
                             Text(locationHint).clack(.caption).foregroundStyle(Ink.text2).multilineTextAlignment(.leading)
                         }
                         Spacer(minLength: 0)
                     }
-                    .padding(.vertical, 10).contentShape(Rectangle())
+                    .padding(.vertical, 12).contentShape(Rectangle())
                 }
                 .buttonStyle(.plain).disabled(locating == .busy)
             }
             if !shownTracks.isEmpty {
                 group(l10n.t("stationMap.tracks")) {
-                    FlowLayout(spacing: 6, lineSpacing: 6) {
+                    FlowLayout(spacing: 8, lineSpacing: 8) {
                         ForEach(shownTracks, id: \.self) { track in ChipButton(text: track) { onPick(track) } }
                     }
                 }
@@ -631,7 +631,7 @@ private struct PlaceSearchSheet: View {
                                     }
                                     Spacer(minLength: 0)
                                 }
-                                .padding(.vertical, 10).contentShape(Rectangle())
+                                .padding(.vertical, 12).contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                         }
@@ -655,7 +655,7 @@ private struct PlaceSearchSheet: View {
     }
 
     private func group<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(title.uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2)
             content()
         }
@@ -701,7 +701,7 @@ private struct PoiSheet: View {
         let name = poi.name.isEmpty ? l10n.t("stationMap.cat.\(poi.category.rawValue)") : poi.name
         let level = map.levels.first { $0.id == poi.level }?.name ?? poi.level
         SheetFrame(title: name, onClose: { dismiss() }) {
-            FlowLayout(spacing: 10, lineSpacing: 6) {
+            FlowLayout(spacing: 12, lineSpacing: 8) {
                 Chip(text: stateLabel, tint: state.state == .open ? Ink.onTimeInk : state.state == .closingSoon ? Ink.lateInk : Ink.text2)
                 Chip(text: l10n.t("stationMap.cat.\(poi.category.rawValue)"))
                 Chip(text: level)
@@ -719,7 +719,7 @@ private struct PoiSheet: View {
                 Text(l10n.t("stationMap.hoursNote")).clack(.caption).foregroundStyle(Ink.text2)
             }
             HStack(spacing: 8) {
-                Button { onRoute(.to) } label: { HStack(spacing: 6) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.routeHere")) } }
+                Button { onRoute(.to) } label: { HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.routeHere")) } }
                     .buttonStyle(.clack(.primary, small: true))
                 ChipButton(text: l10n.t("stationMap.startHere")) { onRoute(.from) }
             }
