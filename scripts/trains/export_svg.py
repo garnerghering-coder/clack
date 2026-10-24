@@ -1,5 +1,5 @@
 """Writes every train drawing as a standalone SVG file, one per model and livery, to assets/trains/ (for the Xcode
-asset catalog, design tools, or anywhere outside the web app). `plain` is the unpainted version.
+asset catalog and design tools). `plain` is the unpainted version.
 
 Run from the repository root after changing a drawing: python3 scripts/trains/export_svg.py
 """
