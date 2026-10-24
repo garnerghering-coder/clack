@@ -22,6 +22,36 @@ struct TrainPoint {
     var lon: Double
 }
 
+/// The map features of the trains on screen, kept between frames so a glide frame only changes coordinates.
+@MainActor
+struct TrainFeatures {
+    private var byId: [String: MLNPointFeature] = [:]
+    private(set) var features: [MLNPointFeature] = []
+
+    /// A full picture: every feature is made again (the trains, their colours, the filters or the follows changed).
+    mutating func rebuild(_ points: [TrainPoint]) -> [MLNPointFeature] {
+        byId.removeAll(keepingCapacity: true)
+        features = points.map { p in
+            let f = MLNPointFeature()
+            f.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
+            f.attributes = [
+                "id": p.id, "number": p.number, "label": p.label, "color": p.color, "mine": p.mine, "followed": p.followed,
+                "bearing": p.bearing ?? 0, "hasBearing": p.bearing != nil,
+            ]
+            byId[p.id] = f
+            return f
+        }
+        return features
+    }
+
+    /// Moves the features that are here; a train that isn't drawn (filtered out) is ignored.
+    func move(_ positions: [String: LatLon]) {
+        for (id, position) in positions {
+            byId[id]?.coordinate = CLLocationCoordinate2D(latitude: position.lat, longitude: position.lon)
+        }
+    }
+}
+
 /// What the Explore screen does to its map, and what the map tells the screen.
 @MainActor
 final class LiveMapController {
@@ -53,17 +83,17 @@ final class LiveMapController {
     /// Every visible train, at the position it is drawn at now.
     func setTrains(_ points: [TrainPoint]) {
         guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
-        let features = points.map { p -> MLNPointFeature in
-            let f = MLNPointFeature()
-            f.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
-            f.attributes = [
-                "id": p.id, "number": p.number, "label": p.label, "color": p.color, "mine": p.mine, "followed": p.followed,
-                "bearing": p.bearing ?? 0, "hasBearing": p.bearing != nil,
-            ]
-            return f
-        }
-        source.shape = MLNShapeCollectionFeature(shapes: features)
+        source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.rebuild(points))
     }
+
+    /// A glide frame: only the trains that are moving get a new coordinate; every other feature is reused as it was.
+    func moveTrains(_ positions: [String: LatLon]) {
+        guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
+        trainFeatures.move(positions)
+        source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.features)
+    }
+
+    private var trainFeatures = TrainFeatures()
 
     func setSelected(_ id: String?) {
         (mapView?.style?.layer(withIdentifier: "train-selected") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", id ?? "")

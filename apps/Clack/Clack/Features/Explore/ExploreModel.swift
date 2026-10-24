@@ -70,6 +70,7 @@ final class ExploreModel {
     @ObservationIgnored private var trains: [String: LiveTrain] = [:]
     @ObservationIgnored private var glides: [String: (from: LatLon, to: LatLon, start: Double)] = [:]
     @ObservationIgnored private var renderTask: Task<Void, Never>?
+    @ObservationIgnored private var needsFullRender = true
     @ObservationIgnored private var route: (id: String, line: [LatLon], from: Int)?
     @ObservationIgnored private var stopsTask: Task<Void, Never>?
     @ObservationIgnored private var scheduledTask: Task<Void, Never>?
@@ -180,10 +181,13 @@ final class ExploreModel {
     // MARK: drawing the trains
 
     func scheduleRender() {
+        // Whatever asked for a render changed the trains, the filters or the follows: the next frame is a full one.
+        needsFullRender = true
         guard renderTask == nil, active else { return }
         renderTask = Task { [weak self] in
-            while let self, !Task.isCancelled {
-                let moving = self.render()
+            // Stops when the map is hidden (`active` off) as well as when nothing is gliding any more.
+            while let self, !Task.isCancelled, self.active {
+                let moving = self.needsFullRender ? self.render() : self.glideFrame()
                 if !moving { break }
                 try? await Task.sleep(for: .milliseconds(33))
             }
@@ -191,8 +195,23 @@ final class ExploreModel {
         }
     }
 
-    /// Pushes the current (glided) positions into the map. Returns whether anything is still gliding.
+    /// A frame of a glide with nothing else changed: only the moving trains get new coordinates (no new colours,
+    /// labels or points for the ones standing still). Returns whether anything is still gliding.
+    private func glideFrame() -> Bool {
+        let nowMs = CACurrentMediaTime() * 1000
+        var positions: [String: LatLon] = [:]
+        for (id, g) in glides {
+            let step = ExploreLogic.glide(from: g.from, to: g.to, startedAt: g.start, now: nowMs)
+            positions[id] = step.position
+            if step.done { glides[id] = nil }
+        }
+        controller.moveTrains(positions)
+        return !glides.isEmpty
+    }
+
+    /// Pushes every train, at the position it is drawn at now, into the map. Returns whether anything is still gliding.
     private func render() -> Bool {
+        needsFullRender = false
         let nowMs = CACurrentMediaTime() * 1000
         let followed = followKeys
         var moving = false

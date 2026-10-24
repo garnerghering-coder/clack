@@ -33,6 +33,21 @@ struct ShapeTests {
         #expect(point.coordinate.latitude == 55.7)
     }
 
+    @MainActor @Test func glideFramesMoveOnlyTheNamedTrainsAndKeepTheRest() throws {
+        func point(_ id: String, _ lat: Double) -> TrainPoint {
+            TrainPoint(id: id, number: id, label: id, color: "#fff", mine: false, followed: false, bearing: nil, lat: lat, lon: 10)
+        }
+        var cache = TrainFeatures()
+        let first = cache.rebuild([point("a", 59), point("b", 58)])
+        #expect(first.count == 2)
+        cache.move(["a": LatLon(59.5, 10), "gone": LatLon(0, 0)])
+        #expect(cache.features.count == 2)
+        #expect(cache.features[0] === first[0] && cache.features[1] === first[1])
+        #expect(cache.features[0].coordinate.latitude == 59.5)
+        #expect(cache.features[1].coordinate.latitude == 58)
+        #expect(cache.features[0].attributes["id"] as? String == "a")
+    }
+
     @Test func emptyCollectionIsAShape() {
         #expect(MLNShape.fromGeoJSON(MapGeometry.lines([])) != nil)
     }
