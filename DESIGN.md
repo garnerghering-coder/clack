@@ -14,7 +14,7 @@ Clack is a Flighty-style app for trains: calm, dark, precise, a little playful. 
 
 **Tone of copy:** friendly, short, never snarky about delays. Examples: "On time", "+8 min", "No trains yet. Add your first one.", "Scheduled times only; we couldn't find actual times for this trip."
 
-**Primary platform:** phone (mobile-first PWA, later wrapped in Capacitor for iOS). Desktop is a responsive layout of the same app, not a separate design.
+**Platform:** the native SwiftUI iPhone app, portrait. iPads run it in iPhone mode.
 
 ## 2. Visual language
 
@@ -58,7 +58,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 - Station names: Body weight 600. Train numbers and codes: caption weight 600, letter-spacing +0.02em.
 
 ### 2.3 Shape, spacing, depth
-- 4px spacing grid; 16px screen gutters on mobile; 24px on tablet/desktop.
+- 4px spacing grid; 16px screen gutters.
 - Radii, one scale (owner, 2026-10-23): tags (platform) 6, small controls (34 px buttons, filter chips, date field) 10, buttons/inputs/segmented controls 12, cards 16, sheets 24 (top corners), operator badge 10. Circles only for icon buttons, the FAB and dots. Nothing is a full pill.
 - Status is written, not boxed (owner, 2026-10-23: "tiny pill box with a bit of text"): delay, Live, GPS/estimated, speed, Planned/Arrived, category, notices are coloured or grey text in a line, with a dot or icon where it helps. Delay colours have darker "ink" versions for light mode. Only over a map does a status get a backing (a glass label, radius 10).
 - Buttons: primary is a yellow fill, secondary a raised surface with a hairline; both radius 12, the same as inputs and the segmented control.
@@ -78,11 +78,24 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 - **Draw-on animation:** when a trip detail opens, the route line draws from origin to destination over ~1.2s (ease-out) while the camera fits the bounds with 48px padding. Skip if `prefers-reduced-motion`.
 - **Attribution:** small "© OpenStreetMap contributors" bottom-left, in `text-tertiary`.
 
+### 2.5 Components (being built)
+
+Shared pieces, one spec each; the screens use these instead of their own copies.
+
+- **StopTimeline** (StopRail + StopRow): 2 pt rail; travelled = operator colour, ahead dotted, not ridden = hairline. Dots 10 pt, 14 pt at your stops. Time on the right in split-flap .sm in band ink, scheduled struck in caption. Platform in a fixed column with PlatformTag. A compact variant.
+- **BoardRow**: time as FlapTime text; destination in rowTitle 600; via and service in caption; PlatformTag; DelayText. A compact variant.
+- **StatusLine**: one line of written status. Live with an 8 pt pulsing dot in on-time ink, stale, upcoming, boarding, on its way, arrived, cancelled, estimated.
+- **ServiceHeader**: OperatorBadge at 20/28/36 only, "SJ 529", optional category chip and StatusLine.
+- **TimePair**: "08:03 – 10:51", one "+1" style (captionUpper, inline), monospaced digits.
+- **Tile**: label above value, caption + headline, surfaceRaised, input radius, padding 12.
+- **ProgressBar**: 4 pt, radius 2, operator colour, optional 14 pt marker.
+- **IconButton**: 44 pt circle (34 pt only over maps), label required.
+- **SearchField**: one field, one height, one icon.
+- **InfoNote**: a one-line note with an (i) disclosure for longer text.
+
 ## 3. Navigation & layout
 
-**Mobile:** bottom tab bar with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
-
-**Tablet/desktop (≥ 1024px):** left sidebar (logo, Trips, Passport, Settings, big "Add train" button). Trips screen becomes a split view: list on the left (400px), selected trip's map + details on the right. Passport and Settings are centered content (max width 960px). Add trip opens as a centered modal (560px wide).
+Bottom tab bar with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
 
 ## 4. Screen: Trips (home) — P0
 
@@ -113,7 +126,7 @@ Bands are constants in one file (`delayBands.ts`) so they can be tuned. The **on
 
 ## 5. Screen: Add trip — P0
 
-Opens as a full-height bottom sheet (mobile) or modal (desktop). Title "Add a train", close button top-right.
+Opens as a full-height bottom sheet. Title "Add a train", close button top-right.
 
 ### 5.1 Layout, top to bottom
 1. **Date row:** pill chips **Today · Tomorrow · Pick date**, plus the selected date shown ("Fri 17 Oct"). Choosing a past date shows a subtle hint "Past trip". Date picker is a native-feeling calendar; years are quickly selectable (people add old trips).
@@ -162,7 +175,6 @@ Loading skeletons for results; offline/API-down banner "Timetable search needs a
   7. **Activity** (only if events exist): reverse-chronological log: "Platform changed 12 → 14 · 08:41", "Delay increased to +12 · 08:55".
   8. **Details:** category, operator, journey link, notes (editable text), data-quality badge when not full ("Scheduled times only"), source line ("Times: Trafikverket").
   9. **Actions:** Change boarding/alighting stops, Move to journey, Delete trip.
-- **Desktop:** the left column is the trips list; the right 60% is the map with the same sheet content docked as a 380px panel over the map's left edge.
 - **Opening animation:** route draws on, then the times flip into place (§10).
 
 ### 6.2 Behaviors
@@ -204,7 +216,7 @@ Derived only from the user's own data; never invented. Constants live in one fil
 - "Longest rail streak: **9 days in a row**." (P2)
 - "You've spent **6h 12m** on late trains. Hang in there." (only if delay data exists)
 
-## 9. Live tracking — P0 (in-app while the server is running)
+## 9. Live tracking — P0
 
 ### 9.1 What it does
 For any leg that is upcoming within 24 hours, in progress, or finished within the last 30 minutes ("tracked legs"), Clack shows live status in the Trips hero, the trip detail and the activity log:
@@ -214,21 +226,21 @@ For any leg that is upcoming within 24 hours, in progress, or finished within th
 - Where the train is: a **live position** marker when the train reports GPS, otherwise an **estimated position** along the track.
 - Next stop and ETA.
 
-**Out of scope for Phase 1:** push notifications, lock-screen Live Activities, tracking while the app/server is closed (these need hosting and, for Live Activities, a native iOS app). The architecture must not block them (see 9.4).
+**Push and Live Activities exist.** The server watches every saved trip even when the app is closed and sends alerts (departure reminder, platform, delays of 5+ min, cancellations, changes between trains, get off soon); the Live Activity on the Lock Screen and in the Dynamic Island follows the train you are on (docs/IOS.md).
 
 ### 9.2 Data and how it works (verify in Phase 0)
 1. **Times, delays, platforms, cancellations:** Trafikverket `TrainAnnouncement`. Trafikverket's API supports query-then-stream (server-sent events) subscriptions; if streaming is awkward or limited, poll every 20–30 s for tracked trains only. Phase 0 must confirm which works and the connection limits.
 2. **Position:** Trafikverket `TrainPosition` (exists in the API's object list). Not every train reports a position, so the UI must handle absence gracefully.
 3. **Estimated position (fallback):** from the last confirmed stop passage (actual time) and the next stop's estimated time, interpolate along the leg's geometry at constant speed between stops. Always label it "Estimated".
 4. **Oxyfi realtime positioning is NOT used in Phase 1.** Its documented vehicle list is limited to a few regional operators, one websocket per key, and the server must relay it. Possible later addition.
-5. **One poller per train per date**, shared by every user who tracks it (quota-friendly and multi-user ready). The backend pushes updates to open clients via Server-Sent Events (or WebSocket) from **our** server; the browser never talks to Trafikverket.
+5. **One poller per train per date**, shared by every user who tracks it (quota-friendly and multi-user ready). The backend pushes updates to open clients via Server-Sent Events (or WebSocket) from **our** server; the app never talks to Trafikverket.
 6. Pause polling when no client is viewing and no leg is within its tracking window.
 
 ### 9.3 Leg status state machine
 `scheduled → boarding (T−30 min) → departed → en route → arrived → snapshotted`. Boarding means the train is at the stop you get on at: a train that started earlier and is still on its way to you is `approaching` (shown as "On its way to {stop}", with its position when seen), however close the departure time, and a late estimate passing does not make it departed while GPS puts it short of you (owner, 2026-10-23). Side events: `delayed`, `platform_set`, `platform_changed`, `cancelled`, `short_turned`. Each event is stored in `leg_events` (SPEC §7) and appears in the Activity log and as an in-app toast/banner while the app is open. On `arrived` plus final actuals, run the permanent snapshot (SPEC §10).
 
-### 9.4 Forward compatibility
-Store each event with a type, timestamp and payload so that push notifications can later be sent from the same event stream. Keep the poller as a server-side job independent of any browser session.
+### 9.4 Events and push
+Each event is stored with a type, timestamp and payload; the push alerts are sent from the same event stream. The poller is a server-side job independent of any open app.
 
 ### 9.5 UI details
 - Hero card and trip detail show a **LIVE** chip with a pulsing dot while tracked and fresh. If data is older than 2 minutes, the chip turns grey "Stale · updated 3 min ago".
@@ -281,10 +293,6 @@ For every screen implement: loading (skeleton), empty, error (with retry), offli
 ## 16. Accessibility
 
 - Contrast ≥ 4.5:1 for body text; color never the only signal (delay numbers always shown).
-- Touch targets ≥ 44px; all controls reachable by keyboard on desktop; visible focus rings (accent).
+- Touch targets ≥ 44px (34 pt only for small buttons over a map).
 - Maps have a text alternative: the stop timeline contains everything shown on the map.
-- Support dynamic text sizing and `prefers-reduced-motion`; provide `aria-live="polite"` announcements for live status changes (delay changes, platform changes).
-
-## 17. Responsive breakpoints
-
-`< 640px` phone layout · `640–1023px` tablet (two-column Passport tiles, sheet becomes a side panel) · `≥ 1024px` desktop split view with sidebar.
+- Support Dynamic Type and Reduce Motion; announce live status changes to VoiceOver (delay changes, platform changes).

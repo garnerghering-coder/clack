@@ -1,4 +1,4 @@
-# Clack — Product & Build Spec (Phase 1: Sweden)
+# Clack — Product & Build Spec
 
 > **Clack** is the chosen name (pending domain and trademark checks before launch). A Flighty-style app for trains: log every train you ride, see it drawn on the real tracks, and build a "Passport" of your rail history with stats and CO₂ savings.
 >
@@ -15,41 +15,48 @@
 
 ## 2. Non-negotiable principles
 
-1. **No AI at runtime.** Everything is deterministic code: downloads, database queries, string matching, arithmetic. No LLM calls anywhere in the app.
-2. **Cheap.** Free data sources, free map data, no paid tiles or paid APIs. Respect every quota.
-3. **Portable to iOS later.** Build as a web app (PWA) that can later be wrapped with **Capacitor** into a native iOS app without a rewrite.
-4. **Keys stay on the server.** The front end never calls third-party APIs directly; it only talks to our backend.
+1. **No AI at runtime.** Everything is deterministic code: downloads, database queries, string matching, arithmetic. No LLM calls anywhere in the app or the server.
+2. **Cheap.** Free data sources, free map data, no paid tiles or paid APIs. Respect every quota. (The Apple Developer Program and the hosted VM are the only costs; nothing in the code is paid per request.)
+3. **Native on iPhone.** The only client is the SwiftUI app in `apps/Clack`. There is no web app, no PWA and no wrapper around a web view.
+4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab or Entur itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
 5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again.
-6. **i18n from day one.** All UI strings go through a translation layer, even though only English ships first.
-7. **Country = adapter.** All country-specific logic lives behind a common adapter interface so new countries plug in without touching the core.
+6. **i18n from day one.** Every user-facing string is a key in `packages/shared/locales/en.json` and `sv.json`; English and Swedish ship together.
+7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur), so a new country plugs in without touching the core.
+8. **Nothing made up.** A train type, livery, line or amenity with no source is not shown (an unpainted train, "Train type not known"), and an estimate is always labelled as one.
 
-## 3. Phase 1 scope
+## 3. Scope
 
-**In scope (the demo):**
-1. Add a trip (smart search + manual fallback)
-2. Trip detail page (map, stops, times, delays)
-3. Trip list (upcoming + past)
-4. Passport (stats + map of everything)
-5. CO₂ comparisons with toggles
-6. Settings (language, units, clock format, CO₂ comparison, commuter filter)
-7. **Live tracking while the app is open** (live delays, platforms, cancellations, train position or estimated position, activity log). See `DESIGN.md` §9.
-8. Journeys (grouping legs) and the "Add another" fast-entry flow.
+**Built:**
+1. Add a train (smart search by number or by stations, with a manual fallback), or import it from a ticket shared to Clack as a PDF or email (SJ tickets and receipts so far).
+2. Trip detail: map, stop timeline, times and delays, platforms, the train's drawing, change risk, what is on board, activity log.
+3. Trips: upcoming and past legs grouped into journeys, with the next one featured.
+4. Explore: the live map of every running passenger train in Sweden and Norway, station search, station maps and live departure and arrival boards.
+5. Passport: stats, year filter, commuter toggle, CO₂ comparisons, map of everything, share cards.
+6. Settings: theme, language (English, Swedish), distance units, clock, CO₂ comparison, commuter filter, rail-network toggle, walking pace and step-free routing, display name, alert lead time, offline maps, privacy, about and sources, delete my data.
+7. **Live tracking:** live delays, platforms, cancellations and short-turns, train position (GPS or labelled estimate), activity log (`DESIGN.md` §9).
+8. **Alerts and Live Activities:** the server sends push alerts for saved trips and updates a Live Activity (Lock Screen and Dynamic Island) for the train you are on (docs/IOS.md).
+9. **Working offline:** trips, stations and maps are kept on the phone; status and progress are estimated, and labelled, when there is no connection.
+10. **Home Screen and Lock Screen widgets:** next journey, passport, departures, year in rail, stats.
 
-**Out of scope for Phase 1 (planned later):** push notifications, lock-screen Live Activities and tracking while the server/app is closed (need hosting), booking-email import, CSV/bulk import, year-in-review, share cards, friends, accounts/login, hosting, other countries.
+**Not built yet** (planned as later workstreams, see docs/SWIFT_PORT.md): deep links beyond widgets and tickets, an Apple Watch app, and export of your data. Out of scope: accounts and login, friends, other countries until each has an adapter, booking and ticket sales.
 
 ## 4. Tech stack
 
 | Layer | Choice | Why |
 |---|---|---|
-| Front end | React + TypeScript + Vite, set up as a PWA | Common, fast, wraps into iOS via Capacitor later |
-| Map | MapLibre GL JS | Free, open source, vector maps, has a native iOS counterpart |
-| Basemap tiles | Self-hosted Protomaps PMTiles file (dark style) | No API key, no per-request cost |
-| Backend | Node.js + TypeScript (Fastify or Hono) | Same language as front end |
-| Database | SQLite (via Drizzle ORM or better-sqlite3) | Zero-cost, single file; schema should be Postgres-compatible for later hosting |
-| i18n | i18next (or similar) | Language switching from day one |
-| Jobs | Simple in-process scheduler (node-cron) | Daily GTFS import, post-trip snapshots |
+| App | SwiftUI, iPhone only (`apps/Clack`), with the Swift package `ClackKit` (ClackCore, ClackDesign) | Native feel, widgets, Live Activities, share sheet |
+| Map | MapLibre Native | Free, open source, vector maps, offline tile cache |
+| Basemap tiles | A Protomaps PMTiles extract of the Nordics on the server, served as `z/x/y` vector tiles (`/api/map/tiles`), with label glyphs from `apps/server/assets/map-fonts` | No API key, no per-request cost |
+| Backend | Node.js 22 + TypeScript, Fastify, run with tsx | One language across server, shared package and scripts |
+| Database | SQLite via Drizzle ORM (`data/app.db`); schema kept Postgres-compatible | Zero cost, one file |
+| Push | Apple Push Notification service, from the server (`apps/server/src/push`) | Alerts and Live Activity updates |
+| Strings | `packages/shared/locales/{en,sv}.json`, copied into the app by `scripts/ios/sync_assets.py` | One source for both languages |
+| Jobs | In-process scheduler (daily timetable import, post-trip snapshots, audit, push watcher) | No extra service |
+| Hosting | One VM behind Caddy with https (docs/SERVER.md) | Cheap, simple |
 
-Keep dependencies modest. Use a monorepo layout like `apps/web`, `apps/server`, `packages/shared` (shared types), `scripts/` (one-off data tools).
+**Identity.** There are no accounts. On first launch the app makes a random UUID, keeps it in the Keychain (it is being made to sync through the iCloud Keychain, so a new iPhone gets the same trips back; the app does not set that yet, and the privacy text already says it) and sends it with every request in `X-Clack-User`. Every user-owned row has a `user_id`. A shared server run with `CLACK_REQUIRE_USER=1` refuses `/api` requests without one. Delete my data removes the rows and the push addresses.
+
+**Layout.** `apps/Clack` (app), `apps/server` (API, importers, push), `packages/shared` (types, constants, strings), `assets/trains` (train drawings), `data/` (hand-made data), `scripts/` (imports and tools).
 
 ## 5. Data sources (Sweden)
 
@@ -241,48 +248,56 @@ Language (English first), distance units (km/mi), clock (24h/12h), CO₂ compari
 
 ## 17. Screens
 
-1. **Home / trips:** upcoming and past legs grouped by journey; "+" to add.
-2. **Add trip:** date picker → smart search → results → confirm (and manual entry).
-3. **Trip detail:** map; header with operator, train number, date; stop timeline with scheduled vs actual times, platforms, delays; distance, duration, CO₂ saved; data-quality badge.
-4. **Passport:** headline stats, year filter, commuter toggle, map of all legs, breakdown lists.
-5. **Settings.**
-6. **About/sources:** data attributions and CO₂ method.
+Three tabs (`DESIGN.md` §3): **Trips**, **Explore**, **Passport**. Settings opens from a gear in the Trips and Passport headers.
 
-Mobile-first layout (it will become an iPhone app), works on desktop too. Dark theme first.
+1. **Trips:** upcoming and past legs grouped by journey, the next one as a featured card; "+" to add.
+2. **Add a train:** date, smart search (number or stations), results, confirm; manual entry; or a shared ticket ("From your ticket").
+3. **Trip detail:** map; header with operator, train number, date; stop timeline with scheduled vs actual times, platforms, delays; progress, change risk, disruption and alert cards, what is on board, activity log; distance, duration, CO₂ saved; data-quality note.
+4. **Journey:** the legs of one journey with connections between them.
+5. **Explore:** the live map; station search; a station's map and its departure and arrival boards.
+6. **Arrival:** shown when you reach the end of a journey.
+7. **Passport:** headline stats, year filter, commuter toggle, map of all legs, breakdown lists, share cards.
+8. **Settings:** the list in §3, with About (sources and the CO₂ method) and Privacy.
+
+Portrait iPhone only; iPads run it in iPhone mode. Dark and light themes.
 
 ## 18. Operator branding
 
-- Each operator gets a brand color and a small logo icon from `apps/web/public/operators/` (one file per operator).
-- **All logos live in that one folder** so they can be swapped for plain colored badges before public launch if permission is not obtained. Provide a badge fallback (colored rounded rectangle with the operator's short name) for operators without a logo.
+- Each operator has a brand colour in `data/operators.json`. The server downloads each operator's logo (its website's app icon) into `data/cache/logos/` and serves it at `GET /api/operators/:id/logo`; the app shows it in the operator badge (`Config.showOperatorLogos`).
+- Garner has the operators' approval to show their logos (2026-10-23, kept for App Review, docs/APP_STORE.md). If that ever changes, switching `Config.showOperatorLogos` off shows the fallback: a coloured badge with the operator's short name.
 
 ## 19. Build order & acceptance criteria
 
-1. **Phase 0 — data verification** (§6). Done when `DATA_FINDINGS.md` answers all nine questions.
-2. **Skeleton:** monorepo, server, web, SQLite, i18n, `.env` handling, dark theme shell. Done when both apps run with one command.
-3. **Import:** GTFS Sweden 3 import with quota guard; station mapping; Trafikverket `TrainStation` import. Done when stations are searchable via autocomplete.
-4. **Search & add:** smart search, results list, save leg with stops. Done when "SJ 523" and "Stockholm → Göteborg" both find real trains on a chosen date.
+The server was built in this order; each step was done when its acceptance sentence held.
+
+1. **Phase 0, data verification** (§6): `DATA_FINDINGS.md` answers all nine questions.
+2. **Skeleton:** server, SQLite, `.env` handling, strings. Done when the server starts with one command (`npm run dev`).
+3. **Import:** GTFS Sweden 3 import with quota guard; station mapping; Trafikverket `TrainStation` import. Done when stations are searchable.
+4. **Search & add:** smart search, results, save a leg with its stops. Done when "SJ 523" and "Stockholm → Göteborg" both find real trains on a chosen date.
 5. **Actuals & snapshot:** Trafikverket integration. Done when a past train shows real delays and platforms per stop.
-6. **Map & geometry:** basemap, routed track lines, rail-network toggle. Done when a leg draws along the real tracks.
-7. **Live tracking:** server-side poller/stream per tracked train, `leg_events` and `live_state`, SSE to the client, LIVE chip, progress module, train marker (GPS or estimated), activity log. Done when a train that is currently running shows live delays and a moving marker in the app.
-8. **Trip list, trip detail, journeys** (per `DESIGN.md` §4, §6, §7).
-9. **Passport & CO₂** (per `DESIGN.md` §8).
-10. **Historical search** via GTFS Sverige 2 and manual fallback.
-11. **Polish:** settings, about/sources page, first-run flow, split-flap and other motion, stamps (P2), empty/error/offline states, accessibility pass.
+6. **Map & geometry:** basemap, routed track lines, rail-network layer. Done when a leg draws along the real tracks.
+7. **Live tracking:** server-side poller or stream per tracked train, `leg_events` and `live_state`, SSE to the app. Done when a train that is running shows live delays and a moving marker.
+8. **Trips, trip detail, journeys; Passport and CO₂; historical search** (`DESIGN.md` §4, §6, §7, §8).
+9. **Norway** through Entur: timetables, live positions, boards.
+10. **Native app:** all of the above in SwiftUI (docs/SWIFT_PORT.md, done), then alerts, Live Activities, ticket import, offline mode and widgets (docs/IOS.md, done).
+11. **Later work** is tracked as workstreams A to J ("Clack: from ported to stellar"; docs/SWIFT_PORT.md, last section).
 
-Write tests for: search input parsing, station fuzzy matching, delay calculation, journey grouping, distance calculation, CO₂ calculation, and stat aggregations.
+Tests (vitest for the server and shared package; Swift Testing for the app) cover: search input parsing, station fuzzy matching, delay calculation, journey grouping, distance calculation, CO₂ calculation, stat aggregations, the push rules and the strings (`packages/shared/locales/locales.test.ts` checks both languages have the same keys).
 
-## 20. Launch checklist (later, not Phase 1)
+## 20. Launch checklist
 
-- Operator logos: get permission or switch to badges.
+What App Review needs, and what is done and open, is in `docs/APP_STORE.md`. In short:
+- Operator logos: approval is held; keep the written approvals.
 - Rejseplanen (Denmark) and any other free tiers marked non-commercial: confirm commercial terms before charging money.
-- Accounts, hosting, backups, privacy policy, data export/delete.
-- Map and data attributions in the app and App Store listing.
-- Apple developer account ($99/year) when publishing to the App Store.
+- Privacy policy at `https://clack-garner.duckdns.org/privacy`, data deletion in Settings; a backup of `data/app.db` (docs/SERVER.md, none automatic yet).
+- Map and data attributions in the app and the App Store listing.
+- Apple Developer Program (the paid team is active), TestFlight, then the App Store.
 
 ## 21. Future phases
 
-- **Phase 2: Denmark** via Rejseplanen API 2.0 (access ID requested separately; free non-commercial tier is ~50,000 calls/month). New adapter, Danish station data, Danish rail CO₂ factor, Öresund border-crossing logic.
-- **Then:** Germany, UK. Push alerts and lock-screen Live Activities (need hosting), booking-email import, bulk/CSV import, year-in-review and share cards, iOS app via Capacitor (Live Activities would need a native plugin).
+- **Denmark** via Rejseplanen API 2.0 (access id requested separately; the free non-commercial tier is ~50,000 calls a month). New adapter, Danish station data, Danish rail CO₂ factor, Öresund border-crossing logic.
+- **Then:** Germany, UK.
+- **In the app:** more deep links, an Apple Watch app, export of your data, booking-email import and CSV import.
 
 ## 22. Open questions (resolved by Phase 0)
 
