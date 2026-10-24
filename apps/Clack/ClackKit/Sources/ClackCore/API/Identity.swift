@@ -44,17 +44,43 @@ public nonisolated enum Identity {
 
     /// The id if this phone has one, without making or moving one. The widgets use this: only the app creates the id, so a
     /// widget that can't read the Keychain shows its cache instead of fetching as a new, empty phone.
-    public static func existing(keychain: IdentityKeychain = SystemKeychain()) -> String? {
+    /// Falls back to the copy the app leaves in the App Group (`shareWithWidgets`), for when the extension can't read the
+    /// Keychain item (an id from a build before the shared item, a Keychain that refuses): without an id the widgets'
+    /// station picker had nothing to list or search.
+    public static func existing(keychain: IdentityKeychain = SystemKeychain(), groupCopy: () -> String? = Identity.groupCopy) -> String? {
         #if DEBUG
         if let override = UserDefaults.standard.string(forKey: "userId"), !override.isEmpty { return override.lowercased() }
         #endif
-        return keychain.readShared() ?? keychain.readLegacy()
+        return keychain.readShared() ?? keychain.readLegacy() ?? groupCopy()
+    }
+
+    /// The App Group's defaults, shared by the app and its widgets; nil without an App Group (a Personal Team).
+    private static var groupDefaults: UserDefaults? {
+        WidgetSnapshot.containerURL == nil ? nil : UserDefaults(suiteName: WidgetSnapshot.groupId)
+    }
+    private static let groupKey = "phoneId"
+
+    /// The id as the app left it in the App Group.
+    public static func groupCopy() -> String? {
+        groupDefaults?.string(forKey: groupKey).flatMap { $0.isEmpty ? nil : $0 }
+    }
+
+    /// The app gives its widgets the id it uses (they never make one). Written only when it changed.
+    public static func shareWithWidgets(_ id: String) {
+        #if DEBUG
+        // A `-userId` session is a look at another phone's trips; the widgets keep this phone's.
+        if let override = UserDefaults.standard.string(forKey: "userId"), !override.isEmpty { return }
+        #endif
+        guard let defaults = groupDefaults, defaults.string(forKey: groupKey) != id else { return }
+        defaults.set(id, forKey: groupKey)
     }
 
     /// Forgets the id ("Delete my data"): the next `current()` makes a new one. Also clears the widgets' copy of the data.
     public static func delete(keychain: IdentityKeychain = SystemKeychain()) {
         keychain.deleteAll()
+        groupDefaults?.removeObject(forKey: groupKey)
         WidgetSnapshot.clear()
+        WidgetStations.clear()
     }
 }
 

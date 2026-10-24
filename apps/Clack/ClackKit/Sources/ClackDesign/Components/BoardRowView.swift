@@ -121,6 +121,8 @@ public struct BoardRowView<Badge: View>: View {
                 .frame(minWidth: timeWidth * 0.75, alignment: .leading)
             badge
             Text(destination).clack(.stopName).fontWeight(.semibold).foregroundStyle(Ink.text).lineLimit(1)
+                // A widget can't be opened for the rest: shrink a little before cutting.
+                .minimumScaleFactor(dense ? 0.75 : 1)
                 .strikethrough(line.canceled)
             Spacer(minLength: 4)
             delay
