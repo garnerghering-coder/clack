@@ -299,8 +299,8 @@ enum Config {
     }()
     /// The Mac's local name: System Settings > General > Sharing > Local hostname, without ".local".
     static let macHostName = "REPLACE-WITH-MAC-NAME"
-    /// Operators' logos are trademarks: off in App Store builds (docs/APP_STORE.md, 5.2.1); initials instead.
-    static let showOperatorLogos = false
+    /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
+    static let showOperatorLogos = true
     /// Shown on the Privacy screen when set (docs/APP_STORE.md, 1.5).
     static let supportEmail: String? = nil
 }

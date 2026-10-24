@@ -1451,7 +1451,7 @@ Cache Storage (web only): `clack-shell-v1` (service worker app shell, `public/sw
 - [ ] Reduced motion disables flips, pulses, draw-on, marching dots, pop-ins.
 - [ ] Offline: legs, leg details, journeys, operators, train types, settings, amenities, station info and maps open
       from the cache.
-- [ ] Operator logos off in the App Store build (initials badges).
+- [ ] Operator logos shown (approved by the operators, docs/APP_STORE.md); initials badge when an operator has no logo.
 
 ---
 
@@ -1493,4 +1493,4 @@ Cache Storage (web only): `clack-shell-v1` (service worker app shell, `public/sw
 - Icons (SF Symbols mapping or Lucide SVG set).
 - No station-map, operator or train-type JSON needs bundling (server-provided and cached offline), unless the port
   wants a first-launch fallback **[decision for the brief]**.
-- Build-time config: API base URL (https), support email (optional), operator-logos flag (false for the App Store).
+- Build-time config: API base URL (https), support email (optional), operator-logos flag (on: the operators approved it, docs/APP_STORE.md).

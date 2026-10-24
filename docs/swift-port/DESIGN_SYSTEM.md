@@ -539,8 +539,9 @@ fully rounded, `--accent-ink`.
 ### 3.12 Operator badge (OperatorBadge.tsx; styles.css:266-267)
 Square `size` (default 36; 28 in featured), radius `round(size × 0.28)`; fill brand colour (fallback `#3a4555`); white
 `short_name`, 800, 0.02em, font-size `size×0.36` (≤2 chars) or `size×0.3`, text-shadow `0 1px 2px rgba(0,0,0,0.35)`.
-If a downloaded logo exists and logos are enabled: image, `object-fit: cover`, bg `#fff`, inset hairline. **App Store
-build turns logos off** (`VITE_OPERATOR_LOGOS=false`, trademarks, App Review 5.2.1) (OperatorBadge.tsx:6-10).
+If a downloaded logo exists and logos are enabled: image, `object-fit: cover`, bg `#fff`, inset hairline. The web's
+App Store build turned logos off (`VITE_OPERATOR_LOGOS=false`, trademarks, App Review 5.2.1) (OperatorBadge.tsx:6-10);
+the Swift app keeps them on, with the operators' approval (docs/APP_STORE.md).
 
 ### 3.13 Medals and rim progress (Medal.tsx; styles.css:873-884, :978-994)
 

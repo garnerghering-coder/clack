@@ -34,7 +34,7 @@ Each item says who does it and where:
 | **Delete my data** (Settings > Your data): removes everything the server has for this phone at once, plus the phone's copies. | 5.1.1(v) account deletion |
 | **Privacy policy in the app** (Settings > Your data > Privacy), English and Swedish, matching what the code does. | 5.1.1(i) |
 | **Location purpose string.** Only "My location" on a station map asks; the position never leaves the phone. | 5.1.1, 5.1.5 |
-| **Operators' logos off in the iOS build** (they're trademarks). The badge shows the operator's initials in its colour instead. Names are fine to use. | 5.2.1, 4.1(c) |
+| **Operators' logos** are trademarks. Garner has the operators' approval to use them (2026-10-23), so the Swift app shows them (`Config.showOperatorLogos`). Keep the written approvals: App Review can ask for proof of permission. Without a logo the badge shows the operator's initials in its colour. | 5.2.1, 4.1(c) |
 | **No third-party analytics, ads or tracking**, so no App Tracking Transparency prompt is needed. | 5.1.2 |
 | **Standard HTTPS only**: `ITSAppUsesNonExemptEncryption = NO`, so no export-compliance paperwork with each upload. | Export rules |
 | **Built for Xcode 26 / iOS 26 SDK** (Capacitor 8), as required since April 2026. | 2.5.1 |
@@ -72,4 +72,3 @@ Each item says who does it and where:
 
 - iPad layout (2.4.1 encourages it, doesn't require it).
 - Accessibility Nutrition Labels in ASC (optional): check VoiceOver labels and Dynamic Type first.
-- Operator logos back on, for any operator that gives written permission (one setting: `VITE_OPERATOR_LOGOS`).
