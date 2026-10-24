@@ -13,6 +13,7 @@ struct ClackApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
     init() {
+        LaunchTiming.mark("init-start")
         let model = AppModel()
         _app = State(initialValue: model)
         // From launch, also a launch in the background: iOS wakes the app to hand over the address of a trip card the
@@ -20,6 +21,7 @@ struct ClackApp: App {
         LiveActivityManager.shared.observe { model.client }
         // A silent push or a background refresh can wake the app with no screen: they refresh through this model.
         BackgroundRefresh.shared.attach(model)
+        LaunchTiming.mark("init-end")
     }
 
     var body: some Scene {

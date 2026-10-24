@@ -40,7 +40,7 @@ struct AddTrainSheet: View {
             ConfirmConnectionStep(connection: connection) { model.pickedConnection = nil } onSaved: { model.didSave($0, app.client) }
         } else if let picked = model.picked {
             ConfirmStep(
-                result: picked, backLabel: model.openedWithTrip ? l10n.t("common.back") : nil,
+                result: picked, originChosen: model.originChosen, backLabel: model.openedWithTrip ? l10n.t("common.back") : nil,
                 onBack: { model.openedWithTrip ? router.closeAdd() : (model.picked = nil) }, onSaved: { model.didSave($0, app.client) }
             )
         } else {
@@ -138,7 +138,7 @@ private struct SearchStep: View {
             }
             VStack(spacing: 16) {
                 ForEach(model.results ?? []) { result in
-                    ResultCard(result: result) { model.picked = result }
+                    ResultCard(result: result) { model.pick(result) }
                 }
             }
         }
@@ -334,13 +334,13 @@ private struct ConfirmStep: View {
     @State private var error: String?
     @State private var saving = false
 
-    init(result: TripResult, backLabel: String? = nil, onBack: @escaping () -> Void, onSaved: @escaping (LegDetail) -> Void) {
+    init(result: TripResult, originChosen: Bool, backLabel: String? = nil, onBack: @escaping () -> Void, onSaved: @escaping (LegDetail) -> Void) {
         self.result = result
         self.backLabel = backLabel
         self.onBack = onBack
         self.onSaved = onSaved
-        // "To" is active first: most people only change where they got off.
-        _picked = State(initialValue: AddTrainLogic.Picked(fromSeq: result.from.seq, toSeq: result.to.seq, picking: .to))
+        // Where you got on first, then where you got off; unless the search already said where you got on.
+        _picked = State(initialValue: AddTrainLogic.initialPick(result, originChosen: originChosen))
     }
 
     var body: some View {

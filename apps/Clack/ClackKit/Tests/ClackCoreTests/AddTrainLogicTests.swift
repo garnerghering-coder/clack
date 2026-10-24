@@ -89,6 +89,31 @@ struct StopPickerTests {
         #expect(AddTrainLogic.tap(stop(1, noPickup: true), in: picking) == nil)
     }
 
+    @Test func aWholeTrainStartsAtWhereYouGotOnThenWhereYouGotOff() throws {
+        // Explore's "Plan a journey" and a board row open the whole train: first stop to last, nothing chosen yet.
+        let trip = TimetableTrip(
+            key: "k", serviceDate: "2026-10-24", trainNumber: "529", operatorId: "sj", category: "long_distance", product: "high_speed",
+            trainType: nil, stops: (1...6).map { stop($0) }
+        )
+        let result = try #require(AddTrainLogic.result(from: trip, fromSeq: nil, toSeq: nil))
+        var state = AddTrainLogic.initialPick(result, originChosen: false)
+        #expect(state == AddTrainLogic.Picked(fromSeq: 1, toSeq: 6, picking: .from))
+        // Stops after the first can be where you got on; the last can't (nothing after it to get off at).
+        #expect(AddTrainLogic.isSelectable(stop(3), in: state))
+        #expect(!AddTrainLogic.isSelectable(stop(6), in: state))
+        // Choosing where you got on moves to where you got off.
+        state = try #require(AddTrainLogic.tap(stop(3), in: state))
+        #expect(state == AddTrainLogic.Picked(fromSeq: 3, toSeq: 6, picking: .to))
+        #expect(!AddTrainLogic.isSelectable(stop(2), in: state))
+        state = try #require(AddTrainLogic.tap(stop(5), in: state))
+        #expect(state == AddTrainLogic.Picked(fromSeq: 3, toSeq: 5, picking: .to))
+    }
+
+    @Test func whenWhereYouGotOnIsAlreadyChosenThePickerStartsAtWhereYouGotOff() {
+        #expect(AddTrainLogic.firstEnd(originChosen: false) == .from)
+        #expect(AddTrainLogic.firstEnd(originChosen: true) == .to)
+    }
+
     @Test func rolesAndWhichStopsCanBeChosen() {
         #expect(AddTrainLogic.role(stop(2), in: picked) == .from)
         #expect(AddTrainLogic.role(stop(6), in: picked) == .to)

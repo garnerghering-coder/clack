@@ -50,7 +50,7 @@ struct TripProgressView: View {
                         VStack(spacing: 8) {
                             Text(p.unlocked.count == 1 ? l10n.t("progress.unlockedOne") : l10n.t("progress.unlocked", count: p.unlocked.count))
                                 .clack(.captionUpper).foregroundStyle(Ink.text2)
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8)], spacing: 16) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 120), spacing: 8, alignment: .top)], spacing: 16) {
                                 ForEach(Array(p.unlocked.enumerated()), id: \.offset) { index, milestone in
                                     VStack(spacing: 2) {
                                         Medal(m: milestone, size: 84)
