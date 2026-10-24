@@ -26,11 +26,11 @@ extension MLNMapView {
         backgroundColor = .clear
     }
 
-    /// Sets a GeoJSON source's data.
+    /// Sets a GeoJSON source's data. The shape is built directly from the dictionary (`MLNShape.fromGeoJSON`), with no
+    /// trip through JSON text, which matters for the route that redraws every frame while it draws itself in.
     func setShape(_ json: [String: Any], source id: String) {
         guard let source = style?.source(withIdentifier: id) as? MLNShapeSource,
-              let data = try? JSONSerialization.data(withJSONObject: json),
-              let shape = try? MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) else { return }
+              let shape = MLNShape.fromGeoJSON(json) else { return }
         source.shape = shape
     }
 
@@ -72,6 +72,44 @@ final class ClackMapView: MLNMapView {
         if let wantedFit, !moved {
             fit(wantedFit.points, padding: wantedFit.padding, maxZoom: wantedFit.maxZoom, animated: false)
         }
+    }
+}
+
+extension MLNShape {
+    /// A FeatureCollection of LineString and Point features (all the app draws) as map shapes; anything else goes the
+    /// slow way, through JSON, so an unexpected shape still draws.
+    static func fromGeoJSON(_ json: [String: Any]) -> MLNShape? {
+        guard json["type"] as? String == "FeatureCollection", let features = json["features"] as? [[String: Any]] else {
+            return viaJSON(json)
+        }
+        var shapes: [MLNShape & MLNFeature] = []
+        for feature in features {
+            guard let geometry = feature["geometry"] as? [String: Any],
+                  let coordinates = geometry["coordinates"] as? [Any] else { return viaJSON(json) }
+            let attributes = feature["properties"] as? [String: Any] ?? [:]
+            switch geometry["type"] as? String {
+            case "LineString":
+                guard let line = coordinates as? [[Double]] else { return viaJSON(json) }
+                var coords = line.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                let polyline = MLNPolylineFeature(coordinates: &coords, count: UInt(coords.count))
+                polyline.attributes = attributes
+                shapes.append(polyline)
+            case "Point":
+                guard let point = coordinates as? [Double], point.count >= 2 else { return viaJSON(json) }
+                let marker = MLNPointFeature()
+                marker.coordinate = CLLocationCoordinate2D(latitude: point[1], longitude: point[0])
+                marker.attributes = attributes
+                shapes.append(marker)
+            default:
+                return viaJSON(json)
+            }
+        }
+        return MLNShapeCollectionFeature(shapes: shapes)
+    }
+
+    private static func viaJSON(_ json: [String: Any]) -> MLNShape? {
+        guard let data = try? JSONSerialization.data(withJSONObject: json) else { return nil }
+        return try? MLNShape(data: data, encoding: String.Encoding.utf8.rawValue)
     }
 }
 
