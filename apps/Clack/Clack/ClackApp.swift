@@ -29,6 +29,9 @@ struct ClackApp: App {
                 // `-design` opens the design gallery straight away (docs/SWIFT_PORT.md step 4).
                 if CommandLine.arguments.contains("-design") {
                     NavigationStack { DesignGalleryView() }
+                } else if CommandLine.arguments.contains("-widgetGallery") {
+                    // The Home Screen widgets at their true sizes (WidgetGalleryView).
+                    WidgetGalleryView()
                 } else {
                     RootView()
                 }

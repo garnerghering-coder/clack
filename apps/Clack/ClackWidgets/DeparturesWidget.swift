@@ -2,9 +2,11 @@
 //  DeparturesWidget.swift
 //  ClackWidgets
 //
-//  A station's departures as board rows. The station is chosen in the widget's settings (an App Intent): your favourite
-//  stations, or any station found by name (the Stations screen's search). The widget fetches the board itself, drops each
-//  train as it leaves, and fetches again after 15 minutes.
+//  A station's departures as board rows. The station is chosen in the widget's settings (an App Intent): with nothing
+//  typed, your favourites, the stations you looked at lately and the big stations; typing searches every station by
+//  name (the Stations screen's search). Each list comes from the server, else from the copy the app keeps in the App
+//  Group (`WidgetStations`). The widget fetches the board itself, drops each train as it leaves, and fetches again after
+//  15 minutes. The view is `DeparturesWidgetView` (ClackDesign, shared with the app's debug gallery).
 //
 
 import AppIntents
@@ -19,38 +21,48 @@ struct StationOption: AppEntity {
     var id: String
     var name: String
     var displayRepresentation: DisplayRepresentation { DisplayRepresentation(title: "\(name)") }
+
+    init(id: String, name: String) {
+        self.id = id
+        self.name = name
+    }
+
+    init(_ station: WidgetStations.Station) { self.init(id: station.id, name: station.name) }
 }
 
 struct StationQuery: EntityStringQuery {
-    /// Your favourite stations (`GET /api/stations/favorites`); offline, the stations whose boards are kept.
-    private func favourites() async -> [StationOption] {
-        if let client = WidgetData.client(), let hits = try? await client.favoriteStations() {
-            return hits.map { StationOption(id: $0.id, name: $0.name) }
+    /// Favourites, recent and big stations, each under its heading (in the app's language).
+    func suggestedEntities() async throws -> IntentItemCollection<StationOption> {
+        let lists = await WidgetData.stationLists()
+        var sections: [IntentItemSection<StationOption>] = []
+        for (kind, stations) in lists.sections {
+            let title = await MainActor.run { WidgetWords.t(kind.titleKey) }
+            sections.append(IntentItemSection(LocalizedStringResource(stringLiteral: title), items: stations.map(StationOption.init)))
         }
-        return (WidgetSnapshot.load()?.boards ?? []).map { StationOption(id: $0.id, name: $0.name) }
+        return IntentItemCollection(sections: sections)
+    }
+
+    /// Search as you type; with nothing typed, the lists.
+    func entities(matching string: String) async throws -> IntentItemCollection<StationOption> {
+        let text = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return try await suggestedEntities() }
+        return IntentItemCollection(items: await WidgetData.searchStations(text).map(StationOption.init))
     }
 
     func entities(for identifiers: [String]) async throws -> [StationOption] {
-        let known = await favourites() + (WidgetSnapshot.load()?.boards ?? []).map { StationOption(id: $0.id, name: $0.name) }
         var out: [StationOption] = []
         for id in identifiers {
-            if let hit = known.first(where: { $0.id == id }) {
-                out.append(hit)
-            } else if let client = WidgetData.client(), let info = try? await client.station(id) {
-                out.append(StationOption(id: info.id, name: info.name))
-            }
+            if let station = await WidgetData.station(id) { out.append(StationOption(station)) }
         }
         return out
     }
 
-    func entities(matching string: String) async throws -> [StationOption] {
-        let text = string.trimmingCharacters(in: .whitespaces)
-        guard !text.isEmpty, let client = WidgetData.client() else { return await favourites() }
-        return ((try? await client.searchStations(text)) ?? []).map { StationOption(id: $0.id, name: $0.name) }
+    /// Before one is chosen: the first favourite.
+    func defaultResult() async -> StationOption? {
+        let lists = WidgetStations.load() ?? WidgetStations()
+        if let first = lists.favourites.first { return StationOption(first) }
+        return await WidgetData.stationLists().favourites.first.map(StationOption.init)
     }
-
-    func suggestedEntities() async throws -> [StationOption] { await favourites() }
-    func defaultResult() async -> StationOption? { await favourites().first }
 }
 
 struct PickStationIntent: WidgetConfigurationIntent {
@@ -110,12 +122,14 @@ struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: WidgetKinds.departures, intent: PickStationIntent.self, provider: DeparturesProvider()) { entry in
             DeparturesView(entry: entry)
+                .widgetPadding()
                 .containerBackground(Ink.bg, for: .widget)
                 .widgetURL(entry.stationId.flatMap { WidgetLinks.board($0) })
         }
         .configurationDisplayName(WidgetWords.t("widgets.departures.name"))
         .description(WidgetWords.t("widgets.departures.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
+        .contentMarginsDisabled()
         .freshnessPushHandler()
     }
 }
@@ -124,38 +138,10 @@ private struct DeparturesView: View {
     @Environment(\.widgetFamily) private var family
     var entry: DeparturesEntry
 
-    private var l10n: L10n { WidgetWords.l10n(entry.language) }
-
     var body: some View {
-        Group {
-            if let board = entry.board {
-                let rows = WidgetTimeline.departures(board.rows, at: wMs(entry.date), limit: family == .systemLarge ? 8 : 4)
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text(entry.stationName ?? board.name).clack(.boardDestination).foregroundStyle(Ink.text).lineLimit(1)
-                        Spacer(minLength: 6)
-                        UpdatedLine(updatedAt: board.updatedAt, now: entry.date, l10n: l10n, clock: entry.clock)
-                    }
-                    ForEach(rows) { row in
-                        // The board's compact row, as on a station sheet in the app.
-                        BoardRowView(
-                            .init(
-                                time: row.leaves, sched: row.time, tz: board.tz ?? TimeZone.current.identifier, destination: row.to,
-                                platform: row.platform, delay: row.delayMin, canceled: row.canceled
-                            ),
-                            clock: entry.clock, dense: true
-                        )
-                    }
-                    if rows.isEmpty { Text(l10n.t("board.empty")).clack(.caption).foregroundStyle(Ink.text2) }
-                    Spacer(minLength: 0)
-                }
-            } else if entry.stationId != nil {
-                EmptyWidget(title: entry.stationName ?? l10n.t("board.departures"), hint: l10n.t("board.error"))
-            } else {
-                EmptyWidget(title: l10n.t("widgets.pickStation"), hint: l10n.t("widgets.pickStationHint"))
-            }
-        }
-        .environment(l10n)
-        .placeholder(entry.isPlaceholder)
+        DeparturesWidgetView(
+            date: entry.date, size: family.homeSize ?? .medium, stationId: entry.stationId, stationName: entry.stationName,
+            board: entry.board, language: entry.language, clock: entry.clock, isPlaceholder: entry.isPlaceholder
+        )
     }
 }

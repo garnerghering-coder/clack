@@ -79,7 +79,11 @@ enum WidgetFeed {
             s.passportUpdatedAt = now
         }
 
-        if !app.isOffline, let favourites = try? await client.favoriteStations() {
+        // The widgets never make a phone id: they use the app's (also for the station picker).
+        Identity.shareWithWidgets(client.userID)
+        let favourites = app.isOffline ? nil : try? await client.favoriteStations()
+        if !app.isOffline { await keepStationLists(favourites: favourites, client: client, now: now) }
+        if let favourites {
             for station in favourites.prefix(3) {
                 let cached = s.boards.first { $0.id == station.id }
                 if let cached, now - cached.updatedAt < boardMaxAgeMs { continue }
@@ -102,5 +106,16 @@ enum WidgetFeed {
             for kind in [WidgetKinds.passport, WidgetKinds.stats, WidgetKinds.year] { center.reloadTimelines(ofKind: kind) }
         }
         if s.boards.map(\.rows) != before.boards.map(\.rows) { center.reloadTimelines(ofKind: WidgetKinds.departures) }
+    }
+
+    /// The Departures widget's picker lists (favourites, recent, big stations) as the app sees them, for when the
+    /// extension can't reach the server itself.
+    private static func keepStationLists(favourites: [StationHit]?, client: APIClient, now: Double) async {
+        let kept = WidgetStations.load() ?? WidgetStations()
+        let recent = try? await client.recentStations()
+        let askPopular = kept.popular.isEmpty || now - kept.popularAt > WidgetData.popularMaxAgeMs
+        let popular = askPopular ? try? await client.popularStations() : nil
+        let updated = WidgetData.merged(kept, .init(favourites: favourites, recent: recent, popular: popular), now: now)
+        if updated != kept { updated.save() }
     }
 }
