@@ -80,6 +80,11 @@ as one. Nothing polls while nobody is looking, except your own trips.
 | Live map: Norway | Entur GTFS-RT vehicle positions + trip updates for the 4 rail operators (8 requests) every `LIVE_MAP_NORWAY_POLL_MS` | Same |
 | Norwegian trips | 1 Journey Planner query per live trip (cached 30 s) + 1 vehicle-positions request per operator, every 20 s | Same window as Swedish trips |
 | Norwegian station board | 1 Journey Planner query per station and direction every `BOARD_POLL_MS` | While the board is open, plus 60 s |
+| Live map: Finland | Digitraffic `/train-locations/latest` (all running trains, about 100) every `LIVE_MAP_FINLAND_POLL_MS`; `/live-trains` once in full, then only what changed since the highest `version` seen, every 30 s (a full reload every 30 min); `/compositions/{date}` for unit types every 15 min. About 9 requests a minute | Same |
+| Finnish trips | 1 `/trains/{date}/{number}` per live trip (cached 30 s) + the shared `/train-locations/latest`, every 20 s | Same window as Swedish trips |
+| Finnish station board | 1 `/live-trains/station/{code}` per station (cached 30 s, shared by departures and arrivals) | While the board is open, plus 60 s |
+
+Digitraffic allows 60 requests a minute per client; the client in `digitraffic/client.ts` keeps to 40 with a token bucket.
 
 Entur allows 1,000 requests a minute with the client name; if it ever answers "too many", nothing is sent to it again
 until the reset time it gives.
@@ -94,6 +99,8 @@ LIVE_MAP_INCLUDE_ESTIMATED=1  # 0: live map shows GPS positions only, no estimat
 LIVE_MAP_SIMULATE=0           # e.g. 1000: fake trains along real track instead of Trafikverket (demo, load test)
 LIVE_MAP_NORWAY=1             # 0: no Norwegian trains on the live map
 LIVE_MAP_NORWAY_POLL_MS=20000 # Norway's live map feeds (Entur refreshes them every 15 s)
+LIVE_MAP_FINLAND=1            # 0: no Finnish trains on the live map
+LIVE_MAP_FINLAND_POLL_MS=10000 # Finland's train locations (Digitraffic updates each train about every 8 s)
 ENTUR_CLIENT_NAME=garner-clack
 ```
 

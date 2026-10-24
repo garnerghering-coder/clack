@@ -28,7 +28,28 @@ the Sources page and map attribution credit it as: `Source: Fintraffic / digitra
   table in `import/gtfs-fi.ts`.
 - MQTT: the broker address and any credentials were not tried; the plan uses REST polling.
 - The infra API (rail line geometry): not used so far, its limit is lower (30/min).
-- How far back `/trains/{date}/{number}` reaches (needed for actual times of past trips): not measured yet.
+- (Measured, see Live data below.) How far back `/trains/{date}/{number}` reaches: at least to 2023-06-10, the oldest date tried.
 - Whether the replacement variants (`…_replacement`) mean the same train on a replaced route or stop pattern: we only
   know they are separate services on single dates with their own stop times.
 - GTFS rows and live data are checked against each other only for IC 401/402/407/408; nothing else.
+
+## Live data (checked 2026-10-24, by the live feeds work)
+
+- `/live-trains`: about 520 trains (288 commuter, 86 long-distance, the rest cargo, shunting, locomotive moves and track
+  machines, which Clack never shows). Digitraffic caches the full list for 300 s, and `?version=<n>` (trains changed
+  since that version, which is the highest `version` of the list you hold) for 120 s; the delta works: 73 trains changed
+  in the first minute after a full load. Each train in it is complete (all `timeTableRows`).
+- `/train-locations/latest`: about 100 trains (`isGpsLocation` true on all 105 seen), cached 1 s. Each train's location
+  changes about 8 times a minute (measured over a minute: 783 changes for 97 trains), so Clack polls every 10 s.
+- `/trains/{date}/{number}` answers for dates back to at least 2023-06-10 (the oldest tried), cached 10 s.
+- `/compositions/{date}/{number}` is cached 180 s and `/compositions/{date}` (0.8 MB) 900 s. `locomotiveType` is the
+  locomotive (Sr3, Sr2) or, for a multiple unit, the unit type (Sm5, Sm4, Sm2, Sm3). An S (Pendolino-category) train
+  can be hauled by an Sr3 (S 12 on 2026-10-24), so the type follows the composition, not the letter.
+- `/live-trains/station/{code}?departing_trains=N&departed_trains=N&arriving_trains=N&arrived_trains=N&include_nonstopping=false`:
+  N is a count (the next N departures, the last N departed), at most 999; Helsinki with 400+100 each is 11 MB, so Clack
+  asks for 200+40. Cached 30 s. Rows carry `commercialStop`, `commercialTrack`, `cancelled` and `causes`.
+- A call with `trainStopping` true and `commercialStop` false is a technical stop (HD, KML, PSJ in IC 407 and 24): not a
+  place to get on or off. Rows with `trainStopping` false are passing times.
+- Cancellation comes per row: IC 142 on 2026-10-23 was cancelled between Pieksämäki and Jyväskylä and ran on from
+  Jyväskylä about 95 minutes late; HDM 750 on 2026-10-22 was cancelled whole (`cancelled` true on the train and its rows).
+- Haparanda's arrival row is `countryCode` SE (`HPA`), commercial, with a platform.
