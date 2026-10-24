@@ -4,10 +4,10 @@
 
 - **Source:** OpenStreetMap extracts for Sweden, Denmark and Norway (`download.openstreetmap.fr`, 2026-10-19) and
   Finland (Geofabrik, `https://download.geofabrik.de/europe/finland-latest.osm.pbf`, OSM data timestamp
-  2026-10-23). Kept, the same for all four countries: `railway=rail|light_rail|narrow_gauge`, with service track
+  2026-10-23). Kept, the same for all four countries: `railway=rail|narrow_gauge`, plus `light_rail` only around Copenhagen (see below), with service track
   flagged and industrial/military/tourism usage hidden from the map layer. Lines tagged `railway=tram|subway` are
   not kept. Note that in Finland the Helsinki metro (including the western extension to Espoo) and the Tampere tram
-  are tagged `railway=light_rail` in OSM; they are NOT in the graph (owner, 2026-10-24: no light rail in Finland). `build-rail-graph.mjs` skips light_rail ways east of 20.5°E; the committed graph had the same edges removed. Light rail in Sweden, Norway and Denmark is kept (kind 1).
+  are tagged `railway=light_rail` in OSM; they are NOT in the graph. Clack is for planned train journeys, so trams and metros are left out (owner, 2026-10-24): `build-rail-graph.mjs` skips every `light_rail` way except inside the Copenhagen box (55.5–56.1°N, 12.0–12.8°E), where it appears to be the S-tog (judged from location and stations only, unverified); the committed graph had the same edges removed (Helsinki metro, Tampere tram, Bergen Bybanen, Stockholm trams, Aarhus Letbane).
 - **License:** © OpenStreetMap contributors, available under the
   [Open Database License (ODbL) 1.0](https://opendatacommons.org/licenses/odbl/1-0/). This file is a derived
   database and is shared under the same license. The app shows "© OpenStreetMap contributors" on every map.

@@ -109,13 +109,14 @@ describe('the committed OSM rail graph', () => {
   });
 });
 
-describe('Finland has no light rail', () => {
-  it('has no light_rail edge east of 20.5°E (the Helsinki metro and the Tampere tram are not trains)', async () => {
+describe('No trams or metros in the graph', () => {
+  it('has light_rail only around Copenhagen (the S-tog); Helsinki, Tampere, Bergen, Stockholm and Aarhus have none', async () => {
     const { gunzipSync } = await import('node:zlib');
     const { readFileSync } = await import('node:fs');
     const g = JSON.parse(gunzipSync(readFileSync(new URL('../../../data/osm/rail-graph.json.gz', import.meta.url))).toString('utf8'));
-    const lonOf = (n: number) => g.nodes[2 * n + 1] as number;
-    const lightEast = g.edges.filter((e: number[]) => ((e[2]! >> 1) & 3) === 1 && lonOf(e[0]!) >= 20.5 && lonOf(e[1]!) >= 20.5);
-    expect(lightEast.length).toBe(0);
+    const at = (n: number) => [g.nodes[2 * n], g.nodes[2 * n + 1]] as [number, number];
+    const inCopenhagen = ([la, lo]: [number, number]) => la >= 55.5 && la <= 56.1 && lo >= 12.0 && lo <= 12.8;
+    const stray = g.edges.filter((e: number[]) => ((e[2]! >> 1) & 3) === 1 && !(inCopenhagen(at(e[0]!)) && inCopenhagen(at(e[1]!))));
+    expect(stray.length).toBe(0);
   });
 });
