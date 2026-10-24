@@ -1,9 +1,8 @@
-"""Writes the Swift app's colour tokens: one Color Set per CSS custom property of the web app, with Any (light) and Dark
+"""Writes the Swift app's colour tokens: one Color Set per design token, with Any (light) and Dark
 appearances, into apps/Clack/Clack/Assets.xcassets/Colors/.
 
-The values are the ones in apps/web/src/styles.css (:root for dark, :root[data-theme='light'] for light), listed in
-docs/swift-port/DESIGN_SYSTEM.md section 1. Names are the CSS names without the leading dashes. Where the web leaves a
-token to the other theme ("same"), both appearances get the same value.
+The values are listed in docs/swift-port/DESIGN_SYSTEM.md section 1 (dark and light). Names are the token names
+without leading dashes. Where a token is the same in both themes ("same"), both appearances get the same value.
 
 Run from the repository root after changing a token:
     python3 scripts/ios/make_colors.py
