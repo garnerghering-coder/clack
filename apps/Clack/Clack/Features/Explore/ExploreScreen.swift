@@ -74,23 +74,12 @@ struct ExploreScreen: View {
     private var top: some View {
         @Bindable var model = model
         return HStack(spacing: 8) {
-            HStack(spacing: 8) {
-                LucideIcon(name: "search", size: 16).foregroundStyle(Ink.text2)
-                TextField("", text: $model.query, prompt: Text(l10n.t("liveMap.searchPlaceholder")).foregroundStyle(Ink.text3))
-                    .focused($searchFocused)
-                    .font(ClackFont.inter(16)).foregroundStyle(Ink.text).tint(Ink.accentLine)
-                    .textInputAutocapitalization(.never).autocorrectionDisabled().submitLabel(.search)
-                    .accessibilityLabel(l10n.t("liveMap.search"))
-                    .onChange(of: model.query) {
-                        model.searching = true
-                        model.searchChanged()
-                    }
-                    .onChange(of: searchFocused) { if searchFocused { model.searching = true } }
-            }
-            .padding(.horizontal, 14).frame(height: 44)
-            .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input)
+            SearchField(text: $model.query, prompt: l10n.t("liveMap.searchPlaceholder"), overMap: true, focus: $searchFocused)
+                .onChange(of: model.query) {
+                    model.searching = true
+                    model.searchChanged()
+                }
+                .onChange(of: searchFocused) { if searchFocused { model.searching = true } }
             Button { model.showFilters.toggle() } label: {
                 LucideIcon(name: "sliders-horizontal", size: 18)
                     .foregroundStyle(model.filteredCount > 0 ? Ink.onAccent : Ink.text)

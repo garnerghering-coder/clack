@@ -60,19 +60,7 @@ private struct SearchStep: View {
     var body: some View {
         @Bindable var model = model
         DateRow(date: $model.date)
-        TextField("", text: $model.query, prompt: Text(l10n.t("add.placeholder")).foregroundStyle(Ink.text3).fontWeight(.medium))
-            .focused($focused)
-            .clack(.searchField)
-            .foregroundStyle(Ink.text)
-            .tint(Ink.accentLine)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .submitLabel(.search)
-            .padding(.horizontal, 14)
-            .frame(height: 52)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
-            .accessibilityLabel(l10n.t("add.placeholder"))
+        SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
             .onAppear { focused = true }
 
         if model.query.isEmpty {
@@ -765,12 +753,7 @@ private struct ManualStationField: View {
                 .frame(minHeight: 52)
             } else {
                 VStack(alignment: .leading, spacing: 6) {
-                    TextField("", text: $query, prompt: Text(label).foregroundStyle(Ink.text3))
-                        .clack(.searchField).foregroundStyle(Ink.text).tint(Ink.accentLine)
-                        .textInputAutocapitalization(.never).autocorrectionDisabled()
-                        .padding(.horizontal, 14).frame(height: 52)
-                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-                        .hairlineBorder(radius: Radius.input)
+                    SearchField(text: $query, prompt: label)
                     ForEach(hits) { hit in
                         StationRow(station: hit) {
                             value = hit

@@ -58,19 +58,7 @@ struct StationsScreen: View {
     }
 
     private var field: some View {
-        TextField("", text: $query, prompt: Text(l10n.t("stations.placeholder")).foregroundStyle(Ink.text3).fontWeight(.medium))
-            .focused($focused)
-            .clack(.searchField)
-            .foregroundStyle(Ink.text)
-            .tint(Ink.accentLine)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .submitLabel(.search)
-            .padding(.horizontal, 14)
-            .frame(height: 52)
-            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-            .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
-            .accessibilityLabel(l10n.t("stations.placeholder"))
+        SearchField(text: $query, prompt: l10n.t("stations.placeholder"), focus: $focused)
     }
 
     @ViewBuilder

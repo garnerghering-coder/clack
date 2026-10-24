@@ -596,13 +596,7 @@ private struct PlaceSearchSheet: View {
 
     private func content(title: String, q: String, shownTracks: [String], shownEntrances: [(node: StationNode, label: String)], shownPois: [StationPoi]) -> some View {
         SheetFrame(title: title, onClose: { dismiss() }) {
-            TextField("", text: $query, prompt: Text(l10n.t("stationMap.searchPlaceholder")).foregroundStyle(Ink.text3).fontWeight(.medium))
-                .focused($focused).clack(.searchField).foregroundStyle(Ink.text).tint(Ink.accentLine)
-                .textInputAutocapitalization(.never).autocorrectionDisabled().submitLabel(.search)
-                .padding(.horizontal, 14).frame(height: 52)
-                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.input, style: .continuous))
-                .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
-                .accessibilityLabel(l10n.t("stationMap.search"))
+            SearchField(text: $query, prompt: l10n.t("stationMap.searchPlaceholder"), focus: $focused)
             if mode != .find && q.isEmpty {
                 Button { Task { await locate() } } label: {
                     HStack(spacing: 12) {
