@@ -6,7 +6,7 @@ import { BASEMAP_FILE } from '../src/import/basemap.js';
 import { mapRoutes } from '../src/routes/map.js';
 
 // Native map libraries (MapLibre Native on the iPhone) get the basemap as plain z/x/y tiles and the label glyphs
-// from the server, since they can't use the web app's PMTiles reader or its bundled fonts.
+// from the server, since they can't read PMTiles or bundle the fonts.
 describe('map tiles and glyphs for native maps', () => {
   const app = () => {
     const a = Fastify();

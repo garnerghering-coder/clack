@@ -1,6 +1,5 @@
-// Map data for the apps: the local basemap (PMTiles, served with HTTP range requests, and as plain z/x/y tiles for
-// map libraries that don't read PMTiles), the label fonts, the rail-network layer and a status check so the UI can
-// say when the basemap is still downloading.
+// Map data for the app: the local basemap (a PMTiles archive on disk, served as plain z/x/y vector tiles), the label
+// fonts, the rail-network layer and a status check so the app can say when the basemap is still downloading.
 import fs from 'node:fs';
 import path from 'node:path';
 import type { FastifyPluginAsync } from 'fastify';
@@ -29,8 +28,8 @@ class FileSource implements Source {
   }
 }
 
-/** The map labels' glyphs (Noto Sans, OFL), the same files the web app serves itself. */
-const FONTS_DIR = path.join(REPO_ROOT, 'apps/web/public/map/fonts');
+/** The map labels' glyphs (Noto Sans, OFL). */
+const FONTS_DIR = path.join(REPO_ROOT, 'apps/server/assets/map-fonts');
 const FONT_STACKS = new Set(['Noto Sans Regular', 'Noto Sans Medium']);
 
 export const mapRoutes =
@@ -41,22 +40,6 @@ export const mapRoutes =
     app.get('/map/status', async () => {
       const g = railGraph();
       return { basemap: basemapInfo(file), railGraph: g ? { generated: g.generated, attribution: g.attribution } : null };
-    });
-
-    app.get('/map/basemap.pmtiles', async (req, reply) => {
-      if (!fs.existsSync(file)) return reply.code(404).send({ error: 'basemap not downloaded yet' });
-      const size = fs.statSync(file).size;
-      reply.header('Accept-Ranges', 'bytes').header('Content-Type', 'application/vnd.pmtiles').header('Cache-Control', 'no-cache');
-      const m = /^bytes=(\d+)-(\d*)$/.exec(req.headers.range ?? '');
-      if (!m) return reply.header('Content-Length', size).send(fs.createReadStream(file));
-      const start = Number(m[1]);
-      const end = m[2] ? Math.min(Number(m[2]), size - 1) : size - 1;
-      if (start >= size || start > end) return reply.code(416).header('Content-Range', `bytes */${size}`).send();
-      return reply
-        .code(206)
-        .header('Content-Range', `bytes ${start}-${end}/${size}`)
-        .header('Content-Length', end - start + 1)
-        .send(fs.createReadStream(file, { start, end }));
     });
 
     // The basemap as ordinary vector tiles (Mapbox Vector Tile, uncompressed), for MapLibre Native on the iPhone:
