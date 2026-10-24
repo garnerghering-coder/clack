@@ -49,7 +49,8 @@
     { "id": "sl_roslagsbanan", "uncertain": true, "name": "X10p or X15p", "builder": null, "max_kmh": null, "since": null, "art": "railcar", "about": "Roslagsbanan runs X10p and X15p side by side; no source says which train is which.", "_source": "en.wikipedia.org/wiki/SL_X15p (read 2026-10-24): X15p is replacing X10p, both run now." },
     { "id": "sl_c10", "name": "C10/C11", "builder": "ASEA", "max_kmh": 70, "since": 1975, "art": "railcar", "about": "Saltsjöbanan's two-car sets, built 1975–76 on the Stockholm metro's C8 design.", "_source": "en.wikipedia.org/wiki/Saltsjöbanan and sv.wikipedia.org/wiki/Saltsjöbanan (read 2026-10-24): ASEA, 1975–76, 70 km/h; the two articles differ on whether they are rebuilt metro cars. Secondary sources." },
     { "id": "no_el18", "name": "El 18 + coaches", "builder": null, "max_kmh": null, "since": null, "art": "loco", "about": "Vy's Oslo–Bergen locomotive-hauled trains: an El 18 with Class 7 coaches.", "_source": "norsketog.no/en/lines/bergensbanen (read 2026-10-24): Oslo–Bergen is normally El 18 + class 7 coaches (and WLAB2 sleepers); Norske tog warns this can change. No rule uses this type yet: the line has a Type 74 day variant too and the rules can't tell the lines apart." },
-    { "id": "fi_ic_coaches", "name": "InterCity coaches", "builder": null, "max_kmh": null, "since": null, "art": "loco", "about": "VR's InterCity coach rake.", "_source": "Hand-made, owner-supplied drawing; which wagon types it shows is not recorded, so no rule uses this type." }
+    { "id": "fi_ic_coaches", "name": "InterCity coaches", "builder": null, "max_kmh": null, "since": null, "art": "loco", "about": "VR's InterCity coach rake.", "_source": "Hand-made, owner-supplied drawing; which wagon types it shows is not recorded, so no rule uses this type." },
+    { "id": "snalltaget_coaches", "name": "Snälltåget locomotive + coaches", "builder": null, "max_kmh": null, "since": null, "art": "loco", "about": "Snälltåget’s own locomotive-hauled sets.", "_source": "Owner-supplied drawing (2026-10-25). en.wikipedia.org/wiki/Snälltåget and jarnvag.net (read 2026-10-24): since 2016 Snälltåget runs on its own with Vectron (class 193) locomotives and ex-German coaches." }
   ],
   "rules": [
     { "_source": "sj.se/allt-om-resan/vara-tag (read 2026-10-22): Regina runs Karlstad–Göteborg; järnväg.net Alvhem 2026-06-18.", "match": { "operator": "sj", "both_ends": ["Göteborg C", "Trollhättan C", "Vänersborg C", "Öxnered", "Mellerud", "Åmål", "Säffle", "Kil", "Karlstad C"] }, "type": "regina" },
@@ -59,7 +60,7 @@
     { "_source": "sv.wikipedia.org/wiki/Kust_till_kust-banan (read 2026-10-24): since 2009 the line is run by locomotive-hauled trains; jarnvagar.nu 2026-09-09: SJ's loco-hauled regional trains between Göteborg and Kalmar. Which locomotive (Rc6?) is not confirmed, so the generic type.", "match": { "operator": "sj", "product": "regional", "both_ends": ["Göteborg C", "Kalmar C", "Värnamo C", "Borås C", "Alvesta", "Växjö", "Emmaboda"] }, "type": "loco_coaches" },
     { "match": { "operator": "sj", "product": "regional" }, "type": "x40" },
     { "match": { "operator": "snalltaget", "product": "night" }, "type": "loco_sleeper" },
-    { "match": { "operator": "snalltaget" }, "type": "loco_coaches" },
+    { "match": { "operator": "snalltaget" }, "type": "snalltaget_coaches" },
     { "match": { "operator": "vy", "product": "night" }, "type": "loco_sleeper" },
     { "_source": "Line types: Norske tog's route pages (norsketog.no/strekninger) and jernbane.net photos 2025-26, checked 2026-10-22; Notodden–Porsgrunn is Type 69 per no.wikipedia.org/wiki/Type_69_(motorvognsett), read 2026-10-24.", "match": { "operator": "vy", "ends": ["Notodden"] }, "type": "no_type69" },
     { "match": { "operator": "vy", "ends": ["Spikkestad", "Lillestrøm"] }, "type": "no_type72" },
@@ -104,7 +105,7 @@
     { "match": { "operator": "norrtag" }, "type": "x62" },
     { "match": { "operator": "varmlandstrafik" }, "type": "regina" },
     { "match": { "operator": "x-taget" }, "type": "regina" },
-    { "match": { "operator": "tagab" }, "type": "loco_coaches" },
+    { "_source": "Owner-supplied Rc6 drawing in TÅGAB livery (2026-10-25); the locomotive type on TÅGAB was not checked against a written source.", "match": { "operator": "tagab" }, "type": "rc6_coaches" },
     { "match": { "operator": "inlandsbanan" }, "type": "y1" },
     { "match": { "operator": "lennakatten" }, "type": "heritage" },
     { "match": { "operator": "tjf" }, "type": "heritage" },

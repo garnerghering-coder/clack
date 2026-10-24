@@ -9,7 +9,8 @@ describe('typical train types', () => {
     expect(typicalTrainType('sl', 'commuter', '2580')).toBe('x60');
     expect(typicalTrainType('vasttagen', 'commuter', '3592')).toBe('x61_vt');
     expect(typicalTrainType('vasttagen', 'regional', '7256')).toBe('regina');
-    expect(typicalTrainType('snalltaget', 'intercity', '306')).toBe('loco_coaches');
+    expect(typicalTrainType('snalltaget', 'intercity', '306')).toBe('snalltaget_coaches');
+    expect(typicalTrainType('tagab', 'regional', '8001')).toBe('rc6_coaches');
   });
 
   it("keeps Roslagsbanan and Saltsjöbanan off the X60 (sv/en.wikipedia, read 2026-10-24: the X60 runs the Pendeltåg only)", () => {

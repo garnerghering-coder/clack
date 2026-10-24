@@ -36,7 +36,9 @@ public nonisolated enum TrainArt {
         "x2000": Detailed(model: "x2000", liveries: ["sj"], liveryOf: ["sj": "sj-x2"]),
         "x40": Detailed(model: "x40", liveries: ["sj"]),
         "x55": Detailed(model: "x55", liveries: ["sj"]),
-        "rc6_coaches": Detailed(model: "rc6_coaches", liveries: ["sj"]),
+        "rc6_coaches": Detailed(model: "rc6_coaches", liveries: ["sj", "tagab"]),
+        // Snälltåget's own locomotive and coaches (hand-made, owner-supplied).
+        "snalltaget_coaches": Detailed(model: "snalltaget", liveries: ["snalltaget"]),
         "x60": Detailed(model: "x60", liveries: ["sl"]),
         // Västtåg's are mid-repaint (yellow to blue) and Östgötapendeln's cab-car paint differs between units.
         "x61": Detailed(model: "x61", liveries: ["pagatag", "ostgotapendeln"]),
@@ -48,10 +50,10 @@ public nonisolated enum TrainArt {
         "y31": Detailed(model: "y31", liveries: ["krosatag", "vasttagen"]),
         "x31": Detailed(model: "x31", liveries: ["oresundstag", "dsb"]),
         "x11": Detailed(model: "x11", liveries: ["krosatag"]),
-        "er1": Detailed(model: "er1", liveries: ["malartag"]),
+        "er1": Detailed(model: "er1", liveries: ["malartag", "tib"]),
         "flytoget71": Detailed(model: "flytoget71", liveries: ["flytoget"]),
         "flytoget78": Detailed(model: "flytoget78", liveries: ["flytoget"]),
-        "regina": Detailed(model: "regina", liveries: ["vasttagen", "tib", "x-taget", "sj", "malartag", "varmlandstrafik"]),
+        "regina": Detailed(model: "regina", liveries: ["vasttagen", "tib", "x-taget", "sj", "malartag", "varmlandstrafik", "norrtag"]),
         "no_flirt": Detailed(model: "no_flirt", liveries: ["vy"]),
         "no_type72": Detailed(model: "no_type72", liveries: ["go-ahead-norge", "vy"]),
         "no_type73": Detailed(model: "no_type73", liveries: ["sj-nord", "go-ahead-norge", "vy"]),

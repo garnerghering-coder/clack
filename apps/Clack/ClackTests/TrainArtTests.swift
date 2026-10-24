@@ -104,6 +104,15 @@ struct TrainArtTests {
         #expect(picture("no_el18", nil, "vy").asset == "no_el18-vy")
     }
 
+    @Test func wave3LiveriesAreFoundForTheirOperators() {
+        #expect(picture("er1", nil, "tib").asset == "er1-tib")
+        #expect(picture("regina", nil, "norrtag").asset == "regina-norrtag")
+        #expect(picture("rc6_coaches", nil, "tagab").asset == "rc6_coaches-tagab")
+        #expect(picture("snalltaget_coaches", nil, "snalltaget").asset == "snalltaget-snalltaget")
+        // SJ's own Rc6 picture is unchanged.
+        #expect(picture("rc6_coaches", nil, "sj").asset == "rc6_coaches-sj")
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")
