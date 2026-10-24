@@ -87,9 +87,13 @@ final class ExploreModel {
             self?.bbox = bbox
             self?.zoom = zoom
         }
-        controller.onTapTrain = { [weak self] id in Task { await self?.select(id) } }
+        controller.onTapTrain = { [weak self] id in
+            self?.searching = false
+            Task { await self?.select(id) }
+        }
         controller.onTapStation = { [weak self] id, name in
             guard let self else { return }
+            self.searching = false
             self.stationSheet = StationSheetTarget(id: id, name: name)
         }
     }
@@ -256,6 +260,29 @@ final class ExploreModel {
 
     // MARK: search
 
+    /// The text in the field changed. Typing opens the search; the text being cleared (by a pick, or the field's
+    /// clear) doesn't, or picking a result would open the list again over what it opened.
+    func queryChanged() {
+        if !query.trimmingCharacters(in: .whitespaces).isEmpty { startSearch() }
+        searchChanged()
+    }
+
+    /// The search panel opens; the filters close, as the two share the space under the field, and so does the legend,
+    /// which would stand in the panel's lower part.
+    func startSearch() {
+        searching = true
+        showFilters = false
+        legend = false
+    }
+
+    /// The search is done with (a result picked): the panel closes and the text and its station hits go.
+    func endSearch() {
+        searching = false
+        query = ""
+        searchTask?.cancel()
+        stationHits = []
+    }
+
     func searchChanged() {
         searchTask?.cancel()
         let text = query.trimmingCharacters(in: .whitespaces)
@@ -268,8 +295,7 @@ final class ExploreModel {
     }
 
     func openStation(_ hit: StationHit) async {
-        searching = false
-        query = ""
+        endSearch()
         deselect()
         if let info = await app?.stations.info(hit.id) {
             controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: 10, offset: 0)

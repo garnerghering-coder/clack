@@ -36,7 +36,8 @@ struct ExploreScreen: View {
             }
             if model.showFilters { filters }
             bottomLeft
-            sheets
+            // A station's or train's sheet waits under an open search (it comes back on Close); a pick replaces it.
+            if !model.searching { sheets }
         }
         .clipped()
         .environment(model)
@@ -62,13 +63,14 @@ struct ExploreScreen: View {
             model.deselect()
             model.stationSheet = nil
             model.query = ""
-            model.searching = true
+            model.startSearch()
             searchFocused = true
         }
         // A train opened from a board row, a follow or a link.
         .task(id: router.pendingTrain) {
             guard let target = router.pendingTrain else { return }
             router.pendingTrain = nil
+            model.searching = false
             // Not awaited here: clearing the request restarts this task, which would cancel the wait.
             Task { await model.focus(target) }
         }
@@ -79,7 +81,38 @@ struct ExploreScreen: View {
             }
         }
         .sensoryFeedback(.selection, trigger: model.follows.count)
+        #if DEBUG
+        .task { await debugSearch() }
+        #endif
     }
+
+    #if DEBUG
+    /// Launch arguments for checking the search without tapping: `-exploreFilters` opens the filters, `-exploreSearch <text>` types it (an empty string
+    /// opens the station list), `-exploreFocus` puts the caret in the field, and `-explorePick station|train` then
+    /// picks the first station or train found, as a tap on the result does.
+    private func debugSearch() async {
+        let args = CommandLine.arguments
+        if args.contains("-exploreFilters") {
+            try? await Task.sleep(for: .seconds(3))
+            model.showFilters = true
+        }
+        guard let at = args.firstIndex(of: "-exploreSearch") else { return }
+        let text = args.indices.contains(at + 1) ? args[at + 1] : ""
+        try? await Task.sleep(for: .seconds(3))
+        model.startSearch()
+        model.query = text
+        if args.contains("-exploreFocus") { searchFocused = true }
+        guard let pick = args.firstIndex(of: "-explorePick").flatMap({ args.indices.contains($0 + 1) ? args[$0 + 1] : nil }) else { return }
+        try? await Task.sleep(for: .seconds(4))
+        if pick == "station", let hit = model.stationHits.first {
+            model.searching = false
+            await model.openStation(hit)
+        } else if pick == "train", let train = model.trainHits().first {
+            model.endSearch()
+            await model.select(train.id)
+        }
+    }
+    #endif
 
     // MARK: top bar
 
@@ -87,12 +120,15 @@ struct ExploreScreen: View {
         @Bindable var model = model
         return HStack(spacing: 8) {
             SearchField(text: $model.query, prompt: l10n.t("liveMap.searchPlaceholder"), overMap: true, focus: $searchFocused)
-                .onChange(of: model.query) {
-                    model.searching = true
-                    model.searchChanged()
-                }
-                .onChange(of: searchFocused) { if searchFocused { model.searching = true } }
-            Button { model.showFilters.toggle() } label: {
+                .onChange(of: model.query) { model.queryChanged() }
+                .onChange(of: searchFocused) { if searchFocused { model.startSearch() } }
+                // However the search closes (a pick, Close, a tap on the map), the keyboard goes with it.
+                .onChange(of: model.searching) { if !model.searching { searchFocused = false } }
+            Button {
+                // The filters and the search share the space under the field: one at a time.
+                if !model.showFilters { model.searching = false }
+                model.showFilters.toggle()
+            } label: {
                 LucideIcon(name: "sliders-horizontal", size: 18)
                     .foregroundStyle(model.filteredCount > 0 ? Ink.onAccent : Ink.text)
                     .frame(width: 40, height: 40)
@@ -119,7 +155,7 @@ struct ExploreScreen: View {
     private var results: some View {
         let q = model.query.trimmingCharacters(in: .whitespaces)
         let trainHits = model.trainHits()
-        return ScrollView {
+        return SearchPanel(maxHeight: 420) {
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(trainHits) { train in
                     let op = train.operatorId.flatMap { app.operatorsById[$0] }
@@ -130,9 +166,7 @@ struct ExploreScreen: View {
                     } caption: {
                         [train.origin, train.destination].compactMap { $0 }.joined(separator: " → ")
                     } action: {
-                        model.searching = false
-                        model.query = ""
-                        searchFocused = false
+                        model.endSearch()
                         Task { await model.select(train.id) }
                     }
                 }
@@ -144,7 +178,7 @@ struct ExploreScreen: View {
                     } caption: {
                         l10n.t("liveMap.station")
                     } action: {
-                        searchFocused = false
+                        model.searching = false
                         Task { await model.openStation(hit) }
                     }
                 }
@@ -152,37 +186,20 @@ struct ExploreScreen: View {
                     Text(q.allSatisfy(\.isNumber) ? l10n.t("liveMap.noTrainMatch", ["q": q]) : l10n.t("liveMap.noMatch", ["q": q]))
                         .clack(.caption).foregroundStyle(Ink.text2).padding(.vertical, 8)
                 }
-                Button(l10n.t("common.close")) { model.searching = false; searchFocused = false }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
+                Button(l10n.t("common.close")) { model.searching = false }.buttonStyle(LinkButtonStyle()).padding(.top, 8)
             }
-            .padding(.horizontal, 16).padding(.vertical, 12)
         }
-        .scrollBounceBehavior(.basedOnSize)
-        .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
-        .frame(maxHeight: 420)
-        .background(Ink.glass).background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, 12).padding(.top, 64)
     }
 
     /// The search with nothing typed: your favourite and recent stations and the big ones (what the Stations screen on
     /// Trips used to list). A station opens its sheet on the map, with its departures.
     private var stations: some View {
         StationDirectoryList { hit in
-            searchFocused = false
+            model.searching = false
             Task { await model.openStation(hit) }
         } onClose: {
             model.searching = false
-            searchFocused = false
         }
-        .frame(maxWidth: 460).fixedSize(horizontal: false, vertical: true)
-        .frame(maxHeight: 520)
-        .background(Ink.glass).background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, 12).padding(.top, 64)
     }
 
     private func resultRow<Lead: View>(@ViewBuilder lead: () -> Lead, title: () -> String, caption: () -> String, action: @escaping () -> Void) -> some View {
@@ -266,10 +283,13 @@ struct ExploreScreen: View {
     private var bottomLeft: some View {
         VStack(alignment: .leading, spacing: 8) {
             Spacer()
-            if model.legend { legendCard }
-            HStack(spacing: 8) {
-                statusChip
-                MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
+            // While typing, the keyboard lifts the tab bar and this corner into the search panel: they wait below it.
+            if !searchFocused {
+                if model.legend { legendCard }
+                HStack(spacing: 8) {
+                    statusChip
+                    MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
+                }
             }
             Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD)")
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)

@@ -21,7 +21,7 @@ struct StationDirectoryList: View {
     @State private var loaded = false
 
     var body: some View {
-        ScrollView {
+        SearchPanel(maxHeight: 520) {
             VStack(alignment: .leading, spacing: 12) {
                 let favoriteIds = Set(favorites.map(\.id))
                 section(l10n.t("stations.favorites"), favorites, star: true)
@@ -30,10 +30,7 @@ struct StationDirectoryList: View {
                 if !loaded { Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2) }
                 Button(l10n.t("common.close"), action: onClose).buttonStyle(LinkButtonStyle())
             }
-            .padding(.horizontal, 16).padding(.vertical, 12)
         }
-        .scrollBounceBehavior(.basedOnSize)
-        .scrollDismissesKeyboard(.interactively)
         .task {
             async let f = try? app.client.favoriteStations()
             async let r = try? app.client.recentStations()
