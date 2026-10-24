@@ -27,6 +27,7 @@ export const boardRoutes =
           countyNo: trvLocations.countyNo,
           baseTracks: trvLocations.baseTracks,
           nsrId: stations.nsrId,
+          fiId: stations.fiId,
         })
         .from(stations)
         .leftJoin(trvLocations, sql`lower(${trvLocations.signature}) = lower(${stations.trvSignature})`)
@@ -40,12 +41,12 @@ export const boardRoutes =
           .where(and(eq(stationFavorites.userId, userId), eq(stationFavorites.stationId, id)))
           .get(),
       );
-      const { nsrId, ...rest } = s;
+      const { nsrId, fiId, ...rest } = s;
       return {
         ...rest,
         county: s.countyNo ? (SE_COUNTIES[s.countyNo] ?? null) : null,
-        // Trafikverket's own stations, or Norway's through Entur.
-        hasBoard: Boolean((s.code && !s.code.includes('.')) || nsrId),
+        // Trafikverket's own stations, Norway's through Entur, Finland's through Digitraffic.
+        hasBoard: Boolean((s.code && !s.code.includes('.')) || nsrId || fiId),
         hasMap: hasStationMap(id),
         sizeClass: stationSize(s.baseTracks),
         favorite,

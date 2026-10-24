@@ -9,6 +9,7 @@ import { readDataFile } from '../dataFiles.js';
 import { productOf } from '../search/timetable.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { withLogo } from '../import/brands.js';
+import { COUNTRIES } from '../lib/countries.js';
 
 export interface PassportStop {
   stationId: string;
@@ -37,6 +38,8 @@ export interface PassportLeg {
   geometry: string | null;
   /** Ridden stops in order (board … alight). */
   stops: PassportStop[];
+  /** The time zone of the stop you boarded at: which day, month and hour the trip is in. Sweden's when not given. */
+  tz?: string;
 }
 
 /** Earth's equatorial circumference and Sweden's north–south extent (Treriksröset to Smygehuk ≈ 1,572 km). */
@@ -47,15 +50,33 @@ type Co2Factors = Record<string, { train: { g_per_pkm: number }; comparisons: Re
 let factors: Co2Factors | null = null;
 export const co2Factors = () => (factors ??= readDataFile<Co2Factors>('co2_factors.json'));
 
+/**
+ * Emission factors for a country. Only Sweden's are sourced (IVL); Norway and Finland have no figures of their own
+ * here, so they use Sweden's, and the Passport says so (about.co2Body). A country with no entry uses Sweden's too.
+ */
+export const co2FactorsFor = (country: string | null | undefined) => (country === 'NO' || country === 'FI' ? co2Factors().SE! : (co2Factors()[country ?? 'SE'] ?? co2Factors().SE!));
+
 export function co2(distanceKm: number, comparison: Co2Comparison, f = co2Factors().SE!) {
   const train = (distanceKm * f.train.g_per_pkm) / 1000;
   const other = (distanceKm * (f.comparisons[comparison]?.g_per_pkm ?? 0)) / 1000;
   return { trainKg: train, comparisonKg: other, savedKg: other - train };
 }
 
-const localParts = (ms: number) => {
+/** The CO2 of a set of rides, each with its own country's factors (all of them Sweden's for now: see co2FactorsFor). */
+function co2ForLegs(rides: PassportLeg[], comparison: Co2Comparison) {
+  const sum = { trainKg: 0, comparisonKg: 0, savedKg: 0 };
+  for (const l of rides) {
+    const c = co2(l.distanceM / 1000, comparison, co2FactorsFor(l.stops[0]?.country));
+    sum.trainKg += c.trainKg;
+    sum.comparisonKg += c.comparisonKg;
+    sum.savedKg += c.savedKg;
+  }
+  return sum;
+}
+
+const localParts = (ms: number, tz: string = COUNTRIES.SE.tz) => {
   const p = Object.fromEntries(
-    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
+    new Intl.DateTimeFormat('en-GB', { timeZone: tz, year: 'numeric', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
       .formatToParts(ms)
       .map((x) => [x.type, x.value]),
   );
@@ -69,8 +90,8 @@ export interface PassportOptions {
 }
 
 export function computePassport(all: PassportLeg[], opts: PassportOptions) {
-  const years = [...new Set(all.map((l) => localParts(l.schedDep).year))].sort((a, b) => b - a);
-  const inScope = all.filter((l) => (opts.year ? localParts(l.schedDep).year === opts.year : true) && (opts.includeCommuter || l.category !== 'commuter'));
+  const years = [...new Set(all.map((l) => localParts(l.schedDep, l.tz).year))].sort((a, b) => b - a);
+  const inScope = all.filter((l) => (opts.year ? localParts(l.schedDep, l.tz).year === opts.year : true) && (opts.includeCommuter || l.category !== 'commuter'));
   // A cancelled train you didn't ride adds nothing but the cancellation count.
   const rides = inScope.filter((l) => !l.canceled);
   const km = (m: number) => m / 1000;
@@ -112,11 +133,11 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
     const b = l.stops.at(-1)?.name;
     return a && b ? ([a, b].sort().join(' ⇄ ') as string) : null;
   });
-  const months = group((l) => localParts(l.schedDep).month);
+  const months = group((l) => localParts(l.schedDep, l.tz).month);
   const byDistance = [...rides].sort((a, b) => b.distanceM - a.distanceM)[0];
   const byDuration = [...rides].sort((a, b) => b.arr - b.dep - (a.arr - a.dep))[0];
-  const earliest = [...rides].sort((a, b) => localParts(a.dep).minutes - localParts(b.dep).minutes)[0];
-  const latest = [...rides].sort((a, b) => localParts(b.arr).minutes - localParts(a.arr).minutes)[0];
+  const earliest = [...rides].sort((a, b) => localParts(a.dep, a.tz).minutes - localParts(b.dep, b.tz).minutes)[0];
+  const latest = [...rides].sort((a, b) => localParts(b.arr, b.tz).minutes - localParts(a.arr, a.tz).minutes)[0];
 
   // Delays only from trains with real arrival times (SPEC §14).
   const timed = rides.filter((l) => l.dataQuality === 'full' && l.arrDelayMin !== null);
@@ -187,7 +208,7 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
     },
     countries: [...countries].map(([code, count]) => ({ code, legs: count })).sort((a, b) => b.legs - a.legs),
     stations: [...visits.values()].sort((a, b) => b.count - a.count),
-    co2: { comparison: opts.comparison, ...co2(totalKm, opts.comparison) },
+    co2: { comparison: opts.comparison, ...co2ForLegs(rides, opts.comparison) },
     map: rides.map((l) => ({
       legId: l.id,
       operatorId: l.operatorId,
@@ -351,6 +372,7 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
       country: stations.country,
       lat: stations.lat,
       lon: stations.lon,
+      tz: stations.tz,
     })
     .from(legStops)
     .innerJoin(stations, eq(stations.id, legStops.stationId))
@@ -362,7 +384,7 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
     )
     .orderBy(asc(legStops.legId), asc(legStops.seq))
     .all();
-  const byLeg = new Map<string, PassportStop[]>();
+  const byLeg = new Map<string, (PassportStop & { tz: string })[]>();
   for (const s of stops)
     if (s.role === 'board' || s.role === 'through' || s.role === 'alight') (byLeg.get(s.legId) ?? byLeg.set(s.legId, []).get(s.legId)!).push(s);
   return rows.map(({ l, routeType }) => ({
@@ -381,7 +403,8 @@ export function loadPassportLegs(db: Db, userId: string, now = Date.now()): Pass
     arrDelayMin: l.arrDelayMin,
     canceled: l.canceled,
     geometry: l.geometry,
-    stops: byLeg.get(l.id) ?? [],
+    stops: (byLeg.get(l.id) ?? []).map(({ tz: _tz, ...s }) => s),
+    tz: byLeg.get(l.id)?.[0]?.tz ?? COUNTRIES.SE.tz,
   }));
 }
 

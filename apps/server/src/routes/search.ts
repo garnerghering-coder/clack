@@ -8,6 +8,9 @@ import { productOf, searchByRoute, searchConnections, tripStops } from '../searc
 import { typicalTrainType } from '../legs/trainTypes.js';
 import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
+import { eq } from 'drizzle-orm';
+import { stations } from '../db/schema.js';
+import { COUNTRIES } from '../lib/countries.js';
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -17,7 +20,7 @@ export const searchRoutes =
     const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log: (m) => app.log.warn(m) }));
 
     app.get<{ Querystring: { q?: string; date?: string } }>('/search', async (req, reply) => {
-      const date = req.query.date ?? todayIn('Europe/Stockholm');
+      const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
       return search(req.query.q ?? '', date);
     });
@@ -29,7 +32,9 @@ export const searchRoutes =
       const { from, to, exclude } = req.query;
       const after = Number(req.query.after);
       if (!from || !to || !Number.isFinite(after)) return reply.code(400).send({ error: 'from, to and after (ms) are required' });
-      const day = todayIn('Europe/Stockholm', after);
+      // The day where the journey starts: its station's time zone (Finland is an hour ahead of Sweden).
+      const tz = db.select({ tz: stations.tz }).from(stations).where(eq(stations.id, from)).get()?.tz ?? COUNTRIES.SE.tz;
+      const day = todayIn(tz, after);
       const direct = [day, addDays(day, 1)]
         .flatMap((d) => searchByRoute(db, from, to, d))
         .filter((r) => r.from.time >= after && r.key !== exclude)

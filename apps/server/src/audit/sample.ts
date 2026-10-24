@@ -1,6 +1,6 @@
 // The audit's sample (docs/RELIABILITY_PLAN.md §1): one person's trips are too few to measure accuracy by, so a
-// hidden user follows a couple of real trains every hour, picked across long-distance, regional, commuter and
-// Norwegian trains. They're tracked like anyone's trip and audited the same way; nobody sees them in the app.
+// hidden user follows a couple of real trains every hour, picked across long-distance, regional, commuter,
+// Norwegian and Finnish trains. They're tracked like anyone's trip and audited the same way; nobody sees them in the app.
 import { and, eq, lt, sql } from 'drizzle-orm';
 import { DEFAULT_SETTINGS } from '@clack/shared';
 import type { Db } from '../db/client.js';
@@ -8,6 +8,7 @@ import { legs, users } from '../db/schema.js';
 import { createLeg } from '../legs/legs.js';
 import { attachLegGeometry } from '../geo/trackSegments.js';
 import { serviceTimeToUtc, todayIn } from '../lib/time.js';
+import { COUNTRIES } from '../lib/countries.js';
 
 export const AUDIT_USER_ID = 'audit-sample';
 /** Trains added per hourly run (AUDIT_SAMPLE_PER_HOUR; 0 turns the sample off). */
@@ -20,6 +21,7 @@ const BUCKETS = [
   { name: 'regional', where: sql`t.source = 'gtfs_se3' and t.category = 'regional'` },
   { name: 'commuter', where: sql`t.source = 'gtfs_se3' and t.category = 'commuter' and t.route_type <> '900'` },
   { name: 'norway', where: sql`t.source = 'gtfs_no'` },
+  { name: 'finland', where: sql`t.source = ${COUNTRIES.FI.timetableSource}` },
 ] as const;
 
 /**
@@ -28,7 +30,7 @@ const BUCKETS = [
  */
 function candidates(db: Db, bucket: (typeof BUCKETS)[number], now: number) {
   const out: { key: string; date: string; first: number; last: number }[] = [];
-  for (const tz of ['Europe/Stockholm', 'Europe/Oslo']) {
+  for (const tz of [...new Set(Object.values(COUNTRIES).map((c) => c.tz))]) {
     const date = todayIn(tz, now);
     const base = serviceTimeToUtc(date, 0, tz);
     const from = Math.floor((now + 20 * 60_000 - base) / 1000);

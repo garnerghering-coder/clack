@@ -44,6 +44,21 @@ describe('GPS jumps', () => {
     expect(f.push('t', fix(59, 0))).toBe(true);
     expect(f.push('t', fix(59, 0))).toBe(false);
   });
+
+  it('accepts Finland, from Hanko to Kolari and east to Vartius, and a Pendolino at full speed', () => {
+    const f = new FixFilter();
+    // Digitraffic's real positions of 2026-10-24: IC 27 near Oulu, IC 407 at Haparanda; and the extremes of the network.
+    for (const [lat, lon] of [
+      [65.794751, 24.540295],
+      [65.82855, 24.127751],
+      [59.82, 22.95], // Hanko
+      [67.35, 23.77], // Kolari
+      [64.12, 29.95], // Vartius
+    ] as const)
+      expect(f.push(`fi${lat}`, { lat, lon, at: T0, bearing: null, speedKmh: null })).toBe(true);
+    // 2 km in 40 s is 180 km/h: a Pendolino's pace, not a jump.
+    expect(plausibleMove({ lat: 61.5, lon: 23.8, at: T0, bearing: null, speedKmh: null }, { lat: 61.518, lon: 23.8, at: T0 + 40_000, bearing: null, speedKmh: null })).toBe(true);
+  });
 });
 
 describe('speed', () => {

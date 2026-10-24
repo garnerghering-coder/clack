@@ -8,12 +8,16 @@ import { loadBrands } from '../dataFiles.js';
 import { stations, trvLocations } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
 import { fetchNorwayCalls, normalizeNorwayBoard } from './norway.js';
+import { fetchFinlandBoardTrains, normalizeFinlandBoard } from './finland.js';
+import { fetchDayVehicles } from '../digitraffic/trains.js';
+import { COUNTRIES } from '../lib/countries.js';
 import { recordObservations } from '../legs/risk.js';
 
 export const BOARD_POLL_MS = Number(process.env.BOARD_POLL_MS ?? 20_000);
 /** Kept warm this long after the last viewer leaves (quick back-and-forth navigation stays cheap). */
 const IDLE_MS = 60_000;
-const localDate = (ms: number) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Stockholm' }).format(ms);
+/** The calendar day of an instant in a station's time zone (Sweden's unless told otherwise). */
+const localDate = (ms: number, tz: string = COUNTRIES.SE.tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(ms);
 /** The live window: an hour back (so a just-missed train still shows) to 12 hours ahead. */
 export const WINDOW_BEFORE_MS = 60 * 60_000;
 export const WINDOW_AFTER_MS = 12 * 3600_000;
@@ -64,13 +68,19 @@ export class BoardHub {
 
   /**
    * Where a station's board comes from: Trafikverket for Swedish stations (its codes for foreign ones, "No.osl",
-   * have no announcements), Entur's Journey Planner for stations Norway's feeds serve.
+   * have no announcements), Entur's Journey Planner for stations Norway's feeds serve, Digitraffic for Finland's.
    */
-  sourceOf(stationId: string): { kind: 'trv'; id: string } | { kind: 'entur'; id: string } | null {
-    const s = this.db.select({ sig: stations.trvSignature, nsr: stations.nsrId }).from(stations).where(eq(stations.id, stationId)).get();
+  sourceOf(stationId: string): { kind: 'trv'; id: string } | { kind: 'entur'; id: string } | { kind: 'digitraffic'; id: string } | null {
+    const s = this.db.select({ sig: stations.trvSignature, nsr: stations.nsrId, fi: stations.fiId }).from(stations).where(eq(stations.id, stationId)).get();
     if (s?.sig && !s.sig.includes('.')) return { kind: 'trv', id: s.sig };
     if (s?.nsr) return { kind: 'entur', id: s.nsr };
+    // Haparanda has a Swedish signature too, so its board is Trafikverket's; Finnish stations are Digitraffic's.
+    if (s?.fi) return { kind: 'digitraffic', id: s.fi };
     return null;
+  }
+
+  private tzOf(stationId: string): string {
+    return this.db.select({ tz: stations.tz }).from(stations).where(eq(stations.id, stationId)).get()?.tz ?? COUNTRIES.SE.tz;
   }
 
   /** Fetch and normalise a board for any window (used by the poller and for "Show earlier"). */
@@ -79,26 +89,49 @@ export class BoardHub {
     if (!source) throw new Error('This station has no live departures');
     this.upstreamCalls++;
     const now = this.now();
-    const dates = [...new Set([localDate(from), localDate(now), localDate(to)])];
+    const tz = this.tzOf(stationId);
+    const dates = [...new Set([localDate(from, tz), localDate(now, tz), localDate(to, tz)])];
     const calls = callsAtStation(this.db, stationId, dates);
-    const rows =
-      source.kind === 'trv'
-        ? normalizeBoard(await fetchBoardRows(source.id, type, from, to, this.opts.fetchImpl), {
-            type,
-            now,
-            names: (s) => this.stationName(s),
-            matchBrand: this.matchBrand,
-            calls,
-            memory,
-          })
-        : normalizeNorwayBoard(await fetchNorwayCalls(source.id, type, from, to, this.opts.fetchImpl), { type, now, calls, memory });
+    let rows;
+    if (source.kind === 'digitraffic') {
+      const trains = await fetchFinlandBoardTrains(source.id, { fetchImpl: this.opts.fetchImpl, now });
+      // The unit types for today's trains: one cached request a quarter of an hour, and the board is fine without it.
+      const vehicles = await fetchDayVehicles(localDate(now, tz), { fetchImpl: this.opts.fetchImpl, now }).catch(() => new Map<string, string>());
+      rows = normalizeFinlandBoard(trains, {
+        type,
+        now,
+        code: source.id,
+        from,
+        to,
+        names: (code) => this.fiName(code),
+        calls,
+        memory,
+        vehicleOf: (n, d) => (d === localDate(now, tz) ? (vehicles.get(n) ?? null) : null),
+      });
+    } else if (source.kind === 'trv') {
+      rows = normalizeBoard(await fetchBoardRows(source.id, type, from, to, this.opts.fetchImpl), {
+        type,
+        now,
+        names: (s) => this.stationName(s),
+        matchBrand: this.matchBrand,
+        calls,
+        memory,
+      });
+    } else {
+      rows = normalizeNorwayBoard(await fetchNorwayCalls(source.id, type, from, to, this.opts.fetchImpl), { type, now, calls, memory });
+    }
     // What left, and how late: the history behind "this train has often left late" (legs/risk.ts).
     if (source.kind === 'trv' && type === 'departures')
       recordObservations(
         this.db,
-        rows.filter((r) => r.done || r.canceled).map((r) => ({ trainNumber: r.trainNumber, signature: source.id, advertised: r.advertised, actual: r.actual, canceled: r.canceled, serviceDate: r.trip?.serviceDate ?? localDate(r.advertised) })),
+        rows.filter((r) => r.done || r.canceled).map((r) => ({ trainNumber: r.trainNumber, signature: source.id, advertised: r.advertised, actual: r.actual, canceled: r.canceled, serviceDate: r.trip?.serviceDate ?? localDate(r.advertised, tz) })),
       );
     return { stationId, signature: source.id, type, from, to, updatedAt: now, rows } satisfies Board;
+  }
+
+  /** A Finnish station's name by Digitraffic short code (stations.fi_id); the code itself when we don't have it. */
+  private fiName(code: string): string {
+    return this.db.select({ name: stations.name }).from(stations).where(eq(stations.fiId, code)).get()?.name ?? code;
   }
 
   private key(stationId: string, type: BoardType) {

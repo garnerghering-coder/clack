@@ -1,4 +1,6 @@
+import Fastify from 'fastify';
 import { afterEach, describe, expect, it } from 'vitest';
+import { liveMapRoutes } from '../src/routes/livemap.js';
 import { openDb } from '../src/db/client.js';
 import { FinlandFeed, callsOf } from '../src/livemap/finland.js';
 import { LiveMapIngest, isMine, type LiveTrain } from '../src/livemap/ingest.js';
@@ -167,6 +169,45 @@ describe('three feeds on one map', () => {
     await feed.pollTrains();
     ingest.applyFinland();
     expect([...ingest.trains.keys()]).toEqual(['8192|2026-10-24']);
+  });
+
+  it('serves a Finnish train over the API: its trip, its stops from Digitraffic, and the status of the feed', async () => {
+    const db = openDb(':memory:');
+    seedFinland(db);
+    seedTrip(db, ic27);
+    resetDigitrafficCaches();
+    const { fetchImpl } = fakeDigitraffic({
+      'train-locations/latest': locations,
+      'live-trains': [ic27],
+      'compositions/*': [{ trainNumber: 27, departureDate: '2026-10-24', journeySections: [{ locomotives: [{ locomotiveType: 'Sr3' }] }] }],
+      'trains/2026-10-24/27': [ic27],
+    });
+    ingest = new LiveMapIngest(db, { fetchImpl, now: () => Z('2026-10-24T18:50:30Z'), graph: () => null, finland: true });
+    const feed = (ingest as unknown as { fi: FinlandFeed }).fi;
+    await feed.poll();
+    ingest.applyFinland();
+    const app = Fastify();
+    app.decorateRequest('userId', '');
+    app.addHook('onRequest', async (req) => {
+      req.userId = 'local';
+    });
+    await app.register(liveMapRoutes(db, ingest));
+    try {
+      const one = (await app.inject('/live/trains/fi:27%7C2026-10-24')).json();
+      expect(one.train).toMatchObject({ id: 'fi:27|2026-10-24', trainType: 'fi_sr3_ic', mine: false });
+      expect(one.trip).toMatchObject({ key: 'fi:27_20261024:test', serviceDate: '2026-10-24' });
+      const stops = (await app.inject('/live/trains/fi:27%7C2026-10-24/stops')).json().stops;
+      expect(stops[0]).toMatchObject({ name: 'Helsinki', platform: '7', source: 'digitraffic', passed: true });
+      // By number and day, the way a board row or a follow opens it.
+      const byNumber = (await app.inject('/trains/27/2026-10-24')).json();
+      expect(byNumber).toMatchObject({ number: '27', operatorId: 'vr-fi', trip: { key: 'fi:27_20261024:test' } });
+      expect(byNumber.live).toMatchObject({ id: 'fi:27|2026-10-24' });
+      const status = (await app.inject('/live/status')).json();
+      expect(status.finlandAt).toBe(Z('2026-10-24T18:50:30Z'));
+      expect(status.trains).toBe(1);
+    } finally {
+      await app.close();
+    }
   });
 
   it('marks a Finnish train as yours by its trip, or by its number when the timetable lacks the trip', () => {

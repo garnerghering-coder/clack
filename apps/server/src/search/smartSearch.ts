@@ -4,6 +4,7 @@ import { normName } from '../lib/geo.js';
 import type { HistoryState } from '../import/history.js';
 import { loadBrands } from '../dataFiles.js';
 import { addDays, todayIn } from '../lib/time.js';
+import { COUNTRIES, tzOf } from '../lib/countries.js';
 import { buildOperatorMatcher, parseQuery } from './parse.js';
 import { searchStations, type StationHit, type StationIndex } from './stations.js';
 import { searchByNumber, searchByRoute, searchConnections, type Connection, type TripResult } from './timetable.js';
@@ -30,7 +31,7 @@ export interface SmartSearchResult {
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
-  history?: HistoryState['state'] | 'norway';
+  history?: HistoryState['state'] | 'norway' | 'finland';
 }
 
 export function createSmartSearch(db: Db, index: () => StationIndex, history: (date: string) => HistoryState = () => ({ state: 'unavailable' })) {
@@ -88,11 +89,13 @@ export function createSmartSearch(db: Db, index: () => StationIndex, history: (d
     if (from) out.interpretation.from = from;
     if (to) out.interpretation.to = to;
 
-    const windowStart = addDays(todayIn('Europe/Stockholm'), -1);
+    // "Today" is the day where the search starts: Helsinki is an hour ahead of Stockholm and Oslo.
+    const windowStart = addDays(todayIn(tzOf((from ?? to)?.country) ?? COUNTRIES.SE.tz), -1);
     if (date < windowStart && (q.trainNumber || (from && to))) {
-      // Older days come from Sweden's archive, fetched the first time a day is asked for. Norway has no archive.
-      const norwayOnly = from?.country === 'NO' && to?.country === 'NO';
-      const h: HistoryState | { state: 'norway' } = norwayOnly ? { state: 'norway' } : history(date);
+      // Older days come from Sweden's archive, fetched the first time a day is asked for. Norway and Finland have none.
+      const noArchive = (c: string | undefined) => c === 'NO' || c === 'FI';
+      const abroadOnly = noArchive(from?.country) && noArchive(to?.country);
+      const h: HistoryState | { state: 'norway' | 'finland' } = abroadOnly ? { state: from?.country === 'FI' || to?.country === 'FI' ? 'finland' : 'norway' } : history(date);
       out.history = h.state;
       if (h.state !== 'ready') {
         out.outsideTimetable = true;

@@ -3,6 +3,7 @@ import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { typicalTrainType } from '../legs/trainTypes.js';
+import { countryOfKey, isCountryCode, type CountryCode } from '../lib/countries.js';
 
 export type Product = 'high_speed' | 'intercity' | 'night' | 'regional' | 'commuter' | 'heritage';
 
@@ -284,7 +285,10 @@ function dedupe(results: TripResult[]): TripResult[] {
   }
   const out: TripResult[] = [];
   for (const group of groups.values()) {
-    const foreignFeed = (r: TripResult) => Number(r.key.startsWith('no:') !== (r.from.country === 'NO'));
+    // The feed of the country you board in is the home one (Norway's for a Norwegian stop, Finland's for a Finnish one);
+    // anywhere else, Sweden's.
+    const homeFeed = (r: TripResult): CountryCode => (isCountryCode(r.from.country) ? r.from.country : 'SE');
+    const foreignFeed = (r: TripResult) => Number((countryOfKey(r.key) ?? 'SE') !== homeFeed(r));
     const rank = (r: TripResult) => foreignFeed(r) * 2 + (r.trainNumber && r.trainNumber.length <= 4 ? 0 : 1);
     group.sort((a, b) => rank(a) - rank(b));
     const keep = { ...group[0]! };

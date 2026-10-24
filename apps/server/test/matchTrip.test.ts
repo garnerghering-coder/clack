@@ -28,6 +28,21 @@ describe('which trip a train on the map is', () => {
     expect(matchTrip(nearTrondheim, [sj441, sjn441])?.key).toBe('no:441');
   });
 
+  it('knows a Finnish train by its id, and prefers the trip with stops in Finland', () => {
+    // Finnish train 441 (a made-up number that collides with SJ's) near Oulu.
+    const fi441 = {
+      key: 'fi:441_20261024:abc',
+      stops: [
+        { name: 'Oulu', country: 'FI', lat: 64.93, lon: 25.48 },
+        { name: 'Kemi', country: 'FI', lat: 65.74, lon: 24.55 },
+      ],
+    };
+    const near = { id: 'fi:441|2026-10-24', lat: 65.3, lon: 25.0, origin: null, destination: null };
+    expect(matchTrip(near, [sj441, sjn441, fi441])?.key).toBe('fi:441_20261024:abc');
+    // Finland's train near Stockholm would be wrong, though it is the only one that runs in Finland.
+    expect(matchTrip({ ...near, lat: 59.15, lon: 17.8 }, [sj441, fi441])?.key).toBe('se3:441');
+  });
+
   it('gives no trip rather than a wrong one', () => {
     expect(matchTrip({ id: '441|2026-10-22', lat: 55.6, lon: 13.0, origin: null, destination: null }, [sj441, sjn441])).toBeUndefined();
   });

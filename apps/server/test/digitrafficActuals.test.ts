@@ -6,6 +6,7 @@ import { digitrafficStops, fetchTrain, resetDigitrafficCaches, vehicleOf, type D
 import { refreshLegActuals } from '../src/legs/actuals.js';
 import { createLeg, getLeg } from '../src/legs/legs.js';
 import { typeFromVehicle } from '../src/legs/trainTypes.js';
+import { fetchFinlandPositions, trackOnce } from '../src/live/tracker.js';
 import { fakeDigitraffic, fixture, HAPARANDA, seedFinland, seedTrip, trainFixture } from './finlandFixtures.js';
 
 const Z = (iso: string) => Date.parse(iso);
@@ -96,6 +97,31 @@ describe('Digitraffic actuals for a leg', () => {
     expect(seen).toHaveLength(1);
     await fetchTrain('2026-10-24', '27', { fetchImpl, now: 40_000 });
     expect(seen).toHaveLength(2);
+  });
+});
+
+describe('following your own Finnish train', () => {
+  it('reads a train’s newest GPS fix from the list of every running train', async () => {
+    const { fetchImpl } = fakeDigitraffic({ 'train-locations/latest': fixture('locations') });
+    const m = await fetchFinlandPositions(['407|2026-10-24', '9999|2026-10-24'], Z('2026-10-24T18:46:00Z'), fetchImpl);
+    expect([...m.keys()]).toEqual(['407|2026-10-24']);
+    expect(m.get('407|2026-10-24')).toMatchObject({ lat: 65.82855, lon: 24.127751, at: Z('2026-10-24T18:45:10Z') });
+    // Ten minutes old is too old.
+    expect((await fetchFinlandPositions(['407|2026-10-24'], Z('2026-10-24T18:56:00Z'), fetchImpl)).size).toBe(0);
+  });
+
+  it('puts the leg on the map from Digitraffic, and asks Trafikverket nothing about a number it might share', async () => {
+    const db = openDb(':memory:');
+    seedFinland(db);
+    const key = seedTrip(db, ic407);
+    const id = createLeg(db, LOCAL_USER_ID, { tripKey: key, serviceDate: '2026-10-24', fromSeq: 4, toSeq: 5 }, Z('2026-10-24T10:00:00Z'));
+    // Not yet at Haparanda: its arrival is only expected, for 18:50.
+    const running = { ...ic407, timeTableRows: ic407.timeTableRows.map((r) => (r.stationShortCode === 'HPA' ? { ...r, actualTime: undefined, liveEstimateTime: '2026-10-24T18:50:00Z' } : r)) };
+    const { fetchImpl, seen } = fakeDigitraffic({ 'trains/2026-10-24/407': [running], 'train-locations/latest': fixture('locations'), 'compositions/*': { trainNumber: 407, journeySections: [] } });
+    const updates = await trackOnce(db, { now: () => Z('2026-10-24T18:45:30Z'), fetchImpl });
+    expect(updates.map((u) => u.legId)).toEqual([id]);
+    expect(updates[0]!.live).toMatchObject({ positionSource: 'gps', lat: 65.82855 });
+    expect(seen).toContain('train-locations/latest');
   });
 });
 
