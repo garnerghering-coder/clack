@@ -79,7 +79,10 @@ struct TrainArtTests {
 
     @Test func anUncertainFinnishTypeShowsTheCandidateDrawnInTheOperatorsLivery() {
         #expect(picture("fi_commuter", "flirt", uncertain: true, "hsl").asset == "fi_sm5-hsl")
-        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr-fi").asset == "fi_sm4-vr-fi")
+        // VR-listed trains: the Sm5 is first, and it wears the HSL scheme whoever the timetable names.
+        #expect(picture("fi_commuter", "flirt", uncertain: true, "vr-fi").asset == "fi_sm5-hsl")
+        #expect(picture("fi_sm5", nil, "vr-fi").asset == "fi_sm5-hsl")
+        #expect(picture("fi_sm4", nil, "vr-fi").asset == "fi_sm4-vr-fi")
         #expect(picture("fi_sr2_sr3", "loco", uncertain: true, "vr-fi").asset == "fi_sr2_ic-vr-fi")
     }
 

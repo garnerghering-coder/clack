@@ -71,7 +71,10 @@ public nonisolated enum TrainArt {
         "fi_sm3": Detailed(model: "fi_sm3", liveries: ["vr-fi"]),
         "fi_sm2": Detailed(model: "fi_sm2", liveries: ["vr-fi"]),
         "fi_sm4": Detailed(model: "fi_sm4", liveries: ["vr-fi"]),
-        "fi_sm5": Detailed(model: "fi_sm5", liveries: ["hsl"]),
+        // Every Sm5 is in HSL's purple whoever the timetable lists as operator: the units are owned by Pääkaupunkiseudun
+        // Junakalusto, leased to HSL and operated by VR (en.wikipedia.org/wiki/VR_Class_Sm5, read 2026-10-25). Most Helsinki
+        // commuter trips are listed under VR (`vr-fi`), so VR gets the HSL scheme too.
+        "fi_sm5": Detailed(model: "fi_sm5", liveries: ["hsl", "vr-fi"], liveryOf: ["vr-fi": "hsl"]),
         "fi_sr2_ic": Detailed(model: "fi_sr2_ic", liveries: ["vr-fi"]),
         "fi_sr3_ic": Detailed(model: "fi_sr3_ic", liveries: ["vr-fi"]),
         "fi_dm12": Detailed(model: "fi_dm12", liveries: ["vr-fi"]),
@@ -122,7 +125,7 @@ public nonisolated enum TrainArt {
         "sl_roslagsbanan": ["sl_x10p", "sl_x15p"],
         "flytoget": ["flytoget71", "flytoget78"],
         // Finland: InterCity locomotive Sr2 or Sr3; Helsinki commuter Sm5, Sm4 or Sm2 (Digitraffic compositions,
-        // 2026-10-24). In HSL's livery the Sm5 is drawn, in VR's the Sm4.
+        // 2026-10-24). The Sm5 is drawn in HSL's livery, which every Sm5 wears, so it comes first for VR and HSL alike; Sm5 is also the most common (739 of 1,047 commuter compositions on 2026-10-24).
         "fi_sr2_sr3": ["fi_sr2_ic", "fi_sr3_ic"],
         "fi_commuter": ["fi_sm5", "fi_sm4", "fi_sm2"],
     ]
