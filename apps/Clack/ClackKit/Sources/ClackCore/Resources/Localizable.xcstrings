@@ -1368,6 +1368,125 @@
         }
       }
     },
+    "alertsIntro.allow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow alerts"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tillåt notiser"
+          }
+        }
+      }
+    },
+    "alertsIntro.delays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delays, cancellations and tight changes, even with Clack closed."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Förseningar, inställda tåg och snäva byten, även när Clack är stängd."
+          }
+        }
+      }
+    },
+    "alertsIntro.later" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can change this any time in Settings."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du kan ändra det när som helst i Inställningar."
+          }
+        }
+      }
+    },
+    "alertsIntro.live" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your trip live on the Lock Screen and in the Dynamic Island."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din resa live på låsskärmen och i Dynamic Island."
+          }
+        }
+      }
+    },
+    "alertsIntro.notNow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not now"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte nu"
+          }
+        }
+      }
+    },
+    "alertsIntro.platform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The platform as soon as it’s announced, and any change to it."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spåret så fort det meddelas, och varje ändring."
+          }
+        }
+      }
+    },
+    "alertsIntro.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Know when your train changes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Få veta när ditt tåg ändras"
+          }
+        }
+      }
+    },
     "alertsPrompt.body" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6087,6 +6206,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Orsak: {{reasons}} ({{source}})."
+          }
+        }
+      }
+    },
+    "firstRun.continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsätt"
           }
         }
       }

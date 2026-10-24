@@ -32,4 +32,14 @@ struct FirstRunTests {
         #expect(!FirstRun.showsAlertsPrompt(stageBefore: true, canceled: false, alertsOn: false, denied: true, asked: false))
         #expect(!FirstRun.showsAlertsPrompt(stageBefore: true, canceled: false, alertsOn: false, denied: false, asked: true))
     }
+
+    @Test func alertsIntroShowsOnceWhileIOSHasNotAsked() {
+        #expect(FirstRun.showsAlertsIntro(notDetermined: true, introSeen: false, welcomeDue: false))
+        #expect(!FirstRun.showsAlertsIntro(notDetermined: true, introSeen: true, welcomeDue: false))
+        #expect(!FirstRun.showsAlertsIntro(notDetermined: false, introSeen: false, welcomeDue: false))
+        // iOS already allows alerts but Clack's switch is off (allowed from Test alerts, say): still worth the one ask.
+        #expect(FirstRun.showsAlertsIntro(notDetermined: false, allowedButOff: true, introSeen: false, welcomeDue: false))
+        // The welcome ends on the same page, so it isn't shown twice.
+        #expect(!FirstRun.showsAlertsIntro(notDetermined: true, introSeen: false, welcomeDue: true))
+    }
 }
