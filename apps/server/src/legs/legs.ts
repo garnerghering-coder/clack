@@ -12,6 +12,7 @@ import { attachLegGeometry } from '../geo/trackSegments.js';
 import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
 import { updateRides } from './recording.js';
+import { parseCauses } from './causes.js';
 import { zonedToUtc } from '../lib/time.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
@@ -313,6 +314,7 @@ export function getLeg(db: Db, userId: string, id: string) {
       platform: legStops.platform,
       canceled: legStops.canceled,
       deviations: legStops.deviations,
+      causes: legStops.causes,
       reportSource: legStops.reportSource,
     })
     .from(legStops)
@@ -320,7 +322,7 @@ export function getLeg(db: Db, userId: string, id: string) {
     .where(eq(legStops.legId, id))
     .orderBy(asc(legStops.seq))
     .all();
-  return { ...leg!, geometry, stops, ...liveFor(db, id) };
+  return { ...leg!, geometry, stops: stops.map((s) => ({ ...s, causes: parseCauses(s.causes, s.deviations) })), ...liveFor(db, id) };
 }
 
 /** The owner says which train it actually was (null resets to the typical type). */

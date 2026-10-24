@@ -127,42 +127,5 @@ public nonisolated enum Disruption {
     ]
     public static let rightsLinkSweden = "https://www.konsumentverket.se/varor-och-tjanster-process/forsenat-eller-installt-tag/"
 
-    /// Why a train is late or cancelled, from Trafikverket's own deviation notes (fixed codes with short Swedish
-    /// texts; the ones seen on 2026-10-22 plus the usual faults). Only these say why; the rest are notices (track
-    /// changed, cancelled, short train, stop letters) and aren't reasons. A fixed table: no guessing, no generated text.
-    public static let delayReasons: [String: (en: String, sv: String)] = [
-        "Banarbete": ("engineering work", "banarbete"),
-        "Signalfel": ("a signal fault", "signalfel"),
-        "Växelfel": ("a points failure", "växelfel"),
-        "Spårfel": ("a track fault", "spårfel"),
-        "Kontaktledningsfel": ("a fault in the overhead power line", "kontaktledningsfel"),
-        "Elfel": ("a power fault", "elfel"),
-        "Bomfel": ("a level crossing fault", "bomfel"),
-        "Fordonsfel": ("a fault on the train", "fel på tåget"),
-        "Incident": ("an incident", "en incident"),
-        "Tillbud": ("a safety incident", "ett tillbud"),
-        "Olycka": ("an accident", "en olycka"),
-        "Obeh. i spår": ("people on the track", "obehöriga i spåret"),
-        "Djur i spår": ("animals on the track", "djur i spåret"),
-        "Tågkö": ("trains queuing ahead", "tågkö"),
-        "Tågmöte": ("waiting for an oncoming train to pass", "tågmöte"),
-        "Sen tågvänd.": ("the train arrived late for this trip", "sen tågvändning"),
-        "Personalbyte": ("a crew change", "personalbyte"),
-        "Personalbrist": ("a shortage of staff", "personalbrist"),
-        "Spårhalka": ("slippery rails", "spårhalka"),
-        "Polisinsats": ("a police operation", "en polisinsats"),
-        "Sjukdomsfall": ("a passenger taken ill", "ett sjukdomsfall"),
-    ]
-
-    /// The reasons among a train's deviation notes, in the order seen, without repeats.
-    public static func reasons(_ deviations: [String], language: Language = .en) -> [String] {
-        var seen = Set<String>()
-        var out: [String] = []
-        for deviation in deviations {
-            guard let entry = delayReasons[deviation.trimmingCharacters(in: .whitespacesAndNewlines)] else { continue }
-            let text = language == .sv ? entry.sv : entry.en
-            if seen.insert(text).inserted { out.append(text) }
-        }
-        return out
-    }
+    // Why a train is late (reasons) lives in DelayCauses.swift, driven by data/delay_causes.json.
 }

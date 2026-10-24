@@ -1,13 +1,14 @@
 // Actual times from Trafikverket (SPEC §10, Phase 0 §2): match each ridden stop by
 // (signature, activity, advertised minute), because train numbers change mid-journey and collide across operators.
 import { and, eq, gt, lt, ne, sql } from 'drizzle-orm';
-import { delayMinutes } from '@clack/shared';
+import { delayMinutes, type DelayCause } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations, timetableTrips } from '../db/schema.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import { parseComposition, typeFromComposition, type Composition } from './trainTypes.js';
 import { productOf } from '../search/timetable.js';
 import { onboardFromRow } from './onboard.js';
+import { addCauses, deviationTexts, trvCauses } from './causes.js';
 import { updateRides } from './recording.js';
 import { enturStops } from '../entur/calls.js';
 import type { OnboardFacts } from '@clack/shared';
@@ -90,6 +91,8 @@ export interface StopActuals {
   platform: string | null;
   canceled: boolean;
   deviations: string[];
+  /** The same notices with their source's codes (data/delay_causes.json), for showing them in the app's language. */
+  causes?: DelayCause[];
   trvTrainNumber: string | null;
   /** Planned coach order on the departure row ("Vagnsordning 1-3-4-5-6-7"). */
   composition: Composition | null;
@@ -144,7 +147,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     if (!row) continue;
     const a =
       out.get(e.seq) ??
-      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null, source: 'trafikverket' }).get(e.seq)!;
+      out.set(e.seq, { seq: e.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], causes: [], trvTrainNumber: null, composition: null, onboard: null, source: 'trafikverket' }).get(e.seq)!;
     const actual = actualTime(row.TimeAtLocation, row.AdvertisedTimeAtLocation);
     const estimated = row.EstimatedTimeAtLocation ? Date.parse(row.EstimatedTimeAtLocation) : null;
     if (e.activity === 'Ankomst') {
@@ -158,6 +161,7 @@ export function matchAnnouncements(stops: StopForMatch[], rows: AnnouncementRow[
     if (row.TrackAtLocation && row.TrackAtLocation !== 'x' && (e.activity === 'Avgang' || !a.platform)) a.platform = row.TrackAtLocation;
     a.canceled ||= Boolean(row.Canceled);
     for (const d of row.Deviation ?? []) if (!a.deviations.includes(d.Description)) a.deviations.push(d.Description);
+    a.causes = addCauses(a.causes ?? [], trvCauses(row.Deviation));
     a.trvTrainNumber ??= row.AdvertisedTrainIdent;
     if (e.activity === 'Avgang') {
       a.composition ??= parseComposition(row.TrainComposition);
@@ -248,6 +252,8 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       have.actualDep ??= e.actualDep;
       have.platform ??= e.platform;
       have.canceled ||= e.canceled;
+      have.causes = addCauses(have.causes ?? [], e.causes ?? []);
+      for (const t of deviationTexts(e.causes ?? [])) if (!have.deviations.includes(t)) have.deviations.push(t);
     }
   }
   for (const m of matched.values()) {
@@ -303,7 +309,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       for (const s of stops.filter((x) => x.seq > lastReported.seq && !sourceOf(x) && !matched.get(x.seq)?.actualArr && !matched.get(x.seq)?.actualDep)) {
         const e =
           matched.get(s.seq) ??
-          matched.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], trvTrainNumber: null, composition: null, onboard: null, source: null }).get(s.seq)!;
+          matched.set(s.seq, { seq: s.seq, actualArr: null, actualDep: null, estimatedArr: null, estimatedDep: null, platform: null, canceled: false, deviations: [], causes: [], trvTrainNumber: null, composition: null, onboard: null, source: null }).get(s.seq)!;
         e.estimatedArr = s.schedArr === null ? null : s.schedArr + Math.max(0, delay);
         e.estimatedDep = s.schedDep === null ? null : s.schedDep + Math.max(0, delay);
       }
@@ -331,6 +337,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
           platform: m.platform,
           canceled: m.canceled,
           deviations: m.deviations,
+          causes: JSON.stringify(m.causes ?? []),
           trvTrainNumber: m.trvTrainNumber,
         })
         .where(and(eq(legStops.legId, legId), eq(legStops.seq, m.seq)))

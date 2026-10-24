@@ -80,6 +80,7 @@ private struct DisruptionBody: View {
         let alight = leg.stops.first { $0.role == .alight }
         let ridden = leg.stops.filter { $0.role.isRidden }
         let deviations = ridden.flatMap(\.deviations).reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
+        let causes = ridden.flatMap(\.allCauses).reduce(into: [LegStop.Cause]()) { if !$0.contains($1) { $0.append($1) } }
         let schedDep = l.schedDep?.ms ?? 0
         let schedArr = l.schedArr?.ms ?? 0
         let arrived = l.actualArr != nil || (l.status != .planned && schedArr < now)
@@ -99,7 +100,8 @@ private struct DisruptionBody: View {
             let train = [op?.name ?? l.operator?.name, l.trainNumber].compactMap { $0 }.joined(separator: " ")
             let search = searchParams(now: now, arrived: arrived, severe: isSevere, kinds: kinds, final: final, schedDep: schedDep, schedArr: schedArr)
             let tone: AlertTone = arrived ? .info : (isSevere || kinds.contains(.replacement) ? .severe : .warn)
-            let reasons = Disruption.reasons(deviations, language: app.settings.language)
+            let reasons = DelayCauses.reasons(causes) { l10n.t($0) }
+            let reasonSources = reasons.map(\.source).reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
             let altCount = alts.map { $0.direct.count + $0.connections.count }
             let tz = board?.tz ?? "Europe/Stockholm"
             let _ = urgency
@@ -115,7 +117,7 @@ private struct DisruptionBody: View {
                     }
                 }
                 if !reasons.isEmpty {
-                    Text(l10n.t("disruption.why", ["reasons": reasons.joined(separator: l10n.t("disruption.and"))]))
+                    Text(l10n.t("disruption.why", ["reasons": reasons.map(\.text).joined(separator: l10n.t("disruption.and")), "source": reasonSources.joined(separator: ", ")]))
                         .clack(.body).fontWeight(.semibold).foregroundStyle(Ink.text)
                 }
                 if search != nil {

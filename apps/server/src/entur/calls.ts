@@ -4,6 +4,7 @@
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import type { StopActuals } from '../legs/actuals.js';
+import { deviationTexts, enturCauses, type EnturSituation } from '../legs/causes.js';
 import { jpQuery } from './client.js';
 
 export interface NorwayCall {
@@ -18,6 +19,8 @@ export interface NorwayCall {
   platform: string | null;
   canceled: boolean;
   realtime: boolean;
+  /** Entur's notices for this call, in every language it wrote them. */
+  situations?: EnturSituation[];
 }
 
 interface JpCall {
@@ -30,12 +33,13 @@ interface JpCall {
   actualDepartureTime: string | null;
   cancellation: boolean;
   realtime: boolean;
+  situations?: EnturSituation[];
   quay: { publicCode: string | null; stopPlace: { id: string } | null } | null;
 }
 
 const QUERY = `query($id: String!, $date: Date!) { serviceJourney(id: $id) { estimatedCalls(date: $date) {
   stopPositionInPattern aimedArrivalTime aimedDepartureTime expectedArrivalTime expectedDepartureTime
-  actualArrivalTime actualDepartureTime cancellation realtime quay { publicCode stopPlace { id } } } } }`;
+  actualArrivalTime actualDepartureTime cancellation realtime situations { summary { value language } } quay { publicCode stopPlace { id } } } } }`;
 
 const ms = (s: string | null) => (s ? Date.parse(s) : null);
 const TTL_MS = 30_000;
@@ -60,6 +64,7 @@ export async function serviceJourneyCalls(id: string, date: string, opts: { now?
     platform: c.quay?.publicCode || null,
     canceled: c.cancellation,
     realtime: c.realtime,
+    situations: c.situations ?? [],
   }));
   cache.set(k, { at: now, calls });
   if (cache.size > 300) cache.delete(cache.keys().next().value!);
@@ -74,6 +79,7 @@ export interface StopForCalls {
   nsrId?: string | null;
 }
 
+const causesOf = (c: NorwayCall, language: string) => enturCauses(c.situations, language);
 const minute = (t: number | null) => (t === null ? null : Math.floor(t / 60_000));
 
 /**
@@ -82,7 +88,7 @@ const minute = (t: number | null) => (t === null ? null : Math.floor(t / 60_000)
  * on real-time data. An "actual" time still in the future isn't one: Flytoget's calls carry them for stops the train
  * hasn't reached (seen 2026-10-22), so those count as expected times instead. Pure, for tests.
  */
-export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[], now = Date.now()): Map<number, StopActuals> {
+export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[], now = Date.now(), language = 'en'): Map<number, StopActuals> {
   const real = (t: number | null) => (t !== null && t <= now ? t : null);
   const out = new Map<number, StopActuals>();
   const used = new Set<NorwayCall>();
@@ -104,7 +110,8 @@ export function callsToActuals(stops: StopForCalls[], calls: NorwayCall[], now =
       estimatedDep: actualDep === null && (c.realtime || c.actualDep !== null) ? (c.expectedDep ?? c.actualDep) : null,
       platform: c.platform,
       canceled: c.canceled,
-      deviations: [],
+      deviations: deviationTexts(causesOf(c, language)),
+      causes: causesOf(c, language),
       trvTrainNumber: null,
       composition: null,
       onboard: null,
@@ -126,7 +133,7 @@ const PLACE_MATCH_MS = 90 * 60_000;
  * stop place, in order, within 90 minutes of our time. The call's aimed time is that country's published time for
  * the stop (advertisedArr/Dep). Pure, for tests.
  */
-export function callsByPlace(stops: StopForPlace[], calls: NorwayCall[], now = Date.now()): Map<number, StopActuals> {
+export function callsByPlace(stops: StopForPlace[], calls: NorwayCall[], now = Date.now(), language = 'en'): Map<number, StopActuals> {
   const real = (t: number | null) => (t !== null && t <= now ? t : null);
   const out = new Map<number, StopActuals>();
   const ordered = [...calls].sort((a, b) => a.pos - b.pos);
@@ -147,7 +154,8 @@ export function callsByPlace(stops: StopForPlace[], calls: NorwayCall[], now = D
       estimatedDep: actualDep === null && c.realtime ? (c.expectedDep ?? c.actualDep) : null,
       platform: c.platform,
       canceled: c.canceled,
-      deviations: [],
+      deviations: deviationTexts(causesOf(c, language)),
+      causes: causesOf(c, language),
       trvTrainNumber: null,
       composition: null,
       onboard: null,

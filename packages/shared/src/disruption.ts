@@ -90,36 +90,4 @@ export const RIGHTS_LINKS = {
   se: 'https://www.konsumentverket.se/varor-och-tjanster-process/forsenat-eller-installt-tag/',
 } as const;
 
-/**
- * Why a train is late or cancelled, from Trafikverket's own deviation notes (fixed codes with short Swedish texts; the
- * ones seen on 2026-10-22 plus the usual faults). Only these say why; the rest are notices (track changed, cancelled,
- * short train, stop letters) and aren't reasons. A fixed table: no guessing, no generated text.
- */
-export const DELAY_REASONS: Record<string, { en: string; sv: string }> = {
-  Banarbete: { en: 'engineering work', sv: 'banarbete' },
-  Signalfel: { en: 'a signal fault', sv: 'signalfel' },
-  Växelfel: { en: 'a points failure', sv: 'växelfel' },
-  Spårfel: { en: 'a track fault', sv: 'spårfel' },
-  Kontaktledningsfel: { en: 'a fault in the overhead power line', sv: 'kontaktledningsfel' },
-  Elfel: { en: 'a power fault', sv: 'elfel' },
-  Bomfel: { en: 'a level crossing fault', sv: 'bomfel' },
-  Fordonsfel: { en: 'a fault on the train', sv: 'fel på tåget' },
-  Incident: { en: 'an incident', sv: 'en incident' },
-  Tillbud: { en: 'a safety incident', sv: 'ett tillbud' },
-  Olycka: { en: 'an accident', sv: 'en olycka' },
-  'Obeh. i spår': { en: 'people on the track', sv: 'obehöriga i spåret' },
-  'Djur i spår': { en: 'animals on the track', sv: 'djur i spåret' },
-  Tågkö: { en: 'trains queuing ahead', sv: 'tågkö' },
-  Tågmöte: { en: 'waiting for an oncoming train to pass', sv: 'tågmöte' },
-  'Sen tågvänd.': { en: 'the train arrived late for this trip', sv: 'sen tågvändning' },
-  Personalbyte: { en: 'a crew change', sv: 'personalbyte' },
-  Personalbrist: { en: 'a shortage of staff', sv: 'personalbrist' },
-  Spårhalka: { en: 'slippery rails', sv: 'spårhalka' },
-  Polisinsats: { en: 'a police operation', sv: 'en polisinsats' },
-  Sjukdomsfall: { en: 'a passenger taken ill', sv: 'ett sjukdomsfall' },
-};
-
-/** The reasons among a train's deviation notes, in the order seen, without repeats. */
-export function delayReasons(deviations: string[], lang: 'en' | 'sv' = 'en'): string[] {
-  return [...new Set(deviations.map((d) => DELAY_REASONS[d.trim()]?.[lang]).filter((r): r is string => !!r))];
-}
+// Why a train is late (delayReasons) lives in delayCauses.ts, driven by data/delay_causes.json.
