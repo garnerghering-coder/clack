@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy · Clack</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #ffffff; --surface: #f4f4f4; --text: #0a0a0a; --text-2: #5c5c5c; --hairline: rgba(0, 0, 0, 0.09); --accent: #f8d64a; --r-card: 16px; --r-control-sm: 10px; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0a0a0a; --surface: #151515; --text: #ffffff; --text-2: #a3a3a3; --hairline: rgba(255, 255, 255, 0.09); }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif; }
+    main { max-width: 40rem; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { font-size: 32px; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+    h2 { font-size: 17px; margin: 0 0 6px; }
+    p { margin: 0; }
+    .intro { color: var(--text-2); margin-bottom: 24px; }
+    section { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 16px; margin-bottom: 12px; }
+    section p { color: var(--text-2); }
+    nav { margin-bottom: 24px; }
+    a { color: var(--text); text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; border-radius: var(--r-control-sm); }
+  </style>
+</head>
+<body>
+<main>
+  <nav><a href="/privacy/sv" hreflang="sv" lang="sv">Svenska</a></nav>
+  <h1>Privacy</h1>
+  <p class="intro">Clack has no accounts, no ads, no analytics and no tracking. This is everything it keeps and why.</p>
+  <section>
+    <h2>What our server keeps</h2>
+    <p>The trips you add (train, date, the stations you got on and off at, and any note you write), the trains you follow, and your settings, including the optional name shown on your Passport. They&#x27;re kept under a random code your phone made when you first opened Clack, not your name, email or phone number, so they can be shown to you and kept up to date with live times.</p>
+  </section>
+  <section>
+    <h2>What stays on your phone</h2>
+    <p>That random code, a copy of your trips and the maps you&#x27;ve opened so Clack works without a connection, and small preferences like your theme and last tab.</p>
+    <p>The random code that keeps your trips is stored in your iCloud Keychain, so your trips follow you to a new iPhone; there’s still no account.</p>
+  </section>
+  <section>
+    <h2>Your location</h2>
+    <p>Only when you tap &quot;My location&quot; on a station map. It&#x27;s used on your phone to find the nearest point on the map and is never sent to our server.</p>
+  </section>
+  <section>
+    <h2>What Clack doesn&#x27;t collect</h2>
+    <p>No name, email, phone number, contacts, photos or payment details. No advertising or analytics tools, and no tracking across other apps or websites.</p>
+  </section>
+  <section>
+    <h2>Who sees it</h2>
+    <p>No one else. To show live times our server asks Trafikverket (Sweden) and Entur (Norway) about trains by number and station; those requests say nothing about you. Ticket links open the train operator&#x27;s own website.</p>
+  </section>
+  <section>
+    <h2>Keeping and deleting</h2>
+    <p>Your data stays until you delete it. &quot;Delete my data&quot; in Settings removes everything our server has under your code at once, and the copies on your phone.</p>
+  </section>
+  <section>
+    <h2>Alerts</h2>
+    <p>Only if you turn alerts on: Apple&#x27;s address for your phone (a long code Apple gives the app so it can be sent notifications), kept with your random code and your alert settings. It is used only to send you the alerts you chose and to update the trip card on your lock screen, and it is removed when you turn alerts off or delete your data.</p>
+  </section>
+</main>
+</body>
+</html>

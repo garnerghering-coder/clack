@@ -10,6 +10,7 @@ import { importStatusRoutes } from './routes/importStatus.js';
 import { searchRoutes } from './routes/search.js';
 import { legRoutes } from './routes/legs.js';
 import { mapRoutes } from './routes/map.js';
+import { privacyRoutes } from './routes/privacy.js';
 import { liveRoutes } from './routes/live.js';
 import { pushRoutes } from './routes/push.js';
 import { passportRoutes } from './routes/passport.js';
@@ -80,6 +81,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(searchRoutes(db), api);
   app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   app.register(mapRoutes(db), api);
+  app.register(privacyRoutes);
   app.register(liveRoutes(db), api);
   app.register(pushRoutes(db), api);
   app.register(passportRoutes(db), api);
