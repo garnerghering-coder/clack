@@ -55,6 +55,18 @@ public nonisolated enum TrainArt {
         "no_type72": Detailed(model: "no_type72", liveries: ["go-ahead-norge", "vy"]),
         "no_type73": Detailed(model: "no_type73", liveries: ["sj-nord", "go-ahead-norge"]),
         "no_type76": Detailed(model: "no_type76", liveries: ["sj-nord"]),
+        // Finland: hand-made, owner-supplied drawings (docs/TRAIN_ART.md). `vr-fi` is VR Group, Finland; the Swedish
+        // `vr` (VR Snabbtåg, X74) never gets one of these. Sm2 also has a red scheme (`fi_sm2-vr-fi-red`) in the
+        // catalogue; nothing says which unit wears which, so the green one is used. Sm5 is drawn in HSL's livery only.
+        "fi_sm3": Detailed(model: "fi_sm3", liveries: ["vr-fi"]),
+        "fi_sm2": Detailed(model: "fi_sm2", liveries: ["vr-fi"]),
+        "fi_sm4": Detailed(model: "fi_sm4", liveries: ["vr-fi"]),
+        "fi_sm5": Detailed(model: "fi_sm5", liveries: ["hsl"]),
+        "fi_sr2_ic": Detailed(model: "fi_sr2_ic", liveries: ["vr-fi"]),
+        "fi_sr3_ic": Detailed(model: "fi_sr3_ic", liveries: ["vr-fi"]),
+        "fi_dm12": Detailed(model: "fi_dm12", liveries: ["vr-fi"]),
+        // Registered but no rule uses it: which coach type (Edo?) it shows is unverified.
+        "fi_ic_cab": Detailed(model: "fi_ic_cab", liveries: ["vr-fi"]),
     ]
 
     /// The drawn model nearest to each family ("art" in data/train_types.json), shown unpainted and faded when the
@@ -95,6 +107,10 @@ public nonisolated enum TrainArt {
         "itino_y2": ["y31"],
         "no_type69_72": ["no_type72"],
         "flytoget": ["flytoget71", "flytoget78"],
+        // Finland: InterCity locomotive Sr2 or Sr3; Helsinki commuter Sm5, Sm4 or Sm2 (Digitraffic compositions,
+        // 2026-10-24). In HSL's livery the Sm5 is drawn, in VR's the Sm4.
+        "fi_sr2_sr3": ["fi_sr2_ic", "fi_sr3_ic"],
+        "fi_commuter": ["fi_sm5", "fi_sm4", "fi_sm2"],
     ]
 
     /// The drawing of a candidate for an uncertain type, in the operator's own livery; nil when none has been drawn

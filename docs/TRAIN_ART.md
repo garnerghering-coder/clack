@@ -47,7 +47,8 @@ shown to the owner until step 5 passes.
 - `scripts/trains/<model>.py`: the drawing, with the measured numbers and their sources. Prints the SVG.
 - `scripts/trains/lib.py`: the shared kit (body, doors, windows, bogies, livery layers). `python3 scripts/trains/<model>.py <livery>` prints one livery's SVG for the overlay.
 - `scripts/trains/export_svg.py`: writes every model and livery as a standalone SVG file to `assets/trains/` (`<model>-<livery>.svg`, `plain` = unpainted). Rerun it after changing a drawing, then `python3 scripts/ios/sync_assets.py` copies them into the Xcode asset catalog.
-- `apps/Clack/Clack/Logic/TrainArt.swift`: which train types have a drawing, and which operators' liveries (`Design/TrainPicture.swift` draws it).
+- `assets/trains/fi_*.svg`: the Finnish drawings (`fi_sm2`, `fi_sm3`, `fi_sm4`, `fi_sm5`, `fi_sr2_ic`, `fi_sr3_ic`, `fi_dm12`, `fi_ic_cab`) are hand-made and owner-supplied. They have no generator in `scripts/trains`, and the photos or measurements they were drawn from are not recorded here (so they can't be redrawn or checked from this repository). `export_svg.py` leaves them alone. Liveries use the brand ids `vr-fi` (VR Group, Finland; not the Swedish `vr`) and `hsl`. Which Digitraffic wagon type `fi_ic_cab` shows is unverified, so no train-type rule uses it.
+- `apps/Clack/ClackKit/Sources/ClackCore/Logic/TrainArt.swift`: which train types have a drawing, and which operators' liveries (`Design/TrainPicture.swift` draws it).
 
 ## Lessons (X3, 2026-10-22)
 

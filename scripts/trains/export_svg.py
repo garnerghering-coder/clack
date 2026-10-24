@@ -13,6 +13,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'assets', 'trains')
 # Not models of their own: the shared kit, and the Coradia parts x60/x61/x61vt/x62 build on.
 SKIP = {'lib', 'coradia', 'export_svg'}
+# Drawings with no script (hand-made, owner-supplied): never deleted or overwritten by this export.
+HAND_MADE_PREFIX = 'fi_'
 
 
 def run(script, arg):
@@ -28,8 +30,10 @@ def sized(svg):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
+    # Only remove files this script writes. The Finnish drawings (`fi_*.svg`) are hand-made, supplied by the owner,
+    # and have no generator here: deleting them would lose them for good.
     for old in os.listdir(OUT):
-        if old.endswith('.svg'):
+        if old.endswith('.svg') and not old.startswith(HAND_MADE_PREFIX):
             os.remove(os.path.join(OUT, old))
     n = 0
     for script in sorted(os.listdir(HERE)):
