@@ -32,23 +32,26 @@ struct ServiceHeader<Status: View>: View {
     var category: String?
     /// What to say when neither the operator nor the number is known.
     var fallback: String?
+    /// The service's own name, said instead of the operator's ("SJ InterCity"; a route name when the operator isn't known).
+    var name: String?
     @ViewBuilder var status: Status
 
     init(
-        op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, fallback: String? = nil,
+        op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, name: String? = nil, fallback: String? = nil,
         @ViewBuilder status: () -> Status
     ) {
         self.op = op
         self.number = number
         self.size = size
         self.category = category
+        self.name = name
         self.fallback = fallback
         self.status = status()
     }
 
     var body: some View {
-        let service = Format.service(op?.name, number)
-        FlowLayout(spacing: 8, lineSpacing: 4) {
+        let service = Format.service(name ?? op?.name, number)
+        FlowLayout(spacing: 8, lineSpacing: 4, centered: true) {
             OperatorBadge(op: op, size: size)
             Text(service.isEmpty ? (fallback ?? l10n.t("trips.train")) : service)
                 .clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
@@ -60,7 +63,7 @@ struct ServiceHeader<Status: View>: View {
 }
 
 extension ServiceHeader where Status == EmptyView {
-    init(op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, fallback: String? = nil) {
-        self.init(op: op, number: number, size: size, category: category, fallback: fallback) { EmptyView() }
+    init(op: (any OperatorDisplay)?, number: String?, size: BadgeSize = .medium, category: String? = nil, name: String? = nil, fallback: String? = nil) {
+        self.init(op: op, number: number, size: size, category: category, name: name, fallback: fallback) { EmptyView() }
     }
 }

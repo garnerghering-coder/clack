@@ -58,7 +58,7 @@ struct FeaturedCard: View {
         // Only a fresh position draws the train, and only then is the route split into travelled and ahead.
         let grounded = state == .active && live != nil && LiveRules.isFresh(live, now: now)
             && live?.lat != nil && live?.lon != nil && live?.positionSource != nil
-        let service = [leg.operator?.name, leg.trainNumber].compactMap { $0 }.joined(separator: " ")
+
         let tag: String = {
             switch state {
             case .upcoming: return l10n.t("trips.routePreview")
@@ -81,9 +81,7 @@ struct FeaturedCard: View {
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 10) {
-                    OperatorBadge(op: leg.operator, size: .medium)
-                    Text(service.isEmpty ? l10n.t("trips.train") : service).fontWeight(.bold).foregroundStyle(Ink.text)
+                ServiceHeader(op: leg.operator, number: leg.trainNumber, size: .medium) {
                     switch state {
                     case .upcoming: StatusLine(.upcoming, l10n.t("trips.planned"))
                     case .arrived: StatusLine(.arrived, l10n.t("trips.arrived"))

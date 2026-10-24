@@ -255,17 +255,12 @@ private struct ResultCard: View {
                         Text(type.name).clack(.caption).foregroundStyle(Ink.text2)
                     }
                 }
-                FlowLayout(spacing: 8, lineSpacing: 6) {
-                    OperatorBadge(op: op, size: .medium)
-                    Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
-                    Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
-                    Chip(text: l10n.t("products.\(result.product)"))
-                    Text(result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"))
-                        .clack(.caption).foregroundStyle(Ink.text2)
-                    if !result.alsoKnownAs.isEmpty {
-                        Text(l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")])).clack(.caption).foregroundStyle(Ink.text2)
-                    }
-                }
+                ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
+                Text(Format.join([
+                    result.stopsBetween > 0 ? l10n.t("add.stopsBetween", count: result.stopsBetween) : l10n.t("add.direct"),
+                    result.alsoKnownAs.isEmpty ? nil : l10n.t("add.alsoKnownAs", ["numbers": result.alsoKnownAs.joined(separator: ", ")]),
+                ]))
+                .clack(.caption).foregroundStyle(Ink.text2)
             }
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -313,10 +308,8 @@ private struct ConnectionResultCard: View {
             .monospacedDigit()
             ForEach([first, second], id: \.id) { result in
                 let op = result.operatorId.flatMap { app.operatorsById[$0] }
-                HStack(spacing: 8) {
-                    OperatorBadge(op: op, size: .small)
-                    Text(op?.name ?? result.routeName ?? "").font(ClackFont.inter(14, .semibold)).foregroundStyle(Ink.text)
-                    Text(result.trainNumber ?? "").clack(.caption).fontWeight(.semibold).foregroundStyle(Ink.text)
+                VStack(alignment: .leading, spacing: 2) {
+                    ServiceHeader(op: op, number: result.trainNumber, size: .small, name: op == nil ? result.routeName : nil)
                     Text("\(Format.time(result.from.time, tz: result.from.tz, clock: app.settings.clock)) \(result.from.name) → \(Format.time(result.to.time, tz: result.to.tz, clock: app.settings.clock)) \(result.to.name)")
                         .clack(.caption).foregroundStyle(Ink.text2).lineLimit(2)
                 }
@@ -390,11 +383,7 @@ private struct ConfirmStep: View {
             .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
         }
-        HStack(spacing: 10) {
-            OperatorBadge(op: op, size: .medium)
-            Text([op?.name, result.trainNumber].compactMap { $0 }.joined(separator: " ")).clack(.rowTitle).foregroundStyle(Ink.text)
-            Chip(text: l10n.t("products.\(result.product)"))
-        }
+        ServiceHeader(op: op, number: result.trainNumber, size: .medium, category: result.product, name: op == nil ? result.routeName : nil)
         if let from, let to, let dep, let arr, let trip {
             let d = AddTrainLogic.distance(stops: trip.stops, geometry: geometry, fromSeq: picked.fromSeq, toSeq: picked.toSeq)
             (Text("\(from.name) → \(to.name)").fontWeight(.semibold).foregroundStyle(Ink.text)

@@ -243,10 +243,8 @@ struct NotRunningSheet: View {
     var body: some View {
         let op = follow?.operatorId.flatMap { app.operatorsById[$0] }
         LiveSheetCard {
-            HStack(spacing: 10) {
-                OperatorBadge(op: op, size: .medium)
-                Text([op?.name, number].compactMap { $0 }.joined(separator: " ").isEmpty ? l10n.t("liveMap.train", ["number": number]) : [op?.name, number].compactMap { $0 }.joined(separator: " "))
-                    .clack(.rowTitle).foregroundStyle(Ink.text)
+            HStack(spacing: 12) {
+                ServiceHeader(op: op, number: op == nil ? nil : number, size: .medium, fallback: l10n.t("liveMap.train", ["number": number]))
                 Spacer(minLength: 0)
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
