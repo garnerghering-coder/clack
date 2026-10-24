@@ -133,27 +133,15 @@ struct BoardScreen: View {
             Spacer(minLength: 0)
             if let station {
                 if station.hasMap {
-                    IconActionButton(icon: "map", label: l10n.t("stationMap.open")) {
+                    IconButton(icon: "map", label: l10n.t("stationMap.open")) {
                         router.push(.stationMap(StationMapLink(stationId: station.id)))
                     }
                 }
-                // Just the star fills in, in the accent colour; the button around it stays as it is.
-                Button { Task { await toggleFavorite() } } label: {
-                    Group {
-                        if favoriteOverride {
-                            Image(systemName: "star.fill").font(.system(size: 20)).foregroundStyle(Ink.accent)
-                        } else {
-                            LucideIcon(name: "star", size: 20).foregroundStyle(Ink.text)
-                        }
-                    }
-                    .frame(width: 44, height: 44)
-                    .background(Ink.surfaceRaised, in: Circle())
-                    .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-                }
-                .buttonStyle(.plain)
+                // Just the star fills in, in the accent ink; the button around it stays as it is.
+                IconButton(
+                    icon: "star", label: l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"), selected: favoriteOverride
+                ) { Task { await toggleFavorite() } }
                 .sensoryFeedback(.selection, trigger: favoriteOverride)
-                .accessibilityLabel(l10n.t(favoriteOverride ? "stations.unfavorite" : "stations.favorite"))
-                .accessibilityAddTraits(favoriteOverride ? .isSelected : [])
             }
         }
         .padding(.top, 12)

@@ -38,7 +38,7 @@ struct PassportScreen: View {
             PageHeader(title: l10n.t("passport.title")) {
                 HStack(spacing: 8) {
                     if let data, data.totals.trains > 0 {
-                        IconActionButton(icon: "share-2", label: l10n.t("share.title")) { sharing = true }
+                        IconButton(icon: "share-2", label: l10n.t("share.title")) { sharing = true }
                     }
                     SettingsLink()
                 }

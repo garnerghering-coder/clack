@@ -77,14 +77,10 @@ struct AlertCard<Content: View>: View {
                     Text(title).clack(.alertTitle).foregroundStyle(Ink.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .accessibilityAddTraits(.isHeader)
-                    Button {
+                    IconButton(icon: "x", label: l10n.t("common.close")) {
                         DismissedAlerts.dismiss(dismissKey)
                         hidden = true
-                    } label: {
-                        LucideIcon(name: "x", size: 16).foregroundStyle(Ink.text).frame(width: 34, height: 34)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(l10n.t("common.close"))
                 }
                 .padding(.vertical, 10).padding(.leading, 14).padding(.trailing, 10)
                 .background(

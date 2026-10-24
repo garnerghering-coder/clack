@@ -12,15 +12,7 @@ struct SettingsLink: View {
     @Environment(L10n.self) private var l10n
 
     var body: some View {
-        NavigationLink(value: AppRoute.settings) {
-            LucideIcon(name: "settings", size: 20)
-                .foregroundStyle(Ink.text)
-                .frame(width: 44, height: 44)
-                .background(Ink.surfaceRaised, in: Circle())
-                .overlay(Circle().strokeBorder(Ink.hairline, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(l10n.t("nav.settings"))
+        IconLink(icon: "settings", label: l10n.t("nav.settings"), value: AppRoute.settings)
     }
 }
 

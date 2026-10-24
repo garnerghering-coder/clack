@@ -88,7 +88,8 @@ struct StationsScreen: View {
             ForEach(stations) { station in
                 StationRow(
                     station: station,
-                    trailing: star ? AnyView(LucideIcon(name: "star", size: 16).foregroundStyle(Ink.accentInk).accessibilityLabel(l10n.t("stations.favorite"))) : nil
+                    // The same filled star as the board's favourite button.
+                    trailing: star ? AnyView(LucideIcon(name: "star", size: 16, filled: true, label: l10n.t("stations.favorite")).foregroundStyle(Ink.accentInk)) : nil
                 ) {
                     router.push(.board(stationId: station.id, arrivals: false))
                 }
