@@ -649,18 +649,18 @@ struct LegStopRow: View {
     var body: some View {
         let times = TripDetailLogic.stopTimes(stop)
         let ridden = stop.role.isRidden
-        let deviations = stop.deviations.filter { $0 != "Spårändrat" }
+        let causes = l10n.causeNotes(stop.allCauses)
         var notes: [StopRow.Note] = []
         if stop.role == .board { notes.append(.init(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn"), .accent)) }
         if stop.role == .alight { notes.append(.init(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff"), .accent)) }
         if ridden && stop.reportSource == nil { notes.append(.init(l10n.t("detail.noLiveData"))) }
-        if !deviations.isEmpty { notes.append(.init(Format.join(deviations))) }
+        if !causes.isEmpty { notes.append(.init(Format.join(causes))) }
         let end = stop.role == .board || stop.role == .alight
         return StopRow(
             name: stop.name, emphasis: ridden ? .ridden : .dim, canceled: stop.canceled, notes: notes,
             rail: StopRail(color: color, big: end, ridden: ridden, startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below),
             time: times.actual ?? times.sched, sched: times.sched, live: times.actual != nil, delay: times.delay,
-            tz: stop.tz, clock: app.settings.clock, platform: stop.platform, platformChanged: stop.deviations.contains("Spårändrat"),
+            tz: stop.tz, clock: app.settings.clock, platform: stop.platform, platformChanged: stop.deviations.contains("Spårändrat") || stop.allCauses.contains(where: { DelayCauses.isPlatformChange($0) }),
             onOpen: { router.push(.board(stationId: stop.stationId, arrivals: false)) },
             openLabel: l10n.t("board.openBoard", ["station": stop.name])
         )

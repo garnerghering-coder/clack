@@ -381,13 +381,31 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
     public let estimatedDep: Instant?
     public let platform: String?
     public let canceled: Bool
-    /// Trafikverket's Swedish deviation texts.
+    /// Trafikverket's Swedish deviation texts (older servers send only these).
     public let deviations: [String]
+    /// The same notices with their source's codes, to show in the app's language; nil from older servers.
+    public let causes: [Cause]?
     public let reportSource: ReportSource?
+
+    /// One reason or notice as its source gave it (`data/delay_causes.json`). `src` is `trv`, `digitraffic` or `entur`.
+    public nonisolated struct Cause: Codable, Hashable, Sendable {
+        public let src: String
+        public let code: String?
+        public let text: String?
+
+        public init(src: String, code: String? = nil, text: String? = nil) {
+            self.src = src
+            self.code = code
+            self.text = text
+        }
+    }
+
+    /// The causes to show: the structured ones, else the plain texts of an older server.
+    public var allCauses: [Cause] { causes ?? deviations.map { Cause(src: "trv", text: $0) } }
 
     public var id: Int { seq }
 
-    public init(seq: Int, role: StopRole, stationId: String, name: String, code: String?, country: String, tz: String, lat: Double, lon: Double, schedArr: Instant?, schedDep: Instant?, actualArr: Instant?, actualDep: Instant?, estimatedArr: Instant?, estimatedDep: Instant?, platform: String?, canceled: Bool, deviations: [String], reportSource: ReportSource?) {
+    public init(seq: Int, role: StopRole, stationId: String, name: String, code: String?, country: String, tz: String, lat: Double, lon: Double, schedArr: Instant?, schedDep: Instant?, actualArr: Instant?, actualDep: Instant?, estimatedArr: Instant?, estimatedDep: Instant?, platform: String?, canceled: Bool, deviations: [String], causes: [Cause]? = nil, reportSource: ReportSource?) {
         self.seq = seq
         self.role = role
         self.stationId = stationId
@@ -406,6 +424,7 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
         self.platform = platform
         self.canceled = canceled
         self.deviations = deviations
+        self.causes = causes
         self.reportSource = reportSource
     }
 }

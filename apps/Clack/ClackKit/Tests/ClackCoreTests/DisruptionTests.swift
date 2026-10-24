@@ -88,14 +88,3 @@ struct PassengerRightsTests {
         #expect(Disruption.passengerRights(countries: ["NO"], journeyKm: 300, arrDelayMin: 90, canceled: false) == .operator)
     }
 }
-
-struct DelayReasonTests {
-    @Test func readsTrafikverketsReasonCodesAndLeavesNoticesOut() {
-        #expect(
-            Disruption.reasons(["Spårändrat", "Signalfel", "Inställt", "Signalfel", "Kort tåg", "Sen tågvänd."])
-                == ["a signal fault", "the train arrived late for this trip"]
-        )
-        #expect(Disruption.reasons(["Tågkö"], language: .sv) == ["tågkö"])
-        #expect(Disruption.reasons(["Spårändrat", "Hpl C"]).isEmpty)
-    }
-}

@@ -2,12 +2,13 @@
 // activity, normalised into board rows: estimated vs advertised time, platform (with change detection), delay,
 // cancellation, destination/origin and via, brand, train type, and a link to the timetable trip so a row can be
 // added to your trips. normalizeBoard is pure; fetchBoardRows talks to Trafikverket.
-import { delayMinutes, type OnboardFacts } from '@clack/shared';
+import { delayMinutes, type DelayCause, type OnboardFacts } from '@clack/shared';
 import { normName } from '../lib/geo.js';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import type { Product, StationCall } from '../search/timetable.js';
 import { brandOnLine, parseComposition, trainTypeFor } from '../legs/trainTypes.js';
 import { onboardFromRow } from '../legs/onboard.js';
+import { trvCauses } from '../legs/causes.js';
 
 export type BoardType = 'departures' | 'arrivals';
 
@@ -57,6 +58,8 @@ export interface BoardRow {
   platformChange: { from: string | null; at: number | null } | null;
   canceled: boolean;
   deviations: string[];
+  /** The same notices with their source's codes, to show in the app's language (data/delay_causes.json). */
+  causes: DelayCause[];
   /** Destinations (departures) or origins (arrivals), as names. */
   endpoints: string[];
   via: string[];
@@ -172,6 +175,7 @@ export function normalizeBoard(rows: TrvBoardRow[], ctx: NormalizeContext): Boar
       platformChange: change,
       canceled: Boolean(r.Canceled),
       deviations: deviations.filter((d) => d.toLowerCase() !== PLATFORM_CHANGED),
+      causes: trvCauses(r.Deviation).filter((c) => c.code?.toUpperCase() !== 'ANA055' && c.text?.toLowerCase() !== PLATFORM_CHANGED),
       endpoints: ends.map((l) => ctx.names(l.LocationName)),
       via: via.slice(0, 3).map((l) => ctx.names(l.LocationName)),
       operatorId,

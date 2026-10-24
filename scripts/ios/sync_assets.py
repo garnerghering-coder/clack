@@ -3,6 +3,7 @@ there is one source for each:
 
 - the strings: packages/shared/locales/{en,sv}.json -> apps/Clack/ClackKit/Sources/ClackCore/Resources/i18n/
   (read by L10n.swift, same keys)
+- the delay-cause table: data/delay_causes.json -> the same strings folder (read by ClackCore/Logic/DelayCauses.swift)
 - the train drawings: assets/trains/*.svg -> <app>/Assets.xcassets/Trains/<model>-<livery>.imageset (vector, any size)
 
 The app icon is not touched: it is made by scripts/ios/make_icon.py and lives in the Xcode project.
@@ -52,6 +53,7 @@ def main():
     os.makedirs(I18N, exist_ok=True)
     for lang in ('en', 'sv'):
         shutil.copy(os.path.join(ROOT, 'packages', 'shared', 'locales', f'{lang}.json'), I18N)
+    shutil.copy(os.path.join(ROOT, 'data', 'delay_causes.json'), I18N)
 
     trains = os.path.join(catalog, 'Trains')
     fresh(trains)
@@ -68,7 +70,7 @@ def main():
             'properties': {'preserves-vector-representation': True},
         })
 
-    print(f'strings (en, sv), {len(svgs)} train drawings -> {os.path.relpath(APP, ROOT)}, strings -> {os.path.relpath(I18N, ROOT)}')
+    print(f'strings (en, sv, delay causes), {len(svgs)} train drawings -> {os.path.relpath(APP, ROOT)}, strings -> {os.path.relpath(I18N, ROOT)}')
 
 
 if __name__ == '__main__':

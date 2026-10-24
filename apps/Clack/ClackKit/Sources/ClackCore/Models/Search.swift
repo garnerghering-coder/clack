@@ -261,6 +261,8 @@ public nonisolated struct BoardRow: Codable, Hashable, Sendable, Identifiable {
     public let platformChange: PlatformChange?
     public let canceled: Bool
     public let deviations: [String]
+    /// The same notices with their source's codes; nil from older servers.
+    public let causes: [LegStop.Cause]?
     public let endpoints: [String]
     public let via: [String]
     public let operatorId: String?
@@ -270,10 +272,13 @@ public nonisolated struct BoardRow: Codable, Hashable, Sendable, Identifiable {
     public let trainType: String?
     public let trip: Trip?
 
+    /// The causes to show: the structured ones, else the plain texts of an older server.
+    public var allCauses: [LegStop.Cause] { causes ?? deviations.map { LegStop.Cause(src: "trv", text: $0) } }
+
     /// What the board shows: when it happened, else when it's expected, else the timetable.
     public var shown: Double { actual ?? estimated ?? advertised }
 
-    public init(id: String, trainNumber: String, advertised: Double, estimated: Double?, actual: Double?, done: Bool, delayMin: Int?, platform: String?, platformChange: PlatformChange?, canceled: Bool, deviations: [String], endpoints: [String], via: [String], operatorId: String?, productName: String?, product: String, trainType: String?, trip: Trip?) {
+    public init(id: String, trainNumber: String, advertised: Double, estimated: Double?, actual: Double?, done: Bool, delayMin: Int?, platform: String?, platformChange: PlatformChange?, canceled: Bool, deviations: [String], causes: [LegStop.Cause]? = nil, endpoints: [String], via: [String], operatorId: String?, productName: String?, product: String, trainType: String?, trip: Trip?) {
         self.id = id
         self.trainNumber = trainNumber
         self.advertised = advertised
@@ -285,6 +290,7 @@ public nonisolated struct BoardRow: Codable, Hashable, Sendable, Identifiable {
         self.platformChange = platformChange
         self.canceled = canceled
         self.deviations = deviations
+        self.causes = causes
         self.endpoints = endpoints
         self.via = via
         self.operatorId = operatorId

@@ -1,0 +1,1311 @@
+{
+  "_comment": "The one table behind delay causes in the app and the server (task: causes in the selected language). trv: Trafikverket announcement codes (TrainAnnouncement.Deviation[].Code) -> locale key cause.<slug>; trvText: Trafikverket texts that have no code in the list; dt: Digitraffic cause codes (category A, detailed A1, third A101) -> key, null when no honest short translation exists (the resolver then uses the parent code, then shows the Finnish name). kind: cause (says why a train is late) or notice (carriage, platform or service note, not a reason). verified: false = the en/sv wording in packages/shared/locales is ours and not yet reviewed; Trafikverket's own Swedish text (sv) is theirs. Read by packages/shared/src/delayCauses.ts and ClackCore/Logic/DelayCauses.swift (copied by scripts/ios/sync_assets.py).",
+  "_source": {
+    "trv": "Trafikverket Open API, object type ReasonCode (group Annonseringstexter, non-deleted ANA001-ANA155), Level3Description is the announced Swedish text; fetched 2026-10-24. ANA066 (Test) and ANA099 ({Fritext}) are left out; ANA200 and up are bus-stop and gate names, not causes. The \"Orsaker nya principer\" group (IBT01, JVA01 ...) is the planners' internal cause tree and is never announced, so it is not mapped.",
+    "trvText": "The earlier hard-coded table in the app: texts without a code in the ReasonCode list.",
+    "dt": "Digitraffic metadata cause-category-codes, detailed-cause-category-codes and third-cause-category-codes (https://rata.digitraffic.fi/api/v1/metadata/...); the Finnish names (fi) are theirs, only in Finnish. All en/sv wording is a translation by Clack and is unverified."
+  },
+  "skippedTrv": {
+    "ANA066": "Test",
+    "ANA099": "{Fritext}: free text, shown as written"
+  },
+  "trv": {
+    "ANA001": {
+      "key": "cause.routeChanged",
+      "kind": "notice",
+      "sv": "Ändrad väg",
+      "verified": false
+    },
+    "ANA002": {
+      "key": "cause.rearTrain",
+      "kind": "notice",
+      "sv": "Bakre tåg",
+      "verified": false
+    },
+    "ANA003": {
+      "key": "cause.engineeringWork",
+      "kind": "cause",
+      "sv": "Banarbete",
+      "verified": false
+    },
+    "ANA004": {
+      "key": "cause.bridgeFault",
+      "kind": "cause",
+      "sv": "Brofel",
+      "verified": false
+    },
+    "ANA005": {
+      "key": "cause.bridgeOpening",
+      "kind": "cause",
+      "sv": "Broöppning",
+      "verified": false
+    },
+    "ANA006": {
+      "key": "cause.bus",
+      "kind": "notice",
+      "sv": "Buss",
+      "verified": false
+    },
+    "ANA007": {
+      "key": "cause.busReplaces",
+      "kind": "notice",
+      "sv": "Buss ersätter",
+      "verified": false
+    },
+    "ANA008": {
+      "key": "cause.earliestDeparture",
+      "kind": "notice",
+      "sv": "Avg. tidigast",
+      "verified": false
+    },
+    "ANA010": {
+      "key": "cause.directTrain",
+      "kind": "notice",
+      "sv": "Direkttåg",
+      "verified": false
+    },
+    "ANA011": {
+      "key": "cause.animalsOnTrack",
+      "kind": "cause",
+      "sv": "Djur i spår",
+      "verified": false
+    },
+    "ANA012": {
+      "key": "cause.doors2to13",
+      "kind": "notice",
+      "sv": "Dörr 2-13",
+      "verified": false
+    },
+    "ANA013": {
+      "key": "cause.doors16to27",
+      "kind": "notice",
+      "sv": "Dörr 16-27",
+      "verified": false
+    },
+    "ANA015": {
+      "key": "cause.powerFault",
+      "kind": "cause",
+      "sv": "Elfel",
+      "verified": false
+    },
+    "ANA016": {
+      "key": "cause.doubleTrain",
+      "kind": "notice",
+      "sv": "Dubbeltåg",
+      "verified": false
+    },
+    "ANA017": {
+      "key": "cause.extraStop",
+      "kind": "cause",
+      "sv": "Extra uppeh.",
+      "verified": false
+    },
+    "ANA018": {
+      "key": "cause.extraBus",
+      "kind": "notice",
+      "sv": "Extrabuss",
+      "verified": false
+    },
+    "ANA019": {
+      "key": "cause.extraTrain",
+      "kind": "notice",
+      "sv": "Extratåg",
+      "verified": false
+    },
+    "ANA020": {
+      "key": "cause.direct",
+      "kind": "notice",
+      "sv": "Direkt",
+      "verified": false
+    },
+    "ANA021": {
+      "key": "cause.illPassenger",
+      "kind": "cause",
+      "sv": "Sjukdomsfall",
+      "verified": false
+    },
+    "ANA022": {
+      "key": "cause.frontTrain",
+      "kind": "notice",
+      "sv": "Främre tåg",
+      "verified": false
+    },
+    "ANA023": {
+      "key": "cause.crossingFault",
+      "kind": "cause",
+      "sv": "Bomfel",
+      "verified": false
+    },
+    "ANA026": {
+      "key": "cause.innerTrain",
+      "kind": "notice",
+      "sv": "Inre tåg",
+      "verified": false
+    },
+    "ANA027": {
+      "key": "cause.canceled",
+      "kind": "notice",
+      "sv": "Inställt",
+      "verified": false
+    },
+    "ANA028": {
+      "key": "cause.waitingForBus",
+      "kind": "notice",
+      "sv": "Inväntad buss",
+      "verified": false
+    },
+    "ANA029": {
+      "key": "cause.waitingForFerry",
+      "kind": "notice",
+      "sv": "Invänt. färja",
+      "verified": false
+    },
+    "ANA030": {
+      "key": "cause.waitingForTrain",
+      "kind": "cause",
+      "sv": "Inväntat tåg",
+      "verified": false
+    },
+    "ANA031": {
+      "key": "cause.shortTrain",
+      "kind": "notice",
+      "sv": "Kort tåg",
+      "verified": false
+    },
+    "ANA032": {
+      "key": "cause.incident",
+      "kind": "cause",
+      "sv": "Incident",
+      "verified": false
+    },
+    "ANA033": {
+      "key": "cause.vandalism",
+      "kind": "cause",
+      "sv": "Vandalism",
+      "verified": false
+    },
+    "ANA034": {
+      "key": "cause.vehicleFault",
+      "kind": "cause",
+      "sv": "Fordonsfel",
+      "verified": false
+    },
+    "ANA035": {
+      "key": "cause.changedTrainType",
+      "kind": "notice",
+      "sv": "Ändrad tågtyp",
+      "verified": false
+    },
+    "ANA036": {
+      "key": "cause.waitingForTaxi",
+      "kind": "notice",
+      "sv": "Inväntad taxi",
+      "verified": false
+    },
+    "ANA037": {
+      "key": "cause.weather",
+      "kind": "cause",
+      "sv": "Oväder",
+      "verified": false
+    },
+    "ANA039": {
+      "key": "cause.nextDeparture",
+      "kind": "notice",
+      "sv": "Nästa avgång",
+      "verified": false
+    },
+    "ANA040": {
+      "key": "cause.peopleOnTrack",
+      "kind": "cause",
+      "sv": "Obeh. i spår",
+      "verified": false
+    },
+    "ANA041": {
+      "key": "cause.accident",
+      "kind": "cause",
+      "sv": "Olycka",
+      "verified": false
+    },
+    "ANA043": {
+      "key": "cause.borderControl",
+      "kind": "cause",
+      "sv": "Passkontroll",
+      "verified": false
+    },
+    "ANA044": {
+      "key": "cause.crewChange",
+      "kind": "cause",
+      "sv": "Personalbyte",
+      "verified": false
+    },
+    "ANA046": {
+      "key": "cause.provisionalTime",
+      "kind": "notice",
+      "sv": "Prel. tid",
+      "verified": false
+    },
+    "ANA047": {
+      "key": "cause.sabotage",
+      "kind": "cause",
+      "sv": "Sabotage",
+      "verified": false
+    },
+    "ANA048": {
+      "key": "cause.seeInfo",
+      "kind": "notice",
+      "sv": "Se info!",
+      "verified": false
+    },
+    "ANA050": {
+      "key": "cause.signalFault",
+      "kind": "cause",
+      "sv": "Signalfel",
+      "verified": false
+    },
+    "ANA051": {
+      "key": "cause.snowIce",
+      "kind": "cause",
+      "sv": "Snö/Is",
+      "verified": false
+    },
+    "ANA052": {
+      "key": "cause.summerTime",
+      "kind": "notice",
+      "sv": "Sommartid",
+      "verified": false
+    },
+    "ANA053": {
+      "key": "cause.trackFault",
+      "kind": "cause",
+      "sv": "Spårfel",
+      "verified": false
+    },
+    "ANA054": {
+      "key": "cause.slipperyRails",
+      "kind": "cause",
+      "sv": "Spårhalka",
+      "verified": false
+    },
+    "ANA055": {
+      "key": "cause.platformChanged",
+      "kind": "notice",
+      "sv": "Spårändrat",
+      "verified": false
+    },
+    "ANA056": {
+      "key": "cause.slTrainReplaces",
+      "kind": "notice",
+      "sv": "SL-tåg ers",
+      "verified": false
+    },
+    "ANA057": {
+      "key": "cause.taxi",
+      "kind": "notice",
+      "sv": "Taxi",
+      "verified": false
+    },
+    "ANA058": {
+      "key": "cause.taxiReplaces",
+      "kind": "notice",
+      "sv": "Taxi ersätter",
+      "verified": false
+    },
+    "ANA059": {
+      "key": "cause.technicalFault",
+      "kind": "cause",
+      "sv": "Tekniskt fel",
+      "verified": false
+    },
+    "ANA060": {
+      "key": "cause.earlyArrival",
+      "kind": "notice",
+      "sv": "Tidig ankomst",
+      "verified": false
+    },
+    "ANA061": {
+      "key": "cause.safetyIncident",
+      "kind": "cause",
+      "sv": "Tillbud",
+      "verified": false
+    },
+    "ANA063": {
+      "key": "cause.trainQueue",
+      "kind": "cause",
+      "sv": "Tågkö",
+      "verified": false
+    },
+    "ANA064": {
+      "key": "cause.trainMeeting",
+      "kind": "cause",
+      "sv": "Tågmöte",
+      "verified": false
+    },
+    "ANA065": {
+      "key": "cause.lateTurnaround",
+      "kind": "cause",
+      "sv": "Sen tågvänd.",
+      "verified": false
+    },
+    "ANA068": {
+      "key": "cause.vehicleShortage",
+      "kind": "cause",
+      "sv": "Vagnbrist",
+      "verified": false
+    },
+    "ANA070": {
+      "key": "cause.winterTime",
+      "kind": "notice",
+      "sv": "Vintertid",
+      "verified": false
+    },
+    "ANA071": {
+      "key": "cause.pointsFault",
+      "kind": "cause",
+      "sv": "Växelfel",
+      "verified": false
+    },
+    "ANA073": {
+      "key": "cause.outerTrain",
+      "kind": "notice",
+      "sv": "Yttre tåg",
+      "verified": false
+    },
+    "ANA074": {
+      "key": "cause.alsoBus",
+      "kind": "notice",
+      "sv": "Även buss",
+      "verified": false
+    },
+    "ANA075": {
+      "key": "cause.awaitInfo",
+      "kind": "notice",
+      "sv": "Invänta info",
+      "verified": false
+    },
+    "ANA076": {
+      "key": "cause.localBus",
+      "kind": "notice",
+      "sv": "Lokalbuss",
+      "verified": false
+    },
+    "ANA077": {
+      "key": "cause.localTransport",
+      "kind": "notice",
+      "sv": "Lokaltrafiken",
+      "verified": false
+    },
+    "ANA078": {
+      "key": "cause.backInService",
+      "kind": "notice",
+      "sv": "Åter i trafik",
+      "verified": false
+    },
+    "ANA079": {
+      "key": "cause.noBicycles",
+      "kind": "notice",
+      "sv": "Ej cykel",
+      "verified": false
+    },
+    "ANA080": {
+      "key": "cause.fire",
+      "kind": "cause",
+      "sv": "Brand",
+      "verified": false
+    },
+    "ANA081": {
+      "key": "cause.testTrain",
+      "kind": "notice",
+      "sv": "Provtåg",
+      "verified": false
+    },
+    "ANA082": {
+      "key": "cause.wildlifeAccident",
+      "kind": "cause",
+      "sv": "Viltolycka",
+      "verified": false
+    },
+    "ANA083": {
+      "key": "cause.noCatering",
+      "kind": "notice",
+      "sv": "Ej servering",
+      "verified": false
+    },
+    "ANA084": {
+      "key": "cause.policeOperation",
+      "kind": "cause",
+      "sv": "Polisinsats",
+      "verified": false
+    },
+    "ANA085": {
+      "key": "cause.cafeOffer",
+      "kind": "notice",
+      "sv": "Kaféutbud",
+      "verified": false
+    },
+    "ANA086": {
+      "key": "cause.awaitPlatform",
+      "kind": "notice",
+      "sv": "Invänta spår",
+      "verified": false
+    },
+    "ANA087": {
+      "key": "cause.shortTrain",
+      "kind": "notice",
+      "sv": "Kort tåg",
+      "verified": false
+    },
+    "ANA088": {
+      "key": "cause.awaitTime",
+      "kind": "notice",
+      "sv": "Invänta tid",
+      "verified": false
+    },
+    "ANA089": {
+      "key": "cause.tram",
+      "kind": "notice",
+      "sv": "Spårvagn",
+      "verified": false
+    },
+    "ANA090": {
+      "key": "cause.fullTrain",
+      "kind": "notice",
+      "sv": "Fullsatt tåg",
+      "verified": false
+    },
+    "ANA091": {
+      "key": "cause.crowdingRisk",
+      "kind": "notice",
+      "sv": "Trängselrisk",
+      "verified": false
+    },
+    "ANA092": {
+      "key": "cause.busOrTaxi",
+      "kind": "notice",
+      "sv": "Buss/Taxi",
+      "verified": false
+    },
+    "ANA093": {
+      "key": "cause.noToilet",
+      "kind": "notice",
+      "sv": "Ej toalett",
+      "verified": false
+    },
+    "ANA155": {
+      "key": "cause.platformChange",
+      "kind": "notice",
+      "sv": "Plattformsbyte",
+      "verified": false
+    }
+  },
+  "trvText": {
+    "Kontaktledningsfel": {
+      "key": "cause.overheadLineFault",
+      "kind": "cause",
+      "verified": false
+    },
+    "Spårfel": {
+      "key": "cause.trackFault",
+      "kind": "cause",
+      "verified": false
+    },
+    "Obeh. i spår": {
+      "key": "cause.peopleOnTrack",
+      "kind": "cause",
+      "verified": false
+    },
+    "Sen tågvänd.": {
+      "key": "cause.lateTurnaround",
+      "kind": "cause",
+      "verified": false
+    },
+    "Personalbrist": {
+      "key": "cause.staffShortage",
+      "kind": "cause",
+      "verified": false
+    },
+    "Spårhalka": {
+      "key": "cause.slipperyRails",
+      "kind": "cause",
+      "verified": false
+    }
+  },
+  "dt": {
+    "A": {
+      "fi": "Aikataulu ja liikennöinti",
+      "key": null
+    },
+    "E": {
+      "fi": "Etuajassakulku",
+      "key": "cause.ranEarly",
+      "verified": false
+    },
+    "H": {
+      "fi": "Henkilökunta",
+      "key": "cause.staffIssue",
+      "verified": false
+    },
+    "I": {
+      "fi": "Muut syyt",
+      "key": "cause.otherReason",
+      "verified": false
+    },
+    "J": {
+      "fi": "Junan muodostamisen viivästyminen",
+      "key": "cause.trainFormation",
+      "verified": false
+    },
+    "K": {
+      "fi": "Kalusto, moottorijunat ja vaunut",
+      "key": "cause.vehicleIssue",
+      "verified": false
+    },
+    "L": {
+      "fi": "Liikenteenhoito",
+      "key": "cause.trafficControl",
+      "verified": false
+    },
+    "M": {
+      "fi": "Matkustajapalvelu",
+      "key": "cause.passengerService",
+      "verified": false
+    },
+    "O": {
+      "fi": "Onnettomuus",
+      "key": "cause.accident",
+      "verified": false
+    },
+    "P": {
+      "fi": "Liikenteenhoitojärjestelmät",
+      "key": "cause.systemFault",
+      "verified": false
+    },
+    "R": {
+      "fi": "Ratatyö",
+      "key": "cause.engineeringWork",
+      "verified": false
+    },
+    "S": {
+      "fi": "Sähkörata",
+      "key": "cause.powerFault",
+      "verified": false
+    },
+    "T": {
+      "fi": "Rata (ratarakenne)",
+      "key": "cause.trackFault",
+      "verified": false
+    },
+    "V": {
+      "fi": "Vetokalusto",
+      "key": "cause.locomotiveIssue",
+      "verified": false
+    },
+    "X": {
+      "fi": "Rataliikennekeskukselle ilmoitettavat syyt",
+      "key": null
+    },
+    "A1": {
+      "fi": "Mäkeenjäänti tai nopeuden poikkeuksellinen aleneminen mäessä",
+      "key": null
+    },
+    "A2": {
+      "fi": "Aikataulutekninen syy",
+      "key": "cause.timetableReason",
+      "verified": false
+    },
+    "A3": {
+      "fi": "Junaa ei ole ajettu",
+      "key": "cause.notRun",
+      "verified": false
+    },
+    "E1": {
+      "fi": "Etuajassa lähtö",
+      "key": "cause.earlyDeparture",
+      "verified": false
+    },
+    "E2": {
+      "fi": "Ajo- tai pysähtymisajan alitus",
+      "key": null
+    },
+    "I1": {
+      "fi": "Poikkeukselliset sääolosuhteet",
+      "key": "cause.weather",
+      "verified": false
+    },
+    "I2": {
+      "fi": "Lehtikeli tai muu liukkaus",
+      "key": "cause.slipperyRails",
+      "verified": false
+    },
+    "I3": {
+      "fi": "Ilkivalta, asiaton radalla liikkuminen",
+      "key": "cause.vandalismOrTrespass",
+      "verified": false
+    },
+    "I4": {
+      "fi": "Muu syy",
+      "key": "cause.otherReason",
+      "verified": false
+    },
+    "J1": {
+      "fi": "Junan muodostamisen viivästyminen (kaikki liikenne)",
+      "key": null
+    },
+    "K1": {
+      "fi": "Kalustopula",
+      "key": "cause.vehicleShortage",
+      "verified": false
+    },
+    "K2": {
+      "fi": "Kalustovika",
+      "key": "cause.vehicleFault",
+      "verified": false
+    },
+    "K3": {
+      "fi": "Kalustosta johtuva nopeuden alennus",
+      "key": null
+    },
+    "K4": {
+      "fi": "Kytkentä",
+      "key": null
+    },
+    "K5": {
+      "fi": "Irroitus",
+      "key": null
+    },
+    "K6": {
+      "fi": "Katsastamaton kalusto",
+      "key": null
+    },
+    "L1": {
+      "fi": "Yhteysliikenteen odotus (jatkoyhteydet)",
+      "key": "cause.waitingForConnection",
+      "verified": false
+    },
+    "L2": {
+      "fi": "Junakohtaus, edellä kulkeva juna tai ohitus",
+      "key": "cause.otherTrains",
+      "verified": false
+    },
+    "L3": {
+      "fi": "Konflikti kapasiteetissa",
+      "key": "cause.capacityConflict",
+      "verified": false
+    },
+    "L4": {
+      "fi": "Myöhästyminen ulkomailta",
+      "key": "cause.lateFromAbroad",
+      "verified": false
+    },
+    "L5": {
+      "fi": "Edessä oleva kalusto tukkii radan",
+      "key": "cause.trainBlocking",
+      "verified": false
+    },
+    "L6": {
+      "fi": "Junan lähtöön liittyvä odotus",
+      "key": "cause.waitingToDepart",
+      "verified": false
+    },
+    "L7": {
+      "fi": "Liikenteenhoidosta johtuva",
+      "key": "cause.trafficControl",
+      "verified": false
+    },
+    "L8": {
+      "fi": "Liikenteelliset päätökset",
+      "key": "cause.trafficDecision",
+      "verified": false
+    },
+    "M1": {
+      "fi": "Matkustajajunan pysähtymisajan ylitys",
+      "key": "cause.longerStop",
+      "verified": false
+    },
+    "M2": {
+      "fi": "Ylimääräinen pysähdys",
+      "key": "cause.extraStop",
+      "verified": false
+    },
+    "O1": {
+      "fi": "Henkilövahinko",
+      "key": "cause.personInjury",
+      "verified": false
+    },
+    "O2": {
+      "fi": "Eläinvahinko",
+      "key": "cause.animalAccident",
+      "verified": false
+    },
+    "O3": {
+      "fi": "Tasoristeysonnettomuus",
+      "key": "cause.crossingAccident",
+      "verified": false
+    },
+    "O4": {
+      "fi": "Muut onnettomuudet ja vauriot",
+      "key": "cause.accident",
+      "verified": false
+    },
+    "P1": {
+      "fi": "Ratainfran laiteviat",
+      "key": "cause.infrastructureFault",
+      "verified": false
+    },
+    "P2": {
+      "fi": "Tietojärjestelmä- ja päätelaiteviat",
+      "key": "cause.itFault",
+      "verified": false
+    },
+    "P3": {
+      "fi": "Liikkuvan kaluston valvontalaitevika tai -häiriö",
+      "key": "cause.monitoringFault",
+      "verified": false
+    },
+    "P4": {
+      "fi": "Viestintälaite /-yhteysviat",
+      "key": "cause.commsFault",
+      "verified": false
+    },
+    "R1": {
+      "fi": "Ratatyöt (ennakoidut työt nopeusrajoituksineen)",
+      "key": "cause.engineeringWork",
+      "verified": false
+    },
+    "R2": {
+      "fi": "Ratatyön sovitun ajan ylitys",
+      "key": "cause.workOverran",
+      "verified": false
+    },
+    "R3": {
+      "fi": "Liikennerajoite ratatyön jälkeen",
+      "key": "cause.workRestrictions",
+      "verified": false
+    },
+    "R4": {
+      "fi": "Ratatyön toteutus poikkeaa suunnitellusta",
+      "key": null
+    },
+    "S1": {
+      "fi": "Sähkönjakeluhäiriö",
+      "key": "cause.powerFault",
+      "verified": false
+    },
+    "S2": {
+      "fi": "Sähköratavika",
+      "key": "cause.overheadLineFault",
+      "verified": false
+    },
+    "T1": {
+      "fi": "Tilapäiset nopeusrajoitukset",
+      "key": "cause.speedRestriction",
+      "verified": false
+    },
+    "T2": {
+      "fi": "Liikenteenohjauksen asettamat nopeusrajoitukset (ratarakenne)",
+      "key": "cause.speedRestriction",
+      "verified": false
+    },
+    "T3": {
+      "fi": "Ratarikko / este radalla",
+      "key": "cause.trackFault",
+      "verified": false
+    },
+    "V1": {
+      "fi": "Veturipula",
+      "key": "cause.locomotiveShortage",
+      "verified": false
+    },
+    "V2": {
+      "fi": "Veturivika",
+      "key": "cause.locomotiveFault",
+      "verified": false
+    },
+    "V3": {
+      "fi": "Vetovoimasta johtuva nopeuden alennus / tehon puute",
+      "key": null
+    },
+    "V4": {
+      "fi": "Katsastamaton vetokalusto",
+      "key": null
+    },
+    "E201": {
+      "fi": "Aikataulua nopeampi kulku",
+      "key": null
+    },
+    "E202": {
+      "fi": "Junan priorisointi junan matkan aikana",
+      "key": null
+    },
+    "I101": {
+      "fi": "Poikkeukselliset sääolosuhteet, ratainfra",
+      "key": null
+    },
+    "I102": {
+      "fi": "Poikkeukselliset sääolosuhteet, junakalusto",
+      "key": null
+    },
+    "I301": {
+      "fi": "Ilkivalta, ratainfra",
+      "key": "cause.vandalism",
+      "verified": false
+    },
+    "I302": {
+      "fi": "Asiaton radalla liikkuminen",
+      "key": "cause.peopleOnTrack",
+      "verified": false
+    },
+    "I303": {
+      "fi": "Eläin radalla",
+      "key": "cause.animalsOnTrack",
+      "verified": false
+    },
+    "I304": {
+      "fi": "Viranomaistoiminta",
+      "key": "cause.authorityAction",
+      "verified": false
+    },
+    "I305": {
+      "fi": "Ilkivalta, junakalusto",
+      "key": "cause.vandalism",
+      "verified": false
+    },
+    "L101": {
+      "fi": "Yhteysjunan odotus",
+      "key": "cause.waitingForTrain",
+      "verified": false
+    },
+    "L102": {
+      "fi": "Muu yhteysliikenteen odotus",
+      "key": null
+    },
+    "L201": {
+      "fi": "Junakohtaus",
+      "key": "cause.trainMeeting",
+      "verified": false
+    },
+    "L202": {
+      "fi": "Toisen junan edelle päästäminen",
+      "key": "cause.letOtherTrainPass",
+      "verified": false
+    },
+    "L203": {
+      "fi": "Edellä kulkevan junan ohitus",
+      "key": null
+    },
+    "L204": {
+      "fi": "Edellä kulkeva juna",
+      "key": "cause.trainAhead",
+      "verified": false
+    },
+    "L301": {
+      "fi": "Tuloraide varattu",
+      "key": "cause.trackOccupied",
+      "verified": false
+    },
+    "L302": {
+      "fi": "Risteävät kulkutiet",
+      "key": null
+    },
+    "L303": {
+      "fi": "Ahtaus ratapihalla",
+      "key": null
+    },
+    "L304": {
+      "fi": "Suunnitteluvirhe",
+      "key": null
+    },
+    "L305": {
+      "fi": "Konflikti ratatyön kanssa myöhässäkulun takia",
+      "key": null
+    },
+    "L501": {
+      "fi": "Kalusto rikki",
+      "key": null
+    },
+    "L502": {
+      "fi": "Ei-kaupallinen juna tai ratatyökone rikki",
+      "key": null
+    },
+    "L503": {
+      "fi": "Mäkeenjäänti",
+      "key": null
+    },
+    "L504": {
+      "fi": "Onnettomuus",
+      "key": null
+    },
+    "L601": {
+      "fi": "Odotetaan koko junaa sen edelliseltä matkalta",
+      "key": "cause.lateTurnaround",
+      "verified": false
+    },
+    "L602": {
+      "fi": "Odotetaan yhdistettävää runkoa",
+      "key": null
+    },
+    "L603": {
+      "fi": "Veturin odotus myöhässä olevasta junasta",
+      "key": null
+    },
+    "L604": {
+      "fi": "Saaton viivästyminen johtuen kalusto- tai veturiviasta",
+      "key": null
+    },
+    "L605": {
+      "fi": "Saaton viivästyminen johtuen junanmuodostuksesta",
+      "key": null
+    },
+    "L606": {
+      "fi": "Saaton viivästyminen johtuen infraviasta",
+      "key": null
+    },
+    "L607": {
+      "fi": "Saaton viivästyminen johtuen muusta liikenteestä",
+      "key": null
+    },
+    "L608": {
+      "fi": "Junan lähtöön liittyvä muu odotus",
+      "key": null
+    },
+    "L701": {
+      "fi": "Reititysvirhe normaalissa liikennetilanteessa",
+      "key": null
+    },
+    "L702": {
+      "fi": "Reititysvirhe poikkeustilanteessa",
+      "key": null
+    },
+    "L703": {
+      "fi": "Liikenneohjaajan virhe",
+      "key": "cause.trafficControl",
+      "verified": false
+    },
+    "L704": {
+      "fi": "Määrittelyvirhe automatiikassa",
+      "key": null
+    },
+    "L705": {
+      "fi": "Muu liikenteenhoidosta johtuva myöhästyminen",
+      "key": null
+    },
+    "L801": {
+      "fi": "Liikenteenohjauksen päätös",
+      "key": null
+    },
+    "L802": {
+      "fi": "Liikennöitsijän pyyntö",
+      "key": null
+    },
+    "L803": {
+      "fi": "Liikennesuunnittelussa sovittu",
+      "key": null
+    },
+    "M101": {
+      "fi": "Matkustajaruuhka",
+      "key": "cause.crowding",
+      "verified": false
+    },
+    "M102": {
+      "fi": "Matkustajan aiheuttama häiriö",
+      "key": "cause.passengerDisturbance",
+      "verified": false
+    },
+    "M103": {
+      "fi": "Matkustajan loukkaantuminen tai sairaskohtaus",
+      "key": "cause.passengerInjuredOrIll",
+      "verified": false
+    },
+    "M104": {
+      "fi": "Passi- ja tullitarkastus",
+      "key": "cause.borderControl",
+      "verified": false
+    },
+    "M105": {
+      "fi": "Vankien kuormaus ja purku",
+      "key": null
+    },
+    "M106": {
+      "fi": "Matkustajan avustaminen",
+      "key": "cause.assistingPassenger",
+      "verified": false
+    },
+    "M107": {
+      "fi": "Ovien sulkeminen",
+      "key": "cause.closingDoors",
+      "verified": false
+    },
+    "M108": {
+      "fi": "Matkustajien odotus raidemuutoksen vuoksi",
+      "key": "cause.waitingPlatformChange",
+      "verified": false
+    },
+    "M109": {
+      "fi": "Matkustajien odotus kalustomuutoksen vuoksi",
+      "key": null
+    },
+    "M110": {
+      "fi": "Muu syy pysähtymisajan ylitykselle",
+      "key": null
+    },
+    "M111": {
+      "fi": "Porttirahastus",
+      "key": null
+    },
+    "O401": {
+      "fi": "Suistuminen ratapihalla",
+      "key": "cause.derailment",
+      "verified": false
+    },
+    "O402": {
+      "fi": "Suistuminen linjalla",
+      "key": "cause.derailment",
+      "verified": false
+    },
+    "O403": {
+      "fi": "Tulipalot, metsäpalot",
+      "key": "cause.fire",
+      "verified": false
+    },
+    "O404": {
+      "fi": "Junan törmäys muuhun kalustoon",
+      "key": "cause.collision",
+      "verified": false
+    },
+    "O405": {
+      "fi": "Muu onnettomuus",
+      "key": null
+    },
+    "P101": {
+      "fi": "JKV / ERTMS-vika",
+      "key": null
+    },
+    "P102": {
+      "fi": "Baliisi",
+      "key": null
+    },
+    "P103": {
+      "fi": "Asetinlaite",
+      "key": null
+    },
+    "P104": {
+      "fi": "Suojastus",
+      "key": null
+    },
+    "P105": {
+      "fi": "Raidevirtapiiri",
+      "key": null
+    },
+    "P106": {
+      "fi": "Akselinlaskenta",
+      "key": null
+    },
+    "P107": {
+      "fi": "Kauko-ohjauksen rajapintaviat",
+      "key": null
+    },
+    "P108": {
+      "fi": "Opastin",
+      "key": "cause.signalFault",
+      "verified": false
+    },
+    "P109": {
+      "fi": "Vaihde",
+      "key": "cause.pointsFault",
+      "verified": false
+    },
+    "P110": {
+      "fi": "Tasoristeyslaitos",
+      "key": "cause.crossingFault",
+      "verified": false
+    },
+    "P111": {
+      "fi": "Avattava silta",
+      "key": "cause.bridgeFault",
+      "verified": false
+    },
+    "P112": {
+      "fi": "Tiedonsiirto",
+      "key": null
+    },
+    "P113": {
+      "fi": "Virransyöttö",
+      "key": "cause.powerFault",
+      "verified": false
+    },
+    "P114": {
+      "fi": "Laskumäkilaitteisto",
+      "key": null
+    },
+    "P115": {
+      "fi": "Tunnelitekniset järjestelmät",
+      "key": null
+    },
+    "P116": {
+      "fi": "Muut kuin radanpidon vastuulla olevat laiteviat",
+      "key": null
+    },
+    "P117": {
+      "fi": "Muut laiteviat",
+      "key": null
+    },
+    "P201": {
+      "fi": "Ongelma lähtötietojen toimittamisessa",
+      "key": null
+    },
+    "P202": {
+      "fi": "Tekninen vika lähtövalmiusilmoituksen tekemisessä",
+      "key": null
+    },
+    "P203": {
+      "fi": "Muu liikennöitsijän vastuulla oleva tietojärjestelmä- tai päätelaitevika",
+      "key": null
+    },
+    "P204": {
+      "fi": "Ulkopuolisen tahon vastuulla oleva tietojärjestelmähäiriö",
+      "key": null
+    },
+    "P205": {
+      "fi": "Liikenteenhallinnan järjestelmien konesalipalvelut",
+      "key": null
+    },
+    "P206": {
+      "fi": "Liikenteenhallinnan järjestelmien tietoliikennepalvelut",
+      "key": null
+    },
+    "P207": {
+      "fi": "Liikenteenhallinnan järjestelmien työasemat ja laitteet",
+      "key": null
+    },
+    "P208": {
+      "fi": "Integraatiopalvelu",
+      "key": null
+    },
+    "P209": {
+      "fi": "Liikenteenohjauksen tietojärjestelmät",
+      "key": null
+    },
+    "P210": {
+      "fi": "Kapasiteetinhallinnan tietojärjestelmät",
+      "key": null
+    },
+    "P211": {
+      "fi": "Radanpidolle ja liikennöitsijöille suunnatut tietojärjestelmät",
+      "key": null
+    },
+    "P212": {
+      "fi": "Kauko-ohjausjärjestelmä, ESKO",
+      "key": null
+    },
+    "P213": {
+      "fi": "Kauko-ohjausjärjestelmä, TAKO",
+      "key": null
+    },
+    "P214": {
+      "fi": "Kauko-ohjausjärjestelmä, KAKO",
+      "key": null
+    },
+    "P215": {
+      "fi": "Kauko-ohjausjärjestelmä, Mipron MiSO-järjestelmä",
+      "key": null
+    },
+    "P216": {
+      "fi": "Kauko-ohjausjärjestelmä, POKA",
+      "key": null
+    },
+    "P217": {
+      "fi": "Muut liikenteenohjauksen vastuulla olevat tietojärjestelmä- tai päätelaiteviat",
+      "key": null
+    },
+    "P301": {
+      "fi": "Kuumakäynti-ilmaisin vika / aiheeton hälytys",
+      "key": null
+    },
+    "P302": {
+      "fi": "Pyörävoimailmaisin vika / aiheeton hälytys",
+      "key": null
+    },
+    "P303": {
+      "fi": "Virrotinkamera vika / aiheeton hälytys",
+      "key": null
+    },
+    "P304": {
+      "fi": "Muut liikkuvan kaluston valvontalaitehäiriöt",
+      "key": null
+    },
+    "P401": {
+      "fi": "RAILI-palvelu",
+      "key": null
+    },
+    "P402": {
+      "fi": "Liikenteenohjauksen viestintävälineet",
+      "key": null
+    },
+    "P403": {
+      "fi": "Muut viestintälaite / -yhteysviat",
+      "key": null
+    },
+    "S101": {
+      "fi": "Laukaisu",
+      "key": null
+    },
+    "S102": {
+      "fi": "Tehon rajoitus",
+      "key": null
+    },
+    "S103": {
+      "fi": "Yleisen sähköverkon vika tai rajoitus",
+      "key": null
+    },
+    "S104": {
+      "fi": "Muu vika mm. virhetoiminto",
+      "key": null
+    },
+    "S201": {
+      "fi": "Sähköratarakenne",
+      "key": null
+    },
+    "S202": {
+      "fi": "Syöttöasema",
+      "key": null
+    },
+    "S203": {
+      "fi": "Erotusjakso",
+      "key": null
+    },
+    "S204": {
+      "fi": "Puu tms. sähköratarakenteissa",
+      "key": null
+    },
+    "S205": {
+      "fi": "Nostettava ajolanka",
+      "key": null
+    },
+    "S206": {
+      "fi": "Muu sähköratavika",
+      "key": null
+    },
+    "T101": {
+      "fi": "Roudasta johtuvat tilapäiset nopeusrajoitukset",
+      "key": null
+    },
+    "T102": {
+      "fi": "Muut suunnitellut tilapäiset nopeusrajoitukset",
+      "key": null
+    },
+    "T301": {
+      "fi": "Kiskoviat",
+      "key": "cause.trackFault",
+      "verified": false
+    },
+    "T302": {
+      "fi": "Vika ratarakenteessa",
+      "key": "cause.trackFault",
+      "verified": false
+    },
+    "T303": {
+      "fi": "Muu este (puu, lumieste tms. radalla)",
+      "key": "cause.trackObstruction",
+      "verified": false
+    }
+  }
+}

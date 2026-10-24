@@ -237,6 +237,7 @@ export const legStops = sqliteTable(
     trvTrainNumber: text('trv_train_number'),
     /** JSON array of Trafikverket deviation texts shown as notices / delay reasons. */
     deviations: text('deviations', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),
+    causes: text('causes'),
     /** Who reports this stop live: trafikverket | entur; null when nobody can (Denmark, SJ in Norway). */
     reportSource: text('report_source'),
   },

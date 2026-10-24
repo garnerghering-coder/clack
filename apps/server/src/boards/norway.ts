@@ -4,6 +4,7 @@
 import { delayMinutes } from '@clack/shared';
 import { jpQuery } from '../entur/client.js';
 import { cleanStopName } from '../import/gtfs-no.js';
+import { deviationTexts, enturCauses } from '../legs/causes.js';
 import { trainTypeFor } from '../legs/trainTypes.js';
 import type { StationCall } from '../search/timetable.js';
 import type { BoardRow, BoardType, PlatformMemory } from './board.js';
@@ -44,12 +45,7 @@ const BRAND: Record<string, string> = { VYG: 'vy', GOA: 'go-ahead-norge', FLT: '
 const time = (s: string | null) => (s ? Date.parse(s) : null);
 const minute = (ms: number) => Math.floor(ms / 60_000);
 
-/** Notices in English when Entur has them, otherwise in Norwegian. */
-function notices(c: JpBoardCall): string[] {
-  return c.situations.map((s) => (s.summary.find((x) => x.language === 'en') ?? s.summary[0])?.value).filter((v): v is string => !!v);
-}
-
-export function normalizeNorwayBoard(calls: JpBoardCall[], ctx: { type: BoardType; now: number; calls: StationCall[]; memory: PlatformMemory }): BoardRow[] {
+export function normalizeNorwayBoard(calls: JpBoardCall[], ctx: { type: BoardType; now: number; calls: StationCall[]; memory: PlatformMemory; language?: string }): BoardRow[] {
   const dep = ctx.type === 'departures';
   const out: BoardRow[] = [];
   for (const c of calls) {
@@ -75,6 +71,8 @@ export function normalizeNorwayBoard(calls: JpBoardCall[], ctx: { type: BoardTyp
     const operatorId = call?.operatorId ?? BRAND[c.serviceJourney.id.split(':')[0]!] ?? null;
     const product = call?.product ?? 'regional';
     const origin = c.serviceJourney.quays[0]?.name;
+    // Notices in the app's language when Entur wrote them, else English, else Norwegian (documented limit for Swedish).
+    const causes = enturCauses(c.situations, ctx.language);
     out.push({
       id,
       trainNumber: number,
@@ -86,7 +84,8 @@ export function normalizeNorwayBoard(calls: JpBoardCall[], ctx: { type: BoardTyp
       platform,
       platformChange: change,
       canceled: c.cancellation,
-      deviations: notices(c),
+      deviations: deviationTexts(causes),
+      causes,
       endpoints: dep ? [c.destinationDisplay?.frontText ?? ''].filter(Boolean) : origin ? [cleanStopName(origin)] : [],
       via: dep ? (c.destinationDisplay?.via ?? []).slice(0, 3) : [],
       operatorId,

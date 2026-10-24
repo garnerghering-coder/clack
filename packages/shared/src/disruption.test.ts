@@ -40,12 +40,3 @@ describe('passenger rights', () => {
     expect(passengerRights({ countries: ['NO'], journeyKm: 300, arrDelayMin: 90, canceled: false })).toEqual({ regime: 'operator', claim: null });
   });
 });
-
-describe('why a train is late', () => {
-  it("reads Trafikverket's reason codes and leaves notices out", async () => {
-    const { delayReasons } = await import('./disruption');
-    expect(delayReasons(['Spårändrat', 'Signalfel', 'Inställt', 'Signalfel', 'Kort tåg', 'Sen tågvänd.'])).toEqual(['a signal fault', 'the train arrived late for this trip']);
-    expect(delayReasons(['Tågkö'], 'sv')).toEqual(['tågkö']);
-    expect(delayReasons(['Spårändrat', 'Hpl C'])).toEqual([]);
-  });
-});

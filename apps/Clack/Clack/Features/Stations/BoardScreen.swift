@@ -227,11 +227,12 @@ private struct StationBoardRow: View {
         let op = row.operatorId.flatMap { app.operatorsById[$0] }
         let type = row.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let changed = BoardLogic.platformChanged(row, now: now)
+        let notes = l10n.causeNotes(row.allCauses)
         let line = BoardRowView<OperatorBadge>.Line(
             time: row.shown, sched: row.advertised, tz: tz, destination: row.endpoints.joined(separator: ", "),
             via: row.via.isEmpty ? nil : l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")]),
             service: Format.join([Format.service(row.productName ?? op?.name, row.trainNumber), type?.name]),
-            notes: row.deviations.isEmpty ? nil : Format.join(Array(row.deviations.prefix(2))),
+            notes: notes.isEmpty ? nil : Format.join(Array(notes.prefix(2))),
             platform: row.platform, platformFrom: changed ? (row.platformChange?.from ?? "") : nil,
             delay: row.estimated != nil || row.actual != nil ? row.delayMin : nil, canceled: row.canceled,
             done: row.done ? l10n.t(arrivals ? "board.arrived" : "board.departed") : nil, past: BoardLogic.isPast(row, now: now)
