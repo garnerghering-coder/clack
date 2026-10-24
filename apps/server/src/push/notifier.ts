@@ -2,11 +2,11 @@
 // Listens to the tracker, and every minute looks at the trips about to leave or running. What is due and what it says
 // are in rules.ts; this loads the facts, sends once per alert (push_log), and forgets phones Apple says are gone.
 import { and, asc, desc, eq, gt, inArray, lt, ne } from 'drizzle-orm';
-import { DEFAULT_SETTINGS, type Language, type Settings } from '@clack/shared';
+import { DEFAULT_SETTINGS, delayBand, type Language, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, users } from '../db/schema.js';
 import { liveBus, type LiveUpdate } from '../live/tracker.js';
-import { alertPayload, type ApnsClient } from './apns.js';
+import { alertPayload, backgroundPayload, WIDGET_PAYLOAD, type ApnsClient, type Environment } from './apns.js';
 import { change, departureLine, fromEvents, getOff, momentOf, reminder, type Alert, type Moment, type Prefs, type TripFacts } from './rules.js';
 import { t } from './text.js';
 
@@ -20,6 +20,48 @@ const STALE_SEC = 5 * 60;
 const HEARTBEAT_MS = 4 * MIN;
 /** An ended card stays on the Lock Screen this long. */
 const DISMISS_SEC = 10 * 60;
+
+/** At most one background push and one widget push per phone in this time, except for a cancellation. */
+export const FRESH_EVERY_MS = 15 * MIN;
+
+/** Why the app (or its widgets) should fetch again. */
+export type FreshReason = 'delay' | 'platform' | 'cancelled' | 'phase' | 'finished';
+
+/** What the app shows about a leg that a freshness push is about: its delay band, platforms, cancellation and phase. */
+export interface FreshSignature {
+  band: string;
+  depPlatform: string | null;
+  arrPlatform: string | null;
+  canceled: boolean;
+  phase: string;
+}
+
+export function freshSignature(L: Loaded, now: number): FreshSignature {
+  const f = L.facts;
+  return { band: delayBand(f.delayMin, f.canceled), depPlatform: f.depPlatform, arrPlatform: f.arrPlatform, canceled: f.canceled, phase: Notifier.moment(L, now).phase };
+}
+
+/** The most important thing that changed between two looks at a leg, if anything did. The first look is only a baseline. */
+export function freshReason(prev: FreshSignature | undefined, next: FreshSignature, lastInJourney: boolean): FreshReason | null {
+  if (!prev) return null;
+  if (next.canceled && !prev.canceled) return 'cancelled';
+  if (next.phase !== prev.phase && lastInJourney && next.phase === 'arrived') return 'finished';
+  if (next.depPlatform !== prev.depPlatform || next.arrPlatform !== prev.arrPlatform) return 'platform';
+  if (next.band !== prev.band) return 'delay';
+  if (next.phase !== prev.phase) return 'phase';
+  return null;
+}
+
+interface FreshJob {
+  kind: 'background' | 'widgets';
+  /** The phone (devices.token), what the throttle counts by. */
+  device: string;
+  /** Where the push goes: the phone's token, or its widget token. */
+  token: string;
+  environment: Environment;
+  legId: string;
+  reason: FreshReason;
+}
 
 /** What the Live Activity shows. Plain JSON numbers (ms since 1970), as Apple decodes the state with default coding. */
 export interface ActivityState {
@@ -91,6 +133,11 @@ type LegRow = typeof legs.$inferSelect;
 
 export class Notifier {
   private lastActivity = new Map<string, { words: string; full: string; at: number }>();
+  /** The last look at each tracked leg, for freshness pushes. In memory: after a restart the first look is a new baseline. */
+  private seen = new Map<string, { sig: FreshSignature; at: number }>();
+  /** When each phone last got a background (`background:<token>`) or widget (`widgets:<token>`) push, and what waits. */
+  private freshLast = new Map<string, number>();
+  private freshPending = new Map<string, FreshJob>();
 
   constructor(
     private db: Db,
@@ -218,6 +265,7 @@ export class Notifier {
     for (const a of fromEvents(L.facts, u.events, L.prefs, L.lang)) await this.deliver(L, a);
     await this.checks(L);
     await this.pushActivity(L);
+    await this.fresh(L);
   }
 
   /** Reminders, "get off soon", changes, and starting Live Activities: things that happen with the clock, not an event. */
@@ -250,8 +298,10 @@ export class Notifier {
           .filter((r) => withDevice.has(r.userId))
       : [];
     const cards = [...new Set(this.db.select({ legId: liveActivities.legId }).from(liveActivities).all().map((a) => a.legId))];
-    if (!due.length && !cards.length) return;
-    const loaded = this.loadMany([...due.map((r) => r.id), ...cards]);
+    for (const [legId, s] of this.seen) if (now - s.at > 6 * 60 * MIN) this.seen.delete(legId);
+    const loaded = due.length || cards.length ? this.loadMany([...due.map((r) => r.id), ...cards]) : new Map<string, Loaded>();
+    for (const L of loaded.values()) await this.fresh(L);
+    await this.flushFresh();
     for (const r of due) {
       const L = loaded.get(r.id);
       if (!L || !L.prefs.notify) continue;
@@ -285,6 +335,10 @@ export class Notifier {
   /** Apple says this phone is gone: forget it, and the cards that ran on it. */
   private forget(deviceToken: string) {
     this.db.delete(devices).where(eq(devices.token, deviceToken)).run();
+    for (const kind of ['background', 'widgets']) {
+      this.freshLast.delete(`${kind}:${deviceToken}`);
+      this.freshPending.delete(`${kind}:${deviceToken}`);
+    }
     for (const a of this.db.select({ token: liveActivities.token }).from(liveActivities).where(eq(liveActivities.deviceToken, deviceToken)).all()) this.lastActivity.delete(a.token);
     this.db.delete(liveActivities).where(eq(liveActivities.deviceToken, deviceToken)).run();
   }
@@ -321,6 +375,65 @@ export class Notifier {
     // Nothing got through (a network problem, not a dead phone): let a later tick try again.
     if (!delivered)
       this.db.delete(pushLog).where(and(eq(pushLog.legId, L.facts.legId), eq(pushLog.kind, a.kind), eq(pushLog.key, a.key))).run();
+  }
+
+  // ---------- Freshness: background and widget pushes ----------
+
+  /**
+   * A tracked leg changed in a way the app or its widgets show (delay band, platform, cancellation, phase, or the journey
+   * finished): wake the app with a background push, and tell WidgetKit to reload, on each of the person's phones.
+   */
+  private async fresh(L: Loaded) {
+    if (!this.apns) return;
+    const now = this.now();
+    const sig = freshSignature(L, now);
+    const prev = this.seen.get(L.facts.legId)?.sig;
+    this.seen.set(L.facts.legId, { sig, at: now });
+    const reason = freshReason(prev, sig, L.facts.lastInJourney);
+    if (!reason) return;
+    for (const d of this.devicesOf(L.userId)) {
+      const env = d.environment as Environment;
+      await this.freshSend({ kind: 'background', device: d.token, token: d.token, environment: env, legId: L.facts.legId, reason });
+      if (d.widgetToken) await this.freshSend({ kind: 'widgets', device: d.token, token: d.widgetToken, environment: env, legId: L.facts.legId, reason });
+    }
+  }
+
+  /** Sends now, or keeps the newest job for when the phone's 15 minutes are up. A cancellation goes at once. */
+  private async freshSend(job: FreshJob) {
+    if (!this.apns) return;
+    const now = this.now();
+    const key = `${job.kind}:${job.device}`;
+    const last = this.freshLast.get(key);
+    if (job.reason !== 'cancelled' && last !== undefined && now - last < FRESH_EVERY_MS) {
+      this.freshPending.set(key, job);
+      return;
+    }
+    this.freshPending.delete(key);
+    const r = await this.apns.send({
+      token: job.token,
+      environment: job.environment,
+      pushType: job.kind,
+      // Not 0: Apple may hold these until the phone can take them; one held is enough, and an hour old is still worth a refresh.
+      expiration: Math.floor(now / 1000) + 3600,
+      payload: job.kind === 'background' ? backgroundPayload({ legId: job.legId, reason: job.reason }) : WIDGET_PAYLOAD,
+    });
+    if (r.ok) this.freshLast.set(key, now);
+    else if (r.dead) {
+      if (job.kind === 'background') this.forget(job.device);
+      else this.db.update(devices).set({ widgetToken: null }).where(eq(devices.token, job.device)).run();
+    } else {
+      this.opts.log?.(`push: ${job.kind} to ${job.token.slice(0, 8)}… failed: ${r.status} ${r.reason ?? ''}`);
+      this.freshPending.set(key, job);
+    }
+  }
+
+  /** Every minute: the pushes held back by the 15 minutes (or a failure) whose time has come. */
+  private async flushFresh() {
+    const now = this.now();
+    for (const [key, job] of [...this.freshPending]) {
+      const last = this.freshLast.get(key);
+      if (last === undefined || now - last >= FRESH_EVERY_MS) await this.freshSend(job);
+    }
   }
 
   // ---------- Live Activities ----------

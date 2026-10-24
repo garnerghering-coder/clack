@@ -5,7 +5,7 @@ import { DEFAULT_SETTINGS } from '@clack/shared';
 import { openDb } from '../src/db/client.js';
 import { devices, journeys, legEvents, legs, liveActivities, liveState, pushLog, stations, users } from '../src/db/schema.js';
 import { ApnsClient, type Transport, type TransportRequest } from '../src/push/apns.js';
-import { Notifier } from '../src/push/notifier.js';
+import { freshReason, Notifier } from '../src/push/notifier.js';
 import type { LiveUpdate } from '../src/live/tracker.js';
 
 const { privateKey } = crypto.generateKeyPairSync('ec', { namedCurve: 'P-256' });
@@ -332,5 +332,114 @@ describe('Live Activities', () => {
     await w.notifier.tick();
     expect(w.db.select().from(liveActivities).all()).toHaveLength(0);
     expect(w.activity()).toHaveLength(0);
+  });
+});
+
+// ---------- Freshness: background and widget pushes ----------
+
+describe('freshness pushes', () => {
+  const WIDGET = 'f'.repeat(64);
+  const fresh = (w: ReturnType<typeof world>) => {
+    const of = (type: string) => w.sent.filter((r) => r.headers['apns-push-type'] === type);
+    return { bg: of('background'), widgets: of('widgets') };
+  };
+  const setup = (reply?: (r: TransportRequest) => Reply) => {
+    const w = world({ startToken: false, reply });
+    w.db.update(devices).set({ widgetToken: WIDGET }).run();
+    return w;
+  };
+
+  it('wakes the app and reloads the widgets when the delay band changes, not on the first look', async () => {
+    const w = setup();
+    await w.notifier.tick();
+    expect(fresh(w).bg).toHaveLength(0);
+    // No delay known → 4 min late: a new band (packages/shared delayBand).
+    w.db.update(legs).set({ arrDelayMin: 4 }).where(eq(legs.id, 'L1')).run();
+    w.clock.now += MIN_;
+    await w.notifier.tick();
+    const { bg, widgets } = fresh(w);
+    expect(bg).toHaveLength(1);
+    expect(bg[0]!.path).toBe(`/3/device/${TOKEN}`);
+    expect(bg[0]!.headers).toMatchObject({ 'apns-push-type': 'background', 'apns-priority': '5', 'apns-topic': 'com.example.Clack', 'apns-expiration': String(Math.floor(w.clock.now / 1000) + 3600) });
+    expect(JSON.parse(bg[0]!.body)).toEqual({ aps: { 'content-available': 1 }, clack: { legId: 'L1', reason: 'delay' } });
+    expect(widgets).toHaveLength(1);
+    expect(widgets[0]!.path).toBe(`/3/device/${WIDGET}`);
+    expect(widgets[0]!.host).toBe('api.sandbox.push.apple.com');
+    expect(widgets[0]!.headers['apns-topic']).toBe('com.example.Clack.push-type.widgets');
+    expect(widgets[0]!.headers['apns-priority']).toBeUndefined();
+    expect(JSON.parse(widgets[0]!.body)).toEqual({ aps: { 'content-changed': true } });
+    // More minutes in the same band: nothing new.
+    w.db.update(legs).set({ arrDelayMin: 9 }).where(eq(legs.id, 'L1')).run();
+    w.clock.now += MIN_;
+    await w.notifier.tick();
+    expect(fresh(w).bg).toHaveLength(1);
+  });
+
+  it('sends at most one per phone in 15 minutes, holding the newest for later', async () => {
+    const w = setup();
+    await w.notifier.tick();
+    w.db.update(legs).set({ arrDelayMin: 20 }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.tick();
+    const t0 = w.clock.now;
+    expect(fresh(w).bg).toHaveLength(1);
+    w.clock.now = t0 + 5 * MIN_;
+    w.db.update(legs).set({ depPlatform: '7' }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.tick();
+    w.clock.now = t0 + 10 * MIN_;
+    await w.notifier.tick();
+    expect(fresh(w).bg).toHaveLength(1);
+    expect(fresh(w).widgets).toHaveLength(1);
+    w.clock.now = t0 + 15 * MIN_;
+    await w.notifier.tick();
+    const { bg, widgets } = fresh(w);
+    expect(bg).toHaveLength(2);
+    expect(JSON.parse(bg[1]!.body).clack).toEqual({ legId: 'L1', reason: 'platform' });
+    expect(widgets).toHaveLength(2);
+  });
+
+  it('sends a cancellation at once, whatever the throttle', async () => {
+    const w = setup();
+    await w.notifier.tick();
+    w.db.update(legs).set({ arrDelayMin: 20 }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.tick();
+    w.clock.now += 2 * MIN_;
+    w.db.update(legs).set({ canceled: true }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.onUpdate({ legId: 'L1', live: null as unknown as LiveUpdate['live'], events: [{ type: 'cancelled', ts: w.clock.now, payload: {} }] });
+    const { bg, widgets } = fresh(w);
+    expect(bg.map((r) => JSON.parse(r.body).clack.reason)).toEqual(['delay', 'cancelled']);
+    expect(widgets).toHaveLength(2);
+  });
+
+  it('says when the journey is finished', async () => {
+    const w = setup();
+    w.clock.now = NOW + 95 * MIN_;
+    w.db.update(legs).set({ actualDep: new Date(NOW + 20 * MIN_), actualArr: new Date(NOW + 53 * MIN_) }).where(eq(legs.id, 'L1')).run();
+    w.db.update(legs).set({ actualDep: new Date(NOW + 70 * MIN_) }).where(eq(legs.id, 'L2')).run();
+    await w.notifier.tick();
+    w.clock.now = NOW + 100 * MIN_;
+    w.db.update(legs).set({ actualArr: new Date(NOW + 100 * MIN_) }).where(eq(legs.id, 'L2')).run();
+    await w.notifier.onUpdate({ legId: 'L2', live: null as unknown as LiveUpdate['live'], events: [{ type: 'arrived', ts: w.clock.now, payload: { at: w.clock.now } }] });
+    expect(fresh(w).bg.map((r) => JSON.parse(r.body).clack)).toContainEqual({ legId: 'L2', reason: 'finished' });
+  });
+
+  it('forgets a dead widget address but keeps the phone', async () => {
+    const w = setup((r) => (r.path.endsWith(WIDGET) ? { status: 410, body: '{"reason":"Unregistered"}' } : { status: 200 }));
+    await w.notifier.tick();
+    w.db.update(legs).set({ arrDelayMin: 20 }).where(eq(legs.id, 'L1')).run();
+    await w.notifier.tick();
+    const d = w.db.select().from(devices).get()!;
+    expect(d.token).toBe(TOKEN);
+    expect(d.widgetToken).toBeNull();
+  });
+
+  it('works out the reason in order of importance', () => {
+    const base = { band: 'on_time', depPlatform: '5', arrPlatform: null, canceled: false, phase: 'scheduled' };
+    expect(freshReason(undefined, base, true)).toBeNull();
+    expect(freshReason(base, base, true)).toBeNull();
+    expect(freshReason(base, { ...base, band: 'cancelled', canceled: true, phase: 'cancelled' }, true)).toBe('cancelled');
+    expect(freshReason(base, { ...base, phase: 'arrived' }, true)).toBe('finished');
+    expect(freshReason(base, { ...base, phase: 'arrived' }, false)).toBe('phase');
+    expect(freshReason(base, { ...base, depPlatform: '6', band: 'late' }, true)).toBe('platform');
+    expect(freshReason(base, { ...base, band: 'late', phase: 'leaveSoon' }, true)).toBe('delay');
   });
 });

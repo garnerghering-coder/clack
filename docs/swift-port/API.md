@@ -796,6 +796,38 @@ All go to topic `<bundle id>.push-type.liveactivity`, `apns-push-type: liveactiv
 `attributes.legId` has arrived, which would kill the card the server just moved on); register cards with
 `deviceToken`; read the new `content-state` leg fields.
 
+#### Freshness pushes: background and widgets (`push/notifier.ts` `fresh`)
+The server looks at every tracked leg each minute and on each tracker update. When one of these changes since its last
+look, it sends both pushes below to each of the person's phones: the delay band (`delayBand` in
+`packages/shared/src/delay.ts`: on_time, slight, late, very_late, cancelled, unknown), the departure or arrival platform,
+cancellation, or the Live Activity `phase`. The first look at a leg (also after a server restart) is only a baseline.
+
+`reason` is the most important change: `cancelled` > `finished` (the journey's last leg arrived) > `platform` >
+`delay` > `phase`.
+
+**Throttle:** at most one background push and one widget push per phone per 15 minutes. A change inside the window is
+held (the newest one wins) and sent when the window ends. A cancellation goes at once. The throttle is in memory, so a
+restart forgets it. Apple's guidance for background pushes is no more than two or three an hour; 15 minutes allows four.
+
+- **Background push** to the phone's `token`: `apns-push-type: background`, `apns-topic: <bundle id>`,
+  `apns-priority: 5`, `apns-expiration: now+3600`. Payload
+  `{ "aps": { "content-available": 1 }, "clack": { "legId": "<leg id>", "reason": "delay" | "platform" | "cancelled" | "phase" | "finished" } }`.
+  The app must have the Background Modes capability with "Remote notifications", and implement
+  `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)` (or the async form): read `clack.legId`, fetch
+  `GET /api/legs/:id` (and the journey), update its cache and the App Group store the widgets read, call
+  `WidgetCenter.shared.reloadAllTimelines()`, and finish within 30 seconds. iOS delivers these when it likes, may hold
+  them (it keeps only the newest), and drops them if the app was force-quit.
+- **Widget push** to the device's `widgetToken`: `apns-push-type: widgets`, `apns-topic: <bundle id>.push-type.widgets`,
+  no `apns-priority` (as in Apple's example), `apns-expiration: now+3600`. Payload `{ "aps": { "content-changed": true } }`.
+  WidgetKit then calls the widgets' timeline providers; the providers must fetch from the server (or read the App Group
+  store) themselves, as the push carries no data. The app must: add the Push Notifications capability to the
+  `ClackWidgetsExtension` target, implement a `WidgetPushHandler` whose `pushTokenDidChange(_:widgets:)` gets the token
+  (hex), add `.pushHandler(...)` to each widget configuration, and get the token to the server as `widgetToken` in
+  `PUT /api/devices` with the phone's `token` (from the extension itself, or through the App Group to the app). The
+  server sends to it with the phone's `environment` (unverified that the extension's push environment always matches
+  the app's). A dead widget token is cleared, the phone kept. WidgetKit budgets these pushes and delivers them
+  opportunistically; they add to timeline reloads, they don't replace them.
+
 ---
 
 ## 3. Streaming
