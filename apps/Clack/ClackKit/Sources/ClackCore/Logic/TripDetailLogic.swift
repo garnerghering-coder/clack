@@ -61,6 +61,63 @@ public nonisolated enum TripDetailLogic {
         fullRoute ? stops : stops.filter { $0.role != .before && $0.role != .after }
     }
 
+    /// The stops the trip page shows at each stage (owner, 2026-10-24: show what matters now). Before you leave: where
+    /// you get on and off. On the train: where you got on, then from the stop before the next one to where you get off,
+    /// so the train's place is in view. After: every stop you rode, with its times. "Show full route" shows the whole
+    /// trip, before and after your stops too. A ride of two stops is always shown whole.
+    public static func timelineStops(_ stops: [LegStop], stage: Stage, shown: LiveStateRow?, fullRoute: Bool) -> [LegStop] {
+        if fullRoute { return stops }
+        let ridden = stops.filter { $0.role.isRidden }
+        guard ridden.count > 2 else { return ridden.isEmpty ? stops : ridden }
+        switch stage {
+        case .before:
+            return ridden.filter { $0.role == .board || $0.role == .alight }
+        case .during:
+            guard let nextId = shown?.nextStopId,
+                  let next = ridden.indices.dropFirst().first(where: { ridden[$0].stationId == nextId }) else { return ridden }
+            let start = max(1, next - 1)
+            return [ridden[0]] + ridden[start...]
+        case .after:
+            return ridden
+        }
+    }
+
+    /// The next stop is where you get off: the page says so.
+    public static func getOffNext(_ stops: [LegStop], shown: LiveStateRow?, stage: Stage) -> Bool {
+        guard stage == .during, let nextId = shown?.nextStopId, let alight = stops.first(where: { $0.role == .alight }) else { return false }
+        return alight.stationId == nextId
+    }
+
+    /// Which sections a trip's page has at a stage, top to bottom (the parts that are only there when they have
+    /// something, such as a disruption, decide for themselves). Everything else about the train is in "About this train".
+    public enum Section: Hashable, Sendable {
+        /// The countdown and platform in one line, and where the train is when it is on its way to you.
+        case countdown
+        /// Journey risk: only before.
+        case risk
+        /// Progress, next stop, "get off" and freshness.
+        case live
+        /// "Arrived 10:55, +4", the ride check, the Passport effect and why it was late.
+        case result
+        case times
+        case stops
+        case connections
+        /// "Directions to <origin>": only before.
+        case directions
+        /// "Get alerts for this train?": only before, once.
+        case alertsPrompt
+        case about
+        case actions
+    }
+
+    public static func sections(_ stage: Stage) -> [Section] {
+        switch stage {
+        case .before: [.countdown, .risk, .times, .directions, .alertsPrompt, .stops, .connections, .about, .actions]
+        case .during: [.live, .times, .stops, .connections, .about, .actions]
+        case .after: [.result, .stops, .about, .actions]
+        }
+    }
+
     /// The time shown for a stop and the real one: the board stop uses its departure, the others their arrival.
     public struct StopTimes: Equatable, Sendable {
         public var sched: Double?

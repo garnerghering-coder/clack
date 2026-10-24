@@ -48,6 +48,8 @@ struct RouteMapView: View {
     var topInset: CGFloat = 0
     /// Space the bottom controls keep from the bottom edge (the sheet that overlaps a trip's map).
     var bottomInset: CGFloat = 0
+    /// Follow the train from the start (you're on it); switching on later starts following too. Dragging stops it.
+    var followTrain = false
 
     @State private var handle = MapHandle()
     @State private var showRail: Bool
@@ -57,7 +59,7 @@ struct RouteMapView: View {
     init(
         color: String, route: [LatLon], context: [[LatLon]] = [], stops: [MapStop], animate: Bool = false, interactive: Bool = true,
         controls: Bool = true, railNetwork: Bool = false, train: MapTrain? = nil, fitTrain: Bool = false, progress: Double? = nil, label: String? = nil,
-        topInset: CGFloat = 0, bottomInset: CGFloat = 0
+        topInset: CGFloat = 0, bottomInset: CGFloat = 0, followTrain: Bool = false
     ) {
         self.color = color
         self.route = route
@@ -73,7 +75,9 @@ struct RouteMapView: View {
         self.label = label
         self.topInset = topInset
         self.bottomInset = bottomInset
+        self.followTrain = followTrain
         _showRail = State(initialValue: railNetwork)
+        _follow = State(initialValue: followTrain && train != nil)
     }
 
     var body: some View {
@@ -127,6 +131,8 @@ struct RouteMapView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(label ?? "")
         .task { basemap = await app.mapHasBasemap() }
+        // You got on (or the train's position came in): follow it, once; dragging the map stops it as before.
+        .onChange(of: followTrain && train != nil) { _, on in if on { follow = true } }
     }
 }
 
