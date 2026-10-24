@@ -24,24 +24,30 @@ public nonisolated enum TokenUpdate: Equatable, Sendable {
 public nonisolated struct DeviceRegistration: Encodable, Equatable, Sendable {
     public var token: String
     public var environment: String
+    /// The trip card's push-to-start address (iOS 17.2+).
     public var startToken: TokenUpdate
+    /// WidgetKit's push address for this phone's widgets (iOS 26+).
+    public var widgetToken: TokenUpdate
 
-    public init(token: String, environment: String, startToken: TokenUpdate = .keep) {
+    public init(token: String, environment: String, startToken: TokenUpdate = .keep, widgetToken: TokenUpdate = .keep) {
         self.token = token
         self.environment = environment
         self.startToken = startToken
+        self.widgetToken = widgetToken
     }
 
-    private enum CodingKeys: String, CodingKey { case token, environment, startToken }
+    private enum CodingKeys: String, CodingKey { case token, environment, startToken, widgetToken }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(token, forKey: .token)
         try container.encode(environment, forKey: .environment)
-        switch startToken {
-        case .keep: break
-        case .clear: try container.encodeNil(forKey: .startToken)
-        case .set(let value): try container.encode(value, forKey: .startToken)
+        for (update, key) in [(startToken, CodingKeys.startToken), (widgetToken, .widgetToken)] {
+            switch update {
+            case .keep: break
+            case .clear: try container.encodeNil(forKey: key)
+            case .set(let value): try container.encode(value, forKey: key)
+            }
         }
     }
 }
