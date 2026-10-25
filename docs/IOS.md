@@ -18,12 +18,25 @@ All native Swift, in the same Xcode project.
   cancellations and short-turns (time-sensitive), changes between trains ("arrive platform 3, leave platform 5, 11 min
   to spare", tight or likely missed), "get off soon", and a welcome at the end of a whole journey. A `push_log` table
   keeps any alert from going out twice. Texts are in English and Swedish (`push/text.ts`).
-- The app (`App/Notifications.swift`, Settings > Alerts) asks iOS for permission only when the person turns alerts on,
-  tells the server the phone's Apple address (`PUT /api/devices`; removed with Delete my data) and opens the trip
-  when an alert is tapped.
-- The trip card (Live Activity: `App/LiveActivities.swift` and the `ClackWidgets` extension) shows the route, delay,
-  next stop, platform and a line along the way, on the Lock Screen and in the Dynamic Island. The server updates it
-  by push and, on iOS 17.2+, can start it itself half an hour before departure. Without push the app starts it.
+- The app (`App/Notifications.swift`) asks for permission at the end of the welcome (owner, 2026-10-25), or once at
+  launch for someone who had Clack before with alerts off (`FirstRun.showsAlertsIntro`); Settings > Alerts and one card
+  on an upcoming trip are the later chances. It tells the server the phone's Apple address (`PUT /api/devices`;
+  removed with Delete my data) and opens the trip when an alert is tapped. Until 2026-10-25 nobody had turned alerts
+  on, so no phone was registered and nothing was ever sent; checked end to end since (reminder delivered).
+- The trip card (Live Activity: `App/LiveActivities.swift` and the `ClackWidgets` extension) follows one journey on the
+  Lock Screen and in the Dynamic Island. When it comes and goes:
+  - **Starts** 30 minutes before the journey's first train leaves: by push from the server (iOS 17.2+, the app closed),
+    or by the app if it is open then (or the train is already running). A card swiped away doesn't come back.
+  - **Moves** by the server's push (at most once a minute, a heartbeat every 4 min). While the app is open it also
+    updates the card itself, unless a push arrived in the last two minutes; it says "Estimated" when nothing new has
+    come for 5 minutes (the line and countdowns keep running by themselves).
+  - **Ends** when the journey is over: 10 minutes after the last arrival it leaves the Lock Screen; a cancelled train
+    without a replacement ends it too.
+  - **What it says**, by moment (`TripCard.swift`, same rules as the server's `momentOf`): far off, the departure time;
+    *Leaving soon* (30 min) with the platform; *Boarding* with platform and seat; on the way, the next stop and the line
+    filling between the two times; *Get off at X* with a countdown (last 10 min); at a change, *Change at X*, the next
+    platform and the countdown to the next train; at the end, *Welcome to X* with the arrival time and delay;
+    *Cancelled* with the struck time. A platform change in the last 10 minutes shows first, in yellow.
 - The capabilities Push Notifications, Time Sensitive Notifications and the App Group `group.com.garnerghering.Clack`
   are in `Clack.entitlements` (the paid Apple Developer team is active). Debug builds use Apple's push sandbox,
   TestFlight and App Store builds production; the app tells the server which.

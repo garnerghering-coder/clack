@@ -13,7 +13,8 @@ import Foundation
 /// - from launch (also a launch in the background, which is how iOS hands over a card the server started), watches every
 ///   card and gives the server each one's update address, with this phone's own address;
 /// - starts a card for a journey that is about to leave (or running) while the app is open, if it has none yet;
-/// - keeps a card that has no push address (no push entitlement) up to date itself while the app is open;
+/// - keeps every card up to date itself while the app is open, unless the server has moved it in the last two minutes
+///   (a card with a push address used to wait for the server alone, and froze when no push came);
 /// - ends cards whose journey is over. The rules are in ClackCore (`TripCard`), the same as the server's.
 @MainActor
 final class LiveActivityManager {
@@ -25,6 +26,11 @@ final class LiveActivityManager {
     private var pushTokens = [String: String]()
     /// What was last sent for each card, so it isn't sent again.
     private var reported = [String: String]()
+    /// The state the app last gave each card, and when a different one (the server's push) last arrived.
+    private var localState = [String: TripCardState]()
+    private var serverUpdatedAt = [String: Date]()
+    /// How long the app leaves a card to the server after the server's last push.
+    private static let serverQuiet: TimeInterval = 120
 
     /// Journeys that have had a card on this phone, so a card swiped away doesn't come back (as on the server).
     private static let startedKey = "clack.tripCardJourneys"
@@ -73,6 +79,12 @@ final class LiveActivityManager {
         if !sample { remember(activity.attributes.card(activity.content.state).journeyKey) }
         if let token = activity.pushToken { pushTokens[activity.id] = hexToken(token) }
         Task {
+            // A state the app didn't give the card came from the server's push.
+            for await content in activity.contentUpdates where content.state != localState[activity.id] {
+                serverUpdatedAt[activity.id] = .now
+            }
+        }
+        Task {
             for await data in activity.pushTokenUpdates {
                 pushTokens[activity.id] = hexToken(data)
                 await report(activity)
@@ -83,6 +95,8 @@ final class LiveActivityManager {
                 if let token = pushTokens[activity.id], !sample, let client = client?() { try? await client.forgetActivity(token) }
                 pushTokens[activity.id] = nil
                 reported[activity.id] = nil
+                localState[activity.id] = nil
+                serverUpdatedAt[activity.id] = nil
                 observing.remove(activity.id)
                 break
             }
@@ -124,14 +138,23 @@ final class LiveActivityManager {
             let state = leg.flatMap { TripCard.state(for: $0, legs: legs, now: now) }
             if TripCard.isFinished(card, legs: legs) {
                 await activity.end(state.map { ActivityContent(state: $0, staleDate: nil) }, dismissalPolicy: .after(.now + 600))
-            } else if activity.pushToken == nil, let state, state != activity.content.state {
-                // No push for this card: the app is the only one who can move it.
+            } else if let state, state != activity.content.state || activity.content.staleDate.map({ $0 < .now.addingTimeInterval(120) }) == true,
+                      Self.appMoves(hasPush: activity.pushToken != nil, serverAt: serverUpdatedAt[activity.id]) {
+                // The app's own update: also keeps the card from going stale while the app has fresh times.
+                localState[activity.id] = state
                 await activity.update(ActivityContent(state: state, staleDate: Date(timeIntervalSinceNow: 300)))
             }
         }
         guard enabled, ActivityAuthorizationInfo().areActivitiesEnabled else { return }
         let running = current.map { $0.attributes.card($0.content.state) }
         for leg in TripCard.toStart(legs, running: running, started: started, now: now) { start(leg, legs: legs, now: now) }
+    }
+
+    /// Whether the app should move a card now: always without a push address; with one, only when the server has been
+    /// quiet for two minutes (its pushes carry the same rules, so the two never disagree for long).
+    static func appMoves(hasPush: Bool, serverAt: Date?, now: Date = .now) -> Bool {
+        guard hasPush, let serverAt else { return true }
+        return now.timeIntervalSince(serverAt) > serverQuiet
     }
 
     /// Starts a card for a leg, with push when it can (the server then keeps it moving), else without (`push` false).
@@ -158,6 +181,7 @@ final class LiveActivityManager {
             push = false
         }
         remember(TripCard.journeyKey(leg))
+        localState[activity.id] = state
         watch(activity)
         return (activity, push)
     }

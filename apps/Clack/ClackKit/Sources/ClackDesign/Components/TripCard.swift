@@ -16,8 +16,9 @@ import SwiftUI
 ///
 /// Fitting (owner, 2026-10-24: "we should really try not to have text cutting off"; Apple, Human Interface Guidelines,
 /// Live Activities, "Use consistent margins and concentric placement" and the iOS dimensions table): the island is black
-/// with rounded ends, so nothing is drawn near its edge. The expanded island gets wider margins than the default
-/// (`TripIsland.expandedMargins`), the compact sides hold content no taller than `TripIsland.compactContent`, the ring
+/// with rounded ends, so nothing is drawn near its edge. The expanded island uses the system's margins and holds two rows
+/// under the camera (2026-10-25: three rows with wider margins were cropped), the compact sides hold content no taller
+/// than `TripIsland.compactContent`, the ring
 /// draws its stroke inside its own frame, and the minimal and the limited-width compact views fit Apple's 28 pt circle.
 /// Words that could run long have a shorter form (`ViewThatFits`), and scale down to 0.75 at most as a last resort.
 
@@ -114,10 +115,9 @@ public struct TripCardFace {
 
 /// The island's sizes and margins, in points.
 public enum TripIsland {
-    /// The expanded island's content margins: wider than the default so nothing reaches into the rounded ends (Apple:
-    /// "Keep content compact and snug within a margin that's concentric to the outer edge"). With an end radius of about
-    /// 44 pt, a line box that starts 8 pt below the top edge has to be at least 19 pt in from the side to clear the curve.
-    public static let expandedMargins = EdgeInsets(top: 8, leading: 20, bottom: 16, trailing: 20)
+    /// About the system's own expanded margins, for drawing the island in the Debug gallery (the real island applies
+    /// the system's).
+    public static let expandedMargins = EdgeInsets(top: 6, leading: 18, bottom: 14, trailing: 18)
     /// The tallest thing a compact side or the minimal view holds: the compact island is 36.67 pt high with round ends,
     /// and Apple asks for the compact and minimal views to fit a 28 pt circle when the island is narrow.
     public static let compactContent: CGFloat = 20
@@ -317,7 +317,19 @@ public struct TripCardLockScreen: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                FitText(card.route, .boardDestination).layoutPriority(1)
+                switch card.phase {
+                case "arrived":
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(Ink.onTimeInk).accessibilityHidden(true)
+                    FitText(card.l10n.t("tripCard.welcome", ["station": card.to]), .boardDestination).layoutPriority(1)
+                case "changing":
+                    LucideIcon(name: "repeat", size: 16).foregroundStyle(Ink.accentInk)
+                    FitText(card.l10n.t("tripCard.changeAt", ["station": card.to]), .boardDestination).layoutPriority(1)
+                case "getOffSoon":
+                    LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.accentInk)
+                    FitText(card.l10n.t("tripCard.getOffAt", ["station": card.to]), .boardDestination).layoutPriority(1)
+                default:
+                    FitText(card.route, .boardDestination).layoutPriority(1)
+                }
                 Spacer(minLength: 0)
                 if let train = card.train { Text(train).clack(.cardTrain).foregroundStyle(Ink.text2).lineLimit(1).fixedSize() }
             }
@@ -471,13 +483,17 @@ public struct TripIslandCompactTrailing: View {
         } else {
             switch card.phase {
             case "leaveSoon", "boarding":
-                let p = card.state.platform
-                // "Pl 5" when it fits, else the number alone.
-                ViewThatFits(in: .horizontal) {
-                    if card.phase == "leaveSoon", let p {
-                        Text(card.platformShort(p)).clack(.islandValue).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
+                if let p = card.state.platform {
+                    // "Pl 5" when it fits, else the number alone.
+                    ViewThatFits(in: .horizontal) {
+                        if card.phase == "leaveSoon" {
+                            Text(card.platformShort(p)).clack(.islandValue).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
+                        }
+                        fit(p, Ink.accentInk)
                     }
-                    fit(p ?? Format.unknown, Ink.accentInk)
+                } else {
+                    // No platform announced yet: the departure time rather than a dash.
+                    TimeText(text: card.departs, card: card)
                 }
             case "approaching": TimeText(text: card.time(card.state.nextStopAt ?? card.state.departAt, tz: card.fromTz), card: card)
             case "enRoute": TimeText(text: card.arrives, card: card)
@@ -557,7 +573,7 @@ public struct TripIslandExpandedTrailing: View {
     @ViewBuilder private var content: some View {
         switch card.phase {
         case "changing":
-            FitText(card.platform(card.state.changePlatform ?? Format.unknown), .delay, ink: Ink.accentInk)
+            if let at = card.state.changeAt { Countdown(to: at) }
         case "getOffSoon":
             Countdown(to: card.state.nextStopAt ?? card.state.arriveAt ?? card.nowMs)
         case "enRoute":
@@ -572,8 +588,10 @@ public struct TripIslandExpandedTrailing: View {
     }
 }
 
-/// Under the camera: the moment and the delay with where you're going (or the next train's countdown at a change), the
-/// line, and the times at each end.
+/// Under the camera, two rows at most so the island never crops them (owner, 2026-10-25), with a look for each moment
+/// of the trip: before and on the train, the moment and delay over the line between the two times; getting off, where
+/// and how long; a change, where, the next platform and the countdown to the next train; arrived, a welcome; cancelled,
+/// the struck departure.
 public struct TripIslandExpandedBottom: View {
     let card: TripCardFace
     let stale: Bool
@@ -584,26 +602,99 @@ public struct TripIslandExpandedBottom: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        Group {
+            switch card.phase {
+            case "arrived": arrived
+            case "cancelled": cancelled
+            case "changing": changing
+            case "getOffSoon": getOff
+            default: travelling
+            }
+        }
+        // A little in from the island's rounded bottom corners.
+        .padding(.horizontal, 4)
+        .padding(.bottom, 2)
+    }
+
+    /// The times at each end with the line between them, in one row.
+    private var timeline: some View {
+        HStack(spacing: 8) {
+            Text(card.departs).fixedSize()
+            RouteLine(card: card)
+            Text(card.arrives).fixedSize()
+        }
+        .clack(.islandValue).monospacedDigit().foregroundStyle(Ink.text2)
+    }
+
+    private var travelling: some View {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                if let word = card.word { FitText(word.text, .delay, ink: word.ink).layoutPriority(2) }
-                Delay(card: card)
+                StatusRow(card: card).layoutPriority(2)
                 Spacer(minLength: 4)
-                if card.phase == "changing", let at = card.state.changeAt {
-                    Countdown(to: at, colour: Ink.text)
+                if stale {
+                    Text(card.l10n.t("tripCard.estimated")).clack(.caption).italic().foregroundStyle(Ink.text3).lineLimit(1).fixedSize()
                 } else {
                     FitText(card.to, .buttonSmall).layoutPriority(1)
                 }
             }
-            RouteLine(card: card)
-            HStack(spacing: 8) {
-                Text(card.departs).fixedSize()
+            timeline
+        }
+    }
+
+    private var getOff: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Glyph(name: "map-pin")
+                FitText(card.l10n.t("tripCard.getOffAt", ["station": card.to]), .alertTitle).layoutPriority(1)
                 Spacer(minLength: 0)
-                if stale { Text(card.l10n.t("tripCard.estimated")).clack(.caption).italic().lineLimit(1).minimumScaleFactor(0.75) }
-                Spacer(minLength: 0)
-                Text(card.arrives).fixedSize()
             }
-            .clack(.islandValue).monospacedDigit().foregroundStyle(Ink.text2)
+            timeline
+        }
+    }
+
+    private var changing: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Glyph(name: "repeat")
+                FitText(card.l10n.t("tripCard.changeAt", ["station": card.to]), .alertTitle).layoutPriority(1)
+                Spacer(minLength: 0)
+            }
+            HStack(spacing: 8) {
+                if let p = card.state.changePlatform {
+                    Text(verbatim: "→ \(card.platform(p))").clack(.delay).foregroundStyle(Ink.accentInk).lineLimit(1).fixedSize()
+                }
+                Spacer(minLength: 0)
+                if let at = card.state.changeAt {
+                    Text(card.l10n.t("tripCard.nextLeaves", ["time": card.time(at, tz: card.toTz)]))
+                        .clack(.islandValue).monospacedDigit().foregroundStyle(Ink.text2).lineLimit(1).fixedSize()
+                }
+            }
+        }
+    }
+
+    private var arrived: some View {
+        HStack(alignment: .center, spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 26, weight: .semibold))
+                .foregroundStyle(Ink.onTimeInk)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                FitText(card.l10n.t("tripCard.welcome", ["station": card.to]), .alertTitle)
+                HStack(spacing: 6) {
+                    Text(card.l10n.t("tripCard.arrivedAt", ["time": card.arrives])).clack(.stopName).foregroundStyle(Ink.text2).lineLimit(1)
+                    DelayText(delay: card.state.delayMin, canceled: false)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+    }
+
+    private var cancelled: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Glyph(name: "x", colour: Ink.veryLateInk)
+            FitText(card.l10n.t("delay.cancelled"), .alertTitle, ink: Ink.veryLateInk)
+            Spacer(minLength: 4)
+            Text(card.departs).clack(.islandValue).monospacedDigit().strikethrough().foregroundStyle(Ink.text2).fixedSize()
         }
     }
 }

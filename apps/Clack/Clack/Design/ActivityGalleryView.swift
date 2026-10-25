@@ -22,6 +22,12 @@ struct ActivityGalleryView: View {
     @State private var long = CommandLine.arguments.contains("-long")
     @State private var seat = CommandLine.arguments.contains("-seat")
 
+    private static let from: Int = {
+        let args = CommandLine.arguments
+        guard let i = args.firstIndex(of: "-galleryFrom"), args.indices.contains(i + 1) else { return 0 }
+        return Int(args[i + 1]) ?? 0
+    }()
+
     /// The camera cutout in the island (about 125 x 37 pt on the Pro phones).
     private let camera = CGSize(width: 125, height: 36.67)
     /// How far in from the island's outer end the system puts a compact side's content (an estimate: not published).
@@ -32,7 +38,8 @@ struct ActivityGalleryView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Toggle("Long station names", isOn: $long)
                 Toggle("Car and seat", isOn: $seat)
-                ForEach(TestAlertsModel.Moment.allCases, id: \.self) { m in
+                // `-galleryFrom <n>` starts at the n-th moment, to look at one without scrolling.
+                ForEach(Array(TestAlertsModel.Moment.allCases.dropFirst(Self.from)), id: \.self) { m in
                     moment(m)
                 }
             }
@@ -95,11 +102,6 @@ struct ActivityGalleryView: View {
         .background(alignment: .top) { cameraShape.padding(.top, 0) }
         .background(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 44, style: .continuous))
-        .overlay(alignment: .bottomTrailing) { heightNote }
-    }
-
-    private var heightNote: some View {
-        Text(verbatim: "≤ 160").clack(.captionUpper).foregroundStyle(Ink.text3).padding(4)
     }
 
     private var cameraShape: some View {

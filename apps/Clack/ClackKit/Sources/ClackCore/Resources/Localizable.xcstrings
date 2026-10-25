@@ -16234,6 +16234,23 @@
         }
       }
     },
+    "tripCard.arrivedAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrived {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framme {{time}}"
+          }
+        }
+      }
+    },
     "tripCard.arrives" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -16285,6 +16302,23 @@
         }
       }
     },
+    "tripCard.changeAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change at {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Byte vid {{station}}"
+          }
+        }
+      }
+    },
     "tripCard.changing" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -16315,6 +16349,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uppskattat"
+          }
+        }
+      }
+    },
+    "tripCard.getOffAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get off at {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliv av vid {{station}}"
           }
         }
       }
@@ -16387,6 +16438,23 @@
         }
       }
     },
+    "tripCard.nextLeaves" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leaves {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgår {{time}}"
+          }
+        }
+      }
+    },
     "tripCard.platform" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -16451,6 +16519,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "{{from}} → {{to}}"
+          }
+        }
+      }
+    },
+    "tripCard.welcome" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välkommen till {{station}}"
           }
         }
       }
