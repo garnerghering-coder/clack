@@ -114,9 +114,9 @@ medium, large, on the holographic foil), Departures (medium, large; the station 
 train or a station from a link beyond these.
 
 **Sharing a journey** (owner, 2026-10-25). "Share journey" in a trip's "…" menu and on the journey page makes a link,
-`https://clack-garner.duckdns.org/j/<token>` (`POST /api/share/journey`), and opens the system share sheet. "Stop sharing"
+`https://getclack.app/j/<token>` (`POST /api/share/journey`), and opens the system share sheet. "Stop sharing"
 switches it off. The link works until a day after the last arrival.
-- With the app: the link is a universal link (Associated Domains `applinks:clack-garner.duckdns.org`, the server's
+- With the app: the link is a universal link (Associated Domains `applinks:getclack.app` and the old `applinks:clack-garner.duckdns.org`, the server's
   `apple-app-site-association`), also `clack://share/<token>`. It follows the journey (`PUT /api/following/<token>`) and each
   of its trains (Followed trains, so Explore marks them), and opens `FollowingScreen`: a follower's view, with no seat,
   ticket, station walk, history or editing. Followed journeys are listed at the top of Trips (Following). They never become

@@ -19,7 +19,7 @@ null. "ms" = UTC epoch milliseconds (JSON number). "ISO" = an ISO-8601 UTC strin
 ### Base URL
 
 - All endpoints live under `/api`: the app builds `Config.apiBase.appending(path: "api/...")` (`apps/Clack/Clack/API/Config.swift`).
-  Release builds use the hosted server, `https://clack-garner.duckdns.org`; a debug build in the simulator uses
+  Release builds use the hosted server, `https://getclack.app`; a debug build in the simulator uses
   `http://localhost:3001` (override with the launch argument `-apiBase <url>`). In production Caddy proxies everything
   to `127.0.0.1:3001`, with the live streams uncompressed and `flush_interval -1` so SSE is not buffered
   (`docs/SERVER.md`).

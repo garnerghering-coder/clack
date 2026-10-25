@@ -17,6 +17,8 @@ struct SharedLinkTests {
     @Test func aSharedJourneyOpensFromTheAppsLinkAndFromTheWebAddress() {
         #expect(link("clack://share/\(token)") == .shared(token: token))
         #expect(link("https://\(Config.shareHost)/j/\(token)") == .shared(token: token))
+        // The older free name still opens (links made before getclack.app).
+        #expect(link("https://clack-garner.duckdns.org/j/\(token)") == .shared(token: token))
         #expect(link("https://\(Config.shareHost)/j/\(token)/?lang=sv") == .shared(token: token))
         #expect(link("https://\(Config.shareHost)/j/\(token)")?.tab == .trips)
     }

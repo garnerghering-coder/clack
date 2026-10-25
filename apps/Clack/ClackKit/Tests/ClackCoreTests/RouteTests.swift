@@ -79,7 +79,7 @@ struct RouteTests {
     }
 
     @Test func anythingElseOpensNothing() {
-        #expect(link("https://clack-garner.duckdns.org/trip/leg-1") == nil)
+        #expect(link("https://getclack.app/trip/leg-1") == nil)
         #expect(link("clack://") == nil)
         #expect(link("clack://settings") == nil)
         #expect(link("file:///tmp/ticket.pkpass") == nil)

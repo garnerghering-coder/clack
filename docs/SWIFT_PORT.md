@@ -88,7 +88,7 @@ nonisolated enum Config {
     /// simulator uses the server running on this Mac (`npm run dev`), because that is where it is being worked on.
     /// `-apiBase https://...` as a launch argument points a debug build anywhere else.
     static let apiBase: URL = {
-        let hosted = URL(string: "https://clack-garner.duckdns.org")!
+        let hosted = URL(string: "https://getclack.app")!
         #if DEBUG
         if let override = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: override) { return url }
         #if targetEnvironment(simulator)

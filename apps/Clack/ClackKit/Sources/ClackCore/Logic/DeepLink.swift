@@ -117,7 +117,7 @@ public nonisolated enum DeepLink: Hashable, Sendable {
 
     /// The token of a shared journey: from `https://<share host>/j/<token>` (a universal link). Another host is not ours.
     private static func sharedToken(in url: URL) -> String? {
-        guard let scheme = url.scheme?.lowercased(), scheme == "https" || scheme == "http", url.host?.lowercased() == Config.shareHost else { return nil }
+        guard let scheme = url.scheme?.lowercased(), scheme == "https" || scheme == "http", let host = url.host?.lowercased(), Config.shareHosts.contains(host) else { return nil }
         let parts = url.path.split(separator: "/").map(String.init)
         guard parts.count == 2, parts[0] == "j", isToken(parts[1]) else { return nil }
         return parts[1]

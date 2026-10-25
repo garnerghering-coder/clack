@@ -290,7 +290,7 @@ Tests (vitest for the server and shared package; Swift Testing for the app) cove
 What App Review needs, and what is done and open, is in `docs/APP_STORE.md`. In short:
 - Operator logos: approval is held; keep the written approvals.
 - Rejseplanen (Denmark) and any other free tiers marked non-commercial: confirm commercial terms before charging money.
-- Privacy policy at `https://clack-garner.duckdns.org/privacy`, data deletion in Settings; a backup of `data/app.db` (docs/SERVER.md, none automatic yet).
+- Privacy policy at `https://getclack.app/privacy`, data deletion in Settings; a backup of `data/app.db` (docs/SERVER.md, none automatic yet).
 - Map and data attributions in the app and the App Store listing.
 - Apple Developer Program (the paid team is active), TestFlight, then the App Store.
 

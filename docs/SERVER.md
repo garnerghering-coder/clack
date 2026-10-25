@@ -1,14 +1,14 @@
 # The hosted server
 
 The iPhone app talks to one Clack server on the internet (`Config.apiBase` in `apps/Clack/Clack/API/Config.swift`:
-`https://clack-garner.duckdns.org`). This file says where it runs, how to reach it, what it needs and how to update it.
+`https://getclack.app`). This file says where it runs, how to reach it, what it needs and how to update it.
 Anything not written down in the repository is marked **Owner:** for Garner to fill in or confirm.
 
 ## Where it runs
 
 - A Hetzner Cloud VM (Ubuntu 24.04, ARM, 2 vCPU, 4 GB), set up on 2026-10-23 after Oracle Cloud Free Tier had no
   capacity.
-- Public name `clack-garner.duckdns.org` (DuckDNS, pointing at the VM's IP address). Caddy gets and renews the https
+- Public names `getclack.app` (bought on Namecheap, 2026-10-25; A records `@` and `www` to the VM's IP address) and the older free `clack-garner.duckdns.org` (DuckDNS, same IP), both served; `www.getclack.app` redirects to `getclack.app`. Caddy gets and renews the https
   certificate by itself.
 - **Log in** from the Mac that made the key: `ssh -i ~/.ssh/clack_oracle root@clack-garner.duckdns.org` (the key is
   called `clack_oracle` because it was first made for the Oracle attempt). **Owner:** keep a second copy of that key
@@ -23,12 +23,12 @@ Anything not written down in the repository is marked **Owner:** for Garner to f
 - `/api/*`: everything the app calls. `/api/health` shows the version, uptime and how Trafikverket and Entur are
   answering.
 - `/privacy` and `/privacy/sv`: the privacy page (plain HTML in `apps/server/public/privacy`), which is the privacy
-  policy URL for App Store Connect (`https://clack-garner.duckdns.org/privacy`).
+  policy URL for App Store Connect (`https://getclack.app/privacy`).
 - `/j/<token>`: a shared journey's page, for people without the app (`apps/server/public/share`, the MapLibre library
   from the `maplibre-gl` npm package, the app's fonts). The page reads `/api/shared/<token>`, a cut-down copy that never
   has the traveller's id, seat, ticket or other trips. `/share-assets/*` are its files.
 - `/.well-known/apple-app-site-association`: tells iOS that links to `/j/*` open the app (team `HJTCN7QR8M`, bundle
-  `com.garnerghering.Clack`). The app needs the Associated Domains capability (`applinks:clack-garner.duckdns.org`).
+  `com.garnerghering.Clack`). The app needs the Associated Domains capability (`applinks:getclack.app` and the old `applinks:clack-garner.duckdns.org`).
 - Nothing else. There is no web app, so Caddy serves no files itself (it sends every path to Fastify, so these pages
   need no Caddy change).
 
@@ -59,7 +59,7 @@ iOS asks for gzip and Caddy then holds events back until a block fills, so the l
 its trains):
 
 ```
-clack-garner.duckdns.org {
+clack-garner.duckdns.org, getclack.app {
   @streams path /api/live/stream /api/live/trains/stream /api/stations/*/board/stream
   handle @streams {
     reverse_proxy 127.0.0.1:3001 {
@@ -73,11 +73,15 @@ clack-garner.duckdns.org {
     }
   }
 }
+
+www.getclack.app {
+  redir https://getclack.app{uri} permanent
+}
 ```
 
 Apply it with `systemctl reload caddy`. The three stream paths are the server's three event streams
-(`routes/live.ts`, `routes/livemap.ts`, `routes/boards.ts`); a new stream needs adding to the matcher. A backup of the
-previous Caddyfile (the one that also served the web app) is at `/etc/caddy/Caddyfile.bak`.
+(`routes/live.ts`, `routes/livemap.ts`, `routes/boards.ts`); a new stream needs adding to the matcher. Backups of
+earlier Caddyfiles: `/etc/caddy/Caddyfile.bak` (the one that also served the web app) and `Caddyfile.before-getclack`.
 
 ## Updating
 
@@ -90,7 +94,7 @@ systemctl restart clack
 ```
 
 That is `git pull && npm ci && systemctl restart clack`, with git and npm run as the `clack` user and the restart as
-root. Migrations run when the server starts. Then check `https://clack-garner.duckdns.org/api/health` (its `version` is the commit the server runs; Settings in the
+root. Migrations run when the server starts. Then check `https://getclack.app/api/health` (its `version` is the commit the server runs; Settings in the
 app shows the same).
 
 ## Backups
