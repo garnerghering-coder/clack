@@ -78,6 +78,9 @@ final class AppModel {
     /// The landing rule has run for this launch (it runs once).
     var hasLanded = false
 
+    /// Changes when the app starts over: the root view is built again from nothing (`.id(app.epoch)` in ClackApp).
+    private(set) var epoch = 0
+
     /// The server couldn't be reached on the last request: the offline strip shows.
     var isOffline: Bool { connection.isOffline }
 
@@ -182,6 +185,26 @@ final class AppModel {
         settings = .defaults
         l10n.language = .en
         await load()
+        return true
+    }
+}
+
+extension AppModel {
+    /// Launch-argument overrides for development; a start-over keeps them so the app still points where it did.
+    private static let kept: Set<String> = ["apiBase", "userId"]
+
+    /// Delete everything, here and on the server, and show the app as on the first launch: the welcome, no trips, no
+    /// remembered questions or tabs, no cards on the Lock Screen. Returns false (and changes nothing) when the server
+    /// couldn't be reached to delete the copy it keeps.
+    func startOver() async -> Bool {
+        guard await deleteMyData() else { return false }
+        let defaults = UserDefaults.standard
+        for key in defaults.dictionaryRepresentation().keys where !Self.kept.contains(key) && !key.hasPrefix("Apple") && !key.hasPrefix("NS") && !key.hasPrefix("AK") {
+            defaults.removeObject(forKey: key)
+        }
+        await LiveActivityManager.shared.endAll()
+        hasLanded = false
+        epoch += 1
         return true
     }
 }

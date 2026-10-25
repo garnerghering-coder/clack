@@ -9505,13 +9505,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your passport is empty"
+            "value" : "Your passport starts here"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ditt pass är tomt"
+            "value" : "Ditt pass börjar här"
           }
         }
       }
@@ -10395,6 +10395,23 @@
         }
       }
     },
+    "passport.recordsSoon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Records appear after your third journey."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rekord visas efter din tredje resa."
+          }
+        }
+      }
+    },
     "passport.reviewBanner" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10538,6 +10555,23 @@
         }
       }
     },
+    "passport.tab.kinds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kinds"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slag"
+          }
+        }
+      }
+    },
     "passport.timeLost" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10630,6 +10664,47 @@
         }
       }
     },
+    "passport.toGo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld more to go"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld more to go"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld kvar"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld kvar"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "passport.trainTypes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -10718,6 +10793,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Typiska tågtyper, om du inte har ändrat dem på resan."
+          }
+        }
+      }
+    },
+    "passport.upNext" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up next"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nästa mål"
           }
         }
       }
@@ -13299,6 +13391,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa järnvägsnätet på kartor som standard"
+          }
+        }
+      }
+    },
+    "settings.startOver" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erase everything and start over"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera allt och börja om"
+          }
+        }
+      }
+    },
+    "settings.startOverConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete all your trips, followed trains and settings, and start Clack as if you had never opened it? This can’t be undone."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radera alla dina resor, följda tåg och inställningar och starta Clack som om du aldrig hade öppnat det? Det går inte att ångra."
+          }
+        }
+      }
+    },
+    "settings.startOverFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn’t reach the server, so nothing was erased. Try again when you’re online."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte nå servern, så ingenting raderades. Försök igen när du är online."
           }
         }
       }

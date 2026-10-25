@@ -64,6 +64,11 @@ final class LiveActivityManager {
         }
     }
 
+    /// Every card on the Lock Screen ends at once (the app starts over).
+    func endAll() async {
+        for activity in Activity<TripActivityAttributes>.activities { await activity.end(nil, dismissalPolicy: .immediate) }
+    }
+
     /// The app came to the front: catch up, and send again any card whose details changed (the phone's own address
     /// arrived, or the identity changed).
     func resume() {

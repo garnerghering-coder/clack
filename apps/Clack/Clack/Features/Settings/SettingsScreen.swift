@@ -136,6 +136,7 @@ struct SettingsScreen: View {
                 LinkRow(label: l10n.t("settings.privacy"), route: .privacy)
                 ExportDataRow()
                 DeleteMyDataRow()
+                StartOverRow()
             }
             VersionFooter()
             #if DEBUG
@@ -431,6 +432,37 @@ private struct DeleteMyDataRow: View {
             Button(l10n.t("settings.deleteData"), role: .destructive) {
                 phase = .busy
                 Task { phase = await app.deleteMyData() ? .done : .idle }
+            }
+            Button(l10n.t("common.close"), role: .cancel) {}
+        }
+    }
+}
+
+/// Erases everything and starts the app again as if it had never been opened (owner, 2026-10-25).
+private struct StartOverRow: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    @State private var busy = false
+    @State private var failed = false
+    @State private var confirming = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Button(l10n.t("settings.startOver")) { confirming = true }
+                .buttonStyle(.clack(.danger))
+                .disabled(busy)
+                .padding(.vertical, 8)
+            if failed { Text(l10n.t("settings.startOverFailed")).clack(.caption).foregroundStyle(Ink.text2) }
+        }
+        .sensoryFeedback(.warning, trigger: busy)
+        .confirmationDialog(l10n.t("settings.startOverConfirm"), isPresented: $confirming, titleVisibility: .visible) {
+            Button(l10n.t("settings.startOver"), role: .destructive) {
+                busy = true
+                failed = false
+                Task {
+                    failed = await !app.startOver()
+                    busy = false
+                }
             }
             Button(l10n.t("common.close"), role: .cancel) {}
         }

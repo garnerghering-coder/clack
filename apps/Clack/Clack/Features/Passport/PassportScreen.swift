@@ -19,7 +19,6 @@ struct PassportScreen: View {
     @State private var data: Passport?
     @State private var failed = false
     @State private var flavorIndex = 0
-    @State private var showAllStations = false
     @State private var sharing = false
 
     init() {
@@ -91,19 +90,63 @@ struct PassportScreen: View {
                 }
                 .buttonStyle(.plain)
             }
-            if data.totals.trains == 0 {
-                VStack(spacing: 12) {
-                    Text(l10n.t("passport.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
-                    Text(l10n.t("passport.emptyHow")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
-                    VStack(spacing: 12) {
-                        Button(l10n.t("trips.findTrain")) { router.openAdd() }.buttonStyle(.clack(.primary, wide: true))
-                        Button(l10n.t("trips.exploreTrains")) { router.tab = .explore }.buttonStyle(.clack(wide: true))
-                    }
-                    .frame(maxWidth: 320)
-                }
-                .frame(maxWidth: .infinity).padding(.top, 48)
+            if PassportLogic.stage(journeys: data.totals.journeys) == .empty {
+                welcoming(data)
             } else {
                 full(data)
+            }
+        }
+    }
+
+    /// Nothing yet: say what is waiting rather than that it is empty, with the first medals to go for.
+    private func welcoming(_ data: Passport) -> some View {
+        VStack(spacing: 16) {
+            Text(l10n.t("passport.emptyTitle")).clack(.headline).foregroundStyle(Ink.text)
+            if !data.milestones.next.isEmpty {
+                HStack(alignment: .top, spacing: 8) {
+                    ForEach(Array(data.milestones.next.prefix(3).enumerated()), id: \.offset) { _, milestone in
+                        let label = l10n.milestoneLabel(milestone, language: settings.language)
+                        let progress = l10n.t("passport.progressOf", ["value": String(Int((milestone.value ?? 0).rounded(.down))), "target": String(Int(milestone.target))])
+                        VStack(spacing: 4) {
+                            Medal(m: milestone, locked: true, size: 80)
+                            Text(label).clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
+                            Text(progress).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .top)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("\(label): \(progress)")
+                    }
+                }
+            }
+            Text(l10n.t("passport.emptyHow")).clack(.body).foregroundStyle(Ink.text2).multilineTextAlignment(.center)
+            VStack(spacing: 12) {
+                Button(l10n.t("trips.findTrain")) { router.openAdd() }.buttonStyle(.clack(.primary, wide: true))
+                Button(l10n.t("trips.exploreTrains")) { router.tab = .explore }.buttonStyle(.clack(wide: true))
+            }
+            .frame(maxWidth: 320)
+        }
+        .frame(maxWidth: .infinity).padding(.top, 32)
+    }
+
+    /// While there are only a few journeys: the nearest medal and how far there is to go.
+    @ViewBuilder
+    private func upNext(_ data: Passport) -> some View {
+        if let next = data.milestones.next.first {
+            let value = next.value ?? 0
+            let label = l10n.milestoneLabel(next, language: settings.language)
+            let left = l10n.t("passport.toGo", count: PassportLogic.toGo(next))
+            Card {
+                Text(l10n.t("passport.upNext")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                HStack(spacing: 16) {
+                    Medal(m: next, locked: true, size: 64)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(label).clack(.rowTitle).foregroundStyle(Ink.text)
+                        ProgressBar(value: min(1, value / next.target), color: Ink.accent).accessibilityHidden(true)
+                        Text(left).clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
+                    }
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(label): \(left)")
             }
         }
     }
@@ -114,6 +157,7 @@ struct PassportScreen: View {
         let ops = data.refs.operators
         VStack(alignment: .leading, spacing: 16) {
             PassportCard(data: data, year: year, flavorIndex: $flavorIndex)
+            if PassportLogic.stage(journeys: data.totals.journeys) == .starting { upNext(data) }
             MultiRouteMapView(
                 routes: data.map.map { m in
                     MultiRoute(
@@ -131,75 +175,15 @@ struct PassportScreen: View {
             MilestonesCard(data: data)
 
             groupTitle(l10n.t("passport.collections"))
-            Card {
-                Text(l10n.t("passport.operators")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Bars(rows: data.operators, unit: unit, label: { ops[$0.key]?.name ?? $0.key }, brand: { ops[$0.key]?.brandColor ?? "" }, lead: { OperatorBadge(op: ops[$0.key], size: .medium) })
-            }
-            if !data.trainTypes.isEmpty {
-                Card {
-                    Text(l10n.t("passport.trainTypes")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                    VStack(spacing: 12) {
-                        ForEach(data.trainTypes, id: \.key) { row in
-                            let type = data.refs.trainTypes[row.key]
-                            HStack(spacing: 12) {
-                                TrainPicture(type: type, operatorId: nil, height: 36).frame(width: 120, alignment: .leading).clipped()
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(type?.name ?? row.key).clack(.rowTitle).foregroundStyle(Ink.text)
-                                    Text("\(l10n.t("passport.trainsCount", count: row.count)) · \(Format.distance(row.distanceM, unit: unit, language: settings.language))")
-                                        .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
-                                }
-                                Spacer(minLength: 0)
-                            }
-                        }
-                    }
-                    Text(l10n.t("passport.typesNote")).clack(.caption).foregroundStyle(Ink.text2)
-                }
-            }
-            Card {
-                Text(l10n.t("passport.countries")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                VStack(spacing: 12) {
-                    ForEach(data.countries, id: \.code) { country in
-                        HStack(spacing: 12) {
-                            Flag(country: country.code, size: 24, decorative: true)
-                            Text(countryName(country.code)).clack(.rowTitle).foregroundStyle(Ink.text)
-                            Spacer(minLength: 0)
-                            Text(l10n.t("passport.trainsCount", count: country.legs)).clack(.caption).foregroundStyle(Ink.text2)
-                        }
-                    }
-                }
-                Text(l10n.t("passport.borders", count: data.totals.borderCrossings)).clack(.caption).foregroundStyle(Ink.text2)
-            }
-            Card {
-                Text(l10n.t("passport.stationsVisited")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ForEach(showAllStations ? data.stations : Array(data.stations.prefix(12))) { station in
-                        NavigationLink(value: AppRoute.board(stationId: station.id, arrivals: false)) {
-                            HStack(spacing: 8) {
-                                Text(station.name).foregroundStyle(Ink.text)
-                                Text("×\(station.count)").clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
-                            }
-                            .clack(.stopName)
-                            .padding(.vertical, 8).padding(.horizontal, 12)
-                            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
-                            .hairlineBorder(radius: Radius.controlSm)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                if data.stations.count > 12 {
-                    Button(showAllStations ? l10n.t("passport.showFewer") : l10n.t("passport.showAllStations", count: data.stations.count)) { showAllStations.toggle() }
-                        .buttonStyle(LinkButtonStyle())
-                }
-                Text(l10n.t("passport.stationsNote")).clack(.caption).foregroundStyle(Ink.text2)
-            }
-            Card {
-                Text(l10n.t("passport.products")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                Bars(rows: data.products, unit: unit, label: { l10n.t("products.\($0.key)") }, brand: { _ in nil }, lead: { _ in EmptyView() })
-            }
+            CollectionsCard(data: data)
 
             groupTitle(l10n.t("passport.records"))
-            Card {
-                records(data)
+            if PassportLogic.showsRecords(journeys: data.totals.journeys) {
+                Card {
+                    records(data)
+                }
+            } else {
+                Text(l10n.t("passport.recordsSoon")).clack(.body).foregroundStyle(Ink.text2)
             }
 
             groupTitle(l10n.t("passport.moreStats"))
@@ -210,12 +194,6 @@ struct PassportScreen: View {
 
     private func groupTitle(_ title: String) -> some View {
         Text(title).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 24).padding(.bottom, -10)
-    }
-
-    private func countryName(_ code: String) -> String {
-        let key = "countries.\(code)"
-        let name = l10n.t(key)
-        return name == key ? code : name
     }
 
     // MARK: records and statistics
@@ -332,7 +310,7 @@ private struct RecordTile: View {
 }
 
 /// Horizontal bars: a label with its count and distance, and a track filled in proportion to the largest row.
-private struct Bars<Lead: View>: View {
+struct Bars<Lead: View>: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.colorScheme) private var scheme

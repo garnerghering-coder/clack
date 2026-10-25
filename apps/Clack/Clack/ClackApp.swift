@@ -44,6 +44,7 @@ struct ClackApp: App {
                 RootView()
                 #endif
             }
+            .id(app.epoch)
             .environment(app)
             .environment(app.l10n)
             .task { await app.load() }
