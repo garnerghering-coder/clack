@@ -186,6 +186,12 @@ export const legs = sqliteTable(
     arrDelayMin: integer('arr_delay_min'),
     depPlatform: text('dep_platform'),
     arrPlatform: text('arr_platform'),
+    /**
+     * The platform the owner typed for where they got on / off, when no source had one (owner, 2026-10-25). Shown in its
+     * place until a source reports one; never used for alerts.
+     */
+    userDepPlatform: text('user_dep_platform'),
+    userArrPlatform: text('user_arr_platform'),
     canceled: integer('canceled', { mode: 'boolean' }).notNull().default(false),
     distanceM: real('distance_m'),
     /** Encoded polyline of the whole leg. */

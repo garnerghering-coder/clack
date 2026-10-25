@@ -42,3 +42,31 @@ public struct PlatformTag: View {
         ], separator: ", "))
     }
 }
+
+/// The platform column when no platform is known: the same tag with a dash, so rows line up (owner, 2026-10-25).
+/// `onSet` makes it a button that asks for one (on your own trips, where nothing else knows it).
+public struct UnknownPlatformTag: View {
+    @Environment(L10n.self) private var l10n
+    public var onSet: (() -> Void)?
+
+    public init(onSet: (() -> Void)? = nil) { self.onSet = onSet }
+
+    public var body: some View {
+        let tag = Text(verbatim: "—")
+            .clack(.chip)
+            .fontWeight(.bold)
+            .foregroundStyle(onSet == nil ? Ink.text3 : Ink.text2)
+            .padding(.vertical, 2)
+            .padding(.horizontal, 8)
+            .frame(minWidth: 32)
+            .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+            .fixedSize()
+        if let onSet {
+            Button(action: onSet) { tag.frame(minWidth: 44, minHeight: 44).contentShape(Rectangle()) }
+                .buttonStyle(.plain)
+                .accessibilityLabel(l10n.t("platform.add"))
+        } else {
+            tag.accessibilityLabel(l10n.t("platform.unknown"))
+        }
+    }
+}

@@ -84,7 +84,8 @@ public struct StopRail: View {
 
 /// One stop of a timeline (DESIGN §2.5): the rail, the name with its notes, the time on the right (split-flap `.sm` in
 /// the delay band's ink, the timetabled one struck through under it in `struck`), and the platform in a fixed column as
-/// a `PlatformTag`. The compact variant (sheets, the watch) writes the time as text instead of tiles.
+/// a `PlatformTag` (a dash when none is known, so the rows line up). The compact variant (sheets, the watch) is tighter
+/// but has the same split-flap times.
 public struct StopRow: View {
     public enum Emphasis: Sendable {
         /// A stop you ride through: the name in 600.
@@ -125,6 +126,8 @@ public struct StopRow: View {
     public var platform: String?
     public var platformChanged = false
     public var compact = false
+    /// Asks for the platform when none is known (your own trip's boarding and alighting stops).
+    public var onSetPlatform: (() -> Void)?
     /// Opens the station's board when the name is tapped.
     public var onOpen: (() -> Void)?
     public var openLabel: String?
@@ -133,8 +136,9 @@ public struct StopRow: View {
         name: String, emphasis: Emphasis = .ridden, canceled: Bool = false, notes: [Note] = [], rail: StopRail,
         time: Double?, sched: Double? = nil, live: Bool = false, delay: Int? = nil, tz: String, clock: ClockFormat,
         platform: String? = nil, platformChanged: Bool = false, compact: Bool = false,
-        onOpen: (() -> Void)? = nil, openLabel: String? = nil
+        onSetPlatform: (() -> Void)? = nil, onOpen: (() -> Void)? = nil, openLabel: String? = nil
     ) {
+        self.onSetPlatform = onSetPlatform
         self.name = name
         self.emphasis = emphasis
         self.canceled = canceled
@@ -158,20 +162,23 @@ public struct StopRow: View {
 
     public var body: some View {
         HStack(spacing: 12) {
-            rail
-            VStack(alignment: .leading, spacing: 0) {
-                nameView
-                ForEach(notes, id: \.self) { note in
-                    Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
+            HStack(spacing: 12) {
+                rail
+                VStack(alignment: .leading, spacing: 0) {
+                    nameView
+                    ForEach(notes, id: \.self) { note in
+                        Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, compact ? 4 : 8)
+                timeView
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, compact ? 4 : 8)
-            timeView
+            .accessibilityElement(children: .combine)
+            // Its own element: the dash that asks for the platform is a button of its own.
             platformView
         }
         .frame(minHeight: compact ? 44 : 48)
-        .accessibilityElement(children: .combine)
     }
 
     private func ink(_ tone: Note.Tone) -> Color {
@@ -207,13 +214,8 @@ public struct StopRow: View {
         let shown = time ?? sched
         if shown != nil {
         VStack(alignment: .trailing, spacing: 0) {
-            if compact {
-                Text(Format.time(shown, tz: tz, clock: clock))
-                    .clack(.stopName).fontWeight(.semibold).monospacedDigit()
-                    .foregroundStyle(tint ?? (emphasis == .dim ? Ink.text3 : Ink.text))
-            } else {
-                SplitFlap(value: Format.time(shown, tz: tz, clock: clock), size: .sm, colour: tint)
-            }
+            SplitFlap(value: Format.time(shown, tz: tz, clock: clock), size: .sm, colour: tint)
+                .opacity(emphasis == .dim ? 0.6 : 1)
             if FlapTime.changed(time, from: sched), let sched {
                 Text(Format.time(sched, tz: tz, clock: clock))
                     .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
@@ -240,6 +242,8 @@ public struct StopRow: View {
         Group {
             if let platform {
                 PlatformTag(platform: platform, changedFrom: platformChanged ? "" : nil)
+            } else {
+                UnknownPlatformTag(onSet: onSetPlatform)
             }
         }
         .frame(minWidth: platformWidth, alignment: .trailing)

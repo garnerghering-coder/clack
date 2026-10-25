@@ -41,15 +41,20 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
     public var trainType: String??
     public var coach: String??
     public var seat: String??
+    /// The platform where you got on / off, typed where no source has one (the server refuses it otherwise).
+    public var depPlatform: String??
+    public var arrPlatform: String??
 
-    public init(trainType: String?? = nil, coach: String?? = nil, seat: String?? = nil) {
+    public init(trainType: String?? = nil, coach: String?? = nil, seat: String?? = nil, depPlatform: String?? = nil, arrPlatform: String?? = nil) {
         self.trainType = trainType
         self.coach = coach
         self.seat = seat
+        self.depPlatform = depPlatform
+        self.arrPlatform = arrPlatform
     }
 
     /// The server refuses an empty patch ("nothing to change").
-    public var isEmpty: Bool { trainType == nil && coach == nil && seat == nil }
+    public var isEmpty: Bool { trainType == nil && coach == nil && seat == nil && depPlatform == nil && arrPlatform == nil }
 
     public func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
@@ -57,7 +62,9 @@ public nonisolated struct LegPatch: Encodable, Equatable, Sendable {
         if let trainType { try c.encode(trainType, forKey: .trainType) }
         if let coach { try c.encode(coach, forKey: .coach) }
         if let seat { try c.encode(seat, forKey: .seat) }
+        if let depPlatform { try c.encode(depPlatform, forKey: .depPlatform) }
+        if let arrPlatform { try c.encode(arrPlatform, forKey: .arrPlatform) }
     }
 
-    private enum CodingKeys: String, CodingKey { case trainType, coach, seat }
+    private enum CodingKeys: String, CodingKey { case trainType, coach, seat, depPlatform, arrPlatform }
 }

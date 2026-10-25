@@ -240,8 +240,12 @@ const legColumns = {
   actualArr: legs.actualArr,
   depDelayMin: legs.depDelayMin,
   arrDelayMin: legs.arrDelayMin,
-  depPlatform: legs.depPlatform,
-  arrPlatform: legs.arrPlatform,
+  // A source's platform, else the one the owner typed (shown the same way).
+  depPlatform: sql<string | null>`coalesce(${legs.depPlatform}, ${legs.userDepPlatform})`,
+  arrPlatform: sql<string | null>`coalesce(${legs.arrPlatform}, ${legs.userArrPlatform})`,
+  /** Whether the shown platform came from a source; only one that didn't may be typed in. */
+  depPlatformFromSource: sql<boolean>`${legs.depPlatform} is not null`.mapWith(Boolean),
+  arrPlatformFromSource: sql<boolean>`${legs.arrPlatform} is not null`.mapWith(Boolean),
   canceled: legs.canceled,
   distanceM: legs.distanceM,
   isEstimatedGeometry: legs.isEstimatedGeometry,
@@ -293,7 +297,11 @@ export function getLeg(db: Db, userId: string, id: string) {
   const row = db.select(legColumns).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
   if (!row) return null;
   const [leg] = attachRefs(db, [row]);
-  const geometry = db.select({ g: legs.geometry }).from(legs).where(eq(legs.id, id)).get()?.g ?? null;
+  const extra = db.select({ g: legs.geometry, userDep: legs.userDepPlatform, userArr: legs.userArrPlatform }).from(legs).where(eq(legs.id, id)).get();
+  const geometry = extra?.g ?? null;
+  // Where you got on and off, a stop without a reported platform shows the one you typed.
+  const typed = (role: string, platform: string | null) =>
+    platform ?? (role === 'board' ? extra?.userDep ?? null : role === 'alight' ? extra?.userArr ?? null : null);
   const stops = db
     .select({
       seq: legStops.seq,
@@ -322,7 +330,7 @@ export function getLeg(db: Db, userId: string, id: string) {
     .where(eq(legStops.legId, id))
     .orderBy(asc(legStops.seq))
     .all();
-  return { ...leg!, geometry, stops: stops.map((s) => ({ ...s, causes: parseCauses(s.causes, s.deviations) })), ...liveFor(db, id) };
+  return { ...leg!, geometry, stops: stops.map((s) => ({ ...s, platform: typed(s.role, s.platform), causes: parseCauses(s.causes, s.deviations) })), ...liveFor(db, id) };
 }
 
 /** The owner says which train it actually was (null resets to the typical type). */
@@ -344,6 +352,34 @@ export function setCoachSeat(db: Db, userId: string, id: string, fields: { coach
   if (fields.seat !== undefined) set.seat = fields.seat;
   if (!Object.keys(set).length) return !!db.select({ id: legs.id }).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
   return db.update(legs).set(set).where(and(eq(legs.userId, userId), eq(legs.id, id))).run().changes > 0;
+}
+
+/** Longest platform the owner can type ("12b", "4A"). */
+export const MAX_PLATFORM = 6;
+
+/** A typed platform from a request: undefined stays absent, null or blank clears, else trimmed text; throws when too long. */
+export function cleanPlatform(value: unknown, name: 'depPlatform' | 'arrPlatform'): string | null | undefined {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  if (typeof value !== 'string') throw new LegError(`${name} must be text or null`, 400);
+  const v = value.trim();
+  if (v.length > MAX_PLATFORM) throw new LegError(`${name} can be at most ${MAX_PLATFORM} characters`, 400);
+  return v === '' ? null : v;
+}
+
+/**
+ * The owner's platform for where they got on or off. Refused ('known') where a source already has one: the source
+ * wins and isn't edited. False when the leg isn't theirs.
+ */
+export function setUserPlatforms(db: Db, userId: string, id: string, fields: { dep?: string | null; arr?: string | null }): true | false | 'known' {
+  const row = db.select({ dep: legs.depPlatform, arr: legs.arrPlatform }).from(legs).where(and(eq(legs.userId, userId), eq(legs.id, id))).get();
+  if (!row) return false;
+  if ((fields.dep !== undefined && row.dep !== null) || (fields.arr !== undefined && row.arr !== null)) return 'known';
+  const set: { userDepPlatform?: string | null; userArrPlatform?: string | null } = {};
+  if (fields.dep !== undefined) set.userDepPlatform = fields.dep;
+  if (fields.arr !== undefined) set.userArrPlatform = fields.arr;
+  if (Object.keys(set).length) db.update(legs).set(set).where(eq(legs.id, id)).run();
+  return true;
 }
 
 export function deleteLeg(db: Db, userId: string, id: string): boolean {

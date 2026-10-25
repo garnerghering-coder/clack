@@ -255,8 +255,12 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     /// Whole minutes, negative = early.
     public let depDelayMin: Int?
     public let arrDelayMin: Int?
+    /// A source's platform, else the one the owner typed where none was known.
     public let depPlatform: String?
     public let arrPlatform: String?
+    /// Whether the platform came from a source (only one that didn't may be typed in). Nil from an older server.
+    public var depPlatformFromSource: Bool? = nil
+    public var arrPlatformFromSource: Bool? = nil
     public let canceled: Bool
     /// Metres, along the track once routed.
     public let distanceM: Double?

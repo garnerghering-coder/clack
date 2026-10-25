@@ -31,6 +31,10 @@ struct TripDetailScreen: View {
     @State private var busy = false
     @State private var toast: String?
     @State private var confirmDelete = false
+    /// Typing the platform where you got on (`.dep`) or off (`.arr`), where no source has one.
+    @State private var platformEnd: PlatformEnd = .dep
+    @State private var askingPlatform = false
+    @State private var typedPlatform = ""
     /// The route as the maps and the stop rail use it, decoded when the trip changes (not on every tick).
     @State private var geo: RouteGeo?
 
@@ -82,6 +86,16 @@ struct TripDetailScreen: View {
             try? await Task.sleep(for: .seconds(6))
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.25)) { toast = nil }
         }
+        // Which end stays in `platformEnd`: the alert clears its own flag before the button's action runs.
+        .alert(l10n.t("platform.title"), isPresented: $askingPlatform) {
+            TextField(l10n.t("platform.title"), text: $typedPlatform)
+                .textInputAutocapitalization(.characters)
+                .autocorrectionDisabled()
+            Button(l10n.t("common.save")) { Task { await savePlatform() } }
+            Button(l10n.t("common.cancel"), role: .cancel) {}
+        } message: {
+            Text(l10n.t(platformEnd == .arr ? "platform.messageArrival" : "platform.message"))
+        }
         .confirmationDialog(l10n.t("detail.deleteConfirm"), isPresented: $confirmDelete, titleVisibility: .visible) {
             Button(l10n.t("detail.delete"), role: .destructive) { Task { await remove() } }
             Button(l10n.t("common.close"), role: .cancel) {}
@@ -122,6 +136,28 @@ struct TripDetailScreen: View {
 
     private func answer(_ answer: RideAnswer) async {
         if let updated = try? await app.client.answerRide(id, answer) { leg = updated }
+    }
+
+    /// Where a typed platform goes.
+    enum PlatformEnd { case dep, arr }
+
+    /// Asks for the platform at one end, only where no source has one (owner, 2026-10-25). Nil: not to be typed.
+    private func platformAction(_ end: PlatformEnd, _ l: Leg) -> (() -> Void)? {
+        let fromSource = end == .dep ? l.depPlatformFromSource : l.arrPlatformFromSource
+        guard fromSource == false, l.status != .snapshotted else { return nil }
+        return {
+            typedPlatform = (end == .dep ? l.depPlatform : l.arrPlatform) ?? ""
+            platformEnd = end
+            askingPlatform = true
+        }
+    }
+
+    private func savePlatform() async {
+        let end = platformEnd
+        let text = typedPlatform.trimmingCharacters(in: .whitespacesAndNewlines)
+        let value: String? = text.isEmpty ? nil : String(text.prefix(6))
+        let patch = end == .dep ? LegPatch(depPlatform: .some(value)) : LegPatch(arrPlatform: .some(value))
+        if let updated = try? await app.client.updateLeg(id, patch) { leg = updated }
     }
 
     private func refresh() async {
@@ -456,12 +492,12 @@ struct TripDetailScreen: View {
                 label: l10n.t("detail.departure"), sched: schedDep, actual: l.actualDep?.ms ?? (tracking ? board?.estimatedDep?.ms : nil),
                 tz: tz, platform: l.depPlatform,
                 delay: l.depDelayMin ?? (tracking ? Delay.minutes(advertised: schedDep, actual: board?.estimatedDep?.ms) : nil),
-                canceled: l.canceled
+                canceled: l.canceled, onSetPlatform: platformAction(.dep, l)
             )
             TimeBlock(
                 label: l10n.t("detail.arrival"), sched: schedArr, actual: l.actualArr?.ms ?? (tracking ? live?.arrivalEta?.ms : nil),
                 tz: dtz, platform: l.arrPlatform, delay: l.arrDelayMin ?? (tracking ? live?.arrivalDelayMin : nil),
-                canceled: l.canceled, extraDays: extraDays
+                canceled: l.canceled, extraDays: extraDays, onSetPlatform: platformAction(.arr, l)
             )
         }
     }
@@ -491,7 +527,8 @@ struct TripDetailScreen: View {
                 ForEach(Array(stops.enumerated()), id: \.element.id) { i, stop in
                     LegStopRow(
                         stop: stop, color: color, tense: TripDetailLogic.tense(of: stop, shown: shown, stage: stage),
-                        above: halves[i].above, below: halves[i].below
+                        above: halves[i].above, below: halves[i].below,
+                        onSetPlatform: stop.role == .board ? platformAction(.dep, detail.leg) : stop.role == .alight ? platformAction(.arr, detail.leg) : nil
                     )
                 }
             }
@@ -606,6 +643,8 @@ struct TimeBlock: View {
     let delay: Int?
     let canceled: Bool
     var extraDays = 0
+    /// Asks for the platform when none is known (your own trip).
+    var onSetPlatform: (() -> Void)?
 
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
@@ -627,7 +666,22 @@ struct TimeBlock: View {
                 if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
             }
             HStack(spacing: 8) {
-                if let platform { Chip(text: l10n.t("trips.platform", ["platform": platform])) } else { Chip(text: "–").hidden() }
+                if let platform {
+                    Chip(text: l10n.t("trips.platform", ["platform": platform]))
+                        .onTapGesture { onSetPlatform?() }
+                } else if let onSetPlatform {
+                    // Nothing knows it: a dash you can tap to say which.
+                    Button(action: onSetPlatform) {
+                        Label { Text(l10n.t("trips.platform", ["platform": "—"])) } icon: { LucideIcon(name: "plus", size: 12) }
+                            .clack(.chip).foregroundStyle(Ink.text2)
+                            .frame(minHeight: 44).contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(l10n.t("platform.add"))
+                    .accessibilityIdentifier("platform.add")
+                } else {
+                    Chip(text: l10n.t("trips.platform", ["platform": "—"])).foregroundStyle(Ink.text3)
+                }
             }
         }
         .tileSurface()
@@ -645,6 +699,7 @@ struct LegStopRow: View {
     var tense = TripDetailLogic.StopTense.past
     var above = TripDetailLogic.RailHalf()
     var below = TripDetailLogic.RailHalf()
+    var onSetPlatform: (() -> Void)?
 
     var body: some View {
         let times = TripDetailLogic.stopTimes(stop)
@@ -661,6 +716,7 @@ struct LegStopRow: View {
             rail: StopRail(color: color, big: end, ridden: ridden, startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below),
             time: times.actual ?? times.sched, sched: times.sched, live: times.actual != nil, delay: times.delay,
             tz: stop.tz, clock: app.settings.clock, platform: stop.platform, platformChanged: stop.deviations.contains("Spårändrat") || stop.allCauses.contains(where: { DelayCauses.isPlatformChange($0) }),
+            onSetPlatform: stop.platform == nil ? onSetPlatform : nil,
             onOpen: { router.push(.board(stationId: stop.stationId, arrivals: false)) },
             openLabel: l10n.t("board.openBoard", ["station": stop.name])
         )

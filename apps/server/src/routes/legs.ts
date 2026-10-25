@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify';
 import type { Db } from '../db/client.js';
-import { cleanSeatField, createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
+import { cleanPlatform, cleanSeatField, createLeg, createManualLeg, deleteLeg, getJourney, getLeg, LegError, listLegs, setCoachSeat, setTrainType, setUserPlatforms, type CreateLegInput, type ManualLegInput } from '../legs/legs.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { refreshLegActuals } from '../legs/actuals.js';
 import { answerRide } from '../legs/recording.js';
@@ -58,22 +58,34 @@ export const legRoutes =
       return getLeg(db, req.userId, req.params.id);
     });
 
-    // Edits the owner can make to a saved trip: the train type, and where they sat. Absent fields stay as they are;
-    // trainType, coach and seat accept null to clear.
-    app.patch<{ Params: { id: string }; Body: { trainType?: string | null; coach?: string | null; seat?: string | null } }>('/legs/:id', async (req, reply) => {
+    // Edits the owner can make to a saved trip: the train type, where they sat, and the platform where they got on or
+    // off when no source has one (409 when one does). Absent fields stay as they are; each accepts null to clear.
+    app.patch<{
+      Params: { id: string };
+      Body: { trainType?: string | null; coach?: string | null; seat?: string | null; depPlatform?: string | null; arrPlatform?: string | null };
+    }>('/legs/:id', async (req, reply) => {
       const body = req.body ?? {};
       const t = body.trainType;
       let coach: string | null | undefined;
       let seat: string | null | undefined;
+      let dep: string | null | undefined;
+      let arr: string | null | undefined;
       try {
         coach = cleanSeatField(body.coach, 'coach');
         seat = cleanSeatField(body.seat, 'seat');
+        dep = cleanPlatform(body.depPlatform, 'depPlatform');
+        arr = cleanPlatform(body.arrPlatform, 'arrPlatform');
       } catch (e) {
         if (e instanceof LegError) return reply.code(e.status).send({ error: e.message });
         throw e;
       }
-      if (t === undefined && coach === undefined && seat === undefined) return reply.code(400).send({ error: 'nothing to change' });
+      if (t === undefined && coach === undefined && seat === undefined && dep === undefined && arr === undefined) return reply.code(400).send({ error: 'nothing to change' });
       if (t !== undefined && t !== null && !trainTypeCatalog().types.some((x) => x.id === t)) return reply.code(400).send({ error: `unknown train type: ${t}` });
+      if (dep !== undefined || arr !== undefined) {
+        const saved = setUserPlatforms(db, req.userId, req.params.id, { dep, arr });
+        if (saved === false) return reply.code(404).send({ error: 'not found' });
+        if (saved === 'known') return reply.code(409).send({ error: 'the platform is already known' });
+      }
       if (!setCoachSeat(db, req.userId, req.params.id, { coach, seat })) return reply.code(404).send({ error: 'not found' });
       if (t !== undefined) setTrainType(db, req.userId, req.params.id, t);
       return getLeg(db, req.userId, req.params.id);

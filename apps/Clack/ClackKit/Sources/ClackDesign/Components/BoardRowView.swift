@@ -126,7 +126,11 @@ public struct BoardRowView<Badge: View>: View {
                 .strikethrough(line.canceled)
             Spacer(minLength: 4)
             delay
-            if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) }
+            // Always a platform tag (a dash when not known), so the column lines up row to row.
+            Group {
+                if let platform = line.platform { PlatformTag(platform: platform, changedFrom: line.platformFrom) } else { UnknownPlatformTag() }
+            }
+            .frame(minWidth: 36, alignment: .trailing)
         }
         .frame(minHeight: dense ? nil : 44)
     }
