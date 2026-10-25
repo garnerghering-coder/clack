@@ -168,21 +168,25 @@ struct TripsScreen: View {
 
     @ViewBuilder
     private func upcomingTab(_ all: [Leg], upcoming: [Leg], hero: (leg: Leg, state: TripsLogic.HeroState)?) -> some View {
+        // The featured card carries its whole journey; every other journey is one card, as in Past (owner, 2026-10-25).
+        let heroJourney = hero.map { TripsLogic.journey(of: $0.leg, in: all) } ?? []
         if let hero {
             FeaturedCard(
-                leg: hero.leg, state: hero.state, next: hero.state == .active ? TripsLogic.nextInJourney(all, after: hero.leg) : nil
+                leg: hero.leg, state: hero.state, next: hero.state == .active ? TripsLogic.nextInJourney(all, after: hero.leg) : nil,
+                journey: heroJourney
             )
         } else {
             NothingAhead()
         }
         if hero != nil && upcoming.isEmpty { NothingAhead() }
-        // A layover line between trips that meet at a station, including from the featured one.
-        let rest = upcoming.filter { $0.id != hero?.leg.id }
+        let shown = Set(heroJourney.map(\.id))
+        let items = TripsLogic.journeys(upcoming.filter { !shown.contains($0.id) })
         VStack(alignment: .leading, spacing: 16) {
-            ForEach(Array(rest.enumerated()), id: \.element.id) { index, leg in
-                let before = index == 0 ? hero?.leg : rest[index - 1]
-                if let before, TripsLogic.meets(before, leg) { Layover(a: before, b: leg) }
-                LegRow(leg: leg, upcoming: true)
+            ForEach(Array(items.enumerated()), id: \.element.first?.id) { index, item in
+                // A layover line between separate trips that still meet at a station.
+                let before = index == 0 ? heroJourney.last : items[index - 1].last
+                if item.count == 1, let before, TripsLogic.meets(before, item[0]) { Layover(a: before, b: item[0]) }
+                if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0], upcoming: true) }
             }
         }
         FollowingSection(follows: model.follows)

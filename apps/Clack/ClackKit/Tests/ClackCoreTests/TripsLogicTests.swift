@@ -45,6 +45,16 @@ private func liveRow(status: String, arrivalEta: Double? = nil) -> String {
 }
 
 struct PartitionTests {
+    @Test func aJourneyIsOneItemInTravelOrder() throws {
+        let legs = [
+            try leg("solo", dep: 30, arr: 90), try leg("second", dep: 200, arr: 260, journey: "j"),
+            try leg("first", dep: 100, arr: 180, journey: "j"),
+        ]
+        #expect(TripsLogic.journeys(legs).map { $0.map(\.id) } == [["solo"], ["first", "second"]])
+        #expect(TripsLogic.journey(of: legs[1], in: legs).map(\.id) == ["first", "second"])
+        #expect(TripsLogic.journey(of: legs[0], in: legs).map(\.id) == ["solo"])
+    }
+
     @Test func aTripYouDidntTakeIsInNeitherListAndNeverFeatured() throws {
         let legs = [
             try leg("skipped-past", dep: -200, arr: -100, ride: "not_taken"), try leg("kept", dep: -2000, arr: -1900),

@@ -83,16 +83,33 @@ public nonisolated enum TripsLogic {
         }
     }
 
-    /// Past trips by month; legs of one journey are shown together, in travel order (DESIGN §4).
-    public static func months(_ past: [Leg], language: Language) -> [MonthGroup] {
+    /// Legs grouped by journey, each group in travel order; the groups keep the order of their first leg in `legs`
+    /// (a journey is one item, not its trips scattered: owner, 2026-10-25).
+    public static func journeys(_ legs: [Leg]) -> [[Leg]] {
         var byJourney: [String: [Leg]] = [:]
-        for leg in past { if let id = leg.journeyId { byJourney[id, default: []].append(leg) } }
-        var groups: [MonthGroup] = []
+        for leg in legs { if let id = leg.journeyId { byJourney[id, default: []].append(leg) } }
+        var items: [[Leg]] = []
         var done = Set<String>()
-        for leg in past where !done.contains(leg.id) {
+        for leg in legs where !done.contains(leg.id) {
             let together = leg.journeyId.flatMap { byJourney[$0] } ?? [leg]
             let item = together.sorted { ($0.schedDep?.ms ?? 0) < ($1.schedDep?.ms ?? 0) }
             for member in item { done.insert(member.id) }
+            items.append(item)
+        }
+        return items
+    }
+
+    /// Every taken leg of the journey a leg belongs to, in travel order (just the leg when it stands alone).
+    public static func journey(of leg: Leg, in legs: [Leg]) -> [Leg] {
+        guard let id = leg.journeyId else { return [leg] }
+        let all = taken(legs).filter { $0.journeyId == id }.sorted { ($0.schedDep?.ms ?? 0) < ($1.schedDep?.ms ?? 0) }
+        return all.isEmpty ? [leg] : all
+    }
+
+    /// Past trips by month; legs of one journey are shown together, in travel order (DESIGN §4).
+    public static func months(_ past: [Leg], language: Language) -> [MonthGroup] {
+        var groups: [MonthGroup] = []
+        for item in journeys(past) {
             let label = Format.month(item[0].schedDep?.ms ?? 0, tz: tz(item[0]), language: language)
             if groups.last?.label != label { groups.append(MonthGroup(label: label, items: [])) }
             groups[groups.count - 1].items.append(item)

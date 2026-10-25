@@ -16,6 +16,8 @@ struct FeaturedCard: View {
     let state: TripsLogic.HeroState
     /// The leg you change to next, if this one is part of a journey with a change ahead.
     let next: Leg?
+    /// Every leg of this leg's journey, in travel order (just this leg when it stands alone): the card shows the journey.
+    var journey: [Leg] = []
     @State private var detail: LegDetail?
     /// The route strip's geometry, decoded once when the detail arrives (not every second with the clock).
     @State private var strip: FeaturedMapStrip.Route?
@@ -27,20 +29,36 @@ struct FeaturedCard: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(l10n.t("trips.viewJourney", ["from": leg.origin?.name ?? "", "to": leg.destination?.name ?? ""]))
         }
-        .task(id: leg.id) {
-            if let cached = app.legDetails[leg.id] {
-                set(cached)
-            } else if let fetched = try? await app.client.leg(leg.id) {
-                app.legDetails[leg.id] = fetched
-                set(fetched)
+        .task(id: legs.map(\.id).joined(separator: ",")) {
+            var details: [LegDetail] = []
+            for member in legs {
+                if let cached = app.legDetails[member.id] {
+                    details.append(cached)
+                } else if let fetched = try? await app.client.leg(member.id) {
+                    app.legDetails[member.id] = fetched
+                    details.append(fetched)
+                }
             }
+            set(details)
         }
     }
 
-    private func set(_ detail: LegDetail) {
-        self.detail = detail
-        let geo = detail.mapRoute(endsOnly: true)
-        strip = FeaturedMapStrip.Route(route: geo.route, stops: geo.stops)
+    /// The journey's legs (at least this one).
+    private var legs: [Leg] { journey.count > 1 ? journey : [leg] }
+    private var isJourney: Bool { legs.count > 1 }
+
+    /// The strip draws the whole journey: each leg's route one after the other, with its ends (the changes) marked.
+    private func set(_ details: [LegDetail]) {
+        detail = details.first { $0.id == leg.id }
+        var route: [LatLon] = []
+        var stops: [MapStop] = []
+        for d in details {
+            let geo = d.mapRoute(endsOnly: true)
+            route += geo.route
+            // A change station is the end of one leg and the start of the next: label it once.
+            stops += geo.stops.filter { stop in !stops.contains { $0.name == stop.name } }
+        }
+        strip = FeaturedMapStrip.Route(route: route, stops: stops)
     }
 
     private func card(now: Double) -> some View {
@@ -79,11 +97,16 @@ struct FeaturedCard: View {
                     case .active: if let live { LiveStatus(live: live, now: now) }
                     }
                 }
-                Text("\(leg.origin?.name ?? "") → \(leg.destination?.name ?? "")")
+                if isJourney {
+                    Text(l10n.t("journey.label", count: legs.count)).clack(.captionUpper).foregroundStyle(Ink.text2)
+                }
+                // A journey reads end to end; its trains are listed under the times of the one featured.
+                Text("\(legs.first?.origin?.name ?? "") → \(legs.last?.destination?.name ?? "")")
                     .clack(.headline).foregroundStyle(Ink.text)
                     .fixedSize(horizontal: false, vertical: true)
                 TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
                 bottom(now: now, live: live)
+                if isJourney { journeyLegs }
             }
             .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,6 +115,29 @@ struct FeaturedCard: View {
         .background(Surface.Hero(op: op))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
+    }
+
+    /// The whole journey under the featured train: each train with its times, the change between them, the one
+    /// featured above marked. Not links (the card is one); the trip page and the journey page have the rest.
+    private var journeyLegs: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Rectangle().fill(Ink.hairline).frame(height: 1).padding(.vertical, 4)
+            ForEach(Array(legs.enumerated()), id: \.element.id) { index, member in
+                if index > 0 { TransferChip(prev: legs[index - 1], next: member) }
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Circle().fill(member.id == leg.id ? Ink.accent : Ink.text3).frame(width: 6, height: 6)
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("\(member.origin?.name ?? "") → \(member.destination?.name ?? "")")
+                            .clack(.stopName).fontWeight(member.id == leg.id ? .semibold : .regular).foregroundStyle(Ink.text)
+                        Text([member.operator?.name, member.trainNumber].compactMap { $0 }.joined(separator: " "))
+                            .clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                    Spacer(minLength: 8)
+                    Text("\(Format.time(member.schedDep?.ms, tz: TripsLogic.tz(member), clock: app.settings.clock))–\(Format.time(member.schedArr?.ms, tz: member.destination?.tz ?? TripsLogic.tz(member), clock: app.settings.clock))")
+                        .clack(.stopName).monospacedDigit().foregroundStyle(Ink.text2)
+                }
+            }
+        }
     }
 
     /// The route strip, outside the clock's reach: it is redrawn only when its own inputs change.
