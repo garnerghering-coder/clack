@@ -22,7 +22,8 @@ import { BoardHub, type BoardHubOptions } from './boards/hub.js';
 import { liveMapRoutes } from './routes/livemap.js';
 import { LiveMapIngest, type IngestOptions } from './livemap/ingest.js';
 import { trackedLegIds } from './live/tracker.js';
-import { legs, users } from './db/schema.js';
+import { legs, liveState, users } from './db/schema.js';
+import { ringStillOn } from './livemap/mine.js';
 import { eq, inArray } from 'drizzle-orm';
 import { railGraph } from './geo/railGraph.js';
 import { rateLimitPlugin } from './plugins/rateLimit.js';
@@ -119,12 +120,18 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     const ids = trackedLegIds(db, Date.now(), userId);
     if (!ids.length) return new Set<string>();
     const rows = db
-      .select({ n: legs.trainNumber, trv: legs.trvTrainNumbers, date: legs.serviceDate, key: legs.timetableTripKey, countries: legs.countryCodes })
+      .select({
+        n: legs.trainNumber, trv: legs.trvTrainNumbers, date: legs.serviceDate, key: legs.timetableTripKey, countries: legs.countryCodes,
+        actualArr: legs.actualArr, schedArr: legs.schedArr, arrDelayMin: legs.arrDelayMin, arrivalEta: liveState.arrivalEta,
+      })
       .from(legs)
+      .leftJoin(liveState, eq(liveState.legId, legs.id))
       .where(inArray(legs.id, ids))
       .all();
+    // The ring is for a train you are on or about to board; the tracker keeps a leg half an hour after it ends.
+    const now = Date.now();
     return new Set(
-      rows.flatMap((r) => [
+      rows.filter((r) => ringStillOn(r, now)).flatMap((r) => [
         // Not for a Finnish train that reaches Haparanda: Trafikverket doesn't report it, and a Swedish train can share its number.
         ...(r.countries.includes('SE') && !(r.key && countryOfKey(r.key) === 'FI') ? [...(r.n ? [r.n] : []), ...r.trv].map((n) => `${n}|${r.date}`) : []),
         ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
