@@ -114,7 +114,7 @@ struct StationMapSpeedTests {
         let now = Date().timeIntervalSince1970 * 1000
         let cache = SceneLayoutCache()
         let level = try #require(map.levels.first { $0.order == 0 }).id
-        func layout() { _ = cache.layout(map: map, level: level, marks: [], k: 3, state: { states.state($0, from: now, to: now) }, dim: { _ in false }) }
+        func layout() { _ = cache.layout(map: map, level: level, marks: [], pins: [], k: 3, state: { states.state($0, from: now, to: now) }, dim: { _ in false }) }
         let clock = ContinuousClock()
         let first = clock.measure { layout() }
         let second = clock.measure { for _ in 0..<60 { layout() } }
