@@ -78,11 +78,7 @@ struct AlertsIntro: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             Spacer(minLength: 0)
-            Image(systemName: "bell.badge.fill")
-                .font(.system(size: 52, weight: .semibold))
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(Ink.accent, Ink.text)
-                .accessibilityHidden(true)
+            LucideIcon(name: "bell-ring", size: 48).foregroundStyle(Ink.accentInk)
             Text(l10n.t("alertsIntro.title")).clack(.welcomeTitle).foregroundStyle(Ink.text).accessibilityAddTraits(.isHeader)
             VStack(alignment: .leading, spacing: 16) {
                 WelcomeLine(icon: "map-pin", text: l10n.t("alertsIntro.platform"))
@@ -90,7 +86,7 @@ struct AlertsIntro: View {
                 WelcomeLine(icon: "smartphone", text: l10n.t("alertsIntro.live"))
             }
             Spacer(minLength: 0)
-            VStack(spacing: 10) {
+            VStack(spacing: 12) {
                 Button(l10n.t("alertsIntro.allow")) { Task { await allow() } }
                     .buttonStyle(.clack(.primary, wide: true))
                     .disabled(busy)

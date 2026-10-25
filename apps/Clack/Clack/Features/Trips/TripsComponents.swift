@@ -371,7 +371,7 @@ struct EmptyActions: View {
 
     var body: some View {
         // Stacked and the same width, the main one first, as in the system's empty states.
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             Button {
                 router.openAdd()
             } label: {

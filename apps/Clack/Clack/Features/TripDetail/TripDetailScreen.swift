@@ -423,7 +423,7 @@ struct TripDetailScreen: View {
             Button {
                 router.tab = .passport
             } label: {
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     LucideIcon(name: "stamp", size: 18).foregroundStyle(Ink.accentInk)
                     Text(l10n.t("detail.seePassport")).clack(.rowTitle).foregroundStyle(Ink.text)
                     Spacer(minLength: 8)

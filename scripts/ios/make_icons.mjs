@@ -16,7 +16,7 @@ const OUT = path.join(ROOT, 'apps', 'Clack', 'ClackKit', 'Sources', 'ClackDesign
 
 // Every icon the app uses (Lucide's kebab-case names; lucide-react is a root dev dependency, ISC licence).
 const ICONS = [
-  'accessibility', 'activity', 'triangle-alert', 'arrow-down-up', 'arrow-left', 'baby', 'bed-double', 'bike', 'check',
+  'accessibility', 'activity', 'triangle-alert', 'arrow-down-up', 'arrow-left', 'baby', 'bed-double', 'bell-ring', 'bike', 'check',
   'chevron-down', 'chevron-right', 'chevron-up', 'clock', 'coffee', 'compass', 'crown', 'door-open', 'download',
   'external-link', 'eye', 'eye-off', 'flag', 'gauge', 'globe', 'info', 'layers', 'list', 'locate-fixed', 'map',
   'map-pin', 'maximize-2', 'moon', 'navigation', 'paw-print', 'plug', 'plus', 'radar', 'refresh-cw', 'repeat', 'route',
