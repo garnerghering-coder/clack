@@ -20,6 +20,8 @@ struct ClackApp: App {
         LiveActivityManager.shared.observe { model.client }
         // A silent push or a background refresh can wake the app with no screen: they refresh through this model.
         BackgroundRefresh.shared.attach(model)
+        // Usage counts and Apple's crash reports, sent to Clack's own server (Settings > Usage data turns it off).
+        Usage.shared.start { model.client }
     }
 
     var body: some Scene {

@@ -48,6 +48,7 @@ struct BoardScreen: View {
             }
         }
         .plainBar()
+        .countsScreen("board")
         .refreshable {
             if let station, station.hasBoard, let fresh = try? await app.client.board(stationId, arrivals: arrivals) { board = fresh }
         }
@@ -115,6 +116,7 @@ struct BoardScreen: View {
 
     private func toggleFavorite() async {
         guard let station else { return }
+        Usage.shared.count(.feature, "station.favorite")
         if let on = try? await app.client.setFavorite(station.id, !favoriteOverride) {
             favoriteOverride = on
             await app.stations.setFavorite(station.id, on)
@@ -196,7 +198,7 @@ struct BoardScreen: View {
                     }
                 }
             } else if error {
-                Banner(kind: .error) { Text(l10n.t("board.error")) }
+                Banner(kind: .error) { Text(l10n.t("board.error")) }.countsError("board.load")
             } else {
                 VStack(alignment: .leading, spacing: 12) {
                     Skeleton(height: 64)

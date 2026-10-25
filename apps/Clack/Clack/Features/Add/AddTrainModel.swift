@@ -112,6 +112,8 @@ final class AddTrainModel {
             Task { _ = try? await client.answerRide(replace, .no) }
         }
         saved = leg
+        Usage.shared.count(.feature, "trips.add")
+        if let from = leg.leg.origin?.id, let to = leg.leg.destination?.id { Usage.shared.count(.route, "\(from)>\(to)") }
     }
 
     func reset() {

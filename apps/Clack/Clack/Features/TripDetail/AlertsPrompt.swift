@@ -41,7 +41,10 @@ struct AlertsPrompt: View {
     private func turnOn() async {
         busy = true
         // The same as Settings' switch: on only if iOS says yes.
-        if await app.notifications.requestPermission() { await app.update(SettingsPatch(notify: true)) }
+        if await app.notifications.requestPermission() {
+            await app.update(SettingsPatch(notify: true))
+            Usage.shared.count(.feature, "alerts.on")
+        }
         asked = true
         busy = false
     }

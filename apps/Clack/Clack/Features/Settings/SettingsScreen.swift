@@ -72,7 +72,7 @@ struct SettingsScreen: View {
     var body: some View {
         let s = app.settings
         Page {
-            if app.saveFailed { Banner(kind: .error) { Text(l10n.t("settings.saveError")) } }
+            if app.saveFailed { Banner(kind: .error) { Text(l10n.t("settings.saveError")) }.countsError("settings.save") }
             Card {
                 HStack(spacing: 12) {
                     Text(l10n.t("settings.theme")).clack(.settingsRow).foregroundStyle(Ink.text)
@@ -127,8 +127,10 @@ struct SettingsScreen: View {
             AlertsCard(change: change)
             OfflineMapsCard()
             Card {
-                LinkRow(label: l10n.t("settings.about"), route: .about, last: true)
+                LinkRow(label: l10n.t("settings.about"), route: .about)
+                ReportBugRow()
             }
+            UsageCard()
             Card {
                 Text(l10n.t("settings.yourData")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                 LinkRow(label: l10n.t("settings.privacy"), route: .privacy)
@@ -143,7 +145,7 @@ struct SettingsScreen: View {
                 .buttonStyle(.clack(wide: true))
             #endif
         }
-        .screenTitle(l10n.t("settings.title"))
+        .screenTitle(l10n.t("settings.title")).countsScreen("settings")
     }
 }
 
@@ -255,6 +257,57 @@ private struct SettingsToggle: View {
             Toggle("", isOn: Binding(get: { isOn }, set: onChange)).labelsHidden().tint(Ink.accent)
         }
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// Usage data (owner, 2026-10-25): anonymous daily counts and Apple's crash reports to Clack's own server, on unless
+/// turned off here. What's counted is said in plain words under the switch.
+private struct UsageCard: View {
+    @Environment(L10n.self) private var l10n
+    @State private var on = Usage.shared.enabled
+
+    var body: some View {
+        Card {
+            Text(l10n.t("settings.usage.title")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            SettingsToggle(label: l10n.t("settings.usage.share"), isOn: on, last: true) { value in
+                on = value
+                Usage.shared.enabled = value
+            }
+            Text(l10n.t("settings.usage.note")).clack(.caption).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+/// "Report a bug": an email to Clack with the app version, build, iOS and the last error filled in; nothing else is
+/// attached unless they add it.
+private struct ReportBugRow: View {
+    @Environment(L10n.self) private var l10n
+    @Environment(\.openURL) private var openURL
+
+    var body: some View {
+        Button {
+            if let url = Self.mail(l10n) { openURL(url) }
+        } label: {
+            SettingsRow(label: l10n.t("settings.reportBug"), last: true) {
+                LucideIcon(name: "external-link", size: 18).foregroundStyle(Ink.text3)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    static func mail(_ l10n: L10n) -> URL? {
+        guard let email = Config.supportEmail else { return nil }
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let lastError = (UserDefaults.standard.dictionary(forKey: "clack.usage.lastError")?["name"] as? String) ?? "–"
+        let body = l10n.t("settings.reportBugBody", [
+            "version": version, "build": Usage.build, "ios": UIDevice.current.systemVersion, "error": lastError,
+        ])
+        var c = URLComponents()
+        c.scheme = "mailto"
+        c.path = email
+        c.queryItems = [URLQueryItem(name: "subject", value: l10n.t("settings.reportBugSubject")), URLQueryItem(name: "body", value: body)]
+        return c.url
     }
 }
 
@@ -415,7 +468,7 @@ struct AboutScreen: View {
 struct PrivacyScreen: View {
     @Environment(L10n.self) private var l10n
 
-    private static let parts = ["stored", "phone", "alerts", "location", "notCollected", "sharing", "deletion"]
+    private static let parts = ["stored", "phone", "alerts", "location", "notCollected", "sharing", "deletion", "usage"]
 
     var body: some View {
         Page {
@@ -432,7 +485,7 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-10-24"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-10-25"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
         .screenTitle(l10n.t("privacy.title"))

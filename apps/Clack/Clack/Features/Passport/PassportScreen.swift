@@ -36,7 +36,7 @@ struct PassportScreen: View {
     var body: some View {
         Page {
             if failed {
-                Banner(kind: .error) { Text(l10n.t("passport.loadError")) }
+                Banner(kind: .error) { Text(l10n.t("passport.loadError")) }.countsError("passport.load")
             } else if let data {
                 content(data)
             } else {
@@ -48,7 +48,7 @@ struct PassportScreen: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 if let data, data.totals.trains > 0 {
-                    Button { sharing = true } label: { Label { Text(l10n.t("share.title")) } icon: { toolbarIcon("share-2") } }
+                    Button { sharing = true; Usage.shared.count(.feature, "passport.share") } label: { Label { Text(l10n.t("share.title")) } icon: { toolbarIcon("share-2") } }
                 }
                 NavigationLink(value: AppRoute.settings) { Label { Text(l10n.t("nav.settings")) } icon: { toolbarIcon("settings") } }
             }

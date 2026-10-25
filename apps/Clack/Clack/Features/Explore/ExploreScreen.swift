@@ -302,6 +302,8 @@ struct ExploreScreen: View {
                 HStack(spacing: 8) {
                     statusChip
                     MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
+                    // Your position: iOS asks the first time; then your dot, and the map goes to it.
+                    MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation"), pressed: model.showingMe) { model.toggleMe() }
                 }
             }
             Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic)")

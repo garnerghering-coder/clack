@@ -140,6 +140,7 @@ struct TrainDetailSheet: View {
     }
 
     private func toggleFollow(_ view: TrainView) async {
+        Usage.shared.count(.feature, "train.follow")
         busy = true
         defer { busy = false }
         do {

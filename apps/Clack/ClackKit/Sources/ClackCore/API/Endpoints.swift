@@ -83,6 +83,13 @@ extension APIClient {
     }
 
     public func popularStations() async throws -> [StationHit] { try await get(["stations", "popular"]) }
+    /// Real trains leaving within the hour, near a position when given, else from the big stations.
+    public func trainsSoon(lat: Double? = nil, lon: Double? = nil) async throws -> [SoonTrain] {
+        var query: [String: String] = [:]
+        // Rounded to about a kilometre: enough for the nearest stations, and the server doesn't keep it.
+        if let lat, let lon { query = ["lat": String(format: "%.2f", lat), "lon": String(format: "%.2f", lon)] }
+        return try await get(["trains", "soon"], query: query)
+    }
 
     public func searchStations(_ text: String, limit: Int = 12) async throws -> [StationHit] {
         try await get(["stations", "search"], query: ["q": text, "limit": String(limit)])

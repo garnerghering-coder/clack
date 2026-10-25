@@ -454,3 +454,34 @@ export const legAudits = sqliteTable('leg_audits', {
   auditedAt: timestamp('audited_at').notNull(),
   result: text('result', { mode: 'json' }).$type<Record<string, unknown>>().notNull(),
 });
+
+// ---------- Usage (owner, 2026-10-25) ----------
+
+/**
+ * How the app is used, as daily counts with nothing about who: no user id, no device, no times finer than a day. What
+ * was opened or done (`screen`, `feature`), which station pairs were searched (`route`), what failed (`error`), and a
+ * relaunch soon after an error (`relaunch`). Sent by phones that have Usage data on (Settings).
+ */
+export const usageCounts = sqliteTable(
+  'usage_counts',
+  {
+    day: text('day').notNull(),
+    kind: text('kind').notNull(),
+    name: text('name').notNull(),
+    count: integer('count').notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.day, t.kind, t.name] })],
+);
+
+/** Crash and hang reports from Apple's MetricKit, summarised: app build, what kind, where (the top frame), how many. */
+export const diagnostics = sqliteTable(
+  'diagnostics',
+  {
+    day: text('day').notNull(),
+    build: text('build').notNull(),
+    kind: text('kind').notNull(),
+    signature: text('signature').notNull(),
+    count: integer('count').notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.day, t.build, t.kind, t.signature] })],
+);

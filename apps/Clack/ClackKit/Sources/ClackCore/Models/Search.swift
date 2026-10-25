@@ -318,3 +318,24 @@ public nonisolated struct Board: Codable, Hashable, Sendable {
         self.rows = rows
     }
 }
+
+/// A real train leaving within the hour (`GET /api/trains/soon`): the first screen's one-tap trips. A whole run from
+/// `from` to the train's last stop, ready for `createLeg`.
+public nonisolated struct SoonTrain: Codable, Hashable, Sendable, Identifiable {
+    public struct Place: Codable, Hashable, Sendable { public let id: String; public let name: String }
+    public let tripKey: String
+    public let serviceDate: String
+    public let fromSeq: Int
+    public let toSeq: Int
+    public let trainNumber: String?
+    public let operatorId: String?
+    public let category: String
+    public let from: Place
+    public let to: Place
+    /// Epoch ms, timetable.
+    public let dep: Double
+    public let arr: Double
+
+    public var id: String { "\(tripKey)|\(fromSeq)" }
+    public var body: CreateLegBody { CreateLegBody(tripKey: tripKey, serviceDate: serviceDate, fromSeq: fromSeq, toSeq: toSeq) }
+}

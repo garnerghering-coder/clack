@@ -73,7 +73,7 @@ private struct SearchStep: View {
         } else if let interpretation = model.interpretation, interpretation.operator != nil || interpretation.trainNumber != nil || interpretation.from != nil || interpretation.to != nil {
             interpretationChips(interpretation)
         }
-        if model.searchFailed { Banner(kind: .error) { Text(l10n.t("add.searchError")) } }
+        if model.searchFailed { Banner(kind: .error) { Text(l10n.t("add.searchError")) }.countsError("add.search") }
 
         if model.query.isEmpty {
             Text(l10n.t("add.popular")).clack(.sectionHeader).foregroundStyle(Ink.text2)

@@ -67,6 +67,15 @@ final class ExploreModel {
         }
     }
 
+    /// Your dot is on the map (the locate button).
+    private(set) var showingMe = false
+
+    func toggleMe() {
+        showingMe.toggle()
+        controller.showUser(showingMe)
+        Usage.shared.count(.feature, "explore.myLocation")
+    }
+
     /// The theme the map is drawn in (colours of markers and routes).
     var dark = true
 
@@ -251,6 +260,7 @@ final class ExploreModel {
     }
 
     func toggleFollow(number: String, date: String, operatorId: String?, label: String?) async {
+        Usage.shared.count(.feature, "explore.follow")
         guard let client = app?.client else { return }
         do {
             if isFollowed(number: number, date: date) {

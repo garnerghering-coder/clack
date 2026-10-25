@@ -79,6 +79,7 @@ struct TripDetailScreen: View {
             }
         }
         .task(id: id) { await load() }
+        .countsScreen("trip")
         .task(id: id) { await listen() }
         .onChange(of: leg, initial: true) { geo = leg.map(RouteGeo.init) }
         .task(id: toast) {
@@ -155,6 +156,7 @@ struct TripDetailScreen: View {
     }
 
     private func savePlatform() async {
+        Usage.shared.count(.feature, "trip.typePlatform")
         let end = platformEnd
         let text = typedPlatform.trimmingCharacters(in: .whitespacesAndNewlines)
         let value: String? = text.isEmpty ? nil : String(text.prefix(6))

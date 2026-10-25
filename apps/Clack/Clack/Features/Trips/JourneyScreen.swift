@@ -63,6 +63,7 @@ struct JourneyScreen: View {
             }
         }
         .plainBar()
+        .countsScreen("journey")
         .task(id: id) {
             do {
                 journey = try await app.client.journey(id)

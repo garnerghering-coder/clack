@@ -47,6 +47,8 @@ struct StationMapScreen: View {
     @State private var seeded = false
     @State private var cardHeight: CGFloat = 0
     @State private var stateCache = PoiStateCache()
+    /// How exact the last position was (metres), while the walk starts at you.
+    @State private var meAccuracy: Double?
 
     private var tz: String { "Europe/Stockholm" }
     private var clock: ClockFormat { app.settings.clock }
@@ -90,8 +92,34 @@ struct StationMapScreen: View {
         }
         .onChange(of: from) { reselectLevel() }
         .onChange(of: to) { reselectLevel() }
+        // Walking from "My location" (owner, 2026-10-25): the position is followed while the walk starts at you, and the
+        // walk is planned again from the walkway point nearest you whenever that changes, so "you" and the next step move
+        // as you walk. iOS asks once for the precise position if only an approximate one is shared.
+        .task(id: walkingMe) {
+            guard walkingMe else { meAccuracy = nil; return }
+            let location = LocationModel.shared
+            location.start()
+            location.askPreciseForWalking()
+            while !Task.isCancelled {
+                if case .map(let map) = loaded, let fix = location.location, -fix.timestamp.timeIntervalSinceNow < 30 { follow(map, fix) }
+                try? await Task.sleep(for: .seconds(2))
+            }
+            location.stop()
+        }
+        .overlay(alignment: .top) {
+            // Indoors GPS is rough: say how rough rather than pretend.
+            if walkingMe, let m = meAccuracy, m > 20 {
+                Text(l10n.t("stationMap.roughGps", ["m": String(Int(m.rounded()))]))
+                    .clack(.caption).foregroundStyle(Ink.text2)
+                    .padding(.vertical, 4).padding(.horizontal, 12)
+                    .background(Ink.glass, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                    .padding(.top, 116)
+                    .allowsHitTesting(false)
+            }
+        }
         // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
         .toolbar(.hidden, for: .navigationBar)
+        .countsScreen("stationMap")
     }
 
     /// The level the walk starts on, when it has an end.
@@ -138,6 +166,19 @@ struct StationMapScreen: View {
         guard let centre else { return l10n.t("stationMap.entranceOn", ["level": levelName(map, n.level)]) }
         let dir = StationSceneLogic.compass(of: n, from: centre)
         return l10n.t("stationMap.entranceDir", ["dir": l10n.t("stationMap.compass.\(dir)"), "level": levelName(map, n.level)])
+    }
+
+    private var walkingMe: Bool { from?.hasPrefix("me:") == true }
+
+    /// The walk starts at the walkway point nearest the new position, on the level you're on.
+    private func follow(_ map: StationMap, _ fix: CLLocation) {
+        meAccuracy = fix.horizontalAccuracy
+        let here = StationRouting.resolveEndpoint(map, from)?.node
+        let local = StationRouting.toLocal(map, lat: fix.coordinate.latitude, lon: fix.coordinate.longitude)
+        let reach = 60 + min(max(fix.horizontalAccuracy, 0), 150)
+        guard let node = StationRouting.nearestNode(map, level: here?.level ?? level ?? "", x: local.x, y: local.y, maxMeters: reach),
+              node.id != here?.id else { return }
+        setRoute("me:\(node.id)", to)
     }
 
     private func setRoute(_ f: String?, _ t: String?) {
@@ -676,7 +717,7 @@ private struct PlaceSearchSheet: View {
     /// the reported accuracy.
     private func locate() async {
         locating = .busy
-        guard let fix = await OneShotLocation.request() else { locating = .denied; return }
+        guard let fix = await LocationModel.shared.current() else { locating = .denied; return }
         let local = StationRouting.toLocal(map, lat: fix.coordinate.latitude, lon: fix.coordinate.longitude)
         guard let node = StationRouting.nearestNode(map, level: level, x: local.x, y: local.y, maxMeters: 120 + min(max(fix.horizontalAccuracy, 0), 150)) else {
             locating = .far
@@ -741,64 +782,5 @@ private struct PoiSheet: View {
         case .amount(let amount, _): l10n.t("stationMap.fee", ["amount": String(format: "%g", amount)])
         case nil: nil
         }
-    }
-}
-
-// MARK: location
-
-/// One position fix, asked for only when "My location" is tapped (docs/SWIFT_PORT.md: location only on tap).
-@MainActor
-private final class OneShotLocation: NSObject, CLLocationManagerDelegate {
-    private let manager = CLLocationManager()
-    private var continuation: CheckedContinuation<CLLocation?, Never>?
-    private static var current: OneShotLocation?
-
-    static func request() async -> CLLocation? {
-        let job = OneShotLocation()
-        current = job
-        defer { current = nil }
-        return await job.run()
-    }
-
-    private func run() async -> CLLocation? {
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        return await withCheckedContinuation { continuation in
-            self.continuation = continuation
-            switch manager.authorizationStatus {
-            case .notDetermined: manager.requestWhenInUseAuthorization()
-            case .denied, .restricted: finish(nil)
-            default: manager.requestLocation()
-            }
-            // 12 s at most.
-            Task { @MainActor [weak self] in
-                try? await Task.sleep(for: .seconds(12))
-                self?.finish(nil)
-            }
-        }
-    }
-
-    private func finish(_ location: CLLocation?) {
-        continuation?.resume(returning: location)
-        continuation = nil
-    }
-
-    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        Task { @MainActor in
-            switch manager.authorizationStatus {
-            case .authorizedWhenInUse, .authorizedAlways: manager.requestLocation()
-            case .denied, .restricted: finish(nil)
-            default: break
-            }
-        }
-    }
-
-    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let best = locations.last
-        Task { @MainActor in finish(best) }
-    }
-
-    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Task { @MainActor in finish(nil) }
     }
 }

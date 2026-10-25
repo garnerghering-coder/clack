@@ -52,7 +52,6 @@ final class Router {
         if args.contains("-firstRun") {
             UserDefaults.standard.removeObject(forKey: FirstRun.welcomeSeenKey)
             UserDefaults.standard.removeObject(forKey: FirstRun.alertsAskedKey)
-            UserDefaults.standard.removeObject(forKey: FirstRun.alertsIntroSeenKey)
         }
         // `-sheetTrain <number>|<date>[|<key>]` opens that train in place, as a board row on Trips does.
         if let raw = value("-sheetTrain") {

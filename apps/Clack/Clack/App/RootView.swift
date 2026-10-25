@@ -13,8 +13,6 @@ struct RootView: View {
     @State private var router = Router()
     @State private var splashMinDone = false
     @State private var splashGone = false
-    /// Someone who had Clack before the welcome asked about alerts: the alerts page once, by itself.
-    @State private var askAlerts = false
     @Environment(\.scenePhase) private var scenePhase
 
     /// The splash goes once the settings have loaded (or failed to) and the tiles have had time to flip in.
@@ -81,12 +79,6 @@ struct RootView: View {
         }
         .onOpenURL { url in openURL(url) }
         .preferredColorScheme(app.colorScheme)
-        .fullScreenCover(isPresented: Binding(get: { askAlerts && splashGone }, set: { askAlerts = $0 })) {
-            AlertsIntro { askAlerts = false }
-                .environment(app)
-                .environment(app.l10n)
-                .preferredColorScheme(app.colorScheme)
-        }
         // The end of a journey: held back until the splash is gone and the Add sheet is closed.
         .fullScreenCover(item: Binding(
             get: { splashGone && router.addRequest == nil ? app.arrivals.pending : nil },
@@ -98,6 +90,8 @@ struct RootView: View {
                 .environment(router)
         }
         // Alerts: tell the server this phone's address whenever it changes or alerts are switched on.
+        // Going to the background: send the day's usage counts (at most every six hours).
+        .onChange(of: scenePhase) { _, phase in if phase == .background { Task { await Usage.shared.flush() } } }
         .task(id: "\(scenePhase == .active)|\(app.settings.notify)|\(app.notifications.token ?? "")|\(app.notifications.startToken ?? "")") {
             guard scenePhase == .active else { return }
             await app.notifications.refresh()
@@ -220,14 +214,6 @@ struct RootView: View {
         do {
             let legs: [Leg] = try await app.client.get(["legs"])
             let welcomeDue = FirstRun.holdsLanding(seen: UserDefaults.standard.bool(forKey: FirstRun.welcomeSeenKey), legs: legs.count)
-            await app.notifications.refresh()
-            // Clack's alerts switch comes with the settings: wait for them (a failed load says nothing).
-            while app.state == .loading { try? await Task.sleep(for: .milliseconds(100)) }
-            askAlerts = app.state != .failed && FirstRun.showsAlertsIntro(
-                notDetermined: app.notifications.authorization == .notDetermined,
-                allowedButOff: app.notifications.authorization == .authorized && !app.settings.notify,
-                introSeen: UserDefaults.standard.bool(forKey: FirstRun.alertsIntroSeenKey), welcomeDue: welcomeDue
-            )
             // A new phone stays on Trips for the welcome.
             if welcomeDue { return }
             let tab = Landing.resolve(
@@ -247,9 +233,10 @@ private struct TouchWatch: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: router.tab) { _, tab in
+            .onChange(of: router.tab, initial: true) { _, tab in
                 Landing.saveLastTab(tab)
                 router.touched = true
+                Usage.shared.count(.screen, "tab.\(tab.rawValue)")
             }
             .onChange(of: router.tripsTab) { router.touched = true }
             .onChange(of: router.tripsPath.count + router.explorePath.count + router.passportPath.count) { router.touched = true }

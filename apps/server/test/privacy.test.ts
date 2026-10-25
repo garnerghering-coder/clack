@@ -20,7 +20,7 @@ describe('privacy page', () => {
       const body = text(res.body);
       expect(body).toContain(`<html lang="${lang}">`);
       expect(body).toContain(`<title>${strings('title')} · Clack</title>`);
-      for (const key of ['intro', 'storedBody', 'phoneBody', 'idSync', 'locationBody', 'notCollectedBody', 'sharingBody', 'deletionBody', 'alertsBody'] as const) {
+      for (const key of ['intro', 'storedBody', 'phoneBody', 'idSync', 'locationBody', 'notCollectedBody', 'sharingBody', 'deletionBody', 'alertsBody', 'usageBody'] as const) {
         expect(body, key).toContain(strings(key));
       }
     });

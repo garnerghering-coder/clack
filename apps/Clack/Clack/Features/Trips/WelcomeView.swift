@@ -7,111 +7,126 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// The first time Clack opens (DESIGN §13): the wordmark and what Clack does in three lines, then a page asking for
-/// alerts (owner, 2026-10-25: ask up front, so alerts and the trip card work from the first trip). No sign-up. Shown
-/// once (`FirstRun`); the empty Trips screen under it has the ways to start.
+/// The first time Clack opens (owner, 2026-10-25: value in the first minute, permissions only in context): the
+/// wordmark, one line, and real trains leaving in the next hour that go into Trips with one tap, plus "Find your train".
+/// No permission prompts here: location is asked only if they tap "Trains near you", alerts on a trip still ahead
+/// (`AlertsPrompt`). Shown once (`FirstRun`).
 struct WelcomeView: View {
-    @Environment(L10n.self) private var l10n
-    let onDone: () -> Void
-    @State private var askingAlerts = false
-
-    var body: some View {
-        if askingAlerts {
-            AlertsIntro(onDone: onDone)
-                .transition(.move(edge: .trailing).combined(with: .opacity))
-        } else {
-            intro.transition(.opacity)
-        }
-    }
-
-    private var intro: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Spacer(minLength: 0)
-            Wordmark(fontSize: 44)
-            Text(l10n.t("app.tagline")).clack(.splashTagline).foregroundStyle(Ink.text2)
-            VStack(alignment: .leading, spacing: 16) {
-                line("ticket", l10n.t("firstRun.log"))
-                line("radar", l10n.t("firstRun.live"))
-                line("stamp", l10n.t("firstRun.passport"))
-            }
-            Spacer(minLength: 0)
-            Button(l10n.t("firstRun.continue")) {
-                withAnimation(.easeInOut(duration: 0.3)) { askingAlerts = true }
-            }
-            .buttonStyle(.clack(.primary, wide: true))
-        }
-        .padding(.horizontal, 16).padding(.vertical, 24)
-        .frame(maxWidth: 560, maxHeight: .infinity, alignment: .leading)
-        .frame(maxWidth: .infinity)
-        .background(Ink.bg)
-        .accessibilityElement(children: .contain)
-    }
-
-    private func line(_ icon: String, _ text: String) -> some View {
-        WelcomeLine(icon: icon, text: text)
-    }
-}
-
-/// One line of what Clack does: an icon in the accent ink and a sentence.
-private struct WelcomeLine: View {
-    let icon: String
-    let text: String
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 12) {
-            LucideIcon(name: icon, size: 20).foregroundStyle(Ink.accentInk)
-            Text(text).clack(.body).foregroundStyle(Ink.text).fixedSize(horizontal: false, vertical: true)
-        }
-    }
-}
-
-/// "Know when your train changes": what alerts and the trip card do, then iOS's own question. Part of the welcome,
-/// and shown once by itself to someone who had Clack before it asked (`FirstRun.showsAlertsIntro`). "Not now" leaves
-/// the one-time card on an upcoming trip as the next chance.
-struct AlertsIntro: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
-    @AppStorage(FirstRun.alertsIntroSeenKey) private var seen = false
+    @Environment(Router.self) private var router
     let onDone: () -> Void
-    @State private var busy = false
+    @State private var trains: [SoonTrain]?
+    @State private var near = false
+    @State private var adding: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Spacer(minLength: 0)
-            LucideIcon(name: "bell-ring", size: 48).foregroundStyle(Ink.accentInk)
-            Text(l10n.t("alertsIntro.title")).clack(.welcomeTitle).foregroundStyle(Ink.text).accessibilityAddTraits(.isHeader)
-            VStack(alignment: .leading, spacing: 16) {
-                WelcomeLine(icon: "map-pin", text: l10n.t("alertsIntro.platform"))
-                WelcomeLine(icon: "triangle-alert", text: l10n.t("alertsIntro.delays"))
-                WelcomeLine(icon: "smartphone", text: l10n.t("alertsIntro.live"))
-            }
-            Spacer(minLength: 0)
-            VStack(spacing: 12) {
-                Button(l10n.t("alertsIntro.allow")) { Task { await allow() } }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                Wordmark(fontSize: 40).padding(.top, 24)
+                Text(l10n.t("firstRun.log")).clack(.body).foregroundStyle(Ink.text2).fixedSize(horizontal: false, vertical: true)
+                soon
+                VStack(spacing: 12) {
+                    Button {
+                        onDone()
+                        router.openAdd()
+                    } label: {
+                        Label { Text(l10n.t("firstRun.find")) } icon: { LucideIcon(name: "search", size: 18) }
+                    }
                     .buttonStyle(.clack(.primary, wide: true))
-                    .disabled(busy)
-                Button(l10n.t("alertsIntro.notNow")) { finish() }
-                    .buttonStyle(.clack(wide: true))
-                Text(l10n.t("alertsIntro.later")).clack(.caption).foregroundStyle(Ink.text2).frame(maxWidth: .infinity)
+                    Button(l10n.t("firstRun.skip")) { onDone() }.buttonStyle(LinkButtonStyle())
+                }
+                .padding(.top, 8)
+            }
+            // Room under "Not now" for the floating tab bar.
+            .padding(.horizontal, 16).padding(.bottom, 120)
+            .frame(maxWidth: 560, alignment: .leading)
+            .frame(maxWidth: .infinity)
+        }
+        .background(Ink.bg)
+        .task { await load() }
+    }
+
+    @ViewBuilder private var soon: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(l10n.t(near ? "firstRun.nearTitle" : "firstRun.soonTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                Spacer(minLength: 8)
+                // Asked only when tapped: iOS's own prompt, then the trains from the stations nearest you.
+                if !near && !LocationModel.shared.denied {
+                    Button {
+                        Task { await loadNear() }
+                    } label: {
+                        Label { Text(l10n.t("firstRun.nearYou")) } icon: { LucideIcon(name: "locate-fixed", size: 14) }
+                    }
+                    .buttonStyle(.clack(small: true))
+                }
+            }
+            if let trains {
+                if trains.isEmpty {
+                    Text(l10n.t("firstRun.soonEmpty")).clack(.caption).foregroundStyle(Ink.text2)
+                }
+                ForEach(trains) { train in row(train) }
+            } else {
+                Skeleton(height: 64)
+                Skeleton(height: 64)
             }
         }
-        .padding(.horizontal, 16).padding(.vertical, 24)
-        .frame(maxWidth: 560, maxHeight: .infinity, alignment: .leading)
-        .frame(maxWidth: .infinity)
-        .background(Ink.bg)
-        .accessibilityElement(children: .contain)
     }
 
-    /// iOS asks; alerts go on (the same as Settings' switch) only if it says yes.
-    private func allow() async {
-        busy = true
-        if await app.notifications.requestPermission() { await app.update(SettingsPatch(notify: true)) }
-        busy = false
-        finish()
+    private func row(_ t: SoonTrain) -> some View {
+        let op = t.operatorId.flatMap { app.operatorsById[$0] }
+        let tz = TimeZone.current.identifier
+        return HStack(spacing: 12) {
+            OperatorBadge(op: op, size: .medium)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(t.from.name) → \(t.to.name)").clack(.rowTitle).foregroundStyle(Ink.text).lineLimit(1)
+                Text(Format.join([
+                    "\(Format.time(t.dep, tz: tz, clock: app.settings.clock))–\(Format.time(t.arr, tz: tz, clock: app.settings.clock))",
+                    [op?.name, t.trainNumber].compactMap { $0 }.joined(separator: " "),
+                ])).clack(.caption).foregroundStyle(Ink.text2).lineLimit(1)
+            }
+            Spacer(minLength: 8)
+            Button {
+                Task { await add(t) }
+            } label: {
+                if adding == t.id { ProgressView() } else { Text(l10n.t("firstRun.add")) }
+            }
+            .buttonStyle(.clack(.primary, small: true))
+            .disabled(adding != nil)
+            .accessibilityLabel(l10n.t("firstRun.addLabel", ["from": t.from.name, "to": t.to.name]))
+        }
+        .padding(12)
+        .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
     }
 
-    private func finish() {
-        seen = true
+    private func load() async {
+        // Already allowed: near you straight away, without asking anything.
+        if LocationModel.shared.allowed, let here = await LocationModel.shared.current() {
+            near = true
+            trains = (try? await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)) ?? []
+            return
+        }
+        trains = (try? await app.client.trainsSoon()) ?? []
+    }
+
+    private func loadNear() async {
+        guard let here = await LocationModel.shared.current() else { return }
+        let found = (try? await app.client.trainsSoon(lat: here.coordinate.latitude, lon: here.coordinate.longitude)) ?? []
+        if !found.isEmpty {
+            near = true
+            trains = found
+        }
+    }
+
+    /// Saves the whole run as a planned trip and opens it.
+    private func add(_ t: SoonTrain) async {
+        adding = t.id
+        defer { adding = nil }
+        guard let saved = try? await app.client.createLeg(t.body) else { return }
+        Usage.shared.count(.feature, "firstRun.addSuggested")
         onDone()
+        router.push(.trip(saved.id))
     }
 }

@@ -129,6 +129,7 @@ struct TripsScreen: View {
                         Button(l10n.t("trips.retry")) { Task { await model.load(app.client) } }.buttonStyle(LinkButtonStyle())
                     }
                 }
+                .countsError("trips.load")
             }
             if model.legs == nil && !model.failed {
                 VStack(spacing: 12) {

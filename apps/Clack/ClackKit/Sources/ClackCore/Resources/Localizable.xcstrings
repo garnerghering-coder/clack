@@ -1368,125 +1368,6 @@
         }
       }
     },
-    "alertsIntro.allow" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow alerts"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tillåt notiser"
-          }
-        }
-      }
-    },
-    "alertsIntro.delays" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delays, cancellations and tight changes, even with Clack closed."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Förseningar, inställda tåg och snäva byten, även när Clack är stängd."
-          }
-        }
-      }
-    },
-    "alertsIntro.later" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can change this any time in Settings."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du kan ändra det när som helst i Inställningar."
-          }
-        }
-      }
-    },
-    "alertsIntro.live" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your trip live on the Lock Screen and in the Dynamic Island."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Din resa live på låsskärmen och i Dynamic Island."
-          }
-        }
-      }
-    },
-    "alertsIntro.notNow" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not now"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inte nu"
-          }
-        }
-      }
-    },
-    "alertsIntro.platform" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The platform as soon as it’s announced, and any change to it."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spåret så fort det meddelas, och varje ändring."
-          }
-        }
-      }
-    },
-    "alertsIntro.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Know when your train changes"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Få veta när ditt tåg ändras"
-          }
-        }
-      }
-    },
     "alertsPrompt.body" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6244,36 +6125,53 @@
         }
       }
     },
-    "firstRun.continue" : {
+    "firstRun.add" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue"
+            "value" : "Add"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fortsätt"
+            "value" : "Lägg till"
           }
         }
       }
     },
-    "firstRun.live" : {
+    "firstRun.addLabel" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follow them live: the platform, delays and where the train is."
+            "value" : "Add {{from}} to {{to}}"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Följ dem live: spåret, förseningar och var tåget är."
+            "value" : "Lägg till {{from}} till {{to}}"
+          }
+        }
+      }
+    },
+    "firstRun.find" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find your train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hitta ditt tåg"
           }
         }
       }
@@ -6295,19 +6193,87 @@
         }
       }
     },
-    "firstRun.passport" : {
+    "firstRun.nearTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Build your Passport of the lines, stations and countries you’ve ridden."
+            "value" : "Trains leaving near you"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bygg ditt pass med linjerna, stationerna och länderna du har åkt till."
+            "value" : "Tåg som går nära dig"
+          }
+        }
+      }
+    },
+    "firstRun.nearYou" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Near you"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nära dig"
+          }
+        }
+      }
+    },
+    "firstRun.skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not now"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte nu"
+          }
+        }
+      }
+    },
+    "firstRun.soonEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No trains leave the big stations in the next hour. Find yours below."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inga tåg går från de stora stationerna den närmaste timmen. Hitta ditt nedan."
+          }
+        }
+      }
+    },
+    "firstRun.soonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trains leaving soon"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåg som går snart"
           }
         }
       }
@@ -7148,6 +7114,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hämtar tåg…"
+          }
+        }
+      }
+    },
+    "liveMap.myLocation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My location"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min plats"
           }
         }
       }
@@ -10990,13 +10973,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clack has no accounts, no ads, no analytics and no tracking. This is everything it keeps and why."
+            "value" : "Clack has no accounts, no ads and no tracking. This is everything it keeps and why."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clack har inga konton, ingen reklam, ingen analys och ingen spårning. Här är allt den sparar och varför."
+            "value" : "Clack har inga konton, ingen reklam och ingen spårning. Här är allt den sparar och varför."
           }
         }
       }
@@ -11007,13 +10990,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only when you tap \"My location\" on a station map. It’s used on your phone to find the nearest point on the map and is never sent to our server."
+            "value" : "Only when you ask for it: your dot on the Explore map and on a station map while you walk it, worked out on your phone. When you tap \"Near you\" on the first screen, a rough position (about a kilometre) is sent once to our server to find the nearest stations, and is not kept."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bara när du trycker på \"Min plats\" på en stationskarta. Den används i telefonen för att hitta närmaste punkt på kartan och skickas aldrig till vår server."
+            "value" : "Bara när du ber om det: din punkt på Utforska-kartan och på en stationskarta medan du går, beräknad i telefonen. När du trycker på \"Nära dig\" på första skärmen skickas en ungefärlig position (ungefär en kilometer) en gång till vår server för att hitta närmaste stationer, och den sparas inte."
           }
         }
       }
@@ -11041,13 +11024,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No name, email, phone number, contacts, photos or payment details. No advertising or analytics tools, and no tracking across other apps or websites."
+            "value" : "No name, email, phone number, contacts, photos or payment details. No advertising or third-party analytics tools, and no tracking across other apps or websites."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inget namn, ingen e-post, inget telefonnummer, inga kontakter, bilder eller betaluppgifter. Inga reklam- eller analysverktyg och ingen spårning i andra appar eller på webbplatser."
+            "value" : "Inget namn, ingen e-post, inget telefonnummer, inga kontakter, bilder eller betaluppgifter. Inga reklam- eller analysverktyg från andra, och ingen spårning i andra appar eller på webbplatser."
           }
         }
       }
@@ -11201,6 +11184,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senast uppdaterad {{date}}"
+          }
+        }
+      }
+    },
+    "privacy.usageBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unless you turn it off in Settings: anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. They go only to our own server, as totals per day with no code, device or anything that says who you are, so we can see what to improve."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om du inte stänger av det i Inställningar: anonyma dagliga antal av vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. De går bara till vår egen server, som summor per dag utan kod, enhet eller något som säger vem du är, så att vi ser vad som behöver bli bättre."
+          }
+        }
+      }
+    },
+    "privacy.usageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usage data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Användningsdata"
           }
         }
       }
@@ -13133,6 +13150,57 @@
         }
       }
     },
+    "settings.reportBug" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report a bug"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapportera ett fel"
+          }
+        }
+      }
+    },
+    "settings.reportBugBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What happened, and what did you expect?\n\n—\nClack {{version}} (build {{build}}), iOS {{ios}}\nLast error: {{error}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vad hände, och vad väntade du dig?\n\n—\nClack {{version}} (bygge {{build}}), iOS {{ios}}\nSenaste fel: {{error}}"
+          }
+        }
+      }
+    },
+    "settings.reportBugSubject" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clack bug report"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felrapport för Clack"
+          }
+        }
+      }
+    },
     "settings.saveError" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13316,6 +13384,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Engelska mil"
+          }
+        }
+      }
+    },
+    "settings.usage.note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anonymous daily counts of which screens and features are used, which station pairs are added, which errors show, and Apple’s crash reports. Sent only to Clack’s own server, with nothing that says who you are."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anonyma dagliga antal: vilka vyer och funktioner som används, vilka stationspar som läggs till, vilka fel som visas, och Apples kraschrapporter. Skickas bara till Clacks egen server, utan något som säger vem du är."
+          }
+        }
+      }
+    },
+    "settings.usage.share" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share usage data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela användningsdata"
+          }
+        }
+      }
+    },
+    "settings.usage.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usage data"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Användningsdata"
           }
         }
       }
@@ -14931,6 +15050,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Platser"
+          }
+        }
+      }
+    },
+    "stationMap.roughGps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS is rough indoors: about ±{{m}} m"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS är ungefärlig inomhus: cirka ±{{m}} m"
           }
         }
       }

@@ -124,6 +124,7 @@ final class TicketImportModel {
             rows[i].selected = false
         }
         phase = .done
+        Usage.shared.count(.feature, "ticket.import")
     }
 }
 
