@@ -75,25 +75,26 @@ struct PassportCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background { cover }
         .clipShape(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
-        .shadow(color: Color(hex: "#f8d64a")!.opacity(0.55), radius: 20, y: 14)
-        .rotation3DEffect(.degrees(reduceMotion ? 0 : motion.pitch), axis: (x: 1, y: 0, z: 0), perspective: 1 / 3)
-        .rotation3DEffect(.degrees(reduceMotion ? 0 : motion.yaw), axis: (x: 0, y: 1, z: 0), perspective: 1 / 3)
+        // A plain shadow: the yellow glow made it read as neon (owner, 2026-10-25). The card stays still; only the foil
+        // and the glint move with the phone.
+        .clackShadow()
         .onAppear { if !reduceMotion { motion.start() } }
         .onDisappear { motion.stop() }
         .onAppear { sheen = true }
     }
 
-    /// A holographic foil: a rainbow that slides across the cover as the phone moves, strongest along the guilloche lines (like foil
-    /// stamped into a real passport) with a faint wash over the rest. Still with Reduce Motion.
+    /// A holographic foil: a pearly spectrum (soft pink, lilac, ice blue, mint, champagne, like the foil stamped into a
+    /// real passport, not a neon rainbow) that slides across the cover as the phone moves, strongest along the guilloche
+    /// lines with a faint wash over the rest. Still with Reduce Motion.
     private var foil: some View {
         let t = reduceMotion ? 0.5 : motion.shine
-        let rainbow = LinearGradient(
-            colors: [Color(hex: "#ff4fd8")!, Color(hex: "#7a5cff")!, Color(hex: "#27d3ff")!, Color(hex: "#39e58c")!, Color(hex: "#fff04a")!, Color(hex: "#ff9a3c")!, Color(hex: "#ff4fd8")!],
+        let pearl = LinearGradient(
+            colors: [Color(hex: "#f3c4e4")!, Color(hex: "#cdbdf2")!, Color(hex: "#b9dcf2")!, Color(hex: "#c4ecd6")!, Color(hex: "#f4e6b8")!, Color(hex: "#f3c4e4")!],
             startPoint: UnitPoint(x: t - 0.6, y: 0), endPoint: UnitPoint(x: t + 0.6, y: 1)
         )
         return ZStack {
-            rainbow.opacity(0.24)
-            rainbow.mask(Guilloche()).opacity(0.85)
+            pearl.opacity(0.14)
+            pearl.mask(Guilloche()).opacity(0.45)
         }
         .blendMode(.overlay)
         .allowsHitTesting(false)
@@ -117,6 +118,12 @@ struct PassportCard: View {
                     .offset(x: sheen || reduceMotion ? -proxy.size.width * 2.5 * 0.45 + proxy.size.width * (reduceMotion ? 0.3 : motion.shine) : proxy.size.width * 0.4)
                     .blendMode(.overlay)
                     .animation(reduceMotion ? nil : .easeOut(duration: 1.6).delay(0.3), value: sheen)
+                // The metallic glint: a narrow bright line that runs ahead of the sheen as the phone tilts.
+                LinearGradient(stops: [.init(color: .clear, location: 0.46), .init(color: .white.opacity(0.9), location: 0.5), .init(color: .clear, location: 0.54)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .frame(width: proxy.size.width * 2)
+                    .offset(x: -proxy.size.width + proxy.size.width * 1.6 * (reduceMotion ? 0.3 : motion.shine))
+                    .blendMode(.softLight)
+                    .allowsHitTesting(false)
             }
         }
         .overlay(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous).strokeBorder(Color.white.opacity(0.35), lineWidth: 1).blendMode(.overlay))

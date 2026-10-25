@@ -9,15 +9,20 @@
 import ClackCore
 import SwiftUI
 
-/// Yellow, with a rainbow foil sweep and a soft sheen, like the card on the Passport tab.
+/// Yellow, with a pearly foil sweep and a soft sheen, like the card on the Passport tab (metallic, not neon).
 public struct FoilBackground: View {
     public init() {}
+
+    /// Soft pink, lilac, ice blue, mint, champagne: the Passport card's foil.
+    private static let pearl: [Color] = [
+        Color(red: 0.95, green: 0.77, blue: 0.89), Color(red: 0.80, green: 0.74, blue: 0.95), Color(red: 0.73, green: 0.86, blue: 0.95),
+        Color(red: 0.77, green: 0.93, blue: 0.84), Color(red: 0.96, green: 0.90, blue: 0.72), Color(red: 0.95, green: 0.77, blue: 0.89),
+    ]
 
     public var body: some View {
         ZStack {
             Ink.accent
-            LinearGradient(colors: [Color.pink, Color.orange, Color.yellow, Color.green, Color.cyan, Color.purple, Color.pink].map { $0.opacity(0.35) },
-                           startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: Self.pearl.map { $0.opacity(0.22) }, startPoint: .topLeading, endPoint: .bottomTrailing)
                 .blendMode(.overlay)
             LinearGradient(colors: [Ink.onTint.opacity(0), Ink.onTint.opacity(0.55), Ink.onTint.opacity(0)], startPoint: UnitPoint(x: 0.1, y: 0), endPoint: UnitPoint(x: 0.7, y: 1))
         }
