@@ -23,7 +23,7 @@ struct JourneyScreen: View {
             BackLink(label: router.backLabel(l10n))
             if missing {
                 Text(l10n.t("journey.notFound")).clack(.body).foregroundStyle(Ink.text2)
-            } else if let legs = journey?.legs.map(\.leg), let first = legs.first, let last = legs.last {
+            } else if let legs = journey.map({ TripsLogic.taken($0.legs.map(\.leg)) }), let first = legs.first, let last = legs.last {
                 let dep = first.actualDep?.ms ?? first.schedDep?.ms ?? 0
                 let arr = last.actualArr?.ms ?? last.schedArr?.ms ?? 0
                 let distance = legs.reduce(0) { $0 + ($1.distanceM ?? 0) }
@@ -38,7 +38,7 @@ struct JourneyScreen: View {
                     Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
                 }
                 MultiRouteMapView(
-                    routes: (journey?.legs ?? []).map {
+                    routes: (journey?.legs ?? []).filter { $0.leg.ride != .notTaken }.map {
                         MultiRoute(color: MapStyle.opColor($0.leg.operator?.brandColor, dark: scheme == .dark), geometry: $0.geometry, stops: [])
                     },
                     stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")

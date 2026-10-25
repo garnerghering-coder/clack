@@ -117,7 +117,10 @@ public struct TripCardFace {
 public enum TripIsland {
     /// About the system's own expanded margins, for drawing the island in the Debug gallery (the real island applies
     /// the system's).
-    public static let expandedMargins = EdgeInsets(top: 6, leading: 18, bottom: 14, trailing: 18)
+    public static let expandedMargins = EdgeInsets(top: 6, leading: expandedSide, bottom: 14, trailing: expandedSide)
+    /// The one side margin of every expanded region (the train number and platform beside the camera, and the rows
+    /// under it), so they line up.
+    public static let expandedSide: CGFloat = 22
     /// The tallest thing a compact side or the minimal view holds: the compact island is 36.67 pt high with round ends,
     /// and Apple asks for the compact and minimal views to fit a 28 pt circle when the island is narrow.
     public static let compactContent: CGFloat = 20
@@ -611,8 +614,6 @@ public struct TripIslandExpandedBottom: View {
             default: travelling
             }
         }
-        // A little in from the island's rounded bottom corners.
-        .padding(.horizontal, 4)
         .padding(.bottom, 2)
     }
 

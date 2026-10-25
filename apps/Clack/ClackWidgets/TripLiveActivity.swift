@@ -108,8 +108,9 @@ struct TripLiveActivity: Widget {
                 .activitySystemActionForegroundColor(Ink.accentInk)
         } dynamicIsland: { context in
             let card = CardText.card(context.attributes, context.state)
-            // Small things beside the camera, the rest in a bottom block of two rows, inside the system's own margins
-            // (custom ones, with three rows, made the island crop the top and bottom lines).
+            // Small things beside the camera, the rest in a bottom block of two rows. One side margin for every region
+            // (owner, 2026-10-25: the train number and platform sat further out than the rows below); the top and bottom
+            // margins stay the system's (custom ones, with three rows, made the island crop the top and bottom lines).
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) { TripIslandExpandedLeading(card: card) }
                 DynamicIslandExpandedRegion(.trailing) { TripIslandExpandedTrailing(card: card) }
@@ -121,6 +122,7 @@ struct TripLiveActivity: Widget {
             } minimal: {
                 TripIslandMinimal(card: card)
             }
+            .contentMargins(.horizontal, TripIsland.expandedSide, for: .expanded)
             .widgetURL(card.url)
             .keylineTint(card.line)
         }

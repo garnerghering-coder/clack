@@ -31,12 +31,17 @@ public nonisolated enum TripsLogic {
         )
     }
 
-    /// Upcoming (arrival still ahead), soonest first; past, most recent first.
+    /// Upcoming (arrival still ahead), soonest first; past, most recent first. A trip you said you didn't take is in
+    /// neither (owner, 2026-10-25: "it just shouldn't be there"); its page still opens from a link, with Undo.
     public static func partition(_ legs: [Leg], now: Double) -> (upcoming: [Leg], past: [Leg]) {
+        let legs = taken(legs)
         let upcoming = legs.filter { arrivalOf($0) > now }.sorted { ($0.schedDep?.ms ?? 0) < ($1.schedDep?.ms ?? 0) }
         let past = legs.filter { arrivalOf($0) <= now }.sorted { ($0.schedDep?.ms ?? 0) > ($1.schedDep?.ms ?? 0) }
         return (upcoming, past)
     }
+
+    /// The trips you didn't say you skipped.
+    public static func taken(_ legs: [Leg]) -> [Leg] { legs.filter { $0.ride != .notTaken } }
 
     public enum HeroState: Sendable { case upcoming, active, arrived }
 

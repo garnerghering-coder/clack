@@ -205,6 +205,7 @@ struct RootView: View {
                 .toolbar(.hidden, for: .navigationBar)
                 .appDestinations()
         }
+        .modifier(NoBottomEdgeEffect())
     }
 
     /// Once per app start: open where it matters (a train running or about to leave opens Trips, else the tab you
@@ -254,5 +255,17 @@ private struct TouchWatch: ViewModifier {
             .onChange(of: router.tripsTab) { router.touched = true }
             .onChange(of: router.tripsPath.count + router.explorePath.count + router.passportPath.count) { router.touched = true }
             .onChange(of: router.addRequest == nil) { router.touched = true }
+    }
+}
+
+/// No dark fade behind the tab bar (owner, 2026-10-25: "a black box outside the bubble"): content runs to the bottom
+/// edge and only the glass bubble has a backing. iOS 26 and later; nothing to hide before.
+private struct NoBottomEdgeEffect: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.scrollEdgeEffectHidden(true, for: .bottom)
+        } else {
+            content
+        }
     }
 }

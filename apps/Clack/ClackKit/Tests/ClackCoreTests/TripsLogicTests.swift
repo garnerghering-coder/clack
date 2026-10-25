@@ -17,7 +17,7 @@ private func at(_ min: Double) -> Double { now + min * 60_000 }
 private func leg(
     _ id: String, dep: Double, arr: Double, from: String = "A", to: String = "B", journey: String? = nil,
     actualArr: Double? = nil, actualDep: Double? = nil, depDelay: Int? = nil, arrDelay: Int? = nil,
-    canceled: Bool = false, status: String = "planned", live: String? = nil
+    canceled: Bool = false, status: String = "planned", live: String? = nil, ride: String = "auto"
 ) throws -> Leg {
     func ms(_ v: Double?) -> String { v.map { String($0) } ?? "null" }
     let json = """
@@ -27,7 +27,7 @@ private func leg(
     "depPlatform":"1","arrPlatform":"2","canceled":\(canceled),"distanceM":1000,"isEstimatedGeometry":false,
     "trainType":null,"trainTypeSource":null,"onboard":null,"countryCodes":["SE"],
     "journeyId":\(journey.map { "\"\($0)\"" } ?? "null"),"timetableTripKey":null,"operatorId":"sj",
-    "originStationId":"\(from)","destStationId":"\(to)","notes":null,"ride":"auto","rideReason":null,"borderEvidence":null,
+    "originStationId":"\(from)","destStationId":"\(to)","notes":null,"ride":"\(ride)","rideReason":null,"borderEvidence":null,
     "operator":null,
     "origin":{"id":"\(from)","name":"\(from)","code":null,"country":"SE","tz":"Europe/Stockholm"},
     "destination":{"id":"\(to)","name":"\(to)","code":null,"country":"SE","tz":"Europe/Stockholm"},
@@ -45,6 +45,17 @@ private func liveRow(status: String, arrivalEta: Double? = nil) -> String {
 }
 
 struct PartitionTests {
+    @Test func aTripYouDidntTakeIsInNeitherListAndNeverFeatured() throws {
+        let legs = [
+            try leg("skipped-past", dep: -200, arr: -100, ride: "not_taken"), try leg("kept", dep: -2000, arr: -1900),
+            try leg("skipped-soon", dep: 30, arr: 90, ride: "not_taken"),
+        ]
+        let (upcoming, past) = TripsLogic.partition(legs, now: now)
+        #expect(upcoming.isEmpty)
+        #expect(past.map(\.id) == ["kept"])
+        #expect(TripsLogic.hero(upcoming: upcoming, past: past, now: now) == nil)
+    }
+
     @Test func upcomingIsSoonestFirstAndPastMostRecentFirst() throws {
         let legs = [
             try leg("past-old", dep: -600, arr: -500), try leg("future-late", dep: 600, arr: 700),
