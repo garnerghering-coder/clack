@@ -31,6 +31,7 @@ struct TripDetailScreen: View {
     @State private var busy = false
     @State private var toast: String?
     @State private var confirmDelete = false
+    @State private var sharing = JourneyShare()
     /// Typing the platform where you got on (`.dep`) or off (`.arr`), where no source has one.
     @State private var platformEnd: PlatformEnd = .dep
     @State private var askingPlatform = false
@@ -79,6 +80,10 @@ struct TripDetailScreen: View {
             }
         }
         .task(id: id) { await load() }
+        .task(id: leg?.leg.journeyId ?? leg?.id) {
+            if let l = leg?.leg { await sharing.refresh(app, journeyId: l.journeyId, legId: l.id) }
+        }
+        .journeyShareSheet(sharing, l10n: l10n)
         .countsScreen("trip")
         .task(id: id) { await listen() }
         .onChange(of: leg, initial: true) { geo = leg.map(RouteGeo.init) }
@@ -246,6 +251,10 @@ struct TripDetailScreen: View {
                     .accessibilityIdentifier("trip.back")
                 Spacer(minLength: 0)
                 moreMenu(detail.leg)
+                ShareControl(
+                    share: sharing, journeyId: detail.leg.journeyId, legId: detail.leg.id,
+                    from: detail.leg.origin?.name ?? "", to: detail.leg.destination?.name ?? "", overMap: true
+                )
             }
             .padding(.horizontal, 16).padding(.top, top + 12)
             if detail.leg.isEstimatedGeometry {

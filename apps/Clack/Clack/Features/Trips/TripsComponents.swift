@@ -253,18 +253,23 @@ struct TransferChip: View {
     @Environment(L10n.self) private var l10n
     let prev: Leg
     let next: Leg
+    /// Just the line, for a journey rail that draws the connection itself.
+    var plain = false
 
     var body: some View {
         let t = TripsLogic.transfer(from: prev, to: next)
         var text = l10n.t("journey.transfer", ["min": String(t.planned), "station": t.station])
         if let actual = t.actual, actual != t.planned, !t.missed { text += " · " + l10n.t("journey.actually", ["min": String(actual)]) }
         if t.missed { text += " · " + l10n.t("journey.missed") } else if t.tight { text += " · " + l10n.t("journey.tight") }
-        return HStack(spacing: 12) {
+        if plain {
+            return AnyView(StatusLine(t.missed ? .band(.veryLate) : t.tight ? .band(.slight) : .arrived, text).frame(maxWidth: .infinity, alignment: .leading))
+        }
+        return AnyView(HStack(spacing: 12) {
             DashedLine(dash: 3, gap: 3).frame(height: 22)
             StatusLine(t.missed ? .band(.veryLate) : t.tight ? .band(.slight) : .arrived, text)
         }
         .padding(.vertical, 2)
-        .padding(.leading, 16)
+        .padding(.leading, 16))
     }
 }
 
@@ -292,9 +297,12 @@ struct JourneyCard: View {
                 }
                 .buttonStyle(.plain)
             }
-            ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
-                if index > 0 { TransferChip(prev: legs[index - 1], next: leg) }
-                LegRow(leg: leg, flat: true)
+            TimelineView(.periodic(from: .now, by: 60)) { context in
+                JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
+                    LegRow(leg: leg, flat: true)
+                } change: { a, b in
+                    JourneyChange(a: a, b: b)
+                }
             }
         }
         .padding(.top, 4)

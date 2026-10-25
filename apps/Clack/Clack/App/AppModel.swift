@@ -27,6 +27,7 @@ final class AppModel {
     let offlineCache: OfflineCache
     @ObservationIgnored private(set) var live: LiveHub
     let arrivals = ArrivalWatcher()
+    let followed = FollowedJourneys()
     let notifications = NotificationManager.shared
     @ObservationIgnored private(set) var stations: StationDirectory
 

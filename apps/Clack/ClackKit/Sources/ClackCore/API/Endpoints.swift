@@ -169,4 +169,46 @@ extension APIClient {
     public func liveTrainStream(bbox: String) -> AsyncThrowingStream<SSEEvent, Error> {
         EventStream.events(url: url(["live", "trains", "stream"], query: ["bbox": bbox]), userID: userID)
     }
+    // MARK: sharing a journey
+
+    public nonisolated struct ShareBody: Encodable, Sendable {
+        public let journeyId: String?
+        public let legId: String?
+    }
+
+    /// Makes (or finds) the link for a journey, or for a trip that stands alone.
+    public func shareJourney(journeyId: String?, legId: String?) async throws -> ShareLink {
+        try await send("POST", ["share", "journey"], body: ShareBody(journeyId: journeyId, legId: legId))
+    }
+
+    /// The link the journey has now, if it is shared (`token` is nil when not).
+    public func currentShare(journeyId: String?, legId: String?) async throws -> ShareLink {
+        var query: [String: String] = [:]
+        if let journeyId { query["journeyId"] = journeyId }
+        if let legId { query["legId"] = legId }
+        return try await get(["share"], query: query)
+    }
+
+    public func stopSharing(token: String) async throws {
+        try await perform("DELETE", ["share", token])
+    }
+
+    /// What a link shows, for anyone: the journey as a follower sees it.
+    public func sharedJourney(token: String) async throws -> SharedJourney {
+        try await get(["shared", token])
+    }
+
+    /// Follows a shared journey (alerts for it, and a card on Trips). Throws when the link no longer works.
+    public func followJourney(token: String) async throws {
+        let _: FollowingAnswer = try await send("PUT", ["following", token])
+    }
+
+    public func unfollowJourney(token: String) async throws {
+        try await perform("DELETE", ["following", token])
+    }
+
+    /// The shared journeys this phone follows that still work.
+    public func followedJourneys() async throws -> [SharedJourney] {
+        try await get(["following"])
+    }
 }

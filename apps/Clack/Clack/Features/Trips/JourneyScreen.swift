@@ -16,6 +16,7 @@ struct JourneyScreen: View {
     @State private var journey: Journey?
     @State private var missing = false
     @State private var lastReload: Date = .distantPast
+    @State private var sharing = JourneyShare()
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
@@ -45,17 +46,15 @@ struct JourneyScreen: View {
                 .frame(height: 240)
                     .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
                     .hairlineBorder(radius: Radius.card)
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(legs.enumerated()), id: \.element.id) { index, leg in
-                        if index > 0 {
-                            if legs[index - 1].destination?.id == leg.origin?.id {
-                                ConnectionCard(a: legs[index - 1], b: leg)
-                            } else {
-                                TransferChip(prev: legs[index - 1], next: leg)
-                            }
+                TimelineView(.periodic(from: .now, by: 60)) { context in
+                    JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
+                        LegRow(leg: leg, flat: true)
+                    } change: { a, b in
+                        if a.destination?.id == b.origin?.id {
+                            ConnectionCard(a: a, b: b, compact: true)
+                        } else {
+                            TransferChip(prev: a, next: b, plain: true)
                         }
-                        LegRow(leg: leg)
-                            .padding(.vertical, 4)
                     }
                 }
             } else {
@@ -64,6 +63,16 @@ struct JourneyScreen: View {
         }
         .plainBar()
         .countsScreen("journey")
+        .journeyShareSheet(sharing, l10n: l10n)
+        .task(id: id) { await sharing.refresh(app, journeyId: id, legId: id) }
+        .toolbar {
+            // Top right, where the back arrow's twin goes.
+            if let legs = journey.map({ TripsLogic.taken($0.legs.map(\.leg)) }), let first = legs.first, let last = legs.last {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ShareControl(share: sharing, journeyId: id, legId: first.id, from: first.origin?.name ?? "", to: last.destination?.name ?? "")
+                }
+            }
+        }
         .task(id: id) {
             do {
                 journey = try await app.client.journey(id)

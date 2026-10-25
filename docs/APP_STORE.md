@@ -45,6 +45,7 @@ Each item says who does it and where:
 | **The server is online over https** and the app points at it: `Config.apiBase` is `https://clack-garner.duckdns.org` (a Hetzner VM; docs/SERVER.md). No placeholder address is left. | 2.1(a), 2.5.5 |
 | **Bundle id** `com.garnerghering.Clack` (the widgets extension is `com.garnerghering.Clack.ClackWidgets`). | n/a |
 | **Native touches** beyond a plain app: Home Screen and Lock Screen widgets, a Live Activity for the train you are on, time-sensitive alerts and the iOS share sheet for share cards (docs/IOS.md). | 4.2 |
+| **Sharing a journey by link** (2026-10-25). The one thing the app makes public on purpose: a link shows one journey (trains, times, platforms, position) to anyone who has it, until a day after it arrives, never the phone id, seat, notes or other trips; the traveller can stop it. The server also keeps which link a phone follows, to send it alerts. Both are in the privacy text (the app's Privacy screen and `/privacy`). Review notes: the web page a link opens is a viewer made by us for people without the app; the app itself has no web browsing and no accounts. Needs the Associated Domains capability (`applinks:clack-garner.duckdns.org`) on the App ID. | 5.1.1, 5.1.2 |
 | **Privacy manifest** (`PrivacyInfo.xcprivacy`): no tracking, the two collected data types below, and the UserDefaults reason. | Apple privacy manifests |
 | **Swedish purpose strings** (`sv.lproj/InfoPlist.strings`: location, local network). | 5.1.1(ii) |
 

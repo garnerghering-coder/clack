@@ -107,13 +107,27 @@ medium, large, on the holographic foil), Departures (medium, large; the station 
   `clack://board/<station>`.
 - Not checked on a device yet, and adding the widgets to a Home Screen was not tried in the simulator (unverified).
 
-## Deep links (coming)
+## Deep links and sharing a journey
 
-Today the app opens `clack://trip/<id>` and `clack://journey/<id>` (`RootView.openTicket`) and the share sheet for
-tickets. The Passport and Departures widgets use `clack://tab/passport` and `clack://tab/explore`, but `openTicket` reads
-every `clack://` link as a trip or journey id, so those two taps open a trip page that doesn't exist (a bug to fix with
-the rest of the deep links; unverified on a device). More ways in (a train, a station or a board from a link, universal
-links on the server's domain) are planned in a later workstream and are not built.
+`clack://` links open: `trip/<leg>`, `journey/<id>`, `board/<station>`, `explore?train=…`, the tabs, `add` and
+`arrival/<leg>` (`DeepLink`, `ClackCore/Logic/DeepLink.swift`, with its table). More ways in are planned, not built: a
+train or a station from a link beyond these.
+
+**Sharing a journey** (owner, 2026-10-25). "Share journey" in a trip's "…" menu and on the journey page makes a link,
+`https://clack-garner.duckdns.org/j/<token>` (`POST /api/share/journey`), and opens the system share sheet. "Stop sharing"
+switches it off. The link works until a day after the last arrival.
+- With the app: the link is a universal link (Associated Domains `applinks:clack-garner.duckdns.org`, the server's
+  `apple-app-site-association`), also `clack://share/<token>`. It follows the journey (`PUT /api/following/<token>`) and each
+  of its trains (Followed trains, so Explore marks them), and opens `FollowingScreen`: a follower's view, with no seat,
+  ticket, station walk, history or editing. Followed journeys are listed at the top of Trips (Following). They never become
+  the follower's own trips and never count in their Passport.
+- Alerts: the server alerts followers (in their own language and with their own alert settings) about a delay, a new or
+  changed platform, a cancellation, a change in danger and the arrival (`apps/server/src/push/followers.ts`). Not the
+  departure reminder, get-off-soon or a Live Activity. The alert carries `shareToken` and opens the journey.
+- Without the app: the page at the link, in the app's look, with the real map and the train. A banner offers Clack ("Get
+  Clack" is a dead end until `CLACK_APP_DOWNLOAD_URL` is set on the server).
+- Not checked on a real phone: universal links, and alerts to followers (the app must be signed with the new capability,
+  and the hosted server updated).
 
 ## Watch (coming)
 

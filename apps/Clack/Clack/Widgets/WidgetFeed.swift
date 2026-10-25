@@ -5,6 +5,7 @@
 
 import ClackCore
 import Foundation
+import UIKit
 import WidgetKit
 
 /// The fast path for the widgets: after the legs refresh, the app writes what it already has into the widgets' cache
@@ -20,6 +21,8 @@ enum WidgetFeed {
     static let boardMaxAgeMs: Double = 10 * 60_000
 
     private static var lastRun: Double = 0
+    /// Whether this run drew the Year in rail map (the widget then redraws).
+    private static var yearMapMade = false
     private static var latest: (legs: [Leg], details: [String: LegDetail])?
     private static var trailing: Task<Void, Never>?
 
@@ -94,6 +97,8 @@ enum WidgetFeed {
             }
         }
 
+        if !app.isOffline, let year = s.year { await keepYearMap(year, app: app) }
+
         guard s.save() else { return }
         let center = WidgetCenter.shared
         let languageChanged = s.language != before.language || s.clock != before.clock || s.distanceUnit != before.distanceUnit
@@ -102,10 +107,30 @@ enum WidgetFeed {
             return
         }
         if s.journey != before.journey || s.nextJourney != before.nextJourney { center.reloadTimelines(ofKind: WidgetKinds.nextJourney) }
-        if s.passport != before.passport || s.stats != before.stats || s.year != before.year {
+        if s.passport != before.passport || s.stats != before.stats || s.year != before.year || yearMapMade {
             for kind in [WidgetKinds.passport, WidgetKinds.stats, WidgetKinds.year] { center.reloadTimelines(ofKind: kind) }
         }
         if s.boards.map(\.rows) != before.boards.map(\.rows) { center.reloadTimelines(ofKind: WidgetKinds.departures) }
+    }
+
+    /// The real map behind the Year in rail routes, dark and light, drawn here because a widget can't run MapLibre. Only
+    /// when there are routes that have no picture yet; the widget reads the files and falls back to the lines alone.
+    private static func keepYearMap(_ year: WidgetSnapshot.YearBits, app: AppModel) async {
+        yearMapMade = false
+        let key = WidgetMaps.key(year)
+        let lines = year.routes.map { $0.compactMap { $0.count == 2 ? LatLon($0[0], $0[1]) : nil } }.filter { $0.count > 1 }
+        guard !lines.isEmpty else { return }
+        let basemap = await app.mapHasBasemap()
+        for dark in [true, false] {
+            guard let url = WidgetMaps.url(key: key, dark: dark), !FileManager.default.fileExists(atPath: url.path) else { continue }
+            guard let made = await ShareMapSnapshotter.make(
+                lines: lines, ends: [], points: [], size: WidgetMaps.size, base: Config.apiBase, withBasemap: basemap, dark: dark,
+                inset: CGSize(width: 24, height: 20)
+            ), let png = made.image.pngData() else { continue }
+            try? png.write(to: url, options: .atomic)
+            yearMapMade = true
+        }
+        WidgetMaps.prune(keeping: key)
     }
 
     /// The Departures widget's picker lists (favourites, recent, big stations) as the app sees them, for when the

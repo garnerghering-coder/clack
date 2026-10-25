@@ -35,6 +35,7 @@ public nonisolated struct AddTrainLink: Hashable, Sendable {
 /// | `clack://explore`, `clack://trips`, `clack://passport`, `clack://tab/<tab>` | that tab, at its root |
 /// | `clack://add` / `clack://add?trip=K&date=D&from=&to=&replace=` | Add a train (at its confirm step with a trip) |
 /// | `clack://arrival/<legId>?journey=<journeyId>` | the arrival screen for that journey (`journey` optional) |
+/// | `clack://share/<token>`, `https://<share host>/j/<token>` | follow that shared journey (Trips > Following) |
 public nonisolated enum DeepLink: Hashable, Sendable {
     case trip(String)
     case journey(String)
@@ -45,6 +46,8 @@ public nonisolated enum DeepLink: Hashable, Sendable {
     case add(AddTrainLink?)
     /// The end-of-journey screen; `legId` is the journey's last leg.
     case arrival(legId: String, journeyId: String?)
+    /// A journey someone shared: followed, and shown as a follower sees it.
+    case shared(token: String)
 
     public static let scheme = "clack"
 
@@ -55,10 +58,12 @@ public nonisolated enum DeepLink: Hashable, Sendable {
         case .board, .train: .explore
         case .tab(let tab): tab
         case .add, .arrival: nil
+        case .shared: .trips
         }
     }
 
     public static func parse(_ url: URL) -> DeepLink? {
+        if let token = sharedToken(in: url) { return .shared(token: token) }
         guard url.scheme?.lowercased() == scheme,
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else { return nil }
@@ -85,6 +90,8 @@ public nonisolated enum DeepLink: Hashable, Sendable {
         case "arrival":
             guard let id else { return nil }
             return .arrival(legId: id, journeyId: query["journey"])
+        case "share":
+            return id.flatMap { isToken($0) ? DeepLink.shared(token: $0) : nil }
         case "tab":
             return id.flatMap { PrimaryTab(rawValue: $0.lowercased()) }.map(DeepLink.tab)
         case "trips", "passport":
@@ -108,9 +115,24 @@ public nonisolated enum DeepLink: Hashable, Sendable {
         }
     }
 
+    /// The token of a shared journey: from `https://<share host>/j/<token>` (a universal link). Another host is not ours.
+    private static func sharedToken(in url: URL) -> String? {
+        guard let scheme = url.scheme?.lowercased(), scheme == "https" || scheme == "http", url.host?.lowercased() == Config.shareHost else { return nil }
+        let parts = url.path.split(separator: "/").map(String.init)
+        guard parts.count == 2, parts[0] == "j", isToken(parts[1]) else { return nil }
+        return parts[1]
+    }
+
+    /// 128 random bits as base64url: 16 to 64 letters, digits, `-` and `_` (the server refuses anything else).
+    private static func isToken(_ text: String) -> Bool {
+        (16...64).contains(text.count) && text.allSatisfy { $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "-" || $0 == "_") }
+    }
+
     /// The link an alert opens: an arrival opens the arrival screen, a change the whole journey, anything else the trip.
-    public static func forAlert(legId: String, journeyId: String?, kind: String) -> DeepLink {
-        switch kind {
+    /// An alert for someone following a shared journey carries its token and opens that journey instead.
+    public static func forAlert(legId: String, journeyId: String?, kind: String, shareToken: String? = nil) -> DeepLink {
+        if let shareToken, isToken(shareToken) { return .shared(token: shareToken) }
+        return switch kind {
         case "arrival": .arrival(legId: legId, journeyId: journeyId)
         case "change": journeyId.map(DeepLink.journey) ?? .trip(legId)
         default: .trip(legId)
@@ -143,6 +165,7 @@ public nonisolated enum DeepLink: Hashable, Sendable {
         case .arrival(let legId, let journeyId):
             c.host = "arrival"; c.path = "/\(legId)"
             add("journey", journeyId)
+        case .shared(let token): c.host = "share"; c.path = "/\(token)"
         }
         if !items.isEmpty { c.queryItems = items }
         // Every part above is set from strings URLComponents encodes, so this always succeeds.

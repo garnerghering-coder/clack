@@ -13,6 +13,8 @@ import SwiftUI
 nonisolated enum AppRoute: Hashable, Sendable {
     case trip(String)
     case journey(String)
+    /// A journey someone shared, as its follower sees it (by its link's token).
+    case following(String)
     case settings
     case about
     case privacy
@@ -212,6 +214,7 @@ final class Router {
         switch link {
         case .trip(let id): show(.trips, [.trip(id)])
         case .journey(let id): show(.trips, [.journey(id)])
+        case .shared(let token): show(.trips, [.following(token)])
         case .board(let id, let arrivals): show(.explore, [.board(stationId: id, arrivals: arrivals)])
         case .train(let number, let date, let key):
             show(.explore, [])
@@ -243,6 +246,7 @@ extension AppRoute {
         switch self {
         case .trip: .trip
         case .journey: .journey
+        case .following: .other
         case .settings: .settings
         case .about: .about
         case .privacy: .privacy

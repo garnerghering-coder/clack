@@ -25,9 +25,7 @@ struct FeaturedCard: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: state == .active ? 1 : 30)) { context in
             let now = context.date.timeIntervalSince1970 * 1000
-            NavigationLink(value: AppRoute.trip(leg.id)) { card(now: now) }
-                .buttonStyle(.plain)
-                .accessibilityLabel(l10n.t("trips.viewJourney", ["from": leg.origin?.name ?? "", "to": leg.destination?.name ?? ""]))
+            card(now: now)
         }
         .task(id: legs.map(\.id).joined(separator: ",")) {
             var details: [LegDetail] = []
@@ -77,7 +75,11 @@ struct FeaturedCard: View {
                 return live?.positionSource == .estimated ? l10n.t("live.estimatedPosition") : l10n.t("live.livePosition")
             }
         }()
+        // The top of the card opens the journey (the trip itself when it stands alone); each leg and change below has its own link.
+        let top: AppRoute = isJourney ? leg.journeyId.map { .journey($0) } ?? .trip(leg.id) : .trip(leg.id)
         return VStack(spacing: 0) {
+            NavigationLink(value: top) {
+            VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
                 featuredMap(grounded: grounded)
                 Text(tag)
@@ -106,36 +108,50 @@ struct FeaturedCard: View {
                     .fixedSize(horizontal: false, vertical: true)
                 TimePair(leg: leg, clock: app.settings.clock, flap: .lg, intro: true).clack(.heroTimes)
                 bottom(now: now, live: live)
-                if isJourney { journeyLegs }
             }
             .padding(.top, 16).padding(.bottom, 16).padding(.horizontal, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(Surface.Hero(op: op))
+            }
+            .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(l10n.t("trips.viewJourney", ["from": legs.first?.origin?.name ?? "", "to": legs.last?.destination?.name ?? ""]))
+            if isJourney {
+                journeyLegs(now: now)
+                    .padding(.horizontal, 16).padding(.bottom, 12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
         .background(Surface.Hero(op: op))
         .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
         .hairlineBorder(radius: Radius.card)
     }
 
-    /// The whole journey under the featured train: each train with its times, the change between them, the one
-    /// featured above marked. Not links (the card is one); the trip page and the journey page have the rest.
-    private var journeyLegs: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Rectangle().fill(Ink.hairline).frame(height: 1).padding(.vertical, 4)
-            ForEach(Array(legs.enumerated()), id: \.element.id) { index, member in
-                if index > 0 { TransferChip(prev: legs[index - 1], next: member) }
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Circle().fill(member.id == leg.id ? Ink.accent : Ink.text3).frame(width: 6, height: 6)
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("\(member.origin?.name ?? "") → \(member.destination?.name ?? "")")
-                            .clack(.stopName).fontWeight(member.id == leg.id ? .semibold : .regular).foregroundStyle(Ink.text)
-                        Text([member.operator?.name, member.trainNumber].compactMap { $0 }.joined(separator: " "))
-                            .clack(.caption).foregroundStyle(Ink.text2)
+    /// The whole journey under the featured train as one rail: each train with its times and platform, the change
+    /// between them, the one featured above marked. Every leg opens its trip and every change its station map.
+    private func journeyLegs(now: Double) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Rectangle().fill(Ink.hairline).frame(height: 1).padding(.bottom, 8)
+            JourneyTimeline(legs: legs, now: now, scheme: scheme) { member in
+                NavigationLink(value: AppRoute.trip(member.id)) {
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("\(member.origin?.name ?? "") → \(member.destination?.name ?? "")")
+                                .clack(.stopName).fontWeight(member.id == leg.id ? .semibold : .regular).foregroundStyle(Ink.text)
+                            Text([member.operator?.name, member.trainNumber, member.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) }].compactMap { $0 }.joined(separator: Format.separator))
+                                .clack(.caption).foregroundStyle(Ink.text2)
+                        }
+                        Spacer(minLength: 8)
+                        Text("\(Format.time(member.schedDep?.ms, tz: TripsLogic.tz(member), clock: app.settings.clock))–\(Format.time(member.schedArr?.ms, tz: member.destination?.tz ?? TripsLogic.tz(member), clock: app.settings.clock))")
+                            .clack(.stopName).monospacedDigit().foregroundStyle(Ink.text2)
                     }
-                    Spacer(minLength: 8)
-                    Text("\(Format.time(member.schedDep?.ms, tz: TripsLogic.tz(member), clock: app.settings.clock))–\(Format.time(member.schedArr?.ms, tz: member.destination?.tz ?? TripsLogic.tz(member), clock: app.settings.clock))")
-                        .clack(.stopName).monospacedDigit().foregroundStyle(Ink.text2)
+                    .padding(.vertical, 8)
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+            } change: { a, b in
+                JourneyChange(a: a, b: b)
             }
         }
     }

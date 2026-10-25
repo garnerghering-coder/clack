@@ -4,7 +4,9 @@
 //
 
 import ClackCore
+import ClackDesign
 import MapLibre
+import SwiftUI
 import UIKit
 
 /// A real map for a share card (share/mapSnapshot.ts): MapLibre's snapshotter draws the dark basemap and rail network
@@ -19,20 +21,22 @@ struct ShareMapSnapshot {
 
 @MainActor
 enum ShareMapSnapshotter {
-    private static let accent = UIColor(red: 248 / 255, green: 214 / 255, blue: 74 / 255, alpha: 1)
+    private static let signal = UIColor(red: 248 / 255, green: 214 / 255, blue: 74 / 255, alpha: 1)
 
     /// `lines` are the routes along the tracks; `ends` the stops to dot; `points` where labels will go.
-    static func make(lines: [[LatLon]], ends: [LatLon], points: [LatLon], size: CGSize, base: URL, withBasemap: Bool) async -> ShareMapSnapshot? {
+    static func make(lines: [[LatLon]], ends: [LatLon], points: [LatLon], size: CGSize, base: URL, withBasemap: Bool, dark: Bool = true, inset: CGSize = CGSize(width: 64, height: 56)) async -> ShareMapSnapshot? {
+        // The signal yellow reads on the dark map; on the light one the routes take the app's darker yellow.
+        let accent = dark ? signal : UIColor(Ink.accentInk).resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
         let all = lines.filter { $0.count > 1 }.flatMap { $0 }
         guard all.count >= 2, let box = MapGeometry.bounds(all) else { return nil }
-        let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: true, railNetwork: true, kind: .multiRoute)
+        let style = MapStyle.style(base: base, withBasemap: withBasemap, dark: dark, railNetwork: true, kind: .multiRoute)
         guard let url = try? MapStyle.write(style) else { return nil }
         // MapLibre stamps its logo on the bottom of a snapshot, so the picture is taken with a band top and bottom that is
         // cropped off again (the card carries no logo; the attribution is on the web's cards too).
         let band: CGFloat = 44
         let frame = CGSize(width: size.width, height: size.height + 2 * band)
         // Room around the routes (the web's padding 56 / 64), and no closer than zoom 10.
-        let padX = 64.0 * 2 / frame.width, padY = (56.0 * 2 + 2 * Double(band)) / Double(frame.height)
+        let padX = inset.width * 2 / frame.width, padY = (inset.height * 2 + 2 * Double(band)) / Double(frame.height)
         let lonSpan = max((box.east - box.west) / (1 - padX), 0.33)
         let latSpan = max((box.north - box.south) / (1 - padY), 0.17)
         let centre = CLLocationCoordinate2D(latitude: (box.north + box.south) / 2, longitude: (box.east + box.west) / 2)

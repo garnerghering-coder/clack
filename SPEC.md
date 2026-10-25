@@ -37,8 +37,9 @@
 8. **Alerts and Live Activities:** the server sends push alerts for saved trips and updates a Live Activity (Lock Screen and Dynamic Island) for the train you are on (docs/IOS.md).
 9. **Working offline:** trips, stations and maps are kept on the phone; status and progress are estimated, and labelled, when there is no connection.
 10. **Home Screen and Lock Screen widgets:** next journey, passport, departures, year in rail, stats.
+11. **Sharing a journey by link:** a link shows one journey (trains, times, platforms, position, never the traveller's id, seat or other trips) in the app as a followed journey, or on a web page with a demo of the app; followers get alerts about it. No accounts and no friend list: whoever has the link can follow it, and the traveller can stop it (docs/IOS.md).
 
-**Not built yet** (planned as later workstreams, see docs/SWIFT_PORT.md): deep links beyond widgets and tickets, an Apple Watch app, and export of your data. Out of scope: accounts and login, friends, other countries until each has an adapter, booking and ticket sales.
+**Not built yet** (planned as later workstreams, see docs/SWIFT_PORT.md): more deep links, an Apple Watch app, and export of your data. Out of scope: accounts and login, friends, other countries until each has an adapter, booking and ticket sales.
 
 ## 4. Tech stack
 

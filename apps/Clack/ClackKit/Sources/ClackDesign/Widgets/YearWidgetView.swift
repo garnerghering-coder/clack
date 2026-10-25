@@ -43,11 +43,15 @@ public struct YearWidgetView: View {
     var snapshot: WidgetSnapshot
     var date: Date
     var isPlaceholder: Bool
+    /// The real map the app drew behind the routes (dark or light), when there is one for these routes.
+    var mapImage: (Bool) -> Image?
+    @Environment(\.colorScheme) private var scheme
 
-    public init(snapshot: WidgetSnapshot, date: Date, isPlaceholder: Bool = false) {
+    public init(snapshot: WidgetSnapshot, date: Date, isPlaceholder: Bool = false, mapImage: @escaping (Bool) -> Image? = { _ in nil }) {
         self.snapshot = snapshot
         self.date = date
         self.isPlaceholder = isPlaceholder
+        self.mapImage = mapImage
     }
 
     private var l10n: L10n { WidgetWords.l10n(snapshot.language) }
@@ -99,9 +103,17 @@ public struct YearWidgetView: View {
                 stat(Format.distance(y.km * 1000, unit: snapshot.distanceUnit, language: snapshot.language), l10n.t("widgets.distance"))
                 stat(String(y.trains), l10n.t("passport.trains"))
             }
-            RoutesMap(routes: y.routes, color: Ink.accentInk)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+            Group {
+                if let map = mapImage(scheme == .dark) {
+                    // The routes are already on this map; it is cut to the box.
+                    Color.clear.overlay { map.resizable().scaledToFill() }.clipped()
+                } else {
+                    RoutesMap(routes: y.routes, color: Ink.accentInk)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Ink.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             if let route = y.topRoute { stat(route, l10n.t("widgets.topRoute", ["count": String(y.topRouteCount)])) }
             if let iso = y.busiestMonth, let name = month(iso) {
                 stat(name, l10n.t("widgets.busiestMonth", ["count": String(y.busiestMonthCount)]))

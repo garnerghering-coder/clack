@@ -33,7 +33,10 @@ struct OperatorBadge: View {
         Group {
             if Config.showOperatorLogos, let url = logoURL {
                 if let image = LogoStore.shared.image(for: url) {
+                    let inset = Self.needsMargin(url) ? points * 0.14 : 0
                     Image(uiImage: image).resizable().scaledToFill()
+                        .frame(width: points - inset * 2, height: points - inset * 2)
+                        .clipShape(RoundedRectangle(cornerRadius: (Radius.badge * points / BadgeSize.large.points).rounded() * 0.5, style: .continuous))
                         .frame(width: points, height: points)
                         .background(Color.white)
                         .clipShape(shape)
@@ -49,6 +52,17 @@ struct OperatorBadge: View {
         .frame(width: points, height: points)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(op?.name ?? "")
+    }
+
+    /// The logos whose picture runs to its edges (a circle, a mark, a favicon) and so are drawn inside a white margin.
+    /// The others (SJ, VR, TIB, Värmlandstrafik, Go-Ahead) are tiles or carry their own margin. Picked by eye on the
+    /// badges (owner, 2026-10-25); the operator is read from the logo's address, `/api/operators/<id>/logo`.
+    private static let paddedLogos: Set<String> = ["malartag", "norrtag", "oresundstag", "pagatag", "tagab", "x-taget"]
+
+    static func needsMargin(_ url: URL) -> Bool {
+        let parts = url.pathComponents
+        guard let at = parts.firstIndex(of: "operators"), parts.indices.contains(at + 1) else { return false }
+        return paddedLogos.contains(parts[at + 1])
     }
 
     private var logoURL: URL? {

@@ -88,6 +88,7 @@ final class TapTests: XCTestCase {
     func testManyTaps() throws {
         let app = launch()
         let past = app.buttons["Past"], upcoming = app.buttons["Upcoming"]
+        XCTAssertTrue(past.waitForExistence(timeout: 15))
         var missed: [Int] = []
         for i in 0..<12 {
             let target = i % 2 == 0 ? past : upcoming

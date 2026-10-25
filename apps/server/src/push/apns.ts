@@ -178,16 +178,18 @@ export const WIDGET_PAYLOAD: Record<string, unknown> = Object.freeze({ aps: Obje
 /** The alert sound: SBB's jingle, bundled with the app (Resources/Sounds). */
 export const ALERT_SOUND = 'sbb_jingle.wav';
 
-export function alertPayload(a: { title: string; subtitle?: string; body: string; legId: string; kind: string; journeyId?: string | null; timeSensitive?: boolean }): Record<string, unknown> {
+export function alertPayload(a: { title: string; subtitle?: string; body: string; legId: string; kind: string; journeyId?: string | null; timeSensitive?: boolean; shareToken?: string }): Record<string, unknown> {
   return {
     aps: {
       alert: { title: a.title, ...(a.subtitle ? { subtitle: a.subtitle } : {}), body: a.body },
       sound: ALERT_SOUND,
-      'thread-id': a.legId,
+      'thread-id': a.shareToken ?? a.legId,
       'interruption-level': a.timeSensitive ? 'time-sensitive' : 'active',
     },
     legId: a.legId,
     kind: a.kind,
     ...(a.journeyId ? { journeyId: a.journeyId } : {}),
+    // An alert for someone following a shared journey opens that journey, not a trip of theirs.
+    ...(a.shareToken ? { shareToken: a.shareToken } : {}),
   };
 }

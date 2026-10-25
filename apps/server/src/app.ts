@@ -11,6 +11,7 @@ import { searchRoutes } from './routes/search.js';
 import { legRoutes } from './routes/legs.js';
 import { mapRoutes } from './routes/map.js';
 import { privacyRoutes } from './routes/privacy.js';
+import { shareRoutes, sharePageRoutes } from './routes/share.js';
 import { liveRoutes } from './routes/live.js';
 import { pushRoutes } from './routes/push.js';
 import { exportRoutes } from './routes/export.js';
@@ -42,7 +43,7 @@ const USER_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f
  * fetches them itself) and operator logos.
  */
 const requireUser = /^(1|true|yes|on)$/i.test(process.env.CLACK_REQUIRE_USER ?? '');
-const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|operators\/[a-z0-9-]+\/logo$)/;
+const OPEN_WITHOUT_USER = /^\/api\/(health$|map\/|shared\/[A-Za-z0-9_-]+$|operators\/[a-z0-9-]+\/logo$)/;
 
 
 export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (legId: string) => void; boards?: BoardHubOptions; liveMap?: IngestOptions } = {}) {
@@ -91,6 +92,8 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(legRoutes(db, { afterCreate: opts.afterLegCreated }), api);
   app.register(mapRoutes(db), api);
   app.register(privacyRoutes);
+  app.register(sharePageRoutes);
+  app.register(shareRoutes(db), api);
   app.register(liveRoutes(db), api);
   app.register(pushRoutes(db), api);
   app.register(exportRoutes(db), api);

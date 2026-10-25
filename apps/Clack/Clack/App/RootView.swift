@@ -166,10 +166,12 @@ struct RootView: View {
     /// A `clack://` link (a widget, the trip card) opens its screen; one the app doesn't know opens nothing. Anything
     /// else is a file shared to Clack.
     private func openURL(_ url: URL) {
-        if url.scheme?.lowercased() == DeepLink.scheme {
-            if let link = DeepLink.parse(url) { router.open(link, app: app) }
+        // `clack://` links, and a shared journey's web address (a universal link) when the app is installed.
+        if let link = DeepLink.parse(url) {
+            router.open(link, app: app)
             return
         }
+        if url.scheme?.lowercased() == DeepLink.scheme { return }
         openTicket(url)
     }
 

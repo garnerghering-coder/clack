@@ -144,32 +144,53 @@ final class ExploreModel {
         if loaded { try? await Task.sleep(for: .milliseconds(400)) }
         guard !Task.isCancelled, let client = app?.client else { return }
         while !Task.isCancelled {
-            do {
-                for try await event in client.liveTrainStream(bbox: bbox) {
-                    streamDown = false
-                    if event.name == "snapshot", let snapshot = await EventStream.decode(LiveSnapshot.self, from: event) {
-                        loaded = true
-                        lastMessage = now
-                        mode = snapshot.mode
-                        apply(snapshot.trains, removed: [], replace: true)
-                        total = snapshot.total
-                        upstreamAt = snapshot.upstreamAt
-                    } else if event.name == "delta", let delta = await EventStream.decode(LiveDelta.self, from: event) {
-                        lastMessage = now
-                        // A moved train only changed position: lay that over what we already have.
-                        let moved = (delta.moved ?? []).compactMap { m in trains[m.id].map { ExploreLogic.applying(m, to: $0) } }
-                        apply(delta.changed + moved, removed: delta.removed, replace: false)
-                        total = delta.total
-                        upstreamAt = delta.upstreamAt
-                        if let m = delta.mode { mode = m }
-                    }
+            // The server sends something every two seconds (the data's age too), so a stream that goes quiet has
+            // stalled without failing: the watchdog cancels it and the loop connects again.
+            lastEvent = now
+            let consumer = Task { try await consume(client.liveTrainStream(bbox: bbox)) }
+            let watchdog = Task { [weak self] in
+                while !Task.isCancelled {
+                    try? await Task.sleep(for: .seconds(5))
+                    guard let self else { return }
+                    if self.now - self.lastEvent > Self.silenceMs { consumer.cancel(); return }
                 }
+            }
+            do {
+                try await withTaskCancellationHandler { try await consumer.value } onCancel: { consumer.cancel() }
             } catch {
                 // Down until it comes back.
             }
+            watchdog.cancel()
             if Task.isCancelled { return }
             streamDown = true
             try? await Task.sleep(for: .seconds(5))
+        }
+    }
+
+    /// The quiet after which a stream is taken for stalled.
+    nonisolated static let silenceMs = 15_000.0
+    private var lastEvent = 0.0
+
+    private func consume(_ stream: AsyncThrowingStream<SSEEvent, Error>) async throws {
+        for try await event in stream {
+            lastEvent = now
+            streamDown = false
+            if event.name == "snapshot", let snapshot = await EventStream.decode(LiveSnapshot.self, from: event) {
+                loaded = true
+                lastMessage = now
+                mode = snapshot.mode
+                apply(snapshot.trains, removed: [], replace: true)
+                total = snapshot.total
+                upstreamAt = snapshot.upstreamAt
+            } else if event.name == "delta", let delta = await EventStream.decode(LiveDelta.self, from: event) {
+                lastMessage = now
+                // A moved train only changed position: lay that over what we already have.
+                let moved = (delta.moved ?? []).compactMap { m in trains[m.id].map { ExploreLogic.applying(m, to: $0) } }
+                apply(delta.changed + moved, removed: delta.removed, replace: false)
+                total = delta.total
+                upstreamAt = delta.upstreamAt
+                if let m = delta.mode { mode = m }
+            }
         }
     }
 

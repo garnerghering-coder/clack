@@ -142,11 +142,8 @@ struct ExploreScreen: View {
                 if !model.showFilters { model.searching = false }
                 model.showFilters.toggle()
             } label: {
-                LucideIcon(name: "sliders-horizontal", size: 18)
-                    .foregroundStyle(model.filteredCount > 0 ? Ink.onAccent : Ink.text)
-                    .frame(width: 40, height: 40)
-                    .background(model.filteredCount > 0 ? Ink.accent : Ink.glass, in: Circle())
-                    .overlay(Circle().strokeBorder(model.filteredCount > 0 ? Ink.accent : Ink.hairline, lineWidth: 1))
+                // The same glass circle as the map's buttons (yellow while filters are on).
+                MapButtonFace(icon: "sliders-horizontal", pressed: model.filteredCount > 0)
                     .overlay(alignment: .topTrailing) {
                         if model.filteredCount > 0 {
                             Text("\(model.filteredCount)").clack(.micro).fontWeight(.heavy).foregroundStyle(Ink.bg)

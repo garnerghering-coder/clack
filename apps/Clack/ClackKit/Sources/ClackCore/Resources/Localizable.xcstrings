@@ -6278,6 +6278,74 @@
         }
       }
     },
+    "following.deadLink" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This link no longer works."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länken fungerar inte längre."
+          }
+        }
+      }
+    },
+    "following.ended" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This journey is no longer shared."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Den här resan delas inte längre."
+          }
+        }
+      }
+    },
+    "following.opening" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opening the journey…"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar resan…"
+          }
+        }
+      }
+    },
+    "following.stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop following"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sluta följa"
+          }
+        }
+      }
+    },
     "journey.actually" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11092,13 +11160,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one else. To show live times our server asks Trafikverket (Sweden), Entur (Norway) and Digitraffic (Finland) about trains by number and station; those requests say nothing about you. Requests to Digitraffic carry no personal data, only a fixed app name. Ticket links open the train operator’s own website."
+            "value" : "No one else, unless you share a journey: a link you make shows that one journey (its trains, times, platforms and where it is) to anyone who has the link, until a day after it arrives. It never shows your random code, your seat, your notes or your other trips, and you can stop sharing at any time. If you follow someone’s journey, we keep which link you follow so we can send you alerts about it; the person who shared it isn’t told. To show live times our server asks Trafikverket (Sweden), Entur (Norway) and Digitraffic (Finland) about trains by number and station; those requests say nothing about you. Requests to Digitraffic carry no personal data, only a fixed app name. Ticket links open the train operator’s own website."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ingen annan. För att visa realtid frågar vår server Trafikverket (Sverige), Entur (Norge) och Digitraffic (Finland) om tåg utifrån nummer och station; frågorna säger inget om dig. Frågor till Digitraffic innehåller inga personuppgifter, bara ett fast appnamn. Biljettlänkar öppnar tågbolagets egen webbplats."
+            "value" : "Ingen annan, om du inte delar en resa: en länk du skapar visar just den resan (tågen, tiderna, spåren och var tåget är) för alla som har länken, till en dag efter att den kommit fram. Den visar aldrig din slumpkod, din plats, dina anteckningar eller dina andra resor, och du kan sluta dela när som helst. Om du följer någon annans resa sparar vi vilken länk du följer så att vi kan skicka notiser om den; den som delade får inte veta det. För att visa realtid frågar vår server Trafikverket (Sverige), Entur (Norge) och Digitraffic (Finland) om tåg utifrån nummer och station; frågorna säger inget om dig. Frågor till Digitraffic innehåller inga personuppgifter, bara ett fast appnamn. Biljettlänkar öppnar tågbolagets egen webbplats."
           }
         }
       }
@@ -13490,6 +13558,23 @@
         }
       }
     },
+    "share.action" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela resa"
+          }
+        }
+      }
+    },
     "share.allKicker" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13524,6 +13609,91 @@
         }
       }
     },
+    "share.arrives" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrives {{station}} {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framme i {{station}} {{time}}"
+          }
+        }
+      }
+    },
+    "share.arrivesPlatform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrives {{station}} {{time}}, platform {{platform}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framme i {{station}} {{time}}, spår {{platform}}"
+          }
+        }
+      }
+    },
+    "share.change" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change at {{station}} · {{min}} min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Byte i {{station}} · {{min}} min"
+          }
+        }
+      }
+    },
+    "share.changeOk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to spare"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gott om tid"
+          }
+        }
+      }
+    },
+    "share.changeWalk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walk from {{from}} to {{to}} · {{min}} min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå från {{from}} till {{to}} · {{min}} min"
+          }
+        }
+      }
+    },
     "share.countries" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13537,6 +13707,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Länder"
+          }
+        }
+      }
+    },
+    "share.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't make a link. Try again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunde inte skapa länken. Försök igen."
           }
         }
       }
@@ -13558,6 +13745,57 @@
         }
       }
     },
+    "share.following" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following {{from}} → {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följer {{from}} → {{to}}"
+          }
+        }
+      }
+    },
+    "share.late" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min sen"
+          }
+        }
+      }
+    },
+    "share.live" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live"
+          }
+        }
+      }
+    },
     "share.medalKicker" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13571,6 +13809,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Milstolpe upplåst"
+          }
+        }
+      }
+    },
+    "share.nextStop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next stop {{station}} {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nästa stopp {{station}} {{time}}"
           }
         }
       }
@@ -13605,6 +13860,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ombord"
+          }
+        }
+      }
+    },
+    "share.onTime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On time"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I tid"
           }
         }
       }
@@ -13762,6 +14034,159 @@
         }
       }
     },
+    "share.status.arrived" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrived in {{station}} at {{time}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framme i {{station}} {{time}}"
+          }
+        }
+      }
+    },
+    "share.status.atChange" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changing trains at {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Byter tåg i {{station}}"
+          }
+        }
+      }
+    },
+    "share.status.cancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelled"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställt"
+          }
+        }
+      }
+    },
+    "share.status.underway" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On its way"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "På väg"
+          }
+        }
+      }
+    },
+    "share.status.underwayBetween" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Between {{from}} and {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mellan {{from}} och {{to}}"
+          }
+        }
+      }
+    },
+    "share.status.upcoming" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leaves {{time}} from {{station}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgår {{time}} från {{station}}"
+          }
+        }
+      }
+    },
+    "share.status.upcomingPlatform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leaves {{time}} from {{station}}, platform {{platform}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgår {{time}} från {{station}}, spår {{platform}}"
+          }
+        }
+      }
+    },
+    "share.stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop sharing"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sluta dela"
+          }
+        }
+      }
+    },
+    "share.stops" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stops"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopp"
+          }
+        }
+      }
+    },
     "share.tagline" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13775,6 +14200,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "VARJE TÅG. VARJE RESA."
+          }
+        }
+      }
+    },
+    "share.text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow my train from {{from}} to {{to}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följ mitt tåg från {{from}} till {{to}}"
           }
         }
       }
@@ -13860,6 +14302,159 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medalj"
+          }
+        }
+      }
+    },
+    "share.web.bannerBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track your own journeys and get live alerts about this one in Clack."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följ dina egna resor och få aviseringar om den här i Clack."
+          }
+        }
+      }
+    },
+    "share.web.bannerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get updates on this journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Få uppdateringar om resan"
+          }
+        }
+      }
+    },
+    "share.web.ended" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This link no longer works"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länken fungerar inte längre"
+          }
+        }
+      }
+    },
+    "share.web.endedBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The traveller has stopped sharing, or the journey ended a while ago."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resenären har slutat dela, eller så tog resan slut för ett tag sedan."
+          }
+        }
+      }
+    },
+    "share.web.get" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Clack"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hämta Clack"
+          }
+        }
+      }
+    },
+    "share.web.installed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already installed? Open this link again to follow it in the app."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Har du appen? Öppna länken igen för att följa resan i appen."
+          }
+        }
+      }
+    },
+    "share.web.loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading the journey…"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hämtar resan…"
+          }
+        }
+      }
+    },
+    "share.web.mapLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map of the journey"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta över resan"
+          }
+        }
+      }
+    },
+    "share.web.open" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Clack"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna i Clack"
           }
         }
       }

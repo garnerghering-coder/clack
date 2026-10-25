@@ -22,6 +22,9 @@ public nonisolated enum Config {
         return hosted
         #endif
     }()
+    /// The address of the links people share (`https://<host>/j/<token>`): the hosted server's own name. A link on
+    /// another host is not ours and opens nothing.
+    public static let shareHost = "clack-garner.duckdns.org"
     /// Operators' logos are trademarks; Garner has the operators' approval to use them (docs/APP_STORE.md, 5.2.1).
     public static let showOperatorLogos = true
     /// Shown on the Privacy screen (docs/APP_STORE.md, 1.5). The owner chose to publish it. It is displayed only: it must

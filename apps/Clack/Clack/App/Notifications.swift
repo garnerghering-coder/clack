@@ -114,7 +114,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
     nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
         guard let legId = info["legId"] as? String else { return }
-        let request = DeepLink.forAlert(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "")
+        let request = DeepLink.forAlert(legId: legId, journeyId: info["journeyId"] as? String, kind: info["kind"] as? String ?? "", shareToken: info["shareToken"] as? String)
         await MainActor.run { NotificationManager.shared.openRequest = request }
     }
 }

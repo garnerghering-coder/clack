@@ -485,3 +485,31 @@ export const diagnostics = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.day, t.build, t.kind, t.signature] })],
 );
+
+// ---------- Shared journeys (a link to watch a journey) ----------
+
+/**
+ * A journey its traveller has shared by link. The token is the whole secret (128 random bits); the page and the app read a
+ * cut-down copy of the legs (`src/share/shared.ts`) and never the traveller's id. Gone with the user.
+ */
+export const sharedJourneys = sqliteTable('shared_journeys', {
+  token: text('token').primaryKey(),
+  userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  /** JSON array of the leg ids shared (a journey's legs, or the one leg). */
+  legIds: text('leg_ids', { mode: 'json' }).$type<string[]>().notNull(),
+  createdAt: createdAt(),
+  /** 24 hours after the last arrival. */
+  expiresAt: timestamp('expires_at').notNull(),
+  revokedAt: timestamp('revoked_at'),
+});
+
+/** Who watches a shared journey, kept only to send them alerts about it. The traveller is not told. */
+export const journeyFollowers = sqliteTable(
+  'journey_followers',
+  {
+    token: text('token').notNull().references(() => sharedJourneys.token, { onDelete: 'cascade' }),
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+  },
+  (t) => [primaryKey({ columns: [t.token, t.userId] })],
+);

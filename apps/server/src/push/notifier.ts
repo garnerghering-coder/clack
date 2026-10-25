@@ -5,6 +5,8 @@ import { and, asc, desc, eq, gt, inArray, lt, ne } from 'drizzle-orm';
 import { DEFAULT_SETTINGS, delayBand, type Language, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, users } from '../db/schema.js';
+import { followersOfLeg, publicJourneyWithIds } from '../share/shared.js';
+import { followerAlerts } from './followers.js';
 import { liveBus, type LiveUpdate } from '../live/tracker.js';
 import { alertPayload, backgroundPayload, WIDGET_PAYLOAD, type ApnsClient, type Environment } from './apns.js';
 import { change, departureLine, fromEvents, getOff, momentOf, reminder, type Alert, type Moment, type Prefs, type TripFacts } from './rules.js';
@@ -265,12 +267,53 @@ export class Notifier {
 
   /** The tracker saw changes on a leg. */
   async onUpdate(u: LiveUpdate) {
+    // Whoever follows a shared journey this leg belongs to hears about it too, whether or not the leg is a trip of anyone with alerts.
+    await this.followers(u);
     const L = this.load(u.legId);
     if (!L) return;
     for (const a of fromEvents(L.facts, u.events, L.prefs, L.lang)) await this.deliver(L, a);
     await this.checks(L);
     await this.pushActivity(L);
     await this.fresh(L);
+  }
+
+  /** The follower's alerts for what the tracker saw on a leg of a shared journey, each sent once per follower. */
+  async followers(u: LiveUpdate) {
+    if (!this.apns) return;
+    const now = this.now();
+    for (const share of followersOfLeg(this.db, u.legId, now)) {
+      const built = publicJourneyWithIds(this.db, share.token, now);
+      const index = built?.legIds.indexOf(u.legId) ?? -1;
+      if (!built || index < 0) continue;
+      const settings = new Map(this.db.select({ id: users.id, settings: users.settings }).from(users).where(inArray(users.id, share.followers)).all().map((r) => [r.id, r.settings]));
+      for (const follower of share.followers) {
+        const s: Settings = { ...DEFAULT_SETTINGS, ...(settings.get(follower) ?? {}) };
+        for (const a of followerAlerts(built.journey, index, u.events, s, s.language)) await this.deliverFollower(share.token, u.legId, follower, a);
+      }
+    }
+  }
+
+  private async deliverFollower(token: string, legId: string, followerId: string, a: Alert) {
+    if (!this.apns) return;
+    const phones = this.devicesOf(followerId);
+    if (!phones.length) return;
+    const key = `${followerId}:${a.key}`;
+    if (!this.db.insert(pushLog).values({ legId, kind: a.kind, key, sentAt: new Date(this.now()) }).onConflictDoNothing().run().changes) return;
+    let delivered = false;
+    for (const d of phones) {
+      const r = await this.apns.send({
+        token: d.token,
+        environment: d.environment as Environment,
+        pushType: 'alert',
+        collapseId: `${token}:${a.kind}`,
+        expiration: Math.floor(this.now() / 1000) + 3600,
+        payload: alertPayload({ ...a, legId, shareToken: token }),
+      });
+      if (r.ok) delivered = true;
+      else if (r.dead) this.forget(d.token);
+      else this.opts.log?.(`push: ${a.kind} to a follower failed: ${r.status} ${r.reason ?? ''}`);
+    }
+    if (!delivered) this.db.delete(pushLog).where(and(eq(pushLog.legId, legId), eq(pushLog.kind, a.kind), eq(pushLog.key, key))).run();
   }
 
   /** Reminders, "get off soon", changes, and starting Live Activities: things that happen with the clock, not an event. */

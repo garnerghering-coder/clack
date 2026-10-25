@@ -1,0 +1,94 @@
+/* The page a shared journey opens to when the app is not installed. Same look as the app (DESIGN.md §2): monochrome with
+   signal yellow, delay colours always with words, status written not boxed, no pill badges. */
+@font-face { font-family: "Inter"; src: url("/share-assets/InterVariable.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("/share-assets/SpaceGrotesk-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+:root {
+  --bg: #0a0a0a; --surface: #151515; --raised: #1f1f1f; --hairline: rgba(255,255,255,.09);
+  --text: #fff; --text2: #a3a3a3; --text3: #6e6e6e;
+  --accent: #f8d64a; --on-accent: #0a0a0a; --accent-ink: #f8d64a;
+  --green: #3ddc84; --yellow: #f5d90a; --amber: #ff9500; --red: #ff453a;
+  --r-card: 16px; --r-control: 12px; --r-tag: 6px;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fff; --surface: #f4f4f4; --raised: #e9e9e9; --hairline: rgba(0,0,0,.09);
+    --text: #0a0a0a; --text2: #5c5c5c; --text3: #8a8a8a; --accent-ink: #0a0a0a;
+    --green: #1f9d55; --yellow: #8a6d00; --amber: #b25e00; --red: #d62a20;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/22px Inter, -apple-system, system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+a { color: var(--accent-ink); }
+.muted { color: var(--text2); }
+.page { max-width: 560px; margin: 0 auto; padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 16px; }
+
+/* the offer to get the app: at the top, until dismissed */
+.banner { position: sticky; top: 0; z-index: 5; display: grid; gap: 8px; padding: 12px 40px 12px 16px; background: var(--surface); border-bottom: 1px solid var(--hairline); }
+.banner[hidden] { display: none; }
+.banner-text { display: grid; gap: 2px; font-size: 14px; line-height: 19px; color: var(--text2); }
+.banner-text strong { color: var(--text); font-size: 15px; }
+.banner-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.banner-note { margin: 0; font-size: 12px; line-height: 16px; color: var(--text3); }
+.banner-close { position: absolute; top: 6px; right: 8px; width: 32px; height: 32px; border: 0; background: none; color: var(--text2); font-size: 22px; cursor: pointer; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border-radius: var(--r-control); background: var(--raised); color: var(--text); font-weight: 600; font-size: 15px; text-decoration: none; }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+
+.route { margin: 0; font: 700 28px/34px "Space Grotesk", Inter, sans-serif; letter-spacing: -.01em; }
+.day { margin: 2px 0 0; color: var(--text2); font-size: 14px; }
+
+/* the status, in words, with the colour of its band */
+.status { padding: 16px; background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-card); display: grid; gap: 6px; }
+.status-line { display: flex; align-items: baseline; gap: 8px; font-size: 20px; line-height: 26px; font-weight: 600; }
+.dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--text3); transform: translateY(-2px); }
+.live .dot { background: var(--green); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .live .dot { animation: none; } }
+.status-sub { color: var(--text2); font-size: 15px; }
+.on-time { color: var(--green); } .slight { color: var(--yellow); } .late { color: var(--amber); } .very-late { color: var(--red); } .unknown { color: var(--text2); }
+.word { font-weight: 600; }
+
+#map { height: 280px; border-radius: var(--r-card); overflow: hidden; border: 1px solid var(--hairline); background: var(--surface); }
+.map-note { margin: -8px 0 0; font-size: 12px; color: var(--text2); }
+.maplibregl-ctrl-attrib { display: none; }
+.marker { width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.5); }
+
+/* the journey as one rail: a line per train in its colour, a dashed stretch at each change */
+.rail { display: grid; }
+.row { position: relative; display: grid; grid-template-columns: 20px 1fr; column-gap: 8px; }
+.line { position: relative; }
+.line::before { content: ""; position: absolute; left: 9px; top: 0; bottom: 0; width: 2px; background: var(--leg, var(--text3)); opacity: .9; }
+.row.change .line::before { background: none; border-left: 2px dashed var(--text3); width: 0; opacity: 1; }
+.row.first .line::before { top: 8px; } .row.last .line::before { bottom: 8px; }
+.node { position: absolute; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--leg, var(--text)); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--text); }
+.node.top { top: 1px; } .node.bottom { bottom: 1px; }
+.node.small { left: 5px; width: 10px; height: 10px; box-shadow: none; background: var(--text3); border-color: var(--bg); }
+.node.small.top { top: -5px; } .node.small.bottom { bottom: -5px; }
+.node.small.reached { background: var(--leg, var(--text)); }
+.leg { padding: 10px 0; display: grid; gap: 6px; }
+.leg-head { display: flex; align-items: center; gap: 10px; }
+.badge { flex: none; width: 36px; height: 36px; border-radius: 9px; background: var(--op, var(--raised)) center/cover no-repeat; border: 1px solid var(--hairline); color: #fff; font: 800 12px/36px Inter, sans-serif; text-align: center; overflow: hidden; }
+.badge.logo { background-color: #fff; background-size: contain; background-origin: content-box; }
+.badge.pad { padding: 5px; }
+.leg-title { font-weight: 600; font-size: 17px; line-height: 22px; }
+.leg-meta { color: var(--text2); font-size: 13px; line-height: 18px; }
+.times { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 15px; }
+.times .big { font: 700 22px/28px "Space Grotesk", Inter, sans-serif; }
+.struck { color: var(--text3); text-decoration: line-through; }
+.tag { display: inline-block; padding: 0 6px; border-radius: var(--r-tag); background: var(--raised); color: var(--accent-ink); font-size: 12px; line-height: 18px; font-weight: 700; }
+.change-body { padding: 14px 0; display: grid; gap: 2px; font-size: 14px; line-height: 19px; }
+.change-body .t { font-weight: 600; font-size: 15px; }
+details.stops { margin-top: 2px; }
+details.stops summary { cursor: pointer; color: var(--text2); font-size: 13px; padding: 4px 0; }
+.stop { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; font-size: 14px; }
+.stop.passed { color: var(--text3); }
+.stop.canceled .nm { text-decoration: line-through; }
+
+.ended { padding: 48px 8px; display: grid; gap: 8px; text-align: center; }
+.ended h1 { margin: 0; font: 700 24px/30px "Space Grotesk", Inter, sans-serif; }
+.foot { max-width: 560px; margin: 0 auto; padding: 8px 16px 32px; display: flex; justify-content: space-between; color: var(--text3); font-size: 13px; }
+.foot a { color: var(--text3); }
+.wordmark { font: 700 16px "Space Grotesk", Inter, sans-serif; color: var(--text2); }
+
+@media (min-width: 760px) { #map { height: 360px; } }

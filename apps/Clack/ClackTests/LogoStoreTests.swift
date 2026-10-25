@@ -18,6 +18,12 @@ struct LogoStoreTests {
         #expect(a.lastPathComponent.count == 64 + 4)
     }
 
+    @Test func onlyTheLogosThatRunToTheirEdgesGetAMargin() {
+        func url(_ id: String) -> URL { URL(string: "https://x.example/api/operators/\(id)/logo?v=1")! }
+        for id in ["malartag", "norrtag", "oresundstag", "pagatag", "tagab", "x-taget"] { #expect(OperatorBadge.needsMargin(url(id))) }
+        for id in ["sj", "vr", "tib", "varmlandstrafik", "go-ahead-norge"] { #expect(!OperatorBadge.needsMargin(url(id))) }
+    }
+
     @MainActor @Test func lookupInMemoryIsEmptyUntilLoaded() {
         #expect(LogoStore.shared.image(for: URL(string: "https://invalid.example/none.png")!) == nil)
     }

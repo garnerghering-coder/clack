@@ -42,14 +42,31 @@ public struct SearchField: View {
         .frame(minHeight: Self.height)
         .background {
             if overMap {
+                #if os(iOS)
+                if #available(iOS 26.0, *) {
+                    // Liquid Glass; the system draws its own edge.
+                    Color.clear.glassEffect(.regular, in: shape)
+                } else {
+                    shape.fill(Ink.glass)
+                    shape.fill(.ultraThinMaterial)
+                }
+                #else
                 shape.fill(Ink.glass)
                 shape.fill(.ultraThinMaterial)
+                #endif
             } else {
                 shape.fill(Ink.surfaceRaised)
             }
         }
-        .hairlineBorder(radius: Radius.input, color: focused ? Ink.accentLine : Ink.hairline)
+        .modifier(SearchBorder(shape: shape, show: !overMap || !Self.hasLiquidGlass || focused, color: focused ? Ink.accentLine : Ink.hairline))
         .contentShape(shape)
+    }
+
+    private static var hasLiquidGlass: Bool {
+        #if os(iOS)
+        if #available(iOS 26.0, *) { return true }
+        #endif
+        return false
     }
 
     @ViewBuilder
@@ -60,6 +77,17 @@ public struct SearchField: View {
         } else {
             input.focused($ownFocus)
         }
+    }
+}
+
+/// The hairline border, left off glass (which has its edge) until the field is focused.
+private struct SearchBorder: ViewModifier {
+    let shape: RoundedRectangle
+    let show: Bool
+    let color: Color
+
+    func body(content: Content) -> some View {
+        if show { content.hairlineBorder(radius: Radius.input, color: color) } else { content }
     }
 }
 

@@ -81,6 +81,7 @@ public nonisolated enum Identity {
         groupDefaults?.removeObject(forKey: groupKey)
         WidgetSnapshot.clear()
         WidgetStations.clear()
+        WidgetMaps.prune(keeping: "")
     }
 }
 

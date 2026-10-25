@@ -24,7 +24,13 @@ Anything not written down in the repository is marked **Owner:** for Garner to f
   answering.
 - `/privacy` and `/privacy/sv`: the privacy page (plain HTML in `apps/server/public/privacy`), which is the privacy
   policy URL for App Store Connect (`https://clack-garner.duckdns.org/privacy`).
-- Nothing else. There is no web app, so Caddy serves no files itself.
+- `/j/<token>`: a shared journey's page, for people without the app (`apps/server/public/share`, the MapLibre library
+  from the `maplibre-gl` npm package, the app's fonts). The page reads `/api/shared/<token>`, a cut-down copy that never
+  has the traveller's id, seat, ticket or other trips. `/share-assets/*` are its files.
+- `/.well-known/apple-app-site-association`: tells iOS that links to `/j/*` open the app (team `HJTCN7QR8M`, bundle
+  `com.garnerghering.Clack`). The app needs the Associated Domains capability (`applinks:clack-garner.duckdns.org`).
+- Nothing else. There is no web app, so Caddy serves no files itself (it sends every path to Fastify, so these pages
+  need no Caddy change).
 
 ## `.env`
 
@@ -37,6 +43,10 @@ Anything not written down in the repository is marked **Owner:** for Garner to f
 | `TRAFIKLAB_GTFS_SVERIGE2_KEY` | GTFS Sverige 2 (history) |
 | `CLACK_REQUIRE_USER=1` | Refuse `/api` requests that don't say which phone they come from, so nobody can read the local user's trips |
 | `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_KEY_PATH`, `APNS_TOPIC` | Apple Push: the key id, the team id, the path to the `.p8` key file (kept like a password, outside git) and the app's bundle id `com.garnerghering.Clack`. Without all four, alerts and Live Activity updates stay off (the server logs `push: alerts off`) |
+
+Optional for sharing: `CLACK_APP_DOWNLOAD_URL` (where the page's "Get Clack" button goes: the TestFlight public link now,
+the App Store address later; unset, the button is shown but goes nowhere) and `CLACK_PUBLIC_URL` (the address put in share
+links when the server can't tell it from the request).
 
 Optional: `PORT` (3001), `HOST` (127.0.0.1), `DATABASE_PATH` (`data/app.db`), `ENTUR_CLIENT_NAME`, and the polling
 settings in the README. `CLACK_ALLOWED_ORIGINS` was for the old web wrapper and is no longer read; delete it from the

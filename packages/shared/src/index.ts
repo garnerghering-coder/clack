@@ -154,3 +154,4 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
   }
   return next;
 }
+export * from './strings';

@@ -25,6 +25,7 @@ private struct DestinationView: View {
         switch route {
         case .trip(let id): TripDetailScreen(id: id)
         case .journey(let id): JourneyScreen(id: id)
+        case .following(let token): FollowingScreen(token: token)
         case .settings: SettingsScreen()
         case .about: AboutScreen()
         case .privacy: PrivacyScreen()

@@ -102,6 +102,13 @@ struct TripsScreen: View {
         .task(id: app.isOffline) { await model.loadDetails(app.client, now: Date.now.timeIntervalSince1970 * 1000) }
         .task { await model.loadFollows(app.client) }
         .task { await model.listen(app.live) }
+        // The journeys you follow: fetched now and kept fresh while Trips shows.
+        .task {
+            while !Task.isCancelled {
+                await app.followed.load(app)
+                try? await Task.sleep(for: .seconds(30))
+            }
+        }
     }
 
     @ViewBuilder
@@ -131,6 +138,7 @@ struct TripsScreen: View {
                 }
                 .countsError("trips.load")
             }
+            if router.tripsTab == .upcoming { FollowedJourneysSection() }
             if model.legs == nil && !model.failed {
                 VStack(spacing: 12) {
                     Skeleton()
@@ -141,7 +149,7 @@ struct TripsScreen: View {
             if let all = shown {
                 if all.isEmpty {
                     emptyState
-                    if router.tripsTab == .upcoming { FollowingSection(follows: model.follows) }
+                    if router.tripsTab == .upcoming { FollowingSection(follows: unshared(model.follows)) }
                 } else if router.tripsTab == .upcoming {
                     upcomingTab(all, upcoming: upcoming, hero: hero)
                 } else {
@@ -153,6 +161,12 @@ struct TripsScreen: View {
             await model.load(app.client)
             await model.loadFollows(app.client)
         }
+    }
+
+    /// The trains you follow on their own: not the ones that belong to a journey you follow (its card has them).
+    private func unshared(_ follows: [Follow]) -> [Follow] {
+        let covered = Set(app.followed.journeys.flatMap(SharedLogic.followBodies).map { "\($0.trainNumber)|\($0.serviceDate)" })
+        return follows.filter { !covered.contains("\($0.trainNumber)|\($0.serviceDate)") }
     }
 
     private var emptyState: some View {
@@ -190,7 +204,7 @@ struct TripsScreen: View {
                 if item.count > 1 { JourneyCard(legs: item) } else { LegRow(leg: item[0], upcoming: true) }
             }
         }
-        FollowingSection(follows: model.follows)
+        FollowingSection(follows: unshared(model.follows))
     }
 
     @ViewBuilder
