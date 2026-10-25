@@ -56,9 +56,9 @@ struct TrainArtTests {
         #expect(picture("fi_sm3", "x2000", "vr-fi") == .init(asset: "fi_sm3-vr-fi", isStandIn: false, isUnknown: false))
         #expect(picture("fi_sr3_ic", "loco", "vr-fi").asset == "fi_sr3_ic-vr-fi")
         #expect(picture("fi_dm12", "railcar", "vr-fi").asset == "fi_dm12-vr-fi")
-        // The Sm5 is drawn in HSL's livery only; VR's own gets the unpainted drawing.
+        // Every Sm5 is in HSL purple, also on trips the timetable lists under VR (commit 7720162).
         #expect(picture("fi_sm5", "flirt", "hsl").asset == "fi_sm5-hsl")
-        #expect(picture("fi_sm5", "flirt", "vr-fi").asset == "fi_sm5-plain")
+        #expect(picture("fi_sm5", "flirt", "vr-fi").asset == "fi_sm5-hsl")
         #expect(picture("fi_sm4", "coradia", "hsl").asset == "fi_sm4-plain")
     }
 

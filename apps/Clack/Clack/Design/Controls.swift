@@ -111,6 +111,7 @@ struct SegmentedControl<Value: Hashable>: View {
         }
         .pickerStyle(.segmented)
         .labelsHidden()
+        .textSelection(.disabled)
         .controlSize(small ? .regular : .large)
         .frame(maxWidth: small ? 260 : .infinity)
     }
@@ -191,9 +192,12 @@ struct MapButtonFace: View {
         }
         .foregroundStyle(pressed ? Ink.onAccent : Ink.text)
         .frame(width: 44, height: 44)
+        .contentShape(Circle())
+        .textSelection(.disabled)
         if #available(iOS 26.0, *) {
             glyph
-                .glassEffect(pressed ? .regular.tint(Ink.accent).interactive() : .regular.interactive(), in: Circle())
+                // Not `.interactive()`: interactive glass handles touches itself and took the tap from the button.
+                .glassEffect(pressed ? .regular.tint(Ink.accent) : .regular, in: Circle())
         } else {
             glyph
                 .background {

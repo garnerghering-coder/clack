@@ -26,8 +26,10 @@ private struct IconCircle: View {
             .foregroundStyle(tint)
             .frame(width: size.diameter, height: size.diameter)
             .contentShape(Circle())
+            .textSelection(.disabled)
         if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
-            glyph.glassEffect(.regular.interactive(), in: Circle())
+            // Not `.interactive()`: interactive glass handles touches itself and took the tap from the button.
+            glyph.glassEffect(.regular, in: Circle())
         } else {
             glyph
                 .background(Ink.surfaceRaised, in: Circle())

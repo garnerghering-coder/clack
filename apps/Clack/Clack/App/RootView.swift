@@ -50,6 +50,7 @@ struct RootView: View {
                     .opacity(hideSplash ? 0 : 1)
                     .animation(.easeInOut(duration: 0.25), value: hideSplash)
                     .allowsHitTesting(!hideSplash)
+                    .accessibilityIdentifier("splash")
             }
         }
         .environment(app.l10n)
@@ -124,9 +125,9 @@ struct RootView: View {
             guard scenePhase == .active else { return }
             await app.arrivals.run(app)
         }
-        // Any touch before the landing rule has decided cancels it.
-        .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged { _ in router.touched = true })
-        .onChange(of: router.tab) { _, tab in Landing.saveLastTab(tab) }
+        // Anything the person opens or switches before the landing rule has decided cancels it. (A zero-distance drag
+        // over the whole app did this before; it took taps from the tab bar, the segmented control and menus.)
+        .modifier(TouchWatch(router: router))
         .task {
             // The flip takes about 0.7 s; the splash is gone by about 1 s.
             try? await Task.sleep(for: .milliseconds(700))
@@ -236,5 +237,22 @@ struct RootView: View {
         } catch {
             if !router.touched, let lastTab, lastTab != .trips, router.tab == .trips { router.tab = lastTab }
         }
+    }
+}
+
+/// Notes that the person has done something (switched a tab or a list, opened a screen or the Add sheet), so the
+/// landing rule leaves them where they are; and remembers the tab.
+private struct TouchWatch: ViewModifier {
+    let router: Router
+
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: router.tab) { _, tab in
+                Landing.saveLastTab(tab)
+                router.touched = true
+            }
+            .onChange(of: router.tripsTab) { router.touched = true }
+            .onChange(of: router.tripsPath.count + router.explorePath.count + router.passportPath.count) { router.touched = true }
+            .onChange(of: router.addRequest == nil) { router.touched = true }
     }
 }

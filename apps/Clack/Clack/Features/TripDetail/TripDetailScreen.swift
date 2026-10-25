@@ -199,11 +199,14 @@ struct TripDetailScreen: View {
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
-            MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
-                .padding(.leading, 16).padding(.top, top + 12)
-            moreMenu(detail.leg)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.trailing, 16).padding(.top, top + 12)
+            // Back and the menu in one row, so neither lies over the other.
+            HStack {
+                MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
+                    .accessibilityIdentifier("trip.back")
+                Spacer(minLength: 0)
+                moreMenu(detail.leg)
+            }
+            .padding(.horizontal, 16).padding(.top, top + 12)
             if detail.leg.isEstimatedGeometry {
                 Text(l10n.t("detail.estimatedRoute"))
                     .clack(.caption).foregroundStyle(Ink.text)
@@ -212,6 +215,8 @@ struct TripDetailScreen: View {
                     .hairlineBorder(radius: Radius.controlSm)
                     .frame(maxWidth: .infinity)
                     .padding(.top, top + 18)
+                    // A label only: taps go through to the buttons beside it.
+                    .allowsHitTesting(false)
             }
         }
         .frame(height: height)
@@ -540,7 +545,6 @@ struct TripDetailScreen: View {
     private func detailsCard(_ detail: LegDetail) -> some View {
         let l = detail.leg
         let beyond = TripDetailLogic.beyondCountries(detail.stops)
-        let borderAt = TripDetailLogic.borderStation(detail)
         let dep = l.actualDep?.ms ?? l.schedDep?.ms
         let arr = l.actualArr?.ms ?? l.schedArr?.ms
         return Card(spacing: 12) {
@@ -585,6 +589,7 @@ struct TripDetailScreen: View {
             MapButtonFace(icon: "", symbol: "ellipsis")
         }
         .accessibilityLabel(l10n.t("detail.more"))
+        .accessibilityIdentifier("trip.more")
     }
 }
 

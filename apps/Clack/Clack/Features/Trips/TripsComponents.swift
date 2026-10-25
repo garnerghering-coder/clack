@@ -81,6 +81,7 @@ struct LegRow: View {
             let now = context.date.timeIntervalSince1970 * 1000
             NavigationLink(value: AppRoute.trip(leg.id)) { content(now: now) }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("trips.leg")
         }
     }
 
