@@ -24,14 +24,12 @@ struct StatsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: WidgetKinds.stats, provider: PassportProvider()) { entry in
             StatsView(entry: entry)
-                .widgetPadding()
                 .containerBackground(Ink.bg, for: .widget)
                 .widgetURL(WidgetLinks.passport)
         }
         .configurationDisplayName(WidgetWords.t("widgets.stats.name"))
         .description(WidgetWords.t("widgets.stats.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
-        .contentMarginsDisabled()
     }
 }
 

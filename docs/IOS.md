@@ -97,6 +97,11 @@ medium, large, on the holographic foil), Departures (medium, large; the station 
   hours within a day, days beyond), 3 hours ahead, fetched again at the next departure or arrival and at least every 30 minutes; it
   moves on to the next journey when one ends, and keeps an arrived one for 6 hours when nothing follows. Departures redraws every
   minute for 30 minutes, dropping trains as they leave, and fetches again after 15. Passport, Stats and Year: every 6 hours.
+- Between redraws the times run by themselves: within the hour "Departs in" is a live timer (Home Screen and Lock Screen),
+  and on the train the bar fills between the departure and arrival times. When a tracked trip changes, the server's
+  widget push (iOS 26) reloads them at once; that reaches only phones that have alerts on.
+- Margins are the system's (2026-10-25; the hand-set ones cut the large widgets at the edges). The debug gallery draws
+  the common iPhone sizes (158, 338 x 158, 338 x 354), the smaller of Apple's two, so a layout that is too big shows.
 - Texts are the app's (`widgets.*` and existing keys) in the app's language setting. The gallery shows the shapes only (redacted);
   nothing is invented. Taps: Next journey `clack://trip/<leg>`, Passport, Stats and Year `clack://passport`, Departures
   `clack://board/<station>`.

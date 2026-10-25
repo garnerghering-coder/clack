@@ -74,12 +74,13 @@ public struct NextJourneyWidgetView: View {
         return Seat.label(l10n, coach: l.coach, seat: l.seat)
     }
 
-    /// "Departs in {{time}}" with the time as a running timer (within 30 minutes) or the countdown's words.
+    /// "Departs in {{time}}" with the time as a running timer (within the hour: it counts by itself) or the countdown's
+    /// words.
     private func departsIn(_ l: WidgetSnapshot.Leg) -> Text {
         let template = l10n.t("trips.departsIn")
         let parts = template.components(separatedBy: "{{time}}")
         let middle: Text
-        if l.depAt - now <= WidgetTimeline.denseBeforeMs {
+        if l.depAt - now <= 3_600_000 {
             middle = Text(timerInterval: date...max(date, wDate(l.depAt)), countsDown: true)
         } else {
             middle = Text(WidgetTimeline.text(WidgetTimeline.countdown(to: l.depAt, now: now)))
@@ -142,9 +143,19 @@ public struct NextJourneyWidgetView: View {
 
     // MARK: pieces
 
+    /// On the train, a bar that fills by itself between the departure and arrival (no redraw needed); the known
+    /// position when the times can't say.
     @ViewBuilder
     private func progress(_ s: WidgetTimeline.Shown) -> some View {
-        if case .onTrain(_, let p) = s.moment { ProgressBar(value: p, color: Ink.accent) }
+        if case .onTrain(_, let p) = s.moment {
+            if let l = s.leg, l.arrAt > l.depAt {
+                ProgressView(timerInterval: wDate(l.depAt)...wDate(l.arrAt), countsDown: false) { EmptyView() } currentValueLabel: { EmptyView() }
+                    .progressViewStyle(.linear)
+                    .tint(Ink.accent)
+            } else {
+                ProgressBar(value: p, color: Ink.accent)
+            }
+        }
     }
 
     /// The train and its delay on one line: the icon and the operator's name give way before the number does.

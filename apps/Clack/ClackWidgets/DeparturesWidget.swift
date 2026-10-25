@@ -122,14 +122,12 @@ struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: WidgetKinds.departures, intent: PickStationIntent.self, provider: DeparturesProvider()) { entry in
             DeparturesView(entry: entry)
-                .widgetPadding()
                 .containerBackground(Ink.bg, for: .widget)
                 .widgetURL(entry.stationId.flatMap { WidgetLinks.board($0) })
         }
         .configurationDisplayName(WidgetWords.t("widgets.departures.name"))
         .description(WidgetWords.t("widgets.departures.description"))
         .supportedFamilies([.systemMedium, .systemLarge])
-        .contentMarginsDisabled()
         .freshnessPushHandler()
     }
 }

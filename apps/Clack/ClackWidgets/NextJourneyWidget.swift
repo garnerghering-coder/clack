@@ -51,14 +51,12 @@ struct NextJourneyWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: WidgetKinds.nextJourney, provider: JourneyProvider()) { entry in
             NextJourneyView(entry: entry)
-                .widgetPadding()
                 .containerBackground(for: .widget) { TintedBackground(hex: WidgetTimeline.shown(entry.snapshot, at: wMs(entry.date))?.leg?.color) }
                 .widgetURL(WidgetTimeline.shown(entry.snapshot, at: wMs(entry.date))?.leg.flatMap { WidgetLinks.trip($0.id) })
         }
         .configurationDisplayName(WidgetWords.t("widgets.nextJourney.name"))
         .description(WidgetWords.t("widgets.nextJourney.description"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
-        .contentMarginsDisabled()
         .freshnessPushHandler()
     }
 }
@@ -121,6 +119,21 @@ private struct NextJourneyView: View {
         [bigTime(s, l), platformCode(s, l).map { l10n.t(key, ["platform": $0]) }].compactMap { $0 }.joined(separator: " · ")
     }
 
+    /// "Departs in 12:34" with a running timer within the hour (it counts by itself), else the countdown's words.
+    private func departsIn(_ l: WidgetSnapshot.Leg) -> Text {
+        let parts = l10n.t("trips.departsIn").components(separatedBy: "{{time}}")
+        let middle = l.depAt - now <= 3_600_000
+            ? Text(timerInterval: entry.date...max(entry.date, wDate(l.depAt)), countsDown: true)
+            : Text(WidgetTimeline.text(WidgetTimeline.countdown(to: l.depAt, now: now)))
+        return Text("\(parts.first ?? "")\(middle)\(parts.count > 1 ? parts[1] : "")")
+    }
+
+    /// The line under the time, as it counts down (Lock Screen).
+    private func statusText(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> Text {
+        if !l.canceled, case .before = s.moment, l.status != "boarding" { return departsIn(l) }
+        return Text(status(s, l))
+    }
+
     /// The line under the time: cancelled, the next stop on board, else what the moment is.
     private func status(_ s: WidgetTimeline.Shown, _ l: WidgetSnapshot.Leg) -> String {
         if l.canceled { return l10n.t("status.cancelled") }
@@ -156,7 +169,7 @@ private struct NextJourneyView: View {
             FittingText(l10n.t("tripCard.route", ["from": l.from, "to": l.to])).clack(.chip)
             FittingText([timeAndPlatform(s, l, key: "trips.platform"), timeAndPlatform(s, l, key: "tripCard.platformShort")])
                 .clack(.boardDestination).monospacedDigit()
-            Text(status(s, l)).clack(.caption).lineLimit(1).minimumScaleFactor(WidgetInsets.minimumScale)
+            statusText(s, l).clack(.caption).monospacedDigit().lineLimit(1).minimumScaleFactor(WidgetInsets.minimumScale)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

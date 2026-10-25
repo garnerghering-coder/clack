@@ -45,14 +45,12 @@ struct PassportWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: WidgetKinds.passport, provider: PassportProvider()) { entry in
             PassportView(entry: entry)
-                .widgetPadding()
                 .containerBackground(for: .widget) { FoilBackground() }
                 .widgetURL(WidgetLinks.passport)
         }
         .configurationDisplayName(WidgetWords.t("widgets.passport.name"))
         .description(WidgetWords.t("widgets.passport.description"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
-        .contentMarginsDisabled()
     }
 }
 

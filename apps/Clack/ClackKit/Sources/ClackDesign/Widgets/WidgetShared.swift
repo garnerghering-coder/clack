@@ -13,19 +13,14 @@ import SwiftUI
 
 // MARK: the inset rule
 
-/// The gap between a Home Screen widget's edge and its content, the same in every widget and every size (owner,
-/// 2026-10-24: "include some rules for the gap you want along the edges"). The widgets turn the system's content margins
-/// off (`contentMarginsDisabled()`) and pad with these instead, so the gap is the same on every iPhone; where the system
-/// asks for more (StandBy, iPad), its margin wins (`resolved(system:)`).
-///
-/// Why these numbers: a widget's corners are rounded with a radius of about `cornerRadius`. Text at 16 pt from the
-/// side and 16 pt from the top sits about 14 pt inside the curve at the corner itself, so nothing looks pressed into a
-/// corner; the long sides of the medium and large sizes get 4 pt more, because a full-width row runs along them.
+/// The gap between a Home Screen widget's edge and its content. The widgets use the system's own content margins
+/// (owner, 2026-10-25: large widgets were cut at the edges with hand-set ones); these numbers are the iPhone's, so the
+/// app's debug gallery draws the same gap. Backgrounds still reach the edge (`containerBackground`).
 public enum WidgetInsets {
     /// Left and right, small widget.
     public static let smallSide: CGFloat = 16
     /// Left and right, medium and large widgets.
-    public static let wideSide: CGFloat = 20
+    public static let wideSide: CGFloat = 16
     /// Top and bottom, every size.
     public static let topBottom: CGFloat = 16
     /// The rounded corner of a Home Screen widget on a current iPhone, about (for the gallery's outline only).
@@ -37,27 +32,19 @@ public enum WidgetInsets {
         let side = size == .small ? smallSide : wideSide
         return EdgeInsets(top: topBottom, leading: side, bottom: topBottom, trailing: side)
     }
-
-    /// Ours, or the system's margin where it is larger.
-    public static func resolved(_ size: WidgetSize, system: EdgeInsets) -> EdgeInsets {
-        let own = insets(size)
-        return EdgeInsets(
-            top: max(own.top, system.top), leading: max(own.leading, system.leading),
-            bottom: max(own.bottom, system.bottom), trailing: max(own.trailing, system.trailing)
-        )
-    }
 }
 
 /// The Home Screen sizes (`WidgetFamily` without WidgetKit, so the app can draw them too).
 public enum WidgetSize: String, CaseIterable, Sendable {
     case small, medium, large
 
-    /// The size on an iPhone 17 Pro, in points (for the gallery).
+    /// The size on most iPhones (6.1 and 6.3 inch, Apple's widget size table), in points, for the gallery: the smaller
+    /// of the two common sizes, so what doesn't fit shows (the gallery drew the Pro Max size, 364 x 382, and hid it).
     public var points: CGSize {
         switch self {
-        case .small: CGSize(width: 170, height: 170)
-        case .medium: CGSize(width: 364, height: 170)
-        case .large: CGSize(width: 364, height: 382)
+        case .small: CGSize(width: 158, height: 158)
+        case .medium: CGSize(width: 338, height: 158)
+        case .large: CGSize(width: 338, height: 354)
         }
     }
 }
