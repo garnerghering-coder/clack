@@ -298,6 +298,14 @@ struct TripDetailScreen: View {
                     Text(Format.longDate(schedDep, tz: tz, language: app.settings.language)).clack(.body).foregroundStyle(Ink.text2)
                 }
             }
+            // Where you sit, until the trip is over.
+            if stage != .after, let seat = Seat.label(l10n, coach: l.coach, seat: l.seat) {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "armchair", size: 18).foregroundStyle(Ink.text2)
+                    Text(seat).clack(.rowTitle).foregroundStyle(Ink.text)
+                }
+                .accessibilityElement(children: .combine)
+            }
             // Something wrong with this train or the change after it, at every stage: what happened, what to do, what
             // you're owed. Nothing when all is well.
             DisruptionCard(leg: detail)
@@ -330,9 +338,7 @@ struct TripDetailScreen: View {
         let l = detail.leg
         let m = moment(detail, now: now)
         let live = m.shown, tracking = m.tracking, status = m.status
-        // Where you sit, until the trip is over.
-        let seat = m.stage == .after ? nil : Seat.label(l10n, coach: l.coach, seat: l.seat)
-        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category, seat: seat) {
+        return ServiceHeader(op: l.operator, number: l.trainNumber, size: .large, category: l.category) {
             if tracking, let live {
                 LiveStatus(live: live, now: now)
             } else {
@@ -364,10 +370,12 @@ struct TripDetailScreen: View {
         let status = TripsLogic.countdownStatus(l10n, l, now: now)
         let platform = l.depPlatform.map { l10n.t("trips.platform", ["platform": $0]) } ?? l10n.t("detail.platformLater")
         VStack(alignment: .leading, spacing: 8) {
-            // The countdown and the platform as one written line, and the delay when there is one.
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                StatusLine(status.kind, l.canceled ? status.text : Format.join([status.text, platform]))
-                if !l.canceled, derived != nil { DelayText(delay: derived) }
+            // One status card: the status word big in its ink, then the platform and the delay, under a rule in the same ink.
+            StatusCard(kind: status.kind, text: status.text) {
+                if !l.canceled {
+                    Text(platform).clack(.body).foregroundStyle(Ink.text2)
+                    if derived != nil { DelayText(delay: derived) }
+                }
             }
             // The train started earlier and is on its way to where you get on: where it is, and when it gets there.
             if let shown, shown.status == .approaching, let board {
@@ -403,15 +411,25 @@ struct TripDetailScreen: View {
     private func liveNow(_ detail: LegDetail, now: Double) -> some View {
         let m = moment(detail, now: now)
         if let shown = m.shown {
-            Card {
-                if TripDetailLogic.getOffNext(detail.stops, shown: shown, stage: m.stage), let alight = detail.stops.first(where: { $0.role == .alight }) {
-                    HStack(spacing: 8) {
-                        LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.accentInk)
-                        Text(l10n.t("detail.getOffNext", ["name": alight.name])).clack(.rowTitle).foregroundStyle(Ink.accentInk)
-                    }
-                    .accessibilityElement(children: .combine)
+            VStack(alignment: .leading, spacing: 12) {
+                // On the train: when it arrives, big, and how late it runs.
+                let dtz = detail.leg.destination?.tz ?? "Europe/Stockholm"
+                StatusCard(
+                    kind: .live,
+                    text: l10n.t("live.arrives", ["time": Format.time(shown.arrivalEta?.ms ?? detail.leg.schedArr?.ms, tz: dtz, clock: app.settings.clock)])
+                ) {
+                    if let delay = shown.arrivalDelayMin { DelayText(delay: delay) }
                 }
-                LiveModule(leg: detail.leg, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
+                Card {
+                    if TripDetailLogic.getOffNext(detail.stops, shown: shown, stage: m.stage), let alight = detail.stops.first(where: { $0.role == .alight }) {
+                        HStack(spacing: 8) {
+                            LucideIcon(name: "map-pin", size: 16).foregroundStyle(Ink.accentInk)
+                            Text(l10n.t("detail.getOffNext", ["name": alight.name])).clack(.rowTitle).foregroundStyle(Ink.accentInk)
+                        }
+                        .accessibilityElement(children: .combine)
+                    }
+                    LiveModule(leg: detail.leg, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
+                }
             }
         }
     }
@@ -637,8 +655,8 @@ struct TripDetailScreen: View {
     }
 }
 
-/// One of the two time blocks: label and delay, the timetabled time struck through when it changed, the big flap time,
-/// and the platform. Fixed rows so the two cards line up side by side.
+/// One of the two time blocks: the label and the platform as a tag, the timetabled time struck through when it changed,
+/// the big flap time, and the delay under it when known. Fixed rows so the two cards line up side by side.
 struct TimeBlock: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -653,13 +671,44 @@ struct TimeBlock: View {
     /// Asks for the platform when none is known (your own trip).
     var onSetPlatform: (() -> Void)?
 
+    /// "Pl 5" in the accent ink on a raised tag; a dash you can tap when nothing knows the platform.
+    @ViewBuilder
+    private var platformTag: some View {
+        if let platform {
+            Text(l10n.t("tripCard.platformShort", ["platform": platform]))
+                .clack(.chip).fontWeight(.bold).monospacedDigit().foregroundStyle(Ink.accentInk)
+                .padding(.vertical, 2).padding(.horizontal, 8)
+                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+                .fixedSize()
+                .onTapGesture { onSetPlatform?() }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(l10n.t("trips.platform", ["platform": platform]))
+        } else if let onSetPlatform {
+            // Nothing knows it: a dash you can tap to say which.
+            Button(action: onSetPlatform) {
+                Label { Text(l10n.t("tripCard.platformShort", ["platform": "—"])) } icon: { LucideIcon(name: "plus", size: 12) }
+                    .clack(.chip).foregroundStyle(Ink.text2)
+                    .frame(minHeight: 26)
+                    .contentShape(Rectangle().inset(by: -9))
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(l10n.t("platform.add"))
+            .accessibilityIdentifier("platform.add")
+        } else {
+            Text(l10n.t("tripCard.platformShort", ["platform": "—"]))
+                .clack(.chip).foregroundStyle(Ink.text3)
+                .padding(.vertical, 2).padding(.horizontal, 8)
+                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+        }
+    }
+
     var body: some View {
         let changed = actual != nil && sched != nil && floor(actual! / 60_000) != floor(sched! / 60_000)
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 8) {
                 Text(label).clack(.captionUpper).foregroundStyle(Ink.text2).lineLimit(1)
                 Spacer(minLength: 0)
-                DelayText(delay: delay, canceled: canceled)
+                platformTag
             }
             .frame(minHeight: 26)
             Text(Format.time(sched, tz: tz, clock: app.settings.clock))
@@ -672,24 +721,11 @@ struct TimeBlock: View {
                     .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
                 if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
             }
-            HStack(spacing: 8) {
-                if let platform {
-                    Chip(text: l10n.t("trips.platform", ["platform": platform]))
-                        .onTapGesture { onSetPlatform?() }
-                } else if let onSetPlatform {
-                    // Nothing knows it: a dash you can tap to say which.
-                    Button(action: onSetPlatform) {
-                        Label { Text(l10n.t("trips.platform", ["platform": "—"])) } icon: { LucideIcon(name: "plus", size: 12) }
-                            .clack(.chip).foregroundStyle(Ink.text2)
-                            .frame(minHeight: 44).contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(l10n.t("platform.add"))
-                    .accessibilityIdentifier("platform.add")
-                } else {
-                    Chip(text: l10n.t("trips.platform", ["platform": "—"])).foregroundStyle(Ink.text3)
-                }
+            // The delay sits under the time, and only when it is known: never a lone dash.
+            Group {
+                if delay != nil || canceled { DelayText(delay: delay, canceled: canceled) } else { Color.clear }
             }
+            .frame(minHeight: 18, alignment: .leading)
         }
         .tileSurface()
     }
@@ -777,5 +813,27 @@ struct Ticking<Content: View>: View {
         TimelineView(.periodic(from: .now, by: every)) { context in
             content(context.date.timeIntervalSince1970 * 1000)
         }
+    }
+}
+
+/// The status at the top of the trip page: the word big in its ink, a second line (platform, delay) under it, and a
+/// 3 pt rule down the left side in the same ink.
+struct StatusCard<Second: View>: View {
+    let kind: StatusLine.Kind
+    let text: String
+    @ViewBuilder var second: () -> Second
+
+    var body: some View {
+        let ink = StatusLine(kind, text).ink
+        HStack(alignment: .top, spacing: 12) {
+            RoundedRectangle(cornerRadius: 1.5, style: .continuous).fill(ink).frame(width: 3)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(text).clack(.headline).foregroundStyle(ink).fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .firstTextBaseline, spacing: 8) { second() }
+            }
+            Spacer(minLength: 0)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityElement(children: .combine)
     }
 }
