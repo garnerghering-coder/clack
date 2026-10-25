@@ -32,7 +32,7 @@ struct PageHeader<Trailing: View>: View {
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             Text(title)
-                .clack(.pageTitle)
+                .font(.largeTitle.bold())
                 .foregroundStyle(Ink.text)
                 .lineLimit(2)
                 .minimumScaleFactor(0.7)

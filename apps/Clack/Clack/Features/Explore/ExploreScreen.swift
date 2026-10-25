@@ -439,15 +439,17 @@ struct ExploreScreen: View {
             }
             if detail.trip == nil { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
         } actions: {
-            followButton(following: followed) {
-                Task {
-                    await model.toggleFollow(
-                        number: train.number, date: train.date, operatorId: train.operatorId,
-                        label: train.origin != nil && train.destination != nil ? "\(train.origin!) → \(train.destination!)" : nil
-                    )
+            HStack(spacing: 12) {
+                followButton(following: followed) {
+                    Task {
+                        await model.toggleFollow(
+                            number: train.number, date: train.date, operatorId: train.operatorId,
+                            label: train.origin != nil && train.destination != nil ? "\(train.origin!) → \(train.destination!)" : nil
+                        )
+                    }
                 }
+                planButton(legId: detail.legId, trip: detail.trip)
             }
-            planButton(legId: detail.legId, trip: detail.trip)
         }
     }
 
@@ -479,12 +481,14 @@ struct ExploreScreen: View {
                 BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: view.operatorId, number: view.number, from: first, to: last, trip: view.trip), inTrips: view.legId != nil)
             }
         } actions: {
-            followButton(following: followed) {
-                Task {
-                    await model.toggleFollow(number: view.number, date: view.date, operatorId: view.operatorId, label: first.flatMap { f in last.map { "\(f.name) → \($0.name)" } })
+            HStack(spacing: 12) {
+                followButton(following: followed) {
+                    Task {
+                        await model.toggleFollow(number: view.number, date: view.date, operatorId: view.operatorId, label: first.flatMap { f in last.map { "\(f.name) → \($0.name)" } })
+                    }
                 }
+                planButton(legId: view.legId, trip: view.trip)
             }
-            planButton(legId: view.legId, trip: view.trip)
         }
     }
 
@@ -511,13 +515,23 @@ struct ExploreScreen: View {
     @ViewBuilder
     private func planButton(legId: String?, trip: TrainTrip?) -> some View {
         if let legId {
-            Button { router.push(.trip(legId)) } label: { Text(l10n.t("liveMap.inYourTrips")) }
-                .buttonStyle(.clack(.primary, wide: true))
+            Button { router.push(.trip(legId)) } label: {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "train-front", size: 16)
+                    Text(l10n.t("liveMap.inYourTrips"))
+                }
+            }
+            .buttonStyle(.clack(.primary, wide: true))
         } else {
             Button {
                 if let trip { router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate)) }
-            } label: { Text(l10n.t("liveMap.plan")) }
-                .buttonStyle(.clack(.primary, wide: true))
+            } label: {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "plus", size: 16)
+                    Text(l10n.t("liveMap.plan"))
+                }
+            }
+            .buttonStyle(.clack(.primary, wide: true))
                 .disabled(trip == nil)
         }
     }

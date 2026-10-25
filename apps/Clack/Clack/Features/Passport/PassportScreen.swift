@@ -35,6 +35,14 @@ struct PassportScreen: View {
 
     var body: some View {
         Page {
+            PageHeader(title: l10n.t("passport.title")) {
+                HStack(spacing: 8) {
+                    if let data, data.totals.trains > 0 {
+                        IconButton(icon: "share-2", label: l10n.t("share.title")) { sharing = true; Usage.shared.count(.feature, "passport.share") }
+                    }
+                    SettingsLink()
+                }
+            }
             if failed {
                 Banner(kind: .error) { Text(l10n.t("passport.loadError")) }.countsError("passport.load")
             } else if let data {
@@ -44,15 +52,7 @@ struct PassportScreen: View {
             }
         }
         .refreshable { await load() }
-        .screenTitle(l10n.t("passport.title"))
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                if let data, data.totals.trains > 0 {
-                    Button { sharing = true; Usage.shared.count(.feature, "passport.share") } label: { Label { Text(l10n.t("share.title")) } icon: { toolbarIcon("share-2") } }
-                }
-                NavigationLink(value: AppRoute.settings) { Label { Text(l10n.t("nav.settings")) } icon: { toolbarIcon("settings") } }
-            }
-        }
+        .toolbar(.hidden, for: .navigationBar)
         .task(id: "\(year.map(String.init) ?? "all")|\(settings.includeCommuter)|\(activeComparison.rawValue)") { await load() }
         .sheet(isPresented: $sharing) {
             if let data { ShareSheet(passport: data, year: year, commuter: settings.includeCommuter) { sharing = false } }

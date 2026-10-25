@@ -111,15 +111,25 @@ struct TrainDetailSheet: View {
                 .disabled(busy)
                 .accessibilityAddTraits(following ? .isSelected : [])
                 if let legId = view.legId {
-                    Button(l10n.t("liveMap.inYourTrips")) {
+                    Button {
                         close()
                         router.push(.trip(legId))
+                    } label: {
+                        HStack(spacing: 8) {
+                            LucideIcon(name: "train-front", size: 16)
+                            Text(l10n.t("liveMap.inYourTrips"))
+                        }
                     }
                     .buttonStyle(.clack(.primary, wide: true))
                 } else if let trip = view.trip {
-                    Button(l10n.t("liveMap.plan")) {
+                    Button {
                         close()
                         router.openAdd(AddTrainLink(tripKey: trip.key, date: trip.serviceDate))
+                    } label: {
+                        HStack(spacing: 8) {
+                            LucideIcon(name: "plus", size: 16)
+                            Text(l10n.t("liveMap.plan"))
+                        }
                     }
                     .buttonStyle(.clack(.primary, wide: true))
                 }

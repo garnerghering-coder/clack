@@ -87,13 +87,7 @@ struct TripsScreen: View {
         TimelineView(.periodic(from: .now, by: 60)) { context in
             content(now: context.date.timeIntervalSince1970 * 1000)
         }
-        .screenTitle(l10n.t("trips.title"))
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Button { router.openAdd() } label: { Label { Text(l10n.t("nav.addTrain")) } icon: { toolbarIcon("plus") } }
-                NavigationLink(value: AppRoute.settings) { Label { Text(l10n.t("nav.settings")) } icon: { toolbarIcon("settings") } }
-            }
-        }
+        .toolbar(.hidden, for: .navigationBar)
         // The first time, over the empty list: what Clack does and how to start.
         .overlay {
             if FirstRun.showsWelcome(seen: welcomeSeen, legs: model.legs?.count) {
@@ -118,6 +112,12 @@ struct TripsScreen: View {
         let (upcoming, past) = TripsLogic.partition(legs, now: now)
         let hero = TripsLogic.hero(upcoming: upcoming, past: past, now: now)
         Page {
+            PageHeader(title: l10n.t("trips.title")) {
+                HStack(spacing: 8) {
+                    IconButton(icon: "plus", label: l10n.t("nav.addTrain")) { router.openAdd() }
+                    SettingsLink()
+                }
+            }
             SegmentedControl(
                 selection: $router.tripsTab,
                 options: [(TripsTab.upcoming, l10n.t("trips.upcoming")), (TripsTab.past, l10n.t("trips.past"))]
