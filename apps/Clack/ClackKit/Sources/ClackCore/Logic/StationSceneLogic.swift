@@ -192,7 +192,8 @@ public nonisolated enum StationSceneLogic {
 
     /// One chip per platform on this level: its number (island halves that would overlap share one chip), or the
     /// arrive / depart chip; marked chips win over plain ones under them.
-    public static func platformChips(map: StationMap, level: String, marks: [PlatformMark], k: Double) -> [PlatformChip] {
+    /// The route's own pins (from, to, me) come first: a plain chip under one is left out.
+    public static func platformChips(map: StationMap, level: String, marks: [PlatformMark], k: Double, pins: [PlacePin] = []) -> [PlatformChip] {
         let rot = map.view?.rotation ?? 0
         let markFor = Dictionary(marks.map { ($0.platformId, $0) }, uniquingKeysWith: { first, _ in first })
         var chips: [PlatformChip] = []
@@ -211,15 +212,37 @@ public nonisolated enum StationSceneLogic {
         let plain = chips.filter { chip in
             chip.mark == nil && !marked.contains { m in
                 abs(m.sx - chip.sx) < (Double(m.label.count) * 6.6 + 16) / 2 + 14 && abs(m.sy - chip.sy) < 24
-            }
+            } && !covered(sx: chip.sx, sy: chip.sy, halfWidth: 11, by: pins, level: level, rot: rot, k: k)
         }
         return plain + marked
     }
 
+    /// Whether something at a screen point (`halfWidth` wide on each side) lies under one of the route's own pins on
+    /// this level: those pins say where you are, where you get on and where you go, so they are never covered.
+    static func covered(sx: Double, sy: Double, halfWidth: Double, by pins: [PlacePin], level: String, rot: Double, k: Double) -> Bool {
+        pins.contains { pin in
+            guard pin.level == level else { return false }
+            let p = rotate(pin.x, pin.y, degrees: rot)
+            let pinHalf = min(190, Double(pin.label.count) * 6.4 + 18) / 2
+            return abs(p.x * k - sx) < pinHalf + halfWidth && abs(p.y * k - sy) < 24
+        }
+    }
+
     /// Pins that would overlap at this zoom: one per 26 px cell, toilets and open places first; names only when zoomed
-    /// in, and only where one fits (one per 96 × 30 px cell, below its pin).
-    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool) -> (shown: Set<String>, named: Set<String>) {
+    /// in, and only where one fits (one per 96 × 30 px cell, below its pin). The route's own pins and the marked
+    /// platforms come first: an amenity under one of them is left out.
+    public static func shownPois(map: StationMap, level: String, k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool, pins: [PlacePin] = [], marks: [PlatformMark] = []) -> (shown: Set<String>, named: Set<String>) {
         let rot = map.view?.rotation ?? 0
+        let markedPlatforms = map.platforms.filter { p in p.level == level && marks.contains { $0.platformId == p.id } }
+        let markPoints = markedPlatforms.compactMap { p in map.nodes.first { $0.id == p.node } }
+        func underRoute(_ p: StationPoi) -> Bool {
+            let r = rotate(p.x, p.y, degrees: rot)
+            if covered(sx: r.x * k, sy: r.y * k, halfWidth: 11, by: pins, level: level, rot: rot, k: k) { return true }
+            return markPoints.contains { node in
+                let m = rotate(node.x, node.y, degrees: rot)
+                return abs(m.x * k - r.x * k) < 40 && abs(m.y * k - r.y * k) < 24
+            }
+        }
         func rank(_ p: StationPoi) -> Int {
             (p.category == .toilet ? 0 : 1) * 10 + stateRank(state(p)) + (dim(p) ? 20 : 0)
         }
@@ -227,7 +250,7 @@ public nonisolated enum StationSceneLogic {
             // A stable sort: ties keep the data's order, as the web's does.
             list.enumerated().sorted { (rank($0.element), $0.offset) < (rank($1.element), $1.offset) }.map(\.element)
         }
-        let onLevel = map.pois.filter { $0.level == level }
+        let onLevel = map.pois.filter { $0.level == level && !underRoute($0) }
         var taken = Set<String>()
         var shown = Set<String>()
         for p in ordered(onLevel) {

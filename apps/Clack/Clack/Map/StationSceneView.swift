@@ -39,7 +39,7 @@ struct StationSceneView: View {
     @State private var layouts = SceneLayoutCache()
 
     var body: some View {
-        let layout = layouts.layout(map: map, level: level, marks: marks, k: view.k, state: poiState, dim: dimPoi)
+        let layout = layouts.layout(map: map, level: level, marks: marks, pins: pins, k: view.k, state: poiState, dim: dimPoi)
         let chips = layout.chips
         let shown = layout.pois
         let levelChanges = route?.steps.filter { $0.from.level != $0.to.level && ($0.from.level == level || $0.to.level == level) } ?? []
@@ -316,11 +316,12 @@ final class SceneLayoutCache {
         var k: Double
         var level: String
         var marks: [StationSceneLogic.PlatformMark]
+        var pins: [StationSceneLogic.PlacePin]
         var states: [String: Int]
         var dimmed: Set<String>
     }
 
-    func layout(map: StationMap, level: String, marks: [StationSceneLogic.PlatformMark], k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool) -> Layout {
+    func layout(map: StationMap, level: String, marks: [StationSceneLogic.PlatformMark], pins: [StationSceneLogic.PlacePin], k: Double, state: (StationPoi) -> OpenState, dim: (StationPoi) -> Bool) -> Layout {
         // The inputs that decide the pins: each place on this floor with its open state and whether it's dimmed.
         var states: [String: Int] = [:]
         var dimmed = Set<String>()
@@ -328,11 +329,11 @@ final class SceneLayoutCache {
             states[p.id] = StationSceneLogic.stateRank(state(p))
             if dim(p) { dimmed.insert(p.id) }
         }
-        let next = Key(k: k, level: level, marks: marks, states: states, dimmed: dimmed)
+        let next = Key(k: k, level: level, marks: marks, pins: pins.filter { $0.level == level }, states: states, dimmed: dimmed)
         if let cached, key == next { return cached }
         let layout = Layout(
-            chips: StationSceneLogic.platformChips(map: map, level: level, marks: marks, k: k),
-            pois: StationSceneLogic.shownPois(map: map, level: level, k: k, state: state, dim: dim)
+            chips: StationSceneLogic.platformChips(map: map, level: level, marks: marks, k: k, pins: pins),
+            pois: StationSceneLogic.shownPois(map: map, level: level, k: k, state: state, dim: dim, pins: pins, marks: marks)
         )
         key = next
         cached = layout

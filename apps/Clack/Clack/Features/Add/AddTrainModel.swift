@@ -12,7 +12,9 @@ import Observation
 @MainActor
 @Observable
 final class AddTrainModel {
-    var date = Format.todayIso()
+    var date = Format.todayIso() { didSet { if date != oldValue { showEarlier = false } } }
+    /// Today's list starts at now; this brings back the trains that left more than ten minutes ago.
+    var showEarlier = false
     var query = {
         #if DEBUG
         // `-addQuery "Stockholm → Göteborg"` fills the search field on launch, to check the results.
@@ -20,7 +22,7 @@ final class AddTrainModel {
         if let i = args.firstIndex(of: "-addQuery"), args.indices.contains(i + 1) { return args[i + 1] }
         #endif
         return ""
-    }()
+    }() { didSet { if query != oldValue { showEarlier = false } } }
     private(set) var response: SearchResponse?
     private(set) var popular: [StationHit] = []
     private(set) var loading = false
@@ -45,8 +47,18 @@ final class AddTrainModel {
 
     var interpretation: SearchResponse.Interpretation? { response?.interpretation }
 
+    /// Today's trips that left more than ten minutes ago are left out, unless `showEarlier`.
+    private func isEarlier(_ result: TripResult) -> Bool {
+        date == Format.todayIso() && result.from.time < Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000
+    }
+
     var results: [TripResult]? {
-        response?.results?.filter { AddTrainLogic.includes($0, filter) }
+        response?.results?.filter { AddTrainLogic.includes($0, filter) && (showEarlier || !isEarlier($0)) }
+    }
+
+    /// Some results are hidden because they left earlier today.
+    var hasHiddenEarlier: Bool {
+        !showEarlier && (response?.results ?? []).contains { AddTrainLogic.includes($0, filter) && isEarlier($0) }
     }
 
     func loadPopular(_ client: APIClient) async {

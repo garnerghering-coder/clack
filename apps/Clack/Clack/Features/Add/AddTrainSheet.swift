@@ -136,6 +136,9 @@ private struct SearchStep: View {
                     ChipButton(text: l10n.t("add.filter\(filter == .all ? "All" : filter == .long ? "Long" : filter == .regional ? "Regional" : "Commuter")"), active: model.filter == filter) { model.filter = filter }
                 }
             }
+            if model.hasHiddenEarlier {
+                Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
+            }
             VStack(spacing: 16) {
                 ForEach(model.results ?? []) { result in
                     ResultCard(result: result) { model.pick(result) }

@@ -275,12 +275,25 @@ struct LiveStationSheet: View {
     let onMap: () -> Void
     @State private var info: StationInfo?
     @State private var rows: [BoardRow]?
+    @State private var favorite = false
+
+    private func toggleFavorite() async {
+        Usage.shared.count(.feature, "station.favorite")
+        if let on = try? await app.client.setFavorite(id, !favorite) {
+            favorite = on
+            await app.stations.setFavorite(id, on)
+        }
+    }
 
     var body: some View {
         LiveSheetCard {
-            HStack {
-                Text(name).clack(.rowTitle).foregroundStyle(Ink.text)
+            HStack(spacing: 8) {
+                Text(name).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(2)
                 Spacer(minLength: 0)
+                IconButton(
+                    icon: "star", label: l10n.t(favorite ? "stations.unfavorite" : "stations.favorite"), size: .overMap, selected: favorite
+                ) { Task { await toggleFavorite() } }
+                    .sensoryFeedback(.selection, trigger: favorite)
                 IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
             }
             if let county = info?.county { Text(county).clack(.caption).foregroundStyle(Ink.text2) }
@@ -310,11 +323,9 @@ struct LiveStationSheet: View {
                 Text(l10n.t("common.loading")).clack(.caption).foregroundStyle(Ink.text2)
             }
             // The station's board, pushed on Explore (the Stations screen's job, now here).
-            HStack(spacing: 12) {
-                if info?.hasBoard == true {
-                    Button(l10n.t("board.departures"), action: onBoard).buttonStyle(.clack(.primary, wide: true))
-                    Button(l10n.t("board.arrivals"), action: onArrivals).buttonStyle(.clack(wide: true))
-                }
+            // One way in: the board has the departures / arrivals switch.
+            if info?.hasBoard == true {
+                Button(l10n.t("board.openBoard", ["station": name]), action: onBoard).buttonStyle(.clack(.primary, wide: true))
             }
             if info?.hasMap == true {
                 Button(l10n.t("stationMap.open"), action: onMap).buttonStyle(.clack(wide: true))
@@ -325,6 +336,7 @@ struct LiveStationSheet: View {
             rows = nil
             guard let station = await app.stations.info(id) else { return }
             info = station
+            favorite = station.favorite
             guard station.hasBoard else { rows = []; return }
             if let board = try? await app.client.board(id, arrivals: false) {
                 rows = Array(board.rows.filter { !$0.done && !$0.canceled }.sorted { ($0.estimated ?? $0.advertised) < ($1.estimated ?? $1.advertised) }.prefix(4))

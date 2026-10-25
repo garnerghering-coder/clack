@@ -826,7 +826,7 @@ struct StatusCard<Second: View>: View {
     var body: some View {
         let ink = StatusLine(kind, text).ink
         HStack(alignment: .top, spacing: 12) {
-            RoundedRectangle(cornerRadius: 1.5, style: .continuous).fill(ink).frame(width: 3)
+            Rectangle().fill(ink).frame(width: 3)
             VStack(alignment: .leading, spacing: 2) {
                 Text(text).clack(.headline).foregroundStyle(ink).fixedSize(horizontal: false, vertical: true)
                 HStack(alignment: .firstTextBaseline, spacing: 8) { second() }
