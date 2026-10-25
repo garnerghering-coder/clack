@@ -90,6 +90,8 @@ struct StationMapScreen: View {
         }
         .onChange(of: from) { reselectLevel() }
         .onChange(of: to) { reselectLevel() }
+        // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     /// The level the walk starts on, when it has an end.

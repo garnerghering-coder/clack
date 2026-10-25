@@ -13,7 +13,6 @@ extension View {
     func appDestinations() -> some View {
         navigationDestination(for: AppRoute.self) { route in
             DestinationView(route: route)
-                .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

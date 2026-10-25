@@ -95,7 +95,7 @@ Shared pieces, one spec each; the screens use these instead of their own copies.
 
 ## 3. Navigation & layout
 
-The system's bottom tab bar (Liquid Glass on iOS 26) with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
+Screen titles are Apple's (owner, 2026-10-25): large titles that shrink into the bar on scroll, toolbar buttons and the system back button on Trips, Passport, Settings, Journey and Board; the map screens (Explore, a trip, a station map) keep their own floating buttons. The system's bottom tab bar (Liquid Glass on iOS 26) with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
 
 ## 4. Screen: Trips (home) — P0
 

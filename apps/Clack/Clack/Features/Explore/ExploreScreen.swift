@@ -91,6 +91,8 @@ struct ExploreScreen: View {
         #if DEBUG
         .task { await debugSearch() }
         #endif
+        // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     #if DEBUG

@@ -72,8 +72,6 @@ struct SettingsScreen: View {
     var body: some View {
         let s = app.settings
         Page {
-            BackLink()
-            PageHeader(title: l10n.t("settings.title"))
             if app.saveFailed { Banner(kind: .error) { Text(l10n.t("settings.saveError")) } }
             Card {
                 HStack(spacing: 12) {
@@ -145,6 +143,7 @@ struct SettingsScreen: View {
                 .buttonStyle(.clack(wide: true))
             #endif
         }
+        .screenTitle(l10n.t("settings.title"))
     }
 }
 
@@ -393,8 +392,6 @@ struct AboutScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: l10n.t("settings.title"))
-            PageHeader(title: l10n.t("about.title"))
             Card(spacing: 12) {
                 Text(l10n.t("about.intro")).clack(.body).foregroundStyle(Ink.text)
                 Text(l10n.t("about.sourcesTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
@@ -409,6 +406,7 @@ struct AboutScreen: View {
                 Text(l10n.t("about.co2Body")).clack(.body).foregroundStyle(Ink.text)
             }
         }
+        .screenTitle(l10n.t("about.title"))
     }
 }
 
@@ -421,8 +419,6 @@ struct PrivacyScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: l10n.t("settings.title"))
-            PageHeader(title: l10n.t("privacy.title"))
             Card(spacing: 12) {
                 Text(l10n.t("privacy.intro")).clack(.body).foregroundStyle(Ink.text)
                 ForEach(Self.parts, id: \.self) { part in
@@ -439,5 +435,6 @@ struct PrivacyScreen: View {
                 Text(l10n.t("privacy.updated", ["date": "2026-10-24"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
+        .screenTitle(l10n.t("privacy.title"))
     }
 }

@@ -202,7 +202,6 @@ struct RootView: View {
     private func stack<Root: View>(_ tab: PrimaryTab, @ViewBuilder root: () -> Root) -> some View {
         NavigationStack(path: Binding(get: { router.path(for: tab) }, set: { router.setPath($0, for: tab) })) {
             root()
-                .toolbar(.hidden, for: .navigationBar)
                 .appDestinations()
         }
         .modifier(NoBottomEdgeEffect())

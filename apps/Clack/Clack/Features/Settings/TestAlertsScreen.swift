@@ -288,8 +288,6 @@ struct TestAlertsScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: l10n.t("settings.title"))
-            PageHeader(title: "Test alerts")
             Text("Debug builds only. Alerts here are local to this phone, with the wording the server uses. Set a delay, press one, then lock the phone.")
                 .clack(.caption).foregroundStyle(Ink.text2)
             if let message = model.message { Banner(kind: .neutral) { Text(message) } }
@@ -347,6 +345,7 @@ struct TestAlertsScreen: View {
                 if let arrivalNote { Text(arrivalNote).clack(.caption).foregroundStyle(Ink.text2) }
             }
         }
+        .screenTitle("Test alerts")
         .sheet(isPresented: $gallery) { NavigationStack { ActivityGalleryView() } }
     }
 }

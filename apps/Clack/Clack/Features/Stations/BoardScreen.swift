@@ -35,7 +35,6 @@ struct BoardScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: router.backLabel(l10n))
             if missing {
                 Text(l10n.t("board.notFound")).clack(.body).foregroundStyle(Ink.text2)
             } else {
@@ -48,6 +47,7 @@ struct BoardScreen: View {
                 content
             }
         }
+        .plainBar()
         .refreshable {
             if let station, station.hasBoard, let fresh = try? await app.client.board(stationId, arrivals: arrivals) { board = fresh }
         }

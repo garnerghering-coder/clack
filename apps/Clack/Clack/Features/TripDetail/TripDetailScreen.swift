@@ -100,6 +100,8 @@ struct TripDetailScreen: View {
             Button(l10n.t("detail.delete"), role: .destructive) { Task { await remove() } }
             Button(l10n.t("common.close"), role: .cancel) {}
         }
+        // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     // MARK: loading

@@ -7,7 +7,24 @@ import ClackCore
 import ClackDesign
 import SwiftUI
 
-/// `.page-header`: the large title with the actions on the right.
+/// A Lucide icon as a toolbar button's image (the system draws the glass button around it).
+func toolbarIcon(_ name: String) -> Image {
+    Image("lucide-\(name)", bundle: ClackDesignBundle.bundle).renderingMode(.template)
+}
+
+extension View {
+    /// Apple's screen title (owner, 2026-10-25): large at the top, shrinking into the bar as the page scrolls.
+    func screenTitle(_ title: String) -> some View {
+        navigationTitle(title).navigationBarTitleDisplayMode(.large)
+    }
+
+    /// A pushed screen with no title of its own: the system bar with its back button only.
+    func plainBar() -> some View {
+        navigationTitle("").navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+/// `.page-header`: the large title with the actions on the right (screens that draw their own, under a hidden bar).
 struct PageHeader<Trailing: View>: View {
     let title: String
     @ViewBuilder var trailing: Trailing

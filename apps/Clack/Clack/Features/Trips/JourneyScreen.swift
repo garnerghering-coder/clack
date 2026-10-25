@@ -20,7 +20,6 @@ struct JourneyScreen: View {
 
     var body: some View {
         Page {
-            BackLink(label: router.backLabel(l10n))
             if missing {
                 Text(l10n.t("journey.notFound")).clack(.body).foregroundStyle(Ink.text2)
             } else if let legs = journey.map({ TripsLogic.taken($0.legs.map(\.leg)) }), let first = legs.first, let last = legs.last {
@@ -63,6 +62,7 @@ struct JourneyScreen: View {
                 Skeleton(height: 120)
             }
         }
+        .plainBar()
         .task(id: id) {
             do {
                 journey = try await app.client.journey(id)
