@@ -66,7 +66,10 @@ struct ExploreScreen: View {
             model.active = active
             // Back on the tab without a basemap (the first ask failed): ask again.
             if active, basemap != true { Task { basemap = await app.mapHasBasemap() } }
+            // Follows change elsewhere (a followed journey stopped on Trips): the rings follow the real list.
+            if active { Task { await model.refreshFollows() } }
         }
+        .task(id: app.followed.journeys.map(\.token)) { await model.refreshFollows() }
         // "Stations" from elsewhere (old links): the search, open, with your stations under it.
         .task(id: router.stationSearchRequest) {
             guard router.stationSearchRequest != nil else { return }

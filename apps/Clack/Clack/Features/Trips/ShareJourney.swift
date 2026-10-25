@@ -115,9 +115,9 @@ struct ShareControl: View {
     @ViewBuilder
     private var glyph: some View {
         if overMap {
-            MapButtonFace(icon: "share-2", pressed: share.isShared)
+            MapButtonFace(icon: "system:square.and.arrow.up", pressed: share.isShared)
         } else {
-            LucideIcon(name: "share-2", size: 18).foregroundStyle(Ink.text)
+            LucideIcon(name: "system:square.and.arrow.up", size: 18).foregroundStyle(Ink.text)
         }
     }
 }

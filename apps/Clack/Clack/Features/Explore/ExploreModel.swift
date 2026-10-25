@@ -72,6 +72,8 @@ final class ExploreModel {
 
     func toggleMe() {
         showingMe.toggle()
+        // The first time, iOS asks (Settings > Clack > Location only appears once it has been asked).
+        if showingMe { LocationModel.shared.askIfNeeded() }
         controller.showUser(showingMe)
         Usage.shared.count(.feature, "explore.myLocation")
     }
@@ -278,6 +280,12 @@ final class ExploreModel {
 
     func loadFollows() async {
         if let list = try? await app?.client.follows() { follows = list }
+    }
+
+    /// The follows again, and the map drawn with them (a ring on a train that is no longer followed must go).
+    func refreshFollows() async {
+        await loadFollows()
+        scheduleRender()
     }
 
     func toggleFollow(number: String, date: String, operatorId: String?, label: String?) async {

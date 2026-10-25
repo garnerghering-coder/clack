@@ -216,6 +216,20 @@ nonisolated enum MapStyle {
                 ],
                 "paint": ["text-color": isDark ? "#ffffff" : "#0a0a0a"],
             ],
+            // Zoomed out, where the others are clustered, your own trains and the ones you follow stay marked: a ring and a
+            // dot of their own from a source that is never clustered (closer in, the layers below draw them).
+            [
+                "id": "pinned-followed", "type": "circle", "source": "trains-pinned", "maxzoom": 7, "filter": ["==", ["get", "followed"], true],
+                "paint": ["circle-radius": 11, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.text, "circle-stroke-width": 2],
+            ],
+            [
+                "id": "pinned-mine", "type": "circle", "source": "trains-pinned", "maxzoom": 7, "filter": mine,
+                "paint": ["circle-radius": 15, "circle-color": "rgba(248,214,74,0.28)", "circle-stroke-color": "#f8d64a", "circle-stroke-width": 2.5],
+            ],
+            [
+                "id": "pinned-dot", "type": "circle", "source": "trains-pinned", "maxzoom": 7,
+                "paint": ["circle-radius": 5, "circle-color": ["get", "color"], "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.5],
+            ],
             // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
             [
                 "id": "train-followed", "type": "circle", "source": "trains", "filter": ["all", single, ["==", ["get", "followed"], true]],
@@ -297,6 +311,7 @@ nonisolated enum MapStyle {
             layers += multiRouteLayers(c)
         case .live:
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
+            sources["trains-pinned"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains"] = [
                 "type": "geojson", "data": emptyCollection(), "cluster": true, "clusterMaxZoom": 6, "clusterRadius": 36,
             ] as [String: Any]

@@ -28,7 +28,6 @@ struct ShareSheet: View {
     @State private var legId: String?
     @State private var medalKey: String?
     @State private var image: Image?
-    @State private var file: ShareImage?
     @State private var snapshots: [String: ShareMapSnapshot?] = [:]
 
     private var unit: DistanceUnit { app.settings.distanceUnit }
@@ -48,8 +47,7 @@ struct ShareSheet: View {
         SheetFrame(title: l10n.t("share.title"), onClose: onClose) {
             SegmentedControl(
                 selection: $variant,
-                options: Variant.allCases.map { v in (v, v == .year ? (shownYear.map(String.init) ?? l10n.t("share.year")) : l10n.t("share.variant.\(v.rawValue)")) },
-                small: true
+                options: Variant.allCases.map { v in (v, v == .year ? (shownYear.map(String.init) ?? l10n.t("share.year")) : l10n.t("share.variant.\(v.rawValue)")) }
             )
             if variant == .journey, !counted.isEmpty {
                 Picker(l10n.t("share.pickJourney"), selection: Binding(get: { legId ?? counted[0].id }, set: { legId = $0 })) {
@@ -75,9 +73,10 @@ struct ShareSheet: View {
                 }
             }
             InfoNote(l10n.t("share.privacy"), more: l10n.t("share.privacyMore"))
-            if let file {
-                ShareLink(item: file, preview: SharePreview(l10n.t("share.title"), image: file.image)) {
-                    HStack(spacing: 8) { LucideIcon(name: "share-2", size: 16); Text(l10n.t("share.share")) }
+            if let image {
+                // The picture itself (not a file of it), so the share sheet offers Save Image and the usual image actions.
+                ShareLink(item: image, preview: SharePreview(l10n.t("share.title"), image: image)) {
+                    HStack(spacing: 8) { LucideIcon(name: "system:square.and.arrow.up", size: 16); Text(l10n.t("share.share")) }
                 }
                 .buttonStyle(.clack(.primary, wide: true))
             }
@@ -116,7 +115,6 @@ struct ShareSheet: View {
     }
 
     private var card: ShareCardView? {
-        let tagline = l10n.t("share.tagline")
         switch variant {
         case .medal:
             guard let md = achieved.first(where: { key($0) == medalKey }) ?? achieved.first else { return nil }
@@ -124,7 +122,7 @@ struct ShareSheet: View {
                 layout: .medal, kicker: l10n.t("share.medalKicker"), title: l10n.milestoneLabel(md, language: language),
                 sub: md.at.map { l10n.t("share.unlocked", ["date": monthYear($0.ms)]) }, heroValue: "", heroUnit: "",
                 stats: [.init(value: km(base.totals.distanceM), label: unit.rawValue)] + totals(base).prefix(2), routes: [], labels: [],
-                medals: [.init(milestone: md, label: l10n.milestoneLabel(md, language: language))], tagline: tagline
+                medals: [.init(milestone: md, label: l10n.milestoneLabel(md, language: language))]
             )
         case .journey:
             guard let leg = counted.first(where: { $0.id == legId }) ?? counted.first, let route = base.map.first(where: { $0.legId == leg.id }) else { return nil }
@@ -141,7 +139,7 @@ struct ShareSheet: View {
                 heroValue: km(leg.distanceM ?? 0), heroUnit: unit.rawValue,
                 stats: [.init(value: onBoard, label: l10n.t("share.onBoard")), .init(value: leg.operator?.name ?? "—", label: l10n.t("share.operator"))],
                 routes: [.init(geometry: route.geometry, ends: ends)], labels: labels,
-                medals: achieved.filter { $0.legId == leg.id }.map { .init(milestone: $0, label: l10n.milestoneLabel($0, language: language)) }, tagline: tagline
+                medals: achieved.filter { $0.legId == leg.id }.map { .init(milestone: $0, label: l10n.milestoneLabel($0, language: language)) }
             )
         case .year, .all:
             guard let p = variant == .year ? yearData : all else { return nil }
@@ -158,12 +156,12 @@ struct ShareSheet: View {
                     layout: .stats, kicker: l10n.t("share.yearKicker"), title: l10n.t("share.yearTitle", ["year": String(shownYear ?? 0)]), sub: nil,
                     heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue,
                     stats: [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")), .init(value: Format.duration(p.totals.minutes), label: l10n.t("share.onBoard")), .init(value: String(p.totals.stations), label: l10n.t("passport.stations"))],
-                    routes: routes, labels: [], medals: Array(medals), tagline: tagline
+                    routes: routes, labels: [], medals: Array(medals)
                 )
             }
             return ShareCardView(
                 layout: .stats, kicker: l10n.t("share.allKicker"), title: l10n.t("share.allTitle"), sub: nil,
-                heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue, stats: totals(p), routes: routes, labels: [], medals: Array(medals), tagline: tagline
+                heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue, stats: totals(p), routes: routes, labels: [], medals: Array(medals)
             )
         }
     }
@@ -185,7 +183,6 @@ struct ShareSheet: View {
 
     private func render() async {
         image = nil
-        file = nil
         guard var card else { return }
         card.map = await snapshot(for: card)
         let renderer = ImageRenderer(content: card.environment(\.colorScheme, .dark))
@@ -193,20 +190,5 @@ struct ShareSheet: View {
         renderer.proposedSize = ProposedViewSize(width: ShareCardView.width, height: ShareCardView.height)
         guard let ui = renderer.uiImage else { return }
         image = Image(uiImage: ui)
-        if let data = ui.pngData() {
-            let name = "clack-\(variant == .year ? String(shownYear ?? 0) : variant == .all ? "passport" : variant.rawValue).png"
-            file = ShareImage(data: data, name: name, image: Image(uiImage: ui))
-        }
-    }
-}
-
-/// The PNG handed to the share sheet.
-struct ShareImage: Transferable {
-    let data: Data
-    let name: String
-    let image: Image
-
-    static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .png) { $0.data }
     }
 }

@@ -18,6 +18,20 @@ public struct LucideIcon: View {
     public var label: String?
 
     public var body: some View {
+        // `system:<SF Symbol name>` draws Apple's own symbol where the system has the standard one (owner, 2026-10-25: the
+        // share button is the box with the up arrow).
+        if name.hasPrefix("system:") {
+            let symbol = Image(systemName: String(name.dropFirst("system:".count)))
+                .font(.system(size: size * 0.95, weight: .regular))
+                .frame(width: size, height: size)
+            if let label { symbol.accessibilityLabel(label) } else { symbol.accessibilityHidden(true) }
+        } else {
+            lucide
+        }
+    }
+
+    @ViewBuilder
+    private var lucide: some View {
         let image = Image("lucide-\(name)\(thin ? "-thin" : "")\(filled ? "-filled" : "")", bundle: .module)
             .renderingMode(.template)
             .resizable()

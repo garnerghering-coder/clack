@@ -38,7 +38,6 @@ struct ShareCardView: View {
     var routes: [Route]
     var labels: [Label]
     var medals: [CardMedal]
-    var tagline: String
     /// The real map behind the routes, when one could be drawn.
     var map: ShareMapSnapshot?
 
@@ -73,10 +72,7 @@ struct ShareCardView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 14) {
-                Wordmark(fontSize: 36)
-                Text(tagline).font(ClackFont.inter(20, .bold)).foregroundStyle(Self.text2)
-            }
+            Wordmark(fontSize: 36)
             Text(kicker.uppercased()).font(ClackFont.inter(26, .heavy)).foregroundStyle(Self.accent).padding(.top, 52)
         }
     }
@@ -174,12 +170,11 @@ private struct RouteMap: View {
                 let (a, b) = px(p)
                 return CGPoint(x: size.width / 2 + (a - (x0 + x1) / 2) * k, y: size.height / 2 + (b - (y0 + y1) / 2) * k)
             }
-            for (width, alpha) in [(18.0, 0.18), (7.0, 1.0)] {
-                for line in lines {
-                    var path = Path()
-                    for (i, p) in line.enumerated() { i == 0 ? path.move(to: to(p)) : path.addLine(to: to(p)) }
-                    context.stroke(path, with: .color(accent.opacity(alpha)), style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
-                }
+            // One solid line for each journey (owner, 2026-10-25), no second translucent one under it.
+            for line in lines {
+                var path = Path()
+                for (i, p) in line.enumerated() { i == 0 ? path.move(to: to(p)) : path.addLine(to: to(p)) }
+                context.stroke(path, with: .color(accent), style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round))
             }
             for label in labels { drawLabel(&context, label.text, at: to(label.at), size: size) }
         }

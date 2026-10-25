@@ -116,6 +116,10 @@ final class LiveMapController {
     func setTrains(_ points: [TrainPoint]) {
         guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
         source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.rebuild(points))
+        // Your own trains and the ones you follow are also kept out of the clusters, so they stay marked when zoomed out.
+        if let pinned = mapView?.style?.source(withIdentifier: "trains-pinned") as? MLNShapeSource {
+            pinned.shape = MLNShapeCollectionFeature(shapes: pinnedFeatures.rebuild(points.filter { $0.mine || $0.followed }))
+        }
     }
 
     /// A glide frame: only the trains that are moving get a new coordinate; every other feature is reused as it was.
@@ -126,6 +130,7 @@ final class LiveMapController {
     }
 
     private var trainFeatures = TrainFeatures()
+    private var pinnedFeatures = TrainFeatures()
 
     func setSelected(_ id: String?) {
         (mapView?.style?.layer(withIdentifier: "train-selected") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", id ?? "")

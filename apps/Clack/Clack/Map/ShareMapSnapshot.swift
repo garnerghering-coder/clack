@@ -73,12 +73,6 @@ enum ShareMapSnapshotter {
                 }
                 for line in lines where line.count > 1 {
                     path(line)
-                    g.setStrokeColor(accent.withAlphaComponent(0.3).cgColor)
-                    g.setLineWidth(12)
-                    g.strokePath()
-                }
-                for line in lines where line.count > 1 {
-                    path(line)
                     g.setStrokeColor(accent.cgColor)
                     g.setLineWidth(4)
                     g.strokePath()

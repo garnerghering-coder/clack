@@ -43,6 +43,11 @@ final class LocationModel: NSObject, CLLocationManagerDelegate {
         if allowed { manager.startUpdatingLocation() }
     }
 
+    /// Asks iOS for permission if it hasn't been asked (the map's own dot needs it and does not reliably ask itself).
+    func askIfNeeded() {
+        if authorization == .notDetermined { manager.requestWhenInUseAuthorization() }
+    }
+
     func stop() {
         users = max(0, users - 1)
         if users == 0 { manager.stopUpdatingLocation() }
