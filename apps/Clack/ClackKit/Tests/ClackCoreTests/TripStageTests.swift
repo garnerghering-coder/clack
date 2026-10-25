@@ -77,8 +77,8 @@ struct TripStageTests {
         #expect(TripDetailLogic.sections(.before).first == .countdown)
         #expect(TripDetailLogic.sections(.during).first == .live)
         #expect(TripDetailLogic.sections(.after).first == .result)
-        // Directions, the risk and the alerts prompt are for a trip still ahead.
-        for section in [TripDetailLogic.Section.directions, .risk, .alertsPrompt] {
+        // The risk and the alerts prompt are for a trip still ahead.
+        for section in [TripDetailLogic.Section.risk, .alertsPrompt] {
             #expect(TripDetailLogic.sections(.before).contains(section))
             #expect(!TripDetailLogic.sections(.during).contains(section))
             #expect(!TripDetailLogic.sections(.after).contains(section))

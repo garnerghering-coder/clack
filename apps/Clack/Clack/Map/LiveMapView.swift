@@ -67,20 +67,21 @@ final class LiveMapController {
 
     private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
 
-    /// Your position on the map (MapLibre's own dot, which asks iOS the first time): on, it centres on you once, at
-    /// least at zoom 11; moving the map leaves it where you put it.
-    func showUser(_ on: Bool) {
+    /// Your position on the map: MapLibre's own dot, always there once iOS has allowed it (owner, 2026-10-25), and the
+    /// camera is left where it is.
+    func showUserDot() {
+        mapView?.showsUserLocation = true
+    }
+
+    /// The locate button: centres on you, at least at zoom 11, and follows you until you move the map yourself.
+    func centreOnUser() {
         guard let map = mapView else { return }
-        map.showsUserLocation = on
-        if on {
-            (map as? ClackMapView)?.markMoved()
-            if map.zoomLevel < 11, let here = map.userLocation?.location?.coordinate, CLLocationCoordinate2DIsValid(here), here.latitude != 0 {
-                map.setCenter(here, zoomLevel: 12, animated: !reduceMotion)
-            } else {
-                map.setUserTrackingMode(.follow, animated: !reduceMotion, completionHandler: nil)
-            }
+        map.showsUserLocation = true
+        (map as? ClackMapView)?.markMoved()
+        if map.zoomLevel < 11, let here = map.userLocation?.location?.coordinate, CLLocationCoordinate2DIsValid(here), here.latitude != 0 {
+            map.setCenter(here, zoomLevel: 12, animated: !reduceMotion)
         } else {
-            map.userTrackingMode = .none
+            map.setUserTrackingMode(.follow, animated: !reduceMotion, completionHandler: nil)
         }
     }
 

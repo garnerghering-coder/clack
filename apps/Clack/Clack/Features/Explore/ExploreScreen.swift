@@ -70,6 +70,8 @@ struct ExploreScreen: View {
             if active { Task { await model.refreshFollows() } }
         }
         .task(id: app.followed.journeys.map(\.token)) { await model.refreshFollows() }
+        // Your dot, from the moment the map is up (and again when the map is made again for the other theme).
+        .task(id: model.ready) { if model.ready { model.showMyDot() } }
         // "Stations" from elsewhere (old links): the search, open, with your stations under it.
         .task(id: router.stationSearchRequest) {
             guard router.stationSearchRequest != nil else { return }
@@ -303,7 +305,7 @@ struct ExploreScreen: View {
                     statusChip
                     MapButton(icon: "info", label: l10n.t("liveMap.legend"), pressed: model.legend) { model.legend.toggle() }
                     // Your position: iOS asks the first time; then your dot, and the map goes to it.
-                    MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation"), pressed: model.showingMe) { model.toggleMe() }
+                    MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation")) { model.centreOnMe() }
                 }
             }
             Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic)")

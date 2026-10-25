@@ -245,19 +245,16 @@ struct TripDetailScreen: View {
     private func mapArea(_ detail: LegDetail, tracking: Bool, height: CGFloat, top: CGFloat) -> some View {
         ZStack(alignment: .topLeading) {
             tripMap(detail, tracking: tracking, height: height, top: top)
-            // Back, the menu and sharing in one row, so none lies over another; the way to the station under them, on the right.
-            VStack(alignment: .trailing, spacing: 8) {
-                HStack {
-                    MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
-                        .accessibilityIdentifier("trip.back")
-                    Spacer(minLength: 0)
-                    moreMenu(detail.leg)
-                    ShareControl(
-                        share: sharing, journeyId: detail.leg.journeyId, legId: detail.leg.id,
-                        from: detail.leg.origin?.name ?? "", to: detail.leg.destination?.name ?? "", overMap: true
-                    )
-                }
-                directions(detail)
+            // Back, the menu and sharing in one row, so none lies over another.
+            HStack {
+                MapButton(icon: "arrow-left", label: router.backLabel(l10n)) { dismiss() }
+                    .accessibilityIdentifier("trip.back")
+                Spacer(minLength: 0)
+                moreMenu(detail.leg)
+                ShareControl(
+                    share: sharing, journeyId: detail.leg.journeyId, legId: detail.leg.id,
+                    from: detail.leg.origin?.name ?? "", to: detail.leg.destination?.name ?? "", overMap: true
+                )
             }
             .padding(.horizontal, 16).padding(.top, top + 12)
             if detail.leg.isEstimatedGeometry {
@@ -340,7 +337,6 @@ struct TripDetailScreen: View {
         case .times: timesRow(detail, live: shown, tracking: tracking).id("times")
         case .stops: Ticking(every: 1) { now in stopsCard(detail, color: color, now: now) }.id("stops")
         case .connections: JourneyConnections(legId: detail.id, journeyId: detail.leg.journeyId)
-        case .directions: EmptyView()   // the button is on the map
         case .alertsPrompt: AlertsPrompt(leg: detail.leg)
         case .about: about(detail, tracking: tracking)
         }
@@ -400,17 +396,6 @@ struct TripDetailScreen: View {
             }
             Text(shown.map { l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: $0.updatedAt.ms, now: now)]) } ?? l10n.t("detail.timetableOnly"))
                 .clack(.caption).foregroundStyle(Ink.text2)
-        }
-    }
-
-    /// A round button on the map: Apple Maps, to the station you get on at (before the trip only). VoiceOver says which station.
-    @ViewBuilder
-    private func directions(_ detail: LegDetail) -> some View {
-        let stage = TripDetailLogic.stage(detail.leg, live: live, shown: live, now: Date.now.timeIntervalSince1970 * 1000)
-        if stage == .before, !detail.leg.canceled, let board = Directions.target(detail.stops),
-           let url = Directions.appleMaps(lat: board.lat, lon: board.lon) {
-            Link(destination: url) { MapButtonFace(icon: "navigation") }
-                .accessibilityLabel(l10n.t("detail.directions", ["station": board.name]))
         }
     }
 

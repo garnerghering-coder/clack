@@ -67,15 +67,23 @@ final class ExploreModel {
         }
     }
 
-    /// Your dot is on the map (the locate button).
-    private(set) var showingMe = false
+    /// Your dot is on the map by default once iOS allows it; asked the first time the map is up (Settings > Clack >
+    /// Location only appears once iOS has been asked).
+    func showMyDot() {
+        LocationModel.shared.askIfNeeded()
+        controller.showUserDot()
+    }
 
-    func toggleMe() {
-        showingMe.toggle()
-        // The first time, iOS asks (Settings > Clack > Location only appears once it has been asked).
-        if showingMe { LocationModel.shared.askIfNeeded() }
-        controller.showUser(showingMe)
+    /// The locate button: centre on you. Where location is switched off, it opens Settings, where you can switch it on.
+    func centreOnMe() {
         Usage.shared.count(.feature, "explore.myLocation")
+        let location = LocationModel.shared
+        location.askIfNeeded()
+        if location.denied, let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+            return
+        }
+        controller.centreOnUser()
     }
 
     /// The theme the map is drawn in (colours of markers and routes).
