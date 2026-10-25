@@ -141,6 +141,15 @@ struct TicketImportSheet: View {
         }
         .task { await model.load(file, app.client) }
         .sensoryFeedback(.success, trigger: model.phase == .done)
+        // Saved: show it in Trips and close the sheet by itself, after a moment to see what happened.
+        .task(id: model.phase == .done) {
+            guard model.phase == .done else { return }
+            app.tripsChanged()
+            try? await Task.sleep(for: .milliseconds(800))
+            guard !Task.isCancelled else { return }
+            router.ticketFile = nil
+            router.tab = .trips
+        }
     }
 
     @ViewBuilder
@@ -226,13 +235,7 @@ struct TicketImportSheet: View {
 
     @ViewBuilder
     private var actions: some View {
-        if model.phase == .done {
-            Button(l10n.t("common.done")) {
-                router.ticketFile = nil
-                router.tab = .trips
-            }
-            .buttonStyle(ClackButtonStyle(kind: .primary, wide: true))
-        } else {
+        if model.phase != .done {
             Button(model.chosen > 0 && model.onlySeats ? l10n.t("seat.save") : l10n.t("ticketImport.add", count: model.chosen)) {
                 Task { await model.save(app.client) }
             }

@@ -173,6 +173,7 @@ struct TripDetailScreen: View {
     private func remove() async {
         if (try? await app.client.deleteLeg(id)) != nil {
             UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            app.tripsChanged()
             dismiss()
         }
     }
@@ -201,7 +202,7 @@ struct TripDetailScreen: View {
             }
         }
         .ignoresSafeArea(edges: .top)
-        .scrollBounceBehavior(.basedOnSize)
+        .scrollBounceBehavior(.always)
         // Pull to refresh asks the sources for fresh times (a saved trip just reloads).
         .refreshable { await (detail.leg.status == .snapshotted ? load() : refresh()) }
         #if DEBUG
@@ -629,6 +630,8 @@ struct TripDetailScreen: View {
         } label: {
             MapButtonFace(icon: "", symbol: "ellipsis")
         }
+        .buttonStyle(.plain)
+        .tint(Ink.text)
         .accessibilityLabel(l10n.t("detail.more"))
         .accessibilityIdentifier("trip.more")
     }

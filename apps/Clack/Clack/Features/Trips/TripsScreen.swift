@@ -104,7 +104,7 @@ struct TripsScreen: View {
         }
         // Trips already there (an update, or a new phone with the same id): no welcome, now or later.
         .onChange(of: model.legs?.isEmpty) { _, empty in if empty == false { welcomeSeen = true } }
-        .task { await model.load(app.client) }
+        .task(id: app.tripsVersion) { await model.load(app.client) }
         .task(id: app.isOffline) { await model.loadDetails(app.client, now: Date.now.timeIntervalSince1970 * 1000) }
         .task { await model.loadFollows(app.client) }
         .task { await model.listen(app.live) }

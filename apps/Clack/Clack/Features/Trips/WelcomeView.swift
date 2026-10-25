@@ -126,6 +126,7 @@ struct WelcomeView: View {
         defer { adding = nil }
         guard let saved = try? await app.client.createLeg(t.body) else { return }
         Usage.shared.count(.feature, "firstRun.addSuggested")
+        app.tripsChanged()
         onDone()
         router.push(.trip(saved.id))
     }

@@ -30,6 +30,11 @@ final class AppModel {
     let notifications = NotificationManager.shared
     @ObservationIgnored private(set) var stations: StationDirectory
 
+    /// Bumped when a trip is added or removed, so the Trips list loads again at once.
+    private(set) var tripsVersion = 0
+
+    func tripsChanged() { tripsVersion += 1 }
+
     /// The last change to settings couldn't be saved.
     private(set) var saveFailed = false
 

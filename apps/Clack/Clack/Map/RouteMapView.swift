@@ -52,7 +52,8 @@ struct RouteMapView: View {
     var followTrain = false
 
     @State private var handle = MapHandle()
-    @State private var showRail: Bool
+    /// The rail network follows the setting; there is no button for it on the map.
+    private var showRail: Bool { railNetwork }
     @State private var follow = false
     @State private var basemap: Bool?
 
@@ -76,7 +77,6 @@ struct RouteMapView: View {
         self.topInset = topInset
         self.bottomInset = bottomInset
         self.followTrain = followTrain
-        _showRail = State(initialValue: railNetwork)
         _follow = State(initialValue: followTrain && train != nil)
     }
 
@@ -97,7 +97,6 @@ struct RouteMapView: View {
                     HStack {
                         Spacer()
                         VStack(spacing: 8) {
-                            MapButton(icon: "layers", label: l10n.t("map.railNetwork"), pressed: showRail) { showRail.toggle() }
                             if train != nil {
                                 MapButton(icon: "navigation", label: l10n.t("live.follow"), pressed: follow) { follow.toggle() }
                             }

@@ -86,7 +86,7 @@ struct Page<Content: View>: View {
             .padding(.bottom, 24)
             .frame(maxWidth: .infinity)
         }
-        .scrollBounceBehavior(.basedOnSize)
+        .scrollBounceBehavior(.always)
         .background(Ink.bg)
     }
 }
