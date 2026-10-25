@@ -54,6 +54,10 @@ private struct FlapFace: View {
                 .font(ClackFont.groteskFixed(size.font))
                 .monospacedDigit()
                 .foregroundStyle(colour ?? Ink.tflapText)
+                // A wide letter (M, W) is a little narrower than its natural width rather than cut off by the tile.
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .frame(width: FlapFace.width(size))
         }
         .frame(width: FlapFace.width(size), height: size.lineHeight)
         .clipShape(HalfShape(half: half))
@@ -142,6 +146,8 @@ public struct SplitFlap: View {
     public var size: FlapSize = .time
     public var intro = false
     public var colour: Color?
+    /// Seconds between one tile's flip and the next's, left to right.
+    public var stagger: Double = 0.05
 
     /// 100 at the default text size; the tiles are multiplied by this / 100.
     @ScaledMetric(relativeTo: .title) private var scale: CGFloat = 100
@@ -149,7 +155,8 @@ public struct SplitFlap: View {
     @State private var from: String
     @State private var sequence = 0
 
-    public init(value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil) {
+    public init(value: String, size: FlapSize = .time, intro: Bool = false, colour: Color? = nil, stagger: Double = 0.05) {
+        self.stagger = stagger
         self.value = value
         self.size = size
         self.intro = intro
@@ -169,7 +176,7 @@ public struct SplitFlap: View {
             let before = index < old.count ? old[index] : " "
             guard before != char else { return nil }
             defer { count += 1 }
-            return (before, Double(count) * 0.05)
+            return (before, Double(count) * stagger)
         }
     }
 

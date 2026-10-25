@@ -32,10 +32,13 @@ struct ArrivalScreen: View {
                     if let last = legs.last, let destination = last.destination {
                         header(last, destination)
                         summary
-                        if let journey, !journey.legs.isEmpty { map(journey) }
-                        if let progress, progress.counted {
+                        // What the journey did for your milestones plays straight after the board settles, up here
+                        // where it is seen, not under the map.
+                        if let progress, progress.counted, settled {
                             TripProgressView(legId: last.id, quietIfNothing: true, given: progress)
+                                .transition(.opacity)
                         }
+                        if let journey, !journey.legs.isEmpty { map(journey) }
                     } else {
                         Skeleton(height: 120)
                     }
@@ -45,6 +48,7 @@ struct ArrivalScreen: View {
             }
         }
         .preferredColorScheme(.dark)
+        .animation(reduceMotion ? nil : .snappy, value: settled)
         .sensoryFeedback(.impact(weight: .heavy), trigger: settled)
         .sensoryFeedback(.success, trigger: progress?.unlocked.count ?? 0)
         .task {
@@ -165,12 +169,16 @@ private struct ArrivalBoard: View {
 
     private static let letters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ")
 
+    /// How long one round of flips takes: the last tile starts after the others, then flips for 360 ms.
+    private static func roundMs(_ count: Int) -> Int { 380 + count * Int(Self.stagger * 1000) }
+    private static let stagger = 0.02
+
     private func scramble() -> String {
         String(name.map { $0 == " " ? " " : Self.letters.randomElement() ?? "A" })
     }
 
     var body: some View {
-        SplitFlap(value: shown, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm))
+        SplitFlap(value: shown, size: name.count <= 12 ? .lg : (name.count <= 17 ? .md : .sm), stagger: Self.stagger)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(plain)
             .task {
@@ -179,14 +187,12 @@ private struct ArrivalBoard: View {
                     onSettled()
                     return
                 }
-                // Blank, then two rounds of letters, then the name: each change flips the tiles left to right.
-                try? await Task.sleep(for: .milliseconds(450))
+                // Blank, one round of letters, then the name: each change flips the tiles left to right, quickly.
+                try? await Task.sleep(for: .milliseconds(150))
                 shown = scramble()
-                try? await Task.sleep(for: .milliseconds(850))
-                shown = scramble()
-                try? await Task.sleep(for: .milliseconds(850))
+                try? await Task.sleep(for: .milliseconds(Self.roundMs(name.count)))
                 shown = name
-                try? await Task.sleep(for: .milliseconds(700))
+                try? await Task.sleep(for: .milliseconds(Self.roundMs(name.count)))
                 onSettled()
             }
     }

@@ -510,7 +510,9 @@ struct ExploreScreen: View {
                 Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
             }
         }
-        .buttonStyle(.clack(wide: true))
+        // As wide as its word, so the button beside it keeps the room (Plan a journey in one line).
+        .buttonStyle(.clack())
+        .fixedSize()
         .accessibilityAddTraits(following ? .isSelected : [])
     }
 
@@ -520,7 +522,7 @@ struct ExploreScreen: View {
             Button { router.push(.trip(legId)) } label: {
                 HStack(spacing: 8) {
                     LucideIcon(name: "train-front", size: 16)
-                    Text(l10n.t("liveMap.inYourTrips"))
+                    Text(l10n.t("liveMap.inYourTrips")).lineLimit(1).minimumScaleFactor(0.85)
                 }
             }
             .buttonStyle(.clack(.primary, wide: true))
@@ -530,7 +532,7 @@ struct ExploreScreen: View {
             } label: {
                 HStack(spacing: 8) {
                     LucideIcon(name: "plus", size: 16)
-                    Text(l10n.t("liveMap.plan"))
+                    Text(l10n.t("liveMap.plan")).lineLimit(1).minimumScaleFactor(0.85)
                 }
             }
             .buttonStyle(.clack(.primary, wide: true))

@@ -87,7 +87,8 @@ private struct SearchBorder: ViewModifier {
     let color: Color
 
     func body(content: Content) -> some View {
-        if show { content.hairlineBorder(radius: Radius.input, color: color) } else { content }
+        // Always the same view (only the line's colour changes): swapping between two shapes would rebuild the field and drop its focus.
+        content.hairlineBorder(radius: Radius.input, color: show ? color : .clear)
     }
 }
 

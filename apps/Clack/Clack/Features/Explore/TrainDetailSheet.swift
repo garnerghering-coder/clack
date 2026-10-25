@@ -107,7 +107,8 @@ struct TrainDetailSheet: View {
                         Text(l10n.t(following ? "liveMap.following" : "liveMap.follow"))
                     }
                 }
-                .buttonStyle(.clack(wide: true))
+                .buttonStyle(.clack())
+                .fixedSize()
                 .disabled(busy)
                 .accessibilityAddTraits(following ? .isSelected : [])
                 if let legId = view.legId {
@@ -117,7 +118,7 @@ struct TrainDetailSheet: View {
                     } label: {
                         HStack(spacing: 8) {
                             LucideIcon(name: "train-front", size: 16)
-                            Text(l10n.t("liveMap.inYourTrips"))
+                            Text(l10n.t("liveMap.inYourTrips")).lineLimit(1).minimumScaleFactor(0.85)
                         }
                     }
                     .buttonStyle(.clack(.primary, wide: true))
@@ -128,7 +129,7 @@ struct TrainDetailSheet: View {
                     } label: {
                         HStack(spacing: 8) {
                             LucideIcon(name: "plus", size: 16)
-                            Text(l10n.t("liveMap.plan"))
+                            Text(l10n.t("liveMap.plan")).lineLimit(1).minimumScaleFactor(0.85)
                         }
                     }
                     .buttonStyle(.clack(.primary, wide: true))

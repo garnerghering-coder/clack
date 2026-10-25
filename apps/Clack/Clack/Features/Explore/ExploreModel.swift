@@ -99,6 +99,10 @@ final class ExploreModel {
     @ObservationIgnored private var scheduledTask: Task<Void, Never>?
     @ObservationIgnored private var searchTask: Task<Void, Never>?
     @ObservationIgnored private var focused = false
+    /// Counts every pick and every close. A pick that is still waiting for the server when the sheet is closed (or another
+    /// train picked) finds its number changed and drops what it fetched, so it can't open the sheet again or draw a route
+    /// that nothing owns.
+    @ObservationIgnored private var selection = 0
 
     func attach(_ app: AppModel) {
         self.app = app
@@ -361,6 +365,8 @@ final class ExploreModel {
 
     func select(_ id: String) async {
         guard let client = app?.client else { return }
+        selection += 1
+        let mine = selection
         // The ring shows at once, so the tap is seen before the details arrive.
         controller.setSelected(id)
         UISelectionFeedbackGenerator().selectionChanged()
@@ -370,8 +376,10 @@ final class ExploreModel {
             try? await Task.sleep(for: .milliseconds(400))
             fetched = try? await client.liveTrain(id)
         }
+        guard mine == selection else { return }
         guard let detail = fetched else {
-            if selected == nil { controller.setSelected(nil) }
+            // The ring goes back to what is really selected (nothing, or the train that still is).
+            controller.setSelected(selected?.train.id)
             return
         }
         selected = detail
@@ -386,7 +394,7 @@ final class ExploreModel {
         guard let trip = detail.trip else { return }
         startStops(id)
         // The train's whole route along the tracks: travelled part solid, the rest dashed (DESIGN §2.4).
-        guard let geometry = try? await client.timetableTripGeometry(trip.key, date: trip.serviceDate), selected?.train.id == id else { return }
+        guard let geometry = try? await client.timetableTripGeometry(trip.key, date: trip.serviceDate), mine == selection, selected?.train.id == id else { return }
         let line = Self.line(geometry)
         guard line.count > 1 else { return }
         controller.setRouteColor(color(detail.train.operatorId))
@@ -433,6 +441,7 @@ final class ExploreModel {
     }
 
     func deselect() {
+        selection += 1
         selected = nil
         stopsTask?.cancel()
         clearRoute()
@@ -452,8 +461,12 @@ final class ExploreModel {
             await select(live.id)
             return
         }
+        selection += 1
         scheduled = view
         selected = nil
+        // The ring and the stops of the train that was selected go with it.
+        stopsTask?.cancel()
+        controller.setSelected(nil)
         collapsed = false
         stationSheet = nil
         startScheduledRefresh(number: number, date: date, key: key)
@@ -479,6 +492,7 @@ final class ExploreModel {
     }
 
     func closeScheduled() {
+        selection += 1
         scheduled = nil
         scheduledTask?.cancel()
         clearRoute()
