@@ -62,7 +62,11 @@ struct ExploreScreen: View {
             guard model.ready, let bbox = model.bbox, active || !model.loaded else { return }
             await model.runStream(bbox: bbox)
         }
-        .onChange(of: active) { model.active = active }
+        .onChange(of: active) {
+            model.active = active
+            // Back on the tab without a basemap (the first ask failed): ask again.
+            if active, basemap != true { Task { basemap = await app.mapHasBasemap() } }
+        }
         // "Stations" from elsewhere (old links): the search, open, with your stations under it.
         .task(id: router.stationSearchRequest) {
             guard router.stationSearchRequest != nil else { return }

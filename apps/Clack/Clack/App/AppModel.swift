@@ -44,15 +44,18 @@ final class AppModel {
     @ObservationIgnored var legDetails: [String: LegDetail] = [:]
 
     /// Whether the server has a basemap to draw (`GET /api/map/status`), asked once per session. Without one the maps
-    /// show just their background, with the routes on it.
-    @ObservationIgnored private var basemapTask: Task<Bool, Never>?
+    /// show just their background, with the routes on it. Only an answer is kept: a failed ask (no connection at launch)
+    /// is asked again next time, rather than leaving the maps without a basemap for the whole session (Explore blank).
+    @ObservationIgnored private var basemapTask: Task<Bool?, Never>?
 
     func mapHasBasemap() async -> Bool {
-        if let basemapTask { return await basemapTask.value }
+        if let basemapTask, let known = await basemapTask.value { return known }
         let client = client
-        let task = Task<Bool, Never> { ((try? await client.get(["map", "status"])) as MapStatus?)?.basemap != nil }
+        let task = Task<Bool?, Never> { (try? await client.get(["map", "status"]) as MapStatus).map { $0.basemap != nil } }
         basemapTask = task
-        return await task.value
+        let answer = await task.value
+        if answer == nil { basemapTask = nil }
+        return answer ?? false
     }
 
     /// The operators' logos have been fetched (or the attempt gave up): badges can show them from the first frame.

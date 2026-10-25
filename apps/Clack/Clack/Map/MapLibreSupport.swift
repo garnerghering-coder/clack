@@ -65,6 +65,17 @@ final class ClackMapView: MLNMapView {
     /// The person panned or zoomed: stop re-applying the framing.
     func markMoved() { moved = true }
 
+    /// Back on screen (Explore's tab shown again, the app back from the background): draw again. MapLibre pauses while
+    /// the view is out of the window and doesn't always repaint by itself, which left Explore blank (owner, 2026-10-25).
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil {
+            isHidden = false
+            setNeedsLayout()
+            triggerRepaint()
+        }
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         guard bounds.width > 0, bounds.height > 0, bounds.size != laidOutSize else { return }

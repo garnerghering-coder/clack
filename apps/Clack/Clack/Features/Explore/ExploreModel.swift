@@ -55,11 +55,15 @@ final class ExploreModel {
     var query = ""
     var searching = false
     private(set) var stationHits: [StationHit] = []
-    /// The Explore tab is showing. When it isn't, the map is hidden and the markers stop gliding.
+    /// The Explore tab is showing. When it isn't, the markers stop gliding (the tab bar takes the map out of the window;
+    /// hiding it as well could leave it blank on return). Back on the tab, the map repaints and the trains are drawn again.
     var active = true {
         didSet {
-            controller.mapView?.isHidden = !active
-            if active { scheduleRender() }
+            if active {
+                controller.repaint()
+                needsFullRender = true
+                scheduleRender()
+            }
         }
     }
 
@@ -81,8 +85,11 @@ final class ExploreModel {
         self.app = app
         controller.onReady = { [weak self] in
             self?.ready = true
+            self?.needsFullRender = true
             self?.scheduleRender()
         }
+        // A new map (the theme changed): not ready until its style loads, so the stream starts again once it is.
+        controller.onRebuild = { [weak self] in self?.ready = false }
         controller.onViewChange = { [weak self] bbox, zoom in
             self?.bbox = bbox
             self?.zoom = zoom

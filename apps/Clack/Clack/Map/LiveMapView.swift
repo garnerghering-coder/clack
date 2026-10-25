@@ -62,8 +62,23 @@ final class LiveMapController {
     /// The visible area as "W,S,E,N" (3 decimals) and the zoom, after the map settles.
     var onViewChange: (_ bbox: String, _ zoom: Double) -> Void = { _, _ in }
     var onReady: () -> Void = {}
+    /// A new map view was made (its style isn't loaded yet).
+    var onRebuild: () -> Void = {}
 
     private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
+
+    /// Draws the map again (it pauses while out of the window).
+    func repaint() {
+        guard let map = mapView else { return }
+        map.isHidden = false
+        map.setNeedsLayout()
+        map.triggerRepaint()
+    }
+
+    fileprivate func rebuilt() {
+        ready = false
+        onRebuild()
+    }
 
     fileprivate func markReady() {
         ready = true
@@ -165,6 +180,7 @@ struct LiveMapView: UIViewRepresentable {
         map.setCenter(CLLocationCoordinate2D(latitude: 63, longitude: 17), zoomLevel: 3.8, animated: false)
         map.wantedFit = ClackMapView.Fit(points: [LatLon(55.3, 4.5), LatLon(70.2, 31.7)], padding: .zero, maxZoom: 14)
         controller.mapView = map
+        controller.rebuilt()
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped(_:)))
         tap.delegate = context.coordinator
         // Only a double tap (zoom) and a two-finger tap (zoom out) may win over a tap. The map's own single tap
