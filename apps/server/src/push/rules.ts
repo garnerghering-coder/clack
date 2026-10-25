@@ -1,6 +1,6 @@
 // When an alert is due and what it says (owner, 2026-10-23). Pure: the notifier loads the facts and sends the result.
 // Nothing is guessed: a platform that isn't announced is left out, a time that isn't known makes no alert.
-import { DELAY_ALERT_MIN, type Language, type Settings } from '@clack/shared';
+import { BOARD_SECONDS, DEBOARD_SECONDS, DELAY_ALERT_MIN, type Language, type Settings } from '@clack/shared';
 import { clock, t } from './text.js';
 
 export interface Alert {
@@ -118,18 +118,44 @@ export function spareMinutes(a: TripFacts, b: TripFacts): number | null {
   return Math.round((b.expDep - a.expArr) / MIN);
 }
 
-/** The change from `a` to `b` at a's destination: once it is close (15 min before arriving), and again when it changes. */
-export function change(a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: Language): Alert | null {
+/** The walk between the two platforms at the change station: from its map, or estimated from the station's size. */
+export interface Walk {
+  seconds: number;
+  estimated: boolean;
+}
+
+/**
+ * The change from `a` to `b` at a's destination: once it is close (15 min before arriving), and again when it changes.
+ * With a `walk` the connection is judged like the app does (spare time minus the walk and the boarding buffers, see
+ * `connectionStatus` in the shared station code); without one, on the spare time alone.
+ */
+export function change(a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: Language, walk: Walk | null = null): Alert | null {
   if (!p.notify || !p.notifyChange || a.canceled || b.departed || a.expArr === null) return null;
   if (now < a.expArr - 15 * MIN) return null;
   const station = a.to;
   if (b.canceled) return { kind: 'change', key: 'cancelled', title: t(lang, 'changeTitle', { station }), body: t(lang, 'connectionCancelled', { to: b.to }), timeSensitive: true };
   const spare = spareMinutes(a, b);
   if (spare === null) return null;
-  const key = `${a.arrPlatform ?? '-'}>${b.depPlatform ?? '-'}:${Math.floor(spare / 3)}`;
-  if (spare < 0) return { kind: 'change', key, title: t(lang, 'missTitle'), body: t(lang, 'miss', { late: -spare, to: b.to, station }), timeSensitive: true };
-  const body = t(lang, a.arrPlatform && b.depPlatform ? 'changeBoth' : a.arrPlatform ? 'changeArrOnly' : b.depPlatform ? 'changeDepOnly' : 'changeNone', { a: a.arrPlatform ?? '', b: b.depPlatform ?? '', spare });
-  return { kind: 'change', key, title: t(lang, spare < 5 ? 'changeTight' : 'changeTitle', { station }), body };
+  const plat = `${a.arrPlatform ?? '-'}>${b.depPlatform ?? '-'}`;
+  if (!walk) {
+    const key = `${plat}:${Math.floor(spare / 3)}`;
+    if (spare < 0) return { kind: 'change', key, title: t(lang, 'missTitle'), body: t(lang, 'miss', { late: -spare, to: b.to, station }), timeSensitive: true };
+    return { kind: 'change', key, title: t(lang, spare < 5 ? 'changeTight' : 'changeTitle', { station }), body: changeBody(a, b, spare, lang) };
+  }
+  // Minutes left once you have got off, walked and got on (negative: you would not make it).
+  const slack = (spare * 60 - walk.seconds - DEBOARD_SECONDS - BOARD_SECONDS) / 60;
+  const walkMin = Math.max(1, Math.round(walk.seconds / 60));
+  const key = `${plat}:${Math.floor(slack / 3)}`;
+  if (slack < 0)
+    return spare < 0
+      ? { kind: 'change', key, title: t(lang, 'missTitle'), body: t(lang, 'miss', { late: -spare, to: b.to, station }), timeSensitive: true }
+      : { kind: 'change', key, title: t(lang, 'missTitle'), body: t(lang, 'missWalk', { spare, walk: walkMin }), timeSensitive: true };
+  const walkLine = t(lang, walk.estimated ? 'walkEstimated' : 'walkMapped', { walk: walkMin });
+  return { kind: 'change', key, title: t(lang, slack < 5 ? 'changeTight' : 'changeTitle', { station }), body: `${changeBody(a, b, spare, lang)} ${walkLine}` };
+}
+
+function changeBody(a: TripFacts, b: TripFacts, spare: number, lang: Language): string {
+  return t(lang, a.arrPlatform && b.depPlatform ? 'changeBoth' : a.arrPlatform ? 'changeArrOnly' : b.depPlatform ? 'changeDepOnly' : 'changeNone', { a: a.arrPlatform ?? '', b: b.depPlatform ?? '', spare });
 }
 
 /** Where a trip is, for the card on the Lock Screen and the Dynamic Island (owner, 2026-10-24). */

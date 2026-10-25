@@ -112,6 +112,19 @@ describe('changes', () => {
     expect(k2).not.toBe(k1);
     expect(change(a, b({ expDep: T('13:31') }), prefs, T('13:12'), 'en')!.key).toBe(k1);
   });
+  it('counts the walk between the platforms in the change', () => {
+    const next = b({ expDep: T('13:31') }); // 11 min to spare on paper
+    expect(change(a, next, prefs, T('13:10'), 'en', { seconds: 120, estimated: false })!.body).toBe('Arrive on Platform 3, leave from Platform 5. 11 min to spare. 2 min to walk.');
+    const tight = change(a, next, prefs, T('13:10'), 'en', { seconds: 420, estimated: false })!;
+    expect(tight.title).toBe('Tight change at Nässjö');
+    expect(tight.body).toContain('7 min to walk.');
+    expect(change(a, next, prefs, T('13:10'), 'en', { seconds: 420, estimated: true })!.body).toContain('About 7 min to walk (estimated).');
+  });
+  it('warns of a miss when the walk does not fit, even with time between the trains', () => {
+    const miss = change(a, b({ expDep: T('13:24') }), prefs, T('13:10'), 'en', { seconds: 420, estimated: false })!;
+    expect(miss.timeSensitive).toBe(true);
+    expect(miss.body).toBe('4 min between the trains, but the walk to the next one is about 7 min.');
+  });
   it('warns when the next train is cancelled', () => {
     expect(change(a, b({ canceled: true }), prefs, T('13:10'), 'en')!.body).toBe('Your next train to Kolding is cancelled.');
   });

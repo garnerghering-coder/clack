@@ -3,6 +3,7 @@ import { gt, sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { feedHealth } from '../lib/health.js';
 import { trackerFixes } from '../live/tracker.js';
+import { pushStats } from '../push/apns.js';
 import { legAudits } from '../db/schema.js';
 import { SERVER_VERSION } from '../lib/version.js';
 import { summarize, type LegAudit } from '../audit/audit.js';
@@ -25,6 +26,8 @@ export const healthRoutes =
         feeds: feedHealth(),
         // Tracked trips' GPS: fixes taken and dropped as impossible jumps.
         gps: trackerFixes.stats,
+        // Alerts and card updates to Apple since start-up: how many went through, when, and what failed (by Apple's reason).
+        push: pushStats,
       };
     });
     // The last week's accuracy audit in numbers (the readable report is data/audit/latest.md).

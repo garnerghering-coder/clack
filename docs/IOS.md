@@ -14,13 +14,14 @@ Connect, the Apple Developer Program) follow APP_STORE.md and Xcode's Product > 
 All native Swift, in the same Xcode project.
 
 - The server (`apps/server/src/push/`) watches every saved trip and sends: a departure reminder at the lead time chosen
-  in Settings (off, 30 min, 1 h, 2 h, 3 h; default 1 h), platform announced or changed, delays of 5+ min,
+  in Settings (off, 30 min, 1 h, 2 h, 3 h; default 1 h), platform announced or changed, delays of 5+ min (a later alert for the same train only when it has grown by 5 more; a delay that shrinks is silent),
   cancellations and short-turns (time-sensitive), changes between trains ("arrive platform 3, leave platform 5, 11 min
-  to spare", tight or likely missed), "get off soon", and a welcome at the end of a whole journey. A `push_log` table
+  to spare, 4 min to walk", tight or likely missed, counting the walk between the platforms from the station map, or an
+  estimate from the station's size, said as such, when there is no map; followers' change alerts don't count the walk yet), "get off soon", and a welcome at the end of a whole journey. A `push_log` table
   keeps any alert from going out twice. Texts are in English and Swedish (`push/text.ts`).
-- The app (`App/Notifications.swift`) asks for permission at the end of the welcome (owner, 2026-10-25), or once at
-  launch for someone who had Clack before with alerts off (`FirstRun.showsAlertsIntro`); Settings > Alerts and one card
-  on an upcoming trip are the later chances. It tells the server the phone's Apple address (`PUT /api/devices`;
+- The app (`App/Notifications.swift`) does not ask for permission at launch or in the welcome (owner, 2026-10-25: ask in
+  context). The first chance is one "Get alerts for this train?" card on a trip that is still ahead
+  (`AlertsPrompt`, `FirstRun.showsAlertsPrompt`, remembered in `FirstRun.alertsAskedKey`); Settings > Alerts is the other. It tells the server the phone's Apple address (`PUT /api/devices`;
   removed with Delete my data) and opens the trip when an alert is tapped. Until 2026-10-25 nobody had turned alerts
   on, so no phone was registered and nothing was ever sent; checked end to end since (reminder delivered).
 - The trip card (Live Activity: `App/LiveActivities.swift` and the `ClackWidgets` extension) follows one journey on the
@@ -36,14 +37,17 @@ All native Swift, in the same Xcode project.
     *Leaving soon* (30 min) with the platform; *Boarding* with platform and seat; on the way, the next stop and the line
     filling between the two times; *Get off at X* with a countdown (last 10 min); at a change, *Change at X*, the next
     platform and the countdown to the next train; at the end, *Welcome to X* with the arrival time and delay;
-    *Cancelled* with the struck time. A platform change in the last 10 minutes shows first, in yellow.
+    *Cancelled* with the struck time. A platform change in the last 10 minutes shows first, in yellow (only on cards the server pushes; the phone's own cards have no such note).
 - The capabilities Push Notifications, Time Sensitive Notifications and the App Group `group.com.garnerghering.Clack`
   are in `Clack.entitlements` (the paid Apple Developer team is active). Debug builds use Apple's push sandbox,
   TestFlight and App Store builds production; the app tells the server which.
 - Push stays off until the key is in the server's `.env`: `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_KEY_PATH` (the .p8
   file, kept like a password) and `APNS_TOPIC=com.garnerghering.Clack` (docs/SERVER.md). The server logs
   `push: alerts on` or `push: alerts off (no Apple key in .env)` when it starts.
-- Not built: walking times inside change alerts (the walk routing lives in the app) and quiet hours.
+- Focus (owner's decision, 2026-10-25): only cancellations, short-turns and a cancelled or missed connection are
+  time-sensitive and break through Focus and Do Not Disturb. Everything else (reminder, platform, delay, tight change,
+  get off soon, welcome) arrives quietly, so a platform change at 4am is there when you wake and does not wake you.
+- Not built: quiet hours of our own, and walking times in followers' change alerts.
 
 Guidelines to keep in mind: widgets and notifications must relate to the app (2.5.16); the app must work without
 push permission (4.5.4); no marketing pushes without opt-in.

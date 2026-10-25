@@ -132,6 +132,26 @@ export const http2Transport: Transport = (r) =>
     stream.end(r.body);
   });
 
+/** How Apple's answers have gone since the server started; the admin view of /api/health shows it. */
+export const pushStats = {
+  sent: 0,
+  lastOkAt: null as number | null,
+  lastFailureAt: null as number | null,
+  /** Failures by Apple's reason (or the network error), a dead phone included. */
+  failures: {} as Record<string, number>,
+};
+
+function countPush(r: PushResult, at: number) {
+  if (r.ok) {
+    pushStats.sent++;
+    pushStats.lastOkAt = at;
+    return;
+  }
+  const why = r.reason ?? String(r.status);
+  pushStats.lastFailureAt = at;
+  pushStats.failures[why] = (pushStats.failures[why] ?? 0) + 1;
+}
+
 export class ApnsClient {
   private jwt: { token: string; at: number } | null = null;
 
@@ -149,6 +169,12 @@ export class ApnsClient {
   }
 
   async send(req: PushRequest): Promise<PushResult> {
+    const r = await this.sendOnce(req);
+    countPush(r, this.now());
+    return r;
+  }
+
+  private async sendOnce(req: PushRequest): Promise<PushResult> {
     try {
       const r = await this.transport(buildRequest(this.cfg, req, this.token()));
       if (r.status === 200) return { ok: true, status: 200, dead: false };
@@ -175,8 +201,8 @@ export function backgroundPayload(c: { legId: string; reason: string }): Record<
 export const WIDGET_PAYLOAD: Record<string, unknown> = Object.freeze({ aps: Object.freeze({ 'content-changed': true }) });
 
 /** The JSON for an alert on the lock screen. `timeSensitive` breaks through Focus (cancellations, missed changes). */
-/** The alert sound: SBB's jingle, bundled with the app (Resources/Sounds). */
-export const ALERT_SOUND = 'sbb_jingle.wav';
+/** The alert sound: Clack's own chord, bundled with the app (Resources/Sounds). */
+export const ALERT_SOUND = 'clack_arch_chord.wav';
 
 export function alertPayload(a: { title: string; subtitle?: string; body: string; legId: string; kind: string; journeyId?: string | null; timeSensitive?: boolean; shareToken?: string }): Record<string, unknown> {
   return {

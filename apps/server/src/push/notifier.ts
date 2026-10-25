@@ -1,18 +1,21 @@
 // Turns the live tracker's changes into alerts and Live Activity updates on people's phones (owner, 2026-10-23).
 // Listens to the tracker, and every minute looks at the trips about to leave or running. What is due and what it says
 // are in rules.ts; this loads the facts, sends once per alert (push_log), and forgets phones Apple says are gone.
-import { and, asc, desc, eq, gt, inArray, lt, ne } from 'drizzle-orm';
-import { DEFAULT_SETTINGS, delayBand, type Language, type Settings } from '@clack/shared';
+import { and, asc, desc, eq, gt, inArray, lt, ne, sql } from 'drizzle-orm';
+import { DEFAULT_SETTINGS, delayBand, routeTracks, SIZE_WALK_SECONDS, type Language, type Settings } from '@clack/shared';
 import type { Db } from '../db/client.js';
-import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, users } from '../db/schema.js';
+import { devices, legEvents, legs, liveActivities, liveState, operators, pushLog, stations, trvLocations, users } from '../db/schema.js';
+import { stationMap, stationSize } from '../stations/maps.js';
 import { followersOfLeg, publicJourneyWithIds } from '../share/shared.js';
 import { followerAlerts } from './followers.js';
 import { liveBus, type LiveUpdate } from '../live/tracker.js';
 import { alertPayload, backgroundPayload, WIDGET_PAYLOAD, type ApnsClient, type Environment } from './apns.js';
-import { change, departureLine, fromEvents, getOff, momentOf, reminder, type Alert, type Moment, type Prefs, type TripFacts } from './rules.js';
+import { change, departureLine, fromEvents, getOff, momentOf, reminder, type Alert, type Moment, type Prefs, type TripFacts, type Walk } from './rules.js';
 import { t } from './text.js';
 
 const MIN = 60_000;
+/** A later delay alert for the same train is sent only when the delay has grown by this much since the last one. */
+export const DELAY_WORSE_BY_MIN = 5;
 const ms = (d: Date | null | undefined) => (d ? d.getTime() : null);
 
 /** A Live Activity is ended by the system after 8 hours and kept on the Lock Screen at most 4 more (Apple, "Displaying live data with Live Activities"). */
@@ -271,7 +274,7 @@ export class Notifier {
     await this.followers(u);
     const L = this.load(u.legId);
     if (!L) return;
-    for (const a of fromEvents(L.facts, u.events, L.prefs, L.lang)) await this.deliver(L, a);
+    for (const a of fromEvents(L.facts, u.events, L.prefs, L.lang)) if (!this.delayNoise(L.facts.legId, a)) await this.deliver(L, a);
     await this.checks(L);
     await this.pushActivity(L);
     await this.fresh(L);
@@ -316,6 +319,21 @@ export class Notifier {
     if (!delivered) this.db.delete(pushLog).where(and(eq(pushLog.legId, legId), eq(pushLog.kind, a.kind), eq(pushLog.key, key))).run();
   }
 
+  /** The walk between the platforms the two trains use at the change station: from its map, else its size class, else unknown. */
+  private walkBetween(a: TripFacts, b: TripFacts): Walk | null {
+    const map = stationMap(a.toStationId, (m) => this.opts.log?.(m));
+    const mapped = map && a.arrPlatform && b.depPlatform ? routeTracks(map, a.arrPlatform, b.depPlatform) : null;
+    if (mapped) return { seconds: mapped.seconds, estimated: false };
+    const row = this.db
+      .select({ n: trvLocations.baseTracks })
+      .from(stations)
+      .innerJoin(trvLocations, sql`lower(${trvLocations.signature}) = lower(${stations.trvSignature})`)
+      .where(eq(stations.id, a.toStationId))
+      .get();
+    const size = stationSize(row?.n);
+    return size ? { seconds: SIZE_WALK_SECONDS[size], estimated: true } : null;
+  }
+
   /** Reminders, "get off soon", changes, and starting Live Activities: things that happen with the clock, not an event. */
   private async checks(L: Loaded) {
     const now = this.now();
@@ -326,7 +344,7 @@ export class Notifier {
       if (g) await this.deliver(L, g);
     }
     if (L.next) {
-      const c = change(L.facts, L.next, L.prefs, now, L.lang);
+      const c = change(L.facts, L.next, L.prefs, now, L.lang, this.walkBetween(L.facts, L.next));
       if (c) await this.deliver(L, c);
     }
   }
@@ -389,6 +407,14 @@ export class Notifier {
     }
     for (const a of this.db.select({ token: liveActivities.token }).from(liveActivities).where(eq(liveActivities.deviceToken, deviceToken)).all()) this.lastActivity.delete(a.token);
     this.db.delete(liveActivities).where(eq(liveActivities.deviceToken, deviceToken)).run();
+  }
+
+  /** A delay alert that is no news: the delay shrank, or grew by less than WORSE_BY_MIN since the last one sent for the leg. */
+  private delayNoise(legId: string, a: Alert): boolean {
+    if (a.kind !== 'delay') return false;
+    const last = this.db.select({ key: pushLog.key }).from(pushLog).where(and(eq(pushLog.legId, legId), eq(pushLog.kind, 'delay'))).orderBy(desc(pushLog.sentAt)).limit(1).get();
+    const before = Number(last?.key);
+    return last !== undefined && Number.isFinite(before) && Number(a.key) < before + DELAY_WORSE_BY_MIN;
   }
 
   private logged(legId: string, kind: string, key: string) {

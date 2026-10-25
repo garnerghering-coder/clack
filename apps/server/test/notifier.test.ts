@@ -46,7 +46,15 @@ describe('notifier', () => {
     expect(sent[0]!.path).toBe(`/3/device/${TOKEN}`);
     expect(sent[0]!.host).toBe('api.sandbox.push.apple.com');
     expect(bodies(sent)[0]!.aps.alert).toEqual({ title: 'Nässjö C → Jönköping C', subtitle: '7205', body: 'Leaves 14:00 from Platform 5.' });
-    expect((JSON.parse(sent[0]!.body) as { aps: { sound: string } }).aps.sound).toBe('sbb_jingle.wav');
+    expect((JSON.parse(sent[0]!.body) as { aps: { sound: string } }).aps.sound).toBe('clack_arch_chord.wav');
+  });
+
+  it('alerts for a delay that gets worse, not for one that shrinks or wobbles', async () => {
+    const { sent, notifier } = setup();
+    const delayed = (delayMin: number): LiveUpdate => ({ legId: 'L1', live: { status: 'en_route' } as LiveUpdate['live'], events: [{ type: 'delayed', ts: NOW, payload: { delayMin } }] });
+    for (const d of [15, 12, 16, 21]) await notifier.onUpdate(delayed(d));
+    const delays = bodies(sent).filter((x) => x.kind === 'delay');
+    expect(delays.map((x) => x.aps.alert!.body.split(' ')[0])).toEqual(['15', '21']);
   });
 
   it('says nothing to someone who has alerts off, or before the lead time', async () => {

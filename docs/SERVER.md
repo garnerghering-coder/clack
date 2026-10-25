@@ -32,6 +32,14 @@ Anything not written down in the repository is marked **Owner:** for Garner to f
 - Nothing else. There is no web app, so Caddy serves no files itself (it sends every path to Fastify, so these pages
   need no Caddy change).
 
+## Watching the alerts
+
+Every alert and Live Activity update goes through the server, so if it stops, it stops for everyone. With the admin token,
+`GET /api/health` has a `push` part: pushes Apple accepted since the server started, when the last one went through, when the
+last one failed and the failures counted by Apple's reason (`BadDeviceToken` is one phone gone; a run of anything else,
+or `lastOkAt` falling far behind while people have trips, means look at the log lines starting `push:`). Nothing pages
+anyone: it has to be looked at.
+
 ## `.env`
 
 `/home/clack/clack/.env` is read at start-up (not in git; never paste the values anywhere). The names:
