@@ -14,19 +14,18 @@
   document.querySelectorAll('[data-s]').forEach((el) => { el.textContent = t(el.dataset.s); });
 
   // ---- the offer to get the app
+  // The offer comes up every time the link is opened (closing it lasts for this visit only); the "Get Clack" button at the
+  // top stays on the page either way.
   const banner = document.getElementById('banner');
-  const KEY = 'clack.share.bannerClosed';
-  const closed = () => { try { return localStorage.getItem(KEY) === '1'; } catch { return false; } };
-  banner.hidden = closed();
-  document.getElementById('dismiss').addEventListener('click', () => {
-    banner.hidden = true;
-    try { localStorage.setItem(KEY, '1'); } catch { /* private mode */ }
-  });
+  banner.hidden = false;
+  document.getElementById('dismiss').addEventListener('click', () => { banner.hidden = true; });
   document.getElementById('open').href = `clack://share/${encodeURIComponent(token)}`;
-  const get = document.getElementById('get');
-  // Until there is a download address the button goes nowhere (it is shown so the page can be judged).
-  if (cfg.downloadUrl) get.href = cfg.downloadUrl;
-  else get.addEventListener('click', (e) => e.preventDefault());
+  // Until there is a download address the buttons go nowhere (they are shown so the page can be judged).
+  for (const id of ['get', 'getTop']) {
+    const button = document.getElementById(id);
+    if (cfg.downloadUrl) button.href = cfg.downloadUrl;
+    else button.addEventListener('click', (e) => e.preventDefault());
+  }
 
   // ---- words and numbers
   const time = (ms, tz) => (ms == null ? '–' : new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: tz }).format(ms));
@@ -66,6 +65,62 @@
   }
 
   // ---- the page
+  // The stops a visitor has opened stay open when the page refreshes itself.
+  const openLegs = new Set();
+  // `?open` shows every train's stops from the start (for looking at the line against them).
+  if (new URLSearchParams(location.search).has('open')) for (let i = 0; i < 12; i++) openLegs.add(i);
+  app.addEventListener('toggle', (e) => {
+    const d = e.target;
+    if (!(d instanceof HTMLDetailsElement) || d.dataset.leg == null) return;
+    if (d.open) openLegs.add(Number(d.dataset.leg)); else openLegs.delete(Number(d.dataset.leg));
+    if (lastJourney) layoutProgress(lastJourney);
+  }, true);
+
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  /** How far a train has gone, 0 to 1: its own progress when it reports one, else by the times. */
+  function legFraction(l, now) {
+    if (l.arrived) return 1;
+    if (!l.departed) return 0;
+    if (l.live && l.live.progress != null) return clamp(l.live.progress);
+    if (l.expDep != null && l.expArr != null && l.expArr > l.expDep) return clamp((now - l.expDep) / (l.expArr - l.expDep));
+    return 0;
+  }
+
+  /**
+   * Fills each train's line as far as the train has gone. With the stops closed that is a share of the line; with them open
+   * it is placed between the stops (the last one passed and the next), so the line and the dots agree.
+   */
+  function layoutProgress(j) {
+    const now = Date.now();
+    document.querySelectorAll('.row[data-leg]:not(.change)').forEach((row) => {
+      const l = j.legs[Number(row.dataset.leg)];
+      if (!l) return;
+      const top = row.classList.contains('first') ? 8 : 0;
+      const bottom = row.classList.contains('last') ? 8 : 0;
+      const length = Math.max(0, row.offsetHeight - top - bottom);
+      let fill = legFraction(l, now) * length;
+      const details = row.querySelector('details.stops');
+      if (details && details.open && l.stops.length && !l.arrived) {
+        const rowTop = row.getBoundingClientRect().top;
+        const ys = [...details.querySelectorAll('.stop')].map((s) => s.getBoundingClientRect().top + s.offsetHeight / 2 - rowTop - top);
+        let next = l.stops.findIndex((s) => !s.passed);
+        if (next === -1) next = l.stops.length;
+        if (!l.departed || next === 0) fill = 0;
+        else if (next >= l.stops.length) fill = ys[ys.length - 1];
+        else {
+          const a = l.stops[next - 1].dep ?? l.stops[next - 1].arr;
+          const b = l.stops[next].arr ?? l.stops[next].dep;
+          const f = a != null && b != null && b > a ? clamp((now - a) / (b - a)) : 0;
+          fill = ys[next - 1] + (ys[next] - ys[next - 1]) * f;
+        }
+      }
+      row.style.setProperty('--fill', `${Math.round(Math.min(length, Math.max(0, fill)))}px`);
+    });
+  }
+  window.addEventListener('resize', () => { if (lastJourney) layoutProgress(lastJourney); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (lastJourney) layoutProgress(lastJourney); });
+  let lastJourney = null;
+
   const badge = (op) => {
     if (!op) return '<span class="badge">?</span>';
     const style = `--op:${esc(op.brandColor)}${op.logoUrl ? `;background-image:url('${esc(op.logoUrl)}')` : ''}`;
@@ -85,13 +140,13 @@
     const stops = l.stops
       .map((s) => `<div class="stop${s.passed ? ' passed' : ''}${s.canceled ? ' canceled' : ''}"><span class="nm">${esc(s.name)}</span><span>${esc(time(s.dep ?? s.arr, s.tz))}${s.platform ? ` · ${esc(t('trips.platform', { platform: s.platform }))}` : ''}</span></div>`)
       .join('');
-    return `<div class="row${first ? ' first' : ''}${last ? ' last' : ''}" style="--leg:${esc(colour)}">
+    return `<div class="row${first ? ' first' : ''}${last ? ' last' : ''}" data-leg="${i}" style="--leg:${esc(colour)}">
       <div class="line">${first ? '<span class="node top"></span>' : ''}${last ? '<span class="node bottom"></span>' : ''}</div>
       <div class="leg">
         <div class="leg-head">${badge(l.operator)}<div><div class="leg-title">${esc(l.from.name)} → ${esc(l.to.name)}</div><div class="leg-meta">${esc(service)}</div></div></div>
         <div class="times">${timeBlock(l.expDep, l.schedDep, l.from.tz)}<span class="muted">→</span>${timeBlock(l.expArr, l.schedArr, l.to.tz)}</div>
         <div class="leg-meta">${l.depPlatform ? `<span class="tag">${esc(t('trips.platform', { platform: l.depPlatform }))}</span> ` : ''}${delayHtml(l.arrDelayMin, l.canceled)}</div>
-        ${stops ? `<details class="stops"><summary>${esc(t('share.stops'))}</summary>${stops}</details>` : ''}
+        ${stops ? `<details class="stops" data-leg="${i}"${openLegs.has(i) ? ' open' : ''}><summary>${esc(t('share.stops'))}</summary>${stops}</details>` : ''}
       </div>
     </div>`;
   }
@@ -142,6 +197,8 @@
       app.innerHTML = html;
     }
     document.title = `${s.from} → ${s.to} · Clack`;
+    lastJourney = j;
+    layoutProgress(j);
     drawMap(j);
     if (!scrolledToHash && location.hash) { scrolledToHash = true; document.getElementById(location.hash.slice(1))?.scrollIntoView(); }
   }
