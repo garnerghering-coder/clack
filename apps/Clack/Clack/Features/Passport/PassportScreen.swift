@@ -153,7 +153,6 @@ struct PassportScreen: View {
 
     @ViewBuilder
     private func full(_ data: Passport) -> some View {
-        let unit = settings.distanceUnit
         let ops = data.refs.operators
         VStack(alignment: .leading, spacing: 16) {
             PassportCard(data: data, year: year, flavorIndex: $flavorIndex)

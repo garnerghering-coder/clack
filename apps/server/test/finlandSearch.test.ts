@@ -13,6 +13,10 @@ const ic27 = trainFixture('ic-27');
 const ic407 = trainFixture('ic-407-haparanda');
 
 function setup() {
+  // The fixtures are for 24 October 2026, and the search only reaches back to yesterday (Finland has no archive), so the
+  // clock is set to that day: these tests must not depend on the day they are run.
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(Date.parse('2026-10-24T10:00:00Z'));
   const db = openDb(':memory:');
   seedFinland(db);
   seedTrip(db, ic27);

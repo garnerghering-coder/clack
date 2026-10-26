@@ -74,6 +74,15 @@ struct StationMapScreen: View {
                 arr = link.arrival; dep = link.departure
                 operatorA = link.operatorA; operatorB = link.operatorB
                 canceledA = link.canceledA; canceledB = link.canceledB; live = link.live
+                #if DEBUG
+                // `-stationSteps` opens the directions list, to check or photograph it.
+                if CommandLine.arguments.contains("-stationSteps") { showSteps = true }
+                // `-stationTime <ms>` looks at opening hours at that moment (a layover seen from the morning it happens).
+                let args = CommandLine.arguments
+                if let at = args.firstIndex(of: "-stationTime"), args.indices.contains(at + 1), let ms = Double(args[at + 1]) {
+                    picked = Date(timeIntervalSince1970: ms / 1000)
+                }
+                #endif
             }
             info = await app.stations.info(link.stationId)
             if let map = await app.stations.map(link.stationId) {
