@@ -16,3 +16,7 @@ DerivedData/
 .DS_Store
 data/cache
 .build/
+
+# The observed record and raw timetable copies (data, not code; backed up to the owner's Mac)
+data/observed/
+data/archive/

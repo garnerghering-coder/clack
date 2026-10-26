@@ -19,7 +19,7 @@
 2. **Cheap.** Free data sources, free map data, no paid tiles or paid APIs. Respect every quota. (The Apple Developer Program and the hosted VM are the only costs; nothing in the code is paid per request.)
 3. **Native on iPhone.** The only client is the SwiftUI app in `apps/Clack`. There is no web app, no PWA and no wrapper around a web view.
 4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab, Entur or Digitraffic itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
-5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again.
+5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again. The same goes for every train, not just saved legs: what actually happened is recorded as it happens and kept (§5.6).
 6. **i18n from day one.** Every user-facing string is a key in the app's String Catalog (`ClackCore/Resources/Localizable.xcstrings`); English and Swedish ship together.
 7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur, Finland through Digitraffic), so a new country plugs in without touching the core.
 8. **Nothing made up.** A train type, livery, line or amenity with no source is not shown (an unpainted train, "Train type not known"), and an estimate is always labelled as one.
@@ -104,7 +104,26 @@ TRAFIKLAB_GTFS_SVERIGE2_KEY=
 - **One poller per train per date**, shared across users; the backend pushes updates to clients over SSE/WebSocket. Clients never call Trafikverket directly.
 - Phase 0 must confirm schema versions, streaming vs polling behavior, connection/rate limits, and which operators actually report positions.
 
-### 5.6 Not used in Phase 1 (possibly later)
+### 5.6 The observed record: what actually happened to every train
+The data is the product; the app is how it's shown. From 2026-10-27 the server keeps what actually happened to every
+passenger train in Sweden, Norway and Finland, whether or not anyone saved it (`apps/server/src/observed/`), so a trip
+added a year later shows its real times, platforms, cancellations and causes.
+- **Two layers.** Every source answer is kept untouched in a raw archive (`data/observed/<source>/<yyyy>/<date>/`,
+  NDJSON, brotli, written once, never changed). The database holds a projection for the app: `observed_runs` (one row
+  per train per service day) and `observed_calls` (one per stop), with fields that have no column kept as JSON, and
+  timing points passed without stopping kept per run (so a trip can be replayed on the map without stored positions).
+  Repeated bookkeeping (ids, web links, sign "via" lists) is left to the raw archive. Nothing is deleted.
+- **Sweden (Trafikverket):** every announcement of every train, nightly for yesterday and again until final (3 days
+  later; Trafikverket keeps ~4 days), passage points included; incidents (`OperativeEvent`), their reason-coded events
+  (`RailwayEvent`), platform-sign messages (`TrainStationMessage`); the `ReasonCode` list weekly.
+- **Finland (Digitraffic):** every train of each day with all its rows and causes, and every composition, nightly; a
+  slow backfill to 2016-01 (Digitraffic keeps its history).
+- **Norway (Entur):** each train's calls from Journey Planner ~15 min after it arrives (Entur keeps actual times only
+  briefly), disruption messages (SIRI-SX) as they change, and Entur's public BigQuery archive the next morning and back
+  to 2020 (free sandbox, within its monthly allowance).
+- Sizes measured 2026-10-26: Sweden ~3.3 MB raw and ~10 MB of projection a day, Finland ~0.5 MB and ~4.5 MB.
+
+### 5.7 Not used in Phase 1 (possibly later)
 KoDa (regional historical realtime since Feb 2020), Oxyfi realtime positioning (limited to a few regional operators, one websocket per key, server must relay), GTFS Sweden 3 Realtime / GTFS Regional realtime, ResRobot, NeTEx, SIRI.
 
 ## 6. Phase 0 — Data verification spike (do this first)

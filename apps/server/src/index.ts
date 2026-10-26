@@ -3,6 +3,7 @@ import { LOCAL_USER_ID, openDb } from './db/client.js';
 import { buildApp } from './app.js';
 import { bootstrap } from './import/run.js';
 import { startScheduler } from './jobs/scheduler.js';
+import { startObserved } from './observed/index.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
@@ -70,6 +71,8 @@ if (process.env.JOBS !== 'off') {
     .then(ready);
   // Live tracking runs alongside the imports (it only needs saved trips).
   startLiveTracker(db, { log });
+  // The observed record: what actually happened to every train (src/observed/).
+  startObserved(db, log);
   // Alerts and Live Activities: only when the Apple key is set up (APNS_KEY_ID, APNS_TEAM_ID, APNS_KEY_PATH, APNS_TOPIC).
   const apns = loadApnsConfig();
   if (apns) {

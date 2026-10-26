@@ -513,3 +513,97 @@ export const journeyFollowers = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.token, t.userId] })],
 );
+
+// ---------- Observed record: what actually happened to every train (SPEC §5.6) ----------
+// The data is the product: every passenger train in Sweden, Norway and Finland, every day, as it really ran. The
+// collectors in src/observed/ keep each source's full answer, untouched, in data/observed/ (the raw archive) and this
+// projection of it for the app. Rows are never deleted. Fields with no column of their own go in the JSON columns, so
+// the projection drops nothing the source said about a passenger train.
+
+/** One train on one service day. */
+export const observedRuns = sqliteTable(
+  'observed_runs',
+  {
+    /** SE | NO | FI */
+    country: text('country').notNull(),
+    /** The day the train started, in its country's time zone. */
+    serviceDate: text('service_date').notNull(),
+    /** The source's id for the run: Trafikverket AdvertisedTrainIdent, Digitraffic trainNumber, Entur datedServiceJourneyId. */
+    runId: text('run_id').notNull(),
+    trainNumber: text('train_number'),
+    /** trafikverket | digitraffic | entur | entur-bigquery */
+    source: text('source').notNull(),
+    /** The source's operator code (Trafikverket Operator, Digitraffic operatorShortCode, Entur codespace). */
+    operator: text('operator'),
+    /** The source's product or train type text (ProductInformation, trainType, line). */
+    product: text('product'),
+    /** 0 ran, 1 partly cancelled, 2 cancelled throughout. */
+    canceled: integer('canceled').notNull().default(0),
+    originLocation: text('origin_location'),
+    destLocation: text('dest_location'),
+    schedDep: timestamp('sched_dep'),
+    schedArr: timestamp('sched_arr'),
+    actualDep: timestamp('actual_dep'),
+    actualArr: timestamp('actual_arr'),
+    /** Arrival delay at the last stop, in seconds (null when it has no actual time). */
+    arrDelaySec: integer('arr_delay_sec'),
+    /** Everything else the source says about the whole run (product codes, traffic type, composition, ids …). */
+    info: text('info', { mode: 'json' }).$type<Record<string, unknown>>().notNull().default(sql`'{}'`),
+    /** Timing points passed without a stop: [location, 'A'|'D', planned epoch s, delay s | null][] (replay on the map). */
+    passages: text('passages', { mode: 'json' }).$type<[string, 'A' | 'D', number, number | null][]>().notNull().default(sql`'[]'`),
+    fetchedAt: timestamp('fetched_at').notNull(),
+    /** The source won't change it any more (Trafikverket after ~3 days, Digitraffic after 2). */
+    final: integer('final', { mode: 'boolean' }).notNull().default(false),
+  },
+  (t) => [primaryKey({ columns: [t.country, t.serviceDate, t.runId] }), index('observed_runs_number').on(t.trainNumber, t.serviceDate)],
+);
+
+/** One stop of an observed run (where passengers can get on or off). */
+export const observedCalls = sqliteTable(
+  'observed_calls',
+  {
+    country: text('country').notNull(),
+    serviceDate: text('service_date').notNull(),
+    runId: text('run_id').notNull(),
+    seq: integer('seq').notNull(),
+    /** The source's code for the place: Trafikverket signature, Digitraffic short code, NSR quay or stop place. */
+    location: text('location').notNull(),
+    /** Our station, when one matches. */
+    stationId: text('station_id'),
+    schedArr: timestamp('sched_arr'),
+    schedDep: timestamp('sched_dep'),
+    /** The last estimate the source gave. */
+    estArr: timestamp('est_arr'),
+    estDep: timestamp('est_dep'),
+    actualArr: timestamp('actual_arr'),
+    actualDep: timestamp('actual_dep'),
+    platform: text('platform'),
+    canceledArr: integer('canceled_arr', { mode: 'boolean' }).notNull().default(false),
+    canceledDep: integer('canceled_dep', { mode: 'boolean' }).notNull().default(false),
+    /** Deviation and cause codes with the source's own text: [{src, code?, text?}]. Mapped to words when shown. */
+    causes: text('causes', { mode: 'json' }).$type<{ src: string; code?: string; text?: string }[]>().notNull().default(sql`'[]'`),
+    /** Every other field the source sent for this stop: { a: arrival fields, d: departure fields }. */
+    extra: text('extra', { mode: 'json' }).$type<Record<string, unknown>>().notNull().default(sql`'{}'`),
+  },
+  (t) => [primaryKey({ columns: [t.country, t.serviceDate, t.runId, t.seq] }), index('observed_calls_station').on(t.stationId, t.serviceDate)],
+);
+
+/** What each collector has fetched: one row per source, kind and day, so gaps show and get retried. */
+export const observedFetches = sqliteTable(
+  'observed_fetches',
+  {
+    /** trafikverket | digitraffic | entur | entur-bigquery */
+    source: text('source').notNull(),
+    /** announcements | events | trains | compositions | calls | situations … */
+    kind: text('kind').notNull(),
+    date: text('date').notNull(),
+    fetchedAt: timestamp('fetched_at').notNull(),
+    /** Records in the raw file, and runs written to the projection. */
+    records: integer('records').notNull(),
+    runs: integer('runs').notNull().default(0),
+    /** Path under data/observed/. */
+    file: text('file').notNull(),
+    final: integer('final', { mode: 'boolean' }).notNull().default(false),
+  },
+  (t) => [primaryKey({ columns: [t.source, t.kind, t.date] })],
+);
