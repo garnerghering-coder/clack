@@ -22,6 +22,9 @@ public nonisolated enum Config {
         return hosted
         #endif
     }()
+    /// "Buy ticket with Omio" opens Omio's home page through Clack's own affiliate link (Impact), made once in the Impact
+    /// dashboard (owner, 2026-10-26). It does not fill in a journey; that can come later.
+    public static let omioURL = URL(string: "https://omio.sjv.io/DWG092")!
     /// The address of the links people share (`https://<host>/j/<token>`): the hosted server's own name, and its older
     /// free name, which keeps working for links and builds made before getclack.app. A link on another host is not ours
     /// and opens nothing.

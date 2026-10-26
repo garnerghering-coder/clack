@@ -11,38 +11,33 @@ import SwiftUI
 /// (docs/swift-port/SCREENS.md §3.7). Buying happens on the operator's own site: no checkout, payments or affiliate
 /// links in Clack.
 struct BuyTicket: View {
-    @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
     @Environment(\.openURL) private var openURL
     let trip: TicketTrip
     /// Already one of your trips: nothing to offer when you come back.
     var inTrips = false
 
+    /// Where the ticket is bought (shown on the button's return prompt).
+    private static let site = "omio.com"
+
     var body: some View {
-        if let op = trip.operatorId.flatMap({ app.operatorsById[$0] }), let base = op.ticketUrl, trip.to.time >= Date.now.timeIntervalSince1970 * 1000 {
-            let site = TicketPendingStore.host(of: base)
-            let href = Tickets.href(base: base, deepLink: op.ticketDeepLink, trip: trip)
+        if trip.to.time >= Date.now.timeIntervalSince1970 * 1000 {
             VStack(alignment: .leading, spacing: 4) {
                 Button {
                     // Only to offer adding it when you're back; never taken as a purchase.
                     if !inTrips, trip.tripKey != nil, trip.serviceDate != nil {
-                        TicketPendingStore.write(TicketPending(trip: trip, at: Date.now.timeIntervalSince1970 * 1000, site: site))
+                        TicketPendingStore.write(TicketPending(trip: trip, at: Date.now.timeIntervalSince1970 * 1000, site: Self.site))
                     }
-                    if let url = URL(string: href) { openURL(url) }
+                    openURL(Config.omioURL)
                 } label: {
                     HStack(spacing: 8) {
                         LucideIcon(name: "external-link", size: 16)
-                        Text(l10n.t("tickets.buyAt", ["site": site]))
+                        Text(l10n.t("tickets.buyOmio"))
                     }
                 }
                 .buttonStyle(.clack())
-                Text(l10n.t("tickets.searchFor", [
-                    "from": trip.from.name, "to": trip.to.name,
-                    "day": Format.day(trip.from.time, tz: trip.from.tz, language: app.settings.language),
-                    "time": Format.time(trip.from.time, tz: trip.from.tz, clock: app.settings.clock),
-                    "train": [op.name, trip.trainNumber].compactMap { $0 }.joined(separator: " "),
-                ]))
-                .clack(.caption).foregroundStyle(Ink.text2)
+                // The affiliate relationship, said plainly next to the button.
+                Text(l10n.t("tickets.omioNote")).clack(.caption).foregroundStyle(Ink.text2)
             }
             .padding(.top, 8)
         }
