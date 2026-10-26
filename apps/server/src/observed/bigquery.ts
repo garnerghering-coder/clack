@@ -27,7 +27,10 @@ const TABLE = '`ent-data-sharing-ext-prd.realtime_siri_et.realtime_siri_et_last_
  * (12 March 2024: 540 of 1,470 trains had one of 16 such quays). Each quay's newest version is used.
  */
 const QUAYS = '`ent-data-sharing-ext-prd.national_stop_registry.quays_all_versions`';
-export const HISTORY_START = '2020-01-01';
+/** How far back Clack keeps Norway's record (owner, 2026-10-27: from 1 January 2021; the archive has 2020 too). */
+export const HISTORY_START = '2021-01-01';
+/** Days this recent are projected as they are fetched; older ones are kept raw and projected when first asked for. */
+export const PROJECT_DAYS = 30;
 /** Our monthly ceiling, well under the sandbox's 1 TiB. */
 export const MONTHLY_BYTES = 800e9;
 /** A day costing more than this is a sign the query or the table changed: stop and look. */
@@ -181,7 +184,7 @@ export function project(date: string, rows: BqRow[], quay: Map<string, [string |
 }
 
 /** Fetch, archive and project one operating day. Throws past the monthly ceiling or on an oddly expensive day. */
-export async function collectDay(db: Db, date: string, opts: { now?: number; log?: (m: string) => void; stationByNsr?: Map<string, string> } = {}) {
+export async function collectDay(db: Db, date: string, opts: { now?: number; log?: (m: string) => void; stationByNsr?: Map<string, string>; project?: boolean } = {}) {
   const now = opts.now ?? Date.now();
   const dry = await bigQuery(DAY_SQL, { dryRun: true, params: { date } });
   if (dry.bytes > MAX_DAY_BYTES) throw new Error(`BigQuery day ${date} would scan ${(dry.bytes / 1e9).toFixed(1)} GB; not run`);
@@ -189,7 +192,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
   const { rows, bytes } = await bigQuery(DAY_SQL, { params: { date } });
   addUsage(bytes, now);
   const file = writeRaw(SOURCE, date, 'siri-et', rows, { now });
-  const runs = project(date, rows, await quays(now), opts.stationByNsr ?? (await stationsByPlace(db, now)));
+  const runs = opts.project === false ? [] : project(date, rows, await quays(now), opts.stationByNsr ?? (await stationsByPlace(db, now)));
   // Our own same-day record has platforms and messages this table lacks; it's kept where both exist.
   const written = saveRuns(db, runs, now, { keepSources: ['entur'] });
   recordFetch(db, { source: SOURCE, kind: 'siri-et', date, records: rows.length, runs: written, file, final: true }, now);
@@ -215,10 +218,78 @@ export async function backfillStep(db: Db, opts: { now?: number; log?: (m: strin
   const done = new Set((db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'siri-et'`).all(SOURCE) as { date: string }[]).map((r) => r.date));
   for (let date = addDays(todayIn('Europe/Oslo', now), -2); date >= HISTORY_START; date = addDays(date, -1)) {
     if (done.has(date)) continue;
-    await collectDay(db, date, opts);
+    await collectDay(db, date, { ...opts, project: date >= addDays(todayIn('Europe/Oslo', now), -PROJECT_DAYS) });
     return date;
   }
   return null;
+}
+
+/** Project one day already in the raw archive, replacing what's stored for it from this source. */
+export async function projectDay(db: Db, date: string, ctx?: { quay: Awaited<ReturnType<typeof quays>>; stationByNsr: Map<string, string> }): Promise<number> {
+  const { rawFiles, readRaw } = await import('./archive.js');
+  const file = rawFiles(SOURCE, date, 'siri-et').at(-1);
+  if (!file) return 0;
+  const runs = project(date, readRaw<BqRow>(file), ctx?.quay ?? (await quays(Date.now())), ctx?.stationByNsr ?? (await stationsByPlace(db)));
+  db.$client.transaction(() => {
+    db.$client.prepare(`delete from observed_calls where country = 'NO' and service_date = ? and run_id in (select run_id from observed_runs where country = 'NO' and service_date = ? and source = ?)`).run(date, date, SOURCE);
+    db.$client.prepare(`delete from observed_runs where country = 'NO' and service_date = ? and source = ?`).run(date, SOURCE);
+  })();
+  const written = saveRuns(db, runs, Date.now(), { keepSources: ['entur'] });
+  db.$client.prepare(`update observed_fetches set runs = ? where source = ? and kind = 'siri-et' and date = ?`).run(written, SOURCE, date);
+  return written;
+}
+
+/**
+ * Fill a range of days fast (npm run import -- observed-backfill --country=NO): a week per query instead of a day
+ * (a week of 2022 is ~120,000 rows, 0.6 GB scanned, ~20 s), several weeks at once, each day written to the raw archive.
+ * Only days within PROJECT_DAYS are projected now; the rest when first asked for. Days already fetched are skipped.
+ */
+export async function backfillRange(db: Db, opts: { from: string; to?: string; parallel?: number; log?: (m: string) => void }) {
+  const log = opts.log ?? console.log;
+  const now = Date.now();
+  const today = todayIn('Europe/Oslo', now);
+  const to = opts.to ?? addDays(today, -2);
+  const done = new Set((db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'siri-et'`).all(SOURCE) as { date: string }[]).map((r) => r.date));
+  const weeks: [string, string][] = [];
+  for (let d = opts.from; d <= to; d = addDays(d, 7)) {
+    const end = addDays(d, 6) < to ? addDays(d, 6) : to;
+    let missing = false;
+    for (let x = d; x <= end; x = addDays(x, 1)) if (!done.has(x)) missing = true;
+    if (missing) weeks.push([d, end]);
+  }
+  const quay = await quays(now);
+  const stationByNsr = await stationsByPlace(db, now);
+  const projectFrom = addDays(today, -PROJECT_DAYS);
+  const sql = `SELECT * FROM ${TABLE} WHERE operatingDate BETWEEN @from AND @to AND vehicleMode = 'rail'`;
+  let next = 0;
+  let rowsTotal = 0;
+  const t0 = Date.now();
+  const worker = async () => {
+    for (let i = next++; i < weeks.length; i = next++) {
+      const [from, end] = weeks[i]!;
+      const dry = await bigQuery(sql, { dryRun: true, params: { from, to: end } });
+      if (dry.bytes > MAX_DAY_BYTES * 7) throw new Error(`BigQuery week ${from} would scan ${(dry.bytes / 1e9).toFixed(1)} GB; stopped`);
+      if (bytesThisMonth() + dry.bytes > MONTHLY_BYTES) throw new Error('BigQuery monthly ceiling reached; run again next month');
+      const { rows, bytes } = await bigQuery(sql, { params: { from, to: end } });
+      addUsage(bytes, Date.now());
+      const byDay = new Map<string, BqRow[]>();
+      for (const r of rows) {
+        const d = String(r.operatingDate ?? '').slice(0, 10);
+        (byDay.get(d) ?? byDay.set(d, []).get(d)!).push(r);
+      }
+      for (const [date, list] of byDay) {
+        if (done.has(date)) continue;
+        const file = writeRaw(SOURCE, date, 'siri-et', list);
+        const runs = date >= projectFrom ? project(date, list, quay, stationByNsr) : [];
+        const written = saveRuns(db, runs, Date.now(), { keepSources: ['entur'] });
+        recordFetch(db, { source: SOURCE, kind: 'siri-et', date, records: list.length, runs: written, file, final: true });
+      }
+      rowsTotal += rows.length;
+      log(`NO backfill ${from}..${end}: ${rows.length} rows, ${(bytes / 1e9).toFixed(2)} GB (${i + 1}/${weeks.length} weeks, ${Math.round((Date.now() - t0) / 60_000)} min)`);
+    }
+  };
+  await Promise.all(Array.from({ length: opts.parallel ?? 3 }, worker));
+  log(`NO backfill done: ${weeks.length} weeks, ${rowsTotal} rows, ${(bytesThisMonth() / 1e9).toFixed(0)} GB used this month`);
 }
 
 /**

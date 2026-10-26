@@ -1,4 +1,4 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|history|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import { config } from './env.js';
 import { openDb } from './db/client.js';
 import { bootstrap, refreshTrvStations, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
@@ -25,6 +25,15 @@ if (cmd === 'gtfs') {
   const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
   if (!from) throw new Error('history needs --from=YYYY-MM-DD');
   await backfillSweden(db, { from, to: flags.find((f) => f.startsWith('--to='))?.slice(5) });
+} else if (cmd === 'observed-backfill') {
+  // The observed record's past, fast: --country=NO|FI --from=YYYY-MM-DD [--to=…] [--parallel=N].
+  const country = flags.find((f) => f.startsWith('--country='))?.slice(10);
+  const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
+  const to = flags.find((f) => f.startsWith('--to='))?.slice(5);
+  const parallel = Number(flags.find((f) => f.startsWith('--parallel='))?.slice(11)) || undefined;
+  if (!from || (country !== 'NO' && country !== 'FI')) throw new Error('observed-backfill needs --country=NO|FI and --from=YYYY-MM-DD');
+  const mod = country === 'NO' ? await import('./observed/bigquery.js') : await import('./observed/finland.js');
+  await mod.backfillRange(db, { from, to, parallel });
 } else if (cmd === 'reproject') {
   // Rebuild the observed record's Norwegian archive days from the raw files (after a change to how they're read).
   const { reproject } = await import('./observed/bigquery.js');
@@ -41,6 +50,6 @@ if (cmd === 'gtfs') {
   const r = await runAudit(db, { log: console.log });
   console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | history | reproject | trv-stations | basemap | logos | bootstrap | audit`);
+  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
   process.exitCode = 1;
 }

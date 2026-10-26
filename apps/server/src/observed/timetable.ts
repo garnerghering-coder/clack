@@ -152,8 +152,10 @@ export function ensureRecordedDay(db: Db, country: RecordCountry, date: string, 
     return 'ready';
   }
   if (country === 'NO' && !bq.bigQueryEnabled()) return 'unavailable';
-  // Fetched before but kept raw only (Finland's deep backfill), or not fetched yet: get it, then write it.
-  const run = (country === 'FI' ? (have ? fi.projectFromRaw(db, date) : fi.collectDay(db, date, { log: opts.log })) : bq.collectDay(db, date, { log: opts.log })).then(() => writeDay(db, country, date));
+  // Fetched before but kept raw only (older days of the backfills), or not fetched yet: get it, then write it.
+  const run = (
+    country === 'FI' ? (have ? fi.projectFromRaw(db, date) : fi.collectDay(db, date, { log: opts.log })) : have ? bq.projectDay(db, date) : bq.collectDay(db, date, { log: opts.log })
+  ).then(() => writeDay(db, country, date));
   inflight.set(k, run);
   run.then(
     () => failures.delete(k),

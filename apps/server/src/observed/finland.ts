@@ -20,8 +20,11 @@ const TZ = COUNTRIES.FI.tz;
 export const SOURCE = 'digitraffic';
 /** Digitraffic settles a day's data within about a day; the second night's fetch is final. */
 export const FINAL_AFTER_DAYS = 2;
-/** The oldest day Digitraffic was seen to have in full (2015-06-01 came back empty; 2016-01-15 full). */
-export const HISTORY_START = '2016-01-01';
+/**
+ * How far back Clack keeps Finland's record (owner, 2026-10-27: from 1 January 2021). Digitraffic has full days back
+ * to at least 2016-01-15 (2015-06-01 came back empty), should that ever be wanted.
+ */
+export const HISTORY_START = '2021-01-01';
 
 type Row = DtRow & Record<string, unknown>;
 type Train = Omit<DtTrain, 'timeTableRows'> & Record<string, unknown> & { timeTableRows: Row[] };
@@ -185,8 +188,8 @@ export async function runFinland(db: Db, opts: { now?: number; fetchImpl?: typeo
   }
 }
 
-/** Days within this many of today get projected during the backfill; older ones are kept raw (projectable later). */
-export const BACKFILL_PROJECT_DAYS = 730;
+/** Days within this many of today get projected during the backfill; older ones are kept raw and projected when first asked for. */
+export const BACKFILL_PROJECT_DAYS = 30;
 
 /**
  * One step of the backfill: the newest day before today that has no final fetch, back to HISTORY_START. Returns the
@@ -215,4 +218,32 @@ export async function projectFromRaw(db: Db, date: string): Promise<number> {
   const trains = readRaw<Train>(t);
   const runs = project(date, trains, c ? readRaw<Composition>(c) : [], await stationsForTrains(db, trains), true);
   return saveRuns(db, runs);
+}
+
+/**
+ * Fill a range of days fast (npm run import -- observed-backfill --country=FI): several days at once, within
+ * Digitraffic's limit (the shared limiter keeps this process to 40 requests a minute, two a day: ~20 days a minute).
+ */
+export async function backfillRange(db: Db, opts: { from: string; to?: string; parallel?: number; log?: (m: string) => void }) {
+  const log = opts.log ?? console.log;
+  const today = todayIn(TZ, Date.now());
+  const to = opts.to ?? addDays(today, -(FINAL_AFTER_DAYS + 1));
+  const done = new Set((db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'trains' and final = 1`).all(SOURCE) as { date: string }[]).map((r) => r.date));
+  const days: string[] = [];
+  for (let d = to; d >= opts.from; d = addDays(d, -1)) if (!done.has(d)) days.push(d);
+  let next = 0;
+  const t0 = Date.now();
+  const worker = async () => {
+    for (let i = next++; i < days.length; i = next++) {
+      const date = days[i]!;
+      try {
+        await collectDay(db, date, { projectRuns: date >= addDays(today, -BACKFILL_PROJECT_DAYS) });
+      } catch (e) {
+        log(`FI backfill ${date} failed: ${(e as Error).message}`);
+      }
+      if (i % 50 === 0) log(`FI backfill ${date}: ${i + 1}/${days.length} days (${Math.round((Date.now() - t0) / 60_000)} min)`);
+    }
+  };
+  await Promise.all(Array.from({ length: opts.parallel ?? 4 }, worker));
+  log(`FI backfill done: ${days.length} days in ${Math.round((Date.now() - t0) / 60_000)} min`);
 }
