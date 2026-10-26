@@ -183,3 +183,18 @@ describe('the record', () => {
     expect(cancelLevel([c(false, false), c(false, false)])).toBe(0);
   });
 });
+
+describe('empty days', () => {
+  it("doesn't mark a day Trafikverket no longer has as done", async () => {
+    const { collectDay } = await import('../src/observed/sweden.js');
+    const { fetchOf } = await import('../src/observed/store.js');
+    const db = openDb(':memory:');
+    process.env.TRAFIKVERKET_API_KEY ||= 'test';
+    const { config } = await import('../src/env.js');
+    config.trafikverketApiKey ||= 'test';
+    const empty = (async () => new Response(JSON.stringify({ RESPONSE: { RESULT: [{ TrainAnnouncement: [] }] } }))) as typeof fetch;
+    const r = await collectDay(db, '2026-10-22', { fetchImpl: empty, now: Date.parse('2026-10-26T20:00:00Z') });
+    expect(r).toEqual({ records: 0, runs: 0 });
+    expect(fetchOf(db, 'trafikverket', 'announcements', '2026-10-22')).toBeNull();
+  });
+});

@@ -3,7 +3,7 @@
 //    plus the day's incidents and messages; Trafikverket's code list each Monday.
 //  - Finland: each night at 04:40 (Helsinki); and a slow backfill of every day back to 2016.
 //  - Norway: every 5 minutes, the journeys that have just arrived; disruption messages every 10 minutes; Entur's
-//    BigQuery archive each morning at 07:30 (Oslo) for yesterday, and a backfill back to 2020.
+//    BigQuery archive each morning at 07:30 (Oslo) for yesterday, and a backfill back to 2020 (one day every 2 minutes).
 // OBSERVED=off turns it all off; OBSERVED_BACKFILL=off keeps the nightly rounds but not the backfills.
 import cron from 'node-cron';
 import type { Db } from '../db/client.js';
@@ -58,11 +58,12 @@ export function startObserved(db: Db, log: (m: string) => void): () => void {
         log('observed FI backfill complete');
       }
     });
-    // Norway: one day every 10 minutes, within the month's BigQuery budget.
+    // Norway: one day every 2 minutes (a day scans ~0.07 GB, measured 2026-10-26: 2020 to now is ~170 GB, well under
+    // the month's budget, which backfillStep also checks).
     const bqStep = guard('Norway BigQuery backfill', async () => {
       if ((await bq.backfillStep(db, { log })) === null && bq.bigQueryEnabled()) log('observed NO backfill: done or paused for the month');
     });
-    timers.push(setInterval(fiStep, 60_000), setInterval(bqStep, 10 * 60_000));
+    timers.push(setInterval(fiStep, 60_000), setInterval(bqStep, 2 * 60_000));
   }
 
   // Catch up now: Trafikverket still has the last ~4 days, and anything missed while the server was down.

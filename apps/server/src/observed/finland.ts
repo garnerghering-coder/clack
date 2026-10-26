@@ -132,6 +132,11 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; fet
   const now = opts.now ?? Date.now();
   const final = date <= addDays(todayIn(TZ, now), -FINAL_AFTER_DAYS);
   const trains = await fetchJson<Train[]>(`trains/${date}`, { fetchImpl: opts.fetchImpl });
+  // An empty day means Digitraffic doesn't have it (yet), not that no train ran: don't call it done.
+  if (!Array.isArray(trains) || !trains.length) {
+    opts.log?.(`observed FI ${date}: Digitraffic has nothing for this day`);
+    return { records: 0, runs: 0 };
+  }
   const compositions = await fetchJson<Composition[]>(`compositions/${date}`, { fetchImpl: opts.fetchImpl });
   const tFile = writeRaw(SOURCE, date, 'trains', trains, { now });
   const cFile = writeRaw(SOURCE, date, 'compositions', compositions, { now });

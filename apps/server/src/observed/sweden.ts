@@ -218,6 +218,11 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; fet
   const final = date <= addDays(todayIn(TZ, now), -FINAL_AFTER_DAYS);
   const t0 = Date.now();
   const rows = await fetchDay(date, opts);
+  // Nothing back means Trafikverket no longer (or not yet) has the day, not that no train ran: don't call it done.
+  if (!rows.length) {
+    opts.log?.(`observed SE ${date}: Trafikverket has nothing for this day`);
+    return { records: 0, runs: 0 };
+  }
   const file = writeRaw(SOURCE, date, 'announcements', rows, { now });
   const runs = project(date, rows, stationsBySignature(db), final);
   const written = saveRuns(db, runs, now);
