@@ -104,7 +104,7 @@ async function unpackInner(zipPath: string, name: string, out: string) {
 }
 
 /** Dates already imported from the archive, from the import log. */
-function coveredDates(db: Db): Set<string> {
+export function coveredDates(db: Db): Set<string> {
   const out = new Set<string>();
   for (const r of db.$client.prepare(`select notes from import_log where source = ? and status = 'ok'`).all(HISTORY_SOURCE) as { notes: string }[])
     for (const d of trustedDates(JSON.parse(r.notes) as ImportNotes)) out.add(d);

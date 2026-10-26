@@ -20,6 +20,9 @@ export function openDb(file: string): Db {
   const sqlite = new Database(file);
   sqlite.pragma('journal_mode = WAL');
   sqlite.pragma('foreign_keys = ON');
+  // Another process (the history backfill, a manual import) may hold the write lock for a few seconds: wait for it
+  // rather than fail at once.
+  sqlite.pragma('busy_timeout = 15000');
   const db = drizzle(sqlite, { schema });
   migrate(db, { migrationsFolder: MIGRATIONS });
   db.insert(schema.users).values({ id: LOCAL_USER_ID, settings: DEFAULT_SETTINGS }).onConflictDoNothing().run();

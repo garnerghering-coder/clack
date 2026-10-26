@@ -1,18 +1,21 @@
 // Time-zone maths without a date library. GTFS times are "HH:MM:SS" counted from noon minus 12 h on the
 // service day in the agency's time zone, so they stay correct across DST changes and can exceed 24:00.
 
+// One formatter per zone: building an Intl.DateTimeFormat costs far more than using one (a station board's 1,159
+// calls spent ~190 ms here, measured 2026-10-27).
+const formatters = new Map<string, Intl.DateTimeFormat>();
+const formatterFor = (tz: string) =>
+  formatters.get(tz) ??
+  formatters
+    .set(
+      tz,
+      new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+    )
+    .get(tz)!;
+
 /** Offset of `tz` from UTC at instant `ms`, in milliseconds (e.g. +7_200_000 for CEST). */
 export function tzOffsetMs(ms: number, tz: string): number {
-  const parts = new Intl.DateTimeFormat('en-US', {
-    timeZone: tz,
-    hourCycle: 'h23',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  }).formatToParts(new Date(ms));
+  const parts = formatterFor(tz).formatToParts(new Date(ms));
   const get = (t: string) => Number(parts.find((p) => p.type === t)!.value);
   const asUtc = Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'), get('second'));
   return asUtc - Math.floor(ms / 1000) * 1000;

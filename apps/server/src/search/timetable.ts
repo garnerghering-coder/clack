@@ -122,11 +122,15 @@ function toResult(trip: TripRow, stops: StopRow[], from: StopRow, to: StopRow): 
   };
 }
 
-/** Trips on service day D or D-1 (after-midnight runs), as candidate rows. */
+/**
+ * Trips on service day D or D-1 (after-midnight runs), as candidate rows. The day's trips drive the query (CROSS JOIN
+ * keeps SQLite from starting at a station's every trip ever stored, which grows with each year of history); `where`
+ * then checks each of them, its stops found by the (trip_key, seq) key.
+ */
 function candidateTrips(db: Db, date: string, where: ReturnType<typeof sql>): TripRow[] {
   return db.all<TripRow>(sql`
     select t.key, d.service_date, t.train_number, t.operator_id, t.category, t.route_type, t.route_name, t.tz
-    from timetable_trips t join timetable_trip_dates d on d.trip_key = t.key
+    from timetable_trip_dates d cross join timetable_trips t on t.key = d.trip_key
     where d.service_date in (${addDays(date, -1)}, ${date}) and ${where}`);
 }
 
@@ -169,10 +173,10 @@ export function searchByRoute(db: Db, fromId: string, toId: string, date: string
   const trips = candidateTrips(
     db,
     date,
-    sql`t.key in (
-      select a.trip_key from timetable_stop_times a
+    sql`exists (
+      select 1 from timetable_stop_times a
       join timetable_stop_times b on b.trip_key = a.trip_key and b.seq > a.seq and b.station_id = ${toId} and b.no_dropoff = 0
-      where a.station_id = ${fromId} and a.no_pickup = 0) ${op}`,
+      where a.trip_key = t.key and a.station_id = ${fromId} and a.no_pickup = 0) ${op}`,
   );
   const stopsByTrip = loadStops(db, [...new Set(trips.map((t) => t.key))]);
   const results: TripResult[] = [];
@@ -210,7 +214,7 @@ export function searchConnections(db: Db, fromId: string, toId: string, date: st
   if (fromId === toId) return [];
   const minChange = (opts.minChangeMin ?? MIN_CHANGE_MIN) * 60_000;
   const callsAt = (station: string, flag: 'no_pickup' | 'no_dropoff') =>
-    sql`t.key in (select trip_key from timetable_stop_times where station_id = ${station} and ${sql.raw(flag)} = 0)`;
+    sql`exists (select 1 from timetable_stop_times s where s.trip_key = t.key and s.station_id = ${station} and s.${sql.raw(flag)} = 0)`;
   const firsts = candidateTrips(db, date, callsAt(fromId, 'no_pickup'));
   // Second trains may run into the next day (a late change), or have started the day before.
   const seconds = [...candidateTrips(db, date, callsAt(toId, 'no_dropoff')), ...candidateTrips(db, addDays(date, 1), callsAt(toId, 'no_dropoff'))];
@@ -340,9 +344,9 @@ export function callsAtStation(db: Db, stationId: string, dates: string[]): Stat
   const rows = db.all<TripRow & { seq: number; arr_sec: number | null; dep_sec: number | null }>(sql`
     select t.key, d.service_date, t.train_number, t.operator_id, t.category, t.route_type, t.route_name, t.tz,
            st.seq, st.arr_sec, st.dep_sec
-    from timetable_stop_times st
-    join timetable_trips t on t.key = st.trip_key
-    join timetable_trip_dates d on d.trip_key = t.key
+    from timetable_trip_dates d
+    cross join timetable_trips t on t.key = d.trip_key
+    cross join timetable_stop_times st on st.trip_key = d.trip_key
     where st.station_id = ${stationId} and d.service_date in (${sql.join(all.map((d) => sql`${d}`), sql`, `)})`);
   return rows.map((r) => ({
     tripKey: r.key,
