@@ -385,3 +385,22 @@ found, this is what the build does:
 | Rail network layer | DESIGN §2.4: off by default | **On by default** (owner, 2026-10-21): every rail line dimmed under the highlighted route, like a transit map | Owner's choice |
 | Operator logos | SPEC §18: logos once permissions are sorted | Each brand's own app icon (the one its website gives phones) is downloaded **onto the laptop** (`data/cache/logos/`) at first start and monthly; not committed. Brand colours re-taken from the icons | Owner asked for the real logos; downloading locally keeps trademarked files out of the public repo |
 | Basemap | SPEC §4: self-hosted Protomaps PMTiles | Cut from Protomaps' free daily planet build with range requests (plain Node, `npm run import -- basemap`), Nordics + northern Germany to z10, slimmed to the layers DESIGN §2.4 draws (land, water, places, borders, motorways): ~470 MB download once, ~80 MB on disk. MapLibre over-zooms beyond z10 | No tools to install, zero cost; the full tiles would be ~2 GB at z11 |
+
+## The observed record and history storage (checked 2026-10-26/27)
+
+- **A whole day of `TrainAnnouncement`** (every field, no `INCLUDE`), fetched an hour at a time: ~50,000–81,000 rows,
+  under a second per hour, 3.3 MB brotli (4.4 MB of JSON per hour). About 40% are `Advertised=false` timing points
+  passed without a stop, with actual times: kept, so a trip can be replayed on the map without storing positions.
+  2,379–3,457 passenger trains a day. Trafikverket returns nothing for a day ~4 days back.
+- **Other objects** (the old `TrainMessage` name no longer exists): `OperativeEvent` and `RailwayEvent` need
+  `namespace="ols.open"`, schema 1.0 (incidents with event type, affected stretch, position and the public message;
+  reason-coded events); `TrainStationMessage` 1.0 (platform-sign texts); `ReasonCode` 1 (787 codes with their
+  descriptions). A day of the first three is ~50 KB brotli. All kept by the observed record (SPEC §5.6).
+- **Projection size:** a Swedish day is ~10 MB in `observed_runs`/`observed_calls` once ids, web links and sign "via"
+  lists are left to the raw archive (they were three quarters of it). `WITHOUT ROWID` made those tables 2.4× larger
+  (rows of a few hundred bytes), so they are ordinary tables.
+- **Sverige 2, two years stored** (2024-10-27 to 2026-10-21, 26 four-week blocks, ~25 s each): 79,599 distinct trips
+  for 2,570,416 trip-days, ~280 MB, because a trip unchanged between snapshots is stored once (fingerprint keys).
+  Searches stay under 80 ms (route, number, connections, a Stockholm C board) once they start from the day's trips.
+- GTFS Sweden 3 `stops.txt` has `platform_code` on 119,393 of 179,551 stops (kept since 2026-10-27); no headsigns,
+  wheelchair or bike flags.

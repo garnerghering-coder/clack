@@ -122,6 +122,12 @@ added a year later shows its real times, platforms, cancellations and causes.
   briefly), disruption messages (SIRI-SX) as they change, and Entur's public BigQuery archive the next morning and back
   to 2020 (free sandbox, within its monthly allowance).
 - Sizes measured 2026-10-26: Sweden ~3.3 MB raw and ~10 MB of projection a day, Finland ~0.5 MB and ~4.5 MB.
+- **Older days from the record.** Norway and Finland publish no past timetables, so an older Norwegian or Finnish day
+  is searched from the record: its trains are written as timetable trips when the day is first asked for
+  (`observed/timetable.ts`; Norway from 2020-01-01, Finland from 2016-01-01), and a saved trip gets its actual times,
+  platforms and causes from the record once the live sources have forgotten its day.
+- **Sweden's archive** (§5.3) is stored two years ahead of anyone asking (`npm run import -- history`), and further
+  back on demand; archive trips unchanged between snapshots are stored once.
 
 ### 5.7 Not used in Phase 1 (possibly later)
 KoDa (regional historical realtime since Feb 2020), Oxyfi realtime positioning (limited to a few regional operators, one websocket per key, server must relay), GTFS Sweden 3 Realtime / GTFS Regional realtime, ResRobot, NeTEx, SIRI.

@@ -53,3 +53,17 @@ the Sources page and map attribution credit it as: `Source: Fintraffic / digitra
 - Cancellation comes per row: IC 142 on 2026-10-23 was cancelled between Pieksämäki and Jyväskylä and ran on from
   Jyväskylä about 95 minutes late; HDM 750 on 2026-10-22 was cancelled whole (`cancelled` true on the train and its rows).
 - Haparanda's arrival row is `countryCode` SE (`HPA`), commercial, with a platform.
+
+## History and the observed record (checked 2026-10-26/27)
+
+- `/trains/{date}` has full days back to at least **2016-01-15** (2015-06-01 came back empty). A day is ~1,300–1,800
+  trains (about 1,000–1,100 passenger), 17–19 MB as JSON, ~0.8 MB gzipped, ~0.5–0.6 MB brotli in our raw archive.
+  `/compositions/{date}` has every train's locomotives and wagons (type, length, `pet`, `catering`, `disabled`,
+  sales number, top speed), also back to 2016; ~0.8 MB.
+- The observed record fetches both every night (final the second night) and backfills to 2016 at one day a minute
+  (`apps/server/src/observed/finland.ts`). Days older than two years are kept raw only and projected when asked for.
+- Older days call at stations no longer served (VNA Vainikkala, ILR Ilmala ratapiha): they become historical-only
+  stations from `/metadata/stations`. Russian stations (the Helsinki–St Petersburg trains) stay out, as in the import:
+  on 2018-06-01, 1,114 of 1,123 passenger trains map to our stations.
+- Digitraffic's GTFS gives planned platforms on 467 of 1,306 stops, headsigns, `bikes_allowed`, and the commuter line
+  letter in `trip_short_name` ("A (HL 8192)"); all are kept now.
