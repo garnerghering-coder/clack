@@ -198,3 +198,12 @@ describe('empty days', () => {
     expect(fetchOf(db, 'trafikverket', 'announcements', '2026-10-22')).toBeNull();
   });
 });
+
+describe('Norway archive ids', () => {
+  it('reads both the older "<number>:<date>" ids and codespace ids', async () => {
+    const { journeyIdentity } = await import('../src/observed/bigquery.js');
+    expect(journeyIdentity({ serviceJourneyId: '471:2022-03-08', operatorRef: 'SJN', dataSource: 'BNR' })).toEqual({ operator: 'SJN', number: '471' });
+    expect(journeyIdentity({ serviceJourneyId: '1881:2022-03-08', operatorRef: 'VY', dataSource: 'BNR' })).toEqual({ operator: 'VYG', number: '1881' });
+    expect(journeyIdentity({ serviceJourneyId: 'VYG:ServiceJourney:61-LOD_617015-R', operatorRef: 'VYT', dataSource: 'VYG' })).toEqual({ operator: 'VYG', number: '61' });
+  });
+});

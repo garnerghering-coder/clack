@@ -17,7 +17,7 @@ import { bigQuery, googleKeyPath } from '../lib/google.js';
 import { trainNumberFromTripId } from '../import/gtfs-no.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { OBSERVED_DIR, writeRaw } from './archive.js';
-import { runIdOf, stationsByNsr } from './norway.js';
+import { stationsByNsr } from './norway.js';
 import { cancelLevel, fetchOf, recordFetch, saveRuns, type ObservedCall, type ObservedRun } from './store.js';
 
 export const SOURCE = 'entur-bigquery';
@@ -65,6 +65,21 @@ async function quays(now: number): Promise<Map<string, [string | null, string | 
   return quayCache.map;
 }
 
+/** operatorRef values that name an operator by a different code than its codespace: Vy's is VYG. */
+const OPERATOR_CODESPACE: Record<string, string> = { VY: 'VYG' };
+
+/**
+ * A journey's operator and train number. Two id styles (checked 2026-10-27): before each operator had its own stream
+ * the id is just "<number>:<date>" ("471:2022-03-08", "471:2020-03-10") and the operator is in operatorRef (VY, SJN);
+ * later it is the operator's codespace and journey ("VYG:ServiceJourney:61-LOD_617015-R"). Pure.
+ */
+export function journeyIdentity(r: Pick<BqRow, string>): { operator: string | null; number: string | null } {
+  const id = r.serviceJourneyId ?? '';
+  const old = /^(\d+):\d{4}-\d{2}-\d{2}$/.exec(id);
+  if (old) return { operator: (r.operatorRef && (OPERATOR_CODESPACE[r.operatorRef] ?? r.operatorRef)) || r.dataSource || null, number: old[1]! };
+  return { operator: id.split(':')[0] || r.operatorRef || r.dataSource || null, number: trainNumberFromTripId(id) };
+}
+
 /** One day's rows as runs, one per dated journey, stops in sequence order. */
 export function project(date: string, rows: BqRow[], quay: Map<string, [string | null, string | null]>, stationByNsr: Map<string, string>): ObservedRun[] {
   const byJourney = new Map<string, BqRow[]>();
@@ -77,8 +92,8 @@ export function project(date: string, rows: BqRow[], quay: Map<string, [string |
   for (const [, list] of byJourney) {
     list.sort((a, b) => Number(a.sequenceNr) - Number(b.sequenceNr));
     const head = list[0]!;
-    const journeyId = head.serviceJourneyId ?? head.datedServiceJourneyId ?? '';
-    const number = trainNumberFromTripId(journeyId);
+    const { operator, number } = journeyIdentity(head);
+    const line = head.lineRef?.split(':').at(-1);
     const n = list.length;
     const calls: ObservedCall[] = list.map((r, i) => {
       const [platform, stopPlace] = quay.get(r.stopPointRef ?? '') ?? [null, null];
@@ -106,11 +121,12 @@ export function project(date: string, rows: BqRow[], quay: Map<string, [string |
     runs.push({
       country: 'NO',
       serviceDate: date,
-      runId: runIdOf(journeyId, number),
+      runId: `${operator ?? 'NO'}:${number ?? head.datedServiceJourneyId ?? head.serviceJourneyId}`,
       trainNumber: number,
       source: SOURCE,
-      operator: journeyId.split(':')[0] || head.dataSource || null,
-      product: head.lineRef?.split(':').at(-1) ?? null,
+      operator,
+      // "SJN:Line:-": the older rows have no line.
+      product: line && line !== '-' ? line : null,
       canceled: cancelLevel(calls, bool(head.journeyCancellation)),
       info: { dataSource: head.dataSource, dataSourceName: head.dataSourceName, lineRef: head.lineRef, operatorRef: head.operatorRef, directionRef: head.directionRef, serviceJourneyId: head.serviceJourneyId, datedServiceJourneyId: head.datedServiceJourneyId, originName: head.originName, destinationName: head.destinationName, extraJourney: bool(head.extraJourney) },
       passages: [],
@@ -160,4 +176,27 @@ export async function backfillStep(db: Db, opts: { now?: number; log?: (m: strin
     return date;
   }
   return null;
+}
+
+/**
+ * Rebuild the projection of every day already fetched, from the raw archive (after a change to `project`): the
+ * stored runs of this source for the day are replaced. Nothing is fetched again.
+ */
+export async function reproject(db: Db, opts: { log?: (m: string) => void } = {}): Promise<number> {
+  const { rawFiles, readRaw } = await import('./archive.js');
+  const days = (db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'siri-et' order by date`).all(SOURCE) as { date: string }[]).map((r) => r.date);
+  const quay = await quays(Date.now());
+  const stationByNsr = stationsByNsr(db);
+  for (const date of days) {
+    const file = rawFiles(SOURCE, date, 'siri-et').at(-1);
+    if (!file) continue;
+    const runs = project(date, readRaw<BqRow>(file), quay, stationByNsr);
+    db.$client.transaction(() => {
+      db.$client.prepare(`delete from observed_calls where country = 'NO' and service_date = ? and run_id in (select run_id from observed_runs where country = 'NO' and service_date = ? and source = ?)`).run(date, date, SOURCE);
+      db.$client.prepare(`delete from observed_runs where country = 'NO' and service_date = ? and source = ?`).run(date, SOURCE);
+    })();
+    saveRuns(db, runs, Date.now(), { keepSources: ['entur'] });
+  }
+  opts.log?.(`reprojected ${days.length} Norwegian archive days`);
+  return days.length;
 }

@@ -1,4 +1,4 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|history|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|history|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import { config } from './env.js';
 import { openDb } from './db/client.js';
 import { bootstrap, refreshTrvStations, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
@@ -25,6 +25,10 @@ if (cmd === 'gtfs') {
   const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
   if (!from) throw new Error('history needs --from=YYYY-MM-DD');
   await backfillSweden(db, { from, to: flags.find((f) => f.startsWith('--to='))?.slice(5) });
+} else if (cmd === 'reproject') {
+  // Rebuild the observed record's Norwegian archive days from the raw files (after a change to how they're read).
+  const { reproject } = await import('./observed/bigquery.js');
+  await reproject(db, { log: console.log });
 } else if (cmd === 'trv-stations') {
   await refreshTrvStations(db);
 } else if (cmd === 'basemap') {
@@ -37,6 +41,6 @@ if (cmd === 'gtfs') {
   const r = await runAudit(db, { log: console.log });
   console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | history | trv-stations | basemap | logos | bootstrap | audit`);
+  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | history | reproject | trv-stations | basemap | logos | bootstrap | audit`);
   process.exitCode = 1;
 }
