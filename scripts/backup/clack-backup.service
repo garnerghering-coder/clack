@@ -1,0 +1,9 @@
+[Unit]
+Description=Clack nightly database backup (scripts/backup/backup-db.mjs)
+
+[Service]
+Type=oneshot
+User=clack
+WorkingDirectory=/home/clack/clack
+ExecStart=/usr/bin/node scripts/backup/backup-db.mjs /home/clack/clack/data/app.db /home/clack/backups
+Nice=10

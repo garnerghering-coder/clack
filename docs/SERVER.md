@@ -108,18 +108,39 @@ app shows the same).
 ## Backups
 
 The server's database, `/home/clack/clack/data/app.db` (SQLite, with `app.db-wal` and `app.db-shm` beside it), holds
-every user's trips, follows, settings and push addresses. The timetables and maps in `data/cache/` can be downloaded
-again; the database cannot.
+every user's trips, follows, settings and push addresses, and the observed record (SPEC §5.6). The raw archive in
+`data/observed/` (and the raw timetable copies in `data/archive/`) is the full record of what every train did. None
+of it can be downloaded again; the timetables and maps in `data/cache/` can.
 
-**Owner:** no automatic backup is set up in the repository, and none is known to be set up on the VM. Until one is:
-copy the database now and then with SQLite's own backup, which is safe while the server runs:
+Backups go to the owner's Mac (his choice, 2026-10-26), free and with plenty of room:
 
-```
-sqlite3 /home/clack/clack/data/app.db ".backup '/home/clack/app-$(date +%F).db'"
-```
+- **On the server**, every night at 03:30 Stockholm, `clack-backup.timer` runs `scripts/backup/backup-db.mjs`. That
+  is SQLite's online backup (safe while the server writes), compressed with zstd, into `/home/clack/backups/`.
+  It keeps 7 daily copies and 4 weekly ones (Sundays). Install or update it as root:
+  ```
+  cp /home/clack/clack/scripts/backup/clack-backup.{service,timer} /etc/systemd/system/
+  install -d -o clack -g clack /home/clack/backups
+  systemctl daemon-reload && systemctl enable --now clack-backup.timer
+  ```
+- **On the Mac**, `scripts/backup/pull.sh` copies what's new into `~/ClackBackups/`: the database copies, the
+  observed record and the raw timetable copies. Those archives are written once and never changed, so only new files
+  move. It runs every hour and at login, through launchd. Install it once:
+  ```
+  mkdir -p ~/Library/Application\ Support/ClackBackup
+  cp ~/Documents/GitHub/clack/scripts/backup/pull.sh ~/Library/Application\ Support/ClackBackup/
+  cp ~/Documents/GitHub/clack/scripts/backup/app.clack.backup.plist ~/Library/LaunchAgents/
+  launchctl load ~/Library/LaunchAgents/app.clack.backup.plist
+  ```
+  The script is copied out of `~/Documents` because macOS doesn't let background jobs read that folder. Copy it
+  again after changing `pull.sh`.
+  It uses the same SSH key as logging in (`~/.ssh/clack_oracle`), and it logs to `~/ClackBackups/pull.log`.
+  FileVault encrypts the copies on the Mac's disk.
+- **Checking it:** `/api/health` (admin) reports `observed.backup`. Its `status` is `behind` when the Mac hasn't pulled
+  for 3 days.
+- **Restoring:** `zstd -d app-<date>.db.zst`, then put the file in place of `data/app.db` with the server stopped.
+  Delete the old `app.db-wal`/`app.db-shm` first.
 
-then pull the file to the Mac with `scp`. (Unverified: the VM may not have the `sqlite3` command installed; `apt install
-sqlite3`.) Hetzner's own VM backups are a paid option and are off unless the owner turned them on.
+Hetzner's own VM backups are a paid option and are off.
 
 ## First set-up, in short
 

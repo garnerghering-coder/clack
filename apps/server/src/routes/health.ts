@@ -7,6 +7,7 @@ import { pushStats } from '../push/apns.js';
 import { legAudits } from '../db/schema.js';
 import { SERVER_VERSION } from '../lib/version.js';
 import { summarize, type LegAudit } from '../audit/audit.js';
+import { observedHealth } from '../observed/health.js';
 
 export const healthRoutes =
   (db: Db): FastifyPluginAsync =>
@@ -28,6 +29,8 @@ export const healthRoutes =
         gps: trackerFixes.stats,
         // Alerts and card updates to Apple since start-up: how many went through, when, and what failed (by Apple's reason).
         push: pushStats,
+        // The observed record: newest day per source, runs per country, BigQuery use, and whether the Mac's backups are current.
+        observed: observedHealth(db),
       };
     });
     // The last week's accuracy audit in numbers (the readable report is data/audit/latest.md).

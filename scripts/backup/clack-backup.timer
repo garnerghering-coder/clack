@@ -1,0 +1,9 @@
+[Unit]
+Description=Clack nightly database backup at 03:30 Stockholm
+
+[Timer]
+OnCalendar=*-*-* 03:30 Europe/Stockholm
+Persistent=true
+
+[Install]
+WantedBy=timers.target
