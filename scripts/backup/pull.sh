@@ -1,6 +1,6 @@
 #!/bin/zsh
-# Pull the server's backups and data archive to this Mac (docs/SERVER.md "Backups"). Run by launchd hourly and at
-# login (app.clack.backup.plist); safe to run by hand. Copies only what's new: the database copies, and the
+# Pull the server's backups and data archive to this Mac (docs/SERVER.md "Backups"). Run by launchd once a day
+# (app.clack.backup.plist); safe to run by hand. Copies only what's new: the database copies, and the
 # observed record and raw timetable copies, which are written once and never change.
 set -eu
 HOST=root@2.29.143.151

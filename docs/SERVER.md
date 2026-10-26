@@ -124,7 +124,7 @@ Backups go to the owner's Mac (his choice, 2026-10-26), free and with plenty of 
   ```
 - **On the Mac**, `scripts/backup/pull.sh` copies what's new into `~/ClackBackups/`: the database copies, the
   observed record and the raw timetable copies. Those archives are written once and never changed, so only new files
-  move. It runs every hour and at login, through launchd. Install it once:
+  move. It runs once a day at 13:00 through launchd (if the Mac is asleep then, when it next wakes). Install it once:
   ```
   mkdir -p ~/Library/Application\ Support/ClackBackup
   cp ~/Documents/GitHub/clack/scripts/backup/pull.sh ~/Library/Application\ Support/ClackBackup/

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!-- Pulls the server's backups to ~/ClackBackups every hour and at login. Install: docs/SERVER.md "Backups".
+<!-- Pulls the server's backups to ~/ClackBackups once a day (13:00; if the Mac is asleep then, when it next wakes). Install: docs/SERVER.md "Backups".
      The script is run from ~/Library/Application Support/ClackBackup: macOS keeps background jobs out of ~/Documents. -->
 <plist version="1.0">
 <dict>
   <key>Label</key><string>app.clack.backup</string>
   <key>ProgramArguments</key>
   <array><string>/bin/zsh</string><string>-c</string><string>"$HOME/Library/Application Support/ClackBackup/pull.sh"</string></array>
-  <key>StartInterval</key><integer>3600</integer>
-  <key>RunAtLoad</key><true/>
+  <key>StartCalendarInterval</key><dict><key>Hour</key><integer>13</integer><key>Minute</key><integer>0</integer></dict>
   <key>StandardErrorPath</key><string>/tmp/clack-backup.err</string>
 </dict>
 </plist>
