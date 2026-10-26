@@ -9,7 +9,7 @@ import { readDataFile } from '../dataFiles.js';
 import { productOf } from '../search/timetable.js';
 import { trainTypeCatalog } from '../legs/trainTypes.js';
 import { withLogo } from '../import/brands.js';
-import { COUNTRIES } from '../lib/countries.js';
+import { COUNTRIES, isCountryCode, type CountryCode } from '../lib/countries.js';
 
 export interface PassportStop {
   stationId: string;
@@ -45,6 +45,34 @@ export interface PassportLeg {
 /** Earth's equatorial circumference and Sweden's north–south extent (Treriksröset to Smygehuk ≈ 1,572 km). */
 export const EARTH_KM = 40_075;
 export const SWEDEN_KM = 1_572;
+
+/**
+ * Length of each home country, north to south, in km (the "× the length of your country" medal).
+ * SE: Treriksröset to Smygehuk ≈ 1,572 km.
+ * NO: Lindesnes to Nordkapp, 1,699 km in a straight line (Store norske leksikon, snl.no/Norge).
+ * FI: Hanko to Utsjoki, the greatest length, 1,157 km (Statistics Finland, "Suomi lukuina 2026", from Maanmittauslaitos).
+ */
+export const COUNTRY_LENGTH_KM: Record<CountryCode, number> = { SE: SWEDEN_KM, NO: 1_699, FI: 1_157 };
+
+/**
+ * Length of Europe, north to south, in km. No standard figure exists, so it is the great-circle distance between two named
+ * extreme points of mainland Europe: Cape Nordkinn / Kinnarodden (71°08′02″N 27°39′00″E) and Punta de Tarifa
+ * (36°00′15″N 5°36′37″W). Coordinates from Wikipedia's "Extreme points of Europe" and "Punta de Tarifa" articles.
+ */
+const NORDKINN = { lat: 71 + 8 / 60 + 2 / 3600, lon: 27 + 39 / 60 };
+const TARIFA = { lat: 36 + 15 / 3600, lon: -(5 + 36 / 60 + 37 / 3600) };
+const greatCircleKm = (a: { lat: number; lon: number }, b: { lat: number; lon: number }) => {
+  const r = Math.PI / 180;
+  const h = Math.sin(((b.lat - a.lat) * r) / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(((b.lon - a.lon) * r) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+};
+export const EUROPE_KM = Math.round(greatCircleKm(NORDKINN, TARIFA));
+
+/** The Arctic Circle: 66°33′51.1″N (Wikipedia, "Arctic Circle"; it drifts by metres a year). */
+export const ARCTIC_CIRCLE_LAT = 66 + 33 / 60 + 51.1 / 3600;
+
+/** The kinds of train "Every kind of train" asks for; heritage trains are left out. */
+export const KINDS_OF_TRAIN = ['high_speed', 'intercity', 'night', 'regional', 'commuter'] as const;
 
 type Co2Factors = Record<string, { train: { g_per_pkm: number }; comparisons: Record<string, { g_per_pkm: number; source: string }> }>;
 let factors: Co2Factors | null = null;
@@ -87,9 +115,12 @@ export interface PassportOptions {
   year?: number | null;
   includeCommuter: boolean;
   comparison: Co2Comparison;
+  /** Home country, for the length-of-your-country line. Sweden's when not given. */
+  home?: CountryCode;
 }
 
 export function computePassport(all: PassportLeg[], opts: PassportOptions) {
+  const home = opts.home ?? 'SE';
   const years = [...new Set(all.map((l) => localParts(l.schedDep, l.tz).year))].sort((a, b) => b - a);
   const inScope = all.filter((l) => (opts.year ? localParts(l.schedDep, l.tz).year === opts.year : true) && (opts.includeCommuter || l.category !== 'commuter'));
   // A cancelled train you didn't ride adds nothing but the cancellation count.
@@ -167,6 +198,7 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
 
   return {
     years,
+    home,
     scope: { year: opts.year ?? null, includeCommuter: opts.includeCommuter },
     totals: {
       distanceM,
@@ -181,6 +213,8 @@ export function computePassport(all: PassportLeg[], opts: PassportOptions) {
     flavor: {
       earthLaps: totalKm / EARTH_KM,
       swedenLengths: totalKm / SWEDEN_KM,
+      homeLengths: totalKm / COUNTRY_LENGTH_KM[home],
+      europeLengths: totalKm / EUROPE_KM,
       topRoute: routes[0] && routes[0].count > 1 ? { route: routes[0].key, count: routes[0].count } : null,
       busiestMonth: busiestMonth && busiestMonth.count > 1 ? { month: busiestMonth.key, count: busiestMonth.count } : null,
       lateMinutes: late.reduce((n, d) => n + d, 0),
@@ -227,8 +261,20 @@ export const MILESTONES = {
   stations: [10, 25, 50, 100, 200],
   operators: [3, 5, 10],
   countries: [2, 3, 5],
-  borderCrossings: [1],
-  nightTrains: [1],
+  borderCrossings: [1, 5, 10, 25],
+  nightTrains: [1, 5, 10, 25],
+  /** The longest single train ride, in km (a maximum, not a sum). */
+  longestTrainKm: [300, 500, 1000],
+  hoursOnBoard: [10, 50, 100, 250],
+  /** Distinct known train types; trips with no known type never count. */
+  trainTypes: [5, 10, 20],
+  /** Distinct kinds of train ridden, out of KINDS_OF_TRAIN. */
+  kindsOfTrain: [KINDS_OF_TRAIN.length],
+  /** Times a ridden line crossed the Arctic Circle. */
+  arcticCircle: [1],
+  /** Total km as a multiple of the home country's length, and of Europe's. */
+  homeLength: [1],
+  europeLength: [1],
 } as const;
 export type MilestoneFamily = keyof typeof MILESTONES;
 
@@ -242,42 +288,87 @@ export interface Milestone {
   value?: number;
 }
 
-export function computeMilestones(all: PassportLeg[]): { achieved: Milestone[]; next: Milestone[] } {
+/** Running counts behind every milestone family; computeMilestones, milestoneTotals and the flavor lines share it. */
+class Tally {
+  journeys = new Set<string>();
+  stations = new Set<string>();
+  operators = new Set<string>();
+  countries = new Set<string>();
+  types = new Set<string>();
+  kinds = new Set<string>();
+  km = 0;
+  borders = 0;
+  nights = 0;
+  arctic = 0;
+  longestKm = 0;
+  hours = 0;
+  constructor(private readonly home: CountryCode) {}
+
+  add(l: PassportLeg) {
+    this.journeys.add(l.journeyId ?? l.id);
+    this.km += l.distanceM / 1000;
+    this.longestKm = Math.max(this.longestKm, l.distanceM / 1000);
+    this.hours += Math.max(0, l.arr - l.dep) / 3_600_000;
+    for (const st of l.stops) {
+      if (st.role === 'board' || st.role === 'alight') this.stations.add(st.stationId);
+      this.countries.add(st.country);
+    }
+    if (l.operatorId) this.operators.add(l.operatorId);
+    if (l.trainType) this.types.add(l.trainType);
+    if ((KINDS_OF_TRAIN as readonly string[]).includes(l.product)) this.kinds.add(l.product);
+    for (let i = 1; i < l.stops.length; i++) {
+      const a = l.stops[i - 1]!;
+      const b = l.stops[i]!;
+      if (a.country !== b.country) this.borders++;
+      if (a.lat >= ARCTIC_CIRCLE_LAT !== b.lat >= ARCTIC_CIRCLE_LAT) this.arctic++;
+    }
+    if (l.product === 'night') this.nights++;
+  }
+
+  value(f: MilestoneFamily): number {
+    switch (f) {
+      case 'journeys': return this.journeys.size;
+      case 'distanceKm': return this.km;
+      case 'stations': return this.stations.size;
+      case 'operators': return this.operators.size;
+      case 'countries': return this.countries.size;
+      case 'borderCrossings': return this.borders;
+      case 'nightTrains': return this.nights;
+      case 'longestTrainKm': return this.longestKm;
+      case 'hoursOnBoard': return this.hours;
+      case 'trainTypes': return this.types.size;
+      case 'kindsOfTrain': return this.kinds.size;
+      case 'arcticCircle': return this.arctic;
+      case 'homeLength': return this.km / COUNTRY_LENGTH_KM[this.home];
+      case 'europeLength': return this.km / EUROPE_KM;
+    }
+  }
+}
+
+export function computeMilestones(all: PassportLeg[], home: CountryCode = 'SE'): { achieved: Milestone[]; next: Milestone[] } {
   const rides = [...all].filter((l) => !l.canceled).sort((a, b) => a.dep - b.dep);
-  const journeys = new Set<string>();
-  const stations = new Set<string>();
-  const operators = new Set<string>();
-  const countries = new Set<string>();
-  let km = 0;
-  let borders = 0;
-  let nights = 0;
-  const value = (f: MilestoneFamily) =>
-    ({ journeys: journeys.size, distanceKm: km, stations: stations.size, operators: operators.size, countries: countries.size, borderCrossings: borders, nightTrains: nights })[f];
+  const tally = new Tally(home);
+  const families = Object.keys(MILESTONES) as MilestoneFamily[];
   const achieved: Milestone[] = [];
   const reached = new Set<string>();
   for (const l of rides) {
-    journeys.add(l.journeyId ?? l.id);
-    km += l.distanceM / 1000;
-    for (const st of l.stops) if (st.role === 'board' || st.role === 'alight') stations.add(st.stationId);
-    if (l.operatorId) operators.add(l.operatorId);
-    for (const st of l.stops) countries.add(st.country);
-    for (let i = 1; i < l.stops.length; i++) if (l.stops[i]!.country !== l.stops[i - 1]!.country) borders++;
-    if (l.product === 'night') nights++;
-    for (const f of Object.keys(MILESTONES) as MilestoneFamily[])
+    tally.add(l);
+    for (const f of families)
       for (const target of MILESTONES[f]) {
         const k = `${f}:${target}`;
         // Visiting one country isn't a milestone; "countries" starts at 2.
-        if (!reached.has(k) && value(f) >= target) {
+        if (!reached.has(k) && tally.value(f) >= target) {
           reached.add(k);
           achieved.push({ family: f, target, at: l.arr, legId: l.id });
         }
       }
   }
   // The next step in each family, nearest first.
-  const next = (Object.keys(MILESTONES) as MilestoneFamily[])
+  const next = families
     .map((f) => {
-      const target = MILESTONES[f].find((x) => value(f) < x);
-      return target === undefined ? null : ({ family: f, target, value: Math.floor(value(f) * 10) / 10 } as Milestone & { value: number });
+      const v = tally.value(f);
+      const target = MILESTONES[f].find((x) => v < x);
+      return target === undefined ? null : ({ family: f, target, value: Math.floor(v * 10) / 10 } as Milestone & { value: number });
     })
     .filter((m): m is Milestone & { value: number } => m !== null)
     .sort((a, b) => b.value / b.target - a.value / a.target);
@@ -285,25 +376,10 @@ export function computeMilestones(all: PassportLeg[]): { achieved: Milestone[]; 
 }
 
 /** Running totals behind the milestones (same counting as computeMilestones). */
-function milestoneTotals(all: PassportLeg[]): Record<MilestoneFamily, number> {
-  const rides = all.filter((l) => !l.canceled);
-  const stations = new Set<string>();
-  const countries = new Set<string>();
-  let borders = 0;
-  for (const l of rides) {
-    for (const st of l.stops) if (st.role === 'board' || st.role === 'alight') stations.add(st.stationId);
-    for (const st of l.stops) countries.add(st.country);
-    for (let i = 1; i < l.stops.length; i++) if (l.stops[i]!.country !== l.stops[i - 1]!.country) borders++;
-  }
-  return {
-    journeys: new Set(rides.map((l) => l.journeyId ?? l.id)).size,
-    distanceKm: Math.floor((rides.reduce((d, l) => d + l.distanceM, 0) / 1000) * 10) / 10,
-    stations: stations.size,
-    operators: new Set(rides.map((l) => l.operatorId).filter(Boolean)).size,
-    countries: countries.size,
-    borderCrossings: borders,
-    nightTrains: rides.filter((l) => l.product === 'night').length,
-  };
+function milestoneTotals(all: PassportLeg[], home: CountryCode): Record<MilestoneFamily, number> {
+  const tally = new Tally(home);
+  for (const l of all) if (!l.canceled) tally.add(l);
+  return Object.fromEntries((Object.keys(MILESTONES) as MilestoneFamily[]).map((f) => [f, Math.floor(tally.value(f) * 10) / 10])) as Record<MilestoneFamily, number>;
 }
 
 /**
@@ -311,14 +387,14 @@ function milestoneTotals(all: PassportLeg[]): Record<MilestoneFamily, number> {
  * family moved, and its firsts (stations, operator, countries you hadn't been to). Everything from counted trips only;
  * a trip that doesn't count (yet) says so instead. Pure.
  */
-export function tripProgress(all: PassportLeg[], legId: string) {
+export function tripProgress(all: PassportLeg[], legId: string, home: CountryCode = 'SE') {
   const leg = all.find((l) => l.id === legId);
   if (!leg || leg.canceled) return { counted: false as const };
   const others = all.filter((l) => l.id !== legId);
-  const before = milestoneTotals(others);
-  const after = milestoneTotals(all);
-  const had = new Set(computeMilestones(others).achieved.map((m) => `${m.family}:${m.target}`));
-  const unlocked = computeMilestones(all).achieved.filter((m) => !had.has(`${m.family}:${m.target}`));
+  const before = milestoneTotals(others, home);
+  const after = milestoneTotals(all, home);
+  const had = new Set(computeMilestones(others, home).achieved.map((m) => `${m.family}:${m.target}`));
+  const unlocked = computeMilestones(all, home).achieved.filter((m) => !had.has(`${m.family}:${m.target}`));
   // Each family that moved, against its next target (or the one just reached).
   const moved = (Object.keys(MILESTONES) as MilestoneFamily[])
     .filter((f) => after[f] > before[f])
@@ -420,4 +496,11 @@ export function passportRefs(db: Db) {
     ),
     trainTypes: Object.fromEntries(trainTypeCatalog().types.map((t) => [t.id, t])),
   };
+}
+
+/** The home country: the setting, else the country you first boarded in, else Sweden. */
+export function homeCountryOf(setting: string | undefined, all: PassportLeg[]): CountryCode {
+  if (isCountryCode(setting)) return setting;
+  const first = [...all].filter((l) => !l.canceled).sort((a, b) => a.dep - b.dep)[0]?.stops[0]?.country;
+  return isCountryCode(first) ? first : 'SE';
 }

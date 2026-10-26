@@ -54,7 +54,7 @@ struct TripProgressView: View {
                                 ForEach(Array(p.unlocked.enumerated()), id: \.offset) { index, milestone in
                                     VStack(spacing: 2) {
                                         Medal(m: milestone, size: 84)
-                                        Text(l10n.milestoneLabel(milestone, language: app.settings.language))
+                                        Text(l10n.milestoneLabel(milestone, language: app.settings.language, home: p.home ?? app.settings.homeCountry?.rawValue))
                                             .clack(.caption).fontWeight(.bold).foregroundStyle(Ink.text).multilineTextAlignment(.center)
                                     }
                                     .scaleEffect(shown || reduceMotion ? 1 : 0.6)
@@ -73,7 +73,7 @@ struct TripProgressView: View {
                     }
                     if !p.moved.isEmpty {
                         VStack(spacing: 12) {
-                            ForEach(Array(p.moved.enumerated()), id: \.offset) { _, moved in movedRow(moved) }
+                            ForEach(Array(p.moved.enumerated()), id: \.offset) { _, moved in movedRow(moved, home: p.home) }
                         }
                     }
                 }
@@ -98,12 +98,12 @@ struct TripProgressView: View {
         return out
     }
 
-    private func movedRow(_ moved: TripProgress.Moved) -> some View {
+    private func movedRow(_ moved: TripProgress.Moved, home: String?) -> some View {
         let reached = moved.after >= moved.target
         func fraction(_ v: Double) -> Double { min(1, v / moved.target) }
         return VStack(spacing: 4) {
             HStack {
-                Text(l10n.milestoneLabel(Milestone(family: moved.family, target: moved.target, at: nil, legId: nil, value: nil), language: app.settings.language))
+                Text(l10n.milestoneLabel(Milestone(family: moved.family, target: moved.target, at: nil, legId: nil, value: nil), language: app.settings.language, home: home ?? app.settings.homeCountry?.rawValue))
                     .clack(.banner).fontWeight(.semibold).foregroundStyle(Ink.text)
                 Spacer(minLength: 0)
                 Text(reached ? l10n.t("progress.reached") : l10n.t("passport.progressOf", ["value": String(Int(moved.after.rounded(.down))), "target": String(Int(moved.target))]))

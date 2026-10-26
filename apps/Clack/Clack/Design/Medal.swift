@@ -21,6 +21,13 @@ nonisolated enum MedalStyle {
         case .countries: ("#cfa8ff", "#7d3fd6")
         case .borderCrossings: ("#ff8fa3", "#d12a4a")
         case .nightTrains: ("#9aa6ff", "#3242b8")
+        case .longestTrainKm: ("#d4f07a", "#6b9a14")
+        case .hoursOnBoard: ("#6fe0d0", "#12857a")
+        case .trainTypes: ("#ffc66b", "#b86a00")
+        case .kindsOfTrain: ("#f59be8", "#b3239c")
+        case .arcticCircle: ("#bdf0ff", "#2aa7cf")
+        case .homeLength: ("#d9b38c", "#8a5a2b")
+        case .europeLength: ("#b8c6d9", "#4a5f7a")
         case .unknown: ("#e5e5e5", "#8e8e8e")
         }
     }
@@ -35,8 +42,28 @@ nonisolated enum MedalStyle {
         case .countries: return "globe"
         case .borderCrossings: return "flag"
         case .nightTrains: return "moon"
+        case .longestTrainKm: return "ruler"
+        case .hoursOnBoard: return "hourglass"
+        case .trainTypes: return "layers"
+        case .kindsOfTrain: return "train-track"
+        case .arcticCircle: return "snowflake"
+        case .homeLength: return "flag"
+        case .europeLength: return "globe"
         case .unknown: return "star"
         }
+    }
+
+    /// The one ink for a medal's number and icon: the family's dark face colour taken 80% of the way to black. 80%, not
+    /// less, because the number sits mid-gradient and the darker faces (night trains, countries, Europe) need it for 4.5:1.
+    static func ink(_ family: MilestoneFamily) -> Color {
+        let hex = face(family).1.dropFirst()
+        let value = UInt64(hex, radix: 16) ?? 0x8e8e8e
+        let keep = 0.2
+        return Color(
+            red: Double((value >> 16) & 0xff) / 255 * keep,
+            green: Double((value >> 8) & 0xff) / 255 * keep,
+            blue: Double(value & 0xff) / 255 * keep
+        )
     }
 
     /// Bronze, silver, gold, platinum: light, dark.
@@ -50,7 +77,12 @@ nonisolated enum MedalStyle {
         case .stations: [10, 25, 50, 100, 200]
         case .operators: [3, 5, 10]
         case .countries: [2, 3, 5]
-        case .borderCrossings, .nightTrains, .unknown: [1]
+        case .borderCrossings, .nightTrains: [1, 5, 10, 25]
+        case .longestTrainKm: [300, 500, 1000]
+        case .hoursOnBoard: [10, 50, 100, 250]
+        case .trainTypes: [5, 10, 20]
+        case .kindsOfTrain: [5]
+        case .arcticCircle, .homeLength, .europeLength, .unknown: [1]
         }
     }
 
@@ -61,9 +93,9 @@ nonisolated enum MedalStyle {
         return metals[min(metals.count - 1, (i * metals.count) / levels.count)]
     }
 
-    /// "1k", "2.5k", "10k"; the first ones and once-around-the-Earth get an icon instead of a number.
+    /// "1k", "2.5k", "10k"; the first ones, once-around-the-Earth and the one-off medals get an icon instead of a number.
     static func centre(_ m: Milestone) -> String? {
-        if m.target == 1 || m.target >= 40_000 { return nil }
+        if m.target == 1 || m.target >= 40_000 || levels(m.family).count == 1 { return nil }
         if m.target >= 1000 {
             let k = m.target / 1000
             return (k == k.rounded() ? String(Int(k)) : String(format: "%.1f", k)) + "k"
@@ -72,12 +104,14 @@ nonisolated enum MedalStyle {
     }
 }
 
-/// bare: no number (share cards draw it in their own font).
+/// bare: no number (share cards draw it in their own font). foil: where the pearly sheen sits (0 to 1), for the share
+/// cards, which put a holographic sheen on each medal's face (Holo.swift); nil is no sheen.
 struct Medal: View {
     let m: Milestone
     var locked = false
     var size: CGFloat = 92
     var bare = false
+    var foil: Double?
 
     var body: some View {
         let (f0, f1) = MedalStyle.face(m.family)
@@ -115,8 +149,18 @@ struct Medal: View {
                 ))
                 ctx.stroke(face, with: .color(.white.opacity(0.35)), lineWidth: 1.5)
                 ctx.stroke(Path(ellipseIn: CGRect(x: 21.5, y: 57.5, width: 77, height: 77)), with: .color(.black.opacity(0.18)), lineWidth: 1)
+                // The share cards' foil: the pearly spectrum over the face, under the number and icon so they keep their ink.
+                if let foil, !locked {
+                    let pearl = ["#f3c4e4", "#cdbdf2", "#b9dcf2", "#c4ecd6", "#f4e6b8", "#f3c4e4"].map { Color(hex: $0) ?? .white }
+                    var foilCtx = ctx
+                    foilCtx.blendMode = .overlay
+                    foilCtx.fill(face, with: .linearGradient(
+                        Gradient(colors: pearl.map { $0.opacity(0.6) }),
+                        startPoint: CGPoint(x: 26 + 68 * (foil - 0.6), y: 62), endPoint: CGPoint(x: 26 + 68 * (foil + 0.6), y: 130)
+                    ))
+                }
                 // Number and icon
-                let ink = Color.black.opacity(0.72)
+                let ink = MedalStyle.ink(m.family)
                 if let text {
                     if !bare {
                         let fontSize: CGFloat = text.count > 3 ? 21 : 26
@@ -126,9 +170,9 @@ struct Medal: View {
                             at: CGPoint(x: 60, y: y - fontSize * 0.36), anchor: .center
                         )
                     }
-                    drawIcon(&ctx, name: MedalStyle.icon(m.family, target: m.target), rect: CGRect(x: 53, y: 68, width: 14, height: 14), alpha: 0.55)
+                    drawIcon(&ctx, name: MedalStyle.icon(m.family, target: m.target), rect: CGRect(x: 53, y: 68, width: 14, height: 14), ink: ink)
                 } else {
-                    drawIcon(&ctx, name: MedalStyle.icon(m.family, target: m.target), rect: CGRect(x: 42, y: 78, width: 36, height: 36), alpha: 0.62)
+                    drawIcon(&ctx, name: MedalStyle.icon(m.family, target: m.target), rect: CGRect(x: 42, y: 78, width: 36, height: 36), ink: ink)
                 }
                 // Shine
                 var shine = Path(ellipseIn: CGRect(x: 28, y: 65, width: 36, height: 18))
@@ -154,10 +198,15 @@ struct Medal: View {
         .accessibilityHidden(true)
     }
 
-    private func drawIcon(_ ctx: inout GraphicsContext, name: String, rect: CGRect, alpha: Double) {
-        var image = ctx.resolve(Image("lucide-\(name)", bundle: ClackDesignBundle.bundle).renderingMode(.template))
-        image.shading = .color(.black.opacity(alpha))
-        ctx.draw(image, in: rect)
+    /// The icon in `ink`. The tint is a fill over the icon's own shape (a layer drawn with source-atop): setting the
+    /// resolved image's shading left these template icons white, so the number was dark and the icon was not.
+    private func drawIcon(_ ctx: inout GraphicsContext, name: String, rect: CGRect, ink: Color) {
+        let image = ctx.resolve(Image("lucide-\(name)", bundle: ClackDesignBundle.bundle).renderingMode(.template))
+        ctx.drawLayer { layer in
+            layer.draw(image, in: rect)
+            layer.blendMode = .sourceAtop
+            layer.fill(Path(rect), with: .color(ink))
+        }
     }
 }
 

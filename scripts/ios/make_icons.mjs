@@ -23,6 +23,8 @@ const ICONS = [
   'search', 'settings', 'share-2', 'sliders-horizontal', 'smartphone', 'stamp', 'star', 'ticket', 'toilet', 'train-front',
   'trash', 'volume-x', 'wifi', 'wifi-off', 'x', 'square', 'square-check',
   // Station map pictograms (the station map's points of interest).
+  // Medals: the new milestone kinds.
+  'snowflake', 'hourglass', 'ruler', 'train-track',
   'armchair', 'banknote', 'shopping-basket', 'bus', 'car-taxi-front', 'luggage', 'pill', 'shopping-bag', 'utensils-crossed',
 ];
 const THIN = ['train-front', 'compass', 'stamp'];

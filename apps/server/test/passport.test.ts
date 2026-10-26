@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { co2, co2FactorsFor, computeMilestones, computePassport, loadPassportLegs, type PassportLeg, type PassportStop } from '../src/stats/passport.js';
+import { ARCTIC_CIRCLE_LAT, COUNTRY_LENGTH_KM, EUROPE_KM, co2, co2FactorsFor, computeMilestones, homeCountryOf, computePassport, loadPassportLegs, type PassportLeg, type PassportStop } from '../src/stats/passport.js';
 import { LOCAL_USER_ID, openDb } from '../src/db/client.js';
 import { refreshLegActuals } from '../src/legs/actuals.js';
 import { createLeg } from '../src/legs/legs.js';
@@ -127,5 +127,82 @@ describe('Finland in the passport', () => {
     expect(l).toMatchObject({ id, tz: 'Europe/Helsinki', operatorId: 'vr-fi', product: 'intercity', trainNumber: '407' });
     expect(l!.stops.map((x) => x.country)).toEqual(['FI', 'SE']);
     expect(computePassport([l!], opts).totals.borderCrossings).toBe(1);
+  });
+});
+
+describe('milestones: levels and new families', () => {
+  const keys = (legs: PassportLeg[], home?: 'SE' | 'NO' | 'FI') => computeMilestones(legs, home).achieved.map((m) => `${m.family}:${m.target}`);
+  const hour = 3_600_000;
+  const at = (i: number, p: Partial<PassportLeg> = {}) => leg({ id: `l${i}`, dep: 1_000_000 + i * 10 * hour, arr: 1_000_000 + i * 10 * hour + hour, schedDep: 1_000_000 + i * 10 * hour, ...p });
+
+  it('border crossings and night trains have four levels', () => {
+    const cross = (i: number) => at(i, { product: 'night', stops: [st('A', 'SE', 'board'), st('B', 'NO', 'alight')] });
+    const five = keys(Array.from({ length: 5 }, (_, i) => cross(i)));
+    expect(five).toEqual(expect.arrayContaining(['borderCrossings:1', 'borderCrossings:5', 'nightTrains:1', 'nightTrains:5']));
+    expect(five).not.toContain('borderCrossings:10');
+  });
+
+  it('longest train is a maximum, not a sum', () => {
+    expect(keys([at(0, { distanceM: 200_000 }), at(1, { distanceM: 200_000 })])).not.toContain('longestTrainKm:300');
+    expect(keys([at(0, { distanceM: 200_000 }), at(1, { distanceM: 520_000 })])).toEqual(expect.arrayContaining(['longestTrainKm:300', 'longestTrainKm:500']));
+  });
+
+  it('hours on board add up the time on the train', () => {
+    expect(keys(Array.from({ length: 10 }, (_, i) => at(i)))).toContain('hoursOnBoard:10');
+    expect(keys(Array.from({ length: 9 }, (_, i) => at(i)))).not.toContain('hoursOnBoard:10');
+  });
+
+  it('train types count only known, distinct types', () => {
+    const five = ['a', 'b', 'c', 'd', 'e'].map((t, i) => at(i, { trainType: t }));
+    expect(keys(five)).toContain('trainTypes:5');
+    expect(keys([...five.slice(0, 4), at(9, { trainType: null }), at(10, { trainType: null }), at(11, { trainType: 'a' })])).not.toContain('trainTypes:5');
+  });
+
+  it('every kind of train needs all five, and heritage is not one of them', () => {
+    const kinds = ['high_speed', 'intercity', 'night', 'regional', 'commuter'];
+    expect(keys(kinds.slice(0, 4).map((p, i) => at(i, { product: p })).concat(at(9, { product: 'heritage' })))).not.toContain('kindsOfTrain:5');
+    expect(keys(kinds.map((p, i) => at(i, { product: p })))).toContain('kindsOfTrain:5');
+  });
+
+  it('crossing the Arctic Circle: consecutive stops on either side of it (Boden → Narvik)', () => {
+    const north = (id: string, lat: number, role: string) => ({ ...st(id, 'SE', role), lat });
+    const boden = at(0, { stops: [north('Boden', 65.83, 'board'), north('Gällivare', 67.14, 'through'), north('Narvik', 68.43, 'alight')] });
+    expect(keys([boden])).toContain('arcticCircle:1');
+    expect(keys([at(1, { stops: [north('A', 65.0, 'board'), north('B', 66.0, 'alight')] })])).not.toContain('arcticCircle:1');
+    expect(ARCTIC_CIRCLE_LAT).toBeCloseTo(66.5642, 3);
+  });
+
+  it('the length of your home country depends on which country that is', () => {
+    const ride = (km: number) => [at(0, { distanceM: km * 1000 })];
+    expect(keys(ride(1_600), 'SE')).toContain('homeLength:1');
+    expect(keys(ride(1_600), 'NO')).not.toContain('homeLength:1');
+    expect(keys(ride(1_700), 'NO')).toContain('homeLength:1');
+    expect(keys(ride(1_160), 'FI')).toContain('homeLength:1');
+    expect(keys(ride(1_150), 'FI')).not.toContain('homeLength:1');
+    expect(COUNTRY_LENGTH_KM).toEqual({ SE: 1_572, NO: 1_699, FI: 1_157 });
+  });
+
+  it('the length of Europe is a great-circle figure of about 4,360 km', () => {
+    expect(EUROPE_KM).toBeGreaterThan(4_300);
+    expect(EUROPE_KM).toBeLessThan(4_400);
+    expect(keys([at(0, { distanceM: (EUROPE_KM + 1) * 1000 })])).toContain('europeLength:1');
+    expect(keys([at(0, { distanceM: (EUROPE_KM - 1) * 1000 })])).not.toContain('europeLength:1');
+  });
+
+  it('puts the home country in the passport and the flavor lines', () => {
+    const p = computePassport([at(0, { distanceM: 1_699_000 })], { includeCommuter: true, comparison: 'flight', home: 'NO' });
+    expect(p.home).toBe('NO');
+    expect(p.flavor.homeLengths).toBeCloseTo(1, 5);
+    expect(p.flavor.europeLengths).toBeCloseTo(1_699 / EUROPE_KM, 5);
+    expect(p.flavor.swedenLengths).toBeCloseTo(1_699 / 1_572, 5);
+  });
+
+  it('home country: the setting, else the first trip, else Sweden', () => {
+    const first = at(0, { stops: [st('H', 'FI', 'board'), st('T', 'FI', 'alight')] });
+    const later = at(5, { stops: [st('A', 'SE', 'board'), st('B', 'SE', 'alight')] });
+    expect(homeCountryOf('NO', [first])).toBe('NO');
+    expect(homeCountryOf(undefined, [later, first])).toBe('FI');
+    expect(homeCountryOf(undefined, [])).toBe('SE');
+    expect(homeCountryOf('DK', [])).toBe('SE');
   });
 });

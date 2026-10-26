@@ -38,6 +38,8 @@ private struct ChoiceMenu<Value: Hashable>: View {
     let label: String
     let options: [(value: Value, title: String)]
     let selection: Value
+    /// What the button says when `selection` is none of the options (a setting that has not been chosen yet).
+    var unsetTitle = ""
     let onChange: (Value) -> Void
 
     var body: some View {
@@ -47,7 +49,7 @@ private struct ChoiceMenu<Value: Hashable>: View {
             }
         } label: {
             HStack(spacing: 8) {
-                Text(options.first { $0.value == selection }?.title ?? "").lineLimit(1)
+                Text(options.first { $0.value == selection }?.title ?? unsetTitle).lineLimit(1)
                 LucideIcon(name: "chevron-down", size: 14).foregroundStyle(Ink.text2)
             }
             .clack(.body).foregroundStyle(Ink.text)
@@ -89,6 +91,16 @@ struct SettingsScreen: View {
                 SettingsRow(label: l10n.t("settings.language")) {
                     ChoiceMenu(label: l10n.t("settings.language"), options: Language.knownCases.map { ($0, l10n.t("settings.languages.\($0.rawValue)")) }, selection: s.language) { value in
                         change(SettingsPatch(language: value))
+                    }
+                }
+                // Unset until the phone's region or the first trip decides (the server's rule); picking one makes it yours.
+                SettingsRow(label: l10n.t("settings.homeCountry")) {
+                    ChoiceMenu(
+                        label: l10n.t("settings.homeCountry"),
+                        options: HomeCountry.knownCases.map { (Optional($0), l10n.t("countries.\($0.rawValue)")) },
+                        selection: s.homeCountry, unsetTitle: l10n.t("settings.homeCountryAuto")
+                    ) { value in
+                        if let value { change(SettingsPatch(homeCountry: value)) }
                     }
                 }
                 SettingsRow(label: l10n.t("settings.distanceUnit")) {

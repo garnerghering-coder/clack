@@ -12,7 +12,7 @@ describe('what a trip did for your Passport', () => {
     expect(p.counted).toBe(true);
     if (!p.counted) return;
     expect(p.firsts).toEqual({ stations: ['Oslo'], operator: 'vy', countries: ['NO'] });
-    expect(p.unlocked.map((m) => `${m.family}:${m.target}`).sort()).toEqual(['borderCrossings:1', 'countries:2']);
+    expect(p.unlocked.map((m) => `${m.family}:${m.target}`).sort()).toEqual(['borderCrossings:1', 'countries:2', 'longestTrainKm:300']);
   });
   it('a back-catalogue trip counts the same, whatever its date', () => {
     const p = tripProgress([...others, leg('old', 'Cst', 'M', 600, 'sj', 0)], 'old');

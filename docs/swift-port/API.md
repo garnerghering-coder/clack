@@ -127,6 +127,8 @@ Each block: method + path, params, body, response, status codes, TS type, and th
   - `walkPace: "relaxed" | "normal" | "brisk"`
   - `stepFree: boolean`
   - `heavyLuggage: boolean`
+  - `homeCountry?: "SE" | "NO" | "FI"` (absent until set: the app sets it on first launch from the phone's region when it is
+    one of these; the server then falls back to the first counted trip's boarding country, else `SE`)
 - Defaults (`index.ts:53`): `displayName ""`, `language "en"`, `distanceUnit "km"`, `clock "24h"`,
   `co2Comparison "car_1"`, `includeCommuter true`, `showRailNetwork true`, `theme "dark"`, `walkPace "normal"`,
   `stepFree false`, `heavyLuggage false`.
@@ -511,7 +513,7 @@ plus:
   - `{ counted: false }` (trip not counted yet, cancelled, **or the id is unknown**: no 404 here)
   - or `{ counted: true, unlocked: Milestone[], moved: { family: MilestoneFamily, before: number, after: number,
     target: number }[] /*up to 4*/, firsts: { stations: string[] /*names*/, operator: string | null /*operator id*/,
-    countries: string[] } }`
+    countries: string[] }, home: "SE" | "NO" | "FI" }`
 - Web: `api.tripProgress(id)` (`api.ts:479`), `components/TripProgress.tsx` (after adding a past trip, after arrival).
 
 ### 2.7 Journeys
@@ -645,8 +647,12 @@ plus:
 `Milestone` (`api.ts:341`; `stats/passport.ts:214`): `family: MilestoneFamily`, `target: number`,
 `at?: number` (ms, achieved only), `legId?: string` (achieved only), `value?: number` (upcoming only, one decimal).
 Targets per family (`passport.ts:203`): `journeys` 1, 10, 25, 50, 100, 250; `distanceKm` 100, 500, 1000, 2500, 5000,
-10000, 40075; `stations` 10, 25, 50, 100, 200; `operators` 3, 5, 10; `countries` 2, 3, 5; `borderCrossings` 1;
-`nightTrains` 1.
+10000, 40075; `stations` 10, 25, 50, 100, 200; `operators` 3, 5, 10; `countries` 2, 3, 5; `borderCrossings` 1, 5, 10, 25;
+`nightTrains` 1, 5, 10, 25; `longestTrainKm` 300, 500, 1000 (the longest single leg, a maximum); `hoursOnBoard` 10, 50, 100,
+250; `trainTypes` 5, 10, 20 (distinct non-null train types); `kindsOfTrain` 5 (distinct of high_speed, intercity, night,
+regional, commuter); `arcticCircle` 1 (consecutive ridden stops either side of 66°33′51.1″N); `homeLength` 1 and
+`europeLength` 1 (total km ÷ the home country's length, and ÷ Europe's: SE 1572, NO 1699, FI 1157, Europe 4358 km).
+An app that doesn't know a family decodes it as `unknown` and draws a plain medal.
 
 `LegRef` (`api.ts:326`; `passport.ts:131`): `legId: string`, `from: string` (name), `to: string` (name),
 `distanceM: number`, `minutes: number`, `dep: number` (ms), `arr: number` (ms), `delayMin: number | null`.
@@ -660,10 +666,11 @@ Targets per family (`passport.ts:203`): `journeys` 1, 10, 25, 50, 100, 250; `dis
 - Response `Passport` (`api.ts:359`; `routes/passport.ts:11-24` = `computePassport` + `milestones` + `review` +
   `refs`):
   - `years: number[]` (years with counted trips, newest first, Stockholm time)
+  - `home: "SE" | "NO" | "FI"` (the home country the length medals and flavor lines use; older servers don't send it)
   - `scope: { year: number | null, includeCommuter: boolean }`
   - `totals: { distanceM: number, minutes: number, trains: number, journeys: number, stations: number,
     countries: number, borderCrossings: number, cancellations: number }`
-  - `flavor: { earthLaps: number, swedenLengths: number, topRoute: { route: string, count: number } | null,
+  - `flavor: { earthLaps: number, swedenLengths: number, homeLengths: number, europeLengths: number, topRoute: { route: string, count: number } | null,
     busiestMonth: { month: string /*"YYYY-MM"*/, count: number } | null, lateMinutes: number }`
   - `records: { longestDistance: LegRef | null, longestDuration: LegRef | null, biggestDelay: LegRef | null,
     mostRiddenRoute: { route: string, count: number } | null, busiestStation: { id: string, name: string,
@@ -968,9 +975,10 @@ live map bbox re-subscribe 400 ms.
 - `LegRisk.limits`: `too_far`, `abroad`, `no_live_data`, `no_history`. `RiskWarning.kind`: `route_now`,
   `station_now`, `ahead`, `train_pattern`.
 - `Milestone.family`: `journeys`, `distanceKm`, `stations`, `operators`, `countries`, `borderCrossings`,
-  `nightTrains`.
+  `nightTrains`, `longestTrainKm`, `hoursOnBoard`, `trainTypes`, `kindsOfTrain`, `arcticCircle`, `homeLength`,
+  `europeLength`.
 - Passport delay `bands` keys: `on_time`, `slight`, `late`, `very_late`.
-- Settings: `language` `en | sv`; `distanceUnit` `km | mi`; `clock` `24h | 12h`; `theme` `system | dark | light`;
+- Settings: `language` `en | sv`; `distanceUnit` `km | mi`; `clock` `24h | 12h`; `theme` `system | dark | light`; `homeCountry` `SE | NO | FI`;
   `walkPace` `relaxed | normal | brisk`; `co2Comparison` `flight | car_1 | car_2 | car_3 | car_avg | ev_1 | coach`.
 - `OnboardFacts` (`packages/shared/src/onboard.ts:43`): `catering: CateringKind | null`, `cateringCar: string | null`
   (e.g. `"B"`), `sleeper: boolean`, `notices: OnboardNotice[]`. `CateringKind`: `bistro`, `cafe`, `kiosk`,

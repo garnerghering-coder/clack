@@ -92,6 +92,35 @@ struct DesignGalleryView: View {
             Wordmark(fontSize: 64)
             Wordmark(fontSize: 26)
         }
+        section("Medals") {
+            // Every family at its top level, then some locked and one with the share cards' foil.
+            let medals = MilestoneFamily.knownCases.map { f in Milestone(family: f, target: MedalStyle.levels(f).last ?? 1, at: nil, legId: nil, value: 0.4 * (MedalStyle.levels(f).last ?? 1)) }
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 12) {
+                ForEach(Array(medals.enumerated()), id: \.offset) { _, m in
+                    VStack(spacing: 2) {
+                        Medal(m: m, size: 84)
+                        Text(m.family.rawValue).clack(.caption).foregroundStyle(Ink.text2)
+                    }
+                }
+                ForEach(Array(medals.prefix(3).enumerated()), id: \.offset) { _, m in Medal(m: m, locked: true, size: 84) }
+                ForEach(Array(medals.suffix(3).enumerated()), id: \.offset) { _, m in Medal(m: m, size: 84, foil: 0.35) }
+            }
+        }
+        section("ShareCards") {
+            // Both layouts at a third of their size, with made-up numbers.
+            let medal = ShareCardView.CardMedal(milestone: Milestone(family: .homeLength, target: 1, at: nil, legId: nil, value: nil), label: "Once the length of Norway")
+            let stats = [ShareCardView.Stat(value: "41", label: "Journeys"), .init(value: "18", label: "Stations"), .init(value: "3", label: "Countries")]
+            let line = PassportMRZ.line(year: nil, km: 8_412, journeys: 41, stations: 18, countries: 3)
+            ShareCardView(layout: .stats, kicker: "Passport · All time", title: "All my train travel", sub: nil, heroValue: "8,412", heroUnit: "km", stats: stats, routes: [.init(geometry: nil, ends: [LatLon(59.33, 18.06), LatLon(57.71, 11.97)])], labels: [], medals: [medal, medal], mrz: line)
+                .frame(width: ShareCardView.width, height: ShareCardView.height).scaleEffect(0.3, anchor: .topLeading).frame(width: 324, height: 405, alignment: .topLeading)
+        }
+        section("ShareMedal") {
+            let medal = ShareCardView.CardMedal(milestone: Milestone(family: .homeLength, target: 1, at: nil, legId: nil, value: nil), label: "Once the length of Norway")
+            let stats = [ShareCardView.Stat(value: "41", label: "Journeys"), .init(value: "18", label: "Stations"), .init(value: "3", label: "Countries")]
+            let line = PassportMRZ.line(year: nil, km: 8_412, journeys: 41, stations: 18, countries: 3)
+            ShareCardView(layout: .medal, kicker: "Passport · Milestone unlocked", title: "Once the length of Norway", sub: "Unlocked October 2026", heroValue: "", heroUnit: "", stats: stats, routes: [], labels: [], medals: [medal], mrz: line)
+                .frame(width: ShareCardView.width, height: ShareCardView.height).scaleEffect(0.3, anchor: .topLeading).frame(width: 324, height: 405, alignment: .topLeading)
+        }
         section("Colours") {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 4), spacing: 8) {
                 ForEach(swatches, id: \.0) { name, color in

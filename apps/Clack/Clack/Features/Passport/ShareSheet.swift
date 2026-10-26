@@ -57,7 +57,7 @@ struct ShareSheet: View {
             }
             if variant == .medal, !achieved.isEmpty {
                 Picker(l10n.t("share.pickMedal"), selection: Binding(get: { medalKey ?? key(achieved[0]) }, set: { medalKey = $0 })) {
-                    ForEach(achieved, id: \.self) { m in Text(l10n.milestoneLabel(m, language: language)).tag(key(m)) }
+                    ForEach(achieved, id: \.self) { m in Text(l10n.milestoneLabel(m, language: language, home: base.home)).tag(key(m)) }
                 }
                 .tint(Ink.accentInk)
             }
@@ -95,6 +95,13 @@ struct ShareSheet: View {
 
     // MARK: what goes on the card
 
+    /// The year a trip left, in Stockholm's zone like the months on the cards.
+    private static func year(ms: Double) -> Int? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/Stockholm") ?? .current
+        return calendar.component(.year, from: Date(timeIntervalSince1970: ms / 1000))
+    }
+
     private func monthYear(_ ms: Double) -> String {
         let f = DateFormatter()
         f.locale = Format.locale(language)
@@ -119,10 +126,11 @@ struct ShareSheet: View {
         case .medal:
             guard let md = achieved.first(where: { key($0) == medalKey }) ?? achieved.first else { return nil }
             return ShareCardView(
-                layout: .medal, kicker: l10n.t("share.medalKicker"), title: l10n.milestoneLabel(md, language: language),
+                layout: .medal, kicker: l10n.t("share.medalKicker"), title: l10n.milestoneLabel(md, language: language, home: base.home),
                 sub: md.at.map { l10n.t("share.unlocked", ["date": monthYear($0.ms)]) }, heroValue: "", heroUnit: "",
                 stats: [.init(value: km(base.totals.distanceM), label: unit.rawValue)] + totals(base).prefix(2), routes: [], labels: [],
-                medals: [.init(milestone: md, label: l10n.milestoneLabel(md, language: language))]
+                medals: [.init(milestone: md, label: l10n.milestoneLabel(md, language: language, home: base.home))],
+                mrz: PassportMRZ.line(year: nil, km: base.totals.distanceM / 1000, journeys: base.totals.journeys, stations: base.totals.stations)
             )
         case .journey:
             guard let leg = counted.first(where: { $0.id == legId }) ?? counted.first, let route = base.map.first(where: { $0.legId == leg.id }) else { return nil }
@@ -139,7 +147,8 @@ struct ShareSheet: View {
                 heroValue: km(leg.distanceM ?? 0), heroUnit: unit.rawValue,
                 stats: [.init(value: onBoard, label: l10n.t("share.onBoard")), .init(value: leg.operator?.name ?? "—", label: l10n.t("share.operator"))],
                 routes: [.init(geometry: route.geometry, ends: ends)], labels: labels,
-                medals: achieved.filter { $0.legId == leg.id }.map { .init(milestone: $0, label: l10n.milestoneLabel($0, language: language)) }
+                medals: achieved.filter { $0.legId == leg.id }.map { .init(milestone: $0, label: l10n.milestoneLabel($0, language: language, home: base.home)) },
+                mrz: PassportMRZ.line(year: leg.schedDep.flatMap { Self.year(ms: $0.ms) }, km: (leg.distanceM ?? 0) / 1000)
             )
         case .year, .all:
             guard let p = variant == .year ? yearData : all else { return nil }
@@ -150,18 +159,20 @@ struct ShareSheet: View {
                 calendar.timeZone = TimeZone(identifier: "Europe/Stockholm") ?? .current
                 return calendar.component(.year, from: Date(timeIntervalSince1970: at.ms / 1000)) == y
             }
-            let medals = (variant == .year ? achieved.filter(inYear) : achieved).prefix(4).map { ShareCardView.CardMedal(milestone: $0, label: l10n.milestoneLabel($0, language: language)) }
+            let medals = (variant == .year ? achieved.filter(inYear) : achieved).prefix(4).map { ShareCardView.CardMedal(milestone: $0, label: l10n.milestoneLabel($0, language: language, home: base.home)) }
             if variant == .year {
                 return ShareCardView(
-                    layout: .stats, kicker: l10n.t("share.yearKicker"), title: l10n.t("share.yearTitle", ["year": String(shownYear ?? 0)]), sub: nil,
+                    layout: .stats, kicker: l10n.t("share.yearKicker", ["year": String(shownYear ?? 0)]), title: l10n.t("share.yearTitle", ["year": String(shownYear ?? 0)]), sub: nil,
                     heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue,
                     stats: [.init(value: String(p.totals.journeys), label: l10n.t("passport.journeys")), .init(value: Format.duration(p.totals.minutes), label: l10n.t("share.onBoard")), .init(value: String(p.totals.stations), label: l10n.t("passport.stations"))],
-                    routes: routes, labels: [], medals: Array(medals)
+                    routes: routes, labels: [], medals: Array(medals),
+                    mrz: PassportMRZ.line(year: shownYear, km: p.totals.distanceM / 1000, journeys: p.totals.journeys, stations: p.totals.stations)
                 )
             }
             return ShareCardView(
                 layout: .stats, kicker: l10n.t("share.allKicker"), title: l10n.t("share.allTitle"), sub: nil,
-                heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue, stats: totals(p), routes: routes, labels: [], medals: Array(medals)
+                heroValue: km(p.totals.distanceM), heroUnit: unit.rawValue, stats: totals(p), routes: routes, labels: [], medals: Array(medals),
+                mrz: PassportMRZ.line(year: nil, km: p.totals.distanceM / 1000, journeys: p.totals.journeys, stations: p.totals.stations, countries: p.totals.countries)
             )
         }
     }

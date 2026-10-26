@@ -7,9 +7,13 @@ import Foundation
 
 public nonisolated enum MilestoneFamily: OpenEnum {
     case journeys, distanceKm, stations, operators, countries, borderCrossings, nightTrains
+    case longestTrainKm, hoursOnBoard, trainTypes, kindsOfTrain, arcticCircle, homeLength, europeLength
     case unknown(String)
 
-    public static let knownCases: [MilestoneFamily] = [.journeys, .distanceKm, .stations, .operators, .countries, .borderCrossings, .nightTrains]
+    public static let knownCases: [MilestoneFamily] = [
+        .journeys, .distanceKm, .stations, .operators, .countries, .borderCrossings, .nightTrains,
+        .longestTrainKm, .hoursOnBoard, .trainTypes, .kindsOfTrain, .arcticCircle, .homeLength, .europeLength,
+    ]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
@@ -20,6 +24,13 @@ public nonisolated enum MilestoneFamily: OpenEnum {
         case .countries: "countries"
         case .borderCrossings: "borderCrossings"
         case .nightTrains: "nightTrains"
+        case .longestTrainKm: "longestTrainKm"
+        case .hoursOnBoard: "hoursOnBoard"
+        case .trainTypes: "trainTypes"
+        case .kindsOfTrain: "kindsOfTrain"
+        case .arcticCircle: "arcticCircle"
+        case .homeLength: "homeLength"
+        case .europeLength: "europeLength"
         case .unknown(let raw): raw
         }
     }
@@ -78,8 +89,11 @@ public nonisolated struct TripProgress: Codable, Hashable, Sendable {
     public let unlocked: [Milestone]
     public let moved: [Moved]
     public let firsts: Firsts?
+    /// The home country code the "length of your country" medal was counted for (missing from an older server).
+    public let home: String?
 
-    public init(counted: Bool, unlocked: [Milestone], moved: [Moved], firsts: Firsts?) {
+    public init(counted: Bool, unlocked: [Milestone], moved: [Moved], firsts: Firsts?, home: String? = nil) {
+        self.home = home
         self.counted = counted
         self.unlocked = unlocked
         self.moved = moved
@@ -92,9 +106,10 @@ public nonisolated struct TripProgress: Codable, Hashable, Sendable {
         unlocked = try c.decodeIfPresent([Milestone].self, forKey: .unlocked) ?? []
         moved = try c.decodeIfPresent([Moved].self, forKey: .moved) ?? []
         firsts = try c.decodeIfPresent(Firsts.self, forKey: .firsts)
+        home = try c.decodeIfPresent(String.self, forKey: .home)
     }
 
-    private enum CodingKeys: String, CodingKey { case counted, unlocked, moved, firsts }
+    private enum CodingKeys: String, CodingKey { case counted, unlocked, moved, firsts, home }
 }
 
 /// One warning on an upcoming trip (`GET /api/legs/:id/risk`), keyed by `kind`.
@@ -219,6 +234,9 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
     public nonisolated struct Flavor: Codable, Hashable, Sendable {
         public let earthLaps: Double
         public let swedenLengths: Double
+        /// The total as a multiple of the home country's length, and of Europe's (the server added them with the home country).
+        public let homeLengths: Double?
+        public let europeLengths: Double?
         public let topRoute: RouteCount?
         public nonisolated struct Month: Codable, Hashable, Sendable {
             /// `YYYY-MM`.
@@ -228,9 +246,11 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
         public let busiestMonth: Month?
         public let lateMinutes: Double
 
-        public init(earthLaps: Double, swedenLengths: Double, topRoute: RouteCount?, busiestMonth: Month?, lateMinutes: Double) {
+        public init(earthLaps: Double, swedenLengths: Double, homeLengths: Double? = nil, europeLengths: Double? = nil, topRoute: RouteCount?, busiestMonth: Month?, lateMinutes: Double) {
             self.earthLaps = earthLaps
             self.swedenLengths = swedenLengths
+            self.homeLengths = homeLengths
+            self.europeLengths = europeLengths
             self.topRoute = topRoute
             self.busiestMonth = busiestMonth
             self.lateMinutes = lateMinutes
@@ -448,6 +468,8 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
 
     /// Years with counted trips, newest first.
     public let years: [Int]
+    /// The home country code (SE, NO or FI) the length lines and medals use; missing from an older server.
+    public let home: String?
     public let scope: Scope
     public let totals: Totals
     public let flavor: Flavor
@@ -464,8 +486,9 @@ public nonisolated struct Passport: Codable, Hashable, Sendable {
     public let review: [Review]
     public let refs: Refs
 
-    public init(years: [Int], scope: Scope, totals: Totals, flavor: Flavor, records: Records, operators: [CountRow], products: [CountRow], trainTypes: [CountRow], delays: Delays, countries: [CountryRow], stations: [StationVisit], co2: Co2, map: [MapRoute], milestones: Milestones, review: [Review], refs: Refs) {
+    public init(years: [Int], home: String? = nil, scope: Scope, totals: Totals, flavor: Flavor, records: Records, operators: [CountRow], products: [CountRow], trainTypes: [CountRow], delays: Delays, countries: [CountryRow], stations: [StationVisit], co2: Co2, map: [MapRoute], milestones: Milestones, review: [Review], refs: Refs) {
         self.years = years
+        self.home = home
         self.scope = scope
         self.totals = totals
         self.flavor = flavor

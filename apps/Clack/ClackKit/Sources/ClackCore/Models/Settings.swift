@@ -102,6 +102,23 @@ public nonisolated enum WalkPace: OpenEnum {
     }
 }
 
+/// The country whose length the "length of your country" medal uses (SE, NO or FI).
+public nonisolated enum HomeCountry: OpenEnum {
+    case se, no, fi
+    case unknown(String)
+
+    public static let knownCases: [HomeCountry] = [.se, .no, .fi]
+    public init(unknown: String) { self = .unknown(unknown) }
+    public var rawValue: String {
+        switch self {
+        case .se: "SE"
+        case .no: "NO"
+        case .fi: "FI"
+        case .unknown(let raw): raw
+        }
+    }
+}
+
 /// `GET /api/settings` (docs/swift-port/API.md §2.2). The server fills missing keys with its defaults.
 public nonisolated struct Settings: Codable, Hashable, Sendable {
     public var displayName: String
@@ -126,6 +143,8 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
     public var notifyChange: Bool
     public var notifyGetOff: Bool
     public var notifyArrival: Bool
+    /// Unset until the app sets it from the phone's region, or the person picks one; the server then uses the first trip's country.
+    public var homeCountry: HomeCountry?
 
     /// The reminder lead times the server accepts (`LEAD_CHOICES`).
     public static let leadChoices = [0, 30, 60, 120, 180]
@@ -150,10 +169,11 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
         notifyCancel: true,
         notifyChange: true,
         notifyGetOff: true,
-        notifyArrival: true
+        notifyArrival: true,
+        homeCountry: nil
     )
 
-    public init(displayName: String, language: Language, distanceUnit: DistanceUnit, clock: ClockFormat, co2Comparison: Co2Comparison, includeCommuter: Bool, showRailNetwork: Bool, theme: ThemeSetting, walkPace: WalkPace, stepFree: Bool, heavyLuggage: Bool, notify: Bool, notifyLeadMin: Int, notifyPlatform: Bool, notifyDelay: Bool, notifyCancel: Bool, notifyChange: Bool, notifyGetOff: Bool, notifyArrival: Bool) {
+    public init(displayName: String, language: Language, distanceUnit: DistanceUnit, clock: ClockFormat, co2Comparison: Co2Comparison, includeCommuter: Bool, showRailNetwork: Bool, theme: ThemeSetting, walkPace: WalkPace, stepFree: Bool, heavyLuggage: Bool, notify: Bool, notifyLeadMin: Int, notifyPlatform: Bool, notifyDelay: Bool, notifyCancel: Bool, notifyChange: Bool, notifyGetOff: Bool, notifyArrival: Bool, homeCountry: HomeCountry? = nil) {
         self.displayName = displayName
         self.language = language
         self.distanceUnit = distanceUnit
@@ -173,6 +193,7 @@ public nonisolated struct Settings: Codable, Hashable, Sendable {
         self.notifyChange = notifyChange
         self.notifyGetOff = notifyGetOff
         self.notifyArrival = notifyArrival
+        self.homeCountry = homeCountry
     }
 }
 
@@ -180,7 +201,7 @@ nonisolated extension Settings {
     private enum Keys: String, CodingKey {
         case displayName, language, distanceUnit, clock, co2Comparison, includeCommuter, showRailNetwork, theme, walkPace
         case stepFree, heavyLuggage, notify, notifyLeadMin, notifyPlatform, notifyDelay, notifyCancel, notifyChange
-        case notifyGetOff, notifyArrival
+        case notifyGetOff, notifyArrival, homeCountry
     }
 
     /// A copy saved before the alert settings existed still loads: the missing ones take their defaults.
@@ -206,6 +227,7 @@ nonisolated extension Settings {
         notifyChange = try c.decodeIfPresent(Bool.self, forKey: .notifyChange) ?? d.notifyChange
         notifyGetOff = try c.decodeIfPresent(Bool.self, forKey: .notifyGetOff) ?? d.notifyGetOff
         notifyArrival = try c.decodeIfPresent(Bool.self, forKey: .notifyArrival) ?? d.notifyArrival
+        homeCountry = try c.decodeIfPresent(HomeCountry.self, forKey: .homeCountry)
     }
 }
 
@@ -231,8 +253,9 @@ public nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
     public var notifyChange: Bool?
     public var notifyGetOff: Bool?
     public var notifyArrival: Bool?
+    public var homeCountry: HomeCountry?
 
-    public init(displayName: String? = nil, language: Language? = nil, distanceUnit: DistanceUnit? = nil, clock: ClockFormat? = nil, co2Comparison: Co2Comparison? = nil, includeCommuter: Bool? = nil, showRailNetwork: Bool? = nil, theme: ThemeSetting? = nil, walkPace: WalkPace? = nil, stepFree: Bool? = nil, heavyLuggage: Bool? = nil, notify: Bool? = nil, notifyLeadMin: Int? = nil, notifyPlatform: Bool? = nil, notifyDelay: Bool? = nil, notifyCancel: Bool? = nil, notifyChange: Bool? = nil, notifyGetOff: Bool? = nil, notifyArrival: Bool? = nil) {
+    public init(displayName: String? = nil, language: Language? = nil, distanceUnit: DistanceUnit? = nil, clock: ClockFormat? = nil, co2Comparison: Co2Comparison? = nil, includeCommuter: Bool? = nil, showRailNetwork: Bool? = nil, theme: ThemeSetting? = nil, walkPace: WalkPace? = nil, stepFree: Bool? = nil, heavyLuggage: Bool? = nil, notify: Bool? = nil, notifyLeadMin: Int? = nil, notifyPlatform: Bool? = nil, notifyDelay: Bool? = nil, notifyCancel: Bool? = nil, notifyChange: Bool? = nil, notifyGetOff: Bool? = nil, notifyArrival: Bool? = nil, homeCountry: HomeCountry? = nil) {
         self.displayName = displayName
         self.language = language
         self.distanceUnit = distanceUnit
@@ -252,6 +275,7 @@ public nonisolated struct SettingsPatch: Encodable, Sendable, Equatable {
         self.notifyChange = notifyChange
         self.notifyGetOff = notifyGetOff
         self.notifyArrival = notifyArrival
+        self.homeCountry = homeCountry
     }
 }
 
@@ -292,6 +316,7 @@ nonisolated extension Settings {
         if let value = patch.notifyChange { next.notifyChange = value }
         if let value = patch.notifyGetOff { next.notifyGetOff = value }
         if let value = patch.notifyArrival { next.notifyArrival = value }
+        if let value = patch.homeCountry { next.homeCountry = value }
         return next
     }
 }

@@ -62,7 +62,12 @@ export interface Settings {
   notifyChange: boolean;
   notifyGetOff: boolean;
   notifyArrival: boolean;
+  /** Home country for the "length of your country" milestone. Unset: the app sets it from the phone's region, else the server uses your first trip's country. */
+  homeCountry?: HomeCountry;
 }
+
+export const HOME_COUNTRIES = ['SE', 'NO', 'FI'] as const;
+export type HomeCountry = (typeof HOME_COUNTRIES)[number];
 
 /** Lead times the reminder can be set to, in minutes (0 = off). */
 export const LEAD_CHOICES = [0, 30, 60, 120, 180] as const;
@@ -142,6 +147,10 @@ export function mergeSettings(current: Settings, patch: unknown): Settings {
       case 'co2Comparison':
         if (!CO2_COMPARISONS.includes(value as Co2Comparison)) throw new Error(`invalid co2Comparison: ${String(value)}`);
         next.co2Comparison = value as Co2Comparison;
+        break;
+      case 'homeCountry':
+        if (!HOME_COUNTRIES.includes(value as HomeCountry)) throw new Error(`invalid homeCountry: ${String(value)}`);
+        next.homeCountry = value as HomeCountry;
         break;
       case 'includeCommuter':
       case 'showRailNetwork':

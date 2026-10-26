@@ -135,8 +135,22 @@ final class AppModel {
             l10n.language = loaded.0.language
             state = .ready
             Task { await prefetchLogos() }
+            if let region = Self.homeCountry(forRegion: Locale.current.region?.identifier), loaded.0.homeCountry == nil {
+                await update(SettingsPatch(homeCountry: region))
+            }
         } catch {
             state = .failed
+        }
+    }
+
+    /// The home country a phone's region gives: Sweden, Norway or Finland. Any other region gives none, and the server
+    /// then uses the country of the first counted trip, else Sweden.
+    nonisolated static func homeCountry(forRegion region: String?) -> HomeCountry? {
+        switch region {
+        case "SE": .se
+        case "NO": .no
+        case "FI": .fi
+        default: nil
         }
     }
 

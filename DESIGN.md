@@ -209,12 +209,22 @@ Scrollable page. Sticky top controls: **year chips** (All time, 2026, 2025, …)
 ### 8.1 Flavor lines (secondary, small, rotate on tap or daily)
 Derived only from the user's own data; never invented. Constants live in one file and must be verified by Claude Code before use.
 - "**0.31× around the Earth**" (total km ÷ 40,075).
-- "**3.2× the length of Sweden**" (total km ÷ approx. 1,572 km north–south; verify the figure).
+- "**3.2× the length of Norway**": the length of the person's home country (Sweden 1,572 km, Norway 1,699 km, Finland 1,157 km; sources in `stats/passport.ts`), then how far across Europe: "**38% of the way across Europe**", or "**1.2× across Europe**" from the full length (about 4,358 km, Cape Nordkinn to Punta de Tarifa).
 - "**5 days and 3 hours** of your life on rails."
 - "Your most-ridden line: **Stockholm C ⇄ Göteborg C** (23 times)."
 - "Busiest month: **March 2026** (14 trains)."
 - "Longest rail streak: **9 days in a row**." (P2)
 - "You've spent **6h 12m** on late trains. Hang in there." (only if delay data exists)
+
+### 8.2 Medals
+
+A medal's number and its icon share one ink: the family's dark face colour taken 80% of the way to black (`MedalStyle.ink`), checked at 4.5:1 against the middle of the face. Each family has its own face colour. The one-off medals (every kind of train, Arctic Circle, home length, Europe length) show an icon and no number.
+
+### 8.3 Holographic surface & share cards
+
+The Passport's yellow cover, its guilloche rings and the pearly foil (soft pink, lilac, ice blue, mint, champagne) are one piece, `PassportCover` and `HoloSurface` in `Design/Holo.swift`. It is used by the Passport card, where the foil and glint follow the phone (`MotionTilt`), and by the share cards, where the glint is frozen mid-sweep (shine 0.35). With Reduce Motion the light sits still in the middle.
+
+The share cards (1080 × 1350, rendered to an image) are a page of the Passport: the yellow cover, black type, the wordmark and a "Passport · …" kicker, the route map as a dark inset panel with a hairline rim (card radius at card size), the stats, medals with a foil sheen on the face (under the number and icon, so their ink stays), and the code line along the bottom (`PassportMRZ`). The code line is built only from numbers the card prints. The four choices (year, all time, journey, medal) are unchanged.
 
 ## 9. Live tracking — P0
 

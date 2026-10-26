@@ -4598,6 +4598,57 @@
         }
       }
     },
+    "countries.possessive.FI" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finland"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finlands"
+          }
+        }
+      }
+    },
+    "countries.possessive.NO" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Norway"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Norges"
+          }
+        }
+      }
+    },
+    "countries.possessive.SE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sweden"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sveriges"
+          }
+        }
+      }
+    },
     "delay.cancelled" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9550,6 +9601,57 @@
         }
       }
     },
+    "passport.flavor.europe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}}× across Europe"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}}× Europas längd"
+          }
+        }
+      }
+    },
+    "passport.flavor.europePct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{pct}}% of the way across Europe"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{pct}} % av vägen genom Europa"
+          }
+        }
+      }
+    },
+    "passport.flavor.home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}}× the length of {{country}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}}× {{country}} längd"
+          }
+        }
+      }
+    },
     "passport.flavor.late" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9819,6 +9921,23 @@
         }
       }
     },
+    "passport.milestone.arcticCircle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crossed the Arctic Circle"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Över polcirkeln"
+          }
+        }
+      }
+    },
     "passport.milestone.borderCrossings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9935,6 +10054,23 @@
         }
       }
     },
+    "passport.milestone.europeLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once the length of Europe"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En gång Europas längd"
+          }
+        }
+      }
+    },
     "passport.milestone.firstJourney" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9948,6 +10084,64 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Första resan"
+          }
+        }
+      }
+    },
+    "passport.milestone.homeLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once the length of {{country}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En gång {{country}} längd"
+          }
+        }
+      }
+    },
+    "passport.milestone.hoursOnBoard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld hour on board"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld hours on board"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld timme ombord"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld timmar ombord"
+                }
+              }
+            }
           }
         }
       }
@@ -9989,6 +10183,40 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "passport.milestone.kindsOfTrain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every kind of train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla sorters tåg"
+          }
+        }
+      }
+    },
+    "passport.milestone.longestTrainKm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} km on one train"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} km på ett och samma tåg"
           }
         }
       }
@@ -10112,6 +10340,64 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "passport.milestone.trainTypes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld train type"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld train types"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tågtyp"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tågtyper"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "passport.milestone.unknown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Milestone"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Milstolpe"
           }
         }
       }
@@ -13048,6 +13334,40 @@
         }
       }
     },
+    "settings.homeCountry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home country"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hemland"
+          }
+        }
+      }
+    },
+    "settings.homeCountryAuto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From your first trip"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från din första resa"
+          }
+        }
+      }
+    },
     "settings.includeCommuter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13707,13 +14027,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rail passport"
+            "value" : "Passport · All time"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tågpass"
+            "value" : "Pass · Totalt"
           }
         }
       }
@@ -13928,13 +14248,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Milestone unlocked"
+            "value" : "Passport · Milestone unlocked"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Milstolpe upplåst"
+            "value" : "Pass · Milstolpe upplåst"
           }
         }
       }
@@ -14591,13 +14911,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Year in rail"
+            "value" : "Passport · {{year}}"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Året på räls"
+            "value" : "Pass · {{year}}"
           }
         }
       }

@@ -65,7 +65,7 @@ struct PassportCard: View {
             // A machine-readable-zone look, spelled out from your own totals (decoration; nothing personal).
             Text(mrz(km: km))
                 .font(.system(size: 11, design: .monospaced)).tracking(1.3).foregroundStyle(Color.black.opacity(0.45))
-.lineLimit(1)
+                .lineLimit(1)
                 .padding(.top, 8)
                 .overlay(alignment: .top) { Rectangle().stroke(Color.black.opacity(0.2), style: StrokeStyle(lineWidth: 1, dash: [3, 3])).frame(height: 1) }
                 .padding(.top, 4)
@@ -83,50 +83,10 @@ struct PassportCard: View {
         .onAppear { sheen = true }
     }
 
-    /// A holographic foil: a pearly spectrum (soft pink, lilac, ice blue, mint, champagne, like the foil stamped into a
-    /// real passport, not a neon rainbow) that slides across the cover as the phone moves, strongest along the guilloche
-    /// lines with a faint wash over the rest. Still with Reduce Motion.
-    private var foil: some View {
-        let t = reduceMotion ? 0.5 : motion.shine
-        let pearl = LinearGradient(
-            colors: [Color(hex: "#f3c4e4")!, Color(hex: "#cdbdf2")!, Color(hex: "#b9dcf2")!, Color(hex: "#c4ecd6")!, Color(hex: "#f4e6b8")!, Color(hex: "#f3c4e4")!],
-            startPoint: UnitPoint(x: t - 0.6, y: 0), endPoint: UnitPoint(x: t + 0.6, y: 1)
-        )
-        return ZStack {
-            pearl.opacity(0.14)
-            pearl.mask(Guilloche()).opacity(0.45)
-        }
-        .blendMode(.overlay)
-        .allowsHitTesting(false)
-        .accessibilityHidden(true)
-    }
-
-    /// Signal yellow deepening to amber, lit from the top left like a passport cover under a lamp, with guilloche lines,
-    /// holographic foil and a sheen.
+    /// The yellow passport cover with its holographic surface; the foil and glint follow the phone (Holo.swift).
     private var cover: some View {
-        ZStack {
-            CSSLinearGradient(angle: 155, stops: [
-                .init(color: Color(hex: "#ffe169")!, location: 0), .init(color: Color(hex: "#f8d64a")!, location: 0.45), .init(color: Color(hex: "#eab21c")!, location: 1),
-            ])
-            CSSRadialGradient(rx: 0.9, ry: 0.9, cx: 1, cy: 1, stops: [.init(color: Color(hex: "#d99a00")!, location: 0), .init(color: Color(hex: "#d99a00")!.opacity(0), location: 0.6)])
-            CSSRadialGradient(rx: 1.2, ry: 0.8, cx: 0, cy: 0, stops: [.init(color: Color(hex: "#fff3b0")!, location: 0), .init(color: Color(hex: "#fff3b0")!.opacity(0), location: 0.55)])
-            Guilloche().opacity(0.16)
-            foil
-            GeometryReader { proxy in
-                LinearGradient(stops: [.init(color: .clear, location: 0.3), .init(color: .white.opacity(0.75), location: 0.45), .init(color: .clear, location: 0.6)], startPoint: .leading, endPoint: .trailing)
-                    .frame(width: proxy.size.width * 2.5)
-                    .offset(x: sheen || reduceMotion ? -proxy.size.width * 2.5 * 0.45 + proxy.size.width * (reduceMotion ? 0.3 : motion.shine) : proxy.size.width * 0.4)
-                    .blendMode(.overlay)
-                    .animation(reduceMotion ? nil : .easeOut(duration: 1.6).delay(0.3), value: sheen)
-                // The metallic glint: a narrow bright line that runs ahead of the sheen as the phone tilts.
-                LinearGradient(stops: [.init(color: .clear, location: 0.46), .init(color: .white.opacity(0.9), location: 0.5), .init(color: .clear, location: 0.54)], startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .frame(width: proxy.size.width * 2)
-                    .offset(x: -proxy.size.width + proxy.size.width * 1.6 * (reduceMotion ? 0.3 : motion.shine))
-                    .blendMode(.softLight)
-                    .allowsHitTesting(false)
-            }
-        }
-        .overlay(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous).strokeBorder(Color.white.opacity(0.35), lineWidth: 1).blendMode(.overlay))
+        PassportCover(shine: motion.shine, sweep: sheen)
+            .overlay(RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous).strokeBorder(Color.white.opacity(0.35), lineWidth: 1).blendMode(.overlay))
     }
 
     private func tile(_ value: String, _ title: String, soft: Color, ink: Color) -> some View {
@@ -134,9 +94,7 @@ struct PassportCard: View {
     }
 
     private func mrz(km: Double) -> String {
-        let t = data.totals
-        let text = "P<CLACK<<\(year.map(String.init) ?? "ALL")<<KM\(Int(km.rounded()))<<J\(t.journeys)<<S\(t.stations)<<C\(t.countries)"
-        return String((text + String(repeating: "<", count: 44)).prefix(44))
+        PassportMRZ.line(year: year, km: km, journeys: data.totals.journeys, stations: data.totals.stations, countries: data.totals.countries)
     }
 
     /// The facts that rotate under the distance when tapped; ones with nothing worth saying are left out.
@@ -147,7 +105,16 @@ struct PassportCard: View {
         // Under one lap a share reads better than "0.04×"; tiny distances get no comparison at all.
         if f.earthLaps >= 1 { out.append(l10n.t("passport.flavor.earth", ["n": String(format: "%.1f", f.earthLaps)])) }
         else if f.earthLaps >= 0.01 { out.append(l10n.t("passport.flavor.earthPct", ["pct": String(Int((f.earthLaps * 100).rounded()))])) }
-        if f.swedenLengths >= 0.05 { out.append(l10n.t("passport.flavor.sweden", ["n": String(format: "%.1f", f.swedenLengths)])) }
+        // The length of your own country (an older server only sends Sweden's), then how far across Europe.
+        if let home = f.homeLengths {
+            if home >= 0.05 { out.append(l10n.t("passport.flavor.home", ["n": String(format: "%.1f", home), "country": l10n.possessiveCountryName(data.home ?? "SE")])) }
+        } else if f.swedenLengths >= 0.05 {
+            out.append(l10n.t("passport.flavor.sweden", ["n": String(format: "%.1f", f.swedenLengths)]))
+        }
+        if let europe = f.europeLengths {
+            if europe >= 1 { out.append(l10n.t("passport.flavor.europe", ["n": String(format: "%.1f", europe)])) }
+            else if europe >= 0.01 { out.append(l10n.t("passport.flavor.europePct", ["pct": String(Int((europe * 100).rounded()))])) }
+        }
         if t.minutes > 0 { out.append(l10n.t("passport.flavor.time", ["time": Format.duration(t.minutes)])) }
         if let route = f.topRoute { out.append(l10n.t("passport.flavor.route", count: route.count, ["route": route.route])) }
         if let month = f.busiestMonth, let ms = Format.isoToNoonMs("\(month.month)-15") {
@@ -157,29 +124,3 @@ struct PassportCard: View {
         return out
     }
 }
-
-private extension Double {
-    func clamped(_ lower: Double, _ upper: Double) -> Double { Swift.min(Swift.max(self, lower), upper) }
-}
-
-/// Fine concentric lines, the security-print pattern on passports and banknotes.
-private struct Guilloche: View {
-    var body: some View {
-        Canvas { context, size in
-            let ink = Color(red: 120 / 255, green: 70 / 255, blue: 0)
-            func rings(_ cx: Double, _ cy: Double, step: Double, alpha: Double) {
-                let maxR = hypot(size.width * 1.8, size.height * 1.8)
-                var r = step
-                while r < maxR {
-                    context.stroke(Path(ellipseIn: CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2)), with: .color(ink.opacity(alpha)), lineWidth: 1)
-                    r += step + 1
-                }
-            }
-            rings(size.width * 0.78, size.height * 0.2, step: 9, alpha: 0.9)
-            rings(size.width * 0.1, size.height * 0.95, step: 13, alpha: 0.7)
-        }
-        .mask(LinearGradient(colors: [.black, .black.opacity(0.35)], startPoint: .top, endPoint: .bottom))
-        .allowsHitTesting(false)
-    }
-}
-
