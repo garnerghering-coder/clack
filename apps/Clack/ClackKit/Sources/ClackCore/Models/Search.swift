@@ -24,6 +24,11 @@ public nonisolated struct StationHit: Codable, Hashable, Sendable, Identifiable 
     }
 }
 
+/// `GET /api/history/prepare`: where fetching an older day's Swedish timetable stands (ready, loading, failed, unavailable).
+public nonisolated struct HistoryPrepared: Codable, Hashable, Sendable {
+    public let sweden: String
+}
+
 /// `GET /api/search`: how the smart search read the text, station suggestions, and the trains or connections found.
 public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public nonisolated struct Interpretation: Codable, Hashable, Sendable {

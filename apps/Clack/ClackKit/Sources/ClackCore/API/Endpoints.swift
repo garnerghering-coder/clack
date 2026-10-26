@@ -82,6 +82,12 @@ extension APIClient {
         try await get(["search"], query: ["q": text, "date": date])
     }
 
+    /// Starts fetching an older day's timetable as soon as the day is picked, so it's ready when the search runs.
+    /// Answers at once; what it says isn't needed (the search reports the same).
+    public func prepareHistory(date: String) async throws {
+        let _: HistoryPrepared = try await get(["history", "prepare"], query: ["date": date])
+    }
+
     public func popularStations() async throws -> [StationHit] { try await get(["stations", "popular"]) }
     /// Real trains leaving within the hour, near a position when given, else from the big stations.
     public func trainsSoon(lat: Double? = nil, lon: Double? = nil) async throws -> [SoonTrain] {

@@ -25,6 +25,15 @@ export const searchRoutes =
       return search(req.query.q ?? '', date);
     });
 
+    // The app calls this as soon as an older day is picked, before anything is typed, so the archive import for that
+    // day is under way (or done) by the time the search runs. Returns at once with where it stands.
+    app.get<{ Querystring: { date?: string } }>('/history/prepare', async (req, reply) => {
+      const date = req.query.date ?? '';
+      if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
+      if (date >= addDays(todayIn(COUNTRIES.SE.tz), -1)) return { sweden: 'ready' };
+      return { sweden: ensureHistory(db, date, { log: (m) => app.log.warn(m) }).state };
+    });
+
     // Other ways to get there (disruption help): direct trains leaving `from` for `to` at or after `after`, today and
     // tomorrow, without the train you can't take; with one change when there are none. Timetable only: the client
     // says so and links each one to its live view.

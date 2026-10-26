@@ -110,11 +110,22 @@ final class AddTrainModel {
         }
     }
 
-    /// An older day's timetable is on its way: ask again until it's in.
+    /// An older day's timetable is on its way: ask again every couple of seconds until it's in (every 15 if fetching
+    /// it failed), for up to three minutes. One loop for the whole wait: the answer stays "loading" from one search to
+    /// the next, so a task started per answer would only ever ask once.
     func waitForHistory() async {
-        guard let history = response?.history, history == "loading" || history == "failed" else { return }
-        try? await Task.sleep(for: .seconds(history == "loading" ? 3 : 15))
-        if !Task.isCancelled { retry += 1 }
+        let started = Date.now
+        while let history = response?.history, history == "loading" || history == "failed" {
+            try? await Task.sleep(for: .seconds(history == "loading" ? 2 : 15))
+            if Task.isCancelled || Date.now.timeIntervalSince(started) > 180 { return }
+            retry += 1
+        }
+    }
+
+    /// A day before yesterday was picked: start fetching its timetable now, before anything is typed.
+    func prepareHistory(_ client: APIClient) async {
+        guard let yesterday = Format.addDaysIso(Format.todayIso(), days: -1), date < yesterday else { return }
+        try? await client.prepareHistory(date: date)
     }
 
     /// Saved one: if this replaced a cancelled or missed train, that one is marked as not taken, which you asked for by

@@ -27,6 +27,7 @@ struct AddTrainSheet: View {
         }
         .task(id: model.searchKey) { await model.runSearch(app.client) }
         .task(id: model.response?.history) { await model.waitForHistory() }
+        .task(id: model.date) { await model.prepareHistory(app.client) }
         .sensoryFeedback(.success, trigger: model.saved?.id)
     }
 
@@ -469,13 +470,15 @@ private struct ConfirmStep: View {
     }
 
     private func load() async {
+        // Both at once: the stops shouldn't wait for the map. The mini map is a nice-to-have: without it the summary
+        // falls back to straight-line distance.
+        async let route = try? app.client.timetableTripGeometry(result.key, date: result.serviceDate)
         do {
             trip = try await app.client.timetableTrip(result.key, date: result.serviceDate)
         } catch {
             self.error = (error as? APIError)?.message ?? error.localizedDescription
         }
-        // The mini map is a nice-to-have: without it the summary falls back to straight-line distance.
-        geometry = try? await app.client.timetableTripGeometry(result.key, date: result.serviceDate)
+        geometry = await route
     }
 
     private func save(force: Bool) async {
