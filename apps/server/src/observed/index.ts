@@ -66,10 +66,17 @@ export function startObserved(db: Db, log: (m: string) => void): () => void {
     });
     // Norway: one day every 2 minutes (a day scans ~0.07 GB, measured 2026-10-26: 2020 to now is ~170 GB, well under
     // the month's budget, which backfillStep also checks).
+    let bqIdle = false;
     const bqStep = guard('Norway BigQuery backfill', async () => {
       const day = await bq.backfillStep(db, { log });
-      if (day) await refreshLegsOnDay(db, day, log);
-      else if (bq.bigQueryEnabled()) log('observed NO backfill: done or paused for the month');
+      if (day) {
+        bqIdle = false;
+        await refreshLegsOnDay(db, day, log);
+      } else if (bq.bigQueryEnabled() && !bqIdle) {
+        // Said once, not every two minutes: it carries on by itself next month if it paused for the budget.
+        bqIdle = true;
+        log('observed NO backfill: done or paused for the month');
+      }
     });
     timers.push(setInterval(fiStep, 60_000), setInterval(bqStep, 2 * 60_000));
   }
