@@ -10,6 +10,7 @@ import { parseGtfsTime, todayIn, addDays, ymdToIso } from '../lib/time.js';
 import { readAll, readCsv, type Row } from '../lib/zip.js';
 import { classify, isRailRoute } from './classify.js';
 import { buildStations, type GtfsParent, type TrvLoc } from './stations.js';
+import { platformOf, tripDetail, tripDetailArgs, TRIP_DETAIL_COLUMNS, TRIP_DETAIL_UPDATE, TRIP_DETAIL_VALUES, UPSERT_STOP_SQL } from './detail.js';
 
 export const SOURCE = 'gtfs_se3';
 
@@ -33,7 +34,7 @@ export interface ImportOptions {
   log?: (msg: string) => void;
 }
 
-type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean];
+type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean, headsign: string | null];
 
 export function brandIndex(brands: Brand[]): Map<string, Brand> {
   const m = new Map<string, Brand>();
@@ -95,7 +96,7 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
   for await (const st of readCsv(zipPath, 'stop_times.txt')) {
     if (!tripIds.has(st.trip_id!)) continue;
     const list = stopsByTrip.get(st.trip_id!) ?? stopsByTrip.set(st.trip_id!, []).get(st.trip_id!)!;
-    list.push([Number(st.stop_sequence), st.stop_id!, parseGtfsTime(st.arrival_time!), parseGtfsTime(st.departure_time!), st.pickup_type === '1', st.drop_off_type === '1']);
+    list.push([Number(st.stop_sequence), st.stop_id!, parseGtfsTime(st.arrival_time!), parseGtfsTime(st.departure_time!), st.pickup_type === '1', st.drop_off_type === '1', st.stop_headsign || null]);
     usedStops.add(st.stop_id!);
   }
   for (const list of stopsByTrip.values()) list.sort((a, b) => a[0] - b[0]);
@@ -207,18 +208,16 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
     sqlite.prepare(`delete from timetable_trip_dates where service_date >= ? and trip_key in (select key from timetable_trips where source = ?)`).run(windowStart, SOURCE);
 
     const insertTrip = sqlite.prepare(
-      `insert into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version)
-       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) on conflict(key) do update set feed_version = excluded.feed_version, category = excluded.category, operator_id = excluded.operator_id`,
+      `insert into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version, ${TRIP_DETAIL_COLUMNS})
+       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ${TRIP_DETAIL_VALUES}) on conflict(key) do update set feed_version = excluded.feed_version, category = excluded.category, operator_id = excluded.operator_id, ${TRIP_DETAIL_UPDATE}`,
     );
-    const insertStop = sqlite.prepare(
-      `insert or ignore into timetable_stop_times (trip_key, seq, station_id, arr_sec, dep_sec, no_pickup, no_dropoff) values (?, ?, ?, ?, ?, ?, ?)`,
-    );
+    const insertStop = sqlite.prepare(UPSERT_STOP_SQL);
     const insertDate = sqlite.prepare(`insert or ignore into timetable_trip_dates (trip_key, service_date) values (?, ?)`);
     for (const p of patterns) {
       const routeName = p.route.route_long_name || p.route.route_short_name || null;
-      insertTrip.run(p.key, SOURCE, p.trip.trip_id, p.trip.samtrafiken_internal_trip_number || p.trip.trip_short_name || null, p.brand?.id ?? null, p.operator ?? null, routeName, p.route.route_type, p.category, p.tz, feedVersion);
+      insertTrip.run(p.key, SOURCE, p.trip.trip_id, p.trip.samtrafiken_internal_trip_number || p.trip.trip_short_name || null, p.brand?.id ?? null, p.operator ?? null, routeName, p.route.route_type, p.category, p.tz, feedVersion, ...tripDetailArgs(tripDetail(p.trip, p.route)));
       p.stops.forEach((s, i) => {
-        if (insertStop.run(p.key, i + 1, s.station, s[2], s[3], s[4] ? 1 : 0, s[5] ? 1 : 0).changes) stopTimes++;
+        if (insertStop.run(p.key, i + 1, s.station, s[2], s[3], s[4] ? 1 : 0, s[5] ? 1 : 0, platformOf(stopRows.get(s[1])), s[6]).changes) stopTimes++;
       });
       for (const d of p.dates) tripDates += insertDate.run(p.key, d).changes;
     }
@@ -253,7 +252,7 @@ export async function importGtfsSweden3(db: Db, zipPath: string, opts: ImportOpt
     window: [windowStart, windowEnd],
     ms: Date.now() - t0,
   };
-  log(`imported in ${(summary.ms / 1000).toFixed(1)} s: ${summary.trips} trips, ${summary.tripDates} trip-dates, ${summary.stopTimes} new stop times, ${summary.stations} stations`);
+  log(`imported in ${(summary.ms / 1000).toFixed(1)} s: ${summary.trips} trips, ${summary.tripDates} trip-dates, ${summary.stopTimes} stop times written, ${summary.stations} stations`);
   return summary;
 }
 

@@ -15,6 +15,7 @@ import { updateRides } from './recording.js';
 import { enturStops } from '../entur/calls.js';
 import { DIGITRAFFIC_HISTORY_MS, digitrafficFor, fetchVehicle } from '../digitraffic/trains.js';
 import { countryOfKey } from '../lib/countries.js';
+import { recordedStops, recordPending } from '../observed/lookup.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
@@ -270,6 +271,26 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       for (const t of deviationTexts(e.causes ?? [])) if (!have.deviations.includes(t)) have.deviations.push(t);
     }
   }
+  // Beyond the live sources: the observed record, which keeps what actually happened to every train (SPEC §5.6).
+  // It fills what they no longer have (a trip saved after Trafikverket's ~4 days, a past Norwegian day).
+  const recorded = leg.serviceDate ? recordedStops(db, { trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops }) : new Map<number, StopActuals>();
+  for (const [seq, r] of recorded) {
+    const have = matched.get(seq);
+    if (!have) matched.set(seq, r);
+    else {
+      have.actualArr ??= r.actualArr;
+      have.actualDep ??= r.actualDep;
+      have.platform ??= r.platform;
+      have.canceled ||= r.canceled;
+      have.causes = addCauses(have.causes ?? [], r.causes ?? []);
+      for (const t of r.deviations) if (!have.deviations.includes(t)) have.deviations.push(t);
+    }
+  }
+  // The timetable's planned platform where no source has said one (the feeds carry them since 2026-10-27).
+  const planned = new Map<number, string>();
+  if (leg.timetableTripKey)
+    for (const r of db.$client.prepare(`select seq, platform from timetable_stop_times where trip_key = ? and platform is not null`).all(leg.timetableTripKey) as { seq: number; platform: string }[])
+      planned.set(r.seq, r.platform);
   for (const m of matched.values()) {
     const st = storedOf.get(m.seq);
     const ms = (d: Date | null | undefined) => d?.getTime() ?? null;
@@ -282,7 +303,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   // Germany, and SJ's or Snälltåget's trains in Norway): those stops stay on the timetable and say so.
   // Finnish trains: Digitraffic, at every stop it serves (Haparanda included, whatever Trafikverket's signature says).
   const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | 'digitraffic' | null =>
-    finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? null);
+    finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? recorded.get(s.seq)?.source ?? null);
   // Norway's published time for a Norwegian stop of another country's train (SJ 645: Oslo S 00:14, not SJ's 00:02).
   const adjusted = new Map<number, { arr: number | null; dep: number | null }>();
   for (const s of stops) {
@@ -332,7 +353,9 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   const dataQuality = actualDep !== null && actualArr !== null ? 'full' : actualDep !== null || actualArr !== null ? 'partial' : 'scheduled_only';
   const schedArrNow = alight?.schedArr ?? alight?.schedDep ?? arr;
   const arrived = actualArr !== null ? actualArr : schedArrNow;
-  const snapshot = (actualArr !== null && now - actualArr > SNAPSHOT_AFTER_MS) || Boolean(tooOld);
+  // Too old for the live sources: frozen, unless the record may still bring the day (a backfill not there yet).
+  const pending = Boolean(tooOld) && Boolean(leg.serviceDate) && (finnish ? recordPending(db, 'FI', leg.serviceDate!) : leg.countryCodes.includes('NO') && recordPending(db, 'NO', leg.serviceDate!));
+  const snapshot = (actualArr !== null && now - actualArr > SNAPSHOT_AFTER_MS) || (Boolean(tooOld) && !pending);
   const status = snapshot ? 'snapshotted' : schedArrNow && now > arrived ? 'completed' : 'planned';
 
   // The coach order where you boarded can pin down the train type (SJ: X2000 or SJ 3000). Never over the owner's choice.
@@ -357,7 +380,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
           // Estimates only matter until the real time is known.
           estimatedArr: m.actualArr === null && m.estimatedArr !== null ? new Date(m.estimatedArr) : null,
           estimatedDep: m.actualDep === null && m.estimatedDep !== null ? new Date(m.estimatedDep) : null,
-          platform: m.platform,
+          platform: m.platform ?? planned.get(m.seq) ?? null,
           canceled: m.canceled,
           deviations: m.deviations,
           causes: JSON.stringify(m.causes ?? []),
@@ -369,7 +392,11 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
     for (const s of stops) {
       const t = adjusted.get(s.seq);
       tx.update(legStops)
-        .set({ reportSource: sourceOf(s), ...(t ? { schedArr: t.arr === null ? null : new Date(t.arr), schedDep: t.dep === null ? null : new Date(t.dep) } : {}) })
+        .set({
+          reportSource: sourceOf(s),
+          ...(t ? { schedArr: t.arr === null ? null : new Date(t.arr), schedDep: t.dep === null ? null : new Date(t.dep) } : {}),
+          ...(!matched.has(s.seq) && planned.has(s.seq) ? { platform: planned.get(s.seq)! } : {}),
+        })
         .where(and(eq(legStops.legId, legId), eq(legStops.seq, s.seq)))
         .run();
     }
@@ -381,8 +408,8 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
         actualArr: actualArr === null ? null : new Date(actualArr),
         depDelayMin: delayMinutes(board?.schedDep, actualDep),
         arrDelayMin: delayMinutes(alight?.schedArr, actualArr),
-        depPlatform: b?.platform ?? null,
-        arrPlatform: a?.platform ?? null,
+        depPlatform: b?.platform ?? (board ? planned.get(board.seq) : undefined) ?? null,
+        arrPlatform: a?.platform ?? (alight ? planned.get(alight.seq) : undefined) ?? null,
         canceled: Boolean(b?.canceled || a?.canceled),
         trvTrainNumbers: [...new Set([...matched.values()].map((m) => m.trvTrainNumber).filter((n): n is string => !!n))],
         borderEvidence: borderEvidence.board || borderEvidence.alight ? borderEvidence : null,
@@ -409,12 +436,18 @@ export async function refreshDueLegs(db: Db, log: (m: string) => void = () => {}
     .from(legs)
     .where(and(ne(legs.status, 'snapshotted'), lt(legs.schedDep, new Date(now + 86400_000)), gt(legs.schedArr, new Date(now - TRV_HISTORY_MS - 86400_000))))
     .all();
-  // Older legs that were never caught in time: freeze them as scheduled-only (the data is gone from Trafikverket).
-  const expired = db
-    .update(legs)
-    .set({ status: 'snapshotted' })
+  // Older legs that were never caught in time: freeze them as they are (the data is gone from Trafikverket), unless the
+  // observed record may still bring their day (Norway's and Finland's backfills); those are refreshed when it does.
+  let expired = 0;
+  for (const l of db
+    .select({ id: legs.id, serviceDate: legs.serviceDate, countryCodes: legs.countryCodes, key: legs.timetableTripKey })
+    .from(legs)
     .where(and(ne(legs.status, 'snapshotted'), lt(legs.schedArr, new Date(now - TRV_HISTORY_MS))))
-    .run().changes;
+    .all()) {
+    const country = countryOfKey(l.key ?? '') === 'FI' ? 'FI' : l.countryCodes.includes('NO') ? 'NO' : 'SE';
+    if (l.serviceDate && recordPending(db, country, l.serviceDate)) continue;
+    expired += db.update(legs).set({ status: 'snapshotted' }).where(eq(legs.id, l.id)).run().changes;
+  }
   let ok = 0;
   for (const { id } of due) {
     try {
@@ -429,4 +462,15 @@ export async function refreshDueLegs(db: Db, log: (m: string) => void = () => {}
   if (asked) log(`trip records: ${asked} updated`);
   if (due.length || expired) log(`actual times: refreshed ${ok}/${due.length} legs${expired ? `, ${expired} expired as scheduled-only` : ''}`);
   void sql;
+}
+
+/** A day has just come into the observed record (a backfill or the morning's archive): refresh the trips saved for it. */
+export async function refreshLegsOnDay(db: Db, serviceDate: string, log: (m: string) => void = () => {}) {
+  const ids = db
+    .select({ id: legs.id })
+    .from(legs)
+    .where(and(ne(legs.status, 'snapshotted'), eq(legs.serviceDate, serviceDate)))
+    .all();
+  for (const { id } of ids) await refreshLegActuals(db, id).catch((e) => log(`actuals for leg ${id} failed: ${(e as Error).message}`));
+  if (ids.length) log(`observed record ${serviceDate}: refreshed ${ids.length} saved trips`);
 }

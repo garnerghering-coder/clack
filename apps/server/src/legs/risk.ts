@@ -110,7 +110,10 @@ export function patternWarning(obs: { delayMin: number | null; canceled: boolean
   return { kind: 'train_pattern', station, days, lateDays, medianMin: Math.min(median(delays), 98) };
 }
 
-/** Remember departures seen (one row per train, station and day; the latest report wins). Kept 30 days. */
+/**
+ * Remember departures seen (one row per train, station and day; the latest report wins). Kept: the data is the product
+ * (patterns only read the last PATTERN_DAYS).
+ */
 export function recordObservations(db: Db, deps: (Departure & { serviceDate: string })[]) {
   const done = deps.filter((d) => d.actual !== null || d.canceled);
   if (!done.length) return;
@@ -121,7 +124,6 @@ export function recordObservations(db: Db, deps: (Departure & { serviceDate: str
   db.transaction(() => {
     for (const d of done) upsert.run(d.trainNumber, d.signature, d.serviceDate, d.advertised, delayOf(d), d.canceled ? 1 : 0);
   });
-  db.delete(delayObservations).where(lt(delayObservations.serviceDate, addDays(todayIn('Europe/Stockholm'), -30))).run();
 }
 
 interface TrvDep {

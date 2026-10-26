@@ -14,6 +14,7 @@ import { refreshStationPopularity } from './gtfs-se3.js';
 import { matchStation, type ExistingStation } from './gtfs-no.js';
 import { cleanFiName, fetchFiStations, usableFiStation, type FiStation } from './fi-stations.js';
 import { countryOf, TZ_BY_COUNTRY } from './stations.js';
+import { platformOf, tripDetail, tripDetailArgs, TRIP_DETAIL_COLUMNS, TRIP_DETAIL_UPDATE, TRIP_DETAIL_VALUES, UPSERT_STOP_SQL, type TripDetail } from './detail.js';
 
 export const SOURCE = 'gtfs_fi';
 const TZ = COUNTRIES.FI.tz;
@@ -141,7 +142,7 @@ export interface FinlandImportSummary {
   ms: number;
 }
 
-type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean];
+type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean, headsign: string | null];
 
 export async function importGtfsFinland(
   db: Db,
@@ -194,6 +195,7 @@ export async function importGtfsFinland(
       parseGtfsTime(st.departure_time!),
       st.pickup_type === '1',
       st.drop_off_type === '1',
+      st.stop_headsign || null,
     ]);
   }
   log(`Digitraffic GTFS: ${kept.length} rail trips running ${windowStart}..${windowEnd}`);
@@ -238,7 +240,7 @@ export async function importGtfsFinland(
   let numbersMissing = 0;
   const unknownTypes = new Set<string>();
   const usedBrands = new Map<string, Brand>();
-  const patterns: { key: string; tripId: string; number: string | null; brand?: Brand; agency: string; route: Row; category: string; stops: { station: string; s: StopRow }[]; dates: string[] }[] = [];
+  const patterns: { key: string; tripId: string; number: string | null; brand?: Brand; agency: string; route: Row; category: string; stops: { station: string; s: StopRow; platform: string | null }[]; dates: string[]; detail: TripDetail }[] = [];
   for (const trip of kept) {
     const route = routes.get(trip.route_id!)!;
     const type = trainTypeFromRouteId(route.route_id!);
@@ -272,8 +274,10 @@ export async function importGtfsFinland(
       agency: agencies.get(route.agency_id!)?.agency_name ?? '',
       route,
       category: kind.product,
-      stops: stops.map((x) => ({ station: x.station!, s: x.s })),
+      stops: stops.map((x) => ({ station: x.station!, s: x.s, platform: platformOf(stopRows.get(x.s[1])) })),
       dates: dates.get(trip.service_id!)!,
+      // Commuter trains' line letter ("A", "P"), which used to survive only inside the route name.
+      detail: tripDetail(trip, route, commuterLineOf(trip.trip_short_name ?? '') ?? route.route_short_name ?? null),
     });
   }
   if (unknownTypes.size) log(`Digitraffic GTFS: train types not in /metadata/train-types, treated as regional: ${[...unknownTypes].join(', ')}`);
@@ -297,16 +301,16 @@ export async function importGtfsFinland(
     for (const [code, m] of matchedCodes) setFi.run(code, m.uic, m.id);
     sqlite.prepare(`delete from timetable_trip_dates where service_date >= ? and trip_key in (select key from timetable_trips where source = ?)`).run(windowStart, SOURCE);
     const insertTrip = sqlite.prepare(
-      `insert into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version)
-       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) on conflict(key) do update set category = excluded.category, operator_id = excluded.operator_id, feed_version = excluded.feed_version`,
+      `insert into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version, ${TRIP_DETAIL_COLUMNS})
+       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ${TRIP_DETAIL_VALUES}) on conflict(key) do update set category = excluded.category, operator_id = excluded.operator_id, feed_version = excluded.feed_version, ${TRIP_DETAIL_UPDATE}`,
     );
-    const insertStop = sqlite.prepare(`insert or ignore into timetable_stop_times (trip_key, seq, station_id, arr_sec, dep_sec, no_pickup, no_dropoff) values (?, ?, ?, ?, ?, ?, ?)`);
+    const insertStop = sqlite.prepare(UPSERT_STOP_SQL);
     const insertDate = sqlite.prepare(`insert or ignore into timetable_trip_dates (trip_key, service_date) values (?, ?)`);
     for (const p of patterns) {
       // "IC 27 Helsinki - Oulu", or for a commuter line "A Helsinki - Leppävaara": the line letter stays in the name.
       const routeName = [p.route.route_short_name, p.route.route_long_name].filter(Boolean).join(' ') || null;
-      insertTrip.run(p.key, SOURCE, p.tripId, p.number, p.brand?.id ?? null, p.agency, routeName, p.route.route_type, p.category, TZ, today);
-      p.stops.forEach((x, i) => insertStop.run(p.key, i + 1, x.station, x.s[2], x.s[3], x.s[4] ? 1 : 0, x.s[5] ? 1 : 0));
+      insertTrip.run(p.key, SOURCE, p.tripId, p.number, p.brand?.id ?? null, p.agency, routeName, p.route.route_type, p.category, TZ, today, ...tripDetailArgs(p.detail));
+      p.stops.forEach((x, i) => insertStop.run(p.key, i + 1, x.station, x.s[2], x.s[3], x.s[4] ? 1 : 0, x.s[5] ? 1 : 0, x.platform, x.s[6]));
       for (const d of p.dates) tripDates += insertDate.run(p.key, d).changes;
     }
     sqlite.prepare(`delete from timetable_trips where source = ? and key not in (select trip_key from timetable_trip_dates)`).run(SOURCE);

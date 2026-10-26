@@ -72,6 +72,15 @@ export const timetableTrips = sqliteTable(
     /** Agency time zone the stop times are relative to. */
     tz: text('tz').notNull(),
     feedVersion: text('feed_version'),
+    /** What the train shows as its destination (GTFS trip_headsign). */
+    headsign: text('headsign'),
+    /** The line's short name as the feed gives it (R14, L1, Finland's commuter letters). */
+    line: text('line'),
+    /** GTFS route_color (hex without #), when the feed sets one. */
+    routeColor: text('route_color'),
+    /** GTFS wheelchair_accessible / bikes_allowed: 1 yes, 2 no, null not stated. */
+    wheelchair: integer('wheelchair'),
+    bikes: integer('bikes'),
   },
   (t) => [index('timetable_trips_number').on(t.trainNumber)],
 );
@@ -98,6 +107,10 @@ export const timetableStopTimes = sqliteTable(
     /** GTFS pickup_type/drop_off_type = 1: boarding/alighting not allowed here. */
     noPickup: integer('no_pickup', { mode: 'boolean' }).notNull().default(false),
     noDropoff: integer('no_dropoff', { mode: 'boolean' }).notNull().default(false),
+    /** The planned platform (the stop's platform_code, or its own code under the station), when the feed gives one. */
+    platform: text('platform'),
+    /** GTFS stop_headsign: the destination shown from this stop on, when it differs along the way. */
+    headsign: text('headsign'),
   },
   (t) => [primaryKey({ columns: [t.tripKey, t.seq] }), index('stop_times_station').on(t.stationId)],
 );
@@ -396,7 +409,7 @@ export const stationRequests = sqliteTable('station_requests', {
 
 /**
  * Departure delays Clack has seen (boards and route checks), for "this train has often left late" patterns. Trafikverket
- * only keeps about a day back, so the history is what this computer has observed; kept 30 days.
+ * only keeps about a day back, so the history is what this computer has observed; never deleted.
  */
 export const delayObservations = sqliteTable(
   'delay_observations',

@@ -20,6 +20,7 @@ import { buildStations, type GtfsParent, type TrvLoc } from './stations.js';
 import { brandMatcher } from '../boards/board.js';
 import { CACHE_DIR } from './downloads.js';
 import { loadOfficialMapping } from './official-mapping.js';
+import { platformOf, tripDetail, tripDetailArgs, TRIP_DETAIL_COLUMNS, TRIP_DETAIL_VALUES, UPSERT_STOP_SQL } from './detail.js';
 
 export const HISTORY_SOURCE = 'gtfs_sv2';
 export const ARCHIVE_URL = 'https://data.samtrafiken.se/trafiklab/gtfs-sverige-2';
@@ -35,13 +36,26 @@ export interface Snapshot {
   extraUrl: string;
 }
 
-/** Snapshot files in one month of the archive, oldest first. */
-export async function listSnapshots(year: number, month: number, fetchImpl: typeof fetch = fetch): Promise<Snapshot[]> {
-  const dir = `${ARCHIVE_URL}/${year}/${String(month).padStart(2, '0')}/`;
+const listings = new Map<string, { at: number; list: Snapshot[] }>();
+/** For tests. */
+export const resetListingCache = () => listings.clear();
+
+/**
+ * Snapshot files in one month of the archive, oldest first. Remembered: a past month's listing doesn't change, and
+ * the current month's is asked again after an hour (each import used to ask for up to seven months again).
+ */
+export async function listSnapshots(year: number, month: number, fetchImpl: typeof fetch = fetch, now = Date.now()): Promise<Snapshot[]> {
+  const ym = `${year}/${String(month).padStart(2, '0')}`;
+  const hit = listings.get(ym);
+  const current = ym >= new Date(now).toISOString().slice(0, 7).replace('-', '/');
+  if (hit && (!current || now - hit.at < 3600_000)) return hit.list;
+  const dir = `${ARCHIVE_URL}/${ym}/`;
   const res = await fetchImpl(dir);
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Sverige 2 archive ${res.status}`);
-  return parseListing(await res.text(), dir);
+  const list = parseListing(await res.text(), dir);
+  listings.set(ym, { at: now, list });
+  return list;
 }
 
 /** "sweden-20250310.zip" (2017 on) or "trafiklab-20140310.zip" (2012–2016), with its matching extra file. Pure. */
@@ -112,14 +126,23 @@ export function trustedDates(notes: ImportNotes): string[] {
 }
 
 /** The days to import around `date` from a snapshot of `snapshotDate`: from the snapshot's day on, up to two weeks
- * either side of the asked-for date, not yet covered and before the current feed's first day. Pure. */
-export function datesToFill(date: string, snapshotDate: string, firstCurrent: string, covered: Set<string>): string[] {
+ * either side of the asked-for date (or the `span` given, for the backfill's blocks), not yet covered and before the
+ * current feed's first day. Pure. */
+export function datesToFill(date: string, snapshotDate: string, firstCurrent: string, covered: Set<string>, span?: { from: string; to: string }): string[] {
   const out: string[] = [];
-  for (let i = -SPAN_DAYS; i <= SPAN_DAYS; i++) {
-    const d = addDays(date, i);
+  const [first, last] = span ? [span.from, span.to] : [addDays(date, -SPAN_DAYS), addDays(date, SPAN_DAYS)];
+  for (let d = first; d <= last; d = addDays(d, 1)) {
     if (d >= ARCHIVE_START && d >= snapshotDate && d < firstCurrent && !covered.has(d)) out.push(d);
   }
   return out;
+}
+
+/** The first day of the current Swedish feed (GTFS Sweden 3): the archive is only for days before it. */
+export function firstCurrentDay(db: Db): string {
+  return (
+    db.all<{ d: string | null }>(sql`select min(d.service_date) as d from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where t.source = 'gtfs_se3'`)[0]?.d ??
+    '9999-12-31'
+  );
 }
 
 /** Is there any Swedish timetable for this date (today's feed kept from earlier days, or the archive)? */
@@ -134,7 +157,17 @@ export function hasSwedishTimetable(db: Db, date: string): boolean {
 /** The 7-digit rikshållplats ids of 2012–2016 (74xxxxx) became 9 digits (7400xxxxx). */
 export const riksId = (id: string) => (/^\d{7}$/.test(id) ? `${id.slice(0, 2)}00${id.slice(2)}` : id);
 
-type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean];
+type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean, headsign: string | null];
+
+/**
+ * An archive trip's key: a fingerprint of everything stored about it (number, operator, route type, category, route
+ * name, headsign, and per stop the station, times, boarding flags, platform and headsign). The same train in the next
+ * snapshot gets the same key and only adds its dates, so an unchanged train is stored once, not once per snapshot;
+ * a train that differs in anything stored gets its own. Earlier `sv2:<snapshot>:<trip>:<hash>` keys stay as they are.
+ */
+export function historyKey(t: { number: string | null; operator: string; routeType: string; category: string; routeName: string | null; headsign: string | null; stops: unknown[][] }): string {
+  return `sv2:${crypto.createHash('sha1').update(JSON.stringify([t.number, t.operator, t.routeType, t.category, t.routeName, t.headsign, t.stops])).digest('hex').slice(0, 14)}`;
+}
 
 export interface HistorySummary {
   snapshot: string;
@@ -148,20 +181,30 @@ export interface HistorySummary {
  * Import the archive's timetable around `date`: from the snapshot for that date, its rail trips on the days within
  * SPAN_DAYS, from the snapshot's own day on, that have no Swedish timetable yet (and are before GTFS Sweden 3's first day).
  */
-export async function importHistory(db: Db, date: string, opts: { fetchImpl?: typeof fetch; log?: (m: string) => void } = {}): Promise<HistorySummary | null> {
+export async function importHistory(
+  db: Db,
+  date: string,
+  opts: { fetchImpl?: typeof fetch; log?: (m: string) => void; span?: { from: string; to: string }; keepDownload?: boolean } = {},
+): Promise<HistorySummary | null> {
   const t0 = Date.now();
   const log = opts.log ?? (() => {});
   const snap = await snapshotFor(date, opts.fetchImpl);
   if (!snap) return null;
   const zip = path.join(DIR, `sweden-${snap.ymd}.zip`);
   log(`Sverige 2: snapshot ${snap.ymd} for ${date}`);
-  await download(snap.url, zip, opts.fetchImpl);
   // Train numbers: trip_short_name until 2019, then the extra file's trips_technical.txt (DATA_FINDINGS §4).
   const extra = path.join(DIR, `extra-${snap.ymd}.zip`);
   const inner = path.join(DIR, `extra-${snap.ymd}-inner.zip`);
+  // Both files at once (the extra one used to wait for the 33–63 MB main one); the extra one may be missing.
+  const extraDownload = download(snap.extraUrl, extra, opts.fetchImpl).then(
+    () => null,
+    (e: Error) => e,
+  );
+  await download(snap.url, zip, opts.fetchImpl);
   const technical = new Map<string, string>();
   try {
-    await download(snap.extraUrl, extra, opts.fetchImpl);
+    const failed = await extraDownload;
+    if (failed) throw failed;
     await unpackInner(extra, 'extra.zip', inner);
     for await (const r of readCsv(inner, 'trips_technical.txt')) if (r.technical_trip_number) technical.set(r.trip_id!, r.technical_trip_number);
   } catch (e) {
@@ -169,8 +212,7 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
   }
 
   // The dates to fill: around the requested one, not yet covered, before the current feed's first day.
-  const firstCurrent = (db.all<{ d: string | null }>(sql`select min(d.service_date) as d from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where t.source = 'gtfs_se3'`)[0]?.d ?? '9999-12-31');
-  const wanted = datesToFill(date, ymdToIso(snap.ymd), firstCurrent, coveredDates(db));
+  const wanted = datesToFill(date, ymdToIso(snap.ymd), firstCurrentDay(db), coveredDates(db), opts.span);
   if (!wanted.length) return { snapshot: snap.ymd, dates: [], trips: 0, stationsAdded: 0, ms: Date.now() - t0 };
   const [from, to] = [wanted[0]!.replaceAll('-', ''), wanted.at(-1)!.replaceAll('-', '')];
   const wantedSet = new Set(wanted);
@@ -186,7 +228,15 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
   const used = new Set<string>();
   for await (const st of readCsv(zip, 'stop_times.txt')) {
     if (!tripIds.has(st.trip_id!)) continue;
-    (stopsByTrip.get(st.trip_id!) ?? stopsByTrip.set(st.trip_id!, []).get(st.trip_id!)!).push([Number(st.stop_sequence), st.stop_id!, parseGtfsTime(st.arrival_time!), parseGtfsTime(st.departure_time!), st.pickup_type === '1', st.drop_off_type === '1']);
+    (stopsByTrip.get(st.trip_id!) ?? stopsByTrip.set(st.trip_id!, []).get(st.trip_id!)!).push([
+      Number(st.stop_sequence),
+      st.stop_id!,
+      parseGtfsTime(st.arrival_time!),
+      parseGtfsTime(st.departure_time!),
+      st.pickup_type === '1',
+      st.drop_off_type === '1',
+      st.stop_headsign || null,
+    ]);
     used.add(st.stop_id!);
   }
   log(`Sverige 2 ${snap.ymd}: ${trips.length} rail trips on ${wanted[0]}..${wanted.at(-1)}`);
@@ -249,9 +299,8 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
     const brand = brands.get(agency) ?? (named ? brandById.get(named) : undefined);
     if (brand) usedBrands.set(brand.id, brand);
     const number = trip.trip_short_name || technical.get(trip.trip_id!) || trip.samtrafiken_internal_trip_number || null;
-    const hash = crypto.createHash('sha1').update(JSON.stringify([number, stops.map((x) => [x.station, x.s[2], x.s[3]])])).digest('hex').slice(0, 10);
     patterns.push({
-      key: `sv2:${snap.ymd}:${trip.trip_id}:${hash}`,
+      key: historyKey({ number, operator: brand?.id ?? agency, routeType: route.route_type!, category: result.category, routeName: route.route_long_name || route.route_short_name || null, headsign: trip.trip_headsign || null, stops: stops.map((x) => [x.station, x.s[2], x.s[3], x.s[4], x.s[5], platformOf(stopRows.get(x.s[1])), x.s[6]]) }),
       trip,
       route,
       number,
@@ -275,17 +324,18 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
     );
     for (const s of added) insertStation.run(s.id, s.name, s.country, s.lat, s.lon, s.tz, s.trvSignature, JSON.stringify(s.gtfsStopIds), s.coordSource, s.kind);
     const insertTrip = sqlite.prepare(
-      `insert or ignore into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version) values (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Europe/Stockholm', ?)`,
+      `insert or ignore into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version, ${TRIP_DETAIL_COLUMNS})
+       values (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Europe/Stockholm', ?, ${TRIP_DETAIL_VALUES})`,
     );
-    const insertStop = sqlite.prepare(`insert or ignore into timetable_stop_times (trip_key, seq, station_id, arr_sec, dep_sec, no_pickup, no_dropoff) values (?, ?, ?, ?, ?, ?, ?)`);
+    const insertStop = sqlite.prepare(UPSERT_STOP_SQL);
     const insertDate = sqlite.prepare(`insert or ignore into timetable_trip_dates (trip_key, service_date) values (?, ?)`);
     // A partial day left by an earlier import from a later snapshot: its trips come off these dates (the trips stay,
     // for trips already saved against them) before this snapshot's full day goes in.
     const clearDay = sqlite.prepare(`delete from timetable_trip_dates where service_date = ? and trip_key in (select key from timetable_trips where source = ?)`);
     for (const d of wanted) clearDay.run(d, HISTORY_SOURCE);
     for (const p of patterns) {
-      insertTrip.run(p.key, HISTORY_SOURCE, p.trip.trip_id, p.number, p.brand?.id ?? null, p.agency, p.route.route_long_name || p.route.route_short_name || null, p.route.route_type, p.category, snap.ymd);
-      p.stops.forEach((x, i) => insertStop.run(p.key, i + 1, x.station, x.s[2], x.s[3], x.s[4] ? 1 : 0, x.s[5] ? 1 : 0));
+      insertTrip.run(p.key, HISTORY_SOURCE, p.trip.trip_id, p.number, p.brand?.id ?? null, p.agency, p.route.route_long_name || p.route.route_short_name || null, p.route.route_type, p.category, snap.ymd, ...tripDetailArgs(tripDetail(p.trip, p.route)));
+      p.stops.forEach((x, i) => insertStop.run(p.key, i + 1, x.station, x.s[2], x.s[3], x.s[4] ? 1 : 0, x.s[5] ? 1 : 0, platformOf(stopRows.get(x.s[1])), x.s[6]));
       for (const d of p.dates) insertDate.run(p.key, d);
     }
     db.insert(importLog)
@@ -293,6 +343,8 @@ export async function importHistory(db: Db, date: string, opts: { fetchImpl?: ty
       .run();
   });
   if (added.length) refreshStationPopularity(db);
+  // The backfill keeps disk use down: a snapshot is only needed again for another block from the same snapshot.
+  if (opts.keepDownload === false) for (const f of [zip, extra, inner]) fs.rmSync(f, { force: true });
   const summary = { snapshot: snap.ymd, dates: wanted, trips: patterns.length, stationsAdded: added.length, ms: Date.now() - t0 };
   log(`Sverige 2 ${snap.ymd}: ${summary.trips} trips for ${wanted.length} days in ${(summary.ms / 1000).toFixed(1)} s, ${added.length} historical stations added`);
   return summary;
@@ -312,6 +364,9 @@ const failures = new Map<string, { at: number; error: string }>();
 export function ensureHistory(db: Db, date: string, opts: { fetchImpl?: typeof fetch; log?: (m: string) => void; now?: number } = {}): HistoryState {
   if (date < ARCHIVE_START) return { state: 'unavailable' };
   if (hasSwedishTimetable(db, date)) return { state: 'ready' };
+  // From the current feed's first day on, the archive has nothing to add: a day the current feed lacks (the server
+  // was off when it was current) can't be filled, and saying "loading" would ask again for ever.
+  if (date >= firstCurrentDay(db)) return { state: 'unavailable' };
   if (inflight.has(date)) return { state: 'loading' };
   const failed = failures.get(date);
   if (failed && (opts.now ?? Date.now()) - failed.at < 60_000) return { state: 'failed', error: failed.error };
