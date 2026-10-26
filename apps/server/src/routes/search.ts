@@ -3,6 +3,7 @@ import type { Db } from '../db/client.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
 import { ensureHistory } from '../import/history.js';
+import { ensureRecordedDay, recordFrom } from '../observed/timetable.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
 import { productOf, searchByRoute, searchConnections, tripStops } from '../search/timetable.js';
 import { typicalTrainType } from '../legs/trainTypes.js';
@@ -17,7 +18,9 @@ const DATE = /^\d{4}-\d{2}-\d{2}$/;
 export const searchRoutes =
   (db: Db): FastifyPluginAsync =>
   async (app) => {
-    const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log: (m) => app.log.warn(m) }));
+    const log = (m: string) => app.log.warn(m);
+    const record = { ensure: (c: 'NO' | 'FI', date: string) => ensureRecordedDay(db, c, date, { log }), from: (c: 'NO' | 'FI') => recordFrom(db, c) };
+    const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log }), record);
 
     app.get<{ Querystring: { q?: string; date?: string } }>('/search', async (req, reply) => {
       const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
@@ -30,8 +33,8 @@ export const searchRoutes =
     app.get<{ Querystring: { date?: string } }>('/history/prepare', async (req, reply) => {
       const date = req.query.date ?? '';
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
-      if (date >= addDays(todayIn(COUNTRIES.SE.tz), -1)) return { sweden: 'ready' };
-      return { sweden: ensureHistory(db, date, { log: (m) => app.log.warn(m) }).state };
+      if (date >= addDays(todayIn(COUNTRIES.SE.tz), -1)) return { sweden: 'ready', norway: 'ready', finland: 'ready' };
+      return { sweden: ensureHistory(db, date, { log }).state, norway: record.ensure('NO', date), finland: record.ensure('FI', date) };
     });
 
     // Other ways to get there (disruption help): direct trains leaving `from` for `to` at or after `after`, today and

@@ -128,7 +128,7 @@ private struct SearchStep: View {
         }
         if response.outsideTimetable {
             Banner {
-                Text(l10n.t(response.history == "loading" ? "add.historyLoading" : response.history == "failed" ? "add.historyFailed" : response.history == "norway" ? "add.historyNorway" : response.history == "finland" ? "add.historyFinland" : "add.historyUnavailable"))
+                Text(historyMessage(response))
             }
         }
         if let list = response.results, !list.isEmpty {
@@ -162,6 +162,18 @@ private struct SearchStep: View {
                 .buttonStyle(LinkButtonStyle())
                 .frame(maxWidth: .infinity)
                 .padding(.top, 8)
+        }
+    }
+
+    /// Why an older day has no results yet: being fetched, failed, or before the record (Norway and Finland say from when).
+    private func historyMessage(_ response: SearchResponse) -> String {
+        switch response.history {
+        case "loading": return l10n.t("add.historyLoading")
+        case "failed": return l10n.t("add.historyFailed")
+        case "norway", "finland":
+            let from = response.historyFrom.flatMap(Format.isoToNoonMs).map { Format.fullDate($0, tz: "UTC", language: app.settings.language) } ?? ""
+            return l10n.t(response.history == "norway" ? "add.historyNorway" : "add.historyFinland", ["date": from])
+        default: return l10n.t("add.historyUnavailable")
         }
     }
 }

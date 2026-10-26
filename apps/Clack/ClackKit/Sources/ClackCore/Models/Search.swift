@@ -65,10 +65,13 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public let results: [TripResult]?
     public let connections: [TimetableConnection]?
     public let outsideTimetable: Bool
-    /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable` or `norway`.
+    /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable`, `norway` or
+    /// `finland` (before that country's record starts).
     public let history: String?
+    /// With `norway` or `finland`: the first day that country's trains are on record (YYYY-MM-DD).
+    public let historyFrom: String?
 
-    public init(date: String, interpretation: Interpretation, suggestions: [StationHit], results: [TripResult]?, connections: [TimetableConnection]?, outsideTimetable: Bool, history: String?) {
+    public init(date: String, interpretation: Interpretation, suggestions: [StationHit], results: [TripResult]?, connections: [TimetableConnection]?, outsideTimetable: Bool, history: String?, historyFrom: String? = nil) {
         self.date = date
         self.interpretation = interpretation
         self.suggestions = suggestions
@@ -76,6 +79,7 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
         self.connections = connections
         self.outsideTimetable = outsideTimetable
         self.history = history
+        self.historyFrom = historyFrom
     }
 }
 

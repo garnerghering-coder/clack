@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { Db } from '../db/client.js';
 import { bigQuery, googleKeyPath } from '../lib/google.js';
-import { trainNumberFromTripId } from '../import/gtfs-no.js';
+import { cleanStopName, matchStation, trainNumberFromTripId, type ExistingStation } from '../import/gtfs-no.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { OBSERVED_DIR, writeRaw } from './archive.js';
 import { stationsByNsr } from './norway.js';
@@ -22,7 +22,11 @@ import { cancelLevel, fetchOf, recordFetch, saveRuns, type ObservedCall, type Ob
 
 export const SOURCE = 'entur-bigquery';
 const TABLE = '`ent-data-sharing-ext-prd.realtime_siri_et.realtime_siri_et_last_recorded`';
-const QUAYS = '`ent-data-sharing-ext-prd.national_stop_registry.quays_last_version`';
+/**
+ * Every version of every quay: older journeys call at quays since retired, which the latest-version table lacks
+ * (12 March 2024: 540 of 1,470 trains had one of 16 such quays). Each quay's newest version is used.
+ */
+const QUAYS = '`ent-data-sharing-ext-prd.national_stop_registry.quays_all_versions`';
 export const HISTORY_START = '2020-01-01';
 /** Our monthly ceiling, well under the sandbox's 1 TiB. */
 export const MONTHLY_BYTES = 800e9;
@@ -58,7 +62,7 @@ const bool = (v: string | null | undefined) => v === 'true';
 let quayCache: { at: number; map: Map<string, [string | null, string | null]> } | null = null;
 async function quays(now: number): Promise<Map<string, [string | null, string | null]>> {
   if (quayCache && now - quayCache.at < 7 * 86400_000) return quayCache.map;
-  const { rows, bytes } = await bigQuery(`SELECT id, publicCode, stopPlaceRef FROM ${QUAYS}`);
+  const { rows, bytes } = await bigQuery(`SELECT id, publicCode, stopPlaceRef FROM ${QUAYS} QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY SAFE_CAST(version AS INT64) DESC) = 1`);
   addUsage(bytes, now);
   writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'quays', rows, { now });
   quayCache = { at: now, map: new Map(rows.map((r) => [r.id!, [r.publicCode || null, r.stopPlaceRef || null]])) };
@@ -78,6 +82,45 @@ export function journeyIdentity(r: Pick<BqRow, string>): { operator: string | nu
   const old = /^(\d+):\d{4}-\d{2}-\d{2}$/.exec(id);
   if (old) return { operator: (r.operatorRef && (OPERATOR_CODESPACE[r.operatorRef] ?? r.operatorRef)) || r.dataSource || null, number: old[1]! };
   return { operator: id.split(':')[0] || r.operatorRef || r.dataSource || null, number: trainNumberFromTripId(id) };
+}
+
+const PLACES = '`ent-data-sharing-ext-prd.national_stop_registry.stop_places_all_versions`';
+let placeCache: { at: number; rows: { id: string; name: string; lat: number; lon: number }[] } | null = null;
+
+/**
+ * Our station for each rail stop place in the registry, every version. A station knows one stop place by id
+ * (stations.nsr_id), but a station can have several (Lillestrøm's platforms belong to NSR:StopPlace:451, the station
+ * row has 60694), and older days use places since replaced. The rest are matched by name and position the way the
+ * Norway import matches them (gtfs-no.ts matchStation: within 400 m, or 1.5 km with the same name). Weekly.
+ */
+export async function stationsByPlace(db: Db, now = Date.now()): Promise<Map<string, string>> {
+  const out = stationsByNsr(db);
+  if (!placeCache || now - placeCache.at > 7 * 86400_000) {
+    const { rows, bytes } = await bigQuery(
+      `SELECT id, name, location_latitude lat, location_longitude lon FROM ${PLACES} WHERE transportMode = 'RAIL' QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY SAFE_CAST(version AS INT64) DESC) = 1`,
+    );
+    addUsage(bytes, now);
+    writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'stop-places', rows, { now });
+    placeCache = { at: now, rows: rows.filter((r) => r.id && r.name && r.lat && r.lon).map((r) => ({ id: r.id!, name: r.name!, lat: Number(r.lat), lon: Number(r.lon) })) };
+  }
+  const existing: ExistingStation[] = (db.$client.prepare(`select id, name, lat, lon, country from stations`).all() as ExistingStation[]);
+  // A rail place none of our stations is (closed or no longer served: Skoppum, Kjose, Kornsjø …; 56 of 566 on
+  // 2026-10-27) becomes a historical-only station from the registry's own name and position, as the Swedish archive
+  // does for its closed stations.
+  const addStation = db.$client.prepare(
+    `insert into stations (id, name, country, lat, lon, tz, trv_signature, gtfs_stop_ids, coord_source, historical_only, kind, needs_review, nsr_id)
+     values (?, ?, 'NO', ?, ?, 'Europe/Oslo', null, ?, 'nsr', 1, 'rail_station', 0, ?) on conflict(id) do nothing`,
+  );
+  for (const p of placeCache.rows) {
+    if (out.has(p.id)) continue;
+    const hit = matchStation(p, existing);
+    if (hit) out.set(p.id, hit.id);
+    else {
+      addStation.run(p.id, cleanStopName(p.name), p.lat, p.lon, JSON.stringify([p.id]), p.id);
+      out.set(p.id, p.id);
+    }
+  }
+  return out;
 }
 
 /** One day's rows as runs, one per dated journey, stops in sequence order. */
@@ -146,7 +189,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
   const { rows, bytes } = await bigQuery(DAY_SQL, { params: { date } });
   addUsage(bytes, now);
   const file = writeRaw(SOURCE, date, 'siri-et', rows, { now });
-  const runs = project(date, rows, await quays(now), opts.stationByNsr ?? stationsByNsr(db));
+  const runs = project(date, rows, await quays(now), opts.stationByNsr ?? (await stationsByPlace(db, now)));
   // Our own same-day record has platforms and messages this table lacks; it's kept where both exist.
   const written = saveRuns(db, runs, now, { keepSources: ['entur'] });
   recordFetch(db, { source: SOURCE, kind: 'siri-et', date, records: rows.length, runs: written, file, final: true }, now);
@@ -186,7 +229,7 @@ export async function reproject(db: Db, opts: { log?: (m: string) => void } = {}
   const { rawFiles, readRaw } = await import('./archive.js');
   const days = (db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'siri-et' order by date`).all(SOURCE) as { date: string }[]).map((r) => r.date);
   const quay = await quays(Date.now());
-  const stationByNsr = stationsByNsr(db);
+  const stationByNsr = await stationsByPlace(db);
   for (const date of days) {
     const file = rawFiles(SOURCE, date, 'siri-et').at(-1);
     if (!file) continue;

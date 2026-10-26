@@ -32,9 +32,22 @@ export interface SmartSearchResult {
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */
   history?: HistoryState['state'] | 'norway' | 'finland';
+  /** With `norway` or `finland`: the first day that country's record has (YYYY-MM-DD), for the message. */
+  historyFrom?: string;
 }
 
-export function createSmartSearch(db: Db, index: () => StationIndex, history: (date: string) => HistoryState = () => ({ state: 'unavailable' })) {
+/** Older Norwegian and Finnish days, from the observed record (observed/timetable.ts). */
+export interface RecordDays {
+  ensure: (country: 'NO' | 'FI', date: string) => 'ready' | 'loading' | 'failed' | 'unavailable';
+  from: (country: 'NO' | 'FI') => string;
+}
+
+export function createSmartSearch(
+  db: Db,
+  index: () => StationIndex,
+  history: (date: string) => HistoryState = () => ({ state: 'unavailable' }),
+  record: RecordDays = { ensure: () => 'unavailable', from: () => '9999-12-31' },
+) {
   const matchOperator = buildOperatorMatcher(loadBrands());
   const best = (text: string | undefined, min = RESOLVE) => {
     if (!text?.trim()) return undefined;
@@ -92,12 +105,22 @@ export function createSmartSearch(db: Db, index: () => StationIndex, history: (d
     // "Today" is the day where the search starts: Helsinki is an hour ahead of Stockholm and Oslo.
     const windowStart = addDays(todayIn(tzOf((from ?? to)?.country) ?? COUNTRIES.SE.tz), -1);
     if (date < windowStart && (q.trainNumber || (from && to))) {
-      // Older days come from Sweden's archive, fetched the first time a day is asked for. Norway and Finland have none.
-      const noArchive = (c: string | undefined) => c === 'NO' || c === 'FI';
-      const abroadOnly = noArchive(from?.country) && noArchive(to?.country);
-      const h: HistoryState | { state: 'norway' | 'finland' } = abroadOnly ? { state: from?.country === 'FI' || to?.country === 'FI' ? 'finland' : 'norway' } : history(date);
-      out.history = h.state;
-      if (h.state !== 'ready') {
+      // Older days: Sweden's from its archive (fetched the first time a day is asked for), Norway's and Finland's
+      // from the observed record (SPEC §5.6). The countries of the stations, or all three for a train number alone.
+      // Stations elsewhere (Copenhagen) come with Sweden's data.
+      type Where = 'SE' | 'NO' | 'FI';
+      const where = (c: string | undefined): Where => (c === 'NO' || c === 'FI' ? c : 'SE');
+      const countries: Where[] = from || to ? [...new Set([from, to].filter(Boolean).map((s) => where(s!.country)))] : ['SE', 'NO', 'FI'];
+      const states = countries.map((c) => ({ c, state: c === 'SE' ? history(date).state : record.ensure(c, date) }));
+      if (states.some((s) => s.state === 'loading')) out.history = 'loading';
+      else if (states.some((s) => s.state === 'ready')) out.history = 'ready';
+      else {
+        // None has the day: say why for the first (Norway and Finland name the day their record starts).
+        const s = states[0]!;
+        out.history = s.c !== 'SE' && s.state === 'unavailable' ? (s.c === 'NO' ? 'norway' : 'finland') : s.state;
+        if (s.c !== 'SE' && s.state === 'unavailable') out.historyFrom = record.from(s.c);
+      }
+      if (out.history !== 'ready') {
         out.outsideTimetable = true;
         out.results = [];
         return out;

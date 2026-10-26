@@ -10,6 +10,7 @@
 import type { Db } from '../db/client.js';
 import { fetchJson } from '../digitraffic/client.js';
 import { isPassengerTrain, type DtRow, type DtTrain } from '../digitraffic/trains.js';
+import { fetchFiStations, type FiStation } from '../import/fi-stations.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { COUNTRIES } from '../lib/countries.js';
 import { writeRaw } from './archive.js';
@@ -122,6 +123,32 @@ export function project(date: string, trains: Train[], compositions: Composition
   return runs;
 }
 
+let fiStationCache: { at: number; list: FiStation[] } | null = null;
+
+/**
+ * Our stations for a day's trains by short code, adding the ones we don't have: a station a passenger train stopped
+ * at that's closed or unserved today (in older days; 20 of 1,123 trains on 2018-06-01) becomes a historical-only
+ * station from Digitraffic's own station list (its name, code and position). Russian stations stay out, as in the
+ * import (usableFiStation).
+ */
+export async function stationsForTrains(db: Db, trains: Train[]): Promise<Map<string, string>> {
+  const map = stationsByFiCode(db);
+  const missing = new Set<string>();
+  for (const t of trains) if (isPassengerTrain(t)) for (const r of t.timeTableRows) if (r.trainStopping && r.commercialStop && !map.has(r.stationShortCode)) missing.add(r.stationShortCode);
+  if (!missing.size) return map;
+  if (!fiStationCache || Date.now() - fiStationCache.at > 7 * 86400_000) fiStationCache = { at: Date.now(), list: await fetchFiStations() };
+  const add = db.$client.prepare(
+    `insert into stations (id, name, country, lat, lon, tz, trv_signature, gtfs_stop_ids, coord_source, historical_only, kind, needs_review, fi_id, fi_uic)
+     values (?, ?, 'FI', ?, ?, ?, null, ?, 'digitraffic', 1, 'rail_station', 0, ?, ?) on conflict(id) do nothing`,
+  );
+  for (const s of fiStationCache.list) {
+    if (!missing.has(s.code) || (s.country !== 'FI' && s.code !== 'HPA')) continue;
+    add.run(`fi:${s.code}`, s.name, s.lat, s.lon, TZ, JSON.stringify([s.code]), s.code, s.uic);
+    map.set(s.code, `fi:${s.code}`);
+  }
+  return map;
+}
+
 export function stationsByFiCode(db: Db): Map<string, string> {
   const rows = db.$client.prepare(`select id, fi_id from stations where fi_id is not null`).all() as { id: string; fi_id: string }[];
   return new Map(rows.map((r) => [r.fi_id, r.id]));
@@ -140,7 +167,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; fet
   const compositions = await fetchJson<Composition[]>(`compositions/${date}`, { fetchImpl: opts.fetchImpl });
   const tFile = writeRaw(SOURCE, date, 'trains', trains, { now });
   const cFile = writeRaw(SOURCE, date, 'compositions', compositions, { now });
-  const runs = opts.projectRuns === false ? [] : project(date, trains, compositions, stationsByFiCode(db), final);
+  const runs = opts.projectRuns === false ? [] : project(date, trains, compositions, await stationsForTrains(db, trains), final);
   const written = saveRuns(db, runs, now);
   recordFetch(db, { source: SOURCE, kind: 'trains', date, records: trains.length, runs: written, file: tFile, final }, now);
   recordFetch(db, { source: SOURCE, kind: 'compositions', date, records: compositions.length, file: cFile, final }, now);
@@ -177,4 +204,15 @@ export async function backfillStep(db: Db, opts: { now?: number; fetchImpl?: typ
     return date;
   }
   return null;
+}
+
+/** Project a day already in the raw archive (the deep backfill keeps old days raw only), without fetching again. */
+export async function projectFromRaw(db: Db, date: string): Promise<number> {
+  const { rawFiles, readRaw } = await import('./archive.js');
+  const t = rawFiles(SOURCE, date, 'trains').at(-1);
+  if (!t) return 0;
+  const c = rawFiles(SOURCE, date, 'compositions').at(-1);
+  const trains = readRaw<Train>(t);
+  const runs = project(date, trains, c ? readRaw<Composition>(c) : [], await stationsForTrains(db, trains), true);
+  return saveRuns(db, runs);
 }

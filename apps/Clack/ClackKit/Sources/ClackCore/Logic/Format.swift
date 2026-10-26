@@ -76,6 +76,11 @@ public nonisolated enum Format {
         formatted(ms, tz: tz, language: language, template: "EEEEdMMMMy").replacingOccurrences(of: ",", with: "")
     }
 
+    /// "1 January 2020" (no weekday).
+    public static func fullDate(_ ms: Double, tz: String, language: Language = .en) -> String {
+        formatted(ms, tz: tz, language: language, template: "dMMMMy").replacingOccurrences(of: ",", with: "")
+    }
+
     /// "October 2026".
     public static func month(_ ms: Double, tz: String, language: Language = .en) -> String {
         formatted(ms, tz: tz, language: language, template: "MMMMy")
