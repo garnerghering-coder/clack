@@ -662,37 +662,23 @@ struct TimeBlock: View {
     let delay: Int?
     let canceled: Bool
     var extraDays = 0
-    /// Asks for the platform when none is known (your own trip).
+    /// Changes the platform you entered yourself (your own trip).
     var onSetPlatform: (() -> Void)?
 
-    /// "Pl 5" in the accent ink on a raised tag; a dash you can tap when nothing knows the platform.
+    /// The bare platform in the accent ink on a raised tag, like the stops list. Nothing when no platform is known: adding
+    /// one is done from the dash in the stops list. A platform you typed yourself can still be changed by tapping it.
     @ViewBuilder
     private var platformTag: some View {
         if let platform {
-            Text(l10n.t("tripCard.platformShort", ["platform": platform]))
+            Text(platform)
                 .clack(.chip).fontWeight(.bold).monospacedDigit().foregroundStyle(Ink.accentInk)
                 .padding(.vertical, 2).padding(.horizontal, 8)
+                .frame(minWidth: 32)
                 .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                 .fixedSize()
                 .onTapGesture { onSetPlatform?() }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(l10n.t("trips.platform", ["platform": platform]))
-        } else if let onSetPlatform {
-            // Nothing knows it: a dash you can tap to say which.
-            Button(action: onSetPlatform) {
-                Label { Text(l10n.t("tripCard.platformShort", ["platform": "—"])) } icon: { LucideIcon(name: "plus", size: 12) }
-                    .clack(.chip).foregroundStyle(Ink.text2)
-                    .frame(minHeight: 26)
-                    .contentShape(Rectangle().inset(by: -9))
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(l10n.t("platform.add"))
-            .accessibilityIdentifier("platform.add")
-        } else {
-            Text(l10n.t("tripCard.platformShort", ["platform": "—"]))
-                .clack(.chip).foregroundStyle(Ink.text3)
-                .padding(.vertical, 2).padding(.horizontal, 8)
-                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
         }
     }
 

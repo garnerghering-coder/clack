@@ -62,7 +62,7 @@ public struct UnknownPlatformTag: View {
             .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
             .fixedSize()
         if let onSet {
-            Button(action: onSet) { tag.frame(minWidth: 44, minHeight: 44).contentShape(Rectangle()) }
+            Button(action: onSet) { tag.frame(minWidth: 44, minHeight: 44, alignment: .trailing).contentShape(Rectangle()) }
                 .buttonStyle(.plain)
                 .accessibilityLabel(l10n.t("platform.add"))
         } else {

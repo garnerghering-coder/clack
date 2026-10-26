@@ -106,6 +106,21 @@ struct DesignGalleryView: View {
                 ForEach(Array(medals.suffix(3).enumerated()), id: \.offset) { _, m in Medal(m: m, size: 84, foil: 0.35) }
             }
         }
+        section("PlatformBoxes") {
+            // The two time boxes (a known platform, then none) and the stops list's platform column (known, dash, tappable
+            // dash): the three tags must end on one right edge.
+            HStack(alignment: .top, spacing: 12) {
+                TimeBlock(label: "Departure", sched: t, actual: nil, tz: tz, platform: "5", delay: nil, canceled: false)
+                TimeBlock(label: "Arrival", sched: t + 90 * minute, actual: nil, tz: tz, platform: nil, delay: nil, canceled: false)
+            }
+            VStack(alignment: .trailing, spacing: 4) {
+                PlatformTag(platform: "13")
+                UnknownPlatformTag()
+                UnknownPlatformTag(onSet: {})
+            }
+            .frame(minWidth: 44, maxWidth: .infinity, alignment: .trailing)
+            .overlay(alignment: .trailing) { Rectangle().fill(Ink.accent).frame(width: 1) }
+        }
         section("ShareCards") {
             // Both layouts at a third of their size, with made-up numbers.
             let medal = ShareCardView.CardMedal(milestone: Milestone(family: .homeLength, target: 1, at: nil, legId: nil, value: nil), label: "Once the length of Norway")

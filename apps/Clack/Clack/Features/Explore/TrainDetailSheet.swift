@@ -89,9 +89,6 @@ struct TrainDetailSheet: View {
         actions(view)
         StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
         OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
-        if let first, let last {
-            BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: view.operatorId, number: view.number, from: first, to: last, trip: view.trip), inTrips: view.legId != nil)
-        }
         if view.trip == nil { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
     }
 

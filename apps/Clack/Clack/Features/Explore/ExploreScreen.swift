@@ -436,9 +436,6 @@ struct ExploreScreen: View {
         } content: {
             StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
-            if case .list(let stops) = model.stops, let from = ExploreLogic.catchableFrom(stops), let last = stops.last {
-                BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: train.operatorId, number: train.number, from: from, to: last, trip: detail.trip), inTrips: detail.legId != nil)
-            }
             if detail.trip == nil { Text(l10n.t("board.notInTimetable")).clack(.caption).foregroundStyle(Ink.text2) }
         } actions: {
             HStack(spacing: 12) {
@@ -479,9 +476,6 @@ struct ExploreScreen: View {
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)
-            if let first, let last {
-                BuyTicket(trip: ExploreLogic.ticketTrip(operatorId: view.operatorId, number: view.number, from: first, to: last, trip: view.trip), inTrips: view.legId != nil)
-            }
         } actions: {
             HStack(spacing: 12) {
                 followButton(following: followed) {

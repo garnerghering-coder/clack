@@ -400,13 +400,6 @@ private struct ConfirmStep: View {
             }
         }
         if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
-        if let from, let to, let dep, let arr, dep > Date.now.timeIntervalSince1970 * 1000 {
-            BuyTicket(trip: TicketTrip(
-                operatorId: result.operatorId, trainNumber: result.trainNumber,
-                from: .init(name: from.name, time: dep, tz: from.tz, seq: from.seq), to: .init(name: to.name, time: arr, tz: to.tz, seq: to.seq),
-                tripKey: result.key, serviceDate: result.serviceDate
-            ))
-        }
         Button(l10n.t("add.addToClack")) { Task { await save(force: false) } }
             .buttonStyle(.clack(.primary, wide: true))
             .disabled(trip == nil || saving || duplicate)
@@ -525,9 +518,6 @@ private struct ConfirmConnectionStep: View {
         Text(l10n.t("add.connectionTitle")).clack(.headline).foregroundStyle(Ink.text)
         ConnectionResultCard(connection: connection)
         InfoNote(l10n.t("add.connectionNote"), more: l10n.t("add.connectionNoteMore"))
-        ForEach(legs, id: \.id) { r in
-            BuyTicket(trip: TicketTrip(operatorId: r.operatorId, trainNumber: r.trainNumber, from: .init(name: r.from.name, time: r.from.time, tz: r.from.tz, seq: r.from.seq), to: .init(name: r.to.name, time: r.to.time, tz: r.to.tz, seq: r.to.seq), tripKey: r.key, serviceDate: r.serviceDate))
-        }
         if !dupes.isEmpty {
             Banner(kind: .warn) {
                 Text(dupes.count == legs.count ? l10n.t("add.duplicate") : l10n.t("add.duplicateOne", ["train": legs[dupes[0]].trainNumber ?? ""]))
