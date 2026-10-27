@@ -103,8 +103,9 @@ export function journeyIdentity(r: Pick<BqRow, string>): { operator: string | nu
   const id = r.serviceJourneyId ?? '';
   const old = /^(\d+):\d{4}-\d{2}-\d{2}$/.exec(id);
   if (old) return { operator: codespaceOf(r.operatorRef) || r.dataSource || null, number: old[1]! };
-  // A third style from 2025: "VYG:DatedServiceJourney:61_OSL-BRG_25-06-01" (the number before the first "_").
-  const dated = /:DatedServiceJourney:(\d+)_/.exec(id);
+  // A third style from 2025: "VYG:DatedServiceJourney:61_OSL-BRG_25-06-01" (the number before the first "_"). Vy's
+  // trains to Göteborg carry two, "389-115_OSL_389_HLD-GTB_…": the first, repeated after the station, is the train's.
+  const dated = /:DatedServiceJourney:(\d+)[-_]/.exec(id);
   const operator = codespaceOf(r.operatorRef?.includes(':') ? r.operatorRef : null) ?? (id.split(':')[0] || codespaceOf(r.operatorRef) || r.dataSource || null);
   return { operator, number: dated ? dated[1]! : trainNumberFromTripId(id) };
 }

@@ -211,5 +211,6 @@ describe('Norway archive ids', () => {
     expect(journeyIdentity({ serviceJourneyId: '725:2022-07-15', operatorRef: 'GAG', dataSource: 'BNR' })).toEqual({ operator: 'GOA', number: '725' });
     expect(journeyIdentity({ serviceJourneyId: 'VYG:DatedServiceJourney:610_MYR-OSL_25-06-01', operatorRef: 'VYG:Operator:VYT', dataSource: 'VYG' })).toEqual({ operator: 'VYG', number: '610' });
     expect(journeyIdentity({ serviceJourneyId: 'GOA:DatedServiceJourney:725_KRS-STV_26-01-06', operatorRef: 'GOA:Operator:GOA', dataSource: 'GOA' })).toEqual({ operator: 'GOA', number: '725' });
+    expect(journeyIdentity({ serviceJourneyId: 'VYG:DatedServiceJourney:389-115_OSL_389_HLD-GTB_25-06-01', operatorRef: 'VYG:Operator:VYT', dataSource: 'VYG' })).toEqual({ operator: 'VYG', number: '389' });
   });
 });
