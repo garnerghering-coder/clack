@@ -179,7 +179,7 @@ describe('milestones: levels and new families', () => {
     expect(keys(ride(1_700), 'NO')).toContain('homeLength:1');
     expect(keys(ride(1_160), 'FI')).toContain('homeLength:1');
     expect(keys(ride(1_150), 'FI')).not.toContain('homeLength:1');
-    expect(COUNTRY_LENGTH_KM).toEqual({ SE: 1_572, NO: 1_699, FI: 1_157 });
+    expect(COUNTRY_LENGTH_KM).toEqual({ SE: 1_572, NO: 1_699, FI: 1_157, DK: 368 });
   });
 
   it('the length of Europe is a great-circle figure of about 4,360 km', () => {
@@ -203,6 +203,7 @@ describe('milestones: levels and new families', () => {
     expect(homeCountryOf('NO', [first])).toBe('NO');
     expect(homeCountryOf(undefined, [later, first])).toBe('FI');
     expect(homeCountryOf(undefined, [])).toBe('SE');
-    expect(homeCountryOf('DK', [])).toBe('SE');
+    expect(homeCountryOf('DK', [])).toBe('DK');
+    expect(homeCountryOf('DE', [])).toBe('SE');
   });
 });

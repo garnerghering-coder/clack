@@ -35,8 +35,8 @@ describe('popular stations', () => {
     return db;
   }
 
-  it('gives the top 3 Swedish, 2 Norwegian and 1 Finnish, Sweden first, with commuter weighed a third', () => {
-    expect(popularStations(seed()).map((s) => s.id)).toEqual(['SE1', 'SEC', 'SE2', 'NO1', 'NO2', 'FI1']);
+  it('gives the top 3 Swedish, 2 Norwegian, 2 Danish and 1 Finnish, Sweden first, with commuter weighed a third', () => {
+    expect(popularStations(seed()).map((s) => s.id)).toEqual(['SE1', 'SEC', 'SE2', 'NO1', 'NO2', 'DK1', 'FI1']);
   });
 
   it('keeps the answer for an hour', () => {

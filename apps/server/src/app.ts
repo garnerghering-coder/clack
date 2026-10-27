@@ -137,6 +137,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
         ...(r.key ? [`trip:${r.key}|${r.date}`] : []),
         // A Finnish train whose trip the timetable doesn't have (an extra train) is found by its number (isMine).
         ...(r.countries.includes('FI') && r.n ? [`fi:${r.n}|${r.date}`] : []),
+        ...(r.countries.includes('DK') && r.n ? [`dk:${r.n}|${r.date}`] : []),
       ]),
     );
   };

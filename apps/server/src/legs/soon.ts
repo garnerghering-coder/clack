@@ -4,7 +4,7 @@
 // for POST /legs. Nothing is invented: these are timetable trips.
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
-import { COUNTRIES } from '../lib/countries.js';
+import { COUNTRIES, COUNTRY_CODES } from '../lib/countries.js';
 import { serviceTimeToUtc, todayIn } from '../lib/time.js';
 
 export interface SoonTrain {
@@ -29,25 +29,20 @@ let hubCache: { at: number; hubs: Hub[] } | null = null;
 /** The busiest stations by long-distance and regional trains, a few per country (cached for an hour). */
 function hubs(db: Db, now: number): Hub[] {
   if (hubCache && now - hubCache.at < 3600_000) return hubCache.hubs;
-  const rows = db.all<Hub & { country: string; n: number }>(sql`
-    select s.id, s.name, s.lat, s.lon, s.country, count(*) as n
-    from stations s
-    join timetable_stop_times st on st.station_id = s.id
-    join timetable_trips t on t.key = st.trip_key and t.category <> 'commuter'
-    where s.kind = 'rail_station' and s.country in ('SE', 'NO', 'FI')
-    group by s.id
-    order by n desc
-    limit 80`);
-  // Sweden, Norway and Finland each get their biggest stations, not one country's whole list.
-  const perCountry = new Map<string, number>();
-  const picked = rows.filter((r) => {
-    const n = perCountry.get(r.country) ?? 0;
-    if (n >= 3) return false;
-    perCountry.set(r.country, n + 1);
-    return true;
-  });
-  // Sweden first (the app's home), then Norway and Finland.
-  const order = ['SE', 'NO', 'FI'];
+  // Ranked within each country, so one country's timetable (Denmark's has years of history) can't crowd out the others.
+  const picked = db.all<Hub & { country: string; n: number }>(sql`
+    select id, name, lat, lon, country, n from (
+      select s.id, s.name, s.lat, s.lon, s.country, count(*) as n,
+             row_number() over (partition by s.country order by count(*) desc) as rk
+      from stations s
+      join timetable_stop_times st on st.station_id = s.id
+      join timetable_trips t on t.key = st.trip_key and t.category <> 'commuter'
+      where s.kind = 'rail_station' and s.country in (${sql.join(COUNTRY_CODES.map((c) => sql`${c}`), sql`, `)})
+      group by s.id)
+    where rk <= 3
+    order by n desc`);
+  // Sweden first (the app's home), then the others in COUNTRIES order.
+  const order: string[] = COUNTRY_CODES;
   picked.sort((a, b) => order.indexOf(a.country) - order.indexOf(b.country));
   hubCache = { at: now, hubs: picked };
   return picked;

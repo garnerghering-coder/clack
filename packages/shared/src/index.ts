@@ -66,7 +66,7 @@ export interface Settings {
   homeCountry?: HomeCountry;
 }
 
-export const HOME_COUNTRIES = ['SE', 'NO', 'FI'] as const;
+export const HOME_COUNTRIES = ['SE', 'NO', 'FI', 'DK'] as const;
 export type HomeCountry = (typeof HOME_COUNTRIES)[number];
 
 /** Lead times the reminder can be set to, in minutes (0 = off). */

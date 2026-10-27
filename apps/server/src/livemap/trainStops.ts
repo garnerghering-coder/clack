@@ -25,7 +25,7 @@ export interface TrainStopView {
   /** The train has left this stop (or, at the last one, arrived). */
   passed: boolean;
   /** Who reports this stop live; null: nobody does (Denmark, SJ in Norway), so its times are the timetable's. */
-  source: 'trafikverket' | 'entur' | 'digitraffic' | null;
+  source: 'trafikverket' | 'entur' | 'digitraffic' | 'rejseplanen' | null;
 }
 
 type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null; source?: TrainStopView['source'] };

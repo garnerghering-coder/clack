@@ -107,18 +107,19 @@ export function createSmartSearch(
     if (date < windowStart && (q.trainNumber || (from && to))) {
       // Older days: Sweden's from its archive (fetched the first time a day is asked for), Norway's and Finland's
       // from the observed record (SPEC §5.6). The countries of the stations, or all three for a train number alone.
-      // Stations elsewhere (Copenhagen) come with Sweden's data.
-      type Where = 'SE' | 'NO' | 'FI';
-      const where = (c: string | undefined): Where => (c === 'NO' || c === 'FI' ? c : 'SE');
-      const countries: Where[] = from || to ? [...new Set([from, to].filter(Boolean).map((s) => where(s!.country)))] : ['SE', 'NO', 'FI'];
-      const states = countries.map((c) => ({ c, state: c === 'SE' ? history(date).state : record.ensure(c, date) }));
+      // Denmark's past days are in its own timetable (every imported copy keeps its dates), so they are ready as they are.
+      type Where = 'SE' | 'NO' | 'FI' | 'DK';
+      const where = (c: string | undefined): Where => (c === 'NO' || c === 'FI' || c === 'DK' ? c : 'SE');
+      const countries: Where[] = from || to ? [...new Set([from, to].filter(Boolean).map((s) => where(s!.country)))] : ['SE', 'NO', 'FI', 'DK'];
+      const states = countries.map((c) => ({ c, state: c === 'SE' ? history(date).state : c === 'DK' ? ('ready' as const) : record.ensure(c, date) }));
       if (states.some((s) => s.state === 'loading')) out.history = 'loading';
       else if (states.some((s) => s.state === 'ready')) out.history = 'ready';
       else {
         // None has the day: say why for the first (Norway and Finland name the day their record starts).
         const s = states[0]!;
-        out.history = s.c !== 'SE' && s.state === 'unavailable' ? (s.c === 'NO' ? 'norway' : 'finland') : s.state;
-        if (s.c !== 'SE' && s.state === 'unavailable') out.historyFrom = record.from(s.c);
+        const rec = s.c === 'NO' || s.c === 'FI' ? s.c : null;
+        out.history = rec && s.state === 'unavailable' ? (rec === 'NO' ? 'norway' : 'finland') : s.state;
+        if (rec && s.state === 'unavailable') out.historyFrom = record.from(rec);
       }
       if (out.history !== 'ready') {
         out.outsideTimetable = true;

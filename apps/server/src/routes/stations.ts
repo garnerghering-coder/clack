@@ -4,30 +4,34 @@ import type { Db } from '../db/client.js';
 import { searchStations } from '../search/stations.js';
 import { stationIndexCache } from '../search/stationIndexCache.js';
 import { trainsSoon } from '../legs/soon.js';
+import { COUNTRY_CODES } from '../lib/countries.js';
 
 interface PopularStation { id: string; name: string; code: string | null; country: string }
 
 const popularCache = new WeakMap<Db, { at: number; rows: PopularStation[] }>();
 /** How many of each country to show, Sweden first (the app's home). */
-const POPULAR_PER_COUNTRY: [string, number][] = [['SE', 3], ['NO', 2], ['FI', 1]];
+const POPULAR_PER_COUNTRY: [string, number][] = [['SE', 3], ['NO', 2], ['DK', 2], ['FI', 1]];
 
 /**
  * Shown before the user types (Flighty's "Frequently used"). Ranked by timetable stops with a commuter train counting a
- * third (as in the search ranking), so hubs beat busy commuter halts; the top 3 Swedish, 2 Norwegian and 1 Finnish.
+ * third (as in the search ranking), so hubs beat busy commuter halts; the top 3 Swedish, 2 Norwegian, 2 Danish and 1
+ * Finnish. Ranked within each country, so one country's timetable (Denmark's has years of history) can't crowd out the others.
  * The query is a big GROUP BY, so the answer is kept for an hour.
  */
 export function popularStations(db: Db, now = Date.now()): PopularStation[] {
   const hit = popularCache.get(db);
   if (hit && now - hit.at < 3600_000) return hit.rows;
   const ranked = db.all<PopularStation>(sql`
-    select s.id, s.name, s.trv_signature as code, s.country
-    from stations s
-    join timetable_stop_times st on st.station_id = s.id
-    join timetable_trips t on t.key = st.trip_key
-    where s.kind = 'rail_station' and s.country in ('SE', 'NO', 'FI')
-    group by s.id
-    order by sum(case when t.category = 'commuter' then 0.33 else 1.0 end) desc
-    limit 200`);
+    select id, name, code, country from (
+      select s.id, s.name, s.trv_signature as code, s.country,
+             row_number() over (partition by s.country order by sum(case when t.category = 'commuter' then 0.33 else 1.0 end) desc) as rk
+      from stations s
+      join timetable_stop_times st on st.station_id = s.id
+      join timetable_trips t on t.key = st.trip_key
+      where s.kind = 'rail_station' and s.country in (${sql.join(COUNTRY_CODES.map((c) => sql`${c}`), sql`, `)})
+      group by s.id)
+    where rk <= 3
+    order by rk`);
   const rows = POPULAR_PER_COUNTRY.flatMap(([country, n]) => ranked.filter((r) => r.country === country).slice(0, n));
   popularCache.set(db, { at: now, rows });
   return rows;

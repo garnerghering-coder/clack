@@ -109,7 +109,7 @@ export interface StopActuals {
   /** On-board facts from the departure row (catering, day-of notices). */
   onboard: OnboardFacts | null;
   /** Who reports this stop live: Trafikverket, Entur, Digitraffic (Finland), or nobody (a timetable-only match). */
-  source?: 'trafikverket' | 'entur' | 'digitraffic' | null;
+  source?: 'trafikverket' | 'entur' | 'digitraffic' | 'rejseplanen' | null;
   /** The time the stop's own country publishes for it, when it differs from our timetable (Norway's for SJ at Oslo S). */
   advertisedArr?: number | null;
   advertisedDep?: number | null;
@@ -302,7 +302,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   // Who can report each stop: Trafikverket in Sweden, Entur where it has live data, otherwise nobody (Denmark,
   // Germany, and SJ's or Snälltåget's trains in Norway): those stops stay on the timetable and say so.
   // Finnish trains: Digitraffic, at every stop it serves (Haparanda included, whatever Trafikverket's signature says).
-  const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | 'digitraffic' | null =>
+  const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | 'digitraffic' | 'rejseplanen' | null =>
     finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? recorded.get(s.seq)?.source ?? null);
   // Norway's published time for a Norwegian stop of another country's train (SJ 645: Oslo S 00:14, not SJ's 00:02).
   const adjusted = new Map<number, { arr: number | null; dep: number | null }>();
@@ -444,7 +444,8 @@ export async function refreshDueLegs(db: Db, log: (m: string) => void = () => {}
     .from(legs)
     .where(and(ne(legs.status, 'snapshotted'), lt(legs.schedArr, new Date(now - TRV_HISTORY_MS))))
     .all()) {
-    const country = countryOfKey(l.key ?? '') === 'FI' ? 'FI' : l.countryCodes.includes('NO') ? 'NO' : 'SE';
+    const keyCountry = countryOfKey(l.key ?? '');
+    const country = keyCountry === 'FI' || keyCountry === 'DK' ? keyCountry : l.countryCodes.includes('NO') ? 'NO' : 'SE';
     if (l.serviceDate && recordPending(db, country, l.serviceDate)) continue;
     expired += db.update(legs).set({ status: 'snapshotted' }).where(eq(legs.id, l.id)).run().changes;
   }

@@ -115,7 +115,8 @@ describe('country table', () => {
     expect(COUNTRIES.FI).toMatchObject({ tz: 'Europe/Helsinki', timetableSource: 'gtfs_fi', keyPrefix: 'fi', liveIdPrefix: 'fi:' });
     expect(tzOf('NO')).toBe('Europe/Oslo');
     expect(tzOf('SE')).toBe('Europe/Stockholm');
-    expect(tzOf('DK')).toBeUndefined();
+    expect(tzOf('DK')).toBe('Europe/Copenhagen');
+    expect(tzOf('DE')).toBeUndefined();
     expect(tzOf(null)).toBeUndefined();
   });
   it('reads the country from a trip key and a live id', () => {

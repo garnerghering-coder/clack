@@ -51,8 +51,10 @@ export const SWEDEN_KM = 1_572;
  * SE: Treriksröset to Smygehuk ≈ 1,572 km.
  * NO: Lindesnes to Nordkapp, 1,699 km in a straight line (Store norske leksikon, snl.no/Norge).
  * FI: Hanko to Utsjoki, the greatest length, 1,157 km (Statistics Finland, "Suomi lukuina 2026", from Maanmittauslaitos).
+ * DK: 368 km north to south (Danish Wikipedia, "Danmarks geografi"); other sources give 356 km for Skagens Odde to Gedser
+ *     Odde (skoven-i-skolen.dk "Danmark i tal"), so the figure is approximate.
  */
-export const COUNTRY_LENGTH_KM: Record<CountryCode, number> = { SE: SWEDEN_KM, NO: 1_699, FI: 1_157 };
+export const COUNTRY_LENGTH_KM: Record<CountryCode, number> = { SE: SWEDEN_KM, NO: 1_699, FI: 1_157, DK: 368 };
 
 /**
  * Length of Europe, north to south, in km. No standard figure exists, so it is the great-circle distance between two named

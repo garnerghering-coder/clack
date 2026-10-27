@@ -1,7 +1,7 @@
 // The countries Clack covers and what differs between them: one table instead of `startsWith('no:')` and
 // "Europe/Stockholm unless told otherwise" scattered through the server. Finland is +1 h from Sweden and Norway, so
 // time zones must come from here (or from the station/leg), never from a default.
-export type CountryCode = 'SE' | 'NO' | 'FI';
+export type CountryCode = 'SE' | 'NO' | 'FI' | 'DK';
 
 export interface Country {
   code: CountryCode;
@@ -19,17 +19,18 @@ export const COUNTRIES: Record<CountryCode, Country> = {
   SE: { code: 'SE', tz: 'Europe/Stockholm', timetableSource: 'gtfs_se3', keyPrefix: 'se3', liveIdPrefix: '' },
   NO: { code: 'NO', tz: 'Europe/Oslo', timetableSource: 'gtfs_no', keyPrefix: 'no', liveIdPrefix: 'no:' },
   FI: { code: 'FI', tz: 'Europe/Helsinki', timetableSource: 'gtfs_fi', keyPrefix: 'fi', liveIdPrefix: 'fi:' },
+  DK: { code: 'DK', tz: 'Europe/Copenhagen', timetableSource: 'gtfs_dk', keyPrefix: 'dk', liveIdPrefix: 'dk:' },
 };
 
 export const COUNTRY_CODES = Object.keys(COUNTRIES) as CountryCode[];
 
 export const isCountryCode = (c: unknown): c is CountryCode => typeof c === 'string' && c in COUNTRIES;
 
-/** The time zone of a country; undefined for countries we don't cover (Denmark, Germany: see TZ_BY_COUNTRY). */
+/** The time zone of a country; undefined for countries we don't cover (Germany: see TZ_BY_COUNTRY). */
 export const tzOf = (code: string | null | undefined): string | undefined => (isCountryCode(code) ? COUNTRIES[code].tz : undefined);
 
 /**
- * The country whose timetable feed a trip key (`se3:…`, `sv2:…`, `no:…`, `fi:…`) belongs to, or null when the key
+ * The country whose timetable feed a trip key (`se3:…`, `sv2:…`, `no:…`, `fi:…`, `dk:…`) belongs to, or null when the key
  * has no known prefix. Sweden's older Sverige 2 feed ('sv2') is Swedish too.
  */
 export function countryOfKey(key: string): CountryCode | null {

@@ -6,6 +6,7 @@ import type { Db } from '../db/client.js';
 import type { StopActuals } from '../legs/actuals.js';
 import { addDays } from '../lib/time.js';
 import { bigQueryEnabled, HISTORY_START as NO_HISTORY_START } from './bigquery.js';
+import { HISTORY_START as DK_HISTORY_START } from './dk-archive.js';
 import { HISTORY_START as FI_HISTORY_START } from './finland.js';
 
 export interface StopForRecord {
@@ -29,7 +30,7 @@ interface CallRow {
   run_id: string;
 }
 
-const SOURCE_NAME: Record<string, StopActuals['source']> = { trafikverket: 'trafikverket', digitraffic: 'digitraffic', entur: 'entur', 'entur-bigquery': 'entur' };
+const SOURCE_NAME: Record<string, StopActuals['source']> = { trafikverket: 'trafikverket', digitraffic: 'digitraffic', entur: 'entur', 'entur-bigquery': 'entur', train_archive_dk: 'rejseplanen' };
 const minute = (t: number | null) => (t === null ? null : Math.floor(t / 60_000));
 
 /** The record's causes in the form legs store them (the app maps codes to its own words). */
@@ -97,6 +98,8 @@ export function recordPending(db: Db, country: string, serviceDate: string): boo
   const fetch = (source: string, kind: string) =>
     db.$client.prepare(`select final from observed_fetches where source = ? and kind = ? and date = ?`).get(source, kind, serviceDate) as { final: number } | undefined;
   if (country === 'FI') return serviceDate >= FI_HISTORY_START && !fetch('digitraffic', 'trains')?.final;
+  // Denmark's finished days come from train-archive.eu each morning, from the archive's first day.
+  if (country === 'DK') return serviceDate >= DK_HISTORY_START && !fetch('train_archive_dk', 'tripupdate')?.final;
   if (country === 'NO') return bigQueryEnabled() && serviceDate >= NO_HISTORY_START && !fetch('entur-bigquery', 'siri-et');
   return false;
 }
