@@ -2,12 +2,15 @@
 //  - Sweden: each night at 04:10, every train of the last days that isn't final yet (Trafikverket keeps ~4 days),
 //    plus the day's incidents and messages; Trafikverket's code list each Monday.
 //  - Finland: each night at 04:40 (Helsinki); and a slow backfill of every day back to 2016.
+//  - Denmark: each morning at 05:00 (Copenhagen), train-archive.eu's finished days not in yet (from 2026-09-30, so a first run
+//    fills the whole archive); needs TRAIN_ARCHIVE_TOKEN.
 //  - Norway: every 5 minutes, the journeys that have just arrived; disruption messages every 10 minutes; Entur's
 //    BigQuery archive each morning at 07:30 (Oslo) for yesterday, and a backfill back to 2020 (one day every 2 minutes).
 // OBSERVED=off turns it all off; OBSERVED_BACKFILL=off keeps the nightly rounds but not the backfills.
 import cron from 'node-cron';
 import type { Db } from '../db/client.js';
 import * as bq from './bigquery.js';
+import * as dk from './dk-archive.js';
 import * as fi from './finland.js';
 import * as no from './norway.js';
 import * as se from './sweden.js';
@@ -40,6 +43,11 @@ export function startObserved(db: Db, log: (m: string) => void): () => void {
     if (new Date().getDay() === 1) await se.collectReasonCodes(db);
   });
   const finland = guard('Finland', () => fi.runFinland(db, { log }));
+  const denmark = guard('Denmark', async () => {
+    if (!process.env.TRAIN_ARCHIVE_TOKEN) return;
+    await dk.backfillRange(db, { log });
+    await refreshLegsOnDay(db, addDays(todayIn('Europe/Copenhagen'), -1), log);
+  });
   const norway = guard('Norway', () => no.tick(db, { log }));
   const situations = guard('Norway situations', () => no.pollSituations(db, { log }));
   const bigquery = guard('Norway BigQuery', async () => {
@@ -49,6 +57,7 @@ export function startObserved(db: Db, log: (m: string) => void): () => void {
   const jobs = [
     cron.schedule('10 4 * * *', sweden, { timezone: 'Europe/Stockholm' }),
     cron.schedule('40 4 * * *', finland, { timezone: 'Europe/Helsinki' }),
+    cron.schedule('0 5 * * *', denmark, { timezone: 'Europe/Copenhagen' }),
     cron.schedule('30 7 * * *', bigquery, { timezone: 'Europe/Oslo' }),
   ];
   const timers = [setInterval(norway, 5 * 60_000), setInterval(situations, 10 * 60_000)];
@@ -82,7 +91,7 @@ export function startObserved(db: Db, log: (m: string) => void): () => void {
   }
 
   // Catch up now: Trafikverket still has the last ~4 days, and anything missed while the server was down.
-  void sweden().then(finland).then(bigquery);
+  void sweden().then(finland).then(denmark).then(bigquery);
   void norway();
   void situations();
   log(`observed record: on (BigQuery ${bq.bigQueryEnabled() ? 'on' : 'off: no GOOGLE_APPLICATION_CREDENTIALS'})`);
