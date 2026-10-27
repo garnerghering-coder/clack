@@ -316,14 +316,20 @@ public nonisolated struct Board: Codable, Hashable, Sendable {
     public let from: Double
     public let to: Double
     public let updatedAt: Double
+    /// False when the rows are the timetable alone (no live source for the station, or it is unavailable). Older
+    /// servers don't send it: their boards are all live.
+    public let live: Bool?
     public let rows: [BoardRow]
 
-    public init(stationId: String, type: String, from: Double, to: Double, updatedAt: Double, rows: [BoardRow]) {
+    public var isLive: Bool { live ?? true }
+
+    public init(stationId: String, type: String, from: Double, to: Double, updatedAt: Double, live: Bool? = nil, rows: [BoardRow]) {
         self.stationId = stationId
         self.type = type
         self.from = from
         self.to = to
         self.updatedAt = updatedAt
+        self.live = live
         self.rows = rows
     }
 }

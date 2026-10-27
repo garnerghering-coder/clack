@@ -198,10 +198,10 @@ struct LiveMapView: UIViewRepresentable {
         let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
         map.delegate = context.coordinator
-        // Opens on Sweden, Norway and Finland, Bergen to the Finnish east border, Malmö to Nordkapp. The map may be built before it has a
+        // Opens on Sweden, Norway, Finland and Denmark, Bergen to the Finnish east border, Gedser to Nordkapp. The map may be built before it has a
         // size (Explore is built at launch), so the framing is kept and applied when it gets one.
         map.setCenter(CLLocationCoordinate2D(latitude: 63, longitude: 17), zoomLevel: 3.8, animated: false)
-        map.wantedFit = ClackMapView.Fit(points: [LatLon(55.3, 4.5), LatLon(70.2, 31.7)], padding: .zero, maxZoom: 14)
+        map.wantedFit = ClackMapView.Fit(points: [LatLon(54.5, 4.5), LatLon(70.2, 31.7)], padding: .zero, maxZoom: 14)
         controller.mapView = map
         controller.rebuilt()
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped(_:)))

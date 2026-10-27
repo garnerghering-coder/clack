@@ -143,13 +143,14 @@ final class AppModel {
         }
     }
 
-    /// The home country a phone's region gives: Sweden, Norway or Finland. Any other region gives none, and the server
+    /// The home country a phone's region gives: Sweden, Norway, Finland or Denmark. Any other region gives none, and the server
     /// then uses the country of the first counted trip, else Sweden.
     nonisolated static func homeCountry(forRegion region: String?) -> HomeCountry? {
         switch region {
         case "SE": .se
         case "NO": .no
         case "FI": .fi
+        case "DK": .dk
         default: nil
         }
     }

@@ -352,15 +352,17 @@ public nonisolated enum StopRole: OpenEnum {
 
 /// Who reports a stop's times live; nil means nobody does, so its times are the timetable.
 public nonisolated enum ReportSource: OpenEnum {
-    case trafikverket, entur
+    case trafikverket, entur, digitraffic, rejseplanen
     case unknown(String)
 
-    public static let knownCases: [ReportSource] = [.trafikverket, .entur]
+    public static let knownCases: [ReportSource] = [.trafikverket, .entur, .digitraffic, .rejseplanen]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
         case .trafikverket: "trafikverket"
         case .entur: "entur"
+        case .digitraffic: "digitraffic"
+        case .rejseplanen: "rejseplanen"
         case .unknown(let raw): raw
         }
     }

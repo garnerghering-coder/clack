@@ -102,18 +102,19 @@ public nonisolated enum WalkPace: OpenEnum {
     }
 }
 
-/// The country whose length the "length of your country" medal uses (SE, NO or FI).
+/// The country whose length the "length of your country" medal uses (SE, NO, FI or DK).
 public nonisolated enum HomeCountry: OpenEnum {
-    case se, no, fi
+    case se, no, fi, dk
     case unknown(String)
 
-    public static let knownCases: [HomeCountry] = [.se, .no, .fi]
+    public static let knownCases: [HomeCountry] = [.se, .no, .fi, .dk]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
         case .se: "SE"
         case .no: "NO"
         case .fi: "FI"
+        case .dk: "DK"
         case .unknown(let raw): raw
         }
     }

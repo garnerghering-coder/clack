@@ -308,7 +308,7 @@ struct ExploreScreen: View {
                     MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation")) { model.centreOnMe() }
                 }
             }
-            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic)")
+            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen")
                 .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
         }
         .padding(.leading, 12).padding(.bottom, 8)

@@ -115,7 +115,7 @@ public nonisolated enum Disruption {
 
     public static func passengerRights(countries: [String], journeyKm: Double, arrDelayMin: Int?, canceled: Bool) -> Rights {
         let international = Set(countries).count > 1
-        if !international && (countries.allSatisfy({ $0 == "NO" }) || countries.allSatisfy({ $0 == "FI" })) { return .operator }
+        if !international && (countries.allSatisfy({ $0 == "NO" }) || countries.allSatisfy({ $0 == "FI" }) || countries.allSatisfy({ $0 == "DK" })) { return .operator }
         let late = arrDelayMin ?? 0
         if international || journeyKm >= 150 {
             if canceled { return .eu(.refundOrReroute) }

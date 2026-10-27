@@ -155,7 +155,10 @@ struct BoardScreen: View {
             let fresh = now - board.updatedAt < 120_000
             let ago = LiveRules.ago(l10n, then: board.updatedAt, now: now)
             HStack(spacing: 8) {
-                if fresh {
+                if !board.isLive {
+                    // The timetable alone: no live source for this station right now.
+                    StatusLine(.estimated, l10n.t("train.timetableOnly"))
+                } else if fresh {
                     StatusLine(.live, l10n.t("live.chip"))
                     Text(l10n.t("live.updated", ["ago": ago])).clack(.caption).foregroundStyle(Ink.text2)
                 } else {
