@@ -17,6 +17,8 @@ import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
 import { productOf, searchByNumber, tripStops, type Product } from '../search/timetable.js';
 import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
 import { FINLAND_POLL_MS, FinlandFeed } from './finland.js';
+import { DENMARK_POLL_MS, DenmarkFeed } from './denmark.js';
+import type { RejseplanenClient } from '../rejseplanen/client.js';
 import { countryOfLiveId } from '../lib/countries.js';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
 
@@ -116,6 +118,10 @@ export interface IngestOptions {
   norway?: boolean;
   /** Finland's trains from Digitraffic (the same). */
   finland?: boolean;
+  /** Denmark's trains from Rejseplanen. */
+  denmark?: boolean;
+  /** For tests: the Rejseplanen client (else the shared one). */
+  rejseplanen?: RejseplanenClient;
 }
 
 type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
@@ -143,6 +149,11 @@ export class LiveMapIngest extends EventEmitter {
   private estimatedKeys = new Set<string>();
   private no: NorwayFeed | null;
   private fi: FinlandFeed | null;
+  private dk: DenmarkFeed | null;
+  /** Danish trains on the map now. */
+  private dkIds = new Set<string>();
+  /** Swedish keys of cross-border trains drawn from Rejseplanen in Denmark instead of a Swedish estimate abroad. */
+  private denmarkPos = new Set<string>();
   /** Finnish trains on the map now. */
   private fiIds = new Set<string>();
   /** Norwegian trains on the map now. */
@@ -175,11 +186,17 @@ export class LiveMapIngest extends EventEmitter {
     this.ann = new AnnouncementCache({ fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log });
     this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
     this.fi = !opts.finland || opts.simulate ? null : new FinlandFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
+    this.dk = !opts.denmark || opts.simulate ? null : new DenmarkFeed(db, { now: opts.now, client: opts.rejseplanen });
   }
 
   /** Last time Digitraffic's feeds answered (0 without Finland). */
   get finlandAt() {
     return this.fi?.upstreamAt ?? 0;
+  }
+
+  /** Last time Rejseplanen answered for the map (0 without Denmark). */
+  get denmarkAt() {
+    return this.dk?.upstreamAt ?? 0;
   }
 
   /** Last time Entur's feeds answered (0 without Norway). */
@@ -288,6 +305,22 @@ export class LiveMapIngest extends EventEmitter {
         pollFinland();
         this.timers.push(setInterval(pollFinland, FINLAND_POLL_MS));
         this.timers.push(setInterval(() => this.applyFinland(), ESTIMATE_MS));
+      }
+      if (this.dk) {
+        const dk = this.dk;
+        let polling = false;
+        const pollDenmark = () => {
+          if (polling) return;
+          polling = true;
+          dk.poll()
+            .then(() => this.applyDenmark())
+            .catch((e) => this.opts.log?.(`live map: Denmark failed: ${(e as Error).message}`))
+            .finally(() => {
+              polling = false;
+            });
+        };
+        pollDenmark();
+        this.timers.push(setInterval(pollDenmark, DENMARK_POLL_MS));
       }
     }
     this.timers.push(setInterval(() => this.flush(), FLUSH_MS));
@@ -436,7 +469,7 @@ export class LiveMapIngest extends EventEmitter {
       const k = trainKey(number, date);
       const gps = this.positions.get(k);
       if (gps && now - Date.parse(gps.TimeStamp) <= GPS_FRESH_MS) continue;
-      if (this.norwayGps.has(k)) continue;
+      if (this.norwayGps.has(k) || this.denmarkPos.has(k)) continue;
       const info = this.ann.info(number, date);
       if (!info || !this.shows(info)) continue;
       if (!info.nextSig || info.lastAt === null) {
@@ -524,6 +557,65 @@ export class LiveMapIngest extends EventEmitter {
     for (const id of this.noIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
     this.noIds = seen;
     this.norwayGps = taken;
+  }
+
+  /**
+   * Denmark's trains onto the map, from Rejseplanen: all estimated (Rejseplanen works the positions out from delays).
+   * A train Trafikverket also announces (Öresundståg, SJ, Snälltåget) is drawn once: Trafikverket's GPS wins, and so
+   * does Trafikverket while the train is in Sweden; abroad, where Trafikverket only guesses from the timetable,
+   * Rejseplanen's position replaces the guess.
+   */
+  applyDenmark() {
+    if (!this.dk) return;
+    const seen = new Set<string>();
+    const taken = new Set<string>();
+    for (const d of this.dk.trains()) {
+      const id = `dk:${d.number}|${d.date}`;
+      let crossBorder = false;
+      if (!d.inDanishTimetable) {
+        // Trafikverket may carry an Öresundståg with a leading 2 (21378 for Rejseplanen's 1378).
+        const sk = [trainKey(d.number, d.date), trainKey(`2${d.number}`, d.date)].find((k) => this.trains.has(k) || this.ann.info(...(k.split('|') as [string, string])));
+        if (sk) {
+          crossBorder = true;
+          const swe = this.trains.get(sk);
+          const info = this.ann.info(...(sk.split('|') as [string, string]));
+          if (swe && !swe.estimated) continue;
+          if (info?.nextSig && info.lastAt !== null) continue;
+          if (swe && this.trains.delete(sk)) this.removed.add(sk);
+          taken.add(sk);
+        }
+      }
+      seen.add(id);
+      const t: LiveTrain = {
+        id,
+        number: d.number,
+        date: d.date,
+        lat: d.lat,
+        lon: d.lon,
+        bearing: d.bearing,
+        speedKmh: null,
+        at: d.at,
+        estimated: true,
+        operatorId: d.operatorId,
+        productName: d.productName,
+        product: d.product,
+        trainType: trainTypeFor(d.operatorId, d.product, d.number, null, [d.origin, d.destination], null),
+        origin: d.origin,
+        destination: d.destination,
+        next: d.next,
+        nextEta: d.nextEta,
+        delayMin: d.delayMin,
+        mine: false,
+        tripKey: d.tripKey,
+        ...(crossBorder ? { crossBorder: true } : {}),
+      };
+      this.trains.set(id, t);
+      this.changed.add(id);
+      this.removed.delete(id);
+    }
+    for (const id of this.dkIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
+    this.dkIds = seen;
+    this.denmarkPos = taken;
   }
 
   /**

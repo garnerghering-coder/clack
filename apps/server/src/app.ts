@@ -110,6 +110,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
     graph: railGraph,
     norway: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_NORWAY ?? ''),
     finland: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_FINLAND ?? ''),
+    denmark: !/^(0|false|no|off)$/i.test(process.env.LIVE_MAP_DENMARK ?? ''),
     simulateTracks: () => (railGraph()?.edges ?? []).filter((e) => e.length > 8000).map((e) => Array.from({ length: e.pts.length / 2 }, (_, i) => [e.pts[2 * i]!, e.pts[2 * i + 1]!] as [number, number])),
     ...opts.liveMap,
   });
