@@ -1,7 +1,7 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import { config } from './env.js';
 import { openDb } from './db/client.js';
-import { bootstrap, refreshTrvStations, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
+import { bootstrap, refreshTrvStations, runDenmarkImport, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
 import { extractBasemap } from './import/basemap.js';
 import { refreshLogos } from './import/logos.js';
 import { AUDIT_DIR, runAudit } from './audit/audit.js';
@@ -20,6 +20,8 @@ if (cmd === 'gtfs') {
   await runNorwayImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport') });
 } else if (cmd === 'finland') {
   await runFinlandImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport'), zip });
+} else if (cmd === 'denmark') {
+  await runDenmarkImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport'), zip });
 } else if (cmd === 'history') {
   // Sweden's past timetables ahead of time: --from=YYYY-MM-DD [--to=YYYY-MM-DD] (to: the day before the current feed).
   const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
@@ -50,6 +52,6 @@ if (cmd === 'gtfs') {
   const r = await runAudit(db, { log: console.log });
   console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
+  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | denmark | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
   process.exitCode = 1;
 }

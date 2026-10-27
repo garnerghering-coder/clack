@@ -44,6 +44,7 @@ export const TZ_BY_COUNTRY: Record<string, string> = {
   NO: 'Europe/Oslo',
   DE: 'Europe/Berlin',
   AT: 'Europe/Vienna',
+  CZ: 'Europe/Prague',
   FI: COUNTRIES.FI.tz,
 };
 

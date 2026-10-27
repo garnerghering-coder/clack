@@ -57,6 +57,17 @@ export const FINLAND_DATASET: Dataset = {
   monthlyQuota: 40,
 };
 
+/**
+ * Denmark's GTFS from Rejseplanen (DENMARK_DATA_FINDINGS.md): one 56 MB zip, no key, CC BY 4.0, refreshed about every
+ * two weeks. Run checks its Last-Modified first, so the file is only downloaded when it has changed.
+ */
+export const DENMARK_DATASET: Dataset = {
+  source: 'rejseplanen_gtfs',
+  url: 'https://www.rejseplanen.info/labs/GTFS.zip',
+  file: path.join(CACHE_DIR, 'rejseplanen/GTFS.zip'),
+  monthlyQuota: 40,
+};
+
 /** Don't download again within this many hours unless forced (spec §5.2). */
 export const MIN_HOURS_BETWEEN_DOWNLOADS = 20;
 

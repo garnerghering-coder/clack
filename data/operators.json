@@ -1,5 +1,5 @@
 {
-  "_comment": "Brands shown in the app (owner decision: brand over operating company). 'gtfs_operators' lists GTFS attributions.txt organization_name values (or agency names) that map to the brand. 'color' is the brand colour taken from its app icon, brightened where needed to read on the dark map. 'website' is where the logo (the site's app icon) is downloaded from onto this computer; logos are not committed (trademarks). Pågatåg, Västtågen and Östgötapendeln use their transit authority's icon. Finland (2026-10-24): 'vr-fi' is VR Group, Finland (colour: theme-color of https://www.vr.fi, read 2026-10-24); 'hsl' is Helsinki Region Transport (colour: HSL's brand blue #007AC9 per its style guide tyyliopas.hsl.fi, as quoted on Wikipedia; hsl.fi itself blocks scripted requests, so its logo may not download and falls back to the initials badge). The id 'vr' is the SWEDISH VR Snabbtåg (ex-MTR Express) and is not VR Finland. 'gtfs_operators' are matched by exact string, so VR Finland's 'VR' (Digitraffic GTFS agency name) does not touch 'MTR Express AB' or 'VR Sverige AB'. VR Finland's aliases leave out 'VR', 'MTR' and 'VR Snabbtåg', which belong to the Swedish brand. 'aliases' are what people type in search (accents and case don't matter).",
+  "_comment": "Brands shown in the app (owner decision: brand over operating company). 'gtfs_operators' lists GTFS attributions.txt organization_name values (or agency names) that map to the brand. 'color' is the brand colour taken from its app icon, brightened where needed to read on the dark map. 'website' is where the logo (the site's app icon) is downloaded from onto this computer; logos are not committed (trademarks). Pågatåg, Västtågen and Östgötapendeln use their transit authority's icon. Finland (2026-10-24): 'vr-fi' is VR Group, Finland (colour: theme-color of https://www.vr.fi, read 2026-10-24); 'hsl' is Helsinki Region Transport (colour: HSL's brand blue #007AC9 per its style guide tyyliopas.hsl.fi, as quoted on Wikipedia; hsl.fi itself blocks scripted requests, so its logo may not download and falls back to the initials badge). The id 'vr' is the SWEDISH VR Snabbtåg (ex-MTR Express) and is not VR Finland. 'gtfs_operators' are matched by exact string, so VR Finland's 'VR' (Digitraffic GTFS agency name) does not touch 'MTR Express AB' or 'VR Sverige AB'. VR Finland's aliases leave out 'VR', 'MTR' and 'VR Snabbtåg', which belong to the Swedish brand. 'aliases' are what people type in search (accents and case don't matter). Denmark (2026-10-27): 'dsb' is DSB, including the S-tog (colour #b01030, the red of DSB's app icon, https://www.dsb.dk/html/media/fav/apple-touch-icon-57x57.png); 'vores-tog' is DSB Vores Tog, DSB's regional brand in Jutland (its app icon's navy #181840, brightened to #383894 to read on the dark map); 'lokaltog' is Lokaltog A/S (its web manifest's theme colour #00214d, which its app icon matches, brightened to #0057cc); 'nt' is NT, Nordjyllands Trafikselskab (Nordjyske Jernbaner's trains) and 'midttrafik' is Midttrafik: neither gives a usable colour (NT's icon is black and cream; Midttrafik has no icon), so both are the neutral grey #8e8e93 until a source is found. 'gtfs_operators' are Rejseplanen's agency names. RegioJet's trains, which Rejseplanen lists under DSB, get no brand.",
   "brands": [
     {
       "id": "sj",
@@ -406,6 +406,85 @@
         "Helsinki Region Transport"
       ],
       "website": "https://www.hsl.fi"
+    },
+    {
+      "id": "dsb",
+      "name": "DSB",
+      "short_name": "DSB",
+      "color": "#b01030",
+      "country": "DK",
+      "gtfs_operators": [
+        "DSB",
+        "DSB S-tog"
+      ],
+      "aliases": [
+        "DSB",
+        "Danske Statsbaner",
+        "S-tog",
+        "S-toget"
+      ],
+      "website": "https://www.dsb.dk"
+    },
+    {
+      "id": "vores-tog",
+      "name": "Vores Tog",
+      "short_name": "VT",
+      "color": "#383894",
+      "country": "DK",
+      "gtfs_operators": [
+        "DSB Vores Tog"
+      ],
+      "aliases": [
+        "Vores Tog",
+        "DSB Vores Tog"
+      ],
+      "website": "https://vorestog.dk"
+    },
+    {
+      "id": "lokaltog",
+      "name": "Lokaltog",
+      "short_name": "LT",
+      "color": "#0057cc",
+      "country": "DK",
+      "gtfs_operators": [
+        "Lokaltog A/S",
+        "Lokaltog"
+      ],
+      "aliases": [
+        "Lokaltog"
+      ],
+      "website": "https://www.lokaltog.dk"
+    },
+    {
+      "id": "nt",
+      "name": "NT",
+      "short_name": "NT",
+      "color": "#8e8e93",
+      "country": "DK",
+      "gtfs_operators": [
+        "NT"
+      ],
+      "aliases": [
+        "NT",
+        "Nordjyske Jernbaner",
+        "Nordjyllands Trafikselskab"
+      ],
+      "website": "https://www.nordjyllandstrafikselskab.dk"
+    },
+    {
+      "id": "midttrafik",
+      "name": "Midttrafik",
+      "short_name": "MT",
+      "color": "#8e8e93",
+      "country": "DK",
+      "gtfs_operators": [
+        "Midttrafik"
+      ],
+      "aliases": [
+        "Midttrafik",
+        "Lemvigbanen"
+      ],
+      "website": "https://www.midttrafik.dk"
     }
   ]
 }

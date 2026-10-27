@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { importLog, stations } from '../db/schema.js';
-import { DATASETS, ENTUR_DATASETS, FINLAND_DATASET, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { DATASETS, DENMARK_DATASET, ENTUR_DATASETS, FINLAND_DATASET, ensureDataset, importLegacyDownloadLog } from './downloads.js';
+import { importGtfsDenmark, lastDenmarkImport } from './gtfs-dk.js';
 import { config } from '../env.js';
 import { importGtfsFinland, lastFinlandImport } from './gtfs-fi.js';
 import { importGtfsNorway, lastNorwayImport } from './gtfs-no.js';
@@ -130,6 +131,39 @@ export function runFinlandImport(db: Db, opts: RunOptions = {}) {
   });
 }
 
+/**
+ * Denmark (DENMARK_DATA_FINDINGS.md): Rejseplanen's GTFS, downloaded only when its Last-Modified is newer than the
+ * cached copy (it changes about every two weeks), and imported when new (or nothing from Denmark is in yet).
+ */
+export function runDenmarkImport(db: Db, opts: RunOptions = {}) {
+  const log = opts.log ?? console.log;
+  return exclusive(async () => {
+    let zip = opts.zip;
+    let fresh = false;
+    if (!zip) {
+      try {
+        const cached = fs.existsSync(DENMARK_DATASET.file) ? fs.statSync(DENMARK_DATASET.file).mtimeMs : 0;
+        const head = await fetch(DENMARK_DATASET.url, { method: 'HEAD', signal: AbortSignal.timeout(30_000) });
+        const changed = Date.parse(head.headers.get('last-modified') ?? '') || Date.now();
+        if (opts.forceDownload || !cached || changed > cached) {
+          const r = await ensureDataset(db, DENMARK_DATASET, { force: true, log });
+          fresh = r.downloaded;
+        } else log('Denmark: Rejseplanen GTFS unchanged since the cached copy');
+      } catch (e) {
+        log(`Denmark: ${(e as Error).message}`);
+      }
+      if (fs.existsSync(DENMARK_DATASET.file)) zip = DENMARK_DATASET.file;
+    } else fresh = true;
+    if (!zip || !fs.existsSync(zip)) return null;
+    if (!fresh && !opts.reimport && lastDenmarkImport(db)) {
+      log('Denmark: timetable unchanged since the last import; skipping');
+      return null;
+    }
+    log('Denmark: importing rail trips…');
+    return importGtfsDenmark(db, zip, { log });
+  });
+}
+
 /** On server start: make sure there is something to search, without spending quota when a cached feed exists. */
 export async function bootstrap(db: Db, log: (m: string) => void = console.log) {
   try {
@@ -147,6 +181,8 @@ export async function bootstrap(db: Db, log: (m: string) => void = console.log) 
   await runNorwayImport(db, { log }).catch((e) => log(`Norway import skipped: ${(e as Error).message}`));
   // Finland after Norway: Haparanda comes from Sweden's feed and is reused by the Oulu trains.
   if (config.finlandImport) await runFinlandImport(db, { log }).catch((e) => log(`Finland import skipped: ${(e as Error).message}`));
+  // Denmark last: its Öresund stations come from Sweden's feed, and trains that also run in Sweden are left to it.
+  await runDenmarkImport(db, { log }).catch((e) => log(`Denmark import skipped: ${(e as Error).message}`));
   // Operator logos: each brand's app icon from its website (skipped when already downloaded this month).
   await refreshLogos(log).catch((e) => log(`logos skipped: ${(e as Error).message}`));
   // The map's basemap is a one-off download (no quota); later runs just reuse the file.

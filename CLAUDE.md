@@ -1,11 +1,11 @@
 # Clack: notes for Claude
 
-Clack logs the trains you ride in Sweden, Norway and Finland, shows them on the real tracks and builds a passport of your rail
+Clack logs the trains you ride in Sweden, Norway and Finland (and Denmark, timetable only for now), shows them on the real tracks and builds a passport of your rail
 history. The owner is Garner (he/him).
 
 ## Layout
 
-- `apps/server`: Fastify + SQLite (Drizzle), run with tsx. Train data from Trafikverket, Trafiklab, Entur and Digitraffic (Fintraffic). It also
+- `apps/server`: Fastify + SQLite (Drizzle), run with tsx. Train data from Trafikverket, Trafiklab, Entur, Digitraffic (Fintraffic) and Rejseplanen (Denmark). It also
   serves the privacy page. The hosted copy: docs/SERVER.md.
 - `apps/Clack`: the native SwiftUI iPhone app, the only client (docs/SWIFT_PORT.md). Open `apps/Clack/Clack.xcodeproj`.
   `apps/Clack/ClackKit` is a Swift package with the targets ClackCore (logic, API, strings) and ClackDesign (tokens
