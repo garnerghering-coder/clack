@@ -9,6 +9,7 @@ import { danishStationId } from '../import/gtfs-dk.js';
 import { productOfCategory } from '../boards/denmark.js';
 import { rejseplanen, type Journey, type RejseplanenClient } from '../rejseplanen/client.js';
 import { TripMatcher } from '../rejseplanen/match.js';
+import { rememberJourney } from '../rejseplanen/stops.js';
 import type { Product } from '../search/timetable.js';
 
 export const DENMARK_POLL_MS = 20_000;
@@ -82,6 +83,7 @@ export class DenmarkFeed {
     const out: DenmarkTrain[] = [];
     for (const j of this.journeys) {
       const matched = this.matcher.match(j.date, j.ends);
+      rememberJourney(j, matched?.tripKey ?? null);
       const number = j.number ?? matched?.trainNumber ?? null;
       if (!number || !j.pos) continue;
       const key = `${number}|${j.date}`;

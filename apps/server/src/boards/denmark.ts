@@ -8,6 +8,7 @@ import { deviationTexts } from '../legs/causes.js';
 import { trainTypeFor } from '../legs/trainTypes.js';
 import type { BoardEntry } from '../rejseplanen/client.js';
 import type { TripMatcher } from '../rejseplanen/match.js';
+import { rememberJourney } from '../rejseplanen/stops.js';
 import type { Product, StationCall } from '../search/timetable.js';
 import type { BoardRow, BoardType, PlatformMemory } from './board.js';
 
@@ -44,6 +45,7 @@ export function normalizeDenmarkBoard(entries: BoardEntry[], ctx: DenmarkBoardCo
     if (advertised === null || advertised < ctx.from || advertised >= ctx.to) continue;
     const live = dep ? s.depLive : s.arrLive;
     const matched = ctx.matcher.match(j.date, j.ends);
+    rememberJourney(j, matched?.tripKey ?? null);
     const call =
       (matched && ctx.calls.find((c) => c.tripKey === matched.tripKey && c.serviceDate === j.date)) ||
       // Trains Sweden's feed has (Öresundståg, SJ): by number and minute, any feed.

@@ -16,6 +16,7 @@ import { enturStops } from '../entur/calls.js';
 import { DIGITRAFFIC_HISTORY_MS, digitrafficFor, fetchVehicle } from '../digitraffic/trains.js';
 import { countryOfKey } from '../lib/countries.js';
 import { recordedStops, recordPending } from '../observed/lookup.js';
+import { rejseplanenFor } from '../rejseplanen/stops.js';
 import type { OnboardFacts } from '@clack/shared';
 
 /** Trafikverket keeps about 4 days of history (Phase 0 §1); after that a leg can't get actuals any more. */
@@ -271,6 +272,29 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
       for (const t of deviationTexts(e.causes ?? [])) if (!have.deviations.includes(t)) have.deviations.push(t);
     }
   }
+  // Danish stops: Rejseplanen, the same day (a Danish train's, or a Swedish one's past the border).
+  let rp = new Map<number, StopActuals>();
+  const dkStops = stops.filter((s) => s.country === 'DK');
+  if (!finnish && dkStops.length && arr && now - arr < 6 * 3600_000 && leg.serviceDate) {
+    try {
+      rp = await rejseplanenFor(db, { tripKey: leg.timetableTripKey, trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops: dkStops }, { now });
+    } catch {
+      // Rejseplanen resting or down: the timetable stands, and the archive fills the day in the next morning.
+    }
+  }
+  for (const [seq, e] of rp) {
+    const have = matched.get(seq);
+    if (!have) matched.set(seq, e);
+    else {
+      have.actualArr ??= e.actualArr;
+      have.actualDep ??= e.actualDep;
+      have.estimatedArr ??= e.estimatedArr;
+      have.estimatedDep ??= e.estimatedDep;
+      have.platform ??= e.platform;
+      have.canceled ||= e.canceled;
+      have.causes = addCauses(have.causes ?? [], e.causes ?? []);
+    }
+  }
   // Beyond the live sources: the observed record, which keeps what actually happened to every train (SPEC §5.6).
   // It fills what they no longer have (a trip saved after Trafikverket's ~4 days, a past Norwegian day).
   const recorded = leg.serviceDate ? recordedStops(db, { trainNumber: leg.trainNumber, serviceDate: leg.serviceDate, stops }) : new Map<number, StopActuals>();
@@ -303,7 +327,7 @@ export async function refreshLegActuals(db: Db, legId: string, opts: { now?: num
   // Germany, and SJ's or Snälltåget's trains in Norway): those stops stay on the timetable and say so.
   // Finnish trains: Digitraffic, at every stop it serves (Haparanda included, whatever Trafikverket's signature says).
   const sourceOf = (s: (typeof stops)[number]): 'trafikverket' | 'entur' | 'digitraffic' | 'rejseplanen' | null =>
-    finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? recorded.get(s.seq)?.source ?? null);
+    finnish ? (s.fi ? 'digitraffic' : null) : s.sig && !s.sig.includes('.') && s.country === 'SE' ? 'trafikverket' : (entur.get(s.seq)?.source ?? rp.get(s.seq)?.source ?? recorded.get(s.seq)?.source ?? null);
   // Norway's published time for a Norwegian stop of another country's train (SJ 645: Oslo S 00:14, not SJ's 00:02).
   const adjusted = new Map<number, { arr: number | null; dep: number | null }>();
   for (const s of stops) {

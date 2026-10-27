@@ -9,6 +9,7 @@ import { stations } from '../db/schema.js';
 import { inArray } from 'drizzle-orm';
 import { digitrafficFor, fiCodes } from '../digitraffic/trains.js';
 import { countryOfKey } from '../lib/countries.js';
+import { rejseplanenFor } from '../rejseplanen/stops.js';
 
 export interface TrainStopView {
   seq: number;
@@ -119,6 +120,15 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
   } catch {
     // Entur down or over quota: as above.
   }
+  // Danish stops from Rejseplanen (a Danish train's, or an Öresundståg's past the border), where nobody else reports.
+  let rp = new Map<number, StopActuals>();
+  try {
+    const dk = stops.filter((s) => s.country === 'DK');
+    if (dk.length) rp = await rejseplanenFor(db, { tripKey: trip.key, trainNumber, serviceDate: trip.serviceDate, stops: dk.map((s) => ({ seq: s.seq, stationId: s.stationId, schedArr: s.arr, schedDep: s.dep })) }, { now });
+    for (const [seq, a] of rp) if (!actuals.has(seq)) actuals.set(seq, a);
+  } catch {
+    // Rejseplanen resting or down: as above.
+  }
   const out = mergeStops(
     stops.map((s) => {
       const e = s.country === 'NO' ? entur.get(s.seq) : undefined;
@@ -128,7 +138,7 @@ export async function trainStops(db: Db, trip: { key: string; serviceDate: strin
         name: s.name,
         arr: s.arr === null ? null : (e?.advertisedArr ?? s.arr),
         dep: s.dep === null ? null : (e?.advertisedDep ?? s.dep),
-        source: s.code && !s.code.includes('.') && s.country === 'SE' ? 'trafikverket' : (e?.source ?? null),
+        source: s.code && !s.code.includes('.') && s.country === 'SE' ? 'trafikverket' : (e?.source ?? (rp.has(s.seq) ? 'rejseplanen' : null)),
       };
     }),
     actuals,
