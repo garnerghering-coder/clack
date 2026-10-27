@@ -141,4 +141,19 @@ struct TicketReaderTests {
         let train = TicketTrain(operatorName: nil, trainNumber: "99", date: "2026-10-10", from: "A", to: "B", dep: "12:05", arr: nil)
         #expect(TicketReader.pick(results, for: train)?.trainNumber == "2")
     }
+
+    @Test func theTicketsNumberWithinTwoMinutesWhenNothingLeavesAtThePrintedMinute() throws {
+        // The ticket says 12:05; the timetable copy has train 1165 at 12:07.
+        let results = [
+            try result("1163", from: ms("2026-10-10T10:06:00Z"), to: ms("2026-10-10T10:40:00Z")),
+            try result("1165", from: ms("2026-10-10T10:07:00Z"), to: ms("2026-10-10T10:41:00Z")),
+        ]
+        let train = TicketTrain(operatorName: "Öresundståg", trainNumber: "1165", date: "2026-10-10", from: "A", to: "B", dep: "12:05", arr: nil)
+        #expect(TicketReader.pick(results, for: train)?.trainNumber == "1165")
+        // Three minutes off is too far, and a nearby train with another number is never taken.
+        let far = TicketTrain(operatorName: nil, trainNumber: "1165", date: "2026-10-10", from: "A", to: "B", dep: "12:04", arr: nil)
+        #expect(TicketReader.pick([results[1]], for: far) == nil)
+        let other = TicketTrain(operatorName: nil, trainNumber: "1171", date: "2026-10-10", from: "A", to: "B", dep: "12:05", arr: nil)
+        #expect(TicketReader.pick(results, for: other) == nil)
+    }
 }

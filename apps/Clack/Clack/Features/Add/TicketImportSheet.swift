@@ -84,15 +84,28 @@ final class TicketImportModel {
         }
     }
 
-    /// Search the two stations on the date, waiting while the server fetches an older day's timetable.
+    /// Search the two stations on the date (with an arrow between them, so each printed name only has to be a fair
+    /// match), then the same with the ticket's train number. Waits while the server fetches an older day's timetable.
     private nonisolated static func find(_ train: TicketTrain, _ client: APIClient) async -> TripResult? {
-        for attempt in 0..<25 {
-            guard let response = try? await client.search("\(train.from) \(train.to)", date: train.date) else { return nil }
-            if response.history == "loading", attempt < 24 {
-                try? await Task.sleep(for: .seconds(3))
+        if let hit = await search("\(train.from) → \(train.to)", train, client) { return hit }
+        if let number = train.trainNumber { return await search("\(number) \(train.from) → \(train.to)", train, client) }
+        return nil
+    }
+
+    /// One search, asked again while the day is being fetched ("loading", every 3 s) or after a failure (every 15 s, or
+    /// a network error), for up to three minutes, like adding a train does.
+    private nonisolated static func search(_ text: String, _ train: TicketTrain, _ client: APIClient) async -> TripResult? {
+        let started = Date.now
+        while Date.now.timeIntervalSince(started) < 180 {
+            guard let response = try? await client.search(text, date: train.date) else {
+                try? await Task.sleep(for: .seconds(5))
                 continue
             }
-            return TicketReader.pick(response.results ?? [], for: train)
+            switch response.history {
+            case "loading": try? await Task.sleep(for: .seconds(3))
+            case "failed": try? await Task.sleep(for: .seconds(15))
+            default: return TicketReader.pick(response.results ?? [], for: train)
+            }
         }
         return nil
     }

@@ -185,6 +185,20 @@ public nonisolated enum TicketReader {
         if let arr = train.arr, found.contains(where: { clock($0.to) == arr }) { found = found.filter { clock($0.to) == arr } }
         if found.count > 1, let number = train.trainNumber,
            let same = found.first(where: { $0.trainNumber == number || $0.alsoKnownAs.contains(number) }) { return same }
-        return found.first
+        if let first = found.first { return first }
+        // Nothing at the printed minute: the train with the ticket's number within two minutes of it (a timetable
+        // adjusted after the ticket was sold, or an archive copy taken before the change). Never by time alone.
+        guard let number = train.trainNumber, let want = minutes(train.dep) else { return nil }
+        return results.first { r in
+            guard r.trainNumber == number || r.alsoKnownAs.contains(number), let got = minutes(clock(r.from)) else { return false }
+            let diff = abs(got - want)
+            return min(diff, 24 * 60 - diff) <= 2
+        }
+    }
+
+    /// "HH:mm" as minutes after midnight.
+    private static func minutes(_ hhmm: String) -> Int? {
+        let parts = hhmm.split(separator: ":").compactMap { Int($0) }
+        return parts.count == 2 ? parts[0] * 60 + parts[1] : nil
     }
 }

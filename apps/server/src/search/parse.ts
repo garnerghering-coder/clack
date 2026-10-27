@@ -59,8 +59,10 @@ export function parseQuery(input: string, matchOperator: ReturnType<typeof build
     q.operatorText = words.slice(0, op[1]).join(' ');
     words = words.slice(op[1]);
   }
-  // A train number: digits only, at the start (after the operator) or the whole remaining text.
-  if (!q.hasSeparator && words.length >= 1 && /^\d{1,6}$/.test(words[0]!)) {
+  // A train number: digits only, at the start (after the operator) or the whole remaining text. Also before a route
+  // ("1165 Malmö C → København H", as ticket import asks when the stations alone find nothing): no station name is
+  // digits only.
+  if (words.length >= 1 && /^\d{1,6}$/.test(words[0]!) && (!q.hasSeparator || words.length >= 2)) {
     q.trainNumber = words[0];
     words = words.slice(1);
   }

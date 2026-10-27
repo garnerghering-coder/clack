@@ -42,3 +42,13 @@ describe('search input parsing', () => {
     expect(p('Vyborg').operatorId).toBeUndefined();
   });
 });
+
+describe('a train number before a route', () => {
+  it('reads "1165 Malmö C → København H" as the number and both stations', async () => {
+    const { parseQuery, buildOperatorMatcher } = await import('../src/search/parse.js');
+    const q = parseQuery('1165 Malmö C → København H', buildOperatorMatcher([]));
+    expect([q.trainNumber, q.fromText, q.toText]).toEqual(['1165', 'Malmö C', 'København H']);
+    // A number on its own before the arrow stays the station text being typed.
+    expect(parseQuery('1165 →', buildOperatorMatcher([])).trainNumber).toBeUndefined();
+  });
+});
