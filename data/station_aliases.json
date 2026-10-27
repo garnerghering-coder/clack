@@ -1,5 +1,5 @@
 {
-  "_comment": "Extra search terms per Trafikverket signature (or station id, for Norway's NSR stations) (English and other common names). Accents and case don't matter; city names already find their main station by popularity, so only add names that differ from the station name.",
+  "_comment": "Extra search terms per Trafikverket signature (or station id, for Norway's NSR and Finland's fi: stations): English names, and the Swedish names Swedish travellers and tickets use (SJ tickets print \"Köpenhamn H\"). Accents and case don't matter; city names already find their main station by popularity, so only add names that differ from the station name.",
   "aliases": {
     "G": [
       "Gothenburg",
@@ -15,11 +15,21 @@
       "Copenhagen",
       "Kobenhavn",
       "Copenhagen Central",
-      "København H"
+      "København H",
+      "Köpenhamn",
+      "Köpenhamn H",
+      "Köpenhamn C",
+      "Köpenhamns central",
+      "Köpenhamns centralstation",
+      "Københavns Hovedbanegård",
+      "Copenhagen H"
     ],
     "Dk.kk": [
       "Østerport",
-      "Osterport"
+      "Osterport",
+      "Köpenhamn Österport",
+      "Köpenhamn Østerport",
+      "Österport"
     ],
     "Arnc": [
       "Arlanda",
@@ -33,7 +43,14 @@
     "Dk.cph": [
       "Kastrup",
       "CPH",
-      "Kobenhavns Lufthavn"
+      "Kobenhavns Lufthavn",
+      "Köpenhamn Kastrup",
+      "Kastrup flygplats",
+      "Köpenhamns flygplats",
+      "Köpenhamn Lufthavn",
+      "Copenhagen Airport",
+      "Københavns Lufthavn",
+      "Kastrup Airport"
     ],
     "No.osl": [
       "Oslo",
@@ -57,6 +74,113 @@
     "NSR:StopPlace:672": [
       "Sandefjord Torp",
       "Torp Airport"
+    ],
+    "Dk.kn": [
+      "Nørreport",
+      "Norreport",
+      "Köpenhamn Nørreport",
+      "Köpenhamn Nörreport"
+    ],
+    "Dk.öre": [
+      "Köpenhamn Örestad",
+      "Örestad"
+    ],
+    "Dk.nel": [
+      "København Syd",
+      "Köpenhamn Syd",
+      "Ny Ellebjerg"
+    ],
+    "fi:HKI": [
+      "Helsingfors",
+      "Helsingfors C",
+      "Helsinki Central",
+      "Helsingfors central"
+    ],
+    "fi:PSL": [
+      "Böle"
+    ],
+    "fi:EPO": [
+      "Esbo"
+    ],
+    "fi:KNI": [
+      "Grankulla"
+    ],
+    "fi:KKN": [
+      "Kyrkslätt"
+    ],
+    "fi:KR": [
+      "Karis"
+    ],
+    "fi:TMS": [
+      "Ekenäs"
+    ],
+    "fi:HNK": [
+      "Hangö"
+    ],
+    "fi:TKU": [
+      "Åbo"
+    ],
+    "fi:TPE": [
+      "Tammerfors"
+    ],
+    "fi:HL": [
+      "Tavastehus"
+    ],
+    "fi:LH": [
+      "Lahtis"
+    ],
+    "fi:LR": [
+      "Villmanstrand"
+    ],
+    "fi:OL": [
+      "Uleåborg"
+    ],
+    "fi:VS": [
+      "Vasa"
+    ],
+    "fi:PRI": [
+      "Björneborg"
+    ],
+    "fi:MI": [
+      "S:t Michel",
+      "Sankt Michel"
+    ],
+    "fi:SL": [
+      "Nyslott"
+    ],
+    "fi:KAJ": [
+      "Kajana"
+    ],
+    "fi:HY": [
+      "Hyvinge"
+    ],
+    "fi:JP": [
+      "Träskända"
+    ],
+    "fi:TKL": [
+      "Dickursby"
+    ],
+    "fi:KE": [
+      "Kervo"
+    ],
+    "fi:HPL": [
+      "Hoplax"
+    ],
+    "fi:LPV": [
+      "Alberga"
+    ],
+    "fi:OLK": [
+      "Åggelby"
+    ],
+    "fi:KÄP": [
+      "Kottby"
+    ],
+    "fi:LEN": [
+      "Helsinki Airport",
+      "Helsingfors-Vanda",
+      "Helsingfors flygplats",
+      "Helsinki-Vantaa"
     ]
-  }
+  },
+  "_source": "Swedish exonyms for Danish places: Svenska Akademiens ordlista / Språkrådet's list of Swedish names for foreign places (Köpenhamn, Helsingör). Swedish names of Finnish stations: the official bilingual names (Institute for the Languages of Finland, Kotus; shown on VR's station signs), e.g. Helsingfors, Åbo, Tammerfors, Uleåborg. Airport names: Copenhagen Airport / Københavns Lufthavn (Copenhagen Airports A/S), Helsinki Airport / Helsingfors-Vanda."
 }
