@@ -1,4 +1,8 @@
-import { describe, expect, it } from 'vitest';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
+import { openDb } from '../src/db/client.js';
 import { localMs, parseCsv, project, stationOfStop } from '../src/observed/dk-archive.js';
 
 // Rows as in train-archive.eu's dk-rejseplanen file for 2026-10-26 (shortened).
@@ -38,5 +42,38 @@ describe('train-archive.eu Danish day', () => {
     const c = runs.find((x) => x.runId === '169')!;
     expect(c.canceled).toBe(2);
     expect(c.trainNumber).toBeNull();
+  });
+});
+
+describe('train-archive.eu catch-up', () => {
+  it('fetches each missing day once, skips finished ones, and survives a missing day', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'clack-dk-'));
+    vi.stubEnv('OBSERVED_DIR', root);
+    vi.stubEnv('TRAIN_ARCHIVE_TOKEN', 'test');
+    vi.resetModules();
+    const dk = await import('../src/observed/dk-archive.js');
+    const db = openDb(':memory:');
+    const asked: string[] = [];
+    const fetchImpl = (async (url: string) => {
+      const date = /date=([\d-]+)/.exec(url)![1]!;
+      asked.push(date);
+      if (date === '2026-10-25') return new Response('', { status: 404 });
+      return new Response(CSV.replaceAll('2026-10-26', date));
+    }) as typeof fetch;
+    try {
+      await dk.backfillRange(db, { from: '2026-10-24', to: '2026-10-26', fetchImpl, log: () => {} });
+      expect(asked).toEqual(['2026-10-24', '2026-10-25', '2026-10-26']);
+      const runs = db.$client.prepare(`select service_date, count(*) n from observed_runs where country = 'DK' group by 1 order by 1`).all();
+      expect(runs).toEqual([
+        { service_date: '2026-10-24', n: 2 },
+        { service_date: '2026-10-26', n: 2 },
+      ]);
+      asked.length = 0;
+      await dk.backfillRange(db, { from: '2026-10-24', to: '2026-10-26', fetchImpl, log: () => {} });
+      expect(asked).toEqual(['2026-10-25']);
+    } finally {
+      vi.unstubAllEnvs();
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   });
 });

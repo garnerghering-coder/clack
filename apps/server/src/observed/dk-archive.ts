@@ -138,10 +138,23 @@ export async function fetchDay(date: string, fetchImpl: typeof fetch = fetch): P
   return parseCsv((body[0] === 0x1f && body[1] === 0x8b ? zlib.gunzipSync(body) : body).toString('utf8'));
 }
 
+/** Lets the server answer requests between batches: this runs inside it, and SQLite calls block. */
+const breathe = () => new Promise<void>((r) => setImmediate(r));
+
+/** A day is ~3,400 runs and ~100,000 calls; written a few hundred runs per transaction, with a pause between. */
+async function saveInChunks(db: Db, runs: ObservedRun[], now: number, size = 300): Promise<number> {
+  let written = 0;
+  for (let i = 0; i < runs.length; i += size) {
+    written += saveRuns(db, runs.slice(i, i + size), now);
+    await breathe();
+  }
+  return written;
+}
+
 /** Fetch, archive raw and project one finished day. */
-export async function collectDay(db: Db, date: string, opts: { now?: number; log?: (m: string) => void } = {}) {
+export async function collectDay(db: Db, date: string, opts: { now?: number; log?: (m: string) => void; fetchImpl?: typeof fetch } = {}) {
   const now = opts.now ?? Date.now();
-  const rows = await fetchDay(date);
+  const rows = await fetchDay(date, opts.fetchImpl);
   if (!rows?.length) {
     opts.log?.(`observed DK ${date}: the archive has nothing for this day`);
     return 0;
@@ -149,7 +162,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
   const file = writeRaw(SOURCE, date, 'tripupdate', rows, { now });
   const { trips, known } = lookups(db, [...new Set(rows.map((r) => r.trip_id!))]);
   const runs = project(date, rows, trips, known, true);
-  const written = saveRuns(db, runs, now);
+  const written = await saveInChunks(db, runs, now);
   recordFetch(db, { source: SOURCE, kind: 'tripupdate', date, records: rows.length, runs: written, file, final: true }, now);
   opts.log?.(`observed DK ${date}: ${rows.length} rows, ${runs.length} runs`);
   return runs.length;
@@ -165,11 +178,12 @@ export function projectFromRaw(db: Db, date: string): number {
 }
 
 /** Every finished day from the archive's first to yesterday that isn't in yet (npm run import -- observed-backfill --country=DK). */
-export async function backfillRange(db: Db, opts: { from?: string; to?: string; log?: (m: string) => void } = {}) {
+export async function backfillRange(db: Db, opts: { from?: string; to?: string; log?: (m: string) => void; fetchImpl?: typeof fetch } = {}) {
   const log = opts.log ?? console.log;
   const to = opts.to ?? addDays(todayIn(TZ), -1);
   for (let d = opts.from ?? HISTORY_START; d <= to; d = addDays(d, 1)) {
     if (fetchOf(db, SOURCE, 'tripupdate', d)?.final) continue;
-    await collectDay(db, d, { log }).catch((e) => log(`observed DK ${d} failed: ${(e as Error).message}`));
+    await collectDay(db, d, { log, fetchImpl: opts.fetchImpl }).catch((e) => log(`observed DK ${d} failed: ${(e as Error).message}`));
+    await breathe();
   }
 }

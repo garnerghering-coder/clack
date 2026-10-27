@@ -82,7 +82,7 @@ export const timetableTrips = sqliteTable(
     wheelchair: integer('wheelchair'),
     bikes: integer('bikes'),
   },
-  (t) => [index('timetable_trips_number').on(t.trainNumber)],
+  (t) => [index('timetable_trips_number').on(t.trainNumber), index('timetable_trips_source_trip').on(t.source, t.tripId)],
 );
 
 /** The service dates each trip pattern runs on. Past dates are never deleted on import. */
