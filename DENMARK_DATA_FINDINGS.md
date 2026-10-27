@@ -80,3 +80,30 @@ feed. The platform is not in the file.
 
 **Not done yet:** the app endpoint (mgate) client, Clack's own recorder, live Danish legs and boards, and searching
 Danish observed runs from the app (country `DK` is not in `lib/countries.ts`, so the lookup code does not see it yet).
+
+## Live data from Rejseplanen's app backend (2026-10-27)
+
+No source open today without MitID gives Danish live data officially: the API 2.0 key is pending (months), and
+Dataudveksleren's SIRI-ET needs MitID Erhverv or a foreign eID. Checked and not used: Transitous'
+`gtfs.spline.de/siri/danmark` (buses only, Movia and Bornholm, 20 min old); train-archive.eu's 15-minute files
+(20–35 min behind; fine for a fallback, not for live).
+
+Garner chose the backend Rejseplanen's own app uses (HAFAS mgate, `https://mobilapps.rejseplanen.dk/bin/iphone.exe`, the AID in
+hafas-client's `rejseplanen` profile). It is **not granted to us** and may be blocked or changed without notice.
+`apps/server/src/rejseplanen/`. Tested 2026-10-27:
+- `StationBoard` (København H, 0.6 s): planned and live times (`dTimeS`/`dTimeR`), live platform (`dPltfR`),
+  cancellations, train numbers as in the GTFS. One answer holds about 100 trains.
+- `JourneyGeoPos` (all of Denmark, products 31, ~1.2 s): ~250 trains (S-Tog, Re, RA, RX, IC, ICL, Lokalbane,
+  Pågatog, Snälltåget, ECE, RJ, Togbus). Positions are **calculated by Rejseplanen** from delays (`proc`, `ani`), not
+  GPS: Clack draws them as estimated. S-tog runs carry no number here, only the line letter.
+- `JourneyDetails` (0.2 s): every stop, planned and live, `PROGNOSED` (from the train) or `CALCULATED` (carried
+  forward). Clack counts a past PROGNOSED time as actual; the archive confirms the day the next morning.
+- The journey id carries the first and last stop and their times (`1S#8600803#1T#1705#LS#8600677#LT#1814`):
+  Clack matches journeys to `gtfs_dk` on those (188 of 249 trains on 2026-10-27; most of the rest are Sweden's
+  feed's trains, drawn once with Trafikverket's).
+
+Limits Clack keeps to: 30 requests a minute shared by everything, skip rather than queue, rest 10 minutes after 5
+failures, map polled every 20 s only while someone looks, journey details kept 50 s. `REJSEPLANEN_LIVE=off` stops
+it; `LIVE_MAP_DENMARK=off` keeps Danish trains off the map. Without it, Danish boards fall back to the timetable
+(`live: false`). **Not done yet:** placing Danish trains on the map from the archive's delays while Rejseplanen is
+down (they disappear instead), and moving to API 2.0 when the key comes.
