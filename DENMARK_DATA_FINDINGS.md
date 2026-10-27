@@ -53,3 +53,30 @@ Recorded in data/operators.json. Sources:
 ## Searching
 "Köpenhamn", "Köpenhamn H", "Kastrup flygplats" and "Copenhagen Airport" were missing as station names (data/station_aliases.json),
 so SJ tickets to "Köpenhamn H" never resolved; added 2026-10-27.
+
+## Old timetables and the archive without approvals (2026-10-27)
+
+**Old copies of Rejseplanen's GTFS (Mobility Database, mdb-1292).** The free account's token lists 125 copies, from 2016-07
+to 2026-10-20 (every two weeks lately; gaps in 2017–18). `npm run import -- denmark-history` downloads each, newest first,
+imports it with `importGtfsDenmark(… fillGaps)` (only dates no copy has covered yet, nothing deleted: the newest copy wins
+for a date) and deletes the zip; `data/cache/rejseplanen/history.json` records what was done, so a rerun skips it. Copies
+from 2016–2019 may be in another shape: a failure is noted there and the run goes on. CC BY 4.0. The token is
+`MOBILITY_DB_REFRESH_TOKEN` in `.env`, exchanged for a one-hour access token (`POST /v1/tokens`).
+
+**train-archive.eu.** Garner phoned them on 2026-10-27: Clack may use any of their data, with no limits (verbal; the
+Danish source's licence field is empty). Token `TRAIN_ARCHIVE_TOKEN` in `.env`, sent as `X-Api-Key`. The file list is
+`https://www.train-archive.eu/api/sources.json` (no token needed); 60-odd sources in Europe, among them Sweden
+(se-trafikverket, se-sl), Norway (no-entur), Finland (fi-digitraffic), Germany (de-gtfsde), the Netherlands, Poland and
+others, all from 2026-09-28/30. Not imported; listed for later. Denmark: `dk-rejseplanen`, finished days from 2026-09-30,
+`https://data.train-archive.eu/daily/provider=dk-rejseplanen/service=TripUpdate/date=YYYY-MM-DD.csv.gz` (redirects to the
+storage bucket). A day is ~104,000 rows (one per train and planned stop), ~3,400 trips, 1.3 MB gzipped. Columns:
+scheduled and predicted times (local), arrival/departure delay in whole minutes, trip_status (scheduled/cancelled),
+stop_status (skipped), delay_source (feed, or propagated from the previous stop: ~2% of rows). `trip_id` is Rejseplanen's
+GTFS trip id, so the match to the timetable is exact (3,309 of 3,434 trips on 2026-10-26; the rest are trains the
+timetable import leaves out: also in Sweden's feed, or not rail).
+`npm run import -- denmark-archive [--from= --to=]` keeps each day raw (write-once, `data/observed/train_archive_dk/`) and
+projects it into `observed_runs`/`observed_calls` (country `DK`). A time counts as actual only where delay_source is
+feed. The platform is not in the file.
+
+**Not done yet:** the app endpoint (mgate) client, Clack's own recorder, live Danish legs and boards, and searching
+Danish observed runs from the app (country `DK` is not in `lib/countries.ts`, so the lookup code does not see it yet).

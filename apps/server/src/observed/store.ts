@@ -3,7 +3,7 @@
 // up to ~3 days), and a run marked final is never overwritten by a non-final one.
 import type { Db } from '../db/client.js';
 
-export type Country = 'SE' | 'NO' | 'FI';
+export type Country = 'SE' | 'NO' | 'FI' | 'DK';
 
 export interface ObservedCause {
   src: string;

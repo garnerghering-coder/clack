@@ -77,7 +77,7 @@ export interface DenmarkImportSummary {
 
 type StopRow = [seq: number, stopId: string, arr: number | null, dep: number | null, noPickup: boolean, noDropoff: boolean, headsign: string | null];
 
-export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: string; daysAhead?: number; log?: (m: string) => void } = {}): Promise<DenmarkImportSummary> {
+export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: string; daysAhead?: number; fillGaps?: boolean; log?: (m: string) => void } = {}): Promise<DenmarkImportSummary> {
   const t0 = Date.now();
   const log = opts.log ?? (() => {});
   const today = opts.today ?? todayIn(TZ);
@@ -98,10 +98,12 @@ export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: str
     if (cd.exception_type === '1') (added.get(cd.service_id!) ?? added.set(cd.service_id!, []).get(cd.service_id!)!).push(cd.date!);
     else if (cd.exception_type === '2') (removed.get(cd.service_id!) ?? removed.set(cd.service_id!, new Set()).get(cd.service_id!)!).add(cd.date!);
   }
+  // fillGaps (old copies, imported newest first): only dates no import has covered yet, and nothing is deleted.
+  const covered = new Set<string>(opts.fillGaps ? (db.$client.prepare(`select distinct d.service_date from timetable_trip_dates d join timetable_trips t on t.key = d.trip_key where t.source = ?`).all(SOURCE) as { service_date: string }[]).map((r) => r.service_date) : []);
   const dates = new Map<string, string[]>();
   for (const sid of services) {
-    const ds = serviceDates(calendar.get(sid), added.get(sid) ?? [], removed.get(sid) ?? new Set(), from, to);
-    if (ds.length) dates.set(sid, ds.map(ymdToIso));
+    const ds = serviceDates(calendar.get(sid), added.get(sid) ?? [], removed.get(sid) ?? new Set(), from, to).map(ymdToIso).filter((d) => !covered.has(d));
+    if (ds.length) dates.set(sid, ds);
   }
   const kept = trips.filter((t) => dates.has(t.service_id!));
   const tripIds = new Set(kept.map((t) => t.trip_id!));
@@ -230,7 +232,7 @@ export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: str
        on conflict(id) do update set gtfs_stop_ids = excluded.gtfs_stop_ids`,
     );
     for (const s of newStations.values()) insertStation.run(s.id, s.name, s.country, s.lat, s.lon, TZ_BY_COUNTRY[s.country] ?? TZ, JSON.stringify([...new Set(s.stopIds)]));
-    sqlite.prepare(`delete from timetable_trip_dates where service_date >= ? and trip_key in (select key from timetable_trips where source = ?)`).run(windowStart, SOURCE);
+    if (!opts.fillGaps) sqlite.prepare(`delete from timetable_trip_dates where service_date >= ? and trip_key in (select key from timetable_trips where source = ?)`).run(windowStart, SOURCE);
     const insertTrip = sqlite.prepare(
       `insert into timetable_trips (key, source, trip_id, train_number, operator_id, gtfs_operator, route_name, route_type, category, tz, feed_version, ${TRIP_DETAIL_COLUMNS})
        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ${TRIP_DETAIL_VALUES}) on conflict(key) do update set category = excluded.category, operator_id = excluded.operator_id, feed_version = excluded.feed_version, ${TRIP_DETAIL_UPDATE}`,
@@ -245,7 +247,7 @@ export async function importGtfsDenmark(db: Db, zip: string, opts: { today?: str
       for (const d of p.dates) tripDates += insertDate.run(p.key, d).changes;
     }
     sqlite.prepare(`delete from timetable_trips where source = ? and key not in (select trip_key from timetable_trip_dates)`).run(SOURCE);
-    refreshStationPopularity(db, today);
+    refreshStationPopularity(db, opts.fillGaps ? todayIn(TZ) : today);
     db.insert(importLog)
       .values({ source: SOURCE, startedAt: new Date(t0), finishedAt: new Date(), status: 'ok', notes: JSON.stringify({ trips: patterns.length, window: [windowStart, windowEnd], excluded }) })
       .run();

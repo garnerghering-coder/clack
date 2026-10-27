@@ -1,4 +1,4 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import { config } from './env.js';
 import { openDb } from './db/client.js';
 import { bootstrap, refreshTrvStations, runDenmarkImport, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
@@ -6,6 +6,8 @@ import { extractBasemap } from './import/basemap.js';
 import { refreshLogos } from './import/logos.js';
 import { AUDIT_DIR, runAudit } from './audit/audit.js';
 import { backfillSweden } from './import/backfill.js';
+import { backfillRange as backfillDenmarkArchive } from './observed/dk-archive.js';
+import { importDenmarkHistory } from './import/gtfs-dk-history.js';
 
 const [cmd = 'bootstrap', ...flags] = process.argv.slice(2);
 const flag = (name: string) => flags.includes(`--${name}`);
@@ -22,6 +24,13 @@ if (cmd === 'gtfs') {
   await runFinlandImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport'), zip });
 } else if (cmd === 'denmark') {
   await runDenmarkImport(db, { forceDownload: flag('force-download'), reimport: flag('reimport'), zip });
+} else if (cmd === 'denmark-archive') {
+  // train-archive.eu's finished Danish days (from 2026-09-30): [--from=YYYY-MM-DD] [--to=YYYY-MM-DD].
+  await backfillDenmarkArchive(db, { from: flags.find((f) => f.startsWith('--from='))?.slice(7), to: flags.find((f) => f.startsWith('--to='))?.slice(5) });
+} else if (cmd === 'denmark-history') {
+  // Old Danish timetables from the Mobility Database: [--limit=N] copies this run.
+  const limit = flags.find((f) => f.startsWith('--limit='))?.slice(8);
+  await importDenmarkHistory(db, { limit: limit ? Number(limit) : undefined });
 } else if (cmd === 'history') {
   // Sweden's past timetables ahead of time: --from=YYYY-MM-DD [--to=YYYY-MM-DD] (to: the day before the current feed).
   const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
@@ -52,6 +61,6 @@ if (cmd === 'gtfs') {
   const r = await runAudit(db, { log: console.log });
   console.log(`audited ${r.audited} new trip(s); report: ${AUDIT_DIR}/latest.md`);
 } else {
-  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | denmark | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
+  console.error(`unknown command "${cmd}"; use gtfs | norway | finland | denmark | denmark-history | denmark-archive | history | observed-backfill | reproject | trv-stations | basemap | logos | bootstrap | audit`);
   process.exitCode = 1;
 }
