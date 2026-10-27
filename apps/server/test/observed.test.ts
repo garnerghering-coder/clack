@@ -205,5 +205,11 @@ describe('Norway archive ids', () => {
     expect(journeyIdentity({ serviceJourneyId: '471:2022-03-08', operatorRef: 'SJN', dataSource: 'BNR' })).toEqual({ operator: 'SJN', number: '471' });
     expect(journeyIdentity({ serviceJourneyId: '1881:2022-03-08', operatorRef: 'VY', dataSource: 'BNR' })).toEqual({ operator: 'VYG', number: '1881' });
     expect(journeyIdentity({ serviceJourneyId: 'VYG:ServiceJourney:61-LOD_617015-R', operatorRef: 'VYT', dataSource: 'VYG' })).toEqual({ operator: 'VYG', number: '61' });
+    // Older operator codes for the same companies, and the 2025 "DatedServiceJourney" style.
+    expect(journeyIdentity({ serviceJourneyId: '61:2023-06-01', operatorRef: 'VYT', dataSource: 'BNR' })).toEqual({ operator: 'VYG', number: '61' });
+    expect(journeyIdentity({ serviceJourneyId: '3795:2022-07-15', operatorRef: 'FLY', dataSource: 'BNR' })).toEqual({ operator: 'FLT', number: '3795' });
+    expect(journeyIdentity({ serviceJourneyId: '725:2022-07-15', operatorRef: 'GAG', dataSource: 'BNR' })).toEqual({ operator: 'GOA', number: '725' });
+    expect(journeyIdentity({ serviceJourneyId: 'VYG:DatedServiceJourney:610_MYR-OSL_25-06-01', operatorRef: 'VYG:Operator:VYT', dataSource: 'VYG' })).toEqual({ operator: 'VYG', number: '610' });
+    expect(journeyIdentity({ serviceJourneyId: 'GOA:DatedServiceJourney:725_KRS-STV_26-01-06', operatorRef: 'GOA:Operator:GOA', dataSource: 'GOA' })).toEqual({ operator: 'GOA', number: '725' });
   });
 });

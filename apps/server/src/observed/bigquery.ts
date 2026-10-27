@@ -72,8 +72,27 @@ async function quays(now: number): Promise<Map<string, [string | null, string | 
   return quayCache.map;
 }
 
-/** operatorRef values that name an operator by a different code than its codespace: Vy's is VYG. */
-const OPERATOR_CODESPACE: Record<string, string> = { VY: 'VYG' };
+/**
+ * operatorRef values and the operator's codespace (the code its trips carry in the current feed). Seen 2021–2026
+ * (one day a month, 2026-10-27): Vy as VY, vy, VYT, VYG, VYG:Operator:VY and VYG:Operator:VYT; Flytoget as FLY and
+ * FLT:Operator:507; Go-Ahead as GAG and GOA:Operator:GOA. The same train numbers run under the later codes. Others
+ * (SJN, SJ, TM, BN, NJM, VYG:Operator:FLB Flåmsbana, VYG:Operator:TAG Vy Tåg) are kept as given, without a brand
+ * unless the current feed has trips under that code.
+ */
+const OPERATOR_CODESPACE: Record<string, string> = {
+  VY: 'VYG',
+  vy: 'VYG',
+  VYT: 'VYG',
+  'VYG:Operator:VY': 'VYG',
+  'VYG:Operator:VYT': 'VYG',
+  FLY: 'FLT',
+  'FLT:Operator:507': 'FLT',
+  GAG: 'GOA',
+  'GOA:Operator:GOA': 'GOA',
+  'VYG:Operator:FLB': 'FLB',
+  'VYG:Operator:TAG': 'TAG',
+};
+const codespaceOf = (ref: string | null | undefined) => (ref ? (OPERATOR_CODESPACE[ref] ?? ref) : null);
 
 /**
  * A journey's operator and train number. Two id styles (checked 2026-10-27): before each operator had its own stream
@@ -83,8 +102,11 @@ const OPERATOR_CODESPACE: Record<string, string> = { VY: 'VYG' };
 export function journeyIdentity(r: Pick<BqRow, string>): { operator: string | null; number: string | null } {
   const id = r.serviceJourneyId ?? '';
   const old = /^(\d+):\d{4}-\d{2}-\d{2}$/.exec(id);
-  if (old) return { operator: (r.operatorRef && (OPERATOR_CODESPACE[r.operatorRef] ?? r.operatorRef)) || r.dataSource || null, number: old[1]! };
-  return { operator: id.split(':')[0] || r.operatorRef || r.dataSource || null, number: trainNumberFromTripId(id) };
+  if (old) return { operator: codespaceOf(r.operatorRef) || r.dataSource || null, number: old[1]! };
+  // A third style from 2025: "VYG:DatedServiceJourney:61_OSL-BRG_25-06-01" (the number before the first "_").
+  const dated = /:DatedServiceJourney:(\d+)_/.exec(id);
+  const operator = codespaceOf(r.operatorRef?.includes(':') ? r.operatorRef : null) ?? (id.split(':')[0] || codespaceOf(r.operatorRef) || r.dataSource || null);
+  return { operator, number: dated ? dated[1]! : trainNumberFromTripId(id) };
 }
 
 const PLACES = '`ent-data-sharing-ext-prd.national_stop_registry.stop_places_all_versions`';
@@ -298,7 +320,10 @@ export async function backfillRange(db: Db, opts: { from: string; to?: string; p
  */
 export async function reproject(db: Db, opts: { log?: (m: string) => void } = {}): Promise<number> {
   const { rawFiles, readRaw } = await import('./archive.js');
-  const days = (db.$client.prepare(`select date from observed_fetches where source = ? and kind = 'siri-et' order by date`).all(SOURCE) as { date: string }[]).map((r) => r.date);
+  // Only days already projected: the rest are raw only, and projected with the current reading when first asked for.
+  const days = (
+    db.$client.prepare(`select distinct service_date date from observed_runs where country = 'NO' and source = ? order by 1`).all(SOURCE) as { date: string }[]
+  ).map((r) => r.date);
   const quay = await quays(Date.now());
   const stationByNsr = await stationsByPlace(db);
   for (const date of days) {
@@ -311,6 +336,14 @@ export async function reproject(db: Db, opts: { log?: (m: string) => void } = {}
     })();
     saveRuns(db, runs, Date.now(), { keepSources: ['entur'] });
   }
-  opts.log?.(`reprojected ${days.length} Norwegian archive days`);
+  // Days already written as timetable trips (searched before) are written again from the new projection.
+  const { writeDay } = await import('./timetable.js');
+  const written = (db.$client.prepare(`select date from observed_fetches where source = 'clack' and kind = 'timetable-NO'`).all() as { date: string }[]).map((r) => r.date);
+  for (const d of written) writeDay(db, 'NO', d);
+  // Trips left with no dates by that (keys changed) go, unless a saved trip points at one.
+  db.$client
+    .prepare(`delete from timetable_trips where source = 'observed_no' and key not in (select trip_key from timetable_trip_dates) and key not in (select timetable_trip_key from legs where timetable_trip_key is not null)`)
+    .run();
+  opts.log?.(`reprojected ${days.length} Norwegian archive days; rewrote ${written.length} searched days`);
   return days.length;
 }
