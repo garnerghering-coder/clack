@@ -75,3 +75,24 @@ describe('Rejseplanen client', () => {
     await expect(c.journeyDetails('x')).rejects.toBeInstanceOf(RejseplanenUnavailable);
   });
 });
+
+describe('Danish boards', () => {
+  it('turns Rejseplanen board entries into rows: live time, platform, delay, no actual', async () => {
+    const { normalizeDenmarkBoard } = await import('../src/boards/denmark.js');
+    const res = fixture('board-kh.json').svcResL[0].res;
+    const { journeyOf: jo } = await import('../src/rejseplanen/client.js');
+    const entries = res.jnyL.map((j: { stbStop: unknown; date: string }) => ({ journey: jo(res.common, j as never), stop: undefined as never }));
+    // Stops come through the client's parser; reuse it by asking for a board with a fake fetch.
+    const c = new RejseplanenClient({ fetchImpl: (async () => new Response(JSON.stringify(fixture('board-kh.json')))) as typeof fetch });
+    const board = await c.stationBoard('8600626', 'DEP', Date.UTC(2026, 9, 27, 15, 0), 120);
+    expect(board.length).toBe(entries.length);
+    const matcher = { match: () => null } as never;
+    const rows = normalizeDenmarkBoard(board, { type: 'departures', now: Date.UTC(2026, 9, 27, 16, 0), from: 0, to: Infinity, calls: [], memory: new Map(), matcher, names: () => null });
+    const re = rows.find((r) => r.trainNumber === '1099')!;
+    expect(re.delayMin).toBe(5);
+    expect(re.platform).toBe('1');
+    expect(re.actual).toBeNull();
+    expect(re.endpoints).toEqual(['Østerport']);
+    expect(rows.every((r) => r.productName !== 'Togbus')).toBe(true);
+  });
+});

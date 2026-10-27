@@ -5,7 +5,7 @@
 import table from '../../../data/delay_causes.json';
 import { appString } from './strings';
 
-export type CauseSource = 'trv' | 'digitraffic' | 'entur';
+export type CauseSource = 'trv' | 'digitraffic' | 'entur' | 'rejseplanen';
 
 /** One reason or notice on a stop: what the source said, structured. `code` is the source's own; `text` as written. */
 export interface DelayCause {

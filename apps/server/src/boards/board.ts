@@ -79,6 +79,8 @@ export interface Board {
   from: number;
   to: number;
   updatedAt: number;
+  /** False when the rows are the timetable alone (no live source for the station, or it is unavailable). */
+  live: boolean;
   rows: BoardRow[];
 }
 

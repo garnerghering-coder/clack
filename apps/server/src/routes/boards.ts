@@ -45,8 +45,8 @@ export const boardRoutes =
       return {
         ...rest,
         county: s.countyNo ? (SE_COUNTIES[s.countyNo] ?? null) : null,
-        // Trafikverket's own stations, Norway's through Entur, Finland's through Digitraffic.
-        hasBoard: Boolean((s.code && !s.code.includes('.')) || nsrId || fiId),
+        // Live from Trafikverket, Entur, Digitraffic or Rejseplanen; any other rail station has the timetable's.
+        hasBoard: Boolean(hub.sourceOf(id)),
         hasMap: hasStationMap(id),
         sizeClass: stationSize(s.baseTracks),
         favorite,
