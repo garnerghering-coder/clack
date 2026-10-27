@@ -155,6 +155,9 @@ export async function fetchFinlandPositions(keys: string[], now: number, fetchIm
 /** A leg on a Finnish train: its timetable trip is from Finland's feed. Its train is Digitraffic's alone. */
 const isFinnishLeg = (l: { leg: { timetableTripKey: string | null } }) => countryOfKey(l.leg.timetableTripKey ?? '') === 'FI';
 
+/** A leg on a train from Denmark's timetable: Rejseplanen's (its positions are worked out from delays, so none here). */
+const isDanishLeg = (l: { leg: { timetableTripKey: string | null } }) => countryOfKey(l.leg.timetableTripKey ?? '') === 'DK';
+
 const ms = (d: Date | null) => d?.getTime() ?? null;
 
 /** Legs to poll now: not frozen, and between an hour before departure and half an hour after arrival. */
@@ -265,8 +268,8 @@ export async function trackOnce(db: Db, opts: TrackerOptions = {}): Promise<Live
     }
   }
   const loaded = ids.map((id) => loadLeg(db, id)).filter((l): l is NonNullable<typeof l> => l !== null);
-  // Finnish trains aren't Trafikverket's: a Swedish train can share their number.
-  const numbers = [...new Set(loaded.filter((l) => !isFinnishLeg(l)).flatMap((l) => (l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [])))];
+  // Finnish and Danish trains aren't Trafikverket's: a Swedish train can share their number.
+  const numbers = [...new Set(loaded.filter((l) => !isFinnishLeg(l) && !isDanishLeg(l)).flatMap((l) => (l.leg.trvTrainNumbers.length ? l.leg.trvTrainNumbers : l.leg.trainNumber ? [l.leg.trainNumber] : [])))];
   let fixes = new Map<string, DatedFix[]>();
   try {
     fixes = await fetchPositions(numbers, now, opts.fetchImpl);

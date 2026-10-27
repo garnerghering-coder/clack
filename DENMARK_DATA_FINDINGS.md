@@ -105,5 +105,6 @@ hafas-client's `rejseplanen` profile). It is **not granted to us** and may be bl
 Limits Clack keeps to: 30 requests a minute shared by everything, skip rather than queue, rest 10 minutes after 5
 failures, map polled every 20 s only while someone looks, journey details kept 50 s. `REJSEPLANEN_LIVE=off` stops
 it; `LIVE_MAP_DENMARK=off` keeps Danish trains off the map. Without it, Danish boards fall back to the timetable
-(`live: false`). **Not done yet:** placing Danish trains on the map from the archive's delays while Rejseplanen is
-down (they disappear instead), and moving to API 2.0 when the key comes.
+(`live: false`), and the map places Danish trains from the archive's latest 15-minute TripUpdate file (Parquet,
+Brotli; 20–35 min old; only stops with an update are listed, so the next stop can be a few ahead), at most one file
+every 5 minutes (`livemap/denmarkFallback.ts`). **Not done yet:** moving to API 2.0 when the key comes.

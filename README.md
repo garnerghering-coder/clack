@@ -51,6 +51,10 @@ simulator and press Cmd+R: a debug build in the simulator talks to this server.
   first start and at most once a day after that. Every request to Entur names the app (`ENTUR_CLIENT_NAME`, default
   `garner-clack`), as Entur asks.
 - **Finland** needs no key either: data from Digitraffic (Fintraffic), licensed CC BY 4.0, credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY` (shown on the About screen).
+- **Denmark**: the timetable is Rejseplanen's open GTFS (CC BY 4.0). Live data comes from the backend Rejseplanen's app uses
+  (no key; not a granted API, so kept to 30 requests a minute; `REJSEPLANEN_LIVE=off` stops it, `LIVE_MAP_DENMARK=off` keeps
+  Danish trains off the map). Finished days and the map's fallback come from train-archive.eu (`TRAIN_ARCHIVE_TOKEN`).
+  See DENMARK_DATA_FINDINGS.md.
 - **Delay data:** Trafikverket keeps actual times for only ~4 days, and Entur only for the day the train runs. The server saves them for your trips while it's
   running and catches up when it starts, so start the app at least every few days.
 - **Updating:** `git pull`, then `npm ci` if dependencies changed (the hosted server: `docs/SERVER.md`).

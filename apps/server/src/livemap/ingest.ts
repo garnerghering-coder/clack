@@ -186,7 +186,7 @@ export class LiveMapIngest extends EventEmitter {
     this.ann = new AnnouncementCache({ fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log });
     this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
     this.fi = !opts.finland || opts.simulate ? null : new FinlandFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
-    this.dk = !opts.denmark || opts.simulate ? null : new DenmarkFeed(db, { now: opts.now, client: opts.rejseplanen });
+    this.dk = !opts.denmark || opts.simulate ? null : new DenmarkFeed(db, { now: opts.now, client: opts.rejseplanen, fetchImpl: opts.fetchImpl, graph: opts.graph });
   }
 
   /** Last time Digitraffic's feeds answered (0 without Finland). */

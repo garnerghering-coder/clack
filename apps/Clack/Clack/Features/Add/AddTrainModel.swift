@@ -118,6 +118,8 @@ final class AddTrainModel {
         while let history = response?.history, history == "loading" || history == "failed" {
             try? await Task.sleep(for: .seconds(history == "loading" ? 2 : 15))
             if Task.isCancelled || Date.now.timeIntervalSince(started) > 180 { return }
+            // The search may have brought the day in while this slept: then there is nothing to ask again.
+            guard let now = response?.history, now == "loading" || now == "failed" else { return }
             retry += 1
         }
     }

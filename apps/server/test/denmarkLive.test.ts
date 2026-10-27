@@ -47,3 +47,22 @@ describe('Danish trains on the map', () => {
     expect(bearingOf({ lat: 55, lon: 12 }, { lat: 55, lon: 13 })).toBe(90);
   });
 });
+
+describe('Danish trains from the archive while Rejseplanen is down', () => {
+  it('asks for the 15-minute files that exist by now, newest first', async () => {
+    const { recentWindows } = await import('../src/livemap/denmarkFallback.js');
+    // 17:47 in Copenhagen (CET): the 17:15–17:30 file appears around 17:50, so 17:00–17:15 is the newest there.
+    expect(recentWindows(Date.UTC(2026, 9, 27, 16, 47)).map((w) => w.name)).toEqual(['17-00-00_to_17-15-00', '16-45-00_to_17-00-00', '16-30-00_to_16-45-00']);
+    expect(recentWindows(Date.UTC(2026, 9, 27, 16, 47))[0]!.date).toBe('2026-10-27');
+  });
+  it("keeps each trip's newest update", async () => {
+    const { latestUpdates } = await import('../src/livemap/denmarkFallback.js');
+    const u = latestUpdates([
+      { trip_tripId: '1', trip_startDate: '20261027', fetchTime: '2026-10-27T16:15:00Z', stopTimeUpdate: [{ stopId: '000008600626', departure: { time: 100 } }] },
+      { trip_tripId: '1', trip_startDate: '20261027', fetchTime: '2026-10-27T16:20:00Z', stopTimeUpdate: [{ stopId: '000008600626', departure: { time: 160n } }] },
+      { trip_tripId: '2', stopTimeUpdate: [] },
+    ]);
+    expect(u.size).toBe(1);
+    expect(u.get('1')).toMatchObject({ date: '2026-10-27', stops: [{ stopId: '000008600626', arr: null, dep: 160_000 }] });
+  });
+});

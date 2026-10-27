@@ -18,10 +18,10 @@
 1. **No AI at runtime.** Everything is deterministic code: downloads, database queries, string matching, arithmetic. No LLM calls anywhere in the app or the server.
 2. **Cheap.** Free data sources, free map data, no paid tiles or paid APIs. Respect every quota. (The Apple Developer Program and the hosted VM are the only costs; nothing in the code is paid per request.)
 3. **Native on iPhone.** The only client is the SwiftUI app in `apps/Clack`. There is no web app, no PWA and no wrapper around a web view.
-4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab, Entur or Digitraffic itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
+4. **Keys stay on the server.** The app never calls Trafikverket, Trafiklab, Entur, Digitraffic or Rejseplanen itself; it only talks to Clack's server. The one key the app holds is its random phone id (§4).
 5. **History is permanent.** Once a leg is finished, its data is frozen in our DB and never depends on an external API again. The same goes for every train, not just saved legs: what actually happened is recorded as it happens and kept (§5.6).
 6. **i18n from day one.** Every user-facing string is a key in the app's String Catalog (`ClackCore/Resources/Localizable.xcstrings`); English and Swedish ship together.
-7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur, Finland through Digitraffic), so a new country plugs in without touching the core.
+7. **Country = adapter.** Country-specific logic lives behind a common adapter interface (Sweden through Trafikverket and Trafiklab, Norway through Entur, Finland through Digitraffic, Denmark through Rejseplanen), so a new country plugs in without touching the core.
 8. **Nothing made up.** A train type, livery, line or amenity with no source is not shown (an unpainted train, "Train type not known"), and an estimate is always labelled as one.
 
 ## 3. Scope
@@ -118,6 +118,8 @@ added a year later shows its real times, platforms, cancellations and causes.
   (`RailwayEvent`), platform-sign messages (`TrainStationMessage`); the `ReasonCode` list weekly.
 - **Finland (Digitraffic):** every train of each day with all its rows and causes, and every composition, nightly; a
   slow backfill to 2016-01 (Digitraffic keeps its history).
+- **Denmark (train-archive.eu):** each morning, the finished days of Rejseplanen's live feed from the European Train
+  Archive (from 2026-09-30).
 - **Norway (Entur):** each train's calls from Journey Planner ~15 min after it arrives (Entur keeps actual times only
   briefly), disruption messages (SIRI-SX) as they change, and Entur's public BigQuery archive the next morning and back
   to 2020 (free sandbox, within its monthly allowance).
@@ -306,7 +308,9 @@ The server was built in this order; each step was done when its acceptance sente
 6. **Map & geometry:** basemap, routed track lines, rail-network layer. Done when a leg draws along the real tracks.
 7. **Live tracking:** server-side poller or stream per tracked train, `leg_events` and `live_state`, SSE to the app. Done when a train that is running shows live delays and a moving marker.
 8. **Trips, trip detail, journeys; Passport and CO₂; historical search** (`DESIGN.md` §4, §6, §7, §8).
-9. **Norway** through Entur: timetables, live positions, boards. **Finland** through Digitraffic (Fintraffic, CC BY 4.0), the same scope; the Finnish data is described in `FINLAND_DATA_FINDINGS.md`.
+9. **Norway** through Entur: timetables, live positions, boards. **Finland** through Digitraffic (Fintraffic, CC BY 4.0), the same scope; the Finnish data is described in `FINLAND_DATA_FINDINGS.md`. **Denmark** through Rejseplanen: the timetable (GTFS, CC BY 4.0),
+   and live boards, stop times and estimated positions from the backend Rejseplanen's app uses (not a granted API;
+   `DENMARK_DATA_FINDINGS.md`), with the timetable and train-archive.eu as fallbacks.
 10. **Native app:** all of the above in SwiftUI (docs/SWIFT_PORT.md, done), then alerts, Live Activities, ticket import, offline mode and widgets (docs/IOS.md, done).
 11. **Later work** is tracked as workstreams A to J ("Clack: from ported to stellar"; docs/SWIFT_PORT.md, last section).
 

@@ -10,6 +10,8 @@ import { productOfCategory } from '../boards/denmark.js';
 import { rejseplanen, type Journey, type RejseplanenClient } from '../rejseplanen/client.js';
 import { TripMatcher } from '../rejseplanen/match.js';
 import { rememberJourney } from '../rejseplanen/stops.js';
+import type { RailGraph } from '../geo/railGraph.js';
+import { DenmarkArchiveFallback } from './denmarkFallback.js';
 import type { Product } from '../search/timetable.js';
 
 export const DENMARK_POLL_MS = 20_000;
@@ -49,13 +51,17 @@ export class DenmarkFeed {
   private seen = new Map<string, { lat: number; lon: number; bearing: number | null; at: number }>();
   private matcher: TripMatcher;
   private names = new Map<string, string | null>();
+  private fallback: DenmarkArchiveFallback;
+  /** Drawing from the archive because Rejseplanen isn't answering. */
+  usingFallback = false;
   upstreamAt = 0;
 
   constructor(
     private readonly db: Db,
-    private readonly opts: { now?: () => number; client?: RejseplanenClient } = {},
+    private readonly opts: { now?: () => number; client?: RejseplanenClient; fetchImpl?: typeof fetch; graph?: () => RailGraph | null } = {},
   ) {
     this.matcher = new TripMatcher(db);
+    this.fallback = new DenmarkArchiveFallback(db, { fetchImpl: opts.fetchImpl, now: opts.now, graph: opts.graph });
   }
 
   private now() {
@@ -73,12 +79,21 @@ export class DenmarkFeed {
 
   async poll(): Promise<void> {
     const client = this.opts.client ?? rejseplanen();
-    if (!client.available()) return;
-    this.journeys = (await client.journeyGeoPos()).filter((j) => j.pos && j.category !== 'Togbus');
-    this.upstreamAt = this.now();
+    try {
+      if (!client.available()) throw new Error('Rejseplanen unavailable');
+      this.journeys = (await client.journeyGeoPos()).filter((j) => j.pos && j.category !== 'Togbus');
+      this.upstreamAt = this.now();
+      this.usingFallback = false;
+    } catch (e) {
+      // Rejseplanen resting, blocked or off: the archive's latest delays place the trains instead.
+      this.usingFallback = true;
+      await this.fallback.refresh();
+      if (!this.fallback.upstreamAt) throw e;
+    }
   }
 
   trains(): DenmarkTrain[] {
+    if (this.usingFallback) return this.fallback.trains();
     const now = this.now();
     const out: DenmarkTrain[] = [];
     for (const j of this.journeys) {

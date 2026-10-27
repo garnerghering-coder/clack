@@ -20,7 +20,7 @@ Each item says who does it and where:
 | 5 | **Apple Developer Program** membership, USD 99 a year. | n/a | You | Needed for TestFlight and the App Store. Running on your own iPhone from Xcode works with a free Apple ID (the app expires after 7 days). Enroll as an individual unless you have a company. |
 | 6 | **App name.** "Clack" may already be taken on the App Store; names must be unique and at most 30 characters. | 2.3.7 | You + ASC | Check when creating the app in ASC. A subtitle like "Train log for Sweden, Norway & Finland" carries the meaning. |
 | 8 | **EU trader status.** To be listed in the EU (Sweden), ASC asks whether you're a "trader" under the Digital Services Act. A free app from a private person is usually "non-trader"; a trader's address and phone number are shown publicly. | DSA, in ASC | You + ASC | Decide before submitting; ASC asks in its Business section, and the app can't be listed in the EU until it's answered. |
-| 9 | **Data source terms for a public app.** Confirm that Trafikverket's API, Trafiklab's GTFS feeds, Entur's data and Digitraffic (Fintraffic, Finland) allow use in a free public app, and give the attribution each requires (the About page lists all sources). Digitraffic is licensed CC BY 4.0 and asks for the credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY`, which the About page (`about.sources.digitraffic`) carries word for word. | 5.2.2 | You | OpenStreetMap (ODbL) attribution is on every map. The terms differ per source; read each source's terms page. |
+| 9 | **Data source terms for a public app.** Confirm that Trafikverket's API, Trafiklab's GTFS feeds, Entur's data, Digitraffic (Fintraffic, Finland) and Rejseplanen (Denmark; its live data comes from its app's backend, not a granted API: see DENMARK_DATA_FINDINGS.md) allow use in a free public app, and give the attribution each requires (the About page lists all sources). Digitraffic is licensed CC BY 4.0 and asks for the credit `Source: Fintraffic / digitraffic.fi, license CC 4.0 BY`, which the About page (`about.sources.digitraffic`) carries word for word. | 5.2.2 | You | OpenStreetMap (ODbL) attribution is on every map. The terms differ per source; read each source's terms page. |
 | 10 | **Station plans you supplied** (e.g. Jernhusen's Stockholm C plan, Jan 2026 PDF) were used to draw station maps. Those plans are someone else's copyrighted material. | 5.2.1 | You | Either get permission from the plan owners, or ship only the OpenStreetMap-based maps. The README already notes these plans are not ODbL. |
 
 ## Done in this round
@@ -53,7 +53,7 @@ Each item says who does it and where:
 
 | What | Guideline | Who |
 |---|---|---|
-| **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket, Entur and Digitraffic (Finland, CC BY 4.0), and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
+| **Review notes in ASC.** Say that there's no login, that data comes from Trafikverket, Entur, Digitraffic (Finland, CC BY 4.0) and Rejseplanen (Denmark), and how to try it: "Add a train: type SJ 523 for today; open Explore for the live map." | 2.1, 2.3.1 | ASC |
 
 ## App Store Connect answers, prepared
 
