@@ -17,6 +17,7 @@ import { pushRoutes } from './routes/push.js';
 import { exportRoutes } from './routes/export.js';
 import { passportRoutes } from './routes/passport.js';
 import { usageRoutes } from './routes/usage.js';
+import { walkLogRoutes } from './routes/walklogs.js';
 import { boardRoutes } from './routes/boards.js';
 import { BoardHub, type BoardHubOptions } from './boards/hub.js';
 import { liveMapRoutes } from './routes/livemap.js';
@@ -100,6 +101,7 @@ export function buildApp(db: Db, opts: { logger?: boolean; afterLegCreated?: (le
   app.register(exportRoutes(db), api);
   app.register(passportRoutes(db), api);
   app.register(usageRoutes(db), api);
+  app.register(walkLogRoutes, api);
   const hub = new BoardHub(db, { log: (m) => app.log.warn(m), ...opts.boards });
   app.addHook('onClose', async () => hub.close());
   app.register(boardRoutes(db, hub), api);

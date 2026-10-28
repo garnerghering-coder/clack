@@ -22,6 +22,8 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case stations
     case board(stationId: String, arrivals: Bool)
     case stationMap(StationMapLink)
+    /// Settings > Station walks (owner test tool; debug and TestFlight builds).
+    case walkLogger
     #if DEBUG
     /// Settings > Test alerts (debug builds only).
     case testAlerts
@@ -256,6 +258,7 @@ extension AppRoute {
         case .board: .board
         case .stationMap: .stationMap
         case .stations: .other
+        case .walkLogger: .other
         #if DEBUG
         case .testAlerts: .other
         #endif

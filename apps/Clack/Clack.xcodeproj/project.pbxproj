@@ -555,8 +555,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Clack;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
+				INFOPLIST_KEY_NSCameraUsageDescription = "In AR mode Clack uses the camera to track how you move through a station. No pictures or video are saved.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Clack connects to the Clack server on your Mac while the app is being built.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Clack shows where you are on its maps and guides you through stations as you walk. It can also find trains leaving near you. Your exact position stays on your phone.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Clack uses motion and the barometer to follow your steps and level changes when you record a station walk.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -598,8 +600,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Clack;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
+				INFOPLIST_KEY_NSCameraUsageDescription = "In AR mode Clack uses the camera to track how you move through a station. No pictures or video are saved.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Clack connects to the Clack server on your Mac while the app is being built.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Clack shows where you are on its maps and guides you through stations as you walk. It can also find trains leaving near you. Your exact position stays on your phone.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Clack uses motion and the barometer to follow your steps and level changes when you record a station walk.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -133,6 +133,21 @@ public nonisolated struct APIClient: Sendable {
         return try JSONDecoder().decode(T.self, from: data)
     }
 
+    /// Uploads a file as it is (`PUT /walklogs/:id`): the body is raw bytes, not JSON.
+    public func upload(_ segments: [String], data: Data, contentType: String = "application/octet-stream") async throws {
+        var request = URLRequest(url: url(segments))
+        request.httpMethod = "PUT"
+        request.setValue(userID, forHTTPHeaderField: "X-Clack-User")
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 120
+        let (body, response) = try await session.upload(for: request, from: data)
+        guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+        guard (200..<300).contains(http.statusCode) else {
+            let parsed = try? JSONDecoder().decode(APIErrorBody.self, from: body)
+            throw APIError(status: http.statusCode, message: parsed?.error ?? parsed?.message ?? "HTTP \(http.statusCode)", duplicateOf: nil)
+        }
+    }
+
     /// A request whose answer has no body of interest (a 204, or a flag we don't read).
     public func perform(_ method: String, _ segments: [String], query: [String: String] = [:], body: (any Encodable & Sendable)? = nil) async throws {
         _ = try await request(method, segments, query: query, body: body)

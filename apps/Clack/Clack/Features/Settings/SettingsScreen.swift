@@ -151,6 +151,7 @@ struct SettingsScreen: View {
                 StartOverRow()
             }
             VersionFooter()
+            TestToolsRow()
             #if DEBUG
             NavigationLink("Test alerts", value: AppRoute.testAlerts)
                 .buttonStyle(.clack(wide: true))
@@ -533,5 +534,20 @@ struct PrivacyScreen: View {
             }
         }
         .screenTitle(l10n.t("privacy.title"))
+    }
+}
+
+/// Settings > Station walks: only in debug and TestFlight builds (owner test tools), never in App Store builds.
+private struct TestToolsRow: View {
+    @State private var shown = false
+
+    var body: some View {
+        Group {
+            if shown {
+                NavigationLink("Station walks (test tool)", value: AppRoute.walkLogger)
+                    .buttonStyle(.clack(wide: true))
+            }
+        }
+        .task { shown = await WalkStore.isTestBuild() }
     }
 }

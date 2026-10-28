@@ -32,6 +32,7 @@ private struct DestinationView: View {
         case .stations: StationsRedirect()
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
         case .stationMap(let link): StationMapScreen(link: link)
+        case .walkLogger: WalkLoggerScreen()
         #if DEBUG
         case .testAlerts: TestAlertsScreen()
         #endif
