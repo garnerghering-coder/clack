@@ -143,6 +143,20 @@ final class ExploreModel {
     /// The latest from the stream, not the copy from when it was tapped.
     var selectedTrain: LiveTrain? { selected.map { trains[$0.train.id] ?? $0.train } }
 
+    /// How many trains of each kind and each operator are in view (the filter sheet's counts).
+    var countsInView: (products: [String: Int], operators: [String: Int]) {
+        _ = trainsVersion
+        var products: [String: Int] = [:], operators: [String: Int] = [:]
+        for t in trains.values where controller.contains(t.lat, t.lon) {
+            if let p = t.product { products[p, default: 0] += 1 }
+            if let o = t.operatorId { operators[o, default: 0] += 1 }
+        }
+        return (products, operators)
+    }
+
+    /// The colour mode changed: every dot is drawn again.
+    func colorByChanged() { scheduleRender() }
+
     /// The operators with a train in view, A to Z by name (owner, 2026-10-27).
     var operatorsShown: [String] {
         _ = trainsVersion
@@ -309,7 +323,7 @@ final class ExploreModel {
             }
             points.append(TrainPoint(
                 id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number, dest: train.destination,
-                color: color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
+                color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
                 bearing: train.bearing, lat: position.lat, lon: position.lon
             ))
         }

@@ -173,3 +173,18 @@ extension MovedTrain {
         return try! JSONDecoder().decode(MovedTrain.self, from: Data(json.utf8))
     }
 }
+
+struct ExploreColorTests {
+    private func train(_ id: String, product: String?, delay: Int?) -> LiveTrain {
+        LiveTrain(id: id, number: "1", date: "2026-10-28", lat: 59, lon: 18, at: Instant(ms: 0), estimated: false, operatorId: "sj", productName: nil, product: product, trainType: nil, origin: nil, destination: nil, next: nil, nextEta: nil, delayMin: delay, mine: false, tripKey: nil, crossBorder: nil)
+    }
+
+    @Test func eachModeColoursByItsOwnMeasure() {
+        let t = train("dk:1@x|2026-10-28", product: "night", delay: 17)
+        #expect(ExploreLogic.color(of: t, by: .operatorBrand) == nil)
+        #expect(ExploreLogic.color(of: t, by: .product) == ExploreLogic.productColors["night"])
+        #expect(ExploreLogic.color(of: t, by: .delay) == ExploreLogic.delayColors.late)
+        #expect(ExploreLogic.color(of: t, by: .country) == ExploreLogic.countryColors["DK"])
+        #expect([nil, 0, 1, 15, 16, 31].map(ExploreLogic.delayColor) == [ExploreLogic.delayColors.unknown, ExploreLogic.delayColors.onTime, ExploreLogic.delayColors.slight, ExploreLogic.delayColors.slight, ExploreLogic.delayColors.late, ExploreLogic.delayColors.veryLate])
+    }
+}

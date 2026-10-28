@@ -394,6 +394,21 @@ struct MapDisplay: Codable, Equatable {
     var trainLabels = true
     var stations = true
     var stationNames = true
+    /// What the train dots' colours mean (owner, 2026-10-28).
+    var colorBy = ExploreLogic.ColorBy.operatorBrand
+
+    init() {}
+
+    /// Settings saved before a setting existed keep the others and take that one's default.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        myLocation = try c.decodeIfPresent(Bool.self, forKey: .myLocation) ?? true
+        trains = try c.decodeIfPresent(Bool.self, forKey: .trains) ?? true
+        trainLabels = try c.decodeIfPresent(Bool.self, forKey: .trainLabels) ?? true
+        stations = try c.decodeIfPresent(Bool.self, forKey: .stations) ?? true
+        stationNames = try c.decodeIfPresent(Bool.self, forKey: .stationNames) ?? true
+        colorBy = (try? c.decodeIfPresent(ExploreLogic.ColorBy.self, forKey: .colorBy)) ?? .operatorBrand
+    }
 
     private static let key = "explore.mapDisplay"
 

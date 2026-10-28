@@ -29,7 +29,6 @@ struct ExploreScreen: View {
             if model.searching {
                 if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
             }
-            if model.showFilters { filters }
             if model.showNetwork {
                 NetworkPanel(
                     status: model.network, failed: model.networkFailed,
@@ -60,6 +59,13 @@ struct ExploreScreen: View {
             .ignoresSafeArea()
         }
         .environment(model)
+        // Filters and map settings in a sheet (owner, 2026-10-28): the map stays in view above it.
+        .sheet(isPresented: Binding(get: { model.showFilters }, set: { model.showFilters = $0 })) {
+            ExploreFilterSheet { model.showFilters = false }
+                .environment(model)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
         .task {
             model.attach(app)
             model.active = active
@@ -268,95 +274,6 @@ struct ExploreScreen: View {
         }
         .buttonStyle(.plain)
         .overlay(alignment: .bottom) { Rectangle().fill(Ink.hairline).frame(height: 1) }
-    }
-
-    // MARK: filters
-
-    /// The card hugs its content up to 440 pt, then scrolls inside that height, so nothing lies outside what's drawn
-    /// (a clipped overflow still takes taps and covered the filter button).
-    private var filters: some View {
-        ViewThatFits(in: .vertical) {
-            filtersContent
-            ScrollView { filtersContent }.scrollBounceBehavior(.basedOnSize)
-        }
-        .frame(maxWidth: 460)
-        .frame(maxHeight: 440)
-        .background(Ink.glass).background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
-        .clackShadow()
-        .padding(.horizontal, 16).padding(.top, 64)
-    }
-
-    private var filtersContent: some View {
-        @Bindable var model = model
-        return VStack(alignment: .leading, spacing: 8) {
-                Text(l10n.t("liveMap.showTrains").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2)
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ForEach(ExploreLogic.products, id: \.self) { p in
-                        ChipButton(text: l10n.t("products.\(p)"), active: model.filters.products.contains(p)) { toggle(&model.filters.products, p) }
-                    }
-                }
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ForEach(["SE", "NO", "FI", "DK"], id: \.self) { c in
-                        ChipButton(text: l10n.t("countries.\(c)"), active: model.filters.countries.contains(c)) { toggle(&model.filters.countries, c) }
-                    }
-                }
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ForEach(ExploreLogic.Delay.allCases, id: \.self) { d in
-                        ChipButton(text: l10n.t("liveMap.delay.\(d.rawValue)"), active: model.filters.delay == d) { model.filters.delay = d }
-                    }
-                }
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ChipButton(text: l10n.t("liveMap.onlyMine"), active: model.filters.onlyMine) { model.filters.onlyMine.toggle() }
-                    ChipButton(text: l10n.t("liveMap.onlyFollowed"), active: model.filters.onlyFollowed) { model.filters.onlyFollowed.toggle() }
-                }
-                Text(l10n.t("liveMap.operators").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
-                ForEach(model.operatorsShown, id: \.self) { id in
-                    let on = model.filters.operators.contains(id)
-                    Button { toggle(&model.filters.operators, id) } label: {
-                        HStack(spacing: 12) {
-                            RoundedRectangle(cornerRadius: Radius.tag, style: .continuous).fill(on ? Ink.accent : Ink.surfaceRaised)
-                                .overlay(RoundedRectangle(cornerRadius: Radius.tag, style: .continuous).strokeBorder(on ? Ink.accent : Ink.hairline, lineWidth: 1))
-                                .overlay { if on { LucideIcon(name: "check", size: 14).foregroundStyle(Ink.onAccent) } }
-                                .frame(width: 22, height: 22)
-                            OperatorBadge(op: app.operatorsById[id], size: .small)
-                            Text(app.operatorsById[id]?.name ?? id).clack(.body).foregroundStyle(Ink.text)
-                            Spacer(minLength: 0)
-                        }
-                        .frame(minHeight: 40).contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain).accessibilityAddTraits(on ? .isSelected : [])
-                }
-                Text(l10n.t("liveMap.mapSection").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
-                FlowLayout(spacing: 8, lineSpacing: 8) {
-                    displayChip("liveMap.show.myLocation", \.myLocation)
-                    displayChip("liveMap.show.trainDots", \.trains)
-                    displayChip("liveMap.show.trainLabels", \.trainLabels)
-                    displayChip("liveMap.show.stations", \.stations)
-                    displayChip("liveMap.show.stationNames", \.stationNames)
-                }
-                HStack(spacing: 8) {
-                    if model.filteredCount > 0 { ChipButton(text: l10n.t("liveMap.clearFilters")) { model.filters = .init() } }
-                    ChipButton(text: l10n.t("common.done")) { model.showFilters = false }
-                }
-            }
-            .padding(.horizontal, 16).padding(.vertical, 16)
-    }
-
-    /// One of the Map settings: switched on the controller (which hides the layers) and remembered.
-    private func displayChip(_ key: String, _ path: WritableKeyPath<MapDisplay, Bool>) -> some View {
-        ChipButton(text: l10n.t(key), active: model.controller.display[keyPath: path]) {
-            var d = model.controller.display
-            d[keyPath: path].toggle()
-            model.controller.display = d
-            d.save()
-            if path == \.myLocation && d.myLocation { model.controller.showUserDot() }
-        }
-    }
-
-    private func toggle(_ set: inout Set<String>, _ value: String) {
-        if set.contains(value) { set.remove(value) } else { set.insert(value) }
     }
 
     // MARK: status and legend

@@ -268,4 +268,41 @@ public nonisolated enum ExploreLogic {
             return min(0.95, max(0.05, (now - dep) / (arr - dep)))
         }
     }
+
+    // MARK: colour by (owner, 2026-10-28)
+
+    /// What a train dot's colour means on Explore: its operator (the brand colour), its kind of train, how late it is
+    /// (DESIGN.md's delay bands), or its country.
+    public enum ColorBy: String, CaseIterable, Codable, Sendable {
+        case operatorBrand = "operator", product, delay, country
+    }
+
+    /// One colour per kind of train, apart from each other on both map themes.
+    public static let productColors: [String: String] = [
+        "high_speed": "#FF6B3D", "intercity": "#4C8DFF", "regional": "#3DDC84", "commuter": "#F5D90A", "night": "#A78BFA",
+    ]
+    /// DESIGN.md's delay bands: on time, 1–15, 16–30, 31+ minutes late; unknown in grey.
+    public static let delayColors = (onTime: "#3DDC84", slight: "#F5D90A", late: "#FF9500", veryLate: "#FF453A", unknown: "#9AA0A6")
+    /// One colour per country, from its flag where the flags don't clash (Norway's and Denmark's reds would).
+    public static let countryColors: [String: String] = ["SE": "#FECC00", "NO": "#5B8DEF", "DK": "#E03A3E", "FI": "#9FD3FF"]
+    public static let otherColor = "#9AA0A6"
+
+    /// The dot colour for `by`; nil for `.operatorBrand` (the operator's own colour, which the app knows).
+    public static func color(of train: LiveTrain, by: ColorBy) -> String? {
+        switch by {
+        case .operatorBrand: return nil
+        case .product: return train.product.flatMap { productColors[$0] } ?? otherColor
+        case .delay: return delayColor(train.delayMin)
+        case .country: return countryColors[country(ofTrainId: train.id)] ?? otherColor
+        }
+    }
+
+    public static func delayColor(_ min: Int?) -> String {
+        guard let min else { return delayColors.unknown }
+        if min <= 0 { return delayColors.onTime }
+        if min <= 15 { return delayColors.slight }
+        if min <= 30 { return delayColors.late }
+        return delayColors.veryLate
+    }
 }
+
