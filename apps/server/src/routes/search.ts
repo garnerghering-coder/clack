@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { dayIndex, plan } from '../search/planner.js';
+import { dayIndexWithin, plan } from '../search/planner.js';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
@@ -34,7 +34,11 @@ export const searchRoutes =
         const tz = tzOf(from.country) ?? COUNTRIES.SE.tz;
         const start = serviceTimeToUtc(date, 0, tz);
         const maxChanges = Math.max(0, Math.min(2, Number(req.query.changes ?? 2) || 0));
-        out.journeys = plan(db, await dayIndex(db, date), from.id, to.id, start, start + 86400_000, req.query.changes === undefined ? 2 : maxChanges);
+        // The day's index takes 10-50 s to build the first time a date is asked for: the search doesn't wait for it
+        // (the app gives up after 15 s). It answers with the direct trains and `journeysPending`, and the app asks again.
+        const ix = await dayIndexWithin(db, date, 2000);
+        if (ix) out.journeys = plan(db, ix, from.id, to.id, start, start + 86400_000, req.query.changes === undefined ? 2 : maxChanges);
+        else return { ...out, journeysPending: true };
       }
       return out;
     });

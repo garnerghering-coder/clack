@@ -17,15 +17,15 @@ struct ChangeLine: View {
 
     var body: some View {
         let text = l10n.t("change.line", ["station": station, "min": String(gapMin)])
-        HStack(spacing: 4) {
-            Text(text).foregroundStyle(Ink.text2)
-            if let comfort {
-                Text("·").foregroundStyle(Ink.text3)
-                Text(l10n.t("comfort.\(comfort.rawValue)")).foregroundStyle(Self.color(comfort)).fontWeight(.semibold)
-            }
-        }
-        .clack(.caption)
-        .accessibilityElement(children: .combine)
+        // One text, so a long station name wraps as a sentence does; VoiceOver reads it without the dot.
+        let word = comfort.map { l10n.t("comfort.\($0.rawValue)") }
+        let line = word.map { w in
+            Text(text).foregroundStyle(Ink.text2) + Text(" · ").foregroundStyle(Ink.text3) + Text(w).foregroundStyle(Self.color(comfort!)).fontWeight(.semibold)
+        } ?? Text(text).foregroundStyle(Ink.text2)
+        line
+            .clack(.caption)
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityLabel(word.map { "\(text), \($0)" } ?? text)
     }
 
     static func color(_ c: ChangeComfort) -> Color {
@@ -94,8 +94,9 @@ struct JourneyResultCard: View {
     }
 }
 
-/// A planned journey opened from the results: its route on the map, each train with its times, each change with its
-/// comfort, and the two actions: Add to trips (primary) and Follow (secondary). Nothing is saved until asked.
+/// A planned journey opened from the results, laid out exactly as a saved journey is in Trips (JourneyScreen): the
+/// summary, the map, the trains on the rail with the change cards between them, then Add to trips (primary) and Follow
+/// (owner, 2026-10-28). The trains are shown as unsaved trips (`Leg.planned`); nothing is saved until asked.
 struct PlannedJourneyStep: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
@@ -104,16 +105,31 @@ struct PlannedJourneyStep: View {
     let onBack: () -> Void
     let onSaved: (LegDetail) -> Void
     @State private var routes: [MultiRoute] = []
+    /// Metres each train rides, from its geometry, once loaded.
+    @State private var distances: [Int: Double] = [:]
     @State private var saving = false
     @State private var followed = false
     @State private var dupes: [Int] = []
     @State private var error: String?
-    @State private var mapStation: MapStation?
 
-    private struct MapStation: Identifiable { let id: String }
+    /// The trains as unsaved trips, with the planner's tier and country so the change cards agree with it.
+    private var legs: [Leg] {
+        journey.legs.enumerated().map { i, r in
+            let op = r.operatorId.flatMap { app.operatorsById[$0] }.map {
+                LegOperator(id: $0.id, name: $0.name, shortName: $0.shortName, company: $0.company, country: $0.country, brandColor: $0.brandColor, logoPath: $0.logoPath, logoUrl: $0.logoUrl)
+            }
+            return Leg.planned(
+                r, operator: op, journeyId: journey.id,
+                originTier: i > 0 ? (journey.changes.indices.contains(i - 1) ? journey.changes[i - 1].tier : nil) : nil,
+                country: journey.legCountries.flatMap { $0.indices.contains(i) ? $0[i] : nil },
+                distanceM: distances[i]
+            )
+        }
+    }
 
     var body: some View {
-        let first = journey.legs[0], last = journey.legs[journey.legs.count - 1]
+        let legs = legs
+        let first = legs[0], last = legs[legs.count - 1]
         Button(action: onBack) {
             HStack(spacing: 8) {
                 LucideIcon(name: "arrow-left", size: 18)
@@ -121,26 +137,25 @@ struct PlannedJourneyStep: View {
             }
         }
         .buttonStyle(LinkButtonStyle())
-        Text("\(first.from.name) → \(last.to.name)").clack(.headline).foregroundStyle(Ink.text)
-        Text("\(Format.duration(Double(journey.durationMin)))\(Format.separator)\(journey.changes.isEmpty ? l10n.t("journey.direct") : journey.changes.count == 1 ? l10n.t("journey.oneChange") : l10n.t("journey.changes", ["n": String(journey.changes.count)]))")
-            .clack(.caption).foregroundStyle(Ink.text2)
+        Text("\(first.origin?.name ?? "") → \(last.destination?.name ?? "")")
+            .clack(.detailRoute).foregroundStyle(Ink.text)
+            .fixedSize(horizontal: false, vertical: true)
+        Text(Format.longDate(journey.dep, tz: first.origin?.tz ?? "Europe/Stockholm", language: app.settings.language))
+            .clack(.body).foregroundStyle(Ink.text2)
+        HStack(spacing: 12) {
+            Tile(label: l10n.t("journey.doorToDoor"), value: Format.duration(Double(journey.durationMin)))
+            Tile(label: l10n.t("passport.trains"), value: String(legs.count))
+            Tile(label: l10n.t("detail.distance"), value: distances.count == legs.count
+                 ? Format.distance(distances.values.reduce(0, +), unit: app.settings.distanceUnit, language: app.settings.language) : Format.unknown)
+        }
         MultiRouteMapView(routes: routes, stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel"))
-            .frame(height: 220)
+            .frame(height: 240)
             .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
             .hairlineBorder(radius: Radius.card)
-        VStack(alignment: .leading, spacing: 12) {
-            ForEach(Array(journey.legs.enumerated()), id: \.offset) { i, leg in
-                legCard(leg)
-                if i < journey.changes.count {
-                    let c = journey.changes[i]
-                    HStack(spacing: 8) {
-                        ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort)
-                        Spacer(minLength: 0)
-                        Button(l10n.t("journey.stationMap")) { mapStation = MapStation(id: c.stationId) }
-                            .buttonStyle(LinkButtonStyle())
-                    }
-                }
-            }
+        JourneyTimeline(legs: legs, now: 0, scheme: scheme) { leg in
+            LegRow(leg: leg, flat: true, linked: false)
+        } change: { a, b in
+            ConnectionCard(a: a, b: b, compact: true)
         }
         if !dupes.isEmpty { Banner(kind: .warn) { Text(l10n.t("add.duplicate")) } }
         if let error { Banner(kind: .error) { Text(l10n.t("add.saveError", ["message": error])) } }
@@ -152,32 +167,19 @@ struct PlannedJourneyStep: View {
             .buttonStyle(.clack(wide: true))
             .disabled(followed)
             .task { await loadRoutes() }
-            .sheet(item: $mapStation) { s in
-                NavigationStack { StationMapScreen(link: StationMapLink(stationId: s.id)) }
-            }
-    }
-
-    private func legCard(_ leg: TripResult) -> some View {
-        let op = leg.operatorId.flatMap { app.operatorsById[$0] }
-        return VStack(alignment: .leading, spacing: 4) {
-            ServiceHeader(op: op, number: leg.trainNumber, size: .medium, category: leg.product, name: op == nil ? leg.routeName : nil)
-            (TimePair.text(.init(time: leg.from.time, tz: leg.from.tz), .init(time: leg.to.time, tz: leg.to.tz), clock: app.settings.clock)
-                + Text(Format.separator + "\(leg.from.name) → \(leg.to.name)"))
-                .clack(.body).foregroundStyle(Ink.text)
-        }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .hairlineBorder(radius: Radius.card)
     }
 
     /// Each train's ridden route (its stops and geometry), drawn in its operator's colour.
     private func loadRoutes() async {
         var out: [MultiRoute] = []
-        for leg in journey.legs {
+        for (i, leg) in journey.legs.enumerated() {
             async let geo = try? app.client.timetableTripGeometry(leg.key, date: leg.serviceDate)
             guard let trip = try? await app.client.timetableTrip(leg.key, date: leg.serviceDate) else { continue }
-            let map = AddTrainLogic.mapRoute(stops: trip.stops, geometry: await geo, fromSeq: leg.from.seq, toSeq: leg.to.seq)
+            let geometry = await geo
+            if let segments = geometry?.segments {
+                distances[i] = segments.filter { $0.fromSeq >= leg.from.seq && $0.toSeq <= leg.to.seq }.reduce(0) { $0 + $1.lengthM }
+            }
+            let map = AddTrainLogic.mapRoute(stops: trip.stops, geometry: geometry, fromSeq: leg.from.seq, toSeq: leg.to.seq)
             let color = MapStyle.opColor(leg.operatorId.flatMap { app.operatorsById[$0] }?.brandColor, dark: scheme == .dark)
             out.append(MultiRoute(color: color, geometry: nil, stops: map.route))
         }

@@ -67,7 +67,7 @@ async function quays(now: number): Promise<Map<string, [string | null, string | 
   if (quayCache && now - quayCache.at < 7 * 86400_000) return quayCache.map;
   const { rows, bytes } = await bigQuery(`SELECT id, publicCode, stopPlaceRef FROM ${QUAYS} QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY SAFE_CAST(version AS INT64) DESC) = 1`);
   addUsage(bytes, now);
-  writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'quays', rows, { now });
+  await writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'quays', rows, { now });
   quayCache = { at: now, map: new Map(rows.map((r) => [r.id!, [r.publicCode || null, r.stopPlaceRef || null]])) };
   return quayCache.map;
 }
@@ -126,7 +126,7 @@ export async function stationsByPlace(db: Db, now = Date.now()): Promise<Map<str
       `SELECT id, name, location_latitude lat, location_longitude lon FROM ${PLACES} WHERE transportMode = 'RAIL' QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY SAFE_CAST(version AS INT64) DESC) = 1`,
     );
     addUsage(bytes, now);
-    writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'stop-places', rows, { now });
+    await writeRaw(SOURCE, todayIn('Europe/Oslo', now), 'stop-places', rows, { now });
     placeCache = { at: now, rows: rows.filter((r) => r.id && r.name && r.lat && r.lon).map((r) => ({ id: r.id!, name: r.name!, lat: Number(r.lat), lon: Number(r.lon) })) };
   }
   const existing: ExistingStation[] = (db.$client.prepare(`select id, name, lat, lon, country from stations`).all() as ExistingStation[]);
@@ -214,7 +214,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
   if (bytesThisMonth(now) + dry.bytes > MONTHLY_BYTES) throw new Error('BigQuery monthly ceiling reached; waiting for next month');
   const { rows, bytes } = await bigQuery(DAY_SQL, { params: { date } });
   addUsage(bytes, now);
-  const file = writeRaw(SOURCE, date, 'siri-et', rows, { now });
+  const file = await writeRaw(SOURCE, date, 'siri-et', rows, { now });
   const runs = opts.project === false ? [] : project(date, rows, await quays(now), opts.stationByNsr ?? (await stationsByPlace(db, now)));
   // Our own same-day record has platforms and messages this table lacks; it's kept where both exist.
   const written = saveRuns(db, runs, now, { keepSources: ['entur'] });
@@ -302,7 +302,7 @@ export async function backfillRange(db: Db, opts: { from: string; to?: string; p
       }
       for (const [date, list] of byDay) {
         if (done.has(date)) continue;
-        const file = writeRaw(SOURCE, date, 'siri-et', list);
+        const file = await writeRaw(SOURCE, date, 'siri-et', list);
         const runs = date >= projectFrom ? project(date, list, quay, stationByNsr) : [];
         const written = saveRuns(db, runs, Date.now(), { keepSources: ['entur'] });
         recordFetch(db, { source: SOURCE, kind: 'siri-et', date, records: list.length, runs: written, file, final: true });

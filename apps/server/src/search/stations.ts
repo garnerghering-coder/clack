@@ -30,6 +30,23 @@ export interface StationIndex {
   entries: Entry[];
 }
 
+/**
+ * Search-only spelling: "airport" in any of the languages station names use (Oslo lufthavn, Helsinki's Lentoasema,
+ * Flughafen) is one word, so "Aalborg Airport" finds Aalborg Lufthavn.
+ */
+const searchNorm = (s: string) => normName(s).replace(/\b(airport|flygplats|lufthavn|lufthamn|lentoasema|flughafen|lotnisko)\b/g, 'airport');
+
+/**
+ * "Central" (normName's "c") is also Denmark's "H", Germany's "Hbf" and Norway's "S", and a station named after its
+ * town alone (Odense, Gothenburg's alias): the query is tried with each, keeping the best score.
+ */
+function variants(q: string): string[] {
+  const tokens = q.split(' ');
+  if (tokens.length < 2 || tokens.at(-1) !== 'c') return [q];
+  const town = tokens.slice(0, -1).join(' ');
+  return [q, `${town} h`, `${town} hbf`, `${town} s`, town];
+}
+
 export function buildStationIndex(stations: SearchableStation[], aliases: Record<string, string[]>): StationIndex {
   const aliasBySig = new Map(Object.entries(aliases).map(([sig, list]) => [sig.toLowerCase(), list]));
   return {
@@ -40,8 +57,8 @@ export function buildStationIndex(stations: SearchableStation[], aliases: Record
         station,
         code: station.trvSignature?.toLowerCase() ?? null,
         names: [
-          { norm: normName(station.name), tokens: nameTokens(station.name), alias: false },
-          ...extra.map((a) => ({ norm: normName(a), tokens: nameTokens(a), alias: true })),
+          { norm: searchNorm(station.name), tokens: nameTokens(searchNorm(station.name)), alias: false },
+          ...extra.map((a) => ({ norm: searchNorm(a), tokens: nameTokens(searchNorm(a)), alias: true })),
         ],
       };
     }),
@@ -66,12 +83,13 @@ function scoreName(q: string, qTokens: string[], name: { norm: string; tokens: s
 }
 
 export function searchStations(index: StationIndex, query: string, limit = 8): (StationHit & { score: number })[] {
-  const q = normName(query);
-  const qTokens = q.split(' ').filter(Boolean);
-  if (!qTokens.length) return [];
+  const q = searchNorm(query);
+  if (!q.split(' ').filter(Boolean).length) return [];
+  const qs = variants(q).map((v) => ({ v, tokens: v.split(' ').filter(Boolean) }));
   const hits: (StationHit & { score: number })[] = [];
   for (const e of index.entries) {
-    let score = Math.max(...e.names.map((n) => scoreName(q, qTokens, n)));
+    // The query as typed scores a little above its variants, so "Lund C" still prefers Lund C.
+    let score = Math.max(...qs.flatMap((x, i) => e.names.map((n) => scoreName(x.v, x.tokens, n) - (i ? 1 : 0))), 0);
     // Typing a Trafikverket signature ("Cst", "G") finds that station directly.
     if (e.code && e.code === q.replace(/ /g, '.')) score = Math.max(score, 90);
     if (!score) continue;

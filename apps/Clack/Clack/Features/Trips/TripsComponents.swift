@@ -75,13 +75,19 @@ struct LegRow: View {
     var upcoming = false
     /// Inside a journey card the legs sit flat; the card carries the colour.
     var flat = false
+    /// Opens the trip's page; off for a planned train that isn't saved yet.
+    var linked = true
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 60)) { context in
             let now = context.date.timeIntervalSince1970 * 1000
-            NavigationLink(value: AppRoute.trip(leg.id)) { content(now: now) }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("trips.leg")
+            if linked {
+                NavigationLink(value: AppRoute.trip(leg.id)) { content(now: now) }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("trips.leg")
+            } else {
+                content(now: now)
+            }
         }
     }
 

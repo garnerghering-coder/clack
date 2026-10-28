@@ -119,6 +119,8 @@ public nonisolated struct PlannedChange: Codable, Hashable, Sendable {
     /// What the change rule asks for here.
     public let minMin: Int
     public let comfort: ChangeComfort
+    /// `hub`, `mid` or `default`; nil from older servers.
+    public var tier: String? = nil
 
     public init(stationId: String, name: String, gapMin: Int, minMin: Int, comfort: ChangeComfort) {
         self.stationId = stationId
@@ -132,6 +134,8 @@ public nonisolated struct PlannedChange: Codable, Hashable, Sendable {
 /// A journey from the planner (`GET /api/search` `journeys`): one or more trains with their changes.
 public nonisolated struct PlannedJourney: Codable, Hashable, Sendable, Identifiable {
     public let legs: [TripResult]
+    /// Each train's country (most of its stops), for the cross-border minimum; nil from older servers.
+    public var legCountries: [String?]? = nil
     public let changes: [PlannedChange]
     public let dep: Double
     public let arr: Double

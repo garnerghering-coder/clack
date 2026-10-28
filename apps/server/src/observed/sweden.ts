@@ -223,7 +223,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; fet
     opts.log?.(`observed SE ${date}: Trafikverket has nothing for this day`);
     return { records: 0, runs: 0 };
   }
-  const file = writeRaw(SOURCE, date, 'announcements', rows, { now });
+  const file = await writeRaw(SOURCE, date, 'announcements', rows, { now });
   const runs = project(date, rows, stationsBySignature(db), final);
   const written = saveRuns(db, runs, now);
   recordFetch(db, { source: SOURCE, kind: 'announcements', date, records: rows.length, runs: written, file, final }, now);
@@ -245,7 +245,7 @@ export async function collectEvents(db: Db, date: string, opts: { now?: number; 
   for (const [kind, obj, ns, ver] of kinds) {
     const q = `<QUERY objecttype="${obj}"${ns ? ` namespace="${ns}"` : ''} schemaversion="${ver}"><FILTER><AND><GTE name="ModifiedTime" value="${from}"/><LT name="ModifiedTime" value="${to}"/></AND></FILTER></QUERY>`;
     const rows = ((await trvQuery<Record<string, unknown[]>>(q, opts.fetchImpl))[obj] ?? []) as unknown[];
-    const file = writeRaw(SOURCE, date, kind, rows, { now });
+    const file = await writeRaw(SOURCE, date, kind, rows, { now });
     recordFetch(db, { source: SOURCE, kind, date, records: rows.length, file, final: true }, now);
     opts.log?.(`observed SE ${date}: ${rows.length} ${kind}`);
   }
@@ -256,7 +256,7 @@ export async function collectReasonCodes(db: Db, opts: { now?: number; fetchImpl
   const now = opts.now ?? Date.now();
   const rows = ((await trvQuery<{ ReasonCode?: unknown[] }>(`<QUERY objecttype="ReasonCode" schemaversion="1"><FILTER/></QUERY>`, opts.fetchImpl)).ReasonCode ?? []) as unknown[];
   const date = todayIn(TZ, now);
-  const file = writeRaw(SOURCE, date, 'reason-codes', rows, { now });
+  const file = await writeRaw(SOURCE, date, 'reason-codes', rows, { now });
   recordFetch(db, { source: SOURCE, kind: 'reason-codes', date, records: rows.length, file, final: true }, now);
 }
 

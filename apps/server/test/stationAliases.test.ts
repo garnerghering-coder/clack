@@ -16,6 +16,12 @@ const STATIONS = [
   { id: 'fi:TPE', name: 'Tampere', trvSignature: null, country: 'FI', departuresPerDay: 150 },
   { id: 'fi:TKU', name: 'Turku', trvSignature: null, country: 'FI', departuresPerDay: 40 },
   { id: 'fi:LEN', name: 'Lentoasema', trvSignature: null, country: 'FI', departuresPerDay: 200 },
+  { id: '740000002', name: 'Göteborg C', trvSignature: 'G', country: 'SE', departuresPerDay: 800 },
+  { id: '860000512', name: 'Odense', trvSignature: 'Dk.od', country: 'DK', departuresPerDay: 150 },
+  { id: '860000115', name: 'Aalborg Lufthavn', trvSignature: null, country: 'DK', departuresPerDay: 40 },
+  { id: '860000669', name: 'Helsingør', trvSignature: null, country: 'DK', departuresPerDay: 100 },
+  { id: 'uic:8020400', name: 'Hamburg Hbf', trvSignature: null, country: 'DE', departuresPerDay: 20 },
+  { id: 'NSR:StopPlace:337', name: 'Oslo S', trvSignature: null, country: 'NO', departuresPerDay: 600 },
 ];
 const index = buildStationIndex(STATIONS, loadStationAliases());
 const top = (q: string) => searchStations(index, q, 1)[0]?.name;
@@ -40,5 +46,19 @@ describe('Swedish and English names for Danish and Finnish stations', () => {
     expect([r.interpretation.from?.name, r.interpretation.to?.name]).toEqual(['Malmö C', 'København H']);
     const f = search('Helsingfors Tammerfors', '2099-01-01');
     expect([f.interpretation.from?.name, f.interpretation.to?.name]).toEqual(['Helsinki', 'Tampere']);
+  });
+});
+
+describe('main-station and airport words in any language', () => {
+  it('reads "Central" as H, Hbf, S or the town alone, and "Airport" as lufthavn or Lentoasema', () => {
+    expect(top('Hamburg Central')).toBe('Hamburg Hbf');
+    expect(top('Oslo Central')).toBe('Oslo S');
+    expect(top('Odense Central')).toBe('Odense');
+    expect(top('Gothenburg Central')).toBe('Göteborg C');
+    expect(top('Copenhagen Central')).toBe('København H');
+    expect(top('Lund Central')).toBe('Lund C');
+    expect(top('Aalborg Airport')).toBe('Aalborg Lufthavn');
+    expect(top('Helsinki Airport')).toBe('Lentoasema');
+    expect(top('Elsinore')).toBe('Helsingør');
   });
 });

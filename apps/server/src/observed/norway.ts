@@ -190,7 +190,7 @@ export async function tick(db: Db, opts: { now?: number; fetchImpl?: typeof fetc
       if (run) runs.push(run);
     }
     if (raw.length) {
-      const file = writeRaw(SOURCE, date, 'calls', raw, { now });
+      const file = await writeRaw(SOURCE, date, 'calls', raw, { now });
       saveRuns(db, runs, now);
       const total = (db.$client.prepare(`select count(*) n from observed_runs where country = 'NO' and service_date = ? and source = ?`).get(date, SOURCE) as { n: number }).n;
       recordFetch(db, { source: SOURCE, kind: 'calls', date, records: raw.length, runs: total, file }, now);
@@ -228,7 +228,7 @@ export async function pollSituations(db: Db, opts: { now?: number; fetchImpl?: t
   if (seenSituations.size > 50_000) seenSituations.clear();
   if (!fresh.length) return 0;
   const date = todayIn(TZ, now);
-  const file = writeRaw(SOURCE, date, 'situations', fresh, { now });
+  const file = await writeRaw(SOURCE, date, 'situations', fresh, { now });
   const prev = (db.$client.prepare(`select records from observed_fetches where source = ? and kind = 'situations' and date = ?`).get(SOURCE, date) as { records: number } | undefined)?.records ?? 0;
   recordFetch(db, { source: SOURCE, kind: 'situations', date, records: prev + fresh.length, file }, now);
   return fresh.length;

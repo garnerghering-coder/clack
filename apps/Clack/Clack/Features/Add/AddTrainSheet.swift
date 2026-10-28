@@ -27,6 +27,13 @@ struct AddTrainSheet: View {
         }
         .task(id: model.searchKey) { await model.runSearch(app.client) }
         .task(id: model.response?.history) { await model.waitForHistory() }
+        .task(id: model.response?.journeysPending == true) { await model.waitForJourneys() }
+        #if DEBUG
+        // `-addPickJourney`: opens the first planned journey once the list is in (to look at its page).
+        .task(id: model.journeys?.count ?? -1) {
+            if CommandLine.arguments.contains("-addPickJourney"), model.pickedJourney == nil, let first = model.journeys?.first { model.pickedJourney = first }
+        }
+        #endif
         .task(id: model.date) { await model.prepareHistory(app.client) }
         .sensoryFeedback(.success, trigger: model.saved?.id)
     }
@@ -59,6 +66,7 @@ private struct SearchStep: View {
     @Environment(L10n.self) private var l10n
     @Environment(AddTrainModel.self) private var model
     @FocusState private var focused: Bool
+    @State private var showJourneyFilters = false
 
     var body: some View {
         @Bindable var model = model
@@ -75,8 +83,6 @@ private struct SearchStep: View {
                     ChipButton(text: example) { model.query = example }
                 }
             }
-        } else if let interpretation = model.interpretation, interpretation.operator != nil || interpretation.trainNumber != nil || interpretation.from != nil || interpretation.to != nil {
-            interpretationChips(interpretation)
         }
         if model.searchFailed { Banner(kind: .error) { Text(l10n.t("add.searchError")) }.countsError("add.search") }
 
@@ -104,25 +110,40 @@ private struct SearchStep: View {
         }
     }
 
-    private func interpretationChips(_ i: SearchResponse.Interpretation) -> some View {
-        let parts = (op: i.operator?.text, number: i.trainNumber, from: i.from?.name, to: i.to?.name)
-        func rebuild(op: String?, number: String?, from: String?, to: String?) {
-            model.query = AddTrainLogic.rebuilt(operator: op, number: number, from: from, to: to)
-            focused = true
-        }
-        return FlowLayout(spacing: 8, lineSpacing: 8) {
-            if let op = parts.op { ChipButton(text: op, removable: true) { rebuild(op: nil, number: parts.number, from: parts.from, to: parts.to) } }
-            if let number = parts.number {
-                ChipButton(text: l10n.t("add.trainNumber", ["number": number]), removable: true) { rebuild(op: parts.op, number: nil, from: parts.from, to: parts.to) }
+    /// Above the journeys: how many there are, which filters are on, and the Filters button (as Explore's), which opens
+    /// the two choices in a small sheet. Filters are set rarely, so they don't take the results' space (owner, 2026-10-28).
+    private func journeyFilterBar(count: Int) -> some View {
+        let active = (model.maxChanges < 2 ? 1 : 0) + (model.minComfort > 0 && model.maxChanges > 0 ? 1 : 0)
+        let summary = [
+            model.maxChanges < 2 ? l10n.t(["add.changesNone", "add.changesOne", "add.changesTwo"][model.maxChanges]) : nil,
+            model.minComfort > 0 && model.maxChanges > 0 ? l10n.t(["add.comfortAny", "add.comfortNormal", "add.comfortRelaxed"][model.minComfort]) : nil,
+        ].compactMap { $0 }.joined(separator: Format.separator)
+        return HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(l10n.t("add.journeyCount", count: count)).clack(.rowTitle).foregroundStyle(Ink.text)
+                if !summary.isEmpty { Text(summary).clack(.caption).foregroundStyle(Ink.text2) }
             }
-            if let from = parts.from { ChipButton(text: from, removable: true) { rebuild(op: parts.op, number: parts.number, from: nil, to: parts.to) } }
-            if parts.from != nil || parts.to != nil { Text("→").clack(.caption).foregroundStyle(Ink.text2) }
-            if let to = parts.to { ChipButton(text: to, removable: true) { rebuild(op: parts.op, number: parts.number, from: parts.from, to: nil) } }
+            Spacer(minLength: 8)
+            ChipButton(text: active > 0 ? l10n.t("add.filtersOn", ["n": String(active)]) : l10n.t("liveMap.filters"), active: active > 0) {
+                showJourneyFilters = true
+            }
+            .accessibilityHint(l10n.t("add.filtersHint"))
+        }
+        .sheet(isPresented: $showJourneyFilters) {
+            JourneyFilterSheet(model: model) { showJourneyFilters = false }
+                .presentationDetents([.height(model.maxChanges > 0 ? 300 : 190)])
         }
     }
 
     @ViewBuilder
     private func results(_ response: SearchResponse) -> some View {
+        if response.journeysPending == true {
+            // The planner is building the day: the direct trains now, the journeys with changes in a moment.
+            HStack(spacing: 8) {
+                ProgressView()
+                Text(l10n.t("add.journeysPending")).clack(.caption).foregroundStyle(Ink.text2)
+            }
+        }
         if response.journeys != nil, response.interpretation.from != nil, response.interpretation.to != nil, !response.outsideTimetable {
             journeyResults(response)
         } else {
@@ -139,11 +160,7 @@ private struct SearchStep: View {
             Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
             stationList(response.suggestions)
         }
-        FlowLayout(spacing: 8, lineSpacing: 8) {
-            ForEach([0, 1, 2], id: \.self) { n in
-                ChipButton(text: l10n.t(n == 0 ? "add.changesNone" : n == 1 ? "add.changesOne" : "add.changesTwo"), active: model.maxChanges == n) { model.maxChanges = n }
-            }
-        }
+        journeyFilterBar(count: model.journeys?.count ?? 0)
         if model.hasHiddenEarlierJourneys {
             Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
         }
@@ -153,7 +170,11 @@ private struct SearchStep: View {
             }
         } else if model.moreWithMoreChanges {
             Text(l10n.t("add.noJourneyWithFilter")).clack(.body).foregroundStyle(Ink.text2)
-            Button(l10n.t("add.includeMoreChanges")) { model.maxChanges = 2 }.buttonStyle(.clack(wide: true))
+            Button(l10n.t("add.includeMoreChanges")) {
+                model.maxChanges = 2
+                model.minComfort = 0
+            }
+            .buttonStyle(.clack(wide: true))
         } else {
             Text(l10n.t("add.noJourney")).clack(.body).foregroundStyle(Ink.text2)
         }
@@ -833,3 +854,41 @@ private struct ManualStationField: View {
         }
     }
 }
+
+/// The planner's two filters (DESIGN §segmented control): how many changes, and how short a change may be, in the
+/// change gauge's words. The second is hidden for direct journeys, which have no change to judge.
+private struct JourneyFilterSheet: View {
+    @Environment(L10n.self) private var l10n
+    @Bindable var model: AddTrainModel
+    let onDone: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text(l10n.t("liveMap.filters")).clack(.boardSheetTitle).foregroundStyle(Ink.text)
+                Spacer()
+                if model.maxChanges < 2 || model.minComfort > 0 {
+                    Button(l10n.t("liveMap.clearFilters")) {
+                        model.maxChanges = 2
+                        model.minComfort = 0
+                    }
+                    .buttonStyle(LinkButtonStyle())
+                }
+            }
+            VStack(alignment: .leading, spacing: 8) {
+                Text(l10n.t("add.changesLabel")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesMin")), (1, l10n.t("add.upTo1")), (2, l10n.t("add.upTo2"))])
+            }
+            if model.maxChanges > 0 {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(l10n.t("add.comfortLabel")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                    SegmentedControl(selection: $model.minComfort, options: [(0, l10n.t("add.comfortAnyShort")), (1, l10n.t("add.comfortNormalShort")), (2, l10n.t("comfort.relaxed"))])
+                }
+            }
+            Button(l10n.t("common.done"), action: onDone).buttonStyle(.clack(.primary, wide: true))
+        }
+        .padding(20)
+        .animation(.default, value: model.maxChanges > 0)
+    }
+}
+

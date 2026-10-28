@@ -536,3 +536,74 @@ public nonisolated struct LegDetail: Codable, Hashable, Sendable, Identifiable {
         try container.encode(events, forKey: .events)
     }
 }
+
+extension Leg {
+    /// A planned train shown as a trip before it is saved (the planned-journey page mirrors a saved journey, owner
+    /// 2026-10-28): timetable times only, nothing live, never sent to the server. `id` is "planned:<trip key>|<seq>".
+    /// `originTier` and `country` are the planner's, so a change card gives the verdict the planner gave.
+    public static func planned(_ r: TripResult, operator op: LegOperator?, journeyId: String, originTier: String? = nil, country: String? = nil, distanceM: Double? = nil) -> Leg {
+        Leg(
+            id: "planned:\(r.key)|\(r.from.seq)", status: .planned, dataQuality: .scheduledOnly, trainNumber: r.trainNumber,
+            category: r.category, serviceDate: r.serviceDate, schedDep: Instant(ms: r.from.time), schedArr: Instant(ms: r.to.time),
+            actualDep: nil, actualArr: nil, depDelayMin: nil, arrDelayMin: nil, depPlatform: nil, arrPlatform: nil, canceled: false,
+            distanceM: distanceM, isEstimatedGeometry: false, trainType: r.trainType, trainTypeSource: r.trainType == nil ? nil : .typical,
+            onboard: nil, countryCodes: Array(Set([r.from.country, r.to.country])).sorted(), journeyId: journeyId,
+            timetableTripKey: r.key, operatorId: r.operatorId, originStationId: r.from.stationId, destStationId: r.to.stationId,
+            originTier: originTier, trainCountry: country, notes: nil, coach: nil, seat: nil, ride: .pending, rideReason: nil,
+            borderEvidence: nil, operator: op,
+            origin: StationRef(id: r.from.stationId, name: r.from.name, code: r.from.code, country: r.from.country, tz: r.from.tz),
+            destination: StationRef(id: r.to.stationId, name: r.to.name, code: r.to.code, country: r.to.country, tz: r.to.tz),
+            live: nil
+        )
+    }
+
+    /// Every field, for `planned`.
+    init(
+        id: String, status: LegStatus, dataQuality: DataQuality, trainNumber: String?, category: String?, serviceDate: String?,
+        schedDep: Instant?, schedArr: Instant?, actualDep: Instant?, actualArr: Instant?, depDelayMin: Int?, arrDelayMin: Int?,
+        depPlatform: String?, arrPlatform: String?, canceled: Bool, distanceM: Double?, isEstimatedGeometry: Bool,
+        trainType: String?, trainTypeSource: TrainTypeSource?, onboard: OnboardFacts?, countryCodes: [String], journeyId: String?,
+        timetableTripKey: String?, operatorId: String?, originStationId: String, destStationId: String, originTier: String?,
+        trainCountry: String?, notes: String?, coach: String?, seat: String?, ride: Ride, rideReason: String?,
+        borderEvidence: BorderEvidence?, operator op: LegOperator?, origin: StationRef?, destination: StationRef?, live: LiveStateRow?
+    ) {
+        self.id = id
+        self.status = status
+        self.dataQuality = dataQuality
+        self.trainNumber = trainNumber
+        self.category = category
+        self.serviceDate = serviceDate
+        self.schedDep = schedDep
+        self.schedArr = schedArr
+        self.actualDep = actualDep
+        self.actualArr = actualArr
+        self.depDelayMin = depDelayMin
+        self.arrDelayMin = arrDelayMin
+        self.depPlatform = depPlatform
+        self.arrPlatform = arrPlatform
+        self.canceled = canceled
+        self.distanceM = distanceM
+        self.isEstimatedGeometry = isEstimatedGeometry
+        self.trainType = trainType
+        self.trainTypeSource = trainTypeSource
+        self.onboard = onboard
+        self.countryCodes = countryCodes
+        self.journeyId = journeyId
+        self.timetableTripKey = timetableTripKey
+        self.operatorId = operatorId
+        self.originStationId = originStationId
+        self.destStationId = destStationId
+        self.originTier = originTier
+        self.trainCountry = trainCountry
+        self.notes = notes
+        self.coach = coach
+        self.seat = seat
+        self.ride = ride
+        self.rideReason = rideReason
+        self.borderEvidence = borderEvidence
+        self.operator = op
+        self.origin = origin
+        self.destination = destination
+        self.live = live
+    }
+}

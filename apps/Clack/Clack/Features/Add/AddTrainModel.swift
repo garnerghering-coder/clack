@@ -12,7 +12,14 @@ import Observation
 @MainActor
 @Observable
 final class AddTrainModel {
-    var date = Format.todayIso() { didSet { if date != oldValue { showEarlier = false } } }
+    var date = {
+        #if DEBUG
+        // `-addDate 2026-10-29` starts the sheet on that day.
+        let args = CommandLine.arguments
+        if let i = args.firstIndex(of: "-addDate"), args.indices.contains(i + 1) { return args[i + 1] }
+        #endif
+        return Format.todayIso()
+    }() { didSet { if date != oldValue { showEarlier = false } } }
     /// Today's list starts at now; this brings back the trains that left more than ten minutes ago.
     var showEarlier = false
     var query = {
@@ -40,6 +47,9 @@ final class AddTrainModel {
     var pickedJourney: PlannedJourney?
     /// Most changes a journey may have: 0 direct only, 1, or 2 (the default). Filters, doesn't sort.
     var maxChanges = 2
+    /// The shortest change you'll accept: 0 any the planner offers (tight too), 1 normal or more, 2 relaxed only
+    /// (owner, 2026-10-28). Filters, doesn't sort.
+    var minComfort = 0
     var saved: LegDetail?
     /// Opened with a trip already chosen (from a board or a link): going back leaves instead of searching.
     var openedWithTrip = false
@@ -62,16 +72,29 @@ final class AddTrainModel {
 
     /// The planner's journeys for two stations, within the change filter, without those that left earlier today.
     var journeys: [PlannedJourney]? {
-        response?.journeys?.filter { $0.changes.count <= maxChanges && (showEarlier || !isEarlier($0.dep)) }
+        response?.journeys?.filter { passes($0) && (showEarlier || !isEarlier($0.dep)) }
     }
 
-    /// Journeys are hidden by the change filter alone (offer to include more changes).
+    private func passes(_ j: PlannedJourney) -> Bool {
+        j.changes.count <= maxChanges && j.changes.allSatisfy { Self.rank($0.comfort) >= minComfort }
+    }
+
+    /// tight 0, normal 1, relaxed 2 (risky never comes from the planner).
+    static func rank(_ c: ChangeComfort) -> Int {
+        switch c {
+        case .relaxed: 2
+        case .normal: 1
+        default: 0
+        }
+    }
+
+    /// Journeys are hidden by the filters alone (offer to show them all).
     var moreWithMoreChanges: Bool {
-        (response?.journeys ?? []).contains { $0.changes.count > maxChanges && (showEarlier || !isEarlier($0.dep)) }
+        (response?.journeys ?? []).contains { !passes($0) && (showEarlier || !isEarlier($0.dep)) }
     }
 
     var hasHiddenEarlierJourneys: Bool {
-        !showEarlier && (response?.journeys ?? []).contains { $0.changes.count <= maxChanges && isEarlier($0.dep) }
+        !showEarlier && (response?.journeys ?? []).contains { passes($0) && isEarlier($0.dep) }
     }
 
     private func isEarlier(_ time: Double) -> Bool {
@@ -146,6 +169,17 @@ final class AddTrainModel {
         }
     }
 
+    /// The planner was still building the day: ask again every 3 s, for up to two minutes, until the journeys come.
+    func waitForJourneys() async {
+        let started = Date.now
+        while response?.journeysPending == true {
+            try? await Task.sleep(for: .seconds(3))
+            if Task.isCancelled || Date.now.timeIntervalSince(started) > 120 { return }
+            guard response?.journeysPending == true else { return }
+            retry += 1
+        }
+    }
+
     /// A day before yesterday was picked: start fetching its timetable now, before anything is typed.
     func prepareHistory(_ client: APIClient) async {
         guard let yesterday = Format.addDaysIso(Format.todayIso(), days: -1), date < yesterday else { return }
@@ -171,6 +205,7 @@ final class AddTrainModel {
         pickedConnection = nil
         pickedJourney = nil
         maxChanges = 2
+        minComfort = 0
         query = ""
     }
 }

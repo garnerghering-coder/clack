@@ -168,8 +168,8 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; fet
     return { records: 0, runs: 0 };
   }
   const compositions = await fetchJson<Composition[]>(`compositions/${date}`, { fetchImpl: opts.fetchImpl });
-  const tFile = writeRaw(SOURCE, date, 'trains', trains, { now });
-  const cFile = writeRaw(SOURCE, date, 'compositions', compositions, { now });
+  const tFile = await writeRaw(SOURCE, date, 'trains', trains, { now });
+  const cFile = await writeRaw(SOURCE, date, 'compositions', compositions, { now });
   const runs = opts.projectRuns === false ? [] : project(date, trains, compositions, await stationsForTrains(db, trains), final);
   const written = saveRuns(db, runs, now);
   recordFetch(db, { source: SOURCE, kind: 'trains', date, records: trains.length, runs: written, file: tFile, final }, now);

@@ -66,6 +66,8 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public let connections: [TimetableConnection]?
     /// Journeys with up to two changes, direct trains among them, by departure (the planner; nil from older servers).
     public let journeys: [PlannedJourney]?
+    /// The planner is still building the day (the first ask for a date): ask again shortly for the journeys.
+    public var journeysPending: Bool? = nil
     public let outsideTimetable: Bool
     /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable`, `norway` or
     /// `finland` (before that country's record starts).

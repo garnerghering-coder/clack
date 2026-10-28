@@ -5,6 +5,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import { promisify } from 'node:util';
+
+const brotli = promisify(zlib.brotliCompress);
 import { REPO_ROOT } from '../env.js';
 
 export const OBSERVED_DIR = process.env.OBSERVED_DIR ?? path.join(REPO_ROOT, 'data/observed');
@@ -19,14 +22,18 @@ export function dayDir(source: string, date: string, root = OBSERVED_DIR): strin
  * day's folder holds e.g. `announcements-2026-10-27T03-10-00Z.ndjson.br`. Written to a temporary name first, then
  * renamed, so a half-written file never looks complete. Returns the file's path.
  */
-export function writeRaw(source: string, date: string, kind: string, records: unknown[], opts: { root?: string; now?: number } = {}): string {
+/**
+ * Brotli runs on the thread pool (not the event loop): a day's Swedish record compressed in-line held the server for
+ * ~15 s (profiled 2026-10-28).
+ */
+export async function writeRaw(source: string, date: string, kind: string, records: unknown[], opts: { root?: string; now?: number } = {}): Promise<string> {
   const dir = dayDir(source, date, opts.root);
   fs.mkdirSync(dir, { recursive: true });
   const stamp = new Date(opts.now ?? Date.now()).toISOString().replace(/:/g, '-').replace(/\.\d+Z$/, 'Z');
   let file = path.join(dir, `${kind}-${stamp}.ndjson.br`);
   for (let i = 2; fs.existsSync(file); i++) file = path.join(dir, `${kind}-${stamp}-${i}.ndjson.br`);
   const body = records.map((r) => JSON.stringify(r)).join('\n') + (records.length ? '\n' : '');
-  const packed = zlib.brotliCompressSync(body, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 9, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: body.length } });
+  const packed = await brotli(body, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 9, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: body.length } });
   fs.writeFileSync(`${file}.part`, packed);
   fs.renameSync(`${file}.part`, file);
   return file;

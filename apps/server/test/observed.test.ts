@@ -152,11 +152,11 @@ describe('Norway (Journey Planner and BigQuery)', () => {
 });
 
 describe('the record', () => {
-  it('writes raw files once and reads them back intact', () => {
+  it('writes raw files once and reads them back intact', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'obs-'));
     const recs = [{ a: 1, s: 'Göteborg' }, { b: [1, 2] }];
-    writeRaw('test', '2026-10-25', 'trains', recs, { root, now: 0 });
-    writeRaw('test', '2026-10-25', 'trains', recs, { root, now: 0 });
+    await writeRaw('test', '2026-10-25', 'trains', recs, { root, now: 0 });
+    await writeRaw('test', '2026-10-25', 'trains', recs, { root, now: 0 });
     const files = rawFiles('test', '2026-10-25', 'trains', root);
     expect(files).toHaveLength(2);
     expect(readRaw(files[0]!)).toEqual(recs);

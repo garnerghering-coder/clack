@@ -159,7 +159,7 @@ export async function collectDay(db: Db, date: string, opts: { now?: number; log
     opts.log?.(`observed DK ${date}: the archive has nothing for this day`);
     return 0;
   }
-  const file = writeRaw(SOURCE, date, 'tripupdate', rows, { now });
+  const file = await writeRaw(SOURCE, date, 'tripupdate', rows, { now });
   const { trips, known } = lookups(db, [...new Set(rows.map((r) => r.trip_id!))]);
   const runs = project(date, rows, trips, known, true);
   const written = await saveInChunks(db, runs, now);

@@ -38,10 +38,21 @@ export function parseGtfsTime(t: string): number | null {
 
 /** GTFS service date (YYYY-MM-DD) + seconds since "noon minus 12h" -> UTC epoch ms. */
 export function serviceTimeToUtc(serviceDate: string, seconds: number, tz: string): number {
-  const [y, mo, d] = serviceDate.split('-').map(Number) as [number, number, number];
-  const noon = zonedToUtc(y, mo, d, 12, 0, 0, tz);
-  return noon - 12 * 3600_000 + seconds * 1000;
+  // Every time of a service day counts from the same base, so it is worked out once per day and zone: the planner
+  // converts ~1.6 million stop times a day, and the time-zone lookup (Intl) behind it held the server for seconds
+  // at a time (profiled 2026-10-28).
+  const k = `${serviceDate}|${tz}`;
+  let base = serviceBase.get(k);
+  if (base === undefined) {
+    const [y, mo, d] = serviceDate.split('-').map(Number) as [number, number, number];
+    base = zonedToUtc(y, mo, d, 12, 0, 0, tz) - 12 * 3600_000;
+    if (serviceBase.size > 20_000) serviceBase.clear();
+    serviceBase.set(k, base);
+  }
+  return base + seconds * 1000;
 }
+
+const serviceBase = new Map<string, number>();
 
 export const ymdToIso = (ymd: string) => `${ymd.slice(0, 4)}-${ymd.slice(4, 6)}-${ymd.slice(6, 8)}`;
 
