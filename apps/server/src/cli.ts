@@ -1,5 +1,7 @@
 // Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
-import { config } from './env.js';
+import fs from 'node:fs';
+import path from 'node:path';
+import { config, REPO_ROOT } from './env.js';
 import { openDb } from './db/client.js';
 import { bootstrap, refreshTrvStations, runDenmarkImport, runFinlandImport, runGtfsImport, runNorwayImport } from './import/run.js';
 import { extractBasemap } from './import/basemap.js';
@@ -31,6 +33,12 @@ if (cmd === 'gtfs') {
   // Old Danish timetables from the Mobility Database: [--limit=N] copies this run.
   const limit = flags.find((f) => f.startsWith('--limit='))?.slice(8);
   await importDenmarkHistory(db, { limit: limit ? Number(limit) : undefined });
+} else if (cmd === 'art-needed') {
+  const { artNeeded } = await import('./tools/artNeeded.js');
+  const date = flags.find((f) => f.startsWith('--date='))?.slice(7) ?? '2026-10-28';
+  const out = path.join(REPO_ROOT, 'docs/TRAIN_ART_NEEDED.md');
+  fs.writeFileSync(out, artNeeded(db, date));
+  console.log(`wrote ${out}`);
 } else if (cmd === 'history') {
   // Sweden's past timetables ahead of time: --from=YYYY-MM-DD [--to=YYYY-MM-DD] (to: the day before the current feed).
   const from = flags.find((f) => f.startsWith('--from='))?.slice(7);
