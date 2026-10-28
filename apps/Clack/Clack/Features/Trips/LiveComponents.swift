@@ -233,10 +233,19 @@ struct ConnectionCard: View {
             result.layoverSeconds.map { l10n.t("connection.layover", ["min": String(Int((Double($0) / 60).rounded()))]) },
         ].compactMap { $0 }.joined(separator: " · ")
         let content = VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
-                Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
-                Spacer(minLength: 0)
-                ConnectionChip(result: result)
+            // The verdict beside the station when both fit, else under it (a long name and "Relaxed · 48 min to change").
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                    Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
+                        .fixedSize()
+                    Spacer(minLength: 0)
+                    ConnectionChip(result: result).fixedSize()
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(l10n.t("connection.changeAt", ["station": a.destination?.name ?? ""])).clack(.rowTitle).foregroundStyle(Ink.text)
+                        .fixedSize(horizontal: false, vertical: true)
+                    ConnectionChip(result: result)
+                }
             }
             Text(caption).clack(.caption).foregroundStyle(Ink.text2)
             if !times.live && result.status != .broken {

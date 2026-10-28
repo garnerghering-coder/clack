@@ -139,7 +139,10 @@ struct LegRow: View {
         VStack(alignment: .trailing, spacing: 4) {
             if leg.ride == .review { Chip(text: l10n.t("record.needsCheck"), tint: Ink.warnText) }
             if leg.ride == .notTaken { Chip(text: l10n.t("record.notTaken")) }
-            if upcoming {
+            if !linked {
+                // A planned train not saved yet: no delay to show, only its distance.
+                Text(distance).clack(.caption).foregroundStyle(Ink.text2)
+            } else if upcoming {
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
             } else {
                 DelayText(delay: (leg.dataQuality == .scheduledOnly && leg.status == .planned) ? nil : leg.arrDelayMin, canceled: leg.canceled)
