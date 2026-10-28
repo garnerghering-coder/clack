@@ -8,7 +8,7 @@ import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
 import { isMine, LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
-import { searchByNumber, tripStops } from '../search/timetable.js';
+import { searchByNumber, tripByKey, tripStops } from '../search/timetable.js';
 import { matchTrip } from '../livemap/match.js';
 import { trainStops } from '../livemap/trainStops.js';
 
@@ -104,6 +104,9 @@ export const liveMapRoutes =
       if (t.tripKey) {
         const exact = all.find((r) => r.key === t.tripKey);
         if (exact) return exact;
+        // The feed (or the Danish matcher) named the trip, but its number finds another: take the trip by its key.
+        const byKey = tripByKey(db, t.tripKey, t.date);
+        if (byKey) return byKey;
       }
       // A Danish train is its own timetable trip or none: its number alone can be another country's train (NT's "Re
       // 75" is a line number). Trains that cross into Sweden are Sweden's feed's, found by number as usual.
@@ -140,6 +143,8 @@ export const liveMapRoutes =
       // Not in any timetable of ours: Rejseplanen's own list for a Danish train.
       const jid = !stops ? ingest.denmarkJourney(t.id) : undefined;
       if (jid) stops = await journeyStopsView(db, jid).catch(() => null);
+      // Rejseplanen knows the train but couldn't answer just now: ask again (the app retries), not "not in the timetable".
+      if (!stops && jid) return reply.code(503).send({ error: 'stops not available just now', retry: true });
       if (!stops) return reply.code(404).send({ error: 'train not in the timetable' });
       return { stops };
     });

@@ -8,7 +8,7 @@ import type { Db } from '../db/client.js';
 import { addCauses, deviationTexts } from '../legs/causes.js';
 import type { StopActuals } from '../legs/actuals.js';
 import { rejseplanenCauses } from '../boards/denmark.js';
-import { rejseplanen, type Journey, type RejseplanenClient } from './client.js';
+import { rejseplanen, RejseplanenUnavailable, type Journey, type RejseplanenClient } from './client.js';
 import { stationOfUic, TripMatcher, uicOfStation } from './match.js';
 import type { TrainStopView } from '../livemap/trainStops.js';
 
@@ -89,6 +89,25 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
   return out;
 }
 
+/** How old a remembered stop list may be when Rejseplanen can't answer now. */
+const STALE_MS = 10 * 60_000;
+
+/**
+ * JourneyDetails for a train sheet: when the shared limit is used up (the map's polls, boards), waits for the next
+ * token (one every 2 s) up to twice before giving up. Undefined when there was no answer.
+ */
+async function detailsSoon(client: RejseplanenClient, jid: string): Promise<Journey | null | undefined> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      return await client.journeyDetails(jid);
+    } catch (e) {
+      if (!(e instanceof RejseplanenUnavailable) || !/limit/.test(e.message) || attempt === 2) return undefined;
+      await new Promise((r) => setTimeout(r, 2100));
+    }
+  }
+  return undefined;
+}
+
 /**
  * A train's whole stop list from Rejseplanen alone, for trains no timetable of ours has (Snälltåget 21509 Malmö →
  * Berlin on 27 Oct). Live times as in `rejseplanenFor`; names as Rejseplanen gives them where we don't know the station.
@@ -96,11 +115,17 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
 export async function journeyStopsView(db: Db, jid: string, opts: { now?: number; client?: RejseplanenClient } = {}): Promise<TrainStopView[] | null> {
   const client = opts.client ?? rejseplanen();
   const now = opts.now ?? Date.now();
-  if (!client.available()) return null;
   let cached = details.get(jid);
   if (!cached || now - cached.at > DETAILS_TTL_MS) {
-    cached = { at: now, journey: await client.journeyDetails(jid) };
-    details.set(jid, cached);
+    const fresh = client.available() ? await detailsSoon(client, jid) : undefined;
+    // No answer (the shared request limit, Rejseplanen resting): the last list, up to STALE_MS old, beats none.
+    if (fresh === undefined) {
+      if (!cached || now - cached.at > STALE_MS) return null;
+    } else {
+      cached = { at: now, journey: fresh };
+      details.set(jid, cached);
+      if (details.size > 500) details.delete(details.keys().next().value!);
+    }
   }
   const j = cached.journey;
   if (!j?.stops.length) return null;

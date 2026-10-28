@@ -161,6 +161,7 @@ export class DenmarkArchiveFallback {
         origin: first?.name ?? null,
         destination: last?.name ?? null,
         next: next.name,
+        prev: prev.name,
         nextEta: arriving,
         delayMin: null,
         tripKey: trip.key,

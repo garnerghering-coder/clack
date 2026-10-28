@@ -302,6 +302,20 @@ function dedupe(results: TripResult[]): TripResult[] {
   return out.sort((a, b) => a.from.time - b.from.time);
 }
 
+/**
+ * One trip, first stop to last, as a search result: for a train whose timetable trip is already known by key (a
+ * Danish line like Lokaltog 910, whose "number" is the line's and finds no trip by number).
+ */
+export function tripByKey(db: Db, key: string, serviceDate: string): TripResult | null {
+  const trip = db.all<TripRow>(sql`
+    select t.key, d.service_date, t.train_number, t.operator_id, t.category, t.route_type, t.route_name, t.tz
+    from timetable_trips t join timetable_trip_dates d on d.trip_key = t.key
+    where t.key = ${key} and d.service_date = ${serviceDate}`)[0];
+  const stops = trip ? (loadStops(db, [key]).get(key) ?? []) : [];
+  if (!trip || stops.length < 2) return null;
+  return toResult(trip, stops, stops[0]!, stops.at(-1)!);
+}
+
 /** Full stop list of one trip pattern on one service date, for the "Where did you get on and off?" step. */
 export function tripStops(db: Db, key: string, serviceDate: string): { trip: TripRow; stops: TripStop[] } | null {
   const trip = db.all<TripRow>(sql`

@@ -509,14 +509,17 @@ final class ExploreModel {
         stopsTask = Task { [weak self] in
             while !Task.isCancelled {
                 guard let self, let client = self.app?.client else { return }
-                if let list = try? await client.liveTrainStops(id) {
-                    self.stops = .list(list)
-                } else if case .list = self.stops {
-                    // Keep what we have.
-                } else {
-                    self.stops = .none
+                var soon = false
+                do {
+                    self.stops = .list(try await client.liveTrainStops(id))
+                } catch let error as APIError where error.status == 503 {
+                    // Rejseplanen knows the train but couldn't answer just now: still loading, ask again in 5 s.
+                    if case .list = self.stops {} else { self.stops = .loading }
+                    soon = true
+                } catch {
+                    if case .list = self.stops {} else { self.stops = .none }
                 }
-                try? await Task.sleep(for: .seconds(30))
+                try? await Task.sleep(for: .seconds(soon ? 5 : 30))
             }
         }
     }
