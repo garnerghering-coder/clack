@@ -10,6 +10,8 @@ import { fetchJson, type DigitrafficOptions } from '../digitraffic/client.js';
 import { fetchDayVehicles, isPassengerTrain, type DtTrain } from '../digitraffic/trains.js';
 import { finnishProduct } from '../import/gtfs-fi.js';
 import { COUNTRIES } from '../lib/countries.js';
+import { digitrafficCauses } from '../legs/causes.js';
+import type { DelayCause } from '@clack/shared';
 import { haversineM } from '../lib/geo.js';
 import { addDays, todayIn } from '../lib/time.js';
 import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
@@ -66,6 +68,8 @@ interface Stored {
   calls: Call[];
   /** Calls at a station in another country (Haparanda): Trafikverket may report the same train there. */
   crossBorder: boolean;
+  /** Digitraffic's cause codes on the rows passed so far. */
+  causes: DelayCause[];
 }
 
 export interface FinlandTrain {
@@ -87,6 +91,9 @@ export interface FinlandTrain {
   origin: string;
   destination: string;
   next: string | null;
+  /** The stop before `next`, and Digitraffic's cause codes so far (network status). */
+  prev?: string | null;
+  causes?: DelayCause[];
   nextEta: number | null;
   delayMin: number | null;
   /** Calls at Haparanda, so Trafikverket may know the same train there. */
@@ -253,6 +260,7 @@ export class FinlandFeed {
         cancelled: Boolean(t.cancelled),
         calls,
         crossBorder: calls.some((c) => (this.station(c.code)?.country ?? 'FI') !== 'FI'),
+        causes: digitrafficCauses(t.timeTableRows.filter((r) => r.actualTime).flatMap((r) => r.causes ?? [])),
       });
     }
   }
@@ -346,6 +354,8 @@ export class FinlandFeed {
         origin,
         destination,
         next: done ? null : next.name,
+        prev: i > 0 ? (this.station(calls[i - 1]!.code)?.name ?? null) : null,
+        causes: s.causes,
         nextEta: done ? null : nextEta,
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: s.crossBorder,

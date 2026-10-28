@@ -20,6 +20,7 @@ import { FINLAND_POLL_MS, FinlandFeed } from './finland.js';
 import { DENMARK_POLL_MS, DenmarkFeed } from './denmark.js';
 import type { RejseplanenClient } from '../rejseplanen/client.js';
 import { countryOfLiveId } from '../lib/countries.js';
+import type { DelayCause } from '@clack/shared';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
 
 export interface LiveTrain {
@@ -139,6 +140,8 @@ interface TailStop {
 
 export class LiveMapIngest extends EventEmitter {
   readonly trains = new Map<string, LiveTrain>();
+  /** What the network status reads beside each train and the stream doesn't send: the station it passed last, and the reasons its feed gives. */
+  readonly context = new Map<string, { prev: string | null; causes: DelayCause[] }>();
   private positions = new Map<string, TrvPos>();
   /** Every position report passes through here first: impossible jumps are dropped, speeds checked. */
   readonly fixes = new FixFilter();
@@ -421,6 +424,7 @@ export class LiveMapIngest extends EventEmitter {
       mine: false,
     };
     this.trains.set(k, t);
+    this.context.set(k, { prev: abroadNext !== undefined ? null : this.name(info?.lastSig ?? null), causes: info?.causes ?? [] });
     this.changed.add(k);
     this.removed.delete(k);
   }
@@ -566,6 +570,7 @@ export class LiveMapIngest extends EventEmitter {
         ...(n.crossBorder ? { crossBorder: true } : {}),
       };
       this.trains.set(id, t);
+      this.context.set(id, { prev: n.prev ?? null, causes: [] });
       this.changed.add(id);
       this.removed.delete(id);
     }
@@ -627,6 +632,7 @@ export class LiveMapIngest extends EventEmitter {
         ...(crossBorder ? { crossBorder: true } : {}),
       };
       this.trains.set(id, t);
+      this.context.set(id, { prev: d.prev ?? null, causes: [] });
       this.changed.add(id);
       this.removed.delete(id);
     }
@@ -670,6 +676,7 @@ export class LiveMapIngest extends EventEmitter {
         tripKey: f.tripKey,
       };
       this.trains.set(id, t);
+      this.context.set(id, { prev: f.prev ?? null, causes: f.causes ?? [] });
       this.changed.add(id);
       this.removed.delete(id);
     }

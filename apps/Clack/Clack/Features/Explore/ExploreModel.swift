@@ -52,6 +52,10 @@ final class ExploreModel {
     var collapsed = false
     var legend = false
     var showFilters = false
+    /// The network status panel (the button beside the filters), its answer, and whether asking failed.
+    var showNetwork = false
+    private(set) var network: NetworkStatus?
+    private(set) var networkFailed = false
     var query = ""
     var searching = false
     private(set) var stationHits: [StationHit] = []
@@ -388,6 +392,57 @@ final class ExploreModel {
     }
 
     // MARK: selecting a train
+
+    /// Asks for the network status now and every 30 s while the panel is open.
+    func watchNetwork() async {
+        guard let client = app?.client else { return }
+        while showNetwork && !Task.isCancelled {
+            #if DEBUG
+            if CommandLine.arguments.contains("-networkSample") { return }
+            #endif
+            if let answer = try? await client.networkStatus() {
+                network = answer
+                networkFailed = false
+            } else if network == nil {
+                networkFailed = true
+            }
+            // Asked again soon while the map is still filling (no trains counted yet), else every 30 s.
+            let filling = network?.countries.isEmpty ?? true
+            try? await Task.sleep(for: .seconds(filling ? 4 : 30))
+        }
+    }
+
+    #if DEBUG
+    /// Made-up numbers in the server's shape, to look at the panel on a calm day. Never in a release build.
+    func useSampleNetwork() {
+        let signal = NetworkStatus.Cause(src: "trv", code: nil, text: "Signalfel", trains: 5)
+        let points = NetworkStatus.Cause(src: "trv", code: nil, text: "Växelfel", trains: 1)
+        network = NetworkStatus(
+            at: Date().timeIntervalSince1970 * 1000, lateMin: 10,
+            countries: ["SE": .init(trains: 341, known: 336, late: 41), "NO": .init(trains: 118, known: 106, late: 9), "DK": .init(trains: 170, known: 170, late: 12), "FI": .init(trains: 104, known: 104, late: 4)],
+            corridors: [
+                .init(stations: ["Hässleholm C", "Lund C", "Malmö C"], country: "SE", trains: 7, late: 6, medianDelay: 18, maxDelay: 34, lat: 55.8, lon: 13.4, causes: [signal, points], trainIds: []),
+                .init(stations: ["Oslo S", "Lillestrøm"], country: "NO", trains: 3, late: 2, medianDelay: 12, maxDelay: 15, lat: 59.95, lon: 10.95, causes: [], trainIds: []),
+            ],
+            late: [
+                .init(id: "x1", number: "547", operatorId: "sj", delayMin: 42, prev: "Norrköping C", next: "Linköping C", destination: "Malmö C", causes: [.init(src: "trv", code: nil, text: "Olycka")]),
+                .init(id: "x2", number: "1072", operatorId: "oresundstag", delayMin: 16, prev: "Kastrup", next: "København H", destination: "Helsingør", causes: []),
+            ]
+        )
+        networkFailed = false
+    }
+    #endif
+
+    /// A corridor was tapped: the map fits its late trains (where they are now).
+    func showCorridor(_ c: NetworkStatus.Corridor) {
+        showNetwork = false
+        let points = c.trainIds.compactMap { trains[$0] }.map { LatLon($0.lat, $0.lon) }
+        if points.count >= 2 {
+            controller.fit(points, padding: UIEdgeInsets(top: 140, left: 60, bottom: 200, right: 60))
+        } else {
+            controller.ease(to: CLLocationCoordinate2D(latitude: c.lat, longitude: c.lon), minZoom: 9, offset: 0)
+        }
+    }
 
     func select(_ id: String) async {
         guard let client = app?.client else { return }

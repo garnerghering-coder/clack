@@ -77,6 +77,8 @@ export interface NorwayTrain {
   origin: string;
   destination: string;
   next: string | null;
+  /** The stop before `next` (network status). */
+  prev?: string | null;
   nextEta: number | null;
   delayMin: number | null;
   /** Calls at a Swedish station too, so Trafikverket may have the same train. */
@@ -295,6 +297,7 @@ export class NorwayFeed {
         origin: stops[0]!.name,
         destination: stops.at(-1)!.name,
         next: now > lastArr ? null : next.name,
+        prev: i > 0 ? stops[i - 1]!.name : null,
         nextEta: now > lastArr ? null : nextEta,
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: stops.some((s) => s.country !== 'NO'),

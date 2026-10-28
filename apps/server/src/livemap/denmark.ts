@@ -73,6 +73,8 @@ export interface DenmarkTrain {
   origin: string | null;
   destination: string | null;
   next: string | null;
+  /** The stop before `next` (network status). */
+  prev?: string | null;
   nextEta: number | null;
   delayMin: number | null;
   tripKey: string | null;
@@ -165,6 +167,7 @@ export class DenmarkFeed {
         origin: this.name(j.ends?.firstUic) ?? j.stops[0]?.name ?? null,
         destination: this.name(j.ends?.lastUic) ?? j.direction,
         next: next?.name ?? null,
+        prev: next ? (j.stops[j.stops.indexOf(next) - 1]?.name ?? null) : null,
         nextEta: eta,
         delayMin: planned !== null && eta !== null ? Math.round((eta - planned) / 60_000) : null,
         tripKey: matched?.tripKey ?? null,

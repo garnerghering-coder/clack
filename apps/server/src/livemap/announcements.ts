@@ -5,6 +5,8 @@ import { delayMinutes } from '@clack/shared';
 import { actualTime, trvQuery } from '../trafikverket/client.js';
 import { isTrain, type TrvBoardRow } from '../boards/board.js';
 import { parseComposition, type Composition } from '../legs/trainTypes.js';
+import { trvCauses } from '../legs/causes.js';
+import type { DelayCause } from '@clack/shared';
 
 interface AnnRow extends TrvBoardRow {
   LocationSignature: string;
@@ -30,6 +32,8 @@ export interface TrainInfo {
   canceled: boolean;
   /** Planned coach order, from the first departure that has one. */
   composition: Composition | null;
+  /** Trafikverket's reasons at the last stop passed and the next one ("Signalfel", "Olycka"); platform changes left out. */
+  causes: DelayCause[];
 }
 
 const BEFORE_MS = 60 * 60_000;
@@ -53,6 +57,7 @@ const FIELDS = [
   'Operator',
   'ScheduledDepartureDateTime',
   'TrainComposition',
+  'Deviation',
 ];
 
 export const trainKey = (number: string, date: string) => `${number}|${date}`;
@@ -87,6 +92,7 @@ export function summarizeTrain(rows: AnnRow[], now: number): TrainInfo | null {
     delayMin,
     // Everything still ahead is cancelled (and something is ahead): the train isn't running any more.
     composition: sorted.map((r) => (r.ActivityType === 'Avgang' ? parseComposition(r.TrainComposition) : null)).find(Boolean) ?? null,
+    causes: [...new Map([last, next].flatMap((r) => trvCauses(r?.Deviation)).filter((c) => c.code?.toUpperCase() !== 'ANA055' && c.text?.toLowerCase() !== 'spårändrat').map((c) => [c.code ?? c.text, c])).values()],
     canceled: ahead.length > 0 && ahead.every((r) => r.Canceled) && now < Date.parse(ahead.at(-1)!.AdvertisedTimeAtLocation) + 30 * 60_000,
   };
 }

@@ -152,6 +152,8 @@ extension APIClient {
     // MARK: live map
 
     public func liveTrain(_ id: String) async throws -> LiveTrainDetail { try await get(["live", "trains", id]) }
+    /// Where trains are running late now (the network status panel on Explore).
+    public func networkStatus() async throws -> NetworkStatus { try await get(["live", "network"]) }
     public func liveTrainStops(_ id: String) async throws -> [LiveTrainStop] {
         let answer: LiveStopsAnswer = try await get(["live", "trains", id, "stops"])
         return answer.stops

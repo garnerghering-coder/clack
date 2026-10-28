@@ -30,6 +30,18 @@ struct ExploreScreen: View {
                 if model.query.trimmingCharacters(in: .whitespaces).isEmpty { stations } else { results }
             }
             if model.showFilters { filters }
+            if model.showNetwork {
+                NetworkPanel(
+                    status: model.network, failed: model.networkFailed,
+                    onCorridor: { model.showCorridor($0) },
+                    onTrain: { t in
+                        model.showNetwork = false
+                        Task { await model.select(t.id) }
+                    },
+                    onClose: { model.showNetwork = false }
+                )
+                .task { await model.watchNetwork() }
+            }
             bottomLeft
             // A station's or train's sheet waits under an open search (it comes back on Close); a pick replaces it.
             if !model.searching { sheets }
@@ -99,6 +111,14 @@ struct ExploreScreen: View {
         .sensoryFeedback(.selection, trigger: model.follows.count)
         #if DEBUG
         .task { await debugSearch() }
+        // `-exploreNetwork` opens the network status; with `-networkSample`, filled with made-up data (a preview of a bad day).
+        .task {
+            let args = CommandLine.arguments
+            guard args.contains("-exploreNetwork") else { return }
+            try? await Task.sleep(for: .seconds(3))
+            if args.contains("-networkSample") { model.useSampleNetwork() }
+            model.showNetwork = true
+        }
         #endif
         // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
         .toolbar(.hidden, for: .navigationBar)
@@ -139,12 +159,18 @@ struct ExploreScreen: View {
         return HStack(spacing: 8) {
             SearchField(text: $model.query, prompt: l10n.t("liveMap.searchPlaceholder"), overMap: true, focus: $searchFocused)
                 .onChange(of: model.query) { model.queryChanged() }
-                .onChange(of: searchFocused) { if searchFocused { model.startSearch() } }
+                .onChange(of: searchFocused) {
+                    if searchFocused {
+                        model.showNetwork = false
+                        model.startSearch()
+                    }
+                }
                 // However the search closes (a pick, Close, a tap on the map), the keyboard goes with it.
                 .onChange(of: model.searching) { if !model.searching { searchFocused = false } }
             Button {
                 // The filters and the search share the space under the field: one at a time.
                 if !model.showFilters { model.searching = false }
+                model.showNetwork = false
                 model.showFilters.toggle()
             } label: {
                 // The same glass circle as the map's buttons (yellow while filters are on).
@@ -161,6 +187,17 @@ struct ExploreScreen: View {
             .buttonStyle(.plain)
             .accessibilityLabel(l10n.t("liveMap.filters"))
             .accessibilityAddTraits(model.showFilters ? .isSelected : [])
+            // Network status, beside the filters (owner, 2026-10-28); the search field gives up the room.
+            Button {
+                if !model.showNetwork { model.searching = false }
+                model.showFilters = false
+                model.showNetwork.toggle()
+            } label: {
+                MapButtonFace(icon: "activity", pressed: model.showNetwork)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(l10n.t("network.button"))
+            .accessibilityAddTraits(model.showNetwork ? .isSelected : [])
         }
         .padding(.horizontal, 12).padding(.top, 12)
     }
