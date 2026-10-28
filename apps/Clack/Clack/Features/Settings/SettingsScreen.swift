@@ -539,15 +539,17 @@ struct PrivacyScreen: View {
 
 /// Settings > Station walks: only in debug and TestFlight builds (owner test tools), never in App Store builds.
 private struct TestToolsRow: View {
-    @State private var shown = false
+    @State private var shown = WalkStore.alwaysShowTestTools
 
     var body: some View {
-        Group {
+        // A VStack, not a Group: a Group with nothing in it is no view at all, so its .task never ran and the row
+        // never appeared (builds 43 and 44).
+        VStack(spacing: 0) {
             if shown {
                 NavigationLink("Station walks (test tool)", value: AppRoute.walkLogger)
                     .buttonStyle(.clack(wide: true))
             }
         }
-        .task { shown = await WalkStore.isTestBuild() }
+        .task { if !shown { shown = await WalkStore.isTestBuild() } }
     }
 }

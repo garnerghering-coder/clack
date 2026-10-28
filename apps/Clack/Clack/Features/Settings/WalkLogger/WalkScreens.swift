@@ -25,7 +25,7 @@ struct WalkLoggerScreen: View {
                 } else {
                     Card {
                         Text("New walk").clack(.sectionHeader).foregroundStyle(Ink.text2)
-                        TextField("Station and what you're doing, e.g. Jönköping C", text: $newTitle)
+                        TextField("Station, e.g. Jönköping C", text: $newTitle)
                             .textFieldStyle(.roundedBorder)
                         Button("Start walk") {
                             recorder.start(title: newTitle)

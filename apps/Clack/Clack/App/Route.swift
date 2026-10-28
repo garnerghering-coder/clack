@@ -85,6 +85,7 @@ final class Router {
             if raw == "stations" { openStationSearch() }
             if raw == "about" { tripsPath = [.settings, .about] }
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
+            if raw == "walks" { tripsPath = [.settings, .walkLogger] }
             if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
