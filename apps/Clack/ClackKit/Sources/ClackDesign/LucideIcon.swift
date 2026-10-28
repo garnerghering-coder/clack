@@ -23,7 +23,9 @@ public struct LucideIcon: View {
         if name.hasPrefix("system:") {
             let symbol = Image(systemName: String(name.dropFirst("system:".count)))
                 .font(.system(size: size * 0.95, weight: .regular))
-                .frame(width: size, height: size)
+                // At least the icon box, never forced into it: an SF Symbol can be taller than its point size (the
+                // share box's arrow is), and a fixed square cut its top and bottom off inside the toolbar's glass.
+                .frame(minWidth: size, minHeight: size)
             if let label { symbol.accessibilityLabel(label) } else { symbol.accessibilityHidden(true) }
         } else {
             lucide
