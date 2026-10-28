@@ -57,7 +57,7 @@ export function productOf(routeType: string, category: string): Product {
   return category as Product;
 }
 
-interface StopRow {
+export interface StopRow {
   trip_key: string;
   seq: number;
   station_id: string;
@@ -73,7 +73,7 @@ interface StopRow {
   lon: number;
 }
 
-interface TripRow {
+export interface TripRow {
   key: string;
   service_date: string;
   train_number: string | null;
@@ -84,7 +84,7 @@ interface TripRow {
   tz: string;
 }
 
-function loadStops(db: Db, keys: string[]): Map<string, StopRow[]> {
+export function loadStops(db: Db, keys: string[]): Map<string, StopRow[]> {
   const out = new Map<string, StopRow[]>();
   for (let i = 0; i < keys.length; i += 500) {
     const chunk = keys.slice(i, i + 500);
@@ -99,9 +99,9 @@ function loadStops(db: Db, keys: string[]): Map<string, StopRow[]> {
   return out;
 }
 
-const utc = (trip: TripRow, sec: number | null) => (sec === null ? null : serviceTimeToUtc(trip.service_date, sec, trip.tz));
+export const utc = (trip: TripRow, sec: number | null) => (sec === null ? null : serviceTimeToUtc(trip.service_date, sec, trip.tz));
 
-function toResult(trip: TripRow, stops: StopRow[], from: StopRow, to: StopRow): TripResult {
+export function toResult(trip: TripRow, stops: StopRow[], from: StopRow, to: StopRow): TripResult {
   const ref = (s: StopRow, time: number): StopRef => ({ seq: s.seq, stationId: s.station_id, name: s.name, code: s.code, country: s.country, tz: s.stz, time });
   const dep = utc(trip, from.dep_sec ?? from.arr_sec)!;
   const arr = utc(trip, to.arr_sec ?? to.dep_sec)!;
@@ -127,7 +127,7 @@ function toResult(trip: TripRow, stops: StopRow[], from: StopRow, to: StopRow): 
  * keeps SQLite from starting at a station's every trip ever stored, which grows with each year of history); `where`
  * then checks each of them, its stops found by the (trip_key, seq) key.
  */
-function candidateTrips(db: Db, date: string, where: ReturnType<typeof sql>): TripRow[] {
+export function candidateTrips(db: Db, date: string, where: ReturnType<typeof sql>): TripRow[] {
   return db.all<TripRow>(sql`
     select t.key, d.service_date, t.train_number, t.operator_id, t.category, t.route_type, t.route_name, t.tz
     from timetable_trip_dates d cross join timetable_trips t on t.key = d.trip_key

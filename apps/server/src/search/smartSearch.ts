@@ -28,6 +28,8 @@ export interface SmartSearchResult {
   results: TripResult[] | null;
   /** No direct train between the two stations: trains with one change (timetable only). */
   connections?: Connection[];
+  /** Journeys with up to two changes, direct trains among them (search/planner.ts); filled by the route. */
+  journeys?: import('./planner.js').PlannedJourney[];
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */

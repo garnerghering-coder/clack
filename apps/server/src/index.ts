@@ -4,6 +4,8 @@ import { buildApp } from './app.js';
 import { bootstrap } from './import/run.js';
 import { startScheduler } from './jobs/scheduler.js';
 import { startObserved } from './observed/index.js';
+import { warmPlanner } from './search/planner.js';
+import { todayIn } from './lib/time.js';
 import { refreshDueLegs, refreshLegActuals } from './legs/actuals.js';
 import { backfillLegGeometry } from './geo/trackSegments.js';
 import { startLiveTracker } from './live/tracker.js';
@@ -73,6 +75,8 @@ if (process.env.JOBS !== 'off') {
   startLiveTracker(db, { log });
   // The observed record: what actually happened to every train (src/observed/).
   startObserved(db, log);
+  // The planner's timetable for today and tomorrow, built in the background so the first search is quick.
+  setTimeout(() => warmPlanner(db, todayIn('Europe/Stockholm'), log), 60_000).unref();
   // Alerts and Live Activities: only when the Apple key is set up (APNS_KEY_ID, APNS_TEAM_ID, APNS_KEY_PATH, APNS_TOPIC).
   const apns = loadApnsConfig();
   if (apns) {

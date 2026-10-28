@@ -1,6 +1,7 @@
 import type { FastifyPluginAsync } from 'fastify';
+import { dayIndex, plan } from '../search/planner.js';
 import type { Db } from '../db/client.js';
-import { addDays, todayIn } from '../lib/time.js';
+import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
 import { ensureHistory } from '../import/history.js';
 import { ensureRecordedDay, recordFrom } from '../observed/timetable.js';
@@ -11,7 +12,7 @@ import { pathThrough } from '../geo/trackSegments.js';
 import { encodePolyline } from '@clack/shared';
 import { eq } from 'drizzle-orm';
 import { stations } from '../db/schema.js';
-import { COUNTRIES } from '../lib/countries.js';
+import { COUNTRIES, tzOf } from '../lib/countries.js';
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -22,10 +23,20 @@ export const searchRoutes =
     const record = { ensure: (c: 'NO' | 'FI', date: string) => ensureRecordedDay(db, c, date, { log }), from: (c: 'NO' | 'FI') => recordFrom(db, c) };
     const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log }), record);
 
-    app.get<{ Querystring: { q?: string; date?: string } }>('/search', async (req, reply) => {
+    app.get<{ Querystring: { q?: string; date?: string; changes?: string } }>('/search', async (req, reply) => {
       const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
-      return search(req.query.q ?? '', date);
+      const out = search(req.query.q ?? '', date);
+      // Two stations: the planner's journeys (direct and with changes) for the whole service day. The app hides the
+      // ones that left earlier today unless asked, as it does for direct trains.
+      const { from, to } = out.interpretation;
+      if (from && to && !out.outsideTimetable && !out.interpretation.trainNumber) {
+        const tz = tzOf(from.country) ?? COUNTRIES.SE.tz;
+        const start = serviceTimeToUtc(date, 0, tz);
+        const maxChanges = Math.max(0, Math.min(2, Number(req.query.changes ?? 2) || 0));
+        out.journeys = plan(db, await dayIndex(db, date), from.id, to.id, start, start + 86400_000, req.query.changes === undefined ? 2 : maxChanges);
+      }
+      return out;
     });
 
     // The app calls this as soon as an older day is picked, before anything is typed, so the archive import for that
