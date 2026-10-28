@@ -7118,6 +7118,23 @@
         }
       }
     },
+    "liveMap.lateBecause" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Late because of {{reasons}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Försenat på grund av {{reasons}}"
+          }
+        }
+      }
+    },
     "liveMap.legend" : {
       "extractionState" : "manual",
       "localizations" : {

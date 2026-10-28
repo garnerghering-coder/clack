@@ -433,6 +433,7 @@ struct ExploreScreen: View {
                 if !collapsed.wrappedValue, !train.estimated { Speedometer(kmh: train.speedKmh, at: train.at.ms, now: now) }
             }
             Text(l10n.t("live.updated", ["ago": LiveRules.ago(l10n, then: train.at.ms, now: now)])).clack(.caption).foregroundStyle(Ink.text2)
+            if case .list(let list) = model.stops { LateReasons(stops: list) }
         } content: {
             StopList(stops: model.stops, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: train.operatorId, trainType: train.trainType, compact: true)
@@ -473,6 +474,7 @@ struct ExploreScreen: View {
             StatusLine(allCanceled ? .cancelled : .arrived, status)
             // Live times need no note; timetable ones say so.
             if !anyLive { Text(l10n.t("train.timetableOnly")).clack(.caption).foregroundStyle(Ink.text2) }
+            LateReasons(stops: view.stops ?? [])
         } content: {
             StopList(stops: view.stops.map { .list($0) } ?? .none, color: operatorColor(op?.brandColor, scheme: scheme), now: now)
             OnboardView(facts: nil, operatorId: view.operatorId, trainType: view.trainType, compact: true)

@@ -1,6 +1,7 @@
 // A live-map train's whole route, stop by stop: the timetable's calls with Trafikverket's (Sweden), Entur's (Norway) and
 // Digitraffic's (Finland) actual, estimated and platform data laid over them, so the train's sheet can list where it has been and where it's
 // going, and which stops nobody reports live (abroad), so those read as timetable times.
+import { causesFromDeviations, type DelayCause } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { eventsFor, fetchAnnouncements, matchAnnouncements, type StopActuals, type StopForMatch } from '../legs/actuals.js';
 import { tripStops } from '../search/timetable.js';
@@ -25,8 +26,10 @@ export interface TrainStopView {
   canceled: boolean;
   /** The train has left this stop (or, at the last one, arrived). */
   passed: boolean;
-  /** Who reports this stop live; null: nobody does (Denmark, SJ in Norway), so its times are the timetable's. */
+  /** Who reports this stop live; null: nobody does (SJ in Norway, Germany), so its times are the timetable's. */
   source: 'trafikverket' | 'entur' | 'digitraffic' | 'rejseplanen' | null;
+  /** Why it's late or changed here, as the source said it (shown in the app's language from data/delay_causes.json). */
+  causes: DelayCause[];
 }
 
 type Planned = { seq: number; stationId: string; name: string; arr: number | null; dep: number | null; source?: TrainStopView['source'] };
@@ -48,6 +51,7 @@ export function mergeStops(planned: Planned[], actuals: Map<number, StopActuals>
       estimatedDep: a?.estimatedDep ?? null,
       platform: a?.platform ?? null,
       canceled: a?.canceled ?? false,
+      causes: a?.causes?.length ? a.causes : causesFromDeviations(a?.deviations ?? []),
       passed: Boolean(last ? a?.actualArr : a?.actualDep),
     };
     const expected = last ? a?.estimatedArr : a?.estimatedDep;

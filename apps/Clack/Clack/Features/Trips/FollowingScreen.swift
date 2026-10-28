@@ -197,13 +197,20 @@ struct FollowingLeg: View {
                 DisclosureGroup(l10n.t("share.stops")) {
                     VStack(spacing: 4) {
                         ForEach(Array(leg.stops.enumerated()), id: \.offset) { _, stop in
-                            HStack {
-                                Text(stop.name).strikethrough(stop.canceled)
-                                Spacer(minLength: 8)
-                                Text(Format.time(stop.dep ?? stop.arr, tz: stop.tz, clock: clock)).monospacedDigit()
-                                if let platform = stop.platform { Text(platform).foregroundStyle(Ink.accentInk) }
+                            VStack(alignment: .leading, spacing: 2) {
+                                HStack {
+                                    Text(stop.name).strikethrough(stop.canceled)
+                                    Spacer(minLength: 8)
+                                    Text(Format.time(stop.dep ?? stop.arr, tz: stop.tz, clock: clock)).monospacedDigit()
+                                    if let platform = stop.platform { Text(platform).foregroundStyle(Ink.accentInk) }
+                                }
+                                .clack(.stopName)
+                                // Why it's late or changed here, under the station.
+                                let causes = l10n.causeNotes(stop.causes ?? [])
+                                if !causes.isEmpty {
+                                    Text(Format.join(causes)).clack(.caption).foregroundStyle(Ink.text2)
+                                }
                             }
-                            .clack(.stopName)
                             .foregroundStyle(stop.passed ? Ink.text3 : Ink.text)
                         }
                     }

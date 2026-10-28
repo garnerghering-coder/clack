@@ -198,10 +198,14 @@ struct StopList: View {
 
     private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
+        // Why it's late or changed here, under the station (as on a trip's page and a board).
+        let causes = l10n.causeNotes(stop.causes ?? [])
+        var notes: [StopRow.Note] = stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : []
+        if !causes.isEmpty { notes.append(.init(Format.join(causes))) }
         // The shared stop row, compact (no flaps in a sheet): passed stops dimmed, the next one in 600.
         return StopRow(
             name: stop.name, emphasis: stop.passed ? .dim : isNext ? .next : .plain, canceled: stop.canceled,
-            notes: stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : [],
+            notes: notes,
             rail: StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below),
             time: times.real ?? times.planned, sched: times.planned, live: times.real != nil, delay: times.real != nil ? times.lateMinutes : nil,
             tz: Format.zone(stationId: stop.stationId), clock: app.settings.clock, platform: stop.platform, compact: true
@@ -343,6 +347,21 @@ struct LiveStationSheet: View {
             } else {
                 rows = []
             }
+        }
+    }
+}
+
+/// The reasons a train is late, from its stops' causes, as one written line at the top of its sheet ("Late because of
+/// an accident"). Only reasons the cause table knows (so they read in the app's language); nothing when there are none.
+struct LateReasons: View {
+    @Environment(L10n.self) private var l10n
+    let stops: [LiveTrainStop]
+
+    var body: some View {
+        let reasons = DelayCauses.reasons(stops.flatMap { $0.causes ?? [] }) { l10n.t($0) }.map(\.text)
+        if !reasons.isEmpty {
+            Text(l10n.t("liveMap.lateBecause", ["reasons": reasons.formatted(.list(type: .and))]))
+                .clack(.rowTitle).foregroundStyle(Ink.text)
         }
     }
 }

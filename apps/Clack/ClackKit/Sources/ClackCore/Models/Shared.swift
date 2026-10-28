@@ -74,6 +74,8 @@ public nonisolated struct SharedJourney: Codable, Hashable, Sendable, Identifiab
         public let platform: String?
         public let canceled: Bool
         public let passed: Bool
+        /// Why it's late or changed here, as the source said it. Nil from servers before build 43.
+        public let causes: [LegStop.Cause]?
     }
 
     public struct Live: Codable, Hashable, Sendable {

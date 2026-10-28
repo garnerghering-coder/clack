@@ -21,10 +21,12 @@ public nonisolated struct LiveTrainStop: Codable, Hashable, Sendable, Identifiab
     public let canceled: Bool
     /// Left this stop, or arrived at the last one.
     public let passed: Bool
+    /// Why it's late or changed here, as the source said it. Nil from servers before build 43.
+    public let causes: [LegStop.Cause]?
 
     public var id: Int { seq }
 
-    public init(seq: Int, stationId: String, name: String, arr: Double?, dep: Double?, actualArr: Double?, actualDep: Double?, estimatedArr: Double?, estimatedDep: Double?, platform: String?, canceled: Bool, passed: Bool) {
+    public init(seq: Int, stationId: String, name: String, arr: Double?, dep: Double?, actualArr: Double?, actualDep: Double?, estimatedArr: Double?, estimatedDep: Double?, platform: String?, canceled: Bool, passed: Bool, causes: [LegStop.Cause]? = nil) {
         self.seq = seq
         self.stationId = stationId
         self.name = name
@@ -37,6 +39,7 @@ public nonisolated struct LiveTrainStop: Codable, Hashable, Sendable, Identifiab
         self.platform = platform
         self.canceled = canceled
         self.passed = passed
+        self.causes = causes
     }
 }
 

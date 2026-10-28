@@ -22,6 +22,12 @@ describe('a live train’s stop list', () => {
     expect(mergeStops(plan, new Map([act(4, { actualArr: 4000 })])).every((s) => s.passed)).toBe(true);
     expect(mergeStops(plan, new Map()).some((s) => s.passed)).toBe(false);
   });
+  it("keeps each stop's delay causes (SJ 547, 27 Oct: Trafikverket's 'Olycka' never reached the app)", () => {
+    const r = mergeStops(plan, new Map([act(2, { causes: [{ src: 'trv', code: 'FHA015', text: 'Olycka' }] }), act(3, { deviations: ['Spårändrat'] })]));
+    expect(r[1]!.causes).toEqual([{ src: 'trv', code: 'FHA015', text: 'Olycka' }]);
+    expect(r[2]!.causes).toEqual([{ src: 'trv', text: 'Spårändrat' }]);
+    expect(r[0]!.causes).toEqual([]);
+  });
 });
 
 describe('a Finnish train’s stop list', () => {

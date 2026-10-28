@@ -142,6 +142,7 @@ public nonisolated enum DelayCauses {
         switch src {
         case "digitraffic": "Fintraffic"
         case "entur": "Entur"
+        case "rejseplanen": "Rejseplanen"
         default: "Trafikverket"
         }
     }

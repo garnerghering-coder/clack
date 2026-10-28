@@ -3,6 +3,7 @@
 // names the traveller, and nothing about how they ride (seat, coach, ticket, notes, other trips) goes in.
 import { randomBytes } from 'node:crypto';
 import { and, eq, inArray } from 'drizzle-orm';
+import type { DelayCause } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { journeyFollowers, legs, sharedJourneys } from '../db/schema.js';
 import { getLeg, getJourney } from '../legs/legs.js';
@@ -28,6 +29,8 @@ export interface SharedStop {
   platform: string | null;
   canceled: boolean;
   passed: boolean;
+  /** Why it's late or changed here, as the source said it. */
+  causes: DelayCause[];
 }
 
 export interface SharedLeg {
@@ -249,6 +252,7 @@ function toSharedLeg(l: Full, now: number): SharedLeg {
           schedDep: ms(s.schedDep),
           platform: s.platform,
           canceled: s.canceled,
+          causes: s.causes ?? [],
           passed: s.actualDep != null || s.actualArr != null || (at !== null && at <= now && departed),
         };
       }),
