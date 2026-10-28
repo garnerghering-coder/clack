@@ -13,6 +13,8 @@ export interface GroupableLeg {
   destStationId: string;
   dep: number;
   arr: number;
+  /** Saved together from one planned journey (legs.planned_group). */
+  group?: string | null;
 }
 
 /** Legs in departure order, split into journeys. Pure, for tests. */
@@ -23,7 +25,9 @@ export function groupLegs(list: GroupableLeg[]): GroupableLeg[][] {
     const cur = out.at(-1);
     const prev = cur?.at(-1);
     const gap = prev ? l.dep - prev.arr : Infinity;
-    if (cur && prev && prev.destStationId === l.originStationId && gap >= 0 && gap <= MAX_TRANSFER_MS) cur.push(l);
+    // A planned journey stays whole whatever the wait; other legs join when they meet within MAX_TRANSFER_MS.
+    const planned = !!l.group && prev?.group === l.group;
+    if (cur && prev && (planned || (prev.destStationId === l.originStationId && gap >= 0 && gap <= MAX_TRANSFER_MS))) cur.push(l);
     else out.push([l]);
   }
   return out;
@@ -32,7 +36,7 @@ export function groupLegs(list: GroupableLeg[]): GroupableLeg[][] {
 /** Recomputes the user's journeys and stores legs.journey_id. A journey's id is its first leg's id. */
 export function regroupJourneys(db: Db, userId: string) {
   const rows = db
-    .select({ id: legs.id, originStationId: legs.originStationId, destStationId: legs.destStationId, schedDep: legs.schedDep, schedArr: legs.schedArr })
+    .select({ id: legs.id, originStationId: legs.originStationId, destStationId: legs.destStationId, schedDep: legs.schedDep, schedArr: legs.schedArr, group: legs.plannedGroup })
     .from(legs)
     .where(eq(legs.userId, userId))
     .all();
@@ -44,6 +48,7 @@ export function regroupJourneys(db: Db, userId: string) {
       destStationId: r.destStationId,
       dep: r.schedDep?.getTime() ?? 0,
       arr: r.schedArr?.getTime() ?? 0,
+      group: r.group,
     })),
   );
   db.transaction((tx) => {

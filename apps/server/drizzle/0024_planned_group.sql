@@ -1,0 +1,1 @@
+ALTER TABLE `legs` ADD `planned_group` text;

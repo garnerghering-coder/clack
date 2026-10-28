@@ -22,6 +22,8 @@ export const legRoutes =
       if (typeof b.tripKey !== 'string' || typeof b.serviceDate !== 'string' || !Number.isInteger(b.fromSeq) || !Number.isInteger(b.toSeq))
         return reply.code(400).send({ error: 'tripKey, serviceDate, fromSeq and toSeq are required' });
       try {
+        // A planned journey's legs share a group (any short id the app makes), so they stay one journey.
+        if (b.group !== undefined && (typeof b.group !== 'string' || !/^[A-Za-z0-9-]{1,64}$/.test(b.group))) return reply.code(400).send({ error: 'bad group' });
         const id = createLeg(db, req.userId, b);
         hooks.afterCreate?.(id);
         return reply.code(201).send(getLeg(db, req.userId, id));

@@ -65,6 +65,8 @@ export interface CreateLegInput {
   toSeq: number;
   /** Save even if the same train is already logged on that date. */
   force?: boolean;
+  /** Saved from one planned journey: legs with the same group stay one journey (legs/journeys.ts). */
+  group?: string | null;
   /** Where you sat, optional. */
   coach?: string | null;
   seat?: string | null;
@@ -100,6 +102,7 @@ export function createLeg(db: Db, userId: string, input: CreateLegInput, now = D
       .values({
         id,
         userId,
+        plannedGroup: input.group ?? null,
         status: schedArr !== null && schedArr < now ? 'completed' : 'planned',
         // Until actual times are attached (step 5), all we know is the timetable.
         dataQuality: 'scheduled_only',

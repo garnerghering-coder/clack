@@ -179,6 +179,8 @@ export const legs = sqliteTable(
     id: text('id').primaryKey(),
     userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
     journeyId: text('journey_id').references(() => journeys.id, { onDelete: 'set null' }),
+    /** Legs saved together from one planned journey share this: they stay one journey whatever the wait between. */
+    plannedGroup: text('planned_group'),
     status: text('status').notNull().default('planned'),
     dataQuality: text('data_quality').notNull(),
     countryCodes: text('country_codes', { mode: 'json' }).$type<string[]>().notNull().default(sql`'[]'`),

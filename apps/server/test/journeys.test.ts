@@ -32,3 +32,14 @@ describe('journey grouping (SPEC §13)', () => {
     expect(g.map((j) => j.length)).toEqual([3, 1]);
   });
 });
+
+describe('planned journeys stay whole', () => {
+  it('keeps legs saved from one planned journey together, even with a wait over four hours', () => {
+    const at = (h: number) => Date.UTC(2026, 9, 29, h);
+    const a = { id: 'a', originStationId: 'jo', destStationId: 'ns', dep: at(6), arr: at(7), group: 'p1' };
+    const b = { id: 'b', originStationId: 'ns', destStationId: 'kd', dep: at(12), arr: at(17), group: 'p1' };
+    expect(groupLegs([a, b]).map((g) => g.map((l) => l.id))).toEqual([['a', 'b']]);
+    // Without the group, the five-hour wait splits them, as before.
+    expect(groupLegs([{ ...a, group: null }, { ...b, group: null }])).toHaveLength(2);
+  });
+});
