@@ -36,6 +36,10 @@ final class AddTrainModel {
     /// then starts at where they got off (`AddTrainLogic.firstEnd`).
     var originChosen = false
     var pickedConnection: TimetableConnection?
+    /// A planned journey opened from the results (its detail screen).
+    var pickedJourney: PlannedJourney?
+    /// Most changes a journey may have: 0 direct only, 1, or 2 (the default). Filters, doesn't sort.
+    var maxChanges = 2
     var saved: LegDetail?
     /// Opened with a trip already chosen (from a board or a link): going back leaves instead of searching.
     var openedWithTrip = false
@@ -54,6 +58,24 @@ final class AddTrainModel {
 
     var results: [TripResult]? {
         response?.results?.filter { AddTrainLogic.includes($0, filter) && (showEarlier || !isEarlier($0)) }
+    }
+
+    /// The planner's journeys for two stations, within the change filter, without those that left earlier today.
+    var journeys: [PlannedJourney]? {
+        response?.journeys?.filter { $0.changes.count <= maxChanges && (showEarlier || !isEarlier($0.dep)) }
+    }
+
+    /// Journeys are hidden by the change filter alone (offer to include more changes).
+    var moreWithMoreChanges: Bool {
+        (response?.journeys ?? []).contains { $0.changes.count > maxChanges && (showEarlier || !isEarlier($0.dep)) }
+    }
+
+    var hasHiddenEarlierJourneys: Bool {
+        !showEarlier && (response?.journeys ?? []).contains { $0.changes.count <= maxChanges && isEarlier($0.dep) }
+    }
+
+    private func isEarlier(_ time: Double) -> Bool {
+        date == Format.todayIso() && time < Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000
     }
 
     /// Some results are hidden because they left earlier today.
@@ -147,6 +169,8 @@ final class AddTrainModel {
         picked = nil
         originChosen = false
         pickedConnection = nil
+        pickedJourney = nil
+        maxChanges = 2
         query = ""
     }
 }

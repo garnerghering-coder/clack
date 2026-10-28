@@ -68,13 +68,18 @@ public nonisolated struct Follow: Codable, Hashable, Sendable {
     public let label: String?
     /// The train while it's on the map.
     public let train: LiveTrain?
+    /// Followed as part of a planned journey: its group and name ("Jönköping C → Kolding").
+    public let journeyGroup: String?
+    public let journeyLabel: String?
 
-    public init(trainNumber: String, serviceDate: String, operatorId: String?, label: String?, train: LiveTrain?) {
+    public init(trainNumber: String, serviceDate: String, operatorId: String?, label: String?, train: LiveTrain?, journeyGroup: String? = nil, journeyLabel: String? = nil) {
         self.trainNumber = trainNumber
         self.serviceDate = serviceDate
         self.operatorId = operatorId
         self.label = label
         self.train = train
+        self.journeyGroup = journeyGroup
+        self.journeyLabel = journeyLabel
     }
 }
 

@@ -171,11 +171,16 @@ public nonisolated struct FollowBody: Encodable, Sendable {
     public let serviceDate: String
     public let operatorId: String?
     public let label: String?
+    /// Followed together as one planned journey, and its name.
+    public let journeyGroup: String?
+    public let journeyLabel: String?
 
-    public init(trainNumber: String, serviceDate: String, operatorId: String?, label: String?) {
+    public init(trainNumber: String, serviceDate: String, operatorId: String?, label: String?, journeyGroup: String? = nil, journeyLabel: String? = nil) {
         self.trainNumber = trainNumber
         self.serviceDate = serviceDate
         self.operatorId = operatorId
         self.label = label
+        self.journeyGroup = journeyGroup
+        self.journeyLabel = journeyLabel
     }
 }

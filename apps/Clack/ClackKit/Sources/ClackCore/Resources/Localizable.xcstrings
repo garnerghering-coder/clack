@@ -647,6 +647,57 @@
         }
       }
     },
+    "add.changesNone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direct only"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara direkt"
+          }
+        }
+      }
+    },
+    "add.changesOne" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to 1 change"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Högst 1 byte"
+          }
+        }
+      }
+    },
+    "add.changesTwo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to 2 changes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Högst 2 byten"
+          }
+        }
+      }
+    },
     "add.confirmTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -953,6 +1004,23 @@
         }
       }
     },
+    "add.includeMoreChanges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Include more changes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta med fler byten"
+          }
+        }
+      }
+    },
     "add.keepAsIs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1034,6 +1102,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inget direkt tåg det datumet."
+          }
+        }
+      }
+    },
+    "add.noJourney" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No journey between these stations on this date."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen resa mellan de här stationerna det här datumet."
+          }
+        }
+      }
+    },
+    "add.noJourneyWithFilter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No journey with this few changes on this date."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen resa med så få byten det här datumet."
           }
         }
       }
@@ -1272,13 +1374,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a train"
+            "value" : "Plan a journey"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lägg till ett tåg"
+            "value" : "Planera en resa"
           }
         }
       }
@@ -4088,6 +4190,91 @@
         }
       }
     },
+    "change.line" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change at {{station}}: {{min}} min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Byte i {{station}}: {{min}} min"
+          }
+        }
+      }
+    },
+    "comfort.normal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normalt"
+          }
+        }
+      }
+    },
+    "comfort.relaxed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relaxed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gott om tid"
+          }
+        }
+      }
+    },
+    "comfort.risky" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Risky"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riskabelt"
+          }
+        }
+      }
+    },
+    "comfort.tight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tight"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snävt"
+          }
+        }
+      }
+    },
     "common.back" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6431,6 +6618,57 @@
         }
       }
     },
+    "journey.addToTrips" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to trips"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lägg till i resor"
+          }
+        }
+      }
+    },
+    "journey.changes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} changes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} byten"
+          }
+        }
+      }
+    },
+    "journey.direct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direct"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direkt"
+          }
+        }
+      }
+    },
     "journey.doorToDoor" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6444,6 +6682,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dörr till dörr"
+          }
+        }
+      }
+    },
+    "journey.fastest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fastest"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snabbast"
+          }
+        }
+      }
+    },
+    "journey.follow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följ"
+          }
+        }
+      }
+    },
+    "journey.following" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Följer"
           }
         }
       }
@@ -6536,6 +6825,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Den här resan finns inte längre."
+          }
+        }
+      }
+    },
+    "journey.oneChange" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 change"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 byte"
+          }
+        }
+      }
+    },
+    "journey.stationMap" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Station map"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationskarta"
           }
         }
       }
@@ -7539,13 +7862,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plan a journey"
+            "value" : "Add to trips"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Planera en resa"
+            "value" : "Lägg till i resor"
           }
         }
       }

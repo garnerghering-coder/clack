@@ -64,6 +64,8 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     /// Nil when the text isn't a search yet; empty when nothing was found or the date is outside the timetable.
     public let results: [TripResult]?
     public let connections: [TimetableConnection]?
+    /// Journeys with up to two changes, direct trains among them, by departure (the planner; nil from older servers).
+    public let journeys: [PlannedJourney]?
     public let outsideTimetable: Bool
     /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable`, `norway` or
     /// `finland` (before that country's record starts).
@@ -71,7 +73,8 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     /// With `norway` or `finland`: the first day that country's trains are on record (YYYY-MM-DD).
     public let historyFrom: String?
 
-    public init(date: String, interpretation: Interpretation, suggestions: [StationHit], results: [TripResult]?, connections: [TimetableConnection]?, outsideTimetable: Bool, history: String?, historyFrom: String? = nil) {
+    public init(date: String, interpretation: Interpretation, suggestions: [StationHit], results: [TripResult]?, connections: [TimetableConnection]?, outsideTimetable: Bool, history: String?, historyFrom: String? = nil, journeys: [PlannedJourney]? = nil) {
+        self.journeys = journeys
         self.date = date
         self.interpretation = interpretation
         self.suggestions = suggestions
@@ -176,8 +179,10 @@ public nonisolated struct CreateLegBody: Encodable, Sendable {
     /// Where you sit, from a ticket ("16", "37"); left out when not known.
     public var coach: String?
     public var seat: String?
+    /// Legs saved together from one planned journey share this, so they stay one journey whatever the wait.
+    public var group: String?
 
-    public init(tripKey: String, serviceDate: String, fromSeq: Int, toSeq: Int, force: Bool? = nil, coach: String? = nil, seat: String? = nil) {
+    public init(tripKey: String, serviceDate: String, fromSeq: Int, toSeq: Int, force: Bool? = nil, coach: String? = nil, seat: String? = nil, group: String? = nil) {
         self.tripKey = tripKey
         self.serviceDate = serviceDate
         self.fromSeq = fromSeq
@@ -185,6 +190,7 @@ public nonisolated struct CreateLegBody: Encodable, Sendable {
         self.force = force
         self.coach = coach
         self.seat = seat
+        self.group = group
     }
 }
 

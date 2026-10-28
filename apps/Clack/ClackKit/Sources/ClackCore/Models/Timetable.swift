@@ -103,3 +103,50 @@ public nonisolated struct Alternatives: Codable, Hashable, Sendable {
         self.connections = connections
     }
 }
+
+/// How comfortable a change is, by the change rule (server `packages/shared/src/changes.ts`): the real wait against the
+/// minimum for that station and those trains.
+public nonisolated enum ChangeComfort: String, Codable, Hashable, Sendable {
+    case risky, tight, normal, relaxed
+}
+
+/// One change in a planned journey.
+public nonisolated struct PlannedChange: Codable, Hashable, Sendable {
+    public let stationId: String
+    public let name: String
+    /// The real wait: the next train's departure minus this one's arrival.
+    public let gapMin: Int
+    /// What the change rule asks for here.
+    public let minMin: Int
+    public let comfort: ChangeComfort
+
+    public init(stationId: String, name: String, gapMin: Int, minMin: Int, comfort: ChangeComfort) {
+        self.stationId = stationId
+        self.name = name
+        self.gapMin = gapMin
+        self.minMin = minMin
+        self.comfort = comfort
+    }
+}
+
+/// A journey from the planner (`GET /api/search` `journeys`): one or more trains with their changes.
+public nonisolated struct PlannedJourney: Codable, Hashable, Sendable, Identifiable {
+    public let legs: [TripResult]
+    public let changes: [PlannedChange]
+    public let dep: Double
+    public let arr: Double
+    public let durationMin: Int
+    /// The quickest of the list.
+    public let fastest: Bool?
+
+    public var id: String { legs.map { "\($0.key)|\($0.serviceDate)|\($0.from.seq)|\($0.to.seq)" }.joined(separator: ">") }
+
+    public init(legs: [TripResult], changes: [PlannedChange], dep: Double, arr: Double, durationMin: Int, fastest: Bool? = nil) {
+        self.legs = legs
+        self.changes = changes
+        self.dep = dep
+        self.arr = arr
+        self.durationMin = durationMin
+        self.fastest = fastest
+    }
+}

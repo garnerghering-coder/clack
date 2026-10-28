@@ -37,6 +37,8 @@ struct AddTrainSheet: View {
             DoneStep(leg: saved) { model.reset() }
         } else if model.manual {
             ManualTripStep(date: model.date, from: model.interpretation?.from, to: model.interpretation?.to) { model.manual = false } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
+        } else if let journey = model.pickedJourney {
+            PlannedJourneyStep(journey: journey) { model.pickedJourney = nil } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
         } else if let connection = model.pickedConnection {
             ConfirmConnectionStep(connection: connection) { model.pickedConnection = nil } onSaved: { model.didSave($0, app.client); app.tripsChanged() }
         } else if let picked = model.picked {
@@ -63,6 +65,8 @@ private struct SearchStep: View {
         DateRow(date: $model.date, tz: Format.zone(country: model.interpretation?.from?.country))
         SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
             .onAppear { focused = true }
+            // Searching gives the results the whole screen: the keyboard and the station suggestions go away.
+            .onSubmit { focused = false }
 
         if model.query.isEmpty {
             FlowLayout(spacing: 8, lineSpacing: 8) {
@@ -119,6 +123,48 @@ private struct SearchStep: View {
 
     @ViewBuilder
     private func results(_ response: SearchResponse) -> some View {
+        if response.journeys != nil, response.interpretation.from != nil, response.interpretation.to != nil, !response.outsideTimetable {
+            journeyResults(response)
+        } else {
+            trainResults(response)
+        }
+    }
+
+    /// Two stations: the planner's journeys, direct and with changes in one list, by departure; a filter for how many
+    /// changes (it filters, it doesn't sort), and when it leaves nothing, the offer to include more changes.
+    @ViewBuilder
+    private func journeyResults(_ response: SearchResponse) -> some View {
+        // While typing, the stations to pick from; once the search is sent, only the results.
+        if focused, !response.suggestions.isEmpty {
+            Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+            stationList(response.suggestions)
+        }
+        FlowLayout(spacing: 8, lineSpacing: 8) {
+            ForEach([0, 1, 2], id: \.self) { n in
+                ChipButton(text: l10n.t(n == 0 ? "add.changesNone" : n == 1 ? "add.changesOne" : "add.changesTwo"), active: model.maxChanges == n) { model.maxChanges = n }
+            }
+        }
+        if model.hasHiddenEarlierJourneys {
+            Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
+        }
+        if let list = model.journeys, !list.isEmpty {
+            VStack(spacing: 16) {
+                ForEach(list) { journey in JourneyResultCard(journey: journey) { model.pickedJourney = journey } }
+            }
+        } else if model.moreWithMoreChanges {
+            Text(l10n.t("add.noJourneyWithFilter")).clack(.body).foregroundStyle(Ink.text2)
+            Button(l10n.t("add.includeMoreChanges")) { model.maxChanges = 2 }.buttonStyle(.clack(wide: true))
+        } else {
+            Text(l10n.t("add.noJourney")).clack(.body).foregroundStyle(Ink.text2)
+        }
+        Button(l10n.t("manual.cta")) { model.manual = true }
+            .buttonStyle(LinkButtonStyle())
+            .frame(maxWidth: .infinity)
+            .padding(.top, 8)
+    }
+
+    @ViewBuilder
+    private func trainResults(_ response: SearchResponse) -> some View {
         let interpretation = response.interpretation
         let hasResults = !(response.results ?? []).isEmpty
         if !response.suggestions.isEmpty
