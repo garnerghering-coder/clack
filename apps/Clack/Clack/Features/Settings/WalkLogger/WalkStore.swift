@@ -121,9 +121,14 @@ final class WalkStore {
 
     // MARK: - Who sees the tool
 
+    /// Shows the test tools in every build while Clack is only on TestFlight (owner, 2026-10-28: the StoreKit check
+    /// below never showed them there). Set to false before the first App Store release (docs/APP_STORE.md).
+    static let alwaysShowTestTools = true
+
     /// The walk tools show in debug builds and TestFlight builds (StoreKit reports TestFlight as the sandbox), never in
     /// App Store builds.
     static func isTestBuild() async -> Bool {
+        if alwaysShowTestTools { return true }
         #if DEBUG
         return true
         #else
