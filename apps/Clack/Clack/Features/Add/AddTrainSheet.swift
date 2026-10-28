@@ -74,7 +74,10 @@ private struct SearchStep: View {
         SearchField(text: $model.query, prompt: l10n.t("add.placeholder"), focus: $focused)
             .onAppear { focused = true }
             // Searching gives the results the whole screen: the keyboard and the station suggestions go away.
-            .onSubmit { focused = false }
+            .onSubmit {
+                focused = false
+                model.searchAgain()
+            }
 
         if model.query.isEmpty {
             FlowLayout(spacing: 8, lineSpacing: 8) {

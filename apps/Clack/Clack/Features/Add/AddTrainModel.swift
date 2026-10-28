@@ -144,6 +144,7 @@ final class AddTrainModel {
         do {
             response = try await client.search(query, date: date)
             searchFailed = false
+            failedTries = 0
             loading = false
         } catch is CancellationError {
             return
@@ -152,7 +153,22 @@ final class AddTrainModel {
         } catch {
             searchFailed = true
             loading = false
+            // A dropped connection or a server still starting: ask again by itself, a few times, 4 s apart.
+            if failedTries < 3 {
+                failedTries += 1
+                try? await Task.sleep(for: .seconds(4))
+                if !Task.isCancelled { retry += 1 }
+            }
         }
+    }
+
+    /// Failed searches in a row (reset by an answer), for the automatic retries.
+    private var failedTries = 0
+
+    /// Search pressed again (or the text submitted): runs the same search once more after a failure.
+    func searchAgain() {
+        failedTries = 0
+        if searchFailed { retry += 1 }
     }
 
     /// An older day's timetable is on its way: ask again every couple of seconds until it's in (every 15 if fetching
