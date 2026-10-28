@@ -116,6 +116,13 @@ struct TrainArtTests {
         #expect(picture("rc6_coaches", nil, "sj").asset == "rc6_coaches-sj")
     }
 
+    @Test func sjNightTrainsShowTheSJRc6PaintedNotFaded() {
+        // SJ's night trains were faded stand-ins (27 Oct): their type had no drawing of its own.
+        let p = picture("rc6_sleeper", nil, "sj")
+        #expect(p.asset == "rc6_coaches-sj")
+        #expect(!p.isStandIn)
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")

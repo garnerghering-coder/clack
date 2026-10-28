@@ -37,6 +37,10 @@ public nonisolated enum TrainArt {
         "x40": Detailed(model: "x40", liveries: ["sj"]),
         "x55": Detailed(model: "x55", liveries: ["sj"]),
         "rc6_coaches": Detailed(model: "rc6_coaches", liveries: ["sj", "tagab"]),
+        // SJ's night trains: the same Rc6, with couchette and sleeper coaches behind it. The drawing is the Rc6 whole
+        // and the end of the first coach (a B7; SJ night trains also carry seated coaches, sj.se "Sittvagn 2 klass"),
+        // so it is the right picture of the train's front (owner, 2026-10-27).
+        "rc6_sleeper": Detailed(model: "rc6_coaches", liveries: ["sj"]),
         // Snälltåget's own locomotive and coaches (hand-made, owner-supplied).
         "snalltaget_coaches": Detailed(model: "snalltaget", liveries: ["snalltaget"]),
         "x60": Detailed(model: "x60", liveries: ["sl"]),
