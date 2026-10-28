@@ -14,6 +14,8 @@ struct TrainPoint {
     var id: String
     var number: String
     var label: String
+    /// Where it's going, the label's second line from zoom 11.
+    var dest: String? = nil
     var color: String
     var mine: Bool
     var followed: Bool
@@ -35,7 +37,7 @@ struct TrainFeatures {
             let f = MLNPointFeature()
             f.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
             f.attributes = [
-                "id": p.id, "number": p.number, "label": p.label, "color": p.color, "mine": p.mine, "followed": p.followed,
+                "id": p.id, "number": p.number, "label": p.label, "dest": p.dest ?? "", "color": p.color, "mine": p.mine, "followed": p.followed,
                 "bearing": p.bearing ?? 0, "hasBearing": p.bearing != nil,
             ]
             byId[p.id] = f
@@ -67,10 +69,26 @@ final class LiveMapController {
 
     private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
 
-    /// Your position on the map: MapLibre's own dot, always there once iOS has allowed it (owner, 2026-10-25), and the
-    /// camera is left where it is.
+    /// What the map shows (Explore's filter panel, Map section): set by the screen, applied whenever the style is ready.
+    var display = MapDisplay.load() { didSet { applyDisplay() } }
+
+    /// Your position on the map: MapLibre's own dot, there once iOS has allowed it unless switched off in the Map
+    /// settings, and the camera is left where it is.
     func showUserDot() {
-        mapView?.showsUserLocation = true
+        mapView?.showsUserLocation = display.myLocation
+    }
+
+    /// Shows or hides the layers the Map settings name: trains, train labels, station dots, station names, your dot.
+    func applyDisplay() {
+        guard let map = mapView, let style = map.style else { return }
+        let groups: [(ids: [String], on: Bool)] = [
+            (["train-far", "train-dot", "train-mine", "train-followed", "train-selected"], display.trains),
+            (["train-label"], display.trains && display.trainLabels),
+            (["live-stations", "rail-stations"], display.stations),
+            (["live-station-labels"], display.stationNames),
+        ]
+        for g in groups { for id in g.ids { style.layer(withIdentifier: id)?.isVisible = g.on } }
+        if !display.myLocation { map.showsUserLocation = false }
     }
 
     /// The locate button: centres on you, at least at zoom 11, and follows you until you move the map yourself.
@@ -100,6 +118,7 @@ final class LiveMapController {
 
     fileprivate func markReady() {
         ready = true
+        applyDisplay()
         onReady()
         reportView()
     }
@@ -364,5 +383,26 @@ enum LiveMapImages {
             g.addPath(path.cgPath)
             g.drawPath(using: .fillStroke)
         }
+    }
+}
+
+/// Explore's map display settings (owner, 2026-10-27): each part can be switched off, so a trains-only or a
+/// stations-only map is possible. Remembered between launches; the train filters are not.
+struct MapDisplay: Codable, Equatable {
+    var myLocation = true
+    var trains = true
+    var trainLabels = true
+    var stations = true
+    var stationNames = true
+
+    private static let key = "explore.mapDisplay"
+
+    static func load() -> MapDisplay {
+        guard let data = UserDefaults.standard.data(forKey: key), let d = try? JSONDecoder().decode(MapDisplay.self, from: data) else { return MapDisplay() }
+        return d
+    }
+
+    func save() {
+        if let data = try? JSONEncoder().encode(self) { UserDefaults.standard.set(data, forKey: Self.key) }
     }
 }

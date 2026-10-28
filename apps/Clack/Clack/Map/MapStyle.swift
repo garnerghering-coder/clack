@@ -202,44 +202,28 @@ nonisolated enum MapStyle {
     }
 
     private static func liveTrainLayers(_ c: Colors, dark isDark: Bool, route: [[String: Any]]) -> [[String: Any]] {
-        let single: [Any] = ["!", ["has", "point_count"]]
         let mine: [Any] = ["==", ["get", "mine"], true]
         func size(_ a: Double, _ b: Double) -> [Any] { ["case", mine, b, a] }
         var layers: [[String: Any]] = [
+            // Zoomed out: a small dot per train in its operator's colour (cheap to draw for a thousand trains); the heading
+            // cone and the number come in from zoom 7.
             [
-                "id": "clusters", "type": "symbol", "source": "trains", "filter": ["has", "point_count"],
-                "layout": [
-                    "icon-image": "cluster", "icon-size": ["step", ["get", "point_count"], 0.85, 10, 1.05, 50, 1.3],
-                    "icon-allow-overlap": true, "icon-ignore-placement": true, "text-field": ["get", "point_count_abbreviated"],
-                    "text-font": ["Noto Sans Medium"], "text-size": ["step", ["get", "point_count"], 12, 10, 13, 50, 15],
-                    "text-allow-overlap": true,
+                "id": "train-far", "type": "circle", "source": "trains", "maxzoom": 7,
+                "paint": [
+                    "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, ["case", mine, 4, 2.2], 5, ["case", mine, 5, 3], 7, ["case", mine, 6, 4]],
+                    "circle-color": ["get", "color"], "circle-stroke-color": c.bg, "circle-stroke-width": 0.6,
                 ],
-                "paint": ["text-color": isDark ? "#ffffff" : "#0a0a0a"],
-            ],
-            // Zoomed out, where the others are clustered, your own trains and the ones you follow stay marked: a ring and a
-            // dot of their own from a source that is never clustered (closer in, the layers below draw them).
-            [
-                "id": "pinned-followed", "type": "circle", "source": "trains-pinned", "maxzoom": 7, "filter": ["==", ["get", "followed"], true],
-                "paint": ["circle-radius": 11, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.text, "circle-stroke-width": 2],
-            ],
-            [
-                "id": "pinned-mine", "type": "circle", "source": "trains-pinned", "maxzoom": 7, "filter": mine,
-                "paint": ["circle-radius": 15, "circle-color": "rgba(248,214,74,0.28)", "circle-stroke-color": "#f8d64a", "circle-stroke-width": 2.5],
-            ],
-            [
-                "id": "pinned-dot", "type": "circle", "source": "trains-pinned", "maxzoom": 7,
-                "paint": ["circle-radius": 5, "circle-color": ["get", "color"], "circle-stroke-color": "#ffffff", "circle-stroke-width": 1.5],
             ],
             // Followed trains (watching, not travelling): a white ring, unlike your own trips' yellow halo.
             [
-                "id": "train-followed", "type": "circle", "source": "trains", "filter": ["all", single, ["==", ["get", "followed"], true]],
+                "id": "train-followed", "type": "circle", "source": "trains", "filter": ["==", ["get", "followed"], true],
                 "paint": ["circle-radius": 10, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": c.text, "circle-stroke-width": 2],
             ],
         ]
         layers += route
         layers += [
             [
-                "id": "train-mine", "type": "circle", "source": "trains", "filter": ["all", single, mine],
+                "id": "train-mine", "type": "circle", "source": "trains", "filter": mine,
                 "paint": ["circle-radius": 13, "circle-color": "rgba(248,214,74,0.28)", "circle-stroke-color": "#f8d64a", "circle-stroke-width": 2],
             ],
             // The selected train: a larger marker under its dot.
@@ -248,7 +232,7 @@ nonisolated enum MapStyle {
                 "paint": ["circle-radius": 11, "circle-color": ["get", "color"], "circle-opacity": 0.35, "circle-stroke-color": "#ffffff", "circle-stroke-width": 2],
             ],
             [
-                "id": "train-dot", "type": "symbol", "source": "trains", "filter": single,
+                "id": "train-dot", "type": "symbol", "source": "trains", "minzoom": 7,
                 "layout": [
                     // With a heading cone (rotated to the bearing) when the direction is known, a plain disc when it isn't.
                     "icon-image": ["case", ["==", ["get", "hasBearing"], true], ["concat", "tpuck-", ["get", "color"]], ["concat", "tdot-", ["get", "color"]]],
@@ -259,12 +243,20 @@ nonisolated enum MapStyle {
                 ],
             ],
             [
-                "id": "train-label", "type": "symbol", "source": "trains", "minzoom": 9, "filter": single,
+                // The train's number, and from zoom 11 where it's going under it: written, in the app's ink, no box.
+                "id": "train-label", "type": "symbol", "source": "trains", "minzoom": 9,
                 "layout": [
-                    "text-field": ["step", ["zoom"], ["get", "number"], 11, ["get", "label"]], "text-font": ["Noto Sans Medium"],
-                    "text-size": 11, "text-offset": [0, 1.3], "text-anchor": "top", "text-optional": true,
+                    "text-field": ["step", ["zoom"], ["format", ["get", "number"], ["text-font": ["literal", ["Noto Sans Medium"]]]],
+                                   11, ["format", ["get", "number"], ["text-font": ["literal", ["Noto Sans Medium"]]],
+                                        "\n", [:] as [String: Any],
+                                        ["coalesce", ["get", "dest"], ""], ["text-font": ["literal", ["Noto Sans Regular"]], "font-scale": 0.9, "text-color": c.label]]],
+                    "text-font": ["Noto Sans Medium"], "text-size": 12, "text-line-height": 1.15,
+                    // Below the dot where there is room, else beside or above it: a train at a busy station keeps its
+                    // label next to the station's name instead of losing it.
+                    "text-variable-anchor": ["top", "right", "left", "bottom"], "text-radial-offset": 1.1,
+                    "text-justify": "auto", "text-optional": true, "text-max-width": 12,
                 ],
-                "paint": ["text-color": c.text, "text-halo-color": c.bg, "text-halo-width": 1.4],
+                "paint": ["text-color": c.text, "text-halo-color": c.bg, "text-halo-width": 1.6, "text-halo-blur": 0.4],
             ],
             liveStationLabelLayer(c),
         ]
@@ -313,7 +305,8 @@ nonisolated enum MapStyle {
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains-pinned"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains"] = [
-                "type": "geojson", "data": emptyCollection(), "cluster": true, "clusterMaxZoom": 6, "clusterRadius": 36,
+                // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).
+                "type": "geojson", "data": emptyCollection(),
             ] as [String: Any]
             layers += liveStationLayers(c)
             layers += liveTrainLayers(c, dark: isDark, route: routeLayers(color: c.fallback, c, dark: isDark))

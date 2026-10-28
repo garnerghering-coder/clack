@@ -23,9 +23,20 @@ struct ExploreLogicTests {
         #expect(!ExploreLogic.visible(train(), f, followed: []))
         f = .init(); f.operators = ["mtr"]
         #expect(!ExploreLogic.visible(train(), f, followed: []))
-        f = .init(); f.onlyDelayed = true
-        #expect(!ExploreLogic.visible(train(delay: 5), f, followed: []))
-        #expect(ExploreLogic.visible(train(delay: 6), f, followed: []))
+        f = .init(); f.delay = .late5
+        #expect(!ExploreLogic.visible(train(delay: 4), f, followed: []))
+        #expect(ExploreLogic.visible(train(delay: 5), f, followed: []))
+        f.delay = .late15
+        #expect(!ExploreLogic.visible(train(delay: 14), f, followed: []))
+        #expect(ExploreLogic.visible(train(delay: 15), f, followed: []))
+        f.delay = .onTime
+        #expect(ExploreLogic.visible(train(delay: 2), f, followed: []))
+        #expect(!ExploreLogic.visible(train(delay: 3), f, followed: []))
+        f = .init(); f.countries = ["DK"]
+        #expect(!ExploreLogic.visible(train(), f, followed: []))
+        #expect(ExploreLogic.country(ofTrainId: "dk:12@8600626|2026-10-28") == "DK")
+        #expect(ExploreLogic.country(ofTrainId: "fi:IC 1|2026-10-28") == "FI")
+        #expect(ExploreLogic.country(ofTrainId: "1|2026-10-28") == "SE")
         f = .init(); f.onlyMine = true
         #expect(ExploreLogic.visible(train(mine: true), f, followed: []))
         #expect(!ExploreLogic.visible(train(), f, followed: []))
@@ -36,8 +47,8 @@ struct ExploreLogicTests {
 
     @Test func theFilterBadgeCountsEachChoice() {
         var f = ExploreLogic.Filters()
-        f.products = ["a", "b"]; f.operators = ["c"]; f.onlyDelayed = true
-        #expect(f.count == 4)
+        f.products = ["a", "b"]; f.operators = ["c"]; f.delay = .late5; f.countries = ["NO"]
+        #expect(f.count == 5)
     }
 
     @Test func aMovedTrainKeepsEverythingButItsPosition() {

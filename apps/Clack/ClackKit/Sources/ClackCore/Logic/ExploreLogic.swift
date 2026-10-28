@@ -14,20 +14,28 @@ public nonisolated enum ExploreLogic {
     /// A GPS fix older than this is shown as old, not as the train's position now (the server's GPS_FRESH_MS).
     public static let gpsFreshMs = 120_000.0
 
+    /// How late a train must be to show (replacing "only delayed", owner 2026-10-27).
+    public enum Delay: String, CaseIterable, Sendable {
+        case any, onTime, late5, late15
+    }
+
     public struct Filters: Equatable, Sendable {
         public var products: Set<String> = []
         public var operators: Set<String> = []
-        public var onlyDelayed = false
+        /// SE, NO, FI, DK; empty means all.
+        public var countries: Set<String> = []
+        public var delay: Delay = .any
         public var onlyMine = false
         public var onlyFollowed = false
 
-        /// What the filter button's badge counts: each product, each operator and each toggle.
-        public var count: Int { products.count + operators.count + (onlyDelayed ? 1 : 0) + (onlyMine ? 1 : 0) + (onlyFollowed ? 1 : 0) }
+        /// What the filter button's badge counts: each product, operator and country, and each setting that's on.
+        public var count: Int { products.count + operators.count + countries.count + (delay != .any ? 1 : 0) + (onlyMine ? 1 : 0) + (onlyFollowed ? 1 : 0) }
 
-        public init(products: Set<String> = [], operators: Set<String> = [], onlyDelayed: Bool = false, onlyMine: Bool = false, onlyFollowed: Bool = false) {
+        public init(products: Set<String> = [], operators: Set<String> = [], countries: Set<String> = [], delay: Delay = .any, onlyMine: Bool = false, onlyFollowed: Bool = false) {
             self.products = products
             self.operators = operators
-            self.onlyDelayed = onlyDelayed
+            self.countries = countries
+            self.delay = delay
             self.onlyMine = onlyMine
             self.onlyFollowed = onlyFollowed
         }
@@ -35,10 +43,24 @@ public nonisolated enum ExploreLogic {
 
     public static func followKey(number: String, date: String) -> String { "\(number)|\(date)" }
 
+    /// The country of a train on the map, from its id ("dk:…", "fi:…", "no:…"; Sweden's carry no prefix).
+    public static func country(ofTrainId id: String) -> String {
+        if id.hasPrefix("dk:") { return "DK" }
+        if id.hasPrefix("fi:") { return "FI" }
+        if id.hasPrefix("no:") { return "NO" }
+        return "SE"
+    }
+
     public static func visible(_ train: LiveTrain, _ f: Filters, followed: Set<String>) -> Bool {
         if f.onlyMine && !train.mine { return false }
         if f.onlyFollowed && !followed.contains(followKey(number: train.number, date: train.date)) { return false }
-        if f.onlyDelayed && !((train.delayMin ?? 0) > 5) { return false }
+        switch f.delay {
+        case .any: break
+        case .onTime: if (train.delayMin ?? 0) >= 3 { return false }
+        case .late5: if (train.delayMin ?? 0) < 5 { return false }
+        case .late15: if (train.delayMin ?? 0) < 15 { return false }
+        }
+        if !f.countries.isEmpty && !f.countries.contains(country(ofTrainId: train.id)) { return false }
         if !f.products.isEmpty && !(train.product.map(f.products.contains) ?? false) { return false }
         if !f.operators.isEmpty && !(train.operatorId.map(f.operators.contains) ?? false) { return false }
         return true
@@ -108,7 +130,8 @@ public nonisolated enum ExploreLogic {
         if (streamDown && now - lastMessageAt > 20_000) || mode == "stopped" { return .unavailable }
         if upstreamAt > 0 && now - upstreamAt > staleMs { return .delayed(upstreamAt: upstreamAt) }
         if shown == 0 && zoom >= 6.5 { return .none(filtered: filtered) }
-        return .running(total: total, simulated: mode == "simulate")
+        // With filters on, the count is of the trains that match them, so it follows the filters.
+        return .running(total: filtered ? shown : total, simulated: mode == "simulate")
     }
 
     public enum PositionKind: Equatable, Sendable {

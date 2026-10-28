@@ -254,13 +254,23 @@ struct ExploreScreen: View {
     private var filtersContent: some View {
         @Bindable var model = model
         return VStack(alignment: .leading, spacing: 8) {
+                Text(l10n.t("liveMap.showTrains").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2)
                 FlowLayout(spacing: 8, lineSpacing: 8) {
                     ForEach(ExploreLogic.products, id: \.self) { p in
                         ChipButton(text: l10n.t("products.\(p)"), active: model.filters.products.contains(p)) { toggle(&model.filters.products, p) }
                     }
                 }
                 FlowLayout(spacing: 8, lineSpacing: 8) {
-                    ChipButton(text: l10n.t("liveMap.onlyDelayed"), active: model.filters.onlyDelayed) { model.filters.onlyDelayed.toggle() }
+                    ForEach(["SE", "NO", "FI", "DK"], id: \.self) { c in
+                        ChipButton(text: l10n.t("countries.\(c)"), active: model.filters.countries.contains(c)) { toggle(&model.filters.countries, c) }
+                    }
+                }
+                FlowLayout(spacing: 8, lineSpacing: 8) {
+                    ForEach(ExploreLogic.Delay.allCases, id: \.self) { d in
+                        ChipButton(text: l10n.t("liveMap.delay.\(d.rawValue)"), active: model.filters.delay == d) { model.filters.delay = d }
+                    }
+                }
+                FlowLayout(spacing: 8, lineSpacing: 8) {
                     ChipButton(text: l10n.t("liveMap.onlyMine"), active: model.filters.onlyMine) { model.filters.onlyMine.toggle() }
                     ChipButton(text: l10n.t("liveMap.onlyFollowed"), active: model.filters.onlyFollowed) { model.filters.onlyFollowed.toggle() }
                 }
@@ -281,12 +291,31 @@ struct ExploreScreen: View {
                     }
                     .buttonStyle(.plain).accessibilityAddTraits(on ? .isSelected : [])
                 }
+                Text(l10n.t("liveMap.mapSection").uppercased()).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+                FlowLayout(spacing: 8, lineSpacing: 8) {
+                    displayChip("liveMap.show.myLocation", \.myLocation)
+                    displayChip("liveMap.show.trainDots", \.trains)
+                    displayChip("liveMap.show.trainLabels", \.trainLabels)
+                    displayChip("liveMap.show.stations", \.stations)
+                    displayChip("liveMap.show.stationNames", \.stationNames)
+                }
                 HStack(spacing: 8) {
                     if model.filteredCount > 0 { ChipButton(text: l10n.t("liveMap.clearFilters")) { model.filters = .init() } }
                     ChipButton(text: l10n.t("common.done")) { model.showFilters = false }
                 }
             }
             .padding(.horizontal, 16).padding(.vertical, 16)
+    }
+
+    /// One of the Map settings: switched on the controller (which hides the layers) and remembered.
+    private func displayChip(_ key: String, _ path: WritableKeyPath<MapDisplay, Bool>) -> some View {
+        ChipButton(text: l10n.t(key), active: model.controller.display[keyPath: path]) {
+            var d = model.controller.display
+            d[keyPath: path].toggle()
+            model.controller.display = d
+            d.save()
+            if path == \.myLocation && d.myLocation { model.controller.showUserDot() }
+        }
     }
 
     private func toggle(_ set: inout Set<String>, _ value: String) {

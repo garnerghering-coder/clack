@@ -7356,6 +7356,74 @@
         }
       }
     },
+    "liveMap.delay.any" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Any delay"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla"
+          }
+        }
+      }
+    },
+    "liveMap.delay.late15" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15+ min late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15+ min sena"
+          }
+        }
+      }
+    },
+    "liveMap.delay.late5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5+ min late"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5+ min sena"
+          }
+        }
+      }
+    },
+    "liveMap.delay.onTime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On time"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I tid"
+          }
+        }
+      }
+    },
     "liveMap.delayedData" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7628,6 +7696,23 @@
         }
       }
     },
+    "liveMap.mapSection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta"
+          }
+        }
+      }
+    },
     "liveMap.myLocation" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7743,23 +7828,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tåget går inte just nu."
-          }
-        }
-      }
-    },
-    "liveMap.onlyDelayed" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only delayed"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bara försenade"
           }
         }
       }
@@ -7992,6 +8060,91 @@
         }
       }
     },
+    "liveMap.show.myLocation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My location"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min position"
+          }
+        }
+      }
+    },
+    "liveMap.show.stationNames" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Station names"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationsnamn"
+          }
+        }
+      }
+    },
+    "liveMap.show.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationer"
+          }
+        }
+      }
+    },
+    "liveMap.show.trainDots" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tåg"
+          }
+        }
+      }
+    },
+    "liveMap.show.trainLabels" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Train labels"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tågnummer"
+          }
+        }
+      }
+    },
     "liveMap.showAll" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8022,6 +8175,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa på livekartan"
+          }
+        }
+      }
+    },
+    "liveMap.showTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa tåg"
           }
         }
       }

@@ -139,9 +139,13 @@ final class ExploreModel {
     /// The latest from the stream, not the copy from when it was tapped.
     var selectedTrain: LiveTrain? { selected.map { trains[$0.train.id] ?? $0.train } }
 
+    /// The operators with a train in view, A to Z by name (owner, 2026-10-27).
     var operatorsShown: [String] {
         _ = trainsVersion
-        return Array(Set(trains.values.compactMap(\.operatorId))).sorted()
+        let inView = trains.values.filter { controller.contains($0.lat, $0.lon) }
+        let ids = Set(inView.compactMap(\.operatorId)).union(filters.operators)
+        let name = { (id: String) in self.app?.operatorsById[id]?.name ?? id }
+        return ids.sorted { name($0).localizedCaseInsensitiveCompare(name($1)) == .orderedAscending }
     }
 
     func trainHits() -> [LiveTrain] { ExploreLogic.trainHits(Array(trains.values), query: query) }
@@ -229,8 +233,30 @@ final class ExploreModel {
         }
         if let r = route, list.contains(where: { $0.id == r.id }), let train = trains[r.id] { drawSplit(train) }
         trainsVersion += 1
+        // Zoomed out (every train a small dot, no detail to see), the map is redrawn at most every 10 s instead of with
+        // each 2-second update; a snapshot, or zooming in, draws at once.
+        if !close && !replace {
+            let wait = 10_000 - (start - lastFarRender)
+            if wait > 0 {
+                if farRender == nil {
+                    farRender = Task { [weak self] in
+                        try? await Task.sleep(for: .milliseconds(Int(wait)))
+                        guard let self, !Task.isCancelled else { return }
+                        self.farRender = nil
+                        self.lastFarRender = CACurrentMediaTime() * 1000
+                        self.scheduleRender()
+                    }
+                }
+                return
+            }
+            lastFarRender = start
+        }
         scheduleRender()
     }
+
+    /// When the zoomed-out map was last redrawn, and the redraw waiting for its turn.
+    private var lastFarRender: Double = 0
+    private var farRender: Task<Void, Never>?
 
     // MARK: drawing the trains
 
@@ -278,7 +304,7 @@ final class ExploreModel {
                 if step.done { glides[train.id] = nil } else { moving = true }
             }
             points.append(TrainPoint(
-                id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number,
+                id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number, dest: train.destination,
                 color: color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
                 bearing: train.bearing, lat: position.lat, lon: position.lon
             ))
