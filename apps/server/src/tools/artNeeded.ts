@@ -14,18 +14,32 @@ import { productOf, type Product } from '../search/timetable.js';
 
 interface TypeInfo { id: string; name: string; uncertain?: boolean }
 
-/** typeId → the drawn model and its liveries, as TrainArt.swift's `detailed` table says. */
-export function drawnModels(swift: string): Map<string, { model: string; liveries: string[] }> {
-  const out = new Map<string, { model: string; liveries: string[] }>();
-  for (const m of swift.matchAll(/"([a-z0-9_]+)": Detailed\(model: "([a-z0-9_]+)", liveries: \[([^\]]*)\]/g))
-    out.set(m[1]!, { model: m[2]!, liveries: [...m[3]!.matchAll(/"([^"]+)"/g)].map((x) => x[1]!) });
+/**
+ * typeId → the drawn model, its liveries and the livery each operator gets (`liveryOf`, e.g. Vores Tog → `arriva`), as
+ * TrainArt.swift's `detailed` table says.
+ */
+export function drawnModels(swift: string): Map<string, { model: string; liveries: string[]; liveryOf: Record<string, string> }> {
+  const out = new Map<string, { model: string; liveries: string[]; liveryOf: Record<string, string> }>();
+  for (const m of swift.matchAll(/"([a-z0-9_]+)": Detailed\(model: "([a-z0-9_]+)", liveries: \[([^\]]*)\](?:, notFor: \[[^\]]*\])?(?:, liveryOf: \[([^\]]*)\])?/g)) {
+    const liveryOf = Object.fromEntries([...(m[4] ?? '').matchAll(/"([^"]+)": "([^"]+)"/g)].map((x) => [x[1]!, x[2]!]));
+    out.set(m[1]!, { model: m[2]!, liveries: [...m[3]!.matchAll(/"([^"]+)"/g)].map((x) => x[1]!), liveryOf });
+  }
   return out;
+}
+
+/** Uncertain typeId → the drawn models it may be (TrainArt.swift's `candidates`). */
+export function candidateModels(swift: string): Map<string, string[]> {
+  const block = swift.slice(swift.indexOf('candidates: [String: [String]] = ['));
+  const body = block.slice(0, block.indexOf('\n    ]'));
+  return new Map([...body.matchAll(/"([a-z0-9_]+)": \[([^\]]*)\]/g)].map((m) => [m[1]!, [...m[2]!.matchAll(/"([^"]+)"/g)].map((x) => x[1]!)]));
 }
 
 export function artNeeded(db: Db, date: string): string {
   const types = new Map((JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'data/train_types.json'), 'utf8')).types as TypeInfo[]).map((t) => [t.id, t]));
   const brands = new Map(loadBrands().map((b) => [b.id, b]));
-  const drawn = drawnModels(fs.readFileSync(path.join(REPO_ROOT, 'apps/Clack/ClackKit/Sources/ClackCore/Logic/TrainArt.swift'), 'utf8'));
+  const swift = fs.readFileSync(path.join(REPO_ROOT, 'apps/Clack/ClackKit/Sources/ClackCore/Logic/TrainArt.swift'), 'utf8');
+  const drawn = drawnModels(swift);
+  const candidates = candidateModels(swift);
   const files = new Set(fs.readdirSync(path.join(REPO_ROOT, 'assets/trains')).map((f) => f.replace(/\.svg$/, '')));
   // One row per trip running that day: operator, product, number and its two ends (for the type rules).
   const rows = db.all<{ op: string | null; route_type: string; category: string; number: string | null; country: string; first: string; last: string }>(sql`
@@ -47,8 +61,11 @@ export function artNeeded(db: Db, date: string): string {
   }
   const need = [...groups.values()].filter((g) => {
     if (!g.type) return true;
-    const d = drawn.get(g.type);
-    return !d || !d.liveries.includes(g.op) || !files.has(`${d.model}-${g.op}`);
+    // Painted when the type, or one of the models an uncertain type names, is drawn in this operator's livery.
+    return ![g.type, ...(candidates.get(g.type) ?? [])].some((id) => {
+      const d = drawn.get(id);
+      return d && d.liveries.includes(g.op) && files.has(`${d.model}-${d.liveryOf[g.op] ?? g.op}`);
+    });
   });
   need.sort((a, b) => b.total - a.total);
   const country = (g: (typeof need)[number]) => [...g.byCountry].sort((a, b) => b[1] - a[1]).map(([c, n]) => `${c} ${n}`).join(', ');

@@ -123,6 +123,19 @@ struct TrainArtTests {
         #expect(!p.isStandIn)
     }
 
+    @Test func danishTrainsGetTheirOperatorsDrawing() {
+        #expect(picture("dk_ic3", "railcar", "dsb").asset == "dk_ic3-dsb")
+        #expect(picture("dk_eb_talgo", "loco", "dsb").asset == "dk_eb_talgo-dsb")
+        #expect(picture("dk_desiro", "dk_railcar", "vores-tog").asset == "dk_desiro-arriva")
+        #expect(picture("dk_mireo_b", "coradia", "midttrafik").asset == "dk_mireo_b-midtjyske")
+        #expect(picture("dk_ic3_ir4", "railcar", uncertain: true, "dsb") == .init(asset: "dk_ic3-dsb", isStandIn: false, isUnknown: false))
+        #expect(picture("dk_stog", "coradia", uncertain: true, "dsb").asset == "dk_stog_sa-dsb")
+        #expect(picture("dk_lint_desiro", "railcar", uncertain: true, "nt").asset == "dk_lint41_nj-nordjyske")
+        #expect(picture("dk_lint_desiro", "railcar", uncertain: true, "vores-tog").asset == "dk_lint41-vores-tog")
+        // Not drawn yet: the faded unpainted LINT.
+        #expect(picture("dk_regiosprinter", "dk_railcar", "lokaltog") == .init(asset: "dk_lint41-plain", isStandIn: true, isUnknown: false))
+    }
+
     @Test func everyDrawingTheTableNamesIsInTheAssetCatalogue() {
         for (typeId, d) in TrainArt.detailed {
             #expect(UIImage(named: "\(d.model)-plain") != nil, "\(typeId): plain")

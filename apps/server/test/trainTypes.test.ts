@@ -100,9 +100,38 @@ describe('typical train types', () => {
     const ids = new Set(types.map((t) => t.id));
     const brands = new Set(loadBrands().map((b) => b.id));
     for (const r of [...rules, ...(trainTypeCatalog().composition_rules ?? [])]) {
-      expect(ids.has(r.type), r.type).toBe(true);
+      // A null type is a rule that gives matching trips no type (sources disagree).
+      if (r.type !== null) expect(ids.has(r.type), r.type).toBe(true);
       if (r.match.operator) expect(brands.has(r.match.operator), r.match.operator).toBe(true);
     }
+  });
+});
+
+describe('Danish train types', () => {
+  // Real ends from the Danish timetable for 2026-10-29.
+  const t = (op: string, product: string, a: string, b: string) => typicalTrainType(op, product, null, [a, b]);
+  it('picks each line by operator and ends (DENMARK_TRAINS.md)', () => {
+    expect(t('dsb', 'commuter', 'Hundige', 'Hillerød')).toBe('dk_stog');
+    expect(t('dsb', 'intercity', 'København H', 'Hamburg Hbf')).toBe('dk_eb_talgo');
+    expect(t('dsb', 'regional', 'København H', 'Næstved')).toBe('dk_eb_dd');
+    expect(t('dsb', 'regional', 'København Østerport', 'Kalundborg')).toBe('dk_ic3');
+    expect(t('dsb', 'intercity', 'Aarhus H', 'CPH Airport')).toBe('dk_ic3_ir4');
+    expect(t('dsb', 'regional', 'Fredericia', 'Odense')).toBe('dk_ic3_ir4');
+    expect(t('vores-tog', 'regional', 'Svendborg', 'Odense')).toBe('dk_desiro');
+    expect(t('vores-tog', 'regional', 'Thisted', 'Struer')).toBe('dk_lint_desiro');
+    expect(t('vores-tog', 'regional', 'Esbjerg', 'Ribe')).toBe('dk_lint41');
+    expect(t('lokaltog', 'regional', 'Jægersborg', 'Nærum')).toBe('dk_regiosprinter');
+    expect(t('lokaltog', 'regional', 'Grænge', 'Nakskov')).toBe('dk_ic2');
+    expect(t('lokaltog', 'regional', 'Slagelse', 'Tølløse')).toBe('dk_ic2');
+    expect(t('lokaltog', 'regional', 'Køge', 'Faxe Ladeplads')).toBe('dk_lint_ic2');
+    expect(t('lokaltog', 'regional', 'Holbæk', 'Nykøbing Sj.')).toBe('dk_lint41');
+    expect(t('nt', 'regional', 'Hjørring', 'Hirtshals')).toBe('dk_lint_desiro');
+    expect(t('midttrafik', 'regional', 'Lemvig', 'Thyborøn')).toBe('dk_mireo_b');
+  });
+
+  it("gives Kystbanen's trains no type while sources disagree", () => {
+    expect(t('dsb', 'regional', 'Helsingør', 'Næstved')).toBeNull();
+    expect(t('dsb', 'regional', 'Holbæk', 'Snekkersten')).toBeNull();
   });
 });
 

@@ -86,13 +86,27 @@ public nonisolated enum TrainArt {
         "fi_ic_cab": Detailed(model: "fi_ic_cab", liveries: ["vr-fi"]),
         // Registered, no rule uses it: which wagon types it shows is not recorded.
         "fi_ic_coaches": Detailed(model: "fi_ic_coaches", liveries: ["vr-fi"]),
+        // Denmark (the owner's drawings, 2026-10-28; DENMARK_TRAINS.md). One livery per operator, as the data can't tell
+        // repainted units apart: Vores Tog's Desiros keep Arriva's paint (no dated photo shows another), its LINTs the
+        // teal. The other drawn schemes (`dk_ic3-dsb-silver`, `dk_ir4-dsb-grey`, `dk_stog_sa-dsb-old`,
+        // `dk_lint41-gocollective`) are real but on a minority of units, so no operator gets them.
+        "dk_ic3": Detailed(model: "dk_ic3", liveries: ["dsb"]),
+        "dk_ir4": Detailed(model: "dk_ir4", liveries: ["dsb"]),
+        "dk_ic2": Detailed(model: "dk_ic2", liveries: ["lokaltog"]),
+        "dk_stog_sa": Detailed(model: "dk_stog_sa", liveries: ["dsb"]),
+        "dk_eb_dd": Detailed(model: "dk_eb_dd", liveries: ["dsb"]),
+        "dk_eb_talgo": Detailed(model: "dk_eb_talgo", liveries: ["dsb"]),
+        "dk_lint41": Detailed(model: "dk_lint41", liveries: ["vores-tog", "lokaltog"]),
+        "dk_lint41_nj": Detailed(model: "dk_lint41_nj", liveries: ["nt"], liveryOf: ["nt": "nordjyske"]),
+        "dk_desiro": Detailed(model: "dk_desiro", liveries: ["vores-tog", "nt"], liveryOf: ["vores-tog": "arriva", "nt": "nordjyske"]),
+        "dk_mireo_b": Detailed(model: "dk_mireo_b", liveries: ["midttrafik"], liveryOf: ["midttrafik": "midtjyske"]),
     ]
 
     /// The drawn model nearest to each family ("art" in data/train_types.json), shown unpainted and faded when the
     /// train's own model isn't drawn. Steam and night trains have no closer drawing than a locomotive with coaches.
     public static let standIn: [String: String] = [
         "x2000": "x2000", "x3": "x3", "coradia": "x60", "regina": "regina", "contessa": "x11", "flirt": "no_flirt",
-        "double_deck": "x40", "railcar": "y31", "loco": "rc6_coaches", "loco_sleeper": "rc6_coaches", "steam": "rc6_coaches",
+        "double_deck": "x40", "railcar": "y31", "dk_railcar": "dk_lint41", "loco": "rc6_coaches", "loco_sleeper": "rc6_coaches", "steam": "rc6_coaches",
     ]
     /// No type at all: the most common kind of train here, a regional electric unit.
     public static let unknownStandIn = "x60"
@@ -132,6 +146,12 @@ public nonisolated enum TrainArt {
         // 2026-10-24). The Sm5 is drawn in HSL's livery, which every Sm5 wears, so it comes first for VR and HSL alike; Sm5 is also the most common (739 of 1,047 commuter compositions on 2026-10-24).
         "fi_sr2_sr3": ["fi_sr2_ic", "fi_sr3_ic"],
         "fi_commuter": ["fi_sm5", "fi_sm4", "fi_sm2"],
+        // Denmark: one drawing serves the S-tog SA and SE (same cab car); IC3 and IR4 are both red, so the IC3 is right
+        // either way; NT's LINTs are the newer ones (17 of its 25 sets), Vores Tog's the first generation.
+        "dk_stog": ["dk_stog_sa"],
+        "dk_ic3_ir4": ["dk_ic3", "dk_ir4"],
+        "dk_lint_desiro": ["dk_lint41_nj", "dk_lint41"],
+        "dk_lint_ic2": ["dk_lint41", "dk_ic2"],
     ]
 
     /// The drawing of a candidate for an uncertain type, in the operator's own livery; nil when none has been drawn

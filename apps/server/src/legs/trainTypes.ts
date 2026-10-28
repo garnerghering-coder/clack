@@ -24,7 +24,8 @@ interface Rule {
    * stations, so a trip that leaves the line doesn't match). For lines an operator runs with a different type.
    */
   match: { operator?: string; product?: string; number_min?: number; number_max?: number; ends?: string[]; both_ends?: string[]; vehicle_prefix?: string };
-  type: string;
+  /** null: trips that match have no type (sources disagree), so later rules don't give them one. */
+  type: string | null;
 }
 interface CompositionRule {
   match: { operator?: string; product?: string; locomotive?: boolean; cars?: number; cars_max?: number; both_ends?: string[] };

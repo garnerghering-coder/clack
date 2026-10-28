@@ -8,17 +8,7 @@ never guessed (docs/TRAIN_ART.md); the photo links are Wikimedia Commons searche
 
 | Trains/day | Operator | Type | Countries | Drawing today | Photos |
 |---|---|---|---|---|---|
-| 1171 | DSB | S-tog SA or SE (one of these) | DK 1171 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=DSB%20S-tog%20SA) |
-| 1012 | VR | Sm5, Sm4 or Sm2 (one of these) | FI 1012 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=VR%20Sm5%2C%20Sm4) |
-| 493 | SL | X10p or X15p (one of these) | SE 493 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=SL%20X10p) |
-| 482 | Vores Tog | LINT 41 or Desiro (one of these) | DK 471, DE 11 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Vores%20Tog%20LINT%2041) |
-| 218 | Flytoget | Flytoget (Type 71 / 78) (one of these) | NO 218 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Flytoget%20Flytoget%20(Type%2071%20%2F%2078)) |
-| 153 | Vy | Type 69 or 72 (one of these) | NO 153 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Vy%20Type%2069) |
-| 125 | NT | LINT 41 or Desiro (one of these) | DK 125 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=NT%20LINT%2041) |
-| 123 | VR | Sr2 or Sr3 + coaches (one of these) | FI 121, SE 2 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=VR%20Sr2) |
-| 83 | Krösatåg | X11 or X14 (one of these) | SE 83 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Kr%C3%B6sat%C3%A5g%20X11) |
-| 70 | Midttrafik | Mireo Plus B | DK 70 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Midttrafik%20Mireo%20Plus%20B) |
-| 60 | Krösatåg | Itino (Y31/Y32) or Y2 (one of these) | SE 60 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Kr%C3%B6sat%C3%A5g%20Itino%20(Y31%2FY32)) |
+| 148 | Lokaltog | RegioSprinter | DK 148 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Lokaltog%20RegioSprinter) |
 | 22 | Värmlandstrafik | Y31 Itino | SE 22 | y31 drawn in krosatag, vasttagen; not in varmlandstrafik | [search](https://commons.wikimedia.org/w/index.php?search=V%C3%A4rmlandstrafik%20Y31%20Itino) |
 | 15 | Vy | Locomotive + coaches | SE 8, NO 7 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=Vy%20Locomotive%20%2B%20coaches) |
 | 8 | SJ Nord | Di 4 + coaches | NO 8 | none (faded stand-in) | [search](https://commons.wikimedia.org/w/index.php?search=SJ%20Nord%20Di%204%20%2B%20coaches) |
@@ -32,7 +22,6 @@ never guessed (docs/TRAIN_ART.md); the photo links are Wikimedia Commons searche
 
 | Trains/day | Operator | Product | Countries |
 |---|---|---|---|
-| 842 | Lokaltog | regional | DK 842 |
-| 799 | DSB | intercity | DK 787, DE 12 |
+| 173 | DSB | regional | DK 173 |
 | 65 | Krösatåg | regional | SE 65 |
 | 48 | VR | night | FI 48 |
