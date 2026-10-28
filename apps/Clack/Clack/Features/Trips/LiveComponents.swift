@@ -165,7 +165,20 @@ struct ConnectionChip: View {
     }
 
     var body: some View {
-        StatusLine(.band(band), text)
+        // The change rule's verdict when the server sends what it needs (build 50 on); the old walk-based one before.
+        if let comfort = result.comfort, let gap = result.gapMin {
+            StatusLine(.band(Self.band(comfort)), "\(l10n.t("comfort.\(comfort.rawValue)")) · \(l10n.t("connection.wait", ["min": String(gap)]))")
+        } else {
+            StatusLine(.band(band), text)
+        }
+    }
+
+    static func band(_ c: ChangeComfort) -> DelayBand {
+        switch c {
+        case .relaxed, .normal: .onTime
+        case .tight: .slight
+        case .risky: .veryLate
+        }
     }
 }
 

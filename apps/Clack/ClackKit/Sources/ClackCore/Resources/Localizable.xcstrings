@@ -4683,6 +4683,23 @@
         }
       }
     },
+    "connection.wait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min to change"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{min}} min att byta"
+          }
+        }
+      }
+    },
     "connection.walk" : {
       "extractionState" : "manual",
       "localizations" : {

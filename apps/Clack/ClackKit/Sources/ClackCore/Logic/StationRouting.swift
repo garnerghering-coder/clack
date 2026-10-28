@@ -162,6 +162,10 @@ public nonisolated struct ConnectionResult: Equatable, Sendable {
     public var slackSeconds: Double?
     /// The walk is an estimate from the station's size, not a route on a map.
     public var estimated: Bool
+    /// The change rule's verdict (ChangeRule), the one shown everywhere: the real wait, its minimum, the comfort.
+    public var gapMin: Int?
+    public var minMin: Int?
+    public var comfort: ChangeComfort?
 
     public init(status: ConnectionStatus, layoverSeconds: Int? = nil, walkSeconds: Double? = nil, slackSeconds: Double? = nil, estimated: Bool) {
         self.status = status

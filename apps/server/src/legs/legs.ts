@@ -271,7 +271,7 @@ const legColumns = {
   borderEvidence: legs.borderEvidence,
 };
 
-function attachRefs<T extends { operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
+function attachRefs<T extends { id: string; operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
   const ops = new Map(db.select().from(operators).all().map((o) => [o.id, o]));
   const ids = [...new Set(rows.flatMap((r) => [r.originStationId, r.destStationId]))];
   const st = new Map(
@@ -284,11 +284,23 @@ function attachRefs<T extends { operatorId: string | null; originStationId: stri
           .map((s) => [s.id, s])
       : [],
   );
+  // For the change rule in the app (ClackCore ChangeRule): the country most of each leg's stops are in.
+  const countries = new Map<string, (string | null)[]>();
+  for (let i = 0; i < rows.length; i += 500) {
+    const chunk = rows.slice(i, i + 500).map((r) => r.id);
+    for (const c of db.all<{ id: string; country: string; n: number }>(sql`
+      select ls.leg_id id, s.country, count(*) n from leg_stops ls join stations s on s.id = ls.station_id
+      where ls.leg_id in (${sql.join(chunk.map((x) => sql`${x}`), sql`, `)}) group by ls.leg_id, s.country`))
+      for (let k = 0; k < c.n; k++) (countries.get(c.id) ?? countries.set(c.id, []).get(c.id)!).push(c.country);
+  }
   return rows.map((r) => ({
     ...r,
     operator: r.operatorId && ops.get(r.operatorId) ? withLogo(ops.get(r.operatorId)!) : null,
     origin: st.get(r.originStationId) ?? null,
     destination: st.get(r.destStationId) ?? null,
+    /** The change rule's tier of the station the leg starts at (hub / mid / default), and the train's country. */
+    originTier: tierOf(r.originStationId),
+    trainCountry: countryOfStops(countries.get(r.id) ?? []),
   }));
 }
 

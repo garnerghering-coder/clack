@@ -367,7 +367,7 @@ struct StationMapScreen: View {
                     if layover {
                         HStack(spacing: 12) {
                             Text(walkMin.map { l10n.t("stationMap.walk", ["min": String($0)]) } ?? "—").clack(.walkBig).monospacedDigit().foregroundStyle(Ink.text)
-                            if let conn = connection(fromE, toE, route) { ConnectionChip(result: conn) }
+                            // Walking time only: the change's rating is the change rule's (the gauge), shown on the trip.
                             Spacer(minLength: 0)
                             IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: clearRoute)
                         }
@@ -465,14 +465,6 @@ struct StationMapScreen: View {
         .clack(.stopName).fontWeight(here || !multi ? .semibold : .regular)
         .foregroundStyle(here || !multi ? Ink.text : Ink.text2)
         .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func connection(_ fromE: Endpoint?, _ toE: Endpoint?, _ route: StationRoute?) -> ConnectionResult? {
-        guard arr != nil, dep != nil, let from, let to, fromE?.kind == .track, toE?.kind == .track else { return nil }
-        return StationRouting.connectionStatus(ConnectionInput(
-            arrival: arr, departure: dep, arrivalPlatform: from, departurePlatform: to, canceledA: canceledA, canceledB: canceledB,
-            walkSeconds: route.map { Double($0.seconds) }, sizeClass: info?.sizeClass ?? .large, timesLive: live
-        ))
     }
 
     /// A time to look at opening hours for: the hours picker sits invisibly over the chip, as the web's time input does.

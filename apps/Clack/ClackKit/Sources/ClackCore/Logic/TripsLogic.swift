@@ -171,7 +171,15 @@ public nonisolated enum TripsLogic {
                 timesLive: times.live
             )
         )
-        return (result, noPath)
+        var judged = result
+        if let arrival = times.arrival, let departure = times.departure {
+            let gap = Int(((departure - arrival) / 60_000).rounded(.down))
+            let minimum = ChangeRule.minimum(tier: b.originTier, from: a.trainCountry, to: b.trainCountry)
+            judged.gapMin = gap
+            judged.minMin = minimum
+            judged.comfort = a.canceled || b.canceled ? nil : ChangeRule.comfort(gapMin: gap, minMin: minimum)
+        }
+        return (judged, noPath)
     }
 
     /// Everything the Layover Guide needs about a change (the web's map link).
