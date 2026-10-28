@@ -23,10 +23,15 @@ public nonisolated struct TicketTrain: Hashable, Sendable, Identifiable {
     /// The coach ("Vagn 16", "Carriage 11") and seat ("Plats 37", "Seat 105") when the ticket has a seat reservation.
     public var coach: String?
     public var seat: String?
+    /// Who issued the ticket: a DB ticket's legs inside Germany have no timetable here (the import says so).
+    public var issuer: Issuer = .sj
+
+    public enum Issuer: String, Hashable, Sendable { case sj, dsb, db }
 
     public var id: String { "\(date)|\(dep)|\(from)|\(to)" }
 
-    public init(operatorName: String? = nil, trainNumber: String? = nil, date: String, from: String, to: String, dep: String, arr: String? = nil, coach: String? = nil, seat: String? = nil) {
+    public init(operatorName: String? = nil, trainNumber: String? = nil, date: String, from: String, to: String, dep: String, arr: String? = nil, coach: String? = nil, seat: String? = nil, issuer: Issuer = .sj) {
+        self.issuer = issuer
         self.operatorName = operatorName
         self.trainNumber = trainNumber
         self.date = date
@@ -39,7 +44,7 @@ public nonisolated struct TicketTrain: Hashable, Sendable, Identifiable {
     }
 }
 
-/// Reads trains off SJ's ticket PDFs and receipts, in Swedish and English (docs/TRAIN_ART.md's rule applies here too:
+/// Reads trains off SJ's ticket PDFs and receipts, in Swedish and English, and DSB and DB tickets (`dsb`, `db` below) (docs/TRAIN_ART.md's rule applies here too:
 /// nothing guessed). Built from real documents: an SJ ticket has one page per train, with a date line, two "HH:mm
 /// Station" lines and a "Tåg/Train N" line, then the operator; an SJ receipt lists "A–B", "Operator, terms" and
 /// "10 okt 2026 kl 12:05" for each train, and has no train number. A ticket with a seat reservation has "Vagn 16" and
@@ -84,8 +89,16 @@ public nonisolated enum TicketReader {
     // MARK: Text
 
     public static func trains(fromPages pages: [String]) -> [TicketTrain] {
-        var out = pages.compactMap(ticketPage)
-        if out.isEmpty { out = receipt(pages.joined(separator: "\n")) }
+        let all = pages.joined(separator: "\n")
+        var out: [TicketTrain]
+        if all.contains("Print Selv-billet") {
+            out = dsb(pages)
+        } else if all.contains("Online-Ticket"), all.contains("Halt Datum Zeit Gleis Produkte") {
+            out = db(all)
+        } else {
+            out = pages.compactMap(ticketPage)
+            if out.isEmpty { out = receipt(all) }
+        }
         var seen = Set<String>()
         return out.filter { seen.insert($0.id).inserted }
     }
@@ -171,6 +184,80 @@ public nonisolated enum TicketReader {
             }
         }
         return out
+    }
+
+    // MARK: DSB and DB
+
+    /// "Kolding St." and "Fredericia st" as the timetable names them ("Kolding", "Fredericia").
+    static func stationName(_ printed: String) -> String {
+        printed.replacingOccurrences(of: #"\s+[Ss]t\.?$"#, with: "", options: .regularExpression)
+    }
+
+    /// A DSB "Print Selv-billet" (Danish). Page 2, "Din Rejseplan", has the date ("Dato: 06.11.25") and under
+    /// "Detaljer" the stations two by two (a leg's start and end), then each leg's "Afg: 18:01" and "Ank: 20:02", and
+    /// one "InterCity-tog 50169 til Fredericia St." per leg ("Regional-tog", "IC-Lyntog"). Page 1 prints "Tognr
+    /// InterCityLyn 910" with "Vognnr. 63" and "Pladsnr. 24" when a seat is reserved. Names and ID numbers on the ticket
+    /// are never read.
+    private static func dsb(_ pages: [String]) -> [TicketTrain] {
+        let all = pages.joined(separator: "\n")
+        guard let d = firstMatch(#"Dato:\s*(\d{2})\.(\d{2})\.(\d{2})"#, in: all), let day = Int(d[0]), let month = Int(d[1]), let yy = Int(d[2]),
+              let detailsAt = all.range(of: "Detaljer") else { return [] }
+        let date = String(format: "%04d-%02d-%02d", 2000 + yy, month, day)
+        let details = String(all[detailsAt.upperBound...])
+        let l = lines(details)
+        let stations = l.prefix { !$0.hasPrefix("Afg:") && !$0.hasPrefix("Ank:") }.map(stationName)
+        let deps = allMatches(#"Afg:\s*(\d{1,2}):(\d{2})"#, in: details).map { time($0[0], $0[1]) }
+        let arrs = allMatches(#"Ank:\s*(\d{1,2}):(\d{2})"#, in: details).map { time($0[0], $0[1]) }
+        let numbers = allMatches(#"[\p{L}-]*tog\s+(\d+)\s+til\b"#, in: details).map { $0[0] }
+        let count = stations.count / 2
+        guard count > 0, deps.count >= count, arrs.count >= count else { return [] }
+        // The reserved seat belongs to the train page 1 names; a one-train ticket's seat is that train's.
+        let seatTrain = firstMatch(#"Tognr\s+\S+\s+(\d+)"#, in: all)?.first
+        let coach = firstMatch(#"Vognnr\.?\s*(\w{1,8})"#, in: all)?.first.flatMap { $0.contains(where: \.isNumber) ? $0 : nil }
+        let seat = firstMatch(#"Pladsnr\.?\s*(\w{1,8})"#, in: all)?.first.flatMap { $0.contains(where: \.isNumber) ? $0 : nil }
+        return (0..<count).map { i in
+            let number = numbers.indices.contains(i) ? numbers[i] : nil
+            let seated = seatTrain.map { $0 == number } ?? (count == 1)
+            return TicketTrain(
+                trainNumber: number, date: date, from: stations[2 * i], to: stations[2 * i + 1], dep: deps[i], arr: arrs[i],
+                coach: seated ? coach : nil, seat: seated ? seat : nil, issuer: .dsb
+            )
+        }
+    }
+
+    /// A DB "Online-Ticket" (German). Its table "Halt / Datum / Zeit / Gleis / Produkte" reads, per leg: the two
+    /// stations, two dates ("15.10."), "ab 18:10" and "an 18:27", up to two platforms, then the train: "IC 5764", or a
+    /// line with the number in brackets ("RE 8 (11429)", "NBE RB82" over "(82200)"). The year comes from "Einfache Fahrt
+    /// am 15.10.2023". A leg that runs inside Germany is read like the rest; finding no timetable for it is the import's
+    /// to say.
+    private static func db(_ text: String) -> [TicketTrain] {
+        guard let y = firstMatch(#"\bam\s+\d{1,2}\.\d{1,2}\.(\d{4})"#, in: text)?.first ?? firstMatch(#"Gültigkeit:\s*\d{1,2}\.\d{1,2}\.(\d{4})"#, in: text)?.first,
+              let tableAt = text.range(of: "Halt Datum Zeit Gleis Produkte") else { return [] }
+        let l = lines(String(text[tableAt.upperBound...]))
+        var out: [TicketTrain] = []
+        for i in l.indices where i >= 4 && i + 1 < l.count {
+            guard let dep = firstMatch(#"^ab\s+(\d{1,2}):(\d{2})$"#, in: l[i]), let arr = firstMatch(#"^an\s+(\d{1,2}):(\d{2})$"#, in: l[i + 1]),
+                  let day = firstMatch(#"^(\d{1,2})\.(\d{1,2})\.$"#, in: l[i - 2]), let d = Int(day[0]), let m = Int(day[1]) else { continue }
+            // After the times: platforms (short, with a digit), then the train, its number maybe on the next line.
+            var j = i + 2
+            while j < l.count, j < i + 4, firstMatch(#"^\d{1,2}[a-z]?$"#, in: l[j]) != nil { j += 1 }
+            guard j < l.count else { continue }
+            var product = l[j]
+            if j + 1 < l.count, firstMatch(#"^\(\d+\)$"#, in: l[j + 1]) != nil { product += " " + l[j + 1] }
+            let number = firstMatch(#"\((\d+)\)"#, in: product)?.first ?? firstMatch(#"(\d+)$"#, in: product)?.first
+            out.append(TicketTrain(
+                trainNumber: number, date: String(format: "%04d-%02d-%02d", Int(y) ?? 0, m, d),
+                from: stationName(l[i - 4]), to: stationName(l[i - 3]), dep: time(dep[0], dep[1]), arr: time(arr[0], arr[1]), issuer: .db
+            ))
+        }
+        return out
+    }
+
+    private static func allMatches(_ pattern: String, in text: String) -> [[String]] {
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
+        return regex.matches(in: text, range: NSRange(text.startIndex..., in: text)).map { m in
+            (1..<m.numberOfRanges).compactMap { Range(m.range(at: $0), in: text).map { String(text[$0]) } }
+        }
     }
 
     // MARK: Matching

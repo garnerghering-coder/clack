@@ -17564,6 +17564,40 @@
         }
       }
     },
+    "ticketImport.noTimetable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not imported: no timetable for this day"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte importerad: ingen tidtabell för den här dagen"
+          }
+        }
+      }
+    },
+    "ticketImport.notCovered" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not imported: Germany isn't covered yet"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte importerad: Tyskland finns inte med än"
+          }
+        }
+      }
+    },
     "ticketImport.notFound" : {
       "extractionState" : "manual",
       "localizations" : {

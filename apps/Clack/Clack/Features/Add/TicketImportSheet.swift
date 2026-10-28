@@ -22,7 +22,9 @@ struct TicketFile: Identifiable, Hashable {
 final class TicketImportModel {
     enum Phase { case reading, unreadable, ready, saving, done }
     /// `addSeat`: the train is already saved and the ticket says where you sit, which the trip doesn't have yet.
-    enum State { case matching, found, notFound, already, addSeat, added, seatAdded, failed }
+    /// `notCovered`: a station of the leg isn't in Clack (a DB ticket's German legs); `noTimetable`: no timetable covers
+    /// the day. Neither is imported, and the row says why.
+    enum State { case matching, found, notFound, notCovered, noTimetable, already, addSeat, added, seatAdded, failed }
 
     struct Row: Identifiable {
         let train: TicketTrain
@@ -58,11 +60,14 @@ final class TicketImportModel {
         rows = trains.map { Row(train: $0) }
         phase = .ready
         let have = (try? await client.legs()) ?? []
-        await withTaskGroup(of: (String, TripResult?).self) { group in
+        await withTaskGroup(of: (String, TripResult?, State?).self) { group in
             for train in trains {
-                group.addTask { (train.id, await Self.find(train, client)) }
+                group.addTask {
+                    let found = await Self.find(train, client)
+                    return (train.id, found.match, found.missing)
+                }
             }
-            for await (id, match) in group {
+            for await (id, match, missing) in group {
                 guard let i = rows.firstIndex(where: { $0.id == id }) else { continue }
                 rows[i].match = match
                 if let match {
@@ -78,7 +83,7 @@ final class TicketImportModel {
                         rows[i].selected = true
                     }
                 } else {
-                    rows[i].state = .notFound
+                    rows[i].state = missing ?? .notFound
                 }
             }
         }
@@ -86,15 +91,23 @@ final class TicketImportModel {
 
     /// Search the two stations on the date (with an arrow between them, so each printed name only has to be a fair
     /// match), then the same with the ticket's train number. Waits while the server fetches an older day's timetable.
-    private nonisolated static func find(_ train: TicketTrain, _ client: APIClient) async -> TripResult? {
-        if let hit = await search("\(train.from) → \(train.to)", train, client) { return hit }
-        if let number = train.trainNumber { return await search("\(number) \(train.from) → \(train.to)", train, client) }
-        return nil
+    /// Without a match, `missing` says why when it's known: a station Clack doesn't have (on a DB ticket, a leg inside
+    /// Germany), or a day no timetable covers.
+    private nonisolated static func find(_ train: TicketTrain, _ client: APIClient) async -> (match: TripResult?, missing: State?) {
+        let first = await search("\(train.from) → \(train.to)", train, client)
+        if let hit = first.match { return (hit, nil) }
+        // A station Clack doesn't know: searching by the number could only find some other train of that number.
+        let known = first.response.map { $0.interpretation.from != nil && $0.interpretation.to != nil } ?? true
+        if known, let number = train.trainNumber, let hit = await search("\(number) \(train.from) → \(train.to)", train, client).match { return (hit, nil) }
+        guard let response = first.response else { return (nil, nil) }
+        if train.issuer == .db && (response.interpretation.from == nil || response.interpretation.to == nil) { return (nil, .notCovered) }
+        if response.outsideTimetable || response.history == "unavailable" { return (nil, .noTimetable) }
+        return (nil, nil)
     }
 
     /// One search, asked again while the day is being fetched ("loading", every 3 s) or after a failure (every 15 s, or
     /// a network error), for up to three minutes, like adding a train does.
-    private nonisolated static func search(_ text: String, _ train: TicketTrain, _ client: APIClient) async -> TripResult? {
+    private nonisolated static func search(_ text: String, _ train: TicketTrain, _ client: APIClient) async -> (match: TripResult?, response: SearchResponse?) {
         let started = Date.now
         while Date.now.timeIntervalSince(started) < 180 {
             guard let response = try? await client.search(text, date: train.date) else {
@@ -104,10 +117,10 @@ final class TicketImportModel {
             switch response.history {
             case "loading": try? await Task.sleep(for: .seconds(3))
             case "failed": try? await Task.sleep(for: .seconds(15))
-            default: return TicketReader.pick(response.results ?? [], for: train)
+            default: return (TicketReader.pick(response.results ?? [], for: train), response)
             }
         }
-        return nil
+        return (nil, nil)
     }
 
     func save(_ client: APIClient) async {
@@ -230,6 +243,8 @@ struct TicketImportSheet: View {
         case .matching: l10n.t("ticketImport.matching")
         case .found: l10n.t("ticketImport.found")
         case .notFound: l10n.t("ticketImport.notFound")
+        case .notCovered: l10n.t("ticketImport.notCovered")
+        case .noTimetable: l10n.t("ticketImport.noTimetable")
         case .already: l10n.t("ticketImport.already")
         case .addSeat: l10n.t("ticketImport.addSeat", ["seat": seat])
         case .seatAdded: l10n.t("ticketImport.seatAdded", ["seat": seat])
