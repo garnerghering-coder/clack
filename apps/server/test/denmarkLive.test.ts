@@ -70,7 +70,7 @@ describe('Danish trains from the archive while Rejseplanen is down', () => {
 describe('Danish trains that share a number, and Rejseplanen\'s stubs', () => {
   const j = (over: Partial<Journey>): Journey => ({
     jid: 'x', date: '2026-10-27', name: 'Re 75', number: '75', line: '75', category: 'Re', operator: 'NT', admin: null, direction: null,
-    cancelled: false, stops: [], messages: [], pos: { lat: 57, lon: 10 }, ends: { firstUic: '8600032', firstMin: 1421, lastUic: '8600020', lastMin: 1458 }, ...over,
+    cancelled: false, stops: [], notices: [], pos: { lat: 57, lon: 10 }, ends: { firstUic: '8600032', firstMin: 1421, lastUic: '8600020', lastMin: 1458 }, ...over,
   });
   it('keeps four trains called "Re 75" apart, and drops a no-number stub of a numbered train', async () => {
     const { withoutStubs } = await import('../src/livemap/denmark.js');

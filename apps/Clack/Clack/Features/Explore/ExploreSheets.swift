@@ -199,7 +199,7 @@ struct StopList: View {
     private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
         // Why it's late or changed here, under the station (as on a trip's page and a board).
-        let causes = l10n.causeNotes(stop.causes ?? [])
+        let causes = l10n.shownNotes(stop.causes ?? [])
         var notes: [StopRow.Note] = stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : []
         if !causes.isEmpty { notes.append(.init(Format.join(causes))) }
         // The shared stop row, compact (no flaps in a sheet): passed stops dimmed, the next one in 600.

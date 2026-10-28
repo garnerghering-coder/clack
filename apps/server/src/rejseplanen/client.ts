@@ -7,6 +7,7 @@
 // Positions are worked out by Rejseplanen from live delays, not GPS, so Clack shows them as estimated.
 // Times are "HHMMSS", or "DDHHMMSS" with a day offset, local (Copenhagen) to the journey's date.
 import { TokenBucket } from '../digitraffic/client.js';
+import { parseNotice, type Notice } from './notices.js';
 import { feedFailed, feedOk } from '../lib/health.js';
 import { serviceTimeToUtc, ymdToIso } from '../lib/time.js';
 
@@ -144,8 +145,8 @@ export interface Journey {
   direction: string | null;
   cancelled: boolean;
   stops: Stop[];
-  /** Service messages (HIM) on the journey or its line, as text. */
-  messages: string[];
+  /** Service messages (HIM) on the journey or its line, sorted into train and station notices (notices.ts). */
+  notices: Notice[];
   pos: { lat: number; lon: number } | null;
   /** From the journey id: its first and last stop and their planned times (HHMM), for matching the timetable. */
   ends: JourneyEnds | null;
@@ -231,12 +232,14 @@ function stopOf(c: Common, s: RawStop, date: string): Stop {
 export function journeyOf(c: Common, j: RawJourney): Journey {
   const prod = j.prodX !== undefined ? c.prodL?.[j.prodX] : undefined;
   const him = new Map((c.himL ?? []).map((h) => [h.hid, h]));
-  const texts = [
+  const notices = new Map<string, Notice>();
+  for (const h of [
     ...(j.msgL ?? []).filter((m) => m.type === 'HIM' && m.himX !== undefined).map((m) => c.himL?.[m.himX!]),
     ...(prod?.himIdL ?? []).map((id) => him.get(id)),
-  ]
-    .map((h) => [h?.head, h?.text].filter(Boolean).join(': '))
-    .filter((t) => t.length > 0);
+  ]) {
+    const n = parseNotice(h?.head, h?.text);
+    if (n) notices.set(`${n.head}|${n.where.join('|')}`, n);
+  }
   // Duplicates happen (the first stop can be listed twice in a position answer).
   const stops: Stop[] = [];
   for (const s of j.stopL ?? []) {
@@ -259,7 +262,7 @@ export function journeyOf(c: Common, j: RawJourney): Journey {
     direction: j.dirTxt ?? null,
     cancelled: !!j.isCncl,
     stops,
-    messages: [...new Set(texts)],
+    notices: [...notices.values()],
     pos: j.pos ? { lat: j.pos.y / 1e6, lon: j.pos.x / 1e6 } : null,
     ends: endsOf(j.jid),
   };

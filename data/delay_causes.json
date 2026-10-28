@@ -1307,5 +1307,15 @@
       "key": "cause.trackObstruction",
       "verified": false
     }
-  }
+  },
+  "_rjComment": "rj: Rejseplanen's Danish notices, matched on their heading by regular expression (first match wins), to a locale key; named groups fill the key's {{placeholders}}. Meanings from Den Danske Ordbog (ordnet.dk): elevator = lift, ude af drift = out of order, spor = platform track, vogne = coaches, aflyst = cancelled, sporarbejde = track work, signalfejl = signal fault, togbus = rail replacement bus, forsinket = delayed. Seen in DSB's messages on 2026-10-28 (DENMARK_DATA_FINDINGS.md).",
+  "rj": [
+    { "pattern": "^Elevatoren på (?<station>.+?) (?:ved )?spor (?<track>[0-9][0-9 ,og-]*?) er ude af drift", "key": "notice.liftOutTrack", "kind": "notice" },
+    { "pattern": "^Elevatoren på (?<station>.+?) er ude af drift", "key": "notice.liftOut", "kind": "notice" },
+    { "pattern": "kører med færre vogne", "key": "cause.shortTrain", "kind": "notice" },
+    { "pattern": "\\b(?:er )?aflyst\\b", "key": "cause.canceled", "kind": "cause" },
+    { "pattern": "\\bsignalfejl\\b", "key": "cause.signalFault", "kind": "cause" },
+    { "pattern": "\\bsporarbejde\\b", "key": "cause.engineeringWork", "kind": "cause" },
+    { "pattern": "\\b(?:togbus|togbusser)\\b", "key": "cause.busReplaces", "kind": "notice" }
+  ]
 }

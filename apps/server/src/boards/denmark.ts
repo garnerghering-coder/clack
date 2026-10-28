@@ -1,6 +1,7 @@
 // Departure and arrival boards for Danish stations, from Rejseplanen's live data (rejseplanen/client.ts), and the
 // timetable-only board any station without a live source gets (rows straight from the timetable, no live times; the
 // board says so with `live: false`). normalizeDenmarkBoard and timetableRows' row building are pure.
+import { serviceCauses, type Notice } from '../rejseplanen/notices.js';
 import { delayMinutes, type DelayCause } from '@clack/shared';
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
@@ -21,8 +22,8 @@ export function productOfCategory(cat: string | null): Product {
   return 'regional';
 }
 
-/** Rejseplanen's service messages as causes, shown as written (no code table for Denmark). */
-export const rejseplanenCauses = (messages: string[]): DelayCause[] => messages.map((text) => ({ src: 'rejseplanen', text }));
+/** Rejseplanen's train notices as causes (a station's lift notice isn't the train's: notices.ts). */
+export const rejseplanenCauses = (notices: Notice[]): DelayCause[] => serviceCauses(notices);
 
 export interface DenmarkBoardContext {
   type: BoardType;
@@ -67,7 +68,7 @@ export function normalizeDenmarkBoard(entries: BoardEntry[], ctx: DenmarkBoardCo
     const endName = (endUic && ctx.names(endUic)) || (dep ? j.direction : null);
     const product = call?.product ?? productOfCategory(j.category);
     const operatorId = call?.operatorId ?? matched?.operatorId ?? null;
-    const causes = rejseplanenCauses(j.messages);
+    const causes = rejseplanenCauses(j.notices);
     // A live time in the past is when it happened as far as Rejseplanen knows; it stays an estimate until the
     // archive confirms it the next morning, so `actual` is never set from here.
     const done = live !== null ? live <= ctx.now : advertised + 60_000 <= ctx.now;

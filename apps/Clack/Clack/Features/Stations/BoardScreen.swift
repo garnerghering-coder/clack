@@ -232,7 +232,7 @@ private struct StationBoardRow: View {
         let op = row.operatorId.flatMap { app.operatorsById[$0] }
         let type = row.trainType.flatMap { id in app.trainTypes.first { $0.id == id } }
         let changed = BoardLogic.platformChanged(row, now: now)
-        let notes = l10n.causeNotes(row.allCauses)
+        let notes = l10n.shownNotes(row.allCauses)
         let line = BoardRowView<OperatorBadge>.Line(
             time: row.shown, sched: row.advertised, tz: tz, destination: row.endpoints.joined(separator: ", "),
             via: row.via.isEmpty ? nil : l10n.t(arrivals ? "board.from" : "board.via", ["stops": row.via.joined(separator: ", ")]),

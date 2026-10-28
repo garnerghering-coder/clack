@@ -12,6 +12,12 @@ export interface DelayCause {
   src: CauseSource;
   code?: string;
   text?: string;
+  /** The full message when `text` is its heading (Rejseplanen), for "Show original". */
+  body?: string;
+  /** The language of `text`/`body` when it isn't the app's own: `da` for Rejseplanen. */
+  lang?: string;
+  /** About the station's lifts, walkways and the like, not the train: kept off the train's stop list. */
+  facility?: boolean;
 }
 
 export type CauseKind = 'cause' | 'notice';

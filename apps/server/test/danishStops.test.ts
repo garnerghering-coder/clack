@@ -28,7 +28,7 @@ describe('Danish trains always get their stops', () => {
     const db = openDb(':memory:');
     const journey = {
       jid: 'J1', date: '2026-10-28', name: 'Re 2968', number: '2968', line: null, category: 'Re', operator: 'DSB', admin: null, direction: null,
-      cancelled: false, messages: [], pos: null, ends: null,
+      cancelled: false, notices: [], pos: null, ends: null,
       stops: ['Horsens', 'Vejle'].map((name, i) => ({ uic: null, name, lat: null, lon: null, arrPlanned: 1e12 + i * 6e5, arrLive: null, depPlanned: 1e12 + i * 6e5, depLive: null, arrPlatform: null, depPlatform: null, arrPlatformPlanned: null, depPlatformPlanned: null, arrCancelled: false, depCancelled: false, prognosis: null })),
     } as Journey;
     let limited = false;

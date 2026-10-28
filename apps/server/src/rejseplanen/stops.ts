@@ -7,7 +7,7 @@
 import type { Db } from '../db/client.js';
 import { addCauses, deviationTexts } from '../legs/causes.js';
 import type { StopActuals } from '../legs/actuals.js';
-import { rejseplanenCauses } from '../boards/denmark.js';
+import { noticesByStop } from './notices.js';
 import { rejseplanen, RejseplanenUnavailable, type Journey, type RejseplanenClient } from './client.js';
 import { stationOfUic, TripMatcher, uicOfStation } from './match.js';
 import type { TrainStopView } from '../livemap/trainStops.js';
@@ -62,12 +62,14 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
   }
   const j = cached.journey;
   if (!j) return out;
-  const causes = rejseplanenCauses(j.messages);
+  // Each stop's notices: the train's on the stretch they name, a station's own (lifts) on that station only.
+  const byStop = noticesByStop(j.notices, j.stops.map((x) => x.name));
   for (const s of ref.stops) {
     const uic = uicOfStation(s.stationId);
     if (!uic) continue;
     const r = j.stops.find((x) => x.uic === uic && ((s.schedDep !== null && minute(x.depPlanned) === minute(s.schedDep)) || (s.schedArr !== null && minute(x.arrPlanned) === minute(s.schedArr))));
     if (!r) continue;
+    const causes = byStop[j.stops.indexOf(r)] ?? [];
     const reported = r.prognosis === 'PROGNOSED';
     const past = (t: number | null) => t !== null && t <= now;
     out.set(s.seq, {
@@ -129,8 +131,9 @@ export async function journeyStopsView(db: Db, jid: string, opts: { now?: number
   }
   const j = cached.journey;
   if (!j?.stops.length) return null;
-  const causes = addCauses([], rejseplanenCauses(j.messages));
+  const byStop = noticesByStop(j.notices, j.stops.map((x) => x.name));
   const out = j.stops.map((s, i): TrainStopView => {
+    const causes = addCauses([], byStop[i] ?? []);
     const ours = s.uic ? stationOfUic(db, s.uic) : null;
     const reported = s.prognosis === 'PROGNOSED';
     const past = (t: number | null) => t !== null && t <= now;

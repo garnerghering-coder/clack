@@ -206,7 +206,7 @@ struct FollowingLeg: View {
                                 }
                                 .clack(.stopName)
                                 // Why it's late or changed here, under the station.
-                                let causes = l10n.causeNotes(stop.causes ?? [])
+                                let causes = l10n.shownNotes(stop.causes ?? [])
                                 if !causes.isEmpty {
                                     Text(Format.join(causes)).clack(.caption).foregroundStyle(Ink.text2)
                                 }

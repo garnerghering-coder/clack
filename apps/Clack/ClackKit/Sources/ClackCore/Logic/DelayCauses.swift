@@ -19,6 +19,15 @@ public nonisolated enum DelayCauses {
         public let kind: Kind
         /// What to show without a key: the source's text (Digitraffic: the Finnish name).
         public let text: String?
+        /// The key's placeholders, from a matched pattern (Rejseplanen: the station and platform).
+        public var values: [String: String] = [:]
+    }
+
+    /// A Rejseplanen notice heading pattern (`rj` in the table).
+    struct Pattern: Decodable, Sendable {
+        let pattern: String
+        let key: String
+        let kind: String?
     }
 
     struct Entry: Decodable, Sendable {
@@ -32,16 +41,18 @@ public nonisolated enum DelayCauses {
         let trv: [String: Entry]
         let trvText: [String: Entry]
         let dt: [String: Entry]
+        let rj: [Pattern]
 
         /// Trafikverket's announced Swedish text (lower case) to its entry: the old exact-text lookup, from the table.
         let bySwedishText: [String: Entry]
 
-        private enum CodingKeys: String, CodingKey { case trv, trvText, dt }
+        private enum CodingKeys: String, CodingKey { case trv, trvText, dt, rj }
 
-        init(trv: [String: Entry], trvText: [String: Entry], dt: [String: Entry]) {
+        init(trv: [String: Entry], trvText: [String: Entry], dt: [String: Entry], rj: [Pattern] = []) {
             self.trv = trv
             self.trvText = trvText
             self.dt = dt
+            self.rj = rj
             var text: [String: Entry] = [:]
             for entry in trv.values { if let sv = entry.sv { text[sv.lowercased()] = entry } }
             bySwedishText = text
@@ -49,7 +60,10 @@ public nonisolated enum DelayCauses {
 
         public init(from decoder: Decoder) throws {
             let c = try decoder.container(keyedBy: CodingKeys.self)
-            self.init(trv: try c.decode([String: Entry].self, forKey: .trv), trvText: try c.decode([String: Entry].self, forKey: .trvText), dt: try c.decode([String: Entry].self, forKey: .dt))
+            self.init(
+                trv: try c.decode([String: Entry].self, forKey: .trv), trvText: try c.decode([String: Entry].self, forKey: .trvText),
+                dt: try c.decode([String: Entry].self, forKey: .dt), rj: (try? c.decode([Pattern].self, forKey: .rj)) ?? []
+            )
         }
 
         /// The table in a bundle (this package's resources unless told otherwise); empty when it can't be read.
@@ -90,9 +104,33 @@ public nonisolated enum DelayCauses {
             let entry = code.flatMap { table.trv[$0.uppercased()] } ?? text.flatMap { table.bySwedishText[$0.lowercased()] ?? table.trvText[$0] }
             if let entry, let key = entry.key { return Resolved(key: key, kind: Kind(rawValue: entry.kind ?? "") ?? .cause, text: text) }
             return Resolved(key: nil, kind: .cause, text: text)
+        case "rejseplanen":
+            if let text, let hit = danish(text, table: table) { return hit }
+            return Resolved(key: nil, kind: .notice, text: text)
         default:
             return Resolved(key: nil, kind: .cause, text: text)
         }
+    }
+
+    /// A Rejseplanen heading matched to the table's patterns, with the station and platform it names.
+    static func danish(_ text: String, table: Table) -> Resolved? {
+        for p in table.rj {
+            guard let regex = try? NSRegularExpression(pattern: p.pattern, options: [.caseInsensitive]),
+                  let m = regex.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)) else { continue }
+            var values: [String: String] = [:]
+            for name in ["station", "track"] {
+                let r = m.range(withName: name)
+                if r.location != NSNotFound, let range = Range(r, in: text) {
+                    // "1og 2", "1, 2", "3-4" read the same in every language as "1 & 2", "3–4".
+                    let raw = String(text[range]).trimmingCharacters(in: .whitespaces)
+                    values[name] = name == "track"
+                        ? raw.replacingOccurrences(of: #"\s*og\s*|\s*,\s*"#, with: " & ", options: .regularExpression).replacingOccurrences(of: "-", with: "–")
+                        : raw
+                }
+            }
+            return Resolved(key: p.key, kind: Kind(rawValue: p.kind ?? "") ?? .notice, text: text, values: values)
+        }
+        return nil
     }
 
     /// The words to show: translated through `translate` (a locale key to its text) when the table knows the cause,
@@ -129,7 +167,7 @@ public nonisolated enum DelayCauses {
     public static func reasons(_ causes: [LegStop.Cause], table: Table = DelayCauses.table, translate: (String) -> String) -> [Reason] {
         var seen = Set<String>()
         var out: [Reason] = []
-        for cause in causes {
+        for cause in causes where !cause.isFacility {
             let r = resolve(cause, table: table)
             guard r.kind == .cause, let key = r.key else { continue }
             let text = lowerFirst(translate(key))
@@ -151,15 +189,50 @@ public nonisolated enum DelayCauses {
 public extension L10n {
     /// A cause in the app's language: translated when known, else as its source wrote it; nil when empty.
     func cause(_ cause: LegStop.Cause) -> String? {
-        DelayCauses.text(cause) { self.t($0) }
+        let r = DelayCauses.resolve(cause)
+        if let key = r.key { return t(key, r.values) }
+        return r.text
     }
 
-    /// The causes as short notes for a stop or a board row: platform changes left out (shown as such), no repeats.
+    /// The causes as short notes for a stop or a board row: platform changes and station-facility notices (a lift at
+    /// another station) left out, no repeats.
     func causeNotes(_ causes: [LegStop.Cause]) -> [String] {
-        var out: [String] = []
-        for c in causes where !DelayCauses.isPlatformChange(c) {
-            if let text = cause(c), !out.contains(text) { out.append(text) }
+        causeLines(causes).map(\.text)
+    }
+
+    /// The same notes, each with the language it is still in when no table knew it (`da`): the app translates or
+    /// shortens those (NoticeText).
+    func causeLines(_ causes: [LegStop.Cause]) -> [CauseLine] {
+        var out: [CauseLine] = []
+        for c in causes where !DelayCauses.isPlatformChange(c) && !c.isFacility {
+            let r = DelayCauses.resolve(c)
+            guard let text = r.key.map({ t($0, r.values) }) ?? r.text, !out.contains(where: { $0.text == text }) else { continue }
+            out.append(CauseLine(text: text, lang: r.key == nil ? c.lang : nil, original: c.body))
         }
         return out
+    }
+
+    /// A station's own notices (lifts, walkways) among causes, translated where the table knows them.
+    func facilityLines(_ causes: [LegStop.Cause]) -> [CauseLine] {
+        var out: [CauseLine] = []
+        for c in causes where c.isFacility {
+            let r = DelayCauses.resolve(c)
+            guard let text = r.key.map({ t($0, r.values) }) ?? r.text, !out.contains(where: { $0.text == text }) else { continue }
+            out.append(CauseLine(text: text, lang: r.key == nil ? c.lang : nil, original: c.body))
+        }
+        return out
+    }
+}
+
+/// One note for a stop: its words, the language they are still in (nil: the app's own), and the full original.
+public struct CauseLine: Hashable, Sendable {
+    public let text: String
+    public let lang: String?
+    public let original: String?
+
+    public init(text: String, lang: String?, original: String?) {
+        self.text = text
+        self.lang = lang
+        self.original = original
     }
 }

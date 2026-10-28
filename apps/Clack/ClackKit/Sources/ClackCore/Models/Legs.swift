@@ -404,12 +404,23 @@ public nonisolated struct LegStop: Codable, Hashable, Sendable, Identifiable {
         public let src: String
         public let code: String?
         public let text: String?
+        /// The full message when `text` is its heading (Rejseplanen), for "Show original".
+        public var body: String? = nil
+        /// The language of `text` when it isn't the app's: `da` for Rejseplanen.
+        public var lang: String? = nil
+        /// About the station's lifts and walkways, not the train: kept off the train's stop list.
+        public var facility: Bool? = nil
 
-        public init(src: String, code: String? = nil, text: String? = nil) {
+        public init(src: String, code: String? = nil, text: String? = nil, body: String? = nil, lang: String? = nil, facility: Bool? = nil) {
             self.src = src
             self.code = code
             self.text = text
+            self.body = body
+            self.lang = lang
+            self.facility = facility
         }
+
+        public var isFacility: Bool { facility ?? false }
     }
 
     /// The causes to show: the structured ones, else the plain texts of an older server.

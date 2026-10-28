@@ -65,3 +65,27 @@ struct DelayCausesTests {
         #expect(decoded.causes == [LegStop.Cause(src: "trv", code: "ANA015", text: "Elfel")])
     }
 }
+
+@MainActor
+struct DanishNoticeTests {
+    private let l10n = L10n(language: .en)
+
+    @Test func aLiftNoticeIsTranslatedWithItsStationAndPlatform() {
+        let c = LegStop.Cause(src: "rejseplanen", text: "Elevatoren på Trekroner spor 3-4 er ude af drift", lang: "da")
+        #expect(l10n.cause(c) == "Lift to platform 3–4 out of order at Trekroner")
+        let plain = LegStop.Cause(src: "rejseplanen", text: "Elevatoren på Horsens er ude af drift", lang: "da")
+        #expect(l10n.cause(plain) == "Lift out of order at Horsens")
+        let two = LegStop.Cause(src: "rejseplanen", text: "Elevatoren på Sorgenfri spor 1og 2 er ude af drift", lang: "da")
+        #expect(l10n.cause(two) == "Lift to platform 1 & 2 out of order at Sorgenfri")
+    }
+
+    @Test func facilityNoticesStayOffTheTrainsStopsAndUnknownDanishSaysSo() {
+        let lift = LegStop.Cause(src: "rejseplanen", text: "Elevatoren på Horsens er ude af drift", lang: "da", facility: true)
+        let other = LegStop.Cause(src: "rejseplanen", text: "Toget kører fra et andet spor", lang: "da")
+        #expect(l10n.causeNotes([lift]) == [])
+        #expect(l10n.facilityLines([lift]).map(\.text) == ["Lift out of order at Horsens"])
+        #expect(l10n.causeLines([other]) == [CauseLine(text: "Toget kører fra et andet spor", lang: "da", original: nil)])
+        // A known phrase is the app's own words: no language left to translate.
+        #expect(l10n.causeLines([LegStop.Cause(src: "rejseplanen", text: "Signalfejl ved Fredericia", lang: "da")]).first?.lang == nil)
+    }
+}

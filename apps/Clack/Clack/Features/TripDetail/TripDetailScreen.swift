@@ -318,6 +318,8 @@ struct TripDetailScreen: View {
             // Something wrong with this train or the change after it, at every stage: what happened, what to do, what
             // you're owed. Nothing when all is well.
             DisruptionCard(leg: detail)
+            // A lift out of order where you get on or off: the station's, not the train's.
+            StationNoticeCard(leg: detail)
             // Then what matters now (owner, 2026-10-24): before, when and which platform; on the train, where it is and
             // what's next; after, how it went. Everything else about the train is under "About this train".
             ForEach(TripDetailLogic.sections(stage), id: \.self) { part in
@@ -727,7 +729,7 @@ struct LegStopRow: View {
     var body: some View {
         let times = TripDetailLogic.stopTimes(stop)
         let ridden = stop.role.isRidden
-        let causes = l10n.causeNotes(stop.allCauses)
+        let causes = l10n.shownNotes(stop.allCauses)
         var notes: [StopRow.Note] = []
         if stop.role == .board { notes.append(.init(l10n.t(tense == .past ? "detail.gotOn" : tense == .present ? "detail.gettingOn" : "detail.willGetOn"), .accent)) }
         if stop.role == .alight { notes.append(.init(l10n.t(tense == .past ? "detail.gotOff" : tense == .present ? "detail.gettingOff" : "detail.willGetOff"), .accent)) }
