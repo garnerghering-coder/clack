@@ -6897,6 +6897,23 @@
         }
       }
     },
+    "journey.trains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} trains"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "{{n}} tåg"
+          }
+        }
+      }
+    },
     "journey.transfer" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -417,19 +417,59 @@ struct FollowingSection: View {
         if !follows.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text(l10n.t("trips.following")).clack(.sectionHeader).foregroundStyle(Ink.text2).padding(.top, 2)
-                ForEach(follows, id: \.self) { follow in
-                    let op = follow.operatorId.flatMap { app.operatorsById[$0] }
-                    Button {
-                        router.presentTrain(number: follow.trainNumber, date: follow.serviceDate)
-                    } label: {
-                        row(follow, op: op)
+                ForEach(Self.grouped(follows), id: \.id) { item in
+                    if item.follows.count > 1 || item.label != nil {
+                        // Followed together from a planned journey: one journey, its trains inside (as on Trips).
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                LucideIcon(name: "route", size: 16)
+                                Text(item.label ?? "").clack(.rowTitle).foregroundStyle(Ink.text)
+                                Spacer(minLength: 0)
+                                Text(l10n.t("journey.trains", ["n": String(item.follows.count)])).clack(.caption).foregroundStyle(Ink.text2)
+                            }
+                            ForEach(item.follows, id: \.self) { follow in trainButton(follow) }
+                        }
+                        .padding(12)
+                        .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                        .hairlineBorder(radius: Radius.card)
+                    } else if let follow = item.follows.first {
+                        trainButton(follow)
                     }
-                    .buttonStyle(.plain)
                 }
                 InfoNote(l10n.t("trips.followingNote"), more: l10n.t("trips.followingNoteMore"))
             }
             .padding(.top, 2)
         }
+    }
+
+    private func trainButton(_ follow: Follow) -> some View {
+        let op = follow.operatorId.flatMap { app.operatorsById[$0] }
+        return Button {
+            router.presentTrain(number: follow.trainNumber, date: follow.serviceDate)
+        } label: {
+            row(follow, op: op)
+        }
+        .buttonStyle(.plain)
+    }
+
+    struct Item {
+        let id: String
+        let label: String?
+        var follows: [Follow]
+    }
+
+    /// Follows in order, those of one planned journey together under its name.
+    static func grouped(_ follows: [Follow]) -> [Item] {
+        var out: [Item] = []
+        var at: [String: Int] = [:]
+        for f in follows {
+            if let g = f.journeyGroup {
+                if let i = at[g] { out[i].follows.append(f) } else { at[g] = out.count; out.append(Item(id: g, label: f.journeyLabel, follows: [f])) }
+            } else {
+                out.append(Item(id: "\(f.trainNumber)|\(f.serviceDate)", label: nil, follows: [f]))
+            }
+        }
+        return out
     }
 
     private func row(_ follow: Follow, op: Operator?) -> some View {
