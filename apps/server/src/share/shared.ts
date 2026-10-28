@@ -3,7 +3,8 @@
 // names the traveller, and nothing about how they ride (seat, coach, ticket, notes, other trips) goes in.
 import { randomBytes } from 'node:crypto';
 import { and, eq, inArray } from 'drizzle-orm';
-import type { DelayCause } from '@clack/shared';
+import { comfortOf, countryOfStops, minChangeMin, type Comfort, type DelayCause } from '@clack/shared';
+import { tierOf } from '../search/planner.js';
 import type { Db } from '../db/client.js';
 import { journeyFollowers, legs, sharedJourneys } from '../db/schema.js';
 import { getLeg, getJourney } from '../legs/legs.js';
@@ -66,6 +67,9 @@ export interface SharedLeg {
     updatedAt: number;
   } | null;
   stops: SharedStop[];
+  /** For the change rule: where the leg starts, and the country most of its stops are in. */
+  fromStationId?: string | null;
+  country?: string | null;
 }
 
 export interface SharedChange {
@@ -75,6 +79,9 @@ export interface SharedChange {
   /** The trains meet at one station (else it is a walk between two). */
   sameStation: boolean;
   spareMin: number | null;
+  /** The change rule's minimum here (packages/shared/src/changes.ts), and how comfortable the change is. */
+  minMin?: number;
+  comfort?: Comfort | null;
   arrPlatform: string | null;
   depPlatform: string | null;
   status: 'ok' | 'tight' | 'missed' | 'unknown';
@@ -210,6 +217,8 @@ function toSharedLeg(l: Full, now: number): SharedLeg {
     operator: l.operator ? { id: l.operator.id, name: l.operator.name, shortName: l.operator.shortName, brandColor: l.operator.brandColor, logoUrl: l.operator.logoUrl } : null,
     trainNumber: l.trainNumber,
     serviceDate: l.serviceDate,
+    fromStationId: l.originStationId,
+    country: countryOfStops(l.stops.map((s) => (s as { country?: string }).country ?? null)) ?? l.countryCodes?.[0] ?? null,
     from: { name: l.origin?.name ?? '', tz: l.origin?.tz ?? 'Europe/Stockholm' },
     to: { name: l.destination?.name ?? '', tz: l.destination?.tz ?? 'Europe/Stockholm' },
     schedDep,
@@ -297,7 +306,8 @@ export function changesOf(list: SharedLeg[]): SharedChange[] {
     const b = list[i + 1]!;
     const spareMin = a.expArr !== null && b.expDep !== null ? Math.round((b.expDep - a.expArr) / MIN) : null;
     const status = spareMin === null || a.canceled || b.canceled ? (spareMin !== null && spareMin < 0 ? 'missed' : 'unknown') : spareMin < 0 ? 'missed' : spareMin < TIGHT_MIN ? 'tight' : 'ok';
-    out.push({ index: i, station: a.to.name, sameStation: a.to.name === b.from.name, spareMin, arrPlatform: a.arrPlatform, depPlatform: b.depPlatform, status });
+    const minMin = minChangeMin(b.fromStationId ? tierOf(b.fromStationId) : 'default', a.country ?? null, b.country ?? null);
+    out.push({ index: i, station: a.to.name, sameStation: a.to.name === b.from.name, spareMin, arrPlatform: a.arrPlatform, depPlatform: b.depPlatform, status, minMin, comfort: spareMin === null ? null : comfortOf(spareMin, minMin) });
   }
   return out;
 }

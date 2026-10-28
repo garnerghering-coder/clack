@@ -13,6 +13,8 @@ import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
 import { updateRides } from './recording.js';
 import { parseCauses } from './causes.js';
+import { comfortOf, countryOfStops, minChangeMin } from '@clack/shared';
+import { tierOf } from '../search/planner.js';
 import { zonedToUtc } from '../lib/time.js';
 
 export type StopRole = 'before' | 'board' | 'through' | 'alight' | 'after';
@@ -404,5 +406,24 @@ export function getJourney(db: Db, userId: string, journeyId: string) {
       .map((r) => [r.id, r.geometry]),
   );
   const ordered = list.sort((a, b) => (a.schedDep?.getTime() ?? 0) - (b.schedDep?.getTime() ?? 0)).map((l) => ({ ...l, geometry: geo.get(l.id) ?? null }));
-  return { id: journeyId, legs: ordered };
+  return { id: journeyId, legs: ordered, changes: journeyChanges(db, ordered) };
+}
+
+/**
+ * Each change in a journey, judged by the change rule (packages/shared/src/changes.ts), the same one the planner
+ * uses: the real gap with the latest times (actual, else planned plus the delay), the minimum, and how comfortable it
+ * is. Risky shows when a delay eats into a change.
+ */
+export function journeyChanges(db: Db, list: { originStationId: string; destStationId: string; timetableTripKey: string | null; schedDep: Date | null; schedArr: Date | null; actualDep: Date | null; actualArr: Date | null; depDelayMin: number | null; arrDelayMin: number | null }[]) {
+  const countryOf = (key: string | null) =>
+    key ? countryOfStops((db.$client.prepare(`select s.country c from timetable_stop_times st join stations s on s.id = st.station_id where st.trip_key = ?`).all(key) as { c: string }[]).map((r) => r.c)) : null;
+  const expected = (actual: Date | null, sched: Date | null, delay: number | null) => actual?.getTime() ?? (sched ? sched.getTime() + (delay ?? 0) * 60_000 : null);
+  return list.slice(1).map((next, i) => {
+    const prev = list[i]!;
+    const arr = expected(prev.actualArr, prev.schedArr, prev.arrDelayMin), dep = expected(next.actualDep, next.schedDep, next.depDelayMin);
+    const planned = prev.schedArr && next.schedDep ? Math.round((next.schedDep.getTime() - prev.schedArr.getTime()) / 60_000) : null;
+    const gapMin = arr !== null && dep !== null ? Math.round((dep - arr) / 60_000) : planned;
+    const minMin = minChangeMin(tierOf(next.originStationId), countryOf(prev.timetableTripKey), countryOf(next.timetableTripKey));
+    return { index: i, stationId: next.originStationId, sameStation: prev.destStationId === next.originStationId, gapMin, plannedGapMin: planned, minMin, comfort: gapMin === null ? null : comfortOf(gapMin, minMin) };
+  });
 }

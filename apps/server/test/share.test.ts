@@ -70,7 +70,7 @@ describe('sharing a journey', () => {
     for (const secret of [A, 'secret note', '"seat"', '"coach"', 'j1', '"l1"', '"l2"', 'userId']) expect(text).not.toContain(secret);
     expect(Object.keys(copy).sort()).toEqual(['changes', 'expiresAt', 'legs', 'summary', 'token']);
     expect(Object.keys(copy.legs[0]!).sort()).toEqual([
-      'arrPlatform', 'arrDelayMin', 'arrived', 'canceled', 'depDelayMin', 'depPlatform', 'departed', 'expArr', 'expDep', 'from', 'geometry', 'live',
+      'arrPlatform', 'arrDelayMin', 'arrived', 'canceled', 'country', 'depDelayMin', 'depPlatform', 'departed', 'expArr', 'expDep', 'from', 'fromStationId', 'geometry', 'live',
       'operator', 'schedArr', 'schedDep', 'serviceDate', 'stops', 'to', 'trainNumber',
     ].sort());
     expect(copy.legs.map((l) => l.trainNumber)).toEqual(['547', '1387']);
