@@ -147,6 +147,8 @@ export class DenmarkArchiveFallback {
       const first = this.point(times[0]!.stopId);
       const last = this.point(times.at(-1)!.stopId);
       out.push({
+        ref: `tt.${trip.key}`,
+        jid: null,
         number: trip.number,
         date: u.date,
         lat: pos.lat,

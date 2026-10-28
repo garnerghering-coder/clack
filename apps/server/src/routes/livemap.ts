@@ -1,5 +1,8 @@
 // Live map of all trains (ADDITIONS_01 A): snapshot + viewport-filtered SSE deltas from the shared ingest.
 import type { FastifyPluginAsync } from 'fastify';
+import { countryOfLiveId } from '../lib/countries.js';
+import { journeyStopsView } from '../rejseplanen/stops.js';
+import { mapHealth } from '../livemap/denmark.js';
 import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
@@ -101,6 +104,9 @@ export const liveMapRoutes =
         const exact = all.find((r) => r.key === t.tripKey);
         if (exact) return exact;
       }
+      // A Danish train is its own timetable trip or none: its number alone can be another country's train (NT's "Re
+      // 75" is a line number). Trains that cross into Sweden are Sweden's feed's, found by number as usual.
+      if (countryOfLiveId(t.id) === 'DK' && !t.crossBorder) return undefined;
       return matchTrip(
         t,
         all.map((r) => ({ ...r, stops: tripStops(db, r.key, r.serviceDate)?.stops ?? [] })),
@@ -129,7 +135,10 @@ export const liveMapRoutes =
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
       const trip = tripOf(t);
-      const stops = trip ? await trainStops(db, trip, t.number) : null;
+      let stops = trip ? await trainStops(db, trip, t.number) : null;
+      // Not in any timetable of ours: Rejseplanen's own list for a Danish train.
+      const jid = !stops ? ingest.denmarkJourney(t.id) : undefined;
+      if (jid) stops = await journeyStopsView(db, jid).catch(() => null);
       if (!stops) return reply.code(404).send({ error: 'train not in the timetable' });
       return { stops };
     });
@@ -193,6 +202,9 @@ export const liveMapRoutes =
         .run();
       return { following: false };
     });
+
+    // What the map is missing, per country and operator (counts only, no personal data): checked before each build.
+    app.get('/live/health', async () => mapHealth(ingest.trains.values(), ingest.denmarkMatchByHour));
 
     app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows, norwayAt: ingest.norwayAt, finlandAt: ingest.finlandAt, denmarkAt: ingest.denmarkAt }));
   };

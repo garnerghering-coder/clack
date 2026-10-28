@@ -59,7 +59,10 @@ export interface LiveTrain {
 export function isMine(t: LiveTrain, keys: Set<string>): boolean {
   if (t.tripKey !== undefined) {
     if (keys.has(`trip:${t.tripKey}|${t.date}`) || (!!t.crossBorder && keys.has(`${t.number}|${t.date}`))) return true;
-    return countryOfLiveId(t.id) === 'FI' && keys.has(`fi:${t.number}|${t.date}`);
+    const country = countryOfLiveId(t.id);
+    if (country === 'FI') return keys.has(`fi:${t.number}|${t.date}`);
+    // A Danish train the timetable doesn't have is found by its number (a Danish leg adds "dk:number|date").
+    return country === 'DK' && !t.tripKey && keys.has(`dk:${t.number}|${t.date}`);
   }
   return keys.has(`${t.number}|${t.date}`);
 }
@@ -154,6 +157,8 @@ export class LiveMapIngest extends EventEmitter {
   private dkIds = new Set<string>();
   /** Swedish keys of cross-border trains drawn from Rejseplanen in Denmark instead of a Swedish estimate abroad. */
   private denmarkPos = new Set<string>();
+  /** Rejseplanen's journey id per Danish train on the map, for its stop list when the timetable doesn't have it. */
+  private dkJourneys = new Map<string, string>();
   /** Finnish trains on the map now. */
   private fiIds = new Set<string>();
   /** Norwegian trains on the map now. */
@@ -192,6 +197,16 @@ export class LiveMapIngest extends EventEmitter {
   /** Last time Digitraffic's feeds answered (0 without Finland). */
   get finlandAt() {
     return this.fi?.upstreamAt ?? 0;
+  }
+
+  /** Per hour of the day, Danish trains seen and matched to the timetable (empty without Denmark). */
+  get denmarkMatchByHour() {
+    return this.dk?.matchByHour ?? new Map<number, { trains: number; matched: number }>();
+  }
+
+  /** Rejseplanen's journey id for a Danish train on the map. */
+  denmarkJourney(id: string): string | undefined {
+    return this.dkJourneys.get(id);
   }
 
   /** Last time Rejseplanen answered for the map (0 without Denmark). */
@@ -570,7 +585,9 @@ export class LiveMapIngest extends EventEmitter {
     const seen = new Set<string>();
     const taken = new Set<string>();
     for (const d of this.dk.trains()) {
-      const id = `dk:${d.number}|${d.date}`;
+      // Numbers repeat in Denmark (NT's trains carry their line number), so the id names where the train started.
+      const id = `dk:${d.number}@${d.ref}|${d.date}`;
+      if (d.jid) this.dkJourneys.set(id, d.jid);
       let crossBorder = false;
       if (!d.inDanishTimetable) {
         // Trafikverket may carry an Öresundståg with a leading 2 (21378 for Rejseplanen's 1378).
@@ -614,6 +631,7 @@ export class LiveMapIngest extends EventEmitter {
       this.removed.delete(id);
     }
     for (const id of this.dkIds) if (!seen.has(id) && this.trains.delete(id)) this.removed.add(id);
+    for (const id of this.dkJourneys.keys()) if (!seen.has(id)) this.dkJourneys.delete(id);
     this.dkIds = seen;
     this.denmarkPos = taken;
   }

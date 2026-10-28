@@ -15,14 +15,17 @@ describe('Rejseplanen parsing', () => {
     expect(localStamp(Date.UTC(2026, 9, 27, 23, 20))).toEqual({ date: '20261028', time: '002000' });
   });
   it('reads the ends from a journey id', () => {
-    expect(endsOf('2|#VN#1#ST#1#PI#0#ZI#59529#TA#0#DA#271026#1S#8600803#1T#1705#LS#8600677#LT#1814#PU#86#')).toEqual({ firstUic: '8600803', firstHhmm: '1705', lastUic: '8600677', lastHhmm: '1814' });
+    expect(endsOf('2|#VN#1#ST#1#PI#0#ZI#59529#TA#0#DA#271026#1S#8600803#1T#1705#LS#8600677#LT#1814#PU#86#')).toEqual({ firstUic: '8600803', firstMin: 1025, lastUic: '8600677', lastMin: 1094 });
+    // After midnight the id carries a day digit: 01:01 the next day is minute 1501, not 61 (NT Re 75, 27 Oct).
+    expect(endsOf('2|#DA#271026#1S#8604115#1T#2347#LS#8600009#LT#10101#')).toEqual({ firstUic: '8604115', firstMin: 1427, lastUic: '8600009', lastMin: 1501 });
     expect(endsOf('garbage')).toBeNull();
   });
   it('maps station ids to UIC numbers', () => {
     expect(uicOfStation('860000626')).toBe('8600626');
     expect(uicOfStation('uic:7400003')).toBe('7400003');
     expect(uicOfStation('dk:000000123')).toBeNull();
-    expect(uicOfStation('740000001')).toBeNull();
+    expect(uicOfStation('740000003')).toBe('7400003');
+    expect(uicOfStation('fi:HKI')).toBeNull();
   });
   it('reads a board: live time, live platform, number', () => {
     const res = fixture('board-kh.json').svcResL[0].res;

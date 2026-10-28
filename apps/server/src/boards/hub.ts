@@ -14,8 +14,7 @@ import { COUNTRIES } from '../lib/countries.js';
 import { recordObservations } from '../legs/risk.js';
 import { normalizeDenmarkBoard, timetableRows } from './denmark.js';
 import { rejseplanen } from '../rejseplanen/client.js';
-import { TripMatcher, uicOfStation } from '../rejseplanen/match.js';
-import { danishStationId } from '../import/gtfs-dk.js';
+import { stationOfUic, TripMatcher, uicOfStation } from '../rejseplanen/match.js';
 
 export const BOARD_POLL_MS = Number(process.env.BOARD_POLL_MS ?? 20_000);
 /** Kept warm this long after the last viewer leaves (quick back-and-forth navigation stays cheap). */
@@ -98,8 +97,7 @@ export class BoardHub {
 
   /** A station's name by UIC number (Danish ids, else uic:…); null when we don't have it. */
   private uicName(uic: string): string | null {
-    const id = uic.startsWith('86') ? danishStationId(uic) : `uic:${uic}`;
-    return this.db.select({ name: stations.name }).from(stations).where(eq(stations.id, id)).get()?.name ?? null;
+    return stationOfUic(this.db, uic)?.name ?? null;
   }
 
   private tzOf(stationId: string): string {

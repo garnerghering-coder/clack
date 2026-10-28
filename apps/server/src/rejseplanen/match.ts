@@ -5,21 +5,38 @@ import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import type { JourneyEnds } from './client.js';
 
-/** Our station id → its UIC number ("860000626" → "8600626", "uic:7400003" → "7400003"); null when it has none. Pure. */
+/**
+ * Our station id → its UIC number, in either form our feeds use: "<country>00<station>" ("860000626" → "8600626",
+ * "740000003" → "7400003", "800010102" → "8010102") or "uic:<number>" ("uic:8020400"). Null when it has none
+ * ("fi:HKI"). Pure.
+ */
 export function uicOfStation(id: string): string | null {
-  const dk = /^86(\d{7})$/.exec(id);
-  if (dk) return dk[1]!.startsWith('00') ? `86${dk[1]!.slice(2)}` : null;
+  const plain = /^(\d{2})00(\d{5})$/.exec(id);
+  if (plain) return `${plain[1]}${plain[2]}`;
   const other = /^uic:(\d{7})$/.exec(id);
   return other ? other[1]! : null;
 }
 
+/** The two ids a UIC number can have in our stations table, the plain form first. Pure. */
+export const stationIdsOfUic = (uic: string): string[] => [`${uic.slice(0, 2)}00${uic.slice(2)}`, `uic:${uic}`];
+
+const names = new WeakMap<Db, Map<string, { id: string; name: string } | null>>();
+/** Our station for a UIC number (any country), cached; null when we don't have it. */
+export function stationOfUic(db: Db, uic: string): { id: string; name: string } | null {
+  const cache = names.get(db) ?? names.set(db, new Map()).get(db)!;
+  if (!cache.has(uic)) {
+    const [a, b] = stationIdsOfUic(uic);
+    const row = db.all<{ id: string; name: string }>(sql`select id, name from stations where id in (${a}, ${b}) order by id = ${a} desc limit 1`)[0];
+    cache.set(uic, row ?? null);
+  }
+  return cache.get(uic)!;
+}
+
 export interface MatchedTrip { tripKey: string; trainNumber: string | null; operatorId: string | null }
 
-const hhmm = (sec: number) => {
-  const m = Math.floor((((sec % 86400) + 86400) % 86400) / 60);
-  return `${String(Math.floor(m / 60)).padStart(2, '0')}${String(m % 60).padStart(2, '0')}`;
-};
-const keyOf = (e: JourneyEnds) => `${e.firstUic}|${e.firstHhmm}|${e.lastUic}|${e.lastHhmm}`;
+// Both sides in whole minutes after the service day's midnight, never folded back into one day: a train ending after
+// midnight is "1501", not "0101" (that fold made every such train unmatched, 112 of 130 at 23:45 on 27 Oct).
+const keyOf = (e: JourneyEnds) => `${e.firstUic}|${e.firstMin}|${e.lastUic}|${e.lastMin}`;
 
 export class TripMatcher {
   private days = new Map<string, Map<string, MatchedTrip>>();
@@ -47,7 +64,7 @@ export class TripMatcher {
       const a = uicOfStation(r.fs);
       const b = uicOfStation(r.ls);
       if (!a || !b || r.dep === null || r.arr === null) continue;
-      const k = `${a}|${hhmm(r.dep)}|${b}|${hhmm(r.arr)}`;
+      const k = `${a}|${Math.floor(r.dep / 60)}|${b}|${Math.floor(r.arr / 60)}`;
       // Two trips with the same ends and times can't be told apart: match neither rather than guess.
       if (map.has(k)) clash.add(k);
       map.set(k, { tripKey: r.key, trainNumber: r.train_number, operatorId: r.operator_id });

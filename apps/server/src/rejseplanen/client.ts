@@ -139,6 +139,8 @@ export interface Journey {
   /** Rejseplanen's category: IC, ICL, Re, RA, RX, S-Tog, Lokalbane, Pågatog, Togbus … */
   category: string | null;
   operator: string | null;
+  /** Rejseplanen's administration code for the operator ("000087" = DSB Vores Tog), from the product or its line id. */
+  admin: string | null;
   direction: string | null;
   cancelled: boolean;
   stops: Stop[];
@@ -149,13 +151,14 @@ export interface Journey {
   ends: JourneyEnds | null;
 }
 
-export interface JourneyEnds { firstUic: string; firstHhmm: string; lastUic: string; lastHhmm: string }
+/** The first and last stop and their planned times, in minutes after the journey date's midnight (past 1440 after it). */
+export interface JourneyEnds { firstUic: string; firstMin: number; lastUic: string; lastMin: number }
 
 // ---- Parsing (pure) ---------------------------------------------------------------------------------------------
 
 interface Common {
   locL?: { extId?: string; name?: string; crd?: { x: number; y: number } }[];
-  prodL?: { name?: string; number?: string; nameS?: string; oprX?: number; prodCtx?: { num?: string; line?: string; catOutL?: string }; himIdL?: string[] }[];
+  prodL?: { name?: string; number?: string; nameS?: string; oprX?: number; prodCtx?: { num?: string; line?: string; catOutL?: string; admin?: string; lineId?: string }; himIdL?: string[] }[];
   opL?: { name?: string }[];
   himL?: { hid?: string; head?: string; text?: string }[];
 }
@@ -180,11 +183,22 @@ export function hafasTime(date: string, t: string | undefined): number | null {
   return serviceTimeToUtc(ymdToIso(date), sec, TZ);
 }
 
-/** The first and last stop with their times, from a journey id ("…#1S#8600803#1T#1705#LS#8600677#LT#1814#…"). Pure. */
+/**
+ * The first and last stop with their times, from a journey id ("…#1S#8600803#1T#1705#LS#8600677#LT#1814#…"). A time
+ * after midnight carries a day digit in front ("LT#10101" is 01:01 the next day). Pure.
+ */
 export function endsOf(jid: string): JourneyEnds | null {
   const f = (k: string) => new RegExp(`#${k}#([^#]+)#`).exec(jid)?.[1];
-  const [firstUic, firstHhmm, lastUic, lastHhmm] = [f('1S'), f('1T'), f('LS'), f('LT')];
-  return firstUic && firstHhmm && lastUic && lastHhmm ? { firstUic, firstHhmm: firstHhmm.padStart(4, '0'), lastUic, lastHhmm: lastHhmm.padStart(4, '0') } : null;
+  const [firstUic, first, lastUic, last] = [f('1S'), f('1T'), f('LS'), f('LT')];
+  const firstMin = minutesOf(first), lastMin = minutesOf(last);
+  return firstUic && lastUic && firstMin !== null && lastMin !== null ? { firstUic, firstMin, lastUic, lastMin } : null;
+}
+
+/** "1705" → 1025, "905" → 545, "10101" → 1501 (day 1, 01:01). Pure. */
+export function minutesOf(t: string | undefined): number | null {
+  if (!t || !/^\d{3,6}$/.test(t)) return null;
+  const s = t.padStart(4, '0');
+  return Number(s.slice(0, -4) || 0) * 1440 + Number(s.slice(-4, -2)) * 60 + Number(s.slice(-2));
 }
 
 const platform = (p: Platform | undefined, s: string | undefined) => p?.txt ?? s ?? null;
@@ -241,6 +255,7 @@ export function journeyOf(c: Common, j: RawJourney): Journey {
     line: prod?.prodCtx?.line ?? null,
     category: prod?.prodCtx?.catOutL?.trim() ?? null,
     operator: prod?.oprX !== undefined ? (c.opL?.[prod.oprX]?.name ?? null) : null,
+    admin: prod?.prodCtx?.admin ?? /^\d+_(\d{6})_/.exec(prod?.prodCtx?.lineId ?? '')?.[1] ?? null,
     direction: j.dirTxt ?? null,
     cancelled: !!j.isCncl,
     stops,

@@ -9,7 +9,8 @@ import { addCauses, deviationTexts } from '../legs/causes.js';
 import type { StopActuals } from '../legs/actuals.js';
 import { rejseplanenCauses } from '../boards/denmark.js';
 import { rejseplanen, type Journey, type RejseplanenClient } from './client.js';
-import { TripMatcher, uicOfStation } from './match.js';
+import { stationOfUic, TripMatcher, uicOfStation } from './match.js';
+import type { TrainStopView } from '../livemap/trainStops.js';
 
 const DETAILS_TTL_MS = 50_000;
 const jids = new Map<string, string>();
@@ -84,6 +85,55 @@ export async function rejseplanenFor(db: Db, ref: RejseplanenRef, opts: { now?: 
       onboard: null,
       source: 'rejseplanen',
     });
+  }
+  return out;
+}
+
+/**
+ * A train's whole stop list from Rejseplanen alone, for trains no timetable of ours has (Snälltåget 21509 Malmö →
+ * Berlin on 27 Oct). Live times as in `rejseplanenFor`; names as Rejseplanen gives them where we don't know the station.
+ */
+export async function journeyStopsView(db: Db, jid: string, opts: { now?: number; client?: RejseplanenClient } = {}): Promise<TrainStopView[] | null> {
+  const client = opts.client ?? rejseplanen();
+  const now = opts.now ?? Date.now();
+  if (!client.available()) return null;
+  let cached = details.get(jid);
+  if (!cached || now - cached.at > DETAILS_TTL_MS) {
+    cached = { at: now, journey: await client.journeyDetails(jid) };
+    details.set(jid, cached);
+  }
+  const j = cached.journey;
+  if (!j?.stops.length) return null;
+  const causes = addCauses([], rejseplanenCauses(j.messages));
+  const out = j.stops.map((s, i): TrainStopView => {
+    const ours = s.uic ? stationOfUic(db, s.uic) : null;
+    const reported = s.prognosis === 'PROGNOSED';
+    const past = (t: number | null) => t !== null && t <= now;
+    const last = i === j.stops.length - 1;
+    const actualArr = reported && past(s.arrLive) ? s.arrLive : null;
+    const actualDep = reported && past(s.depLive) ? s.depLive : null;
+    return {
+      seq: i + 1,
+      stationId: ours?.id ?? (s.uic ? `uic:${s.uic}` : `rp:${i}`),
+      name: ours?.name ?? s.name ?? '',
+      arr: s.arrPlanned,
+      dep: s.depPlanned,
+      actualArr,
+      actualDep,
+      estimatedArr: actualArr === null ? s.arrLive : null,
+      estimatedDep: actualDep === null ? s.depLive : null,
+      platform: s.depPlatform ?? s.arrPlatform,
+      canceled: j.cancelled || s.arrCancelled || s.depCancelled,
+      passed: Boolean(last ? actualArr : actualDep) || ((last ? (s.arrLive ?? s.arrPlanned) : (s.depLive ?? s.depPlanned)) ?? Infinity) + 2 * 60_000 < now,
+      source: 'rejseplanen',
+      causes,
+    };
+  });
+  // A stop before a passed one is passed too (as mergeStops does).
+  let seen = false;
+  for (let i = out.length - 1; i >= 0; i--) {
+    if (out[i]!.passed) seen = true;
+    else if (seen) out[i]!.passed = true;
   }
   return out;
 }
