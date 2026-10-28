@@ -187,13 +187,14 @@ export const liveMapRoutes =
       const rows = db.select().from(followedTrains).where(eq(followedTrains.userId, req.userId)).all();
       const mine = forUser(myTrainKeys(req.userId));
       const onMap = new Map([...ingest.trains.values()].map((t) => [`${t.number}|${t.date}`, mine(t)]));
-      return rows.map((r) => ({ trainNumber: r.trainNumber, serviceDate: r.serviceDate, operatorId: r.operatorId, label: r.label, train: onMap.get(`${r.trainNumber}|${r.serviceDate}`) ?? null }));
+      return rows.map((r) => ({ trainNumber: r.trainNumber, serviceDate: r.serviceDate, operatorId: r.operatorId, label: r.label, journeyGroup: r.journeyGroup, journeyLabel: r.journeyLabel, train: onMap.get(`${r.trainNumber}|${r.serviceDate}`) ?? null }));
     });
-    app.put<{ Body: { trainNumber?: string; serviceDate?: string; operatorId?: string | null; label?: string | null } }>('/follows', async (req, reply) => {
-      const { trainNumber, serviceDate, operatorId = null, label = null } = req.body ?? {};
+    app.put<{ Body: { trainNumber?: string; serviceDate?: string; operatorId?: string | null; label?: string | null; journeyGroup?: string | null; journeyLabel?: string | null } }>('/follows', async (req, reply) => {
+      const { trainNumber, serviceDate, operatorId = null, label = null, journeyGroup = null, journeyLabel = null } = req.body ?? {};
+      if (journeyGroup !== null && !/^[A-Za-z0-9-]{1,64}$/.test(journeyGroup)) return reply.code(400).send({ error: 'bad journeyGroup' });
       if (!trainNumber || !/^\d{1,6}$/.test(trainNumber) || !serviceDate || !/^\d{4}-\d{2}-\d{2}$/.test(serviceDate)) return reply.code(400).send({ error: 'trainNumber and serviceDate (YYYY-MM-DD) are required' });
       // Following twice is still one follow.
-      db.insert(followedTrains).values({ userId: req.userId, trainNumber, serviceDate, operatorId, label }).onConflictDoNothing().run();
+      db.insert(followedTrains).values({ userId: req.userId, trainNumber, serviceDate, operatorId, label, journeyGroup, journeyLabel: journeyLabel?.slice(0, 120) ?? null }).onConflictDoNothing().run();
       return { following: true };
     });
     app.delete<{ Params: { number: string; date: string } }>('/follows/:number/:date', async (req) => {

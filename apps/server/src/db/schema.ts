@@ -374,6 +374,10 @@ export const followedTrains = sqliteTable(
     operatorId: text('operator_id'),
     /** "Göteborg C → Stockholm C", as shown when followed (the train may be off the map later). */
     label: text('label'),
+    /** Followed together as one planned journey: Following shows them as one journey with its trains inside. */
+    journeyGroup: text('journey_group'),
+    /** That journey's name ("Jönköping C → Kolding"), shown on the journey. */
+    journeyLabel: text('journey_label'),
     createdAt: createdAt(),
   },
   (t) => [primaryKey({ columns: [t.userId, t.trainNumber, t.serviceDate] })],
