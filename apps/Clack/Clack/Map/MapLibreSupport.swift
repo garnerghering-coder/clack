@@ -38,12 +38,6 @@ extension MLNMapView {
             return
         }
         source.shape = shape
-        #if DEBUG
-        if id == "station-detail" {
-            let n = (json["features"] as? [Any])?.count ?? -1
-            Logger(subsystem: "app.clack", category: "map").info("setShape station-detail: \(n) features in, \((shape as? MLNShapeCollectionFeature)?.shapes.count ?? -1) shapes out, \(String(describing: type(of: shape)), privacy: .public)")
-        }
-        #endif
     }
 
     /// Fits the points in the view (zoom no further in than `maxZoom`). A map that hasn't been laid out yet remembers the
@@ -122,7 +116,7 @@ extension MLNShape {
                 guard let rings = coordinates as? [[[Double]]], let outer = rings.first, outer.count >= 3 else { return viaJSON(json) }
                 var coords = outer.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
                 let polygon = MLNPolygonFeature(coordinates: &coords, count: UInt(coords.count))
-                polygon.attributes = attributes
+                // No attributes: a polygon with any attribute is never drawn on iOS (found 2026-10-29); labels use points.
                 shapes.append(polygon)
             case "Point":
                 guard let point = coordinates as? [Double], point.count >= 2 else { return viaJSON(json) }

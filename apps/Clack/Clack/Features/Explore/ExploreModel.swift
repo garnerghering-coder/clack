@@ -339,7 +339,6 @@ final class ExploreModel {
         }
         controller.setTrains(points)
         controller.setTrainCars(["type": "FeatureCollection", "features": cars])
-        if let detailShownJSON, close { controller.setStationDetail(detailShownJSON) }
         if shown != points.count { shown = points.count }
         return moving
     }
@@ -384,9 +383,6 @@ final class ExploreModel {
             comps?.queryItems = [URLQueryItem(name: "bbox", value: key)]
             guard let url = comps?.url else { return }
             let answer = try? await URLSession.shared.data(from: url)
-            #if DEBUG
-            Logger(subsystem: "app.clack", category: "detail").info("station detail \(key, privacy: .public): \(answer?.0.count ?? -1) bytes")
-            #endif
             guard let (data, _) = answer, !Task.isCancelled, let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
             let tracks = Self.tracks(in: json)
             self.detailCache[key] = (json, tracks)
@@ -402,22 +398,6 @@ final class ExploreModel {
         controller.setStationDetail(json)
         needsFullRender = true
         scheduleRender()
-        #if DEBUG
-        Task { @MainActor [weak self] in
-            try? await Task.sleep(for: .seconds(2))
-            guard let map = self?.controller.mapView else { return }
-            let drawn = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["detail-tracks", "detail-tracks-minor", "detail-platforms"]).count
-            let cars = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["train-cars"]).count
-            let plats = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["detail-platforms"]).count
-            let platSrc = (map.style?.source(withIdentifier: "station-platforms") as? MLNShapeSource)?.shape
-            Logger(subsystem: "app.clack", category: "detail").info("platform fills on screen: \(plats); source shape \(platSrc == nil ? "nil" : String(describing: type(of: platSrc!)), privacy: .public)")
-            let src = map.style?.source(withIdentifier: "station-detail") as? MLNShapeSource
-            let held = (src?.shape as? MLNShapeCollectionFeature)?.shapes.count ?? ((src?.shape as? MLNShapeCollection)?.shapes.count ?? -1)
-            let kind = src == nil ? "no source" : (src!.shape == nil ? "shape nil" : String(describing: type(of: src!.shape!)))
-            let layer = map.style?.layer(withIdentifier: "detail-tracks")
-            Logger(subsystem: "app.clack", category: "detail").info("station detail drawn: \(drawn) on screen (cars \(cars)), source holds \(held) [\(kind, privacy: .public)], layer \(layer == nil ? "missing" : (layer!.isVisible ? "visible" : "hidden"), privacy: .public), zoom \(map.zoomLevel), tracks \(tracks.count)")
-        }
-        #endif
     }
 
     /// The track lines of a detail answer, for laying trains on.

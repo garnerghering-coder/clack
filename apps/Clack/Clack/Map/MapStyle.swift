@@ -192,15 +192,15 @@ nonisolated enum MapStyle {
             ],
             [
                 "id": "detail-platforms", "type": "fill", "source": "station-platforms", "minzoom": 13,
-                "paint": ["fill-color": "#ff00ff", "fill-opacity": 1], // DIAGNOSTIC colour
+                "paint": ["fill-color": platform, "fill-opacity": 0.85],
             ],
             [
                 "id": "detail-platforms-line", "type": "line", "source": "station-platforms", "minzoom": 13,
                 "paint": ["line-color": c.text, "line-opacity": 0.25, "line-width": 0.8],
             ],
             [
-                "id": "detail-platform-labels", "type": "symbol", "source": "station-platforms", "minzoom": 14,
-                "layout": ["text-field": ["get", "ref"], "text-font": ["Inter Semi Bold"], "text-size": 11, "text-allow-overlap": false, "symbol-placement": "point"],
+                "id": "detail-platform-labels", "type": "symbol", "source": "station-platform-labels", "minzoom": 14,
+                "layout": ["text-field": ["get", "plat"], "text-font": ["Noto Sans Medium"], "text-size": 11, "text-allow-overlap": false, "symbol-placement": "point"],
                 "paint": ["text-color": c.text, "text-halo-color": c.labelHalo, "text-halo-width": 1],
             ],
         ]
@@ -380,6 +380,7 @@ nonisolated enum MapStyle {
             // Tracks and platforms apart: a shape collection that mixes lines and polygons draws nothing on iOS.
             sources["station-detail"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["station-platforms"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["station-platform-labels"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains-close"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains"] = [
                 // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).

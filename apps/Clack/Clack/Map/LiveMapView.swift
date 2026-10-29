@@ -179,10 +179,9 @@ final class LiveMapController {
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", "")
     }
 
-    /// The station detail for the view (tracks and platforms) and the trains as cars, at close zoom.
     /// The station detail for the view: the tracks as lines in one source and the platforms as polygons in another
-    /// (one collection with both kinds draws nothing on iOS). The platform polygons go through MapLibre's own GeoJSON
-    /// parser, which knows polygons; the lines through `fromGeoJSON`, which keeps their attributes.
+    /// (one collection with both kinds draws nothing on iOS). A polygon with any attribute is not drawn either, so the
+    /// polygons carry none and the platform numbers are points of their own (`station-platform-labels`).
     func setStationDetail(_ geojson: [String: Any]) {
         guard let style = mapView?.style else { return }
         let features = (geojson["features"] as? [[String: Any]]) ?? []
@@ -192,21 +191,19 @@ final class LiveMapController {
         if let source = style.source(withIdentifier: "station-detail") as? MLNShapeSource, let shape = MLNShape.fromGeoJSON(lines) {
             source.shape = shape
         }
-        if let source = style.source(withIdentifier: "station-platforms") as? MLNShapeSource,
-           let data = try? JSONSerialization.data(withJSONObject: polygons), let shape = try? MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) {
+        if let source = style.source(withIdentifier: "station-platforms") as? MLNShapeSource, let shape = MLNShape.fromGeoJSON(polygons) {
             source.shape = shape
-            #if DEBUG
-            Logger(subsystem: "app.clack", category: "map").info("station platforms set: \(polygons["features"].map { ($0 as? [Any])?.count ?? 0 } ?? 0) polygons, parsed as \(String(describing: type(of: shape)), privacy: .public)")
-            #endif
-        } else {
-            #if DEBUG
-            Logger(subsystem: "app.clack", category: "map").error("station platforms: MapLibre could not parse the polygons")
-            #endif
         }
+        // The platform numbers as points at each platform's node (polygons can't carry attributes here).
+        let labels: [[String: Any]] = features.filter(isPolygon).compactMap { f in
+            guard let props = f["properties"] as? [String: Any], let ref = props["ref"] as? String, let node = props["node"] as? [Double], node.count == 2 else { return nil }
+            return ["type": "Feature", "properties": ["plat": ref], "geometry": ["type": "Point", "coordinates": node]]
+        }
+        mapView?.setShape(["type": "FeatureCollection", "features": labels], source: "station-platform-labels")
     }
 
     func clearStationDetail() {
-        for id in ["station-detail", "station-platforms"] { mapView?.setShape(["type": "FeatureCollection", "features": [Any]()], source: id) }
+        for id in ["station-detail", "station-platforms", "station-platform-labels"] { mapView?.setShape(["type": "FeatureCollection", "features": [Any]()], source: id) }
     }
 
     func setTrainCars(_ geojson: [String: Any]) {
