@@ -63,13 +63,30 @@ struct TrainCard: View {
         }
     }
 
+    /// The types to offer, in the order a person picks by looks (owner, 2026-10-29): the ones drawn in this
+    /// operator's livery first, then the rest; the "X or Y" groups (for uncertain automatic types) are left out, and
+    /// two types that would show the same drawing are offered once.
+    private func pickable(current: String?, operatorId: String?) -> [TrainType] {
+        var seen = Set<String>()
+        return app.trainTypes
+            .filter { !$0.name.contains(" or ") || $0.id == current }
+            .sorted { a, b in
+                let la = TrainArt.hasDetailedArt(typeId: a.id, operatorId: operatorId), lb = TrainArt.hasDetailedArt(typeId: b.id, operatorId: operatorId)
+                return la != lb ? la : a.name < b.name
+            }
+            .filter { t in
+                let p = TrainArt.picture(typeId: t.id, art: t.art, uncertain: false, operatorId: operatorId)
+                return t.id == current || seen.insert("\(p.asset)|\(p.isStandIn)").inserted
+            }
+    }
+
     private func picker(current: String?, source: TrainTypeSource?, operatorId: String?) -> some View {
         VStack(spacing: 8) {
-            ForEach(app.trainTypes) { type in
+            ForEach(pickable(current: current, operatorId: operatorId)) { type in
                 Button { choose(type.id) } label: {
                     HStack(spacing: 12) {
-                        TrainPicture(type: type, operatorId: operatorId, height: 34).frame(width: 110, alignment: .leading)
-                        Text(type.name).clack(.body).foregroundStyle(Ink.text)
+                        TrainPicture(type: type, operatorId: operatorId, height: 44).frame(width: 150, alignment: .leading)
+                        Text(type.name).clack(.caption).foregroundStyle(Ink.text2)
                         Spacer(minLength: 0)
                     }
                     .padding(.vertical, 8).padding(.horizontal, 12)

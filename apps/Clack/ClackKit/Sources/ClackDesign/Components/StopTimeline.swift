@@ -47,9 +47,27 @@ public struct StopRail: View {
                 .fill(big ? color : (ridden ? (covered ? color : Ink.text) : Ink.text3))
                 .frame(width: big ? 14 : 10, height: big ? 14 : 10)
                 .overlay(Circle().strokeBorder(big ? Ink.text : Ink.bg, lineWidth: 2).padding(-2))
+            // The train, drawn last so it sits over a stop's dot when the two meet (owner, 2026-10-29): the map's
+            // disc, the operator's colour with a white ring, a little larger than a stop.
+            if let at = trainPosition {
+                GeometryReader { proxy in
+                    Circle().fill(color).frame(width: 14, height: 14)
+                        .overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 2.5))
+                        .shadow(color: Color.black.opacity(0.35), radius: 2, y: 1)
+                        .position(x: proxy.size.width / 2, y: proxy.size.height * at)
+                }
+                .zIndex(1)
+            }
         }
         .frame(width: Self.width)
         .accessibilityHidden(true)
+    }
+
+    /// Where the train is along this row (0 top … 1 bottom): in the half above the stop or the half below.
+    private var trainPosition: Double? {
+        if !startsHere, let t = above.train { return t / 2 }
+        if !endsHere, let t = below.train { return 0.5 + t / 2 }
+        return nil
     }
 
     /// A stop the train has passed: the line below it has started to fill.
@@ -69,13 +87,6 @@ public struct StopRail: View {
                     if half.fill > 0 { color.frame(width: 2, height: h * half.fill).frame(maxWidth: .infinity) }
                 } else {
                     Ink.hairline.frame(width: 2).frame(maxWidth: .infinity)
-                }
-                if let train = half.train {
-                    Circle().fill(color).frame(width: 10, height: 10)
-                        .overlay(Circle().strokeBorder(Ink.markerRing, lineWidth: 2))
-                        .shadow(color: Color.black.opacity(0.3), radius: 2, y: 1)
-                        .frame(maxWidth: .infinity)
-                        .offset(y: h * train - 5)
                 }
             }
         }

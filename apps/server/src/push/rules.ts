@@ -129,9 +129,12 @@ export interface Walk {
  * With a `walk` the connection is judged like the app does (spare time minus the walk and the boarding buffers, see
  * `connectionStatus` in the shared station code); without one, on the spare time alone.
  */
-export function change(a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: Language, walk: Walk | null = null): Alert | null {
+export function change(
+  a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: Language, walk: Walk | null = null,
+  live_: { nextStopId: string | null } | null = null,
+): Alert | null {
   if (!p.notify || !p.notifyChange || a.canceled || b.departed || a.expArr === null) return null;
-  if (now < a.expArr - 15 * MIN) return null;
+  if (!changeDue(a, live_, now)) return null;
   const station = a.to;
   if (b.canceled) return { kind: 'change', key: 'cancelled', title: t(lang, 'changeTitle', { station }), body: t(lang, 'connectionCancelled', { to: b.to }), timeSensitive: true };
   const spare = spareMinutes(a, b);
@@ -152,6 +155,26 @@ export function change(a: TripFacts, b: TripFacts, p: Prefs, now: number, lang: 
       : { kind: 'change', key, title: t(lang, 'missTitle'), body: t(lang, 'missWalk', { spare, walk: walkMin }), timeSensitive: true };
   const walkLine = t(lang, walk.estimated ? 'walkEstimated' : 'walkMapped', { walk: walkMin });
   return { kind: 'change', key, title: t(lang, slack < 5 ? 'changeTight' : 'changeTitle', { station }), body: `${changeBody(a, b, spare, lang)} ${walkLine}` };
+}
+
+/** Never before 15 min out; once the stop before the change station is behind you; at 5 min out in any case. */
+export const CHANGE_EARLIEST_MIN = 15;
+export const CHANGE_LATEST_MIN = 5;
+
+/**
+ * When the change alert is due (owner, 2026-10-29): not a fixed 15 minutes before arriving, but once the train has
+ * left its last stop before the change station (the live state's next stop is the change station), which the
+ * notifier's next pass picks up a minute or so later. On lines with close stops that would be too soon, so never
+ * more than 15 min out; on long stretches it would be too late, so at 5 min out it goes in any case. Without a live
+ * state it goes at 15 min out, as before. Pure.
+ */
+export function changeDue(a: TripFacts, live_: { nextStopId: string | null } | null, now: number): boolean {
+  if (a.expArr === null) return false;
+  const out = a.expArr - now;
+  if (out > CHANGE_EARLIEST_MIN * MIN) return false;
+  if (out <= CHANGE_LATEST_MIN * MIN) return true;
+  // No live state (no position for this train): at 15 min out, as before.
+  return live_ ? live_.nextStopId === a.toStationId : true;
 }
 
 function changeBody(a: TripFacts, b: TripFacts, spare: number, lang: Language): string {

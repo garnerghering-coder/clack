@@ -126,47 +126,36 @@ extension MLNShape {
 
 /// The train on the map (RouteMap.tsx marker): the operator's dot with a white rim, a chevron for the heading and a
 /// halo that pulses outward; hollow when the position is only estimated.
+/// The train on a trip's map: the same marker as Explore's (the flat disc in the operator's colour with the heading
+/// cone; owner, 2026-10-29), with a pulsing halo while the position is live. An estimated position is drawn fainter.
 final class TrainMarkerView: MLNAnnotationView {
     private let halo = CALayer()
-    private let dot = CALayer()
-    private let chevron = CAShapeLayer()
+    private let picture = CALayer()
     private var color = UIColor.systemYellow
-    private var estimated = false
     private var reduceMotion = UIAccessibility.isReduceMotionEnabled
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        frame = CGRect(x: 0, y: 0, width: 14, height: 14)
+        frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         isUserInteractionEnabled = false
-        for layer in [halo, dot] {
-            layer.frame = bounds
-            layer.cornerRadius = 7
-            self.layer.addSublayer(layer)
-        }
-        chevron.frame = bounds
-        layer.addSublayer(chevron)
-        // A 10 wide, 7 tall triangle centred 17 above the dot, turned about the dot's centre.
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 7, y: -10))
-        path.addLine(to: CGPoint(x: 2, y: -3))
-        path.addLine(to: CGPoint(x: 12, y: -3))
-        path.close()
-        chevron.path = path.cgPath
-        chevron.fillColor = UIColor.white.cgColor
+        halo.frame = CGRect(x: 10, y: 10, width: 16, height: 16)
+        halo.cornerRadius = 8
+        layer.addSublayer(halo)
+        picture.frame = bounds
+        picture.contentsGravity = .resizeAspect
+        picture.contentsScale = UIScreen.main.scale
+        layer.addSublayer(picture)
     }
 
     required init?(coder: NSCoder) { fatalError("not used") }
 
     func configure(color: UIColor, estimated: Bool, bearing: Double?) {
         self.color = color
-        self.estimated = estimated
         halo.backgroundColor = color.withAlphaComponent(0.5).cgColor
-        // Estimated: a hollow dot with a 3 pt ring in the operator colour; live: a filled dot with a white rim.
-        dot.backgroundColor = (estimated ? UIColor.black : color).cgColor
-        dot.borderColor = (estimated ? color : UIColor.white).cgColor
-        dot.borderWidth = estimated ? 3 : 2
-        chevron.isHidden = bearing == nil
-        chevron.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat((bearing ?? 0) * .pi / 180)))
+        picture.contents = LiveMapImages.train(color: color, heading: bearing != nil).cgImage
+        picture.opacity = estimated ? 0.7 : 1
+        picture.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat((bearing ?? 0) * .pi / 180)))
+        halo.isHidden = estimated
         if halo.animation(forKey: "pulse") == nil && !reduceMotion {
             let scale = CABasicAnimation(keyPath: "transform.scale")
             scale.fromValue = 1

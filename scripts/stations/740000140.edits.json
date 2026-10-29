@@ -1,5 +1,5 @@
 {
-  "_comment": "Hand edits on top of the OpenStreetMap draft of Nässjö C (scripts/stations/draft_from_osm.py), BUILDOUT O5 batch 1 (2026-10-29). Drafted from OSM only so far; facts from the operator's station page, photos or a walk go here with their source. Level names are placeholders until a plan or signage names them.",
+  "_comment": "Hand edits on top of the OpenStreetMap draft of Nässjö C (scripts/stations/draft_from_osm.py). OSM has little here (platforms 9 and 10 only, no footbridge, no entrances), so most of what is known comes from the owner's two walks on 2026-10-29: a footbridge about 6 m above the platforms spans all platforms from the station building to a car park on the far side, with escalators, stairs and a lift down to each island (2/4, 5–8, 9–10) and a lift and escalator down into the station building; the building has a main entrance, a Pressbyrån side entrance and an Espresso House entrance on the town side, doors out to platforms 1a and 1b, toilets and luggage lockers. Platform outlines for 1, 2/4 and 5–8 are not in OSM and are not drawn (positions from a walk are not geometry).",
   "radius": 400,
   "paths_by_layer": true,
   "path_radius": 30,
@@ -8,13 +8,27 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platform level",
+      "order": 0,
+      "height_m": 0,
+      "height_source": "reference level"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Footbridge",
+      "order": 1,
+      "height_m": 6.2,
+      "height_source": "owner's AR walk 2026-10-29 (walk DC1B3590): barometer +5.5 … +6.6 m at nine marks along the footbridge, median 6.0; the lift marks of walk 0CA1F029 read +6.6/+6.9"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
+      "read": "2026-10-29"
+    },
+    {
+      "name": "Owner's AR walk 2026-10-29 (walk DC1B3590, 14 min, 28 marks) and walk 0CA1F029 (lift, 6 marks)",
       "read": "2026-10-29"
     }
   ],
@@ -22,6 +36,248 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-29",
+      "what": "Footbridge level with its barometer height, entrances, toilets, lockers, shops and the stairs/lift/escalator links the walks showed. Platforms 1, 2/4 and 5–8 still need OSM outlines (or a plan) before their links can be drawn."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        73.9,
+        -39.5
+      ],
+      "level": 0,
+      "name": "Main entrance",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Main enterance, the earlier was the exit' (GPS ±5 m; heights from the barometer)"
+    },
+    {
+      "at": [
+        83.4,
+        -49.5
+      ],
+      "level": 0,
+      "name": "Pressbyrån entrance",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Pressbyran entrance' (GPS ±11 m; heights from the barometer)"
+    },
+    {
+      "at": [
+        66.8,
+        -31.7
+      ],
+      "level": 0,
+      "name": "Espresso House entrance",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Espresso house enterance' (GPS ±17 m; heights from the barometer)"
+    },
+    {
+      "at": [
+        -22.6,
+        -100.7
+      ],
+      "level": 1,
+      "name": "Footbridge to the car park (far side)",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Elevator or stairs down on the other side to some parking' (GPS ±5 m; heights from the barometer)"
+    }
+  ],
+  "pois": [
+    {
+      "id": "walk-toilets",
+      "category": "toilet",
+      "name": "Toilets",
+      "level": "0",
+      "x": 32.8,
+      "y": -36.2,
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Some toilets and the door out to platform 1b' (GPS ±14 m; heights from the barometer)"
+    },
+    {
+      "id": "walk-lockers",
+      "category": "lockers",
+      "name": "Luggage lockers",
+      "level": "0",
+      "x": 36.4,
+      "y": -41.7,
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Some luggage lockers' (GPS ±68 m; heights from the barometer)"
+    },
+    {
+      "id": "walk-pressbyran",
+      "category": "shop",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 85.2,
+      "y": -49.5,
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Pressbyran entrance' (GPS ±11 m; heights from the barometer)"
+    },
+    {
+      "id": "walk-espresso",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": 66.8,
+      "y": -31.7,
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Espresso house enterance' (GPS ±17 m; heights from the barometer)"
+    }
+  ],
+  "connections": [
+    {
+      "from": {
+        "at": [
+          1.3,
+          -78.5
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "9",
+        "near": [
+          1.3,
+          -78.5
+        ]
+      },
+      "kind": "stairs",
+      "seconds": 45,
+      "note": "Stairs from the footbridge down to platforms 9–10; a lift beside them.",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Track 9-10 you can get stairs down in the direction I'm facing, or an …' (GPS ±11 m; heights from the barometer)"
+    },
+    {
+      "from": {
+        "at": [
+          1.3,
+          -78.5
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "10",
+        "near": [
+          1.3,
+          -78.5
+        ]
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "note": "Lift from the footbridge to platforms 9–10.",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Track 9-10 you can get stairs down in the direction I'm facing, or an …' (GPS ±11 m; heights from the barometer)"
+    },
+    {
+      "from": {
+        "at": [
+          52.5,
+          -67.3
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          72.1,
+          -55.1
+        ],
+        "level": "0"
+      },
+      "kind": "escalator",
+      "seconds": 40,
+      "note": "Escalator from the footbridge down into the station building.",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Escalator down to station / Bottom of escalator' (GPS ±14 m; heights from the barometer)"
+    },
+    {
+      "from": {
+        "at": [
+          50.1,
+          -55.1
+        ],
+        "level": "1"
+      },
+      "to": {
+        "at": [
+          33.4,
+          -58.4
+        ],
+        "level": "0"
+      },
+      "kind": "lift",
+      "seconds": 60,
+      "note": "Lift from the footbridge down into the station building.",
+      "_source": "owner's walk 2026-10-29 (walk 0CA1F029), mark 'Taking elevator down to main station / Out of elevator' (GPS ±36 m)"
+    },
+    {
+      "from": {
+        "at": [
+          41.2,
+          -66.2
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "2a",
+        "near": [
+          51.9,
+          -85.2
+        ]
+      },
+      "kind": "escalator",
+      "seconds": 40,
+      "note": "Escalator from the footbridge down to the island of platforms 2a, 2b and 4 (stairs and a lift beside it).",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Bottom of escalator to track 4 and 2a' (GPS ±5 m)"
+    },
+    {
+      "from": {
+        "at": [
+          41.2,
+          -66.2
+        ],
+        "level": "1"
+      },
+      "to": {
+        "platform": "2b",
+        "near": [
+          51.9,
+          -85.2
+        ]
+      },
+      "kind": "stairs",
+      "seconds": 45,
+      "note": "Stairs from the footbridge to the 2/4 island (the 2a/2b split is a sector line along one platform).",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Bottom of escalator to track 4 and 2a' (GPS ±5 m)"
+    },
+    {
+      "from": {
+        "at": [
+          62.0,
+          -79.6
+        ],
+        "level": "0"
+      },
+      "to": {
+        "platform": "1a",
+        "near": [
+          62.0,
+          -79.6
+        ]
+      },
+      "kind": "walk",
+      "seconds": 10,
+      "note": "Door from the station building out to platform 1a.",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Door out to platform 1a' (GPS ±10 m)"
+    },
+    {
+      "from": {
+        "at": [
+          32.8,
+          -36.2
+        ],
+        "level": "0"
+      },
+      "to": {
+        "platform": "1b",
+        "near": [
+          32.8,
+          -36.2
+        ]
+      },
+      "kind": "walk",
+      "seconds": 10,
+      "note": "Door from the station building (by the toilets) out to platform 1b.",
+      "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Some toilets and the door out to platform 1b' (GPS ±14 m)"
     }
   ]
 }

@@ -344,7 +344,7 @@ export class Notifier {
       if (g) await this.deliver(L, g);
     }
     if (L.next) {
-      const c = change(L.facts, L.next, L.prefs, now, L.lang, this.walkBetween(L.facts, L.next));
+      const c = change(L.facts, L.next, L.prefs, now, L.lang, this.walkBetween(L.facts, L.next), L.live);
       if (c) await this.deliver(L, c);
     }
   }

@@ -402,3 +402,12 @@ Each session appends an entry: date, phase and item, what's done (with commits),
   - **No map possible yet (OSM has no numbered platforms; `platform_refs` from a plan needed):** Herrljunga C, Falköping C, Arlanda C, Ski, Oslo lufthavn.
   - **Review queue for the new maps:** 107 items over 24 stations (`data/stations/REVIEW.md`): mostly platforms not connected to the walking graph, platform heights and placeholder level names. Nothing was checked against videos or photos in this batch (none for these stations), and no simulator look yet.
   - **Still to draft:** 51 Danish hub/mid stations (batch 2), then the withheld and unnumbered ones with sources.
+
+- **2026-10-29, owner's notes from a ride on build 50, and the Nässjö walks.** Done in this chat:
+  - Trip map: the train marker is now Explore's disc with the heading cone (`TrainMarkerView` in `Map/MapLibreSupport.swift`), pulsing halo while live, fainter when estimated.
+  - Stops list: the train's dot is drawn last and a little larger than a stop's, so it sits over a stop dot when the two meet (`ClackDesign/Components/StopTimeline.swift`).
+  - "Change at X" alert: no longer a fixed 15 min before arriving; it goes once the live state's next stop is the change station (the stop before it is behind you), never earlier than 15 min out, and at 5 min out in any case; without a live state at 15 min as before (`push/rules.ts` `changeDue`; the get-off alert was already stop-relative, within 10 min of the ETA).
+  - Train type picker: the types drawn in this operator's livery come first, the "X or Y" groups for uncertain automatic types are left out, two types with the same drawing are offered once, and the picture is larger with the name as a caption (`TrainCard.pickable`).
+  - Nässjö C (`740000140`): the owner's two walks (AR walk DC1B3590, 28 marks; lift walk 0CA1F029) gave the footbridge level (+6.2 m, barometer), four entrances, toilets, lockers, Pressbyrån, Espresso House, and the escalator/stairs/lift links from the footbridge to platforms 2a/2b and 9–10 and into the building, and the doors to 1a/1b. 8 platforms connected now; 5–8 still have no OSM outline. Walk files deleted from the Mac after use.
+  - Not done on screen: none of these four changes was screenshotted (time); the owner sees them on the next install.
+
