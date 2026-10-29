@@ -672,11 +672,15 @@ struct TimeBlock: View {
     @ViewBuilder
     private var platformTag: some View {
         if let platform {
-            Text(platform)
-                .clack(.chip).fontWeight(.bold).monospacedDigit().foregroundStyle(Ink.accentInk)
-                .padding(.vertical, 2).padding(.horizontal, 8)
+            // A marked box in the accent yellow with a rail mark, so it reads as the platform (owner, 2026-10-29).
+            HStack(spacing: 4) {
+                LucideIcon(name: "train-track", size: 12)
+                Text(platform).clack(.chip).fontWeight(.bold).monospacedDigit()
+            }
+                .foregroundStyle(Ink.bg)
+                .padding(.vertical, 4).padding(.horizontal, 8)
                 .frame(minWidth: 32)
-                .background(Ink.surfaceRaised, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
+                .background(Ink.accent, in: RoundedRectangle(cornerRadius: Radius.tag, style: .continuous))
                 .fixedSize()
                 .onTapGesture { onSetPlatform?() }
                 .accessibilityElement(children: .ignore)
@@ -693,21 +697,20 @@ struct TimeBlock: View {
                 platformTag
             }
             .frame(minHeight: 26)
-            Text(Format.time(sched, tz: tz, clock: app.settings.clock))
-                .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
-                .opacity(changed ? 1 : 0)
-                .accessibilityHidden(!changed)
+            // The planned time, struck, with the delay beside it on the same line (owner, 2026-10-29); blank when nothing changed.
+            HStack(spacing: 8) {
+                Text(Format.time(sched, tz: tz, clock: app.settings.clock))
+                    .clack(.struck).strikethrough().monospacedDigit().foregroundStyle(Ink.text3)
+                    .opacity(changed ? 1 : 0)
+                    .accessibilityHidden(!changed)
+                if delay != nil || canceled { DelayText(delay: delay, canceled: canceled) }
+            }
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 SplitFlap(value: Format.time(actual ?? sched, tz: tz, clock: app.settings.clock), size: .time, intro: true)
                     .opacity(canceled ? 0.6 : 1)
                     .overlay { if canceled { Rectangle().fill(Ink.text).frame(height: 1.5) } }
                 if extraDays > 0 { Text("+\(extraDays)").clack(.captionUpper).foregroundStyle(Ink.text2) }
             }
-            // The delay sits under the time, and only when it is known: never a lone dash.
-            Group {
-                if delay != nil || canceled { DelayText(delay: delay, canceled: canceled) } else { Color.clear }
-            }
-            .frame(minHeight: 18, alignment: .leading)
         }
         .tileSurface()
     }
