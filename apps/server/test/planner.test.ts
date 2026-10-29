@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { openDb } from '../src/db/client.js';
 import { stations, timetableStopTimes, timetableTripDates, timetableTrips } from '../src/db/schema.js';
-import { dayIndex, forgetDayIndexes, plan } from '../src/search/planner.js';
+import { dayIndex, forgetDayIndexes, plan, rank, type PlannedJourney } from '../src/search/planner.js';
 import { serviceTimeToUtc } from '../src/lib/time.js';
 
 // A small network on 29 Oct 2026, modelled on the owner's Jönköping → Kolding: change at Nässjö onto the Berlin train,
@@ -56,5 +56,23 @@ describe('the journey planner', () => {
     const numbers = plan(db, await dayIndex(db, D), 'jo', 'kd', day, day + 86400_000).map((j) => j.legs.map((l) => l.trainNumber).join('+'));
     expect(numbers).toContain('94');
     expect(numbers).toContain('95');
+  });
+
+  it('ranks: drops long detours and near-equals with more changes, keeps night journeys', () => {
+    const j = (dep: number, arr: number, changes: number, night = false): PlannedJourney => ({
+      legs: [{ key: `k${dep}-${arr}-${changes}`, trainNumber: String(dep), product: night ? 'night' : 'regional', from: { time: dep }, to: { time: arr } } as never],
+      legCountries: [null], changes: Array.from({ length: changes }, (_, i) => ({ stationId: `s${i}`, name: `S${i}`, gapMin: 20, minMin: 7, comfort: 'relaxed' as const, tier: 'default' as const })),
+      dep, arr, durationMin: (arr - dep) / 60_000,
+    });
+    const H = 3600_000;
+    const base = 1_000_000_000_000;
+    const quick = j(base, base + 4 * H, 1);
+    const detour = j(base + H, base + 23 * H, 5); // 22 h when a 4 h one exists
+    const nearEqualMore = j(base + 10 * 60_000, base + 4 * H + 10 * 60_000, 3); // same as quick, two more changes
+    const later = j(base + 3 * H, base + 7 * H, 2);
+    const nightTrain = j(base + 2 * H, base + 20 * H, 0, true); // 18 h: a bed, not a detour
+    const kept = rank([quick, detour, nearEqualMore, later, nightTrain]);
+    expect(kept.map((x) => x.legs[0]!.trainNumber)).toEqual([String(base), String(base + 2 * H), String(base + 3 * H)]);
+    expect(kept.find((x) => x.fastest)?.legs[0]!.trainNumber).toBe(String(base));
   });
 });

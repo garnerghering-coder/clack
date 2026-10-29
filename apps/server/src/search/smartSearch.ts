@@ -31,6 +31,8 @@ export interface SmartSearchResult {
   connections?: Connection[];
   /** Journeys with up to two changes, direct trains among them (search/planner.ts); filled by the route. */
   journeys?: import('./planner.js').PlannedJourney[];
+  /** The time window the journeys cover (epoch ms, start inclusive), so the app can page earlier and later. */
+  window?: { start: number; end: number };
   /** The date is before the current timetable (historical archive search is a later step). */
   outsideTimetable: boolean;
   /** For a date before the current timetable: whether its archive timetable is ready, loading or unavailable. */

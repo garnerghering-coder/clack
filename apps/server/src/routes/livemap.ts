@@ -223,7 +223,10 @@ export const liveMapRoutes =
       const now = Date.now();
       if (!network || now - network.at > 15_000) {
         for (const id of ingest.context.keys()) if (!ingest.trains.has(id)) ingest.context.delete(id);
-        const body = networkStatus(ingest.trains.values(), ingest.context, now);
+        const body = networkStatus(ingest.trains.values(), ingest.context, now, (aId, bId) => {
+          const a = pointOf(aId), b = pointOf(bId);
+          return a && b ? encodePolyline(segmentBetween(db, a, b).points) : null;
+        });
         // Not kept while the map is still filling (no trains yet): the next ask works it out again.
         if (ingest.trains.size === 0) return body;
         network = { at: now, body };

@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { dayIndexWithin, plan } from '../search/planner.js';
+import { dayIndexWithin, plan, rank } from '../search/planner.js';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
@@ -23,7 +23,7 @@ export const searchRoutes =
     const record = { ensure: (c: 'NO' | 'FI', date: string) => ensureRecordedDay(db, c, date, { log }), from: (c: 'NO' | 'FI') => recordFrom(db, c) };
     const search = createSmartSearch(db, stationIndexCache(db), (date) => ensureHistory(db, date, { log }), record);
 
-    app.get<{ Querystring: { q?: string; date?: string; changes?: string } }>('/search', async (req, reply) => {
+    app.get<{ Querystring: { q?: string; date?: string; changes?: string; after?: string; hours?: string } }>('/search', async (req, reply) => {
       const date = req.query.date ?? todayIn(COUNTRIES.SE.tz);
       if (!DATE.test(date)) return reply.code(400).send({ error: 'date must be YYYY-MM-DD' });
       const out = search(req.query.q ?? '', date);
@@ -32,13 +32,37 @@ export const searchRoutes =
       const { from, to } = out.interpretation;
       if (from && to && !out.outsideTimetable && !out.interpretation.trainNumber) {
         const tz = tzOf(from.country) ?? COUNTRIES.SE.tz;
-        const start = serviceTimeToUtc(date, 0, tz);
-        const maxChanges = Math.max(0, Math.min(2, Number(req.query.changes ?? 2) || 0));
-        // The day's index takes 10-50 s to build the first time a date is asked for: the search doesn't wait for it
+        // Up to five changes (owner, 2026-10-28); two unless asked, as older apps expect.
+        const maxChanges = Math.max(0, Math.min(5, Number(req.query.changes ?? 2) || 0));
+        // The window: the whole service day (older apps), or `after` + `hours` for paging. The day planned is the one
+        // `after` falls in (the app pages back and forth from any date with the same `date`); a window that runs
+        // into the next date searches both days' indexes and ranks the results together.
+        const after = Number(req.query.after);
+        const paged = Number.isFinite(after) && after > 0;
+        const hours = Math.max(1, Math.min(24, Number(req.query.hours) || 6));
+        const planDate = paged ? todayIn(tz, after) : date;
+        const dayStart = serviceTimeToUtc(planDate, 0, tz);
+        const dayEnd = dayStart + 86400_000;
+        const winStart = paged ? after : dayStart;
+        const winEnd = paged ? after + hours * 3600_000 : dayEnd;
+        // The day's index takes a moment to build the first time a date is asked for: the search doesn't wait for it
         // (the app gives up after 15 s). It answers with the direct trains and `journeysPending`, and the app asks again.
-        const ix = await dayIndexWithin(db, date, 2000);
-        if (ix) out.journeys = plan(db, ix, from.id, to.id, start, start + 86400_000, req.query.changes === undefined ? 2 : maxChanges);
-        else return { ...out, journeysPending: true };
+        const found: typeof out.journeys = [];
+        let pending = false;
+        if (winStart < dayEnd) {
+          const ix = await dayIndexWithin(db, planDate, 2000);
+          if (ix) found.push(...plan(db, ix, from.id, to.id, winStart, Math.min(winEnd, dayEnd), maxChanges));
+          else pending = true;
+        }
+        if (winEnd > dayEnd) {
+          const next = addDays(planDate, 1);
+          const ix = await dayIndexWithin(db, next, 2000);
+          if (ix) found.push(...plan(db, ix, from.id, to.id, Math.max(winStart, dayEnd), winEnd, maxChanges));
+          else pending = true;
+        }
+        if (pending) return { ...out, journeysPending: true };
+        out.journeys = rank(found);
+        out.window = { start: winStart, end: winEnd };
       }
       return out;
     });

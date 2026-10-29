@@ -77,7 +77,7 @@ describe('matching Trafikverket announcements to a leg', () => {
       { seq: 2, role: 'alight', sig: 'U', schedArr: at('10:40'), schedDep: null },
     ];
     const got = matchAnnouncements(leg, [sx('Cst', 'Avgang', '10:00', 'Vagnsordning 4-3-2-1'), sx('U', 'Ankomst', '10:40')], '582');
-    expect(got.get(1)!.composition).toEqual({ locomotive: false, cars: 4, units: 1 });
+    expect(got.get(1)!.composition).toEqual({ locomotive: false, cars: 4, units: 1, totalCars: 4, unitCars: [4] });
     expect(got.get(2)!.composition).toBeNull();
   });
 });

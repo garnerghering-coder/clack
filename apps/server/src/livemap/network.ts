@@ -30,6 +30,30 @@ export interface Corridor {
   causes: NetworkCause[];
   /** The late trains' live map ids, for the map to highlight. */
   trainIds: string[];
+  /** The track between each pair of neighbouring stations in the corridor, for the map to draw (empty when the
+   * stations' ids or the track aren't known). */
+  stretches: Stretch[];
+  /** The late trains themselves, most late first. */
+  lateTrains: CorridorTrain[];
+}
+
+export interface Stretch {
+  a: string;
+  b: string;
+  aId: string | null;
+  bId: string | null;
+  /** Encoded polyline along the track, when both ids are known. */
+  polyline: string | null;
+}
+
+export interface CorridorTrain {
+  id: string;
+  number: string;
+  operatorId: string | null;
+  delayMin: number;
+  next: string | null;
+  destination: string | null;
+  causes: DelayCause[];
 }
 
 export interface CountryStatus {
@@ -62,9 +86,11 @@ export interface NetworkStatus {
 
 export const LATE_LIST = 12;
 
-interface Stretch {
+interface StretchTrains {
   a: string;
   b: string;
+  aId: string | null;
+  bId: string | null;
   trains: LiveTrain[];
 }
 
@@ -75,7 +101,7 @@ const median = (xs: number[]) => {
 };
 
 /** Orders a corridor's stations along it when its stretches form one line; else keeps them as met. */
-function ordered(stretches: Stretch[]): string[] {
+function ordered(stretches: StretchTrains[]): string[] {
   const links = new Map<string, string[]>();
   for (const s of stretches) {
     links.set(s.a, [...(links.get(s.a) ?? []), s.b]);
@@ -89,9 +115,15 @@ function ordered(stretches: Stretch[]): string[] {
   return out;
 }
 
-export function networkStatus(trains: Iterable<LiveTrain>, context: Map<string, { prev: string | null; causes: DelayCause[] }>, now = Date.now()): NetworkStatus {
+export type Context = Map<string, { prev: string | null; prevId?: string | null; causes: DelayCause[] }>;
+
+/**
+ * `geometry(aId, bId)`: the track between two stations as an encoded polyline, or null; the route passes
+ * `segmentBetween`. Without it, corridors carry no stretches.
+ */
+export function networkStatus(trains: Iterable<LiveTrain>, context: Context, now = Date.now(), geometry?: (aId: string, bId: string) => string | null): NetworkStatus {
   const countries: Record<string, CountryStatus> = {};
-  const stretches = new Map<string, Stretch>();
+  const stretches = new Map<string, StretchTrains>();
   const all = [...trains];
   for (const t of all) {
     const country = countryOfLiveId(t.id);
@@ -99,12 +131,18 @@ export function networkStatus(trains: Iterable<LiveTrain>, context: Map<string, 
     c.trains++;
     if (t.delayMin !== null) c.known++;
     if ((t.delayMin ?? 0) >= LATE_MIN) c.late++;
-    const prev = context.get(t.id)?.prev;
+    const ctx = context.get(t.id);
+    const prev = ctx?.prev;
     if (!prev || !t.next || prev === t.next) continue;
     // Both directions are the same track.
-    const [a, b] = prev < t.next ? [prev, t.next] : [t.next, prev];
+    const flip = prev > t.next;
+    const [a, b] = flip ? [t.next, prev] : [prev, t.next];
+    const [aId, bId] = flip ? [t.nextId ?? null, ctx?.prevId ?? null] : [ctx?.prevId ?? null, t.nextId ?? null];
     const k = `${a}|${b}`;
-    (stretches.get(k) ?? stretches.set(k, { a, b, trains: [] }).get(k)!).trains.push(t);
+    const s = stretches.get(k) ?? stretches.set(k, { a, b, aId, bId, trains: [] }).get(k)!;
+    s.aId ??= aId;
+    s.bId ??= bId;
+    s.trains.push(t);
   }
   const flagged = [...stretches.values()].filter((s) => {
     const late = s.trains.filter((t) => (t.delayMin ?? 0) >= LATE_MIN).length;
@@ -120,7 +158,7 @@ export function networkStatus(trains: Iterable<LiveTrain>, context: Map<string, 
     return r;
   };
   for (const s of flagged) parent.set(find(s.a), find(s.b));
-  const groups = new Map<string, Stretch[]>();
+  const groups = new Map<string, StretchTrains[]>();
   for (const s of flagged) {
     const r = find(s.a);
     groups.set(r, [...(groups.get(r) ?? []), s]);
@@ -149,6 +187,8 @@ export function networkStatus(trains: Iterable<LiveTrain>, context: Map<string, 
       lon: late.reduce((s, t) => s + t.lon, 0) / late.length,
       causes: [...causes.values()].sort((x, y) => y.trains - x.trains),
       trainIds: late.map((t) => t.id),
+      stretches: group.map((s) => ({ a: s.a, b: s.b, aId: s.aId, bId: s.bId, polyline: s.aId && s.bId && geometry ? geometry(s.aId, s.bId) : null })),
+      lateTrains: [...late].sort((x, y) => (y.delayMin ?? 0) - (x.delayMin ?? 0)).map((t) => ({ id: t.id, number: t.number, operatorId: t.operatorId, delayMin: t.delayMin ?? 0, next: t.next, destination: t.destination, causes: context.get(t.id)?.causes ?? [] })),
     };
   });
   corridors.sort((x, y) => y.late - x.late || y.medianDelay - x.medianDelay);

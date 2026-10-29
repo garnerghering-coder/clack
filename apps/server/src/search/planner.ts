@@ -14,7 +14,7 @@ import { REPO_ROOT } from '../env.js';
 import { addDays } from '../lib/time.js';
 import { candidateTrips, loadStops, productOf, toResult, utc, type StopRow, type TripResult, type TripRow } from './timetable.js';
 
-const MAX_TRIPS = 3; // up to two changes
+const MAX_TRIPS = 6; // up to five changes (owner, 2026-10-28); the default asked for is two
 const MAX_WAIT_MS = 3 * 3600_000;
 const breathe = () => new Promise<void>((r) => setImmediate(r));
 
@@ -280,13 +280,39 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
         found.push(j);
       }
   }
-  // A journey with a night train is only dropped for another with one: the bed is the point, so a later daytime train
-  // arriving sooner doesn't replace it (owner, 2026-10-28).
-  const night = (j: PlannedJourney) => j.legs.some((l) => l.product === 'night');
-  const kept = found.filter(
-    (c) => !found.some((d) => d !== c && (!night(c) || night(d)) && d.dep >= c.dep && d.arr <= c.arr && d.changes.length <= c.changes.length && (d.dep > c.dep || d.arr < c.arr || d.changes.length < c.changes.length)),
+  return rank(found);
+}
+
+const night = (j: PlannedJourney) => j.legs.some((l) => l.product === 'night');
+
+/**
+ * The journeys worth showing, by departure, from everything the search found (also from two days' searches merged):
+ * - dominance: a journey is dropped when another leaves no earlier, arrives no later and has no more changes;
+ * - detours: dropped when longer than 1.5 × the fastest, or 3 h longer than it (a 22-hour route when a 14-hour one
+ *   exists), and when it has more changes than a near-equal (within 30 min at both ends) with fewer;
+ * - night journeys are judged against night journeys only: the bed is the point, so a later daytime train arriving
+ *   sooner doesn't replace one (owner, 2026-10-28).
+ * The same train in two feeds is already one journey (`plan` dedupes by id). Pure.
+ */
+export function rank(found: PlannedJourney[]): PlannedJourney[] {
+  const seen = new Set<string>();
+  const unique = found.filter((j) => {
+    const id = `${j.dep}|${j.arr}|` + j.legs.map((l) => `${l.trainNumber ?? l.key}@${l.from.time}`).join('>');
+    return seen.has(id) ? false : (seen.add(id), true);
+  });
+  const dominated = unique.filter(
+    (c) => !unique.some((d) => d !== c && (!night(c) || night(d)) && d.dep >= c.dep && d.arr <= c.arr && d.changes.length <= c.changes.length && (d.dep > c.dep || d.arr < c.arr || d.changes.length < c.changes.length)),
   );
+  const half = 30 * 60_000;
+  const kept = dominated.filter((c) => {
+    const peers = dominated.filter((d) => d !== c && (!night(c) || night(d)));
+    if (!peers.length) return true;
+    const fastest = Math.min(c.durationMin, ...peers.map((j) => j.durationMin));
+    if (c.durationMin > Math.max(fastest * 1.5, fastest + 180)) return false;
+    return !peers.some((d) => d.changes.length < c.changes.length && Math.abs(d.dep - c.dep) <= half && d.arr <= c.arr + half);
+  });
   kept.sort((a, b) => a.dep - b.dep || a.arr - b.arr);
+  for (const j of kept) j.fastest = undefined;
   if (kept.length > 1) {
     const quickest = Math.min(...kept.map((j) => j.durationMin));
     kept.find((j) => j.durationMin === quickest)!.fastest = true;
