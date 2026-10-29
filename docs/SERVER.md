@@ -165,3 +165,5 @@ WantedBy=multi-user.target
 
 **Owner:** this unit file is the one from the old guide with the user changed to `clack`; check it against
 `systemctl cat clack` on the server, which is the truth.
+
+- `GET /api/map/station-detail?bbox=W,S,E,N` (at most 0.06° × 0.03°): every rail-graph track in the box at full detail with `service`/`minor` flags, and the platform outlines of the mapped stations in it (`kind: platform`, `ref`, `tracks`, `node`, `draft`). Gzipped, cached an hour per box rounded to 100 m. Feeds the Explore map's station detail from zoom 13.

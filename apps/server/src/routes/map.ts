@@ -7,6 +7,7 @@ import { PMTiles, type RangeResponse, type Source } from 'pmtiles';
 import { REPO_ROOT } from '../env.js';
 import type { Db } from '../db/client.js';
 import { BASEMAP_FILE, basemapInfo } from '../import/basemap.js';
+import { parseBbox, stationDetailGz } from '../geo/stationDetail.js';
 import { railGraph } from '../geo/railGraph.js';
 import { railNetworkGz } from '../geo/railNetwork.js';
 
@@ -65,6 +66,16 @@ export const mapRoutes =
       const f = path.join(FONTS_DIR, stack, range);
       if (!fs.existsSync(f)) return reply.code(404).send({ error: 'no such glyphs' });
       return reply.header('Content-Type', 'application/x-protobuf').header('Cache-Control', 'max-age=604800').send(fs.createReadStream(f));
+    });
+
+    // Station detail at close zoom: every track in a small box at full detail (service tracks flagged) and the
+    // platform outlines of the mapped stations in it. `bbox=W,S,E,N`, at most about 3 × 3 km.
+    app.get<{ Querystring: { bbox?: string } }>('/map/station-detail', async (req, reply) => {
+      const g = railGraph();
+      if (!g) return reply.code(404).send({ error: 'rail graph missing (data/osm/rail-graph.json.gz)' });
+      const b = parseBbox(req.query.bbox);
+      if (!b) return reply.code(400).send({ error: 'bbox must be W,S,E,N and at most 0.06° wide and 0.03° tall' });
+      return reply.header('Content-Type', 'application/geo+json').header('Content-Encoding', 'gzip').header('Cache-Control', 'max-age=600').send(stationDetailGz(db, g, b));
     });
 
     app.get('/map/rail-network.geojson', async (_req, reply) => {
