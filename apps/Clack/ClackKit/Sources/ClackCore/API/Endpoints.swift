@@ -78,8 +78,14 @@ extension APIClient {
         return try await get(["alternatives"], query: query)
     }
 
-    public func search(_ text: String, date: String) async throws -> SearchResponse {
-        try await get(["search"], query: ["q": text, "date": date])
+    /// `changes` (0–5) is the most changes a journey may have; `after` (epoch ms) and `hours` ask for one window of
+    /// journeys instead of the whole service day, for paging earlier and later (the window may run into the next day).
+    public func search(_ text: String, date: String, changes: Int? = nil, after: Double? = nil, hours: Int? = nil) async throws -> SearchResponse {
+        var query = ["q": text, "date": date]
+        if let changes { query["changes"] = String(changes) }
+        if let after { query["after"] = String(Int64(after)) }
+        if let hours { query["hours"] = String(hours) }
+        return try await get(["search"], query: query)
     }
 
     /// Starts fetching an older day's timetable as soon as the day is picked, so it's ready when the search runs.

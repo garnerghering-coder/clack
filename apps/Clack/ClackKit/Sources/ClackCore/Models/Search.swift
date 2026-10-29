@@ -31,6 +31,15 @@ public nonisolated struct HistoryPrepared: Codable, Hashable, Sendable {
 
 /// `GET /api/search`: how the smart search read the text, station suggestions, and the trains or connections found.
 public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
+    public nonisolated struct Window: Codable, Hashable, Sendable {
+        public let start: Double
+        public let end: Double
+        public init(start: Double, end: Double) {
+            self.start = start
+            self.end = end
+        }
+    }
+
     public nonisolated struct Interpretation: Codable, Hashable, Sendable {
         public nonisolated struct OperatorText: Codable, Hashable, Sendable {
             public let id: String
@@ -68,6 +77,8 @@ public nonisolated struct SearchResponse: Codable, Hashable, Sendable {
     public let journeys: [PlannedJourney]?
     /// The planner is still building the day (the first ask for a date): ask again shortly for the journeys.
     public var journeysPending: Bool? = nil
+    /// The time window the journeys cover (epoch ms), from which the app pages earlier and later.
+    public var window: Window? = nil
     public let outsideTimetable: Bool
     /// For dates before yesterday: `ready`, `loading` (try again shortly), `failed`, `unavailable`, `norway` or
     /// `finland` (before that country's record starts).

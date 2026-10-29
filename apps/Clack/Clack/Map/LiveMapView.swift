@@ -166,6 +166,17 @@ final class LiveMapController {
         for id in ["route", "route-ahead", "route-context"] { mapView?.setShape(MapGeometry.lines([]), source: id) }
     }
 
+    /// A corridor from the network status: its track in orange and a ring on each of its late trains.
+    func setCorridor(lines: [[LatLon]], trainIds: [String]) {
+        mapView?.setShape(MapGeometry.lines(lines), source: "corridor")
+        (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id IN %@", trainIds)
+    }
+
+    func clearCorridor() {
+        mapView?.setShape(MapGeometry.lines([]), source: "corridor")
+        (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", "")
+    }
+
     func setRouteColor(_ hex: String) {
         guard let style = mapView?.style else { return }
         let color = UIColor(cssColor: hex)

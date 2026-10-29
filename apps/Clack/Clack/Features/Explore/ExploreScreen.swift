@@ -117,13 +117,18 @@ struct ExploreScreen: View {
         .sensoryFeedback(.selection, trigger: model.follows.count)
         #if DEBUG
         .task { await debugSearch() }
-        // `-exploreNetwork` opens the network status; with `-networkSample`, filled with made-up data (a preview of a bad day).
+        // `-exploreNetwork` opens the network status; with `-networkSample`, filled with made-up data (a preview of a bad
+        // day); `-exploreCorridor` goes on to the first corridor's sheet and highlight.
         .task {
             let args = CommandLine.arguments
             guard args.contains("-exploreNetwork") else { return }
             try? await Task.sleep(for: .seconds(3))
             if args.contains("-networkSample") { model.useSampleNetwork() }
             model.showNetwork = true
+            if args.contains("-exploreCorridor") {
+                try? await Task.sleep(for: .seconds(2))
+                if let c = model.network?.corridors.first { model.showCorridor(c) }
+            }
         }
         #endif
         // Full-bleed: the map runs under where the bar would be; its own buttons float over it.
@@ -367,6 +372,12 @@ struct ExploreScreen: View {
             )
         } else if let view = model.scheduled {
             scheduledSheet(view, collapsed: $model.collapsed)
+        } else if let corridor = model.corridor {
+            CorridorSheet(corridor: corridor, gone: model.corridorGone, updatedAt: model.network?.at, onClose: { model.closeCorridor() }) { id in
+                model.closeCorridor()
+                Task { await model.select(id) }
+            }
+            .task(id: corridor.id) { await model.watchCorridor() }
         } else if let station = model.stationSheet {
             LiveStationSheet(
                 id: station.id, name: station.name, onClose: { model.stationSheet = nil },

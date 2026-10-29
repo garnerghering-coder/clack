@@ -56,6 +56,9 @@ final class ExploreModel {
     var showNetwork = false
     private(set) var network: NetworkStatus?
     private(set) var networkFailed = false
+    /// The corridor on show (highlighted on the map, its sheet open) and whether it has since cleared.
+    private(set) var corridor: NetworkStatus.Corridor?
+    private(set) var corridorGone = false
     var query = ""
     var searching = false
     private(set) var stationHits: [StationHit] = []
@@ -427,17 +430,30 @@ final class ExploreModel {
     }
 
     #if DEBUG
-    /// Made-up numbers in the server's shape, to look at the panel on a calm day. Never in a release build.
-    func useSampleNetwork() {
+    /// The sample's Skåne corridor, with straight stretches between the stations' real positions (the track itself
+    /// comes from the server) and two late trains, to look at the corridor sheet.
+    private var sampleCorridor: NetworkStatus.Corridor {
         let signal = NetworkStatus.Cause(src: "trv", code: nil, text: "Signalfel", trains: 5)
         let points = NetworkStatus.Cause(src: "trv", code: nil, text: "Växelfel", trains: 1)
+        var c = NetworkStatus.Corridor(stations: ["Hässleholm C", "Lund C", "Malmö C"], country: "SE", trains: 7, late: 6, medianDelay: 18, maxDelay: 34, lat: 55.8, lon: 13.4, causes: [signal, points], trainIds: [])
+        let h = LatLon(56.1585, 13.7636), l = LatLon(55.7068, 13.1870), m = LatLon(55.6090, 12.9999)
+        c.stretches = [
+            .init(a: "Hässleholm C", b: "Lund C", aId: "740000008", bId: "740000006", polyline: Polyline.encode([h, LatLon(55.93, 13.55), l])),
+            .init(a: "Lund C", b: "Malmö C", aId: "740000006", bId: "740000003", polyline: Polyline.encode([l, m])),
+        ]
+        c.lateTrains = [
+            .init(id: "s1", number: "1084", operatorId: "oresundstag", delayMin: 34, next: "Lund C", destination: "Helsingør", causes: [.init(src: "trv", code: nil, text: "Signalfel")]),
+            .init(id: "s2", number: "533", operatorId: "sj", delayMin: 18, next: "Malmö C", destination: "Malmö C", causes: []),
+        ]
+        return c
+    }
+
+    /// Made-up numbers in the server's shape, to look at the panel on a calm day. Never in a release build.
+    func useSampleNetwork() {
         network = NetworkStatus(
             at: Date().timeIntervalSince1970 * 1000, lateMin: 10,
             countries: ["SE": .init(trains: 341, known: 336, late: 41), "NO": .init(trains: 118, known: 106, late: 9), "DK": .init(trains: 170, known: 170, late: 12), "FI": .init(trains: 104, known: 104, late: 4)],
-            corridors: [
-                .init(stations: ["Hässleholm C", "Lund C", "Malmö C"], country: "SE", trains: 7, late: 6, medianDelay: 18, maxDelay: 34, lat: 55.8, lon: 13.4, causes: [signal, points], trainIds: []),
-                .init(stations: ["Oslo S", "Lillestrøm"], country: "NO", trains: 3, late: 2, medianDelay: 12, maxDelay: 15, lat: 59.95, lon: 10.95, causes: [], trainIds: []),
-            ],
+            corridors: [sampleCorridor, .init(stations: ["Oslo S", "Lillestrøm"], country: "NO", trains: 3, late: 2, medianDelay: 12, maxDelay: 15, lat: 59.95, lon: 10.95, causes: [], trainIds: [])],
             late: [
                 .init(id: "x1", number: "547", operatorId: "sj", delayMin: 42, prev: "Norrköping C", next: "Linköping C", destination: "Malmö C", causes: [.init(src: "trv", code: nil, text: "Olycka")]),
                 .init(id: "x2", number: "1072", operatorId: "oresundstag", delayMin: 16, prev: "Kastrup", next: "København H", destination: "Helsingør", causes: []),
@@ -447,14 +463,47 @@ final class ExploreModel {
     }
     #endif
 
-    /// A corridor was tapped: the map fits its late trains (where they are now).
+    /// A corridor was tapped: its track is drawn in orange, its late trains ringed, the map fits them, and its sheet
+    /// opens (closing a train's or a station's).
     func showCorridor(_ c: NetworkStatus.Corridor) {
         showNetwork = false
-        let points = c.trainIds.compactMap { trains[$0] }.map { LatLon($0.lat, $0.lon) }
+        deselect()
+        stationSheet = nil
+        notRunning = nil
+        corridor = c
+        corridorGone = false
+        controller.setCorridor(lines: c.lines, trainIds: c.trainIds)
+        let points = c.lines.flatMap { $0 } + c.trainIds.compactMap { trains[$0] }.map { LatLon($0.lat, $0.lon) }
         if points.count >= 2 {
-            controller.fit(points, padding: UIEdgeInsets(top: 140, left: 60, bottom: 200, right: 60))
+            controller.fit(points, padding: UIEdgeInsets(top: 140, left: 60, bottom: 320, right: 60))
         } else {
             controller.ease(to: CLLocationCoordinate2D(latitude: c.lat, longitude: c.lon), minZoom: 9, offset: 0)
+        }
+    }
+
+    func closeCorridor() {
+        corridor = nil
+        corridorGone = false
+        controller.clearCorridor()
+    }
+
+    /// Keeps the open corridor fresh: the network status again every 30 s, the same stretch (by its stations) read
+    /// from it; when the stretch has dropped out, the sheet says so and keeps the last figures.
+    func watchCorridor() async {
+        guard let client = app?.client else { return }
+        while corridor != nil && !Task.isCancelled {
+            try? await Task.sleep(for: .seconds(30))
+            guard let open = corridor, !Task.isCancelled else { return }
+            guard let answer = try? await client.networkStatus() else { continue }
+            network = answer
+            if let fresh = answer.corridors.first(where: { $0.id == open.id }) {
+                corridor = fresh
+                corridorGone = false
+                controller.setCorridor(lines: fresh.lines, trainIds: fresh.trainIds)
+            } else {
+                corridorGone = true
+                controller.setCorridor(lines: open.lines, trainIds: [])
+            }
         }
     }
 

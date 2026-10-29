@@ -25,7 +25,16 @@ struct AddTrainSheet: View {
         .task {
             if let link = request.link { await model.prefill(link, app.client) }
         }
-        .task(id: model.searchKey) { await model.runSearch(app.client) }
+        .task(id: model.searchKey) {
+            await model.runSearch(app.client)
+            #if DEBUG
+            // `-addLater <n>` presses Show later n times once the journeys are in, to look at the paging and the day line.
+            let args = CommandLine.arguments
+            if let at = args.firstIndex(of: "-addLater"), at + 1 < args.count, let n = Int(args[at + 1]), model.window != nil {
+                for _ in 0..<n { await model.showLaterJourneys(app.client) }
+            }
+            #endif
+        }
         .task(id: model.response?.history) { await model.waitForHistory() }
         .task(id: model.response?.journeysPending == true) { await model.waitForJourneys() }
         #if DEBUG
@@ -116,9 +125,10 @@ private struct SearchStep: View {
     /// Above the journeys: how many there are, which filters are on, and the Filters button (as Explore's), which opens
     /// the two choices in a small sheet. Filters are set rarely, so they don't take the results' space (owner, 2026-10-28).
     private func journeyFilterBar(count: Int) -> some View {
-        let active = (model.maxChanges < 2 ? 1 : 0) + (model.minComfort > 0 && model.maxChanges > 0 ? 1 : 0)
+        let changesSet = model.maxChanges != AddTrainModel.defaultMaxChanges
+        let active = (changesSet ? 1 : 0) + (model.minComfort > 0 && model.maxChanges > 0 ? 1 : 0)
         let summary = [
-            model.maxChanges < 2 ? l10n.t(["add.changesNone", "add.changesOne", "add.changesTwo"][model.maxChanges]) : nil,
+            changesSet ? (model.maxChanges == 0 ? l10n.t("add.changesNone") : l10n.t("add.changesUpTo", count: model.maxChanges)) : nil,
             model.minComfort > 0 && model.maxChanges > 0 ? l10n.t(["add.comfortAny", "add.comfortNormal", "add.comfortRelaxed"][model.minComfort]) : nil,
         ].compactMap { $0 }.joined(separator: Format.separator)
         return HStack(alignment: .center, spacing: 12) {
@@ -164,27 +174,49 @@ private struct SearchStep: View {
             stationList(response.suggestions)
         }
         journeyFilterBar(count: model.journeys?.count ?? 0)
-        if model.hasHiddenEarlierJourneys {
-            Button(l10n.t("board.showEarlier")) { model.showEarlier = true }.buttonStyle(LinkButtonStyle())
-        }
+        // Paging: six hours earlier or later per press; a day line where the list crosses midnight.
+        if model.window != nil { pagingButton("board.showEarlier", busy: model.pagingEarlier) { await model.showEarlierJourneys(app.client) } }
         if let list = model.journeys, !list.isEmpty {
             VStack(spacing: 16) {
-                ForEach(list) { journey in JourneyResultCard(journey: journey) { model.pickedJourney = journey } }
+                ForEach(Array(list.enumerated()), id: \.element.id) { i, journey in
+                    if let day = model.daySeparator(before: journey, previous: i > 0 ? list[i - 1] : nil, language: app.settings.language) {
+                        Text(day).clack(.captionUpper).foregroundStyle(Ink.text2).frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, i > 0 ? 8 : 0)
+                    }
+                    JourneyResultCard(journey: journey) { model.pickedJourney = journey }
+                }
             }
         } else if model.moreWithMoreChanges {
             Text(l10n.t("add.noJourneyWithFilter")).clack(.body).foregroundStyle(Ink.text2)
             Button(l10n.t("add.includeMoreChanges")) {
-                model.maxChanges = 2
+                model.maxChanges = AddTrainModel.maxChangesLimit
                 model.minComfort = 0
             }
             .buttonStyle(.clack(wide: true))
         } else {
             Text(l10n.t("add.noJourney")).clack(.body).foregroundStyle(Ink.text2)
         }
+        if model.window != nil {
+            if model.laterEmpty { Text(l10n.t("add.noLaterJourneys")).clack(.caption).foregroundStyle(Ink.text2) }
+            pagingButton("board.showLater", busy: model.pagingLater) { await model.showLaterJourneys(app.client) }
+        }
         Button(l10n.t("manual.cta")) { model.manual = true }
             .buttonStyle(LinkButtonStyle())
             .frame(maxWidth: .infinity)
             .padding(.top, 8)
+    }
+
+    /// Show earlier / Show later as a plain system link, replaced by a spinner and "Looking for more…" while it runs.
+    private func pagingButton(_ key: String, busy: Bool, action: @escaping () async -> Void) -> some View {
+        HStack(spacing: 8) {
+            if busy {
+                ProgressView().controlSize(.small)
+                Text(l10n.t("add.searchingMore")).clack(.caption).foregroundStyle(Ink.text2)
+            } else {
+                Button(l10n.t(key)) { Task { await action() } }.buttonStyle(LinkButtonStyle())
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     @ViewBuilder
@@ -869,8 +901,10 @@ private struct JourneyFilterSheet: View {
         NavigationStack {
             Form {
                 Section(l10n.t("add.changesLabel")) {
-                    SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesMin")), (1, l10n.t("add.upTo1")), (2, l10n.t("add.upTo2"))])
+                    // Direct · 1 · 2 · 3 · 4 · 5 (the planner does up to five changes, owner 2026-10-28).
+                    SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesDirectShort"))] + (1...AddTrainModel.maxChangesLimit).map { ($0, String($0)) })
                         .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    Text(model.maxChanges == 0 ? l10n.t("add.changesNone") : l10n.t("add.changesUpTo", count: model.maxChanges)).font(.footnote).foregroundStyle(.secondary)
                 }
                 if model.maxChanges > 0 {
                     Section(l10n.t("add.comfortLabel")) {
@@ -883,10 +917,10 @@ private struct JourneyFilterSheet: View {
             .navigationTitle(l10n.t("liveMap.filters"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                if model.maxChanges < 2 || model.minComfort > 0 {
+                if model.maxChanges != AddTrainModel.defaultMaxChanges || model.minComfort > 0 {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(l10n.t("liveMap.clearFilters")) {
-                            model.maxChanges = 2
+                            model.maxChanges = AddTrainModel.defaultMaxChanges
                             model.minComfort = 0
                         }
                     }

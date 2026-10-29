@@ -201,10 +201,23 @@ nonisolated enum MapStyle {
         ]
     }
 
+    /// The late orange of the delay palette, for a corridor's track and the rings on its trains.
+    static let corridorColor = ExploreLogic.delayColors.late
+
     private static func liveTrainLayers(_ c: Colors, dark isDark: Bool, route: [[String: Any]]) -> [[String: Any]] {
         let mine: [Any] = ["==", ["get", "mine"], true]
         func size(_ a: Double, _ b: Double) -> [Any] { ["case", mine, b, a] }
         var layers: [[String: Any]] = [
+            // A corridor from the network status (a stretch where most trains are late): its track in the late orange,
+            // a soft glow under a firm line, drawn under every train.
+            [
+                "id": "corridor-glow", "type": "line", "source": "corridor", "layout": ["line-cap": "round", "line-join": "round"],
+                "paint": ["line-color": corridorColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 8, 10, 16], "line-opacity": 0.25, "line-blur": 4],
+            ],
+            [
+                "id": "corridor-body", "type": "line", "source": "corridor", "layout": ["line-cap": "round", "line-join": "round"],
+                "paint": ["line-color": corridorColor, "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.5, 10, 5], "line-opacity": 0.9],
+            ],
             // Zoomed out: a small dot per train in its operator's colour (cheap to draw for a thousand trains); the heading
             // cone and the number come in from zoom 7.
             [
@@ -225,6 +238,11 @@ nonisolated enum MapStyle {
             [
                 "id": "train-mine", "type": "circle", "source": "trains", "filter": mine,
                 "paint": ["circle-radius": 13, "circle-color": "rgba(248,214,74,0.28)", "circle-stroke-color": "#f8d64a", "circle-stroke-width": 2],
+            ],
+            // The late trains of the corridor on show: an orange ring (the filter is set with the corridor).
+            [
+                "id": "train-corridor", "type": "circle", "source": "trains", "filter": ["==", ["get", "id"], ""],
+                "paint": ["circle-radius": 11, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": corridorColor, "circle-stroke-width": 2.5],
             ],
             // The selected train: a larger marker under its dot.
             [
@@ -304,6 +322,7 @@ nonisolated enum MapStyle {
         case .live:
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains-pinned"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["corridor"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains"] = [
                 // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).
                 "type": "geojson", "data": emptyCollection(),

@@ -698,40 +698,6 @@
         }
       }
     },
-    "add.changesOne" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Up to 1 change"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Högst 1 byte"
-          }
-        }
-      }
-    },
-    "add.changesTwo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Up to 2 changes"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Högst 2 byten"
-          }
-        }
-      }
-    },
     "add.comfortAny" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1677,40 +1643,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "tåg {{number}}"
-          }
-        }
-      }
-    },
-    "add.upTo1" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Up to 1"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Högst 1"
-          }
-        }
-      }
-    },
-    "add.upTo2" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Up to 2"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Högst 2"
           }
         }
       }
@@ -20481,6 +20413,183 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Året på räls {{year}}"
+          }
+        }
+      }
+    },
+    "add.changesUpTo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Up to %lld change"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Up to %lld changes"
+                }
+              }
+            }
+          }
+        },
+        "sv" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Högst %lld byte"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Högst %lld byten"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "add.changesDirectShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direct"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direkt"
+          }
+        }
+      }
+    },
+    "add.noLaterJourneys" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No more journeys found later. Show later looks six hours further on."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inga fler resor hittades senare. Visa senare söker sex timmar framåt."
+          }
+        }
+      }
+    },
+    "add.searchingMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking for more…"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Söker fler…"
+          }
+        }
+      }
+    },
+    "network.corridorTrains" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Late trains on this stretch"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Försenade tåg på sträckan"
+          }
+        }
+      }
+    },
+    "network.corridorReasons" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reasons given"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angivna orsaker"
+          }
+        }
+      }
+    },
+    "network.corridorNoneLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No train on this stretch is late any more."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inget tåg på sträckan är försenat längre."
+          }
+        }
+      }
+    },
+    "network.corridorGone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This stretch has cleared: most of its trains are on time again."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sträckan har klarnat: de flesta tågen går i tid igen."
+          }
+        }
+      }
+    },
+    "network.corridorHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The stretch is drawn in orange on the map; its late trains are ringed."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sträckan är ritad i orange på kartan; dess försenade tåg är ringade."
           }
         }
       }

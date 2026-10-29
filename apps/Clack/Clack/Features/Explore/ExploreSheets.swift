@@ -235,6 +235,103 @@ struct LiveSheetCard<Content: View>: View {
     }
 }
 
+/// A corridor from the network status: the stretch, how late its trains are, the reasons the feeds give (each with
+/// its source) and the late trains themselves, which open on a tap. The map behind shows the track in orange and
+/// rings the trains; the model refreshes it every 30 s (`watchCorridor`). Status is written, never boxed.
+struct CorridorSheet: View {
+    @Environment(AppModel.self) private var app
+    @Environment(L10n.self) private var l10n
+    let corridor: NetworkStatus.Corridor
+    /// The stretch has dropped out of the latest status: the figures shown are the last ones.
+    let gone: Bool
+    let updatedAt: Double?
+    let onClose: () -> Void
+    let onTrain: (String) -> Void
+
+    var body: some View {
+        LiveSheetCard {
+            HStack(alignment: .top, spacing: 8) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(corridor.stations.joined(separator: " – ")).clack(.sheetTitle).foregroundStyle(Ink.text).lineLimit(3)
+                    Text(NetworkWording.corridorLine(corridor, l10n: l10n)).clack(.caption).monospacedDigit().foregroundStyle(Ink.lateInk)
+                    if gone { Text(l10n.t("network.corridorGone")).clack(.caption).foregroundStyle(Ink.onTimeInk) }
+                }
+                Spacer(minLength: 0)
+                IconButton(icon: "x", label: l10n.t("common.close"), size: .overMap, action: onClose)
+            }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
+                    reasons
+                    trains
+                    Text(l10n.t("network.corridorHint")).clack(.micro).foregroundStyle(Ink.text3)
+                    if let updatedAt {
+                        Text(l10n.t("network.updated", ["time": Format.time(updatedAt, tz: TimeZone.current.identifier, clock: app.settings.clock)]))
+                            .clack(.micro).foregroundStyle(Ink.text3)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .frame(maxHeight: 300)
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    /// Each reason once, with how many trains give it and which feed it comes from.
+    @ViewBuilder
+    private var reasons: some View {
+        Text(l10n.t("network.corridorReasons")).clack(.captionUpper).foregroundStyle(Ink.text2)
+        let named = corridor.causes.compactMap { c -> (text: String, count: Int, src: String)? in
+            DelayCauses.text(c.cause, translate: { l10n.t($0) }).map { ($0, c.trains, c.src) }
+        }
+        if named.isEmpty {
+            Text(l10n.t("network.noReason")).clack(.body).foregroundStyle(Ink.text2)
+        } else {
+            ForEach(Array(named.enumerated()), id: \.offset) { _, r in
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(l10n.t("network.reasonCount", count: r.count, ["reason": r.text, "count": String(r.count)])).clack(.body).foregroundStyle(Ink.text)
+                    Text(l10n.t("notice.source", ["source": DelayCauses.sourceName(r.src)])).clack(.micro).foregroundStyle(Ink.text3)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var trains: some View {
+        Text(l10n.t("network.corridorTrains")).clack(.captionUpper).foregroundStyle(Ink.text2).padding(.top, 4)
+        let list = corridor.lateTrains ?? []
+        if list.isEmpty {
+            Text(l10n.t("network.corridorNoneLate")).clack(.body).foregroundStyle(Ink.onTimeInk)
+        } else {
+            ForEach(list) { t in
+                Button { onTrain(t.id) } label: {
+                    HStack(alignment: .top, spacing: 12) {
+                        OperatorBadge(op: t.operatorId.flatMap { app.operatorsById[$0] }, size: .small)
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 8) {
+                                Text([t.operatorId.flatMap { app.operatorsById[$0]?.name }, t.number].compactMap { $0 }.joined(separator: " "))
+                                    .clack(.rowTitle).foregroundStyle(Ink.text)
+                                Text(l10n.t("network.minLate", ["min": String(t.delayMin)])).clack(.delay).monospacedDigit()
+                                    .foregroundStyle(t.delayMin >= 30 ? Ink.veryLateInk : Ink.lateInk)
+                            }
+                            if let towards = t.next ?? t.destination {
+                                Text(l10n.t("network.towards", ["b": towards])).clack(.caption).foregroundStyle(Ink.text2)
+                            }
+                            if !t.causes.isEmpty {
+                                Text(NetworkWording.reasons(t.causes.map { .init(src: $0.src, code: $0.code, text: $0.text, trains: 1) }, l10n: l10n, counted: false))
+                                    .clack(.caption).foregroundStyle(Ink.text2)
+                            }
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .frame(minHeight: 44).contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+}
+
 /// A train you asked for that isn't on the map: not started yet, finished, or not running today.
 struct NotRunningSheet: View {
     @Environment(AppModel.self) private var app

@@ -45,8 +45,21 @@ final class AddTrainModel {
     var pickedConnection: TimetableConnection?
     /// A planned journey opened from the results (its detail screen).
     var pickedJourney: PlannedJourney?
-    /// Most changes a journey may have: 0 direct only, 1, or 2 (the default). Filters, doesn't sort.
-    var maxChanges = 2
+    /// Most changes a journey may have: 0 direct only, up to 5; two by default. Filters, doesn't sort (the planner is
+    /// always asked for the most, so changing the filter never searches again).
+    var maxChanges = AddTrainModel.defaultMaxChanges
+    static let defaultMaxChanges = 2
+    static let maxChangesLimit = 5
+    /// One page of journeys: six hours, moved earlier or later on request.
+    static let pageHours = 6
+    private static var pageMs: Double { Double(pageHours) * 3600_000 }
+    /// Journeys from Show earlier and Show later, added to the first answer's; the window the whole list covers.
+    private(set) var pagedJourneys: [PlannedJourney] = []
+    private(set) var window: SearchResponse.Window?
+    private(set) var pagingEarlier = false
+    private(set) var pagingLater = false
+    /// The last Show later found nothing, which the list says.
+    private(set) var laterEmpty = false
     /// The shortest change you'll accept: 0 any the planner offers (tight too), 1 normal or more, 2 relaxed only
     /// (owner, 2026-10-28). Filters, doesn't sort.
     var minComfort = 0
@@ -70,9 +83,27 @@ final class AddTrainModel {
         response?.results?.filter { AddTrainLogic.includes($0, filter) && (showEarlier || !isEarlier($0)) }
     }
 
-    /// The planner's journeys for two stations, within the change filter, without those that left earlier today.
+    /// The planner's journeys for two stations, every page so far, by departure, within the change filter. Today's
+    /// first page starts ten minutes ago (the window the server was asked for), so nothing is hidden here.
     var journeys: [PlannedJourney]? {
-        response?.journeys?.filter { passes($0) && (showEarlier || !isEarlier($0.dep)) }
+        guard let first = response?.journeys else { return nil }
+        return allJourneys(first).filter { passes($0) }
+    }
+
+    private func allJourneys(_ first: [PlannedJourney]) -> [PlannedJourney] {
+        var seen = Set<String>()
+        return (first + pagedJourneys)
+            .sorted { ($0.dep, $0.arr) < ($1.dep, $1.arr) }
+            .filter { seen.insert($0.id).inserted }
+    }
+
+    /// A line to write above `journey` when it leaves on a different day than the one before it (or than the day
+    /// searched, for the first): "Fri 31 Oct". Nil when it's the same day.
+    func daySeparator(before journey: PlannedJourney, previous: PlannedJourney?, language: Language) -> String? {
+        let tz = journey.legs.first?.from.tz ?? "Europe/Stockholm"
+        let day = Format.localDate(journey.dep, tz: tz)
+        let before = previous.map { Format.localDate($0.dep, tz: $0.legs.first?.from.tz ?? tz) } ?? date
+        return day == before ? nil : Format.day(journey.dep, tz: tz, language: language)
     }
 
     private func passes(_ j: PlannedJourney) -> Bool {
@@ -90,15 +121,46 @@ final class AddTrainModel {
 
     /// Journeys are hidden by the filters alone (offer to show them all).
     var moreWithMoreChanges: Bool {
-        (response?.journeys ?? []).contains { !passes($0) && (showEarlier || !isEarlier($0.dep)) }
+        allJourneys(response?.journeys ?? []).contains { !passes($0) }
     }
 
-    var hasHiddenEarlierJourneys: Bool {
-        !showEarlier && (response?.journeys ?? []).contains { passes($0) && isEarlier($0.dep) }
+    /// Six more hours of journeys before the list. The server plans the day the window falls in, so this walks back
+    /// across midnight by itself.
+    func showEarlierJourneys(_ client: APIClient) async {
+        guard let w = window, !pagingEarlier else { return }
+        pagingEarlier = true
+        defer { pagingEarlier = false }
+        let start = w.start - Self.pageMs
+        if let page = await fetchPage(client, after: start) {
+            pagedJourneys += page
+            window = .init(start: start, end: w.end)
+        }
     }
 
-    private func isEarlier(_ time: Double) -> Bool {
-        date == Format.todayIso() && time < Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000
+    /// Six more hours of journeys after the list.
+    func showLaterJourneys(_ client: APIClient) async {
+        guard let w = window, !pagingLater else { return }
+        pagingLater = true
+        defer { pagingLater = false }
+        if let page = await fetchPage(client, after: w.end) {
+            pagedJourneys += page
+            window = .init(start: w.start, end: w.end + Self.pageMs)
+            laterEmpty = page.isEmpty
+        }
+    }
+
+    /// One window of journeys, waiting a few times while the server builds a new day's index. Nil when the search
+    /// changed meanwhile or the server didn't answer.
+    private func fetchPage(_ client: APIClient, after: Double) async -> [PlannedJourney]? {
+        let key = searchKey
+        for _ in 0..<6 {
+            guard let page = try? await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: Self.pageHours) else { return nil }
+            guard key == searchKey else { return nil }
+            if page.journeysPending != true { return page.journeys ?? [] }
+            try? await Task.sleep(for: .seconds(3))
+            if Task.isCancelled { return nil }
+        }
+        return nil
     }
 
     /// Some results are hidden because they left earlier today.
@@ -135,6 +197,8 @@ final class AddTrainModel {
         let text = query.trimmingCharacters(in: .whitespaces)
         guard !text.isEmpty else {
             response = nil
+            pagedJourneys = []
+            window = nil
             loading = false
             return
         }
@@ -142,7 +206,15 @@ final class AddTrainModel {
         try? await Task.sleep(for: .milliseconds(150))
         if Task.isCancelled { return }
         do {
-            response = try await client.search(query, date: date)
+            // Today's journeys from ten minutes ago, one page at a time; another day whole. The planner is asked for
+            // the most changes it does, and the filter picks from that.
+            let today = date == Format.todayIso()
+            let after: Double? = today ? Date.now.timeIntervalSince1970 * 1000 - 10 * 60_000 : nil
+            let answer = try await client.search(query, date: date, changes: Self.maxChangesLimit, after: after, hours: today ? Self.pageHours : nil)
+            response = answer
+            pagedJourneys = []
+            window = answer.window
+            laterEmpty = false
             searchFailed = false
             failedTries = 0
             loading = false
