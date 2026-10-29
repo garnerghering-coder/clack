@@ -75,6 +75,8 @@ public nonisolated enum ExploreLogic {
         t.speedKmh = moved.speedKmh
         t.at = Instant(ms: moved.at)
         t.estimated = moved.estimated
+        if let state = moved.state { t.state = state }
+        t.progress = moved.progress
         return t
     }
 
@@ -112,6 +114,128 @@ public nonisolated enum ExploreLogic {
         let k = min(1, (now - startedAt) / glideMs)
         let e = 1 - pow(1 - k, 3)
         return (LatLon(from.lat + (to.lat - from.lat) * e, from.lon + (to.lon - from.lon) * e), k >= 1)
+    }
+
+    // MARK: gliding along the track
+
+    /// A train track as a polyline with cumulative lengths in metres (the answer of `GET /api/live/segment`).
+    public struct TrackPath: Sendable, Equatable {
+        public let points: [LatLon]
+        private let cumulative: [Double]
+        public var length: Double { cumulative.last ?? 0 }
+
+        public init(points: [LatLon]) {
+            self.points = points
+            var sum = 0.0
+            var c: [Double] = points.isEmpty ? [] : [0]
+            for i in 1..<max(1, points.count) {
+                sum += ExploreLogic.metres(points[i - 1], points[i])
+                c.append(sum)
+            }
+            cumulative = c
+        }
+
+        /// How far along the track the nearest point to `p` is, and how far `p` lies from the track.
+        public func project(_ p: LatLon) -> (along: Double, offsetM: Double) {
+            guard points.count >= 2 else { return (0, .infinity) }
+            var best = (along: 0.0, offsetM: Double.infinity)
+            let k = cos(p.lat * .pi / 180)
+            for i in 1..<points.count {
+                let a = points[i - 1], b = points[i]
+                let ax = (b.lon - a.lon) * k, ay = b.lat - a.lat
+                let px = (p.lon - a.lon) * k, py = p.lat - a.lat
+                let len2 = ax * ax + ay * ay
+                let t = len2 == 0 ? 0 : max(0, min(1, (px * ax + py * ay) / len2))
+                let q = LatLon(a.lat + (b.lat - a.lat) * t, a.lon + (b.lon - a.lon) * t)
+                let d = ExploreLogic.metres(p, q)
+                if d < best.offsetM { best = (cumulative[i - 1] + (cumulative[i] - cumulative[i - 1]) * t, d) }
+            }
+            return best
+        }
+
+        /// The point `m` metres along (clamped to the track) and the direction of travel there, degrees from north.
+        public func at(_ m: Double) -> (position: LatLon, bearing: Double) {
+            guard points.count >= 2 else { return (points.first ?? LatLon(0, 0), 0) }
+            let d = max(0, min(length, m))
+            var i = 1
+            while i < points.count - 1 && cumulative[i] < d { i += 1 }
+            let a = points[i - 1], b = points[i]
+            let span = cumulative[i] - cumulative[i - 1]
+            let t = span == 0 ? 0 : (d - cumulative[i - 1]) / span
+            return (LatLon(a.lat + (b.lat - a.lat) * t, a.lon + (b.lon - a.lon) * t), ExploreLogic.bearing(a, b))
+        }
+    }
+
+    /// How long a train is carried on at its speed after an update, waiting for the next one (they come every 2 s).
+    public static let extrapolateMs = 4_000.0
+
+    /// A marker's move to a new fix. Straight (`track` nil) it eases from `from` to `to`; along a track it eases along
+    /// the rails from `fromM` to `toM`, then keeps going at `speed` (m/s) for `extrapolateMs`, never past the track's end
+    /// (the next station), and its heading follows the track.
+    public struct Glide: Sendable {
+        public var from: LatLon
+        public var to: LatLon
+        public var start: Double
+        public var track: TrackPath?
+        public var fromM = 0.0
+        public var toM = 0.0
+        public var speed = 0.0
+
+        public init(from: LatLon, to: LatLon, start: Double) {
+            self.from = from
+            self.to = to
+            self.start = start
+        }
+
+        public init(track: TrackPath, fromM: Double, toM: Double, speed: Double, start: Double) {
+            self.from = track.at(fromM).position
+            self.to = track.at(toM).position
+            self.start = start
+            self.track = track
+            self.fromM = fromM
+            self.toM = toM
+            self.speed = speed
+        }
+
+        public func step(now: Double) -> (position: LatLon, bearing: Double?, done: Bool) {
+            guard let track else {
+                let s = ExploreLogic.glide(from: from, to: to, startedAt: start, now: now)
+                return (s.position, nil, s.done)
+            }
+            let elapsed = max(0, now - start)
+            let k = min(1, elapsed / ExploreLogic.glideMs)
+            let e = 1 - pow(1 - k, 3)
+            let ahead = speed * min(elapsed, ExploreLogic.extrapolateMs) / 1000
+            let target = min(track.length, toM + ahead)
+            let along = target - (toM - fromM) * (1 - e)
+            let p = track.at(along)
+            let finished = speed > 0 ? (elapsed >= ExploreLogic.extrapolateMs || target >= track.length) : true
+            return (p.position, p.bearing, finished && k >= 1)
+        }
+    }
+
+    /// Starts a glide for a train that moved from `old` (where it is drawn now) to a new fix. On the track when both
+    /// points lie within 100 m of it; a standing train never creeps along it.
+    public static func makeGlide(track: TrackPath?, from old: LatLon, to new: LatLon, standing: Bool, speedKmh: Double?, start: Double) -> Glide {
+        guard let track, !standing else { return Glide(from: old, to: new, start: start) }
+        let a = track.project(old), b = track.project(new)
+        guard a.offsetM < 100, b.offsetM < 100 else { return Glide(from: old, to: new, start: start) }
+        let v = max(0, speedKmh ?? 0) / 3.6
+        return Glide(track: track, fromM: a.along, toM: b.along, speed: v, start: start)
+    }
+
+    public static func metres(_ a: LatLon, _ b: LatLon) -> Double {
+        let dy = (b.lat - a.lat) * 111_320
+        let dx = (b.lon - a.lon) * 111_320 * cos((a.lat + b.lat) / 2 * .pi / 180)
+        return (dx * dx + dy * dy).squareRoot()
+    }
+
+    /// Degrees from north, clockwise, from `a` towards `b`.
+    public static func bearing(_ a: LatLon, _ b: LatLon) -> Double {
+        let dy = b.lat - a.lat
+        let dx = (b.lon - a.lon) * cos((a.lat + b.lat) / 2 * .pi / 180)
+        let d = atan2(dx, dy) * 180 / .pi
+        return d < 0 ? d + 360 : d
     }
 
     // MARK: status

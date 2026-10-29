@@ -133,6 +133,9 @@ public nonisolated struct MovedTrain: Decodable, Hashable, Sendable {
     public let speedKmh: Double?
     public let at: Double
     public let estimated: Bool
+    /// Entries 8 and 9 of the tuple (build 54); absent from older servers.
+    public let state: String?
+    public let progress: Double?
 
     public init(from decoder: Decoder) throws {
         var c = try decoder.unkeyedContainer()
@@ -143,6 +146,8 @@ public nonisolated struct MovedTrain: Decodable, Hashable, Sendable {
         speedKmh = try c.decodeIfPresent(Double.self)
         at = try c.decode(Double.self)
         estimated = try c.decode(Bool.self)
+        state = (try? c.decodeIfPresent(String.self)) ?? nil
+        progress = (try? c.decodeIfPresent(Double.self)) ?? nil
     }
 }
 

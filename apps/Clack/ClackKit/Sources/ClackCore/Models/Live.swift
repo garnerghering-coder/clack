@@ -35,6 +35,18 @@ public nonisolated struct LiveTrain: Codable, Hashable, Sendable, Identifiable {
     public let crossBorder: Bool?
     /// Cars today where the feed says (Sweden's coach order, Finland's composition); nil elsewhere or from older servers.
     public var cars: Int? = nil
+    /// Build 54 (docs/POSITIONING.md): "running" between `prevId` and `nextId`, "standing" at a station, or "waiting" at its first stop.
+    public var state: String? = nil
+    /// The stop passed and the next one: our station ids, or "trv:<signature>"; the track between is `GET /api/live/segment`.
+    public var prevId: String? = nil
+    public var nextId: String? = nil
+    /// 0 to 1 along prevId to nextId while running.
+    public var progress: Double? = nil
+    public var platform: String? = nil
+    public var atStation: String? = nil
+
+    /// Standing or waiting at a station: drawn where it is, never carried on along a track.
+    public var isStanding: Bool { state.map { $0 != "running" } ?? (atStation != nil) }
 
     public init(id: String, number: String, date: String, lat: Double, lon: Double, bearing: Double? = nil, speedKmh: Double? = nil, at: Instant, estimated: Bool, operatorId: String?, productName: String?, product: String?, trainType: String?, origin: String?, destination: String?, next: String?, nextEta: Instant?, delayMin: Int?, mine: Bool, tripKey: String?, crossBorder: Bool?) {
         self.id = id
@@ -174,4 +186,13 @@ public nonisolated struct Journey: Codable, Hashable, Sendable, Identifiable {
 
 public nonisolated enum RideAnswer: String, Encodable, Sendable {
     case yes, no, undo
+}
+
+/// The answer of `GET /api/live/segment`: the track between two stops as an encoded polyline.
+public nonisolated struct LiveSegment: Decodable, Hashable, Sendable {
+    public let from: String
+    public let to: String
+    public let polyline: String
+    public let lengthM: Double
+    public let estimated: Bool?
 }

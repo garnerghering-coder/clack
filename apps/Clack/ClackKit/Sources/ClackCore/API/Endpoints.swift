@@ -160,6 +160,10 @@ extension APIClient {
     public func liveTrain(_ id: String) async throws -> LiveTrainDetail { try await get(["live", "trains", id]) }
     /// Where trains are running late now (the network status panel on Explore).
     public func networkStatus() async throws -> NetworkStatus { try await get(["live", "network"]) }
+    /// The track between two stops (`GET /api/live/segment?from&to`; ids as in `LiveTrain.prevId`/`nextId`).
+    public func liveSegment(from: String, to: String) async throws -> LiveSegment {
+        try await get(["live", "segment"], query: ["from": from, "to": to])
+    }
     public func liveTrainStops(_ id: String) async throws -> [LiveTrainStop] {
         let answer: LiveStopsAnswer = try await get(["live", "trains", id, "stops"])
         return answer.stops

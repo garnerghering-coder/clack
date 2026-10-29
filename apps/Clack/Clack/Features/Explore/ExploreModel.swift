@@ -99,7 +99,10 @@ final class ExploreModel {
 
     // Data behind the map.
     @ObservationIgnored private var trains: [String: LiveTrain] = [:]
-    @ObservationIgnored private var glides: [String: (from: LatLon, to: LatLon, start: Double)] = [:]
+    @ObservationIgnored private var glides: [String: ExploreLogic.Glide] = [:]
+    /// The track between two stops, by "from>to"; nil once asked and not found. Fetched when a train first runs on it.
+    @ObservationIgnored private var segments: [String: ExploreLogic.TrackPath?] = [:]
+    @ObservationIgnored private var segmentsAsked: Set<String> = []
     @ObservationIgnored private var renderTask: Task<Void, Never>?
     @ObservationIgnored private var needsFullRender = true
     @ObservationIgnored private var route: (id: String, line: [LatLon], from: Int)?
@@ -248,7 +251,9 @@ final class ExploreModel {
         let close = controller.zoom >= 7
         for train in list {
             if let old = trains[train.id], close, old.lat != train.lat || old.lon != train.lon, controller.contains(train.lat, train.lon) {
-                glides[train.id] = (LatLon(old.lat, old.lon), LatLon(train.lat, train.lon), start)
+                // Where it is drawn now, so a train that is mid-glide does not jump back.
+                let shown = glides[train.id].map { $0.step(now: start).position } ?? LatLon(old.lat, old.lon)
+                glides[train.id] = ExploreLogic.makeGlide(track: track(of: train), from: shown, to: LatLon(train.lat, train.lon), standing: train.isStanding, speedKmh: train.speedKmh, start: start)
             } else {
                 glides[train.id] = nil
             }
@@ -275,6 +280,21 @@ final class ExploreModel {
             lastFarRender = start
         }
         scheduleRender()
+    }
+
+    /// The track a running train is on, once fetched; asks for it the first time and answers nil until it is there.
+    private func track(of train: LiveTrain) -> ExploreLogic.TrackPath? {
+        guard !train.isStanding, let from = train.prevId, let to = train.nextId, let client = app?.client else { return nil }
+        let key = "\(from)>\(to)"
+        if let known = segments[key] { return known }
+        if segmentsAsked.insert(key).inserted {
+            Task { [weak self] in
+                let segment = try? await client.liveSegment(from: from, to: to)
+                let points = segment.map { Polyline.decode($0.polyline) } ?? []
+                self?.segments[key] = .some(points.count >= 2 ? ExploreLogic.TrackPath(points: points) : nil)
+            }
+        }
+        return nil
     }
 
     /// When the zoomed-out map was last redrawn, and the redraw waiting for its turn.
@@ -304,7 +324,7 @@ final class ExploreModel {
         let nowMs = CACurrentMediaTime() * 1000
         var positions: [String: LatLon] = [:]
         for (id, g) in glides {
-            let step = ExploreLogic.glide(from: g.from, to: g.to, startedAt: g.start, now: nowMs)
+            let step = g.step(now: nowMs)
             positions[id] = step.position
             if step.done { glides[id] = nil }
         }
@@ -323,18 +343,20 @@ final class ExploreModel {
         let close = zoom >= Self.carsZoom
         for train in trains.values where ExploreLogic.visible(train, filters, followed: followed) {
             var position = LatLon(train.lat, train.lon)
+            var bearing = train.bearing
             if let g = glides[train.id] {
-                let step = ExploreLogic.glide(from: g.from, to: g.to, startedAt: g.start, now: nowMs)
+                let step = g.step(now: nowMs)
                 position = step.position
+                if let b = step.bearing { bearing = b }
                 if step.done { glides[train.id] = nil } else { moving = true }
             }
             if close, controller.contains(position.lat, position.lon) {
-                cars += carFeatures(train, at: position, color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId))
+                cars += carFeatures(train, at: position, bearing: bearing, color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId))
             }
             points.append(TrainPoint(
                 id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number, dest: train.destination,
                 color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId), mine: train.mine, followed: followed.contains(ExploreLogic.followKey(number: train.number, date: train.date)),
-                bearing: train.bearing, lat: position.lat, lon: position.lon
+                bearing: bearing, lat: position.lat, lon: position.lon
             ))
         }
         controller.setTrains(points)
@@ -413,11 +435,11 @@ final class ExploreModel {
 
     /// A train as its cars (TrainKit: the feed's count, else the type's, else the design's default) along the
     /// nearest detail track; one line feature per car.
-    private func carFeatures(_ train: LiveTrain, at p: LatLon, color: String) -> [[String: Any]] {
+    private func carFeatures(_ train: LiveTrain, at p: LatLon, bearing: Double?, color: String) -> [[String: Any]] {
         let type = train.trainType.flatMap { id in app?.trainTypes.first { $0.id == id } }
         let template = TrainKit.template(forArt: type?.art)
         let count = TrainKit.carCount(live: train.cars, typical: type?.cars, template: template).count
-        let cars = StationDetailLogic.cars(at: p, bearing: train.bearing, count: count, carLength: TrainKit.carLength(template), tracks: detailTracks)
+        let cars = StationDetailLogic.cars(at: p, bearing: bearing, count: count, carLength: TrainKit.carLength(template), tracks: detailTracks)
         return cars.map { car in
             [
                 "type": "Feature",
