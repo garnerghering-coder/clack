@@ -32,6 +32,9 @@ no source gives.
 5. **Garner's AR walks** (uploaded walk logs, `data/walklogs/*.walk` on the hosted server; raw-deflate JSON). The only
    source for heights: barometer `relAlt` and ARKit `ar[].p[1]` at the marks. Jönköping C's upper level is +3.3 m
    (barometer +3.5, ARKit +3.1). Marks' GPS gives positions to about ±10 m outdoors; indoors use the AR path.
+   **A mark is made a few steps from the thing it names** (Garner cannot stand in an escalator or a doorway), so a
+   mark says "this exists, within a few metres of here": snap it to the nearest OSM node of that kind, or to the AR
+   path, and never treat the mark's own point as the object's position.
 
 ## Steps per station
 
