@@ -75,6 +75,48 @@ struct AppleLiveMapView: UIViewRepresentable {
     }
 }
 
+/// A station from the rail network, drawn like Apple's transit view: a small dot with its name from zoom 9.
+final class StationAnnotation: NSObject, MKAnnotation {
+    let coordinate: CLLocationCoordinate2D
+    let id: String
+    let name: String
+    init(id: String, name: String, coordinate: CLLocationCoordinate2D) {
+        self.id = id
+        self.name = name
+        self.coordinate = coordinate
+    }
+}
+
+final class StationAnnotationView: MKAnnotationView {
+    static let reuseId = "station"
+    private let dot = UIView()
+    private let label = UILabel()
+
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        collisionMode = .circle
+        displayPriority = .defaultLow
+        dot.frame = bounds
+        dot.layer.cornerRadius = 5
+        dot.layer.borderWidth = 1.5
+        addSubview(dot)
+        label.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+        label.frame = CGRect(x: 14, y: -3, width: 140, height: 16)
+        addSubview(label)
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    func apply(_ a: StationAnnotation, showName: Bool, dark: Bool) {
+        dot.backgroundColor = AppleLiveMapSurface.railBlue
+        dot.layer.borderColor = (dark ? UIColor.white : UIColor.black).withAlphaComponent(0.9).cgColor
+        label.text = a.name
+        label.textColor = dark ? .white : .black
+        label.isHidden = !showName
+    }
+}
+
 /// One train on the Apple map.
 final class TrainAnnotation: NSObject, MKAnnotation {
     @objc dynamic var coordinate: CLLocationCoordinate2D
@@ -189,6 +231,9 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
     private var corridorLines: [StyledPolyline] = []
     private var display = MapDisplay.load()
     private var railLines: [MKMultiPolyline] = []
+    private var stationAnnotations: [StationAnnotation] = []
+    /// The rail colour of Apple's own transit view, near enough: solid, no transparency (owner, 2026-10-29).
+    static let railBlue = UIColor(red: 0.42, green: 0.60, blue: 0.93, alpha: 1)
     private var readyOnce = false
     private var link: CADisplayLink?
     private var lastFrame: CFTimeInterval = 0
@@ -212,10 +257,15 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
             guard let (data, _) = try? await URLSession.shared.data(from: url) else { return }
             let objects = (try? MKGeoJSONDecoder().decode(data)) ?? []
             var lines: [MKPolyline] = []
+            var stations: [StationAnnotation] = []
             for case let f as MKGeoJSONFeature in objects {
+                let props = f.properties.flatMap { try? JSONSerialization.jsonObject(with: $0) as? [String: Any] } ?? [:]
                 for g in f.geometry {
                     if let l = g as? MKPolyline { lines.append(l) }
                     if let m = g as? MKMultiPolyline { lines += m.polylines }
+                    if let pt = g as? MKPointAnnotation, let id = props["id"] as? String {
+                        stations.append(StationAnnotation(id: id, name: (props["name"] as? String) ?? "", coordinate: pt.coordinate))
+                    }
                 }
             }
             await MainActor.run {
@@ -223,7 +273,22 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
                 let multi = MKMultiPolyline(lines)
                 self.railLines = [multi]
                 map.addOverlay(multi, level: .aboveRoads)
+                self.stationAnnotations = stations
+                self.syncStations()
             }
+        }
+    }
+
+    /// Station dots from zoom 7 (names from 9), as the Clack map; none when the Map settings hide stations.
+    private func syncStations() {
+        guard let map else { return }
+        let want = zoom >= 7 && display.stations
+        let shown = map.annotations.contains { $0 is StationAnnotation }
+        if want && !shown { map.addAnnotations(stationAnnotations) }
+        if !want && shown { map.removeAnnotations(stationAnnotations) }
+        if want {
+            let names = zoom >= 9 && display.stationNames
+            for a in stationAnnotations { (map.view(for: a) as? StationAnnotationView)?.apply(a, showName: names, dark: dark) }
         }
     }
 
@@ -281,6 +346,7 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
     nonisolated func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         MainActor.assumeIsolated {
             syncMode()
+            syncStations()
             reportView()
         }
     }
@@ -355,6 +421,12 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
 
     nonisolated func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         MainActor.assumeIsolated {
+            if let st = annotation as? StationAnnotation {
+                let v = (mapView.dequeueReusableAnnotationView(withIdentifier: StationAnnotationView.reuseId) as? StationAnnotationView) ?? StationAnnotationView(annotation: st, reuseIdentifier: StationAnnotationView.reuseId)
+                v.annotation = st
+                v.apply(st, showName: zoom >= labelZoom && display.stationNames, dark: dark)
+                return v
+            }
             guard let a = annotation as? TrainAnnotation else { return nil }
             let v = mapView.dequeueReusableAnnotationView(withIdentifier: TrainAnnotationView.reuseId, for: a) as! TrainAnnotationView
             v.apply(a.point, selected: a.point.id == selectedId, corridor: corridorIds.contains(a.point.id), showLabel: zoom >= labelZoom && display.trainLabels, dark: dark)
@@ -364,8 +436,9 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
 
     nonisolated func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         MainActor.assumeIsolated {
+            mapView.deselectAnnotation(annotation, animated: false)
+            if let st = annotation as? StationAnnotation { return controller.onTapStation(st.id, st.name) }
             guard let a = annotation as? TrainAnnotation else { return }
-            mapView.deselectAnnotation(a, animated: false)
             controller.onTapTrain(a.point.id)
         }
     }
@@ -381,8 +454,8 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
             }
             if let multi = overlay as? MKMultiPolyline {
                 let r = MKMultiPolylineRenderer(multiPolyline: multi)
-                r.strokeColor = UIColor(cssColor: MapStyle.colors(dark: dark).rail)
-                r.lineWidth = 1.5
+                r.strokeColor = Self.railBlue
+                r.lineWidth = 2
                 return r
             }
             if let line = overlay as? StyledPolyline {
@@ -475,6 +548,7 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
         display = d
         map?.showsUserLocation = d.myLocation
         syncMode()
+        syncStations()
     }
 
     func showUserDot(_ on: Bool) {

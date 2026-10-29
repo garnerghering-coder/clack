@@ -88,10 +88,7 @@ struct RideScreen: View {
         let next = model.nextStop(now: now)
         let left = model.left(now: now)
         return VStack(alignment: .leading, spacing: 12) {
-            Picker(l10n.t("ride.camera"), selection: Binding(get: { model.preset }, set: { model.choose($0) })) {
-                ForEach(RideLogic.CameraPreset.allCases, id: \.self) { Text(l10n.t("ride.camera.\($0.rawValue)")).tag($0) }
-            }
-            .pickerStyle(.segmented)
+            Text(l10n.t("ride.orbitHint")).clack(.micro).foregroundStyle(Ink.text3)
             HStack(alignment: .firstTextBaseline, spacing: 12) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(speed.kmh.map { "\(Int($0.rounded())) km/h" } ?? "—").clack(.timeBig).monospacedDigit().foregroundStyle(Ink.text)

@@ -20628,91 +20628,6 @@
         }
       }
     },
-    "ride.camera" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kamera"
-          }
-        }
-      }
-    },
-    "ride.camera.behind" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behind"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bakom"
-          }
-        }
-      }
-    },
-    "ride.camera.above" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Above"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ovanifrån"
-          }
-        }
-      }
-    },
-    "ride.camera.side" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Side"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Från sidan"
-          }
-        }
-      }
-    },
-    "ride.camera.driver" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Driver"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Förarplats"
-          }
-        }
-      }
-    },
     "ride.speed.phone" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -21090,6 +21005,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Räknar med {{min}} min för tågets vanliga försening här"
+          }
+        }
+      }
+    },
+    "ride.orbitHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to look round the train, pinch to move closer or further away"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dra för att se dig om kring tåget, nyp för att komma närmare eller längre bort"
           }
         }
       }

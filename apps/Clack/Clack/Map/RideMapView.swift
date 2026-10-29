@@ -71,6 +71,10 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
     private var camera = RideLogic.camera(.behind)
     private var dark = false
     private var needsTrain = true
+    /// Where the map draws the look-at point minus where RealityKit projects the scene origin, in points: the AR
+    /// view is shifted by it, so the train stands on the ground whatever MapKit does with its centre (safe areas,
+    /// terrain). Smoothed over a few frames.
+    private var correction = CGPoint.zero
     var onPinch: (CGFloat, Bool) -> Void = { _, _ in }
     var onDrag: (CGFloat, CGFloat, CGFloat) -> Void = { _, _, _ in }
 
@@ -84,6 +88,9 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         addSubview(map)
         arView.environment.background = .color(.clear)
         arView.isUserInteractionEnabled = false
+        // Boxes need none of the camera-feed effects; rendering at 2x instead of 3x spares the GPU (the phone ran hot).
+        arView.renderOptions = [.disableMotionBlur, .disableDepthOfField, .disableHDR, .disableFaceMesh, .disablePersonOcclusion, .disableGroundingShadows, .disableAREnvironmentLighting, .disableCameraGrain]
+        arView.contentScaleFactor = min(2, UIScreen.main.scale)
         let anchor = AnchorEntity(world: .zero)
         anchor.addChild(cameraEntity)
         arView.scene.addAnchor(anchor)
@@ -95,7 +102,7 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         addGestureRecognizer(pan)
         link = CADisplayLink(target: self, selector: #selector(tick))
         // 30 frames a second is plenty for a train and spares the phone (it ran hot at 60, owner 2026-10-29).
-        link?.preferredFrameRateRange = CAFrameRateRange(minimum: 20, maximum: 30, preferred: 30)
+        link?.preferredFrameRateRange = CAFrameRateRange(minimum: 15, maximum: 24, preferred: 24)
         link?.add(to: .main, forMode: .common)
     }
 
@@ -106,7 +113,7 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         map.frame = bounds
-        arView.frame = bounds
+        arView.frame = bounds.offsetBy(dx: correction.x, dy: correction.y)
     }
 
     override func didMoveToWindow() {
@@ -143,7 +150,7 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         self.camera = camera
         self.dark = dark
         routeColor = UIColor(operatorColor(brandColor, scheme: dark ? .dark : .light))
-        routeRenderer?.strokeColor = routeColor.withAlphaComponent(0.85)
+        routeRenderer?.strokeColor = routeColor.withAlphaComponent(0.55)
     }
 
     /// A new report: the train is eased towards it over the next second rather than jumped (unless far off).
@@ -156,8 +163,10 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let line = overlay as? MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
         let r = MKPolylineRenderer(polyline: line)
-        r.strokeColor = routeColor.withAlphaComponent(0.85)
-        r.lineWidth = 4
+        // Thin and translucent: the train's guide, not a second railway beside Apple's drawn one (our line is the
+        // OSM-routed track; Apple's rendering can sit some metres from it).
+        r.strokeColor = routeColor.withAlphaComponent(0.55)
+        r.lineWidth = 2.5
         r.lineCap = .round
         r.lineJoin = .round
         routeRenderer = r
@@ -207,6 +216,15 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
             let f = px * actualDistance / (probeMetres * cos(actualPitch * .pi / 180))
             let fov = 2 * atan(Double(bounds.height) / 2 / f) * 180 / .pi
             cameraEntity.camera.fieldOfViewInDegrees = Float(max(10, min(120, fov)))
+        }
+        // Keep the two cameras' centres on the same pixel: MapKit's centre is the look-at point; RealityKit's is the
+        // origin. Any difference (MapKit insets, terrain under the centre) becomes a shift of the AR view.
+        if let originPx = arView.project(.zero) {
+            let want = CGPoint(x: probeA.x - originPx.x - arView.frame.minX + bounds.minX, y: probeA.y - originPx.y - arView.frame.minY + bounds.minY)
+            if abs(want.x) < 400, abs(want.y) < 400 {
+                correction = CGPoint(x: correction.x + (want.x - correction.x) * 0.3, y: correction.y + (want.y - correction.y) * 0.3)
+                arView.frame = bounds.offsetBy(dx: correction.x, dy: correction.y)
+            }
         }
         // The train: rebuilt when its make-up changes, else its cars re-placed.
         if needsTrain || trainEntity == nil {
