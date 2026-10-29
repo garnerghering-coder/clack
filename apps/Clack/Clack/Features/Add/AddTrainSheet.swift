@@ -858,40 +858,42 @@ private struct ManualStationField: View {
     }
 }
 
-/// The planner's two filters (DESIGN §segmented control): how many changes, and how short a change may be, in the
-/// change gauge's words. The second is hidden for direct journeys, which have no change to judge.
+/// The planner's two filters as a system `Form`: how many changes, and how short a change may be, in the change
+/// gauge's words. The second is hidden for direct journeys, which have no change to judge.
 private struct JourneyFilterSheet: View {
     @Environment(L10n.self) private var l10n
     @Bindable var model: AddTrainModel
     let onDone: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text(l10n.t("liveMap.filters")).clack(.boardSheetTitle).foregroundStyle(Ink.text)
-                Spacer()
-                if model.maxChanges < 2 || model.minComfort > 0 {
-                    Button(l10n.t("liveMap.clearFilters")) {
-                        model.maxChanges = 2
-                        model.minComfort = 0
+        NavigationStack {
+            Form {
+                Section(l10n.t("add.changesLabel")) {
+                    SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesMin")), (1, l10n.t("add.upTo1")), (2, l10n.t("add.upTo2"))])
+                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                }
+                if model.maxChanges > 0 {
+                    Section(l10n.t("add.comfortLabel")) {
+                        SegmentedControl(selection: $model.minComfort, options: [(0, l10n.t("add.comfortAnyShort")), (1, l10n.t("add.comfortNormalShort")), (2, l10n.t("comfort.relaxed"))])
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                     }
-                    .buttonStyle(LinkButtonStyle())
                 }
             }
-            VStack(alignment: .leading, spacing: 8) {
-                Text(l10n.t("add.changesLabel")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                SegmentedControl(selection: $model.maxChanges, options: [(0, l10n.t("add.changesMin")), (1, l10n.t("add.upTo1")), (2, l10n.t("add.upTo2"))])
-            }
-            if model.maxChanges > 0 {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(l10n.t("add.comfortLabel")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-                    SegmentedControl(selection: $model.minComfort, options: [(0, l10n.t("add.comfortAnyShort")), (1, l10n.t("add.comfortNormalShort")), (2, l10n.t("comfort.relaxed"))])
+            .tint(Ink.accent)
+            .navigationTitle(l10n.t("liveMap.filters"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if model.maxChanges < 2 || model.minComfort > 0 {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(l10n.t("liveMap.clearFilters")) {
+                            model.maxChanges = 2
+                            model.minComfort = 0
+                        }
+                    }
                 }
+                ToolbarItem(placement: .confirmationAction) { Button(l10n.t("common.done"), action: onDone) }
             }
-            Button(l10n.t("common.done"), action: onDone).buttonStyle(.clack(.primary, wide: true))
+            .animation(.default, value: model.maxChanges > 0)
         }
-        .padding(20)
-        .animation(.default, value: model.maxChanges > 0)
     }
 }
-

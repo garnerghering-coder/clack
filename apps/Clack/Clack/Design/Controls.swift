@@ -92,92 +92,37 @@ extension PrimitiveButtonStyle where Self == GlassControlStyle {
     static func glassControl(prominent: Bool = false) -> GlassControlStyle { GlassControlStyle(prominent: prominent) }
 }
 
-/// An inline action in a line of text or under a card: accent-ink text, no box, no underline (the system's borderless
-/// style). At least 44 pt high, so it is as easy to hit as any button (DESIGN §16).
-struct LinkButtonStyle: ButtonStyle {
+/// An inline action in a line of text or under a card: the system's borderless button in accent ink, at least 44 pt
+/// high so it is as easy to hit as any button (DESIGN §16).
+struct LinkButtonStyle: PrimitiveButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .clack(.button)
-            .foregroundStyle(Ink.accentInk)
-            .opacity(configuration.isPressed ? 0.6 : 1)
-            .textSelection(.disabled)
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
+        Button(role: configuration.role, action: configuration.trigger) {
+            configuration.label.clack(.button).textSelection(.disabled)
+        }
+        .buttonStyle(.borderless)
+        .tint(Ink.accentInk)
+        .frame(minHeight: 44)
+        .contentShape(Rectangle())
     }
 }
 
-/// `.segmented`: equal segments on one glass track, with a yellow glass thumb that slides to the chosen one (Liquid
-/// Glass on iOS 26 and later; a raised track and a yellow thumb before). Each segment is a button, 44 pt high.
+/// `.segmented`: the system's segmented control (owner, 2026-10-28: Apple's own controls wherever one exists), so it
+/// gets Liquid Glass, the system's sizes and VoiceOver for free. `small` keeps it to 260 pt.
 struct SegmentedControl<Value: Hashable>: View {
     @Binding var selection: Value
     let options: [(value: Value, label: String)]
     var small = false
-    @Namespace private var thumb
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    private var thumbShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input - 4, style: .continuous) }
-    private var trackShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input, style: .continuous) }
 
     var body: some View {
-        segments
-            .padding(4)
-            .modifier(TrackSurface(shape: trackShape))
-            .frame(maxWidth: small ? 260 : .infinity)
-            .textSelection(.disabled)
-    }
-
-    private var segments: some View {
-        HStack(spacing: 0) {
+        Picker("", selection: $selection) {
             ForEach(Array(options.enumerated()), id: \.offset) { _, option in
-                let chosen = option.value == selection
-                Button {
-                    withAnimation(reduceMotion ? nil : .snappy(duration: 0.28)) { selection = option.value }
-                } label: {
-                    Text(option.label)
-                        .clack(.button)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .foregroundStyle(chosen ? Ink.onAccent : Ink.text)
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .background {
-                    if chosen { Thumb(shape: thumbShape).matchedGeometryEffect(id: "thumb", in: thumb) }
-                }
-                .accessibilityAddTraits(chosen ? [.isButton, .isSelected] : .isButton)
+                Text(option.label).tag(option.value)
             }
         }
-    }
-
-    /// The yellow thumb: glass tinted in the accent on iOS 26, plain accent before.
-    private struct Thumb: View {
-        let shape: RoundedRectangle
-
-        var body: some View {
-            if #available(iOS 26.0, *) {
-                Color.clear.glassEffect(.regular.tint(Ink.accent), in: shape)
-            } else {
-                shape.fill(Ink.accent)
-            }
-        }
-    }
-
-    /// The track under all segments: one glass shape (the thumb joins it in a container, so they blend), or a raised surface.
-    private struct TrackSurface: ViewModifier {
-        let shape: RoundedRectangle
-
-        func body(content: Content) -> some View {
-            if #available(iOS 26.0, *) {
-                GlassEffectContainer(spacing: 8) {
-                    content.glassEffect(.regular, in: shape)
-                }
-            } else {
-                content
-                    .background(Ink.surfaceRaised, in: shape)
-                    .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
-            }
-        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .controlSize(.large)
+        .frame(maxWidth: small ? 260 : .infinity, minHeight: 44)
     }
 }
 

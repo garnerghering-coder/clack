@@ -35,6 +35,8 @@ RULES = [
     (re.compile(r'cornerRadius:\s*[0-9]'), 'radius literal: use a Radius token'),
     (re.compile(r'Image\(systemName:'), 'SF Symbol: use LucideIcon (one icon family)'),
     (re.compile(r'Text\("•"\)'), 'bullet literal: join facts with Format.join'),
+    (re.compile(r'LucideIcon\(name: "check"'), 'hand-made checkbox: use a Toggle or a List selection (DESIGN §2.3, native controls)'),
+    (re.compile(r'\.pickerStyle\(\.(menu|inline|wheel)\)'), 'picker style: segmented for a few choices, a Menu for more (DESIGN §2.3)'),
     (re.compile(r'foreground(Style|Color)\([^)]*\bInk\.(slight|onTime|late|veryLate)\b(?!Ink)'),
      'status fill colour used as text: use the -Ink variant (slightInk, onTimeInk, lateInk, veryLateInk)'),
     (re.compile(r'\.clack\(\.(rowTitle|headline|body|detailRoute|sheetTitle|pageTitle)\)\s*\.fontWeight\(\.(bold|heavy|black)\)'),
