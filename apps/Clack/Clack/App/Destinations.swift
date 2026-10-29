@@ -33,10 +33,8 @@ private struct DestinationView: View {
         case .board(let id, let arrivals): BoardScreen(stationId: id, arrivals: arrivals)
         case .stationMap(let link): StationMapScreen(link: link)
         case .walkLogger: WalkLoggerScreen()
-        case .ride(let target): RideScreen(target: target)
         #if DEBUG
         case .testAlerts: TestAlertsScreen()
-        case .rideProof: RideProofScreen()
         #endif
         }
     }

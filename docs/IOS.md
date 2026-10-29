@@ -137,26 +137,10 @@ switches it off. The link works until a day after the last arrival.
 
 An Apple Watch app is planned in a later workstream. Nothing is built yet.
 
-## Ride view and the Apple Maps test engine
+## Removed: the Ride view and the Apple Maps engine (2026-10-29)
 
-- **Ride view** (`Features/Ride`, `Map/RideMapView.swift`; BUILDOUT O3): opened from a train's sheet on Explore or
-  from a trip while it is under way (`AppRoute.ride`). Apple's 3D map (`MKMapView`, realistic elevation) follows the
-  train; the train is the kit's RealityKit model (`TrainKit`, `TrainScene`) with as many cars as the data gives, drawn
-  in a view laid over the map with its camera matched to `MKMapCamera` every frame. The train is drawn over the map
-  and is never hidden behind buildings (a MapKit limit, said in the panel). Between position reports (every 5 s from
-  `GET /api/live/trains/:id`) the train moves on at its last speed and is eased onto each new report, never past its
-  next stop (`RideLogic.extrapolate`). Camera presets Behind · Above · Side · Driver (system picker), pinch for the
-  distance; both remembered in `UserDefaults`. The speedometer shows the phone's GPS speed only when the ride is under
-  way and the phone is within 1 km of the drawn train with a fix under 10 s old, and says so; otherwise the train's
-  reported or estimated speed (`RideLogic.speed`). The panel: next stop and its time, delay, kilometres and minutes
-  left to the last stop, and the phone's barometric altitude (`CMAltimeter` absolute altitude) once aboard. Line speed
-  from OSM `maxspeed` is not shown yet (the tag isn't extracted). Debug: `-open ride:replay` replays Stockholm C →
-  Uppsala C at 120 km/h; `-open ride:<live id>` follows a train.
-- **Explore on Apple Maps** (Settings → Map engine, `MapEngine`, kept on the phone only; `Map/AppleLiveMapView.swift`):
-  the Explore model drives either engine through `LiveMapController`, which forwards to a `LiveMapSurface` when one
-  is set. The Apple surface draws trains as one overlay of dots below zoom 7 and as annotation views (the Clack
-  marker pictures, labels from zoom 9, rings for selected/followed/yours/corridor) from zoom 7; the selected train's
-  route and a corridor are polylines; your dot is MapKit's. Stations are Apple's own and can't be tapped for a board
-  there; offline maps stay on MapLibre. A display link reports the frame interval (median, p90) and the train count to
-  a readout at the bottom left while this engine is on. The Clack map remains the default until the owner says switch.
-
+Built and tried on the owner's phone the same day, then scrapped: the 3D ride (MapKit + RealityKit) ran the phone hot and
+could not keep the train on the ground and on the line reliably, and Explore on Apple Maps jumped, hid trains and lacked
+rails. What was wanted from them, stations with their tracks and platforms and trains pulling up to them, is built on
+Clack's own MapLibre map instead (station detail at close zoom). The 3D station view, opened from a station, remains a
+later idea on its own.

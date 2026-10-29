@@ -17,13 +17,6 @@ struct SettingsLink: View {
 }
 
 /// A settings row: the label, then its control; a hairline underneath except on the last row of a card (`.row`).
-/// Which engine draws Explore: Clack's own map (MapLibre, offline-capable) or Apple Maps, as a test. Remembered on
-/// the phone, not in the account.
-enum MapEngine: String, CaseIterable {
-    case clack, apple
-    static let key = "clack.mapEngine"
-}
-
 private struct SettingsRow<Control: View>: View {
     let label: String
     var last = false
@@ -72,7 +65,6 @@ private struct ChoiceMenu<Value: Hashable>: View {
 struct SettingsScreen: View {
     @Environment(AppModel.self) private var app
     @Environment(L10n.self) private var l10n
-    @AppStorage(MapEngine.key) private var mapEngine = MapEngine.clack.rawValue
 
     /// Saves a change (shown at once; undone if the server refuses it).
     private func change(_ patch: SettingsPatch) {
@@ -131,13 +123,7 @@ struct SettingsScreen: View {
             }
             Card {
                 SettingsToggle(label: l10n.t("settings.includeCommuter"), isOn: s.includeCommuter) { value in change(SettingsPatch(includeCommuter: value)) }
-                SettingsToggle(label: l10n.t("settings.showRailNetwork"), isOn: s.showRailNetwork) { value in change(SettingsPatch(showRailNetwork: value)) }
-                // Explore on Apple Maps as a test (BUILDOUT O3); kept on this phone only.
-                SettingsRow(label: l10n.t("settings.mapEngine"), last: true) {
-                    ChoiceMenu(label: l10n.t("settings.mapEngine"), options: MapEngine.allCases.map { ($0, l10n.t("settings.mapEngine.\($0.rawValue)")) }, selection: MapEngine(rawValue: mapEngine) ?? .clack) { value in
-                        mapEngine = value.rawValue
-                    }
-                }
+                SettingsToggle(label: l10n.t("settings.showRailNetwork"), isOn: s.showRailNetwork, last: true) { value in change(SettingsPatch(showRailNetwork: value)) }
             }
             Card {
                 Text(l10n.t("settings.changing")).clack(.sectionHeader).foregroundStyle(Ink.text2)

@@ -425,16 +425,6 @@ struct TripDetailScreen: View {
                         .accessibilityElement(children: .combine)
                     }
                     LiveModule(leg: detail.leg, live: shown, stops: detail.stops.map { StopName(stationId: $0.stationId, name: $0.name, tz: $0.tz) }, now: now)
-                    if m.stage == .during, let number = detail.leg.trainNumber, let date = detail.leg.serviceDate {
-                        Button { router.push(.ride(.train(number: number, date: date, key: nil))) } label: {
-                            HStack(spacing: 8) {
-                                LucideIcon(name: "train-track", size: 16)
-                                Text(l10n.t("ride.open"))
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.clack(wide: true))
-                    }
                 }
             }
         }

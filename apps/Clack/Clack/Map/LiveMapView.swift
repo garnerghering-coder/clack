@@ -66,11 +66,6 @@ final class LiveMapController {
     var onReady: () -> Void = {}
     /// A new map view was made (its style isn't loaded yet).
     var onRebuild: () -> Void = {}
-    /// The Apple test engine's frame interval (median ms, p90 ms) and how many trains it holds, about once a second.
-    var onFrameStats: (_ medianMs: Double, _ p90Ms: Double, _ trains: Int) -> Void = { _, _, _ in }
-
-    /// Another engine standing in for MapLibre (Explore on Apple Maps, BUILDOUT O3): while set, every call goes to it.
-    var surface: LiveMapSurface?
 
     private var reduceMotion: Bool { UIAccessibility.isReduceMotionEnabled }
 
@@ -80,13 +75,11 @@ final class LiveMapController {
     /// Your position on the map: MapLibre's own dot, there once iOS has allowed it unless switched off in the Map
     /// settings, and the camera is left where it is.
     func showUserDot() {
-        if let surface { return surface.showUserDot(display.myLocation) }
         mapView?.showsUserLocation = display.myLocation
     }
 
     /// Shows or hides the layers the Map settings name: trains, train labels, station dots, station names, your dot.
     func applyDisplay() {
-        if let surface { return surface.applyDisplay(display) }
         guard let map = mapView, let style = map.style else { return }
         let groups: [(ids: [String], on: Bool)] = [
             (["train-far", "train-dot", "train-mine", "train-followed", "train-selected"], display.trains),
@@ -100,7 +93,6 @@ final class LiveMapController {
 
     /// The locate button: centres on you, at least at zoom 11, and follows you until you move the map yourself.
     func centreOnUser() {
-        if let surface { return surface.centreOnUser() }
         guard let map = mapView else { return }
         map.showsUserLocation = true
         (map as? ClackMapView)?.markMoved()
@@ -113,7 +105,7 @@ final class LiveMapController {
 
     /// Draws the map again (it pauses while out of the window).
     func repaint() {
-        guard surface == nil, let map = mapView else { return }
+        guard let map = mapView else { return }
         map.isHidden = false
         map.setNeedsLayout()
         map.triggerRepaint()
@@ -124,10 +116,6 @@ final class LiveMapController {
         onRebuild()
     }
 
-    /// The Apple surface's view settled.
-    func viewChanged(bbox: String, zoom: Double) {
-        onViewChange(bbox, zoom)
-    }
 
     func markReady() {
         ready = true
@@ -143,11 +131,10 @@ final class LiveMapController {
         onViewChange(bbox, map.zoomLevel)
     }
 
-    var zoom: Double { surface?.zoom ?? mapView?.zoomLevel ?? 4 }
+    var zoom: Double { mapView?.zoomLevel ?? 4 }
 
     /// Every visible train, at the position it is drawn at now.
     func setTrains(_ points: [TrainPoint]) {
-        if let surface { return surface.setTrains(points) }
         guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
         source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.rebuild(points))
         // Your own trains and the ones you follow are also kept out of the clusters, so they stay marked when zoomed out.
@@ -158,7 +145,6 @@ final class LiveMapController {
 
     /// A glide frame: only the trains that are moving get a new coordinate; every other feature is reused as it was.
     func moveTrains(_ positions: [String: LatLon]) {
-        if let surface { return surface.moveTrains(positions) }
         guard let source = mapView?.style?.source(withIdentifier: "trains") as? MLNShapeSource else { return }
         trainFeatures.move(positions)
         source.shape = MLNShapeCollectionFeature(shapes: trainFeatures.features)
@@ -168,37 +154,31 @@ final class LiveMapController {
     private var pinnedFeatures = TrainFeatures()
 
     func setSelected(_ id: String?) {
-        if let surface { return surface.setSelected(id) }
         (mapView?.style?.layer(withIdentifier: "train-selected") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", id ?? "")
     }
 
     /// The route in the train's colour: travelled part solid, the rest dashed.
     func setRoute(done: [LatLon], ahead: [LatLon]) {
-        if let surface { return surface.setRoute(done: done, ahead: ahead) }
         mapView?.setShape(MapGeometry.lines([done]), source: "route")
         mapView?.setShape(MapGeometry.lines([ahead]), source: "route-ahead")
     }
 
     func clearRoute() {
-        if let surface { return surface.clearRoute() }
         for id in ["route", "route-ahead", "route-context"] { mapView?.setShape(MapGeometry.lines([]), source: id) }
     }
 
     /// A corridor from the network status: its track in orange and a ring on each of its late trains.
     func setCorridor(lines: [[LatLon]], trainIds: [String]) {
-        if let surface { return surface.setCorridor(lines: lines, trainIds: trainIds) }
         mapView?.setShape(MapGeometry.lines(lines), source: "corridor")
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id IN %@", trainIds)
     }
 
     func clearCorridor() {
-        if let surface { return surface.clearCorridor() }
         mapView?.setShape(MapGeometry.lines([]), source: "corridor")
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", "")
     }
 
     func setRouteColor(_ hex: String) {
-        if let surface { return surface.setRouteColor(hex) }
         guard let style = mapView?.style else { return }
         let color = UIColor(cssColor: hex)
         for id in ["route-context", "route-ahead", "route-glow", "route-body"] {
@@ -211,7 +191,6 @@ final class LiveMapController {
     /// Eases to a train, up into the free space above its sheet: at least `minZoom`, with the point `offset` points above
     /// the middle.
     func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat) {
-        if let surface { return surface.ease(to: c, minZoom: minZoom, offset: offset) }
         guard let map = mapView else { return }
         (map as? ClackMapView)?.markMoved()
         let z = max(map.zoomLevel, minZoom)
@@ -221,16 +200,14 @@ final class LiveMapController {
     }
 
     func fit(_ points: [LatLon], padding: UIEdgeInsets) {
-        if let surface { return surface.fit(points, padding: padding) }
         (mapView as? ClackMapView)?.markMoved()
         mapView?.fit(points, padding: padding, maxZoom: 14, animated: !reduceMotion)
     }
 
-    var height: CGFloat { surface?.height ?? mapView?.bounds.height ?? 600 }
+    var height: CGFloat { mapView?.bounds.height ?? 600 }
 
     /// Whether any train marker is inside the current view (for deciding who glides).
     func contains(_ lat: Double, _ lon: Double) -> Bool {
-        if let surface { return surface.contains(lat, lon) }
         guard let b = mapView?.visibleCoordinateBounds else { return false }
         return lat >= b.sw.latitude && lat <= b.ne.latitude && lon >= b.sw.longitude && lon <= b.ne.longitude
     }
@@ -257,7 +234,6 @@ struct LiveMapView: UIViewRepresentable {
         map.setCenter(CLLocationCoordinate2D(latitude: 63, longitude: 17), zoomLevel: 3.8, animated: false)
         map.wantedFit = ClackMapView.Fit(points: [LatLon(54.5, 4.5), LatLon(70.2, 31.7)], padding: .zero, maxZoom: 14)
         controller.mapView = map
-        controller.surface = nil
         controller.rebuilt()
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped(_:)))
         tap.delegate = context.coordinator
