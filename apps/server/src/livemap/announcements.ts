@@ -11,6 +11,8 @@ import type { DelayCause } from '@clack/shared';
 interface AnnRow extends TrvBoardRow {
   LocationSignature: string;
   ScheduledDepartureDateTime?: string;
+  /** The passage time to the second (TimeAtLocation is the minute). */
+  TimeAtLocationWithSeconds?: string;
 }
 
 export interface TrainInfo {
@@ -28,6 +30,13 @@ export interface TrainInfo {
   lastWasArrival: boolean;
   nextSig: string | null;
   nextEta: number | null;
+  /** The advertised time at the next stop (before the train has left: its first departure), for "waiting" (BUILDOUT §A.3). */
+  nextAdvertised: number | null;
+  /** Tracks at the last stop passed and the next one (TrackAtLocation; "x" means none), for platform placement (§A.2). */
+  lastTrack: string | null;
+  nextTrack: string | null;
+  /** When it passed the last stop, to the second, for the GPS timestamp check (§A.8); null when only the minute is known. */
+  lastAtSeconds: number | null;
   delayMin: number | null;
   canceled: boolean;
   /** Planned coach order, from the first departure that has one. */
@@ -58,7 +67,11 @@ const FIELDS = [
   'ScheduledDepartureDateTime',
   'TrainComposition',
   'Deviation',
+  'TrackAtLocation',
+  'TimeAtLocationWithSeconds',
 ];
+
+const track = (r: AnnRow | null) => (r?.TrackAtLocation && r.TrackAtLocation !== 'x' ? r.TrackAtLocation : null);
 
 export const trainKey = (number: string, date: string) => `${number}|${date}`;
 
@@ -89,6 +102,10 @@ export function summarizeTrain(rows: AnnRow[], now: number): TrainInfo | null {
     lastWasArrival: last?.ActivityType === 'Ankomst',
     nextSig: next?.LocationSignature ?? null,
     nextEta: est ?? (nextAdv !== null ? nextAdv + (lastDelay ?? 0) * 60_000 : null),
+    nextAdvertised: nextAdv,
+    lastTrack: track(last),
+    nextTrack: track(next),
+    lastAtSeconds: last?.TimeAtLocationWithSeconds ? actualTime(last.TimeAtLocationWithSeconds, last.AdvertisedTimeAtLocation) : null,
     delayMin,
     // Everything still ahead is cancelled (and something is ahead): the train isn't running any more.
     composition: sorted.map((r) => (r.ActivityType === 'Avgang' ? parseComposition(r.TrainComposition) : null)).find(Boolean) ?? null,

@@ -10,6 +10,11 @@ import { loadBrands } from '../dataFiles.js';
 import { rememberJourney } from '../rejseplanen/stops.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { DenmarkArchiveFallback } from './denmarkFallback.js';
+import { segmentCached } from '../geo/trackSegments.js';
+import { locateOnSegment, type Located } from '../live/locate.js';
+import { Placement } from '../live/placement.js';
+import type { LiveQuality } from '../live/quality.js';
+import type { Stop } from '../rejseplanen/client.js';
 import type { Product } from '../search/timetable.js';
 
 export const DENMARK_POLL_MS = 20_000;
@@ -80,6 +85,8 @@ export interface DenmarkTrain {
   tripKey: string | null;
   /** In the Danish timetable? Trains that aren't (Öresundståg, SJ, Snälltåget) are Sweden's feed's too. */
   inDanishTimetable: boolean;
+  /** Where it is in its run (live/locate.ts); absent from the archive fallback. */
+  where?: Pick<Located, 'state' | 'prevId' | 'nextId' | 'atStation' | 'platform' | 'progress'>;
 }
 
 /** Initial compass bearing from a to b, degrees. Pure. */
@@ -100,11 +107,15 @@ export class DenmarkFeed {
   /** Drawing from the archive because Rejseplanen isn't answering. */
   usingFallback = false;
   upstreamAt = 0;
+  /** The time Rejseplanen's last answer was for (its positions are worked out for that moment, not our poll time; §A.7). */
+  positionsAt = 0;
+  private placement: Placement;
 
   constructor(
     private readonly db: Db,
-    private readonly opts: { now?: () => number; client?: RejseplanenClient; fetchImpl?: typeof fetch; graph?: () => RailGraph | null } = {},
+    private readonly opts: { now?: () => number; client?: RejseplanenClient; fetchImpl?: typeof fetch; graph?: () => RailGraph | null; placement?: Placement; quality?: LiveQuality; log?: (m: string) => void } = {},
   ) {
+    this.placement = opts.placement ?? new Placement(() => opts.graph?.() ?? null);
     this.matcher = new TripMatcher(db);
     this.fallback = new DenmarkArchiveFallback(db, { fetchImpl: opts.fetchImpl, now: opts.now, graph: opts.graph });
   }
@@ -123,6 +134,7 @@ export class DenmarkFeed {
       if (!client.available()) throw new Error('Rejseplanen unavailable');
       this.journeys = withoutStubs((await client.journeyGeoPos()).filter((j) => j.pos && j.category !== 'Togbus'));
       this.upstreamAt = this.now();
+      this.positionsAt = this.journeys.find((j) => j.posAt)?.posAt ?? this.upstreamAt;
       this.usingFallback = false;
     } catch (e) {
       // Rejseplanen resting, blocked or off: the archive's latest delays place the trains instead.
@@ -130,6 +142,38 @@ export class DenmarkFeed {
       await this.fallback.refresh();
       if (!this.fallback.upstreamAt) throw e;
     }
+  }
+
+  /**
+   * Rejseplanen's position put on our track between the stop it has left and the next (live/locate.ts, with its
+   * position as the "fix": snapped when within 60 m, never advanced since Rejseplanen gives no speed). Standing at
+   * a stop between its arrival and departure, at the platform when the station is mapped. Null when the stops
+   * around it aren't ours.
+   */
+  private locate(stops: Stop[], next: Stop | null, pos: { lat: number; lon: number; bearing: number | null; at: number }, now: number): Located | null {
+    if (!next) return null;
+    const ni = stops.indexOf(next);
+    const prev = ni > 0 ? stops[ni - 1]! : null;
+    if (!prev || prev.lat === null || prev.lon === null || next.lat === null || next.lon === null) return null;
+    const a = prev.uic ? stationOfUic(this.db, prev.uic) : null;
+    const b = next.uic ? stationOfUic(this.db, next.uic) : null;
+    if (!a || !b) return null;
+    const seg = a.id === b.id ? { points: [[prev.lat, prev.lon] as [number, number]], lengthM: 0, estimated: false } : segmentCached(this.db, { id: a.id, lat: prev.lat, lon: prev.lon }, { id: b.id, lat: next.lat, lon: next.lon }, this.opts.graph?.() ?? null);
+    const left = prev.depLive ?? prev.depPlanned ?? prev.arrLive ?? prev.arrPlanned;
+    return locateOnSegment(
+      { seg, placement: this.placement, quality: this.opts.quality },
+      {
+        prev: { id: a.id, name: prev.name ?? a.name, lat: prev.lat, lon: prev.lon, track: prev.depPlatform ?? prev.arrPlatform },
+        next: { id: b.id, name: next.name ?? b.name, lat: next.lat, lon: next.lon, track: next.arrPlatform ?? next.depPlatform },
+        left,
+        arriving: next.arrLive ?? next.depLive ?? next.arrPlanned ?? next.depPlanned,
+        standingAtPrev: left !== null && left > now,
+        gps: { lat: pos.lat, lon: pos.lon, at: pos.at, bearing: pos.bearing, speedKmh: null, lastSpeedKmh: null, fresh: true, ageMs: Math.max(0, now - pos.at) },
+        now,
+        country: 'DK',
+        source: 'rejseplanen',
+      },
+    );
   }
 
   trains(): DenmarkTrain[] {
@@ -152,15 +196,17 @@ export class DenmarkFeed {
       const next = j.stops.find((s) => (s.arrLive ?? s.arrPlanned ?? s.depLive ?? s.depPlanned ?? 0) > now) ?? null;
       const planned = next ? (next.arrPlanned ?? next.depPlanned) : null;
       const eta = next ? (next.arrLive ?? next.depLive ?? planned) : null;
+      const at = j.posAt ?? this.positionsAt;
+      const where = this.locate(j.stops, next, { lat: j.pos.lat, lon: j.pos.lon, bearing, at }, now);
       out.push({
         ref,
         jid: j.jid,
         number,
         date: j.date,
-        lat: j.pos.lat,
-        lon: j.pos.lon,
-        bearing,
-        at: this.upstreamAt,
+        lat: where?.lat ?? j.pos.lat,
+        lon: where?.lon ?? j.pos.lon,
+        bearing: where?.bearing ?? bearing,
+        at,
         operatorId: matched?.operatorId ?? operatorOfJourney(j),
         productName: j.category,
         product: productOfCategory(j.category),
@@ -172,6 +218,7 @@ export class DenmarkFeed {
         delayMin: planned !== null && eta !== null ? Math.round((eta - planned) / 60_000) : null,
         tripKey: matched?.tripKey ?? null,
         inDanishTimetable: Boolean(matched),
+        ...(where ? { where: { state: where.state, prevId: where.prevId, nextId: where.nextId, atStation: where.atStation, platform: where.platform, progress: where.progress } } : {}),
       });
     }
     const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Copenhagen', hour: '2-digit', hourCycle: 'h23' }).format(now));

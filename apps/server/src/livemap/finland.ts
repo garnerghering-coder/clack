@@ -14,10 +14,13 @@ import { digitrafficCauses } from '../legs/causes.js';
 import type { DelayCause } from '@clack/shared';
 import { haversineM } from '../lib/geo.js';
 import { addDays, todayIn } from '../lib/time.js';
-import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
+import { segmentCached } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
-import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
+import { GPS_FRESH_MS } from '../live/progress.js';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
+import { locateOnSegment, type Located, type SegGps, type SegStop } from '../live/locate.js';
+import { Placement } from '../live/placement.js';
+import { LiveQuality } from '../live/quality.js';
 import type { Product } from '../search/timetable.js';
 import { bearingOf } from './norway.js';
 
@@ -31,6 +34,10 @@ const FULL_EVERY_MS = 30 * 60_000;
 const POSITION_MAX_AGE_MS = 10 * 60_000;
 const BEFORE_MS = 2 * 60_000;
 const AFTER_MS = 5 * 60_000;
+/** Digitraffic says how good each fix is; one worse than this is dropped (BUILDOUT §A.6). */
+export const MAX_ACCURACY_M = 200;
+/** Passage times older than this aren't compared with the fixes (the ring won't have them). */
+const PASSAGE_WINDOW_MS = 10 * 60_000;
 
 interface Pos {
   lat: number;
@@ -56,6 +63,8 @@ interface Call {
   expArr: number | null;
   expDep: number | null;
   skipped: boolean;
+  /** The platform (commercialTrack) at this call, when given. */
+  track: string | null;
 }
 
 interface Stored {
@@ -100,6 +109,8 @@ export interface FinlandTrain {
   crossBorder: boolean;
   /** The unit or locomotive type from /compositions (Sm5, Sr3), when known. */
   vehicle: string | null;
+  /** Where it is in its run (live/locate.ts). */
+  where: Pick<Located, 'state' | 'prevId' | 'nextId' | 'atStation' | 'platform' | 'progress' | 'fixAt'>;
 }
 
 interface TripInfo {
@@ -123,11 +134,14 @@ export function callsOf(train: DtTrain, stationOf: (code: string) => unknown): C
     if (known !== null) carry = known - sched;
     if (r.commercialStop !== true || !stationOf(r.stationShortCode)) continue;
     if (r.type === 'ARRIVAL' || !cur || cur.code !== r.stationShortCode || cur.dep !== null) {
-      cur = { code: r.stationShortCode, arr: null, dep: null, expArr: null, expDep: null, skipped: Boolean(r.cancelled) };
+      cur = { code: r.stationShortCode, arr: null, dep: null, expArr: null, expDep: null, skipped: Boolean(r.cancelled), track: null };
       calls.push(cur);
     }
     if (r.type === 'ARRIVAL') [cur.arr, cur.expArr] = [sched, exp];
     else [cur.dep, cur.expDep] = [sched, exp];
+    // The departure's track wins; an arrival's fills in.
+    const track = r.commercialTrack?.trim();
+    if (track && (r.type === 'DEPARTURE' || !cur.track)) cur.track = track;
     cur.skipped = cur.skipped && Boolean(r.cancelled);
   }
   return calls;
@@ -148,11 +162,18 @@ export class FinlandFeed {
   private vehiclesAt = new Map<string, number>();
   upstreamAt = 0;
   polls = 0;
+  private placement: Placement;
+  private quality: LiveQuality;
+  /** Fixes dropped for poor accuracy, for the health report. */
+  inaccurate = 0;
 
   constructor(
     private db: Db,
-    private opts: { fetchImpl?: typeof fetch; now?: () => number; log?: (m: string) => void; graph?: () => RailGraph | null } = {},
-  ) {}
+    private opts: { fetchImpl?: typeof fetch; now?: () => number; log?: (m: string) => void; graph?: () => RailGraph | null; placement?: Placement; quality?: LiveQuality } = {},
+  ) {
+    this.placement = opts.placement ?? new Placement(() => opts.graph?.() ?? null);
+    this.quality = opts.quality ?? new LiveQuality(() => this.now());
+  }
 
   private now() {
     return (this.opts.now ?? Date.now)();
@@ -228,10 +249,15 @@ export class FinlandFeed {
       const k = `${l.trainNumber}|${l.departureDate}`;
       const at = Date.parse(l.timestamp);
       if (!Number.isFinite(at) || lat === undefined || lon === undefined) continue;
+      if (typeof l.accuracy === 'number' && l.accuracy > MAX_ACCURACY_M) {
+        this.inaccurate++;
+        continue;
+      }
       const old = this.positions.get(k);
       if (old && old.at >= at) continue;
       // Digitraffic's speed is km/h; 0 is a standing train (or none reported), so it goes through the same check as Sweden's.
       if (!this.fixes.push(k, { lat, lon, at, bearing: null, speedKmh: l.speed ?? null })) continue;
+      this.quality.recordFix('digitraffic', k, { lat, lon, at }, this.now());
       const pos: Pos = { lat, lon, at, speedKmh: this.fixes.current(k)?.speedKmh ?? null };
       if (old && haversineM(old.lat, old.lon, pos.lat, pos.lon) > 25) this.previous.set(k, old);
       this.positions.set(k, pos);
@@ -251,6 +277,7 @@ export class FinlandFeed {
         this.trains_.delete(k);
         continue;
       }
+      this.passages(k, t);
       this.trains_.set(k, {
         number: String(t.trainNumber),
         date: t.departureDate,
@@ -262,6 +289,23 @@ export class FinlandFeed {
         crossBorder: calls.some((c) => (this.station(c.code)?.country ?? 'FI') !== 'FI'),
         causes: digitrafficCauses(t.timeTableRows.filter((r) => r.actualTime).flatMap((r) => r.causes ?? [])),
       });
+    }
+  }
+
+  /**
+   * Digitraffic's actual times against the GPS run, for the timestamp offset (§A.8): arrivals, departures, and the
+   * passing times at stations the train doesn't stop at (the cleanest comparison, when the station is one of ours).
+   */
+  private passages(k: string, t: DtTrain) {
+    const now = this.now();
+    const product = (finnishProduct(t.trainType).product ?? 'regional') as string;
+    for (const r of t.timeTableRows) {
+      if (!r.actualTime) continue;
+      const at = Date.parse(r.actualTime);
+      if (!(now - at <= PASSAGE_WINDOW_MS)) continue;
+      const st = this.station(r.stationShortCode);
+      if (!st) continue;
+      this.quality.recordPassage('digitraffic', product, k, st, at, r.trainStopping === false ? 'pass' : r.type === 'ARRIVAL' ? 'arr' : 'dep');
     }
   }
 
@@ -313,30 +357,31 @@ export class FinlandFeed {
       const planned = nextCall.arr ?? nextCall.dep;
       const delayMs = nextEta !== null && planned !== null ? nextEta - planned : null;
 
-      let fix: Pick<FinlandTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
-      if (fresh) {
-        const prev = this.previous.get(rk);
-        fix = { lat: gps.lat, lon: gps.lon, bearing: prev ? bearingOf(prev, gps) : bearingOf(gps, next), speedKmh: now - gps.at <= SPEED_FRESH_MS ? gps.speedKmh : null, at: gps.at, estimated: false };
-      } else {
-        let j = i - 1;
-        while (j > 0 && calls[j]!.skipped) j--;
-        const prevCall = j >= 0 ? calls[j]! : null;
-        const left = prevCall ? (prevCall.expDep ?? prevCall.expArr) : null;
-        const arriving = nextCall.expArr ?? nextCall.expDep!;
-        if (!prevCall || left === null || now >= arriving || now < left) {
-          // Waiting at its first stop, or standing at the next one (its dwell time).
-          fix = { lat: next.lat, lon: next.lon, bearing: null, speedKmh: null, at: now, estimated: true };
-        } else {
-          const p = this.station(prevCall.code)!;
-          const a: StationPoint = { id: p.id, lat: p.lat, lon: p.lon };
-          const b: StationPoint = { id: next.id, lat: next.lat, lon: next.lon };
-          const seg = segmentBetween(this.db, a, b, graph);
-          const cum = cumulative(seg.points);
-          const f = Math.min(0.95, Math.max(0, (now - left) / Math.max(1, arriving - left)));
-          const pt = pointAt(seg.points, cum, f * cum.at(-1)!);
-          fix = { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: null, at: now, estimated: true };
-        }
+      // Where it is (live/locate.ts): the fix snapped onto the prev → next track and carried forward, dead
+      // reckoning when the fix is stale, else the run profile; standing at its platform when it has arrived.
+      let j = i - 1;
+      while (j > 0 && calls[j]!.skipped) j--;
+      const prevCall = j >= 0 ? calls[j]! : null;
+      const left = prevCall ? (prevCall.expDep ?? prevCall.expArr) : null;
+      const arriving = nextCall.expArr ?? nextCall.expDep!;
+      const prev = this.previous.get(rk);
+      const g: SegGps | null = gps
+        ? { lat: gps.lat, lon: gps.lon, at: gps.at, bearing: prev ? bearingOf(prev, gps) : null, speedKmh: fresh && now - gps.at <= SPEED_FRESH_MS ? gps.speedKmh : null, lastSpeedKmh: gps.speedKmh, fresh: !!fresh, ageMs: now - gps.at }
+        : null;
+      const asStop = (c: Call, st: StationInfo): SegStop => ({ id: st.id, name: st.name, lat: st.lat, lon: st.lon, track: c.track });
+      let where: Located | null = null;
+      const p = prevCall ? this.station(prevCall.code) : undefined;
+      if (prevCall && p && p.id !== next.id) {
+        const seg = segmentCached(this.db, { id: p.id, lat: p.lat, lon: p.lon }, { id: next.id, lat: next.lat, lon: next.lon }, graph);
+        where = locateOnSegment({ seg, placement: this.placement, quality: this.quality }, { prev: asStop(prevCall, p), next: asStop(nextCall, next), left, arriving, standingAtPrev: false, gps: g, now, country: p.country === 'SE' ? 'SE' : 'FI', source: 'digitraffic' });
       }
+      if (!where) {
+        // Before its first departure (or with no times): waiting at its first stop, at the platform when Digitraffic names the track.
+        const placed = this.placement.standing(next.id, next.lat, next.lon, nextCall.track);
+        const useFix = g?.fresh && placed.how !== 'platform';
+        where = { lat: useFix ? g!.lat : placed.lat, lon: useFix ? g!.lon : placed.lon, bearing: null, speedKmh: g?.fresh ? 0 : null, at: now, estimated: !g?.fresh, state: i === 0 ? 'waiting' : 'standing', prevId: p?.id ?? null, nextId: next.id, atStation: next.name, platform: placed.how === 'platform' ? nextCall.track : null, progress: null, ...(g?.fresh ? { fixAt: g.at } : {}) };
+      }
+      const { state, prevId, nextId, atStation, platform, progress, fixAt, ...fix } = where;
       const trip = this.trip(s.number, s.date, now);
       const product = (finnishProduct(s.type).product ?? 'regional') as Product;
       const origin = this.station(first.code)!.name;
@@ -360,6 +405,7 @@ export class FinlandFeed {
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: s.crossBorder,
         vehicle: this.vehicles.get(`${s.date}|${s.number}`) ?? null,
+        where: { state, prevId, nextId, atStation, platform, progress, ...(fixAt !== undefined ? { fixAt } : {}) },
       });
     }
     return out;

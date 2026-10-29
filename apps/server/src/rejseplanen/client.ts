@@ -93,11 +93,14 @@ export class RejseplanenClient {
 
   /** Every train in a box (all of Denmark by default) with its position. */
   async journeyGeoPos(box: Box = DENMARK): Promise<Journey[]> {
-    const { res, common } = await this.call<{ jnyL?: RawJourney[] }>('JourneyGeoPos', {
+    const { res, common } = await this.call<{ jnyL?: RawJourney[]; date?: string; time?: string }>('JourneyGeoPos', {
       rect: { llCrd: { x: Math.round(box.minLon * 1e6), y: Math.round(box.minLat * 1e6) }, urCrd: { x: Math.round(box.maxLon * 1e6), y: Math.round(box.maxLat * 1e6) } },
       perSize: 30000, perStep: 5000, onlyRT: false, jnyFltrL: [{ type: 'PROD', mode: 'INC', value: String(TRAIN_PRODUCTS) }],
     });
-    return (res.jnyL ?? []).map((j) => journeyOf(common, j));
+    // The answer says what moment its positions are for ("date"/"time", the request's reference time): kept, so a
+    // position isn't dated by when we happened to poll (BUILDOUT §A.7).
+    const posAt = res.date && res.time ? hafasTime(res.date, res.time) : null;
+    return (res.jnyL ?? []).map((j) => ({ ...journeyOf(common, j), posAt }));
   }
 }
 
@@ -148,6 +151,8 @@ export interface Journey {
   /** Service messages (HIM) on the journey or its line, sorted into train and station notices (notices.ts). */
   notices: Notice[];
   pos: { lat: number; lon: number } | null;
+  /** The moment `pos` is for (the position answer's reference time); null in answers that don't say. */
+  posAt?: number | null;
   /** From the journey id: its first and last stop and their planned times (HHMM), for matching the timetable. */
   ends: JourneyEnds | null;
 }

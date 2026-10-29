@@ -248,7 +248,8 @@ export class RailGraph {
       chain.push(this.slice(bestEnd.t.edge, bestEnd.node === te.u ? 0 : te.length, bestEnd.t.offset));
       points = chain.flatMap((part, i) => (i ? part.slice(1) : part));
     }
-    points = [from, ...points, to];
+    // The line starts and ends on the track (the snapped points), not at the station centroids (BUILDOUT §A.4): a
+    // train on it is on rails all the way, and the last metres before a platform aren't a straight line to the building.
     let lengthM = 0;
     for (let i = 1; i < points.length; i++) lengthM += hav(points[i - 1]![0], points[i - 1]![1], points[i]![0], points[i]![1]);
     return { points: dedupe(points), lengthM };

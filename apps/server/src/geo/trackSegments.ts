@@ -1,6 +1,6 @@
 // Track geometry for station pairs, cached in track_segments (SPEC §12), and whole legs built from them.
 import { and, asc, eq, isNull, ne, or } from 'drizzle-orm';
-import { decodePolyline, encodePolyline, type LatLon } from '@clack/shared';
+import { cumulative, decodePolyline, encodePolyline, type LatLon } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { legStops, legs, stations, trackSegments } from '../db/schema.js';
 import { haversineM } from '../lib/geo.js';
@@ -49,6 +49,33 @@ export function segmentBetween(db: Db, a: StationPoint, b: StationPoint, graph: 
     .onConflictDoNothing()
     .run();
   return { ...seg, points: orient(seg.points) };
+}
+
+export interface CachedSegment extends Segment {
+  /** Cumulative metres at each point. */
+  cum: number[];
+}
+const memo = new Map<string, CachedSegment>();
+const MEMO_MAX = 4000;
+
+/**
+ * segmentBetween with the decoded points and their cumulative lengths kept in memory, per direction: the live map
+ * places hundreds of trains a second on these, and decoding a long polyline each time would cost more than the rest.
+ */
+export function segmentCached(db: Db, a: StationPoint, b: StationPoint, graph: RailGraph | null = railGraph()): CachedSegment {
+  const key = `${a.id}>${b.id}`;
+  const hit = memo.get(key);
+  if (hit) return hit;
+  const seg = segmentBetween(db, a, b, graph);
+  const c: CachedSegment = { ...seg, cum: cumulative(seg.points) };
+  memo.set(key, c);
+  if (memo.size > MEMO_MAX) memo.delete(memo.keys().next().value!);
+  return c;
+}
+
+/** Forget the in-memory segments (after the cache table is cleared, or in tests). */
+export function resetSegmentMemo() {
+  memo.clear();
 }
 
 /** Track along a sequence of stops: one segment per consecutive pair, plus the joined line. */

@@ -150,9 +150,9 @@ describe('estimated positions (trains without GPS)', () => {
     expect(t!.lat).toBeCloseTo((59.33 + 59.86) / 2, 2);
   });
 
-  it('stops short of the next station when the train is running late', async () => {
+  it('stands an overdue train at the next station instead of freezing short of it (BUILDOUT §A.3)', async () => {
     const t = await setup([ann('Cst', 'Avgang', '11:00', { TimeAtLocation: T('11:00') }), ann('U', 'Ankomst', '11:40')], '11:58');
-    expect(t!.lat).toBeLessThan(59.86 - 0.01);
+    expect(t).toMatchObject({ lat: 59.86, lon: 17.65, state: 'standing', atStation: 'U' });
   });
 
   it('keeps a train that is standing at a station there', async () => {
@@ -160,8 +160,9 @@ describe('estimated positions (trains without GPS)', () => {
     expect(t).toMatchObject({ lat: 59.86, lon: 17.65, estimated: true });
   });
 
-  it("leaves out trains that haven't left yet, and ones that arrived a while ago", async () => {
-    expect(await setup([ann('Cst', 'Avgang', '11:00'), ann('U', 'Ankomst', '11:40')], '10:55')).toBeUndefined();
+  it("leaves out trains that haven't left yet (until shortly before departure), and ones that arrived a while ago", async () => {
+    expect(await setup([ann('Cst', 'Avgang', '11:00'), ann('U', 'Ankomst', '11:40')], '10:45')).toBeUndefined();
+    expect(await setup([ann('Cst', 'Avgang', '11:00'), ann('U', 'Ankomst', '11:40')], '10:55')).toMatchObject({ state: 'waiting', atStation: 'Cst' });
     expect(await setup([ann('Cst', 'Avgang', '11:00', { TimeAtLocation: T('11:00') }), ann('U', 'Ankomst', '11:40', { TimeAtLocation: T('11:40') })], '11:50')).toBeUndefined();
   });
 
@@ -246,7 +247,7 @@ describe('live map stream', () => {
     fake.emit('delta', { changed: [train('gbg', 57.71, 12.01), train('sth', 59.31, 18.1)], removed: [], total: 2, upstreamAt: 2 });
     const d1 = await next('delta');
     expect(d1.changed).toEqual([]);
-    expect(d1.moved).toEqual([['gbg', 57.71, 12.01, 0, 100, 1, false]]);
+    expect(d1.moved).toEqual([['gbg', 57.71, 12.01, 0, 100, 1, false, null, null]]);
 
     // Its delay changes: the whole train is sent again.
     fake.emit('delta', { changed: [train('gbg', 57.71, 12.01, { delayMin: 7 })], removed: [], total: 2, upstreamAt: 3 });

@@ -1,0 +1,16 @@
+{
+  "_comment": "Oslo S (NSR, Bane NOR). First draft 2026-10-28 from OSM via Overpass. The train platforms are multipolygon relations in OSM (refs 1;2 … 19), so multipolygons is on. OSM tags the station's walkways with levels -1, 0, 1 and 2; the levels are named by number until the owner's video and Bane NOR's plan say what each is called. Bus platforms (Oslo bussterminal, bus=yes) and the T-bane platforms (subway=yes, layer -2) are left out by the drafter's filters.",
+  "radius": 500,
+  "multipolygons": true,
+  "levels": [
+    { "osm": "2", "id": "L2", "name": "Level 2", "order": 2 },
+    { "osm": "1", "id": "L1", "name": "Level 1", "order": 1 },
+    { "osm": "0", "id": "L0", "name": "Ground level and platforms", "order": 0 },
+    { "osm": "-1", "id": "L-1", "name": "Level -1", "order": -1 }
+  ],
+  "rotation": 0,
+  "sources": [],
+  "changelog": [
+    { "date": "2026-10-28", "who": "Claude (for the owner)", "what": "First draft from OpenStreetMap (Overpass, 2026-10-28), schema 2. Levels named by number only; the video and Bane NOR's plan are still to be read." }
+  ]
+}

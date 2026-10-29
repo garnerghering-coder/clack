@@ -6,10 +6,14 @@ import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn, ymdToIso } from '../lib/time.js';
 import { haversineM } from '../lib/geo.js';
-import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
+import { segmentCached } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
-import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
+import { GPS_FRESH_MS } from '../live/progress.js';
 import { FixFilter, SPEED_FRESH_MS } from '../live/sanitize.js';
+import { locateOnSegment, type Located, type SegGps, type SegStop } from '../live/locate.js';
+import { Placement } from '../live/placement.js';
+import { LiveQuality } from '../live/quality.js';
+import type { CountryCode } from '../lib/countries.js';
 import { gtfsRt, RT_DATASOURCES, ScheduleRelationship, StopScheduleRelationship, type FeedMessage } from '../entur/client.js';
 
 const TZ = 'Europe/Oslo';
@@ -46,6 +50,8 @@ interface Stop {
   country: string;
   arr: number | null;
   dep: number | null;
+  /** The planned platform (the quay's code), when the timetable has one. */
+  platform: string | null;
 }
 
 interface RunningTrip {
@@ -85,6 +91,8 @@ export interface NorwayTrain {
   crossBorder: boolean;
   /** The set running it, when the feed names it. */
   vehicle: string | null;
+  /** Where it is in its run (live/locate.ts). */
+  where: Pick<Located, 'state' | 'prevId' | 'nextId' | 'atStation' | 'platform' | 'progress' | 'fixAt'>;
 }
 
 /** GTFS-RT start dates come as "20261022" or "2026-10-22". */
@@ -121,11 +129,16 @@ export class NorwayFeed {
   private runningCache: { at: number; trips: RunningTrip[] } | null = null;
   upstreamAt = 0;
   polls = 0;
+  private placement: Placement;
+  private quality: LiveQuality;
 
   constructor(
     private db: Db,
-    private opts: { fetchImpl?: typeof fetch; now?: () => number; log?: (m: string) => void; graph?: () => RailGraph | null } = {},
-  ) {}
+    private opts: { fetchImpl?: typeof fetch; now?: () => number; log?: (m: string) => void; graph?: () => RailGraph | null; placement?: Placement; quality?: LiveQuality } = {},
+  ) {
+    this.placement = opts.placement ?? new Placement(() => opts.graph?.() ?? null);
+    this.quality = opts.quality ?? new LiveQuality(() => this.now());
+  }
 
   private now() {
     return (this.opts.now ?? Date.now)();
@@ -155,6 +168,7 @@ export class NorwayFeed {
       // Protobuf sends 0 for a missing bearing; only Flytoget sends real ones, so 0 is treated as none.
       const raw: Pos = { lat: v.position.latitude, lon: v.position.longitude, bearing: v.position.bearing || null, speedKmh: v.position.speed ? Math.round(v.position.speed * 3.6) : null, at };
       if (!this.fixes.push(k, raw)) continue;
+      this.quality.recordFix('entur', k, { lat: raw.lat, lon: raw.lon, at }, this.now());
       const pos: Pos = { ...raw, speedKmh: this.fixes.current(k)?.speedKmh ?? null, vehicle: v.vehicle?.label || v.vehicle?.id || null };
       if (old && haversineM(old.lat, old.lon, pos.lat, pos.lon) > 25) this.previous.set(k, old);
       this.positions.set(k, pos);
@@ -207,8 +221,8 @@ export class NorwayFeed {
     const k = `${trip.key}|${trip.date}`;
     const hit = this.stopsCache.get(k);
     if (hit) return hit;
-    const rows = this.db.all<{ seq: number; station_id: string; name: string; lat: number; lon: number; country: string; arr_sec: number | null; dep_sec: number | null }>(sql`
-      select st.seq, st.station_id, s.name, s.lat, s.lon, s.country, st.arr_sec, st.dep_sec
+    const rows = this.db.all<{ seq: number; station_id: string; name: string; lat: number; lon: number; country: string; arr_sec: number | null; dep_sec: number | null; platform: string | null }>(sql`
+      select st.seq, st.station_id, s.name, s.lat, s.lon, s.country, st.arr_sec, st.dep_sec, st.platform
       from timetable_stop_times st join stations s on s.id = st.station_id
       where st.trip_key = ${trip.key} order by st.seq`);
     const base = serviceTimeToUtc(trip.date, 0, TZ);
@@ -221,6 +235,7 @@ export class NorwayFeed {
       country: r.country,
       arr: r.arr_sec === null ? null : base + r.arr_sec * 1000,
       dep: r.dep_sec === null ? null : base + r.dep_sec * 1000,
+      platform: r.platform,
     }));
     this.stopsCache.set(k, stops);
     if (this.stopsCache.size > 3000) this.stopsCache.delete(this.stopsCache.keys().next().value!);
@@ -262,29 +277,30 @@ export class NorwayFeed {
       const nextEta = exp[i]!.arr ?? exp[i]!.dep;
       const delayMs = u ? (exp[i]!.arr ?? exp[i]!.dep ?? 0) - (next.arr ?? next.dep ?? 0) : null;
 
-      let fix: Pick<NorwayTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
-      if (fresh) {
-        const prev = this.previous.get(rk);
-        fix = { lat: gps.lat, lon: gps.lon, bearing: gps.bearing ?? (prev ? bearingOf(prev, gps) : bearingOf(gps, next)), speedKmh: now - gps.at <= SPEED_FRESH_MS ? gps.speedKmh : null, at: gps.at, estimated: false };
-      } else {
-        let j = i - 1;
-        while (j > 0 && exp[j]!.skipped) j--;
-        const prevStop = j >= 0 ? stops[j]! : null;
-        const left = j >= 0 ? (exp[j]!.dep ?? exp[j]!.arr) : null;
-        const arriving = exp[i]!.arr ?? exp[i]!.dep!;
-        if (!prevStop || left === null || now >= arriving || now < left) {
-          // Waiting at its first stop, or standing at the next one (its dwell time).
-          fix = { lat: next.lat, lon: next.lon, bearing: null, speedKmh: null, at: now, estimated: true };
-        } else {
-          const a: StationPoint = { id: prevStop.stationId, lat: prevStop.lat, lon: prevStop.lon };
-          const b: StationPoint = { id: next.stationId, lat: next.lat, lon: next.lon };
-          const seg = segmentBetween(this.db, a, b, graph);
-          const cum = cumulative(seg.points);
-          const f = Math.min(0.95, Math.max(0, (now - left) / Math.max(1, arriving - left)));
-          const pt = pointAt(seg.points, cum, f * cum.at(-1)!);
-          fix = { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: null, at: now, estimated: true };
-        }
+      // Where it is (live/locate.ts): the fix snapped onto the prev → next track and carried forward, dead
+      // reckoning when the fix is stale, else the run profile; standing at its platform when it has arrived.
+      let j = i - 1;
+      while (j > 0 && exp[j]!.skipped) j--;
+      const prevStop = j >= 0 ? stops[j]! : null;
+      const left = j >= 0 ? (exp[j]!.dep ?? exp[j]!.arr) : null;
+      const arriving = exp[i]!.arr ?? exp[i]!.dep!;
+      const prev = this.previous.get(rk);
+      const g: SegGps | null = gps
+        ? { lat: gps.lat, lon: gps.lon, at: gps.at, bearing: gps.bearing ?? (prev ? bearingOf(prev, gps) : null), speedKmh: fresh && now - gps.at <= SPEED_FRESH_MS ? gps.speedKmh : null, lastSpeedKmh: gps.speedKmh, fresh: !!fresh, ageMs: now - gps.at }
+        : null;
+      const asStop = (s: Stop): SegStop => ({ id: s.stationId, name: s.name, lat: s.lat, lon: s.lon, track: s.platform });
+      let where: Located | null = null;
+      if (prevStop && prevStop.stationId !== next.stationId) {
+        const seg = segmentCached(this.db, { id: prevStop.stationId, lat: prevStop.lat, lon: prevStop.lon }, { id: next.stationId, lat: next.lat, lon: next.lon }, graph);
+        where = locateOnSegment({ seg, placement: this.placement, quality: this.quality }, { prev: asStop(prevStop), next: asStop(next), left, arriving, standingAtPrev: false, gps: g, now, country: prevStop.country as CountryCode, source: 'entur' });
       }
+      if (!where) {
+        // Before its first departure (or with no times): waiting at its first stop, at the platform when the timetable names it.
+        const placed = this.placement.standing(next.stationId, next.lat, next.lon, next.platform);
+        const useFix = g?.fresh && placed.how !== 'platform';
+        where = { lat: useFix ? g!.lat : placed.lat, lon: useFix ? g!.lon : placed.lon, bearing: null, speedKmh: g?.fresh ? 0 : null, at: now, estimated: !g?.fresh, state: i === 0 ? 'waiting' : 'standing', prevId: prevStop?.stationId ?? null, nextId: next.stationId, atStation: next.name, platform: placed.how === 'platform' ? next.platform : null, progress: null, ...(g?.fresh ? { fixAt: g.at } : {}) };
+      }
+      const { state, prevId, nextId, atStation, platform, progress, fixAt, ...fix } = where;
       out.push({
         tripKey: trip.key,
         tripId: trip.tripId,
@@ -302,6 +318,7 @@ export class NorwayFeed {
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: stops.some((s) => s.country !== 'NO'),
         vehicle: gps?.vehicle ?? null,
+        where: { state, prevId, nextId, atStation, platform, progress, ...(fixAt !== undefined ? { fixAt } : {}) },
       });
     }
     return out;

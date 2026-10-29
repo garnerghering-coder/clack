@@ -3,6 +3,12 @@
 //
 // Coordinates are metres in a local frame around `origin` (x east, y south, so they map straight onto SVG); the
 // spec allowed "schematic" or "wgs84", and local metres give real walking distances without a projection step.
+//
+// Schema 2 (build 54, docs/STATION_MAPPING.md) adds what a 3D view and platform-level positioning need, all optional
+// so schema-1 files and older apps keep working: level heights, platform edges per track, building and platform
+// heights, track numbers on the rails, escalator directions, and `_source` on every element (where the fact came
+// from: an OSM way, a published plan, a video frame, a walk log). `validateStationMap` demands the sources and the
+// exits only of files that say `schema: 2`.
 
 export type Pt = [number, number];
 export type StationNodeType = 'platform' | 'platform_access' | 'hall' | 'entrance' | 'stairs' | 'escalator' | 'lift' | 'gate' | 'junction';
@@ -10,11 +16,21 @@ export type EdgeKind = 'walk' | 'stairs' | 'escalator' | 'lift';
 export const POI_CATEGORIES = ['toilet', 'cafe', 'restaurant', 'kiosk', 'shop', 'ticket', 'locker', 'waiting', 'info', 'pharmacy', 'atm', 'taxi', 'bus', 'other'] as const;
 export type PoiCategory = (typeof POI_CATEGORIES)[number];
 
+/**
+ * Where an element's facts come from (schema 2): "osm:way/123", "osm:node/45", "plan:<which plan>",
+ * "video:<file> @ mm:ss", "walk:<log id>", "mapillary:<image id>", "commons:<file>", "manual:<note>", or
+ * "derived:<how>" for things worked out from other sourced elements (a platform's middle). Several, comma-separated.
+ */
+export type SourceRef = string;
+
 export interface StationLevel {
   id: string;
   name: string;
   /** Higher is further up; used for "up"/"down" in directions. */
   order: number;
+  /** Floor height in metres above the reference level (the main platforms' level is 0), measured; absent when not known. */
+  height_m?: number;
+  _source?: SourceRef;
 }
 export interface StationShape {
   level: string;
@@ -22,6 +38,19 @@ export interface StationShape {
   kind: 'building' | 'hall' | 'room' | 'shop' | 'track';
   name?: string;
   points: Pt[];
+  /** For "track": the track number, when the rails carry one (OSM railway:track_ref / ref). */
+  ref?: string;
+  /** For buildings: the height in metres when the source gives one (OSM height=). */
+  height_m?: number;
+  _source?: SourceRef;
+}
+/** One side of a platform where trains stop: the line along the rails, with the track it serves when known. */
+export interface PlatformEdge {
+  /** The track id at this edge; null when the sources don't say which side is which (the review queue lists it). */
+  track: string | null;
+  points: Pt[];
+  _source: SourceRef;
+  note?: string;
 }
 export interface StationPlatform {
   id: string;
@@ -34,6 +63,11 @@ export interface StationPlatform {
   geometry: Pt[][];
   /** The node a route starts or ends at (type "platform", at the middle of the platform). */
   node: string;
+  /** Platform surface above the rail head, metres, when a source gives it. */
+  height_m?: number;
+  /** The platform's edges along the tracks (schema 2). */
+  edges?: PlatformEdge[];
+  _source?: SourceRef;
 }
 export interface StationNode {
   id: string;
@@ -43,6 +77,7 @@ export interface StationNode {
   y: number;
   platform?: string;
   name?: string;
+  _source?: SourceRef;
 }
 export interface StationEdge {
   from: string;
@@ -55,6 +90,9 @@ export interface StationEdge {
   /** Polyline for drawing, from → to; straight when missing. */
   geometry?: Pt[];
   source?: 'osm' | 'manual';
+  /** Escalators: which way they run (from → to), when the source says. */
+  direction?: 'up' | 'down' | 'both';
+  _source?: SourceRef;
 }
 export interface StationPoi {
   id: string;
@@ -74,14 +112,18 @@ export interface StationPoi {
   hours_verified: string | null;
   /** The place's own outline (a shop's unit), when it is mapped as one; otherwise it's drawn as a pin. */
   outline?: Pt[];
+  _source?: SourceRef;
 }
+export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons';
 export interface StationMap {
+  /** 1 (or absent): the original format; 2: with sources on every element, heights and platform edges. */
+  schema?: 1 | 2;
   station_id: string;
   name: string;
   updated: string;
   /** "hand_curated" once someone has checked it end to end; "osm_draft" straight from the draft script. */
   quality: 'osm_draft' | 'hand_curated';
-  sources: { type: 'osm' | 'manual' | 'website' | 'trafikverket'; license?: string; retrieved?: string; url?: string; note?: string }[];
+  sources: { type: StationSourceType; license?: string; retrieved?: string; url?: string; note?: string }[];
   changelog: { date: string; who: string; what: string }[];
   coord_system: 'local_m';
   origin: { lat: number; lon: number };
@@ -130,7 +172,81 @@ export function validateStationMap(m: StationMap): string[] {
     else if (!seen.has(p.node)) errors.push(`poi ${p.id}: unreachable`);
     if (!levels.has(p.level)) errors.push(`poi ${p.id}: unknown level ${p.level}`);
   }
+  if ((m.schema ?? 1) >= 2) errors.push(...validateSchema2(m, nodes, adj));
   return errors;
+}
+
+/**
+ * Schema 2's stricter rules: every element says where it comes from; a change of level is stairs, an escalator or
+ * a lift, never a plain walk; every platform reaches an entrance; a platform edge names a track the platform serves.
+ */
+function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Map<string, [string, StationEdge][]>): string[] {
+  const errors: string[] = [];
+  const need = (what: string, src: SourceRef | undefined) => {
+    if (!src || !src.trim()) errors.push(`${what}: no _source`);
+  };
+  for (const l of m.levels) need(`level ${l.id}`, l._source);
+  m.shapes.forEach((s, i) => need(`shape ${i} (${s.kind}${s.name ? ` ${s.name}` : ''})`, s._source));
+  for (const p of m.platforms) {
+    need(`platform ${p.ref}`, p._source);
+    for (const e of p.edges ?? []) {
+      need(`platform ${p.ref} edge`, e._source);
+      if (e.track !== null && !p.tracks.includes(e.track.toLowerCase().replace(/[a-z]+$/, ''))) errors.push(`platform ${p.ref}: edge track ${e.track} is not one of its tracks`);
+      if (e.points.length < 2) errors.push(`platform ${p.ref}: an edge with fewer than 2 points`);
+    }
+  }
+  for (const n of m.nodes) need(`node ${n.id}`, n._source);
+  for (const e of m.edges) {
+    need(`edge ${e.from}→${e.to}`, e._source);
+    const a = nodes.get(e.from);
+    const b = nodes.get(e.to);
+    if (a && b && a.level !== b.level && e.kind === 'walk') errors.push(`edge ${e.from}→${e.to}: changes level (${a.level}→${b.level}) but is a walk, not stairs, an escalator or a lift`);
+  }
+  for (const p of m.pois) need(`poi ${p.id}`, p._source);
+  // Every platform reaches an exit.
+  const entrances = new Set(m.nodes.filter((n) => n.type === 'entrance').map((n) => n.id));
+  if (!entrances.size) errors.push('no entrance nodes: platforms cannot reach an exit');
+  else
+    for (const p of m.platforms) {
+      const seen = new Set<string>();
+      const stack = [p.node];
+      let found = false;
+      while (stack.length && !found) {
+        const n = stack.pop()!;
+        if (seen.has(n)) continue;
+        seen.add(n);
+        if (entrances.has(n)) found = true;
+        for (const [to] of adj.get(n) ?? []) stack.push(to);
+      }
+      if (!found) errors.push(`platform ${p.ref}: no way to an entrance`);
+    }
+  return errors;
+}
+
+/**
+ * What a map is still missing, for the review queue (docs/STATION_MAPPING.md): not errors, but things a walk, a
+ * plan or a video can settle. `knownTracks`: the tracks the timetable or the boards use at this station, when known.
+ */
+export function stationReview(m: StationMap, knownTracks?: string[] | null): string[] {
+  const out: string[] = [];
+  const base = (t: string) => t.toLowerCase().replace(/[a-z]+$/, '');
+  const mapped = new Set(m.platforms.flatMap((p) => p.tracks.map(base)));
+  for (const t of new Set((knownTracks ?? []).map(base))) if (t && !mapped.has(t)) out.push(`track ${t} is used in the timetable or boards but no platform in the map serves it`);
+  for (const p of m.platforms) {
+    if ((m.schema ?? 1) >= 2 && !p.edges?.length) out.push(`platform ${p.ref}: no platform edges (which side the trains stop at)`);
+    for (const e of p.edges ?? []) if (e.track === null) out.push(`platform ${p.ref}: an edge whose track is not known (${e.note ?? 'island platform: which side is which track'})`);
+    if (p.height_m === undefined && (m.schema ?? 1) >= 2) out.push(`platform ${p.ref}: height above rail not known`);
+  }
+  if (m.levels.length > 1) for (const l of m.levels) if (l.height_m === undefined) out.push(`level ${l.id} (${l.name}): height not measured`);
+  const levelsWithPlatforms = new Set(m.platforms.map((p) => p.level));
+  const vertical = m.edges.filter((e) => e.kind !== 'walk');
+  if (m.levels.length > 1 && !vertical.length) out.push('several levels but no stairs, escalators or lifts between them');
+  if (!m.nodes.some((n) => n.type === 'entrance')) out.push('no entrances mapped');
+  for (const p of m.platforms)
+    if (m.levels.length > 1 && !m.edges.some((e) => e.kind !== 'walk' && (m.nodes.find((n) => n.id === e.from)?.platform === p.id || m.nodes.find((n) => n.id === e.to)?.platform === p.id)) && levelsWithPlatforms.size < m.levels.length)
+      out.push(`platform ${p.ref}: no stairs, escalator or lift of its own (reached along the platform level only)`);
+  for (const poi of m.pois) if (!poi.opening_hours && ['cafe', 'restaurant', 'kiosk', 'shop', 'pharmacy', 'waiting'].includes(poi.category)) out.push(`${poi.category} ${poi.name || poi.id}: no opening hours`);
+  return out;
 }
 
 function adjacency(m: StationMap): Map<string, [string, StationEdge][]> {
@@ -310,6 +426,22 @@ export function routeBetween(m: StationMap, a: Endpoint | null, b: Endpoint | nu
 export function toLocal(m: StationMap, lat: number, lon: number): Pt {
   const kx = 111_320 * Math.cos((m.origin.lat * Math.PI) / 180);
   return [(lon - m.origin.lon) * kx, -(lat - m.origin.lat) * 110_574];
+}
+
+/** The map's local metres back to WGS84 (the inverse of toLocal). */
+export function fromLocal(m: StationMap, x: number, y: number): [number, number] {
+  const kx = 111_320 * Math.cos((m.origin.lat * Math.PI) / 180);
+  return [m.origin.lat - y / 110_574, m.origin.lon + x / kx];
+}
+
+/**
+ * Where a train standing at a track is drawn: the platform's node (the middle of the platform) in WGS84, for the
+ * platform that serves the track; null when the map doesn't know the track.
+ */
+export function platformPoint(m: StationMap, track: string | null | undefined): [number, number] | null {
+  const p = platformForTrack(m, track);
+  const n = p && m.nodes.find((x) => x.id === p.node);
+  return n ? fromLocal(m, n.x, n.y) : null;
 }
 
 /** The walking-graph node closest to a point on a level, if one is within `maxMeters`. */

@@ -8,6 +8,9 @@ import { and, eq, inArray, lt } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { followedTrains, legs } from '../db/schema.js';
 import { isMine, LiveMapIngest, type LiveDelta, type LiveTrain } from '../livemap/ingest.js';
+import { stations, trvLocations } from '../db/schema.js';
+import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
+import { encodePolyline } from '@clack/shared';
 import { searchByNumber, tripByKey, tripStops } from '../search/timetable.js';
 import { matchTrip } from '../livemap/match.js';
 import { trainStops } from '../livemap/trainStops.js';
@@ -27,11 +30,11 @@ function parseBbox(s: string | undefined): Bbox | null {
 const inside = (t: LiveTrain, b: Bbox | null) => !b || (t.lon >= b[0] && t.lon <= b[2] && t.lat >= b[1] && t.lat <= b[3]);
 
 /** Everything but the position: when only this is unchanged, a delta sends the train as a short "moved" tuple. */
-const infoOf = ({ lat: _a, lon: _b, bearing: _c, speedKmh: _d, at: _e, estimated: _f, ...info }: LiveTrain) => JSON.stringify(info);
+const infoOf = ({ lat: _a, lon: _b, bearing: _c, speedKmh: _d, at: _e, estimated: _f, state: _g, progress: _h, fixAt: _i, ...info }: LiveTrain) => JSON.stringify(info);
 const r5 = (v: number) => Math.round(v * 1e5) / 1e5;
-/** [id, lat, lon, bearing, speedKmh, at, estimated]: about a tenth of the full object. */
-export type MovedTuple = [string, number, number, number | null, number | null, number, boolean];
-const moved = (t: LiveTrain): MovedTuple => [t.id, r5(t.lat), r5(t.lon), t.bearing, t.speedKmh, t.at, t.estimated];
+/** [id, lat, lon, bearing, speedKmh, at, estimated, state, progress]: about a tenth of the full object. Apps from before build 54 read the first seven. */
+export type MovedTuple = [string, number, number, number | null, number | null, number, boolean, LiveTrain['state'] | null, number | null];
+const moved = (t: LiveTrain): MovedTuple => [t.id, r5(t.lat), r5(t.lon), t.bearing, t.speedKmh, t.at, t.estimated, t.state ?? null, t.progress === undefined || t.progress === null ? null : Math.round(t.progress * 1000) / 1000];
 
 /** How often a live-map stream re-reads which trains are the viewer's (adding a trip shows up within this). */
 const MINE_REFRESH_MS = 10_000;
@@ -227,6 +230,32 @@ export const liveMapRoutes =
       }
       return network.body;
     });
+
+    // The track between two consecutive stops, as the live trains' prevId/nextId name them (our station ids, or
+    // "trv:<signature>" for Swedish locations without one): the same geometry the server places trains on, so the
+    // app can move a marker along it between updates (BUILDOUT §A, app). Cacheable: track doesn't change.
+    const pointOf = (id: string | undefined): StationPoint | null => {
+      if (!id || !/^[\w:.-]{1,64}$/.test(id)) return null;
+      if (id.startsWith('trv:')) {
+        const sig = id.slice(4);
+        const l = db.select({ s: trvLocations.signature, lat: trvLocations.lat, lon: trvLocations.lon }).from(trvLocations).where(eq(trvLocations.signature, sig)).get();
+        return l && l.lat !== null && l.lon !== null ? { id: `trv:${l.s}`, lat: l.lat, lon: l.lon } : null;
+      }
+      const s = db.select({ id: stations.id, lat: stations.lat, lon: stations.lon }).from(stations).where(eq(stations.id, id)).get();
+      return s ? { id: s.id, lat: s.lat, lon: s.lon } : null;
+    };
+    app.get<{ Querystring: { from?: string; to?: string } }>('/live/segment', async (req, reply) => {
+      const a = pointOf(req.query.from);
+      const b = pointOf(req.query.to);
+      if (!a || !b) return reply.code(404).send({ error: 'unknown station id' });
+      const seg = segmentBetween(db, a, b);
+      reply.header('Cache-Control', 'public, max-age=86400');
+      return { from: a.id, to: b.id, polyline: encodePolyline(seg.points), lengthM: Math.round(seg.lengthM), estimated: seg.estimated };
+    });
+
+    // How good the positions are: delivery lag and timestamp offsets per source, the position check (old rule vs
+    // new, standing placement) and track-side agreement (live/quality.ts). Counters only; admin token required.
+    app.get('/live/quality', async (req, reply) => (req.isAdmin ? ingest.quality.report() : reply.callNotFound()));
 
     app.get('/live/status', async () => ({ mode: ingest.mode, viewers: ingest.viewers, trains: ingest.trains.size, upstreamAt: ingest.upstreamAt, upstreamOpens: ingest.upstreamOpens, announcementRows: ingest.announcementRows, norwayAt: ingest.norwayAt, finlandAt: ingest.finlandAt, denmarkAt: ingest.denmarkAt }));
   };

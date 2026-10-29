@@ -11,9 +11,17 @@ import { brandMatcher } from '../boards/board.js';
 import { loadBrands } from '../dataFiles.js';
 import { brandOnLine, trainTypeFor } from '../legs/trainTypes.js';
 import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js';
-import { segmentBetween, type StationPoint } from '../geo/trackSegments.js';
+import { segmentBetween, segmentCached, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
+import { estimateAlong, type TrainState } from '../live/positioning.js';
+import { locateOnSegment } from '../live/locate.js';
+import { Placement } from '../live/placement.js';
+import type { LatLon } from '@clack/shared';
+import { LiveQuality } from '../live/quality.js';
+import { haversineM } from '../lib/geo.js';
+import { REPO_ROOT } from '../env.js';
+import path from 'node:path';
 import { productOf, searchByNumber, tripStops, type Product } from '../search/timetable.js';
 import { NORWAY_POLL_MS, NorwayFeed } from './norway.js';
 import { FINLAND_POLL_MS, FinlandFeed } from './finland.js';
@@ -49,6 +57,21 @@ export interface LiveTrain {
   tripKey?: string | null;
   /** A Norwegian train that also runs in Sweden, where Trafikverket knows it by number. */
   crossBorder?: boolean;
+  /**
+   * Where it is in its run (BUILDOUT §A.1): running between prevId and nextId, standing at a station, or waiting at
+   * its first one before departure. Added in build 54; older apps ignore these fields.
+   */
+  state?: TrainState;
+  /** The stop passed and the next one: our station ids, or "trv:<signature>" for a Swedish location without one. The track between them is GET /api/live/segment?from&to. */
+  prevId?: string | null;
+  nextId?: string | null;
+  /** The station it stands or waits at, and its platform or track there when the feed says. */
+  atStation?: string | null;
+  platform?: string | null;
+  /** 0 … 1 along prevId → nextId while running; null when standing, waiting or off the track. */
+  progress?: number | null;
+  /** When the shown position was carried forward from a GPS fix (by the delivery lag), the fix's own time; `at` is then the time the position is for. */
+  fixAt?: number;
 }
 
 /**
@@ -126,9 +149,27 @@ export interface IngestOptions {
   denmark?: boolean;
   /** For tests: the Rejseplanen client (else the shared one). */
   rejseplanen?: RejseplanenClient;
+  /** Where the quality counters are kept between restarts (default data/cache/live-quality.json); null keeps them in memory only (tests). */
+  qualityFile?: string | null;
 }
 
-type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated'>;
+type Fix = Pick<LiveTrain, 'lat' | 'lon' | 'bearing' | 'speedKmh' | 'at' | 'estimated' | 'state' | 'prevId' | 'nextId' | 'atStation' | 'platform' | 'progress' | 'fixAt'>;
+/** A Swedish train is drawn waiting at its first stop this long before its advertised departure (a chosen window, not measured: long-distance trains are usually at the platform by then). */
+export const WAITING_BEFORE_MS = 10 * 60_000;
+const QUALITY_FILE = path.join(REPO_ROOT, 'data/cache/live-quality.json');
+const QUALITY_SAVE_MS = 5 * 60_000;
+/** One position-check sample per train per minute, so Sweden's 3-second fixes don't outweigh the rest. */
+const CHECK_EVERY_MS = 60_000;
+interface GpsPoint {
+  lat: number;
+  lon: number;
+  at: number;
+  bearing: number | null;
+  /** The checked speed while it is fresh. */
+  speedKmh: number | null;
+  /** The last checked speed however old, for dead reckoning. */
+  lastSpeedKmh: number | null;
+}
 interface TailStop {
   id: string;
   name: string;
@@ -141,10 +182,16 @@ interface TailStop {
 export class LiveMapIngest extends EventEmitter {
   readonly trains = new Map<string, LiveTrain>();
   /** What the network status reads beside each train and the stream doesn't send: the station it passed last, and the reasons its feed gives. */
-  readonly context = new Map<string, { prev: string | null; causes: DelayCause[] }>();
+  readonly context = new Map<string, { prev: string | null; prevId: string | null; causes: DelayCause[] }>();
   private positions = new Map<string, TrvPos>();
   /** Every position report passes through here first: impossible jumps are dropped, speeds checked. */
   readonly fixes = new FixFilter();
+  /** Where standing trains go (platforms, track points) and the parallel-track choice; shared with the other feeds. */
+  readonly placement: Placement;
+  /** Delivery lag, timestamp offsets, the position check and track-side agreement (GET /api/live/quality). */
+  readonly quality: LiveQuality;
+  /** When each train was last sampled for the position check. */
+  private checked = new Map<string, number>();
   private changed = new Set<string>();
   private removed = new Set<string>();
   private ann: AnnouncementCache;
@@ -191,10 +238,13 @@ export class LiveMapIngest extends EventEmitter {
   ) {
     super();
     this.setMaxListeners(200);
+    this.placement = new Placement(() => opts.graph?.() ?? null);
+    this.quality = opts.qualityFile === null ? new LiveQuality(() => this.now()) : LiveQuality.load(opts.qualityFile ?? QUALITY_FILE, () => this.now());
+    const shared = { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph, placement: this.placement, quality: this.quality };
     this.ann = new AnnouncementCache({ fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log });
-    this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
-    this.fi = !opts.finland || opts.simulate ? null : new FinlandFeed(db, { fetchImpl: opts.fetchImpl, now: opts.now, log: opts.log, graph: opts.graph });
-    this.dk = !opts.denmark || opts.simulate ? null : new DenmarkFeed(db, { now: opts.now, client: opts.rejseplanen, fetchImpl: opts.fetchImpl, graph: opts.graph });
+    this.no = !opts.norway || opts.simulate ? null : new NorwayFeed(db, shared);
+    this.fi = !opts.finland || opts.simulate ? null : new FinlandFeed(db, shared);
+    this.dk = !opts.denmark || opts.simulate ? null : new DenmarkFeed(db, { ...shared, client: opts.rejseplanen });
   }
 
   /** Last time Digitraffic's feeds answered (0 without Finland). */
@@ -343,6 +393,16 @@ export class LiveMapIngest extends EventEmitter {
     }
     this.timers.push(setInterval(() => this.flush(), FLUSH_MS));
     this.timers.push(setInterval(() => this.prune(), PRUNE_MS));
+    if (this.opts.qualityFile !== null)
+      this.timers.push(
+        setInterval(() => {
+          try {
+            this.quality.save(this.opts.qualityFile ?? QUALITY_FILE);
+          } catch (e) {
+            this.opts.log?.(`live map: could not save quality counters: ${(e as Error).message}`);
+          }
+        }, QUALITY_SAVE_MS),
+      );
   }
 
   stop() {
@@ -376,23 +436,150 @@ export class LiveMapIngest extends EventEmitter {
       }
       const ll = parseWgs84(p.Position?.WGS84);
       if (!ll) continue;
-      if (!this.fixes.push(k, { lat: ll[0], lon: ll[1], at: Date.parse(p.TimeStamp), bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null })) continue;
+      const at = Date.parse(p.TimeStamp);
+      if (!this.fixes.push(k, { lat: ll[0], lon: ll[1], at, bearing: p.Bearing ?? null, speedKmh: p.Speed ?? null })) continue;
       const cur = this.fixes.current(k);
       this.positions.set(k, { ...p, Speed: cur?.speedKmh ?? undefined, speedAt: cur?.speedAt });
+      this.quality.recordFix('trafikverket', k, { lat: ll[0], lon: ll[1], at }, this.now());
+      this.sampleCheck(k, { lat: ll[0], lon: ll[1], at, speedKmh: cur?.speedKmh ?? null });
       this.derive(k);
     }
   }
 
-  private derive(k: string) {
+  /** The raw fix the filter accepted, with the speed as checked. */
+  private gpsOf(k: string): (GpsPoint & { fresh: boolean; ageMs: number }) | null {
     const p = this.positions.get(k);
     const ll = p && parseWgs84(p.Position?.WGS84);
-    if (!p || !ll) return;
+    if (!p || !ll) return null;
     const at = Date.parse(p.TimeStamp);
+    const ageMs = this.now() - at;
+    // A speed only from a fresh reading: an old one says nothing about how fast it's going now.
+    return { lat: ll[0], lon: ll[1], at, bearing: p.Bearing ?? null, speedKmh: this.now() - (p.speedAt ?? at) <= SPEED_FRESH_MS ? (p.Speed ?? null) : null, lastSpeedKmh: p.Speed ?? null, fresh: ageMs <= GPS_FRESH_MS, ageMs };
+  }
+
+  private derive(k: string) {
+    const gps = this.gpsOf(k);
+    if (!gps) return;
     // A stale fix is left to the estimate (if that's on); a fresh one always wins over it.
-    if (this.opts.includeEstimated !== false && this.now() - at > GPS_FRESH_MS && this.estimatedKeys.has(k)) return;
+    if (this.opts.includeEstimated !== false && !gps.fresh && this.estimatedKeys.has(k)) return;
     this.estimatedKeys.delete(k);
-    // A speed only from a fresh fix: an old one says nothing about how fast it's going now.
-    this.put(k, { lat: ll[0], lon: ll[1], bearing: p.Bearing ?? null, speedKmh: this.now() - (p.speedAt ?? at) <= SPEED_FRESH_MS ? (p.Speed ?? null) : null, at, estimated: false });
+    const [number, date] = k.split('|') as [string, string];
+    const info = this.ann.info(number, date);
+    this.passages(k, info);
+    const where = this.locate(k, info, gps, this.now());
+    if (where) this.put(k, where.fix, where.next);
+    else this.put(k, { lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, at: gps.at, estimated: false, state: 'running', prevId: null, nextId: null, atStation: null, platform: null, progress: null });
+  }
+
+  /** The feed's passage times with seconds against the GPS run, for the timestamp offset (§A.8). */
+  private passages(k: string, info: TrainInfo | null) {
+    if (!info || info.lastAtSeconds === null) return;
+    const a = this.point(info.lastSig);
+    if (a) this.quality.recordPassage('trafikverket', productOfText(info.productName, null), k, a, info.lastAtSeconds, info.lastWasArrival ? 'arr' : 'dep');
+  }
+
+  /**
+   * The position check (BUILDOUT "Measuring it"): when a fix comes for a train we could also have estimated, how far
+   * the old rule (a constant fraction of the time, capped at 95%) and the new one (the run profile) would have put it
+   * from where it really was; and for a train reported standing at a mapped platform, how far that platform's point
+   * is from the fix. One sample per train per minute.
+   */
+  private sampleCheck(k: string, fix: { lat: number; lon: number; at: number; speedKmh: number | null }) {
+    if (fix.at - (this.checked.get(k) ?? 0) < CHECK_EVERY_MS) return;
+    const [number, date] = k.split('|') as [string, string];
+    const info = this.ann.info(number, date);
+    if (!info || info.lastAt === null || !info.lastSig || !info.nextSig) return;
+    const a = this.point(info.lastSig);
+    const b = this.point(info.nextSig);
+    if (!a || !b) return;
+    const product = productOfText(info.productName, null);
+    if (info.lastWasArrival) {
+      const placed = this.placement.standing(a.id, a.lat, a.lon, info.lastTrack);
+      if (placed.how === 'platform') {
+        this.checked.set(k, fix.at);
+        this.quality.recordStanding(this.name(info.lastSig) ?? a.id, haversineM(fix.lat, fix.lon, placed.lat, placed.lon));
+      }
+      return;
+    }
+    if (a.id === b.id || info.nextEta === null || fix.at < info.lastAt) return;
+    const seg = segmentCached(this.db, a, b, this.opts.graph?.() ?? null);
+    const cum = seg.cum;
+    const L = cum.at(-1)!;
+    const span = info.nextEta - info.lastAt;
+    const f = span > 0 ? Math.min(0.95, Math.max(0, (fix.at - info.lastAt) / span)) : 0;
+    const oldPt = pointAt(seg.points, cum, f * L);
+    const newPt = pointAt(seg.points, cum, estimateAlong(L, info.lastAt, info.nextEta, fix.at).m);
+    this.checked.set(k, fix.at);
+    this.quality.recordCheck(product, haversineM(fix.lat, fix.lon, oldPt.lat, oldPt.lon), haversineM(fix.lat, fix.lon, newPt.lat, newPt.lon));
+  }
+
+  /**
+   * Where a Swedish train is now (BUILDOUT §A), from its announcements and its GPS:
+   * - a fresh fix is snapped onto the prev → next track, pointed along it, and carried forward by the delivery lag;
+   *   a fix that is slow next to a station, or a train the feed says has arrived, stands at its platform;
+   * - a stale fix is dead-reckoned along the track at its last speed, then blended into the estimate;
+   * - without GPS, the estimate follows the run profile, moves to the approach after the expected arrival, and then
+   *   stands at the platform; a train the feed says has arrived stands at its platform;
+   * - before its first departure, it waits at its first stop (its platform when the announcement names the track).
+   * Null when there is nothing to draw it from (then a fresh fix is shown raw by the caller).
+   */
+  private locate(k: string, info: TrainInfo | null, gps: (GpsPoint & { fresh: boolean; ageMs: number }) | null, now: number): { fix: Fix; next?: { name: string; eta: number | null } | null } | null {
+    const graph = this.opts.graph?.() ?? null;
+    const raw = (): Fix | null => (gps?.fresh ? { lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, at: gps.at, estimated: false, state: 'running', prevId: null, nextId: null, atStation: null, platform: null, progress: null } : null);
+    if (!info) {
+      const r = raw();
+      return r ? { fix: r } : null;
+    }
+    const standingAt = (p: StationPoint, sig: string | null, track: string | null, prevId: string | null, nextId: string | null, state: TrainState, estimated: boolean): Fix => {
+      const placed = this.placement.standing(p.id.startsWith('trv:') ? null : p.id, p.lat, p.lon, track);
+      // With a fix and no mapped platform, the fix beats the station's point.
+      const at = gps?.fresh && placed.how !== 'platform' ? gps : placed;
+      return { lat: at.lat, lon: at.lon, bearing: null, speedKmh: estimated ? null : 0, at: now, estimated, state, prevId, nextId, atStation: this.name(sig), platform: placed.how === 'platform' ? track : null, progress: null, ...(gps?.fresh ? { fixAt: gps.at } : {}) };
+    };
+
+    // Not left its first stop yet: a train from abroad is on its way (head); otherwise it waits at the first stop.
+    if (info.lastAt === null) {
+      const abroad = this.estimateAbroad(info, now, graph);
+      if (abroad && !gps?.fresh) return abroad;
+      const first = this.point(info.nextSig);
+      if (!first) {
+        const r = raw();
+        return r ? { fix: r } : null;
+      }
+      const due = info.nextEta ?? info.nextAdvertised;
+      if (gps?.fresh || (due !== null && due - now <= WAITING_BEFORE_MS)) return { fix: standingAt(first, info.nextSig, info.nextTrack, null, first.id, 'waiting', !gps?.fresh) };
+      return null;
+    }
+    // Past its last Swedish stop: the timetable abroad (tail), or just the fix.
+    if (!info.nextSig) {
+      if (gps?.fresh) {
+        const r = raw()!;
+        return { fix: r, next: null };
+      }
+      return this.estimateAbroad(info, now, graph);
+    }
+    const a = this.point(info.lastSig);
+    const b = this.point(info.nextSig);
+    if (!a || !b) {
+      const r = raw();
+      return r ? { fix: r } : null;
+    }
+    const seg = a.id === b.id ? { points: [[a.lat, a.lon]] as LatLon[], lengthM: 0, estimated: false } : segmentCached(this.db, a, b, graph);
+    const fix = locateOnSegment(
+      { seg, placement: this.placement, quality: this.quality },
+      {
+        prev: { id: a.id, name: this.name(info.lastSig), lat: a.lat, lon: a.lon, track: info.lastTrack },
+        next: { id: b.id, name: this.name(info.nextSig), lat: b.lat, lon: b.lon, track: info.nextTrack },
+        left: info.lastAt,
+        arriving: info.nextEta,
+        standingAtPrev: info.lastWasArrival,
+        gps,
+        now,
+        country: 'SE',
+        source: 'trafikverket',
+      },
+    );
+    return fix ? { fix } : null;
   }
 
   /** Train k at this position, with what the announcements say about it; or off the map if it shouldn't show. */
@@ -424,7 +611,7 @@ export class LiveMapIngest extends EventEmitter {
       mine: false,
     };
     this.trains.set(k, t);
-    this.context.set(k, { prev: abroadNext !== undefined ? null : this.name(info?.lastSig ?? null), causes: info?.causes ?? [] });
+    this.context.set(k, { prev: abroadNext !== undefined ? null : this.name(info?.lastSig ?? null), prevId: fix.prevId ?? null, causes: info?.causes ?? [] });
     this.changed.add(k);
     this.removed.delete(k);
   }
@@ -475,49 +662,26 @@ export class LiveMapIngest extends EventEmitter {
   }
 
   /**
-   * Trains without fresh GPS: on the track between the last stop passed and the next one, by time (the trip view's
-   * rule, DESIGN §9.2), stopping short of the next station so an estimate never runs past it. Standing at a
-   * station: at the station.
+   * Trains without fresh GPS: along the track between the last stop passed and the next one on the run profile, at
+   * the approach once overdue, standing at their platform when arrived, waiting at their first stop before leaving,
+   * and dead-reckoned from a fix that has gone quiet (locate, BUILDOUT §A). Drawn hollow.
    */
   estimateAll() {
     if (this.opts.includeEstimated === false || !this.ann.size) return;
     const now = this.now();
-    const graph = this.opts.graph?.() ?? null;
     const seen = new Set<string>();
     for (const [number, date] of this.ann.trains()) {
       const k = trainKey(number, date);
-      const gps = this.positions.get(k);
-      if (gps && now - Date.parse(gps.TimeStamp) <= GPS_FRESH_MS) continue;
+      const gps = this.gpsOf(k);
+      if (gps?.fresh) continue;
       if (this.norwayGps.has(k) || this.denmarkPos.has(k)) continue;
       const info = this.ann.info(number, date);
       if (!info || !this.shows(info)) continue;
-      if (!info.nextSig || info.lastAt === null) {
-        const fix = this.estimateAbroad(info, now, graph);
-        if (fix) {
-          seen.add(k);
-          this.estimatedKeys.add(k);
-          this.put(k, fix.fix, fix.next);
-        }
-        continue;
-      }
-      if (info.nextEta === null) continue;
-      const a = this.point(info.lastSig);
-      const b = this.point(info.nextSig);
-      if (!a || !b) continue;
-      let fix: Fix;
-      if (a.id === b.id || info.lastWasArrival) {
-        fix = { lat: a.lat, lon: a.lon, bearing: null, speedKmh: null, at: now, estimated: true };
-      } else {
-        const seg = segmentBetween(this.db, a, b, graph);
-        const cum = cumulative(seg.points);
-        const span = info.nextEta - info.lastAt;
-        const f = span > 0 ? Math.min(0.95, Math.max(0, (now - info.lastAt) / span)) : 0;
-        const pt = pointAt(seg.points, cum, f * cum.at(-1)!);
-        fix = { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: null, at: now, estimated: true };
-      }
+      const where = this.locate(k, info, gps, now);
+      if (!where) continue;
       seen.add(k);
       this.estimatedKeys.add(k);
-      this.put(k, fix);
+      this.put(k, where.fix, where.next);
     }
     // Estimates that no longer apply (arrived, cancelled, or GPS came back fresh and took over).
     for (const k of this.estimatedKeys)
@@ -568,9 +732,10 @@ export class LiveMapIngest extends EventEmitter {
         mine: false,
         tripKey: n.tripKey,
         ...(n.crossBorder ? { crossBorder: true } : {}),
+        ...n.where,
       };
       this.trains.set(id, t);
-      this.context.set(id, { prev: n.prev ?? null, causes: [] });
+      this.context.set(id, { prev: n.prev ?? null, prevId: n.where.prevId, causes: [] });
       this.changed.add(id);
       this.removed.delete(id);
     }
@@ -630,9 +795,10 @@ export class LiveMapIngest extends EventEmitter {
         mine: false,
         tripKey: d.tripKey,
         ...(crossBorder ? { crossBorder: true } : {}),
+        ...(d.where ?? {}),
       };
       this.trains.set(id, t);
-      this.context.set(id, { prev: d.prev ?? null, causes: [] });
+      this.context.set(id, { prev: d.prev ?? null, prevId: d.where?.prevId ?? null, causes: [] });
       this.changed.add(id);
       this.removed.delete(id);
     }
@@ -674,9 +840,10 @@ export class LiveMapIngest extends EventEmitter {
         delayMin: f.delayMin,
         mine: false,
         tripKey: f.tripKey,
+        ...f.where,
       };
       this.trains.set(id, t);
-      this.context.set(id, { prev: f.prev ?? null, causes: f.causes ?? [] });
+      this.context.set(id, { prev: f.prev ?? null, prevId: f.where.prevId, causes: f.causes ?? [] });
       this.changed.add(id);
       this.removed.delete(id);
     }
@@ -720,21 +887,29 @@ export class LiveMapIngest extends EventEmitter {
     if (info.lastAt === null && tail.length >= 2 && now < (tail[0]!.dep ?? tail[0]!.arr ?? Infinity)) return null;
     if (tail.length < 2) return null;
     const leaves = (x: TailStop) => x.dep ?? x.arr;
+    const standing = (s: TailStop, prevId: string | null, nextId: string | null): Fix => {
+      const p = this.placement.standing(s.id, s.lat, s.lon, null);
+      return { lat: p.lat, lon: p.lon, bearing: null, speedKmh: null, at: now, estimated: true, state: 'standing', prevId, nextId, atStation: s.name, platform: null, progress: null };
+    };
     const i = tail.findIndex((x, j) => j > 0 && (x.arr ?? x.dep ?? 0) > now);
     if (i < 0) {
       const end = tail.at(-1)!;
-      return { fix: { lat: end.lat, lon: end.lon, bearing: null, speedKmh: null, at: now, estimated: true }, next: null };
+      return { fix: standing(end, end.id, null), next: null };
     }
     const a = tail[i - 1]!;
     const b = tail[i]!;
     const left = leaves(a);
-    if (left === null || now < left) return { fix: { lat: a.lat, lon: a.lon, bearing: null, speedKmh: null, at: now, estimated: true }, next: { name: b.name, eta: b.arr ?? b.dep } };
+    if (left === null || now < left) return { fix: standing(a, a.id, b.id), next: { name: b.name, eta: b.arr ?? b.dep } };
     const seg = segmentBetween(this.db, { id: a.id, lat: a.lat, lon: a.lon }, { id: b.id, lat: b.lat, lon: b.lon }, graph);
     const cum = cumulative(seg.points);
     const arrive = b.arr ?? b.dep!;
-    const f = Math.min(0.95, Math.max(0, (now - left) / Math.max(1, arrive - left)));
-    const pt = pointAt(seg.points, cum, f * cum.at(-1)!);
-    return { fix: { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: null, at: now, estimated: true }, next: { name: b.name, eta: arrive } };
+    const est = estimateAlong(cum.at(-1)!, left, arrive, now);
+    if (est.state === 'standing' && est.progress >= 1) return { fix: standing(b, a.id, b.id), next: { name: b.name, eta: arrive } };
+    const pt = pointAt(seg.points, cum, est.m);
+    return {
+      fix: { lat: pt.lat, lon: pt.lon, bearing: Math.round(pt.bearing), speedKmh: est.speedKmh === null ? null : Math.round(est.speedKmh), at: now, estimated: true, state: 'running', prevId: a.id, nextId: b.id, atStation: null, platform: null, progress: est.progress },
+      next: { name: b.name, eta: arrive },
+    };
   }
 
   /** New announcement data: refresh every train's delay/next stop. */
@@ -746,6 +921,8 @@ export class LiveMapIngest extends EventEmitter {
   private prune() {
     const cutoff = this.now() - POSITION_MAX_AGE_MS;
     this.fixes.prune(this.now() - 60 * 60_000);
+    this.quality.prune(this.now() - 60 * 60_000);
+    for (const [k, at] of this.checked) if (at < cutoff) this.checked.delete(k);
     for (const [k, p] of this.positions)
       if (Date.parse(p.TimeStamp) < cutoff) {
         this.positions.delete(k);

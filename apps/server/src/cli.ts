@@ -1,4 +1,4 @@
-// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
+// Manual imports and checks: npm run import -- <gtfs|norway|finland|denmark|denmark-history|denmark-archive|history|observed-backfill|reproject|trv-stations|basemap|logos|bootstrap|audit|position-check> [--force-download] [--reimport] [--zip=path] [--maxzoom=N]
 import fs from 'node:fs';
 import path from 'node:path';
 import { config, REPO_ROOT } from './env.js';
@@ -39,6 +39,14 @@ if (cmd === 'gtfs') {
   const out = path.join(REPO_ROOT, 'docs/TRAIN_ART_NEEDED.md');
   fs.writeFileSync(out, artNeeded(db, date));
   console.log(`wrote ${out}`);
+} else if (cmd === 'position-check') {
+  // The positioning numbers (docs/POSITIONING.md): [--minutes=N] listening here, or [--server=URL --admin=TOKEN] from a running server.
+  const { positionCheck } = await import('./tools/positionCheck.js');
+  const minutes = Number(flags.find((f) => f.startsWith('--minutes='))?.slice(10)) || undefined;
+  const server = flags.find((f) => f.startsWith('--server='))?.slice(9);
+  const admin = flags.find((f) => f.startsWith('--admin='))?.slice(8) ?? process.env.CLACK_ADMIN_TOKEN;
+  const { markdown } = await positionCheck(db, { minutes, server, admin, log: (m) => console.error(m) });
+  console.log(markdown);
 } else if (cmd === 'station-tiers') {
   const { stationTiers } = await import('./tools/stationTiers.js');
   const date = flags.find((f) => f.startsWith('--date='))?.slice(7) ?? '2026-10-28';

@@ -70,9 +70,10 @@ describe('the committed OSM rail graph', () => {
   // appends edges and must not change them.
   it('still routes Swedish and Norwegian legs exactly as before Finland was added', () => {
     const se = real!.route([59.3303, 18.0583], [57.7089, 11.973])!;
-    expect(se.lengthM / 1000).toBeCloseTo(453.068, 2);
+    // Since build 54 the line starts and ends on the track, not at the station points (BUILDOUT §A.4): 453.068 → 452.962 km.
+    expect(se.lengthM / 1000).toBeCloseTo(452.962, 2);
     const no = real!.route([59.911, 10.7527], [60.3905, 5.3335])!;
-    expect(no.lengthM / 1000).toBeCloseTo(459.302, 2);
+    expect(no.lengthM / 1000).toBeCloseTo(458.774, 2);
   });
   // Finnish station coordinates from Digitraffic /metadata/stations. The ranges are plausibility checks (the
   // track is longer than the straight line, shorter than a detour), not sourced distances.
