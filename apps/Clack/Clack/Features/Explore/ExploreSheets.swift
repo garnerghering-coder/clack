@@ -198,6 +198,7 @@ struct StopList: View {
 
     private func row(_ stop: LiveTrainStop, index i: Int, count: Int, isNext: Bool, above: TripDetailLogic.RailHalf, below: TripDetailLogic.RailHalf) -> some View {
         let times = ExploreLogic.stopTimes(stop, isLast: i == count - 1)
+        let dwell = ExploreLogic.dwell(stop, isEnd: i == 0 || i == count - 1)
         // Why it's late or changed here, under the station (as on a trip's page and a board).
         let causes = l10n.shownNotes(stop.causes ?? [])
         var notes: [StopRow.Note] = stop.canceled ? [.init(l10n.t("liveMap.canceledStop"))] : []
@@ -207,10 +208,20 @@ struct StopList: View {
             name: stop.name, emphasis: stop.passed ? .dim : isNext ? .next : .plain, canceled: stop.canceled,
             notes: notes,
             rail: StopRail(color: color, big: i == 0 || i == count - 1, startsHere: i == 0, endsHere: i == count - 1, above: above, below: below),
-            time: times.real ?? times.planned, sched: times.planned, live: times.real != nil, delay: times.real != nil ? times.lateMinutes : nil,
-            tz: Format.zone(stationId: stop.stationId), clock: app.settings.clock, platform: stop.platform, compact: true
+            time: dwell != nil ? (stop.actualArr ?? stop.estimatedArr ?? stop.arr) : (times.real ?? times.planned),
+            sched: dwell != nil ? stop.arr : times.planned,
+            live: dwell != nil ? (stop.actualArr ?? stop.estimatedArr) != nil : times.real != nil,
+            delay: dwell != nil ? arrivalDelay(stop) : (times.real != nil ? times.lateMinutes : nil),
+            tz: Format.zone(stationId: stop.stationId), clock: app.settings.clock, platform: stop.platform, compact: true,
+            dwell: dwell.map { StopRow.Dwell(arr: $0.arr, dep: $0.dep) }
         )
     }
+}
+
+/// Minutes late at arrival, when a real or estimated arrival is known.
+private func arrivalDelay(_ stop: LiveTrainStop) -> Int? {
+    guard let planned = stop.arr, let real = stop.actualArr ?? stop.estimatedArr else { return nil }
+    return Int(((real - planned) / 60_000).rounded())
 }
 
 // MARK: the other sheets

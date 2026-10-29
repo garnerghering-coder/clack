@@ -230,8 +230,31 @@ struct DesignGalleryView: View {
 
     // MARK: components (DESIGN §2.5)
 
+    /// A long stand at a stop (owner, 2026-10-29): the arrival in the time column, "Departs 09:04 · 45 min stop" under
+    /// the name, nothing else changes while the train waits there.
+    private var longStopSample: some View {
+        let color = Color(hex: "#1fb14f")!
+        let arr = t + 65 * minute, dep = t + 110 * minute
+        return Card {
+            StopRow(
+                name: "Lund C", rail: StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true, fill: 1)),
+                time: t + 50 * minute, tz: tz, clock: .h24, platform: "2", compact: true
+            )
+            StopRow(
+                name: "Malmö C", emphasis: .next, rail: StopRail(color: color, above: .init(ridden: true, fill: 1), below: .init(ridden: true)),
+                time: arr + 3 * minute, sched: arr, live: true, delay: 3, tz: tz, clock: .h24, platform: "4", compact: true,
+                dwell: StopRow.Dwell(arr: arr + 3 * minute, dep: dep)
+            )
+            StopRow(
+                name: "København H", rail: StopRail(color: color, big: true, endsHere: true, above: .init(ridden: true)),
+                time: dep + 40 * minute, tz: tz, clock: .h24, platform: "26", compact: true
+            )
+        }
+    }
+
     @ViewBuilder
     private var components: some View {
+        section("LongStops") { longStopSample }
         section("StopTimeline") {
             Card {
                 let color = Color(hex: "#1fb14f")!

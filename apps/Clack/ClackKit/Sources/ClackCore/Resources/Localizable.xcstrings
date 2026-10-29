@@ -20661,6 +20661,23 @@
           }
         }
       }
+    },
+    "stop.departsAfter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Departs {{dep}} · {{min}} min stop"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avgår {{dep}} · {{min}} min uppehåll"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

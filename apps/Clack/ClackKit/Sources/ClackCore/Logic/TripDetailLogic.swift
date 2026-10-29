@@ -132,6 +132,12 @@ public nonisolated enum TripDetailLogic {
         }
     }
 
+    /// A long stand (five minutes or more) at a stop passed through on the leg, with the best-known times. Pure.
+    public static func dwell(_ s: LegStop) -> (arr: Double, dep: Double)? {
+        guard s.role == .through, !s.canceled, let arr = (s.actualArr ?? s.estimatedArr ?? s.schedArr)?.ms, let dep = (s.actualDep ?? s.estimatedDep ?? s.schedDep)?.ms else { return nil }
+        return dep - arr >= ExploreLogic.longStopMin * 60_000 ? (arr, dep) : nil
+    }
+
     public static func stopTimes(_ s: LegStop) -> StopTimes {
         if s.role == .board {
             return StopTimes(sched: s.schedDep?.ms ?? s.schedArr?.ms, real: s.actualDep?.ms, estimate: s.estimatedDep?.ms)

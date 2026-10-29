@@ -226,6 +226,14 @@ public nonisolated enum ExploreLogic {
         }
     }
 
+    /// A stand of `longStopMin` or more at an intermediate stop: the best-known arrival and departure. Nil at the
+    /// ends of the run and for ordinary stops (owner, 2026-10-29: only the clearly long stands). Pure.
+    public static let longStopMin = 5.0
+    public static func dwell(_ stop: LiveTrainStop, isEnd: Bool) -> (arr: Double, dep: Double)? {
+        guard !isEnd, !stop.canceled, let arr = stop.actualArr ?? stop.estimatedArr ?? stop.arr, let dep = stop.actualDep ?? stop.estimatedDep ?? stop.dep else { return nil }
+        return dep - arr >= longStopMin * 60_000 ? (arr, dep) : nil
+    }
+
     public static func stopTimes(_ stop: LiveTrainStop, isLast: Bool) -> StopTimes {
         let planned = isLast ? stop.arr : (stop.dep ?? stop.arr)
         let real = isLast ? (stop.actualArr ?? stop.estimatedArr) : (stop.actualDep ?? stop.estimatedDep ?? stop.actualArr ?? stop.estimatedArr)

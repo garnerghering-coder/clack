@@ -137,6 +137,20 @@ public struct StopRow: View {
     public var platform: String?
     public var platformChanged = false
     public var compact = false
+    /// A long stand at this stop (owner, 2026-10-29: a 45-minute stop read like any other). Shown when arrival and
+    /// departure are five minutes or more apart: the time column holds the arrival and a line under the name says
+    /// "Departs 09:04 · 45 min stop".
+    public var dwell: Dwell?
+
+    public struct Dwell: Hashable, Sendable {
+        public let arr: Double
+        public let dep: Double
+        public init(arr: Double, dep: Double) {
+            self.arr = arr
+            self.dep = dep
+        }
+        public var minutes: Int { max(1, Int(((dep - arr) / 60_000).rounded())) }
+    }
     /// Asks for the platform when none is known (your own trip's boarding and alighting stops).
     public var onSetPlatform: (() -> Void)?
     /// Opens the station's board when the name is tapped.
@@ -146,10 +160,11 @@ public struct StopRow: View {
     public init(
         name: String, emphasis: Emphasis = .ridden, canceled: Bool = false, notes: [Note] = [], rail: StopRail,
         time: Double?, sched: Double? = nil, live: Bool = false, delay: Int? = nil, tz: String, clock: ClockFormat,
-        platform: String? = nil, platformChanged: Bool = false, compact: Bool = false,
+        platform: String? = nil, platformChanged: Bool = false, compact: Bool = false, dwell: Dwell? = nil,
         onSetPlatform: (() -> Void)? = nil, onOpen: (() -> Void)? = nil, openLabel: String? = nil
     ) {
         self.onSetPlatform = onSetPlatform
+        self.dwell = dwell
         self.name = name
         self.emphasis = emphasis
         self.canceled = canceled
@@ -180,6 +195,7 @@ public struct StopRow: View {
                     ForEach(notes, id: \.self) { note in
                         Text(note.text).clack(.caption).foregroundStyle(ink(note.tone))
                     }
+                    if let dwell { dwellLine(dwell) }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, compact ? 4 : 8)
@@ -216,6 +232,12 @@ public struct StopRow: View {
         } else {
             text
         }
+    }
+
+    /// "Departs 09:04 · 45 min stop" under the name (the time column shows the arrival).
+    private func dwellLine(_ d: Dwell) -> some View {
+        Text(l10n.t("stop.departsAfter", ["dep": Format.time(d.dep, tz: tz, clock: clock), "min": String(d.minutes)]))
+            .clack(.caption).monospacedDigit().foregroundStyle(Ink.text2)
     }
 
     @ViewBuilder

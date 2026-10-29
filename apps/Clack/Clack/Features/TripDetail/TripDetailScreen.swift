@@ -728,6 +728,9 @@ struct LegStopRow: View {
 
     var body: some View {
         let times = TripDetailLogic.stopTimes(stop)
+        // A long stand: the arrival in the time column, the departure in a line under the name.
+        let dwell = TripDetailLogic.dwell(stop)
+        let arrSched = stop.schedArr?.ms, arrReal = (stop.actualArr ?? stop.estimatedArr)?.ms
         let ridden = stop.role.isRidden
         let causes = l10n.shownNotes(stop.allCauses)
         var notes: [StopRow.Note] = []
@@ -739,8 +742,11 @@ struct LegStopRow: View {
         return StopRow(
             name: stop.name, emphasis: ridden ? .ridden : .dim, canceled: stop.canceled, notes: notes,
             rail: StopRail(color: color, big: end, ridden: ridden, startsHere: stop.role == .board, endsHere: stop.role == .alight, above: above, below: below),
-            time: times.actual ?? times.sched, sched: times.sched, live: times.actual != nil, delay: times.delay,
+            time: dwell != nil ? (arrReal ?? arrSched) : (times.actual ?? times.sched), sched: dwell != nil ? arrSched : times.sched,
+            live: dwell != nil ? arrReal != nil : times.actual != nil,
+            delay: dwell != nil ? (arrSched != nil && arrReal != nil ? Int(((arrReal! - arrSched!) / 60_000).rounded()) : nil) : times.delay,
             tz: stop.tz, clock: app.settings.clock, platform: stop.platform, platformChanged: stop.deviations.contains("Spårändrat") || stop.allCauses.contains(where: { DelayCauses.isPlatformChange($0) }),
+            dwell: dwell.map { StopRow.Dwell(arr: $0.arr, dep: $0.dep) },
             onSetPlatform: stop.platform == nil ? onSetPlatform : nil,
             onOpen: { router.push(.board(stationId: stop.stationId, arrivals: false)) },
             openLabel: l10n.t("board.openBoard", ["station": stop.name])
