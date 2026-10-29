@@ -55,6 +55,18 @@ no source gives.
    - `drop_ways`, `drop_platforms`, `drop_pois`, `drop_entrances`: OSM objects that are wrong or not public.
    - `pois`: amenities OSM lacks, each with `_source`.
    - `sources` and `changelog`: what was read, and what changed when.
+   A station with nothing known yet starts from the minimal file (the O5 batches began this way): `radius` 400,
+   `paths_by_layer`, `path_radius` 30 (60 in Norway, with `default_level` "1" and `multipolygons`), one level
+   `{"osm": "0", "id": "L0", "name": "Level 0", "order": 0}`, `sources` (OSM via Overpass, the date) and a
+   `changelog` line. The drafter needs `levels`; everything else is optional. A batch runs as a shell loop over the
+   ids (one Overpass request per station, about a minute each; a 502 from Overpass is retried later by running the
+   same command again, since the cache file is written only on success).
+   A station with nothing known yet starts from the minimal file (the O5 batches began this way): `radius` 400,
+   `paths_by_layer`, `path_radius` 30 (60 in Norway, with `default_level` "1" and `multipolygons`), one level
+   `{"osm": "0", "id": "L0", "name": "Level 0", "order": 0}`, `sources` (OSM via Overpass, the date) and a
+   `changelog` line. The drafter needs `levels`; everything else is optional. A batch runs as a shell loop over the
+   ids (one Overpass request per station, about a minute each, with a pause between them; a 502 from Overpass is
+   retried by running the same command again, since the cache file is written only on success).
 2. **Draft:** `npm run stations:draft -- <id>` (the station id as in the database, colon included for Finland). The
    drafter writes `data/stations/<safe id>.json` and prints what didn't connect.
 3. **Validate:** `npm run stations:validate -- --review`. Every map must pass (sources on everything, no walk across
@@ -73,6 +85,11 @@ no source gives.
 
 - `_source` on every element; `manual:` sources name the edits file and entry.
 - Level names come from the operator's plan or signage seen in a video or photo, else "Level N".
+- Tracks are kept without their sector letter ("2a" is track 2); the platform's ref keeps the letter.
+- When OSM tags no entrance, the drafter lets the walking network's loose ends away from the platforms (where a
+  footway leaves the station area) stand in as exits, each sourced as such. That is read off OSM, not a door that was
+  seen; a plan or a walk replaces them with the real entrances. A draft whose platforms still reach no exit is
+  withheld (its edits file says so in the changelog) rather than shipped.
 - Heights only from measurement (AR walk) or a published plan; otherwise `height_m` stays unset.
 - Time constants (walking 1.3 m/s, stairs 0.55 m/s, escalator 0.75 m/s, lift 45 s + 8 s per extra level) are in the
   drafter; change them only with a measured reason (`data/walking_model.json` when it exists).

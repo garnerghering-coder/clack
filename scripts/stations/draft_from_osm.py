@@ -423,7 +423,9 @@ def main():
                 left.append((x + nx, y + ny))
                 right.append((x - nx, y - ny))
             p = left + right[::-1] + [left[0]]
-        tracks = [x.strip().lower() for x in re.split(r"[;,]", ref) if x.strip()]
+        # Tracks without their sector letter ("2a" → "2"): the app and the validator match tracks that way; the
+        # platform's ref keeps the letter, and so does an edge's track from the rail's own number.
+        tracks = list(dict.fromkeys(re.sub(r"[a-z]+$", "", x.strip().lower()) for x in re.split(r"[;,]", ref) if x.strip()))
         platforms.append(dict(ref=ref.replace(";", "–"), tracks=tracks, level=level_id[lv[0]], poly=p, wid=wid))
     # Merge pieces with the same ref.
     by_ref = defaultdict(list)
@@ -837,6 +839,20 @@ def main():
     for e in E:
         adj[e["a"]].add(e["b"])
         adj[e["b"]].add(e["a"])
+    # No tagged entrance (OSM often has none at mid-size stations): the walking network's loose ends away from the
+    # platforms are where its footways leave the station area for the street, so they stand in as exits. That is read
+    # off the geometry, not guessed: the source names the way and says what the point is.
+    if not any(v.get("type") == "entrance" for v in V.values()):
+        ends = 0
+        for k, v in V.items():
+            if v.get("type") in ("platform", "platform_access", "entrance") or len(adj[k]) != 1:
+                continue
+            if all(dist_to_poly((v["x"], v["y"]), pl["poly"]) >= 25 for pl in platforms):
+                v["type"] = "entrance"
+                v["src"] = (v.get("src") or "osm") + " (footway end: the path leaves the station area here; no entrance tagged in OSM)"
+                ends += 1
+        if ends:
+            print(f"  ! no tagged entrance in OSM: {ends} footway end(s) away from the platforms stand in as exits")
     comp, seen = {}, set()
     for p in out_platforms:
         stack = [p["node"]]

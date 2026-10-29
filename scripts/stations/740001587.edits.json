@@ -1,0 +1,27 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft of Triangeln (scripts/stations/draft_from_osm.py), BUILDOUT O5 batch 1 (2026-10-29). Drafted from OSM only so far; facts from the operator's station page, photos or a walk go here with their source. Level names are placeholders until a plan or signage names them.",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Level 0",
+      "order": 0
+    }
+  ],
+  "sources": [
+    {
+      "name": "OpenStreetMap contributors, via Overpass (ODbL)",
+      "read": "2026-10-29"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-29",
+      "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    }
+  ]
+}
