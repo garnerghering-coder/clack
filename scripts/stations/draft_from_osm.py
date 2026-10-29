@@ -3,7 +3,8 @@
 ADDITIONS_01 C1. Reads the Geofabrik extract offline (pyosmium; Overpass isn't needed), keeps the levels you name,
 turns footways, steps, escalators and lifts into a walking graph, attaches platforms and amenities, and then applies
 the hand edits in scripts/stations/<id>.edits.json (extra connections OSM is missing, level names, dropped
-objects). Re-running the script keeps those edits, so the map can be refreshed from newer OSM data.
+objects; "entrances": entrances OSM lacks, as a point and level; "default_level": the OSM level untagged platforms, paths and buildings belong to, "0" unless the
+country numbers the ground floor "1" as Norway does). Re-running the script keeps those edits, so the map can be refreshed from newer OSM data.
 
 Usage: python3 scripts/stations/draft_from_osm.py 740000001 [--pbf data/cache/osm/sweden-latest.osm.pbf]
 The OSM part of the output is ODbL (© OpenStreetMap contributors); see the Sources page.
@@ -360,7 +361,7 @@ def main():
         lv = parse_levels(t.get("level")) or parse_levels(edits.get("platform_levels", {}).get(wid))
         if lv is None and edits.get("layer_as_level"):
             lv = parse_levels(t.get("layer"))
-        return lv or ["0"]
+        return lv or [edits.get("default_level", "0")]
 
     # ---- Station buildings: shapes, and the area where untagged in-station paths count as ground level ----
     station_polys = []
@@ -375,7 +376,7 @@ def main():
             continue
         if t.get("building") in ("train_station", "transportation") or t.get("railway") == "station" or (t.get("public_transport") == "station" and t.get("train") != "no"):
             station_polys.append(p)
-            b = dict(level=edits.get("building_level", level_id["0"]), kind="building", points=simplify(p, 0.8), _source=f"osm:way/{wid}")
+            b = dict(level=edits.get("building_level", level_id[edits.get("default_level", "0")]), kind="building", points=simplify(p, 0.8), _source=f"osm:way/{wid}")
             h = re.match(r"^\s*(\d+(?:\.\d+)?)\s*(m)?\s*$", t.get("height") or "")
             if h:
                 b["height_m"] = float(h.group(1))
@@ -456,7 +457,7 @@ def main():
                 run.append(q)
             elif run:
                 if len(run) >= 2:
-                    shape = dict(level=level_id[lv[0]] if lv else level_id["0"], kind="track", points=simplify(run, 0.6), _source=f"osm:way/{wid}")
+                    shape = dict(level=level_id[lv[0]] if lv else level_id[edits.get("default_level", "0")], kind="track", points=simplify(run, 0.6), _source=f"osm:way/{wid}")
                     if track_ref:
                         shape["ref"] = track_ref
                     shapes.append(shape)
@@ -563,7 +564,7 @@ def main():
             near_platform = edits.get("path_radius") and any(dist_to_poly(q, pp) <= edits["path_radius"] for q in (pts[0], mid, pts[-1]) for pp in plat_polys)
             if t.get("level") is not None or not (in_station(mid) or near_platform):
                 continue
-            lv = ["0"]
+            lv = [edits.get("default_level", "0")]
         if not set(lv) <= keep_levels:
             continue
         if len(lv) == 1 and hw not in ("steps", "elevator") and not t.get("conveying"):
@@ -818,7 +819,18 @@ def main():
 
     for i, c in enumerate(edits.get("connections", [])):
         a, b = endpoint(c["from"], f"{i}a"), endpoint(c["to"], f"{i}b")
-        E.append(dict(a=a, b=b, kind=c.get("kind", "walk"), pts=None, seconds=c.get("seconds"), manual=True, note=c.get("note"), meters=c.get("meters"), src=c.get("_source") or f"manual:{c.get('note') or 'edits connections'}"))
+        E.append(dict(a=a, b=b, kind=c.get("kind", "walk"), pts=None, seconds=c.get("seconds"), manual=True, note=c.get("note"), meters=c.get("meters"), src=c.get("_source") or f"manual:scripts/stations/{safe}.edits.json connections[{i}]" + (f" ({c['note']})" if c.get("note") else "")))
+
+    # Entrances OSM doesn't tag (edits "entrances": [{"at": [x, y], "level": osm level, "name": …, "_source": …}]):
+    # the nearest vertex on that level becomes an entrance.
+    for spec in edits.get("entrances", []):
+        k, d = nearest(*spec["at"], level_id[str(spec["level"])])
+        if k is None:
+            continue
+        V[k]["type"] = "entrance"
+        if spec.get("name"):
+            V[k]["name"] = spec["name"]
+        V[k]["src"] = spec.get("_source") or V[k].get("src")
 
     # ---- Keep the part of the graph the platforms are on ----
     adj = defaultdict(set)
@@ -978,7 +990,7 @@ def main():
         if lv is None:
             if not in_station(p):
                 continue
-            lv = ["0"]
+            lv = [edits.get("default_level", "0")]
         if lv[0] not in keep_levels or not in_station(p):
             continue
         level = level_id[lv[0]]
@@ -1023,8 +1035,8 @@ def main():
             continue
         lv = parse_levels(t.get("level"))
         if lv is None and t.get("indoor"):
-            lv = ["0"]
-        units.append(dict(pts=cs, area=a, levels={level_id[x] for x in (lv or ["0"]) if x in level_id}))
+            lv = [edits.get("default_level", "0")]
+        units.append(dict(pts=cs, area=a, levels={level_id[x] for x in (lv or [edits.get("default_level", "0")]) if x in level_id}))
     for u in sorted(units, key=lambda u: u["area"]):
         inside = [q for q in pois if q["level"] in u["levels"] and pip((q["x"], q["y"]), u["pts"])]
         ring = [list(q) for q in simplify(u["pts"], 0.4)]
@@ -1038,7 +1050,7 @@ def main():
     for p in edits.get("pois", []):
         p = dict(p)
         p["level"] = level_id[str(p["level"])]
-        p.setdefault("_source", "manual:edits pois (see the sources list)")
+        p.setdefault("_source", f"manual:scripts/stations/{safe}.edits.json pois (see the sources list)")
         # "attach": [x, y] joins the place to the walking graph there instead of at its pin (a shop inside a building
         # with no mapped paths, whose nearest node would otherwise be across a track).
         ax, ay = p.pop("attach", None) or (p["x"], p["y"])

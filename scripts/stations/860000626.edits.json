@@ -1,0 +1,37 @@
+{
+  "_comment": "København H (DSB; UIC 8600626). Draft from OSM via Overpass (cached 2026-10-28), schema 2. The 12 train platforms (tracks 1-12, plus 26 for the metro? no: Metro Cityringen is below) are multipolygon relations in OSM, so multipolygons is on. Levels: 0 = the hall (Hovedbanegården's concourse) and the train platforms below street level reached by stairs from the hall; OSM tags the Metro passages level -1 and the Metro platforms -2. Names from DSB's station plan are still to be checked; the owner's video (Copenhagen walking tour) covers the hall.",
+  "radius": 450,
+  "multipolygons": true,
+  "default_level": "0",
+  "path_radius": 60,
+  "paths_by_layer": true,
+  "rotation": 0,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Hall and train platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Metro passage",
+      "order": -1
+    },
+    {
+      "osm": "-2",
+      "id": "L-2",
+      "name": "Metro platforms",
+      "order": -2
+    }
+  ],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-29",
+      "who": "the owner's assistant",
+      "what": "First draft from OpenStreetMap (Overpass, cached 2026-10-28), schema 2."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "Helsinki (Helsingin päärautatieasema, Digitraffic HKI). Draft from OSM via Overpass (cached 2026-10-28), schema 2. Platforms 1-19 are tagged in OSM at ground level (no level tag); the station hall and Asematunneli are tagged indoor with levels 2, 1, 0 and -1 (OSM uses 0 for the street level here). Platforms H0018-H0021 at level -3 are the Pisararata reservation/ metro and are left out of the walking levels. Names from VR's/Finnish Transport Infrastructure Agency's plans still to be checked; the owner's video covers the hall and platforms.",
+  "radius": 450,
+  "multipolygons": true,
+  "default_level": "0",
+  "path_radius": 60,
+  "paths_by_layer": true,
+  "rotation": 0,
+  "levels": [
+    {
+      "osm": "2",
+      "id": "L2",
+      "name": "Upper level",
+      "order": 2
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Level 1",
+      "order": 1
+    },
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Hall and platforms",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Asematunneli (lower level)",
+      "order": -1
+    }
+  ],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-29",
+      "who": "the owner's assistant",
+      "what": "First draft from OpenStreetMap (Overpass, cached 2026-10-28), schema 2."
+    }
+  ]
+}

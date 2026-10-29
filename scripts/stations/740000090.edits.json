@@ -5,6 +5,14 @@
   "path_radius": 30,
   "levels": [
     {
+      "osm": "1",
+      "id": "L1",
+      "name": "Upper level (Juneporten)",
+      "order": 1,
+      "height_m": 3.3,
+      "height_source": "owner's AR walk 2026-10-28 (walk 85AA73B5): barometer +3.5 m and ARKit +3.1 m from the ground floor at the top of the escalators and the Juneporten entrance"
+    },
+    {
       "osm": "0",
       "id": "L0",
       "name": "Station, bus terminal and platform",
@@ -88,6 +96,48 @@
       },
       "kind": "walk",
       "note": "The same east door of the bus terminal, to the west end of the track 1 side of the platform, 15 m away; OSM doesn't join them."
+    },
+    {
+      "from": {
+        "at": [
+          -69.2,
+          20.0
+        ],
+        "level": 0
+      },
+      "to": {
+        "at": [
+          -88,
+          -2
+        ],
+        "level": 1
+      },
+      "kind": "escalator",
+      "direction": "up",
+      "seconds": 18,
+      "note": "Escalator up from the ground-floor entrance hall to the Juneporten level",
+      "_source": "owner's AR walk 2026-10-28 (walk 85AA73B5): marks 'Escalators start' 12:09, 'Top of escalators' 12:27, 'Escalator down starts' 13:04, 'Bottom of the escalator' 13:23; positions from the walk's GPS (±12 m at the bottoms)"
+    },
+    {
+      "from": {
+        "at": [
+          -97,
+          -17
+        ],
+        "level": 1
+      },
+      "to": {
+        "at": [
+          -85.5,
+          -15.8
+        ],
+        "level": 0
+      },
+      "kind": "escalator",
+      "direction": "down",
+      "seconds": 19,
+      "note": "Escalator down from the Juneporten level to the ground floor by Espresso House",
+      "_source": "owner's AR walk 2026-10-28 (walk 85AA73B5): marks 'Escalators start' 12:09, 'Top of escalators' 12:27, 'Escalator down starts' 13:04, 'Bottom of the escalator' 13:23; positions from the walk's GPS (±12 m at the bottoms)"
     }
   ],
   "sources": [
@@ -119,6 +169,11 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "First map from OSM (2026-10-20 extract): platform pieces 2a/2b joined as platform 2; the hall's and the bus terminal's doors joined to the platform by hand (4 connections); upper floor and footbridges left out. Toilets named; shops checked against Jernhusen's list (both in OSM)."
+    },
+    {
+      "date": "2026-10-29",
+      "who": "the owner's assistant",
+      "what": "Upper level added (OSM level 1: the corridor and entrance at Juneporten); its height from the owner's AR walk."
     }
   ],
   "pois": [
@@ -133,6 +188,17 @@
       "hours_source": null,
       "hours_verified": null,
       "fee": null
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        -113.3,
+        -48.7
+      ],
+      "level": 1,
+      "name": "Juneporten",
+      "_source": "owner's AR walk 2026-10-28 (walk 85AA73B5), mark 'Now at another entrance into the station from juneporten' 12:48 (GPS ±10 m)"
     }
   ]
 }
