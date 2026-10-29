@@ -9,21 +9,24 @@ import CoreMotion
 import Foundation
 import Observation
 
+/// Which train the Ride view follows. Outside the model so routes can hash it off the main actor.
+nonisolated enum RideTarget: Hashable, Sendable {
+    /// A train on the live map, by its live id.
+    case live(id: String)
+    /// A train by number and day (from a trip), looked up on the live map first.
+    case train(number: String, date: String, key: String?)
+    #if DEBUG
+    case replay
+    #endif
+}
+
 /// What the Ride view knows (BUILDOUT O3): the train (asked for every five seconds), its track and stops, the last
 /// position report as metres along the track, the camera preset (remembered), and the phone's own speed and altitude
 /// once it is aboard. `-open ride:replay` (Debug) replays a run along a real track instead.
 @MainActor
 @Observable
 final class RideModel {
-    enum Target: Hashable {
-        /// A train on the live map, by its live id.
-        case live(id: String)
-        /// A train by number and day (from a trip), looked up on the live map first.
-        case train(number: String, date: String, key: String?)
-        #if DEBUG
-        case replay
-        #endif
-    }
+    typealias Target = RideTarget
 
     enum Status: Equatable { case loading, running, notRunning, noTrack, failed }
 
@@ -70,7 +73,29 @@ final class RideModel {
         distances = UserDefaults.standard.dictionary(forKey: Self.distancesKey) as? [String: Double] ?? [:]
     }
 
-    var camera: RideLogic.Camera { RideLogic.camera(preset, distance: distances[preset.rawValue]) }
+    /// The camera orbits the train on a ring (owner, 2026-10-29): dragging turns it round the train and tilts it,
+    /// pinching moves it in and out; a preset is a starting point on that ring.
+    private(set) var orbitHeading: Double?
+    private(set) var orbitPitch: Double?
+
+    var camera: RideLogic.Camera {
+        let base = RideLogic.camera(preset, distance: distances[preset.rawValue])
+        return RideLogic.Camera(pitch: orbitPitch ?? base.pitch, distance: base.distance, headingOffset: orbitHeading ?? base.headingOffset, lookAheadM: base.lookAheadM)
+    }
+
+    /// A drag of `dx`, `dy` points: a screen width turns the camera all the way round; up and down tilts it.
+    func orbit(dx: CGFloat, dy: CGFloat, width: CGFloat) {
+        let h = (orbitHeading ?? camera.headingOffset) - Double(dx / max(1, width)) * 360
+        orbitHeading = (h.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
+        orbitPitch = min(80, max(20, (orbitPitch ?? camera.pitch) + Double(dy) * 0.25))
+    }
+
+    /// A preset puts the camera back on its own spot of the ring.
+    func choose(_ p: RideLogic.CameraPreset) {
+        preset = p
+        orbitHeading = nil
+        orbitPitch = nil
+    }
 
     /// A pinch scales the camera's distance from where it was when the gesture began.
     func pinch(scale: CGFloat, ended: Bool) {
@@ -203,7 +228,15 @@ final class RideModel {
         guard let track, let t = train else { return }
         let m = RideLogic.metresAlong(track, of: LatLon(t.lat, t.lon))
         let next = track.stopsAt.values.filter { $0 > m + 1 }.min() ?? track.length
-        report = RideReport(metres: m, at: t.at.ms, speedKmh: t.estimated ? t.speedKmh : t.speedKmh, limitM: next)
+        // An estimated position is the server's for now, not for the old fix time. Without a reported speed, the
+        // speed is read off the last two reports, so the train keeps moving between them instead of freezing.
+        let at = t.estimated ? Date.now.timeIntervalSince1970 * 1000 : t.at.ms
+        var speed = t.speedKmh
+        if speed == nil, let last = report, at > last.at + 1000, m >= last.metres {
+            speed = min(250, (m - last.metres) / ((at - last.at) / 1000) * 3.6)
+        }
+        if let last = report, last.metres == m, last.at == at { return }
+        report = RideReport(metres: m, at: at, speedKmh: speed, limitM: next)
         status = .running
     }
 

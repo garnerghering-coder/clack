@@ -37,18 +37,20 @@ protocol LiveMapSurface: AnyObject {
 /// be tapped for a board here (said in the log). A display link measures the frame interval for the readout.
 struct AppleLiveMapView: UIViewRepresentable {
     let controller: LiveMapController
+    let base: URL
     let dark: Bool
 
     func makeCoordinator() -> AppleLiveMapSurface { AppleLiveMapSurface(controller: controller) }
 
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView()
-        map.preferredConfiguration = MKStandardMapConfiguration(elevationStyle: .realistic, emphasisStyle: .default)
+        // Flat and muted: the trains and the rail lines are the point, and the phone stays cool (owner, 2026-10-29).
+        map.preferredConfiguration = MKStandardMapConfiguration(elevationStyle: .flat, emphasisStyle: .muted)
         map.showsCompass = false
         map.showsScale = false
-        map.isPitchEnabled = true
+        map.isPitchEnabled = false
         map.isRotateEnabled = true
-        map.pointOfInterestFilter = .includingAll
+        map.pointOfInterestFilter = .excludingAll
         map.delegate = context.coordinator
         map.register(TrainAnnotationView.self, forAnnotationViewWithReuseIdentifier: TrainAnnotationView.reuseId)
         context.coordinator.map = map
@@ -59,6 +61,7 @@ struct AppleLiveMapView: UIViewRepresentable {
         map.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 63, longitude: 17), span: MKCoordinateSpan(latitudeDelta: 18, longitudeDelta: 30)), animated: false)
         map.addOverlay(context.coordinator.farOverlay, level: .aboveLabels)
         context.coordinator.startMeasuring()
+        context.coordinator.loadRailNetwork(base)
         return map
     }
 
@@ -185,6 +188,7 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
     private var routeLines: [StyledPolyline] = []
     private var corridorLines: [StyledPolyline] = []
     private var display = MapDisplay.load()
+    private var railLines: [MKMultiPolyline] = []
     private var readyOnce = false
     private var link: CADisplayLink?
     private var lastFrame: CFTimeInterval = 0
@@ -196,6 +200,31 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
 
     init(controller: LiveMapController) {
         self.controller = controller
+    }
+
+    // MARK: the rail network
+
+    /// Clack's rail lines over Apple's map (the trains looked as if they floated; owner 2026-10-29): the same GeoJSON
+    /// the MapLibre style uses, as one multipolyline overlay under the trains.
+    func loadRailNetwork(_ base: URL) {
+        let url = base.appendingPathComponent("api/map/rail-network.geojson")
+        Task { [weak self] in
+            guard let (data, _) = try? await URLSession.shared.data(from: url) else { return }
+            let objects = (try? MKGeoJSONDecoder().decode(data)) ?? []
+            var lines: [MKPolyline] = []
+            for case let f as MKGeoJSONFeature in objects {
+                for g in f.geometry {
+                    if let l = g as? MKPolyline { lines.append(l) }
+                    if let m = g as? MKMultiPolyline { lines += m.polylines }
+                }
+            }
+            await MainActor.run {
+                guard let self, let map = self.map, !lines.isEmpty else { return }
+                let multi = MKMultiPolyline(lines)
+                self.railLines = [multi]
+                map.addOverlay(multi, level: .aboveRoads)
+            }
+        }
     }
 
     // MARK: frame measuring
@@ -214,7 +243,7 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
     @objc private func frame(_ l: CADisplayLink) {
         if lastFrame > 0 { intervals.append((l.timestamp - lastFrame) * 1000) }
         lastFrame = l.timestamp
-        if intervals.count >= 60 {
+        if intervals.count >= 120 {
             let s = intervals.sorted()
             controller.onFrameStats(s[s.count / 2], s[min(s.count - 1, Int(Double(s.count) * 0.9))], points.count)
             intervals.removeAll(keepingCapacity: true)
@@ -291,7 +320,10 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
             points[p.id] = p
             if let a = annotations[p.id] {
                 a.point = p
-                a.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
+                // On screen and close, the glide frames (`moveTrains`) carry it to the new spot; jumping it here
+                // first and then gliding from the old spot made the trains jitter (owner, 2026-10-29).
+                let target = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon)
+                if !close || !contains(a.coordinate.latitude, a.coordinate.longitude) { a.coordinate = target }
             } else if close && display.trains {
                 add(p, to: map)
             }
@@ -345,6 +377,12 @@ final class AppleLiveMapSurface: NSObject, LiveMapSurface, MKMapViewDelegate {
             if overlay === farOverlay {
                 let r = TrainsOverlayRenderer(overlay: overlay)
                 farRenderer = r
+                return r
+            }
+            if let multi = overlay as? MKMultiPolyline {
+                let r = MKMultiPolylineRenderer(multiPolyline: multi)
+                r.strokeColor = UIColor(cssColor: MapStyle.colors(dark: dark).rail)
+                r.lineWidth = 1.5
                 return r
             }
             if let line = overlay as? StyledPolyline {

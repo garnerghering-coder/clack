@@ -54,7 +54,7 @@ struct ExploreScreen: View {
             ZStack {
                 Ink.mapBg
                 if mapEngine == MapEngine.apple.rawValue {
-                    AppleLiveMapView(controller: model.controller, dark: scheme == .dark)
+                    AppleLiveMapView(controller: model.controller, base: Config.apiBase, dark: scheme == .dark)
                         .id("apple-\(scheme == .dark)")
                 } else if let basemap {
                     LiveMapView(controller: model.controller, base: Config.apiBase, withBasemap: basemap, dark: scheme == .dark)

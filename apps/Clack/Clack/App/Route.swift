@@ -25,7 +25,7 @@ nonisolated enum AppRoute: Hashable, Sendable {
     /// Settings > Station walks (owner test tool; debug and TestFlight builds).
     case walkLogger
     /// The Ride view: Apple's 3D map following a train (BUILDOUT O3).
-    case ride(RideModel.Target)
+    case ride(RideTarget)
     #if DEBUG
     /// Settings > Test alerts (debug builds only).
     case testAlerts

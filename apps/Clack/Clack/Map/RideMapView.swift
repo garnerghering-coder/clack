@@ -24,21 +24,22 @@ struct RideMapView: UIViewRepresentable {
     /// train may not pass before the next report (its next stop, or the end).
     let report: RideReport?
     let dark: Bool
-    /// Room the panel takes, so Apple's attribution and the camera's look-at point stay clear of it.
-    var insets: UIEdgeInsets = .zero
     /// A pinch: the scale so far and whether the gesture ended.
     var onPinch: (CGFloat, Bool) -> Void = { _, _ in }
+    /// A drag since the last call: points right and down, and the view's width.
+    var onDrag: (CGFloat, CGFloat, CGFloat) -> Void = { _, _, _ in }
 
     func makeUIView(context: Context) -> RideMapUIView {
         let v = RideMapUIView()
         v.onPinch = onPinch
+        v.onDrag = onDrag
         return v
     }
 
     func updateUIView(_ v: RideMapUIView, context: Context) {
         v.onPinch = onPinch
+        v.onDrag = onDrag
         v.configure(track: track, template: template, cars: cars, brandColor: brandColor, camera: camera, dark: dark)
-        v.insets = insets
         if let report { v.setReport(report) }
     }
 }
@@ -71,10 +72,7 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
     private var dark = false
     private var needsTrain = true
     var onPinch: (CGFloat, Bool) -> Void = { _, _ in }
-    /// MapKit keeps its attribution inside the layout margins: the panel's room goes there.
-    var insets = UIEdgeInsets.zero {
-        didSet { if insets != oldValue { map.directionalLayoutMargins = NSDirectionalEdgeInsets(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right) } }
-    }
+    var onDrag: (CGFloat, CGFloat, CGFloat) -> Void = { _, _, _ in }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,8 +80,6 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         map.isPitchEnabled = true
         map.isUserInteractionEnabled = false
         map.showsCompass = false
-        map.preservesSuperviewLayoutMargins = false
-        map.insetsLayoutMarginsFromSafeArea = false
         map.delegate = self
         addSubview(map)
         arView.environment.background = .color(.clear)
@@ -94,7 +90,12 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         addSubview(arView)
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(pinched(_:)))
         addGestureRecognizer(pinch)
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned(_:)))
+        pan.maximumNumberOfTouches = 1
+        addGestureRecognizer(pan)
         link = CADisplayLink(target: self, selector: #selector(tick))
+        // 30 frames a second is plenty for a train and spares the phone (it ran hot at 60, owner 2026-10-29).
+        link?.preferredFrameRateRange = CAFrameRateRange(minimum: 20, maximum: 30, preferred: 30)
         link?.add(to: .main, forMode: .common)
     }
 
@@ -112,6 +113,12 @@ final class RideMapUIView: UIView, MKMapViewDelegate {
         super.didMoveToWindow()
         // No work while off screen.
         link?.isPaused = window == nil
+    }
+
+    @objc private func panned(_ g: UIPanGestureRecognizer) {
+        let d = g.translation(in: self)
+        g.setTranslation(.zero, in: self)
+        onDrag(d.x, d.y, bounds.width)
     }
 
     @objc private func pinched(_ g: UIPinchGestureRecognizer) {

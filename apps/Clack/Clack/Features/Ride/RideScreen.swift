@@ -18,13 +18,14 @@ struct RideScreen: View {
     @Environment(\.verticalSizeClass) private var vertical
     @State private var model: RideModel
     @State private var now = Date.now.timeIntervalSince1970 * 1000
-    @State private var panelHeight = 0.0
 
-    init(target: RideModel.Target) {
+    init(target: RideTarget) {
         _model = State(initialValue: RideModel(target: target))
     }
 
     var body: some View {
+        // The map and the panel never overlap: the map's centre stays the camera's centre (an overlapping panel
+        // skewed the 3D train against the map) and Apple's attribution stays in view.
         Group {
             if vertical == .compact {
                 HStack(spacing: 0) {
@@ -32,7 +33,7 @@ struct RideScreen: View {
                     panel.frame(width: 300)
                 }
             } else {
-                ZStack(alignment: .bottom) {
+                VStack(spacing: 0) {
                     map
                     panel
                 }
@@ -57,10 +58,10 @@ struct RideScreen: View {
             RideMapView(
                 track: track, template: model.template, cars: model.cars.count, brandColor: model.brandColor, camera: model.camera,
                 report: model.report, dark: scheme == .dark,
-                insets: UIEdgeInsets(top: 8, left: 8, bottom: vertical == .compact ? 8 : panelHeight + 8, right: 8),
-                onPinch: { scale, ended in model.pinch(scale: scale, ended: ended) }
+                onPinch: { scale, ended in model.pinch(scale: scale, ended: ended) },
+                onDrag: { dx, dy, width in model.orbit(dx: dx, dy: dy, width: width) }
             )
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: vertical == .compact ? [.top, .bottom, .leading] : [.top, .horizontal])
             .accessibilityLabel(l10n.t("ride.mapLabel"))
         } else {
             VStack(spacing: 12) {
@@ -87,7 +88,7 @@ struct RideScreen: View {
         let next = model.nextStop(now: now)
         let left = model.left(now: now)
         return VStack(alignment: .leading, spacing: 12) {
-            Picker(l10n.t("ride.camera"), selection: Binding(get: { model.preset }, set: { model.preset = $0 })) {
+            Picker(l10n.t("ride.camera"), selection: Binding(get: { model.preset }, set: { model.choose($0) })) {
                 ForEach(RideLogic.CameraPreset.allCases, id: \.self) { Text(l10n.t("ride.camera.\($0.rawValue)")).tag($0) }
             }
             .pickerStyle(.segmented)
@@ -119,9 +120,8 @@ struct RideScreen: View {
             Text(l10n.t("ride.buildings")).clack(.micro).foregroundStyle(Ink.text3)
         }
         .padding(16)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-        .padding(12)
-        .onGeometryChange(for: Double.self) { $0.size.height } action: { panelHeight = $0 }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Ink.bg)
     }
 
     private func speedCaption(_ source: RideLogic.SpeedSource) -> String {
