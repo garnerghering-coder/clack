@@ -5,6 +5,7 @@
 
 import ClackCore
 import MapLibre
+import os
 import ClackDesign
 import SwiftUI
 import UIKit
@@ -29,9 +30,20 @@ extension MLNMapView {
     /// Sets a GeoJSON source's data. The shape is built directly from the dictionary (`MLNShape.fromGeoJSON`), with no
     /// trip through JSON text, which matters for the route that redraws every frame while it draws itself in.
     func setShape(_ json: [String: Any], source id: String) {
-        guard let source = style?.source(withIdentifier: id) as? MLNShapeSource,
-              let shape = MLNShape.fromGeoJSON(json) else { return }
+        guard let source = style?.source(withIdentifier: id) as? MLNShapeSource else { return }
+        guard let shape = MLNShape.fromGeoJSON(json) else {
+            #if DEBUG
+            Logger(subsystem: "app.clack", category: "map").error("setShape(\(id, privacy: .public)): the GeoJSON made no shape")
+            #endif
+            return
+        }
         source.shape = shape
+        #if DEBUG
+        if id == "station-detail" {
+            let n = (json["features"] as? [Any])?.count ?? -1
+            Logger(subsystem: "app.clack", category: "map").info("setShape station-detail: \(n) features in, \((shape as? MLNShapeCollectionFeature)?.shapes.count ?? -1) shapes out, \(String(describing: type(of: shape)), privacy: .public)")
+        }
+        #endif
     }
 
     /// Fits the points in the view (zoom no further in than `maxZoom`). A map that hasn't been laid out yet remembers the
@@ -97,7 +109,8 @@ extension MLNShape {
         for feature in features {
             guard let geometry = feature["geometry"] as? [String: Any],
                   let coordinates = geometry["coordinates"] as? [Any] else { return viaJSON(json) }
-            let attributes = feature["properties"] as? [String: Any] ?? [:]
+            // MapLibre takes strings, numbers, bools, arrays and dictionaries as attributes, not nulls.
+            let attributes = (feature["properties"] as? [String: Any] ?? [:]).filter { !($0.value is NSNull) }
             switch geometry["type"] as? String {
             case "LineString":
                 guard let line = coordinates as? [[Double]] else { return viaJSON(json) }
@@ -105,6 +118,12 @@ extension MLNShape {
                 let polyline = MLNPolylineFeature(coordinates: &coords, count: UInt(coords.count))
                 polyline.attributes = attributes
                 shapes.append(polyline)
+            case "Polygon":
+                guard let rings = coordinates as? [[[Double]]], let outer = rings.first, outer.count >= 3 else { return viaJSON(json) }
+                var coords = outer.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+                let polygon = MLNPolygonFeature(coordinates: &coords, count: UInt(coords.count))
+                polygon.attributes = attributes
+                shapes.append(polygon)
             case "Point":
                 guard let point = coordinates as? [Double], point.count >= 2 else { return viaJSON(json) }
                 let marker = MLNPointFeature()

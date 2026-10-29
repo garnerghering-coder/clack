@@ -92,7 +92,8 @@ nonisolated enum MapStyle {
         [
             [
                 "id": "rail-network", "type": "line", "source": "rail-network", "filter": ["==", ["geometry-type"], "LineString"],
-                "paint": ["line-color": c.rail, "line-width": 1],
+                // Fades out where the station detail (every track at full detail) takes over.
+                "paint": ["line-color": c.rail, "line-width": 1, "line-opacity": ["interpolate", ["linear"], ["zoom"], 13, 1, 13.6, 0]],
             ],
             [
                 "id": "rail-stations", "type": "circle", "source": "rail-network", "minzoom": 9,
@@ -173,6 +174,58 @@ nonisolated enum MapStyle {
 
     /// The Explore map's own layers (LiveMapPage.tsx): stations you can tap, and the trains, clustered when zoomed out.
     /// Images (`station`, `cluster`, `tdot-<colour>`, `tpuck-<colour>`) are drawn on demand by the map's delegate.
+    /// Station detail from zoom 13 (plan 2026-10-29): every track at full detail, sidings and yards fainter, and
+    /// the platforms of the mapped stations with their numbers from zoom 14. Under the trains.
+    static func stationDetailLayers(_ c: Colors, dark isDark: Bool) -> [[String: Any]] {
+        let round: [String: Any] = ["line-cap": "round", "line-join": "round"]
+        let platform = isDark ? "#4a4a4a" : "#d6d6d6"
+        return [
+            [
+                "id": "detail-tracks-minor", "type": "line", "source": "station-detail", "minzoom": 13, "layout": round,
+                "filter": ["==", ["get", "cls"], "siding"],
+                "paint": ["line-color": c.text, "line-opacity": 0.22, "line-width": ["interpolate", ["linear"], ["zoom"], 13, 1.2, 17, 2.5]],
+            ],
+            [
+                "id": "detail-tracks", "type": "line", "source": "station-detail", "minzoom": 13, "layout": round,
+                "filter": ["==", ["get", "cls"], "track"],
+                "paint": ["line-color": c.text, "line-opacity": 0.55, "line-width": ["interpolate", ["linear"], ["zoom"], 13, 1.5, 17, 3.5]],
+            ],
+            [
+                "id": "detail-platforms", "type": "fill", "source": "station-platforms", "minzoom": 13,
+                "paint": ["fill-color": "#ff00ff", "fill-opacity": 1], // DIAGNOSTIC colour
+            ],
+            [
+                "id": "detail-platforms-line", "type": "line", "source": "station-platforms", "minzoom": 13,
+                "paint": ["line-color": c.text, "line-opacity": 0.25, "line-width": 0.8],
+            ],
+            [
+                "id": "detail-platform-labels", "type": "symbol", "source": "station-platforms", "minzoom": 14,
+                "layout": ["text-field": ["get", "ref"], "text-font": ["Inter Semi Bold"], "text-size": 11, "text-allow-overlap": false, "symbol-placement": "point"],
+                "paint": ["text-color": c.text, "text-halo-color": c.labelHalo, "text-halo-width": 1],
+            ],
+        ]
+    }
+
+    /// From zoom 14 a train is its cars along the track (`trains-close`, built by the model from TrainKit): lines in
+    /// the operator's colour whose width is metres on the ground, the front car a shade lighter.
+    static func trainCarLayers(_ c: Colors) -> [[String: Any]] {
+        let width: [Any] = ["interpolate", ["exponential", 2], ["zoom"], 14, 2.2, 18, 36]
+        return [
+            [
+                "id": "train-cars", "type": "line", "source": "trains-close", "minzoom": 14, "layout": ["line-cap": "butt", "line-join": "round"],
+                "paint": ["line-color": ["get", "color"], "line-width": width],
+            ],
+            [
+                "id": "train-cars-front", "type": "line", "source": "trains-close", "minzoom": 14, "filter": ["==", ["get", "front"], true],
+                "layout": ["line-cap": "butt"], "paint": ["line-color": "#ffffff", "line-opacity": 0.35, "line-width": width],
+            ],
+            [
+                "id": "train-cars-edge", "type": "line", "source": "trains-close", "minzoom": 14, "layout": ["line-cap": "butt"],
+                "paint": ["line-color": c.bg, "line-opacity": 0.6, "line-width": 0.8, "line-gap-width": width],
+            ],
+        ]
+    }
+
     private static func liveStationLayers(_ c: Colors) -> [[String: Any]] {
         let dpd: [Any] = ["coalesce", ["get", "dpd"], 0]
         return [
@@ -250,7 +303,8 @@ nonisolated enum MapStyle {
                 "paint": ["circle-radius": 11, "circle-color": ["get", "color"], "circle-opacity": 0.35, "circle-stroke-color": "#ffffff", "circle-stroke-width": 2],
             ],
             [
-                "id": "train-dot", "type": "symbol", "source": "trains", "minzoom": 7,
+                // From zoom 14 the cars take over (`train-cars`).
+                "id": "train-dot", "type": "symbol", "source": "trains", "minzoom": 7, "maxzoom": 14,
                 "layout": [
                     // With a heading cone (rotated to the bearing) when the direction is known, a plain disc when it isn't.
                     "icon-image": ["case", ["==", ["get", "hasBearing"], true], ["concat", "tpuck-", ["get", "color"]], ["concat", "tdot-", ["get", "color"]]],
@@ -323,12 +377,18 @@ nonisolated enum MapStyle {
             for id in ["route-context", "route-ahead", "route", "stops"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains-pinned"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["corridor"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            // Tracks and platforms apart: a shape collection that mixes lines and polygons draws nothing on iOS.
+            sources["station-detail"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["station-platforms"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
+            sources["trains-close"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains"] = [
                 // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).
                 "type": "geojson", "data": emptyCollection(),
             ] as [String: Any]
+            layers += stationDetailLayers(c, dark: isDark)
             layers += liveStationLayers(c)
             layers += liveTrainLayers(c, dark: isDark, route: routeLayers(color: c.fallback, c, dark: isDark))
+            layers += trainCarLayers(c)
         }
         return ["version": 8, "glyphs": "\(origin)/api/map/fonts/{fontstack}/{range}.pbf", "sources": sources, "layers": layers]
     }

@@ -50,6 +50,7 @@ export function platformFeatures(m: StationMap, stationId: string) {
       type: 'Feature' as const,
       properties: {
         kind: 'platform',
+        cls: 'platform',
         stationId,
         ref: p.ref,
         tracks: p.tracks,
@@ -78,7 +79,9 @@ export function trackFeatures(graph: RailGraph, b: Bbox) {
     for (let i = 0; i < edge.pts.length; i += 2) coords.push([r6(edge.pts[i + 1]!), r6(edge.pts[i]!)]);
     out.push({
       type: 'Feature',
-      properties: { kind: 'track', service: !!(edge.flags & FLAG_SERVICE), minor: !!(edge.flags & FLAG_MINOR_USAGE) },
+      // `cls` is what the map's layers filter on: "track" for running and platform tracks, "siding" for yards,
+      // sidings, spurs and minor-usage lines (drawn fainter).
+      properties: { kind: 'track', cls: edge.flags & (FLAG_SERVICE | FLAG_MINOR_USAGE) ? 'siding' : 'track', service: !!(edge.flags & FLAG_SERVICE), minor: !!(edge.flags & FLAG_MINOR_USAGE) },
       geometry: { type: 'LineString', coordinates: coords },
     });
   }

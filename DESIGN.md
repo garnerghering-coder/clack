@@ -94,6 +94,18 @@ Shared pieces, one spec each; the screens use these instead of their own copies.
 - **SearchField**: one field, one height, one icon.
 - **InfoNote**: a one-line note with an (i) disclosure for longer text.
 
+
+### 2.6 Station detail at close zoom
+
+From zoom 13 the Explore map stops drawing the simplified network and shows every track at full detail from the rail
+graph: running and platform tracks in the rail-station ink at 1.5–3.5 pt, yards and sidings the same ink at 40 % and
+thinner. The platforms of the mapped stations are filled in a neutral grey (`#d6d6d6` light, `#3a3a3a` dark) with a
+faint outline and, from zoom 14, their number in Inter Semi Bold 11 at the platform's node. From zoom 14 a train is no
+longer a dot but its cars: one line per car in the operator's colour, as wide as a car on the ground (exponential
+width, 2.2 pt at zoom 14 to 36 at 18), the front car a shade lighter, a hairline of the background between cars. The
+count is the feed's, else the type's, else the design's default, never a claim. Trains standing at a mapped station sit
+beside their platform; running ones slide along the track.
+
 ## 3. Navigation & layout
 
 Screen titles are Apple's (owner, 2026-10-25): large titles that shrink into the bar on scroll, toolbar buttons and the system back button on Trips, Passport, Settings, Journey and Board; the map screens (Explore, a trip, a station map) keep their own floating buttons. The system's bottom tab bar (Liquid Glass on iOS 26) with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.

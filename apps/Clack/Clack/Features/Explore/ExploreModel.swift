@@ -7,6 +7,7 @@ import ClackCore
 import Foundation
 import MapLibre
 import Observation
+import os
 import ClackDesign
 import SwiftUI
 
@@ -123,6 +124,7 @@ final class ExploreModel {
         controller.onViewChange = { [weak self] bbox, zoom in
             self?.bbox = bbox
             self?.zoom = zoom
+            self?.viewChangedForDetail()
         }
         controller.onTapTrain = { [weak self] id in
             self?.searching = false
@@ -288,7 +290,7 @@ final class ExploreModel {
         renderTask = Task { [weak self] in
             // Stops when the map is hidden (`active` off) as well as when nothing is gliding any more.
             while let self, !Task.isCancelled, self.active {
-                let moving = self.needsFullRender ? self.render() : self.glideFrame()
+                let moving = self.needsFullRender || self.zoom >= Self.carsZoom ? self.render() : self.glideFrame()
                 if !moving { break }
                 try? await Task.sleep(for: .milliseconds(33))
             }
@@ -317,12 +319,17 @@ final class ExploreModel {
         let followed = followKeys
         var moving = false
         var points: [TrainPoint] = []
+        var cars: [[String: Any]] = []
+        let close = zoom >= Self.carsZoom
         for train in trains.values where ExploreLogic.visible(train, filters, followed: followed) {
             var position = LatLon(train.lat, train.lon)
             if let g = glides[train.id] {
                 let step = ExploreLogic.glide(from: g.from, to: g.to, startedAt: g.start, now: nowMs)
                 position = step.position
                 if step.done { glides[train.id] = nil } else { moving = true }
+            }
+            if close, controller.contains(position.lat, position.lon) {
+                cars += carFeatures(train, at: position, color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId))
             }
             points.append(TrainPoint(
                 id: train.id, number: train.number, label: train.destination.map { "\(train.number) · \($0)" } ?? train.number, dest: train.destination,
@@ -331,8 +338,113 @@ final class ExploreModel {
             ))
         }
         controller.setTrains(points)
+        controller.setTrainCars(["type": "FeatureCollection", "features": cars])
+        if let detailShownJSON, close { controller.setStationDetail(detailShownJSON) }
         if shown != points.count { shown = points.count }
         return moving
+    }
+
+    // MARK: station detail at close zoom (plan 2026-10-29, step 2)
+
+    /// From this zoom the view asks for every track and the platforms; from `carsZoom` trains are their cars.
+    static let detailZoom = 13.0
+    static let carsZoom = 14.0
+    @ObservationIgnored private var detailTask: Task<Void, Never>?
+    @ObservationIgnored private var detailCache: [String: (json: [String: Any], tracks: [StationDetailLogic.Track])] = [:]
+    @ObservationIgnored private var detailTracks: [StationDetailLogic.Track] = []
+    @ObservationIgnored private var detailShownKey: String?
+    @ObservationIgnored private var detailShownJSON: [String: Any]?
+
+    /// The view moved: at close zoom fetch the detail for it (debounced, cached by the rounded box); below, clear.
+    private func viewChangedForDetail() {
+        detailTask?.cancel()
+        guard zoom >= Self.detailZoom, let bbox else {
+            if detailShownKey != nil {
+                detailShownKey = nil
+                detailShownJSON = nil
+                detailTracks = []
+                controller.clearStationDetail()
+                controller.setTrainCars(["type": "FeatureCollection", "features": [Any]()])
+            }
+            return
+        }
+        let parts = bbox.split(separator: ",").compactMap { Double($0) }
+        guard parts.count == 4 else { return }
+        // A little wider than the screen, rounded to about 100 m, so a nudge doesn't ask again.
+        let r = { (v: Double) in (v / 0.001).rounded() * 0.001 }
+        let w = r(parts[0] - 0.002), s = r(parts[1] - 0.001), e = r(parts[2] + 0.002), n = r(parts[3] + 0.001)
+        guard e - w <= 0.06, n - s <= 0.03 else { return }
+        let key = String(format: "%.3f,%.3f,%.3f,%.3f", w, s, e, n)
+        if key == detailShownKey { return }
+        if let hit = detailCache[key] { return show(hit.json, tracks: hit.tracks, key: key) }
+        detailTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(350))
+            guard !Task.isCancelled, let self else { return }
+            var comps = URLComponents(url: Config.apiBase.appendingPathComponent("api/map/station-detail"), resolvingAgainstBaseURL: false)
+            comps?.queryItems = [URLQueryItem(name: "bbox", value: key)]
+            guard let url = comps?.url else { return }
+            let answer = try? await URLSession.shared.data(from: url)
+            #if DEBUG
+            Logger(subsystem: "app.clack", category: "detail").info("station detail \(key, privacy: .public): \(answer?.0.count ?? -1) bytes")
+            #endif
+            guard let (data, _) = answer, !Task.isCancelled, let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            let tracks = Self.tracks(in: json)
+            self.detailCache[key] = (json, tracks)
+            if self.detailCache.count > 40 { self.detailCache.removeValue(forKey: self.detailCache.keys.first!) }
+            self.show(json, tracks: tracks, key: key)
+        }
+    }
+
+    private func show(_ json: [String: Any], tracks: [StationDetailLogic.Track], key: String) {
+        detailShownKey = key
+        detailShownJSON = json
+        detailTracks = tracks
+        controller.setStationDetail(json)
+        needsFullRender = true
+        scheduleRender()
+        #if DEBUG
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(2))
+            guard let map = self?.controller.mapView else { return }
+            let drawn = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["detail-tracks", "detail-tracks-minor", "detail-platforms"]).count
+            let cars = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["train-cars"]).count
+            let plats = map.visibleFeatures(in: map.bounds, styleLayerIdentifiers: ["detail-platforms"]).count
+            let platSrc = (map.style?.source(withIdentifier: "station-platforms") as? MLNShapeSource)?.shape
+            Logger(subsystem: "app.clack", category: "detail").info("platform fills on screen: \(plats); source shape \(platSrc == nil ? "nil" : String(describing: type(of: platSrc!)), privacy: .public)")
+            let src = map.style?.source(withIdentifier: "station-detail") as? MLNShapeSource
+            let held = (src?.shape as? MLNShapeCollectionFeature)?.shapes.count ?? ((src?.shape as? MLNShapeCollection)?.shapes.count ?? -1)
+            let kind = src == nil ? "no source" : (src!.shape == nil ? "shape nil" : String(describing: type(of: src!.shape!)))
+            let layer = map.style?.layer(withIdentifier: "detail-tracks")
+            Logger(subsystem: "app.clack", category: "detail").info("station detail drawn: \(drawn) on screen (cars \(cars)), source holds \(held) [\(kind, privacy: .public)], layer \(layer == nil ? "missing" : (layer!.isVisible ? "visible" : "hidden"), privacy: .public), zoom \(map.zoomLevel), tracks \(tracks.count)")
+        }
+        #endif
+    }
+
+    /// The track lines of a detail answer, for laying trains on.
+    nonisolated static func tracks(in json: [String: Any]) -> [StationDetailLogic.Track] {
+        guard let features = json["features"] as? [[String: Any]] else { return [] }
+        return features.compactMap { f in
+            guard let props = f["properties"] as? [String: Any], props["kind"] as? String == "track",
+                  let geometry = f["geometry"] as? [String: Any], let coords = geometry["coordinates"] as? [[Double]] else { return nil }
+            let pts = coords.compactMap { c in c.count >= 2 ? LatLon(c[1], c[0]) : nil }
+            return pts.count >= 2 ? StationDetailLogic.Track(points: pts, service: (props["service"] as? Bool ?? false) || (props["minor"] as? Bool ?? false)) : nil
+        }
+    }
+
+    /// A train as its cars (TrainKit: the feed's count, else the type's, else the design's default) along the
+    /// nearest detail track; one line feature per car.
+    private func carFeatures(_ train: LiveTrain, at p: LatLon, color: String) -> [[String: Any]] {
+        let type = train.trainType.flatMap { id in app?.trainTypes.first { $0.id == id } }
+        let template = TrainKit.template(forArt: type?.art)
+        let count = TrainKit.carCount(live: train.cars, typical: type?.cars, template: template).count
+        let cars = StationDetailLogic.cars(at: p, bearing: train.bearing, count: count, carLength: TrainKit.carLength(template), tracks: detailTracks)
+        return cars.map { car in
+            [
+                "type": "Feature",
+                "properties": ["id": train.id, "color": color, "front": car.isFront],
+                "geometry": ["type": "LineString", "coordinates": [[car.back.lon, car.back.lat], [car.front.lon, car.front.lat]]],
+            ]
+        }
     }
 
     // MARK: follows

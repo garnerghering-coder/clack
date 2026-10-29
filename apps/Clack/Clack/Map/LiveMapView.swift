@@ -5,6 +5,7 @@
 
 import ClackCore
 import MapLibre
+import os
 import ClackDesign
 import SwiftUI
 import UIKit
@@ -178,6 +179,46 @@ final class LiveMapController {
         (mapView?.style?.layer(withIdentifier: "train-corridor") as? MLNCircleStyleLayer)?.predicate = NSPredicate(format: "id == %@", "")
     }
 
+    /// The station detail for the view (tracks and platforms) and the trains as cars, at close zoom.
+    /// The station detail for the view: the tracks as lines in one source and the platforms as polygons in another
+    /// (one collection with both kinds draws nothing on iOS). The platform polygons go through MapLibre's own GeoJSON
+    /// parser, which knows polygons; the lines through `fromGeoJSON`, which keeps their attributes.
+    func setStationDetail(_ geojson: [String: Any]) {
+        guard let style = mapView?.style else { return }
+        let features = (geojson["features"] as? [[String: Any]]) ?? []
+        let isPolygon: ([String: Any]) -> Bool = { ((($0["geometry"] as? [String: Any])?["type"]) as? String) == "Polygon" }
+        let lines: [String: Any] = ["type": "FeatureCollection", "features": features.filter { !isPolygon($0) }]
+        let polygons: [String: Any] = ["type": "FeatureCollection", "features": features.filter(isPolygon)]
+        if let source = style.source(withIdentifier: "station-detail") as? MLNShapeSource, let shape = MLNShape.fromGeoJSON(lines) {
+            source.shape = shape
+        }
+        if let source = style.source(withIdentifier: "station-platforms") as? MLNShapeSource,
+           let data = try? JSONSerialization.data(withJSONObject: polygons), let shape = try? MLNShape(data: data, encoding: String.Encoding.utf8.rawValue) {
+            source.shape = shape
+            #if DEBUG
+            Logger(subsystem: "app.clack", category: "map").info("station platforms set: \(polygons["features"].map { ($0 as? [Any])?.count ?? 0 } ?? 0) polygons, parsed as \(String(describing: type(of: shape)), privacy: .public)")
+            #endif
+        } else {
+            #if DEBUG
+            Logger(subsystem: "app.clack", category: "map").error("station platforms: MapLibre could not parse the polygons")
+            #endif
+        }
+    }
+
+    func clearStationDetail() {
+        for id in ["station-detail", "station-platforms"] { mapView?.setShape(["type": "FeatureCollection", "features": [Any]()], source: id) }
+    }
+
+    func setTrainCars(_ geojson: [String: Any]) {
+        mapView?.setShape(geojson, source: "trains-close")
+    }
+
+    /// Straight to a place at a zoom (the Debug `-exploreAt` argument; no animation).
+    func jump(to c: CLLocationCoordinate2D, zoom: Double) {
+        (mapView as? ClackMapView)?.markMoved()
+        mapView?.setCenter(c, zoomLevel: zoom, animated: false)
+    }
+
     func setRouteColor(_ hex: String) {
         guard let style = mapView?.style else { return }
         let color = UIColor(cssColor: hex)
@@ -302,7 +343,7 @@ struct LiveMapView: UIViewRepresentable {
                 return
             }
             // Trains bunch up at stations: of the dots under the finger, take the one nearest to it.
-            let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot"])
+            let trains = map.visibleFeatures(in: box, styleLayerIdentifiers: ["train-dot", "train-cars"])
             if let best = trains.min(by: { distance($0, point, map) < distance($1, point, map) }), let id = best.attribute(forKey: "id") as? String {
                 controller.onTapTrain(id)
                 return

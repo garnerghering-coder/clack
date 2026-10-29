@@ -119,6 +119,19 @@ struct ExploreScreen: View {
         .task { await debugSearch() }
         // `-exploreNetwork` opens the network status; with `-networkSample`, filled with made-up data (a preview of a bad
         // day); `-exploreCorridor` goes on to the first corridor's sheet and highlight.
+        // `-exploreAt 59.33,18.058,15.5` opens the map there (a station's detail).
+        .task {
+            let args = CommandLine.arguments
+            if let at = args.firstIndex(of: "-exploreAt"), at + 1 < args.count {
+                let p = args[at + 1].split(separator: ",").compactMap { Double($0) }
+                if p.count == 3 {
+                    // The map is made once the basemap check is in and its style has loaded.
+                    for _ in 0..<60 where !model.ready { try? await Task.sleep(for: .milliseconds(250)) }
+                    try? await Task.sleep(for: .milliseconds(500))
+                    model.controller.jump(to: CLLocationCoordinate2D(latitude: p[0], longitude: p[1]), zoom: p[2])
+                }
+            }
+        }
         .task {
             let args = CommandLine.arguments
             guard args.contains("-exploreNetwork") else { return }
