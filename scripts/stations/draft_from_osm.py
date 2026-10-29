@@ -10,6 +10,7 @@ The OSM part of the output is ODbL (© OpenStreetMap contributors); see the Sour
 A one-off data tool, like scripts/phase0/*.py; the app itself is TypeScript. (pip install osmium)
 """
 import argparse
+import urllib.parse
 import datetime
 import json
 import math
@@ -42,9 +43,75 @@ def parse_levels(v):
     return parts
 
 
+OSM_KEYS = ["railway", "public_transport", "highway", "indoor", "amenity", "shop", "building", "entrance", "level", "conveying", "tourism", "vending", "room", "office", "healthcare", "wheelchair", "ref", "name", "step_count", "incline", "layer", "tunnel", "bridge", "covered", "location", "ele", "height", "min_height", "building:levels", "handrail", "escalator", "lit"]
+
+
+OVERPASS_ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://lz4.overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+
+
+def load_osm_overpass(lat0, lon0, radius, cache, endpoints=OVERPASS_ENDPOINTS):
+    """The same extract as load_osm, but from the Overpass API for the station's box: no PBF download needed
+    (the four countries' PBFs are 3.8 GB). Everything tagged with one of OSM_KEYS inside the box, with the nodes
+    of every such way, plus multipolygon relations' outer rings. Cached like the PBF extract. One request per
+    station, well within Overpass's fair-use limits; the result is ODbL like the PBF."""
+    if os.path.exists(cache):
+        return json.load(open(cache))
+    dlat = radius / 111320
+    dlon = radius / (111320 * math.cos(math.radians(lat0)))
+    bb = (lat0 - dlat, lat0 + dlat, lon0 - dlon, lon0 + dlon)
+    inside = lambda la, lo: bb[0] <= la <= bb[1] and bb[2] <= lo <= bb[3]
+    keys = "|".join(OSM_KEYS)
+    q = (
+        f"[out:json][timeout:120][bbox:{bb[0]},{bb[2]},{bb[1]},{bb[3]}];"
+        f'(node[~"^({keys})$"~"."];way[~"^({keys})$"~"."];relation["type"="multipolygon"][~"^({keys})$"~"."];);'
+        "out body;>;out skel qt;"
+    )
+    # curl, not urllib: the Python that ships with Xcode can't complete the TLS handshake with overpass-api.de.
+    import subprocess
+
+    raw, errors = None, []
+    for endpoint in endpoints:
+        r = subprocess.run(["curl", "-sS", "--fail", "--max-time", "200", "-A", "clack-station-drafter (OpenStreetMap ODbL; one request per station)", "--data-urlencode", "data=" + q, endpoint], capture_output=True, text=True)
+        if r.returncode == 0:
+            try:
+                raw = json.loads(r.stdout)
+                break
+            except ValueError:
+                errors.append(f"{endpoint}: not JSON")
+        else:
+            errors.append(f"{endpoint}: {r.stderr.strip()}")
+    if raw is None:
+        raise SystemExit("Overpass failed: " + "; ".join(errors))
+    coords, nodes, ways, rels = {}, {}, {}, {}
+    for el in raw["elements"]:
+        if el["type"] == "node":
+            coords[el["id"]] = (el["lat"], el["lon"])
+            if el.get("tags") and inside(el["lat"], el["lon"]):
+                nodes[el["id"]] = dict(t=el["tags"], lat=el["lat"], lon=el["lon"])
+    for el in raw["elements"]:
+        if el["type"] == "way":
+            pts = [(ref, *coords[ref]) for ref in el["nodes"] if ref in coords]
+            if el.get("tags") and any(inside(la, lo) for _, la, lo in pts):
+                ways[el["id"]] = dict(t=el["tags"], nd=pts)
+            elif pts:
+                ways.setdefault(f"_m{el['id']}", dict(nd=pts))
+    out = dict(retrieved=datetime.date.today().isoformat(), source="overpass", nodes={str(k): v for k, v in nodes.items() if isinstance(k, int)}, ways={str(k): v for k, v in ways.items() if isinstance(k, int)})
+    member_pts = {int(k[2:]) if isinstance(k, str) else k: v["nd"] for k, v in ways.items()}
+    for el in raw["elements"]:
+        if el["type"] == "relation" and el.get("tags", {}).get("type") == "multipolygon":
+            refs = [m["ref"] for m in el["members"] if m["type"] == "way" and m.get("role", "") in ("outer", "")]
+            rels[el["id"]] = dict(t=el["tags"], members=[member_pts.get(ref) for ref in refs])
+    add_relation_rings(out, rels, inside)
+    os.makedirs(os.path.dirname(cache), exist_ok=True)
+    json.dump(out, open(cache, "w"))
+    return out
+
+
 def load_osm(pbf, lat0, lon0, radius, cache):
     if os.path.exists(cache):
         return json.load(open(cache))
+    if not os.path.exists(pbf):
+        return load_osm_overpass(lat0, lon0, radius, cache)
     import osmium
 
     dlat = radius / 111320
@@ -73,7 +140,7 @@ def load_osm(pbf, lat0, lon0, radius, cache):
             if hit:
                 s.ways[w.id] = dict(t=dict(w.tags), nd=pts)
 
-    keys = ["railway", "public_transport", "highway", "indoor", "amenity", "shop", "building", "entrance", "level", "conveying", "tourism", "vending", "room", "office", "healthcare"]
+    keys = OSM_KEYS
     h = H()
     h.apply_file(pbf, locations=True, filters=[osmium.filter.KeyFilter(*keys)])
     out = dict(retrieved=datetime.date.fromtimestamp(os.path.getmtime(pbf)).isoformat(), nodes={str(k): v for k, v in h.nodes.items()}, ways={str(k): v for k, v in h.ways.items()})
@@ -264,14 +331,16 @@ def main():
     ap.add_argument("--pbf", default=os.path.join(ROOT, "data/cache/osm/sweden-latest.osm.pbf"))
     args = ap.parse_args()
     sid = args.station_id
-    edits = json.load(open(os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")))
+    # Finnish ids carry a colon ("fi:HKI"); files are named with an underscore (fi_HKI.edits.json, fi_HKI.json).
+    safe = sid.replace(":", "_")
+    edits = json.load(open(os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")))
     db = sqlite3.connect(f"file:{os.path.join(ROOT, 'data/app.db')}?mode=ro", uri=True)
     name, lat0, lon0 = db.execute("select name, lat, lon from stations where id=?", (sid,)).fetchone()
     if "origin" in edits:
         lat0, lon0 = edits["origin"]["lat"], edits["origin"]["lon"]
     K = math.cos(math.radians(lat0)) * 111320
     xy = lambda la, lo: (round((lo - lon0) * K, 2), round(-(la - lat0) * 111320, 2))
-    osm = load_osm(args.pbf, lat0, lon0, edits.get("radius", 400), os.path.join(ROOT, f"data/cache/stations/{sid}-osm.json"))
+    osm = load_osm(args.pbf, lat0, lon0, edits.get("radius", 400), os.path.join(ROOT, f"data/cache/stations/{safe}-osm.json"))
     nodes, ways = osm["nodes"], osm["ways"]
     if edits.get("multipolygons"):
         # Platforms and station houses OSM maps as multipolygon relations: their outer rings, as ways "r<id>".
@@ -306,11 +375,15 @@ def main():
             continue
         if t.get("building") in ("train_station", "transportation") or t.get("railway") == "station" or (t.get("public_transport") == "station" and t.get("train") != "no"):
             station_polys.append(p)
-            shapes.append(dict(level=edits.get("building_level", level_id["0"]), kind="building", points=simplify(p, 0.8)))
+            b = dict(level=edits.get("building_level", level_id["0"]), kind="building", points=simplify(p, 0.8), _source=f"osm:way/{wid}")
+            h = re.match(r"^\s*(\d+(?:\.\d+)?)\s*(m)?\s*$", t.get("height") or "")
+            if h:
+                b["height_m"] = float(h.group(1))
+            shapes.append(b)
         lv = parse_levels(t.get("level"))
         if t.get("indoor") in ("room", "area", "corridor") and lv and lv[0] in keep_levels:
             kind = "shop" if (t.get("shop") or t.get("amenity") in ("cafe", "restaurant", "fast_food")) else ("hall" if t.get("indoor") == "area" else "room")
-            s = dict(level=level_id[lv[0]], kind=kind, points=simplify(p, 0.5))
+            s = dict(level=level_id[lv[0]], kind=kind, points=simplify(p, 0.5), _source=f"osm:way/{wid}")
             if t.get("name"):
                 s["name"] = t["name"]
             indoor_shapes.append(s)
@@ -350,19 +423,32 @@ def main():
                 right.append((x - nx, y - ny))
             p = left + right[::-1] + [left[0]]
         tracks = [x.strip().lower() for x in re.split(r"[;,]", ref) if x.strip()]
-        platforms.append(dict(ref=ref.replace(";", "–"), tracks=tracks, level=level_id[lv[0]], poly=p))
+        platforms.append(dict(ref=ref.replace(";", "–"), tracks=tracks, level=level_id[lv[0]], poly=p, wid=wid))
     # Merge pieces with the same ref.
     by_ref = defaultdict(list)
     for p in platforms:
         by_ref[p["ref"]].append(p)
 
-    # ---- Tracks between the platforms (drawing only): rail segments near a platform, not in tunnels ----
+    # ---- Tracks between the platforms: rail segments near a platform (drawn; and, with a track number, the rails a
+    # train stands at). Above-ground rails go on level 0; rails in a tunnel or a negative layer are kept for the
+    # platform edges (Malmö C's underground platforms) but drawn only when "layer_as_level" maps their layer. ----
     plat_polys = [p["poly"] for p in platforms]
+    rails = []  # (wid, pts, track ref or None, underground)
     for wid, w in ways.items():
         t = w["t"]
-        if t.get("railway") != "rail" or t.get("tunnel") or (t.get("layer") or "0").startswith("-"):
+        if t.get("railway") != "rail":
             continue
         pts = coords(w)
+        if not any(dist_to_poly(q, pp) <= 12 for q in pts for pp in plat_polys):
+            continue
+        track_ref = (t.get("railway:track_ref") or t.get("ref") or "").strip().lower() or None
+        underground = bool(t.get("tunnel")) or (t.get("layer") or "0").startswith("-")
+        rails.append((wid, pts, track_ref, underground))
+        lv = None
+        if underground:
+            lv = parse_levels(t.get("level")) or (parse_levels(t.get("layer")) if edits.get("layer_as_level") else None)
+            if not lv or lv[0] not in keep_levels:
+                continue
         run = []
         for q in pts + [None]:
             close = q is not None and any(dist_to_poly(q, pp) <= 12 for pp in plat_polys)
@@ -370,8 +456,72 @@ def main():
                 run.append(q)
             elif run:
                 if len(run) >= 2:
-                    shapes.append(dict(level=level_id["0"], kind="track", points=simplify(run, 0.6)))
+                    shape = dict(level=level_id[lv[0]] if lv else level_id["0"], kind="track", points=simplify(run, 0.6), _source=f"osm:way/{wid}")
+                    if track_ref:
+                        shape["ref"] = track_ref
+                    shapes.append(shape)
                 run = []
+
+    def dist_to_line(q, pts):
+        """Distance from q to an open polyline, and how far along it the nearest point is."""
+        best, at, run = float("inf"), 0.0, 0.0
+        for i in range(1, len(pts)):
+            ax, ay = pts[i - 1]
+            bx, by = pts[i]
+            dx, dy = bx - ax, by - ay
+            L2 = dx * dx + dy * dy
+            tt = 0 if L2 == 0 else max(0, min(1, ((q[0] - ax) * dx + (q[1] - ay) * dy) / L2))
+            d = math.hypot(ax + tt * dx - q[0], ay + tt * dy - q[1])
+            if d < best:
+                best, at = d, run + tt * math.sqrt(L2)
+            run += math.sqrt(L2)
+        return best, at
+
+    def platform_edges(ref, pieces):
+        """The platform's sides along the rails (schema 2): the outline vertices within 6 m of each rail way nearby,
+        in order along the rail. The track comes from the rail's own number when OSM has one and the platform serves
+        it, else from the platform when it has one track; otherwise it is left unknown for the review queue (or set
+        in the edits: "platform_edges": {"<ref>": [{"track": "7", "near": [x, y], "_source": "plan:…"}]})."""
+        out = []
+        tracks = sorted({t for p in pieces for t in p["tracks"]})
+        verts = [q for p in pieces for q in p["poly"]]
+        for wid, pts, track_ref, _ in rails:
+            close = []
+            for q in verts:
+                d, at = dist_to_line(q, pts)
+                if d <= 6:
+                    close.append((at, q))
+            if len(close) < 2:
+                continue
+            close.sort()
+            line = simplify([q for _, q in close], 0.5)
+            if polylen(line) < 15:
+                continue
+            e = dict(points=[[round(x, 1), round(y, 1)] for x, y in line], _source=f"osm:way/{','.join(str(p['wid']) for p in pieces)} along rail osm:way/{wid}")
+            if track_ref and track_ref in tracks:
+                e["track"] = track_ref
+            elif len(tracks) == 1:
+                e["track"] = tracks[0]
+                e["note"] = "the platform's only track"
+            else:
+                e["track"] = None
+                e["note"] = "island platform: which side is which track is not in OSM" + (f" (rail says {track_ref})" if track_ref else "")
+            out.append(e)
+        for o in edits.get("platform_edges", {}).get(ref, []):
+            if not out:
+                break
+            x, y = o["near"]
+            best = min(out, key=lambda e: min(math.hypot(px - x, py - y) for px, py in e["points"]))
+            best["track"] = o["track"].lower()
+            best["_source"] += f"; track from {o['_source']}"
+            best.pop("note", None)
+        # One edge per track: the longest.
+        by_track = {}
+        for e in out:
+            k = e["track"] or f"?{len(by_track)}"
+            if k not in by_track or polylen(e["points"]) > polylen(by_track[k]["points"]):
+                by_track[k] = e
+        return list(by_track.values())
 
     # ---- Walking graph from OSM ways ----
     g_nodes = {}  # vid -> dict(x, y, levels Counter, osm tags)
@@ -404,7 +554,7 @@ def main():
         vertical_way = hw in ("steps", "elevator") or bool(t.get("conveying"))
         if lv is None and vertical_way and t.get("level") is None:
             # Stairs without a level: worked out below from what their ends touch.
-            untagged_vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs"), incline=t.get("incline"), step_count=t.get("step_count")))
+            untagged_vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs"), incline=t.get("incline"), step_count=t.get("step_count"), way=wid, conveying=t.get("conveying")))
             continue
         if lv is None:
             # Untagged paths count inside the station building (as ground level), and with "path_radius" in the edits
@@ -419,10 +569,10 @@ def main():
         if len(lv) == 1 and hw not in ("steps", "elevator") and not t.get("conveying"):
             for (nid, _, _) in w["nd"]:
                 node_level_votes[nid][lv[0]] += 1
-            g_edges.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="walk", levels=lv))
+            g_edges.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind="walk", levels=lv, way=wid))
         else:
             kind = "lift" if hw == "elevator" else ("escalator" if t.get("conveying") else "stairs")
-            vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind=kind, levels=lv, incline=t.get("incline")))
+            vertical.append(dict(ids=[p[0] for p in w["nd"]], pts=pts, kind=kind, levels=lv, incline=t.get("incline"), way=wid, conveying=t.get("conveying")))
 
     # Platform outlines: a stair that shares a node with one starts or ends on that platform's level.
     platform_node_level = {}
@@ -451,7 +601,7 @@ def main():
         sc = e.get("step_count")
         if e["kind"] == "stairs" and bool(la) != bool(lb) and ((sc or "").isdigit() and int(sc) <= 6 or polylen(e["pts"]) < 2.5):
             L = la or lb
-            vertical.append(dict(ids=e["ids"], pts=e["pts"], kind="stairs", levels=[L], ends=(L, L), short=True))
+            vertical.append(dict(ids=e["ids"], pts=e["pts"], kind="stairs", levels=[L], ends=(L, L), short=True, way=e["way"]))
             continue
         if la and not lb and (up or down):
             lb = step_level(la, 1 if up else -1)
@@ -459,7 +609,7 @@ def main():
             la = step_level(lb, -1 if up else 1)
         if not la or not lb or la == lb:
             continue
-        vertical.append(dict(ids=e["ids"], pts=e["pts"], kind=e["kind"], levels=sorted([la, lb], key=lambda k: order[k]), ends=(la, lb)))
+        vertical.append(dict(ids=e["ids"], pts=e["pts"], kind=e["kind"], levels=sorted([la, lb], key=lambda k: order[k]), ends=(la, lb), way=e["way"], conveying=e.get("conveying"), incline=e.get("incline")))
 
     def level_of(nid, default):
         c = node_level_votes.get(nid)
@@ -471,7 +621,7 @@ def main():
         level = level_id[level]
         k = vid(nid, level)
         if k not in V:
-            V[k] = dict(id=k, x=x, y=y, level=level, osm=nid)
+            V[k] = dict(id=k, x=x, y=y, level=level, osm=nid, src=f"osm:node/{nid}")
         return k
 
     E = []
@@ -480,7 +630,18 @@ def main():
         for i in range(1, len(e["ids"])):
             a = vertex(e["ids"][i - 1], L, *e["pts"][i - 1])
             b = vertex(e["ids"][i], L, *e["pts"][i])
-            E.append(dict(a=a, b=b, kind="walk", pts=[e["pts"][i - 1], e["pts"][i]]))
+            E.append(dict(a=a, b=b, kind="walk", pts=[e["pts"][i - 1], e["pts"][i]], src=f"osm:way/{e['way']}"))
+
+    def escalator_direction(e):
+        """Which way an escalator runs, from the way's conveying= and incline= tags; None when OSM doesn't say."""
+        c, inc = e.get("conveying"), e.get("incline")
+        if c == "reversible":
+            return "both"
+        if c in ("forward", "backward", "yes") and inc in ("up", "down"):
+            up = (inc == "up") == (c != "backward")
+            return "up" if up else "down"
+        return None
+
     for e in vertical:
         lo, hi = e["levels"][0], e["levels"][-1]
         # Which end is which level: ask the ways that meet each end; otherwise guess from the order given.
@@ -496,7 +657,7 @@ def main():
             la, lb = lo, hi
         a = vertex(e["ids"][0], la, *e["pts"][0])
         b = vertex(e["ids"][-1], lb, *e["pts"][-1])
-        E.append(dict(a=a, b=b, kind=e["kind"], pts=e["pts"], levels=e["levels"], short=e.get("short")))
+        E.append(dict(a=a, b=b, kind=e["kind"], pts=e["pts"], levels=e["levels"], short=e.get("short"), src=f"osm:way/{e['way']}", direction=escalator_direction(e) if e["kind"] == "escalator" else None))
     # Lift nodes (a single node tagged highway=elevator with level "-1;0"): one vertex per level, joined by lift edges.
     for nid, n in nodes.items():
         t = n["t"]
@@ -513,7 +674,7 @@ def main():
             continue
         for i in range(len(here)):
             for j in range(i + 1, len(here)):
-                E.append(dict(a=here[i], b=here[j], kind="lift", pts=[(V[here[i]]["x"], V[here[i]]["y"]), (V[here[j]]["x"], V[here[j]]["y"])], levels=lv))
+                E.append(dict(a=here[i], b=here[j], kind="lift", pts=[(V[here[i]]["x"], V[here[i]]["y"]), (V[here[j]]["x"], V[here[j]]["y"])], levels=lv, src=f"osm:node/{nid}"))
 
     # ---- Snap loose ends: OSM often draws stairs and lifts a few metres short of the path or platform they serve,
     # and some lifts are a single node on no way at all. ----
@@ -550,7 +711,7 @@ def main():
             continue
         ends = [vertex(int(nid), L, x, y) for L in lv]
         for i in range(len(ends) - 1):
-            E.append(dict(a=ends[i], b=ends[i + 1], kind="lift", pts=[(x, y), (x, y)], levels=lv))
+            E.append(dict(a=ends[i], b=ends[i + 1], kind="lift", pts=[(x, y), (x, y)], levels=lv, src=f"osm:node/{nid}"))
         snaps.extend(ends)
     pending_platform_links = []
     for k in snaps:
@@ -567,7 +728,7 @@ def main():
             if d < bd and not any((e["a"] == k and e["b"] == k2) or (e["b"] == k and e["a"] == k2) for e in E if e["kind"] != "walk"):
                 best, bd = k2, d
         if best:
-            E.append(dict(a=k, b=best, kind="walk", pts=[(v["x"], v["y"]), (V[best]["x"], V[best]["y"])]))
+            E.append(dict(a=k, b=best, kind="walk", pts=[(v["x"], v["y"]), (V[best]["x"], V[best]["y"])], src=f"derived:gap of {bd:.0f} m closed between {v['src']} and {V[best]['src']}"))
 
     # ---- Platforms in the graph: a node in the middle of each, joined to the paths that touch it ----
     out_platforms, extra_nodes = [], []
@@ -579,14 +740,15 @@ def main():
         cy = sum(q[1] for q in allpts) / len(allpts)
         level = pieces[0]["level"]
         node_id = f"{pid}_mid"
-        V[node_id] = dict(id=node_id, x=round(cx, 2), y=round(cy, 2), level=level, osm=None, type="platform", platform=pid)
+        piece_src = ",".join(f"osm:way/{p['wid']}" for p in pieces)
+        V[node_id] = dict(id=node_id, x=round(cx, 2), y=round(cy, 2), level=level, osm=None, type="platform", platform=pid, src=f"derived:middle of {piece_src}")
         access = [k for k, v in V.items() if v["level"] == level and v.get("type") != "platform" and any(dist_to_poly((v["x"], v["y"]), p["poly"]) <= 1.5 for p in pieces)]
         access += [k for k, r in pending_platform_links if r == ref and k not in access]
         for k in access:
             V[k]["type"] = V[k].get("type") or "platform_access"
             V[k]["platform"] = pid
-            E.append(dict(a=node_id, b=k, kind="walk", pts=[(cx, cy), (V[k]["x"], V[k]["y"])]))
-        out_platforms.append(dict(id=pid, ref=ref, tracks=sorted({t for p in pieces for t in p["tracks"]}), level=level, geometry=[simplify(p["poly"], 0.5) for p in pieces], node=node_id))
+            E.append(dict(a=node_id, b=k, kind="walk", pts=[(cx, cy), (V[k]["x"], V[k]["y"])], src=f"derived:along the platform ({piece_src})"))
+        out_platforms.append(dict(id=pid, ref=ref, tracks=sorted({t for p in pieces for t in p["tracks"]}), level=level, geometry=[simplify(p["poly"], 0.5) for p in pieces], node=node_id, edges=platform_edges(ref, pieces), _source=piece_src))
     # Two halves of an island platform: a short walk across.
     for i, a in enumerate(out_platforms):
         for b in out_platforms[i + 1 :]:
@@ -598,7 +760,7 @@ def main():
                 # long platform) can have their middles 100 m or more apart.
                 na, nb = V[a["node"]], V[b["node"]]
                 d = math.hypot(na["x"] - nb["x"], na["y"] - nb["y"])
-                E.append(dict(a=a["node"], b=b["node"], kind="walk", pts=None, seconds=max(PLATFORM_CROSS_SECONDS, round(d / WALK_SPEED)), meters=max(6, round(d, 1)), island=True))
+                E.append(dict(a=a["node"], b=b["node"], kind="walk", pts=None, seconds=max(PLATFORM_CROSS_SECONDS, round(d / WALK_SPEED)), meters=max(6, round(d, 1)), island=True, src=f"derived:island platform halves {a['_source']} and {b['_source']}"))
 
     # ---- Entrances ----
     for nid, n in nodes.items():
@@ -648,15 +810,15 @@ def main():
             q = min((closest_on(p["poly"], x, y) for p in pieces), key=lambda q: math.hypot(q[0] - x, q[1] - y))
             pid = "p" + re.sub(r"[^0-9a-z]+", "_", spec["platform"].lower())
             k = f"manual{i}@{pieces[0]['level']}"
-            V[k] = dict(id=k, x=round(q[0], 2), y=round(q[1], 2), level=pieces[0]["level"], osm=None, type="platform_access", platform=pid)
+            V[k] = dict(id=k, x=round(q[0], 2), y=round(q[1], 2), level=pieces[0]["level"], osm=None, type="platform_access", platform=pid, src="manual:edits connections")
             mid = V[f"{pid}_mid"]
-            E.append(dict(a=f"{pid}_mid", b=k, kind="walk", pts=[(mid["x"], mid["y"]), q]))
+            E.append(dict(a=f"{pid}_mid", b=k, kind="walk", pts=[(mid["x"], mid["y"]), q], src="derived:along the platform to a hand-placed access point"))
             return k
         return nearest(*spec["at"], level_id[str(spec["level"])])[0]
 
     for i, c in enumerate(edits.get("connections", [])):
         a, b = endpoint(c["from"], f"{i}a"), endpoint(c["to"], f"{i}b")
-        E.append(dict(a=a, b=b, kind=c.get("kind", "walk"), pts=None, seconds=c.get("seconds"), manual=True, note=c.get("note"), meters=c.get("meters")))
+        E.append(dict(a=a, b=b, kind=c.get("kind", "walk"), pts=None, seconds=c.get("seconds"), manual=True, note=c.get("note"), meters=c.get("meters"), src=c.get("_source") or f"manual:{c.get('note') or 'edits connections'}"))
 
     # ---- Keep the part of the graph the platforms are on ----
     adj = defaultdict(set)
@@ -722,6 +884,7 @@ def main():
             # Walk along a chain of plain vertices.
             used.add(ei)
             pts = edge_pts(e, k)
+            srcs = [e.get("src")]
             cur = e["b"] if e["a"] == k else e["a"]
             while not is_key(cur):
                 nxt = [j for j in inc[cur] if j not in used and (E[j]["b"] if E[j]["a"] == cur else E[j]["a"]) != cur]
@@ -730,8 +893,9 @@ def main():
                 used.add(nxt[0])
                 f = E[nxt[0]]
                 pts += edge_pts(f, cur)[1:]
+                srcs.append(f.get("src"))
                 cur = f["b"] if f["a"] == cur else f["a"]
-            final_edges.append(dict(a=k, b=cur, kind="walk", pts=pts))
+            final_edges.append(dict(a=k, b=cur, kind="walk", pts=pts, src=",".join(sorted({x for x in srcs if x}))))
 
     # ---- Ids, seconds, output ----
     names = {}
@@ -742,7 +906,7 @@ def main():
         v = V[k]
         nid = v["id"] if v.get("type") == "platform" else f"n{len(out_nodes) + 1}"
         names[k] = nid
-        node = dict(id=nid, type=v.get("type") or "junction", level=v["level"], x=round(v["x"], 1), y=round(v["y"], 1))
+        node = dict(id=nid, type=v.get("type") or "junction", level=v["level"], x=round(v["x"], 1), y=round(v["y"], 1), _source=v.get("src") or "osm:node/?")
         if v.get("platform"):
             node["platform"] = v["platform"]
         if v.get("name"):
@@ -781,6 +945,9 @@ def main():
         if len(g) > 2:
             edge["geometry"] = [list(p) for p in g]
         edge["source"] = "manual" if e.get("manual") else "osm"
+        edge["_source"] = e.get("src") or ("manual:edits connections" if e.get("manual") else "osm:way/?")
+        if e.get("direction"):
+            edge["direction"] = e["direction"]
         out_edges.append(edge)
         seen_pairs[key] = edge
     # Mark the vertical ends.
@@ -832,7 +999,7 @@ def main():
         fee = t.get("fee")
         icon = poi_icon(t)
         poi = dict(id=pid, category=cat, name=t.get("name") or "", level=level, x=round(p[0], 1), y=round(p[1], 1), node=nid, **({"icon": icon} if icon else {}),
-                   opening_hours=t.get("opening_hours"), hours_source="osm" if t.get("opening_hours") else None, hours_verified=None)
+                   opening_hours=t.get("opening_hours"), hours_source="osm" if t.get("opening_hours") else None, hours_verified=None, _source=f"osm:{'node' if 'lat' in obj else 'way'}/{src_id}")
         if fee in ("no",):
             poi["fee"] = "free"
         elif fee:
@@ -871,23 +1038,32 @@ def main():
     for p in edits.get("pois", []):
         p = dict(p)
         p["level"] = level_id[str(p["level"])]
+        p.setdefault("_source", "manual:edits pois (see the sources list)")
         # "attach": [x, y] joins the place to the walking graph there instead of at its pin (a shop inside a building
         # with no mapped paths, whose nearest node would otherwise be across a track).
         ax, ay = p.pop("attach", None) or (p["x"], p["y"])
         p["node"] = names.get(nearest(ax, ay, p["level"])[0]) or min(((math.hypot(n["x"] - ax, n["y"] - ay), n["id"]) for n in out_nodes if n["level"] == p["level"]))[1]
         pois = [q for q in pois if q["id"] != p["id"]] + [p]
 
+    def level_out(l):
+        o = dict(id=l["id"], name=l["name"], order=l["order"], _source=l.get("_source") or f"osm:level={l['osm']}")
+        if "height_m" in l:
+            o["height_m"] = l["height_m"]
+            o["_source"] = l.get("height_source") or o["_source"]
+        return o
+
     out = dict(
+        schema=2,
         station_id=sid,
         name=name,
         updated=datetime.date.today().isoformat(),
         quality=edits.get("quality", "osm_draft"),
-        sources=[dict(type="osm", license="ODbL", retrieved=osm["retrieved"], url="https://www.openstreetmap.org/copyright")] + edits.get("sources", []),
+        sources=[dict(type="osm", license="ODbL", retrieved=osm["retrieved"], url="https://www.openstreetmap.org/copyright", note="via the Overpass API" if osm.get("source") == "overpass" else "from the Geofabrik/openstreetmap.fr extract")] + edits.get("sources", []),
         changelog=edits.get("changelog", []),
         coord_system="local_m",
         origin=dict(lat=lat0, lon=lon0),
         view=dict(rotation=edits.get("rotation", 0)),
-        levels=[dict(id=l["id"], name=l["name"], order=l["order"]) for l in edits["levels"]],
+        levels=[level_out(l) for l in edits["levels"]],
         shapes=[s for s in shapes if len(s["points"]) >= (2 if s["kind"] == "track" else 3)],
         platforms=[p for p in out_platforms if p["node"] in names],
         nodes=out_nodes,
@@ -898,7 +1074,10 @@ def main():
         s["points"] = [[round(x, 1), round(y, 1)] for x, y in s["points"]]
     for p in out["platforms"]:
         p["geometry"] = [[[round(x, 1), round(y, 1)] for x, y in g] for g in p["geometry"]]
-    path = os.path.join(ROOT, f"data/stations/{sid}.json")
+        if "height_m" in edits.get("platform_heights", {}).get(p["ref"], {}):
+            p["height_m"] = edits["platform_heights"][p["ref"]]["height_m"]
+            p["_source"] += f"; height from {edits['platform_heights'][p['ref']]['_source']}"
+    path = os.path.join(ROOT, f"data/stations/{safe}.json")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     json.dump(out, open(path, "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{name}: {len(out['platforms'])} platforms, {len(out_nodes)} nodes, {len(out_edges)} edges, {len(pois)} amenities, {os.path.getsize(path) // 1024} KB")

@@ -9,8 +9,9 @@ const cache = new Map<string, { mtime: number; map: StationMap | null }>();
 
 /** The station's map, or null when there isn't one (or it doesn't validate; that's logged). */
 export function stationMap(stationId: string, log: (m: string) => void = console.warn): StationMap | null {
-  if (!/^[\w-]+$/.test(stationId)) return null;
-  const file = path.join(DIR, `${stationId}.json`);
+  if (!/^[\w:-]+$/.test(stationId)) return null;
+  // Finnish ids carry a colon ("fi:HKI"); the file is named with an underscore instead (fi_HKI.json).
+  const file = path.join(DIR, `${stationId.replace(/:/g, '_')}.json`);
   let mtime: number;
   try {
     mtime = fs.statSync(file).mtimeMs;

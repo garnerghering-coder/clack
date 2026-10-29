@@ -136,11 +136,23 @@ public nonisolated struct StationLevel: Codable, Hashable, Sendable, Identifiabl
     public let name: String
     /// Higher is further up; used for "up" and "down" in directions.
     public let order: Int
+    /// Schema 2: floor height in metres above the reference level (the main platforms), when measured.
+    public let heightM: Double?
+    /// Schema 2: where the fact comes from ("osm:way/123", "walk:<log>", "plan:…").
+    public let source: String?
 
-    public init(id: String, name: String, order: Int) {
+    public enum CodingKeys: String, CodingKey {
+        case id, name, order
+        case heightM = "height_m"
+        case source = "_source"
+    }
+
+    public init(id: String, name: String, order: Int, heightM: Double? = nil, source: String? = nil) {
         self.id = id
         self.name = name
         self.order = order
+        self.heightM = heightM
+        self.source = source
     }
 }
 
@@ -150,12 +162,47 @@ public nonisolated struct StationShape: Codable, Hashable, Sendable {
     public let kind: ShapeKind
     public let name: String?
     public let points: [Pt]
+    /// Schema 2: for a track, its number when the rails carry one.
+    public let ref: String?
+    /// Schema 2: a building's height in metres, when the source gives one.
+    public let heightM: Double?
+    public let source: String?
 
-    public init(level: String, kind: ShapeKind, name: String?, points: [Pt]) {
+    public enum CodingKeys: String, CodingKey {
+        case level, kind, name, points, ref
+        case heightM = "height_m"
+        case source = "_source"
+    }
+
+    public init(level: String, kind: ShapeKind, name: String?, points: [Pt], ref: String? = nil, heightM: Double? = nil, source: String? = nil) {
         self.level = level
         self.kind = kind
         self.name = name
         self.points = points
+        self.ref = ref
+        self.heightM = heightM
+        self.source = source
+    }
+}
+
+/// Schema 2: one side of a platform where trains stop, along the rails, with the track it serves when known.
+public nonisolated struct PlatformEdge: Codable, Hashable, Sendable {
+    /// Nil when the sources don't say which side is which track.
+    public let track: String?
+    public let points: [Pt]
+    public let source: String
+    public let note: String?
+
+    public enum CodingKeys: String, CodingKey {
+        case track, points, note
+        case source = "_source"
+    }
+
+    public init(track: String?, points: [Pt], source: String, note: String? = nil) {
+        self.track = track
+        self.points = points
+        self.source = source
+        self.note = note
     }
 }
 
@@ -170,14 +217,28 @@ public nonisolated struct StationPlatform: Codable, Hashable, Sendable, Identifi
     public let geometry: [[Pt]]
     /// The node a route starts or ends at (the middle of the platform).
     public let node: String
+    /// Schema 2: platform surface above the rail head, metres, when a source gives it.
+    public let heightM: Double?
+    /// Schema 2: the platform's edges along the tracks.
+    public let edges: [PlatformEdge]?
+    public let source: String?
 
-    public init(id: String, ref: String, tracks: [String], level: String, geometry: [[Pt]], node: String) {
+    public enum CodingKeys: String, CodingKey {
+        case id, ref, tracks, level, geometry, node, edges
+        case heightM = "height_m"
+        case source = "_source"
+    }
+
+    public init(id: String, ref: String, tracks: [String], level: String, geometry: [[Pt]], node: String, heightM: Double? = nil, edges: [PlatformEdge]? = nil, source: String? = nil) {
         self.id = id
         self.ref = ref
         self.tracks = tracks
         self.level = level
         self.geometry = geometry
         self.node = node
+        self.heightM = heightM
+        self.edges = edges
+        self.source = source
     }
 }
 
@@ -189,8 +250,14 @@ public nonisolated struct StationNode: Codable, Hashable, Sendable, Identifiable
     public let y: Double
     public let platform: String?
     public let name: String?
+    public let source: String?
 
-    public init(id: String, type: StationNodeType, level: String, x: Double, y: Double, platform: String?, name: String?) {
+    public enum CodingKeys: String, CodingKey {
+        case id, type, level, x, y, platform, name
+        case source = "_source"
+    }
+
+    public init(id: String, type: StationNodeType, level: String, x: Double, y: Double, platform: String?, name: String?, source: String? = nil) {
         self.id = id
         self.type = type
         self.level = level
@@ -198,6 +265,7 @@ public nonisolated struct StationNode: Codable, Hashable, Sendable, Identifiable
         self.y = y
         self.platform = platform
         self.name = name
+        self.source = source
     }
 }
 
@@ -212,13 +280,18 @@ public nonisolated struct StationEdge: Codable, Hashable, Sendable {
     /// Polyline for drawing, from to to; straight when missing.
     public let geometry: [Pt]?
     public let source: String?
+    /// Schema 2: an escalator's direction, from → to ("up", "down", "both"), when the source says.
+    public let direction: String?
+    /// Schema 2: where the edge comes from ("osm:way/123", "manual:…", "derived:…").
+    public let sourceRef: String?
 
     public enum CodingKeys: String, CodingKey {
-        case from, to, seconds, kind, meters, geometry, source
+        case from, to, seconds, kind, meters, geometry, source, direction
         case stepFree = "step_free"
+        case sourceRef = "_source"
     }
 
-    public init(from: String, to: String, seconds: Double, stepFree: Bool, kind: EdgeKind, meters: Double?, geometry: [Pt]?, source: String?) {
+    public init(from: String, to: String, seconds: Double, stepFree: Bool, kind: EdgeKind, meters: Double?, geometry: [Pt]?, source: String?, direction: String? = nil, sourceRef: String? = nil) {
         self.from = from
         self.to = to
         self.seconds = seconds
@@ -227,6 +300,8 @@ public nonisolated struct StationEdge: Codable, Hashable, Sendable {
         self.meters = meters
         self.geometry = geometry
         self.source = source
+        self.direction = direction
+        self.sourceRef = sourceRef
     }
 }
 
@@ -279,15 +354,18 @@ public nonisolated struct StationPoi: Codable, Hashable, Sendable, Identifiable 
     public let hoursVerified: String?
     /// The place's own outline (a shop's unit), when it is mapped as one; otherwise it's drawn as a pin.
     public let outline: [Pt]?
+    /// Schema 2: where the place comes from.
+    public let source: String?
 
     public enum CodingKeys: String, CodingKey {
         case id, category, icon, name, level, x, y, node, fee, outline
         case openingHours = "opening_hours"
         case hoursSource = "hours_source"
         case hoursVerified = "hours_verified"
+        case source = "_source"
     }
 
-    public init(id: String, category: PoiCategory, icon: String?, name: String, level: String, x: Double, y: Double, node: String, fee: PoiFee?, openingHours: String?, hoursSource: String?, hoursVerified: String?, outline: [Pt]?) {
+    public init(id: String, category: PoiCategory, icon: String?, name: String, level: String, x: Double, y: Double, node: String, fee: PoiFee?, openingHours: String?, hoursSource: String?, hoursVerified: String?, outline: [Pt]?, source: String? = nil) {
         self.id = id
         self.category = category
         self.icon = icon
@@ -301,6 +379,7 @@ public nonisolated struct StationPoi: Codable, Hashable, Sendable, Identifiable 
         self.hoursSource = hoursSource
         self.hoursVerified = hoursVerified
         self.outline = outline
+        self.source = source
     }
 }
 
@@ -336,6 +415,8 @@ public nonisolated struct StationMapChange: Codable, Hashable, Sendable {
 /// A station's indoor map (`GET /api/stations/:id/map`; docs/swift-port/API.md §2.3). Coordinates are metres in a
 /// local frame around `origin`: x east, y south.
 public nonisolated struct StationMap: Codable, Hashable, Sendable {
+    /// 1 (or absent): the original format; 2: sources on every element, heights and platform edges (build 54).
+    public let schema: Int?
     public let stationId: String
     public let name: String
     public let updated: String
@@ -371,11 +452,12 @@ public nonisolated struct StationMap: Codable, Hashable, Sendable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois
+        case schema, name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois
         case stationId = "station_id"
     }
 
-    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi]) {
+    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi], schema: Int? = nil) {
+        self.schema = schema
         self.stationId = stationId
         self.name = name
         self.updated = updated
