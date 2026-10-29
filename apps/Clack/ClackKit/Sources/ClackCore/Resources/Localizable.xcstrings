@@ -21025,6 +21025,74 @@
           }
         }
       }
+    },
+    "train.usuallyLate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usually {{low}}–{{high}} min late at {{station}}, {{late}} of {{days}} days"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vanligen {{low}}–{{high}} min sen i {{station}}, {{late}} av {{days}} dagar"
+          }
+        }
+      }
+    },
+    "train.usuallyOnTime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usually on time at {{station}}: {{ontime}} of {{days}} days within 5 min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vanligen i tid i {{station}}: {{ontime}} av {{days}} dagar inom 5 min"
+          }
+        }
+      }
+    },
+    "train.historySource" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From Clack’s own record of actual times, the last 28 days"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från Clacks egen registrering av faktiska tider, de senaste 28 dagarna"
+          }
+        }
+      }
+    },
+    "change.historyNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allows {{min}} min for this train’s usual lateness here"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Räknar med {{min}} min för tågets vanliga försening här"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

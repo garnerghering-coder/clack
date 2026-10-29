@@ -121,6 +121,9 @@ public nonisolated struct PlannedChange: Codable, Hashable, Sendable {
     public let comfort: ChangeComfort
     /// `hub`, `mid` or `default`; nil from older servers.
     public var tier: String? = nil
+    /// The incoming train's usual lateness here, already taken off the gap in `comfort` (BUILDOUT O4); nil without a week of record.
+    public var typicalLateMin: Int? = nil
+    public var historyDays: Int? = nil
 
     public init(stationId: String, name: String, gapMin: Int, minMin: Int, comfort: ChangeComfort) {
         self.stationId = stationId

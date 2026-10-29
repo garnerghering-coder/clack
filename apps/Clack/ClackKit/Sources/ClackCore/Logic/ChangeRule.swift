@@ -29,6 +29,19 @@ public nonisolated enum ChangeRule {
         max(tierMinimum(tier), crossBorderMinimum(a, b))
     }
 
+    /// History-aware (BUILDOUT O4, the same as packages/shared/src/changes.ts): the incoming train's usual lateness at
+    /// the station, the 80th percentile of its arrival delay over the last 28 days, is taken off the gap first, and
+    /// only once the record has a week or more of days for it.
+    public static let historyMinDays = 7
+
+    public static func typicalLateMin(days: Int, p80Min: Double) -> Int? {
+        days >= historyMinDays ? max(0, Int(p80Min.rounded())) : nil
+    }
+
+    public static func comfort(gapMin: Int, minMin: Int, typicalLateMin: Int?) -> ChangeComfort {
+        comfort(gapMin: gapMin - (typicalLateMin ?? 0), minMin: minMin)
+    }
+
     public static func comfort(gapMin: Int, minMin: Int) -> ChangeComfort {
         let spare = Double(gapMin - minMin)
         if spare < 0 { return .risky }

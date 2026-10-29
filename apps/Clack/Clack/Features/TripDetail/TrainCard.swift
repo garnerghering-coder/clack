@@ -40,6 +40,16 @@ struct TrainCard: View {
             } else {
                 Text(l10n.t("train.unknown")).clack(.caption).foregroundStyle(Ink.text2)
             }
+            // How it usually runs at your stop, from Clack's own record (BUILDOUT O4); silent under four days.
+            if let h = leg.leg.arrivalHistory, h.days >= 4, let station = leg.leg.destination?.name {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(h.highMin >= 5
+                        ? l10n.t("train.usuallyLate", ["low": String(Int(h.lowMin)), "high": String(Int(h.highMin)), "station": station, "late": String(h.lateDays), "days": String(h.days)])
+                        : l10n.t("train.usuallyOnTime", ["station": station, "ontime": String(h.onTimeDays), "days": String(h.days)]))
+                        .clack(.caption).foregroundStyle(h.highMin >= 5 ? Ink.lateInk : Ink.onTimeInk)
+                    Text(l10n.t("train.historySource")).clack(.micro).foregroundStyle(Ink.text3)
+                }
+            }
             Button(picking ? l10n.t("train.cancel") : l10n.t("train.change")) { picking.toggle() }
                 .buttonStyle(LinkButtonStyle())
             if picking { picker(current: leg.leg.trainType, source: source, operatorId: operatorId) }

@@ -37,7 +37,7 @@ describe('the journey planner', () => {
     const db = await setup();
     const js = plan(db, await dayIndex(db, D), 'jo', 'kd', day, day + 86400_000);
     expect(js.map((j) => j.legs.map((l) => l.trainNumber))).toEqual([['17601', '1033', '835'], ['27616', '307']]);
-    expect(js[1]!.changes).toEqual([{ stationId: 'ns', name: 'Nässjö C', gapMin: 22, minMin: 7, comfort: 'relaxed', tier: 'default' }]);
+    expect(js[1]!.changes).toEqual([{ stationId: 'ns', name: 'Nässjö C', gapMin: 22, minMin: 7, comfort: 'relaxed', tier: 'default', typicalLateMin: null, historyDays: 0 }]);
     // København H: a cross-border change at a hub needs 15, not 7 + 10.
     expect(js[0]!.changes.map((c) => [c.name, c.gapMin, c.minMin])).toEqual([['Alvesta', 10, 7], ['København H', 48, 15]]);
   });

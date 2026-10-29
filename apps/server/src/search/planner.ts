@@ -8,7 +8,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { sql } from 'drizzle-orm';
-import { comfortOf, countryOfStops, minChangeMin, type Comfort, type Tier } from '@clack/shared';
+import { comfortOf, comfortWithHistory, countryOfStops, minChangeMin, typicalLateMin, type Comfort, type Tier } from '@clack/shared';
+import { punctuality } from '../stats/punctuality.js';
 import type { Db } from '../db/client.js';
 import { REPO_ROOT } from '../env.js';
 import { addDays } from '../lib/time.js';
@@ -187,6 +188,10 @@ export interface PlannedChange {
   comfort: Comfort;
   /** The station's tier, which the minimum comes from (the app's change cards work the verdict out again from it). */
   tier: Tier;
+  /** The incoming train's usual lateness here (minutes, taken off the gap in `comfort`), when the record has a week or more. */
+  typicalLateMin?: number | null;
+  /** Days of record behind `typicalLateMin` (0 when there is none). */
+  historyDays?: number;
 }
 
 export interface PlannedJourney {
@@ -280,7 +285,27 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
         found.push(j);
       }
   }
-  return rank(found);
+  return withHistory(db, rank(found));
+}
+
+/**
+ * The history-aware verdict (BUILDOUT O4): each change is judged again with the incoming train's usual lateness at
+ * the station taken off the gap (packages/shared/src/changes.ts `comfortWithHistory`, from the observed record).
+ * Done after ranking, on the few journeys left, so the search itself stays fast; a change that becomes risky drops
+ * the journey, as the planner never offers a risky change.
+ */
+export function withHistory(db: Db, journeys: PlannedJourney[]): PlannedJourney[] {
+  return journeys
+    .map((j) => ({
+      ...j,
+      changes: j.changes.map((c, i) => {
+        const incoming = j.legs[i]!;
+        const p = incoming.trainNumber ? punctuality(db, { trainNumber: incoming.trainNumber, stationId: incoming.to.stationId, before: incoming.serviceDate }) : null;
+        const typical = p ? typicalLateMin(p.days, p.p80Min) : null;
+        return { ...c, comfort: comfortWithHistory(c.gapMin, c.minMin, typical), typicalLateMin: typical, historyDays: p?.days ?? 0 };
+      }),
+    }))
+    .filter((j) => !j.changes.some((c) => c.comfort === 'risky'));
 }
 
 const night = (j: PlannedJourney) => j.legs.some((l) => l.product === 'night');

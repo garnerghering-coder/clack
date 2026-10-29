@@ -128,6 +128,36 @@ public nonisolated struct OnboardFacts: Codable, Hashable, Sendable {
 }
 
 /// A station as a leg refers to it.
+/// A train's record at a station over a window of days (server `stats/punctuality.ts`): counts and quantiles of what
+/// happened, nothing predicted. Late is five minutes or more; cancellations count as late.
+public nonisolated struct Punctuality: Codable, Hashable, Sendable {
+    public let days: Int
+    public let lateDays: Int
+    public let onTimeDays: Int
+    public let canceledDays: Int
+    public let medianMin: Double
+    public let p80Min: Double
+    public let lowMin: Double
+    public let highMin: Double
+    public let from: String
+    public let to: String
+    public init(days: Int, lateDays: Int, onTimeDays: Int, canceledDays: Int, medianMin: Double, p80Min: Double, lowMin: Double, highMin: Double, from: String, to: String) {
+        self.days = days
+        self.lateDays = lateDays
+        self.onTimeDays = onTimeDays
+        self.canceledDays = canceledDays
+        self.medianMin = medianMin
+        self.p80Min = p80Min
+        self.lowMin = lowMin
+        self.highMin = highMin
+        self.from = from
+        self.to = to
+    }
+
+    /// The minutes the change rule allows for this train's usual lateness, when the record is long enough.
+    public var typicalLateMin: Int? { ChangeRule.typicalLateMin(days: days, p80Min: p80Min) }
+}
+
 public nonisolated struct StationRef: Codable, Hashable, Sendable, Identifiable {
     public let id: String
     public let name: String
@@ -291,6 +321,9 @@ public nonisolated struct Leg: Codable, Hashable, Sendable, Identifiable {
     public let destination: StationRef?
     /// Replaced as live updates arrive.
     public var live: LiveStateRow?
+    /// How this train usually arrives at the leg's last stop, from Clack's observed record (nil from older servers or
+    /// without a record).
+    public var arrivalHistory: Punctuality? = nil
 
     public init(id: String, status: LegStatus, dataQuality: DataQuality, trainNumber: String?, category: String?, serviceDate: String?, schedDep: Instant?, schedArr: Instant?, actualDep: Instant?, actualArr: Instant?, depDelayMin: Int?, arrDelayMin: Int?, depPlatform: String?, arrPlatform: String?, canceled: Bool, distanceM: Double?, isEstimatedGeometry: Bool, trainType: String?, trainTypeSource: TrainTypeSource?, onboard: OnboardFacts?, countryCodes: [String], journeyId: String?, timetableTripKey: String?, operatorId: String?, originStationId: String, destStationId: String, notes: String?, coach: String? = nil, seat: String? = nil, ride: Ride, rideReason: String? = nil, borderEvidence: BorderEvidence?, `operator`: LegOperator?, origin: StationRef?, destination: StationRef?, live: LiveStateRow? = nil, originTier: String? = nil, trainCountry: String? = nil) {
         self.originTier = originTier

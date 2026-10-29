@@ -42,3 +42,20 @@ export function countryOfStops(countries: (string | null | undefined)[]): string
   for (const [c, k] of n) if (best === null || k > n.get(best)!) best = c;
   return best;
 }
+
+// History-aware comfort (BUILDOUT O4, decided with the owner 2026-10-28): a train that is usually late at the change
+// station eats into the gap before you even arrive, so its usual lateness is taken off the gap first. "Usual" is the
+// 80th percentile of its arrival delay there over the last 28 days (stats/punctuality.ts), and only when the record
+// has at least HISTORY_MIN_DAYS days for it; with less history the plain rule stands. The same rule runs in the app
+// (ClackCore ChangeRule) with the figure the server sends on the leg.
+export const HISTORY_MIN_DAYS = 7;
+
+/** The minutes to allow for a train's usual lateness, or null when the record is too thin. Pure. */
+export function typicalLateMin(days: number, p80Min: number): number | null {
+  return days >= HISTORY_MIN_DAYS ? Math.max(0, Math.round(p80Min)) : null;
+}
+
+/** Comfort with the incoming train's usual lateness taken off the gap. Pure. */
+export function comfortWithHistory(gapMin: number, minMin: number, typicalLate: number | null): Comfort {
+  return comfortOf(gapMin - (typicalLate ?? 0), minMin);
+}

@@ -13,7 +13,8 @@ import { withLogo } from '../import/brands.js';
 import { liveFor, liveForMany } from '../live/tracker.js';
 import { updateRides } from './recording.js';
 import { parseCauses } from './causes.js';
-import { comfortOf, countryOfStops, minChangeMin } from '@clack/shared';
+import { comfortOf, comfortWithHistory, countryOfStops, minChangeMin, typicalLateMin } from '@clack/shared';
+import { punctuality, type Punctuality } from '../stats/punctuality.js';
 import { tierOf } from '../search/planner.js';
 import { zonedToUtc } from '../lib/time.js';
 
@@ -271,7 +272,13 @@ const legColumns = {
   borderEvidence: legs.borderEvidence,
 };
 
-function attachRefs<T extends { id: string; operatorId: string | null; originStationId: string; destStationId: string }>(db: Db, rows: T[]) {
+/** How the train usually arrives at the leg's last stop (BUILDOUT O4), from the observed record; null without one. */
+export function arrivalHistoryOf(db: Db, leg: { trainNumber: string | null; serviceDate: string | null; destStationId: string }): Punctuality | null {
+  if (!leg.trainNumber || !leg.serviceDate) return null;
+  return punctuality(db, { trainNumber: leg.trainNumber, stationId: leg.destStationId, before: leg.serviceDate });
+}
+
+function attachRefs<T extends { id: string; operatorId: string | null; originStationId: string; destStationId: string; trainNumber: string | null; serviceDate: string | null }>(db: Db, rows: T[]) {
   const ops = new Map(db.select().from(operators).all().map((o) => [o.id, o]));
   const ids = [...new Set(rows.flatMap((r) => [r.originStationId, r.destStationId]))];
   const st = new Map(
@@ -298,6 +305,7 @@ function attachRefs<T extends { id: string; operatorId: string | null; originSta
     operator: r.operatorId && ops.get(r.operatorId) ? withLogo(ops.get(r.operatorId)!) : null,
     origin: st.get(r.originStationId) ?? null,
     destination: st.get(r.destStationId) ?? null,
+    arrivalHistory: arrivalHistoryOf(db, r),
     /** The change rule's tier of the station the leg starts at (hub / mid / default), and the train's country. */
     originTier: tierOf(r.originStationId),
     trainCountry: countryOfStops(countries.get(r.id) ?? []),
@@ -426,7 +434,7 @@ export function getJourney(db: Db, userId: string, journeyId: string) {
  * uses: the real gap with the latest times (actual, else planned plus the delay), the minimum, and how comfortable it
  * is. Risky shows when a delay eats into a change.
  */
-export function journeyChanges(db: Db, list: { originStationId: string; destStationId: string; timetableTripKey: string | null; schedDep: Date | null; schedArr: Date | null; actualDep: Date | null; actualArr: Date | null; depDelayMin: number | null; arrDelayMin: number | null }[]) {
+export function journeyChanges(db: Db, list: { trainNumber?: string | null; serviceDate?: string | null; originStationId: string; destStationId: string; timetableTripKey: string | null; schedDep: Date | null; schedArr: Date | null; actualDep: Date | null; actualArr: Date | null; depDelayMin: number | null; arrDelayMin: number | null }[]) {
   const countryOf = (key: string | null) =>
     key ? countryOfStops((db.$client.prepare(`select s.country c from timetable_stop_times st join stations s on s.id = st.station_id where st.trip_key = ?`).all(key) as { c: string }[]).map((r) => r.c)) : null;
   const expected = (actual: Date | null, sched: Date | null, delay: number | null) => actual?.getTime() ?? (sched ? sched.getTime() + (delay ?? 0) * 60_000 : null);
@@ -436,6 +444,12 @@ export function journeyChanges(db: Db, list: { originStationId: string; destStat
     const planned = prev.schedArr && next.schedDep ? Math.round((next.schedDep.getTime() - prev.schedArr.getTime()) / 60_000) : null;
     const gapMin = arr !== null && dep !== null ? Math.round((dep - arr) / 60_000) : planned;
     const minMin = minChangeMin(tierOf(next.originStationId), countryOf(prev.timetableTripKey), countryOf(next.timetableTripKey));
-    return { index: i, stationId: next.originStationId, sameStation: prev.destStationId === next.originStationId, gapMin, plannedGapMin: planned, minMin, comfort: gapMin === null ? null : comfortOf(gapMin, minMin) };
+    // The incoming train's usual lateness here (BUILDOUT O4) is taken off the gap, as the planner does.
+    const history = arrivalHistoryOf(db, { trainNumber: prev.trainNumber ?? null, serviceDate: prev.serviceDate ?? null, destStationId: prev.destStationId });
+    const typical = history ? typicalLateMin(history.days, history.p80Min) : null;
+    return {
+      index: i, stationId: next.originStationId, sameStation: prev.destStationId === next.originStationId, gapMin, plannedGapMin: planned, minMin,
+      comfort: gapMin === null ? null : comfortWithHistory(gapMin, minMin, typical), typicalLateMin: typical, historyDays: history?.days ?? 0,
+    };
   });
 }

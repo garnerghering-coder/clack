@@ -166,6 +166,8 @@ public nonisolated struct ConnectionResult: Equatable, Sendable {
     public var gapMin: Int?
     public var minMin: Int?
     public var comfort: ChangeComfort?
+    /// The incoming train's usual lateness taken off the gap in `comfort` (BUILDOUT O4), when known.
+    public var typicalLateMin: Int?
 
     public init(status: ConnectionStatus, layoverSeconds: Int? = nil, walkSeconds: Double? = nil, slackSeconds: Double? = nil, estimated: Bool) {
         self.status = status

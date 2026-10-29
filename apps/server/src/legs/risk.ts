@@ -12,6 +12,7 @@ import type { Db } from '../db/client.js';
 import { delayObservations, legs, legStops, stations } from '../db/schema.js';
 import { trvQuery } from '../trafikverket/client.js';
 import { addDays, todayIn } from '../lib/time.js';
+import { punctuality } from '../stats/punctuality.js';
 
 export interface Departure {
   trainNumber: string;
@@ -102,6 +103,12 @@ export async function trainsAhead(deps: Departure[], boardSig: string, nextSig: 
 }
 
 /** The pattern for one train at one station from earlier days' observations. Pure. */
+/** The same rule on the observed record's figures: most days late and a median of 5 min or more. Pure. */
+export function patternFromHistory(h: { days: number; lateDays: number; medianMin: number }, station: string): RiskWarning | null {
+  if (h.days < 4 || h.lateDays / h.days < 0.6 || h.medianMin < 5) return null;
+  return { kind: 'train_pattern', station, days: h.days, lateDays: h.lateDays, medianMin: Math.min(h.medianMin, 98) };
+}
+
 export function patternWarning(obs: { delayMin: number | null; canceled: boolean }[], station: string): RiskWarning | null {
   const days = obs.length;
   const delays = obs.map((o) => (o.canceled ? 99 : (o.delayMin ?? 0)));
@@ -211,7 +218,18 @@ export async function legRisk(db: Db, userId: string, legId: string, opts: { now
       risk.limits.push('no_live_data');
     }
   }
-  if (boardSig && leg.trainNumber && dep - now <= 7 * 86400_000) {
+  // The past pattern: the observed record first (every country, departures from where you get on, 28 days;
+  // BUILDOUT O4), else what boards and these checks have recorded in Sweden.
+  let patternDone = false;
+  if (leg.trainNumber && dep - now <= 7 * 86400_000) {
+    const history = punctuality(db, { trainNumber: leg.trainNumber, stationId: leg.originStationId, before: leg.serviceDate ?? todayIn('Europe/Stockholm', now), event: 'dep' });
+    if (history && history.days >= 4) {
+      patternDone = true;
+      const p = patternFromHistory(history, board?.name ?? '');
+      if (p) risk.warnings.push(p);
+    }
+  }
+  if (!patternDone && boardSig && leg.trainNumber && dep - now <= 7 * 86400_000) {
     const today = todayIn('Europe/Stockholm', now);
     const obs = db
       .select({ delayMin: delayObservations.delayMin, canceled: delayObservations.canceled })

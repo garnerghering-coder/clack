@@ -177,7 +177,10 @@ public nonisolated enum TripsLogic {
             let minimum = ChangeRule.minimum(tier: b.originTier, from: a.trainCountry, to: b.trainCountry)
             judged.gapMin = gap
             judged.minMin = minimum
-            judged.comfort = a.canceled || b.canceled ? nil : ChangeRule.comfort(gapMin: gap, minMin: minimum)
+            // The incoming train's usual lateness here comes off the gap (BUILDOUT O4), as on the server.
+            let typical = a.arrivalHistory?.typicalLateMin
+            judged.typicalLateMin = typical
+            judged.comfort = a.canceled || b.canceled ? nil : ChangeRule.comfort(gapMin: gap, minMin: minimum, typicalLateMin: typical)
         }
         return (judged, noPath)
     }

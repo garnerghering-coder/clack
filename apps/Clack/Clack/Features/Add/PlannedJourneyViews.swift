@@ -14,15 +14,26 @@ struct ChangeLine: View {
     let station: String
     let gapMin: Int
     let comfort: ChangeComfort?
+    /// The incoming train's usual lateness, already in the verdict (shown as a note).
+    var typicalLateMin: Int? = nil
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            line
+            if let typical = typicalLateMin, typical > 0 {
+                Text(l10n.t("change.historyNote", ["min": String(typical)])).clack(.micro).foregroundStyle(Ink.text3)
+            }
+        }
+    }
+
+    private var line: some View {
         let text = l10n.t("change.line", ["station": station, "min": String(gapMin)])
         // One text, so a long station name wraps as a sentence does; VoiceOver reads it without the dot.
         let word = comfort.map { l10n.t("comfort.\($0.rawValue)") }
         let line = word.map { w in
             Text(text).foregroundStyle(Ink.text2) + Text(" · ").foregroundStyle(Ink.text3) + Text(w).foregroundStyle(Self.color(comfort!)).fontWeight(.semibold)
         } ?? Text(text).foregroundStyle(Ink.text2)
-        line
+        return line
             .clack(.caption)
             .fixedSize(horizontal: false, vertical: true)
             .accessibilityLabel(word.map { "\(text), \($0)" } ?? text)
@@ -72,7 +83,7 @@ struct JourneyResultCard: View {
                 }
                 if i < journey.changes.count {
                     let c = journey.changes[i]
-                    ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort)
+                    ChangeLine(station: c.name, gapMin: c.gapMin, comfort: c.comfort, typicalLateMin: c.typicalLateMin)
                 }
             }
         }

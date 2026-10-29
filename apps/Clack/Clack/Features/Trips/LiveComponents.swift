@@ -167,7 +167,12 @@ struct ConnectionChip: View {
     var body: some View {
         // The change rule's verdict when the server sends what it needs (build 50 on); the old walk-based one before.
         if let comfort = result.comfort, let gap = result.gapMin {
-            StatusLine(.band(Self.band(comfort)), "\(l10n.t("comfort.\(comfort.rawValue)")) · \(l10n.t("connection.wait", ["min": String(gap)]))")
+            VStack(alignment: .leading, spacing: 2) {
+                StatusLine(.band(Self.band(comfort)), "\(l10n.t("comfort.\(comfort.rawValue)")) · \(l10n.t("connection.wait", ["min": String(gap)]))")
+                if let typical = result.typicalLateMin, typical > 0 {
+                    Text(l10n.t("change.historyNote", ["min": String(typical)])).clack(.micro).foregroundStyle(Ink.text3)
+                }
+            }
         } else {
             StatusLine(.band(band), text)
         }
