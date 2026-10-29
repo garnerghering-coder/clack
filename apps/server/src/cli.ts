@@ -44,8 +44,9 @@ if (cmd === 'gtfs') {
   const { positionCheck } = await import('./tools/positionCheck.js');
   const minutes = Number(flags.find((f) => f.startsWith('--minutes='))?.slice(10)) || undefined;
   const server = flags.find((f) => f.startsWith('--server='))?.slice(9);
+  const file = flags.find((f) => f.startsWith('--file='))?.slice(7);
   const admin = flags.find((f) => f.startsWith('--admin='))?.slice(8) ?? process.env.CLACK_ADMIN_TOKEN;
-  const { markdown } = await positionCheck(db, { minutes, server, admin, log: (m) => console.error(m) });
+  const { markdown } = await positionCheck(db, { minutes, server, admin, file, log: (m) => console.error(m) });
   console.log(markdown);
 } else if (cmd === 'station-tiers') {
   const { stationTiers } = await import('./tools/stationTiers.js');

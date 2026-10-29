@@ -5,7 +5,7 @@
 import type { Db } from '../db/client.js';
 import { railGraph } from '../geo/railGraph.js';
 import { LiveMapIngest } from '../livemap/ingest.js';
-import type { HistogramSummary, QualityReport } from '../live/quality.js';
+import { LiveQuality, type HistogramSummary, type QualityReport } from '../live/quality.js';
 
 export interface PositionCheckOptions {
   /** How long to listen to Trafikverket here (default 10). Ignored with --server. */
@@ -13,13 +13,17 @@ export interface PositionCheckOptions {
   /** A running server to read the counters from, with its admin token. */
   server?: string;
   admin?: string;
+  /** A copy of the server's data/cache/live-quality.json (the admin route needs a user id the CLI has not got). */
+  file?: string;
   log?: (m: string) => void;
 }
 
 export async function positionCheck(db: Db, opts: PositionCheckOptions = {}): Promise<{ report: QualityReport; markdown: string }> {
   const log = opts.log ?? (() => {});
   let report: QualityReport;
-  if (opts.server) {
+  if (opts.file) {
+    report = LiveQuality.load(opts.file).report();
+  } else if (opts.server) {
     const res = await fetch(`${opts.server.replace(/\/$/, '')}/api/live/quality`, { headers: { 'x-clack-admin': opts.admin ?? '' } });
     if (!res.ok) throw new Error(`${opts.server}: HTTP ${res.status} (is the admin token right?)`);
     report = (await res.json()) as QualityReport;

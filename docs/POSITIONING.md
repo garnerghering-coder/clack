@@ -141,3 +141,51 @@ What this says, and what it doesn't yet:
   samples in this run (Sweden only).
 - Nothing here is from the hosted server yet: it starts counting at the build 54 deploy, and
   `GET /api/live/quality` (admin) has the live numbers for all four sources from then on.
+
+### 2026-10-29, hosted server at b6e4ac4, 07:28 to 12:14 UTC (4.8 hours, not days)
+
+Read from a copy of `data/cache/live-quality.json` (`position-check --file=`; the admin route also wants a user id the
+CLI does not send). The counters file was last saved 12:14 UTC and the server was not asked again; `since` is
+07:28 UTC, not the 06:48 first thought. Everything here is a few hours of one day: read it as a first look.
+Rejseplanen (Denmark) has no delivery or passage samples at all, and Entur has delivery only (no passage offsets);
+Digitraffic and Trafikverket have both.
+
+| What | Result |
+|---|---|
+| Delivery lag (receive − fix time), median (p90), n | Trafikverket 6.9 s (12.4), 30 260; Digitraffic 4.6 s (7.6), 15 475; Entur 17.7 s (28.1), 3 559; Rejseplanen none |
+| Offset, passing without a stop (the cleanest measure; Digitraffic only) | commuter 0 s (n 143), intercity -1.8 s (n 72), high-speed -2.5 s (n 49, p90 28: thin) |
+| Offset, arrivals (first within 150 m vs reported) | Trafikverket commuter +2.8 s (n 140), regional +2.1 s (213), intercity +8.8 (11), high-speed +2.7 (9); Digitraffic commuter -25.6 s (176), intercity -25.1 (15) |
+| Offset, departures (last leaving 150 m) | Trafikverket commuter +15.9 s (147), regional +11.6 (193); Digitraffic commuter +15.3 (170) |
+| Position check, old rule → run profile, median (p90), metres | commuter 649 → 521 (1 998 → 1 909), n 533; regional 1 319 → 1 091 (5 302 → 5 285), n 2 027; intercity 2 746 → 2 508, n 205; high-speed 3 231 → 2 797 (p90 ~15.4 km both), n 398; night n 1 (too thin) |
+| Standing placement, platform point vs fix, median metres (n) | Lund C 120 (22), Jönköping C 74 (13), Stockholm C 177 (12), Malmö C 193 (19), Helsingborg C 5 (3), Växjö 69 (4), Hässleholm 931 (4), Alvesta 499 (6), Katrineholm C 287 (8); under 5 samples is too thin |
+| Track side, share where the raw fix lay nearer the chosen track | SE 68% (10 039 vs 4 619), NO 64% (1 828 vs 1 033), FI 61% (2 156 vs 1 392), DK 42% (1 897 vs 2 576) |
+
+What was decided, and why:
+
+- **Timestamp offsets stay 0 for all four sources.** Trafikverket's arrival medians (+2.1 to +2.8 s) clear 2 s on
+  paper, but the p90 is 30 to 43 s, so the median's own uncertainty is about 2 s: not distinguishable from 0. The
+  arrival and departure rows measure the 150 m circle as much as the clock (Digitraffic arrivals read -25 s, because
+  Fintraffic reports arrival at standstill, after the train has crossed the circle; departures read +12 to +16 s for
+  the reverse). Digitraffic's passes, which have no stop to confuse them, read 0 and -1.8 s: the timestamp is
+  right. Trafikverket has no passes in the counters; adding a pass measure for it (a `Passage` row) would settle it.
+  Entur and Rejseplanen have no samples.
+- **Accelerations (0.5 and 0.6 m/s2) are unchanged.** The data does not measure acceleration. The run profile beats
+  the constant fraction in every product (median 5 to 21% smaller, p90 about the same); that supports having the
+  profile, not a change of its constants.
+- **The Lund C 9 km was not the station id; it was which fixes were counted.** The standing check took any fix of a
+  train whose last report was an arrival, with no check that the fix came after the arrival or that the train was
+  still: a fix from the approach, or from a train that had left whose departure report was late, was measured against
+  the platform. Now only a fix at or after the arrival report with a speed under 3 km/h counts (`countsAsStanding`).
+  In this window Lund C already reads 120 m median (p90 235, 1 of 22 over 3.2 km), but Alvesta (p90 79 km),
+  Hässleholm, Katrineholm C, Malmö C (p90 16 km) and Kristianstad C still show the same far outliers, which this
+  fix should remove; check after the next deploy.
+- **Denmark's side rule is off.** 42% agreement over 4 473 samples is below the 50% of a coin flip, so the sources'
+  "right" does not fit this feed (the fix may be coarse, or the track data may be wrong there). `RUNNING_SIDE.DK`
+  is `null` and the nearest track is used. Sweden (68%), Norway (64%) and Finland (61%) are above chance but well
+  short of clean; left as they are. The samples are one morning; the earlier Sweden-only run read 65%. Sweden's
+  Öresund and Finland's Helsinki areas are already excepted.
+
+Needs more days of data: a weekday-and-weekend week of Trafikverket and Digitraffic offsets (and a Trafikverket pass
+measure); any Entur and Rejseplanen offsets; high-speed and night position checks (the p90 of ~15 km is bad inputs,
+not shape); per-line track side for Norway and Finland, and why Denmark disagrees; the Alvesta-type standing outliers
+after the fix.

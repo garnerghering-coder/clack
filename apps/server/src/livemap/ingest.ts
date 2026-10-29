@@ -14,7 +14,7 @@ import { AnnouncementCache, trainKey, type TrainInfo } from './announcements.js'
 import { segmentBetween, segmentCached, type StationPoint } from '../geo/trackSegments.js';
 import type { RailGraph } from '../geo/railGraph.js';
 import { cumulative, GPS_FRESH_MS, pointAt } from '../live/progress.js';
-import { estimateAlong, type TrainState } from '../live/positioning.js';
+import { countsAsStanding, estimateAlong, type TrainState } from '../live/positioning.js';
 import { locateOnSegment } from '../live/locate.js';
 import { Placement } from '../live/placement.js';
 import type { LatLon } from '@clack/shared';
@@ -496,6 +496,7 @@ export class LiveMapIngest extends EventEmitter {
     if (!a || !b) return;
     const product = productOfText(info.productName, null);
     if (info.lastWasArrival) {
+      if (!countsAsStanding(fix.at, info.lastAt, fix.speedKmh)) return;
       const placed = this.placement.standing(a.id, a.lat, a.lon, info.lastTrack);
       if (placed.how === 'platform') {
         this.checked.set(k, fix.at);

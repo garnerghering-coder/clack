@@ -187,6 +187,15 @@ export const TIMESTAMP_OFFSET_S: Record<'trafikverket' | 'entur' | 'digitraffic'
 export const STANDING_KMH = 3;
 export const STANDING_NEAR_M = 400;
 
+/**
+ * Whether a fix may count in the standing-placement counters (platform point vs the fix of a train reported standing
+ * there). The train is only standing from its reported arrival until it moves: a fix from before the arrival report
+ * (still on approach) or one with speed (the train has left and its departure report is late or missing) is
+ * somewhere else, and counted anyway it made Lund C read 9 km off and Alvesta's p90 79 km (docs/POSITIONING.md).
+ */
+export const countsAsStanding = (fixAt: number, arrivedAt: number | null, speedKmh: number | null): boolean =>
+  arrivedAt !== null && fixAt >= arrivedAt && (speedKmh === null || speedKmh < STANDING_KMH);
+
 export const standingByGps = (speedKmh: number | null, nearStationM: number | null): boolean =>
   speedKmh !== null && speedKmh < STANDING_KMH && nearStationM !== null && nearStationM <= STANDING_NEAR_M;
 
@@ -208,7 +217,15 @@ export type Side = 'left' | 'right';
  * (SIDE_EXCEPTIONS) and the nearest track is used. The quality counters record how often the raw fix agrees with
  * the chosen track per country, so a wrong rule shows up and can be turned off (quality.ts, docs/POSITIONING.md).
  */
-export const RUNNING_SIDE: Record<CountryCode, Side> = { SE: 'left', NO: 'right', DK: 'right', FI: 'right' };
+export const RUNNING_SIDE: Record<CountryCode, Side | null> = {
+  SE: 'left',
+  NO: 'right',
+  // Off: in 4 473 double-track samples on the hosted server (2026-10-29, 4.8 h) the raw fix lay nearer the chosen
+  // (right) track only 42% of the time, below the 50% of a coin flip, so the rule does not hold up against the
+  // feed. The nearest track is used until more data says why. (Counters: docs/POSITIONING.md.)
+  DK: null,
+  FI: 'right',
+};
 
 export const SIDE_EXCEPTIONS: { country: CountryCode; name: string; box: { minLat: number; maxLat: number; minLon: number; maxLon: number } }[] = [
   { country: 'SE', name: 'Öresund link, Malmö C to the bridge: right-hand running to match Denmark', box: { minLat: 55.5, maxLat: 55.66, minLon: 12.8, maxLon: 13.05 } },

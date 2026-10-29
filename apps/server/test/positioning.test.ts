@@ -24,6 +24,7 @@ import {
   snapToLine,
   speedAt,
   standingByGps,
+  countsAsStanding,
 } from '../src/live/positioning.js';
 import { locateOnSegment } from '../src/live/locate.js';
 import { Placement } from '../src/live/placement.js';
@@ -145,7 +146,7 @@ describe('standing and parallel tracks (§A.2, §A.5)', () => {
   it('knows each country’s side, and turns the rule off where the sources name an exception', () => {
     expect(runningSide('SE', 59.33, 18.06)).toBe('left');
     expect(runningSide('NO', 59.91, 10.75)).toBe('right');
-    expect(runningSide('DK', 55.67, 12.56)).toBe('right');
+    expect(runningSide('DK', 55.67, 12.56)).toBeNull(); // off: 42% agreement on the hosted server, see POSITIONING.md
     expect(runningSide('FI', 61.5, 23.77)).toBe('right');
     // Öresund link and the Helsinki commuter area: no rule.
     expect(runningSide('SE', 55.58, 12.95)).toBeNull();
@@ -414,5 +415,17 @@ describe('locateOnSegment for the other feeds', () => {
   it('uses a fresh fix as it is when it is off the track', () => {
     const gps = { lat: 59.5, lon: 18.3, at: ms('11:20'), bearing: 45, speedKmh: 80, lastSpeedKmh: 80, fresh: true, ageMs: 5000 };
     expect(locateOnSegment({ seg, placement }, { prev, next, left: ms('11:00'), arriving: ms('11:40'), standingAtPrev: false, gps, now: ms('11:20', '05'), country: 'FI', source: 'digitraffic' })).toMatchObject({ lat: 59.5, lon: 18.3, bearing: 45, estimated: false, progress: null });
+  });
+});
+
+describe('which fixes count as a train standing at its platform (the Lund C check)', () => {
+  it('counts a fix after the arrival report with no or a low speed', () => {
+    expect(countsAsStanding(2000, 1000, 0)).toBe(true);
+    expect(countsAsStanding(2000, 1000, null)).toBe(true);
+  });
+  it('leaves out a fix from before the arrival, and one with speed (the train has left, its departure report is late)', () => {
+    expect(countsAsStanding(900, 1000, 0)).toBe(false);
+    expect(countsAsStanding(2000, 1000, 60)).toBe(false);
+    expect(countsAsStanding(2000, null, 0)).toBe(false);
   });
 });
