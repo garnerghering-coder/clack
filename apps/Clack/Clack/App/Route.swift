@@ -24,6 +24,8 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case stationMap(StationMapLink)
     /// Settings > Station walks (owner test tool; debug and TestFlight builds).
     case walkLogger
+    /// The Ride view: Apple's 3D map following a train (BUILDOUT O3).
+    case ride(RideModel.Target)
     #if DEBUG
     /// Settings > Test alerts (debug builds only).
     case testAlerts
@@ -91,11 +93,14 @@ final class Router {
             if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
             #if DEBUG
             if raw == "rideproof" { tripsPath = [.rideProof] }
+            // `-open ride:replay` replays a run; `-open ride:<live id>` follows that train.
+            if raw == "ride:replay" { tripsPath = [.ride(.replay)] }
             #endif
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
                 if parts[0] == "journey" { tripsPath = [.journey(parts[1])] }
+                if parts[0] == "ride", parts[1] != "replay" { tripsPath = [.ride(.live(id: parts[1]))] }
                 if parts[0] == "map" {
                     tab = .explore
                     explorePath = [.board(stationId: parts[1], arrivals: false), .stationMap(StationMapLink(stationId: parts[1]))]
@@ -265,6 +270,7 @@ extension AppRoute {
         case .stationMap: .stationMap
         case .stations: .other
         case .walkLogger: .other
+        case .ride: .other
         #if DEBUG
         case .testAlerts: .other
         case .rideProof: .other

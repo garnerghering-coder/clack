@@ -18,6 +18,9 @@ struct ExploreScreen: View {
     @State private var basemap: Bool?
     @State private var now = Date().timeIntervalSince1970 * 1000
     @FocusState private var searchFocused: Bool
+    /// Settings → Map engine (BUILDOUT O3): the Clack map, or Apple Maps as a test.
+    @AppStorage(MapEngine.key) private var mapEngine = MapEngine.clack.rawValue
+    @State private var frameStats: (median: Double, p90: Double, trains: Int)?
 
     /// This tab is the one showing (the screen stays built while another is).
     private var active: Bool { router.tab == .explore }
@@ -50,7 +53,10 @@ struct ExploreScreen: View {
         .background {
             ZStack {
                 Ink.mapBg
-                if let basemap {
+                if mapEngine == MapEngine.apple.rawValue {
+                    AppleLiveMapView(controller: model.controller, dark: scheme == .dark)
+                        .id("apple-\(scheme == .dark)")
+                } else if let basemap {
                     LiveMapView(controller: model.controller, base: Config.apiBase, withBasemap: basemap, dark: scheme == .dark)
                         // Re-created when the theme changes: the basemap and every layer take their colours from it.
                         .id("\(scheme == .dark)-\(basemap)")
@@ -68,6 +74,7 @@ struct ExploreScreen: View {
         }
         .task {
             model.attach(app)
+            model.controller.onFrameStats = { median, p90, trains in frameStats = (median, p90, trains) }
             model.active = active
             model.dark = scheme == .dark
             basemap = await app.mapHasBasemap()
@@ -296,8 +303,20 @@ struct ExploreScreen: View {
                     MapButton(icon: "locate-fixed", label: l10n.t("liveMap.myLocation")) { model.centreOnMe() }
                 }
             }
-            Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen")
-                .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
+            if mapEngine == MapEngine.apple.rawValue {
+                // The test engine's readout: how long frames take (Garner judges smoothness with ~700 trains on his phone).
+                if let f = frameStats {
+                    Text(l10n.t("liveMap.appleTest", ["ms": String(format: "%.1f", f.median), "p90": String(format: "%.1f", f.p90), "n": String(f.trains)]))
+                        .clack(.micro).monospacedDigit().foregroundStyle(Ink.text2).allowsHitTesting(false)
+                        .padding(.vertical, 4).padding(.horizontal, 8)
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Radius.controlSm, style: .continuous))
+                }
+                Text("Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen")
+                    .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false).padding(.bottom, 20)
+            } else {
+                Text("© OpenStreetMap contributors · Protomaps · Trafikverket · Entur (NLOD) · Digitraffic (Fintraffic) · Rejseplanen")
+                    .clack(.mapAttribution).foregroundStyle(Ink.text3).allowsHitTesting(false)
+            }
         }
         .padding(.leading, 12).padding(.bottom, 8)
     }
@@ -444,6 +463,14 @@ struct ExploreScreen: View {
                 }
                 planButton(legId: detail.legId, trip: detail.trip)
             }
+            Button { router.push(.ride(.live(id: train.id))) } label: {
+                HStack(spacing: 8) {
+                    LucideIcon(name: "train-track", size: 16)
+                    Text(l10n.t("ride.open"))
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.clack(wide: true))
         }
     }
 
