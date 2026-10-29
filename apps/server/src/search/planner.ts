@@ -8,7 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { sql } from 'drizzle-orm';
-import { comfortOf, comfortWithHistory, countryOfStops, minChangeMin, typicalLateMin, type Comfort, type Tier } from '@clack/shared';
+import { comfortOf, comfortWithHistory, countryOfStops, minChangeMin, TIER_MIN, typicalLateMin, type Comfort, type Tier } from '@clack/shared';
 import { punctuality } from '../stats/punctuality.js';
 import type { Db } from '../db/client.js';
 import { REPO_ROOT } from '../env.js';
@@ -213,6 +213,17 @@ export interface PlannedJourney {
 interface Label { arr: number; trip: number; board: number; alight: number; prev: number | null }
 const keyOf = (station: number, night: boolean) => station * 2 + (night ? 1 : 0);
 
+/** Index in `list` (global stop indexes sorted by departure time) of the first departure at or after `t`. */
+function firstAtOrAfter(dep: Float64Array, list: Int32Array, t: number): number {
+  let lo = 0, hi = list.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (dep[list[mid]!]! < t) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
 /** Minutes a change at `station` from trip a to trip b needs. */
 const changeMs = (station: string, a: Trip, b: Trip) => minChangeMin(tierOf(station), a.country, b.country) * 60_000;
 
@@ -233,6 +244,16 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
   const seen = new Set<string>();
   const stopsCache = new Map<string, StopRow[]>();
 
+  // A train boarded at or before this stop, in this round, in this run or an earlier one (with the same night flag),
+  // already gave every later stop its label, and labels only get better: boarding it again adds nothing, so it is skipped.
+  const boarded: Map<number, number>[] = Array.from({ length: rounds }, () => new Map());
+  const alreadyRidden = (seen: Map<number, number>, bk: number, g: number) => {
+    const was = seen.get(bk);
+    if (was !== undefined && was <= g) return true;
+    seen.set(bk, g);
+    return false;
+  };
+
   const ride = (g0: number, prev: number | null, round: Map<number, Label>, marked: Map<number, Label>) => {
     const ti = ix.stopTrip[g0]!;
     const t = ix.trips[ti]!;
@@ -251,7 +272,8 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
 
   for (const t0 of times) {
     let marked = new Map<number, Label>();
-    for (const g of originDeps) if (ix.stopDep[g] === t0) ride(g, null, best[0]!, marked);
+    for (const g of originDeps)
+      if (ix.stopDep[g] === t0 && !alreadyRidden(boarded[0]!, ix.stopTrip[g]! * 2 + (ix.trips[ix.stopTrip[g]!]!.night ? 1 : 0), g)) ride(g, null, best[0]!, marked);
     for (let k = 1; k < rounds && marked.size; k++) {
       const next = new Map<number, Label>();
       for (const [key, lab] of marked) {
@@ -259,14 +281,22 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
         if (station === target) continue;
         const arriving = ix.trips[lab.trip]!;
         const sid = ix.stations[station]!;
-        for (const g of ix.deps.get(station) ?? []) {
+        const tierMs = TIER_MIN[tierOf(sid)] * 60_000;
+        const list = ix.deps.get(station);
+        if (!list) continue;
+        // The departures are sorted by time: start at the first one at or after the arrival (a hub has thousands).
+        for (let li = firstAtOrAfter(ix.stopDep, list, lab.arr); li < list.length; li++) {
+          const g = list[li]!;
           const d = ix.stopDep[g]!;
-          if (d < lab.arr) continue;
-          if (d - lab.arr > MAX_WAIT_MS) break;
+          const gap = d - lab.arr;
+          if (gap > MAX_WAIT_MS) break;
+          if (gap < tierMs) continue; // the station's tier minimum; the cross-border one is checked below
           const ti = ix.stopTrip[g]!;
           const trip = ix.trips[ti]!;
           if (ti === lab.trip || (trip.number && trip.number === arriving.number)) continue; // the same train
-          if (d - lab.arr < changeMs(sid, arriving, trip)) continue;
+          if (arriving.country !== trip.country && gap < changeMs(sid, arriving, trip)) continue;
+          const bk = ti * 2 + ((trip.night || key % 2 === 1) ? 1 : 0);
+          if (alreadyRidden(boarded[k]!, bk, g)) continue;
           ride(g, key, best[k]!, next);
         }
       }
@@ -286,6 +316,24 @@ export function plan(db: Db, ix: DayIndex, fromId: string, toId: string, from: n
       }
   }
   return withHistory(db, rank(found));
+}
+
+/**
+ * `plan`, remembered per built index for ten minutes: the app asks the same pair again (paging, reopening), and the
+ * answer only changes when the index is rebuilt (a new object, so a new cache) or the observed record moves a verdict
+ * (which `punctuality` itself keeps for an hour). Copies are returned, as `rank` marks `fastest` on what it is given.
+ */
+const planned = new WeakMap<DayIndex, Map<string, { at: number; journeys: PlannedJourney[] }>>();
+const PLAN_TTL_MS = 600_000;
+export function planCached(db: Db, ix: DayIndex, fromId: string, toId: string, from: number, until: number, maxChanges = 2, now = Date.now()): PlannedJourney[] {
+  const mine = planned.get(ix) ?? planned.set(ix, new Map()).get(ix)!;
+  const key = `${fromId}|${toId}|${from}|${until}|${maxChanges}`;
+  const hit = mine.get(key);
+  if (hit && now - hit.at < PLAN_TTL_MS) return hit.journeys.map((j) => ({ ...j }));
+  const journeys = plan(db, ix, fromId, toId, from, until, maxChanges);
+  mine.set(key, { at: now, journeys });
+  if (mine.size > 200) mine.delete(mine.keys().next().value!);
+  return journeys.map((j) => ({ ...j }));
 }
 
 /**

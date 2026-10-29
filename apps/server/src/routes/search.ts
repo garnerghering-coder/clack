@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from 'fastify';
-import { dayIndexWithin, plan, rank } from '../search/planner.js';
+import { dayIndexWithin, planCached, rank } from '../search/planner.js';
 import type { Db } from '../db/client.js';
 import { addDays, serviceTimeToUtc, todayIn } from '../lib/time.js';
 import { createSmartSearch } from '../search/smartSearch.js';
@@ -51,13 +51,13 @@ export const searchRoutes =
         let pending = false;
         if (winStart < dayEnd) {
           const ix = await dayIndexWithin(db, planDate, 2000);
-          if (ix) found.push(...plan(db, ix, from.id, to.id, winStart, Math.min(winEnd, dayEnd), maxChanges));
+          if (ix) found.push(...planCached(db, ix, from.id, to.id, winStart, Math.min(winEnd, dayEnd), maxChanges));
           else pending = true;
         }
         if (winEnd > dayEnd) {
           const next = addDays(planDate, 1);
           const ix = await dayIndexWithin(db, next, 2000);
-          if (ix) found.push(...plan(db, ix, from.id, to.id, Math.max(winStart, dayEnd), winEnd, maxChanges));
+          if (ix) found.push(...planCached(db, ix, from.id, to.id, Math.max(winStart, dayEnd), winEnd, maxChanges));
           else pending = true;
         }
         if (pending) return { ...out, journeysPending: true };

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { openDb } from '../src/db/client.js';
 import { stations, timetableStopTimes, timetableTripDates, timetableTrips } from '../src/db/schema.js';
-import { dayIndex, forgetDayIndexes, plan, rank, type PlannedJourney } from '../src/search/planner.js';
+import { dayIndex, forgetDayIndexes, plan, planCached, rank, type PlannedJourney } from '../src/search/planner.js';
 import { serviceTimeToUtc } from '../src/lib/time.js';
 
 // A small network on 29 Oct 2026, modelled on the owner's Jönköping → Kolding: change at Nässjö onto the Berlin train,
@@ -33,6 +33,16 @@ async function setup(extra?: (trip: (key: string, number: string, calls: [string
 const day = serviceTimeToUtc(D, 0, 'Europe/Stockholm');
 
 describe('the journey planner', () => {
+  it('answers the same question from memory with the same journeys', async () => {
+    const db = await setup();
+    const ix = await dayIndex(db, D);
+    const first = planCached(db, ix, 'jo', 'kd', day, day + 86400_000, 5);
+    const again = planCached(db, ix, 'jo', 'kd', day, day + 86400_000, 5);
+    expect(again).toEqual(first);
+    expect(again).toEqual(plan(db, ix, 'jo', 'kd', day, day + 86400_000, 5));
+    expect(again[0]).not.toBe(first[0]);
+  });
+
   it('finds the one-change and the two-change journeys, with the real wait at each change', async () => {
     const db = await setup();
     const js = plan(db, await dayIndex(db, D), 'jo', 'kd', day, day + 86400_000);
