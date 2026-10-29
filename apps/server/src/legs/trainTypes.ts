@@ -17,6 +17,8 @@ export interface TrainType {
   since: number | null;
   art: string;
   about: string;
+  /** Cars in a typical set, the locomotive not counted; only where a source says (the type's text). */
+  cars?: number | null;
 }
 interface Rule {
   /**
@@ -46,6 +48,10 @@ export interface Composition {
   /** Numbered cars in the first unit (doubled sets list each unit). */
   cars: number;
   units: number;
+  /** Numbered cars over every unit (the locomotive not counted): what a drawing of the whole train needs. */
+  totalCars: number;
+  /** Cars per unit, in order. */
+  unitCars: number[];
 }
 
 /**
@@ -60,10 +66,11 @@ export function parseComposition(texts: (string | { Description?: string })[] | 
     // Snälltåget lists cars with commas ("9,10,11"): only ", " (with a space) separates units.
     const units = m[1]!.split(/,\s+/).map((u) => u.split(/[-,]/).map((c) => c.replace(/[[\]]/g, '').trim()).filter(Boolean));
     const first = units[0] ?? [];
-    const locomotive = first.some((c) => /^lok$/i.test(c));
-    const cars = first.filter((c) => !/^lok$/i.test(c)).length;
+    const locomotive = units.some((u) => u.some((c) => /^lok$/i.test(c)));
+    const unitCars = units.map((u) => u.filter((c) => !/^lok$/i.test(c)).length);
+    const cars = unitCars[0] ?? 0;
     if (!cars) continue;
-    return { locomotive, cars, units: units.length };
+    return { locomotive, cars, units: units.length, totalCars: unitCars.reduce((a, b) => a + b, 0), unitCars };
   }
   return null;
 }

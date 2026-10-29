@@ -47,6 +47,8 @@ public nonisolated struct TrainType: Codable, Hashable, Sendable, Identifiable {
     public let art: String
     public let about: String
     public let uncertain: Bool?
+    /// Cars in a typical set, the locomotive not counted; nil where no source says.
+    public var cars: Int? = nil
 
     public enum CodingKeys: String, CodingKey {
         case id, name, builder, since, art, about, uncertain

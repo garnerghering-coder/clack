@@ -162,7 +162,26 @@ export interface DtComposition {
     beginTimeTableRow?: { stationShortCode: string };
     endTimeTableRow?: { stationShortCode: string };
     locomotives?: { location?: number; locomotiveType?: string; powerType?: string }[];
+    /** The coaches or unit cars, each with its length in cm and sales number (verified 2026-10-28 in /compositions/2026-10-28/27: Sr2 + 6 Ed, totalLength 178). */
+    wagons?: { location?: number; salesNumber?: number; length?: number; wagonType?: string }[];
+    /** Metres. */
+    totalLength?: number;
+    maximumSpeed?: number;
   }[];
+}
+
+/** What a day's composition says about one train: its lead vehicle, how many cars (wagons, the locomotive not counted) and its length. */
+export interface DayComposition {
+  vehicle: string | null;
+  cars: number | null;
+  lengthM: number | null;
+}
+
+/** The first section's cars and length. Pure. */
+export function compositionOf(c: DtComposition | null | undefined): DayComposition {
+  const s = c?.journeySections?.[0];
+  const cars = s?.wagons?.length ?? 0;
+  return { vehicle: vehicleOf(c), cars: cars > 0 ? cars : null, lengthM: s?.totalLength ?? null };
 }
 
 /**
@@ -200,21 +219,21 @@ export async function fetchVehicle(date: string, number: string, at?: string | n
   return vehicle;
 }
 
-const dayCache = new Map<string, { at: number; byNumber: Map<string, string> }>();
+const dayCache = new Map<string, { at: number; byNumber: Map<string, DayComposition> }>();
 
 /**
  * Every train's vehicle for one day in a single request (/compositions/{date}, 0.8 MB, Digitraffic caches it 15
  * minutes): what the live map uses instead of one request per train. Cached 15 minutes.
  */
-export async function fetchDayVehicles(date: string, opts: DigitrafficOptions & { now?: number } = {}): Promise<Map<string, string>> {
+export async function fetchDayVehicles(date: string, opts: DigitrafficOptions & { now?: number } = {}): Promise<Map<string, DayComposition>> {
   const now = opts.now ?? Date.now();
   const hit = dayCache.get(date);
   if (hit && now - hit.at < 15 * 60_000) return hit.byNumber;
   const list = await fetchJson<DtComposition[]>(`compositions/${date}`, opts);
-  const byNumber = new Map<string, string>();
+  const byNumber = new Map<string, DayComposition>();
   for (const c of Array.isArray(list) ? list : []) {
-    const v = vehicleOf(c);
-    if (v) byNumber.set(String(c.trainNumber), v);
+    const comp = compositionOf(c);
+    if (comp.vehicle || comp.cars) byNumber.set(String(c.trainNumber), comp);
   }
   dayCache.set(date, { at: now, byNumber });
   if (dayCache.size > 4) dayCache.delete(dayCache.keys().next().value!);

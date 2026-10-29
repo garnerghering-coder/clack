@@ -35,6 +35,7 @@ private struct DestinationView: View {
         case .walkLogger: WalkLoggerScreen()
         #if DEBUG
         case .testAlerts: TestAlertsScreen()
+        case .rideProof: RideProofScreen()
         #endif
         }
     }

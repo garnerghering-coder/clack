@@ -77,8 +77,8 @@ describe('typical train types', () => {
 
   it('puts Reginas on the lines SJ and Mälartåg run them on, also when a coach order is published', () => {
     expect(typicalTrainType('sj', 'intercity', '1', ['Karlstad C', 'Göteborg C'])).toBe('regina');
-    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1 }, ['Göteborg C', 'Karlstad C'])).toBe('regina');
-    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1 }, ['Stockholm C', 'Västerås C'])).toBe('x40');
+    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1, totalCars: 3, unitCars: [3] }, ['Göteborg C', 'Karlstad C'])).toBe('regina');
+    expect(trainTypeFor('sj', 'regional', '1', { locomotive: false, cars: 3, units: 1, totalCars: 3, unitCars: [3] }, ['Stockholm C', 'Västerås C'])).toBe('x40');
     expect(typicalTrainType('malartag', 'regional', '1', ['Linköping C', 'Sala'])).toBe('regina');
     expect(typicalTrainType('malartag', 'regional', '1', ['Stockholm C', 'Uppsala C'])).toBe('er1');
   });
@@ -139,10 +139,10 @@ describe('Danish train types', () => {
 const vo = (s: string) => [{ Description: `Vagnsordning ${s}` }];
 describe('train type from the planned coach order', () => {
   it('reads cars, units and locomotives', () => {
-    expect(parseComposition(vo('1-3-4-5-6-7'))).toEqual({ locomotive: false, cars: 6, units: 1 });
-    expect(parseComposition(vo('1-3-4-5-6-7, 8-10-11-12-13-14'))).toEqual({ locomotive: false, cars: 6, units: 2 });
-    expect(parseComposition(vo('Lok-[-6]-5-4-3-2'))).toEqual({ locomotive: true, cars: 5, units: 1 });
-    expect(parseComposition(vo('9,10,11,12,13,14,216,217,218'))).toEqual({ locomotive: false, cars: 9, units: 1 });
+    expect(parseComposition(vo('1-3-4-5-6-7'))).toEqual({ locomotive: false, cars: 6, units: 1, totalCars: 6, unitCars: [6] });
+    expect(parseComposition(vo('1-3-4-5-6-7, 8-10-11-12-13-14'))).toEqual({ locomotive: false, cars: 6, units: 2, totalCars: 12, unitCars: [6, 6] });
+    expect(parseComposition(vo('Lok-[-6]-5-4-3-2'))).toEqual({ locomotive: true, cars: 5, units: 1, totalCars: 5, unitCars: [5] });
+    expect(parseComposition(vo('9,10,11,12,13,14,216,217,218'))).toEqual({ locomotive: false, cars: 9, units: 1, totalCars: 9, unitCars: [9] });
     expect(parseComposition([{ Description: 'Långt tåg.' }, { Description: 'Vagnsordning A-B-C-D-E' }, { Description: 'Café i vagn B' }])).toMatchObject({ cars: 5 });
     expect(parseComposition([{ Description: 'Långt tåg.' }])).toBeNull();
     expect(parseComposition(undefined)).toBeNull();

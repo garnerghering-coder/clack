@@ -9,7 +9,7 @@ import { stations, trvLocations } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
 import { fetchNorwayCalls, normalizeNorwayBoard } from './norway.js';
 import { fetchFinlandBoardTrains, normalizeFinlandBoard } from './finland.js';
-import { fetchDayVehicles } from '../digitraffic/trains.js';
+import { fetchDayVehicles, type DayComposition } from '../digitraffic/trains.js';
 import { COUNTRIES } from '../lib/countries.js';
 import { recordObservations } from '../legs/risk.js';
 import { normalizeDenmarkBoard, timetableRows } from './denmark.js';
@@ -134,7 +134,7 @@ export class BoardHub {
     } else if (source.kind === 'digitraffic') {
       const trains = await fetchFinlandBoardTrains(source.id, { fetchImpl: this.opts.fetchImpl, now });
       // The unit types for today's trains: one cached request a quarter of an hour, and the board is fine without it.
-      const vehicles = await fetchDayVehicles(localDate(now, tz), { fetchImpl: this.opts.fetchImpl, now }).catch(() => new Map<string, string>());
+      const vehicles = await fetchDayVehicles(localDate(now, tz), { fetchImpl: this.opts.fetchImpl, now }).catch(() => new Map<string, DayComposition>());
       rows = normalizeFinlandBoard(trains, {
         type,
         now,
@@ -144,7 +144,7 @@ export class BoardHub {
         names: (code) => this.fiName(code),
         calls,
         memory,
-        vehicleOf: (n, d) => (d === localDate(now, tz) ? (vehicles.get(n) ?? null) : null),
+        vehicleOf: (n, d) => (d === localDate(now, tz) ? (vehicles.get(n)?.vehicle ?? null) : null),
       });
     } else if (source.kind === 'trv') {
       rows = normalizeBoard(await fetchBoardRows(source.id, type, from, to, this.opts.fetchImpl), {

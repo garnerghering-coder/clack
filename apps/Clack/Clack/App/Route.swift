@@ -27,6 +27,8 @@ nonisolated enum AppRoute: Hashable, Sendable {
     #if DEBUG
     /// Settings > Test alerts (debug builds only).
     case testAlerts
+    /// The Ride view proof (BUILDOUT F3): Apple's 3D map with a RealityKit train, debug builds only.
+    case rideProof
     #endif
 }
 
@@ -87,6 +89,9 @@ final class Router {
             if raw == "privacy" { tripsPath = [.settings, .privacy] }
             if raw == "walks" { tripsPath = [.settings, .walkLogger] }
             if raw == "testalerts" { tripsPath = [.settings, .testAlerts] }
+            #if DEBUG
+            if raw == "rideproof" { tripsPath = [.rideProof] }
+            #endif
             let parts = raw.split(separator: ":", maxSplits: 1).map(String.init)
             if parts.count == 2 {
                 if parts[0] == "trip" { tripsPath = [.trip(parts[1])] }
@@ -262,6 +267,7 @@ extension AppRoute {
         case .walkLogger: .other
         #if DEBUG
         case .testAlerts: .other
+        case .rideProof: .other
         #endif
         }
     }

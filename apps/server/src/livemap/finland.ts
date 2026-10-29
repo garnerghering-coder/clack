@@ -7,7 +7,7 @@
 import { sql } from 'drizzle-orm';
 import type { Db } from '../db/client.js';
 import { fetchJson, type DigitrafficOptions } from '../digitraffic/client.js';
-import { fetchDayVehicles, isPassengerTrain, type DtTrain } from '../digitraffic/trains.js';
+import { fetchDayVehicles, isPassengerTrain, type DayComposition, type DtTrain } from '../digitraffic/trains.js';
 import { finnishProduct } from '../import/gtfs-fi.js';
 import { COUNTRIES } from '../lib/countries.js';
 import { digitrafficCauses } from '../legs/causes.js';
@@ -109,6 +109,8 @@ export interface FinlandTrain {
   crossBorder: boolean;
   /** The unit or locomotive type from /compositions (Sm5, Sr3), when known. */
   vehicle: string | null;
+  /** Cars today from Digitraffic's composition (the locomotive not counted); null without one. */
+  cars: number | null;
   /** Where it is in its run (live/locate.ts). */
   where: Pick<Located, 'state' | 'prevId' | 'nextId' | 'atStation' | 'platform' | 'progress' | 'fixAt'>;
 }
@@ -158,7 +160,7 @@ export class FinlandFeed {
   private stationIdx: Map<string, StationInfo> | null = null;
   private stationIdxAt = 0;
   private trips = new Map<string, { at: number; trip: TripInfo | null }>();
-  private vehicles = new Map<string, string>();
+  private vehicles = new Map<string, DayComposition>();
   private vehiclesAt = new Map<string, number>();
   upstreamAt = 0;
   polls = 0;
@@ -404,7 +406,8 @@ export class FinlandFeed {
         nextEta: done ? null : nextEta,
         delayMin: delayMs === null ? null : Math.round(delayMs / 60_000),
         crossBorder: s.crossBorder,
-        vehicle: this.vehicles.get(`${s.date}|${s.number}`) ?? null,
+        vehicle: this.vehicles.get(`${s.date}|${s.number}`)?.vehicle ?? null,
+        cars: this.vehicles.get(`${s.date}|${s.number}`)?.cars ?? null,
         where: { state, prevId, nextId, atStation, platform, progress, ...(fixAt !== undefined ? { fixAt } : {}) },
       });
     }

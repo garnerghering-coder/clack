@@ -57,6 +57,8 @@ export interface LiveTrain {
   tripKey?: string | null;
   /** A Norwegian train that also runs in Sweden, where Trafikverket knows it by number. */
   crossBorder?: boolean;
+  /** Cars today where the feed says (Sweden's coach order, Finland's composition), the locomotive not counted. */
+  cars?: number | null;
   /**
    * Where it is in its run (BUILDOUT §A.1): running between prevId and nextId, standing at a station, or waiting at
    * its first one before departure. Added in build 54; older apps ignore these fields.
@@ -603,6 +605,7 @@ export class LiveMapIngest extends EventEmitter {
       productName: info?.productName ?? null,
       product,
       trainType: trainTypeFor(brand, product, number, info?.composition ?? null, [origin, destination]),
+      cars: info?.composition?.totalCars ?? null,
       origin,
       destination,
       next: abroadNext !== undefined ? (abroadNext?.name ?? null) : this.name(info?.nextSig ?? null),
@@ -833,6 +836,7 @@ export class LiveMapIngest extends EventEmitter {
         productName: null,
         product: f.product,
         trainType: trainTypeFor(f.operatorId, f.product, f.number, null, [f.origin, f.destination], f.vehicle),
+        cars: f.cars,
         origin: f.origin,
         destination: f.destination,
         next: f.next,

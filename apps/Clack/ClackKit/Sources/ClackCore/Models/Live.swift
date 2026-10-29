@@ -33,6 +33,8 @@ public nonisolated struct LiveTrain: Codable, Hashable, Sendable, Identifiable {
     public let mine: Bool
     public let tripKey: String?
     public let crossBorder: Bool?
+    /// Cars today where the feed says (Sweden's coach order, Finland's composition); nil elsewhere or from older servers.
+    public var cars: Int? = nil
 
     public init(id: String, number: String, date: String, lat: Double, lon: Double, bearing: Double? = nil, speedKmh: Double? = nil, at: Instant, estimated: Bool, operatorId: String?, productName: String?, product: String?, trainType: String?, origin: String?, destination: String?, next: String?, nextEta: Instant?, delayMin: Int?, mine: Bool, tripKey: String?, crossBorder: Bool?) {
         self.id = id
