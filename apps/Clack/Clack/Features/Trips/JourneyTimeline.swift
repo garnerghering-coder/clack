@@ -22,9 +22,11 @@ struct JourneyRail: Identifiable {
             let times = TripsLogic.expected(leg)
             var travelled = 0.0
             if let dep = times.dep, let arr = times.arr, arr > dep { travelled = min(1, max(0, (now - dep) / (arr - dep))) }
+            // The fill may follow the clock; the dots only move on evidence (`TripsLogic.reached`).
+            let reached = TripsLogic.reached(leg, now: now)
             return JourneyRail(
                 id: leg.id, tint: operatorColor(leg.operator?.brandColor, scheme: scheme), travelled: travelled,
-                departed: (times.dep ?? .infinity) <= now, arrived: travelled >= 1
+                departed: reached.departed, arrived: reached.arrived
             )
         }
         let waited = zip(legs, legs.dropFirst()).map { a, b -> Double in

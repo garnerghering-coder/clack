@@ -145,7 +145,8 @@ struct LegRow: View {
             } else if upcoming {
                 if leg.depDelayMin != nil { DelayText(delay: leg.depDelayMin, canceled: leg.canceled) }
             } else {
-                DelayText(delay: (leg.dataQuality == .scheduledOnly && leg.status == .planned) ? nil : leg.arrDelayMin, canceled: leg.canceled)
+                // Legs inside a journey show the delay beside their times, not again here.
+                if !flat { DelayText(delay: (leg.dataQuality == .scheduledOnly && leg.status == .planned) ? nil : leg.arrDelayMin, canceled: leg.canceled) }
                 Text(distance).clack(.caption).foregroundStyle(Ink.text2)
             }
         }

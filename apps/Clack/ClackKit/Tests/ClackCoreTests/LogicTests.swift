@@ -168,3 +168,60 @@ struct LandingTests {
         #expect(Landing.readLastTab(defaults) == nil)
     }
 }
+
+struct JourneyReachedTests {
+    private let dep = 1_000_000_000.0
+    private let arr = 1_000_000_000.0 + 3_600_000
+    private func r(_ now: Double, actualDep: Double? = nil, actualArr: Double? = nil, _ status: LiveStatus? = nil, prev: Bool = false) -> (departed: Bool, arrived: Bool) {
+        TripsLogic.reached(actualDep: actualDep, actualArr: actualArr, expDep: dep, expArr: arr, liveStatus: status, hasPrevStop: prev, now: now)
+    }
+
+    @Test func aTrackedTrainIsNotReachedOnTheClock() {
+        let late = r(arr + 3_600_000, .enRoute)
+        #expect(late.departed && !late.arrived)
+        #expect(!r(dep + 3_600_000, .boarding).departed)
+        #expect(!r(dep + 3_600_000, .atStop).departed)
+        #expect(r(dep + 1, .atStop, prev: true).departed)
+    }
+
+    @Test func actualTimesAndAnArrivedStateCount() {
+        #expect(r(0, actualDep: dep).departed)
+        #expect(r(0, actualDep: dep, actualArr: arr).arrived)
+        #expect(r(0, .arrived).arrived)
+    }
+
+    @Test func withNoLiveDataTheClockPlusTenMinutesDoes() {
+        #expect(!r(dep + 9 * 60_000).departed)
+        #expect(r(dep + 10 * 60_000).departed)
+        #expect(!r(arr + 9 * 60_000).arrived)
+        #expect(r(arr + 10 * 60_000).arrived)
+    }
+}
+
+struct JourneyNowTests {
+    private let now = ms("2026-10-21T12:00:00Z")
+
+    private func leg(_ id: String, dep: Double, arr: Double, actualArr: Double? = nil) throws -> Leg {
+        let json = """
+        {"id":"\(id)","status":"planned","dataQuality":"full","trainNumber":null,"category":null,"serviceDate":null,
+        "schedDep":\(now + dep * 60_000),"schedArr":\(now + arr * 60_000),"actualDep":null,
+        "actualArr":\(actualArr.map { String(now + $0 * 60_000) } ?? "null"),
+        "depDelayMin":null,"arrDelayMin":null,"depPlatform":null,"arrPlatform":null,"canceled":false,
+        "distanceM":null,"isEstimatedGeometry":false,"trainType":null,"trainTypeSource":null,"onboard":null,
+        "countryCodes":[],"journeyId":null,"timetableTripKey":null,"operatorId":null,"originStationId":"1",
+        "destStationId":"2","notes":null,"ride":"auto","rideReason":null,"borderEvidence":null,"operator":null,
+        "origin":null,"destination":null,"live":null}
+        """
+        return try JSONDecoder().decode(Leg.self, from: Data(json.utf8))
+    }
+
+    @Test func picksTheRunningLegThenTheNextOneAndNothingOutsideTheWindow() throws {
+        let legs = [try leg("a", dep: -30, arr: 20), try leg("b", dep: 30, arr: 90)]
+        #expect(TripsLogic.nowLegIndex(legs, now: now) == 0)
+        let between = [try leg("a", dep: -60, arr: -10, actualArr: -10), try leg("b", dep: 30, arr: 90)]
+        #expect(TripsLogic.nowLegIndex(between, now: now) == 1)
+        #expect(TripsLogic.nowLegIndex([try leg("a", dep: 120, arr: 200)], now: now) == nil)
+        #expect(TripsLogic.nowLegIndex([try leg("a", dep: 30, arr: 90)], now: now) == 0)
+        #expect(TripsLogic.nowLegIndex([try leg("a", dep: -90, arr: -10, actualArr: -10)], now: now) == nil)
+    }
+}

@@ -31,6 +31,59 @@ public nonisolated enum TripsLogic {
         )
     }
 
+    /// How far ahead of the first departure a journey's "Now" section appears.
+    public static let nowWindowMs: Double = 60 * 60_000
+
+    /// The leg the journey's "Now" section is about, while the journey is under way or about to start (first leg's
+    /// expected departure within an hour, last leg not arrived): the leg running now, else the next to leave.
+    public static func nowLegIndex(_ legs: [Leg], now: Double) -> Int? {
+        guard let first = legs.first, let last = legs.last, last.actualArr == nil, arrivalOf(last) > now,
+              let firstDep = expected(first).dep, firstDep - now <= nowWindowMs else { return nil }
+        let open = legs.indices.filter { legs[$0].actualArr == nil && !legs[$0].canceled }
+        if let running = open.first(where: { (expected(legs[$0]).dep ?? .infinity) <= now && arrivalOf(legs[$0]) > now }) { return running }
+        if let next = open.first(where: { (expected(legs[$0]).dep ?? 0) > now }) { return next }
+        return open.first
+    }
+
+    /// How long past its expected time a train with no live data counts as having left or arrived.
+    public static let reachedMarginMs: Double = 10 * 60_000
+
+    /// Has the train left, and has it arrived, on evidence and not on the clock: an actual time, or its live state
+    /// saying so. Only with no live tracking at all does the expected time plus a margin stand in.
+    public static func reached(
+        actualDep: Double?, actualArr: Double?, expDep: Double?, expArr: Double?,
+        liveStatus: LiveStatus?, hasPrevStop: Bool, now: Double
+    ) -> (departed: Bool, arrived: Bool) {
+        var departed = actualDep != nil
+        var arrived = actualArr != nil
+        let tracked = {
+            switch liveStatus {
+            case .approaching?, .boarding?, .enRoute?, .atStop?, .arrived?: true
+            default: false
+            }
+        }()
+        switch liveStatus {
+        case .arrived?: departed = true; arrived = true
+        case .enRoute?: departed = true
+        case .atStop?: if hasPrevStop { departed = true }
+        default: break
+        }
+        if !tracked {
+            if let expDep, now >= expDep + reachedMarginMs { departed = true }
+            if let expArr, now >= expArr + reachedMarginMs { arrived = true; departed = true }
+        }
+        return (departed || arrived, arrived)
+    }
+
+    /// `reached` for a leg of the traveller's own.
+    public static func reached(_ leg: Leg, now: Double) -> (departed: Bool, arrived: Bool) {
+        let times = expected(leg)
+        return reached(
+            actualDep: leg.actualDep?.ms, actualArr: leg.actualArr?.ms, expDep: times.dep, expArr: times.arr,
+            liveStatus: leg.live?.status, hasPrevStop: leg.live?.prevStopId != nil, now: now
+        )
+    }
+
     /// Upcoming (arrival still ahead), soonest first; past, most recent first. A trip you said you didn't take is in
     /// neither (owner, 2026-10-25: "it just shouldn't be there"); its page still opens from a link, with Undo.
     public static func partition(_ legs: [Leg], now: Double) -> (upcoming: [Leg], past: [Leg]) {

@@ -18,6 +18,29 @@ struct JourneyScreen: View {
     @State private var lastReload: Date = .distantPast
     @State private var sharing = JourneyShare()
     @Environment(\.colorScheme) private var scheme
+    /// The leg in focus while the journey is under way or about to start, and its live experience.
+    @State private var nowLegId: String?
+    @State private var nowModel = JourneyNowModel()
+
+    private var wholeMap: some View {
+        MultiRouteMapView(
+            routes: (journey?.legs ?? []).filter { $0.leg.ride != .notTaken }.map {
+                MultiRoute(color: MapStyle.opColor($0.leg.operator?.brandColor, dark: scheme == .dark), geometry: $0.geometry, stops: [])
+            },
+            stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
+        )
+        .frame(height: 240)
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+        .hairlineBorder(radius: Radius.card)
+    }
+
+    /// Which leg the "Now" section is about, re-worked every 30 s and whenever the journey reloads.
+    private func updateNowLeg() {
+        let legs = TripsLogic.taken((journey?.legs ?? []).map(\.leg))
+        let index = TripsLogic.nowLegIndex(legs, now: Date.now.timeIntervalSince1970 * 1000)
+        let next = index.map { legs[$0].id }
+        if next != nowLegId { nowLegId = next }
+    }
 
     var body: some View {
         Page {
@@ -37,15 +60,23 @@ struct JourneyScreen: View {
                     Tile(label: l10n.t("passport.trains"), value: String(legs.count))
                     Tile(label: l10n.t("detail.distance"), value: Format.distance(distance, unit: app.settings.distanceUnit, language: app.settings.language))
                 }
-                MultiRouteMapView(
-                    routes: (journey?.legs ?? []).filter { $0.leg.ride != .notTaken }.map {
-                        MultiRoute(color: MapStyle.opColor($0.leg.operator?.brandColor, dark: scheme == .dark), geometry: $0.geometry, stops: [])
-                    },
-                    stations: [], railNetwork: app.settings.showRailNetwork, label: l10n.t("journey.mapLabel")
-                )
-                .frame(height: 240)
-                    .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
-                    .hairlineBorder(radius: Radius.card)
+                // "Now": the leg running (or next to leave) with its live card; its map replaces the whole-journey
+                // one while the train is under way.
+                Ticking(every: 30) { now in
+                    if let detail = nowModel.detail, nowLegId != nil {
+                        JourneyNowSection(model: nowModel, legs: legs, now: now)
+                        if JourneyNowMap.isUnderway(detail, live: nowModel.live, now: now, offline: app.isOffline) {
+                            JourneyNowMap(detail: detail, live: nowModel.live, now: now)
+                                .frame(height: 240)
+                                .clipShape(RoundedRectangle(cornerRadius: Radius.card, style: .continuous))
+                                .hairlineBorder(radius: Radius.card)
+                        } else {
+                            wholeMap
+                        }
+                    } else {
+                        wholeMap
+                    }
+                }
                 TimelineView(.periodic(from: .now, by: 60)) { context in
                     JourneyTimeline(legs: legs, now: context.date.timeIntervalSince1970 * 1000, scheme: scheme) { leg in
                         LegRow(leg: leg, flat: true)
@@ -71,6 +102,13 @@ struct JourneyScreen: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     ShareControl(share: sharing, journeyId: id, legId: first.id, from: first.origin?.name ?? "", to: last.destination?.name ?? "")
                 }
+            }
+        }
+        .task(id: nowLegId) { await nowModel.follow(nowLegId, app: app) }
+        .task(id: journey?.legs.map(\.id)) {
+            while !Task.isCancelled {
+                updateNowLeg()
+                try? await Task.sleep(for: .seconds(30))
             }
         }
         .task(id: id) {

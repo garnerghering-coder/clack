@@ -218,3 +218,78 @@ struct MapButtonFace: View {
         }
     }
 }
+
+/// The Trips Upcoming/Past toggle in build 50's look (owner, 2026-10-29), the one deliberate exception to "Apple's own
+/// controls": equal segments as plain 44 pt buttons on one glass track, with a yellow glass thumb that slides to the
+/// chosen one (Liquid Glass on iOS 26 and later; a raised track and a yellow thumb before).
+struct TripsSegmentedControl<Value: Hashable>: View {
+    @Binding var selection: Value
+    let options: [(value: Value, label: String)]
+    @Namespace private var thumb
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var thumbShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input - 4, style: .continuous) }
+    private var trackShape: RoundedRectangle { RoundedRectangle(cornerRadius: Radius.input, style: .continuous) }
+
+    var body: some View {
+        segments
+            .padding(4)
+            .modifier(TrackSurface(shape: trackShape))
+            .frame(maxWidth: .infinity)
+            .textSelection(.disabled)
+    }
+
+    private var segments: some View {
+        HStack(spacing: 0) {
+            ForEach(Array(options.enumerated()), id: \.offset) { _, option in
+                let chosen = option.value == selection
+                Button {
+                    withAnimation(reduceMotion ? nil : .snappy(duration: 0.28)) { selection = option.value }
+                } label: {
+                    Text(option.label)
+                        .clack(.button)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                        .foregroundStyle(chosen ? Ink.onAccent : Ink.text)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .background {
+                    if chosen { Thumb(shape: thumbShape).matchedGeometryEffect(id: "thumb", in: thumb) }
+                }
+                .accessibilityAddTraits(chosen ? [.isButton, .isSelected] : .isButton)
+            }
+        }
+    }
+
+    /// The yellow thumb: glass tinted in the accent on iOS 26, plain accent before.
+    private struct Thumb: View {
+        let shape: RoundedRectangle
+
+        var body: some View {
+            if #available(iOS 26.0, *) {
+                Color.clear.glassEffect(.regular.tint(Ink.accent), in: shape)
+            } else {
+                shape.fill(Ink.accent)
+            }
+        }
+    }
+
+    /// The track under all segments: one glass shape (the thumb joins it in a container, so they blend), or a raised surface.
+    private struct TrackSurface: ViewModifier {
+        let shape: RoundedRectangle
+
+        func body(content: Content) -> some View {
+            if #available(iOS 26.0, *) {
+                GlassEffectContainer(spacing: 8) {
+                    content.glassEffect(.regular, in: shape)
+                }
+            } else {
+                content
+                    .background(Ink.surfaceRaised, in: shape)
+                    .overlay(shape.strokeBorder(Ink.hairline, lineWidth: 1))
+            }
+        }
+    }
+}
