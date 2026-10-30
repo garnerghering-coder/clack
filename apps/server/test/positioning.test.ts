@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { cumulative, platformPoint, type LatLon, type StationMap } from '@clack/shared';
+import { cumulative, platformPoint, pointAt, type LatLon, type StationMap } from '@clack/shared';
 import { openDb } from '../src/db/client.js';
 import { stations, trvLocations } from '../src/db/schema.js';
 import { LiveMapIngest, WAITING_BEFORE_MS } from '../src/livemap/ingest.js';
@@ -422,6 +422,25 @@ describe('locateOnSegment for the other feeds', () => {
     expect(locateOnSegment({ seg, placement }, { ...base, now: ms('11:20') })).toMatchObject({ state: 'running', prevId: 'a', nextId: 'b' });
     expect(locateOnSegment({ seg, placement }, { ...base, now: ms('11:43') })).toMatchObject({ state: 'standing', atStation: 'B', lat: 59.86 });
     expect(locateOnSegment({ seg, placement }, { ...base, left: null, arriving: null, now: ms('11:20') })).toBeNull();
+  });
+  it('learns where trains are from fixes on the track, and places an estimated train on that curve once it has enough', () => {
+    const quality = new LiveQuality(() => ms('12:00'));
+    const base = { prev, next, left: ms('11:00'), arriving: ms('11:40'), standingAtPrev: false, country: 'NO' as const, source: 'entur' as const };
+    const L = seg.lengthM;
+    // Trains that cover a share of the track equal to the square of the share of time: fixes on the line, every 12 s.
+    for (let k = 1; k < 200; k++) {
+      const share = k / 200;
+      const at = ms('11:00') + share * 40 * 60_000;
+      const p = pointAt(LINE, cumulative(LINE), share * share * L);
+      locateOnSegment({ seg, placement, quality }, { ...base, gps: { lat: p.lat, lon: p.lon, at, bearing: null, speedKmh: 90, lastSpeedKmh: 90, fresh: true, ageMs: 0 }, now: at });
+    }
+    expect(quality.report().curves).toMatchObject({ stretches: 1, ready: 1 });
+    // Halfway through the time, the textbook profile has it about halfway; the learned curve about a quarter.
+    const textbook = locateOnSegment({ seg, placement }, { ...base, gps: null, now: ms('11:20') })!;
+    const learned = locateOnSegment({ seg, placement, quality }, { ...base, gps: null, now: ms('11:20') })!;
+    expect(textbook.progress!).toBeGreaterThan(0.4);
+    expect(learned.progress!).toBeGreaterThan(0.2);
+    expect(learned.progress!).toBeLessThan(0.32);
   });
   it('uses a fresh fix as it is when it is off the track', () => {
     const gps = { lat: 59.5, lon: 18.3, at: ms('11:20'), bearing: 45, speedKmh: 80, lastSpeedKmh: 80, fresh: true, ageMs: 5000 };

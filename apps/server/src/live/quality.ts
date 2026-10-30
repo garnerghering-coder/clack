@@ -9,6 +9,7 @@
 // - the position check: how far the estimate (old rule and new rule, both worked out at the fix's time) is from the
 //   GPS fix that arrived, and how far the platform point is from a fix of a train reported standing there;
 // - track-side agreement: whether the raw fix lay nearer the track the running-side rule chose than the other one.
+import { RunCurves } from './runCurves.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { crossingTime, passageTime } from './positioning.js';
@@ -95,6 +96,8 @@ interface Fix {
 }
 
 export interface QualityReport {
+  /** Learned run curves: stretches seen, those with a curve in use, samples. */
+  curves: { stretches: number; ready: number; samples: number };
   since: number;
   savedAt: number | null;
   delivery: Record<string, HistogramSummary>;
@@ -105,6 +108,8 @@ export interface QualityReport {
 }
 
 export class LiveQuality {
+  /** Learned run curves per stretch (live/runCurves.ts); saved with the counters, never pruned by them. */
+  curves = new RunCurves();
   readonly since: number;
   private delivery = new Map<string, Histogram>();
   private offset = new Map<string, Histogram>();
@@ -188,7 +193,7 @@ export class LiveQuality {
     for (const [k, h] of [...this.checkOld].sort()) running[k] = { old: h.summary(), new: this.checkNew.get(k)!.summary() };
     const side: QualityReport['side'] = {};
     for (const [k, s] of [...this.side].sort()) side[k] = { ...s, agreeShare: s.agree + s.disagree ? Math.round((100 * s.agree) / (s.agree + s.disagree)) / 100 : null };
-    return { since: this.since, savedAt: this.savedAt, delivery: sum(this.delivery), offset: sum(this.offset), check: { running, standing: sum(this.standing) }, side, fixesTracked: this.fixes.size };
+    return { since: this.since, savedAt: this.savedAt, delivery: sum(this.delivery), offset: sum(this.offset), check: { running, standing: sum(this.standing) }, side, fixesTracked: this.fixes.size, curves: this.curves.summary() };
   }
 
   /** Written to disk (and read back on start) so a restart keeps the day's numbers. Fix rings are not kept. */
@@ -196,7 +201,7 @@ export class LiveQuality {
     const j = (m: Map<string, Histogram>) => Object.fromEntries([...m].map(([k, h]) => [k, h.toJSON()]));
     this.savedAt = this.now();
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, JSON.stringify({ since: this.since, savedAt: this.savedAt, delivery: j(this.delivery), offset: j(this.offset), checkOld: j(this.checkOld), checkNew: j(this.checkNew), standing: j(this.standing), side: Object.fromEntries(this.side) }));
+    fs.writeFileSync(file, JSON.stringify({ since: this.since, savedAt: this.savedAt, delivery: j(this.delivery), offset: j(this.offset), checkOld: j(this.checkOld), checkNew: j(this.checkNew), standing: j(this.standing), side: Object.fromEntries(this.side), curves: this.curves.toJSON() }));
   }
 
   static load(file: string, now: () => number = Date.now): LiveQuality {
@@ -214,6 +219,7 @@ export class LiveQuality {
       back(q.checkNew, j.checkNew);
       back(q.standing, j.standing);
       for (const [k, s] of Object.entries((j.side ?? {}) as unknown as Record<string, { agree: number; disagree: number }>)) q.side.set(k, { ...s });
+      q.curves = RunCurves.from((j as unknown as { curves?: Parameters<typeof RunCurves.from>[0] }).curves);
     } catch {
       // No file yet, or an older shape: start fresh.
     }

@@ -10,6 +10,7 @@ import type { Placement } from './placement.js';
 import { advanceM, blendM, estimateAlong, snapToLine, standingByGps, TIMESTAMP_OFFSET_S, type TrainState } from './positioning.js';
 import { DEAD_RECKONING_MS } from './progress.js';
 import type { LiveQuality, Source } from './quality.js';
+import { RunCurves } from './runCurves.js';
 
 export interface SegStop {
   /** Our station id, or "trv:<signature>" for a Swedish location without one. */
@@ -113,6 +114,9 @@ export function locateOnSegment(env: LocateEnv, input: LocateInput): Located | n
     }
     const snapped = points.length > 1 ? snapToLine(points, cum, gps) : null;
     if (!snapped) return { lat: gps.lat, lon: gps.lon, bearing: gps.bearing, speedKmh: gps.speedKmh, at: gps.at, estimated: false, state: 'running', prevId: prev.id, nextId: next.id, atStation: null, platform: null, progress: null };
+    // A sample for the learned run curves: where along the stretch at what share of its time (operators' GPS only).
+    if (source !== 'rejseplanen' && input.left !== null && input.arriving !== null && input.arriving > input.left && L > 0)
+      env.quality?.curves.record(RunCurves.key(prev.id, next.id), (gps.at - input.left) / (input.arriving - input.left), snapped.m / L);
     // Carried forward from the fix's own time by the delivery lag (plus the measured offset, 0 until F4), never past the next stop.
     const m = advanceM(snapped.m, gps.speedKmh, now - gps.at + TIMESTAMP_OFFSET_S[source] * 1000, L);
     return running(m, gps.speedKmh, false, now, gps.at);
@@ -130,5 +134,11 @@ export function locateOnSegment(env: LocateEnv, input: LocateInput): Located | n
     }
   }
   if (est.state === 'standing' && est.progress >= 1) return standingAt(next, prev.id, next.id, 'standing', true);
+  // Where this stretch has a learned curve (live/runCurves.ts), it places the train instead of the textbook profile.
+  if (est.state === 'running' && now < input.arriving && L > 0) {
+    const share = (now - input.left) / (input.arriving - input.left);
+    const learned = env.quality?.curves.progressAt(RunCurves.key(prev.id, next.id), share);
+    if (learned !== null && learned !== undefined) return running(learned * L, null, true, now);
+  }
   return running(est.m, est.speedKmh === null ? null : Math.round(est.speedKmh), true, now);
 }

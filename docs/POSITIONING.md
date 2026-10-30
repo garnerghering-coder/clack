@@ -96,6 +96,19 @@ per phone per train every 10 s. The train is carried forward from the report's t
 next stop, and marked `riders: n` (not estimated). The counts (accepted, refused by reason, used) are in the admin
 quality report.
 
+### Learned run curves (2026-10-30)
+
+Every fresh operator GPS fix (Trafikverket, Entur, Digitraffic; not Rejseplanen's estimate, not riders' reports) that
+snaps onto a stretch while the feed has the train between its departure and its expected arrival is a sample: the
+share of the time gone against the share of the track covered, summed in 10 time bins per stretch
+(`live/runCurves.ts`; no train, no time of day, no fix kept). The curves are saved with the quality counters
+(`data/cache/live-quality.json`) and are not pruned with them. Once a stretch has 60 samples and at least 4 in every
+bin, an estimated train on it is placed on its learned curve (bin means, never going backwards) instead of the
+textbook run profile; until then nothing changes. The admin quality report says how many stretches are learned
+(`curves: { stretches, ready, samples }`). Whether this beats the profile is for the position check to show once a
+few days are in; it only applies where the feeds have GPS, so Denmark gains from it only on stretches shared with
+Sweden.
+
 ## GPS lag (§A.8)
 
 Two numbers, per source, counted while the server runs (`live/quality.ts`; admin-only `GET /api/live/quality`;
