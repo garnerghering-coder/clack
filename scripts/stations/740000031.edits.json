@@ -102,7 +102,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.51,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     },
     {
       "from": "#6",
@@ -110,7 +110,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.8,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20c029, scanned 2020-03-31), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000031/flemingsberg_structures_heights.geojson (metres above the platform surface, 34.4 m RH 2000, laser 2020-03-31); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -119,5 +119,48 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000031/flemingsberg_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (34.4 m RH 2000, laser 2020-03-31)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res5f18f22d9b",
+      "category": "restaurant",
+      "name": "JA Thai Wok",
+      "level": "0",
+      "x": -97.2,
+      "y": 123.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 11:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/flemingsberg-station/mat-och-butiker/, read 2026-10-30 (jathai.se lists only its Hornsgatan restaurant); placed OSM node n11942251754 (research pass 2026-10-30, data/stations/research/740000031/station_facts.json)"
+    },
+    {
+      "id": "res924430c5af",
+      "category": "ticket",
+      "name": "SL",
+      "level": "0",
+      "x": -77.3,
+      "y": 106.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000031/station_facts.json)",
+      "approximate": true,
+      "where": "OSM shop=ticket n8205959660 in the station"
+    },
+    {
+      "id": "res39c62f88b4",
+      "category": "toilet",
+      "name": "SL",
+      "level": "0",
+      "x": 60.8,
+      "y": -72.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n14273142536 (read 2026-10-30); placed OSM node n14273142536 (research pass 2026-10-30, data/stations/research/740000031/station_facts.json)"
+    }
+  ]
 }

@@ -1214,6 +1214,112 @@
           -70
         ]
       ]
+    },
+    {
+      "id": "res8762794f1c",
+      "category": "shop",
+      "name": "Sixt",
+      "level": "0",
+      "x": 139.2,
+      "y": -149.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/taxi-och-biluthyrning/, read 2026-10-30; placed OSM node n1677336158 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "res23871082f9",
+      "category": "bus",
+      "name": "Centralplan bus terminal",
+      "level": "0",
+      "x": -310,
+      "y": -237.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://en.wikipedia.org/wiki/Malm%C3%B6_Central_Station, read 2026-10-30; Skånetrafiken terminal map Malmö C (80000_malmoc_terminalkarta_a3.pdf, updated June 2026), read 2026-10-30; facts only; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)",
+      "approximate": true,
+      "where": "just south of the station building"
+    },
+    {
+      "id": "res043fb32878",
+      "category": "kiosk",
+      "name": "Pressbyrån Glashallen",
+      "level": "0",
+      "x": -8.6,
+      "y": -58.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30; placed OSM node n430003688 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "res3181b6c633",
+      "category": "restaurant",
+      "name": "Oakberry Açaí",
+      "level": "0",
+      "x": -26.3,
+      "y": -37.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/, read 2026-10-30; placed OSM node n1677335977 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "res845cf53003",
+      "category": "locker",
+      "name": "Speed Box",
+      "level": "0",
+      "x": 80.3,
+      "y": -99.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n13594624260 (read 2026-10-30); placed OSM node n13594624260 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "resdbcaf6c551",
+      "category": "restaurant",
+      "name": "McDonald's",
+      "level": "0",
+      "x": -254.4,
+      "y": -72.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n514143378 (ODbL), read 2026-10-30; placed OSM node n514143378 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "res12f481c222",
+      "category": "cafe",
+      "name": "Gottelisa",
+      "level": "0",
+      "x": 46.5,
+      "y": -2.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n3402696470 (ODbL), read 2026-10-30; placed OSM node n3402696470 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
+    },
+    {
+      "id": "resff14475e2a",
+      "category": "atm",
+      "name": "Bankomat",
+      "level": "0",
+      "x": -10.7,
+      "y": -86.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:40-24:00, Sa-Su 06:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12124755075 (ODbL), read 2026-10-30; placed OSM node n12124755075 (research pass 2026-10-30, data/stations/research/740000003/station_facts.json)"
     }
   ],
   "platform_heights": {
@@ -1514,7 +1620,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 2.91,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     },
     {
       "from": "#42",
@@ -1522,7 +1628,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 5.93,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {

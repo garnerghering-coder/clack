@@ -1088,7 +1088,9 @@ def main():
         name=name,
         updated=datetime.date.today().isoformat(),
         quality=edits.get("quality", "osm_draft"),
-        sources=[dict(type="osm", license="ODbL", retrieved=osm["retrieved"], url="https://www.openstreetmap.org/copyright", note="via the Overpass API" if osm.get("source") == "overpass" else "from the Geofabrik/openstreetmap.fr extract")] + edits.get("sources", []),
+        # Every source needs a type (the app and the format require one); hand edits that named theirs get "manual".
+        sources=[dict(type="osm", license="ODbL", retrieved=osm["retrieved"], url="https://www.openstreetmap.org/copyright", note="via the Overpass API" if osm.get("source") == "overpass" else "from the Geofabrik/openstreetmap.fr extract")]
+        + [s if s.get("type") else {"type": "manual", **({"note": s["name"]} if "name" in s else {}), **({"retrieved": s["read"]} if "read" in s else {}), **{k: v for k, v in s.items() if k not in ("name", "read")}} for s in edits.get("sources", [])],
         changelog=edits.get("changelog", []),
         coord_system="local_m",
         origin=dict(lat=lat0, lon=lon0),

@@ -21188,6 +21188,57 @@
           }
         }
       }
+    },
+    "stationMap.hoursWebsite" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From the station's website, checked {{date}}; may differ on holidays"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Från stationens webbplats, kontrollerat {{date}}; kan avvika på helgdagar"
+          }
+        }
+      }
+    },
+    "stationMap.approximate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approximate position"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefärlig plats"
+          }
+        }
+      }
+    },
+    "stationMap.approximateWhere" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approximate position: {{where}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungefärlig plats: {{where}}"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

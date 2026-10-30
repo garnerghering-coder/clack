@@ -370,16 +370,23 @@ public nonisolated struct StationPoi: Codable, Hashable, Sendable, Identifiable 
     public let outline: [Pt]?
     /// Schema 2: where the place comes from.
     public let source: String?
+    /// The pin stands for a place described in words, not located: at the building, hall or entrance it names.
+    public let approximate: Bool?
+    /// The description it was placed from ("in the hall, by entrance A").
+    public let whereText: String?
 
     public enum CodingKeys: String, CodingKey {
-        case id, category, icon, name, level, x, y, node, fee, outline
+        case id, category, icon, name, level, x, y, node, fee, outline, approximate
+        case whereText = "where"
         case openingHours = "opening_hours"
         case hoursSource = "hours_source"
         case hoursVerified = "hours_verified"
         case source = "_source"
     }
 
-    public init(id: String, category: PoiCategory, icon: String?, name: String, level: String, x: Double, y: Double, node: String, fee: PoiFee?, openingHours: String?, hoursSource: String?, hoursVerified: String?, outline: [Pt]?, source: String? = nil) {
+    public init(id: String, category: PoiCategory, icon: String?, name: String, level: String, x: Double, y: Double, node: String, fee: PoiFee?, openingHours: String?, hoursSource: String?, hoursVerified: String?, outline: [Pt]?, source: String? = nil, approximate: Bool? = nil, whereText: String? = nil) {
+        self.approximate = approximate
+        self.whereText = whereText
         self.id = id
         self.category = category
         self.icon = icon
@@ -412,6 +419,28 @@ public nonisolated struct StationMapSource: Codable, Hashable, Sendable {
         self.url = url
         self.note = note
     }
+
+    enum CodingKeys: String, CodingKey { case type, license, retrieved, url, note, name, read }
+
+    /// Lenient: a source written without a `type` (some hand edits named theirs `name`/`read`) must not cost the whole
+    /// map, which a strict decode did ("There's no map for this station yet" at Nässjö C and others, 2026-10-30).
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        type = (try? c.decodeIfPresent(String.self, forKey: .type)) ?? "manual"
+        license = try? c.decodeIfPresent(String.self, forKey: .license)
+        retrieved = (try? c.decodeIfPresent(String.self, forKey: .retrieved)) ?? (try? c.decodeIfPresent(String.self, forKey: .read))
+        url = try? c.decodeIfPresent(String.self, forKey: .url)
+        note = (try? c.decodeIfPresent(String.self, forKey: .note)) ?? (try? c.decodeIfPresent(String.self, forKey: .name))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(type, forKey: .type)
+        try c.encodeIfPresent(license, forKey: .license)
+        try c.encodeIfPresent(retrieved, forKey: .retrieved)
+        try c.encodeIfPresent(url, forKey: .url)
+        try c.encodeIfPresent(note, forKey: .note)
+    }
 }
 
 public nonisolated struct StationMapChange: Codable, Hashable, Sendable {
@@ -423,6 +452,16 @@ public nonisolated struct StationMapChange: Codable, Hashable, Sendable {
         self.date = date
         self.who = who
         self.what = what
+    }
+
+    enum CodingKeys: String, CodingKey { case date, who, what }
+
+    /// Lenient, like the sources: a hand-written entry without `who` must not cost the whole map.
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        date = (try? c.decodeIfPresent(String.self, forKey: .date)) ?? ""
+        who = (try? c.decodeIfPresent(String.self, forKey: .who)) ?? ""
+        what = (try? c.decodeIfPresent(String.self, forKey: .what)) ?? ""
     }
 }
 

@@ -89,7 +89,7 @@
       "from": "w609037665",
       "kind": "roof",
       "name": "roof",
-      "top_m": 2.0,
+      "top_m": 2,
       "_source": "Outline OSM w609037665 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
     },
     {
@@ -176,5 +176,52 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000170/eskilstuna_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (18.2 m RH 2000, laser 2020-02-27)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "rescf6013a6b6",
+      "category": "waiting",
+      "name": "Väntsal",
+      "level": "0",
+      "x": 63.8,
+      "y": 7.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:30-00:15; Sa,Su 06:30-22:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/ and Sörmlandstrafiken terminalkarta, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000170/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res066578306f",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": 63.8,
+      "y": 7.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/toalett/ and /tillganglighet/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000170/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    },
+    {
+      "id": "res2ea205f23e",
+      "category": "atm",
+      "name": "Uttagsautomat",
+      "level": "0",
+      "x": 63.8,
+      "y": 7.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/eskilstuna-centralstation/uttagsautomat/ and OSM, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000170/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    }
+  ]
 }

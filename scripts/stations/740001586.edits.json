@@ -134,5 +134,124 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740001586/hyllie_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (16.96 m RH 2000, laser 2025-03-07)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resf4177387fa",
+      "category": "atm",
+      "name": "Bankomat",
+      "level": "0",
+      "x": 33.6,
+      "y": -29.2,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OSM (osmfacts 740001586), read 2026-10-30; placed OSM node n11057831932 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res1e0b82ff93",
+      "category": "kiosk",
+      "name": "Pressbyrån",
+      "level": "0",
+      "x": 34.9,
+      "y": -7.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM (osmfacts 740001586), read 2026-10-30; placed OSM node n1692398183 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res149fed59d6",
+      "category": "restaurant",
+      "name": "McDonald's",
+      "level": "0",
+      "x": 37.2,
+      "y": 9.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM (osmfacts 740001586), read 2026-10-30; placed OSM node n6466666264 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res67f21481db",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -32.9,
+      "y": 52.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n1985852004 (read 2026-10-30); placed OSM node n1985852004 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res808d010213",
+      "category": "restaurant",
+      "name": "Brödernas",
+      "level": "0",
+      "x": 44,
+      "y": -67.7,
+      "fee": null,
+      "opening_hours": "Mo-Tu 11:00-21:00; Sa 12:00-22:00; We-Fr 11:00-22:00; Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1692398169 (ODbL), read 2026-10-30; placed OSM node n1692398169 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "resf7b103ff8c",
+      "category": "restaurant",
+      "name": "Subway",
+      "level": "0",
+      "x": 37.1,
+      "y": -59.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-22:00; Sa,Su 10:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1692398174 (ODbL), read 2026-10-30; placed OSM node n1692398174 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res0e49e56731",
+      "category": "restaurant",
+      "name": "Sultan kebab",
+      "level": "0",
+      "x": 37.1,
+      "y": -53.8,
+      "fee": null,
+      "opening_hours": "Mo-Su 10:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1692398193 (ODbL), read 2026-10-30; placed OSM node n1692398193 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res1f13c438c7",
+      "category": "atm",
+      "name": "Swedbank",
+      "level": "0",
+      "x": 30.2,
+      "y": 48.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n1692398196 (ODbL), read 2026-10-30; placed OSM node n1692398196 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    },
+    {
+      "id": "res7a20ce12e4",
+      "category": "restaurant",
+      "name": "Kung Fu Dumplings",
+      "level": "0",
+      "x": 36.6,
+      "y": -47.9,
+      "fee": null,
+      "opening_hours": "Mo-Su 11:00-21:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2396630557 (ODbL), read 2026-10-30; placed OSM node n2396630557 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
+    }
+  ]
 }

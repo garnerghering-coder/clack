@@ -145,7 +145,7 @@
       "kind": "building",
       "name": "building",
       "top_m": 8.36,
-      "base_m": -1.0,
+      "base_m": -1,
       "_source": "Outline OSM w285587679 (ODbL); roof = median of 185 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c012, scanned 2020-02-03), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000007/norrkoping_c_structures_heights.geojson (metres above the platform surface, 3.24 m RH 2000, laser 2020-02-03)"
     },
     {
@@ -218,7 +218,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.88,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20c012, scanned 2020-02-03), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000007/norrkoping_c_structures_heights.geojson (metres above the platform surface, 3.24 m RH 2000, laser 2020-02-03); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -227,5 +227,80 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000007/norrkoping_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (3.24 m RH 2000, laser 2020-02-03)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res93d3feafbe",
+      "category": "waiting",
+      "name": "Väntsal (station)",
+      "level": "0",
+      "x": -44,
+      "y": 0.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:30-00:15; Sa 05:30-22:15; Su 06:45-00:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000007/station_facts.json)",
+      "approximate": true,
+      "where": "station building, Norra Promenaden 94"
+    },
+    {
+      "id": "res20f1ec0744",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": -44,
+      "y": 0.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/toalett/ and https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/tillganglighet/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000007/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    },
+    {
+      "id": "res3c59416548",
+      "category": "locker",
+      "name": "Förvaringsboxar (Speed Box)",
+      "level": "0",
+      "x": -44,
+      "y": 0.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/forvaringsboxar/, read 2026-10-30; OSM; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000007/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    },
+    {
+      "id": "resc22dd246ad",
+      "category": "ticket",
+      "name": "Östgötatrafiken Kundcenter",
+      "level": "0",
+      "x": -44,
+      "y": 0.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:20-20:00; Sa,Su 10:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/norrkoping-centralstation/trafik-och-biljetter/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000007/station_facts.json)",
+      "approximate": true,
+      "where": "by the bus waiting room at the resecentrum"
+    },
+    {
+      "id": "res4a8376221a",
+      "category": "locker",
+      "name": "Speed Services",
+      "level": "0",
+      "x": -51.1,
+      "y": 4.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n12186425107 (read 2026-10-30); placed OSM node n12186425107 (research pass 2026-10-30, data/stations/research/740000007/station_facts.json)"
+    }
+  ]
 }

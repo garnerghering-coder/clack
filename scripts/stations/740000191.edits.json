@@ -122,5 +122,65 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000191/trollhattan_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (44.6 m RH 2000, laser 2020-03-21)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res091bb5bbdd",
+      "category": "cafe",
+      "name": "Stationscaféet",
+      "level": "0",
+      "x": 39.6,
+      "y": 34.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/mat-och-butiker/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000191/station_facts.json)",
+      "approximate": true,
+      "where": "in/at the station building"
+    },
+    {
+      "id": "res198b2152ea",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": 39.6,
+      "y": 34.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/toalett/ and tillganglighet/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000191/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res723646a4ff",
+      "category": "bus",
+      "name": "Trollhättan resecentrum (bus terminal)",
+      "level": "0",
+      "x": 39.6,
+      "y": 34.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vasttrafik.se/reseplanering/hallplatser/9021014081800000/, read 2026-10-30; Trollhättans stad, planbeskrivning \"Detaljplan för del av Resecentrum m m, Tingvalla\" (antagen 2011-04-28), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/resecentrum-d22011/planbeskriv_resecentrum-antagande.pdf, read 2026-10-30; Trollhättans stad, \"Trafikutredning del 1\" (planprogram Resecentrum/Tingvalla, v1.0, 2021-02-04), https://www.trollhattan.se/globalassets/dokument/bygga-bo-och-miljo/stadsbyggnad/detaljplaner/planprogram-resecentrum-tingvalla/trafikutredning-del-1.pdf, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000191/station_facts.json)",
+      "approximate": true,
+      "where": "next to the station building"
+    },
+    {
+      "id": "res747097b63b",
+      "category": "restaurant",
+      "name": "Pizzeria Arena",
+      "level": "0",
+      "x": -14.4,
+      "y": 54.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n3197271610 (ODbL), read 2026-10-30; placed OSM node n3197271610 (research pass 2026-10-30, data/stations/research/740000191/station_facts.json)"
+    }
+  ]
 }

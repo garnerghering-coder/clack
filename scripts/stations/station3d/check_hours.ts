@@ -9,6 +9,9 @@ for (const id of process.argv.slice(2)) {
   const hours: Record<string, { opening_hours: string }> = e.poi_hours ?? {};
   const bad = Object.entries(hours).filter(([, h]) => !parseHours(h.opening_hours));
   for (const [k] of bad) delete hours[k];
+  // Research amenities added as `pois`: an unreadable string is dropped, the place stays (hours not known).
+  let poiBad = 0;
+  for (const p of e.pois ?? []) if (p.opening_hours && !parseHours(p.opening_hours)) { p.opening_hours = null; p.hours_source = null; p.hours_verified = null; poiBad++; }
   fs.writeFileSync(p, JSON.stringify(e, null, 2) + '\n');
-  console.log(`${id}: ${Object.keys(hours).length} hours kept, ${bad.length} dropped${bad.length ? ': ' + bad.map(([, h]) => h.opening_hours).slice(0, 3).join(' | ') : ''}`);
+  console.log(`${id}: ${Object.keys(hours).length} hours kept, ${bad.length} dropped, ${poiBad} unreadable on added places${bad.length ? ': ' + bad.map(([, h]) => h.opening_hours).slice(0, 3).join(' | ') : ''}`);
 }

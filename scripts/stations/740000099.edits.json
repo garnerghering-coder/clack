@@ -108,5 +108,67 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000099/vasteras_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (3.85 m RH 2000, laser 2021-04-05)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res3200c4f5f6",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": -89.9,
+      "y": 103.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-23:30; Sa 05:00-22:30; Su 06:00-22:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/toalett/ and tillganglighet/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000099/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res3eae55801d",
+      "category": "locker",
+      "name": "Förvaringsboxar (Speed Box)",
+      "level": "0",
+      "x": -89.9,
+      "y": 103.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-23:30; Sa 05:00-22:30; Su 06:00-22:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Jernhusen, https://www.jernhusen.se/hitta-din-station/vasteras-centralstation/forvaringsboxar/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000099/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "resff3ec27a0b",
+      "category": "bus",
+      "name": "Hållplats Tågersättning (replacement buses)",
+      "level": "0",
+      "x": -89.9,
+      "y": 103.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "VL map \"Hållplatslägen Västerås Central\" (last updated 2026-03-06), https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf, read 2026-10-30; facts only; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000099/station_facts.json)",
+      "approximate": true,
+      "where": "beside track 1B, about 100 m west of the station building"
+    },
+    {
+      "id": "res2e8c4fddd6",
+      "category": "bus",
+      "name": "Hållplats Flygbussar, turistbussar (airport and long-distance coaches)",
+      "level": "0",
+      "x": -89.9,
+      "y": 103.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "VL map \"Hållplatslägen Västerås Central\" (last updated 2026-03-06), https://vl.se/globalassets/kartor/hallplatsoversikter/hallplatslage_vasterascentral_tillfallig-karta-2026.pdf, read 2026-10-30; facts only; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000099/station_facts.json)",
+      "approximate": true,
+      "where": "beside track 1B, about 150 m west of the station building"
+    }
+  ]
 }

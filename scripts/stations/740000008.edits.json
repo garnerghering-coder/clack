@@ -167,7 +167,7 @@
       "kind": "building",
       "name": "bridge",
       "top_m": 8.06,
-      "base_m": -1.0,
+      "base_m": -1,
       "_source": "Outline OSM w1235549205 (ODbL); roof = median of 212 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
     },
     {
@@ -192,7 +192,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.35,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     },
     {
       "from": "#23",
@@ -200,7 +200,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.26,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     },
     {
       "from": "#24",
@@ -208,7 +208,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.34,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -217,5 +217,67 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000008/skovde_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (140.25 m RH 2000, laser 2022-03-11)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res929da8379b",
+      "category": "shop",
+      "name": "Resecentrumfrisörerna",
+      "level": "0",
+      "x": 62.8,
+      "y": -122.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-14:00; Su off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/mat-och-butiker/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000008/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "resdf4da40c92",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": 62.8,
+      "y": -122.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/toalett/ and https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/tillganglighet/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000008/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res9340b70434",
+      "category": "locker",
+      "name": "Förvaringsboxar (Speed Box)",
+      "level": "0",
+      "x": 62.8,
+      "y": -122.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/forvaringsboxar/, read 2026-10-30; OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000008/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "resf6d4f34ec3",
+      "category": "waiting",
+      "name": "Stationshall",
+      "level": "0",
+      "x": 62.8,
+      "y": -122.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 04:15-01:00; Fr 04:15-02:00; Sa 05:00-02:00; Su 05:00-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/skovde-resecentrum/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000008/station_facts.json)",
+      "approximate": true,
+      "where": "Skövde resecentrum's hall"
+    }
+  ]
 }

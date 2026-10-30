@@ -92,6 +92,11 @@ struct StationMapScreen: View {
             if let map = await app.stations.map(link.stationId) {
                 loaded = .map(map)
                 level = StationSceneLogic.initialLevel(map, startLevel: startLevel(map), current: level)
+                #if DEBUG
+                // `-stationPoi <id>` opens a place's card (to check or photograph it).
+                let args = CommandLine.arguments
+                if let at = args.firstIndex(of: "-stationPoi"), args.indices.contains(at + 1) { poi = map.pois.first { $0.id == args[at + 1] } }
+                #endif
             } else {
                 loaded = .none
             }
@@ -771,7 +776,20 @@ private struct PoiSheet: View {
                     Text(OpeningHours.parse(hours) != nil ? hours.replacingOccurrences(of: #";\s*"#, with: " · ", options: .regularExpression) : hours)
                         .clack(.body).monospacedDigit().foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("stationMap.hoursNote")).clack(.caption).foregroundStyle(Ink.text2)
+                // Checked on the station owner's page: say so and when; else the general note.
+                if poi.hoursSource == "website", let checked = poi.hoursVerified {
+                    Text(l10n.t("stationMap.hoursWebsite", ["date": checked])).clack(.caption).foregroundStyle(Ink.text2)
+                } else {
+                    Text(l10n.t("stationMap.hoursNote")).clack(.caption).foregroundStyle(Ink.text2)
+                }
+            }
+            if poi.approximate == true {
+                // Placed from a description, not located (owner, 2026-10-30): say so, and what the description is.
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    LucideIcon(name: "info", size: 12).foregroundStyle(Ink.text3)
+                    Text(poi.whereText.map { l10n.t("stationMap.approximateWhere", ["where": $0]) } ?? l10n.t("stationMap.approximate"))
+                        .clack(.caption).foregroundStyle(Ink.text2)
+                }
             }
             HStack(spacing: 8) {
                 Button { onRoute(.to) } label: { HStack(spacing: 8) { LucideIcon(name: "route", size: 14); Text(l10n.t("stationMap.routeHere")) } }

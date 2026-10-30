@@ -119,6 +119,10 @@ export interface StationPoi {
   hours_verified: string | null;
   /** The place's own outline (a shop's unit), when it is mapped as one; otherwise it's drawn as a pin. */
   outline?: Pt[];
+  /** The pin stands for a place described in words, not located: at the building, hall or entrance it names. */
+  approximate?: boolean;
+  /** The description it was placed from ("in the hall, by entrance A"), shown with an approximate pin. */
+  where?: string;
   _source?: SourceRef;
 }
 export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'lantmateriet' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons';
@@ -196,6 +200,7 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
     if (!src || !src.trim()) errors.push(`${what}: no _source`);
   };
   for (const l of m.levels) need(`level ${l.id}`, l._source);
+  m.sources.forEach((s, i) => { if (!s.type) errors.push(`source ${i}: no type (the app needs one)`); });
   m.shapes.forEach((s, i) => need(`shape ${i} (${s.kind}${s.name ? ` ${s.name}` : ''})`, s._source));
   m.shapes.forEach((s, i) => {
     if (s.kind === 'roof' && s.top_m === undefined) errors.push(`shape ${i} (roof${s.name ? ` ${s.name}` : ''}): a roof needs top_m`);

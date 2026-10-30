@@ -153,5 +153,59 @@
     "reference_m": 6.84,
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740001587/triangeln_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the street (6.84 m RH 2000, laser 2025-03-07)"
-  }
+  },
+  "pois": [
+    {
+      "id": "res99e651f2c9",
+      "category": "restaurant",
+      "name": "Corfitz Taverna",
+      "level": "0",
+      "x": 47.4,
+      "y": 290,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n1780224911 (ODbL), read 2026-10-30; placed OSM node n1780224911 (research pass 2026-10-30, data/stations/research/740001587/station_facts.json)"
+    },
+    {
+      "id": "rescc0bae0eba",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": -46.1,
+      "y": -3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:15-23:00; Sa 06:00-23:00; Su 07:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2403601384 (ODbL), read 2026-10-30; placed OSM node n2403601384 (research pass 2026-10-30, data/stations/research/740001587/station_facts.json)"
+    },
+    {
+      "id": "res037427c16c",
+      "category": "cafe",
+      "name": "Joe & The Juice",
+      "level": "0",
+      "x": -10.3,
+      "y": -62.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3402696488 (ODbL), read 2026-10-30; placed OSM node n3402696488 (research pass 2026-10-30, data/stations/research/740001587/station_facts.json)"
+    },
+    {
+      "id": "res2c9883a104",
+      "category": "restaurant",
+      "name": "WOSO",
+      "level": "0",
+      "x": 5.8,
+      "y": -60.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10129165432 (ODbL), read 2026-10-30; placed OSM node n10129165432 (research pass 2026-10-30, data/stations/research/740001587/station_facts.json)"
+    }
+  ]
 }

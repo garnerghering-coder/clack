@@ -179,5 +179,65 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000040/herrljunga_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (108.4 m RH 2000, laser 2022-03-04)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resa74fefe7e2",
+      "category": "shop",
+      "name": "Självfallet",
+      "level": "0",
+      "x": 61.6,
+      "y": -3.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000040/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res5ebc3eef8d",
+      "category": "toilet",
+      "name": "Toalett och universaltoalett",
+      "level": "0",
+      "x": 61.6,
+      "y": -3.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 07:30-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/toalett/, read 2026-10-30; OpenStreetMap (osmfacts/740000040.json, ODbL), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000040/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res29a2abdc5a",
+      "category": "waiting",
+      "name": "Stationshus (väntsal)",
+      "level": "0",
+      "x": 61.6,
+      "y": -3.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 07:30-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/herrljunga-station/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000040/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res6084dbcf31",
+      "category": "cafe",
+      "name": "House Of Eden",
+      "level": "0",
+      "x": 9.6,
+      "y": 37.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-13:00,14:00-18:00; Sa 10:00-13:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10116922793 (ODbL), read 2026-10-30; placed OSM node n10116922793 (research pass 2026-10-30, data/stations/research/740000040/station_facts.json)"
+    }
+  ]
 }

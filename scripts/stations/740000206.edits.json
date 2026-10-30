@@ -116,7 +116,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.94,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (19b030, scanned 2019-10-29), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000206/kil_structures_heights.geojson (metres above the platform surface, 98.99 m RH 2000, laser 2019-10-29); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -125,5 +125,64 @@
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000206/kil_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (98.99 m RH 2000, laser 2019-10-29)"
   },
-  "poi_hours": {}
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res44b41f2161",
+      "category": "cafe",
+      "name": "Järnvägscafé",
+      "level": "0",
+      "x": -15.6,
+      "y": 21.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/mat-och-butik/, read 2026-10-30; placed OSM node n12125029961 (research pass 2026-10-30, data/stations/research/740000206/station_facts.json)"
+    },
+    {
+      "id": "resdbde7f4aab",
+      "category": "waiting",
+      "name": "Väntsal",
+      "level": "0",
+      "x": -29.8,
+      "y": 20.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-22:45; Sa 07:15-18:30; Su 08:30-22:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/ and https://www.jernhusen.se/hitta-din-station/kil-station/tillganglighet/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000206/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res262a824612",
+      "category": "toilet",
+      "name": "Universaltoalett",
+      "level": "0",
+      "x": -29.8,
+      "y": 20.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.jernhusen.se/hitta-din-station/kil-station/toalett/ (\"På stationen finns universaltoalett\"), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/740000206/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    },
+    {
+      "id": "res44c1fdf6e1",
+      "category": "shop",
+      "name": "PeKås",
+      "level": "0",
+      "x": 34.8,
+      "y": 60.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap w296470000 (ODbL), read 2026-10-30; placed representative point of the OSM area w296470000 (research pass 2026-10-30, data/stations/research/740000206/station_facts.json)",
+      "approximate": true
+    }
+  ]
 }
