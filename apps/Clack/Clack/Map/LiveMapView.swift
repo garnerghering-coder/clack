@@ -196,16 +196,27 @@ final class LiveMapController {
         if let source = style.source(withIdentifier: "station-platforms") as? MLNShapeSource, let shape = MLNShape.fromGeoJSON(polygons) {
             source.shape = shape
         }
-        // The platform numbers as points at each platform's node (polygons can't carry attributes here).
-        let labels: [[String: Any]] = features.filter(isPolygon).compactMap { f in
+        // The platform numbers as points at each platform's node (polygons can't carry attributes here). A platform
+        // with lettered sectors gives way to its sectors' names (written along the `sector-name` lines) when close.
+        let labels: [[String: Any]] = platformFeatures.compactMap { f in
             guard let props = f["properties"] as? [String: Any], let ref = props["ref"] as? String, let node = props["node"] as? [Double], node.count == 2 else { return nil }
-            return ["type": "Feature", "properties": ["plat": ref], "geometry": ["type": "Point", "coordinates": node]]
+            let sectored = !((props["sectors"] as? [Any]) ?? []).isEmpty
+            return ["type": "Feature", "properties": ["plat": ref, "role": sectored ? "sectored" : "platform"], "geometry": ["type": "Point", "coordinates": node]]
         }
         mapView?.setShape(["type": "FeatureCollection", "features": labels], source: "station-platform-labels")
         // The 3D (zoom 15 on): measured platforms and the buildings and roofs, as native features so their heights
         // can drive the extrusions. Platforms at the standard height stay flat: Explore has no panel to say so.
         let measured = platformFeatures.filter { (($0["properties"] as? [String: Any])?["measured"] as? Bool) == true }
-        setPolygons(measured, source: "station-platforms-3d")
+        // On a raised platform a flat line would be hidden: the sector divider as a thin strip just above its surface.
+        let raised = Set(measured.compactMap { ($0["properties"] as? [String: Any])?["ref"] as? String })
+        let dividers: [[String: Any]] = features.compactMap { f in
+            guard kind(f) == "sector", let ref = (f["properties"] as? [String: Any])?["ref"] as? String, raised.contains(ref),
+                  let c = (f["geometry"] as? [String: Any])?["coordinates"] as? [[Double]], c.count == 2,
+                  let h = measured.first(where: { (($0["properties"] as? [String: Any])?["ref"] as? String) == ref }).flatMap({ ($0["properties"] as? [String: Any])?["height"] as? Double })
+            else { return nil }
+            return ["type": "Feature", "properties": ["cls": "sector", "height": h + 0.06], "geometry": ["type": "Polygon", "coordinates": [Self.carFootprint(back: c[0], front: c[1], widthM: 0.5)]]]
+        }
+        setPolygons(measured + dividers, source: "station-platforms-3d")
         setPolygons(features.filter { isPolygon($0) && kind($0) == "structure" }, source: "station-structures")
     }
 

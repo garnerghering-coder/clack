@@ -430,7 +430,7 @@ final class Station3DStage {
         // Roofs: thin sheets under their measured tops.
         var roofs = StationScene3D.MeshData()
         for r in scene.roofs { roofs.append(StationScene3D.mesh(r.prism, bottomCap: true)) }
-        add(roofs, top: UIColor(cssColor: Colors.roof(dark)), dark: dark, opacity: 0.85)
+        add(roofs, top: UIColor(cssColor: Colors.roof(dark)), dark: dark, opacity: 0.5)
 
         var slabs = StationScene3D.MeshData()
         for s in scene.slabs { slabs.append(StationScene3D.mesh(s.prism, bottomCap: true)) }

@@ -137,6 +137,7 @@ def main():
             st = {"from": ref, "kind": "roof", "name": name, "top_m": round(top, 2), "_source": src + "; underside not measured"}
             if kind == "canopy_laser":
                 st["simplify_m"] = 2.0
+                st["align_to"] = "nearest"
             structures.append(st)
         elif kind in ("footbridge", "bridge"):
             # Road bridges too (owner, 2026-10-30); one whose deck is below the minimum clearance is the railway

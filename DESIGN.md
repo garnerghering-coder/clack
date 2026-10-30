@@ -115,7 +115,14 @@ lighter (the flat car lines hand over at 15). Near a station with measured struc
 16 and flattens again below 15.5 or away from it; tilting by hand is allowed only then. The ground stays flat at rail
 level (MapLibre on iOS draws no terrain). The attribution line adds Lantmäteriet's credit while its heights are shown. Station names, platform numbers and train labels draw over the 3D (owner, 2026-10-30). A selected train shown as cars
 gets a signal-yellow outline on the ground round them instead of the ring, and the camera keeps it centred in the
-space above its sheet until the map is dragged.
+space above its sheet until the map is dragged. Roofs on Explore are at 45 % opacity so trains under them show.
+
+**Platform sectors (owner, 2026-10-30):** a platform with lettered sectors ("2a", "2b") shows them as separate pieces
+when close, on Explore and on the station map: a line across the platform in the text ink where one sector meets the
+next (halfway between the sectors' facing ends; on a raised platform a 0.5 m strip just above its surface), and each
+sector's name written along its part, repeated (every 150 px on Explore, every 220 px as chips on the station map), so
+whichever stretch is on screen says which it is. From Explore's zoom 15.5 the sectors' names replace the platform's
+number; on the station map once two sectors' middles are 70 px apart.
 
 **Full screen:**
 
@@ -124,7 +131,8 @@ alone, heights in metres above the platform surface: the ground from the map's t
 cells a shade apart), flat at rail level where the map has none; tracks as 1.5 m strips in the station-rail ink at rail
 level; platforms as prisms in the station map's platform grey, their measured height (else the 0.55 m standard, said
 so); buildings from their lowest ground to their measured top in the shop grey at 80 % opacity; roofs (canopies, a
-footbridge seen from above) as 0.4 m sheets under their measured tops, a step darker; stairs and escalators as ramps and
+footbridge seen from above) as 0.4 m sheets under their measured tops, a step darker, at 50 % opacity so the trains under
+them show; stairs and escalators as ramps and
 lifts as columns in the secondary ink. A floor above the ground is drawn only from an outline on that level, never from
 walkway points. Unlit colours, the walls a shade darker (light mode) or lighter (dark mode) than the tops, so the shapes
 read without lighting cost. Trains from the board are boxes per car in the operator's colour, the front car lighter (as

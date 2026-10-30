@@ -598,3 +598,125 @@ export function connectionStatus(c: ConnectionInput): ConnectionResult {
   else status = 'easy';
   return { status, layoverSeconds: layover, walkSeconds: walk, slackSeconds: slack, estimated };
 }
+
+/** One lettered part of a platform ("2a"): where its label goes, inside the platform, and its middle line along it. */
+export interface PlatformSector {
+  sector: string;
+  label: Pt;
+  /** The middle of the platform along the sector, every 10 m (where the platform is beside the sector's line). */
+  line: Pt[];
+}
+
+/**
+ * A platform's lettered sectors (edges with tracks "2a", "2b") and the lines across the platform where one meets the
+ * next, in the map's metres (owner, 2026-10-30: the a and b pieces marked separately on the zoomed map). A sector's
+ * line is its track line (BanInfo) or the platform edge; the divider is the platform's cross-section halfway between
+ * the two sectors' facing ends. Empty when the platform has fewer than two sectors.
+ */
+export function platformSectors(p: StationPlatform): { sectors: PlatformSector[]; dividers: [Pt, Pt][] } {
+  const base = p.ref.trim().toLowerCase();
+  const lines = (p.edges ?? []).flatMap((e) => (e.track && /^\d+[a-z]$/.test(e.track) && e.track.slice(0, -1) === base && e.points.length >= 2 ? [{ ...e, track: e.track }] : []));
+  const rings = p.geometry ?? [];
+  if (lines.length < 2 || !rings.length) return { sectors: [], dividers: [] };
+  // The platform's direction: from the first sector's start to its end, the others' order along it.
+  const all = lines.flatMap((e) => e.points);
+  const a = all[0]!, b = all[all.length - 1]!;
+  let dir: Pt = [b[0] - a[0], b[1] - a[1]];
+  const len = Math.hypot(dir[0], dir[1]) || 1;
+  dir = [dir[0] / len, dir[1] / len];
+  const along = (q: Pt) => (q[0] - a[0]) * dir[0] + (q[1] - a[1]) * dir[1];
+  const sorted = lines.map((e) => {
+    const t = e.points.map(along);
+    return { e, lo: Math.min(...t), hi: Math.max(...t) };
+  }).sort((x, y) => x.lo - y.lo);
+  const sectors = sorted.map(({ e }) => {
+    const mid = midpointAlong(e.points);
+    const cut = crossSection(rings, mid, localDir(e.points, mid));
+    const line: Pt[] = [];
+    for (const q of resample(e.points, 10)) {
+      const c = crossSection(rings, q, localDir(e.points, q));
+      if (c) line.push([(c[0][0] + c[1][0]) / 2, (c[0][1] + c[1][1]) / 2]);
+    }
+    return { sector: e.track, label: cut ? [(cut[0][0] + cut[1][0]) / 2, (cut[0][1] + cut[1][1]) / 2] as Pt : mid, line };
+  });
+  const dividers: [Pt, Pt][] = [];
+  for (let i = 0; i + 1 < sorted.length; i++) {
+    const t = (sorted[i]!.hi + sorted[i + 1]!.lo) / 2;
+    // The point at that distance on either sector's line (whichever comes closest), across the platform there.
+    const pts = [...sorted[i]!.e.points, ...sorted[i + 1]!.e.points];
+    const ordered = [...pts].sort((x, y) => along(x) - along(y));
+    const j = Math.max(1, ordered.findIndex((q) => along(q) >= t));
+    const q0 = ordered[j - 1]!, q1 = ordered[Math.min(j, ordered.length - 1)]!;
+    const f = along(q1) - along(q0) > 1e-6 ? (t - along(q0)) / (along(q1) - along(q0)) : 0;
+    const at: Pt = [q0[0] + (q1[0] - q0[0]) * f, q0[1] + (q1[1] - q0[1]) * f];
+    const cut = crossSection(rings, at, norm([q1[0] - q0[0], q1[1] - q0[1]]) ?? dir);
+    if (cut) dividers.push(cut);
+  }
+  return { sectors, dividers };
+}
+
+/** Points every `step` metres along a polyline, both ends included. */
+function resample(pts: Pt[], step: number): Pt[] {
+  const out: Pt[] = [pts[0]!];
+  let carry = 0;
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const a = pts[i]!, b = pts[i + 1]!;
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    let d = step - carry;
+    while (d <= len) {
+      out.push([a[0] + ((b[0] - a[0]) * d) / len, a[1] + ((b[1] - a[1]) * d) / len]);
+      d += step;
+    }
+    carry = len - (d - step);
+  }
+  const last = pts[pts.length - 1]!;
+  if (Math.hypot(out.at(-1)![0] - last[0], out.at(-1)![1] - last[1]) > 1) out.push(last);
+  return out;
+}
+
+function norm(v: Pt): Pt | null {
+  const l = Math.hypot(v[0], v[1]);
+  return l > 1e-6 ? [v[0] / l, v[1] / l] : null;
+}
+
+/** The direction of a polyline at its point nearest `q`. */
+function localDir(pts: Pt[], q: Pt): Pt {
+  let best = 0, bestD = Infinity;
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const d = Math.hypot((pts[i]![0] + pts[i + 1]![0]) / 2 - q[0], (pts[i]![1] + pts[i + 1]![1]) / 2 - q[1]);
+    if (d < bestD && norm([pts[i + 1]![0] - pts[i]![0], pts[i + 1]![1] - pts[i]![1]])) [best, bestD] = [i, d];
+  }
+  return norm([pts[best + 1]![0] - pts[best]![0], pts[best + 1]![1] - pts[best]![1]]) ?? [1, 0];
+}
+
+/**
+ * The platform's width at `q` across direction `d`: where the line through `q` square to `d` crosses the outline, the
+ * stretch nearest `q` (q may lie just off the platform, on its track line). Null when the line misses the platform.
+ */
+export function crossSection(rings: Pt[][], q: Pt, d: Pt): [Pt, Pt] | null {
+  const n: Pt = [-d[1], d[0]];
+  const ts: number[] = [];
+  for (const ring of rings) {
+    // Every side, the closing one too (a closed ring's last side has no length and is skipped).
+    for (let i = 0; i < ring.length; i++) {
+      const p0 = ring[i]!, p1 = ring[(i + 1) % ring.length]!;
+      const ex = p1[0] - p0[0], ey = p1[1] - p0[1];
+      const den = n[0] * ey - n[1] * ex;
+      if (Math.abs(den) < 1e-9) continue;
+      // q + t·n = p0 + s·e
+      const t = ((p0[0] - q[0]) * ey - (p0[1] - q[1]) * ex) / den;
+      const s = ((p0[0] - q[0]) * n[1] - (p0[1] - q[1]) * n[0]) / den;
+      if (s >= 0 && s <= 1) ts.push(t);
+    }
+  }
+  ts.sort((x, y) => x - y);
+  // Inside-stretches are consecutive pairs; the one holding q, else the nearest within 15 m.
+  const gap = ([lo, hi]: [number, number]) => (lo <= 0 && hi >= 0 ? 0 : Math.min(Math.abs(lo), Math.abs(hi)));
+  let best: [number, number] | null = null;
+  for (let i = 0; i + 1 < ts.length; i += 2) {
+    const span: [number, number] = [ts[i]!, ts[i + 1]!];
+    if (span[1] - span[0] >= 0.3 && (!best || gap(span) < gap(best))) best = span;
+  }
+  if (!best || gap(best) > 15) return null;
+  return [[q[0] + n[0] * best[0], q[1] + n[1] * best[0]], [q[0] + n[0] * best[1], q[1] + n[1] * best[1]]];
+}

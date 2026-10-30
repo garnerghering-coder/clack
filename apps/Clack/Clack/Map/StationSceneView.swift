@@ -165,6 +165,15 @@ struct StationSceneView: View {
                 context.fill(polygon(g), with: .color(Palette.platform))
                 context.stroke(polygon(g), with: .color(Palette.platform), style: StrokeStyle(lineWidth: 0.5 / k, lineJoin: .round))
             }
+            // Where one lettered sector meets the next ("2a" | "2b"), once the sectors get their own chips.
+            if k > 0.3 {
+                for (a, b) in PlatformSectors.of(platform).dividers {
+                    var line = Path()
+                    line.move(to: CGPoint(x: a.x, y: a.y))
+                    line.addLine(to: CGPoint(x: b.x, y: b.y))
+                    context.stroke(line, with: .color(Ink.text2.opacity(0.8)), lineWidth: 1.2 / k)
+                }
+            }
         }
         if k > 2.2 {
             for node in map.nodes where node.level == level && (node.type == .stairs || node.type == .escalator || node.type == .lift) {

@@ -1162,6 +1162,28 @@ def apply_structures(shapes, edits, xy, ground_level):
         osm = None
         if st["from"][:1] in ("w", "r") and st["from"][1:].isdigit():
             osm = f"osm:{'way' if st['from'][0] == 'w' else 'relation'}/{st['from'][1:]}"
+        if st.get("align_to"):
+            # A roof traced from 1 m laser cells has ragged edges; drawn instead as the rectangle that covers the trace,
+            # aligned to the adjoining building's longest edge (owner, 2026-10-30: "its edge is parallel to the rest of
+            # that building"). "nearest" picks the closest building outline.
+            def centre(q):
+                return (sum(x for x, _ in q) / len(q), sum(y for _, y in q) / len(q))
+            bs = [s2 for s2 in shapes if s2["kind"] == "building" and len(s2["points"]) >= 3]
+            ref_shape = next((s2 for s2 in bs if st["align_to"] != "nearest" and s2.get("_source", "").endswith("/" + st["align_to"].lstrip("wr"))), None)
+            if ref_shape is None and bs:
+                cx, cy = centre(pts)
+                ref_shape = min(bs, key=lambda s2: math.hypot(centre(s2["points"])[0] - cx, centre(s2["points"])[1] - cy))
+            if ref_shape:
+                bp = ref_shape["points"]
+                a, b = max(((bp[i], bp[(i + 1) % len(bp)]) for i in range(len(bp))), key=lambda e: math.hypot(e[1][0] - e[0][0], e[1][1] - e[0][1]))
+                ang = math.atan2(b[1] - a[1], b[0] - a[0])
+                ca, sa = math.cos(-ang), math.sin(-ang)
+                rot = [(x * ca - y * sa, x * sa + y * ca) for x, y in pts]
+                x0, x1 = min(x for x, _ in rot), max(x for x, _ in rot)
+                y0, y1 = min(y for _, y in rot), max(y for _, y in rot)
+                cb, sb = math.cos(ang), math.sin(ang)
+                pts = [(round(x * cb - y * sb, 1), round(x * sb + y * cb, 1)) for x, y in ((x0, y0), (x1, y0), (x1, y1), (x0, y1))]
+                st = {**st, "_source": st["_source"] + f"; drawn as the rectangle covering the trace, parallel to {ref_shape.get('_source', 'the adjoining building')}"}
         shape = dict(level=st.get("level", ground_level), kind=st["kind"], points=pts, _source=st["_source"])
         if st.get("name"):
             shape["name"] = st["name"]

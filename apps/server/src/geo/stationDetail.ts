@@ -6,7 +6,7 @@
 // platform's height, for the map's 3D at the closest zooms.
 import zlib from 'node:zlib';
 import { and, gte, lte } from 'drizzle-orm';
-import { fromLocal, LASER_SOURCES, type StationMap } from '@clack/shared';
+import { fromLocal, LASER_SOURCES, platformSectors, type StationMap } from '@clack/shared';
 import type { Db } from '../db/client.js';
 import { stations } from '../db/schema.js';
 import { stationMap } from '../stations/maps.js';
@@ -61,6 +61,11 @@ export function platformFeatures(m: StationMap, stationId: string) {
         tracks: p.tracks,
         level: p.level,
         node: node ? [r6(node[1]), r6(node[0])] : null,
+        // The lettered parts ("2a", "2b") with a point inside each for its label.
+        sectors: platformSectors(p).sectors.map((sc) => {
+          const [lat, lon] = fromLocal(m, sc.label[0], sc.label[1]);
+          return { ref: sc.sector, at: [r6(lon), r6(lat)] };
+        }),
         draft: m.quality === 'osm_draft',
         // Above the rails, the map's flat ground; the standard when the map has none. `measured` (what the 3D raises)
         // also needs the platform on the main platform level (the one most platforms are on): a tunnel platform
@@ -70,6 +75,33 @@ export function platformFeatures(m: StationMap, stationId: string) {
       },
       geometry: { type: 'Polygon' as const, coordinates: rings },
     };
+  });
+}
+
+/**
+ * Lettered sectors as lines, in lon/lat: across the platform where one sector meets the next (cls `sector`), and each
+ * sector's middle line along the platform (cls `sector-name`, `ref` "2a"), which the map writes the sector along.
+ */
+export function sectorFeatures(m: StationMap, stationId: string) {
+  const r6 = (v: number) => Math.round(v * 1e6) / 1e6;
+  const ll = (pts: [number, number][]) => pts.map(([x, y]) => {
+    const [lat, lon] = fromLocal(m, x, y);
+    return [r6(lon), r6(lat)];
+  });
+  return m.platforms.flatMap((p) => {
+    const { sectors, dividers } = platformSectors(p);
+    return [
+      ...dividers.map((d) => ({
+        type: 'Feature' as const,
+        properties: { kind: 'sector', cls: 'sector', stationId, ref: p.ref },
+        geometry: { type: 'LineString' as const, coordinates: ll(d) },
+      })),
+      ...sectors.filter((s) => s.line.length >= 2).map((s) => ({
+        type: 'Feature' as const,
+        properties: { kind: 'sector-name', cls: 'sector-name', stationId, ref: s.sector },
+        geometry: { type: 'LineString' as const, coordinates: ll(s.line) },
+      })),
+    ];
   });
 }
 
@@ -148,7 +180,7 @@ export function stationDetailGeoJson(db: Db, graph: RailGraph, b: Bbox) {
     .all();
   const platforms = inBox.flatMap((s) => {
     const m = stationMap(s.id);
-    return m ? [...platformFeatures(m, s.id), ...structureFeatures(m, s.id)] : [];
+    return m ? [...platformFeatures(m, s.id), ...sectorFeatures(m, s.id), ...structureFeatures(m, s.id)] : [];
   });
   return { type: 'FeatureCollection', features: [...trackFeatures(graph, b), ...platforms] };
 }

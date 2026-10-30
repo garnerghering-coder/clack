@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cacheKey, parseBbox, platformFeatures, STANDARD_PLATFORM_HEIGHT_M, structureFeatures } from '../src/geo/stationDetail.js';
+import { cacheKey, parseBbox, platformFeatures, sectorFeatures, STANDARD_PLATFORM_HEIGHT_M, structureFeatures } from '../src/geo/stationDetail.js';
 import type { StationMap } from '@clack/shared';
 
 describe('station detail', () => {
@@ -55,5 +55,38 @@ describe('station detail', () => {
     expect(s[1]!.geometry.coordinates[0]!.at(-1)).toEqual(s[1]!.geometry.coordinates[0]![0]);
     const p = platformFeatures(m, 'x');
     expect(p.map((f) => [f.properties.height, f.properties.measured])).toEqual([[0.58, true], [STANDARD_PLATFORM_HEIGHT_M, false]]);
+  });
+
+  it('labels each lettered sector inside the platform and draws a line across where they meet', () => {
+    // A 200 m platform 6 m wide along the x axis; sector a's track line runs 3 m off its edge over the west half.
+    const m = {
+      schema: 2, station_id: 'x', name: 'X', origin: { lat: 57.0, lon: 14.0 }, coord_system: 'local_m', levels: [], shapes: [], nodes: [], edges: [],
+      platforms: [{
+        id: 'p2', ref: '2', tracks: ['2'], level: 'L0', node: 'n1', geometry: [[[0, 0], [200, 0], [200, -6], [0, -6], [0, 0]]], _source: 't',
+        edges: [
+          { track: '2', points: [[0, 1], [200, 1]], _source: 't' },
+          { track: '2a', points: [[5, 3], [90, 3]], _source: 't' },
+          { track: '2b', points: [[110, 3], [195, 3]], _source: 't' },
+        ],
+      }],
+    } as unknown as StationMap;
+    const [f] = platformFeatures(m, 'x');
+    expect(f!.properties.sectors.map((s) => s.ref)).toEqual(['2a', '2b']);
+    // The label sits on the platform (between 0 and 6 m north of y = 0), at the sector's middle.
+    const [lon, lat] = f!.properties.sectors[0]!.at;
+    expect(lat).toBeGreaterThan(57);
+    expect(lat).toBeLessThan(57 + 6 / 110574);
+    expect(lon).toBeCloseTo(14 + 47.5 / (111320 * Math.cos((57 * Math.PI) / 180)), 5);
+    const lines = sectorFeatures(m, 'x');
+    // The divider, then each sector's middle line along the platform (3 m north of y = 0), to write its name along.
+    expect(lines.map((l) => [l.properties.cls, l.properties.ref])).toEqual([['sector', '2'], ['sector-name', '2a'], ['sector-name', '2b']]);
+    expect(lines[1]!.geometry.coordinates.length).toBeGreaterThan(5);
+    expect((lines[1]!.geometry.coordinates[3]![1]! - 57) * 110574).toBeCloseTo(3, 0);
+    const d = lines[0];
+    // Across the platform at 100 m, from one edge to the other.
+    const xs = d!.geometry.coordinates.map((c) => (c[0]! - 14) * 111320 * Math.cos((57 * Math.PI) / 180));
+    expect(xs[0]).toBeCloseTo(100, 0);
+    expect(xs[1]).toBeCloseTo(100, 0);
+    expect(Math.abs(d!.geometry.coordinates[0]![1]! - d!.geometry.coordinates[1]![1]!) * 110574).toBeCloseTo(6, 0);
   });
 });

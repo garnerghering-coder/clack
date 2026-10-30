@@ -202,6 +202,25 @@ public nonisolated enum StationSceneLogic {
             let p = rotate(node.x, node.y, degrees: rot)
             let (sx, sy) = (p.x * k, p.y * k)
             let mark = markFor[platform.id]
+            // Zoomed in far enough that its lettered sectors ("2a", "2b") sit apart: a chip on each instead.
+            let sectors = mark == nil ? PlatformSectors.of(platform).sectors : []
+            let sectorPoints = sectors.map { (rotate($0.label.x, $0.label.y, degrees: rot), $0) }
+            if sectorPoints.count >= 2, zip(sectorPoints, sectorPoints.dropFirst()).allSatisfy({ hypot(($0.0.x - $1.0.x) * k, ($0.0.y - $1.0.y) * k) >= 70 }) {
+                // From the sector's middle outwards, one every 220 px along it, so any stretch on screen is named.
+                for (q, s) in sectorPoints {
+                    chips.append(PlatformChip(id: "\(platform.id)#\(s.sector)", x: s.label.x, y: s.label.y, label: s.sector, sx: q.x * k, sy: q.y * k))
+                    let mid = s.line.indices.min { hypot(s.line[$0].x - s.label.x, s.line[$0].y - s.label.y) < hypot(s.line[$1].x - s.label.x, s.line[$1].y - s.label.y) } ?? 0
+                    for (way, side) in [Array(s.line[..<mid].reversed()), Array(s.line[mid...])].enumerated() {
+                        var from = s.label
+                        for (n, pt) in side.enumerated() where hypot(pt.x - from.x, pt.y - from.y) * k >= 220 {
+                            from = pt
+                            let r = rotate(pt.x, pt.y, degrees: rot)
+                            chips.append(PlatformChip(id: "\(platform.id)#\(s.sector)#\(way)#\(n)", x: pt.x, y: pt.y, label: s.sector, sx: r.x * k, sy: r.y * k))
+                        }
+                    }
+                }
+                continue
+            }
             if mark == nil, let near = chips.firstIndex(where: { $0.mark == nil && hypot($0.sx - sx, $0.sy - sy) < 28 }) {
                 chips[near].label = [chips[near].label, platform.ref].sorted { (Double($0) ?? 0) < (Double($1) ?? 0) }.joined(separator: "/")
             } else {

@@ -199,9 +199,31 @@ nonisolated enum MapStyle {
                 "paint": ["line-color": c.text, "line-opacity": 0.25, "line-width": 0.8],
             ],
             [
-                "id": "detail-platform-labels", "type": "symbol", "source": "station-platform-labels", "minzoom": 14,
+                // Where one lettered sector of a platform meets the next ("2a" | "2b"), across the platform.
+                "id": "detail-sector-lines", "type": "line", "source": "station-detail", "minzoom": 15.5, "layout": ["line-cap": "butt"],
+                "filter": ["==", ["get", "cls"], "sector"],
+                "paint": ["line-color": c.text, "line-opacity": 0.7, "line-width": ["interpolate", ["linear"], ["zoom"], 15.5, 1, 18, 2.5]],
+            ],
+        ] + [
+            // A platform's number; one with lettered sectors shows its sectors' ("2a", "2b") instead from zoom 15.5
+            // (owner, 2026-10-30: the a and b pieces marked separately when zoomed in).
+            ("detail-platform-labels", ["==", ["get", "role"], "platform"] as [Any], 14.0, 24.0),
+            ("detail-platform-labels-sectored", ["==", ["get", "role"], "sectored"] as [Any], 14.0, 15.5),
+        ].map { id, filter, minZoom, maxZoom -> [String: Any] in
+            [
+                "id": id, "type": "symbol", "source": "station-platform-labels", "minzoom": minZoom, "maxzoom": maxZoom, "filter": filter,
                 "layout": ["text-field": ["get", "plat"], "text-font": ["Noto Sans Medium"], "text-size": 11, "text-allow-overlap": false, "symbol-placement": "point"],
                 "paint": ["text-color": c.text, "text-halo-color": c.labelHalo, "text-halo-width": 1],
+            ]
+        } + [
+            // Each sector written along its part of the platform, repeated, so any stretch on screen says which it is
+            // (a sector is ~150 m: one label at its middle is off-screen when close).
+            [
+                "id": "detail-sector-labels", "type": "symbol", "source": "station-detail", "minzoom": 15.5,
+                "filter": ["==", ["get", "cls"], "sector-name"],
+                "layout": ["text-field": ["get", "ref"], "text-font": ["Noto Sans Medium"], "text-size": 12, "symbol-placement": "line",
+                           "symbol-spacing": 150, "text-keep-upright": true, "text-pitch-alignment": "viewport", "text-allow-overlap": false],
+                "paint": ["text-color": c.text, "text-halo-color": c.labelHalo, "text-halo-width": 1.2],
             ],
         ]
     }
@@ -230,12 +252,13 @@ nonisolated enum MapStyle {
     /// detail (`station-platforms-3d`, `station-structures`, heights in metres above the rails, the map's flat ground)
     /// and every train's cars as boxes (`trains-close-3d`). Colours as the full-screen 3D view's; the camera tilts
     /// only where a station has measured structures (`ExploreModel.model3DZoom`).
+    /// Roofs are see-through (0.45) so the trains standing under them show (owner, 2026-10-30).
     static func stationModelLayers(_ c: Colors, dark isDark: Bool) -> [[String: Any]] {
         let height: [Any] = ["get", "height"], base: [Any] = ["get", "base"]
         return [
             [
                 "id": "model-platforms", "type": "fill-extrusion", "source": "station-platforms-3d", "minzoom": 15,
-                "paint": ["fill-extrusion-color": isDark ? "#4a4a4a" : "#d6d6d6", "fill-extrusion-height": height, "fill-extrusion-base": 0, "fill-extrusion-opacity": 0.95],
+                "paint": ["fill-extrusion-color": ["case", ["==", ["get", "cls"], "sector"], c.text, isDark ? "#4a4a4a" : "#d6d6d6"], "fill-extrusion-height": height, "fill-extrusion-base": 0, "fill-extrusion-opacity": 0.95],
             ],
             [
                 "id": "model-buildings", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
@@ -245,7 +268,7 @@ nonisolated enum MapStyle {
             [
                 "id": "model-roofs", "type": "fill-extrusion", "source": "station-structures", "minzoom": 15,
                 "filter": ["==", ["get", "cls"], "roof"],
-                "paint": ["fill-extrusion-color": isDark ? "#3a3a3a" : "#c4c4c4", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.9],
+                "paint": ["fill-extrusion-color": isDark ? "#3a3a3a" : "#c4c4c4", "fill-extrusion-height": height, "fill-extrusion-base": base, "fill-extrusion-opacity": 0.45],
             ],
             [
                 "id": "model-cars", "type": "fill-extrusion", "source": "trains-close-3d", "minzoom": 15,
