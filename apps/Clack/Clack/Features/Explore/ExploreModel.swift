@@ -448,7 +448,7 @@ final class ExploreModel {
 
     /// Close in on a station with measured structures, the map tilts into 3D (owner, 2026-10-30: "when a user zooms in
     /// close enough to the station, it switches into the 3d view"); out again, or away from it, it flattens. In at
-    /// `model3DZoom`, out half a zoom below, so it doesn't flip at the edge.
+    /// `model3DZoom`, out a whole zoom below, so it doesn't flip at the edge.
     static let model3DZoom = 16.0
     static let tiltDegrees = 55.0
     @ObservationIgnored private var detailHasStructures = false
@@ -459,7 +459,7 @@ final class ExploreModel {
     private(set) var laserCredit3D: String?
 
     private func updateTilt() {
-        let want = detailHasStructures && zoom >= (tilted ? Self.model3DZoom - 0.5 : Self.model3DZoom)
+        let want = detailHasStructures && zoom >= (tilted ? Self.model3DZoom - 1 : Self.model3DZoom)
         guard want != tilted else { return }
         tilted = want
         controller.setTilt(want ? Self.tiltDegrees : 0)
@@ -559,8 +559,10 @@ final class ExploreModel {
     func openStation(_ hit: StationHit) async {
         endSearch()
         deselect()
+        // Close in on it (owner, 2026-10-30): a mapped station to its 3D (the tilt follows at that zoom), others to
+        // its tracks, in the space above the station's sheet.
         if let info = await app?.stations.info(hit.id) {
-            controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: 10, offset: 0)
+            controller.ease(to: CLLocationCoordinate2D(latitude: info.lat, longitude: info.lon), minZoom: info.hasMap ? Self.model3DZoom + 0.5 : 15, offset: min(260, controller.height * 0.29))
         }
         stationSheet = StationSheetTarget(id: hit.id, name: hit.name)
     }

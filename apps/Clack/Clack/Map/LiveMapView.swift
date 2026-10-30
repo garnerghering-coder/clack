@@ -261,10 +261,17 @@ final class LiveMapController {
     /// only while tilted.
     func setTilt(_ degrees: Double) {
         guard let mapView else { return }
-        mapView.allowsTilting = degrees > 0
+        // Tilting allowed first when tilting, and only switched off after the camera is flat again: with tilting off,
+        // MapLibre keeps the pitch it has (owner, 2026-10-30: "it doesn't untilt when you zoom out").
+        if degrees > 0 { mapView.allowsTilting = true }
+        // Same zoom level at the new pitch: MapLibre keeps the camera's altitude, which shifts the zoom by ~0.8 at 55°,
+        // and that flipped the tilt straight back.
         let camera = mapView.camera
         camera.pitch = degrees
-        mapView.setCamera(camera, withDuration: 0.6, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut))
+        camera.altitude = MLNAltitudeForZoomLevel(mapView.zoomLevel, degrees, mapView.centerCoordinate.latitude, mapView.bounds.size)
+        mapView.setCamera(camera, withDuration: 0.6, animationTimingFunction: CAMediaTimingFunction(name: .easeInEaseOut)) { [weak mapView] in
+            if degrees == 0 { mapView?.allowsTilting = false }
+        }
     }
 
     /// Straight to a place at a zoom (the Debug `-exploreAt` argument; no animation).

@@ -129,6 +129,11 @@ struct ExploreScreen: View {
                     for _ in 0..<60 where !model.ready { try? await Task.sleep(for: .milliseconds(250)) }
                     try? await Task.sleep(for: .milliseconds(500))
                     model.controller.jump(to: CLLocationCoordinate2D(latitude: p[0], longitude: p[1]), zoom: p[2])
+                    // `-exploreZoomOut <zoom>` zooms out there six seconds later (to check the 3D flattens again).
+                    if let z = args.firstIndex(of: "-exploreZoomOut").flatMap({ args.indices.contains($0 + 1) ? Double(args[$0 + 1]) : nil }) {
+                        try? await Task.sleep(for: .seconds(6))
+                        model.controller.jump(to: CLLocationCoordinate2D(latitude: p[0], longitude: p[1]), zoom: z)
+                    }
                 }
             }
             // `-exploreSelect <train id>` then selects a train (its cars outlined, the camera following it).
