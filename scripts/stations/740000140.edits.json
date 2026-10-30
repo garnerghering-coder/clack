@@ -30,6 +30,20 @@
     {
       "name": "Owner's AR walk 2026-10-29 (walk DC1B3590, 14 min, 28 marks) and walk 0CA1F029 (lift, 6 marks)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000140)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -40,6 +54,11 @@
     {
       "date": "2026-10-29",
       "what": "Footbridge level with its barometer height, entrances, toilets, lockers, shops and the stairs/lift/escalator links the walks showed. Platforms 1, 2/4 and 5–8 still need OSM outlines (or a plan) before their links can be drawn."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 6 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000140)."
     }
   ],
   "entrances": [
@@ -242,7 +261,7 @@
     {
       "from": {
         "at": [
-          62.0,
+          62,
           -79.6
         ],
         "level": "0"
@@ -250,7 +269,7 @@
       "to": {
         "platform": "1a",
         "near": [
-          62.0,
+          62,
           -79.6
         ]
       },
@@ -279,5 +298,97 @@
       "note": "Door from the station building (by the toilets) out to platform 1b.",
       "_source": "owner's AR walk 2026-10-29 (walk DC1B3590), mark 'Some toilets and the door out to platform 1b' (GPS ±14 m)"
     }
-  ]
+  ],
+  "platform_heights": {
+    "3": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 676; BanInfo BIS 258 (track 2s): tracks 2n,3n,2s,4n,4s, class hög = 0.73 m above rail, 499 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 676; BanInfo BIS 258 (track 2s): tracks 2n,3n,2s,4n,4s, class hög = 0.73 m above rail, 499 m long; a recorded design class, not a survey"
+    },
+    "9": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 677; BanInfo BIS 259 (track 10n,10s): tracks 10n,9n, class hög = 0.73 m above rail, 310 m long; a recorded design class, not a survey"
+    },
+    "10": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 677; BanInfo BIS 259 (track 10n,10s): tracks 10n,9n, class hög = 0.73 m above rail, 310 m long; a recorded design class, not a survey"
+    },
+    "1a": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 673; BanInfo BIS 1547 (track 1s): tracks 1s, class mellan = 0.58 m above rail, 148 m long; a recorded design class, not a survey"
+    },
+    "1b": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 673; BanInfo BIS 1547 (track 1s): tracks 1s, class mellan = 0.58 m above rail, 148 m long; a recorded design class, not a survey"
+    },
+    "2a": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 676; BanInfo BIS 258 (track 2s): tracks 2n,3n,2s,4n,4s, class hög = 0.73 m above rail, 499 m long; a recorded design class, not a survey"
+    },
+    "2b": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 676; BanInfo BIS 258 (track 2s): tracks 2n,3n,2s,4n,4s, class hög = 0.73 m above rail, 499 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000140/nassjo_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w180051276",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.3,
+      "base_m": -0.53,
+      "_source": "Outline OSM w180051276 (ODbL); roof = median of 42 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20)"
+    },
+    {
+      "from": "w180051280",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.81,
+      "base_m": 1.92,
+      "_source": "Outline OSM w180051280 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20)"
+    },
+    {
+      "from": "w185046408",
+      "kind": "building",
+      "name": "Nässjö resecentrum (station building)",
+      "top_m": 6.66,
+      "base_m": -0.47,
+      "_source": "Outline OSM w185046408 (ODbL); roof = median of 2520 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20)"
+    },
+    {
+      "from": "#4",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.5,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#5",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.71,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#6",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.99,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22c001, scanned 2022-03-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000140/nassjo_c_structures_heights.geojson (metres above the platform surface, 294.52 m RH 2000, laser 2022-03-20); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000140/nassjo_c_ground_1m.tif",
+    "reference_m": 294.52,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000140/nassjo_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (294.52 m RH 2000, laser 2022-03-20)"
+  },
+  "poi_hours": {}
 }

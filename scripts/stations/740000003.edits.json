@@ -247,6 +247,20 @@
       "url": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/karta-over-stationen/",
       "retrieved": "2026-10-22",
       "note": "Jernhusen's station map of Malmö C (January 2026 PDF): shop units, names and outlines from the PDF's own vector shapes, placed by fitting them to OpenStreetMap's shop pins (median 4.7 m off). Not ODbL: Jernhusen hasn't licensed the plan; see data/stations/README.md."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000003)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -259,6 +273,11 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "Shops, cafés, restaurants and services from Jernhusen's January 2026 station map, with their outlines (31 places); Oak berry and Gottelisa, no longer on it, removed."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 34 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000003)."
     }
   ],
   "pois": [
@@ -268,7 +287,7 @@
       "name": "7-Eleven",
       "level": "0",
       "x": 43.9,
-      "y": -3.0,
+      "y": -3,
       "opening_hours": "Mo-Th 06:00-24:00, Fr 06:00-01:00, Sa 07:00-01:00, Su 08:00-18:00",
       "hours_source": "osm",
       "hours_verified": null,
@@ -282,7 +301,7 @@
           3.9
         ],
         [
-          50.0,
+          50,
           1.3
         ],
         [
@@ -362,7 +381,7 @@
       "hours_verified": null,
       "outline": [
         [
-          6.0,
+          6,
           1.7
         ],
         [
@@ -371,7 +390,7 @@
         ],
         [
           15.8,
-          11.0
+          11
         ],
         [
           12.6,
@@ -403,7 +422,7 @@
           0.6
         ],
         [
-          8.0,
+          8,
           -1.7
         ]
       ],
@@ -433,8 +452,8 @@
           13.2
         ],
         [
-          5.0,
-          2.0
+          5,
+          2
         ]
       ],
       "icon": "sushi"
@@ -445,7 +464,7 @@
       "name": "Spazio",
       "level": "0",
       "x": -6.6,
-      "y": -8.0,
+      "y": -8,
       "opening_hours": "Mo-Su 08:00-22:30",
       "hours_source": "osm",
       "hours_verified": null,
@@ -480,16 +499,16 @@
       "hours_verified": null,
       "outline": [
         [
-          -14.0,
+          -14,
           -25.1
         ],
         [
-          -11.0,
+          -11,
           -14.7
         ],
         [
           -6.3,
-          -16.0
+          -16
         ],
         [
           -9.3,
@@ -588,7 +607,7 @@
           -52.1
         ],
         [
-          -36.0,
+          -36,
           -63.6
         ]
       ],
@@ -610,7 +629,7 @@
           -21.1
         ],
         [
-          -50.0,
+          -50,
           -4.6
         ],
         [
@@ -689,7 +708,7 @@
       "category": "restaurant",
       "name": "Subway",
       "level": "0",
-      "x": 4.0,
+      "x": 4,
       "y": -7.3,
       "opening_hours": "Mo-Fr 07:00-23:00; Sa,Su 08:00-23:00",
       "hours_source": "osm",
@@ -697,7 +716,7 @@
       "outline": [
         [
           -3.2,
-          -8.0
+          -8
         ],
         [
           -1.8,
@@ -735,7 +754,7 @@
         ],
         [
           9.6,
-          -12.0
+          -12
         ],
         [
           8.1,
@@ -761,10 +780,10 @@
         ],
         [
           -4.9,
-          -14.0
+          -14
         ],
         [
-          8.0,
+          8,
           -17.6
         ],
         [
@@ -790,10 +809,10 @@
         ],
         [
           -6.9,
-          -21.0
+          -21
         ],
         [
-          6.0,
+          6,
           -24.7
         ],
         [
@@ -816,14 +835,14 @@
       "outline": [
         [
           -11.7,
-          -38.0
+          -38
         ],
         [
-          -10.0,
+          -10,
           -31.8
         ],
         [
-          3.0,
+          3,
           -35.5
         ],
         [
@@ -837,14 +856,14 @@
       "category": "kiosk",
       "name": "Pressbyrån",
       "level": "0",
-      "x": -8.0,
+      "x": -8,
       "y": -49.3,
       "opening_hours": "Mo-Fr 05:30-23:00;Sa 06:30-23:00;Su 06:55-23:00",
       "hours_source": "osm",
       "hours_verified": null,
       "outline": [
         [
-          -17.0,
+          -17,
           -56.5
         ],
         [
@@ -852,7 +871,7 @@
           -38.4
         ],
         [
-          1.0,
+          1,
           -42.1
         ],
         [
@@ -897,7 +916,7 @@
       "name": "7-Eleven",
       "level": "0",
       "x": -12.1,
-      "y": -97.0,
+      "y": -97,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null,
@@ -946,7 +965,7 @@
         ],
         [
           -13.3,
-          -109.0
+          -109
         ]
       ],
       "icon": "bakery"
@@ -964,7 +983,7 @@
       "outline": [
         [
           10.6,
-          -147.0
+          -147
         ],
         [
           11.7,
@@ -1016,7 +1035,7 @@
       "category": "shop",
       "name": "Kjell & Co",
       "level": "0",
-      "x": 36.0,
+      "x": 36,
       "y": -146.8,
       "opening_hours": null,
       "hours_source": null,
@@ -1036,7 +1055,7 @@
         ],
         [
           42.5,
-          -156.0
+          -156
         ],
         [
           30.8,
@@ -1095,7 +1114,7 @@
         ],
         [
           25.7,
-          -80.0
+          -80
         ],
         [
           27.7,
@@ -1172,7 +1191,7 @@
       "category": "locker",
       "name": "Luggage lockers",
       "level": "0",
-      "x": -16.0,
+      "x": -16,
       "y": -65.9,
       "opening_hours": "Mo-Fr 04:40-24:00; Sa,Su 06:00-24:00",
       "hours_source": "website",
@@ -1192,9 +1211,446 @@
         ],
         [
           -13.3,
-          -70.0
+          -70
         ]
       ]
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 576; BanInfo BIS 2093 (track 2a,2b): tracks 2a,1a, class mellan = 0.58 m above rail, 330 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 576; BanInfo BIS 2093 (track 2a,2b): tracks 2a,1a, class mellan = 0.58 m above rail, 330 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 575; BanInfo BIS 2092 (track 4a,4b): tracks 3a,4a, class mellan = 0.58 m above rail, 321 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 575; BanInfo BIS 2092 (track 4a,4b): tracks 3a,4a, class mellan = 0.58 m above rail, 321 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 569; BanInfo BIS 2082 (track 5): tracks 5, class mellan = 0.58 m above rail, 427 m long; a recorded design class, not a survey"
+    },
+    "6": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 573; BanInfo BIS 2083 (track 7): tracks 6,7, class mellan = 0.58 m above rail, 282 m long; a recorded design class, not a survey"
+    },
+    "7": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 573; BanInfo BIS 2083 (track 7): tracks 6,7, class mellan = 0.58 m above rail, 282 m long; a recorded design class, not a survey"
+    },
+    "8": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 572; BanInfo BIS 2084 (track 9): tracks 9,8, class mellan = 0.58 m above rail, 282 m long; a recorded design class, not a survey"
+    },
+    "9": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 572; BanInfo BIS 2084 (track 9): tracks 9,8, class mellan = 0.58 m above rail, 282 m long; a recorded design class, not a survey"
+    },
+    "10": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 570; BanInfo BIS 2482 (track 10): tracks 10, class mellan = 0.58 m above rail, 407 m long; a recorded design class, not a survey"
+    },
+    "11": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 571; BanInfo BIS 2602 (track 11): tracks 11, class mellan = 0.58 m above rail, 275 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000003/malmo_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w28415330",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.68,
+      "_source": "Outline OSM w28415330 (ODbL); roof = median of 19671 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w52200890",
+      "kind": "building",
+      "name": "Orkanen (university)",
+      "top_m": 24.56,
+      "base_m": -0.91,
+      "_source": "Outline OSM w52200890 (ODbL); roof = median of 2379 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w52201121",
+      "kind": "building",
+      "name": "Malmö börshus (building)",
+      "top_m": 16.71,
+      "base_m": -2.31,
+      "_source": "Outline OSM w52201121 (ODbL); roof = median of 5793 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w81391559",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 4.43,
+      "base_m": -0.57,
+      "_source": "Outline OSM w81391559 (ODbL); roof = median of 294 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w81391563",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 4.43,
+      "base_m": -1.08,
+      "_source": "Outline OSM w81391563 (ODbL); roof = median of 293 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w89355624",
+      "kind": "building",
+      "name": "building",
+      "top_m": 15.98,
+      "base_m": 0.09,
+      "_source": "Outline OSM w89355624 (ODbL); roof = median of 6521 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w189255289",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.07,
+      "_source": "Outline OSM w189255289 (ODbL); roof = median of 509 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w189255290",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.12,
+      "_source": "Outline OSM w189255290 (ODbL); roof = median of 653 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w189255291",
+      "kind": "building",
+      "name": "MENYn Grill & Sallad (building)",
+      "top_m": 3.88,
+      "base_m": 0.25,
+      "_source": "Outline OSM w189255291 (ODbL); roof = median of 132 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w191082399",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.96,
+      "_source": "Outline OSM w191082399 (ODbL); roof = median of 186 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w191082401",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.08,
+      "_source": "Outline OSM w191082401 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w328037285",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.18,
+      "_source": "Outline OSM w328037285 (ODbL); roof = median of 2052 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w330653386",
+      "kind": "building",
+      "name": "Malmö centralstation (station building)",
+      "top_m": 8.76,
+      "base_m": -0.78,
+      "_source": "Outline OSM w330653386 (ODbL); roof = median of 15561 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w330709334",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.33,
+      "_source": "Outline OSM w330709334 (ODbL); roof = median of 114 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w330709335",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.33,
+      "_source": "Outline OSM w330709335 (ODbL); roof = median of 121 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w941081386",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.72,
+      "base_m": -0.28,
+      "_source": "Outline OSM w941081386 (ODbL); roof = median of 501 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081387",
+      "kind": "building",
+      "name": "building",
+      "top_m": 13.81,
+      "base_m": -0.49,
+      "_source": "Outline OSM w941081387 (ODbL); roof = median of 769 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081393",
+      "kind": "building",
+      "name": "building",
+      "top_m": 9.07,
+      "base_m": -0.34,
+      "_source": "Outline OSM w941081393 (ODbL); roof = median of 340 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081394",
+      "kind": "building",
+      "name": "building",
+      "top_m": 9.73,
+      "base_m": -0.52,
+      "_source": "Outline OSM w941081394 (ODbL); roof = median of 1896 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081398",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.11,
+      "base_m": -0.53,
+      "_source": "Outline OSM w941081398 (ODbL); roof = median of 253 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081399",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.13,
+      "base_m": -0.57,
+      "_source": "Outline OSM w941081399 (ODbL); roof = median of 235 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081401",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.42,
+      "base_m": -0.07,
+      "_source": "Outline OSM w941081401 (ODbL); roof = median of 555 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081403",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.46,
+      "base_m": -0.53,
+      "_source": "Outline OSM w941081403 (ODbL); roof = median of 261 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081405",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.99,
+      "base_m": -0.59,
+      "_source": "Outline OSM w941081405 (ODbL); roof = median of 811 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081406",
+      "kind": "building",
+      "name": "roof",
+      "top_m": 5.72,
+      "base_m": -0.38,
+      "_source": "Outline OSM w941081406 (ODbL); roof = median of 1446 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081407",
+      "kind": "building",
+      "name": "building",
+      "top_m": 7.63,
+      "base_m": -0.44,
+      "_source": "Outline OSM w941081407 (ODbL); roof = median of 1208 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081408",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.56,
+      "base_m": -0.53,
+      "_source": "Outline OSM w941081408 (ODbL); roof = median of 2345 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w941081411",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.98,
+      "base_m": -0.47,
+      "_source": "Outline OSM w941081411 (ODbL); roof = median of 1006 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w1035166397",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.08,
+      "_source": "Outline OSM w1035166397 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w1035166398",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.19,
+      "_source": "Outline OSM w1035166398 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w1156564026",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.92,
+      "_source": "Outline OSM w1156564026 (ODbL); roof = median of 53 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w1281927624",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.2,
+      "_source": "Outline OSM w1281927624 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "#41",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.91,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#42",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 5.93,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000003/malmo_c_structures_heights.geojson (metres above the platform surface, 3.2 m RH 2000, laser 2025-03-07); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000003/malmo_c_ground_1m.tif",
+    "reference_m": 3.2,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000003/malmo_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (3.2 m RH 2000, laser 2025-03-07)"
+  },
+  "poi_hours": {
+    "osm901520737": {
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 10:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm8993117217": {
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa-Su 07:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm10024758396": {
+      "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 09:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm2747390883": {
+      "opening_hours": "Mo-Th 06:00-24:00; Fr 06:00-03:00; Sa 06:00-03:00; Su 07:00-24:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm5834378330": {
+      "opening_hours": "Mo-Th 06:00-24:00; Fr 06:00-03:00; Sa 06:00-03:00; Su 07:00-24:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm430003688": {
+      "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 06:55-23:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "jh-mc-40": {
+      "opening_hours": "Mo-Fr 04:40-24:00; Sa,Su 06:00-24:00",
+      "checked": "2026-10-22",
+      "_source": "the app map (website) (read 2026-10-22; website)"
+    },
+    "osm3402678105": {
+      "opening_hours": "Mo-Fr 10:00-22:00; Sa 10:00-23:00; Su 10:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm429998727": {
+      "opening_hours": "Mo-Fr 10:00-22:00; Sa-Su 10:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336009": {
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 10:00-19:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "jh-mc-33": {
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa-Su 10:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm444845102": {
+      "opening_hours": "Su-Th 11:30-20:30; Fr-Sa 11:30-22:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1181418068": {
+      "opening_hours": "Mo-Su 11:00-23:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336092": {
+      "opening_hours": "Mo-Fr 07:00-19:00; Sa-Su 10:00-16:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336148": {
+      "opening_hours": "Mo-Fr 08:00-21:00; Sa 10:00-21:00; Su 10:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336183": {
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 09:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677335991": {
+      "opening_hours": "Mo-Fr 06:00-23:00; Sa-Su 09:00-23:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336020": {
+      "opening_hours": "Mo-Th 11:00-22:00; Fr-Sa 11:00-23:00; Su 12:00-21:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm11249031237": {
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa-Su 10:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "jh-mc-34": {
+      "opening_hours": "Mo-Fr 09:00-18:00; Sa off; Su off",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336121": {
+      "opening_hours": "Mo-Fr 06:30-21:00; Sa-Su 08:00-19:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "jh-mc-32": {
+      "opening_hours": "Mo-Fr 09:00-18:00; Sa-Su off",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1677336163": {
+      "opening_hours": "Mo-Fr 06:30-20:00; Sa 09:00-18:00; Su 10:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "jh-mc-3": {
+      "opening_hours": "Mo-Fr 06:30-17:00; Sa-Su off",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/malmo-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    }
+  }
 }

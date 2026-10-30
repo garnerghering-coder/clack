@@ -8,8 +8,9 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street and platform level",
+      "order": 0,
+      "name_source": "OSM platforms 1-4 (no level tag), read 2026-10-30"
     }
   ],
   "sources": [
@@ -50,7 +51,7 @@
     },
     "4": {
       "height_m": 0.58,
-      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 161: tracks 4, class mellan = 0.58 m above rail, 142 m long; a recorded design class, not a survey"
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 161; BanInfo BIS 1208 (track 4): tracks 4, class mellan = 0.58 m above rail, 142 m long; a recorded design class, not a survey"
     }
   },
   "structures_file": "data/stations/research/740000170/eskilstuna_c_structures_heights.geojson",
@@ -88,7 +89,7 @@
       "from": "w609037665",
       "kind": "roof",
       "name": "roof",
-      "top_m": 2.0,
+      "top_m": 2,
       "_source": "Outline OSM w609037665 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c026, scanned 2020-02-27), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000170/eskilstuna_c_structures_heights.geojson (metres above the platform surface, 18.2 m RH 2000, laser 2020-02-27); underside not measured"
     },
     {
@@ -174,5 +175,6 @@
     "reference_m": 18.2,
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000170/eskilstuna_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (18.2 m RH 2000, laser 2020-02-27)"
-  }
+  },
+  "poi_hours": {}
 }

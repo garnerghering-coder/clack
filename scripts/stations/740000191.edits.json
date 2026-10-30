@@ -8,20 +8,119 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street, stationshuset (station building) and platforms",
+      "order": 0,
+      "name_source": "https://www.jernhusen.se/hitta-din-station/trollhattan-centralstation/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000191)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 8 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000191)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 953; BanInfo BIS 1333 (track 1): tracks 1, class hög = 0.73 m above rail, 299 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 954; BanInfo BIS 1336 (track 2): tracks 2,3, class hög = 0.73 m above rail, 299 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000191/trollhattan_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w76617203",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.25,
+      "base_m": -0.81,
+      "_source": "Outline OSM w76617203 (ODbL); roof = median of 415 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21)"
+    },
+    {
+      "from": "w88526977",
+      "kind": "building",
+      "name": "Trollhättan C (station building)",
+      "top_m": 6.43,
+      "base_m": -0.74,
+      "_source": "Outline OSM w88526977 (ODbL); roof = median of 704 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21)"
+    },
+    {
+      "from": "w310276083",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.3,
+      "base_m": -0.63,
+      "_source": "Outline OSM w310276083 (ODbL); roof = median of 167 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21)"
+    },
+    {
+      "from": "w1201014738",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.48,
+      "_source": "Outline OSM w1201014738 (ODbL); roof = median of 850 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21); underside not measured"
+    },
+    {
+      "from": "w1256391261",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.04,
+      "_source": "Outline OSM w1256391261 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21); underside not measured"
+    },
+    {
+      "from": "w1263691796",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.07,
+      "_source": "Outline OSM w1263691796 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21); underside not measured"
+    },
+    {
+      "from": "w1263691797",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.93,
+      "_source": "Outline OSM w1263691797 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21); underside not measured"
+    },
+    {
+      "from": "w1263691798",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.98,
+      "_source": "Outline OSM w1263691798 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b016, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000191/trollhattan_structures_heights.geojson (metres above the platform surface, 44.6 m RH 2000, laser 2020-03-21); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000191/trollhattan_ground_1m.tif",
+    "reference_m": 44.6,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000191/trollhattan_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (44.6 m RH 2000, laser 2020-03-21)"
+  },
+  "poi_hours": {}
 }

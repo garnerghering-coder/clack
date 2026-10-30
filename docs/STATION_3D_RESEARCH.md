@@ -109,7 +109,11 @@ Keys in `scripts/stations/<id>.edits.json`:
 For a pack built by `scripts/stations/station3d/` (the batch pipeline, see `data/stations/research/HANDOFF_STATION_3D.md`),
 `python3 scripts/stations/station3d/to_edits.py <id>` writes all of the above from the pack and the Trafikverket CSV
 (the longest register row per track; footbridges from the 5.9 m minimum clearance; `hall_roof_laser`, road bridges and
-trains left out for a look). A station whose map is still schema 1 needs its schema-2 redraft first (entrances!).
+trains left out for a look). A station whose map is still schema 1 needs its schema-2 redraft first (entrances!). The pack's `station_facts.json` goes in with
+`python3 scripts/stations/station3d/facts_to_edits.py <id>` (opening hours for the amenities the research matched to the
+map's own, with the date read, as `poi_hours`; researched names for levels still called "Level N"), then
+`npx tsx scripts/stations/station3d/check_hours.ts <id>` drops hours the app can't parse. Unmatched amenities, entrances
+and connections stay research notes: they come as descriptions, not positions.
 
 Then `python3 scripts/stations/draft_from_osm.py <id>`, `npx tsx scripts/stations/validate.ts`, and open the station in
 the 3D view (`-open map:<id> -station3D`, Debug). Keep the pack (laser LAZ, ground GeoTIFF, GeoJSONs, station JSON, model,

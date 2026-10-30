@@ -16,12 +16,155 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000009)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 12 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000009)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 515; BanInfo BIS 1204 (track 1): tracks 1, class mellan = 0.58 m above rail, 371 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 516; BanInfo BIS 1205 (track 2): tracks 2,3, class mellan = 0.58 m above rail, 376 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 516; BanInfo BIS 1205 (track 2): tracks 2,3, class mellan = 0.58 m above rail, 376 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 517; BanInfo BIS 1594 (track 4): tracks 4,5, class mellan = 0.58 m above rail, 152 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 517; BanInfo BIS 1594 (track 4): tracks 4,5, class mellan = 0.58 m above rail, 152 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000009/linkoping_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w39983371",
+      "kind": "building",
+      "name": "Linköpings centralstation (station building)",
+      "top_m": 4.04,
+      "base_m": -4.26,
+      "_source": "Outline OSM w39983371 (ODbL); roof = median of 3947 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26)"
+    },
+    {
+      "from": "w39983372",
+      "kind": "building",
+      "name": "Östgötatrafikens kundcenter (transportation)",
+      "top_m": 4.14,
+      "base_m": -4.36,
+      "_source": "Outline OSM w39983372 (ODbL); roof = median of 1721 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26)"
+    },
+    {
+      "from": "w156024124",
+      "kind": "building",
+      "name": "Bussgods (transportation)",
+      "top_m": 6.84,
+      "base_m": -0.33,
+      "_source": "Outline OSM w156024124 (ODbL); roof = median of 369 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26)"
+    },
+    {
+      "from": "w203690334",
+      "kind": "building",
+      "name": "office",
+      "top_m": 22.35,
+      "base_m": 3.69,
+      "_source": "Outline OSM w203690334 (ODbL); roof = median of 1678 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26)"
+    },
+    {
+      "from": "w291677725",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.27,
+      "_source": "Outline OSM w291677725 (ODbL); roof = median of 1004 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured"
+    },
+    {
+      "from": "w291677726",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.2,
+      "_source": "Outline OSM w291677726 (ODbL); roof = median of 2132 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured"
+    },
+    {
+      "from": "w291677727",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.18,
+      "_source": "Outline OSM w291677727 (ODbL); roof = median of 3200 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured"
+    },
+    {
+      "from": "w450434287",
+      "kind": "bridge",
+      "name": "Gumpekullabron (bridge)",
+      "top_m": 7.47,
+      "base_m": 5.32,
+      "_source": "Outline OSM w450434287 (ODbL); roof = median of 38 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w975271977",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.18,
+      "_source": "Outline OSM w975271977 (ODbL); roof = median of 1079 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured"
+    },
+    {
+      "from": "#9",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.26,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#10",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.81,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#11",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.56,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (21c011, scanned 2021-03-26), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000009/linkoping_c_structures_heights.geojson (metres above the platform surface, 41.62 m RH 2000, laser 2021-03-26); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000009/linkoping_c_ground_1m.tif",
+    "reference_m": 41.62,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000009/linkoping_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (41.62 m RH 2000, laser 2021-03-26)"
+  },
+  "poi_hours": {}
 }

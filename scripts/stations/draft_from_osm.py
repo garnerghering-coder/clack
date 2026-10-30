@@ -1078,6 +1078,8 @@ def main():
         if "height_m" in l:
             o["height_m"] = l["height_m"]
             o["_source"] = l.get("height_source") or o["_source"]
+        if l.get("name_source"):
+            o["_source"] += f"; name from {l['name_source']}"
         return o
 
     out = dict(
@@ -1115,6 +1117,15 @@ def main():
         if "height_m" in edits.get("platform_heights", {}).get(p["ref"], {}):
             p["height_m"] = edits["platform_heights"][p["ref"]]["height_m"]
             p["_source"] += f"; height from {edits['platform_heights'][p['ref']]['_source']}"
+    # Opening hours from a dated source (the station owner's page), over OSM's (docs/STATION_3D_RESEARCH.md, Part 2):
+    # "poi_hours": {"<poi id>": {"opening_hours": "Mo-Fr 06:00-22:00", "checked": "2026-10-30", "_source": "https://…"}}.
+    for poi in out["pois"]:
+        h = edits.get("poi_hours", {}).get(poi["id"])
+        if h:
+            poi["opening_hours"] = h["opening_hours"]
+            poi["hours_source"] = "website"
+            poi["hours_verified"] = h["checked"]
+            poi["_source"] = f"{poi.get('_source', '')}; hours from {h['_source']}"
     if "terrain" in edits:
         out["terrain"] = terrain_grid(edits["terrain"], lat0, lon0, K, out)
     path = os.path.join(ROOT, f"data/stations/{safe}.json")

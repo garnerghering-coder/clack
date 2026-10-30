@@ -53,7 +53,8 @@ def main():
     # Platform heights.
     heights, notes = {}, []
     for p in m["platforms"]:
-        want = {re.sub(r"[a-z]+$", "", t.lower()) for t in p["tracks"]}
+        # The map's tracks as numbers: "2a" → 2, "spår 1" → 1, "2 & 3" → 2 and 3.
+        want = {n for t in p["tracks"] for n in re.findall(r"\d+", t)}
         cands = [r for r in rows if r["height_m"] and track_numbers(r["tracks"]) & want]
         if not cands:
             notes.append(f"platform {p['ref']}: no register row with a height")

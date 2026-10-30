@@ -8,20 +8,214 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Station level",
+      "order": 0,
+      "name_source": "OpenStreetMap (osmfacts/740000008.json, ODbL), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000008)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 21 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000008)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 781; BanInfo BIS 392 (track 1): tracks 1, class mellan = 0.58 m above rail, 386 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000008/skovde_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w89660660",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 3.75,
+      "base_m": -0.59,
+      "_source": "Outline OSM w89660660 (ODbL); roof = median of 1478 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w89660669",
+      "kind": "building",
+      "name": "Skövde Central (station building)",
+      "top_m": 10.27,
+      "base_m": -0.38,
+      "_source": "Outline OSM w89660669 (ODbL); roof = median of 1650 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w312826159",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -1.47,
+      "_source": "Outline OSM w312826159 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w312826160",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -1.77,
+      "_source": "Outline OSM w312826160 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w312826161",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -1.76,
+      "_source": "Outline OSM w312826161 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w535289859",
+      "kind": "building",
+      "name": "Mode (parking)",
+      "top_m": 15.31,
+      "base_m": -6.48,
+      "_source": "Outline OSM w535289859 (ODbL); roof = median of 5409 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w846907576",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.87,
+      "_source": "Outline OSM w846907576 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w846907577",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.72,
+      "_source": "Outline OSM w846907577 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w846907578",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.47,
+      "_source": "Outline OSM w846907578 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w846907579",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.8,
+      "_source": "Outline OSM w846907579 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w846907580",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.89,
+      "_source": "Outline OSM w846907580 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w1018745072",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 9.79,
+      "base_m": -1.17,
+      "_source": "Outline OSM w1018745072 (ODbL); roof = median of 121 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w1044410775",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.35,
+      "_source": "Outline OSM w1044410775 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w1044410776",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.04,
+      "_source": "Outline OSM w1044410776 (ODbL); roof = median of 274 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured"
+    },
+    {
+      "from": "w1235549204",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 7.15,
+      "base_m": -0.1,
+      "_source": "Outline OSM w1235549204 (ODbL); roof = median of 174 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w1235549205",
+      "kind": "building",
+      "name": "bridge",
+      "top_m": 8.06,
+      "base_m": -1,
+      "_source": "Outline OSM w1235549205 (ODbL); roof = median of 212 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w1235549206",
+      "kind": "building",
+      "name": "bridge",
+      "top_m": 6.94,
+      "base_m": -1.22,
+      "_source": "Outline OSM w1235549206 (ODbL); roof = median of 502 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "w1493434047",
+      "kind": "building",
+      "name": "building",
+      "top_m": 15.04,
+      "base_m": -5.53,
+      "_source": "Outline OSM w1493434047 (ODbL); roof = median of 2803 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11)"
+    },
+    {
+      "from": "#22",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.35,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#23",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.26,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#24",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.34,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (22b020, scanned 2022-03-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000008/skovde_c_structures_heights.geojson (metres above the platform surface, 140.25 m RH 2000, laser 2022-03-11); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000008/skovde_c_ground_1m.tif",
+    "reference_m": 140.25,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000008/skovde_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (140.25 m RH 2000, laser 2022-03-11)"
+  },
+  "poi_hours": {}
 }

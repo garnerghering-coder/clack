@@ -59,9 +59,10 @@ export function platformFeatures(m: StationMap, stationId: string) {
         level: p.level,
         node: node ? [r6(node[1]), r6(node[0])] : null,
         draft: m.quality === 'osm_draft',
-        // Above the rails, the map's flat ground; the standard when the map has none (`measured` says which).
+        // Above the rails, the map's flat ground; the standard when the map has none. `measured` (what the 3D raises)
+        // also needs the platform on the main level: a tunnel platform (Malmö C's City Tunnel) isn't on the surface.
         height: p.height_m ?? STANDARD_PLATFORM_HEIGHT_M,
-        measured: p.height_m !== undefined,
+        measured: p.height_m !== undefined && (m.levels.find((l) => l.id === p.level)?.order ?? 0) === 0,
       },
       geometry: { type: 'Polygon' as const, coordinates: rings },
     };

@@ -8,20 +8,131 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Hyllie Stationstorg (street level)",
+      "order": 0,
+      "name_source": "https://www.malmoarena.com/en/find-us, read 2026-10-30; OSM (osmfacts 740001586), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740001586)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 10 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740001586)."
     }
-  ]
+  ],
+  "platform_heights": {},
+  "structures_file": "data/stations/research/740001586/hyllie_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w94780041",
+      "kind": "building",
+      "name": "P-huset Hyllie (garage)",
+      "top_m": 28.74,
+      "base_m": 6.4,
+      "_source": "Outline OSM w94780041 (ODbL); roof = median of 9398 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w95298037",
+      "kind": "building",
+      "name": "Point Hyllie Hus E (building)",
+      "top_m": 31.03,
+      "base_m": 7.43,
+      "_source": "Outline OSM w95298037 (ODbL); roof = median of 2618 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w147530552",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 14.33,
+      "base_m": 7.23,
+      "_source": "Outline OSM w147530552 (ODbL); roof = median of 3308 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w157598209",
+      "kind": "building",
+      "name": "building",
+      "top_m": 39.31,
+      "base_m": 7.26,
+      "_source": "Outline OSM w157598209 (ODbL); roof = median of 1985 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w332190868",
+      "kind": "building",
+      "name": "Point Hyllie (hotel)",
+      "top_m": 22.85,
+      "base_m": 6.96,
+      "_source": "Outline OSM w332190868 (ODbL); roof = median of 8101 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w339183847",
+      "kind": "building",
+      "name": "building",
+      "top_m": 22.2,
+      "base_m": 6.96,
+      "_source": "Outline OSM w339183847 (ODbL); roof = median of 3750 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w342710057",
+      "kind": "building",
+      "name": "Isblocket (office)",
+      "top_m": 32.99,
+      "base_m": 6.75,
+      "_source": "Outline OSM w342710057 (ODbL); roof = median of 1984 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w590869570",
+      "kind": "building",
+      "name": "The Point (building)",
+      "top_m": 114.41,
+      "base_m": 6.96,
+      "_source": "Outline OSM w590869570 (ODbL); roof = median of 1636 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w630767184",
+      "kind": "building",
+      "name": "building",
+      "top_m": 35.98,
+      "base_m": 6.88,
+      "_source": "Outline OSM w630767184 (ODbL); roof = median of 1004 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w1305913895",
+      "kind": "building",
+      "name": "building",
+      "top_m": 52.37,
+      "base_m": 0.1,
+      "_source": "Outline OSM w1305913895 (ODbL); roof = median of 1587 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001586/hyllie_structures_heights.geojson (metres above the platform surface, 16.96 m RH 2000, laser 2025-03-07)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740001586/hyllie_ground_1m.tif",
+    "reference_m": 16.96,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740001586/hyllie_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (16.96 m RH 2000, laser 2025-03-07)"
+  },
+  "poi_hours": {}
 }

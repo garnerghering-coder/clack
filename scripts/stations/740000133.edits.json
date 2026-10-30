@@ -8,20 +8,104 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street, station building and platforms",
+      "order": 0,
+      "name_source": "OSM (osmfacts/740000133.json, ODbL), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000133)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 5 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000133)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 1140; BanInfo BIS 1217 (track ?): tracks 4,3, class mellan = 0.58 m above rail, 457 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 1140; BanInfo BIS 1217 (track ?): tracks 4,3, class mellan = 0.58 m above rail, 457 m long; a recorded design class, not a survey"
+    },
+    "1a": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 1139; BanInfo BIS 1220 (track 1a): tracks 1a,1b, class mellan = 0.58 m above rail, 393 m long; a recorded design class, not a survey"
+    },
+    "1b": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 1139; BanInfo BIS 1220 (track 1a): tracks 1a,1b, class mellan = 0.58 m above rail, 393 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000133/orebro_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w180241375",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.87,
+      "_source": "Outline OSM w180241375 (ODbL); roof = median of 2043 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (23c023, scanned 2023-07-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000133/orebro_c_structures_heights.geojson (metres above the platform surface, 28.16 m RH 2000, laser 2023-07-11); underside not measured"
+    },
+    {
+      "from": "w383771873",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.56,
+      "_source": "Outline OSM w383771873 (ODbL); roof = median of 365 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (23c023, scanned 2023-07-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000133/orebro_c_structures_heights.geojson (metres above the platform surface, 28.16 m RH 2000, laser 2023-07-11); underside not measured"
+    },
+    {
+      "from": "w383771874",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.87,
+      "_source": "Outline OSM w383771874 (ODbL); roof = median of 381 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (23c023, scanned 2023-07-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000133/orebro_c_structures_heights.geojson (metres above the platform surface, 28.16 m RH 2000, laser 2023-07-11); underside not measured"
+    },
+    {
+      "from": "w525673338",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.66,
+      "_source": "Outline OSM w525673338 (ODbL); roof = median of 45 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (23c023, scanned 2023-07-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000133/orebro_c_structures_heights.geojson (metres above the platform surface, 28.16 m RH 2000, laser 2023-07-11); underside not measured"
+    },
+    {
+      "from": "r7584983",
+      "kind": "building",
+      "name": "Örebro Central (station building)",
+      "top_m": 6.26,
+      "base_m": -0.38,
+      "_source": "Outline OSM r7584983 (ODbL); roof = median of 938 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (23c023, scanned 2023-07-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000133/orebro_c_structures_heights.geojson (metres above the platform surface, 28.16 m RH 2000, laser 2023-07-11)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000133/orebro_c_ground_1m.tif",
+    "reference_m": 28.16,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000133/orebro_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (28.16 m RH 2000, laser 2023-07-11)"
+  },
+  "poi_hours": {}
 }

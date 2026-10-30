@@ -129,11 +129,11 @@
     },
     "3": {
       "height_m": 0.58,
-      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 265; BanInfo BIS 1616 (track 3): tracks 3,4, class mellan = 0.58 m above rail, 375 m long; a recorded design class, not a survey"
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 265; BanInfo BIS 1616 (track 4): tracks 3,4, class mellan = 0.58 m above rail, 375 m long; a recorded design class, not a survey"
     },
     "4": {
       "height_m": 0.58,
-      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 265; BanInfo BIS 1616 (track 3): tracks 3,4, class mellan = 0.58 m above rail, 375 m long; a recorded design class, not a survey"
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 265; BanInfo BIS 1616 (track 4): tracks 3,4, class mellan = 0.58 m above rail, 375 m long; a recorded design class, not a survey"
     },
     "5": {
       "height_m": 0.58,
@@ -145,11 +145,11 @@
     },
     "7": {
       "height_m": 0.58,
-      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 266; BanInfo BIS 1622 (track 8): tracks 8,7, class mellan = 0.58 m above rail, 421 m long; a recorded design class, not a survey"
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 266; BanInfo BIS 1622 (track 7): tracks 8,7, class mellan = 0.58 m above rail, 421 m long; a recorded design class, not a survey"
     },
     "8": {
       "height_m": 0.58,
-      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 266; BanInfo BIS 1622 (track 8): tracks 8,7, class mellan = 0.58 m above rail, 421 m long; a recorded design class, not a survey; other rows for this track: 9,8 låg 0.35 m (288 m, Bilaga 2A tab 4 row 269)"
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 266; BanInfo BIS 1622 (track 7): tracks 8,7, class mellan = 0.58 m above rail, 421 m long; a recorded design class, not a survey; other rows for this track: 9,8 låg 0.35 m (288 m, Bilaga 2A tab 4 row 269)"
     },
     "9": {
       "height_m": 0.35,
@@ -419,7 +419,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.72,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000002/goteborg_c_structures_heights.geojson (metres above the platform surface, 2.91 m RH 2000, laser 2020-03-21); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -427,5 +427,77 @@
     "reference_m": 2.91,
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000002/goteborg_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (2.91 m RH 2000, laser 2020-03-21)"
+  },
+  "poi_hours": {
+    "osm1561620392": {
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm3663448226": {
+      "opening_hours": "Mo-Fr 06:00-19:00; Sa 09:00-16:00; Su off",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561650285": {
+      "opening_hours": "Mo-Sa 07:00-21:00; Su 08:00-21:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561620387": {
+      "opening_hours": "Mo-Sa 07:00-01:00; Su 08:00-01:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1567923681": {
+      "opening_hours": "Mo-Su 11:00-23:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561620390": {
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa 10:00-18:00; Su 09:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561620388": {
+      "opening_hours": "Mo-Su 11:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561650290": {
+      "opening_hours": "Mo-Su 11:00-20:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561650284": {
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-21:00; Su 08:00-21:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1567923683": {
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa 08:00-19:00; Su 10:00-19:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1567923682": {
+      "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-19:00; Su 09:00-19:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1567923680": {
+      "opening_hours": "Mo-Fr 09:00-19:00; Sa-Su 10:00-17:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1569213566": {
+      "opening_hours": "Mo-Fr 07:30-18:30; Sa 10:00-16:00; Su 11:00-16:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm1561620391": {
+      "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00; Su off",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/goteborg-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    }
   }
 }
