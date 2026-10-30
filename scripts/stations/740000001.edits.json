@@ -3181,9 +3181,9 @@
       "from": "w587808099",
       "kind": "bridge",
       "name": "Kungsbron (bridge)",
-      "top_m": 12.14,
+      "top_m": 6.1,
       "base_m": 5.32,
-      "_source": "Outline OSM w587808099 (ODbL); roof = median of 1518 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c031, scanned 2021-03-23), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000001/stockholm_c_structures_heights.geojson (metres above the platform surface, 4.48 m RH 2000, laser 2021-03-23); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+      "_source": "Outline OSM w587808099 (ODbL); roof = median of 1518 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c031, scanned 2021-03-23), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000001/stockholm_c_structures_heights.geojson (metres above the platform surface, 4.48 m RH 2000, laser 2021-03-23); top = the deck the laser saw (class 17, footbridge_decks.json), 6.1 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
     },
     {
       "from": "w906374987",
@@ -3266,9 +3266,9 @@
       "from": "w1469194608",
       "kind": "bridge",
       "name": "bridge",
-      "top_m": 14.04,
+      "top_m": 6.19,
       "base_m": 5.32,
-      "_source": "Outline OSM w1469194608 (ODbL); roof = median of 3645 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c031, scanned 2021-03-23), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000001/stockholm_c_structures_heights.geojson (metres above the platform surface, 4.48 m RH 2000, laser 2021-03-23); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+      "_source": "Outline OSM w1469194608 (ODbL); roof = median of 3645 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c031, scanned 2021-03-23), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000001/stockholm_c_structures_heights.geojson (metres above the platform surface, 4.48 m RH 2000, laser 2021-03-23); top = the deck the laser saw (class 17, footbridge_decks.json), 6.19 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
     },
     {
       "from": "w1469194609",
@@ -3292,7 +3292,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 5.72,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (21c031, scanned 2021-03-23), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000001/stockholm_c_structures_heights.geojson (metres above the platform surface, 4.48 m RH 2000, laser 2021-03-23); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0
     }
   ],
   "terrain": {

@@ -44,7 +44,24 @@
       "what": "Platform heights from Trafikverket's register; 10 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740001586)."
     }
   ],
-  "platform_heights": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 334; BanInfo BIS 2090 (track 72N): tracks 71,72N, class mellan = 0.58 m above rail, 355 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 334; BanInfo BIS 2090 (track 72N): tracks 71,72N, class mellan = 0.58 m above rail, 355 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 333; BanInfo BIS 2091 (track 74): tracks 73N,74, class mellan = 0.58 m above rail, 355 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 333; BanInfo BIS 2091 (track 74): tracks 73N,74, class mellan = 0.58 m above rail, 355 m long; a recorded design class, not a survey"
+    }
+  },
   "structures_file": "data/stations/research/740001586/hyllie_structures_heights.geojson",
   "structures": [
     {
@@ -253,5 +270,20 @@
       "hours_verified": "2026-10-30",
       "_source": "OpenStreetMap n2396630557 (ODbL), read 2026-10-30; placed OSM node n2396630557 (research pass 2026-10-30, data/stations/research/740001586/station_facts.json)"
     }
-  ]
+  ],
+  "register_tracks": {
+    "1": [
+      "71"
+    ],
+    "2": [
+      "72"
+    ],
+    "3": [
+      "73"
+    ],
+    "4": [
+      "74"
+    ],
+    "_source": "owner, 2026-10-30, from Trafikverket BanInfo and OSM's platform refs: signposted spår 1 = Trafikverket track 71, 2 = 72N, 3 = 73N, 4 = 74 (island BIS 2090 serves 71/72N, island BIS 2091 serves 73N/74); track 75 (BIS 2597, 0.9 km south-west) is not one of the four"
+  }
 }

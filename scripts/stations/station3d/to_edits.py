@@ -59,6 +59,10 @@ def main():
     for p in ([] if surface else m["platforms"]):
         # The map's tracks as numbers: "2a" → 2, "spår 1" → 1, "2 & 3" → 2 and 3.
         want = {n for t in p["tracks"] for n in re.findall(r"\d+", t)}
+        # Where the register numbers the tracks differently (Hyllie: signposted 1–4 = Trafikverket 71–74), the edits say.
+        alias = e.get("register_tracks", {})
+        if any(t in alias for t in want):
+            want = {r for t in want for r in alias.get(t, [t])}
         cands = [r for r in rows if r["height_m"] and track_numbers(r["tracks"]) & want]
         if not cands:
             notes.append(f"platform {p['ref']}: no register row with a height")
@@ -73,6 +77,9 @@ def main():
         heights[p["ref"]] = {"height_m": float(best["height_m"]), "_source": src}
 
     # Structures.
+    # Bridge decks the laser saw (class 17, the research's footbridge_decks.json): metres above the platform surface.
+    dpath = os.path.join(ROOT, rdir, "footbridge_decks.json")
+    decks = {b["osm_id"]: b["deck_above_platform_m"] for b in (json.load(open(dpath))["bridges"] if os.path.exists(dpath) else []) if b.get("deck_above_platform_m") is not None}
     gpath = f"{rdir}/{slug}_structures_heights.geojson"
     feats = json.load(open(os.path.join(ROOT, gpath)))["features"]
     rail_below = (sorted(h["height_m"] for h in heights.values())[len(heights) // 2] if heights else 0.55)
@@ -102,6 +109,16 @@ def main():
             # Road bridges too (owner, 2026-10-30); one whose deck is below the minimum clearance is the railway
             # passing over a road, and stays out.
             under = round(MIN_CLEAR_ABOVE_RAIL - rail_below, 2)
+            deck = decks.get(pr.get("osm_id"))
+            if deck is not None:
+                # The deck is measured: it is the bridge's top (the road or walking surface); below the clearance it
+                # is the railway passing over a road, and stays out.
+                if deck <= under:
+                    skipped.append(f"{name}: deck {deck} m is under the clearance (the railway passes over it)")
+                    continue
+                structures.append({"from": ref, "kind": "bridge", "name": name, "top_m": round(deck, 2), "base_m": under,
+                                   "_source": src + f"; top = the deck the laser saw (class 17, footbridge_decks.json), {deck} m above the platform; underside drawn at the minimum clear height over an electrified railway, {MIN_CLEAR_ABOVE_RAIL} m above the rail (TRVR Bro 11): a lower bound"})
+                continue
             if top - under < 1.0:
                 skipped.append(f"{name}: roof {top} m is not above the minimum clearance")
                 continue
