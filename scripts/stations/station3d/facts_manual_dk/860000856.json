@@ -1,0 +1,192 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Forhal / covered footbridge (overdækkede gangbro) over the cutting, street level",
+   "other_names": [
+    "Forhal",
+    "den overdækkede gangbro"
+   ],
+   "note": "DSB: 'Forhal med billetautomat'; 'Den overdækkede gangbro er åben hele døgnet'.",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Regional platforms: two side platforms in a trench (cutting)",
+   "note": "Sund & Bælt: 'an open station with two side platforms'; Wikipedia: 'Trench (Regional service)'. Owner: By & Havn.",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; Wikipedia, \"Ørestad railway station\", https://en.wikipedia.org/wiki/%C3%98restad_railway_station, read 2026-10-30; Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30"
+  },
+  {
+   "osm_level": "2+",
+   "name": "Metro Ørestad (M1), elevated on a viaduct along the east edge of Ørestads Boulevard — out of scope",
+   "_source": "Wikipedia, \"Ørestad railway station\", https://en.wikipedia.org/wiki/%C3%98restad_railway_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n13660820158",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "under the covered footbridge, about 130–180 m from the platform ends (OSM)",
+   "confirmed_by": "OSM only; DSB: 'trapper, rulletrapper og elevator til rådighed'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13660820167",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "under the covered footbridge (OSM)",
+   "confirmed_by": "OSM only; DSB confirms a lift",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w168945180",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "beside the lift, footbridge position (OSM)",
+   "confirmed_by": "OSM only; DSB confirms escalators",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1490476721",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "beside the lift, footbridge position (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476708",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "beside the escalator (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476722",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "beside the escalator (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w168945182",
+   "between": [
+    "perron 1 (spor 1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "covered footbridge across the cutting (about 42 m)",
+   "confirmed_by": "OSM + owner text ('Den overdækkede gangbro er åben hele døgnet')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w91335292",
+    "w91335282"
+   ],
+   "between": [
+    "perron 1 (spor 1) / perron 2 (spor 2)",
+    "street (Ørestads Boulevard end)"
+   ],
+   "where": "about 20 m from the end of each platform, near footbridge w4317970 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1056160518",
+    "w1493909053"
+   ],
+   "between": [
+    "street/gangbro",
+    "Metro (probably)"
+   ],
+   "where": "about 35–45 m from the platforms, no level tags (OSM)",
+   "confirmed_by": "OSM only; purpose unconfirmed",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station (DSB address)",
+   "street": "Ørestads Boulevard 91, 2300 København S",
+   "level": "1",
+   "where": "no entrance nodes in OSM",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "level_per_plan": "1",
+   "where": "in the forhal ('Forhal med billetautomat')",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal / covered footbridge",
+   "level_per_plan": "1",
+   "where": "over the platforms",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Den overdækkede gangbro er åben hele døgnet",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Bilparkering (administered by By og Havn) and cykelparkering",
+   "where": "by the station",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "at the station (OSM)",
+   "osm_id": "w1490241856",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Vending machines (2, type not tagged)",
+   "level_per_plan": "1",
+   "where": "level 1 by the platform access (OSM)",
+   "osm_ids": [
+    "n12980738252",
+    "n12980793842"
+   ],
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No toilets, shops or 7-Eleven at the station on DSB's page; DSB notes the station is close to Fields shopping centre. Ørestad Kebab (OSM n5893123055, about 74 m away) and Field's were left out as not in the station.",
+  "Entrances: none in OSM; street side of each stair/footbridge unconfirmed. Metro transfer (lifts/escalators to the M1 viaduct) not confirmed by m.dk (m.dk station page could not be fetched).",
+  "No owner plan; positions OSM only. Level names beyond 'Forhal'/'gangbro' not found.",
+  "No open-question list was supplied for Danish stations."
+ ]
+}

@@ -1,0 +1,968 @@
+{
+ "levels": [
+  {
+   "osm_level": "3",
+   "name": "Hovedhallen plan 2",
+   "note": "Upper floor of the main hall. oslo-s.no / the magazine put Sentralpuben, Starbucks ('i andre etasje'), O'Learys, KOK – Kjøkken og kaffe, Sporet (Kirkens Bymisjon) and a Burger King listing here. OSM tags Starbucks, O'Learys, Sentralpuben and Kjøkken og kaffe level 3, so plan 2 = OSM level 3 (matched by these shops).",
+   "_source": "https://oslo-s.no/spisesteder/starbucks/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "osm_level": "2",
+   "name": "Hovedhallen plan 1",
+   "other_names": [
+    "Hovedhallen plan 1 inkl. passasjen (magazine)",
+    "Main Hall, Level 1 (English pages)",
+    "stasjonshall (Bane NOR)"
+   ],
+   "note": "Main concourse: ticket office (Entur, between tracks 8 and 9), ramps and travelators to tracks 1–12, stairs and lifts to tracks 13–19, most shops. Includes 'Passasjen'. oslo-s.no labels Peppes Pizza, Boots, Burger King, Döner Bros, 7-Eleven Hovedhallen, Deli de Luca, Upper Crust, Bake Me Up, Smoothie Xchange, La Baguette, Pronto di Olivia, Swift by Sumo, Vita, Mester Grønn, Dressmann XL, b.young, Ichi, Accessorize, Joker and two Narvesen units 'Hovedhallen plan 1'. OSM tags most of these level 2 (Peppes, Boots, Burger King, Dressmann XL, Narvesen, Vita, 7-Eleven Jernbanehallen, Deli de Luca, Upper Crust, Smoothie Xchange, La Baguette, Ichi), so plan 1 = OSM level 2.",
+   "_source": "https://oslo-s.no/spisesteder/burger-king/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Hovedhallen plan U",
+   "other_names": [
+    "Main hall level U (English pages)"
+   ],
+   "note": "Lower floor under the main hall: Hard Rock Cafe, Vinmonopolet, the Speed luggage lockers (reached from Flytogterminalen towards Østbanehallen, or by the escalator in the corridor by Deli de Luca), Oslo Visitor Centre, photo booths. OSM tags Vinmonopolet and the luggage lockers level 1, so plan U = OSM level 1. Caution: oslo-s.no prints the line 'Hovedhallen plan U' above the same station-map image on many pages, so a second 'plan U' line on a shop page may just be the map label.",
+   "_source": "https://oslo-s.no/spisesteder/hard-rock-cafe/, read 2026-10-30; https://oslo-s.no/butikker/vinmonopolet/, read 2026-10-30; https://oslo-s.no/praktisk-info/bagasjeoppbevaring/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "osm_level": "0;1",
+   "name": "Flytogterminalen",
+   "note": "Airport-train terminal hall on the sea side (sjøsiden), reached by the escalator down from the main hall by the toilets. The magazine lists Ark, Espresso House, Narvesen, 7-Eleven, FOREX Bank, Studio Johnny, Hertz, Pronto di Olivia and La Baguette here. OSM has Espresso House Flytogterminalen at level 0 and Hertz and Forex at level 1, so this hall does not match one OSM level.",
+   "_source": "https://oslo-s.no/praktisk-info/toaletter-og-stellerom/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Østbanehallen",
+   "note": "The old station building (Oslo Ø) facing Jernbanetorget: Yo! Sushi, Yokoso, Bella Bambina, Olivia, Royal Gastropub, Kanelsnurren, Olivenlunden 1830, L'Occitane, Sweets, Blivakker, Oslo Visitor Centre, Comfort Hotel Grand Central (magazine). OSM tags Yo! Sushi, Bella Bambina, Royal Gastropub, Kanelsnurren and Olivia level 0, and the door 'Utgang Jernbanetorget' level 0. oslo-s.no groups Flytogterminalen and Østbanehallen as one location, 'Flytogterminalen og Østbanehallen'.",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; https://oslo-s.no/spisesteder/kanelsnurren/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "ramp",
+   "between": [
+    "Hovedhallen plan 1 (stasjonshall)",
+    "platforms for tracks 1–12"
+   ],
+   "where": "from the station hall to each island platform for tracks 1–12 (one ramp plus one travelator per platform)",
+   "note": "Bane NOR: 'Bratt rampe og rullebånd til plattformene for spor 1-12 fra stasjonshall'; ramps have a gradient of 1:12 without landings. OSM has 13 ramp ways of about 50 m on level 2.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "travelator",
+   "between": [
+    "Hovedhallen plan 1",
+    "platforms for tracks 1–12"
+   ],
+   "where": "next to the ramps; OSM names them 'Access to tracks 1 and 2', '3 and 4', '5 and 6', '7 and 8', '9 and 10', '11 and 12' (osm w516184498, w516184459, w516184481, w516184512, w516184359, w516184531, tagged highway=steps+conveying, 49 m)",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "stasjonshall",
+    "platforms for tracks 13–19"
+   ],
+   "where": "from the station hall to tracks 13–19",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "stasjonshall",
+    "platforms for tracks 13–19"
+   ],
+   "where": "from the station building to tracks 13–19 (positions not given)",
+   "note": "The OSM extract has no lift tagged to railway platforms 13–19: the main-line platforms 1–19 are missing from its platform list, which has only metro, tram and bus stops.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Hovedhallen plan 1",
+    "Flytogterminalen og Østbanehallen"
+   ],
+   "where": "in the main hall by the toilets, opposite La Baguette ('rulletrappen ned til Flytogterminalen og Østbanehallen')",
+   "confirmed_by": "owner text",
+   "_source": "https://oslo-s.no/praktisk-info/toaletter-og-stellerom/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Hovedhallen plan 1",
+    "Hovedhallen plan U (luggage lockers)"
+   ],
+   "where": "'rulletrappen i gangen ved Deli de Luca' (the escalator in the corridor by Deli de Luca)",
+   "confirmed_by": "owner text",
+   "_source": "https://oslo-s.no/praktisk-info/bagasjeoppbevaring/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Hovedhallen (north side by Byporten)",
+    "Jernbanetorget T-bane"
+   ],
+   "where": "'Ta rulletrappen ned ved Byporten og gå mot Oslo City'; OSM w516184525 'Escalator to Subway & Taxi' (level 2)",
+   "confirmed_by": "owner text",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "between": [
+    "inngang nord (Byporten side)",
+    "Galleri Oslo / Oslo Bussterminal"
+   ],
+   "where": "from inngang nord across the bridge into Galleri Oslo; the bus terminal is at the far end of Galleri Oslo",
+   "note": "OSM footbridges w4682690 and w4757568 (layer 2) by Utgang Nord.",
+   "confirmed_by": "owner text",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5039388335",
+   "between": [
+    "OSM level 0",
+    "OSM level 1",
+    "OSM level 2"
+   ],
+   "where": "north side of the main hall near Utgang Nord / the escalator to the metro",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5039385793",
+   "between": [
+    "OSM level 0",
+    "OSM level 1"
+   ],
+   "where": "west part of the station near Flytogterminalen/Østbanehallen",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5039388333",
+    "n5039388375",
+    "n5039388389",
+    "n5039388871",
+    "n5039388901"
+   ],
+   "between": [
+    "OSM level 1 (Hovedhallen plan U / Flytogterminalen)",
+    "OSM level 2 (Hovedhallen plan 1)"
+   ],
+   "where": "five lifts around the main hall (positions in OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "Hovedhallen plan 1",
+    "Hovedhallen plan 2"
+   ],
+   "where": "OSM has several escalators on level 3 in the main hall (e.g. w516184392, w516184562, w516184414)",
+   "note": "Starbucks says it is 'i andre etasje'; no owner text on how plan 2 is reached.",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30; https://oslo-s.no/spisesteder/starbucks/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Hovedinngangen / Inngang Hovedhallen",
+   "street": "Jernbanetorget",
+   "where": "main entrance; the Jernbanetorget tram stop is 'rett utenfor hovedinngangen'",
+   "note": "The magazine map labels 'INNGANG HOVEDHALLEN'. That this is the door oslo-s.no calls 'hovedinngangen' is likely but not stated.",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "name": "Inngang Østbanehallen",
+   "street": "Jernbanetorget",
+   "level": "0",
+   "where": "the old station building's entrance; OSM door 'Utgang Jernbanetorget' (n3132157595, level 0)",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "name": "Inngang Comfort Hotel Grand Central",
+   "where": "into Østbanehallen through the hotel (label on the magazine map)",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "name": "Inngang nord",
+   "street": "Biskop Gunnerus' gate",
+   "level": "2",
+   "where": "north side by Byporten, towards Oslo City and Galleri Oslo/the bus terminal; taxi rank and drop-off under Byporten; OSM 'Utgang Nord' n5039388214 (level 2)",
+   "note": "Bane NOR, temporary: weeks 43–47 (2026) inngang nord is partly closed for maintenance. The revolving door ('rondellen') is closed. The stairs up from Biskop Gunnerus' gate and the side door stay open.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "name": "Inngang sjøsiden (Flytogterminalen)",
+   "street": "Trelastgata",
+   "where": "sea side, outside Flytogterminalen at the upper taxi rank ('øvre drosjetorg'); rail-replacement buses leave from Trelastgata by track 19; OSM main entrance n7044014566 nearest Trelastgata",
+   "note": "Bane NOR (English) calls it 'the southern entrance' with the taxi rank. The street comes from OSM's nearest-street match and Bane NOR's Trelastgata reference.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30; https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "7-Eleven Flytogterminalen",
+   "osm_id": "n6223448581",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Su 05:30-01:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no location label: 'Flytogterminalen og Østbanehallen'. OSM's 24/7 tag is out of date.",
+   "_source": "https://oslo-s.no/spisesteder/7-eleven-flytogterminalen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven Hovedhallen",
+   "osm_id": "n5039385768",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Su 05:30-01:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM name '7-Eleven Jernbanehallen'; 7-eleven.no calls the store 'Jernbanehallen, Oslo'.",
+   "_source": "https://oslo-s.no/spisesteder/7-eleven-hovedhallen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Bake Me Up",
+   "osm_id": "n14131837922",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa,Su 07:00-22:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The magazine prints it as no. 22 among entries 19–23, whose section (plan 1 or Østbanehallen) is unclear in the text.",
+   "_source": "https://oslo-s.no/spisesteder/bake-me-up/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Bella Bambina Ristorante",
+   "osm_id": "w506513936",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Sa 12:00-21:00; Su 13:00-20:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The oslo-s.no listing says 'Hjemmelaget pasta i Østbanehallen'.",
+   "_source": "https://oslo-s.no/spisesteder/bella-bambina-ristorante/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "osm_id": "n3132099333",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Th 07:00-24:30; Fr,Sa 07:00-01:00; Su 07:00-24:30",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The magazine lists Burger King under both plan 1 (no. 9) and plan 2 (no. 25), so there may be two outlets or one on both floors. The hours have been converted to OSM syntax: 00:30 is written as 24:30.",
+   "_source": "https://oslo-s.no/spisesteder/burger-king/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Deli de Luca",
+   "osm_id": "n1886466530",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall; the luggage-locker escalator is in the corridor by Deli de Luca",
+   "opening_hours": "Mo-Fr 05:30-24:00; Sa,Su 06:00-24:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no prints two location lines: 'Hovedhallen plan 1' and 'Hovedhallen plan U'.",
+   "_source": "https://oslo-s.no/spisesteder/deli-de-luca/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Döner Bros",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Th 11:00-24:00; Fr,Sa 11:00-01:00; Su 11:00-23:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM.",
+   "_source": "https://oslo-s.no/spisesteder/doner-bros/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House Flytogterminalen",
+   "osm_id": "n7118275603",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Fr 04:30-23:00; Sa,Su 05:00-23:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/espresso-house-flytogterminalen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House Hovedhallen",
+   "osm_id": "n7118275595",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Th 06:30-21:00; Fr 06:30-21:30; Sa,Su 07:30-21:30",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/espresso-house-hovedhallen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Hard Rock Cafe",
+   "osm_id": "n10268538991",
+   "level_per_plan": "Hovedhallen plan U",
+   "where": "lower level of the main hall",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 11:00-21:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The bar closes at 23:00 Mo–Sa and at 22:00 on Sundays.",
+   "_source": "https://oslo-s.no/spisesteder/hard-rock-cafe/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Kanelsnurren",
+   "osm_id": "w506513941",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen ('Gourmetbakeri i Østbanehallen')",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/kanelsnurren/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "KOK – Kjøkken og kaffe",
+   "osm_id": "n3132157590",
+   "level_per_plan": "Hovedhallen plan 2",
+   "where": "upper floor of the main hall",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/kok-kjokken-og-kaffe/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "La Baguette",
+   "osm_id": "n11459920149",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "at the top of the escalator down to Flytogterminalen, opposite the toilets",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no labels it 'Hovedhallen plan 1' (and 'plan U'); the magazine lists it under Flytogterminalen (no. 38). The toilets page puts it opposite the toilets by the escalator down to Flytogterminalen.",
+   "_source": "https://oslo-s.no/spisesteder/la-baguette/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "O'Learys",
+   "osm_id": "n7118275596",
+   "level_per_plan": "Hovedhallen plan 2",
+   "where": "upper floor of the main hall (sports bar)",
+   "opening_hours": "Mo-Th 11:00-24:00; Fr 11:00-01:00; Sa 12:00-01:00; Su 12:00-23:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The kitchen closes at 22:00 every day.",
+   "_source": "https://oslo-s.no/spisesteder/olearys/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Olivia",
+   "osm_id": "n5315431323",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen ('Østbanehallens italienske kjøkken')",
+   "opening_hours": "Mo-We 11:00-23:00; Th-Sa 11:00-24:00; Su 12:00-22:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/olivia/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Peppes Pizza",
+   "osm_id": "n3132098800",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-We 10:00-22:00; Th-Sa 10:00-23:00; Su 12:00-21:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/peppes-pizza/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Pronto di Olivia",
+   "level_per_plan": "Hovedhallen plan 1",
+   "opening_hours": "Mo-We 08:00-19:00; Th,Fr 08:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no says 'Hovedhallen plan 1'; the magazine lists it under Flytogterminalen (no. 37). Not in OSM.",
+   "_source": "https://oslo-s.no/spisesteder/pronto-di-olivia/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Royal Gastropub",
+   "osm_id": "w506513937",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-We 11:00-23:00; Th-Sa 11:00-24:30; Su 12:00-23:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/royal-gastropub/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Sentralpuben",
+   "osm_id": "n3132157594",
+   "level_per_plan": "Hovedhallen plan 2",
+   "where": "upper floor of the main hall",
+   "opening_hours": "Mo-Su 14:30-24:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/sentralpuben/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "SmoothieXchange",
+   "osm_id": "n11459920148",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 07:00-22:00; Sa 09:00-20:00; Su 10:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Smoothie bar.",
+   "_source": "https://oslo-s.no/spisesteder/smoothie-xchange/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Starbucks",
+   "osm_id": "n3132098801",
+   "level_per_plan": "Hovedhallen plan 2",
+   "where": "'i andre etasje' (upper floor of the main hall)",
+   "opening_hours": "Mo-Fr 06:30-21:00; Sa 07:30-21:00; Su 09:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/starbucks/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Swift by Sumo",
+   "osm_id": "n6453909666",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Sa 10:00-21:00; Su 12:00-19:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Asian fusion.",
+   "_source": "https://oslo-s.no/spisesteder/swift-by-sumo/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Upper Crust",
+   "osm_id": "n11452132813",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 06:30-21:00; Sa 07:30-19:00; Su 08:00-20:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Baguettes.",
+   "_source": "https://oslo-s.no/spisesteder/upper-crust/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Yo! Sushi",
+   "osm_id": "w506513943",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Th 11:00-21:00; Fr,Sa 11:00-22:00; Su 12:00-21:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/spisesteder/yo-sushi/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Yokoso",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-20:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Japanese (izakaya, sushi, ramen). Not in OSM.",
+   "_source": "https://oslo-s.no/spisesteder/yokoso/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "fashion_accessories",
+   "name": "Accessorize",
+   "osm_id": "n7118275597",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-20:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "No Sunday hours listed.",
+   "_source": "https://oslo-s.no/butikker/accessorize/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Ark (Ark Pocket / Ark Bokhandel)",
+   "osm_id": "n7118275602",
+   "level_per_plan": "Flytogterminalen",
+   "where": "'ved flytogterminalen'",
+   "opening_hours": "Mo-Fr 07:00-22:00; Sa 08:00-20:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "No Sunday hours listed.",
+   "_source": "https://oslo-s.no/butikker/ark/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "b.young",
+   "osm_id": "n7118275598",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/b-young/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cosmetics",
+   "name": "Blivakker",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Sa 09:00-21:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM.",
+   "_source": "https://oslo-s.no/butikker/blivakker/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Boots apotek",
+   "osm_id": "n3132099332",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/boots-apotek/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Dressmann XL",
+   "osm_id": "n3132157591",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall ('Main Hall, Level 1')",
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/dressmann-xl/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "FOREX Bank",
+   "osm_id": "n7118275605",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-19:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "The magazine (p. 35) also gives Mon–Fri 08–21 and Sat 09–19.",
+   "_source": "https://oslo-s.no/butikker/forex/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Hertz (Hertz CarPool)",
+   "osm_id": "n7118275604",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa 07:00-18:00; Su 08:00-21:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/hertz-car-rental/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Ichi",
+   "osm_id": "n13469894267",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "No Sunday hours listed.",
+   "_source": "https://oslo-s.no/butikker/ichi/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "Joker Oslo S",
+   "osm_id": "n6059110186",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Su 08:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no shows 'Hver dag 08:00–18:00' (location 'Hovedhallen 1'). OSM's hours (Mo-Fr 05:00-24:00, Sa-Su 06:00-24:00) differ, so this needs checking.",
+   "_source": "https://oslo-s.no/butikker/joker/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "cosmetics",
+   "name": "L'Occitane",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM.",
+   "_source": "https://oslo-s.no/butikker/loccitane/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Mester Grønn",
+   "osm_id": "n6453911563",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-19:00; Su,PH 10:30-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/mester-gronn/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen Flytogterminalen",
+   "osm_id": "n6122924670",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Fr 06:00-23:30; Sa 07:00-22:00; Su 08:00-23:45",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no's location line reads 'Hovedhallen plan U' (probably just the map label); the magazine lists it under Flytogterminalen (no. 32).",
+   "_source": "https://oslo-s.no/butikker/narvesen-flytogterminalen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen (Hovedhallen, 2 units)",
+   "osm_id": "n3132157593; n6122925926; n6453911562",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "'2 steder i Hovedhallen Plan 1 og i Flytogterminalen' (two kiosks in the main hall)",
+   "opening_hours": "Mo-Su 05:00-21:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "One oslo-s.no page with one set of hours covers both main-hall kiosks (magazine nos. 8 and 11). OSM has three Narvesen nodes in the main hall. Narvesen.no lists 'Oslo Sentralstasjon' and 'Oslo S Sør' at Jernbanetorget 1.",
+   "_source": "https://oslo-s.no/butikker/narvesen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen v/inngang nord",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "by inngang nord",
+   "opening_hours": "Mo-Su 04:45-23:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/narvesen-v-inngang-nord/, read 2026-10-30; https://narvesen.no/finn-butikk ('Inngang Nord Oslo S'), read 2026-10-30"
+  },
+  {
+   "category": "deli",
+   "name": "Olivenlunden 1830",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Olive oil and Mediterranean delicatessen. Not in OSM.",
+   "_source": "https://oslo-s.no/butikker/olivenlunden-1830/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "tourist_information",
+   "name": "Oslo Visitor Centre (VisitOSLO)",
+   "level_per_plan": "Hovedhallen plan U",
+   "opening_hours": "Mo-Fr 10:00-16:00; Sa 10:00-15:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "oslo-s.no says 'Hovedhallen plan U'; the magazine lists it under Østbanehallen (no. 39).",
+   "_source": "https://oslo-s.no/butikker/oslo-visitor-centre/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Studio Johnny",
+   "level_per_plan": "Flytogterminalen",
+   "where": "in Flytogterminalen",
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM.",
+   "_source": "https://oslo-s.no/butikker/studio-johnny/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Sweets",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen",
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa 10:00-19:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Chocolate shop. Not in OSM.",
+   "_source": "https://oslo-s.no/butikker/sweets/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "alcohol",
+   "name": "Vinmonopolet Oslo S",
+   "osm_id": "n3132098799",
+   "level_per_plan": "Hovedhallen plan U",
+   "where": "lower level of the main hall",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/butikker/vinmonopolet/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "chemist",
+   "name": "Vita",
+   "osm_id": "n3132157596",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 10:00-19:00; Su off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "Beauty and health shop; not a pharmacy.",
+   "_source": "https://oslo-s.no/butikker/vita/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "social_facility",
+   "name": "Sporet (Kirkens Bymisjon)",
+   "level_per_plan": "Hovedhallen plan 2",
+   "where": "upper floor of the main hall",
+   "note": "On the magazine map (no. 29); not on oslo-s.no's shop or eatery lists. No hours found.",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30"
+  },
+  {
+   "category": "hotel",
+   "name": "Comfort Hotel Grand Central",
+   "level_per_plan": "Østbanehallen",
+   "where": "in Østbanehallen, with its own entrance",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Vitusapotek Byporten (Oslo S)",
+   "where": "in Byporten (Jernbanetorget 6), next to inngang nord; not on oslo-s.no's list",
+   "osm_id": "n6821148278",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 10:00-20:00; Su 12:00-19:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.vitusapotek.no/apotek, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Vitusapotek Jernbanetorget (24-hour)",
+   "where": "'utenfor Oslo S', Jernbanetorget 4 B (outside the station)",
+   "opening_hours": "24/7",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.vitusapotek.no/apotek, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "Entur billettsalg og informasjon",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "'mellom spor 8 og 9 i Hovedhallen' (between tracks 8 and 9 in the main hall); the counter has a hearing loop",
+   "osm_id": "n5039388941",
+   "opening_hours": "Mo-Fr 07:30-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "note": "International sales: Mo-Fr 07:30-19:00; Sa,Su 10:00-17:00. Bane NOR's Norwegian page gives the same hours. Its English page (Mo-Fr 06:30-23:15) is out of date. Hours can change on holidays.",
+   "_source": "https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Entur ticket machines",
+   "where": "in the station (positions not given by oslo-s.no; OSM has Entur vending machine n5039388404 in the main hall)",
+   "_source": "https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Flytoget ticket machines",
+   "where": "at track 10 in the main hall, where Flytoget leaves for Oslo Lufthavn; OSM also has a Flytoget machine n5039388148 at level 1 (Flytogterminalen)",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toaletter og stellerom",
+   "fee": "20 kr (staffed; card or cash)",
+   "level_per_plan": "Hovedhallen plan 1",
+   "where": "in the main hall opposite La Baguette, by the escalator down to Flytogterminalen and Østbanehallen; has an accessible (HC) toilet and a baby-changing table",
+   "osm_id": "n6550145908",
+   "note": "Bane NOR says there is a payment machine for the toilet. Bane NOR's English page lists 'ATM Fee NOK 10,-', which looks like an old toilet fee. No opening hours are published.",
+   "_source": "https://oslo-s.no/praktisk-info/toaletter-og-stellerom/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Oppbevaringsbokser (Speed / Speedbox)",
+   "level_per_plan": "Hovedhallen plan U",
+   "where": "reached from Flytogterminalen towards Østbanehallen, or by the escalator in the corridor by Deli de Luca",
+   "osm_id": "n5039388949",
+   "hours_raw": "available during the station's opening hours (Bane NOR); waiting room/station open 03:45–01:30",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "fee": "per hour, day or week; card only (prices on speedbox.eu)",
+   "note": "Entur's lost-property office ('Hittegods') is at the luggage lockers: Mo-Fr 07:30-16:45, closed Sa/Su/holidays.",
+   "_source": "https://oslo-s.no/praktisk-info/bagasjeoppbevaring/, read 2026-10-30; https://oslo-s.no/praktisk-info/hittegods/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "lost_property",
+   "name": "Hittegods (Entur Lost Property)",
+   "where": "at the luggage lockers at Oslo S",
+   "opening_hours": "Mo-Fr 07:30-16:45; Sa,Su,PH off",
+   "hours_source": "website (oslo-s.no)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://oslo-s.no/praktisk-info/hittegods/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom / stasjonshall",
+   "opening_hours": "Mo-Su 03:45-01:30",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "the station hall (step-free, automatic doors)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Minibanker",
+   "where": "'mange minibanker på stasjonen med både norsk og utenlandsk valuta'; OSM has Forex ATMs n11452132814 (level 2, main hall) and n3132157601",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "category": "charging",
+   "name": "Chargo powerbank stations",
+   "where": "'Hovedterminalen foran togene', Flytogterminalen, and at Upper Crust, Deli de Luca, YO! Sushi, Royal Gastropub, O'Learys, Bella Bambina and Comfort Hotel Xpress Central Station",
+   "_source": "https://oslo-s.no/praktisk-info/mobillading/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Fotoautomater (3)",
+   "level_per_plan": "Hovedhallen plan U",
+   "where": "oslo-s.no gives only the label 'Hovedhallen plan U'",
+   "_source": "https://oslo-s.no/praktisk-info/fotoautomat/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi (sjøsiden)",
+   "where": "outside Flytogterminalen on the sea side ('øvre drosjetorg'); drop-off by the taxi rank",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi (inngang nord)",
+   "where": "at the steps down to the metro towards Byporten / Biskop Gunnerus' gate under Byporten; drop-off here too",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "tram_stop",
+   "name": "Jernbanetorget (trikk)",
+   "where": "right outside the main entrance",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30"
+  },
+  {
+   "category": "subway",
+   "name": "Jernbanetorget T-bane",
+   "where": "escalator down by Byporten, then towards Oslo City",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Oslo Bussterminal (Galleri Oslo)",
+   "where": "via inngang nord and the bridge into Galleri Oslo; the terminal is at its far end (about 300 m, Bane NOR)",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Buss for tog (rail replacement)",
+   "where": "Trelastgata by track 19 (sea side), and also from Tollboden",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Oslo S P-hus",
+   "where": "on the sea side; drive in from Dronning Eufemias gate; four short-term accessible (HC) spaces",
+   "fee": "yes",
+   "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Oslo S (Oslo kommune)",
+   "where": "between Flytogterminalen and the P-hus on the sea side; about 160 bikes, five cargo-bike stands; access by app; CCTV",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "category": "assistance",
+   "name": "Bane NOR Assistansetjeneste",
+   "opening_hours": "Mo-Fr 08:00-19:00; Sa,Su,PH 09:00-15:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "Book at least 24 hours ahead, phone +47 477 70 098. Christmas Eve and New Year's Eve 08:00–12:00.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Kart Oslo S (station map image, 'Kart-Oslo-S-2025_mars-1.jpg')",
+   "publisher": "Oslo S / Bane NOR Eiendom (oslo-s.no)",
+   "url": "https://oslo-s.no/wp-content/uploads/sites/4/2024/04/Kart-Oslo-S-2025_mars-1.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Image only; it could not be read with the tools available (the fetch failed). It is printed under the location label on every shop page."
+  },
+  {
+   "title": "Oslo S magasinet 03/2026, p. 6 'Slik finner du frem hos oss' (map + numbered legend 1–50)",
+   "publisher": "Oslo S (oslo-s.no)",
+   "url": "https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Sporplan Oslo S (track plan)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-o---p-/ko-000987-000-oslo-s.png",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "oslo-s.no and its magazine use 'Hovedhallen plan U', 'Hovedhallen plan 1' (incl. 'Passasjen'), 'Hovedhallen plan 2', 'Flytogterminalen' and 'Østbanehallen'. Shops tagged in OSM match them to OSM levels 1, 2, 3 and 0. Flytogterminalen is a mix of 0 and 1. These are website names; the station signs themselves were not seen.",
+   "_source": "Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; https://oslo-s.no/spisesteder/burger-king/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Tracks 1–12: a steep ramp and a travelator from the station hall (no lift needed). Tracks 13–19: stairs and lifts from the station hall. Bane NOR does not say where these are along the platforms.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Every shop and eatery on oslo-s.no's lists (46) has hours from oslo-s.no. Sporet (Kirkens Bymisjon) and the toilets have none published.",
+   "_source": "oslo-s.no shop and eatery pages, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Floor heights: no open source measures them.",
+  "The station-map image (Kart-Oslo-S-2025_mars-1.jpg) could not be read, so positions within each hall are mostly OSM's. Only some places have a 'where' in words: ticket office between tracks 8 and 9, toilets opposite La Baguette by the escalator to Flytogterminalen, lockers via the escalator by Deli de Luca, Starbucks on the second floor, Narvesen by inngang nord, Flytoget machines at track 10.",
+  "Lifts to tracks 13–19 (Bane NOR) are not in the OSM extract. The extract also lacks the main-line platforms 1–19: its platform list holds only metro, tram and bus stops. Lift positions on those platforms are still open.",
+  "oslo-s.no and the magazine disagree on where some places are. La Baguette and Pronto di Olivia: plan 1 (web) vs Flytogterminalen (magazine). Oslo Visitor Centre: plan U (web) vs Østbanehallen (magazine). Magazine entries 19–23 (Deli de Luca, Upper Crust, Entur, Bake Me Up, Smoothie Xchange) have no clear section heading. Burger King appears on both plan 1 and plan 2.",
+  "Several shop pages print a second location line, 'Hovedhallen plan U', which may just be the map label. It was ignored where the page also gives another level.",
+  "Joker Oslo S hours on oslo-s.no ('Hver dag 08:00–18:00') look unusually short for a station grocery, and OSM says 05:00/06:00–24:00. This needs checking.",
+  "OSM places in or near the station that are not on oslo-s.no's current lists were left out: Gladkokken (2 nodes), Steam kaffebar (Østbanehallen, OSM level 0), Eye Factory, Joker Plaza, and everything in Byporten, Oslo City and Galleri Oslo/the bus terminal (Mix, Joker Oslo bussterminal, Espresso House Galleriet, BIT, Forex). Steam and Gladkokken may have closed.",
+  "Entrance streets: only inngang nord (Biskop Gunnerus' gate, Bane NOR) and the Jernbanetorget side are named by owner text. The sea-side/Flytogterminalen street (Trelastgata) relies partly on OSM. The magazine labels 'OPERAEN' and 'BUSSTERMINALEN' exits without naming streets.",
+  "Bane NOR's English page differs from the Norwegian page on ticket-office hours (06:30–23:15 vs 07:30–20:00) and the bus-terminal distance (200 m vs 300 m). The Norwegian page and oslo-s.no were used.",
+  "Temporary: inngang nord is partly closed in weeks 43–47 of 2026 (Bane NOR notice)."
+ ]
+}

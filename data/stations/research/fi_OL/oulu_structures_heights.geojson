@@ -1,0 +1,2671 @@
+{
+ "type": "FeatureCollection",
+ "name": "oulu_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 12.65,
+ "track_bed_m": 12.11,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4842497,
+       65.01169269999997
+      ],
+      [
+       25.4841072,
+       65.01159769999998
+      ],
+      [
+       25.4838873,
+       65.01145119999998
+      ],
+      [
+       25.48381,
+       65.0114719
+      ],
+      [
+       25.4837341,
+       65.0114213
+      ],
+      [
+       25.4836588,
+       65.01137110000002
+      ],
+      [
+       25.483724700000003,
+       65.0113535
+      ],
+      [
+       25.4835323,
+       65.0112253
+      ],
+      [
+       25.483647,
+       65.0111946
+      ],
+      [
+       25.4837323,
+       65.0111718
+      ],
+      [
+       25.483758,
+       65.0111649
+      ],
+      [
+       25.4838897,
+       65.01125269999999
+      ],
+      [
+       25.4839799,
+       65.0113126
+      ],
+      [
+       25.484073600000002,
+       65.0113775
+      ],
+      [
+       25.4840831,
+       65.01138419999998
+      ],
+      [
+       25.4842317,
+       65.0114807
+      ],
+      [
+       25.4843935,
+       65.01158849999999
+      ],
+      [
+       25.4844639,
+       65.01163539999999
+      ],
+      [
+       25.4842497,
+       65.01169269999997
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w38295259",
+    "name": "Oulun rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "name": "Oulun rautatieasema"
+    },
+    "ground_min_m": 12.68,
+    "ground_median_m": 12.9,
+    "ground_max_m": 13.89,
+    "laser_points": 0,
+    "source": "Outline OSM w38295259 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4830484,
+       65.0111251
+      ],
+      [
+       25.4831246,
+       65.01110479999998
+      ],
+      [
+       25.4831314,
+       65.0111094
+      ],
+      [
+       25.4835268,
+       65.011004
+      ],
+      [
+       25.4835057,
+       65.01098989999998
+      ],
+      [
+       25.4833879,
+       65.010911
+      ],
+      [
+       25.4833643,
+       65.0108952
+      ],
+      [
+       25.483114,
+       65.0109619
+      ],
+      [
+       25.4829689,
+       65.0110006
+      ],
+      [
+       25.4829753,
+       65.0110049
+      ],
+      [
+       25.4828991,
+       65.01102519999999
+      ],
+      [
+       25.4830484,
+       65.0111251
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w45418237",
+    "name": "Taito (building)",
+    "osm_tags": {
+     "building": "yes",
+     "name": "Taito"
+    },
+    "ground_min_m": 11.6,
+    "ground_median_m": 12.55,
+    "ground_max_m": 12.75,
+    "laser_points": 2,
+    "source": "Outline OSM w45418237 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4818445,
+       65.0084704
+      ],
+      [
+       25.4821464,
+       65.0083911
+      ],
+      [
+       25.4824393,
+       65.00831419999999
+      ],
+      [
+       25.4822869,
+       65.0082106
+      ],
+      [
+       25.4822119,
+       65.0081597
+      ],
+      [
+       25.4816171,
+       65.00831589999999
+      ],
+      [
+       25.4818445,
+       65.0084704
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w87499625",
+    "name": "Oulun linja-autoasema (building)",
+    "osm_tags": {
+     "amenity": "bus_station",
+     "building": "yes",
+     "building:levels": "1",
+     "name": "Oulun linja-autoasema"
+    },
+    "ground_min_m": 11.92,
+    "ground_median_m": 12.22,
+    "ground_max_m": 12.62,
+    "laser_points": 2,
+    "source": "Outline OSM w87499625 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4826249,
+       65.0100707
+      ],
+      [
+       25.482730500000002,
+       65.0100429
+      ],
+      [
+       25.4840172,
+       65.0109145
+      ],
+      [
+       25.4839116,
+       65.0109423
+      ],
+      [
+       25.4826249,
+       65.0100707
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w87687268",
+    "name": "canopy",
+    "osm_tags": {
+     "building": "canopy",
+     "layer": "1"
+    },
+    "ground_min_m": 12.5,
+    "ground_median_m": 12.6,
+    "ground_max_m": 12.68,
+    "laser_points": 2,
+    "source": "Outline OSM w87687268 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.484677600000005,
+       65.0103025
+      ],
+      [
+       25.4846442,
+       65.0102783
+      ],
+      [
+       25.4847984,
+       65.0102341
+      ],
+      [
+       25.484818,
+       65.01022850000001
+      ],
+      [
+       25.4847694,
+       65.01020079999999
+      ],
+      [
+       25.4847236,
+       65.0101823
+      ],
+      [
+       25.4846586,
+       65.01016629999998
+      ],
+      [
+       25.4845764,
+       65.01015839999998
+      ],
+      [
+       25.484503400000005,
+       65.0101575
+      ],
+      [
+       25.4845158,
+       65.0102594
+      ],
+      [
+       25.4845984,
+       65.0102779
+      ],
+      [
+       25.4842874,
+       65.0103608
+      ],
+      [
+       25.4843375,
+       65.0103933
+      ],
+      [
+       25.4844289,
+       65.0103692
+      ],
+      [
+       25.484546100000003,
+       65.01033769999998
+      ],
+      [
+       25.484677600000005,
+       65.0103025
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w135976271",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.24,
+    "ground_median_m": 12.63,
+    "ground_max_m": 13.08,
+    "laser_points": 1,
+    "source": "Outline OSM w135976271 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.482739,
+       65.0105726
+      ],
+      [
+       25.4828562,
+       65.0105414
+      ],
+      [
+       25.4831145,
+       65.0107143
+      ],
+      [
+       25.4829973,
+       65.01074549999998
+      ],
+      [
+       25.4829759,
+       65.0107311
+      ],
+      [
+       25.4829006,
+       65.0106808
+      ],
+      [
+       25.4828294,
+       65.01063309999999
+      ],
+      [
+       25.482739,
+       65.0105726
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w427854919",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.28,
+    "ground_median_m": 12.59,
+    "ground_max_m": 13.05,
+    "laser_points": 0,
+    "source": "Outline OSM w427854919 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.483571,
+       65.0093954
+      ],
+      [
+       25.4831447,
+       65.00910549999999
+      ],
+      [
+       25.483249100000002,
+       65.00907809999998
+      ],
+      [
+       25.4836756,
+       65.00936789999999
+      ],
+      [
+       25.483571,
+       65.0093954
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w814111629",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 11.87,
+    "ground_median_m": 12.1,
+    "ground_max_m": 12.44,
+    "laser_points": 3,
+    "source": "Outline OSM w814111629 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.481018100000004,
+       65.00975719999998
+      ],
+      [
+       25.481159,
+       65.0098527
+      ],
+      [
+       25.4811166,
+       65.00986389999998
+      ],
+      [
+       25.4810671,
+       65.0098769
+      ],
+      [
+       25.481148100000002,
+       65.00993179999999
+      ],
+      [
+       25.4811665,
+       65.00994429999999
+      ],
+      [
+       25.4812448,
+       65.00992369999999
+      ],
+      [
+       25.4812656,
+       65.0099378
+      ],
+      [
+       25.4817284,
+       65.00981599999999
+      ],
+      [
+       25.4817041,
+       65.0097995
+      ],
+      [
+       25.4817407,
+       65.0097898
+      ],
+      [
+       25.4816408,
+       65.0097221
+      ],
+      [
+       25.4816096,
+       65.0097303
+      ],
+      [
+       25.4815151,
+       65.0096663
+      ],
+      [
+       25.481472800000002,
+       65.0096375
+      ],
+      [
+       25.481018100000004,
+       65.00975719999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w831245387",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "12",
+     "height": "50",
+     "layer": "1"
+    },
+    "ground_min_m": 12.51,
+    "ground_median_m": 17.19,
+    "ground_max_m": 17.65,
+    "laser_points": 1,
+    "source": "Outline OSM w831245387 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4846803,
+       65.01227069999999
+      ],
+      [
+       25.4848332,
+       65.0123314
+      ],
+      [
+       25.4849849,
+       65.0123916
+      ],
+      [
+       25.4852676,
+       65.0122646
+      ],
+      [
+       25.484963,
+       65.01214360000002
+      ],
+      [
+       25.484699100000004,
+       65.01226219999998
+      ],
+      [
+       25.4846803,
+       65.01227069999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w831245389",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "8",
+     "building:part": "yes",
+     "height": "35",
+     "roof:shape": "skillion",
+     "start_date": "2021-10"
+    },
+    "ground_min_m": 12.1,
+    "ground_median_m": 12.13,
+    "ground_max_m": 12.17,
+    "laser_points": 0,
+    "source": "Outline OSM w831245389 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4846564,
+       65.01185359999998
+      ],
+      [
+       25.4843487,
+       65.0119082
+      ],
+      [
+       25.4842941,
+       65.01191779999999
+      ],
+      [
+       25.4842715,
+       65.01192189999999
+      ],
+      [
+       25.4843491,
+       65.0119999
+      ],
+      [
+       25.4844341,
+       65.0120854
+      ],
+      [
+       25.484819,
+       65.01201719999999
+      ],
+      [
+       25.4846564,
+       65.01185359999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w831245390",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "8",
+     "building:part": "yes",
+     "height": "35",
+     "roof:shape": "skillion",
+     "start_date": "2020-12"
+    },
+    "ground_min_m": 12.06,
+    "ground_median_m": 12.14,
+    "ground_max_m": 12.15,
+    "laser_points": 0,
+    "source": "Outline OSM w831245390 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.484461300000003,
+       65.0109553
+      ],
+      [
+       25.4844197,
+       65.01096680000002
+      ],
+      [
+       25.4844579,
+       65.0109914
+      ],
+      [
+       25.4844994,
+       65.01097989999998
+      ],
+      [
+       25.484461300000003,
+       65.0109553
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w844277144",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 12.15,
+    "ground_median_m": 12.22,
+    "ground_max_m": 12.25,
+    "laser_points": 0,
+    "source": "Outline OSM w844277144 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4816931,
+       65.013215
+      ],
+      [
+       25.4812424,
+       65.0133371
+      ],
+      [
+       25.4810205,
+       65.0131887
+      ],
+      [
+       25.4816863,
+       65.013011
+      ],
+      [
+       25.4814563,
+       65.0128575
+      ],
+      [
+       25.4804068,
+       65.0131377
+      ],
+      [
+       25.4804507,
+       65.01316699999998
+      ],
+      [
+       25.4809576,
+       65.0135058
+      ],
+      [
+       25.4810307,
+       65.0135547
+      ],
+      [
+       25.4818646,
+       65.01333210000001
+      ],
+      [
+       25.4818201,
+       65.01330119999999
+      ],
+      [
+       25.4817094,
+       65.013227
+      ],
+      [
+       25.4816931,
+       65.013215
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w877996837",
+    "name": "Scandic Oulu Station (hotel)",
+    "osm_tags": {
+     "building": "hotel",
+     "name": "Scandic Oulu Station"
+    },
+    "ground_min_m": 10.88,
+    "ground_median_m": 11.08,
+    "ground_max_m": 12.33,
+    "laser_points": 0,
+    "source": "Outline OSM w877996837 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4816575,
+       65.0102261
+      ],
+      [
+       25.4816875,
+       65.01024650000001
+      ],
+      [
+       25.4817473,
+       65.0102871
+      ],
+      [
+       25.4817595,
+       65.01029529999998
+      ],
+      [
+       25.4817341,
+       65.010302
+      ],
+      [
+       25.481709800000004,
+       65.0103084
+      ],
+      [
+       25.4818113,
+       65.0103773
+      ],
+      [
+       25.4818935,
+       65.01035559999998
+      ],
+      [
+       25.4819144,
+       65.01036979999999
+      ],
+      [
+       25.4821764,
+       65.0103008
+      ],
+      [
+       25.4823365,
+       65.0102587
+      ],
+      [
+       25.4823732,
+       65.0102491
+      ],
+      [
+       25.4823494,
+       65.010233
+      ],
+      [
+       25.482382000000005,
+       65.0102244
+      ],
+      [
+       25.4822814,
+       65.0101561
+      ],
+      [
+       25.4822561,
+       65.0101628
+      ],
+      [
+       25.4821561,
+       65.010095
+      ],
+      [
+       25.4816575,
+       65.0102261
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w878645018",
+    "name": "apartments",
+    "osm_tags": {
+     "building:levels": "12",
+     "building:part": "apartments",
+     "height": "50",
+     "layer": "1"
+    },
+    "ground_min_m": 8.93,
+    "ground_median_m": 12.18,
+    "ground_max_m": 12.92,
+    "laser_points": 1,
+    "source": "Outline OSM w878645018 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4811665,
+       65.00994429999999
+      ],
+      [
+       25.4816031,
+       65.01024049999998
+      ],
+      [
+       25.4816575,
+       65.0102261
+      ],
+      [
+       25.4816875,
+       65.01024650000001
+      ],
+      [
+       25.4817473,
+       65.0102871
+      ],
+      [
+       25.4817595,
+       65.01029529999998
+      ],
+      [
+       25.4817341,
+       65.010302
+      ],
+      [
+       25.481709800000004,
+       65.0103084
+      ],
+      [
+       25.4818113,
+       65.0103773
+      ],
+      [
+       25.4818322,
+       65.0103914
+      ],
+      [
+       25.4819144,
+       65.01036979999999
+      ],
+      [
+       25.4821764,
+       65.0103008
+      ],
+      [
+       25.482229,
+       65.01033649999997
+      ],
+      [
+       25.4823891,
+       65.0102944
+      ],
+      [
+       25.4823365,
+       65.0102587
+      ],
+      [
+       25.4823732,
+       65.0102491
+      ],
+      [
+       25.4823494,
+       65.010233
+      ],
+      [
+       25.482382000000005,
+       65.0102244
+      ],
+      [
+       25.4822814,
+       65.0101561
+      ],
+      [
+       25.4822561,
+       65.0101628
+      ],
+      [
+       25.4821561,
+       65.010095
+      ],
+      [
+       25.4821809,
+       65.01008839999999
+      ],
+      [
+       25.4817407,
+       65.0097898
+      ],
+      [
+       25.4817041,
+       65.0097995
+      ],
+      [
+       25.4817284,
+       65.00981599999999
+      ],
+      [
+       25.4812656,
+       65.0099378
+      ],
+      [
+       25.4812448,
+       65.00992369999999
+      ],
+      [
+       25.4811665,
+       65.00994429999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w878645019",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "2",
+     "height": "10"
+    },
+    "ground_min_m": 8.53,
+    "ground_median_m": 12.4,
+    "ground_max_m": 12.92,
+    "laser_points": 1,
+    "source": "Outline OSM w878645019 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4850287,
+       65.0085528
+      ],
+      [
+       25.4852573,
+       65.0087097
+      ],
+      [
+       25.4853226,
+       65.0086927
+      ],
+      [
+       25.4852221,
+       65.0086247
+      ],
+      [
+       25.4851354,
+       65.0085684
+      ],
+      [
+       25.485089500000004,
+       65.0085369
+      ],
+      [
+       25.4850287,
+       65.0085528
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w898545089",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof"
+    },
+    "ground_min_m": 11.94,
+    "ground_median_m": 12.08,
+    "ground_max_m": 12.45,
+    "laser_points": 1,
+    "source": "Outline OSM w898545089 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4826714,
+       65.0093548
+      ],
+      [
+       25.4826434,
+       65.00936
+      ],
+      [
+       25.4827085,
+       65.0094218
+      ],
+      [
+       25.4827365,
+       65.0094165
+      ],
+      [
+       25.4826714,
+       65.0093548
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1343382901",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 12.21,
+    "ground_median_m": 12.41,
+    "ground_max_m": 12.56,
+    "laser_points": 0,
+    "source": "Outline OSM w1343382901 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.485327200000004,
+       65.0122365
+      ],
+      [
+       25.4852676,
+       65.0122646
+      ],
+      [
+       25.4849849,
+       65.0123916
+      ],
+      [
+       25.484961900000002,
+       65.0124021
+      ],
+      [
+       25.485179100000003,
+       65.01255229999998
+      ],
+      [
+       25.4856233,
+       65.01243489999999
+      ],
+      [
+       25.485327200000004,
+       65.0122365
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1343382907",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "2",
+     "building:part": "yes",
+     "height": "10",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 11.95,
+    "ground_median_m": 12.19,
+    "ground_max_m": 13.11,
+    "laser_points": 0,
+    "source": "Outline OSM w1343382907 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4852676,
+       65.0122646
+      ],
+      [
+       25.484963,
+       65.01214360000002
+      ],
+      [
+       25.484699100000004,
+       65.01226219999998
+      ],
+      [
+       25.4844341,
+       65.0120854
+      ],
+      [
+       25.484819,
+       65.01201719999999
+      ],
+      [
+       25.4849662,
+       65.01199469999999
+      ],
+      [
+       25.485327200000004,
+       65.0122365
+      ],
+      [
+       25.4852676,
+       65.0122646
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1343382908",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "2",
+     "building:part": "yes",
+     "height": "10",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 12.08,
+    "ground_median_m": 12.36,
+    "ground_max_m": 12.68,
+    "laser_points": 1,
+    "source": "Outline OSM w1343382908 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.484819,
+       65.01201719999999
+      ],
+      [
+       25.4846564,
+       65.01185359999998
+      ],
+      [
+       25.4843487,
+       65.0119082
+      ],
+      [
+       25.4843365,
+       65.01189999999998
+      ],
+      [
+       25.4843278,
+       65.0118942
+      ],
+      [
+       25.4844128,
+       65.0118712
+      ],
+      [
+       25.4843407,
+       65.011822
+      ],
+      [
+       25.484310000000004,
+       65.01180169999999
+      ],
+      [
+       25.4842401,
+       65.01175699999999
+      ],
+      [
+       25.4845055,
+       65.0116862
+      ],
+      [
+       25.4849662,
+       65.01199469999999
+      ],
+      [
+       25.484819,
+       65.01201719999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1343382909",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "2",
+     "building:part": "yes",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 12.32,
+    "ground_median_m": 12.59,
+    "ground_max_m": 12.78,
+    "laser_points": 0,
+    "source": "Outline OSM w1343382909 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4811665,
+       65.00994429999999
+      ],
+      [
+       25.481148100000002,
+       65.00993179999999
+      ],
+      [
+       25.4810671,
+       65.0098769
+      ],
+      [
+       25.4811166,
+       65.00986389999998
+      ],
+      [
+       25.4810103,
+       65.0097918
+      ],
+      [
+       25.4809612,
+       65.00980479999998
+      ],
+      [
+       25.4805306,
+       65.0095127
+      ],
+      [
+       25.480603,
+       65.0094936
+      ],
+      [
+       25.480623,
+       65.0095073
+      ],
+      [
+       25.481089,
+       65.0093847
+      ],
+      [
+       25.4810666,
+       65.0093695
+      ],
+      [
+       25.481101,
+       65.00936039999999
+      ],
+      [
+       25.4815417,
+       65.00965929999998
+      ],
+      [
+       25.4815151,
+       65.0096663
+      ],
+      [
+       25.4816096,
+       65.0097303
+      ],
+      [
+       25.4816408,
+       65.0097221
+      ],
+      [
+       25.4817407,
+       65.0097898
+      ],
+      [
+       25.4817041,
+       65.0097995
+      ],
+      [
+       25.4817284,
+       65.00981599999999
+      ],
+      [
+       25.4812656,
+       65.0099378
+      ],
+      [
+       25.4812448,
+       65.00992369999999
+      ],
+      [
+       25.4811665,
+       65.00994429999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1460220552",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "2",
+     "height": "10"
+    },
+    "ground_min_m": 11.27,
+    "ground_median_m": 12.33,
+    "ground_max_m": 13.17,
+    "roof_top_median_m": 19.62,
+    "roof_top_p95_m": 47.61,
+    "laser_points": 21,
+    "height_above_ground_median_m": 7.29,
+    "height_above_ground_p95_m": 35.28,
+    "top_above_platform_m": 6.97,
+    "base_above_platform_m": -1.38,
+    "source": "Outline OSM w1460220552 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.485220200000004,
+       65.01257989999998
+      ],
+      [
+       25.4852004,
+       65.0125666
+      ],
+      [
+       25.484961900000002,
+       65.0124021
+      ],
+      [
+       25.4849849,
+       65.0123916
+      ],
+      [
+       25.4852676,
+       65.0122646
+      ],
+      [
+       25.485327200000004,
+       65.0122365
+      ],
+      [
+       25.4856233,
+       65.01243489999999
+      ],
+      [
+       25.485976900000004,
+       65.01266929999998
+      ],
+      [
+       25.4853334,
+       65.0126557
+      ],
+      [
+       25.485220200000004,
+       65.01257989999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1490205622",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "16",
+     "height": "66",
+     "roof:shape": "skillion",
+     "start_date": "2023-05"
+    },
+    "ground_min_m": 10.5,
+    "ground_median_m": 12.05,
+    "ground_max_m": 13.11,
+    "laser_points": 2,
+    "source": "Outline OSM w1490205622 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4846803,
+       65.01227069999999
+      ],
+      [
+       25.4848332,
+       65.0123314
+      ],
+      [
+       25.4849849,
+       65.0123916
+      ],
+      [
+       25.4852676,
+       65.0122646
+      ],
+      [
+       25.485327200000004,
+       65.0122365
+      ],
+      [
+       25.4849662,
+       65.01199469999999
+      ],
+      [
+       25.484819,
+       65.01201719999999
+      ],
+      [
+       25.4844341,
+       65.0120854
+      ],
+      [
+       25.484699100000004,
+       65.01226219999998
+      ],
+      [
+       25.4846803,
+       65.01227069999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1490205623",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "8",
+     "height": "35",
+     "roof:shape": "skillion",
+     "start_date": "2021-10"
+    },
+    "ground_min_m": 12.08,
+    "ground_median_m": 12.18,
+    "ground_max_m": 12.68,
+    "laser_points": 1,
+    "source": "Outline OSM w1490205623 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.4843491,
+       65.0119999
+      ],
+      [
+       25.4844341,
+       65.0120854
+      ],
+      [
+       25.484819,
+       65.01201719999999
+      ],
+      [
+       25.4849662,
+       65.01199469999999
+      ],
+      [
+       25.4845055,
+       65.0116862
+      ],
+      [
+       25.4842401,
+       65.01175699999999
+      ],
+      [
+       25.484310000000004,
+       65.01180169999999
+      ],
+      [
+       25.4843407,
+       65.011822
+      ],
+      [
+       25.4844128,
+       65.0118712
+      ],
+      [
+       25.4843278,
+       65.0118942
+      ],
+      [
+       25.4843365,
+       65.01189999999998
+      ],
+      [
+       25.4843487,
+       65.0119082
+      ],
+      [
+       25.4842941,
+       65.01191779999999
+      ],
+      [
+       25.4842715,
+       65.01192189999999
+      ],
+      [
+       25.4843491,
+       65.0119999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1490205624",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "8",
+     "height": "35",
+     "roof:shape": "skillion",
+     "start_date": "2020-12"
+    },
+    "ground_min_m": 12.06,
+    "ground_median_m": 12.57,
+    "ground_max_m": 12.78,
+    "laser_points": 0,
+    "source": "Outline OSM w1490205624 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.48411069583051,
+       65.01119494622527
+      ],
+      [
+       25.48404656503213,
+       65.01120327040756
+      ],
+      [
+       25.484046056326036,
+       65.0112122400462
+      ],
+      [
+       25.484088471082533,
+       65.01121267035377
+      ],
+      [
+       25.484086945004627,
+       65.01123957927012
+      ],
+      [
+       25.48415005853414,
+       65.01124919434875
+      ],
+      [
+       25.484168213944873,
+       65.01130322732371
+      ],
+      [
+       25.484231327654026,
+       65.01131284236831
+      ],
+      [
+       25.484229801712942,
+       65.01133975128606
+      ],
+      [
+       25.484251009193944,
+       65.01133996641552
+      ],
+      [
+       25.484254061030047,
+       65.01128614857934
+      ],
+      [
+       25.48421164615374,
+       65.0112857183185
+      ],
+      [
+       25.484192982009144,
+       65.01124065498774
+      ],
+      [
+       25.4841505672062,
+       65.01124022470974
+      ],
+      [
+       25.4841313945182,
+       65.01120413101036
+      ],
+      [
+       25.484110187146115,
+       65.01120391586417
+      ],
+      [
+       25.48411069583051,
+       65.01119494622527
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 16.2,
+    "top_p10_m": 15.9,
+    "top_p90_m": 16.26,
+    "laser_points": 28,
+    "top_above_platform_m": 3.54,
+    "area_m2": 40.0,
+    "underside_m": null,
+    "multi_return_share": 0.11,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "ground_min_m": 12.08,
+    "ground_median_m": 12.32,
+    "ground_max_m": 12.87
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.481758461218693,
+       65.009645347267
+      ],
+      [
+       25.481756932904776,
+       65.00967225616004
+      ],
+      [
+       25.481799345173464,
+       65.00967268711196
+      ],
+      [
+       25.481797816898794,
+       65.0096995960054
+      ],
+      [
+       25.481860925964323,
+       65.00970921204288
+      ],
+      [
+       25.48187907573758,
+       65.00976324529422
+      ],
+      [
+       25.48192148815299,
+       65.00976367621179
+      ],
+      [
+       25.48192097876735,
+       65.00977264584334
+      ],
+      [
+       25.481962881826686,
+       65.00978204638078
+      ],
+      [
+       25.481961863081935,
+       65.00979998564418
+      ],
+      [
+       25.482004275557248,
+       65.00980041653837
+      ],
+      [
+       25.482002747479935,
+       65.00982732543392
+      ],
+      [
+       25.482044650653776,
+       65.00983672594857
+      ],
+      [
+       25.48204312261457,
+       65.0098636348445
+      ],
+      [
+       25.482085535192443,
+       65.00986406571585
+      ],
+      [
+       25.48208400719248,
+       65.00989097461218
+      ],
+      [
+       25.482105213503313,
+       65.0098911900436
+      ],
+      [
+       25.482125401174425,
+       65.0099093447365
+      ],
+      [
+       25.48216781382642,
+       65.00990977558465
+      ],
+      [
+       25.482185964351554,
+       65.009963808799
+      ],
+      [
+       25.482228377091136,
+       65.00996423963016
+      ],
+      [
+       25.48222786780379,
+       65.00997320926275
+      ],
+      [
+       25.482249074181254,
+       65.00997342467389
+      ],
+      [
+       25.48224754633827,
+       65.01000033357185
+      ],
+      [
+       25.482289959136995,
+       65.01000076438568
+      ],
+      [
+       25.482309128492954,
+       65.01003685831954
+      ],
+      [
+       25.482351541350823,
+       65.010037289116
+      ],
+      [
+       25.48241057758928,
+       65.01011866198714
+      ],
+      [
+       25.48245299057891,
+       65.01011909275509
+      ],
+      [
+       25.482451462931014,
+       65.01014600165506
+      ],
+      [
+       25.48249387596481,
+       65.0101464324115
+      ],
+      [
+       25.482513554894958,
+       65.01017355668586
+      ],
+      [
+       25.482534761434128,
+       65.01017377205682
+      ],
+      [
+       25.482533743054905,
+       65.01019171132403
+      ],
+      [
+       25.482576156162825,
+       65.01019214205728
+      ],
+      [
+       25.482574628633806,
+       65.0102190509585
+      ],
+      [
+       25.482616532623016,
+       65.01022845131413
+      ],
+      [
+       25.48261500513211,
+       65.01025536021577
+      ],
+      [
+       25.482678115805328,
+       65.01026497591096
+      ],
+      [
+       25.48267658837386,
+       65.01029188481321
+      ],
+      [
+       25.482719001643485,
+       65.01029231550625
+      ],
+      [
+       25.482717983382383,
+       65.0103102547747
+      ],
+      [
+       25.48275988756506,
+       65.01031965509044
+      ],
+      [
+       25.482758360212088,
+       65.0103465639935
+      ],
+      [
+       25.48280077357005,
+       65.01034699466354
+      ],
+      [
+       25.482800264465855,
+       65.01035596429804
+      ],
+      [
+       25.48282147115252,
+       65.01035617962863
+      ],
+      [
+       25.482819943858985,
+       65.01038308853234
+      ],
+      [
+       25.482862357276097,
+       65.01038351918503
+      ],
+      [
+       25.48286083002181,
+       65.01041042808912
+      ],
+      [
+       25.482902734411798,
+       65.01041982836514
+      ],
+      [
+       25.48290120719562,
+       65.01044673726963
+      ],
+      [
+       25.482943620715297,
+       65.01044716789947
+      ],
+      [
+       25.482962282214476,
+       65.01049223138506
+      ],
+      [
+       25.483025393572557,
+       65.0105018469348
+      ],
+      [
+       25.483023866474124,
+       65.0105287558405
+      ],
+      [
+       25.48308697794074,
+       65.01053837136445
+      ],
+      [
+       25.48308545090175,
+       65.01056528027077
+      ],
+      [
+       25.48310665775723,
+       65.01056549556125
+      ],
+      [
+       25.483106148750586,
+       65.01057446519677
+      ],
+      [
+       25.483148562476902,
+       65.0105748957689
+      ],
+      [
+       25.48316671542078,
+       65.01062892886479
+      ],
+      [
+       25.483229827175556,
+       65.0106385443289
+      ],
+      [
+       25.483228300273378,
+       65.01066545323664
+      ],
+      [
+       25.48331160120071,
+       65.01069322320883
+      ],
+      [
+       25.4833302634874,
+       65.01073828664879
+      ],
+      [
+       25.483372677477988,
+       65.01073871715785
+      ],
+      [
+       25.483391848814357,
+       65.01077481095376
+      ],
+      [
+       25.483434262864094,
+       65.01077524144549
+      ],
+      [
+       25.483452925413292,
+       65.01082030487024
+      ],
+      [
+       25.483516037723465,
+       65.01082992021443
+      ],
+      [
+       25.48351451109603,
+       65.01085682912505
+      ],
+      [
+       25.48357762351474,
+       65.01086644444347
+      ],
+      [
+       25.48357609694675,
+       65.01089335335472
+      ],
+      [
+       25.48359730406726,
+       65.01089356857614
+      ],
+      [
+       25.48361647581574,
+       65.01092966234341
+      ],
+      [
+       25.48365889011553,
+       65.01093009277193
+      ],
+      [
+       25.48367806197285,
+       65.01096618653136
+      ],
+      [
+       25.483720476331793,
+       65.01096661694254
+      ],
+      [
+       25.483739139493522,
+       65.01101168033176
+      ],
+      [
+       25.48380225235909,
+       65.01102129555608
+      ],
+      [
+       25.48384161418446,
+       65.01107554376007
+      ],
+      [
+       25.48388351996241,
+       65.01108494376332
+      ],
+      [
+       25.48388199368711,
+       65.01111185267759
+      ],
+      [
+       25.483945106840853,
+       65.01112146784209
+      ],
+      [
+       25.483963770486483,
+       65.01116653120341
+      ],
+      [
+       25.48402688379891,
+       65.01117614633364
+      ],
+      [
+       25.484027392510605,
+       65.01116717669505
+      ],
+      [
+       25.484048599852738,
+       65.01116739185292
+      ],
+      [
+       25.48405012596422,
+       65.0111404829368
+      ],
+      [
+       25.483987012727347,
+       65.01113086781649
+      ],
+      [
+       25.483988538898277,
+       65.01110395890099
+      ],
+      [
+       25.483925425769943,
+       65.01109434375488
+      ],
+      [
+       25.483906762237908,
+       65.01104928038859
+      ],
+      [
+       25.483843649268266,
+       65.01103966520819
+      ],
+      [
+       25.483827529783568,
+       65.01094975364177
+      ],
+      [
+       25.483700795601234,
+       65.01093949282594
+      ],
+      [
+       25.483702322046927,
+       65.01091258391332
+      ],
+      [
+       25.48366041660275,
+       65.01090318385978
+      ],
+      [
+       25.48366194308656,
+       65.01087627494755
+      ],
+      [
+       25.48361952887208,
+       65.01087584452007
+      ],
+      [
+       25.483621055395144,
+       65.01084893560821
+      ],
+      [
+       25.483578641224838,
+       65.01084850516924
+      ],
+      [
+       25.48358016778715,
+       65.01082159625778
+      ],
+      [
+       25.483601374850785,
+       65.01082181147852
+      ],
+      [
+       25.483601883697023,
+       65.01081284184126
+      ],
+      [
+       25.48349635729959,
+       65.01080279607112
+      ],
+      [
+       25.483477694688972,
+       65.01075773265158
+      ],
+      [
+       25.483414582562894,
+       65.01074811729148
+      ],
+      [
+       25.483416109283343,
+       65.01072120838171
+      ],
+      [
+       25.48339490230132,
+       65.01072099313487
+      ],
+      [
+       25.48339541121449,
+       65.01071202349834
+      ],
+      [
+       25.483352997265804,
+       65.01071159299579
+      ],
+      [
+       25.483355541897065,
+       65.01066674481385
+      ],
+      [
+       25.48337674883567,
+       65.01066696006619
+      ],
+      [
+       25.483377257753677,
+       65.01065799042965
+      ],
+      [
+       25.483292430029962,
+       65.01065712940262
+      ],
+      [
+       25.483292938976028,
+       65.01064815976645
+      ],
+      [
+       25.483271732053154,
+       65.01064794450224
+      ],
+      [
+       25.48327325891041,
+       65.0106210355939
+      ],
+      [
+       25.48323084510846,
+       65.01062060505699
+      ],
+      [
+       25.48323237200496,
+       65.01059369614906
+      ],
+      [
+       25.48327478576426,
+       65.01059412668542
+      ],
+      [
+       25.483275294714783,
+       65.01058515704922
+      ],
+      [
+       25.48321167409774,
+       65.01058451124044
+      ],
+      [
+       25.483213201011026,
+       65.0105576023326
+      ],
+      [
+       25.48323440786167,
+       65.01055781760495
+      ],
+      [
+       25.483234916824898,
+       65.01054884796889
+      ],
+      [
+       25.48312888261102,
+       65.0105477715775
+      ],
+      [
+       25.48312990060744,
+       65.01052983230622
+      ],
+      [
+       25.48310869378002,
+       65.01052961701909
+      ],
+      [
+       25.48311123879999,
+       65.01048476884111
+      ],
+      [
+       25.483047618426642,
+       65.01048412296299
+      ],
+      [
+       25.483048636474635,
+       65.01046618369224
+      ],
+      [
+       25.48298552519211,
+       65.01045656815242
+      ],
+      [
+       25.482966863677866,
+       65.0104115046695
+      ],
+      [
+       25.48290426162456,
+       65.01039291946056
+      ],
+      [
+       25.482905279764513,
+       65.01037498019076
+      ],
+      [
+       25.482884073062117,
+       65.01037476487204
+      ],
+      [
+       25.482864393609844,
+       65.01034764064603
+      ],
+      [
+       25.482822489346315,
+       65.01033824035945
+      ],
+      [
+       25.48282401663417,
+       65.01031133145555
+      ],
+      [
+       25.482760905798486,
+       65.01030171582168
+      ],
+      [
+       25.48274224476809,
+       65.01025665231086
+      ],
+      [
+       25.48269983155458,
+       65.01025622162453
+      ],
+      [
+       25.48268066151687,
+       65.01022012774028
+      ],
+      [
+       25.48263824836251,
+       65.0102196970366
+      ],
+      [
+       25.482619587594606,
+       65.01017463351057
+      ],
+      [
+       25.48255647715561,
+       65.01016501779105
+      ],
+      [
+       25.4825378165627,
+       65.01011995425488
+      ],
+      [
+       25.48249540357005,
+       65.010119523511
+      ],
+      [
+       25.482456045864463,
+       65.01006527495481
+      ],
+      [
+       25.48241363296015,
+       65.01006484418792
+      ],
+      [
+       25.48239497267608,
+       65.01001978063401
+      ],
+      [
+       25.48235255984513,
+       65.01001934984994
+      ],
+      [
+       25.482353069091715,
+       65.01001038021688
+      ],
+      [
+       25.482331862683917,
+       65.01001016482041
+      ],
+      [
+       25.48233339044273,
+       65.00998325592145
+      ],
+      [
+       25.482290977670928,
+       65.00998282512002
+      ],
+      [
+       25.482271808377348,
+       65.0099467311837
+      ],
+      [
+       25.482229395664692,
+       65.00994630036493
+      ],
+      [
+       25.48223041423673,
+       65.00992836109965
+      ],
+      [
+       25.48220920789519,
+       65.00992814568595
+      ],
+      [
+       25.482211754354207,
+       65.00988329752298
+      ],
+      [
+       25.482148135438486,
+       65.00988265126506
+      ],
+      [
+       25.482149154062096,
+       65.00986471200031
+      ],
+      [
+       25.482107250807402,
+       65.00985531151477
+      ],
+      [
+       25.482108269457175,
+       65.0098373722503
+      ],
+      [
+       25.482045669344686,
+       65.00981878668459
+      ],
+      [
+       25.482027009848053,
+       65.00977372308502
+      ],
+      [
+       25.481984597414634,
+       65.0097732921974
+      ],
+      [
+       25.48196542868193,
+       65.00973719822203
+      ],
+      [
+       25.481923016307658,
+       65.00973676731702
+      ],
+      [
+       25.481924544458913,
+       65.00970985842216
+      ],
+      [
+       25.481861435368643,
+       65.0097002424115
+      ],
+      [
+       25.48186347298214,
+       65.00966436388579
+      ],
+      [
+       25.4818210607254,
+       65.00966393295211
+      ],
+      [
+       25.481824117219578,
+       65.00961011516426
+      ],
+      [
+       25.48178170504966,
+       65.00960968421961
+      ],
+      [
+       25.481782214478248,
+       65.0096007145884
+      ],
+      [
+       25.481761008400966,
+       65.00960049911167
+      ],
+      [
+       25.481759480092737,
+       65.00962740800489
+      ],
+      [
+       25.48173827399451,
+       65.00962719252487
+      ],
+      [
+       25.481737255106243,
+       65.00964513178678
+      ],
+      [
+       25.481758461218693,
+       65.009645347267
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 17.44,
+    "top_p10_m": 16.4,
+    "top_p90_m": 17.52,
+    "laser_points": 378,
+    "top_above_platform_m": 4.79,
+    "area_m2": 620.5,
+    "underside_m": null,
+    "multi_return_share": 0.19,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)",
+    "ground_min_m": 12.02,
+    "ground_median_m": 12.28,
+    "ground_max_m": 12.97
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.48180330451715,
+       65.00885602602082
+      ],
+      [
+       25.4818027958156,
+       65.00886498328002
+      ],
+      [
+       25.4818482513124,
+       65.00886885741815
+      ],
+      [
+       25.48180126760061,
+       65.00889189217645
+      ],
+      [
+       25.48183556468539,
+       65.00889122579423
+      ],
+      [
+       25.481864768857438,
+       65.00890356773402
+      ],
+      [
+       25.481862846608827,
+       65.00892841710633
+      ],
+      [
+       25.48190836554912,
+       65.00893016844631
+      ],
+      [
+       25.481924425785,
+       65.00896494201103
+      ],
+      [
+       25.481988777850887,
+       65.0089659934097
+      ],
+      [
+       25.481966305103686,
+       65.00897448069885
+      ],
+      [
+       25.481985495782798,
+       65.00901043652333
+      ],
+      [
+       25.482051711160143,
+       65.00902137289668
+      ],
+      [
+       25.482047075314686,
+       65.00904696137788
+      ],
+      [
+       25.482087298410868,
+       65.00905919748001
+      ],
+      [
+       25.48208744934425,
+       65.00908327077772
+      ],
+      [
+       25.482108625762812,
+       65.0090834859101
+      ],
+      [
+       25.482108252966643,
+       65.00906802813293
+      ],
+      [
+       25.48215205568911,
+       65.00906597749345
+      ],
+      [
+       25.48215256427832,
+       65.00905702023303
+      ],
+      [
+       25.48211488907707,
+       65.00905540899484
+      ],
+      [
+       25.482111171590045,
+       65.00903865011705
+      ],
+      [
+       25.48206816148175,
+       65.00902674274015
+      ],
+      [
+       25.48207079759482,
+       65.00900234072348
+      ],
+      [
+       25.48202460940695,
+       65.0090001422349
+      ],
+      [
+       25.48201023680671,
+       65.00894787661285
+      ],
+      [
+       25.48194673538059,
+       65.00893620111675
+      ],
+      [
+       25.48194865755189,
+       65.00891135174324
+      ],
+      [
+       25.481883932820296,
+       65.00890819849437
+      ],
+      [
+       25.481892015404213,
+       65.0088996978619
+      ],
+      [
+       25.481926118584383,
+       65.00890323782907
+      ],
+      [
+       25.481928470746308,
+       65.008893197026
+      ],
+      [
+       25.481888364610732,
+       65.00889182705214
+      ],
+      [
+       25.48186689172863,
+       65.00885667212299
+      ],
+      [
+       25.48180330451715,
+       65.00885602602082
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (25.4 m × 2.8 m)",
+    "top_median_m": 15.33,
+    "top_above_track_bed_m": 3.17,
+    "laser_points": 47,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-14. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_R4414A2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned R4414A2 2023-06-14 (20230206_Swissphoto_Oulu_kesa)"
+   }
+  }
+ ]
+}

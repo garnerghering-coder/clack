@@ -1,0 +1,293 @@
+{
+ "clack_id": "NO-SV",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w187993310",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 39.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.5246096,
+    59.8924474
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415365091",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.5250699,
+    59.8922629
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w415488429",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 36.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.5234084,
+    59.8923095
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1986208813",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Stasjonstorget",
+   "nearest_street_m": 0.0,
+   "lonlat": [
+    10.5247492,
+    59.8923228
+   ]
+  },
+  {
+   "osm_id": "n1986208819",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Folangerveien",
+   "nearest_street_m": 6.9,
+   "lonlat": [
+    10.5243944,
+    59.8926313
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n293027340",
+   "category": "library",
+   "name": "Bærum bibliotek, Sandvika",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 73,
+   "lonlat": [
+    10.5253831,
+    59.8922768
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://www.barum.folkebibl.no"
+  },
+  {
+   "osm_id": "n570206829",
+   "category": "bus_station",
+   "name": "Sandvika bussterminal",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "limited",
+   "distance_m": 67,
+   "lonlat": [
+    10.524556,
+    59.892905
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n1370605017",
+   "category": "parking_entrance",
+   "name": "Sandvika p-hus",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 55,
+   "lonlat": [
+    10.5255374,
+    59.8933855
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "Q-Park"
+  },
+  {
+   "osm_id": "n2260304949",
+   "category": "shop=kiosk",
+   "name": "Narvesen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 86,
+   "lonlat": [
+    10.5244562,
+    59.8924833
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Narvesen"
+  },
+  {
+   "osm_id": "n9338762510",
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Sandvika stasjon",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 136,
+   "lonlat": [
+    10.5237548,
+    59.8921972
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://www.banenor.no/reise-og-trafikk/parkering/sykkelhotell/",
+   "operator": "Bane NOR SF"
+  },
+  {
+   "osm_id": "n9630170136",
+   "category": "bicycle_repair_station",
+   "name": "Bane NOR SF",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 134,
+   "lonlat": [
+    10.5239037,
+    59.8921363
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "Bane NOR SF"
+  },
+  {
+   "osm_id": "n9673683599",
+   "category": "post_box",
+   "name": "Posten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 71,
+   "lonlat": [
+    10.524824,
+    59.892465
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Posten",
+   "operator": "Posten"
+  },
+  {
+   "osm_id": "n9841851834",
+   "category": "shop=supermarket",
+   "name": "Joker Sandvika stasjon",
+   "level": null,
+   "fee": null,
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 87,
+   "lonlat": [
+    10.5243804,
+    59.8925384
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Joker"
+  },
+  {
+   "osm_id": "n10777809407",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    10.5262963,
+    59.8927066
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n11238673885",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    10.5247509,
+    59.8929694
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13788913459",
+   "category": "shop=bakery",
+   "name": "Backstube",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",
+   "wheelchair": null,
+   "distance_m": 76,
+   "lonlat": [
+    10.5245101,
+    59.8926277
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://backstube.no/"
+  },
+  {
+   "osm_id": "w306264145",
+   "category": "parking",
+   "name": "Sandvika stasjon",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 57,
+   "lonlat": [
+    10.5250704,
+    59.8934681
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "Q-Park"
+  }
+ ]
+}

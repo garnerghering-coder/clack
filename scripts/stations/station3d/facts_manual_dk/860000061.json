@@ -1,0 +1,151 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal / street level, Banegårdspladsen",
+   "other_names": [],
+   "note": "DSB 'forhal'.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel under the tracks",
+   "other_names": [],
+   "note": "OSM underpass w49512712 (92 m), lifts and stairs up to perron 1 and 2/3.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n4322092394",
+   "between": [
+    "tunnel",
+    "perron 1 (spor 1)"
+   ],
+   "where": "from the tunnel up to platform 1",
+   "confirmed_by": "owner text (DSB: 'Elevator', presence only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w433516648",
+   "between": [
+    "tunnel",
+    "perron 2 (spor 2/3)"
+   ],
+   "where": "from the tunnel up to the island platform 2/3",
+   "confirmed_by": "owner text (presence) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w49512205",
+   "between": [
+    "tunnel",
+    "perron 1"
+   ],
+   "where": "beside the platform-1 lift",
+   "confirmed_by": "owner text ('Trapper') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w433516646",
+   "between": [
+    "tunnel",
+    "perron 2/3"
+   ],
+   "where": "beside the platform-2/3 lift",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w49512712",
+   "between": [
+    "Banegårdspladsen side",
+    "perron 1 and 2/3"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n4321953197",
+   "name": "Main entrance",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "confirmed_by": "OSM only (DSB address is Jernbanevej 3)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "osm_ids": [
+    "n4321953214",
+    "n4322092398"
+   ],
+   "name": "Entrances",
+   "street": "Banegårdspladsen",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n1241568977",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 06:45-22:00; Su 08:45-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list on 2026-10-30; OSM agrees with DSB.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet/Handicaptoilet",
+   "osm_id": "n6900719958",
+   "where": "station building (OSM)",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "osm_id": "n6900799658",
+   "where": "station hall",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "position not given",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n439766134",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 257 spaces (100 % occupancy per DSB); 1 locked bicycle shelter",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Forhal hours not given by DSB.",
+  "7-Eleven not in the 7-Eleven store list; hours from DSB only.",
+  "No lockers listed.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ]
+}

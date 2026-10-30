@@ -1,0 +1,704 @@
+{
+ "clack_id": "fi:PM",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Ground level: station building (Asemakatu 2, built 1981) and the platforms: edge platform 1 (station side), island platform 3/4, platform 6 (east)",
+   "other_names": [],
+   "note": "No signposted level name found. Väylävirasto: passengers use the edge platforms and the island platform between tracks 3 and 4; in the 2023–2024 'Pieksämäen asemajärjestelyt' works track 2 was removed, the island 3/4 widened, low platforms raised, canopies, lighting and lifts renewed. Digitraffic still classes platform 4 as matala (0.265 m) while the others are korkea; VR calls all platforms high (korkeat laiturit).",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Pieksämäki\" (Väyläviraston julkaisuja 58/2026, published 2026-08-10, CC BY 4.0), pp. 17–18, 25–27, 35, https://www.doria.fi/bitstream/10024/195303/1/vj_2026-58_978-952-405-444-7.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; https://en.wikipedia.org/wiki/Pieks%C3%A4m%C3%A4ki_railway_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Asematunneli (pedestrian tunnel under the tracks)",
+   "other_names": [
+    "asematunneli (the city's 2020 development plan)"
+   ],
+   "note": "Built in the 1980s, about 118 m long, 5.5–6.5 m wide; with the Keskuskatu bridge it is the only link to the east side (2020 plan). OSM way w200674516 (108 m, wheelchair=yes).",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "PM L6",
+   "track": "6",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 6 (the train stops with the platform to its east)",
+   "_source": "laser (2025-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PM L6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PM L4",
+   "track": "4",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 4 (the train stops with the platform to its west)",
+   "_source": "laser (2025-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PM L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PM L1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2025-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PM L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PM L3",
+   "track": "3",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 3 (the train stops with the platform to its east)",
+   "_source": "laser (2025-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PM L3; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w200674516",
+   "name": "asematunneli",
+   "between": [
+    "station side (west)",
+    "east side"
+   ],
+   "where": "crosses under all tracks at the station building; exits to platform 1, island 3/4 and platform 6",
+   "confirmed_by": "owner text (city plan 2020)",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30",
+   "position": {
+    "lon": 27.1672541,
+    "lat": 62.3013208,
+    "how": "OSM w200674516 (point on the way)",
+    "_source": "OpenStreetMap w200674516 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886302",
+   "between": [
+    "asematunneli (-1)",
+    "island platform 3/4 (0)"
+   ],
+   "where": "on the island platform between tracks 3 and 4",
+   "confirmed_by": "owner text (VR: 'Hissit laitureille raiteiden 3 ja 4 välissä sekä raiteiden 1 ja 6 päässä')",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (pieksamaki_platform_vayla.geojson)",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 27.1673092,
+    "lat": 62.3013711,
+    "how": "OSM n10593886302",
+    "_source": "OpenStreetMap n10593886302 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886269",
+   "between": [
+    "asematunneli (-1)",
+    "platform 6 (0)"
+   ],
+   "where": "at the tunnel exit on platform 6 (VR: 'at the end of track 6')",
+   "confirmed_by": "owner text (VR)",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (pieksamaki_platform_vayla.geojson)",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 27.1677262,
+    "lat": 62.3013653,
+    "how": "OSM n10593886269",
+    "_source": "OpenStreetMap n10593886269 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "asematunneli (-1)",
+    "platform 1 / station building (0)"
+   ],
+   "where": "VR: lift at the end of track 1; the city's 2020 plan says the station-side lift is inside the station building and usable only while the building is open",
+   "confirmed_by": "owner text (VR, city plan 2020); not in OSM",
+   "note": "Missing from OSM. Which hours apply after the 2023–2024 renewal is not stated; the vestibule is open 05:00–22:45 and the waiting room shorter.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1547012532"
+   ],
+   "between": [
+    "asematunneli (-1)",
+    "platform 1 (0)"
+   ],
+   "where": "platform 1 at the tunnel",
+   "confirmed_by": "owner text for stairs at both tunnel ends (2020 plan); position OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (pieksamaki_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w200674518"
+   ],
+   "between": [
+    "asematunneli (-1)",
+    "island platform 3/4 (0)"
+   ],
+   "where": "island platform 3/4 next to the lift",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (pieksamaki_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1547012526"
+   ],
+   "between": [
+    "asematunneli (-1)",
+    "platform 6 / east side (0)"
+   ],
+   "where": "east end of the tunnel by platform 6",
+   "confirmed_by": "owner text (2020 plan: stairs at both ends, the east platform stair in poor condition); position OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1547012531"
+   ],
+   "between": [
+    "asematunneli (-1)",
+    "west side, station forecourt (0)"
+   ],
+   "where": "west end of the tunnel, about 55 m west of track 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w59514422",
+    "w239858087"
+   ],
+   "between": [
+    "west side",
+    "east side"
+   ],
+   "where": "bridges over the yard north of the station; the city's 2020 plan describes the Keskuskatu bridge with narrow pedestrian/cycle lanes; OSM gives no name and no platform access",
+   "confirmed_by": "owner text for the Keskuskatu bridge; mapping of OSM ways to it not checked",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w59514422",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 180.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w59514422 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1659224,
+    "lat": 62.3021307,
+    "how": "OSM w59514422 (point on the way)",
+    "_source": "OpenStreetMap w59514422 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w200674516",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 3",
+    "platform 4",
+    "platform 6"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": 108.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w200674516 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1672541,
+    "lat": 62.3013208,
+    "how": "OSM w200674516 (point on the way)",
+    "_source": "OpenStreetMap w200674516 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w200674518",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w200674518 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1672818,
+    "lat": 62.3014637,
+    "how": "OSM w200674518 (point on the way)",
+    "_source": "OpenStreetMap w200674518 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w239858087",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 3",
+    "platform 4",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 180.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w239858087 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1692337,
+    "lat": 62.3026029,
+    "how": "OSM w239858087 (point on the way)",
+    "_source": "OpenStreetMap w239858087 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1136426218",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1136426218 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1677256,
+    "lat": 62.3013417,
+    "how": "OSM w1136426218 (point on the way)",
+    "_source": "OpenStreetMap w1136426218 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1136426234",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1136426234 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1673092,
+    "lat": 62.3013711,
+    "how": "OSM w1136426234 (point on the way)",
+    "_source": "OpenStreetMap w1136426234 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1547012526",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1547012526 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1678796,
+    "lat": 62.3013818,
+    "how": "OSM w1547012526 (point on the way)",
+    "_source": "OpenStreetMap w1547012526 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012528",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1547012528 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.167779,
+    "lat": 62.3013414,
+    "how": "OSM w1547012528 (point on the way)",
+    "_source": "OpenStreetMap w1547012528 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1547012532",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1547012532 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1667733,
+    "lat": 62.3013552,
+    "how": "OSM w1547012532 (point on the way)",
+    "_source": "OpenStreetMap w1547012532 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012533",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1547012533 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1667733,
+    "lat": 62.3013552,
+    "how": "OSM w1547012533 (point on the way)",
+    "_source": "OpenStreetMap w1547012533 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012535",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1547012535 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1672565,
+    "lat": 62.3013897,
+    "how": "OSM w1547012535 (point on the way)",
+    "_source": "OpenStreetMap w1547012535 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886269",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10593886269 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1677262,
+    "lat": 62.3013653,
+    "how": "OSM n10593886269",
+    "_source": "OpenStreetMap n10593886269 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886302",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10593886302 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 27.1673092,
+    "lat": 62.3013711,
+    "how": "OSM n10593886302",
+    "_source": "OpenStreetMap n10593886302 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building main doors / tuulikaappi (vestibule)",
+   "street": "Asemakatu (address Asemakatu 2)",
+   "level": "0",
+   "where": "west (town) side; OSM entrances n2326334305 and n13736783178 on Asemakatu. The vestibule with the ticket machine is open 05:00–22:45; the waiting room inside opens with the QR code of a valid ticket from 1 h before to 12 h after departure.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "name": "Asematunneli, east end",
+   "street": null,
+   "level": "0",
+   "where": "east side of the yard beyond platform 6; street name not given by any source",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2326334305",
+   "street": "Asemakatu",
+   "street_how": "nearest named street, 9.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2326334305 (already in OSM)",
+   "position": {
+    "lon": 27.1663159,
+    "lat": 62.3013473,
+    "how": "OSM n2326334305",
+    "_source": "OpenStreetMap n2326334305 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13736783178",
+   "street": "Asemakatu",
+   "street_how": "nearest named street, 31.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13736783178 (already in OSM)",
+   "position": {
+    "lon": 27.1667406,
+    "lat": 62.3013422,
+    "how": "OSM n13736783178",
+    "_source": "OpenStreetMap n13736783178 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building",
+   "opening_hours": "Mo-Sa 06:00-19:30; Su 08:15-19:30",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Outside these hours it opens with the QR code on a valid ticket from 1 h before departure until 12 h after; problems: VR Security Centre.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/pieksamaki, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR ticket machine",
+   "where": "in the station building's vestibule (tuulikaappi)",
+   "opening_hours": "Mo-Su 05:00-22:45",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "No VR service point.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "note": "VR lists a WC; fee not stated.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "HYvä Maku (Chinese restaurant)",
+   "where": "Asemakatu 2 (the station building's address)",
+   "hours_raw": "Visit Pieksämäki: 'Open Mo-Fr 10.30 am-8pm, Sa-Su 12am-8pm' (weekend opening probably 12:00 noon)",
+   "hours_source": "website (Visit Pieksämäki)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM. The 2020 city plan names a station restaurant (asemaravintola) in the building; that it is HYvä Maku is inferred from the shared address only.",
+   "_source": "Visit Pieksämäki, \"Cafes and restaurants\", https://visitpieksamaki.fi/?p=4640, read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "bus_station",
+   "name": "Pieksämäki matkakeskus (bus stands)",
+   "osm_id": "n413044727",
+   "where": "square in front of the station building; rail-replacement buses also leave from in front of the station",
+   "note": "2020 plan: a Matkahuolto outlet in the station building; bus platform area on the square.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30",
+   "position": {
+    "lon": 27.1665719,
+    "lat": 62.3014442,
+    "osm_id": "n413044727",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 13.5,
+    "how": "OSM node n413044727",
+    "_source": "OpenStreetMap n413044727 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "vending_machine",
+   "osm_id": "n2326334303",
+   "where": "in the station building (OSM; type not tagged)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30",
+   "position": {
+    "lon": 27.1663089,
+    "lat": 62.3013273,
+    "osm_id": "n2326334303",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 26.8,
+    "how": "OSM node n2326334303",
+    "_source": "OpenStreetMap n2326334303 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "near platform 1 at the northern end of the station building; no shelter",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/pieksamaki, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "osm_id": "n413044858",
+   "where": "near the station building (OSM, about 90 m from the platforms)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30",
+   "position": {
+    "lon": 27.1656648,
+    "lat": 62.3014908,
+    "osm_id": "n413044858",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 60.7,
+    "how": "OSM node n413044858",
+    "_source": "OpenStreetMap n413044858 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "osm_ids": [
+    "w1547049955",
+    "w37228002",
+    "w361061107"
+   ],
+   "where": "large surface car parks between the station and the town centre (fee=no in OSM)",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "JR Fast Food",
+   "osm_id": "w489048039",
+   "where": "outside the station building, about 170 m away (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30",
+   "position": {
+    "lon": 27.1645604,
+    "lat": 62.3008933,
+    "osm_id": "w489048039",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 107.5,
+    "how": "representative point of the OSM area w489048039",
+    "_source": "OpenStreetMap w489048039 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [
+  {
+   "title": "Pieksämäen aseman alueen kehittämissuunnitelma (19.2.2020)",
+   "publisher": "Pieksämäen kaupunki (consultant WSP)",
+   "url": "https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Describes the pre-2023 state (tunnel, lifts, low platforms); partly superseded by the 2023–2024 works."
+  },
+  {
+   "title": "Ratapihaselvitykset: Pieksämäki (Väyläviraston julkaisuja 58/2026)",
+   "publisher": "Väylävirasto",
+   "url": "https://www.doria.fi/bitstream/10024/195303/1/vj_2026-58_978-952-405-444-7.pdf",
+   "licence": "CC BY 4.0",
+   "read": "2026-10-30",
+   "note": "Only pp. 1–38 could be read; the platform table (3.1.8, p. 47), structures (3.1.7, p. 39) and passenger section (3.2.1, p. 49) were beyond what the fetch returned."
+  }
+ ],
+ "open": [
+  "Level heights: no source measures them; platform 4 height class (Digitraffic matala) vs Väylävirasto's statement that low platforms were raised in 2023–2024 vs laser ~0.53 m above rail: not settled (see REVIEW).",
+  "Platform-1 lift: position and opening hours (inside the station building) not in OSM and not exactly described.",
+  "Väylävirasto's platform table and structures list for Pieksämäki (pp. 39–49 of the 2026 study) could not be read through WebFetch.",
+  "East exit of the tunnel: street name not given.",
+  "Whether the café-kiosk space and Matkahuolto outlet described in 2020 still operate; whether HYvä Maku is inside the station building.",
+  "Toilet fee not given; taxi rank position OSM only.",
+  "Web search budget ran out during this pass."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Lifts from the tunnel to island 3/4, platform 6 (both in OSM) and platform 1 (inside the station building, not in OSM), per VR. Stairs at platform 1, island 3/4 and the east end (OSM; the 2020 plan says the tunnel stairs are not step-free).",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Waiting room, vestibule/ticket machine from VR; HYvä Maku from Visit Pieksämäki as raw text.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; Visit Pieksämäki, \"Cafes and restaurants\", https://visitpieksamaki.fi/?p=4640, read 2026-10-30"
+  },
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not settled; the city's plan calls the tunnel 'asematunneli'.",
+   "_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30"
+  }
+ ]
+}

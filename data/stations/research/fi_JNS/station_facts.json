@@ -1,0 +1,350 @@
+{
+ "clack_id": "fi:JNS",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Ground level: platforms 1–3, and the ground floor of Asemaparkki (waiting area, R-kioski, WC, taxi, drop-off)",
+   "other_names": [
+    "Asemaparkki ground floor / 'pysäköintitalon alimmainen kerros' (VR)"
+   ],
+   "note": "The passenger services moved into the parking building Asemaparkki (Asemankaari 9): VR calls the waiting area 'new' and puts it next to the R-kioski on the lowest floor of the parking building. Platforms: Digitraffic 1 (265 m), 2 and 3 (320 m), all korkea; Wikipedia says track 2 is not used by passenger trains.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JNS/_report.json and joensuu_platform_vayla.geojson, read 2026-10-30; https://en.wikipedia.org/wiki/Joensuu_railway_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Overpass (ylikulku) level: footbridge over the tracks next to Asemaparkki",
+   "other_names": [
+    "the overpass / footbridge next to Asemaparkki (city and JOJO texts)"
+   ],
+   "note": "City and JOJO: the VR ticket machine is 'beneath the footbridge/overpass next to Asemaparkki, beside platform 1'. OSM has stairs and lifts at levels 0;1 here. Upper parking decks are Asemaparkki levels, not station levels.",
+   "_source": "City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "JNS L1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2024-08-06, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform JNS L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "JNS L2",
+   "track": "2",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 2 (the train stops with the platform to its east)",
+   "_source": "laser (2024-08-06, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform JNS L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "JNS L3",
+   "track": "3",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 3 (the train stops with the platform to its west)",
+   "_source": "laser (2024-08-06, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform JNS L3; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n11162525854",
+   "between": [
+    "overpass (1)",
+    "platform 1 side (0)"
+   ],
+   "where": "by platform 1, about 5 m from the track-1 centre line, next to Asemaparkki",
+   "confirmed_by": "OSM only (VR: the assistance point at Asemaparkki's A stair has a direct step-free link to the platform areas; lifts are not named)",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (joensuu_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JNS/_report.json and joensuu_platform_vayla.geojson, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30",
+   "position": {
+    "lon": 29.7778207,
+    "lat": 62.6010463,
+    "how": "OSM n11162525854",
+    "_source": "OpenStreetMap n11162525854 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11162525855",
+   "between": [
+    "overpass (1)",
+    "island platform 2/3 (0)"
+   ],
+   "where": "between tracks 2 and 3 (4.5 m from track 3, 7.6 m from track 2)",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (joensuu_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JNS/_report.json and joensuu_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 29.7781669,
+    "lat": 62.6009689,
+    "how": "OSM n11162525855",
+    "_source": "OpenStreetMap n11162525855 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1204376486"
+   ],
+   "between": [
+    "overpass (1)",
+    "platform 1 side (0)"
+   ],
+   "where": "by platform 1 next to the lift",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (joensuu_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JNS/_report.json and joensuu_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1432627513"
+   ],
+   "between": [
+    "overpass (1)",
+    "island platform 2/3 (0)"
+   ],
+   "where": "island platform 2/3 next to the lift",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (joensuu_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JNS/_report.json and joensuu_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w58617254",
+   "between": [
+    "one side of the yard",
+    "other side (not settled)"
+   ],
+   "where": "about 130 m north-east of the overpass lifts, near the north-east end of platform 1 (38 m); no platform access in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30",
+   "position": {
+    "lon": 29.7787653,
+    "lat": 62.6021814,
+    "how": "OSM w58617254 (point on the way)",
+    "_source": "OpenStreetMap w58617254 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "step_free_route",
+   "between": [
+    "Asemaparkki A stair / assistance point",
+    "platform areas"
+   ],
+   "where": "VR: direct, barrier-free connection from the assistance point to the train platform areas",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/joensuu, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11162525854",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11162525854 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 29.7778207,
+    "lat": 62.6010463,
+    "how": "OSM n11162525854",
+    "_source": "OpenStreetMap n11162525854 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11162525855",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11162525855 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 29.7781669,
+    "lat": 62.6009689,
+    "how": "OSM n11162525855",
+    "_source": "OpenStreetMap n11162525855 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Asemaparkki, A stair (A-porras)",
+   "street": "Asemankaari (address Asemankaari 9)",
+   "level": "0",
+   "where": "leads to Asemankaari, the railway station, the bus station and the pick-up/drop-off area; VR's assistance point is here",
+   "_source": "EuroPark, \"P-Asemaparkki, Joensuu\", https://www.europark.fi/en/?p=6802, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30"
+  },
+  {
+   "name": "Asemaparkki, B stair (B-porras)",
+   "street": "Itäranta",
+   "level": "0",
+   "where": "leads to Itäranta and the Original Sokos Hotel Kimmel across the street",
+   "_source": "EuroPark, \"P-Asemaparkki, Joensuu\", https://www.europark.fi/en/?p=6802, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila (Asemaparkki)",
+   "where": "ground floor of Asemaparkki, next to the R-kioski",
+   "opening_hours": "Mo-Fr 07:30-21:00; Sa 08:00-20:00; Su 08:30-20:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Same hours on the city's and JOJO's pages.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Joensuu Asema",
+   "where": "ground floor of Asemaparkki, Asemankaari 9, next to the waiting area",
+   "opening_hours": "Mo-Fr 07:30-21:00; Sa,Su 08:30-20:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Sells VR train tickets; stores a small amount of luggage for a fee (no left-luggage office or lockers at the station). Services: Hodarit, Paistotuotteet, Paninit, Postin automaatti, Wolt-piste. Not in OSM.",
+   "_source": "https://www.r-kioski.fi/kioskit/joensuu-asema/, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": "WC (accessible)",
+   "fee": "yes (paid; amount not given)",
+   "where": "ground floor of Asemaparkki",
+   "_source": "JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatti",
+   "osm_id": "n11275686118",
+   "where": "beneath the overpass next to Asemaparkki, beside platform 1",
+   "note": "No VR service point.",
+   "_source": "City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30",
+   "position": {
+    "lon": 29.7777018,
+    "lat": 62.6009309,
+    "osm_id": "n11275686118",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n11275686118",
+    "_source": "OpenStreetMap n11275686118 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taksiasema",
+   "where": "ground level of Asemaparkki, next to the drop-off area and the R-kioski",
+   "_source": "City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Long-distance coach bays",
+   "where": "on Asemankaari (Asemankaari 9, Itäranta), by the assistance point; rail-replacement buses leave from beside/in front of the station building",
+   "_source": "JOJO (Joensuu public transport), \"Long-distance coaches\", https://jojo.joensuu.fi/en/timetables-routes-and-zones/other-public-transport-connections/, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "at the A stair of the Asemaparkki parking building next to the station; taxi rank, bus station, R-kioski and waiting room alongside",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/joensuu, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers; the city: no separate left-luggage facility (R-kioski stores small items for a fee).",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Asemaparkki (EuroPark)",
+   "where": "the parking building beside the station; pay stations at street level by stairs A and B; drop-off on the ground level (10 min)",
+   "opening_hours": "24/7",
+   "hours_source": "website (EuroPark)",
+   "hours_checked": "2026-10-30",
+   "fee": "€2.20/h (€0.55 per started 15 min); first 24 h €15.00; days 2–3 €14.00/24 h; further days €7.00/24 h; week €69.00; the city's page says 30 min free",
+   "_source": "EuroPark, \"P-Asemaparkki, Joensuu\", https://www.europark.fi/en/?p=6802, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_repair_station",
+   "osm_id": "n8104725138",
+   "where": "near the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30",
+   "position": {
+    "lon": 29.7773091,
+    "lat": 62.6009106,
+    "osm_id": "n8104725138",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n8104725138",
+    "_source": "OpenStreetMap n8104725138 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "post_box",
+   "osm_id": "n11289433279",
+   "where": "near the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30",
+   "position": {
+    "lon": 29.7762777,
+    "lat": 62.5999525,
+    "osm_id": "n11289433279",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n11289433279",
+    "_source": "OpenStreetMap n11289433279 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Level heights: no source measures them; the laser pass flags platform 1 at only 0.58 m above the track bed vs class korkea (see REVIEW).",
+  "Lifts and overpass stairs are OSM only; no owner text names lifts. The overpass way itself is not among the OSM connections extracted (only its stairs/lifts).",
+  "Whether platform 1 is an edge platform at the Asemaparkki side and which face of the 2/3 island is platform 2: not confirmed by a plan.",
+  "Old station building: what remains open there (VR still says rail-replacement buses leave from beside the station building) is not described by any source read.",
+  "R-kioski, waiting area, WC and taxi are not in OSM: positions only as text ('ground floor of Asemaparkki').",
+  "Footbridge w58617254 (north-east): what it connects is not settled.",
+  "Väylävirasto station-area map could not be fetched; no plan read. Web search budget ran out during this pass.",
+  "Toilet fee amount not given."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not settled. Owner texts speak of Asemaparkki's ground floor (alimmainen kerros) and of the overpass next to Asemaparkki; no signposted names found.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "OSM: lift + stairs from the overpass to platform 1 and to island platform 2/3. Owner texts confirm the overpass and a step-free link from Asemaparkki to the platforms, but do not name lifts.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JNS.json), read 2026-10-30; City of Joensuu, \"Railway and bus station\", https://www.joensuu.fi/en/city-and-development/our-joensuu/arriving-in-joensuu/railway-and-bus-station/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30"
+  },
+  {
+   "question": "Missing entrances",
+   "answer": "OSM has no station entrances. Asemaparkki A stair (Asemankaari) and B stair (Itäranta) per EuroPark.",
+   "_source": "EuroPark, \"P-Asemaparkki, Joensuu\", https://www.europark.fi/en/?p=6802, read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Waiting area (VR/city/JOJO) and R-kioski (own site) settled.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; https://www.r-kioski.fi/kioskit/joensuu-asema/, read 2026-10-30"
+  }
+ ]
+}

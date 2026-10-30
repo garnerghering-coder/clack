@@ -1,0 +1,5081 @@
+{
+ "type": "FeatureCollection",
+ "name": "drammen_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m NN2000",
+ "platform_surface_m": 2.17,
+ "track_bed_m": 1.71,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.1984988,
+       59.74071209999999
+      ],
+      [
+       10.198580000000002,
+       59.74074439999999
+      ],
+      [
+       10.1984384,
+       59.74083499999999
+      ],
+      [
+       10.197910599999998,
+       59.7406256
+      ],
+      [
+       10.1980519,
+       59.74053509999999
+      ],
+      [
+       10.1984988,
+       59.74071209999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w111633153",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "1",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 2.48,
+    "ground_median_m": 2.58,
+    "ground_max_m": 2.75,
+    "roof_top_median_m": 7.53,
+    "roof_top_p95_m": 7.6,
+    "laser_points": 167,
+    "height_above_ground_median_m": 4.95,
+    "height_above_ground_p95_m": 5.02,
+    "top_above_platform_m": 5.36,
+    "base_above_platform_m": 0.31,
+    "source": "Outline OSM w111633153 (ODbL); roof = median of 167 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.203550000000002,
+       59.74036600000002
+      ],
+      [
+       10.203398,
+       59.740396999999994
+      ],
+      [
+       10.203396999999999,
+       59.740395
+      ],
+      [
+       10.203228000000001,
+       59.740429000000006
+      ],
+      [
+       10.203231,
+       59.740432999999996
+      ],
+      [
+       10.203034,
+       59.740473
+      ],
+      [
+       10.203031,
+       59.74046899999998
+      ],
+      [
+       10.202701999999999,
+       59.74053599999999
+      ],
+      [
+       10.202604,
+       59.74041100000002
+      ],
+      [
+       10.2026436,
+       59.740403199999996
+      ],
+      [
+       10.202716,
+       59.740389
+      ],
+      [
+       10.20272,
+       59.740394
+      ],
+      [
+       10.2028211,
+       59.74037360000001
+      ],
+      [
+       10.202938,
+       59.74035
+      ],
+      [
+       10.202936,
+       59.740346999999986
+      ],
+      [
+       10.203132,
+       59.740307000000016
+      ],
+      [
+       10.203135,
+       59.74031099999999
+      ],
+      [
+       10.203355,
+       59.74026699999999
+      ],
+      [
+       10.203351,
+       59.740261999999994
+      ],
+      [
+       10.203442000000003,
+       59.74024300000001
+      ],
+      [
+       10.20346,
+       59.74024000000002
+      ],
+      [
+       10.203558,
+       59.740364
+      ],
+      [
+       10.203550000000002,
+       59.74036600000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134395837",
+    "name": "Drammen stasjon (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "3",
+     "height": "17",
+     "name": "Drammen stasjon",
+     "roof:shape": "hipped"
+    },
+    "ground_min_m": 2.35,
+    "ground_median_m": 2.5,
+    "ground_max_m": 2.72,
+    "roof_top_median_m": 16.34,
+    "roof_top_p95_m": 16.78,
+    "laser_points": 404,
+    "height_above_ground_median_m": 13.84,
+    "height_above_ground_p95_m": 14.28,
+    "top_above_platform_m": 14.17,
+    "base_above_platform_m": 0.18,
+    "source": "Outline OSM w134395837 (ODbL); roof = median of 404 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.203442000000003,
+       59.74024300000001
+      ],
+      [
+       10.203402,
+       59.74021400000001
+      ],
+      [
+       10.203391999999997,
+       59.740210000000005
+      ],
+      [
+       10.203364999999998,
+       59.740207999999996
+      ],
+      [
+       10.203344,
+       59.74020399999999
+      ],
+      [
+       10.203326,
+       59.740196
+      ],
+      [
+       10.203311,
+       59.740187
+      ],
+      [
+       10.203306,
+       59.740179999999995
+      ],
+      [
+       10.203305,
+       59.740170000000006
+      ],
+      [
+       10.203309,
+       59.740158
+      ],
+      [
+       10.203326999999998,
+       59.74014399999999
+      ],
+      [
+       10.203343,
+       59.74013900000001
+      ],
+      [
+       10.203360999999997,
+       59.740134999999995
+      ],
+      [
+       10.203378,
+       59.740134
+      ],
+      [
+       10.203396,
+       59.74013499999999
+      ],
+      [
+       10.203415,
+       59.74013699999999
+      ],
+      [
+       10.203423,
+       59.74013699999998
+      ],
+      [
+       10.203433,
+       59.740134999999995
+      ],
+      [
+       10.203898,
+       59.739976999999996
+      ],
+      [
+       10.203918,
+       59.739971
+      ],
+      [
+       10.203933,
+       59.739968
+      ],
+      [
+       10.203953999999998,
+       59.739966999999986
+      ],
+      [
+       10.203991999999998,
+       59.73996999999997
+      ],
+      [
+       10.204042,
+       59.739987
+      ],
+      [
+       10.204085,
+       59.739994
+      ],
+      [
+       10.204095,
+       59.74
+      ],
+      [
+       10.204104000000001,
+       59.74000900000001
+      ],
+      [
+       10.204107,
+       59.74001699999999
+      ],
+      [
+       10.204107,
+       59.740030999999995
+      ],
+      [
+       10.204109999999998,
+       59.740041
+      ],
+      [
+       10.204117,
+       59.74004899999999
+      ],
+      [
+       10.2041267,
+       59.7400568
+      ],
+      [
+       10.2041514,
+       59.74007649999999
+      ],
+      [
+       10.204157000000002,
+       59.74008099999999
+      ],
+      [
+       10.204161,
+       59.740089
+      ],
+      [
+       10.204161999999998,
+       59.74010399999999
+      ],
+      [
+       10.204157000000002,
+       59.740117000000005
+      ],
+      [
+       10.204148,
+       59.740126000000004
+      ],
+      [
+       10.204118,
+       59.740142
+      ],
+      [
+       10.204165999999999,
+       59.740178
+      ],
+      [
+       10.2038543,
+       59.740165199999986
+      ],
+      [
+       10.203919,
+       59.74026400000001
+      ],
+      [
+       10.203908,
+       59.74026699999999
+      ],
+      [
+       10.203881,
+       59.740276999999985
+      ],
+      [
+       10.203853,
+       59.74028599999998
+      ],
+      [
+       10.20383,
+       59.740294399999996
+      ],
+      [
+       10.203812,
+       59.74030100000002
+      ],
+      [
+       10.203801000000002,
+       59.740304
+      ],
+      [
+       10.203758,
+       59.74031999999998
+      ],
+      [
+       10.203747,
+       59.740323000000004
+      ],
+      [
+       10.20365,
+       59.740356999999996
+      ],
+      [
+       10.203637000000002,
+       59.740360999999986
+      ],
+      [
+       10.203617999999999,
+       59.74034799999999
+      ],
+      [
+       10.20362,
+       59.740353999999996
+      ],
+      [
+       10.203619,
+       59.740357999999986
+      ],
+      [
+       10.203612999999999,
+       59.740364999999976
+      ],
+      [
+       10.203608,
+       59.74036799999999
+      ],
+      [
+       10.203602,
+       59.740369999999984
+      ],
+      [
+       10.203588,
+       59.74037300000001
+      ],
+      [
+       10.203573,
+       59.740373
+      ],
+      [
+       10.203566,
+       59.740371999999994
+      ],
+      [
+       10.203553,
+       59.740367999999975
+      ],
+      [
+       10.203550000000002,
+       59.74036600000002
+      ],
+      [
+       10.203558,
+       59.740364
+      ],
+      [
+       10.20346,
+       59.74024000000002
+      ],
+      [
+       10.203442000000003,
+       59.74024300000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134395844",
+    "name": "Drammen stasjon (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "5",
+     "name": "Drammen stasjon"
+    },
+    "ground_min_m": 2.23,
+    "ground_median_m": 2.36,
+    "ground_max_m": 2.57,
+    "roof_top_median_m": 7.22,
+    "roof_top_p95_m": 10.49,
+    "laser_points": 204,
+    "height_above_ground_median_m": 4.86,
+    "height_above_ground_p95_m": 8.13,
+    "top_above_platform_m": 5.05,
+    "base_above_platform_m": 0.06,
+    "source": "Outline OSM w134395844 (ODbL); roof = median of 204 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204932499999998,
+       59.739928899999974
+      ],
+      [
+       10.204945799999999,
+       59.739938599999995
+      ],
+      [
+       10.2044442,
+       59.7401154
+      ],
+      [
+       10.204362,
+       59.740056199999984
+      ],
+      [
+       10.2043344,
+       59.74003629999997
+      ],
+      [
+       10.204299,
+       59.74001079999999
+      ],
+      [
+       10.2046238,
+       59.7398963
+      ],
+      [
+       10.2046065,
+       59.7398839
+      ],
+      [
+       10.204644399999998,
+       59.7398706
+      ],
+      [
+       10.204703399999998,
+       59.73984980000001
+      ],
+      [
+       10.204720600000002,
+       59.7398622
+      ],
+      [
+       10.2048011,
+       59.73983390000001
+      ],
+      [
+       10.2048142,
+       59.73984330000001
+      ],
+      [
+       10.2048217,
+       59.7398407
+      ],
+      [
+       10.2048249,
+       59.73984299999998
+      ],
+      [
+       10.2048757,
+       59.739825100000004
+      ],
+      [
+       10.204900200000003,
+       59.73984279999999
+      ],
+      [
+       10.204945,
+       59.73982699999999
+      ],
+      [
+       10.2049843,
+       59.73981309999999
+      ],
+      [
+       10.2050468,
+       59.73985809999999
+      ],
+      [
+       10.2050085,
+       59.73987159999999
+      ],
+      [
+       10.204961799999998,
+       59.7398881
+      ],
+      [
+       10.2049854,
+       59.7399051
+      ],
+      [
+       10.2049351,
+       59.7399228
+      ],
+      [
+       10.204940000000002,
+       59.73992630000001
+      ],
+      [
+       10.204932499999998,
+       59.739928899999974
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134396697",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 2.36,
+    "ground_median_m": 2.51,
+    "ground_max_m": 2.67,
+    "roof_top_median_m": 14.18,
+    "roof_top_p95_m": 20.69,
+    "laser_points": 255,
+    "height_above_ground_median_m": 11.67,
+    "height_above_ground_p95_m": 18.18,
+    "top_above_platform_m": 12.01,
+    "base_above_platform_m": 0.19,
+    "source": "Outline OSM w134396697 (ODbL); roof = median of 255 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2049843,
+       59.73981309999999
+      ],
+      [
+       10.204754400000002,
+       59.739647500000004
+      ],
+      [
+       10.204892099999999,
+       59.73959889999999
+      ],
+      [
+       10.2049713,
+       59.739571
+      ],
+      [
+       10.2052832,
+       59.7397957
+      ],
+      [
+       10.2052047,
+       59.739823299999976
+      ],
+      [
+       10.205216499999999,
+       59.7398318
+      ],
+      [
+       10.205078000000002,
+       59.739880599999985
+      ],
+      [
+       10.2050468,
+       59.73985809999999
+      ],
+      [
+       10.2049843,
+       59.73981309999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134396699",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "5"
+    },
+    "ground_min_m": 2.2,
+    "ground_median_m": 2.42,
+    "ground_max_m": 2.74,
+    "roof_top_median_m": 20.78,
+    "roof_top_p95_m": 21.02,
+    "laser_points": 219,
+    "height_above_ground_median_m": 18.36,
+    "height_above_ground_p95_m": 18.6,
+    "top_above_platform_m": 18.61,
+    "base_above_platform_m": 0.03,
+    "source": "Outline OSM w134396699 (ODbL); roof = median of 219 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2052907,
+       59.739660799999996
+      ],
+      [
+       10.2057913,
+       59.739485200000004
+      ],
+      [
+       10.2059363,
+       59.7395902
+      ],
+      [
+       10.2054357,
+       59.73976580000001
+      ],
+      [
+       10.2052907,
+       59.739660799999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134396701",
+    "name": "service",
+    "osm_tags": {
+     "building": "service",
+     "building:levels": "1"
+    },
+    "ground_min_m": 2.32,
+    "ground_median_m": 2.63,
+    "ground_max_m": 2.75,
+    "roof_top_median_m": 8.17,
+    "roof_top_p95_m": 8.6,
+    "laser_points": 250,
+    "height_above_ground_median_m": 5.54,
+    "height_above_ground_p95_m": 5.97,
+    "top_above_platform_m": 6.0,
+    "base_above_platform_m": 0.15,
+    "source": "Outline OSM w134396701 (ODbL); roof = median of 250 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2009666,
+       59.74048969999998
+      ],
+      [
+       10.1993251,
+       59.7408116
+      ],
+      [
+       10.199283500000002,
+       59.74075779999998
+      ],
+      [
+       10.200925,
+       59.74043580000001
+      ],
+      [
+       10.2009666,
+       59.74048969999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w139976887",
+    "name": "Drammen busstasjon (transportation)",
+    "osm_tags": {
+     "building": "transportation",
+     "name": "Drammen busstasjon"
+    },
+    "ground_min_m": 2.21,
+    "ground_median_m": 2.3,
+    "ground_max_m": 2.35,
+    "roof_top_median_m": 6.33,
+    "roof_top_p95_m": 6.38,
+    "laser_points": 776,
+    "height_above_ground_median_m": 4.03,
+    "height_above_ground_p95_m": 4.08,
+    "top_above_platform_m": 4.16,
+    "base_above_platform_m": 0.04,
+    "source": "Outline OSM w139976887 (ODbL); roof = median of 776 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204774900000002,
+       59.73687280000001
+      ],
+      [
+       10.2047632,
+       59.736877100000015
+      ],
+      [
+       10.2042813,
+       59.73654319999999
+      ],
+      [
+       10.204249599999999,
+       59.73655480000001
+      ],
+      [
+       10.204194699999999,
+       59.736516699999996
+      ],
+      [
+       10.2042308,
+       59.736503500000005
+      ],
+      [
+       10.2042225,
+       59.7364977
+      ],
+      [
+       10.2042163,
+       59.73649999999999
+      ],
+      [
+       10.2041035,
+       59.7364219
+      ],
+      [
+       10.2047194,
+       59.73619610000001
+      ],
+      [
+       10.204831599999999,
+       59.73627379999999
+      ],
+      [
+       10.2046721,
+       59.736332300000015
+      ],
+      [
+       10.2052172,
+       59.73671
+      ],
+      [
+       10.2051786,
+       59.73672410000001
+      ],
+      [
+       10.2052403,
+       59.73676679999999
+      ],
+      [
+       10.204835899999999,
+       59.73691509999998
+      ],
+      [
+       10.204774900000002,
+       59.73687280000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w139979083",
+    "name": "Drammen brannstasjon (fire_station)",
+    "osm_tags": {
+     "amenity": "fire_station",
+     "building": "fire_station",
+     "name": "Drammen brannstasjon"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w139979083 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.1967989,
+       59.74125480000001
+      ],
+      [
+       10.197079099999998,
+       59.741065599999985
+      ],
+      [
+       10.197030500000002,
+       59.7410473
+      ],
+      [
+       10.197071,
+       59.74102
+      ],
+      [
+       10.197116,
+       59.741037000000006
+      ],
+      [
+       10.1973131,
+       59.7409039
+      ],
+      [
+       10.19767,
+       59.741038100000004
+      ],
+      [
+       10.1974719,
+       59.741171900000005
+      ],
+      [
+       10.1974116,
+       59.7411493
+      ],
+      [
+       10.197091999999998,
+       59.74136499999999
+      ],
+      [
+       10.1967989,
+       59.74125480000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w152126642",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 2.46,
+    "ground_median_m": 2.61,
+    "ground_max_m": 2.75,
+    "roof_top_median_m": 11.49,
+    "roof_top_p95_m": 12.3,
+    "laser_points": 352,
+    "height_above_ground_median_m": 8.88,
+    "height_above_ground_p95_m": 9.69,
+    "top_above_platform_m": 9.32,
+    "base_above_platform_m": 0.29,
+    "source": "Outline OSM w152126642 (ODbL); roof = median of 352 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.200881499999998,
+       59.74067039999999
+      ],
+      [
+       10.200931999999998,
+       59.74065899999999
+      ],
+      [
+       10.200922,
+       59.74064699999999
+      ],
+      [
+       10.200985,
+       59.740633999999986
+      ],
+      [
+       10.200971,
+       59.74061700000001
+      ],
+      [
+       10.201043,
+       59.74060199999999
+      ],
+      [
+       10.201054,
+       59.740616
+      ],
+      [
+       10.20111,
+       59.74060399999998
+      ],
+      [
+       10.2013341,
+       59.7408838
+      ],
+      [
+       10.201359,
+       59.74091499999998
+      ],
+      [
+       10.201303,
+       59.740927
+      ],
+      [
+       10.201328,
+       59.740957
+      ],
+      [
+       10.201255000000002,
+       59.740972
+      ],
+      [
+       10.201244,
+       59.740958
+      ],
+      [
+       10.20118,
+       59.74097100000001
+      ],
+      [
+       10.201157000000002,
+       59.740942
+      ],
+      [
+       10.2011047,
+       59.740953600000005
+      ],
+      [
+       10.200881499999998,
+       59.74067039999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w152251029",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "7",
+     "building:part": "yes"
+    },
+    "ground_min_m": 2.29,
+    "ground_median_m": 2.41,
+    "ground_max_m": 2.55,
+    "roof_top_median_m": 20.6,
+    "roof_top_p95_m": 23.51,
+    "laser_points": 215,
+    "height_above_ground_median_m": 18.19,
+    "height_above_ground_p95_m": 21.1,
+    "top_above_platform_m": 18.43,
+    "base_above_platform_m": 0.12,
+    "source": "Outline OSM w152251029 (ODbL); roof = median of 215 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.1981677,
+       59.7404387
+      ],
+      [
+       10.1983326,
+       59.7403331
+      ],
+      [
+       10.1984942,
+       59.7403972
+      ],
+      [
+       10.198329899999997,
+       59.740502400000004
+      ],
+      [
+       10.1981677,
+       59.7404387
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w486952622",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof"
+    },
+    "ground_min_m": 2.81,
+    "ground_median_m": 2.86,
+    "ground_max_m": 2.94,
+    "roof_top_median_m": 7.59,
+    "roof_top_p95_m": 7.65,
+    "laser_points": 103,
+    "height_above_ground_median_m": 4.73,
+    "height_above_ground_p95_m": 4.79,
+    "top_above_platform_m": 5.42,
+    "base_above_platform_m": 0.64,
+    "source": "Outline OSM w486952622 (ODbL); roof = median of 103 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2104218,
+       59.74334970000002
+      ],
+      [
+       10.2109421,
+       59.7432376
+      ],
+      [
+       10.2108912,
+       59.7431754
+      ],
+      [
+       10.2103681,
+       59.7432889
+      ],
+      [
+       10.2104218,
+       59.74334970000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w487054823",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof"
+    },
+    "ground_min_m": 7.65,
+    "ground_median_m": 7.9,
+    "ground_max_m": 8.15,
+    "roof_top_median_m": 13.2,
+    "roof_top_p95_m": 13.32,
+    "laser_points": 245,
+    "height_above_ground_median_m": 5.3,
+    "height_above_ground_p95_m": 5.42,
+    "top_above_platform_m": 11.03,
+    "base_above_platform_m": 5.48,
+    "source": "Outline OSM w487054823 (ODbL); roof = median of 245 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.200516,
+       59.740786
+      ],
+      [
+       10.200501,
+       59.74076699999999
+      ],
+      [
+       10.2007473,
+       59.74069819999998
+      ],
+      [
+       10.200881499999998,
+       59.74067039999999
+      ],
+      [
+       10.200931999999998,
+       59.74065899999999
+      ],
+      [
+       10.200922,
+       59.74064699999999
+      ],
+      [
+       10.200985,
+       59.740633999999986
+      ],
+      [
+       10.200971,
+       59.74061700000001
+      ],
+      [
+       10.201043,
+       59.74060199999999
+      ],
+      [
+       10.201054,
+       59.740616
+      ],
+      [
+       10.20111,
+       59.74060399999998
+      ],
+      [
+       10.2013341,
+       59.7408838
+      ],
+      [
+       10.201359,
+       59.74091499999998
+      ],
+      [
+       10.201303,
+       59.740927
+      ],
+      [
+       10.201328,
+       59.740957
+      ],
+      [
+       10.201255000000002,
+       59.740972
+      ],
+      [
+       10.201244,
+       59.740958
+      ],
+      [
+       10.20118,
+       59.74097100000001
+      ],
+      [
+       10.201157000000002,
+       59.740942
+      ],
+      [
+       10.2011047,
+       59.740953600000005
+      ],
+      [
+       10.200719000000001,
+       59.741039
+      ],
+      [
+       10.200516,
+       59.740786
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w490626523",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 2.29,
+    "ground_median_m": 2.43,
+    "ground_max_m": 2.55,
+    "roof_top_median_m": 18.47,
+    "roof_top_p95_m": 23.48,
+    "laser_points": 348,
+    "height_above_ground_median_m": 16.04,
+    "height_above_ground_p95_m": 21.05,
+    "top_above_platform_m": 16.3,
+    "base_above_platform_m": 0.12,
+    "source": "Outline OSM w490626523 (ODbL); roof = median of 348 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204822200000002,
+       59.7406471
+      ],
+      [
+       10.2047978,
+       59.74062929999999
+      ],
+      [
+       10.2049722,
+       59.7405712
+      ],
+      [
+       10.2049954,
+       59.7405881
+      ],
+      [
+       10.204822200000002,
+       59.7406471
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w491749404",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 0.18,
+    "ground_median_m": 1.25,
+    "ground_max_m": 1.35,
+    "roof_top_median_m": 3.23,
+    "roof_top_p95_m": 3.26,
+    "laser_points": 7,
+    "height_above_ground_median_m": 1.98,
+    "height_above_ground_p95_m": 2.01,
+    "top_above_platform_m": 1.06,
+    "base_above_platform_m": -1.99,
+    "source": "Outline OSM w491749404 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2056964,
+       59.740349599999995
+      ],
+      [
+       10.2056776,
+       59.740336000000006
+      ],
+      [
+       10.205792900000002,
+       59.740295499999974
+      ],
+      [
+       10.2058147,
+       59.74030930000001
+      ],
+      [
+       10.2056964,
+       59.740349599999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w491749406",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 0.17,
+    "ground_median_m": 1.07,
+    "ground_max_m": 1.31,
+    "roof_top_median_m": 3.22,
+    "roof_top_p95_m": 3.29,
+    "laser_points": 5,
+    "height_above_ground_median_m": 2.15,
+    "height_above_ground_p95_m": 2.22,
+    "top_above_platform_m": 1.05,
+    "base_above_platform_m": -2.0,
+    "source": "Outline OSM w491749406 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.202153700000002,
+       59.74058350000001
+      ],
+      [
+       10.202272300000002,
+       59.740769099999994
+      ],
+      [
+       10.2023848,
+       59.74094520000001
+      ],
+      [
+       10.2036247,
+       59.7427924
+      ],
+      [
+       10.2036523,
+       59.7427877
+      ],
+      [
+       10.203752899999998,
+       59.74277070000001
+      ],
+      [
+       10.2038569,
+       59.7427531
+      ],
+      [
+       10.2039382,
+       59.742739399999984
+      ],
+      [
+       10.202883299999998,
+       59.741154200000004
+      ],
+      [
+       10.2028742,
+       59.7411406
+      ],
+      [
+       10.202775000000003,
+       59.7409915
+      ],
+      [
+       10.202677899999998,
+       59.74084559999998
+      ],
+      [
+       10.2025894,
+       59.74071259999999
+      ],
+      [
+       10.2025793,
+       59.74069739999999
+      ],
+      [
+       10.2025309,
+       59.740624800000006
+      ],
+      [
+       10.2024681,
+       59.7405304
+      ],
+      [
+       10.2023879,
+       59.7405439
+      ],
+      [
+       10.2023318,
+       59.7405534
+      ],
+      [
+       10.202283,
+       59.740561700000015
+      ],
+      [
+       10.2021928,
+       59.74057690000001
+      ],
+      [
+       10.202153700000002,
+       59.74058350000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w594335608",
+    "name": "Bybrua (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Bybrua"
+    },
+    "ground_min_m": 0.08,
+    "ground_median_m": 0.26,
+    "ground_max_m": 6.67,
+    "roof_top_median_m": 8.91,
+    "roof_top_p95_m": 11.78,
+    "laser_points": 132,
+    "height_above_ground_median_m": 8.65,
+    "height_above_ground_p95_m": 11.52,
+    "top_above_platform_m": 6.74,
+    "base_above_platform_m": -2.09,
+    "source": "Outline OSM w594335608 (ODbL); roof = median of 132 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2119677,
+       59.737172
+      ],
+      [
+       10.2119816,
+       59.73719479999999
+      ],
+      [
+       10.211993799999998,
+       59.73721489999999
+      ],
+      [
+       10.212251999999998,
+       59.7371656
+      ],
+      [
+       10.2123921,
+       59.737143599999996
+      ],
+      [
+       10.212578500000001,
+       59.7371135
+      ],
+      [
+       10.2127583,
+       59.73709019999999
+      ],
+      [
+       10.2129018,
+       59.73707470000001
+      ],
+      [
+       10.2130815,
+       59.7370598
+      ],
+      [
+       10.2132343,
+       59.7370483
+      ],
+      [
+       10.213410700000003,
+       59.7370388
+      ],
+      [
+       10.2135438,
+       59.7370355
+      ],
+      [
+       10.2136749,
+       59.7370331
+      ],
+      [
+       10.213797,
+       59.73703169999999
+      ],
+      [
+       10.2137964,
+       59.73703679999999
+      ],
+      [
+       10.2143763,
+       59.73705199999997
+      ],
+      [
+       10.2175031,
+       59.7372874
+      ],
+      [
+       10.2180596,
+       59.7373375
+      ],
+      [
+       10.2180615,
+       59.737333199999995
+      ],
+      [
+       10.2183621,
+       59.737364599999985
+      ],
+      [
+       10.2186846,
+       59.737400799999996
+      ],
+      [
+       10.219038000000001,
+       59.737445
+      ],
+      [
+       10.219436,
+       59.73749790000001
+      ],
+      [
+       10.2198607,
+       59.73755790000001
+      ],
+      [
+       10.2198766,
+       59.737535300000005
+      ],
+      [
+       10.2198896,
+       59.73751669999999
+      ],
+      [
+       10.2194551,
+       59.7374542
+      ],
+      [
+       10.2190621,
+       59.737401099999985
+      ],
+      [
+       10.2187061,
+       59.737357499999995
+      ],
+      [
+       10.2183909,
+       59.73732199999999
+      ],
+      [
+       10.2180795,
+       59.737290800000004
+      ],
+      [
+       10.2180818,
+       59.737285500000006
+      ],
+      [
+       10.217519499999998,
+       59.73723769999997
+      ],
+      [
+       10.2162829,
+       59.73714359999999
+      ],
+      [
+       10.214382700000002,
+       59.7369991
+      ],
+      [
+       10.2137978,
+       59.73697810000001
+      ],
+      [
+       10.213796900000002,
+       59.73698559999998
+      ],
+      [
+       10.2136742,
+       59.736985099999984
+      ],
+      [
+       10.213551499999998,
+       59.7369878
+      ],
+      [
+       10.2133926,
+       59.736993600000005
+      ],
+      [
+       10.213225,
+       59.737000999999985
+      ],
+      [
+       10.213071400000002,
+       59.737012500000006
+      ],
+      [
+       10.2128837,
+       59.737027699999985
+      ],
+      [
+       10.2127361,
+       59.73704429999999
+      ],
+      [
+       10.2125551,
+       59.73706859999999
+      ],
+      [
+       10.212378100000002,
+       59.7370966
+      ],
+      [
+       10.2122064,
+       59.7371243
+      ],
+      [
+       10.2119677,
+       59.737172
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w727089259",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge",
+     "start_date": "1930"
+    },
+    "ground_min_m": 0.17,
+    "ground_median_m": 0.19,
+    "ground_max_m": 5.65,
+    "laser_points": 0,
+    "source": "Outline OSM w727089259 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2199405,
+       59.73743250000001
+      ],
+      [
+       10.2199178,
+       59.737467999999986
+      ],
+      [
+       10.2198903,
+       59.7375109
+      ],
+      [
+       10.2196361,
+       59.737472799999985
+      ],
+      [
+       10.2194376,
+       59.73744099999998
+      ],
+      [
+       10.219133899999997,
+       59.73739839999997
+      ],
+      [
+       10.2187637,
+       59.737349099999996
+      ],
+      [
+       10.2183828,
+       59.73730349999999
+      ],
+      [
+       10.218071,
+       59.7372686
+      ],
+      [
+       10.2176895,
+       59.7372308
+      ],
+      [
+       10.217280499999998,
+       59.737193999999995
+      ],
+      [
+       10.2144903,
+       59.73698210000001
+      ],
+      [
+       10.2142791,
+       59.7369689
+      ],
+      [
+       10.214093300000002,
+       59.7369625
+      ],
+      [
+       10.2139029,
+       59.73695739999998
+      ],
+      [
+       10.213723200000002,
+       59.73695640000002
+      ],
+      [
+       10.2135609,
+       59.73695739999998
+      ],
+      [
+       10.2133879,
+       59.7369638
+      ],
+      [
+       10.213212199999997,
+       59.73697429999997
+      ],
+      [
+       10.213063999999997,
+       59.736986099999974
+      ],
+      [
+       10.2128749,
+       59.73700470000001
+      ],
+      [
+       10.212717999999999,
+       59.73702329999999
+      ],
+      [
+       10.2125135,
+       59.73705339999999
+      ],
+      [
+       10.212365999999998,
+       59.7370784
+      ],
+      [
+       10.2121957,
+       59.73710959999998
+      ],
+      [
+       10.2120374,
+       59.7371426
+      ],
+      [
+       10.212005000000001,
+       59.737105799999995
+      ],
+      [
+       10.211972999999999,
+       59.737069599999984
+      ],
+      [
+       10.212145999999999,
+       59.73703549999998
+      ],
+      [
+       10.212308999999998,
+       59.737002399999994
+      ],
+      [
+       10.2124578,
+       59.736977700000004
+      ],
+      [
+       10.2126523,
+       59.73694829999999
+      ],
+      [
+       10.2128401,
+       59.73692530000001
+      ],
+      [
+       10.2130385,
+       59.7369033
+      ],
+      [
+       10.213176700000002,
+       59.7368945
+      ],
+      [
+       10.213374500000002,
+       59.7368814
+      ],
+      [
+       10.2135555,
+       59.7368749
+      ],
+      [
+       10.2137131,
+       59.7368729
+      ],
+      [
+       10.2139042,
+       59.7368736
+      ],
+      [
+       10.214103399999999,
+       59.7368783
+      ],
+      [
+       10.2142972,
+       59.7368888
+      ],
+      [
+       10.2145118,
+       59.736903600000005
+      ],
+      [
+       10.217316,
+       59.7371159
+      ],
+      [
+       10.2177264,
+       59.737150700000015
+      ],
+      [
+       10.2181247,
+       59.7371902
+      ],
+      [
+       10.218426400000002,
+       59.73722540000001
+      ],
+      [
+       10.218811300000002,
+       59.7372734
+      ],
+      [
+       10.2191842,
+       59.73731999999999
+      ],
+      [
+       10.2194678,
+       59.737359
+      ],
+      [
+       10.2197159,
+       59.73739710000001
+      ],
+      [
+       10.2199405,
+       59.73743250000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w727089260",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge",
+     "start_date": "1996"
+    },
+    "ground_min_m": 0.17,
+    "ground_median_m": 0.18,
+    "ground_max_m": 0.2,
+    "laser_points": 0,
+    "source": "Outline OSM w727089260 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2185473,
+       59.737267800000005
+      ],
+      [
+       10.218537599999998,
+       59.737256
+      ],
+      [
+       10.2185217,
+       59.73724380000001
+      ],
+      [
+       10.218496199999999,
+       59.73723150000001
+      ],
+      [
+       10.2184278,
+       59.7372085
+      ],
+      [
+       10.2183641,
+       59.737187199999994
+      ],
+      [
+       10.218289,
+       59.7371639
+      ],
+      [
+       10.218213199999997,
+       59.7371446
+      ],
+      [
+       10.2181126,
+       59.7371243
+      ],
+      [
+       10.2180154,
+       59.737108799999994
+      ],
+      [
+       10.217891300000002,
+       59.737094000000006
+      ],
+      [
+       10.2177205,
+       59.7370779
+      ],
+      [
+       10.2131678,
+       59.736791100000005
+      ],
+      [
+       10.2129122,
+       59.736775200000004
+      ],
+      [
+       10.2127572,
+       59.736764799999996
+      ],
+      [
+       10.2125919,
+       59.73675130000001
+      ],
+      [
+       10.212385699999999,
+       59.736727699999996
+      ],
+      [
+       10.2122216,
+       59.736703600000006
+      ],
+      [
+       10.212066399999998,
+       59.73667329999999
+      ],
+      [
+       10.2119393,
+       59.73664240000001
+      ],
+      [
+       10.211817399999997,
+       59.7366054
+      ],
+      [
+       10.211717700000001,
+       59.736567300000004
+      ],
+      [
+       10.2116246,
+       59.736526200000014
+      ],
+      [
+       10.2115254,
+       59.7364716
+      ],
+      [
+       10.211448299999999,
+       59.73642269999997
+      ],
+      [
+       10.2113521,
+       59.736360499999996
+      ],
+      [
+       10.211250899999998,
+       59.736280900000004
+      ],
+      [
+       10.2112778,
+       59.7362736
+      ],
+      [
+       10.2113526,
+       59.7362532
+      ],
+      [
+       10.2114168,
+       59.73623570000001
+      ],
+      [
+       10.211505,
+       59.7363065
+      ],
+      [
+       10.2115948,
+       59.73636470000001
+      ],
+      [
+       10.211667299999998,
+       59.7364106
+      ],
+      [
+       10.2117551,
+       59.73645890000001
+      ],
+      [
+       10.2118356,
+       59.7364944
+      ],
+      [
+       10.2119221,
+       59.736527499999994
+      ],
+      [
+       10.212028,
+       59.73655960000001
+      ],
+      [
+       10.2121407,
+       59.73658699999999
+      ],
+      [
+       10.2122815,
+       59.73661460000001
+      ],
+      [
+       10.2124324,
+       59.736636700000005
+      ],
+      [
+       10.2126275,
+       59.73665899999998
+      ],
+      [
+       10.2127844,
+       59.736671799999996
+      ],
+      [
+       10.212936,
+       59.73668200000001
+      ],
+      [
+       10.213190800000001,
+       59.73669789999999
+      ],
+      [
+       10.217743100000002,
+       59.73698339999999
+      ],
+      [
+       10.2183507,
+       59.73701920000001
+      ],
+      [
+       10.2187255,
+       59.73704429999999
+      ],
+      [
+       10.2190252,
+       59.73706690000001
+      ],
+      [
+       10.2189843,
+       59.737083600000005
+      ],
+      [
+       10.2188346,
+       59.73714489999998
+      ],
+      [
+       10.2186513,
+       59.737223299999975
+      ],
+      [
+       10.218584,
+       59.7372521
+      ],
+      [
+       10.2185473,
+       59.737267800000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w727089261",
+    "name": "Strømsøbrua (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Strømsøbrua"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w727089261 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2087209,
+       59.736540999999995
+      ],
+      [
+       10.2086416,
+       59.73648499999998
+      ],
+      [
+       10.2087168,
+       59.736458
+      ],
+      [
+       10.2087961,
+       59.73651399999999
+      ],
+      [
+       10.2087209,
+       59.736540999999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w751098853",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w751098853 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2037144,
+       59.74318179999999
+      ],
+      [
+       10.2036594,
+       59.7431049
+      ],
+      [
+       10.203685099999998,
+       59.7431002
+      ],
+      [
+       10.203740099999997,
+       59.743177100000004
+      ],
+      [
+       10.2037144,
+       59.74318179999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w930916193",
+    "name": "service",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "service"
+    },
+    "ground_min_m": 2.57,
+    "ground_median_m": 2.64,
+    "ground_max_m": 2.74,
+    "roof_top_median_m": 9.87,
+    "roof_top_p95_m": 12.23,
+    "laser_points": 138,
+    "height_above_ground_median_m": 7.22,
+    "height_above_ground_p95_m": 9.59,
+    "top_above_platform_m": 7.7,
+    "base_above_platform_m": 0.4,
+    "source": "Outline OSM w930916193 (ODbL); roof = median of 138 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.206888999999999,
+       59.73909799999997
+      ],
+      [
+       10.2068378,
+       59.73911809999999
+      ],
+      [
+       10.206778,
+       59.73914150000002
+      ],
+      [
+       10.2068584,
+       59.7391866
+      ],
+      [
+       10.206468,
+       59.73933600000001
+      ],
+      [
+       10.206212,
+       59.739091
+      ],
+      [
+       10.206528,
+       59.7389698
+      ],
+      [
+       10.2065985,
+       59.73902019999998
+      ],
+      [
+       10.2066534,
+       59.73899929999999
+      ],
+      [
+       10.206711999999998,
+       59.73897689999999
+      ],
+      [
+       10.206653999999999,
+       59.73894099999998
+      ],
+      [
+       10.206876,
+       59.738837999999994
+      ],
+      [
+       10.207042599999998,
+       59.738911999999985
+      ],
+      [
+       10.2071954,
+       59.73898
+      ],
+      [
+       10.207236,
+       59.73899800000001
+      ],
+      [
+       10.206942,
+       59.739134
+      ],
+      [
+       10.206888999999999,
+       59.73909799999997
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w980248930",
+    "name": "Quality Hotel River Station (hotel)",
+    "osm_tags": {
+     "building": "hotel",
+     "building:levels": "14",
+     "name": "Quality Hotel River Station",
+     "roof:shape": "skillion",
+     "start_date": "2019-10-01"
+    },
+    "ground_min_m": 1.8,
+    "ground_median_m": 2.11,
+    "ground_max_m": 2.59,
+    "roof_top_median_m": 9.5,
+    "roof_top_p95_m": 10.32,
+    "laser_points": 57,
+    "height_above_ground_median_m": 7.39,
+    "height_above_ground_p95_m": 8.21,
+    "top_above_platform_m": 7.33,
+    "base_above_platform_m": -0.37,
+    "source": "Outline OSM w980248930 (ODbL); roof = median of 57 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.210368,
+       59.742054
+      ],
+      [
+       10.210296,
+       59.74204899999999
+      ],
+      [
+       10.210251000000001,
+       59.74206
+      ],
+      [
+       10.210217,
+       59.742028999999995
+      ],
+      [
+       10.2103,
+       59.742015
+      ],
+      [
+       10.210384,
+       59.74202099999997
+      ],
+      [
+       10.210368,
+       59.742054
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w991416887",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 3.12,
+    "ground_median_m": 3.38,
+    "ground_max_m": 3.56,
+    "roof_top_median_m": 6.27,
+    "roof_top_p95_m": 6.36,
+    "laser_points": 158,
+    "height_above_ground_median_m": 2.89,
+    "height_above_ground_p95_m": 2.98,
+    "top_above_platform_m": 4.1,
+    "base_above_platform_m": 0.95,
+    "source": "Outline OSM w991416887 (ODbL); roof = median of 158 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.210616,
+       59.741806000000004
+      ],
+      [
+       10.210557,
+       59.741823
+      ],
+      [
+       10.210362999999997,
+       59.741658
+      ],
+      [
+       10.210421999999998,
+       59.74164
+      ],
+      [
+       10.210415,
+       59.741635
+      ],
+      [
+       10.210463999999998,
+       59.741623000000004
+      ],
+      [
+       10.210423,
+       59.741557
+      ],
+      [
+       10.210521,
+       59.74153299999998
+      ],
+      [
+       10.211006,
+       59.741949
+      ],
+      [
+       10.210704999999999,
+       59.742053
+      ],
+      [
+       10.210596,
+       59.74196999999999
+      ],
+      [
+       10.210749,
+       59.74192000000001
+      ],
+      [
+       10.210616,
+       59.741806000000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w991418896",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 2.11,
+    "ground_median_m": 3.45,
+    "ground_max_m": 4.18,
+    "roof_top_median_m": 7.97,
+    "roof_top_p95_m": 8.13,
+    "laser_points": 660,
+    "height_above_ground_median_m": 4.52,
+    "height_above_ground_p95_m": 4.68,
+    "top_above_platform_m": 5.8,
+    "base_above_platform_m": -0.06,
+    "source": "Outline OSM w991418896 (ODbL); roof = median of 660 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.203022999999998,
+       59.73849899999999
+      ],
+      [
+       10.203028999999999,
+       59.738503999999985
+      ],
+      [
+       10.202896999999998,
+       59.738551999999984
+      ],
+      [
+       10.202849,
+       59.738519
+      ],
+      [
+       10.202982,
+       59.73847000000002
+      ],
+      [
+       10.203022999999998,
+       59.73849899999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w991466242",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 3.12,
+    "ground_median_m": 3.18,
+    "ground_max_m": 3.37,
+    "roof_top_median_m": 9.32,
+    "roof_top_p95_m": 9.73,
+    "laser_points": 58,
+    "height_above_ground_median_m": 6.14,
+    "height_above_ground_p95_m": 6.55,
+    "top_above_platform_m": 7.15,
+    "base_above_platform_m": 0.95,
+    "source": "Outline OSM w991466242 (ODbL); roof = median of 58 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.200775899999998,
+       59.741074
+      ],
+      [
+       10.2007581,
+       59.74105199999999
+      ],
+      [
+       10.2011181,
+       59.740978
+      ],
+      [
+       10.2011359,
+       59.74100000000001
+      ],
+      [
+       10.200775899999998,
+       59.741074
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w991466420",
+    "name": "garage",
+    "osm_tags": {
+     "building": "garage"
+    },
+    "ground_min_m": 2.28,
+    "ground_median_m": 2.46,
+    "ground_max_m": 2.56,
+    "roof_top_median_m": 4.94,
+    "roof_top_p95_m": 4.99,
+    "laser_points": 61,
+    "height_above_ground_median_m": 2.48,
+    "height_above_ground_p95_m": 2.53,
+    "top_above_platform_m": 2.77,
+    "base_above_platform_m": 0.11,
+    "source": "Outline OSM w991466420 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.1946471,
+       59.74071799999999
+      ],
+      [
+       10.1945916,
+       59.74059869999999
+      ],
+      [
+       10.1946668,
+       59.74058980000001
+      ],
+      [
+       10.1946585,
+       59.74056959999999
+      ],
+      [
+       10.1951044,
+       59.7405167
+      ],
+      [
+       10.1951133,
+       59.7405356
+      ],
+      [
+       10.1951879,
+       59.740526100000004
+      ],
+      [
+       10.1951795,
+       59.74050789999999
+      ],
+      [
+       10.1961681,
+       59.74039109999999
+      ],
+      [
+       10.196177899999999,
+       59.740412
+      ],
+      [
+       10.1962664,
+       59.7404003
+      ],
+      [
+       10.1963009,
+       59.740477000000006
+      ],
+      [
+       10.196416599999997,
+       59.740463
+      ],
+      [
+       10.196496899999998,
+       59.74063749999999
+      ],
+      [
+       10.1963652,
+       59.740653
+      ],
+      [
+       10.196304,
+       59.74052350000001
+      ],
+      [
+       10.1946471,
+       59.74071799999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1116374192",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 3.1,
+    "ground_median_m": 3.3,
+    "ground_max_m": 3.5,
+    "roof_top_median_m": 8.38,
+    "roof_top_p95_m": 8.63,
+    "laser_points": 282,
+    "height_above_ground_median_m": 5.08,
+    "height_above_ground_p95_m": 5.33,
+    "top_above_platform_m": 6.21,
+    "base_above_platform_m": 0.93,
+    "source": "Outline OSM w1116374192 (ODbL); roof = median of 282 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.1969111,
+       59.74252039999999
+      ],
+      [
+       10.1969464,
+       59.742506099999986
+      ],
+      [
+       10.197018899999998,
+       59.7425324
+      ],
+      [
+       10.196962,
+       59.742554
+      ],
+      [
+       10.1969111,
+       59.74252039999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1535657340",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 2.3,
+    "ground_median_m": 2.32,
+    "ground_max_m": 2.39,
+    "roof_top_median_m": 13.15,
+    "roof_top_p95_m": 16.9,
+    "laser_points": 7,
+    "height_above_ground_median_m": 10.83,
+    "height_above_ground_p95_m": 14.58,
+    "top_above_platform_m": 10.98,
+    "base_above_platform_m": 0.13,
+    "source": "Outline OSM w1535657340 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2037131,
+       59.74095100000001
+      ],
+      [
+       10.2036525,
+       59.740898
+      ],
+      [
+       10.2042019,
+       59.7407358
+      ],
+      [
+       10.2043794,
+       59.740679400000005
+      ],
+      [
+       10.204567999999998,
+       59.740615199999986
+      ],
+      [
+       10.2047645,
+       59.740546699999996
+      ],
+      [
+       10.2048336,
+       59.74059649999999
+      ],
+      [
+       10.2046422,
+       59.7406625
+      ],
+      [
+       10.204503900000002,
+       59.7407116
+      ],
+      [
+       10.204378199999999,
+       59.7407543
+      ],
+      [
+       10.2041231,
+       59.7408335
+      ],
+      [
+       10.20392,
+       59.740892300000006
+      ],
+      [
+       10.2037131,
+       59.74095100000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1535657348",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 1.29,
+    "ground_median_m": 1.42,
+    "ground_max_m": 1.77,
+    "laser_points": 0,
+    "source": "Outline OSM w1535657348 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2056776,
+       59.740115499999995
+      ],
+      [
+       10.2055982,
+       59.7400574
+      ],
+      [
+       10.205362699999998,
+       59.74013959999998
+      ],
+      [
+       10.2047329,
+       59.740359599999984
+      ],
+      [
+       10.2043107,
+       59.7405067
+      ],
+      [
+       10.203898200000001,
+       59.7406446
+      ],
+      [
+       10.2036118,
+       59.74073189999999
+      ],
+      [
+       10.2034095,
+       59.74079220000001
+      ],
+      [
+       10.203470100000002,
+       59.7408465
+      ],
+      [
+       10.203800600000001,
+       59.74075379999999
+      ],
+      [
+       10.204041999999998,
+       59.740680000000005
+      ],
+      [
+       10.2043531,
+       59.74057859999999
+      ],
+      [
+       10.2046321,
+       59.74048320000001
+      ],
+      [
+       10.2051068,
+       59.740318300000006
+      ],
+      [
+       10.2056776,
+       59.740115499999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1535657349",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 1.5,
+    "ground_median_m": 1.78,
+    "ground_max_m": 2.86,
+    "roof_top_median_m": 5.82,
+    "roof_top_p95_m": 9.18,
+    "laser_points": 510,
+    "height_above_ground_median_m": 4.04,
+    "height_above_ground_p95_m": 7.4,
+    "top_above_platform_m": 3.65,
+    "base_above_platform_m": -0.67,
+    "source": "Outline OSM w1535657349 (ODbL); roof = median of 510 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.2054997,
+       59.739981400000005
+      ],
+      [
+       10.2054166,
+       59.7399218
+      ],
+      [
+       10.2043636,
+       59.7402912
+      ],
+      [
+       10.204004700000002,
+       59.7404138
+      ],
+      [
+       10.2037252,
+       59.7405116
+      ],
+      [
+       10.2035351,
+       59.74057199999999
+      ],
+      [
+       10.203260999999998,
+       59.74065610000001
+      ],
+      [
+       10.203325,
+       59.7407105
+      ],
+      [
+       10.2037616,
+       59.74058110000001
+      ],
+      [
+       10.204068,
+       59.7404806
+      ],
+      [
+       10.2043187,
+       59.7403949
+      ],
+      [
+       10.204649399999997,
+       59.74027910000001
+      ],
+      [
+       10.204979100000001,
+       59.7401645
+      ],
+      [
+       10.205322299999999,
+       59.74004499999999
+      ],
+      [
+       10.2054997,
+       59.739981400000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1535657350",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 1.55,
+    "ground_median_m": 1.89,
+    "ground_max_m": 2.76,
+    "roof_top_median_m": 6.88,
+    "roof_top_p95_m": 9.66,
+    "laser_points": 227,
+    "height_above_ground_median_m": 4.99,
+    "height_above_ground_p95_m": 7.77,
+    "top_above_platform_m": 4.71,
+    "base_above_platform_m": -0.62,
+    "source": "Outline OSM w1535657350 (ODbL); roof = median of 227 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204532163035033,
+       59.74051232621666
+      ],
+      [
+       10.204515023774508,
+       59.740530444528936
+      ],
+      [
+       10.2044794532322,
+       59.74053077061205
+      ],
+      [
+       10.204462313933744,
+       59.74054888891756
+      ],
+      [
+       10.204426743371156,
+       59.740549214986444
+      ],
+      [
+       10.20440960403477,
+       59.74056733328512
+      ],
+      [
+       10.2043740334519,
+       59.740567659339824
+      ],
+      [
+       10.20437435641528,
+       59.740576636973834
+      ],
+      [
+       10.204321323474433,
+       59.74058610367219
+      ],
+      [
+       10.204321646423917,
+       59.74059508130636
+      ],
+      [
+       10.204410572954115,
+       59.7405942661868
+      ],
+      [
+       10.204410895927637,
+       59.74060324382065
+      ],
+      [
+       10.204428681237834,
+       59.74060308078946
+      ],
+      [
+       10.204429973153008,
+       59.74063899132452
+      ],
+      [
+       10.204500468471913,
+       59.740620383907725
+      ],
+      [
+       10.204500145474155,
+       59.74061140627418
+      ],
+      [
+       10.204464574845645,
+       59.740611732353536
+      ],
+      [
+       10.204464251857623,
+       59.74060275471985
+      ],
+      [
+       10.204428358259547,
+       59.740594103155665
+      ],
+      [
+       10.204427389325904,
+       59.74056717025417
+      ],
+      [
+       10.204445174616833,
+       59.740567007220804
+      ],
+      [
+       10.204444851634591,
+       59.740558029587
+      ],
+      [
+       10.20448042220631,
+       59.740557703513176
+      ],
+      [
+       10.204480099214736,
+       59.7405487258795
+      ],
+      [
+       10.20451566977611,
+       59.74054839979615
+      ],
+      [
+       10.204532809045357,
+       59.74053028148378
+      ],
+      [
+       10.204603627102399,
+       59.740520651645724
+      ],
+      [
+       10.204638228531966,
+       59.74049339262934
+      ],
+      [
+       10.204744293908018,
+       59.74047445895672
+      ],
+      [
+       10.204761433015813,
+       59.74045634061485
+      ],
+      [
+       10.20479700347537,
+       59.74045601445565
+      ],
+      [
+       10.204814142545237,
+       59.74043789610697
+      ],
+      [
+       10.204849712984512,
+       59.74043756993356
+      ],
+      [
+       10.20484906680665,
+       59.74041961466826
+      ],
+      [
+       10.204955131828163,
+       59.740400680826355
+      ],
+      [
+       10.204954808711344,
+       59.74039170319402
+      ],
+      [
+       10.205007841162672,
+       59.74038223624123
+      ],
+      [
+       10.205042442120158,
+       59.74035497711931
+      ],
+      [
+       10.205095797642164,
+       59.74035448776331
+      ],
+      [
+       10.205130398499355,
+       59.74032722861842
+      ],
+      [
+       10.205165968816935,
+       59.740326902359776
+      ],
+      [
+       10.205183107621304,
+       59.74030878396346
+      ],
+      [
+       10.2052186779186,
+       59.740308457690595
+      ],
+      [
+       10.205218354732315,
+       59.740299480058994
+      ],
+      [
+       10.205271386962057,
+       59.740290013000404
+      ],
+      [
+       10.205288525690568,
+       59.74027189459046
+      ],
+      [
+       10.205377451330877,
+       59.74027107881925
+      ],
+      [
+       10.205397175861426,
+       59.740324781443945
+      ],
+      [
+       10.205432746172919,
+       59.74032445511308
+      ],
+      [
+       10.205449884831253,
+       59.74030633668242
+      ],
+      [
+       10.205485455122465,
+       59.74030601033738
+      ],
+      [
+       10.205485131864682,
+       59.740297032706636
+      ],
+      [
+       10.20543177644186,
+       59.740297522220445
+      ],
+      [
+       10.20543145319858,
+       59.74028854458951
+      ],
+      [
+       10.205395559691672,
+       59.74027989328885
+      ],
+      [
+       10.205394266759521,
+       59.74024398276453
+      ],
+      [
+       10.205412051872472,
+       59.74024381960084
+      ],
+      [
+       10.205429190501295,
+       59.74022570117272
+      ],
+      [
+       10.205464760707118,
+       59.740225374833535
+      ],
+      [
+       10.205481899298016,
+       59.74020725639863
+      ],
+      [
+       10.205517469483555,
+       59.74020693004524
+      ],
+      [
+       10.205534608036524,
+       59.7401888116035
+      ],
+      [
+       10.205570178201782,
+       59.74018848523591
+      ],
+      [
+       10.205587316716823,
+       59.74017036678739
+      ],
+      [
+       10.205622886861796,
+       59.74017004040557
+      ],
+      [
+       10.20565748709936,
+       59.74014278112308
+      ],
+      [
+       10.205728304007197,
+       59.7401331506819
+      ],
+      [
+       10.205762904120835,
+       59.740105891371854
+      ],
+      [
+       10.20570922569275,
+       59.74009740336722
+      ],
+      [
+       10.205692087280742,
+       59.74011552183151
+      ],
+      [
+       10.205656517194587,
+       59.740115848231895
+      ],
+      [
+       10.205639378744653,
+       59.740133966689385
+      ],
+      [
+       10.205603808638214,
+       59.74013429307554
+      ],
+      [
+       10.20556920836546,
+       59.74016155234404
+      ],
+      [
+       10.2055336382288,
+       59.74016187871129
+      ],
+      [
+       10.205516499688914,
+       59.74017999715292
+      ],
+      [
+       10.205480929531973,
+       59.74018032350597
+      ],
+      [
+       10.205446329111664,
+       59.74020758274239
+      ],
+      [
+       10.205375511963682,
+       59.74021721303226
+      ],
+      [
+       10.205375835191042,
+       59.74022619066344
+      ],
+      [
+       10.205322803092223,
+       59.74023565776388
+      ],
+      [
+       10.205288202486027,
+       59.74026291695905
+      ],
+      [
+       10.205252632238016,
+       59.740263243250546
+      ],
+      [
+       10.205235493494394,
+       59.74028136165589
+      ],
+      [
+       10.2051999232261,
+       59.740281687933205
+      ],
+      [
+       10.205182784444549,
+       59.74029980633173
+      ],
+      [
+       10.205147214155973,
+       59.74030013259483
+      ],
+      [
+       10.205147537323194,
+       59.740309110226676
+      ],
+      [
+       10.205094505027636,
+       59.740318577235456
+      ],
+      [
+       10.20507736617023,
+       59.740336695620364
+      ],
+      [
+       10.205006548641038,
+       59.74034632571235
+      ],
+      [
+       10.205006871771142,
+       59.74035530334461
+      ],
+      [
+       10.204989086596328,
+       59.740355466453636
+      ],
+      [
+       10.204971947663065,
+       59.74037358482495
+      ],
+      [
+       10.20493637729336,
+       59.740373911031234
+      ],
+      [
+       10.204919238322168,
+       59.740392029395714
+      ],
+      [
+       10.2048484206296,
+       59.74040165940292
+      ],
+      [
+       10.204813819465738,
+       59.74042891847421
+      ],
+      [
+       10.204743001664255,
+       59.74043854842489
+      ],
+      [
+       10.204725862555444,
+       59.740456666764416
+      ],
+      [
+       10.204690292094265,
+       59.740456992904335
+      ],
+      [
+       10.204673152947528,
+       59.74047511123708
+      ],
+      [
+       10.204637582466066,
+       59.74047543736281
+      ],
+      [
+       10.204620443281398,
+       59.7404935556887
+      ],
+      [
+       10.204584872779654,
+       59.74049388180023
+      ],
+      [
+       10.20456773355706,
+       59.74051200011934
+      ],
+      [
+       10.204532163035033,
+       59.74051232621666
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 5.87,
+    "top_p10_m": 5.51,
+    "top_p90_m": 7.67,
+    "laser_points": 794,
+    "top_above_platform_m": 3.7,
+    "area_m2": 241.0,
+    "underside_m": null,
+    "multi_return_share": 0.3,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "ground_min_m": 1.61,
+    "ground_median_m": 1.83,
+    "ground_max_m": 2.77
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.20362188684087,
+       59.7404308620792
+      ],
+      [
+       10.20355106868458,
+       59.74044049138853
+      ],
+      [
+       10.203516466420506,
+       59.74046775012145
+      ],
+      [
+       10.20346311068709,
+       59.740468238836776
+      ],
+      [
+       10.203463433404949,
+       59.74047721647391
+      ],
+      [
+       10.203410723063136,
+       59.740495660442356
+      ],
+      [
+       10.203429476450125,
+       59.74052243045837
+      ],
+      [
+       10.203465046997279,
+       59.74052210465949
+      ],
+      [
+       10.203464724278408,
+       59.74051312702239
+      ],
+      [
+       10.203535542613485,
+       59.740503497759136
+      ],
+      [
+       10.203570144898555,
+       59.74047623902126
+      ],
+      [
+       10.203623500642625,
+       59.74047575026246
+      ],
+      [
+       10.2036406403594,
+       59.7404576320649
+      ],
+      [
+       10.203711458525529,
+       59.74044800270727
+      ],
+      [
+       10.203746060610005,
+       59.74042074392349
+      ],
+      [
+       10.203852126269764,
+       59.74040181096999
+      ],
+      [
+       10.203886728191979,
+       59.740374552149476
+      ],
+      [
+       10.203957546110265,
+       59.74036492265987
+      ],
+      [
+       10.203957223261378,
+       59.740355945024184
+      ],
+      [
+       10.204010255943201,
+       59.7403464784733
+      ],
+      [
+       10.20400993308042,
+       59.740337500837754
+      ],
+      [
+       10.204063288594803,
+       59.74033701190106
+      ],
+      [
+       10.204082042412008,
+       59.74036378182323
+      ],
+      [
+       10.20413572086361,
+       59.74037227049219
+      ],
+      [
+       10.204116966998741,
+       59.74034550057789
+      ],
+      [
+       10.204099181823326,
+       59.740345663566494
+      ],
+      [
+       10.20409789027809,
+       59.74030975302543
+      ],
+      [
+       10.20411567543444,
+       59.74030959003709
+      ],
+      [
+       10.204132814800122,
+       59.740291471775954
+      ],
+      [
+       10.204203632470565,
+       59.74028184215436
+      ],
+      [
+       10.204202986643182,
+       59.740263886884364
+      ],
+      [
+       10.204238556905587,
+       59.74026356087697
+      ],
+      [
+       10.204255696181315,
+       59.74024544259996
+      ],
+      [
+       10.204361760993695,
+       59.7402265092372
+      ],
+      [
+       10.204396362319908,
+       59.74019925028363
+      ],
+      [
+       10.204467179718067,
+       59.7401896205207
+      ],
+      [
+       10.204501780920355,
+       59.74016236153962
+      ],
+      [
+       10.2045725982096,
+       59.740152731720165
+      ],
+      [
+       10.204607199287963,
+       59.74012547271154
+      ],
+      [
+       10.204678016468295,
+       59.740115842835564
+      ],
+      [
+       10.204712617422732,
+       59.74008858379941
+      ],
+      [
+       10.20474818749226,
+       59.74008825765464
+      ],
+      [
+       10.204747864434967,
+       59.74007928002118
+      ],
+      [
+       10.204783434494148,
+       59.740078953866885
+      ],
+      [
+       10.204800573380863,
+       59.740060835519536
+      ],
+      [
+       10.204871390367806,
+       59.740051205539835
+      ],
+      [
+       10.204870744188318,
+       59.74003325027361
+      ],
+      [
+       10.204941561096364,
+       59.740023620256295
+      ],
+      [
+       10.204958699869293,
+       59.74000550188853
+      ],
+      [
+       10.205012054836072,
+       59.74000501256823
+      ],
+      [
+       10.205012377963234,
+       59.74001399020092
+      ],
+      [
+       10.205030162956524,
+       59.7400138270893
+      ],
+      [
+       10.205031455486273,
+       59.74004973761968
+      ],
+      [
+       10.20508448737507,
+       59.740040270637245
+      ],
+      [
+       10.205084164228232,
+       59.740031293004826
+      ],
+      [
+       10.205119734232046,
+       59.740030966759676
+      ],
+      [
+       10.205119411075877,
+       59.74002198912735
+      ],
+      [
+       10.205154981069347,
+       59.74002166287269
+      ],
+      [
+       10.205172119725454,
+       59.74000354447744
+      ],
+      [
+       10.205136549751455,
+       59.740003870736686
+      ],
+      [
+       10.205136872911982,
+       59.74001284836896
+      ],
+      [
+       10.20510130292764,
+       59.740013174618696
+      ],
+      [
+       10.20510162607884,
+       59.74002215225108
+      ],
+      [
+       10.205048271086504,
+       59.740022641607794
+      ],
+      [
+       10.20504762481291,
+       59.74000468634269
+      ],
+      [
+       10.205029839824592,
+       59.74000484945667
+      ],
+      [
+       10.205011085455796,
+       59.739978079670095
+      ],
+      [
+       10.204975192389925,
+       59.73996942825281
+      ],
+      [
+       10.20497422304068,
+       59.73994249535415
+      ],
+      [
+       10.204938653128949,
+       59.73994282155964
+      ],
+      [
+       10.204939945556882,
+       59.739978732091615
+      ],
+      [
+       10.204904375606208,
+       59.73997905828794
+      ],
+      [
+       10.204869774920608,
+       59.74000631737419
+      ],
+      [
+       10.204798958027979,
+       59.74001594735279
+      ],
+      [
+       10.204781819163069,
+       59.74003406569999
+      ],
+      [
+       10.20474624915155,
+       59.74003439185369
+      ],
+      [
+       10.204729110248712,
+       59.74005251019409
+      ],
+      [
+       10.204693540216912,
+       59.740052836333575
+      ],
+      [
+       10.204658939283464,
+       59.74008009536478
+      ],
+      [
+       10.204623369221443,
+       59.74008042148539
+      ],
+      [
+       10.20462369224537,
+       59.74008939911924
+      ],
+      [
+       10.204570660146352,
+       59.74009886591627
+      ],
+      [
+       10.204570983156387,
+       59.740107843550305
+      ],
+      [
+       10.204499842970284,
+       59.74010849573441
+      ],
+      [
+       10.204499519979315,
+       59.740099518100166
+      ],
+      [
+       10.204481734937048,
+       59.740099681140116
+      ],
+      [
+       10.204483026883077,
+       59.740135591677266
+      ],
+      [
+       10.204465241821541,
+       59.74013575471503
+      ],
+      [
+       10.20444810271497,
+       59.74015387301915
+      ],
+      [
+       10.204394747499943,
+       59.7401543621112
+      ],
+      [
+       10.20437760834571,
+       59.74017248040619
+      ],
+      [
+       10.204342038181874,
+       59.74017280645094
+      ],
+      [
+       10.20432489898971,
+       59.74019092473914
+      ],
+      [
+       10.204289328805595,
+       59.74019125076967
+      ],
+      [
+       10.20425472740008,
+       59.74021850969532
+      ],
+      [
+       10.204183909878408,
+       59.74022813934408
+      ],
+      [
+       10.204149308348967,
+       59.740255398242226
+      ],
+      [
+       10.204078490718382,
+       59.74026502783446
+      ],
+      [
+       10.204061351336579,
+       59.740283146088636
+      ],
+      [
+       10.20400799590799,
+       59.74028363502427
+      ],
+      [
+       10.204007350185467,
+       59.740265679752994
+      ],
+      [
+       10.203971779917792,
+       59.74026600569782
+      ],
+      [
+       10.203973394177956,
+       59.74031089387649
+      ],
+      [
+       10.203920361541769,
+       59.74032036041241
+      ],
+      [
+       10.203903222046181,
+       59.74033847864615
+      ],
+      [
+       10.203867651699815,
+       59.74033880456304
+      ],
+      [
+       10.203850512166296,
+       59.74035692278996
+      ],
+      [
+       10.203814941799646,
+       59.74035724869263
+      ],
+      [
+       10.203815264610403,
+       59.740366226328774
+      ],
+      [
+       10.203779694233411,
+       59.74036655222194
+      ],
+      [
+       10.203780017034838,
+       59.74037552985819
+      ],
+      [
+       10.20372666145353,
+       59.74037601868006
+      ],
+      [
+       10.203726015879479,
+       59.7403580634072
+      ],
+      [
+       10.203690445509995,
+       59.74035838927617
+      ],
+      [
+       10.203709844607651,
+       59.74040311452525
+      ],
+      [
+       10.203674274190098,
+       59.74040344038998
+      ],
+      [
+       10.203657134518961,
+       59.74042155859196
+      ],
+      [
+       10.203621564081125,
+       59.74042188444248
+      ],
+      [
+       10.20362188684087,
+       59.7404308620792
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 5.78,
+    "top_p10_m": 5.37,
+    "top_p90_m": 6.22,
+    "laser_points": 2223,
+    "top_above_platform_m": 3.61,
+    "area_m2": 498.0,
+    "underside_m": null,
+    "multi_return_share": 0.22,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "ground_min_m": 1.46,
+    "ground_median_m": 2.28,
+    "ground_max_m": 2.66
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204421252788526,
+       59.74039659520861
+      ],
+      [
+       10.204350434939792,
+       59.7404062249479
+      ],
+      [
+       10.204315833364198,
+       59.740433483889305
+      ],
+      [
+       10.204280262922293,
+       59.74043380991818
+      ],
+      [
+       10.204280585858799,
+       59.740442787552695
+      ],
+      [
+       10.20419133681398,
+       59.74043462494824
+      ],
+      [
+       10.20428284642002,
+       59.740505630993894
+      ],
+      [
+       10.204300631679205,
+       59.740505467980185
+      ],
+      [
+       10.204299339909653,
+       59.74046955744267
+      ],
+      [
+       10.20431712514957,
+       59.7404693944268
+      ],
+      [
+       10.204316802202925,
+       59.740460416792466
+      ],
+      [
+       10.204441621823317,
+       59.74046825324829
+      ],
+      [
+       10.204441298843303,
+       59.740459275614356
+      ],
+      [
+       10.204494331549176,
+       59.74044980886815
+      ],
+      [
+       10.204528932995572,
+       59.740422549880186
+      ],
+      [
+       10.204564503422269,
+       59.74042222378403
+      ],
+      [
+       10.204564180409907,
+       59.74041324615043
+      ],
+      [
+       10.20459975082626,
+       59.740412920044776
+      ],
+      [
+       10.204616889981414,
+       59.74039480172144
+      ],
+      [
+       10.204652460377485,
+       59.74039447560156
+      ],
+      [
+       10.20466959949471,
+       59.74037635727144
+      ],
+      [
+       10.2047051698705,
+       59.74037603113736
+      ],
+      [
+       10.20470452377174,
+       59.74035807587094
+      ],
+      [
+       10.2048105886819,
+       59.740339142145885
+      ],
+      [
+       10.204827727685341,
+       59.74032102379532
+      ],
+      [
+       10.204863298000284,
+       59.740320697618635
+      ],
+      [
+       10.204880436965796,
+       59.74030257926127
+      ],
+      [
+       10.204916007260456,
+       59.740302253070375
+      ],
+      [
+       10.204950608211147,
+       59.74027499397232
+      ],
+      [
+       10.20502142560617,
+       59.740265363910765
+      ],
+      [
+       10.205056026432937,
+       59.74023810478519
+      ],
+      [
+       10.20509159665681,
+       59.74023777854697
+      ],
+      [
+       10.205091273505511,
+       59.740228800914835
+      ],
+      [
+       10.205144305660108,
+       59.740219333907696
+      ],
+      [
+       10.205161444421885,
+       59.740201215514034
+      ],
+      [
+       10.205197014605194,
+       59.74020088924739
+      ],
+      [
+       10.205196691426107,
+       59.740191911615575
+      ],
+      [
+       10.205232261599074,
+       59.740191585339424
+      ],
+      [
+       10.20524940029909,
+       59.740173466934415
+      ],
+      [
+       10.205284970451773,
+       59.740173140644075
+      ],
+      [
+       10.205302109113862,
+       59.740155022232216
+      ],
+      [
+       10.205337679246265,
+       59.740154695927686
+      ],
+      [
+       10.205337032814061,
+       59.74013674066483
+      ],
+      [
+       10.205407849803436,
+       59.74012711039607
+      ],
+      [
+       10.205406556866015,
+       59.740091199871074
+      ],
+      [
+       10.205442126929253,
+       59.74009087353846
+      ],
+      [
+       10.205459265464478,
+       59.74007275510632
+      ],
+      [
+       10.205530082282774,
+       59.74006312477215
+      ],
+      [
+       10.205564682486774,
+       59.74003586551373
+      ],
+      [
+       10.205635499196152,
+       59.74002623512304
+      ],
+      [
+       10.20567009927623,
+       59.73999897583712
+      ],
+      [
+       10.205705669238053,
+       59.73999864943347
+      ],
+      [
+       10.20572280758364,
+       59.73998053096728
+      ],
+      [
+       10.205758377525184,
+       59.73998020454942
+      ],
+      [
+       10.205758054198444,
+       59.73997122691914
+      ],
+      [
+       10.205793624129644,
+       59.73997090049176
+      ],
+      [
+       10.205810762413472,
+       59.73995278201423
+      ],
+      [
+       10.205846332324388,
+       59.739952455572656
+      ],
+      [
+       10.20588093215662,
+       59.73992519623171
+      ],
+      [
+       10.205916502037317,
+       59.739924869771215
+      ],
+      [
+       10.205916178668899,
+       59.73991589214138
+      ],
+      [
+       10.205951748539249,
+       59.73991556567139
+      ],
+      [
+       10.205968886709298,
+       59.73989744717344
+      ],
+      [
+       10.206004456559365,
+       59.73989712068925
+      ],
+      [
+       10.206003809776288,
+       59.73987916543008
+      ],
+      [
+       10.206092734350245,
+       59.739878349178035
+      ],
+      [
+       10.206147706242044,
+       59.73992274754343
+      ],
+      [
+       10.206165491179448,
+       59.73992258427828
+      ],
+      [
+       10.206164520874623,
+       59.73989565139123
+      ],
+      [
+       10.206128627603206,
+       59.73988700028957
+      ],
+      [
+       10.206109549005541,
+       59.739851253032626
+      ],
+      [
+       10.20609176410566,
+       59.73985141629009
+      ],
+      [
+       10.206091440691203,
+       59.73984243866072
+      ],
+      [
+       10.20605554749564,
+       59.7398337875388
+      ],
+      [
+       10.206054900686807,
+       59.739815832279795
+      ],
+      [
+       10.206019007529168,
+       59.739807181147754
+      ],
+      [
+       10.206020624504095,
+       59.73985206929583
+      ],
+      [
+       10.205985054702094,
+       59.73985239578424
+      ],
+      [
+       10.205985378088156,
+       59.73986137341394
+      ],
+      [
+       10.205949808275813,
+       59.73986169989285
+      ],
+      [
+       10.205932670113471,
+       59.739879818388374
+      ],
+      [
+       10.205861853800712,
+       59.73988944893822
+      ],
+      [
+       10.205844715576612,
+       59.73990756742242
+      ],
+      [
+       10.205809145713358,
+       59.7399078938634
+      ],
+      [
+       10.205792007451333,
+       59.739926012340796
+      ],
+      [
+       10.205756437567796,
+       59.73992633876758
+      ],
+      [
+       10.205739299267842,
+       59.73994445723814
+      ],
+      [
+       10.205703729364023,
+       59.739944783650714
+      ],
+      [
+       10.205686591026142,
+       59.73996290211448
+      ],
+      [
+       10.205651021102039,
+       59.73996322851285
+      ],
+      [
+       10.205616421042953,
+       59.73999048779382
+      ],
+      [
+       10.20551035769859,
+       59.74000942216548
+      ],
+      [
+       10.205511004220437,
+       59.740027377427545
+      ],
+      [
+       10.2054576492278,
+       59.74002786695051
+      ],
+      [
+       10.205440510714379,
+       59.7400459853825
+      ],
+      [
+       10.205404940698804,
+       59.740046311714536
+      ],
+      [
+       10.205387802147456,
+       59.740064430139725
+      ],
+      [
+       10.205352232111597,
+       59.74006475645755
+      ],
+      [
+       10.205352555330741,
+       59.74007373408904
+      ],
+      [
+       10.205334770307742,
+       59.74007389724441
+      ],
+      [
+       10.205317631704368,
+       59.74009201566051
+      ],
+      [
+       10.20528206163829,
+       59.74009234195943
+      ],
+      [
+       10.20526492299699,
+       59.740110460368754
+      ],
+      [
+       10.205175997779566,
+       59.74011127606251
+      ],
+      [
+       10.205175674607274,
+       59.740102298430486
+      ],
+      [
+       10.20514010452842,
+       59.74010262469102
+      ],
+      [
+       10.205141720344242,
+       59.74014751285155
+      ],
+      [
+       10.205123935280678,
+       59.7401476759785
+      ],
+      [
+       10.205106796525595,
+       59.740165794367385
+      ],
+      [
+       10.205071226378388,
+       59.74016612060949
+      ],
+      [
+       10.2050715495235,
+       59.740175098241764
+      ],
+      [
+       10.205035979365949,
+       59.74017542447435
+      ],
+      [
+       10.205018840549107,
+       59.74019354285189
+      ],
+      [
+       10.204948023304986,
+       59.74020317291167
+      ],
+      [
+       10.204913422425687,
+       59.7402304320091
+      ],
+      [
+       10.20487785220729,
+       59.740230758199054
+      ],
+      [
+       10.204878175301392,
+       59.74023973583188
+      ],
+      [
+       10.204825143037983,
+       59.74024920273196
+      ],
+      [
+       10.204808004069427,
+       59.74026732108225
+      ],
+      [
+       10.204737186607474,
+       59.740276951028974
+      ],
+      [
+       10.204720047577162,
+       59.74029506936792
+      ],
+      [
+       10.204684477287572,
+       59.74029539550575
+      ],
+      [
+       10.204667338219329,
+       59.74031351383791
+      ],
+      [
+       10.20463176790946,
+       59.740313839961544
+      ],
+      [
+       10.204614628803288,
+       59.74033195828687
+      ],
+      [
+       10.204543811147946,
+       59.74034158812989
+      ],
+      [
+       10.204526671980013,
+       59.74035970644387
+      ],
+      [
+       10.204491101619235,
+       59.74036003252958
+      ],
+      [
+       10.204473962413376,
+       59.740378150836754
+      ],
+      [
+       10.204438392032314,
+       59.740378476908255
+      ],
+      [
+       10.204421252788526,
+       59.74039659520861
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 6.17,
+    "top_p10_m": 5.56,
+    "top_p90_m": 7.27,
+    "laser_points": 3313,
+    "top_above_platform_m": 4.0,
+    "area_m2": 731.0,
+    "underside_m": null,
+    "multi_return_share": 0.19,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "ground_min_m": 1.7,
+    "ground_median_m": 1.94,
+    "ground_max_m": 2.89
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.204187151457054,
+       59.74031792177419
+      ],
+      [
+       10.204187473921666,
+       59.74032688702514
+      ],
+      [
+       10.204223342637599,
+       59.74033553888145
+      ],
+      [
+       10.204262731883343,
+       59.74030915037852
+      ],
+      [
+       10.204293514497396,
+       59.740307953941645
+      ],
+      [
+       10.204315441459222,
+       59.74029070607015
+      ],
+      [
+       10.20434622405429,
+       59.740289509621
+      ],
+      [
+       10.204368150976894,
+       59.74027226174079
+      ],
+      [
+       10.204398933552975,
+       59.74027106527932
+      ],
+      [
+       10.204420860436352,
+       59.740253817390396
+      ],
+      [
+       10.20445164299345,
+       59.74025262091664
+      ],
+      [
+       10.204473569837603,
+       59.740235373019004
+      ],
+      [
+       10.204504352375714,
+       59.74023417653293
+      ],
+      [
+       10.204526279180643,
+       59.74021692862657
+      ],
+      [
+       10.204557061699768,
+       59.74021573212821
+      ],
+      [
+       10.204578988465473,
+       59.74019848421313
+      ],
+      [
+       10.204609770965615,
+       59.74019728770251
+      ],
+      [
+       10.204631697692093,
+       59.7401800397787
+      ],
+      [
+       10.204662480173248,
+       59.74017884325575
+      ],
+      [
+       10.204683577067051,
+       59.7401619179302
+      ],
+      [
+       10.20476789841389,
+       59.74014195429922
+      ],
+      [
+       10.204790713461156,
+       59.74012442635116
+      ],
+      [
+       10.204820607446896,
+       59.74012350978945
+      ],
+      [
+       10.204843422454005,
+       59.7401059818323
+      ],
+      [
+       10.204873316421692,
+       59.74010506525865
+      ],
+      [
+       10.204895242952048,
+       59.74008781729125
+      ],
+      [
+       10.204961272288447,
+       59.740077316871535
+      ],
+      [
+       10.204983198755315,
+       59.7400600688896
+      ],
+      [
+       10.20501398111265,
+       59.74005887228468
+      ],
+      [
+       10.205089504700311,
+       59.74002289967728
+      ],
+      [
+       10.205154645414392,
+       59.740012679160984
+      ],
+      [
+       10.205177460171099,
+       59.73999515114635
+      ],
+      [
+       10.20522513901131,
+       59.73999407135903
+      ],
+      [
+       10.205224493089421,
+       59.73997612847899
+      ],
+      [
+       10.205171162705936,
+       59.73997661766035
+      ],
+      [
+       10.205149236390408,
+       59.739993865673405
+      ],
+      [
+       10.205083207278378,
+       59.74000436618701
+      ],
+      [
+       10.205061280899363,
+       59.74002161418552
+      ],
+      [
+       10.205030498578095,
+       59.74002281080141
+      ],
+      [
+       10.205008572159855,
+       59.74004005879121
+      ],
+      [
+       10.204977789819601,
+       59.74004125539481
+      ],
+      [
+       10.204956693150393,
+       59.74005818076719
+      ],
+      [
+       10.204872372127989,
+       59.74007814451858
+      ],
+      [
+       10.204849557154889,
+       59.74009567248071
+      ],
+      [
+       10.204819663194867,
+       59.74009658904894
+      ],
+      [
+       10.20479684818161,
+       59.74011411700199
+      ],
+      [
+       10.204731707159151,
+       59.74012433734168
+      ],
+      [
+       10.204639609353436,
+       59.74016917044268
+      ],
+      [
+       10.204608826880285,
+       59.740170366960236
+      ],
+      [
+       10.204533302442073,
+       59.740206339293216
+      ],
+      [
+       10.204468161158475,
+       59.740216559502926
+      ],
+      [
+       10.204428772183439,
+       59.74024294806694
+      ],
+      [
+       10.204397989634348,
+       59.74024414453532
+      ],
+      [
+       10.204376062745416,
+       59.74026139242048
+      ],
+      [
+       10.204345280177339,
+       59.74026258887655
+      ],
+      [
+       10.204323353249181,
+       59.74027983675298
+      ],
+      [
+       10.20429257066212,
+       59.74028103319675
+      ],
+      [
+       10.204270643694738,
+       59.74029828106447
+      ],
+      [
+       10.204187151457054,
+       59.74031792177419
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (68.5 m × 1.2 m)",
+    "top_median_m": 6.62,
+    "top_above_track_bed_m": 4.04,
+    "laser_points": 464,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2015-07-07. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.197384802241109,
+       59.74163737001197
+      ],
+      [
+       10.197385444004743,
+       59.74165531293895
+      ],
+      [
+       10.197527706782905,
+       59.74165401643861
+      ],
+      [
+       10.197534980186138,
+       59.7416452077815
+      ],
+      [
+       10.19763410108875,
+       59.7416440661399
+      ],
+      [
+       10.197643418882967,
+       59.741635032768286
+      ],
+      [
+       10.197776067132555,
+       59.74163379149262
+      ],
+      [
+       10.197783340465946,
+       59.74162498282196
+      ],
+      [
+       10.197829103612227,
+       59.741624327426614
+      ],
+      [
+       10.197828782833382,
+       59.741615362156566
+      ],
+      [
+       10.19765094844991,
+       59.741616983220624
+      ],
+      [
+       10.197641630662694,
+       59.74162601659277
+      ],
+      [
+       10.197384802241109,
+       59.74163737001197
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (24.4 m × 1.8 m)",
+    "top_median_m": 6.22,
+    "top_above_track_bed_m": 3.99,
+    "laser_points": 268,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2015-07-07. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.197828486146003,
+       59.7416063842788
+      ],
+      [
+       10.197811342250967,
+       59.741624489342605
+      ],
+      [
+       10.19800671307469,
+       59.741622714366386
+      ],
+      [
+       10.198016280244927,
+       59.74161367249991
+      ],
+      [
+       10.198273429596519,
+       59.74161129550028
+      ],
+      [
+       10.198281714065734,
+       59.74160234909507
+      ],
+      [
+       10.198379823537742,
+       59.741601344598784
+      ],
+      [
+       10.198378859873705,
+       59.74157442402585
+      ],
+      [
+       10.198183561192293,
+       59.74158518567653
+      ],
+      [
+       10.198174243557995,
+       59.741594219086
+      ],
+      [
+       10.198006023726798,
+       59.74159578509744
+      ],
+      [
+       10.197996706041529,
+       59.741604818494466
+      ],
+      [
+       10.197828486146003,
+       59.7416063842788
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (31.1 m × 2.1 m)",
+    "top_median_m": 6.27,
+    "top_above_track_bed_m": 4.1,
+    "laser_points": 306,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2015-07-07. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.197385123344295,
+       59.7416463476675
+      ],
+      [
+       10.197386086212118,
+       59.741673268249905
+      ],
+      [
+       10.197492527737204,
+       59.74167230441204
+      ],
+      [
+       10.197502095060775,
+       59.7416632625826
+      ],
+      [
+       10.197847853189014,
+       59.74165109824656
+      ],
+      [
+       10.197857170927303,
+       59.741642064859974
+      ],
+      [
+       10.198025391000304,
+       59.74164049903839
+      ],
+      [
+       10.19803470868762,
+       59.74163146563936
+      ],
+      [
+       10.198220714592262,
+       59.74162973739799
+      ],
+      [
+       10.198228999080108,
+       59.74162079099608
+      ],
+      [
+       10.198344894498005,
+       59.741619624329516
+      ],
+      [
+       10.198353178950102,
+       59.74161067791988
+      ],
+      [
+       10.198469074327331,
+       59.74160951114393
+      ],
+      [
+       10.198477358743679,
+       59.74160056472655
+      ],
+      [
+       10.198611039957466,
+       59.74159923559572
+      ],
+      [
+       10.19861733340382,
+       59.74159061395943
+      ],
+      [
+       10.198681862014018,
+       59.741589608938554
+      ],
+      [
+       10.198690146368477,
+       59.74158066250792
+      ],
+      [
+       10.198788255760963,
+       59.74157965770692
+      ],
+      [
+       10.19879454915796,
+       59.741571036062275
+      ],
+      [
+       10.198859077724043,
+       59.74157003095448
+      ],
+      [
+       10.19886736202623,
+       59.741561084512824
+      ],
+      [
+       10.19894768550029,
+       59.74156024187304
+      ],
+      [
+       10.19896482874651,
+       59.7415421366628
+      ],
+      [
+       10.198822566518372,
+       59.74154343471744
+      ],
+      [
+       10.19881324906853,
+       59.74155246817171
+      ],
+      [
+       10.198361098542483,
+       59.74157458601607
+      ],
+      [
+       10.198359185525446,
+       59.74159203097576
+      ],
+      [
+       10.1983261695202,
+       59.74159286574184
+      ],
+      [
+       10.198319875998278,
+       59.74160148736441
+      ],
+      [
+       10.198184203825866,
+       59.74160314098244
+      ],
+      [
+       10.198174886186804,
+       59.741612174391946
+      ],
+      [
+       10.197775449694516,
+       59.7416158483445
+      ],
+      [
+       10.19776716508633,
+       59.7416247947182
+      ],
+      [
+       10.197544875381094,
+       59.74163591118775
+      ],
+      [
+       10.197535557559961,
+       59.74164494455244
+      ],
+      [
+       10.197385123344295,
+       59.7416463476675
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (88.6 m × 3.3 m)",
+    "top_median_m": 6.26,
+    "top_above_track_bed_m": 4.47,
+    "laser_points": 1398,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2015-07-07. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  }
+ ]
+}

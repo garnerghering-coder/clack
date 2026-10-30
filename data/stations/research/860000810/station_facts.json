@@ -1,0 +1,599 @@
+{
+ "clack_id": "860000810",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: station building and platform 1 (track 1, 72 cm) on the Banegårdspladsen side; island perron 2 (tracks 2/3) and perron 3 (tracks 4/5), 55 cm",
+   "note": "No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (underpass) by the station building",
+   "note": "OSM layer -1; no signposted name.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "2",
+   "name": "Footbridge over the tracks (OSM layer 2), north-west of the station building, with lifts",
+   "note": "No signposted name found.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w115776675",
+   "between": [
+    "station building / platform 1",
+    "perron 2 and perron 3"
+   ],
+   "where": "by the station building, about 0.64 along the platforms from the north-west end",
+   "confirmed_by": "OSM only (DSB: stairs and elevator)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30",
+   "position": {
+    "lon": 11.7672559,
+    "lat": 55.2315733,
+    "how": "OSM w115776675 (point on the way)",
+    "_source": "OpenStreetMap w115776675 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w115776650",
+    "w115776788"
+   ],
+   "between": [
+    "tunnel",
+    "perron 2"
+   ],
+   "where": "at the tunnel; w115776788 has a ramp (ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w115776708",
+    "w115776793"
+   ],
+   "between": [
+    "tunnel",
+    "perron 3"
+   ],
+   "where": "at the tunnel; w115776708 has a ramp (ramp=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w115776707",
+    "w115776766",
+    "w1068884744",
+    "w1068884745",
+    "w1068884742"
+   ],
+   "between": [
+    "tunnel / station building",
+    "platform 1"
+   ],
+   "where": "by the station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w37902386",
+   "between": [
+    "platform 1 side",
+    "perron 2, perron 3 and the far side"
+   ],
+   "where": "north-west of the station building (about 0.2–0.4 along the platforms from the north-west end)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7667094,
+    "lat": 55.23242,
+    "how": "OSM w37902386 (point on the way)",
+    "_source": "OpenStreetMap w37902386 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10827094302",
+   "between": [
+    "footbridge",
+    "platform 1"
+   ],
+   "where": "north-west part of platform 1",
+   "wheelchair": "yes",
+   "confirmed_by": "OSM only (DSB confirms elevator access)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30",
+   "position": {
+    "lon": 11.7661424,
+    "lat": 55.2322566,
+    "how": "OSM n10827094302",
+    "_source": "OpenStreetMap n10827094302 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10827094298",
+   "between": [
+    "footbridge",
+    "perron 2 (tracks 2/3)"
+   ],
+   "where": "north-west part of perron 2",
+   "wheelchair": "yes",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7664364,
+    "lat": 55.232359,
+    "how": "OSM n10827094298",
+    "_source": "OpenStreetMap n10827094298 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1068884753",
+    "w1068884751"
+   ],
+   "between": [
+    "footbridge",
+    "platform 1 and perron 2"
+   ],
+   "where": "beside the footbridge lifts",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w37902386",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 151.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w37902386 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7667094,
+    "lat": 55.23242,
+    "how": "OSM w37902386 (point on the way)",
+    "_source": "OpenStreetMap w37902386 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w115776675",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 33.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w115776675 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7672559,
+    "lat": 55.2315733,
+    "how": "OSM w115776675 (point on the way)",
+    "_source": "OpenStreetMap w115776675 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w115776707",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w115776707 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7668263,
+    "lat": 55.2314833,
+    "how": "OSM w115776707 (point on the way)",
+    "_source": "OpenStreetMap w115776707 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w115776766",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w115776766 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7670134,
+    "lat": 55.2314893,
+    "how": "OSM w115776766 (point on the way)",
+    "_source": "OpenStreetMap w115776766 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w847534161",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w847534161 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7667182,
+    "lat": 55.2314743,
+    "how": "OSM w847534161 (point on the way)",
+    "_source": "OpenStreetMap w847534161 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1068884742",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1068884742 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7668261,
+    "lat": 55.2314313,
+    "how": "OSM w1068884742 (point on the way)",
+    "_source": "OpenStreetMap w1068884742 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1068884744",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1068884744 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7669202,
+    "lat": 55.2315349,
+    "how": "OSM w1068884744 (point on the way)",
+    "_source": "OpenStreetMap w1068884744 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1068884745",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1068884745 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7669747,
+    "lat": 55.2314763,
+    "how": "OSM w1068884745 (point on the way)",
+    "_source": "OpenStreetMap w1068884745 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1068884749",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1068884749 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.766555,
+    "lat": 55.2317786,
+    "how": "OSM w1068884749 (point on the way)",
+    "_source": "OpenStreetMap w1068884749 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1068884753",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1068884753 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7661862,
+    "lat": 55.2322328,
+    "how": "OSM w1068884753 (point on the way)",
+    "_source": "OpenStreetMap w1068884753 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1164158632",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1164158632 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7661424,
+    "lat": 55.2322566,
+    "how": "OSM w1164158632 (point on the way)",
+    "_source": "OpenStreetMap w1164158632 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10827094298",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10827094298 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7664364,
+    "lat": 55.232359,
+    "how": "OSM n10827094298",
+    "_source": "OpenStreetMap n10827094298 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10827094302",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10827094302 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 11.7661424,
+    "lat": 55.2322566,
+    "how": "OSM n10827094302",
+    "_source": "OpenStreetMap n10827094302 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Næstved Station",
+   "street": "Banegårdspladsen (address Banegårdspladsen 2)",
+   "level": "0",
+   "where": "station building on the town side of platform 1",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Næstved Station)",
+   "osm_id": "n9595163049",
+   "where": "in the station building (Banegårdspladsen 3)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-22:45; Sa,Su 06:15-22:45",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB gives the same hours; OSM tags it amenity=fast_food.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.767048,
+    "lat": 55.231141,
+    "osm_id": "n9595163049",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 10.3,
+    "how": "OSM node n9595163049",
+    "_source": "OpenStreetMap n9595163049 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "opening_hours": "Mo-Su 04:30-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "No position from DSB; not in OSM.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "photo_booth",
+   "name": "Pasfoto",
+   "osm_id": "n12812285177",
+   "where": "in the station building (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.76718,
+    "lat": 55.2312046,
+    "osm_id": "n12812285177",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n12812285177",
+    "_source": "OpenStreetMap n12812285177 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi (Banegårdspladsen)",
+   "osm_ids": [
+    "n3149254833",
+    "n444378421",
+    "w1301706270"
+   ],
+   "where": "on Banegårdspladsen in front of the station (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering + Handicapparkering",
+   "note": "About 407 spaces, 49 % occupancy; disabled parking listed without count.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 2 aflåste cykelskure",
+   "note": "Opened via the DSB app.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "DSB 7-Eleven Næstved",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:00-22:45; Sa-Su 06:15-22:45",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.7-eleven.dk",
+   "position": {
+    "lon": 11.767048,
+    "lat": 55.231141,
+    "osm_id": "n9595163049",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 10.3,
+    "how": "OSM node n9595163049",
+    "_source": "OpenStreetMap n9595163049 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9595163049 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bank",
+   "name": "Arbejdernes Landsbank",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 11.7666774,
+    "lat": 55.2308365,
+    "osm_id": "n12812285176",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 47.3,
+    "how": "OSM node n12812285176",
+    "_source": "OpenStreetMap n12812285176 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12812285176 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Lift to perron 3 (tracks 4/5): OSM maps none; DSB gives no detail.",
+  "Lift positions are OSM only.",
+  "Bus terminal: not described by DSB; not checked with Movia.",
+  "Signposted names of tunnel/footbridge: none found. No owner plan found.",
+  "OSM footbridge w1498175892 (layer 1) at the south-east end: purpose not settled (possibly a road/path bridge).",
+  "Floor heights: no source."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Næstved)",
+   "answer": "Two ways across: a tunnel by the station building (stairs, some with ramps, to all three platforms) and a footbridge north-west of it with lifts to platform 1 and perron 2 (OSM). DSB confirms stairs and elevator but not positions.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
+  }
+ ]
+}

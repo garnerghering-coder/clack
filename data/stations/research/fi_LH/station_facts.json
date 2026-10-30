@@ -1,0 +1,1263 @@
+{
+ "clack_id": "fi:LH",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street / platform level (station building, Mannerheiminkatu, platforms)",
+   "other_names": [],
+   "note": "Station building (1935, Thure Hellström) at Mannerheiminkatu 15 on the city (south) side; the travel centre (matkakeskus) was completed in early 2016. No signposted level names found.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_bus_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses (station tunnels along Vesijärvenkatu–Uudenmaankatu)",
+   "other_names": [],
+   "note": "Visit Lahti: tracks are reached through underpasses along Vesijärvenkatu–Uudenmaankatu; levels are linked by lifts or stairs. Wikipedia: the west-side underpass was renovated in 2006. OSM: several underpass ways on layer -1. Heights: no source measures them.",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "LH L1",
+   "track": "1",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1 (the train stops with the platform to its north)",
+   "_source": "laser (2022-07-01, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform LH L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "LH L4",
+   "track": "4",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 4 (the train stops with the platform to its south)",
+   "_source": "laser (2022-07-01, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform LH L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "LH L2",
+   "track": "2",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 2 (the train stops with the platform to its south)",
+   "_source": "laser (2022-07-01, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform LH L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "LH L3",
+   "track": "3",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 3 (the train stops with the platform to its north)",
+   "_source": "laser (2022-07-01, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform LH L3; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w34903227",
+    "w34903229",
+    "w46103619"
+   ],
+   "between": [
+    "city side (station building, Mannerheiminkatu)",
+    "both island platforms and the north side"
+   ],
+   "where": "along Vesijärvenkatu–Uudenmaankatu",
+   "confirmed_by": "owner text (Visit Lahti) for the underpasses; OSM for their course",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5820135489",
+    "n7394212281"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 2 (OSM platforms 2 and La0203)"
+   ],
+   "where": "two lifts from the underpasses up to this platform (OSM)",
+   "confirmed_by": "owner text for lifts in general (Visit Lahti: levels reached by lifts or stairs; lifts with sound beacons, room for a wheelchair to turn; VR: lift renovation 28 Sep–18 Oct 2026); positions OSM only",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5820135491",
+    "n7394241289"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 3/4"
+   ],
+   "where": "two lifts from the underpasses up to this platform (OSM)",
+   "confirmed_by": "owner text for lifts in general (Visit Lahti); positions OSM only",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n4034829098",
+    "n4034829109",
+    "n4552144334",
+    "n13278363780"
+   ],
+   "between": [
+    "underpass / street",
+    "street"
+   ],
+   "where": "OSM lifts not linked to a platform (street-to-underpass lifts, e.g. near the Marskinaukio entrances n4034829097/n4034829099)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w34903235",
+    "w34903236",
+    "w34903237",
+    "w790958835",
+    "w790958836",
+    "w790958837"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 2 (OSM 2 / La0203)"
+   ],
+   "where": "from the underpasses",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w34903232",
+    "w34903233",
+    "w34903234",
+    "w790958839",
+    "w790958840",
+    "w790958841"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 3/4"
+   ],
+   "where": "from the underpasses",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w51819438",
+    "w51819439"
+   ],
+   "between": [
+    "street",
+    "platform 4 / La0203"
+   ],
+   "where": "stairs reaching the platforms directly (OSM, not via the underpass)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w34903227",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3",
+    "platform 4",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 63.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903227 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.658476,
+    "lat": 60.9760999,
+    "how": "OSM w34903227 (point on the way)",
+    "_source": "OpenStreetMap w34903227 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w34903229",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3",
+    "platform 4",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 71.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903229 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6583355,
+    "lat": 60.976431,
+    "how": "OSM w34903229 (point on the way)",
+    "_source": "OpenStreetMap w34903229 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903232",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903232 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6578175,
+    "lat": 60.9764297,
+    "how": "OSM w34903232 (point on the way)",
+    "_source": "OpenStreetMap w34903232 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903233",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903233 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6582429,
+    "lat": 60.9764343,
+    "how": "OSM w34903233 (point on the way)",
+    "_source": "OpenStreetMap w34903233 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903234",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903234 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6582256,
+    "lat": 60.9764024,
+    "how": "OSM w34903234 (point on the way)",
+    "_source": "OpenStreetMap w34903234 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903235",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903235 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6582011,
+    "lat": 60.9762707,
+    "how": "OSM w34903235 (point on the way)",
+    "_source": "OpenStreetMap w34903235 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903236",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903236 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6577939,
+    "lat": 60.9762691,
+    "how": "OSM w34903236 (point on the way)",
+    "_source": "OpenStreetMap w34903236 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903237",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w34903237 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6581921,
+    "lat": 60.9762401,
+    "how": "OSM w34903237 (point on the way)",
+    "_source": "OpenStreetMap w34903237 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w46103619",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3",
+    "platform 4",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 64.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w46103619 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6591354,
+    "lat": 60.9763721,
+    "how": "OSM w46103619 (point on the way)",
+    "_source": "OpenStreetMap w46103619 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w51819438",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w51819438 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.664173,
+    "lat": 60.9761779,
+    "how": "OSM w51819438 (point on the way)",
+    "_source": "OpenStreetMap w51819438 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w51819439",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w51819439 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.664184,
+    "lat": 60.9760265,
+    "how": "OSM w51819439 (point on the way)",
+    "_source": "OpenStreetMap w51819439 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958835",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958835 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592211,
+    "lat": 60.9762461,
+    "how": "OSM w790958835 (point on the way)",
+    "_source": "OpenStreetMap w790958835 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958836",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958836 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592014,
+    "lat": 60.9762049,
+    "how": "OSM w790958836 (point on the way)",
+    "_source": "OpenStreetMap w790958836 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958837",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958837 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592538,
+    "lat": 60.9762209,
+    "how": "OSM w790958837 (point on the way)",
+    "_source": "OpenStreetMap w790958837 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958839",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958839 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592388,
+    "lat": 60.9764203,
+    "how": "OSM w790958839 (point on the way)",
+    "_source": "OpenStreetMap w790958839 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958840",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958840 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592216,
+    "lat": 60.9763702,
+    "how": "OSM w790958840 (point on the way)",
+    "_source": "OpenStreetMap w790958840 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958841",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w790958841 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.65965,
+    "lat": 60.9763809,
+    "how": "OSM w790958841 (point on the way)",
+    "_source": "OpenStreetMap w790958841 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4034829098",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4034829098 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.658476,
+    "lat": 60.9776287,
+    "how": "OSM n4034829098",
+    "_source": "OpenStreetMap n4034829098 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4034829109",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4034829109 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6593067,
+    "lat": 60.9775707,
+    "how": "OSM n4034829109",
+    "_source": "OpenStreetMap n4034829109 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4552144334",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4552144334 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6594008,
+    "lat": 60.9770967,
+    "how": "OSM n4552144334",
+    "_source": "OpenStreetMap n4552144334 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5820135489",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5820135489 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6581903,
+    "lat": 60.976256,
+    "how": "OSM n5820135489",
+    "_source": "OpenStreetMap n5820135489 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5820135491",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5820135491 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6582189,
+    "lat": 60.976419,
+    "how": "OSM n5820135491",
+    "_source": "OpenStreetMap n5820135491 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7394212281",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform La0203"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7394212281 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592034,
+    "lat": 60.9762226,
+    "how": "OSM n7394212281",
+    "_source": "OpenStreetMap n7394212281 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7394241289",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7394241289 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6592427,
+    "lat": 60.9763917,
+    "how": "OSM n7394241289",
+    "_source": "OpenStreetMap n7394241289 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13278363780",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13278363780 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.6584522,
+    "lat": 60.9767301,
+    "how": "OSM n13278363780",
+    "_source": "OpenStreetMap n13278363780 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building main entrance",
+   "street": "Mannerheiminkatu",
+   "level": "0",
+   "where": "city side; OSM entrances n4034829110, n7410885048 nearest Mannerheiminkatu, n7608913752 tagged main",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "name": "Underpass entrances, Marskinaukio",
+   "street": "Marskinaukio",
+   "level": "0",
+   "where": "OSM n4034829097, n4034829099 (by lift n4034829098/n4034829109)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "name": "Underpass entrances, Uudenmaankatu (north side)",
+   "street": "Uudenmaankatu",
+   "level": "0",
+   "where": "OSM n1035390980, n5250877708, n10138284581",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1035390980",
+   "street": "Uudenmaankatu",
+   "street_how": "nearest named street, 23.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1035390980 (already in OSM)",
+   "position": {
+    "lon": 25.6583935,
+    "lat": 60.9767326,
+    "how": "OSM n1035390980",
+    "_source": "OpenStreetMap n1035390980 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4034829097",
+   "street": "Marskinaukio",
+   "street_how": "nearest named street, 2.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4034829097 (already in OSM)",
+   "position": {
+    "lon": 25.65839,
+    "lat": 60.9776354,
+    "how": "OSM n4034829097",
+    "_source": "OpenStreetMap n4034829097 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4034829099",
+   "street": "Marskinaukio",
+   "street_how": "nearest named street, 10.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4034829099 (already in OSM)",
+   "position": {
+    "lon": 25.6585553,
+    "lat": 60.9776225,
+    "how": "OSM n4034829099",
+    "_source": "OpenStreetMap n4034829099 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4034829110",
+   "street": "Mannerheiminkatu",
+   "street_how": "nearest named street, 9.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4034829110 (already in OSM)",
+   "position": {
+    "lon": 25.6592219,
+    "lat": 60.9775707,
+    "how": "OSM n4034829110",
+    "_source": "OpenStreetMap n4034829110 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5250877708",
+   "street": "Uudenmaankatu",
+   "street_how": "nearest named street, 17.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5250877708 (already in OSM)",
+   "position": {
+    "lon": 25.6593509,
+    "lat": 60.9770898,
+    "how": "OSM n5250877708",
+    "_source": "OpenStreetMap n5250877708 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7410885048",
+   "street": "Mannerheiminkatu",
+   "street_how": "nearest named street, 7.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7410885048 (already in OSM)",
+   "position": {
+    "lon": 25.6593438,
+    "lat": 60.9775545,
+    "how": "OSM n7410885048",
+    "_source": "OpenStreetMap n7410885048 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7608913752",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7608913752 (already in OSM)",
+   "position": {
+    "lon": 25.6576602,
+    "lat": 60.9769667,
+    "how": "OSM n7608913752",
+    "_source": "OpenStreetMap n7608913752 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7608913753",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7608913753 (already in OSM)",
+   "position": {
+    "lon": 25.657629,
+    "lat": 60.9767621,
+    "how": "OSM n7608913753",
+    "_source": "OpenStreetMap n7608913753 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10138284581",
+   "street": "Uudenmaankatu",
+   "street_how": "nearest named street, 29.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10138284581 (already in OSM)",
+   "position": {
+    "lon": 25.6582961,
+    "lat": 60.9768025,
+    "how": "OSM n10138284581",
+    "_source": "OpenStreetMap n10138284581 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station hall / waiting room",
+   "where": "station building",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:00-23:15",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Visit Lahti gives the station hall as daily 05:30-23:15.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Lahti Asema",
+   "osm_id": "n9828658374",
+   "where": "in the station hall (VR)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa,Su 08:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM differs (Sa 07:00-21:00). Services: HSL travel cards, baked goods, Wolt pickup.",
+   "_source": "https://www.r-kioski.fi/kioskit/lahti-asema-4/, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.6573357,
+    "lat": 60.9768777,
+    "osm_id": "n9828658374",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 45.4,
+    "how": "OSM node n9828658374",
+    "_source": "OpenStreetMap n9828658374 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "locker",
+   "name": "KeyBoy digital key locker",
+   "where": "in the station hall, next to the R-kioski; reserve in the KeyBoy app",
+   "level_per_plan": "0",
+   "note": "VR: no ordinary luggage lockers.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Otto",
+   "osm_id": "n9828658382",
+   "where": "in the main entrance vestibule",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.657627,
+    "lat": 60.9769543,
+    "osm_id": "n9828658382",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 53.9,
+    "how": "OSM node n9828658382",
+    "_source": "OpenStreetMap n9828658382 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "WC + Inva-WC",
+   "osm_id": "n9828658376",
+   "fee": "yes (per OSM; VR gives no fee)",
+   "where": "in the station building",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.6581158,
+    "lat": 60.9768101,
+    "osm_id": "n9828658376",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 38.0,
+    "how": "OSM node n9828658376",
+    "_source": "OpenStreetMap n9828658376 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Ravintola Asema",
+   "osm_id": "n1035390835",
+   "where": "in the station building, east side (Wikipedia: the restaurant remains on the east side)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 06:00-22:00; Fr 06:00-23:00; Sa 07:00-23:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 25.6578236,
+    "lat": 60.9769211,
+    "osm_id": "n1035390835",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 50.2,
+    "how": "OSM node n1035390835",
+    "_source": "OpenStreetMap n1035390835 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Express",
+   "osm_id": "n9828658375",
+   "where": "in the station building (OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 08:30-17:00; Sa 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.6578433,
+    "lat": 60.9768162,
+    "osm_id": "n9828658375",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 38.6,
+    "how": "OSM node n9828658375",
+    "_source": "OpenStreetMap n9828658375 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Asemapäällikkö (in the stationmaster's house)",
+   "osm_id": "w51819441",
+   "where": "next to the station, in the 1912 stationmaster's house (not in the station building)",
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa 09:00-16:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Wikimedia Commons, File:Asemapäällikön talo ja BW Tower Lahdessa.jpg (2020: 'Asemapäällikön talo, jossa toimii kahvila'), read 2026-10-30",
+   "position": {
+    "lon": 25.6595117,
+    "lat": 60.9768574,
+    "osm_id": "w51819441",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 40.7,
+    "how": "representative point of the OSM area w51819441",
+    "_source": "OpenStreetMap w51819441 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR ticket machines (Lippuautomaatti)",
+   "osm_ids": [
+    "n1035390881",
+    "n9828658385",
+    "n9828658386"
+   ],
+   "where": "in the station building (OSM); the area map marks ticket vending machines",
+   "note": "VR: no VR service point.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Avis, Europcar, Hertz, SIXT, Budget",
+   "osm_ids": [
+    "n9828658377",
+    "n9828658378",
+    "n9828658379",
+    "n9828658380",
+    "n9828658381"
+   ],
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "assistance_point",
+   "name": "Assistance point (VR)",
+   "where": "in front of the station building, city side, near taxis and drop-off",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stand",
+   "osm_id": "n7368313332",
+   "where": "in front of the travel centre",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.657593,
+    "lat": 60.977155,
+    "osm_id": "n7368313332",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 76.3,
+    "how": "OSM node n7368313332",
+    "_source": "OpenStreetMap n7368313332 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_station",
+   "name": "Lahti Matkakeskus, long-distance bus terminal (Matkahuolto)",
+   "osm_id": "n4393602346",
+   "where": "Askonkatu 2; long-haul buses leave from platforms in front of the train station; local bus stops (A–E on the area map) along Mannerheiminkatu and Vesijärvenkatu",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
+   "position": {
+    "lon": 25.6580901,
+    "lat": 60.9770839,
+    "osm_id": "n4393602346",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 68.5,
+    "how": "OSM node n4393602346",
+    "_source": "OpenStreetMap n4393602346 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "P-Matka parking garage",
+   "where": "right next to the station, entry from Askonkatu (Lahden Pysäköinti)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Covered bike park in the station tunnel",
+   "where": "station tunnel on the eastern edge of Vesijärvenkatu; ~230 bikes, CCTV, repair point; plus ~100 uncovered in the station courtyard and 36 on the south side along Uudenmaankatu",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n9828658376",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9828658376 (read 2026-10-30)",
+   "position": {
+    "lon": 25.6581158,
+    "lat": 60.9768101,
+    "osm_id": "n9828658376",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 38.0,
+    "how": "OSM node n9828658376",
+    "_source": "OpenStreetMap n9828658376 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_rental",
+   "name": "Avis",
+   "brand": "Avis",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.657993,
+    "lat": 60.97685,
+    "osm_id": "n9828658377",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 42.4,
+    "how": "OSM node n9828658377",
+    "_source": "OpenStreetMap n9828658377 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9828658377 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Europcar",
+   "brand": "Europcar",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.6580638,
+    "lat": 60.976861,
+    "osm_id": "n9828658378",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 43.6,
+    "how": "OSM node n9828658378",
+    "_source": "OpenStreetMap n9828658378 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9828658378 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Hertz",
+   "brand": "Hertz",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.6580622,
+    "lat": 60.9768844,
+    "osm_id": "n9828658379",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.3,
+    "how": "OSM node n9828658379",
+    "_source": "OpenStreetMap n9828658379 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9828658379 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "SIXT",
+   "brand": "SIXT",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.6579953,
+    "lat": 60.976881,
+    "osm_id": "n9828658380",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 45.8,
+    "how": "OSM node n9828658380",
+    "_source": "OpenStreetMap n9828658380 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9828658380 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Budget",
+   "brand": "Budget",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.6580288,
+    "lat": 60.9769044,
+    "osm_id": "n9828658381",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 48.5,
+    "how": "OSM node n9828658381",
+    "_source": "OpenStreetMap n9828658381 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9828658381 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Lähialuekartta Lahti (station area map, FI/SV/EN, 07/2019)",
+   "publisher": "Väylävirasto (named for maintenance); published on lahti.fi 13 Aug 2020",
+   "url": "https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "open": [
+  "Platform grouping: OSM tags platforms '2', 'La0203', '3', '4'; lifts reach '2'+'La0203' together and '3'+'4' together. Digitraffic gives tracks 1 and 4 at 451 m and 2 and 3 at 270 m, which suggests islands 1/2 and 3/4 (La0203 = track 1 face?), but no source states which tracks share a platform.",
+  "Which underpass is which (west tunnel renovated 2006 vs. the 2016 travel-centre tunnel) and their signposted names: not found.",
+  "Lift renovation (VR: 28 Sep–18 Oct 2026) — VR did not say which lift; presumably finished by 2026-10-30, not confirmed.",
+  "Station hall opening: VR 05:00, Visit Lahti 05:30 (both close 23:15). VR used.",
+  "Ravintola Asema and Cafe Express hours are OSM only; no own websites found.",
+  "Toilet fee amount not stated by VR or the area map; fee=yes is OSM only.",
+  "Visit Lahti mentions a station office Mo-Fr 06:30-18:00, but VR lists no VR service point: left out as probably stale."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
+   "answer": "Platform tracks 1–4 (Digitraffic) on two platforms reached from underpasses along Vesijärvenkatu–Uudenmaankatu; levels linked by lifts or stairs (Visit Lahti). OSM has two lifts and several stairs to each platform. Station hall 05:00-23:15 (VR). In the building: R-kioski, Ravintola Asema, Cafe Express, toilets, Otto, KeyBoy lockers, car rental desks.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-LH/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ]
+}

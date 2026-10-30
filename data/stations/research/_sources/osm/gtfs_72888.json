@@ -1,0 +1,246 @@
+{
+ "clack_id": "gtfs:72888",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w572775921",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w572775922",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w572775929",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w572775930",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w572775931",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w36001692",
+   "name": null,
+   "level": null,
+   "layer": "2",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 113.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.269672,
+    55.6493678
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n5681624491",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 51,
+   "lonlat": [
+    12.2689196,
+    55.6482292
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 360.5
+  },
+  {
+   "osm_id": "n9039094850",
+   "category": "shop=greengrocer",
+   "name": "Banegårdens Frugt & Grønt",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-17:00",
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    12.269504,
+    55.648278
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 397.1
+  },
+  {
+   "osm_id": "n9562621717",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    12.26947,
+    55.649054
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 377.9
+  },
+  {
+   "osm_id": "n9644122361",
+   "category": "pharmacy",
+   "name": "Høje Taastrup Apotek",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-17:00; PH off",
+   "wheelchair": null,
+   "distance_m": 42,
+   "lonlat": [
+    12.2695313,
+    55.6482286
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 399.0,
+   "website": "https://htapotek.dk"
+  },
+  {
+   "osm_id": "w203821498",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 55,
+   "lonlat": [
+    12.2684394,
+    55.6478593
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 293.3
+  },
+  {
+   "osm_id": "w204841698",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 52,
+   "lonlat": [
+    12.2703605,
+    55.6482914
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 325.6
+  },
+  {
+   "osm_id": "w846252137",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 26,
+   "lonlat": [
+    12.2683921,
+    55.6487035
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 284.6
+  },
+  {
+   "osm_id": "w846252138",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 42,
+   "lonlat": [
+    12.2702704,
+    55.6489108
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 309.3
+  },
+  {
+   "osm_id": "w846252139",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 37,
+   "lonlat": [
+    12.2703367,
+    55.648724
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 312.1
+  },
+  {
+   "osm_id": "w846252140",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 14,
+   "lonlat": [
+    12.2684662,
+    55.6485097
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 286.7
+  },
+  {
+   "osm_id": "w1123142817",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 47,
+   "lonlat": [
+    12.2690354,
+    55.6479284
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 360.1
+  },
+  {
+   "osm_id": "w1123142818",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 17,
+   "lonlat": [
+    12.2691849,
+    55.6484084
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 373.7
+  }
+ ]
+}

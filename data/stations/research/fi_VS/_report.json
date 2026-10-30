@@ -1,0 +1,98 @@
+{
+ "clack_id": "fi:VS",
+ "slug": "vaasa",
+ "flags": [
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w655237791 (cycleway, footway, primary).",
+  "Laser-traced roof (278 m², top 4.6 m above the platform, 5.3 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=21.618540,63.094625,21.628376,63.099774",
+ "profile": {
+  "brief": "the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)",
+  "vdatum": "N2000",
+  "crs": "ETRS-TM35FIN (EPSG:3067)",
+  "laser_line": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3411E4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3411E4 2021-06-07 (20210108_Swissphoto_Vaasa_kesa)",
+  "scan_block": "clack_fi_mml05_P3411E4",
+  "box_note": ": the platforms' extent plus a margin",
+  "dtm_what": "Ground, 1 m, float32, EPSG:3067, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3411E4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3411E4 2021-06-07 (20210108_Swissphoto_Vaasa_kesa)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Digitraffic",
+  "register_owner": "Väylävirasto (Finnish Transport Infrastructure Agency)",
+  "register_file": "vaasa_platform_vayla.geojson",
+  "register_what": "Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels",
+  "register_licence": "Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0",
+  "register_text": "Register: Digitraffic infra-api `laiturit` (read 2026-10-30, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail (Väylävirasto Network Statement 2021 appendix 3B via Wikipedia \"Platform height\", read 2026-10-30).",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1,3,4,5)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3411E4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3411E4 2021-06-07 (20210108_Swissphoto_Vaasa_kesa). https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/laser-scanning-data-05-p (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read 2026-10-30, CC BY 4.0."
+ },
+ "ground": {
+  "min_m": 3.57,
+  "median_m": 7.35,
+  "max_m": 13.31,
+  "nan_cells": 100106,
+  "size_m": [
+   403,
+   390
+  ],
+  "box_sweref": [
+   228604,
+   7007583,
+   229007,
+   7007973
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "clack_fi_mml05_P3411E4.laz"
+  ],
+  "scan_date": "2021-06-07",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 93817,
+  "density_in_box": 0.6,
+  "classes": {
+   "1": 15,
+   "2": 58195,
+   "3": 184,
+   "4": 3138,
+   "5": 32285
+  },
+  "train_points_class64": 28
+ },
+ "platforms": [
+  {
+   "bis_object": "VS L1",
+   "track": "1",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 258.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 4.29,
+   "track_bed_points": 88,
+   "platform_surface_m": 4.99,
+   "platform_points": 633,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.7,
+   "laser_estimate_above_rail_m": 0.53
+  }
+ ],
+ "platform_surface_m": 4.99,
+ "track_bed_m": 4.29,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 5,
+  "footbridge": 0,
+  "canopy_osm": 2,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 23,
+ "photos_station_related": 5
+}

@@ -1,0 +1,202 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform level: terminus with 3 platforms and 5 tracks — perron 1 (tracks 1/13), perron 2 (tracks 2/3), perron 3 (tracks 3/4); the 1891 station building (forhal) at the buffer end",
+   "note": "Register heights 50–72 cm. Hornbæk Line (Lokaltog) trains use a separate halt on the street next to the station building. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Walkways to the ferry terminal (Øresundslinjen / ForSea, terminal building 1991)",
+   "note": "DSB: elevator 'til forhal og færgeterminal'. OSM has two long footbridges (w1222778550, w1222778552, layer 1). No signposted name found.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "platform level",
+    "forhal and færgeterminal"
+   ],
+   "where": "position not given",
+   "confirmed_by": "owner text (DSB: 'Elevator: Til forhal og færgeterminal'); not in OSM",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "not stated",
+    "not stated"
+   ],
+   "where": "DSB lists 'Rulletrapper' without detail; not in OSM",
+   "confirmed_by": "owner text (DSB)",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1165076598",
+    "w1553927994"
+   ],
+   "between": [
+    "platforms",
+    "station building / ferry side"
+   ],
+   "where": "near the buffer end of perron 2/3",
+   "confirmed_by": "OSM only (DSB lists stairs)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w1222778550",
+    "w1222778552"
+   ],
+   "between": [
+    "station / ferry terminal",
+    "ferry berths"
+   ],
+   "where": "from the buffer end towards the ferry terminal (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w1222778551",
+    "w1223061250",
+    "w1223061255"
+   ],
+   "between": [
+    "not stated",
+    "not stated"
+   ],
+   "where": "near the buffer end (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Helsingør Station (forhal)",
+   "street": "Stationspladsen (address Stationspladsen 2)",
+   "level": "0",
+   "where": "1891 building at the buffer end; forecourt with taxi stand and pedestrian access to Sundbusserne",
+   "_source": "https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30"
+  },
+  {
+   "name": "Færgeterminal (Øresundslinjen)",
+   "street": null,
+   "level": "0",
+   "where": "direct access from the station to the ferry terminal",
+   "_source": "https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n2270460296",
+   "where": "inside the station building (combined ticket office and shop per Wikipedia)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-24:00; Sa 07:00-24:00; Su 07:00-22:30",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list as read.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Restaurant Strejf",
+   "osm_id": "n4261836180",
+   "where": "in the old station building, sea (Øresund) side — the former royal waiting room; Stationspladsen 3",
+   "opening_hours": "Tu-Sa 11:30-15:00,17:30-21:30; Su,Mo off",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Open on request for events on Sundays/Mondays.",
+   "_source": "https://www.restaurant-strejf.dk/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "hours_raw": "Open in the daytime; forhal locked in the evening and at night (no exact hours)",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n12037149186",
+   "fee": "5 kr, credit card (body text also mentions SMS payment)",
+   "hours_raw": "Not open in the evening and at night (no exact hours)",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM says 24/7; DSB used.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "note": "DSB lists them without prices or position.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "category": "ferry_terminal",
+   "name": "Øresundslinjen (ForSea) færgeterminal",
+   "osm_id": "n10837041430",
+   "where": "next to the station building; direct access from the station",
+   "_source": "https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Helsingør busterminal",
+   "where": "south-west side of the station, six stops",
+   "_source": "https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "on the forecourt (Stationspladsen)",
+   "_source": "https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "note": "About 140 spaces, 100 % occupancy.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Helsingør)",
+   "answer": "Terminus with 3 platforms/5 tracks and the station building at the buffer end, so the platforms are reached at grade. DSB lists an elevator to the forhal and ferry terminal plus stairs and escalators (positions not given); OSM has no lifts or escalators here.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Position of the elevator and escalators (DSB lists them; OSM has none).",
+  "Hornbæk Line (Lokaltog) halt: Wikipedia says it is on the street next to the station building; position and name not in OSM extract or owner text.",
+  "Waiting room and toilet hours: DSB gives only 'closed/locked evenings and nights'.",
+  "365discount (OSM n2270460295, Mo-Su 07:00-22:00), HaiYi and Sweet Ship are 10–20 m from the platforms in OSM, probably in the ferry terminal/harbour buildings; no source says they are in the station, so left out.",
+  "No owner plan found; level names not signposted in any source."
+ ]
+}

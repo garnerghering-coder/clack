@@ -1,0 +1,662 @@
+{
+ "clack_id": "860000083",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w37134188",
+   "ref": "1",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w53151537",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 4.5,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4815487,
+    55.4908649
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w53151538",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 39.0,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4815989,
+    55.4908942
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w53151539",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 5.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4818251,
+    55.4907822
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w106001604",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 11.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4811875,
+    55.4904025
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w106041802",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 11.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4809895,
+    55.4905125
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w117916289",
+   "name": "Smutvejen",
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 65.8,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4811633,
+    55.4903883
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w117916290",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 9.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.480777,
+    55.490597
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w178756731",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4809744,
+    55.4905035
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w178756732",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 0.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4811726,
+    55.4903934
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w863060532",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 5.9,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4819214,
+    55.4910863
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w863060533",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 7.6,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4819466,
+    55.4910026
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w863060534",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4820972,
+    55.4909273
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w863060535",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4820539,
+    55.4909489
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w863060536",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.0,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4819466,
+    55.4910026
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1007304529",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 0.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4811088,
+    55.4908464
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1327227762",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.4811633,
+    55.4903883
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1327227784",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.4809639,
+    55.4904957
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n7956096729",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 10.6,
+   "lonlat": [
+    9.4811167,
+    55.4908422
+   ]
+  },
+  {
+   "osm_id": "n11136343942",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 31.2,
+   "lonlat": [
+    9.4813324,
+    55.4907029
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n417279210",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.4807005,
+    55.4906432
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.8
+  },
+  {
+   "osm_id": "n963244298",
+   "category": "shop=convenience",
+   "name": "7-Eleven",
+   "level": "0",
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+   "wheelchair": "yes",
+   "distance_m": 18,
+   "lonlat": [
+    9.4810585,
+    55.490665
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 9.4,
+   "brand": "7-Eleven",
+   "cuisine": "pastry",
+   "operator": "7-Eleven"
+  },
+  {
+   "osm_id": "n2507163900",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 29,
+   "lonlat": [
+    9.4807397,
+    55.4908605
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 36.0
+  },
+  {
+   "osm_id": "n2507163901",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 34,
+   "lonlat": [
+    9.4806199,
+    55.4908905
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 42.6
+  },
+  {
+   "osm_id": "n2507163902",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    9.4804983,
+    55.4909174
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 49.5
+  },
+  {
+   "osm_id": "n2997124336",
+   "category": "toilets",
+   "name": "DSB",
+   "level": "0",
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "wheelchair": "yes",
+   "distance_m": 45,
+   "lonlat": [
+    9.4814228,
+    55.4908041
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.8,
+   "operator": "DSB",
+   "indoor": "no"
+  },
+  {
+   "osm_id": "n7198236278",
+   "category": "restaurant",
+   "name": "Fratelli Kolding",
+   "level": null,
+   "fee": null,
+   "opening_hours": "17:00-22:00",
+   "wheelchair": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.480583,
+    55.490445
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.7,
+   "cuisine": "italian",
+   "website": "https://www.ristorantefratelli.dk/"
+  },
+  {
+   "osm_id": "n9624208704",
+   "category": "cafe",
+   "name": "Freddy's Cafe",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:30-16:00; Sa 09:00-15:00; Su off",
+   "wheelchair": "yes",
+   "distance_m": 84,
+   "lonlat": [
+    9.4816454,
+    55.4911836
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.2,
+   "cuisine": "coffee_shop",
+   "website": "https://freddyscafe.dk/"
+  },
+  {
+   "osm_id": "n10825526371",
+   "category": "bar",
+   "name": "Pitstop til Fremtiden",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 60,
+   "lonlat": [
+    9.4799744,
+    55.4903425
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 27.5,
+   "website": "http://pitstop6k.dk/"
+  },
+  {
+   "osm_id": "n13060118395",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    9.480171,
+    55.4905355
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 34.3
+  },
+  {
+   "osm_id": "w37134564",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 48,
+   "lonlat": [
+    9.4808912,
+    55.4911509
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 38.3
+  },
+  {
+   "osm_id": "w47198255",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 17,
+   "lonlat": [
+    9.4804742,
+    55.4906986
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 27.8
+  },
+  {
+   "osm_id": "w59484137",
+   "category": "parking",
+   "name": "Jernbanegade",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 94,
+   "lonlat": [
+    9.4791628,
+    55.4898081
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 6.2
+  },
+  {
+   "osm_id": "w105967752",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": "\"Lås op i DSB-appen\"",
+   "distance_m": 100,
+   "lonlat": [
+    9.4823858,
+    55.4913406
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w191147369",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.4805595,
+    55.4905986
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.7
+  },
+  {
+   "osm_id": "w546134565",
+   "category": "parking",
+   "name": "Det Gamle Posthus",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 109,
+   "lonlat": [
+    9.4822461,
+    55.4915346
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.3
+  },
+  {
+   "osm_id": "w1020019218",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 55,
+   "lonlat": [
+    9.4814012,
+    55.4910466
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.7
+  },
+  {
+   "osm_id": "w1563530270",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.4805027,
+    55.4907467
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 33.0
+  },
+  {
+   "osm_id": "w1563530271",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.4805378,
+    55.4907659
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 33.0
+  },
+  {
+   "osm_id": "w1563530272",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 51,
+   "lonlat": [
+    9.4809896,
+    55.4910722
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 41.5
+  }
+ ]
+}

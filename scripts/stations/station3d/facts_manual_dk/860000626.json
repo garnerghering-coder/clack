@@ -1,0 +1,962 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Banegårdshallen (the station hall, street level); DSB also calls it \"Ventesal/forhal\" / \"Forhal\"",
+   "other_names": [
+    "Forhal",
+    "Ventesal/forhal",
+    "banegårdshallen"
+   ],
+   "note": "Street level: hall with ticket office, shops, toilets; entrances from Banegårdspladsen, Bernstorffsgade and Reventlowsgade. Tietgensbroen (the Tietgensgade road bridge crossing the platforms further south) is also at street level. During 2026–28 DSB splits the hall into \"en tydelig rejsehal og en butikshal\".",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Platforms (perron 1–6, spor 1–12) in the cutting below the hall; perron 7 (spor 26) further south",
+   "note": "No signposted name for the platform level found. Track 26 (perron 7): Wikipedia says it is about 200 m south of the main building and 'reachable only by walking along the platform for track 4 and 5'. S-tog use spor 9–12 (Wikipedia).",
+   "_source": "Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30; Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": "Pedestrian tunnel under the tracks to the Metro (København H, M3/M4)",
+   "note": "Wikipedia: 'A pedestrian tunnel connects the train station with the metro station (M3 and M4 lines)… The underground metro station can be accessed 24/7 directly from the platforms by an underpass under the tracks.' No signposted name found. Metro platforms out of scope.",
+   "_source": "Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-0.5",
+   "name": "Intermediate landing of the stairs at the south (Tietgensgade) end of perron 5 and 6 (OSM level only)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n10832230263",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "hall end (north end) of perron 1 (spor 1/2), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832230264",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "hall end (north end) of perron 2 (spor 3/4), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general and names the lift between spor 3/4 and Banegårdshallen (DSB news 2006–07)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; DSB news \"Elevator på Kh lukker\" (27 Oct 2006), https://www.dsb.dk/om-dsb/presse/nyheder/elevator-pa-kh-lukker/, read 2026-10-30; DSB news \"Renoveringen og ombygningen af Københavns Hovedbanegård forløber fortsat efter planen\" (24 Jul 2007), https://www.dsb.dk/om-dsb/presse/nyheder/renoveringen-og-ombygningen-af-kobenhavns-hovedbanegard-forlober-fortsat-efter-planen/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832230265",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 3 (spor 5/6)"
+   ],
+   "where": "hall end (north end) of perron 3 (spor 5/6), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general (DSB 2007 news: perron 3 lift to be finished March 2008)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; DSB news \"Elevator på Kh lukker\" (27 Oct 2006), https://www.dsb.dk/om-dsb/presse/nyheder/elevator-pa-kh-lukker/, read 2026-10-30; DSB news \"Renoveringen og ombygningen af Københavns Hovedbanegård forløber fortsat efter planen\" (24 Jul 2007), https://www.dsb.dk/om-dsb/presse/nyheder/renoveringen-og-ombygningen-af-kobenhavns-hovedbanegard-forlober-fortsat-efter-planen/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832230266",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 4 (spor 7/8)"
+   ],
+   "where": "hall end (north end) of perron 4 (spor 7/8), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832230267",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 5 (spor 9/10, S-tog)"
+   ],
+   "where": "hall end (north end) of perron 5 (spor 9/10, S-tog), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832230268",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 6 (spor 11/12, S-tog)"
+   ],
+   "where": "hall end (north end) of perron 6 (spor 11/12, S-tog), from the hall",
+   "confirmed_by": "OSM only for position (wheelchair=yes); owner text confirms lifts between hall and platforms in general",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w91272626",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "hall end of perron 1 (spor 1/2)",
+   "confirmed_by": "OSM only; DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w91272636",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "hall end of perron 2 (spor 3/4)",
+   "confirmed_by": "OSM only; DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w91272635",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 3 (spor 5/6)"
+   ],
+   "where": "hall end of perron 3 (spor 5/6)",
+   "confirmed_by": "OSM only + owner text (DSB 2007: 'helt nye eskalatorer mellem perron og Banegårdshal' for perron 3); DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB news \"Renoveringen og ombygningen af Københavns Hovedbanegård forløber fortsat efter planen\" (24 Jul 2007), https://www.dsb.dk/om-dsb/presse/nyheder/renoveringen-og-ombygningen-af-kobenhavns-hovedbanegard-forlober-fortsat-efter-planen/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w91272631",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 4 (spor 7/8)"
+   ],
+   "where": "hall end of perron 4 (spor 7/8)",
+   "confirmed_by": "OSM only; DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w91272634",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 5 (spor 9/10, S-tog)"
+   ],
+   "where": "hall end of perron 5 (spor 9/10, S-tog)",
+   "confirmed_by": "OSM only; DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w813670264",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 6 (spor 11/12, S-tog)"
+   ],
+   "where": "hall end of perron 6 (spor 11/12, S-tog)",
+   "confirmed_by": "OSM only; DSB station page lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n1059595570",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "hall end of perron 1 (spor 1/2) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n1059595701",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "hall end of perron 2 (spor 3/4) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n1059595603",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 3 (spor 5/6)"
+   ],
+   "where": "hall end of perron 3 (spor 5/6) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n1059595617",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 4 (spor 7/8)"
+   ],
+   "where": "hall end of perron 4 (spor 7/8) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n3417201670",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 5 (spor 9/10, S-tog)"
+   ],
+   "where": "hall end of perron 5 (spor 9/10, S-tog) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "n1059595657",
+   "between": [
+    "Banegårdshallen (0)",
+    "perron 6 (spor 11/12, S-tog)"
+   ],
+   "where": "hall end of perron 6 (spor 11/12, S-tog) (OSM entrance=staircase node at the stair head in the hall)",
+   "confirmed_by": "OSM only; DSB station page lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275148",
+   "between": [
+    "perron 1 (spor 1/2)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 1 (spor 1/2), up to Tietgensbroen",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275174",
+   "between": [
+    "perron 2 (spor 3/4)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 2 (spor 3/4), up to Tietgensbroen",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275159",
+   "between": [
+    "perron 3 (spor 5/6)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 3 (spor 5/6), up to Tietgensbroen",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275146",
+   "between": [
+    "perron 4 (spor 7/8)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 4 (spor 7/8), up to Tietgensbroen",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275152",
+   "between": [
+    "perron 5 (spor 9/10, S-tog)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 5 (spor 9/10, S-tog), up to Tietgensbroen (about 40 m from the south end)",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91275149",
+   "between": [
+    "perron 6 (spor 11/12, S-tog)",
+    "Tietgensbroen (street level, Tietgensgade)"
+   ],
+   "where": "about 125–135 m from the hall end of perron 6 (spor 11/12, S-tog), up to Tietgensbroen (about 15 m from the south end)",
+   "confirmed_by": "OSM (position) + owner/encyclopedia text: Wikipedia 'the platforms have direct access via stairs from Tietgensbroen'; when the hall is closed the platforms are reached via Tietgens bridge",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w91275142",
+    "w91275151"
+   ],
+   "between": [
+    "perron 6 (spor 11/12, S-tog)",
+    "Tietgensgade (street level, via landing -0.5)"
+   ],
+   "where": "south end of perron 6",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w91275145",
+    "w91275153"
+   ],
+   "between": [
+    "perron 5 (spor 9/10, S-tog)",
+    "Tietgensgade (street level, via landing -0.5)"
+   ],
+   "where": "south end of perron 5",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288911",
+   "between": [
+    "perron 1 (spor 1/2)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 1 (spor 1/2)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w229215442",
+   "between": [
+    "perron 1 (spor 1/2)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 1 (spor 1/2), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288910",
+   "between": [
+    "perron 2 (spor 3/4)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 2 (spor 3/4)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w229215449",
+   "between": [
+    "perron 2 (spor 3/4)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 2 (spor 3/4), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288909",
+   "between": [
+    "perron 3 (spor 5/6)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 3 (spor 5/6)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w229215450",
+   "between": [
+    "perron 3 (spor 5/6)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 3 (spor 5/6), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288908",
+   "between": [
+    "perron 4 (spor 7/8)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 4 (spor 7/8)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w229215446",
+   "between": [
+    "perron 4 (spor 7/8)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 4 (spor 7/8), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288907",
+   "between": [
+    "perron 5 (spor 9/10, S-tog)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 5 (spor 9/10, S-tog)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w229215463",
+   "between": [
+    "perron 5 (spor 9/10, S-tog)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 5 (spor 9/10, S-tog), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10832288906",
+   "between": [
+    "perron 6 (spor 11/12, S-tog)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 48 m from the hall end of perron 6 (spor 11/12, S-tog)",
+   "confirmed_by": "OSM only for position (wheelchair=yes); Wikipedia confirms the 24/7 underpass from the platforms to the Metro",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w813670253",
+   "between": [
+    "perron 6 (spor 11/12, S-tog)",
+    "Metro tunnel (-2)"
+   ],
+   "where": "about 50–60 m from the hall end of perron 6 (spor 11/12, S-tog), beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w229215461",
+   "between": [
+    "platform lifts/stairs (perron 1–6)",
+    "Metro København H"
+   ],
+   "where": "under the tracks about 50 m south of the hall, about 150 m long, west toward Reventlowsgade/Stampesgade",
+   "confirmed_by": "OSM + Wikipedia text (no plan)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n8676527941",
+    "n8676527945"
+   ],
+   "between": [
+    "Metro tunnel (-2)",
+    "Metro København H / Stampesgade side"
+   ],
+   "where": "west end of the tunnel by the Metro station (Stampesgade side)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "name": "Reventlowsgade til Forhal",
+   "between": [
+    "Reventlowsgade",
+    "Forhal (hall)"
+   ],
+   "where": "Reventlowsgade side of the hall",
+   "status": "Ude af drift, på ubestemt tid (out of service indefinitely) on 2026-10-30",
+   "confirmed_by": "owner text",
+   "_source": "DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1164707481",
+   "between": [
+    "Bernstorffsgade / Banegårdspladsen corner",
+    "hall"
+   ],
+   "where": "north-east corner of the station by the Bernstorffsgade gate",
+   "confirmed_by": "OSM only (wheelchair=yes); DSB: all hall entrances stay step-free via ramps or lifts during the works",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Banegårdspladsen (north front, west door)",
+   "osm_id": "n2512504214",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "where": "north front of the hall, west of centre",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Banegårdspladsen (north front, east door)",
+   "osm_id": "n2513054093",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "where": "north front of the hall, by McDonald's",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Bernstorffsgade",
+   "osm_id": "n3635193171",
+   "street": "Bernstorffsgade",
+   "level": "0",
+   "where": "east side of the hall (towards Tivoli), by Joe & The Juice and Lagkagehuset",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Bernstorffsgade gate (step-free)",
+   "osm_id": "n3207955215",
+   "street": "Bernstorffsgade",
+   "level": "0",
+   "wheelchair": "yes (OSM)",
+   "where": "north-east corner",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Reventlowsgade (south)",
+   "osm_id": "n2535325502",
+   "street": "Reventlowsgade",
+   "level": "0",
+   "where": "west side of the hall by the police office, Lagkagehuset and the Bagagecenter",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Reventlowsgade (north)",
+   "osm_id": "n11829250065",
+   "street": "Reventlowsgade",
+   "level": "0",
+   "where": "west side of the hall by the DSB ticket office",
+   "note": "DSB lift 'Reventlowsgade til Forhal' out of service indefinitely (2026-10-30)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "name": "Metro København H (Reventlowsgade)",
+   "osm_id": "n7729856005",
+   "street": "Reventlowsgade",
+   "level": "0",
+   "where": "Reventlowsgade, south-west of the hall (Metro entrance; OSM wheelchair=no)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Metro København H (Stampesgade)",
+   "osm_id": "n7729856016",
+   "street": "Stampesgade",
+   "level": "0",
+   "where": "Stampesgade, west of the tracks; Wikipedia: the Metro's 'own, separate entrance in Stampesgade outside the station complex'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "name": "Tietgensbroen (platform access without the hall)",
+   "street": "Tietgensgade",
+   "level": "0",
+   "where": "stairs from the Tietgensgade bridge straight down to each platform; Wikipedia: used when the hall is closed at night",
+   "_source": "Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "All hall entrances during the works",
+   "street": "—",
+   "level": "0",
+   "where": "DSB: 'alle ind- og udgange til banegårdshallen vil fortsat være niveaufri og kan benyttes via ramper eller elevatorer'; 'Adgangsveje og ganglinjer kan ændre sig under ombygningen'",
+   "_source": "DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "DSB Salg & Service (indland & udland) / DSB Billetsalg",
+   "level_per_plan": "0",
+   "where": "west side of the hall by the north Reventlowsgade entrance (OSM n7194194957 'DSB Billetter')",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n7194194957",
+   "open_during_works": "yes: DSB says DSB Billetsalg stays open that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "office",
+   "name": "DSB Stationskontor",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "opening_hours": "Mo-Fr 08:00-18:00; Sa,Su 10:00-17:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "left_luggage",
+   "name": "DSB Bagagecenter & GLS pakkeshop (also bagagebokse / lockers)",
+   "level_per_plan": "0",
+   "where": "west side of the hall near the south Reventlowsgade entrance (OSM n6761862166)",
+   "opening_hours": "Mo-Sa 05:30-01:00; Su 06:00-01:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n6761862166",
+   "fee": "yes",
+   "note": "DSB gives no separate locker hours or location.",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal (the hall)",
+   "level_per_plan": "0",
+   "where": "the hall",
+   "opening_hours": "Mo-Fr 00:00-02:15,04:30-24:00; Sa,Su 00:00-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Closed for cleaning between 02:15 and 04:30, except the nights after Friday and Saturday (DSB).",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter / Handicaptoilet (betalingstoilet), puslerum",
+   "level_per_plan": "0",
+   "where": "north-west part of the hall near the west Banegårdspladsen door (OSM n732619324)",
+   "osm_id": "n732619324",
+   "fee": "yes (betalingstoilet; amount not stated)",
+   "open_during_works": "yes: 'Kundetoiletter, handicaptoilet og puslerum vil fortsat være åbne'",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "lounge",
+   "name": "DSB 1' Lounge",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "level_per_plan": "0",
+   "where": "not stated by DSB",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (no ticket sales)",
+   "level_per_plan": "0",
+   "where": "in the hall; DSB does not say which unit. 7-Eleven's list has 'Press', KBH, Banegårdspladsen (hours Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00, which differ from DSB's)",
+   "opening_hours": "Mo-Fr 05:00-01:00; Sa,Su 00:00-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "open_during_works": "yes: 7-Eleven stays open; the fourth shop area 'indrettes til 7-Eleven' and runs until H2 2028",
+   "hours_raw_7eleven": "Press, KBH, Banegårdspladsen: Mon-Fri 05:00 til 23:59, Sat-Sun 00:00 til 23:59",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; 7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven Express (hall, centre)",
+   "level_per_plan": "0",
+   "where": "in the hall, south-centre near the stair heads to perron 3–4 (OSM position)",
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n5041276742",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "note": "OSM hours match 7-Eleven's 'Press, KBH, Banegårdspladsen' entry; whether this is that unit is not confirmed.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven Express (hall, east)",
+   "level_per_plan": "0",
+   "where": "in the hall, east part towards the Bernstorffsgade entrance (OSM position)",
+   "opening_hours": "Mo-Th 05:00-01:00; Fr 05:00-24:00; Sa 00:00-24:00; Su 00:00-01:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n10744459623",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "level_per_plan": "0",
+   "where": "north-east, by the Banegårdspladsen east door / DSB office area (OSM position; no hours in OSM)",
+   "osm_id": "n13072511277",
+   "open_during_works": "7-Eleven (brand) stays open per DSB; this unit not identified",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven (platform kiosk)",
+   "level_per_plan": "-1",
+   "where": "on perron 4 (spor 7/8), about 15 m from its hall end (OSM position)",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su,PH 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n10744463990",
+   "open_during_works": "platform kiosk, outside the hall works area (not stated by DSB)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven (platform kiosk)",
+   "level_per_plan": "-1",
+   "where": "on perron 5 (spor 9/10, S-tog), about 15 m from its hall end (OSM position)",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su,PH 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n10744303582",
+   "open_during_works": "platform kiosk, outside the hall works area (not stated by DSB)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven (platform kiosk)",
+   "level_per_plan": "-1",
+   "where": "on perron 6 (spor 11/12, S-tog), about 15 m from its hall end (OSM position)",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su,PH 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n7650257093",
+   "open_during_works": "platform kiosk, outside the hall works area (not stated by DSB)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Lagkagehuset (Reventlowsgade side)",
+   "level_per_plan": "0",
+   "where": "west side of the hall right by the south Reventlowsgade entrance (OSM position)",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa,Su,PH 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n6372248726",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Lagkagehuset (Bernstorffsgade side)",
+   "level_per_plan": "0",
+   "where": "east side of the hall right by the Bernstorffsgade entrance (OSM position)",
+   "opening_hours": "Mo-Fr 05:00-19:00; Sa 05:00-17:00; Su 06:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n9425571712",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\"); DSB does not say whether both units stay open",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "level_per_plan": "0",
+   "where": "east side of the hall by the Bernstorffsgade entrance (OSM position)",
+   "opening_hours": "Mo-Sa 06:00-22:00; Su 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n10832230254",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "level_per_plan": "0",
+   "where": "north front of the hall by the east Banegårdspladsen door (OSM position)",
+   "opening_hours": "Mo-Th 04:30-01:45; Fr 04:30-05:00; Sa 07:00-05:00; Su,PH 07:00-01:45",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n12001645974",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "hours_raw": "OSM as tagged: 'Mo-Th 04:30-01:45, Fr 04:30-29:00, Sa 07:00-05:00, PH,Su 07:00-01:45'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Max (Max Burgers)",
+   "level_per_plan": "0",
+   "where": "north-west part of the hall between the Reventlowsgade (north) and Banegårdspladsen (west) doors (OSM position)",
+   "opening_hours": "Su-We 08:00-01:45; Th-Sa 08:00-06:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n7207062931",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Starbucks",
+   "level_per_plan": "0",
+   "where": "north front of the hall just inside the west Banegårdspladsen door (OSM position)",
+   "opening_hours": "Mo-Sa 06:00-20:30; Su 07:00-20:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n3061519633",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Dunkin' (Dunkin' Donuts)",
+   "level_per_plan": "0",
+   "where": "east part of the hall, south of the Bernstorffsgade entrance near the stair heads to perron 1 (OSM position)",
+   "opening_hours": "Mo-Th 08:00-21:00; Fr,Sa 08:00-22:00; Su 08:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n4341887285",
+   "open_during_works": "yes: DSB names it among the hall shops that stay open during the 2026–28 works (\"DSB Billetsalg holder fortsat åbent, ligesom 7-Eleven, Lagkagehuset, Joe & The Juice, … McDonald's, Max Burger, Starbucks og Dunkin' Donuts\")",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Hovedbanens Apotek",
+   "level_per_plan": "0",
+   "where": "west side of the hall between the two Reventlowsgade entrances (OSM position)",
+   "opening_hours": "Mo-Fr 08:00-19:00; Sa 09:00-15:00; Su off; PH 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n13271054875",
+   "open_during_works": "not stated: DSB's modernisation page does not name it among the shops that stay open, and no source says it closed (three of four hall shop areas fenced off April 2026 – mid-2028)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Dlet Hovedbanegården",
+   "level_per_plan": "0",
+   "where": "west part of the hall near the ticket office (OSM position)",
+   "opening_hours": "11:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n10832230257",
+   "open_during_works": "not stated: DSB's modernisation page does not name it among the shops that stay open, and no source says it closed (three of four hall shop areas fenced off April 2026 – mid-2028)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Flowers",
+   "level_per_plan": "0",
+   "where": "west part of the hall near the ticket office (OSM position)",
+   "opening_hours": "Mo-Th 08:00-18:30; Fr 08:00-19:00; Sa 08:00-18:30; Su 09:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n13007399348",
+   "open_during_works": "not stated: DSB's modernisation page does not name it among the shops that stay open, and no source says it closed (three of four hall shop areas fenced off April 2026 – mid-2028)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; TV2 Kosmopol (2025) names 'blomsterbutikken Flowers på Hovedbanegården', https://www.tv2kosmopol.dk/koebenhavn/hovedbanegardens-butikker-morkelagt, read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "level_per_plan": "0",
+   "where": "north-east corner by the Bernstorffsgade entrance (OSM position)",
+   "opening_hours": "Mo-Fr 09:00-19:00; Sa 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n314080358",
+   "open_during_works": "not stated: DSB's modernisation page does not name it among the shops that stay open, and no source says it closed (three of four hall shop areas fenced off April 2026 – mid-2028)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Dan Exchange",
+   "level_per_plan": "0",
+   "where": "centre-west of the hall (OSM position)",
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa,Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n6789866402",
+   "open_during_works": "not stated: DSB's modernisation page does not name it among the shops that stay open, and no source says it closed (three of four hall shop areas fenced off April 2026 – mid-2028)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "ATM",
+   "level_per_plan": "0",
+   "where": "west side by the south Reventlowsgade entrance (OSM position)",
+   "osm_id": "n7298216059",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Euronet (2 machines)",
+   "level_per_plan": "0",
+   "where": "north part of the hall between the Banegårdspladsen east door and Bernstorffsgade (OSM position)",
+   "osm_ids": [
+    "n13474571858",
+    "n13474571859"
+   ],
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "police",
+   "name": "Københavns Politis ekspedition Hovedbanegården",
+   "level_per_plan": "0",
+   "where": "at the south Reventlowsgade entrance (OSM position)",
+   "osm_id": "n732619377",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Central Station\", https://en.wikipedia.org/wiki/Copenhagen_Central_Station, read 2026-10-30"
+  },
+  {
+   "category": "lost_property_office",
+   "name": "DSB Hittegodskontor: moved to Høje Taastrup Station, Banestrøget 5",
+   "level_per_plan": "0",
+   "where": "not at København H",
+   "note": "OSM still has a 'DSB' lost_property_office node n13157572043 here (hours equal DSB's Stationskontor hours); treat as the station office, not lost property.",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parking (5 spaces, 2 disabled; occupancy 100%)",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + cykelpumpe",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "service",
+   "name": "Handicapservice",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi rank 'Københavns Hovedbanegård'",
+   "level_per_plan": "0",
+   "where": "outside the station, about 90 m from the station point (OSM)",
+   "osm_id": "w244360863",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No DSB or Banedanmark station plan (PDF) for København H found; DSB's modernisation page has only illustrations. All shop/lift/stair positions are from OSM.",
+  "Which hall shops are behind the fences: DSB names only the shops that stay open (DSB Billetsalg, 7-Eleven, Lagkagehuset, Joe & The Juice, McDonald's, Max Burger, Starbucks, Dunkin' Donuts) and says three of four hall shop areas are fenced off April 2026 – mid-2028 (the 7-Eleven area until H2 2028). Status not stated for Hovedbanens Apotek, Dlet, Flowers, Forex, Dan Exchange, ATMs; OSM also has a vacant shop (n3887005211). Which of the four shop areas is where is not described in text.",
+  "Shop hours are OSM's opening_hours except DSB units: Lagkagehuset, Starbucks, Joe & The Juice and the pharmacy sites are client-side rendered and could not be read; mcdonalds.dk blocks fetching. Hours not confirmed by the shops' own sites.",
+  "DSB 7-Eleven hours (Mo-Fr 05-01, Sa-Su 24h) conflict with 7-Eleven's own list ('Press', KBH Banegårdspladsen: Mo-Fr 05:00-23:59, Sa-Su 24h); which physical unit DSB means is not stated. 7-Eleven's list (24+52 entries read) shows no other København H unit; platform kiosks rely on OSM.",
+  "Toilet fee amount and hours, ticket-machine positions, locker position, DSB 1' Lounge position and hours: not given by DSB.",
+  "Track 26 / perron 7 access: only Wikipedia's text; no geometry in the platform register. The DSB 2006–07 news mentions a lift at Tietgensbroen at the opposite end of perron 2; OSM has no lift at Tietgensbroen today — current status unknown.",
+  "Level names as signposted (beyond 'Forhal'/'Banegårdshallen') and level heights: no source.",
+  "No open-question list was supplied for Danish stations, so no 'answers' section."
+ ]
+}

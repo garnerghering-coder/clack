@@ -1,0 +1,686 @@
+{
+ "clack_id": "FI-PM",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w155635672",
+   "ref": "6",
+   "level": null
+  },
+  {
+   "osm_id": "w1434884404",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w1434884409",
+   "ref": "3",
+   "level": null
+  },
+  {
+   "osm_id": "w1434884410",
+   "ref": "4",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w59514422",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 180.4,
+   "reaches_platforms": [
+    "1",
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    27.1659224,
+    62.3021307
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w200674516",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": "yes",
+   "ramp": null,
+   "length_m": 108.2,
+   "reaches_platforms": [
+    "1",
+    "3",
+    "4",
+    "6"
+   ],
+   "lonlat": [
+    27.1672541,
+    62.3013208
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w200674518",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 6.4,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    27.1672818,
+    62.3014637
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w200674519",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": "yes",
+   "ramp": null,
+   "length_m": 69.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    27.1656561,
+    62.3012751
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w200674523",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": "yes",
+   "ramp": null,
+   "length_m": 58.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    27.1684591,
+    62.3015014
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w239858087",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 180.0,
+   "reaches_platforms": [
+    "1",
+    "3",
+    "4",
+    "6"
+   ],
+   "lonlat": [
+    27.1692337,
+    62.3026029
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1136426218",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.2,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    27.1677256,
+    62.3013417
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1136426234",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    27.1673092,
+    62.3013711
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1547012526",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.9,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    27.1678796,
+    62.3013818
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012528",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.7,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    27.167779,
+    62.3013414
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012530",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 8.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    27.1658841,
+    62.3013428
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1547012531",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 8.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    27.1657891,
+    62.3013447
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1547012532",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.0,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    27.1667733,
+    62.3013552
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012533",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.6,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    27.1667733,
+    62.3013552
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1547012535",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.8,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    27.1672565,
+    62.3013897
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886269",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    27.1677262,
+    62.3013653
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10593886302",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    27.1673092,
+    62.3013711
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n2326334305",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Asemakatu",
+   "nearest_street_m": 9.8,
+   "lonlat": [
+    27.1663159,
+    62.3013473
+   ]
+  },
+  {
+   "osm_id": "n13736783178",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Asemakatu",
+   "nearest_street_m": 31.9,
+   "lonlat": [
+    27.1667406,
+    62.3013422
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n413044727",
+   "category": "bus_station",
+   "name": "Pieksämäki matkakeskus",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 56,
+   "lonlat": [
+    27.1665719,
+    62.3014442
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 13.5
+  },
+  {
+   "osm_id": "n413044858",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 91,
+   "lonlat": [
+    27.1656648,
+    62.3014908
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 60.7
+  },
+  {
+   "osm_id": "n2326334303",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 75,
+   "lonlat": [
+    27.1663089,
+    62.3013273
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 26.8
+  },
+  {
+   "osm_id": "n14071295495",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 159,
+   "lonlat": [
+    27.1643573,
+    62.3013733
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 128.1
+  },
+  {
+   "osm_id": "n14071295496",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 80,
+   "lonlat": [
+    27.1659041,
+    62.3014899
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.3
+  },
+  {
+   "osm_id": "n14071295497",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 82,
+   "lonlat": [
+    27.1658345,
+    62.3015141
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 51.9
+  },
+  {
+   "osm_id": "n14071295498",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 80,
+   "lonlat": [
+    27.1658915,
+    62.3015056
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 49.0
+  },
+  {
+   "osm_id": "n14071295499",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 82,
+   "lonlat": [
+    27.1658885,
+    62.301474
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 49.0
+  },
+  {
+   "osm_id": "n14071295689",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 159,
+   "lonlat": [
+    27.1643795,
+    62.3013565
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 126.9
+  },
+  {
+   "osm_id": "w37228002",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 96,
+   "lonlat": [
+    27.1681489,
+    62.3009185
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.4
+  },
+  {
+   "osm_id": "w361061107",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 110,
+   "lonlat": [
+    27.1653422,
+    62.3009526
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 46.5
+  },
+  {
+   "osm_id": "w489048039",
+   "category": "fast_food",
+   "name": "JR Fast Food",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 167,
+   "lonlat": [
+    27.1645604,
+    62.3008933
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 107.5,
+   "cuisine": "burger"
+  },
+  {
+   "osm_id": "w1464342789",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 101,
+   "lonlat": [
+    27.1650433,
+    62.3015662
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 75.1
+  },
+  {
+   "osm_id": "w1547012540",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 67,
+   "lonlat": [
+    27.1677339,
+    62.3012397
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w1547012541",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 32,
+   "lonlat": [
+    27.1677581,
+    62.3016116
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w1547012542",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 28,
+   "lonlat": [
+    27.1677799,
+    62.3019598
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w1547043910",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 97,
+   "lonlat": [
+    27.1654302,
+    62.3016032
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 71.8
+  },
+  {
+   "osm_id": "w1547043914",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 124,
+   "lonlat": [
+    27.1650102,
+    62.3014185
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 92.6
+  },
+  {
+   "osm_id": "w1547043921",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 167,
+   "lonlat": [
+    27.1643956,
+    62.301068
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 121.0
+  },
+  {
+   "osm_id": "w1547049955",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 26,
+   "lonlat": [
+    27.1666274,
+    62.3023054
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.4
+  }
+ ]
+}

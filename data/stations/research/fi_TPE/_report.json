@@ -1,0 +1,171 @@
+{
+ "clack_id": "fi:TPE",
+ "slug": "tampere",
+ "flags": [
+  "Platform BIS TPE L2 (track 2): laser gives 0.85 m above the track bed (≈0.68 m above rail after −0.15…0.2 m), register class korkea = 0.55 m. Not decided; add to REVIEW.md.",
+  "Platform BIS TPE L4 (track 4): laser gives 0.90 m above the track bed (≈0.72 m above rail after −0.15…0.2 m), register class korkea = 0.55 m. Not decided; add to REVIEW.md.",
+  "Platform BIS TPE L5 (track 5): laser gives 0.87 m above the track bed (≈0.70 m above rail after −0.15…0.2 m), register class korkea = 0.55 m. Not decided; add to REVIEW.md.",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1304545431 (cycleway, primary).",
+  "Laser-traced roof (184 m², top 4.5 m above the platform, 5.2 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section.",
+  "Laser-traced roof (353 m², top 4.5 m above the platform, 5.3 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section.",
+  "Laser-traced roof (342 m², top 4.6 m above the platform, 5.3 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=23.770334,61.494558,23.777231,61.502705",
+ "profile": {
+  "brief": "the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)",
+  "vdatum": "N2000",
+  "crs": "ETRS-TM35FIN (EPSG:3067)",
+  "laser_line": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa)",
+  "scan_block": "clack_fi_mml05_M4212G1",
+  "box_note": ": the platforms' extent plus a margin",
+  "dtm_what": "Ground, 1 m, float32, EPSG:3067, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Digitraffic",
+  "register_owner": "Väylävirasto (Finnish Transport Infrastructure Agency)",
+  "register_file": "tampere_platform_vayla.geojson",
+  "register_what": "Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels",
+  "register_licence": "Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0",
+  "register_text": "Register: Digitraffic infra-api `laiturit` (read 2026-10-30, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail (Väylävirasto Network Statement 2021 appendix 3B via Wikipedia \"Platform height\", read 2026-10-30).",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1,3,4,5)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa). https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/laser-scanning-data-05-p (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read 2026-10-30, CC BY 4.0."
+ },
+ "ground": {
+  "min_m": 87.25,
+  "median_m": 95.44,
+  "max_m": 100.55,
+  "nan_cells": 130876,
+  "size_m": [
+   272,
+   748
+  ],
+  "box_sweref": [
+   328163,
+   6822205,
+   328435,
+   6822953
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "clack_fi_mml05_M4212G1.laz"
+  ],
+  "scan_date": "2023-06-08",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 112355,
+  "density_in_box": 0.55,
+  "classes": {
+   "1": 991,
+   "2": 73664,
+   "3": 269,
+   "4": 2490,
+   "5": 34941
+  },
+  "train_points_class64": 126
+ },
+ "platforms": [
+  {
+   "bis_object": "TPE L1",
+   "track": "1",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 500.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.14,
+   "track_bed_points": 440,
+   "platform_surface_m": 95.87,
+   "platform_points": 1214,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.73,
+   "laser_estimate_above_rail_m": 0.56
+  },
+  {
+   "bis_object": "TPE L2",
+   "track": "2",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 500.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.16,
+   "track_bed_points": 418,
+   "platform_surface_m": 96.01,
+   "platform_points": 1242,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.85,
+   "laser_estimate_above_rail_m": 0.68
+  },
+  {
+   "bis_object": "TPE L3",
+   "track": "3",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 500.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.38,
+   "track_bed_points": 442,
+   "platform_surface_m": 96.14,
+   "platform_points": 1260,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.76,
+   "laser_estimate_above_rail_m": 0.59
+  },
+  {
+   "bis_object": "TPE L4",
+   "track": "4",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 500.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.37,
+   "track_bed_points": 259,
+   "platform_surface_m": 96.27,
+   "platform_points": 1453,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.9,
+   "laser_estimate_above_rail_m": 0.72
+  },
+  {
+   "bis_object": "TPE L5",
+   "track": "5",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 500.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.42,
+   "track_bed_points": 301,
+   "platform_surface_m": 96.29,
+   "platform_points": 1466,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.87,
+   "laser_estimate_above_rail_m": 0.7
+  }
+ ],
+ "platform_surface_m": 96.14,
+ "track_bed_m": 95.37,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 32,
+  "footbridge": 0,
+  "canopy_osm": 7,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 100,
+ "photos_station_related": 30
+}

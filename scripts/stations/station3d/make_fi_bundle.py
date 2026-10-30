@@ -19,8 +19,8 @@ CODE, OUT, SRCKIND = sys.argv[1], sys.argv[2], sys.argv[3]
 E0, N0, E1, N1 = map(int, sys.argv[4:8])
 LAZ = sys.argv[8:]
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.environ.get('FI_SOURCES', '/mnt/user-data/uploads/Downloads/clack_station3d/sources/FI')
-ST = {s['code']: s for s in json.load(open(os.environ.get('FI_STATIONS', '/home/claude/fi/fi_stations.json')))}[CODE]
+SRC = os.environ.get('FI_SOURCES', 'data/stations/research/_sources/FI')
+ST = {s['code']: s for s in json.load(open(os.environ.get('FI_STATIONS', 'data/stations/research/_sources/FI/fi_stations.json')))}[CODE]
 os.makedirs(OUT, exist_ok=True)
 
 LASER = {
@@ -85,19 +85,42 @@ json.dump(oc['osm'], open(f'{OUT}/osm.json', 'w'))
 json.dump(oc['commons'], open(f'{OUT}/commons.json', 'w'))
 slug = re.sub(r'[^a-z0-9]+', '_', ST['name'].lower().replace('ä', 'a').replace('ö', 'o').replace('å', 'a')).strip('_')
 line = LASER['line'].format(tiles=', '.join(t.replace('.laz', '') for t in tiles))
+SCAN = LASER['year'] or 'unknown'
+if SRCKIND == 'mml05':
+    SM = json.load(open(os.environ.get('FI_SHEET_META', os.path.join(os.path.dirname(os.environ.get('FI_STATIONS', 'data/stations/research/_sources/FI/fi_stations.json')), 'mml05_sheet_meta.json'))))['sheets']
+    sh = [SM[t.split('_')[-1].replace('.laz', '')] for t in tiles]
+    dates = sorted({x['scan_date'] for x in sh})
+    SCAN = dates[-1] if len(dates) == 1 else dates[0] + '…' + dates[-1]
+    line = line.replace('Laserkeilausaineisto 0,5 p (', 'Laserkeilausaineisto 0,5 p, newest per sheet (' ) + '; scanned ' + ', '.join(f"{x['sheet']} {x['scan_date']} ({x['project']})" for x in sh)
+meta_src = 'Väylävirasto Network Statement 2021 appendix 3B via Wikipedia "Platform height", read 2026-10-30'
 meta = {
     'clack_id': 'FI-' + CODE, 'slug': slug, 'country': 'FI', 'lat': ST['lat'], 'lon': ST['lon'],
     'crs_epsg': EPSG, 'crs_name': LASER['crs_name'], 'vertical_datum': 'N2000', 'box': [E0, N0, E1, N1],
     'height_classes': {'korkea': 0.55, 'matala': 0.265},
     'height_classes_source': 'Finnish platform standard: high 550 mm, older standard 265 mm above top of rail (Väylävirasto Network Statement 2021, appendix 3B, via Wikipedia "Platform height", read 2026-10-30)',
     'platform_file_suffix': 'vayla',
-    'platform_geometry_note': 'Digitraffic infra-api platform line (laiturit.geometria) as published',
+    'platform_geometry_note': 'Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge',
     'retrieved': read,
     'dtm': {'items': [], 'from_laser': True, 'short_source': 'gridded from the laser ground class, CC BY 4.0',
             'source_line': f'Gridded here from the ground points (class 2) of {line}: median per 1 m cell; cells without ground points left as no-data'},
-    'laser': [{'id': SRCKIND, 'datetime': LASER['year'] or 'unknown', 'licence_line': line, 'object_classes': LASER['object_classes'],
+    'laser': [{'id': SRCKIND, 'datetime': SCAN, 'licence_line': line, 'object_classes': LASER['object_classes'],
                'props': {'punkttathet': LASER['density']}, 'url': LASER['url']}],
     'baninfo': {'plat': plat, 'trk': trk},
+    'doc_profile': {
+        'brief': 'the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)', 'vdatum': 'N2000', 'crs': f"{LASER['crs_name']} (EPSG:{EPSG})",
+        'laser_line': line, 'scan_block': ', '.join(t.replace('.laz', '') for t in tiles),
+        'box_note': ': the platforms\' extent plus a margin',
+        'dtm_what': f"Ground, 1 m, float32, EPSG:{EPSG}, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+        'dtm_licence': line, 'ground_how': 'ground grid from the laser class 2 (see the GeoTIFF tags)',
+        'register_short': 'Digitraffic', 'register_owner': 'Väylävirasto (Finnish Transport Infrastructure Agency)',
+        'register_file': f'{slug}_platform_vayla.geojson',
+        'register_what': 'Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels',
+        'register_licence': 'Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0',
+        'register_text': f"Register: Digitraffic infra-api `laiturit` (read {read}, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail ({meta_src}).",
+        'id_label': 'Platform', 'object_points': 'non-ground (classes ' + ','.join(map(str, LASER['object_classes'])) + ')',
+        'osm_warning': 'The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor\'s permission for OSM.',
+        'sources_md': f"- {line}. {LASER['url']} (scan {{scan}}; {{points}} points in the box, {{density}} per m²; classes {{classes}}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read {read}, CC BY 4.0.",
+    },
 }
 json.dump(meta, open(f'{OUT}/meta.json', 'w'), ensure_ascii=False, indent=1)
 print(CODE, slug, 'platforms', len(plat), 'tiles', tiles, 'ground cells', int(np.isfinite(dtm).sum()), 'of', W * H)

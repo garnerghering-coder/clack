@@ -1,0 +1,349 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Terminal 3 (check-in and arrival hall, street level); the 'station terminal' above the platforms",
+   "other_names": [
+    "Terminal 3"
+   ],
+   "note": "Wikipedia: the station is 'below ground directly under the check-in and arrival area in the airport's Terminal 3'. Sund & Bælt: 'Copenhagen Airport A/S has established a terminal above the station.'",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; Wikipedia, \"Copenhagen Airport railway station\", https://en.wikipedia.org/wiki/Copenhagen_Airport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Platforms perron 1 and 2 (spor 1, 2); DSB toilets 'Under terminal 3 (kælderniveau)'",
+   "other_names": [
+    "kælderniveau"
+   ],
+   "note": "Sund & Bælt: about 320 m long, platforms 6.5 m wide.",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0 (new platforms)",
+   "name": "New platforms at spor 11 and 12 (opened 27 April 2026), north of the old ones under the Metro station",
+   "note": "TRM: 'to nye overdækkede perroner ved de nuværende godsspor 11 og 12, som ligger under metrostationen'. Westbound trains use the new station. OSM tags platforms 11/12 level 0. Not yet in the platform register.",
+   "_source": "Sund & Bælt news 27 April 2026, https://sundogbaelt.dk/nyheder-presse/nyheder/2026/togtrafikken-far-flere-muskler-med-udvidelsen-af-kobenhavns-lufthavn-station/, read 2026-10-30; Transportministeriet fact sheet \"Københavns Lufthavn Station\", https://www.trm.dk/media/q5umj5ww/faktaark-kbenhavns-lufthavn-station-final-a.pdf, read 2026-10-30; Wikipedia, \"Copenhagen Airport railway station\", https://en.wikipedia.org/wiki/Copenhagen_Airport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Upper footbridge level (OSM footbridges w290049185, w1518908814); Metro Lufthavnen is 'at the far end of Terminal 3 on the level 2' (Wikipedia) — Metro out of scope",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Copenhagen Airport railway station\", https://en.wikipedia.org/wiki/Copenhagen_Airport_railway_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "travelator",
+   "osm_ids": [
+    "w1128332954",
+    "w1128332955",
+    "w1165610013",
+    "w1165610014"
+   ],
+   "between": [
+    "perron 2 (spor 2)",
+    "Terminal 3 (0)"
+   ],
+   "where": "four ramps along perron 2, about 100–215 m from its ends (OSM tags them escalator, conveying, wheelchair=no)",
+   "confirmed_by": "owner text (Sund & Bælt: 'the four double travalators' link the platforms to the station terminal); positions OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "travelator",
+   "osm_ids": [
+    "w1165610036",
+    "w1165610037",
+    "w1165610038",
+    "w1165610039"
+   ],
+   "between": [
+    "perron 1 (spor 1)",
+    "Terminal 3 (0)"
+   ],
+   "where": "four ramps along perron 1, about 100–180 m from its ends (OSM)",
+   "confirmed_by": "owner text (Sund & Bælt) + OSM positions",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n7907706415",
+    "n10841747161"
+   ],
+   "between": [
+    "perron 2 (spor 2)",
+    "Terminal 3 (0) / level 1"
+   ],
+   "where": "middle of perron 2 (OSM wheelchair=yes)",
+   "confirmed_by": "owner text (Sund & Bælt: 'stairs and lifts in the middle of the station' up to the terminal) + OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n10841755634",
+    "n10841755636"
+   ],
+   "between": [
+    "perron 1 (spor 1)",
+    "Terminal 3 (0)"
+   ],
+   "where": "middle of perron 1 (OSM wheelchair=yes)",
+   "confirmed_by": "owner text (Sund & Bælt) + OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1165610027",
+    "w1165610028",
+    "w1165610044",
+    "w1165610016"
+   ],
+   "between": [
+    "perron 1 / 2",
+    "Terminal 3"
+   ],
+   "where": "middle of the platforms (OSM)",
+   "confirmed_by": "owner text (Sund & Bælt) + OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1165610034",
+    "w1165610035"
+   ],
+   "between": [
+    "perron 1 / 2",
+    "apron (forplads)"
+   ],
+   "where": "one end of perron 1 and 2, about 25–40 m from the end (OSM)",
+   "confirmed_by": "owner text (Sund & Bælt: 'At each end, stairs lead up to the apron') + OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1165610040",
+    "w1165610041"
+   ],
+   "between": [
+    "perron 1 / 2",
+    "apron"
+   ],
+   "where": "other end of perron 1 and 2 (OSM)",
+   "confirmed_by": "owner text (Sund & Bælt) + OSM",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w291162430",
+    "w1165610020"
+   ],
+   "between": [
+    "Terminal 3 (0)",
+    "level 1 footbridge"
+   ],
+   "where": "middle of the station (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n14325478051",
+    "n14325527493"
+   ],
+   "between": [
+    "new platforms spor 11/12",
+    "Terminal 3 / Metro"
+   ],
+   "where": "at the new platforms north of the old ones (OSM, no level tags)",
+   "confirmed_by": "OSM only; Sund & Bælt: 'direkte adgang fra lufthavnens Terminal 3 og Metro'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Sund & Bælt news 27 April 2026, https://sundogbaelt.dk/nyheder-presse/nyheder/2026/togtrafikken-far-flere-muskler-med-udvidelsen-af-kobenhavns-lufthavn-station/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1535160816",
+    "w1535160817"
+   ],
+   "between": [
+    "new platforms spor 11/12",
+    "upper level"
+   ],
+   "where": "at the new platforms (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1518908814",
+   "between": [
+    "new platforms",
+    "Terminal 3 / Metro"
+   ],
+   "where": "level 1, about 40 m (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "From Terminal 3",
+   "street": "inside Terminal 3 (address Terminal 3, 2770 Kastrup)",
+   "level": "0",
+   "where": "DSB: toilets and ticket machines in/under Terminal 3; Sund & Bælt: travelators, stairs and lifts up to the terminal",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30; Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30"
+  },
+  {
+   "name": "OSM entrances at the travelator heads",
+   "osm_ids": [
+    "n10841747155",
+    "n10841747156",
+    "n10841747158",
+    "n10841747160",
+    "n10841747168",
+    "n10841747169",
+    "n10841755622",
+    "n10841755623",
+    "n10841755625",
+    "n10841755628",
+    "n13142768066",
+    "n13285055680"
+   ],
+   "street": "OSM nearest named streets: Ellehammersvej, Kastrup Tværvej B, Kaperrækken (airport-internal roads; not verified as signposted)",
+   "level": "0",
+   "where": "tops of the travelators/stairs in Terminal 3",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Hotelvej / exit to Kastrup Tværvej C",
+   "osm_ids": [
+    "n2935875247",
+    "n5396217867"
+   ],
+   "street": "Hotelvej; Kastrup Tværvej C",
+   "level": "0",
+   "where": "OSM main entrance and exit nodes near the station",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "DSB Salg & Service / DSB Serviceguide (with DSB Billetautomater and Rejsekortautomater)",
+   "level_per_plan": "0",
+   "where": "Terminal 3: machines 'findes ved DSB Salg & Service i Terminal 3'",
+   "opening_hours": "Mo-Fr 07:30-20:30; Sa 07:30-19:00; Su 08:30-20:30",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB lists these as DSB Serviceguide hours; the station is otherwise 'selvbetjent med automater og automatguider'. Refunds etc. at København H.",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter",
+   "level_per_plan": "-1",
+   "where": "'Under terminal 3 (kælderniveau), adgang fra terminal 3'",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven 'CPH Lufthavn, Terminal 3, Landside'",
+   "level_per_plan": "0",
+   "where": "Terminal 3, landside (before security)",
+   "opening_hours": "24/7",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "_source": "7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven 'CPH Lufthavn, Terminal 3, Arrival, Landside'",
+   "level_per_plan": "0",
+   "where": "Terminal 3 arrival hall, landside (OSM n13145798930, level 0, by the platforms' travelators)",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n13145798930",
+   "note": "Matched to OSM by identical hours; the match is an inference.",
+   "_source": "7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House - Landside",
+   "level_per_plan": "0",
+   "where": "Terminal 3 landside, by the travelators (OSM)",
+   "opening_hours": "Mo-Su 04:30-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n9044612600",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "level_per_plan": "1",
+   "where": "Terminal 3, level 1 (OSM)",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n4434134245",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Steff's Place",
+   "level_per_plan": "0",
+   "where": "Terminal 3 level 0 by the station (OSM)",
+   "opening_hours": "Su-Fr 10:00-21:00; Sa 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n13149177590",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "not stated",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Betalingsparkering (incl. handicap parking) — airport car parks P4, P6, P7, P8, P10, P11 nearby",
+   "where": "around Terminal 3 (OSM)",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "where": "not stated",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30"
+  },
+  {
+   "category": "service",
+   "name": "Handicapservice",
+   "where": "not stated",
+   "_source": "DSB station page Københavns Lufthavn (CPH Airport), https://www.dsb.dk/trafikinformation/stationer/kobenhavns-lufthavn-kastrup/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "CPH airport map (PDF)",
+   "publisher": "Copenhagen Airports A/S (cph.dk)",
+   "url": "https://www.cph.dk/en/practical/cph-map",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Found via search; the PDF itself was not read in this pass."
+  }
+ ],
+ "open": [
+  "Access to the new platforms at spor 11/12 (opened 27 April 2026): only OSM lifts/stairs/footbridge; no owner description; not yet in the platform register (register has perron 1/2 only, as 'Kastrup').",
+  "cph.dk outlet pages are client-side rendered (no hours or positions readable); Espresso House, Burger King and Steff's Place hours are OSM's.",
+  "DSB toilet fee/hours not given. Taxi rank and bus stops not checked.",
+  "OSM tags the travelators as escalators with wheelchair=no; Sund & Bælt calls them travelators; step-free route is the middle lifts.",
+  "No open-question list was supplied for Danish stations."
+ ]
+}

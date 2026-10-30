@@ -1,0 +1,114 @@
+{
+ "clack_id": "NO-SKØ",
+ "slug": "skoyen",
+ "flags": [
+  "Platform BIS track 4 (track 3,4): laser gives 0.61 m above the track bed (≈0.43 m above rail after −0.15…0.2 m), register class 700 = 0.7 m. Not decided; add to REVIEW.md.",
+  "w148114388 office: p95 43.5 m is 26.2 m above the median 17.3 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w996166897 (no mapped ways); w1052349991 (residential)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.671831,59.918353,10.685831,59.926353",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Oslo kommune tynnet laserskanning 2019",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "skoyen_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": -0.59,
+  "median_m": 5.7,
+  "max_m": 34.52,
+  "nan_cells": 321745,
+  "size_m": [
+   950,
+   679
+  ],
+  "box_sweref": [
+   593379,
+   6643614,
+   594329,
+   6644293
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1797494_1175.laz"
+  ],
+  "scan_date": "2019-09-14",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 833637,
+  "density_in_box": 1.29,
+  "classes": {
+   "1": 296536,
+   "2": 531569,
+   "17": 5532
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "track 1",
+   "track": "1,2",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 300.0,
+   "width_m": 12.0,
+   "roof": null,
+   "track_bed_m": 7.43,
+   "track_bed_points": 411,
+   "platform_surface_m": 8.33,
+   "platform_points": 2146,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.9,
+   "laser_estimate_above_rail_m": 0.73
+  },
+  {
+   "bis_object": "track 4",
+   "track": "3,4",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 249.0,
+   "width_m": 9.5,
+   "roof": null,
+   "track_bed_m": 7.35,
+   "track_bed_points": 410,
+   "platform_surface_m": 7.96,
+   "platform_points": 1304,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.61,
+   "laser_estimate_above_rail_m": 0.43
+  }
+ ],
+ "platform_surface_m": 8.14,
+ "track_bed_m": 7.39,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 14,
+  "footbridge": 0,
+  "canopy_osm": 7,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 30,
+ "photos_station_related": 3
+}

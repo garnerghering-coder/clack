@@ -187,6 +187,16 @@
   "All stairs, lifts and escalators rest on OSM only; no plan or owner text confirms them.",
   "Signposted level names and the platform depth (~7 m per Wikipedia, not measured by the owner).",
   "Shops around the station (Pressbyrån, McDonald's, Subway, Sultan kebab, Kung Fu Dumplings, Brödernas, Swedbank) are outside the station structure per OSM; their own websites could not be read for hours, so only OSM hours exist and they are not repeated here.",
-  "Ticket machines and a ticket office: no source read lists them for Hyllie."
+  "Ticket machines and a ticket office: no source read lists them for Hyllie.",
+  "Hyllie track 75 platform (BIS 2597, valid from 2026-01-17, 0.9 km SW of the station): signposted number and whether it belongs to Hyllie station for passengers are not known."
+ ],
+ "answers": [
+  {
+   "question": "Which of Trafikverket's tracks 71–75 is signposted platform (spår) 1–4?",
+   "answer": "Spår 1 = track 71, spår 2 = track 72N, spår 3 = track 73N, spår 4 = track 74. Layout: two island platforms; the island between tracks 71 and 72N (12.3 m apart) is BIS 2090 (355 m, mellan) and serves spår 1 and 2; the island between 73N and 74 (12.9 m apart) is BIS 2091 (355 m, mellan) and serves spår 3 and 4. Tracks 72N and 73N run 4.3 m apart with no platform between them. Track 75: Bilaga 2A row 335 and BanInfo BIS 2597 (350 m, mellan, no roof, valid from 2026-01-17) put a platform on track 75, but it lies about 0.9 km south-west of the station (55.5594 N, 12.9633 E), outside the station box; OSM has no platform there and no source gives its signposted number: open.",
+   "how": "Each OSM platform edge polygon with ref 1–4 lies against exactly one register track line: ref 1 on 71 (0.0 m), ref 2 on 72N (0.9 m), ref 3 on 73N (0.6 m), ref 4 on 74 (0.1 m); the next track is 5–6 m away in every case.",
+   "confidence": "Track geometry and numbers are Trafikverket's; the signposted numbers 1–4 come from OSM refs (w157006194, w157006197, w157006198, w157006202), not from an owner source. A platform sign photo or Skånetrafiken's terminal map would confirm it.",
+   "_source": "Trafikverket BanInfo WMS BanInfo_1_5, layers Sparnummer (track links 71, 72N, 73N, 74, 75) and Plattform (BIS 2090 on 72N, 2091 on 74), GetFeatureInfo 2026-10-30, CC0; OpenStreetMap platform ways w157006194/-197/-198/-202 (ODbL), read 2026-10-30"
+  }
  ]
 }

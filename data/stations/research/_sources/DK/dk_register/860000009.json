@@ -1,0 +1,78 @@
+{
+ "clack_id": "860000009",
+ "name": "Hjørring",
+ "bilag_name": "Hjørring",
+ "station_abbr": [
+  "Hj"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "57.4562477 9.9835438 57.4562516 9.9835755 57.4562658 9.9836991 57.4562752 9.9837839 57.4562928 9.9839519 57.4563012 9.9840374 57.4563143 9.9841772 57.4563260 9.9843119 57.4563370 9.9844474 57.4563464 9.9845727 57.4563594 9.9847656 57.4563645 9.9848483 57.4563714 9.9849700 57.4563750 9.9850397 57.4563801 9.9851457 57.4563855 9.9852697 57.4563893 9.9853686 57.4563950 9.9855486 57.4563982 9.9856758 57.4564001 9.9857680 57.4564011 9.9858305 57.4564020 9.9858929 57.4564028 9.9859554 57.4564034 9.9860178 57.4564040 9.9860803 57.4564045 9.9861428 57.4564049 9.9862052 57.4564054 9.9862677 57.4564177 9.9880552 57.4564180 9.9880968 57.4564183 9.9881384 57.4564186 9.9881801 57.4564188 9.9882217 57.4564190 9.9882634 57.4564192 9.9883050 57.4564194 9.9883467 57.4564195 9.9883883 57.4564193 9.9885330 57.4564185 9.9886779 57.4564169 9.9888318 57.4564148 9.9889734 57.4564119 9.9891211 57.4564081 9.9892751 57.4564050 9.9893811 57.4564039 9.9894164",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 226,
+   "Bredd_m": 6.5,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000009-25-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "25",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 171 beside the track (354 m along it; Bilag 226 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2",
+   "Points": "57.4562406 9.9843574 57.4562561 9.9846087 57.4562696 9.9849008 57.4562785 9.9851935 57.4562828 9.9854866 57.4562952 9.9872992 57.4562983 9.9877946 57.4562998 9.9879833 57.4563052 9.9886508 57.4563058 9.9889865 57.4563047 9.9891679 57.4563045 9.9891971 57.4563041 9.9892674 57.4563016 9.9894104",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 305,
+   "Bredd_m": 4.9,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000009-25-2-2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "25",
+   "x_perron": "2",
+   "x_track": "2",
+   "x_perron_tracks": [
+    "2"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 172 beside the track (303 m along it; Bilag 305 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000009-25-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000009-25-2-2",
+   "IndKod": "2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [
+  "Perron 1 track 1: the outline FOR_PERRONER_OD Hj 171 runs 354 m along the track, Bilag says 226 m; line drawn to the outline"
+ ],
+ "heights": {
+  "55": 0.55
+ }
+}

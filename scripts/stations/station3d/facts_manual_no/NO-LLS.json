@@ -1,0 +1,362 @@
+{
+ "levels": [
+  {
+   "name": "Street level: station hall (stasjonshall, 1930 building, Jonas Lies gate) and bus terminal (bysiden)",
+   "note": "No level tags in OSM; signposted level names not found. Station building by Gudmund Hoel and Arne Henriksen, built 1930, listed (vernet). Today's station opened 1998 with Gardermobanen. Lillestrøm bussterminal is next to the station area.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; Store norske leksikon, Lillestrøm stasjon https://snl.no/Lillestr%C3%B8m_stasjon, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "Passage under the tracks (passasjen under sporene)",
+   "note": "Bane NOR: several eateries and shops in the passage under the tracks. OSM: underpass w25123510, layer -1, ~104 m long. Signposted name not found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "Platform level: island platforms for spor 1/2, 3/4, 6/7 and 8/9",
+   "note": "Bane NOR Sportabell: 'Mellomplattform dekker spor 2 og 1' 350 m, 700 mm, 10.30 m; 'dekker spor 3 og 4' 350 m, 700 mm, 9 m; 'dekker spor 6 og 7' 350 m, 560 mm, 11.70 m; 'dekker spor 8 og 9' 250 m, 560 mm, 11 m. Platforms roofed ('Tak over plattformene'). The OSM extract has no platform objects for this station.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w25123510",
+   "between": [
+    "street / station side",
+    "platforms (passage under the tracks)"
+   ],
+   "where": "passage under the tracks with shops and eateries; ~104 m long (OSM layer -1)",
+   "confirmed_by": "owner text (Bane NOR: 'passasjen under sporene') + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "passage / station",
+    "all platforms"
+   ],
+   "where": "Bane NOR: 'Heis til alle plattformer' (lift to every platform); positions not given and no lifts in the OSM extract",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w58198085",
+    "w58198086"
+   ],
+   "between": [
+    "passage under the tracks",
+    "platform (not linked in OSM)"
+   ],
+   "where": "about 11–12 m either side of the middle of the passage (one to the NNW, one to the S); ~9 m long",
+   "confirmed_by": "OSM only (Bane NOR confirms stairs to the platforms: 'Trapp og heis til plattformer')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w58198084",
+    "w58198087"
+   ],
+   "between": [
+    "passage under the tracks",
+    "platform (not linked in OSM)"
+   ],
+   "where": "about 31 m either side of the middle of the passage (one to the NW, one to the S); ~9 m long",
+   "confirmed_by": "OSM only (Bane NOR confirms stairs to the platforms)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stasjonshall (station hall) entrance",
+   "street": "Jonas Lies gate",
+   "where": "station hall with step-free access through automatic sliding doors; Bane NOR address 'Jonas Lies gate, 2000 Lillestrøm'; which OSM entrance node is the hall door is not established",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=main n6847210371",
+   "osm_id": "n6847210371",
+   "street": "Jonas Lies gate",
+   "where": "about 84 m NW of the middle of the passage",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=main n1417364125",
+   "osm_id": "n1417364125",
+   "where": "about 52 m NNW of the middle of the passage; no named street within OSM's match",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=main n4743670559",
+   "osm_id": "n4743670559",
+   "where": "about 76 m WNW of the middle of the passage; no named street matched",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrances=main n1243723635, n1243723636, n1243723634, n1243723632, n9986547021",
+   "osm_ids": [
+    "n1243723635",
+    "n1243723636",
+    "n1243723634",
+    "n1243723632",
+    "n9986547021"
+   ],
+   "street": "Jonas Lies gate",
+   "where": "96–215 m NW of the passage, along Jonas Lies gate towards the bus terminal; likely bus-terminal building doors (OSM bus_station w108333263 is ~129 m NW) — attribution not confirmed",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=yes series n6847210341–n6847224699 (17 doors)",
+   "street": "Jonas Lies gate",
+   "where": "row of doors 121–208 m NW of the passage along Jonas Lies gate, same line as the bus terminal; not station doors as far as can be told",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=yes n6847210370",
+   "osm_id": "n6847210370",
+   "where": "about 58 m NW of the passage; no street matched",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=yes n6965857075",
+   "osm_id": "n6965857075",
+   "where": "about 71 m NNE of the middle of the passage, near the toilets n6965857073",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "Mo-Su 04:00-02:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "station hall (step-free, automatic sliding doors)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (5)",
+   "where": "position not given; pay with card, coins and notes",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett (HC)",
+   "osm_id": "n6965857073",
+   "where": "OSM: inside the station building, about 62 m NNE of the middle of the passage",
+   "fee": "yes (payment machine)",
+   "note": "Bane NOR: HC toilet with a payment machine; baby-changing table in the HC toilet. Hours not given.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Oppbevaringsbokser (Speedbox / Speed Service)",
+   "osm_id": "n11806735428",
+   "where": "OSM: inside the station building, about 54 m NNE of the middle of the passage",
+   "hours_raw": "Tilgjengelig i stasjonens åpningstid (available while the station is open; waiting room 04:00-02:00)",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nordea",
+   "osm_id": "n6874391695",
+   "where": "outside the station building outline in OSM, about 8 m SE of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "note": "Bane NOR: 'Minibank og valutaveksling'.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "osm_id": "n5729021028",
+   "where": "outside the station building outline in OSM, about 18 m NW of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Mo-Fr 09:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Snarkjøp Lillestrøm stasjon",
+   "osm_id": "n288622866",
+   "where": "OSM: inside the station building, about 51 m N of the middle of the passage",
+   "opening_hours": "Mo-Fr 06:00-24:00; Sa 08:00-24:00; Su 09:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Garcon",
+   "osm_id": "n287239736",
+   "where": "OSM: inside the station building, about 66 m NNE of the middle of the passage",
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa-Su 08:30-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen",
+   "osm_id": "n710551049",
+   "where": "OSM: inside the station building, about 50 m NNW of the middle of the passage",
+   "opening_hours": "Mo-Th 05:00-23:00; Fr 05:00-24:00; Sa 06:30-24:00; Su 07:30-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM value used ',' between rules; normalised to ';'. Narvesen lists three stores here (Lillestrøm jbst., Jonas Liesgate 4; Lillestrøm jbst., syd; Rutebilst., Lillestrøm) without hours; which OSM node is which is not established.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen",
+   "osm_id": "n5728701142",
+   "where": "outside the station building outline in OSM, about 47 m SSE of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Mo-Fr 06:00-20:00; Sa,Su 09:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen",
+   "osm_id": "n710551047",
+   "where": "OSM: inside the station/bus-terminal building, about 97 m NW of the middle of the passage, towards the bus terminal",
+   "note": "No hours in OSM; narvesen.no hours did not render.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Garcon Express",
+   "osm_id": "n5728701143",
+   "where": "outside the station building outline in OSM, about 47 m S of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Mo-Fr 07:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Go' Bento",
+   "osm_id": "n6864709206",
+   "where": "outside the station building outline in OSM, about 12 m N of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "note": "No hours in OSM; no owner page found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Tea Fusion",
+   "osm_id": "n9587304965",
+   "where": "outside the station building outline in OSM, about 30 m N of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Mo-Fr 11:00-18:00; Sa-Su 12:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Big Bite",
+   "osm_id": "n10025607075",
+   "where": "outside the station building outline in OSM, about 30 m SSE of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "note": "No hours in OSM; no owner page found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "sports",
+   "name": "Fitness Factory",
+   "osm_id": "n9624376805",
+   "where": "outside the station building outline in OSM, about 21 m S of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "unknown (OSM shop/amenity=yes)",
+   "name": "Sporet",
+   "osm_id": "n12364966688",
+   "where": "outside the station building outline in OSM, about 12 m SE of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "opening_hours": "Fr-Sa 19:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM gives no type; evening-only hours.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Vending machine",
+   "osm_id": "n6874391697",
+   "where": "outside the station building outline in OSM, about 14 m SE of the middle of the passage under the tracks (w25123510); presumably in or at the passage (Bane NOR: 'Flere serveringssteder og butikker i passasjen under sporene') — position inferred from OSM, not stated by an owner",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Backstube",
+   "osm_id": "n10867567140",
+   "where": "Backstube: 'Lillestrøm Bus Terminal, Jonas Lies gate 2'; OSM: inside the bus-terminal/station building, about 109 m NW of the middle of the passage",
+   "opening_hours": "Mo-Fr 06:30-20:00; Sa,Su 08:00-17:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM tags it cafe; Backstube is a bakery.",
+   "_source": "Backstube, Visit us https://backstube.no/visit-us, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Lillestrøm bussterminal",
+   "osm_id": "w108333263",
+   "where": "next to the station area, NW of the passage along Jonas Lies gate (OSM ~129 m)",
+   "opening_hours": "Mo-Fr 05:30-23:59; Sa,Su 07:00-23:59",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Rail-replacement buses for Vy/SJ from bus terminal platforms 15–16; for Flytoget from the stop 'Lillestrøm stasjon' in Stillverksveien.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Store norske leksikon https://snl.no/Lillestr%C3%B8m_stasjon, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Drosjeholdeplass",
+   "osm_id": "w991544509",
+   "where": "OSM: about 74 m N of the middle of the passage",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Lillestrøm stasjon Bysiden",
+   "osm_id": "n11434400635",
+   "where": "town side (bysiden), about 96 m W of the middle of the passage (OSM); Bane NOR: one bike hotel lies between the station and the bus terminal (14 e-bike charging places)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "fee": "yes (NOK 50 / 30 days via app 'Bane NOR Parkering')",
+   "note": "Bane NOR gives capacities inconsistently (394 and 412 in one place; 'messesiden 355, bysiden 412' in another).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Lillestrøm Messesiden",
+   "where": "exhibition-centre side (messesiden); not in the OSM extract",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Norway; levels, ways to the platforms, entrances and shops requested)",
+   "answer": "Station hall in the 1930 building on Jonas Lies gate (bysiden) with the bus terminal next to it; a passage under the tracks (OSM w25123510, ~104 m) holds several eateries and shops and leads to four island platforms (spor 1/2, 3/4, 6/7, 8/9). Bane NOR confirms stairs and a lift to every platform; OSM maps four stairs off the passage but no lifts. 18 shops/eateries/services listed from OSM, with hours from OSM except Backstube (own website).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lillestrom/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-LLS.json), read 2026-10-30; Backstube, Visit us https://backstube.no/visit-us, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lifts: Bane NOR says there is a lift to every platform, but the OSM extract has none, so positions and which passage exit serves which platform are unknown.",
+  "Stairs w58198084–w58198087: OSM does not link them to platform refs, and the extract has no platform objects; which island platform each reaches is unknown.",
+  "Signposted names for the levels and for the passage under the tracks not found; no heights in any source.",
+  "Shop positions for the passage are inferred from OSM coordinates (distance to the middle of the underpass), not from a plan or owner text. No Bane NOR/Bane NOR Eiendom tenant list or station plan found.",
+  "Hours missing for: Narvesen n710551047, Go' Bento, Big Bite, toilets. Narvesen's store finder (3 stores: Lillestrøm jbst., Lillestrøm jbst. syd, Rutebilst. Lillestrøm) did not render hours; which OSM node matches which store is not established.",
+  "All shop hours except Backstube come from OSM's opening_hours only (shops' own sites not found or not readable); they may be outdated.",
+  "Ticket machine positions (5 machines) not given. Messesiden bike hotel is not in the OSM extract.",
+  "Which OSM entrance is the station hall door is not established; many OSM entrances along Jonas Lies gate (n6847210341–n6847224699, n1243723632–36) probably belong to the bus terminal building."
+ ]
+}

@@ -1,0 +1,402 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Street level / footbridges over the cutting (Oslo Plads station building, Østbanegade); OSM lifts tagged 0;1",
+   "note": "No signposted name found. DSB: 'Forhal åben hele døgnet'.",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platforms (perron 1–5) in the cutting",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Passages under the platforms (OSM underpasses w724683388, w724683390, w724683398) and the Metro transfer",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": "Metro Østerport (M3/M4) under Østbanegade — out of scope",
+   "note": "Wikipedia: 'The metro station is located under the street Østbanegade… A subway between the metro platforms to Østerport station is in operating.'",
+   "_source": "Wikipedia, \"Østerport railway station\", https://en.wikipedia.org/wiki/%C3%98sterport_railway_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n9938636550",
+   "between": [
+    "street/footbridge (1)",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "middle of perron 1 (OSM wheelchair=yes)",
+   "confirmed_by": "OSM only; DSB lists Elevator",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9938636547",
+   "between": [
+    "street (1)",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "middle of perron 1, beside the footbridge (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10833678372",
+   "between": [
+    "street",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "Oslo Plads (south) end of perron 1 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9938636542",
+   "between": [
+    "footbridge w48770051 (1)",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "middle of perron 2 at the footbridge (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10833678374",
+   "between": [
+    "street/passage",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "about 70 m from the Oslo Plads end of perron 2 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9938636540",
+   "between": [
+    "footbridge (1)",
+    "perron 3 (spor 5/6, S-tog 92 cm)"
+   ],
+   "where": "north end area of perron 3, about 55 m from its north end (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10589932727",
+   "between": [
+    "-1 (Metro transfer)",
+    "perron 3 (spor 5/6, S-tog 92 cm)"
+   ],
+   "where": "about 66 m from the Oslo Plads end of perron 3 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10649508130",
+   "between": [
+    "street",
+    "Metro (-2)"
+   ],
+   "where": "Oslo Plads, about 100 m from perron 3 (Metro lift; transfer only)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w724683392",
+   "between": [
+    "street/passage",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "about 90 m from the Oslo Plads end of perron 2",
+   "confirmed_by": "owner text: DSB out-of-service list 'Østerport spor 3/4: Forventes i drift den 13.11.26'; position OSM",
+   "status": "out of service, expected back 2026-11-13",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w724683396",
+   "between": [
+    "street/passage",
+    "perron 3 (spor 5/6, S-tog 92 cm)"
+   ],
+   "where": "about 87 m from the Oslo Plads end of perron 3",
+   "confirmed_by": "OSM only; DSB lists Rulletrapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1164838153",
+   "between": [
+    "street",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "Oslo Plads end of perron 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1145134053",
+    "w1145134057",
+    "w1469229735",
+    "w1469229736"
+   ],
+   "between": [
+    "perron 3 area",
+    "-1 / Metro transfer (Østbanegade)"
+   ],
+   "where": "about 60–75 m from the Oslo Plads end of perron 3, by Metro entrances n10589890288/n10657723425 on Østbanegade",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w48770051",
+   "between": [
+    "Østbanegade side",
+    "perron 2 / perron 1 lifts"
+   ],
+   "where": "across the tracks at the middle of perron 1–2 (about 95 m, wheelchair=yes)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1145432139",
+   "between": [
+    "Oslo Plads side",
+    "perron 3 (spor 5/6, S-tog 92 cm)"
+   ],
+   "where": "Oslo Plads end of perron 3 (about 59 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w724683388",
+    "w724683390",
+    "w724683398"
+   ],
+   "between": [
+    "perron 2",
+    "perron 3 / Østbanegade"
+   ],
+   "where": "about 40–55 m from the Oslo Plads end, under the tracks (level -1)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1164838148",
+    "w217665487",
+    "w48770047"
+   ],
+   "between": [
+    "street",
+    "perron 1 (spor 1/2)"
+   ],
+   "where": "Oslo Plads end and middle of perron 1",
+   "confirmed_by": "OSM only; DSB lists Trapper",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w48770050",
+    "w724683384",
+    "w1164838152"
+   ],
+   "between": [
+    "street/underpass",
+    "perron 2 (spor 3/4)"
+   ],
+   "where": "middle and Oslo Plads part of perron 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w271610055",
+    "w724683387",
+    "w724683389",
+    "w846602910"
+   ],
+   "between": [
+    "street/underpass",
+    "perron 3 (spor 5/6, S-tog 92 cm)"
+   ],
+   "where": "along perron 3",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w271610051",
+    "w271610052",
+    "w724683399"
+   ],
+   "between": [
+    "Oslo Plads",
+    "perron 4 (spor 12) / perron 2 (spor 3/4)"
+   ],
+   "where": "Oslo Plads end of perron 2 and the north end of perron 4 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building, Oslo Plads",
+   "osm_id": "n10902459892",
+   "street": "Oslo Plads",
+   "level": "1",
+   "where": "Oslo Plads 8 (DSB address); south end of the station",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "name": "Østbanegade entrances",
+   "osm_ids": [
+    "n6796507763",
+    "n6796507765",
+    "n6796507770",
+    "n9939671640",
+    "n3768742275"
+   ],
+   "street": "Østbanegade",
+   "level": "1",
+   "wheelchair": "yes (OSM, except n3768742275 staircase)",
+   "where": "east side along Østbanegade, at perron 2–3",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Metro entrances",
+   "osm_ids": [
+    "n6815705356",
+    "n10657723415",
+    "n10589890288",
+    "n10657723425"
+   ],
+   "street": "Oslo Plads / Østbanegade",
+   "level": "1",
+   "where": "two on Oslo Plads, two on Østbanegade by perron 3 (Metro transfer only)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Østerport railway station\", https://en.wikipedia.org/wiki/%C3%98sterport_railway_station, read 2026-10-30"
+  },
+  {
+   "name": "Unnamed OSM entrances",
+   "osm_ids": [
+    "n6796507776",
+    "n10833678376"
+   ],
+   "street": "not given",
+   "level": "?",
+   "where": "about 90 m from the Oslo Plads end of perron 2",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven / 7-Eleven 'Østerport Station'",
+   "level_per_plan": "1",
+   "where": "in the station (OSM n4332172893); 7-Eleven address Oslo Plads 8",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n4332172893",
+   "note": "DSB: also open around the clock between Christmas and New Year. 7-Eleven list agrees (00:00 til 23:59 every day).",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30; 7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "level_per_plan": "1",
+   "where": "in the station building (OSM n7289328539)",
+   "opening_hours": "Mo-Fr 06:30-18:00; Sa 09:00-17:00; Su 09:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n7289328539",
+   "note": "Named by DSB without hours.",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "level_per_plan": "1",
+   "where": "in the station building (OSM n7194411725)",
+   "osm_id": "n7194411725",
+   "note": "Named by DSB without hours; OSM has none.",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet / Handicaptoilet",
+   "where": "not stated",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "fee": "5 kr, card payment",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "level_per_plan": "1",
+   "where": "station building",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Forhal åben hele døgnet",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "not stated",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Aflåst cykelskur (1, access via DSB app with DSB profile) + cykelpumpe",
+   "where": "not stated",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "category": "service",
+   "name": "Handicapservice",
+   "where": "not stated",
+   "_source": "DSB station page Østerport, https://www.dsb.dk/trafikinformation/stationer/osterport/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Euronet",
+   "where": "about 130 m from the station point (OSM; outside the building)",
+   "osm_id": "n10889210107",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No owner plan. All lift/escalator/stair positions OSM only; DSB confirms the three kinds exist and the spor 3/4 escalator outage.",
+  "Which platform the escalator 'spor 3/4' is: matched to OSM w724683392 by position only.",
+  "Joe & The Juice and Espresso House hours not from their own sites (client-side rendered); toilet location not stated.",
+  "Real level names as signposted: none found. Lifts to perron 4 (spor 12) and perron 5 (spor 13): none in OSM; unknown.",
+  "No open-question list was supplied for Danish stations."
+ ]
+}

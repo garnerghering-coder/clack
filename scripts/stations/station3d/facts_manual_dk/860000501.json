@@ -1,0 +1,159 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal / street level",
+   "other_names": [],
+   "note": "DSB 'forhal' with toilets and ticket machine.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel under the tracks",
+   "other_names": [],
+   "note": "OSM underpass w184105187 (49 m) with lifts tagged -1;0.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n4512725709",
+   "between": [
+    "tunnel (-1)",
+    "0 (platform or street, not tagged)"
+   ],
+   "where": "south end of the tunnel",
+   "confirmed_by": "owner text (DSB: 'Elevator', presence only) + OSM (wheelchair=yes)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4512725705",
+   "between": [
+    "tunnel (-1)",
+    "0 (platform or street, not tagged)"
+   ],
+   "where": "north end of the tunnel",
+   "confirmed_by": "owner text (presence) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w546420523",
+    "w546420528"
+   ],
+   "between": [
+    "tunnel (-1)",
+    "0"
+   ],
+   "where": "beside each lift",
+   "confirmed_by": "owner text ('Trapper') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w184105187",
+   "between": [
+    "station side",
+    "far side / platforms"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building",
+   "street": "Jernbanegade",
+   "where": "DSB address Jernbanegade 39",
+   "confirmed_by": "owner text only; no OSM entrance node",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n275963877",
+   "where": "in the forhal",
+   "fee": "not stated",
+   "hours_raw": "DSB: 'Aflåst pga. hærværk' (locked because of vandalism); OSM still has Mo-Su 06:00-21:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall with toilets and ticket machine",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "in the forhal",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "City Kiosk",
+   "osm_id": "n2692709811",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 08:00-22:00; Sa 09:00-22:00; Su 10:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "KudosGames Café",
+   "osm_id": "n11922544879",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa 10:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "lighting",
+   "name": "Bennike el",
+   "osm_id": "n13752878085",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:30-13:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Middelfart Busstation",
+   "osm_id": "w178125657",
+   "where": "next to the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n3344711055",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 70-75 spaces (DSB gives both); 2 locked bicycle sheds",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "No 7-Eleven or staffed ticket office (DSB lists none; 7-Eleven list has no Middelfart store).",
+  "Toilets: DSB says locked because of vandalism; OSM hours are probably stale.",
+  "OSM extract has no platform ways; lifts are not linked to perron 1 (spor 1/3) or 2 (spor 4). Whether the lifts reach the platforms or the street on the far side is unsettled.",
+  "Entrances not mapped in OSM.",
+  "Shops (City Kiosk, KudosGames Café, Bennike el) are 'in station building' per OSM only; their own sites not checked.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ]
+}

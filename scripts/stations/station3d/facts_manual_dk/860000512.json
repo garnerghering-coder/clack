@@ -1,0 +1,503 @@
+{
+ "levels": [
+  {
+   "osm_level": "2",
+   "name": "Plan 2",
+   "other_names": [
+    "OBC concourse above/next to the tracks"
+   ],
+   "note": "DSB's label ('DSB 7-Eleven, Plan 2'); the 7-Eleven address is 'OBC, Østre Stationsvej 27,2'. OSM puts DSB Salg & Service (OSM name 'DSB Rejsecenter'), the 7-Eleven IC unit, the cafés and the heads of the three platform escalators and two platform lifts on level 2. Whether 'Plan 2' is signposted in the building is not confirmed.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Stueplan (ground floor) / platform level",
+   "other_names": [],
+   "note": "DSB's word 'stueplan' for the second 7-Eleven ('DSB 7-Eleven, stueplan (uden billetsalg)'; 7-Eleven address '...27,st'). OSM: the platform escalators and lifts run between levels 0 and 2, so the platforms are at OSM level 0; the stueplan 7-Eleven, McDonald's and DanØst Marked are also on level 0 (OBC ground floor).",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (pedestrian tunnel under the tracks, west of OBC)",
+   "other_names": [],
+   "note": "DSB: 'Trapper fra tunnel hele døgnet'. OSM: underpass w25111483 (layer -1, 101 m) with ramped stairs up to platforms 1, 2 and 3.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1 (layer)",
+   "name": "Byens Bro (footbridge over the tracks, west end)",
+   "other_names": [],
+   "note": "DSB: 'Elevator/trappe fra Byens Bro hele døgnet'. OSM: footbridge 'Byens Bro' (layer 1) with stairs and lifts down to platforms 1 and 2 (lifts tagged level 0;2).",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "osm_id": "w129517469",
+   "between": [
+    "Plan 2",
+    "perron 1 (spor 3/4)"
+   ],
+   "where": "from the OBC concourse down to platform 1",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (DSB: 'Rulletrapper: via Odense Banegårds Center kl. 05.00-00.30', presence and hours only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517470",
+   "between": [
+    "Plan 2",
+    "perron 2 (spor 5/6)"
+   ],
+   "where": "from the OBC concourse down to platform 2",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence, hours) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517471",
+   "between": [
+    "Plan 2",
+    "perron 3 (spor 7/8)"
+   ],
+   "where": "from the OBC concourse down to platform 3",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence, hours) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807063",
+   "between": [
+    "Plan 2",
+    "perron 1 (spor 3/4)"
+   ],
+   "where": "OBC concourse, beside the platform-1 escalator; OSM levels 0;2;4 (also serves the parking deck)",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (DSB: 'Elevator: via Odense Banegård Center kl. 05.00-00.30', presence only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807062",
+   "between": [
+    "Plan 2",
+    "perron 2 (spor 5/6)"
+   ],
+   "where": "OBC concourse, beside the platform-2 escalator; OSM levels 0;2;4",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768506",
+   "between": [
+    "Byens Bro",
+    "perron 1"
+   ],
+   "where": "west end of platform 1, under Byens Bro",
+   "hours": "24/7",
+   "confirmed_by": "owner text (DSB: 'Elevator/trappe fra Byens Bro hele døgnet') + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768511",
+   "between": [
+    "Byens Bro",
+    "perron 2"
+   ],
+   "where": "west end of platform 2, under Byens Bro",
+   "hours": "24/7",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768513",
+   "between": [
+    "Byens Bro",
+    "north of perron 2 (platform 3 side?)"
+   ],
+   "where": "west end, northernmost Byens Bro lift",
+   "confirmed_by": "OSM only (OSM links it to no platform)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w432556989",
+    "w963727696"
+   ],
+   "between": [
+    "Byens Bro",
+    "perron 1"
+   ],
+   "where": "west end of platform 1",
+   "hours": "24/7",
+   "confirmed_by": "owner text (Byens Bro stairs, presence) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w432556981",
+    "w963727698"
+   ],
+   "between": [
+    "Byens Bro",
+    "perron 2"
+   ],
+   "where": "west end of platform 2",
+   "hours": "24/7",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w25111483",
+   "between": [
+    "Østre Stationsvej side",
+    "perron 1, 2, 3"
+   ],
+   "where": "tunnel under the tracks west of OBC",
+   "hours": "24/7",
+   "confirmed_by": "owner text (DSB: 'Trapper fra tunnel hele døgnet') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w35912995",
+    "w924396510"
+   ],
+   "between": [
+    "tunnel",
+    "perron 1"
+   ],
+   "where": "from the tunnel up to platform 1 (OSM: ramp=yes, i.e. stairs with a ramp/wheel rail)",
+   "confirmed_by": "owner text (tunnel stairs) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w35912994",
+    "w924396408"
+   ],
+   "between": [
+    "tunnel",
+    "perron 2"
+   ],
+   "where": "from the tunnel up to platform 2",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w25111576",
+    "w924396221"
+   ],
+   "between": [
+    "tunnel",
+    "perron 3"
+   ],
+   "where": "from the tunnel up to platform 3",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3580277556",
+   "between": [
+    "OBC level 0",
+    "levels 1, 2, 3"
+   ],
+   "where": "south part of OBC (Østre Stationsvej side)",
+   "confirmed_by": "OSM only (OBC centre lift, not a platform lift)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1428844715",
+   "name": "OBC main entrance",
+   "street": "Østre Stationsvej",
+   "where": "south side of OBC",
+   "confirmed_by": "OSM only (entrance=main); DSB address Østre Stationsvej 27",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "osm_id": "n13143287489",
+   "name": "OBC entrance",
+   "street": "Østre Stationsvej",
+   "where": "south side of OBC",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_id": "n1428844717",
+   "name": "OBC entrance (west)",
+   "street": "Adamsgade",
+   "where": "west side of OBC",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_id": "n2727287835",
+   "name": "entrance (north)",
+   "street": "Dannebrogsgade",
+   "where": "north side, towards Dannebrogsgade",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_id": "n3374396743",
+   "name": "entrance (north)",
+   "street": "Dannebrogsgade",
+   "where": "north side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "name": "Byens Bro",
+   "street": "Byens Bro (footbridge over the tracks)",
+   "where": "west end of the platforms; lifts/stairs open 24 h",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "name": "Tunnel",
+   "street": "pedestrian tunnel west of OBC",
+   "where": "stairs from the tunnel to all three platforms, open 24 h",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "DSB Salg & Service",
+   "osm_id": "n317274330",
+   "level_per_plan": "2 (OSM level)",
+   "where": "OBC concourse (Plan 2), above the platforms; OSM still names it 'DSB Rejsecenter'",
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su off",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Sells international tickets too.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "lounge",
+   "name": "DSB 1' Lounge",
+   "where": "reached by walking through DSB Salg & Service ('som du finder, når du går gennem DSB Salg & Service')",
+   "hours_raw": "Lounge page table: Mo-Fr 08:00-17:00; the same page's meta text says 'hverdage kl. 8-17:30 og i weekenden kl. 10-16:45' (inconsistent)",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB 1' ticket required.",
+   "_source": "DSB 1' Lounge Odense https://www.dsb.dk/find-produkter-og-services/dsb-1-lounge-odense/, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Odense IC)",
+   "osm_id": "n4570094288",
+   "level_per_plan": "Plan 2",
+   "where": "OBC concourse (Plan 2), near the platform escalators; sells tickets; station concourse unit",
+   "opening_hours": "Mo-Fr 05:00-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page gives the same hours ('DSB 7-Eleven, Plan 2'). OSM has Mo-Fr 05:30 (outdated).",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Odense Station)",
+   "osm_id": "n4565928737",
+   "level_per_plan": "stueplan (0)",
+   "where": "OBC ground floor ('stueplan'), no ticket sales; DSB-listed station unit",
+   "opening_hours": "Mo-Th 05:00-24:00; Fr,Sa 05:00-00:30; Su 05:00-24:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "hours_conflict": "DSB page: 'Mandag - torsdag 05:30-00:00, fredag 05:30-01:00, lørdag 07:00-01:00, søndag 07:00-00:00' (OSM agrees with DSB).",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "the station hall in OBC (level not stated by DSB)",
+   "opening_hours": "Mo-Su 05:00-01:15",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal ved spor 7/8",
+   "where": "on platform 3 (spor 7/8)",
+   "hours_raw": "used when Odense Banegård Center is closed ('Er Odense Banegård Center lukket, er der ventesal ved spor 7/8')",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n3580277557",
+   "level_per_plan": "Plan 2 (OSM level 2)",
+   "where": "in OBC; DSB: 'ejes og drives af ATP-bygning' (run by the building owner, not DSB)",
+   "fee": "not stated by DSB",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "DSB gives no price or hours; OSM 24/7 is doubtful since OBC closes 00:30.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "osm_id": "n13474548111",
+   "where": "position per OSM only (no level tagged)",
+   "fee": "per started day: S 30 kr, M2 50 kr, L 60 kr, XL 80 kr; card only",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "osm_ids": [
+    "n4489412337",
+    "n4489425527 (level -1)"
+   ],
+   "where": "OSM: one by the concourse, one at tunnel level",
+   "confirmed_by": "owner text (presence) + OSM (positions)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "osm_id": "n2845525704",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), about 20 m from the platform escalators (OSM)",
+   "opening_hours": "Mo-Fr 05:30-18:30; Sa 06:30-18:00; Su 07:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "osm_id": "n4039782461",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), next to the platform escalators (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "The Food Stall",
+   "osm_id": "n4447219893",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), over the platforms (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Giraffen",
+   "osm_id": "n940463203",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), over the platforms (OSM)",
+   "opening_hours": "Mo-Sa 10:00-23:00; Su 10:00-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Kitchen: Mo-We 12:00-21:00, Th-Sa 12:00-21:30, Su 12:00-20:30.",
+   "_source": "Giraffen https://www.giraffen-odense.dk/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Apoteket Odense Banegård",
+   "osm_id": "n6238143253",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:30-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Cover City",
+   "osm_id": "n7083944394",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Smart Things",
+   "osm_id": "n13005996097",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 12:00-17:00; Su \"efter aftale\"",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "money_transfer",
+   "name": "Ria",
+   "osm_id": "n13474548112",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Euronet",
+   "osm_id": "n11078069420",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nokas",
+   "osm_id": "n3580260110",
+   "level_per_plan": "Plan 2",
+   "where": "OBC Plan 2, about 30 m south of the platform edge (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "w435954043",
+   "where": "outside OBC (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 33 spaces; spot no. 2172, the two rows farthest from Dannebrogsgade; accessible parking behind Danmarks Jernbanemuseum on Dannebrogsgade",
+   "fee": "free with DSB Plus / DSB Bilparkeringsbillet (free, 5 days)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Station vs mall: only units on the OBC concourse level (Plan 2) within about 25 m of the platform escalators per OSM, plus the two DSB-listed 7-Elevens, are included. Excluded as OBC mall shops: McDonald's, Mr. Fried Chicken, DanØst Marked (all OSM level 0), D'let (OSM level 1), Banegårdens Shawarma (OBC tenant list, not in OSM), Nordisk Film Biografer, Borgernes Hus/Hovedbiblioteket. No owner text says which units count as station.",
+  "Hours missing for Joe & The Juice and The Food Stall (no own-site page found; thefoodstall.dk is an empty WordPress page); Espresso House, Apoteket, Cover City, Smart Things, Ria hours are OSM only.",
+  "7-Eleven stueplan: 7-Eleven list and DSB page disagree on hours (see hours_conflict).",
+  "Toilet price/hours not given by DSB (run by ATP building).",
+  "Which platform the third Byens Bro lift (n4039768513) serves, and whether there is a concourse lift to platform 3, is not settled: OSM links concourse lifts only to platforms 1 and 2. DSB says only 'Elevator via OBC'.",
+  "Signposting of 'Plan 2'/'stueplan' inside OBC not confirmed (DSB text only).",
+  "Platform numbering: OSM platform refs 1/2/3 = perron 1 (spor 3/4), 2 (spor 5/6), 3 (spor 7/8) per the register; DSB uses 'spor 7/8'.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ]
+}

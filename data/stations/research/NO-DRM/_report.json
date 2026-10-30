@@ -1,0 +1,160 @@
+{
+ "clack_id": "NO-DRM",
+ "slug": "drammen",
+ "flags": [
+  "Platform BIS track 1 (track 1): laser gives 0.27 m above the track bed (≈0.10 m above rail after −0.15…0.2 m), register class 760 = 0.76 m. Not decided; add to REVIEW.md.",
+  "Platform surfaces differ by 0.53 m across the station (1.90–2.43 m); the station reference above is their median — check which level the app should use.",
+  "w134395844 Drammen stasjon (station building): p95 10.5 m is 3.3 m above the median 7.2 m (a taller neighbour or a mast inside the outline?).",
+  "w134396697 office: p95 20.7 m is 6.5 m above the median 14.2 m (a taller neighbour or a mast inside the outline?).",
+  "w1535657340 roof: p95 16.9 m is 3.8 m above the median 13.2 m (a taller neighbour or a mast inside the outline?).",
+  "w1535657349 roof: p95 9.2 m is 3.4 m above the median 5.8 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w594335608 Bybrua (footway, tertiary); w727089259 (no mapped ways); w727089260 (no mapped ways); w727089261 Strømsøbrua (footway, trunk).",
+  "Laser-traced roof (241 m², top 3.7 m above the platform, 4.2 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section.",
+  "Laser-traced roof (498 m², top 3.6 m above the platform, 4.1 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section.",
+  "Laser-traced roof (731 m², top 4.0 m above the platform, 4.5 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 0.14 m over 2452 m², 0.15 m over 5057 m², 0.16 m over 12638 m², 0.17 m over 30112 m², 0.18 m over 46365 m², 0.19 m over 37376 m², 0.20 m over 21256 m², 0.21 m over 12463 m², 0.22 m over 8570 m², 0.23 m over 6743 m², 0.24 m over 5591 m², 0.25 m over 4771 m², 0.26 m over 3886 m², 0.27 m over 2889 m², 0.28 m over 2060 m², 1.83 m over 1533 m², 1.85 m over 1606 m², 1.86 m over 1713 m², 1.87 m over 1786 m², 1.88 m over 1906 m², 1.89 m over 1900 m², 1.90 m over 1896 m², 1.91 m over 1908 m², 1.92 m over 1826 m², 1.93 m over 1781 m², 1.94 m over 1737 m², 1.95 m over 1773 m², 1.96 m over 1763 m², 1.97 m over 1786 m², 1.98 m over 1710 m², 1.99 m over 1597 m², 2.00 m over 1667 m², 2.01 m over 1768 m², 2.02 m over 1785 m², 2.03 m over 1730 m², 2.04 m over 1718 m², 2.05 m over 1750 m², 2.06 m over 1624 m², 2.07 m over 1630 m², 2.08 m over 1629 m², 2.09 m over 1655 m², 2.10 m over 1654 m², 2.11 m over 1587 m², 2.12 m over 1599 m², 2.13 m over 1709 m², 2.14 m over 1841 m², 2.15 m over 1914 m², 2.16 m over 2070 m², 2.17 m over 1965 m², 2.18 m over 2074 m², 2.19 m over 2175 m², 2.20 m over 2237 m², 2.21 m over 2190 m², 2.22 m over 2306 m², 2.23 m over 2443 m², 2.24 m over 2308 m², 2.25 m over 2274 m², 2.26 m over 2170 m², 2.27 m over 2217 m², 2.28 m over 2306 m², 2.29 m over 2211 m², 2.30 m over 2286 m², 2.31 m over 2201 m², 2.32 m over 2247 m², 2.33 m over 2172 m², 2.34 m over 2084 m², 2.35 m over 2037 m², 2.36 m over 2147 m², 2.37 m over 2001 m², 2.38 m over 2054 m², 2.39 m over 2073 m², 2.40 m over 2158 m², 2.41 m over 2277 m², 2.42 m over 2251 m², 2.43 m over 2178 m², 2.44 m over 2169 m², 2.45 m over 2166 m², 2.46 m over 2281 m², 2.47 m over 2353 m², 2.48 m over 2293 m², 2.49 m over 2337 m², 2.50 m over 2291 m², 2.51 m over 2237 m², 2.52 m over 2257 m², 2.53 m over 2365 m², 2.54 m over 2346 m², 2.55 m over 2316 m², 2.56 m over 2285 m², 2.57 m over 2225 m², 2.58 m over 2291 m², 2.59 m over 2291 m², 2.60 m over 2242 m², 2.61 m over 2277 m², 2.62 m over 2298 m², 2.63 m over 2277 m², 2.64 m over 2255 m², 2.65 m over 2097 m², 2.66 m over 2138 m², 2.67 m over 1976 m², 2.68 m over 2086 m², 2.69 m over 2018 m², 2.70 m over 1944 m², 2.71 m over 1829 m², 2.72 m over 1835 m², 2.73 m over 1863 m², 2.74 m over 1753 m², 2.75 m over 1876 m², 2.76 m over 1716 m², 2.77 m over 1794 m², 2.78 m over 1669 m², 2.79 m over 1642 m², 2.80 m over 1645 m², 2.81 m over 1713 m², 2.82 m over 1597 m², 2.83 m over 1554 m², 2.84 m over 1622 m², 2.85 m over 1548 m², 2.86 m over 1580 m², 2.87 m over 1613 m², 2.88 m over 1546 m², 2.89 m over 1551 m², 2.90 m over 1518 m², 2.91 m over 1597 m², 2.93 m over 1665 m², 2.94 m over 1588 m², 2.95 m over 1652 m², 2.96 m over 1650 m², 2.97 m over 1601 m², 2.98 m over 1565 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.196235,59.736104,10.214235,59.744104",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Drammen Eiker 2015",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "drammen_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": -4.42,
+  "median_m": 2.01,
+  "max_m": 16.15,
+  "nan_cells": 325465,
+  "size_m": [
+   1158,
+   796
+  ],
+  "box_sweref": [
+   567170,
+   6622685,
+   568328,
+   6623481
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1798298_341.laz"
+  ],
+  "scan_date": "2015-07-07",
+  "density_pts_m2_nominal": 5,
+  "flight_height_m": null,
+  "points_in_box": 5484001,
+  "density_in_box": 5.95,
+  "classes": {
+   "1": 2471828,
+   "2": 2962433,
+   "7": 7436,
+   "10": 42304
+  },
+  "train_points_class64": 2436
+ },
+ "platforms": [
+  {
+   "bis_object": "track 1",
+   "track": "1",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 350.0,
+   "width_m": 3.5,
+   "roof": null,
+   "track_bed_m": 1.63,
+   "track_bed_points": 2614,
+   "platform_surface_m": 1.9,
+   "platform_points": 338,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "surface_minus_bed_m": 0.27,
+   "laser_estimate_above_rail_m": 0.1
+  },
+  {
+   "bis_object": "track 3",
+   "track": "2,3",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 350.0,
+   "width_m": 3.5,
+   "roof": null,
+   "track_bed_m": 2.06,
+   "track_bed_points": 2603,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 4",
+   "track": "4,5",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 350.0,
+   "width_m": 3.5,
+   "roof": null,
+   "track_bed_m": 1.79,
+   "track_bed_points": 2782,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 6",
+   "track": "6",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 350.0,
+   "width_m": 3.5,
+   "roof": null,
+   "track_bed_m": 1.61,
+   "track_bed_points": 1952,
+   "platform_surface_m": 2.43,
+   "platform_points": 3590,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "other_side_surface_m": 1.96,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 0.82,
+   "laser_estimate_above_rail_m": 0.65
+  }
+ ],
+ "platform_surface_m": 2.17,
+ "track_bed_m": 1.71,
+ "trains_in_scan": 4,
+ "structures": {
+  "building": 17,
+  "footbridge": 0,
+  "canopy_osm": 10,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 4
+ },
+ "photos": 100,
+ "photos_station_related": 17
+}

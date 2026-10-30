@@ -7,7 +7,7 @@ nothing is estimated. Where a source gives nothing, the cell says –.
 
 | | m RH 2000 | How |
 |---|---|---|
-| **Platform surface** (reference level 0) | **16.96** | median of the per-platform laser medians below (ground-class points 2.0 m to 2.0 m + width beside the track line, on BanInfo's side) |
+| **Platform surface** (reference level 0) | **16.96** | median of the per-platform laser medians below (ground-class points 2.0 m to 2.0 m + width beside the track line, on the raised side) |
 | **Track bed** | **16.24** | median of ground-class points within 0.8 m of the track lines (ballast/sleepers, not rail head) |
 | Ground in the box | 14.86 – 29.09 (median 23.63) | terrain model 615_37 (2025-09-18) |
 

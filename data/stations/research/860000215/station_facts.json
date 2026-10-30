@@ -1,0 +1,485 @@
+{
+ "clack_id": "860000215",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal (station hall) / street level",
+   "other_names": [],
+   "note": "DSB 'forhal'. OSM has one shop on level 1 (krystakSkønhed) in the station building.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [],
+ "entrances": [
+  {
+   "osm_id": "n5508357680",
+   "name": "Main entrance",
+   "street": "Jernbanegade",
+   "level": "0",
+   "where": "recessed entrance between the two towers (Wikipedia)",
+   "confirmed_by": "OSM + DSB address Jernbanegade 35 + Wikipedia text",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; Wikipedia 'Esbjerg station' https://en.wikipedia.org/wiki/Esbjerg_station, read 2026-10-30",
+   "position": {
+    "lon": 8.4581244,
+    "lat": 55.4678213,
+    "how": "OSM n5508357680",
+    "_source": "OpenStreetMap n5508357680 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5508357680",
+   "street": "Jernbanegade",
+   "street_how": "nearest named street, 20.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5508357680 (already in OSM)",
+   "position": {
+    "lon": 8.4581244,
+    "lat": 55.4678213,
+    "how": "OSM n5508357680",
+    "_source": "OpenStreetMap n5508357680 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Esbjerg Station)",
+   "osm_id": "n5284602780",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 05:00-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page agrees. OSM has Mo-Fr 05:30.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4582444,
+    "lat": 55.4677468,
+    "osm_id": "n5284602780",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 53.4,
+    "how": "OSM node n5284602780",
+    "_source": "OpenStreetMap n5284602780 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall, with toilets, ticket machine and lockers",
+   "opening_hours": "Mo-Su 05:00-23:15",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet/Handicaptoilet",
+   "where": "in the forhal",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "on platform 1 and in the forhal ('findes på perron 1 og i forhallen')",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "where": "in the forhal",
+   "fee": "per started day: S 30, M 50, L 60, XL 80 kr; card",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair Lounge",
+   "osm_id": "n13241526307",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4582246,
+    "lat": 55.4679292,
+    "osm_id": "n13241526307",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 58.9,
+    "how": "OSM node n13241526307",
+    "_source": "OpenStreetMap n13241526307 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair by COA",
+   "osm_id": "n9472475327",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4583017,
+    "lat": 55.467922,
+    "osm_id": "n9472475327",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 54.0,
+    "how": "OSM node n9472475327",
+    "_source": "OpenStreetMap n9472475327 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair by Lisa",
+   "osm_id": "n13011672203",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4583419,
+    "lat": 55.4679182,
+    "osm_id": "n13011672203",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 51.4,
+    "how": "OSM node n13011672203",
+    "_source": "OpenStreetMap n13011672203 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Smuuuk",
+   "osm_id": "n13241526321",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4582618,
+    "lat": 55.4679254,
+    "osm_id": "n13241526321",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 56.5,
+    "how": "OSM node n13241526321",
+    "_source": "OpenStreetMap n13241526321 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "beauty",
+   "name": "Beauty By Reenberg",
+   "osm_id": "n5284602779",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4581879,
+    "lat": 55.467932,
+    "osm_id": "n5284602779",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 61.3,
+    "how": "OSM node n5284602779",
+    "_source": "OpenStreetMap n5284602779 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "beauty",
+   "name": "krystakSkønhed",
+   "osm_id": "n13241526317",
+   "level_per_plan": "1",
+   "where": "in the station building, upper floor (OSM level 1)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30",
+   "position": {
+    "lon": 8.4582751,
+    "lat": 55.4679815,
+    "osm_id": "n13241526317",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 57.0,
+    "how": "OSM node n13241526317",
+    "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_ids": [
+    "n5508357701",
+    "n5508357702",
+    "n5508357703"
+   ],
+   "where": "in front of the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Esbjerg Busterminal",
+   "where": "immediately adjacent to the station",
+   "_source": "Wikipedia 'Esbjerg station', read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 53 spaces; free with DSB Plus or free DSB Bilparkeringsbillet (5 days); 1 locked bicycle shelter",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "w1002396657",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM w1002396657 (read 2026-10-30)",
+   "position": {
+    "lon": 8.458981,
+    "lat": 55.4661643,
+    "osm_id": "w1002396657",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 22.8,
+    "how": "representative point of the OSM area w1002396657",
+    "_source": "OpenStreetMap w1002396657 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "beauty",
+   "name": "Beauty By Reenberg",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://beauty-by-reenberg-24874.planway.com/",
+   "position": {
+    "lon": 8.4581879,
+    "lat": 55.467932,
+    "osm_id": "n5284602779",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 61.3,
+    "how": "OSM node n5284602779",
+    "_source": "OpenStreetMap n5284602779 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5284602779 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa-Su 07:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.dsb.dk/kundeservice/stationer/esbjerg/",
+   "position": {
+    "lon": 8.4582444,
+    "lat": 55.4677468,
+    "osm_id": "n5284602780",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 53.4,
+    "how": "OSM node n5284602780",
+    "_source": "OpenStreetMap n5284602780 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5284602780 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair by COA",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 8.4583017,
+    "lat": 55.467922,
+    "osm_id": "n9472475327",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 54.0,
+    "how": "OSM node n9472475327",
+    "_source": "OpenStreetMap n9472475327 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9472475327 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair by Lisa",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 8.4583419,
+    "lat": 55.4679182,
+    "osm_id": "n13011672203",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 51.4,
+    "how": "OSM node n13011672203",
+    "_source": "OpenStreetMap n13011672203 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13011672203 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair Lounge",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://hair-lounge.planway.com/",
+   "position": {
+    "lon": 8.4582246,
+    "lat": 55.4679292,
+    "osm_id": "n13241526307",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 58.9,
+    "how": "OSM node n13241526307",
+    "_source": "OpenStreetMap n13241526307 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13241526307 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "beauty",
+   "name": "krystakSkønhed",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 8.4582751,
+    "lat": 55.4679815,
+    "osm_id": "n13241526317",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 57.0,
+    "how": "OSM node n13241526317",
+    "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Smuuuk",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 8.4582618,
+    "lat": 55.4679254,
+    "osm_id": "n13241526321",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 56.5,
+    "how": "OSM node n13241526321",
+    "_source": "OpenStreetMap n13241526321 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13241526321 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Broen Shopping",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa,Su 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.broenshopping.dk/",
+   "position": {
+    "lon": 8.4581433,
+    "lat": 55.4656909,
+    "osm_id": "w412479585",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 4.8,
+    "how": "representative point of the OSM area w412479585",
+    "_source": "OpenStreetMap w412479585 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w412479585 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Pølsevognen Banegårdspladsen",
+   "brand": null,
+   "cuisine": "burger",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 8.4576375,
+    "lat": 55.4679882,
+    "osm_id": "w463087806",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 94.1,
+    "how": "representative point of the OSM area w463087806",
+    "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Access to the platforms (tunnel, level crossing, stairs, lifts) is unknown: DSB lists no access lines for Esbjerg and OSM has no lifts, stairs or underpass in the extract; OSM platforms carry no refs.",
+  "DSB lists 'Billetkontor' without hours; whether a staffed ticket office exists is not settled.",
+  "Identical OSM hours on five salon nodes look copied; not checked on their own sites.",
+  "Pølsevognen Banegårdspladsen (OSM, outside) not included.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

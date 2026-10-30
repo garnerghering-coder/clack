@@ -1,0 +1,379 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.4350307,
+      59.83403360000001
+     ],
+     [
+      10.4349558,
+      59.83398680000001
+     ],
+     [
+      10.4345703,
+      59.8337357
+     ],
+     [
+      10.4341489,
+      59.83344420000001
+     ],
+     [
+      10.433945399999999,
+      59.8332936
+     ],
+     [
+      10.4337487,
+      59.8331425
+     ],
+     [
+      10.4337026,
+      59.8331066
+     ],
+     [
+      10.4333444,
+      59.8328234
+     ],
+     [
+      10.433085,
+      59.8326093
+     ],
+     [
+      10.4328606,
+      59.8324132
+     ],
+     [
+      10.432607899999999,
+      59.8321929
+     ],
+     [
+      10.432256599999999,
+      59.83186379999999
+     ],
+     [
+      10.431619800000002,
+      59.83122120000001
+     ],
+     [
+      10.4315141,
+      59.831110899999985
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 354.0,
+    "width_m": 10.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "ASR-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 105.0,
+    "laser_track_bed_m": 104.21,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Sideplattform Askerbanen, alt 1 til DS4722",
+    "x_covers_tracks": [
+     "1"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 342.0,
+    "x_comment": "Sideplattform Askerbanen, alt 1 til DS4722",
+    "x_geometry": "extent: OSM platform outline w133645355 (ref 1), 381 m along the track (Bane NOR: 354 m)",
+    "x_osm_platform": "w133645355",
+    "x_nsr_quays": [
+     "NSR:Quay:698",
+     "NSR:Quay:5735"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w133645355 (ref 1), 381 m along the track (Bane NOR: 354 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.4318079,
+      59.831024
+     ],
+     [
+      10.4319341,
+      59.8311446
+     ],
+     [
+      10.4326002,
+      59.8317798
+     ],
+     [
+      10.432939499999998,
+      59.8321037
+     ],
+     [
+      10.433234200000001,
+      59.8323753
+     ],
+     [
+      10.4336474,
+      59.83273019999999
+     ],
+     [
+      10.433987,
+      59.83300979999999
+     ],
+     [
+      10.434036100000002,
+      59.833049
+     ],
+     [
+      10.434235099999999,
+      59.83320499999999
+     ],
+     [
+      10.4344392,
+      59.83336020000001
+     ],
+     [
+      10.434834,
+      59.8336576
+     ],
+     [
+      10.4351273,
+      59.8338762
+     ],
+     [
+      10.4352248,
+      59.83394859999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 3",
+    "track": "2,3",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 365.0,
+    "width_m": 8.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "ASR-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 104.36,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 3 og 2 Askerbanen",
+    "x_covers_tracks": [
+     "3",
+     "2"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 348.0,
+    "x_comment": "Mellomplattform Dekker spor 3 og 2 Askerbanen",
+    "x_geometry": "extent: OSM platform outline r7592987 (ref 2;3), 378 m along the track (Bane NOR: 365 m)",
+    "x_osm_platform": "r7592987",
+    "x_nsr_quays": [
+     "NSR:Quay:697",
+     "NSR:Quay:5729"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7592987 (ref 2;3), 378 m along the track (Bane NOR: 365 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.435260300000001,
+      59.83389909999999
+     ],
+     [
+      10.435198,
+      59.83385259999999
+     ],
+     [
+      10.4349054,
+      59.83363609999999
+     ],
+     [
+      10.434509,
+      59.83334010000001
+     ],
+     [
+      10.4343091,
+      59.83318319999999
+     ],
+     [
+      10.4341124,
+      59.833025499999984
+     ],
+     [
+      10.434060600000002,
+      59.832983300000016
+     ],
+     [
+      10.4337294,
+      59.832705899999986
+     ],
+     [
+      10.4333333,
+      59.83236
+     ],
+     [
+      10.4330316,
+      59.832078799999984
+     ],
+     [
+      10.432767599999998,
+      59.83182459999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 4",
+    "track": "4,5",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 261.0,
+    "width_m": 10.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "ASR-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 105.46,
+    "laser_track_bed_m": 104.41,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 4 og 5 Drammensbanen",
+    "x_covers_tracks": [
+     "4",
+     "5"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 256.0,
+    "x_comment": "Mellomplattform Dekker spor 4 og 5 Drammensbanen",
+    "x_geometry": "extent: OSM platform outline r7592986 (ref 4;5), 270 m along the track (Bane NOR: 261 m)",
+    "x_osm_platform": "r7592986",
+    "x_nsr_quays": [
+     "NSR:Quay:695",
+     "NSR:Quay:5730"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7592986 (ref 4;5), 270 m along the track (Bane NOR: 261 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.4358392,
+      59.834114699999986
+     ],
+     [
+      10.4358015,
+      59.8340826
+     ],
+     [
+      10.4355011,
+      59.833833699999985
+     ],
+     [
+      10.4351699,
+      59.8335623
+     ],
+     [
+      10.4343491,
+      59.832887
+     ],
+     [
+      10.4340227,
+      59.83261600000001
+     ],
+     [
+      10.4336007,
+      59.832273199999996
+     ],
+     [
+      10.433427899999998,
+      59.832141799999995
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 6",
+    "track": "6",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 259.0,
+    "width_m": 5.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "ASR-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 105.44,
+    "laser_track_bed_m": 104.46,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Sideplattform Drammensbanen",
+    "x_covers_tracks": [
+     "6"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 262.0,
+    "x_comment": "Sideplattform Drammensbanen",
+    "x_geometry": "extent: OSM platform outline w133645357 (ref 6), 258 m along the track (Bane NOR: 259 m)",
+    "x_osm_platform": "w133645357",
+    "x_nsr_quays": [
+     "NSR:Quay:696",
+     "NSR:Quay:5733"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w133645357 (ref 6), 258 m along the track (Bane NOR: 259 m)"
+   }
+  }
+ ]
+}

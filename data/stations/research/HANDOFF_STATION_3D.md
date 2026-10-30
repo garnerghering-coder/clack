@@ -1,4 +1,4 @@
-# Station 3D research (Sweden): handoff for Claude Code
+# Station 3D research (Sweden, Finland, Norway, Denmark): handoff for Claude Code
 
 State at 2026-10-30 (updated 11:00: Part 2 "what is at the station" added, see the end). This continues the brief `STATION_3D_RESEARCH_BRIEF_SWEDEN.md` (33 hub/mid stations) with the
 recipe in `STATION_3D_RESEARCH.md` (the playbook). **All 33 stations are done** (32 in this pass + Jönköping C earlier). Nothing has been written into `scripts/stations/<id>.edits.json`, redrafted or committed to git.
@@ -158,3 +158,51 @@ Stockholm C and Alvesta have full hand-read plan facts; the others have answers 
 **Still open across the batch:** floor heights (no open source measures them; the laser sees roofs only), hours for shops
 the owner's page doesn't list (aggregators such as Thatsup were not used), Göteborg C's platform access (no plan
 published), Mapillary and photo checks.
+
+## Finland (17 stations, brief `STATION_3D_RESEARCH_BRIEF_DK_FI.md`): done
+
+- Folders `data/stations/research/fi_<CODE>/` (ids `fi:<CODE>`, `_` for `:`), same files as Sweden, register file
+  `<slug>_platform_vayla.geojson`. Country CSV `vayla_platforms_FI.csv` (Swedish columns; `bandel` = ratanumero, `tracks` =
+  commercial track number), `README_platforms_FI.md`, `REVIEW_platform_heights_FI.md` (25 of 95 platforms differ by > 0.125 m).
+- Laser: Helsinki and Pasila from the City of Helsinki 2021 lidar (CC BY 4.0, ~40 pts/m²); the other 15 from the NLS open
+  0.5 p laser (CC BY 4.0), ordered free through the NLS file service (MapSite, order 0599290996; the owner's email, no API key).
+  The ground grid is made from each laser's class 2 (no DTM download). **No account or key was used for Finland.**
+- Register: Digitraffic infra-api `laiturit` (CC BY 4.0); class heights korkea 0.55 / matala 0.265 m.
+- Flags: Helsinki platforms read 0.80–0.96 m above the bed (likely slab track / larger ballast step); Turku's Logomo
+  platforms postdate the scan.
+- Rebuild: `make_fi_bundle.py` → `station_pack.py` → `finish_fi.sh` (facts + docs). Facts hand-read in `facts_manual_fi/`.
+
+## Norway (11 stations): 5 of 11 packs built, 6 waiting for Kartverket's exports
+
+- Folders `data/stations/research/NO-<CODE>/` (no Clack ids were given for Norway; the brief says Norway comes after DK/FI).
+  Built: NO-OSL_S, NO-NTH (underground: surface only), NO-SKØ, NO-LYS, NO-SV. Waiting: NO-ASR, NO-DRM, NO-LLS, NO-MOS,
+  NO-SKI (exports running), NO-GAR (queued; Kartverket allows 4 open exports per user).
+- Laser: Kartverket høydedata.no point-cloud exports (LAZ, EPSG:25832, NN2000, © Kartverket CC BY 4.0), one rectangle
+  per station (`_sources/NO/no_orders.json`), best open project per station (Oslo kommune tynnet 2019 for OSL_S/NTH/SKØ —
+  thinned, ~1 pt/m²; Bærum 2013, Asker 2012, Drammen Eiker 2015, Romerike 2013, Follo 2014, Moss Done FOU 2020, NDH
+  Akershus 2015). Exports are emailed as links (`leveranse.hoydedata.no`, valid 6 days). Bærum 2013 leaves platform decks
+  in class 1: `platform_from_unclassified` lets the pack take a flat class-1 band (marked `surface_from_class1`).
+- Register: Bane NOR's station pages, track table (per track: platform length, height mm above rail, width, which tracks the
+  platform serves), read 2026-10-30 (`_sources/NO/banenor_station_pages.json`; facts only). The English page is used where
+  it is newer (Ski after Follobanen). No coordinates in Bane NOR's table: each platform is drawn on the OSM track centreline
+  (`railway:track_ref`), cut to the OSM platform outline beside it; every feature says how in `x_geometry`. Stabling and
+  service platforms are listed in the README, not drawn.
+- Facts: `facts_manual_no/` (Oslo S has all 46 oslo-s.no outlets with hours and hall/level).
+- Rebuild: `run_no.sh <CODE> <export job id>` then `finish_no.sh <CODE>`.
+
+## Denmark (27 stations): register, OSM and facts in progress; 3D needs the owner's laser decision
+
+- Ids from the brief (`860000626` …, `gtfs:72888` → folder `gtfs_72888`).
+- Register: `banedanmark_platforms_DK.csv` (Swedish columns, `height_class` = cm) from Banedanmark Netredegørelse 2027
+  Bilag 3.6 (all 27 stations, 144 rows; København Syd = "Ny Ellebjerg", CPH Airport = "Kastrup") placed on Banedanmark Open
+  Data (CC BY 4.0) track centrelines (`Sporforløb`, SPORNUMMER) and platform outlines (`FOR_PERRONER_OD`). Per-station lists
+  in `_sources/DK/dk_register/`; flags there (e.g. København Syd's regional and S-tog tracks share numbers).
+- **Laser (Danmarks Højdemodel punktsky, CC BY 4.0) is not downloaded.** It needs either a Dataforsyningen token (the owner
+  creates it in their Dataforsyningen profile; never commit it) for 1 km tiles via the API, or the website's 10 km block
+  order (several GB per block). `make_dk_register.py` output is ready to feed a DK bundle once tiles exist (same shape as
+  `make_no_bundle.py`; EPSG:25832, DVR90).
+- OSM + Commons per station: `_sources/DK/clack_dk_osm_commons.json` (from the owner's Downloads) and `_sources/osm/<id>.json`.
+
+## Accounts used
+- Sweden: Lantmäteriet Geotorget login (laser download). Finland: NLS free file-service order (owner's email). Norway:
+  høydedata.no exports to the owner's email. Denmark: none yet. No token or key is stored anywhere in the repo.

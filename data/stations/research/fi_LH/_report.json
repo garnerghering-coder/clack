@@ -1,0 +1,146 @@
+{
+ "clack_id": "fi:LH",
+ "slug": "lahti",
+ "flags": [],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=25.652034,60.974265,25.666894,60.978216",
+ "profile": {
+  "brief": "the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)",
+  "vdatum": "N2000",
+  "crs": "ETRS-TM35FIN (EPSG:3067)",
+  "laser_line": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4422H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4422H4 2022-07-01 (20220204_MGGP_Lahti_kesa)",
+  "scan_block": "clack_fi_mml05_L4422H4",
+  "box_note": ": the platforms' extent plus a margin",
+  "dtm_what": "Ground, 1 m, float32, EPSG:3067, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4422H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4422H4 2022-07-01 (20220204_MGGP_Lahti_kesa)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Digitraffic",
+  "register_owner": "Väylävirasto (Finnish Transport Infrastructure Agency)",
+  "register_file": "lahti_platform_vayla.geojson",
+  "register_what": "Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels",
+  "register_licence": "Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0",
+  "register_text": "Register: Digitraffic infra-api `laiturit` (read 2026-10-30, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail (Väylävirasto Network Statement 2021 appendix 3B via Wikipedia \"Platform height\", read 2026-10-30).",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1,3,4,5)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4422H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4422H4 2022-07-01 (20220204_MGGP_Lahti_kesa). https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/laser-scanning-data-05-p (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read 2026-10-30, CC BY 4.0."
+ },
+ "ground": {
+  "min_m": 89.34,
+  "median_m": 103.09,
+  "max_m": 110.76,
+  "nan_cells": 117319,
+  "size_m": [
+   673,
+   284
+  ],
+  "box_sweref": [
+   427109,
+   6760741,
+   427782,
+   6761025
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "clack_fi_mml05_L4422H4.laz"
+  ],
+  "scan_date": "2022-07-01",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 108344,
+  "density_in_box": 0.57,
+  "classes": {
+   "1": 301,
+   "2": 74064,
+   "3": 310,
+   "4": 3439,
+   "5": 30230
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "LH L1",
+   "track": "1",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 451.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 102.97,
+   "track_bed_points": 374,
+   "platform_surface_m": 103.59,
+   "platform_points": 968,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.62,
+   "laser_estimate_above_rail_m": 0.45
+  },
+  {
+   "bis_object": "LH L4",
+   "track": "4",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 451.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 103.03,
+   "track_bed_points": 362,
+   "platform_surface_m": 103.68,
+   "platform_points": 1041,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.65,
+   "laser_estimate_above_rail_m": 0.48
+  },
+  {
+   "bis_object": "LH L2",
+   "track": "2",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 270.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 103.04,
+   "track_bed_points": 216,
+   "platform_surface_m": 103.78,
+   "platform_points": 478,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.56
+  },
+  {
+   "bis_object": "LH L3",
+   "track": "3",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 270.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 103.15,
+   "track_bed_points": 222,
+   "platform_surface_m": 103.85,
+   "platform_points": 475,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.7,
+   "laser_estimate_above_rail_m": 0.53
+  }
+ ],
+ "platform_surface_m": 103.73,
+ "track_bed_m": 103.03,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 5,
+  "footbridge": 0,
+  "canopy_osm": 4,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 52,
+ "photos_station_related": 19
+}

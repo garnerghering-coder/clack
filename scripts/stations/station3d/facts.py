@@ -9,6 +9,7 @@ import json, sys, os, re, math, unicodedata
 import jernhusen as JH
 
 CID, OUT = sys.argv[1], sys.argv[2]
+SAFE = CID.replace(':', '_')   # file and folder names use '_' for ':' (fi:HKI -> fi_HKI)
 TODAY = '2026-10-30'
 JPAGES = {}
 R = os.environ.get('STATION3D_RESEARCH', 'data/stations/research')
@@ -18,10 +19,10 @@ for f in (f'{R}/_sources/clack_jernhusen_pages_SE.json', f'{R}/_sources/clack_je
         for k, v in json.load(open(f)).items():
             if any(len(h) > 500 for h in v['pages'].values()):
                 JPAGES[k] = v
-APP = f'data/stations/{CID}.json'
-OSMF = f'{R}/_sources/osm/{CID}.json'          # made by osm_station.py from an OSM API 0.6 map extract
-PACK = f'{R}/{CID}'
-MANUAL = f'{HERE}/facts_manual/{CID}.json'
+APP = f'data/stations/{SAFE}.json'
+OSMF = os.environ.get('OSMFACTS_DIR', f'{R}/_sources/osm') + f'/{SAFE}.json'          # made by osm_station.py from an OSM API 0.6 map extract
+PACK = os.environ.get('PACK_DIR', R) + f'/{SAFE}'
+MANUAL = os.environ.get('FACTS_MANUAL_DIR', f'{HERE}/facts_manual') + f'/{SAFE}.json'
 OQ = f'{R}/STATION_OPEN_QUESTIONS_SWEDEN.md'
 
 norm = lambda s: re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD', (s or '').lower()).encode('ascii', 'ignore').decode())
@@ -32,7 +33,7 @@ manual = json.load(open(MANUAL)) if os.path.exists(MANUAL) else {}
 # ---------------------------------------------------------------- open questions for this station
 oq = []
 blk = None
-for line in open(OQ, encoding='utf-8'):
+for line in (open(OQ, encoding='utf-8') if os.path.exists(OQ) and CID.startswith('7400') else []):
     m = re.match(r'^## .*\(`(\d+)`\)', line)
     if m:
         blk = m.group(1)
@@ -157,11 +158,11 @@ for s in (J['shops'] if J else []):
                                '_source': jsrc('mat-och-butiker/'), 'note': 'listed by Jernhusen, not in the app map'})
 
 # ---------------------------------------------------------------- platform sides from the laser + BanInfo
-gj = next((f for f in os.listdir(PACK) if f.endswith('_platform_trafikverket.geojson')), None) if os.path.isdir(PACK) else None
-rep = json.load(open(f'{PACK}/_report.json')) if os.path.isdir(PACK) else None
+gj = next((f for f in os.listdir(PACK) if f.endswith(('_platform_trafikverket.geojson', '_platform_vayla.geojson', '_platform_banenor.geojson', '_platform_banedanmark.geojson'))), None) if os.path.isdir(PACK) else None
+rep = json.load(open(f'{PACK}/_report.json')) if os.path.exists(f'{PACK}/_report.json') else None
 if gj and rep:
     from pyproj import Transformer
-    fw = Transformer.from_crs(4326, 3006, always_xy=True).transform
+    fw = Transformer.from_crs(4326, 3006, always_xy=True).transform   # only for the compass side: any metric projection does
     G = json.load(open(f'{PACK}/{gj}'))
     byb = {r['bis_object']: r for r in rep['platforms']}
     for f in G['features']:
@@ -180,7 +181,7 @@ if gj and rep:
         comp = ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][int((ang + 22.5) // 45) % 8]
         e = {'platform_bis': q['bis_object'], 'track': q.get('track'), 'side': comp,
              'meaning': f'the platform lies on the {comp} side of track {q.get("track")} (the train stops with the platform to its {comp})',
-             '_source': f"laser ({rep['laser']['scan_date']}, raised ground beside the BanInfo track line) + Trafikverket BanInfo BIS {q['bis_object']}; read {TODAY}"}
+             '_source': f"laser ({rep['laser']['scan_date']}, raised ground beside the " + ("register's track line) + " + rep['profile']['register_licence'] + ' platform ' if rep.get('profile') else 'BanInfo track line) + Trafikverket BanInfo BIS ') + f"{q['bis_object']}; read {TODAY}"}
         if r.get('side_note'):
             e['note'] = r['side_note']
         facts['platform_sides'].append(e)
@@ -262,7 +263,7 @@ if os.path.exists(OSMF):
                                    'hours_source': "OSM's opening_hours" if m_.get('opening_hours') else None,
                                    'hours_checked': TODAY if m_.get('opening_hours') else None,
                                    'website': m_.get('website') or m_.get('contact:website'), 'position': pos(m_),
-                                   'note': 'OSM only: not on the station owner\'s list; check it still exists' if J else 'from OSM (the station owner publishes no shop list)',
+                                   'note': 'OSM only: not on the station owner\'s list; check it still exists' if J else ('from OSM (the station owner publishes no shop list)' if CID.startswith('7400') else 'from OSM; compare with the owner list in the hand-read facts'),
                                    '_source': f"OpenStreetMap {m_['osm_id']} (ODbL), read {TODAY}"})
     for k in ('connections', 'entrances'):
         for e in facts[k]:

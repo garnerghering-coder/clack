@@ -1,0 +1,135 @@
+{
+ "clack_id": "fi:KUO",
+ "slug": "kuopio",
+ "flags": [
+  "Platform BIS KUO L1 (track 1): laser gives 0.92 m above the track bed (≈0.74 m above rail after −0.15…0.2 m), register class korkea = 0.55 m. Not decided; add to REVIEW.md.",
+  "Platform BIS KUO L2 (track 2): register korkea, laser 0.79 m above the bed; record valid from 2023-11-17, not in Bilaga 2A; the scan is from 2021-07-05: probably built after the scan.",
+  "w87807952 Kuopion rautatieasema (station building): p95 100.2 m is 4.5 m above the median 95.7 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1044169166 (no mapped ways)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=27.673632,62.895608,27.687283,62.899039",
+ "profile": {
+  "brief": "the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)",
+  "vdatum": "N2000",
+  "crs": "ETRS-TM35FIN (EPSG:3067)",
+  "laser_line": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+  "scan_block": "clack_fi_mml05_P5114D3",
+  "box_note": ": the platforms' extent plus a margin",
+  "dtm_what": "Ground, 1 m, float32, EPSG:3067, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Digitraffic",
+  "register_owner": "Väylävirasto (Finnish Transport Infrastructure Agency)",
+  "register_file": "kuopio_platform_vayla.geojson",
+  "register_what": "Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels",
+  "register_licence": "Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0",
+  "register_text": "Register: Digitraffic infra-api `laiturit` (read 2026-10-30, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail (Väylävirasto Network Statement 2021 appendix 3B via Wikipedia \"Platform height\", read 2026-10-30).",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1,3,4,5)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa). https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/laser-scanning-data-05-p (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read 2026-10-30, CC BY 4.0."
+ },
+ "ground": {
+  "min_m": 82.79,
+  "median_m": 93.24,
+  "max_m": 106.9,
+  "nan_cells": 88357,
+  "size_m": [
+   550,
+   250
+  ],
+  "box_sweref": [
+   534312,
+   6974207,
+   534862,
+   6974457
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "clack_fi_mml05_P5114D3.laz"
+  ],
+  "scan_date": "2021-07-05",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 83379,
+  "density_in_box": 0.61,
+  "classes": {
+   "1": 381,
+   "2": 49465,
+   "3": 238,
+   "4": 1962,
+   "5": 31333
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "KUO L1",
+   "track": "1",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 324.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.46,
+   "track_bed_points": 267,
+   "platform_surface_m": 96.38,
+   "platform_points": 468,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.92,
+   "laser_estimate_above_rail_m": 0.74
+  },
+  {
+   "bis_object": "KUO L3",
+   "track": "3",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 320.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.25,
+   "track_bed_points": 261,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "KUO L2",
+   "track": "2",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 320.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 95.41,
+   "track_bed_points": 254,
+   "platform_surface_m": 96.2,
+   "platform_points": 463,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.79,
+   "laser_estimate_above_rail_m": 0.62,
+   "note": "not in Bilaga 2A (report 2026-02-04) and the BanInfo record is from 2023-11-17: probably built or rebuilt after the scan, so the laser value is not this platform; left out of the station level",
+   "after_scan": true
+  }
+ ],
+ "platform_surface_m": 96.38,
+ "track_bed_m": 95.35,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 9,
+  "footbridge": 1,
+  "canopy_osm": 5,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 34,
+ "photos_station_related": 3
+}

@@ -1,0 +1,37 @@
+{
+ "what": "footbridge deck and roof levels over the platform tracks",
+ "method": ", per bridge, on a 1.2 m-wide strip along the OSM line, over the part that lies above the tracks\n(within 8 m of a platform track line):\n  - deck_top_m: median of the bridge-deck class (Lantmäteriet/Helsinki class 17) points = the open deck's walking surface\n    (plus railings and anything lying on it; p10/p90 given);\n  - top_surface_m: median of non-ground object points (class 1, or 6 where buildings are classed) more than 2 m above\n    that deck, or above the platform when no deck points exist. Without deck-class points this surface is EITHER an open\n    deck that the classification left unclassified (railings included) OR the roof of an enclosed bridge: the laser alone\n    cannot tell which, so deck_top_m stays null and the bridge is flagged (OSM covered=*, photos or a drawing decide).\nHeights in the pack's vertical datum; *_above_platform_m = minus the pack's platform surface.",
+ "source": "laser sodertalje_syd_laser_station_2020.laz (scan 2020-03-31); bridge lines and tags: OpenStreetMap (ODbL), 740000055.osm; track lines: sodertalje_syd_platform_trafikverket.geojson",
+ "bridges": [
+  {
+   "osm_id": "w1266209056",
+   "name": "Igelstabron",
+   "osm_tags": {
+    "bridge": "yes",
+    "layer": "2",
+    "man_made": "bridge"
+   },
+   "crosses_register_tracks": [
+    "6",
+    "8"
+   ],
+   "strip_area_m2": 9874,
+   "points_class17": 12566,
+   "platform_surface_m": 28.95,
+   "track_bed_m": 27.75,
+   "deck_top_m": 40.71,
+   "deck_p10_p90_m": [
+    38.97,
+    42.06
+   ],
+   "deck_above_platform_m": 11.76,
+   "deck_above_track_bed_m": 12.96,
+   "top_surface_m": 44.45,
+   "top_surface_points": 3197,
+   "top_surface_above_platform_m": 15.5,
+   "osm_covered": null,
+   "osm_start_date": "1995-01-14",
+   "note": "deck seen (bridge class) and a higher surface over parts of it (roof, canopy or lift tower)"
+  }
+ ]
+}

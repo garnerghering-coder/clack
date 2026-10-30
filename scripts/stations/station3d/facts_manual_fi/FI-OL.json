@@ -1,0 +1,216 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level",
+   "other_names": [],
+   "note": "Station building (Rautatienkatu 11 A) beside platform 1 (track 1); an island platform serves tracks 2 and 3. Three platform tracks out of seven; register: L1 korkea, L2–L3 matala.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30; Digitraffic infra-api laiturit OL L1–L3 (Väylävirasto / Fintraffic, CC BY 4.0), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Asematunneli (station tunnel)",
+   "other_names": [
+    "Station tunnel (Wikipedia photo caption)"
+   ],
+   "note": "Name 'Asematunneli' from OSM; Wikipedia only shows it in a photo caption. No signposted level names found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w23350321",
+   "name": "Asematunneli",
+   "between": [
+    "station side (platform 1 / station building)",
+    "east side of the yard"
+   ],
+   "where": "just south of the station building (by the south end of the building), under all three platform tracks (~85 m)",
+   "confirmed_by": "OSM (name, platforms 1–3) + Wikipedia photo caption 'Station tunnel'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11417337663",
+   "between": [
+    "Asematunneli",
+    "platform 1 (track 1)"
+   ],
+   "where": "at the tunnel, platform 1",
+   "confirmed_by": "owner text (VR: 'an elevator serves the platforms') + OSM for position",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7875596530",
+   "between": [
+    "Asematunneli",
+    "island platform tracks 2–3"
+   ],
+   "where": "at the tunnel, middle of the island platform",
+   "confirmed_by": "owner text (VR: lift to the platforms) + OSM for position (wheelchair=yes)",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390189",
+   "between": [
+    "Asematunneli",
+    "platform 1"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390187",
+   "between": [
+    "Asematunneli",
+    "island platform tracks 2–3"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w27705215",
+    "w25000370"
+   ],
+   "name": "Eteläinen alikulku",
+   "between": [
+    "west side",
+    "east side of the yard"
+   ],
+   "where": "about 160 m south of the platforms; does not reach the platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building, main entrance",
+   "street": "Rautatienkatu",
+   "level": "0",
+   "where": "Rautatienkatu 11 A; OSM main door n8173831415",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "name": "Station building, platform-side doors",
+   "street": null,
+   "level": "0",
+   "where": "straight onto platform 1 (OSM n8173831394, n8173831401, n8173831403, n8173831409, n8173831411, n8173953410, n8173953412)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building",
+   "opening_hours": "Mo-Fr 06:00-24:00; Sa 07:00-24:00; Su 09:00-24:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Car-carrier keys go into a box in the waiting room (car trains suspended from 1 Apr 2026 for the rail-yard renovation; reopening expected autumn 2026).",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavaralokerot (VR)",
+   "fee": "S from 3.90 € / 3 h, XL from 4.90 € / 3 h, also ski size; 3–72 h; card; overstay charged hourly",
+   "where": "station building",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatit",
+   "where": "in the station building by the main entrance (OSM n8173831396, n8173831397)",
+   "osm_ids": [
+    "n8173831396",
+    "n8173831397"
+   ],
+   "note": "No VR service point.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Huovisen leipomo – Rautatieaseman kahvila",
+   "where": "in the station building (Rautatienkatu 11 a)",
+   "osm_id": "n13184845848",
+   "opening_hours": "Mo-Fr 06:00-18:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "Huovisen leipomo, https://huovisenleipomo.fi/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Barot's Oulu",
+   "where": "in the historic station building (Rautatienkatu 11A)",
+   "osm_id": "n13184845849",
+   "opening_hours": "Mo-Th 10:30-21:00; Fr,Sa 10:30-24:00; Su 12:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "Barot's, https://barots.fi/ravintolat/oulu/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Hanna (Taito Shop Oulu)",
+   "where": "next to the station building on the station side (OSM; not inside the building outline)",
+   "osm_id": "n11050273238",
+   "opening_hours": "Mo-Fr 10:00-17:00; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "south end of the station building, by the drop-off parking; no roof",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Kivisydän (P-Kivisydän)",
+   "where": "about 5 min walk; entrance from Hallituskatu",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "Rautatienkatu side (OSM n355554893)",
+   "osm_id": "n355554893",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "category": "car_carrier_loading",
+   "name": "Autojunien lastaus",
+   "where": "east of the rail yard, Ratakatu 6",
+   "note": "Suspended from 1 Apr 2026; reopening expected autumn 2026, date to be confirmed.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Both platforms: platform 1 (track 1, by the station building, also reached directly through the building's platform doors) and the island platform for tracks 2–3 each have stairs and a lift down to the Asematunneli. VR confirms a lift to the platforms; positions are OSM.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Rail-yard renovation 2026: VR mentions it only for car trains; whether passenger access (Asematunneli, lifts) is affected could not be checked (search budget ran out).",
+  "Where the east end of the Asematunneli opens (street) is not in the extract.",
+  "No published station plan read (Väylävirasto area-map listing on vayla.fi would not load).",
+  "No signposted level names; no heights. Toilet fee unknown.",
+  "Cafe Hanna hours OSM only; the shop's page was not checked.",
+  "Oulun joukkoliikenne stop names by the station not checked."
+ ]
+}

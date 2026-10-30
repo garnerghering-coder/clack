@@ -1,0 +1,489 @@
+{
+ "clack_id": "860000803",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: perron 1 (tracks 2/3), perron 2 (tracks 4 and 6), perron 3 (track 7), and perron 4 (track 5, short 129 m, south of the others)",
+   "note": "Bilag 3.6 heights: perron 1 35/55 cm, track 4 55 cm, track 5 55 cm, tracks 6 and 7 92 cm (S-tog). Wikipedia (da): 4 platforms, 6 platform tracks, 2 of them S-tog; operators DSB and Lokaltog (Køge Bugt-banen, Lille Syd, Østbanen). No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Gangbro (wide footbridge across the station area, built 2016–2018 as part of Køge Kyst)",
+   "note": "Danish Wikipedia: 'en bred gangbro tværs over stationsområdet'. OSM maps it at the south end of the main platforms (layer 1). No signposted name found.",
+   "_source": "https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses (OSM layer -1): one at the south end by perron 4, two short ones west of the station",
+   "note": "Danish Wikipedia mentions a road tunnel opened 2016 at the north end and that the south-end level crossing stays open for pedestrians; which OSM underpass is which is not settled.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w591100757",
+   "between": [
+    "town side (west)",
+    "harbour side / Køge Kyst (east)"
+   ],
+   "where": "crosses all tracks at the south end of the main platforms",
+   "confirmed_by": "Wikipedia text + OSM (no owner text found)",
+   "_source": "https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.1867613,
+    "lat": 55.4575728,
+    "how": "OSM w591100757 (point on the way)",
+    "_source": "OpenStreetMap w591100757 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w689983700",
+    "w689983694"
+   ],
+   "between": [
+    "footbridge",
+    "perron 1 (tracks 2/3)"
+   ],
+   "where": "south end of perron 1",
+   "confirmed_by": "OSM only (DSB lists stairs)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w689983691",
+   "between": [
+    "footbridge / south end",
+    "perron 4 (track 5)"
+   ],
+   "where": "north end of perron 4",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.1864381,
+    "lat": 55.4573419,
+    "how": "OSM w689983691 (point on the way)",
+    "_source": "OpenStreetMap w689983691 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w689983703",
+   "between": [
+    "footbridge",
+    "west side / perron 3"
+   ],
+   "where": "south end, west side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.1864883,
+    "lat": 55.4575917,
+    "how": "OSM w689983703 (point on the way)",
+    "_source": "OpenStreetMap w689983703 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w591100751",
+   "between": [
+    "footbridge",
+    "west side by perron 3 (track 7)"
+   ],
+   "where": "south end of perron 3, west side (OSM maps it as an area)",
+   "confirmed_by": "OSM only (DSB lists 'Elevator' with no detail)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30",
+   "position": {
+    "lon": 12.1863968,
+    "lat": 55.45769,
+    "how": "OSM w591100751 (point on the way)",
+    "_source": "OpenStreetMap w591100751 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w166700473",
+   "between": [
+    "west side",
+    "east side"
+   ],
+   "where": "south of the main platforms, by the north end of perron 4",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.1866977,
+    "lat": 55.4573846,
+    "how": "OSM w166700473 (point on the way)",
+    "_source": "OpenStreetMap w166700473 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w591100751",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 32.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w591100751 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.1863968,
+    "lat": 55.45769,
+    "how": "OSM w591100751 (point on the way)",
+    "_source": "OpenStreetMap w591100751 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w591100757",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 92.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w591100757 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.1867613,
+    "lat": 55.4575728,
+    "how": "OSM w591100757 (point on the way)",
+    "_source": "OpenStreetMap w591100757 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w689983691",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w689983691 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.1864381,
+    "lat": 55.4573419,
+    "how": "OSM w689983691 (point on the way)",
+    "_source": "OpenStreetMap w689983691 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w689983694",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w689983694 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.1867194,
+    "lat": 55.457318,
+    "how": "OSM w689983694 (point on the way)",
+    "_source": "OpenStreetMap w689983694 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w689983700",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w689983700 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.1868301,
+    "lat": 55.4577927,
+    "how": "OSM w689983700 (point on the way)",
+    "_source": "OpenStreetMap w689983700 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Køge Station",
+   "street": "Jernbanegade (address Jernbanegade 12)",
+   "level": "0",
+   "where": "town side, west of the tracks; the station lies between the old town and Køge Havn/Køge Kyst",
+   "_source": "https://en.wikipedia.org/wiki/K%C3%B8ge_railway_station, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n8363710420",
+   "where": "west side of the station by the footbridge landing (OSM, about 35 m from perron 3)",
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB: 'Mandag - fredag 05.00-00.00; Lørdag - Søndag Døgnåbent'. Not found in the 7-Eleven store list as read (page text truncated).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.1858951,
+    "lat": 55.4576106,
+    "osm_id": "n8363710420",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 27.5,
+    "how": "OSM node n8363710420",
+    "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "No position from DSB; not in OSM.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "note": "DSB lists it without hours or position.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_pickup",
+   "name": "Afhentning af udlandsbillet",
+   "note": "DSB lists pickup of international tickets (presumably at the 7-Eleven; not stated).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "note": "About 390 spaces, 49 % occupancy.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Busstoppesteder",
+   "where": "bus stops on Ivar Huitfeldtsvej and Østre Banevej (the western bus terminal closed in 2014)",
+   "_source": "https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Lucky Star",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.185832,
+    "lat": 55.457374,
+    "osm_id": "n5908116366",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 28.6,
+    "how": "OSM node n5908116366",
+    "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Lagkagehuset",
+   "brand": "Lagkagehuset",
+   "cuisine": "coffee_shop",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.185599,
+    "lat": 55.457359,
+    "osm_id": "n8133042258",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.8,
+    "how": "OSM node n8133042258",
+    "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.1858951,
+    "lat": 55.4576106,
+    "osm_id": "n8363710420",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 27.5,
+    "how": "OSM node n8363710420",
+    "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "365discount",
+   "brand": "365discount",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.1858162,
+    "lat": 55.4578296,
+    "osm_id": "n8363710421",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.6,
+    "how": "OSM node n8363710421",
+    "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Køge Stations Apotek",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 08:00-19:00; Sa 08:00-18:00; Su 10:00-13:00; PH 10:00-13:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.1861875,
+    "lat": 55.4585771,
+    "osm_id": "n8363710422",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.6,
+    "how": "OSM node n8363710422",
+    "_source": "OpenStreetMap n8363710422 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8363710422 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "houseware",
+   "name": "Imerco",
+   "brand": "Imerco",
+   "cuisine": null,
+   "opening_hours": "10:00-19:00; Sa-Su 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.imerco.dk/find-imerco/imerco-home-koege-straedet",
+   "position": {
+    "lon": 12.1856956,
+    "lat": 55.4578405,
+    "osm_id": "n9645634594",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.4,
+    "how": "OSM node n9645634594",
+    "_source": "OpenStreetMap n9645634594 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9645634594 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bicycle",
+   "name": "Fri BikeShop",
+   "brand": "Fri BikeShop",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.1861481,
+    "lat": 55.458493,
+    "osm_id": "n11556124104",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 18.8,
+    "how": "OSM node n11556124104",
+    "_source": "OpenStreetMap n11556124104 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11556124104 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Lifts: OSM maps only one (west side); DSB lists 'Elevator' with no number or position. Whether perron 1, perron 2 and the Lokaltog perron 4 have lifts is not settled.",
+  "OSM platform refs ('2;3', '5', one without ref) don't cover perron 2 (tracks 4/6) and perron 3 (track 7).",
+  "Which platform the Lokaltog Østbanen uses (track 5/perron 4 by its length and position, but no owner source says so).",
+  "Shops near the station in OSM (Lagkagehuset n8133042258, 365discount n8363710421, Køge Stations Apotek n8363710422, Imerco, Lucky Star, Fri BikeShop) are 25–50 m from the platforms; no source says they are in the station, so they are left out.",
+  "No station building is described after the 2015 demolition; where the ventesal and toilets are is not given.",
+  "No owner station plan found; footbridge name as signposted not found.",
+  "Floor heights: no source."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Køge)",
+   "answer": "Station rebuilt 2015–2018 with a wide footbridge across the tracks (Køge Kyst). OSM: footbridge at the south end of the platforms with stairs to perron 1 and perron 4, one lift on the west side; DSB confirms elevator and stairs but gives no positions.",
+   "_source": "https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ]
+}

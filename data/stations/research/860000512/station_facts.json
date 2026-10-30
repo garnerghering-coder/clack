@@ -1,0 +1,1877 @@
+{
+ "clack_id": "860000512",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "2",
+   "name": "Plan 2",
+   "other_names": [
+    "OBC concourse above/next to the tracks"
+   ],
+   "note": "DSB's label ('DSB 7-Eleven, Plan 2'); the 7-Eleven address is 'OBC, Østre Stationsvej 27,2'. OSM puts DSB Salg & Service (OSM name 'DSB Rejsecenter'), the 7-Eleven IC unit, the cafés and the heads of the three platform escalators and two platform lifts on level 2. Whether 'Plan 2' is signposted in the building is not confirmed.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Stueplan (ground floor) / platform level",
+   "other_names": [],
+   "note": "DSB's word 'stueplan' for the second 7-Eleven ('DSB 7-Eleven, stueplan (uden billetsalg)'; 7-Eleven address '...27,st'). OSM: the platform escalators and lifts run between levels 0 and 2, so the platforms are at OSM level 0; the stueplan 7-Eleven, McDonald's and DanØst Marked are also on level 0 (OBC ground floor).",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (pedestrian tunnel under the tracks, west of OBC)",
+   "other_names": [],
+   "note": "DSB: 'Trapper fra tunnel hele døgnet'. OSM: underpass w25111483 (layer -1, 101 m) with ramped stairs up to platforms 1, 2 and 3.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1 (layer)",
+   "name": "Byens Bro (footbridge over the tracks, west end)",
+   "other_names": [],
+   "note": "DSB: 'Elevator/trappe fra Byens Bro hele døgnet'. OSM: footbridge 'Byens Bro' (layer 1) with stairs and lifts down to platforms 1 and 2 (lifts tagged level 0;2).",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "escalator",
+   "osm_id": "w129517469",
+   "between": [
+    "Plan 2",
+    "perron 1 (spor 3/4)"
+   ],
+   "where": "from the OBC concourse down to platform 1",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (DSB: 'Rulletrapper: via Odense Banegårds Center kl. 05.00-00.30', presence and hours only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3862908,
+    "lat": 55.4016777,
+    "how": "OSM w129517469 (point on the way)",
+    "_source": "OpenStreetMap w129517469 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517470",
+   "between": [
+    "Plan 2",
+    "perron 2 (spor 5/6)"
+   ],
+   "where": "from the OBC concourse down to platform 2",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence, hours) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3866129,
+    "lat": 55.4018506,
+    "how": "OSM w129517470 (point on the way)",
+    "_source": "OpenStreetMap w129517470 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517471",
+   "between": [
+    "Plan 2",
+    "perron 3 (spor 7/8)"
+   ],
+   "where": "from the OBC concourse down to platform 3",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence, hours) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3868933,
+    "lat": 55.4020066,
+    "how": "OSM w129517471 (point on the way)",
+    "_source": "OpenStreetMap w129517471 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807063",
+   "between": [
+    "Plan 2",
+    "perron 1 (spor 3/4)"
+   ],
+   "where": "OBC concourse, beside the platform-1 escalator; OSM levels 0;2;4 (also serves the parking deck)",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (DSB: 'Elevator: via Odense Banegård Center kl. 05.00-00.30', presence only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3868034,
+    "lat": 55.4016944,
+    "how": "OSM n4039807063",
+    "_source": "OpenStreetMap n4039807063 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807062",
+   "between": [
+    "Plan 2",
+    "perron 2 (spor 5/6)"
+   ],
+   "where": "OBC concourse, beside the platform-2 escalator; OSM levels 0;2;4",
+   "hours": "05:00-00:30 (via OBC)",
+   "confirmed_by": "owner text (presence) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3868191,
+    "lat": 55.4018554,
+    "how": "OSM n4039807062",
+    "_source": "OpenStreetMap n4039807062 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768506",
+   "between": [
+    "Byens Bro",
+    "perron 1"
+   ],
+   "where": "west end of platform 1, under Byens Bro",
+   "hours": "24/7",
+   "confirmed_by": "owner text (DSB: 'Elevator/trappe fra Byens Bro hele døgnet') + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3825144,
+    "lat": 55.401611,
+    "how": "OSM n4039768506",
+    "_source": "OpenStreetMap n4039768506 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768511",
+   "between": [
+    "Byens Bro",
+    "perron 2"
+   ],
+   "where": "west end of platform 2, under Byens Bro",
+   "hours": "24/7",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3825119,
+    "lat": 55.4017587,
+    "how": "OSM n4039768511",
+    "_source": "OpenStreetMap n4039768511 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768513",
+   "between": [
+    "Byens Bro",
+    "north of perron 2 (platform 3 side?)"
+   ],
+   "where": "west end, northernmost Byens Bro lift",
+   "confirmed_by": "OSM only (OSM links it to no platform)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3825149,
+    "lat": 55.4019449,
+    "how": "OSM n4039768513",
+    "_source": "OpenStreetMap n4039768513 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w432556989",
+    "w963727696"
+   ],
+   "between": [
+    "Byens Bro",
+    "perron 1"
+   ],
+   "where": "west end of platform 1",
+   "hours": "24/7",
+   "confirmed_by": "owner text (Byens Bro stairs, presence) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w432556981",
+    "w963727698"
+   ],
+   "between": [
+    "Byens Bro",
+    "perron 2"
+   ],
+   "where": "west end of platform 2",
+   "hours": "24/7",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w25111483",
+   "between": [
+    "Østre Stationsvej side",
+    "perron 1, 2, 3"
+   ],
+   "where": "tunnel under the tracks west of OBC",
+   "hours": "24/7",
+   "confirmed_by": "owner text (DSB: 'Trapper fra tunnel hele døgnet') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3854515,
+    "lat": 55.4016616,
+    "how": "OSM w25111483 (point on the way)",
+    "_source": "OpenStreetMap w25111483 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w35912995",
+    "w924396510"
+   ],
+   "between": [
+    "tunnel",
+    "perron 1"
+   ],
+   "where": "from the tunnel up to platform 1 (OSM: ramp=yes, i.e. stairs with a ramp/wheel rail)",
+   "confirmed_by": "owner text (tunnel stairs) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w35912994",
+    "w924396408"
+   ],
+   "between": [
+    "tunnel",
+    "perron 2"
+   ],
+   "where": "from the tunnel up to platform 2",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w25111576",
+    "w924396221"
+   ],
+   "between": [
+    "tunnel",
+    "perron 3"
+   ],
+   "where": "from the tunnel up to platform 3",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3580277556",
+   "between": [
+    "OBC level 0",
+    "levels 1, 2, 3"
+   ],
+   "where": "south part of OBC (Østre Stationsvej side)",
+   "confirmed_by": "OSM only (OBC centre lift, not a platform lift)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3871761,
+    "lat": 55.4011608,
+    "how": "OSM n3580277556",
+    "_source": "OpenStreetMap n3580277556 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w25111483",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 101.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w25111483 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3854515,
+    "lat": 55.4016616,
+    "how": "OSM w25111483 (point on the way)",
+    "_source": "OpenStreetMap w25111483 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w25111576",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w25111576 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3854357,
+    "lat": 55.4019749,
+    "how": "OSM w25111576 (point on the way)",
+    "_source": "OpenStreetMap w25111576 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w35912994",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w35912994 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.385298,
+    "lat": 55.4018199,
+    "how": "OSM w35912994 (point on the way)",
+    "_source": "OpenStreetMap w35912994 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w35912995",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w35912995 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3853177,
+    "lat": 55.4016612,
+    "how": "OSM w35912995 (point on the way)",
+    "_source": "OpenStreetMap w35912995 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517469",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 21.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w129517469 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3862908,
+    "lat": 55.4016777,
+    "how": "OSM w129517469 (point on the way)",
+    "_source": "OpenStreetMap w129517469 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517470",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 20.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w129517470 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3866129,
+    "lat": 55.4018506,
+    "how": "OSM w129517470 (point on the way)",
+    "_source": "OpenStreetMap w129517470 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w129517471",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 18.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w129517471 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3868933,
+    "lat": 55.4020066,
+    "how": "OSM w129517471 (point on the way)",
+    "_source": "OpenStreetMap w129517471 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w263719741",
+   "name": "Byens Bro",
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 322.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w263719741 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3827375,
+    "lat": 55.4017443,
+    "how": "OSM w263719741 (point on the way)",
+    "_source": "OpenStreetMap w263719741 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w319413160",
+   "name": null,
+   "osm_level": "0;2",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 28.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w319413160 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3875087,
+    "lat": 55.4012388,
+    "how": "OSM w319413160 (point on the way)",
+    "_source": "OpenStreetMap w319413160 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w376969681",
+   "name": "Byens Bro",
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 263.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w376969681 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3826853,
+    "lat": 55.4019472,
+    "how": "OSM w376969681 (point on the way)",
+    "_source": "OpenStreetMap w376969681 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w432556980",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w432556980 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825779,
+    "lat": 55.4017591,
+    "how": "OSM w432556980 (point on the way)",
+    "_source": "OpenStreetMap w432556980 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w432556981",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w432556981 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825473,
+    "lat": 55.40174,
+    "how": "OSM w432556981 (point on the way)",
+    "_source": "OpenStreetMap w432556981 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w432556982",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w432556982 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825741,
+    "lat": 55.4016033,
+    "how": "OSM w432556982 (point on the way)",
+    "_source": "OpenStreetMap w432556982 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w432556989",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w432556989 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3824957,
+    "lat": 55.4015926,
+    "how": "OSM w432556989 (point on the way)",
+    "_source": "OpenStreetMap w432556989 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w924396221",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w924396221 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3854357,
+    "lat": 55.4019749,
+    "how": "OSM w924396221 (point on the way)",
+    "_source": "OpenStreetMap w924396221 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w924396408",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w924396408 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3854414,
+    "lat": 55.4018223,
+    "how": "OSM w924396408 (point on the way)",
+    "_source": "OpenStreetMap w924396408 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w924396510",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w924396510 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3854515,
+    "lat": 55.4016616,
+    "how": "OSM w924396510 (point on the way)",
+    "_source": "OpenStreetMap w924396510 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w963727696",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w963727696 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3827419,
+    "lat": 55.4016072,
+    "how": "OSM w963727696 (point on the way)",
+    "_source": "OpenStreetMap w963727696 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w963727698",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w963727698 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3827529,
+    "lat": 55.4017552,
+    "how": "OSM w963727698 (point on the way)",
+    "_source": "OpenStreetMap w963727698 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3580277556",
+   "name": null,
+   "osm_level": "0;1;2;3",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n3580277556 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3871761,
+    "lat": 55.4011608,
+    "how": "OSM n3580277556",
+    "_source": "OpenStreetMap n3580277556 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768506",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039768506 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825144,
+    "lat": 55.401611,
+    "how": "OSM n4039768506",
+    "_source": "OpenStreetMap n4039768506 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768511",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039768511 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825119,
+    "lat": 55.4017587,
+    "how": "OSM n4039768511",
+    "_source": "OpenStreetMap n4039768511 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039768513",
+   "name": null,
+   "osm_level": "0;2",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039768513 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3825149,
+    "lat": 55.4019449,
+    "how": "OSM n4039768513",
+    "_source": "OpenStreetMap n4039768513 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807061",
+   "name": null,
+   "osm_level": "0;1;2;3;4",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039807061 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3871026,
+    "lat": 55.4021498,
+    "how": "OSM n4039807061",
+    "_source": "OpenStreetMap n4039807061 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807062",
+   "name": null,
+   "osm_level": "0;2;4",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039807062 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3868191,
+    "lat": 55.4018554,
+    "how": "OSM n4039807062",
+    "_source": "OpenStreetMap n4039807062 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4039807063",
+   "name": null,
+   "osm_level": "0;2;4",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4039807063 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.3868034,
+    "lat": 55.4016944,
+    "how": "OSM n4039807063",
+    "_source": "OpenStreetMap n4039807063 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1428844715",
+   "name": "OBC main entrance",
+   "street": "Østre Stationsvej",
+   "where": "south side of OBC",
+   "confirmed_by": "OSM only (entrance=main); DSB address Østre Stationsvej 27",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30",
+   "position": {
+    "lon": 10.3876242,
+    "lat": 55.4011457,
+    "how": "OSM n1428844715",
+    "_source": "OpenStreetMap n1428844715 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n13143287489",
+   "name": "OBC entrance",
+   "street": "Østre Stationsvej",
+   "where": "south side of OBC",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.389188,
+    "lat": 55.4011329,
+    "how": "OSM n13143287489",
+    "_source": "OpenStreetMap n13143287489 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n1428844717",
+   "name": "OBC entrance (west)",
+   "street": "Adamsgade",
+   "where": "west side of OBC",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3863877,
+    "lat": 55.4011845,
+    "how": "OSM n1428844717",
+    "_source": "OpenStreetMap n1428844717 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n2727287835",
+   "name": "entrance (north)",
+   "street": "Dannebrogsgade",
+   "where": "north side, towards Dannebrogsgade",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3870992,
+    "lat": 55.402196,
+    "how": "OSM n2727287835",
+    "_source": "OpenStreetMap n2727287835 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n3374396743",
+   "name": "entrance (north)",
+   "street": "Dannebrogsgade",
+   "where": "north side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3867885,
+    "lat": 55.4025077,
+    "how": "OSM n3374396743",
+    "_source": "OpenStreetMap n3374396743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Byens Bro",
+   "street": "Byens Bro (footbridge over the tracks)",
+   "where": "west end of the platforms; lifts/stairs open 24 h",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "name": "Tunnel",
+   "street": "pedestrian tunnel west of OBC",
+   "where": "stairs from the tunnel to all three platforms, open 24 h",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1428844715",
+   "street": "Østre Stationsvej",
+   "street_how": "nearest named street, 10.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1428844715 (already in OSM)",
+   "position": {
+    "lon": 10.3876242,
+    "lat": 55.4011457,
+    "how": "OSM n1428844715",
+    "_source": "OpenStreetMap n1428844715 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1428844717",
+   "street": "Adamsgade",
+   "street_how": "nearest named street, 9.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1428844717 (already in OSM)",
+   "position": {
+    "lon": 10.3863877,
+    "lat": 55.4011845,
+    "how": "OSM n1428844717",
+    "_source": "OpenStreetMap n1428844717 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1428844731",
+   "street": "Adamsgade",
+   "street_how": "nearest named street, 29.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1428844731 (already in OSM)",
+   "position": {
+    "lon": 10.3866292,
+    "lat": 55.4016897,
+    "how": "OSM n1428844731",
+    "_source": "OpenStreetMap n1428844731 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1428844734",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1428844734 (already in OSM)",
+   "position": {
+    "lon": 10.3866129,
+    "lat": 55.4018506,
+    "how": "OSM n1428844734",
+    "_source": "OpenStreetMap n1428844734 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1504874197",
+   "street": "Dannebrogsgade",
+   "street_how": "nearest named street, 36.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1504874197 (already in OSM)",
+   "position": {
+    "lon": 10.3866004,
+    "lat": 55.4020022,
+    "how": "OSM n1504874197",
+    "_source": "OpenStreetMap n1504874197 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2727287835",
+   "street": "Dannebrogsgade",
+   "street_how": "nearest named street, 26.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2727287835 (already in OSM)",
+   "position": {
+    "lon": 10.3870992,
+    "lat": 55.402196,
+    "how": "OSM n2727287835",
+    "_source": "OpenStreetMap n2727287835 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3374396743",
+   "street": "Dannebrogsgade",
+   "street_how": "nearest named street, 12.7 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3374396743 (already in OSM)",
+   "position": {
+    "lon": 10.3867885,
+    "lat": 55.4025077,
+    "how": "OSM n3374396743",
+    "_source": "OpenStreetMap n3374396743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4315628258",
+   "street": "Adamsgade",
+   "street_how": "nearest named street, 9.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4315628258 (already in OSM)",
+   "position": {
+    "lon": 10.3876091,
+    "lat": 55.4013608,
+    "how": "OSM n4315628258",
+    "_source": "OpenStreetMap n4315628258 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5655749517",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5655749517 (already in OSM)",
+   "position": {
+    "lon": 10.3825463,
+    "lat": 55.4016206,
+    "how": "OSM n5655749517",
+    "_source": "OpenStreetMap n5655749517 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "P-10 Skulkenborg",
+   "osm_id": "n7119754638",
+   "street": "Under Byen",
+   "street_how": "nearest named street, 3.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7119754638 (already in OSM)",
+   "position": {
+    "lon": 10.3899439,
+    "lat": 55.3996449,
+    "how": "OSM n7119754638",
+    "_source": "OpenStreetMap n7119754638 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8914471280",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8914471280 (already in OSM)",
+   "position": {
+    "lon": 10.3825392,
+    "lat": 55.4017679,
+    "how": "OSM n8914471280",
+    "_source": "OpenStreetMap n8914471280 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8914471281",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8914471281 (already in OSM)",
+   "position": {
+    "lon": 10.3825167,
+    "lat": 55.4019568,
+    "how": "OSM n8914471281",
+    "_source": "OpenStreetMap n8914471281 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9954517148",
+   "street": "Under Byen",
+   "street_how": "nearest named street, 11.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9954517148 (already in OSM)",
+   "position": {
+    "lon": 10.3904249,
+    "lat": 55.3999147,
+    "how": "OSM n9954517148",
+    "_source": "OpenStreetMap n9954517148 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9954517149",
+   "street": "Under Byen",
+   "street_how": "nearest named street, 14.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9954517149 (already in OSM)",
+   "position": {
+    "lon": 10.3902962,
+    "lat": 55.3996886,
+    "how": "OSM n9954517149",
+    "_source": "OpenStreetMap n9954517149 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13143287489",
+   "street": "Østre Stationsvej",
+   "street_how": "nearest named street, 9.6 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13143287489 (already in OSM)",
+   "position": {
+    "lon": 10.389188,
+    "lat": 55.4011329,
+    "how": "OSM n13143287489",
+    "_source": "OpenStreetMap n13143287489 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "DSB Salg & Service",
+   "osm_id": "n317274330",
+   "level_per_plan": "2 (OSM level)",
+   "where": "OBC concourse (Plan 2), above the platforms; OSM still names it 'DSB Rejsecenter'",
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su off",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Sells international tickets too.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3870077,
+    "lat": 55.4018845,
+    "osm_id": "n317274330",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n317274330",
+    "_source": "OpenStreetMap n317274330 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "lounge",
+   "name": "DSB 1' Lounge",
+   "where": "reached by walking through DSB Salg & Service ('som du finder, når du går gennem DSB Salg & Service')",
+   "hours_raw": "Lounge page table: Mo-Fr 08:00-17:00; the same page's meta text says 'hverdage kl. 8-17:30 og i weekenden kl. 10-16:45' (inconsistent)",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB 1' ticket required.",
+   "_source": "DSB 1' Lounge Odense https://www.dsb.dk/find-produkter-og-services/dsb-1-lounge-odense/, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Odense IC)",
+   "osm_id": "n4570094288",
+   "level_per_plan": "Plan 2",
+   "where": "OBC concourse (Plan 2), near the platform escalators; sells tickets; station concourse unit",
+   "opening_hours": "Mo-Fr 05:00-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page gives the same hours ('DSB 7-Eleven, Plan 2'). OSM has Mo-Fr 05:30 (outdated).",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3871588,
+    "lat": 55.4019413,
+    "osm_id": "n4570094288",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 3.2,
+    "how": "OSM node n4570094288",
+    "_source": "OpenStreetMap n4570094288 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Odense Station)",
+   "osm_id": "n4565928737",
+   "level_per_plan": "stueplan (0)",
+   "where": "OBC ground floor ('stueplan'), no ticket sales; DSB-listed station unit",
+   "opening_hours": "Mo-Th 05:00-24:00; Fr,Sa 05:00-00:30; Su 05:00-24:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "hours_conflict": "DSB page: 'Mandag - torsdag 05:30-00:00, fredag 05:30-01:00, lørdag 07:00-01:00, søndag 07:00-00:00' (OSM agrees with DSB).",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3878281,
+    "lat": 55.4012835,
+    "osm_id": "n4565928737",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.1,
+    "how": "OSM node n4565928737",
+    "_source": "OpenStreetMap n4565928737 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "the station hall in OBC (level not stated by DSB)",
+   "opening_hours": "Mo-Su 05:00-01:15",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal ved spor 7/8",
+   "where": "on platform 3 (spor 7/8)",
+   "hours_raw": "used when Odense Banegård Center is closed ('Er Odense Banegård Center lukket, er der ventesal ved spor 7/8')",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n3580277557",
+   "level_per_plan": "Plan 2 (OSM level 2)",
+   "where": "in OBC; DSB: 'ejes og drives af ATP-bygning' (run by the building owner, not DSB)",
+   "fee": "not stated by DSB",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "DSB gives no price or hours; OSM 24/7 is doubtful since OBC closes 00:30.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3872275,
+    "lat": 55.4020236,
+    "osm_id": "n3580277557",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 12.1,
+    "how": "OSM node n3580277557",
+    "_source": "OpenStreetMap n3580277557 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "osm_id": "n13474548111",
+   "where": "position per OSM only (no level tagged)",
+   "fee": "per started day: S 30 kr, M2 50 kr, L 60 kr, XL 80 kr; card only",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3871372,
+    "lat": 55.4018866,
+    "osm_id": "n13474548111",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n13474548111",
+    "_source": "OpenStreetMap n13474548111 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "osm_ids": [
+    "n4489412337",
+    "n4489425527 (level -1)"
+   ],
+   "where": "OSM: one by the concourse, one at tunnel level",
+   "confirmed_by": "owner text (presence) + OSM (positions)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House",
+   "osm_id": "n2845525704",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), about 20 m from the platform escalators (OSM)",
+   "opening_hours": "Mo-Fr 05:30-18:30; Sa 06:30-18:00; Su 07:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30",
+   "position": {
+    "lon": 10.3866617,
+    "lat": 55.4014467,
+    "osm_id": "n2845525704",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.4,
+    "how": "OSM node n2845525704",
+    "_source": "OpenStreetMap n2845525704 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "osm_id": "n4039782461",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), next to the platform escalators (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30",
+   "position": {
+    "lon": 10.3867087,
+    "lat": 55.4015715,
+    "osm_id": "n4039782461",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 8.7,
+    "how": "OSM node n4039782461",
+    "_source": "OpenStreetMap n4039782461 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "The Food Stall",
+   "osm_id": "n4447219893",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), over the platforms (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30",
+   "position": {
+    "lon": 10.3872083,
+    "lat": 55.4015803,
+    "osm_id": "n4447219893",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.3,
+    "how": "OSM node n4447219893",
+    "_source": "OpenStreetMap n4447219893 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Giraffen",
+   "osm_id": "n940463203",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2), over the platforms (OSM)",
+   "opening_hours": "Mo-Sa 10:00-23:00; Su 10:00-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Kitchen: Mo-We 12:00-21:00, Th-Sa 12:00-21:30, Su 12:00-20:30.",
+   "_source": "Giraffen https://www.giraffen-odense.dk/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3871758,
+    "lat": 55.4018185,
+    "osm_id": "n940463203",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.3,
+    "how": "OSM node n940463203",
+    "_source": "OpenStreetMap n940463203 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pharmacy",
+   "name": "Apoteket Odense Banegård",
+   "osm_id": "n6238143253",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:30-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30",
+   "position": {
+    "lon": 10.3870033,
+    "lat": 55.4016169,
+    "osm_id": "n6238143253",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.6,
+    "how": "OSM node n6238143253",
+    "_source": "OpenStreetMap n6238143253 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Cover City",
+   "osm_id": "n7083944394",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3868199,
+    "lat": 55.401772,
+    "osm_id": "n7083944394",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.0,
+    "how": "OSM node n7083944394",
+    "_source": "OpenStreetMap n7083944394 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Smart Things",
+   "osm_id": "n13005996097",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 12:00-17:00; Su \"efter aftale\"",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3871923,
+    "lat": 55.4019841,
+    "osm_id": "n13005996097",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.8,
+    "how": "OSM node n13005996097",
+    "_source": "OpenStreetMap n13005996097 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "money_transfer",
+   "name": "Ria",
+   "osm_id": "n13474548112",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "opening_hours": "Mo-Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3872031,
+    "lat": 55.4016234,
+    "osm_id": "n13474548112",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.5,
+    "how": "OSM node n13474548112",
+    "_source": "OpenStreetMap n13474548112 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Euronet",
+   "osm_id": "n11078069420",
+   "level_per_plan": "Plan 2",
+   "where": "station concourse (OBC Plan 2) (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3866505,
+    "lat": 55.4019831,
+    "osm_id": "n11078069420",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.2,
+    "how": "OSM node n11078069420",
+    "_source": "OpenStreetMap n11078069420 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Nokas",
+   "osm_id": "n3580260110",
+   "level_per_plan": "Plan 2",
+   "where": "OBC Plan 2, about 30 m south of the platform edge (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3869676,
+    "lat": 55.4012921,
+    "osm_id": "n3580260110",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 32.5,
+    "how": "OSM node n3580260110",
+    "_source": "OpenStreetMap n3580260110 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "w435954043",
+   "where": "outside OBC (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30",
+   "position": {
+    "lon": 10.3860183,
+    "lat": 55.4021634,
+    "osm_id": "w435954043",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 3.5,
+    "how": "representative point of the OSM area w435954043",
+    "_source": "OpenStreetMap w435954043 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 33 spaces; spot no. 2172, the two rows farthest from Dannebrogsgade; accessible parking behind Danmarks Jernbanemuseum on Dannebrogsgade",
+   "fee": "free with DSB Plus / DSB Bilparkeringsbillet (free, 5 days)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30"
+  },
+  {
+   "category": "shop=ticket",
+   "name": "DSB Rejsecenter",
+   "osm_id": "n317274330",
+   "osm_level": "2",
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa-Su off",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n317274330 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n3580277557",
+   "osm_level": "2",
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n3580277557 (read 2026-10-30)",
+   "position": {
+    "lon": 10.3872275,
+    "lat": 55.4020236,
+    "osm_id": "n3580277557",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 12.1,
+    "how": "OSM node n3580277557",
+    "_source": "OpenStreetMap n3580277557 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11078069429",
+   "osm_level": "1",
+   "fee": "no",
+   "opening_hours": "Mo,Tu,Th,Fr 10:00-16:00; We 09:00-21:00; Sa,Su,PH 09:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n11078069429 (read 2026-10-30)",
+   "position": {
+    "lon": 10.3851917,
+    "lat": 55.4028829,
+    "osm_id": "n11078069429",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.7,
+    "how": "OSM node n11078069429",
+    "_source": "OpenStreetMap n11078069429 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n13474548111",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13474548111 (read 2026-10-30)",
+   "position": {
+    "lon": 10.3871372,
+    "lat": 55.4018866,
+    "osm_id": "n13474548111",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n13474548111",
+    "_source": "OpenStreetMap n13474548111 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Th 05:30-24:00; Fr 05:30-01:00; Sa 07:00-01:00; Su, PH 07:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.3878281,
+    "lat": 55.4012835,
+    "osm_id": "n4565928737",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.1,
+    "how": "OSM node n4565928737",
+    "_source": "OpenStreetMap n4565928737 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4565928737 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.3871588,
+    "lat": 55.4019413,
+    "osm_id": "n4570094288",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 3.2,
+    "how": "OSM node n4570094288",
+    "_source": "OpenStreetMap n4570094288 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4570094288 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Ordet",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.odensebib.dk/hovedbiblioteket/cafe-ordet-cafeen-i-hjertet-af-borgernes-hus",
+   "position": {
+    "lon": 10.3886267,
+    "lat": 55.401253,
+    "osm_id": "n5952621080",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 87.1,
+    "how": "OSM node n5952621080",
+    "_source": "OpenStreetMap n5952621080 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5952621080 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Cover City",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 08:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://covercity.dk/",
+   "position": {
+    "lon": 10.3868199,
+    "lat": 55.401772,
+    "osm_id": "n7083944394",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.0,
+    "how": "OSM node n7083944394",
+    "_source": "OpenStreetMap n7083944394 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7083944394 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Dlet - Odense Banegård Center",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.3871873,
+    "lat": 55.4016824,
+    "osm_id": "n7206987840",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n7206987840",
+    "_source": "OpenStreetMap n7206987840 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7206987840 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DanØst Marked",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 10:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.3873735,
+    "lat": 55.4012967,
+    "osm_id": "n9025612555",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 32.7,
+    "how": "OSM node n9025612555",
+    "_source": "OpenStreetMap n9025612555 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9025612555 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Hafla Burger",
+   "brand": null,
+   "cuisine": "burger",
+   "opening_hours": "Su,Mo,We,Th 11:00-23:59, Tu 11:00-22:00, Fr,Sa 11:00-01:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://haflaburger.dk/",
+   "position": {
+    "lon": 10.3881559,
+    "lat": 55.4008487,
+    "osm_id": "n10753341649",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 54.8,
+    "how": "OSM node n10753341649",
+    "_source": "OpenStreetMap n10753341649 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10753341649 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "brand": "McDonald's",
+   "cuisine": "burger",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.3870024,
+    "lat": 55.4011815,
+    "osm_id": "n12037491698",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 20.1,
+    "how": "OSM node n12037491698",
+    "_source": "OpenStreetMap n12037491698 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12037491698 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Mr. Fried Chicken",
+   "brand": null,
+   "cuisine": "indian;fried_chicken",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.3878303,
+    "lat": 55.4012159,
+    "osm_id": "n12528958825",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 41.6,
+    "how": "OSM node n12528958825",
+    "_source": "OpenStreetMap n12528958825 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12528958825 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Smart Things",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 12:00-17:00; Su \"efter aftale\"",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.3871923,
+    "lat": 55.4019841,
+    "osm_id": "n13005996097",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.8,
+    "how": "OSM node n13005996097",
+    "_source": "OpenStreetMap n13005996097 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13005996097 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Odense Banegård Center",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.obc.dk/",
+   "position": {
+    "lon": 10.387017,
+    "lat": 55.4017123,
+    "osm_id": "w27862489",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w27862489",
+    "_source": "OpenStreetMap w27862489 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w27862489 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Station vs mall: only units on the OBC concourse level (Plan 2) within about 25 m of the platform escalators per OSM, plus the two DSB-listed 7-Elevens, are included. Excluded as OBC mall shops: McDonald's, Mr. Fried Chicken, DanØst Marked (all OSM level 0), D'let (OSM level 1), Banegårdens Shawarma (OBC tenant list, not in OSM), Nordisk Film Biografer, Borgernes Hus/Hovedbiblioteket. No owner text says which units count as station.",
+  "Hours missing for Joe & The Juice and The Food Stall (no own-site page found; thefoodstall.dk is an empty WordPress page); Espresso House, Apoteket, Cover City, Smart Things, Ria hours are OSM only.",
+  "7-Eleven stueplan: 7-Eleven list and DSB page disagree on hours (see hours_conflict).",
+  "Toilet price/hours not given by DSB (run by ATP building).",
+  "Which platform the third Byens Bro lift (n4039768513) serves, and whether there is a concourse lift to platform 3, is not settled: OSM links concourse lifts only to platforms 1 and 2. DSB says only 'Elevator via OBC'.",
+  "Signposting of 'Plan 2'/'stueplan' inside OBC not confirmed (DSB text only).",
+  "Platform numbering: OSM platform refs 1/2/3 = perron 1 (spor 3/4), 2 (spor 5/6), 3 (spor 7/8) per the register; DSB uses 'spor 7/8'.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

@@ -1,0 +1,1 @@
+The island platform at tracks 2/3 is under a canopy over most of its length: the airborne laser (Asker 2012) gives no platform surface there (the canopy top is at about 109.4 m). The 2012 classification leaves platform decks in class 1; levels were taken from a flat class-1 band (see each platform's note).

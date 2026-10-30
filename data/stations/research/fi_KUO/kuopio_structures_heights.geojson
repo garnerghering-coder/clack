@@ -1,0 +1,1075 @@
+{
+ "type": "FeatureCollection",
+ "name": "kuopio_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 96.38,
+ "track_bed_m": 95.35,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6807162,
+       62.89745309999999
+      ],
+      [
+       27.6807137,
+       62.89750000000001
+      ],
+      [
+       27.6809283,
+       62.89750129999999
+      ],
+      [
+       27.6809295,
+       62.89747840000001
+      ],
+      [
+       27.6809307,
+       62.8974554
+      ],
+      [
+       27.6807162,
+       62.89745309999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w87777888",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "1"
+    },
+    "ground_min_m": 95.23,
+    "ground_median_m": 95.61,
+    "ground_max_m": 95.71,
+    "laser_points": 0,
+    "source": "Outline OSM w87777888 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6800545,
+       62.89686350000001
+      ],
+      [
+       27.6800165,
+       62.8970025
+      ],
+      [
+       27.680545900000002,
+       62.8970326
+      ],
+      [
+       27.680539,
+       62.8970581
+      ],
+      [
+       27.6805332,
+       62.89707919999999
+      ],
+      [
+       27.6806822,
+       62.897087699999986
+      ],
+      [
+       27.681142,
+       62.89711340000001
+      ],
+      [
+       27.6811615,
+       62.897040900000015
+      ],
+      [
+       27.6813797,
+       62.89705310000001
+      ],
+      [
+       27.6814102,
+       62.89694000000001
+      ],
+      [
+       27.6807288,
+       62.89690190000001
+      ],
+      [
+       27.6800545,
+       62.89686350000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w87807952",
+    "name": "Kuopion rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "2",
+     "height": "12",
+     "name": "Kuopion rautatieasema",
+     "roof:shape": "hipped",
+     "start_date": "1934"
+    },
+    "ground_min_m": 90.41,
+    "ground_median_m": 91.36,
+    "ground_max_m": 95.3,
+    "roof_top_median_m": 95.67,
+    "roof_top_p95_m": 100.16,
+    "laser_points": 6,
+    "height_above_ground_median_m": 4.31,
+    "height_above_ground_p95_m": 8.8,
+    "top_above_platform_m": -0.71,
+    "base_above_platform_m": -5.97,
+    "source": "Outline OSM w87807952 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6805618,
+       62.8986571
+      ],
+      [
+       27.6806578,
+       62.89828440000001
+      ],
+      [
+       27.680666,
+       62.898252500000005
+      ],
+      [
+       27.6806873,
+       62.8981702
+      ],
+      [
+       27.6807097,
+       62.8980832
+      ],
+      [
+       27.6807417,
+       62.89795879999999
+      ],
+      [
+       27.6806244,
+       62.89795249999999
+      ],
+      [
+       27.680413800000004,
+       62.897941200000005
+      ],
+      [
+       27.6803618,
+       62.897938499999995
+      ],
+      [
+       27.6803189,
+       62.89810450000002
+      ],
+      [
+       27.6801817,
+       62.898636700000004
+      ],
+      [
+       27.680241200000005,
+       62.8986399
+      ],
+      [
+       27.6805618,
+       62.8986571
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w770688424",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "16"
+    },
+    "ground_min_m": 89.58,
+    "ground_median_m": 89.95,
+    "ground_max_m": 101.34,
+    "laser_points": 1,
+    "source": "Outline OSM w770688424 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.680307300000003,
+       62.8981498
+      ],
+      [
+       27.6806873,
+       62.8981702
+      ],
+      [
+       27.6807097,
+       62.8980832
+      ],
+      [
+       27.6807417,
+       62.89795879999999
+      ],
+      [
+       27.6806244,
+       62.89795249999999
+      ],
+      [
+       27.680413800000004,
+       62.897941200000005
+      ],
+      [
+       27.6803618,
+       62.897938499999995
+      ],
+      [
+       27.6803189,
+       62.89810450000002
+      ],
+      [
+       27.680307300000003,
+       62.8981498
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w770688432",
+    "name": "apartments",
+    "osm_tags": {
+     "building:levels": "16",
+     "building:part": "apartments",
+     "height": "55",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 89.88,
+    "ground_median_m": 89.96,
+    "ground_max_m": 101.34,
+    "laser_points": 1,
+    "source": "Outline OSM w770688432 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6806495,
+       62.897860600000016
+      ],
+      [
+       27.68069,
+       62.89786410000001
+      ],
+      [
+       27.6807804,
+       62.89787179999998
+      ],
+      [
+       27.680875,
+       62.8978799
+      ],
+      [
+       27.680934900000004,
+       62.89773490000001
+      ],
+      [
+       27.6810046,
+       62.897739300000005
+      ],
+      [
+       27.6810779,
+       62.8977436
+      ],
+      [
+       27.681075,
+       62.89789770000001
+      ],
+      [
+       27.6815262,
+       62.897899499999994
+      ],
+      [
+       27.6815229,
+       62.897975
+      ],
+      [
+       27.6815096,
+       62.898058
+      ],
+      [
+       27.6814741,
+       62.89806829999999
+      ],
+      [
+       27.6811542,
+       62.89817359999999
+      ],
+      [
+       27.6810512,
+       62.89809690000001
+      ],
+      [
+       27.6809128,
+       62.8980913
+      ],
+      [
+       27.6807439,
+       62.89808449999999
+      ],
+      [
+       27.6807097,
+       62.8980832
+      ],
+      [
+       27.6807417,
+       62.89795879999999
+      ],
+      [
+       27.6806244,
+       62.89795249999999
+      ],
+      [
+       27.6806439,
+       62.89788119999999
+      ],
+      [
+       27.6806495,
+       62.897860600000016
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w810700766",
+    "name": "Kuopion matkakeskus (transportation)",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "3",
+     "height": "12",
+     "name": "Kuopion matkakeskus",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 89.97,
+    "ground_median_m": 90.08,
+    "ground_max_m": 101.37,
+    "roof_top_median_m": 104.34,
+    "roof_top_p95_m": 104.44,
+    "laser_points": 22,
+    "height_above_ground_median_m": 14.26,
+    "height_above_ground_p95_m": 14.36,
+    "top_above_platform_m": 7.96,
+    "base_above_platform_m": -6.41,
+    "source": "Outline OSM w810700766 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6804019,
+       62.897317499999986
+      ],
+      [
+       27.6804012,
+       62.89733259999999
+      ],
+      [
+       27.682320500000003,
+       62.897351199999996
+      ],
+      [
+       27.682321100000003,
+       62.8973381
+      ],
+      [
+       27.6817197,
+       62.89733219999999
+      ],
+      [
+       27.6817218,
+       62.8972854
+      ],
+      [
+       27.6823219,
+       62.89729119999999
+      ],
+      [
+       27.6823225,
+       62.8972781
+      ],
+      [
+       27.6804045,
+       62.89725959999999
+      ],
+      [
+       27.680404,
+       62.89727080000001
+      ],
+      [
+       27.6805689,
+       62.89727229999999
+      ],
+      [
+       27.6805686,
+       62.8972781
+      ],
+      [
+       27.680912300000003,
+       62.89728149999999
+      ],
+      [
+       27.680911500000004,
+       62.89729889999999
+      ],
+      [
+       27.6809107,
+       62.8973171
+      ],
+      [
+       27.6805691,
+       62.89731369999998
+      ],
+      [
+       27.6805689,
+       62.897319100000004
+      ],
+      [
+       27.6804019,
+       62.897317499999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w967754515",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "2",
+     "level": "1"
+    },
+    "ground_min_m": 95.01,
+    "ground_median_m": 95.49,
+    "ground_max_m": 95.93,
+    "laser_points": 0,
+    "source": "Outline OSM w967754515 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6817197,
+       62.89733219999999
+      ],
+      [
+       27.6817218,
+       62.8972854
+      ],
+      [
+       27.6823219,
+       62.89729119999999
+      ],
+      [
+       27.682321500000004,
+       62.897316100000005
+      ],
+      [
+       27.682321100000003,
+       62.8973381
+      ],
+      [
+       27.6817197,
+       62.89733219999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w967754518",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "1"
+    },
+    "ground_min_m": 95.5,
+    "ground_median_m": 95.53,
+    "ground_max_m": 95.58,
+    "laser_points": 0,
+    "source": "Outline OSM w967754518 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6804019,
+       62.897317499999986
+      ],
+      [
+       27.680404,
+       62.89727080000001
+      ],
+      [
+       27.6805689,
+       62.89727229999999
+      ],
+      [
+       27.6805686,
+       62.8972781
+      ],
+      [
+       27.680912300000003,
+       62.89728149999999
+      ],
+      [
+       27.680911500000004,
+       62.89729889999999
+      ],
+      [
+       27.6809107,
+       62.8973171
+      ],
+      [
+       27.6805691,
+       62.89731369999998
+      ],
+      [
+       27.6805689,
+       62.897319100000004
+      ],
+      [
+       27.6804019,
+       62.897317499999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w967754519",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "1"
+    },
+    "ground_min_m": 95.91,
+    "ground_median_m": 95.92,
+    "ground_max_m": 95.97,
+    "laser_points": 0,
+    "source": "Outline OSM w967754519 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6789448,
+       62.89743970000001
+      ],
+      [
+       27.677707400000003,
+       62.89743039999999
+      ],
+      [
+       27.6777098,
+       62.8973621
+      ],
+      [
+       27.6777115,
+       62.89731640000001
+      ],
+      [
+       27.6777154,
+       62.8972079
+      ],
+      [
+       27.6777169,
+       62.89716510000002
+      ],
+      [
+       27.677718,
+       62.8971366
+      ],
+      [
+       27.6789554,
+       62.8971459
+      ],
+      [
+       27.6789544,
+       62.8971735
+      ],
+      [
+       27.6789529,
+       62.89721699999999
+      ],
+      [
+       27.6789484,
+       62.89734100000001
+      ],
+      [
+       27.6789467,
+       62.8973867
+      ],
+      [
+       27.6789448,
+       62.89743970000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1044169166",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 89.72,
+    "ground_median_m": 94.4,
+    "ground_max_m": 96.84,
+    "roof_top_median_m": 97.56,
+    "roof_top_p95_m": 106.25,
+    "laser_points": 22,
+    "height_above_ground_median_m": 3.16,
+    "height_above_ground_p95_m": 11.85,
+    "top_above_platform_m": 1.18,
+    "base_above_platform_m": -6.66,
+    "source": "Outline OSM w1044169166 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6778614,
+       62.8975062
+      ],
+      [
+       27.6778687,
+       62.8974773
+      ],
+      [
+       27.6778754,
+       62.89745080000001
+      ],
+      [
+       27.6780189,
+       62.8974583
+      ],
+      [
+       27.6788017,
+       62.897499299999986
+      ],
+      [
+       27.6787946,
+       62.89752719999999
+      ],
+      [
+       27.6787876,
+       62.89755479999999
+      ],
+      [
+       27.6778614,
+       62.8975062
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1044169167",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 89.7,
+    "ground_median_m": 90.04,
+    "ground_max_m": 95.57,
+    "laser_points": 4,
+    "source": "Outline OSM w1044169167 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6801817,
+       62.898636700000004
+      ],
+      [
+       27.680307300000003,
+       62.8981498
+      ],
+      [
+       27.6806873,
+       62.8981702
+      ],
+      [
+       27.6806804,
+       62.8981971
+      ],
+      [
+       27.680666,
+       62.898252500000005
+      ],
+      [
+       27.680588600000004,
+       62.8985529
+      ],
+      [
+       27.6805618,
+       62.8986571
+      ],
+      [
+       27.680241200000005,
+       62.8986399
+      ],
+      [
+       27.6801817,
+       62.898636700000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1174442640",
+    "name": "commercial",
+    "osm_tags": {
+     "building:levels": "4",
+     "building:part": "commercial",
+     "height": "16",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 89.58,
+    "ground_median_m": 89.8,
+    "ground_max_m": 89.99,
+    "laser_points": 0,
+    "source": "Outline OSM w1174442640 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6791409,
+       62.89797869999999
+      ],
+      [
+       27.6792745,
+       62.89798600000001
+      ],
+      [
+       27.6791749,
+       62.89836489999999
+      ],
+      [
+       27.679093400000003,
+       62.898360499999995
+      ],
+      [
+       27.6791548,
+       62.89812739999999
+      ],
+      [
+       27.6791025,
+       62.898124499999994
+      ],
+      [
+       27.6791409,
+       62.89797869999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1174748001",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "1",
+     "level": "1"
+    },
+    "ground_min_m": 89.33,
+    "ground_median_m": 89.51,
+    "ground_max_m": 89.91,
+    "laser_points": 4,
+    "source": "Outline OSM w1174748001 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6805332,
+       62.89707919999999
+      ],
+      [
+       27.680545900000002,
+       62.8970326
+      ],
+      [
+       27.6800165,
+       62.8970025
+      ],
+      [
+       27.6794606,
+       62.89697149999999
+      ],
+      [
+       27.6794967,
+       62.89702249999999
+      ],
+      [
+       27.6805332,
+       62.89707919999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1174748006",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1",
+     "level": "1"
+    },
+    "ground_min_m": 91.36,
+    "ground_median_m": 91.86,
+    "ground_max_m": 95.3,
+    "laser_points": 2,
+    "source": "Outline OSM w1174748006 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6807137,
+       62.89750000000001
+      ],
+      [
+       27.6807162,
+       62.89745309999999
+      ],
+      [
+       27.6809307,
+       62.8974554
+      ],
+      [
+       27.6809295,
+       62.89747840000001
+      ],
+      [
+       27.6809283,
+       62.89750129999999
+      ],
+      [
+       27.6811023,
+       62.8975032
+      ],
+      [
+       27.6811043,
+       62.897447500000006
+      ],
+      [
+       27.6805196,
+       62.8974411
+      ],
+      [
+       27.6805155,
+       62.8975202
+      ],
+      [
+       27.6806368,
+       62.89752149999999
+      ],
+      [
+       27.6807137,
+       62.89750000000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1454975015",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "layer": "2",
+     "level": "1"
+    },
+    "ground_min_m": 94.91,
+    "ground_median_m": 95.63,
+    "ground_max_m": 95.83,
+    "laser_points": 1,
+    "source": "Outline OSM w1454975015 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.681931900000002,
+       62.8971435
+      ],
+      [
+       27.6819372,
+       62.89709920000001
+      ],
+      [
+       27.6817868,
+       62.8970919
+      ],
+      [
+       27.6817815,
+       62.8971387
+      ],
+      [
+       27.681931900000002,
+       62.8971435
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1550510974",
+    "name": "shelter",
+    "osm_tags": {
+     "building": "shelter"
+    },
+    "ground_min_m": 89.83,
+    "ground_median_m": 90.62,
+    "ground_max_m": 93.41,
+    "laser_points": 0,
+    "source": "Outline OSM w1550510974 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.6828941,
+       62.898169100000004
+      ],
+      [
+       27.682854,
+       62.8981415
+      ],
+      [
+       27.683055,
+       62.89808130000002
+      ],
+      [
+       27.6830878,
+       62.898104000000004
+      ],
+      [
+       27.6830927,
+       62.89810729999999
+      ],
+      [
+       27.6828941,
+       62.898169100000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1561412912",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 88.43,
+    "ground_median_m": 88.47,
+    "ground_max_m": 88.52,
+    "laser_points": 0,
+    "source": "Outline OSM w1561412912 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa)",
+    "underside_m": null
+   }
+  }
+ ]
+}

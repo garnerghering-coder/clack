@@ -1,0 +1,1033 @@
+{
+ "clack_id": "fi:OL",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level",
+   "other_names": [],
+   "note": "Station building (Rautatienkatu 11 A) beside platform 1 (track 1); an island platform serves tracks 2 and 3. Three platform tracks out of seven; register: L1 korkea, L2–L3 matala.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30; Digitraffic infra-api laiturit OL L1–L3 (Väylävirasto / Fintraffic, CC BY 4.0), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Asematunneli (station tunnel)",
+   "other_names": [
+    "Station tunnel (Wikipedia photo caption)"
+   ],
+   "note": "Name 'Asematunneli' from OSM; Wikipedia only shows it in a photo caption. No signposted level names found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "OL L1",
+   "track": "1",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1 (the train stops with the platform to its north-west)",
+   "_source": "laser (2023-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform OL L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "OL L2",
+   "track": "2",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 2 (the train stops with the platform to its south-east)",
+   "_source": "laser (2023-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform OL L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "OL L3",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2023-06-14, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform OL L3; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w23350321",
+   "name": "Asematunneli",
+   "between": [
+    "station side (platform 1 / station building)",
+    "east side of the yard"
+   ],
+   "where": "just south of the station building (by the south end of the building), under all three platform tracks (~85 m)",
+   "confirmed_by": "OSM (name, platforms 1–3) + Wikipedia photo caption 'Station tunnel'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; Wikipedia 'Oulu railway station', https://en.wikipedia.org/wiki/Oulu_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 25.4834538,
+    "lat": 65.0105654,
+    "how": "OSM w23350321 (point on the way)",
+    "_source": "OpenStreetMap w23350321 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11417337663",
+   "between": [
+    "Asematunneli",
+    "platform 1 (track 1)"
+   ],
+   "where": "at the tunnel, platform 1",
+   "confirmed_by": "owner text (VR: 'an elevator serves the platforms') + OSM for position",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4831684,
+    "lat": 65.0106847,
+    "how": "OSM n11417337663",
+    "_source": "OpenStreetMap n11417337663 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7875596530",
+   "between": [
+    "Asematunneli",
+    "island platform tracks 2–3"
+   ],
+   "where": "at the tunnel, middle of the island platform",
+   "confirmed_by": "owner text (VR: lift to the platforms) + OSM for position (wheelchair=yes)",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4835068,
+    "lat": 65.0106028,
+    "how": "OSM n7875596530",
+    "_source": "OpenStreetMap n7875596530 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390189",
+   "between": [
+    "Asematunneli",
+    "platform 1"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4828382,
+    "lat": 65.0105751,
+    "how": "OSM w32390189 (point on the way)",
+    "_source": "OpenStreetMap w32390189 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390187",
+   "between": [
+    "Asematunneli",
+    "island platform tracks 2–3"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4832722,
+    "lat": 65.0104462,
+    "how": "OSM w32390187 (point on the way)",
+    "_source": "OpenStreetMap w32390187 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w27705215",
+    "w25000370"
+   ],
+   "name": "Eteläinen alikulku",
+   "between": [
+    "west side",
+    "east side of the yard"
+   ],
+   "where": "about 160 m south of the platforms; does not reach the platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w23350321",
+   "name": "Asematunneli",
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 85.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w23350321 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4834538,
+    "lat": 65.0105654,
+    "how": "OSM w23350321 (point on the way)",
+    "_source": "OpenStreetMap w23350321 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390187",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w32390187 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4832722,
+    "lat": 65.0104462,
+    "how": "OSM w32390187 (point on the way)",
+    "_source": "OpenStreetMap w32390187 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w32390189",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w32390189 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4828382,
+    "lat": 65.0105751,
+    "how": "OSM w32390189 (point on the way)",
+    "_source": "OpenStreetMap w32390189 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w844277146",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w844277146 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4835068,
+    "lat": 65.0106028,
+    "how": "OSM w844277146 (point on the way)",
+    "_source": "OpenStreetMap w844277146 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878638611",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878638611 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4839286,
+    "lat": 65.0112422,
+    "how": "OSM w878638611 (point on the way)",
+    "_source": "OpenStreetMap w878638611 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878638613",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878638613 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4844277,
+    "lat": 65.0115794,
+    "how": "OSM w878638613 (point on the way)",
+    "_source": "OpenStreetMap w878638613 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878638616",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878638616 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4840149,
+    "lat": 65.0113034,
+    "how": "OSM w878638616 (point on the way)",
+    "_source": "OpenStreetMap w878638616 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878638617",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878638617 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4840879,
+    "lat": 65.0113738,
+    "how": "OSM w878638617 (point on the way)",
+    "_source": "OpenStreetMap w878638617 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878650661",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878650661 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4833879,
+    "lat": 65.010911,
+    "how": "OSM w878650661 (point on the way)",
+    "_source": "OpenStreetMap w878650661 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w878650662",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w878650662 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4835369,
+    "lat": 65.0109821,
+    "how": "OSM w878650662 (point on the way)",
+    "_source": "OpenStreetMap w878650662 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1231115229",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1231115229 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4831684,
+    "lat": 65.0106847,
+    "how": "OSM w1231115229 (point on the way)",
+    "_source": "OpenStreetMap w1231115229 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7875596530",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 2",
+    "platform 3"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7875596530 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4835068,
+    "lat": 65.0106028,
+    "how": "OSM n7875596530",
+    "_source": "OpenStreetMap n7875596530 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11417337663",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11417337663 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 25.4831684,
+    "lat": 65.0106847,
+    "how": "OSM n11417337663",
+    "_source": "OpenStreetMap n11417337663 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building, main entrance",
+   "street": "Rautatienkatu",
+   "level": "0",
+   "where": "Rautatienkatu 11 A; OSM main door n8173831415",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "name": "Station building, platform-side doors",
+   "street": null,
+   "level": "0",
+   "where": "straight onto platform 1 (OSM n8173831394, n8173831401, n8173831403, n8173831409, n8173831411, n8173953410, n8173953412)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n7893409108",
+   "street": "Saaristonkatu",
+   "street_how": "nearest named street, 31.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7893409108 (already in OSM)",
+   "position": {
+    "lon": 25.4796786,
+    "lat": 65.0083521,
+    "how": "OSM n7893409108",
+    "_source": "OpenStreetMap n7893409108 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7893409109",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7893409109 (already in OSM)",
+   "position": {
+    "lon": 25.4799106,
+    "lat": 65.0085311,
+    "how": "OSM n7893409109",
+    "_source": "OpenStreetMap n7893409109 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831394",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173831394 (already in OSM)",
+   "position": {
+    "lon": 25.4838897,
+    "lat": 65.0112527,
+    "how": "OSM n8173831394",
+    "_source": "OpenStreetMap n8173831394 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831401",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173831401 (already in OSM)",
+   "position": {
+    "lon": 25.4843935,
+    "lat": 65.0115885,
+    "how": "OSM n8173831401",
+    "_source": "OpenStreetMap n8173831401 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831403",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n8173831403 (already in OSM)",
+   "position": {
+    "lon": 25.4840831,
+    "lat": 65.0113842,
+    "how": "OSM n8173831403",
+    "_source": "OpenStreetMap n8173831403 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831409",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173831409 (already in OSM)",
+   "position": {
+    "lon": 25.4839799,
+    "lat": 65.0113126,
+    "how": "OSM n8173831409",
+    "_source": "OpenStreetMap n8173831409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831411",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173831411 (already in OSM)",
+   "position": {
+    "lon": 25.4840736,
+    "lat": 65.0113775,
+    "how": "OSM n8173831411",
+    "_source": "OpenStreetMap n8173831411 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173831415",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 25.6 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173831415 (already in OSM)",
+   "position": {
+    "lon": 25.4837341,
+    "lat": 65.0114213,
+    "how": "OSM n8173831415",
+    "_source": "OpenStreetMap n8173831415 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862123",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 6.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862123 (already in OSM)",
+   "position": {
+    "lon": 25.4833796,
+    "lat": 65.0117257,
+    "how": "OSM n8173862123",
+    "_source": "OpenStreetMap n8173862123 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862125",
+   "street": "Asemakatu",
+   "street_how": "nearest named street, 9.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862125 (already in OSM)",
+   "position": {
+    "lon": 25.4831796,
+    "lat": 65.0116564,
+    "how": "OSM n8173862125",
+    "_source": "OpenStreetMap n8173862125 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862132",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 6.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862132 (already in OSM)",
+   "position": {
+    "lon": 25.4834577,
+    "lat": 65.011778,
+    "how": "OSM n8173862132",
+    "_source": "OpenStreetMap n8173862132 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862134",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 6.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862134 (already in OSM)",
+   "position": {
+    "lon": 25.483598,
+    "lat": 65.0118725,
+    "how": "OSM n8173862134",
+    "_source": "OpenStreetMap n8173862134 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862137",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 6.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862137 (already in OSM)",
+   "position": {
+    "lon": 25.4837605,
+    "lat": 65.0119818,
+    "how": "OSM n8173862137",
+    "_source": "OpenStreetMap n8173862137 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173862138",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 6.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173862138 (already in OSM)",
+   "position": {
+    "lon": 25.4837045,
+    "lat": 65.0119442,
+    "how": "OSM n8173862138",
+    "_source": "OpenStreetMap n8173862138 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173953408",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 27.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173953408 (already in OSM)",
+   "position": {
+    "lon": 25.483114,
+    "lat": 65.0109619,
+    "how": "OSM n8173953408",
+    "_source": "OpenStreetMap n8173953408 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173953410",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173953410 (already in OSM)",
+   "position": {
+    "lon": 25.4833879,
+    "lat": 65.010911,
+    "how": "OSM n8173953410",
+    "_source": "OpenStreetMap n8173953410 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173953412",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173953412 (already in OSM)",
+   "position": {
+    "lon": 25.4835057,
+    "lat": 65.0109899,
+    "how": "OSM n8173953412",
+    "_source": "OpenStreetMap n8173953412 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8173953415",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 35.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8173953415 (already in OSM)",
+   "position": {
+    "lon": 25.483647,
+    "lat": 65.0111946,
+    "how": "OSM n8173953415",
+    "_source": "OpenStreetMap n8173953415 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12429938907",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 17.9 m",
+   "level": "0",
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12429938907 (already in OSM)",
+   "position": {
+    "lon": 25.4842941,
+    "lat": 65.0119178,
+    "how": "OSM n12429938907",
+    "_source": "OpenStreetMap n12429938907 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12429938911",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 20.7 m",
+   "level": "0",
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12429938911 (already in OSM)",
+   "position": {
+    "lon": 25.4843365,
+    "lat": 65.0119,
+    "how": "OSM n12429938911",
+    "_source": "OpenStreetMap n12429938911 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12429938925",
+   "street": "Rautatienkatu",
+   "street_how": "addr:street",
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12429938925 (already in OSM)",
+   "position": {
+    "lon": 25.4843491,
+    "lat": 65.0119999,
+    "how": "OSM n12429938925",
+    "_source": "OpenStreetMap n12429938925 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12429938934",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 30.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12429938934 (already in OSM)",
+   "position": {
+    "lon": 25.4841072,
+    "lat": 65.0115977,
+    "how": "OSM n12429938934",
+    "_source": "OpenStreetMap n12429938934 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13392578041",
+   "street": "Rautatienkatu",
+   "street_how": "nearest named street, 12.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13392578041 (already in OSM)",
+   "position": {
+    "lon": 25.4817473,
+    "lat": 65.0102871,
+    "how": "OSM n13392578041",
+    "_source": "OpenStreetMap n13392578041 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building",
+   "opening_hours": "Mo-Fr 06:00-24:00; Sa 07:00-24:00; Su 09:00-24:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Car-carrier keys go into a box in the waiting room (car trains suspended from 1 Apr 2026 for the rail-yard renovation; reopening expected autumn 2026).",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavaralokerot (VR)",
+   "fee": "S from 3.90 € / 3 h, XL from 4.90 € / 3 h, also ski size; 3–72 h; card; overstay charged hourly",
+   "where": "station building",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatit",
+   "where": "in the station building by the main entrance (OSM n8173831396, n8173831397)",
+   "osm_ids": [
+    "n8173831396",
+    "n8173831397"
+   ],
+   "note": "No VR service point.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30; VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Huovisen leipomo – Rautatieaseman kahvila",
+   "where": "in the station building (Rautatienkatu 11 a)",
+   "osm_id": "n13184845848",
+   "opening_hours": "Mo-Fr 06:00-18:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "Huovisen leipomo, https://huovisenleipomo.fi/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4840165,
+    "lat": 65.0114635,
+    "osm_id": "n13184845848",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.5,
+    "how": "OSM node n13184845848",
+    "_source": "OpenStreetMap n13184845848 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Barot's Oulu",
+   "where": "in the historic station building (Rautatienkatu 11A)",
+   "osm_id": "n13184845849",
+   "opening_hours": "Mo-Th 10:30-21:00; Fr,Sa 10:30-24:00; Su 12:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "Barot's, https://barots.fi/ravintolat/oulu/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4837859,
+    "lat": 65.0113128,
+    "osm_id": "n13184845849",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.8,
+    "how": "OSM node n13184845849",
+    "_source": "OpenStreetMap n13184845849 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Hanna (Taito Shop Oulu)",
+   "where": "next to the station building on the station side (OSM; not inside the building outline)",
+   "osm_id": "n11050273238",
+   "opening_hours": "Mo-Fr 10:00-17:00; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4833152,
+    "lat": 65.0109638,
+    "osm_id": "n11050273238",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.7,
+    "how": "OSM node n11050273238",
+    "_source": "OpenStreetMap n11050273238 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "south end of the station building, by the drop-off parking; no roof",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Kivisydän (P-Kivisydän)",
+   "where": "about 5 min walk; entrance from Hallituskatu",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "Rautatienkatu side (OSM n355554893)",
+   "osm_id": "n355554893",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30",
+   "position": {
+    "lon": 25.4828977,
+    "lat": 65.0111824,
+    "osm_id": "n355554893",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 37.4,
+    "how": "OSM node n355554893",
+    "_source": "OpenStreetMap n355554893 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_carrier_loading",
+   "name": "Autojunien lastaus",
+   "where": "east of the rail yard, Ratakatu 6",
+   "note": "Suspended from 1 Apr 2026; reopening expected autumn 2026, date to be confirmed.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "The Royal Garden",
+   "brand": null,
+   "cuisine": "asian;chinese;japanese",
+   "opening_hours": "Mo-Th 11:00-21:00; Fr 11:00-22:00; Sa 12:00-22:00; Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.theroyalgarden.fi/",
+   "position": {
+    "lon": 25.4834253,
+    "lat": 65.0118057,
+    "osm_id": "n543940116",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 53.4,
+    "how": "OSM node n543940116",
+    "_source": "OpenStreetMap n543940116 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n543940116 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hius Plaza",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 25.4833581,
+    "lat": 65.0117541,
+    "osm_id": "n13392578068",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 53.0,
+    "how": "OSM node n13392578068",
+    "_source": "OpenStreetMap n13392578068 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13392578068 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Rail-yard renovation 2026: VR mentions it only for car trains; whether passenger access (Asematunneli, lifts) is affected could not be checked (search budget ran out).",
+  "Where the east end of the Asematunneli opens (street) is not in the extract.",
+  "No published station plan read (Väylävirasto area-map listing on vayla.fi would not load).",
+  "No signposted level names; no heights. Toilet fee unknown.",
+  "Cafe Hanna hours OSM only; the shop's page was not checked.",
+  "Oulun joukkoliikenne stop names by the station not checked."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Both platforms: platform 1 (track 1, by the station building, also reached directly through the building's platform doors) and the island platform for tracks 2–3 each have stairs and a lift down to the Asematunneli. VR confirms a lift to the platforms; positions are OSM.",
+   "_source": "VR 'Oulu' station page, https://www.vr.fi/rautatieasemat-ja-reitit/oulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-OL.json), read 2026-10-30"
+  }
+ ]
+}

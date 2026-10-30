@@ -1,0 +1,1040 @@
+{
+ "clack_id": "fi:KV",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Ground level: station building (Hallituskatu 3, waiting hall), platform 1 and the three island platforms",
+   "other_names": [],
+   "note": "No signposted level name found in any owner text. Platforms: edge platform (reunalaituri) at track 1 by the station building; island platforms (välilaiturit) 3/4, 6/7 and 9/10; all 0.55 m (korkea) per the Väylävirasto table, which also marks every platform as having an accessible route (esteetön reitti).",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kouvola, read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Asematunneli (passenger tunnel under the tracks)",
+   "other_names": [
+    "Kouvolan aseman henkilötunneli (Väylävirasto's structure name, built 1965)"
+   ],
+   "note": "OSM names the tunnel ways w42198837 and w809591207 'Asematunneli'. Väylävirasto lists the 'Kouvolan aseman henkilötunneli' (1965) in the passenger yard; whether the signs say 'Asematunneli' is not confirmed by an owner page.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Upper floor of the station building (only OSM: one toilets node n4051660143 tagged level 1)",
+   "other_names": [],
+   "note": "No owner source describes an upper floor open to passengers; treat as unconfirmed.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "KV L1",
+   "track": "1",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1 (the train stops with the platform to its north)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L3",
+   "track": "3",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 3 (the train stops with the platform to its south)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L4",
+   "track": "4",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 4 (the train stops with the platform to its north)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L6",
+   "track": "6",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 6 (the train stops with the platform to its south)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L7",
+   "track": "7",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 7 (the train stops with the platform to its north)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L7; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L9",
+   "track": "9",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 9 (the train stops with the platform to its south)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L9; read 2026-10-30"
+  },
+  {
+   "platform_bis": "KV L10",
+   "track": "10",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 10 (the train stops with the platform to its north)",
+   "_source": "laser (2025-08-02, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform KV L10; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w42198837",
+    "w809591207"
+   ],
+   "name": "Asematunneli",
+   "between": [
+    "station building side (north, by platform 1)",
+    "south side of the yard"
+   ],
+   "where": "runs north–south under all tracks at about the middle of the platforms; exits up to platform 1, island 3/4, island 6/7 and island 9/10; the 130 m way w809591207 continues past platform 9/10 to the south side",
+   "confirmed_by": "owner text (Väylävirasto lists the passenger tunnel); course and exits OSM only",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4064066689",
+   "between": [
+    "Asematunneli (-1)",
+    "ground level by the station building / platform 1 (0)"
+   ],
+   "where": "north end of the tunnel, at the station-building side (about 25 m from the track-1 centre line)",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island. Väylävirasto confirms an accessible route to every platform but does not name lifts; VR's page does not mention lifts.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 26.7047952,
+    "lat": 60.8661386,
+    "how": "OSM n4064066689",
+    "_source": "OpenStreetMap n4064066689 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643690",
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 3/4"
+   ],
+   "where": "middle of island platform 3/4, at the tunnel exit",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 26.7049502,
+    "lat": 60.8657737,
+    "how": "OSM n367643690",
+    "_source": "OpenStreetMap n367643690 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643731",
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 6/7"
+   ],
+   "where": "middle of island platform 6/7, at the tunnel exit",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 26.7050095,
+    "lat": 60.8655234,
+    "how": "OSM n367643731",
+    "_source": "OpenStreetMap n367643731 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643743",
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 9/10"
+   ],
+   "where": "middle of island platform 9/10, at the tunnel exit",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 26.7050599,
+    "lat": 60.8653126,
+    "how": "OSM n367643743",
+    "_source": "OpenStreetMap n367643743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w32673329",
+   "between": [
+    "Asematunneli (-1)",
+    "ground level at the station building (0)"
+   ],
+   "where": "north end of the tunnel by the station building (about 29 m from the track-1 centre line); OSM conveying=forward (one direction only, direction not stated)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30",
+   "position": {
+    "lon": 26.705098,
+    "lat": 60.8661989,
+    "how": "OSM w32673329 (point on the way)",
+    "_source": "OpenStreetMap w32673329 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1432601639"
+   ],
+   "between": [
+    "Asematunneli (-1)",
+    "ground level at the station building (0)"
+   ],
+   "where": "north end of the tunnel, next to lift n4064066689",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w32673350",
+    "w42198845"
+   ],
+   "between": [
+    "Asematunneli (-1)",
+    "platform 1"
+   ],
+   "where": "on platform 1, either side of the tunnel; w32673350 is tagged ramp=yes (stair with a ramp strip)",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w32673331",
+    "w32673333"
+   ],
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 3/4"
+   ],
+   "where": "island platform 3/4, west and east of the lift; both tagged ramp=yes",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w32673335",
+    "w32673338"
+   ],
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 6/7"
+   ],
+   "where": "island platform 6/7, west and east of the lift; w32673338 tagged ramp=yes",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w32673348",
+    "w32673344"
+   ],
+   "between": [
+    "Asematunneli (-1)",
+    "island platform 9/10"
+   ],
+   "where": "island platform 9/10, west and east of the lift; both tagged ramp=yes",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kouvola_platform_vayla.geojson): between two tracks of an island platform = that island",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "step_free_route",
+   "between": [
+    "station hall",
+    "platform 1"
+   ],
+   "where": "VR: the station hall gives step-free (accessible) entry to platform 1",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w32673329",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 10.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w32673329 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 26.705098,
+    "lat": 60.8661989,
+    "how": "OSM w32673329 (point on the way)",
+    "_source": "OpenStreetMap w32673329 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643690",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n367643690 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 26.7049502,
+    "lat": 60.8657737,
+    "how": "OSM n367643690",
+    "_source": "OpenStreetMap n367643690 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643731",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n367643731 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 26.7050095,
+    "lat": 60.8655234,
+    "how": "OSM n367643731",
+    "_source": "OpenStreetMap n367643731 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n367643743",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n367643743 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 26.7050599,
+    "lat": 60.8653126,
+    "how": "OSM n367643743",
+    "_source": "OpenStreetMap n367643743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4064066689",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4064066689 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 26.7047952,
+    "lat": 60.8661386,
+    "how": "OSM n4064066689",
+    "_source": "OpenStreetMap n4064066689 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance, city-centre side",
+   "street": "Hallituskatu (station address Hallituskatu 3)",
+   "level": "0",
+   "where": "city-centre (north) side of the station building; VR's assistance point is under a shelter to the left of the main entrance as you face it, and automatic doors near the assistance point give accessible entry to the hall. OSM main entrances n525461801, n4085138038, n4051660141 lie on this side.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.r-kioski.fi/kioskit/kouvola-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "name": "Station hall to platform 1",
+   "street": null,
+   "level": "0",
+   "where": "track side of the station building, step-free onto platform 1",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "name": "Asematunneli, south end",
+   "street": null,
+   "level": "-1/0",
+   "where": "south side of the yard beyond platform 9/10 (OSM entrances n367643739 and n367643746, level 0, 73 m from the nearest named street); street name not given by any source",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n367643739",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n367643739 (already in OSM)",
+   "position": {
+    "lon": 26.7053574,
+    "lat": 60.8653354,
+    "how": "OSM n367643739",
+    "_source": "OpenStreetMap n367643739 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n367643746",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n367643746 (already in OSM)",
+   "position": {
+    "lon": 26.7048218,
+    "lat": 60.8653072,
+    "how": "OSM n367643746",
+    "_source": "OpenStreetMap n367643746 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n525461801",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n525461801 (already in OSM)",
+   "position": {
+    "lon": 26.7047172,
+    "lat": 60.8662478,
+    "how": "OSM n525461801",
+    "_source": "OpenStreetMap n525461801 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2049502524",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n2049502524 (already in OSM)",
+   "position": {
+    "lon": 26.7047512,
+    "lat": 60.8661068,
+    "how": "OSM n2049502524",
+    "_source": "OpenStreetMap n2049502524 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2049502531",
+   "street": "Laituri 2",
+   "street_how": "nearest named street, 18.2 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n2049502531 (already in OSM)",
+   "position": {
+    "lon": 26.7038616,
+    "lat": 60.8661385,
+    "how": "OSM n2049502531",
+    "_source": "OpenStreetMap n2049502531 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2049524582",
+   "street": "Laituri 1",
+   "street_how": "nearest named street, 10.7 m",
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2049524582 (already in OSM)",
+   "position": {
+    "lon": 26.7039912,
+    "lat": 60.8663866,
+    "how": "OSM n2049524582",
+    "_source": "OpenStreetMap n2049524582 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2049524583",
+   "street": "Laituri 1",
+   "street_how": "nearest named street, 21.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2049524583 (already in OSM)",
+   "position": {
+    "lon": 26.7040685,
+    "lat": 60.8664858,
+    "how": "OSM n2049524583",
+    "_source": "OpenStreetMap n2049524583 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4051657068",
+   "street": null,
+   "street_how": null,
+   "level": "-1",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n4051657068 (already in OSM)",
+   "position": {
+    "lon": 26.7048791,
+    "lat": 60.8661136,
+    "how": "OSM n4051657068",
+    "_source": "OpenStreetMap n4051657068 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4051660141",
+   "street": "Laituri 1",
+   "street_how": "nearest named street, 18.1 m",
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n4051660141 (already in OSM)",
+   "position": {
+    "lon": 26.7041641,
+    "lat": 60.8662187,
+    "how": "OSM n4051660141",
+    "_source": "OpenStreetMap n4051660141 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4051660142",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n4051660142 (already in OSM)",
+   "position": {
+    "lon": 26.7046143,
+    "lat": 60.8662424,
+    "how": "OSM n4051660142",
+    "_source": "OpenStreetMap n4051660142 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4064066699",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4064066699 (already in OSM)",
+   "position": {
+    "lon": 26.7047594,
+    "lat": 60.8661579,
+    "how": "OSM n4064066699",
+    "_source": "OpenStreetMap n4064066699 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4085138038",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n4085138038 (already in OSM)",
+   "position": {
+    "lon": 26.7052584,
+    "lat": 60.8662763,
+    "how": "OSM n4085138038",
+    "_source": "OpenStreetMap n4085138038 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13168018201",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n13168018201 (already in OSM)",
+   "position": {
+    "lon": 26.7047654,
+    "lat": 60.8661368,
+    "how": "OSM n13168018201",
+    "_source": "OpenStreetMap n13168018201 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13168018240",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n13168018240 (already in OSM)",
+   "position": {
+    "lon": 26.7049809,
+    "lat": 60.8657752,
+    "how": "OSM n13168018240",
+    "_source": "OpenStreetMap n13168018240 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13168018246",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n13168018246 (already in OSM)",
+   "position": {
+    "lon": 26.7050419,
+    "lat": 60.8655253,
+    "how": "OSM n13168018246",
+    "_source": "OpenStreetMap n13168018246 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13168018252",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n13168018252 (already in OSM)",
+   "position": {
+    "lon": 26.7050933,
+    "lat": 60.8653145,
+    "how": "OSM n13168018252",
+    "_source": "OpenStreetMap n13168018252 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila (waiting hall)",
+   "where": "station building, ground level",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Sa 04:30-22:00; Su 07:15-22:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/kouvola, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR ticket vending machine",
+   "where": "inside the station building (OSM: 'Junamaatti' vending machines n525461803 and n2049440193, level 0)",
+   "level_per_plan": "0",
+   "note": "No VR service point (ticket office) at Kouvola.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "fee": "yes (OSM fee=yes; VR gives no fee)",
+   "where": "station building (OSM n2049440139 level 0; a second node n4051660143 tagged level 1)",
+   "level_per_plan": "0",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Otto.",
+   "osm_id": "n463768073",
+   "where": "in the waiting area of the station hall",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Sa 05:00-22:00; Su 06:30-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours start earlier on Sundays than VR's waiting-hall hours (Su 07:15); access follows the hall's hours.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7052744,
+    "lat": 60.8661882,
+    "osm_id": "n463768073",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n463768073",
+    "_source": "OpenStreetMap n463768073 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Kouvola Asema",
+   "osm_id": "n1498437293",
+   "where": "in the station building (address Hallituskatu 3 Rautatieasema)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su 08:00-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM's opening_hours differ (Mo-Fr 07:00-21:00; Sa 07:00-20:00; Su 09:00-21:00); the shop's own page is used. Services listed: Hodarit, Wolt-piste.",
+   "_source": "https://www.r-kioski.fi/kioskit/kouvola-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7049252,
+    "lat": 60.8661376,
+    "osm_id": "n1498437293",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1498437293",
+    "_source": "OpenStreetMap n1498437293 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Ranela",
+   "osm_id": "n1498437291",
+   "where": "OSM puts it on level -1 (tunnel level) inside the station building",
+   "level_per_plan": "-1",
+   "note": "No owner or own website found; existence and hours unverified.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7045744,
+    "lat": 60.8661579,
+    "osm_id": "n1498437291",
+    "osm_level": "-1",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1498437291",
+    "_source": "OpenStreetMap n1498437291 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Aseman parturi",
+   "osm_id": "n1498437296",
+   "where": "station building, level 0 (OSM)",
+   "level_per_plan": "0",
+   "note": "OSM only; no hours.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7053751,
+    "lat": 60.8663309,
+    "osm_id": "n1498437296",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1498437296",
+    "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop",
+   "name": "Filmtown",
+   "osm_id": "n5782712954",
+   "where": "station building (OSM, shop=video)",
+   "note": "OSM only; not confirmed by any current source (Filmtown's web links now redirect to CandyTown). Probably outdated.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7043908,
+    "lat": 60.8662046,
+    "osm_id": "n5782712954",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5782712954",
+    "_source": "OpenStreetMap n5782712954 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_rental",
+   "name": "Avis",
+   "osm_id": "n2049440192",
+   "where": "station building, level 0 (OSM); Avis calls the branch 'Kouvola Railway Station (KU9)'",
+   "level_per_plan": "0",
+   "hours_raw": "Avis website: Sun-Sat 06:00 AM - 12:00 AM; OSM: Mo-Fr 08:00-17:00; Sa-Su off",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "The two sources disagree; the Avis figure may be key-return hours. Not settled.",
+   "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7047206,
+    "lat": 60.8661226,
+    "osm_id": "n2049440192",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n2049440192",
+    "_source": "OpenStreetMap n2049440192 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "vending_machine",
+   "name": "Valokuva-automaatti (photo booth)",
+   "osm_id": "n2049440173",
+   "where": "station building, level 0 (OSM)",
+   "level_per_plan": "0",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7055048,
+    "lat": 60.8661939,
+    "osm_id": "n2049440173",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n2049440173",
+    "_source": "OpenStreetMap n2049440173 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Bar & Cafe Columbia",
+   "osm_id": "w42198834",
+   "where": "own building about 90 m from the platforms, outside the station building (OSM)",
+   "opening_hours": "Mo-Th 08:00-22:00; Fr 08:00-24:00; Sa 09:00-24:00; Su 12:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7039809,
+    "lat": 60.8664335,
+    "osm_id": "w42198834",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "representative point of the OSM area w42198834",
+    "_source": "OpenStreetMap w42198834 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "city-centre side of the station building, to the left of the main entrance as you face it, under a shelter",
+   "note": "Book on 0800 188 822 (free), Mo-Fr 05:00-22:00, Sa-Su 07:00-22:00, at least 24 h before departure.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers at Kouvola.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Kouvola Matkakeskus (bus terminal)",
+   "osm_id": "n8242331720",
+   "where": "beside the station; with the station it forms the travel centre",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; https://en.wikipedia.org/wiki/Kouvola_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 26.7037613,
+    "lat": 60.8664272,
+    "osm_id": "n8242331720",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n8242331720",
+    "_source": "OpenStreetMap n8242331720 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_stop",
+   "name": "Rail-replacement bus stop",
+   "where": "between the station building and track 1",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Kymenlaakson Taksi",
+   "osm_id": "n367643609",
+   "where": "outside the station building, about 120 m from the platforms (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7051038,
+    "lat": 60.8663704,
+    "osm_id": "n367643609",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n367643609",
+    "_source": "OpenStreetMap n367643609 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Car park in front of track 1",
+   "where": "in front of track 1",
+   "note": "VR: free for VR season-ticket holders with the ticket copy on the windscreen; the Finnish page says this arrangement ends on 1.1.2027 and points to the city's park-and-ride spaces. OSM 'Aseman P' (w42198838, fee=no) is one of the car parks nearby.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_rental",
+   "name": "Matkakeskus (bike-share station)",
+   "osm_id": "n5774642994",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "position": {
+    "lon": 26.7042324,
+    "lat": 60.8664488,
+    "osm_id": "n5774642994",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5774642994",
+    "_source": "OpenStreetMap n5774642994 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2049440139",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2049440139 (read 2026-10-30)",
+   "position": {
+    "lon": 26.7055077,
+    "lat": 60.8662287,
+    "osm_id": "n2049440139",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n2049440139",
+    "_source": "OpenStreetMap n2049440139 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n4051660143",
+   "osm_level": "1",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n4051660143 (read 2026-10-30)",
+   "position": {
+    "lon": 26.7046026,
+    "lat": 60.8661167,
+    "osm_id": "n4051660143",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n4051660143",
+    "_source": "OpenStreetMap n4051660143 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "hairdresser",
+   "name": "Aseman parturi",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 26.7053751,
+    "lat": 60.8663309,
+    "osm_id": "n1498437296",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1498437296",
+    "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus (Väyläviraston julkaisuja 57/2026)",
+   "publisher": "Väylävirasto",
+   "url": "https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf",
+   "licence": "CC BY 4.0",
+   "read": "2026-10-30",
+   "note": "A yard study, not a station plan: platform table (p. 36), passenger tunnel and underpasses (p. 31). No lift or stair positions."
+  }
+ ],
+ "open": [
+  "Level heights: no source measures them.",
+  "Signposted level names: none found (no owner station plan read).",
+  "Lift, stair and escalator positions are OSM only; no plan or photo checked (Wikimedia Commons and fi.wikipedia could not be fetched).",
+  "Väylävirasto's station-area map (asemien lähialuekartat, https://vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat, linked by VR) could not be fetched (site error), so it is not listed as read.",
+  "Escalator w32673329 direction (up or down) is not stated in OSM.",
+  "South exit of Asematunneli: street name not given by any source.",
+  "Ranela (pub), Aseman parturi, Filmtown: existence and hours unverified; Filmtown is probably closed.",
+  "Avis hours: website (06:00-24:00 daily) vs OSM (Mo-Fr 08:00-17:00) not reconciled.",
+  "Toilet fee amount not given by any source.",
+  "Web search budget ran out during this pass; Matkahuolto/bus-terminal details and the city's park-and-ride page for the station were not checked."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not settled. Ground level has no signposted name in any source. The tunnel is 'Asematunneli' in OSM and 'Kouvolan aseman henkilötunneli' in Väylävirasto's structure list; signage not confirmed.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "From Asematunneli: lift + two stairs up to each island platform (3/4, 6/7, 9/10), two stairs up to platform 1, and lift + stairs + escalator at the station-building end. Positions are OSM only; Väylävirasto confirms an accessible route to every platform; VR confirms step-free entry from the hall to platform 1.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30"
+  },
+  {
+   "question": "Missing entrances",
+   "answer": "Main entrance on the city-centre side (Hallituskatu 3) per VR; the tunnel's south exit street is not named by any source.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Waiting hall (VR) and R-kioski (own site) settled; Ranela, Aseman parturi and Filmtown have no source hours; Avis disagrees between sources.",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.r-kioski.fi/kioskit/kouvola-asema/, read 2026-10-30"
+  }
+ ]
+}

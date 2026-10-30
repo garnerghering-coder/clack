@@ -1,0 +1,115 @@
+{
+ "clack_id": "NO-LYS",
+ "slug": "lysaker",
+ "flags": [
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w385726720 (cycleway, residential, secondary); w462374406 (footway, secondary); w816331430 Lysaker bru (trunk); w816331431 (no mapped ways); w1112574629 (footway, secondary, tertiary); w1568184890 (service)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.630247,59.909446,10.644247,59.917446",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Bærum 2013",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "lysaker_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lysaker/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lysaker/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": -0.62,
+  "median_m": 13.88,
+  "max_m": 43.91,
+  "nan_cells": 345778,
+  "size_m": [
+   950,
+   679
+  ],
+  "box_sweref": [
+   591079,
+   6642564,
+   592029,
+   6643243
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1797891_122.laz"
+  ],
+  "scan_date": "2013-04-27",
+  "density_pts_m2_nominal": 5,
+  "flight_height_m": null,
+  "points_in_box": 3972073,
+  "density_in_box": 6.16,
+  "classes": {
+   "1": 2656356,
+   "2": 1251875,
+   "7": 5410,
+   "10": 58432
+  },
+  "train_points_class64": 3626
+ },
+ "platforms": [
+  {
+   "bis_object": "track 2",
+   "track": "1,2",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 280.0,
+   "width_m": 13.0,
+   "roof": null,
+   "track_bed_m": 12.88,
+   "track_bed_points": 1108,
+   "platform_surface_m": 13.63,
+   "platform_points": 7753,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.75,
+   "laser_estimate_above_rail_m": 0.57
+  },
+  {
+   "bis_object": "track 3",
+   "track": "3,4",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 266.0,
+   "width_m": 13.0,
+   "roof": null,
+   "track_bed_m": 13.06,
+   "track_bed_points": 1549,
+   "platform_surface_m": 14.0,
+   "platform_points": 10924,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "other_side_surface_m": 13.49,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 0.94,
+   "laser_estimate_above_rail_m": 0.76
+  }
+ ],
+ "platform_surface_m": 13.82,
+ "track_bed_m": 12.97,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 6,
+  "footbridge": 3,
+  "canopy_osm": 11,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 100,
+ "photos_station_related": 2
+}

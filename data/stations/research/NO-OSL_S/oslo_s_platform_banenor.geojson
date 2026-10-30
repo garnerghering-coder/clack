@@ -1,0 +1,826 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7549092,
+      59.911293099999995
+     ],
+     [
+      10.756718799999998,
+      59.9108577
+     ],
+     [
+      10.7571961,
+      59.9107447
+     ],
+     [
+      10.7577474,
+      59.91061369999999
+     ],
+     [
+      10.758873899999998,
+      59.9103424
+     ],
+     [
+      10.7595087,
+      59.9101889
+     ],
+     [
+      10.7603739,
+      59.90998240000001
+     ],
+     [
+      10.761052999999999,
+      59.909819
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS1",
+    "track": "2,OS1",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 252.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.18,
+    "laser_track_bed_m": 3.44,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS1 og 2",
+    "x_covers_tracks": [
+     "OS1",
+     "2"
+    ],
+    "x_track_type": "Buttspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 369.0,
+    "x_comment": "Mellomplattform Dekker spor OS1 og 2",
+    "x_geometry": "extent: OSM platform outline r4121515 (ref 1;2), 381 m along the track (Bane NOR: 252 m)",
+    "x_osm_platform": "r4121515",
+    "x_nsr_quays": [
+     "NSR:Quay:565"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121515 (ref 1;2), 381 m along the track (Bane NOR: 252 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7620201,
+      59.909414300000016
+     ],
+     [
+      10.7614421,
+      59.90955370000001
+     ],
+     [
+      10.760944999999998,
+      59.90967249999999
+     ],
+     [
+      10.7602856,
+      59.90983060000001
+     ],
+     [
+      10.7591251,
+      59.91011159999999
+     ],
+     [
+      10.7579136,
+      59.9104018
+     ],
+     [
+      10.756590699999999,
+      59.910718799999984
+     ],
+     [
+      10.754785200000002,
+      59.9111544
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS3",
+    "track": "4,OS3",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 252.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.19,
+    "laser_track_bed_m": 3.39,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS3 og 4",
+    "x_covers_tracks": [
+     "OS3",
+     "4"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 265.0,
+    "x_comment": "Mellomplattform Dekker spor OS3 og 4",
+    "x_geometry": "extent: OSM platform outline r4121518 (ref 3;4), 449 m along the track (Bane NOR: 252 m)",
+    "x_osm_platform": "r4121518",
+    "x_nsr_quays": [
+     "NSR:Quay:554"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121518 (ref 3;4), 449 m along the track (Bane NOR: 252 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7598212,
+      59.9097721
+     ],
+     [
+      10.758640399999999,
+      59.91005629999996
+     ],
+     [
+      10.757782099999998,
+      59.910261999999996
+     ],
+     [
+      10.7564553,
+      59.91057939999998
+     ],
+     [
+      10.754706799999997,
+      59.9110024
+     ],
+     [
+      10.7546537,
+      59.9110154
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS5",
+    "track": "6,OS5",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 252.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS5",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.23,
+    "laser_track_bed_m": 3.32,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS5 og 6",
+    "x_covers_tracks": [
+     "OS5",
+     "6"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 325.0,
+    "x_comment": "Mellomplattform Dekker spor OS5 og 6",
+    "x_geometry": "extent: OSM platform outline r4121521 (ref 5;6), 321 m along the track (Bane NOR: 252 m)",
+    "x_osm_platform": "r4121521",
+    "x_nsr_quays": [
+     "NSR:Quay:559"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121521 (ref 5;6), 321 m along the track (Bane NOR: 252 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.758342999999998,
+      59.9099555
+     ],
+     [
+      10.7578433,
+      59.910077199999996
+     ],
+     [
+      10.7563266,
+      59.9104432
+     ],
+     [
+      10.7545193,
+      59.910875699999984
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS7",
+    "track": "8,OS7",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 238.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS7",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.4,
+    "laser_track_bed_m": 3.35,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS7 og 8 HB Lillestrøm-Oslo",
+    "x_covers_tracks": [
+     "OS7",
+     "8"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 205.0,
+    "x_comment": "Mellomplattform Dekker spor OS7 og 8 HB Lillestrøm-Oslo",
+    "x_geometry": "extent: OSM platform outline r6825729 (ref 7;8), 237 m along the track (Bane NOR: 238 m)",
+    "x_osm_platform": "r6825729",
+    "x_nsr_quays": [
+     "NSR:Quay:553"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r6825729 (ref 7;8), 237 m along the track (Bane NOR: 238 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7543825,
+      59.91073740000001
+     ],
+     [
+      10.7561934,
+      59.910301
+     ],
+     [
+      10.757507699999998,
+      59.90998669999998
+     ],
+     [
+      10.758209000000003,
+      59.9098175
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS9",
+    "track": "10,OS9",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 238.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS9",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.44,
+    "laser_track_bed_m": 3.31,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor OS9 og 10 HB Oslo Lillestrøm",
+    "x_covers_tracks": [
+     "OS9",
+     "10"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 246.0,
+    "x_comment": "Mellomplattform Dekker spor OS9 og 10 HB Oslo Lillestrøm",
+    "x_geometry": "extent: OSM platform outline r6825730 (ref 9;10), 237 m along the track (Bane NOR: 238 m)",
+    "x_osm_platform": "r6825730",
+    "x_nsr_quays": [
+     "NSR:Quay:555"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r6825730 (ref 9;10), 237 m along the track (Bane NOR: 238 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.754247099999999,
+      59.91059719999998
+     ],
+     [
+      10.7560602,
+      59.91016229999999
+     ],
+     [
+      10.7573935,
+      59.9098426
+     ],
+     [
+      10.7583199,
+      59.9096207
+     ],
+     [
+      10.759099299999999,
+      59.9094323
+     ],
+     [
+      10.7600648,
+      59.90919950000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS11",
+    "track": "12,OS11",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 252.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS11",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.37,
+    "laser_track_bed_m": 3.39,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS11 og 12",
+    "x_covers_tracks": [
+     "OS11",
+     "12"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 314.0,
+    "x_comment": "Mellomplattform Dekker spor OS11 og 12",
+    "x_geometry": "extent: OSM platform outline r4121516 (ref 11;12), 361 m along the track (Bane NOR: 252 m)",
+    "x_osm_platform": "r4121516",
+    "x_nsr_quays": [
+     "NSR:Quay:571"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121516 (ref 11;12), 361 m along the track (Bane NOR: 252 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7541303,
+      59.9104548
+     ],
+     [
+      10.7559291,
+      59.9100239
+     ],
+     [
+      10.7572436,
+      59.909706799999995
+     ],
+     [
+      10.7581769,
+      59.909482199999985
+     ],
+     [
+      10.7585419,
+      59.9093962
+     ],
+     [
+      10.7586812,
+      59.90936349999998
+     ],
+     [
+      10.758886099999998,
+      59.90931719999998
+     ],
+     [
+      10.759018599999997,
+      59.90928829999999
+     ],
+     [
+      10.7595111,
+      59.90918479999999
+     ],
+     [
+      10.7598335,
+      59.90912150000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS13",
+    "track": "14,OS13",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 234.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS13",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.37,
+    "laser_track_bed_m": 3.41,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor OS13 og 14",
+    "x_covers_tracks": [
+     "OS13",
+     "14"
+    ],
+    "x_track_type": "Togspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 361.0,
+    "x_comment": "Mellomplattform Dekker spor OS13 og 14",
+    "x_geometry": "extent: OSM platform outline r4121520 (ref 13;14), 352 m along the track (Bane NOR: 234 m)",
+    "x_osm_platform": "r4121520",
+    "x_nsr_quays": [
+     "NSR:Quay:557"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121520 (ref 13;14), 352 m along the track (Bane NOR: 234 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.753872999999999,
+      59.91034729999998
+     ],
+     [
+      10.7539663,
+      59.91032520000001
+     ],
+     [
+      10.7557939,
+      59.90988279999999
+     ],
+     [
+      10.757098299999997,
+      59.909572699999984
+     ],
+     [
+      10.757847,
+      59.9093919
+     ],
+     [
+      10.758125699999999,
+      59.9093229
+     ],
+     [
+      10.758464799999999,
+      59.9092434
+     ],
+     [
+      10.758808599999998,
+      59.90917500000001
+     ],
+     [
+      10.7590783,
+      59.9091263
+     ],
+     [
+      10.759264,
+      59.909099899999994
+     ],
+     [
+      10.7594712,
+      59.909072800000004
+     ],
+     [
+      10.7596385,
+      59.9090547
+     ],
+     [
+      10.7598954,
+      59.9090315
+     ],
+     [
+      10.7601307,
+      59.909010600000016
+     ],
+     [
+      10.7602501,
+      59.9089978
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS15",
+    "track": "16,OS15",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 234.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS15",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.31,
+    "laser_track_bed_m": 3.49,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS15 og 16",
+    "x_covers_tracks": [
+     "OS15",
+     "16"
+    ],
+    "x_track_type": "Buttspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 285.0,
+    "x_comment": "Mellomplattform Dekker spor OS15 og 16",
+    "x_geometry": "extent: OSM platform outline r4121517 (ref 15;16), 389 m along the track (Bane NOR: 234 m)",
+    "x_osm_platform": "r4121517",
+    "x_nsr_quays": [
+     "NSR:Quay:563"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121517 (ref 15;16), 389 m along the track (Bane NOR: 234 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.753736,
+      59.9102008
+     ],
+     [
+      10.753829899999998,
+      59.910178499999994
+     ],
+     [
+      10.755658300000002,
+      59.9097462
+     ],
+     [
+      10.756970599999999,
+      59.909434199999986
+     ],
+     [
+      10.7573373,
+      59.9093435
+     ],
+     [
+      10.7577754,
+      59.9092363
+     ],
+     [
+      10.7579831,
+      59.90918630000001
+     ],
+     [
+      10.758179299999998,
+      59.909143699999994
+     ],
+     [
+      10.7584273,
+      59.909091800000006
+     ],
+     [
+      10.758638900000001,
+      59.9090541
+     ],
+     [
+      10.758823899999998,
+      59.9090251
+     ],
+     [
+      10.7590193,
+      59.908995
+     ],
+     [
+      10.759227500000001,
+      59.9089656
+     ],
+     [
+      10.7595777,
+      59.90892379999999
+     ],
+     [
+      10.7601268,
+      59.90886199999998
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS17",
+    "track": "18,OS17",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 234.0,
+    "width_m": 9.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS17",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.19,
+    "laser_track_bed_m": 3.39,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Mellomplattform Dekker spor OS17 og 18 GMB",
+    "x_covers_tracks": [
+     "OS17",
+     "18"
+    ],
+    "x_track_type": "Buttspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 305.0,
+    "x_comment": "Mellomplattform Dekker spor OS17 og 18 GMB",
+    "x_geometry": "extent: OSM platform outline r4121519 (ref 17;18), 389 m along the track (Bane NOR: 234 m)",
+    "x_osm_platform": "r4121519",
+    "x_nsr_quays": [
+     "NSR:Quay:564"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r4121519 (ref 17;18), 389 m along the track (Bane NOR: 234 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.753610800000002,
+      59.91006839999999
+     ],
+     [
+      10.753694800000002,
+      59.9100487
+     ],
+     [
+      10.7555249,
+      59.909607699999995
+     ],
+     [
+      10.756806,
+      59.909298
+     ],
+     [
+      10.757392199999998,
+      59.90915929999998
+     ],
+     [
+      10.7577136,
+      59.9090865
+     ],
+     [
+      10.7579588,
+      59.9090345
+     ],
+     [
+      10.758238,
+      59.90897959999998
+     ],
+     [
+      10.7584954,
+      59.90893470000001
+     ],
+     [
+      10.7587604,
+      59.908895499999986
+     ],
+     [
+      10.7590244,
+      59.90885859999999
+     ],
+     [
+      10.7593069,
+      59.90882109999998
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track OS19",
+    "track": "OS19",
+    "height_class": "570",
+    "height_m": 0.57,
+    "height_text": "570 mm above top of rail (Bane NOR)",
+    "length_m": 234.0,
+    "width_m": 10.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "OSL_S-OS19",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.14,
+    "laser_track_bed_m": 3.34,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "570",
+    "x_platform_type": "Sideplattform ØB",
+    "x_covers_tracks": [
+     "OS19"
+    ],
+    "x_track_type": "Buttspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 315.0,
+    "x_comment": "Sideplattform ØB",
+    "x_geometry": "extent: OSM platform outline r6825728 (ref 19), 348 m along the track (Bane NOR: 234 m)",
+    "x_osm_platform": "r6825728",
+    "x_nsr_quays": [
+     "NSR:Quay:556"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r6825728 (ref 19), 348 m along the track (Bane NOR: 234 m)"
+   }
+  }
+ ]
+}

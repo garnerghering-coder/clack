@@ -1,0 +1,141 @@
+{
+ "clack_id": "NO-GAR",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w34081867",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 3.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0975298,
+    60.191932
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w34082003",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 103.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0964553,
+    60.1920878
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w661039552",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 47.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0982641,
+    60.1927184
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n6726980241",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    11.0961081,
+    60.1933137
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n6726986164",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 49,
+   "lonlat": [
+    11.0960627,
+    60.1932652
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n9968148268",
+   "category": "vending_machine",
+   "name": "OnePark",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 112,
+   "lonlat": [
+    11.098548,
+    60.1925341
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "OnePark"
+  },
+  {
+   "osm_id": "n14122050932",
+   "category": "clock",
+   "name": "Lett",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 7,
+   "lonlat": [
+    11.096794,
+    60.1930409
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w661039546",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 61,
+   "lonlat": [
+    11.0979758,
+    60.1933912
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "OnePark"
+  }
+ ]
+}

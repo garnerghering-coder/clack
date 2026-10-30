@@ -1,0 +1,542 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.7004033,
+      60.865677599999984
+     ],
+     [
+      26.706941300000004,
+      60.86603120000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L1",
+    "track": "1",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 350.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 290}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 651}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3185925",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.19,
+    "laser_track_bed_m": 71.51,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "1",
+    "x_infra_oid": "1.2.246.586.1.37.3185925",
+    "x_description": "Kouvola asema laituri: 1",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3185925, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.7069606,
+      60.8659325
+     ],
+     [
+      26.7065562,
+      60.86591450000001
+     ],
+     [
+      26.705554600000003,
+      60.865862500000006
+     ],
+     [
+      26.7028828,
+      60.865722
+     ],
+     [
+      26.7017158,
+      60.865660599999984
+     ],
+     [
+      26.701351500000005,
+      60.86563689999999
+     ],
+     [
+      26.7006434,
+      60.865597099999995
+     ],
+     [
+      26.7004153,
+      60.8655849
+     ],
+     [
+      26.7002,
+      60.865572799999995
+     ],
+     [
+      26.6999718,
+      60.86555700000001
+     ],
+     [
+      26.6997625,
+      60.86554160000001
+     ],
+     [
+      26.6996255,
+      60.86552979999998
+     ],
+     [
+      26.699504,
+      60.8655205
+     ],
+     [
+      26.6993134,
+      60.865503699999984
+     ],
+     [
+      26.6991576,
+      60.865489100000005
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L3",
+    "track": "3",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 430.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 221}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 651}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3185976",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.36,
+    "laser_track_bed_m": 71.52,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "3",
+    "x_infra_oid": "1.2.246.586.1.37.3185976",
+    "x_description": "Kouvola asema laituri: 3",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3185976, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.7069802,
+      60.86580680000001
+     ],
+     [
+      26.7055705,
+      60.865729699999996
+     ],
+     [
+      26.7029014,
+      60.8655816
+     ],
+     [
+      26.7017355,
+      60.86551699999999
+     ],
+     [
+      26.7013785,
+      60.86549780000001
+     ],
+     [
+      26.7009834,
+      60.8654749
+     ],
+     [
+      26.7003724,
+      60.8654448
+     ],
+     [
+      26.6999509,
+      60.8654259
+     ],
+     [
+      26.6996542,
+      60.865413099999984
+     ],
+     [
+      26.6995366,
+      60.8654071
+     ],
+     [
+      26.6993519,
+      60.8653968
+     ],
+     [
+      26.699177,
+      60.8653891
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L4",
+    "track": "4",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 430.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 221}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 651}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3186035",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.35,
+    "laser_track_bed_m": 71.55,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "4",
+    "x_infra_oid": "1.2.246.586.1.37.3186035",
+    "x_description": "Kouvola asema laituri: 4",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3186035, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.6991533,
+      60.8652928
+     ],
+     [
+      26.6996679,
+      60.8653225
+     ],
+     [
+      26.701394,
+      60.8654152
+     ],
+     [
+      26.7017363,
+      60.865436199999984
+     ],
+     [
+      26.7022287,
+      60.865461499999995
+     ],
+     [
+      26.7032606,
+      60.8655147
+     ],
+     [
+      26.7065007,
+      60.865686800000006
+     ],
+     [
+      26.7073164,
+      60.86572849999998
+     ],
+     [
+      26.707612700000002,
+      60.86574439999999
+     ],
+     [
+      26.7078644,
+      60.865754900000006
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L6",
+    "track": "6",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 480.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 217}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 697}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3186088",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.36,
+    "laser_track_bed_m": 71.5,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "6",
+    "x_infra_oid": "1.2.246.586.1.37.3186088",
+    "x_description": "Kouvola asema laituri: 6",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3186088, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.699143000000003,
+      60.86514309999998
+     ],
+     [
+      26.6996785,
+      60.8651752
+     ],
+     [
+      26.7014101,
+      60.8652707
+     ],
+     [
+      26.7017956,
+      60.865291699999986
+     ],
+     [
+      26.7022845,
+      60.8653181
+     ],
+     [
+      26.7065268,
+      60.86554679999997
+     ],
+     [
+      26.7065315,
+      60.8655468
+     ],
+     [
+      26.7074368,
+      60.86559639999999
+     ],
+     [
+      26.707709,
+      60.86561030000001
+     ],
+     [
+      26.707884,
+      60.865620199999995
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L7",
+    "track": "7",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 480.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 217}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 697}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3186230",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.37,
+    "laser_track_bed_m": 71.52,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "7",
+    "x_infra_oid": "1.2.246.586.1.37.3186230",
+    "x_description": "Kouvola asema laituri: 7",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3186230, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.707113700000004,
+      60.865490900000005
+     ],
+     [
+      26.7070689,
+      60.865488099999986
+     ],
+     [
+      26.7067008,
+      60.865469899999994
+     ],
+     [
+      26.7066272,
+      60.865466299999994
+     ],
+     [
+      26.7065488,
+      60.8654625
+     ],
+     [
+      26.7063659,
+      60.8654527
+     ],
+     [
+      26.706075400000003,
+      60.865437199999995
+     ],
+     [
+      26.705707500000003,
+      60.8654175
+     ],
+     [
+      26.7056379,
+      60.86541379999999
+     ],
+     [
+      26.705512400000003,
+      60.86540660000001
+     ],
+     [
+      26.7051755,
+      60.8653874
+     ],
+     [
+      26.704751,
+      60.8653631
+     ],
+     [
+      26.7045872,
+      60.865354399999994
+     ],
+     [
+      26.7042021,
+      60.86533399999999
+     ],
+     [
+      26.7034683,
+      60.865295
+     ],
+     [
+      26.702887,
+      60.86526229999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L9",
+    "track": "9",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 230.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 435}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 652}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20170129",
+    "reflink_oid": "1.2.246.586.1.37.3186369",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.37,
+    "laser_track_bed_m": 71.55,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "9",
+    "x_infra_oid": "1.2.246.586.1.37.3186369",
+    "x_description": "Kouvola asema laituri: 9",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3186369, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      26.7071315,
+      60.8653672
+     ],
+     [
+      26.7061863,
+      60.865317799999985
+     ],
+     [
+      26.7058596,
+      60.8653004
+     ],
+     [
+      26.7046723,
+      60.865236900000006
+     ],
+     [
+      26.7045054,
+      60.86522990000002
+     ],
+     [
+      26.7034786,
+      60.8651756
+     ],
+     [
+      26.7031382,
+      60.8651553
+     ],
+     [
+      26.7029173,
+      60.8651425
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "KV L10",
+    "track": "10",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 230.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"006\", \"alku\": {\"ratakm\": 191, \"etaisyys\": 420}, \"loppu\": {\"ratakm\": 191, \"etaisyys\": 652}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20200527",
+    "reflink_oid": "1.2.246.586.1.37.3630244",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 72.37,
+    "laser_track_bed_m": 71.56,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "10",
+    "x_infra_oid": "1.2.246.586.1.37.3630244",
+    "x_description": "Kouvola asema laituri: 10",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3630244, read 2026-10-30, CC BY 4.0"
+   }
+  }
+ ]
+}

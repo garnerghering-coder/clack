@@ -6,7 +6,8 @@ from shapely.geometry import Point, LineString, Polygon
 from shapely.ops import unary_union
 
 CID, SRC, LAT, LON, OUT = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
-fw = Transformer.from_crs(4326, 3006, always_xy=True).transform
+EPSG = int(sys.argv[6]) if len(sys.argv) > 6 else 3006   # any metric projection for the area
+fw = Transformer.from_crs(4326, EPSG, always_xy=True).transform
 root = ET.parse(SRC).getroot()
 tags = lambda el: {t.get('k'): t.get('v') for t in el.findall('tag')}
 N = {n.get('id'): (float(n.get('lon')), float(n.get('lat'))) for n in root.iter('node')}
@@ -26,14 +27,19 @@ for wid, (t, pts) in W.items():
             platforms.append({'osm_id': 'w' + wid, 'ref': t.get('ref') or t.get('local_ref') or t.get('name'), 'level': t.get('level'), 'g': g})
 stations = [geom(pts) for wid, (t, pts) in W.items() if t.get('building') in ('train_station', 'transportation') or t.get('railway') == 'station']
 stations = [s for s in stations if s is not None and s.distance(P0) < 300]
-zone = unary_union([p['g'].buffer(25) for p in platforms] + [s.buffer(40) for s in stations] + [P0.buffer(60)])
+REGLINES = []
+if len(sys.argv) > 7 and sys.argv[7]:   # the register's platform track lines (pack *_platform_*.geojson): widen the zone where OSM lacks platforms
+    for f in json.load(open(sys.argv[7]))['features']:
+        if f['geometry']['type'] == 'LineString':
+            REGLINES.append(LineString([fw(*c) for c in f['geometry']['coordinates']]))
+zone = unary_union([p['g'].buffer(25) for p in platforms] + [s.buffer(40) for s in stations] + [P0.buffer(60)] + [l.buffer(30) for l in REGLINES])
 streets = [(t.get('name'), geom(pts)) for wid, (t, pts) in W.items() if t.get('highway') in (
     'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'pedestrian', 'living_street', 'service') and t.get('name') and len(pts) > 1]
 
 def reaches(g, tol=6):
     return sorted({p['ref'] for p in platforms if p['ref'] and p['g'].distance(g) < tol})
 
-bw = Transformer.from_crs(3006, 4326, always_xy=True).transform
+bw = Transformer.from_crs(EPSG, 4326, always_xy=True).transform
 
 def lonlat(g):
     c = g.representative_point() if g.geom_type != 'Point' else g

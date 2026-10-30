@@ -1,0 +1,782 @@
+{
+ "clack_id": "FI-HL",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w61899397",
+   "ref": "1",
+   "level": "0"
+  },
+  {
+   "osm_id": "w389810790",
+   "ref": "3",
+   "level": "0"
+  },
+  {
+   "osm_id": "w1124153295",
+   "ref": "2",
+   "level": "0"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w23009762",
+   "name": "Viipurintie",
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 126.0,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4822856,
+    61.0007478
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w25544980",
+   "name": "Viipurintie",
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 126.0,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4817748,
+    61.0004026
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w101808930",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 94.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    24.4783765,
+    61.003022
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w121199264",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 20.3,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4820239,
+    61.0009
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w526840592",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.8,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4822856,
+    61.0007478
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w527219718",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": "yes",
+   "ramp": null,
+   "length_m": 113.0,
+   "reaches_platforms": [
+    "1",
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.477711,
+    61.0026799
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w702672499",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 25.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    24.4783765,
+    61.003022
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425465919",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": "no",
+   "ramp": "yes",
+   "length_m": 19.8,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    24.4779945,
+    61.0025675
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1425465923",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.0,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4779674,
+    61.0028395
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1425465924",
+   "name": null,
+   "level": "-1",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 2.8,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    24.4776741,
+    61.0026977
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425465925",
+   "name": null,
+   "level": "-1;0",
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 22.3,
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4780038,
+    61.0028304
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1460536341",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": "no",
+   "ramp": null,
+   "length_m": 1.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    24.4779536,
+    61.002262
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5181724177",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    24.4776741,
+    61.0026977
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5181724185",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [
+    "2",
+    "3"
+   ],
+   "lonlat": [
+    24.4779617,
+    61.0028467
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1175239860",
+   "name": null,
+   "entrance": "main",
+   "level": "0",
+   "wheelchair": "no",
+   "door": "hinged",
+   "addr_street": null,
+   "nearest_named_street": "Paavo Cajanderin katu",
+   "nearest_street_m": 10.6,
+   "lonlat": [
+    24.477973,
+    61.0022716
+   ]
+  },
+  {
+   "osm_id": "n4374637990",
+   "name": null,
+   "entrance": "main",
+   "level": "0",
+   "wheelchair": "limited;yes",
+   "door": "hinged;automatic",
+   "addr_street": null,
+   "nearest_named_street": "Paavo Cajanderin katu",
+   "nearest_street_m": 29.0,
+   "lonlat": [
+    24.4782087,
+    61.0023898
+   ]
+  },
+  {
+   "osm_id": "n8349854873",
+   "name": null,
+   "entrance": "shop",
+   "level": "0",
+   "wheelchair": "yes",
+   "door": "hinged",
+   "addr_street": null,
+   "nearest_named_street": "Paavo Cajanderin katu",
+   "nearest_street_m": 29.5,
+   "lonlat": [
+    24.4783249,
+    61.0023378
+   ]
+  },
+  {
+   "osm_id": "n8349897374",
+   "name": null,
+   "entrance": "home",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Paavo Cajanderin katu",
+   "nearest_street_m": 23.7,
+   "lonlat": [
+    24.4777438,
+    61.0024501
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n257395451",
+   "category": "taxi",
+   "name": "Hämeenlinna rautatieasema",
+   "level": null,
+   "fee": null,
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 76,
+   "lonlat": [
+    24.4780306,
+    61.0021912
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 22.8,
+   "website": "http://www.aluetaksi.net"
+  },
+  {
+   "osm_id": "n5110597635",
+   "category": "restaurant",
+   "name": "Asemaravintola",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Th 08:00-22:00; Fr,Sa 08:00-23:00; Su 08:00-22:00",
+   "wheelchair": null,
+   "distance_m": 90,
+   "lonlat": [
+    24.4779,
+    61.0024435
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 6.9
+  },
+  {
+   "osm_id": "n5181717229",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "limited",
+   "distance_m": 74,
+   "lonlat": [
+    24.4781742,
+    61.0023923
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 1.1
+  },
+  {
+   "osm_id": "n5894019063",
+   "category": "car_rental",
+   "name": "Scandia Rent",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 85,
+   "lonlat": [
+    24.4779429,
+    61.0023714
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 11.3,
+   "website": "https://www.scandiarent.fi/autovuokraamo/hameenlinna-rautatieasema",
+   "operator": "Scandia Rent"
+  },
+  {
+   "osm_id": "n5935017088",
+   "category": "shop=kiosk",
+   "name": "R-Kioski",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:30-20:00; Sa 07:00-19:30; Su 08:00-18:00",
+   "wheelchair": null,
+   "distance_m": 69,
+   "lonlat": [
+    24.4782214,
+    61.0023188
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 5.4,
+   "brand": "R-Kioski",
+   "website": "https://www.r-kioski.fi/kioskit/hameenlinna-asema/"
+  },
+  {
+   "osm_id": "n6055635388",
+   "category": "vending_machine",
+   "name": "VR Lippuautomaatti",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 77,
+   "lonlat": [
+    24.4781133,
+    61.0023721
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 5.0,
+   "operator": "VR"
+  },
+  {
+   "osm_id": "n6533496674",
+   "category": "bicycle_rental",
+   "name": "Valpastin Oy",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 92,
+   "lonlat": [
+    24.4778101,
+    61.0023587
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 17.2,
+   "operator": "Valpastin Oy"
+  },
+  {
+   "osm_id": "n7054906406",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "limited",
+   "distance_m": 68,
+   "lonlat": [
+    24.4782651,
+    61.0023533
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.9
+  },
+  {
+   "osm_id": "n7141743516",
+   "category": "vending_machine",
+   "name": "VR",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 79,
+   "lonlat": [
+    24.4779977,
+    61.0022469
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.4,
+   "operator": "VR"
+  },
+  {
+   "osm_id": "n8349854874",
+   "category": "parcel_locker",
+   "name": "Posti",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 70,
+   "lonlat": [
+    24.4781869,
+    61.0023066
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 7.6,
+   "operator": "Posti"
+  },
+  {
+   "osm_id": "n8349854875",
+   "category": "post_box",
+   "name": "Posti",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 72,
+   "lonlat": [
+    24.4781706,
+    61.0023204
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 7.1,
+   "operator": "Posti",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n8349854876",
+   "category": "post_box",
+   "name": "Posti",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 75,
+   "lonlat": [
+    24.4780536,
+    61.0022276
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.0,
+   "operator": "Posti"
+  },
+  {
+   "osm_id": "n8609670903",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 67,
+   "lonlat": [
+    24.4782927,
+    61.0023592
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n8609670905",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    24.4783769,
+    61.0023184
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n8609670906",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 45,
+   "lonlat": [
+    24.4786142,
+    61.0021956
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n8609670907",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 18,
+   "lonlat": [
+    24.4791037,
+    61.002075
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n8609670908",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    24.478759,
+    61.0022235
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n8609670909",
+   "category": "vending_machine",
+   "name": "Selecta",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    24.479015,
+    61.0023759
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0,
+   "brand": "Selecta",
+   "operator": "Selecta"
+  },
+  {
+   "osm_id": "n12163791818",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 136,
+   "lonlat": [
+    24.4770016,
+    61.0024451
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.3
+  },
+  {
+   "osm_id": "w17265789",
+   "category": "parking",
+   "name": "Asema-aukio",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 89,
+   "lonlat": [
+    24.4773696,
+    61.0019625
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 41.1
+  },
+  {
+   "osm_id": "w23379063",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 30,
+   "lonlat": [
+    24.4803518,
+    61.001245
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.6
+  },
+  {
+   "osm_id": "w101808920",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 106,
+   "lonlat": [
+    24.4775393,
+    61.002577
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.8
+  },
+  {
+   "osm_id": "w355525812",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 17,
+   "lonlat": [
+    24.4792644,
+    61.0019534
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w527219814",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 115,
+   "lonlat": [
+    24.4771329,
+    61.002384
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 25.2
+  },
+  {
+   "osm_id": "w584747628",
+   "category": "parking",
+   "name": "Hämeenlinnan rautatieasema liityntäparkki",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 249,
+   "lonlat": [
+    24.4836027,
+    60.999403
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 27.3,
+   "operator": "Hämeenlinnan Pysäköinti Oy"
+  },
+  {
+   "osm_id": "w928139448",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 39,
+   "lonlat": [
+    24.4791315,
+    61.0017591
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 21.3
+  },
+  {
+   "osm_id": "w928139450",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 50,
+   "lonlat": [
+    24.479449,
+    61.0016082
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 21.5
+  }
+ ]
+}

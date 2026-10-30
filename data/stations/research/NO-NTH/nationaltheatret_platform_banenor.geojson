@@ -1,0 +1,128 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.7305051,
+      59.9153765
+     ],
+     [
+      10.7285525,
+      59.91555989999999
+     ],
+     [
+      10.726712199999998,
+      59.9157365
+     ],
+     [
+      10.726275,
+      59.91577919999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track N1",
+    "track": "N1,N2",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 244.0,
+    "width_m": 11.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "NTH-N1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": null,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform",
+    "x_covers_tracks": [
+     "N1",
+     "N2"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 354.0,
+    "x_comment": "Mellomplattform; dekker spor N1 og N2. DB Oslo–Drammen.",
+    "x_geometry": "extent: OSM platform outline w317429054 (ref 1;2), 241 m along the track (Bane NOR: 244 m)",
+    "x_osm_platform": "w317429054",
+    "x_nsr_quays": [
+     "NSR:Quay:475",
+     "NSR:Quay:7333"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w317429054 (ref 1;2), 241 m along the track (Bane NOR: 244 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.725644,
+      59.915553800000005
+     ],
+     [
+      10.7275629,
+      59.9153748
+     ],
+     [
+      10.729465699999999,
+      59.91518889999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track N3",
+    "track": "N3,N4",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 251.0,
+    "width_m": 11.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "NTH-N3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": null,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform",
+    "x_covers_tracks": [
+     "N3",
+     "N4"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 374.0,
+    "x_comment": "Mellomplattform; dekker spor N3 og N4. DB Drammen–Oslo.",
+    "x_geometry": "extent: OSM platform outline w317429049 (ref 3;4), 218 m along the track (Bane NOR: 251 m)",
+    "x_osm_platform": "w317429049",
+    "x_nsr_quays": [
+     "NSR:Quay:477"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w317429049 (ref 3;4), 218 m along the track (Bane NOR: 251 m)"
+   }
+  }
+ ]
+}

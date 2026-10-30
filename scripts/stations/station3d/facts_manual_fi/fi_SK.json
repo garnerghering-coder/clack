@@ -1,0 +1,267 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level (new station building / station hall, platforms)",
+   "other_names": [],
+   "note": "New station building (architect Anssi Lassila / OOPEAA) opened 4 Dec 2024; the station hall is part of an office and business building with the family centre and a 450-space parking house (P-Asema) joined directly to the hall. Bus and taxi users enter at street level. The 1971 station building still stands; its future is undecided.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; Wikipedia 'Seinäjoki railway station', https://en.wikipedia.org/wiki/Sein%C3%A4joki_railway_station, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses under the tracks",
+   "other_names": [],
+   "note": "Two underpasses: the new one by the new station building (city centre ↔ Pohja to the north, finished Feb 2025) and an older one further north-west. No signposted level names found.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w1425385959",
+    "w1425385960",
+    "w1340337587",
+    "w1343431352"
+   ],
+   "name": "New underpass (by the new station building)",
+   "between": [
+    "city centre / station hall",
+    "Pohja (north side)"
+   ],
+   "where": "at the new station building (south-east part of the platforms)",
+   "confirmed_by": "owner text (OOPEAA, the architect: 'a new underpass connects the city centre with Pohja and gives safe access to the platforms', finished Feb 2025) + OSM",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561427",
+   "between": [
+    "new underpass",
+    "platform 1 (track 1, station side)"
+   ],
+   "where": "at the new station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561419",
+   "between": [
+    "new underpass",
+    "island platform tracks 2–3"
+   ],
+   "where": "at the new station building end of the island platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1419199660",
+    "w1419199658"
+   ],
+   "between": [
+    "new underpass",
+    "platform 1 / island platform 2–3"
+   ],
+   "where": "beside the lifts",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12398310523",
+   "between": [
+    "street / parking house",
+    "new underpass"
+   ],
+   "where": "station-building side, by stairs w1419159646 / w1419159651",
+   "confirmed_by": "OSM only (OOPEAA shows stairs to the platforms from the parking-house entrance)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w151098790",
+    "w1425385961",
+    "w1425385962"
+   ],
+   "name": "Older underpass (north-west)",
+   "between": [
+    "station side",
+    "island platform tracks 2–3"
+   ],
+   "where": "about 115 m north-west of the new underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400621",
+   "between": [
+    "older underpass",
+    "platform 1 / station side"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400624",
+   "between": [
+    "older underpass",
+    "island platform tracks 2–3"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w151098980",
+    "w151098793"
+   ],
+   "between": [
+    "older underpass",
+    "platform 1 side / island platform"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station hall (new station building)",
+   "street": "Ruukintie / Valtionkatu",
+   "level": "0",
+   "where": "street-level entrance for bus and taxi users; VR address Ruukintie 2; local buses stop on Valtionkatu in front of the station (OOPEAA)",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "name": "Parking-house link (P-Asema)",
+   "street": "Asemapäällikönkatu",
+   "level": "0",
+   "where": "the parking house joins the station hall directly and opens to Asemapäällikönkatu; stairs to the platforms at its entrance",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "name": "New underpass, Pohja side",
+   "street": "Pohja (north side of the yard; street not named in sources)",
+   "level": "-1",
+   "where": "far end of the new underpass",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila (station hall)",
+   "where": "new station building",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Picnic",
+   "where": "inside the station building; the VR assistance point is next to it",
+   "osm_id": "n12396780467",
+   "note": "No hours on VR's page; picnic.fi would not load.",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-Kioski",
+   "where": "in the station building (OSM in_station_building)",
+   "osm_id": "n2157465905",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 07:15-21:00; Su 10:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Food & Co Bistro Kaffeli",
+   "where": "in the station building (OSM in_station_building)",
+   "osm_id": "n12398310502",
+   "note": "No hours: the Compass Group page returned no content.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "osm_id": "n2157465904",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatti",
+   "where": "station building side (OSM)",
+   "osm_id": "n2157465903",
+   "note": "No VR service point; ticket office closed 2016.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; Wikipedia 'Seinäjoki railway station', https://en.wikipedia.org/wiki/Sein%C3%A4joki_railway_station, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers.",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "inside the station building next to Café Picnic",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Asema (Seipark)",
+   "where": "parking house next to the new station building, joined to the station hall",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1320722832",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stands",
+   "where": "OSM n1640581520 'Seinäjoen asema' and n13475956204 (Keskustaksi); taxi users enter the hall at street level",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Local buses (Valtionkatu) and long-distance buses (bus station north of the old station building)",
+   "where": "local buses on Valtionkatu in front of the station; long-distance buses leave from the north side of the old station with a direct link from the platform",
+   "note": "VR's page says the station has no public-transport connections and that rail-replacement buses leave from platform 1 at the north end; the architect's text describes the bus links above. Not reconciled.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Pyöräparkki Asema A / B",
+   "where": "700 spaces around the station",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Per OSM: two underpasses, each with a lift and stairs to platform 1 (track 1) and to the island platform for tracks 2–3. The newest (by the new station building, finished Feb 2025) is confirmed by the architect's text; per-platform lifts are OSM only. VR: platforms 1 and 2 are raised, platforms 1–3 have canopies.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Platform numbering: VR names platforms 1–3 (1 and 2 raised); Digitraffic has tracks 1–4 with only L1 'korkea' (L2–L4 'matala'), and the laser gives L2 ≈0.52 m above rail. How tracks 2–4 map onto platforms 2 and 3, and where track 4's platform is, is unsettled.",
+  "Lifts per platform are OSM only; no published plan read (Väylävirasto 'asemien lähialuekartat' at vayla.fi would not load).",
+  "Café Picnic and Food & Co Bistro Kaffeli hours not found; R-Kioski hours are OSM only.",
+  "Bus links: VR ('no public transport connections') vs OOPEAA (local buses on Valtionkatu, long-distance buses north of the old station).",
+  "No signposted level names; no heights.",
+  "Toilet fee unknown."
+ ]
+}

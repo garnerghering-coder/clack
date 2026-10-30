@@ -1,0 +1,562 @@
+{
+ "clack_id": "860000073",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal (Vejle Trafikcenter hall) / street level",
+   "other_names": [
+    "Vejle Trafikcenter"
+   ],
+   "note": "DSB: the station is in Vejle Trafikcenter; 7-Eleven in the forhal.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel under the tracks",
+   "other_names": [],
+   "note": "OSM underpass w149893501 (47 m), stairs (layer -1) up to perron 3/4 and 5/6.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w149893501",
+   "between": [
+    "forhal side",
+    "perron 3/4 and 5/6"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5369922,
+    "lat": 55.7066299,
+    "how": "OSM w149893501 (point on the way)",
+    "_source": "OpenStreetMap w149893501 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w151542391",
+   "between": [
+    "tunnel",
+    "perron 1 (spor 3/4)"
+   ],
+   "where": "from the tunnel up to the platform for tracks 3/4",
+   "confirmed_by": "owner text ('Trapper') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5369922,
+    "lat": 55.7066299,
+    "how": "OSM w151542391 (point on the way)",
+    "_source": "OpenStreetMap w151542391 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w151542392",
+   "between": [
+    "tunnel",
+    "perron 2 (spor 5/6)"
+   ],
+   "where": "from the tunnel up to the platform for tracks 5/6",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5372437,
+    "lat": 55.7066019,
+    "how": "OSM w151542392 (point on the way)",
+    "_source": "OpenStreetMap w151542392 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "not mapped in OSM",
+   "confirmed_by": "owner text only ('Elevator', presence only)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w149893501",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3;4",
+    "platform 5;6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 46.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w149893501 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.5369922,
+    "lat": 55.7066299,
+    "how": "OSM w149893501 (point on the way)",
+    "_source": "OpenStreetMap w149893501 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w151542391",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3;4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w151542391 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.5369922,
+    "lat": 55.7066299,
+    "how": "OSM w151542391 (point on the way)",
+    "_source": "OpenStreetMap w151542391 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w151542392",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5;6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w151542392 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.5372437,
+    "lat": 55.7066019,
+    "how": "OSM w151542392 (point on the way)",
+    "_source": "OpenStreetMap w151542392 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n3043291277",
+   "name": "Entrance",
+   "street": "Banegårdspladsen",
+   "where": "DSB address Banegårdspladsen 3B",
+   "confirmed_by": "OSM + DSB address",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30",
+   "position": {
+    "lon": 9.5364234,
+    "lat": 55.7066929,
+    "how": "OSM n3043291277",
+    "_source": "OpenStreetMap n3043291277 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n1628343712",
+   "name": "Entrance",
+   "street": "Reinholdts Plads",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5374066,
+    "lat": 55.7065838,
+    "how": "OSM n1628343712",
+    "_source": "OpenStreetMap n1628343712 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n4356738573",
+   "name": "Entrance",
+   "street": "Borgvold",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5363406,
+    "lat": 55.7063337,
+    "how": "OSM n4356738573",
+    "_source": "OpenStreetMap n4356738573 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n5974391206",
+   "name": "Entrance",
+   "street": "unnamed (47 m from nearest named street)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5366564,
+    "lat": 55.7066087,
+    "how": "OSM n5974391206",
+    "_source": "OpenStreetMap n5974391206 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1628343712",
+   "street": "Reinholdts Plads",
+   "street_how": "nearest named street, 13.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1628343712 (already in OSM)",
+   "position": {
+    "lon": 9.5374066,
+    "lat": 55.7065838,
+    "how": "OSM n1628343712",
+    "_source": "OpenStreetMap n1628343712 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3043291277",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 35.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3043291277 (already in OSM)",
+   "position": {
+    "lon": 9.5364234,
+    "lat": 55.7066929,
+    "how": "OSM n3043291277",
+    "_source": "OpenStreetMap n3043291277 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4356738573",
+   "street": "Borgvold",
+   "street_how": "nearest named street, 30.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4356738573 (already in OSM)",
+   "position": {
+    "lon": 9.5363406,
+    "lat": 55.7063337,
+    "how": "OSM n4356738573",
+    "_source": "OpenStreetMap n4356738573 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5974391206",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5974391206 (already in OSM)",
+   "position": {
+    "lon": 9.5366564,
+    "lat": 55.7066087,
+    "how": "OSM n5974391206",
+    "_source": "OpenStreetMap n5974391206 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Vejle Station)",
+   "osm_id": "n1517761505",
+   "level_per_plan": "0",
+   "where": "in the forhal",
+   "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page agrees.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.536516,
+    "lat": 55.7066168,
+    "osm_id": "n1517761505",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.6,
+    "how": "OSM node n1517761505",
+    "_source": "OpenStreetMap n1517761505 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bakery",
+   "name": "Lagkagehuset",
+   "osm_id": "n9066920223",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 06:00-17:30; Sa,Su 06:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.536544,
+    "lat": 55.706879,
+    "osm_id": "n9066920223",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 28.8,
+    "how": "OSM node n9066920223",
+    "_source": "OpenStreetMap n9066920223 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Euronet",
+   "osm_id": "n13456582430",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5363779,
+    "lat": 55.7065255,
+    "osm_id": "n13456582430",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 31.1,
+    "how": "OSM node n13456582430",
+    "_source": "OpenStreetMap n13456582430 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall",
+   "opening_hours": "Mo-Fr 04:45-24:00; Sa,Su,PH 06:45-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet og handicaptoilet",
+   "osm_id": "n8982974376",
+   "where": "station building (OSM)",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Sa 06:00-22:00; Su 07:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5364963,
+    "lat": 55.7063905,
+    "osm_id": "n8982974376",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 20.8,
+    "how": "OSM node n8982974376",
+    "_source": "OpenStreetMap n8982974376 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "where": "in the forhal; available during forhal opening hours",
+   "fee": "per started day: S 30, M 40, M2 50, L 60, XL 80 kr; card",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "position not given; DSB handicap service meets 'ved billetsalget'",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Vejle Trafikcenter",
+   "osm_id": "w300214936",
+   "where": "the station is part of the Trafikcenter (regional and city buses)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5360379,
+    "lat": 55.7056685,
+    "osm_id": "w300214936",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.3,
+    "how": "representative point of the OSM area w300214936",
+    "_source": "OpenStreetMap w300214936 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n3530340467",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30",
+   "position": {
+    "lon": 9.5363209,
+    "lat": 55.7069272,
+    "osm_id": "n3530340467",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 43.7,
+    "how": "OSM node n3530340467",
+    "_source": "OpenStreetMap n3530340467 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 141 spaces at Jernbanegade 13 (north of Havnegade) and Reinholdts Plads (south of Havnegade); some APCOA spaces",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n8982974376",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n8982974376 (read 2026-10-30)",
+   "position": {
+    "lon": 9.5364963,
+    "lat": 55.7063905,
+    "osm_id": "n8982974376",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 20.8,
+    "how": "OSM node n8982974376",
+    "_source": "OpenStreetMap n8982974376 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Lagkagehuset",
+   "osm_id": "n11455177409",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11455177409 (read 2026-10-30)",
+   "position": {
+    "lon": 9.5366524,
+    "lat": 55.7069209,
+    "osm_id": "n11455177409",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 23.1,
+    "how": "OSM node n11455177409",
+    "_source": "OpenStreetMap n11455177409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Sa,Su,PH 07:00-23:00; Mo-Fr 05:45-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 9.536516,
+    "lat": 55.7066168,
+    "osm_id": "n1517761505",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.6,
+    "how": "OSM node n1517761505",
+    "_source": "OpenStreetMap n1517761505 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1517761505 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Toscana",
+   "brand": null,
+   "cuisine": "italian",
+   "opening_hours": "17:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "http://toscana-restaurant.dk/",
+   "position": {
+    "lon": 9.5366496,
+    "lat": 55.7072194,
+    "osm_id": "n4036360417",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 30.1,
+    "how": "OSM node n4036360417",
+    "_source": "OpenStreetMap n4036360417 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4036360417 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Lagkagehuset",
+   "brand": "Lagkagehuset",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-17:30; Sa,Su 06:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 9.536544,
+    "lat": 55.706879,
+    "osm_id": "n9066920223",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 28.8,
+    "how": "OSM node n9066920223",
+    "_source": "OpenStreetMap n9066920223 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9066920223 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Piri Piri Chicken",
+   "brand": null,
+   "cuisine": "chicken",
+   "opening_hours": "Mo-Th 12:00-22:00; Fr-Sa 12:00-24:00; Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://piripiri.dk",
+   "position": {
+    "lon": 9.5366308,
+    "lat": 55.7071281,
+    "osm_id": "n13509405089",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.2,
+    "how": "OSM node n13509405089",
+    "_source": "OpenStreetMap n13509405089 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13509405089 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "DSB lists an elevator but OSM maps no lift; position and platforms served unknown.",
+  "Toilet 'Lagkagehuset' node n11455177409 (OSM) is the bakery's customer toilet; not listed.",
+  "Lagkagehuset hours are OSM only (own site not checked).",
+  "Toscana and Piri Piri Chicken (OSM, outside the station building) not included.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

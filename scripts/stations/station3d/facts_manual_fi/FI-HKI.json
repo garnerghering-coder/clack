@@ -1,0 +1,663 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street / platform level (station hall, kiosk hall, platforms, west wing Kauppakuja)",
+   "other_names": [
+    "Laituritaso is used only for the metro"
+   ],
+   "note": "Platforms 1–19 are at street level; 4–11 are under the main roof, 1–3 east, 12–19 west (Wikipedia). Entrances from Rautatientori, Kaivokatu, Asema-aukio and Elielinaukio. The step-free route to the platforms is through the Elielinaukio gateway/corridor (porttikongi) and is signposted.",
+   "_source": "https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Kellaritaso (basement: passenger service facilities — toilets, luggage lockers, lost property) / Asematunneli",
+   "other_names": [
+    "kellarikerros",
+    "matkustajapalvelutilat",
+    "Asematunneli (the 1967 shopping tunnel under Kaivokatu to the metro; HKL map level -1)"
+   ],
+   "note": "paarautatieasema.fi names the basement level 'kellaritaso'/'kellarikerros'; reached by lift (step-free) or stairs. HKL's metro map names the -1 level 'Asematunneli', -2 'Kompassitaso', -3 metro 'Laituritaso'. The Eliel underpass and Kaisantunneli under the tracks are also on OSM layer -1. VR mentions 'the metro level on the K floor' for a TalletusOtto.",
+   "_source": "https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; https://paarautatieasema.fi/p/79/palvelut/yleiso-wc, read 2026-10-30; HKL/Helsinki metro station guide map 'Rautatientori' (https://www.hel.fi/static/hkl/metroasema_opaskartat/rautatientori.pdf), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": "Kompassitaso (metro, out of scope)",
+   "other_names": [],
+   "note": "Metro concourse level; R-kioski Kompassitaso is here (not recorded as a station shop).",
+   "_source": "HKL/Helsinki metro station guide map 'Rautatientori' (https://www.hel.fi/static/hkl/metroasema_opaskartat/rautatientori.pdf), read 2026-10-30; https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-kompassitaso-3/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-3",
+   "name": "Laituritaso (metro platforms, out of scope)",
+   "other_names": [],
+   "_source": "HKL/Helsinki metro station guide map 'Rautatientori' (https://www.hel.fi/static/hkl/metroasema_opaskartat/rautatientori.pdf), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "name": "Eliel underpass (ratapihan alikulku)",
+   "osm_id": "w16759161",
+   "between": [
+    "Kaisaniemi park corner (east)",
+    "Elielinaukio corner (west)"
+   ],
+   "where": "across the tracks north of the main hall; 185 m long, built 1999–2000; stairs and lifts to the platforms",
+   "confirmed_by": "Wikipedia text + OSM (VR text for the closing hours)",
+   "note": "VR: 'Northern underpass: closed at 22:30 Friday to Sunday and on evenings before public holidays; opens at 05:30.' A 2023 City of Helsinki notice also says the underpass can be reached by the stairs next to platform 4.",
+   "_source": "https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; https://hel.fi/en/news/central-railway-stations-accessible-entrance-to-the-railway-yard-underpass-closed-after-easter, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "name": "Kaisantunneli",
+   "osm_ids": [
+    "w753384651",
+    "w1148057148",
+    "w1304733511"
+   ],
+   "between": [
+    "Kaisaniemi park (east)",
+    "Töölönlahdenkatu / Baana (west)"
+   ],
+   "where": "pedestrian and cycle tunnel under the station, opened 4 May 2024; direct access to the platforms and joined to the pedestrian underpass; bike garage inside",
+   "confirmed_by": "Wikipedia text + owner text (paarautatieasema.fi bike garage) + OSM",
+   "_source": "https://en.wikipedia.org/wiki/Kaisantunneli, read 2026-10-30; https://paarautatieasema.fi/p/85/palvelut/kaisantunnelin-pyoratalli, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4642563750",
+   "between": [
+    "underpass",
+    "platforms 5/6"
+   ],
+   "where": "north part of the platforms, from the underpass",
+   "confirmed_by": "OSM only (Wikipedia: the Eliel underpass has stairs and lifts to all tracks)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4642563748",
+   "between": [
+    "underpass",
+    "platforms 7/8"
+   ],
+   "where": "north part of the platforms, from the underpass",
+   "confirmed_by": "OSM only (Wikipedia: lifts to all tracks)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4642563760",
+   "between": [
+    "underpass",
+    "platforms 9/10"
+   ],
+   "where": "north part of the platforms, from the underpass",
+   "confirmed_by": "OSM only (Wikipedia: lifts to all tracks)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "w1570456565",
+    "n11792578113"
+   ],
+   "between": [
+    "underpass (level -1)",
+    "platform 19"
+   ],
+   "where": "west side, platform 19",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4642563726",
+   "between": [
+    "kellaritaso (passenger service facilities)",
+    "street level by platform 11 / west wing"
+   ],
+   "where": "west wing by the toilets and lockers; the pharmacy page places a lift and stairs 'opposite the VR service point' down to the west wing's lower floor",
+   "confirmed_by": "owner text (paarautatieasema.fi: passenger services reached by lift or stairs) + OSM for position",
+   "_source": "https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; https://paarautatieasema.fi/p/67/palvelut/steissin-apteekki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w16960360",
+    "w16960321",
+    "w1176578922",
+    "w470004897"
+   ],
+   "between": [
+    "underpass",
+    "platforms 5/6, 7/8, 9/10, 4"
+   ],
+   "where": "from the underpass up to the platforms",
+   "confirmed_by": "OSM only (2023 City of Helsinki notice confirms stairs next to platform 4)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w28684711",
+    "w1266803794",
+    "w1266803796",
+    "w18379178",
+    "w18378880",
+    "w23648432"
+   ],
+   "between": [
+    "station hall / street (0)",
+    "Asematunneli (-1)"
+   ],
+   "where": "from the main hall and streets down to Asematunneli and the metro",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "name": "Metro transfer lift (Rautatientori, entrance A)",
+   "osm_id": "n2039713549",
+   "between": [
+    "Asema-aukio (street)",
+    "metro Rautatientori"
+   ],
+   "where": "outdoors on the Asema-aukio side, through a separate metro entrance (OSM entrance 'Metro Rautatientori A', n189437356/n2039713563, wheelchair=yes)",
+   "confirmed_by": "owner text (paarautatieasema.fi: step-free metro route is outdoors via a lift on the Asema-aukio side through a separate metro entrance) + OSM for position",
+   "note": "OSM also has lift 'Metro Rautatientori C' n2261292460 (level -1;0) on Kaivokatu. Metro itself out of scope.",
+   "_source": "https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrances (wooden doors with vestibule)",
+   "street": "Kaivokatu / Rautatientori",
+   "level": "0",
+   "where": "main hall; not step-free (wooden doors and vestibule). OSM main entrances on Kaivokatu n256259546, n316412723, n316413112, n315279614, n315279616",
+   "_source": "https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "name": "Elielinaukio gateway (step-free route to the platforms)",
+   "street": "Elielinaukio",
+   "level": "0",
+   "where": "west side; automatic doors lead to the station interior and the postihalli; signposted step-free route",
+   "_source": "https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "name": "West entrances on Asema-aukio (B, C, D)",
+   "street": "Asema-aukio",
+   "level": "0",
+   "where": "west wing / Asema-aukio side; OSM entrances B n1371515185, C n1371515205/n1371515225, D n1371515216; taxi stand near the western entrance",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; https://paarautatieasema.fi/liikenne, read 2026-10-30"
+  },
+  {
+   "name": "Kauppakuja (west wing shopping street)",
+   "street": "Rautatieaseman Kauppakuja",
+   "level": "0",
+   "where": "west wing corridor to the western commuter platforms; OSM entrances n317764843, n2485472928, n4642563725, n4642563733",
+   "_source": "https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "name": "Eliel underpass / Kaisantunneli ends",
+   "street": "Kaisaniemi park (east); Töölönlahdenkatu / Elielinaukio (west)",
+   "level": "-1/0",
+   "where": "tunnel mouths at both sides of the yard",
+   "_source": "https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; https://en.wikipedia.org/wiki/Kaisantunneli, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "station",
+   "name": "Helsingin päärautatieasema (station opening)",
+   "where": "whole station",
+   "opening_hours": "Mo-Su 05:00-02:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "VR gives the waiting room as daily 05-02.",
+   "_source": "https://paarautatieasema.fi/liikenne, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Bröner (Berlin döner)",
+   "osm_id": "n1369465635",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "note": "paarautatieasema.fi: 'Ravintola on tilapäisesti suljettu' (temporarily closed); no hours given.",
+   "_source": "https://paarautatieasema.fi/p/83/ravintolat/broner, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Eliel",
+   "osm_id": "n10300470509",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-We 07:00-20:00; Th-Sa 07:00-21:00; Su 08:00-18:30",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ (Mo-Sa 07-21, Su 08-20); owner page used.",
+   "_source": "https://paarautatieasema.fi/p/52/ravintolat/cafe-eliel, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Gateau Rautatieasema",
+   "osm_id": "n10271214809",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 07:30-20:00; Su 08:30-19:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/89/ravintolat/fazer-gateau, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Jungle Juice Bar",
+   "osm_id": "n10271203910",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:30-21:00; Sa 07:30-20:00; Su 08:30-19:30",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Smoothie and juice bar.",
+   "_source": "https://paarautatieasema.fi/p/43/ravintolat/jungle-juice-bar, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Kellotorni Panimoravintola",
+   "osm_id": "n600140089",
+   "where": "in the station, Kaivokatu 1 (clock tower; position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 10:00-24:00; Fr,Sa 10:00-02:00; Su 12:00-22:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Brewery restaurant.",
+   "_source": "https://paarautatieasema.fi/p/91/ravintolat/kellotorni-panimoravintola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "La Komia",
+   "osm_id": "n60068034",
+   "where": "Elielinaukio side of the station (Elielinaukio 3)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Sa 11:00-24:00; Su 12:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Bar hours. Kitchen: Mo-Th 12-19, Fr 12-20, Sa 13-20. OSM gives Fr-Sa to 02:00; owner page used.",
+   "_source": "https://paarautatieasema.fi/p/99/ravintolat/la-komia, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Olivia Central Station",
+   "osm_id": "n9595092848",
+   "where": "in the station's historic restaurant hall (ravintolasali), Kaivokatu 1",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-23:00; Su 12:00-22:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Public holiday hours may differ.",
+   "_source": "https://paarautatieasema.fi/p/53/ravintolat/olivia-central-station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Picnic",
+   "where": "in the station, Kaivokatu 1; exact spot not given",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:30-19:30; Sa 09:00-17:30; Su 10:00-17:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM: no position.",
+   "_source": "https://paarautatieasema.fi/p/50/ravintolat/picnic, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Pronto (Italian food to go)",
+   "osm_id": "n13304356586",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 10:00-20:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ; owner page used.",
+   "_source": "https://paarautatieasema.fi/p/51/ravintolat/pronto, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "Päärata Bar",
+   "osm_id": "n1369465556",
+   "where": "Elielinaukio 3; the owner page says it is at the end of a platform ('tämän laiturin päässä'), platform not named",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th,Su 10:00-22:00; Fr,Sa 10:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Kitchen 15:00-21:30.",
+   "_source": "https://paarautatieasema.fi/p/106/ravintolat/paarata-bar, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Starbucks",
+   "osm_id": "n12666876558",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 06:00-21:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ (Mo-Sa 06-20, Su 07-20); owner page used.",
+   "_source": "https://paarautatieasema.fi/p/82/ravintolat/starbucks, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King Rautatieasema",
+   "osm_id": "n12688142626",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 07:00-01:30; Sa,Su 09:00-01:30",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/95/ravintolat/burger-king, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Robert's Coffee",
+   "osm_id": "n317766538",
+   "where": "west wing, Elielinaukio 3 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 06:00-21:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ (Mo-Sa 06-23, Su 07-21); owner page used.",
+   "_source": "https://paarautatieasema.fi/p/101/ravintolat/Roberts-Coffee, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "osm_id": "n11937197788",
+   "where": "Elielinaukio 1 (as written on the owner page; position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 09:00-22:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ; owner page used.",
+   "_source": "https://paarautatieasema.fi/p/54/ravintolat/subway, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Taulu (café, bar, restaurant)",
+   "osm_id": "n1369465577",
+   "where": "in the station's historic restaurant hall (ravintolasali), Kaivokatu 1",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 08:00-23:00; Fr 08:00-24:00; Sa 09:00-24:00; Su 09:00-23:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "À la carte kitchen Su-Mo 11:30-20, Tu-Sa 11:30-22; bar Su-Tu 11-23, We-Sa 11-00.",
+   "_source": "https://paarautatieasema.fi/p/93/ravintolat/Taulu, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Rautatieasema Elielinaukio",
+   "osm_id": "n11371593967",
+   "where": "Elielinaukio 3, Tila 1542 (west wing, Elielinaukio side)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa 08:00-23:00; Su 09:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-elielinaukio/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Rautatieasema Asema-aukio",
+   "osm_id": "n317551811",
+   "where": "west wing (Länsisiipi), Asema-aukio side",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 05:00-24:00; Fr,Sa 05:00-01:00; Su 06:00-23:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM match by position (shop page gives 60.17123, 24.94046; OSM node ~15 m away) — check.",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-asema-aukio-2/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Kioskihalli (Lähtevät ja saapuvat junat)",
+   "osm_id": "n317551808",
+   "where": "kiosk hall at the head of the platforms (departing and arriving trains)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo 14:00-24:00; Tu-Th 05:30-24:00; Fr 05:30-01:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Monday opening 14:00 is as listed on the shop page. OSM match by position (~20 m) — check.",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-rautatieasema-lahtevat-ja-saapuvat-junat-2/, read 2026-10-30; https://paarautatieasema.fi/p/72/palvelut/r-kioski, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Rauta-Kukka",
+   "osm_id": "n12666881341",
+   "where": "in the station hall (asemahalli), Kaivokatu 1",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Sa 07:30-20:00; Su 09:00-17:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/68/palvelut/rauta-kukka, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Steissin Apteekki",
+   "osm_id": "n1369465553",
+   "where": "west wing; enter from track 11 or from Elielinaukio",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa 10:00-16:00; Su,PH off",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Closed on Saturdays in July, Christmas Eve and Midsummer Eve; paarautatieasema.fi also lists 'la 31.10.26 suljettu'. Its pickup locker is on the ground floor of the west wing's Kauppakuja, reached by lift or stairs opposite the VR service point.",
+   "_source": "https://www.steissinapteekki.fi/, read 2026-10-30; https://paarautatieasema.fi/p/67/palvelut/steissin-apteekki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "books",
+   "name": "Suomalainen Kirjakauppa",
+   "osm_id": "n1369465559",
+   "where": "in the kiosk hall (kioskihalli)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Sa 08:00-20:00; Su 09:00-17:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Exceptions listed: Midsummer Eve 08-14, Midsummer Day and following day closed.",
+   "_source": "https://paarautatieasema.fi/p/100/palvelut/suomalainen-kirjakauppa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "FOREX",
+   "osm_id": "n1380976581",
+   "where": "in the station, Kaivokatu 1 (position from OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:30-18:00; Su off",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Also Western Union.",
+   "_source": "https://paarautatieasema.fi/p/69/palvelut/forex, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone_repair",
+   "name": "MFix",
+   "where": "in the station, Kaivokatu 1; exact spot not given",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Not in OSM.",
+   "_source": "https://paarautatieasema.fi/p/71/palvelut/mfix, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "SIXT Autovuokraamo",
+   "where": "in the station, Kaivokatu 1; exact spot not given",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 09:00-16:00; Fr 09:00-18:00; Sa 09:00-15:00; PH 09:00-15:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/105/palvelut/sixt-autovuokraamo, read 2026-10-30"
+  },
+  {
+   "category": "ticket_office",
+   "name": "VR-kohtaamispiste (VR Customer Point)",
+   "where": "in the station, Kaivokatu 1; exact spot not given. The pharmacy page refers to a lift and stairs 'opposite the VR service point' leading to the west wing ground floor",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Ticket sales and changes, travel advice. Public holiday hours may differ. Same hours on VR's page.",
+   "_source": "https://paarautatieasema.fi/p/64/palvelut/vr-kohtaamispiste, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Yleisö-WC (incl. Inva-WC)",
+   "osm_id": "n4642563718",
+   "where": "basement level (kellaritaso), in the passenger service facilities (matkustajapalvelutilat), Elielinaukio 3 side; step-free by lift, or stairs",
+   "level_per_plan": "-1",
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Fee 1.10 EUR (card or phone). Inva-WC is in the same rooms (accessibility page). OSM has two toilet nodes here (n4642563718, n4642563719).",
+   "_source": "https://paarautatieasema.fi/p/79/palvelut/yleiso-wc, read 2026-10-30; https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavarasäilytys (luggage lockers)",
+   "osm_id": "n12099238398",
+   "where": "basement level (kellarikerros) passenger service facilities; VR: 'the west wing of the station'",
+   "level_per_plan": "-1",
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Card payment; 3/6/12/24/72 h; from 3.90 EUR (S), 4.90 (XL), 5.90 (Ski) for 3 h; accessible locker available. OSM also n5155503077.",
+   "_source": "https://paarautatieasema.fi/p/66/palvelut/matkatavarasailytys, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "lost_property",
+   "name": "Löytötavarapalvelu (lost property)",
+   "where": "basement level passenger service facilities, Elielinaukio 3",
+   "level_per_plan": "-1",
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00; Su off",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "TalletusOtto and ValuuttaOtto",
+   "osm_id": "n4220208271",
+   "where": "west wing (länsisiipi), street level (VR); VR adds a TalletusOtto at 'the metro level on the K floor'",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "ValuuttaOtto gives foreign currency.",
+   "_source": "https://paarautatieasema.fi/p/73/palvelut/otto--ja-ottoplus-automaatit, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "locker",
+   "name": "KeyBoy key locker",
+   "where": "west wing (länsisiipi), Elielinaukio 3",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/104/palvelut/Keyboy-avainautomaatti, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30"
+  },
+  {
+   "category": "parcel_locker",
+   "name": "PostNord parcel machine",
+   "where": "in the station, Kaivokatu 1; exact spot not given",
+   "level_per_plan": "0",
+   "_source": "https://paarautatieasema.fi/p/94/palvelut/postnord-oy, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Kaisantunnelin Pyörätalli (bike garage)",
+   "osm_id": "w1148057153",
+   "where": "in Kaisantunneli (Kaisantunneli 1), under the tracks",
+   "level_per_plan": "-1",
+   "opening_hours": "Mo-Su 05:00-23:00",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Almost 900 bikes; max 10 days; access with HSL card + PIN after registering for HSL bike parking.",
+   "_source": "https://paarautatieasema.fi/p/85/palvelut/kaisantunnelin-pyoratalli, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR ticket machine",
+   "osm_id": "n7946077090",
+   "where": "station hall (OSM); HSL's area map also marks VR and HSL ticket machines",
+   "level_per_plan": "0",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; HSL area map Rautatientori 10.08.2020 (https://www.hsl.fi/sites/default/files/uploads/rautatientori_1730x1180_09102020.pdf), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR assistance point",
+   "where": "under the platform canopy by platform 11 (in the courtyard); step-free from the station hall, Elielinaukio and the Asema-aukio taxi stand. Book on 0800 188 822.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stand (Asema-aukio)",
+   "where": "Asema-aukio, near the western entrance",
+   "opening_hours": "24/7",
+   "hours_source": "website (paarautatieasema.fi)",
+   "hours_checked": "2026-10-30",
+   "note": "Taksi Helsinki and Fixu Taksi.",
+   "_source": "https://paarautatieasema.fi/liikenne, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Eliel (underground car park)",
+   "where": "under Elielinaukio, entry from Töölönlahdenkatu and Kaivokatu",
+   "note": "Wikipedia: 480 spaces, opened Oct 2000.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/helsinki, read 2026-10-30; https://paarautatieasema.fi/liikenne, read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Elielinaukio bus terminal",
+   "osm_id": "w33386599",
+   "where": "Elielinaukio, west side of the station (on top of the P-Eliel car park); further buses from Rautatientori (east side)",
+   "_source": "https://paarautatieasema.fi/liikenne, read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30"
+  },
+  {
+   "category": "service_point",
+   "name": "HSL service point",
+   "where": "west wing of the station (moved there in spring 2020 per HSL's area map)",
+   "_source": "HSL area map Rautatientori 10.08.2020 (https://www.hsl.fi/sites/default/files/uploads/rautatientori_1730x1180_09102020.pdf), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Rautatientori area map (HSL lähialuekartta, 10.08.2020)",
+   "publisher": "HSL",
+   "url": "https://www.hsl.fi/sites/default/files/uploads/rautatientori_1730x1180_09102020.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Rautatientori metro station guide map (metroaseman opaskartta)",
+   "publisher": "HKL / City of Helsinki (base © OpenStreetMap contributors)",
+   "url": "https://www.hel.fi/static/hkl/metroasema_opaskartat/rautatientori.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours; metro transfer entrance and lift)",
+   "answer": "Platforms 1–19 at street level (Digitraffic, Wikipedia). Under the tracks: the Eliel underpass (1999–2000, stairs and lifts to all tracks per Wikipedia; OSM maps lifts for 5/6, 7/8, 9/10 and 19) and Kaisantunneli (2024). Basement 'kellaritaso' holds toilets (1.10 EUR, 06-24), lockers (06-24) and lost property, reached by lift or stairs. Metro transfer: step-free via the outdoor lift at the separate metro entrance on Asema-aukio (OSM 'Metro Rautatientori A'). Station open 05-02; hours for all 15 restaurants and the services are from paarautatieasema.fi or the shop's own site.",
+   "_source": "https://paarautatieasema.fi/info/esteettomyys, read 2026-10-30; https://paarautatieasema.fi/p/77/palvelut/matkustajapalvelutilat, read 2026-10-30; https://en.wikipedia.org/wiki/Helsinki_Central_Station, read 2026-10-30; https://en.wikipedia.org/wiki/Kaisantunneli, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-HKI/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lifts to platforms 1–4 and 11–18: Wikipedia says the Eliel underpass has lifts to all tracks, but OSM maps platform lifts only for 5/6, 7/8, 9/10 and 19, and no owner page lists them.",
+  "Which underpass VR's 'northern underpass' (closed 22:30 Fri–Sun and before holidays, opens 05:30) is — the Eliel underpass is assumed but not stated.",
+  "Exact positions inside the station for most restaurants/services: paarautatieasema.fi gives only Kaivokatu 1 / Elielinaukio 3; positions come from OSM. Picnic, MFix, SIXT, PostNord machine and the VR Customer Point are not in OSM (no position).",
+  "R-kioski Asema-aukio and Kioskihalli were matched to OSM n317551811 / n317551808 by position (15–20 m off); check.",
+  "VR's 'K floor' (TalletusOtto on the metro level) is not defined in any owner source; HKL's map names levels Asematunneli/Kompassitaso/Laituritaso.",
+  "Bröner is temporarily closed (paarautatieasema.fi).",
+  "No official station floor plan from paarautatieasema.fi found; HSL area map (2020) predates Kaisantunneli.",
+  "Heights of levels: no source measures them.",
+  "Out of scope / left out: Asematunneli and Kompassitaso shops (metro level), R-kioski Scandic Grand Central (Bergbominkuja 4, hotel building), Hotel Scandic Grand Central, Fabrik and Bauer Media (offices)."
+ ]
+}

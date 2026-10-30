@@ -1,0 +1,2752 @@
+{
+ "type": "FeatureCollection",
+ "name": "tikkurila_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 20.01,
+ "track_bed_m": 19.23,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.044058300000003,
+       60.29445179999999
+      ],
+      [
+       25.0436263,
+       60.294498000000004
+      ],
+      [
+       25.0434207,
+       60.294519900000004
+      ],
+      [
+       25.0429446,
+       60.294575899999984
+      ],
+      [
+       25.0429301,
+       60.2945426
+      ],
+      [
+       25.0427858,
+       60.2945596
+      ],
+      [
+       25.0428617,
+       60.29462349999999
+      ],
+      [
+       25.0435596,
+       60.294838899999995
+      ],
+      [
+       25.0438195,
+       60.2948155
+      ],
+      [
+       25.0440991,
+       60.2954103
+      ],
+      [
+       25.0441809,
+       60.295400699999995
+      ],
+      [
+       25.0442437,
+       60.2953933
+      ],
+      [
+       25.044351500000005,
+       60.2953807
+      ],
+      [
+       25.0443797,
+       60.295426499999984
+      ],
+      [
+       25.0444365,
+       60.2954163
+      ],
+      [
+       25.0444036,
+       60.29536599999999
+      ],
+      [
+       25.0444804,
+       60.295353099999986
+      ],
+      [
+       25.0442715,
+       60.294907099999975
+      ],
+      [
+       25.0441737,
+       60.2947096
+      ],
+      [
+       25.044058300000003,
+       60.29445179999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w30741359",
+    "name": "school",
+    "osm_tags": {
+     "building": "school",
+     "building:levels": "5",
+     "start_date": "2005-05-20"
+    },
+    "ground_min_m": 18.61,
+    "ground_median_m": 18.95,
+    "ground_max_m": 20.25,
+    "laser_points": 4,
+    "source": "Outline OSM w30741359 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0432288,
+       60.290828999999995
+      ],
+      [
+       25.0433055,
+       60.29099579999999
+      ],
+      [
+       25.0430502,
+       60.29102460000001
+      ],
+      [
+       25.0430118,
+       60.290944200000006
+      ],
+      [
+       25.0429735,
+       60.29085780000002
+      ],
+      [
+       25.0432288,
+       60.290828999999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w41143470",
+    "name": "Tikkurilan vanha rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "3",
+     "height": "14.5",
+     "name": "Tikkurilan vanha rautatieasema",
+     "start_date": "1862"
+    },
+    "ground_min_m": 17.94,
+    "ground_median_m": 18.12,
+    "ground_max_m": 18.39,
+    "laser_points": 2,
+    "source": "Outline OSM w41143470 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0431871,
+       60.29332119999999
+      ],
+      [
+       25.0425735,
+       60.293392499999996
+      ],
+      [
+       25.042380800000004,
+       60.293413400000006
+      ],
+      [
+       25.0423999,
+       60.293456600000006
+      ],
+      [
+       25.0421465,
+       60.293483999999985
+      ],
+      [
+       25.042122600000003,
+       60.29343009999999
+      ],
+      [
+       25.0421443,
+       60.2934277
+      ],
+      [
+       25.0420913,
+       60.2933077
+      ],
+      [
+       25.0425157,
+       60.293261699999995
+      ],
+      [
+       25.0430991,
+       60.293192899999994
+      ],
+      [
+       25.043357800000003,
+       60.29313629999999
+      ],
+      [
+       25.0436518,
+       60.2937782
+      ],
+      [
+       25.0433518,
+       60.29381300000001
+      ],
+      [
+       25.0433062,
+       60.2937001
+      ],
+      [
+       25.043377600000003,
+       60.29369210000001
+      ],
+      [
+       25.0432931,
+       60.293491
+      ],
+      [
+       25.0431871,
+       60.29332119999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w320920450",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "8",
+     "start_date": "2015-03-23"
+    },
+    "ground_min_m": 18.0,
+    "ground_median_m": 19.95,
+    "ground_max_m": 20.73,
+    "laser_points": 4,
+    "source": "Outline OSM w320920450 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0436981,
+       60.29278330000001
+      ],
+      [
+       25.0438982,
+       60.292891700000006
+      ],
+      [
+       25.0440606,
+       60.2929796
+      ],
+      [
+       25.0440344,
+       60.2929285
+      ],
+      [
+       25.044018,
+       60.29289829999999
+      ],
+      [
+       25.0438527,
+       60.2928044
+      ],
+      [
+       25.0437626,
+       60.29275320000001
+      ],
+      [
+       25.0437325,
+       60.2927672
+      ],
+      [
+       25.0436981,
+       60.29278330000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w322098855",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "18",
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w322098855 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0443002,
+       60.2918158
+      ],
+      [
+       25.0446707,
+       60.292646100000006
+      ],
+      [
+       25.0447802,
+       60.292634099999994
+      ],
+      [
+       25.0444025,
+       60.2918043
+      ],
+      [
+       25.0443002,
+       60.2918158
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w322534933",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "4.5",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 18.94,
+    "ground_median_m": 19.75,
+    "ground_max_m": 19.89,
+    "roof_top_median_m": 23.78,
+    "roof_top_p95_m": 24.43,
+    "laser_points": 24,
+    "height_above_ground_median_m": 4.03,
+    "height_above_ground_p95_m": 4.68,
+    "top_above_platform_m": 3.77,
+    "base_above_platform_m": -1.07,
+    "source": "Outline OSM w322534933 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0439947,
+       60.29184990000002
+      ],
+      [
+       25.0443664,
+       60.292681200000004
+      ],
+      [
+       25.0444725,
+       60.292668600000006
+      ],
+      [
+       25.044097,
+       60.29183840000001
+      ],
+      [
+       25.0439947,
+       60.29184990000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w322534936",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "4.5",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 18.92,
+    "ground_median_m": 19.74,
+    "ground_max_m": 19.9,
+    "roof_top_median_m": 23.76,
+    "roof_top_p95_m": 23.95,
+    "laser_points": 30,
+    "height_above_ground_median_m": 4.02,
+    "height_above_ground_p95_m": 4.21,
+    "top_above_platform_m": 3.75,
+    "base_above_platform_m": -1.09,
+    "source": "Outline OSM w322534936 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0441899,
+       60.292930299999995
+      ],
+      [
+       25.0443028,
+       60.2931634
+      ],
+      [
+       25.0444251,
+       60.29314889999999
+      ],
+      [
+       25.0444965,
+       60.293140400000006
+      ],
+      [
+       25.044558600000002,
+       60.29313299999998
+      ],
+      [
+       25.044591300000004,
+       60.29312919999998
+      ],
+      [
+       25.0446684,
+       60.29312040000001
+      ],
+      [
+       25.0448814,
+       60.29309649999998
+      ],
+      [
+       25.0449129,
+       60.29309299999999
+      ],
+      [
+       25.0449978,
+       60.2930833
+      ],
+      [
+       25.0452232,
+       60.2930577
+      ],
+      [
+       25.045239,
+       60.293056
+      ],
+      [
+       25.0452693,
+       60.29305269999998
+      ],
+      [
+       25.045285000000003,
+       60.29305089999998
+      ],
+      [
+       25.0455453,
+       60.293021
+      ],
+      [
+       25.0455855,
+       60.293016399999985
+      ],
+      [
+       25.0456116,
+       60.2930135
+      ],
+      [
+       25.0456264,
+       60.2930119
+      ],
+      [
+       25.0456161,
+       60.29298459999998
+      ],
+      [
+       25.045673300000004,
+       60.29297719999999
+      ],
+      [
+       25.0456332,
+       60.29288549999999
+      ],
+      [
+       25.0455972,
+       60.292801
+      ],
+      [
+       25.0455361,
+       60.29280739999999
+      ],
+      [
+       25.0454981,
+       60.2927815
+      ],
+      [
+       25.0454099,
+       60.29279129999999
+      ],
+      [
+       25.0453851,
+       60.2927941
+      ],
+      [
+       25.045218500000004,
+       60.29281350000001
+      ],
+      [
+       25.0451295,
+       60.29282409999998
+      ],
+      [
+       25.0451037,
+       60.2928271
+      ],
+      [
+       25.044873600000003,
+       60.29285260000001
+      ],
+      [
+       25.0448316,
+       60.2928572
+      ],
+      [
+       25.0448076,
+       60.2928598
+      ],
+      [
+       25.0447714,
+       60.292863800000006
+      ],
+      [
+       25.0445636,
+       60.29288640000001
+      ],
+      [
+       25.0445181,
+       60.2928914
+      ],
+      [
+       25.044487,
+       60.292895000000016
+      ],
+      [
+       25.0444618,
+       60.2928979
+      ],
+      [
+       25.0443856,
+       60.292907
+      ],
+      [
+       25.0443193,
+       60.29291489999999
+      ],
+      [
+       25.0441899,
+       60.292930299999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w369130582",
+    "name": "Tikkurilan rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:part": "yes",
+     "height": "20",
+     "layer": "1",
+     "level": "1",
+     "name": "Tikkurilan rautatieasema",
+     "roof:shape": "round"
+    },
+    "ground_min_m": 19.02,
+    "ground_median_m": 19.65,
+    "ground_max_m": 19.91,
+    "laser_points": 4,
+    "source": "Outline OSM w369130582 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0446466,
+       60.29194220000001
+      ],
+      [
+       25.0447714,
+       60.2919279
+      ],
+      [
+       25.0448781,
+       60.29215700000001
+      ],
+      [
+       25.0449964,
+       60.292411200000004
+      ],
+      [
+       25.0450102,
+       60.2924408
+      ],
+      [
+       25.0450649,
+       60.2925584
+      ],
+      [
+       25.0451089,
+       60.2926529
+      ],
+      [
+       25.0449842,
+       60.29266710000001
+      ],
+      [
+       25.0446466,
+       60.29194220000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w384000586",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "4.5",
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 18.89,
+    "ground_median_m": 19.61,
+    "ground_max_m": 21.29,
+    "roof_top_median_m": 23.69,
+    "roof_top_p95_m": 24.04,
+    "laser_points": 24,
+    "height_above_ground_median_m": 4.08,
+    "height_above_ground_p95_m": 4.43,
+    "top_above_platform_m": 3.68,
+    "base_above_platform_m": -1.12,
+    "source": "Outline OSM w384000586 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.045014,
+       60.29311689999999
+      ],
+      [
+       25.0449791,
+       60.293120900000005
+      ],
+      [
+       25.0449297,
+       60.293126699999995
+      ],
+      [
+       25.0448966,
+       60.29313039999999
+      ],
+      [
+       25.04494,
+       60.29322379999999
+      ],
+      [
+       25.0450574,
+       60.2932104
+      ],
+      [
+       25.045014,
+       60.29311689999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395601806",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "height": "20",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.09,
+    "ground_median_m": 19.88,
+    "ground_max_m": 19.94,
+    "laser_points": 0,
+    "source": "Outline OSM w395601806 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0446832,
+       60.2931499
+      ],
+      [
+       25.044654600000005,
+       60.2931543
+      ],
+      [
+       25.0446049,
+       60.2931595
+      ],
+      [
+       25.0445734,
+       60.29316330000001
+      ],
+      [
+       25.0446168,
+       60.293256
+      ],
+      [
+       25.0447298,
+       60.293242699999986
+      ],
+      [
+       25.0446832,
+       60.2931499
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395601987",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "height": "20",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.87,
+    "ground_median_m": 19.93,
+    "ground_max_m": 19.96,
+    "laser_points": 0,
+    "source": "Outline OSM w395601987 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0449978,
+       60.2930833
+      ],
+      [
+       25.045014,
+       60.29311689999999
+      ],
+      [
+       25.0449297,
+       60.293126699999995
+      ],
+      [
+       25.0448966,
+       60.29313039999999
+      ],
+      [
+       25.0448814,
+       60.29309649999998
+      ],
+      [
+       25.0449129,
+       60.29309299999999
+      ],
+      [
+       25.0449978,
+       60.2930833
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395602364",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "height": "15",
+     "layer": "1",
+     "level": "1",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.13,
+    "ground_median_m": 19.87,
+    "ground_max_m": 19.88,
+    "laser_points": 0,
+    "source": "Outline OSM w395602364 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0456116,
+       60.2930135
+      ],
+      [
+       25.0456243,
+       60.29304090000001
+      ],
+      [
+       25.0455975,
+       60.293044
+      ],
+      [
+       25.0455579,
+       60.29304840000001
+      ],
+      [
+       25.0455453,
+       60.293021
+      ],
+      [
+       25.0455855,
+       60.293016399999985
+      ],
+      [
+       25.0456116,
+       60.2930135
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395602460",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.5,
+    "ground_median_m": 19.67,
+    "ground_max_m": 19.76,
+    "laser_points": 0,
+    "source": "Outline OSM w395602460 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0446684,
+       60.29312040000001
+      ],
+      [
+       25.0446832,
+       60.2931499
+      ],
+      [
+       25.0446049,
+       60.2931595
+      ],
+      [
+       25.0445734,
+       60.29316330000001
+      ],
+      [
+       25.044558600000002,
+       60.29313299999998
+      ],
+      [
+       25.044591300000004,
+       60.29312919999998
+      ],
+      [
+       25.0446684,
+       60.29312040000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395602461",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "height": "15",
+     "layer": "1",
+     "level": "1",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.8,
+    "ground_median_m": 19.9,
+    "ground_max_m": 19.95,
+    "laser_points": 0,
+    "source": "Outline OSM w395602461 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.045437300000003,
+       60.29264459999999
+      ],
+      [
+       25.0453618,
+       60.292653300000005
+      ],
+      [
+       25.0453201,
+       60.292658100000004
+      ],
+      [
+       25.045363,
+       60.2927498
+      ],
+      [
+       25.045388000000003,
+       60.29274699999998
+      ],
+      [
+       25.0454049,
+       60.292745100000005
+      ],
+      [
+       25.045479600000004,
+       60.2927366
+      ],
+      [
+       25.045437300000003,
+       60.29264459999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603388",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "height": "20",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.55,
+    "ground_median_m": 19.66,
+    "ground_max_m": 19.79,
+    "laser_points": 1,
+    "source": "Outline OSM w395603388 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.045479600000004,
+       60.2927366
+      ],
+      [
+       25.0454049,
+       60.292745100000005
+      ],
+      [
+       25.045388000000003,
+       60.29274699999998
+      ],
+      [
+       25.045363,
+       60.2927498
+      ],
+      [
+       25.0453851,
+       60.2927941
+      ],
+      [
+       25.0454099,
+       60.29279129999999
+      ],
+      [
+       25.0454981,
+       60.2927815
+      ],
+      [
+       25.045479600000004,
+       60.2927366
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603389",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "height": "15",
+     "layer": "1",
+     "level": "1",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.66,
+    "ground_median_m": 19.7,
+    "ground_max_m": 19.77,
+    "laser_points": 0,
+    "source": "Outline OSM w395603389 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.045198100000004,
+       60.292771399999985
+      ],
+      [
+       25.045218500000004,
+       60.29281350000001
+      ],
+      [
+       25.0451295,
+       60.29282409999998
+      ],
+      [
+       25.0451037,
+       60.2928271
+      ],
+      [
+       25.0450834,
+       60.292784999999995
+      ],
+      [
+       25.0451095,
+       60.29278189999999
+      ],
+      [
+       25.045123900000004,
+       60.29278019999999
+      ],
+      [
+       25.045198100000004,
+       60.292771399999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603615",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "height": "15",
+     "layer": "1",
+     "level": "1",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.74,
+    "ground_median_m": 19.77,
+    "ground_max_m": 19.83,
+    "laser_points": 1,
+    "source": "Outline OSM w395603615 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0451544,
+       60.29268100000001
+      ],
+      [
+       25.0450804,
+       60.2926898
+      ],
+      [
+       25.045039700000004,
+       60.29269459999998
+      ],
+      [
+       25.0450834,
+       60.292784999999995
+      ],
+      [
+       25.0451095,
+       60.29278189999999
+      ],
+      [
+       25.045123900000004,
+       60.29278019999999
+      ],
+      [
+       25.045198100000004,
+       60.292771399999985
+      ],
+      [
+       25.0451544,
+       60.29268100000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603617",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "height": "20",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.65,
+    "ground_median_m": 19.78,
+    "ground_max_m": 19.83,
+    "laser_points": 1,
+    "source": "Outline OSM w395603617 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0441636,
+       60.292880199999985
+      ],
+      [
+       25.044178700000003,
+       60.2929111
+      ],
+      [
+       25.0440344,
+       60.2929285
+      ],
+      [
+       25.044018,
+       60.29289829999999
+      ],
+      [
+       25.0441636,
+       60.292880199999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603805",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "12",
+     "building:part": "yes",
+     "height": "45"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w395603805 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.043975,
+       60.2924919
+      ],
+      [
+       25.0440327,
+       60.29260879999998
+      ],
+      [
+       25.0440746,
+       60.29269559999999
+      ],
+      [
+       25.0441636,
+       60.292880199999985
+      ],
+      [
+       25.044178700000003,
+       60.2929111
+      ],
+      [
+       25.0441899,
+       60.292930299999995
+      ],
+      [
+       25.0443028,
+       60.2931634
+      ],
+      [
+       25.044319,
+       60.293198799999985
+      ],
+      [
+       25.0443841,
+       60.293341100000006
+      ],
+      [
+       25.0443894,
+       60.293352
+      ],
+      [
+       25.0444241,
+       60.2934232
+      ],
+      [
+       25.0444549,
+       60.2934894
+      ],
+      [
+       25.0445556,
+       60.29370619999998
+      ],
+      [
+       25.0446556,
+       60.29392159999998
+      ],
+      [
+       25.0447565,
+       60.29413869999999
+      ],
+      [
+       25.0448412,
+       60.29432099999999
+      ],
+      [
+       25.0448748,
+       60.294393399999976
+      ],
+      [
+       25.0448961,
+       60.2944417
+      ],
+      [
+       25.0449177,
+       60.29450339999999
+      ],
+      [
+       25.0449659,
+       60.2946379
+      ],
+      [
+       25.044902,
+       60.29464449999998
+      ],
+      [
+       25.0447823,
+       60.2946568
+      ],
+      [
+       25.0447453,
+       60.29463239999999
+      ],
+      [
+       25.0447244,
+       60.294618699999994
+      ],
+      [
+       25.0446888,
+       60.29459529999998
+      ],
+      [
+       25.0446115,
+       60.294544399999985
+      ],
+      [
+       25.0441863,
+       60.29426459999998
+      ],
+      [
+       25.0436626,
+       60.2931023
+      ],
+      [
+       25.0436232,
+       60.293013200000004
+      ],
+      [
+       25.043572800000003,
+       60.292893499999984
+      ],
+      [
+       25.0435443,
+       60.29283989999999
+      ],
+      [
+       25.0435068,
+       60.2927549
+      ],
+      [
+       25.0435464,
+       60.2927495
+      ],
+      [
+       25.043613,
+       60.2927428
+      ],
+      [
+       25.0436981,
+       60.29278330000001
+      ],
+      [
+       25.0438982,
+       60.292891700000006
+      ],
+      [
+       25.0440606,
+       60.2929796
+      ],
+      [
+       25.0440344,
+       60.2929285
+      ],
+      [
+       25.044018,
+       60.29289829999999
+      ],
+      [
+       25.0438527,
+       60.2928044
+      ],
+      [
+       25.0437626,
+       60.29275320000001
+      ],
+      [
+       25.043726500000002,
+       60.29273310000001
+      ],
+      [
+       25.043596400000002,
+       60.29266049999999
+      ],
+      [
+       25.0435419,
+       60.2925451
+      ],
+      [
+       25.0434715,
+       60.29240020000001
+      ],
+      [
+       25.043451,
+       60.292357900000006
+      ],
+      [
+       25.0433912,
+       60.29222450000001
+      ],
+      [
+       25.0432328,
+       60.2918769
+      ],
+      [
+       25.043183900000002,
+       60.2917764
+      ],
+      [
+       25.0434874,
+       60.29174390000001
+      ],
+      [
+       25.043616800000002,
+       60.2917284
+      ],
+      [
+       25.0436953,
+       60.2918904
+      ],
+      [
+       25.0437548,
+       60.292015000000006
+      ],
+      [
+       25.0438248,
+       60.292177300000006
+      ],
+      [
+       25.0438813,
+       60.2923047
+      ],
+      [
+       25.043975,
+       60.2924919
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395603996",
+    "name": "Dixi (retail)",
+    "osm_tags": {
+     "building": "retail",
+     "height": "18",
+     "layer": "2",
+     "name": "Dixi"
+    },
+    "ground_min_m": 18.62,
+    "ground_median_m": 19.4,
+    "ground_max_m": 28.53,
+    "roof_top_median_m": 37.5,
+    "roof_top_p95_m": 67.64,
+    "laser_points": 22,
+    "height_above_ground_median_m": 18.1,
+    "height_above_ground_p95_m": 48.24,
+    "top_above_platform_m": 17.49,
+    "base_above_platform_m": -1.39,
+    "source": "Outline OSM w395603996 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0441375,
+       60.29316859999999
+      ],
+      [
+       25.0446465,
+       60.2943027
+      ],
+      [
+       25.0443222,
+       60.294338399999994
+      ],
+      [
+       25.0438131,
+       60.29320440000001
+      ],
+      [
+       25.044026500000005,
+       60.29318079999999
+      ],
+      [
+       25.0441375,
+       60.29316859999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395604698",
+    "name": "Dixi (building)",
+    "osm_tags": {
+     "amenity": "parking",
+     "building": "yes",
+     "building:part": "yes",
+     "layer": "1",
+     "name": "Dixi"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w395604698 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.044178700000003,
+       60.2929111
+      ],
+      [
+       25.0440344,
+       60.2929285
+      ],
+      [
+       25.0440606,
+       60.2929796
+      ],
+      [
+       25.0442767,
+       60.2933562
+      ],
+      [
+       25.0443359,
+       60.2933479
+      ],
+      [
+       25.0443841,
+       60.293341100000006
+      ],
+      [
+       25.044319,
+       60.293198799999985
+      ],
+      [
+       25.0443028,
+       60.2931634
+      ],
+      [
+       25.0441899,
+       60.292930299999995
+      ],
+      [
+       25.044178700000003,
+       60.2929111
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395611858",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "5",
+     "building:part": "yes",
+     "height": "18"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w395611858 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0444241,
+       60.2934232
+      ],
+      [
+       25.0443371,
+       60.2934355
+      ],
+      [
+       25.0447951,
+       60.29440480000001
+      ],
+      [
+       25.0448748,
+       60.294393399999976
+      ],
+      [
+       25.0448412,
+       60.29432099999999
+      ],
+      [
+       25.0447565,
+       60.29413869999999
+      ],
+      [
+       25.0446556,
+       60.29392159999998
+      ],
+      [
+       25.0445556,
+       60.29370619999998
+      ],
+      [
+       25.0444549,
+       60.2934894
+      ],
+      [
+       25.0444241,
+       60.2934232
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613145",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "5",
+     "building:part": "yes",
+     "height": "18"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w395613145 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0440606,
+       60.2929796
+      ],
+      [
+       25.0438982,
+       60.292891700000006
+      ],
+      [
+       25.0436981,
+       60.29278330000001
+      ],
+      [
+       25.043613,
+       60.2927428
+      ],
+      [
+       25.0435464,
+       60.2927495
+      ],
+      [
+       25.0435068,
+       60.2927549
+      ],
+      [
+       25.0435443,
+       60.29283989999999
+      ],
+      [
+       25.043572800000003,
+       60.292893499999984
+      ],
+      [
+       25.0436232,
+       60.293013200000004
+      ],
+      [
+       25.0436626,
+       60.2931023
+      ],
+      [
+       25.0441863,
+       60.29426459999998
+      ],
+      [
+       25.0446115,
+       60.294544399999985
+      ],
+      [
+       25.0446888,
+       60.29459529999998
+      ],
+      [
+       25.0447244,
+       60.294618699999994
+      ],
+      [
+       25.0447453,
+       60.29463239999999
+      ],
+      [
+       25.0449177,
+       60.29450339999999
+      ],
+      [
+       25.0448961,
+       60.2944417
+      ],
+      [
+       25.0448748,
+       60.294393399999976
+      ],
+      [
+       25.0447951,
+       60.29440480000001
+      ],
+      [
+       25.0443371,
+       60.2934355
+      ],
+      [
+       25.0444241,
+       60.2934232
+      ],
+      [
+       25.0443894,
+       60.293352
+      ],
+      [
+       25.0443841,
+       60.293341100000006
+      ],
+      [
+       25.0443359,
+       60.2933479
+      ],
+      [
+       25.0442767,
+       60.2933562
+      ],
+      [
+       25.0440606,
+       60.2929796
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613156",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "5",
+     "building:part": "yes",
+     "height": "18"
+    },
+    "ground_min_m": 19.08,
+    "ground_median_m": 19.58,
+    "ground_max_m": 28.74,
+    "roof_top_median_m": 38.69,
+    "roof_top_p95_m": 42.91,
+    "laser_points": 8,
+    "height_above_ground_median_m": 19.11,
+    "height_above_ground_p95_m": 23.33,
+    "top_above_platform_m": 18.68,
+    "base_above_platform_m": -0.93,
+    "source": "Outline OSM w395613156 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0449177,
+       60.29450339999999
+      ],
+      [
+       25.0449659,
+       60.2946379
+      ],
+      [
+       25.044902,
+       60.29464449999998
+      ],
+      [
+       25.0447823,
+       60.2946568
+      ],
+      [
+       25.0447453,
+       60.29463239999999
+      ],
+      [
+       25.0448496,
+       60.29455429999999
+      ],
+      [
+       25.0449177,
+       60.29450339999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613192",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "5",
+     "building:part": "yes",
+     "height": "18"
+    },
+    "ground_min_m": 19.31,
+    "ground_median_m": 20.19,
+    "ground_max_m": 28.74,
+    "roof_top_median_m": 35.6,
+    "roof_top_p95_m": 36.22,
+    "laser_points": 7,
+    "height_above_ground_median_m": 15.41,
+    "height_above_ground_p95_m": 16.03,
+    "top_above_platform_m": 15.59,
+    "base_above_platform_m": -0.7,
+    "source": "Outline OSM w395613192 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.045285000000003,
+       60.29305089999998
+      ],
+      [
+       25.0453837,
+       60.293271
+      ],
+      [
+       25.045366,
+       60.293273000000006
+      ],
+      [
+       25.0453385,
+       60.293276000000006
+      ],
+      [
+       25.0453219,
+       60.293277800000006
+      ],
+      [
+       25.0452232,
+       60.2930577
+      ],
+      [
+       25.045239,
+       60.293056
+      ],
+      [
+       25.0452693,
+       60.29305269999998
+      ],
+      [
+       25.045285000000003,
+       60.29305089999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613727",
+    "name": "bridge",
+    "osm_tags": {
+     "building": "bridge",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.73,
+    "ground_median_m": 19.87,
+    "ground_max_m": 19.94,
+    "laser_points": 4,
+    "source": "Outline OSM w395613727 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.044545800000005,
+       60.2928452
+      ],
+      [
+       25.0445636,
+       60.29288640000001
+      ],
+      [
+       25.0445181,
+       60.2928914
+      ],
+      [
+       25.044487,
+       60.292895000000016
+      ],
+      [
+       25.0444618,
+       60.2928979
+      ],
+      [
+       25.0444437,
+       60.292856
+      ],
+      [
+       25.044545800000005,
+       60.2928452
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613728",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "2",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.79,
+    "ground_median_m": 19.83,
+    "ground_max_m": 19.89,
+    "laser_points": 0,
+    "source": "Outline OSM w395613728 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.044752,
+       60.29282029999999
+      ],
+      [
+       25.0448541,
+       60.2928091
+      ],
+      [
+       25.044873600000003,
+       60.29285260000001
+      ],
+      [
+       25.0448316,
+       60.2928572
+      ],
+      [
+       25.0448076,
+       60.2928598
+      ],
+      [
+       25.0447714,
+       60.292863800000006
+      ],
+      [
+       25.044752,
+       60.29282029999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w395613730",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "2",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 19.77,
+    "ground_median_m": 19.81,
+    "ground_max_m": 19.86,
+    "laser_points": 0,
+    "source": "Outline OSM w395613730 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0440746,
+       60.29269559999999
+      ],
+      [
+       25.0440327,
+       60.29260879999998
+      ],
+      [
+       25.043596400000002,
+       60.29266049999999
+      ],
+      [
+       25.043726500000002,
+       60.29273310000001
+      ],
+      [
+       25.0437626,
+       60.29275320000001
+      ],
+      [
+       25.0438527,
+       60.2928044
+      ],
+      [
+       25.044018,
+       60.29289829999999
+      ],
+      [
+       25.0441636,
+       60.292880199999985
+      ],
+      [
+       25.0440746,
+       60.29269559999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w445291692",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "12",
+     "building:part": "yes",
+     "height": "45"
+    },
+    "ground_min_m": 19.41,
+    "ground_median_m": 19.41,
+    "ground_max_m": 19.41,
+    "laser_points": 0,
+    "source": "Outline OSM w445291692 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.043596400000002,
+       60.29266049999999
+      ],
+      [
+       25.0435419,
+       60.2925451
+      ],
+      [
+       25.043975,
+       60.2924919
+      ],
+      [
+       25.0440327,
+       60.29260879999998
+      ],
+      [
+       25.043596400000002,
+       60.29266049999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w445292038",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "10",
+     "building:part": "yes",
+     "height": "45",
+     "roof:shape": "skillion"
+    },
+    "ground_min_m": 19.11,
+    "ground_median_m": 19.18,
+    "ground_max_m": 19.35,
+    "laser_points": 4,
+    "source": "Outline OSM w445292038 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.043451,
+       60.292357900000006
+      ],
+      [
+       25.0438813,
+       60.2923047
+      ],
+      [
+       25.043975,
+       60.2924919
+      ],
+      [
+       25.0435419,
+       60.2925451
+      ],
+      [
+       25.0434715,
+       60.29240020000001
+      ],
+      [
+       25.043451,
+       60.292357900000006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w445703134",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "10",
+     "building:part": "yes",
+     "height": "40.15",
+     "roof:shape": "skillion"
+    },
+    "ground_min_m": 18.9,
+    "ground_median_m": 18.99,
+    "ground_max_m": 19.11,
+    "laser_points": 0,
+    "source": "Outline OSM w445703134 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0463749,
+       60.2903938
+      ],
+      [
+       25.0463461,
+       60.2903798
+      ],
+      [
+       25.0462696,
+       60.2903424
+      ],
+      [
+       25.0461886,
+       60.29030290000001
+      ],
+      [
+       25.0461632,
+       60.29029049999999
+      ],
+      [
+       25.046540400000005,
+       60.2900919
+      ],
+      [
+       25.0465661,
+       60.290103499999994
+      ],
+      [
+       25.046648000000005,
+       60.2901405
+      ],
+      [
+       25.0467276,
+       60.29017649999999
+      ],
+      [
+       25.0467564,
+       60.290189500000004
+      ],
+      [
+       25.0463749,
+       60.2903938
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w888214611",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 19.32,
+    "ground_median_m": 19.35,
+    "ground_max_m": 19.77,
+    "laser_points": 0,
+    "source": "Outline OSM w888214611 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0422712,
+       60.296737
+      ],
+      [
+       25.0423745,
+       60.2967301
+      ],
+      [
+       25.0423788,
+       60.29689050000001
+      ],
+      [
+       25.0423151,
+       60.296895099999986
+      ],
+      [
+       25.0422712,
+       60.296737
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w918183677",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 18.45,
+    "ground_median_m": 18.55,
+    "ground_max_m": 18.63,
+    "laser_points": 0,
+    "source": "Outline OSM w918183677 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0435317,
+       60.2915589
+      ],
+      [
+       25.0435785,
+       60.29155329999998
+      ],
+      [
+       25.0436413,
+       60.29154559999999
+      ],
+      [
+       25.043805,
+       60.291877099999994
+      ],
+      [
+       25.0436953,
+       60.2918904
+      ],
+      [
+       25.0435317,
+       60.2915589
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w921222106",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 18.7,
+    "ground_median_m": 18.83,
+    "ground_max_m": 19.61,
+    "laser_points": 1,
+    "source": "Outline OSM w921222106 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.0421812,
+       60.29609159999999
+      ],
+      [
+       25.0421691,
+       60.296058699999996
+      ],
+      [
+       25.0422469,
+       60.296051699999985
+      ],
+      [
+       25.042259,
+       60.2960846
+      ],
+      [
+       25.0421812,
+       60.29609159999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1528999292",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 18.28,
+    "ground_median_m": 18.32,
+    "ground_max_m": 18.39,
+    "laser_points": 0,
+    "source": "Outline OSM w1528999292 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.044533789329417,
+       60.29202946167973
+      ],
+      [
+       25.04453271789647,
+       60.29204739656641
+      ],
+      [
+       25.044563985240483,
+       60.29204877123138
+      ],
+      [
+       25.04457284183046,
+       60.29206068335513
+      ],
+      [
+       25.044548114924428,
+       60.292092530841416
+      ],
+      [
+       25.044589135611336,
+       60.292087348021305
+      ],
+      [
+       25.044581053408837,
+       60.29214690485517
+      ],
+      [
+       25.044598422745448,
+       60.29215099132625
+      ],
+      [
+       25.044597522691475,
+       60.29217409185904
+      ],
+      [
+       25.044628682494096,
+       60.292174021194796
+      ],
+      [
+       25.044637471352228,
+       60.29218685629011
+      ],
+      [
+       25.044613971267175,
+       60.29220141704079
+      ],
+      [
+       25.044651423133423,
+       60.29222429504435
+      ],
+      [
+       25.044629389209522,
+       60.29224641312635
+      ],
+      [
+       25.044649304405944,
+       60.29225016730713
+      ],
+      [
+       25.04464585858087,
+       60.292273600124275
+      ],
+      [
+       25.04467712614603,
+       60.29227497476363
+      ],
+      [
+       25.04468580738143,
+       60.29228636454128
+      ],
+      [
+       25.044662327239728,
+       60.292300799498655
+      ],
+      [
+       25.04466018375026,
+       60.29233668165171
+      ],
+      [
+       25.04469535106981,
+       60.29233910887446
+      ],
+      [
+       25.04470852006103,
+       60.2924361898939
+      ],
+      [
+       25.04476329090422,
+       60.29246791509009
+      ],
+      [
+       25.044772254214184,
+       60.292580832366966
+      ],
+      [
+       25.044807765550953,
+       60.29258377199123
+      ],
+      [
+       25.044821663254627,
+       60.292662393301754
+      ],
+      [
+       25.044893949451446,
+       60.29266345721669
+      ],
+      [
+       25.044879086957298,
+       60.29260936172671
+      ],
+      [
+       25.044847926739674,
+       60.292609432447705
+      ],
+      [
+       25.044839137688527,
+       60.29259659736617
+      ],
+      [
+       25.044830749881385,
+       60.29250985354533
+      ],
+      [
+       25.04477418741685,
+       60.292506675766745
+      ],
+      [
+       25.044814280240992,
+       60.29248266656996
+      ],
+      [
+       25.04479477612624,
+       60.292479412441146
+      ],
+      [
+       25.044797810627554,
+       60.29245547959256
+      ],
+      [
+       25.04477593923855,
+       60.29244298129062
+      ],
+      [
+       25.044782949119636,
+       60.29240137171295
+      ],
+      [
+       25.044763445056365,
+       60.29239811757973
+      ],
+      [
+       25.04476594354211,
+       60.292383158365034
+      ],
+      [
+       25.0447274589289,
+       60.29238024664858
+      ],
+      [
+       25.044767551630393,
+       60.29235623746489
+      ],
+      [
+       25.04472706667299,
+       60.29235244670523
+      ],
+      [
+       25.04471867921292,
+       60.29226570287604
+      ],
+      [
+       25.04466265323719,
+       60.29225355141871
+      ],
+      [
+       25.044683596307614,
+       60.29224721495004
+      ],
+      [
+       25.044685204335202,
+       60.292220302528776
+      ],
+      [
+       25.044650601515166,
+       60.29219748635597
+      ],
+      [
+       25.044670348055295,
+       60.29216632080468
+      ],
+      [
+       25.0446501196694,
+       60.292161922501535
+      ],
+      [
+       25.044654409828585,
+       60.292130034007954
+      ],
+      [
+       25.044613925164192,
+       60.29212624321507
+      ],
+      [
+       25.044622543363435,
+       60.29205771274571
+      ],
+      [
+       25.044586034220135,
+       60.29203624521934
+      ],
+      [
+       25.044588532756052,
+       60.29202128600747
+      ],
+      [
+       25.044533789329417,
+       60.29202946167973
+      ]
+     ],
+     [
+      [
+       25.044840403561082,
+       60.292644571092055
+      ],
+      [
+       25.044842620119475,
+       60.29262868523607
+      ],
+      [
+       25.044856350252925,
+       60.29262590278052
+      ],
+      [
+       25.044858130142643,
+       60.2926430697985
+      ],
+      [
+       25.044840403561082,
+       60.292644571092055
+      ]
+     ],
+     [
+      [
+       25.044794934841374,
+       60.29254658800303
+      ],
+      [
+       25.044808605339455,
+       60.2925351242825
+      ],
+      [
+       25.04481331713692,
+       60.292544249105305
+      ],
+      [
+       25.044794934841374,
+       60.29254658800303
+      ]
+     ],
+     [
+      [
+       25.044806268477945,
+       60.29257371117631
+      ],
+      [
+       25.044794055563152,
+       60.29256184290918
+      ],
+      [
+       25.04481211222822,
+       60.29256474276003
+      ],
+      [
+       25.044806268477945,
+       60.29257371117631
+      ]
+     ],
+     [
+      [
+       25.044746598110834,
+       60.29244707979179
+      ],
+      [
+       25.044760268583513,
+       60.29243561607598
+      ],
+      [
+       25.044764980353687,
+       60.29244474090049
+      ],
+      [
+       25.044746598110834,
+       60.29244707979179
+      ]
+     ],
+     [
+      [
+       25.044743070224612,
+       60.29242009508559
+      ],
+      [
+       25.04473085116835,
+       60.292408228962465
+      ],
+      [
+       25.0447489182944,
+       60.29241112975969
+      ],
+      [
+       25.044743070224612,
+       60.29242009508559
+      ]
+     ],
+     [
+      [
+       25.044681256165788,
+       60.29232935820445
+      ],
+      [
+       25.044694926611253,
+       60.29231789449504
+      ],
+      [
+       25.044699638346867,
+       60.29232701932186
+      ],
+      [
+       25.044681256165788,
+       60.29232935820445
+      ]
+     ],
+     [
+      [
+       25.044618595015457,
+       60.292166768421126
+      ],
+      [
+       25.044632265413743,
+       60.292155304717674
+      ],
+      [
+       25.04463697710932,
+       60.292164429546716
+      ],
+      [
+       25.044618595015457,
+       60.292166768421126
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (72.7 m × 3.1 m)",
+    "top_median_m": 22.78,
+    "top_above_track_bed_m": 3.55,
+    "laser_points": 134,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-06-15. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4134D3, clack_fi_mml05_L4134F1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4134D3 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa), L4134F1 2024-06-15 (20240003_MML_Helsinki-Vantaa_kesa)"
+   }
+  }
+ ]
+}

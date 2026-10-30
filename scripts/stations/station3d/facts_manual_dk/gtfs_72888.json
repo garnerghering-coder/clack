@@ -1,0 +1,228 @@
+{
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Station bridge: forhal (station building on a wide bridge across the tracks), busgaden (bus terminal on the same bridge), fodgængerbroen",
+   "other_names": [
+    "forhallen",
+    "busgaden",
+    "fodgængerbroen"
+   ],
+   "note": "Wikipedia: 'The station building itself is located on a wide bridge that leads across the tracks… Immediately adjacent… a large bus terminal.' DSB: forhal closed for renovation from week 35 to the end of 2026.",
+   "_source": "Wikipedia, \"Høje Taastrup railway station\", https://en.wikipedia.org/wiki/H%C3%B8je_Taastrup_railway_station, read 2026-10-30; DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platforms: perron 1 (spor 1/2) and perron 2 (spor 3/4) regional 55 cm; perron 3 (spor 11/12) S-tog 92 cm",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30; Wikipedia, \"Høje Taastrup railway station\", https://en.wikipedia.org/wiki/H%C3%B8je_Taastrup_railway_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "forhal",
+    "perron 1 (spor 1-2)"
+   ],
+   "where": "'Høje Tåstrup spor 1-2 op' and 'spor 1-2 ned'",
+   "confirmed_by": "owner text",
+   "status": "closed with the forhal; DSB: expected in service 12.12.26",
+   "_source": "DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30; DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "forhal",
+    "perron 2 (spor 3-4)"
+   ],
+   "where": "'Høje Tåstrup spor 3-4 op' and 'spor 3-4 ned'",
+   "confirmed_by": "owner text",
+   "status": "out of service, expected 12.12.26",
+   "_source": "DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "between": [
+    "forhal",
+    "perron 3 (spor 11-12)"
+   ],
+   "where": "'Høje Tåstrup spor 11-12 op' and 'spor 11-12 ned'",
+   "confirmed_by": "owner text",
+   "status": "out of service, expected 12.12.26",
+   "_source": "DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "busgaden",
+    "platforms"
+   ],
+   "where": "DSB: 'Adgang til perronerne kan ske via de udendørs trapper og elevatorer fra busgaden'",
+   "confirmed_by": "owner text (positions per platform not given; OSM has no lifts here)",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "busgaden (outdoor stairs)",
+    "platforms"
+   ],
+   "where": "from the bus street",
+   "confirmed_by": "owner text",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "fodgængerbroen",
+    "platforms"
+   ],
+   "where": "'via trapperne fra fodgængerbroen'",
+   "confirmed_by": "owner text",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w36001692",
+   "between": [
+    "north side",
+    "south side / platforms"
+   ],
+   "where": "fodgængerbroen, about 113 m across the tracks (OSM)",
+   "confirmed_by": "OSM + owner text (DSB names 'fodgængerbroen')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Indgangen mod øst (east entrance)",
+   "street": "busgaden (bus street)",
+   "level": "1",
+   "where": "DSB: use 'busgaden og indgangen mod øst' while the forhal is closed",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "name": "Adgangen via bilbanen mod vest (west, via the car road)",
+   "street": "bilbanen",
+   "level": "1",
+   "where": "closed with the forhal (from week 35 to end of 2026)",
+   "status": "closed",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "name": "7-Eleven and DSB Hittegods street access",
+   "street": "Banestrøget (DSB address Banestrøget 5)",
+   "level": "1",
+   "where": "'kan tilgås direkte fra gaden'",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "level_per_plan": "1",
+   "where": "station building, reachable directly from the street during the works",
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa,Su 06:00-21:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "DSB body text says open 'fra tidlig morgen og frem til midnat' (conflicts with the table).",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "lost_property_office",
+   "name": "DSB Hittegods (national lost property office)",
+   "level_per_plan": "1",
+   "where": "station building, reachable directly from the street",
+   "opening_hours": "Mo-Fr 08:00-18:00; Sa,Su 10:00-17:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet / handicaptoilet",
+   "where": "'på stationen' (not more specific)",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "fee": "5 kr, card",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "level_per_plan": "1",
+   "where": "station building",
+   "opening_hours": "closed",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Forhallen lukket fra uge 35 og frem til årets udgang (2026) på grund af renoveringsarbejde.",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "not stated",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Free parking, about 400 spaces on Banestrøget (4 disabled, 12 EV incl. 4 chargers, 2-hour and 30-minute spaces, tourist-bus drop-off)",
+   "level_per_plan": "0",
+   "where": "Banestrøget beside the station",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Bike parking incl. secure bike parking run by the municipality",
+   "where": "not stated",
+   "_source": "DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Bus terminal (busgaden)",
+   "level_per_plan": "1",
+   "where": "on the station bridge next to the station building",
+   "_source": "Wikipedia, \"Høje Taastrup railway station\", https://en.wikipedia.org/wiki/H%C3%B8je_Taastrup_railway_station, read 2026-10-30; DSB station page Høje Taastrup, https://www.dsb.dk/trafikinformation/stationer/hoje-taastrup/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Høje Taastrup Apotek",
+   "where": "about 40 m from the station point, by the bus terminal (OSM; whether inside the station building unconfirmed)",
+   "opening_hours": "Mo-Fr 09:00-17:00; PH off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n9644122361",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "greengrocer",
+   "name": "Banegårdens Frugt & Grønt",
+   "where": "about 35 m from the station point (OSM)",
+   "opening_hours": "Mo-Fr 09:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n9039094850",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi (2 ranks)",
+   "where": "by the bus terminal (OSM)",
+   "osm_ids": [
+    "w1123142817",
+    "w1123142818"
+   ],
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "OSM has almost nothing here (one footbridge, no lifts/stairs/escalators/entrances): per-platform lift and stair positions unknown; DSB gives only general text.",
+  "Whether toilets and the waiting room are usable while the forhal is closed (week 35 – end of 2026): not stated.",
+  "7-Eleven hours: DSB table vs DSB body text conflict; not in the fetched 7-Eleven list.",
+  "Whether the pharmacy and greengrocer are in the station building: OSM position only.",
+  "No open-question list was supplied for Danish stations."
+ ]
+}

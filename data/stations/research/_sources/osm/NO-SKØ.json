@@ -1,0 +1,834 @@
+{
+ "clack_id": "NO-SKØ",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w93230305",
+   "ref": "12",
+   "level": null
+  },
+  {
+   "osm_id": "w93230306",
+   "ref": "11",
+   "level": null
+  },
+  {
+   "osm_id": "w237581800",
+   "ref": "11",
+   "level": null
+  },
+  {
+   "osm_id": "w237581831",
+   "ref": "12",
+   "level": null
+  },
+  {
+   "osm_id": "w1510474593",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w88600720",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 9.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.679932,
+    59.9221469
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w88600725",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 17.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6783762,
+    59.9225554
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w88600733",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 9.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6797715,
+    59.9219953
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w88600740",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 25.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6786658,
+    59.9222902
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w130994340",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 52.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6784048,
+    59.922519
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w687028074",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 4.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6788503,
+    59.9228247
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w764152945",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6782251,
+    59.9224103
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w981002195",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 2.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.674612,
+    59.9248536
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w981002200",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 1.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6749269,
+    59.9248543
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1570389065",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 1.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6752596,
+    59.9246566
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7136796363",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6785511,
+    59.9225143
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7139023779",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    10.6782251,
+    59.9224103
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1028860868",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Hoffsveien",
+   "nearest_street_m": 17.5,
+   "lonlat": [
+    10.6785537,
+    59.9226561
+   ]
+  },
+  {
+   "osm_id": "n7136796406",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 42.5,
+   "lonlat": [
+    10.6780364,
+    59.9222364
+   ]
+  },
+  {
+   "osm_id": "n7136796409",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Drammensveien",
+   "nearest_street_m": 32.4,
+   "lonlat": [
+    10.6783249,
+    59.922275
+   ]
+  },
+  {
+   "osm_id": "n7136796412",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Hoffsveien",
+   "nearest_street_m": 30.7,
+   "lonlat": [
+    10.6785104,
+    59.9225355
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n1319172082",
+   "category": "bicycle_parking",
+   "name": "Samferdselsetaten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    10.678506,
+    59.922227
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 211.1,
+   "operator": "Samferdselsetaten"
+  },
+  {
+   "osm_id": "n1319172117",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    10.678225,
+    59.922813
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 174.6
+  },
+  {
+   "osm_id": "n5555194768",
+   "category": "recycling",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 199,
+   "lonlat": [
+    10.681018,
+    59.9237664
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.7
+  },
+  {
+   "osm_id": "n5555197275",
+   "category": "recycling",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 25,
+   "lonlat": [
+    10.67878,
+    59.92258
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 171.9
+  },
+  {
+   "osm_id": "n5921085763",
+   "category": "doctors",
+   "name": "Harbitzalleen legesenter",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 288,
+   "lonlat": [
+    10.6750391,
+    59.9240967
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n6126672848",
+   "category": "dentist",
+   "name": "Hoff tannklinikk",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 271,
+   "lonlat": [
+    10.6751394,
+    59.9239265
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.1
+  },
+  {
+   "osm_id": "n7136796313",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 22,
+   "lonlat": [
+    10.6790566,
+    59.9221927
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 195.3
+  },
+  {
+   "osm_id": "n7136796314",
+   "category": "grit_bin",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 70,
+   "lonlat": [
+    10.6778171,
+    59.9227139
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 198.9
+  },
+  {
+   "osm_id": "n7136796315",
+   "category": "grit_bin",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 9,
+   "lonlat": [
+    10.6789121,
+    59.9224202
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 180.0
+  },
+  {
+   "osm_id": "n7136796318",
+   "category": "grit_bin",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 69,
+   "lonlat": [
+    10.6776686,
+    59.9225593
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 216.6
+  },
+  {
+   "osm_id": "n7136796338",
+   "category": "bench",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    10.6779509,
+    59.9226818
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 195.8
+  },
+  {
+   "osm_id": "n7136796339",
+   "category": "bench",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    10.6780441,
+    59.9226593
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 193.8
+  },
+  {
+   "osm_id": "n7136796344",
+   "category": "bench",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 9,
+   "lonlat": [
+    10.6788682,
+    59.9224318
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 180.6
+  },
+  {
+   "osm_id": "n7136796345",
+   "category": "waste_basket",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 19,
+   "lonlat": [
+    10.6791709,
+    59.9223573
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 176.6
+  },
+  {
+   "osm_id": "n7136796346",
+   "category": "bench",
+   "name": null,
+   "level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    10.6792333,
+    59.9223407
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 176.1
+  },
+  {
+   "osm_id": "n9081114231",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 318,
+   "lonlat": [
+    10.6752802,
+    59.9245814
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.9
+  },
+  {
+   "osm_id": "n9081114232",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 364,
+   "lonlat": [
+    10.674734,
+    59.924889
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.3
+  },
+  {
+   "osm_id": "n9081114233",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 375,
+   "lonlat": [
+    10.6745996,
+    59.9249609
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.3
+  },
+  {
+   "osm_id": "n9081114235",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 398,
+   "lonlat": [
+    10.674232,
+    59.925072
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.1
+  },
+  {
+   "osm_id": "n9177329145",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 58,
+   "lonlat": [
+    10.6789824,
+    59.92184
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 228.7
+  },
+  {
+   "osm_id": "n9177329148",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    10.6792479,
+    59.9218956
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 213.2
+  },
+  {
+   "osm_id": "n9177329149",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 55,
+   "lonlat": [
+    10.6793459,
+    59.9219285
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 206.6
+  },
+  {
+   "osm_id": "n9177329150",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    10.6792715,
+    59.921856
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 214.9
+  },
+  {
+   "osm_id": "n9177329154",
+   "category": "bicycle_rental",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    10.6784429,
+    59.9227718
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 169.2
+  },
+  {
+   "osm_id": "n9177329155",
+   "category": "bicycle_repair_station",
+   "name": "Oslo Municipality Agency for City Environment (Bymiljøetaten)",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 55,
+   "lonlat": [
+    10.6783326,
+    59.9227745
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 173.3,
+   "operator": "Oslo Municipality Agency for City Environment (Bymiljøetaten)"
+  },
+  {
+   "osm_id": "n9673679062",
+   "category": "post_box",
+   "name": "Posten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 30,
+   "lonlat": [
+    10.678328,
+    59.922271
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 214.3,
+   "brand": "Posten",
+   "operator": "Posten"
+  },
+  {
+   "osm_id": "n10966241013",
+   "category": "bicycle_rental",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 43,
+   "lonlat": [
+    10.6795794,
+    59.9222675
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 173.2
+  },
+  {
+   "osm_id": "n11010222337",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 45,
+   "lonlat": [
+    10.6784255,
+    59.9226986
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 175.9
+  },
+  {
+   "osm_id": "n12786901430",
+   "category": "charging_station",
+   "name": "Mer Skøyen drosjeholdeplass",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    10.67823,
+    59.92223
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 221.4,
+   "brand": "Mer"
+  },
+  {
+   "osm_id": "n13713598728",
+   "category": "shop=convenience",
+   "name": "Mix Skøyen Stasjon",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa-Su 11:00-18:00",
+   "wheelchair": null,
+   "distance_m": 36,
+   "lonlat": [
+    10.678222,
+    59.9222589
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 219.3,
+   "brand": "Mix"
+  },
+  {
+   "osm_id": "w660531366",
+   "category": "parking",
+   "name": "Skøyen stasjon",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 43,
+   "lonlat": [
+    10.6772549,
+    59.9224588
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 153.0,
+   "operator": "APCOA parking Norway"
+  },
+  {
+   "osm_id": "w669605654",
+   "category": "public_bookcase",
+   "name": "Telefon",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 49,
+   "lonlat": [
+    10.6779623,
+    59.9222519
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 229.2
+  },
+  {
+   "osm_id": "w763912532",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 46,
+   "lonlat": [
+    10.6780479,
+    59.9220232
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 234.0
+  },
+  {
+   "osm_id": "w1185276433",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 24,
+   "lonlat": [
+    10.6787927,
+    59.9226152
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 164.2,
+   "operator": "Oslo Municipality Agency for City Environment (Bymiljøetaten)"
+  }
+ ]
+}

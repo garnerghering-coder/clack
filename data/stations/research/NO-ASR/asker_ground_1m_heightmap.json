@@ -1,0 +1,18 @@
+{
+ "file": "asker_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 100",
+ "base_m": 85,
+ "scale": 100,
+ "nodata_value": 0,
+ "crs": "EPSG:25832 (ETRS89 / UTM 32N)",
+ "vertical_datum": "NN2000",
+ "origin_top_left_EN": [
+  579922,
+  6634210
+ ],
+ "pixel_m": 1,
+ "width": 977,
+ "height": 977,
+ "source": "asker_ground_1m.tif (gridded from the laser ground class, \u00a9 Kartverket, CC BY 4.0)"
+}

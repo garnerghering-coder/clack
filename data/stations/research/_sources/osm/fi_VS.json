@@ -1,0 +1,553 @@
+{
+ "clack_id": "FI-VS",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w321419284",
+   "ref": "1",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w23153500",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 100.8,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    21.6233832,
+    63.097061
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w35008578",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 98.7,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    21.6238236,
+    63.0969095
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w40305739",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 4.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6213399,
+    63.0974929
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w40305741",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 24.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6217203,
+    63.0976363
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w40305744",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 25.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6215695,
+    63.0975516
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w40305745",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 14.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6216634,
+    63.0975167
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w175843961",
+   "name": "Vaasanpuistikko / Matkakeskus P",
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 37.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    21.6238014,
+    63.0972387
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w321416650",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 4.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6215039,
+    63.0974303
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w718392565",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    21.6211135,
+    63.0978601
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w804683640",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 6.0,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    21.6233142,
+    63.0970555
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1051631621",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 8.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6233973,
+    63.0970693
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1051631622",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6233142,
+    63.0970555
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1051631626",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.6239546,
+    63.0968624
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1051631629",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    21.623862,
+    63.0968678
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n486283156",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Ratakatu",
+   "nearest_street_m": 28.0,
+   "lonlat": [
+    21.6219134,
+    63.097568
+   ]
+  },
+  {
+   "osm_id": "n486283159",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Ratakatu",
+   "nearest_street_m": 31.0,
+   "lonlat": [
+    21.621538,
+    63.0977039
+   ]
+  },
+  {
+   "osm_id": "n486283168",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Ratakatu",
+   "nearest_street_m": 8.1,
+   "lonlat": [
+    21.6215602,
+    63.0974598
+   ]
+  },
+  {
+   "osm_id": "n486283182",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Ratakatu",
+   "nearest_street_m": 10.7,
+   "lonlat": [
+    21.6213957,
+    63.0975189
+   ]
+  },
+  {
+   "osm_id": "n510691809",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Sepänkyläntie",
+   "nearest_street_m": 12.3,
+   "lonlat": [
+    21.6232778,
+    63.0970152
+   ]
+  },
+  {
+   "osm_id": "n512543476",
+   "name": null,
+   "entrance": "garage",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "AsemaParkki",
+   "nearest_street_m": 6.4,
+   "lonlat": [
+    21.6208326,
+    63.0979451
+   ]
+  },
+  {
+   "osm_id": "n9664071240",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Sepänkyläntie",
+   "nearest_street_m": 7.3,
+   "lonlat": [
+    21.6237695,
+    63.0968598
+   ]
+  },
+  {
+   "osm_id": "n9664071243",
+   "name": null,
+   "entrance": "service",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Sepänkyläntie",
+   "nearest_street_m": 7.3,
+   "lonlat": [
+    21.6238121,
+    63.0968854
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n281223928",
+   "category": "car_rental",
+   "name": "Scandia Rent",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 103,
+   "lonlat": [
+    21.621545,
+    63.0975305
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 24.3,
+   "brand": "Avis",
+   "operator": "Avis"
+  },
+  {
+   "osm_id": "n485662842",
+   "category": "cafe",
+   "name": "Cafe Solo",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:15-16:30; Sa-Su 10:00-16:30; Jun 19 06:15-12:00; Jun 20 off",
+   "wheelchair": "yes",
+   "distance_m": 95,
+   "lonlat": [
+    21.6217525,
+    63.0975548
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 15.7,
+   "website": "http://www.cafesolo.fi"
+  },
+  {
+   "osm_id": "n512543480",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 53,
+   "lonlat": [
+    21.6224145,
+    63.0971638
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 29.0
+  },
+  {
+   "osm_id": "n13130505150",
+   "category": "car_rental",
+   "name": "SIXT",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-16:00",
+   "wheelchair": null,
+   "distance_m": 109,
+   "lonlat": [
+    21.6215223,
+    63.0976262
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 16.7,
+   "brand": "SIXT"
+  },
+  {
+   "osm_id": "n13130512565",
+   "category": "shop=hairdresser",
+   "name": "Hair Company",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 113,
+   "lonlat": [
+    21.6214,
+    63.0976011
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 22.7
+  },
+  {
+   "osm_id": "w25613454",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 156,
+   "lonlat": [
+    21.6201072,
+    63.0981863
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.3
+  },
+  {
+   "osm_id": "w25613457",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 142,
+   "lonlat": [
+    21.6271244,
+    63.0957078
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.1
+  },
+  {
+   "osm_id": "w40281846",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 169,
+   "lonlat": [
+    21.6203963,
+    63.0985965
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 11.5
+  },
+  {
+   "osm_id": "w41679917",
+   "category": "bus_station",
+   "name": "Vaasan Matkakeskus - Matkahuolto",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 14,
+   "lonlat": [
+    21.6235121,
+    63.0969722
+   ],
+   "drawn_as": "area",
+   "in_station_building": true,
+   "to_nearest_platform_m": 5.4,
+   "operator": "Matkahuolto"
+  },
+  {
+   "osm_id": "w41679919",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    21.6243493,
+    63.0965323
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 21.6
+  },
+  {
+   "osm_id": "w1226958633",
+   "category": "bicycle_parking",
+   "name": "Pyörätalli",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 81,
+   "lonlat": [
+    21.6217357,
+    63.0971449
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.5
+  }
+ ]
+}

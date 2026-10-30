@@ -1,0 +1,711 @@
+{
+ "clack_id": "860000669",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w1165076598",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6138127,
+    56.0333569
+   ]
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1165076599",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 28.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6137172,
+    56.0333538
+   ]
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1165076600",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6134008,
+    56.0332871
+   ]
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1165076601",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6134884,
+    56.0332341
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1222778550",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 191.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6148804,
+    56.0325608
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1222778551",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 21.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6140161,
+    56.0330969
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1222778552",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 166.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6156392,
+    56.03341
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1223061250",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6146194,
+    56.032691
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1223061255",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 13.4,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6144084,
+    56.0334504
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1553927994",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.6134499,
+    56.0332574
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n2270460295",
+   "category": "shop=supermarket",
+   "name": "365discount",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "wheelchair": null,
+   "distance_m": 80,
+   "lonlat": [
+    12.6132591,
+    56.0331114
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "365discount"
+  },
+  {
+   "osm_id": "n2270460296",
+   "category": "shop=convenience",
+   "name": "7-Eleven",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 5,
+   "lonlat": [
+    12.6142193,
+    56.0335848
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "7-Eleven",
+   "operator": "7-Eleven"
+  },
+  {
+   "osm_id": "n3240405813",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 15,
+   "lonlat": [
+    12.6141407,
+    56.033489
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n3971433042",
+   "category": "restaurant",
+   "name": "HaiYi",
+   "level": null,
+   "fee": null,
+   "opening_hours": "17:00-22:00",
+   "wheelchair": null,
+   "distance_m": 38,
+   "lonlat": [
+    12.6135604,
+    56.0336523
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "cuisine": "chinese",
+   "website": "http://haiyi.dk/"
+  },
+  {
+   "osm_id": "n4261836180",
+   "category": "restaurant",
+   "name": "Strejf",
+   "level": null,
+   "fee": null,
+   "opening_hours": "11:30-15:00,17:30-21:30; Su-Mo off",
+   "wheelchair": "no",
+   "distance_m": 38,
+   "lonlat": [
+    12.614632,
+    56.033396
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "cuisine": "seafood;steak_house",
+   "website": "https://www.restaurant-strejf.dk/"
+  },
+  {
+   "osm_id": "n10016804027",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 96,
+   "lonlat": [
+    12.613735,
+    56.0327973
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n10837041430",
+   "category": "ferry_terminal",
+   "name": "Øresundslinjen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 63,
+   "lonlat": [
+    12.6141372,
+    56.0330531
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "Forsea",
+   "payment:coins": "yes"
+  },
+  {
+   "osm_id": "n10837041494",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    12.6149495,
+    56.0334683
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n10837041495",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 53,
+   "lonlat": [
+    12.6149208,
+    56.0334007
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n10837041496",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 63,
+   "lonlat": [
+    12.6150294,
+    56.0333219
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n10837041497",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 59,
+   "lonlat": [
+    12.614962,
+    56.0339061
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12037149186",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 21,
+   "lonlat": [
+    12.6139975,
+    56.0334626
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12819232620",
+   "category": "shop=confectionery",
+   "name": "Sweet Ship",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 63,
+   "lonlat": [
+    12.61321,
+    56.0334432
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12819232621",
+   "category": "events_venue",
+   "name": "Toldkammeret",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    12.614211,
+    56.0339769
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://kuto.dk/toldkammeret/"
+  },
+  {
+   "osm_id": "n13910203731",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 93,
+   "lonlat": [
+    12.6143914,
+    56.0327979
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n14028630351",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    12.6145241,
+    56.0336675
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n14028630352",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 44,
+   "lonlat": [
+    12.6134948,
+    56.0334995
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w113512834",
+   "category": "community_centre",
+   "name": "Toldkammeret",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 19,
+   "lonlat": [
+    12.6141499,
+    56.0339312
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://kuto.dk/toldkammeret/",
+   "operator": "Kulturværftet"
+  },
+  {
+   "osm_id": "w245530758",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 77,
+   "lonlat": [
+    12.6132188,
+    56.0321066
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w335079363",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 60,
+   "lonlat": [
+    12.6152662,
+    56.0337364
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1165076621",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 83,
+   "lonlat": [
+    12.6137264,
+    56.0327919
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1468509803",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 100,
+   "lonlat": [
+    12.6129527,
+    56.0330017
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1474841625",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 16,
+   "lonlat": [
+    12.6140353,
+    56.0337577
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1474841626",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 33,
+   "lonlat": [
+    12.613554,
+    56.0337814
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1474841627",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 52,
+   "lonlat": [
+    12.6134253,
+    56.0338822
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1526170244",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 28,
+   "lonlat": [
+    12.6146063,
+    56.033715
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1526170245",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 37,
+   "lonlat": [
+    12.6147753,
+    56.0335492
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530928989",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 91,
+   "lonlat": [
+    12.6148108,
+    56.0328528
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530928990",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 89,
+   "lonlat": [
+    12.6149069,
+    56.0329009
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530928991",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 103,
+   "lonlat": [
+    12.6144778,
+    56.0326936
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530928992",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 100,
+   "lonlat": [
+    12.6145377,
+    56.0327255
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530987892",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 50,
+   "lonlat": [
+    12.6150078,
+    56.0337736
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1530987893",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 39,
+   "lonlat": [
+    12.6148714,
+    56.033707
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level",
+   "other_names": [],
+   "note": "One side platform: all trains use track 1, beside the station building on Ratakatu. No signposted level names; no lift is needed between building and platform (none in OSM, none named by VR).",
+   "_source": "Wikipedia 'Vaasa railway station', https://en.wikipedia.org/wiki/Vaasa_railway_station, read 2026-10-30; VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w23153500",
+    "w35008578"
+   ],
+   "between": [
+    "platform 1, Matkakeskus (bus station) end",
+    "beyond the yard (layer 1, ~100 m each)"
+   ],
+   "where": "by the travel-centre / bus-station end of platform 1 (Sepänkyläntie side), with stairs w1051631621, w1051631622, w1051631626, w1051631629",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w175843961",
+   "name": "Vaasanpuistikko / Matkakeskus P",
+   "between": [
+    "Vaasanpuistikko",
+    "Matkakeskus car park / platform 1"
+   ],
+   "where": "east (Seinäjoki) end of the station",
+   "confirmed_by": "OSM only (name from OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w718392565",
+   "between": [
+    "platform 1 (west end)",
+    "Ratakatu / AsemaParkki side"
+   ],
+   "where": "west end of platform 1, layer -1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building (Vaasan rautatieasema)",
+   "street": "Ratakatu",
+   "level": "0",
+   "where": "Ratakatu 13; OSM entrances n486283156, n486283159, n486283168, n486283182 on the Ratakatu side",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "name": "Matkakeskus (Matkahuolto bus station) main entrance",
+   "street": "Sepänkyläntie",
+   "level": "0",
+   "where": "east of the station building, at the Seinäjoki end; OSM n9664071240",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building, Ratakatu 13",
+   "opening_hours": "Mo-Th 04:15-18:30; Fr 04:15-20:45; Sa 05:15-18:30; Su 06:15-20:45; 2026 Dec 23 04:15-20:45; 2026 Dec 31 04:15-20:45; 2027 Jan 05 04:15-20:45; 2026 Dec 25 04:15-18:30; 2027 Jan 01 04:15-18:30",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatti",
+   "where": "inside the station building",
+   "note": "No VR service point.",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavaralokerot (Ekomar Ab Oy)",
+   "fee": "3 € per day, coins only",
+   "where": "station building",
+   "hours_raw": "usable during the station's opening hours (same as the waiting room)",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Solo",
+   "where": "in the station building (Ratakatu 13; OSM in_station_building)",
+   "osm_id": "n485662842",
+   "opening_hours": "Mo-Fr 06:15-16:30; Sa-Su 10:00-16:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "cafesolo.fi gives Ratakatu 13 (the station address) but lists no hours (points to Facebook).",
+   "_source": "Cafe Solo, http://www.cafesolo.fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "SIXT",
+   "where": "in the station building (OSM)",
+   "osm_id": "n13130505150",
+   "opening_hours": "Mo-Fr 08:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "Seinäjoki end of the station building, by bus bay 6 of the travel centre; drop-off traffic can reach it",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Vaasan Matkakeskus – Matkahuolto",
+   "where": "next to the station, Seinäjoki (east) end; bus bay 6 by the assistance point",
+   "osm_id": "w41679917",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "OSM n512543480, Ratakatu side",
+   "osm_id": "n512543480",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "There is one platform (track 1) at street level beside the station building; no lifts are recorded by VR or OSM. OSM has footbridges with stairs at the bus-station end and an underpass at the west end, unconfirmed by any owner source.",
+   "_source": "Wikipedia 'Vaasa railway station', https://en.wikipedia.org/wiki/Vaasa_railway_station, read 2026-10-30; VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Väylävirasto's area map PDF (linked from VR via https://vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat) could not be read: vayla.fi does not load from here.",
+  "Where the OSM footbridges (w23153500, w35008578, w175843961) lead and whether they have lifts/ramps: OSM only.",
+  "Cafe Solo and SIXT hours are OSM only.",
+  "Parking: not on VR's page; OSM shows AsemaParkki and lots around the station (not verified).",
+  "No signposted level names; no heights. Toilet fee unknown."
+ ]
+}

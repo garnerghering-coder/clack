@@ -1,0 +1,384 @@
+{
+ "clack_id": "860000683",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w598442276",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w598442286",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w26380518",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 13.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3123658,
+    55.9274443
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w26380519",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 14.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3115381,
+    55.927402
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w26380520",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 36.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3115794,
+    55.9275266
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w150549081",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3109236,
+    55.9269364
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w150549083",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 21.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3110442,
+    55.9269246
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1165106319",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    12.3113208,
+    55.9267562
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n1625939564",
+   "category": "shop=convenience",
+   "name": "7-Eleven",
+   "level": null,
+   "fee": null,
+   "opening_hours": "24/7",
+   "wheelchair": "limited",
+   "distance_m": 25,
+   "lonlat": [
+    12.3106774,
+    55.9270928
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 65.6,
+   "brand": "7-Eleven",
+   "operator": "7-Eleven"
+  },
+  {
+   "osm_id": "n4261837129",
+   "category": "restaurant",
+   "name": "You Sushi Hillerød Aps",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 57,
+   "lonlat": [
+    12.3100319,
+    55.9270073
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 103.4,
+   "cuisine": "sushi"
+  },
+  {
+   "osm_id": "n4429455834",
+   "category": "fast_food",
+   "name": "Corner Sandwich og Kebab",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 71,
+   "lonlat": [
+    12.3101297,
+    55.9273666
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 104.4,
+   "cuisine": "kebab"
+  },
+  {
+   "osm_id": "n7111588422",
+   "category": "cafe",
+   "name": "Lagkagehuset",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-17:00; Sa,Su 07:00-16:00",
+   "wheelchair": null,
+   "distance_m": 24,
+   "lonlat": [
+    12.3105969,
+    55.926808
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 64.2,
+   "brand": "Lagkagehuset"
+  },
+  {
+   "osm_id": "n8117602488",
+   "category": "bar",
+   "name": "Jernstangen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 56,
+   "lonlat": [
+    12.310043,
+    55.927002
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 102.6
+  },
+  {
+   "osm_id": "n8949465164",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "wheelchair": "yes",
+   "distance_m": 42,
+   "lonlat": [
+    12.3105778,
+    55.9272428
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 74.7
+  },
+  {
+   "osm_id": "n8949465165",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 45,
+   "lonlat": [
+    12.3107787,
+    55.9273153
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 63.4
+  },
+  {
+   "osm_id": "w42466129",
+   "category": "bus_station",
+   "name": "Hillerød Station",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 55,
+   "lonlat": [
+    12.3109269,
+    55.9278946
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 38.1
+  },
+  {
+   "osm_id": "w149656222",
+   "category": "college",
+   "name": "Københavns Professionshøjskole, Campus Nordsjælland",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 319,
+   "lonlat": [
+    12.3136553,
+    55.9303706
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.1,
+   "website": "https://www.kp.dk"
+  },
+  {
+   "osm_id": "w602966268",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 55,
+   "lonlat": [
+    12.3104009,
+    55.926397
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 59.3,
+   "operator": "DSB"
+  },
+  {
+   "osm_id": "w602966269",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 46,
+   "lonlat": [
+    12.310464,
+    55.9265277
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 59.3,
+   "operator": "DSB"
+  },
+  {
+   "osm_id": "w915748018",
+   "category": "school",
+   "name": "UNord - Hillerød Tekniske Gymnasium",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 115,
+   "lonlat": [
+    12.3119804,
+    55.9255453
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.2,
+   "website": "https://unord.dk/",
+   "operator": "UNord"
+  },
+  {
+   "osm_id": "w940863091",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 133,
+   "lonlat": [
+    12.312524,
+    55.9279751
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 23.5
+  },
+  {
+   "osm_id": "w1529906985",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 96,
+   "lonlat": [
+    12.3125073,
+    55.9290757
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.7
+  },
+  {
+   "osm_id": "w1529906987",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 99,
+   "lonlat": [
+    12.3121218,
+    55.9275446
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.3
+  },
+  {
+   "osm_id": "w1529906999",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 61,
+   "lonlat": [
+    12.3120978,
+    55.926902
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.1
+  }
+ ]
+}

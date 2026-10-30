@@ -1,0 +1,146 @@
+{
+ "clack_id": "860000719",
+ "name": "Holbæk",
+ "bilag_name": "Holbæk",
+ "station_abbr": [
+  "Hk"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "55.7153147 11.7087666 55.7154069 11.7085785 55.7155180 11.7083432 55.7156568 11.7080411 55.7157550 11.7078180 55.7158687 11.7075425 55.7159977 11.7072168 55.7160986 11.7069493 55.7161928 11.7066858 55.7163007 11.7063742 55.7164203 11.7060050 55.7165047 11.7057268 55.7165872 11.7054416 55.7166830 11.7050880 55.7167760 11.7047239 55.7168035 11.7045996",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 311,
+   "Bredd_m": 7.9,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000719-5-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "5",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "0",
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Hk); extent: Banedanmark platform outline FOR_PERRONER_OD Hk 171 beside the track (311 m along it; Bilag 311 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 5; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2",
+   "Points": "55.7140408 11.7109637 55.7140492 11.7109505 55.7141807 11.7107365 55.7142948 11.7105477 55.7143868 11.7103936 55.7145063 11.7101876 55.7145813 11.7100547 55.7146650 11.7099048 55.7147462 11.7097569 55.7148229 11.7096147 55.7149521 11.7093717 55.7150136 11.7092540 55.7151522 11.7089828 55.7152258 11.7088363 55.7153406 11.7086019 55.7154365 11.7084007 55.7155105 11.7082424 55.7155817 11.7080865 55.7156360 11.7079647 55.7156951 11.7078293 55.7157742 11.7076434 55.7158694 11.7074117 55.7159619 11.7071774 55.7160358 11.7069822 55.7161224 11.7067438 55.7161924 11.7065442 55.7162688 11.7063176 55.7163539 11.7060528 55.7164150 11.7058595 55.7164599 11.7057151",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 423,
+   "Bredd_m": 6.6,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000719-5-2-2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "5",
+   "x_perron": "2",
+   "x_track": "2",
+   "x_perron_tracks": [
+    "2",
+    "3",
+    "2a"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Hk); extent: Banedanmark platform outline FOR_PERRONER_OD Hk 172 beside the track (428 m along it; Bilag 423 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 5; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 3",
+   "Points": "55.7140001 11.7108837 55.7140353 11.7108252 55.7141886 11.7105675 55.7143402 11.7103009 55.7144216 11.7101542 55.7145032 11.7100005 55.7145674 11.7098820 55.7146531 11.7097183 55.7148075 11.7094121 55.7148883 11.7092497 55.7149650 11.7090957 55.7150276 11.7089615 55.7151107 11.7087854 55.7152493 11.7084833 55.7153178 11.7083265 55.7153944 11.7081557 55.7154634 11.7079977 55.7155273 11.7078446 55.7155893 11.7076947 55.7156601 11.7075159 55.7157365 11.7073241 55.7158804 11.7069495 55.7159957 11.7066406 55.7161719 11.7061419 55.7162342 11.7059476 55.7163302 11.7056576 55.7163480 11.7056031",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 280,
+   "Bredd_m": 6.6,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000719-5-2-3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "5",
+   "x_perron": "2",
+   "x_track": "3",
+   "x_perron_tracks": [
+    "2",
+    "3",
+    "2a"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Hk); extent: Banedanmark platform outline FOR_PERRONER_OD Hk 172 beside the track (424 m along it; Bilag 280 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 5; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2a",
+   "Points": "55.7156843 11.7076031 55.7158177 11.7072690 55.7159110 11.7070261 55.7160045 11.7067763 55.7161264 11.7064349 55.7163363 11.7058260 55.7163954 11.7056511",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 130,
+   "Bredd_m": 19.3,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000719-5-2-2a",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "5",
+   "x_perron": "2",
+   "x_track": "2a",
+   "x_perron_tracks": [
+    "2",
+    "3",
+    "2a"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2a (station Hk); extent: Banedanmark platform outline FOR_PERRONER_OD Hk 172 beside the track (146 m along it; Bilag 130 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 5; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000719-5-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000719-5-2-2",
+   "IndKod": "2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000719-5-2-3",
+   "IndKod": "3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000719-5-2-2a",
+   "IndKod": "2a",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [
+  "Bilag row TIB 5 perron 1 track 0: no Banedanmark track 0 within 700 m; not placed",
+  "Perron 2 track 3: the outline FOR_PERRONER_OD Hk 172 runs 424 m along the track, Bilag says 280 m; line drawn to the outline"
+ ],
+ "heights": {
+  "55": 0.55
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform level: S-tog perron 1 (track 1) and perron 2 (track 2), 92 cm; regional perron 3 (tracks 3/4) and perron 4 (tracks 6/7) on the København–Ringsted line, 55 cm, 400 m",
+   "note": "Per Banedanmark register. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Gangbro (station footbridge, 225 m long, 9 m wide) over the S-tog line, Køge Bugt Motorvejen and the high-speed line",
+   "note": "Fact sheet: bridge owned by Banedanmark; parking and transit facilities by Køge Kommune; platform furnishings by DSB. Contains waiting/rest zones. OSM: footbridge w693688673 (222 m, layer 1). No signposted name found.",
+   "_source": "Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30; Dissing+Weitling press text https://dissingweitling.com/assets/press/Køge-Nord-Station-version_final_dk.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w693688673",
+   "between": [
+    "regional platforms 3/4 (west)",
+    "S-tog platforms 1/2 (east)"
+   ],
+   "where": "over the whole station, motorway and both railways",
+   "confirmed_by": "owner text (Dissing+Weitling for Banedanmark) + OSM",
+   "_source": "Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1435620201",
+   "between": [
+    "footbridge",
+    "platform 1 (OSM ref)"
+   ],
+   "where": "OSM escalator (one-way, 'forward')",
+   "confirmed_by": "OSM only (DSB and the fact sheet confirm escalators exist)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30; Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1435620204",
+   "between": [
+    "footbridge",
+    "platform 2 (OSM ref)"
+   ],
+   "where": "OSM escalator (one-way, 'forward')",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w693688671",
+    "w1435620206"
+   ],
+   "between": [
+    "footbridge",
+    "platform 1 (OSM ref)"
+   ],
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w693688669",
+   "between": [
+    "footbridge",
+    "platform 2 (OSM ref)"
+   ],
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "count": 5,
+   "between": [
+    "footbridge",
+    "platforms / ground"
+   ],
+   "where": "positions not given",
+   "confirmed_by": "owner text (fact sheet: 'five lifts', 'five stairs' plus escalators); DSB lists Elevator, Trapper, Rulletrapper",
+   "_source": "Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Køge Nord Station",
+   "street": "Nordstjernen (address Nordstjernen 3, 4600 Køge)",
+   "level": "0",
+   "where": "DSB's address for the station; which bridge end it is not stated",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "toilets",
+   "name": "Toilet (drives af Køge Kommune)",
+   "osm_id": "n6982453442",
+   "where": "OSM n6982453442 (position only in OSM)",
+   "note": "Operated by Køge Kommune; DSB gives no fee or hours.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering (pendlerparkering)",
+   "note": "About 632 spaces, 90 % occupancy; Køge Kommune owns the parking and transit facilities.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30; Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Køge Nord)",
+   "answer": "Footbridge station: a 225 m enclosed bridge links the regional platforms 3/4 (København–Ringsted line) with the S-tog platforms 1/2 across the motorway. The owner-side fact sheet gives five lifts and five stairs plus escalators; OSM maps only two escalators and three stairs (to OSM platforms 1 and 2) and no lifts.",
+   "_source": "Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Positions of the five lifts and which platform each serves: not in any source read; OSM has none.",
+  "OSM maps no stairs/lifts to regional perrons 3 and 4; OSM platform refs 1/2 may not match Banedanmark's perron numbering.",
+  "Number of escalators: the fact sheet mentions escalators without a count; OSM has two.",
+  "Toilet fee/hours: DSB says only 'Drives af Køge Kommune'.",
+  "No shops at the station in any source.",
+  "Bus stops: not given by DSB; not checked with Movia.",
+  "No owner station plan found; bridge deck height not measured in any source."
+ ]
+}

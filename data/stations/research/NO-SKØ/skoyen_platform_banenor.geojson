@@ -1,0 +1,179 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.681418600000002,
+      59.9217943
+     ],
+     [
+      10.681011900000001,
+      59.92190949999999
+     ],
+     [
+      10.6798801,
+      59.92223390000001
+     ],
+     [
+      10.6789693,
+      59.9224931
+     ],
+     [
+      10.6786296,
+      59.922588000000005
+     ],
+     [
+      10.6783858,
+      59.9226566
+     ],
+     [
+      10.678181300000002,
+      59.9227101
+     ],
+     [
+      10.6779768,
+      59.9227617
+     ],
+     [
+      10.6777669,
+      59.92281209999997
+     ],
+     [
+      10.677556999999998,
+      59.922858799999986
+     ],
+     [
+      10.6774838,
+      59.92287429999998
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1,2",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700/500 mm above top of rail (Bane NOR; two values: one per platform edge, the first taken for track 1)",
+    "length_m": 300.0,
+    "width_m": 12.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SKØ-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 8.33,
+    "laser_track_bed_m": 7.43,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700/500",
+    "x_platform_type": "Mellomplattform Dekker spor 1 og 2",
+    "x_covers_tracks": [
+     "1",
+     "2"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": 3600.0,
+    "x_passing_loop_m": 300.0,
+    "x_comment": "Mellomplattform Dekker spor 1 og 2",
+    "x_geometry": "extent: OSM platform outline r6656488 (ref 1;2), 251 m along the track (Bane NOR: 300 m)",
+    "x_osm_platform": "r6656488",
+    "x_nsr_quays": [
+     "NSR:Quay:239"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r6656488 (ref 1;2), 251 m along the track (Bane NOR: 300 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.677229,
+      59.9226201
+     ],
+     [
+      10.6772817,
+      59.92260550000001
+     ],
+     [
+      10.6783561,
+      59.9223114
+     ],
+     [
+      10.6786731,
+      59.92222550000001
+     ],
+     [
+      10.6795877,
+      59.9219725
+     ],
+     [
+      10.679887299999999,
+      59.92189119999998
+     ],
+     [
+      10.680754,
+      59.92165699999999
+     ],
+     [
+      10.6809795,
+      59.92159939999999
+     ],
+     [
+      10.6811602,
+      59.921555000000005
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 4",
+    "track": "3,4",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700/575 mm above top of rail (Bane NOR; two values: one per platform edge, the first taken for track 4)",
+    "length_m": 249.0,
+    "width_m": 9.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SKØ-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 7.96,
+    "laser_track_bed_m": 7.35,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700/575",
+    "x_platform_type": "Mellomplattform Dekker spor 4 og 3",
+    "x_covers_tracks": [
+     "4",
+     "3"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": 3600.0,
+    "x_passing_loop_m": 287.0,
+    "x_comment": "Mellomplattform Dekker spor 4 og 3",
+    "x_geometry": "extent: OSM platform outline r6656489 (ref 3;4), 250 m along the track (Bane NOR: 249 m)",
+    "x_osm_platform": "r6656489",
+    "x_nsr_quays": [
+     "NSR:Quay:236"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r6656489 (ref 3;4), 250 m along the track (Bane NOR: 249 m)"
+   }
+  }
+ ]
+}

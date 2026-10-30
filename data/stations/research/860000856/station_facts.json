@@ -1,0 +1,851 @@
+{
+ "clack_id": "860000856",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Forhal / covered footbridge (overdækkede gangbro) over the cutting, street level",
+   "other_names": [
+    "Forhal",
+    "den overdækkede gangbro"
+   ],
+   "note": "DSB: 'Forhal med billetautomat'; 'Den overdækkede gangbro er åben hele døgnet'.",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Regional platforms: two side platforms in a trench (cutting)",
+   "note": "Sund & Bælt: 'an open station with two side platforms'; Wikipedia: 'Trench (Regional service)'. Owner: By & Havn.",
+   "_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; Wikipedia, \"Ørestad railway station\", https://en.wikipedia.org/wiki/%C3%98restad_railway_station, read 2026-10-30; Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30"
+  },
+  {
+   "osm_level": "2+",
+   "name": "Metro Ørestad (M1), elevated on a viaduct along the east edge of Ørestads Boulevard — out of scope",
+   "_source": "Wikipedia, \"Ørestad railway station\", https://en.wikipedia.org/wiki/%C3%98restad_railway_station, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n13660820158",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "under the covered footbridge, about 130–180 m from the platform ends (OSM)",
+   "confirmed_by": "OSM only; DSB: 'trapper, rulletrapper og elevator til rådighed'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30",
+   "position": {
+    "lon": 12.5790876,
+    "lat": 55.6283396,
+    "how": "OSM n13660820158",
+    "_source": "OpenStreetMap n13660820158 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13660820167",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "under the covered footbridge (OSM)",
+   "confirmed_by": "OSM only; DSB confirms a lift",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30",
+   "position": {
+    "lon": 12.5791533,
+    "lat": 55.6285025,
+    "how": "OSM n13660820167",
+    "_source": "OpenStreetMap n13660820167 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w168945180",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "beside the lift, footbridge position (OSM)",
+   "confirmed_by": "OSM only; DSB confirms escalators",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30",
+   "position": {
+    "lon": 12.5792602,
+    "lat": 55.6283378,
+    "how": "OSM w168945180 (point on the way)",
+    "_source": "OpenStreetMap w168945180 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1490476721",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "beside the lift, footbridge position (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 12.5793256,
+    "lat": 55.6285006,
+    "how": "OSM w1490476721 (point on the way)",
+    "_source": "OpenStreetMap w1490476721 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476708",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "beside the escalator (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 12.5792584,
+    "lat": 55.6283278,
+    "how": "OSM w1490476708 (point on the way)",
+    "_source": "OpenStreetMap w1490476708 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476722",
+   "between": [
+    "gangbro/forhal (1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "beside the escalator (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 12.5793239,
+    "lat": 55.6284906,
+    "how": "OSM w1490476722 (point on the way)",
+    "_source": "OpenStreetMap w1490476722 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w168945182",
+   "between": [
+    "perron 1 (spor 1)",
+    "perron 2 (spor 2)"
+   ],
+   "where": "covered footbridge across the cutting (about 42 m)",
+   "confirmed_by": "OSM + owner text ('Den overdækkede gangbro er åben hele døgnet')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30",
+   "position": {
+    "lon": 12.5792107,
+    "lat": 55.6285003,
+    "how": "OSM w168945182 (point on the way)",
+    "_source": "OpenStreetMap w168945182 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w91335292",
+    "w91335282"
+   ],
+   "between": [
+    "perron 1 (spor 1) / perron 2 (spor 2)",
+    "street (Ørestads Boulevard end)"
+   ],
+   "where": "about 20 m from the end of each platform, near footbridge w4317970 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1056160518",
+    "w1493909053"
+   ],
+   "between": [
+    "street/gangbro",
+    "Metro (probably)"
+   ],
+   "where": "about 35–45 m from the platforms, no level tags (OSM)",
+   "confirmed_by": "OSM only; purpose unconfirmed",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w4317970",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 108.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w4317970 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5813426,
+    "lat": 55.6282706,
+    "how": "OSM w4317970 (point on the way)",
+    "_source": "OpenStreetMap w4317970 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91335282",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w91335282 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5809678,
+    "lat": 55.6284606,
+    "how": "OSM w91335282 (point on the way)",
+    "_source": "OpenStreetMap w91335282 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w91335292",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w91335292 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5809581,
+    "lat": 55.6282765,
+    "how": "OSM w91335292 (point on the way)",
+    "_source": "OpenStreetMap w91335292 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w168945180",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": "backward",
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w168945180 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792602,
+    "lat": 55.6283378,
+    "how": "OSM w168945180 (point on the way)",
+    "_source": "OpenStreetMap w168945180 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w168945182",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform Ørestad"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 42.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w168945182 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792107,
+    "lat": 55.6285003,
+    "how": "OSM w168945182 (point on the way)",
+    "_source": "OpenStreetMap w168945182 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1056160516",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Ørestad"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1056160516 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5794646,
+    "lat": 55.629309,
+    "how": "OSM w1056160516 (point on the way)",
+    "_source": "OpenStreetMap w1056160516 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1056160518",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Ørestad"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 10.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1056160518 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792668,
+    "lat": 55.6287432,
+    "how": "OSM w1056160518 (point on the way)",
+    "_source": "OpenStreetMap w1056160518 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1079251618",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 117.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1079251618 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.578687,
+    "lat": 55.6277483,
+    "how": "OSM w1079251618 (point on the way)",
+    "_source": "OpenStreetMap w1079251618 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1079251619",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 117.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1079251619 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5783409,
+    "lat": 55.6277678,
+    "how": "OSM w1079251619 (point on the way)",
+    "_source": "OpenStreetMap w1079251619 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490155263",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 94.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490155263 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5787202,
+    "lat": 55.6286309,
+    "how": "OSM w1490155263 (point on the way)",
+    "_source": "OpenStreetMap w1490155263 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490202110",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 32.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490202110 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5787929,
+    "lat": 55.6281252,
+    "how": "OSM w1490202110 (point on the way)",
+    "_source": "OpenStreetMap w1490202110 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490202116",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490202116 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5789827,
+    "lat": 55.6286025,
+    "how": "OSM w1490202116 (point on the way)",
+    "_source": "OpenStreetMap w1490202116 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490202117",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490202117 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5789044,
+    "lat": 55.6284056,
+    "how": "OSM w1490202117 (point on the way)",
+    "_source": "OpenStreetMap w1490202117 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476706",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476706 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5791454,
+    "lat": 55.6283373,
+    "how": "OSM w1490476706 (point on the way)",
+    "_source": "OpenStreetMap w1490476706 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476708",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476708 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792584,
+    "lat": 55.6283278,
+    "how": "OSM w1490476708 (point on the way)",
+    "_source": "OpenStreetMap w1490476708 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476709",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476709 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792584,
+    "lat": 55.6283278,
+    "how": "OSM w1490476709 (point on the way)",
+    "_source": "OpenStreetMap w1490476709 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476718",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476718 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792602,
+    "lat": 55.6283378,
+    "how": "OSM w1490476718 (point on the way)",
+    "_source": "OpenStreetMap w1490476718 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1490476721",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "backward",
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476721 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5793256,
+    "lat": 55.6285006,
+    "how": "OSM w1490476721 (point on the way)",
+    "_source": "OpenStreetMap w1490476721 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1490476722",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476722 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5793239,
+    "lat": 55.6284906,
+    "how": "OSM w1490476722 (point on the way)",
+    "_source": "OpenStreetMap w1490476722 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476723",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476723 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5793239,
+    "lat": 55.6284906,
+    "how": "OSM w1490476723 (point on the way)",
+    "_source": "OpenStreetMap w1490476723 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476724",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476724 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5793071,
+    "lat": 55.6284963,
+    "how": "OSM w1490476724 (point on the way)",
+    "_source": "OpenStreetMap w1490476724 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476725",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476725 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792107,
+    "lat": 55.6285003,
+    "how": "OSM w1490476725 (point on the way)",
+    "_source": "OpenStreetMap w1490476725 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476726",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476726 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5791454,
+    "lat": 55.6283373,
+    "how": "OSM w1490476726 (point on the way)",
+    "_source": "OpenStreetMap w1490476726 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1490476729",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1490476729 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5791533,
+    "lat": 55.6285025,
+    "how": "OSM w1490476729 (point on the way)",
+    "_source": "OpenStreetMap w1490476729 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1493909053",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Ørestad"
+   ],
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 10.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1493909053 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5792796,
+    "lat": 55.6288405,
+    "how": "OSM w1493909053 (point on the way)",
+    "_source": "OpenStreetMap w1493909053 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13660820158",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13660820158 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5790876,
+    "lat": 55.6283396,
+    "how": "OSM n13660820158",
+    "_source": "OpenStreetMap n13660820158 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13660820167",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13660820167 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.5791533,
+    "lat": 55.6285025,
+    "how": "OSM n13660820167",
+    "_source": "OpenStreetMap n13660820167 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station (DSB address)",
+   "street": "Ørestads Boulevard 91, 2300 København S",
+   "level": "1",
+   "where": "no entrance nodes in OSM",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "level_per_plan": "1",
+   "where": "in the forhal ('Forhal med billetautomat')",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal / covered footbridge",
+   "level_per_plan": "1",
+   "where": "over the platforms",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "hours_raw": "Den overdækkede gangbro er åben hele døgnet",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Bilparkering (administered by By og Havn) and cykelparkering",
+   "where": "by the station",
+   "_source": "DSB station page Ørestad, https://www.dsb.dk/trafikinformation/stationer/orestad/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "at the station (OSM)",
+   "osm_id": "w1490241856",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30",
+   "position": {
+    "lon": 12.578857,
+    "lat": 55.6284041,
+    "osm_id": "w1490241856",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1490241856",
+    "_source": "OpenStreetMap w1490241856 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "vending_machine",
+   "name": "Vending machines (2, type not tagged)",
+   "level_per_plan": "1",
+   "where": "level 1 by the platform access (OSM)",
+   "osm_ids": [
+    "n12980738252",
+    "n12980793842"
+   ],
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Ørestad Kebab",
+   "brand": null,
+   "cuisine": "kebab",
+   "opening_hours": "Mo-Fr 11:00-20:00; Sa,Su 12:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.5795261,
+    "lat": 55.6293433,
+    "osm_id": "n5893123055",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n5893123055",
+    "_source": "OpenStreetMap n5893123055 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5893123055 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No toilets, shops or 7-Eleven at the station on DSB's page; DSB notes the station is close to Fields shopping centre. Ørestad Kebab (OSM n5893123055, about 74 m away) and Field's were left out as not in the station.",
+  "Entrances: none in OSM; street side of each stair/footbridge unconfirmed. Metro transfer (lifts/escalators to the M1 viaduct) not confirmed by m.dk (m.dk station page could not be fetched).",
+  "No owner plan; positions OSM only. Level names beyond 'Forhal'/'gangbro' not found.",
+  "No open-question list was supplied for Danish stations."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

@@ -1,0 +1,1950 @@
+{
+ "type": "FeatureCollection",
+ "name": "nationaltheatret_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m NN2000",
+ "platform_surface_m": null,
+ "track_bed_m": null,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.734419999999998,
+       59.91854799999999
+      ],
+      [
+       10.734370000000002,
+       59.91894199999999
+      ],
+      [
+       10.734079,
+       59.91893199999999
+      ],
+      [
+       10.733778199999998,
+       59.918651499999996
+      ],
+      [
+       10.733014000000002,
+       59.917939
+      ],
+      [
+       10.73299,
+       59.91794600000001
+      ],
+      [
+       10.732930000000001,
+       59.91789
+      ],
+      [
+       10.732952999999998,
+       59.91788299999999
+      ],
+      [
+       10.733071,
+       59.917801
+      ],
+      [
+       10.7340302,
+       59.917838299999985
+      ],
+      [
+       10.73451,
+       59.917857
+      ],
+      [
+       10.734419999999998,
+       59.91854799999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w5042466",
+    "name": "hotel",
+    "osm_tags": {
+     "building": "hotel",
+     "building:levels": "3",
+     "layer": "1"
+    },
+    "ground_min_m": 19.02,
+    "ground_median_m": 20.42,
+    "ground_max_m": 20.58,
+    "laser_points": 3,
+    "source": "Outline OSM w5042466 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.729965,
+       59.91427800000001
+      ],
+      [
+       10.729822999999998,
+       59.91426799999998
+      ],
+      [
+       10.729779999999998,
+       59.914188999999986
+      ],
+      [
+       10.72975,
+       59.914128
+      ],
+      [
+       10.729729,
+       59.914096
+      ],
+      [
+       10.729707999999999,
+       59.914075
+      ],
+      [
+       10.729683,
+       59.91405300000001
+      ],
+      [
+       10.729643,
+       59.91402599999998
+      ],
+      [
+       10.729573,
+       59.913991
+      ],
+      [
+       10.729533000000002,
+       59.913977
+      ],
+      [
+       10.729503,
+       59.913967999999976
+      ],
+      [
+       10.729463000000003,
+       59.913958
+      ],
+      [
+       10.729407999999998,
+       59.91394799999999
+      ],
+      [
+       10.729364,
+       59.913942000000006
+      ],
+      [
+       10.729277,
+       59.91393799999999
+      ],
+      [
+       10.728994,
+       59.91393229999999
+      ],
+      [
+       10.728947800000002,
+       59.91386130000001
+      ],
+      [
+       10.729495,
+       59.913613
+      ],
+      [
+       10.729631,
+       59.913644
+      ],
+      [
+       10.72962,
+       59.91379500000001
+      ],
+      [
+       10.729629,
+       59.91382500000001
+      ],
+      [
+       10.729641000000003,
+       59.913844
+      ],
+      [
+       10.729663,
+       59.913864
+      ],
+      [
+       10.729691,
+       59.913881
+      ],
+      [
+       10.729719,
+       59.91389499999998
+      ],
+      [
+       10.72975,
+       59.913909
+      ],
+      [
+       10.729779,
+       59.91391799999998
+      ],
+      [
+       10.729806,
+       59.913924999999985
+      ],
+      [
+       10.729847,
+       59.913932
+      ],
+      [
+       10.729892,
+       59.91393600000001
+      ],
+      [
+       10.729946999999997,
+       59.91393499999999
+      ],
+      [
+       10.729986,
+       59.913932
+      ],
+      [
+       10.73005,
+       59.913923999999994
+      ],
+      [
+       10.730251,
+       59.913896
+      ],
+      [
+       10.730338,
+       59.913955
+      ],
+      [
+       10.729965,
+       59.91427800000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w44278259",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "9",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 5.78,
+    "ground_median_m": 9.83,
+    "ground_max_m": 12.22,
+    "roof_top_median_m": 33.81,
+    "roof_top_p95_m": 33.88,
+    "laser_points": 14,
+    "height_above_ground_median_m": 23.98,
+    "height_above_ground_p95_m": 24.05,
+    "source": "Outline OSM w44278259 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.732722,
+       59.91327700000001
+      ],
+      [
+       10.732985,
+       59.913252
+      ],
+      [
+       10.733054000000001,
+       59.913428
+      ],
+      [
+       10.733125000000001,
+       59.91347399999997
+      ],
+      [
+       10.733467,
+       59.91353699999998
+      ],
+      [
+       10.733369799999998,
+       59.91366739999999
+      ],
+      [
+       10.7330183,
+       59.913600900000006
+      ],
+      [
+       10.732886000000002,
+       59.913576000000006
+      ],
+      [
+       10.732861,
+       59.913569999999986
+      ],
+      [
+       10.732845,
+       59.91356300000002
+      ],
+      [
+       10.732833,
+       59.91355600000001
+      ],
+      [
+       10.732822,
+       59.913543000000004
+      ],
+      [
+       10.732808,
+       59.91351399999999
+      ],
+      [
+       10.732722,
+       59.91327700000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w44278268",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "9",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 6.33,
+    "ground_median_m": 6.74,
+    "ground_max_m": 6.9,
+    "laser_points": 4,
+    "source": "Outline OSM w44278268 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.732203200000002,
+       59.91402300000001
+      ],
+      [
+       10.7323638,
+       59.91439239999998
+      ],
+      [
+       10.732249499999998,
+       59.91443039999999
+      ],
+      [
+       10.7320058,
+       59.9143056
+      ],
+      [
+       10.731833699999997,
+       59.914215699999986
+      ],
+      [
+       10.7316604,
+       59.91430379999998
+      ],
+      [
+       10.731648199999999,
+       59.91430989999997
+      ],
+      [
+       10.731980900000002,
+       59.91447879999999
+      ],
+      [
+       10.732227,
+       59.91462560000001
+      ],
+      [
+       10.732694700000001,
+       59.91446049999999
+      ],
+      [
+       10.7324829,
+       59.91398220000001
+      ],
+      [
+       10.732217,
+       59.91401100000001
+      ],
+      [
+       10.732203200000002,
+       59.91402300000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w44278278",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "8"
+    },
+    "ground_min_m": 6.72,
+    "ground_median_m": 9.94,
+    "ground_max_m": 12.05,
+    "roof_top_median_m": 30.12,
+    "roof_top_p95_m": 30.2,
+    "laser_points": 14,
+    "height_above_ground_median_m": 20.18,
+    "height_above_ground_p95_m": 20.26,
+    "source": "Outline OSM w44278278 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.730825099999999,
+       59.913315199999985
+      ],
+      [
+       10.7305884,
+       59.91327050000001
+      ],
+      [
+       10.730573799999998,
+       59.91326769999999
+      ],
+      [
+       10.73102,
+       59.912672999999984
+      ],
+      [
+       10.731078,
+       59.91268500000001
+      ],
+      [
+       10.73108,
+       59.91267
+      ],
+      [
+       10.731189999999998,
+       59.91264300000001
+      ],
+      [
+       10.731192999999998,
+       59.91270699999999
+      ],
+      [
+       10.731279999999998,
+       59.91272099999997
+      ],
+      [
+       10.7308562,
+       59.9132745
+      ],
+      [
+       10.730825099999999,
+       59.913315199999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w44278280",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "9",
+     "roof:shape": "saltbox"
+    },
+    "ground_min_m": 5.11,
+    "ground_median_m": 5.34,
+    "ground_max_m": 5.61,
+    "roof_top_median_m": 34.76,
+    "roof_top_p95_m": 35.86,
+    "laser_points": 14,
+    "height_above_ground_median_m": 29.42,
+    "height_above_ground_p95_m": 30.52,
+    "source": "Outline OSM w44278280 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.724545,
+       59.913039
+      ],
+      [
+       10.724517,
+       59.913053
+      ],
+      [
+       10.724511,
+       59.91304900000001
+      ],
+      [
+       10.724494,
+       59.913041
+      ],
+      [
+       10.724304,
+       59.91294
+      ],
+      [
+       10.724295,
+       59.912935000000004
+      ],
+      [
+       10.724377,
+       59.912898
+      ],
+      [
+       10.724380999999997,
+       59.91289999999999
+      ],
+      [
+       10.724509999999999,
+       59.912842000000005
+      ],
+      [
+       10.724496000000002,
+       59.912835
+      ],
+      [
+       10.724681,
+       59.912751999999976
+      ],
+      [
+       10.724692,
+       59.912756999999985
+      ],
+      [
+       10.724904,
+       59.91265899999999
+      ],
+      [
+       10.724994000000002,
+       59.91270800000001
+      ],
+      [
+       10.725024,
+       59.912694999999985
+      ],
+      [
+       10.725054,
+       59.91271200000001
+      ],
+      [
+       10.725026,
+       59.912726000000006
+      ],
+      [
+       10.725117999999998,
+       59.91277599999999
+      ],
+      [
+       10.725031,
+       59.91281600000001
+      ],
+      [
+       10.725026,
+       59.91281300000001
+      ],
+      [
+       10.724591999999998,
+       59.91301300000001
+      ],
+      [
+       10.724595000000003,
+       59.913015
+      ],
+      [
+       10.724545,
+       59.913039
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w89541284",
+    "name": "Oslo ingeniørhøgskole (school)",
+    "osm_tags": {
+     "amenity": "college",
+     "building": "school",
+     "building:levels": "4",
+     "name": "Oslo ingeniørhøgskole",
+     "roof:shape": "hipped",
+     "start_date": "1889"
+    },
+    "ground_min_m": 12.39,
+    "ground_median_m": 15.04,
+    "ground_max_m": 19.18,
+    "roof_top_median_m": 33.37,
+    "roof_top_p95_m": 33.54,
+    "laser_points": 21,
+    "height_above_ground_median_m": 18.33,
+    "height_above_ground_p95_m": 18.5,
+    "source": "Outline OSM w89541284 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.727789000000001,
+       59.91500099999999
+      ],
+      [
+       10.727822,
+       59.915
+      ],
+      [
+       10.727820999999999,
+       59.914988
+      ],
+      [
+       10.727948,
+       59.91498299999997
+      ],
+      [
+       10.728095000000001,
+       59.91497900000001
+      ],
+      [
+       10.728095000000001,
+       59.915020000000005
+      ],
+      [
+       10.728123,
+       59.915019
+      ],
+      [
+       10.728124,
+       59.91502599999999
+      ],
+      [
+       10.728114,
+       59.915136000000004
+      ],
+      [
+       10.728012300000001,
+       59.91513940000001
+      ],
+      [
+       10.727722,
+       59.91514899999999
+      ],
+      [
+       10.727718999999999,
+       59.91515600000001
+      ],
+      [
+       10.727652,
+       59.915144
+      ],
+      [
+       10.72766,
+       59.91513400000001
+      ],
+      [
+       10.727321999999997,
+       59.91488399999999
+      ],
+      [
+       10.727673,
+       59.914762999999994
+      ],
+      [
+       10.727681,
+       59.914767
+      ],
+      [
+       10.727727999999999,
+       59.9148
+      ],
+      [
+       10.727721999999998,
+       59.914801999999995
+      ],
+      [
+       10.727588,
+       59.914850000000015
+      ],
+      [
+       10.727789000000001,
+       59.91500099999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w90768977",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "4",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 21.16,
+    "ground_median_m": 21.84,
+    "ground_max_m": 23.83,
+    "roof_top_median_m": 34.73,
+    "roof_top_p95_m": 39.73,
+    "laser_points": 6,
+    "height_above_ground_median_m": 12.89,
+    "height_above_ground_p95_m": 17.89,
+    "source": "Outline OSM w90768977 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.728114,
+       59.915136000000004
+      ],
+      [
+       10.728124,
+       59.91502599999999
+      ],
+      [
+       10.72829,
+       59.915020999999996
+      ],
+      [
+       10.728288,
+       59.91501100000002
+      ],
+      [
+       10.728307,
+       59.915003
+      ],
+      [
+       10.728124,
+       59.914905
+      ],
+      [
+       10.728117999999998,
+       59.91490799999998
+      ],
+      [
+       10.728091999999998,
+       59.91489500000001
+      ],
+      [
+       10.728131,
+       59.91487600000001
+      ],
+      [
+       10.728089,
+       59.914854
+      ],
+      [
+       10.728237,
+       59.91478199999999
+      ],
+      [
+       10.728241999999998,
+       59.91477800000001
+      ],
+      [
+       10.728313,
+       59.914817
+      ],
+      [
+       10.72831,
+       59.91482
+      ],
+      [
+       10.728793,
+       59.915073
+      ],
+      [
+       10.728757,
+       59.91511899999999
+      ],
+      [
+       10.72865,
+       59.915121000000006
+      ],
+      [
+       10.728649999999998,
+       59.91511899999999
+      ],
+      [
+       10.728543000000002,
+       59.915122
+      ],
+      [
+       10.728543000000002,
+       59.91512399999999
+      ],
+      [
+       10.728375,
+       59.915128999999986
+      ],
+      [
+       10.728374999999998,
+       59.915126999999984
+      ],
+      [
+       10.728114,
+       59.915136000000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w90768997",
+    "name": "retail",
+    "osm_tags": {
+     "building": "retail",
+     "building:levels": "5",
+     "roof:shape": "saltbox"
+    },
+    "ground_min_m": 21.38,
+    "ground_median_m": 21.73,
+    "ground_max_m": 23.84,
+    "roof_top_median_m": 39.37,
+    "roof_top_p95_m": 42.54,
+    "laser_points": 35,
+    "height_above_ground_median_m": 17.64,
+    "height_above_ground_p95_m": 20.81,
+    "source": "Outline OSM w90768997 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.727822,
+       59.912762999999984
+      ],
+      [
+       10.727088,
+       59.91301499999999
+      ],
+      [
+       10.727045999999998,
+       59.91298299999999
+      ],
+      [
+       10.726885,
+       59.912928
+      ],
+      [
+       10.72691,
+       59.91291899999999
+      ],
+      [
+       10.726847999999999,
+       59.91287499999999
+      ],
+      [
+       10.72758,
+       59.912623
+      ],
+      [
+       10.7276787,
+       59.912680400000006
+      ],
+      [
+       10.727822,
+       59.912762999999984
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w90967640",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "10"
+    },
+    "ground_min_m": 1.76,
+    "ground_median_m": 12.36,
+    "ground_max_m": 12.92,
+    "laser_points": 2,
+    "source": "Outline OSM w90967640 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.72986,
+       59.914872199999984
+      ],
+      [
+       10.7299136,
+       59.91504710000002
+      ],
+      [
+       10.730911199999998,
+       59.91501749999998
+      ],
+      [
+       10.7310118,
+       59.915006
+      ],
+      [
+       10.7310371,
+       59.914971699999995
+      ],
+      [
+       10.7310591,
+       59.9149457
+      ],
+      [
+       10.7310688,
+       59.9149341
+      ],
+      [
+       10.7310797,
+       59.91492130000001
+      ],
+      [
+       10.7310885,
+       59.91491090000001
+      ],
+      [
+       10.730645800000001,
+       59.91482739999999
+      ],
+      [
+       10.7303696,
+       59.9147754
+      ],
+      [
+       10.7303949,
+       59.91473699999999
+      ],
+      [
+       10.7302921,
+       59.9146989
+      ],
+      [
+       10.730284299999997,
+       59.91470189999998
+      ],
+      [
+       10.7302026,
+       59.9147343
+      ],
+      [
+       10.72986,
+       59.914872199999984
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w101782993",
+    "name": "station",
+    "osm_tags": {
+     "building": "station",
+     "layer": "-1"
+    },
+    "ground_min_m": 11.25,
+    "ground_median_m": 16.52,
+    "ground_max_m": 19.26,
+    "laser_points": 1,
+    "source": "Outline OSM w101782993 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.7271809,
+       59.91544149999999
+      ],
+      [
+       10.727243,
+       59.9154395
+      ],
+      [
+       10.727250699999999,
+       59.915501
+      ],
+      [
+       10.7271903,
+       59.91550290000001
+      ],
+      [
+       10.7271908,
+       59.915507
+      ],
+      [
+       10.727032299999998,
+       59.91551199999999
+      ],
+      [
+       10.7270307,
+       59.915499099999984
+      ],
+      [
+       10.7269777,
+       59.915500800000004
+      ],
+      [
+       10.726972200000002,
+       59.91545729999997
+      ],
+      [
+       10.7270235,
+       59.91545569999999
+      ],
+      [
+       10.727021600000002,
+       59.915441
+      ],
+      [
+       10.7271802,
+       59.91543599999999
+      ],
+      [
+       10.7271809,
+       59.91544149999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w118749662",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 24.81,
+    "ground_median_m": 25.68,
+    "ground_max_m": 26.19,
+    "roof_top_median_m": 29.17,
+    "roof_top_p95_m": 29.47,
+    "laser_points": 5,
+    "height_above_ground_median_m": 3.49,
+    "height_above_ground_p95_m": 3.79,
+    "source": "Outline OSM w118749662 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.7263996,
+       59.915473199999994
+      ],
+      [
+       10.726450799999999,
+       59.9154719
+      ],
+      [
+       10.726455099999999,
+       59.91551489999999
+      ],
+      [
+       10.726404900000002,
+       59.9155162
+      ],
+      [
+       10.726406400000002,
+       59.915531
+      ],
+      [
+       10.7262468,
+       59.91553499999999
+      ],
+      [
+       10.7262462,
+       59.9155282
+      ],
+      [
+       10.7261845,
+       59.915529800000016
+      ],
+      [
+       10.726178600000003,
+       59.9154712
+      ],
+      [
+       10.726239399999999,
+       59.91546969999998
+      ],
+      [
+       10.7262387,
+       59.9154635
+      ],
+      [
+       10.726398200000002,
+       59.9154595
+      ],
+      [
+       10.7263996,
+       59.915473199999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w118749690",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 25.75,
+    "ground_median_m": 26.04,
+    "ground_max_m": 26.3,
+    "laser_points": 2,
+    "source": "Outline OSM w118749690 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.7316604,
+       59.91430379999998
+      ],
+      [
+       10.7315589,
+       59.914255399999995
+      ],
+      [
+       10.7309818,
+       59.9139799
+      ],
+      [
+       10.731211800000002,
+       59.9136673
+      ],
+      [
+       10.731225199999999,
+       59.91367120000001
+      ],
+      [
+       10.731460499999999,
+       59.91373990000001
+      ],
+      [
+       10.7313059,
+       59.9139421
+      ],
+      [
+       10.7314905,
+       59.91403129999998
+      ],
+      [
+       10.7316915,
+       59.91412699999999
+      ],
+      [
+       10.7316725,
+       59.91413670000001
+      ],
+      [
+       10.731833699999997,
+       59.914215699999986
+      ],
+      [
+       10.7316604,
+       59.91430379999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w669303852",
+    "name": "retail",
+    "osm_tags": {
+     "building": "retail",
+     "building:levels": "10"
+    },
+    "ground_min_m": 6.01,
+    "ground_median_m": 7.68,
+    "ground_max_m": 9.18,
+    "roof_top_median_m": 30.85,
+    "roof_top_p95_m": 31.04,
+    "laser_points": 6,
+    "height_above_ground_median_m": 23.17,
+    "height_above_ground_p95_m": 23.36,
+    "source": "Outline OSM w669303852 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.7268512,
+       59.91276779999998
+      ],
+      [
+       10.726689,
+       59.91271599999999
+      ],
+      [
+       10.726662099999999,
+       59.9127109
+      ],
+      [
+       10.726640700000003,
+       59.912710600000004
+      ],
+      [
+       10.7266199,
+       59.912711599999994
+      ],
+      [
+       10.7263738,
+       59.91262860000001
+      ],
+      [
+       10.7264817,
+       59.91254820000001
+      ],
+      [
+       10.7265099,
+       59.91253820000001
+      ],
+      [
+       10.7265361,
+       59.91253239999999
+      ],
+      [
+       10.726565599999999,
+       59.912528399999985
+      ],
+      [
+       10.726611,
+       59.91252819999999
+      ],
+      [
+       10.7268083,
+       59.912549899999995
+      ],
+      [
+       10.726845999999998,
+       59.912551599999986
+      ],
+      [
+       10.7268765,
+       59.912549999999996
+      ],
+      [
+       10.7269039,
+       59.91254649999999
+      ],
+      [
+       10.726929500000002,
+       59.9125398
+      ],
+      [
+       10.7272727,
+       59.912421499999994
+      ],
+      [
+       10.7274243,
+       59.912494299999985
+      ],
+      [
+       10.727519099999999,
+       59.9125398
+      ],
+      [
+       10.7268512,
+       59.91276779999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1040907079",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "12",
+     "building:part": "yes",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 2.17,
+    "ground_median_m": 2.33,
+    "ground_max_m": 2.44,
+    "laser_points": 0,
+    "source": "Outline OSM w1040907079 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.727519099999999,
+       59.9125398
+      ],
+      [
+       10.7268512,
+       59.91276779999998
+      ],
+      [
+       10.7267238,
+       59.9127516
+      ],
+      [
+       10.726682200000003,
+       59.91275500000002
+      ],
+      [
+       10.726651299999999,
+       59.91276729999999
+      ],
+      [
+       10.7266259,
+       59.912786599999976
+      ],
+      [
+       10.7266232,
+       59.91281279999998
+      ],
+      [
+       10.726624599999997,
+       59.912844400000004
+      ],
+      [
+       10.725791200000002,
+       59.91257060000001
+      ],
+      [
+       10.7256671,
+       59.912529799999994
+      ],
+      [
+       10.7255698,
+       59.91249779999998
+      ],
+      [
+       10.725602399999998,
+       59.91247289999998
+      ],
+      [
+       10.7255014,
+       59.9124195
+      ],
+      [
+       10.725647199999997,
+       59.912353100000004
+      ],
+      [
+       10.7260788,
+       59.912152
+      ],
+      [
+       10.7263998,
+       59.912002399999984
+      ],
+      [
+       10.72665,
+       59.91212250000001
+      ],
+      [
+       10.7271733,
+       59.91237369999999
+      ],
+      [
+       10.7272727,
+       59.912421499999994
+      ],
+      [
+       10.7274243,
+       59.912494299999985
+      ],
+      [
+       10.727519099999999,
+       59.9125398
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1040907081",
+    "name": "House of Oslo (building)",
+    "osm_tags": {
+     "building": "yes",
+     "layer": "-1",
+     "name": "House of Oslo"
+    },
+    "ground_min_m": -1.33,
+    "ground_median_m": -1.26,
+    "ground_max_m": 7.12,
+    "laser_points": 3,
+    "source": "Outline OSM w1040907081 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.727519099999999,
+       59.9125398
+      ],
+      [
+       10.7268512,
+       59.91276779999998
+      ],
+      [
+       10.7267238,
+       59.9127516
+      ],
+      [
+       10.726682200000003,
+       59.91275500000002
+      ],
+      [
+       10.726651299999999,
+       59.91276729999999
+      ],
+      [
+       10.7266259,
+       59.912786599999976
+      ],
+      [
+       10.7266232,
+       59.91281279999998
+      ],
+      [
+       10.726624599999997,
+       59.912844400000004
+      ],
+      [
+       10.725791200000002,
+       59.91257060000001
+      ],
+      [
+       10.7255698,
+       59.91249779999998
+      ],
+      [
+       10.725602399999998,
+       59.91247289999998
+      ],
+      [
+       10.725617699999999,
+       59.91246249999998
+      ],
+      [
+       10.7256409,
+       59.91245139999999
+      ],
+      [
+       10.7256694,
+       59.9124432
+      ],
+      [
+       10.7256949,
+       59.912437299999986
+      ],
+      [
+       10.725721999999998,
+       59.912434999999974
+      ],
+      [
+       10.7257519,
+       59.9124343
+      ],
+      [
+       10.7257814,
+       59.912437000000004
+      ],
+      [
+       10.7260399,
+       59.91246540000001
+      ],
+      [
+       10.726298,
+       59.91249380000001
+      ],
+      [
+       10.726611,
+       59.91252819999999
+      ],
+      [
+       10.7268083,
+       59.912549899999995
+      ],
+      [
+       10.726845999999998,
+       59.912551599999986
+      ],
+      [
+       10.7268765,
+       59.912549999999996
+      ],
+      [
+       10.7269039,
+       59.91254649999999
+      ],
+      [
+       10.726929500000002,
+       59.9125398
+      ],
+      [
+       10.7272727,
+       59.912421499999994
+      ],
+      [
+       10.7274243,
+       59.912494299999985
+      ],
+      [
+       10.727519099999999,
+       59.9125398
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1040907082",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": -1.33,
+    "ground_median_m": -1.26,
+    "ground_max_m": 7.12,
+    "laser_points": 3,
+    "source": "Outline OSM w1040907082 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.725149999999998,
+       59.916418
+      ],
+      [
+       10.725152,
+       59.91643900000002
+      ],
+      [
+       10.725125,
+       59.916454
+      ],
+      [
+       10.725085,
+       59.916455000000006
+      ],
+      [
+       10.725054,
+       59.916442
+      ],
+      [
+       10.725051999999998,
+       59.916420999999985
+      ],
+      [
+       10.725078,
+       59.916406
+      ],
+      [
+       10.725118999999998,
+       59.916405
+      ],
+      [
+       10.725149999999998,
+       59.916418
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1040907160",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 30.95,
+    "ground_median_m": 31.05,
+    "ground_max_m": 31.21,
+    "laser_points": 2,
+    "source": "Outline OSM w1040907160 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.732985,
+       59.913252
+      ],
+      [
+       10.732722,
+       59.91327700000001
+      ],
+      [
+       10.732624,
+       59.913025999999995
+      ],
+      [
+       10.732634,
+       59.913025000000005
+      ],
+      [
+       10.732891,
+       59.9130003
+      ],
+      [
+       10.732940500000002,
+       59.9131227
+      ],
+      [
+       10.732985,
+       59.913252
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1041214399",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "9",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 5.81,
+    "ground_median_m": 6.16,
+    "ground_max_m": 6.45,
+    "laser_points": 2,
+    "source": "Outline OSM w1041214399 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.732398999999997,
+       59.91379699999999
+      ],
+      [
+       10.732361000000001,
+       59.91371200000001
+      ],
+      [
+       10.732395199999997,
+       59.9137087
+      ],
+      [
+       10.7324327,
+       59.9137937
+      ],
+      [
+       10.732398999999997,
+       59.91379699999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1298205656",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 6.94,
+    "ground_median_m": 7.1,
+    "ground_max_m": 7.38,
+    "laser_points": 0,
+    "source": "Outline OSM w1298205656 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.725152100000003,
+       59.91709120000001
+      ],
+      [
+       10.7251677,
+       59.9170334
+      ],
+      [
+       10.725193300000003,
+       59.91702930000002
+      ],
+      [
+       10.7251767,
+       59.9170931
+      ],
+      [
+       10.725152100000003,
+       59.91709120000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1523490311",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 26.88,
+    "ground_median_m": 27.07,
+    "ground_max_m": 27.31,
+    "laser_points": 1,
+    "source": "Outline OSM w1523490311 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.728451799999998,
+       59.912873299999994
+      ],
+      [
+       10.728589,
+       59.9128405
+      ],
+      [
+       10.728689099999999,
+       59.91281779999998
+      ],
+      [
+       10.728763,
+       59.91280100000001
+      ],
+      [
+       10.728921400000003,
+       59.9127623
+      ],
+      [
+       10.728905300000001,
+       59.91272049999999
+      ],
+      [
+       10.7289021,
+       59.9127123
+      ],
+      [
+       10.728897799999999,
+       59.91270109999999
+      ],
+      [
+       10.728885499999999,
+       59.91267740000001
+      ],
+      [
+       10.728860399999999,
+       59.912593099999995
+      ],
+      [
+       10.7288432,
+       59.912500099999995
+      ],
+      [
+       10.7288216,
+       59.91249289999999
+      ],
+      [
+       10.728795499999999,
+       59.91248319999998
+      ],
+      [
+       10.7287621,
+       59.91246859999999
+      ],
+      [
+       10.727731100000002,
+       59.91197329999997
+      ],
+      [
+       10.7276594,
+       59.91202649999999
+      ],
+      [
+       10.727575299999998,
+       59.9120951
+      ],
+      [
+       10.727531900000002,
+       59.91212900000001
+      ],
+      [
+       10.7283093,
+       59.91249759999999
+      ],
+      [
+       10.728331400000002,
+       59.912520100000016
+      ],
+      [
+       10.7283397,
+       59.9125297
+      ],
+      [
+       10.728347800000002,
+       59.912550200000005
+      ],
+      [
+       10.7283464,
+       59.912572399999995
+      ],
+      [
+       10.728329699999998,
+       59.912600000000005
+      ],
+      [
+       10.7283209,
+       59.9126107
+      ],
+      [
+       10.728306199999999,
+       59.91262110000001
+      ],
+      [
+       10.7279803,
+       59.91271659999999
+      ],
+      [
+       10.727822,
+       59.912762999999984
+      ],
+      [
+       10.7278442,
+       59.912776300000004
+      ],
+      [
+       10.727940400000001,
+       59.912831400000016
+      ],
+      [
+       10.7281344,
+       59.9129435
+      ],
+      [
+       10.728158,
+       59.912957
+      ],
+      [
+       10.728209599999998,
+       59.912940599999985
+      ],
+      [
+       10.728284300000002,
+       59.9129178
+      ],
+      [
+       10.7282995,
+       59.91291309999999
+      ],
+      [
+       10.728451799999998,
+       59.912873299999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "r14170557",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 2.6,
+    "ground_median_m": 10.9,
+    "ground_max_m": 11.31,
+    "laser_points": 4,
+    "source": "Outline OSM r14170557 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  }
+ ]
+}

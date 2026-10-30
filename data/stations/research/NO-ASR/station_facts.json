@@ -1,0 +1,949 @@
+{
+ "clack_id": "NO-ASR",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "name": "Street / station-building level (Torvveien side, by spor 1)",
+   "note": "Bane NOR address Torvveien 4; station building by Niels Torp, Georg Andreas Bull and Ragnvald Utne (NSB Arkitektkontor). Bus and taxi by platform 1. Station is next to Asker's town square (Wikipedia). Signposted level names not found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; Wikipedia, \"Asker Station\" https://en.wikipedia.org/wiki/Asker_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpass by the station building (undergang under sporene)",
+   "note": "Bane NOR: 'Det er undergang under sporene ved stasjonsbygningen'; one ticket machine is in the underpass. OSM: w306981125 (layer -1, ~44 m) reaching platforms 1 and 6; second underpass w1120605495 (layer -1) reaching 6. Wikipedia: underpass decorated by Sven Påhlsson and Erik Wøllo (LED lights and soundtrack).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; Wikipedia, \"Asker Station\" https://en.wikipedia.org/wiki/Asker_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Footbridge over the tracks at the west end (overgangsbroen)",
+   "note": "Bane NOR: lift connected to the footbridge over the tracks at the station's western end. OSM: footbridge w67300743 (layer 1, ~58 m) reaching platforms 1 and 6, and w130660328 (layer 1) reaching 6; lifts tagged level 0;1.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
+  },
+  {
+   "name": "Platform level: side platform 1, island platforms 2/3 and 4/5, side platform 6",
+   "note": "Bane NOR Sportabell: spor 1 side platform 354 m, 700 mm, 10 m; 'Mellomplattform; dekker spor 3 og 2' 365 m, 700 mm, 8.5 m; 'dekker spor 4 og 5' 261 m, 700 mm, 10 m; spor 6 side platform 259 m, 700 mm, 5 m. Tracks 1–3 Askerbanen, 4–6 Drammenbanen; track 1 closest to the town (Wikipedia). OSM extract has only platforms 1 (w133645355) and 6 (w133645357).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; Wikipedia, \"Asker Station\" https://en.wikipedia.org/wiki/Asker_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "track 1",
+   "track": "1",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1 (the train stops with the platform to its north-west)",
+   "_source": "laser (2012-08-21, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "track 4",
+   "track": "4,5",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 4,5 (the train stops with the platform to its south-east)",
+   "_source": "laser (2012-08-21, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 4; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "track 6",
+   "track": "6",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 6 (the train stops with the platform to its south-east)",
+   "_source": "laser (2012-08-21, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 6; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w67300743",
+   "between": [
+    "platform 1 side",
+    "platform 6 side"
+   ],
+   "where": "west end of the station (about 140 m SW of the station-building underpass)",
+   "confirmed_by": "owner text (Bane NOR: 'overgangsbroen over sporene i stasjonens vestre ende') + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4338008,
+    "lat": 59.8329558,
+    "how": "OSM w67300743 (point on the way)",
+    "_source": "OpenStreetMap w67300743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n10128519311",
+    "n10128519312",
+    "n10128519313"
+   ],
+   "between": [
+    "footbridge (level 1)",
+    "ground/platform level (level 0)"
+   ],
+   "where": "at the west-end footbridge; OSM links n10128519313 to platform 1, the other two to no platform ref",
+   "confirmed_by": "owner text (lift at the west-end footbridge) for existence; count and platforms OSM only",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w446633147",
+   "between": [
+    "footbridge",
+    "platform 1"
+   ],
+   "where": "west end",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4334433,
+    "lat": 59.8331162,
+    "how": "OSM w446633147 (point on the way)",
+    "_source": "OpenStreetMap w446633147 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w130660325",
+    "w130660326"
+   ],
+   "between": [
+    "footbridge",
+    "not linked to a platform in OSM"
+   ],
+   "where": "west end, at the footbridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w130660328",
+   "between": [
+    "footbridge",
+    "platform 6"
+   ],
+   "where": "west end, about 122 m SSW of the station-building underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4345489,
+    "lat": 59.832957,
+    "how": "OSM w130660328 (point on the way)",
+    "_source": "OpenStreetMap w130660328 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w133645358",
+    "w533332791"
+   ],
+   "between": [
+    "footbridge",
+    "platform 6"
+   ],
+   "where": "west end",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w306981125",
+   "between": [
+    "platform 1 / station building",
+    "platform 6 side"
+   ],
+   "where": "under the tracks at the station building; contains a ticket machine (card, coins, notes)",
+   "confirmed_by": "owner text + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4352089,
+    "lat": 59.8340053,
+    "how": "OSM w306981125 (point on the way)",
+    "_source": "OpenStreetMap w306981125 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1108261478",
+   "between": [
+    "underpass",
+    "platform 1"
+   ],
+   "where": "about 29 m NW of the middle of the underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4348402,
+    "lat": 59.834184,
+    "how": "OSM w1108261478 (point on the way)",
+    "_source": "OpenStreetMap w1108261478 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1120605495",
+   "between": [
+    "underpass",
+    "platform 6 side"
+   ],
+   "where": "about 35 m SSE of the middle of the main underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4354228,
+    "lat": 59.8337119,
+    "how": "OSM w1120605495 (point on the way)",
+    "_source": "OpenStreetMap w1120605495 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1120605494",
+   "between": [
+    "underpass w1120605495",
+    "platform 6"
+   ],
+   "where": "south side, ~54 m long",
+   "confirmed_by": "OSM only (Bane NOR confirms ramps exist: 'Trapp, rampe og heis til plattformer')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30",
+   "position": {
+    "lon": 10.4348601,
+    "lat": 59.8332161,
+    "how": "OSM w1120605494 (point on the way)",
+    "_source": "OpenStreetMap w1120605494 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1120605496",
+   "between": [
+    "underpass w1120605495",
+    "platform 6"
+   ],
+   "where": "south side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4355955,
+    "lat": 59.8338255,
+    "how": "OSM w1120605496 (point on the way)",
+    "_source": "OpenStreetMap w1120605496 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w67300743",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 57.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w67300743 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4338008,
+    "lat": 59.8329558,
+    "how": "OSM w67300743 (point on the way)",
+    "_source": "OpenStreetMap w67300743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w130660328",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 42.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w130660328 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4345489,
+    "lat": 59.832957,
+    "how": "OSM w130660328 (point on the way)",
+    "_source": "OpenStreetMap w130660328 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w133645358",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w133645358 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.434745,
+    "lat": 59.8328805,
+    "how": "OSM w133645358 (point on the way)",
+    "_source": "OpenStreetMap w133645358 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w306981125",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 43.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w306981125 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4352089,
+    "lat": 59.8340053,
+    "how": "OSM w306981125 (point on the way)",
+    "_source": "OpenStreetMap w306981125 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w446633147",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w446633147 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4334433,
+    "lat": 59.8331162,
+    "how": "OSM w446633147 (point on the way)",
+    "_source": "OpenStreetMap w446633147 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w533332791",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w533332791 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4340274,
+    "lat": 59.8325496,
+    "how": "OSM w533332791 (point on the way)",
+    "_source": "OpenStreetMap w533332791 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w986141136",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w986141136 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4314367,
+    "lat": 59.8311669,
+    "how": "OSM w986141136 (point on the way)",
+    "_source": "OpenStreetMap w986141136 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1106885723",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1106885723 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4334881,
+    "lat": 59.8330639,
+    "how": "OSM w1106885723 (point on the way)",
+    "_source": "OpenStreetMap w1106885723 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1108261478",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1108261478 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4348402,
+    "lat": 59.834184,
+    "how": "OSM w1108261478 (point on the way)",
+    "_source": "OpenStreetMap w1108261478 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1120605494",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 53.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1120605494 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4348601,
+    "lat": 59.8332161,
+    "how": "OSM w1120605494 (point on the way)",
+    "_source": "OpenStreetMap w1120605494 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1120605495",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1120605495 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4354228,
+    "lat": 59.8337119,
+    "how": "OSM w1120605495 (point on the way)",
+    "_source": "OpenStreetMap w1120605495 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1120605496",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1120605496 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4355955,
+    "lat": 59.8338255,
+    "how": "OSM w1120605496 (point on the way)",
+    "_source": "OpenStreetMap w1120605496 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519311",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10128519311 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4339825,
+    "lat": 59.8328374,
+    "how": "OSM n10128519311",
+    "_source": "OpenStreetMap n10128519311 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519312",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10128519312 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4337637,
+    "lat": 59.8329288,
+    "how": "OSM n10128519312",
+    "_source": "OpenStreetMap n10128519312 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519313",
+   "name": null,
+   "osm_level": "0;1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10128519313 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.4334633,
+    "lat": 59.8330457,
+    "how": "OSM n10128519313",
+    "_source": "OpenStreetMap n10128519313 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station (Bane NOR address)",
+   "street": "Torvveien",
+   "where": "Torvveien 4, 1384 Asker; bus stop and taxi by platform 1",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30"
+  },
+  {
+   "name": "OSM entrance=main n8871541081",
+   "osm_id": "n8871541081",
+   "wheelchair": "yes",
+   "where": "about 71 m NNE of the middle of the station underpass, near the bike hotel; no street matched; what building it belongs to is not established",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.435663,
+    "lat": 59.834608,
+    "how": "OSM n8871541081",
+    "_source": "OpenStreetMap n8871541081 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Peppes Pizza (restaurant entrance)",
+   "osm_id": "n1910691572",
+   "street": "Torvveien",
+   "where": "about 67 m W of the middle of the station underpass; restaurant door, not a station entrance",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.434023,
+    "lat": 59.834116,
+    "how": "OSM n1910691572",
+    "_source": "OpenStreetMap n1910691572 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Peppes Pizza",
+   "osm_id": "n1910691572",
+   "street": "Torvveien",
+   "street_how": "nearest named street, 19.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1910691572 (already in OSM)",
+   "position": {
+    "lon": 10.434023,
+    "lat": 59.834116,
+    "how": "OSM n1910691572",
+    "_source": "OpenStreetMap n1910691572 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8871541081",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n8871541081 (already in OSM)",
+   "position": {
+    "lon": 10.435663,
+    "lat": 59.834608,
+    "how": "OSM n8871541081",
+    "_source": "OpenStreetMap n8871541081 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "Mo-Su 04:15-01:45",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building (position not given)",
+   "note": "Hours only on Bane NOR's English page.",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/, read 2026-10-30; Wikipedia, \"Asker Station\" https://en.wikipedia.org/wiki/Asker_Station, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (4)",
+   "where": "one in the underpass (card, coins, notes); three others (card and coins) not placed",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen",
+   "osm_id": "n6122924656",
+   "where": "OSM: inside the station building, about 36 m N of the middle of the underpass; Narvesen store 'Asker jbst.', Torvvn. 4",
+   "note": "No hours: not in OSM; narvesen.no hours did not render.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30",
+   "position": {
+    "lon": 10.435203,
+    "lat": 59.8343309,
+    "osm_id": "n6122924656",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 32.3,
+    "how": "OSM node n6122924656",
+    "_source": "OpenStreetMap n6122924656 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House Asker stasjon",
+   "osm_id": "n7233878633",
+   "where": "OSM: inside the station building, about 30 m NNW of the middle of the underpass",
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM value used ',' between rules; normalised to ';'. Espresso House's own page (no.espressohouse.com/coffee-shops/asker-stasjon/) opened only the store finder.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4350921,
+    "lat": 59.8342747,
+    "osm_id": "n7233878633",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 23.6,
+    "how": "OSM node n7233878633",
+    "_source": "OpenStreetMap n7233878633 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Glorioso",
+   "osm_id": "n10732269229",
+   "where": "'i stasjonen i Asker' (Glorioso), with outdoor seating on the square; OSM: inside the station building, about 52 m NNE of the middle of the underpass",
+   "opening_hours": "Mo-Sa 13:00-21:00; Su 15:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours as published on glorioso.no, labelled July 2026; may be summer hours.",
+   "_source": "Glorioso https://glorioso.no/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4354428,
+    "lat": 59.8344593,
+    "osm_id": "n10732269229",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 46.0,
+    "how": "OSM node n10732269229",
+    "_source": "OpenStreetMap n10732269229 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Peppes Pizza",
+   "osm_id": "n1910691572",
+   "where": "next to the station, entrance on Torvveien (OSM: outside the station building outline, about 67 m W of the underpass)",
+   "opening_hours": "Mo-Su 14:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "peppes.no could not be read (robots disallowed).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.434023,
+    "lat": 59.834116,
+    "osm_id": "n1910691572",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 38.2,
+    "how": "OSM node n1910691572",
+    "_source": "OpenStreetMap n1910691572 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_station",
+   "name": "Asker stasjon (bus)",
+   "osm_id": "n1175143489",
+   "where": "Bane NOR: bus by platform 1; rail-replacement buses from the stop 'Asker stasjon' in Lensmannslia, platforms 21–25; OSM bus_station node about 113 m SW of the underpass",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.433721,
+    "lat": 59.83331,
+    "osm_id": "n1175143489",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.4,
+    "how": "OSM node n1175143489",
+    "_source": "OpenStreetMap n1175143489 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n1910691576",
+   "where": "by platform 1 (Bane NOR); OSM about 33 m W of the underpass",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.4346162,
+    "lat": 59.8340155,
+    "osm_id": "n1910691576",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 5.2,
+    "how": "OSM node n1910691576",
+    "_source": "OpenStreetMap n1910691576 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell ved spor 1 (Bane NOR)",
+   "osm_id": "w513498533",
+   "where": "by track 1 (Bane NOR), 304 places; 51 free covered stands on the 2nd floor above it; OSM about 86 m NNE of the underpass",
+   "fee": "NOK 50 / 30 days via app 'Bane NOR Parkering'",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30",
+   "position": {
+    "lon": 10.435926,
+    "lat": 59.8346964,
+    "osm_id": "w513498533",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 48.1,
+    "how": "representative point of the OSM area w513498533",
+    "_source": "OpenStreetMap w513498533 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell ved spor 6 / Grindegården (Asker kommune)",
+   "where": "by track 6; run by Asker kommune; 56 free uncovered stands next to it",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "\"Glasshuset\" (Bane NOR)",
+   "where": "between Rema 1000 and the parking garage (towards Drammen); 32 places; no new tags issued",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "ATM",
+   "where": "Bane NOR's English page lists an ATM among the station's facilities; position not given and none in the OSM extract",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "parking",
+   "name": "P-hus Onepark Asker (commuter parking 4th floor)",
+   "where": "parking garage at the station; Bane NOR commuter agreement on level 4 (80 places)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Vitusapotek Asker",
+   "brand": "Vitusapotek",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-18:00, Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.4345225,
+    "lat": 59.8343276,
+    "osm_id": "n2501000580",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.8,
+    "how": "OSM node n2501000580",
+    "_source": "OpenStreetMap n2501000580 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n2501000580 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Egon Asker",
+   "brand": "Egon",
+   "cuisine": "pizza;burger;meat;pasta",
+   "opening_hours": "Mo-Th 10:00-23:00; Fr-Sa 10:00-23:30; Su 11:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://egon.no/",
+   "position": {
+    "lon": 10.435615,
+    "lat": 59.834777,
+    "osm_id": "n7964121643",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 76.1,
+    "how": "OSM node n7964121643",
+    "_source": "OpenStreetMap n7964121643 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7964121643 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bank",
+   "name": "Sparebanken Øst Asker",
+   "brand": "Sparebanken Øst",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.4344441,
+    "lat": 59.8342735,
+    "osm_id": "n9253807110",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 28.3,
+    "how": "OSM node n9253807110",
+    "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bank",
+   "name": "Danske bank Asker og Bærum",
+   "brand": "Danske bank",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.4357008,
+    "lat": 59.8349033,
+    "osm_id": "n9264747033",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 89.3,
+    "how": "OSM node n9264747033",
+    "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Kårner",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:30-18:00; Sa 08:00-18:00; Su 09:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.4342687,
+    "lat": 59.8345676,
+    "osm_id": "w87862755",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 48.5,
+    "how": "representative point of the OSM area w87862755",
+    "_source": "OpenStreetMap w87862755 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w87862755 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "yes",
+   "name": "Vasen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.4357836,
+    "lat": 59.8348478,
+    "osm_id": "w817779913",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 63.8,
+    "how": "representative point of the OSM area w817779913",
+    "_source": "OpenStreetMap w817779913 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w817779913 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Island platforms 2/3 and 4/5 are not in the OSM extract, so how they are reached (which stairs/lifts from the footbridge or underpass) is not established. OSM has only 3 lifts at the footbridge, while a lift per platform would need 4; Bane NOR only says 'heis i tilknytning til overgangsbroen'.",
+  "Whether the station-building underpass reaches the island platforms (and has lifts) is unknown; Bane NOR mentions lifts only at the west-end footbridge. Wikipedia says the underpass was replaced by an overpass in the 1990s upgrade, but Bane NOR's current text and the artwork describe a working underpass at the station building.",
+  "Signposted names for the levels, the underpass and the footbridge not found; no heights in any source.",
+  "Narvesen hours missing (not in OSM; narvesen.no unreadable). Espresso House and Peppes hours are from OSM only; Glorioso's published hours are labelled July 2026.",
+  "Rema 1000 is mentioned by Bane NOR as a landmark ('Glasshuset' between Rema 1000 and the parking garage) but is not in the OSM extract and rema.no's page did not render, so it is not listed.",
+  "Nearby but outside the station building per OSM, not listed as station shops: Vitusapotek Asker (n2501000580, OSM Mo-Fr 09:00-18:00, Sa 10:00-15:00), Kårner café (w87862755), Egon (n7964121643), Sparebanken Øst and Danske Bank branches, Vasen shop.",
+  "Toilets: no source mentions toilets at Asker station. ATM position unknown (Bane NOR English page lists one; none in the OSM extract).",
+  "Main station-building entrances are not in OSM (only n8871541081, unattributed)."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no open-question list for Norway; levels, ways to the platforms, entrances and shops requested)",
+   "answer": "Six tracks: side platform 1 (town side, bus and taxi), island platforms 2/3 and 4/5, side platform 6. Two crossings: an underpass at the station building (ticket machine inside; OSM w306981125 reaching platforms 1 and 6, with a ramp and stairs to platform 6 via w1120605495) and a footbridge at the west end with lifts (Bane NOR; OSM has 3 lifts, w67300743). Shops in the station building: Narvesen, Espresso House, Glorioso; Peppes Pizza next door.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; Glorioso https://glorioso.no/, read 2026-10-30"
+  }
+ ]
+}

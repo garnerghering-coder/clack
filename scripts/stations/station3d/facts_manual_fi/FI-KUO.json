@@ -1,0 +1,337 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Tunnel level (OSM level 0): the passenger tunnel from the east end of the station building under the tracks",
+   "other_names": [],
+   "note": "VR: step-free access to the platforms 'through the tunnel at the eastern end of the station building' (tunnelin kautta asemarakennuksen itäpäädystä); route signposted. OSM tags the tunnel pieces w1454976056/w1454976057 level 0 and the lifts 0;1. No signposted level name found.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Platform level (OSM level 1): island platform 1/2 and platform 3",
+   "other_names": [],
+   "note": "All three platforms are korkea (0.55 m class) in Digitraffic; lengths 324 m (1), 320 m (2), 320 m (3). Digitraffic's record for platform 2 is valid from 2023-11-17. OSM gives no level to the station building, Matkakeskus or street; whether they are at tunnel or platform level is not settled.",
+   "_source": "Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w98648887",
+    "w1454976056",
+    "w1454976057"
+   ],
+   "between": [
+    "east end of the station building / Matkakeskus side",
+    "platforms"
+   ],
+   "where": "from the eastern end of the station building under the tracks (w98648887, 68 m)",
+   "confirmed_by": "owner text (VR)",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13343111132",
+   "between": [
+    "tunnel (0)",
+    "island platform 1/2 (1)"
+   ],
+   "where": "island platform between tracks 1 and 2, at the tunnel",
+   "confirmed_by": "owner text for a lift on the route (VR: 'Käytössä on hissi ja reitti on merkitty opastein'); position and platform OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kuopio_platform_vayla.geojson): tracks 1 and 2 are about 12 m apart with the island between them; track 3 is about 5 m north of track 2",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13343111135",
+   "between": [
+    "tunnel (0)",
+    "platform 3 (1)"
+   ],
+   "where": "platform north of track 3, at the tunnel",
+   "confirmed_by": "OSM only (VR mentions one lift in the singular)",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kuopio_platform_vayla.geojson): tracks 1 and 2 are about 12 m apart with the island between them; track 3 is about 5 m north of track 2",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1563642375"
+   ],
+   "between": [
+    "tunnel",
+    "island platform 1/2"
+   ],
+   "where": "island platform 1/2 next to the lift",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kuopio_platform_vayla.geojson): tracks 1 and 2 are about 12 m apart with the island between them; track 3 is about 5 m north of track 2",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w98648889"
+   ],
+   "between": [
+    "tunnel",
+    "platform 3"
+   ],
+   "where": "platform 3 next to the lift",
+   "confirmed_by": "OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (kuopio_platform_vayla.geojson): tracks 1 and 2 are about 12 m apart with the island between them; track 3 is about 5 m north of track 2",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w626004894",
+   "between": [
+    "south side",
+    "north side"
+   ],
+   "where": "second underpass about 60 m east of the station tunnel (61 m long); no platform exits in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w24698354",
+   "between": [
+    "south side",
+    "north side"
+   ],
+   "where": "about 100 m west of the tunnel, crossing the tracks at the west end of the platforms; stairs w810700762 and w199843192 at its ends; no platform access in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "kind": "step_free_route",
+   "between": [
+    "street",
+    "station hall"
+   ],
+   "where": "VR: step-free access to the station hall",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building (rautatieasema)",
+   "street": "Asemakatu (address Asemakatu 1)",
+   "level": null,
+   "where": "south side of the tracks; OSM main entrance n5910158515 and entrances n12694051400/n12694081601 lie on Asemakatu",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "name": "Matkakeskus, bus-station doors",
+   "street": "Puutarhakatu (address Puutarhakatu 3)",
+   "level": null,
+   "where": "the travel centre's external doors to the bus station; VR's assistance point is indoors next to them",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30"
+  },
+  {
+   "name": "P-Matkakeskus pedestrian exits",
+   "street": "Puutarhakatu 11 (K-Supermarket Portti entrance) and Puutarhakatu 15",
+   "level": null,
+   "where": "from the parking hall; by day there is an indoor link from the parking hall to the railway station, in the evening and at night pedestrians must use the Puutarhakatu exits",
+   "_source": "EuroPark, \"P-Matkakeskus, Kuopio\", https://www.europark.fi/en/?p=6808, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building / Matkakeskus",
+   "opening_hours": "Mo-Sa 05:00-24:00; Su 06:00-24:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR ticket machines (2)",
+   "where": "one inside the station building, one on the Matkakeskus side",
+   "note": "No VR service point.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "osm_id": "n14200533424",
+   "where": "in the station building (OSM)",
+   "note": "VR lists a WC; no fee information.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Kuopio Asema",
+   "osm_id": "n12379097310",
+   "where": "Asemakatu 1 (station building)",
+   "opening_hours": "Mo-Fr 05:15-19:00; Sa,Su 10:00-19:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Services: Hodarit, Paninit, Waltti matkakortti.",
+   "_source": "https://www.r-kioski.fi/kioskit/kuopio-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Bar & Cafe Asema",
+   "osm_id": "n1831133748",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa,Su 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Pubi",
+   "osm_id": "n1831133792",
+   "where": "in the station building (OSM)",
+   "note": "OSM only; no hours.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Ravintola Portti",
+   "osm_id": "n8946375510",
+   "where": "in the station building complex (OSM in_station_building; exact unit not known)",
+   "opening_hours": "Mo-Fr 09:00-16:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Linjurin Kukka",
+   "osm_id": "n5520494465",
+   "where": "in the station building complex (OSM in_station_building; exact unit not known)",
+   "opening_hours": "Mo-Su 08:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nosto",
+   "osm_id": "n12713743805",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "parcel_locker",
+   "name": "Budbee",
+   "osm_id": "n12713743804",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Europcar",
+   "osm_id": "n1831133756",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Hertz",
+   "osm_id": "n1831133767",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "K-Supermarket Portti",
+   "osm_id": "n9775872343",
+   "where": "Puutarhakatu 11, next to P-Matkakeskus (outside the station building per OSM)",
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "EuroPark, \"P-Matkakeskus, Kuopio\", https://www.europark.fi/en/?p=6808, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Barot's Kuopio",
+   "osm_id": "n8946375509",
+   "where": "near the station, outside the station building (OSM)",
+   "opening_hours": "Mo-Th 10:30-21:00; Fr,Sa 10:30-22:00; Su 12:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "indoors in the Matkakeskus (Puutarhakatu 3), next to the bus station's external doors; seats shared with bus passengers",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Kuopion linja-autoasema (bus and train terminal)",
+   "osm_id": "w892923014",
+   "where": "next to the Matkakeskus; trains and regional/long-distance buses use the same terminal; nearest local (Vilkku) stops on Puijonkatu about 100 m away",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30; Vilkku (Kuopio regional public transport), https://vilkku.kuopio.fi/en/tourist, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Matkakeskus (EuroPark)",
+   "osm_id": "w770688426",
+   "where": "Puutarhakatu 15; P1 short-term, P2–P3 contract, P4 shareholders; EV charging P1–P3; max height 2.3 m",
+   "opening_hours": "24/7",
+   "hours_source": "website (EuroPark)",
+   "hours_checked": "2026-10-30",
+   "fee": "€2.40 per started 60 min; €13.40 / 24 h",
+   "_source": "EuroPark, \"P-Matkakeskus, Kuopio\", https://www.europark.fi/en/?p=6808, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_rental",
+   "name": "Asemapiha",
+   "osm_id": "n11921680314",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not settled: no source names them. OSM: tunnel 0, platforms 1.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "From the tunnel at the east end of the station building: lift + stairs to island platform 1/2 and lift + stairs to platform 3 (OSM). VR confirms a signposted step-free route with a lift through the tunnel.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+  },
+  {
+   "question": "Missing entrances",
+   "answer": "Station building on Asemakatu 1; Matkakeskus/bus-station doors at Puutarhakatu 3; parking-hall exits Puutarhakatu 11 and 15 (indoor link to the station by day only).",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; EuroPark, \"P-Matkakeskus, Kuopio\", https://www.europark.fi/en/?p=6808, read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Waiting room (VR) and R-kioski (own site) settled; café/restaurant/florist from OSM only; Pubi, car rentals without hours.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; https://www.r-kioski.fi/kioskit/kuopio-asema/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Level heights: no source measures them; the laser pass flags platform 1 at 0.92 m above the track bed vs class 0.55 m (see REVIEW).",
+  "Signposted level names: none found.",
+  "Whether platform 1 is the island between tracks 1 and 2 (as the OSM lift position suggests) or an edge platform at the station building: not confirmed by any owner text or plan.",
+  "Second lift (n13343111135, platform 3) is OSM only; VR mentions one lift.",
+  "Which floor the station building, the Matkakeskus hall and the street are on relative to the tunnel (OSM gives no level).",
+  "Opening date of the new Matkakeskus (end of January 2021) is known only from a consultant (WSP) page, not an allowed source; not used.",
+  "Bar & Cafe Asema, Ravintola Portti, Linjurin Kukka, Pubi, K-Supermarket Portti: own-website hours not checked (web search budget ran out during this pass).",
+  "Väylävirasto station-area map (asemien lähialuekartat) could not be fetched.",
+  "Toilet fee not given by any source; taxi rank position not given (VR only advertises a taxi discount)."
+ ]
+}

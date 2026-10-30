@@ -1,0 +1,309 @@
+{
+ "clack_id": "860000275",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal / street level, Banegårdspladsen",
+   "other_names": [],
+   "note": "DSB 'forhal'.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel under the tracks",
+   "other_names": [],
+   "note": "OSM underpass w25607568 (108 m, layer -1).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w25607568",
+   "between": [
+    "station side",
+    "far side / platforms"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30",
+   "position": {
+    "lon": 8.9764558,
+    "lat": 56.1332703,
+    "how": "OSM w25607568 (point on the way)",
+    "_source": "OpenStreetMap w25607568 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "tunnel or hall",
+    "platforms"
+   ],
+   "where": "not mapped in OSM",
+   "hours": "during the station's opening hours ('i stationens åbningstid')",
+   "confirmed_by": "owner text only",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1534670026",
+    "w1534949087",
+    "w1534949090",
+    "w1535790666"
+   ],
+   "between": [
+    "street/hall",
+    "tunnel or platforms (not tagged)"
+   ],
+   "where": "around the station (OSM)",
+   "hours": "during the station's opening hours",
+   "confirmed_by": "owner text (presence) + OSM (positions only)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n8700980092",
+   "name": "Entrance",
+   "street": "Banegårdspladsen",
+   "confirmed_by": "OSM + DSB address Banegårdspladsen 6C",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30",
+   "position": {
+    "lon": 8.9781028,
+    "lat": 56.1334153,
+    "how": "OSM n8700980092",
+    "_source": "OpenStreetMap n8700980092 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n8700980102",
+   "name": "Entrance",
+   "street": "Sølvgade",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30",
+   "position": {
+    "lon": 8.9783228,
+    "lat": 56.1336221,
+    "how": "OSM n8700980102",
+    "_source": "OpenStreetMap n8700980102 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8700980092",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 22.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8700980092 (already in OSM)",
+   "position": {
+    "lon": 8.9781028,
+    "lat": 56.1334153,
+    "how": "OSM n8700980092",
+    "_source": "OpenStreetMap n8700980092 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8700980102",
+   "street": "Sølvgade",
+   "street_how": "nearest named street, 23.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8700980102 (already in OSM)",
+   "position": {
+    "lon": 8.9783228,
+    "lat": 56.1336221,
+    "how": "OSM n8700980102",
+    "_source": "OpenStreetMap n8700980102 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n9593088619",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 07:30-23:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list on 2026-10-30. OSM tags it amenity=fast_food.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30",
+   "position": {
+    "lon": 8.9784711,
+    "lat": 56.133613,
+    "osm_id": "n9593088619",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 283.9,
+    "how": "OSM node n9593088619",
+    "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Station's Pizza Kebap",
+   "osm_id": "n13983896221",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30",
+   "position": {
+    "lon": 8.9779144,
+    "lat": 56.1332732,
+    "osm_id": "n13983896221",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 294.9,
+    "how": "OSM node n13983896221",
+    "_source": "OpenStreetMap n13983896221 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall",
+   "opening_hours": "Mo-Su 04:00-02:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Betalingstoilet / handicaptoilet",
+   "where": "in the forhal; owned and run by the municipality",
+   "fee": "paid; price not stated",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "where": "station; available during forhal hours",
+   "fee": "per started day: S 30 kr, L 60 kr; card",
+   "opening_hours": "Mo-Su 04:00-02:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billetautomat",
+   "where": "position not given",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "w1426357381",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30",
+   "position": {
+    "lon": 8.9772062,
+    "lat": 56.1334443,
+    "osm_id": "w1426357381",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 334.2,
+    "how": "representative point of the OSM area w1426357381",
+    "_source": "OpenStreetMap w1426357381 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 20 spaces (another DSB section says about 100); 1 locked bicycle shelter",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Scandic Regina Restaurant",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 8.9789228,
+    "lat": 56.1334669,
+    "osm_id": "n4122090542",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 251.6,
+    "how": "OSM node n4122090542",
+    "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Scandic Lobby Shop",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 8.9789858,
+    "lat": 56.1334557,
+    "osm_id": "n9231041674",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 247.7,
+    "how": "OSM node n9231041674",
+    "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "DSB 7-Eleven",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 8.9784711,
+    "lat": 56.133613,
+    "osm_id": "n9593088619",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 283.9,
+    "how": "OSM node n9593088619",
+    "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "OSM platforms carry no refs and lie about 250-330 m from the station amenities in the extract (to_nearest_platform_m); platform geometry or the extract centre should be checked against the register (perron 1: spor 1/2/43a, 2: spor 3/4).",
+  "DSB lists an elevator but OSM maps no lift; position unknown.",
+  "Toilet price/hours not given (municipal).",
+  "Station's Pizza Kebap hours missing.",
+  "Scandic Regina restaurant/lobby shop next door: not part of the station, not included.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

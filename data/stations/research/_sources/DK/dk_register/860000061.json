@@ -1,0 +1,112 @@
+{
+ "clack_id": "860000061",
+ "name": "Skanderborg",
+ "bilag_name": "Skanderborg",
+ "station_abbr": [
+  "Sd"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "56.0433619 9.9238011 56.0434386 9.9243833 56.0435106 9.9248416 56.0436225 9.9254710 56.0437548 9.9261461 56.0439546 9.9270157 56.0440858 9.9275100 56.0442037 9.9279388 56.0443719 9.9284830 56.0443995 9.9285666",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 220,
+   "Bredd_m": 4.3,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000061-23-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "23",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Sd); extent: Banedanmark platform outline FOR_PERRONER_OD Sd 171 beside the track (320 m along it; Bilag 220 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2",
+   "Points": "56.0433510 9.9233805 56.0433581 9.9234475 56.0433608 9.9234729 56.0433912 9.9237206 56.0434143 9.9239023 56.0434680 9.9242984 56.0435553 9.9248628 56.0436596 9.9254655 56.0437320 9.9258153 56.0438023 9.9261721 56.0438917 9.9265698 56.0439779 9.9269215 56.0439919 9.9269947 56.0441387 9.9275481 56.0442360 9.9278949 56.0444134 9.9284815 56.0445286 9.9288214",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 266,
+   "Bredd_m": 8.3,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000061-23-2-2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "23",
+   "x_perron": "2",
+   "x_track": "2",
+   "x_perron_tracks": [
+    "2",
+    "3"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Sd); extent: Banedanmark platform outline FOR_PERRONER_OD Sd 172 beside the track (365 m along it; Bilag 266 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 3",
+   "Points": "56.0434558 9.9233431 56.0434637 9.9234119 56.0434714 9.9234790 56.0435502 9.9240977 56.0436005 9.9244482 56.0436672 9.9248670 56.0437321 9.9252439 56.0437943 9.9255713 56.0438756 9.9259717 56.0439641 9.9263818 56.0440106 9.9265889 56.0440579 9.9267888 56.0441072 9.9269882 56.0441632 9.9272052 56.0442213 9.9274215 56.0442872 9.9276584 56.0443560 9.9278964 56.0444261 9.9281305 56.0444954 9.9283536 56.0445649 9.9285689 56.0446174 9.9287256",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 266,
+   "Bredd_m": 8.4,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000061-23-2-3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "23",
+   "x_perron": "2",
+   "x_track": "3",
+   "x_perron_tracks": [
+    "2",
+    "3"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Sd); extent: Banedanmark platform outline FOR_PERRONER_OD Sd 172 beside the track (361 m along it; Bilag 266 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000061-23-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000061-23-2-2",
+   "IndKod": "2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000061-23-2-3",
+   "IndKod": "3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [
+  "Perron 1 track 1: the outline FOR_PERRONER_OD Sd 171 runs 320 m along the track, Bilag says 220 m; line drawn to the outline",
+  "Perron 2 track 2: the outline FOR_PERRONER_OD Sd 172 runs 365 m along the track, Bilag says 266 m; line drawn to the outline",
+  "Perron 2 track 3: the outline FOR_PERRONER_OD Sd 172 runs 361 m along the track, Bilag says 266 m; line drawn to the outline"
+ ],
+ "heights": {
+  "55": 0.55
+ }
+}

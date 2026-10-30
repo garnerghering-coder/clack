@@ -1,0 +1,335 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform / street level (three island platforms; station building on Jernbaneveien; west side on Vestveien)",
+   "note": "Signposted name not found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Undergangen (pedestrian underpass under the tracks)",
+   "note": "Bane NOR's word ('ved undergangen' for the ticket machine). Signposted name not found. OSM maps the underpass with stairs, long ramps and three lifts up to level 0.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n9941248952",
+    "n9941248966",
+    "n9941248968"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "platforms (0)"
+   ],
+   "where": "three lifts along the underpass, about 20-25 m apart (west to east: n9941248952, n9941248966, n9941248968); OSM tags wheelchair=yes but the extract has no platform geometry, so which lift serves which island platform is not linked",
+   "confirmed_by": "owner text ('Trapp, rampe og heis til plattformer') + OSM positions",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_ids": [
+    "w813679176",
+    "w813679184"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "level 0"
+   ],
+   "where": "from the middle of the underpass (58 m each)",
+   "confirmed_by": "owner text (ramps to platforms) + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_ids": [
+    "w203517931",
+    "w404613782",
+    "w813679167"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "level 0, north-east towards Jernbaneveien / the station building"
+   ],
+   "where": "east end of the underpass (58-74 m)",
+   "confirmed_by": "OSM only (owner text confirms ramps exist)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_ids": [
+    "w404613786",
+    "w404613787"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "level 0, south-west side"
+   ],
+   "where": "west end of the underpass (67-78 m)",
+   "confirmed_by": "OSM only (owner text confirms ramps exist)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w813679149",
+    "w813679151",
+    "w813679155",
+    "w813679157",
+    "w813679175",
+    "w813679189",
+    "w203517927",
+    "w965705808",
+    "w965705812",
+    "w965842523"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "level 0"
+   ],
+   "where": "short stair flights (3-5 m) along the underpass; OSM ramp=no",
+   "confirmed_by": "OSM only (owner text confirms stairs)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w203517929",
+    "w203517930",
+    "w1339771602",
+    "w1339771603"
+   ],
+   "between": [
+    "undergangen (-1)",
+    "level 0"
+   ],
+   "where": "at the east (w203517929) and south-west (w203517930, w1339771602/3) underpass mouths, beside the ramps",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w813679163",
+    "w813679172",
+    "w813679181",
+    "w813679193",
+    "w813679194",
+    "w404613781",
+    "w813679148",
+    "w813679171",
+    "w813679182",
+    "w1084938965"
+   ],
+   "between": [
+    "east side (Jernbaneveien)",
+    "west side (Vestveien)"
+   ],
+   "where": "under all tracks",
+   "confirmed_by": "owner text (undergangen) + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Stasjonsbygget, main doors",
+   "street": "Jernbaneveien",
+   "level": "0",
+   "osm_ids": [
+    "n9941248970",
+    "n9941248971"
+   ],
+   "where": "station building on Jernbaneveien (Narvesen address Jernbaneveien 1A); OSM entrance=main, 11-18 m from Jernbaneveien",
+   "confirmed_by": "OSM + shop address",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30; https://www.narvesen.no/finn-butikk, read 2026-10-30"
+  },
+  {
+   "name": "Stasjonsbygget, other doors",
+   "street": "Jernbaneveien",
+   "level": "0",
+   "osm_ids": [
+    "n9941248969",
+    "n9941248972"
+   ],
+   "where": "same building, Jernbaneveien side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "name": "West door at the underpass",
+   "street": null,
+   "level": "0",
+   "osm_id": "n9941248953",
+   "where": "sliding door beside the westernmost lift (n9941248952), ~50 m from a named street",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "name": "Vestveien side",
+   "street": "Vestveien",
+   "where": "Bane NOR's address is Vestveien, 1424 Ski; west-side parking, sykkelhotell Vest and rail-replacement buses are on Vestveien",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "kiosk",
+   "name": "Narvesen (Ski Jernbanestasjon, store 115)",
+   "osm_id": "n9941248974",
+   "where": "in the station building, Jernbaneveien 1A",
+   "level_per_plan": "0",
+   "note": "Hours not in OSM; narvesen.no loads hours by script.",
+   "_source": "https://www.narvesen.no/finn-butikk, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café (name not given)",
+   "where": "Bane NOR (English) lists 'Kiosk and café' under refreshments; the Norwegian page says only 'Kiosk'",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett (HC) with stellebord",
+   "osm_id": "n9941248973",
+   "fee": "yes (payment machine)",
+   "where": "in the station building on Jernbaneveien (OSM)",
+   "hours_raw": "closes 18:00 ('Toalettene stenger kl. 18.00'); opening time not given",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "where": "not stated (probably the station building; not confirmed)",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 06:00-19:00; Su 06:45-21:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "Hours from the English page; the Norwegian page gives no waiting-room hours.",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomat",
+   "where": "by the underpass ('ved undergangen'); card and coins",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Ski stasjon Jernbaneveien",
+   "where": "bus quays A, B, C, D, E 'i Jernbaneveien' plus quays in Jernbanesvingen (NSR:StopPlace:4992)",
+   "_source": "Entur NSR stop register, NSR:StopPlace:60944 children (rail NSR:StopPlace:127; buses NSR:StopPlace:129, 4859, 4992), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:60944/children, read 2026-10-30 (NLOD)"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Ski stasjon vest",
+   "where": "west side, quays with private codes 1-3 (NSR:StopPlace:4859)",
+   "_source": "Entur NSR stop register, NSR:StopPlace:60944 children (rail NSR:StopPlace:127; buses NSR:StopPlace:129, 4859, 4992), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:60944/children, read 2026-10-30 (NLOD)"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Buss for tog: Ski Vestveien P-plass",
+   "where": "bus stop at the car park in Vestveien (NSR:StopPlace:129)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; Entur NSR stop register, NSR:StopPlace:60944 children (rail NSR:StopPlace:127; buses NSR:StopPlace:129, 4859, 4992), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:60944/children, read 2026-10-30 (NLOD)"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n9941214006",
+   "where": "OSM taxi rank south of the station (~100 m); Bane NOR lists taxi without location",
+   "confirmed_by": "OSM only for position",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Pendlerparkering",
+   "fee": "250 kr / 30 days, 85 kr / 7 days (Bane NOR app)",
+   "where": "114 spaces east side, 259 west side",
+   "note": "Controlled Mo-Fr 05:00-17:00.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Dagparkering",
+   "fee": "40 kr per day, max 10 days",
+   "where": "35 spaces on the west side",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "HC-parkering",
+   "where": "5 spaces east side, 16 west side",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Vest",
+   "where": "Ski Vest, entrances 'Magda' (64) and 'Anna' (64)",
+   "fee": "50 kr / 30 days (Bane NOR Parkering app)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Øst",
+   "osm_id": "n11499568789",
+   "where": "east side, entrances A, B, C and D",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelstativ",
+   "where": "268 open and 120 covered spaces",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "scooter_parking",
+   "name": "Parkering for sparkesykler",
+   "where": "marked spaces (location not given)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  },
+  {
+   "category": "hotel",
+   "name": "Hotel",
+   "where": "'Rett bak stasjonen' (right behind the station); name not given",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Sporplan Ski stasjon (KO-001788-000, image on the station page)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-s-/ko-001788-000---ski.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Not opened (banenor.no assets do not load via WebFetch)."
+  }
+ ],
+ "answers": [
+  {
+   "question": "Bane NOR's track table looks out of date (it lists one passenger platform, track 3 covering 3 and 2, while OSM has platforms 1;2, 3;4 and 5;6 after the Follobanen opening in Dec 2022): which tracks/platforms are signposted and in use?",
+   "answer": "Six platform tracks, 1-6, on three island platforms: 1/2, 3/4 and 5/6. The Norwegian track table (one island platform for tracks 3 and 2, 600 mm) is the pre-Follobanen table. Bane NOR's own English page for the same station has the current table: island platform between tracks 2 and 1 (350 m, 760 mm, 7 m wide), between tracks 3 and 4 (350 m, 760 mm, 7 m) and between tracks 6 and 5 (288 m, 760 mm, 5 m); island platforms at stub tracks 12/13 (340/100 mm) are for stabling, not passengers. Entur's stop register (what departure boards and journey planners show) has six rail quays with public codes 1, 2, 3, 4, 5, 6. Bane NOR's S-sirkulære 124-2022 put tracks 4, 5 and 6 into use as platform tracks from 6 Aug 2022 (track 6 platform 288 m) and says the eastern line (Østre linje) reaches only tracks 5 and 6. Wikipedia: 'The new station includes six platforms' (meaning six platform tracks). The physical signs (track numbers 1-6) were not seen in a photo or plan, so 'signposted' rests on Entur's public codes.",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; Entur NSR stop register, NSR:StopPlace:60944 children (rail NSR:StopPlace:127; buses NSR:StopPlace:129, 4859, 4992), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:60944/children, read 2026-10-30 (NLOD); Bane NOR S-sirkulære 124-2022 'Østfoldbanen Ski stasjon, endringer i infrastruktur' (1 Aug 2022, valid from 6 Aug 2022 06:00), https://orv.banenor.no/contentassets/660e358608e242f187a758b21fc9d82b/s-sirkulaere_124-2022.pdf, read 2026-10-30; https://en.wikipedia.org/wiki/Ski_Station, read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Bane NOR: stairs, ramp and lift to the platforms. OSM has three lifts, long ramps and short stairs from the underpass. The OSM extract has no platform geometry, so OSM does not say which lift serves which island platform. Three lifts for three island platforms fits, but no source confirms the pairing.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Which lift/ramp/stair reaches which island platform (1/2, 3/4, 5/6): the OSM extract has no platforms; no owner plan read (banenor.no track plan image did not load).",
+  "Physical signage of tracks 1-6 not seen (no photo or plan read); settled from Bane NOR's English track table, Entur public codes and S-sirkulære 124-2022.",
+  "Narvesen Ski Jernbanestasjon hours: narvesen.no loads hours by script; not in OSM.",
+  "The café Bane NOR's English page mentions is not named anywhere.",
+  "Waiting-room location and toilet opening time not given.",
+  "Signposted level names and underpass depth: no source.",
+  "OSM places within ~130 m but outside the station (Ski storsenter, McDonald's, Jams, Stockfleths) are not station amenities and were left out.",
+  "Wikipedia says the whole new station opened in August 2022; Bane NOR says the station area and building were finished when Follobanen opened in December 2022."
+ ]
+}

@@ -1,0 +1,733 @@
+{
+ "clack_id": "fi:RI",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street / platform level (Asema-aukio, station building, platform 1)",
+   "other_names": [],
+   "note": "No signposted level names found in any owner source. The station building (1935, Thure Hellström) stands on Asema-aukio on the town (south) side; track 1 platform is on the building side. Waiting room open daily 05:30-24:00.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpass (alikulkutunneli, to the island platforms and to Peltosaari)",
+   "other_names": [
+    "Peltosaaren alikulku (VR calls it 'the Peltosaari underpass')"
+   ],
+   "note": "OSM maps the underpass on layer -1 and the lifts as level -1;0. Wikipedia: underpass tunnel renovated in 2021. Heights: no source measures them.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "RI L1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "RI L4",
+   "track": "4",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 4 (the train stops with the platform to its east)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "RI L5",
+   "track": "5",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 5 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "RI L7",
+   "track": "7",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 7 (the train stops with the platform to its east)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L7; read 2026-10-30"
+  },
+  {
+   "platform_bis": "RI L8",
+   "track": "8",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 8 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L8; read 2026-10-30"
+  },
+  {
+   "platform_bis": "RI L11",
+   "track": "11",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 11 (the train stops with the platform to its east)",
+   "_source": "laser (2023-06-11, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform RI L11; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w33189031",
+    "w223078019"
+   ],
+   "name": "Peltosaari underpass",
+   "between": [
+    "Asema-aukio / station building (town side)",
+    "Peltosaari side (north)"
+   ],
+   "where": "passes under all tracks from the town side by the station building to Peltosaari; branches up to platforms 4/5 and 7/8 (and the OSM platform Ri0156)",
+   "confirmed_by": "owner text (VR names the Peltosaari underpass) + OSM for its course",
+   "note": "Renovated in 2021 (Wikipedia).",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n2321371633",
+   "between": [
+    "underpass",
+    "island platform tracks 4/5"
+   ],
+   "where": "from the underpass up to the island platform of tracks 4 and 5 (OSM: platform 5 and Ri0106)",
+   "confirmed_by": "OSM only (Wikipedia confirms the lifts were renewed in the 2018–2021 renovation, not their positions)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 24.7816146,
+    "lat": 60.7354961,
+    "how": "OSM n2321371633",
+    "_source": "OpenStreetMap n2321371633 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n2321371629",
+   "between": [
+    "underpass",
+    "island platform tracks 7/8"
+   ],
+   "where": "from the underpass up to the island platform of tracks 7 and 8",
+   "confirmed_by": "OSM only (Wikipedia confirms the lifts were renewed in the 2018–2021 renovation, not their positions)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 24.7820195,
+    "lat": 60.7355325,
+    "how": "OSM n2321371629",
+    "_source": "OpenStreetMap n2321371629 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w223078017",
+   "between": [
+    "underpass",
+    "island platform tracks 4/5"
+   ],
+   "where": "next to the lift n2321371633",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7816612,
+    "lat": 60.73542,
+    "how": "OSM w223078017 (point on the way)",
+    "_source": "OpenStreetMap w223078017 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w223078015",
+   "between": [
+    "underpass",
+    "island platform tracks 7/8"
+   ],
+   "where": "next to the lift n2321371629",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7821011,
+    "lat": 60.7353447,
+    "how": "OSM w223078015 (point on the way)",
+    "_source": "OpenStreetMap w223078015 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w33189036",
+   "between": [
+    "underpass",
+    "OSM platform Ri0156"
+   ],
+   "where": "near the station building end of the underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7812179,
+    "lat": 60.7352659,
+    "how": "OSM w33189036 (point on the way)",
+    "_source": "OpenStreetMap w33189036 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w33189031",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 7",
+    "platform 8",
+    "platform Ri0106",
+    "platform Ri0156"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 141.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w33189031 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.78127,
+    "lat": 60.7354259,
+    "how": "OSM w33189031 (point on the way)",
+    "_source": "OpenStreetMap w33189031 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w33189036",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Ri0156"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w33189036 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7812179,
+    "lat": 60.7352659,
+    "how": "OSM w33189036 (point on the way)",
+    "_source": "OpenStreetMap w33189036 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w33189039",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform Ri0106"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w33189039 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7816412,
+    "lat": 60.7354643,
+    "how": "OSM w33189039 (point on the way)",
+    "_source": "OpenStreetMap w33189039 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w33189041",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 8.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w33189041 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7820434,
+    "lat": 60.7355059,
+    "how": "OSM w33189041 (point on the way)",
+    "_source": "OpenStreetMap w33189041 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w223078014",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform Ri0156"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w223078014 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7812858,
+    "lat": 60.7353815,
+    "how": "OSM w223078014 (point on the way)",
+    "_source": "OpenStreetMap w223078014 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w223078015",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 13.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w223078015 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7821011,
+    "lat": 60.7353447,
+    "how": "OSM w223078015 (point on the way)",
+    "_source": "OpenStreetMap w223078015 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w223078017",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform Ri0106"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w223078017 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7816612,
+    "lat": 60.73542,
+    "how": "OSM w223078017 (point on the way)",
+    "_source": "OpenStreetMap w223078017 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w223078019",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 7",
+    "platform 8",
+    "platform Ri0106",
+    "platform Ri0156"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 49.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w223078019 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7816612,
+    "lat": 60.73542,
+    "how": "OSM w223078019 (point on the way)",
+    "_source": "OpenStreetMap w223078019 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n2321371629",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n2321371629 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7820195,
+    "lat": 60.7355325,
+    "how": "OSM n2321371629",
+    "_source": "OpenStreetMap n2321371629 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n2321371633",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 5",
+    "platform Ri0106"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n2321371633 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.7816146,
+    "lat": 60.7354961,
+    "how": "OSM n2321371633",
+    "_source": "OpenStreetMap n2321371633 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance (pääsisäänkäynti)",
+   "street": "Asema-aukio",
+   "level": "0",
+   "where": "station building front on Asema-aukio; OSM has six entrance nodes on the building (n2286986195, n2320185843, n2320185844, n2320185848, n2320185849, n2320185850), all nearest to Asema-aukio",
+   "_source": "Wikimedia Commons, File:Riihimäen rautatieasema. Asema-aukio.jpg ('Main entrance, Railway station, Station Square', 2019), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30"
+  },
+  {
+   "name": "Peltosaari underpass, Peltosaari end",
+   "street": null,
+   "level": "-1/0",
+   "where": "north side of the tracks, end of the underpass towards Peltosaari",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2286986195",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 8.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2286986195 (already in OSM)",
+   "position": {
+    "lon": 24.7811352,
+    "lat": 60.7346708,
+    "how": "OSM n2286986195",
+    "_source": "OpenStreetMap n2286986195 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2320185843",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 23.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2320185843 (already in OSM)",
+   "position": {
+    "lon": 24.7811261,
+    "lat": 60.7351649,
+    "how": "OSM n2320185843",
+    "_source": "OpenStreetMap n2320185843 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2320185844",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 4.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2320185844 (already in OSM)",
+   "position": {
+    "lon": 24.7807759,
+    "lat": 60.7351293,
+    "how": "OSM n2320185844",
+    "_source": "OpenStreetMap n2320185844 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2320185848",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 5.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2320185848 (already in OSM)",
+   "position": {
+    "lon": 24.780967,
+    "lat": 60.7347868,
+    "how": "OSM n2320185848",
+    "_source": "OpenStreetMap n2320185848 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2320185849",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2320185849 (already in OSM)",
+   "position": {
+    "lon": 24.7807624,
+    "lat": 60.7346232,
+    "how": "OSM n2320185849",
+    "_source": "OpenStreetMap n2320185849 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2320185850",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 4.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2320185850 (already in OSM)",
+   "position": {
+    "lon": 24.7810538,
+    "lat": 60.7346723,
+    "how": "OSM n2320185850",
+    "_source": "OpenStreetMap n2320185850 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Waiting room (odotustila)",
+   "where": "station building (station hall)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:30-24:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Riihimäki Asema",
+   "osm_id": "n2418536875",
+   "where": "in the station building (Asema-aukio 2)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:45-19:30; Sa,Su 09:00-18:30",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM opening_hours differs (Sa 07:30-18:30; Su 09:00-18:30); the shop's own page is used. Services: hot dogs, baked goods, paninis, Wolt pickup point.",
+   "_source": "https://www.r-kioski.fi/kioskit/riihimaki-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7810736,
+    "lat": 60.7350629,
+    "osm_id": "n2418536875",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n2418536875",
+    "_source": "OpenStreetMap n2418536875 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet",
+   "osm_id": "n7159961235",
+   "fee": "yes (per OSM; VR gives no fee)",
+   "where": "in the station building",
+   "level_per_plan": "0",
+   "note": "VR lists a toilet among the station's services; fee=yes and position from OSM.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7810875,
+    "lat": 60.7351413,
+    "osm_id": "n7159961235",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.6,
+    "how": "OSM node n7159961235",
+    "_source": "OpenStreetMap n7159961235 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Otto",
+   "where": "in the station hall waiting area",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR ticket machine",
+   "osm_id": "n7159961234",
+   "where": "in the station building (OSM)",
+   "note": "VR: no VR service point at Riihimäki.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30",
+   "position": {
+    "lon": 24.7810875,
+    "lat": 60.7352029,
+    "osm_id": "n7159961234",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.2,
+    "how": "OSM node n7159961234",
+    "_source": "OpenStreetMap n7159961234 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "Assistance meeting point (VR avustuspalvelu)",
+   "where": "town side of the station building near the Peltosaari underpass, with a shelter nearby; book on 0800 188 822 at least 24 h ahead (Mo-Fr 05-22, Sa-Su 07-22)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taksitolppa, Riihimäen rautatieasema",
+   "osm_id": "w1416699996",
+   "where": "by the station (OSM)",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "VR lists taxi (Lähitaksi discount) as a connection.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30",
+   "position": {
+    "lon": 24.7805886,
+    "lat": 60.7349473,
+    "osm_id": "w1416699996",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 30.8,
+    "how": "representative point of the OSM area w1416699996",
+    "_source": "OpenStreetMap w1416699996 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_station",
+   "name": "Matkakeskus (bus travel centre)",
+   "where": "southern side of the station, completed 2009",
+   "_source": "https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Eväspysäkki",
+   "osm_id": "w37761026",
+   "where": "by the station, not in the station building (OSM)",
+   "opening_hours": "Mo-Th 10:00-24:00; Fr 10:00-01:00; Sa 11:00-01:00; Su 11:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30",
+   "position": {
+    "lon": 24.7803523,
+    "lat": 60.7353836,
+    "osm_id": "w37761026",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 28.2,
+    "how": "representative point of the OSM area w37761026",
+    "_source": "OpenStreetMap w37761026 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n7159961235",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7159961235 (read 2026-10-30)",
+   "position": {
+    "lon": 24.7810875,
+    "lat": 60.7351413,
+    "osm_id": "n7159961235",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.6,
+    "how": "OSM node n7159961235",
+    "_source": "OpenStreetMap n7159961235 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Bulldog Bar",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 24.7806657,
+    "lat": 60.7345669,
+    "osm_id": "n1319193150",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 39.7,
+    "how": "OSM node n1319193150",
+    "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "post_office",
+   "name": "Postin jakelukeskus",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 24.781992,
+    "lat": 60.7333232,
+    "osm_id": "n2426359019",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 22.4,
+    "how": "OSM node n2426359019",
+    "_source": "OpenStreetMap n2426359019 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n2426359019 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Level names: no owner source signposts names for the street level or the underpass.",
+  "Lift positions and whether track 1 / temporary track 11 platforms are step-free from the street: VR's page lists no lifts; positions are OSM only.",
+  "OSM platforms Ri0106 and Ri0156 carry internal refs, not track numbers. Ri0106 shares lift/stairs with platform 5, so it is probably the track 4 face of island 4/5; Ri0156 (reached by stairs w33189036 near the building) may be the track 1 platform. No source states this.",
+  "Restaurant in the station building: a yrittajat.fi event page names 'Riihimäen rautatieaseman ravintola Taco 4 Wine' at Asema-aukio 2, and Commons has a 2019 photo of a restaurant entrance in the station interior, but no current website or hours were found, so it is left out of amenities.",
+  "Toilet fee amount and hours not given by VR; fee=yes is OSM only.",
+  "Väylävirasto's station area map page (vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat, linked from VR's station pages) could not be read (fetch error), so no plan is listed."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
+   "answer": "Two levels: street level (Asema-aukio, station building, track 1 platform side) and the Peltosaari underpass below the tracks. Platforms at tracks 1, 4, 5, 7, 8 and temporary 11 (Digitraffic, Wikipedia). OSM has one lift and one stair from the underpass to each island platform (4/5 and 7/8); Wikipedia confirms lifts renewed in 2018–2021. Waiting room 05:30-24:00 daily (VR). Only in-building shop: R-kioski.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-RI/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ]
+}

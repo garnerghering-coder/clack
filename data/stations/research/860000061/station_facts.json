@@ -1,0 +1,543 @@
+{
+ "clack_id": "860000061",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal / street level, Banegårdspladsen",
+   "other_names": [],
+   "note": "DSB 'forhal'.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel under the tracks",
+   "other_names": [],
+   "note": "OSM underpass w49512712 (92 m), lifts and stairs up to perron 1 and 2/3.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n4322092394",
+   "between": [
+    "tunnel",
+    "perron 1 (spor 1)"
+   ],
+   "where": "from the tunnel up to platform 1",
+   "confirmed_by": "owner text (DSB: 'Elevator', presence only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9246302,
+    "lat": 56.04339,
+    "how": "OSM n4322092394",
+    "_source": "OpenStreetMap n4322092394 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w433516648",
+   "between": [
+    "tunnel",
+    "perron 2 (spor 2/3)"
+   ],
+   "where": "from the tunnel up to the island platform 2/3",
+   "confirmed_by": "owner text (presence) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9244534,
+    "lat": 56.0435444,
+    "how": "OSM w433516648 (point on the way)",
+    "_source": "OpenStreetMap w433516648 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w49512205",
+   "between": [
+    "tunnel",
+    "perron 1"
+   ],
+   "where": "beside the platform-1 lift",
+   "confirmed_by": "owner text ('Trapper') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9247798,
+    "lat": 56.0434412,
+    "how": "OSM w49512205 (point on the way)",
+    "_source": "OpenStreetMap w49512205 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w433516646",
+   "between": [
+    "tunnel",
+    "perron 2/3"
+   ],
+   "where": "beside the platform-2/3 lift",
+   "confirmed_by": "owner text + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9247104,
+    "lat": 56.0435873,
+    "how": "OSM w433516646 (point on the way)",
+    "_source": "OpenStreetMap w433516646 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w49512712",
+   "between": [
+    "Banegårdspladsen side",
+    "perron 1 and 2/3"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9246043,
+    "lat": 56.0433859,
+    "how": "OSM w49512712 (point on the way)",
+    "_source": "OpenStreetMap w49512712 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w49512204",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w49512204 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9244724,
+    "lat": 56.0435498,
+    "how": "OSM w49512204 (point on the way)",
+    "_source": "OpenStreetMap w49512204 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w49512205",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w49512205 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9247798,
+    "lat": 56.0434412,
+    "how": "OSM w49512205 (point on the way)",
+    "_source": "OpenStreetMap w49512205 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w49512712",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 92.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w49512712 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9246043,
+    "lat": 56.0433859,
+    "how": "OSM w49512712 (point on the way)",
+    "_source": "OpenStreetMap w49512712 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w433516644",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w433516644 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9246043,
+    "lat": 56.0433859,
+    "how": "OSM w433516644 (point on the way)",
+    "_source": "OpenStreetMap w433516644 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w433516646",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 12.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w433516646 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9247104,
+    "lat": 56.0435873,
+    "how": "OSM w433516646 (point on the way)",
+    "_source": "OpenStreetMap w433516646 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w433516648",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 10.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w433516648 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9244534,
+    "lat": 56.0435444,
+    "how": "OSM w433516648 (point on the way)",
+    "_source": "OpenStreetMap w433516648 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1049602780",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1049602780 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.928471,
+    "lat": 56.0442912,
+    "how": "OSM w1049602780 (point on the way)",
+    "_source": "OpenStreetMap w1049602780 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1450520844",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1450520844 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9273724,
+    "lat": 56.0439597,
+    "how": "OSM w1450520844 (point on the way)",
+    "_source": "OpenStreetMap w1450520844 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4322092394",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n4322092394 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.9246302,
+    "lat": 56.04339,
+    "how": "OSM n4322092394",
+    "_source": "OpenStreetMap n4322092394 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n4321953197",
+   "name": "Main entrance",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "confirmed_by": "OSM only (DSB address is Jernbanevej 3)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30",
+   "position": {
+    "lon": 9.9248564,
+    "lat": 56.0433446,
+    "how": "OSM n4321953197",
+    "_source": "OpenStreetMap n4321953197 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_ids": [
+    "n4321953214",
+    "n4322092398"
+   ],
+   "name": "Entrances",
+   "street": "Banegårdspladsen",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n4321953197",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 6.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4321953197 (already in OSM)",
+   "position": {
+    "lon": 9.9248564,
+    "lat": 56.0433446,
+    "how": "OSM n4321953197",
+    "_source": "OpenStreetMap n4321953197 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4321953214",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 17.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4321953214 (already in OSM)",
+   "position": {
+    "lon": 9.9248082,
+    "lat": 56.0434339,
+    "how": "OSM n4321953214",
+    "_source": "OpenStreetMap n4321953214 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4322092398",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 35.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4322092398 (already in OSM)",
+   "position": {
+    "lon": 9.9244724,
+    "lat": 56.0435498,
+    "how": "OSM n4322092398",
+    "_source": "OpenStreetMap n4322092398 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n1241568977",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 06:45-22:00; Su 08:45-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list on 2026-10-30; OSM agrees with DSB.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30",
+   "position": {
+    "lon": 9.9245708,
+    "lat": 56.0433465,
+    "osm_id": "n1241568977",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n1241568977",
+    "_source": "OpenStreetMap n1241568977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet/Handicaptoilet",
+   "osm_id": "n6900719958",
+   "where": "station building (OSM)",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9249788,
+    "lat": 56.0434462,
+    "osm_id": "n6900719958",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.8,
+    "how": "OSM node n6900719958",
+    "_source": "OpenStreetMap n6900719958 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "osm_id": "n6900799658",
+   "where": "station hall",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9249031,
+    "lat": 56.043395,
+    "osm_id": "n6900799658",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.8,
+    "how": "OSM node n6900799658",
+    "_source": "OpenStreetMap n6900799658 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "position not given",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n439766134",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30",
+   "position": {
+    "lon": 9.9249021,
+    "lat": 56.0433123,
+    "osm_id": "n439766134",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 14.6,
+    "how": "OSM node n439766134",
+    "_source": "OpenStreetMap n439766134 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 257 spaces (100 % occupancy per DSB); 1 locked bicycle shelter",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n6900719958",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n6900719958 (read 2026-10-30)",
+   "position": {
+    "lon": 9.9249788,
+    "lat": 56.0434462,
+    "osm_id": "n6900719958",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.8,
+    "how": "OSM node n6900719958",
+    "_source": "OpenStreetMap n6900719958 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": null,
+   "osm_id": "n6900799658",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n6900799658 (read 2026-10-30)",
+   "position": {
+    "lon": 9.9249031,
+    "lat": 56.043395,
+    "osm_id": "n6900799658",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.8,
+    "how": "OSM node n6900799658",
+    "_source": "OpenStreetMap n6900799658 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 06:45-22:00; Su 08:45-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 9.9245708,
+    "lat": 56.0433465,
+    "osm_id": "n1241568977",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n1241568977",
+    "_source": "OpenStreetMap n1241568977 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1241568977 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Forhal hours not given by DSB.",
+  "7-Eleven not in the 7-Eleven store list; hours from DSB only.",
+  "No lockers listed.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

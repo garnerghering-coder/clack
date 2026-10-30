@@ -1,0 +1,18 @@
+{
+ "file": "kouvola_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 1000",
+ "base_m": 60,
+ "scale": 1000,
+ "nodata_value": 0,
+ "crs": "EPSG:3067 (ETRS-TM35FIN)",
+ "vertical_datum": "N2000",
+ "origin_top_left_EN": [
+  483549,
+  6748011
+ ],
+ "pixel_m": 1,
+ "width": 695,
+ "height": 318,
+ "source": "kouvola_ground_1m.tif (gridded from the laser ground class, CC BY 4.0)"
+}

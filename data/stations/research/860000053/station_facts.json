@@ -1,0 +1,1952 @@
+{
+ "clack_id": "860000053",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Station hall (DSB: 'Forhal') at Banegårdspladsen",
+   "other_names": [
+    "Entrance Hall / Departure Hall (Wikipedia)"
+   ],
+   "note": "OSM level 0: DSB Salg & Service, 7-Eleven, McDonald's, Dunkin', Joe & The Juice, toilets, lockers, waiting room. Signposted level name not found.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station' https://en.wikipedia.org/wiki/Aarhus_Central_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Platform level (below the hall per OSM levels)",
+   "other_names": [],
+   "note": "OSM: escalators w515037624, w1062163969, w1149384817 between levels -1 and 0; an entrance at level -1 (n10692801356). Wikipedia: 'Outside stairways connecting the street level (upper deck) and the railway yard'. Signposted name not found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station' https://en.wikipedia.org/wiki/Aarhus_Central_Station, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5030708505",
+    "n5030711330",
+    "n5030711331",
+    "n5030711332"
+   ],
+   "between": [
+    "station level",
+    "platforms (each lift's platform not tagged in OSM)"
+   ],
+   "where": "a row of four lifts running south from the hall across the platforms",
+   "confirmed_by": "owner text (DSB: 'Adgang til alle perroner med både trapper, rulletrapper og elevator', presence only) + OSM (positions only)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w515037636",
+    "w515037638",
+    "w515037640",
+    "w515037642",
+    "w734550346",
+    "w734550347"
+   ],
+   "between": [
+    "station level",
+    "platforms (not tagged in OSM)"
+   ],
+   "where": "in pairs along the passage south of the hall",
+   "confirmed_by": "owner text (presence) + OSM (positions)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w515037624",
+    "w1062163969",
+    "w1149384817"
+   ],
+   "between": [
+    "level -1",
+    "level 0 (hall)"
+   ],
+   "where": "at the hall, north end of the passage",
+   "confirmed_by": "OSM only (levels -1;0)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w612088281",
+    "w612088282"
+   ],
+   "between": [
+    "hall",
+    "platforms"
+   ],
+   "where": "passage south from the hall (OSM layer -1, about 55 m)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w515037634",
+    "w515037653",
+    "w734550344"
+   ],
+   "between": [
+    "station level",
+    "platforms"
+   ],
+   "where": "beside the escalators",
+   "confirmed_by": "owner text (presence) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w849975158",
+   "between": [
+    "west side (M.P. Bruuns Gade?)",
+    "platforms"
+   ],
+   "where": "west end, about 190 m (OSM)",
+   "confirmed_by": "OSM only; Wikipedia mentions 'platform access from M.P. Bruuns Gade'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station', read 2026-10-30",
+   "position": {
+    "lon": 10.2028656,
+    "lat": 56.1499597,
+    "how": "OSM w849975158 (point on the way)",
+    "_source": "OpenStreetMap w849975158 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w515037624",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 11.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w515037624 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2044775,
+    "lat": 56.1501514,
+    "how": "OSM w515037624 (point on the way)",
+    "_source": "OpenStreetMap w515037624 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w515037636",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 19.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w515037636 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2046102,
+    "lat": 56.1500077,
+    "how": "OSM w515037636 (point on the way)",
+    "_source": "OpenStreetMap w515037636 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w515037638",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 19.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w515037638 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.204328,
+    "lat": 56.149926,
+    "how": "OSM w515037638 (point on the way)",
+    "_source": "OpenStreetMap w515037638 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w515037640",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 19.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w515037640 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2046945,
+    "lat": 56.1498413,
+    "how": "OSM w515037640 (point on the way)",
+    "_source": "OpenStreetMap w515037640 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w515037642",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 19.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w515037642 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2044079,
+    "lat": 56.1497677,
+    "how": "OSM w515037642 (point on the way)",
+    "_source": "OpenStreetMap w515037642 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w734550346",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 20.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w734550346 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2044805,
+    "lat": 56.1496341,
+    "how": "OSM w734550346 (point on the way)",
+    "_source": "OpenStreetMap w734550346 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w734550347",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 20.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w734550347 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2047977,
+    "lat": 56.1496747,
+    "how": "OSM w734550347 (point on the way)",
+    "_source": "OpenStreetMap w734550347 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1062163969",
+   "name": null,
+   "osm_level": "0;-1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 11.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1062163969 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2044694,
+    "lat": 56.1501676,
+    "how": "OSM w1062163969 (point on the way)",
+    "_source": "OpenStreetMap w1062163969 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1149384817",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 30.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1149384817 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2043725,
+    "lat": 56.1501428,
+    "how": "OSM w1149384817 (point on the way)",
+    "_source": "OpenStreetMap w1149384817 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5030708505",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5030708505 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.204513,
+    "lat": 56.1501312,
+    "how": "OSM n5030708505",
+    "_source": "OpenStreetMap n5030708505 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5030711330",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5030711330 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.204653,
+    "lat": 56.1499956,
+    "how": "OSM n5030711330",
+    "_source": "OpenStreetMap n5030711330 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5030711331",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5030711331 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2047337,
+    "lat": 56.149833,
+    "how": "OSM n5030711331",
+    "_source": "OpenStreetMap n5030711331 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5030711332",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5030711332 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2048059,
+    "lat": 56.1496967,
+    "how": "OSM n5030711332",
+    "_source": "OpenStreetMap n5030711332 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_ids": [
+    "n2398266646",
+    "n5030711820",
+    "n10692801408",
+    "n10692801409",
+    "n11351531077"
+   ],
+   "name": "Main entrances",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "where": "north front of the station building",
+   "confirmed_by": "OSM (entrance=main) + Wikipedia ('entrances from Banegårdspladsen')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station', read 2026-10-30"
+  },
+  {
+   "osm_id": "n5030711816",
+   "name": "Entrance",
+   "street": "Ny Banegårdsgade",
+   "where": "east side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2053844,
+    "lat": 56.1505049,
+    "how": "OSM n5030711816",
+    "_source": "OpenStreetMap n5030711816 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_ids": [
+    "n5030711334",
+    "n5030711335",
+    "n5030711336",
+    "n5030711337",
+    "n5030711338"
+   ],
+   "name": "Sliding doors along the platform passage",
+   "street": "nearest named street Værkmestergade (OSM)",
+   "where": "along the passage south of the hall",
+   "confirmed_by": "OSM only (door=sliding)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30"
+  },
+  {
+   "name": "Bruun's Galleri connection",
+   "street": "Bruun's Galleri (M.P. Bruuns Gade)",
+   "where": "DSB: 'Bruuns Galleri er forbundet til stationen'; DSB 2004: glass footbridge linking station and gallery",
+   "confirmed_by": "owner text",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; DSB press release 'Indkøbscenter med DSB i centrum' https://www.dsb.dk/om-dsb/presse/nyheder/indkobscenter-med-dsb-i-centrum/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n2398266646",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 27.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n2398266646 (already in OSM)",
+   "position": {
+    "lon": 10.2044913,
+    "lat": 56.1503693,
+    "how": "OSM n2398266646",
+    "_source": "OpenStreetMap n2398266646 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711334",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n5030711334 (already in OSM)",
+   "position": {
+    "lon": 10.2047007,
+    "lat": 56.1500217,
+    "how": "OSM n5030711334",
+    "_source": "OpenStreetMap n5030711334 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711335",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n5030711335 (already in OSM)",
+   "position": {
+    "lon": 10.2047185,
+    "lat": 56.1499865,
+    "how": "OSM n5030711335",
+    "_source": "OpenStreetMap n5030711335 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711336",
+   "street": "Værkmestergade",
+   "street_how": "nearest named street, 36.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n5030711336 (already in OSM)",
+   "position": {
+    "lon": 10.2047847,
+    "lat": 56.1498553,
+    "how": "OSM n5030711336",
+    "_source": "OpenStreetMap n5030711336 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711337",
+   "street": "Værkmestergade",
+   "street_how": "nearest named street, 32.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n5030711337 (already in OSM)",
+   "position": {
+    "lon": 10.2047984,
+    "lat": 56.1498281,
+    "how": "OSM n5030711337",
+    "_source": "OpenStreetMap n5030711337 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711338",
+   "street": "Værkmestergade",
+   "street_how": "nearest named street, 15.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n5030711338 (already in OSM)",
+   "position": {
+    "lon": 10.2048736,
+    "lat": 56.1496792,
+    "how": "OSM n5030711338",
+    "_source": "OpenStreetMap n5030711338 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711816",
+   "street": "Ny Banegårdsgade",
+   "street_how": "nearest named street, 24.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5030711816 (already in OSM)",
+   "position": {
+    "lon": 10.2053844,
+    "lat": 56.1505049,
+    "how": "OSM n5030711816",
+    "_source": "OpenStreetMap n5030711816 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5030711820",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 27.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5030711820 (already in OSM)",
+   "position": {
+    "lon": 10.2046123,
+    "lat": 56.1503883,
+    "how": "OSM n5030711820",
+    "_source": "OpenStreetMap n5030711820 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10692801356",
+   "street": null,
+   "street_how": null,
+   "level": "-1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n10692801356 (already in OSM)",
+   "position": {
+    "lon": 10.2044884,
+    "lat": 56.1501274,
+    "how": "OSM n10692801356",
+    "_source": "OpenStreetMap n10692801356 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10692801362",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n10692801362 (already in OSM)",
+   "position": {
+    "lon": 10.2042441,
+    "lat": 56.1501251,
+    "how": "OSM n10692801362",
+    "_source": "OpenStreetMap n10692801362 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10692801408",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 26.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10692801408 (already in OSM)",
+   "position": {
+    "lon": 10.2046899,
+    "lat": 56.1504004,
+    "how": "OSM n10692801408",
+    "_source": "OpenStreetMap n10692801408 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10692801409",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 27.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10692801409 (already in OSM)",
+   "position": {
+    "lon": 10.2045352,
+    "lat": 56.1503762,
+    "how": "OSM n10692801409",
+    "_source": "OpenStreetMap n10692801409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11351531077",
+   "street": "Banegårdspladsen",
+   "street_how": "nearest named street, 26.8 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11351531077 (already in OSM)",
+   "position": {
+    "lon": 10.2046899,
+    "lat": 56.1504004,
+    "how": "OSM n11351531077",
+    "_source": "OpenStreetMap n11351531077 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "DSB Salg & Service",
+   "osm_id": "n10692768761",
+   "level_per_plan": "0",
+   "where": "station hall",
+   "opening_hours": "Mo-Fr 08:00-17:30; Sa,Su 10:00-16:45",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "International tickets sold.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2049926,
+    "lat": 56.1498922,
+    "osm_id": "n10692768761",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n10692768761",
+    "_source": "OpenStreetMap n10692768761 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "lounge",
+   "name": "DSB 1' Lounge",
+   "level_per_plan": "0",
+   "where": "through DSB Salg & Service",
+   "opening_hours": "Mo-Fr 08:00-17:30; Sa,Su 10:00-16:45",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB 1' ticket required; meeting rooms for 6 or 12.",
+   "_source": "DSB 1' Lounge Aarhus H https://www.dsb.dk/find-produkter-og-services/dsb-1-lounge-aarhus-h/, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Århus H)",
+   "osm_id": "n5030711339",
+   "level_per_plan": "0",
+   "where": "station hall (station unit); OSM match by its 24/7 hours tag",
+   "opening_hours": "Mo-Th 05:00-24:00; Fr-Su 00:00-24:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page agrees (Mo-Th 05-24, Fr-Su døgnåbent).",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.204992,
+    "lat": 56.1501388,
+    "osm_id": "n5030711339",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.4,
+    "how": "OSM node n5030711339",
+    "_source": "OpenStreetMap n5030711339 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Århus H IC)",
+   "osm_id": "n12956562803",
+   "level_per_plan": "0",
+   "where": "station hall, near the platform passage (station unit); OSM match: the other 7-Eleven OSM maps in the station building",
+   "opening_hours": "Mo-Th 06:00-23:00; Fr 06:00-24:00; Sa 08:00-24:00; Su 08:00-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "hours_conflict": "DSB page: Sunday 06.00-23.00.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2045179,
+    "lat": 56.1500668,
+    "osm_id": "n12956562803",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.3,
+    "how": "OSM node n12956562803",
+    "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "McDonald's",
+   "osm_id": "n825060407",
+   "level_per_plan": "0",
+   "where": "station building, Banegårdspladsen side (Wikipedia lists McDonald's in the station building)",
+   "opening_hours": "Su-Th 08:00-01:00; Fr,Sa 08:00-05:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station', read 2026-10-30",
+   "position": {
+    "lon": 10.2049327,
+    "lat": 56.150311,
+    "osm_id": "n825060407",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.8,
+    "how": "OSM node n825060407",
+    "_source": "OpenStreetMap n825060407 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Dunkin'",
+   "osm_id": "n12541961098",
+   "level_per_plan": "0",
+   "where": "station hall (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2044363,
+    "lat": 56.1502756,
+    "osm_id": "n12541961098",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 30.0,
+    "how": "OSM node n12541961098",
+    "_source": "OpenStreetMap n12541961098 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "osm_id": "n4494500197",
+   "level_per_plan": "0",
+   "where": "station hall, by the platform passage (OSM)",
+   "opening_hours": "Mo 08:00-21:00; Tu,We 06:00-22:00; Th-Su,PH 07:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 10.204858,
+     "lat": 56.1492368,
+     "osm_id": "n4450641000",
+     "osm_level": "0",
+     "in_station_building": false,
+     "to_nearest_platform_m": 64.1,
+     "how": "OSM node n4450641000",
+     "_source": "OpenStreetMap n4450641000 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 10.204706,
+     "lat": 56.1499148,
+     "osm_id": "n4494500197",
+     "osm_level": "0",
+     "in_station_building": true,
+     "to_nearest_platform_m": 5.7,
+     "how": "OSM node n4494500197",
+     "_source": "OpenStreetMap n4494500197 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled",
+   "position": {
+    "lon": 10.204706,
+    "lat": 56.1499148,
+    "osm_id": "n4494500197",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.7,
+    "how": "OSM node n4494500197",
+    "_source": "OpenStreetMap n4494500197 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "optician",
+   "name": "Smarteyes",
+   "osm_id": "n10692768762",
+   "level_per_plan": "0",
+   "where": "station building, by the platform passage (OSM)",
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa,Su 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2047874,
+    "lat": 56.1497547,
+    "osm_id": "n10692768762",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.3,
+    "how": "OSM node n10692768762",
+    "_source": "OpenStreetMap n10692768762 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "osm_id": "n13259943394",
+   "level_per_plan": "0",
+   "where": "station hall",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2050012,
+    "lat": 56.1499768,
+    "osm_id": "n13259943394",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.1,
+    "how": "OSM node n13259943394",
+    "_source": "OpenStreetMap n13259943394 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n7940746477",
+   "level_per_plan": "0",
+   "where": "station hall (OSM)",
+   "fee": "paid ('betalingstoiletter'); price not stated",
+   "hours_raw": "locked 23:00-06:00 ('aflåst fra kl. 23.00 til 06.00')",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.205078,
+    "lat": 56.1500731,
+    "osm_id": "n7940746477",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n7940746477",
+    "_source": "OpenStreetMap n7940746477 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "osm_id": "n9798726959",
+   "level_per_plan": "0",
+   "where": "station hall (OSM)",
+   "fee": "per started day: S 30, M 40, M2 50, L 60, XL 80 kr; card",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2044287,
+    "lat": 56.1501898,
+    "osm_id": "n9798726959",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.3,
+    "how": "OSM node n9798726959",
+    "_source": "OpenStreetMap n9798726959 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomater",
+   "where": "several; positions not given",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nokas",
+   "osm_id": "n8222276929",
+   "where": "outside the station building on Banegårdspladsen (OSM indoor=no)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2053725,
+    "lat": 56.1506294,
+    "osm_id": "n8222276929",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 52.1,
+    "how": "OSM node n8222276929",
+    "_source": "OpenStreetMap n8222276929 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "w268546604",
+   "where": "Banegårdspladsen, west of the main entrance (OSM); Wikipedia: taxi hub on the square",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station', read 2026-10-30",
+   "position": {
+    "lon": 10.2039295,
+    "lat": 56.1503271,
+    "osm_id": "w268546604",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.9,
+    "how": "representative point of the OSM area w268546604",
+    "_source": "OpenStreetMap w268546604 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "tram",
+   "name": "Aarhus Letbane stop",
+   "where": "at the station (Wikipedia: terminus of the Grenaa and Odder lines); exact position not settled",
+   "_source": "Wikipedia 'Aarhus Central Station', read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n632467142",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n632467142 (read 2026-10-30)",
+   "position": {
+    "lon": 10.204958,
+    "lat": 56.1508394,
+    "osm_id": "n632467142",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 81.0,
+    "how": "OSM node n632467142",
+    "_source": "OpenStreetMap n632467142 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n7940746477",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7940746477 (read 2026-10-30)",
+   "position": {
+    "lon": 10.205078,
+    "lat": 56.1500731,
+    "osm_id": "n7940746477",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n7940746477",
+    "_source": "OpenStreetMap n7940746477 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": null,
+   "osm_id": "n9798726959",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9798726959 (read 2026-10-30)",
+   "position": {
+    "lon": 10.2044287,
+    "lat": 56.1501898,
+    "osm_id": "n9798726959",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.3,
+    "how": "OSM node n9798726959",
+    "_source": "OpenStreetMap n9798726959 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n10218259509",
+   "osm_level": "0;1",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n10218259509 (read 2026-10-30)",
+   "position": {
+    "lon": 10.2045287,
+    "lat": 56.1494398,
+    "osm_id": "n10218259509",
+    "osm_level": "0;1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 44.0,
+    "how": "OSM node n10218259509",
+    "_source": "OpenStreetMap n10218259509 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "DSB Salg & Service",
+   "osm_id": "n10692768761",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-17:30; Sa-Su,PH 10:00-16:45",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n10692768761 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Midttrafik kundecenter",
+   "osm_id": "n10744712610",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": "Mo,Fr 10:00-16:00; We 10:00-18:00; Sa-Su,PH off",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n10744712610 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n12843752670",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n12843752670 (read 2026-10-30)",
+   "position": {
+    "lon": 10.2084371,
+    "lat": 56.1517202,
+    "osm_id": "n12843752670",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 253.0,
+    "how": "OSM node n12843752670",
+    "_source": "OpenStreetMap n12843752670 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": null,
+   "osm_id": "n13259943394",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13259943394 (read 2026-10-30)",
+   "position": {
+    "lon": 10.2050012,
+    "lat": 56.1499768,
+    "osm_id": "n13259943394",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.1,
+    "how": "OSM node n13259943394",
+    "_source": "OpenStreetMap n13259943394 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Dee Dee's sandwiches",
+   "brand": null,
+   "cuisine": "sandwich",
+   "opening_hours": "Mo-Fr 09:00-18:30; Sa 10:00-18:00; Su,PH 10:00-17:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.deedees.dk/",
+   "position": {
+    "lon": 10.2041513,
+    "lat": 56.1507973,
+    "osm_id": "n632467141",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 90.4,
+    "how": "OSM node n632467141",
+    "_source": "OpenStreetMap n632467141 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n632467141 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Stiften",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2033335,
+    "lat": 56.150115,
+    "osm_id": "n825060403",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 82.7,
+    "how": "OSM node n825060403",
+    "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Pearl India",
+   "brand": null,
+   "cuisine": "indian",
+   "opening_hours": "Su-Th 17:00-22:00; Fr-Sa 17:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "http://www.pearlindia.dk/",
+   "position": {
+    "lon": 10.207873,
+    "lat": 56.1520008,
+    "osm_id": "n2273711692",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 253.2,
+    "how": "OSM node n2273711692",
+    "_source": "OpenStreetMap n2273711692 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n2273711692 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Milo",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Su-Th 11:00-23:00, Fr,Sa 11:00-01:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.2040785,
+    "lat": 56.150784,
+    "osm_id": "n4441355682",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 90.7,
+    "how": "OSM node n4441355682",
+    "_source": "OpenStreetMap n4441355682 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4441355682 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.204992,
+    "lat": 56.1501388,
+    "osm_id": "n5030711339",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.4,
+    "how": "OSM node n5030711339",
+    "_source": "OpenStreetMap n5030711339 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5030711339 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "electronics",
+   "name": "GreenMind",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 10:00-18:00; Fr 10:00-19:00; Sa 10:00-17:00; PH off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://greenmind.dk",
+   "position": {
+    "lon": 10.2053692,
+    "lat": 56.1508329,
+    "osm_id": "n5691419329",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 74.7,
+    "how": "OSM node n5691419329",
+    "_source": "OpenStreetMap n5691419329 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5691419329 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "health_food",
+   "name": "Helsam Aarhus Bruuns Bro",
+   "brand": "Helsam",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2033701,
+    "lat": 56.1498215,
+    "osm_id": "n9204612979",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 83.4,
+    "how": "OSM node n9204612979",
+    "_source": "OpenStreetMap n9204612979 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9204612979 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Falafel King",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2082817,
+    "lat": 56.1518292,
+    "osm_id": "n9241685208",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 254.7,
+    "how": "OSM node n9241685208",
+    "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Emmerys",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa-Su 07:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://emmerys.dk/",
+   "position": {
+    "lon": 10.2052181,
+    "lat": 56.1493745,
+    "osm_id": "n9279143970",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 54.4,
+    "how": "OSM node n9279143970",
+    "_source": "OpenStreetMap n9279143970 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9279143970 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Nögen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "11:30-23:00, Fr-Sa 11:30-02:00, Su-Mo off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.restaurantnoegen.dk/",
+   "position": {
+    "lon": 10.2051654,
+    "lat": 56.1509795,
+    "osm_id": "n9621110017",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 92.7,
+    "how": "OSM node n9621110017",
+    "_source": "OpenStreetMap n9621110017 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9621110017 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "shoes",
+   "name": "Boisen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-17:30; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.ruthboisen.dk/",
+   "position": {
+    "lon": 10.2059526,
+    "lat": 56.1509072,
+    "osm_id": "n9848266355",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 88.0,
+    "how": "OSM node n9848266355",
+    "_source": "OpenStreetMap n9848266355 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9848266355 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "party",
+   "name": "Billig-Billy",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://billig-billy.dk",
+   "position": {
+    "lon": 10.2027388,
+    "lat": 56.1502884,
+    "osm_id": "n9850470789",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 122.5,
+    "how": "OSM node n9850470789",
+    "_source": "OpenStreetMap n9850470789 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9850470789 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.2028545,
+    "lat": 56.1501558,
+    "osm_id": "n10201655673",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 112.8,
+    "how": "OSM node n10201655673",
+    "_source": "OpenStreetMap n10201655673 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10201655673 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Thiele",
+   "brand": "Thiele",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2049717,
+    "lat": 56.1493023,
+    "osm_id": "n10212824382",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 58.0,
+    "how": "OSM node n10212824382",
+    "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "NAME IT",
+   "brand": "NAME IT",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2048727,
+    "lat": 56.1494302,
+    "osm_id": "n10212824384",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.9,
+    "how": "OSM node n10212824384",
+    "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Bruuns Apotek",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa-Su 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://bruunsapotek.dk/",
+   "position": {
+    "lon": 10.2048543,
+    "lat": 56.1494966,
+    "osm_id": "n10212824385",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 35.4,
+    "how": "OSM node n10212824385",
+    "_source": "OpenStreetMap n10212824385 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824385 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "3 Butikken",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2051614,
+    "lat": 56.1494845,
+    "osm_id": "n10212824387",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 41.7,
+    "how": "OSM node n10212824387",
+    "_source": "OpenStreetMap n10212824387 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824387 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cosmetics",
+   "name": "Rituals",
+   "brand": "Rituals",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.rituals.com/da-dk/store-detail?store=Aarhus-Bruuns-Galleri",
+   "position": {
+    "lon": 10.2051788,
+    "lat": 56.1494314,
+    "osm_id": "n10212824388",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 47.6,
+    "how": "OSM node n10212824388",
+    "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "H&M",
+   "brand": "H&M",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2052872,
+    "lat": 56.1493167,
+    "osm_id": "n10212824389",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 61.8,
+    "how": "OSM node n10212824389",
+    "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "sports",
+   "name": "Sport 24",
+   "brand": "Sport 24",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2054704,
+    "lat": 56.1493754,
+    "osm_id": "n10212866839",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 58.7,
+    "how": "OSM node n10212866839",
+    "_source": "OpenStreetMap n10212866839 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866839 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Jack & Jones",
+   "brand": "Jack & Jones",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2053147,
+    "lat": 56.1493958,
+    "osm_id": "n10212866840",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 53.8,
+    "how": "OSM node n10212866840",
+    "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Vero Moda",
+   "brand": "Vero Moda",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2049928,
+    "lat": 56.1493653,
+    "osm_id": "n10212866841",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 51.5,
+    "how": "OSM node n10212866841",
+    "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Change",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2049213,
+    "lat": 56.1493066,
+    "osm_id": "n10212866842",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 56.9,
+    "how": "OSM node n10212866842",
+    "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Samsøe Samsøe",
+   "brand": "Samsøe Samsøe",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2046666,
+    "lat": 56.1493307,
+    "osm_id": "n10212866843",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 53.9,
+    "how": "OSM node n10212866843",
+    "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Quint",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2045337,
+    "lat": 56.1492976,
+    "osm_id": "n10212866844",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 59.0,
+    "how": "OSM node n10212866844",
+    "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "SELECTED",
+   "brand": "SELECTED",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2044083,
+    "lat": 56.1493203,
+    "osm_id": "n10212907462",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 59.1,
+    "how": "OSM node n10212907462",
+    "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nordea",
+   "brand": "Nordea",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2049275,
+    "lat": 56.1495498,
+    "osm_id": "n10212980336",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 30.6,
+    "how": "OSM node n10212980336",
+    "_source": "OpenStreetMap n10212980336 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10212980336 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Smarteyes",
+   "brand": "Smarteyes",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa,Su 10:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.smarteyes.dk/butik/aarhus",
+   "position": {
+    "lon": 10.2047874,
+    "lat": 56.1497547,
+    "osm_id": "n10692768762",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 6.3,
+    "how": "OSM node n10692768762",
+    "_source": "OpenStreetMap n10692768762 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10692768762 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "jewelry",
+   "name": "Ganesha",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2045067,
+    "lat": 56.1509136,
+    "osm_id": "n10807899985",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 96.6,
+    "how": "OSM node n10807899985",
+    "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "06:00-23:00; Fr-Sa 06:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.2042686,
+    "lat": 56.1508259,
+    "osm_id": "n10807944510",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 91.2,
+    "how": "OSM node n10807944510",
+    "_source": "OpenStreetMap n10807944510 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10807944510 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "House of Hair",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2028316,
+    "lat": 56.1502472,
+    "osm_id": "n12259255005",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 115.8,
+    "how": "OSM node n12259255005",
+    "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Chicken East",
+   "brand": null,
+   "cuisine": "chicken",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2033963,
+    "lat": 56.1497046,
+    "osm_id": "n12838597022",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 85.6,
+    "how": "OSM node n12838597022",
+    "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "second_hand",
+   "name": "PR Mønter",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://ebuy.dk/",
+   "position": {
+    "lon": 10.2033592,
+    "lat": 56.1498824,
+    "osm_id": "n12907595962",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 82.4,
+    "how": "OSM node n12907595962",
+    "_source": "OpenStreetMap n12907595962 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12907595962 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2045179,
+    "lat": 56.1500668,
+    "osm_id": "n12956562803",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.3,
+    "how": "OSM node n12956562803",
+    "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Børnenes kontor banegårdspladsen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.203571,
+    "lat": 56.1503982,
+    "osm_id": "n13517873369",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 78.6,
+    "how": "OSM node n13517873369",
+    "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "doityourself",
+   "name": "Silvan",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2043655,
+    "lat": 56.1493072,
+    "osm_id": "n14077245348",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 61.5,
+    "how": "OSM node n14077245348",
+    "_source": "OpenStreetMap n14077245348 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n14077245348 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mall",
+   "name": "Bruuns Galleri",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 10:00-20:00; Fr 07:00-22:00; Sa-Su 10:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://bruuns-galleri.steenstrom.dk/",
+   "position": {
+    "lon": 10.2047313,
+    "lat": 56.1490377,
+    "osm_id": "w231434903",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 25.6,
+    "how": "representative point of the OSM area w231434903",
+    "_source": "OpenStreetMap w231434903 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w231434903 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Opera",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2035985,
+    "lat": 56.1501379,
+    "osm_id": "w515037718",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 57.5,
+    "how": "representative point of the OSM area w515037718",
+    "_source": "OpenStreetMap w515037718 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w515037718 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "food_court",
+   "name": "Aarhus Street Food",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su,PH 11:30-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://aarhusstreetfood.com/",
+   "position": {
+    "lon": 10.209417,
+    "lat": 56.151451,
+    "osm_id": "w998752616",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 243.0,
+    "how": "representative point of the OSM area w998752616",
+    "_source": "OpenStreetMap w998752616 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w998752616 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Station vs mall: only units OSM puts in the station hall (level 0, near the platform passage) are included. Excluded as Bruun's Galleri or outside: H&M, Name It, Rituals, 3, Thiele, Bruuns Apotek, Silvan, Jack & Jones etc. (Bruun's Galleri), Café Opera and Café Stiften (west of the station on OSM, not confirmed in the station), the 7-Eleven at Banegårdspladsen 6 (separate 24 h store) and OSM 7-Eleven n10807944510 outside the building.",
+  "Which OSM 7-Eleven node is 'Århus H' and which 'Århus H IC' is matched by hours/position only.",
+  "Lifts and escalators: OSM gives no levels or platform refs for the four lifts and six platform escalators; which lift serves which perron (1: spor 2/3, 2: spor 4/5, 3: spor 6/7) is not settled. Wikipedia says 4 platforms/8 tracks; the register has 3 perrons (tracks 2-7).",
+  "OSM platforms (w515037672, w515037673) carry no refs.",
+  "Hours missing for Dunkin'; McDonald's, Joe & The Juice and Smarteyes are OSM only. Toilet price not stated.",
+  "Level names as signposted not found.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

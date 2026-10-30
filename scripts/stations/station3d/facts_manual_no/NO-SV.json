@@ -1,0 +1,204 @@
+{
+ "levels": [
+  {
+   "name": "Street level: station building under the tracks (common waiting room for bus and train), Stasjonstorget / Folangerveien",
+   "note": "Wikipedia: the station is elevated; the station building is built under the tracks and is a common waiting room for bus and train passengers; indoor waiting room and kiosk. OSM: underpass w187993310 (layer -1, ~40 m) through the building area and a second underpass w415488429 (~36 m) about 69 m to the west. Station building architect Arne Henriksen, rebuilt 2017 (Bane NOR). Signposted level names not found.",
+   "_source": "Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "name": "Platform level (elevated): island platforms for spor 1/2 and spor 3/4",
+   "note": "Bane NOR Sportabell: 'Mellomplattform; dekker spor 1 og 2' 268 m, 700 mm, 10 m; 'dekker spor 4 og 3' 268 m, 700 mm, 10 m. Outer tracks 1 and 4 Askerbanen, inner 2 and 3 Drammenbanen. Wikipedia: track 1 to the north, track 4 to the south. Roofed. OSM extract has no platform objects.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "between": [
+    "station building / street",
+    "both island platforms"
+   ],
+   "where": "Bane NOR: 'Det er heis til alle plattformer'; positions not given, none in the OSM extract. Wikipedia notes the 1924 interlocking (signal) building, in concrete, is now used for elevators.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "street level",
+    "both island platforms"
+   ],
+   "where": "Bane NOR: 'Rullestolramper opp til begge mellomplattformene' (wheelchair ramps up to both island platforms); position not given",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "street level",
+    "platforms"
+   ],
+   "where": "Bane NOR: 'Trapp, rampe og heis til plattformer'; positions not given",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w187993310",
+   "between": [
+    "Stasjonstorget side",
+    "Folangerveien / bus terminal side"
+   ],
+   "where": "under the tracks at the station building (layer -1, ~40 m); kiosk, Joker and Backstube lie within ~20 m of its middle",
+   "confirmed_by": "OSM only (Wikipedia: station building under the tracks)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w415488429",
+   "between": [
+    "south side",
+    "north side"
+   ],
+   "where": "about 69 m west of the main underpass, ~36 m long; near the bike hotel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w415365091",
+   "between": [
+    "unknown",
+    "unknown"
+   ],
+   "where": "about 33 m SE of the main underpass, ~6 m long; not linked to a platform in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Entrance (OSM n1986208813)",
+   "osm_id": "n1986208813",
+   "street": "Stasjonstorget",
+   "where": "south side of the station building, about 16 m from the middle of the underpass",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "name": "Entrance (OSM n1986208819)",
+   "osm_id": "n1986208819",
+   "street": "Folangerveien",
+   "where": "north side, about 24 m NNW of the middle of the underpass, towards the bus terminal (Bane NOR: bus terminal on the north side of the station; address Folangerveien, 1337 Sandvika)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "Mo-Fr 06:30-18:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station building under the tracks (shared with bus passengers, Wikipedia)",
+   "note": "Hours only on Bane NOR's English page; weekends not mentioned (closed or not stated).",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (3)",
+   "where": "position not given; card, coins and notes",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen",
+   "osm_id": "n2260304949",
+   "where": "in the station building by the underpass (OSM: about 9 m WNW of the middle of underpass w187993310); Narvesen store 'Sandvika jbst.', Folangerveien",
+   "note": "No hours: narvesen.no's store finder did not render hours and OSM has none.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30; Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Joker Sandvika stasjon",
+   "osm_id": "n9841851834",
+   "where": "by the underpass (OSM: about 16 m NW of the middle of underpass w187993310)",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM says 24/7; not confirmed by joker.no (store page could not be read). Treat with caution.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Backstube Sandvika Stasjon",
+   "osm_id": "n13788913459",
+   "where": "Backstube: 'Sandvika Stasjon, Otto Sverdrups Plass 1'; OSM: about 21 m NNW of the middle of the underpass",
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM's opening_hours is identical.",
+   "_source": "Backstube, Visit us https://backstube.no/visit-us, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Sandvika bussterminal",
+   "osm_id": "n570206829",
+   "where": "north side of the station (Bane NOR); OSM ~51 m N of the underpass. Rail-replacement buses leave from here.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "Bane NOR lists taxi at the station; Wikipedia: taxi stand; position not given",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Sandvika stasjon",
+   "osm_id": "n9338762510",
+   "where": "about 55 m WSW of the main underpass (OSM), near underpass w415488429; 176 places on two levels",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "fee": "NOK 50 / 30 days via app 'Bane NOR Parkering'",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_repair_station",
+   "name": "Sykkelservicestasjon (Bane NOR)",
+   "osm_id": "n9630170136",
+   "where": "next to the bike hotel (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Sandvika p-hus (Q-Park)",
+   "osm_id": "n1370605017",
+   "where": "parking garage next to the station, own rules and prices (Bane NOR offers no car parking here); OSM entrance ~116 m NNE of the underpass",
+   "fee": "yes",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bank like ved stasjonen",
+   "where": "Bane NOR: a bank close to the station (not in it); no ATM in the OSM extract",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Norway; levels, ways to the platforms, entrances and shops requested)",
+   "answer": "Elevated station: the station building/waiting room sits under the tracks with entrances from Stasjonstorget (south) and Folangerveien (north, bus terminal side). Two island platforms (spor 1/2, 3/4) reached by stairs, wheelchair ramps up to both island platforms and lifts to all platforms (Bane NOR). OSM maps the underpasses but no lifts or ramps. Shops: Narvesen, Joker Sandvika stasjon, Backstube.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/sandvika/, read 2026-10-30; Wikipedia, \"Sandvika Station\" https://en.wikipedia.org/wiki/Sandvika_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SV.json), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lifts and ramps: Bane NOR confirms lifts to all platforms and ramps to both island platforms, but no source places them; none are in the OSM extract.",
+  "Signposted level names not found; no heights in any source.",
+  "Narvesen hours: not in OSM; narvesen.no hours did not render. Joker's 24/7 comes only from OSM (joker.no store page unreadable).",
+  "Waiting room weekend hours not stated (English Bane NOR page gives only Mo-Fr 06:30-18:00; the Norwegian page gives none).",
+  "Toilets: no source mentions toilets at Sandvika station; ATM: only 'bank close to the station'.",
+  "Ticket machine positions (3) not given. Taxi rank position not given (no OSM taxi object).",
+  "Which underpass/stairs lead to which platform is not in OSM (no platform objects in the extract); no station plan found."
+ ]
+}

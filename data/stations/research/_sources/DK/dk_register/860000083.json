@@ -1,0 +1,108 @@
+{
+ "clack_id": "860000083",
+ "name": "Kolding",
+ "bilag_name": "Kolding",
+ "station_abbr": [
+  "Kd"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "55.4920032 9.4837141 55.4918306 9.4834039 55.4916747 9.4831320 55.4900720 9.4803704 55.4898844 9.4800455",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 301,
+   "Bredd_m": 6.1,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000083-26-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "26",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Kd); extent: Banedanmark platform outline FOR_PERRONER_OD Kd 171 beside the track (331 m along it; Bilag 301 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 26; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2",
+   "Points": "55.4916528 9.4831923 55.4912308 9.4824578 55.4905963 9.4813635 55.4900528 9.4804285",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 250,
+   "Bredd_m": 10.5,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000083-26-2-2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "26",
+   "x_perron": "2",
+   "x_track": "2",
+   "x_perron_tracks": [
+    "2",
+    "3"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Kd); extent: Banedanmark platform outline FOR_PERRONER_OD Kd 172 beside the track (249 m along it; Bilag 250 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 26; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 3",
+   "Points": "55.4915665 9.4833475 55.4914404 9.4831308 55.4905450 9.4815808 55.4902129 9.4810096 55.4900440 9.4807122 55.4899681 9.4805729",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 250,
+   "Bredd_m": 10.5,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000083-26-2-3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "26",
+   "x_perron": "2",
+   "x_track": "3",
+   "x_perron_tracks": [
+    "2",
+    "3"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Kd); extent: Banedanmark platform outline FOR_PERRONER_OD Kd 172 beside the track (250 m along it; Bilag 250 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 26; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000083-26-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000083-26-2-2",
+   "IndKod": "2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000083-26-2-3",
+   "IndKod": "3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [],
+ "heights": {
+  "50": 0.5
+ }
+}

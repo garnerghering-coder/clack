@@ -1,0 +1,1644 @@
+{
+ "clack_id": "FI-LH",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w43021926",
+   "ref": "4",
+   "level": null
+  },
+  {
+   "osm_id": "w43021927",
+   "ref": "2",
+   "level": null
+  },
+  {
+   "osm_id": "w512079187",
+   "ref": "La0203",
+   "level": null
+  },
+  {
+   "osm_id": "w512079188",
+   "ref": "3",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w34903227",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 63.7,
+   "reaches_platforms": [
+    "2",
+    "3",
+    "4",
+    "La0203"
+   ],
+   "lonlat": [
+    25.658476,
+    60.9760999
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w34903229",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 71.4,
+   "reaches_platforms": [
+    "2",
+    "3",
+    "4",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6583355,
+    60.976431
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903231",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "yes",
+   "length_m": 20.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6583858,
+    60.9766925
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903232",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 19.9,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6578175,
+    60.9764297
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903233",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6582429,
+    60.9764343
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903234",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6582256,
+    60.9764024
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903235",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.7,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6582011,
+    60.9762707
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903236",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 19.3,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6577939,
+    60.9762691
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34903237",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.7,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6581921,
+    60.9762401
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w35423495",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 79.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6586179,
+    60.9772131
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w37043487",
+   "name": "Vihdinpolku",
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 44.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.664173,
+    60.9761779
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w37125742",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 46.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6591264,
+    60.9772906
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w46103619",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 64.4,
+   "reaches_platforms": [
+    "2",
+    "3",
+    "4",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6591354,
+    60.9763721
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w51819438",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 18.9,
+   "reaches_platforms": [
+    "4"
+   ],
+   "lonlat": [
+    25.664173,
+    60.9761779
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w51819439",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 18.7,
+   "reaches_platforms": [
+    "La0203"
+   ],
+   "lonlat": [
+    25.664184,
+    60.9760265
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w89209524",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 11.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6584766,
+    60.9768452
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w89209535",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 15.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6583935,
+    60.9767326
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w398298608",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 34.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6586912,
+    60.9768939
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w459349019",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 6.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6591606,
+    60.9771048
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w543166736",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6593679,
+    60.9770988
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w543166738",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6594283,
+    60.9771199
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w594416980",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 34.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6591817,
+    60.9769594
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w594416981",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 115.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6597535,
+    60.9772513
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w786472737",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 11.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6593789,
+    60.9775824
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w786472740",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6585335,
+    60.9776404
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958835",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.8,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6592211,
+    60.9762461
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958836",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.1,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6592014,
+    60.9762049
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958837",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 20.4,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6592538,
+    60.9762209
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958839",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 9.2,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6592388,
+    60.9764203
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958840",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.6,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6592216,
+    60.9763702
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w790958841",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 20.1,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.65965,
+    60.9763809
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1259643965",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6594008,
+    60.9770967
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1259643966",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6592879,
+    60.9771017
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1447220502",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 2.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6584522,
+    60.9767301
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1479028440",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6586179,
+    60.9772131
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1479028441",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 2.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6586854,
+    60.9771648
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1480093529",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 13.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6580403,
+    60.9760939
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4034829098",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.658476,
+    60.9776287
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4034829109",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6593067,
+    60.9775707
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4552144334",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6594008,
+    60.9770967
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5820135489",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6581903,
+    60.976256
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5820135491",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6582189,
+    60.976419
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7394212281",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "2",
+    "La0203"
+   ],
+   "lonlat": [
+    25.6592034,
+    60.9762226
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7394241289",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "3",
+    "4"
+   ],
+   "lonlat": [
+    25.6592427,
+    60.9763917
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13278363780",
+   "name": null,
+   "level": null,
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    25.6584522,
+    60.9767301
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1035390980",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Uudenmaankatu",
+   "nearest_street_m": 23.8,
+   "lonlat": [
+    25.6583935,
+    60.9767326
+   ]
+  },
+  {
+   "osm_id": "n4034829097",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Marskinaukio",
+   "nearest_street_m": 2.3,
+   "lonlat": [
+    25.65839,
+    60.9776354
+   ]
+  },
+  {
+   "osm_id": "n4034829099",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Marskinaukio",
+   "nearest_street_m": 10.2,
+   "lonlat": [
+    25.6585553,
+    60.9776225
+   ]
+  },
+  {
+   "osm_id": "n4034829110",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Mannerheiminkatu",
+   "nearest_street_m": 9.2,
+   "lonlat": [
+    25.6592219,
+    60.9775707
+   ]
+  },
+  {
+   "osm_id": "n5250877708",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Uudenmaankatu",
+   "nearest_street_m": 17.8,
+   "lonlat": [
+    25.6593509,
+    60.9770898
+   ]
+  },
+  {
+   "osm_id": "n7410885048",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Mannerheiminkatu",
+   "nearest_street_m": 7.8,
+   "lonlat": [
+    25.6593438,
+    60.9775545
+   ]
+  },
+  {
+   "osm_id": "n7608913752",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 53.6,
+   "lonlat": [
+    25.6576602,
+    60.9769667
+   ]
+  },
+  {
+   "osm_id": "n7608913753",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 65.3,
+   "lonlat": [
+    25.657629,
+    60.9767621
+   ]
+  },
+  {
+   "osm_id": "n10138284581",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Uudenmaankatu",
+   "nearest_street_m": 29.8,
+   "lonlat": [
+    25.6582961,
+    60.9768025
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n260978632",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 116,
+   "lonlat": [
+    25.6575829,
+    60.9769925
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 58.2
+  },
+  {
+   "osm_id": "n409448802",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 48,
+   "lonlat": [
+    25.6583355,
+    60.976431
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n409448804",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 48,
+   "lonlat": [
+    25.658304,
+    60.9762672
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n1035390835",
+   "category": "restaurant",
+   "name": "Ravintola Asema",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Th 06:00-22:00; Fr 06:00-23:00; Sa 07:00-23:00; Su 08:00-22:00",
+   "wheelchair": null,
+   "distance_m": 101,
+   "lonlat": [
+    25.6578236,
+    60.9769211
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 50.2
+  },
+  {
+   "osm_id": "n1035390881",
+   "category": "vending_machine",
+   "name": "VR",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 114,
+   "lonlat": [
+    25.6575673,
+    60.9769575
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 54.3,
+   "operator": "VR",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n1035391089",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 47,
+   "lonlat": [
+    25.6583223,
+    60.9763622
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 1.2
+  },
+  {
+   "osm_id": "n4393602346",
+   "category": "bus_station",
+   "name": "Lahti Matkakeskus",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 105,
+   "lonlat": [
+    25.6580901,
+    60.9770839
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 68.5
+  },
+  {
+   "osm_id": "n5249508966",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 64,
+   "lonlat": [
+    25.659089,
+    60.9768753
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 46.8
+  },
+  {
+   "osm_id": "n5249508967",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 72,
+   "lonlat": [
+    25.6586491,
+    60.9768945
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 47.6
+  },
+  {
+   "osm_id": "n5249508968",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 70,
+   "lonlat": [
+    25.6587343,
+    60.9768922
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 47.4
+  },
+  {
+   "osm_id": "n7368313332",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 128,
+   "lonlat": [
+    25.657593,
+    60.977155
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 76.3
+  },
+  {
+   "osm_id": "n9828658374",
+   "category": "shop=kiosk",
+   "name": "R-Kioski",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa 07:00-21:00; Su 08:00-21:00",
+   "wheelchair": null,
+   "distance_m": 119,
+   "lonlat": [
+    25.6573357,
+    60.9768777
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 45.4,
+   "brand": "R-Kioski",
+   "website": "https://www.r-kioski.fi/kioskit/lahti-asema/"
+  },
+  {
+   "osm_id": "n9828658375",
+   "category": "cafe",
+   "name": "Cafe Express",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:30-17:00; Sa 10:00-16:00",
+   "wheelchair": null,
+   "distance_m": 93,
+   "lonlat": [
+    25.6578433,
+    60.9768162
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 38.6
+  },
+  {
+   "osm_id": "n9828658376",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 81,
+   "lonlat": [
+    25.6581158,
+    60.9768101
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 38.0
+  },
+  {
+   "osm_id": "n9828658377",
+   "category": "car_rental",
+   "name": "Avis",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 89,
+   "lonlat": [
+    25.657993,
+    60.97685
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 42.4,
+   "brand": "Avis"
+  },
+  {
+   "osm_id": "n9828658378",
+   "category": "car_rental",
+   "name": "Europcar",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 87,
+   "lonlat": [
+    25.6580638,
+    60.976861
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 43.6,
+   "brand": "Europcar"
+  },
+  {
+   "osm_id": "n9828658379",
+   "category": "car_rental",
+   "name": "Hertz",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 89,
+   "lonlat": [
+    25.6580622,
+    60.9768844
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 46.3,
+   "brand": "Hertz"
+  },
+  {
+   "osm_id": "n9828658380",
+   "category": "car_rental",
+   "name": "SIXT",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 91,
+   "lonlat": [
+    25.6579953,
+    60.976881
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 45.8,
+   "brand": "SIXT"
+  },
+  {
+   "osm_id": "n9828658381",
+   "category": "car_rental",
+   "name": "Budget",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 92,
+   "lonlat": [
+    25.6580288,
+    60.9769044
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 48.5,
+   "brand": "Budget"
+  },
+  {
+   "osm_id": "n9828658382",
+   "category": "atm",
+   "name": "Otto",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 111,
+   "lonlat": [
+    25.657627,
+    60.9769543
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 53.9,
+   "operator": "Otto"
+  },
+  {
+   "osm_id": "n9828658383",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 131,
+   "lonlat": [
+    25.6576378,
+    60.9772092
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 82.3
+  },
+  {
+   "osm_id": "n9828658384",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 126,
+   "lonlat": [
+    25.6577834,
+    60.9772036
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 81.7
+  },
+  {
+   "osm_id": "n9828658385",
+   "category": "vending_machine",
+   "name": "VR",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 104,
+   "lonlat": [
+    25.6577497,
+    60.9769267
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 50.9,
+   "operator": "VR",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n9828658386",
+   "category": "vending_machine",
+   "name": "VR",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 103,
+   "lonlat": [
+    25.6577795,
+    60.976925
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 50.7,
+   "operator": "VR",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n9828658387",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 107,
+   "lonlat": [
+    25.6576446,
+    60.976906
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 48.6
+  },
+  {
+   "osm_id": "n9828658388",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 113,
+   "lonlat": [
+    25.6576262,
+    60.9769766
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 56.4
+  },
+  {
+   "osm_id": "n9828658390",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 96,
+   "lonlat": [
+    25.6583077,
+    60.9770493
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 64.7
+  },
+  {
+   "osm_id": "n9828658391",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 91,
+   "lonlat": [
+    25.6584813,
+    60.9770413
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 63.9
+  },
+  {
+   "osm_id": "n9828658392",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 126,
+   "lonlat": [
+    25.657622,
+    60.9771398
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 74.6
+  },
+  {
+   "osm_id": "n9828658393",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 120,
+   "lonlat": [
+    25.6577683,
+    60.9771352
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 74.1
+  },
+  {
+   "osm_id": "n12817131070",
+   "category": "bicycle_rental",
+   "name": "Marskinaukio",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 159,
+   "lonlat": [
+    25.6583092,
+    60.9776629
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 133.1,
+   "website": "https://kaupunkipyorat.lahti.fi/",
+   "ref": "10",
+   "operator": "Freebike"
+  },
+  {
+   "osm_id": "w37196307",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 34,
+   "lonlat": [
+    25.6597013,
+    60.9758609
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.9
+  },
+  {
+   "osm_id": "w37196312",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 68,
+   "lonlat": [
+    25.6574102,
+    60.9759074
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.2
+  },
+  {
+   "osm_id": "w46618824",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 109,
+   "lonlat": [
+    25.6621653,
+    60.9765981
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 21.7
+  },
+  {
+   "osm_id": "w51819441",
+   "category": "cafe",
+   "name": "Asemapäällikkö",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa 09:00-16:00; Su off",
+   "distance_m": 58,
+   "lonlat": [
+    25.6595117,
+    60.9768574
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 40.7
+  },
+  {
+   "osm_id": "w61117964",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 194,
+   "lonlat": [
+    25.6577756,
+    60.9780208
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 165.5
+  },
+  {
+   "osm_id": "w722315713",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 256,
+   "lonlat": [
+    25.6641308,
+    60.9764712
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 26.0
+  },
+  {
+   "osm_id": "w787880722",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 99,
+   "lonlat": [
+    25.6603188,
+    60.9771554
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 69.0
+  },
+  {
+   "osm_id": "w788097918",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 137,
+   "lonlat": [
+    25.6572382,
+    60.9772227
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 70.5
+  },
+  {
+   "osm_id": "w788097920",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 121,
+   "lonlat": [
+    25.6572755,
+    60.9770908
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 59.7
+  },
+  {
+   "osm_id": "w788097921",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 134,
+   "lonlat": [
+    25.6568387,
+    60.9769278
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 44.5
+  },
+  {
+   "osm_id": "w792492949",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 83,
+   "lonlat": [
+    25.6611521,
+    60.9756616
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.7
+  },
+  {
+   "osm_id": "w977378837",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 173,
+   "lonlat": [
+    25.6597143,
+    60.9779296
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 155.4
+  },
+  {
+   "osm_id": "w1489461269",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 133,
+   "lonlat": [
+    25.6562821,
+    60.9760302
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 17.3
+  }
+ ]
+}

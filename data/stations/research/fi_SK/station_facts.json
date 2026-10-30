@@ -1,0 +1,1025 @@
+{
+ "clack_id": "fi:SK",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level (new station building / station hall, platforms)",
+   "other_names": [],
+   "note": "New station building (architect Anssi Lassila / OOPEAA) opened 4 Dec 2024; the station hall is part of an office and business building with the family centre and a 450-space parking house (P-Asema) joined directly to the hall. Bus and taxi users enter at street level. The 1971 station building still stands; its future is undecided.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; Wikipedia 'Seinäjoki railway station', https://en.wikipedia.org/wiki/Sein%C3%A4joki_railway_station, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses under the tracks",
+   "other_names": [],
+   "note": "Two underpasses: the new one by the new station building (city centre ↔ Pohja to the north, finished Feb 2025) and an older one further north-west. No signposted level names found.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "SK L1",
+   "track": "1",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1 (the train stops with the platform to its south-west)",
+   "_source": "laser (2025-06-13, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform SK L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "SK L2",
+   "track": "2",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 2 (the train stops with the platform to its north-east)",
+   "_source": "laser (2025-06-13, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform SK L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "SK L3",
+   "track": "3",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 3 (the train stops with the platform to its south-west)",
+   "_source": "laser (2025-06-13, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform SK L3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; BanInfo SIDE picked the side"
+  },
+  {
+   "platform_bis": "SK L4",
+   "track": "4",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 4 (the train stops with the platform to its south-west)",
+   "_source": "laser (2025-06-13, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform SK L4; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w1425385959",
+    "w1425385960",
+    "w1340337587",
+    "w1343431352"
+   ],
+   "name": "New underpass (by the new station building)",
+   "between": [
+    "city centre / station hall",
+    "Pohja (north side)"
+   ],
+   "where": "at the new station building (south-east part of the platforms)",
+   "confirmed_by": "owner text (OOPEAA, the architect: 'a new underpass connects the city centre with Pohja and gives safe access to the platforms', finished Feb 2025) + OSM",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561427",
+   "between": [
+    "new underpass",
+    "platform 1 (track 1, station side)"
+   ],
+   "where": "at the new station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8453867,
+    "lat": 62.791327,
+    "how": "OSM n13041561427",
+    "_source": "OpenStreetMap n13041561427 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561419",
+   "between": [
+    "new underpass",
+    "island platform tracks 2–3"
+   ],
+   "where": "at the new station building end of the island platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8456782,
+    "lat": 62.791464,
+    "how": "OSM n13041561419",
+    "_source": "OpenStreetMap n13041561419 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1419199660",
+    "w1419199658"
+   ],
+   "between": [
+    "new underpass",
+    "platform 1 / island platform 2–3"
+   ],
+   "where": "beside the lifts",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12398310523",
+   "between": [
+    "street / parking house",
+    "new underpass"
+   ],
+   "where": "station-building side, by stairs w1419159646 / w1419159651",
+   "confirmed_by": "OSM only (OOPEAA shows stairs to the platforms from the parking-house entrance)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30",
+   "position": {
+    "lon": 22.8451799,
+    "lat": 62.791251,
+    "how": "OSM n12398310523",
+    "_source": "OpenStreetMap n12398310523 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w151098790",
+    "w1425385961",
+    "w1425385962"
+   ],
+   "name": "Older underpass (north-west)",
+   "between": [
+    "station side",
+    "island platform tracks 2–3"
+   ],
+   "where": "about 115 m north-west of the new underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400621",
+   "between": [
+    "older underpass",
+    "platform 1 / station side"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8436542,
+    "lat": 62.7920111,
+    "how": "OSM n1639400621",
+    "_source": "OpenStreetMap n1639400621 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400624",
+   "between": [
+    "older underpass",
+    "island platform tracks 2–3"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8440713,
+    "lat": 62.7922026,
+    "how": "OSM n1639400624",
+    "_source": "OpenStreetMap n1639400624 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w151098980",
+    "w151098793"
+   ],
+   "between": [
+    "older underpass",
+    "platform 1 side / island platform"
+   ],
+   "where": "north-west underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w151098790",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 30.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w151098790 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8441117,
+    "lat": 62.7921832,
+    "how": "OSM w151098790 (point on the way)",
+    "_source": "OpenStreetMap w151098790 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w151098980",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w151098980 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8436999,
+    "lat": 62.791991,
+    "how": "OSM w151098980 (point on the way)",
+    "_source": "OpenStreetMap w151098980 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1340337587",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 57.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1340337587 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8453318,
+    "lat": 62.7912772,
+    "how": "OSM w1340337587 (point on the way)",
+    "_source": "OpenStreetMap w1340337587 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1340337607",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1340337607 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8453067,
+    "lat": 62.791289,
+    "how": "OSM w1340337607 (point on the way)",
+    "_source": "OpenStreetMap w1340337607 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1362294142",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1362294142 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.845344,
+    "lat": 62.7913141,
+    "how": "OSM w1362294142 (point on the way)",
+    "_source": "OpenStreetMap w1362294142 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1419199660",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1419199660 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8451785,
+    "lat": 62.7913868,
+    "how": "OSM w1419199660 (point on the way)",
+    "_source": "OpenStreetMap w1419199660 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1419233650",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1419233650 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8452358,
+    "lat": 62.7912577,
+    "how": "OSM w1419233650 (point on the way)",
+    "_source": "OpenStreetMap w1419233650 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1425385960",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425385960 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8453867,
+    "lat": 62.791327,
+    "how": "OSM w1425385960 (point on the way)",
+    "_source": "OpenStreetMap w1425385960 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1425385961",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1425385961 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8436542,
+    "lat": 62.7920111,
+    "how": "OSM w1425385961 (point on the way)",
+    "_source": "OpenStreetMap w1425385961 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400621",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n1639400621 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8436542,
+    "lat": 62.7920111,
+    "how": "OSM n1639400621",
+    "_source": "OpenStreetMap n1639400621 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n1639400624",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n1639400624 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8440713,
+    "lat": 62.7922026,
+    "how": "OSM n1639400624",
+    "_source": "OpenStreetMap n1639400624 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12398310523",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12398310523 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8451799,
+    "lat": 62.791251,
+    "how": "OSM n12398310523",
+    "_source": "OpenStreetMap n12398310523 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561419",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13041561419 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8456782,
+    "lat": 62.791464,
+    "how": "OSM n13041561419",
+    "_source": "OpenStreetMap n13041561419 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13041561427",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13041561427 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.8453867,
+    "lat": 62.791327,
+    "how": "OSM n13041561427",
+    "_source": "OpenStreetMap n13041561427 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station hall (new station building)",
+   "street": "Ruukintie / Valtionkatu",
+   "level": "0",
+   "where": "street-level entrance for bus and taxi users; VR address Ruukintie 2; local buses stop on Valtionkatu in front of the station (OOPEAA)",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "name": "Parking-house link (P-Asema)",
+   "street": "Asemapäällikönkatu",
+   "level": "0",
+   "where": "the parking house joins the station hall directly and opens to Asemapäällikönkatu; stairs to the platforms at its entrance",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "name": "New underpass, Pohja side",
+   "street": "Pohja (north side of the yard; street not named in sources)",
+   "level": "-1",
+   "where": "far end of the new underpass",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n1789872491",
+   "street": "Valtionkatu",
+   "street_how": "nearest named street, 21.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1789872491 (already in OSM)",
+   "position": {
+    "lon": 22.8421779,
+    "lat": 62.791789,
+    "how": "OSM n1789872491",
+    "_source": "OpenStreetMap n1789872491 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2063153959",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n2063153959 (already in OSM)",
+   "position": {
+    "lon": 22.8439027,
+    "lat": 62.7915081,
+    "how": "OSM n2063153959",
+    "_source": "OpenStreetMap n2063153959 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n2157439198",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n2157439198 (already in OSM)",
+   "position": {
+    "lon": 22.8442065,
+    "lat": 62.7916495,
+    "how": "OSM n2157439198",
+    "_source": "OpenStreetMap n2157439198 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8737084926",
+   "street": "Valtionkatu",
+   "street_how": "nearest named street, 12.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n8737084926 (already in OSM)",
+   "position": {
+    "lon": 22.8408674,
+    "lat": 62.7920169,
+    "how": "OSM n8737084926",
+    "_source": "OpenStreetMap n8737084926 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12396780457",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n12396780457 (already in OSM)",
+   "position": {
+    "lon": 22.8449731,
+    "lat": 62.7910955,
+    "how": "OSM n12396780457",
+    "_source": "OpenStreetMap n12396780457 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12396780458",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 23.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n12396780458 (already in OSM)",
+   "position": {
+    "lon": 22.8452895,
+    "lat": 62.7912464,
+    "how": "OSM n12396780458",
+    "_source": "OpenStreetMap n12396780458 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12398289780",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 23.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12398289780 (already in OSM)",
+   "position": {
+    "lon": 22.8451993,
+    "lat": 62.7912868,
+    "how": "OSM n12398289780",
+    "_source": "OpenStreetMap n12398289780 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12398289781",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 24.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12398289781 (already in OSM)",
+   "position": {
+    "lon": 22.8451112,
+    "lat": 62.7913263,
+    "how": "OSM n12398289781",
+    "_source": "OpenStreetMap n12398289781 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12398310505",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 11.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12398310505 (already in OSM)",
+   "position": {
+    "lon": 22.845298,
+    "lat": 62.7909502,
+    "how": "OSM n12398310505",
+    "_source": "OpenStreetMap n12398310505 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12398310508",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 25.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12398310508 (already in OSM)",
+   "position": {
+    "lon": 22.8456119,
+    "lat": 62.791102,
+    "how": "OSM n12398310508",
+    "_source": "OpenStreetMap n12398310508 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12398310516",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 15.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n12398310516 (already in OSM)",
+   "position": {
+    "lon": 22.8448143,
+    "lat": 62.7906745,
+    "how": "OSM n12398310516",
+    "_source": "OpenStreetMap n12398310516 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Pyöräparkki Asema B",
+   "osm_id": "n12612770003",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "parking",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12612770003 (already in OSM)",
+   "position": {
+    "lon": 22.8450653,
+    "lat": 62.7910546,
+    "how": "OSM n12612770003",
+    "_source": "OpenStreetMap n12612770003 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12777953042",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 22.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n12777953042 (already in OSM)",
+   "position": {
+    "lon": 22.8452072,
+    "lat": 62.7907688,
+    "how": "OSM n12777953042",
+    "_source": "OpenStreetMap n12777953042 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13041604964",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 23.7 m",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13041604964 (already in OSM)",
+   "position": {
+    "lon": 22.8452559,
+    "lat": 62.7912665,
+    "how": "OSM n13041604964",
+    "_source": "OpenStreetMap n13041604964 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Pyöräparkki Asema A",
+   "osm_id": "n13154978924",
+   "street": "Asemapäällikkö",
+   "street_how": "nearest named street, 8.3 m",
+   "level": null,
+   "kind": "parking",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13154978924 (already in OSM)",
+   "position": {
+    "lon": 22.8468591,
+    "lat": 62.7904366,
+    "how": "OSM n13154978924",
+    "_source": "OpenStreetMap n13154978924 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n14094707724",
+   "street": "Asema-aukio",
+   "street_how": "nearest named street, 18.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n14094707724 (already in OSM)",
+   "position": {
+    "lon": 22.8441066,
+    "lat": 62.7910374,
+    "how": "OSM n14094707724",
+    "_source": "OpenStreetMap n14094707724 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila (station hall)",
+   "where": "new station building",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Café Picnic",
+   "where": "inside the station building; the VR assistance point is next to it",
+   "osm_id": "n12396780467",
+   "note": "No hours on VR's page; picnic.fi would not load.",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8453405,
+    "lat": 62.7911607,
+    "osm_id": "n12396780467",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 11.0,
+    "how": "OSM node n12396780467",
+    "_source": "OpenStreetMap n12396780467 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "R-Kioski",
+   "where": "in the station building (OSM in_station_building)",
+   "osm_id": "n2157465905",
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 07:15-21:00; Su 10:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8449143,
+    "lat": 62.7911823,
+    "osm_id": "n2157465905",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.8,
+    "how": "OSM node n2157465905",
+    "_source": "OpenStreetMap n2157465905 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Food & Co Bistro Kaffeli",
+   "where": "in the station building (OSM in_station_building)",
+   "osm_id": "n12398310502",
+   "note": "No hours: the Compass Group page returned no content.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8451716,
+    "lat": 62.7910891,
+    "osm_id": "n12398310502",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.7,
+    "how": "OSM node n12398310502",
+    "_source": "OpenStreetMap n12398310502 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "osm_id": "n2157465904",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8450477,
+    "lat": 62.7913197,
+    "osm_id": "n2157465904",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 8.0,
+    "how": "OSM node n2157465904",
+    "_source": "OpenStreetMap n2157465904 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatti",
+   "where": "station building side (OSM)",
+   "osm_id": "n2157465903",
+   "note": "No VR service point; ticket office closed 2016.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; Wikipedia 'Seinäjoki railway station', https://en.wikipedia.org/wiki/Sein%C3%A4joki_railway_station, read 2026-10-30",
+   "position": {
+    "lon": 22.8451099,
+    "lat": 62.7912162,
+    "osm_id": "n2157465903",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 14.7,
+    "how": "OSM node n2157465903",
+    "_source": "OpenStreetMap n2157465903 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers.",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "inside the station building next to Café Picnic",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Asema (Seipark)",
+   "where": "parking house next to the new station building, joined to the station hall",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "w1320722832",
+   "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30",
+   "position": {
+    "lon": 22.8464191,
+    "lat": 62.7906048,
+    "osm_id": "w1320722832",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1320722832",
+    "_source": "OpenStreetMap w1320722832 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stands",
+   "where": "OSM n1640581520 'Seinäjoen asema' and n13475956204 (Keskustaksi); taxi users enter the hall at street level",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Local buses (Valtionkatu) and long-distance buses (bus station north of the old station building)",
+   "where": "local buses on Valtionkatu in front of the station; long-distance buses leave from the north side of the old station with a direct link from the platform",
+   "note": "VR's page says the station has no public-transport connections and that rail-replacement buses leave from platform 1 at the north end; the architect's text describes the bus links above. Not reconciled.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Pyöräparkki Asema A / B",
+   "where": "700 spaces around the station",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n2157465904",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n2157465904 (read 2026-10-30)",
+   "position": {
+    "lon": 22.8450477,
+    "lat": 62.7913197,
+    "osm_id": "n2157465904",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 8.0,
+    "how": "OSM node n2157465904",
+    "_source": "OpenStreetMap n2157465904 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "grocery",
+   "name": "Mokka Market",
+   "brand": null,
+   "cuisine": "asian;middle_eastern;indian;balkan;mexican",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 22.842684,
+    "lat": 62.7916579,
+    "osm_id": "n12431171255",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 64.9,
+    "how": "OSM node n12431171255",
+    "_source": "OpenStreetMap n12431171255 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12431171255 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Alusasut Justihi Eikä Melekehen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://liivitliikkeessa.fi/",
+   "position": {
+    "lon": 22.8420945,
+    "lat": 62.7918895,
+    "osm_id": "n12431171260",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 67.7,
+    "how": "OSM node n12431171260",
+    "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Platform numbering: VR names platforms 1–3 (1 and 2 raised); Digitraffic has tracks 1–4 with only L1 'korkea' (L2–L4 'matala'), and the laser gives L2 ≈0.52 m above rail. How tracks 2–4 map onto platforms 2 and 3, and where track 4's platform is, is unsettled.",
+  "Lifts per platform are OSM only; no published plan read (Väylävirasto 'asemien lähialuekartat' at vayla.fi would not load).",
+  "Café Picnic and Food & Co Bistro Kaffeli hours not found; R-Kioski hours are OSM only.",
+  "Bus links: VR ('no public transport connections') vs OOPEAA (local buses on Valtionkatu, long-distance buses north of the old station).",
+  "No signposted level names; no heights.",
+  "Toilet fee unknown."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Per OSM: two underpasses, each with a lift and stairs to platform 1 (track 1) and to the island platform for tracks 2–3. The newest (by the new station building, finished Feb 2025) is confirmed by the architect's text; per-platform lifts are OSM only. VR: platforms 1 and 2 are raised, platforms 1–3 have canopies.",
+   "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  }
+ ]
+}

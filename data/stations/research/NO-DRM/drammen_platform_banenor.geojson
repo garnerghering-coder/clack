@@ -1,0 +1,411 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.2066882,
+      59.7398323
+     ],
+     [
+      10.2065098,
+      59.7399016
+     ],
+     [
+      10.2062223,
+      59.74000790000001
+     ],
+     [
+      10.205685200000001,
+      59.7401961
+     ],
+     [
+      10.204591200000001,
+      59.74057929999999
+     ],
+     [
+      10.2043031,
+      59.7406759
+     ],
+     [
+      10.204008899999998,
+      59.74076849999999
+     ],
+     [
+      10.2036955,
+      59.740860000000005
+     ],
+     [
+      10.2034267,
+      59.74093440000001
+     ],
+     [
+      10.2031375,
+      59.741004999999994
+     ],
+     [
+      10.202837,
+      59.7410764
+     ],
+     [
+      10.2024131,
+      59.741167
+     ],
+     [
+      10.2013961,
+      59.74137480000002
+     ],
+     [
+      10.2012272,
+      59.74140740000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 3.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "DRM-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 1.9,
+    "laser_track_bed_m": 1.63,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Side platform",
+    "x_covers_tracks": [
+     "1"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 1535.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Side platform.",
+    "x_geometry": "extent: OSM platform outline w1305136492 (ref 1), 355 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "w1305136492",
+    "x_nsr_quays": [
+     "NSR:Quay:22"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w1305136492 (ref 1), 355 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.206499,
+      59.7397044
+     ],
+     [
+      10.2063871,
+      59.73974790000001
+     ],
+     [
+      10.206051700000002,
+      59.739869999999996
+     ],
+     [
+      10.205434199999997,
+      59.74008569999999
+     ],
+     [
+      10.2043887,
+      59.74045079999998
+     ],
+     [
+      10.2041192,
+      59.7405441
+     ],
+     [
+      10.203815499999997,
+      59.740643099999986
+     ],
+     [
+      10.2035677,
+      59.740719299999995
+     ],
+     [
+      10.203300699999998,
+      59.740793100000005
+     ],
+     [
+      10.2030347,
+      59.740863199999986
+     ],
+     [
+      10.202703399999999,
+      59.74094399999999
+     ],
+     [
+      10.202310699999998,
+      59.741034600000006
+     ],
+     [
+      10.201275900000002,
+      59.7412662
+     ],
+     [
+      10.201105800000002,
+      59.741304500000005
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 3",
+    "track": "2,3",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760/740 mm above top of rail (Bane NOR; two values: one per platform edge, the first taken for track 3)",
+    "length_m": 350.0,
+    "width_m": 3.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "DRM-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 2.06,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760/740",
+    "x_platform_type": "Island platform between tracks 3 and 2",
+    "x_covers_tracks": [
+     "3",
+     "2"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 2830.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 3 and 2.",
+    "x_geometry": "extent: OSM platform outline w1305136503 (ref 2;3), 353 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "w1305136503",
+    "x_nsr_quays": [
+     "NSR:Quay:20"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w1305136503 (ref 2;3), 353 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.201070100000003,
+      59.74126850000002
+     ],
+     [
+      10.2012349,
+      59.74123189999999
+     ],
+     [
+      10.2022623,
+      59.7410002
+     ],
+     [
+      10.2026776,
+      59.740905000000005
+     ],
+     [
+      10.202993,
+      59.74082749999997
+     ],
+     [
+      10.2032567,
+      59.7407576
+     ],
+     [
+      10.2035165,
+      59.74068470000002
+     ],
+     [
+      10.203769,
+      59.74060889999999
+     ],
+     [
+      10.2040662,
+      59.74051189999999
+     ],
+     [
+      10.2043489,
+      59.7404135
+     ],
+     [
+      10.2053773,
+      59.74005420000002
+     ],
+     [
+      10.205998700000002,
+      59.73983719999999
+     ],
+     [
+      10.206335000000001,
+      59.739714500000005
+     ],
+     [
+      10.2064373,
+      59.7396742
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 4",
+    "track": "4,5",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760/755 mm above top of rail (Bane NOR; two values: one per platform edge, the first taken for track 4)",
+    "length_m": 350.0,
+    "width_m": 3.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "DRM-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 1.79,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760/755",
+    "x_platform_type": "Island platform between tracks 4 and 5",
+    "x_covers_tracks": [
+     "4",
+     "5"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 2830.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 4 and 5.",
+    "x_geometry": "extent: OSM platform outline r7648642 (ref 4;5), 351 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r7648642",
+    "x_nsr_quays": [
+     "NSR:Quay:26"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7648642 (ref 4;5), 351 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.200978,
+      59.74114910000001
+     ],
+     [
+      10.2011628,
+      59.74110809999999
+     ],
+     [
+      10.202072399999999,
+      59.740891
+     ],
+     [
+      10.202513599999998,
+      59.74078409999999
+     ],
+     [
+      10.2028475,
+      59.74069870000001
+     ],
+     [
+      10.2030716,
+      59.74063670000002
+     ],
+     [
+      10.2033144,
+      59.7405636
+     ],
+     [
+      10.203585,
+      59.7404792
+     ],
+     [
+      10.2038335,
+      59.740394299999984
+     ],
+     [
+      10.2041253,
+      59.740295299999985
+     ],
+     [
+      10.205258,
+      59.73989859999999
+     ],
+     [
+      10.2061216,
+      59.73959729999999
+     ],
+     [
+      10.2062565,
+      59.7395488
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 6",
+    "track": "6",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760/735 mm above top of rail (Bane NOR; two values: one per platform edge, the first taken for track 6)",
+    "length_m": 350.0,
+    "width_m": 3.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "DRM-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 2.43,
+    "laser_track_bed_m": 1.61,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760/735",
+    "x_platform_type": "Side platform",
+    "x_covers_tracks": [
+     "6"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 1567.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Side platform.",
+    "x_geometry": "extent: OSM platform outline r20743613 (ref 6), 347 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r20743613",
+    "x_nsr_quays": [
+     "NSR:Quay:109342"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r20743613 (ref 6), 347 m along the track (Bane NOR: 350 m)"
+   }
+  }
+ ]
+}

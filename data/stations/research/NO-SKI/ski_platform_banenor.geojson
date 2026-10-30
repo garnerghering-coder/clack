@@ -1,0 +1,254 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.8343515,
+      59.71985069999999
+     ],
+     [
+      10.8342528,
+      59.71962950000001
+     ],
+     [
+      10.834134500000001,
+      59.71933190000001
+     ],
+     [
+      10.8340408,
+      59.71909269999998
+     ],
+     [
+      10.8339532,
+      59.7188416
+     ],
+     [
+      10.8339062,
+      59.718707000000016
+     ],
+     [
+      10.833821,
+      59.7184182
+     ],
+     [
+      10.833706599999998,
+      59.71800539999998
+     ],
+     [
+      10.8336289,
+      59.717687600000005
+     ],
+     [
+      10.8335167,
+      59.71723709999999
+     ],
+     [
+      10.8333909,
+      59.71673919999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 2",
+    "track": "1,2",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 7.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SKI-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 129.15,
+    "laser_track_bed_m": 128.89,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Island platform between tracks 2 and 1",
+    "x_covers_tracks": [
+     "2",
+     "1"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 3350.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 2 and 1.",
+    "x_geometry": "extent: OSM platform outline r11180738 (ref 1;2), 351 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r11180738",
+    "x_nsr_quays": [
+     "NSR:Quay:201"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r11180738 (ref 1;2), 351 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.8334741,
+      59.71673489999998
+     ],
+     [
+      10.833598,
+      59.71722739999999
+     ],
+     [
+      10.833709599999999,
+      59.717681299999995
+     ],
+     [
+      10.8337907,
+      59.718002599999984
+     ],
+     [
+      10.8339,
+      59.7184133
+     ],
+     [
+      10.8339923,
+      59.71870260000002
+     ],
+     [
+      10.834042399999998,
+      59.7188498
+     ],
+     [
+      10.8341233,
+      59.71908739999999
+     ],
+     [
+      10.834212,
+      59.71931769999998
+     ],
+     [
+      10.8343342,
+      59.7196105
+     ],
+     [
+      10.834434999999997,
+      59.719841399999986
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 3",
+    "track": "3,4",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 7.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SKI-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 128.87,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Island platform between tracks 3 and 4",
+    "x_covers_tracks": [
+     "3",
+     "4"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 3350.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 3 and 4.",
+    "x_geometry": "extent: OSM platform outline r11180737 (ref 3;4), 350 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r11180737",
+    "x_nsr_quays": [
+     "NSR:Quay:200"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r11180737 (ref 3;4), 350 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.8345023,
+      59.7182631
+     ],
+     [
+      10.834884299999999,
+      59.71953689999998
+     ],
+     [
+      10.835029899999999,
+      59.72001729999999
+     ],
+     [
+      10.8351609,
+      59.72045610000001
+     ],
+     [
+      10.8352692,
+      59.7208151
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 6",
+    "track": "5,6",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 288.0,
+    "width_m": 5.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SKI-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 129.57,
+    "laser_track_bed_m": 128.94,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Island platform between tracks 6 and 5",
+    "x_covers_tracks": [
+     "6",
+     "5"
+    ],
+    "x_track_type": "Train track",
+    "x_track_length_m": 3719.0,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 6 and 5.",
+    "x_geometry": "extent: OSM platform outline r11180736 (ref 5;6), 287 m along the track (Bane NOR: 288 m)",
+    "x_osm_platform": "r11180736",
+    "x_nsr_quays": [
+     "NSR:Quay:107151"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r11180736 (ref 5;6), 287 m along the track (Bane NOR: 288 m)"
+   }
+  }
+ ]
+}

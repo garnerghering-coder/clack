@@ -1,0 +1,260 @@
+{
+ "levels": [
+  {
+   "osm_level": "-1",
+   "name": "Passasjen under sporene (underpass)",
+   "other_names": [
+    "undergang under sporene"
+   ],
+   "note": "Bane NOR: the waiting room is in the underpass under the tracks, entered from the passage. Escalators, stairs and lifts go from here up to the platforms. OSM tags the underpass, escalators, stairs and lifts '-1;0'.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Plattformer (elevated)",
+   "note": "Elevated station with two island platforms: tracks 1/2 and tracks 3/4, each 13 m wide and 700 mm high, 280 m and 266 m long. Askerbanen uses tracks 2 and 3, Drammenbanen tracks 1 and 4.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; en.wikipedia.org 'Lysaker Station' https://en.wikipedia.org/wiki/Lysaker_Station, read 2026-10-30"
+  },
+  {
+   "osm_level": "3",
+   "name": "Lysaker torg (OSM level 3)",
+   "note": "OSM has entrances at levels 0 and 3, all nearest Lysaker torg, and two lifts '0;3' there. No owner source names this level.",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w476332819",
+    "w476332821"
+   ],
+   "between": [
+    "passasjen (underpass)",
+    "platforms"
+   ],
+   "where": "two up-escalators from the underpass, one per island platform (OSM positions ~20 m apart)",
+   "note": "Bane NOR: 'Det er rulletrapper, trapper og heiser til plattformer.' OSM has duplicate escalator ways w1455926335 and w1455926336 at the same spots.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w476332818",
+    "w476332820"
+   ],
+   "between": [
+    "passasjen (underpass)",
+    "platforms"
+   ],
+   "where": "two stairs beside the escalators",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n6445483854",
+    "n6445483855"
+   ],
+   "between": [
+    "passasjen (underpass)",
+    "platforms"
+   ],
+   "where": "two lifts beside the escalators and stairs; OSM does not say which platform each reaches",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n13348402065",
+    "n13348402066"
+   ],
+   "between": [
+    "OSM level 0",
+    "OSM level 3 (Lysaker torg)"
+   ],
+   "where": "at the Lysaker torg entrance, south end of the station",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w53746856",
+    "w53746861"
+   ],
+   "between": [
+    "?",
+    "?"
+   ],
+   "where": "two footbridges (layer 1) north-west of the underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Lysaker torg",
+   "street": "Lysaker torg",
+   "where": "south end of the passage; OSM has six entrance nodes here (levels 0 and 3: n678464951, n13348622556–9, n13348622564)",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "pharmacy",
+   "name": "Vitusapotek Lysaker stasjon",
+   "osm_id": "n678464935",
+   "opening_hours": "Mo-Fr 07:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Address Elveveien 16. No weekend hours listed. OSM's Mo-Fr 08:00-16:00 is out of date.",
+   "_source": "https://www.vitusapotek.no/apotek, read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "Joker Lysaker stasjon",
+   "osm_id": "n678464937",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 08:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen Lysaker jbst.",
+   "osm_id": "n681304850",
+   "note": "In narvesen.no's store list (#080, Drammensveien 325); hours hidden there and missing in OSM.",
+   "_source": "https://narvesen.no/finn-butikk, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Espresso House Lysaker",
+   "osm_id": "n7233878616",
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-18:00; Su 09:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Mett på Lett",
+   "osm_id": "n3131502662",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "osm_id": "n13822259536",
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa,Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Tintin",
+   "osm_id": "n681304680",
+   "note": "No hours in OSM; no owner page found.",
+   "_source": "OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (3)",
+   "where": "three machines on the station area",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "Mo-Su 05:30-23:30",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "in the underpass under the tracks, entered from the passage",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC (incl. HC toilet)",
+   "fee": "yes (payment machine)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Minibank",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_trolley",
+   "name": "Bagasjetralle",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Lysaker stasjon (buss)",
+   "where": "right outside the station, on the south side by Drammensveien. Rail replacement: platform F towards Drammen/Skien/Kongsberg/Stavanger, platform G towards Oslo S and Oslo lufthavn",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxiholdeplass",
+   "where": "east of the station under the railway bridge at Strandveien; kiss & ride (short-term) is there too",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Bane NOR parkering",
+   "where": "Nordraaks vei 1: 47 spaces in total. 36 commuter spaces (250 kr, with a period ticket, paid in Bane NOR's parking app); 10 day spaces (40 kr/day, max 72 h, machine or EasyPark); 1 HC space. Checked Mo–Fr 05:00–17:00; free at other times.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelstativ",
+   "where": "149 spaces without roof",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30"
+  },
+  {
+   "category": "ferry_terminal",
+   "name": "Båt til Nesoddtangen",
+   "where": "quay near the station; rush hours only (Ruter B11 per Wikipedia)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; en.wikipedia.org 'Lysaker Station' https://en.wikipedia.org/wiki/Lysaker_Station, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Sporplan Lysaker (track plan)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-l-/ko-001350-000---lysaker.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Buss for tog Lysaker (rail-replacement map)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/kart-buss-for-tog/buss-for-tog-lysaker.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Image; not read."
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Both island platforms (1/2 and 3/4) are reached from the underpass by escalator, stairs and lift (Bane NOR). OSM shows one escalator, one stair and one lift per platform. Which set goes to which platform is not tagged.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-l-/lysaker/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-LYS), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Shop positions and 'where': no owner text says where in the passage each shop is. Positions come from OSM, which has no level for the shops.",
+  "Hours for Joker, Espresso House, Mett på Lett and Subway are OSM's only; the chains' store finders could not be read. Narvesen and Tintin have no hours.",
+  "Level names: Bane NOR says only 'passasjen/undergang under sporene'. OSM level 3 at Lysaker torg is not explained by any owner source.",
+  "Entrances: only the Lysaker torg side is in OSM. Bane NOR names Drammensveien (bus, south), Strandveien (taxi, east) and Nordraaks vei 1 (parking) but not the entrance doors.",
+  "Fornebubanen construction at Lysaker may change access; not checked."
+ ]
+}

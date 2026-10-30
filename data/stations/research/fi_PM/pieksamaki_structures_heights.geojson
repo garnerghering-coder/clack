@@ -1,0 +1,815 @@
+{
+ "type": "FeatureCollection",
+ "name": "pieksamaki_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 122.32,
+ "track_bed_m": 121.65,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1662962,
+       62.30099139999999
+      ],
+      [
+       27.1664418,
+       62.300989599999994
+      ],
+      [
+       27.1664442,
+       62.3010315
+      ],
+      [
+       27.1667216,
+       62.30102810000001
+      ],
+      [
+       27.1667343,
+       62.30125629999999
+      ],
+      [
+       27.16677,
+       62.3012559
+      ],
+      [
+       27.1667719,
+       62.301290399999985
+      ],
+      [
+       27.1667378,
+       62.3012908
+      ],
+      [
+       27.166740600000004,
+       62.301342199999986
+      ],
+      [
+       27.1667519,
+       62.30154599999999
+      ],
+      [
+       27.1667891,
+       62.301545499999996
+      ],
+      [
+       27.1667911,
+       62.3015819
+      ],
+      [
+       27.1667569,
+       62.30158229999998
+      ],
+      [
+       27.1667659,
+       62.3017453
+      ],
+      [
+       27.1664729,
+       62.3017489
+      ],
+      [
+       27.1664694,
+       62.30168499999999
+      ],
+      [
+       27.1663347,
+       62.30168659999998
+      ],
+      [
+       27.1663274,
+       62.3015548
+      ],
+      [
+       27.1663159,
+       62.3013473
+      ],
+      [
+       27.1663059,
+       62.301166900000005
+      ],
+      [
+       27.1662962,
+       62.30099139999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w155269527",
+    "name": "Pieksämäen Matkakeskus (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "2",
+     "name": "Pieksämäen Matkakeskus"
+    },
+    "ground_min_m": 121.89,
+    "ground_median_m": 122.09,
+    "ground_max_m": 122.39,
+    "laser_points": 0,
+    "source": "Outline OSM w155269527 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1677496,
+       62.30072030000001
+      ],
+      [
+       27.1680004,
+       62.3007156
+      ],
+      [
+       27.1679802,
+       62.30042859999999
+      ],
+      [
+       27.1677276,
+       62.30043369999997
+      ],
+      [
+       27.1677496,
+       62.30072030000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w155270277",
+    "name": "Savon radan museo (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "name": "Savon radan museo",
+     "start_date": "1889"
+    },
+    "ground_min_m": 121.91,
+    "ground_median_m": 122.28,
+    "ground_max_m": 123.02,
+    "laser_points": 0,
+    "source": "Outline OSM w155270277 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.167152000000005,
+       62.3010084
+      ],
+      [
+       27.1673364,
+       62.30100580000002
+      ],
+      [
+       27.1674186,
+       62.302240999999995
+      ],
+      [
+       27.1672317,
+       62.3022052
+      ],
+      [
+       27.167152000000005,
+       62.3010084
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w155336251",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 121.57,
+    "ground_median_m": 122.37,
+    "ground_max_m": 126.23,
+    "roof_top_median_m": 126.42,
+    "roof_top_p95_m": 126.49,
+    "laser_points": 11,
+    "height_above_ground_median_m": 4.05,
+    "height_above_ground_p95_m": 4.12,
+    "top_above_platform_m": 4.1,
+    "base_above_platform_m": -0.75,
+    "source": "Outline OSM w155336251 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.164756,
+       62.30103959999998
+      ],
+      [
+       27.165681000000003,
+       62.30124989999999
+      ],
+      [
+       27.1658471,
+       62.30128030000001
+      ],
+      [
+       27.1660225,
+       62.30129999999999
+      ],
+      [
+       27.1659875,
+       62.301326800000005
+      ],
+      [
+       27.1659716,
+       62.301338999999984
+      ],
+      [
+       27.1658915,
+       62.30136249999998
+      ],
+      [
+       27.1657917,
+       62.30136400000001
+      ],
+      [
+       27.1656045,
+       62.301326299999985
+      ],
+      [
+       27.1656179,
+       62.30131289999997
+      ],
+      [
+       27.165631,
+       62.30129980000001
+      ],
+      [
+       27.1647878,
+       62.301106399999995
+      ],
+      [
+       27.1647717,
+       62.3010729
+      ],
+      [
+       27.164756,
+       62.30103959999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w200674514",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "1"
+    },
+    "ground_min_m": 121.24,
+    "ground_median_m": 121.69,
+    "ground_max_m": 122.13,
+    "laser_points": 0,
+    "source": "Outline OSM w200674514 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1681734,
+       62.3013533
+      ],
+      [
+       27.1682906,
+       62.3013872
+      ],
+      [
+       27.1683695,
+       62.30143809999999
+      ],
+      [
+       27.168404,
+       62.30150319999999
+      ],
+      [
+       27.1684169,
+       62.3017645
+      ],
+      [
+       27.168474100000005,
+       62.301742499999996
+      ],
+      [
+       27.1685286,
+       62.3017205
+      ],
+      [
+       27.1685142,
+       62.30149960000001
+      ],
+      [
+       27.1684725,
+       62.3014172
+      ],
+      [
+       27.1683686,
+       62.301349599999995
+      ],
+      [
+       27.168214600000002,
+       62.3013038
+      ],
+      [
+       27.1681264,
+       62.3012907
+      ],
+      [
+       27.1680359,
+       62.3012888
+      ],
+      [
+       27.1680744,
+       62.30131699999998
+      ],
+      [
+       27.1681099,
+       62.30133669999999
+      ],
+      [
+       27.1681734,
+       62.3013533
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w200836384",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 121.13,
+    "ground_median_m": 121.47,
+    "ground_max_m": 122.18,
+    "laser_points": 0,
+    "source": "Outline OSM w200836384 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1658613,
+       62.302140800000004
+      ],
+      [
+       27.1660089,
+       62.301984999999995
+      ],
+      [
+       27.1693348,
+       62.3026008
+      ],
+      [
+       27.169211400000002,
+       62.3027529
+      ],
+      [
+       27.1658613,
+       62.302140800000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1230324174",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 119.25,
+    "ground_median_m": 121.61,
+    "ground_max_m": 127.77,
+    "roof_top_median_m": 129.26,
+    "roof_top_p95_m": 131.09,
+    "laser_points": 14,
+    "height_above_ground_median_m": 7.65,
+    "height_above_ground_p95_m": 9.48,
+    "top_above_platform_m": 6.94,
+    "base_above_platform_m": -3.07,
+    "source": "Outline OSM w1230324174 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1668322,
+       62.3015395
+      ],
+      [
+       27.1667888,
+       62.30153999999999
+      ],
+      [
+       27.1667891,
+       62.301545499999996
+      ],
+      [
+       27.1667519,
+       62.30154599999999
+      ],
+      [
+       27.166740600000004,
+       62.301342199999986
+      ],
+      [
+       27.1667378,
+       62.3012908
+      ],
+      [
+       27.1667719,
+       62.301290399999985
+      ],
+      [
+       27.1667723,
+       62.30129759999999
+      ],
+      [
+       27.1668187,
+       62.30129699999999
+      ],
+      [
+       27.1668322,
+       62.3015395
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1434884408",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 122.16,
+    "ground_median_m": 122.31,
+    "ground_max_m": 122.45,
+    "laser_points": 0,
+    "source": "Outline OSM w1434884408 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1678413,
+       62.301344600000014
+      ],
+      [
+       27.1679015,
+       62.3013617
+      ],
+      [
+       27.1679173,
+       62.301383
+      ],
+      [
+       27.1679219,
+       62.30147030000001
+      ],
+      [
+       27.1678849,
+       62.30147069999999
+      ],
+      [
+       27.1678479,
+       62.30147109999999
+      ],
+      [
+       27.1678413,
+       62.301344600000014
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1547012525",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 121.92,
+    "ground_median_m": 122.0,
+    "ground_max_m": 122.08,
+    "laser_points": 3,
+    "source": "Outline OSM w1547012525 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.167240800000002,
+       62.30138459999999
+      ],
+      [
+       27.1673098,
+       62.3013843
+      ],
+      [
+       27.1673356,
+       62.30138409999999
+      ],
+      [
+       27.1673349,
+       62.3013583
+      ],
+      [
+       27.167240200000002,
+       62.30135879999999
+      ],
+      [
+       27.167240800000002,
+       62.30138459999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1547012537",
+    "name": "elevator",
+    "osm_tags": {
+     "building": "elevator"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w1547012537 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1677018,
+       62.301378699999994
+      ],
+      [
+       27.1677265,
+       62.301378599999985
+      ],
+      [
+       27.1677517,
+       62.3013785
+      ],
+      [
+       27.1677511,
+       62.301352599999994
+      ],
+      [
+       27.1677011,
+       62.30135289999999
+      ],
+      [
+       27.1677018,
+       62.301378699999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1547012539",
+    "name": "elevator",
+    "osm_tags": {
+     "building": "elevator"
+    },
+    "ground_min_m": 122.13,
+    "ground_median_m": 122.29,
+    "ground_max_m": 122.36,
+    "laser_points": 0,
+    "source": "Outline OSM w1547012539 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1677162,
+       62.30126319999998
+      ],
+      [
+       27.1677546,
+       62.3012627
+      ],
+      [
+       27.1677517,
+       62.301216100000005
+      ],
+      [
+       27.1677133,
+       62.301216599999975
+      ],
+      [
+       27.1677162,
+       62.30126319999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1547012540",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 122.19,
+    "ground_median_m": 122.28,
+    "ground_max_m": 122.35,
+    "laser_points": 0,
+    "source": "Outline OSM w1547012540 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1677403,
+       62.3016352
+      ],
+      [
+       27.1677787,
+       62.3016347
+      ],
+      [
+       27.1677759,
+       62.30158809999998
+      ],
+      [
+       27.167737400000004,
+       62.3015886
+      ],
+      [
+       27.1677403,
+       62.3016352
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1547012541",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 122.03,
+    "ground_median_m": 122.2,
+    "ground_max_m": 122.32,
+    "laser_points": 0,
+    "source": "Outline OSM w1547012541 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.1677621,
+       62.3019834
+      ],
+      [
+       27.1678005,
+       62.3019829
+      ],
+      [
+       27.1677977,
+       62.30193630000001
+      ],
+      [
+       27.167759200000003,
+       62.3019368
+      ],
+      [
+       27.1677621,
+       62.3019834
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1547012542",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 121.93,
+    "ground_median_m": 122.08,
+    "ground_max_m": 122.19,
+    "laser_points": 0,
+    "source": "Outline OSM w1547012542 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       27.166242700000005,
+       62.3015558
+      ],
+      [
+       27.1663274,
+       62.3015548
+      ],
+      [
+       27.1663059,
+       62.301166900000005
+      ],
+      [
+       27.166221200000003,
+       62.30116790000001
+      ],
+      [
+       27.166242700000005,
+       62.3015558
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1547043913",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 121.75,
+    "ground_median_m": 121.91,
+    "ground_max_m": 122.05,
+    "laser_points": 2,
+    "source": "Outline OSM w1547043913 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa)",
+    "underside_m": null
+   }
+  }
+ ]
+}

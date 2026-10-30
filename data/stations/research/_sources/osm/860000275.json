@@ -1,0 +1,408 @@
+{
+ "clack_id": "860000275",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w454595876",
+   "ref": null,
+   "level": null
+  },
+  {
+   "osm_id": "w847410940",
+   "ref": null,
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w25607568",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 107.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    8.9764558,
+    56.1332703
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1534670026",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    8.976557,
+    56.1334135
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1534949087",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 6.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    8.9782946,
+    56.1334985
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1534949090",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 21.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    8.9779964,
+    56.1323516
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1535790666",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 5.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    8.9780116,
+    56.1323485
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n8700980092",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 22.3,
+   "lonlat": [
+    8.9781028,
+    56.1334153
+   ]
+  },
+  {
+   "osm_id": "n8700980102",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Sølvgade",
+   "nearest_street_m": 23.2,
+   "lonlat": [
+    8.9783228,
+    56.1336221
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n2969412609",
+   "category": "parking_entrance",
+   "name": "Banegårdens P-kælder",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 108,
+   "lonlat": [
+    8.9762196,
+    56.1336483
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 408.1
+  },
+  {
+   "osm_id": "n2969412611",
+   "category": "parking_entrance",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 46,
+   "lonlat": [
+    8.9785758,
+    56.133228
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 255.9
+  },
+  {
+   "osm_id": "n4122090542",
+   "category": "restaurant",
+   "name": "Scandic Regina Restaurant",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 68,
+   "lonlat": [
+    8.9789228,
+    56.1334669
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 251.6
+  },
+  {
+   "osm_id": "n5331087822",
+   "category": "parking_entrance",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 74,
+   "lonlat": [
+    8.9790173,
+    56.1331616
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 228.3
+  },
+  {
+   "osm_id": "n6104885918",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 48,
+   "lonlat": [
+    8.9785472,
+    56.1335296
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 274.7
+  },
+  {
+   "osm_id": "n9231041674",
+   "category": "shop=kiosk",
+   "name": "Scandic Lobby Shop",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 71,
+   "lonlat": [
+    8.9789858,
+    56.1334557
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 247.7,
+   "operator": "Scandic Hotels"
+  },
+  {
+   "osm_id": "n9593088619",
+   "category": "fast_food",
+   "name": "DSB 7-Eleven",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 49,
+   "lonlat": [
+    8.9784711,
+    56.133613
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 283.9,
+   "operator": "7-Eleven"
+  },
+  {
+   "osm_id": "n12582586973",
+   "category": "bicycle_repair_station",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 58,
+   "lonlat": [
+    8.9786196,
+    56.1336368
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 277.9
+  },
+  {
+   "osm_id": "n12582931363",
+   "category": "recycling",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 64,
+   "lonlat": [
+    8.97865,
+    56.1336954
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 280.4
+  },
+  {
+   "osm_id": "n13983896221",
+   "category": "fast_food",
+   "name": "Station's Pizza Kebap",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 7,
+   "lonlat": [
+    8.9779144,
+    56.1332732
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 294.9,
+   "cuisine": "kebab;pizza"
+  },
+  {
+   "osm_id": "n13985991362",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 47,
+   "lonlat": [
+    8.9784133,
+    56.1336228
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 287.4
+  },
+  {
+   "osm_id": "w141501369",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 5,
+   "lonlat": [
+    8.9770494,
+    56.1335269
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 304.0
+  },
+  {
+   "osm_id": "w454907685",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    8.9791572,
+    56.133426
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 219.9
+  },
+  {
+   "osm_id": "w474917328",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 104,
+   "lonlat": [
+    8.9769515,
+    56.1322959
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 268.7
+  },
+  {
+   "osm_id": "w892641965",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 82,
+   "lonlat": [
+    8.9767809,
+    56.1339249
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 381.0
+  },
+  {
+   "osm_id": "w1426357380",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 9,
+   "lonlat": [
+    8.9775601,
+    56.13338
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 309.9
+  },
+  {
+   "osm_id": "w1426357381",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 34,
+   "lonlat": [
+    8.9772062,
+    56.1334443
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 334.2
+  }
+ ]
+}

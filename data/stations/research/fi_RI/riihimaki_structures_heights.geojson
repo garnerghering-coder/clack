@@ -1,0 +1,3364 @@
+{
+ "type": "FeatureCollection",
+ "name": "riihimaki_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 92.09,
+ "track_bed_m": 91.4,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7806929,
+       60.735326600000015
+      ],
+      [
+       24.78061,
+       60.73531830000002
+      ],
+      [
+       24.7805544,
+       60.735450599999986
+      ],
+      [
+       24.780895,
+       60.7354848
+      ],
+      [
+       24.7809877,
+       60.735494200000005
+      ],
+      [
+       24.7810002,
+       60.7354644
+      ],
+      [
+       24.7810689,
+       60.73530110000001
+      ],
+      [
+       24.7811261,
+       60.73516490000001
+      ],
+      [
+       24.7812154,
+       60.73495239999999
+      ],
+      [
+       24.7812829,
+       60.7349592
+      ],
+      [
+       24.7813035,
+       60.73491039999999
+      ],
+      [
+       24.7812319,
+       60.7349032
+      ],
+      [
+       24.7812546,
+       60.734849099999984
+      ],
+      [
+       24.781268100000002,
+       60.7348171
+      ],
+      [
+       24.7810434,
+       60.73479449999999
+      ],
+      [
+       24.7810035,
+       60.7347905
+      ],
+      [
+       24.780967,
+       60.7347868
+      ],
+      [
+       24.7809331,
+       60.7347834
+      ],
+      [
+       24.7808458,
+       60.73477470000001
+      ],
+      [
+       24.7807983,
+       60.734887699999994
+      ],
+      [
+       24.7807966,
+       60.7348917
+      ],
+      [
+       24.780788900000005,
+       60.73491
+      ],
+      [
+       24.7808648,
+       60.73491769999999
+      ],
+      [
+       24.7807987,
+       60.735075
+      ],
+      [
+       24.7807759,
+       60.7351293
+      ],
+      [
+       24.780759,
+       60.7351693
+      ],
+      [
+       24.7807371,
+       60.73522160000001
+      ],
+      [
+       24.7806929,
+       60.735326600000015
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w37761031",
+    "name": "Riihimäen rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "2",
+     "name": "Riihimäen rautatieasema",
+     "roof:shape": "hipped"
+    },
+    "ground_min_m": 90.77,
+    "ground_median_m": 91.31,
+    "ground_max_m": 92.86,
+    "laser_points": 1,
+    "source": "Outline OSM w37761031 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7810002,
+       60.7354644
+      ],
+      [
+       24.7812107,
+       60.7354856
+      ],
+      [
+       24.7814691,
+       60.734870699999995
+      ],
+      [
+       24.7812546,
+       60.734849099999984
+      ],
+      [
+       24.7812319,
+       60.7349032
+      ],
+      [
+       24.7813035,
+       60.73491039999999
+      ],
+      [
+       24.7812829,
+       60.7349592
+      ],
+      [
+       24.7812154,
+       60.73495239999999
+      ],
+      [
+       24.7811261,
+       60.73516490000001
+      ],
+      [
+       24.7810689,
+       60.73530110000001
+      ],
+      [
+       24.7810002,
+       60.7354644
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w100084332",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "building:levels": "1",
+     "layer": "1",
+     "roof:shape": "butterfly"
+    },
+    "ground_min_m": 91.38,
+    "ground_median_m": 91.48,
+    "ground_max_m": 92.21,
+    "roof_top_median_m": 96.22,
+    "roof_top_p95_m": 96.39,
+    "laser_points": 21,
+    "height_above_ground_median_m": 4.74,
+    "height_above_ground_p95_m": 4.91,
+    "top_above_platform_m": 4.13,
+    "base_above_platform_m": -0.71,
+    "source": "Outline OSM w100084332 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7810885,
+       60.73467840000001
+      ],
+      [
+       24.7810538,
+       60.73467229999999
+      ],
+      [
+       24.7810203,
+       60.73466700000001
+      ],
+      [
+       24.7809792,
+       60.7346593
+      ],
+      [
+       24.7807624,
+       60.73462320000001
+      ],
+      [
+       24.780551600000003,
+       60.734588500000015
+      ],
+      [
+       24.7810002,
+       60.7339481
+      ],
+      [
+       24.7812281,
+       60.7336377
+      ],
+      [
+       24.7815057,
+       60.73326469999999
+      ],
+      [
+       24.7813845,
+       60.73324419999999
+      ],
+      [
+       24.781265900000005,
+       60.73322420000001
+      ],
+      [
+       24.7814194,
+       60.733006700000004
+      ],
+      [
+       24.7815665,
+       60.73279819999999
+      ],
+      [
+       24.7818064,
+       60.7328387
+      ],
+      [
+       24.7817033,
+       60.732984800000004
+      ],
+      [
+       24.7817973,
+       60.73300009999999
+      ],
+      [
+       24.7818121,
+       60.732968499999984
+      ],
+      [
+       24.7818423,
+       60.73293969999999
+      ],
+      [
+       24.781880300000005,
+       60.732917899999975
+      ],
+      [
+       24.7819199,
+       60.7329028
+      ],
+      [
+       24.7819678,
+       60.732890999999995
+      ],
+      [
+       24.7820195,
+       60.732884100000014
+      ],
+      [
+       24.782088800000004,
+       60.73288279999999
+      ],
+      [
+       24.7821698,
+       60.732892800000016
+      ],
+      [
+       24.7822154,
+       60.732905
+      ],
+      [
+       24.7822554,
+       60.73292130000001
+      ],
+      [
+       24.7822925,
+       60.7329445
+      ],
+      [
+       24.7823182,
+       60.73297099999999
+      ],
+      [
+       24.7823305,
+       60.732997
+      ],
+      [
+       24.7823318,
+       60.73302360000002
+      ],
+      [
+       24.7823169,
+       60.73305759999999
+      ],
+      [
+       24.782296,
+       60.73307959999999
+      ],
+      [
+       24.782267300000004,
+       60.73309929999997
+      ],
+      [
+       24.782214200000002,
+       60.73312219999999
+      ],
+      [
+       24.7820309,
+       60.73339179999999
+      ],
+      [
+       24.782135300000004,
+       60.733410299999996
+      ],
+      [
+       24.7819564,
+       60.7336752
+      ],
+      [
+       24.7818553,
+       60.733661
+      ],
+      [
+       24.7817216,
+       60.733856700000004
+      ],
+      [
+       24.7818244,
+       60.73387089999999
+      ],
+      [
+       24.7816241,
+       60.7341358
+      ],
+      [
+       24.7815147,
+       60.73411540000001
+      ],
+      [
+       24.7814663,
+       60.7341833
+      ],
+      [
+       24.7813754,
+       60.734310900000004
+      ],
+      [
+       24.7814792,
+       60.734327400000005
+      ],
+      [
+       24.7813067,
+       60.73459099999999
+      ],
+      [
+       24.7812007,
+       60.734576600000004
+      ],
+      [
+       24.781135200000005,
+       60.7346708
+      ],
+      [
+       24.7811267,
+       60.734684900000005
+      ],
+      [
+       24.7810885,
+       60.73467840000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w100420380",
+    "name": "Matkakeskus Liikerata (retail)",
+    "osm_tags": {
+     "building": "retail",
+     "building:levels": "3",
+     "name": "Matkakeskus Liikerata"
+    },
+    "ground_min_m": 89.75,
+    "ground_median_m": 91.2,
+    "ground_max_m": 92.59,
+    "roof_top_median_m": 100.12,
+    "roof_top_p95_m": 104.01,
+    "laser_points": 5,
+    "height_above_ground_median_m": 8.92,
+    "height_above_ground_p95_m": 12.81,
+    "top_above_platform_m": 8.03,
+    "base_above_platform_m": -2.34,
+    "source": "Outline OSM w100420380 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7809331,
+       60.7347834
+      ],
+      [
+       24.780967,
+       60.7347868
+      ],
+      [
+       24.7810035,
+       60.7347905
+      ],
+      [
+       24.7810885,
+       60.73467840000001
+      ],
+      [
+       24.7810538,
+       60.73467229999999
+      ],
+      [
+       24.7810203,
+       60.73466700000001
+      ],
+      [
+       24.7809331,
+       60.7347834
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w119527381",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 91.65,
+    "ground_median_m": 92.26,
+    "ground_max_m": 92.86,
+    "laser_points": 0,
+    "source": "Outline OSM w119527381 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7813845,
+       60.73324419999999
+      ],
+      [
+       24.7813559,
+       60.73328360000002
+      ],
+      [
+       24.7813213,
+       60.7333311
+      ],
+      [
+       24.781263,
+       60.7334112
+      ],
+      [
+       24.7805052,
+       60.7344766
+      ],
+      [
+       24.7804384,
+       60.73457109999998
+      ],
+      [
+       24.7804325,
+       60.73458000000001
+      ],
+      [
+       24.7805444,
+       60.73459950000001
+      ],
+      [
+       24.780551600000003,
+       60.734588500000015
+      ],
+      [
+       24.7810002,
+       60.7339481
+      ],
+      [
+       24.7812281,
+       60.7336377
+      ],
+      [
+       24.7815057,
+       60.73326469999999
+      ],
+      [
+       24.7813845,
+       60.73324419999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w683559372",
+    "name": "canopy",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 90.1,
+    "ground_median_m": 90.15,
+    "ground_max_m": 90.41,
+    "roof_top_median_m": 95.57,
+    "roof_top_p95_m": 95.64,
+    "laser_points": 17,
+    "height_above_ground_median_m": 5.42,
+    "height_above_ground_p95_m": 5.49,
+    "top_above_platform_m": 3.48,
+    "base_above_platform_m": -1.99,
+    "source": "Outline OSM w683559372 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7817033,
+       60.732984800000004
+      ],
+      [
+       24.7815057,
+       60.73326469999999
+      ],
+      [
+       24.7813845,
+       60.73324419999999
+      ],
+      [
+       24.781265900000005,
+       60.73322420000001
+      ],
+      [
+       24.7814194,
+       60.733006700000004
+      ],
+      [
+       24.7815665,
+       60.73279819999999
+      ],
+      [
+       24.7818064,
+       60.7328387
+      ],
+      [
+       24.7817033,
+       60.732984800000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w766620305",
+    "name": "building",
+    "osm_tags": {
+     "building:levels": "7",
+     "building:part": "yes",
+     "height": "27"
+    },
+    "ground_min_m": 89.75,
+    "ground_median_m": 90.24,
+    "ground_max_m": 92.13,
+    "laser_points": 0,
+    "source": "Outline OSM w766620305 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.780759,
+       60.7351693
+      ],
+      [
+       24.7807295,
+       60.7351665
+      ],
+      [
+       24.780731,
+       60.735162599999995
+      ],
+      [
+       24.7807653,
+       60.7350752
+      ],
+      [
+       24.7807666,
+       60.73507199999998
+      ],
+      [
+       24.7807987,
+       60.735075
+      ],
+      [
+       24.7807759,
+       60.7351293
+      ],
+      [
+       24.780759,
+       60.7351693
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1416700003",
+    "name": "canopy",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 91.31,
+    "ground_median_m": 91.42,
+    "ground_max_m": 91.48,
+    "laser_points": 0,
+    "source": "Outline OSM w1416700003 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7776307,
+       60.7387326
+      ],
+      [
+       24.7776963,
+       60.7386969
+      ],
+      [
+       24.7778285,
+       60.738624899999984
+      ],
+      [
+       24.7779626,
+       60.7385557
+      ],
+      [
+       24.7780018,
+       60.73853539999999
+      ],
+      [
+       24.778559,
+       60.738503900000005
+      ],
+      [
+       24.7788293,
+       60.7384917
+      ],
+      [
+       24.779101400000002,
+       60.7384825
+      ],
+      [
+       24.7793609,
+       60.7384756
+      ],
+      [
+       24.7794629,
+       60.7384728
+      ],
+      [
+       24.7798195,
+       60.738462900000016
+      ],
+      [
+       24.7802561,
+       60.73844820000001
+      ],
+      [
+       24.7815904,
+       60.73841370000001
+      ],
+      [
+       24.7826719,
+       60.7383809
+      ],
+      [
+       24.783180400000003,
+       60.73836599999998
+      ],
+      [
+       24.7831826,
+       60.73838469999998
+      ],
+      [
+       24.7831884,
+       60.7384342
+      ],
+      [
+       24.783194400000003,
+       60.738485800000014
+      ],
+      [
+       24.7831969,
+       60.73850779999999
+      ],
+      [
+       24.7816043,
+       60.73855520000001
+      ],
+      [
+       24.7804121,
+       60.7385917
+      ],
+      [
+       24.7803036,
+       60.73859499999999
+      ],
+      [
+       24.779663700000004,
+       60.738614299999995
+      ],
+      [
+       24.7795713,
+       60.738617000000005
+      ],
+      [
+       24.7794091,
+       60.738621200000004
+      ],
+      [
+       24.7793046,
+       60.7386244
+      ],
+      [
+       24.7792606,
+       60.7386258
+      ],
+      [
+       24.7792227,
+       60.738627
+      ],
+      [
+       24.7785004,
+       60.73864940000001
+      ],
+      [
+       24.7782236,
+       60.73866129999998
+      ],
+      [
+       24.7779117,
+       60.738691
+      ],
+      [
+       24.7776307,
+       60.7387326
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1420882453",
+    "name": "Peltosaaren ylikulkusilta (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Peltosaaren ylikulkusilta"
+    },
+    "ground_min_m": 89.85,
+    "ground_median_m": 91.31,
+    "ground_max_m": 100.85,
+    "roof_top_median_m": 99.07,
+    "roof_top_p95_m": 102.65,
+    "laser_points": 11,
+    "height_above_ground_median_m": 7.76,
+    "height_above_ground_p95_m": 11.34,
+    "top_above_platform_m": 6.98,
+    "base_above_platform_m": -2.24,
+    "source": "Outline OSM w1420882453 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7798759,
+       60.735359800000005
+      ],
+      [
+       24.7798949,
+       60.7353125
+      ],
+      [
+       24.7799047,
+       60.735287899999996
+      ],
+      [
+       24.7799141,
+       60.73526450000001
+      ],
+      [
+       24.7802412,
+       60.7352952
+      ],
+      [
+       24.7804997,
+       60.73531940000001
+      ],
+      [
+       24.7805329,
+       60.7353225
+      ],
+      [
+       24.7805097,
+       60.73537519999999
+      ],
+      [
+       24.7804893,
+       60.7354214
+      ],
+      [
+       24.7801944,
+       60.735392
+      ],
+      [
+       24.780182400000005,
+       60.7353908
+      ],
+      [
+       24.7798759,
+       60.735359800000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1421892828",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 90.56,
+    "ground_median_m": 90.75,
+    "ground_max_m": 91.0,
+    "laser_points": 2,
+    "source": "Outline OSM w1421892828 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.779965700000005,
+       60.73499409999999
+      ],
+      [
+       24.7799357,
+       60.734991100000016
+      ],
+      [
+       24.7799509,
+       60.734954399999985
+      ],
+      [
+       24.7799809,
+       60.73495739999998
+      ],
+      [
+       24.779965700000005,
+       60.73499409999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1421892836",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 90.45,
+    "ground_median_m": 90.55,
+    "ground_max_m": 90.6,
+    "laser_points": 0,
+    "source": "Outline OSM w1421892836 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7793696,
+       60.734934999999986
+      ],
+      [
+       24.779339500000003,
+       60.73493199999997
+      ],
+      [
+       24.7793547,
+       60.7348954
+      ],
+      [
+       24.7793848,
+       60.7348983
+      ],
+      [
+       24.7793696,
+       60.734934999999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1421892837",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 90.38,
+    "ground_median_m": 90.44,
+    "ground_max_m": 90.49,
+    "laser_points": 0,
+    "source": "Outline OSM w1421892837 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.782154500000004,
+       60.733520199999994
+      ],
+      [
+       24.7820937,
+       60.73350920000001
+      ],
+      [
+       24.7821674,
+       60.733412200000004
+      ],
+      [
+       24.7822282,
+       60.7334232
+      ],
+      [
+       24.782154500000004,
+       60.733520199999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1497720234",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 90.48,
+    "ground_median_m": 90.77,
+    "ground_max_m": 91.77,
+    "laser_points": 1,
+    "source": "Outline OSM w1497720234 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7821117,
+       60.7335781
+      ],
+      [
+       24.7820541,
+       60.7335687
+      ],
+      [
+       24.7820875,
+       60.733520199999994
+      ],
+      [
+       24.782145,
+       60.7335297
+      ],
+      [
+       24.7821117,
+       60.7335781
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1497720235",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 90.68,
+    "ground_median_m": 90.9,
+    "ground_max_m": 91.49,
+    "laser_points": 1,
+    "source": "Outline OSM w1497720235 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7820716,
+       60.733631399999986
+      ],
+      [
+       24.782031,
+       60.733622200000006
+      ],
+      [
+       24.7820544,
+       60.7335976
+      ],
+      [
+       24.782095,
+       60.73360679999999
+      ],
+      [
+       24.7820716,
+       60.733631399999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1497720236",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 90.64,
+    "ground_median_m": 91.06,
+    "ground_max_m": 91.51,
+    "laser_points": 0,
+    "source": "Outline OSM w1497720236 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7815012,
+       60.735565900000005
+      ],
+      [
+       24.781644200000002,
+       60.735580299999974
+      ],
+      [
+       24.7819496,
+       60.73485650000001
+      ],
+      [
+       24.7818066,
+       60.73484209999999
+      ],
+      [
+       24.7815012,
+       60.735565900000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1563661661",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "building:levels": "1",
+     "layer": "1"
+    },
+    "ground_min_m": 91.38,
+    "ground_median_m": 91.55,
+    "ground_max_m": 92.59,
+    "roof_top_median_m": 96.57,
+    "roof_top_p95_m": 96.59,
+    "laser_points": 6,
+    "height_above_ground_median_m": 5.02,
+    "height_above_ground_p95_m": 5.04,
+    "top_above_platform_m": 4.48,
+    "base_above_platform_m": -0.71,
+    "source": "Outline OSM w1563661661 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.7819119,
+       60.735606399999995
+      ],
+      [
+       24.7820549,
+       60.73562080000001
+      ],
+      [
+       24.7823603,
+       60.734897000000004
+      ],
+      [
+       24.7822173,
+       60.734882600000006
+      ],
+      [
+       24.7819119,
+       60.735606399999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1563661662",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "building:levels": "1",
+     "layer": "1"
+    },
+    "ground_min_m": 91.35,
+    "ground_median_m": 91.44,
+    "ground_max_m": 92.22,
+    "laser_points": 2,
+    "source": "Outline OSM w1563661662 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        24.78161912762729,
+        60.735721153298414
+       ],
+       [
+        24.781592669240645,
+        60.735769307177186
+       ],
+       [
+        24.78166593701519,
+        60.73577051947298
+       ],
+       [
+        24.7816685469039,
+        60.735694228948894
+       ],
+       [
+        24.78168983297235,
+        60.73569007886373
+       ],
+       [
+        24.781689127358625,
+        60.73563088992945
+       ],
+       [
+        24.78171310962777,
+        60.73561860978031
+       ],
+       [
+        24.781714261498433,
+        60.735532506250294
+       ],
+       [
+        24.781729623173643,
+        60.73552788117914
+       ],
+       [
+        24.781755328477946,
+        60.7355384723216
+       ],
+       [
+        24.78177789908973,
+        60.7354078142875
+       ],
+       [
+        24.78180190248721,
+        60.73539540837467
+       ],
+       [
+        24.781781892923895,
+        60.73538011635329
+       ],
+       [
+        24.781821442492927,
+        60.73537789420854
+       ],
+       [
+        24.781824537342683,
+        60.73533304892107
+       ],
+       [
+        24.781769593571642,
+        60.735332139876306
+       ],
+       [
+        24.78176751415874,
+        60.73535521990362
+       ],
+       [
+        24.781749413074678,
+        60.735358751313534
+       ],
+       [
+        24.781746184258104,
+        60.73544401337594
+       ],
+       [
+        24.781724898360363,
+        60.73544816347108
+       ],
+       [
+        24.78172349391203,
+        60.73549856976269
+       ],
+       [
+        24.781683917925786,
+        60.735510357858324
+       ],
+       [
+        24.781655338499604,
+        60.73565770814584
+       ],
+       [
+        24.781636745345416,
+        60.73566226754314
+       ],
+       [
+        24.781636717582707,
+        60.73568624527266
+       ],
+       [
+        24.78161656452574,
+        60.735688878957504
+       ],
+       [
+        24.78161912762729,
+        60.735721153298414
+       ]
+      ],
+      [
+       [
+        24.781786866369107,
+        60.73534154190707
+       ],
+       [
+        24.78180460389601,
+        60.73534359814077
+       ],
+       [
+        24.78180058141714,
+        60.73536067289452
+       ],
+       [
+        24.781787051276417,
+        60.73535746441594
+       ],
+       [
+        24.781786866369107,
+        60.73534154190707
+       ]
+      ],
+      [
+       [
+        24.781723036906733,
+        60.73550297416834
+       ],
+       [
+        24.781741699656127,
+        60.735510039904874
+       ],
+       [
+        24.78172472055288,
+        60.73551124929952
+       ],
+       [
+        24.781723036906733,
+        60.73550297416834
+       ]
+      ],
+      [
+       [
+        24.78164404584243,
+        60.735761404213136
+       ],
+       [
+        24.7816353596321,
+        60.73574285187656
+       ],
+       [
+        24.781652156336424,
+        60.73574463597528
+       ],
+       [
+        24.78164404584243,
+        60.735761404213136
+       ]
+      ],
+      [
+       [
+        24.78163489257196,
+        60.73572644486844
+       ],
+       [
+        24.78164884730628,
+        60.7357150105041
+       ],
+       [
+        24.781653546574233,
+        60.73572414398585
+       ],
+       [
+        24.78163489257196,
+        60.73572644486844
+       ]
+      ],
+      [
+       [
+        24.781636741326587,
+        60.73569016364368
+       ],
+       [
+        24.781655424529525,
+        60.73569721689416
+       ],
+       [
+        24.78163842495925,
+        60.735698438775685
+       ],
+       [
+        24.781636741326587,
+        60.73569016364368
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.781706995749673,
+        60.73547404586896
+       ],
+       [
+        24.781687013838194,
+        60.73546550020035
+       ],
+       [
+        24.78168639551063,
+        60.73547445935638
+       ],
+       [
+        24.781706995749673,
+        60.73547404586896
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (48.6 m × 3.0 m)",
+    "top_median_m": 96.01,
+    "top_above_track_bed_m": 4.61,
+    "laser_points": 87,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        24.780630044370657,
+        60.73642702158866
+       ],
+       [
+        24.78062818672129,
+        60.73645392378479
+       ],
+       [
+        24.78066480872572,
+        60.73645452999589
+       ],
+       [
+        24.78068375185301,
+        60.73644586178269
+       ],
+       [
+        24.78068453607086,
+        60.73636821454075
+       ],
+       [
+        24.780725974393512,
+        60.7363657246763
+       ],
+       [
+        24.78072969036615,
+        60.736311907904046
+       ],
+       [
+        24.78069904150731,
+        60.736312197273826
+       ],
+       [
+        24.780693662726495,
+        60.736302329768634
+       ],
+       [
+        24.78067536444841,
+        60.736302026877894
+       ],
+       [
+        24.78067557622494,
+        60.73633398293449
+       ],
+       [
+        24.780654562931478,
+        60.736337609663195
+       ],
+       [
+        24.780651496005994,
+        60.736422337708206
+       ],
+       [
+        24.780630044370657,
+        60.73642702158866
+       ]
+      ],
+      [
+       [
+        24.780706809337325,
+        60.73633982183447
+       ],
+       [
+        24.780694529457293,
+        60.73632792972411
+       ],
+       [
+        24.780712809340542,
+        60.736330866465785
+       ],
+       [
+        24.780706809337325,
+        60.73633982183447
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.780566397149418,
+        60.73655157441524
+       ],
+       [
+        24.780560825378988,
+        60.73663244428948
+       ],
+       [
+        24.78059744758506,
+        60.73663305052003
+       ],
+       [
+        24.780596373485434,
+        60.73658231785229
+       ],
+       [
+        24.780637812090685,
+        60.73657982801666
+       ],
+       [
+        24.7806390541808,
+        60.736562023509215
+       ],
+       [
+        24.78061930586399,
+        60.736558603369396
+       ],
+       [
+        24.780623204440282,
+        60.73652570402087
+       ],
+       [
+        24.780602597551518,
+        60.73651924913875
+       ],
+       [
+        24.78066047227398,
+        60.736517330664185
+       ],
+       [
+        24.780663568886965,
+        60.73647248541962
+       ],
+       [
+        24.780589680049587,
+        60.73648024409172
+       ],
+       [
+        24.780591622651947,
+        60.73652148996728
+       ],
+       [
+        24.780566397149418,
+        60.73655157441524
+       ]
+      ],
+      [
+       [
+        24.7806223703417,
+        60.73650009388369
+       ],
+       [
+        24.780610084108748,
+        60.736488203902354
+       ],
+       [
+        24.780628368438634,
+        60.736491143752325
+       ],
+       [
+        24.7806223703417,
+        60.73650009388369
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.78043562124554,
+        60.73692256040836
+       ],
+       [
+        24.78040901559821,
+        60.73697123878103
+       ],
+       [
+        24.78048228605268,
+        60.7369724517374
+       ],
+       [
+        24.780486592612707,
+        60.73686978066043
+       ],
+       [
+        24.78050804456532,
+        60.73686509680486
+       ],
+       [
+        24.780509678601604,
+        60.73681912422144
+       ],
+       [
+        24.78047451901777,
+        60.73681964531208
+       ],
+       [
+        24.780468683739727,
+        60.7368553366125
+       ],
+       [
+        24.78043539306559,
+        60.73685492471724
+       ],
+       [
+        24.78043562124554,
+        60.73692256040836
+       ]
+      ],
+      [
+       [
+        24.780465599081026,
+        60.73691066277309
+       ],
+       [
+        24.780453312752737,
+        60.736898772777536
+       ],
+       [
+        24.780471603625028,
+        60.736901710513244
+       ],
+       [
+        24.780465599081026,
+        60.73691066277309
+       ]
+      ],
+      [
+       [
+        24.780448948902865,
+        60.73691815605334
+       ],
+       [
+        24.780466687208133,
+        60.73692021246765
+       ],
+       [
+        24.78046266380401,
+        60.736937287172815
+       ],
+       [
+        24.780449133139555,
+        60.736934078557155
+       ],
+       [
+        24.780448948902865,
+        60.73691815605334
+       ]
+      ],
+      [
+       [
+        24.780448763856917,
+        60.73696426295711
+       ],
+       [
+        24.78046271955739,
+        60.736952828723176
+       ],
+       [
+        24.780467418660756,
+        60.73696196224408
+       ],
+       [
+        24.780448763856917,
+        60.73696426295711
+       ]
+      ],
+      [
+       [
+        24.78046807731317,
+        60.73687477668386
+       ],
+       [
+        24.780455797321856,
+        60.73686288455195
+       ],
+       [
+        24.780474077485746,
+        60.73686582132739
+       ],
+       [
+        24.78046807731317,
+        60.73687477668386
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.78050640830623,
+        60.7368014005753
+       ],
+       [
+        24.78053008567543,
+        60.73681157100198
+       ],
+       [
+        24.780536311358965,
+        60.736724796733995
+       ],
+       [
+        24.78057292862243,
+        60.73672246242936
+       ],
+       [
+        24.780570986037503,
+        60.73668121655478
+       ],
+       [
+        24.780596207699638,
+        60.73665100594246
+       ],
+       [
+        24.780522937971952,
+        60.73664979305208
+       ],
+       [
+        24.780525500030723,
+        60.73668206740428
+       ],
+       [
+        24.780501516510274,
+        60.73669434733272
+       ],
+       [
+        24.78050098082791,
+        60.73677147929862
+       ],
+       [
+        24.78047575503966,
+        60.73680156372703
+       ],
+       [
+        24.78050640830623,
+        60.7368014005753
+       ]
+      ],
+      [
+       [
+        24.780552530749592,
+        60.736714500476026
+       ],
+       [
+        24.780540244462376,
+        60.73670261048834
+       ],
+       [
+        24.780558528907207,
+        60.73670555034833
+       ],
+       [
+        24.780552530749592,
+        60.736714500476026
+       ]
+      ],
+      [
+       [
+        24.780541265260414,
+        60.73668735910368
+       ],
+       [
+        24.780555220805837,
+        60.73667592485885
+       ],
+       [
+        24.78055991989678,
+        60.736685058376814
+       ],
+       [
+        24.780541265260414,
+        60.73668735910368
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (74.8 m × 3.0 m)",
+    "top_median_m": 95.06,
+    "top_above_track_bed_m": 3.67,
+    "laser_points": 122,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        24.78351526958395,
+        60.733160476906136
+       ],
+       [
+        24.783512795981526,
+        60.73319635071374
+       ],
+       [
+        24.78356773616849,
+        60.73319725902578
+       ],
+       [
+        24.783589770844188,
+        60.73315604740099
+       ],
+       [
+        24.783607472752042,
+        60.7331530071014
+       ],
+       [
+        24.7836109058623,
+        60.733110572006595
+       ],
+       [
+        24.783647209225144,
+        60.7331087551644
+       ],
+       [
+        24.78364427458562,
+        60.73308493711214
+       ],
+       [
+        24.783668005273213,
+        60.73307317187089
+       ],
+       [
+        24.783652156959313,
+        60.73303699516591
+       ],
+       [
+        24.783633860502487,
+        60.733036692688266
+       ],
+       [
+        24.783628648085834,
+        60.73306341262004
+       ],
+       [
+        24.783595361279783,
+        60.73306300152926
+       ],
+       [
+        24.783551573008054,
+        60.73315866009019
+       ],
+       [
+        24.78351526958395,
+        60.733160476906136
+       ]
+      ],
+      [
+       [
+        24.78362743143457,
+        60.73309182213608
+       ],
+       [
+        24.78361514535948,
+        60.73307993242544
+       ],
+       [
+        24.78363342804137,
+        60.73308287185839
+       ],
+       [
+        24.78362743143457,
+        60.73309182213608
+       ]
+      ],
+      [
+       [
+        24.783547952043055,
+        60.73318032812263
+       ],
+       [
+        24.783535672287936,
+        60.73316843626808
+       ],
+       [
+        24.78355395064886,
+        60.733171372615715
+       ],
+       [
+        24.783547952043055,
+        60.73318032812263
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.783413143678047,
+        60.733311478575914
+       ],
+       [
+        24.783410051299192,
+        60.73335632392514
+       ],
+       [
+        24.78344666984516,
+        60.733356929358706
+       ],
+       [
+        24.78344645526953,
+        60.73332497327911
+       ],
+       [
+        24.783467466280996,
+        60.733321346099515
+       ],
+       [
+        24.78347189850421,
+        60.733295007783596
+       ],
+       [
+        24.783505965921513,
+        60.73329503729837
+       ],
+       [
+        24.78350898369335,
+        60.733254522229515
+       ],
+       [
+        24.78352738086264,
+        60.733250482483314
+       ],
+       [
+        24.783548176284686,
+        60.733214911585875
+       ],
+       [
+        24.783493236068296,
+        60.733214003265665
+       ],
+       [
+        24.783494825610003,
+        60.73323926122039
+       ],
+       [
+        24.783454736515914,
+        60.73324031206391
+       ],
+       [
+        24.783455224359045,
+        60.73327174494544
+       ],
+       [
+        24.783433940120393,
+        60.733275895321725
+       ],
+       [
+        24.78343442794297,
+        60.733307328203075
+       ],
+       [
+        24.783413143678047,
+        60.733311478575914
+       ]
+      ],
+      [
+       [
+        24.783486181769746,
+        60.733278106386194
+       ],
+       [
+        24.783473902001038,
+        60.73326621452603
+       ],
+       [
+        24.783492180411535,
+        60.733269150882336
+       ],
+       [
+        24.783486181769746,
+        60.733278106386194
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.783292076147536,
+        60.73347114876051
+       ],
+       [
+        24.783288983579677,
+        60.733515994105005
+       ],
+       [
+        24.783322593865396,
+        60.733506493064326
+       ],
+       [
+        24.783325008903095,
+        60.73352557153463
+       ],
+       [
+        24.78334330563423,
+        60.73352587405581
+       ],
+       [
+        24.783343709833265,
+        60.733484946433
+       ],
+       [
+        24.783364720960915,
+        60.73348131927017
+       ],
+       [
+        24.78336536605973,
+        60.73344836998171
+       ],
+       [
+        24.783385517570625,
+        60.733445736025196
+       ],
+       [
+        24.783385057723613,
+        60.733386031790346
+       ],
+       [
+        24.7834258733625,
+        60.73339251261429
+       ],
+       [
+        24.78342710979622,
+        60.7333745818999
+       ],
+       [
+        24.783372169311555,
+        60.73337367352869
+       ],
+       [
+        24.78335322872912,
+        60.73338234213857
+       ],
+       [
+        24.783328379934137,
+        60.73346933200695
+       ],
+       [
+        24.783292076147536,
+        60.73347114876051
+       ]
+      ],
+      [
+       [
+        24.78332475877931,
+        60.73349100003148
+       ],
+       [
+        24.78331247899102,
+        60.733479108156786
+       ],
+       [
+        24.783330757506917,
+        60.73348204453558
+       ],
+       [
+        24.78332475877931,
+        60.73349100003148
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (55.5 m × 3.0 m)",
+    "top_median_m": 95.14,
+    "top_above_track_bed_m": 3.75,
+    "laser_points": 89,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.782731785734406,
+       60.73441395160695
+      ],
+      [
+       24.78272931113126,
+       60.734449825388786
+      ],
+      [
+       24.78278425343052,
+       60.73445073403271
+      ],
+      [
+       24.78280319480034,
+       60.73444206550858
+      ],
+      [
+       24.78280186827112,
+       60.73439184809926
+      ],
+      [
+       24.782812658105215,
+       60.73437882023776
+      ],
+      [
+       24.782844171670327,
+       60.7343798707517
+      ],
+      [
+       24.782842845077546,
+       60.734329653342016
+      ],
+      [
+       24.782866825928952,
+       60.73431737297697
+      ],
+      [
+       24.7828707609343,
+       60.73426737830361
+      ],
+      [
+       24.782888861281357,
+       60.73426384673795
+      ],
+      [
+       24.782868223531803,
+       60.73423075413119
+      ],
+      [
+       24.782909040131862,
+       60.73423723511673
+      ],
+      [
+       24.782931206832313,
+       60.73414330445171
+      ],
+      [
+       24.782952491710848,
+       60.734139154159024
+      ],
+      [
+       24.78295203268604,
+       60.73407944993257
+      ],
+      [
+       24.782993467894194,
+       60.7340769593504
+      ],
+      [
+       24.782990903507656,
+       60.73404468502187
+      ],
+      [
+       24.783014884088153,
+       60.734032404628465
+      ],
+      [
+       24.78299696645938,
+       60.73399117402647
+      ],
+      [
+       24.783036918988966,
+       60.733978878360716
+      ],
+      [
+       24.783041890768757,
+       60.73393501493286
+      ],
+      [
+       24.78307665728918,
+       60.73393462660728
+      ],
+      [
+       24.78307471158213,
+       60.733893380737165
+      ],
+      [
+       24.78309869201682,
+       60.73388110032775
+      ],
+      [
+       24.78310150715119,
+       60.73384763679657
+      ],
+      [
+       24.783137811373056,
+       60.73384582009697
+      ],
+      [
+       24.783136339920432,
+       60.73379612743752
+      ],
+      [
+       24.78316046466309,
+       60.733783322263044
+      ],
+      [
+       24.78316378040292,
+       60.73374229911761
+      ],
+      [
+       24.78320082126195,
+       60.73373009892653
+      ],
+      [
+       24.7831978869066,
+       60.73370628086796
+      ],
+      [
+       24.783221618219418,
+       60.73369451570997
+      ],
+      [
+       24.78322471290912,
+       60.733661972739306
+      ],
+      [
+       24.783242415130065,
+       60.73365893248975
+      ],
+      [
+       24.78324071815259,
+       60.733617171344676
+      ],
+      [
+       24.783251258609823,
+       60.73360465871901
+      ],
+      [
+       24.783282771433182,
+       60.733605709126124
+      ],
+      [
+       24.783304804727656,
+       60.73355219518292
+      ],
+      [
+       24.783230923223396,
+       60.73355995535174
+      ],
+      [
+       24.78320972199294,
+       60.73363646619181
+      ],
+      [
+       24.783188710746554,
+       60.73364009332964
+      ],
+      [
+       24.78319040765702,
+       60.733681854474895
+      ],
+      [
+       24.783148972972707,
+       60.73368434512079
+      ],
+      [
+       24.783123504636826,
+       60.733780306486196
+      ],
+      [
+       24.7830872004883,
+       60.733782123182365
+      ],
+      [
+       24.783061936603797,
+       60.73386961352942
+      ],
+      [
+       24.7830260463901,
+       60.73387092967027
+      ],
+      [
+       24.78300099305995,
+       60.73396497098738
+      ],
+      [
+       24.782982595415262,
+       60.733969010658505
+      ],
+      [
+       24.782983673283066,
+       60.7340197433446
+      ],
+      [
+       24.78294223814806,
+       60.734022233924165
+      ],
+      [
+       24.782941033995492,
+       60.73408004745795
+      ],
+      [
+       24.782919584256174,
+       60.734084731716045
+      ],
+      [
+       24.782918800590814,
+       60.734126166498875
+      ],
+      [
+       24.782898167894032,
+       60.73412928642156
+      ],
+      [
+       24.78289986443906,
+       60.73417104756584
+      ],
+      [
+       24.782889323655176,
+       60.7341835601612
+      ],
+      [
+       24.78285781028066,
+       60.73418250965886
+      ],
+      [
+       24.782836233740177,
+       60.73429574011784
+      ],
+      [
+       24.782794798238545,
+       60.73429823064981
+      ],
+      [
+       24.78277260253786,
+       60.7344204326349
+      ],
+      [
+       24.782757918954946,
+       60.73443364755509
+      ],
+      [
+       24.782752281334314,
+       60.7344150449014
+      ],
+      [
+       24.782731785734406,
+       60.73441395160695
+      ]
+     ],
+     [
+      [
+       24.78326299353567,
+       60.733588776044606
+      ],
+      [
+       24.783250707410147,
+       60.73357688630111
+      ],
+      [
+       24.783268990339266,
+       60.733579825784844
+      ],
+      [
+       24.78326299353567,
+       60.733588776044606
+      ]
+     ],
+     [
+      [
+       24.78318104333276,
+       60.73371316583303
+      ],
+      [
+       24.78316875719117,
+       60.73370127608214
+      ],
+      [
+       24.783187040183048,
+       60.73370421557735
+      ],
+      [
+       24.78318104333276,
+       60.73371316583303
+      ]
+     ],
+     [
+      [
+       24.783117414666325,
+       60.733837858536766
+      ],
+      [
+       24.783105128501735,
+       60.73382596878014
+      ],
+      [
+       24.78312341155827,
+       60.7338289082843
+      ],
+      [
+       24.783117414666325,
+       60.733837858536766
+      ]
+     ],
+     [
+      [
+       24.783106766705984,
+       60.733801745820564
+      ],
+      [
+       24.78312072006981,
+       60.733790311292935
+      ],
+      [
+       24.783125419487558,
+       60.73379944472623
+      ],
+      [
+       24.783106766705984,
+       60.733801745820564
+      ]
+     ],
+     [
+      [
+       24.78305626054193,
+       60.73392666503768
+      ],
+      [
+       24.78304397436685,
+       60.733914775275515
+      ],
+      [
+       24.783062257467947,
+       60.7339177147882
+      ],
+      [
+       24.78305626054193,
+       60.73392666503768
+      ]
+     ],
+     [
+      [
+       24.78304499386032,
+       60.733899523859264
+      ],
+      [
+       24.783058947289167,
+       60.73388808933853
+      ],
+      [
+       24.78306364670301,
+       60.733897222773855
+      ],
+      [
+       24.78304499386032,
+       60.733899523859264
+      ]
+     ],
+     [
+      [
+       24.782974308652218,
+       60.734051054685274
+      ],
+      [
+       24.78296202246107,
+       60.73403916491572
+      ],
+      [
+       24.782980305624925,
+       60.73404210443988
+      ],
+      [
+       24.782974308652218,
+       60.734051054685274
+      ]
+     ],
+     [
+      [
+       24.782889880865465,
+       60.73421133043996
+      ],
+      [
+       24.782877594645736,
+       60.734199440662785
+      ],
+      [
+       24.782895877892457,
+       60.73420238019881
+      ],
+      [
+       24.782889880865465,
+       60.73421133043996
+      ]
+     ],
+     [
+      [
+       24.782824393537794,
+       60.73436293760604
+      ],
+      [
+       24.782812107285697,
+       60.73435104782294
+      ],
+      [
+       24.78283039061216,
+       60.73435398736825
+      ],
+      [
+       24.782824393537794,
+       60.73436293760604
+      ]
+     ],
+     [
+      [
+       24.782813126907442,
+       60.73433579641001
+      ],
+      [
+       24.78282708061096,
+       60.73432436191552
+      ],
+      [
+       24.78283178001984,
+       60.7343334953584
+      ],
+      [
+       24.782813126907442,
+       60.73433579641001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (104.4 m × 2.8 m)",
+    "top_median_m": 95.19,
+    "top_above_track_bed_m": 3.79,
+    "laser_points": 165,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.78404273694063,
+       60.73269316254301
+      ],
+      [
+       24.784041500884573,
+       60.73271109326667
+      ],
+      [
+       24.784058585533916,
+       60.73272933920495
+      ],
+      [
+       24.78407688182114,
+       60.732729641623756
+      ],
+      [
+       24.784074297926544,
+       60.73270532275976
+      ],
+      [
+       24.7841153802477,
+       60.732703332639176
+      ],
+      [
+       24.784112445291612,
+       60.7326795145942
+      ],
+      [
+       24.784136175507214,
+       60.73266774926698
+      ],
+      [
+       24.784139269150295,
+       60.73263520626527
+      ],
+      [
+       24.784156970719913,
+       60.732632165891154
+      ],
+      [
+       24.784137567459624,
+       60.73261570840746
+      ],
+      [
+       24.78417652905684,
+       60.73261452561286
+      ],
+      [
+       24.78417630225898,
+       60.73259546758113
+      ],
+      [
+       24.784147469871623,
+       60.7325983382782
+      ],
+      [
+       24.784139431229182,
+       60.7325904282589
+      ],
+      [
+       24.784196705780936,
+       60.73258791378084
+      ],
+      [
+       24.784197323336265,
+       60.73257895460571
+      ],
+      [
+       24.784124062707185,
+       60.732577743729784
+      ],
+      [
+       24.784123659537915,
+       60.73261867136536
+      ],
+      [
+       24.784102649059193,
+       60.73262229865092
+      ],
+      [
+       24.78409720107462,
+       60.73264038848251
+      ],
+      [
+       24.784064769167657,
+       60.73263963608272
+      ],
+      [
+       24.78406402071537,
+       60.73268901206731
+      ],
+      [
+       24.78404273694063,
+       60.73269316254301
+      ]
+     ],
+     [
+      [
+       24.78407896697448,
+       60.73269361400721
+      ],
+      [
+       24.7840813467049,
+       60.73267773441953
+      ],
+      [
+       24.784095286969286,
+       60.73267498021507
+      ],
+      [
+       24.784096947342167,
+       60.73269214895647
+      ],
+      [
+       24.78407896697448,
+       60.73269361400721
+      ]
+     ],
+     [
+      [
+       24.784084335304875,
+       60.73265925858091
+      ],
+      [
+       24.78409828781857,
+       60.73264782394532
+      ],
+      [
+       24.784102987354803,
+       60.73265695734639
+      ],
+      [
+       24.784084335304875,
+       60.73265925858091
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (16.3 m × 2.8 m)",
+    "top_median_m": 95.07,
+    "top_above_track_bed_m": 3.67,
+    "laser_points": 28,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       24.783883176154028,
+       60.73287914226477
+      ],
+      [
+       24.783900261653493,
+       60.732897375847195
+      ],
+      [
+       24.783936879689033,
+       60.732897981144255
+      ],
+      [
+       24.783934563339535,
+       60.732865191547866
+      ],
+      [
+       24.783975996911142,
+       60.732862700653115
+      ],
+      [
+       24.78397550855636,
+       60.73283126776908
+      ],
+      [
+       24.78399679243136,
+       60.732827117304666
+      ],
+      [
+       24.784019442440904,
+       60.732764631680006
+      ],
+      [
+       24.783982824555153,
+       60.73276402640625
+      ],
+      [
+       24.783960037888946,
+       60.73281563075544
+      ],
+      [
+       24.78392414888435,
+       60.732816947143185
+      ],
+      [
+       24.78392708371119,
+       60.732840765191135
+      ],
+      [
+       24.783883176154028,
+       60.73287914226477
+      ]
+     ],
+     [
+      [
+       24.783940201988223,
+       60.732844010433965
+      ],
+      [
+       24.78394258179987,
+       60.732828130849484
+      ],
+      [
+       24.783956522141324,
+       60.732825376659925
+      ],
+      [
+       24.78395818244609,
+       60.73284254540235
+      ],
+      [
+       24.783940201988223,
+       60.732844010433965
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (15.1 m × 2.5 m)",
+    "top_median_m": 95.03,
+    "top_above_track_bed_m": 3.63,
+    "laser_points": 25,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        24.781815526730075,
+        60.73519817319761
+       ],
+       [
+        24.781808717032444,
+        60.73529684768159
+       ],
+       [
+        24.78184533774842,
+        60.73529745356365
+       ],
+       [
+        24.78184401270935,
+        60.73524723615841
+       ],
+       [
+        24.781885698471175,
+        60.73524423065531
+       ],
+       [
+        24.781888926886243,
+        60.73515896858518
+       ],
+       [
+        24.781910212571074,
+        60.73515481846273
+       ],
+       [
+        24.781911856879553,
+        60.73509594779612
+       ],
+       [
+        24.781932869220768,
+        60.735092320864794
+       ],
+       [
+        24.78193410657286,
+        60.7350743901731
+       ],
+       [
+        24.78191335069061,
+        60.735069007811475
+       ],
+       [
+        24.781935345631368,
+        60.735056434730154
+       ],
+       [
+        24.78193402045345,
+        60.73500621732346
+       ],
+       [
+        24.781975705894443,
+        60.73500321179063
+       ],
+       [
+        24.781997656108537,
+        60.73488152523741
+       ],
+       [
+        24.782021637695777,
+        60.73486924502827
+       ],
+       [
+        24.782001649678293,
+        60.73485382729328
+       ],
+       [
+        24.782042435864792,
+        60.73483367438646
+       ],
+       [
+        24.781969170206025,
+        60.73483246230723
+       ],
+       [
+        24.781970495437577,
+        60.734882679715064
+       ],
+       [
+        24.781946513820863,
+        60.734894959914875
+       ],
+       [
+        24.781923016279556,
+        60.73496259448181
+       ],
+       [
+        24.781904915434133,
+        60.734966125914156
+       ],
+       [
+        24.78188048833238,
+        60.73512369858183
+       ],
+       [
+        24.78186969786559,
+        60.735136726363706
+       ],
+       [
+        24.781838183595884,
+        60.735135675617165
+       ],
+       [
+        24.781836977372887,
+        60.735193489121535
+       ],
+       [
+        24.781815526730075,
+        60.73519817319761
+       ]
+      ],
+      [
+       [
+        24.781944479184183,
+        60.73498496035233
+       ],
+       [
+        24.781955703111233,
+        60.734966737426696
+       ],
+       [
+        24.781961458001366,
+        60.734983750928286
+       ],
+       [
+        24.781944479184183,
+        60.73498496035233
+       ]
+      ],
+      [
+       [
+        24.78194011867743,
+        60.734947457950696
+       ],
+       [
+        24.781959091976617,
+        60.734940598224455
+       ],
+       [
+        24.781956910621158,
+        60.734949238912975
+       ],
+       [
+        24.78194011867743,
+        60.734947457950696
+       ]
+      ],
+      [
+       [
+        24.781867771375435,
+        60.73520038490768
+       ],
+       [
+        24.781855485165693,
+        60.73518849503847
+       ],
+       [
+        24.78187377520053,
+        60.73519143257922
+       ],
+       [
+        24.781867771375435,
+        60.73520038490768
+       ]
+      ],
+      [
+       [
+        24.781857130726944,
+        60.73516426996735
+       ],
+       [
+        24.78187108513434,
+        60.735152835577274
+       ],
+       [
+        24.781875784386887,
+        60.73516196905186
+       ],
+       [
+        24.781857130726944,
+        60.73516426996735
+       ]
+      ],
+      [
+       [
+        24.781865914000598,
+        60.73522729950686
+       ],
+       [
+        24.781853634105534,
+        60.73521540750082
+       ],
+       [
+        24.781871913467672,
+        60.7352183440822
+       ],
+       [
+        24.781865914000598,
+        60.73522729950686
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.781771451035052,
+        60.73530522527928
+       ],
+       [
+        24.78176959442572,
+        60.73533212750074
+       ],
+       [
+        24.781824538196744,
+        60.7353330365455
+       ],
+       [
+        24.781825775621414,
+        60.73531510585574
+       ],
+       [
+        24.78179538241549,
+        60.73532495633929
+       ],
+       [
+        24.78178974875951,
+        60.7353055280176
+       ],
+       [
+        24.781771451035052,
+        60.73530522527928
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (55.9 m × 3.0 m)",
+    "top_median_m": 95.92,
+    "top_above_track_bed_m": 4.52,
+    "laser_points": 94,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        24.77964436826554,
+        60.73688673616602
+       ],
+       [
+        24.779642509756634,
+        60.736913638342344
+       ],
+       [
+        24.779659594078765,
+        60.736931884829055
+       ],
+       [
+        24.779694776967553,
+        60.73693389087208
+       ],
+       [
+        24.779694382556123,
+        60.73695940627864
+       ],
+       [
+        24.77976604088128,
+        60.736971484341325
+       ],
+       [
+        24.779768630690945,
+        60.7369863195628
+       ],
+       [
+        24.779729170237815,
+        60.736986940094944
+       ],
+       [
+        24.779728551326304,
+        60.736995899237066
+       ],
+       [
+        24.77976373428977,
+        60.736997905262356
+       ],
+       [
+        24.779780424379236,
+        60.73704166714088
+       ],
+       [
+        24.77982034742654,
+        60.73703463327894
+       ],
+       [
+        24.779832917318707,
+        60.737078463506904
+       ],
+       [
+        24.779888483725717,
+        60.73707040184169
+       ],
+       [
+        24.779851653751145,
+        60.73704887366974
+       ],
+       [
+        24.779837229354666,
+        60.73701567483609
+       ],
+       [
+        24.77979735234638,
+        60.73701328391817
+       ],
+       [
+        24.77978597601145,
+        60.7369609354358
+       ],
+       [
+        24.779756319218006,
+        60.73696145999551
+       ],
+       [
+        24.77973071641449,
+        60.73694854101188
+       ],
+       [
+        24.77971639895486,
+        60.736905892574555
+       ],
+       [
+        24.779695797778842,
+        60.73690630575119
+       ],
+       [
+        24.779701659029378,
+        60.73692042439461
+       ],
+       [
+        24.77968450997207,
+        60.736924124744775
+       ],
+       [
+        24.779680990738502,
+        60.73688734264825
+       ],
+       [
+        24.77964436826554,
+        60.73688673616602
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        24.779453342953943,
+        60.736730882256644
+       ],
+       [
+        24.779486272409883,
+        60.736785305932436
+       ],
+       [
+        24.779526625442127,
+        60.73678817230993
+       ],
+       [
+        24.779521060581963,
+        60.736812827425936
+       ],
+       [
+        24.779540804997655,
+        60.73681612156303
+       ],
+       [
+        24.77955522900222,
+        60.736849320427446
+       ],
+       [
+        24.779590179921428,
+        60.73684890105471
+       ],
+       [
+        24.77960834117002,
+        60.73687714536253
+       ],
+       [
+        24.779663907282234,
+        60.73686908378862
+       ],
+       [
+        24.779664526208546,
+        60.73686012464672
+       ],
+       [
+        24.779624649406937,
+        60.73685773367845
+       ],
+       [
+        24.77961265360896,
+        60.736814356699306
+       ],
+       [
+        24.77957801688948,
+        60.736812819855466
+       ],
+       [
+        24.779543077162938,
+        60.736759313750206
+       ],
+       [
+        24.779502580672396,
+        60.73676589426312
+       ],
+       [
+        24.779508289028808,
+        60.73673179226242
+       ],
+       [
+        24.779488544668162,
+        60.73672849812079
+       ],
+       [
+        24.77949120489686,
+        60.73671354575692
+       ],
+       [
+        24.779472906399672,
+        60.73671324270096
+       ],
+       [
+        24.779473496836207,
+        60.73672824890165
+       ],
+       [
+        24.779453342953943,
+        60.736730882256644
+       ]
+      ],
+      [
+       [
+        24.779590397372925,
+        60.736833296776624
+       ],
+       [
+        24.779578111399058,
+        60.73682140670259
+       ],
+       [
+        24.779596395820384,
+        60.73682434669364
+       ],
+       [
+        24.779590397372925,
+        60.736833296776624
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (44.4 m × 2.7 m)",
+    "top_median_m": 95.43,
+    "top_above_track_bed_m": 4.03,
+    "laser_points": 70,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-11. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa)"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1422 @@
+{
+ "type": "FeatureCollection",
+ "name": "sandvika_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m NN2000",
+ "platform_surface_m": 12.87,
+ "track_bed_m": 12.1,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.5258052,
+       59.89258829999997
+      ],
+      [
+       10.525151899999997,
+       59.89226579999998
+      ],
+      [
+       10.5253533,
+       59.892163100000005
+      ],
+      [
+       10.525540499999998,
+       59.89225549999999
+      ],
+      [
+       10.525641400000001,
+       59.89230529999999
+      ],
+      [
+       10.5258844,
+       59.89242519999999
+      ],
+      [
+       10.5260085,
+       59.8924865
+      ],
+      [
+       10.5259553,
+       59.8925136
+      ],
+      [
+       10.5260121,
+       59.8925416
+      ],
+      [
+       10.5259388,
+       59.89257900000001
+      ],
+      [
+       10.5258802,
+       59.892549999999986
+      ],
+      [
+       10.5258052,
+       59.89258829999997
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w103142988",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 10.18,
+    "ground_median_m": 12.65,
+    "ground_max_m": 13.04,
+    "roof_top_median_m": 32.85,
+    "roof_top_p95_m": 35.25,
+    "laser_points": 112,
+    "height_above_ground_median_m": 20.2,
+    "height_above_ground_p95_m": 22.6,
+    "top_above_platform_m": 19.98,
+    "base_above_platform_m": -2.69,
+    "source": "Outline OSM w103142988 (ODbL); roof = median of 112 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.524257899999999,
+       59.892461299999994
+      ],
+      [
+       10.524350699999998,
+       59.892390799999994
+      ],
+      [
+       10.5242558,
+       59.8923594
+      ],
+      [
+       10.5242871,
+       59.89233569999998
+      ],
+      [
+       10.524381799999999,
+       59.89236710000001
+      ],
+      [
+       10.524387299999999,
+       59.892362899999995
+      ],
+      [
+       10.524474500000002,
+       59.89239180000001
+      ],
+      [
+       10.524469099999997,
+       59.892395999999984
+      ],
+      [
+       10.5244925,
+       59.89240369999999
+      ],
+      [
+       10.5244644,
+       59.89242499999999
+      ],
+      [
+       10.5244258,
+       59.892412199999995
+      ],
+      [
+       10.5243289,
+       59.8924857
+      ],
+      [
+       10.524354,
+       59.892494000000006
+      ],
+      [
+       10.5243277,
+       59.8925139
+      ],
+      [
+       10.5241304,
+       59.8924485
+      ],
+      [
+       10.5241574,
+       59.8924279
+      ],
+      [
+       10.524257899999999,
+       59.892461299999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w133659769",
+    "name": "station building",
+    "osm_tags": {
+     "building": "train_station",
+     "layer": "1"
+    },
+    "ground_min_m": 12.1,
+    "ground_median_m": 12.17,
+    "ground_max_m": 12.22,
+    "roof_top_median_m": 16.27,
+    "roof_top_p95_m": 24.28,
+    "laser_points": 35,
+    "height_above_ground_median_m": 4.1,
+    "height_above_ground_p95_m": 12.11,
+    "top_above_platform_m": 3.4,
+    "base_above_platform_m": -0.77,
+    "source": "Outline OSM w133659769 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.525202199999999,
+       59.8924851
+      ],
+      [
+       10.524954799999998,
+       59.892401899999996
+      ],
+      [
+       10.5250563,
+       59.8923259
+      ],
+      [
+       10.525303699999998,
+       59.89240910000001
+      ],
+      [
+       10.525202199999999,
+       59.8924851
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w187993308",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 11.94,
+    "ground_median_m": 12.11,
+    "ground_max_m": 12.78,
+    "roof_top_median_m": 18.72,
+    "roof_top_p95_m": 20.63,
+    "laser_points": 131,
+    "height_above_ground_median_m": 6.61,
+    "height_above_ground_p95_m": 8.52,
+    "top_above_platform_m": 5.85,
+    "base_above_platform_m": -0.93,
+    "source": "Outline OSM w187993308 (ODbL); roof = median of 131 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.523687299999999,
+       59.892634499999986
+      ],
+      [
+       10.525446899999999,
+       59.89324189999997
+      ],
+      [
+       10.525498200000001,
+       59.8932045
+      ],
+      [
+       10.5237385,
+       59.8925971
+      ],
+      [
+       10.523687299999999,
+       59.892634499999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w187993309",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 6.33,
+    "ground_median_m": 6.55,
+    "ground_max_m": 6.63,
+    "roof_top_median_m": 9.9,
+    "roof_top_p95_m": 10.27,
+    "laser_points": 2501,
+    "height_above_ground_median_m": 3.35,
+    "height_above_ground_p95_m": 3.72,
+    "top_above_platform_m": -2.97,
+    "base_above_platform_m": -6.54,
+    "source": "Outline OSM w187993309 (ODbL); roof = median of 2501 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.529423,
+       59.89384399999999
+      ],
+      [
+       10.529682,
+       59.893928
+      ],
+      [
+       10.529606,
+       59.89398400000002
+      ],
+      [
+       10.529344,
+       59.89389799999999
+      ],
+      [
+       10.529423,
+       59.89384399999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w188026781",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 11.75,
+    "ground_median_m": 11.95,
+    "ground_max_m": 12.12,
+    "roof_top_median_m": 16.9,
+    "roof_top_p95_m": 18.19,
+    "laser_points": 60,
+    "height_above_ground_median_m": 4.95,
+    "height_above_ground_p95_m": 6.24,
+    "top_above_platform_m": 4.03,
+    "base_above_platform_m": -1.12,
+    "source": "Outline OSM w188026781 (ODbL); roof = median of 60 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.5292695,
+       59.893877500000016
+      ],
+      [
+       10.5288607,
+       59.89373520000001
+      ],
+      [
+       10.528944,
+       59.893674999999995
+      ],
+      [
+       10.5293528,
+       59.89381729999999
+      ],
+      [
+       10.5292695,
+       59.893877500000016
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w188026793",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 11.95,
+    "ground_median_m": 12.14,
+    "ground_max_m": 12.27,
+    "roof_top_median_m": 16.19,
+    "roof_top_p95_m": 16.39,
+    "laser_points": 222,
+    "height_above_ground_median_m": 4.05,
+    "height_above_ground_p95_m": 4.25,
+    "top_above_platform_m": 3.32,
+    "base_above_platform_m": -0.92,
+    "source": "Outline OSM w188026793 (ODbL); roof = median of 222 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.5226149,
+       59.8920298
+      ],
+      [
+       10.5226533,
+       59.8919934
+      ],
+      [
+       10.5226939,
+       59.8919549
+      ],
+      [
+       10.522739599999998,
+       59.891911599999986
+      ],
+      [
+       10.5227902,
+       59.8918636
+      ],
+      [
+       10.5228295,
+       59.8918264
+      ],
+      [
+       10.5225446,
+       59.8917448
+      ],
+      [
+       10.5221412,
+       59.8916293
+      ],
+      [
+       10.521817999999998,
+       59.8915418
+      ],
+      [
+       10.521708300000002,
+       59.891512100000014
+      ],
+      [
+       10.5211998,
+       59.89138459999999
+      ],
+      [
+       10.5206878,
+       59.891275499999985
+      ],
+      [
+       10.520322199999999,
+       59.8912036
+      ],
+      [
+       10.520276099999998,
+       59.891241
+      ],
+      [
+       10.5202183,
+       59.89128910000001
+      ],
+      [
+       10.5201683,
+       59.89133079999999
+      ],
+      [
+       10.5201168,
+       59.89137339999999
+      ],
+      [
+       10.520075799999999,
+       59.8914079
+      ],
+      [
+       10.5205203,
+       59.8914878
+      ],
+      [
+       10.5209901,
+       59.891586600000004
+      ],
+      [
+       10.5212756,
+       59.89165270000001
+      ],
+      [
+       10.521332799999998,
+       59.8916677
+      ],
+      [
+       10.5214953,
+       59.89171019999999
+      ],
+      [
+       10.5219111,
+       59.89181730000001
+      ],
+      [
+       10.5223494,
+       59.891944599999995
+      ],
+      [
+       10.5226149,
+       59.8920298
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w328019637",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": -0.3,
+    "ground_median_m": 3.32,
+    "ground_max_m": 12.75,
+    "roof_top_median_m": 12.38,
+    "roof_top_p95_m": 13.66,
+    "laser_points": 6589,
+    "height_above_ground_median_m": 9.06,
+    "height_above_ground_p95_m": 10.34,
+    "top_above_platform_m": -0.49,
+    "base_above_platform_m": -13.17,
+    "source": "Outline OSM w328019637 (ODbL); roof = median of 6589 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.5263285,
+       59.89313620000001
+      ],
+      [
+       10.526251700000001,
+       59.8931976
+      ],
+      [
+       10.524803,
+       59.892719
+      ],
+      [
+       10.524767000000002,
+       59.892699
+      ],
+      [
+       10.524736,
+       59.892684
+      ],
+      [
+       10.524667,
+       59.892655000000005
+      ],
+      [
+       10.524625999999998,
+       59.892639
+      ],
+      [
+       10.524589,
+       59.89262699999998
+      ],
+      [
+       10.52448,
+       59.892587999999996
+      ],
+      [
+       10.524482,
+       59.892586
+      ],
+      [
+       10.524386,
+       59.89255400000001
+      ],
+      [
+       10.524416,
+       59.892531
+      ],
+      [
+       10.524512999999999,
+       59.89256199999998
+      ],
+      [
+       10.524516,
+       59.89256000000001
+      ],
+      [
+       10.524661999999998,
+       59.89260800000001
+      ],
+      [
+       10.524713000000002,
+       59.892622
+      ],
+      [
+       10.524785999999999,
+       59.89263999999999
+      ],
+      [
+       10.524831,
+       59.89265000000001
+      ],
+      [
+       10.524889,
+       59.89266099999999
+      ],
+      [
+       10.5263285,
+       59.89313620000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1033730390",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 12.09,
+    "ground_median_m": 12.19,
+    "ground_max_m": 12.36,
+    "roof_top_median_m": 16.99,
+    "roof_top_p95_m": 17.07,
+    "laser_points": 157,
+    "height_above_ground_median_m": 4.8,
+    "height_above_ground_p95_m": 4.88,
+    "top_above_platform_m": 4.12,
+    "base_above_platform_m": -0.78,
+    "source": "Outline OSM w1033730390 (ODbL); roof = median of 157 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.526391,
+       59.89307199999999
+      ],
+      [
+       10.526389,
+       59.893073999999984
+      ],
+      [
+       10.524978999999998,
+       59.892607999999996
+      ],
+      [
+       10.524924000000002,
+       59.89257800000001
+      ],
+      [
+       10.524882,
+       59.892558
+      ],
+      [
+       10.524776,
+       59.892513
+      ],
+      [
+       10.524765,
+       59.892509999999994
+      ],
+      [
+       10.524758999999998,
+       59.892513999999984
+      ],
+      [
+       10.524629,
+       59.892470999999986
+      ],
+      [
+       10.524632,
+       59.892469000000006
+      ],
+      [
+       10.524537,
+       59.892439
+      ],
+      [
+       10.524561,
+       59.892419999999994
+      ],
+      [
+       10.524654,
+       59.892449000000006
+      ],
+      [
+       10.524659,
+       59.89244600000001
+      ],
+      [
+       10.524845000000001,
+       59.89249800000001
+      ],
+      [
+       10.524899,
+       59.892511999999996
+      ],
+      [
+       10.524991,
+       59.89253300000001
+      ],
+      [
+       10.525057999999998,
+       59.892546999999986
+      ],
+      [
+       10.526465,
+       59.893011
+      ],
+      [
+       10.526391,
+       59.89307199999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1033730393",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 12.01,
+    "ground_median_m": 12.13,
+    "ground_max_m": 12.21,
+    "roof_top_median_m": 17.07,
+    "roof_top_p95_m": 17.15,
+    "laser_points": 54,
+    "height_above_ground_median_m": 4.94,
+    "height_above_ground_p95_m": 5.02,
+    "top_above_platform_m": 4.2,
+    "base_above_platform_m": -0.86,
+    "source": "Outline OSM w1033730393 (ODbL); roof = median of 54 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.527145,
+       59.893295999999985
+      ],
+      [
+       10.527121,
+       59.893314000000004
+      ],
+      [
+       10.5264781,
+       59.893100900000015
+      ],
+      [
+       10.526391,
+       59.89307199999999
+      ],
+      [
+       10.526465,
+       59.893011
+      ],
+      [
+       10.526477,
+       59.892999
+      ],
+      [
+       10.527193,
+       59.89325700000002
+      ],
+      [
+       10.527145,
+       59.893295999999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1033730394",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 12.05,
+    "ground_median_m": 12.15,
+    "ground_max_m": 12.28,
+    "roof_top_median_m": 17.02,
+    "roof_top_p95_m": 17.11,
+    "laser_points": 96,
+    "height_above_ground_median_m": 4.87,
+    "height_above_ground_p95_m": 4.96,
+    "top_above_platform_m": 4.15,
+    "base_above_platform_m": -0.82,
+    "source": "Outline OSM w1033730394 (ODbL); roof = median of 96 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.531387899999999,
+       59.890837499999996
+      ],
+      [
+       10.5306852,
+       59.89064909999998
+      ],
+      [
+       10.530254699999999,
+       59.890530099999985
+      ],
+      [
+       10.529817300000001,
+       59.89039710000001
+      ],
+      [
+       10.529344099999998,
+       59.8902482
+      ],
+      [
+       10.528850600000002,
+       59.890088700000014
+      ],
+      [
+       10.5285649,
+       59.88998849999998
+      ],
+      [
+       10.528151399999999,
+       59.88984179999998
+      ],
+      [
+       10.5278595,
+       59.889733799999995
+      ],
+      [
+       10.5273351,
+       59.889533
+      ],
+      [
+       10.527018299999998,
+       59.8894053
+      ],
+      [
+       10.5265586,
+       59.889213399999996
+      ],
+      [
+       10.526118700000001,
+       59.889019000000005
+      ],
+      [
+       10.5255919,
+       59.88877580000001
+      ],
+      [
+       10.5253261,
+       59.888644199999995
+      ],
+      [
+       10.5252514,
+       59.88868279999999
+      ],
+      [
+       10.525084399999999,
+       59.888774399999996
+      ],
+      [
+       10.525015,
+       59.888812400000006
+      ],
+      [
+       10.5252749,
+       59.8889393
+      ],
+      [
+       10.5258156,
+       59.889191900000014
+      ],
+      [
+       10.5262354,
+       59.88937419999998
+      ],
+      [
+       10.5266997,
+       59.88957119999999
+      ],
+      [
+       10.527049499999999,
+       59.8897106
+      ],
+      [
+       10.527585999999998,
+       59.88991630000001
+      ],
+      [
+       10.5279574,
+       59.8900531
+      ],
+      [
+       10.528270199999998,
+       59.890164099999986
+      ],
+      [
+       10.5286145,
+       59.89028109999999
+      ],
+      [
+       10.5290912,
+       59.890440500000004
+      ],
+      [
+       10.529588200000001,
+       59.8905946
+      ],
+      [
+       10.5300382,
+       59.8907301
+      ],
+      [
+       10.5304733,
+       59.8908516
+      ],
+      [
+       10.5308206,
+       59.89094519999998
+      ],
+      [
+       10.5309002,
+       59.8909686
+      ],
+      [
+       10.531176,
+       59.89104069999999
+      ],
+      [
+       10.5312605,
+       59.8910616
+      ],
+      [
+       10.5314751,
+       59.8911147
+      ],
+      [
+       10.531599799999999,
+       59.891085799999985
+      ],
+      [
+       10.5318887,
+       59.891019400000005
+      ],
+      [
+       10.5319968,
+       59.890996900000005
+      ],
+      [
+       10.531387899999999,
+       59.890837499999996
+      ]
+     ],
+     [
+      [
+       10.525457100000002,
+       59.8888499
+      ],
+      [
+       10.525987299999999,
+       59.88909699999999
+      ],
+      [
+       10.5264177,
+       59.889286800000015
+      ],
+      [
+       10.5263833,
+       59.889305799999995
+      ],
+      [
+       10.5259524,
+       59.88911649999998
+      ],
+      [
+       10.5254228,
+       59.8888689
+      ],
+      [
+       10.525457100000002,
+       59.8888499
+      ]
+     ],
+     [
+      [
+       10.5280647,
+       59.88993529999999
+      ],
+      [
+       10.5284207,
+       59.8900635
+      ],
+      [
+       10.5287701,
+       59.89018489999997
+      ],
+      [
+       10.529243500000002,
+       59.890339
+      ],
+      [
+       10.529725,
+       59.8904883
+      ],
+      [
+       10.530171499999998,
+       59.8906182
+      ],
+      [
+       10.530580599999999,
+       59.89073459999999
+      ],
+      [
+       10.530934599999998,
+       59.8908331
+      ],
+      [
+       10.531351000000003,
+       59.890940100000016
+      ],
+      [
+       10.5313282,
+       59.890961
+      ],
+      [
+       10.530917900000002,
+       59.890854700000006
+      ],
+      [
+       10.5305578,
+       59.8907568
+      ],
+      [
+       10.5301447,
+       59.8906404
+      ],
+      [
+       10.5296954,
+       59.8905072
+      ],
+      [
+       10.5292167,
+       59.8903605
+      ],
+      [
+       10.5287446,
+       59.89020579999998
+      ],
+      [
+       10.5283892,
+       59.8900796
+      ],
+      [
+       10.5280466,
+       59.889960900000005
+      ],
+      [
+       10.5280647,
+       59.88993529999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "r10367706",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": -0.41,
+    "ground_median_m": 1.37,
+    "ground_max_m": 5.1,
+    "roof_top_median_m": 5.72,
+    "roof_top_p95_m": 11.89,
+    "laser_points": 1178,
+    "height_above_ground_median_m": 4.35,
+    "height_above_ground_p95_m": 10.52,
+    "top_above_platform_m": -7.15,
+    "base_above_platform_m": -13.28,
+    "source": "Outline OSM r10367706 (ODbL); roof = median of 1178 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.527249835615597,
+       59.89314084721907
+      ],
+      [
+       10.527250247656381,
+       59.89314982343679
+      ],
+      [
+       10.527285976398801,
+       59.89314940935984
+      ],
+      [
+       10.527341217772516,
+       59.89318469309544
+      ],
+      [
+       10.527376946550861,
+       59.89318427899369
+      ],
+      [
+       10.5274139115852,
+       59.893210793533086
+      ],
+      [
+       10.527449640390355,
+       59.893210379411535
+      ],
+      [
+       10.527450052486182,
+       59.89321935562831
+      ],
+      [
+       10.527486193405647,
+       59.893227917713524
+      ],
+      [
+       10.527488253938134,
+       59.893272798796346
+      ],
+      [
+       10.527506118373509,
+       59.89327259172658
+      ],
+      [
+       10.527505706261678,
+       59.89326361551011
+      ],
+      [
+       10.527577163981318,
+       59.89326278720712
+      ],
+      [
+       10.527614129262528,
+       59.8932893016891
+      ],
+      [
+       10.527649858148642,
+       59.89328888751293
+      ],
+      [
+       10.527650270299773,
+       59.893297863728755
+      ],
+      [
+       10.527668134747257,
+       59.89329765663699
+      ],
+      [
+       10.527670195530892,
+       59.893342537715526
+      ],
+      [
+       10.527741653414527,
+       59.89334170932269
+      ],
+      [
+       10.527742065591294,
+       59.893350685538074
+      ],
+      [
+       10.527759930066368,
+       59.89335047843373
+      ],
+      [
+       10.527761166612674,
+       59.89337740707955
+      ],
+      [
+       10.527814760079675,
+       59.89337678575134
+      ],
+      [
+       10.52781558447407,
+       59.893394738181364
+      ],
+      [
+       10.52785131347003,
+       59.893394323950155
+      ],
+      [
+       10.527851725677246,
+       59.893403300164984
+      ],
+      [
+       10.527869590179654,
+       59.893403093045684
+      ],
+      [
+       10.527869177967622,
+       59.89339411683093
+      ],
+      [
+       10.527976777188638,
+       59.893401850279034
+      ],
+      [
+       10.527977189429821,
+       59.89341082649335
+      ],
+      [
+       10.52801333069144,
+       59.89341938843243
+      ],
+      [
+       10.528014155194366,
+       59.89343734086065
+      ],
+      [
+       10.528085613270123,
+       59.89343651228058
+      ],
+      [
+       10.52810471461698,
+       59.89346323377066
+      ],
+      [
+       10.528122579149455,
+       59.89346302661695
+      ],
+      [
+       10.52812216686819,
+       59.89345405040333
+      ],
+      [
+       10.528193624976232,
+       59.89345322176456
+      ],
+      [
+       10.528194037276757,
+       59.893462197977875
+      ],
+      [
+       10.528211901807934,
+       59.89346199081206
+      ],
+      [
+       10.528211077197513,
+       59.89344403838554
+      ],
+      [
+       10.528175348154162,
+       59.89344445271446
+      ],
+      [
+       10.528174523564044,
+       59.89342650028759
+      ],
+      [
+       10.528138794538915,
+       59.89342691460652
+      ],
+      [
+       10.528101828687296,
+       59.89340040027446
+      ],
+      [
+       10.528066099688978,
+       59.89340081457359
+      ],
+      [
+       10.528029133924296,
+       59.89337430022071
+      ],
+      [
+       10.527993404952792,
+       59.89337471450003
+      ],
+      [
+       10.527992992707832,
+       59.89336573828573
+      ],
+      [
+       10.527975128226503,
+       59.89336594542167
+      ],
+      [
+       10.527956439275039,
+       59.89334820012631
+      ],
+      [
+       10.527920710330347,
+       59.89334861438582
+      ],
+      [
+       10.527883744739528,
+       59.893322099991266
+      ],
+      [
+       10.527848015821649,
+       59.893322514230945
+      ],
+      [
+       10.52782932696245,
+       59.89330476891706
+      ],
+      [
+       10.527793598062274,
+       59.893305183141926
+      ],
+      [
+       10.527774909241858,
+       59.893287437820156
+      ],
+      [
+       10.527739180359381,
+       59.89328785203019
+      ],
+      [
+       10.527683938393265,
+       59.89325256846426
+      ],
+      [
+       10.527648209546712,
+       59.89325298264951
+      ],
+      [
+       10.527647385247302,
+       59.89323503021768
+      ],
+      [
+       10.527575515459548,
+       59.89322688234231
+      ],
+      [
+       10.527574691200217,
+       59.89320892990982
+      ],
+      [
+       10.5275389623987,
+       59.893209344065276
+      ],
+      [
+       10.527501997266878,
+       59.89318282956132
+      ],
+      [
+       10.527466268492173,
+       59.89318324369695
+      ],
+      [
+       10.52744757991511,
+       59.893165498327484
+      ],
+      [
+       10.527411851158107,
+       59.89316591244829
+      ],
+      [
+       10.527374886175814,
+       59.89313939790792
+      ],
+      [
+       10.527339157445622,
+       59.893139812008926
+      ],
+      [
+       10.527320468960827,
+       59.89312206662096
+      ],
+      [
+       10.527302604604712,
+       59.89312227366526
+      ],
+      [
+       10.527303016659422,
+       59.893131249882764
+      ],
+      [
+       10.527213282820242,
+       59.89312330885044
+      ],
+      [
+       10.527213694850875,
+       59.89313228506831
+      ],
+      [
+       10.527249835615597,
+       59.89314084721907
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 16.3,
+    "top_p10_m": 15.48,
+    "top_p90_m": 16.9,
+    "laser_points": 846,
+    "top_above_platform_m": 3.43,
+    "area_m2": 316.0,
+    "underside_m": null,
+    "multi_return_share": 0.03,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "ground_min_m": 11.96,
+    "ground_median_m": 15.07,
+    "ground_max_m": 16.73
+   }
+  }
+ ]
+}

@@ -1,0 +1,305 @@
+{
+ "levels": [
+  {
+   "name": "Platform level (spor 1–4, two island platforms under the terminal)",
+   "note": "Bane NOR Sportabell: platform 'dekker spor 1 og 2' (360 m, 760 mm, 12 m wide) and platform 'dekker spor 4 og 3' (360 m, 760 mm, 12 m wide); a 250 m section by spor 2/3 is 8 m wide. Spor 1 northbound regional/local trains, spor 2 arriving Flytoget, spor 3 departing Flytoget (Oslo S/Drammen), spor 4 southbound. Flytoget says its trains to the city always leave from track 3. The station lies directly below the airport terminal (Wikipedia). OSM extract has no platforms or levels here.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  },
+  {
+   "name": "Ankomst (arrivals floor, 'lower forplass')",
+   "other_names": [
+    "Ankomsthallen",
+    "Ankomstområdet",
+    "arrivals floor (Bane NOR English page)"
+   ],
+   "note": "One floor above the station: Bane NOR tells rail-replacement passengers to 'bruk trapp eller heis opp en etasje og utgang ved ankomsthall innland'. Domestic (innland) and international (utland) arrivals halls; Flytoget: international arrivals turn right after customs. Avinor's map 'Ankomst' covers this floor.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30; Avinor, Kollektivtransport https://www.avinor.no/flyplass/oslo/info/kollektivt/ (GPS-posisjoner: 'upper forplass (departures)', 'lower forplass' arrivals), read 2026-10-30; Avinor, Kart over flyplassen https://www.avinor.no/flyplass/oslo/info/kart/ and https://www.avinor.no/en/airport/oslo/info/map/ (map titles and alt texts only), read 2026-10-30"
+  },
+  {
+   "name": "Avgang (departures floor, 'upper forplass')",
+   "other_names": [
+    "Avgangshallen",
+    "Innsjekkingsområdet"
+   ],
+   "note": "Above the arrivals floor; check-in and departures. Not part of the station area.",
+   "_source": "Avinor, Kollektivtransport https://www.avinor.no/flyplass/oslo/info/kollektivt/ (GPS-posisjoner: 'upper forplass (departures)', 'lower forplass' arrivals), read 2026-10-30; Avinor, Kart over flyplassen https://www.avinor.no/flyplass/oslo/info/kart/ and https://www.avinor.no/en/airport/oslo/info/map/ (map titles and alt texts only), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "Ankomst (arrivals hall)",
+    "station / platforms"
+   ],
+   "where": "from the arrivals hall down to the station; Flytoget: 'As you come down the escalator from Arrivals you will see an illuminated board counting down' to the next departure",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "Ankomst (arrivals hall)",
+    "platforms"
+   ],
+   "where": "lifts located in the arrivals hall (Wikipedia); Bane NOR lists 'Heis (HC)' and 'Trapp, rulletrapp og heis til plattformer'. Number and exact position not given.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "platforms",
+    "Ankomst (arrivals floor)"
+   ],
+   "where": "'Bruk trapp eller heis opp en etasje' (to the arrivals floor, exit by domestic arrivals); position not given",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30"
+  },
+  {
+   "kind": "ticket_gates",
+   "between": [
+    "arrivals hall",
+    "station"
+   ],
+   "where": "gates into the station; ticket machines on either side of the gates; card readers on every gate (Flytoget)",
+   "confirmed_by": "owner text",
+   "_source": "Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station entrance from the arrivals hall (Ankomsthallen)",
+   "level": "Ankomst",
+   "where": "from the arrivals hall via escalators/lifts/stairs and Flytoget's ticket gates; the station hall has step-free access through revolving doors or doors with automatic openers. Bane NOR address: Edvard Griegs veg, 2060 Gardermoen. Rail-replacement passengers exit 'ved ankomsthall innland' (domestic arrivals).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_office",
+   "name": "Billettsalg på stasjonen",
+   "where": "at the station (Bane NOR gives no position)",
+   "opening_hours": "Mo-Fr 07:30-22:00; Sa 10:00-16:45; Su,PH 10:00-22:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "Bane NOR English page gives Sunday 10.00-22.05 instead of 22.00; may change at holidays and in summer. Which operator staffs it is not stated.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (incl. Flytoget)",
+   "where": "on either side of the gates to the station (Flytoget); Flytoget also accepts a payment card at the gate reader",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "station hall (Bane NOR: 'Døgnåpent'; step-free via revolving/automatic doors)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "HC-toalett i flyterminalen",
+   "wheelchair": "yes",
+   "where": "in the airport terminal (not in the station itself; exact position not given)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Minibank",
+   "where": "Bane NOR lists an ATM among the station's facilities; Avinor lists an ATM in the arrivals hall",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Avinor, Bank and currency https://www.avinor.no/en/airport/oslo/info/bank-and-currency/, read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Loomis (valutaveksling)",
+   "level_per_plan": "Ankomst",
+   "where": "arrivals hall, ground floor (Avinor); listed as 'Innsjekkingsområdet - Ankomsthall'",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "note": "Exchange only for passengers to/from destinations outside Norway (Avinor).",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/loomis-for-sikkerhetskontroll/, read 2026-10-30; Avinor, Bank and currency https://www.avinor.no/en/airport/oslo/info/bank-and-currency/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Vitusapotek",
+   "level_per_plan": "Ankomst",
+   "where": "Ankomstområdet (arrivals area); exact spot not given",
+   "opening_hours": "Mo-Fr 08:00-18:00; Sa 10:00-17:00; Su 14:00-19:00; PH 15:00-19:00",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals area above the station",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/vitusapotek/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen (Gardermoen jbst.)",
+   "where": "Narvesen lists a store 'Gardermoen jbst.' (store #039; address 'Gardermoen jbst.'), i.e. at the railway station; position not given",
+   "station_area": "in the station (per the store name)",
+   "note": "No hours: narvesen.no's store finder shows only a collapsed 'Vis/skjul åpningstider' toggle without data. May be the same outlet as one of Avinor's 'Narvesen ankomst' entries; not established.",
+   "_source": "Narvesen, Finn butikk https://www.narvesen.no/finn-butikk, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen (ankomst innland)",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet, domestic arrivals (Avinor page name 'Narvesen ankomst innland')",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/Narvesen-ankomst-innland/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen (ankomst utland)",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet, international arrivals (Avinor page name 'Narvesen ankomst utland'); whether before or after customs is not stated",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/narvesen-ankomst-utland/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30",
+   "note": "Landside/airside position not stated by Avinor."
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "in the arrivals hall ('i ankomsthallen', Avinor)",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/burger-king/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Joe & The Juice",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet (arrivals area); exact spot not given",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/joe-and-the-juice/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Oslo Food Hub",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet (arrivals area); exact spot not given",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/oslo-food-hub/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Asia Street Cooking",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet (arrivals area); exact spot not given",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/asia-street-cooking/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Peppes Pizza",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet – Ankomsthallen (arrivals hall)",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/peppes-pizza/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Ritazza",
+   "level_per_plan": "Ankomst (arrivals floor)",
+   "where": "Ankomstområdet – Ankomsthallen (arrivals hall)",
+   "hours_raw": "Åpent når det er flygninger (open when there are flights)",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "station_area": "arrivals hall directly above the station (exit from the station escalators/lifts)",
+   "_source": "Avinor shop page https://www.avinor.no/flyplass/oslo/shopping-og-mat/ritazza-ankomst/, read 2026-10-30; Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Oppbevaringsbokser (electronic lockers)",
+   "where": "1st floor of the P10 parking garage beside the terminal; follow signs to the parking garage from arrivals (not in the station)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Avinor)",
+   "hours_checked": "2026-10-30",
+   "fee": "NOK 149 (medium) / 298 (large, XL) per day",
+   "_source": "Avinor, Baggage services https://www.avinor.no/en/airport/oslo/info/Baggage-services/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30 (refers to avinor.no for lockers)"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "right outside the international arrivals hall; taxi booking machine outside at ground level",
+   "_source": "Avinor, Taxi https://www.avinor.no/en/airport/oslo/info/Taxi/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Oslo lufthavn bussterminal",
+   "where": "outside the arrivals floor; Bane NOR: take stairs/lift up one floor and exit by domestic arrivals (ankomsthall innland) for rail-replacement buses",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_trolley",
+   "name": "Bagasjetralle",
+   "where": "available at the station (position not given)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  },
+  {
+   "category": "baby_changing",
+   "name": "Stellerom",
+   "where": "listed by Bane NOR under facilities; position not given",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Kart over flyplassen – Ankomst (arrivals map)",
+   "publisher": "Avinor",
+   "url": "https://www.avinor.no/siteassets/flyplasser/oslo-lufthavn/info/kart-over-flyplassen/kart-over-flyplassen-ankomst-oslo-lufthavn-avinor.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Image could not be fetched (server error); only its alt text was read: shows baggage belts, service desks, duty-free, restaurants such as Burger King and Joe & the Juice, toilets, ATMs, stairs, escalators, meeting points, customs."
+  },
+  {
+   "title": "Kart over flyplassen – Avgang (departures map)",
+   "publisher": "Avinor",
+   "url": "https://www.avinor.no/siteassets/flyplasser/oslo-lufthavn/info/kart-over-flyplassen/kart-over-flyplassen-avgang-oslo-lufthavn-avinor.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Not read (departures floor; not station area)."
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Norway; brief asks which Avinor shops are in or directly at the station area)",
+   "answer": "The station lies directly under the terminal; escalators, lifts and stairs lead one floor up into the arrivals floor (Ankomst), through Flytoget's ticket gates. Included as 'directly at the station area': the outlets Avinor places in Ankomstområdet / Ankomsthallen (landside arrivals): Narvesen ankomst innland and utland, Burger King, Joe & The Juice, Oslo Food Hub, Asia Street Cooking, Peppes Pizza, Ritazza, Vitusapotek, Loomis; plus Narvesen 'Gardermoen jbst.' (Narvesen's own list). Excluded: Tax Free (ankomst) and the vending machine in Bagasjehallen (baggage reclaim, airside), everything in Innsjekkingsområdet/Avgangshallen (departures floor: Starbucks, Parken, Point Kiosk, Samsonite & TUMI) and all gate-area outlets.",
+   "_source": "Avinor, Oslo lufthavn \"Shopping og mat\" https://www.avinor.no/flyplass/oslo/shopping-og-mat/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-lufthavn/, read 2026-10-30; Flytoget, \"Train from Oslo Airport to the city\" https://flytoget.no/en/to-and-from-airport/train-from-oslo-airport-to-city/, read 2026-10-30; Wikipedia, \"Oslo Airport Station\" https://en.wikipedia.org/wiki/Oslo_Airport_Station, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Hours: Avinor gives only 'Åpent når det er flygninger' for all arrivals-area food/kiosk outlets (Narvesen x2, Burger King, Joe & The Juice, Oslo Food Hub, Asia Street Cooking, Peppes Pizza, Ritazza); no per-day hours from Avinor or the chains. Narvesen store finder hours did not render.",
+  "Exact positions of the arrivals-area outlets (left/right of the station escalators, domestic vs international hall, landside vs airside for 'Narvesen ankomst utland', 'Joe & The Juice', 'Oslo Food Hub', 'Asia Street Cooking') are not given in text; Avinor's arrivals map image could not be fetched.",
+  "Whether there is a separate station hall level between the platforms and the arrivals floor, and its signposted name: Bane NOR mentions a 'stasjonshall' (waiting room 24/7) but no source places it. Heights not measured in any source.",
+  "Number and position of lifts and escalators (which platform each serves) unknown: owner text confirms they exist; the OSM extract has no platforms, lifts or escalators for this station (only two footbridges w34082003, w661039552 and stairs w34081867 outside, unrelated to platforms).",
+  "Position of the ticket office (Billettsalg) and toilets relative to the station not given.",
+  "Wikipedia says outer platforms 1 and 4 serve Vy/SJ and inner platforms 2 and 3 serve Flytoget; Bane NOR's Sportabell shows two island platforms covering spor 1+2 and spor 3+4. The Bane NOR layout is used here.",
+  "OSM has no entrances for the station; the only entrance used is the arrivals-hall connection from owner text."
+ ]
+}

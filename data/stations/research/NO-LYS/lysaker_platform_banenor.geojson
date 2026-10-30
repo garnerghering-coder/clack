@@ -1,0 +1,351 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.6399969,
+      59.913630800000014
+     ],
+     [
+      10.6399776,
+      59.91362829999999
+     ],
+     [
+      10.639760300000003,
+      59.913601
+     ],
+     [
+      10.6395289,
+      59.9135758
+     ],
+     [
+      10.6393259,
+      59.91355630000001
+     ],
+     [
+      10.6392859,
+      59.913552400000015
+     ],
+     [
+      10.6391305,
+      59.913539400000005
+     ],
+     [
+      10.6389752,
+      59.9135279
+     ],
+     [
+      10.6388184,
+      59.9135171
+     ],
+     [
+      10.6386644,
+      59.91350849999998
+     ],
+     [
+      10.638486599999998,
+      59.9135
+     ],
+     [
+      10.6383121,
+      59.9134923
+     ],
+     [
+      10.6381327,
+      59.9134871
+     ],
+     [
+      10.6379582,
+      59.9134826
+     ],
+     [
+      10.637772199999999,
+      59.9134809
+     ],
+     [
+      10.637591099999998,
+      59.91348070000001
+     ],
+     [
+      10.637408299999999,
+      59.9134822
+     ],
+     [
+      10.6372305,
+      59.91348610000001
+     ],
+     [
+      10.637064000000002,
+      59.9134904
+     ],
+     [
+      10.636897599999998,
+      59.913496200000004
+     ],
+     [
+      10.6367289,
+      59.91350429999999
+     ],
+     [
+      10.6365677,
+      59.91351310000001
+     ],
+     [
+      10.6364154,
+      59.91352270000001
+     ],
+     [
+      10.6362661,
+      59.9135339
+     ],
+     [
+      10.6361087,
+      59.91354660000002
+     ],
+     [
+      10.635963100000001,
+      59.91355999999998
+     ],
+     [
+      10.6358065,
+      59.9135757
+     ],
+     [
+      10.6356513,
+      59.9135923
+     ],
+     [
+      10.635496200000002,
+      59.913609900000004
+     ],
+     [
+      10.635344,
+      59.91362980000001
+     ],
+     [
+      10.6351833,
+      59.913651099999996
+     ],
+     [
+      10.635027,
+      59.9136746
+     ],
+     [
+      10.6350195,
+      59.9136757
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 2",
+    "track": "1,2",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 280.0,
+    "width_m": 13.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LYS-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 13.63,
+    "laser_track_bed_m": 12.88,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 2 og 1 Askerbanen",
+    "x_covers_tracks": [
+     "2",
+     "1"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 287.0,
+    "x_comment": "Mellomplattform Dekker spor 2 og 1 Askerbanen",
+    "x_geometry": "extent: OSM platform outline r9539640 (ref 1;2), 282 m along the track (Bane NOR: 280 m)",
+    "x_osm_platform": "r9539640",
+    "x_nsr_quays": [
+     "NSR:Quay:248"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lysaker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r9539640 (ref 1;2), 282 m along the track (Bane NOR: 280 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.6337953,
+      59.9138594
+     ],
+     [
+      10.634082699999999,
+      59.9137985
+     ],
+     [
+      10.6342166,
+      59.91377070000001
+     ],
+     [
+      10.6343563,
+      59.913743600000004
+     ],
+     [
+      10.6345247,
+      59.91371359999999
+     ],
+     [
+      10.6347004,
+      59.91368430000001
+     ],
+     [
+      10.6348499,
+      59.9136586
+     ],
+     [
+      10.635005499999998,
+      59.91363400000001
+     ],
+     [
+      10.635159999999999,
+      59.913611100000004
+     ],
+     [
+      10.635319600000003,
+      59.91358969999998
+     ],
+     [
+      10.6354704,
+      59.91357040000001
+     ],
+     [
+      10.635627399999999,
+      59.91355169999998
+     ],
+     [
+      10.635783899999998,
+      59.913534000000006
+     ],
+     [
+      10.635945499999998,
+      59.91351780000001
+     ],
+     [
+      10.636095,
+      59.9135033
+     ],
+     [
+      10.636246599999998,
+      59.9134904
+     ],
+     [
+      10.6363988,
+      59.91347879999999
+     ],
+     [
+      10.6365541,
+      59.91346769999999
+     ],
+     [
+      10.6366917,
+      59.9134591
+     ],
+     [
+      10.6368804,
+      59.91344899999997
+     ],
+     [
+      10.6369779,
+      59.91344530000001
+     ],
+     [
+      10.6370656,
+      59.913441999999996
+     ],
+     [
+      10.637227000000001,
+      59.9134373
+     ],
+     [
+      10.6374073,
+      59.913434
+     ],
+     [
+      10.6375927,
+      59.9134316
+     ],
+     [
+      10.6377767,
+      59.91343110000002
+     ],
+     [
+      10.637962,
+      59.913432599999986
+     ],
+     [
+      10.6381392,
+      59.913436299999994
+     ],
+     [
+      10.6383189,
+      59.91344140000001
+     ],
+     [
+      10.638417900000002,
+      59.9134451
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 3",
+    "track": "3,4",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 266.0,
+    "width_m": 13.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LYS-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 14.0,
+    "laser_track_bed_m": 13.06,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 3 og 4 Askerbanen",
+    "x_covers_tracks": [
+     "3",
+     "4"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 260.0,
+    "x_comment": "Mellomplattform Dekker spor 3 og 4 Askerbanen",
+    "x_geometry": "extent: OSM platform outline r9539641 (ref 3;4), 265 m along the track (Bane NOR: 266 m)",
+    "x_osm_platform": "r9539641",
+    "x_nsr_quays": [
+     "NSR:Quay:247"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lysaker/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r9539641 (ref 3;4), 265 m along the track (Bane NOR: 266 m)"
+   }
+  }
+ ]
+}

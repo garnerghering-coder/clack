@@ -1,0 +1,187 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.5285323,
+      59.893935
+     ],
+     [
+      10.5285052,
+      59.8939268
+     ],
+     [
+      10.527918799999998,
+      59.893754699999995
+     ],
+     [
+      10.527152,
+      59.89352809999999
+     ],
+     [
+      10.5267062,
+      59.893393499999995
+     ],
+     [
+      10.526272900000002,
+      59.89325530000001
+     ],
+     [
+      10.5259336,
+      59.8931395
+     ],
+     [
+      10.5255979,
+      59.89302370000002
+     ],
+     [
+      10.524969900000002,
+      59.892802200000006
+     ],
+     [
+      10.5246105,
+      59.892676900000005
+     ],
+     [
+      10.5244094,
+      59.89260419999999
+     ],
+     [
+      10.524128800000002,
+      59.8925053
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1,2",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 268.0,
+    "width_m": 10.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SV-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 12.87,
+    "laser_track_bed_m": 12.1,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 1 og 2 Askerbanen",
+    "x_covers_tracks": [
+     "1",
+     "2"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 253.0,
+    "x_comment": "Mellomplattform Dekker spor 1 og 2 Askerbanen",
+    "x_geometry": "extent: OSM platform outline r7080929 (ref 1;2), 294 m along the track (Bane NOR: 268 m)",
+    "x_osm_platform": "r7080929",
+    "x_nsr_quays": [
+     "NSR:Quay:991"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7080929 (ref 1;2), 294 m along the track (Bane NOR: 268 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.524359399999998,
+      59.89231879999998
+     ],
+     [
+      10.5244775,
+      59.892352699999996
+     ],
+     [
+      10.5248761,
+      59.8924689
+     ],
+     [
+      10.5252531,
+      59.8925753
+     ],
+     [
+      10.525579,
+      59.892678
+     ],
+     [
+      10.525901400000002,
+      59.892781700000015
+     ],
+     [
+      10.526588,
+      59.89301919999999
+     ],
+     [
+      10.527424,
+      59.89332129999998
+     ],
+     [
+      10.5281491,
+      59.8935832
+     ],
+     [
+      10.5284853,
+      59.8937036
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 4",
+    "track": "3,4",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 268.0,
+    "width_m": 10.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "SV-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 12.87,
+    "laser_track_bed_m": 12.1,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Mellomplattform Dekker spor 4 og 3 Askerbanen",
+    "x_covers_tracks": [
+     "4",
+     "3"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": 251.0,
+    "x_comment": "Mellomplattform Dekker spor 4 og 3 Askerbanen",
+    "x_geometry": "extent: OSM platform outline r7080930 (ref 3;4), 278 m along the track (Bane NOR: 268 m)",
+    "x_osm_platform": "r7080930",
+    "x_nsr_quays": [
+     "NSR:Quay:993"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7080930 (ref 3;4), 278 m along the track (Bane NOR: 268 m)"
+   }
+  }
+ ]
+}

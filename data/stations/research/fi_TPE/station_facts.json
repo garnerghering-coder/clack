@@ -1,0 +1,1896 @@
+{
+ "clack_id": "fi:TPE",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street / station-hall level (Rautatienkatu side, station hall, the tunnels under the tracks)",
+   "other_names": [],
+   "note": "No signposted level names were found in any source. OSM puts the station hall shops, the travel-centre tunnel (Matkakeskustunneli), the Rongankatu underpass and the closed Asematunneli on level 0, with the platforms one floor up; 0.5 is the stair landing between them.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Platform level (raiteet 1–5)",
+   "other_names": [
+    "tracks 1–5 (VR, Nysse)"
+   ],
+   "note": "Three platforms for five tracks: one at track 1 by the station building, an island for tracks 2–3 and an island for tracks 4–5. Track numbers are the ones VR and Nysse use ('tracks 1-5'). Which track lies at which platform comes from the Digitraffic track lines (track 1 and 2 only 4.5 m apart, so no platform between them) and OSM.",
+   "_source": "Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; Nysse 'Trains in the Nysse area', https://nysse.fi/en/ways-to-get-around/train.html, read 2026-10-30; Digitraffic infra-api laiturit TPE L1–L5 (Väylävirasto / Fintraffic, CC BY 4.0), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "TPE L1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-08, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform TPE L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "TPE L2",
+   "track": "2",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 2 (the train stops with the platform to its east)",
+   "_source": "laser (2023-06-08, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform TPE L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "TPE L3",
+   "track": "3",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 3 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-08, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform TPE L3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "TPE L4",
+   "track": "4",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 4 (the train stops with the platform to its east)",
+   "_source": "laser (2023-06-08, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform TPE L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "TPE L5",
+   "track": "5",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 5 (the train stops with the platform to its west)",
+   "_source": "laser (2023-06-08, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform TPE L5; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w54191177",
+   "name": "Matkakeskustunneli (travel-centre tunnel; VR: 'ratapihan eteläinen alikulkutunneli' / 'southern underpass')",
+   "between": [
+    "Rautatienkatu / station front (south end of the station building)",
+    "Tammela side (Ratapihankatu)"
+   ],
+   "where": "south end of the station, under all tracks; the VR assistance point, taxi stand and car park are in front of its doors",
+   "status": "OPEN 24 h; the accessible route to the platforms and through the station area during the rebuild; the advised route from Tammela, Tulli and the Tulli tram stop",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; Tavara-asema 'Tampereen henkilöratapiha -hanke muuttaa kulkureittejä ja liikennejärjestelyitä' (updated 2025-06-25: 'Matkakeskustunneli auki ympäri vuorokauden'), https://tavara-asema.fi/tampereen-henkiloratapiha-hanke-muuttaa-kulkureitteja-ja-liikennejarjestelyita/, read 2026-10-30",
+   "position": {
+    "lon": 23.7740309,
+    "lat": 61.4978969,
+    "how": "OSM w54191177 (point on the way)",
+    "_source": "OpenStreetMap w54191177 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5056120093",
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "platform at track 1 (station-building side)"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel",
+   "confirmed_by": "owner text (the city confirms lifts and escalators in the travel-centre tunnel; which platform each reaches is OSM only)",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7733009,
+    "lat": 61.497945,
+    "how": "OSM n5056120093",
+    "_source": "OpenStreetMap n5056120093 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1424026790",
+    "w1424149262"
+   ],
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "platform at track 1 (station-building side)"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel (a pair: OSM tags both conveying=forward, i.e. one up and one down)",
+   "confirmed_by": "owner text (escalators in the tunnel) + OSM for the platform",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5308748484",
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "island platform tracks 2–3"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel",
+   "confirmed_by": "owner text (the city confirms lifts and escalators in the travel-centre tunnel; which platform each reaches is OSM only)",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7736882,
+    "lat": 61.4979481,
+    "how": "OSM n5308748484",
+    "_source": "OpenStreetMap n5308748484 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1424026782",
+    "w1424149261"
+   ],
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "island platform tracks 2–3"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel (a pair: OSM tags both conveying=forward, i.e. one up and one down)",
+   "confirmed_by": "owner text (escalators in the tunnel) + OSM for the platform",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5308748482",
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "island platform tracks 4–5"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel",
+   "confirmed_by": "owner text (the city confirms lifts and escalators in the travel-centre tunnel; which platform each reaches is OSM only)",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7740262,
+    "lat": 61.4979509,
+    "how": "OSM n5308748482",
+    "_source": "OpenStreetMap n5308748482 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1424026775",
+    "w1424149260"
+   ],
+   "between": [
+    "Matkakeskustunneli (level 0)",
+    "island platform tracks 4–5"
+   ],
+   "where": "south end of the platforms, from the travel-centre tunnel (a pair: OSM tags both conveying=forward, i.e. one up and one down)",
+   "confirmed_by": "owner text (escalators in the tunnel) + OSM for the platform",
+   "_source": "City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w166973555",
+    "w166973556"
+   ],
+   "name": "Rongantunneli (Rongankatu underpass)",
+   "between": [
+    "Rongankatu / city-centre side (north end, by the car-carrier loading at Rautatienkatu 21)",
+    "Tammela side"
+   ],
+   "where": "north end of the platforms",
+   "status": "OPEN; VR: an accessible route to the platforms; the city advises it for through traffic",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121962126",
+   "between": [
+    "Rongankatu underpass (level 0)",
+    "platform at track 1 (station-building side)"
+   ],
+   "where": "north end of the platforms",
+   "confirmed_by": "owner text (VR: the Rongankatu underpass is an accessible route to the platforms) + Wikipedia (lift and stair connections to all platforms); position OSM",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7731238,
+    "lat": 61.5005337,
+    "how": "OSM n5121962126",
+    "_source": "OpenStreetMap n5121962126 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121961716",
+   "between": [
+    "Rongankatu underpass (level 0)",
+    "island platform tracks 2–3"
+   ],
+   "where": "north end of the platforms",
+   "confirmed_by": "owner text (VR: the Rongankatu underpass is an accessible route to the platforms) + Wikipedia (lift and stair connections to all platforms); position OSM",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7735994,
+    "lat": 61.5005661,
+    "how": "OSM n5121961716",
+    "_source": "OpenStreetMap n5121961716 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121961719",
+   "between": [
+    "Rongankatu underpass (level 0)",
+    "island platform tracks 4–5"
+   ],
+   "where": "north end of the platforms",
+   "confirmed_by": "owner text (VR: the Rongankatu underpass is an accessible route to the platforms) + Wikipedia (lift and stair connections to all platforms); position OSM",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7739372,
+    "lat": 61.5005841,
+    "how": "OSM n5121961719",
+    "_source": "OpenStreetMap n5121961719 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1424026763",
+    "w1424026760",
+    "w1424026758",
+    "w1424026756",
+    "w1424026749",
+    "w1424026751",
+    "w1424026754"
+   ],
+   "between": [
+    "Rongankatu underpass (level 0)",
+    "all three platforms (via a landing, level 0.5, on the island platforms)"
+   ],
+   "where": "north end of the platforms, beside the lifts",
+   "confirmed_by": "Wikipedia text + OSM",
+   "_source": "Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "name": "Asematunneli (station tunnel through the station building, the 1989 shopping tunnel)",
+   "osm_ids": [
+    "w1424026808"
+   ],
+   "between": [
+    "station hall / Hämeenkatu side",
+    "Tammela side (Itsenäisyydenkatu)"
+   ],
+   "where": "middle of the station, under the tracks; OSM stairs w1424026799 (platform 1), w1424026797/w1424425162/w1424026798/w1424425164 (island 2–3), w1424026802 (island 4–5) and w1424026805/w1424026806/w1424425157/w1424425160 lead up from it",
+   "status": "CLOSED to pedestrians for the whole rebuild (with the Itsenäisyydenkatu underpass next to it). The stairs from it are therefore not a usable way to the platforms now.",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; City of Tampere, 'Construction sites affecting traffic in the city centre', https://www.tampere.fi/en/transport-streets-and-maintenance/construction-sites-affecting-traffic-city-centre, read 2026-10-30; Wikipedia 'Tampere railway station', https://en.wikipedia.org/wiki/Tampere_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "name": "Itsenäisyydenkatu underpass",
+   "where": "beside the Asematunneli, south of the station building",
+   "status": "closed to pedestrians and cyclists for the whole project; the city now says closed to all traffic except trams until the project ends (2031)",
+   "confirmed_by": "owner text",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; City of Tampere, 'Construction sites affecting traffic in the city centre', https://www.tampere.fi/en/transport-streets-and-maintenance/construction-sites-affecting-traffic-city-centre, read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424026775",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424026775 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7740159,
+    "lat": 61.4978445,
+    "how": "OSM w1424026775 (point on the way)",
+    "_source": "OpenStreetMap w1424026775 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424026782",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424026782 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7736812,
+    "lat": 61.4977281,
+    "how": "OSM w1424026782 (point on the way)",
+    "_source": "OpenStreetMap w1424026782 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424026790",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424026790 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7732932,
+    "lat": 61.497838,
+    "how": "OSM w1424026790 (point on the way)",
+    "_source": "OpenStreetMap w1424026790 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424149260",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424149260 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7740476,
+    "lat": 61.4978448,
+    "how": "OSM w1424149260 (point on the way)",
+    "_source": "OpenStreetMap w1424149260 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424149261",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424149261 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7737132,
+    "lat": 61.4977284,
+    "how": "OSM w1424149261 (point on the way)",
+    "_source": "OpenStreetMap w1424149261 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1424149262",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "forward",
+   "length_m": 12.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1424149262 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7733252,
+    "lat": 61.4978384,
+    "how": "OSM w1424149262 (point on the way)",
+    "_source": "OpenStreetMap w1424149262 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5056120093",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5056120093 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7733009,
+    "lat": 61.497945,
+    "how": "OSM n5056120093",
+    "_source": "OpenStreetMap n5056120093 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121961716",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5121961716 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7735994,
+    "lat": 61.5005661,
+    "how": "OSM n5121961716",
+    "_source": "OpenStreetMap n5121961716 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121961719",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5121961719 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7739372,
+    "lat": 61.5005841,
+    "how": "OSM n5121961719",
+    "_source": "OpenStreetMap n5121961719 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5121962126",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5121962126 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7731238,
+    "lat": 61.5005337,
+    "how": "OSM n5121962126",
+    "_source": "OpenStreetMap n5121962126 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5308748482",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5308748482 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7740262,
+    "lat": 61.4979509,
+    "how": "OSM n5308748482",
+    "_source": "OpenStreetMap n5308748482 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5308748484",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n5308748484 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7736882,
+    "lat": 61.4979481,
+    "how": "OSM n5308748484",
+    "_source": "OpenStreetMap n5308748484 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13089158346",
+   "name": "Asemanporras",
+   "osm_level": "0;-2",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13089158346 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 23.7728365,
+    "lat": 61.4980175,
+    "how": "OSM n13089158346",
+    "_source": "OpenStreetMap n13089158346 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance (pääsisäänkäynti), station building",
+   "street": "Rautatienkatu (Hämeenkatu direction)",
+   "level": "0",
+   "where": "front of the 1936 station building facing Rautatienkatu / Hämeenkatu; OSM main door n3645139806. Used as usual during the works.",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "name": "Matkakeskustunneli, west mouth",
+   "street": "Rautatienkatu (station front, south end)",
+   "level": "0",
+   "where": "south end of the station front; OSM sliding door n3645139805; the VR assistance point (no shelter), taxi stand and car park are by these doors",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "name": "Matkakeskustunneli, east mouth",
+   "street": "Ratapihankatu (Tammela side)",
+   "level": "0",
+   "where": "east end of the travel-centre tunnel; the route from Tammela, Tulli and the Tulli tram stop",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30"
+  },
+  {
+   "name": "Rongankatu underpass",
+   "street": "Rongankatu",
+   "level": "0",
+   "where": "north end of the platforms, both sides of the yard; car-carrier loading (Rautatienkatu 21) is at this end",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "name": "Asematunneli (east side)",
+   "street": "Itsenäisyydenkatu / Tammela",
+   "level": "0",
+   "where": "CLOSED during the rebuild",
+   "_source": "City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n694324581",
+   "street": "Tullinramppi",
+   "street_how": "nearest named street, 38.6 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n694324581 (already in OSM)",
+   "position": {
+    "lon": 23.7729715,
+    "lat": 61.4986844,
+    "how": "OSM n694324581",
+    "_source": "OpenStreetMap n694324581 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Stockmann Tampere B-rappu",
+   "osm_id": "n3645129890",
+   "street": "Hämeenkatu",
+   "street_how": "nearest named street, 25.0 m",
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3645129890 (already in OSM)",
+   "position": {
+    "lon": 23.7701676,
+    "lat": 61.498639,
+    "how": "OSM n3645129890",
+    "_source": "OpenStreetMap n3645129890 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3645129891",
+   "street": "Hämeenkatu",
+   "street_how": "nearest named street, 14.9 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3645129891 (already in OSM)",
+   "position": {
+    "lon": 23.7705558,
+    "lat": 61.4985738,
+    "how": "OSM n3645129891",
+    "_source": "OpenStreetMap n3645129891 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Stockmann Tampere A-rappu",
+   "osm_id": "n3645129892",
+   "street": "Hämeenkatu",
+   "street_how": "nearest named street, 14.8 m",
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n3645129892 (already in OSM)",
+   "position": {
+    "lon": 23.7707496,
+    "lat": 61.4985873,
+    "how": "OSM n3645129892",
+    "_source": "OpenStreetMap n3645129892 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3645139805",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n3645139805 (already in OSM)",
+   "position": {
+    "lon": 23.7729989,
+    "lat": 61.4978883,
+    "how": "OSM n3645139805",
+    "_source": "OpenStreetMap n3645139805 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3645139806",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "main",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n3645139806 (already in OSM)",
+   "position": {
+    "lon": 23.7727811,
+    "lat": 61.4985493,
+    "how": "OSM n3645139806",
+    "_source": "OpenStreetMap n3645139806 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3952760351",
+   "street": "Hämeenkatu",
+   "street_how": "nearest named street, 15.0 m",
+   "level": null,
+   "kind": "restaurant",
+   "wheelchair": "no",
+   "door": "hinged",
+   "_source": "OSM n3952760351 (already in OSM)",
+   "position": {
+    "lon": 23.7710318,
+    "lat": 61.4986085,
+    "how": "OSM n3952760351",
+    "_source": "OpenStreetMap n3952760351 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3952760352",
+   "street": "Tullinramppi",
+   "street_how": "nearest named street, 2.9 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3952760352 (already in OSM)",
+   "position": {
+    "lon": 23.7714997,
+    "lat": 61.4986483,
+    "how": "OSM n3952760352",
+    "_source": "OpenStreetMap n3952760352 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3952760353",
+   "street": "Hämeenkatu",
+   "street_how": "nearest named street, 14.7 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3952760353 (already in OSM)",
+   "position": {
+    "lon": 23.7705913,
+    "lat": 61.4983083,
+    "how": "OSM n3952760353",
+    "_source": "OpenStreetMap n3952760353 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3976087153",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3976087153 (already in OSM)",
+   "position": {
+    "lon": 23.772862,
+    "lat": 61.4976738,
+    "how": "OSM n3976087153",
+    "_source": "OpenStreetMap n3976087153 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5056120085",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n5056120085 (already in OSM)",
+   "position": {
+    "lon": 23.7729864,
+    "lat": 61.4982201,
+    "how": "OSM n5056120085",
+    "_source": "OpenStreetMap n5056120085 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11077626831",
+   "street": "Tullinramppi",
+   "street_how": "nearest named street, 3.0 m",
+   "level": null,
+   "kind": "restaurant",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n11077626831 (already in OSM)",
+   "position": {
+    "lon": 23.7712979,
+    "lat": 61.4986269,
+    "how": "OSM n11077626831",
+    "_source": "OpenStreetMap n11077626831 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n12087742955",
+   "street": "Rongankatu",
+   "street_how": "addr:street",
+   "level": "0",
+   "kind": "staircase",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n12087742955 (already in OSM)",
+   "position": {
+    "lon": 23.7728261,
+    "lat": 61.500766,
+    "how": "OSM n12087742955",
+    "_source": "OpenStreetMap n12087742955 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13088406102",
+   "street": "Rongankatu",
+   "street_how": "nearest named street, 15.2 m",
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n13088406102 (already in OSM)",
+   "position": {
+    "lon": 23.7730619,
+    "lat": 61.500543,
+    "how": "OSM n13088406102",
+    "_source": "OpenStreetMap n13088406102 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13088406103",
+   "street": "Rongankatu",
+   "street_how": "nearest named street, 38.3 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "no",
+   "_source": "OSM n13088406103 (already in OSM)",
+   "position": {
+    "lon": 23.7731201,
+    "lat": 61.5003272,
+    "how": "OSM n13088406103",
+    "_source": "OpenStreetMap n13088406103 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13088406116",
+   "street": "Ratapihankatu",
+   "street_how": "nearest named street, 38.0 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13088406116 (already in OSM)",
+   "position": {
+    "lon": 23.7740353,
+    "lat": 61.4977072,
+    "how": "OSM n13088406116",
+    "_source": "OpenStreetMap n13088406116 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13088406120",
+   "street": null,
+   "street_how": null,
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13088406120 (already in OSM)",
+   "position": {
+    "lon": 23.773697,
+    "lat": 61.4977041,
+    "how": "OSM n13088406120",
+    "_source": "OpenStreetMap n13088406120 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13088406138",
+   "street": null,
+   "street_how": null,
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13088406138 (already in OSM)",
+   "position": {
+    "lon": 23.7733131,
+    "lat": 61.497701,
+    "how": "OSM n13088406138",
+    "_source": "OpenStreetMap n13088406138 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13089158344",
+   "street": null,
+   "street_how": null,
+   "level": "0",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "sliding",
+   "_source": "OSM n13089158344 (already in OSM)",
+   "position": {
+    "lon": 23.7728982,
+    "lat": 61.4980177,
+    "how": "OSM n13089158344",
+    "_source": "OpenStreetMap n13089158344 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13093307534",
+   "street": null,
+   "street_how": null,
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n13093307534 (already in OSM)",
+   "position": {
+    "lon": 23.7739359,
+    "lat": 61.5004142,
+    "how": "OSM n13093307534",
+    "_source": "OpenStreetMap n13093307534 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13093307536",
+   "street": null,
+   "street_how": null,
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n13093307536 (already in OSM)",
+   "position": {
+    "lon": 23.7736004,
+    "lat": 61.5003951,
+    "how": "OSM n13093307536",
+    "_source": "OpenStreetMap n13093307536 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13095324626",
+   "street": "Tullinramppi",
+   "street_how": "nearest named street, 37.5 m",
+   "level": "1",
+   "kind": "yes",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n13095324626 (already in OSM)",
+   "position": {
+    "lon": 23.7732241,
+    "lat": 61.4987107,
+    "how": "OSM n13095324626",
+    "_source": "OpenStreetMap n13095324626 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila (station hall)",
+   "where": "in the station building",
+   "opening_hours": "Mo-Su 05:00-24:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatit",
+   "where": "inside the station building; OSM VR vending machine n4070180045 in the hall",
+   "osm_id": "n4070180045",
+   "note": "No VR service point (ticket office) at Tampere.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.772836,
+    "lat": 61.49848,
+    "osm_id": "n4070180045",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 78.4,
+    "how": "OSM node n4070180045",
+    "_source": "OpenStreetMap n4070180045 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse ticket devices",
+   "where": "on all platforms, mostly near the stairs to the platform; OSM n13089222590–95, n13095332774",
+   "_source": "Nysse 'Trains in the Nysse area', https://nysse.fi/en/ways-to-get-around/train.html, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building, platform-1 side (OSM n9845031505, n9845166226)",
+   "osm_ids": [
+    "n9845031505",
+    "n9845166226"
+   ],
+   "note": "VR lists a WC; no fee information in any source.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavaralokerikko (VR luggage lockers)",
+   "fee": "S from 3.90 € / 3 h, XL from 4.90 € / 3 h; 3, 6, 12, 24 or 72 h; payment card; overstay charged hourly",
+   "where": "luggage storage corridor in the station building (OSM n13089508007, opening_hours Mo-Su 04:00-24:00; a second node n13089508006 by track 1)",
+   "osm_ids": [
+    "n13089508007",
+    "n13089508006"
+   ],
+   "opening_hours": "Mo-Su 04:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "VR gives no locker hours; two KeyBoy key lockers are in the same corridor.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Otto",
+   "where": "inside the station hall",
+   "osm_id": "n13091349705",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 23.7704005,
+     "lat": 61.4986002,
+     "osm_id": "n2850752535",
+     "osm_level": "-1",
+     "in_station_building": false,
+     "to_nearest_platform_m": 12.7,
+     "how": "OSM node n2850752535",
+     "_source": "OpenStreetMap n2850752535 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 23.7730081,
+     "lat": 61.498318,
+     "osm_id": "n13091349705",
+     "osm_level": "0",
+     "in_station_building": true,
+     "to_nearest_platform_m": 88.5,
+     "how": "OSM node n13091349705",
+     "_source": "OpenStreetMap n13091349705 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled",
+   "position": {
+    "lon": 23.7730081,
+    "lat": 61.498318,
+    "osm_id": "n13091349705",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 88.5,
+    "how": "OSM node n13091349705",
+    "_source": "OpenStreetMap n13091349705 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "in front of the station by the doors of the southern underpass (Matkakeskustunneli); no shelter; drop-off traffic can reach it",
+   "note": "Assistance booked on 0800 188 822 (Mo-Fr 05-22, Sa-Su 07-22) at least 24 h ahead.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taksiasema",
+   "where": "next to the assistance point in front of the station (south end); the Pakkahuoneenaukio taxi stand is closed until further notice",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Liityntäpysäköinti (Moovy) and car park next to the assistance point",
+   "where": "in front of the station, south end",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Rail-replacement buses",
+   "where": "the parking area in front of the station main entrance (green train+bus sign)",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; Nysse 'Trains in the Nysse area', https://nysse.fi/en/ways-to-get-around/train.html, read 2026-10-30"
+  },
+  {
+   "category": "tram_stop",
+   "name": "Rautatieasema (tram lines 1, 3)",
+   "where": "next to the station; Tulli stop on the Tammela side is reached through the Matkakeskustunneli during the works",
+   "_source": "Nysse 'Tram', https://nysse.fi/en/tram.html, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-Kioski",
+   "osm_id": "w1424287107",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa 06:00-24:00; Su 07:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "note": "r-kioski.fi store page (tampere-asema-3) did not load",
+   "position": {
+    "lon": 23.7731472,
+    "lat": 61.4984488,
+    "osm_id": "w1424287107",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 91.6,
+    "how": "representative point of the OSM area w1424287107",
+    "_source": "OpenStreetMap w1424287107 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Robert's Coffee",
+   "osm_id": "w1424287108",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Th 05:30-20:00; Fr 05:30-21:00; Sa 07:00-20:00; Su 07:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "Robert's Coffee, https://robertscoffee.com/cafe/tampereen-rautatieasema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7728471,
+    "lat": 61.4983004,
+    "osm_id": "w1424287108",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 75.9,
+    "how": "representative point of the OSM area w1424287108",
+    "_source": "OpenStreetMap w1424287108 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "osm_id": "w1424287109",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Th 09:00-23:30; Fr-Sa 08:30-01:00; Su 08:30-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7731646,
+    "lat": 61.4983399,
+    "osm_id": "w1424287109",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 92.0,
+    "how": "representative point of the OSM area w1424287109",
+    "_source": "OpenStreetMap w1424287109 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bakery",
+   "name": "Brander",
+   "osm_id": "w1424287110",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 06:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7731672,
+    "lat": 61.4982739,
+    "osm_id": "w1424287110",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 93.4,
+    "how": "representative point of the OSM area w1424287110",
+    "_source": "OpenStreetMap w1424287110 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Asemamestari",
+   "osm_id": "w1424287111",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 10:00-24:00; Su 11:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "note": "hemingways.fi restaurant page redirects to the chain page",
+   "position": {
+    "lon": 23.7731699,
+    "lat": 61.4982055,
+    "osm_id": "w1424287111",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 94.4,
+    "how": "representative point of the OSM area w1424287111",
+    "_source": "OpenStreetMap w1424287111 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "Punnitse ja Säästä",
+   "osm_id": "w1424287112",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7731751,
+    "lat": 61.4980678,
+    "osm_id": "w1424287112",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 98.2,
+    "how": "representative point of the OSM area w1424287112",
+    "_source": "OpenStreetMap w1424287112 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Bento Ya!",
+   "osm_id": "w1424287116",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "11:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7731408,
+    "lat": 61.498616,
+    "osm_id": "w1424287116",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 92.8,
+    "how": "representative point of the OSM area w1424287116",
+    "_source": "OpenStreetMap w1424287116 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Jungle Juice Bar",
+   "osm_id": "w1424287117",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Fr 06:30-21:00; Sa 09:00-20:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "position": {
+    "lon": 23.7728921,
+    "lat": 61.4986115,
+    "osm_id": "w1424287117",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 76.9,
+    "how": "representative point of the OSM area w1424287117",
+    "_source": "OpenStreetMap w1424287117 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Aitoleipä",
+   "osm_id": "w1424287113",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Fr 06:00-18:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "note": "OSM has it on level 0 but not inside the station-building outline",
+   "position": {
+    "lon": 23.7731897,
+    "lat": 61.4979621,
+    "osm_id": "w1424287113",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 106.1,
+    "how": "representative point of the OSM area w1424287113",
+    "_source": "OpenStreetMap w1424287113 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Aseman Kahvila",
+   "osm_id": "w1424287114",
+   "where": "in the station building, street/hall level (OSM level 0), along the hall on the track side",
+   "opening_hours": "Mo-Th 07:30-18:00; Fr,Sa 07:30-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "note": "south end of the building, towards the travel-centre tunnel",
+   "position": {
+    "lon": 23.773131,
+    "lat": 61.4977762,
+    "osm_id": "w1424287114",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 108.9,
+    "how": "representative point of the OSM area w1424287114",
+    "_source": "OpenStreetMap w1424287114 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Semafori",
+   "osm_id": "n139581997",
+   "where": "in the station building, upper floor (OSM level 1)",
+   "opening_hours": "We-Sa 10:00-03:00; Su-Tu 10:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30",
+   "note": "OSM level 1, inside the station building",
+   "position": {
+    "lon": 23.7731,
+    "lat": 61.4988845,
+    "osm_id": "n139581997",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 101.5,
+    "how": "OSM node n139581997",
+    "_source": "OpenStreetMap n139581997 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n9845031505",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9845031505 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7733281,
+    "lat": 61.4985898,
+    "osm_id": "n9845031505",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 105.8,
+    "how": "OSM node n9845031505",
+    "_source": "OpenStreetMap n9845031505 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n9845166226",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9845166226 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7733315,
+    "lat": 61.4985216,
+    "osm_id": "n9845166226",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 105.0,
+    "how": "OSM node n9845166226",
+    "_source": "OpenStreetMap n9845166226 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222590",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222590 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7733205,
+    "lat": 61.4987388,
+    "osm_id": "n13089222590",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 108.2,
+    "how": "OSM node n13089222590",
+    "_source": "OpenStreetMap n13089222590 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222591",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222591 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7733572,
+    "lat": 61.4980125,
+    "osm_id": "n13089222591",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 116.2,
+    "how": "OSM node n13089222591",
+    "_source": "OpenStreetMap n13089222591 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222592",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222592 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7740211,
+    "lat": 61.4983026,
+    "osm_id": "n13089222592",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 142.2,
+    "how": "OSM node n13089222592",
+    "_source": "OpenStreetMap n13089222592 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222593",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222593 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7737035,
+    "lat": 61.4976288,
+    "osm_id": "n13089222593",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 153.8,
+    "how": "OSM node n13089222593",
+    "_source": "OpenStreetMap n13089222593 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222594",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222594 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7739728,
+    "lat": 61.499287,
+    "osm_id": "n13089222594",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 163.1,
+    "how": "OSM node n13089222594",
+    "_source": "OpenStreetMap n13089222594 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13089222595",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089222595 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7736491,
+    "lat": 61.4987858,
+    "osm_id": "n13089222595",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 126.4,
+    "how": "OSM node n13089222595",
+    "_source": "OpenStreetMap n13089222595 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "VR",
+   "osm_id": "n13089508006",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13089508006 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7735305,
+    "lat": 61.4981667,
+    "osm_id": "n13089508006",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 119.2,
+    "how": "OSM node n13089508006",
+    "_source": "OpenStreetMap n13089508006 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "VR",
+   "osm_id": "n13089508007",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": "Mo-Su 04:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n13089508007 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7730852,
+    "lat": 61.4980282,
+    "osm_id": "n13089508007",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 102.4,
+    "how": "OSM node n13089508007",
+    "_source": "OpenStreetMap n13089508007 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_validator",
+   "name": "Nysse",
+   "osm_id": "n13095332774",
+   "osm_level": "1",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13095332774 (read 2026-10-30)",
+   "position": {
+    "lon": 23.7736511,
+    "lat": 61.4982535,
+    "osm_id": "n13095332774",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 123.4,
+    "how": "OSM node n13095332774",
+    "_source": "OpenStreetMap n13095332774 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Ale-pupi",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 09:00-02:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.alepupi.fi",
+   "position": {
+    "lon": 23.7714266,
+    "lat": 61.4986885,
+    "osm_id": "n139581203",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 16.4,
+    "how": "OSM node n139581203",
+    "_source": "OpenStreetMap n139581203 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n139581203 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bank",
+   "name": "Ålandsbanken",
+   "brand": "Ålandsbanken",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-16:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.alandsbanken.fi/",
+   "position": {
+    "lon": 23.7706591,
+    "lat": 61.4986222,
+    "osm_id": "n774502317",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.1,
+    "how": "OSM node n774502317",
+    "_source": "OpenStreetMap n774502317 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n774502317 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "alcohol",
+   "name": "Alko",
+   "brand": "Alko",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.alko.fi/myymalat-palvelut/2462",
+   "position": {
+    "lon": 23.7707239,
+    "lat": 61.4987071,
+    "osm_id": "n865601561",
+    "osm_level": "-1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 22.0,
+    "how": "OSM node n865601561",
+    "_source": "OpenStreetMap n865601561 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n865601561 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "variety_store",
+   "name": "Flying Tiger Copenhagen",
+   "brand": "Flying Tiger Copenhagen",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-18:00; Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7714834,
+    "lat": 61.4983189,
+    "osm_id": "n896600880",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 14.9,
+    "how": "OSM node n896600880",
+    "_source": "OpenStreetMap n896600880 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n896600880 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "DNA",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-16:00; Su 12:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7705943,
+    "lat": 61.4982614,
+    "osm_id": "n3825159498",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.7,
+    "how": "OSM node n3825159498",
+    "_source": "OpenStreetMap n3825159498 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n3825159498 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-18:30, Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7705346,
+    "lat": 61.4987026,
+    "osm_id": "n4031481032",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 22.9,
+    "how": "OSM node n4031481032",
+    "_source": "OpenStreetMap n4031481032 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4031481032 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "beauty",
+   "name": "Tampereen kauneushoitola",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.tampereenkauneushoitola.fi/",
+   "position": {
+    "lon": 23.7710941,
+    "lat": 61.4983008,
+    "osm_id": "n6654862787",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.2,
+    "how": "OSM node n6654862787",
+    "_source": "OpenStreetMap n6654862787 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6654862787 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Asematunnelin Silmälasi",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:30-17:30; Sa 10:00-14:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7712276,
+    "lat": 61.4983094,
+    "osm_id": "n9135406866",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.3,
+    "how": "OSM node n9135406866",
+    "_source": "OpenStreetMap n9135406866 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9135406866 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Bistro Koo",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:00-18:00; Fr 09:00-20:00; Sa 09:00-18:00; Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7706396,
+    "lat": 61.49861,
+    "osm_id": "n10250605877",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 11.9,
+    "how": "OSM node n10250605877",
+    "_source": "OpenStreetMap n10250605877 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10250605877 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Relove Stockmann Tampere 1. krs",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.relove.fi/page/58/relove-tampere",
+   "position": {
+    "lon": 23.7707629,
+    "lat": 61.4986416,
+    "osm_id": "n11964129622",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 14.5,
+    "how": "OSM node n11964129622",
+    "_source": "OpenStreetMap n11964129622 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11964129622 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Pizzamestarit",
+   "brand": null,
+   "cuisine": "pizza",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": "https://www.pizzamestarit.fi/tampereen-pizzamestarit/",
+   "position": {
+    "lon": 23.770751,
+    "lat": 61.4982724,
+    "osm_id": "n12112370926",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.7,
+    "how": "OSM node n12112370926",
+    "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Parturi-kampaamo Prime",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 23.7711642,
+    "lat": 61.4983025,
+    "osm_id": "n14001718622",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.6,
+    "how": "OSM node n14001718622",
+    "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Relove Stockmann Tampere 3. krs",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-18:00; Su 12:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7708084,
+    "lat": 61.4986608,
+    "osm_id": "n14107110258",
+    "osm_level": "2",
+    "in_station_building": false,
+    "to_nearest_platform_m": 16.2,
+    "how": "OSM node n14107110258",
+    "_source": "OpenStreetMap n14107110258 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n14107110258 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "department_store",
+   "name": "Stockmann",
+   "brand": "Stockmann",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 09:00-19:00; Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://info.stockmann.com/info/tavaratalot/tampere/",
+   "position": {
+    "lon": 23.7703894,
+    "lat": 61.499009,
+    "osm_id": "w89453870",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 8.5,
+    "how": "representative point of the OSM area w89453870",
+    "_source": "OpenStreetMap w89453870 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w89453870 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bakery",
+   "name": "Brander",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:30-19:00; Sa 06:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7731672,
+    "lat": 61.4982739,
+    "osm_id": "w1424287110",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 93.4,
+    "how": "representative point of the OSM area w1424287110",
+    "_source": "OpenStreetMap w1424287110 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w1424287110 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Punnitse ja Säästä",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 23.7731751,
+    "lat": 61.4980678,
+    "osm_id": "w1424287112",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 98.2,
+    "how": "representative point of the OSM area w1424287112",
+    "_source": "OpenStreetMap w1424287112 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap w1424287112 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Signposted level names: none found (no published station plan).",
+  "Levels' heights: no source measures them.",
+  "Which platform each lift/escalator reaches is OSM only (the city and VR confirm lifts/escalators in the travel-centre tunnel and lifts via the Rongankatu underpass, not per platform).",
+  "Signposted platform names (e.g. 'laituri 2' vs 'raide 2–3') not confirmed; sources speak of tracks 1–5.",
+  "No published station plan from VR/Väylä/City of Tampere found; vayla.fi project pages (tampereen-henkiloratapiha/liikennejarjestelyt) would not load.",
+  "Toilet fee unknown.",
+  "Shop hours other than Robert's Coffee are OSM's opening_hours (R-Kioski and Hemingway's pages did not load); not checked against the shops.",
+  "Whether shops inside the closed Asematunneli (e.g. Asematunnelin Silmälasi) are reachable now is unknown.",
+  "Platform heights: laser gives ~0.68–0.72 m above rail for L2/L4/L5 vs register class korkea 0.55 m (see 3D pass flags)."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Current entrances, lifts and passages during the station-yard rebuild (City of Tampere / Nysse)",
+   "answer": "Open: the main entrance from Hämeenkatu/Rautatienkatu; the Matkakeskustunneli (travel-centre tunnel, south end, open 24 h, with a lift and a pair of escalators up to each of the three platforms); the Rongankatu underpass (north end, accessible, lifts and stairs to all platforms); Sorinsilta and Lapintie (and Erkkilänsilta) for crossing the yard. Closed for the whole project: the Asematunneli (station tunnel) and the Itsenäisyydenkatu underpass for pedestrians/cyclists. From Tammela, Tulli and the Tulli tram stop, go through the travel-centre tunnel. There is no VR service point.",
+   "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; City of Tampere, 'Construction sites affecting traffic in the city centre', https://www.tampere.fi/en/transport-streets-and-maintenance/construction-sites-affecting-traffic-city-centre, read 2026-10-30; City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30"
+  }
+ ]
+}

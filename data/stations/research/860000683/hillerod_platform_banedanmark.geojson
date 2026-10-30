@@ -1,0 +1,241 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.3105143,
+      55.9253713
+     ],
+     [
+      12.3105404,
+      55.9254373
+     ],
+     [
+      12.3106033,
+      55.9255951
+     ],
+     [
+      12.3107058,
+      55.9258523
+     ],
+     [
+      12.3111859,
+      55.9270666
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 1",
+    "track": "1",
+    "perron": "1",
+    "perron_tracks": [
+     "1",
+     "11"
+    ],
+    "tib": "82",
+    "height_class": "92 cm",
+    "height_m": 0.92,
+    "length_m": 187,
+    "width_m": 8.4,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 1 (station Hi); extent: Banedanmark platform outline FOR_PERRONER_OD Hi 171 beside the track (193 m along it; Bilag 187 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 82; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.3103198,
+      55.9253957
+     ],
+     [
+      12.3103471,
+      55.9254617
+     ],
+     [
+      12.310441,
+      55.925689
+     ],
+     [
+      12.3104842,
+      55.9257875
+     ],
+     [
+      12.3105716,
+      55.9260187
+     ],
+     [
+      12.3106916,
+      55.9263484
+     ],
+     [
+      12.310744,
+      55.9264971
+     ],
+     [
+      12.3108015,
+      55.9266574
+     ],
+     [
+      12.3108346,
+      55.9267498
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 11",
+    "track": "11",
+    "perron": "1",
+    "perron_tracks": [
+     "1",
+     "11"
+    ],
+    "tib": "82",
+    "height_class": "92 cm",
+    "height_m": 0.92,
+    "length_m": 144,
+    "width_m": 10.6,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 11 (station Hi); extent: Banedanmark platform outline FOR_PERRONER_OD Hi 171 beside the track (154 m along it; Bilag 144 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 82; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.3107151,
+      55.9255093
+     ],
+     [
+      12.3107437,
+      55.9255817
+     ],
+     [
+      12.3107554,
+      55.9256114
+     ],
+     [
+      12.3114045,
+      55.9272449
+     ],
+     [
+      12.3114072,
+      55.9272517
+     ],
+     [
+      12.3114448,
+      55.9273464
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 3",
+    "track": "3",
+    "perron": "2",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "82",
+    "height_class": "92 cm",
+    "height_m": 0.92,
+    "length_m": 199,
+    "width_m": 7.8,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 3 (station Hi); extent: Banedanmark platform outline FOR_PERRONER_OD Hi 172 beside the track (210 m along it; Bilag 199 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 82; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      12.3108732,
+      55.9254888
+     ],
+     [
+      12.3109024,
+      55.9255559
+     ],
+     [
+      12.3109045,
+      55.9255608
+     ],
+     [
+      12.3110907,
+      55.9259891
+     ],
+     [
+      12.3112731,
+      55.9264169
+     ],
+     [
+      12.3114111,
+      55.9267601
+     ],
+     [
+      12.3115015,
+      55.9270103
+     ],
+     [
+      12.311527,
+      55.9270989
+     ],
+     [
+      12.3115275,
+      55.9271008
+     ],
+     [
+      12.3115521,
+      55.9271863
+     ],
+     [
+      12.3115869,
+      55.9273198
+     ],
+     [
+      12.311594,
+      55.9273517
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 4",
+    "track": "4",
+    "perron": "2",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "82",
+    "height_class": "92 cm",
+    "height_m": 0.92,
+    "length_m": 218,
+    "width_m": 7.7,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 4 (station Hi); extent: Banedanmark platform outline FOR_PERRONER_OD Hi 172 beside the track (212 m along it; Bilag 218 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 82; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  }
+ ]
+}

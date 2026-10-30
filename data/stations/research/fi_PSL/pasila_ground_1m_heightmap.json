@@ -1,0 +1,18 @@
+{
+ "file": "pasila_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 1000",
+ "base_m": 9,
+ "scale": 1000,
+ "nodata_value": 0,
+ "crs": "EPSG:3879 (ETRS-GK25)",
+ "vertical_datum": "N2000",
+ "origin_top_left_EN": [
+  25496110,
+  6676653
+ ],
+ "pixel_m": 1,
+ "width": 330,
+ "height": 608,
+ "source": "pasila_ground_1m.tif (gridded from the laser ground class, CC BY 4.0)"
+}

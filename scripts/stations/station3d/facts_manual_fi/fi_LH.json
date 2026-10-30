@@ -1,0 +1,316 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street / platform level (station building, Mannerheiminkatu, platforms)",
+   "other_names": [],
+   "note": "Station building (1935, Thure Hellström) at Mannerheiminkatu 15 on the city (south) side; the travel centre (matkakeskus) was completed in early 2016. No signposted level names found.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_bus_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses (station tunnels along Vesijärvenkatu–Uudenmaankatu)",
+   "other_names": [],
+   "note": "Visit Lahti: tracks are reached through underpasses along Vesijärvenkatu–Uudenmaankatu; levels are linked by lifts or stairs. Wikipedia: the west-side underpass was renovated in 2006. OSM: several underpass ways on layer -1. Heights: no source measures them.",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w34903227",
+    "w34903229",
+    "w46103619"
+   ],
+   "between": [
+    "city side (station building, Mannerheiminkatu)",
+    "both island platforms and the north side"
+   ],
+   "where": "along Vesijärvenkatu–Uudenmaankatu",
+   "confirmed_by": "owner text (Visit Lahti) for the underpasses; OSM for their course",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5820135489",
+    "n7394212281"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 2 (OSM platforms 2 and La0203)"
+   ],
+   "where": "two lifts from the underpasses up to this platform (OSM)",
+   "confirmed_by": "owner text for lifts in general (Visit Lahti: levels reached by lifts or stairs; lifts with sound beacons, room for a wheelchair to turn; VR: lift renovation 28 Sep–18 Oct 2026); positions OSM only",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n5820135491",
+    "n7394241289"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 3/4"
+   ],
+   "where": "two lifts from the underpasses up to this platform (OSM)",
+   "confirmed_by": "owner text for lifts in general (Visit Lahti); positions OSM only",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n4034829098",
+    "n4034829109",
+    "n4552144334",
+    "n13278363780"
+   ],
+   "between": [
+    "underpass / street",
+    "street"
+   ],
+   "where": "OSM lifts not linked to a platform (street-to-underpass lifts, e.g. near the Marskinaukio entrances n4034829097/n4034829099)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w34903235",
+    "w34903236",
+    "w34903237",
+    "w790958835",
+    "w790958836",
+    "w790958837"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 2 (OSM 2 / La0203)"
+   ],
+   "where": "from the underpasses",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w34903232",
+    "w34903233",
+    "w34903234",
+    "w790958839",
+    "w790958840",
+    "w790958841"
+   ],
+   "between": [
+    "underpass",
+    "platform of tracks 3/4"
+   ],
+   "where": "from the underpasses",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w51819438",
+    "w51819439"
+   ],
+   "between": [
+    "street",
+    "platform 4 / La0203"
+   ],
+   "where": "stairs reaching the platforms directly (OSM, not via the underpass)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building main entrance",
+   "street": "Mannerheiminkatu",
+   "level": "0",
+   "where": "city side; OSM entrances n4034829110, n7410885048 nearest Mannerheiminkatu, n7608913752 tagged main",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "name": "Underpass entrances, Marskinaukio",
+   "street": "Marskinaukio",
+   "level": "0",
+   "where": "OSM n4034829097, n4034829099 (by lift n4034829098/n4034829109)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "name": "Underpass entrances, Uudenmaankatu (north side)",
+   "street": "Uudenmaankatu",
+   "level": "0",
+   "where": "OSM n1035390980, n5250877708, n10138284581",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station hall / waiting room",
+   "where": "station building",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:00-23:15",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Visit Lahti gives the station hall as daily 05:30-23:15.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Lahti Asema",
+   "osm_id": "n9828658374",
+   "where": "in the station hall (VR)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-21:00; Sa,Su 08:00-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM differs (Sa 07:00-21:00). Services: HSL travel cards, baked goods, Wolt pickup.",
+   "_source": "https://www.r-kioski.fi/kioskit/lahti-asema-4/, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "locker",
+   "name": "KeyBoy digital key locker",
+   "where": "in the station hall, next to the R-kioski; reserve in the KeyBoy app",
+   "level_per_plan": "0",
+   "note": "VR: no ordinary luggage lockers.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Otto",
+   "osm_id": "n9828658382",
+   "where": "in the main entrance vestibule",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC + Inva-WC",
+   "osm_id": "n9828658376",
+   "fee": "yes (per OSM; VR gives no fee)",
+   "where": "in the station building",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Ravintola Asema",
+   "osm_id": "n1035390835",
+   "where": "in the station building, east side (Wikipedia: the restaurant remains on the east side)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 06:00-22:00; Fr 06:00-23:00; Sa 07:00-23:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; https://en.wikipedia.org/wiki/Lahti_railway_station, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Express",
+   "osm_id": "n9828658375",
+   "where": "in the station building (OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 08:30-17:00; Sa 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Asemapäällikkö (in the stationmaster's house)",
+   "osm_id": "w51819441",
+   "where": "next to the station, in the 1912 stationmaster's house (not in the station building)",
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa 09:00-16:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Wikimedia Commons, File:Asemapäällikön talo ja BW Tower Lahdessa.jpg (2020: 'Asemapäällikön talo, jossa toimii kahvila'), read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR ticket machines (Lippuautomaatti)",
+   "osm_ids": [
+    "n1035390881",
+    "n9828658385",
+    "n9828658386"
+   ],
+   "where": "in the station building (OSM); the area map marks ticket vending machines",
+   "note": "VR: no VR service point.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Avis, Europcar, Hertz, SIXT, Budget",
+   "osm_ids": [
+    "n9828658377",
+    "n9828658378",
+    "n9828658379",
+    "n9828658380",
+    "n9828658381"
+   ],
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "Assistance point (VR)",
+   "where": "in front of the station building, city side, near taxis and drop-off",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stand",
+   "osm_id": "n7368313332",
+   "where": "in front of the travel centre",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Lahti Matkakeskus, long-distance bus terminal (Matkahuolto)",
+   "osm_id": "n4393602346",
+   "where": "Askonkatu 2; long-haul buses leave from platforms in front of the train station; local bus stops (A–E on the area map) along Mannerheiminkatu and Vesijärvenkatu",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; City of Lahti / Väylävirasto, station area map 'lähialuekartta Lahti' (07/2019), https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Matka parking garage",
+   "where": "right next to the station, entry from Askonkatu (Lahden Pysäköinti)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Covered bike park in the station tunnel",
+   "where": "station tunnel on the eastern edge of Vesijärvenkatu; ~230 bikes, CCTV, repair point; plus ~100 uncovered in the station courtyard and 36 on the south side along Uudenmaankatu",
+   "_source": "Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Lähialuekartta Lahti (station area map, FI/SV/EN, 07/2019)",
+   "publisher": "Väylävirasto (named for maintenance); published on lahti.fi 13 Aug 2020",
+   "url": "https://www.lahti.fi/app/uploads/2020/08/376d19ee-lahialuekartta_-lahti_-a4-10062020.pdf",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
+   "answer": "Platform tracks 1–4 (Digitraffic) on two platforms reached from underpasses along Vesijärvenkatu–Uudenmaankatu; levels linked by lifts or stairs (Visit Lahti). OSM has two lifts and several stairs to each platform. Station hall 05:00-23:15 (VR). In the building: R-kioski, Ravintola Asema, Cafe Express, toilets, Otto, KeyBoy lockers, car rental desks.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-LH/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Platform grouping: OSM tags platforms '2', 'La0203', '3', '4'; lifts reach '2'+'La0203' together and '3'+'4' together. Digitraffic gives tracks 1 and 4 at 451 m and 2 and 3 at 270 m, which suggests islands 1/2 and 3/4 (La0203 = track 1 face?), but no source states which tracks share a platform.",
+  "Which underpass is which (west tunnel renovated 2006 vs. the 2016 travel-centre tunnel) and their signposted names: not found.",
+  "Lift renovation (VR: 28 Sep–18 Oct 2026) — VR did not say which lift; presumably finished by 2026-10-30, not confirmed.",
+  "Station hall opening: VR 05:00, Visit Lahti 05:30 (both close 23:15). VR used.",
+  "Ravintola Asema and Cafe Express hours are OSM only; no own websites found.",
+  "Toilet fee amount not stated by VR or the area map; fee=yes is OSM only.",
+  "Visit Lahti mentions a station office Mo-Fr 06:30-18:00, but VR lists no VR service point: left out as probably stale."
+ ]
+}

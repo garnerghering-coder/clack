@@ -1,0 +1,347 @@
+{
+ "clack_id": "860000719",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: station building (Jernbaneplads) and perron 1 (tracks 0/1); island perron 2 (tracks 2/3/2a)",
+   "note": "Per Banedanmark register, 55 cm. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (underpass) under the tracks by the station building",
+   "note": "OSM layer -1; a second underpass (w149004069) lies about 50 m away, off the platforms.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w150387765",
+   "between": [
+    "station building / perron 1",
+    "perron 2"
+   ],
+   "where": "south-east part of the platforms, by the station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7082825,
+    "lat": 55.7155989,
+    "how": "OSM w150387765 (point on the way)",
+    "_source": "OpenStreetMap w150387765 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w205701853",
+   "between": [
+    "tunnel",
+    "perron 1"
+   ],
+   "where": "at the tunnel by the station building",
+   "confirmed_by": "OSM only (DSB lists stairs)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30",
+   "position": {
+    "lon": 11.7082825,
+    "lat": 55.7155989,
+    "how": "OSM w205701853 (point on the way)",
+    "_source": "OpenStreetMap w205701853 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w150387768",
+    "w150387770"
+   ],
+   "between": [
+    "tunnel",
+    "perron 2"
+   ],
+   "where": "at the tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "not stated",
+    "not stated"
+   ],
+   "where": "unknown",
+   "confirmed_by": "owner text (DSB lists 'Elevator'); not in OSM",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Entrance (OSM)",
+   "osm_id": "n5987468127",
+   "street": "Jernbaneplads",
+   "level": "0",
+   "where": "station building, town side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7085419,
+    "lat": 55.715785,
+    "how": "OSM n5987468127",
+    "_source": "OpenStreetMap n5987468127 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n5987468127",
+   "street": "Jernbaneplads",
+   "street_how": "nearest named street, 8.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n5987468127 (already in OSM)",
+   "position": {
+    "lon": 11.7085419,
+    "lat": 55.715785,
+    "how": "OSM n5987468127",
+    "_source": "OpenStreetMap n5987468127 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n9622509134",
+   "where": "in the station building",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-22:00; Sa,Su 08:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list as read.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7086374,
+    "lat": 55.7156545,
+    "osm_id": "n9622509134",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n9622509134",
+    "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 05:00-23:45; Sa 05:30-23:45; Su 07:30-23:45",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n9868454926",
+   "fee": "5 kr, card",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7082969,
+    "lat": 55.715609,
+    "osm_id": "n9868454926",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n9868454926",
+    "_source": "OpenStreetMap n9868454926 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bicycle",
+   "name": "Holbæk Station Cykler",
+   "osm_id": "n5659060565",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 08:00-17:30; Sa 09:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Shop website blocked reading (robots); OSM hours used.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7088613,
+    "lat": 55.7155118,
+    "osm_id": "n5659060565",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5659060565",
+    "_source": "OpenStreetMap n5659060565 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Holbæk St. (bus station)",
+   "osm_id": "w148969808",
+   "where": "beside the station (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 11.7076649,
+    "lat": 55.7161085,
+    "osm_id": "w148969808",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "representative point of the OSM area w148969808",
+    "_source": "OpenStreetMap w148969808 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Holbæk Taxa",
+   "osm_ids": [
+    "n1620235979",
+    "w1539452776"
+   ],
+   "where": "in front of the station building (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering + Handicapparkering",
+   "note": "About 335 spaces, 50 % occupancy.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 1 aflåst cykelskur",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n9868454926",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n9868454926 (read 2026-10-30)",
+   "position": {
+    "lon": 11.7082969,
+    "lat": 55.715609,
+    "osm_id": "n9868454926",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n9868454926",
+    "_source": "OpenStreetMap n9868454926 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bicycle",
+   "name": "Holbæk Station Cykler",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 08:00-17:30; Sa 09:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 11.7088613,
+    "lat": 55.7155118,
+    "osm_id": "n5659060565",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n5659060565",
+    "_source": "OpenStreetMap n5659060565 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n5659060565 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "Stangen 1876",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 11.7091284,
+    "lat": 55.7161833,
+    "osm_id": "n8109952179",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n8109952179",
+    "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 11.7086374,
+    "lat": 55.7156545,
+    "osm_id": "n9622509134",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n9622509134",
+    "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Lift(s): DSB lists 'Elevator' but gives no position; OSM has none. Not settled.",
+  "OSM has no platform objects with refs for Holbæk; platform names come from the Banedanmark register.",
+  "Second underpass w149004069 (with stairs w149004072, w1477015822): whether it is a public passage to the platforms is not settled.",
+  "No owner plan found; level names not signposted in any source.",
+  "Bar 'Stangen 1876' (OSM, 59 m) not confirmed as part of the station."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Holbæk)",
+   "answer": "A tunnel by the station building with stairs to perron 1 and perron 2 (OSM). DSB lists an elevator and stairs, but OSM maps no lift, so where the lift(s) are is unknown.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30"
+  }
+ ]
+}

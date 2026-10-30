@@ -1,0 +1,92 @@
+{
+ "clack_id": "860000009",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w677314160",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 3.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.9854946,
+    57.4563504
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1520147709",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Parallelvej",
+   "nearest_street_m": 16.7,
+   "lonlat": [
+    9.9859528,
+    57.4566321
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n13061004970",
+   "category": "bar",
+   "name": "UNO BANEgaard",
+   "level": null,
+   "fee": null,
+   "opening_hours": "We-Fr 09:00-17:00; Sa,Su 09:00-15:00; Mo,Tu off",
+   "wheelchair": null,
+   "distance_m": 25,
+   "lonlat": [
+    9.9857576,
+    57.4565817
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "website": "https://unobanegaard.dk/"
+  },
+  {
+   "osm_id": "w270159008",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 52,
+   "lonlat": [
+    9.9842829,
+    57.4565855
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w766508682",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 50,
+   "lonlat": [
+    9.9845615,
+    57.456896
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

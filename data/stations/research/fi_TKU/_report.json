@@ -1,0 +1,177 @@
+{
+ "clack_id": "fi:TKU",
+ "slug": "turku",
+ "flags": [
+  "w912901301 Logomonsilta (bridge): p95 26.9 m is 3.5 m above the median 23.4 m (a taller neighbour or a mast inside the outline?).",
+  "w1424898294 roof: p95 17.1 m is 3.2 m above the median 13.9 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=22.254560,60.453999,22.266770,60.459399",
+ "profile": {
+  "brief": "the Sweden brief, applied to Finland (sources swapped for the Finnish equivalents)",
+  "vdatum": "N2000",
+  "crs": "ETRS-TM35FIN (EPSG:3067)",
+  "laser_line": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+  "scan_block": "clack_fi_mml05_L3324B4",
+  "box_note": ": the platforms' extent plus a margin",
+  "dtm_what": "Ground, 1 m, float32, EPSG:3067, N2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Digitraffic",
+  "register_owner": "Väylävirasto (Finnish Transport Infrastructure Agency)",
+  "register_file": "turku_platform_vayla.geojson",
+  "register_what": "Digitraffic infra-api platform objects (laiturit) as track-centre lines, with platform number, height class, length and the laser levels",
+  "register_licence": "Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0",
+  "register_text": "Register: Digitraffic infra-api `laiturit` (read 2026-10-30, CC BY 4.0): platform number (`kaupallinenNumero`), height class `korkea`/`matala`, length; no width or roof. Class heights: korkea 0.55 m, matala 0.265 m above rail (Väylävirasto Network Statement 2021 appendix 3B via Wikipedia \"Platform height\", read 2026-10-30).",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1,3,4,5)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa). https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/laser-scanning-data-05-p (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Digitraffic infra-api (Väylävirasto / Fintraffic) `https://rata.digitraffic.fi/infra-api/latest/laiturit.json` and `rautatieliikennepaikat.json`, read 2026-10-30, CC BY 4.0."
+ },
+ "ground": {
+  "min_m": 6.91,
+  "median_m": 9.64,
+  "max_m": 32.81,
+  "nan_cells": 147397,
+  "size_m": [
+   574,
+   412
+  ],
+  "box_sweref": [
+   239169,
+   6711451,
+   239743,
+   6711863
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "clack_fi_mml05_L3324B4.laz"
+  ],
+  "scan_date": "2023-05-29",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 134269,
+  "density_in_box": 0.57,
+  "classes": {
+   "1": 169,
+   "2": 90219,
+   "3": 367,
+   "4": 4714,
+   "5": 38800
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "TKU L3",
+   "track": "3",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 350.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.39,
+   "track_bed_points": 273,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "TKU L2",
+   "track": "2",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 326.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.35,
+   "track_bed_points": 261,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "TKU L1",
+   "track": "1",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 270.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.36,
+   "track_bed_points": 240,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "TKU L4",
+   "track": "4",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 350.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.45,
+   "track_bed_points": 279,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "TKU L5",
+   "track": "5",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 350.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.5,
+   "track_bed_points": 279,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "TKU L6",
+   "track": "6",
+   "height_class": "korkea",
+   "class_height_m": 0.55,
+   "length_m": 350.0,
+   "width_m": null,
+   "roof": null,
+   "track_bed_m": 9.48,
+   "track_bed_points": 286,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  }
+ ],
+ "platform_surface_m": null,
+ "track_bed_m": 9.42,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 6,
+  "footbridge": 1,
+  "canopy_osm": 10,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 100,
+ "photos_station_related": 48
+}

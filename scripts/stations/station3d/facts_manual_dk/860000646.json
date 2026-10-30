@@ -1,0 +1,276 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Gadeplan (street level: Nørre Voldgade / Frederiksborggade, entrance pavilions and the two DSB 7-Eleven shops)",
+   "other_names": [
+    "gadeplan"
+   ],
+   "_source": "DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-0.5 / -1 / -2",
+   "name": "Underground platform levels (OSM tags lifts/escalators between 0, -0.5, -1 and -2; perron 1 lift w642816830 is tagged -1;0 and perron 2 lift w642816846 -2;-1)",
+   "note": "Wikipedia: 'The entire station is underground'; DSB/Banedanmark give no level names. Which OSM level each platform is on is not confirmed by any owner source.",
+   "_source": "Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "osm_level": "-3",
+   "name": "Metro Nørreport (M1/M2) — out of scope; reached via transfer tunnel (Wikipedia caption: 'the metro can be reached from transfer tunnel')",
+   "_source": "Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "w642816830",
+   "between": [
+    "gadeplan (0)",
+    "perron 1 (spor 1/2, 55 cm: regional/Kystbanen)"
+   ],
+   "where": "Frederiksborggade end of perron 1 (OSM: about 5 m from that end)",
+   "confirmed_by": "OSM only (DSB: 'adgang til perronerne med både trapper og elevator')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w642818720",
+   "between": [
+    "gadeplan (0)",
+    "-1 (perron 1 side)"
+   ],
+   "where": "Nørre Voldgade, about 47 m beyond the end of perron 1 (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w642816846",
+   "between": [
+    "-1",
+    "perron 2 (spor 3/4, 92 cm: S-tog)"
+   ],
+   "where": "near the Frederiksborggade end of perron 2 (OSM)",
+   "confirmed_by": "owner text: DSB lists 'Nørreport Spor 3/4' lift, out of service 16.11.26–23.11.26 (modernisation); position OSM",
+   "status": "planned outage 2026-11-16 to 2026-11-23",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"Elevatorer & Rulletrapper\" (out-of-service list, page updated 30 Oct 13:39), https://www.dsb.dk/trafikinformation/elevatorer/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5703164369",
+   "between": [
+    "gadeplan (0)",
+    "-2 (metro transfer level)"
+   ],
+   "where": "Frederiksborggade, by the Metro entrance (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w642560991",
+    "w642560992"
+   ],
+   "between": [
+    "-1",
+    "-2 / perron 2 (spor 3/4, 92 cm: S-tog)"
+   ],
+   "where": "Frederiksborggade end of perron 2 (OSM)",
+   "confirmed_by": "OSM only (DSB page does not list escalators)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w642561002",
+    "w642561004"
+   ],
+   "between": [
+    "-0.5",
+    "-2"
+   ],
+   "where": "between Nørre Voldgade entrance and platform level (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w642560974",
+    "w642560975",
+    "w642560983",
+    "w642561019"
+   ],
+   "between": [
+    "Nørre Voldgade (0)",
+    "perron 2 (spor 3/4, 92 cm: S-tog)"
+   ],
+   "where": "middle of perron 2, from the Nørre Voldgade entrance pavilions (OSM subway_entrance n6048839935/n6048839936)",
+   "confirmed_by": "OSM only; DSB confirms stairs",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w642561055",
+    "w642561014",
+    "w642561008"
+   ],
+   "between": [
+    "Nørre Voldgade (0)",
+    "perron 1 (spor 1/2, 55 cm: regional/Kystbanen)"
+   ],
+   "where": "Nørre Voldgade main entrance n6048840409, about 20–35 m from the Frederiksborggade end of perron 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w642560993",
+   "between": [
+    "-1",
+    "perron 1 (spor 1/2, 55 cm: regional/Kystbanen) / -2"
+   ],
+   "where": "Frederiksborggade end (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w642560989",
+    "w642560990",
+    "w642560994",
+    "w642560995",
+    "w642561000",
+    "w26518128"
+   ],
+   "between": [
+    "platforms",
+    "Metro transfer"
+   ],
+   "where": "level -2 passages at the Frederiksborggade end; Metro escalators w599459262–65 continue to -3",
+   "confirmed_by": "OSM + Wikipedia caption ('the metro can be reached from transfer tunnel')",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Nørre Voldgade main entrance",
+   "osm_id": "n6048840409",
+   "street": "Nørre Voldgade",
+   "level": "0",
+   "wheelchair": "yes (OSM)",
+   "where": "Nørre Voldgade, near the Frederiksborggade end of perron 1",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Nørre Voldgade platform entrances (pavilions)",
+   "osm_ids": [
+    "n6048839935",
+    "n6048839936"
+   ],
+   "street": "Nørre Voldgade",
+   "level": "0",
+   "wheelchair": "yes (OSM)",
+   "where": "over the middle of perron 2",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30"
+  },
+  {
+   "name": "Frederiksborggade entrances",
+   "osm_ids": [
+    "n6048840265",
+    "n6050668415",
+    "n5703164345",
+    "n5703164347"
+   ],
+   "street": "Frederiksborggade",
+   "level": "0",
+   "where": "Frederiksborggade end of the platforms, incl. the lift n5703164369",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "name": "Metro entrance (Frederiksborggade)",
+   "osm_id": "n2932351381",
+   "street": "Frederiksborggade",
+   "level": "0",
+   "wheelchair": "yes (OSM)",
+   "where": "Wikipedia: 'Overground main entrance to the Metro station'",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30"
+  },
+  {
+   "name": "Other OSM entrances on Nørre Voldgade",
+   "osm_ids": [
+    "n6048840390",
+    "n6050668471",
+    "n6050668472",
+    "n6050674868",
+    "n6050674869",
+    "n6050700959",
+    "n6048840412"
+   ],
+   "street": "Nørre Voldgade",
+   "level": "0 / -1 / -2 (OSM)",
+   "where": "OSM entrance nodes along Nørre Voldgade; Wikipedia counts 4 entrances to the S-train and regional platforms",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (med billetsalg) — two shops at street level",
+   "level_per_plan": "0",
+   "where": "gadeplan; DSB: 'Vores to 7-Eleven-butikker i gadeplan på Nørreport Station har billetsalg'",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB's prose says one of the two is open only limited hours each day; the table says both 'DØGNÅBENT'. OSM has a street 7-Eleven n3791695033 (05:30-24:00) and one n9642934829 (24/7) about 125 m away.",
+   "_source": "DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven Perron (uden billetsalg) / 7-Eleven 'Nørreport Perron'",
+   "level_per_plan": "-2",
+   "where": "on the platform level (OSM n3791695032 tagged level -2)",
+   "opening_hours": "Mo-Su 05:30-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "osm_id": "n3791695032",
+   "hours_raw": "7-Eleven list 'Nørreport Perron', Nørre Voldgade 13: Mon-Fri 05:00 til 23:59, Sat-Sun 00:00 til 23:59 (conflicts with DSB 05.30-24.00 and OSM 05:00-24:00; Sa-Su 06:00-24:00)",
+   "_source": "DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30; 7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "not stated",
+   "_source": "DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Public toilet (no fee in OSM)",
+   "level_per_plan": "0",
+   "where": "street level about 17 m from the station point (OSM; owner not stated)",
+   "osm_id": "w1571069920",
+   "fee": "no (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering",
+   "level_per_plan": "0",
+   "where": "not stated",
+   "note": "No boarding/alighting with bikes at Nørreport on weekdays 07:00-09:00 and 15:30-17:30 (DSB).",
+   "_source": "DSB station page Nørreport, https://www.dsb.dk/trafikinformation/stationer/norreport/, read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "No owner plan; DSB lists only 'Elevator' and 'Trapper' (no escalators) while OSM maps several escalators. Platform-to-level assignment (-1 vs -2) and real level names not confirmed.",
+  "Toilets, lockers, waiting room, parking not on the DSB page; OSM toilet w1571069920 owner/fee unconfirmed.",
+  "7-Eleven hours conflict between DSB (perron 05.30-24.00; street shops 24h with a contradicting prose note), 7-Eleven's list and OSM.",
+  "Shops around Nørreport (Føtex, McDonald's, Netto, Matas, bars) are street shops outside the station and were left out.",
+  "The platform register's first polygon point for Nørreport lies ~500 m east of the station point (check the register geometry).",
+  "No open-question list was supplied for Danish stations."
+ ]
+}

@@ -1,0 +1,396 @@
+{
+ "clack_id": "NO-SKØ",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "name": "Stasjonsbygning / street level",
+   "note": "The protected station building (Bane NOR: built 1872) with the waiting room. Wikipedia: 'The platforms are universally accessible from street level.' No signposted level names found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; en.wikipedia.org 'Skøyen station' https://en.wikipedia.org/wiki/Sk%C3%B8yen_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Undergang (underpass under the tracks)",
+   "note": "OSM: a 52 m underpass (w130994340, layer -1) between the station building side and the platforms, with stairs and two lifts. Wikipedia's 'two underpasses carrying Drammensveien and Karenslyst allé' are road underpasses under the railway.",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30; en.wikipedia.org 'Skøyen station' https://en.wikipedia.org/wiki/Sk%C3%B8yen_station, read 2026-10-30"
+  },
+  {
+   "name": "Plattformer",
+   "note": "Two island platforms: tracks 1/2 (12 m wide, 700/500 mm high, 300 m) and tracks 3/4 (9.5 m wide, 700/575 mm, 249 m) (Sportabell). Platform shelters (leskur) have narrow doors and a high threshold.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "track 1",
+   "track": "1,2",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1,2 (the train stops with the platform to its south-west)",
+   "_source": "laser (2019-09-14, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "track 4",
+   "track": "3,4",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 3,4 (the train stops with the platform to its north-east)",
+   "_source": "laser (2019-09-14, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 4; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "between": [
+    "street/underpass",
+    "platforms"
+   ],
+   "where": "Bane NOR: 'Trapper og heis til plattformer'. After the modernisation the stairs are open again.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7136796363",
+   "between": [
+    "OSM level 0",
+    "OSM level 1"
+   ],
+   "where": "by the underpass east end (OSM position); which platform it serves is not tagged",
+   "note": "Bane NOR confirms lifts to the platforms ('the public can now use all lifts and entrances freely'), not their positions.",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30",
+   "position": {
+    "lon": 10.6785511,
+    "lat": 59.9225143,
+    "how": "OSM n7136796363",
+    "_source": "OpenStreetMap n7136796363 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7139023779",
+   "between": [
+    "OSM level 0",
+    "OSM level 1"
+   ],
+   "where": "at the underpass (OSM position); platform not tagged",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30",
+   "position": {
+    "lon": 10.6782251,
+    "lat": 59.9224103,
+    "how": "OSM n7139023779",
+    "_source": "OpenStreetMap n7139023779 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w130994340",
+   "between": [
+    "station building side",
+    "platforms"
+   ],
+   "where": "under the tracks, 52 m",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30",
+   "position": {
+    "lon": 10.6784048,
+    "lat": 59.922519,
+    "how": "OSM w130994340 (point on the way)",
+    "_source": "OpenStreetMap w130994340 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w88600725",
+    "w88600740",
+    "w88600720",
+    "w88600733"
+   ],
+   "between": [
+    "underpass/street",
+    "platforms"
+   ],
+   "where": "OSM stairs around the underpass; not linked to a platform in the extract",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7136796363",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7136796363 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6785511,
+    "lat": 59.9225143,
+    "how": "OSM n7136796363",
+    "_source": "OpenStreetMap n7136796363 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7139023779",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n7139023779 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6782251,
+    "lat": 59.9224103,
+    "how": "OSM n7139023779",
+    "_source": "OpenStreetMap n7139023779 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_ids": [
+    "n1028860868",
+    "n7136796412"
+   ],
+   "name": "(unnamed)",
+   "street": "Hoffsveien",
+   "where": "north/east side, at the underpass (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30"
+  },
+  {
+   "osm_id": "n7136796409",
+   "name": "(unnamed)",
+   "street": "Drammensveien",
+   "where": "south side by the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30",
+   "position": {
+    "lon": 10.6783249,
+    "lat": 59.922275,
+    "how": "OSM n7136796409",
+    "_source": "OpenStreetMap n7136796409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "osm_id": "n7136796406",
+   "name": "(unnamed)",
+   "where": "station building (OSM; no street matched)",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30",
+   "position": {
+    "lon": 10.6780364,
+    "lat": 59.9222364,
+    "how": "OSM n7136796406",
+    "_source": "OpenStreetMap n7136796406 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n1028860868",
+   "street": "Hoffsveien",
+   "street_how": "nearest named street, 17.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n1028860868 (already in OSM)",
+   "position": {
+    "lon": 10.6785537,
+    "lat": 59.9226561,
+    "how": "OSM n1028860868",
+    "_source": "OpenStreetMap n1028860868 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7136796406",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7136796406 (already in OSM)",
+   "position": {
+    "lon": 10.6780364,
+    "lat": 59.9222364,
+    "how": "OSM n7136796406",
+    "_source": "OpenStreetMap n7136796406 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7136796409",
+   "street": "Drammensveien",
+   "street_how": "nearest named street, 32.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7136796409 (already in OSM)",
+   "position": {
+    "lon": 10.6783249,
+    "lat": 59.922275,
+    "how": "OSM n7136796409",
+    "_source": "OpenStreetMap n7136796409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7136796412",
+   "street": "Hoffsveien",
+   "street_how": "nearest named street, 30.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7136796412 (already in OSM)",
+   "position": {
+    "lon": 10.6785104,
+    "lat": 59.9225355,
+    "how": "OSM n7136796412",
+    "_source": "OpenStreetMap n7136796412 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "Mix Skøyen Stasjon",
+   "osm_id": "n13713598728",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa,Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Bane NOR lists only 'Servering' without names. No owner page for this shop could be read.",
+   "_source": "OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30",
+   "position": {
+    "lon": 10.678222,
+    "lat": 59.9222589,
+    "osm_id": "n13713598728",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 219.3,
+    "how": "OSM node n13713598728",
+    "_source": "OpenStreetMap n13713598728 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (3)",
+   "where": "three machines; card and coins",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "opening_hours": "Mo-Su 04:10-01:30",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "in the station hall (step-free, automatic sliding doors)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toaletter",
+   "note": "Permanently closed (Bane NOR: 'NB! The toilets are permanently closed').",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "shelter",
+   "name": "Leskur på plattform",
+   "where": "on the platforms; narrow doors and a high threshold",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelstativ + BikeLoop sykkelparkering",
+   "where": "69 spaces without roof, 30 with roof; BikeLoop secure bike parking (contact BikeLoop; help line Mo–Fr 08–16)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxiholdeplass",
+   "where": "by the station building; OSM taxi w763912532 and charger 'Mer Skøyen drosjeholdeplass'",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Buss for tog",
+   "where": "from the stop by the station building (by the taxi rank); for Flytoget passengers, from the stop under the bridge in Drammensveien",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "tram_stop",
+   "name": "Skøyen (trikk)",
+   "where": "about 100 m from the train station",
+   "_source": "en.wikipedia.org 'Skøyen station' https://en.wikipedia.org/wiki/Sk%C3%B8yen_station, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Mix Skøyen Stasjon",
+   "brand": "Mix",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-19:00; Sa-Su 11:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.678222,
+    "lat": 59.9222589,
+    "osm_id": "n13713598728",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 219.3,
+    "how": "OSM node n13713598728",
+    "_source": "OpenStreetMap n13713598728 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13713598728 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Sporplan Skøyen (track plan)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-s-/ko-005763-000-skoyen.png",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  },
+  {
+   "title": "Buss for tog Skøyen (rail-replacement map)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/kart-buss-for-tog/buss-for-tog-skoyen.jpg",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Image; not read."
+  }
+ ],
+ "open": [
+  "Which lift and stair serves platform 1/2 and which serves 3/4: no owner plan found. OSM's lifts are not linked to platforms, and OSM's platform refs at Skøyen (11, 12) are tram/bus stops, not the rail platforms.",
+  "Signposted level names: none found.",
+  "Entrances: streets come from OSM only (Hoffsveien, Drammensveien); Bane NOR does not list the entrances.",
+  "Mix Skøyen hours are from OSM only; no owner page was readable.",
+  "No owner source says which stair leads to which platform."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Both platforms are reached by stairs and lift (Bane NOR: 'Trapper og heis til plattformer'). The 2023–24 modernisation is finished and all lifts and entrances are open. OSM has two lifts at the underpass but does not tag which platform each serves.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30"
+  }
+ ]
+}

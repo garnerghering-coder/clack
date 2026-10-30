@@ -1,0 +1,983 @@
+{
+ "clack_id": "NO-LLS",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w25123510",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 103.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0449738,
+    59.953273
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w58198084",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0446581,
+    59.9535033
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w58198085",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.044909,
+    59.953371
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w58198086",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0450359,
+    59.9531714
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w58198087",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 9.0,
+   "reaches_platforms": [],
+   "lonlat": [
+    11.0449811,
+    59.9529918
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1243723632",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 20.3,
+   "lonlat": [
+    11.0416958,
+    59.9542508
+   ]
+  },
+  {
+   "osm_id": "n1243723634",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 17.5,
+   "lonlat": [
+    11.0422705,
+    59.9541799
+   ]
+  },
+  {
+   "osm_id": "n1243723635",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 19.8,
+   "lonlat": [
+    11.0437719,
+    59.9538991
+   ]
+  },
+  {
+   "osm_id": "n1243723636",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 16.4,
+   "lonlat": [
+    11.0430989,
+    59.9540504
+   ]
+  },
+  {
+   "osm_id": "n1417364125",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 43.8,
+   "lonlat": [
+    11.0446837,
+    59.9537229
+   ]
+  },
+  {
+   "osm_id": "n4743670559",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 52.9,
+   "lonlat": [
+    11.0437618,
+    59.9535913
+   ]
+  },
+  {
+   "osm_id": "n6847210341",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.0,
+   "lonlat": [
+    11.0432505,
+    59.9539322
+   ]
+  },
+  {
+   "osm_id": "n6847210343",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.2,
+   "lonlat": [
+    11.0431537,
+    59.9539476
+   ]
+  },
+  {
+   "osm_id": "n6847210345",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.4,
+   "lonlat": [
+    11.0430537,
+    59.9539634
+   ]
+  },
+  {
+   "osm_id": "n6847210347",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.5,
+   "lonlat": [
+    11.042948,
+    59.9539802
+   ]
+  },
+  {
+   "osm_id": "n6847210349",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.6,
+   "lonlat": [
+    11.042845,
+    59.9539966
+   ]
+  },
+  {
+   "osm_id": "n6847210351",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.7,
+   "lonlat": [
+    11.042745,
+    59.9540125
+   ]
+  },
+  {
+   "osm_id": "n6847210370",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 50.7,
+   "lonlat": [
+    11.0441398,
+    59.9535909
+   ]
+  },
+  {
+   "osm_id": "n6847210371",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 36.2,
+   "lonlat": [
+    11.0437904,
+    59.953742
+   ]
+  },
+  {
+   "osm_id": "n6847210380",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 26.9,
+   "lonlat": [
+    11.0426412,
+    59.954029
+   ]
+  },
+  {
+   "osm_id": "n6847210382",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.0,
+   "lonlat": [
+    11.0425344,
+    59.9540459
+   ]
+  },
+  {
+   "osm_id": "n6847210384",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.1,
+   "lonlat": [
+    11.0424349,
+    59.9540618
+   ]
+  },
+  {
+   "osm_id": "n6847224686",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.2,
+   "lonlat": [
+    11.0423279,
+    59.9540787
+   ]
+  },
+  {
+   "osm_id": "n6847224688",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.3,
+   "lonlat": [
+    11.0422255,
+    59.954095
+   ]
+  },
+  {
+   "osm_id": "n6847224690",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.4,
+   "lonlat": [
+    11.0421181,
+    59.9541121
+   ]
+  },
+  {
+   "osm_id": "n6847224692",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.5,
+   "lonlat": [
+    11.0420167,
+    59.9541282
+   ]
+  },
+  {
+   "osm_id": "n6847224694",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.6,
+   "lonlat": [
+    11.0419128,
+    59.9541447
+   ]
+  },
+  {
+   "osm_id": "n6847224696",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.8,
+   "lonlat": [
+    11.0418075,
+    59.9541614
+   ]
+  },
+  {
+   "osm_id": "n6847224699",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 27.9,
+   "lonlat": [
+    11.0417001,
+    59.9541785
+   ]
+  },
+  {
+   "osm_id": "n6965857075",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 34.2,
+   "lonlat": [
+    11.0455588,
+    59.9538432
+   ]
+  },
+  {
+   "osm_id": "n9986547021",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jonas Lies gate",
+   "nearest_street_m": 10.6,
+   "lonlat": [
+    11.0420871,
+    59.9545612
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n287239736",
+   "category": "cafe",
+   "name": "Garcon",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa-Su 08:30-18:00",
+   "wheelchair": null,
+   "distance_m": 77,
+   "lonlat": [
+    11.045196,
+    59.9538553
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n288622866",
+   "category": "shop=convenience",
+   "name": "Snarkjøp Lillestrøm stasjon",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:00-24:00; Sa 08:00-24:00; Su 09:00-24:00",
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    11.0449333,
+    59.9537379
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "Snarkjøp"
+  },
+  {
+   "osm_id": "n710551047",
+   "category": "shop=kiosk",
+   "name": "Narvesen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 89,
+   "lonlat": [
+    11.0435122,
+    59.9537536
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "Narvesen"
+  },
+  {
+   "osm_id": "n710551049",
+   "category": "shop=kiosk",
+   "name": "Narvesen",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Th 05:00-23:00, Fr 05:00-24:00, Sa 06:30-24:00, Su 07:30-23:00",
+   "wheelchair": null,
+   "distance_m": 52,
+   "lonlat": [
+    11.0445353,
+    59.9536706
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "Narvesen"
+  },
+  {
+   "osm_id": "n4408540036",
+   "category": "bicycle_rental",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 58,
+   "lonlat": [
+    11.0441929,
+    59.9536729
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n5728701142",
+   "category": "shop=kiosk",
+   "name": "Narvesen",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:00-20:00; Sa,Su 09:00-19:00",
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    11.045341,
+    59.9528911
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Narvesen"
+  },
+  {
+   "osm_id": "n5728701143",
+   "category": "cafe",
+   "name": "Garcon Express",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-14:00",
+   "wheelchair": null,
+   "distance_m": 43,
+   "lonlat": [
+    11.0449334,
+    59.9528478
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n5729021028",
+   "category": "bureau_de_change",
+   "name": "Forex",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-18:00",
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    11.0447827,
+    59.9534055
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "Forex"
+  },
+  {
+   "osm_id": "n6864709206",
+   "category": "fast_food",
+   "name": "Go' Bento",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 25,
+   "lonlat": [
+    11.0449642,
+    59.9533829
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "cuisine": "sushi"
+  },
+  {
+   "osm_id": "n6874391695",
+   "category": "atm",
+   "name": "Nordea",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 21,
+   "lonlat": [
+    11.0450571,
+    59.9532171
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Nordea",
+   "operator": "Nordea"
+  },
+  {
+   "osm_id": "n6874391697",
+   "category": "vending_machine",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    11.0450869,
+    59.9531579
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n6965857073",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 77,
+   "lonlat": [
+    11.0454148,
+    59.9537898
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n9587304965",
+   "category": "cafe",
+   "name": "Tea Fusion",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 11:00-18:00; Sa-Su 12:00-18:00",
+   "wheelchair": null,
+   "distance_m": 39,
+   "lonlat": [
+    11.0448816,
+    59.9535421
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "cuisine": "bubble_tea"
+  },
+  {
+   "osm_id": "n9624376805",
+   "category": "shop=sports",
+   "name": "Fitness Factory",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-16:00",
+   "wheelchair": null,
+   "distance_m": 23,
+   "lonlat": [
+    11.0449987,
+    59.953082
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n9648153482",
+   "category": "post_box",
+   "name": "Posten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 63,
+   "lonlat": [
+    11.044892,
+    59.953768
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "Posten",
+   "operator": "Posten"
+  },
+  {
+   "osm_id": "n9648153483",
+   "category": "parcel_locker",
+   "name": "PostNord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 64,
+   "lonlat": [
+    11.0449037,
+    59.9537724
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "PostNord"
+  },
+  {
+   "osm_id": "n9648153484",
+   "category": "parcel_locker",
+   "name": "PostNord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 65,
+   "lonlat": [
+    11.0449477,
+    59.9537802
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "PostNord"
+  },
+  {
+   "osm_id": "n9673679105",
+   "category": "post_box",
+   "name": "Posten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 50,
+   "lonlat": [
+    11.0450089,
+    59.9527893
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Posten",
+   "operator": "Posten"
+  },
+  {
+   "osm_id": "n9709628212",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 213,
+   "lonlat": [
+    11.0420185,
+    59.9545836
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n9974993536",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 108,
+   "lonlat": [
+    11.0453423,
+    59.9541187
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n10025607075",
+   "category": "fast_food",
+   "name": "Big Bite",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 35,
+   "lonlat": [
+    11.0451834,
+    59.953025
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "brand": "Big Bite",
+   "cuisine": "sandwich"
+  },
+  {
+   "osm_id": "n10867567140",
+   "category": "cafe",
+   "name": "Backstube",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 102,
+   "lonlat": [
+    11.0434405,
+    59.9538812
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n11434400635",
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Lillestrøm stasjon Bysiden",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "wheelchair": null,
+   "distance_m": 83,
+   "lonlat": [
+    11.0433248,
+    59.9535145
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "https://www.banenor.no/reise-og-trafikk/parkering/sykkelhotell/",
+   "operator": "Bane NOR SF"
+  },
+  {
+   "osm_id": "n11806735428",
+   "category": "luggage_locker",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 68,
+   "lonlat": [
+    11.0452718,
+    59.953742
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12364966688",
+   "category": "yes",
+   "name": "Sporet",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Fr-Sa 19:00-24:00",
+   "wheelchair": null,
+   "distance_m": 24,
+   "lonlat": [
+    11.045116,
+    59.9531878
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "Kirkens Bymisjon"
+  },
+  {
+   "osm_id": "w23374018",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 83,
+   "lonlat": [
+    11.0446383,
+    59.9540507
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w108333263",
+   "category": "bus_station",
+   "name": "Lillestrøm bussterminal",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:30-23:59, Sa-Su 07:00-23:59",
+   "distance_m": 75,
+   "lonlat": [
+    11.0431476,
+    59.9539959
+   ],
+   "drawn_as": "area",
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w108333699",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 90,
+   "lonlat": [
+    11.0429011,
+    59.953564
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w936524013",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 93,
+   "lonlat": [
+    11.045934,
+    59.9539658
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w991544509",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 73,
+   "lonlat": [
+    11.0446721,
+    59.9539253
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

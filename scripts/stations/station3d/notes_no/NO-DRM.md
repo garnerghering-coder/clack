@@ -1,0 +1,1 @@
+The laser (Drammen Eiker 2015, last flight 2015-07-07) predates the rebuild of Drammen station (six 350 m platform tracks in use from 30 Aug 2025, Bane NOR S-sirkulære 121-2025). Platform levels measured here are of the old layout and must not be used for the new 760 mm platforms; the track bed levels are also pre-rebuild.

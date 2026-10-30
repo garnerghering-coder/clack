@@ -1,0 +1,387 @@
+{
+ "levels": [
+  {
+   "osm_level": "2",
+   "name": "Station bridge (asemasilta) = Dixi 3rd floor",
+   "other_names": [
+    "Dixi 3. kerros"
+   ],
+   "note": "VR: Dixi travel centre is connected to the station; its third floor houses the station services and the station bridge over the tracks is the waiting area. OSM tags the bridge and the shops on it level 2.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platform / street level (Ratatie)",
+   "other_names": [],
+   "note": "Platforms on tracks 1–6 (Digitraffic). Dixi main entrance Ratatie 11 A at street level. Signposted Dixi floor number for street level not found.",
+   "_source": "Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-TKL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses",
+   "other_names": [],
+   "note": "OSM maps underpasses on layer -1 under the platforms with stairs and lifts (level 0;1 tags). Heights: no source.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n3288383072",
+   "between": [
+    "station bridge",
+    "platform tracks 2/3"
+   ],
+   "where": "from the bridge down to the island platform",
+   "confirmed_by": "owner text for lifts in general (VR: platforms reached by lift or escalator from Dixi); position OSM only",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3288383071",
+   "between": [
+    "station bridge",
+    "platform tracks 4/5"
+   ],
+   "where": "from the bridge",
+   "confirmed_by": "owner text in general (VR); position OSM only",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n3288383088",
+    "n12617590053"
+   ],
+   "between": [
+    "underpass / bridge",
+    "platform track 6 (V0617)"
+   ],
+   "where": "OSM level 0;1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n3288383095",
+    "n3288383092"
+   ],
+   "between": [
+    "underpass",
+    "platforms 2/3 and 4/5"
+   ],
+   "where": "OSM level 0;1 (second lift per island platform)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3293095423",
+   "between": [
+    "Dixi floors 1;3;4;5;6 (OSM)",
+    "track 1 side (V0618)"
+   ],
+   "where": "Dixi building lift by platform 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w322534946",
+    "w1361717940"
+   ],
+   "between": [
+    "station bridge",
+    "platform 2/3"
+   ],
+   "where": "up and down pair",
+   "confirmed_by": "owner text in general (VR); OSM for position",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w322534952",
+    "w1361717938"
+   ],
+   "between": [
+    "station bridge",
+    "platform 4/5"
+   ],
+   "where": "up and down pair",
+   "confirmed_by": "owner text in general (VR); OSM for position",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w327819449",
+    "w395601873"
+   ],
+   "between": [
+    "station bridge",
+    "platform 6"
+   ],
+   "where": "pair",
+   "confirmed_by": "owner text in general (VR); OSM for position",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w395602185",
+    "w395601808",
+    "w666290383",
+    "w666290382",
+    "w395603614"
+   ],
+   "between": [
+    "station bridge",
+    "platforms 2/3, 4/5, 6"
+   ],
+   "where": "stairs from the bridge",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w30620090",
+    "w462166792",
+    "w462166793",
+    "w30619677"
+   ],
+   "between": [
+    "track 1 side",
+    "platforms 2/3, 4/5, 6"
+   ],
+   "where": "underpass under the platforms with stairs (w1109220410, w666290755…)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Station bridge (asemasilta)",
+   "osm_ids": [
+    "w462166779",
+    "w462166777",
+    "w462166776"
+   ],
+   "between": [
+    "Dixi (west, Ratatie)",
+    "east side"
+   ],
+   "where": "over all tracks at Dixi's 3rd floor",
+   "confirmed_by": "owner text (VR)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Dixi main entrance (Ratatie 11 A)",
+   "street": "Ratatie",
+   "level": "0",
+   "where": "west side; VR assistance point in front of Kotipizza ~5 m away. OSM main entrance n10560516683 (wheelchair=yes); staircase entrances A n4564183489 and B n5676995349",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "name": "East side (bridge end)",
+   "street": "Hertaksentie (nearest, OSM)",
+   "level": "0",
+   "where": "OSM main entrance n745789949",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station bridge waiting area (asemasilta)",
+   "where": "the station bridge over the tracks on Dixi's 3rd floor serves as the waiting area",
+   "level_per_plan": "Dixi 3rd floor",
+   "opening_hours": "Mo-Su 05:00-02:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Kauppakeskus Dixi Tikkurila",
+   "osm_id": "n3293095367",
+   "where": "Dixi, shop unit 10320 (Ratatie 11); OSM puts it on level 2 by the station bridge",
+   "level_per_plan": "not stated by the shop; OSM level 2",
+   "opening_hours": "Mo-Fr 06:00-21:30; Sa 07:00-21:30; Su 09:00-21:30",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours differ (Mo-Fr 05:45-21:00…); shop page used. Services: HSL cards, Wolt pickup.",
+   "_source": "https://www.r-kioski.fi/kioskit/vantaa-kauppakeskus-dixi-tikkurila/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Maltainen Metso",
+   "osm_id": "n3346184919",
+   "where": "in the station part of Dixi (OSM in_station_building), level 2",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Th 11:00-23:00; Fr,Sa 11:00-02:00; Su 11:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "CandyTown",
+   "osm_id": "n13086340161",
+   "where": "in the station part of Dixi (OSM), level 2",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-20:00; Su 12:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "S-market",
+   "osm_id": "n3293095368",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Fr 06:30-22:00; Sa 07:00-22:00; Su 09:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Picnic",
+   "osm_id": "n3293095366",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Fr 07:30-20:00; Sa 09:00-18:00; Su 11:00-18:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Karkkitori",
+   "osm_id": "n3293095364",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su 12:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "JK Shop",
+   "osm_id": "n13300261563",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Otto and ValuuttaOtto",
+   "osm_id": "n13657031419",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "opening_hours": "Mo-Fr 06:30-22:00; Sa 07:00-22:00; Su 09:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "ValuuttaOtto is n13657031418.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Bittimaatti",
+   "osm_id": "n10560516700",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Dixi toilets",
+   "osm_id": "n10560516693",
+   "fee": "no (OSM)",
+   "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
+   "level_per_plan": "Dixi 3rd floor (OSM level 2)",
+   "note": "VR lists a toilet among the station's services without fee or place.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Luggage lockers",
+   "where": "not given by VR",
+   "note": "VR lists luggage lockers as available.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR ticket machine",
+   "osm_id": "n1102387349",
+   "where": "station bridge (OSM level 2, in station building)",
+   "note": "VR: no VR service point.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR assistance meeting point",
+   "where": "outside on the street in front of Kotipizza, about 5 m from Dixi's main entrance (Ratatie 11 A); covered",
+   "level_per_plan": "street (OSM level 0)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Kotipizza",
+   "osm_id": "n10560516689",
+   "where": "street level by Dixi's main entrance (Ratatie 11 A); VR uses it as the assistance-point landmark",
+   "level_per_plan": "street (OSM level 0)",
+   "opening_hours": "Mo-Th 10:30-21:00; Fr 10:30-22:00; Sa 11:00-22:00; Su 11:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Tikkurila bus terminal (closed) / temporary terminals",
+   "osm_id": "w1448053839",
+   "where": "VR: the Tikkurila bus terminal closes from 9 February; buses use temporary terminals (HSL). OSM has 'Tikkurila pohjoinen terminaali' about 250 m away.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Park and ride (3 areas) + Dixi car park",
+   "osm_id": "w395604698",
+   "where": "three park-and-ride areas next to the station, from Ratatie, Jokiniemenkatu or Väritehtaankatu; VR ticket holders get a discount in some; Dixi car park (Aimo Park) per OSM",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Tikkurilan asema, pyörähalli",
+   "osm_id": "n8552990791",
+   "where": "bike hall below ground (OSM level -1)",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief: only the station-related part of Dixi and the routes to the platforms)",
+   "answer": "The station hall is the bridge over the tracks on Dixi's 3rd floor (VR), open 05-02 as the waiting area. Platforms 1–6 (Digitraffic). VR says platforms are reached by lift or escalator; OSM maps from the bridge one lift, an escalator pair and stairs to each island (2/3, 4/5) and to 6, plus an underpass with more lifts. R-kioski hours from r-kioski.fi; other shop hours OSM only.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-TKL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "dixi.fi could not be read (robots.txt blocks automated fetching), so tenant floors/hours are from OSM; the web-search budget ran out before the shops' own sites could be looked up.",
+  "Which Dixi 3rd-floor shops count as the 'station part' is not stated by any source read; the list keeps the bridge-floor shops nearest the platforms and leaves out the rest of the mall (S-market and Picnic are kept as traveller-relevant).",
+  "Position of the luggage lockers (VR: available) not found.",
+  "Lift/escalator positions are OSM only; VR confirms lifts and escalators exist.",
+  "Bus terminal: VR says the Tikkurila terminal closes from 9 February (year not stated) and buses use temporary terminals; current stop positions not settled.",
+  "R-kioski Tikkurila Piletti (Ratatie 16, Mo-Fr 06-20, Sa-Su 10-19 per r-kioski.fi) is outside Dixi; left out.",
+  "Platform 1 (V0618 in OSM) access: OSM shows an underpass and stairs; lift n3293095423 is a Dixi building lift. Not confirmed."
+ ]
+}

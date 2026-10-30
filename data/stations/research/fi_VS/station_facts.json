@@ -1,0 +1,512 @@
+{
+ "clack_id": "fi:VS",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level",
+   "other_names": [],
+   "note": "One side platform: all trains use track 1, beside the station building on Ratakatu. No signposted level names; no lift is needed between building and platform (none in OSM, none named by VR).",
+   "_source": "Wikipedia 'Vaasa railway station', https://en.wikipedia.org/wiki/Vaasa_railway_station, read 2026-10-30; VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "VS L1",
+   "track": "1",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1 (the train stops with the platform to its south-west)",
+   "_source": "laser (2021-06-07, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform VS L1; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w23153500",
+    "w35008578"
+   ],
+   "between": [
+    "platform 1, Matkakeskus (bus station) end",
+    "beyond the yard (layer 1, ~100 m each)"
+   ],
+   "where": "by the travel-centre / bus-station end of platform 1 (Sepänkyläntie side), with stairs w1051631621, w1051631622, w1051631626, w1051631629",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w175843961",
+   "name": "Vaasanpuistikko / Matkakeskus P",
+   "between": [
+    "Vaasanpuistikko",
+    "Matkakeskus car park / platform 1"
+   ],
+   "where": "east (Seinäjoki) end of the station",
+   "confirmed_by": "OSM only (name from OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6238014,
+    "lat": 63.0972387,
+    "how": "OSM w175843961 (point on the way)",
+    "_source": "OpenStreetMap w175843961 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w718392565",
+   "between": [
+    "platform 1 (west end)",
+    "Ratakatu / AsemaParkki side"
+   ],
+   "where": "west end of platform 1, layer -1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6211135,
+    "lat": 63.0978601,
+    "how": "OSM w718392565 (point on the way)",
+    "_source": "OpenStreetMap w718392565 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w23153500",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 100.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w23153500 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 21.6233832,
+    "lat": 63.097061,
+    "how": "OSM w23153500 (point on the way)",
+    "_source": "OpenStreetMap w23153500 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w35008578",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 98.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w35008578 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 21.6238236,
+    "lat": 63.0969095,
+    "how": "OSM w35008578 (point on the way)",
+    "_source": "OpenStreetMap w35008578 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w175843961",
+   "name": "Vaasanpuistikko / Matkakeskus P",
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 37.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w175843961 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 21.6238014,
+    "lat": 63.0972387,
+    "how": "OSM w175843961 (point on the way)",
+    "_source": "OpenStreetMap w175843961 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w718392565",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w718392565 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 21.6211135,
+    "lat": 63.0978601,
+    "how": "OSM w718392565 (point on the way)",
+    "_source": "OpenStreetMap w718392565 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w804683640",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w804683640 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 21.6233142,
+    "lat": 63.0970555,
+    "how": "OSM w804683640 (point on the way)",
+    "_source": "OpenStreetMap w804683640 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building (Vaasan rautatieasema)",
+   "street": "Ratakatu",
+   "level": "0",
+   "where": "Ratakatu 13; OSM entrances n486283156, n486283159, n486283168, n486283182 on the Ratakatu side",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "name": "Matkakeskus (Matkahuolto bus station) main entrance",
+   "street": "Sepänkyläntie",
+   "level": "0",
+   "where": "east of the station building, at the Seinäjoki end; OSM n9664071240",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n486283156",
+   "street": "Ratakatu",
+   "street_how": "nearest named street, 28.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n486283156 (already in OSM)",
+   "position": {
+    "lon": 21.6219134,
+    "lat": 63.097568,
+    "how": "OSM n486283156",
+    "_source": "OpenStreetMap n486283156 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n486283159",
+   "street": "Ratakatu",
+   "street_how": "nearest named street, 31.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n486283159 (already in OSM)",
+   "position": {
+    "lon": 21.621538,
+    "lat": 63.0977039,
+    "how": "OSM n486283159",
+    "_source": "OpenStreetMap n486283159 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n486283168",
+   "street": "Ratakatu",
+   "street_how": "nearest named street, 8.1 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n486283168 (already in OSM)",
+   "position": {
+    "lon": 21.6215602,
+    "lat": 63.0974598,
+    "how": "OSM n486283168",
+    "_source": "OpenStreetMap n486283168 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n486283182",
+   "street": "Ratakatu",
+   "street_how": "nearest named street, 10.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n486283182 (already in OSM)",
+   "position": {
+    "lon": 21.6213957,
+    "lat": 63.0975189,
+    "how": "OSM n486283182",
+    "_source": "OpenStreetMap n486283182 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n510691809",
+   "street": "Sepänkyläntie",
+   "street_how": "nearest named street, 12.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n510691809 (already in OSM)",
+   "position": {
+    "lon": 21.6232778,
+    "lat": 63.0970152,
+    "how": "OSM n510691809",
+    "_source": "OpenStreetMap n510691809 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n512543476",
+   "street": "AsemaParkki",
+   "street_how": "nearest named street, 6.4 m",
+   "level": null,
+   "kind": "garage",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n512543476 (already in OSM)",
+   "position": {
+    "lon": 21.6208326,
+    "lat": 63.0979451,
+    "how": "OSM n512543476",
+    "_source": "OpenStreetMap n512543476 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9664071240",
+   "street": "Sepänkyläntie",
+   "street_how": "nearest named street, 7.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9664071240 (already in OSM)",
+   "position": {
+    "lon": 21.6237695,
+    "lat": 63.0968598,
+    "how": "OSM n9664071240",
+    "_source": "OpenStreetMap n9664071240 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9664071243",
+   "street": "Sepänkyläntie",
+   "street_how": "nearest named street, 7.3 m",
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9664071243 (already in OSM)",
+   "position": {
+    "lon": 21.6238121,
+    "lat": 63.0968854,
+    "how": "OSM n9664071243",
+    "_source": "OpenStreetMap n9664071243 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building, Ratakatu 13",
+   "opening_hours": "Mo-Th 04:15-18:30; Fr 04:15-20:45; Sa 05:15-18:30; Su 06:15-20:45; 2026 Dec 23 04:15-20:45; 2026 Dec 31 04:15-20:45; 2027 Jan 05 04:15-20:45; 2026 Dec 25 04:15-18:30; 2027 Jan 01 04:15-18:30",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR lippuautomaatti",
+   "where": "inside the station building",
+   "note": "No VR service point.",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavaralokerot (Ekomar Ab Oy)",
+   "fee": "3 € per day, coins only",
+   "where": "station building",
+   "hours_raw": "usable during the station's opening hours (same as the waiting room)",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Cafe Solo",
+   "where": "in the station building (Ratakatu 13; OSM in_station_building)",
+   "osm_id": "n485662842",
+   "opening_hours": "Mo-Fr 06:15-16:30; Sa-Su 10:00-16:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "cafesolo.fi gives Ratakatu 13 (the station address) but lists no hours (points to Facebook).",
+   "_source": "Cafe Solo, http://www.cafesolo.fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6217525,
+    "lat": 63.0975548,
+    "osm_id": "n485662842",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 15.7,
+    "how": "OSM node n485662842",
+    "_source": "OpenStreetMap n485662842 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_rental",
+   "name": "SIXT",
+   "where": "in the station building (OSM)",
+   "osm_id": "n13130505150",
+   "opening_hours": "Mo-Fr 08:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6215223,
+    "lat": 63.0976262,
+    "osm_id": "n13130505150",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 16.7,
+    "how": "OSM node n13130505150",
+    "_source": "OpenStreetMap n13130505150 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "Seinäjoki end of the station building, by bus bay 6 of the travel centre; drop-off traffic can reach it",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Vaasan Matkakeskus – Matkahuolto",
+   "where": "next to the station, Seinäjoki (east) end; bus bay 6 by the assistance point",
+   "osm_id": "w41679917",
+   "_source": "VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6235121,
+    "lat": 63.0969722,
+    "osm_id": "w41679917",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.4,
+    "how": "representative point of the OSM area w41679917",
+    "_source": "OpenStreetMap w41679917 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "OSM n512543480, Ratakatu side",
+   "osm_id": "n512543480",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30",
+   "position": {
+    "lon": 21.6224145,
+    "lat": 63.0971638,
+    "osm_id": "n512543480",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.0,
+    "how": "OSM node n512543480",
+    "_source": "OpenStreetMap n512543480 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_rental",
+   "name": "Scandia Rent",
+   "brand": "Avis",
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 21.621545,
+    "lat": 63.0975305,
+    "osm_id": "n281223928",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 24.3,
+    "how": "OSM node n281223928",
+    "_source": "OpenStreetMap n281223928 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n281223928 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Hair Company",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 21.6214,
+    "lat": 63.0976011,
+    "osm_id": "n13130512565",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 22.7,
+    "how": "OSM node n13130512565",
+    "_source": "OpenStreetMap n13130512565 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13130512565 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Väylävirasto's area map PDF (linked from VR via https://vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat) could not be read: vayla.fi does not load from here.",
+  "Where the OSM footbridges (w23153500, w35008578, w175843961) lead and whether they have lifts/ramps: OSM only.",
+  "Cafe Solo and SIXT hours are OSM only.",
+  "Parking: not on VR's page; OSM shows AsemaParkki and lots around the station (not verified).",
+  "No signposted level names; no heights. Toilet fee unknown."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "There is one platform (track 1) at street level beside the station building; no lifts are recorded by VR or OSM. OSM has footbridges with stairs at the bus-station end and an underpass at the west end, unconfirmed by any owner source.",
+   "_source": "Wikipedia 'Vaasa railway station', https://en.wikipedia.org/wiki/Vaasa_railway_station, read 2026-10-30; VR 'Vaasa' station page, https://www.vr.fi/rautatieasemat-ja-reitit/vaasa, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-VS.json), read 2026-10-30"
+  }
+ ]
+}

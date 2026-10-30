@@ -1,0 +1,683 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0446621,
+      60.2920751
+     ],
+     [
+      25.0449026,
+      60.292605099999996
+     ],
+     [
+      25.045012,
+      60.2928376
+     ],
+     [
+      25.0450427,
+      60.29290290000001
+     ],
+     [
+      25.0451132,
+      60.2930583
+     ],
+     [
+      25.0451496,
+      60.2931388
+     ],
+     [
+      25.0452207,
+      60.2932833
+     ],
+     [
+      25.0452778,
+      60.2934159
+     ],
+     [
+      25.045591,
+      60.2940959
+     ],
+     [
+      25.045626,
+      60.2941709
+     ],
+     [
+      25.0457751,
+      60.294490499999995
+     ],
+     [
+      25.0458809,
+      60.29471730000001
+     ],
+     [
+      25.045886,
+      60.29473039999999
+     ],
+     [
+      25.0459305,
+      60.29484549999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L6",
+    "track": "6",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 320.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 859}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 177}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068168",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 20.01,
+    "laser_track_bed_m": 19.21,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "6",
+    "x_infra_oid": "1.2.246.586.1.37.3068168",
+    "x_description": "Tikkurila laituri: 6",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068168, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0457796,
+      60.2947265
+     ],
+     [
+      25.0457359,
+      60.2946244
+     ],
+     [
+      25.0457303,
+      60.2946113
+     ],
+     [
+      25.0456948,
+      60.294533099999995
+     ],
+     [
+      25.0456803,
+      60.2945012
+     ],
+     [
+      25.0455349,
+      60.294181400000014
+     ],
+     [
+      25.045500000000004,
+      60.294104499999975
+     ],
+     [
+      25.0452016,
+      60.293422099999994
+     ],
+     [
+      25.0450398,
+      60.2930665
+     ],
+     [
+      25.0449691,
+      60.2929111
+     ],
+     [
+      25.044938400000003,
+      60.29284579999999
+     ],
+     [
+      25.0446636,
+      60.29226070000001
+     ],
+     [
+      25.0445358,
+      60.2919765
+     ],
+     [
+      25.0445115,
+      60.2919223
+     ],
+     [
+      25.044471,
+      60.291831899999984
+     ],
+     [
+      25.044442,
+      60.2917752
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L5",
+    "track": "5",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 338.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 827}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 163}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068239",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 19.99,
+    "laser_track_bed_m": 19.23,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "5",
+    "x_infra_oid": "1.2.246.586.1.37.3068239",
+    "x_description": "Tikkurila laituri: 5",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068239, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0455724,
+      60.2947459
+     ],
+     [
+      25.0455625,
+      60.29472330000001
+     ],
+     [
+      25.0455486,
+      60.29469319999999
+     ],
+     [
+      25.0455456,
+      60.2946869
+     ],
+     [
+      25.0455048,
+      60.29459629999999
+     ],
+     [
+      25.0454712,
+      60.29452420000001
+     ],
+     [
+      25.0454201,
+      60.2944147
+     ],
+     [
+      25.045376,
+      60.2943182
+     ],
+     [
+      25.0453237,
+      60.29420530000001
+     ],
+     [
+      25.045238,
+      60.2940252
+     ],
+     [
+      25.0449291,
+      60.29334359999999
+     ],
+     [
+      25.0448434,
+      60.29316429999999
+     ],
+     [
+      25.0448103,
+      60.29309179999999
+     ],
+     [
+      25.0447096,
+      60.292871399999996
+     ],
+     [
+      25.0446348,
+      60.29270770000001
+     ],
+     [
+      25.0443075,
+      60.29199549999999
+     ],
+     [
+      25.044285,
+      60.29194689999999
+     ],
+     [
+      25.0442107,
+      60.2917872
+     ],
+     [
+      25.0441909,
+      60.29174469999999
+     ],
+     [
+      25.0441618,
+      60.291684599999996
+     ],
+     [
+      25.0441492,
+      60.2916564
+     ],
+     [
+      25.0441313,
+      60.2916153
+     ],
+     [
+      25.0441206,
+      60.2915937
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L4",
+    "track": "4",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 320.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 803}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 162}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068403",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 19.95,
+    "laser_track_bed_m": 19.09,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "4",
+    "x_infra_oid": "1.2.246.586.1.37.3068403",
+    "x_description": "Tikkurila laituri: 4",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068403, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0440665,
+      60.29164339999999
+     ],
+     [
+      25.0441063,
+      60.291732200000006
+     ],
+     [
+      25.0441345,
+      60.29179580000001
+     ],
+     [
+      25.0441781,
+      60.29189410000001
+     ],
+     [
+      25.0442081,
+      60.291954999999994
+     ],
+     [
+      25.0442311,
+      60.292001799999994
+     ],
+     [
+      25.0444198,
+      60.2924154
+     ],
+     [
+      25.0445191,
+      60.2926333
+     ],
+     [
+      25.0446324,
+      60.292880100000005
+     ],
+     [
+      25.0447336,
+      60.2931003
+     ],
+     [
+      25.044786100000003,
+      60.293214799999994
+     ],
+     [
+      25.0451474,
+      60.294039100000006
+     ],
+     [
+      25.0452322,
+      60.2942157
+     ],
+     [
+      25.045385,
+      60.2945339
+     ],
+     [
+      25.0454252,
+      60.29461769999999
+     ],
+     [
+      25.045500300000004,
+      60.29477
+     ],
+     [
+      25.045501100000003,
+      60.2947716
+     ],
+     [
+      25.0455491,
+      60.29487669999997
+     ],
+     [
+      25.0455994,
+      60.2949806
+     ],
+     [
+      25.0456127,
+      60.29501160000001
+     ],
+     [
+      25.0456354,
+      60.2950646
+     ],
+     [
+      25.0456833,
+      60.295190399999996
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L3",
+    "track": "3",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 423.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 808}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 211}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068559",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 20.0,
+    "laser_track_bed_m": 19.24,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "3",
+    "x_infra_oid": "1.2.246.586.1.37.3068559",
+    "x_description": "Tikkurila laituri: 3",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068559, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0454496,
+      60.2952157
+     ],
+     [
+      25.0454117,
+      60.295131699999985
+     ],
+     [
+      25.0453764,
+      60.29506540000001
+     ],
+     [
+      25.0453588,
+      60.29502619999999
+     ],
+     [
+      25.0453195,
+      60.29493899999999
+     ],
+     [
+      25.0452559,
+      60.2947976
+     ],
+     [
+      25.045149,
+      60.294560100000005
+     ],
+     [
+      25.0451098,
+      60.2944732
+     ],
+     [
+      25.045002100000005,
+      60.2942417
+     ],
+     [
+      25.0449205,
+      60.29406629999999
+     ],
+     [
+      25.0446056,
+      60.2933799
+     ],
+     [
+      25.0445363,
+      60.2932299
+     ],
+     [
+      25.04449,
+      60.293127199999994
+     ],
+     [
+      25.0443907,
+      60.2929073
+     ],
+     [
+      25.0443574,
+      60.2928334
+     ],
+     [
+      25.04417,
+      60.29243279999999
+     ],
+     [
+      25.0439813,
+      60.292023699999994
+     ],
+     [
+      25.043961800000005,
+      60.29198150000001
+     ],
+     [
+      25.0438883,
+      60.291823099999995
+     ],
+     [
+      25.0438678,
+      60.29177889999999
+     ],
+     [
+      25.0438586,
+      60.2917601
+     ],
+     [
+      25.0437864,
+      60.2916015
+     ],
+     [
+      25.0437085,
+      60.291430599999984
+     ],
+     [
+      25.0436669,
+      60.2913398
+     ],
+     [
+      25.0436643,
+      60.29133489999999
+     ],
+     [
+      25.0436556,
+      60.2913187
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L2",
+    "track": "2",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 461.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 768}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 212}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068632",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 20.01,
+    "laser_track_bed_m": 19.29,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "2",
+    "x_infra_oid": "1.2.246.586.1.37.3068632",
+    "x_description": "Tikkurila laituri: 2",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068632, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      25.0456729,
+      60.295874
+     ],
+     [
+      25.0456451,
+      60.2958104
+     ],
+     [
+      25.0456398,
+      60.295799399999986
+     ],
+     [
+      25.0455971,
+      60.29571279999999
+     ],
+     [
+      25.0453761,
+      60.295231699999995
+     ],
+     [
+      25.045335,
+      60.29514229999999
+     ],
+     [
+      25.0451805,
+      60.2948059
+     ],
+     [
+      25.0450715,
+      60.2945687
+     ],
+     [
+      25.0449253,
+      60.294250399999996
+     ],
+     [
+      25.0448442,
+      60.294074
+     ],
+     [
+      25.0445234,
+      60.2933757
+     ],
+     [
+      25.0444625,
+      60.2932377
+     ],
+     [
+      25.0444157,
+      60.2931355
+     ],
+     [
+      25.0443151,
+      60.29291599999999
+     ],
+     [
+      25.0440408,
+      60.2923346
+     ],
+     [
+      25.0439568,
+      60.29216009999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "TKL L1",
+    "track": "1",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 415.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 15, \"etaisyys\": 862}, \"loppu\": {\"ratakm\": 16, \"etaisyys\": 286}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "19211231",
+    "reflink_oid": "1.2.246.586.1.37.3068769",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 20.19,
+    "laser_track_bed_m": 19.36,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "1",
+    "x_infra_oid": "1.2.246.586.1.37.3068769",
+    "x_description": "Tikkurila laituri: 1",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3068769, read 2026-10-30, CC BY 4.0"
+   }
+  }
+ ]
+}

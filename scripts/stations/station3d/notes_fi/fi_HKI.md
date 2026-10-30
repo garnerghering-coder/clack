@@ -1,0 +1,2 @@
+All 19 platforms read 0.80–0.96 m above the ground-class track bed, i.e. about 0.65–0.78 m above rail with Sweden's 0.175 m bed-to-rail-head step, against the register's `korkea` 550 mm. The offset is the same on every track, so it may be the bed-to-rail-head step (Finnish track, ballast shoulder) rather than the platforms: check against one platform edge measured on site or in a drawing before deciding.
+The metro (Rautatientori) is underground and out of scope; the airborne laser sees the street above it.

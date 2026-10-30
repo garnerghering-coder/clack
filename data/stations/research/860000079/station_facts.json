@@ -1,0 +1,401 @@
+{
+ "clack_id": "860000079",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal (station hall) / street level, Jernbanegade",
+   "other_names": [],
+   "note": "DSB 'forhal'. Wikipedia: train shed covering tracks and platforms.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; Wikipedia 'Fredericia station' https://en.wikipedia.org/wiki/Fredericia_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnels under the tracks",
+   "other_names": [],
+   "note": "OSM underpasses w149914715 (80 m) and w514924980 (86 m), layer -1.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n11510453876",
+   "between": [
+    "tunnel",
+    "platform (not tagged)"
+   ],
+   "where": "about 50 m west of the Jernbanegade main entrance (OSM)",
+   "confirmed_by": "owner text (DSB: 'Elevator', 'dog ikke mellem spor 1 og 2') + OSM (only one lift mapped)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7398185,
+    "lat": 55.568333,
+    "how": "OSM n11510453876",
+    "_source": "OpenStreetMap n11510453876 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w149914715",
+    "w514924980"
+   ],
+   "between": [
+    "station side",
+    "platforms"
+   ],
+   "where": "two tunnels under the tracks",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "between": [
+    "tunnel",
+    "platforms"
+   ],
+   "where": "not mapped in OSM",
+   "confirmed_by": "owner text only ('Trapper')",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11510453876",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n11510453876 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 9.7398185,
+    "lat": 55.568333,
+    "how": "OSM n11510453876",
+    "_source": "OpenStreetMap n11510453876 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "osm_ids": [
+    "n7191954019",
+    "n7191954020"
+   ],
+   "name": "Main entrance",
+   "street": "Jernbanegade",
+   "level": "0",
+   "confirmed_by": "OSM + DSB address Jernbanegade 2 B",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "name": "Vestindgangen",
+   "street": "not stated",
+   "where": "west entrance; has a ticket machine",
+   "confirmed_by": "owner text only (not in OSM)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n7191954019",
+   "street": "Jernbanegade",
+   "street_how": "nearest named street, 28.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7191954019 (already in OSM)",
+   "position": {
+    "lon": 9.7406234,
+    "lat": 55.5682495,
+    "how": "OSM n7191954019",
+    "_source": "OpenStreetMap n7191954019 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7191954020",
+   "street": "Jernbanegade",
+   "street_how": "nearest named street, 26.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7191954020 (already in OSM)",
+   "position": {
+    "lon": 9.7406266,
+    "lat": 55.5681979,
+    "how": "OSM n7191954020",
+    "_source": "OpenStreetMap n7191954020 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Fredericia Station)",
+   "osm_id": "n1618739862",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 05:00-23:30; Sa,Su 07:00-23:30",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "hours_conflict": "DSB page: Mo-Fr 05.30-23.30, Sa-Su 07.00-23.30.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7403513,
+    "lat": 55.5680765,
+    "osm_id": "n1618739862",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1618739862",
+    "_source": "OpenStreetMap n1618739862 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Betalingstoiletter",
+   "osm_id": "n7773335578",
+   "where": "in the forhal",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7402527,
+    "lat": 55.5682076,
+    "osm_id": "n7773335578",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n7773335578",
+    "_source": "OpenStreetMap n7773335578 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "osm_id": "n13291535706",
+   "where": "in the forhal",
+   "fee": "per started day: S 30 kr, L 60 kr; card",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7403155,
+    "lat": 55.5681716,
+    "osm_id": "n13291535706",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13291535706",
+    "_source": "OpenStreetMap n13291535706 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "in the forhal and at Vestindgangen",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Snackautomat",
+   "where": "on the platforms at spor 3/4 and 9/10",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "category": "lounge",
+   "name": "Knudepunktet",
+   "osm_id": "n6372932904",
+   "where": "in the station building (OSM)",
+   "note": "OSM only; DSB does not list a lounge at Fredericia.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7405164,
+    "lat": 55.5683744,
+    "osm_id": "n6372932904",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n6372932904",
+    "_source": "OpenStreetMap n6372932904 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bus_station",
+   "name": "Fredericia Banegård (Bybusser)",
+   "osm_id": "w148986518",
+   "where": "in front of the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7406428,
+    "lat": 55.5676211,
+    "osm_id": "w148986518",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "representative point of the OSM area w148986518",
+    "_source": "OpenStreetMap w148986518 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "w1173705657",
+   "where": "in front of the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30",
+   "position": {
+    "lon": 9.7405015,
+    "lat": 55.5679523,
+    "osm_id": "w1173705657",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "representative point of the OSM area w1173705657",
+    "_source": "OpenStreetMap w1173705657 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 252 spaces; 3 locked bicycle sheds (DSB app)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "DSB",
+   "osm_id": "n7773335578",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n7773335578 (read 2026-10-30)",
+   "position": {
+    "lon": 9.7402527,
+    "lat": 55.5682076,
+    "osm_id": "n7773335578",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n7773335578",
+    "_source": "OpenStreetMap n7773335578 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "DSB",
+   "osm_id": "n13291535706",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13291535706 (read 2026-10-30)",
+   "position": {
+    "lon": 9.7403155,
+    "lat": 55.5681716,
+    "osm_id": "n13291535706",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13291535706",
+    "_source": "OpenStreetMap n13291535706 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 05:00-23:30; PH,Sa,Su 07:00-23:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.7-eleven.dk/",
+   "position": {
+    "lon": 9.7403513,
+    "lat": 55.5680765,
+    "osm_id": "n1618739862",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n1618739862",
+    "_source": "OpenStreetMap n1618739862 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1618739862 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Gozas Pizza og Kebab",
+   "brand": null,
+   "cuisine": "pizza",
+   "opening_hours": "Mo-Su 16:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 9.741318,
+    "lat": 55.568284,
+    "osm_id": "n4022447682",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n4022447682",
+    "_source": "OpenStreetMap n4022447682 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4022447682 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Allan Frisør",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:30-18:00; Sa 09:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 9.7413777,
+    "lat": 55.5684212,
+    "osm_id": "n13755826571",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13755826571",
+    "_source": "OpenStreetMap n13755826571 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13755826571 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "OSM extract has no platform ways, so tunnels/lift are not linked to perrons 1-6; only one lift is mapped. DSB: lifts exist except between spor 1 and 2.",
+  "Position and street of Vestindgangen not found.",
+  "'Knudepunktet' lounge (OSM) not confirmed by DSB.",
+  "Gozas Pizza og Kebab (OSM, outside the building) not included.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": []
+}

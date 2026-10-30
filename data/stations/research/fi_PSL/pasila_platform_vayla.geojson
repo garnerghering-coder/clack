@@ -1,0 +1,1098 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.933107099999972,
+      60.20100819999998
+     ],
+     [
+      24.933136000000022,
+      60.20094339999998
+     ],
+     [
+      24.933154900000012,
+      60.20090129999999
+     ],
+     [
+      24.933217199999984,
+      60.200760900000006
+     ],
+     [
+      24.933469800000015,
+      60.200232699999994
+     ],
+     [
+      24.93371670000002,
+      60.1997442
+     ],
+     [
+      24.933797999999967,
+      60.199580400000016
+     ],
+     [
+      24.93381959999998,
+      60.19953140000001
+     ],
+     [
+      24.933858400000023,
+      60.199445999999995
+     ],
+     [
+      24.933905400000025,
+      60.1993509
+     ],
+     [
+      24.934006799999977,
+      60.1991458
+     ],
+     [
+      24.934201100000028,
+      60.1986983
+     ],
+     [
+      24.934223999999983,
+      60.19863599999999
+     ],
+     [
+      24.934252199999978,
+      60.19855749999999
+     ],
+     [
+      24.9342955,
+      60.19842159999999
+     ],
+     [
+      24.93432609999999,
+      60.1982907
+     ],
+     [
+      24.934349599999987,
+      60.19816149999999
+     ],
+     [
+      24.93435499999998,
+      60.19812940000002
+     ],
+     [
+      24.934360699999978,
+      60.19808859999999
+     ],
+     [
+      24.934363200000018,
+      60.198063700000006
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L1",
+    "track": "1",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 332.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 161}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 498}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190123",
+    "reflink_oid": "1.2.246.586.1.37.3166214",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.33,
+    "laser_track_bed_m": 23.63,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "1",
+    "x_infra_oid": "1.2.246.586.1.37.3166214",
+    "x_description": "Pasila laituri: 1",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3166214, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.932908699999988,
+      60.2009483
+     ],
+     [
+      24.932926299999995,
+      60.20091229999999
+     ],
+     [
+      24.932941399999997,
+      60.200881100000004
+     ],
+     [
+      24.933034999999986,
+      60.20067639999999
+     ],
+     [
+      24.93304990000002,
+      60.20064019999999
+     ],
+     [
+      24.93310689999999,
+      60.20051440000001
+     ],
+     [
+      24.93312880000001,
+      60.20047660000001
+     ],
+     [
+      24.93326599999998,
+      60.2002035
+     ],
+     [
+      24.93350120000001,
+      60.1997152
+     ],
+     [
+      24.93357790000001,
+      60.1995547
+     ],
+     [
+      24.93361179999997,
+      60.199486699999994
+     ],
+     [
+      24.933747100000033,
+      60.19920259999999
+     ],
+     [
+      24.933782800000024,
+      60.19912860000001
+     ],
+     [
+      24.933964600000024,
+      60.19875169999999
+     ],
+     [
+      24.933998399999968,
+      60.19867390000001
+     ],
+     [
+      24.93404569999997,
+      60.19856260000001
+     ],
+     [
+      24.934108599999988,
+      60.1983998
+     ],
+     [
+      24.93413760000001,
+      60.1983081
+     ],
+     [
+      24.93417799999999,
+      60.1981757
+     ],
+     [
+      24.93418180000003,
+      60.19816139999998
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L2",
+    "track": "2",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 321.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 174}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 492}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190123",
+    "reflink_oid": "1.2.246.586.1.37.3166221",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.33,
+    "laser_track_bed_m": 23.59,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "2",
+    "x_infra_oid": "1.2.246.586.1.37.3166221",
+    "x_description": "Pasila laituri: 2",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3166221, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.932469299999987,
+      60.2016957
+     ],
+     [
+      24.932571400000008,
+      60.201455599999996
+     ],
+     [
+      24.932875100000032,
+      60.2007983
+     ],
+     [
+      24.93289750000001,
+      60.20076009999998
+     ],
+     [
+      24.932982399999993,
+      60.20057920000001
+     ],
+     [
+      24.933106999999993,
+      60.20032090000001
+     ],
+     [
+      24.933107099999994,
+      60.20031869999999
+     ],
+     [
+      24.933197800000023,
+      60.2001317
+     ],
+     [
+      24.933303299999995,
+      60.19992309999999
+     ],
+     [
+      24.93338130000003,
+      60.1997536
+     ],
+     [
+      24.933405599999993,
+      60.199703499999984
+     ],
+     [
+      24.933482700000027,
+      60.1995442
+     ],
+     [
+      24.93368309999999,
+      60.19911719999999
+     ],
+     [
+      24.933796500000025,
+      60.19887580000001
+     ],
+     [
+      24.933884000000017,
+      60.19866149999999
+     ],
+     [
+      24.934010600000015,
+      60.19838889999999
+     ],
+     [
+      24.934056799999993,
+      60.198236299999984
+     ],
+     [
+      24.934090600000022,
+      60.1980965
+     ],
+     [
+      24.934108099999982,
+      60.1980326
+     ],
+     [
+      24.934119599999992,
+      60.19799079999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L3",
+    "track": "3",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 418.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 160}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 582}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190123",
+    "reflink_oid": "1.2.246.586.1.37.3167430",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.43,
+    "laser_track_bed_m": 23.71,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "3",
+    "x_infra_oid": "1.2.246.586.1.37.3167430",
+    "x_description": "Pasila laituri: 3",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3167430, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.932285699999987,
+      60.20168559999999
+     ],
+     [
+      24.932303599999983,
+      60.2016036
+     ],
+     [
+      24.932345899999987,
+      60.201441899999985
+     ],
+     [
+      24.932414800000032,
+      60.2012424
+     ],
+     [
+      24.932492200000024,
+      60.2010328
+     ],
+     [
+      24.932538700000023,
+      60.200927099999994
+     ],
+     [
+      24.93268990000001,
+      60.20059780000001
+     ],
+     [
+      24.932876999999976,
+      60.2002077
+     ],
+     [
+      24.932894999999974,
+      60.200162699999986
+     ],
+     [
+      24.93314289999999,
+      60.19967870000001
+     ],
+     [
+      24.933221799999966,
+      60.199513100000004
+     ],
+     [
+      24.933382599999973,
+      60.1991968
+     ],
+     [
+      24.933438899999974,
+      60.199088999999994
+     ],
+     [
+      24.93374309999997,
+      60.1985069
+     ],
+     [
+      24.93381760000002,
+      60.198367899999994
+     ],
+     [
+      24.933877399999975,
+      60.1982432
+     ],
+     [
+      24.933925700000017,
+      60.198112300000005
+     ],
+     [
+      24.933964100000033,
+      60.1979822
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L4",
+    "track": "4",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 418.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 160}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 582}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190123",
+    "reflink_oid": "1.2.246.586.1.37.3167444",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.41,
+    "laser_track_bed_m": 23.69,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "4",
+    "x_infra_oid": "1.2.246.586.1.37.3167444",
+    "x_description": "Pasila laituri: 4",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3167444, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.933844100000012,
+      60.19796809999999
+     ],
+     [
+      24.933799799999985,
+      60.19807339999999
+     ],
+     [
+      24.933644200000032,
+      60.198406600000006
+     ],
+     [
+      24.93356069999998,
+      60.1985874
+     ],
+     [
+      24.93354530000001,
+      60.1986194
+     ],
+     [
+      24.933504699999993,
+      60.198705399999994
+     ],
+     [
+      24.933442699999972,
+      60.198835999999986
+     ],
+     [
+      24.933331599999974,
+      60.199076700000006
+     ],
+     [
+      24.933241599999974,
+      60.1992717
+     ],
+     [
+      24.93315679999999,
+      60.1994433
+     ],
+     [
+      24.933130899999977,
+      60.199503500000006
+     ],
+     [
+      24.93305339999998,
+      60.1996686
+     ],
+     [
+      24.932827700000022,
+      60.20014280000001
+     ],
+     [
+      24.932821600000032,
+      60.200153399999984
+     ],
+     [
+      24.932554000000007,
+      60.2007226
+     ],
+     [
+      24.93245590000002,
+      60.2009245
+     ],
+     [
+      24.932425799999997,
+      60.20099520000001
+     ],
+     [
+      24.93234900000002,
+      60.20118439999999
+     ],
+     [
+      24.932304600000027,
+      60.201287900000004
+     ],
+     [
+      24.932263100000014,
+      60.201402200000004
+     ],
+     [
+      24.932226400000015,
+      60.2015013
+     ],
+     [
+      24.932200399999974,
+      60.201586599999985
+     ],
+     [
+      24.932177799999977,
+      60.20167089999999
+     ],
+     [
+      24.932148000000026,
+      60.20179119999999
+     ],
+     [
+      24.93214139999999,
+      60.20182469999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L5",
+    "track": "5",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 433.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 160}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 596}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3167749",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.77,
+    "laser_track_bed_m": 23.73,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "5",
+    "x_infra_oid": "1.2.246.586.1.37.3167749",
+    "x_description": "Pasila laituri: 5",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3167749, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.931929699999994,
+      60.2018973
+     ],
+     [
+      24.931951900000012,
+      60.2017878
+     ],
+     [
+      24.93198720000001,
+      60.20163639999997
+     ],
+     [
+      24.932021200000026,
+      60.20150059999999
+     ],
+     [
+      24.93207289999998,
+      60.201333699999985
+     ],
+     [
+      24.9321234,
+      60.20119290000001
+     ],
+     [
+      24.932159299999967,
+      60.201105699999985
+     ],
+     [
+      24.932165200000032,
+      60.20109249999999
+     ],
+     [
+      24.932190499999965,
+      60.20104740000001
+     ],
+     [
+      24.9322708,
+      60.2008615
+     ],
+     [
+      24.932403800000003,
+      60.2006001
+     ],
+     [
+      24.932923199999976,
+      60.1994782
+     ],
+     [
+      24.93306659999997,
+      60.199167399999986
+     ],
+     [
+      24.93312280000001,
+      60.19905299999999
+     ],
+     [
+      24.93317550000001,
+      60.19894559999999
+     ],
+     [
+      24.933405399999984,
+      60.1984559
+     ],
+     [
+      24.93345670000002,
+      60.1983428
+     ],
+     [
+      24.933515100000008,
+      60.198216
+     ],
+     [
+      24.933576400000003,
+      60.1980891
+     ],
+     [
+      24.93364409999997,
+      60.1979445
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L6",
+    "track": "6",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 447.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 159}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 596}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3167954",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.78,
+    "laser_track_bed_m": 23.88,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "6",
+    "x_infra_oid": "1.2.246.586.1.37.3167954",
+    "x_description": "Pasila laituri: 6",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3167954, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.932125699999972,
+      60.2008606
+     ],
+     [
+      24.93227979999999,
+      60.200549199999976
+     ],
+     [
+      24.932467,
+      60.20011029999999
+     ],
+     [
+      24.93275709999999,
+      60.1994902
+     ],
+     [
+      24.932887700000013,
+      60.19921099999999
+     ],
+     [
+      24.932973199999992,
+      60.19903560000001
+     ],
+     [
+      24.93298719999999,
+      60.199006699999984
+     ],
+     [
+      24.9330916,
+      60.1987819
+     ],
+     [
+      24.933232200000003,
+      60.19848449999999
+     ],
+     [
+      24.933436899999975,
+      60.19806159999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L7",
+    "track": "7",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 320.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"001\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 170}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 491}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3168952",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.23,
+    "laser_track_bed_m": 23.56,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "7",
+    "x_infra_oid": "1.2.246.586.1.37.3168952",
+    "x_description": "Pasila laituri: 7",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3168952, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.93326369999999,
+      60.1980398
+     ],
+     [
+      24.933058700000032,
+      60.1983914
+     ],
+     [
+      24.933003300000024,
+      60.19849049999999
+     ],
+     [
+      24.932848699999983,
+      60.19880020000001
+     ],
+     [
+      24.932753499999976,
+      60.1990102
+     ],
+     [
+      24.932616799999977,
+      60.19931160000001
+     ],
+     [
+      24.932544799999977,
+      60.19946439999999
+     ],
+     [
+      24.931947599999994,
+      60.20079400000001
+     ],
+     [
+      24.931923000000005,
+      60.200838600000004
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L8",
+    "track": "8",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 322.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"001\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 170}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 491}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3168959",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.32,
+    "laser_track_bed_m": 23.59,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "8",
+    "x_infra_oid": "1.2.246.586.1.37.3168959",
+    "x_description": "Pasila laituri: 8",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3168959, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.931840000000026,
+      60.2008373
+     ],
+     [
+      24.931863,
+      60.20078849999999
+     ],
+     [
+      24.93218740000002,
+      60.20008249999999
+     ],
+     [
+      24.932335099999975,
+      60.19975689999999
+     ],
+     [
+      24.932466299999998,
+      60.19945549999999
+     ],
+     [
+      24.932509699999983,
+      60.1993652
+     ],
+     [
+      24.93254770000002,
+      60.1992882
+     ],
+     [
+      24.9326759,
+      60.199000299999994
+     ],
+     [
+      24.93276900000003,
+      60.19879120000001
+     ],
+     [
+      24.932831299999986,
+      60.198666799999984
+     ],
+     [
+      24.932929999999992,
+      60.19848069999999
+     ],
+     [
+      24.93293949999998,
+      60.1984617
+     ],
+     [
+      24.933164500000018,
+      60.19804529999998
+     ],
+     [
+      24.93318209999998,
+      60.1980083
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L9",
+    "track": "9",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 321.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"001\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 168}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 491}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3168967",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.31,
+    "laser_track_bed_m": 23.63,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "9",
+    "x_infra_oid": "1.2.246.586.1.37.3168967",
+    "x_description": "Pasila laituri: 9",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3168967, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.931596900000006,
+      60.200800199999996
+     ],
+     [
+      24.931614500000006,
+      60.20075929999999
+     ],
+     [
+      24.931741299999977,
+      60.20048090000002
+     ],
+     [
+      24.931785699999992,
+      60.20038830000001
+     ],
+     [
+      24.93183460000001,
+      60.200278199999985
+     ],
+     [
+      24.931882900000033,
+      60.20016039999999
+     ],
+     [
+      24.93208439999999,
+      60.19972610000001
+     ],
+     [
+      24.932188600000018,
+      60.19950319999999
+     ],
+     [
+      24.93226710000001,
+      60.19933770000001
+     ],
+     [
+      24.932337299999997,
+      60.1991791
+     ],
+     [
+      24.932391100000007,
+      60.199057499999995
+     ],
+     [
+      24.93259199999997,
+      60.19864909999998
+     ],
+     [
+      24.932709500000012,
+      60.19845130000001
+     ],
+     [
+      24.932744100000026,
+      60.19838980000001
+     ],
+     [
+      24.932799700000032,
+      60.198301300000004
+     ],
+     [
+      24.93291020000002,
+      60.1981371
+     ],
+     [
+      24.93301830000002,
+      60.1979817
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L10",
+    "track": "10",
+    "height_class": "matala",
+    "height_m": 0.265,
+    "height_text": "matala",
+    "length_m": 320.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"001\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 168}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 491}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190124",
+    "reflink_oid": "1.2.246.586.1.37.3168974",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.37,
+    "laser_track_bed_m": 23.62,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "10",
+    "x_infra_oid": "1.2.246.586.1.37.3168974",
+    "x_description": "Pasila laituri: 10",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3168974, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      24.932145099999996,
+      60.19908300000001
+     ],
+     [
+      24.931424299999982,
+      60.2006582
+     ],
+     [
+      24.931398299999998,
+      60.200713199999996
+     ],
+     [
+      24.931368799999994,
+      60.200774799999984
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PSL L11",
+    "track": "11",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 250.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"001\", \"alku\": {\"ratakm\": 3, \"etaisyys\": 295}, \"loppu\": {\"ratakm\": 3, \"etaisyys\": 491}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20191021",
+    "reflink_oid": "1.2.246.586.1.37.3443983",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 24.31,
+    "laser_track_bed_m": 23.52,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "11",
+    "x_infra_oid": "1.2.246.586.1.37.3443983",
+    "x_description": "Pasila laituri: 11",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3443983, read 2026-10-30, CC BY 4.0"
+   }
+  }
+ ]
+}

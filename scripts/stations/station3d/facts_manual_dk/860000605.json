@@ -1,0 +1,255 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: station building (Sdr. Stationsvej 28A) and platform 1 (track 1) on the south side; island perron 2 (tracks 2/3) and short perron 3 (tracks 4/5, 160 m, east part) to the north; north side exit to Nordre Stationsvej (Baneby)",
+   "note": "Platforms per Banedanmark register, all 55 cm. Slagelse is also the terminus of Lokaltog's Tølløse line (Wikipedia); which platform it uses is not stated. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; https://en.wikipedia.org/wiki/Slagelse_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (underpass) under the tracks by the station building, with lifts",
+   "note": "OSM layer -1; no signposted name.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Campusbroen (footbridge, west part of the station, towards SDU/campus)",
+   "note": "Name from OSM. No owner text confirms the name.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w290146572",
+    "w1167428742",
+    "w1167428743"
+   ],
+   "between": [
+    "station building (south)",
+    "perron 2, perron 3 and the north side"
+   ],
+   "where": "about one third along the platforms from the east end, by the station building",
+   "confirmed_by": "OSM only (DSB: 'adgang til Slagelse Station via både trapper og elevator')",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10856632300",
+   "between": [
+    "tunnel",
+    "platform 1"
+   ],
+   "where": "platform 1 at the tunnel, by the station building",
+   "confirmed_by": "OSM only (DSB confirms elevator)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10856632296",
+   "between": [
+    "tunnel",
+    "perron 2 (tracks 2/3)"
+   ],
+   "where": "perron 2 at the tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10856632294",
+   "between": [
+    "tunnel",
+    "perron 3 (tracks 4/5)"
+   ],
+   "where": "east end of perron 3, at the tunnel",
+   "confirmed_by": "OSM only (OSM records no platform link for it; position matches perron 3's east end)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10856632291",
+   "between": [
+    "tunnel",
+    "north side (Nordre Stationsvej)"
+   ],
+   "where": "north end of the tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w290146566",
+    "w290146571",
+    "w1042695969",
+    "w290146567",
+    "w290146568"
+   ],
+   "between": [
+    "tunnel",
+    "platform 1, perron 2, perron 3, north side"
+   ],
+   "where": "at the tunnel; w290146568 (north side) has a ramp",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Campusbroen",
+   "osm_ids": [
+    "w1027510320",
+    "w1043415189"
+   ],
+   "between": [
+    "south side",
+    "north side (campus)"
+   ],
+   "where": "west part of the station (about 0.75 along perron 2 from the east end)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1027510322",
+    "w1027510324",
+    "w1027510321"
+   ],
+   "between": [
+    "Campusbroen",
+    "platform 1, perron 2, north side"
+   ],
+   "where": "at Campusbroen; OSM tags ramp=yes, wheelchair=no; no lifts at the bridge in OSM",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Slagelse Station (station building)",
+   "street": "Sønder Stationsvej (address Sønder Stationsvej 28A)",
+   "level": "0",
+   "where": "south side, by platform 1",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "name": "North side (Slagelse Baneby)",
+   "street": "Nordre Stationsvej",
+   "level": "0",
+   "where": "north side of the tracks; DSB and 7-Eleven place a second 7-Eleven at Ndr. Stationsvej 13",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Sdr. Stationsvej 28)",
+   "osm_id": "n4119367070",
+   "where": "station building, south side",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 08:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "Not found in the 7-Eleven store list as read.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven Slagelse Baneby Station",
+   "where": "north side, Nordre Stationsvej 13 (not in OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 05:15-22:00; Fr 05:15-23:00; Sa 07:30-23:00; Su 07:30-22:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB gives different hours for 'Baneby, Ndr. Stationsvej 13': Mo-Fr 05:15-22:00; Sa 07:00-22:00; Su 08:30-22:00.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal/ventesal",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 06:00-15:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "SMS-betalingstoilet",
+   "fee": "5 kr + normal SMS rate",
+   "opening_hours": "Mo-Fr 06:00-15:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "No position from DSB; not in OSM.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Jernbaneapoteket",
+   "osm_id": "n9603043161",
+   "where": "by the station building, south side (OSM; about 18 m from platform 1)",
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:30-13:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only; not stated by DSB to be in the station.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_ids": [
+    "w1125506359",
+    "w1469616807",
+    "w1469616808"
+   ],
+   "where": "south side by the station building, and north side by perron 3's east end (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Slagelse busstation",
+   "where": "immediately adjacent to the station",
+   "_source": "https://en.wikipedia.org/wiki/Slagelse_station, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "note": "About 304 spaces (body text: 370), 63 % occupancy; free for DSB Plus; disabled-card holders park free.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 2 aflåste cykelskure",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Slagelse)",
+   "answer": "Tunnel by the station building with lifts to platform 1, perron 2, perron 3 and the north side (OSM: 4 lifts) plus stairs; Campusbroen footbridge to the west with stairs only (OSM). DSB confirms stairs and elevator.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lift positions OSM only; DSB confirms elevator(s) without number or position.",
+  "Campusbroen: a Slagelse Kommune agenda of 23 Sep 2015 (https://dagsordener.slagelse.dk/vis/pdf/dagsorden/00786558-d96a-461d-9be6-b3ffd841d4ae, read 2026-10-30) said lifts were not required for the planned footbridge; OSM maps no lifts there. Not confirmed either way by an owner source.",
+  "Lokaltog (Tølløsebanen) platform at Slagelse: not identified.",
+  "DSB lists 'Andre butikker' without names; Slik Safari, Karas bagels and an unnamed shop in OSM are 50–60 m from the platforms and not confirmed as in the station.",
+  "Baneby 7-Eleven hours differ between DSB and 7-Eleven; 7-Eleven's own list used.",
+  "No owner plan found; level names not signposted in any source."
+ ]
+}

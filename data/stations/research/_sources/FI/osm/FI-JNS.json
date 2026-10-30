@@ -1,0 +1,260 @@
+{
+ "clack_id": "FI-JNS",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w58617254",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 38.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7787653,
+    62.6021814
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1204376486",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 20.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7776355,
+    62.6008664
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1216893305",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 2.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7761271,
+    62.5995036
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1432627513",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 20.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7779799,
+    62.6007878
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11162525854",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7778207,
+    62.6010463
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11162525855",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    29.7781669,
+    62.6009689
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n8104725138",
+   "category": "bicycle_repair_station",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 59,
+   "lonlat": [
+    29.7773091,
+    62.6009106
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n11275686118",
+   "category": "vending_machine",
+   "name": "VR lippuautomaatti",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 62,
+   "lonlat": [
+    29.7777018,
+    62.6009309
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "operator": "VR"
+  },
+  {
+   "osm_id": "n11289433273",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 74,
+   "lonlat": [
+    29.7763838,
+    62.5999429
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n11289433279",
+   "category": "post_box",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 77,
+   "lonlat": [
+    29.7762777,
+    62.5999525
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w694732299",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 83,
+   "lonlat": [
+    29.7778227,
+    62.6013021
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w863346966",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 206,
+   "lonlat": [
+    29.7750763,
+    62.598836
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1216591544",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 25,
+   "lonlat": [
+    29.7768556,
+    62.6003479
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1216591545",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 24,
+   "lonlat": [
+    29.7771134,
+    62.6006029
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1216591546",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 45,
+   "lonlat": [
+    29.7774137,
+    62.6008972
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1216893304",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 131,
+   "lonlat": [
+    29.7781265,
+    62.6016032
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

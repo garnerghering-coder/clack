@@ -1,0 +1,406 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform level: platform 1 (edge platform by the Matkakeskus), island platform 2/4, island platform 3, bus terminal side",
+   "other_names": [],
+   "note": "No signposted level name found. Väylävirasto: platform 1 (reunalaituri, 449 m) has a short step-free route from the travel centre, drop-off/parking and bus terminal; platforms 2–4 are reached via the overpass lift and stairs or the Kilpinen footbridge stairs. All four platforms 550 mm. Platform 3 (186 m) and 4 (160 m) have no passenger signage and are not in regular passenger use. Digitraffic also lists short platforms 23 and 24 (57–58 m) north-east of the station.",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JY/_report.json and jyvaskyla_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "osm_level": "0.5",
+   "name": "Intermediate level inside the Matkakeskus (OSM only: escalator landings between 0 and 1)",
+   "other_names": [],
+   "note": "OSM escalators w1433034756/w1433034758 (0–0.5) and w1433034754/w1433034755 (0.5–1) and footway pieces at 0.5. No owner text describes this level.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Upper level: Matkakeskus hall with the shops and restaurants (OSM), and the overpass over the tracks to Lutakko (Messusilta)",
+   "other_names": [
+    "Messusilta (OSM name of the footbridge w121934320 at level 1)"
+   ],
+   "note": "OSM tags R-kioski, Picnic, Pizza Hut, Shalimar and Musta Kynnys at level 1 and one Hannikaisenkatu entrance (n13171206508) at level 1. Visit Jyväskylä puts the lockers in the main hall 'between the bus and train platform doors', which suggests the main hall opens onto the platforms; how OSM's level 1 relates to the hall is not settled. Wikipedia: services for bus and rail passengers are on the 'first floor'.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; https://en.wikipedia.org/wiki/Jyv%C3%A4skyl%C3%A4_Central_Station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n7977033074",
+   "between": [
+    "overpass (1)",
+    "platform 1 (0)"
+   ],
+   "where": "on platform 1 under the travel-centre overpass; VR: the assistance point is at the Tampere end of the station on platform 1 and a lift to the island platforms is about 5 m from it",
+   "confirmed_by": "owner text (Väylävirasto: the travel-centre overpass to Lutakko has a lift and stairs to the platforms; VR: lift to the island platforms near the assistance point); exact position OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (jyvaskyla_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JY/_report.json and jyvaskyla_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n7977045407",
+   "between": [
+    "overpass (1)",
+    "island platform 2/4 (0)"
+   ],
+   "where": "island platform 2/4 under the overpass",
+   "confirmed_by": "owner text (Väylävirasto and VR confirm a lift to the island platforms); position OSM only",
+   "note": "platform assignment derived by Claude from the distance of the OSM node to the Digitraffic platform-track centre lines (jyvaskyla_platform_vayla.geojson)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JY/_report.json and jyvaskyla_platform_vayla.geojson, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9711790489",
+   "between": [
+    "Matkakeskus ground level (0)",
+    "Matkakeskus upper level (1)"
+   ],
+   "where": "inside the Matkakeskus building, about 25 m from the track-1 line",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1433034756",
+    "w1433034758"
+   ],
+   "between": [
+    "0",
+    "0.5"
+   ],
+   "where": "inside the Matkakeskus, pair of escalators",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1433034754",
+    "w1433034755"
+   ],
+   "between": [
+    "0.5",
+    "1"
+   ],
+   "where": "inside the Matkakeskus towards the overpass, pair of escalators",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w121934320",
+   "name": "Messusilta",
+   "between": [
+    "Matkakeskus (1)",
+    "Lutakko side"
+   ],
+   "where": "travel-centre overpass across the tracks; lifts and stairs down to platform 1 and island 2/4",
+   "confirmed_by": "owner text (Väylävirasto lists Messusilta, KeS-4901, built 2001, and the travel-centre overpass with lift and stairs)",
+   "note": "Väylävirasto lists 'Messusilta' and 'the travel-centre overpass to Lutakko' in separate sentences; OSM gives the name Messusilta to the overpass way that has the platform stairs. Whether they are the same structure is not fully settled.",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w90513830"
+   ],
+   "between": [
+    "overpass (1)",
+    "platform 1 (0)"
+   ],
+   "where": "platform 1 under the overpass",
+   "confirmed_by": "owner text (Väylävirasto: stairs from the overpass to the platforms); position OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w90513832"
+   ],
+   "between": [
+    "Messusilta / overpass (1)",
+    "island platform 2/4 (0)"
+   ],
+   "where": "island platform 2/4 under the overpass",
+   "confirmed_by": "owner text (Väylävirasto); position OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w32070201",
+    "w165401085"
+   ],
+   "name": "Kilpisen silta",
+   "between": [
+    "south-west (Tampere) end, both sides of the yard",
+    "platforms 2/3"
+   ],
+   "where": "south-west end of the platforms; stairs w90513823 down to the island platform 2/3 end",
+   "confirmed_by": "owner text (Väylävirasto: Kilpisen silta, KeS-4791, built 1989, has stairs to the platforms; no lift)",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w90513823"
+   ],
+   "between": [
+    "Kilpisen silta (1)",
+    "island platform 2/3 (0)"
+   ],
+   "where": "south-west end of the island platform",
+   "confirmed_by": "owner text (Väylävirasto); position OSM only",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "kind": "step_free_route",
+   "between": [
+    "Matkakeskus / drop-off / bus terminal",
+    "platform 1"
+   ],
+   "where": "short step-free route at ground level",
+   "confirmed_by": "owner text",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Matkakeskus, Hannikaisenkatu entrances",
+   "street": "Hannikaisenkatu (address Hannikaisenkatu 20)",
+   "level": "0",
+   "where": "street side of the travel centre; OSM main entrances n9711790479 and n9212521798 (level 0) and n1360430633, about 10–40 m from Hannikaisenkatu; one more entrance n13171206508 tagged level 1",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/jyvaskyla, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "name": "Doors to the train platform and to the bus platforms",
+   "street": null,
+   "level": "0",
+   "where": "from the main hall; the lockers stand between these two doors",
+   "_source": "Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30"
+  },
+  {
+   "name": "Kilpisen silta stair entrances",
+   "street": "Hannikaisenkatu",
+   "level": "0",
+   "where": "south-west end, OSM entrances n8792824649/n8792824650 (addr:street Hannikaisenkatu)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Matkakeskus / odotustila",
+   "where": "Matkakeskus",
+   "opening_hours": "Mo-Sa 06:00-22:00; Su 08:00-22:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Visit Jyväskylä gives the same hours for the Matkakeskus building. Väylävirasto: the waiting room is closed at night.",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Säilytyslokerot",
+   "where": "main hall, between the bus-platform and train-platform doors",
+   "opening_hours": "Mo-Sa 06:00-22:00; Su 08:00-22:00",
+   "hours_source": "website (Visit Jyväskylä)",
+   "hours_checked": "2026-10-30",
+   "fee": "S (33×43×57 cm) €2/2 h, €6/6 h, €10/12 h; L (33×90×57 cm) €3/2 h, €7/6 h, €11/12 h; QR code and card payment",
+   "note": "VR's services list says 'no luggage lockers' but its own text sends travellers to the lockers in the Matkakeskus.",
+   "_source": "Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "fee": "yes (paid; amount not given)",
+   "where": "Matkakeskus (OSM n4785991421)",
+   "_source": "Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR ticket machines (green)",
+   "where": "in the Matkakeskus; OSM has one 'VR lippuautomaatti' n4796375725 outside the building",
+   "note": "No VR service point. R-kioski also sells VR tickets (€1 service charge on long-distance).",
+   "_source": "Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/jyvaskyla, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nosto",
+   "osm_id": "n534798604",
+   "where": "Matkakeskus, level 0 (OSM)",
+   "level_per_plan": "0",
+   "_source": "Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Jyväskylä Matkakeskus",
+   "osm_id": "n5813131391",
+   "where": "Matkakeskus (OSM level 1)",
+   "level_per_plan": "1",
+   "opening_hours": "Mo-Th 06:00-20:30; Fr 06:00-21:30; Sa,Su 08:30-21:30",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM had Fr,Sa 06:00-21:30; Su 08:30-21:30. Sells VR, Matkahuolto, Onnibus and local tickets.",
+   "_source": "https://www.r-kioski.fi/kioskit/jyvaskyla-matkakeskus-3/, read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Picnic (Cafe Picnic Matkakeskus)",
+   "osm_id": "n3470831282",
+   "where": "Matkakeskus (OSM level 1)",
+   "level_per_plan": "1",
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa,Su 09:00-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Picnic's own store finder did not render; Visit Jyväskylä lists Picnic in the Matkakeskus without hours.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Pizza Hut Matkakeskus",
+   "osm_id": "n8781433537",
+   "where": "Matkakeskus (OSM level 1)",
+   "level_per_plan": "1",
+   "opening_hours": "Mo-Fr 10:30-20:00; Sa 11:00-21:00; Su 10:30-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM had Mo-Th 10:30-20:00; Fr 10:30-21:00.",
+   "_source": "https://www.pizzahut.fi/toimipisteet/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Shalimar (Indian restaurant)",
+   "osm_id": "n2977344107",
+   "where": "Matkakeskus (OSM level 1)",
+   "level_per_plan": "1",
+   "opening_hours": "Mo 10:30-20:00; Tu-Th 10:30-18:00; Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Shalimar's own page (ravintolashalimar.fi/matkakeskus/) blocks automated reading; OSM hours used.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Ozaki Sushi (Ozaki Matkakeskus)",
+   "osm_id": "n8781433538",
+   "where": "Matkakeskus (OSM: no level)",
+   "opening_hours": "Mo-Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-20:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM had Mo-Fr 10:30-20:00; Sa 12:00-20:00, no Sunday.",
+   "_source": "https://ozakisushi.fi/ozaki-jyvaskyla/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "CandyTown Jyväskylä Matkakeskus",
+   "osm_id": "n12147904321",
+   "where": "Matkakeskus (OSM: no level)",
+   "opening_hours": "Mo-Th 10:00-19:30; Fr 10:00-20:00; Sa 10:00-18:00; Su 12:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://candytown.fi/pages/jyvaskyla-matkakeskus, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Musta Kynnys",
+   "osm_id": "n2977344104",
+   "where": "Matkakeskus (OSM level 1)",
+   "level_per_plan": "1",
+   "opening_hours": "Su-Tu 14:00-24:00; We,Th 14:00-02:00; Fr,Sa 14:00-03:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM value uses commas between rules; rewritten with semicolons. Not listed by Visit Jyväskylä; unverified.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Gastropub Jalo",
+   "osm_id": "n1360517424",
+   "where": "outside the Matkakeskus, about 90 m from the platforms (OSM)",
+   "opening_hours": "Mo-Th 15:00-02:00; Fr,Sa 15:00-03:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "post_box",
+   "osm_id": "n11104486023",
+   "where": "Matkakeskus, level 0 (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "Tampere end of the station building, on platform 1, with a shelter; drop-off parking and taxi rank nearby; lift to the island platforms about 5 m away",
+   "_source": "https://www.vr.fi/en/railway-stations-and-routes/jyvaskyla, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Jyväskylän matkakeskus (Matkahuolto bus terminal)",
+   "osm_id": "w13235730",
+   "where": "part of the Matkakeskus; P-bussiparkki and charter-bus stands also here",
+   "_source": "Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taksitolppa",
+   "osm_id": "w42769965",
+   "where": "next to the station near the assistance point, with kiss-and-ride",
+   "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "P-Matkakeskus (parking hall)",
+   "where": "bus-terminal side of the Matkakeskus; 432 spaces (Väylävirasto); Jyväs-Parkki: open 24 h, ticketless (plate recognition)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Jyväs-Parkki)",
+   "hours_checked": "2026-10-30",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; https://jyvas-parkki.fi/pysakointitalot/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "where": "covered two-storey rack for 40 bikes, plus racks on the platform-1 side and along the building",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Ratapihaselvitykset: Jyväskylä (Väyläviraston julkaisuja 53/2026)",
+   "publisher": "Väylävirasto",
+   "url": "https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y",
+   "licence": "CC BY 4.0",
+   "read": "2026-10-30",
+   "note": "Yard study with platform table (p. 31), bridges (p. 28) and accessible routes (p. 32); no lift positions drawn in the text read."
+  }
+ ],
+ "answers": [
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not settled: no source names the floors. OSM uses 0 (platforms), 0.5 (escalator landing) and 1 (shops, overpass).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Platform 1: step-free from the Matkakeskus at ground level, plus lift and stairs from the overpass. Island 2/4: lift and stairs from the overpass (Messusilta). Island 2/3 south-west end: stairs only, from Kilpisen silta. Lifts confirmed by Väylävirasto and VR text; positions OSM only.",
+   "_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30"
+  },
+  {
+   "question": "Missing hours",
+   "answer": "Hours settled from own websites for R-kioski, Pizza Hut, Ozaki, CandyTown; Picnic, Shalimar and Musta Kynnys from OSM only.",
+   "_source": "see amenities"
+  }
+ ],
+ "open": [
+  "Level heights: no source measures them.",
+  "Visit Jyväskylä links an area map of the Matkakeskus (https://citynomadi.com/route/1dfd2d8ab5b2a662b58d9378f8afeac3, showing bus/train platforms, services, parking); not opened in this pass.",
+  "Signposted floor names and how OSM level 1 relates to the main hall: not settled (the area map and any owner floor plan were not read).",
+  "Whether Väylävirasto's 'Messusilta' and 'travel-centre overpass to Lutakko' are one structure.",
+  "Which way the Matkakeskus escalators run, and where lift n9711790489 opens: OSM only.",
+  "Platform 3 is shown in OSM with stairs from Kilpisen silta but Väylävirasto says it has no passenger signage and is not in passenger use; Digitraffic short platforms 23/24 not described by any owner text.",
+  "Picnic, Shalimar, Musta Kynnys: no own-website hours could be read (store finder blank / robots block); OSM used.",
+  "Toilet fee amount not given.",
+  "Web search budget ran out during this pass; the Matkakeskus owner/manager site (feedback link points to Granlund Manager) was not found."
+ ]
+}

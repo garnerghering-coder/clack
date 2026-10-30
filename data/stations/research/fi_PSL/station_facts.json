@@ -1,0 +1,4902 @@
+{
+ "clack_id": "fi:PSL",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "3",
+   "name": "Asemahalli (station hall) = Mall of Tripla 4th floor ('4. krs')",
+   "other_names": [
+    "Tripla 4. kerros"
+   ],
+   "note": "Station hall opened 17 Oct 2019 on pillars above the tracks, integrally joined to Mall of Tripla (Wikipedia). VR places the lockers 'on the 4th floor of the shopping centre'; OSM names the locker 'Matkatavarasäilytys Asemahalli 4. krs' and tags the hall shops level 3. Pasilansilta (south) and Opastinsilta connect at this level.",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platform level (tracks 1–11)",
+   "other_names": [],
+   "note": "Platforms 1–11 (Digitraffic: 10 korkea + track 10 matala). Signposted Tripla floor number for the platform level not found.",
+   "_source": "Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-PSL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses (north tunnel Veturitie–Ratapihantie; 'Siniviiva')",
+   "other_names": [],
+   "note": "Wikipedia: an underpass north of the station connects Veturitie and Ratapihantie. OSM names one underpass 'Siniviiva' (w5231865). Heights: no source measures them.",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "PSL L1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L2",
+   "track": "2",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 2 (the train stops with the platform to its east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L3",
+   "track": "3",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 3 (the train stops with the platform to its west)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L4",
+   "track": "4",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 4 (the train stops with the platform to its north-east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L5",
+   "track": "5",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 5 (the train stops with the platform to its west)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L6",
+   "track": "6",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 6 (the train stops with the platform to its east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L7",
+   "track": "7",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 7 (the train stops with the platform to its west)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L7; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L8",
+   "track": "8",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 8 (the train stops with the platform to its east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L8; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L9",
+   "track": "9",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 9 (the train stops with the platform to its west)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L9; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L10",
+   "track": "10",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 10 (the train stops with the platform to its east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L10; read 2026-10-30"
+  },
+  {
+   "platform_bis": "PSL L11",
+   "track": "11",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 11 (the train stops with the platform to its east)",
+   "_source": "laser (2021, raised ground beside the register's track line) + Väylävirasto / Fintraffic (Digitraffic), CC BY 4.0 platform PSL L11; read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n6840018666",
+   "between": [
+    "station hall",
+    "platform tracks 1/2"
+   ],
+   "where": "from the station hall down to the platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9339391,
+    "lat": 60.1990166,
+    "how": "OSM n6840018666",
+    "_source": "OpenStreetMap n6840018666 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018661",
+   "between": [
+    "station hall",
+    "platform tracks 3/4"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9336356,
+    "lat": 60.19898,
+    "how": "OSM n6840018661",
+    "_source": "OpenStreetMap n6840018661 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n6840018656",
+    "w1134457336"
+   ],
+   "between": [
+    "station hall",
+    "platform tracks 5/6"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018651",
+   "between": [
+    "station hall",
+    "platform tracks 7/8"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9329156,
+    "lat": 60.1988934,
+    "how": "OSM n6840018651",
+    "_source": "OpenStreetMap n6840018651 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10574546644",
+   "between": [
+    "station hall",
+    "platform tracks 9/10"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9326161,
+    "lat": 60.1988794,
+    "how": "OSM n10574546644",
+    "_source": "OpenStreetMap n10574546644 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018642",
+   "between": [
+    "station hall",
+    "platform tracks 10/11 side (OSM refs H0092/H0093)"
+   ],
+   "where": "west side of the hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9322646,
+    "lat": 60.1991243,
+    "how": "OSM n6840018642",
+    "_source": "OpenStreetMap n6840018642 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142822",
+    "w1134549164"
+   ],
+   "between": [
+    "station hall (3)",
+    "platform 1/2 (0)"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142823",
+    "w1134549162"
+   ],
+   "between": [
+    "station hall",
+    "platform 3/4"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142824",
+    "w1134549159"
+   ],
+   "between": [
+    "station hall",
+    "platform 5/6"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142821",
+    "w1134549156"
+   ],
+   "between": [
+    "station hall",
+    "platform 7/8"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1134256267",
+    "w1134549152",
+    "w730142820",
+    "w1134549168"
+   ],
+   "between": [
+    "station hall",
+    "platform 9/10"
+   ],
+   "where": "pairs of escalators",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142816",
+    "w1134549149"
+   ],
+   "between": [
+    "station hall",
+    "platform 11"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w737781213",
+    "w1134258889",
+    "w484424554",
+    "w1134258891",
+    "w484424553",
+    "w1134464063",
+    "w484424552",
+    "w1134258893",
+    "w733305102",
+    "w1134258895",
+    "w1134260231",
+    "w1134520139"
+   ],
+   "between": [
+    "station hall / bridges",
+    "platforms 1/2, 3/4, 5/6, 7/8, 9/10, 11"
+   ],
+   "where": "stairs to each platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w28477046",
+    "w28476984",
+    "w28476983",
+    "w28476986",
+    "w28857616",
+    "w649127833"
+   ],
+   "between": [
+    "east",
+    "west"
+   ],
+   "where": "underpass under the platforms (OSM layer -1) reaching platforms 1/2, 3/4, 5/6, 7/8, 9/10 and 11",
+   "confirmed_by": "OSM only (Wikipedia mentions an underpass north of the station between Veturitie and Ratapihantie)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Pasilansilta",
+   "osm_id": "w1205955347",
+   "between": [
+    "Itä-Pasila",
+    "Länsi-Pasila"
+   ],
+   "where": "traffic bridge passing south of the station and Tripla; assistance point by the entrance on this side",
+   "confirmed_by": "Wikipedia + owner text (VR)",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9341479,
+    "lat": 60.1982482,
+    "how": "OSM w1205955347 (point on the way)",
+    "_source": "OpenStreetMap w1205955347 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "name": "Opastinsilta",
+   "osm_ids": [
+    "w24253733",
+    "w358243282",
+    "w469962766"
+   ],
+   "between": [
+    "east",
+    "west"
+   ],
+   "where": "footbridge north side; OSM main entrance n6908493539 (level 3) on Opastinsilta",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w5231865",
+   "name": "Siniviiva",
+   "osm_level": null,
+   "between": [
+    "platform 5;5b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 104.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w5231865 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9319237,
+    "lat": 60.2019098,
+    "how": "OSM w5231865 (point on the way)",
+    "_source": "OpenStreetMap w5231865 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w24254684",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w24254684 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9343778,
+    "lat": 60.1981987,
+    "how": "OSM w24254684 (point on the way)",
+    "_source": "OpenStreetMap w24254684 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w28476983",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 5;5b",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w28476983 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321983,
+    "lat": 60.2012557,
+    "how": "OSM w28476983 (point on the way)",
+    "_source": "OpenStreetMap w28476983 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w28476984",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w28476984 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326774,
+    "lat": 60.2009596,
+    "how": "OSM w28476984 (point on the way)",
+    "_source": "OpenStreetMap w28476984 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w28476986",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w28476986 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9320078,
+    "lat": 60.2008825,
+    "how": "OSM w28476986 (point on the way)",
+    "_source": "OpenStreetMap w28476986 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w28477046",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w28477046 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9328519,
+    "lat": 60.2013313,
+    "how": "OSM w28477046 (point on the way)",
+    "_source": "OpenStreetMap w28477046 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w28857616",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 10",
+    "platform 9"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w28857616 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9317173,
+    "lat": 60.200849,
+    "how": "OSM w28857616 (point on the way)",
+    "_source": "OpenStreetMap w28857616 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w60082977",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11",
+    "platform 5;5b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 105.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w60082977 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321841,
+    "lat": 60.2012869,
+    "how": "OSM w60082977 (point on the way)",
+    "_source": "OpenStreetMap w60082977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w111790842",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 29.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w111790842 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329803,
+    "lat": 60.1979223,
+    "how": "OSM w111790842 (point on the way)",
+    "_source": "OpenStreetMap w111790842 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w221599773",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w221599773 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9337047,
+    "lat": 60.1988141,
+    "how": "OSM w221599773 (point on the way)",
+    "_source": "OpenStreetMap w221599773 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w339548095",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w339548095 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9340646,
+    "lat": 60.198842,
+    "how": "OSM w339548095 (point on the way)",
+    "_source": "OpenStreetMap w339548095 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w469978139",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 6",
+    "platform H0089"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w469978139 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9333857,
+    "lat": 60.1987635,
+    "how": "OSM w469978139 (point on the way)",
+    "_source": "OpenStreetMap w469978139 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w469978140",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 7",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w469978140 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330475,
+    "lat": 60.1987235,
+    "how": "OSM w469978140 (point on the way)",
+    "_source": "OpenStreetMap w469978140 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w469978141",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 6",
+    "platform 7",
+    "platform H0089",
+    "platform H0090",
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w469978141 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330475,
+    "lat": 60.1987235,
+    "how": "OSM w469978141 (point on the way)",
+    "_source": "OpenStreetMap w469978141 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w469978142",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 4",
+    "platform 6",
+    "platform H0087",
+    "platform H0089"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w469978142 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933711,
+    "lat": 60.198801,
+    "how": "OSM w469978142 (point on the way)",
+    "_source": "OpenStreetMap w469978142 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w469978143",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 4",
+    "platform H0085",
+    "platform H0086",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w469978143 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933711,
+    "lat": 60.198801,
+    "how": "OSM w469978143 (point on the way)",
+    "_source": "OpenStreetMap w469978143 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w484424552",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w484424552 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330414,
+    "lat": 60.1987363,
+    "how": "OSM w484424552 (point on the way)",
+    "_source": "OpenStreetMap w484424552 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w484424553",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 6",
+    "platform H0089"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w484424553 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933379,
+    "lat": 60.1987775,
+    "how": "OSM w484424553 (point on the way)",
+    "_source": "OpenStreetMap w484424553 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w484424554",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w484424554 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336351,
+    "lat": 60.1989532,
+    "how": "OSM w484424554 (point on the way)",
+    "_source": "OpenStreetMap w484424554 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w649127833",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 38.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w649127833 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9313168,
+    "lat": 60.2011545,
+    "how": "OSM w649127833 (point on the way)",
+    "_source": "OpenStreetMap w649127833 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w730142803",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142803 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9322277,
+    "lat": 60.1991201,
+    "how": "OSM w730142803 (point on the way)",
+    "_source": "OpenStreetMap w730142803 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w730142807",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142807 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329218,
+    "lat": 60.1988821,
+    "how": "OSM w730142807 (point on the way)",
+    "_source": "OpenStreetMap w730142807 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w730142808",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142808 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9332992,
+    "lat": 60.1989247,
+    "how": "OSM w730142808 (point on the way)",
+    "_source": "OpenStreetMap w730142808 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w730142810",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142810 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336414,
+    "lat": 60.1989662,
+    "how": "OSM w730142810 (point on the way)",
+    "_source": "OpenStreetMap w730142810 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w730142812",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142812 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9339451,
+    "lat": 60.1990051,
+    "how": "OSM w730142812 (point on the way)",
+    "_source": "OpenStreetMap w730142812 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w730142815",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142815 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9328795,
+    "lat": 60.1981431,
+    "how": "OSM w730142815 (point on the way)",
+    "_source": "OpenStreetMap w730142815 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142816",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 11",
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142816 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.932163,
+    "lat": 60.199315,
+    "how": "OSM w730142816 (point on the way)",
+    "_source": "OpenStreetMap w730142816 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142820",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 18.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142820 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325785,
+    "lat": 60.198999,
+    "how": "OSM w730142820 (point on the way)",
+    "_source": "OpenStreetMap w730142820 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142821",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142821 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9328232,
+    "lat": 60.19919,
+    "how": "OSM w730142821 (point on the way)",
+    "_source": "OpenStreetMap w730142821 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142822",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142822 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9339112,
+    "lat": 60.1991584,
+    "how": "OSM w730142822 (point on the way)",
+    "_source": "OpenStreetMap w730142822 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142823",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142823 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9335897,
+    "lat": 60.1991207,
+    "how": "OSM w730142823 (point on the way)",
+    "_source": "OpenStreetMap w730142823 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w730142824",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w730142824 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9331727,
+    "lat": 60.1992319,
+    "how": "OSM w730142824 (point on the way)",
+    "_source": "OpenStreetMap w730142824 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w733305101",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w733305101 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9327202,
+    "lat": 60.1986847,
+    "how": "OSM w733305101 (point on the way)",
+    "_source": "OpenStreetMap w733305101 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w733305102",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w733305102 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9327136,
+    "lat": 60.1986978,
+    "how": "OSM w733305102 (point on the way)",
+    "_source": "OpenStreetMap w733305102 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w737781213",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 17.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w737781213 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933959,
+    "lat": 60.1989998,
+    "how": "OSM w737781213 (point on the way)",
+    "_source": "OpenStreetMap w737781213 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w737781214",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w737781214 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9340365,
+    "lat": 60.1988386,
+    "how": "OSM w737781214 (point on the way)",
+    "_source": "OpenStreetMap w737781214 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w737833352",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 10.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w737833352 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9340646,
+    "lat": 60.198842,
+    "how": "OSM w737833352 (point on the way)",
+    "_source": "OpenStreetMap w737833352 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w881014883",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform 4",
+    "platform 6",
+    "platform 7",
+    "platform H0085",
+    "platform H0086",
+    "platform H0087",
+    "platform H0089",
+    "platform H0090",
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 65.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w881014883 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9332469,
+    "lat": 60.1981219,
+    "how": "OSM w881014883 (point on the way)",
+    "_source": "OpenStreetMap w881014883 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1024229945",
+   "name": null,
+   "osm_level": "3;2",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 15.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1024229945 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9318181,
+    "lat": 60.1986679,
+    "how": "OSM w1024229945 (point on the way)",
+    "_source": "OpenStreetMap w1024229945 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1024229958",
+   "name": null,
+   "osm_level": "2;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 14.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1024229958 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9317859,
+    "lat": 60.1985587,
+    "how": "OSM w1024229958 (point on the way)",
+    "_source": "OpenStreetMap w1024229958 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1024243172",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform 4",
+    "platform 6",
+    "platform 7",
+    "platform H0086",
+    "platform H0087",
+    "platform H0089",
+    "platform H0090",
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 87.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1024243172 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9334243,
+    "lat": 60.198162,
+    "how": "OSM w1024243172 (point on the way)",
+    "_source": "OpenStreetMap w1024243172 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1024814762",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 48.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1024814762 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330915,
+    "lat": 60.1979833,
+    "how": "OSM w1024814762 (point on the way)",
+    "_source": "OpenStreetMap w1024814762 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1024814763",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 32.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1024814763 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326383,
+    "lat": 60.1979878,
+    "how": "OSM w1024814763 (point on the way)",
+    "_source": "OpenStreetMap w1024814763 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134256267",
+   "name": null,
+   "osm_level": "3;0",
+   "between": [
+    "platform 10",
+    "platform 9",
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134256267 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9324297,
+    "lat": 60.199244,
+    "how": "OSM w1134256267 (point on the way)",
+    "_source": "OpenStreetMap w1134256267 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134256270",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 0.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134256270 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326223,
+    "lat": 60.1988801,
+    "how": "OSM w1134256270 (point on the way)",
+    "_source": "OpenStreetMap w1134256270 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134258889",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134258889 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9339579,
+    "lat": 60.1989929,
+    "how": "OSM w1134258889 (point on the way)",
+    "_source": "OpenStreetMap w1134258889 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134258891",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134258891 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336294,
+    "lat": 60.1989523,
+    "how": "OSM w1134258891 (point on the way)",
+    "_source": "OpenStreetMap w1134258891 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134258893",
+   "name": null,
+   "osm_level": "3;0",
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134258893 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329748,
+    "lat": 60.1988768,
+    "how": "OSM w1134258893 (point on the way)",
+    "_source": "OpenStreetMap w1134258893 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134258895",
+   "name": null,
+   "osm_level": "3;0",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 15.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134258895 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326509,
+    "lat": 60.1988326,
+    "how": "OSM w1134258895 (point on the way)",
+    "_source": "OpenStreetMap w1134258895 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134260231",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 16.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134260231 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9322782,
+    "lat": 60.1989487,
+    "how": "OSM w1134260231 (point on the way)",
+    "_source": "OpenStreetMap w1134260231 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134262238",
+   "name": null,
+   "osm_level": "3;4",
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134262238 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336548,
+    "lat": 60.1989256,
+    "how": "OSM w1134262238 (point on the way)",
+    "_source": "OpenStreetMap w1134262238 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134262239",
+   "name": null,
+   "osm_level": "3;4",
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134262239 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330216,
+    "lat": 60.1987436,
+    "how": "OSM w1134262239 (point on the way)",
+    "_source": "OpenStreetMap w1134262239 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134262240",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134262240 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329357,
+    "lat": 60.1988386,
+    "how": "OSM w1134262240 (point on the way)",
+    "_source": "OpenStreetMap w1134262240 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134262241",
+   "name": null,
+   "osm_level": "4;5",
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134262241 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933693,
+    "lat": 60.1989303,
+    "how": "OSM w1134262241 (point on the way)",
+    "_source": "OpenStreetMap w1134262241 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w1134457336",
+   "name": null,
+   "osm_level": "3;2",
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134457336 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9332876,
+    "lat": 60.1989504,
+    "how": "OSM w1134457336 (point on the way)",
+    "_source": "OpenStreetMap w1134457336 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134464063",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 6",
+    "platform H0089"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 10.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134464063 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9334002,
+    "lat": 60.1988035,
+    "how": "OSM w1134464063 (point on the way)",
+    "_source": "OpenStreetMap w1134464063 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134464064",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134464064 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9331573,
+    "lat": 60.1986258,
+    "how": "OSM w1134464064 (point on the way)",
+    "_source": "OpenStreetMap w1134464064 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134520137",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11",
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 19.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134520137 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9319947,
+    "lat": 60.1993426,
+    "how": "OSM w1134520137 (point on the way)",
+    "_source": "OpenStreetMap w1134520137 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134520138",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11",
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 21.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134520138 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9320587,
+    "lat": 60.1991974,
+    "how": "OSM w1134520138 (point on the way)",
+    "_source": "OpenStreetMap w1134520138 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134520139",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11",
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134520139 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9322773,
+    "lat": 60.1991192,
+    "how": "OSM w1134520139 (point on the way)",
+    "_source": "OpenStreetMap w1134520139 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134523407",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134523407 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9322309,
+    "lat": 60.1991136,
+    "how": "OSM w1134523407 (point on the way)",
+    "_source": "OpenStreetMap w1134523407 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134523410",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134523410 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325442,
+    "lat": 60.1987236,
+    "how": "OSM w1134523410 (point on the way)",
+    "_source": "OpenStreetMap w1134523410 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134523411",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 1.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134523411 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325442,
+    "lat": 60.1987236,
+    "how": "OSM w1134523411 (point on the way)",
+    "_source": "OpenStreetMap w1134523411 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1134523412",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134523412 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325518,
+    "lat": 60.1987085,
+    "how": "OSM w1134523412 (point on the way)",
+    "_source": "OpenStreetMap w1134523412 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1134524331",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134524331 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325959,
+    "lat": 60.1988453,
+    "how": "OSM w1134524331 (point on the way)",
+    "_source": "OpenStreetMap w1134524331 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549149",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 11",
+    "platform H0093"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549149 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.93219,
+    "lat": 60.199319,
+    "how": "OSM w1134549149 (point on the way)",
+    "_source": "OpenStreetMap w1134549149 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549152",
+   "name": null,
+   "osm_level": "3;0",
+   "between": [
+    "platform 10",
+    "platform 9",
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549152 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9324872,
+    "lat": 60.1991922,
+    "how": "OSM w1134549152 (point on the way)",
+    "_source": "OpenStreetMap w1134549152 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549156",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 7",
+    "platform 8"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549156 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.932796,
+    "lat": 60.1991864,
+    "how": "OSM w1134549156 (point on the way)",
+    "_source": "OpenStreetMap w1134549156 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549159",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 5",
+    "platform 6"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549159 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9331473,
+    "lat": 60.199229,
+    "how": "OSM w1134549159 (point on the way)",
+    "_source": "OpenStreetMap w1134549159 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549162",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549162 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9335596,
+    "lat": 60.1991175,
+    "how": "OSM w1134549162 (point on the way)",
+    "_source": "OpenStreetMap w1134549162 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549164",
+   "name": null,
+   "osm_level": "0;3",
+   "between": [
+    "platform 1",
+    "platform 2"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 17.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549164 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9338005,
+    "lat": 60.1993034,
+    "how": "OSM w1134549164 (point on the way)",
+    "_source": "OpenStreetMap w1134549164 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134549168",
+   "name": null,
+   "osm_level": "3;0",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 18.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134549168 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9325487,
+    "lat": 60.1989955,
+    "how": "OSM w1134549168 (point on the way)",
+    "_source": "OpenStreetMap w1134549168 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551129",
+   "name": null,
+   "osm_level": "4;3",
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551129 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329992,
+    "lat": 60.1988462,
+    "how": "OSM w1134551129 (point on the way)",
+    "_source": "OpenStreetMap w1134551129 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551130",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551130 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329579,
+    "lat": 60.1987391,
+    "how": "OSM w1134551130 (point on the way)",
+    "_source": "OpenStreetMap w1134551130 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551131",
+   "name": null,
+   "osm_level": "4;5",
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551131 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9337715,
+    "lat": 60.1988362,
+    "how": "OSM w1134551131 (point on the way)",
+    "_source": "OpenStreetMap w1134551131 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551132",
+   "name": null,
+   "osm_level": "4;3",
+   "between": [
+    "platform 3",
+    "platform 4",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 11.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551132 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336773,
+    "lat": 60.1988244,
+    "how": "OSM w1134551132 (point on the way)",
+    "_source": "OpenStreetMap w1134551132 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551134",
+   "name": null,
+   "osm_level": "3;2",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 16.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551134 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9318401,
+    "lat": 60.1986548,
+    "how": "OSM w1134551134 (point on the way)",
+    "_source": "OpenStreetMap w1134551134 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134551135",
+   "name": null,
+   "osm_level": "2;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 14.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134551135 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9315893,
+    "lat": 60.1986466,
+    "how": "OSM w1134551135 (point on the way)",
+    "_source": "OpenStreetMap w1134551135 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134733146",
+   "name": null,
+   "osm_level": "1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134733146 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321657,
+    "lat": 60.1986749,
+    "how": "OSM w1134733146 (point on the way)",
+    "_source": "OpenStreetMap w1134733146 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134733147",
+   "name": null,
+   "osm_level": "1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 12.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134733147 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9323842,
+    "lat": 60.1986425,
+    "how": "OSM w1134733147 (point on the way)",
+    "_source": "OpenStreetMap w1134733147 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1134943373",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": "yes",
+   "length_m": 27.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1134943373 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9324914,
+    "lat": 60.1991469,
+    "how": "OSM w1134943373 (point on the way)",
+    "_source": "OpenStreetMap w1134943373 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1191883529",
+   "name": null,
+   "osm_level": "1",
+   "between": [
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1191883529 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9324375,
+    "lat": 60.1986517,
+    "how": "OSM w1191883529 (point on the way)",
+    "_source": "OpenStreetMap w1191883529 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1195531734",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1195531734 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329156,
+    "lat": 60.1980607,
+    "how": "OSM w1195531734 (point on the way)",
+    "_source": "OpenStreetMap w1195531734 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1205955347",
+   "name": "Pasilansilta",
+   "osm_level": "3",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1205955347 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9341479,
+    "lat": 60.1982482,
+    "how": "OSM w1205955347 (point on the way)",
+    "_source": "OpenStreetMap w1205955347 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1205955355",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1205955355 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.934238,
+    "lat": 60.1982101,
+    "how": "OSM w1205955355 (point on the way)",
+    "_source": "OpenStreetMap w1205955355 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1205955356",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 27.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1205955356 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9343783,
+    "lat": 60.1982222,
+    "how": "OSM w1205955356 (point on the way)",
+    "_source": "OpenStreetMap w1205955356 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1205955358",
+   "name": null,
+   "osm_level": "3",
+   "between": [
+    "platform H0085",
+    "platform H0086",
+    "platform H0087"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1205955358 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9341479,
+    "lat": 60.1982482,
+    "how": "OSM w1205955358 (point on the way)",
+    "_source": "OpenStreetMap w1205955358 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1435844694",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform 7",
+    "platform H0090"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 0.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1435844694 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9330439,
+    "lat": 60.1987366,
+    "how": "OSM w1435844694 (point on the way)",
+    "_source": "OpenStreetMap w1435844694 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1446302872",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 11",
+    "platform 5;5b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 107.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1446302872 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321983,
+    "lat": 60.2012557,
+    "how": "OSM w1446302872 (point on the way)",
+    "_source": "OpenStreetMap w1446302872 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1446302875",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5;5b"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 3.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1446302875 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321841,
+    "lat": 60.2012869,
+    "how": "OSM w1446302875 (point on the way)",
+    "_source": "OpenStreetMap w1446302875 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1447413418",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 0.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1447413418 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.932715,
+    "lat": 60.198698,
+    "how": "OSM w1447413418 (point on the way)",
+    "_source": "OpenStreetMap w1447413418 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1499869390",
+   "name": null,
+   "osm_level": "0",
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1499869390 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326791,
+    "lat": 60.1986799,
+    "how": "OSM w1499869390 (point on the way)",
+    "_source": "OpenStreetMap w1499869390 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018642",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0092",
+    "platform H0093"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6840018642 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9322646,
+    "lat": 60.1991243,
+    "how": "OSM n6840018642",
+    "_source": "OpenStreetMap n6840018642 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018651",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 7",
+    "platform 8",
+    "platform H0090"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6840018651 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9329156,
+    "lat": 60.1988934,
+    "how": "OSM n6840018651",
+    "_source": "OpenStreetMap n6840018651 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018656",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 5",
+    "platform 6",
+    "platform H0089"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6840018656 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.933291,
+    "lat": 60.1989414,
+    "how": "OSM n6840018656",
+    "_source": "OpenStreetMap n6840018656 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018661",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 3",
+    "platform 4"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6840018661 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9336356,
+    "lat": 60.19898,
+    "how": "OSM n6840018661",
+    "_source": "OpenStreetMap n6840018661 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018666",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2",
+    "platform H0085",
+    "platform H0086"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6840018666 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9339391,
+    "lat": 60.1990166,
+    "how": "OSM n6840018666",
+    "_source": "OpenStreetMap n6840018666 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6851659060",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0085"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n6851659060 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9342854,
+    "lat": 60.1987758,
+    "how": "OSM n6851659060",
+    "_source": "OpenStreetMap n6851659060 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9444685873",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n9444685873 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9321776,
+    "lat": 60.198537,
+    "how": "OSM n9444685873",
+    "_source": "OpenStreetMap n9444685873 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10574546644",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform H0091",
+    "platform H0092"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n10574546644 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 24.9326161,
+    "lat": 60.1988794,
+    "how": "OSM n10574546644",
+    "_source": "OpenStreetMap n10574546644 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Pasilansilta side entrance",
+   "street": "Pasilansilta",
+   "level": "3",
+   "where": "south side of the station hall; VR's assistance point is close to it",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Opastinsilta entrance",
+   "street": "Opastinsilta",
+   "level": "3",
+   "where": "OSM main entrance n6908493539",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Veturitie entrance ('Veturitie sisäänkäynti')",
+   "street": "Veturitie",
+   "level": "0",
+   "where": "west side; OSM n10576816488; also 'Raide 11 Veturitien yhteys' stair entrance n10576786000 to track 11",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Ratapihantie entrances",
+   "street": "Ratapihantie",
+   "level": "0",
+   "where": "east side (VR address Ratapihantie 6); OSM n6840029186, n10577024872/75/76",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": null,
+   "osm_id": "n312831145",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n312831145 (already in OSM)",
+   "position": {
+    "lon": 24.9331586,
+    "lat": 60.1992634,
+    "how": "OSM n312831145",
+    "_source": "OpenStreetMap n312831145 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n3467673798",
+   "street": "Opastinsilta",
+   "street_how": "nearest named street, 14.5 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n3467673798 (already in OSM)",
+   "position": {
+    "lon": 24.9340646,
+    "lat": 60.198842,
+    "how": "OSM n3467673798",
+    "_source": "OpenStreetMap n3467673798 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6817208063",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6817208063 (already in OSM)",
+   "position": {
+    "lon": 24.9329554,
+    "lat": 60.1985178,
+    "how": "OSM n6817208063",
+    "_source": "OpenStreetMap n6817208063 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6817208065",
+   "street": "Opastinsilta",
+   "street_how": "nearest named street, 27.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6817208065 (already in OSM)",
+   "position": {
+    "lon": 24.9339725,
+    "lat": 60.1986364,
+    "how": "OSM n6817208065",
+    "_source": "OpenStreetMap n6817208065 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6817231385",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6817231385 (already in OSM)",
+   "position": {
+    "lon": 24.9335897,
+    "lat": 60.1991207,
+    "how": "OSM n6817231385",
+    "_source": "OpenStreetMap n6817231385 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6817231386",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6817231386 (already in OSM)",
+   "position": {
+    "lon": 24.9328986,
+    "lat": 60.1990413,
+    "how": "OSM n6817231386",
+    "_source": "OpenStreetMap n6817231386 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6817231387",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6817231387 (already in OSM)",
+   "position": {
+    "lon": 24.933243,
+    "lat": 60.1990803,
+    "how": "OSM n6817231387",
+    "_source": "OpenStreetMap n6817231387 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6840018676",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 21.5 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6840018676 (already in OSM)",
+   "position": {
+    "lon": 24.9322333,
+    "lat": 60.1991621,
+    "how": "OSM n6840018676",
+    "_source": "OpenStreetMap n6840018676 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6840018682",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 35.6 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6840018682 (already in OSM)",
+   "position": {
+    "lon": 24.9325785,
+    "lat": 60.198999,
+    "how": "OSM n6840018682",
+    "_source": "OpenStreetMap n6840018682 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6840029186",
+   "street": "Ratapihantie",
+   "street_how": "nearest named street, 28.1 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6840029186 (already in OSM)",
+   "position": {
+    "lon": 24.9339112,
+    "lat": 60.1991584,
+    "how": "OSM n6840029186",
+    "_source": "OpenStreetMap n6840029186 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6881448305",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 34.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6881448305 (already in OSM)",
+   "position": {
+    "lon": 24.9327099,
+    "lat": 60.1986836,
+    "how": "OSM n6881448305",
+    "_source": "OpenStreetMap n6881448305 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n6908493539",
+   "street": "Opastinsilta",
+   "street_how": "nearest named street, 7.4 m",
+   "level": "3",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n6908493539 (already in OSM)",
+   "position": {
+    "lon": 24.9342477,
+    "lat": 60.1988169,
+    "how": "OSM n6908493539",
+    "_source": "OpenStreetMap n6908493539 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446509",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n7651446509 (already in OSM)",
+   "position": {
+    "lon": 24.9361483,
+    "lat": 60.1998333,
+    "how": "OSM n7651446509",
+    "_source": "OpenStreetMap n7651446509 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446511",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "secondary",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7651446511 (already in OSM)",
+   "position": {
+    "lon": 24.9363146,
+    "lat": 60.199888,
+    "how": "OSM n7651446511",
+    "_source": "OpenStreetMap n7651446511 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446514",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "secondary",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7651446514 (already in OSM)",
+   "position": {
+    "lon": 24.9362583,
+    "lat": 60.1999831,
+    "how": "OSM n7651446514",
+    "_source": "OpenStreetMap n7651446514 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446517",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": null,
+   "_source": "OSM n7651446517 (already in OSM)",
+   "position": {
+    "lon": 24.9358945,
+    "lat": 60.1999416,
+    "how": "OSM n7651446517",
+    "_source": "OpenStreetMap n7651446517 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446519",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7651446519 (already in OSM)",
+   "position": {
+    "lon": 24.9359011,
+    "lat": 60.1998342,
+    "how": "OSM n7651446519",
+    "_source": "OpenStreetMap n7651446519 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446521",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "secondary",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7651446521 (already in OSM)",
+   "position": {
+    "lon": 24.9359221,
+    "lat": 60.1998294,
+    "how": "OSM n7651446521",
+    "_source": "OpenStreetMap n7651446521 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7651446530",
+   "street": "Veturitori",
+   "street_how": "addr:street",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7651446530 (already in OSM)",
+   "position": {
+    "lon": 24.9359556,
+    "lat": 60.1998333,
+    "how": "OSM n7651446530",
+    "_source": "OpenStreetMap n7651446530 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7656184979",
+   "street": "Veturimiehenkatu",
+   "street_how": "nearest named street, 5.9 m",
+   "level": null,
+   "kind": "secondary",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7656184979 (already in OSM)",
+   "position": {
+    "lon": 24.9355171,
+    "lat": 60.1999754,
+    "how": "OSM n7656184979",
+    "_source": "OpenStreetMap n7656184979 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7656184980",
+   "street": "Veturimiehenkatu",
+   "street_how": "nearest named street, 6.0 m",
+   "level": null,
+   "kind": "service",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7656184980 (already in OSM)",
+   "position": {
+    "lon": 24.9354864,
+    "lat": 60.2000407,
+    "how": "OSM n7656184980",
+    "_source": "OpenStreetMap n7656184980 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7656184981",
+   "street": "Veturimiehenkatu",
+   "street_how": "nearest named street, 6.2 m",
+   "level": null,
+   "kind": "secondary",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7656184981 (already in OSM)",
+   "position": {
+    "lon": 24.9354594,
+    "lat": 60.2000982,
+    "how": "OSM n7656184981",
+    "_source": "OpenStreetMap n7656184981 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n7656184982",
+   "street": "Veturimiehenkatu",
+   "street_how": "nearest named street, 6.2 m",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n7656184982 (already in OSM)",
+   "position": {
+    "lon": 24.9354442,
+    "lat": 60.2001303,
+    "how": "OSM n7656184982",
+    "_source": "OpenStreetMap n7656184982 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9439882268",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 1.3 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n9439882268 (already in OSM)",
+   "position": {
+    "lon": 24.9321007,
+    "lat": 60.1982213,
+    "how": "OSM n9439882268",
+    "_source": "OpenStreetMap n9439882268 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576785994",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 13.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576785994 (already in OSM)",
+   "position": {
+    "lon": 24.9318369,
+    "lat": 60.1995655,
+    "how": "OSM n10576785994",
+    "_source": "OpenStreetMap n10576785994 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576785996",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 12.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576785996 (already in OSM)",
+   "position": {
+    "lon": 24.9318867,
+    "lat": 60.1994604,
+    "how": "OSM n10576785996",
+    "_source": "OpenStreetMap n10576785996 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576785997",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 11.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576785997 (already in OSM)",
+   "position": {
+    "lon": 24.9319442,
+    "lat": 60.1993364,
+    "how": "OSM n10576785997",
+    "_source": "OpenStreetMap n10576785997 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Raide 11 Veturitien yhteys",
+   "osm_id": "n10576786000",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 10.2 m",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n10576786000 (already in OSM)",
+   "position": {
+    "lon": 24.9320467,
+    "lat": 60.1991162,
+    "how": "OSM n10576786000",
+    "_source": "OpenStreetMap n10576786000 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Veturitie sisäänkäynti",
+   "osm_id": "n10576816488",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 9.7 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576816488 (already in OSM)",
+   "position": {
+    "lon": 24.9322545,
+    "lat": 60.1986914,
+    "how": "OSM n10576816488",
+    "_source": "OpenStreetMap n10576816488 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576816495",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 9.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576816495 (already in OSM)",
+   "position": {
+    "lon": 24.9322169,
+    "lat": 60.1987706,
+    "how": "OSM n10576816495",
+    "_source": "OpenStreetMap n10576816495 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576816496",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 10.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576816496 (already in OSM)",
+   "position": {
+    "lon": 24.9321718,
+    "lat": 60.1988658,
+    "how": "OSM n10576816496",
+    "_source": "OpenStreetMap n10576816496 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576976609",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576976609 (already in OSM)",
+   "position": {
+    "lon": 24.9334714,
+    "lat": 60.1993022,
+    "how": "OSM n10576976609",
+    "_source": "OpenStreetMap n10576976609 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576976625",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576976625 (already in OSM)",
+   "position": {
+    "lon": 24.9327801,
+    "lat": 60.1992175,
+    "how": "OSM n10576976625",
+    "_source": "OpenStreetMap n10576976625 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10576976636",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10576976636 (already in OSM)",
+   "position": {
+    "lon": 24.9335006,
+    "lat": 60.1993058,
+    "how": "OSM n10576976636",
+    "_source": "OpenStreetMap n10576976636 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577000844",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577000844 (already in OSM)",
+   "position": {
+    "lon": 24.9328077,
+    "lat": 60.1992208,
+    "how": "OSM n10577000844",
+    "_source": "OpenStreetMap n10577000844 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577000851",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 35.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577000851 (already in OSM)",
+   "position": {
+    "lon": 24.9323663,
+    "lat": 60.199376,
+    "how": "OSM n10577000851",
+    "_source": "OpenStreetMap n10577000851 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577000852",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 22.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577000852 (already in OSM)",
+   "position": {
+    "lon": 24.9321451,
+    "lat": 60.1993515,
+    "how": "OSM n10577000852",
+    "_source": "OpenStreetMap n10577000852 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024857",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 23.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024857 (already in OSM)",
+   "position": {
+    "lon": 24.9322603,
+    "lat": 60.1991652,
+    "how": "OSM n10577024857",
+    "_source": "OpenStreetMap n10577024857 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024858",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 24.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024858 (already in OSM)",
+   "position": {
+    "lon": 24.9321729,
+    "lat": 60.199355,
+    "how": "OSM n10577024858",
+    "_source": "OpenStreetMap n10577024858 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024863",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 36.8 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024863 (already in OSM)",
+   "position": {
+    "lon": 24.9323982,
+    "lat": 60.19938,
+    "how": "OSM n10577024863",
+    "_source": "OpenStreetMap n10577024863 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024865",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024865 (already in OSM)",
+   "position": {
+    "lon": 24.9328704,
+    "lat": 60.1990379,
+    "how": "OSM n10577024865",
+    "_source": "OpenStreetMap n10577024865 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024867",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024867 (already in OSM)",
+   "position": {
+    "lon": 24.9331318,
+    "lat": 60.1992598,
+    "how": "OSM n10577024867",
+    "_source": "OpenStreetMap n10577024867 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024868",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024868 (already in OSM)",
+   "position": {
+    "lon": 24.9332176,
+    "lat": 60.1990781,
+    "how": "OSM n10577024868",
+    "_source": "OpenStreetMap n10577024868 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024870",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024870 (already in OSM)",
+   "position": {
+    "lon": 24.9335596,
+    "lat": 60.1991175,
+    "how": "OSM n10577024870",
+    "_source": "OpenStreetMap n10577024870 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024872",
+   "street": "Ratapihantie",
+   "street_how": "nearest named street, 30.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024872 (already in OSM)",
+   "position": {
+    "lon": 24.9338745,
+    "lat": 60.199154,
+    "how": "OSM n10577024872",
+    "_source": "OpenStreetMap n10577024872 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024875",
+   "street": "Ratapihantie",
+   "street_how": "nearest named street, 30.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024875 (already in OSM)",
+   "position": {
+    "lon": 24.9337812,
+    "lat": 60.1993434,
+    "how": "OSM n10577024875",
+    "_source": "OpenStreetMap n10577024875 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024876",
+   "street": "Ratapihantie",
+   "street_how": "nearest named street, 28.0 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024876 (already in OSM)",
+   "position": {
+    "lon": 24.9338213,
+    "lat": 60.1993481,
+    "how": "OSM n10577024876",
+    "_source": "OpenStreetMap n10577024876 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024880",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 35.9 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024880 (already in OSM)",
+   "position": {
+    "lon": 24.9324864,
+    "lat": 60.1991915,
+    "how": "OSM n10577024880",
+    "_source": "OpenStreetMap n10577024880 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10577024881",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 34.2 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10577024881 (already in OSM)",
+   "position": {
+    "lon": 24.9324564,
+    "lat": 60.1991881,
+    "how": "OSM n10577024881",
+    "_source": "OpenStreetMap n10577024881 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347286",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347286 (already in OSM)",
+   "position": {
+    "lon": 24.9330049,
+    "lat": 60.1985236,
+    "how": "OSM n10578347286",
+    "_source": "OpenStreetMap n10578347286 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347287",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347287 (already in OSM)",
+   "position": {
+    "lon": 24.9330651,
+    "lat": 60.1985306,
+    "how": "OSM n10578347287",
+    "_source": "OpenStreetMap n10578347287 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347288",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347288 (already in OSM)",
+   "position": {
+    "lon": 24.9329067,
+    "lat": 60.1985123,
+    "how": "OSM n10578347288",
+    "_source": "OpenStreetMap n10578347288 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347289",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 37.3 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347289 (already in OSM)",
+   "position": {
+    "lon": 24.9328568,
+    "lat": 60.1985067,
+    "how": "OSM n10578347289",
+    "_source": "OpenStreetMap n10578347289 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347290",
+   "street": "Opastinsilta",
+   "street_how": "nearest named street, 28.4 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347290 (already in OSM)",
+   "position": {
+    "lon": 24.9339461,
+    "lat": 60.1986333,
+    "how": "OSM n10578347290",
+    "_source": "OpenStreetMap n10578347290 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n10578347291",
+   "street": "Opastinsilta",
+   "street_how": "nearest named street, 25.6 m",
+   "level": null,
+   "kind": "yes",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n10578347291 (already in OSM)",
+   "position": {
+    "lon": 24.9339996,
+    "lat": 60.1986396,
+    "how": "OSM n10578347291",
+    "_source": "OpenStreetMap n10578347291 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n11175296429",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 5.3 m",
+   "level": null,
+   "kind": "staircase",
+   "wheelchair": "no",
+   "door": null,
+   "_source": "OSM n11175296429 (already in OSM)",
+   "position": {
+    "lon": 24.9324546,
+    "lat": 60.1980237,
+    "how": "OSM n11175296429",
+    "_source": "OpenStreetMap n11175296429 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13279898237",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 35.9 m",
+   "level": "3",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13279898237 (already in OSM)",
+   "position": {
+    "lon": 24.9324875,
+    "lat": 60.1991916,
+    "how": "OSM n13279898237",
+    "_source": "OpenStreetMap n13279898237 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n13279898238",
+   "street": "Veturitie",
+   "street_how": "nearest named street, 34.2 m",
+   "level": "3",
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n13279898238 (already in OSM)",
+   "position": {
+    "lon": 24.9324569,
+    "lat": 60.1991881,
+    "how": "OSM n13279898238",
+    "_source": "OpenStreetMap n13279898238 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station hall / waiting room (Asemahalli)",
+   "where": "above the tracks, joined to Mall of Tripla",
+   "level_per_plan": "Tripla 4th floor",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Tripla Asema Itä",
+   "osm_id": "n6909741008",
+   "where": "station hall, east side; shop unit A-4074 (Veturitie 11)",
+   "level_per_plan": "Tripla 4th floor (unit A-4074; OSM level 3)",
+   "opening_hours": "Mo-Th 06:00-19:30; Fr 06:00-20:00; Sa 08:00-19:30; Su 08:30-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Match with OSM by hours (identical). Floor inferred from the unit number A-4xxx and OSM level 3 = '4. krs'; not stated by the shop.",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-ita-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 24.9340656,
+     "lat": 60.1988578,
+     "osm_id": "n6909741008",
+     "osm_level": "3",
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n6909741008",
+     "_source": "OpenStreetMap n6909741008 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 24.9326319,
+     "lat": 60.1987462,
+     "osm_id": "n7054828649",
+     "osm_level": "2",
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n7054828649",
+     "_source": "OpenStreetMap n7054828649 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled",
+   "position": {
+    "lon": 24.9340656,
+    "lat": 60.1988578,
+    "osm_id": "n6909741008",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6909741008",
+    "_source": "OpenStreetMap n6909741008 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Tripla Asema Länsi",
+   "osm_id": "n7054828649",
+   "where": "station hall, west side; shop unit A-4040 (Veturitie 11)",
+   "level_per_plan": "Tripla 4th floor by unit number A-4040 (OSM tags level 2 — conflict)",
+   "opening_hours": "Mo-Th 05:30-22:30; Fr 05:30-23:30; Sa,Su 07:30-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Match with OSM by hours (Mo-Th/Fr identical).",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-lansi-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 24.9340656,
+     "lat": 60.1988578,
+     "osm_id": "n6909741008",
+     "osm_level": "3",
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n6909741008",
+     "_source": "OpenStreetMap n6909741008 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 24.9326319,
+     "lat": 60.1987462,
+     "osm_id": "n7054828649",
+     "osm_level": "2",
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n7054828649",
+     "_source": "OpenStreetMap n7054828649 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 2 places with this name at the station; which one this entry is isn't settled",
+   "position": {
+    "lon": 24.9326319,
+    "lat": 60.1987462,
+    "osm_id": "n7054828649",
+    "osm_level": "2",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n7054828649",
+    "_source": "OpenStreetMap n7054828649 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pharmacy",
+   "name": "Pasilan Apteekki",
+   "osm_id": "n3635432312",
+   "where": "station hall level; VR: the luggage lockers are on the 4th floor next to Pasila Pharmacy, near tracks 9–10",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-22:00; Sa,Su 09:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9340409,
+    "lat": 60.1989122,
+    "osm_id": "n3635432312",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n3635432312",
+    "_source": "OpenStreetMap n3635432312 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "supermarket",
+   "name": "Alepa",
+   "osm_id": "n6888053756",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9326944,
+    "lat": 60.1984573,
+    "osm_id": "n6888053756",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.6,
+    "how": "OSM node n6888053756",
+    "_source": "OpenStreetMap n6888053756 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "K-Market",
+   "osm_id": "n6888053757",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 06:00-22:00; Sa,Su 09:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9342412,
+    "lat": 60.1986427,
+    "osm_id": "n6888053757",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.9,
+    "how": "OSM node n6888053757",
+    "_source": "OpenStreetMap n6888053757 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Hesburger",
+   "osm_id": "n6938652927",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 00:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM gives 00:00-00:00 every day (read as 24 h).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9331242,
+    "lat": 60.1986063,
+    "osm_id": "n6938652927",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6938652927",
+    "_source": "OpenStreetMap n6938652927 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "osm_id": "n12182734894",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 07:00-01:00; Fr 07:00-24:00; Sa 00:00-24:00; Su 00:00-01:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours look inconsistent; check on the shop's site.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9335889,
+    "lat": 60.1986766,
+    "osm_id": "n12182734894",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.6,
+    "how": "OSM node n12182734894",
+    "_source": "OpenStreetMap n12182734894 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "KFC",
+   "osm_id": "n14090237169",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 09:00-24:00; Fr,Sa 09:00-04:00; Su 10:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9339893,
+    "lat": 60.1992612,
+    "osm_id": "n14090237169",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.8,
+    "how": "OSM node n14090237169",
+    "_source": "OpenStreetMap n14090237169 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "osm_id": "n7054844293",
+   "where": "in the station building (OSM, no level)",
+   "level_per_plan": "not given",
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9337593,
+    "lat": 60.1989225,
+    "osm_id": "n7054844293",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.4,
+    "how": "OSM node n7054844293",
+    "_source": "OpenStreetMap n7054844293 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Picnic",
+   "osm_id": "n8977942412",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-21:00; Su 09:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9327376,
+    "lat": 60.198976,
+    "osm_id": "n8977942412",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.0,
+    "how": "OSM node n8977942412",
+    "_source": "OpenStreetMap n8977942412 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Gateau",
+   "osm_id": "n6987659787",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-19:00; Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.933287,
+    "lat": 60.1988535,
+    "osm_id": "n6987659787",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6987659787",
+    "_source": "OpenStreetMap n6987659787 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Bär Bar",
+   "osm_id": "n6938652928",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 06:30-22:00; Sa,Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9333005,
+    "lat": 60.1986284,
+    "osm_id": "n6938652928",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.5,
+    "how": "OSM node n6938652928",
+    "_source": "OpenStreetMap n6938652928 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "beverages",
+   "name": "Jungle Juice Bar 4. krs",
+   "osm_id": "n6987636538",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3); OSM name says '4. krs'",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9333887,
+    "lat": 60.1988492,
+    "osm_id": "n6987636538",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6987636538",
+    "_source": "OpenStreetMap n6987636538 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "bar",
+   "name": "Bar Pikajuna",
+   "osm_id": "n8977942409",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 10:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9337478,
+    "lat": 60.199097,
+    "osm_id": "n8977942409",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.2,
+    "how": "OSM node n8977942409",
+    "_source": "OpenStreetMap n8977942409 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "pub",
+   "name": "Oluthuone Ratamo",
+   "osm_id": "n6938652926",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 10:00-24:00; Fr 10:00-02:00; Sa 10:00-01:00; Su 10:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9332466,
+    "lat": 60.1985811,
+    "osm_id": "n6938652926",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.3,
+    "how": "OSM node n6938652926",
+    "_source": "OpenStreetMap n6938652926 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "tea",
+   "name": "QualiTea",
+   "osm_id": "n6938652929",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9334682,
+    "lat": 60.1986247,
+    "osm_id": "n6938652929",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6938652929",
+    "_source": "OpenStreetMap n6938652929 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "florist",
+   "name": "Kaivokukka Tripla",
+   "osm_id": "n6938652930",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9337375,
+    "lat": 60.1986397,
+    "osm_id": "n6938652930",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6938652930",
+    "_source": "OpenStreetMap n6938652930 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "butcher",
+   "name": "Riipisen riistaherkut",
+   "osm_id": "n8977942411",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Sa 08:00-21:00; Su 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.933105,
+    "lat": 60.1990194,
+    "osm_id": "n8977942411",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n8977942411",
+    "_source": "OpenStreetMap n8977942411 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "photo",
+   "name": "Tunnin kuva",
+   "osm_id": "n6936787996",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:00-20:00; Su 11:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9337226,
+    "lat": 60.1989992,
+    "osm_id": "n6936787996",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.3,
+    "how": "OSM node n6936787996",
+    "_source": "OpenStreetMap n6936787996 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parcel_locker",
+   "name": "Posti",
+   "osm_id": "n13363760901",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9322887,
+    "lat": 60.1991565,
+    "osm_id": "n13363760901",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.3,
+    "how": "OSM node n13363760901",
+    "_source": "OpenStreetMap n13363760901 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "atm",
+   "name": "Nosto (3 machines)",
+   "osm_ids": [
+    "n11545069651",
+    "n11545069652",
+    "n11545069653"
+   ],
+   "where": "in the station building (OSM, no level)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position_candidates": [
+    {
+     "lon": 24.9333169,
+     "lat": 60.1989661,
+     "osm_id": "n11545069651",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n11545069651",
+     "_source": "OpenStreetMap n11545069651 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 24.9333187,
+     "lat": 60.1989617,
+     "osm_id": "n11545069652",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n11545069652",
+     "_source": "OpenStreetMap n11545069652 (ODbL), read 2026-10-30"
+    },
+    {
+     "lon": 24.9333208,
+     "lat": 60.1989562,
+     "osm_id": "n11545069653",
+     "osm_level": null,
+     "in_station_building": true,
+     "to_nearest_platform_m": 0.0,
+     "how": "OSM node n11545069653",
+     "_source": "OpenStreetMap n11545069653 (ODbL), read 2026-10-30"
+    }
+   ],
+   "position_note": "OSM has 3 places with this name at the station; which one this entry is isn't settled"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet",
+   "osm_id": "n7054579577",
+   "where": "in the station building (OSM, no level, no fee tag)",
+   "note": "VR lists a toilet among Pasila's services; no fee or location given.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9324106,
+    "lat": 60.198896,
+    "osm_id": "n7054579577",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.0,
+    "how": "OSM node n7054579577",
+    "_source": "OpenStreetMap n7054579577 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavarasäilytys Asemahalli 4. krs",
+   "osm_id": "n10577666932",
+   "where": "4th floor of the shopping centre, next to Pasila Pharmacy and near tracks 9–10",
+   "level_per_plan": "Tripla 4th floor (OSM node tagged level 0 — conflict)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9339472,
+    "lat": 60.1989543,
+    "osm_id": "n10577666932",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n10577666932",
+    "_source": "OpenStreetMap n10577666932 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR and HSL ticket machines",
+   "osm_ids": [
+    "n7054579576",
+    "n7054579575"
+   ],
+   "where": "in the station building (OSM)",
+   "note": "VR: no VR service point at Pasila.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "service_point",
+   "name": "HSL Palvelupiste",
+   "osm_id": "n4625883091",
+   "where": "in the station building, OSM level 4.5 (above the station hall)",
+   "opening_hours": "Mo-Fr 08:30-18:00; Sa 09:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30",
+   "position": {
+    "lon": 24.9337897,
+    "lat": 60.1989695,
+    "osm_id": "n4625883091",
+    "osm_level": "4.5",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.2,
+    "how": "OSM node n4625883091",
+    "_source": "OpenStreetMap n4625883091 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR assistance point",
+   "where": "close to the entrance on the Pasilansilta side; book on 0800 188 822",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Pasilan asema taxi",
+   "osm_id": "w1134266686",
+   "where": "OSM level 3 (bridge/deck level), outside the station; VR: Lähitaksi 10% discount with train ticket",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30",
+   "position": {
+    "lon": 24.933368,
+    "lat": 60.1983923,
+    "osm_id": "w1134266686",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.0,
+    "how": "representative point of the OSM area w1134266686",
+    "_source": "OpenStreetMap w1134266686 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Triplaparkki",
+   "where": "Mall of Tripla car park, entry from Firdonkatu or Pasilan tornikuja",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "vending=public_transport_tickets",
+   "name": "HSL Palvelupiste",
+   "osm_id": "n4625883091",
+   "osm_level": "4.5",
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:30-18:00, Sa 09:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n4625883091 (read 2026-10-30)",
+   "position": {
+    "lon": 24.9337897,
+    "lat": 60.1989695,
+    "osm_id": "n4625883091",
+    "osm_level": "4.5",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.2,
+    "how": "OSM node n4625883091",
+    "_source": "OpenStreetMap n4625883091 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n7054579577",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n7054579577 (read 2026-10-30)",
+   "position": {
+    "lon": 24.9324106,
+    "lat": 60.198896,
+    "osm_id": "n7054579577",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.0,
+    "how": "OSM node n7054579577",
+    "_source": "OpenStreetMap n7054579577 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavarasäilytys Asemahalli 4. krs",
+   "osm_id": "n10577666932",
+   "osm_level": "0",
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n10577666932 (read 2026-10-30)",
+   "position": {
+    "lon": 24.9339472,
+    "lat": 60.1989543,
+    "osm_id": "n10577666932",
+    "osm_level": "0",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n10577666932",
+    "_source": "OpenStreetMap n10577666932 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "restaurant",
+   "name": "Rauhankahvila Fredrika",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-13:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://rauhankahvila.fi/",
+   "position": {
+    "lon": 24.9360668,
+    "lat": 60.1998398,
+    "osm_id": "n75795843",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 131.6,
+    "how": "OSM node n75795843",
+    "_source": "OpenStreetMap n75795843 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n75795843 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Ravintola Vaunu",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 10:30-13:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://jk-kitchen.fi/vaunu/",
+   "position": {
+    "lon": 24.9353101,
+    "lat": 60.1999512,
+    "osm_id": "n1665559316",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 93.6,
+    "how": "OSM node n1665559316",
+    "_source": "OpenStreetMap n1665559316 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1665559316 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "Alepa",
+   "brand": "Alepa",
+   "cuisine": null,
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.s-kanava.fi/toimipaikka/alepa-tripla/726026011",
+   "position": {
+    "lon": 24.9326944,
+    "lat": 60.1984573,
+    "osm_id": "n6888053756",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.6,
+    "how": "OSM node n6888053756",
+    "_source": "OpenStreetMap n6888053756 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6888053756 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "K-Market",
+   "brand": "K-Market",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 06:00-22:00; Sa-Su 09:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.k-ruoka.fi/kauppa/k-market-pasilan-asema",
+   "position": {
+    "lon": 24.9342412,
+    "lat": 60.1986427,
+    "osm_id": "n6888053757",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.9,
+    "how": "OSM node n6888053757",
+    "_source": "OpenStreetMap n6888053757 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6888053757 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "photo",
+   "name": "Tunnin kuva",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:00-20:00; Su 11:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9337226,
+    "lat": 60.1989992,
+    "osm_id": "n6936787996",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 1.3,
+    "how": "OSM node n6936787996",
+    "_source": "OpenStreetMap n6936787996 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6936787996 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "tea",
+   "name": "QualiTea",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://qitea.fi/",
+   "position": {
+    "lon": 24.9334682,
+    "lat": 60.1986247,
+    "osm_id": "n6938652929",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6938652929",
+    "_source": "OpenStreetMap n6938652929 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6938652929 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Kaivokukka Tripla",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.kaivokukka.fi/kukkakaupat#malloftripla",
+   "position": {
+    "lon": 24.9337375,
+    "lat": 60.1986397,
+    "osm_id": "n6938652930",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6938652930",
+    "_source": "OpenStreetMap n6938652930 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6938652930 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Brokadi Tripla",
+   "brand": null,
+   "cuisine": "chinese",
+   "opening_hours": "Mo-Sa 10:30-21:00, Sa,Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://brokadi.com/",
+   "position": {
+    "lon": 24.9329152,
+    "lat": 60.1989466,
+    "osm_id": "n6977655469",
+    "osm_level": "3.5",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6977655469",
+    "_source": "OpenStreetMap n6977655469 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6977655469 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "beverages",
+   "name": "Jungle Juice Bar 4. krs",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9333887,
+    "lat": 60.1988492,
+    "osm_id": "n6987636538",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 0.0,
+    "how": "OSM node n6987636538",
+    "_source": "OpenStreetMap n6987636538 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n6987636538 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Arnolds",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9323079,
+    "lat": 60.1987233,
+    "osm_id": "n7054853570",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.3,
+    "how": "OSM node n7054853570",
+    "_source": "OpenStreetMap n7054853570 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7054853570 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "SIS. Deli+Café",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-21:00; Su 08:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9323781,
+    "lat": 60.1985931,
+    "osm_id": "n7054853571",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 17.5,
+    "how": "OSM node n7054853571",
+    "_source": "OpenStreetMap n7054853571 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7054853571 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Delhi Rasoi Tripla",
+   "brand": null,
+   "cuisine": "indian",
+   "opening_hours": "Mo-Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.delhirasoi.fi",
+   "position": {
+    "lon": 24.9316179,
+    "lat": 60.1989894,
+    "osm_id": "n7063273821",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 33.8,
+    "how": "OSM node n7063273821",
+    "_source": "OpenStreetMap n7063273821 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7063273821 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Teppanyaki",
+   "brand": null,
+   "cuisine": "sushi",
+   "opening_hours": "Mo-Fr 10:30-21:00; Sa 11:00-21:00; Su 12:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9337543,
+    "lat": 60.1990693,
+    "osm_id": "n7820604205",
+    "osm_level": "4.5",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.8,
+    "how": "OSM node n7820604205",
+    "_source": "OpenStreetMap n7820604205 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n7820604205 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "butcher",
+   "name": "Riipisen riistaherkut",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 08:00-21:00; Su 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.riipisen.fi/category/36/myymala-helsinki",
+   "position": {
+    "lon": 24.933105,
+    "lat": 60.1990194,
+    "osm_id": "n8977942411",
+    "osm_level": "3",
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.1,
+    "how": "OSM node n8977942411",
+    "_source": "OpenStreetMap n8977942411 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8977942411 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Specsavers",
+   "brand": "Specsavers",
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.specsavers.fi/liikehaku/helsinki-tripla",
+   "position": {
+    "lon": 24.9326128,
+    "lat": 60.1986905,
+    "osm_id": "n9015171079",
+    "osm_level": "1",
+    "in_station_building": true,
+    "to_nearest_platform_m": 2.0,
+    "how": "OSM node n9015171079",
+    "_source": "OpenStreetMap n9015171079 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9015171079 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "storage_rental",
+   "name": "Matkatavarasäilytys Veturitie 1.krs",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 24.9323778,
+    "lat": 60.1987161,
+    "osm_id": "n10576816499",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 13.8,
+    "how": "OSM node n10576816499",
+    "_source": "OpenStreetMap n10576816499 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10576816499 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Candytown",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 07:00-22:00; Su 09:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9328557,
+    "lat": 60.1988148,
+    "osm_id": "n10577656167",
+    "osm_level": "4",
+    "in_station_building": true,
+    "to_nearest_platform_m": 3.2,
+    "how": "OSM node n10577656167",
+    "_source": "OpenStreetMap n10577656167 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10577656167 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Brokadi Tripla",
+   "brand": null,
+   "cuisine": "chinese",
+   "opening_hours": "Mo-Fr 10:30-21:00; Sa,Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9325023,
+    "lat": 60.1988229,
+    "osm_id": "n10577675571",
+    "osm_level": "4.5",
+    "in_station_building": true,
+    "to_nearest_platform_m": 4.0,
+    "how": "OSM node n10577675571",
+    "_source": "OpenStreetMap n10577675571 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10577675571 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Scandia Rent",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 24.9321246,
+    "lat": 60.198308,
+    "osm_id": "n10578487664",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 39.5,
+    "how": "OSM node n10578487664",
+    "_source": "OpenStreetMap n10578487664 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n10578487664 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bureau_de_change",
+   "name": "Change Group",
+   "brand": "Change Group",
+   "cuisine": null,
+   "opening_hours": "Mo-Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9322101,
+    "lat": 60.1985462,
+    "osm_id": "n11219554883",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 27.9,
+    "how": "OSM node n11219554883",
+    "_source": "OpenStreetMap n11219554883 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11219554883 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "DNA",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9317275,
+    "lat": 60.1988751,
+    "osm_id": "n11966331209",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 35.4,
+    "how": "OSM node n11966331209",
+    "_source": "OpenStreetMap n11966331209 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966331209 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "optician",
+   "name": "Synsam",
+   "brand": "Synsam",
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9319086,
+    "lat": 60.1988072,
+    "osm_id": "n11966340412",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 35.5,
+    "how": "OSM node n11966340412",
+    "_source": "OpenStreetMap n11966340412 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966340412 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Aleksi 13",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 24.9319295,
+    "lat": 60.198555,
+    "osm_id": "n11966347720",
+    "osm_level": "1",
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.6,
+    "how": "OSM node n11966347720",
+    "_source": "OpenStreetMap n11966347720 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966347720 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Fonum",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9320649,
+    "lat": 60.1987673,
+    "osm_id": "n11966353301",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 29.0,
+    "how": "OSM node n11966353301",
+    "_source": "OpenStreetMap n11966353301 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966353301 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "H&M",
+   "brand": "H&M",
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.931741,
+    "lat": 60.1987629,
+    "osm_id": "n11966354640",
+    "osm_level": "1;2",
+    "in_station_building": false,
+    "to_nearest_platform_m": 44.5,
+    "how": "OSM node n11966354640",
+    "_source": "OpenStreetMap n11966354640 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966354640 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "mobile_phone",
+   "name": "Elisa",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9321753,
+    "lat": 60.1987393,
+    "osm_id": "n11966369798",
+    "osm_level": "3",
+    "in_station_building": false,
+    "to_nearest_platform_m": 23.9,
+    "how": "OSM node n11966369798",
+    "_source": "OpenStreetMap n11966369798 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966369798 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "clothes",
+   "name": "Cropp",
+   "brand": "Cropp",
+   "cuisine": null,
+   "opening_hours": "Mo-Sa 09:00-21:00; Su 11:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 24.9319538,
+    "lat": 60.1985229,
+    "osm_id": "n11966371609",
+    "osm_level": "2",
+    "in_station_building": false,
+    "to_nearest_platform_m": 42.3,
+    "how": "OSM node n11966371609",
+    "_source": "OpenStreetMap n11966371609 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n11966371609 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "tripla.fi could not be read (robots.txt blocks automated fetching), so no shop floor/hours from the owner; hours other than R-kioski are OSM's only. The web-search budget for this run ran out before the shops' own sites (Alepa, K-Market, Pasilan Apteekki, Hesburger, Burger King…) could be looked up.",
+  "Lifts/escalators to the platforms are OSM only: no owner or authority text found that lists them (VR's Pasila page names none).",
+  "Signposted floor number of the platform level and of Pasilansilta/Opastinsilta not found; OSM levels 0/3 are used. R-kioski Länsi (unit A-4040) is tagged level 2 in OSM and the luggage locker level 0 while VR says 4th floor: OSM level tags need checking.",
+  "Brokadi, Teppanyaki, Candytown, Terveystalo (mall upper levels) and Specsavers (level 1) left out as mall, not station hall. Rauhanasema / Rauhankahvila Fredrika (old station building) left out. HSL Palvelupiste is kept (service point) although OSM puts it at level 4.5.",
+  "Toilet fee and position: VR lists a toilet; OSM node has no level/fee.",
+  "No owner station plan found (HSL area map filename for Pasila unknown, search budget exhausted)."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief: only shops in or directly at the station hall and the routes to the platforms)",
+   "answer": "Station hall (Asemahalli) is Tripla's 4th floor above the tracks, open 24 h (VR). OSM maps from it one lift, one up/down escalator pair and stairs to each platform (1/2, 3/4, 5/6, 7/8, 9/10, 11); no owner page lists them. Shops at the hall: two R-kioski (hours from r-kioski.fi), pharmacy, Alepa (24/7), K-Market, fast food and cafés with hours from OSM. Lockers on the 4th floor by the pharmacy near tracks 9–10.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-PSL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ]
+}

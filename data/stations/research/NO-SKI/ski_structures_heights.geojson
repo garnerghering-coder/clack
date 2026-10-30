@@ -1,0 +1,3181 @@
+{
+ "type": "FeatureCollection",
+ "name": "ski_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m NN2000",
+ "platform_surface_m": 129.36,
+ "track_bed_m": 128.89,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.83539,
+       59.718515999999994
+      ],
+      [
+       10.835473,
+       59.718799
+      ],
+      [
+       10.835168,
+       59.718821999999996
+      ],
+      [
+       10.834938,
+       59.718661
+      ],
+      [
+       10.834856,
+       59.718382000000005
+      ],
+      [
+       10.835339999999999,
+       59.718346
+      ],
+      [
+       10.835353999999999,
+       59.718392
+      ],
+      [
+       10.83538,
+       59.71840199999999
+      ],
+      [
+       10.835397000000002,
+       59.71846000000001
+      ],
+      [
+       10.835416,
+       59.71846599999999
+      ],
+      [
+       10.835421000000002,
+       59.718494
+      ],
+      [
+       10.83539,
+       59.718515999999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w137138948",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 128.72,
+    "ground_median_m": 129.22,
+    "ground_max_m": 129.41,
+    "roof_top_median_m": 143.26,
+    "roof_top_p95_m": 145.09,
+    "laser_points": 534,
+    "height_above_ground_median_m": 14.04,
+    "height_above_ground_p95_m": 15.87,
+    "top_above_platform_m": 13.9,
+    "base_above_platform_m": -0.64,
+    "source": "Outline OSM w137138948 (ODbL); roof = median of 534 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.840606,
+       59.72003500000001
+      ],
+      [
+       10.840999,
+       59.72004400000001
+      ],
+      [
+       10.840991,
+       59.720132500000005
+      ],
+      [
+       10.840598,
+       59.72012350000001
+      ],
+      [
+       10.840606,
+       59.72003500000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w183273665",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "parking",
+     "building": "roof"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w183273665 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.837266,
+       59.713829000000004
+      ],
+      [
+       10.837243199999998,
+       59.7138409
+      ],
+      [
+       10.8372862,
+       59.71386189999999
+      ],
+      [
+       10.837070500000001,
+       59.713974199999996
+      ],
+      [
+       10.836505499999998,
+       59.71369829999998
+      ],
+      [
+       10.836725,
+       59.71358399999999
+      ],
+      [
+       10.836769200000003,
+       59.71360560000001
+      ],
+      [
+       10.8367913,
+       59.7135941
+      ],
+      [
+       10.836834299999998,
+       59.71361509999998
+      ],
+      [
+       10.836810200000002,
+       59.7136276
+      ],
+      [
+       10.8372022,
+       59.713819099999974
+      ],
+      [
+       10.837223300000002,
+       59.71380810000001
+      ],
+      [
+       10.837266,
+       59.713829000000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w317072776",
+    "name": "apartments",
+    "osm_tags": {
+     "building": "apartments",
+     "building:levels": "3"
+    },
+    "ground_min_m": 118.71,
+    "ground_median_m": 119.17,
+    "ground_max_m": 119.48,
+    "roof_top_median_m": 127.95,
+    "roof_top_p95_m": 128.33,
+    "laser_points": 573,
+    "height_above_ground_median_m": 8.78,
+    "height_above_ground_p95_m": 9.16,
+    "top_above_platform_m": -1.41,
+    "base_above_platform_m": -10.65,
+    "source": "Outline OSM w317072776 (ODbL); roof = median of 573 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.833590000000001,
+       59.71489900000001
+      ],
+      [
+       10.8339451,
+       59.714875
+      ],
+      [
+       10.834029,
+       59.71518949999999
+      ],
+      [
+       10.8336739,
+       59.71521349999999
+      ],
+      [
+       10.833590000000001,
+       59.71489900000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w343900873",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 126.71,
+    "ground_median_m": 127.76,
+    "ground_max_m": 127.96,
+    "roof_top_median_m": 134.37,
+    "roof_top_p95_m": 135.39,
+    "laser_points": 278,
+    "height_above_ground_median_m": 6.61,
+    "height_above_ground_p95_m": 7.63,
+    "top_above_platform_m": 5.01,
+    "base_above_platform_m": -2.65,
+    "source": "Outline OSM w343900873 (ODbL); roof = median of 278 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8344503,
+       59.720520900000004
+      ],
+      [
+       10.8344582,
+       59.720548400000006
+      ],
+      [
+       10.834474900000002,
+       59.72060620000001
+      ],
+      [
+       10.834491800000002,
+       59.7206647
+      ],
+      [
+       10.834500000000002,
+       59.720693000000004
+      ],
+      [
+       10.835326700000001,
+       59.720666
+      ],
+      [
+       10.8353188,
+       59.7206398
+      ],
+      [
+       10.8353006,
+       59.72057899999999
+      ],
+      [
+       10.8352833,
+       59.720521500000004
+      ],
+      [
+       10.8352751,
+       59.720494200000005
+      ],
+      [
+       10.8344503,
+       59.720520900000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w404613778",
+    "name": "Nordbyveien bru (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Nordbyveien bru"
+    },
+    "ground_min_m": 129.23,
+    "ground_median_m": 133.61,
+    "ground_max_m": 137.21,
+    "roof_top_median_m": 136.78,
+    "roof_top_p95_m": 138.82,
+    "laser_points": 76,
+    "height_above_ground_median_m": 3.16,
+    "height_above_ground_p95_m": 5.21,
+    "top_above_platform_m": 7.41,
+    "base_above_platform_m": -0.13,
+    "source": "Outline OSM w404613778 (ODbL); roof = median of 76 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.833118,
+       59.7191329
+      ],
+      [
+       10.8332932,
+       59.7191197
+      ],
+      [
+       10.833446,
+       59.71910809999999
+      ],
+      [
+       10.833529,
+       59.71938709999999
+      ],
+      [
+       10.833200999999999,
+       59.71941189999998
+      ],
+      [
+       10.833179899999998,
+       59.71934099999998
+      ],
+      [
+       10.833118,
+       59.7191329
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w813679132",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 130.63,
+    "ground_median_m": 131.22,
+    "ground_max_m": 131.7,
+    "laser_points": 0,
+    "source": "Outline OSM w813679132 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.833852599999998,
+       59.717942999999984
+      ],
+      [
+       10.8338472,
+       59.7179139
+      ],
+      [
+       10.833845200000003,
+       59.71789629999999
+      ],
+      [
+       10.8338482,
+       59.7178801
+      ],
+      [
+       10.8338569,
+       59.7178635
+      ],
+      [
+       10.833865699999999,
+       59.71785320000001
+      ],
+      [
+       10.8338767,
+       59.717845899999986
+      ],
+      [
+       10.833887500000001,
+       59.7178422
+      ],
+      [
+       10.8339089,
+       59.71784120000001
+      ],
+      [
+       10.833924700000003,
+       59.717844000000014
+      ],
+      [
+       10.833938799999999,
+       59.71785169999999
+      ],
+      [
+       10.833951200000001,
+       59.7178606
+      ],
+      [
+       10.833964200000002,
+       59.71787450000001
+      ],
+      [
+       10.833976,
+       59.71789209999999
+      ],
+      [
+       10.833985399999998,
+       59.71790879999998
+      ],
+      [
+       10.8339931,
+       59.717932600000005
+      ],
+      [
+       10.8341483,
+       59.71851029999999
+      ],
+      [
+       10.8341624,
+       59.71854820000001
+      ],
+      [
+       10.8341765,
+       59.7185769
+      ],
+      [
+       10.8342066,
+       59.7186277
+      ],
+      [
+       10.8342509,
+       59.718694899999996
+      ],
+      [
+       10.834300500000001,
+       59.7188332
+      ],
+      [
+       10.834330000000001,
+       59.71893300000001
+      ],
+      [
+       10.8343414,
+       59.7189949
+      ],
+      [
+       10.8343454,
+       59.719054
+      ],
+      [
+       10.8343475,
+       59.719097600000005
+      ],
+      [
+       10.834342799999998,
+       59.719128799999986
+      ],
+      [
+       10.8343391,
+       59.719146499999994
+      ],
+      [
+       10.8343307,
+       59.719158500000006
+      ],
+      [
+       10.8343206,
+       59.719167799999994
+      ],
+      [
+       10.8343123,
+       59.719171700000004
+      ],
+      [
+       10.834297500000002,
+       59.719173
+      ],
+      [
+       10.834282699999997,
+       59.7191724
+      ],
+      [
+       10.834266699999999,
+       59.7191668
+      ],
+      [
+       10.8342462,
+       59.7191565
+      ],
+      [
+       10.8342268,
+       59.7191411
+      ],
+      [
+       10.8341865,
+       59.7191007
+      ],
+      [
+       10.834145599999998,
+       59.71904790000001
+      ],
+      [
+       10.834116800000002,
+       59.71900740000001
+      ],
+      [
+       10.8340839,
+       59.718948199999986
+      ],
+      [
+       10.8340497,
+       59.718850800000006
+      ],
+      [
+       10.8340316,
+       59.71878490000002
+      ],
+      [
+       10.8340216,
+       59.71871929999999
+      ],
+      [
+       10.8340209,
+       59.7186371
+      ],
+      [
+       10.8340155,
+       59.7185627
+      ],
+      [
+       10.834005500000002,
+       59.7185272
+      ],
+      [
+       10.833852599999998,
+       59.717942999999984
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w819953900",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 128.69,
+    "ground_median_m": 128.83,
+    "ground_max_m": 129.13,
+    "roof_top_median_m": 132.33,
+    "roof_top_p95_m": 132.61,
+    "laser_points": 65,
+    "height_above_ground_median_m": 3.5,
+    "height_above_ground_p95_m": 3.78,
+    "top_above_platform_m": 2.97,
+    "base_above_platform_m": -0.67,
+    "source": "Outline OSM w819953900 (ODbL); roof = median of 65 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8334543,
+       59.7179061
+      ],
+      [
+       10.833448899999999,
+       59.717877
+      ],
+      [
+       10.8334469,
+       59.7178594
+      ],
+      [
+       10.8334499,
+       59.717843200000004
+      ],
+      [
+       10.8334586,
+       59.71782659999999
+      ],
+      [
+       10.8334674,
+       59.717816299999996
+      ],
+      [
+       10.833478399999999,
+       59.71780909999998
+      ],
+      [
+       10.8334891,
+       59.7178053
+      ],
+      [
+       10.8335106,
+       59.71780429999999
+      ],
+      [
+       10.833526400000002,
+       59.71780720000002
+      ],
+      [
+       10.8335404,
+       59.71781479999999
+      ],
+      [
+       10.8335529,
+       59.7178238
+      ],
+      [
+       10.8335659,
+       59.71783760000001
+      ],
+      [
+       10.833577700000001,
+       59.71785520000001
+      ],
+      [
+       10.833587000000001,
+       59.7178719
+      ],
+      [
+       10.8335948,
+       59.717895799999994
+      ],
+      [
+       10.83375,
+       59.71847350000001
+      ],
+      [
+       10.8337641,
+       59.71851130000001
+      ],
+      [
+       10.8337782,
+       59.71854009999999
+      ],
+      [
+       10.833808299999998,
+       59.718590799999994
+      ],
+      [
+       10.8338526,
+       59.7186581
+      ],
+      [
+       10.8338881,
+       59.7187223
+      ],
+      [
+       10.833919,
+       59.71879030000001
+      ],
+      [
+       10.8339525,
+       59.7188863
+      ],
+      [
+       10.8339605,
+       59.7189404
+      ],
+      [
+       10.8339652,
+       59.719001599999984
+      ],
+      [
+       10.8339649,
+       59.7190599
+      ],
+      [
+       10.8339569,
+       59.71909440000001
+      ],
+      [
+       10.833949499999997,
+       59.71911169999999
+      ],
+      [
+       10.833941799999998,
+       59.71912050000001
+      ],
+      [
+       10.8339304,
+       59.7191299
+      ],
+      [
+       10.833922,
+       59.71913379999999
+      ],
+      [
+       10.8339072,
+       59.7191352
+      ],
+      [
+       10.833892499999997,
+       59.71913449999999
+      ],
+      [
+       10.8338764,
+       59.71912890000001
+      ],
+      [
+       10.8338559,
+       59.7191186
+      ],
+      [
+       10.833834500000002,
+       59.71910460000001
+      ],
+      [
+       10.8338023,
+       59.71907600000001
+      ],
+      [
+       10.8337473,
+       59.7190111
+      ],
+      [
+       10.8337185,
+       59.7189705
+      ],
+      [
+       10.8336856,
+       59.7189113
+      ],
+      [
+       10.8336514,
+       59.718814
+      ],
+      [
+       10.833633300000002,
+       59.718748
+      ],
+      [
+       10.8336233,
+       59.718682400000006
+      ],
+      [
+       10.8336226,
+       59.718600300000006
+      ],
+      [
+       10.8336172,
+       59.718525899999975
+      ],
+      [
+       10.8336072,
+       59.718490399999986
+      ],
+      [
+       10.8334543,
+       59.7179061
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w819953901",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 128.65,
+    "ground_median_m": 128.9,
+    "ground_max_m": 129.13,
+    "roof_top_median_m": 131.2,
+    "roof_top_p95_m": 131.29,
+    "laser_points": 9,
+    "height_above_ground_median_m": 2.3,
+    "height_above_ground_p95_m": 2.39,
+    "top_above_platform_m": 1.84,
+    "base_above_platform_m": -0.71,
+    "source": "Outline OSM w819953901 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8308007,
+       59.7206153
+      ],
+      [
+       10.830770999999999,
+       59.720641999999984
+      ],
+      [
+       10.830662,
+       59.720611
+      ],
+      [
+       10.830719999999998,
+       59.720558999999994
+      ],
+      [
+       10.8308293,
+       59.72059009999999
+      ],
+      [
+       10.8308218,
+       59.720596799999996
+      ],
+      [
+       10.830830000000002,
+       59.7205991
+      ],
+      [
+       10.8308092,
+       59.7206177
+      ],
+      [
+       10.8308007,
+       59.7206153
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w893278733",
+    "name": "garage",
+    "osm_tags": {
+     "building": "garage"
+    },
+    "ground_min_m": 147.47,
+    "ground_median_m": 148.09,
+    "ground_max_m": 148.21,
+    "roof_top_median_m": 150.99,
+    "roof_top_p95_m": 152.2,
+    "laser_points": 118,
+    "height_above_ground_median_m": 2.9,
+    "height_above_ground_p95_m": 4.11,
+    "top_above_platform_m": 21.63,
+    "base_above_platform_m": 18.11,
+    "source": "Outline OSM w893278733 (ODbL); roof = median of 118 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.838826400000002,
+       59.71511280000001
+      ],
+      [
+       10.838898999999998,
+       59.71516649999999
+      ],
+      [
+       10.8388056,
+       59.7151987
+      ],
+      [
+       10.838733,
+       59.715145
+      ],
+      [
+       10.838826400000002,
+       59.71511280000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w967829063",
+    "name": "Truckdiesel (roof)",
+    "osm_tags": {
+     "building": "roof",
+     "name": "Truckdiesel"
+    },
+    "ground_min_m": 123.25,
+    "ground_median_m": 123.36,
+    "ground_max_m": 123.44,
+    "roof_top_median_m": 128.37,
+    "roof_top_p95_m": 128.79,
+    "laser_points": 107,
+    "height_above_ground_median_m": 5.01,
+    "height_above_ground_p95_m": 5.43,
+    "top_above_platform_m": -0.99,
+    "base_above_platform_m": -6.11,
+    "source": "Outline OSM w967829063 (ODbL); roof = median of 107 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8285794,
+       59.719432399999995
+      ],
+      [
+       10.8285178,
+       59.71947139999999
+      ],
+      [
+       10.8285369,
+       59.7194791
+      ],
+      [
+       10.828598500000002,
+       59.7194401
+      ],
+      [
+       10.8285794,
+       59.719432399999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w979890522",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof"
+    },
+    "ground_min_m": 151.61,
+    "ground_median_m": 151.8,
+    "ground_max_m": 151.99,
+    "laser_points": 0,
+    "source": "Outline OSM w979890522 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.831261599999998,
+       59.72041589999999
+      ],
+      [
+       10.831342,
+       59.72043199999999
+      ],
+      [
+       10.831384400000001,
+       59.720378
+      ],
+      [
+       10.831304,
+       59.72036200000001
+      ],
+      [
+       10.831261599999998,
+       59.72041589999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w979890531",
+    "name": "service",
+    "osm_tags": {
+     "building": "service"
+    },
+    "ground_min_m": 143.34,
+    "ground_median_m": 143.51,
+    "ground_max_m": 143.72,
+    "roof_top_median_m": 146.92,
+    "roof_top_p95_m": 146.98,
+    "laser_points": 72,
+    "height_above_ground_median_m": 3.41,
+    "height_above_ground_p95_m": 3.47,
+    "top_above_platform_m": 17.56,
+    "base_above_platform_m": 13.98,
+    "source": "Outline OSM w979890531 (ODbL); roof = median of 72 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8350366,
+       59.717967000000016
+      ],
+      [
+       10.835042200000002,
+       59.71796550000001
+      ],
+      [
+       10.8350855,
+       59.71793960000001
+      ],
+      [
+       10.835036400000002,
+       59.7177834
+      ],
+      [
+       10.8350317,
+       59.7177816
+      ],
+      [
+       10.835026299999999,
+       59.71778019999997
+      ],
+      [
+       10.835020899999998,
+       59.717779599999986
+      ],
+      [
+       10.835014,
+       59.71778119999999
+      ],
+      [
+       10.8349762,
+       59.717806799999984
+      ],
+      [
+       10.835022299999999,
+       59.717960500000004
+      ],
+      [
+       10.8350254,
+       59.717964499999994
+      ],
+      [
+       10.8350315,
+       59.7179664
+      ],
+      [
+       10.8350366,
+       59.717967000000016
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1084938960",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 128.4,
+    "ground_median_m": 128.54,
+    "ground_max_m": 128.74,
+    "roof_top_median_m": 131.13,
+    "roof_top_p95_m": 131.61,
+    "laser_points": 39,
+    "height_above_ground_median_m": 2.59,
+    "height_above_ground_p95_m": 3.07,
+    "top_above_platform_m": 1.77,
+    "base_above_platform_m": -0.96,
+    "source": "Outline OSM w1084938960 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.835344,
+       59.719888299999994
+      ],
+      [
+       10.835472799999998,
+       59.719899599999984
+      ],
+      [
+       10.8355007,
+       59.7198189
+      ],
+      [
+       10.8355331,
+       59.71972520000001
+      ],
+      [
+       10.8355553,
+       59.71966089999999
+      ],
+      [
+       10.835571200000002,
+       59.71961480000002
+      ],
+      [
+       10.8354424,
+       59.7196035
+      ],
+      [
+       10.835426699999998,
+       59.7196488
+      ],
+      [
+       10.835404399999998,
+       59.7197135
+      ],
+      [
+       10.8353722,
+       59.71980680000001
+      ],
+      [
+       10.835344,
+       59.719888299999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1084938976",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 130.56,
+    "ground_median_m": 131.36,
+    "ground_max_m": 132.17,
+    "roof_top_median_m": 149.54,
+    "roof_top_p95_m": 154.48,
+    "laser_points": 628,
+    "height_above_ground_median_m": 18.18,
+    "height_above_ground_p95_m": 23.12,
+    "top_above_platform_m": 20.18,
+    "base_above_platform_m": 1.2,
+    "source": "Outline OSM w1084938976 (ODbL); roof = median of 628 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834868,
+       59.7199651
+      ],
+      [
+       10.8348675,
+       59.71996120000001
+      ],
+      [
+       10.8348694,
+       59.71995600000002
+      ],
+      [
+       10.834872200000001,
+       59.71995299999998
+      ],
+      [
+       10.8348779,
+       59.719950999999995
+      ],
+      [
+       10.834885,
+       59.719950100000005
+      ],
+      [
+       10.834892199999999,
+       59.719950100000005
+      ],
+      [
+       10.8348984,
+       59.7199508
+      ],
+      [
+       10.8349051,
+       59.719952799999994
+      ],
+      [
+       10.8349116,
+       59.71995729999999
+      ],
+      [
+       10.8349133,
+       59.7199616
+      ],
+      [
+       10.834945199999998,
+       59.720065899999994
+      ],
+      [
+       10.834945400000002,
+       59.7200699
+      ],
+      [
+       10.834943799999998,
+       59.72007370000001
+      ],
+      [
+       10.8349388,
+       59.7200775
+      ],
+      [
+       10.8349331,
+       59.720079999999996
+      ],
+      [
+       10.834928399999999,
+       59.72008069999998
+      ],
+      [
+       10.8349237,
+       59.720080799999984
+      ],
+      [
+       10.8349172,
+       59.720079999999996
+      ],
+      [
+       10.8349121,
+       59.72007819999999
+      ],
+      [
+       10.8349069,
+       59.7200757
+      ],
+      [
+       10.8349032,
+       59.7200724
+      ],
+      [
+       10.834901699999998,
+       59.72006919999999
+      ],
+      [
+       10.834868,
+       59.7199651
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1253429592",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 129.06,
+    "ground_median_m": 129.74,
+    "ground_max_m": 129.94,
+    "laser_points": 0,
+    "source": "Outline OSM w1253429592 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.833930899999999,
+       59.71919769999999
+      ],
+      [
+       10.8339301,
+       59.719193799999985
+      ],
+      [
+       10.833931499999998,
+       59.71918860000001
+      ],
+      [
+       10.8339341,
+       59.719185599999996
+      ],
+      [
+       10.833939600000003,
+       59.719183400000006
+      ],
+      [
+       10.8339467,
+       59.7191824
+      ],
+      [
+       10.833953899999997,
+       59.719182200000006
+      ],
+      [
+       10.8339602,
+       59.719182800000006
+      ],
+      [
+       10.833967,
+       59.71918459999999
+      ],
+      [
+       10.833973800000003,
+       59.719189099999994
+      ],
+      [
+       10.833975899999999,
+       59.719193399999995
+      ],
+      [
+       10.834016100000001,
+       59.71929690000001
+      ],
+      [
+       10.8340165,
+       59.7193008
+      ],
+      [
+       10.8340152,
+       59.719304699999995
+      ],
+      [
+       10.834010500000002,
+       59.7193086
+      ],
+      [
+       10.8340051,
+       59.71931119999999
+      ],
+      [
+       10.8340004,
+       59.719312
+      ],
+      [
+       10.8339957,
+       59.7193122
+      ],
+      [
+       10.8339891,
+       59.7193115
+      ],
+      [
+       10.8339839,
+       59.719309899999985
+      ],
+      [
+       10.8339785,
+       59.7193075
+      ],
+      [
+       10.8339746,
+       59.71930419999999
+      ],
+      [
+       10.833972800000002,
+       59.719300999999994
+      ],
+      [
+       10.833930899999999,
+       59.71919769999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1253429593",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 128.97,
+    "ground_median_m": 129.03,
+    "ground_max_m": 129.12,
+    "laser_points": 0,
+    "source": "Outline OSM w1253429593 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8342884,
+       59.719235299999994
+      ],
+      [
+       10.8342878,
+       59.71923139999999
+      ],
+      [
+       10.8342896,
+       59.7192263
+      ],
+      [
+       10.834292499999998,
+       59.71922329999999
+      ],
+      [
+       10.834298100000002,
+       59.71922119999999
+      ],
+      [
+       10.8343052,
+       59.7192203
+      ],
+      [
+       10.8343124,
+       59.7192203
+      ],
+      [
+       10.834318599999998,
+       59.719221
+      ],
+      [
+       10.8343253,
+       59.7192229
+      ],
+      [
+       10.8343319,
+       59.7192275
+      ],
+      [
+       10.8343337,
+       59.71923180000001
+      ],
+      [
+       10.8343667,
+       59.71933590000001
+      ],
+      [
+       10.8343668,
+       59.7193399
+      ],
+      [
+       10.8343653,
+       59.71934370000002
+      ],
+      [
+       10.834360299999998,
+       59.719347599999985
+      ],
+      [
+       10.834354699999999,
+       59.71934999999998
+      ],
+      [
+       10.83435,
+       59.71935080000001
+      ],
+      [
+       10.834345300000003,
+       59.719350899999995
+      ],
+      [
+       10.8343388,
+       59.7193501
+      ],
+      [
+       10.8343336,
+       59.719348399999994
+      ],
+      [
+       10.8343284,
+       59.7193458
+      ],
+      [
+       10.834324700000002,
+       59.71934259999999
+      ],
+      [
+       10.8343232,
+       59.7193393
+      ],
+      [
+       10.8342884,
+       59.719235299999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1253429594",
+    "name": "shelter",
+    "osm_tags": {
+     "amenity": "shelter"
+    },
+    "ground_min_m": 128.92,
+    "ground_median_m": 128.97,
+    "ground_max_m": 129.04,
+    "laser_points": 0,
+    "source": "Outline OSM w1253429594 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834758400000002,
+       59.7193057
+      ],
+      [
+       10.8349186,
+       59.7198431
+      ],
+      [
+       10.8349171,
+       59.719864300000005
+      ],
+      [
+       10.834909199999998,
+       59.7198782
+      ],
+      [
+       10.834896800000001,
+       59.719888000000005
+      ],
+      [
+       10.8348845,
+       59.7198935
+      ],
+      [
+       10.834872899999999,
+       59.719894999999994
+      ],
+      [
+       10.834859099999997,
+       59.7198935
+      ],
+      [
+       10.8348396,
+       59.719888399999995
+      ],
+      [
+       10.8348157,
+       59.719875300000005
+      ],
+      [
+       10.834799699999998,
+       59.7198614
+      ],
+      [
+       10.8347903,
+       59.71984529999999
+      ],
+      [
+       10.8346149,
+       59.7193048
+      ],
+      [
+       10.8346084,
+       59.719281599999995
+      ],
+      [
+       10.834598900000001,
+       59.719258399999994
+      ],
+      [
+       10.8345772,
+       59.719214900000004
+      ],
+      [
+       10.8345616,
+       59.7191785
+      ],
+      [
+       10.8345413,
+       59.71913679999999
+      ],
+      [
+       10.8345294,
+       59.719114600000005
+      ],
+      [
+       10.8345149,
+       59.719087699999974
+      ],
+      [
+       10.834490999999998,
+       59.7190391
+      ],
+      [
+       10.8344768,
+       59.719010600000004
+      ],
+      [
+       10.834462,
+       59.7189784
+      ],
+      [
+       10.8344486,
+       59.718941299999976
+      ],
+      [
+       10.834435099999999,
+       59.718902199999995
+      ],
+      [
+       10.8344217,
+       59.7188567
+      ],
+      [
+       10.8344138,
+       59.71882149999998
+      ],
+      [
+       10.8344065,
+       59.7187834
+      ],
+      [
+       10.8343978,
+       59.71874290000002
+      ],
+      [
+       10.8343935,
+       59.71871049999999
+      ],
+      [
+       10.834393300000002,
+       59.7186785
+      ],
+      [
+       10.8343937,
+       59.718651499999986
+      ],
+      [
+       10.8343973,
+       59.71863329999999
+      ],
+      [
+       10.834403799999999,
+       59.718615699999994
+      ],
+      [
+       10.834412,
+       59.718600900000006
+      ],
+      [
+       10.8344225,
+       59.7185801
+      ],
+      [
+       10.8344337,
+       59.7185687
+      ],
+      [
+       10.8344471,
+       59.718561099999995
+      ],
+      [
+       10.8344629,
+       59.71855849999997
+      ],
+      [
+       10.8344794,
+       59.7185579
+      ],
+      [
+       10.834495699999998,
+       59.7185612
+      ],
+      [
+       10.8345082,
+       59.71856579999999
+      ],
+      [
+       10.8345256,
+       59.7185752
+      ],
+      [
+       10.834541,
+       59.7185897
+      ],
+      [
+       10.834556900000003,
+       59.71860610000001
+      ],
+      [
+       10.8345692,
+       59.7186215
+      ],
+      [
+       10.8345874,
+       59.718649500000005
+      ],
+      [
+       10.8346058,
+       59.7186785
+      ],
+      [
+       10.834640300000002,
+       59.7187385
+      ],
+      [
+       10.834666200000001,
+       59.7187858
+      ],
+      [
+       10.8346823,
+       59.71881749999999
+      ],
+      [
+       10.834695699999997,
+       59.71884829999999
+      ],
+      [
+       10.834705299999998,
+       59.71887239999998
+      ],
+      [
+       10.834722899999997,
+       59.718926299999985
+      ],
+      [
+       10.834735799999999,
+       59.718982299999986
+      ],
+      [
+       10.834740099999998,
+       59.71900879999999
+      ],
+      [
+       10.8347417,
+       59.7190336
+      ],
+      [
+       10.834739200000001,
+       59.7190762
+      ],
+      [
+       10.834735200000003,
+       59.71912430000002
+      ],
+      [
+       10.8347348,
+       59.7191509
+      ],
+      [
+       10.8347372,
+       59.71917719999998
+      ],
+      [
+       10.8347403,
+       59.719215599999984
+      ],
+      [
+       10.8347468,
+       59.7192514
+      ],
+      [
+       10.834751900000002,
+       59.71927680000001
+      ],
+      [
+       10.834758400000002,
+       59.7193057
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1253429595",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 128.75,
+    "ground_median_m": 128.99,
+    "ground_max_m": 129.99,
+    "roof_top_median_m": 133.82,
+    "roof_top_p95_m": 136.42,
+    "laser_points": 580,
+    "height_above_ground_median_m": 4.83,
+    "height_above_ground_p95_m": 7.43,
+    "top_above_platform_m": 4.46,
+    "base_above_platform_m": -0.61,
+    "source": "Outline OSM w1253429595 (ODbL); roof = median of 580 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.8348906,
+       59.718878899999986
+      ],
+      [
+       10.8348987,
+       59.7188587
+      ],
+      [
+       10.835005399999998,
+       59.718869599999984
+      ],
+      [
+       10.835001399999998,
+       59.71887960000001
+      ],
+      [
+       10.834997299999998,
+       59.71888979999999
+      ],
+      [
+       10.8348906,
+       59.718878899999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1253429599",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w1253429599 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834604199999998,
+       59.718249099999994
+      ],
+      [
+       10.834673299999999,
+       59.718217400000015
+      ],
+      [
+       10.834689399999998,
+       59.7182082
+      ],
+      [
+       10.834697500000003,
+       59.7181974
+      ],
+      [
+       10.8346961,
+       59.7181886
+      ],
+      [
+       10.834688100000001,
+       59.718161200000004
+      ],
+      [
+       10.8345868,
+       59.71782819999999
+      ],
+      [
+       10.8345483,
+       59.71770089999998
+      ],
+      [
+       10.834546200000002,
+       59.717697
+      ],
+      [
+       10.834539899999998,
+       59.71769529999999
+      ],
+      [
+       10.834533199999997,
+       59.717695799999994
+      ],
+      [
+       10.834518799999998,
+       59.717700199999996
+      ],
+      [
+       10.8344591,
+       59.71772690000001
+      ],
+      [
+       10.834455699999998,
+       59.717730100000004
+      ],
+      [
+       10.8344544,
+       59.71773450000001
+      ],
+      [
+       10.8344832,
+       59.71785560000001
+      ],
+      [
+       10.834604199999998,
+       59.718249099999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1285861906",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 128.72,
+    "ground_median_m": 128.97,
+    "ground_max_m": 129.23,
+    "roof_top_median_m": 132.09,
+    "roof_top_p95_m": 132.12,
+    "laser_points": 6,
+    "height_above_ground_median_m": 3.12,
+    "height_above_ground_p95_m": 3.15,
+    "top_above_platform_m": 2.73,
+    "base_above_platform_m": -0.64,
+    "source": "Outline OSM w1285861906 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834753839625694,
+       59.718761241491514
+      ],
+      [
+       10.834776523496416,
+       59.71885074364374
+      ],
+      [
+       10.8347942920722,
+       59.718850495364094
+      ],
+      [
+       10.834796258236711,
+       59.718886395534746
+      ],
+      [
+       10.834778489641911,
+       59.718886643814756
+      ],
+      [
+       10.834778981179056,
+       59.718895618857466
+      ],
+      [
+       10.83479674977861,
+       59.71889537057737
+      ],
+      [
+       10.834799699036472,
+       59.71894922083284
+      ],
+      [
+       10.834817467664239,
+       59.71894897254981
+      ],
+      [
+       10.834842609627513,
+       59.719083349898014
+      ],
+      [
+       10.83486037832597,
+       59.71908310160884
+      ],
+      [
+       10.834862344579584,
+       59.7191190017769
+      ],
+      [
+       10.83493341944639,
+       59.71911800859476
+      ],
+      [
+       10.834932436280937,
+       59.71910005851147
+      ],
+      [
+       10.834914667574205,
+       59.71910030681043
+      ],
+      [
+       10.834910734962754,
+       59.71902850647598
+      ],
+      [
+       10.834892966293744,
+       59.71902875477185
+      ],
+      [
+       10.834889033740053,
+       59.718956954435725
+      ],
+      [
+       10.834871265108763,
+       59.71895720272846
+      ],
+      [
+       10.834867332612829,
+       59.718885402390704
+      ],
+      [
+       10.834849564019262,
+       59.71888565068033
+      ],
+      [
+       10.834845631581084,
+       59.7188138503409
+      ],
+      [
+       10.834827863025238,
+       59.71881409862739
+      ],
+      [
+       10.834824422191291,
+       59.71875127332899
+      ],
+      [
+       10.83477111662173,
+       59.71875201817222
+      ],
+      [
+       10.834771608154252,
+       59.71876099321515
+      ],
+      [
+       10.834753839625694,
+       59.718761241491514
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 132.86,
+    "top_p10_m": 132.79,
+    "top_p90_m": 132.92,
+    "laser_points": 952,
+    "top_above_platform_m": 3.5,
+    "area_m2": 154.5,
+    "underside_m": null,
+    "multi_return_share": 0.16,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "ground_min_m": 129.26,
+    "ground_median_m": 129.47,
+    "ground_max_m": 129.54
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10.83408664048775,
+        59.71598631063462
+       ],
+       [
+        10.83408870444003,
+        59.71603104450282
+       ],
+       [
+        10.834159748280799,
+        59.71603005211245
+       ],
+       [
+        10.834158955172457,
+        59.716006948408236
+       ],
+       [
+        10.834176046765505,
+        59.71600275259814
+       ],
+       [
+        10.834167036223441,
+        59.71583721533361
+       ],
+       [
+        10.834184478743037,
+        59.7158319784612
+       ],
+       [
+        10.83418054353168,
+        59.715760316617896
+       ],
+       [
+        10.834144518338372,
+        59.715751837943166
+       ],
+       [
+        10.834109500263477,
+        59.71576130901686
+       ],
+       [
+        10.83410319459503,
+        59.71597209589641
+       ],
+       [
+        10.83408664048775,
+        59.71598631063462
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.834090670304597,
+        59.716066957083626
+       ],
+       [
+        10.834095091315335,
+        59.7161477201531
+       ],
+       [
+        10.834148368254537,
+        59.71614697594603
+       ],
+       [
+        10.83416564408421,
+        59.71613775270853
+       ],
+       [
+        10.834161222905228,
+        59.71605698964211
+       ],
+       [
+        10.834107946109446,
+        59.716057733853724
+       ],
+       [
+        10.834090670304597,
+        59.716066957083626
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (40.8 m × 2.9 m)",
+    "top_median_m": 131.6,
+    "top_above_track_bed_m": 3.57,
+    "laser_points": 553,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834483020789653,
+       59.71608842171424
+      ],
+      [
+       10.834484002918046,
+       59.71610635942988
+      ],
+      [
+       10.834520004069857,
+       59.71611483835125
+      ],
+      [
+       10.834534029327317,
+       59.716037636125776
+      ],
+      [
+       10.834567408344842,
+       59.716006393057754
+      ],
+      [
+       10.834582741496163,
+       59.71594663842799
+      ],
+      [
+       10.834599502458827,
+       59.71594307123345
+      ],
+      [
+       10.834597537414593,
+       59.71590718342305
+      ],
+      [
+       10.834579794905572,
+       59.715907431326315
+      ],
+      [
+       10.83458130585016,
+       59.7159389938988
+      ],
+      [
+       10.834547700787134,
+       59.715970753146145
+      ],
+      [
+       10.83453236756302,
+       59.71603050777198
+      ],
+      [
+       10.834515606549484,
+       59.716034074958145
+      ],
+      [
+       10.834516891315982,
+       59.71606615370686
+      ],
+      [
+       10.834483020789653,
+       59.71608842171424
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (22.1 m × 1.5 m)",
+    "top_median_m": 131.15,
+    "top_above_track_bed_m": 3.78,
+    "laser_points": 38,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834462305292252,
+       59.71603481965574
+      ],
+      [
+       10.834448468669603,
+       59.71610685588916
+      ],
+      [
+       10.834501745533322,
+       59.71610611153906
+      ],
+      [
+       10.834516753651053,
+       59.71604685941114
+      ],
+      [
+       10.834533839863681,
+       59.716042789730686
+      ],
+      [
+       10.83454966450899,
+       59.71599201015264
+      ],
+      [
+       10.834566425497862,
+       59.71598844296223
+      ],
+      [
+       10.834565465879875,
+       59.715955861719614
+      ],
+      [
+       10.834582226849015,
+       59.71595229452725
+      ],
+      [
+       10.834596251901953,
+       59.71587509229429
+      ],
+      [
+       10.834629630702082,
+       59.715843849210756
+      ],
+      [
+       10.834625537663205,
+       59.71576793628654
+      ],
+      [
+       10.834642974719571,
+       59.71576282552974
+      ],
+      [
+       10.834654316237017,
+       59.715641264226406
+      ],
+      [
+       10.834671628347134,
+       59.71563667835273
+      ],
+      [
+       10.834652225603495,
+       59.71560588892173
+      ],
+      [
+       10.834669662571862,
+       59.71560077816168
+      ],
+      [
+       10.834666185799033,
+       59.7155333153975
+      ],
+      [
+       10.834683497852,
+       59.71552872952248
+      ],
+      [
+       10.834679038175663,
+       59.71544331666215
+      ],
+      [
+       10.834696350180572,
+       59.71543873078561
+      ],
+      [
+       10.83469585941148,
+       59.715429768118135
+      ],
+      [
+       10.834659834447358,
+       59.71542128958328
+      ],
+      [
+       10.834624816864377,
+       59.715430760792515
+      ],
+      [
+       10.83462561027281,
+       59.71545386449439
+      ],
+      [
+       10.83460852437051,
+       59.71545793418568
+      ],
+      [
+       10.83460074758503,
+       59.715641795939106
+      ],
+      [
+       10.834583310584755,
+       59.715646906690125
+      ],
+      [
+       10.834586069661555,
+       59.71570591058403
+      ],
+      [
+       10.83456898362641,
+       59.715709980270645
+      ],
+      [
+       10.834558133198556,
+       59.71584051661503
+      ],
+      [
+       10.834540820967833,
+       59.71584510247415
+      ],
+      [
+       10.83452751333431,
+       59.7159307635743
+      ],
+      [
+       10.834510201052927,
+       59.715935349429564
+      ],
+      [
+       10.834511711933725,
+       59.71596691200302
+      ],
+      [
+       10.834478106776901,
+       59.71599867123289
+      ],
+      [
+       10.834479617631445,
+       59.71603023380655
+      ],
+      [
+       10.834462305292252,
+       59.71603481965574
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (76.0 m × 2.9 m)",
+    "top_median_m": 131.04,
+    "top_above_track_bed_m": 3.88,
+    "laser_points": 650,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10.834576282951234,
+        59.720389454152645
+       ],
+       [
+        10.83459552621973,
+        59.72041611864051
+       ],
+       [
+        10.83461327094966,
+        59.72041587463587
+       ],
+       [
+        10.834594027833264,
+        59.720389206238714
+       ],
+       [
+        10.834576282951234,
+        59.720389454152645
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.83463153272874,
+        59.72042460988422
+       ],
+       [
+        10.834608596150746,
+        59.720433269707485
+       ],
+       [
+        10.834578740517115,
+        59.72043432936081
+       ],
+       [
+        10.834579722867618,
+        59.72045226706358
+       ],
+       [
+        10.834598475333785,
+        59.72046996888947
+       ],
+       [
+        10.834651759129537,
+        59.72046922444593
+       ],
+       [
+        10.83463153272874,
+        59.72042460988422
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.834574788581047,
+        59.72036239081364
+       ],
+       [
+        10.83459255260518,
+        59.72036226873348
+       ],
+       [
+        10.834591078735892,
+        59.72033535598895
+       ],
+       [
+        10.834573333882348,
+        59.72033560390236
+       ],
+       [
+        10.834574788581047,
+        59.72036239081364
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.834519042793174,
+        59.720318398571465
+       ],
+       [
+        10.83451953361102,
+        59.72032736123308
+       ],
+       [
+        10.834537278460733,
+        59.72032711332696
+       ],
+       [
+        10.834536787638145,
+        59.72031815066543
+       ],
+       [
+        10.834519042793174,
+        59.720318398571465
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (17.3 m × 2.0 m)",
+    "top_median_m": 137.12,
+    "top_above_track_bed_m": 3.33,
+    "laser_points": 46,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10.83445883417835,
+        59.72019335449455
+       ],
+       [
+        10.834509837038693,
+        59.7201947445732
+       ],
+       [
+        10.834532879478132,
+        59.72024633760634
+       ],
+       [
+        10.834550624284809,
+        59.72024608969862
+       ],
+       [
+        10.834548658954414,
+        59.72021020191095
+       ],
+       [
+        10.834531151362347,
+        59.72020661555066
+       ],
+       [
+        10.834509679919497,
+        59.72014787311217
+       ],
+       [
+        10.834474165897602,
+        59.7201483692561
+       ],
+       [
+        10.83445883417835,
+        59.72019335449455
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.834417909304527,
+        59.72009526371066
+       ],
+       [
+        10.834438729328308,
+        59.720107916996994
+       ],
+       [
+        10.83443764374409,
+        59.72013090326701
+       ],
+       [
+        10.834455388490587,
+        59.720130655372444
+       ],
+       [
+        10.83447119250987,
+        59.72009451934317
+       ],
+       [
+        10.834417909304527,
+        59.72009526371066
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (17.1 m × 3.1 m)",
+    "top_median_m": 133.78,
+    "top_above_track_bed_m": 3.25,
+    "laser_points": 54,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.83440632471638,
+       59.71890967503391
+      ],
+      [
+       10.83442439543121,
+       59.718914944025876
+      ],
+      [
+       10.834407327425255,
+       59.718927763337014
+      ],
+      [
+       10.83441322403032,
+       59.719035451489866
+      ],
+      [
+       10.834431275659457,
+       59.71904059464688
+      ],
+      [
+       10.834414698357996,
+       59.71906237662287
+      ],
+      [
+       10.834432669763075,
+       59.71906699267186
+      ],
+      [
+       10.834483239755679,
+       59.719339858280144
+      ],
+      [
+       10.83450102917747,
+       59.719343953721925
+      ],
+      [
+       10.834525658130456,
+       59.71946501240155
+      ],
+      [
+       10.834543165332933,
+       59.719468598764806
+      ],
+      [
+       10.834546375952451,
+       59.719518614412685
+      ],
+      [
+       10.834564347621239,
+       59.719523230442114
+      ],
+      [
+       10.834547850415623,
+       59.719545539541684
+      ],
+      [
+       10.834566602348568,
+       59.71956324137698
+      ],
+      [
+       10.834584346793205,
+       59.719562993466404
+      ],
+      [
+       10.834619393195918,
+       59.71955352191054
+      ],
+      [
+       10.83461793850877,
+       59.719526734996606
+      ],
+      [
+       10.834599947674938,
+       59.719521993141036
+      ],
+      [
+       10.834573534583077,
+       59.71936555490235
+      ],
+      [
+       10.834555562998032,
+       59.71936093887368
+      ],
+      [
+       10.834572550922669,
+       59.71934759243571
+      ],
+      [
+       10.834554008298069,
+       59.71933348663644
+      ],
+      [
+       10.834569602660748,
+       59.719293754557114
+      ],
+      [
+       10.834533370824918,
+       59.71928041173221
+      ],
+      [
+       10.834546919020076,
+       59.71920425237374
+      ],
+      [
+       10.834510687290617,
+       59.719190909541865
+      ],
+      [
+       10.834514706864947,
+       59.71917865871756
+      ],
+      [
+       10.834545443899833,
+       59.7191773148629
+      ],
+      [
+       10.834544461617815,
+       59.719159377156316
+      ],
+      [
+       10.83450879984941,
+       59.71915640063348
+      ],
+      [
+       10.83452472697853,
+       59.71912372522836
+      ],
+      [
+       10.834507219958883,
+       59.71912013886161
+      ],
+      [
+       10.834503517980162,
+       59.719061148165544
+      ],
+      [
+       10.834485546568652,
+       59.71905653212626
+      ],
+      [
+       10.834502043581198,
+       59.71903422303389
+      ],
+      [
+       10.8344840721844,
+       59.719029606994326
+      ],
+      [
+       10.834478868851582,
+       59.7189357457896
+      ],
+      [
+       10.834461079650117,
+       59.71893165034351
+      ],
+      [
+       10.834456185713254,
+       59.71884624358356
+      ],
+      [
+       10.83443792569139,
+       59.71883751677296
+      ],
+      [
+       10.834402904492146,
+       59.71884698793564
+      ],
+      [
+       10.83440632471638,
+       59.71890967503391
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (80.2 m × 3.7 m)",
+    "top_median_m": 132.88,
+    "top_above_track_bed_m": 3.88,
+    "laser_points": 698,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.834655085238271,
+       59.71890619959917
+      ],
+      [
+       10.834672893605177,
+       59.71891042085249
+      ],
+      [
+       10.834677296594725,
+       59.7189868525578
+      ],
+      [
+       10.834695267994608,
+       59.718991468570934
+      ],
+      [
+       10.834699488905683,
+       59.71906737967766
+      ],
+      [
+       10.83471699591776,
+       59.71907096601887
+      ],
+      [
+       10.834720206747503,
+       59.71912098166434
+      ],
+      [
+       10.834738178225477,
+       59.71912559767114
+      ],
+      [
+       10.834743382323985,
+       59.71921945885939
+      ],
+      [
+       10.834760889420425,
+       59.71922304519426
+      ],
+      [
+       10.834764591875384,
+       59.71928203587942
+      ],
+      [
+       10.834782563446167,
+       59.71928665187961
+      ],
+      [
+       10.834786784604665,
+       59.71936256297916
+      ],
+      [
+       10.834804756221851,
+       59.71936717897602
+      ],
+      [
+       10.834829695704405,
+       59.7194966920382
+      ],
+      [
+       10.834847956189767,
+       59.71950541879127
+      ],
+      [
+       10.834901238444457,
+       59.71950467425375
+      ],
+      [
+       10.834875113431902,
+       59.71935235922491
+      ],
+      [
+       10.83485760625569,
+       59.71934877290572
+      ],
+      [
+       10.83485439519271,
+       59.71929875726635
+      ],
+      [
+       10.834836423605692,
+       59.71929414127609
+      ],
+      [
+       10.834831219231086,
+       59.71920028009384
+      ],
+      [
+       10.834814091860213,
+       59.71919718641286
+      ],
+      [
+       10.834810992711416,
+       59.719155653168585
+      ],
+      [
+       10.834793021207394,
+       59.7191510371719
+      ],
+      [
+       10.834788308527067,
+       59.71906615102773
+      ],
+      [
+       10.834770519219024,
+       59.71906205562414
+      ],
+      [
+       10.83474441511897,
+       59.71891407185764
+      ],
+      [
+       10.834726625897275,
+       59.71890997644761
+      ],
+      [
+       10.834722714329635,
+       59.718842519786655
+      ],
+      [
+       10.834704454241088,
+       59.71883379301344
+      ],
+      [
+       10.834651173047174,
+       59.71883453746613
+      ],
+      [
+       10.834655085238271,
+       59.71890619959917
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (74.4 m × 3.0 m)",
+    "top_median_m": 132.76,
+    "top_above_track_bed_m": 3.86,
+    "laser_points": 738,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10.83501145631864,
+        59.72119174547118
+       ],
+       [
+        10.83501194728535,
+        59.72120070812915
+       ],
+       [
+        10.835029692592647,
+        59.72120046015432
+       ],
+       [
+        10.835031425377085,
+        59.721192220765204
+       ],
+       [
+        10.83501145631864,
+        59.72119174547118
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.835044771513475,
+        59.72119051318535
+       ],
+       [
+        10.835065294175196,
+        59.72120461297529
+       ],
+       [
+        10.835031192055661,
+        59.72122738492654
+       ],
+       [
+        10.83506288870398,
+        59.72122817146269
+       ],
+       [
+        10.835067459666577,
+        59.721241379569285
+       ],
+       [
+        10.835032176035943,
+        59.7212453473834
+       ],
+       [
+        10.83503315866106,
+        59.72126328507936
+       ],
+       [
+        10.835053947459643,
+        59.72126857390275
+       ],
+       [
+        10.835034633618346,
+        59.721290210193814
+       ],
+       [
+        10.835053386800992,
+        59.721307911949225
+       ],
+       [
+        10.83508202333011,
+        59.72130649609268
+       ],
+       [
+        10.835104863892528,
+        59.72131815099287
+       ],
+       [
+        10.835108663120446,
+        59.72134306712319
+       ],
+       [
+        10.835126408502168,
+        59.721342819134954
+       ],
+       [
+        10.835143686712781,
+        59.72133359576427
+       ],
+       [
+        10.835141720661674,
+        59.721297707994474
+       ],
+       [
+        10.835092254076184,
+        59.72129716980614
+       ],
+       [
+        10.835084527240259,
+        59.721277128475656
+       ],
+       [
+        10.835122475083978,
+        59.72127101883373
+       ],
+       [
+        10.835120017385858,
+        59.72122615602538
+       ],
+       [
+        10.835082802048383,
+        59.72121519659102
+       ],
+       [
+        10.8350825110636,
+        59.721190752530255
+       ],
+       [
+        10.835064249590925,
+        59.7211820258166
+       ],
+       [
+        10.835044771513475,
+        59.72119051318535
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.835074107338796,
+        59.721361526233686
+       ],
+       [
+        10.835074598325601,
+        59.72137048889108
+       ],
+       [
+        10.835145653447062,
+        59.72136949591423
+       ],
+       [
+        10.835145162441272,
+        59.721360533257176
+       ],
+       [
+        10.835074107338796,
+        59.721361526233686
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (20.3 m × 3.8 m)",
+    "top_median_m": 135.96,
+    "top_above_track_bed_m": 3.17,
+    "laser_points": 87,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2014-12-08. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Follo 2014\" (id 119, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  }
+ ]
+}

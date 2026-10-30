@@ -1,0 +1,18 @@
+{
+ "file": "skoyen_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 1000",
+ "base_m": -1,
+ "scale": 1000,
+ "nodata_value": 0,
+ "crs": "EPSG:25832 (ETRS89 / UTM 32N)",
+ "vertical_datum": "NN2000",
+ "origin_top_left_EN": [
+  593379,
+  6644293
+ ],
+ "pixel_m": 1,
+ "width": 950,
+ "height": 679,
+ "source": "skoyen_ground_1m.tif (gridded from the laser ground class, \u00a9 Kartverket, CC BY 4.0)"
+}

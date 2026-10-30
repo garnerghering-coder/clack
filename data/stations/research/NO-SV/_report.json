@@ -1,0 +1,122 @@
+{
+ "clack_id": "NO-SV",
+ "slug": "sandvika",
+ "flags": [
+  "w133659769 station building: p95 24.3 m is 8.0 m above the median 16.3 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): r10367706 (motorway)."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 0.03 m over 1506 m², 0.04 m over 1992 m², 0.05 m over 2343 m², 0.06 m over 2700 m², 0.07 m over 2912 m², 0.08 m over 3014 m², 0.09 m over 2871 m², 0.10 m over 2500 m², 0.11 m over 1950 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.517746,59.888903,10.533746,59.896903",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Bærum 2013",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "sandvika_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/sandvika/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": -0.64,
+  "median_m": 8.86,
+  "max_m": 74.97,
+  "nan_cells": 269640,
+  "size_m": [
+   950,
+   679
+  ],
+  "box_sweref": [
+   584898,
+   6640128,
+   585848,
+   6640807
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1798292_122.laz"
+  ],
+  "scan_date": "2013-04-27",
+  "density_pts_m2_nominal": 5,
+  "flight_height_m": null,
+  "points_in_box": 5470870,
+  "density_in_box": 8.48,
+  "classes": {
+   "1": 3876461,
+   "2": 1530580,
+   "7": 3826,
+   "10": 60003
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "track 1",
+   "track": "1,2",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 268.0,
+   "width_m": 10.0,
+   "roof": null,
+   "track_bed_m": 12.1,
+   "track_bed_points": 1520,
+   "platform_surface_m": 12.87,
+   "platform_points": 10373,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "other_side_surface_m": 12.51,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 0.77,
+   "laser_estimate_above_rail_m": 0.6
+  },
+  {
+   "bis_object": "track 4",
+   "track": "3,4",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 268.0,
+   "width_m": 10.0,
+   "roof": null,
+   "track_bed_m": 12.1,
+   "track_bed_points": 1079,
+   "platform_surface_m": 12.87,
+   "platform_points": 6022,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "surface_minus_bed_m": 0.77,
+   "laser_estimate_above_rail_m": 0.6
+  }
+ ],
+ "platform_surface_m": 12.87,
+ "track_bed_m": 12.1,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 8,
+  "footbridge": 1,
+  "canopy_osm": 1,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 59,
+ "photos_station_related": 3
+}

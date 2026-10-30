@@ -1,0 +1,161 @@
+{
+ "clack_id": "NO-LLS",
+ "slug": "lillestrom",
+ "flags": [
+  "Platform at track 8: OSM outline r7105815 runs 331 m along the track, Bane NOR length 250 m (the outline may include ramps or the part beyond the usable length); line drawn to the OSM outline",
+  "w115788728 station building: p95 117.7 m is 4.5 m above the median 113.2 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w343472117 Lillestrømbrua (footway, trunk); w343761147 (footway, secondary); w343761148 Rælingsbrua (footway, secondary); w343761149 (footway, secondary); w344123432 (no mapped ways); w344123433 (no mapped ways)."
+ ],
+ "notes": [
+  "track 20: 72 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 20: 107 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 20: 107 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 22: 107 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 22: 107 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 24: 95 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 24: 107 m, 350 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "track 25: 80 m, 600 mm, \"Island platform. Stabling.\" (not a passenger platform: left out of the register lines)",
+  "terrain model is exactly flat over large areas (a water surface, not ground): 106.23 m over 1527 m², 106.24 m over 1531 m², 106.25 m over 1608 m², 106.26 m over 1548 m², 106.27 m over 1579 m², 106.28 m over 1530 m², 106.29 m over 1563 m², 106.31 m over 1516 m², 106.32 m over 1588 m², 106.33 m over 1670 m², 106.34 m over 1824 m², 106.35 m over 1743 m², 106.36 m over 1759 m², 106.37 m over 1807 m², 106.38 m over 1773 m², 106.39 m over 1955 m², 106.40 m over 1883 m², 106.41 m over 1934 m², 106.42 m over 1847 m², 106.43 m over 1989 m², 106.44 m over 1958 m², 106.45 m over 1884 m², 106.46 m over 1854 m², 106.47 m over 1831 m², 106.48 m over 1965 m², 106.49 m over 1995 m², 106.50 m over 1907 m², 106.51 m over 1940 m², 106.52 m over 1951 m², 106.53 m over 1939 m², 106.54 m over 1918 m², 106.55 m over 1947 m², 106.56 m over 1926 m², 106.57 m over 1963 m², 106.58 m over 1973 m², 106.59 m over 1859 m², 106.60 m over 1936 m², 106.61 m over 1790 m², 106.62 m over 1908 m², 106.63 m over 1844 m², 106.64 m over 1911 m², 106.65 m over 1810 m², 106.66 m over 1712 m², 106.67 m over 1683 m², 106.68 m over 1643 m², 106.69 m over 1603 m², 106.70 m over 1618 m², 106.71 m over 1609 m², 106.72 m over 1611 m², 106.73 m over 1622 m², 106.74 m over 1667 m², 106.75 m over 1688 m², 106.76 m over 1708 m², 106.77 m over 1725 m², 106.78 m over 1714 m², 106.79 m over 1659 m², 106.80 m over 1719 m², 106.81 m over 1750 m², 106.82 m over 1609 m², 106.83 m over 1668 m², 106.84 m over 1688 m², 106.85 m over 1725 m², 106.86 m over 1811 m², 106.87 m over 1848 m², 106.88 m over 1693 m², 106.89 m over 1761 m², 106.90 m over 1699 m², 106.91 m over 1701 m², 106.92 m over 1737 m², 106.93 m over 1700 m², 106.94 m over 1756 m², 106.95 m over 1682 m², 106.96 m over 1758 m², 106.97 m over 1763 m², 106.98 m over 1704 m², 106.99 m over 1689 m², 107.00 m over 1697 m², 107.01 m over 1686 m², 107.02 m over 1551 m², 107.03 m over 1621 m², 107.05 m over 1542 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=11.036680,59.949210,11.052680,59.957210",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Romerike 2013",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "lillestrom_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Romerike 2013\" (id 121, FKB-Laser 2.0, nominal 2 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 102.34,
+  "median_m": 106.94,
+  "max_m": 137.47,
+  "nan_cells": 456610,
+  "size_m": [
+   788,
+   1059
+  ],
+  "box_sweref": [
+   613802,
+   6647435,
+   614590,
+   6648494
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1797895_121.laz"
+  ],
+  "scan_date": "2013-07-06",
+  "density_pts_m2_nominal": 2,
+  "flight_height_m": null,
+  "points_in_box": 1835389,
+  "density_in_box": 2.2,
+  "classes": {
+   "1": 1058739,
+   "2": 757952,
+   "7": 6150,
+   "10": 12548
+  },
+  "train_points_class64": 3514
+ },
+ "platforms": [
+  {
+   "bis_object": "track 2",
+   "track": "1,2",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 350.0,
+   "width_m": 10.3,
+   "roof": null,
+   "track_bed_m": 109.22,
+   "track_bed_points": 1187,
+   "platform_surface_m": 110.16,
+   "platform_points": 10802,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "surface_minus_bed_m": 0.94,
+   "laser_estimate_above_rail_m": 0.76
+  },
+  {
+   "bis_object": "track 3",
+   "track": "3,4",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 350.0,
+   "width_m": 9.0,
+   "roof": null,
+   "track_bed_m": 109.24,
+   "track_bed_points": 1209,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 6",
+   "track": "6,7",
+   "height_class": "560",
+   "class_height_m": 0.56,
+   "length_m": 350.0,
+   "width_m": 11.7,
+   "roof": null,
+   "track_bed_m": 109.22,
+   "track_bed_points": 1363,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 8",
+   "track": "8,9",
+   "height_class": "560",
+   "class_height_m": 0.56,
+   "length_m": 250.0,
+   "width_m": 11.0,
+   "roof": null,
+   "track_bed_m": 109.15,
+   "track_bed_points": 1162,
+   "platform_surface_m": 109.83,
+   "platform_points": 10380,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "surface_minus_bed_m": 0.68,
+   "laser_estimate_above_rail_m": 0.5
+  }
+ ],
+ "platform_surface_m": 110.0,
+ "track_bed_m": 109.22,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 6,
+  "footbridge": 1,
+  "canopy_osm": 11,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 11,
+ "photos_station_related": 2
+}

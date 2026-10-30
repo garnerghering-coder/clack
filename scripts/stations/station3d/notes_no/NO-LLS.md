@@ -1,0 +1,1 @@
+Lillestrøm's island platforms 3/4 and 6/7 are under long canopies: no flat platform surface in the airborne laser (Romerike 2013, 2 points/m²). The 2013 classification leaves platform decks in class 1; levels for platforms 1/2 and 8/9 come from a flat class-1 band.

@@ -1,0 +1,920 @@
+{
+ "clack_id": "NO-ASR",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w133645355",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w133645357",
+   "ref": "6",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w67300743",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 57.9,
+   "reaches_platforms": [
+    "1",
+    "6"
+   ],
+   "lonlat": [
+    10.4338008,
+    59.8329558
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w130660325",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 23.5,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4340196,
+    59.832864
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w130660326",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 21.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4338008,
+    59.8329558
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w130660328",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 42.1,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.4345489,
+    59.832957
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w133645358",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 17.1,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.434745,
+    59.8328805
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w306981125",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 43.9,
+   "reaches_platforms": [
+    "1",
+    "6"
+   ],
+   "lonlat": [
+    10.4352089,
+    59.8340053
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w446633147",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 15.7,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    10.4334433,
+    59.8331162
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w513498531",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 34.2,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4361648,
+    59.8348413
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w533332791",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 7.3,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.4340274,
+    59.8325496
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w986141136",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.5,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    10.4314367,
+    59.8311669
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1106885721",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4340046,
+    59.8328532
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1106885722",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4337873,
+    59.832946
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1106885723",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 2.5,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    10.4334881,
+    59.8330639
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1108261478",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 14.4,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    10.4348402,
+    59.834184
+   ]
+  },
+  {
+   "kind": "ramp",
+   "osm_id": "w1120605494",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 53.7,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.4348601,
+    59.8332161
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1120605495",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 27.8,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.4354228,
+    59.8337119
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1120605496",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 14.9,
+   "reaches_platforms": [
+    "6"
+   ],
+   "lonlat": [
+    10.4355955,
+    59.8338255
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519311",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4339825,
+    59.8328374
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519312",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    10.4337637,
+    59.8329288
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10128519313",
+   "name": null,
+   "level": "0;1",
+   "wheelchair": "yes",
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    10.4334633,
+    59.8330457
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n1910691572",
+   "name": "Peppes Pizza",
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Torvveien",
+   "nearest_street_m": 19.4,
+   "lonlat": [
+    10.434023,
+    59.834116
+   ]
+  },
+  {
+   "osm_id": "n8871541081",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": "yes",
+   "door": "sliding",
+   "addr_street": null,
+   "nearest_named_street": null,
+   "nearest_street_m": 44.0,
+   "lonlat": [
+    10.435663,
+    59.834608
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n1175143489",
+   "category": "bus_station",
+   "name": "Asker stasjon",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 43,
+   "lonlat": [
+    10.433721,
+    59.83331
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.4
+  },
+  {
+   "osm_id": "n1438382860",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 73,
+   "lonlat": [
+    10.4343128,
+    59.8326987
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.7
+  },
+  {
+   "osm_id": "n1910691572",
+   "category": "restaurant",
+   "name": "Peppes Pizza",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 14:00-21:00",
+   "wheelchair": null,
+   "distance_m": 90,
+   "lonlat": [
+    10.434023,
+    59.834116
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 38.2,
+   "brand": "Peppes Pizza",
+   "cuisine": "pizza"
+  },
+  {
+   "osm_id": "n1910691576",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 75,
+   "lonlat": [
+    10.4346162,
+    59.8340155
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 5.2
+  },
+  {
+   "osm_id": "n2501000580",
+   "category": "pharmacy",
+   "name": "Vitusapotek Asker",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:00-18:00, Sa 10:00-15:00",
+   "wheelchair": null,
+   "distance_m": 110,
+   "lonlat": [
+    10.4345225,
+    59.8343276
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 29.8,
+   "brand": "Vitusapotek"
+  },
+  {
+   "osm_id": "n6122924656",
+   "category": "shop=kiosk",
+   "name": "Narvesen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 117,
+   "lonlat": [
+    10.435203,
+    59.8343309
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 32.3,
+   "brand": "Narvesen"
+  },
+  {
+   "osm_id": "n7233878633",
+   "category": "cafe",
+   "name": "Espresso House Asker stasjon",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 06:30-19:00, Sa 08:00-19:00, Su 09:00-19:00",
+   "wheelchair": null,
+   "distance_m": 109,
+   "lonlat": [
+    10.4350921,
+    59.8342747
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 23.6,
+   "brand": "Espresso House",
+   "cuisine": "coffee_shop",
+   "website": "https://no.espressohouse.com/coffee-shops/asker-stasjon/"
+  },
+  {
+   "osm_id": "n7964121643",
+   "category": "restaurant",
+   "name": "Egon Asker",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Th 10:00-23:00; Fr-Sa 10:00-23:30; Su 11:00-23:00",
+   "wheelchair": "limited",
+   "distance_m": 172,
+   "lonlat": [
+    10.435615,
+    59.834777
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 76.1,
+   "brand": "Egon",
+   "cuisine": "pizza;burger;meat;pasta",
+   "website": "https://egon.no/",
+   "operator": "Egon"
+  },
+  {
+   "osm_id": "n8871541060",
+   "category": "bicycle_parking",
+   "name": "Bane NOR SF",
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 177,
+   "lonlat": [
+    10.4360316,
+    59.8347296
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 70.1,
+   "operator": "Bane NOR SF"
+  },
+  {
+   "osm_id": "n9253807110",
+   "category": "bank",
+   "name": "Sparebanken Øst Asker",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 104,
+   "lonlat": [
+    10.4344441,
+    59.8342735
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 28.3,
+   "brand": "Sparebanken Øst"
+  },
+  {
+   "osm_id": "n9264747033",
+   "category": "bank",
+   "name": "Danske bank Asker og Bærum",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 187,
+   "lonlat": [
+    10.4357008,
+    59.8349033
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 89.3,
+   "brand": "Danske bank"
+  },
+  {
+   "osm_id": "n9673677813",
+   "category": "post_box",
+   "name": "Posten",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 115,
+   "lonlat": [
+    10.432683,
+    59.832853
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 20.9,
+   "brand": "Posten"
+  },
+  {
+   "osm_id": "n10126562095",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 279,
+   "lonlat": [
+    10.4313061,
+    59.8314247
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 19.5
+  },
+  {
+   "osm_id": "n10128519309",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 62,
+   "lonlat": [
+    10.4335351,
+    59.8330644
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "n10249076053",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 68,
+   "lonlat": [
+    10.433304,
+    59.8332133
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 12.1
+  },
+  {
+   "osm_id": "n10249076054",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    10.4349112,
+    59.832942
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.9
+  },
+  {
+   "osm_id": "n10249076055",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 59,
+   "lonlat": [
+    10.4345228,
+    59.8328179
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.0
+  },
+  {
+   "osm_id": "n10680191015",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 59,
+   "lonlat": [
+    10.4337873,
+    59.832946
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 15.0
+  },
+  {
+   "osm_id": "n10680191016",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 61,
+   "lonlat": [
+    10.4340046,
+    59.8328532
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.7
+  },
+  {
+   "osm_id": "n10732269229",
+   "category": "restaurant",
+   "name": "Glorioso",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 135,
+   "lonlat": [
+    10.4354428,
+    59.8344593
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 46.0,
+   "cuisine": "italian",
+   "website": "https://glorioso.no/"
+  },
+  {
+   "osm_id": "n14144611756",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 90,
+   "lonlat": [
+    10.4340606,
+    59.8325612
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w87862755",
+   "category": "cafe",
+   "name": "Kårner",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:30-18:00; Sa 08:00-18:00; Su 09:00-18:00",
+   "distance_m": 128,
+   "lonlat": [
+    10.4342687,
+    59.8345676
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.5
+  },
+  {
+   "osm_id": "w87862759",
+   "category": "shop=yes",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 94,
+   "lonlat": [
+    10.4344956,
+    59.8343102
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 22.5
+  },
+  {
+   "osm_id": "w87870849",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 170,
+   "lonlat": [
+    10.4317138,
+    59.8321752
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 2.5
+  },
+  {
+   "osm_id": "w92350484",
+   "category": "arts_centre",
+   "name": "Galleri Trafo",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 31,
+   "lonlat": [
+    10.4351652,
+    59.8331881
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.5
+  },
+  {
+   "osm_id": "w126671122",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 76,
+   "lonlat": [
+    10.4362387,
+    59.8340054
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0
+  },
+  {
+   "osm_id": "w130660336",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 79,
+   "lonlat": [
+    10.43439,
+    59.8321252
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 18.0
+  },
+  {
+   "osm_id": "w426553808",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 69,
+   "lonlat": [
+    10.4330163,
+    59.8329849
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 5.8
+  },
+  {
+   "osm_id": "w513498533",
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Asker stasjon",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "distance_m": 148,
+   "lonlat": [
+    10.435926,
+    59.8346964
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 48.1,
+   "website": "https://www.banenor.no/reise-og-trafikk/parkering/sykkelhotell/",
+   "operator": "Bane NOR SF"
+  },
+  {
+   "osm_id": "w817779913",
+   "category": "shop=yes",
+   "name": "Vasen",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 164,
+   "lonlat": [
+    10.4357836,
+    59.8348478
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 63.8
+  },
+  {
+   "osm_id": "w1120590348",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 60,
+   "lonlat": [
+    10.434415,
+    59.832681
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 7.2
+  },
+  {
+   "osm_id": "w1120590349",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 98,
+   "lonlat": [
+    10.4340201,
+    59.8323771
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 4.7
+  }
+ ]
+}

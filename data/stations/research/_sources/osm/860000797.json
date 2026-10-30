@@ -1,0 +1,227 @@
+{
+ "clack_id": "860000797",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w591111737",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w591111738",
+   "ref": "2",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "stairs",
+   "osm_id": "w693688669",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 21.8,
+   "reaches_platforms": [
+    "2"
+   ],
+   "lonlat": [
+    12.1749483,
+    55.4992486
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w693688671",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 22.6,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    12.1752132,
+    55.4991688
+   ]
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w693688673",
+   "name": null,
+   "level": null,
+   "layer": "1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 222.0,
+   "reaches_platforms": [
+    "1",
+    "2"
+   ],
+   "lonlat": [
+    12.1731206,
+    55.4991824
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1435620201",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "forward",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 24.2,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    12.175259,
+    55.4992311
+   ]
+  },
+  {
+   "kind": "escalator",
+   "osm_id": "w1435620204",
+   "name": null,
+   "level": "0;1",
+   "layer": null,
+   "conveying": "forward",
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 24.3,
+   "reaches_platforms": [
+    "2"
+   ],
+   "lonlat": [
+    12.1750164,
+    55.4994392
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1435620206",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 5.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    12.1752668,
+    55.4990693
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n6982453442",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": "yes",
+   "distance_m": 88,
+   "lonlat": [
+    12.1751534,
+    55.4996222
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 9.9
+  },
+  {
+   "osm_id": "w746112376",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 90,
+   "lonlat": [
+    12.1757219,
+    55.4989556
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.5
+  },
+  {
+   "osm_id": "w765373987",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 92,
+   "lonlat": [
+    12.1757856,
+    55.4990652
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.6
+  },
+  {
+   "osm_id": "w815732975",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 101,
+   "lonlat": [
+    12.1754486,
+    55.5000194
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.6
+  },
+  {
+   "osm_id": "w815732979",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 24,
+   "lonlat": [
+    12.1745143,
+    55.4994085
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 29.2
+  },
+  {
+   "osm_id": "w815732980",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 14,
+   "lonlat": [
+    12.1741063,
+    55.4988098
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.7
+  }
+ ]
+}

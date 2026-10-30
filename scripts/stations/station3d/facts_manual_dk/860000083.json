@@ -1,0 +1,189 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal / street level, Banegårdspladsen",
+   "other_names": [],
+   "note": "DSB 'forhal'.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnels under the tracks (one named 'Smutvejen' in OSM)",
+   "other_names": [
+    "Smutvejen"
+   ],
+   "note": "OSM underpass w117916289 name=Smutvejen (66 m) and w53151538 (39 m).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n1327227784",
+    "w106041802"
+   ],
+   "between": [
+    "tunnel (Smutvejen)",
+    "perron 1 (spor 1)"
+   ],
+   "where": "west part, from the Smutvejen tunnel up to platform 1",
+   "confirmed_by": "owner text (DSB: 'Elevator', presence only) + OSM (position, platform)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n1327227762",
+    "w106001604"
+   ],
+   "between": [
+    "tunnel (Smutvejen)",
+    "not tagged (perron 2 / far side?)"
+   ],
+   "where": "at the Smutvejen tunnel",
+   "confirmed_by": "owner text (presence) + OSM (position only)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w117916289",
+   "name": "Smutvejen",
+   "between": [
+    "Banegårdspladsen side",
+    "far side"
+   ],
+   "where": "west tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w53151538",
+   "between": [
+    "station building",
+    "platforms"
+   ],
+   "where": "east tunnel, by the station building",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w53151537",
+    "w863060532",
+    "w117916290"
+   ],
+   "between": [
+    "tunnels",
+    "perron 1"
+   ],
+   "where": "from the tunnels up to platform 1",
+   "confirmed_by": "owner text ('Trapper') + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w53151539",
+    "w863060534"
+   ],
+   "between": [
+    "tunnel",
+    "not tagged (perron 2?)"
+   ],
+   "where": "east tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n7956096729",
+   "name": "Main entrance",
+   "street": "Banegårdspladsen",
+   "level": "0",
+   "confirmed_by": "OSM + DSB address Banegårdspladsen 4",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  },
+  {
+   "osm_id": "n11136343942",
+   "name": "Entrance",
+   "street": "Banegårdspladsen",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Kolding Station)",
+   "osm_id": "n963244298",
+   "level_per_plan": "0",
+   "where": "at the station building (OSM)",
+   "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB page agrees.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "where": "station hall",
+   "opening_hours": "Mo-Su 05:00-23:15",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet/Handicaptoilet",
+   "osm_id": "n2997124336",
+   "level_per_plan": "0",
+   "where": "station building (OSM)",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "position not given",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Snackautomat",
+   "where": "on the platform ('På perron')",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_ids": [
+    "n417279210",
+    "w191147369"
+   ],
+   "where": "Banegårdspladsen (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "about 40 spaces at Jens Holms Vej; free but must be registered (DSB app / DSB Plus); 2 locked bicycle sheds",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "OSM has only platform 1 (ref 1); perron 2 (spor 2/3) is not in the extract, so which lift/stairs reach it is unsettled.",
+  "No lockers or ticket office listed by DSB.",
+  "Fratelli Kolding and Freddy's Cafe (OSM, next to the station, not tagged as in the station building) not included.",
+  "OSM does not flag the 7-Eleven and DSB toilet nodes as inside the station building (18 m / 45 m away); position words unconfirmed.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ]
+}

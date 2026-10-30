@@ -1,0 +1,409 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0476856,
+      59.953984199999994
+     ],
+     [
+      11.0475658,
+      59.9539621
+     ],
+     [
+      11.0473418,
+      59.95392179999999
+     ],
+     [
+      11.0469139,
+      59.95384499999999
+     ],
+     [
+      11.044831300000002,
+      59.953471300000004
+     ],
+     [
+      11.0440152,
+      59.953325700000015
+     ],
+     [
+      11.043606200000001,
+      59.953254600000015
+     ],
+     [
+      11.0431962,
+      59.95318539999999
+     ],
+     [
+      11.0428372,
+      59.953125199999995
+     ],
+     [
+      11.0424773,
+      59.9530681
+     ],
+     [
+      11.0422891,
+      59.95303890000001
+     ],
+     [
+      11.0421008,
+      59.95301069999999
+     ],
+     [
+      11.041907100000001,
+      59.95298270000001
+     ],
+     [
+      11.041770699999999,
+      59.95296349999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 2",
+    "track": "1,2",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 10.3,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LLS-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 110.16,
+    "laser_track_bed_m": 109.22,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Island platform between tracks 2 and 1",
+    "x_covers_tracks": [
+     "2",
+     "1"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": null,
+    "x_passing_loop_m": null,
+    "x_comment": "Island platform between tracks 2 and 1.",
+    "x_geometry": "extent: OSM platform outline r7105812 (ref 1;2), 350 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r7105812",
+    "x_nsr_quays": [
+     "NSR:Quay:755"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7105812 (ref 1;2), 350 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0417945,
+      59.952920200000015
+     ],
+     [
+      11.041935,
+      59.95294
+     ],
+     [
+      11.042125799999999,
+      59.95296849999998
+     ],
+     [
+      11.0423145,
+      59.9529967
+     ],
+     [
+      11.0425041,
+      59.9530258
+     ],
+     [
+      11.0428632,
+      59.953083100000015
+     ],
+     [
+      11.043224,
+      59.953143
+     ],
+     [
+      11.0436379,
+      59.9532129
+     ],
+     [
+      11.044044100000002,
+      59.9532828
+     ],
+     [
+      11.0448622,
+      59.95342890000001
+     ],
+     [
+      11.046940799999998,
+      59.95380269999999
+     ],
+     [
+      11.0473734,
+      59.95387960000001
+     ],
+     [
+      11.0475965,
+      59.9539199
+     ],
+     [
+      11.047714399999998,
+      59.95394199999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 3",
+    "track": "3,4",
+    "height_class": "700",
+    "height_m": 0.7,
+    "height_text": "700 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 9.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LLS-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 109.24,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "700",
+    "x_platform_type": "Island platform between tracks 3 and 4",
+    "x_covers_tracks": [
+     "3",
+     "4"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 867.0,
+    "x_passing_loop_m": 285.0,
+    "x_comment": "Island platform between tracks 3 and 4.",
+    "x_geometry": "extent: OSM platform outline r7105813 (ref 3;4), 350 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r7105813",
+    "x_nsr_quays": [
+     "NSR:Quay:761"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7105813 (ref 3;4), 350 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0474072,
+      59.95366940000001
+     ],
+     [
+      11.0472836,
+      59.9536431
+     ],
+     [
+      11.0470605,
+      59.95360190000001
+     ],
+     [
+      11.0466116,
+      59.9535217
+     ],
+     [
+      11.0450032,
+      59.95323369999999
+     ],
+     [
+      11.0447583,
+      59.953191400000016
+     ],
+     [
+      11.04455,
+      59.9531576
+     ],
+     [
+      11.043396499999998,
+      59.95297249999999
+     ],
+     [
+      11.0415733,
+      59.952677900000005
+     ],
+     [
+      11.0411712,
+      59.952613400000004
+     ],
+     [
+      11.0410128,
+      59.95258819999999
+     ],
+     [
+      11.0408529,
+      59.95256710000001
+     ],
+     [
+      11.040691900000002,
+      59.952547800000005
+     ],
+     [
+      11.0406645,
+      59.952545199999996
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 6",
+    "track": "6,7",
+    "height_class": "560",
+    "height_m": 0.56,
+    "height_text": "560 mm above top of rail (Bane NOR)",
+    "length_m": 350.0,
+    "width_m": 11.7,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LLS-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": 109.22,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "560",
+    "x_platform_type": "Island platform between tracks 6 and 7",
+    "x_covers_tracks": [
+     "6",
+     "7"
+    ],
+    "x_track_type": "Train track",
+    "x_track_length_m": 501.0,
+    "x_passing_loop_m": 340.0,
+    "x_comment": "Island platform between tracks 6 and 7.",
+    "x_geometry": "extent: OSM platform outline r7105814 (ref 6;7), 397 m along the track (Bane NOR: 350 m)",
+    "x_osm_platform": "r7105814",
+    "x_nsr_quays": [
+     "NSR:Quay:747"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7105814 (ref 6;7), 397 m along the track (Bane NOR: 350 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0408696,
+      59.9524174
+     ],
+     [
+      11.040929500000003,
+      59.95242450000002
+     ],
+     [
+      11.0412435,
+      59.952467
+     ],
+     [
+      11.0416655,
+      59.9525264
+     ],
+     [
+      11.042058300000003,
+      59.952583
+     ],
+     [
+      11.042717,
+      59.95268159999999
+     ],
+     [
+      11.0434567,
+      59.95279800000001
+     ],
+     [
+      11.0442945,
+      59.95293660000001
+     ],
+     [
+      11.0451156,
+      59.953077199999996
+     ],
+     [
+      11.0459511,
+      59.9532256
+     ],
+     [
+      11.0463357,
+      59.95329279999999
+     ],
+     [
+      11.0465055,
+      59.95332319999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 8",
+    "track": "8,9",
+    "height_class": "560",
+    "height_m": 0.56,
+    "height_text": "560 mm above top of rail (Bane NOR)",
+    "length_m": 250.0,
+    "width_m": 11.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "LLS-8",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 109.83,
+    "laser_track_bed_m": 109.15,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "560",
+    "x_platform_type": "Island platform between tracks 8 and 9",
+    "x_covers_tracks": [
+     "8",
+     "9"
+    ],
+    "x_track_type": "Train track",
+    "x_track_length_m": 451.0,
+    "x_passing_loop_m": 322.0,
+    "x_comment": "Island platform between tracks 8 and 9.",
+    "x_geometry": "extent: OSM platform outline r7105815 (ref 8;9), 331 m along the track (Bane NOR: 250 m)",
+    "x_osm_platform": "r7105815",
+    "x_nsr_quays": [
+     "NSR:Quay:750"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-l-/lillestrom/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r7105815 (ref 8;9), 331 m along the track (Bane NOR: 250 m)"
+   }
+  }
+ ]
+}

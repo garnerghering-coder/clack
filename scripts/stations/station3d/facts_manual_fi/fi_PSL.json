@@ -1,0 +1,599 @@
+{
+ "levels": [
+  {
+   "osm_level": "3",
+   "name": "Asemahalli (station hall) = Mall of Tripla 4th floor ('4. krs')",
+   "other_names": [
+    "Tripla 4. kerros"
+   ],
+   "note": "Station hall opened 17 Oct 2019 on pillars above the tracks, integrally joined to Mall of Tripla (Wikipedia). VR places the lockers 'on the 4th floor of the shopping centre'; OSM names the locker 'Matkatavarasäilytys Asemahalli 4. krs' and tags the hall shops level 3. Pasilansilta (south) and Opastinsilta connect at this level.",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platform level (tracks 1–11)",
+   "other_names": [],
+   "note": "Platforms 1–11 (Digitraffic: 10 korkea + track 10 matala). Signposted Tripla floor number for the platform level not found.",
+   "_source": "Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-PSL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpasses (north tunnel Veturitie–Ratapihantie; 'Siniviiva')",
+   "other_names": [],
+   "note": "Wikipedia: an underpass north of the station connects Veturitie and Ratapihantie. OSM names one underpass 'Siniviiva' (w5231865). Heights: no source measures them.",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n6840018666",
+   "between": [
+    "station hall",
+    "platform tracks 1/2"
+   ],
+   "where": "from the station hall down to the platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018661",
+   "between": [
+    "station hall",
+    "platform tracks 3/4"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n6840018656",
+    "w1134457336"
+   ],
+   "between": [
+    "station hall",
+    "platform tracks 5/6"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018651",
+   "between": [
+    "station hall",
+    "platform tracks 7/8"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10574546644",
+   "between": [
+    "station hall",
+    "platform tracks 9/10"
+   ],
+   "where": "from the station hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6840018642",
+   "between": [
+    "station hall",
+    "platform tracks 10/11 side (OSM refs H0092/H0093)"
+   ],
+   "where": "west side of the hall",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142822",
+    "w1134549164"
+   ],
+   "between": [
+    "station hall (3)",
+    "platform 1/2 (0)"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142823",
+    "w1134549162"
+   ],
+   "between": [
+    "station hall",
+    "platform 3/4"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142824",
+    "w1134549159"
+   ],
+   "between": [
+    "station hall",
+    "platform 5/6"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142821",
+    "w1134549156"
+   ],
+   "between": [
+    "station hall",
+    "platform 7/8"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w1134256267",
+    "w1134549152",
+    "w730142820",
+    "w1134549168"
+   ],
+   "between": [
+    "station hall",
+    "platform 9/10"
+   ],
+   "where": "pairs of escalators",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "escalator",
+   "osm_ids": [
+    "w730142816",
+    "w1134549149"
+   ],
+   "between": [
+    "station hall",
+    "platform 11"
+   ],
+   "where": "one up, one down",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w737781213",
+    "w1134258889",
+    "w484424554",
+    "w1134258891",
+    "w484424553",
+    "w1134464063",
+    "w484424552",
+    "w1134258893",
+    "w733305102",
+    "w1134258895",
+    "w1134260231",
+    "w1134520139"
+   ],
+   "between": [
+    "station hall / bridges",
+    "platforms 1/2, 3/4, 5/6, 7/8, 9/10, 11"
+   ],
+   "where": "stairs to each platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w28477046",
+    "w28476984",
+    "w28476983",
+    "w28476986",
+    "w28857616",
+    "w649127833"
+   ],
+   "between": [
+    "east",
+    "west"
+   ],
+   "where": "underpass under the platforms (OSM layer -1) reaching platforms 1/2, 3/4, 5/6, 7/8, 9/10 and 11",
+   "confirmed_by": "OSM only (Wikipedia mentions an underpass north of the station between Veturitie and Ratapihantie)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Pasilansilta",
+   "osm_id": "w1205955347",
+   "between": [
+    "Itä-Pasila",
+    "Länsi-Pasila"
+   ],
+   "where": "traffic bridge passing south of the station and Tripla; assistance point by the entrance on this side",
+   "confirmed_by": "Wikipedia + owner text (VR)",
+   "_source": "https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Opastinsilta",
+   "osm_ids": [
+    "w24253733",
+    "w358243282",
+    "w469962766"
+   ],
+   "between": [
+    "east",
+    "west"
+   ],
+   "where": "footbridge north side; OSM main entrance n6908493539 (level 3) on Opastinsilta",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Pasilansilta side entrance",
+   "street": "Pasilansilta",
+   "level": "3",
+   "where": "south side of the station hall; VR's assistance point is close to it",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Opastinsilta entrance",
+   "street": "Opastinsilta",
+   "level": "3",
+   "where": "OSM main entrance n6908493539",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Veturitie entrance ('Veturitie sisäänkäynti')",
+   "street": "Veturitie",
+   "level": "0",
+   "where": "west side; OSM n10576816488; also 'Raide 11 Veturitien yhteys' stair entrance n10576786000 to track 11",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "name": "Ratapihantie entrances",
+   "street": "Ratapihantie",
+   "level": "0",
+   "where": "east side (VR address Ratapihantie 6); OSM n6840029186, n10577024872/75/76",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Station hall / waiting room (Asemahalli)",
+   "where": "above the tracks, joined to Mall of Tripla",
+   "level_per_plan": "Tripla 4th floor",
+   "opening_hours": "24/7",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Tripla Asema Itä",
+   "osm_id": "n6909741008",
+   "where": "station hall, east side; shop unit A-4074 (Veturitie 11)",
+   "level_per_plan": "Tripla 4th floor (unit A-4074; OSM level 3)",
+   "opening_hours": "Mo-Th 06:00-19:30; Fr 06:00-20:00; Sa 08:00-19:30; Su 08:30-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Match with OSM by hours (identical). Floor inferred from the unit number A-4xxx and OSM level 3 = '4. krs'; not stated by the shop.",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-ita-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Tripla Asema Länsi",
+   "osm_id": "n7054828649",
+   "where": "station hall, west side; shop unit A-4040 (Veturitie 11)",
+   "level_per_plan": "Tripla 4th floor by unit number A-4040 (OSM tags level 2 — conflict)",
+   "opening_hours": "Mo-Th 05:30-22:30; Fr 05:30-23:30; Sa,Su 07:30-22:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Match with OSM by hours (Mo-Th/Fr identical).",
+   "_source": "https://www.r-kioski.fi/kioskit/helsinki-tripla-asema-lansi-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Pasilan Apteekki",
+   "osm_id": "n3635432312",
+   "where": "station hall level; VR: the luggage lockers are on the 4th floor next to Pasila Pharmacy, near tracks 9–10",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-22:00; Sa,Su 09:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "Alepa",
+   "osm_id": "n6888053756",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "K-Market",
+   "osm_id": "n6888053757",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 06:00-22:00; Sa,Su 09:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Hesburger",
+   "osm_id": "n6938652927",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 00:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM gives 00:00-00:00 every day (read as 24 h).",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Burger King",
+   "osm_id": "n12182734894",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 07:00-01:00; Fr 07:00-24:00; Sa 00:00-24:00; Su 00:00-01:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM hours look inconsistent; check on the shop's site.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "KFC",
+   "osm_id": "n14090237169",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 09:00-24:00; Fr,Sa 09:00-04:00; Su 10:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Subway",
+   "osm_id": "n7054844293",
+   "where": "in the station building (OSM, no level)",
+   "level_per_plan": "not given",
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Picnic",
+   "osm_id": "n8977942412",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-21:00; Su 09:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Gateau",
+   "osm_id": "n6987659787",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-19:00; Su 10:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "cafe",
+   "name": "Bär Bar",
+   "osm_id": "n6938652928",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 06:30-22:00; Sa,Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "beverages",
+   "name": "Jungle Juice Bar 4. krs",
+   "osm_id": "n6987636538",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3); OSM name says '4. krs'",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 08:00-20:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "Bar Pikajuna",
+   "osm_id": "n8977942409",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 10:00-24:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Oluthuone Ratamo",
+   "osm_id": "n6938652926",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Th 10:00-24:00; Fr 10:00-02:00; Sa 10:00-01:00; Su 10:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "tea",
+   "name": "QualiTea",
+   "osm_id": "n6938652929",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Su 07:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "florist",
+   "name": "Kaivokukka Tripla",
+   "osm_id": "n6938652930",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "butcher",
+   "name": "Riipisen riistaherkut",
+   "osm_id": "n8977942411",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Sa 08:00-21:00; Su 10:00-15:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "photo",
+   "name": "Tunnin kuva",
+   "osm_id": "n6936787996",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:00-20:00; Su 11:00-20:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "parcel_locker",
+   "name": "Posti",
+   "osm_id": "n13363760901",
+   "where": "in the station hall (Asemahalli) above the tracks, Tripla 4th floor (OSM level 3)",
+   "level_per_plan": "3 (OSM) = station hall, Tripla 4th floor",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Nosto (3 machines)",
+   "osm_ids": [
+    "n11545069651",
+    "n11545069652",
+    "n11545069653"
+   ],
+   "where": "in the station building (OSM, no level)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet",
+   "osm_id": "n7054579577",
+   "where": "in the station building (OSM, no level, no fee tag)",
+   "note": "VR lists a toilet among Pasila's services; no fee or location given.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Matkatavarasäilytys Asemahalli 4. krs",
+   "osm_id": "n10577666932",
+   "where": "4th floor of the shopping centre, next to Pasila Pharmacy and near tracks 9–10",
+   "level_per_plan": "Tripla 4th floor (OSM node tagged level 0 — conflict)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR and HSL ticket machines",
+   "osm_ids": [
+    "n7054579576",
+    "n7054579575"
+   ],
+   "where": "in the station building (OSM)",
+   "note": "VR: no VR service point at Pasila.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "service_point",
+   "name": "HSL Palvelupiste",
+   "osm_id": "n4625883091",
+   "where": "in the station building, OSM level 4.5 (above the station hall)",
+   "opening_hours": "Mo-Fr 08:30-18:00; Sa 09:30-17:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR assistance point",
+   "where": "close to the entrance on the Pasilansilta side; book on 0800 188 822",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Pasilan asema taxi",
+   "osm_id": "w1134266686",
+   "where": "OSM level 3 (bridge/deck level), outside the station; VR: Lähitaksi 10% discount with train ticket",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Triplaparkki",
+   "where": "Mall of Tripla car park, entry from Firdonkatu or Pasilan tornikuja",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief: only shops in or directly at the station hall and the routes to the platforms)",
+   "answer": "Station hall (Asemahalli) is Tripla's 4th floor above the tracks, open 24 h (VR). OSM maps from it one lift, one up/down escalator pair and stairs to each platform (1/2, 3/4, 5/6, 7/8, 9/10, 11); no owner page lists them. Shops at the hall: two R-kioski (hours from r-kioski.fi), pharmacy, Alepa (24/7), K-Market, fast food and cafés with hours from OSM. Lockers on the 4th floor by the pharmacy near tracks 9–10.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/pasila, read 2026-10-30; https://en.wikipedia.org/wiki/Pasila_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PSL.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-PSL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "tripla.fi could not be read (robots.txt blocks automated fetching), so no shop floor/hours from the owner; hours other than R-kioski are OSM's only. The web-search budget for this run ran out before the shops' own sites (Alepa, K-Market, Pasilan Apteekki, Hesburger, Burger King…) could be looked up.",
+  "Lifts/escalators to the platforms are OSM only: no owner or authority text found that lists them (VR's Pasila page names none).",
+  "Signposted floor number of the platform level and of Pasilansilta/Opastinsilta not found; OSM levels 0/3 are used. R-kioski Länsi (unit A-4040) is tagged level 2 in OSM and the luggage locker level 0 while VR says 4th floor: OSM level tags need checking.",
+  "Brokadi, Teppanyaki, Candytown, Terveystalo (mall upper levels) and Specsavers (level 1) left out as mall, not station hall. Rauhanasema / Rauhankahvila Fredrika (old station building) left out. HSL Palvelupiste is kept (service point) although OSM puts it at level 4.5.",
+  "Toilet fee and position: VR lists a toilet; OSM node has no level/fee.",
+  "No owner station plan found (HSL area map filename for Pasila unknown, search budget exhausted)."
+ ]
+}

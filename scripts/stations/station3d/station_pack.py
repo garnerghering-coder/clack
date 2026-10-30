@@ -49,13 +49,15 @@ H_CLS = meta.get('height_classes') or {'låg': 0.35, 'mellan': 0.58, 'hög': 0.7
 EXCLUDE_BIS = {'740000001': {'2308', '2309', '811', '812'}, '740000361': {'1220'}, '740000170': {'2489', '2490'},
                '740001586': {'2597'}, '740000005': {'2335', '2336'}}
 import csv
-_SE_DIR = os.environ.get('SE_REGISTER_DIR', '/home/claude/work/out')
+_SE_DIR = os.environ.get('SE_REGISTER_DIR', 'data/stations/research')
 IN_BILAGA = {r['bis_object'] for r in csv.DictReader(open(f'{_SE_DIR}/trafikverket_platforms_SE.csv', encoding='utf-8'))
              if r['clack_id'] == CID and r['source_row'].startswith('Bilaga') and r['bis_object']} if COUNTRY == 'SE' else set()
 BILAGA_ROWS = [(r_.split('|')[3].lower(), {t.strip().lower() for t in r_.split('|')[2].split(',')})
                for r_ in open(f'{_SE_DIR}/bilaga2a_raw.txt', encoding='utf-8') if not r_.startswith('#') and CID.endswith(r_.split('|')[0])] if COUNTRY == 'SE' else []
 report = {'clack_id': CID, 'slug': SLUG, 'flags': [], 'notes': [], 'osm_source': osm.get('_endpoint', '?')}
 flag = lambda s: report['flags'].append(s)
+if meta.get('doc_profile'):
+    report['profile'] = meta['doc_profile']   # wording and sources for gen_docs.py outside Sweden
 
 # ---------------------------------------------------------------- terrain model window
 dtm = np.fromfile(f'{SRC}/dtm_window.f32', dtype='<f4').reshape(H, W)
@@ -344,7 +346,11 @@ is_train = np.zeros(len(X), bool)
 trains = []
 tlines = [r[2] for r in rails]
 if tlines and len(X):
-    cand_t = np.where(OBJ & (HAG > 2.6) & (HAG < 5.0))[0]
+    # where the terrain model has no ground under a standing train (a terrain model gridded from the laser itself),
+    # measure from the station's median track bed instead: used only to find train roofs, not written anywhere
+    _bed0 = report['track_bed_m'] if report['track_bed_m'] is not None else np.nanmedian(dtm)
+    HAGt = Z - np.where(np.isnan(G), _bed0, G)
+    cand_t = np.where(OBJ & (HAGt > 2.6) & (HAGt < 5.0))[0]
     if len(cand_t):
         P = shapely.points(X[cand_t], Y[cand_t])
         D = np.stack([shapely.distance(l, P) for l in tlines])
@@ -366,7 +372,7 @@ if tlines and len(X):
                 ad = np.abs(d_[seg])
                 if np.median(ad) > 1.0 or np.percentile(ad, 90) > 1.9:
                     continue
-                bedloc = dtm_at(X[pi[seg]], Y[pi[seg]])
+                bedloc = dtm_at(X[pi[seg]], Y[pi[seg]]); bedloc = np.where(np.isnan(bedloc), _bed0, bedloc)
                 above = float(np.median(Z[pi[seg]] - bedloc))
                 if not 3.0 <= above <= 4.8:
                     continue

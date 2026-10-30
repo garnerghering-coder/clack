@@ -1,0 +1,413 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      22.8473319,
+      62.79053829999998
+     ],
+     [
+      22.847081699999997,
+      62.79065640000002
+     ],
+     [
+      22.8467997,
+      62.790783600000005
+     ],
+     [
+      22.845603,
+      62.79132810000001
+     ],
+     [
+      22.8454115,
+      62.791415300000004
+     ],
+     [
+      22.845325000000003,
+      62.79145439999999
+     ],
+     [
+      22.8452908,
+      62.7914699
+     ],
+     [
+      22.844673600000004,
+      62.79175140000001
+     ],
+     [
+      22.8443877,
+      62.79188169999999
+     ],
+     [
+      22.8443841,
+      62.79188340000001
+     ],
+     [
+      22.8441852,
+      62.7919728
+     ],
+     [
+      22.8440299,
+      62.79204309999999
+     ],
+     [
+      22.843909100000005,
+      62.792097699999985
+     ],
+     [
+      22.8436912,
+      62.792196999999994
+     ],
+     [
+      22.8436845,
+      62.792199999999994
+     ],
+     [
+      22.843682500000003,
+      62.79220089999999
+     ],
+     [
+      22.8424959,
+      62.792739299999994
+     ],
+     [
+      22.8410617,
+      62.79338989999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "SK L1",
+    "track": "1",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 451.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 346, \"etaisyys\": 873}, \"loppu\": {\"ratakm\": 347, \"etaisyys\": 320}}, {\"ratanumero\": \"008\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 789}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"066\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 789}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"431\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 789}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"441\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 789}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190528",
+    "reflink_oid": "1.2.246.586.1.37.3329958",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 45.22,
+    "laser_track_bed_m": 44.56,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "1",
+    "x_infra_oid": "1.2.246.586.1.37.3329958",
+    "x_description": "Seinäjoki laituri: 1",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3329958, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      22.8473715,
+      62.790584099999975
+     ],
+     [
+      22.847151900000004,
+      62.790689
+     ],
+     [
+      22.846872100000002,
+      62.79081379999999
+     ],
+     [
+      22.845669600000004,
+      62.791359299999996
+     ],
+     [
+      22.8454796,
+      62.7914455
+     ],
+     [
+      22.845391800000005,
+      62.7914853
+     ],
+     [
+      22.844456900000004,
+      62.79190940000001
+     ],
+     [
+      22.8443387,
+      62.7919629
+     ],
+     [
+      22.8440935,
+      62.7920738
+     ],
+     [
+      22.843974,
+      62.79212780000001
+     ],
+     [
+      22.8437587,
+      62.792225200000004
+     ],
+     [
+      22.8437509,
+      62.7922287
+     ],
+     [
+      22.8425597,
+      62.79276730000001
+     ],
+     [
+      22.8411328,
+      62.79341719999999
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "SK L2",
+    "track": "2",
+    "height_class": "matala",
+    "height_m": 0.265,
+    "height_text": "matala",
+    "length_m": 448.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"003\", \"alku\": {\"ratakm\": 346, \"etaisyys\": 875}, \"loppu\": {\"ratakm\": 347, \"etaisyys\": 320}}, {\"ratanumero\": \"008\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 791}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"066\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 791}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"431\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 791}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}, {\"ratanumero\": \"441\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 791}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 236}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190528",
+    "reflink_oid": "1.2.246.586.1.37.3329966",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 45.25,
+    "laser_track_bed_m": 44.55,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "2",
+    "x_infra_oid": "1.2.246.586.1.37.3329966",
+    "x_description": "Seinäjoki laituri: 2",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3329966, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      22.8467993,
+      62.79102409999999
+     ],
+     [
+      22.846789399999995,
+      62.79102850000001
+     ],
+     [
+      22.8466596,
+      62.7910871
+     ],
+     [
+      22.8463987,
+      62.791204500000006
+     ],
+     [
+      22.846388800000003,
+      62.79120889999999
+     ],
+     [
+      22.8460763,
+      62.7913544
+     ],
+     [
+      22.8456001,
+      62.79157
+     ],
+     [
+      22.8448538,
+      62.79191240000001
+     ],
+     [
+      22.8447877,
+      62.79194090000001
+     ],
+     [
+      22.8445298,
+      62.79205790000001
+     ],
+     [
+      22.8445156,
+      62.7920644
+     ],
+     [
+      22.844510200000002,
+      62.792066799999986
+     ],
+     [
+      22.844508099999995,
+      62.792067700000004
+     ],
+     [
+      22.8445005,
+      62.7920709
+     ],
+     [
+      22.8444877,
+      62.7920769
+     ],
+     [
+      22.8444793,
+      62.792080800000015
+     ],
+     [
+      22.8418136,
+      62.793289
+     ],
+     [
+      22.841293400000005,
+      62.79352449999999
+     ],
+     [
+      22.8405173,
+      62.793881000000006
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "SK L3",
+    "track": "3",
+    "height_class": "matala",
+    "height_m": 0.265,
+    "height_text": "matala",
+    "length_m": 459.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"008\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 845}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 297}}, {\"ratanumero\": \"431\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 845}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 297}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190528",
+    "reflink_oid": "1.2.246.586.1.37.3329972",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 45.06,
+    "laser_track_bed_m": 44.5,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "3",
+    "x_infra_oid": "1.2.246.586.1.37.3329972",
+    "x_description": "Seinäjoki laituri: 3",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3329972, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      22.8406534,
+      62.79394439999999
+     ],
+     [
+      22.8407517,
+      62.7938979
+     ],
+     [
+      22.840970500000005,
+      62.79379490000001
+     ],
+     [
+      22.8414129,
+      62.793596300000004
+     ],
+     [
+      22.841555500000002,
+      62.79353179999999
+     ],
+     [
+      22.8415859,
+      62.793518299999995
+     ],
+     [
+      22.8416092,
+      62.79350849999998
+     ],
+     [
+      22.8417191,
+      62.793457999999994
+     ],
+     [
+      22.8426501,
+      62.793035100000004
+     ],
+     [
+      22.842936,
+      62.792904300000004
+     ],
+     [
+      22.8434368,
+      62.7926752
+     ],
+     [
+      22.8443884,
+      62.7922449
+     ],
+     [
+      22.8447555,
+      62.7920768
+     ],
+     [
+      22.8457534,
+      62.791623599999994
+     ],
+     [
+      22.8458635,
+      62.791574399999995
+     ],
+     [
+      22.8458926,
+      62.7915613
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "SK L4",
+    "track": "4",
+    "height_class": "matala",
+    "height_m": 0.265,
+    "height_text": "matala",
+    "length_m": 396.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"008\", \"alku\": {\"ratakm\": 417, \"etaisyys\": 918}, \"loppu\": {\"ratakm\": 418, \"etaisyys\": 297}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190528",
+    "reflink_oid": "1.2.246.586.1.37.3329979",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 45.02,
+    "laser_track_bed_m": 44.52,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "4",
+    "x_infra_oid": "1.2.246.586.1.37.3329979",
+    "x_description": "Seinäjoki laituri: 4",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3329979, read 2026-10-30, CC BY 4.0"
+   }
+  }
+ ]
+}

@@ -1,0 +1,541 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.5364176,
+      55.7041355
+     ],
+     [
+      9.5364131,
+      55.7041687
+     ],
+     [
+      9.5363968,
+      55.7043564
+     ],
+     [
+      9.5363945,
+      55.7044179
+     ],
+     [
+      9.5363889,
+      55.7045607
+     ],
+     [
+      9.5363915,
+      55.7047127
+     ],
+     [
+      9.5363973,
+      55.7048464
+     ],
+     [
+      9.5364086,
+      55.7049676
+     ],
+     [
+      9.5364206,
+      55.7050695
+     ],
+     [
+      9.5364346,
+      55.705166
+     ],
+     [
+      9.5364548,
+      55.705285
+     ],
+     [
+      9.5364698,
+      55.7053565
+     ],
+     [
+      9.5364808,
+      55.7054067
+     ],
+     [
+      9.5364899,
+      55.7054445
+     ],
+     [
+      9.5365101,
+      55.7055284
+     ],
+     [
+      9.5365323,
+      55.7056103
+     ],
+     [
+      9.5365894,
+      55.7057955
+     ],
+     [
+      9.5367516,
+      55.706242
+     ],
+     [
+      9.5370468,
+      55.7070412
+     ],
+     [
+      9.5371158,
+      55.7072266
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 3",
+    "track": "3",
+    "perron": "1",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "23",
+    "height_class": "50 cm",
+    "height_m": 0.5,
+    "length_m": 338,
+    "width_m": 6.5,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 3 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (348 m along it; Bilag 338 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.5365304,
+      55.7041404
+     ],
+     [
+      9.536521,
+      55.7042101
+     ],
+     [
+      9.5365119,
+      55.7043
+     ],
+     [
+      9.5365093,
+      55.7043256
+     ],
+     [
+      9.5365054,
+      55.704399
+     ],
+     [
+      9.5365033,
+      55.7044651
+     ],
+     [
+      9.5365028,
+      55.7045186
+     ],
+     [
+      9.5365028,
+      55.7045237
+     ],
+     [
+      9.5365054,
+      55.704632
+     ],
+     [
+      9.5365123,
+      55.704746
+     ],
+     [
+      9.5365126,
+      55.7047494
+     ],
+     [
+      9.5365186,
+      55.7048055
+     ],
+     [
+      9.5365265,
+      55.7048716
+     ],
+     [
+      9.5365417,
+      55.7049737
+     ],
+     [
+      9.5365428,
+      55.7049806
+     ],
+     [
+      9.5365606,
+      55.7050752
+     ],
+     [
+      9.5365831,
+      55.7051763
+     ],
+     [
+      9.536607,
+      55.7052691
+     ],
+     [
+      9.5366331,
+      55.7053593
+     ],
+     [
+      9.5366896,
+      55.7055377
+     ],
+     [
+      9.5367115,
+      55.7055995
+     ],
+     [
+      9.5367429,
+      55.7056822
+     ],
+     [
+      9.5367906,
+      55.7058117
+     ],
+     [
+      9.536841,
+      55.7059476
+     ],
+     [
+      9.5369585,
+      55.7062647
+     ],
+     [
+      9.5370191,
+      55.7064329
+     ],
+     [
+      9.5370881,
+      55.706625
+     ],
+     [
+      9.5371363,
+      55.7067622
+     ],
+     [
+      9.5371847,
+      55.7069112
+     ],
+     [
+      9.537258,
+      55.7071403
+     ],
+     [
+      9.5372789,
+      55.7072103
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 4",
+    "track": "4",
+    "perron": "1",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "23",
+    "height_class": "35 cm",
+    "height_m": 0.35,
+    "length_m": 338,
+    "width_m": 6.5,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 4 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (346 m along it; Bilag 338 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.5366111,
+      55.7041412
+     ],
+     [
+      9.5366059,
+      55.7041779
+     ],
+     [
+      9.5365992,
+      55.7042365
+     ],
+     [
+      9.5365922,
+      55.7043215
+     ],
+     [
+      9.5365857,
+      55.7044209
+     ],
+     [
+      9.5365831,
+      55.7045371
+     ],
+     [
+      9.5365859,
+      55.704667
+     ],
+     [
+      9.5365918,
+      55.7047767
+     ],
+     [
+      9.5366007,
+      55.7048851
+     ],
+     [
+      9.5366146,
+      55.7050077
+     ],
+     [
+      9.5366377,
+      55.7051318
+     ],
+     [
+      9.5366686,
+      55.7052522
+     ],
+     [
+      9.536707,
+      55.7053832
+     ],
+     [
+      9.5367276,
+      55.7054466
+     ],
+     [
+      9.536771,
+      55.7055716
+     ],
+     [
+      9.5368077,
+      55.7056773
+     ],
+     [
+      9.536879,
+      55.7058659
+     ],
+     [
+      9.5369849,
+      55.7061546
+     ],
+     [
+      9.5370341,
+      55.7062879
+     ],
+     [
+      9.5371256,
+      55.7065364
+     ],
+     [
+      9.537133,
+      55.7065565
+     ],
+     [
+      9.5372009,
+      55.7067508
+     ],
+     [
+      9.5373065,
+      55.707073
+     ],
+     [
+      9.5373249,
+      55.7071334
+     ],
+     [
+      9.5373391,
+      55.7071799
+     ],
+     [
+      9.5373454,
+      55.7072018
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 5",
+    "track": "5",
+    "perron": "2",
+    "perron_tracks": [
+     "5",
+     "6"
+    ],
+    "tib": "23",
+    "height_class": "50 cm",
+    "height_m": 0.5,
+    "length_m": 338,
+    "width_m": 6.9,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 5 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (345 m along it; Bilag 338 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.5367191,
+      55.704145
+     ],
+     [
+      9.5367166,
+      55.7041698
+     ],
+     [
+      9.5367099,
+      55.7042842
+     ],
+     [
+      9.5367098,
+      55.7044023
+     ],
+     [
+      9.5367118,
+      55.7045283
+     ],
+     [
+      9.5367188,
+      55.7046169
+     ],
+     [
+      9.5367296,
+      55.7047224
+     ],
+     [
+      9.5367411,
+      55.7048079
+     ],
+     [
+      9.5367512,
+      55.704864
+     ],
+     [
+      9.5367598,
+      55.7049096
+     ],
+     [
+      9.5367778,
+      55.7049906
+     ],
+     [
+      9.5368003,
+      55.7050814
+     ],
+     [
+      9.5368448,
+      55.7052302
+     ],
+     [
+      9.5368599,
+      55.7052764
+     ],
+     [
+      9.536903,
+      55.7053992
+     ],
+     [
+      9.5369594,
+      55.7055541
+     ],
+     [
+      9.5369677,
+      55.7055773
+     ],
+     [
+      9.5370249,
+      55.7057329
+     ],
+     [
+      9.5370665,
+      55.7058409
+     ],
+     [
+      9.5371,
+      55.7059312
+     ],
+     [
+      9.5371897,
+      55.7061726
+     ],
+     [
+      9.537217,
+      55.7062492
+     ],
+     [
+      9.5372686,
+      55.7063863
+     ],
+     [
+      9.5373118,
+      55.7065105
+     ],
+     [
+      9.5373496,
+      55.7066319
+     ],
+     [
+      9.5373733,
+      55.7067247
+     ],
+     [
+      9.5373993,
+      55.7068463
+     ],
+     [
+      9.5374162,
+      55.7069434
+     ],
+     [
+      9.5374468,
+      55.7071586
+     ],
+     [
+      9.5374522,
+      55.7071955
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 6",
+    "track": "6",
+    "perron": "2",
+    "perron_tracks": [
+     "5",
+     "6"
+    ],
+    "tib": "23",
+    "height_class": "35 cm",
+    "height_m": 0.35,
+    "length_m": 338,
+    "width_m": 7.0,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 6 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (344 m along it; Bilag 338 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  }
+ ]
+}

@@ -1,0 +1,910 @@
+{
+ "clack_id": "860000061",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [
+  {
+   "osm_id": "w49511361",
+   "ref": "1",
+   "level": null
+  },
+  {
+   "osm_id": "w49511362",
+   "ref": "2;3",
+   "level": null
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w49512204",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.2,
+   "reaches_platforms": [
+    "2;3"
+   ],
+   "lonlat": [
+    9.9244724,
+    56.0435498
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w49512205",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 12.2,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.9247798,
+    56.0434412
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w49512712",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 92.0,
+   "reaches_platforms": [
+    "1",
+    "2;3"
+   ],
+   "lonlat": [
+    9.9246043,
+    56.0433859
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w433516644",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 1.7,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.9246043,
+    56.0433859
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w433516646",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 12.2,
+   "reaches_platforms": [
+    "2;3"
+   ],
+   "lonlat": [
+    9.9247104,
+    56.0435873
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "w433516648",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 10.3,
+   "reaches_platforms": [
+    "2;3"
+   ],
+   "lonlat": [
+    9.9244534,
+    56.0435444
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1049602780",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.3,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.928471,
+    56.0442912
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1307083959",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 9.6,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.9267402,
+    56.0435271
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1450520844",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.1,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.9273724,
+    56.0439597
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4322092394",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [
+    "1"
+   ],
+   "lonlat": [
+    9.9246302,
+    56.04339
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n4321953197",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 6.8,
+   "lonlat": [
+    9.9248564,
+    56.0433446
+   ]
+  },
+  {
+   "osm_id": "n4321953214",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 17.2,
+   "lonlat": [
+    9.9248082,
+    56.0434339
+   ]
+  },
+  {
+   "osm_id": "n4322092398",
+   "name": null,
+   "entrance": "yes",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Banegårdspladsen",
+   "nearest_street_m": 35.7,
+   "lonlat": [
+    9.9244724,
+    56.0435498
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n439766134",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 29,
+   "lonlat": [
+    9.9249021,
+    56.0433123
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.6
+  },
+  {
+   "osm_id": "n1241568977",
+   "category": "shop=convenience",
+   "name": "7-Eleven",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:45-22:00; Sa 06:45-22:00; Su 08:45-22:00",
+   "wheelchair": "yes",
+   "distance_m": 49,
+   "lonlat": [
+    9.9245708,
+    56.0433465
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 5.1,
+   "brand": "7-Eleven",
+   "operator": "Kort & Godt"
+  },
+  {
+   "osm_id": "n6900719958",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "wheelchair": "yes",
+   "distance_m": 25,
+   "lonlat": [
+    9.9249788,
+    56.0434462
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 1.8,
+   "payment:coins": "no"
+  },
+  {
+   "osm_id": "n6900799658",
+   "category": "waiting_room",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 29,
+   "lonlat": [
+    9.9249031,
+    56.043395
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 5.8
+  },
+  {
+   "osm_id": "n12104718158",
+   "category": "parcel_locker",
+   "name": "PostNord",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 200,
+   "lonlat": [
+    9.9282221,
+    56.0441798
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.0,
+   "brand": "PostNord",
+   "operator": "Post Danmark A/S"
+  },
+  {
+   "osm_id": "n13291540880",
+   "category": "vending_machine",
+   "name": "DSB",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 46,
+   "lonlat": [
+    9.9247319,
+    56.0435848
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": 0.0,
+   "operator": "DSB",
+   "indoor": "yes",
+   "payment:coins": "yes"
+  },
+  {
+   "osm_id": "n13304561821",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 124,
+   "lonlat": [
+    9.9271261,
+    56.0438761
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 3.2
+  },
+  {
+   "osm_id": "n13711255871",
+   "category": "charging_station",
+   "name": "Clever",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 157,
+   "lonlat": [
+    9.9277006,
+    56.0438969
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.2,
+   "operator": "Clever"
+  },
+  {
+   "osm_id": "n14177930428",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 45,
+   "lonlat": [
+    9.9246573,
+    56.0432713
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": 14.6
+  },
+  {
+   "osm_id": "w318992650",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 158,
+   "lonlat": [
+    9.9310744,
+    56.0450876
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 8.4
+  },
+  {
+   "osm_id": "w433455921",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.9255042,
+    56.0435024
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0,
+   "operator": "DSB"
+  },
+  {
+   "osm_id": "w433455923",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 70,
+   "lonlat": [
+    9.9240891,
+    56.0432642
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 0.0,
+   "operator": "DSB"
+  },
+  {
+   "osm_id": "w433544720",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 53,
+   "lonlat": [
+    9.9251275,
+    56.0427376
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 62.5
+  },
+  {
+   "osm_id": "w433544721",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 58,
+   "lonlat": [
+    9.9259343,
+    56.0427634
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 72.2
+  },
+  {
+   "osm_id": "w648695442",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 60,
+   "lonlat": [
+    9.9246502,
+    56.0437867
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 16.4
+  },
+  {
+   "osm_id": "w1450467373",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 124,
+   "lonlat": [
+    9.9272504,
+    56.0437796
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 10.5
+  },
+  {
+   "osm_id": "w1558558058",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    9.9243061,
+    56.0432142
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558059",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 68,
+   "lonlat": [
+    9.9242676,
+    56.0432079
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558060",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 63,
+   "lonlat": [
+    9.9243444,
+    56.0432206
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558061",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 51,
+   "lonlat": [
+    9.9244879,
+    56.0432452
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558062",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 56,
+   "lonlat": [
+    9.9244498,
+    56.0432387
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558063",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 51,
+   "lonlat": [
+    9.9245256,
+    56.0432516
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.3
+  },
+  {
+   "osm_id": "w1558558064",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 41,
+   "lonlat": [
+    9.9246559,
+    56.0432733
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.2
+  },
+  {
+   "osm_id": "w1558558065",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 23,
+   "lonlat": [
+    9.9249171,
+    56.0433166
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558066",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 28,
+   "lonlat": [
+    9.9248794,
+    56.0433102
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558067",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 23,
+   "lonlat": [
+    9.9249545,
+    56.043323
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558068",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 11,
+   "lonlat": [
+    9.9250973,
+    56.0433473
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558069",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 16,
+   "lonlat": [
+    9.925059,
+    56.0433409
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558070",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 11,
+   "lonlat": [
+    9.9251356,
+    56.0433536
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558071",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 1,
+   "lonlat": [
+    9.9252814,
+    56.043378
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558072",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 5,
+   "lonlat": [
+    9.9252424,
+    56.0433715
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558073",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 1,
+   "lonlat": [
+    9.9253193,
+    56.0433843
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558074",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 3,
+   "lonlat": [
+    9.925465,
+    56.0434087
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558075",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 3,
+   "lonlat": [
+    9.9254278,
+    56.0434025
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558076",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.9255038,
+    56.0434151
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558077",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 15,
+   "lonlat": [
+    9.9256485,
+    56.0434392
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558078",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 15,
+   "lonlat": [
+    9.9256102,
+    56.0434331
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558079",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 19,
+   "lonlat": [
+    9.9256864,
+    56.0434453
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.4
+  },
+  {
+   "osm_id": "w1558558080",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 26,
+   "lonlat": [
+    9.9258331,
+    56.0434693
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.5
+  },
+  {
+   "osm_id": "w1558558081",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 26,
+   "lonlat": [
+    9.925794,
+    56.0434625
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.5
+  },
+  {
+   "osm_id": "w1558558082",
+   "category": "parking_space",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 31,
+   "lonlat": [
+    9.9258705,
+    56.0434758
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": 13.5
+  }
+ ]
+}

@@ -1,0 +1,1296 @@
+{
+ "clack_id": "NO-DRM",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Stasjonshallen / street level (Strømsø torg) and the platforms",
+   "other_names": [
+    "stasjonshall (Bane NOR's word)",
+    "venterommet"
+   ],
+   "note": "Bane NOR's words, not confirmed signage. The station hall (waiting room, Narvesen, Joker, Backstube, toilets) is at street level on Strømsø torg; the whole station area was raised 40 cm in the 2023-2025 rebuild. OSM puts platform 1 on level 0.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Personundergang / undergang under sporene (pedestrian underpass)",
+   "note": "Bane NOR: lift from the station hall/waiting room down to the underpass under the tracks. Byggeindustrien: a new underpass was built from the station hall under the tracks in the rebuild. Signposted name not found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Bybrua (the new city bridge, deck over the west end of the platforms)",
+   "note": "Byggeindustrien: from the new Bybrua there is access down to all platforms; Bybrua opened to pedestrians and cyclists Sept 2025. OSM tags the bridge walkways as layer 1 and one lift as level 0;1.",
+   "_source": "Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "track 1",
+   "track": "1",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 1 (the train stops with the platform to its south-west)",
+   "_source": "laser (2015-07-07, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "track 6",
+   "track": "6",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 6 (the train stops with the platform to its south-west)",
+   "_source": "laser (2015-07-07, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 6; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n13110852328",
+   "between": [
+    "stasjonshallen (level 0)",
+    "underpass (level -1)"
+   ],
+   "where": "in the station hall, at the head of the underpass",
+   "confirmed_by": "owner text (Bane NOR: 'Heis fra stasjonshall ned til personundergang') + OSM position",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2040978,
+    "lat": 59.7404324,
+    "how": "OSM n13110852328",
+    "_source": "OpenStreetMap n13110852328 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12092256396",
+   "between": [
+    "underpass (level -1)",
+    "platform 1"
+   ],
+   "where": "from the underpass up to side platform 1",
+   "confirmed_by": "OSM only (wheelchair=yes). Bane NOR's accessibility text names only the station-hall lift and 'stairs and steep ramps up to the island platforms'; the text looks older than the Aug 2025 rebuild.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30",
+   "position": {
+    "lon": 10.2047213,
+    "lat": 59.7405917,
+    "how": "OSM n12092256396",
+    "_source": "OpenStreetMap n12092256396 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12088005667",
+   "between": [
+    "underpass (level -1)",
+    "platform 2/3 (island)"
+   ],
+   "where": "from the underpass up to the island platform for tracks 2 and 3",
+   "confirmed_by": "OSM only (wheelchair=yes)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2045522,
+    "lat": 59.7404596,
+    "how": "OSM n12088005667",
+    "_source": "OpenStreetMap n12088005667 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1305136504",
+    "w1305604729"
+   ],
+   "between": [
+    "underpass (level -1)",
+    "platform 1"
+   ],
+   "where": "next to the platform-1 lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1305136509",
+   "between": [
+    "underpass (level -1)",
+    "platform 2/3"
+   ],
+   "where": "next to the platform-2/3 lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2044296,
+    "lat": 59.7405014,
+    "how": "OSM w1305136509 (point on the way)",
+    "_source": "OpenStreetMap w1305136509 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w502864348",
+    "w1006440228"
+   ],
+   "between": [
+    "stasjonshallen (level 0)",
+    "underpass (level -1)"
+   ],
+   "where": "from the station hall down into the underpass",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w1305136507",
+    "w1161541669",
+    "w1006440229",
+    "w483183155",
+    "w1305136506",
+    "w1305136508"
+   ],
+   "between": [
+    "stasjonshallen",
+    "platforms 1 and 2/3 (as mapped in OSM)"
+   ],
+   "where": "from the station hall under the tracks",
+   "confirmed_by": "owner text (Bane NOR: undergang under sporene) + trade press (new underpass from the station hall, 2025) + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "between": [
+    "underpass",
+    "island platforms"
+   ],
+   "where": "not mapped in OSM",
+   "note": "Bane NOR: 'Trapp og bratte ramper opp til midtplattformer'; 'Rullestolrampene fra undergang under sporene i Drammen er bratte.' Possibly pre-rebuild text.",
+   "confirmed_by": "owner text only",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "name": "Bybrua",
+   "osm_ids": [
+    "w706332454",
+    "w706332455"
+   ],
+   "between": [
+    "Strømsø side",
+    "Bragernes side (over the river)"
+   ],
+   "where": "west end of the station; Byggeindustrien: access down from the new Bybrua to all platforms",
+   "confirmed_by": "trade press text + OSM",
+   "_source": "Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w134548808",
+    "w134548812",
+    "w1444726167",
+    "w1444726170"
+   ],
+   "between": [
+    "Bybrua (level 1)",
+    "platform 1"
+   ],
+   "where": "west end of platform 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1444726160",
+   "between": [
+    "Bybrua (level 1)",
+    "platform 2/3"
+   ],
+   "where": "west end of platform 2/3",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.202775,
+    "lat": 59.7409915,
+    "how": "OSM w1444726160 (point on the way)",
+    "_source": "OpenStreetMap w1444726160 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w1444726162",
+    "w1444726165"
+   ],
+   "between": [
+    "Bybrua (level 1)",
+    "a platform OSM does not map (probably 4/5 or 6; not confirmed)"
+   ],
+   "where": "west end, from Bybrua",
+   "confirmed_by": "OSM only (OSM has no platform 4/5 or 6 to attach them to)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3373384166",
+   "between": [
+    "street level (0)",
+    "Bybrua (1)"
+   ],
+   "where": "at the north end of Bybrua, beside the platform-1 stairs; OSM links it to no platform",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2025296,
+    "lat": 59.7413099,
+    "how": "OSM n3373384166",
+    "_source": "OpenStreetMap n3373384166 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w134548808",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w134548808 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2032101,
+    "lat": 59.741075,
+    "how": "OSM w134548808 (point on the way)",
+    "_source": "OpenStreetMap w134548808 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w134548812",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w134548812 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2026129,
+    "lat": 59.7412257,
+    "how": "OSM w134548812 (point on the way)",
+    "_source": "OpenStreetMap w134548812 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w706332454",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 259.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w706332454 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2026502,
+    "lat": 59.7412782,
+    "how": "OSM w706332454 (point on the way)",
+    "_source": "OpenStreetMap w706332454 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w706332455",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1",
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 259.7,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w706332455 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2028043,
+    "lat": 59.7411702,
+    "how": "OSM w706332455 (point on the way)",
+    "_source": "OpenStreetMap w706332455 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1161541669",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 28.1,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1161541669 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2042882,
+    "lat": 59.7405245,
+    "how": "OSM w1161541669 (point on the way)",
+    "_source": "OpenStreetMap w1161541669 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1305136504",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 11.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305136504 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2046468,
+    "lat": 59.740616,
+    "how": "OSM w1305136504 (point on the way)",
+    "_source": "OpenStreetMap w1305136504 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1305136506",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305136506 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2046811,
+    "lat": 59.7406049,
+    "how": "OSM w1305136506 (point on the way)",
+    "_source": "OpenStreetMap w1305136506 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1305136507",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 1",
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 34.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305136507 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2045079,
+    "lat": 59.7404749,
+    "how": "OSM w1305136507 (point on the way)",
+    "_source": "OpenStreetMap w1305136507 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w1305136508",
+   "name": null,
+   "osm_level": "-1",
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305136508 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2045079,
+    "lat": 59.7404749,
+    "how": "OSM w1305136508 (point on the way)",
+    "_source": "OpenStreetMap w1305136508 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1305136509",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 7.0,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305136509 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2044296,
+    "lat": 59.7405014,
+    "how": "OSM w1305136509 (point on the way)",
+    "_source": "OpenStreetMap w1305136509 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1305604729",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1305604729 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.20481,
+    "lat": 59.7405624,
+    "how": "OSM w1305604729 (point on the way)",
+    "_source": "OpenStreetMap w1305604729 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1444726157",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1444726157 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2028833,
+    "lat": 59.7411542,
+    "how": "OSM w1444726157 (point on the way)",
+    "_source": "OpenStreetMap w1444726157 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1444726158",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 4.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1444726158 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2026968,
+    "lat": 59.7410082,
+    "how": "OSM w1444726158 (point on the way)",
+    "_source": "OpenStreetMap w1444726158 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1444726160",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 18.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1444726160 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.202775,
+    "lat": 59.7409915,
+    "how": "OSM w1444726160 (point on the way)",
+    "_source": "OpenStreetMap w1444726160 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1444726167",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.6,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1444726167 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2027378,
+    "lat": 59.7411593,
+    "how": "OSM w1444726167 (point on the way)",
+    "_source": "OpenStreetMap w1444726167 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1444726170",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1444726170 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2026691,
+    "lat": 59.7412279,
+    "how": "OSM w1444726170 (point on the way)",
+    "_source": "OpenStreetMap w1444726170 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3373384166",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n3373384166 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2025296,
+    "lat": 59.7413099,
+    "how": "OSM n3373384166",
+    "_source": "OpenStreetMap n3373384166 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12088005667",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 2;3"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12088005667 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2045522,
+    "lat": 59.7404596,
+    "how": "OSM n12088005667",
+    "_source": "OpenStreetMap n12088005667 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12092256396",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12092256396 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2047213,
+    "lat": 59.7405917,
+    "how": "OSM n12092256396",
+    "_source": "OpenStreetMap n12092256396 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13110852328",
+   "name": null,
+   "osm_level": "-1;0",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13110852328 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.2040978,
+    "lat": 59.7404324,
+    "how": "OSM n13110852328",
+    "_source": "OpenStreetMap n13110852328 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Hovedinngang stasjonshallen (main entrance)",
+   "street": "Strømsø torg",
+   "level": "0",
+   "osm_ids": [
+    "n4932234503",
+    "n9160501627",
+    "n9160501656",
+    "n9160501664",
+    "n9160501672",
+    "n9292743089"
+   ],
+   "where": "station building front on Strømsø torg (address Strømsø Torg 1). OSM has several doors: n4932234503 (main, double, wheelchair yes), revolving doors n9160501627, n9160501656, n9160501672, hinged n9160501664 (wheelchair yes) and n9292743089",
+   "note": "Bane NOR: the station hall has step-free access via revolving doors or doors with automatic opener. Byggeindustrien: no major works at the main entrance in the rebuild.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "name": "Entrance by Bybrua",
+   "street": "Bybrua",
+   "osm_id": "n4319632969",
+   "where": "west end of the station building towards Bybrua (OSM entrance=main, 9 m from Bybrua)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2021212,
+    "lat": 59.7405779,
+    "how": "OSM n4319632969",
+    "_source": "OpenStreetMap n4319632969 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Side door (sliding, step-free)",
+   "street": null,
+   "osm_id": "n8058656087",
+   "where": "south-east of the building, ~80 m from a named street; OSM door=sliding, wheelchair=yes",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2048921,
+    "lat": 59.7395989,
+    "how": "OSM n8058656087",
+    "_source": "OpenStreetMap n8058656087 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": "Access from platform 1 to Jernbanekaia",
+   "street": "Jernbanekaia (river quay)",
+   "where": "from platform 1 to the railway quay along the river",
+   "_source": "Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts)"
+  },
+  {
+   "name": null,
+   "osm_id": "n4319632969",
+   "street": "Bybrua",
+   "street_how": "nearest named street, 9.2 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": null,
+   "_source": "OSM n4319632969 (already in OSM)",
+   "position": {
+    "lon": 10.2021212,
+    "lat": 59.7405779,
+    "how": "OSM n4319632969",
+    "_source": "OpenStreetMap n4319632969 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n4932234503",
+   "street": "Strømsø torg",
+   "street_how": "nearest named street, 33.0 m",
+   "level": "0",
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "double",
+   "_source": "OSM n4932234503 (already in OSM)",
+   "position": {
+    "lon": 10.20383,
+    "lat": 59.7402944,
+    "how": "OSM n4932234503",
+    "_source": "OpenStreetMap n4932234503 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n8058656087",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "yes",
+   "wheelchair": "yes",
+   "door": "sliding",
+   "_source": "OSM n8058656087 (already in OSM)",
+   "position": {
+    "lon": 10.2048921,
+    "lat": 59.7395989,
+    "how": "OSM n8058656087",
+    "_source": "OpenStreetMap n8058656087 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9160501627",
+   "street": "Strømsø torg",
+   "street_how": "nearest named street, 28.6 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n9160501627 (already in OSM)",
+   "position": {
+    "lon": 10.203588,
+    "lat": 59.740373,
+    "how": "OSM n9160501627",
+    "_source": "OpenStreetMap n9160501627 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9160501651",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "service",
+   "wheelchair": null,
+   "door": "overhead",
+   "_source": "OSM n9160501651 (already in OSM)",
+   "position": {
+    "lon": 10.204117,
+    "lat": 59.740049,
+    "how": "OSM n9160501651",
+    "_source": "OpenStreetMap n9160501651 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9160501656",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n9160501656 (already in OSM)",
+   "position": {
+    "lon": 10.204095,
+    "lat": 59.74,
+    "how": "OSM n9160501656",
+    "_source": "OpenStreetMap n9160501656 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9160501664",
+   "street": "Strømsø torg",
+   "street_how": "nearest named street, 7.4 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": "yes",
+   "door": "hinged",
+   "_source": "OSM n9160501664 (already in OSM)",
+   "position": {
+    "lon": 10.203433,
+    "lat": 59.740135,
+    "how": "OSM n9160501664",
+    "_source": "OpenStreetMap n9160501664 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9160501672",
+   "street": "Strømsø torg",
+   "street_how": "nearest named street, 0.0 m",
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": "revolving",
+   "_source": "OSM n9160501672 (already in OSM)",
+   "position": {
+    "lon": 10.203309,
+    "lat": 59.740158,
+    "how": "OSM n9160501672",
+    "_source": "OpenStreetMap n9160501672 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "name": null,
+   "osm_id": "n9292743089",
+   "street": null,
+   "street_how": null,
+   "level": null,
+   "kind": "main",
+   "wheelchair": null,
+   "door": "hinged",
+   "_source": "OSM n9292743089 (already in OSM)",
+   "position": {
+    "lon": 10.2046444,
+    "lat": 59.7398706,
+    "how": "OSM n9292743089",
+    "_source": "OpenStreetMap n9292743089 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "amenities": [
+  {
+   "category": "kiosk",
+   "name": "Narvesen (Drammen jbst., store 030)",
+   "osm_id": "n1262634963",
+   "where": "in the station building, Strømsø Torg 1",
+   "level_per_plan": "0",
+   "note": "Hours not shown in text form on narvesen.no (loaded by script) and not in OSM.",
+   "_source": "https://www.narvesen.no/finn-butikk, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2034705,
+    "lat": 59.7402941,
+    "osm_id": "n1262634963",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 44.4,
+    "how": "OSM node n1262634963",
+    "_source": "OpenStreetMap n1262634963 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "Joker Drammen togstasjon",
+   "osm_id": "n4341011043",
+   "where": "in the station building (OSM)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 04:00-23:30; Sa 07:00-23:30; Su 09:00-23:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "joker.no store finder did not render; hours are OSM's only.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.203962,
+    "lat": 59.740143,
+    "osm_id": "n4341011043",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 44.0,
+    "how": "OSM node n4341011043",
+    "_source": "OpenStreetMap n4341011043 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Backstube Drammen Stasjon",
+   "osm_id": "n11409520977",
+   "where": "Strømsø Torg 1 (station building)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 06:00-18:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Backstube says 'CLOSED DURING SUMMER' for this shop (dates not given).",
+   "_source": "https://backstube.no/visit-us, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2035736,
+    "lat": 59.7401387,
+    "osm_id": "n11409520977",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 56.0,
+    "how": "OSM node n11409520977",
+    "_source": "OpenStreetMap n11409520977 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett (HC)",
+   "osm_id": "n4322828524",
+   "fee": "yes (payment machine)",
+   "where": "in the station building (OSM, operator Bane NOR Eiendom)",
+   "note": "Bane NOR: HC toilet, payment machine.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2039,
+    "lat": 59.7400486,
+    "osm_id": "n4322828524",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 54.7,
+    "how": "OSM node n4322828524",
+    "_source": "OpenStreetMap n4322828524 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom / stasjonshall",
+   "where": "station hall at street level",
+   "hours_raw": "open for all train departures ('Åpent til alle togavganger')",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "Also step-free shelters with manual doors on the island platforms.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (Vy) and separate Flytoget ticket machines",
+   "where": "at the station (position not given)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Oppbevaringsbokser",
+   "note": "Norwegian page: 'Oppbevaringsbokser: Nei' (no lockers); the English page lists 'Storage Boxes' only as a heading. Treat as none.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Drammen stasjon (bus)",
+   "where": "quays 'i Dr. Hansteins gate' (NSR:Quay:107381) and 'ved Johan Jørgen Schwartz plass' (NSR:Quay:38); Bane NOR: bus stop (Strømsø torg) right by the station; Drammen rutebilstasjon about 100 m west",
+   "_source": "Entur NSR stop register, NSR:StopPlace:59952 children (rail NSR:StopPlace:11, bus NSR:StopPlace:21), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:59952/children, read 2026-10-30 (NLOD); Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Buss for tog (rail replacement)",
+   "where": "Vy and Go-Ahead replacement buses from the stop by the station building; Flytoget replacement buses from the stop in Tamburgata",
+   "note": "Bane NOR notice: short-term parking, drop-off, HC and MC spaces closed for rail replacement buses from 12 Oct 04:00 to 22 Nov 08:00.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Drammen busstasjon (rutebilstasjon)",
+   "osm_id": "n6372878163",
+   "where": "about 100 m west of the station",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.20017,
+    "lat": 59.740605,
+    "osm_id": "n6372878163",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 96.0,
+    "how": "OSM node n6372878163",
+    "_source": "OpenStreetMap n6372878163 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_office",
+   "name": "Brakar kundesenter",
+   "osm_id": "n7128020343",
+   "where": "at Drammen busstasjon, Jernbanegata 10 (outside the railway station, ~100 m west)",
+   "opening_hours": "Mo-Fr 07:00-18:00; Sa 09:00-16:00",
+   "hours_source": "website (Brakar)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM has only Mo-Fr 07:00-18:00. Brakar notes reduced hours 15-16 Oct (09:00-14:30).",
+   "_source": "https://www.brakar.no/kundesenter/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.1998695,
+    "lat": 59.7406734,
+    "osm_id": "n7128020343",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 100.8,
+    "how": "OSM node n7128020343",
+    "_source": "OpenStreetMap n7128020343 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "taxi",
+   "name": "Taxiholdeplass",
+   "where": "by the station (not mapped in OSM extract)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Dagparkering",
+   "where": "at the station",
+   "fee": "98 kr per day, max 72 h (P-automat or EasyPark +15%)",
+   "note": "55 spaces (Norwegian page; English page says 26). Controlled Mo-Fr 05:00-17:00, free otherwise.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Korttidsparkering",
+   "fee": "20 kr, max 30 min",
+   "where": "8 spaces, entry from Dr. Hansteins gate; municipal short-term parking from Drammen busstasjon and Jernbanegata",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Pendlerparkering",
+   "where": "by Drammen godsterminal, entry from Kreftingsgate, about 500 m from the station",
+   "fee": "250 kr (period-ticket holders, Bane NOR app)",
+   "note": "227 spaces (Norwegian page; English page says 302).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "HC-parkering (1) and MC-parkering (1)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell Drammen stasjon",
+   "osm_id": "n4472631748",
+   "fee": "50 kr / 30 days (Bane NOR Parkering app)",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "188 spaces. Also open and covered bike racks and Bikely racks.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-d-/drammen/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30",
+   "position": {
+    "lon": 10.2049105,
+    "lat": 59.7396141,
+    "osm_id": "n4472631748",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 62.2,
+    "how": "OSM node n4472631748",
+    "_source": "OpenStreetMap n4472631748 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Bane NOR Eiendom",
+   "osm_id": "n4322828524",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n4322828524 (read 2026-10-30)",
+   "position": {
+    "lon": 10.2039,
+    "lat": 59.7400486,
+    "osm_id": "n4322828524",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 54.7,
+    "how": "OSM node n4322828524",
+    "_source": "OpenStreetMap n4322828524 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "shop=ticket",
+   "name": "Brakar kundesenter",
+   "osm_id": "n7128020343",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-18:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n7128020343 (read 2026-10-30)",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "cafe",
+   "name": "Baker Hansen St. Hallvard",
+   "brand": null,
+   "cuisine": "regional;coffee_shop",
+   "opening_hours": "Mo-Fr 06:30-18:00; Sa 09:00-16:00; Su 10:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.bakerhansen.no/",
+   "position": {
+    "lon": 10.203244,
+    "lat": 59.739919,
+    "osm_id": "n2381292116",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 86.6,
+    "how": "OSM node n2381292116",
+    "_source": "OpenStreetMap n2381292116 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n2381292116 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Strømsø Sportspub",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "11:00-03:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.sports-pub.no/",
+   "position": {
+    "lon": 10.203291,
+    "lat": 59.738308,
+    "osm_id": "n3129939726",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 233.6,
+    "how": "OSM node n3129939726",
+    "_source": "OpenStreetMap n3129939726 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n3129939726 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "pub",
+   "name": "Palmen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 10.2022683,
+    "lat": 59.7384498,
+    "osm_id": "n4194763830",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 253.8,
+    "how": "OSM node n4194763830",
+    "_source": "OpenStreetMap n4194763830 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4194763830 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "supermarket",
+   "name": "Joker Drammen togstasjon",
+   "brand": "Joker",
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 04:00-23:30, Sa 07:00-23:30, Su 09:00-23:30",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.203962,
+    "lat": 59.740143,
+    "osm_id": "n4341011043",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 44.0,
+    "how": "OSM node n4341011043",
+    "_source": "OpenStreetMap n4341011043 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4341011043 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Fuji sushi",
+   "brand": null,
+   "cuisine": "sushi",
+   "opening_hours": "Mo-Sa 14:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://www.fujisushi.no/",
+   "position": {
+    "lon": 10.202783,
+    "lat": 59.738237,
+    "osm_id": "n9858546152",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 256.7,
+    "how": "OSM node n9858546152",
+    "_source": "OpenStreetMap n9858546152 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9858546152 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Champs Grill og Pizza",
+   "brand": null,
+   "cuisine": "barbecue;pizza",
+   "opening_hours": "Mo-Th 10:30-00:45, Fr 10:30-04:00, Sa 11:00-04:00, Su 11:00-00:45",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 10.2031219,
+    "lat": 59.7398381,
+    "osm_id": "n9962266921",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 97.9,
+    "how": "OSM node n9962266921",
+    "_source": "OpenStreetMap n9962266921 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n9962266921 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Faseplan Drammen stasjon 2023-2025 (PDF 748.59 KB, linked from the station page; not opened, URL not captured)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "open": [
+  "Lifts, stairs and ramps to platforms 4/5 and 6: OSM has neither these platforms nor links to them; Bane NOR's accessibility text ('stairs and steep ramps to the island platforms') looks older than the Aug 2025 rebuild. No as-built plan found.",
+  "Bybrua: trade press says it gives access down to all platforms; OSM maps stairs to 1 and 2/3 plus two stairs (w1444726162, w1444726165) to unmapped platforms. Whether there are lifts from Bybrua to the platforms is not stated anywhere.",
+  "Narvesen Drammen jbst. hours: narvesen.no loads hours by script; not in OSM.",
+  "Joker hours are OSM-only (joker.no store finder did not render).",
+  "Signposted level names, floor heights: no source.",
+  "Parking counts differ between Bane NOR's Norwegian and English pages (dagparkering 55 vs 26; pendler 227 vs 302); Norwegian figures used.",
+  "English page lists 'ATM' among facilities; Norwegian page does not; OSM has no ATM in the building. Left out.",
+  "Faseplan PDF (2023-2025) could not be opened (banenor.no not reachable with WebFetch).",
+  "OSM lists nearby places outside the station building (Baker Hansen St. Hallvard, Champs Grill og Pizza, Strømsø Sportspub etc.); not added as station amenities."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which tracks/platforms are in use after the rebuild?",
+   "answer": "Six tracks with platforms, all 350 m: from 30 Aug 2025 'Drammen stasjon er ombygget til 6 spor med plattform'; new/changed platforms on tracks 1-6. Bane NOR's track table: track 1 side platform (760 mm), island platform tracks 2/3 (760/740 mm), island platform tracks 4/5 (760/755 mm), track 6 side platform (760/735 mm), all 3.5 m wide (as tabled). Entur NSR has rail quays 1-6. OSM maps only platform 1 and island 2;3; platforms 4/5 and 6 are missing in OSM.",
+   "_source": "Bane NOR S-sirkulære 121-2025 'Drammenbanen, Drammen stasjon: endringer i infrastruktur' (25 Aug 2025, valid from 30 Aug 2025), https://orv.banenor.no/contentassets/6b86820bcb5442988c81c41521311f27/s-sirkulare-121-2025.pdf, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Entur NSR stop register, NSR:StopPlace:59952 children (rail NSR:StopPlace:11, bus NSR:StopPlace:21), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:59952/children, read 2026-10-30 (NLOD); Regjeringen.no, speech at the opening of InterCity Drammen-Kobbervikdalen, https://www.regjeringen.no/no/aktuelt/tale-pa-arrangement-i-anledning-apning-av-intercity-prosjektet-drammen-kobbervikdalen/id3119576/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "question": "Which platforms have lifts?",
+   "answer": "Owner text confirms a lift from the station hall down to the underpass. OSM adds lifts from the underpass to platform 1 and to island 2/3, and one lift between street and Bybrua. No owner source names lifts for platforms 4/5 and 6, and OSM does not map those platforms. The government speech says the rebuilt station has universal design, which suggests step-free access to all platforms but does not say how.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Regjeringen.no, speech at the opening of InterCity Drammen-Kobbervikdalen, https://www.regjeringen.no/no/aktuelt/tale-pa-arrangement-i-anledning-apning-av-intercity-prosjektet-drammen-kobbervikdalen/id3119576/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-DRM.json), read 2026-10-30"
+  },
+  {
+   "question": "Levels' real names as signposted",
+   "answer": "Not found. Owner words: 'stasjonshall', 'personundergang'/'undergang under sporene', and Bybrua for the bridge deck.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-d-/drammen/, read 2026-10-30; Byggeindustrien nr. 13/2025 pp. 99-106, 'Drammen stasjon' (A. Brekkhus), https://www.bygg.no/files/2025/09/01/Drammen%20stasjon.pdf, read 2026-10-30 (trade press; used only for the rebuild's layout facts)"
+  }
+ ]
+}

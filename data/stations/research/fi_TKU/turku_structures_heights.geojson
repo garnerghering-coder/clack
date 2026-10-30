@@ -1,0 +1,1010 @@
+{
+ "type": "FeatureCollection",
+ "name": "turku_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": null,
+ "track_bed_m": 9.42,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2595326,
+       60.4557468
+      ],
+      [
+       22.2594426,
+       60.45579560000001
+      ],
+      [
+       22.2593851,
+       60.45583009999999
+      ],
+      [
+       22.2593191,
+       60.455871099999996
+      ],
+      [
+       22.2592682,
+       60.45590740000001
+      ],
+      [
+       22.2592594,
+       60.4559139
+      ],
+      [
+       22.2592213,
+       60.45594149999999
+      ],
+      [
+       22.2591972,
+       60.4559589
+      ],
+      [
+       22.259139000000005,
+       60.456009499999986
+      ],
+      [
+       22.259093600000003,
+       60.456051099999996
+      ],
+      [
+       22.2590651,
+       60.45608190000001
+      ],
+      [
+       22.259011900000004,
+       60.45613929999999
+      ],
+      [
+       22.258965600000003,
+       60.4561962
+      ],
+      [
+       22.2589411,
+       60.45622889999999
+      ],
+      [
+       22.2589191,
+       60.456262000000024
+      ],
+      [
+       22.2589046,
+       60.4562842
+      ],
+      [
+       22.2588745,
+       60.456343
+      ],
+      [
+       22.2588365,
+       60.4564376
+      ],
+      [
+       22.2588172,
+       60.45650359999999
+      ],
+      [
+       22.258805200000005,
+       60.456583
+      ],
+      [
+       22.2588016,
+       60.45666520000001
+      ],
+      [
+       22.2588038,
+       60.4567177
+      ],
+      [
+       22.258811200000004,
+       60.456768699999984
+      ],
+      [
+       22.2588129,
+       60.45678120000001
+      ],
+      [
+       22.258698,
+       60.456787199999994
+      ],
+      [
+       22.258692000000003,
+       60.45675349999999
+      ],
+      [
+       22.258687,
+       60.45672330000002
+      ],
+      [
+       22.258684500000005,
+       60.45666289999998
+      ],
+      [
+       22.258686900000004,
+       60.4565881
+      ],
+      [
+       22.258699500000002,
+       60.45650499999999
+      ],
+      [
+       22.2587228,
+       60.456424
+      ],
+      [
+       22.258764,
+       60.45632799999999
+      ],
+      [
+       22.2588036,
+       60.45625519999999
+      ],
+      [
+       22.2588587,
+       60.45617440000001
+      ],
+      [
+       22.258916,
+       60.45610450000002
+      ],
+      [
+       22.2589842,
+       60.4560329
+      ],
+      [
+       22.259040900000002,
+       60.455978399999985
+      ],
+      [
+       22.259099800000005,
+       60.455929399999995
+      ],
+      [
+       22.2591726,
+       60.455875000000006
+      ],
+      [
+       22.2592223,
+       60.455839299999994
+      ],
+      [
+       22.2592893,
+       60.45579690000002
+      ],
+      [
+       22.259347800000004,
+       60.45576259999999
+      ],
+      [
+       22.259408100000005,
+       60.45572769999999
+      ],
+      [
+       22.2594541,
+       60.45570320000001
+      ],
+      [
+       22.259519,
+       60.455669500000006
+      ],
+      [
+       22.259566499999995,
+       60.45564820000002
+      ],
+      [
+       22.2596482,
+       60.4556899
+      ],
+      [
+       22.2595898,
+       60.455718700000006
+      ],
+      [
+       22.2595326,
+       60.4557468
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w912901301",
+    "name": "Logomonsilta (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Logomonsilta",
+     "start_date": "2021-11-03"
+    },
+    "ground_min_m": 8.51,
+    "ground_median_m": 9.37,
+    "ground_max_m": 10.3,
+    "roof_top_median_m": 23.35,
+    "roof_top_p95_m": 26.85,
+    "laser_points": 17,
+    "height_above_ground_median_m": 13.98,
+    "height_above_ground_p95_m": 17.48,
+    "source": "Outline OSM w912901301 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.264389800000004,
+       60.4559405
+      ],
+      [
+       22.264353,
+       60.455927800000005
+      ],
+      [
+       22.2643749,
+       60.45591099999999
+      ],
+      [
+       22.264333,
+       60.45589779999999
+      ],
+      [
+       22.264465700000002,
+       60.45579970000001
+      ],
+      [
+       22.264529800000002,
+       60.45582159999999
+      ],
+      [
+       22.264465100000002,
+       60.45586569999999
+      ],
+      [
+       22.264487,
+       60.4558728
+      ],
+      [
+       22.264389800000004,
+       60.4559405
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142360",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 10.33,
+    "ground_median_m": 10.61,
+    "ground_max_m": 12.16,
+    "laser_points": 0,
+    "source": "Outline OSM w1123142360 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2657369,
+       60.4568241
+      ],
+      [
+       22.2657981,
+       60.45684510000001
+      ],
+      [
+       22.2657779,
+       60.45685950000001
+      ],
+      [
+       22.265716600000005,
+       60.45683839999999
+      ],
+      [
+       22.2657369,
+       60.4568241
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1168876370",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 9.44,
+    "ground_median_m": 9.56,
+    "ground_max_m": 9.63,
+    "laser_points": 1,
+    "source": "Outline OSM w1168876370 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.260112200000002,
+       60.455863999999984
+      ],
+      [
+       22.2600379,
+       60.4559153
+      ],
+      [
+       22.2599164,
+       60.4560014
+      ],
+      [
+       22.2610915,
+       60.45640859999999
+      ],
+      [
+       22.2625542,
+       60.456915599999995
+      ],
+      [
+       22.262750300000004,
+       60.456777999999986
+      ],
+      [
+       22.260112200000002,
+       60.455863999999984
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1283197265",
+    "name": "LogoHub (construction)",
+    "osm_tags": {
+     "building": "construction",
+     "layer": "4",
+     "name": "LogoHub"
+    },
+    "ground_min_m": 8.9,
+    "ground_median_m": 9.35,
+    "ground_max_m": 9.68,
+    "laser_points": 1,
+    "source": "Outline OSM w1283197265 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2589411,
+       60.45622889999999
+      ],
+      [
+       22.259359300000003,
+       60.45637099999998
+      ],
+      [
+       22.259321000000003,
+       60.456398400000005
+      ],
+      [
+       22.2589191,
+       60.456262000000024
+      ],
+      [
+       22.2589411,
+       60.45622889999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898283",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.35,
+    "ground_median_m": 9.4,
+    "ground_max_m": 9.49,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898283 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.259093600000003,
+       60.456051099999996
+      ],
+      [
+       22.259481300000004,
+       60.456182699999985
+      ],
+      [
+       22.259443,
+       60.4562102
+      ],
+      [
+       22.2590651,
+       60.45608190000001
+      ],
+      [
+       22.259093600000003,
+       60.456051099999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898284",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.3,
+    "ground_median_m": 9.42,
+    "ground_max_m": 9.64,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898284 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.258907900000004,
+       60.45628229999999
+      ],
+      [
+       22.258972600000003,
+       60.4563041
+      ],
+      [
+       22.2589948,
+       60.456287999999994
+      ],
+      [
+       22.2589302,
+       60.456266199999995
+      ],
+      [
+       22.258907900000004,
+       60.45628229999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1424898285",
+    "name": "elevator",
+    "osm_tags": {
+     "building": "elevator",
+     "building:levels": "2",
+     "height": "12",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 9.3,
+    "ground_median_m": 9.36,
+    "ground_max_m": 9.4,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898285 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2590491,
+       60.456100899999996
+      ],
+      [
+       22.2591138,
+       60.4561227
+      ],
+      [
+       22.259136,
+       60.456106600000005
+      ],
+      [
+       22.2590714,
+       60.4560849
+      ],
+      [
+       22.2590491,
+       60.456100899999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1424898286",
+    "name": "elevator",
+    "osm_tags": {
+     "building": "elevator",
+     "building:levels": "2",
+     "height": "12",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 9.29,
+    "ground_median_m": 9.36,
+    "ground_max_m": 9.49,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898286 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2591998,
+       60.4559586
+      ],
+      [
+       22.2592644,
+       60.45598029999999
+      ],
+      [
+       22.2592867,
+       60.45596429999999
+      ],
+      [
+       22.259222000000005,
+       60.45594249999999
+      ],
+      [
+       22.2591998,
+       60.4559586
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1424898287",
+    "name": "elevator",
+    "osm_tags": {
+     "building": "elevator",
+     "building:levels": "2",
+     "height": "12",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 9.37,
+    "ground_median_m": 9.43,
+    "ground_max_m": 9.52,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898287 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2595898,
+       60.455718700000006
+      ],
+      [
+       22.259618,
+       60.45572819999999
+      ],
+      [
+       22.2597227,
+       60.45576319999999
+      ],
+      [
+       22.259932500000005,
+       60.45583329999999
+      ],
+      [
+       22.259910000000005,
+       60.455849399999984
+      ],
+      [
+       22.259886300000005,
+       60.455866300000004
+      ],
+      [
+       22.2596779,
+       60.455795800000004
+      ],
+      [
+       22.2595736,
+       60.45576049999998
+      ],
+      [
+       22.2595326,
+       60.4557468
+      ],
+      [
+       22.2595898,
+       60.455718700000006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898293",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "2"
+    },
+    "ground_min_m": 8.55,
+    "ground_median_m": 8.94,
+    "ground_max_m": 9.17,
+    "laser_points": 3,
+    "source": "Outline OSM w1424898293 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2588038,
+       60.4567177
+      ],
+      [
+       22.2591728,
+       60.45683460000001
+      ],
+      [
+       22.2591265,
+       60.45686890000002
+      ],
+      [
+       22.258811200000004,
+       60.456768699999984
+      ],
+      [
+       22.2588038,
+       60.4567177
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898294",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.94,
+    "ground_median_m": 10.08,
+    "ground_max_m": 10.3,
+    "roof_top_median_m": 13.92,
+    "roof_top_p95_m": 17.13,
+    "laser_points": 5,
+    "height_above_ground_median_m": 3.84,
+    "height_above_ground_p95_m": 7.05,
+    "source": "Outline OSM w1424898294 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2588303,
+       60.456100900000024
+      ],
+      [
+       22.2588083,
+       60.456117000000006
+      ],
+      [
+       22.2588735,
+       60.4561388
+      ],
+      [
+       22.2588956,
+       60.4561227
+      ],
+      [
+       22.2588303,
+       60.456100900000024
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1424898297",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "2",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 9.41,
+    "ground_median_m": 9.43,
+    "ground_max_m": 9.57,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898297 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.25905,
+       60.45589089999999
+      ],
+      [
+       22.2591147,
+       60.455912599999984
+      ],
+      [
+       22.2591369,
+       60.455896599999996
+      ],
+      [
+       22.259072300000003,
+       60.45587479999998
+      ],
+      [
+       22.25905,
+       60.45589089999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1424898298",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "2",
+     "height": "15",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 9.38,
+    "ground_median_m": 9.42,
+    "ground_max_m": 9.56,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898298 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2592213,
+       60.45594149999999
+      ],
+      [
+       22.2592594,
+       60.4559139
+      ],
+      [
+       22.2596383,
+       60.45604180000001
+      ],
+      [
+       22.2596,
+       60.4560692
+      ],
+      [
+       22.2592213,
+       60.45594149999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898302",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.34,
+    "ground_median_m": 9.48,
+    "ground_max_m": 9.6,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898302 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2593184,
+       60.4564295
+      ],
+      [
+       22.259394000000004,
+       60.45637499999999
+      ],
+      [
+       22.2611669,
+       60.4569735
+      ],
+      [
+       22.2610913,
+       60.4570279
+      ],
+      [
+       22.2593184,
+       60.4564295
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898306",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.37,
+    "ground_median_m": 9.49,
+    "ground_max_m": 9.64,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898306 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2594531,
+       60.4562475
+      ],
+      [
+       22.2595271,
+       60.456194100000005
+      ],
+      [
+       22.2612967,
+       60.4567897
+      ],
+      [
+       22.2612228,
+       60.4568431
+      ],
+      [
+       22.2594531,
+       60.4562475
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898307",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.21,
+    "ground_median_m": 9.44,
+    "ground_max_m": 9.83,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898307 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.2596105,
+       60.4561055
+      ],
+      [
+       22.2596738,
+       60.45606010000001
+      ],
+      [
+       22.261439500000005,
+       60.45665899999999
+      ],
+      [
+       22.261376200000004,
+       60.45670439999999
+      ],
+      [
+       22.2596105,
+       60.4561055
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1424898308",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 9.18,
+    "ground_median_m": 9.38,
+    "ground_max_m": 9.65,
+    "laser_points": 0,
+    "source": "Outline OSM w1424898308 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa)",
+    "underside_m": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,621 @@
+{
+ "clack_id": "860000617",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: station building (forhal/ventesal, DSB 7-Eleven) on the town side by platform 1, and the island platforms 2, 3 and 4",
+   "note": "Platforms per Banedanmark: perron 1 (track 1), perron 2 (tracks 2/3), perron 3 (tracks 4/5), perron 4 (tracks 6/7), all 55 cm. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Pedestrian tunnels under the tracks (two in OSM: one by the station building, mid-platform; one near the west end)",
+   "note": "Wikipedia: the tunnels were renovated in the 1998–2002 refurbishment, when elevators were also installed. OSM tags the tunnels layer=-1, not level; no signposted name found.",
+   "_source": "https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w331283211"
+   ],
+   "between": [
+    "station building / platform 1",
+    "island platforms 2, 3, 4"
+   ],
+   "where": "middle of the platforms, by the station building (about 0.47 along the platforms from the east end)",
+   "confirmed_by": "OSM only (Wikipedia confirms tunnels, not their positions)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w331284116",
+    "w847534153",
+    "w331284120",
+    "w331284121",
+    "w331284119",
+    "w847534154"
+   ],
+   "between": [
+    "middle tunnel",
+    "platform 1, perron 2, perron 3 (and the street side)"
+   ],
+   "where": "middle of the platforms, by the station building",
+   "confirmed_by": "OSM only (DSB: 'adgang til stationen med trapper og elevator')",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w331284126",
+    "w1164409879"
+   ],
+   "between": [
+    "platform 1 side",
+    "island platforms (west tunnel)"
+   ],
+   "where": "west part of the platforms (about 0.6–0.8 along from the east end)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w331284122",
+    "w331284128",
+    "w1164409883"
+   ],
+   "between": [
+    "west tunnel",
+    "platform 1 and perron 2"
+   ],
+   "where": "west part of the platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3882434172",
+   "between": [
+    "west tunnel",
+    "platform 1 / street side"
+   ],
+   "where": "west part of platform 1 (about 0.88 along from the east end)",
+   "wheelchair": "yes",
+   "confirmed_by": "OSM only (DSB and Wikipedia confirm elevators exist, not where)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30",
+   "position": {
+    "lon": 12.086679,
+    "lat": 55.6384005,
+    "how": "OSM n3882434172",
+    "_source": "OpenStreetMap n3882434172 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3882419457",
+   "between": [
+    "west tunnel",
+    "perron 2 (tracks 2/3)"
+   ],
+   "where": "west part of perron 2 (about 0.83 along from the east end)",
+   "wheelchair": "yes",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.0868784,
+    "lat": 55.6382381,
+    "how": "OSM n3882419457",
+    "_source": "OpenStreetMap n3882419457 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w331283211",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 60.2,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w331283211 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0885571,
+    "lat": 55.6388237,
+    "how": "OSM w331283211 (point on the way)",
+    "_source": "OpenStreetMap w331283211 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w331284120",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 6.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w331284120 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0883863,
+    "lat": 55.6389709,
+    "how": "OSM w331284120 (point on the way)",
+    "_source": "OpenStreetMap w331284120 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w331284121",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 5.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w331284121 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0882848,
+    "lat": 55.6390573,
+    "how": "OSM w331284121 (point on the way)",
+    "_source": "OpenStreetMap w331284121 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w331284126",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 88.5,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w331284126 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0870587,
+    "lat": 55.6381228,
+    "how": "OSM w331284126 (point on the way)",
+    "_source": "OpenStreetMap w331284126 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w331284128",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 9.9,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w331284128 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0866637,
+    "lat": 55.6384666,
+    "how": "OSM w331284128 (point on the way)",
+    "_source": "OpenStreetMap w331284128 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1164409883",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 2.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1164409883 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0864039,
+    "lat": 55.6382578,
+    "how": "OSM w1164409883 (point on the way)",
+    "_source": "OpenStreetMap w1164409883 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3882419457",
+   "name": null,
+   "osm_level": null,
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n3882419457 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.0868784,
+    "lat": 55.6382381,
+    "how": "OSM n3882419457",
+    "_source": "OpenStreetMap n3882419457 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3882434172",
+   "name": null,
+   "osm_level": null,
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n3882434172 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 12.086679,
+    "lat": 55.6384005,
+    "how": "OSM n3882434172",
+    "_source": "OpenStreetMap n3882434172 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building (stationsbygningen)",
+   "street": "Jernbanegade",
+   "level": "0",
+   "where": "the 1911 building faces the town centre, main entrance between two short towers; the DSB 7-Eleven inside has the address Jernbanegade 1",
+   "_source": "https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Roskilde Station)",
+   "osm_id": "n4549004200",
+   "where": "in the station building (Jernbanegade 1); combined with ticket sales per Wikipedia",
+   "level_per_plan": "0",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB: 'Mandag - fredag DØGNÅBENT, Lørdag - Søndag DØGNÅBENT'; 7-Eleven store list: Mon–Sun 00:00–23:59 (same).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30",
+   "position": {
+    "lon": 12.089018,
+    "lat": 55.639243,
+    "osm_id": "n4549004200",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.3,
+    "how": "OSM node n4549004200",
+    "_source": "OpenStreetMap n4549004200 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "opening_hours": "24/7",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "fee": "5 kr, credit card",
+   "where": "OSM n8016370941 by platform 1 at the station building (mid-platform); OSM n10911675215 is an outdoor toilet near the west end",
+   "osm_ids": [
+    "n8016370941",
+    "n10911675215"
+   ],
+   "hours_raw": "Locked in the evening and at night (DSB: 'Toiletter er aflåst i aften og nattetimer'); exact hours not given",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM gives 24/7 on n8016370941, which conflicts with DSB.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "on the station (DSB gives no position)",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Danske Bank",
+   "osm_id": "n10680986254",
+   "where": "at the station building, town side (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.0882027,
+    "lat": 55.6390218,
+    "osm_id": "n10680986254",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 11.1,
+    "how": "OSM node n10680986254",
+    "_source": "OpenStreetMap n10680986254 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Roskilde Station Kebab",
+   "osm_id": "n11810293614",
+   "where": "at the west end of the platforms, by the west tunnel (OSM)",
+   "opening_hours": "Mo-Fr 10:00-24:00; Sa 00:00-06:00,10:00-24:00; Su 00:00-06:00,11:00-23:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only; not stated by DSB to be part of the station.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.0862194,
+    "lat": 55.6382404,
+    "osm_id": "n11810293614",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.1,
+    "how": "OSM node n11810293614",
+    "_source": "OpenStreetMap n11810293614 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "confectionery",
+   "name": "Lækkerland",
+   "osm_id": "n12735368225",
+   "where": "at the west end of the platforms (OSM)",
+   "opening_hours": "Mo-Th 09:00-22:00; Fr 09:00-24:00; Sa 10:00-23:00; Su 10:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM only.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.0860421,
+    "lat": 55.6381759,
+    "osm_id": "n12735368225",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.2,
+    "how": "OSM node n12735368225",
+    "_source": "OpenStreetMap n12735368225 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "where": "car parks at Jernbanegade and Ny Østergade; 2 marked disabled spaces in the car park in Ny Østergade",
+   "note": "DSB: 358 spaces, 45 % occupancy (body text: about 350); free with DSB Plus.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 7 aflåste cykelskure",
+   "note": "Locked sheds opened via the DSB app (DSB profile needed).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Roskilde busstation",
+   "where": "immediately adjacent to the station",
+   "_source": "https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n775601840",
+   "where": "in front of the station building (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.0883862,
+    "lat": 55.6393353,
+    "osm_id": "n775601840",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 33.6,
+    "how": "OSM node n775601840",
+    "_source": "OpenStreetMap n775601840 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n8016370941",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su,PH 00:00-00:00",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n8016370941 (read 2026-10-30)",
+   "position": {
+    "lon": 12.0883612,
+    "lat": 55.6389602,
+    "osm_id": "n8016370941",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 0.1,
+    "how": "OSM node n8016370941",
+    "_source": "OpenStreetMap n8016370941 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n10911675215",
+   "osm_level": "0",
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n10911675215 (read 2026-10-30)",
+   "position": {
+    "lon": 12.0863089,
+    "lat": 55.6382162,
+    "osm_id": "n10911675215",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": 1.7,
+    "how": "OSM node n10911675215",
+    "_source": "OpenStreetMap n10911675215 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "w384714379",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM w384714379 (read 2026-10-30)",
+   "position": {
+    "lon": 12.0885236,
+    "lat": 55.6396154,
+    "osm_id": "w384714379",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 54.0,
+    "how": "representative point of the OSM area w384714379",
+    "_source": "OpenStreetMap w384714379 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "fast_food",
+   "name": "Torvet's Grill & Kebab",
+   "brand": null,
+   "cuisine": "kebab;pizza;grill",
+   "opening_hours": "Mo-Th, Su 11:00-22:00; Fr-Sa 11:00-06:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.0892228,
+    "lat": 55.6396116,
+    "osm_id": "n3933094357",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 31.7,
+    "how": "OSM node n3933094357",
+    "_source": "OpenStreetMap n3933094357 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n3933094357 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "Mo-Su 00:00-23:59",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.089018,
+    "lat": 55.639243,
+    "osm_id": "n4549004200",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 5.3,
+    "how": "OSM node n4549004200",
+    "_source": "OpenStreetMap n4549004200 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4549004200 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "confectionery",
+   "name": "Lækkerland",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Th 09:00-22:00; Fr 09:00-00:00; Sa 10:00-23:00; Su 10:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.0860421,
+    "lat": 55.6381759,
+    "osm_id": "n12735368225",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 7.2,
+    "how": "OSM node n12735368225",
+    "_source": "OpenStreetMap n12735368225 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n12735368225 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "hairdresser",
+   "name": "Frisør Station",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": "https://xn--frisrstation-yjb.dk/",
+   "position": {
+    "lon": 12.0858441,
+    "lat": 55.6381175,
+    "osm_id": "n13341027104",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 15.2,
+    "how": "OSM node n13341027104",
+    "_source": "OpenStreetMap n13341027104 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n13341027104 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Lifts to perron 3 (tracks 4/5) and perron 4 (tracks 6/7): DSB and Wikipedia confirm elevators exist but not how many or where; OSM has only two lifts (platform 1 side and perron 2, west tunnel).",
+  "Signposted names of the two tunnels and of any level: no owner source found.",
+  "No ticket office (DSB Salg & Service) mentioned by DSB; Wikipedia says the 7-Eleven is a combined ticket office/shop.",
+  "Toilet hours: DSB says only 'locked in the evening and at night'.",
+  "No owner station plan found (DSB, Banedanmark, Movia).",
+  "Lockers: not mentioned by DSB.",
+  "Floor heights / tunnel depth: no source measures them."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Roskilde; brief asks for levels, lifts and entrances)",
+   "answer": "Street/platform level plus pedestrian tunnels under the tracks. DSB confirms stairs and elevator access; Wikipedia says elevators were installed 1998–2002. OSM maps two tunnels (middle, by the station building; and west) and only two lifts, both at the west tunnel (platform 1 side and perron 2).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ]
+}

@@ -1,0 +1,353 @@
+{
+ "clack_id": "860000683",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: S-tog perron 1 (tracks 1/11) and perron 2 (tracks 3/4), 92 cm; Lokaltog tracks 11 and 12 (new platforms being built)",
+   "note": "Banedanmark register (Bilag 3.6 covers only the S-tog platforms). The station is being rebuilt Feb 2026–Sep 2027: new platforms along Lokaltog tracks 11 and 12 and a raised platform at track 0. No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "New gangbro (footbridge over the whole track area), opened 12 October 2026",
+   "note": "Two spans, 42 m (west) and 32 m (east), 10 m wide. Lifts in elevator towers expected by the end of 2026. The OSM footbridge w26380520 is the old bridge, which the project removes.",
+   "_source": "Banedanmark press release \"Ny gangbro åbnet på Hillerød Station\", 12 Oct 2026, https://via.ritzau.dk/pressemeddelelse/15221913/ny-gangbro-abnet-pa-hillerod-station?lang=da, read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Old gangtunnel (OSM w150549083)",
+   "note": "The project closes the stair building and tunnel (concrete slabs over the stairwells); the planned extension to the station building was dropped. Whether it is still open on 2026-10-30 is not stated.",
+   "_source": "Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "name": "Ny gangbro",
+   "between": [
+    "west side",
+    "east side, all platforms"
+   ],
+   "where": "across the whole track area; position not given in owner text",
+   "confirmed_by": "owner text (Banedanmark)",
+   "status": "open since 12 Oct 2026",
+   "_source": "Banedanmark press release \"Ny gangbro åbnet på Hillerød Station\", 12 Oct 2026, https://via.ritzau.dk/pressemeddelelse/15221913/ny-gangbro-abnet-pa-hillerod-station?lang=da, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "new footbridge",
+    "platforms"
+   ],
+   "where": "in new elevator towers; number and positions not given",
+   "confirmed_by": "owner text (Banedanmark)",
+   "status": "not yet in service: expected by end of 2026",
+   "_source": "Banedanmark press release \"Ny gangbro åbnet på Hillerød Station\", 12 Oct 2026, https://via.ritzau.dk/pressemeddelelse/15221913/ny-gangbro-abnet-pa-hillerod-station?lang=da, read 2026-10-30"
+  },
+  {
+   "kind": "step_free_route",
+   "between": [
+    "west side",
+    "platforms"
+   ],
+   "where": "temporary step-free access to the platforms from the west side, reserved for people with reduced mobility, wheelchair users and prams until the lifts are ready",
+   "confirmed_by": "owner text (Banedanmark)",
+   "_source": "Banedanmark press release \"Ny gangbro åbnet på Hillerød Station\", 12 Oct 2026, https://via.ritzau.dk/pressemeddelelse/15221913/ny-gangbro-abnet-pa-hillerod-station?lang=da, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w26380520",
+   "between": [
+    "not stated",
+    "perron 2 north end"
+   ],
+   "where": "north end of the platforms (old bridge)",
+   "confirmed_by": "OSM only",
+   "status": "to be removed under the rebuild (24-hour closure planned); likely stale in OSM",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30",
+   "position": {
+    "lon": 12.3115794,
+    "lat": 55.9275266,
+    "how": "OSM w26380520 (point on the way)",
+    "_source": "OpenStreetMap w26380520 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w150549083",
+   "between": [
+    "station building side",
+    "perron 1 north end"
+   ],
+   "where": "north end of perron 1",
+   "confirmed_by": "OSM only",
+   "status": "to be closed under the rebuild; current state not stated",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30",
+   "position": {
+    "lon": 12.3110442,
+    "lat": 55.9269246,
+    "how": "OSM w150549083 (point on the way)",
+    "_source": "OpenStreetMap w150549083 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Søndre Jernbanevej side",
+   "street": "Søndre Jernbanevej",
+   "level": "0",
+   "where": "west side, station building (7-Eleven at Søndre Jernbanevej 34)",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30"
+  },
+  {
+   "name": "Nordre Jernbanevej side",
+   "street": "Nordre Jernbanevej",
+   "level": "0",
+   "where": "DSB: access 'fra Søndre og Nordre Jernbanevej'",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Hillerød Station)",
+   "osm_id": "n1625939564",
+   "where": "station building, Søndre Jernbanevej 34, by the north end of perron 1",
+   "level_per_plan": "0",
+   "opening_hours": "24/7",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "note": "DSB also: 'Døgnåbent' all days.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.3106774,
+    "lat": 55.9270928,
+    "osm_id": "n1625939564",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 65.6,
+    "how": "OSM node n1625939564",
+    "_source": "OpenStreetMap n1625939564 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "cafe",
+   "name": "Lagkagehuset (Hillerød Station)",
+   "osm_id": "n7111588422",
+   "where": "in the station building (OSM), Søndre Jernbanevej 32; also a self-service VisitNordsjælland information point",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 07:00-17:00; Sa,Su 07:00-16:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "lagkagehuset.dk shop list did not render; OSM hours used.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.visitnorthzealand.com/north-zealand/explore/information-point-lagkagehuset-hillerod-station-gdk1120583, read 2026-10-30",
+   "position": {
+    "lon": 12.3105969,
+    "lat": 55.926808,
+    "osm_id": "n7111588422",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 64.2,
+    "how": "OSM node n7111588422",
+    "_source": "OpenStreetMap n7111588422 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 08:00-23:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n8949465164",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM says 24/7; DSB used.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30",
+   "position": {
+    "lon": 12.3105778,
+    "lat": 55.9272428,
+    "osm_id": "n8949465164",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 74.7,
+    "how": "OSM node n8949465164",
+    "_source": "OpenStreetMap n8949465164 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Hillerød Station (bus terminal)",
+   "osm_id": "w42466129",
+   "where": "by the station (OSM); DSB: full accessibility to/from all S-tog, Lokaltog and buses",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30",
+   "position": {
+    "lon": 12.3109269,
+    "lat": 55.9278946,
+    "osm_id": "w42466129",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 38.1,
+    "how": "representative point of the OSM area w42466129",
+    "_source": "OpenStreetMap w42466129 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "note": "About 363 spaces, 55 % occupancy.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 2 aflåste cykelskure",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n8949465164",
+   "osm_level": null,
+   "fee": "yes",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "_source": "OSM n8949465164 (read 2026-10-30)",
+   "position": {
+    "lon": 12.3105778,
+    "lat": 55.9272428,
+    "osm_id": "n8949465164",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 74.7,
+    "how": "OSM node n8949465164",
+    "_source": "OpenStreetMap n8949465164 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven",
+   "brand": "7-Eleven",
+   "cuisine": null,
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "website": null,
+   "position": {
+    "lon": 12.3106774,
+    "lat": 55.9270928,
+    "osm_id": "n1625939564",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 65.6,
+    "how": "OSM node n1625939564",
+    "_source": "OpenStreetMap n1625939564 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n1625939564 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "You Sushi Hillerød Aps",
+   "brand": null,
+   "cuisine": "sushi",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.3100319,
+    "lat": 55.9270073,
+    "osm_id": "n4261837129",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 103.4,
+    "how": "OSM node n4261837129",
+    "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "fast_food",
+   "name": "Corner Sandwich og Kebab",
+   "brand": null,
+   "cuisine": "kebab",
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.3101297,
+    "lat": 55.9273666,
+    "osm_id": "n4429455834",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 104.4,
+    "how": "OSM node n4429455834",
+    "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30"
+  },
+  {
+   "category": "bar",
+   "name": "Jernstangen",
+   "brand": null,
+   "cuisine": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "hours_checked": null,
+   "website": null,
+   "position": {
+    "lon": 12.310043,
+    "lat": 55.927002,
+    "osm_id": "n8117602488",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 102.6,
+    "how": "OSM node n8117602488",
+    "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30"
+   },
+   "note": "from OSM; compare with the owner list in the hand-read facts",
+   "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Exact position of the new footbridge, its stairs and lift towers, and which platforms each lift serves: not in owner text.",
+  "Whether the old tunnel (w150549083) and old footbridge (w26380520) are still usable on 2026-10-30: not stated.",
+  "Lokaltog platforms (tracks 11/12, new) and their numbering: not in Bilag 3.6 or any source read.",
+  "DSB's page gives no lift/stairs info; it predates the rebuild in places.",
+  "Lagkagehuset hours from OSM only.",
+  "No owner plan found (Trafikstyrelsen's 'Stadieplanen' PDF not read)."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Hillerød)",
+   "answer": "The station is mid-rebuild (Feb 2026–Sep 2027). A new footbridge across all tracks opened on 12 Oct 2026; its lifts are due by the end of 2026, and until then step-free access is from the west side (reserved for those who need it). The old footbridge and tunnel in OSM are being removed/closed, so OSM is likely stale here.",
+   "_source": "Banedanmark press release \"Ny gangbro åbnet på Hillerød Station\", 12 Oct 2026, https://via.ritzau.dk/pressemeddelelse/15221913/ny-gangbro-abnet-pa-hillerod-station?lang=da, read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30"
+  }
+ ]
+}

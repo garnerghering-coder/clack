@@ -1,0 +1,157 @@
+{
+ "clack_id": "NO-ASR",
+ "slug": "asker",
+ "flags": [
+  "Platform BIS track 4 (track 4,5): laser gives 1.05 m above the track bed (≈0.87 m above rail after −0.15…0.2 m), register class 700 = 0.7 m. Not decided; add to REVIEW.md.",
+  "w152904610 Asker brannstasjon (fire_station): p95 130.3 m is 3.7 m above the median 126.5 m (a taller neighbour or a mast inside the outline?).",
+  "w306981119 roof: p95 112.8 m is 3.8 m above the median 109.0 m (a taller neighbour or a mast inside the outline?).",
+  "w1014090512 service: p95 113.0 m is 5.6 m above the median 107.4 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1550572574 (footway, unclassified).",
+  "Laser-traced roof (776 m², top 7.4 m above the platform) could be a building or hall roof, not a canopy: check OSM and a platform photo.",
+  "Laser-traced roof (1330 m², top 6.8 m above the platform) could be a building or hall roof, not a canopy: check OSM and a platform photo.",
+  "Laser-traced roof (1330 m², top 6.8 m above the platform, 7.8 m above the track bed) lies partly over a track: a bridge, gantry or roof over the track; check in a cross-section."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.426492,59.829343,10.442492,59.837343",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Asker 2012",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "asker_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Asker 2012\" (id 123, FKB-Laser 2.0, nominal 10 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 85.89,
+  "median_m": 110.48,
+  "max_m": 169.95,
+  "nan_cells": 383543,
+  "size_m": [
+   977,
+   977
+  ],
+  "box_sweref": [
+   579922,
+   6633233,
+   580899,
+   6634210
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1798296_123.laz"
+  ],
+  "scan_date": "2012-08-21",
+  "density_pts_m2_nominal": 10,
+  "flight_height_m": null,
+  "points_in_box": 15868733,
+  "density_in_box": 16.62,
+  "classes": {
+   "1": 13447772,
+   "2": 2371843,
+   "7": 7261,
+   "10": 41857
+  },
+  "train_points_class64": 2063
+ },
+ "platforms": [
+  {
+   "bis_object": "track 1",
+   "track": "1",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 354.0,
+   "width_m": 10.0,
+   "roof": null,
+   "track_bed_m": 104.21,
+   "track_bed_points": 1913,
+   "platform_surface_m": 105.0,
+   "platform_points": 7125,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.79,
+   "laser_estimate_above_rail_m": 0.61
+  },
+  {
+   "bis_object": "track 3",
+   "track": "2,3",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 365.0,
+   "width_m": 8.5,
+   "roof": null,
+   "track_bed_m": 104.36,
+   "track_bed_points": 1745,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 4",
+   "track": "4,5",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 261.0,
+   "width_m": 10.0,
+   "roof": null,
+   "track_bed_m": 104.41,
+   "track_bed_points": 1336,
+   "platform_surface_m": 105.46,
+   "platform_points": 21562,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_from_class1": true,
+   "surface_note": "platform surface from unclassified (class 1) laser points: this scan left the platform deck unclassified; flat band bed+0.2…+1.6 m",
+   "other_side_surface_m": 105.41,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 1.05,
+   "laser_estimate_above_rail_m": 0.87
+  },
+  {
+   "bis_object": "track 6",
+   "track": "6",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 259.0,
+   "width_m": 5.0,
+   "roof": null,
+   "track_bed_m": 104.46,
+   "track_bed_points": 1348,
+   "platform_surface_m": 105.44,
+   "platform_points": 3757,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.98,
+   "laser_estimate_above_rail_m": 0.8
+  }
+ ],
+ "platform_surface_m": 105.44,
+ "track_bed_m": 104.38,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 12,
+  "footbridge": 0,
+  "canopy_osm": 3,
+  "canopy_laser": 0,
+  "hall_roof_laser": 2,
+  "train_in_scan": 1
+ },
+ "photos": 15,
+ "photos_station_related": 4
+}

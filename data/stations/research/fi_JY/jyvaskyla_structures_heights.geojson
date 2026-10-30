@@ -1,0 +1,2361 @@
+{
+ "type": "FeatureCollection",
+ "name": "jyvaskyla_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m N2000",
+ "platform_surface_m": 82.0,
+ "track_bed_m": 81.19,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7546556,
+       62.24157080000002
+      ],
+      [
+       25.755378,
+       62.24193139999999
+      ],
+      [
+       25.7554369,
+       62.24196080000002
+      ],
+      [
+       25.7551721,
+       62.24205909999999
+      ],
+      [
+       25.7549953,
+       62.242124800000006
+      ],
+      [
+       25.7550259,
+       62.24219169999999
+      ],
+      [
+       25.7549095,
+       62.2422054
+      ],
+      [
+       25.7549168,
+       62.24222309999998
+      ],
+      [
+       25.75491,
+       62.2422365
+      ],
+      [
+       25.7548836,
+       62.242243300000005
+      ],
+      [
+       25.7548554,
+       62.24224289999999
+      ],
+      [
+       25.7548334,
+       62.24223279999999
+      ],
+      [
+       25.7546693,
+       62.24201600000001
+      ],
+      [
+       25.7545189,
+       62.2418172
+      ],
+      [
+       25.7544932,
+       62.24176779999999
+      ],
+      [
+       25.7544901,
+       62.24173290000001
+      ],
+      [
+       25.7544977,
+       62.241687699999986
+      ],
+      [
+       25.7545266,
+       62.2416498
+      ],
+      [
+       25.754587800000003,
+       62.24160800000001
+      ],
+      [
+       25.7546301,
+       62.2415848
+      ],
+      [
+       25.7546556,
+       62.24157080000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w13235730",
+    "name": "Jyväskylän matkakeskus (station building)",
+    "osm_tags": {
+     "amenity": "bus_station",
+     "building": "train_station",
+     "name": "Jyväskylän matkakeskus"
+    },
+    "ground_min_m": 98.88,
+    "ground_median_m": 98.97,
+    "ground_max_m": 99.45,
+    "laser_points": 2,
+    "source": "Outline OSM w13235730 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7472856,
+       62.24069669999999
+      ],
+      [
+       25.7480193,
+       62.24105609999998
+      ],
+      [
+       25.7474127,
+       62.24131800000001
+      ],
+      [
+       25.7473877,
+       62.2413045
+      ],
+      [
+       25.7473192,
+       62.24127029999999
+      ],
+      [
+       25.747249,
+       62.24123370000002
+      ],
+      [
+       25.7476292,
+       62.24106870000001
+      ],
+      [
+       25.747284,
+       62.24089589999999
+      ],
+      [
+       25.7469799,
+       62.24102769999998
+      ],
+      [
+       25.7469106,
+       62.2410577
+      ],
+      [
+       25.7466931,
+       62.2409488
+      ],
+      [
+       25.7467627,
+       62.2409192
+      ],
+      [
+       25.7472856,
+       62.24069669999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w52916189",
+    "name": "commercial",
+    "osm_tags": {
+     "building": "commercial"
+    },
+    "ground_min_m": 86.69,
+    "ground_median_m": 86.89,
+    "ground_max_m": 87.09,
+    "laser_points": 0,
+    "source": "Outline OSM w52916189 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7483171,
+       62.2411985
+      ],
+      [
+       25.7477143,
+       62.24146170000001
+      ],
+      [
+       25.747126,
+       62.24171810000002
+      ],
+      [
+       25.7465933,
+       62.24195679999999
+      ],
+      [
+       25.7463458,
+       62.242064799999994
+      ],
+      [
+       25.7466085,
+       62.242206
+      ],
+      [
+       25.746638000000004,
+       62.242196000000014
+      ],
+      [
+       25.7467289,
+       62.242245000000004
+      ],
+      [
+       25.746756,
+       62.2422588
+      ],
+      [
+       25.7467767,
+       62.242269400000005
+      ],
+      [
+       25.7468096,
+       62.24227969999998
+      ],
+      [
+       25.7468525,
+       62.24228469999999
+      ],
+      [
+       25.7469008,
+       62.242284700000006
+      ],
+      [
+       25.746933,
+       62.242282200000005
+      ],
+      [
+       25.7469934,
+       62.242311699999995
+      ],
+      [
+       25.7472842,
+       62.242454
+      ],
+      [
+       25.7473805,
+       62.2424091
+      ],
+      [
+       25.7474053,
+       62.242421
+      ],
+      [
+       25.7474286,
+       62.2424321
+      ],
+      [
+       25.7474037,
+       62.242443899999984
+      ],
+      [
+       25.7475311,
+       62.2425046
+      ],
+      [
+       25.7480681,
+       62.242267600000005
+      ],
+      [
+       25.7481484,
+       62.24223219999999
+      ],
+      [
+       25.7482475,
+       62.2421884
+      ],
+      [
+       25.7482868,
+       62.2421711
+      ],
+      [
+       25.7482795,
+       62.24216479999998
+      ],
+      [
+       25.7481856,
+       62.2421198
+      ],
+      [
+       25.748223,
+       62.2421044
+      ],
+      [
+       25.7482669,
+       62.242086199999996
+      ],
+      [
+       25.7482822,
+       62.242079900000014
+      ],
+      [
+       25.7483868,
+       62.242132299999994
+      ],
+      [
+       25.7484541,
+       62.2421027
+      ],
+      [
+       25.7492692,
+       62.2417438
+      ],
+      [
+       25.7491552,
+       62.24168550000001
+      ],
+      [
+       25.7487757,
+       62.2414915
+      ],
+      [
+       25.7488537,
+       62.241456899999996
+      ],
+      [
+       25.7483171,
+       62.2411985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w119294895",
+    "name": "Kauppakeskus Forum (building)",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "4",
+     "name": "Kauppakeskus Forum"
+    },
+    "ground_min_m": 86.03,
+    "ground_median_m": 88.61,
+    "ground_max_m": 91.14,
+    "roof_top_median_m": 98.08,
+    "roof_top_p95_m": 100.52,
+    "laser_points": 19,
+    "height_above_ground_median_m": 9.47,
+    "height_above_ground_p95_m": 11.91,
+    "top_above_platform_m": 16.08,
+    "base_above_platform_m": 4.03,
+    "source": "Outline OSM w119294895 (ODbL); roof = median of 19 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7523741,
+       62.2404608
+      ],
+      [
+       25.7523874,
+       62.24045489999999
+      ],
+      [
+       25.7522649,
+       62.2403952
+      ],
+      [
+       25.752227500000004,
+       62.2404119
+      ],
+      [
+       25.7521256,
+       62.240362299999994
+      ],
+      [
+       25.751947100000002,
+       62.240441800000006
+      ],
+      [
+       25.7520489,
+       62.24049140000001
+      ],
+      [
+       25.7520045,
+       62.2405112
+      ],
+      [
+       25.7521242,
+       62.2405695
+      ],
+      [
+       25.7521342,
+       62.240565000000004
+      ],
+      [
+       25.7526992,
+       62.2408403
+      ],
+      [
+       25.7529363,
+       62.24073469999998
+      ],
+      [
+       25.7523741,
+       62.2404608
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w121549519",
+    "name": "Jyväskylän rautatieasema (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "1",
+     "name": "Jyväskylän rautatieasema",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 81.93,
+    "ground_median_m": 82.11,
+    "ground_max_m": 82.67,
+    "roof_top_median_m": 87.25,
+    "roof_top_p95_m": 88.4,
+    "laser_points": 6,
+    "height_above_ground_median_m": 5.14,
+    "height_above_ground_p95_m": 6.29,
+    "top_above_platform_m": 5.25,
+    "base_above_platform_m": -0.07,
+    "source": "Outline OSM w121549519 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7505115,
+       62.239681100000006
+      ],
+      [
+       25.750645800000004,
+       62.23974759999999
+      ],
+      [
+       25.7508801,
+       62.23964490000001
+      ],
+      [
+       25.7507458,
+       62.23957849999999
+      ],
+      [
+       25.7505115,
+       62.239681100000006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w121549524",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 81.15,
+    "ground_median_m": 81.35,
+    "ground_max_m": 81.69,
+    "roof_top_median_m": 90.23,
+    "roof_top_p95_m": 91.38,
+    "laser_points": 6,
+    "height_above_ground_median_m": 8.88,
+    "height_above_ground_p95_m": 10.03,
+    "top_above_platform_m": 8.23,
+    "base_above_platform_m": -0.85,
+    "source": "Outline OSM w121549524 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7531984,
+       62.241196399999986
+      ],
+      [
+       25.7534038,
+       62.241297999999986
+      ],
+      [
+       25.7537751,
+       62.241135299999996
+      ],
+      [
+       25.753569700000003,
+       62.241033599999994
+      ],
+      [
+       25.7531984,
+       62.241196399999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w121549527",
+    "name": "retail",
+    "osm_tags": {
+     "building": "retail",
+     "building:levels": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 82.22,
+    "ground_median_m": 82.62,
+    "ground_max_m": 83.27,
+    "laser_points": 1,
+    "source": "Outline OSM w121549527 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.750331,
+       62.239508900000004
+      ],
+      [
+       25.7504361,
+       62.239560899999994
+      ],
+      [
+       25.7504541,
+       62.239552999999994
+      ],
+      [
+       25.7504982,
+       62.239574799999986
+      ],
+      [
+       25.7506206,
+       62.239521200000006
+      ],
+      [
+       25.7504096,
+       62.2394167
+      ],
+      [
+       25.7502872,
+       62.23947039999999
+      ],
+      [
+       25.7503491,
+       62.239501
+      ],
+      [
+       25.750331,
+       62.239508900000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w121549540",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 81.37,
+    "ground_median_m": 81.43,
+    "ground_max_m": 81.74,
+    "laser_points": 4,
+    "source": "Outline OSM w121549540 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7483171,
+       62.2411985
+      ],
+      [
+       25.7480193,
+       62.24105609999998
+      ],
+      [
+       25.7474127,
+       62.24131800000001
+      ],
+      [
+       25.7477143,
+       62.24146170000001
+      ],
+      [
+       25.7483171,
+       62.2411985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w122141263",
+    "name": "office",
+    "osm_tags": {
+     "building": "office"
+    },
+    "ground_min_m": 86.6,
+    "ground_median_m": 86.79,
+    "ground_max_m": 86.97,
+    "laser_points": 1,
+    "source": "Outline OSM w122141263 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7556658,
+       62.2432919
+      ],
+      [
+       25.7559119,
+       62.243605899999984
+      ],
+      [
+       25.7560906,
+       62.243575699999994
+      ],
+      [
+       25.7558511,
+       62.24326109999999
+      ],
+      [
+       25.7556658,
+       62.2432919
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w122158733",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 82.5,
+    "ground_median_m": 82.63,
+    "ground_max_m": 82.69,
+    "laser_points": 2,
+    "source": "Outline OSM w122158733 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7544201,
+       62.24138539999999
+      ],
+      [
+       25.7544659,
+       62.24136519999998
+      ],
+      [
+       25.754697300000004,
+       62.241479199999986
+      ],
+      [
+       25.7547277,
+       62.24146579999999
+      ],
+      [
+       25.7544964,
+       62.24135189999999
+      ],
+      [
+       25.7539984,
+       62.2411067
+      ],
+      [
+       25.7538909,
+       62.2411541
+      ],
+      [
+       25.7543886,
+       62.2413991
+      ],
+      [
+       25.7546199,
+       62.24151299999998
+      ],
+      [
+       25.7546511,
+       62.2414992
+      ],
+      [
+       25.7544201,
+       62.24138539999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w439373188",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 81.73,
+    "ground_median_m": 81.88,
+    "ground_max_m": 82.17,
+    "roof_top_median_m": 85.66,
+    "roof_top_p95_m": 86.2,
+    "laser_points": 37,
+    "height_above_ground_median_m": 3.78,
+    "height_above_ground_p95_m": 4.32,
+    "top_above_platform_m": 3.66,
+    "base_above_platform_m": -0.27,
+    "source": "Outline OSM w439373188 (ODbL); roof = median of 37 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.754759,
+       62.24123670000001
+      ],
+      [
+       25.7549902,
+       62.241350000000004
+      ],
+      [
+       25.7550175,
+       62.24133799999997
+      ],
+      [
+       25.7547846,
+       62.241223699999985
+      ],
+      [
+       25.7542828,
+       62.24097769999999
+      ],
+      [
+       25.7541743,
+       62.24102569999999
+      ],
+      [
+       25.7549092,
+       62.24138600000002
+      ],
+      [
+       25.7549438,
+       62.241370700000004
+      ],
+      [
+       25.7547124,
+       62.24125729999999
+      ],
+      [
+       25.754759,
+       62.24123670000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w439373190",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 81.16,
+    "ground_median_m": 81.99,
+    "ground_max_m": 82.12,
+    "roof_top_median_m": 85.69,
+    "roof_top_p95_m": 86.15,
+    "laser_points": 26,
+    "height_above_ground_median_m": 3.7,
+    "height_above_ground_p95_m": 4.16,
+    "top_above_platform_m": 3.69,
+    "base_above_platform_m": -0.84,
+    "source": "Outline OSM w439373190 (ODbL); roof = median of 26 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.758019,
+       62.240498200000005
+      ],
+      [
+       25.7581892,
+       62.2403511
+      ],
+      [
+       25.7582163,
+       62.240358
+      ],
+      [
+       25.7582552,
+       62.2403679
+      ],
+      [
+       25.758098200000003,
+       62.24051579999997
+      ],
+      [
+       25.758019,
+       62.240498200000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w772254846",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1",
+     "man_made": "canopy"
+    },
+    "ground_min_m": 80.3,
+    "ground_median_m": 80.42,
+    "ground_max_m": 80.53,
+    "laser_points": 0,
+    "source": "Outline OSM w772254846 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7563479,
+       62.2396009
+      ],
+      [
+       25.756415,
+       62.2395841
+      ],
+      [
+       25.7564767,
+       62.239562200000016
+      ],
+      [
+       25.756529,
+       62.239533499999986
+      ],
+      [
+       25.7565572,
+       62.2395016
+      ],
+      [
+       25.7565665,
+       62.23946790000001
+      ],
+      [
+       25.7565652,
+       62.23943599999999
+      ],
+      [
+       25.7565478,
+       62.23940789999999
+      ],
+      [
+       25.7565692,
+       62.2394035
+      ],
+      [
+       25.7566095,
+       62.2394317
+      ],
+      [
+       25.756643,
+       62.23946730000001
+      ],
+      [
+       25.7566537,
+       62.239502900000005
+      ],
+      [
+       25.7566349,
+       62.23953720000001
+      ],
+      [
+       25.7565961,
+       62.239566600000025
+      ],
+      [
+       25.7565277,
+       62.23959090000001
+      ],
+      [
+       25.7564472,
+       62.23960339999999
+      ],
+      [
+       25.7563479,
+       62.23961160000001
+      ],
+      [
+       25.7563479,
+       62.2396009
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1057098071",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 80.62,
+    "ground_median_m": 80.69,
+    "ground_max_m": 80.81,
+    "laser_points": 0,
+    "source": "Outline OSM w1057098071 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7520304,
+       62.23843089999999
+      ],
+      [
+       25.7500632,
+       62.239283499999985
+      ],
+      [
+       25.7501406,
+       62.23932089999999
+      ],
+      [
+       25.7518642,
+       62.238569
+      ],
+      [
+       25.7521013,
+       62.23846759999999
+      ],
+      [
+       25.7520919,
+       62.238462200000015
+      ],
+      [
+       25.7520667,
+       62.23844769999999
+      ],
+      [
+       25.7520304,
+       62.23843089999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1057626890",
+    "name": "Kilpisen silta (bridge)",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge",
+     "name": "Kilpisen silta"
+    },
+    "ground_min_m": 80.48,
+    "ground_median_m": 81.16,
+    "ground_max_m": 84.86,
+    "roof_top_median_m": 89.32,
+    "roof_top_p95_m": 91.18,
+    "laser_points": 21,
+    "height_above_ground_median_m": 8.16,
+    "height_above_ground_p95_m": 10.02,
+    "top_above_platform_m": 7.32,
+    "base_above_platform_m": -1.52,
+    "source": "Outline OSM w1057626890 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7501406,
+       62.23932089999999
+      ],
+      [
+       25.7501443,
+       62.2393262
+      ],
+      [
+       25.7501499,
+       62.239343700000006
+      ],
+      [
+       25.7501417,
+       62.23935399999997
+      ],
+      [
+       25.7498353,
+       62.239490299999986
+      ],
+      [
+       25.7497942,
+       62.23946850000001
+      ],
+      [
+       25.7500876,
+       62.23934059999999
+      ],
+      [
+       25.7500794,
+       62.2393363
+      ],
+      [
+       25.7497647,
+       62.23947859999999
+      ],
+      [
+       25.7496396,
+       62.2394204
+      ],
+      [
+       25.7496171,
+       62.239395499999986
+      ],
+      [
+       25.7496098,
+       62.239374000000005
+      ],
+      [
+       25.7496162,
+       62.239352700000005
+      ],
+      [
+       25.7496428,
+       62.239328099999994
+      ],
+      [
+       25.749889,
+       62.2392182
+      ],
+      [
+       25.7499568,
+       62.239205399999996
+      ],
+      [
+       25.7499986,
+       62.239198800000004
+      ],
+      [
+       25.7500318,
+       62.23919999999999
+      ],
+      [
+       25.7500671,
+       62.2392029
+      ],
+      [
+       25.7501053,
+       62.239207
+      ],
+      [
+       25.7501383,
+       62.23921159999998
+      ],
+      [
+       25.7501885,
+       62.2392308
+      ],
+      [
+       25.7502278,
+       62.239252799999996
+      ],
+      [
+       25.7502524,
+       62.23927489999999
+      ],
+      [
+       25.7502621,
+       62.23929899999999
+      ],
+      [
+       25.7502609,
+       62.239326600000005
+      ],
+      [
+       25.7502471,
+       62.239353300000005
+      ],
+      [
+       25.7502089,
+       62.2393834
+      ],
+      [
+       25.7500627,
+       62.2394469
+      ],
+      [
+       25.7500289,
+       62.2394303
+      ],
+      [
+       25.7500062,
+       62.239417100000004
+      ],
+      [
+       25.7501493,
+       62.2393534
+      ],
+      [
+       25.7501662,
+       62.23933939999999
+      ],
+      [
+       25.750168800000004,
+       62.2393274
+      ],
+      [
+       25.7501759,
+       62.23931220000001
+      ],
+      [
+       25.7501776,
+       62.2392979
+      ],
+      [
+       25.7501617,
+       62.23927780000001
+      ],
+      [
+       25.7501089,
+       62.2392544
+      ],
+      [
+       25.750071,
+       62.23924770000001
+      ],
+      [
+       25.7500347,
+       62.2392437
+      ],
+      [
+       25.749998,
+       62.2392442
+      ],
+      [
+       25.7499582,
+       62.2392499
+      ],
+      [
+       25.749721,
+       62.23935300000002
+      ],
+      [
+       25.7497077,
+       62.239364699999996
+      ],
+      [
+       25.7497046,
+       62.23937690000002
+      ],
+      [
+       25.7497117,
+       62.239388199999986
+      ],
+      [
+       25.7497281,
+       62.2393979
+      ],
+      [
+       25.7497537,
+       62.239405099999985
+      ],
+      [
+       25.749780700000002,
+       62.23940449999999
+      ],
+      [
+       25.7498073,
+       62.2393979
+      ],
+      [
+       25.7500632,
+       62.239283499999985
+      ],
+      [
+       25.7501406,
+       62.23932089999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1057626892",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 81.44,
+    "ground_median_m": 81.57,
+    "ground_max_m": 82.3,
+    "roof_top_median_m": 86.66,
+    "roof_top_p95_m": 89.3,
+    "laser_points": 40,
+    "height_above_ground_median_m": 5.09,
+    "height_above_ground_p95_m": 7.73,
+    "top_above_platform_m": 4.66,
+    "base_above_platform_m": -0.56,
+    "source": "Outline OSM w1057626892 (ODbL); roof = median of 40 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7550927,
+       62.241378
+      ],
+      [
+       25.7564896,
+       62.240771899999984
+      ],
+      [
+       25.7564445,
+       62.2407521
+      ],
+      [
+       25.7564018,
+       62.24073349999998
+      ],
+      [
+       25.7550175,
+       62.24133799999997
+      ],
+      [
+       25.7550927,
+       62.241378
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1057626893",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 80.36,
+    "ground_median_m": 81.12,
+    "ground_max_m": 81.97,
+    "laser_points": 3,
+    "source": "Outline OSM w1057626893 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7476507,
+       62.240565000000004
+      ],
+      [
+       25.747827,
+       62.24065210000001
+      ],
+      [
+       25.7480141,
+       62.2407446
+      ],
+      [
+       25.7479781,
+       62.240760300000005
+      ],
+      [
+       25.7476172,
+       62.24057969999999
+      ],
+      [
+       25.7476507,
+       62.240565000000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1082148030",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 86.32,
+    "ground_median_m": 86.6,
+    "ground_max_m": 87.09,
+    "laser_points": 0,
+    "source": "Outline OSM w1082148030 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.748047500000002,
+       62.240761699999986
+      ],
+      [
+       25.7484109,
+       62.240941299999996
+      ],
+      [
+       25.7483749,
+       62.240957
+      ],
+      [
+       25.7481953,
+       62.24086709999999
+      ],
+      [
+       25.748014,
+       62.2407764
+      ],
+      [
+       25.748047500000002,
+       62.240761699999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1082148031",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 86.35,
+    "ground_median_m": 86.51,
+    "ground_max_m": 87.09,
+    "laser_points": 1,
+    "source": "Outline OSM w1082148031 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7484625,
+       62.240966099999994
+      ],
+      [
+       25.748825900000003,
+       62.24114569999998
+      ],
+      [
+       25.7487899,
+       62.24116139999999
+      ],
+      [
+       25.7484289,
+       62.240980799999996
+      ],
+      [
+       25.7484625,
+       62.240966099999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1082148032",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 86.01,
+    "ground_median_m": 86.33,
+    "ground_max_m": 86.53,
+    "laser_points": 0,
+    "source": "Outline OSM w1082148032 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7488703,
+       62.24117040000001
+      ],
+      [
+       25.7491774,
+       62.24132310000001
+      ],
+      [
+       25.7492326,
+       62.2413505
+      ],
+      [
+       25.7492066,
+       62.24136179999999
+      ],
+      [
+       25.7491978,
+       62.24136570000001
+      ],
+      [
+       25.7490075,
+       62.24127099999998
+      ],
+      [
+       25.7488356,
+       62.24118559999999
+      ],
+      [
+       25.7488703,
+       62.24117040000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1082148033",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes",
+     "layer": "1"
+    },
+    "ground_min_m": 85.26,
+    "ground_median_m": 85.57,
+    "ground_max_m": 86.09,
+    "laser_points": 2,
+    "source": "Outline OSM w1082148033 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7516238,
+       62.24008769999998
+      ],
+      [
+       25.7517029,
+       62.2400508
+      ],
+      [
+       25.751881400000002,
+       62.240133900000004
+      ],
+      [
+       25.7518023,
+       62.2401708
+      ],
+      [
+       25.7516238,
+       62.24008769999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1082149324",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 81.87,
+    "ground_median_m": 81.95,
+    "ground_max_m": 82.01,
+    "laser_points": 2,
+    "source": "Outline OSM w1082149324 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7511932,
+       62.2416071
+      ],
+      [
+       25.751146,
+       62.241584199999984
+      ],
+      [
+       25.7509881,
+       62.2416535
+      ],
+      [
+       25.7511152,
+       62.2417158
+      ],
+      [
+       25.7513017,
+       62.241635300000006
+      ],
+      [
+       25.7516778,
+       62.2418241
+      ],
+      [
+       25.751638,
+       62.24184129999999
+      ],
+      [
+       25.751776,
+       62.241910600000004
+      ],
+      [
+       25.751815000000004,
+       62.24189379999999
+      ],
+      [
+       25.7521928,
+       62.24208349999999
+      ],
+      [
+       25.7519392,
+       62.242193
+      ],
+      [
+       25.7518669,
+       62.242224199999995
+      ],
+      [
+       25.7520011,
+       62.242289199999995
+      ],
+      [
+       25.7520669,
+       62.242260699999996
+      ],
+      [
+       25.7520206,
+       62.242236999999996
+      ],
+      [
+       25.7520479,
+       62.24222489999999
+      ],
+      [
+       25.7522946,
+       62.2421186
+      ],
+      [
+       25.752334000000005,
+       62.2421021
+      ],
+      [
+       25.7523464,
+       62.24209129999999
+      ],
+      [
+       25.7523453,
+       62.242080500000014
+      ],
+      [
+       25.752335700000003,
+       62.2420676
+      ],
+      [
+       25.7522798,
+       62.24203769999998
+      ],
+      [
+       25.752400100000003,
+       62.24198599999998
+      ],
+      [
+       25.752324,
+       62.24194659999999
+      ],
+      [
+       25.7522549,
+       62.24197699999999
+      ],
+      [
+       25.7522392,
+       62.24198049999999
+      ],
+      [
+       25.7522124,
+       62.24198189999997
+      ],
+      [
+       25.752184800000002,
+       62.24197630000002
+      ],
+      [
+       25.7514219,
+       62.24158589999996
+      ],
+      [
+       25.7513876,
+       62.24158279999999
+      ],
+      [
+       25.7513206,
+       62.241551900000005
+      ],
+      [
+       25.7511932,
+       62.2416071
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1107068872",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 82.25,
+    "ground_median_m": 82.51,
+    "ground_max_m": 86.45,
+    "roof_top_median_m": 87.18,
+    "roof_top_p95_m": 87.75,
+    "laser_points": 7,
+    "height_above_ground_median_m": 4.67,
+    "height_above_ground_p95_m": 5.24,
+    "top_above_platform_m": 5.18,
+    "base_above_platform_m": 0.25,
+    "source": "Outline OSM w1107068872 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7559177,
+       62.242735300000014
+      ],
+      [
+       25.755778800000005,
+       62.2426658
+      ],
+      [
+       25.7557163,
+       62.24269179999998
+      ],
+      [
+       25.7557037,
+       62.242687200000006
+      ],
+      [
+       25.7556262,
+       62.242646
+      ],
+      [
+       25.756148800000002,
+       62.24241850000001
+      ],
+      [
+       25.7561636,
+       62.2424118
+      ],
+      [
+       25.756256300000004,
+       62.2424583
+      ],
+      [
+       25.756242,
+       62.2424651
+      ],
+      [
+       25.7561948,
+       62.24248630000001
+      ],
+      [
+       25.7563336,
+       62.2425548
+      ],
+      [
+       25.7559177,
+       62.242735300000014
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1126980916",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "building:levels": "5"
+    },
+    "ground_min_m": 81.68,
+    "ground_median_m": 81.96,
+    "ground_max_m": 82.03,
+    "laser_points": 1,
+    "source": "Outline OSM w1126980916 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       25.7549438,
+       62.241370700000004
+      ],
+      [
+       25.7549092,
+       62.24138600000002
+      ],
+      [
+       25.7547639,
+       62.2414503
+      ],
+      [
+       25.7547277,
+       62.24146579999999
+      ],
+      [
+       25.754697300000004,
+       62.241479199999986
+      ],
+      [
+       25.7544659,
+       62.24136519999998
+      ],
+      [
+       25.7544201,
+       62.24138539999999
+      ],
+      [
+       25.7546511,
+       62.2414992
+      ],
+      [
+       25.7546199,
+       62.24151299999998
+      ],
+      [
+       25.754573,
+       62.24153370000001
+      ],
+      [
+       25.7544944,
+       62.2415734
+      ],
+      [
+       25.7544516,
+       62.2416084
+      ],
+      [
+       25.7544188,
+       62.24164659999999
+      ],
+      [
+       25.7543885,
+       62.241678
+      ],
+      [
+       25.7543754,
+       62.241731999999985
+      ],
+      [
+       25.7543746,
+       62.241774899999996
+      ],
+      [
+       25.7544021,
+       62.241829300000006
+      ],
+      [
+       25.7545581,
+       62.24203359999998
+      ],
+      [
+       25.7547304,
+       62.24226629999998
+      ],
+      [
+       25.7547895,
+       62.24233559999998
+      ],
+      [
+       25.7549497,
+       62.2422819
+      ],
+      [
+       25.7561148,
+       62.24188970000001
+      ],
+      [
+       25.7550927,
+       62.241378
+      ],
+      [
+       25.7550175,
+       62.24133799999997
+      ],
+      [
+       25.7549902,
+       62.241350000000004
+      ],
+      [
+       25.754759,
+       62.24123670000001
+      ],
+      [
+       25.7547124,
+       62.24125729999999
+      ],
+      [
+       25.7549438,
+       62.241370700000004
+      ]
+     ],
+     [
+      [
+       25.755378,
+       62.24193139999999
+      ],
+      [
+       25.7554369,
+       62.24196080000002
+      ],
+      [
+       25.7551721,
+       62.24205909999999
+      ],
+      [
+       25.7549953,
+       62.242124800000006
+      ],
+      [
+       25.7550259,
+       62.24219169999999
+      ],
+      [
+       25.7549095,
+       62.2422054
+      ],
+      [
+       25.7549168,
+       62.24222309999998
+      ],
+      [
+       25.75491,
+       62.2422365
+      ],
+      [
+       25.7548836,
+       62.242243300000005
+      ],
+      [
+       25.7548554,
+       62.24224289999999
+      ],
+      [
+       25.7548334,
+       62.24223279999999
+      ],
+      [
+       25.7546693,
+       62.24201600000001
+      ],
+      [
+       25.7545189,
+       62.2418172
+      ],
+      [
+       25.7544932,
+       62.24176779999999
+      ],
+      [
+       25.7544901,
+       62.24173290000001
+      ],
+      [
+       25.7544977,
+       62.241687699999986
+      ],
+      [
+       25.7545266,
+       62.2416498
+      ],
+      [
+       25.754587800000003,
+       62.24160800000001
+      ],
+      [
+       25.7546301,
+       62.2415848
+      ],
+      [
+       25.7546556,
+       62.24157080000002
+      ],
+      [
+       25.755378,
+       62.24193139999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "r2065832",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "2"
+    },
+    "ground_min_m": 81.17,
+    "ground_median_m": 98.89,
+    "ground_max_m": 99.43,
+    "laser_points": 4,
+    "source": "Outline OSM r2065832 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        25.751841682829877,
+        62.23976340109657
+       ],
+       [
+        25.751820244261545,
+        62.239775139097894
+       ],
+       [
+        25.751877969028392,
+        62.23978669183572
+       ],
+       [
+        25.751895716921872,
+        62.23981172772869
+       ],
+       [
+        25.751926823284496,
+        62.23981099228706
+       ],
+       [
+        25.751952696993335,
+        62.239822867046676
+       ],
+       [
+        25.751971189765044,
+        62.2398483163187
+       ],
+       [
+        25.75200229616372,
+        62.23984758086028
+       ],
+       [
+        25.75202816993358,
+        62.23985945560591
+       ],
+       [
+        25.752027794517414,
+        62.23987575773448
+       ],
+       [
+        25.752082052253844,
+        62.2398778294639
+       ],
+       [
+        25.752084399372638,
+        62.23990319912731
+       ],
+       [
+        25.752118480248104,
+        62.23990328933079
+       ],
+       [
+        25.752143778691547,
+        62.239916169968886
+       ],
+       [
+        25.752141004330714,
+        62.23993064049718
+       ],
+       [
+        25.752218250193756,
+        62.2399517863123
+       ],
+       [
+        25.75221610694241,
+        62.23997620309221
+       ],
+       [
+        25.75226942711499,
+        62.23997646622934
+       ],
+       [
+        25.75229195138842,
+        62.24000381737143
+       ],
+       [
+        25.75235001333193,
+        62.239995361867074
+       ],
+       [
+        25.752350383606704,
+        62.239986400108315
+       ],
+       [
+        25.75230907238014,
+        62.2399847395038
+       ],
+       [
+        25.752293778353447,
+        62.239958958823316
+       ],
+       [
+        25.752253169650402,
+        62.23995771406574
+       ],
+       [
+        25.752256041575087,
+        62.23994066462055
+       ],
+       [
+        25.752218304842437,
+        62.2399223704076
+       ],
+       [
+        25.752177696191943,
+        62.23992112562808
+       ],
+       [
+        25.752161699829173,
+        62.239894929069074
+       ],
+       [
+        25.75210185205794,
+        62.23989351128685
+       ],
+       [
+        25.752086597500625,
+        62.23984936644481
+       ],
+       [
+        25.752052516686195,
+        62.23984927623364
+       ],
+       [
+        25.752008798739574,
+        62.239827746229295
+       ],
+       [
+        25.752011124514297,
+        62.23981277791718
+       ],
+       [
+        25.751977974258033,
+        62.23981300892319
+       ],
+       [
+        25.75195414899383,
+        62.23979431063155
+       ],
+       [
+        25.75191748344061,
+        62.23979497862958
+       ],
+       [
+        25.75189791537764,
+        62.23975789504932
+       ],
+       [
+        25.75186293486678,
+        62.23976763241768
+       ],
+       [
+        25.75185980816215,
+        62.2397485748762
+       ],
+       [
+        25.751840595635272,
+        62.23974840209267
+       ],
+       [
+        25.751841682829877,
+        62.23976340109657
+       ]
+      ],
+      [
+       [
+        25.75205005124323,
+        62.239868327683105
+       ],
+       [
+        25.75206434079776,
+        62.23985679650211
+       ],
+       [
+        25.75206955654353,
+        62.23986589478846
+       ],
+       [
+        25.75205005124323,
+        62.239868327683105
+       ]
+      ],
+      [
+       [
+        25.7519883516588,
+        62.239831874775234
+       ],
+       [
+        25.751975094420875,
+        62.23982007232297
+       ],
+       [
+        25.751994369647043,
+        62.23982287854658
+       ],
+       [
+        25.7519883516588,
+        62.239831874775234
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        25.751557203927838,
+        62.23962016854112
+       ],
+       [
+        25.751574959378274,
+        62.23965622576619
+       ],
+       [
+        25.75161162476953,
+        62.23965555785824
+       ],
+       [
+        25.751612695388456,
+        62.23967452015295
+       ],
+       [
+        25.751688543142386,
+        62.2396948067683
+       ],
+       [
+        25.7517070356139,
+        62.23972025607523
+       ],
+       [
+        25.75174370108039,
+        62.239719588132594
+       ],
+       [
+        25.751763639886295,
+        62.239747697598034
+       ],
+       [
+        25.751821701481948,
+        62.239739242313505
+       ],
+       [
+        25.751822071909473,
+        62.23973028055623
+       ],
+       [
+        25.75178076106397,
+        62.23972861979534
+       ],
+       [
+        25.75176546761617,
+        62.239702839057145
+       ],
+       [
+        25.75170707932466,
+        62.23970191620924
+       ],
+       [
+        25.75172773147777,
+        62.239684544711686
+       ],
+       [
+        25.75170923439745,
+        62.23966642339897
+       ],
+       [
+        25.751648684634848,
+        62.23966458955606
+       ],
+       [
+        25.75163413331869,
+        62.23962086053152
+       ],
+       [
+        25.751557203927838,
+        62.23962016854112
+       ]
+      ],
+      [
+       [
+        25.751611086026845,
+        62.23964705217206
+       ],
+       [
+        25.751592000485743,
+        62.239639697483156
+       ],
+       [
+        25.751609781974015,
+        62.2396383678224
+       ],
+       [
+        25.751611086026845,
+        62.23964705217206
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (56.5 m × 2.7 m)",
+    "top_median_m": 85.19,
+    "top_above_track_bed_m": 4.0,
+    "laser_points": 85,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2023-06-10. Not a structure; these points are class 64 in the LAZ. Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa)"
+   }
+  }
+ ]
+}

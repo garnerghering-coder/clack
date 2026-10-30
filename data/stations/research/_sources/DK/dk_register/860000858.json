@@ -1,0 +1,78 @@
+{
+ "clack_id": "860000858",
+ "name": "CPH Airport",
+ "bilag_name": "Kastrup",
+ "station_abbr": [
+  "Cph"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "55.6296333 12.6468342 55.6296316 12.6468568 55.6296149 12.6470996 55.6295880 12.6475968 55.6295779 12.6478048 55.6295598 12.6482431 55.6295494 12.6486110 55.6295448 12.6488024 55.6295425 12.6490095 55.6295403 12.6493879 55.6295402 12.6494841 55.6295401 12.6495944 55.6295412 12.6497867 55.6295447 12.6500181 55.6295535 12.6504230 55.6295708 12.6509586 55.6295800 12.6511544 55.6296068 12.6516381 55.6296173 12.6518090 55.6296259 12.6519320",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 322,
+   "Bredd_m": 4.3,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000858-11-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "11",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Cph); extent: Banedanmark platform outline FOR_PERRONER_OD Cph171 beside the track (322 m along it; Bilag 322 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 11; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 2",
+   "Points": "55.6296728 12.6468507 55.6296526 12.6471491 55.6296222 12.6476935 55.6295990 12.6482792 55.6295895 12.6486134 55.6295825 12.6490609 55.6295806 12.6493785 55.6295807 12.6494840 55.6295808 12.6496834 55.6295836 12.6499471 55.6295952 12.6504664 55.6296124 12.6509886 55.6296449 12.6515980 55.6296661 12.6519239",
+   "Höjd": "55",
+   "Höjd_beskr": "55 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 322,
+   "Bredd_m": 4.4,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000858-11-2-2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "11",
+   "x_perron": "2",
+   "x_track": "2",
+   "x_perron_tracks": [
+    "2"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Cph); extent: Banedanmark platform outline FOR_PERRONER_OD Cph172 beside the track (320 m along it; Bilag 322 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 11; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000858-11-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000858-11-2-2",
+   "IndKod": "2",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [
+  "New platforms at tracks 11/12 opened 27 April 2026 (Sund & Bælt, Transportministeriet; per the facts pass): not in Bilag 3.6 (table dated 1 August 2023), so not in this register"
+ ],
+ "heights": {
+  "55": 0.55
+ }
+}

@@ -1,0 +1,206 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Forhal (station hall) at John F. Kennedys Plads",
+   "other_names": [],
+   "note": "DSB 'forhal'; OSM level 0 for 7-Eleven, toilets, Life Genbrug.",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Tunnel (pedestrian tunnel under the tracks)",
+   "other_names": [],
+   "note": "OSM: underpass w71452341 (level -1, 111 m) under the tracks; Wikipedia: 'access to platforms from Kildeparken'.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; Wikipedia 'Aalborg station' https://en.wikipedia.org/wiki/Aalborg_station, read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "lift",
+   "osm_id": "n7557551061",
+   "between": [
+    "0",
+    "tunnel (-1)"
+   ],
+   "where": "east end of the tunnel, by the hall",
+   "confirmed_by": "owner text (DSB: perrons reachable by 'trapper og elevator', presence only) + OSM (position, wheelchair=yes)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n3672678538",
+   "between": [
+    "0",
+    "tunnel (-1)"
+   ],
+   "where": "west part of the tunnel",
+   "confirmed_by": "owner text (presence) + OSM (position)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w332254518",
+    "w363053669",
+    "w808205728",
+    "w808205729"
+   ],
+   "between": [
+    "0",
+    "tunnel (-1)"
+   ],
+   "where": "along the tunnel (OSM levels -1;0)",
+   "confirmed_by": "owner text (presence) + OSM",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w71452341",
+   "between": [
+    "John F. Kennedys Plads side",
+    "Kildeparken side"
+   ],
+   "where": "under the tracks",
+   "confirmed_by": "OSM + Wikipedia text",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; Wikipedia 'Aalborg station', read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_ids": [
+    "w826572009",
+    "w826572010"
+   ],
+   "between": [
+    "forecourt",
+    "hall entrances"
+   ],
+   "where": "at the John F. Kennedys Plads entrances",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "osm_ids": [
+    "n7717453178",
+    "n7717453202",
+    "n7717453203"
+   ],
+   "name": "Main entrances",
+   "street": "John F. Kennedys Plads",
+   "level": "0",
+   "where": "front of the station building",
+   "confirmed_by": "OSM + Wikipedia ('entrances from John F. Kennedys Plads'); DSB address John F. Kennedys Plads 3",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; Wikipedia 'Aalborg station', read 2026-10-30"
+  },
+  {
+   "osm_id": "n7717453180",
+   "name": "Entrance",
+   "street": "John F. Kennedys Plads",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "name": "Kildeparken side",
+   "street": "Kildeparken",
+   "where": "platform access from the park side via the tunnel",
+   "confirmed_by": "Wikipedia text; no OSM entrance node",
+   "_source": "Wikipedia 'Aalborg station', read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven (Aalborg Station)",
+   "osm_id": "n1685082063",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Th 05:30-23:00; Fr 05:30-24:00; Sa 07:30-24:00; Su 07:30-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
+   "hours_conflict": "DSB page: Mo-Th 05.40-23.00, Fr 05.40-24.00, Sa 07.30-24.00, Su 07.30-23.00.",
+   "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "category": "second_hand",
+   "name": "Life Genbrug",
+   "osm_id": "n13978121672",
+   "level_per_plan": "0",
+   "where": "in the station building (OSM)",
+   "opening_hours": "Mo-Fr 13:00-17:00; Sa 10:00-14:00; Su off",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet/Handicaptoilet",
+   "osm_id": "n11047567800",
+   "level_per_plan": "0",
+   "where": "station building (OSM)",
+   "fee": "5 kr, card",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Forhal",
+   "level_per_plan": "0",
+   "where": "station hall",
+   "opening_hours": "Mo-Fr 04:45-00:15; Sa,Su 05:45-00:15",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "where": "in the forhal",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "where": "in the forhal",
+   "fee": "per started day: S 30 kr, L 60 kr; card",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Snackautomat (DSB)",
+   "osm_id": "n14283930488",
+   "where": "on the platform ('På perron')",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "osm_id": "n836626413",
+   "where": "in front of the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Aalborg Busterminal",
+   "where": "next to / across the street from the station",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; Wikipedia 'Aalborg station', read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "DSB parking",
+   "where": "25 spaces; handicap parking; 1 locked bicycle shelter (DSB app)",
+   "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "No ticket office listed by DSB (Wikipedia still mentions one; DSB page is newer).",
+  "OSM platforms (5 ways) carry no refs, so lifts/stairs are not linked to perron 1 (spor 0/1) or 2 (spor 3/4); which platform each lift reaches is unsettled. OSM shows only two lifts, both 0;-1.",
+  "Kennedy Arkaden next door: not included (not part of the station).",
+  "Second toilet node n11047578514 (68 m, outside the building) not identified.",
+  "Signposted level names not found.",
+  "No published station plan (DSB, Banedanmark, Midttrafik/FynBus/NT) found on 2026-10-30; DSB publishes access only as present/absent lines. Level heights: no source measures them."
+ ]
+}

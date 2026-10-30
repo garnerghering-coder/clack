@@ -1,0 +1,32 @@
+{
+ "what": "footbridge deck and roof levels over the platform tracks",
+ "method": ", per bridge, on a 1.2 m-wide strip along the OSM line, over the part that lies above the tracks\n(within 8 m of a platform track line):\n  - deck_top_m: median of the bridge-deck class (Lantmäteriet/Helsinki class 17) points = the open deck's walking surface\n    (plus railings and anything lying on it; p10/p90 given);\n  - top_surface_m: median of non-ground object points (class 1, or 6 where buildings are classed) more than 2 m above\n    that deck, or above the platform when no deck points exist. Without deck-class points this surface is EITHER an open\n    deck that the classification left unclassified (railings included) OR the roof of an enclosed bridge: the laser alone\n    cannot tell which, so deck_top_m stays null and the bridge is flagged (OSM covered=*, photos or a drawing decide).\nHeights in the pack's vertical datum; *_above_platform_m = minus the pack's platform surface.",
+ "source": "laser hassleholm_laser_station_2025.laz (scan 2025-02-19); bridge lines and tags: OpenStreetMap (ODbL), 740000006.osm; track lines: hassleholm_platform_trafikverket.geojson",
+ "bridges": [
+  {
+   "osm_id": "w55226306",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1",
+    "indoor": "yes"
+   },
+   "crosses_register_tracks": [
+    "1b",
+    "4b"
+   ],
+   "strip_area_m2": 35,
+   "points_class17": 0,
+   "platform_surface_m": 53.81,
+   "track_bed_m": 53.13,
+   "deck_top_m": null,
+   "top_surface_m": 63.63,
+   "top_surface_points": 40,
+   "top_surface_above_platform_m": 9.82,
+   "osm_covered": null,
+   "osm_start_date": null,
+   "note": "no bridge-deck class: the top surface is either the open deck (unclassified) or the roof of an enclosed bridge; deck level not measured; OSM has no covered tag"
+  }
+ ]
+}

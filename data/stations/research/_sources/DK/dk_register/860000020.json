@@ -1,0 +1,140 @@
+{
+ "clack_id": "860000020",
+ "name": "Aalborg",
+ "bilag_name": "Aalborg",
+ "station_abbr": [
+  "Ab"
+ ],
+ "plat": [
+  {
+   "BisObjektNr": "perron 1 / track 0",
+   "Points": "57.0410033 9.9179784 57.0410350 9.9179691 57.0411780 9.9179186 57.0413255 9.9178589 57.0415602 9.9177628 57.0417909 9.9176683 57.0419342 9.9176097 57.0420253 9.9175718",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 109,
+   "Bredd_m": 23.1,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000020-24-1-0",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "24",
+   "x_perron": "1",
+   "x_track": "0",
+   "x_perron_tracks": [
+    "0",
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 0 (station Ab); extent: Banedanmark platform outline FOR_PERRONER_OD Ab 171 beside the track (116 m along it; Bilag 109 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 24; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 1 / track 1",
+   "Points": "57.0409881 9.9178146 57.0411048 9.9177778 57.0411225 9.9177718 57.0411401 9.9177657 57.0411578 9.9177596 57.0411754 9.9177533 57.0411931 9.9177471 57.0412107 9.9177407 57.0412283 9.9177343 57.0412459 9.9177278 57.0412635 9.9177213 57.0412811 9.9177147 57.0415708 9.9176001 57.0418591 9.9174742 57.0421459 9.9173369 57.0424310 9.9171883 57.0427142 9.9170285 57.0429956 9.9168575 57.0432748 9.9166755 57.0435519 9.9164826 57.0436647 9.9163982 57.0437761 9.9163083 57.0438862 9.9162129 57.0439841 9.9161224 57.0440199 9.9160871 57.0440939 9.9160143",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 367,
+   "Bredd_m": 7.4,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000020-24-1-1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "24",
+   "x_perron": "1",
+   "x_track": "1",
+   "x_perron_tracks": [
+    "0",
+    "1"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Ab); extent: Banedanmark platform outline FOR_PERRONER_OD Ab 171 beside the track (364 m along it; Bilag 367 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 24; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 3",
+   "Points": "57.0409751 9.9176597 57.0409926 9.9176548 57.0411293 9.9176118 57.0412352 9.9175746 57.0413563 9.9175293 57.0414921 9.9174752 57.0415086 9.9174679 57.0415844 9.9174368 57.0416749 9.9173981 57.0418451 9.9173220 57.0420472 9.9172253 57.0421595 9.9171731 57.0423180 9.9170909 57.0425133 9.9169848 57.0428184 9.9168068 57.0431013 9.9166272 57.0431985 9.9165615 57.0434120 9.9164175 57.0435619 9.9163118 57.0437582 9.9161573 57.0438216 9.9161019 57.0438547 9.9160731 57.0438754 9.9160551 57.0439384 9.9159981 57.0439869 9.9159520 57.0440260 9.9159149 57.0440630 9.9158773",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 367,
+   "Bredd_m": 8.5,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000020-24-2-3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "24",
+   "x_perron": "2",
+   "x_track": "3",
+   "x_perron_tracks": [
+    "3",
+    "4"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Ab); extent: Banedanmark platform outline FOR_PERRONER_OD Ab 172 beside the track (362 m along it; Bilag 367 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 24; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  },
+  {
+   "BisObjektNr": "perron 2 / track 4",
+   "Points": "57.0409608 9.9174972 57.0409987 9.9174851 57.0410504 9.9174685 57.0412084 9.9174085 57.0413307 9.9173565 57.0414417 9.9173077 57.0415470 9.9172605 57.0417975 9.9171428 57.0420593 9.9170116 57.0422967 9.9168855 57.0425466 9.9167446 57.0427391 9.9166317 57.0429862 9.9164767 57.0431193 9.9163892 57.0431586 9.9163626 57.0433729 9.9162177 57.0434653 9.9161535 57.0435473 9.9160967 57.0436671 9.9160089 57.0438088 9.9159016 57.0438151 9.9158967 57.0438811 9.9158446 57.0439472 9.9157905 57.0439931 9.9157529 57.0440202 9.9157299",
+   "Höjd": "50",
+   "Höjd_beskr": "50 cm above top of rail (Bilag 3.6)",
+   "Längd_m": 367,
+   "Bredd_m": 8.6,
+   "Väderskydd": null,
+   "SIDE": null,
+   "VALID_FROM": null,
+   "REFLINK_OID": "860000020-24-2-4",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0,
+   "Kmtal": null,
+   "x_tib": "24",
+   "x_perron": "2",
+   "x_track": "4",
+   "x_perron_tracks": [
+    "3",
+    "4"
+   ],
+   "x_geometry": "track: Sporforløb SPORNUMMER 4 (station Ab); extent: Banedanmark platform outline FOR_PERRONER_OD Ab 172 beside the track (358 m along it; Bilag 367 m)",
+   "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+   "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 24; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+  }
+ ],
+ "trk": [
+  {
+   "REFLINK_OID": "860000020-24-1-0",
+   "IndKod": "0",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000020-24-1-1",
+   "IndKod": "1",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000020-24-2-3",
+   "IndKod": "3",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  },
+  {
+   "REFLINK_OID": "860000020-24-2-4",
+   "IndKod": "4",
+   "MEASURE_FROM": 0,
+   "MEASURE_TO": 1000000000.0
+  }
+ ],
+ "flags": [],
+ "heights": {
+  "50": 0.5
+ }
+}

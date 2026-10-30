@@ -1,0 +1,399 @@
+{
+ "clack_id": "fi:TKU",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "1",
+   "name": "Logomonsilta (the Logomo bridge, deck level)",
+   "other_names": [
+    "Logomon Silta 1 (VR's station address)"
+   ],
+   "note": "The station is the footbridge over the yard: passengers walk along Logomonsilta and go down stairs or a lift to their platform. Logomo (station services) is at the north end of the bridge, Ratapihankatu at the south (city) end.",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "0",
+   "name": "Platform level (the passenger yard between Logomonsilta and Aninkaistensilta) and street level",
+   "other_names": [],
+   "note": "No signposted level names found. Platforms are raised (korkea).",
+   "_source": "VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_id": "w687299560",
+   "name": "Logomonsilta",
+   "between": [
+    "Ratapihankatu (city side, south)",
+    "Logomo / Köydenpunojankatu (north)"
+   ],
+   "where": "over the passenger yard; all platforms are reached from it",
+   "confirmed_by": "owner text (VR, Väylävirasto) + OSM (wheelchair=yes)",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2589402,
+    "lat": 60.4561507,
+    "how": "OSM w687299560 (point on the way)",
+    "_source": "OpenStreetMap w687299560 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9226878657",
+   "between": [
+    "Ratapihankatu (street)",
+    "Logomonsilta"
+   ],
+   "where": "south (Ratapihankatu) end of the bridge",
+   "confirmed_by": "owner text (VR: the bridge is reached by elevator from Ratapihankatu and Vaunukatu) + OSM position",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.259408,
+    "lat": 60.4556822,
+    "how": "OSM n9226878657",
+    "_source": "OpenStreetMap n9226878657 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1424898299",
+   "between": [
+    "Ratapihankatu (street)",
+    "Logomonsilta"
+   ],
+   "where": "south (Ratapihankatu) end of the bridge, beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.25991,
+    "lat": 60.4558494,
+    "how": "OSM w1424898299 (point on the way)",
+    "_source": "OpenStreetMap w1424898299 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12400350419",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 1–2"
+   ],
+   "where": "from the bridge down to the middle of the platform",
+   "confirmed_by": "owner text (Väylävirasto/VR/Turun Seutusanomat: lifts and stairs from Logomonsilta to the platforms) + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2592532,
+    "lat": 60.4559645,
+    "how": "OSM n12400350419",
+    "_source": "OpenStreetMap n12400350419 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1424898303",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 1–2"
+   ],
+   "where": "from the bridge, beside the lift",
+   "confirmed_by": "owner text + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2592814,
+    "lat": 60.4559417,
+    "how": "OSM w1424898303 (point on the way)",
+    "_source": "OpenStreetMap w1424898303 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12423294383",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 3–4"
+   ],
+   "where": "from the bridge down to the middle of the platform",
+   "confirmed_by": "owner text (Väylävirasto/VR/Turun Seutusanomat: lifts and stairs from Logomonsilta to the platforms) + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2591026,
+    "lat": 60.4561072,
+    "how": "OSM n12423294383",
+    "_source": "OpenStreetMap n12423294383 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1424898304",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 3–4"
+   ],
+   "where": "from the bridge, beside the lift",
+   "confirmed_by": "owner text + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2591288,
+    "lat": 60.4560831,
+    "how": "OSM w1424898304 (point on the way)",
+    "_source": "OpenStreetMap w1424898304 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13097329531",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 5–6"
+   ],
+   "where": "from the bridge down to the middle of the platform",
+   "confirmed_by": "owner text (Väylävirasto/VR/Turun Seutusanomat: lifts and stairs from Logomonsilta to the platforms) + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2589581,
+    "lat": 60.4562875,
+    "how": "OSM n13097329531",
+    "_source": "OpenStreetMap n13097329531 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1424898305",
+   "between": [
+    "Logomonsilta",
+    "island platform tracks 5–6"
+   ],
+   "where": "from the bridge, beside the lift",
+   "confirmed_by": "owner text + OSM for which platform",
+   "_source": "Väylävirasto 'Kupittaa–Turku-ratahanke selkosuomeksi', https://vayla.fi/kupittaa-turku-ratahanke/selkosuomi, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.259001,
+    "lat": 60.4562688,
+    "how": "OSM w1424898305 (point on the way)",
+    "_source": "OpenStreetMap w1424898305 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9226878657",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n9226878657 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.259408,
+    "lat": 60.4556822,
+    "how": "OSM n9226878657",
+    "_source": "OpenStreetMap n9226878657 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12400350419",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12400350419 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.2592532,
+    "lat": 60.4559645,
+    "how": "OSM n12400350419",
+    "_source": "OpenStreetMap n12400350419 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n12423294383",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": "yes",
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n12423294383 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.2591026,
+    "lat": 60.4561072,
+    "how": "OSM n12423294383",
+    "_source": "OpenStreetMap n12423294383 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n13097329531",
+   "name": null,
+   "osm_level": "0;1",
+   "between": null,
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n13097329531 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 22.2589581,
+    "lat": 60.4562875,
+    "how": "OSM n13097329531",
+    "_source": "OpenStreetMap n13097329531 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Logomonsilta, Ratapihankatu end",
+   "street": "Ratapihankatu",
+   "level": "0→1",
+   "where": "south end of the bridge: lift and stairs up; VR ticket machine, taxi stand, accessible parking by the VR assistance point, free bike parking, Föli line 20 stop",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+  },
+  {
+   "name": "Logomonsilta, Vaunukatu / Logomo end",
+   "street": "Vaunukatu / Köydenpunojankatu (Logomo, Junakatu 9)",
+   "level": "1",
+   "where": "north end of the bridge at Logomo, where the station services are; VR names a lift from Vaunukatu (not mapped in the OSM extract)",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Waiting area and temporary station services in Logomo (Logomo Kitchen)",
+   "where": "in Logomo (Junakatu 9), at the north end of Logomonsilta",
+   "opening_hours": "Mo-Sa 06:30-21:00; Su 07:30-21:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "note": "Temporary: services move to the ground floor of LogoHub (Ratapihankatu, beside the bridge, 3rd floor linked to the bridge) when it is finished, estimated spring 2027. No VR service point.",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; Logomo Kitchen, https://logomo.fi/ravintolat/logomo-kitchen, read 2026-10-30; LogoHub, https://logohub.fi, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC (in Logomo)",
+   "where": "in Logomo with the waiting area",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Logomo Kitchen",
+   "where": "in Logomo, north end of Logomonsilta; holds the temporary VR station services",
+   "opening_hours": "Mo-Sa 06:30-21:00; Su 07:30-21:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "Breakfast Mo-Sa 06:30-10:00, Su 07:30-10:00; lunch Mo-Fr 10:30-13:30; brunch Sa 12:00-15:00 (none on 31 Oct).",
+   "_source": "Logomo Kitchen, https://logomo.fi/ravintolat/logomo-kitchen, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "cafe",
+   "name": "Teatro Bar & Café",
+   "where": "in Logomo",
+   "note": "No hours found.",
+   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30",
+   "position": null,
+   "position_note": "not found in OSM near the station: position unknown"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "VR ticket machine",
+   "where": "city-side (Ratapihankatu) end of Logomonsilta",
+   "osm_id": "n13097333770",
+   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2597033,
+    "lat": 60.455768,
+    "osm_id": "n13097333770",
+    "osm_level": "0",
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "OSM node n13097333770",
+    "_source": "OpenStreetMap n13097333770 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: luggage lockers are not available; Logomo cannot store luggage.",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "VR avustamispiste",
+   "where": "Ratapihankatu side of Logomonsilta; accessible parking next to it",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi stands",
+   "where": "at the Ratapihankatu end of Logomonsilta (OSM w1393833848) and on Junakatu by Logomo",
+   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Föli lines 9, 9A, 20",
+   "where": "Köydenpunojankatu (Logomo side) or Ratapihankatu; line 20 stops at the Logomo bridge and runs along Ratapihankatu to the bus station and Market Square",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Logomo P2, P5, P7 (paid)",
+   "where": "around Logomo; limited; more spaces when LogoHub opens (2027)",
+   "osm_id": "w516188550",
+   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30",
+   "position": {
+    "lon": 22.2616379,
+    "lat": 60.4576042,
+    "osm_id": "w516188550",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": null,
+    "how": "representative point of the OSM area w516188550",
+    "_source": "OpenStreetMap w516188550 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "car_carrier_loading",
+   "name": "Autojunien lastaus",
+   "where": "next to the old station building, Ratapihankatu 37; loading 19:00-19:30",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30"
+  }
+ ],
+ "plans": [],
+ "open": [
+  "Signposted platform numbers: Digitraffic has tracks 1–6; Wikipedia (2024) says platforms 1–3. Whether signs say 'laituri 1–3' (three island platforms) or tracks 1–6 is not confirmed.",
+  "Which platform each lift/stair reaches is OSM only (owner texts confirm lifts and stairs from the bridge, not per platform).",
+  "The Vaunukatu-side lift named by VR is not in the OSM extract; its position is unknown.",
+  "No signposted level names, no heights (laser found no platform surface).",
+  "No published station plan found (vayla.fi project pages would not load).",
+  "Teatro Bar & Café hours not found; toilet fee unknown.",
+  "Logomo's entrance used by train passengers and the waiting area's floor are not described."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Do trains use a temporary station or platforms during the Turku travel-centre works (the register's platforms sit ~400 m NE of the old station building)? Where do passengers board now?",
+   "answer": "Passengers board at the Logomo platforms under Logomonsilta (VR address Logomon Silta 1), between Logomonsilta and Aninkaistensilta, about 10–15 min walk from the old station building. Tampere-direction trains moved there on 5 Aug 2024 and all trains (incl. Helsinki–Turku and night trains) on 15 Dec 2024. These are the new permanent passenger-yard platforms, not temporary ones: the yard was completed with tracks 4–6 on 8 Oct 2025, matching the Digitraffic register (L1–L3 valid from 2024-08-05, L4–L6 from 2025-09-29). The old platforms by the station building (2–7) were dismantled in 2022–24 and the old building closed; only car-carrier loading stays there. What is temporary is the station services (waiting area, toilets, café) in Logomo / Logomo Kitchen, until LogoHub opens (est. spring 2027).",
+   "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; VR news 2024-07-26 'Turku railway station to move to Logomo on 5 August 2024', https://www.vr.fi/en/news/2024/07/26/turku-railway-station-to-move-to-logomo-on-5-august-2024, read 2026-10-30; VR news 2024-11-07 'All train traffic will return to Turku railway station on 15 December', https://vr.fi/en/news/2024/11/07/all-train-traffic-will-return-to-turku-railway-station-on-15-december, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; Wikipedia 'Turku Central Station', https://en.wikipedia.org/wiki/Turku_Central_Station, read 2026-10-30; LogoHub, https://logohub.fi, read 2026-10-30; Digitraffic infra-api laiturit TKU L1–L6 (Väylävirasto / Fintraffic, CC BY 4.0; L1–L3 valid from 2024-08-05, L4–L6 from 2025-09-29), read 2026-10-30"
+  }
+ ]
+}

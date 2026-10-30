@@ -1,0 +1,629 @@
+{
+ "clack_id": "860000079",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w149914715",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 79.9,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.738957,
+    55.5684491
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w514924980",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 86.3,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.739293,
+    55.5690436
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n11510453876",
+   "name": null,
+   "level": null,
+   "wheelchair": null,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7398185,
+    55.568333
+   ]
+  }
+ ],
+ "entrances": [
+  {
+   "osm_id": "n7191954019",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jernbanegade",
+   "nearest_street_m": 28.0,
+   "lonlat": [
+    9.7406234,
+    55.5682495
+   ]
+  },
+  {
+   "osm_id": "n7191954020",
+   "name": null,
+   "entrance": "main",
+   "level": null,
+   "wheelchair": null,
+   "door": null,
+   "addr_street": null,
+   "nearest_named_street": "Jernbanegade",
+   "nearest_street_m": 26.4,
+   "lonlat": [
+    9.7406266,
+    55.5681979
+   ]
+  }
+ ],
+ "amenities": [
+  {
+   "osm_id": "n1618739862",
+   "category": "shop=convenience",
+   "name": "7-Eleven",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 05:00-23:30; PH,Sa,Su 07:00-23:30",
+   "wheelchair": "yes",
+   "distance_m": 24,
+   "lonlat": [
+    9.7403513,
+    55.5680765
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "brand": "7-Eleven",
+   "website": "https://www.7-eleven.dk/",
+   "operator": "Kort & Godt"
+  },
+  {
+   "osm_id": "n4022447682",
+   "category": "fast_food",
+   "name": "Gozas Pizza og Kebab",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Su 16:00-22:00",
+   "wheelchair": "yes",
+   "distance_m": 44,
+   "lonlat": [
+    9.741318,
+    55.568284
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "cuisine": "pizza"
+  },
+  {
+   "osm_id": "n4557754553",
+   "category": "vending_machine",
+   "name": "DSB Billetter",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.7405089,
+    55.5682421
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "website": "https://www.dsb.dk/",
+   "operator": "DSB",
+   "indoor": "yes",
+   "payment:coins": "yes"
+  },
+  {
+   "osm_id": "n5335517101",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 86,
+   "lonlat": [
+    9.7395611,
+    55.567739
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n6372932904",
+   "category": "lounge",
+   "name": "Knudepunktet",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 19,
+   "lonlat": [
+    9.7405164,
+    55.5683744
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n7773335578",
+   "category": "toilets",
+   "name": "DSB",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "wheelchair": "yes",
+   "distance_m": 24,
+   "lonlat": [
+    9.7402527,
+    55.5682076
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "DSB",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n11045308138",
+   "category": "dentist",
+   "name": "Tandlægerne Jernbanegade 13",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo 09:00-17:30; Tu,Th 08:30-16:00; We 08:30-15:00; Fr 08:30-13:00",
+   "wheelchair": null,
+   "distance_m": 40,
+   "lonlat": [
+    9.7412393,
+    55.5681218
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n11045357754",
+   "category": "driving_school",
+   "name": "Kurt's Køreskole",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 41,
+   "lonlat": [
+    9.7411984,
+    55.5680339
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12829078369",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.7407393,
+    55.5681885
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n12829078370",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 8,
+   "lonlat": [
+    9.7407413,
+    55.5681952
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13234579477",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 16,
+   "lonlat": [
+    9.7404882,
+    55.5681028
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13234579478",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 15,
+   "lonlat": [
+    9.7404904,
+    55.5681077
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13234579479",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 9,
+   "lonlat": [
+    9.7407647,
+    55.5681877
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13291535706",
+   "category": "luggage_locker",
+   "name": "DSB",
+   "level": null,
+   "fee": "yes",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 21,
+   "lonlat": [
+    9.7403155,
+    55.5681716
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "DSB",
+   "indoor": "yes"
+  },
+  {
+   "osm_id": "n13456591029",
+   "category": "photo_booth",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 9,
+   "lonlat": [
+    9.7405324,
+    55.5681614
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "indoor": "yes",
+   "payment:coins": "no"
+  },
+  {
+   "osm_id": "n13752828305",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 29,
+   "lonlat": [
+    9.7404353,
+    55.5679859
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13755826571",
+   "category": "shop=hairdresser",
+   "name": "Allan Frisør",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:30-18:00; Sa 09:00-16:00",
+   "wheelchair": null,
+   "distance_m": 52,
+   "lonlat": [
+    9.7413777,
+    55.5684212
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w110588774",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 93,
+   "lonlat": [
+    9.7407091,
+    55.5669802
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w117679829",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.7408265,
+    55.5685321
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w117683598",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 67,
+   "lonlat": [
+    9.7411544,
+    55.5688437
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w117683601",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 82,
+   "lonlat": [
+    9.740976,
+    55.568973
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w148986518",
+   "category": "bus_station",
+   "name": "Fredericia Banegård (Bybusser)",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.7406428,
+    55.5676211
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null,
+   "website": "http://www.rejseplanen.dk/bin/stboard.exe/en&mn?ml=m&ml=m&boardType=dep&input=607302402&maxJourneys=250&start=yes"
+  },
+  {
+   "osm_id": "w294854531",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 52,
+   "lonlat": [
+    9.7407071,
+    55.5677159
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w294854533",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 27,
+   "lonlat": [
+    9.7407752,
+    55.5679642
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w294854536",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 35,
+   "lonlat": [
+    9.7407273,
+    55.5678868
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w294854538",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 74,
+   "lonlat": [
+    9.740811,
+    55.5675396
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w670249226",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 17,
+   "lonlat": [
+    9.7409346,
+    55.5684857
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w670250186",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 21,
+   "lonlat": [
+    9.740986,
+    55.5683698
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w670250456",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 36,
+   "lonlat": [
+    9.7410712,
+    55.5685429
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w670251337",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 64,
+   "lonlat": [
+    9.740946,
+    55.5688015
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1173705657",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 16,
+   "lonlat": [
+    9.7405015,
+    55.5679523
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1388582093",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 94,
+   "lonlat": [
+    9.7403378,
+    55.5673334
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1389628875",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 86,
+   "lonlat": [
+    9.7400088,
+    55.5670917
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

@@ -1,0 +1,113 @@
+{
+ "clack_id": "NO-NTH",
+ "slug": "nationaltheatret",
+ "flags": [
+  "OSM platform outline w312826116 (ref 1, 412 m²) beside the tracks has no Bane NOR Sportabell row matched to it: check the table (https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/)",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w1523490311 (no mapped ways); r14170557 (footway, tertiary, trunk, trunk_link)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=10.721133,59.911390,10.735133,59.919390",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project Oslo kommune tynnet laserskanning 2019",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "nationaltheatret_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": -1.35,
+  "median_m": 21.76,
+  "max_m": 36.98,
+  "nan_cells": 204218,
+  "size_m": [
+   652,
+   651
+  ],
+  "box_sweref": [
+   596304,
+   6642924,
+   596956,
+   6643575
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1797890_1175.laz"
+  ],
+  "scan_date": "2019-09-14",
+  "density_pts_m2_nominal": 0.5,
+  "flight_height_m": null,
+  "points_in_box": 558998,
+  "density_in_box": 1.32,
+  "classes": {
+   "1": 200888,
+   "2": 357316,
+   "17": 794
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "track N1",
+   "track": "N1,N2",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 244.0,
+   "width_m": 11.0,
+   "roof": null,
+   "baninfo_side": null,
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  },
+  {
+   "bis_object": "track N3",
+   "track": "N3,N4",
+   "height_class": "700",
+   "class_height_m": 0.7,
+   "length_m": 251.0,
+   "width_m": 11.0,
+   "roof": null,
+   "baninfo_side": null,
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  }
+ ],
+ "platform_surface_m": null,
+ "track_bed_m": null,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 17,
+  "footbridge": 0,
+  "canopy_osm": 2,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 100,
+ "photos_station_related": 1
+}

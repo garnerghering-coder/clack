@@ -1,0 +1,865 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7393378,
+      55.5669273
+     ],
+     [
+      9.7393408,
+      55.5669325
+     ],
+     [
+      9.7394161,
+      55.5670787
+     ],
+     [
+      9.7400149,
+      55.5683001
+     ],
+     [
+      9.740468,
+      55.5692245
+     ],
+     [
+      9.7406313,
+      55.5695576
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 2",
+    "track": "2",
+    "perron": "1",
+    "perron_tracks": [
+     "2",
+     "1"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 299,
+    "width_m": 5.8,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 2 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 171 beside the track (304 m along it; Bilag 299 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7395048,
+      55.5668982
+     ],
+     [
+      9.7395217,
+      55.5669312
+     ],
+     [
+      9.7401779,
+      55.5682744
+     ],
+     [
+      9.7406516,
+      55.5692438
+     ],
+     [
+      9.7406956,
+      55.5693503
+     ],
+     [
+      9.7407276,
+      55.5694581
+     ],
+     [
+      9.7407452,
+      55.569548
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 1 / track 1",
+    "track": "1",
+    "perron": "1",
+    "perron_tracks": [
+     "2",
+     "1"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 170,
+    "width_m": 5.7,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 1 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 171 beside the track (305 m along it; Bilag 170 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7389561,
+      55.5664637
+     ],
+     [
+      9.7390166,
+      55.566549
+     ],
+     [
+      9.7391663,
+      55.5667719
+     ],
+     [
+      9.7392521,
+      55.5669152
+     ],
+     [
+      9.7393282,
+      55.5670514
+     ],
+     [
+      9.7393855,
+      55.5671628
+     ],
+     [
+      9.7399464,
+      55.5683108
+     ],
+     [
+      9.7399477,
+      55.5683134
+     ],
+     [
+      9.7400656,
+      55.5685471
+     ],
+     [
+      9.7405798,
+      55.569602
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 3",
+    "track": "3",
+    "perron": "2",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 351,
+    "width_m": 10.1,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 3 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 172 beside the track (364 m along it; Bilag 351 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7388052,
+      55.5664973
+     ],
+     [
+      9.7388398,
+      55.5665531
+     ],
+     [
+      9.7388924,
+      55.5666446
+     ],
+     [
+      9.7389832,
+      55.5668082
+     ],
+     [
+      9.7390553,
+      55.5669463
+     ],
+     [
+      9.7394917,
+      55.5678438
+     ],
+     [
+      9.7396271,
+      55.5681174
+     ],
+     [
+      9.7397419,
+      55.5683428
+     ],
+     [
+      9.7401197,
+      55.5691186
+     ],
+     [
+      9.7403729,
+      55.5696344
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 2 / track 4",
+    "track": "4",
+    "perron": "2",
+    "perron_tracks": [
+     "3",
+     "4"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 351,
+    "width_m": 10.2,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 4 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 172 beside the track (363 m along it; Bilag 351 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.738128,
+      55.5657272
+     ],
+     [
+      9.7381569,
+      55.5657681
+     ],
+     [
+      9.7383037,
+      55.5659751
+     ],
+     [
+      9.7384001,
+      55.566111
+     ],
+     [
+      9.7384975,
+      55.5662568
+     ],
+     [
+      9.7385943,
+      55.566401
+     ],
+     [
+      9.7386723,
+      55.566523
+     ],
+     [
+      9.7387484,
+      55.5666539
+     ],
+     [
+      9.7388215,
+      55.5667783
+     ],
+     [
+      9.738893,
+      55.5669121
+     ],
+     [
+      9.7389683,
+      55.5670629
+     ],
+     [
+      9.7393882,
+      55.5679277
+     ],
+     [
+      9.7396048,
+      55.5683644
+     ],
+     [
+      9.7397102,
+      55.5685918
+     ],
+     [
+      9.7400479,
+      55.5692669
+     ],
+     [
+      9.7402425,
+      55.569663
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 3 / track 6",
+    "track": "6",
+    "perron": "3",
+    "perron_tracks": [
+     "6",
+     "7",
+     "16"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 317,
+    "width_m": 8.7,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 6 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 173 beside the track (458 m along it; Bilag 317 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7379304,
+      55.5657722
+     ],
+     [
+      9.7379423,
+      55.5657889
+     ],
+     [
+      9.7380913,
+      55.5659997
+     ],
+     [
+      9.738322,
+      55.5663377
+     ],
+     [
+      9.7384211,
+      55.5664924
+     ],
+     [
+      9.7385292,
+      55.5666691
+     ],
+     [
+      9.7385868,
+      55.5667703
+     ],
+     [
+      9.7387134,
+      55.5670066
+     ],
+     [
+      9.739396,
+      55.5683973
+     ],
+     [
+      9.7395121,
+      55.5686337
+     ],
+     [
+      9.7399994,
+      55.5696327
+     ],
+     [
+      9.7400297,
+      55.5696963
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 3 / track 7",
+    "track": "7",
+    "perron": "3",
+    "perron_tracks": [
+     "6",
+     "7",
+     "16"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 452,
+    "width_m": 8.7,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 7 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 173 beside the track (457 m along it; Bilag 452 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7380389,
+      55.5657462
+     ],
+     [
+      9.7380972,
+      55.5658198
+     ],
+     [
+      9.738206,
+      55.5659629
+     ],
+     [
+      9.7383599,
+      55.5661733
+     ],
+     [
+      9.7384779,
+      55.5663408
+     ],
+     [
+      9.7385498,
+      55.5664501
+     ],
+     [
+      9.7386447,
+      55.566602
+     ],
+     [
+      9.7387095,
+      55.566714
+     ],
+     [
+      9.7387319,
+      55.5667532
+     ],
+     [
+      9.7387636,
+      55.5668113
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 3 / track 16",
+    "track": "16",
+    "perron": "3",
+    "perron_tracks": [
+     "6",
+     "7",
+     "16"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 129,
+    "width_m": 31.3,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 16 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 173 beside the track (127 m along it; Bilag 129 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7385003,
+      55.5668793
+     ],
+     [
+      9.7385117,
+      55.5669
+     ],
+     [
+      9.7385989,
+      55.5670707
+     ],
+     [
+      9.7387942,
+      55.5674704
+     ],
+     [
+      9.739259,
+      55.5684133
+     ],
+     [
+      9.7392616,
+      55.5684186
+     ],
+     [
+      9.7393723,
+      55.5686528
+     ],
+     [
+      9.7397481,
+      55.5694196
+     ],
+     [
+      9.7398519,
+      55.5696358
+     ],
+     [
+      9.7398891,
+      55.569717
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 4 / track 9",
+    "track": "9",
+    "perron": "4",
+    "perron_tracks": [
+     "9",
+     "10"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 348,
+    "width_m": 10.0,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 9 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 174 beside the track (328 m along it; Bilag 348 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7382937,
+      55.5669155
+     ],
+     [
+      9.7384187,
+      55.5671625
+     ],
+     [
+      9.7387302,
+      55.5678065
+     ],
+     [
+      9.7390517,
+      55.5684517
+     ],
+     [
+      9.7396859,
+      55.5697478
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 4 / track 10",
+    "track": "10",
+    "perron": "4",
+    "perron_tracks": [
+     "9",
+     "10"
+    ],
+    "tib": "1",
+    "height_class": "55 cm",
+    "height_m": 0.55,
+    "length_m": 341,
+    "width_m": 10.0,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 10 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 174 beside the track (327 m along it; Bilag 341 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7402101,
+      55.5697458
+     ],
+     [
+      9.7405221,
+      55.5703884
+     ],
+     [
+      9.7406528,
+      55.5706578
+     ],
+     [
+      9.740679,
+      55.5707189
+     ],
+     [
+      9.7407025,
+      55.570782
+     ],
+     [
+      9.7407386,
+      55.5708985
+     ],
+     [
+      9.740933,
+      55.5715748
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 5 / track 31",
+    "track": "31",
+    "perron": "5",
+    "perron_tracks": [
+     "31",
+     "32",
+     "33",
+     "7"
+    ],
+    "tib": "1",
+    "height_class": "26 cm",
+    "height_m": 0.26,
+    "length_m": 73,
+    "width_m": 7.9,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 31 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 175 beside the track (209 m along it; Bilag 73 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7405221,
+      55.5703884
+     ],
+     [
+      9.7407765,
+      55.5712833
+     ],
+     [
+      9.7409651,
+      55.5719389
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 5 / track 32",
+    "track": "32",
+    "perron": "5",
+    "perron_tracks": [
+     "31",
+     "32",
+     "33",
+     "7"
+    ],
+    "tib": "1",
+    "height_class": "26 cm",
+    "height_m": 0.26,
+    "length_m": 169,
+    "width_m": 9.5,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 32 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 175 beside the track (175 m along it; Bilag 169 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7403011,
+      55.5701827
+     ],
+     [
+      9.7403225,
+      55.5702462
+     ],
+     [
+      9.7404337,
+      55.5706141
+     ],
+     [
+      9.7404678,
+      55.570749
+     ],
+     [
+      9.7407061,
+      55.5715742
+     ],
+     [
+      9.7407777,
+      55.5718355
+     ],
+     [
+      9.7408092,
+      55.5719531
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 5 / track 33",
+    "track": "33",
+    "perron": "5",
+    "perron_tracks": [
+     "31",
+     "32",
+     "33",
+     "7"
+    ],
+    "tib": "1",
+    "height_class": "26 cm",
+    "height_m": 0.26,
+    "length_m": 192,
+    "width_m": 8.3,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 33 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 175 beside the track (200 m along it; Bilag 192 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7400295,
+      55.5696959
+     ],
+     [
+      9.7400627,
+      55.5697656
+     ],
+     [
+      9.7401148,
+      55.569884
+     ],
+     [
+      9.7401804,
+      55.5700512
+     ],
+     [
+      9.740247,
+      55.5702319
+     ],
+     [
+      9.7402977,
+      55.5703902
+     ],
+     [
+      9.7403398,
+      55.5705372
+     ],
+     [
+      9.7403695,
+      55.5706501
+     ],
+     [
+      9.7403982,
+      55.5707907
+     ],
+     [
+      9.740441,
+      55.5711452
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 5 / track 7",
+    "track": "7",
+    "perron": "5",
+    "perron_tracks": [
+     "31",
+     "32",
+     "33",
+     "7"
+    ],
+    "tib": "1",
+    "height_class": "26 cm",
+    "height_m": 0.26,
+    "length_m": 58,
+    "width_m": 10.1,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 7 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 175 beside the track (164 m along it; Bilag 58 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      9.7398885,
+      55.5697156
+     ],
+     [
+      9.7399273,
+      55.5698004
+     ],
+     [
+      9.7399953,
+      55.5699672
+     ],
+     [
+      9.7400604,
+      55.5701435
+     ],
+     [
+      9.7400869,
+      55.5702197
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "perron 6 / track 9",
+    "track": "9",
+    "perron": "6",
+    "perron_tracks": [
+     "9"
+    ],
+    "tib": "1",
+    "height_class": "26 cm",
+    "height_m": 0.26,
+    "length_m": 58,
+    "width_m": 4.2,
+    "width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "geometry_how": "track: Sporforløb SPORNUMMER 9 (station Fa); extent: Banedanmark platform outline FOR_PERRONER_OD Fa 176 beside the track (57 m along it; Bilag 58 m)",
+    "platform_surface_m": null,
+    "track_bed_m": null,
+    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 1; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+   }
+  }
+ ]
+}

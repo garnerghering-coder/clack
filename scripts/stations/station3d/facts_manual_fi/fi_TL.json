@@ -1,0 +1,163 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street and platform level",
+   "other_names": [],
+   "note": "Station building (1963, Aarno Raveala; VR address Pätsiniementie 4) on the south-west side of the yard; four platform tracks 1–4, all 'korkea' in the register.",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30; Wikipedia 'Toijala railway station', https://en.wikipedia.org/wiki/Toijala_railway_station, read 2026-10-30; Digitraffic infra-api laiturit TL L1–L4 (Väylävirasto / Fintraffic, CC BY 4.0), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpass under the tracks",
+   "other_names": [],
+   "note": "One underpass (~167 m, crosses the whole yard) with stairs and lifts up to the platforms. No signposted level names found.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w34388053",
+   "between": [
+    "station side (Pätsiniementie, station building and bus station)",
+    "north-east side of the yard (the long-stay car park VR mentions 'on the other side of the rail yard')"
+   ],
+   "where": "crosses the yard about 35 m south-east of the station building's main doors",
+   "confirmed_by": "OSM only (VR confirms parking on the far side of the yard, not the underpass)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30; VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34388052",
+   "between": [
+    "underpass",
+    "station side (street level)"
+   ],
+   "where": "south-west (station) end of the underpass, by the station bike parking",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10598809640",
+   "between": [
+    "underpass",
+    "platform nearest the station (tracks 1–2)"
+   ],
+   "where": "middle of the platform, at the underpass",
+   "confirmed_by": "OSM only (wheelchair=yes)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34388058",
+   "between": [
+    "underpass",
+    "platform nearest the station (tracks 1–2)"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n10598809638",
+   "between": [
+    "underpass",
+    "far platform (tracks 3–4)"
+   ],
+   "where": "middle of the platform, at the underpass",
+   "confirmed_by": "OSM only (wheelchair=yes)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w34388057",
+   "between": [
+    "underpass",
+    "far platform (tracks 3–4)"
+   ],
+   "where": "beside the lift",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Station building main doors",
+   "street": "Pätsiniementie",
+   "level": "0",
+   "where": "south-west side of the yard; OSM n13816771579, n13816771580",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Odotustila",
+   "where": "station building",
+   "opening_hours": "Mo-Su 04:50-21:00",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC",
+   "where": "station building",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "none",
+   "note": "VR: no luggage lockers, no VR service point, no assistance service.",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Chinese wave",
+   "where": "in the station building (OSM in_station_building)",
+   "osm_id": "n9568764802",
+   "opening_hours": "Mo,Fr 11:00-21:00; Sa,Su 12:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "OSM's value is 'Fr 11:00-21:00, Sa-Su 12:00-21:00, Mo 11:00-21:00' (no Tu-Th); rewritten in standard syntax, same meaning. Not checked with the restaurant.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Toijalan rautatieasema (bus stops)",
+   "where": "in front of the station building",
+   "osm_id": "w34388054",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Station car park (max 24 h, monitored) and long-stay car park",
+   "where": "short stay in front of the station; longer stays on the other side of the rail yard",
+   "_source": "VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "in front of the station (OSM n375432160)",
+   "osm_id": "n375432160",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts?",
+   "answer": "Per OSM, one underpass with a lift and stairs up to each of the two platforms (the one nearest the station, tracks 1–2, and the far one, tracks 3–4), plus stairs to street level on the station side. No owner source describes them; VR only says the platforms are high with step-free boarding of low-floor trains.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30; VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30; Wikipedia 'Toijala railway station', https://en.wikipedia.org/wiki/Toijala_railway_station, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lifts and stairs are OSM only: no VR text, plan or photo checked. Which tracks each platform serves (1–2 / 3–4) is inferred from Digitraffic track spacing and OSM positions.",
+  "Whether the east end of the underpass has stairs/lift to street level is not in the extract.",
+  "No signposted names; no heights (laser ≈0.68–0.72 m above rail vs class 0.55 m).",
+  "Ticket machine: not mentioned by VR, none in OSM.",
+  "Chinese wave hours OSM only."
+ ]
+}

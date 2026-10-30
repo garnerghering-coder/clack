@@ -1,0 +1,519 @@
+{
+ "clack_id": "860000501",
+ "source": "OpenStreetMap, API 0.6 map call",
+ "licence": "ODbL",
+ "platforms": [],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w184105187",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 48.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7339335,
+    55.5016696
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w454743377",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 3.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7338336,
+    55.5015236
+   ]
+  },
+  {
+   "kind": "underpass",
+   "osm_id": "w454743380",
+   "name": null,
+   "level": null,
+   "layer": "-1",
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": null,
+   "length_m": 4.1,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7339335,
+    55.5016696
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w546420523",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 8.8,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7339401,
+    55.5015211
+   ]
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w546420528",
+   "name": null,
+   "level": null,
+   "layer": null,
+   "conveying": null,
+   "wheelchair": null,
+   "ramp": "no",
+   "length_m": 9.7,
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7339335,
+    55.5016696
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4512725705",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7338699,
+    55.5016755
+   ]
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n4512725709",
+   "name": null,
+   "level": "-1;0",
+   "wheelchair": "yes",
+   "reaches_platforms": [],
+   "lonlat": [
+    9.7338336,
+    55.5015236
+   ]
+  }
+ ],
+ "entrances": [],
+ "amenities": [
+  {
+   "osm_id": "n275963877",
+   "category": "toilets",
+   "name": null,
+   "level": null,
+   "fee": "yes",
+   "opening_hours": "Mo-Su 06:00-21:00",
+   "wheelchair": "yes",
+   "distance_m": 15,
+   "lonlat": [
+    9.7341294,
+    55.5018534
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n2692709811",
+   "category": "shop=kiosk",
+   "name": "City Kiosk",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 08:00-22:00; Sa 09:00-22:00; Su 10:00-22:00",
+   "wheelchair": null,
+   "distance_m": 18,
+   "lonlat": [
+    9.7337732,
+    55.5020263
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n3344711055",
+   "category": "taxi",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 18,
+   "lonlat": [
+    9.7343152,
+    55.502008
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n4512725714",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 10,
+   "lonlat": [
+    9.7339295,
+    55.5020502
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n4512725716",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 6,
+   "lonlat": [
+    9.7339466,
+    55.5019693
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n4512725719",
+   "category": "shelter",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 66,
+   "lonlat": [
+    9.73482,
+    55.5015834
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n4557738396",
+   "category": "vending_machine",
+   "name": "DSB Billetter",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 15,
+   "lonlat": [
+    9.7339296,
+    55.5018654
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "operator": "DSB",
+   "indoor": "yes",
+   "payment:coins": "yes"
+  },
+  {
+   "osm_id": "n11922544879",
+   "category": "cafe",
+   "name": "KudosGames Café",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa 10:00-21:00",
+   "wheelchair": null,
+   "distance_m": 9,
+   "lonlat": [
+    9.734165,
+    55.5019485
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null,
+   "website": "https://kudosgames.cafe/"
+  },
+  {
+   "osm_id": "n13752878085",
+   "category": "shop=lighting",
+   "name": "Bennike el",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:30-13:00",
+   "wheelchair": null,
+   "distance_m": 29,
+   "lonlat": [
+    9.7335983,
+    55.5020592
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752878095",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 11,
+   "lonlat": [
+    9.7342139,
+    55.5019795
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752878096",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 15,
+   "lonlat": [
+    9.7342692,
+    55.5020039
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752878097",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 16,
+   "lonlat": [
+    9.7342903,
+    55.5020032
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752878099",
+   "category": "waste_basket",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 6,
+   "lonlat": [
+    9.7341065,
+    55.5020226
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752928001",
+   "category": "shop=electronics",
+   "name": "FM Elektronik & Hvidevare",
+   "level": null,
+   "fee": null,
+   "opening_hours": "Mo-Fr 11:00-17:00; Sa 10:00-13:00",
+   "wheelchair": null,
+   "distance_m": 39,
+   "lonlat": [
+    9.7346437,
+    55.501888
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752928002",
+   "category": "dentist",
+   "name": "Tandlægerne Midtpunktet",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 50,
+   "lonlat": [
+    9.7348318,
+    55.5019266
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752928003",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 51,
+   "lonlat": [
+    9.7348479,
+    55.5020384
+   ],
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "n13752928021",
+   "category": "bench",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "wheelchair": null,
+   "distance_m": 6,
+   "lonlat": [
+    9.7339493,
+    55.5019825
+   ],
+   "in_station_building": true,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w24461214",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 85,
+   "lonlat": [
+    9.7322886,
+    55.5020749
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w178125657",
+   "category": "bus_station",
+   "name": "Middelfart Busstation",
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 12,
+   "lonlat": [
+    9.7346108,
+    55.5021744
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w322741534",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 56,
+   "lonlat": [
+    9.734047,
+    55.5014489
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1053269060",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": null,
+   "opening_hours": null,
+   "distance_m": 48,
+   "lonlat": [
+    9.7328853,
+    55.502307
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1502536608",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 65,
+   "lonlat": [
+    9.7328796,
+    55.5021121
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1502536609",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 14,
+   "lonlat": [
+    9.7336185,
+    55.5021136
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1502536610",
+   "category": "parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 22,
+   "lonlat": [
+    9.7338765,
+    55.5021802
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  },
+  {
+   "osm_id": "w1502536615",
+   "category": "bicycle_parking",
+   "name": null,
+   "level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "distance_m": 58,
+   "lonlat": [
+    9.7343177,
+    55.5014236
+   ],
+   "drawn_as": "area",
+   "in_station_building": false,
+   "to_nearest_platform_m": null
+  }
+ ]
+}

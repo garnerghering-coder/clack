@@ -1,0 +1,227 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Street/platform level: station building and platform 1 (track 1) on the station side; island perron 2 (tracks 2/3, partly 72 cm) and perron 3 (tracks 4/5)",
+   "note": "No owner source gives signposted level names for this station.",
+   "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Perron tunnel (underpass) in the middle of the platforms",
+   "note": "OSM tags it layer=-1; no signposted name found.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w487705148",
+    "w641135142",
+    "w641135143",
+    "w641135148",
+    "w641135150",
+    "w641135151"
+   ],
+   "between": [
+    "station building side (platform 1)",
+    "perron 2, perron 3 and the far side"
+   ],
+   "where": "middle of the platforms (about 0.52–0.58 along from the east end), by the station building",
+   "confirmed_by": "OSM only (DSB: 'trapper og elevator' give access to the platforms)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6038610170",
+   "between": [
+    "tunnel",
+    "platform 1 (track 1)"
+   ],
+   "where": "middle of platform 1, at the tunnel",
+   "confirmed_by": "OSM only (DSB confirms elevator access to the platforms)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6038610174",
+   "between": [
+    "tunnel",
+    "perron 2 (tracks 2/3)"
+   ],
+   "where": "middle of perron 2, at the tunnel",
+   "confirmed_by": "OSM only (DSB confirms elevator access)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n6038610173",
+   "between": [
+    "tunnel",
+    "perron 3 (tracks 4/5)"
+   ],
+   "where": "middle of perron 3, at the tunnel",
+   "confirmed_by": "OSM only (DSB confirms elevator access)",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w641135149",
+    "w641135154"
+   ],
+   "between": [
+    "tunnel",
+    "platform 1"
+   ],
+   "where": "middle of platform 1",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w641135141",
+    "w641135152"
+   ],
+   "between": [
+    "tunnel",
+    "perron 2"
+   ],
+   "where": "middle of perron 2",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w641135140",
+    "w641135153"
+   ],
+   "between": [
+    "tunnel",
+    "perron 3"
+   ],
+   "where": "middle of perron 3",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "kind": "ramp",
+   "osm_ids": [
+    "w795897516",
+    "w795897517"
+   ],
+   "between": [
+    "street",
+    "tunnel/platform area"
+   ],
+   "where": "west of the tunnel stairs (OSM)",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance (OSM entrance=main)",
+   "osm_id": "n6038610146",
+   "street": "Vestervej (nearest named street, 35 m, per OSM)",
+   "level": "0",
+   "where": "station building, town side",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "name": "Entrance (OSM)",
+   "osm_id": "n6038610145",
+   "street": null,
+   "level": "0",
+   "where": "station building, platform side by the tunnel",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "convenience",
+   "name": "DSB 7-Eleven",
+   "osm_id": "n6743199478",
+   "where": "in the station building",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:00-23:45; Sa 06:00-23:45; Su 06:30-23:45",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM has older hours (Mo-Th 05:00-22:00). Ringsted Station is not in the 7-Eleven store list as read (the page text ends before the full list).",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toiletter/Handicaptoilet",
+   "osm_id": "n12036242627",
+   "fee": "5 kr, card",
+   "where": "indoors in the station building (OSM, operator DSB)",
+   "opening_hours": "Mo-Su 06:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "category": "luggage_locker",
+   "name": "Bagagebokse",
+   "fee": "per started day: S 30 kr, L 60 kr; card",
+   "where": "DSB gives no position",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Ventesal/forhal",
+   "where": "in the station building",
+   "note": "DSB lists it without hours.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "DSB Billetautomat",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "handicap_service",
+   "name": "Handicapservice på stationen",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkering",
+   "note": "About 770 spaces, 78 % occupancy; disabled parking max 2 hours.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Cykelparkering + 3 aflåste cykelskure",
+   "note": "Locked sheds opened via the DSB app.",
+   "_source": "https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  },
+  {
+   "category": "bus_station",
+   "name": "Ringsted busstation",
+   "where": "immediately adjacent to the station",
+   "_source": "https://en.wikipedia.org/wiki/Ringsted_station, read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no station-specific open questions were listed for Ringsted)",
+   "answer": "One perron tunnel in the middle of the platforms, by the station building, with stairs and a lift to each of platform 1, perron 2 and perron 3 (OSM: 3 lifts). DSB confirms access by stairs and elevator.",
+   "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/ringsted/, read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Lift positions are OSM only; DSB confirms elevators but not their number or positions.",
+  "Waiting room hours: DSB lists the ventesal without hours.",
+  "Ticket office: not mentioned by DSB.",
+  "Signposted names of the tunnel/levels: none found.",
+  "No owner station plan found.",
+  "Floor heights / tunnel depth: no source."
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Gateplan (street level)",
+   "note": "Three entrances from street level (Bane NOR).",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30"
+  },
+  {
+   "name": "Vestibyle / venterom (1999 vestibule)",
+   "other_names": [
+    "main vestibule at Ruseløkkveien (Wikipedia)"
+   ],
+   "note": "Bane NOR: in 1999 the station was extended to four tracks and a new vestibule with a waiting room opened. Wikipedia: 'a large, open vestibule near the surface at the entrance to Ruseløkkveien', with south-facing windows and escalators and lifts down to the platforms. No signposted level number found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-2",
+   "name": "T-bane Nationaltheatret (metro platforms)",
+   "note": "OSM puts the metro platforms 1 and 2 at level -2. Wikipedia: the metro station is above the railway station but not directly on top of it, reached by a hallway with a green marble wall (Katrine Giæver).",
+   "_source": "OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "osm_level": "-3",
+   "name": "Plattformnivå: 'den gamle stasjonshallen' (tracks 1–2) and 'den nye stasjonshallen' (tracks 3–4)",
+   "note": "Bane NOR: westbound trains use tracks 1 and 2 in the old station hall, eastbound trains tracks 3 and 4 in the new station hall. Island platforms: N1/N2 and N3/N4, each 11 m wide and 700 mm high, 244 m and 251 m long (Sportabell). Wikipedia: about 30 m below the surface. OSM tags rail platforms '1;2' and '3;4' at level -3.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30; OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "escalator",
+   "between": [
+    "vestibule",
+    "platforms (tracks 1–4)"
+   ],
+   "where": "from the vestibule at the Ruseløkkveien entrance (Wikipedia); Bane NOR: 'Rulletrapp og heis til plattformer'",
+   "note": "Not in the OSM extract.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "between": [
+    "street/vestibule",
+    "platforms (tracks 1–4)"
+   ],
+   "where": "in the main vestibule (Wikipedia: 'escalators and elevators to the platforms'); which platform each lift reaches is not given",
+   "note": "Not in the OSM extract.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w101782986",
+    "w317535517"
+   ],
+   "between": [
+    "west entrance (Henrik Ibsens gate / Parkveien)",
+    "platforms 1/2 and 3/4"
+   ],
+   "where": "long passages (~100–190 m) from the west end to the platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  },
+  {
+   "kind": "underpass",
+   "osm_ids": [
+    "w101782985",
+    "w101782990"
+   ],
+   "between": [
+    "Ruseløkkveien vestibule area",
+    "platforms 1/2 and 3/4"
+   ],
+   "where": "short passages to the rail platforms from the middle of the station",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w312826107",
+    "w312826108",
+    "w312826110",
+    "w312826111",
+    "w683937981"
+   ],
+   "between": [
+    "passage at the east end",
+    "metro platforms 1 and 2 (level -2)"
+   ],
+   "where": "east end near Johanne Dybwads plass / Stortingsgata",
+   "note": "These go to the metro (T-bane), not the railway.",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Inngang Ruseløkkveien (Vika)",
+   "street": "Ruseløkkveien",
+   "where": "the main entrance, under 7. juni-plassen / Victoria Terrasse, into the 1999 vestibule. Station address: Ruseløkkveien 1.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "name": "Inngang Studenterlunden / Nationaltheatret",
+   "street": "Johanne Dybwads plass",
+   "where": "east side by the National Theatre. OSM subway_entrance 'Nationaltheatret stasjon' n9759339152 (wheelchair=yes) and main entrance n2785849205, both nearest Stortingsgata. The shop listings call it 'Abelhaugen'.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30; OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  },
+  {
+   "name": "Inngang vest",
+   "street": "Henrik Ibsens gate / Parkveien",
+   "where": "west side, from the junction of Parkveien and Henrik Ibsens gate",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomater (8)",
+   "where": "eight machines in various places in the station; card, coins and notes",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30"
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "hours_raw": "open for all trains ('Åpent til alle tog')",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "where": "in the 1999 vestibule (step-free, automatic doors)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "WC (incl. HC toilet)",
+   "fee": "yes (payment machine)",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30"
+  },
+  {
+   "category": "baby_changing",
+   "name": "Stellerom / baby changing room",
+   "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-n-/nationaltheatret/, read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "Minibank",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-n-/nationaltheatret/, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "Narvesen Nationaltheatret jbst., Abelhaugen",
+   "where": "at the Abelhaugen / Johanne Dybwads plass side (store address Johanne Dybwads plass 1)",
+   "note": "narvesen.no hides the opening hours behind a toggle that could not be read, and OSM's Narvesen node (n1174966217, no hours) sits further west, mid-station. Whether this is the same kiosk is not known.",
+   "_source": "https://narvesen.no/finn-butikk (store #091), read 2026-10-30"
+  },
+  {
+   "category": "convenience",
+   "name": "7-Eleven Nationaltheatret jbst. Abelhaugen",
+   "where": "at the Abelhaugen / Johanne Dybwads plass side (store address Johanne Dybwads plass 1)",
+   "note": "In the 7-eleven.no store list; hours hidden there. It may be the same unit as the Narvesen entry (both Reitan, same address).",
+   "_source": "https://www.7-eleven.no/butikker/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelstativ",
+   "where": "33 spaces without roof; at street level",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Parkeringshus (Vika)",
+   "where": "about 300 m from the station; car rental in the Vika car park, 300 m from the main entrance",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-n-/nationaltheatret/, read 2026-10-30"
+  }
+ ],
+ "plans": [
+  {
+   "title": "Sporplan Nationaltheatret (track plan)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-n-/ko-005791-000-nationaltheateret.png",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "Which platforms have stairs/lifts",
+   "answer": "Bane NOR: escalator and lift to the platforms, step-free; the station is described as universally designed. Neither Bane NOR nor Wikipedia says where each lift and escalator lands on platform 1/2 and platform 3/4.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; en.wikipedia.org 'Nationaltheatret station' https://en.wikipedia.org/wiki/Nationaltheatret_station, read 2026-10-30"
+  },
+  {
+   "question": "Missing entrances",
+   "answer": "Three entrances: Johanne Dybwads plass (Studenterlunden/Nationaltheatret), Ruseløkkveien (main, Vika), and west at Parkveien × Henrik Ibsens gate. OSM has only the Johanne Dybwads plass / Stortingsgata side.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "No lifts or escalators for the railway in the OSM extract; their positions are unknown. Bane NOR and Wikipedia confirm they exist in the main vestibule.",
+  "Signposted level names are unknown. Bane NOR uses 'gamle stasjonshallen' (tracks 1–2) and 'nye stasjonshallen' (tracks 3–4) for the platform halls. Depth is about 30 m (Wikipedia, unmeasured by an owner source).",
+  "Shops: Bane NOR says 'Flere caféer og kiosker'. Only the Narvesen and 7-Eleven at Abelhaugen were found, in the chains' store lists, with no readable hours. OSM's Narvesen (n1174966217) has no hours. Other cafés were not identified.",
+  "Lockers: none at Nationaltheatret (Bane NOR: nearest at Oslo S). Wikipedia still mentions lockers; that is out of date.",
+  "No published station plan (PDF) found for the vestibule."
+ ]
+}

@@ -1,0 +1,269 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      27.1675779,
+      62.30078030000001
+     ],
+     [
+      27.1675805,
+      62.300828300000006
+     ],
+     [
+      27.1676872,
+      62.302462000000006
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PM L6",
+    "track": "6",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 180.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"005\", \"alku\": {\"ratakm\": 375, \"etaisyys\": 953}, \"loppu\": {\"ratakm\": 376, \"etaisyys\": 139}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190204",
+    "reflink_oid": "1.2.246.586.1.37.3182450",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 122.25,
+    "laser_track_bed_m": 121.62,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "6",
+    "x_infra_oid": "1.2.246.586.1.37.3182450",
+    "x_description": "Pieksämäki laituri: 6",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3182450, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      27.167349,
+      62.300314
+     ],
+     [
+      27.1673563,
+      62.3004198
+     ],
+     [
+      27.1674938,
+      62.302473799999994
+     ],
+     [
+      27.167499900000003,
+      62.30264300000001
+     ],
+     [
+      27.1675406,
+      62.30327960000002
+     ],
+     [
+      27.1675512,
+      62.303454099999996
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PM L4",
+    "track": "4",
+    "height_class": "matala",
+    "height_m": 0.265,
+    "height_text": "matala",
+    "length_m": 350.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"005\", \"alku\": {\"ratakm\": 375, \"etaisyys\": 900}, \"loppu\": {\"ratakm\": 376, \"etaisyys\": 250}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190204",
+    "reflink_oid": "1.2.246.586.1.37.3182584",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 122.38,
+    "laser_track_bed_m": 121.67,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "4",
+    "x_infra_oid": "1.2.246.586.1.37.3182584",
+    "x_description": "Pieksämäki laituri: 4",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3182584, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      27.1669151,
+      62.300879499999986
+     ],
+     [
+      27.1669284,
+      62.30110809999999
+     ],
+     [
+      27.166939,
+      62.3012876
+     ],
+     [
+      27.1669638,
+      62.30171040000001
+     ],
+     [
+      27.1669641,
+      62.301761599999985
+     ],
+     [
+      27.1669959,
+      62.30212629999997
+     ],
+     [
+      27.167022,
+      62.3025418
+     ],
+     [
+      27.1670326,
+      62.3026779
+     ],
+     [
+      27.1670384,
+      62.30275640000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PM L1",
+    "track": "1",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 210.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"005\", \"alku\": {\"ratakm\": 375, \"etaisyys\": 962}, \"loppu\": {\"ratakm\": 376, \"etaisyys\": 171}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20190204",
+    "reflink_oid": "1.2.246.586.1.37.3182770",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 122.26,
+    "laser_track_bed_m": 121.61,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "1",
+    "x_infra_oid": "1.2.246.586.1.37.3182770",
+    "x_description": "Pieksämäki laituri: 1",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.3182770, read 2026-10-30, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      27.1669776,
+      62.300315199999986
+     ],
+     [
+      27.1669835,
+      62.3004241
+     ],
+     [
+      27.1670145,
+      62.300943399999994
+     ],
+     [
+      27.1670263,
+      62.30110990000001
+     ],
+     [
+      27.167066400000003,
+      62.301661499999994
+     ],
+     [
+      27.1670762,
+      62.30181799999997
+     ],
+     [
+      27.1670763,
+      62.301836600000016
+     ],
+     [
+      27.1670764,
+      62.30185029999997
+     ],
+     [
+      27.1671226,
+      62.3025417
+     ],
+     [
+      27.1671225,
+      62.3025647
+     ],
+     [
+      27.1671342,
+      62.30275
+     ],
+     [
+      27.1671648,
+      62.3032863
+     ],
+     [
+      27.1671822,
+      62.303456100000005
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "PM L3",
+    "track": "3",
+    "height_class": "korkea",
+    "height_m": 0.55,
+    "height_text": "korkea",
+    "length_m": 350.0,
+    "width_m": null,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": "[{\"ratanumero\": \"005\", \"alku\": {\"ratakm\": 375, \"etaisyys\": 900}, \"loppu\": {\"ratakm\": 376, \"etaisyys\": 250}}]",
+    "km_to": null,
+    "side": null,
+    "valid_from": "20240804",
+    "reflink_oid": "1.2.246.586.1.37.5390826",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 122.4,
+    "laser_track_bed_m": 121.71,
+    "geometry_note": "Digitraffic infra-api platform line (laiturit.geometria): it runs along the centre of the platform track (checked against OSM rails: median offset 0.0–0.2 m at Helsinki), not the platform edge",
+    "x_platform_number": "3",
+    "x_infra_oid": "1.2.246.586.1.37.5390826",
+    "x_description": "Pieksämäki laituri: 3",
+    "source": "Digitraffic infra-api (Väylävirasto / Fintraffic), laiturit 1.2.246.586.1.37.5390826, read 2026-10-30, CC BY 4.0"
+   }
+  }
+ ]
+}

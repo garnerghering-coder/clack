@@ -1,0 +1,268 @@
+{
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform / station building level",
+   "other_names": [],
+   "note": "Station building (1921, Thure Hellström) on the city side at Hämeentie 16; platform 1 (track 1) runs along it; island platform tracks 2/3 beyond. VR: the station building is accessible from the platforms. No signposted level names found.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "-1",
+   "name": "Underpass (alikulkutunneli, 1999)",
+   "other_names": [],
+   "note": "Wikipedia: new underpass tunnel completed 1999 with the renewal of the passenger yard. OSM puts it on level -1 with stairs and lifts to platform 1 and island 2/3.",
+   "_source": "https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "1",
+   "name": "Viipurintie bridge (Viipurintien ylikulkusilta)",
+   "other_names": [],
+   "note": "Road bridge with footways over the tracks at the north end; OSM stairs w121199264 (level 0;1) lead down to island platform 2/3. Heights: no source measures them.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; /home/claude/packs_fi/FI-HL/_report.json (flags: w786496613 Viipurintien ylikulkusilta), read 2026-10-30"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "underpass",
+   "osm_id": "w527219718",
+   "between": [
+    "platform 1 / station building",
+    "island platform tracks 2/3"
+   ],
+   "where": "under the tracks by the station building",
+   "confirmed_by": "OSM only for its course (Wikipedia confirms an underpass completed 1999)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5181724177",
+   "between": [
+    "underpass",
+    "platform 1"
+   ],
+   "where": "platform 1 end of the underpass",
+   "confirmed_by": "owner text (VR: 'Lifts to the platforms') for the existence; position OSM only",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n5181724185",
+   "between": [
+    "underpass",
+    "island platform tracks 2/3"
+   ],
+   "where": "island platform end of the underpass",
+   "confirmed_by": "owner text (VR: 'Lifts to the platforms') for the existence; position OSM only",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425465919",
+   "between": [
+    "underpass",
+    "platform 1"
+   ],
+   "where": "next to lift n5181724177",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1425465925",
+   "between": [
+    "underpass",
+    "island platform tracks 2/3"
+   ],
+   "where": "next to lift n5181724185",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w121199264",
+   "between": [
+    "Viipurintie bridge",
+    "island platform tracks 2/3"
+   ],
+   "where": "north end of the island platform, up to the Viipurintie bridge footway",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w23009762",
+    "w25544980"
+   ],
+   "name": "Viipurintie",
+   "between": [
+    "city side",
+    "east side"
+   ],
+   "where": "road bridge footways over the tracks at the north end of the platforms",
+   "confirmed_by": "OSM only",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "kind": "step_free_access",
+   "name": "Accessible-access button near platform 1",
+   "between": [
+    "station building",
+    "platform 1"
+   ],
+   "where": "near platform 1",
+   "confirmed_by": "owner text",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Main entrance (city side)",
+   "street": "Hämeentie (address Hämeentie 16); OSM nearest named street Paavo Cajanderin katu",
+   "level": "0",
+   "where": "front of the station building; OSM main entrances n1175239860 (wheelchair=no) and n4374637990 (wheelchair=limited;yes)",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "name": "Shop entrance (R-kioski)",
+   "street": "Paavo Cajanderin katu (nearest, OSM)",
+   "level": "0",
+   "where": "OSM entrance=shop n8349854873, wheelchair=yes",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "waiting_room",
+   "name": "Waiting room (odotustila)",
+   "where": "station building",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Su 05:15-00:10",
+   "hours_source": "website (VR)",
+   "hours_checked": "2026-10-30",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  },
+  {
+   "category": "kiosk",
+   "name": "R-kioski Hämeenlinna Asema",
+   "osm_id": "n5935017088",
+   "where": "in the station building (Hämeentie 16)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 05:30-20:00; Sa,Su 08:00-18:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
+   "note": "OSM opening_hours differs (Sa 07:00-19:30). Services: DHL Express point, HSL travel cards, Wolt pickup.",
+   "_source": "https://www.r-kioski.fi/kioskit/hameenlinna-asema-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "restaurant",
+   "name": "Asemaravintola",
+   "osm_id": "n5110597635",
+   "where": "in the station building (OSM; Wikipedia: the station building has a restaurant)",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Th 08:00-22:00; Fr,Sa 08:00-23:00; Su 08:00-22:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "No own website found to confirm hours.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30"
+  },
+  {
+   "category": "toilets",
+   "name": "Toilet",
+   "osm_ids": [
+    "n5181717229",
+    "n7054906406"
+   ],
+   "fee": "yes (per OSM; VR gives no fee)",
+   "where": "in the station building (two OSM nodes)",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "atm",
+   "name": "TalletusOtto",
+   "where": "inside the station hall waiting area; takes deposits plus regular Otto services",
+   "level_per_plan": "0",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "VR Lippuautomaatti (ticket machine)",
+   "osm_ids": [
+    "n6055635388",
+    "n7141743516"
+   ],
+   "where": "one in the station building, one outside (OSM)",
+   "note": "VR: no VR service point at Hämeenlinna.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  },
+  {
+   "category": "vending_machine",
+   "name": "Selecta",
+   "osm_id": "n8609670909",
+   "where": "outside the building, by the platform (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "car_rental",
+   "name": "Scandia Rent",
+   "osm_id": "n5894019063",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "parcel_locker",
+   "name": "Posti",
+   "osm_id": "n8349854874",
+   "where": "in the station building (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "assistance_point",
+   "name": "Assistance meeting point (VR)",
+   "where": "Tampere end of the station building, left of the main entrance when arriving from the city centre; no shelter. Taxi stand and bus stop close by. Book on 0800 188 822 at least 24 h ahead.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Hämeenlinna rautatieasema",
+   "osm_id": "n257395451",
+   "where": "by the station, close to the assistance point (VR)",
+   "opening_hours": "24/7",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Hämeenlinnan rautatieasema liityntäparkki",
+   "osm_id": "w584747628",
+   "fee": "yes (OSM)",
+   "where": "about 250 m from the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  },
+  {
+   "category": "bicycle_rental",
+   "name": "Valpastin Oy",
+   "osm_id": "n6533496674",
+   "fee": "yes (OSM)",
+   "where": "by the station (OSM)",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+  }
+ ],
+ "answers": [
+  {
+   "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
+   "answer": "Three platforms: track 1 (side platform by the building) and island 2/3 (Digitraffic, Wikipedia). Underpass (1999) with lift + stairs to platform 1 and to island 2/3 (VR confirms lifts to the platforms; positions from OSM). Stairs also from the Viipurintie bridge down to island 2/3 (OSM only). Waiting room 05:15-00:10 daily. In the building: R-kioski, Asemaravintola, toilets, TalletusOtto, ticket machine.",
+   "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-HL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  }
+ ],
+ "open": [
+  "Level names: no owner source signposts names for the underpass or bridge level.",
+  "Exact position of the lifts and whether the Viipurintie bridge stairs exist as mapped: OSM only.",
+  "Asemaravintola hours are OSM's only; no restaurant website found.",
+  "Toilet fee amount not given by VR; fee=yes is OSM only.",
+  "Väylävirasto's station area map PDF (linked from VR's page: vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat) could not be read (fetch error), so no plan is listed."
+ ]
+}
