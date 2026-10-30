@@ -384,6 +384,12 @@ public nonisolated enum StationRouting {
         return Pt((lon - map.origin.lon) * kx, -(lat - map.origin.lat) * 110_574)
     }
 
+    /// The inverse of `toLocal`: the map's local metres (x east, y south) to WGS84.
+    public static func toWGS84(_ map: StationMap, x: Double, y: Double) -> LatLon {
+        let kx = 111_320 * cos(map.origin.lat * Double.pi / 180)
+        return LatLon(map.origin.lat - y / 110_574, map.origin.lon + x / kx)
+    }
+
     /// The walking-graph node closest to a point on a level, if one is within `maxMeters`.
     public static func nearestNode(_ map: StationMap, level: String, x: Double, y: Double, maxMeters: Double = .infinity) -> StationNode? {
         var reachable = Set<String>()

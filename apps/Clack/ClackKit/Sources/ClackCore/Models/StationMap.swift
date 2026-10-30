@@ -98,10 +98,11 @@ public nonisolated enum PoiCategory: OpenEnum {
 }
 
 public nonisolated enum ShapeKind: OpenEnum {
-    case building, hall, room, shop, track
+    /// `roof`: a roof with open sides or an unknown underside (a platform canopy, a footbridge seen from above).
+    case building, hall, room, shop, track, roof
     case unknown(String)
 
-    public static let knownCases: [ShapeKind] = [.building, .hall, .room, .shop, .track]
+    public static let knownCases: [ShapeKind] = [.building, .hall, .room, .shop, .track, .roof]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
@@ -110,6 +111,7 @@ public nonisolated enum ShapeKind: OpenEnum {
         case .room: "room"
         case .shop: "shop"
         case .track: "track"
+        case .roof: "roof"
         case .unknown(let raw): raw
         }
     }
@@ -166,21 +168,29 @@ public nonisolated struct StationShape: Codable, Hashable, Sendable {
     public let ref: String?
     /// Schema 2: a building's height in metres, when the source gives one.
     public let heightM: Double?
+    /// A building's or roof's top, metres above the platform surface (the reference level), measured.
+    public let topM: Double?
+    /// A building's lowest ground at its outline, metres above the platform surface (negative below it).
+    public let baseM: Double?
     public let source: String?
 
     public enum CodingKeys: String, CodingKey {
         case level, kind, name, points, ref
         case heightM = "height_m"
+        case topM = "top_m"
+        case baseM = "base_m"
         case source = "_source"
     }
 
-    public init(level: String, kind: ShapeKind, name: String?, points: [Pt], ref: String? = nil, heightM: Double? = nil, source: String? = nil) {
+    public init(level: String, kind: ShapeKind, name: String?, points: [Pt], ref: String? = nil, heightM: Double? = nil, topM: Double? = nil, baseM: Double? = nil, source: String? = nil) {
         self.level = level
         self.kind = kind
         self.name = name
         self.points = points
         self.ref = ref
         self.heightM = heightM
+        self.topM = topM
+        self.baseM = baseM
         self.source = source
     }
 }
@@ -432,6 +442,35 @@ public nonisolated struct StationMap: Codable, Hashable, Sendable {
     public var nodes: [StationNode]
     public var edges: [StationEdge]
     public var pois: [StationPoi]
+    /// The ground as a grid, when a source gives it (the 3D view).
+    public let terrain: Terrain?
+
+    /// Ground heights in metres above the platform surface at (x0 + i·step, y0 + j·step): `heights[j][i]`, nil where
+    /// the source has no value.
+    public struct Terrain: Codable, Hashable, Sendable {
+        public let x0: Double
+        public let y0: Double
+        public let step: Double
+        public let cols: Int
+        public let rows: Int
+        public let heights: [[Double?]]
+        public let source: String?
+
+        public enum CodingKeys: String, CodingKey {
+            case x0, y0, step, cols, rows, heights
+            case source = "_source"
+        }
+
+        public init(x0: Double, y0: Double, step: Double, cols: Int, rows: Int, heights: [[Double?]], source: String? = nil) {
+            self.x0 = x0
+            self.y0 = y0
+            self.step = step
+            self.cols = cols
+            self.rows = rows
+            self.heights = heights
+            self.source = source
+        }
+    }
 
     public struct View: Codable, Hashable, Sendable {
         public let rotation: Double
@@ -452,12 +491,13 @@ public nonisolated struct StationMap: Codable, Hashable, Sendable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case schema, name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois
+        case schema, name, updated, quality, sources, changelog, origin, view, levels, shapes, platforms, nodes, edges, pois, terrain
         case stationId = "station_id"
     }
 
-    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi], schema: Int? = nil) {
+    public init(stationId: String, name: String, updated: String, quality: MapQuality, sources: [StationMapSource], changelog: [StationMapChange], origin: LatLonPair, view: View?, levels: [StationLevel], shapes: [StationShape], platforms: [StationPlatform], nodes: [StationNode], edges: [StationEdge], pois: [StationPoi], schema: Int? = nil, terrain: Terrain? = nil) {
         self.schema = schema
+        self.terrain = terrain
         self.stationId = stationId
         self.name = name
         self.updated = updated
