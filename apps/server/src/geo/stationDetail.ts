@@ -2,6 +2,8 @@
 // graph's full 2 m detail, service tracks (yards, sidings, spurs) flagged so the app draws them fainter, plus the
 // platform outlines of the mapped stations in the box (data/stations, schema 2) with their numbers. The ordinary
 // rail-network layer drops service tracks and simplifies to 25 m, which is why tracks never split on screen.
+// Where a map has measured heights (docs/STATION_3D_RESEARCH.md) it also gives the buildings and roofs and each
+// platform's height, for the map's 3D at the closest zooms.
 import zlib from 'node:zlib';
 import { and, gte, lte } from 'drizzle-orm';
 import { fromLocal, type StationMap } from '@clack/shared';
@@ -57,10 +59,51 @@ export function platformFeatures(m: StationMap, stationId: string) {
         level: p.level,
         node: node ? [r6(node[1]), r6(node[0])] : null,
         draft: m.quality === 'osm_draft',
+        // Above the rails, the map's flat ground; the standard when the map has none (`measured` says which).
+        height: p.height_m ?? STANDARD_PLATFORM_HEIGHT_M,
+        measured: p.height_m !== undefined,
       },
       geometry: { type: 'Polygon' as const, coordinates: rings },
     };
   });
+}
+
+/** Platform surface above the rail head when the map has none: the TSI's nominal low platform (as the app's 3D view). */
+export const STANDARD_PLATFORM_HEIGHT_M = 0.55;
+/** How thick a roof is drawn under its measured top (its underside isn't measured); as the app's 3D view. */
+const ROOF_SHEET_M = 0.4;
+
+/** The map's platform height for the 3D: the median of the measured ones, else the standard. */
+export function railToPlatformM(m: StationMap): number {
+  const known = m.platforms.map((p) => p.height_m).filter((h): h is number => h !== undefined).sort((a, b) => a - b);
+  return known.length ? known[Math.floor(known.length / 2)]! : STANDARD_PLATFORM_HEIGHT_M;
+}
+
+/**
+ * The buildings and roofs with a measured top (`top_m`, metres above the platform surface), as polygons in lon/lat.
+ * The Explore map's ground is flat at rail level, so `base` and `height` are metres above the rails: a building from
+ * the ground to its top, a roof as a sheet under its top. `lantmateriet` says the heights need that credit.
+ */
+export function structureFeatures(m: StationMap, stationId: string) {
+  const r6 = (v: number) => Math.round(v * 1e6) / 1e6;
+  const rail = railToPlatformM(m);
+  const lantmateriet = m.sources.some((s) => s.type === 'lantmateriet');
+  const r2 = (v: number) => Math.round(v * 100) / 100;
+  return m.shapes
+    .filter((s) => (s.kind === 'building' || s.kind === 'roof') && s.top_m !== undefined && s.points.length >= 3)
+    .map((s) => {
+      const top = s.top_m! + rail;
+      const ring = s.points.map(([x, y]) => {
+        const [lat, lon] = fromLocal(m, x, y);
+        return [r6(lon), r6(lat)];
+      });
+      ring.push(ring[0]!);
+      return {
+        type: 'Feature' as const,
+        properties: { kind: 'structure', cls: s.kind, stationId, name: s.name ?? '', base: s.kind === 'roof' ? r2(Math.max(0, top - ROOF_SHEET_M)) : 0, height: r2(top), lantmateriet },
+        geometry: { type: 'Polygon' as const, coordinates: [ring] },
+      };
+    });
 }
 
 /** Every graph edge that touches the padded box, at full detail, as one feature per edge. */
@@ -96,7 +139,7 @@ export function stationDetailGeoJson(db: Db, graph: RailGraph, b: Bbox) {
     .all();
   const platforms = inBox.flatMap((s) => {
     const m = stationMap(s.id);
-    return m ? platformFeatures(m, s.id) : [];
+    return m ? [...platformFeatures(m, s.id), ...structureFeatures(m, s.id)] : [];
   });
   return { type: 'FeatureCollection', features: [...trackFeatures(graph, b), ...platforms] };
 }
