@@ -20,6 +20,7 @@
   ],
   "rotation": 29,
   "platform_refs": {
+    "59282313": "4",
     "r7327577": "3",
     "r7327578": "2",
     "r7327583": "4",
@@ -33,8 +34,7 @@
     "r7327592": "3",
     "r7327593": "3",
     "r7327594": "4",
-    "r7327595": "1",
-    "59282313": "4"
+    "r7327595": "1"
   },
   "drop_platform_ways": [
     "r7327587",
@@ -47,13 +47,13 @@
       "from": {
         "platform": "1",
         "near": [
-          14.0,
+          14,
           32.4
         ]
       },
       "to": {
         "at": [
-          14.0,
+          14,
           32.4
         ],
         "level": "-1"
@@ -83,13 +83,13 @@
       "from": {
         "platform": "4",
         "near": [
-          38.0,
+          38,
           18.2
         ]
       },
       "to": {
         "at": [
-          38.0,
+          38,
           18.2
         ],
         "level": "-1"
@@ -144,11 +144,11 @@
       "to": {
         "at": [
           46.9,
-          13.0
+          13
         ],
         "level": "0"
       },
-      "kind": "walk",
+      "kind": "ramp",
       "note": "The tunnel opens at ground level on the south side (bus terminal), without steps (OSM ways 25162044/25162046; the plan shows the tunnel running out to the bus terminal)."
     }
   ],
@@ -167,6 +167,20 @@
       "url": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/",
       "retrieved": "2026-10-22",
       "note": "Jernhusen's list of places at the station with opening hours (WHSmith's and Järnvägskrogen's hours from it). It also names Subway and Habesha Restaurang Bar, which no source places, so they aren't on the map; Bistro Nord (OSM, no date) isn't on it and is left out. Toilet page: toilet and accessible toilet, card payment."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000210)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -174,6 +188,11 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "First draft from OSM (2026-10-19 extract, with its multipolygon platforms), checked against the region's Gävle Central plan (2025-08-18): three tunnel lifts, two flights of stairs and the tunnel's south end joined by hand; bridge pieces of the platforms left out; toilets placed from the plan; WHSmith's and Järnvägskrogen's hours from Jernhusen (2026-10-22); Bistro Nord, not on Jernhusen's list, removed."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 50 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000210)."
     }
   ],
   "pois": [
@@ -247,5 +266,398 @@
       "hours_verified": null
     }
   ],
-  "quality": "osm_draft"
+  "quality": "osm_draft",
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 260; BanInfo BIS 1977 (track 1s): tracks 1s, class mellan = 0.58 m above rail, 300 m long; a recorded design class, not a survey; other rows for this track: 1s,1n,5 låg 0.35 m (123 m, Bilaga 2A tab 4 row 263)"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 261; BanInfo BIS 1978 (track 3): tracks 2n,3,2s, class mellan = 0.58 m above rail, 411 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 261; BanInfo BIS 1978 (track 3): tracks 2n,3,2s, class mellan = 0.58 m above rail, 411 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 262; BanInfo BIS 1980 (track 4): tracks 4, class mellan = 0.58 m above rail, 384 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.35,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 263; BanInfo BIS 1800 (track ?): tracks 1s,1n,5, class låg = 0.35 m above rail, 123 m long; a recorded design class, not a survey; other rows for this track: 5 mellan 0.58 m (85 m, Bilaga 2A tab 4 row 264)"
+    }
+  },
+  "structures_file": "data/stations/research/740000210/gavle_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w32615693",
+      "kind": "building",
+      "name": "Södra Station MAXIM (station building)",
+      "top_m": 10.93,
+      "base_m": -0.25,
+      "_source": "Outline OSM w32615693 (ODbL); roof = median of 643 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11)"
+    },
+    {
+      "from": "w96964467",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.12,
+      "_source": "Outline OSM w96964467 (ODbL); roof = median of 163 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w141054585",
+      "kind": "building",
+      "name": "Gävle brandstation (building)",
+      "top_m": 3.51,
+      "base_m": -1.84,
+      "_source": "Outline OSM w141054585 (ODbL); roof = median of 4839 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11)"
+    },
+    {
+      "from": "w219151077",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 3.84,
+      "base_m": -3.46,
+      "_source": "Outline OSM w219151077 (ODbL); roof = median of 105 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11)"
+    },
+    {
+      "from": "w720417460",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.53,
+      "_source": "Outline OSM w720417460 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1346766967",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.73,
+      "_source": "Outline OSM w1346766967 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1346766973",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.06,
+      "_source": "Outline OSM w1346766973 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1346766983",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.14,
+      "_source": "Outline OSM w1346766983 (ODbL); roof = median of 75 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1347410250",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.25,
+      "_source": "Outline OSM w1347410250 (ODbL); roof = median of 128 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1347410259",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.56,
+      "_source": "Outline OSM w1347410259 (ODbL); roof = median of 160 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1347410267",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.25,
+      "_source": "Outline OSM w1347410267 (ODbL); roof = median of 86 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1387848716",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.4,
+      "_source": "Outline OSM w1387848716 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1387859854",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.77,
+      "_source": "Outline OSM w1387859854 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1387859857",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.65,
+      "_source": "Outline OSM w1387859857 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314299",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.43,
+      "_source": "Outline OSM w1388314299 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314323",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.25,
+      "_source": "Outline OSM w1388314323 (ODbL); roof = median of 27 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314333",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.91,
+      "_source": "Outline OSM w1388314333 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314339",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.69,
+      "base_m": -3.53,
+      "_source": "Outline OSM w1388314339 (ODbL); roof = median of 47 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11)"
+    },
+    {
+      "from": "w1388314346",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.13,
+      "_source": "Outline OSM w1388314346 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314348",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 15.15,
+      "_source": "Outline OSM w1388314348 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314349",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 17.91,
+      "_source": "Outline OSM w1388314349 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388314364",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.02,
+      "_source": "Outline OSM w1388314364 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863115",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.09,
+      "_source": "Outline OSM w1388863115 (ODbL); roof = median of 19 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863126",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.77,
+      "_source": "Outline OSM w1388863126 (ODbL); roof = median of 44 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863127",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.55,
+      "_source": "Outline OSM w1388863127 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863134",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.57,
+      "_source": "Outline OSM w1388863134 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863137",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.82,
+      "_source": "Outline OSM w1388863137 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863138",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.77,
+      "_source": "Outline OSM w1388863138 (ODbL); roof = median of 32 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863142",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.25,
+      "_source": "Outline OSM w1388863142 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863153",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.96,
+      "_source": "Outline OSM w1388863153 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388863158",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.91,
+      "_source": "Outline OSM w1388863158 (ODbL); roof = median of 477 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388869071",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.06,
+      "_source": "Outline OSM w1388869071 (ODbL); roof = median of 426 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388869100",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.31,
+      "_source": "Outline OSM w1388869100 (ODbL); roof = median of 153 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1388869122",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.12,
+      "_source": "Outline OSM w1388869122 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176425",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.54,
+      "_source": "Outline OSM w1389176425 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176447",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.75,
+      "_source": "Outline OSM w1389176447 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176474",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.5,
+      "_source": "Outline OSM w1389176474 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176521",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.01,
+      "_source": "Outline OSM w1389176521 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176522",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.91,
+      "_source": "Outline OSM w1389176522 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176523",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.49,
+      "_source": "Outline OSM w1389176523 (ODbL); roof = median of 69 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389176524",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 7.86,
+      "_source": "Outline OSM w1389176524 (ODbL); roof = median of 186 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444720",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.84,
+      "_source": "Outline OSM w1389444720 (ODbL); roof = median of 53 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444726",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.33,
+      "_source": "Outline OSM w1389444726 (ODbL); roof = median of 42 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444727",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.96,
+      "_source": "Outline OSM w1389444727 (ODbL); roof = median of 189 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444728",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.41,
+      "_source": "Outline OSM w1389444728 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444731",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.57,
+      "_source": "Outline OSM w1389444731 (ODbL); roof = median of 155 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444733",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.32,
+      "_source": "Outline OSM w1389444733 (ODbL); roof = median of 40 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444744",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.48,
+      "_source": "Outline OSM w1389444744 (ODbL); roof = median of 36 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "w1389444752",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.3,
+      "_source": "Outline OSM w1389444752 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured"
+    },
+    {
+      "from": "#56",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.09,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (21c051, scanned 2021-04-11), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000210/gavle_c_structures_heights.geojson (metres above the platform surface, 5.75 m RH 2000, laser 2021-04-11); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000210/gavle_c_ground_1m.tif",
+    "reference_m": 5.75,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000210/gavle_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (5.75 m RH 2000, laser 2021-04-11)"
+  },
+  "poi_hours": {
+    "osm560670424": {
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 07:00-19:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/gavle-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    }
+  }
 }

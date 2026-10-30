@@ -35,7 +35,7 @@
         ],
         "level": "0"
       },
-      "kind": "walk",
+      "kind": "ramp",
       "note": "Lövatunneln's north end: OSM's tunnel (way 444809214) meets the cycleway up to Stationsplan (way 106547371) at one node, which the draft splits into its two levels. A cycle path, so a ramp with no steps."
     },
     {
@@ -43,12 +43,12 @@
         "platform": "3",
         "near": [
           -58.9,
-          3.0
+          3
         ]
       },
       "to": {
         "at": [
-          -66.0,
+          -66,
           2.1
         ],
         "level": "-1"
@@ -89,7 +89,7 @@
         ],
         "level": "0"
       },
-      "kind": "walk",
+      "kind": "ramp",
       "note": "South of the tracks the tunnel runs on in an open cut (way 444809215, layer -1 but not a tunnel) to the Fabriksgatan tunnel; the draft reads the cut as street level, so its ends are joined by hand (flat, no steps)."
     },
     {
@@ -107,7 +107,7 @@
         ],
         "level": "-1"
       },
-      "kind": "walk",
+      "kind": "ramp",
       "note": "Same, at the cut's south end, into the tunnel under Fabriksgatan (way 444809213)."
     }
   ],
@@ -124,6 +124,20 @@
       "url": "https://www.jernhusen.se/hitta-din-station/katrineholm-station/toalett/",
       "retrieved": "2026-10-22",
       "note": "Jernhusen: toilet and accessible toilet, card payment (matches OSM). Its shop list names only Katrineholm Turistinformation (Stationsplan 4, Mon–Fri 11–15), which no source places, so it isn't on the map."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000166)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -131,6 +145,11 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "First draft from OSM (2026-10-19 extract, foot-designated cycleways included), checked against Sörmlandstrafiken's map (2025-02-25): tunnel ends joined by hand, lifts to the 3/4 island and platform 5 and the waiting room added from the map, Pressbyrån (OSM, the map's kiosk) added."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 5 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000166)."
     }
   ],
   "pois": [
@@ -158,5 +177,72 @@
       "hours_verified": null
     }
   ],
-  "quality": "osm_draft"
+  "quality": "osm_draft",
+  "platform_heights": {
+    "1": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 408; BanInfo BIS 1297 (track 1): tracks 1, class hög = 0.73 m above rail, 364 m long; a recorded design class, not a survey"
+    },
+    "3": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 406; BanInfo BIS 1296 (track 4): tracks 4,3, class hög = 0.73 m above rail, 365 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 406; BanInfo BIS 1296 (track 4): tracks 4,3, class hög = 0.73 m above rail, 365 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.73,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 407; BanInfo BIS 1295 (track 5): tracks 5, class hög = 0.73 m above rail, 367 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/740000166/katrineholm_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w301655859",
+      "kind": "building",
+      "name": "Katrineholms centralstation (station building)",
+      "top_m": 8.26,
+      "base_m": -0.97,
+      "_source": "Outline OSM w301655859 (ODbL); roof = median of 3326 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c018, scanned 2020-11-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000166/katrineholm_c_structures_heights.geojson (metres above the platform surface, 46.67 m RH 2000, laser 2020-11-20)"
+    },
+    {
+      "from": "w479773850",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 7.09,
+      "base_m": -1.13,
+      "_source": "Outline OSM w479773850 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c018, scanned 2020-11-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000166/katrineholm_c_structures_heights.geojson (metres above the platform surface, 46.67 m RH 2000, laser 2020-11-20)"
+    },
+    {
+      "from": "w558598114",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.93,
+      "_source": "Outline OSM w558598114 (ODbL); roof = median of 149 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c018, scanned 2020-11-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000166/katrineholm_c_structures_heights.geojson (metres above the platform surface, 46.67 m RH 2000, laser 2020-11-20); underside not measured"
+    },
+    {
+      "from": "w1223482268",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.32,
+      "base_m": 5.17,
+      "_source": "Outline OSM w1223482268 (ODbL); roof = median of 248 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c018, scanned 2020-11-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000166/katrineholm_c_structures_heights.geojson (metres above the platform surface, 46.67 m RH 2000, laser 2020-11-20); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1419984735",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.85,
+      "base_m": -0.82,
+      "_source": "Outline OSM w1419984735 (ODbL); roof = median of 1667 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20c018, scanned 2020-11-20), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000166/katrineholm_c_structures_heights.geojson (metres above the platform surface, 46.67 m RH 2000, laser 2020-11-20)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000166/katrineholm_c_ground_1m.tif",
+    "reference_m": 46.67,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000166/katrineholm_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (46.67 m RH 2000, laser 2020-11-20)"
+  },
+  "poi_hours": {}
 }

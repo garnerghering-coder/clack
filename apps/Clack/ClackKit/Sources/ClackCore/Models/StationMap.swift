@@ -52,10 +52,11 @@ public nonisolated enum StationNodeType: OpenEnum {
 }
 
 public nonisolated enum EdgeKind: OpenEnum {
-    case walk, stairs, escalator, lift
+    /// `ramp`: a step-free slope between two levels (a tunnel coming out at street level).
+    case walk, stairs, escalator, lift, ramp
     case unknown(String)
 
-    public static let knownCases: [EdgeKind] = [.walk, .stairs, .escalator, .lift]
+    public static let knownCases: [EdgeKind] = [.walk, .stairs, .escalator, .lift, .ramp]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
@@ -63,6 +64,7 @@ public nonisolated enum EdgeKind: OpenEnum {
         case .stairs: "stairs"
         case .escalator: "escalator"
         case .lift: "lift"
+        case .ramp: "ramp"
         case .unknown(let raw): raw
         }
     }

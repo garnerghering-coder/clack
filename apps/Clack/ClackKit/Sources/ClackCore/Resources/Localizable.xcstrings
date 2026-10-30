@@ -21154,6 +21154,40 @@
           }
         }
       }
+    },
+    "stationMap.step.ramp_up" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take the ramp up to {{level}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta rampen upp till {{level}}"
+          }
+        }
+      }
+    },
+    "stationMap.step.ramp_down" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take the ramp down to {{level}}"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta rampen ner till {{level}}"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

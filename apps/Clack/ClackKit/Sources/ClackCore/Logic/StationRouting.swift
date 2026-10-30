@@ -97,6 +97,7 @@ public nonisolated struct Instruction: Hashable, Sendable {
         case stairsUp = "stairs_up", stairsDown = "stairs_down"
         case escalatorUp = "escalator_up", escalatorDown = "escalator_down"
         case liftUp = "lift_up", liftDown = "lift_down"
+        case rampUp = "ramp_up", rampDown = "ramp_down"
         case arrive, reach
     }
 
@@ -239,7 +240,7 @@ public nonisolated enum StationRouting {
         if profile.stepFree && !edge.stepFree { return nil }
         var s = edge.seconds
         switch edge.kind {
-        case .walk: s *= profile.paceFactor
+        case .walk, .ramp: s *= profile.paceFactor
         case .stairs: s = s * profile.paceFactor * (profile.luggage ? 1.8 : 1) + (profile.luggage ? 15 : 0)
         case .escalator: s = s * (profile.luggage ? 1.2 : 1) + (profile.luggage ? 5 : 0)
         case .lift, .unknown: break
@@ -433,6 +434,7 @@ public nonisolated enum StationRouting {
             case .stairs: key = up ? .stairsUp : .stairsDown
             case .escalator: key = up ? .escalatorUp : .escalatorDown
             case .lift: key = up ? .liftUp : .liftDown
+            case .ramp: key = up ? .rampUp : .rampDown
             }
             if out[out.count - 1].key == key {
                 seconds[seconds.count - 1] += step.seconds

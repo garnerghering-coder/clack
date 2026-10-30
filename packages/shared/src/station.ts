@@ -12,7 +12,8 @@
 
 export type Pt = [number, number];
 export type StationNodeType = 'platform' | 'platform_access' | 'hall' | 'entrance' | 'stairs' | 'escalator' | 'lift' | 'gate' | 'junction';
-export type EdgeKind = 'walk' | 'stairs' | 'escalator' | 'lift';
+/** "ramp": a step-free slope between two levels (a tunnel coming out at street level, a cycle path up from an underpass). */
+export type EdgeKind = 'walk' | 'stairs' | 'escalator' | 'lift' | 'ramp';
 export const POI_CATEGORIES = ['toilet', 'cafe', 'restaurant', 'kiosk', 'shop', 'ticket', 'locker', 'waiting', 'info', 'pharmacy', 'atm', 'taxi', 'bus', 'other'] as const;
 export type PoiCategory = (typeof POI_CATEGORIES)[number];
 
@@ -219,7 +220,7 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
     need(`edge ${e.from}→${e.to}`, e._source);
     const a = nodes.get(e.from);
     const b = nodes.get(e.to);
-    if (a && b && a.level !== b.level && e.kind === 'walk') errors.push(`edge ${e.from}→${e.to}: changes level (${a.level}→${b.level}) but is a walk, not stairs, an escalator or a lift`);
+    if (a && b && a.level !== b.level && e.kind === 'walk') errors.push(`edge ${e.from}→${e.to}: changes level (${a.level}→${b.level}) but is a walk, not stairs, an escalator, a lift or a ramp`);
   }
   for (const p of m.pois) need(`poi ${p.id}`, p._source);
   // Every platform reaches an exit.
@@ -292,7 +293,7 @@ export const DEFAULT_PROFILE: WalkProfile = { pace: 'normal', stepFree: false, l
 export function edgeSeconds(e: StationEdge, p: WalkProfile): number | null {
   if (p.stepFree && !e.step_free) return null;
   let s = e.seconds;
-  if (e.kind === 'walk') s *= PACE_FACTOR[p.pace];
+  if (e.kind === 'walk' || e.kind === 'ramp') s *= PACE_FACTOR[p.pace];
   if (e.kind === 'stairs') s = s * PACE_FACTOR[p.pace] * (p.luggage ? 1.8 : 1) + (p.luggage ? 15 : 0);
   if (e.kind === 'escalator') s = s * (p.luggage ? 1.2 : 1) + (p.luggage ? 5 : 0);
   return s;
@@ -501,7 +502,7 @@ export function nearestNode(m: StationMap, level: string, x: number, y: number, 
 
 /** Directions from templates (i18n keys + values), merging consecutive walking. Never generated text. */
 export interface Instruction {
-  key: 'leave' | 'start' | 'walk' | 'stairs_up' | 'stairs_down' | 'escalator_up' | 'escalator_down' | 'lift_up' | 'lift_down' | 'arrive' | 'reach';
+  key: 'leave' | 'start' | 'walk' | 'stairs_up' | 'stairs_down' | 'escalator_up' | 'escalator_down' | 'lift_up' | 'lift_down' | 'ramp_up' | 'ramp_down' | 'arrive' | 'reach';
   level?: string;
   seconds: number;
   track?: string;

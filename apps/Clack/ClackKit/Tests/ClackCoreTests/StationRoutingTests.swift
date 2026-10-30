@@ -212,3 +212,21 @@ struct ConnectionStatusTests {
         #expect(StationRouting.sizeClass(baseTracks: 11) == .large)
     }
 }
+
+struct RampTests {
+    @Test func aRampIsStepFreeAndReadsAsARamp() throws {
+        let json = """
+        {"station_id":"r","name":"Ramp","updated":"2026-10-30","quality":"osm_draft","sources":[],"changelog":[],
+         "origin":{"lat":59,"lon":18},
+         "levels":[{"id":"L0","name":"Street","order":0},{"id":"L-1","name":"Tunnel","order":-1}],"shapes":[],"platforms":[],
+         "nodes":[{"id":"a","type":"junction","level":"L-1","x":0,"y":0},{"id":"b","type":"entrance","level":"L0","x":20,"y":0}],
+         "edges":[{"from":"a","to":"b","seconds":15,"step_free":true,"kind":"ramp"}],"pois":[]}
+        """
+        let map = try JSONDecoder().decode(StationMap.self, from: Data(json.utf8))
+        let route = try #require(StationRouting.route(map, from: "a", to: "b", profile: WalkProfile(stepFree: true)))
+        #expect(route.steps.first?.kind == .ramp)
+        let keys = StationRouting.instructions(map, route).map(\.key)
+        #expect(keys.contains(.rampUp))
+    }
+}
+

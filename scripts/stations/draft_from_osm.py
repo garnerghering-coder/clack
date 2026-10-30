@@ -950,7 +950,7 @@ def main():
         kind = e["kind"]
         if e.get("seconds"):
             secs = e["seconds"]
-        elif kind == "walk":
+        elif kind in ("walk", "ramp"):
             secs = meters / WALK_SPEED
         elif kind == "stairs" and e.get("short"):
             secs = meters / STAIRS_SPEED + 3  # a few steps at a door
@@ -968,7 +968,7 @@ def main():
             continue
         if key in seen_pairs:
             out_edges.remove(seen_pairs[key])
-        edge = dict(**{"from": names[e["a"]], "to": names[e["b"]]}, seconds=max(1, round(secs)), step_free=kind in ("walk", "lift"), kind=kind, meters=round(meters, 1))
+        edge = dict(**{"from": names[e["a"]], "to": names[e["b"]]}, seconds=max(1, round(secs)), step_free=kind in ("walk", "lift", "ramp"), kind=kind, meters=round(meters, 1))
         g = simplify([(round(x, 1), round(y, 1)) for x, y in pts], 0.4)
         if len(g) > 2:
             edge["geometry"] = [list(p) for p in g]

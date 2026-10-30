@@ -20,16 +20,16 @@
   "rotation": 0,
   "platform_refs": {
     "415061494": "1",
+    "415061497": "4;5",
+    "415061499": "2;3",
+    "415061504": "7",
+    "415061505": "8",
+    "415061506": "6",
     "415061507": "1",
     "415061508": "2;3",
-    "415061499": "2;3",
-    "415061497": "4;5",
     "415061509": "4;5",
-    "415061506": "6",
     "418841380": "6",
-    "415061504": "7",
     "418841381": "7",
-    "415061505": "8",
     "418841382": "8"
   },
   "drop_platform_ways": [
@@ -65,7 +65,7 @@
         "platform": "7",
         "near": [
           -23.7,
-          -22.0
+          -22
         ]
       },
       "to": {
@@ -88,7 +88,7 @@
       },
       "to": {
         "at": [
-          -4.0,
+          -4,
           -20.1
         ],
         "level": "1"
@@ -205,7 +205,7 @@
       "name": "",
       "level": "1",
       "x": 6.5,
-      "y": -18.0,
+      "y": -18,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null
@@ -216,7 +216,7 @@
       "name": "",
       "level": "0",
       "x": 38.9,
-      "y": -21.0,
+      "y": -21,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null
@@ -254,6 +254,20 @@
       "license": "CC0",
       "retrieved": "2026-10-22",
       "note": "TrainStation.PlatformLine for Hm: 1 (1a, 1b), 2, 3, 4, 5, 6 (6a, 6b), 7 (7a, 7b), 8 (8a, 8b)."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740000006)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
@@ -261,6 +275,98 @@
       "date": "2026-10-22",
       "who": "Claude (for the owner)",
       "what": "First draft from OSM (extract of 2026-10-20): sector pieces joined into one platform per face; 5 lifts from Skånetrafiken's terminal map (December 2025); the strip east of track 1 and two footways left out (see _comment). Amenities checked against Jernhusen (2026-10-22): Espresso House and Pressbyrån hours updated; 2 ticket machines from the terminal map."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 5 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000006)."
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 359; BanInfo BIS 2542 (track 1a): tracks 1b,1a, class mellan = 0.58 m above rail, 285 m long; a recorded design class, not a survey; other rows for this track: 2,1b hög 0.73 m (52 m, Bilaga 2A tab 4 row 353); 1b,15 låg 0.35 m (115.6 m, Bilaga 2A tab 4 row 355)"
+    },
+    "6": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 358; BanInfo BIS 2540 (track 6a): tracks 6b,6a, class mellan = 0.58 m above rail, 286 m long; a recorded design class, not a survey; other rows for this track: 4b,6b hög 0.73 m (50 m, Bilaga 2A tab 4 row 354)"
+    },
+    "7": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 351; BanInfo BIS 2041 (track 7a): tracks 8b,7b,7a, class mellan = 0.58 m above rail, 414 m long; a recorded design class, not a survey"
+    },
+    "8": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 351; BanInfo BIS 2041 (track 7a): tracks 8b,7b,7a, class mellan = 0.58 m above rail, 414 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 356; BanInfo BIS 2543 (track 3a): tracks 2,3a, class mellan = 0.58 m above rail, 286 m long; a recorded design class, not a survey; other rows for this track: 2,1b hög 0.73 m (52 m, Bilaga 2A tab 4 row 353)"
+    },
+    "4–5": {
+      "height_m": 0.58,
+      "_source": "Trafikverket register (CC0), Bilaga 2A tab 4 row 357; BanInfo BIS 2539 (track 5): tracks 4b,4a,5, class mellan = 0.58 m above rail, 286 m long; a recorded design class, not a survey; other rows for this track: 4b,6b hög 0.73 m (50 m, Bilaga 2A tab 4 row 354)"
+    }
+  },
+  "structures_file": "data/stations/research/740000006/hassleholm_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w419690632",
+      "kind": "building",
+      "name": "Hässleholm C (station building)",
+      "top_m": 10.25,
+      "base_m": -0.73,
+      "_source": "Outline OSM w419690632 (ODbL); roof = median of 1512 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a009, scanned 2025-02-19), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000006/hassleholm_structures_heights.geojson (metres above the platform surface, 53.81 m RH 2000, laser 2025-02-19)"
+    },
+    {
+      "from": "w424033194",
+      "kind": "building",
+      "name": "Vårdcentral Vänhem (civic)",
+      "top_m": 1.56,
+      "base_m": -5.44,
+      "_source": "Outline OSM w424033194 (ODbL); roof = median of 1770 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a009, scanned 2025-02-19), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000006/hassleholm_structures_heights.geojson (metres above the platform surface, 53.81 m RH 2000, laser 2025-02-19)"
+    },
+    {
+      "from": "w424096588",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.76,
+      "base_m": -1.51,
+      "_source": "Outline OSM w424096588 (ODbL); roof = median of 907 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a009, scanned 2025-02-19), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000006/hassleholm_structures_heights.geojson (metres above the platform surface, 53.81 m RH 2000, laser 2025-02-19)"
+    },
+    {
+      "from": "w424096644",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.69,
+      "base_m": -1.64,
+      "_source": "Outline OSM w424096644 (ODbL); roof = median of 1172 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a009, scanned 2025-02-19), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000006/hassleholm_structures_heights.geojson (metres above the platform surface, 53.81 m RH 2000, laser 2025-02-19)"
+    },
+    {
+      "from": "#5",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.61,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (25a009, scanned 2025-02-19), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000006/hassleholm_structures_heights.geojson (metres above the platform surface, 53.81 m RH 2000, laser 2025-02-19); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000006/hassleholm_ground_1m.tif",
+    "reference_m": 53.81,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000006/hassleholm_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (53.81 m RH 2000, laser 2025-02-19)"
+  },
+  "poi_hours": {
+    "osm5714913207": {
+      "opening_hours": "Mo-Fr 06:00-20:00; Sa 08:00-18:00; Su 09:00-18:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    },
+    "osm5714913208": {
+      "opening_hours": "Mo-Fr 05:30-22:00; Sa 08:00-22:00; Su 09:00-22:00",
+      "checked": "2026-10-30",
+      "_source": "https://www.jernhusen.se/hitta-din-station/hassleholm-centralstation/mat-och-butiker/ (read 2026-10-30; website (Jernhusen station page))"
+    }
+  }
 }

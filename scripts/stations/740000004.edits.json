@@ -101,7 +101,7 @@
       "from": {
         "at": [
           8.3,
-          22.0
+          22
         ],
         "level": "1"
       },
@@ -198,8 +198,8 @@
       "category": "waiting",
       "name": "Waiting room",
       "level": "0",
-      "x": 6.0,
-      "y": -21.0,
+      "x": 6,
+      "y": -21,
       "opening_hours": "Mo-Fr 03:30-01:00; Sa 03:30-23:45; Su 06:30-01:00",
       "hours_source": "website",
       "hours_verified": "2026-10-22"
@@ -209,8 +209,8 @@
       "category": "shop",
       "name": "Antikvariatet Bokpärlan",
       "level": "0",
-      "x": 9.0,
-      "y": -26.0,
+      "x": 9,
+      "y": -26,
       "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
       "hours_source": "website",
       "hours_verified": "2026-10-22",
@@ -221,8 +221,8 @@
       "category": "other",
       "name": "Alvesta kommuns utställningshall",
       "level": "0",
-      "x": 12.0,
-      "y": -31.0,
+      "x": 12,
+      "y": -31,
       "opening_hours": "We-Fr 12:00-18:00; Su 12:00-16:00",
       "hours_source": "website",
       "hours_verified": "2026-10-22"
@@ -232,8 +232,8 @@
       "category": "toilet",
       "name": "Toilets",
       "level": "0",
-      "x": 2.0,
-      "y": -14.0,
+      "x": 2,
+      "y": -14,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null,
@@ -244,7 +244,7 @@
       "category": "ticket",
       "name": "Ticket machine",
       "level": "0",
-      "x": 4.0,
+      "x": 4,
       "y": -17.5,
       "opening_hours": null,
       "hours_source": null,
@@ -256,7 +256,7 @@
       "name": "Ticket machine",
       "level": "1",
       "x": 14.5,
-      "y": 25.0,
+      "y": 25,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null
@@ -334,7 +334,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.4,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (26a022, scanned 2026-03-08), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000004/alvesta_structures_heights.geojson (metres above the platform surface, 145.31 m RH 2000, laser 2026-03-08); underside not measured",
-      "simplify_m": 2.0
+      "simplify_m": 2
     }
   ],
   "terrain": {
@@ -342,5 +342,32 @@
     "reference_m": 145.31,
     "step_m": 5,
     "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740000004/alvesta_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (145.31 m RH 2000, laser 2026-03-08)"
+  },
+  "entrances": [
+    {
+      "at": [
+        -11.7,
+        11.7
+      ],
+      "level": "0",
+      "name": "Footbridge, station building side (Centralgatan)",
+      "_source": "Länstrafiken Kronoberg's map of Alvesta (\"Stationsområdet\", read 2026-10-30 by the research pass, facts only): stairs and a lift at each end of the footbridge down to the street; placed at the street-level end of those stairs in OSM (data/stations/research/740000004/station_facts.json)"
+    },
+    {
+      "at": [
+        71.8,
+        54.5
+      ],
+      "level": "0",
+      "name": "Footbridge, Sjögatan side",
+      "_source": "Länstrafiken Kronoberg's map of Alvesta (\"Stationsområdet\", read 2026-10-30 by the research pass, facts only): stairs and a lift at each end of the footbridge down to the street; placed at the street-level end of those stairs in OSM (data/stations/research/740000004/station_facts.json)"
+    }
+  ],
+  "poi_hours": {
+    "lk-av-waiting": {
+      "opening_hours": "Mo-Fr 03:30-01:00; Sa 03:30-23:45; Su 06:30-01:00",
+      "checked": "2026-10-22",
+      "_source": "the app map (website) (read 2026-10-22; website)"
+    }
   }
 }
