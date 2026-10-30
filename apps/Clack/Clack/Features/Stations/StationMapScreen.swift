@@ -27,6 +27,8 @@ struct StationMapScreen: View {
     @State private var level: String?
     @State private var filter: String?
     @State private var listView = false
+    /// The 3D view (one-station demo, Debug builds on iOS 18 and later).
+    @State private var show3D = false
     @State private var poi: StationPoi?
     @State private var picked: Date?
     @State private var planning = false
@@ -77,6 +79,8 @@ struct StationMapScreen: View {
                 #if DEBUG
                 // `-stationSteps` opens the directions list, to check or photograph it.
                 if CommandLine.arguments.contains("-stationSteps") { showSteps = true }
+                // `-station3D` opens the 3D view (where it is offered).
+                if CommandLine.arguments.contains("-station3D") { show3D = true }
                 // `-stationTime <ms>` looks at opening hours at that moment (a layover seen from the morning it happens).
                 let args = CommandLine.arguments
                 if let at = args.firstIndex(of: "-stationTime"), args.indices.contains(at + 1), let ms = Double(args[at + 1]) {
@@ -333,6 +337,13 @@ struct StationMapScreen: View {
                 }
             }
             MapButton(icon: listView ? "map" : "list", label: l10n.t(listView ? "stationMap.map" : "stationMap.list")) { listView.toggle() }
+            #if DEBUG
+            // The 3D view is a demo at Jönköping C only until the owner has tried it (BUILDOUT, 2026-10-29).
+            if #available(iOS 18.0, *), map.stationId == "740000090", !listView {
+                MapButton(icon: "box", label: l10n.t("station3d.open")) { show3D = true }
+                    .fullScreenCover(isPresented: $show3D) { StationScene3DView(map: map) }
+            }
+            #endif
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
         .padding(.trailing, 12).padding(.top, 112)

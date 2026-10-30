@@ -106,6 +106,24 @@ width, 2.2 pt at zoom 14 to 36 at 18), the front car a shade lighter, a hairline
 count is the feed's, else the type's, else the design's default, never a claim. Trains standing at a mapped station sit
 beside their platform; running ones slide along the track.
 
+### 2.7 3D station view (demo: Jönköping C only, Debug builds, iOS 18+)
+
+Opened from the station map's side column ("3D view"), full screen with a close button. Drawn from the station map
+alone, heights in metres above the platform surface: the ground from the map's terrain grid in the land colour (steep
+cells a shade apart), flat at rail level where the map has none; tracks as 1.5 m strips in the station-rail ink at rail
+level; platforms as prisms in the station map's platform grey, their measured height (else the 0.55 m standard, said
+so); buildings from their lowest ground to their measured top in the shop grey at 80 % opacity; roofs (canopies, a
+footbridge seen from above) as 0.4 m sheets under their measured tops, a step darker; stairs and escalators as ramps and
+lifts as columns in the secondary ink. A floor above the ground is drawn only from an outline on that level, never from
+walkway points. Unlit colours, the walls a shade darker (light mode) or lighter (dark mode) than the tops, so the shapes
+read without lighting cost. Trains from the board are boxes per car in the operator's colour, the front car lighter (as
+§2.6), 3.0 m wide, 3.8 m high (4.6 m double-deck): they slide in over the last 60 s, stand, and pull out over 60 s. The
+camera starts at 45° with the platforms running up the screen as on the 2D map; one finger turns and tilts, two fingers
+move, pinch zooms. Under the scene, a panel says what is not measured, in plain text (draft from OpenStreetMap; the
+standard platform height; building heights not known; stairs drawn at 30°; roof undersides not measured; ground flat),
+only the notes that apply; then the trains shown with platform and written status, those whose platform isn't known
+(listed, not drawn), and the sources with their attribution lines (OpenStreetMap, Lantmäteriet, Trafikverket).
+
 ## 3. Navigation & layout
 
 Screen titles are Apple's (owner, 2026-10-25): large titles that shrink into the bar on scroll, toolbar buttons and the system back button on Trips, Passport, Settings, Journey and Board; the map screens (Explore, a trip, a station map) keep their own floating buttons. The system's bottom tab bar (Liquid Glass on iOS 26) with three tabs: **Trips**, **Explore** (the live map), **Passport**. Settings opens from a gear in the Trips and Passport headers. Trips has a "+" button in the header. Trip detail, Add trip, and Journey view open as full-height sheets/pages with back/close.
