@@ -129,6 +129,8 @@ final class ExploreModel {
             self?.zoom = zoom
             self?.viewChangedForDetail()
         }
+        // Dragging the map lets go of a followed train.
+        controller.onUserGesture = { [weak self] in self?.followingSelected = false }
         controller.onTapTrain = { [weak self] id in
             self?.searching = false
             Task { await self?.select(id) }
@@ -361,6 +363,18 @@ final class ExploreModel {
         }
         controller.setTrains(points)
         controller.setTrainCars(["type": "FeatureCollection", "features": cars])
+        // The selected train: an outline round its cars, and the camera on it while it is followed (owner,
+        // 2026-10-30: "it should lock onto it ... it seems to just drive out of frame").
+        let selectedId = selected?.train.id
+        let halo: [[String: Any]] = cars.compactMap { f in
+            guard let props = f["properties"] as? [String: Any], props["id"] as? String == selectedId,
+                  let coords = (f["geometry"] as? [String: Any])?["coordinates"] as? [[Double]], coords.count == 2 else { return nil }
+            return ["type": "Feature", "properties": [String: Any](), "geometry": ["type": "Polygon", "coordinates": [LiveMapController.carFootprint(back: coords[0], front: coords[1], widthM: 6)]]]
+        }
+        controller.setSelectedCars(halo)
+        if followingSelected, let id = selectedId, let p = points.first(where: { $0.id == id }) {
+            controller.keepInView(CLLocationCoordinate2D(latitude: p.lat, longitude: p.lon))
+        }
         if shown != points.count { shown = points.count }
         return moving
     }
@@ -437,6 +451,8 @@ final class ExploreModel {
     static let model3DZoom = 16.0
     static let tiltDegrees = 55.0
     @ObservationIgnored private var detailHasStructures = false
+    /// The camera stays on the selected train until the map is dragged.
+    @ObservationIgnored private var followingSelected = false
     @ObservationIgnored private var tilted = false
     /// The heights on screen come from Lantmäteriet's laser data: the attribution line credits it.
     private(set) var lantmateriet3D = false
@@ -667,13 +683,15 @@ final class ExploreModel {
             return
         }
         selected = detail
+        followingSelected = true
         scheduled = nil
         collapsed = false
         stops = detail.trip == nil ? .none : .loading
         stationSheet = nil
         controller.setSelected(id)
-        // Up into the free space above the train's sheet, so the train and its route aren't under it.
-        controller.ease(to: CLLocationCoordinate2D(latitude: detail.train.lat, longitude: detail.train.lon), minZoom: 8, offset: min(320, controller.height * 0.34))
+        // Up into the free space above the train's sheet (between the search bar and the sheet's top), so the train and
+        // its route aren't under either.
+        controller.ease(to: CLLocationCoordinate2D(latitude: detail.train.lat, longitude: detail.train.lon), minZoom: 8, offset: min(260, controller.height * 0.29))
         clearRoute()
         guard let trip = detail.trip else { return }
         startStops(id)
@@ -730,9 +748,12 @@ final class ExploreModel {
     func deselect() {
         selection += 1
         selected = nil
+        followingSelected = false
         stopsTask?.cancel()
         clearRoute()
         controller.setSelected(nil)
+        controller.setSelectedCars([])
+        controller.clearInset()
     }
 
     // MARK: a train with no position

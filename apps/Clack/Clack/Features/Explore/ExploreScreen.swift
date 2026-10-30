@@ -131,6 +131,12 @@ struct ExploreScreen: View {
                     model.controller.jump(to: CLLocationCoordinate2D(latitude: p[0], longitude: p[1]), zoom: p[2])
                 }
             }
+            // `-exploreSelect <train id>` then selects a train (its cars outlined, the camera following it).
+            if let at = args.firstIndex(of: "-exploreSelect"), at + 1 < args.count {
+                for _ in 0..<40 where !model.ready { try? await Task.sleep(for: .milliseconds(250)) }
+                try? await Task.sleep(for: .seconds(2))
+                await model.select(args[at + 1])
+            }
         }
         .task {
             let args = CommandLine.arguments

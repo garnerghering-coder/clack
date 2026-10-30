@@ -25,6 +25,14 @@ private func stop(_ seq: Int, noPickup: Bool = false, noDropoff: Bool = false, l
 }
 
 struct SearchTextTests {
+    @Test func theTypedTermIsWhatFollowsTheLastSeparator() {
+        #expect(AddTrainLogic.typedTerm("Kolding → Jönk") == "Jönk")
+        #expect(AddTrainLogic.typedTerm("Kolding to Jönköping") == "Jönköping")
+        #expect(AddTrainLogic.typedTerm("Malmö till Göt") == "Göt")
+        #expect(AddTrainLogic.typedTerm("Kolding → ") == "")
+        #expect(AddTrainLogic.typedTerm("  Stockh ") == "Stockh")
+    }
+
     @Test func pickingTheFirstStationWritesItAndAnArrow() {
         #expect(AddTrainLogic.query(afterPicking: hit("Stockholm C"), query: "sthlm", interpretation: interpretation(typing: "from")) == "Stockholm C → ")
         #expect(AddTrainLogic.query(afterPicking: hit("Stockholm C"), query: "Snälltåget sthlm", interpretation: interpretation(typing: "from", op: "Snälltåget")) == "Snälltåget Stockholm C → ")

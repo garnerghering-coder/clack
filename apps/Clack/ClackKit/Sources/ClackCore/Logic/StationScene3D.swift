@@ -85,6 +85,8 @@ public nonisolated enum StationScene3D {
         public var rampSlopeStandard = false
         /// Roofs are drawn from their measured tops; what is under them (a canopy's underside, a footbridge's deck) isn't.
         public var roofUndersideUnknown = false
+        /// A footbridge's underside is drawn at a stated minimum (its `_source` says which), not measured.
+        public var bridgeUndersideMinimum = false
         /// The map has no ground heights: the ground is drawn flat at rail level.
         public var flatGround = false
         /// Heights from Lantmäteriet's laser data (CC BY 4.0: the panel credits it).
@@ -174,9 +176,15 @@ public nonisolated enum StationScene3D {
 
         var buildings: [Building] = []
         var roofs: [Roof] = []
-        for s in map.shapes where s.kind == .building || s.kind == .roof {
+        for s in map.shapes where s.kind == .building || s.kind == .roof || s.kind == .bridge {
             let pts = clean(s.points)
             guard pts.count >= 3 else { continue }
+            if s.kind == .bridge {
+                guard let top = s.topM, let base = s.baseM, top > base else { continue }
+                notes.bridgeUndersideMinimum = true
+                buildings.append(Building(prism: Prism(footprint: pts, bottom: base, top: top), heightKnown: true, name: s.name))
+                continue
+            }
             if s.kind == .roof {
                 guard let top = s.topM else { continue }
                 notes.roofUndersideUnknown = true
@@ -319,8 +327,14 @@ public nonisolated enum StationScene3D {
         return lengthen(line, by: runOut)
     }
 
-    /// Where along `track` the platform's middle is, metres (the projection of its outline's extent).
-    public static func platformMiddle(_ p: StationPlatform, track: [Pt]) -> Double {
+    /// Where along `track` the platform's middle is, metres (the projection of its outline's extent); for a sector the
+    /// board names ("2a") the middle of that sector's edge when the map has one (trains wait at their part).
+    public static func platformMiddle(_ p: StationPlatform, track: [Pt], sector: String? = nil) -> Double {
+        let s = (sector ?? "").trimmingCharacters(in: .whitespaces).lowercased()
+        if let last = s.last, last.isLetter, let edge = p.edges?.first(where: { $0.track == s && $0.points.count >= 2 }) {
+            let along = edge.points.map { project($0, on: track) }
+            if let lo = along.min(), let hi = along.max() { return (lo + hi) / 2 }
+        }
         let along = p.geometry.flatMap { $0 }.map { project($0, on: track) }
         guard let lo = along.min(), let hi = along.max() else { return length(track) / 2 }
         return (lo + hi) / 2

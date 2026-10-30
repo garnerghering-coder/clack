@@ -98,11 +98,12 @@ public nonisolated enum PoiCategory: OpenEnum {
 }
 
 public nonisolated enum ShapeKind: OpenEnum {
-    /// `roof`: a roof with open sides or an unknown underside (a platform canopy, a footbridge seen from above).
-    case building, hall, room, shop, track, roof
+    /// `roof`: a roof with open sides or an unknown underside (a platform canopy). `bridge`: an enclosed footbridge
+    /// between `baseM` (its underside) and `topM`.
+    case building, hall, room, shop, track, roof, bridge
     case unknown(String)
 
-    public static let knownCases: [ShapeKind] = [.building, .hall, .room, .shop, .track, .roof]
+    public static let knownCases: [ShapeKind] = [.building, .hall, .room, .shop, .track, .roof, .bridge]
     public init(unknown: String) { self = .unknown(unknown) }
     public var rawValue: String {
         switch self {
@@ -112,6 +113,7 @@ public nonisolated enum ShapeKind: OpenEnum {
         case .shop: "shop"
         case .track: "track"
         case .roof: "roof"
+        case .bridge: "bridge"
         case .unknown(let raw): raw
         }
     }

@@ -104,6 +104,11 @@ private struct SearchStep: View {
         } else if let response = model.response {
             results(response)
         } else if model.loading {
+            // The first search of a query: the quick station names already, the journeys still coming.
+            if !model.suggestionsShown.isEmpty {
+                Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
+                stationList(model.suggestionsShown)
+            }
             VStack(spacing: 12) {
                 Skeleton(height: 120)
                 Skeleton(height: 120)
@@ -169,9 +174,9 @@ private struct SearchStep: View {
     @ViewBuilder
     private func journeyResults(_ response: SearchResponse) -> some View {
         // While typing, the stations to pick from; once the search is sent, only the results.
-        if focused, !response.suggestions.isEmpty {
+        if focused, !model.suggestionsShown.isEmpty {
             Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            stationList(response.suggestions)
+            stationList(model.suggestionsShown)
         }
         journeyFilterBar(count: model.journeys?.count ?? 0)
         // Paging: six hours earlier or later per press; a day line where the list crosses midnight.
@@ -184,6 +189,15 @@ private struct SearchStep: View {
                             .padding(.top, i > 0 ? 8 : 0)
                     }
                     JourneyResultCard(journey: journey) { model.pickedJourney = journey }
+                }
+                // Some journeys are hidden by the change filter (owner, 2026-10-30: a 4-change night via
+                // København was found but never shown): offer them under the list too, not only when none pass.
+                if model.moreWithMoreChanges {
+                    Button(l10n.t("add.includeMoreChanges")) {
+                        model.maxChanges = AddTrainModel.maxChangesLimit
+                        model.minComfort = 0
+                    }
+                    .buttonStyle(.clack(.secondary, small: true))
                 }
             }
         } else if model.moreWithMoreChanges {
@@ -223,10 +237,10 @@ private struct SearchStep: View {
     private func trainResults(_ response: SearchResponse) -> some View {
         let interpretation = response.interpretation
         let hasResults = !(response.results ?? []).isEmpty
-        if !response.suggestions.isEmpty
-            && !(interpretation.to != nil && response.suggestions.first?.id == interpretation.to?.id && hasResults) {
+        if !model.suggestionsShown.isEmpty
+            && !(interpretation.to != nil && model.suggestionsShown.first?.id == interpretation.to?.id && hasResults) {
             Text(l10n.t("add.stations")).clack(.sectionHeader).foregroundStyle(Ink.text2)
-            stationList(response.suggestions)
+            stationList(model.suggestionsShown)
         }
         if response.outsideTimetable {
             Banner {
@@ -296,15 +310,12 @@ private struct DateRow: View {
         FlowLayout(spacing: 8, lineSpacing: 8) {
             ChipButton(text: l10n.t("add.today"), active: date == today) { date = today }
             ChipButton(text: l10n.t("add.tomorrow"), active: date == tomorrow) { date = tomorrow ?? date }
-            ChipButton(text: l10n.t("add.pickDate"), active: date != today && date != tomorrow) { picking = true }
-            HStack(spacing: 0) {
-                Text(Format.day(Format.isoToNoonMs(date) ?? 0, tz: "UTC", language: app.settings.language))
-                    .fontWeight(.semibold).foregroundStyle(Ink.text)
-                if date < today {
-                    Text(" · \(l10n.t("add.pastTrip"))").foregroundStyle(Ink.slightInk).fontWeight(.medium)
-                }
+            // A picked day is the button's own label (owner, 2026-10-30: no separate date line).
+            let picked = date != today && date != tomorrow
+            ChipButton(text: picked ? Format.day(Format.isoToNoonMs(date) ?? 0, tz: "UTC", language: app.settings.language) : l10n.t("add.pickDate"), active: picked) { picking = true }
+            if date < today {
+                Text(l10n.t("add.pastTrip")).clack(.body).fontWeight(.medium).foregroundStyle(Ink.slightInk).padding(.leading, 4)
             }
-            .clack(.body).padding(.leading, 4)
         }
         .sheet(isPresented: $picking) {
             let maxDate = AddTrainLogic.date(fromIso: Format.addDaysIso(today, days: 365) ?? today, tz: tz) ?? .now

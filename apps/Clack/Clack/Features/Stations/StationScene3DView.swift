@@ -149,15 +149,15 @@ struct StationScene3DView: View {
     }
 
     #if DEBUG
-    /// `-fakeBoard3D`: one train standing at platform 2 (arrived 2 min ago, leaves in 5) and one arriving at platform 1
+    /// `-fakeBoard3D`: one train standing at platform 2a (arrived 2 min ago, leaves in 5) and one arriving at platform 1
     /// in 40 s. Made up, to look at the view; never in a release build.
     static func fakeBoard(now: Double) -> (arrivals: [BoardRow], departures: [BoardRow]) {
         func row(_ n: String, _ at: Double, _ platform: String, _ type: String, _ places: [String]) -> BoardRow {
             BoardRow(id: "fake-\(n)-\(places[0])", trainNumber: n, advertised: at, estimated: nil, actual: nil, done: false, delayMin: nil, platform: platform, platformChange: nil, canceled: false, deviations: [], endpoints: places, via: [], operatorId: "sj", productName: nil, product: "regional", trainType: type, trip: .init(key: "fake-\(n)", serviceDate: "", seq: 0))
         }
         return (
-            [row("1234", now - 120_000, "2", "x40", ["Nässjö C"]), row("1301", now + 40_000, "1", "x61", ["Vaggeryd"])],
-            [row("1234", now + 300_000, "2", "x40", ["Göteborg C"]), row("1301", now + 280_000, "1", "x61", ["Nässjö C"])]
+            [row("1234", now - 120_000, "2a", "x40", ["Nässjö C"]), row("1301", now + 40_000, "1", "x61", ["Vaggeryd"])],
+            [row("1234", now + 300_000, "2a", "x40", ["Göteborg C"]), row("1301", now + 280_000, "1", "x61", ["Nässjö C"])]
         )
     }
     #endif
@@ -222,6 +222,7 @@ struct StationScene3DView: View {
                     if notes.buildingHeightUnknown { note(l10n.t("station3d.note.buildingHeight")) }
                     if notes.rampSlopeStandard { note(l10n.t("station3d.note.rampSlope")) }
                     if notes.roofUndersideUnknown { note(l10n.t("station3d.note.roofUnderside")) }
+                    if notes.bridgeUndersideMinimum { note(l10n.t("station3d.note.bridgeMinimum")) }
                     if notes.flatGround { note(l10n.t("station3d.note.flatGround")) }
                 }
                 VStack(alignment: .leading, spacing: 8) {
@@ -457,10 +458,12 @@ final class Station3DStage {
         }
         var seen = Set<String>()
         for t in trains where t.state != .upcoming {
-            guard let pid = t.platformId, let place = tracks[pid] else { continue }
+            guard let pid = t.platformId, let place = tracks[pid], let platform = map.platforms.first(where: { $0.id == pid }) else { continue }
+            // Its sector ("2a") when the board names one, else the platform's middle.
+            let middle = StationScene3D.platformMiddle(platform, track: place.track, sector: t.platform)
             let spec = StationScene3D.cars(for: t.trainType.flatMap(type))
             let railY = Float(scene?.railY ?? 0)
-            let places = StationScene3D.carPlaces(map, track: place.track, middleM: place.middle, offsetM: t.offsetM, count: spec.count, carLength: spec.length)
+            let places = StationScene3D.carPlaces(map, track: place.track, middleM: middle, offsetM: t.offsetM, count: spec.count, carLength: spec.length)
             seen.insert(t.id)
             var entities = cars[t.id] ?? []
             if entities.count != places.count {

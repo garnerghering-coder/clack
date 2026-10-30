@@ -285,13 +285,36 @@ final class LiveMapController {
 
     /// Eases to a train, up into the free space above its sheet: at least `minZoom`, with the point `offset` points above
     /// the middle.
+    /// Centres on a point `offset` points above the middle (the free space over a sheet). The offset is a content
+    /// inset at the bottom, so it holds whatever the tilt and rotation, and later re-centring (`keepInView`) uses it.
     func ease(to c: CLLocationCoordinate2D, minZoom: Double, offset: CGFloat) {
         guard let map = mapView else { return }
         (map as? ClackMapView)?.markMoved()
-        let z = max(map.zoomLevel, minZoom)
-        let metersPerPoint = map.metersPerPoint(atLatitude: c.latitude) * pow(2, map.zoomLevel - z)
-        let shifted = CLLocationCoordinate2D(latitude: c.latitude - Double(offset) * metersPerPoint / 111_320, longitude: c.longitude)
-        map.setCenter(shifted, zoomLevel: z, animated: !reduceMotion)
+        map.setContentInset(UIEdgeInsets(top: 0, left: 0, bottom: offset * 2, right: 0), animated: false, completionHandler: nil)
+        map.setCenter(c, zoomLevel: max(map.zoomLevel, minZoom), animated: !reduceMotion)
+    }
+
+    /// The sheet closed: the centre goes back to the middle of the map.
+    func clearInset() {
+        mapView?.setContentInset(.zero, animated: false, completionHandler: nil)
+    }
+
+    /// Keeps a moving train at the centre (the selected one, followed): re-centred, without animation, when it is
+    /// more than a few points off, so it stays put on screen as it drives.
+    func keepInView(_ c: CLLocationCoordinate2D) {
+        guard let map = mapView else { return }
+        let p = map.convert(c, toPointTo: map)
+        let inset = map.contentInset
+        let centre = CGPoint(x: inset.left + (map.bounds.width - inset.left - inset.right) / 2, y: inset.top + (map.bounds.height - inset.top - inset.bottom) / 2)
+        if hypot(p.x - centre.x, p.y - centre.y) > 4 { map.setCenter(c, animated: false) }
+    }
+
+    /// The person dragged, pinched or turned the map (a followed train lets go).
+    var onUserGesture: () -> Void = {}
+
+    /// The selected train's cars get a yellow outline on the ground (from zoom 14, where it is cars, not a dot).
+    func setSelectedCars(_ footprints: [[String: Any]]) {
+        setPolygons(footprints, source: "train-selected-cars")
     }
 
     func fit(_ points: [LatLon], padding: UIEdgeInsets) {
@@ -323,6 +346,9 @@ struct LiveMapView: UIViewRepresentable {
         let url = (try? MapStyle.write(style)) ?? URL(fileURLWithPath: "/dev/null")
         let map = ClackMapView(frame: .zero, styleURL: url)
         map.applyClackDefaults()
+        // Tilted (the station in 3D) the whole view keeps one tile zoom: by default MapLibre uses coarser tiles
+        // towards the horizon, and a lake's outline then flickers between the two (owner, 2026-10-30, Vättern).
+        map.tileLodPitchThreshold = 60 * .pi / 180
         map.delegate = context.coordinator
         // Opens on Sweden, Norway, Finland and Denmark, Bergen to the Finnish east border, Gedser to Nordkapp. The map may be built before it has a
         // size (Explore is built at launch), so the framing is kept and applied when it gets one.
@@ -363,6 +389,9 @@ struct LiveMapView: UIViewRepresentable {
             // The person moved the map: it keeps where they put it.
             if reason.contains(.gesturePan) || reason.contains(.gesturePinch) || reason.contains(.gestureZoomIn) || reason.contains(.gestureZoomOut) {
                 (mapView as? ClackMapView)?.markMoved()
+            }
+            if reason.contains(.gesturePan) || reason.contains(.gestureRotate) || reason.contains(.gestureTilt) {
+                controller.onUserGesture()
             }
         }
 

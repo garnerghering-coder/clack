@@ -113,7 +113,9 @@ measured height (at the standard they stay flat, as Explore has no panel to say 
 measured tops (same greys as below), and every train's cars as boxes 3 m wide in the operator's colour, the front car
 lighter (the flat car lines hand over at 15). Near a station with measured structures the camera tilts to 55° at zoom
 16 and flattens again below 15.5 or away from it; tilting by hand is allowed only then. The ground stays flat at rail
-level (MapLibre on iOS draws no terrain). The attribution line adds Lantmäteriet's credit while its heights are shown.
+level (MapLibre on iOS draws no terrain). The attribution line adds Lantmäteriet's credit while its heights are shown. Station names, platform numbers and train labels draw over the 3D (owner, 2026-10-30). A selected train shown as cars
+gets a signal-yellow outline on the ground round them instead of the ring, and the camera keeps it centred in the
+space above its sheet until the map is dragged.
 
 **Full screen:**
 

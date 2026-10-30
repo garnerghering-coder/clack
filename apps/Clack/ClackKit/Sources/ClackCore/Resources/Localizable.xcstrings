@@ -21025,13 +21025,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Roofs drawn from their measured tops; undersides and the footbridge deck not measured"
+            "value" : "Roofs drawn from their measured tops; their undersides not measured"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tak ritade från uppmätta ovansidor; undersidor och gångbrons golv är inte uppmätta"
+            "value" : "Tak ritade från uppmätta ovansidor; undersidorna är inte uppmätta"
           }
         }
       }
@@ -21134,6 +21134,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trappor och rulltrappor ritade i 30°: var de börjar är känt bara på ungefär 10 m"
+          }
+        }
+      }
+    },
+    "station3d.note.bridgeMinimum" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Footbridge underside drawn at the minimum clearance over the rails (5.9 m), not measured"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gångbrons undersida ritad på minsta fria höjd över spåren (5,9 m), inte uppmätt"
           }
         }
       }

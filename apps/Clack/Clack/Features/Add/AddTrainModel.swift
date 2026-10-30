@@ -31,6 +31,13 @@ final class AddTrainModel {
         return ""
     }() { didSet { if query != oldValue { showEarlier = false } } }
     private(set) var response: SearchResponse?
+    /// Station names for the part being typed, from the quick station search, shown while the full search (which
+    /// also plans journeys and can take a second) is still out (owner, 2026-10-30).
+    private(set) var quickSuggestions: [StationHit] = []
+    /// What to offer as stations: the quick ones while a search is loading, else the full search's.
+    var suggestionsShown: [StationHit] {
+        loading && !quickSuggestions.isEmpty ? quickSuggestions : (response?.suggestions ?? [])
+    }
     private(set) var popular: [StationHit] = []
     private(set) var loading = false
     var searchFailed = false
@@ -205,6 +212,16 @@ final class AddTrainModel {
         loading = true
         try? await Task.sleep(for: .milliseconds(150))
         if Task.isCancelled { return }
+        let term = AddTrainLogic.typedTerm(text)
+        if term.count >= 2 {
+            Task { [weak self] in
+                let hits = (try? await client.searchStations(term, limit: 8)) ?? []
+                guard let self, AddTrainLogic.typedTerm(self.query) == term else { return }
+                self.quickSuggestions = hits
+            }
+        } else {
+            quickSuggestions = []
+        }
         do {
             // Today's journeys from ten minutes ago, one page at a time; another day whole. The planner is asked for
             // the most changes it does, and the filter picks from that.

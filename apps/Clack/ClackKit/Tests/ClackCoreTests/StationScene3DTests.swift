@@ -222,4 +222,28 @@ struct StationScene3DTests {
         #expect(StationScene3D.terrainHeight(t, x: 25, y: 5) == nil)
         #expect(StationScene3D.terrainHeight(t, x: 35, y: 5) == nil)
     }
+
+    @Test func aBridgeSpansFromItsUndersideAndASectorTrainStandsInItsSector() throws {
+        let json = """
+        {"schema":2,"station_id":"b","name":"Bridge C","updated":"2026-10-30","quality":"osm_draft","sources":[],"changelog":[],
+         "origin":{"lat":57.78,"lon":14.16},"levels":[{"id":"L0","name":"Platforms","order":0}],
+         "shapes":[{"level":"L0","kind":"bridge","name":"Footbridge","points":[[40,-20],[46,-20],[46,40],[40,40]],"top_m":9.1,"base_m":5.3},
+                   {"level":"L0","kind":"track","name":null,"points":[[-50,-1.5],[250,-1.5]]}],
+         "platforms":[{"id":"p2","ref":"2","tracks":["2"],"level":"L0","geometry":[[[0,0],[200,0],[200,8],[0,8]]],"node":"p2","height_m":0.58,
+           "edges":[{"track":"2","points":[[0,0],[200,0]],"_source":"t"},{"track":"2a","points":[[0,-1.5],[80,-1.5]],"_source":"t"},{"track":"2b","points":[[120,-1.5],[200,-1.5]],"_source":"t"}]}],
+         "nodes":[{"id":"p2","type":"platform","level":"L0","x":100,"y":4}],"edges":[],"pois":[]}
+        """
+        let map = try JSONDecoder().decode(StationMap.self, from: Data(json.utf8))
+        let scene = StationScene3D.build(map)
+        let bridge = try #require(scene.buildings.first { $0.name == "Footbridge" })
+        #expect(bridge.prism.bottom == 5.3 && bridge.prism.top == 9.1 && scene.notes.bridgeUndersideMinimum)
+        let p = map.platforms[0]
+        let track = try #require(StationScene3D.platformTrack(map, platform: p))
+        let whole = StationScene3D.platformMiddle(p, track: track)
+        let a = StationScene3D.platformMiddle(p, track: track, sector: "2a")
+        let b = StationScene3D.platformMiddle(p, track: track, sector: "2B")
+        // Along the lengthened track (600 m before x −50): the platform's middle at x 100, 2a's at 40, 2b's at 160.
+        #expect(abs(whole - 750) < 0.5 && abs(a - 690) < 0.5 && abs(b - 810) < 0.5)
+        #expect(StationScene3D.platformMiddle(p, track: track, sector: "2c") == whole)
+    }
 }

@@ -254,6 +254,13 @@ nonisolated enum MapStyle {
         ]
     }
 
+    /// The selected train as cars: a signal-yellow outline on the ground around them (`train-selected-cars`, 6 m wide
+    /// footprints), under the 2D car lines' level and the 3D boxes.
+    static func selectedCarsLayer() -> [String: Any] {
+        ["id": "train-selected-cars", "type": "fill", "source": "train-selected-cars", "minzoom": 14,
+         "paint": ["fill-color": "#f8d64a", "fill-opacity": 0.6]]
+    }
+
     private static func liveStationLayers(_ c: Colors) -> [[String: Any]] {
         let dpd: [Any] = ["coalesce", ["get", "dpd"], 0]
         return [
@@ -327,7 +334,7 @@ nonisolated enum MapStyle {
             ],
             // The selected train: a larger marker under its dot.
             [
-                "id": "train-selected", "type": "circle", "source": "trains", "filter": ["==", ["get", "id"], ""],
+                "id": "train-selected", "type": "circle", "source": "trains", "maxzoom": 14, "filter": ["==", ["get", "id"], ""],
                 "paint": ["circle-radius": 11, "circle-color": ["get", "color"], "circle-opacity": 0.35, "circle-stroke-color": "#ffffff", "circle-stroke-width": 2],
             ],
             [
@@ -410,16 +417,21 @@ nonisolated enum MapStyle {
             sources["station-platforms"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["station-platform-labels"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
             sources["trains-close"] = ["type": "geojson", "data": emptyCollection()] as [String: Any]
-            for id in ["station-platforms-3d", "station-structures", "trains-close-3d"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
+            for id in ["station-platforms-3d", "station-structures", "trains-close-3d", "train-selected-cars"] { sources[id] = ["type": "geojson", "data": emptyCollection()] as [String: Any] }
             sources["trains"] = [
                 // Not clustered: every train is its own dot at every zoom (owner, 2026-10-27).
                 "type": "geojson", "data": emptyCollection(),
             ] as [String: Any]
-            layers += stationDetailLayers(c, dark: isDark)
+            // Order (owner, 2026-10-30: "the text should be on top"): the flat detail, the 3D, then everything
+            // written or marked: platform numbers, stations, trains.
+            let detail = stationDetailLayers(c, dark: isDark)
+            layers += detail.filter { $0["type"] as? String != "symbol" }
+            layers += trainCarLayers(c)
+            layers += [selectedCarsLayer()]
+            layers += stationModelLayers(c, dark: isDark)
+            layers += detail.filter { $0["type"] as? String == "symbol" }
             layers += liveStationLayers(c)
             layers += liveTrainLayers(c, dark: isDark, route: routeLayers(color: c.fallback, c, dark: isDark))
-            layers += trainCarLayers(c)
-            layers += stationModelLayers(c, dark: isDark)
         }
         return ["version": 8, "glyphs": "\(origin)/api/map/fonts/{fontstack}/{range}.pbf", "sources": sources, "layers": layers]
     }

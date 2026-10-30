@@ -14,6 +14,19 @@ public nonisolated enum AddTrainLogic {
 
     public enum Filter: String, CaseIterable, Sendable { case all, long, regional, commuter }
 
+    private static let afterSeparator = try? NSRegularExpression(pattern: "(?:→|->|=>|>|–|—|\\s-\\s|\\bto\\b|\\btill\\b)\\s*([^→>–—]*)$", options: .caseInsensitive)
+
+    /// The station name being typed: what follows the last "→" (or "to", "till", "-"), else the whole query. The quick
+    /// station suggestions are asked for this while the full search is still planning.
+    public static func typedTerm(_ query: String) -> String {
+        let q = query.trimmingCharacters(in: .whitespaces)
+        let range = NSRange(q.startIndex..., in: q)
+        if let m = afterSeparator?.firstMatch(in: q, range: range), let r = Range(m.range(at: 1), in: q) {
+            return String(q[r]).trimmingCharacters(in: .whitespaces)
+        }
+        return q
+    }
+
     public static func includes(_ result: TripResult, _ filter: Filter) -> Bool {
         switch filter {
         case .all: true
