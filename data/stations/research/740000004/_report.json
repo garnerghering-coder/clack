@@ -1,0 +1,114 @@
+{
+ "clack_id": "740000004",
+ "slug": "alvesta",
+ "flags": [
+  "w39352040 Alvesta järnvägsstation (station building): p95 160.5 m is 3.3 m above the median 157.2 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 142.26 m over 66156 m²"
+ ],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 142.09,
+  "median_m": 144.7,
+  "max_m": 153.42,
+  "nan_cells": 0,
+  "size_m": [
+   433,
+   616
+  ],
+  "box_sweref": [
+   472735,
+   6305767,
+   473168,
+   6306383
+  ],
+  "tiles": [
+   "630_47 (2024-03-08)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y26a022-63050_4725_25.copc.laz"
+  ],
+  "scan_date": "2026-03-08",
+  "density_pts_m2_nominal": 1.8,
+  "flight_height_m": 2000,
+  "points_in_box": 669086,
+  "density_in_box": 2.51,
+  "classes": {
+   "1": 221330,
+   "2": 348302,
+   "7": 279,
+   "9": 99175
+  },
+  "train_points_class64": 2736
+ },
+ "platforms": [
+  {
+   "bis_object": "703",
+   "track": "4b",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 610.1,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 144.75,
+   "track_bed_points": 198,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "700",
+   "track": "1a,1b",
+   "height_class": "låg",
+   "class_height_m": 0.35,
+   "length_m": 139.0,
+   "width_m": null,
+   "roof": "Saknas",
+   "track_bed_m": 144.59,
+   "track_bed_points": 303,
+   "platform_surface_m": 145.23,
+   "platform_points": 967,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "other_side_surface_m": 145.45,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 0.64,
+   "laser_estimate_above_rail_m": 0.46
+  },
+  {
+   "bis_object": "698",
+   "track": "2",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 414.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 144.58,
+   "track_bed_points": 1272,
+   "platform_surface_m": 145.4,
+   "platform_points": 2788,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.82,
+   "laser_estimate_above_rail_m": 0.64
+  }
+ ],
+ "platform_surface_m": 145.31,
+ "track_bed_m": 144.59,
+ "trains_in_scan": 6,
+ "structures": {
+  "building": 3,
+  "footbridge": 1,
+  "canopy_osm": 2,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 6
+ },
+ "photos": 83,
+ "photos_station_related": 62
+}

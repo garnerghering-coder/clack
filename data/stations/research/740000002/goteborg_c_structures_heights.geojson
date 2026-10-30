@@ -1,0 +1,9554 @@
+{
+ "type": "FeatureCollection",
+ "name": "goteborg_c_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m RH 2000",
+ "platform_surface_m": 2.91,
+ "track_bed_m": 2.21,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9734845,
+       57.708510400000016
+      ],
+      [
+       11.973485900000002,
+       57.7085076
+      ],
+      [
+       11.9734633,
+       57.7085032
+      ],
+      [
+       11.9733318,
+       57.7084798
+      ],
+      [
+       11.973270800000002,
+       57.70846889999999
+      ],
+      [
+       11.9731837,
+       57.70845390000001
+      ],
+      [
+       11.973181300000002,
+       57.708457799999984
+      ],
+      [
+       11.9730864,
+       57.70844149999999
+      ],
+      [
+       11.9729675,
+       57.7084203
+      ],
+      [
+       11.9729636,
+       57.70842729999999
+      ],
+      [
+       11.9728628,
+       57.708409100000004
+      ],
+      [
+       11.9728297,
+       57.7084641
+      ],
+      [
+       11.9727671,
+       57.708453199999994
+      ],
+      [
+       11.9727223,
+       57.708526599999985
+      ],
+      [
+       11.972530500000001,
+       57.70849319999999
+      ],
+      [
+       11.972504200000001,
+       57.708536300000006
+      ],
+      [
+       11.9724681,
+       57.7085955
+      ],
+      [
+       11.9724595,
+       57.70860960000001
+      ],
+      [
+       11.9724475,
+       57.70862930000001
+      ],
+      [
+       11.9723763,
+       57.7087458
+      ],
+      [
+       11.972406900000001,
+       57.70875359999999
+      ],
+      [
+       11.972594600000003,
+       57.708786099999976
+      ],
+      [
+       11.972773699999998,
+       57.7088172
+      ],
+      [
+       11.9729291,
+       57.70884410000001
+      ],
+      [
+       11.9729719,
+       57.70885160000001
+      ],
+      [
+       11.973037300000001,
+       57.70886249999999
+      ],
+      [
+       11.973091300000002,
+       57.70887200000001
+      ],
+      [
+       11.9732253,
+       57.70889540000001
+      ],
+      [
+       11.9734288,
+       57.7089309
+      ],
+      [
+       11.9735307,
+       57.70894869999999
+      ],
+      [
+       11.9738267,
+       57.70900040000001
+      ],
+      [
+       11.973836600000002,
+       57.7089906
+      ],
+      [
+       11.973863699999999,
+       57.708946299999994
+      ],
+      [
+       11.973890400000002,
+       57.708902499999986
+      ],
+      [
+       11.9738938,
+       57.70889689999999
+      ],
+      [
+       11.973916700000002,
+       57.708859399999994
+      ],
+      [
+       11.973936,
+       57.7088277
+      ],
+      [
+       11.9739832,
+       57.7087503
+      ],
+      [
+       11.974068999999998,
+       57.70876360000002
+      ],
+      [
+       11.9741132,
+       57.7087703
+      ],
+      [
+       11.974200600000001,
+       57.7087852
+      ],
+      [
+       11.974285,
+       57.70880050000002
+      ],
+      [
+       11.9742954,
+       57.70878379999999
+      ],
+      [
+       11.9743108,
+       57.708759599999986
+      ],
+      [
+       11.974334800000001,
+       57.70872139999998
+      ],
+      [
+       11.9741176,
+       57.708683699999995
+      ],
+      [
+       11.973772699999998,
+       57.70862390000002
+      ],
+      [
+       11.9737767,
+       57.708617
+      ],
+      [
+       11.9738029,
+       57.7085728
+      ],
+      [
+       11.973701499999999,
+       57.70855569999999
+      ],
+      [
+       11.9737055,
+       57.70854889999999
+      ],
+      [
+       11.9736323,
+       57.708536599999995
+      ],
+      [
+       11.9734845,
+       57.708510400000016
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w13704175",
+    "name": "station building",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "2",
+     "height": "15",
+     "layer": "1"
+    },
+    "ground_min_m": 2.41,
+    "ground_median_m": 2.73,
+    "ground_max_m": 2.93,
+    "roof_top_median_m": 10.76,
+    "roof_top_p95_m": 15.42,
+    "laser_points": 5124,
+    "height_above_ground_median_m": 8.03,
+    "height_above_ground_p95_m": 12.69,
+    "top_above_platform_m": 7.85,
+    "base_above_platform_m": -0.5,
+    "source": "Outline OSM w13704175 (ODbL); roof = median of 5124 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9719895,
+       57.70934890000002
+      ],
+      [
+       11.971986,
+       57.70935490000001
+      ],
+      [
+       11.9718958,
+       57.7095021
+      ],
+      [
+       11.9721264,
+       57.709542600000006
+      ],
+      [
+       11.9724458,
+       57.7096007
+      ],
+      [
+       11.972513200000002,
+       57.70961209999999
+      ],
+      [
+       11.972630100000002,
+       57.7096319
+      ],
+      [
+       11.972761100000001,
+       57.7096541
+      ],
+      [
+       11.972827600000002,
+       57.709664399999994
+      ],
+      [
+       11.972903000000002,
+       57.7096775
+      ],
+      [
+       11.973003000000004,
+       57.709694799999966
+      ],
+      [
+       11.973071500000001,
+       57.70970669999999
+      ],
+      [
+       11.9733708,
+       57.7097585
+      ],
+      [
+       11.9734062,
+       57.7097002
+      ],
+      [
+       11.973443500000002,
+       57.70963869999998
+      ],
+      [
+       11.973504300000002,
+       57.70953850000001
+      ],
+      [
+       11.9735415,
+       57.70947730000001
+      ],
+      [
+       11.973598200000001,
+       57.70938399999999
+      ],
+      [
+       11.9736328,
+       57.70932700000001
+      ],
+      [
+       11.973688500000002,
+       57.70923519999997
+      ],
+      [
+       11.9737252,
+       57.709174799999985
+      ],
+      [
+       11.9737744,
+       57.70908580000001
+      ],
+      [
+       11.973780200000002,
+       57.70907629999999
+      ],
+      [
+       11.973786900000002,
+       57.70906540000001
+      ],
+      [
+       11.9738267,
+       57.70900040000001
+      ],
+      [
+       11.9735307,
+       57.70894869999999
+      ],
+      [
+       11.9734288,
+       57.7089309
+      ],
+      [
+       11.9732253,
+       57.70889540000001
+      ],
+      [
+       11.973091300000002,
+       57.70887200000001
+      ],
+      [
+       11.973037300000001,
+       57.70886249999999
+      ],
+      [
+       11.9729719,
+       57.70885160000001
+      ],
+      [
+       11.9729291,
+       57.70884410000001
+      ],
+      [
+       11.972773699999998,
+       57.7088172
+      ],
+      [
+       11.972594600000003,
+       57.708786099999976
+      ],
+      [
+       11.972406900000001,
+       57.70875359999999
+      ],
+      [
+       11.9723859,
+       57.70878799999998
+      ],
+      [
+       11.9723639,
+       57.708824300000025
+      ],
+      [
+       11.9723451,
+       57.708851900000006
+      ],
+      [
+       11.972298900000002,
+       57.7088439
+      ],
+      [
+       11.972265800000002,
+       57.708898600000005
+      ],
+      [
+       11.9720178,
+       57.709303000000006
+      ],
+      [
+       11.9719895,
+       57.70934890000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w13704178",
+    "name": "Centralhuset (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "4",
+     "height": "25.5",
+     "layer": "1",
+     "name": "Centralhuset"
+    },
+    "ground_min_m": 2.01,
+    "ground_median_m": 2.66,
+    "ground_max_m": 2.99,
+    "roof_top_median_m": 23.98,
+    "roof_top_p95_m": 27.35,
+    "laser_points": 10930,
+    "height_above_ground_median_m": 21.32,
+    "height_above_ground_p95_m": 24.69,
+    "top_above_platform_m": 21.07,
+    "base_above_platform_m": -0.9,
+    "source": "Outline OSM w13704178 (ODbL); roof = median of 10930 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976013200000002,
+       57.7090433
+      ],
+      [
+       11.976171900000002,
+       57.7087944
+      ],
+      [
+       11.9767419,
+       57.7088981
+      ],
+      [
+       11.976705700000002,
+       57.70895499999999
+      ],
+      [
+       11.976646,
+       57.7089441
+      ],
+      [
+       11.976561500000003,
+       57.70907669999998
+      ],
+      [
+       11.976609399999997,
+       57.7090854
+      ],
+      [
+       11.9765715,
+       57.709144900000005
+      ],
+      [
+       11.976013200000002,
+       57.7090433
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w13704190",
+    "name": "office",
+    "osm_tags": {
+     "building": "office",
+     "building:levels": "4"
+    },
+    "ground_min_m": 2.22,
+    "ground_median_m": 2.69,
+    "ground_max_m": 3.26,
+    "roof_top_median_m": 18.23,
+    "roof_top_p95_m": 20.93,
+    "laser_points": 1408,
+    "height_above_ground_median_m": 15.54,
+    "height_above_ground_p95_m": 18.24,
+    "top_above_platform_m": 15.32,
+    "base_above_platform_m": -0.69,
+    "source": "Outline OSM w13704190 (ODbL); roof = median of 1408 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9703506,
+       57.71185830000001
+      ],
+      [
+       11.970507900000001,
+       57.7119055
+      ],
+      [
+       11.970610200000001,
+       57.71193709999999
+      ],
+      [
+       11.9706483,
+       57.71194860000001
+      ],
+      [
+       11.970651,
+       57.7119772
+      ],
+      [
+       11.9706457,
+       57.7120346
+      ],
+      [
+       11.9706162,
+       57.712089
+      ],
+      [
+       11.9705913,
+       57.7121241
+      ],
+      [
+       11.9705598,
+       57.71215200000001
+      ],
+      [
+       11.9705323,
+       57.7121721
+      ],
+      [
+       11.9705089,
+       57.7121879
+      ],
+      [
+       11.970444500000001,
+       57.71222369999998
+      ],
+      [
+       11.970396200000001,
+       57.712243699999995
+      ],
+      [
+       11.970321099999998,
+       57.712263799999995
+      ],
+      [
+       11.970264800000002,
+       57.7122796
+      ],
+      [
+       11.970202800000001,
+       57.71229109999998
+      ],
+      [
+       11.9701711,
+       57.71227969999999
+      ],
+      [
+       11.9700857,
+       57.71224920000001
+      ],
+      [
+       11.969860800000001,
+       57.712168599999984
+      ],
+      [
+       11.970023400000002,
+       57.71218069999999
+      ],
+      [
+       11.970087800000002,
+       57.712174999999995
+      ],
+      [
+       11.9701709,
+       57.71215920000001
+      ],
+      [
+       11.9702219,
+       57.7121434
+      ],
+      [
+       11.970294300000003,
+       57.71210909999999
+      ],
+      [
+       11.9703292,
+       57.7120861
+      ],
+      [
+       11.970345300000002,
+       57.71207470000002
+      ],
+      [
+       11.970380099999998,
+       57.712030300000016
+      ],
+      [
+       11.9703962,
+       57.7119944
+      ],
+      [
+       11.9704069,
+       57.7119658
+      ],
+      [
+       11.9703989,
+       57.71193139999999
+      ],
+      [
+       11.970382800000001,
+       57.711892699999986
+      ],
+      [
+       11.9703506,
+       57.71185830000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w374053019",
+    "name": "Bananbron (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Bananbron"
+    },
+    "ground_min_m": -3.59,
+    "ground_median_m": 0.51,
+    "ground_max_m": 2.77,
+    "roof_top_median_m": 3.65,
+    "roof_top_p95_m": 5.22,
+    "laser_points": 290,
+    "height_above_ground_median_m": 3.13,
+    "height_above_ground_p95_m": 4.71,
+    "top_above_platform_m": 0.73,
+    "base_above_platform_m": -6.5,
+    "source": "Outline OSM w374053019 (ODbL); roof = median of 290 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976436800000002,
+       57.7086153
+      ],
+      [
+       11.976156600000001,
+       57.70856819999998
+      ],
+      [
+       11.9761485,
+       57.7085649
+      ],
+      [
+       11.976143200000001,
+       57.70856029999999
+      ],
+      [
+       11.976142900000001,
+       57.70855969999999
+      ],
+      [
+       11.9761416,
+       57.7085568
+      ],
+      [
+       11.9761418,
+       57.70855279999999
+      ],
+      [
+       11.9761445,
+       57.708549
+      ],
+      [
+       11.976151400000001,
+       57.708544700000004
+      ],
+      [
+       11.976409500000003,
+       57.708466500000014
+      ],
+      [
+       11.9764456,
+       57.70852430000002
+      ],
+      [
+       11.976378200000001,
+       57.70854390000001
+      ],
+      [
+       11.976451500000001,
+       57.70855649999999
+      ],
+      [
+       11.976436800000002,
+       57.7086153
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w490573738",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "1"
+    },
+    "ground_min_m": 2.5,
+    "ground_median_m": 2.67,
+    "ground_max_m": 2.84,
+    "roof_top_median_m": 9.27,
+    "roof_top_p95_m": 9.43,
+    "laser_points": 211,
+    "height_above_ground_median_m": 6.6,
+    "height_above_ground_p95_m": 6.76,
+    "top_above_platform_m": 6.36,
+    "base_above_platform_m": -0.41,
+    "source": "Outline OSM w490573738 (ODbL); roof = median of 211 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9760814,
+       57.7085503
+      ],
+      [
+       11.976009400000002,
+       57.708480800000004
+      ],
+      [
+       11.976000800000001,
+       57.7084464
+      ],
+      [
+       11.976081099999998,
+       57.708043300000014
+      ],
+      [
+       11.9761735,
+       57.7080157
+      ],
+      [
+       11.9761961,
+       57.70803869999999
+      ],
+      [
+       11.9762086,
+       57.708050599999986
+      ],
+      [
+       11.976225200000002,
+       57.70806619999999
+      ],
+      [
+       11.9761624,
+       57.708085200000006
+      ],
+      [
+       11.976183,
+       57.7081054
+      ],
+      [
+       11.9761959,
+       57.7081179
+      ],
+      [
+       11.9762116,
+       57.70813350000001
+      ],
+      [
+       11.9761495,
+       57.708152399999996
+      ],
+      [
+       11.9761691,
+       57.708173699999996
+      ],
+      [
+       11.9761807,
+       57.7081852
+      ],
+      [
+       11.9761958,
+       57.7082002
+      ],
+      [
+       11.9761361,
+       57.7082167
+      ],
+      [
+       11.9761578,
+       57.708240599999996
+      ],
+      [
+       11.9761711,
+       57.7082552
+      ],
+      [
+       11.976182400000003,
+       57.708267600000006
+      ],
+      [
+       11.9761233,
+       57.708286000000015
+      ],
+      [
+       11.976144700000003,
+       57.70830829999999
+      ],
+      [
+       11.9761566,
+       57.708319899999985
+      ],
+      [
+       11.9761713,
+       57.7083345
+      ],
+      [
+       11.9761086,
+       57.708353
+      ],
+      [
+       11.976133000000003,
+       57.70837669999999
+      ],
+      [
+       11.9761453,
+       57.70838809999997
+      ],
+      [
+       11.9761585,
+       57.70840149999999
+      ],
+      [
+       11.976095700000002,
+       57.7084204
+      ],
+      [
+       11.976118200000002,
+       57.7084416
+      ],
+      [
+       11.976129800000002,
+       57.708453099999986
+      ],
+      [
+       11.976144600000001,
+       57.70846799999998
+      ],
+      [
+       11.9760825,
+       57.708487200000015
+      ],
+      [
+       11.976104,
+       57.7085067
+      ],
+      [
+       11.976117500000003,
+       57.70852080000001
+      ],
+      [
+       11.9761317,
+       57.70853499999999
+      ],
+      [
+       11.976109200000002,
+       57.70854199999997
+      ],
+      [
+       11.9760814,
+       57.7085503
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w490573739",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation",
+     "building:levels": "1"
+    },
+    "ground_min_m": 2.65,
+    "ground_median_m": 2.84,
+    "ground_max_m": 3.02,
+    "roof_top_median_m": 6.08,
+    "roof_top_p95_m": 6.52,
+    "laser_points": 144,
+    "height_above_ground_median_m": 3.24,
+    "height_above_ground_p95_m": 3.68,
+    "top_above_platform_m": 3.17,
+    "base_above_platform_m": -0.26,
+    "source": "Outline OSM w490573739 (ODbL); roof = median of 144 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.968369100000002,
+       57.7109597
+      ],
+      [
+       11.969983600000003,
+       57.71147669999999
+      ],
+      [
+       11.9700584,
+       57.71150260000001
+      ],
+      [
+       11.9702038,
+       57.7115717
+      ],
+      [
+       11.970349200000001,
+       57.71165370000001
+      ],
+      [
+       11.9704543,
+       57.7117292
+      ],
+      [
+       11.9705694,
+       57.7118274
+      ],
+      [
+       11.970670400000001,
+       57.71193960000001
+      ],
+      [
+       11.970729,
+       57.7120572
+      ],
+      [
+       11.9707633,
+       57.7121371
+      ],
+      [
+       11.970771400000002,
+       57.712238499999984
+      ],
+      [
+       11.970767400000002,
+       57.712352900000006
+      ],
+      [
+       11.970729,
+       57.712491
+      ],
+      [
+       11.970668400000001,
+       57.7126
+      ],
+      [
+       11.9705997,
+       57.7126809
+      ],
+      [
+       11.970456299999999,
+       57.712795200000016
+      ],
+      [
+       11.969698399999999,
+       57.71338510000001
+      ],
+      [
+       11.9698345,
+       57.713434899999996
+      ],
+      [
+       11.970646199999997,
+       57.712790899999995
+      ],
+      [
+       11.9707007,
+       57.71274239999999
+      ],
+      [
+       11.9707714,
+       57.71265819999999
+      ],
+      [
+       11.9708381,
+       57.712557900000014
+      ],
+      [
+       11.9708684,
+       57.71248880000001
+      ],
+      [
+       11.9708966,
+       57.71241539999998
+      ],
+      [
+       11.970910800000002,
+       57.712325899999996
+      ],
+      [
+       11.9709128,
+       57.7122061
+      ],
+      [
+       11.9708926,
+       57.7121187
+      ],
+      [
+       11.970870400000003,
+       57.71205179999998
+      ],
+      [
+       11.9708219,
+       57.71196119999999
+      ],
+      [
+       11.9706482,
+       57.71172810000001
+      ],
+      [
+       11.9702826,
+       57.711241499999986
+      ],
+      [
+       11.970224000000002,
+       57.7111519
+      ],
+      [
+       11.970203800000002,
+       57.711103399999985
+      ],
+      [
+       11.970189700000002,
+       57.71106129999999
+      ],
+      [
+       11.9701856,
+       57.71102569999999
+      ],
+      [
+       11.9701872,
+       57.710946699999994
+      ],
+      [
+       11.9701957,
+       57.71085740000001
+      ],
+      [
+       11.970254300000002,
+       57.71075379999999
+      ],
+      [
+       11.9704808,
+       57.71036670000001
+      ],
+      [
+       11.970449700000001,
+       57.71036299999998
+      ],
+      [
+       11.9704112,
+       57.7103575
+      ],
+      [
+       11.9704073,
+       57.71035699999999
+      ],
+      [
+       11.9703644,
+       57.7103506
+      ],
+      [
+       11.970338900000002,
+       57.710345099999984
+      ],
+      [
+       11.9700947,
+       57.710790499999995
+      ],
+      [
+       11.970070500000002,
+       57.710857399999995
+      ],
+      [
+       11.9700543,
+       57.710930700000006
+      ],
+      [
+       11.9700442,
+       57.711014900000016
+      ],
+      [
+       11.9700563,
+       57.711074200000006
+      ],
+      [
+       11.9700765,
+       57.71113570000001
+      ],
+      [
+       11.970098800000002,
+       57.711188599999986
+      ],
+      [
+       11.9703539,
+       57.711558000000004
+      ],
+      [
+       11.970224,
+       57.711479999999995
+      ],
+      [
+       11.970048300000002,
+       57.71141089999998
+      ],
+      [
+       11.9698745,
+       57.711350499999995
+      ],
+      [
+       11.968442200000002,
+       57.7108937
+      ],
+      [
+       11.968418900000001,
+       57.7109147
+      ],
+      [
+       11.9684024,
+       57.71092960000001
+      ],
+      [
+       11.968386100000002,
+       57.71094429999999
+      ],
+      [
+       11.968369100000002,
+       57.7109597
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w725288025",
+    "name": "Hisingsbron (bridge)",
+    "osm_tags": {
+     "layer": "2",
+     "man_made": "bridge",
+     "name": "Hisingsbron"
+    },
+    "ground_min_m": -3.53,
+    "ground_median_m": 2.51,
+    "ground_max_m": 8.16,
+    "roof_top_median_m": 11.16,
+    "roof_top_p95_m": 13.78,
+    "laser_points": 1350,
+    "height_above_ground_median_m": 8.65,
+    "height_above_ground_p95_m": 11.27,
+    "top_above_platform_m": 8.25,
+    "base_above_platform_m": -6.44,
+    "source": "Outline OSM w725288025 (ODbL); roof = median of 1350 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974516000000001,
+       57.7087515
+      ],
+      [
+       11.9745391,
+       57.7087818
+      ],
+      [
+       11.9745257,
+       57.7087848
+      ],
+      [
+       11.9745224,
+       57.70878950000002
+      ],
+      [
+       11.974516500000002,
+       57.708794299999994
+      ],
+      [
+       11.9745081,
+       57.7087986
+      ],
+      [
+       11.9744985,
+       57.708801600000015
+      ],
+      [
+       11.974486299999999,
+       57.7088035
+      ],
+      [
+       11.974474800000001,
+       57.70880379999999
+      ],
+      [
+       11.9744621,
+       57.7088023
+      ],
+      [
+       11.974451200000003,
+       57.70879929999999
+      ],
+      [
+       11.974443600000003,
+       57.7087958
+      ],
+      [
+       11.9744382,
+       57.708792499999994
+      ],
+      [
+       11.9744339,
+       57.70878859999999
+      ],
+      [
+       11.9744304,
+       57.708783
+      ],
+      [
+       11.9744294,
+       57.70877829999999
+      ],
+      [
+       11.974429900000002,
+       57.708771999999975
+      ],
+      [
+       11.9744324,
+       57.7087674
+      ],
+      [
+       11.9744385,
+       57.70876179999998
+      ],
+      [
+       11.9744469,
+       57.7087569
+      ],
+      [
+       11.9744581,
+       57.7087531
+      ],
+      [
+       11.9744705,
+       57.70875110000001
+      ],
+      [
+       11.9744825,
+       57.708750999999985
+      ],
+      [
+       11.974492900000001,
+       57.7087519
+      ],
+      [
+       11.974502300000001,
+       57.70875439999999
+      ],
+      [
+       11.974516000000001,
+       57.7087515
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1013465729",
+    "name": "Franks (retail)",
+    "osm_tags": {
+     "amenity": "fast_food",
+     "building": "retail",
+     "building:levels": "1",
+     "name": "Franks",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 2.66,
+    "ground_median_m": 2.72,
+    "ground_max_m": 2.78,
+    "roof_top_median_m": 6.11,
+    "roof_top_p95_m": 8.79,
+    "laser_points": 44,
+    "height_above_ground_median_m": 3.39,
+    "height_above_ground_p95_m": 6.07,
+    "top_above_platform_m": 3.2,
+    "base_above_platform_m": -0.25,
+    "source": "Outline OSM w1013465729 (ODbL); roof = median of 44 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973164500000001,
+       57.70778089999999
+      ],
+      [
+       11.9731617,
+       57.70776539999999
+      ],
+      [
+       11.9732467,
+       57.707761099999985
+      ],
+      [
+       11.973249500000001,
+       57.70777649999999
+      ],
+      [
+       11.973164500000001,
+       57.70778089999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1023939822",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes",
+     "building:levels": "1",
+     "height": "3",
+     "roof:shape": "round"
+    },
+    "ground_min_m": 3.0,
+    "ground_median_m": 3.03,
+    "ground_max_m": 3.07,
+    "laser_points": 4,
+    "source": "Outline OSM w1023939822 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974712000000002,
+       57.708734299999996
+      ],
+      [
+       11.974721000000002,
+       57.70872020000001
+      ],
+      [
+       11.9748067,
+       57.708735899999986
+      ],
+      [
+       11.9747976,
+       57.70875
+      ],
+      [
+       11.974712000000002,
+       57.708734299999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1023942994",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes",
+     "building:levels": "1",
+     "height": "3",
+     "roof:shape": "round"
+    },
+    "ground_min_m": 2.74,
+    "ground_median_m": 2.8,
+    "ground_max_m": 2.87,
+    "roof_top_median_m": 5.4,
+    "roof_top_p95_m": 5.46,
+    "laser_points": 10,
+    "height_above_ground_median_m": 2.6,
+    "height_above_ground_p95_m": 2.66,
+    "top_above_platform_m": 2.49,
+    "base_above_platform_m": -0.17,
+    "source": "Outline OSM w1023942994 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9748796,
+       57.70876290000001
+      ],
+      [
+       11.974889,
+       57.7087485
+      ],
+      [
+       11.9749753,
+       57.7087645
+      ],
+      [
+       11.9749659,
+       57.70877889999999
+      ],
+      [
+       11.9748796,
+       57.70876290000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1023942995",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes",
+     "building:levels": "1",
+     "height": "3",
+     "roof:shape": "round"
+    },
+    "ground_min_m": 2.73,
+    "ground_median_m": 2.82,
+    "ground_max_m": 2.9,
+    "roof_top_median_m": 5.41,
+    "roof_top_p95_m": 5.48,
+    "laser_points": 10,
+    "height_above_ground_median_m": 2.59,
+    "height_above_ground_p95_m": 2.66,
+    "top_above_platform_m": 2.5,
+    "base_above_platform_m": -0.18,
+    "source": "Outline OSM w1023942995 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.977300700000002,
+       57.707911499999994
+      ],
+      [
+       11.9772668,
+       57.70790860000001
+      ],
+      [
+       11.9772767,
+       57.70787560000001
+      ],
+      [
+       11.9773105,
+       57.70787849999999
+      ],
+      [
+       11.977300700000002,
+       57.707911499999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1023942996",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 2.79,
+    "ground_median_m": 2.92,
+    "ground_max_m": 3.0,
+    "laser_points": 4,
+    "source": "Outline OSM w1023942996 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.977801200000002,
+       57.708075099999995
+      ],
+      [
+       11.977772199999999,
+       57.708071600000004
+      ],
+      [
+       11.977792100000002,
+       57.708025
+      ],
+      [
+       11.9778211,
+       57.70802849999999
+      ],
+      [
+       11.977801200000002,
+       57.708075099999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1023942997",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 2.45,
+    "ground_median_m": 2.73,
+    "ground_max_m": 2.79,
+    "roof_top_median_m": 5.42,
+    "roof_top_p95_m": 5.47,
+    "laser_points": 7,
+    "height_above_ground_median_m": 2.69,
+    "height_above_ground_p95_m": 2.74,
+    "top_above_platform_m": 2.51,
+    "base_above_platform_m": -0.46,
+    "source": "Outline OSM w1023942997 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973074300000002,
+       57.709808899999985
+      ],
+      [
+       11.973095600000002,
+       57.7097732
+      ],
+      [
+       11.973117300000002,
+       57.70973670000001
+      ],
+      [
+       11.9743577,
+       57.70994729999999
+      ],
+      [
+       11.9746289,
+       57.7099933
+      ],
+      [
+       11.9745861,
+       57.710065400000005
+      ],
+      [
+       11.974314600000001,
+       57.71001929999999
+      ],
+      [
+       11.973074300000002,
+       57.709808899999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834912",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "6",
+     "layer": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.04,
+    "ground_median_m": 2.53,
+    "ground_max_m": 2.9,
+    "roof_top_median_m": 7.6,
+    "roof_top_p95_m": 8.04,
+    "laser_points": 904,
+    "height_above_ground_median_m": 5.07,
+    "height_above_ground_p95_m": 5.51,
+    "top_above_platform_m": 4.69,
+    "base_above_platform_m": -0.87,
+    "source": "Outline OSM w1096834912 (ODbL); roof = median of 904 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973443500000002,
+       57.70963869999998
+      ],
+      [
+       11.9747179,
+       57.709861400000015
+      ],
+      [
+       11.9746824,
+       57.70991670000001
+      ],
+      [
+       11.9734062,
+       57.7097002
+      ],
+      [
+       11.973443500000002,
+       57.70963869999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834913",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "6",
+     "layer": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.05,
+    "ground_median_m": 2.29,
+    "ground_max_m": 2.9,
+    "roof_top_median_m": 7.5,
+    "roof_top_p95_m": 7.88,
+    "laser_points": 628,
+    "height_above_ground_median_m": 5.21,
+    "height_above_ground_p95_m": 5.59,
+    "top_above_platform_m": 4.59,
+    "base_above_platform_m": -0.86,
+    "source": "Outline OSM w1096834913 (ODbL); roof = median of 628 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973504300000002,
+       57.70953850000001
+      ],
+      [
+       11.975149099999998,
+       57.7098256
+      ],
+      [
+       11.975186100000002,
+       57.70976610000001
+      ],
+      [
+       11.9735415,
+       57.70947730000001
+      ],
+      [
+       11.973504300000002,
+       57.70953850000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834914",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "6",
+     "layer": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.03,
+    "ground_median_m": 2.17,
+    "ground_max_m": 3.01,
+    "roof_top_median_m": 7.41,
+    "roof_top_p95_m": 7.85,
+    "laser_points": 925,
+    "height_above_ground_median_m": 5.24,
+    "height_above_ground_p95_m": 5.68,
+    "top_above_platform_m": 4.5,
+    "base_above_platform_m": -0.88,
+    "source": "Outline OSM w1096834914 (ODbL); roof = median of 925 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976277700000002,
+       57.709854899999996
+      ],
+      [
+       11.973598200000001,
+       57.70938399999999
+      ],
+      [
+       11.9736328,
+       57.70932700000001
+      ],
+      [
+       11.976312800000002,
+       57.70979640000001
+      ],
+      [
+       11.976277700000002,
+       57.709854899999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834915",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "6",
+     "layer": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.08,
+    "ground_median_m": 2.2,
+    "ground_max_m": 2.93,
+    "roof_top_median_m": 7.86,
+    "roof_top_p95_m": 8.24,
+    "laser_points": 1432,
+    "height_above_ground_median_m": 5.66,
+    "height_above_ground_p95_m": 6.04,
+    "top_above_platform_m": 4.95,
+    "base_above_platform_m": -0.83,
+    "source": "Outline OSM w1096834915 (ODbL); roof = median of 1432 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973688500000002,
+       57.70923519999997
+      ],
+      [
+       11.9763577,
+       57.70969709999999
+      ],
+      [
+       11.9763942,
+       57.709633200000006
+      ],
+      [
+       11.9737252,
+       57.709174799999985
+      ],
+      [
+       11.973688500000002,
+       57.70923519999997
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834916",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "6",
+     "layer": "1",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.03,
+    "ground_median_m": 2.2,
+    "ground_max_m": 3.01,
+    "roof_top_median_m": 7.49,
+    "roof_top_p95_m": 7.96,
+    "laser_points": 1527,
+    "height_above_ground_median_m": 5.29,
+    "height_above_ground_p95_m": 5.76,
+    "top_above_platform_m": 4.58,
+    "base_above_platform_m": -0.88,
+    "source": "Outline OSM w1096834916 (ODbL); roof = median of 1527 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973780200000002,
+       57.70907629999999
+      ],
+      [
+       11.9746422,
+       57.70923760000001
+      ],
+      [
+       11.977295499999999,
+       57.709697
+      ],
+      [
+       11.977341,
+       57.7096192
+      ],
+      [
+       11.9741365,
+       57.70906190000001
+      ],
+      [
+       11.974162500000002,
+       57.70901409999999
+      ],
+      [
+       11.9773711,
+       57.7095684
+      ],
+      [
+       11.977413100000001,
+       57.70949889999999
+      ],
+      [
+       11.9742098,
+       57.7089462
+      ],
+      [
+       11.974240800000002,
+       57.708891
+      ],
+      [
+       11.9774435,
+       57.709446599999985
+      ],
+      [
+       11.9774736,
+       57.70939919999999
+      ],
+      [
+       11.9745758,
+       57.70888610000001
+      ],
+      [
+       11.9745842,
+       57.7088718
+      ],
+      [
+       11.974617,
+       57.7088137
+      ],
+      [
+       11.9743108,
+       57.708759599999986
+      ],
+      [
+       11.9742954,
+       57.70878379999999
+      ],
+      [
+       11.974285,
+       57.70880050000002
+      ],
+      [
+       11.974200600000001,
+       57.7087852
+      ],
+      [
+       11.9741132,
+       57.7087703
+      ],
+      [
+       11.974061100000002,
+       57.70885029999997
+      ],
+      [
+       11.973936,
+       57.7088277
+      ],
+      [
+       11.973916700000002,
+       57.708859399999994
+      ],
+      [
+       11.9738938,
+       57.70889689999999
+      ],
+      [
+       11.973890400000002,
+       57.708902499999986
+      ],
+      [
+       11.9740187,
+       57.708927100000004
+      ],
+      [
+       11.9739645,
+       57.709010700000015
+      ],
+      [
+       11.973836600000002,
+       57.7089906
+      ],
+      [
+       11.9738267,
+       57.70900040000001
+      ],
+      [
+       11.973786900000002,
+       57.70906540000001
+      ],
+      [
+       11.973780200000002,
+       57.70907629999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834917",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "7",
+     "layer": "1"
+    },
+    "ground_min_m": 2.11,
+    "ground_median_m": 2.34,
+    "ground_max_m": 3.11,
+    "roof_top_median_m": 8.08,
+    "roof_top_p95_m": 8.82,
+    "laser_points": 6812,
+    "height_above_ground_median_m": 5.74,
+    "height_above_ground_p95_m": 6.48,
+    "top_above_platform_m": 5.17,
+    "base_above_platform_m": -0.8,
+    "source": "Outline OSM w1096834917 (ODbL); roof = median of 6812 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9722988,
+       57.710545399999994
+      ],
+      [
+       11.972827600000002,
+       57.709664399999994
+      ],
+      [
+       11.972903000000002,
+       57.7096775
+      ],
+      [
+       11.972374500000003,
+       57.71055830000001
+      ],
+      [
+       11.9722988,
+       57.710545399999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1096834918",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "height": "4.5",
+     "layer": "1"
+    },
+    "ground_min_m": 2.43,
+    "ground_median_m": 2.67,
+    "ground_max_m": 2.94,
+    "roof_top_median_m": 6.44,
+    "roof_top_p95_m": 6.99,
+    "laser_points": 207,
+    "height_above_ground_median_m": 3.77,
+    "height_above_ground_p95_m": 4.32,
+    "top_above_platform_m": 3.53,
+    "base_above_platform_m": -0.48,
+    "source": "Outline OSM w1096834918 (ODbL); roof = median of 207 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.970684300000002,
+       57.709302799999996
+      ],
+      [
+       11.9707552,
+       57.70930870000002
+      ],
+      [
+       11.9708231,
+       57.7090787
+      ],
+      [
+       11.9707521,
+       57.7090727
+      ],
+      [
+       11.970684300000002,
+       57.709302799999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1180021070",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "3",
+     "layer": "1"
+    },
+    "ground_min_m": 2.9,
+    "ground_median_m": 3.04,
+    "ground_max_m": 3.3,
+    "roof_top_median_m": 5.87,
+    "roof_top_p95_m": 6.16,
+    "laser_points": 13,
+    "height_above_ground_median_m": 2.83,
+    "height_above_ground_p95_m": 3.12,
+    "top_above_platform_m": 2.96,
+    "base_above_platform_m": -0.01,
+    "source": "Outline OSM w1180021070 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.970848900000002,
+       57.70932169999998
+      ],
+      [
+       11.970910500000002,
+       57.709331299999995
+      ],
+      [
+       11.9711483,
+       57.708899599999995
+      ],
+      [
+       11.971086500000002,
+       57.70888989999999
+      ],
+      [
+       11.970848900000002,
+       57.70932169999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1180021071",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "3",
+     "layer": "1"
+    },
+    "ground_min_m": 2.98,
+    "ground_median_m": 3.19,
+    "ground_max_m": 3.42,
+    "roof_top_median_m": 5.85,
+    "roof_top_p95_m": 6.1,
+    "laser_points": 36,
+    "height_above_ground_median_m": 2.66,
+    "height_above_ground_p95_m": 2.91,
+    "top_above_platform_m": 2.94,
+    "base_above_platform_m": 0.07,
+    "source": "Outline OSM w1180021071 (ODbL); roof = median of 36 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.971039300000001,
+       57.70935159999998
+      ],
+      [
+       11.971101500000001,
+       57.70936129999998
+      ],
+      [
+       11.9713375,
+       57.7089302
+      ],
+      [
+       11.971275200000003,
+       57.70892049999999
+      ],
+      [
+       11.971039300000001,
+       57.70935159999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1180021072",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "3",
+     "layer": "1"
+    },
+    "ground_min_m": 3.03,
+    "ground_median_m": 3.17,
+    "ground_max_m": 3.41,
+    "roof_top_median_m": 9.86,
+    "roof_top_p95_m": 12.77,
+    "laser_points": 12,
+    "height_above_ground_median_m": 6.69,
+    "height_above_ground_p95_m": 9.6,
+    "top_above_platform_m": 6.95,
+    "base_above_platform_m": 0.12,
+    "source": "Outline OSM w1180021072 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.971419699999998,
+       57.708943200000014
+      ],
+      [
+       11.971183,
+       57.7093736
+      ],
+      [
+       11.971244900000002,
+       57.70938339999999
+      ],
+      [
+       11.9714818,
+       57.708953000000015
+      ],
+      [
+       11.971419699999998,
+       57.708943200000014
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1180021073",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof",
+     "height": "3",
+     "layer": "1"
+    },
+    "ground_min_m": 2.89,
+    "ground_median_m": 3.03,
+    "ground_max_m": 3.15,
+    "laser_points": 2,
+    "source": "Outline OSM w1180021073 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9756059,
+       57.71186039999999
+      ],
+      [
+       11.975824000000001,
+       57.71149689999999
+      ],
+      [
+       11.973445400000001,
+       57.711088399999994
+      ],
+      [
+       11.9732277,
+       57.71145280000001
+      ],
+      [
+       11.9756059,
+       57.71186039999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1374501612",
+    "name": "Park Central (construction)",
+    "osm_tags": {
+     "building": "construction",
+     "name": "Park Central"
+    },
+    "ground_min_m": 0.1,
+    "ground_median_m": 2.85,
+    "ground_max_m": 3.78,
+    "roof_top_median_m": 4.47,
+    "roof_top_p95_m": 28.08,
+    "laser_points": 1042,
+    "height_above_ground_median_m": 1.62,
+    "height_above_ground_p95_m": 25.23,
+    "top_above_platform_m": 1.56,
+    "base_above_platform_m": -2.81,
+    "source": "Outline OSM w1374501612 (ODbL); roof = median of 1042 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9710644,
+       57.710887500000005
+      ],
+      [
+       11.970738400000002,
+       57.71083299999999
+      ],
+      [
+       11.970868100000002,
+       57.710616
+      ],
+      [
+       11.9717558,
+       57.710761399999996
+      ],
+      [
+       11.9720747,
+       57.7108149
+      ],
+      [
+       11.9727736,
+       57.71094350000001
+      ],
+      [
+       11.972510700000003,
+       57.71138409999998
+      ],
+      [
+       11.9721449,
+       57.7113137
+      ],
+      [
+       11.9721767,
+       57.7112668
+      ],
+      [
+       11.9718222,
+       57.71120560000001
+      ],
+      [
+       11.971838700000001,
+       57.71117650000001
+      ],
+      [
+       11.971551200000002,
+       57.711129799999995
+      ],
+      [
+       11.9715809,
+       57.71108069999999
+      ],
+      [
+       11.971294599999998,
+       57.71102960000002
+      ],
+      [
+       11.971322000000002,
+       57.71098580000001
+      ],
+      [
+       11.9710372,
+       57.7109355
+      ],
+      [
+       11.9710644,
+       57.710887500000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1374501613",
+    "name": "Göteborg Grand Central (construction)",
+    "osm_tags": {
+     "building": "construction",
+     "name": "Göteborg Grand Central"
+    },
+    "ground_min_m": -0.21,
+    "ground_median_m": 1.61,
+    "ground_max_m": 2.85,
+    "roof_top_median_m": 8.23,
+    "roof_top_p95_m": 11.07,
+    "laser_points": 292,
+    "height_above_ground_median_m": 6.62,
+    "height_above_ground_p95_m": 9.46,
+    "top_above_platform_m": 5.32,
+    "base_above_platform_m": -3.12,
+    "source": "Outline OSM w1374501613 (ODbL); roof = median of 292 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.972298900000002,
+       57.7088439
+      ],
+      [
+       11.9723451,
+       57.708851900000006
+      ],
+      [
+       11.9723639,
+       57.708824300000025
+      ],
+      [
+       11.972467200000002,
+       57.708842199999985
+      ],
+      [
+       11.972566000000002,
+       57.708859299999986
+      ],
+      [
+       11.972691,
+       57.708881
+      ],
+      [
+       11.972928900000001,
+       57.708922199999996
+      ],
+      [
+       11.9728757,
+       57.7090047
+      ],
+      [
+       11.9728228,
+       57.709094
+      ],
+      [
+       11.9727735,
+       57.7091772
+      ],
+      [
+       11.9726862,
+       57.709323700000006
+      ],
+      [
+       11.9726351,
+       57.709409199999996
+      ],
+      [
+       11.972392900000001,
+       57.70936840000001
+      ],
+      [
+       11.9722663,
+       57.709346200000006
+      ],
+      [
+       11.9720178,
+       57.709303000000006
+      ],
+      [
+       11.972265800000002,
+       57.708898600000005
+      ],
+      [
+       11.972298900000002,
+       57.7088439
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1430170872",
+    "name": "Hyatt Place Gothenburg Central (building)",
+    "osm_tags": {
+     "building": "yes",
+     "layer": "2",
+     "name": "Hyatt Place Gothenburg Central"
+    },
+    "ground_min_m": 2.41,
+    "ground_median_m": 2.68,
+    "ground_max_m": 3.05,
+    "roof_top_median_m": 21.8,
+    "roof_top_p95_m": 27.71,
+    "laser_points": 2922,
+    "height_above_ground_median_m": 19.12,
+    "height_above_ground_p95_m": 25.03,
+    "top_above_platform_m": 18.89,
+    "base_above_platform_m": -0.5,
+    "source": "Outline OSM w1430170872 (ODbL); roof = median of 2922 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.971756999999998,
+       57.7107611
+      ],
+      [
+       11.971858600000001,
+       57.710589799999994
+      ],
+      [
+       11.9718924,
+       57.71053289999998
+      ],
+      [
+       11.9719302,
+       57.71046909999999
+      ],
+      [
+       11.971962700000002,
+       57.710414300000004
+      ],
+      [
+       11.971996800000003,
+       57.71035699999999
+      ],
+      [
+       11.972030800000002,
+       57.71029970000001
+      ],
+      [
+       11.9720639,
+       57.710243899999995
+      ],
+      [
+       11.972098200000001,
+       57.710185999999986
+      ],
+      [
+       11.972132300000002,
+       57.71012850000001
+      ],
+      [
+       11.972165500000001,
+       57.710072600000004
+      ],
+      [
+       11.9721995,
+       57.7100153
+      ],
+      [
+       11.972233900000003,
+       57.7099573
+      ],
+      [
+       11.9722687,
+       57.7098988
+      ],
+      [
+       11.972297900000001,
+       57.709849599999984
+      ],
+      [
+       11.972331000000002,
+       57.70979379999999
+      ],
+      [
+       11.972341500000002,
+       57.709776099999985
+      ],
+      [
+       11.972505,
+       57.7098038
+      ],
+      [
+       11.9725686,
+       57.7096967
+      ],
+      [
+       11.9724052,
+       57.7096691
+      ],
+      [
+       11.9724288,
+       57.7096294
+      ],
+      [
+       11.9724458,
+       57.7096007
+      ],
+      [
+       11.972513200000002,
+       57.70961209999999
+      ],
+      [
+       11.972630100000002,
+       57.7096319
+      ],
+      [
+       11.972761100000001,
+       57.7096541
+      ],
+      [
+       11.9727549,
+       57.7096646
+      ],
+      [
+       11.9727738,
+       57.7096678
+      ],
+      [
+       11.9727643,
+       57.7096838
+      ],
+      [
+       11.972754100000001,
+       57.70970099999999
+      ],
+      [
+       11.9727371,
+       57.7096981
+      ],
+      [
+       11.972683600000002,
+       57.70978809999998
+      ],
+      [
+       11.9727271,
+       57.70979550000002
+      ],
+      [
+       11.9727075,
+       57.7098286
+      ],
+      [
+       11.9726638,
+       57.7098212
+      ],
+      [
+       11.9726493,
+       57.7098455
+      ],
+      [
+       11.9726927,
+       57.70985280000002
+      ],
+      [
+       11.9726732,
+       57.709885799999995
+      ],
+      [
+       11.972629600000001,
+       57.7098784
+      ],
+      [
+       11.972615000000001,
+       57.70990279999999
+      ],
+      [
+       11.9726583,
+       57.70991020000001
+      ],
+      [
+       11.9726388,
+       57.70994309999999
+      ],
+      [
+       11.972595499999999,
+       57.7099357
+      ],
+      [
+       11.9725809,
+       57.7099603
+      ],
+      [
+       11.972624000000001,
+       57.70996759999999
+      ],
+      [
+       11.9726044,
+       57.71000070000001
+      ],
+      [
+       11.972560999999999,
+       57.7099933
+      ],
+      [
+       11.9725464,
+       57.710018000000005
+      ],
+      [
+       11.9725898,
+       57.71002540000001
+      ],
+      [
+       11.9725704,
+       57.710058
+      ],
+      [
+       11.972526700000001,
+       57.710050599999995
+      ],
+      [
+       11.972477300000001,
+       57.7101337
+      ],
+      [
+       11.972489400000002,
+       57.710135799999996
+      ],
+      [
+       11.972470500000002,
+       57.710167499999976
+      ],
+      [
+       11.972458399999999,
+       57.7101655
+      ],
+      [
+       11.972409800000001,
+       57.710247200000005
+      ],
+      [
+       11.9724486,
+       57.710253800000004
+      ],
+      [
+       11.972429,
+       57.7102867
+      ],
+      [
+       11.972389900000001,
+       57.710280099999984
+      ],
+      [
+       11.9723751,
+       57.71030490000001
+      ],
+      [
+       11.9724146,
+       57.710311600000004
+      ],
+      [
+       11.9723952,
+       57.71034410000001
+      ],
+      [
+       11.972356100000002,
+       57.71033749999999
+      ],
+      [
+       11.972341500000002,
+       57.710362
+      ],
+      [
+       11.972381100000002,
+       57.710368700000004
+      ],
+      [
+       11.9723613,
+       57.7104019
+      ],
+      [
+       11.9723228,
+       57.710395399999996
+      ],
+      [
+       11.9723087,
+       57.710419
+      ],
+      [
+       11.9723475,
+       57.710425600000015
+      ],
+      [
+       11.972327400000001,
+       57.7104595
+      ],
+      [
+       11.9722881,
+       57.7104528
+      ],
+      [
+       11.9722391,
+       57.710535199999995
+      ],
+      [
+       11.9722472,
+       57.71053659999999
+      ],
+      [
+       11.972239800000002,
+       57.7105491
+      ],
+      [
+       11.9722281,
+       57.7105689
+      ],
+      [
+       11.9722214,
+       57.7105677
+      ],
+      [
+       11.972173,
+       57.7106493
+      ],
+      [
+       11.9720747,
+       57.7108149
+      ],
+      [
+       11.971756999999998,
+       57.7107611
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674700",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "10.5",
+     "roof:shape": "round"
+    },
+    "ground_min_m": 0.14,
+    "ground_median_m": 2.77,
+    "ground_max_m": 2.99,
+    "roof_top_median_m": 9.38,
+    "roof_top_p95_m": 11.11,
+    "laser_points": 3265,
+    "height_above_ground_median_m": 6.61,
+    "height_above_ground_p95_m": 8.34,
+    "top_above_platform_m": 6.47,
+    "base_above_platform_m": -2.77,
+    "source": "Outline OSM w1561674700 (ODbL); roof = median of 3265 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974068999999998,
+       57.70876360000002
+      ],
+      [
+       11.9741176,
+       57.708683699999995
+      ],
+      [
+       11.974334800000001,
+       57.70872139999998
+      ],
+      [
+       11.9743108,
+       57.708759599999986
+      ],
+      [
+       11.9742954,
+       57.70878379999999
+      ],
+      [
+       11.974285,
+       57.70880050000002
+      ],
+      [
+       11.974200600000001,
+       57.7087852
+      ],
+      [
+       11.9741132,
+       57.7087703
+      ],
+      [
+       11.974068999999998,
+       57.70876360000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674713",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "6.5"
+    },
+    "ground_min_m": 2.67,
+    "ground_median_m": 2.75,
+    "ground_max_m": 2.86,
+    "roof_top_median_m": 8.63,
+    "roof_top_p95_m": 9.0,
+    "laser_points": 161,
+    "height_above_ground_median_m": 5.88,
+    "height_above_ground_p95_m": 6.25,
+    "top_above_platform_m": 5.72,
+    "base_above_platform_m": -0.24,
+    "source": "Outline OSM w1561674713 (ODbL); roof = median of 161 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973786900000002,
+       57.70906540000001
+      ],
+      [
+       11.9738267,
+       57.70900040000001
+      ],
+      [
+       11.973836600000002,
+       57.7089906
+      ],
+      [
+       11.9739645,
+       57.709010700000015
+      ],
+      [
+       11.9740187,
+       57.708927100000004
+      ],
+      [
+       11.973890400000002,
+       57.708902499999986
+      ],
+      [
+       11.9738938,
+       57.70889689999999
+      ],
+      [
+       11.973916700000002,
+       57.708859399999994
+      ],
+      [
+       11.973936,
+       57.7088277
+      ],
+      [
+       11.974061100000002,
+       57.70885029999997
+      ],
+      [
+       11.9741132,
+       57.7087703
+      ],
+      [
+       11.974200600000001,
+       57.7087852
+      ],
+      [
+       11.974285,
+       57.70880050000002
+      ],
+      [
+       11.974265700000002,
+       57.708832300000005
+      ],
+      [
+       11.9745758,
+       57.70888610000001
+      ],
+      [
+       11.9774736,
+       57.70939919999999
+      ],
+      [
+       11.9774435,
+       57.709446599999985
+      ],
+      [
+       11.974240800000002,
+       57.708891
+      ],
+      [
+       11.9742098,
+       57.7089462
+      ],
+      [
+       11.977413100000001,
+       57.70949889999999
+      ],
+      [
+       11.9773711,
+       57.7095684
+      ],
+      [
+       11.974162500000002,
+       57.70901409999999
+      ],
+      [
+       11.9741365,
+       57.70906190000001
+      ],
+      [
+       11.977341,
+       57.7096192
+      ],
+      [
+       11.977295499999999,
+       57.709697
+      ],
+      [
+       11.9746422,
+       57.70923760000001
+      ],
+      [
+       11.973780200000002,
+       57.70907629999999
+      ],
+      [
+       11.973786900000002,
+       57.70906540000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674714",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "6.5"
+    },
+    "ground_min_m": 2.11,
+    "ground_median_m": 2.34,
+    "ground_max_m": 3.11,
+    "roof_top_median_m": 8.07,
+    "roof_top_p95_m": 8.6,
+    "laser_points": 6588,
+    "height_above_ground_median_m": 5.73,
+    "height_above_ground_p95_m": 6.26,
+    "top_above_platform_m": 5.16,
+    "base_above_platform_m": -0.8,
+    "source": "Outline OSM w1561674714 (ODbL); roof = median of 6588 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974285,
+       57.70880050000002
+      ],
+      [
+       11.9743108,
+       57.708759599999986
+      ],
+      [
+       11.974617,
+       57.7088137
+      ],
+      [
+       11.9745842,
+       57.7088718
+      ],
+      [
+       11.9745758,
+       57.70888610000001
+      ],
+      [
+       11.974265700000002,
+       57.708832300000005
+      ],
+      [
+       11.974285,
+       57.70880050000002
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674715",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "7",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 2.35,
+    "ground_median_m": 2.74,
+    "ground_max_m": 3.02,
+    "roof_top_median_m": 9.0,
+    "roof_top_p95_m": 9.58,
+    "laser_points": 224,
+    "height_above_ground_median_m": 6.26,
+    "height_above_ground_p95_m": 6.84,
+    "top_above_platform_m": 6.09,
+    "base_above_platform_m": -0.56,
+    "source": "Outline OSM w1561674715 (ODbL); roof = median of 224 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9720178,
+       57.709303000000006
+      ],
+      [
+       11.972265800000002,
+       57.708898600000005
+      ],
+      [
+       11.972298900000002,
+       57.7088439
+      ],
+      [
+       11.9723451,
+       57.708851900000006
+      ],
+      [
+       11.9723639,
+       57.708824300000025
+      ],
+      [
+       11.9723859,
+       57.70878799999998
+      ],
+      [
+       11.972406900000001,
+       57.70875359999999
+      ],
+      [
+       11.972594600000003,
+       57.708786099999976
+      ],
+      [
+       11.972773699999998,
+       57.7088172
+      ],
+      [
+       11.9729291,
+       57.70884410000001
+      ],
+      [
+       11.9729719,
+       57.70885160000001
+      ],
+      [
+       11.973037300000001,
+       57.70886249999999
+      ],
+      [
+       11.973091300000002,
+       57.70887200000001
+      ],
+      [
+       11.9732253,
+       57.70889540000001
+      ],
+      [
+       11.9734288,
+       57.7089309
+      ],
+      [
+       11.9735307,
+       57.70894869999999
+      ],
+      [
+       11.9738267,
+       57.70900040000001
+      ],
+      [
+       11.973786900000002,
+       57.70906540000001
+      ],
+      [
+       11.973780200000002,
+       57.70907629999999
+      ],
+      [
+       11.9737744,
+       57.70908580000001
+      ],
+      [
+       11.9731735,
+       57.7089812
+      ],
+      [
+       11.972946,
+       57.709353199999995
+      ],
+      [
+       11.9728886,
+       57.709343200000006
+      ],
+      [
+       11.9728465,
+       57.709411999999986
+      ],
+      [
+       11.9729046,
+       57.7094222
+      ],
+      [
+       11.9728764,
+       57.7094684
+      ],
+      [
+       11.972836100000002,
+       57.709534199999986
+      ],
+      [
+       11.972761100000001,
+       57.7096541
+      ],
+      [
+       11.972630100000002,
+       57.7096319
+      ],
+      [
+       11.972513200000002,
+       57.70961209999999
+      ],
+      [
+       11.9724458,
+       57.7096007
+      ],
+      [
+       11.9721264,
+       57.709542600000006
+      ],
+      [
+       11.9718958,
+       57.7095021
+      ],
+      [
+       11.971986,
+       57.70935490000001
+      ],
+      [
+       11.9719895,
+       57.70934890000002
+      ],
+      [
+       11.9720178,
+       57.709303000000006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674716",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes"
+    },
+    "ground_min_m": 2.21,
+    "ground_median_m": 2.67,
+    "ground_max_m": 2.99,
+    "roof_top_median_m": 20.6,
+    "roof_top_p95_m": 27.64,
+    "laser_points": 6611,
+    "height_above_ground_median_m": 17.93,
+    "height_above_ground_p95_m": 24.97,
+    "top_above_platform_m": 17.69,
+    "base_above_platform_m": -0.7,
+    "source": "Outline OSM w1561674716 (ODbL); roof = median of 6611 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9737744,
+       57.70908580000001
+      ],
+      [
+       11.9737252,
+       57.709174799999985
+      ],
+      [
+       11.973688500000002,
+       57.70923519999997
+      ],
+      [
+       11.9736328,
+       57.70932700000001
+      ],
+      [
+       11.973598200000001,
+       57.70938399999999
+      ],
+      [
+       11.9735415,
+       57.70947730000001
+      ],
+      [
+       11.973504300000002,
+       57.70953850000001
+      ],
+      [
+       11.973443500000002,
+       57.70963869999998
+      ],
+      [
+       11.9734062,
+       57.7097002
+      ],
+      [
+       11.9733708,
+       57.7097585
+      ],
+      [
+       11.973071500000001,
+       57.70970669999999
+      ],
+      [
+       11.973003000000004,
+       57.709694799999966
+      ],
+      [
+       11.972903000000002,
+       57.7096775
+      ],
+      [
+       11.972827600000002,
+       57.709664399999994
+      ],
+      [
+       11.972761100000001,
+       57.7096541
+      ],
+      [
+       11.972836100000002,
+       57.709534199999986
+      ],
+      [
+       11.9728764,
+       57.7094684
+      ],
+      [
+       11.9729046,
+       57.7094222
+      ],
+      [
+       11.9728465,
+       57.709411999999986
+      ],
+      [
+       11.9728886,
+       57.709343200000006
+      ],
+      [
+       11.972946,
+       57.709353199999995
+      ],
+      [
+       11.9731735,
+       57.7089812
+      ],
+      [
+       11.9737744,
+       57.70908580000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674717",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "23.5"
+    },
+    "ground_min_m": 2.01,
+    "ground_median_m": 2.66,
+    "ground_max_m": 2.99,
+    "roof_top_median_m": 25.09,
+    "roof_top_p95_m": 27.34,
+    "laser_points": 4319,
+    "height_above_ground_median_m": 22.43,
+    "height_above_ground_p95_m": 24.68,
+    "top_above_platform_m": 22.18,
+    "base_above_platform_m": -0.9,
+    "source": "Outline OSM w1561674717 (ODbL); roof = median of 4319 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9732783,
+       57.70941880000001
+      ],
+      [
+       11.9732165,
+       57.7095197
+      ],
+      [
+       11.972925300000002,
+       57.70946879999999
+      ],
+      [
+       11.972988200000001,
+       57.709365999999996
+      ],
+      [
+       11.9732783,
+       57.70941880000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674718",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "25.5"
+    },
+    "ground_min_m": 2.78,
+    "ground_median_m": 2.83,
+    "ground_max_m": 2.84,
+    "roof_top_median_m": 27.32,
+    "roof_top_p95_m": 27.38,
+    "laser_points": 305,
+    "height_above_ground_median_m": 24.49,
+    "height_above_ground_p95_m": 24.55,
+    "top_above_platform_m": 24.41,
+    "base_above_platform_m": -0.13,
+    "source": "Outline OSM w1561674718 (ODbL); roof = median of 305 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973391400000002,
+       57.709242199999984
+      ],
+      [
+       11.973331700000001,
+       57.70933959999999
+      ],
+      [
+       11.9730462,
+       57.7092897
+      ],
+      [
+       11.973106,
+       57.70919210000001
+      ],
+      [
+       11.973391400000002,
+       57.709242199999984
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1561674719",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "height": "25.5"
+    },
+    "ground_min_m": 2.7,
+    "ground_median_m": 2.76,
+    "ground_max_m": 2.8,
+    "roof_top_median_m": 27.33,
+    "roof_top_p95_m": 27.38,
+    "laser_points": 269,
+    "height_above_ground_median_m": 24.57,
+    "height_above_ground_p95_m": 24.62,
+    "top_above_platform_m": 24.42,
+    "base_above_platform_m": -0.21,
+    "source": "Outline OSM w1561674719 (ODbL); roof = median of 269 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973607000000001,
+       57.71192039999998
+      ],
+      [
+       11.973624,
+       57.711907200000006
+      ],
+      [
+       11.973694800000002,
+       57.71193309999998
+      ],
+      [
+       11.973677800000003,
+       57.7119463
+      ],
+      [
+       11.973607000000001,
+       57.71192039999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1567433670",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 0.65,
+    "ground_median_m": 1.02,
+    "ground_max_m": 1.38,
+    "laser_points": 0,
+    "source": "Outline OSM w1567433670 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973224,
+       57.711979
+      ],
+      [
+       11.973241,
+       57.71196570000001
+      ],
+      [
+       11.973311800000001,
+       57.71199159999998
+      ],
+      [
+       11.9732948,
+       57.712004900000004
+      ],
+      [
+       11.973224,
+       57.711979
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1567433671",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 1.03,
+    "ground_median_m": 1.16,
+    "ground_max_m": 1.22,
+    "laser_points": 0,
+    "source": "Outline OSM w1567433671 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9728734,
+       57.71185069999999
+      ],
+      [
+       11.9728904,
+       57.7118374
+      ],
+      [
+       11.9729612,
+       57.71186329999999
+      ],
+      [
+       11.972944200000002,
+       57.7118766
+      ],
+      [
+       11.9728734,
+       57.71185069999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1567433672",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 1.83,
+    "ground_median_m": 2.14,
+    "ground_max_m": 2.37,
+    "laser_points": 0,
+    "source": "Outline OSM w1567433672 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.9732259,
+       57.7117828
+      ],
+      [
+       11.9732429,
+       57.7117696
+      ],
+      [
+       11.9733137,
+       57.7117954
+      ],
+      [
+       11.9732967,
+       57.711808699999985
+      ],
+      [
+       11.9732259,
+       57.7117828
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1567433674",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 1.41,
+    "ground_median_m": 1.84,
+    "ground_max_m": 2.94,
+    "laser_points": 0,
+    "source": "Outline OSM w1567433674 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.97460343425509,
+       57.70885481771734
+      ],
+      [
+       11.974586675812688,
+       57.70885441695322
+      ],
+      [
+       11.974583680828891,
+       57.708890296726935
+      ],
+      [
+       11.97471774851277,
+       57.70889350278226
+      ],
+      [
+       11.974716999798767,
+       57.70890247272674
+      ],
+      [
+       11.974750516732446,
+       57.708903274218684
+      ],
+      [
+       11.974765777795403,
+       57.70892161485106
+      ],
+      [
+       11.974899096947668,
+       57.708933790660645
+      ],
+      [
+       11.974898348277339,
+       57.708942760606575
+      ],
+      [
+       11.974965382232135,
+       57.708944363486275
+      ],
+      [
+       11.974964633577892,
+       57.708953333432746
+      ],
+      [
+       11.975031667556323,
+       57.708954936277564
+      ],
+      [
+       11.975030918918163,
+       57.70896390622455
+      ],
+      [
+       11.975113962803913,
+       57.7089748796791
+      ],
+      [
+       11.975113214185525,
+       57.70898384962673
+      ],
+      [
+       11.975180248229536,
+       57.70898545239343
+      ],
+      [
+       11.975179499627233,
+       57.70899442234161
+      ],
+      [
+       11.9752297751773,
+       57.708995624393765
+      ],
+      [
+       11.975229026586948,
+       57.709004594342346
+      ],
+      [
+       11.975312819199942,
+       57.709006597719
+      ],
+      [
+       11.97532808059142,
+       57.70902493828645
+      ],
+      [
+       11.975445390329227,
+       57.70902774290708
+      ],
+      [
+       11.97544464179126,
+       57.70903671285739
+      ],
+      [
+       11.975478158871468,
+       57.70903751415792
+      ],
+      [
+       11.97547741034132,
+       57.70904648410849
+      ],
+      [
+       11.975610730215438,
+       57.709058659174666
+      ],
+      [
+       11.975609981717458,
+       57.70906762912631
+      ],
+      [
+       11.97566025738895,
+       57.70906883100854
+      ],
+      [
+       11.975659508902924,
+       57.709077800960564
+      ],
+      [
+       11.975726543154325,
+       57.7090794034397
+      ],
+      [
+       11.975725794684383,
+       57.70908837339228
+      ],
+      [
+       11.975759311821013,
+       57.70908917461883
+      ],
+      [
+       11.975758563358891,
+       57.70909814457165
+      ],
+      [
+       11.9758423562289,
+       57.70910014759994
+      ],
+      [
+       11.975841607786995,
+       57.709109117553425
+      ],
+      [
+       11.975908642107527,
+       57.70911071993671
+      ],
+      [
+       11.975907893681706,
+       57.709119689890734
+      ],
+      [
+       11.976025203788662,
+       57.70912249397714
+      ],
+      [
+       11.97602445539132,
+       57.709131463932124
+      ],
+      [
+       11.976074731170502,
+       57.70913266565061
+      ],
+      [
+       11.976073982785113,
+       57.709141635605974
+      ],
+      [
+       11.97612425858069,
+       57.709142837304924
+      ],
+      [
+       11.976123510207252,
+       57.7091518072607
+      ],
+      [
+       11.976173786019222,
+       57.70915300894013
+      ],
+      [
+       11.97617303765774,
+       57.70916197889629
+      ],
+      [
+       11.976306358213384,
+       57.70917415323559
+      ],
+      [
+       11.976305609884067,
+       57.70918312319283
+      ],
+      [
+       11.976339127126169,
+       57.709183924266725
+      ],
+      [
+       11.97635438911271,
+       57.70920226471559
+      ],
+      [
+       11.976371147743135,
+       57.70920266524727
+      ],
+      [
+       11.976371896056813,
+       57.70919369528952
+      ],
+      [
+       11.976422171938351,
+       57.709194896870876
+      ],
+      [
+       11.976424416839524,
+       57.70916798699627
+      ],
+      [
+       11.976390899609513,
+       57.709167185945084
+      ],
+      [
+       11.97639164791728,
+       57.70915821598713
+      ],
+      [
+       11.976358130697308,
+       57.70915741492735
+      ],
+      [
+       11.976358879012897,
+       57.709148444969635
+      ],
+      [
+       11.976275085991402,
+       57.70914644228211
+      ],
+      [
+       11.976275834327206,
+       57.70913747232509
+      ],
+      [
+       11.97624231712998,
+       57.70913667123484
+      ],
+      [
+       11.976243065473604,
+       57.70912770127804
+      ],
+      [
+       11.976092986525634,
+       57.7091151263079
+      ],
+      [
+       11.97609373490556,
+       57.70910615635234
+      ],
+      [
+       11.976060217742898,
+       57.70910535521416
+      ],
+      [
+       11.976060966130643,
+       57.709096385258846
+      ],
+      [
+       11.975960414678111,
+       57.70909398179195
+      ],
+      [
+       11.975961163090204,
+       57.70908501183746
+      ],
+      [
+       11.975927645951177,
+       57.70908421066437
+      ],
+      [
+       11.975928394371092,
+       57.70907524071012
+      ],
+      [
+       11.975795074318333,
+       57.70906306597708
+      ],
+      [
+       11.975795822770417,
+       57.7090540960239
+      ],
+      [
+       11.975696019936125,
+       57.7090427223952
+      ],
+      [
+       11.975696768412112,
+       57.70903375244281
+      ],
+      [
+       11.975663251328621,
+       57.70903295120018
+      ],
+      [
+       11.975663999812426,
+       57.70902398124805
+      ],
+      [
+       11.9755969656673,
+       57.709022378736776
+      ],
+      [
+       11.975597714167192,
+       57.70901340878517
+      ],
+      [
+       11.9755306800457,
+       57.709011806238976
+      ],
+      [
+       11.975531428561675,
+       57.70900283628793
+      ],
+      [
+       11.975464394463822,
+       57.70900123370683
+      ],
+      [
+       11.97546514299588,
+       57.70899226375631
+      ],
+      [
+       11.975364591887217,
+       57.708989859819
+      ],
+      [
+       11.975365340443624,
+       57.70898088986929
+      ],
+      [
+       11.975315064907686,
+       57.708979687871135
+      ],
+      [
+       11.975316562043961,
+       57.70896174797247
+      ],
+      [
+       11.975249528035318,
+       57.70896014527835
+      ],
+      [
+       11.975250276619319,
+       57.708951175329524
+      ],
+      [
+       11.975116957273027,
+       57.70893899988829
+      ],
+      [
+       11.975117705889193,
+       57.70893002994055
+      ],
+      [
+       11.975017154985261,
+       57.70892762572899
+      ],
+      [
+       11.975001893791678,
+       57.708909285125706
+      ],
+      [
+       11.974951618371833,
+       57.7089080829842
+      ],
+      [
+       11.974952367027988,
+       57.70889911303777
+      ],
+      [
+       11.97486857469113,
+       57.70889710942494
+      ],
+      [
+       11.9748693233675,
+       57.70888813947921
+      ],
+      [
+       11.974819047983111,
+       57.708886937285314
+      ],
+      [
+       11.974819796671435,
+       57.70887796733998
+      ],
+      [
+       11.97476952130344,
+       57.70887676512657
+      ],
+      [
+       11.974770270003717,
+       57.70886779518162
+      ],
+      [
+       11.974669719304517,
+       57.70886539069581
+      ],
+      [
+       11.974671216753318,
+       57.70884745080749
+      ],
+      [
+       11.974604182995797,
+       57.708845847773716
+      ],
+      [
+       11.97460343425509,
+       57.70885481771734
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 6.63,
+    "top_p10_m": 6.12,
+    "top_p90_m": 6.74,
+    "laser_points": 560,
+    "top_above_platform_m": 3.72,
+    "area_m2": 480.0,
+    "underside_m": null,
+    "multi_return_share": 0.14,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0",
+    "ground_min_m": 2.24,
+    "ground_median_m": 2.54,
+    "ground_max_m": 2.84
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974461890008369,
+       57.70894131742952
+      ],
+      [
+       11.974476403196986,
+       57.70896861566438
+      ],
+      [
+       11.974537183722902,
+       57.70897048591407
+      ],
+      [
+       11.974542688414132,
+       57.70897918871086
+      ],
+      [
+       11.974603468962236,
+       57.70898105892891
+      ],
+      [
+       11.9746912687553,
+       57.70900970539784
+      ],
+      [
+       11.974750188658646,
+       57.70901122417413
+      ],
+      [
+       11.974757554113602,
+       57.709020278333014
+      ],
+      [
+       11.97481833474506,
+       57.7090221484486
+      ],
+      [
+       11.974823839511629,
+       57.70903085123381
+      ],
+      [
+       11.974900464465323,
+       57.70903292189517
+      ],
+      [
+       11.974922893349392,
+       57.709051195493544
+      ],
+      [
+       11.974998571873533,
+       57.70905311487538
+      ],
+      [
+       11.975055464399853,
+       57.70907234108942
+      ],
+      [
+       11.975132089459073,
+       57.70907441161148
+      ],
+      [
+       11.975154518486253,
+       57.709092685170035
+      ],
+      [
+       11.975197428589462,
+       57.70908483309946
+      ],
+      [
+       11.975254298156203,
+       57.709104058672764
+      ],
+      [
+       11.975264284837987,
+       57.70908502066859
+      ],
+      [
+       11.975287838409997,
+       57.70910486057696
+      ],
+      [
+       11.975353375562722,
+       57.70912440315221
+      ],
+      [
+       11.975495340069424,
+       57.70913689483079
+      ],
+      [
+       11.975552232996678,
+       57.70915612082503
+      ],
+      [
+       11.975602485670837,
+       57.709157322178676
+      ],
+      [
+       11.975619992767166,
+       57.70914875285809
+      ],
+      [
+       11.975621488729919,
+       57.70913082532826
+      ],
+      [
+       11.975544863513734,
+       57.70912875510118
+      ],
+      [
+       11.975522434265761,
+       57.709110481609834
+      ],
+      [
+       11.975411611530829,
+       57.70910108695575
+      ],
+      [
+       11.975389862787855,
+       57.709089336499396
+      ],
+      [
+       11.975329082005228,
+       57.70908746665702
+      ],
+      [
+       11.975323577108481,
+       57.70907876389261
+      ],
+      [
+       11.975263860094861,
+       57.709078521009516
+      ],
+      [
+       11.975257291468829,
+       57.709068191251475
+      ],
+      [
+       11.975147897927988,
+       57.709056349477954
+      ],
+      [
+       11.975091951856237,
+       57.70903727452453
+      ],
+      [
+       11.97504545807502,
+       57.70904490215386
+      ],
+      [
+       11.975042424892427,
+       57.709027102470124
+      ],
+      [
+       11.974949190915169,
+       57.709026058023575
+      ],
+      [
+       11.974942622388358,
+       57.70901572825007
+      ],
+      [
+       11.974865831919677,
+       57.70900448752071
+      ],
+      [
+       11.974860327146759,
+       57.70899578473725
+      ],
+      [
+       11.974717416956532,
+       57.70898314113119
+      ],
+      [
+       11.974678229723567,
+       57.70896446674515
+      ],
+      [
+       11.974601604931626,
+       57.70896239595069
+      ],
+      [
+       11.974545659298755,
+       57.708943320759566
+      ],
+      [
+       11.974500853620178,
+       57.708943046476136
+      ],
+      [
+       11.974496132622857,
+       57.70893314849388
+      ],
+      [
+       11.974461890008369,
+       57.70894131742952
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (71.1 m × 2.7 m)",
+    "top_median_m": 6.15,
+    "top_above_track_bed_m": 3.8,
+    "laser_points": 258,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976412594332174,
+       57.70991356293845
+      ],
+      [
+       11.976512141931103,
+       57.70992506224638
+      ],
+      [
+       11.976524651391221,
+       57.70991504020657
+      ],
+      [
+       11.976528411522775,
+       57.7099344327071
+      ],
+      [
+       11.976578665320353,
+       57.70993563368349
+      ],
+      [
+       11.976589938111646,
+       57.70992554275347
+      ],
+      [
+       11.976612206383976,
+       57.70993643524415
+      ],
+      [
+       11.97665701333107,
+       57.70993670879175
+      ],
+      [
+       11.976661735042713,
+       57.7099466066989
+      ],
+      [
+       11.976754971478186,
+       57.70994764990643
+      ],
+      [
+       11.9767775514352,
+       57.70996735003217
+      ],
+      [
+       11.976819909619174,
+       57.70995697318913
+      ],
+      [
+       11.97696188454712,
+       57.70997175460955
+      ],
+      [
+       11.976973149933606,
+       57.70996166366201
+      ],
+      [
+       11.9769779111633,
+       57.70998112559574
+      ],
+      [
+       11.977103690721703,
+       57.70998282993604
+      ],
+      [
+       11.977111235021185,
+       57.7099932991169
+      ],
+      [
+       11.977161488927326,
+       57.70999449986278
+      ],
+      [
+       11.977190268715256,
+       57.709975839342896
+      ],
+      [
+       11.977195030063402,
+       57.70999530126957
+      ],
+      [
+       11.977254699829446,
+       57.709987848932066
+      ],
+      [
+       11.977294836020215,
+       57.71000667374388
+      ],
+      [
+       11.977378607989639,
+       57.71000867522302
+      ],
+      [
+       11.977403608565721,
+       57.70999892085689
+      ],
+      [
+       11.97746165502041,
+       57.7100196471647
+      ],
+      [
+       11.977467629462726,
+       57.71000058652315
+      ],
+      [
+       11.977479177948075,
+       57.71001107777388
+      ],
+      [
+       11.977612998489459,
+       57.710014281182154
+      ],
+      [
+       11.977624506824643,
+       57.710004189591785
+      ],
+      [
+       11.977629268409704,
+       57.71002365150429
+      ],
+      [
+       11.977696281412808,
+       57.71002525240487
+      ],
+      [
+       11.977698524408964,
+       57.709998354875644
+      ],
+      [
+       11.977554392695318,
+       57.70999725882107
+      ],
+      [
+       11.977514923283529,
+       57.7099849808334
+      ],
+      [
+       11.977421686711569,
+       57.70998393818472
+      ],
+      [
+       11.977414882539938,
+       57.7099735967245
+      ],
+      [
+       11.977364863422443,
+       57.709972407887605
+      ],
+      [
+       11.977339862854715,
+       57.70998216224619
+      ],
+      [
+       11.977331322302279,
+       57.70997160652601
+      ],
+      [
+       11.977238882693756,
+       57.70996928810223
+      ],
+      [
+       11.977231516429251,
+       57.70996023408124
+      ],
+      [
+       11.9770722189575,
+       57.709957728990936
+      ],
+      [
+       11.97706467467642,
+       57.709947259807905
+      ],
+      [
+       11.976903784226705,
+       57.70994576257122
+      ],
+      [
+       11.976881074073647,
+       57.709933884850514
+      ],
+      [
+       11.976820291775566,
+       57.70993201571046
+      ],
+      [
+       11.976814786397126,
+       57.709923313007316
+      ],
+      [
+       11.976753701645817,
+       57.7099331883517
+      ],
+      [
+       11.976729463655,
+       57.70992776268447
+      ],
+      [
+       11.976731739796032,
+       57.709912340644905
+      ],
+      [
+       11.976473385453241,
+       57.70988949193055
+      ],
+      [
+       11.976465841359857,
+       57.709879022713466
+      ],
+      [
+       11.976415587645931,
+       57.70987782169301
+      ],
+      [
+       11.976412594332174,
+       57.70991356293845
+      ]
+     ],
+     [
+      [
+       11.97732658219162,
+       57.709999805036155
+      ],
+      [
+       11.977314786017391,
+       57.70999012848285
+      ],
+      [
+       11.977330629946524,
+       57.70999205251054
+      ],
+      [
+       11.97732658219162,
+       57.709999805036155
+      ]
+     ],
+     [
+      [
+       11.977060688357808,
+       57.709966486240326
+      ],
+      [
+       11.977048886436279,
+       57.709956811766524
+      ],
+      [
+       11.977064182967222,
+       57.70995828200503
+      ],
+      [
+       11.977060688357808,
+       57.709966486240326
+      ]
+     ],
+     [
+      [
+       11.976462496411813,
+       57.70991474665525
+      ],
+      [
+       11.976464996838594,
+       57.70989887673392
+      ],
+      [
+       11.976477808869843,
+       57.70989619628959
+      ],
+      [
+       11.976478979126881,
+       57.70991337713778
+      ],
+      [
+       11.976462496411813,
+       57.70991474665525
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (77.9 m × 3.4 m)",
+    "top_median_m": 5.88,
+    "top_above_track_bed_m": 3.7,
+    "laser_points": 168,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.973799885687631,
+       57.709428803427414
+      ],
+      [
+       11.97379763985016,
+       57.70945570086234
+      ],
+      [
+       11.973891189631546,
+       57.7094673431063
+      ],
+      [
+       11.973912704027395,
+       57.709485416724974
+      ],
+      [
+       11.97395543691577,
+       57.70947614992692
+      ],
+      [
+       11.973962980199135,
+       57.70948661928653
+      ],
+      [
+       11.974029007282176,
+       57.70949719261498
+      ],
+      [
+       11.974042500074855,
+       57.709487293587465
+      ],
+      [
+       11.974045276032935,
+       57.70950656338757
+      ],
+      [
+       11.97410657227149,
+       57.709505786822525
+      ],
+      [
+       11.974161089450705,
+       57.7095273090893
+      ],
+      [
+       11.974221870891155,
+       57.709529179499114
+      ],
+      [
+       11.974227375586599,
+       57.709537882309036
+      ],
+      [
+       11.974260877285422,
+       57.70953868336588
+      ],
+      [
+       11.97427508181988,
+       57.709528959711335
+      ],
+      [
+       11.974276903004178,
+       57.70954805468623
+      ],
+      [
+       11.974323397586604,
+       57.70954042734754
+      ],
+      [
+       11.974326430450102,
+       57.70955822704432
+      ],
+      [
+       11.974343166096087,
+       57.709558627293084
+      ],
+      [
+       11.974354128350754,
+       57.709539728902136
+      ],
+      [
+       11.974392716693348,
+       57.70956880017837
+      ],
+      [
+       11.974433446033684,
+       57.70955941389728
+      ],
+      [
+       11.974442993002928,
+       57.709570002550436
+      ],
+      [
+       11.974519469579503,
+       57.709570646606984
+      ],
+      [
+       11.974574816874727,
+       57.709600118605394
+      ],
+      [
+       11.974686389631952,
+       57.70960054406103
+      ],
+      [
+       11.974709666683454,
+       57.70960584258578
+      ],
+      [
+       11.974707389706913,
+       57.70962126458159
+      ],
+      [
+       11.974750122562366,
+       57.70961199751495
+      ],
+      [
+       11.974757666103804,
+       57.709622466829394
+      ],
+      [
+       11.97483445783954,
+       57.70963370763564
+      ],
+      [
+       11.974839962697986,
+       57.70964241042034
+      ],
+      [
+       11.974890223323507,
+       57.709643612045596
+      ],
+      [
+       11.974902490015193,
+       57.7096335907472
+      ],
+      [
+       11.97490624925311,
+       57.709652983288144
+      ],
+      [
+       11.974973261403171,
+       57.7096545856233
+      ],
+      [
+       11.974975506386219,
+       57.709627688160026
+      ],
+      [
+       11.974959496256206,
+       57.70961831749633
+      ],
+      [
+       11.974909235662516,
+       57.70961711589887
+      ],
+      [
+       11.974895986165714,
+       57.70962701444234
+      ],
+      [
+       11.97489320974768,
+       57.70960774465683
+      ],
+      [
+       11.974717528300367,
+       57.709585329624325
+      ],
+      [
+       11.974678340426664,
+       57.709566655233665
+      ],
+      [
+       11.974661604771796,
+       57.709566255029166
+      ],
+      [
+       11.974650642668069,
+       57.70958515344811
+      ],
+      [
+       11.974628064110803,
+       57.70956545295509
+      ],
+      [
+       11.974485151771008,
+       57.70955280906704
+      ],
+      [
+       11.974396436605682,
+       57.70952396229445
+      ],
+      [
+       11.974335774923624,
+       57.70952352787635
+      ],
+      [
+       11.974330150442844,
+       57.70951338916306
+      ],
+      [
+       11.97418738789591,
+       57.70950217178766
+      ],
+      [
+       11.974164809643359,
+       57.709482471214635
+      ],
+      [
+       11.974105091990733,
+       57.709482227778345
+      ],
+      [
+       11.974098523627596,
+       57.7094718979632
+      ],
+      [
+       11.974048263276703,
+       57.70947069602593
+      ],
+      [
+       11.974035013602645,
+       57.7094805944777
+      ],
+      [
+       11.97403223765156,
+       57.709461324677385
+      ],
+      [
+       11.973999469132247,
+       57.70945155305272
+      ],
+      [
+       11.973923789849774,
+       57.70944963306598
+      ],
+      [
+       11.973899924735836,
+       57.70944017799674
+      ],
+      [
+       11.973872098551047,
+       57.70945085366978
+      ],
+      [
+       11.973866897355151,
+       57.709430406344154
+      ],
+      [
+       11.973799885687631,
+       57.709428803427414
+      ]
+     ],
+     [
+      [
+       11.974825779797682,
+       57.709622826121716
+      ],
+      [
+       11.97483994305432,
+       57.70961410995877
+      ],
+      [
+       11.974842034206427,
+       57.70962243815038
+      ],
+      [
+       11.974825779797682,
+       57.709622826121716
+      ]
+     ],
+     [
+      [
+       11.97474482847423,
+       57.70959616018341
+      ],
+      [
+       11.974761760671367,
+       57.70960332659749
+      ],
+      [
+       11.974746200881018,
+       57.70960444585075
+      ],
+      [
+       11.97474482847423,
+       57.70959616018341
+      ]
+     ],
+     [
+      [
+       11.974193009114481,
+       57.709518562980584
+      ],
+      [
+       11.974176724646613,
+       57.70951098218713
+      ],
+      [
+       11.974192284411997,
+       57.70950986300368
+      ],
+      [
+       11.974193009114481,
+       57.709518562980584
+      ]
+     ],
+     [
+      [
+       11.974093874508075,
+       57.7094974626264
+      ],
+      [
+       11.974111374081659,
+       57.709490702706105
+      ],
+      [
+       11.974109202496868,
+       57.70949933341114
+      ],
+      [
+       11.974093874508075,
+       57.7094974626264
+      ]
+     ],
+     [
+      [
+       11.973950143193813,
+       57.70946031256535
+      ],
+      [
+       11.973967094054808,
+       57.709467466691585
+      ],
+      [
+       11.973951515414553,
+       57.709468598239674
+      ],
+      [
+       11.973950143193813,
+       57.70946031256535
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (73.3 m × 3.2 m)",
+    "top_median_m": 5.91,
+    "top_above_track_bed_m": 3.71,
+    "laser_points": 165,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974466668043402,
+       57.70908523728726
+      ],
+      [
+       11.974481930068027,
+       57.709103565579404
+      ],
+      [
+       11.974541796591287,
+       57.70910523567795
+      ],
+      [
+       11.974548215532344,
+       57.70911413862513
+      ],
+      [
+       11.974641764695432,
+       57.70912578030861
+      ],
+      [
+       11.974647269434264,
+       57.709134483101124
+      ],
+      [
+       11.974706189537725,
+       57.7091360018998
+      ],
+      [
+       11.974713555005923,
+       57.70914505606121
+      ],
+      [
+       11.974774335843415,
+       57.70914692619987
+      ],
+      [
+       11.974779840617309,
+       57.70915562898693
+      ],
+      [
+       11.9748732244178,
+       57.70915810040715
+      ],
+      [
+       11.974961939087972,
+       57.70918694684195
+      ],
+      [
+       11.975038564382007,
+       57.70918901742289
+      ],
+      [
+       11.975094510656414,
+       57.70920809240151
+      ],
+      [
+       11.97513931667403,
+       57.70920836647787
+      ],
+      [
+       11.975144037881117,
+       57.70921826443778
+      ],
+      [
+       11.975203904634569,
+       57.70921993422512
+      ],
+      [
+       11.975259851045593,
+       57.709239009131835
+      ],
+      [
+       11.975319717840435,
+       57.70924067886475
+      ],
+      [
+       11.975326136996742,
+       57.70924958177439
+      ],
+      [
+       11.975501817228215,
+       57.709271995950935
+      ],
+      [
+       11.975508236434845,
+       57.70928089885177
+      ],
+      [
+       11.975601620625332,
+       57.7092833697379
+      ],
+      [
+       11.975607291353171,
+       57.7093012425852
+      ],
+      [
+       11.975723830420373,
+       57.70931301635522
+      ],
+      [
+       11.975710064638042,
+       57.70927674830228
+      ],
+      [
+       11.975633439106828,
+       57.7092746781259
+      ],
+      [
+       11.975577492439287,
+       57.70925560338207
+      ],
+      [
+       11.975516711365472,
+       57.70925373362712
+      ],
+      [
+       11.975478437662323,
+       57.709235259626546
+      ],
+      [
+       11.975385203126608,
+       57.70923421549609
+      ],
+      [
+       11.975378634439052,
+       57.709223885743974
+      ],
+      [
+       11.975317853431804,
+       57.7092220158941
+      ],
+      [
+       11.975246811229363,
+       57.7091937705316
+      ],
+      [
+       11.975183558665277,
+       57.70920099752944
+      ],
+      [
+       11.975180525404253,
+       57.70918319784859
+      ],
+      [
+       11.975020855758627,
+       57.7091701538884
+      ],
+      [
+       11.97501443669123,
+       57.70916125096402
+      ],
+      [
+       11.974968717509288,
+       57.70915924274294
+      ],
+      [
+       11.974948899661126,
+       57.70914170821442
+      ],
+      [
+       11.974888284373737,
+       57.709149008253306
+      ],
+      [
+       11.974881865342693,
+       57.70914010532253
+      ],
+      [
+       11.974836205540642,
+       57.70913954321917
+      ],
+      [
+       11.974816328424199,
+       57.70912056250526
+      ],
+      [
+       11.974738274273218,
+       57.709120938675355
+      ],
+      [
+       11.974716525740673,
+       57.709109188105245
+      ],
+      [
+       11.974671719853808,
+       57.70910891388035
+      ],
+      [
+       11.974666998789525,
+       57.709099015904044
+      ],
+      [
+       11.974622976594375,
+       57.709097546477196
+      ],
+      [
+       11.974617471866724,
+       57.70908884368371
+      ],
+      [
+       11.974573449686494,
+       57.70908737423978
+      ],
+      [
+       11.974567944972272,
+       57.70907867144423
+      ],
+      [
+       11.974484175367621,
+       57.709076668125974
+      ],
+      [
+       11.974466668043402,
+       57.70908523728726
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (78.1 m × 2.5 m)",
+    "top_median_m": 6.28,
+    "top_above_track_bed_m": 3.97,
+    "laser_points": 255,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.97306380788466,
+       57.70979767184135
+      ],
+      [
+       11.973063059768965,
+       57.70980662939748
+      ],
+      [
+       11.973121980873078,
+       57.70980814894352
+      ],
+      [
+       11.973160404944112,
+       57.70981992409624
+      ],
+      [
+       11.973143108418155,
+       57.70985348387555
+      ],
+      [
+       11.973285871982679,
+       57.70986470243879
+      ],
+      [
+       11.973308449983469,
+       57.709884403165326
+      ],
+      [
+       11.973369746865124,
+       57.70988362696352
+      ],
+      [
+       11.97342426415707,
+       57.70990514954793
+      ],
+      [
+       11.973451264784204,
+       57.70989544379619
+      ],
+      [
+       11.973474540887851,
+       57.70990635230887
+      ],
+      [
+       11.973519078894471,
+       57.70990517511693
+      ],
+      [
+       11.973606365135312,
+       57.70993646937541
+      ],
+      [
+       11.97379865701985,
+       57.70995785998823
+      ],
+      [
+       11.973805225380461,
+       57.70996818981829
+      ],
+      [
+       11.973864943826866,
+       57.709968433403716
+      ],
+      [
+       11.973871512208294,
+       57.70997876323052
+      ],
+      [
+       11.973914621185939,
+       57.709980032773245
+      ],
+      [
+       11.973970568059347,
+       57.70999910825275
+      ],
+      [
+       11.974114911052467,
+       57.71000930586031
+      ],
+      [
+       11.9741694289841,
+       57.710030828129305
+      ],
+      [
+       11.974228350515876,
+       57.710032347164
+      ],
+      [
+       11.974235716038468,
+       57.71004140135274
+      ],
+      [
+       11.974301980014728,
+       57.710051973988904
+      ],
+      [
+       11.974304974378445,
+       57.71001610660454
+      ],
+      [
+       11.974288964256386,
+       57.71000673585651
+      ],
+      [
+       11.974229096261228,
+       57.71000506562445
+      ],
+      [
+       11.974189908197618,
+       57.70998639108166
+      ],
+      [
+       11.974130986742688,
+       57.70998487202977
+      ],
+      [
+       11.97412338648728,
+       57.70997580602108
+      ],
+      [
+       11.97407976337234,
+       57.70998351830136
+      ],
+      [
+       11.97405733435706,
+       57.709965244554425
+      ],
+      [
+       11.973931329069805,
+       57.70995442771357
+      ],
+      [
+       11.973924760675402,
+       57.70994409788972
+      ],
+      [
+       11.973864892806128,
+       57.70994242748646
+      ],
+      [
+       11.973858473894163,
+       57.70993352450579
+      ],
+      [
+       11.97381536497438,
+       57.70993225494448
+      ],
+      [
+       11.973759418286948,
+       57.70991317939794
+      ],
+      [
+       11.973699550478917,
+       57.709911508916996
+      ],
+      [
+       11.973693131613064,
+       57.70990260592837
+      ],
+      [
+       11.973633263826583,
+       57.70990093541623
+      ],
+      [
+       11.973577317285457,
+       57.70988185979045
+      ],
+      [
+       11.973517598988119,
+       57.70988161607069
+      ],
+      [
+       11.97351103072484,
+       57.709871286226495
+      ],
+      [
+       11.973467172843858,
+       57.70987898648034
+      ],
+      [
+       11.97344474420395,
+       57.70986071262815
+      ],
+      [
+       11.973300043737199,
+       57.70984762007832
+      ],
+      [
+       11.973296161496593,
+       57.709830194457666
+      ],
+      [
+       11.973237418257415,
+       57.70983009014905
+      ],
+      [
+       11.973229875116877,
+       57.70981962074803
+      ],
+      [
+       11.973185971838925,
+       57.709819586721956
+      ],
+      [
+       11.973180347638275,
+       57.70980944796059
+      ],
+      [
+       11.973137238897362,
+       57.70980817816985
+      ],
+      [
+       11.973130820188024,
+       57.70979927515404
+      ],
+      [
+       11.97306380788466,
+       57.70979767184135
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (77.1 m × 3.4 m)",
+    "top_median_m": 5.81,
+    "top_above_track_bed_m": 3.52,
+    "laser_points": 331,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        11.978110211152824,
+        57.710700252338825
+       ],
+       [
+        11.978109464257187,
+        57.71070920993539
+       ],
+       [
+        11.978126200492579,
+        57.710709609689154
+       ],
+       [
+        11.97812694738409,
+        57.71070065209249
+       ],
+       [
+        11.978110211152824,
+        57.710700252338825
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.976319050359942,
+        57.711034946006706
+       ],
+       [
+        11.976318303012356,
+        57.71104390358798
+       ],
+       [
+        11.9763683225269,
+        57.71104510522562
+       ],
+       [
+        11.976376435088097,
+        57.711036543476986
+       ],
+       [
+        11.976419585139684,
+        57.711037336313595
+       ],
+       [
+        11.976478293007256,
+        57.71101219252382
+       ],
+       [
+        11.976522387009926,
+        57.71101282959749
+       ],
+       [
+        11.976565498917235,
+        57.71099599401878
+       ],
+       [
+        11.976624440440505,
+        57.71099729275378
+       ],
+       [
+        11.976666970900254,
+        57.71097914856543
+       ],
+       [
+        11.976709734328288,
+        57.71098135533444
+       ],
+       [
+        11.976713777809188,
+        57.71096260374599
+       ],
+       [
+        11.976727499959432,
+        57.71097279823052
+       ],
+       [
+        11.976778268691405,
+        57.71096501737361
+       ],
+       [
+        11.976781759716145,
+        57.710947892357
+       ],
+       [
+        11.976729508978481,
+        57.710945888919966
+       ],
+       [
+        11.976722217831805,
+        57.710955718874665
+       ],
+       [
+        11.976678482367651,
+        57.71095365739558
+       ],
+       [
+        11.976653683462155,
+        57.71097205680509
+       ],
+       [
+        11.976593188532414,
+        57.71096959479437
+       ],
+       [
+        11.976568748052575,
+        57.71098656971134
+       ],
+       [
+        11.976456867912404,
+        57.710993300520144
+       ],
+       [
+        11.976450966807322,
+        57.71101022013902
+       ],
+       [
+        11.976405092822237,
+        57.71101003883999
+       ],
+       [
+        11.976382432216427,
+        57.71102655792028
+       ],
+       [
+        11.976319050359942,
+        57.711034946006706
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.976797295007014,
+        57.71093852090643
+       ],
+       [
+        11.976812793746214,
+        57.71095686074067
+       ],
+       [
+        11.976839122469562,
+        57.71094852801126
+       ],
+       [
+        11.976930600222417,
+        57.710950681723475
+       ],
+       [
+        11.976972158413117,
+        57.71093268271781
+       ],
+       [
+        11.977015893872078,
+        57.71093474409535
+       ],
+       [
+        11.97705709354319,
+        57.71091816953794
+       ],
+       [
+        11.977101187448415,
+        57.710918806408955
+       ],
+       [
+        11.977108868208504,
+        57.71090143094696
+       ],
+       [
+        11.977186480951426,
+        57.710902868664334
+       ],
+       [
+        11.977194161667166,
+        57.710885493196706
+       ],
+       [
+        11.977238255536662,
+        57.710886130019574
+       ],
+       [
+        11.977331425393027,
+        57.71086163093378
+       ],
+       [
+        11.977442361020481,
+        57.710855055081005
+       ],
+       [
+        11.97748450437761,
+        57.710838324646666
+       ],
+       [
+        11.977527654230176,
+        57.71083911710339
+       ],
+       [
+        11.977552094165373,
+        57.71082214199566
+       ],
+       [
+        11.977647214209549,
+        57.71081500984371
+       ],
+       [
+        11.977648135303872,
+        57.71079911467987
+       ],
+       [
+        11.977699736492857,
+        57.710789301040556
+       ],
+       [
+        11.977706087355424,
+        57.710779667689316
+       ],
+       [
+        11.977818548196609,
+        57.71077416358292
+       ],
+       [
+        11.977844899857327,
+        57.710756927212394
+       ],
+       [
+        11.977886333700857,
+        57.71076679498061
+       ],
+       [
+        11.977927369866004,
+        57.710741454675194
+       ],
+       [
+        11.97805766719951,
+        57.710725948391044
+       ],
+       [
+        11.97807666933663,
+        57.71069945116831
+       ],
+       [
+        11.97801779017286,
+        57.71071578203843
+       ],
+       [
+        11.977974640450753,
+        57.71071498975013
+       ],
+       [
+        11.977898230757805,
+        57.71073988965408
+       ],
+       [
+        11.977787295552927,
+        57.71074646591077
+       ],
+       [
+        11.977728589009727,
+        57.71077161032159
+       ],
+       [
+        11.977583190960885,
+        57.7107775414149
+       ],
+       [
+        11.977524484228196,
+        57.710802685729064
+       ],
+       [
+        11.977412604806112,
+        57.71080941739022
+       ],
+       [
+        11.977389075717744,
+        57.710826187964656
+       ],
+       [
+        11.97734407101403,
+        57.710825755700505
+       ],
+       [
+        11.977300959664639,
+        57.71084259155027
+       ],
+       [
+        11.977242018358025,
+        57.71084129313257
+       ],
+       [
+        11.97721935823671,
+        57.710857812367735
+       ],
+       [
+        11.977173484431379,
+        57.71085763134908
+       ],
+       [
+        11.977132284881963,
+        57.710874205945665
+       ],
+       [
+        11.977037164593616,
+        57.710881337708024
+       ],
+       [
+        11.97690972741276,
+        57.71091400560573
+       ],
+       [
+        11.976849818063295,
+        57.71091281246397
+       ],
+       [
+        11.976828468092318,
+        57.7109387317258
+       ],
+       [
+        11.976797295007014,
+        57.71093852090643
+       ]
+      ],
+      [
+       [
+        11.977359665535115,
+        57.71085180993001
+       ],
+       [
+        11.977373828681923,
+        57.710843093483675
+       ],
+       [
+        11.977375920479124,
+        57.710851421638196
+       ],
+       [
+        11.977359665535115,
+        57.71085180993001
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.975995381171499,
+        57.71109012490712
+       ],
+       [
+        11.975994633742395,
+        57.711099082485646
+       ],
+       [
+        11.976061648631177,
+        57.71110068426999
+       ],
+       [
+        11.976081899504118,
+        57.711083959854996
+       ],
+       [
+        11.975995381171499,
+        57.71109012490712
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.97609469210772,
+        57.711082743534284
+       ],
+       [
+        11.9761469429986,
+        57.711084747234956
+       ],
+       [
+        11.976188143230429,
+        57.71106817296626
+       ],
+       [
+        11.9762322372927,
+        57.71106881014166
+       ],
+       [
+        11.976266504668505,
+        57.71106064129719
+       ],
+       [
+        11.976284759901482,
+        57.711043114313256
+       ],
+       [
+        11.97625126406174,
+        57.71104231376131
+       ],
+       [
+        11.976210099553068,
+        57.7110615530583
+       ],
+       [
+        11.976149210353814,
+        57.71105785030124
+       ],
+       [
+        11.976144888745097,
+        57.71107413700737
+       ],
+       [
+        11.976097435032562,
+        57.711074588492835
+       ],
+       [
+        11.97609469210772,
+        57.711082743534284
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (132.8 m × 3.0 m)",
+    "top_median_m": 6.2,
+    "top_above_track_bed_m": 4.27,
+    "laser_points": 366,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.975267397822988,
+       57.71073776928843
+      ],
+      [
+       11.975233889017213,
+       57.71075733432269
+      ],
+      [
+       11.975267384562374,
+       57.710758135141276
+      ],
+      [
+       11.975278199833621,
+       57.71074941206752
+      ],
+      [
+       11.975317662560899,
+       57.71075933718159
+      ],
+      [
+       11.97539348856498,
+       57.7107331701013
+      ],
+      [
+       11.975453983000076,
+       57.71073563268113
+      ],
+      [
+       11.975496290231698,
+       57.710708664216234
+      ],
+      [
+       11.975624570439939,
+       57.71070375935915
+      ],
+      [
+       11.97564810025242,
+       57.71068698911958
+      ],
+      [
+       11.975744131175666,
+       57.71067965390503
+      ],
+      [
+       11.975768571824648,
+       57.71066267914836
+      ],
+      [
+       11.975863691755595,
+       57.71065554833637
+      ],
+      [
+       11.975905835588856,
+       57.7106388184321
+      ],
+      [
+       11.975965744439799,
+       57.71064001201625
+      ],
+      [
+       11.97612744843441,
+       57.710599176255805
+      ],
+      [
+       11.976187357230666,
+       57.71060036973445
+      ],
+      [
+       11.976262823800935,
+       57.71057562659769
+      ],
+      [
+       11.976306917266493,
+       57.7105762637414
+      ],
+      [
+       11.97634720593983,
+       57.71055989391163
+      ],
+      [
+       11.976392210289857,
+       57.71056032652709
+      ],
+      [
+       11.976485379852543,
+       57.71053582806061
+      ],
+      [
+       11.976528529312032,
+       57.710536620854455
+      ],
+      [
+       11.976587236283159,
+       57.71051147700393
+      ],
+      [
+       11.976648088920005,
+       57.710512514534656
+      ],
+      [
+       11.97667347299867,
+       57.71049538386868
+      ],
+      [
+       11.976801166834576,
+       57.71048920906326
+      ],
+      [
+       11.97680904335902,
+       57.71048064784829
+      ],
+      [
+       11.976903218671412,
+       57.71047367197837
+      ],
+      [
+       11.976945361822136,
+       57.710456941720864
+      ],
+      [
+       11.977056296267344,
+       57.710450366195055
+      ],
+      [
+       11.977099407255034,
+       57.71043353042439
+      ],
+      [
+       11.977208625529878,
+       57.71043603018754
+      ],
+      [
+       11.977215557988421,
+       57.71042762467939
+      ],
+      [
+       11.977276410512612,
+       57.710428661906796
+      ],
+      [
+       11.977337263163534,
+       57.7104121722929
+      ],
+      [
+       11.977377713887156,
+       57.710422094399235
+      ],
+      [
+       11.977404065492923,
+       57.71040485811924
+      ],
+      [
+       11.97746225801979,
+       57.71041512641988
+      ],
+      [
+       11.977489592165181,
+       57.710397835944455
+      ],
+      [
+       11.977513306829323,
+       57.71040735817111
+      ],
+      [
+       11.977596843934705,
+       57.710409360080114
+      ],
+      [
+       11.977604370537188,
+       57.71039952950528
+      ],
+      [
+       11.97766486460156,
+       57.71040199102432
+      ],
+      [
+       11.977674691418999,
+       57.71039327010894
+      ],
+      [
+       11.97771490641147,
+       57.71040319267401
+      ],
+      [
+       11.977724969023464,
+       57.7103944711887
+      ],
+      [
+       11.977849963863067,
+       57.7103974249324
+      ],
+      [
+       11.977852954758676,
+       57.71036155743258
+      ],
+      [
+       11.977794825395717,
+       57.71037150679045
+      ],
+      [
+       11.97773491555507,
+       57.71036772552133
+      ],
+      [
+       11.977725088759094,
+       57.710376446441636
+      ],
+      [
+       11.977667878798817,
+       57.71036612408295
+      ],
+      [
+       11.977658051987332,
+       57.7103748449979
+      ],
+      [
+       11.977414994847553,
+       57.71037805830265
+      ],
+      [
+       11.977391339004456,
+       57.71038872843056
+      ],
+      [
+       11.977279425097038,
+       57.71039279497848
+      ],
+      [
+       11.977270167820427,
+       57.710402862718205
+      ],
+      [
+       11.977144603398328,
+       57.710398561545574
+      ],
+      [
+       11.977136726970928,
+       57.71040712278248
+      ],
+      [
+       11.976991526075508,
+       57.7104218674385
+      ],
+      [
+       11.97698326305932,
+       57.71043184269861
+      ],
+      [
+       11.976923741052696,
+       57.71042923556622
+      ],
+      [
+       11.97691547801625,
+       57.71043921082171
+      ],
+      [
+       11.976804930138638,
+       57.710444372191546
+      ],
+      [
+       11.976797639117677,
+       57.71045420215243
+      ],
+      [
+       11.976753904252549,
+       57.710452140704994
+      ],
+      [
+       11.97672946420392,
+       57.71046911565822
+      ],
+      [
+       11.976651852416648,
+       57.71046767766949
+      ],
+      [
+       11.976542119564114,
+       57.710500589978125
+      ],
+      [
+       11.976481266952005,
+       57.71049955239666
+      ],
+      [
+       11.976319563789136,
+       57.71054038861785
+      ],
+      [
+       11.976259655085515,
+       57.710539195202706
+      ],
+      [
+       11.976236125650415,
+       57.71055596555995
+      ],
+      [
+       11.976140095142833,
+       57.71056330115208
+      ],
+      [
+       11.976081387783307,
+       57.71058844479119
+      ],
+      [
+       11.976020535044354,
+       57.710587406986875
+      ],
+      [
+       11.976012658311264,
+       57.71059596815066
+      ],
+      [
+       11.975918482531021,
+       57.71060294335296
+      ],
+      [
+       11.975910801270723,
+       57.710620318738556
+      ],
+      [
+       11.975833189209093,
+       57.71061888024491
+      ],
+      [
+       11.97582816519865,
+       57.710636301345005
+      ],
+      [
+       11.975696869445944,
+       57.71064258516085
+      ],
+      [
+       11.975692772267829,
+       57.710659792545115
+      ],
+      [
+       11.975594068098308,
+       57.7106670912122
+      ],
+      [
+       11.975571407347328,
+       57.71068361014649
+      ],
+      [
+       11.975525533790567,
+       57.710683428532555
+      ],
+      [
+       11.975484333706119,
+       57.71070000258765
+      ],
+      [
+       11.975423480806638,
+       57.710698964494604
+      ],
+      [
+       11.975417129356089,
+       57.71070859772573
+      ],
+      [
+       11.97533818705082,
+       57.71071490104844
+      ],
+      [
+       11.975329342183425,
+       57.71072356761532
+      ],
+      [
+       11.97527040117144,
+       57.710722268281685
+      ],
+      [
+       11.975267397822988,
+       57.71073776928843
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (161.1 m × 2.9 m)",
+    "top_median_m": 5.89,
+    "top_above_track_bed_m": 3.89,
+    "laser_points": 604,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.97523014477889,
+       57.710802196426414
+      ],
+      [
+       11.975227899882881,
+       57.710829093890986
+      ],
+      [
+       11.975294914225477,
+       57.710830696076414
+      ],
+      [
+       11.97533611454503,
+       57.710814122085516
+      ],
+      [
+       11.975380208273531,
+       57.710814759554765
+      ],
+      [
+       11.975448742894446,
+       57.71079842231639
+      ],
+      [
+       11.975457368390803,
+       57.71078089124172
+      ],
+      [
+       11.975584314846545,
+       57.7107836876244
+      ],
+      [
+       11.975606975655808,
+       57.710767168688555
+      ],
+      [
+       11.975704624396835,
+       57.71075061226136
+      ],
+      [
+       11.97571097577919,
+       57.71074097901521
+      ],
+      [
+       11.97585770389066,
+       57.71072730794751
+      ],
+      [
+       11.975881233612368,
+       57.710710537663765
+      ],
+      [
+       11.975977264556875,
+       57.710703202272455
+      ],
+      [
+       11.97600264908464,
+       57.7106860717458
+      ],
+      [
+       11.976079317330296,
+       57.71068766586165
+      ],
+      [
+       11.976113584375994,
+       57.71067949705505
+      ],
+      [
+       11.976119485579058,
+       57.710662577452126
+      ],
+      [
+       11.976182118421796,
+       57.710663159413556
+      ],
+      [
+       11.976206917347033,
+       57.71064476009597
+      ],
+      [
+       11.976369464201415,
+       57.71063168563837
+      ],
+      [
+       11.976392993625968,
+       57.71061491525641
+      ],
+      [
+       11.976437998045379,
+       57.71061534785623
+      ],
+      [
+       11.976440242025609,
+       57.710588450360724
+      ],
+      [
+       11.976373228059717,
+       57.71058684878563
+      ],
+      [
+       11.976194960669975,
+       57.71063609853306
+      ],
+      [
+       11.976134107845992,
+       57.710635060782565
+      ],
+      [
+       11.976041881766559,
+       57.71065940326095
+      ],
+      [
+       11.975997788207648,
+       57.710658766023954
+      ],
+      [
+       11.97595583990327,
+       57.7106843101874
+      ],
+      [
+       11.975895735483247,
+       57.710674302369526
+      ],
+      [
+       11.975820268461991,
+       57.71069904528267
+      ],
+      [
+       11.975725148409158,
+       57.71070617606082
+      ],
+      [
+       11.975718461794688,
+       57.71072608613655
+      ],
+      [
+       11.975588828249014,
+       57.71072988085628
+      ],
+      [
+       11.975565298380976,
+       57.71074665108418
+      ],
+      [
+       11.975520293819342,
+       57.71074621817251
+      ],
+      [
+       11.975515269639239,
+       57.71076363925831
+      ],
+      [
+       11.975469267248105,
+       57.7107539861609
+      ],
+      [
+       11.975461585738955,
+       57.71077136151649
+      ],
+      [
+       11.97533294674895,
+       57.71077769067721
+      ],
+      [
+       11.975275149403103,
+       57.710802629441936
+      ],
+      [
+       11.97523014477889,
+       57.710802196426414
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (75.4 m × 2.9 m)",
+    "top_median_m": 5.8,
+    "top_above_track_bed_m": 3.92,
+    "laser_points": 277,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        11.978557171631886,
+        57.71057610996439
+       ],
+       [
+        11.978556424850199,
+        57.7105850675648
+       ],
+       [
+        11.978573161035209,
+        57.71058546725899
+       ],
+       [
+        11.97857590336286,
+        57.71057731215756
+       ],
+       [
+        11.978557171631886,
+        57.71057610996439
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.978588695711775,
+        57.71057609558212
+       ],
+       [
+        11.978607427443942,
+        57.710577297770634
+       ],
+       [
+        11.97860817421281,
+        57.71056834016979
+       ],
+       [
+        11.978591438035163,
+        57.710567940480324
+       ],
+       [
+        11.978588695711775,
+        57.71057609558212
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.976289273342458,
+        57.71098929513903
+       ],
+       [
+        11.97630453706568,
+        57.71100762322298
+       ],
+       [
+        11.976354792339624,
+        57.71100882430223
+       ],
+       [
+        11.976395992391204,
+        57.71099224996396
+       ],
+       [
+        11.976440086367225,
+        57.710992887066105
+       ],
+       [
+        11.976464526910847,
+        57.71097591217462
+       ],
+       [
+        11.976593914755993,
+        57.71096061191143
+       ],
+       [
+        11.976601595767754,
+        57.71094323648274
+       ],
+       [
+        11.976679208569657,
+        57.710944674511914
+       ],
+       [
+        11.976737334586536,
+        57.71091830277789
+       ],
+       [
+        11.976798769437165,
+        57.71092056806297
+       ],
+       [
+        11.976856692900007,
+        57.71090172904439
+       ],
+       [
+        11.976900074263297,
+        57.710914000952194
+       ],
+       [
+        11.976923603633248,
+        57.71089723047159
+       ],
+       [
+        11.976968608415687,
+        57.710897662886076
+       ],
+       [
+        11.976972651752156,
+        57.71087891128779
+       ],
+       [
+        11.977002875469083,
+        57.71088949383886
+       ],
+       [
+        11.9770958496997,
+        57.71085618069886
+       ],
+       [
+        11.977139943530684,
+        57.710856817555666
+       ],
+       [
+        11.977146294553519,
+        57.71084718423414
+       ],
+       [
+        11.977225236870742,
+        57.71084087978324
+       ],
+       [
+        11.977267380308987,
+        57.71082414942196
+       ],
+       [
+        11.977344048927618,
+        57.710825742774745
+       ],
+       [
+        11.977367578036242,
+        57.7108089722089
+       ],
+       [
+        11.97746360897892,
+        57.71080163568924
+       ],
+       [
+        11.977471485418619,
+        57.71079307443254
+       ],
+       [
+        11.977514635216913,
+        57.71079386689323
+       ],
+       [
+        11.977539823197255,
+        57.710767921822494
+       ],
+       [
+        11.977583168874412,
+        57.71077752848916
+       ],
+       [
+        11.977607608741481,
+        57.71076055336994
+       ],
+       [
+        11.977702728614094,
+        57.71075342117453
+       ],
+       [
+        11.977708181005339,
+        57.710744033878186
+       ],
+       [
+        11.977760651350872,
+        57.7107345817347
+       ],
+       [
+        11.977855806915558,
+        57.71073011443125
+       ],
+       [
+        11.977861707317098,
+        57.710713194739505
+       ],
+       [
+        11.977924340303924,
+        57.71071377583963
+       ],
+       [
+        11.97794972393204,
+        57.710696644913696
+       ],
+       [
+        11.978008885025826,
+        57.710706807500806
+       ],
+       [
+        11.97803426860956,
+        57.710689676557465
+       ],
+       [
+        11.978110936993115,
+        57.71069126944323
+       ],
+       [
+        11.978118617219353,
+        57.71067389391432
+       ],
+       [
+        11.978264762672657,
+        57.71065899222955
+       ],
+       [
+        11.978305379896984,
+        57.71064118944287
+       ],
+       [
+        11.978367562263628,
+        57.71063448399097
+       ],
+       [
+        11.978392001669711,
+        57.71061750871545
+       ],
+       [
+        11.978469613882126,
+        57.710618945640505
+       ],
+       [
+        11.978477490045162,
+        57.710610384318336
+       ],
+       [
+        11.978520639659507,
+        57.71061117643412
+       ],
+       [
+        11.978521386450785,
+        57.71060221883403
+       ],
+       [
+        11.978455120169787,
+        57.71059164838706
+       ],
+       [
+        11.978449667995152,
+        57.71060103571785
+       ],
+       [
+        11.978420853714423,
+        57.71059981783368
+       ],
+       [
+        11.978378711060085,
+        57.710616548587204
+       ],
+       [
+        11.978268524192325,
+        57.71061415529827
+       ],
+       [
+        11.978260647979518,
+        57.71062271660696
+       ],
+       [
+        11.978166472506574,
+        57.710629693485856
+       ],
+       [
+        11.978091007084245,
+        57.710654437769115
+       ],
+       [
+        11.97799588753873,
+        57.7106615702597
+       ],
+       [
+        11.977953358107277,
+        57.71067971490541
+       ],
+       [
+        11.977910594944813,
+        57.710677508559286
+       ],
+       [
+        11.977887935229093,
+        57.71069402791842
+       ],
+       [
+        11.97781762190686,
+        57.710710822310254
+       ],
+       [
+        11.97770574281471,
+        57.7107175542339
+       ],
+       [
+        11.977647036263685,
+        57.71074269860689
+       ],
+       [
+        11.977569423835849,
+        57.71074126117508
+       ],
+       [
+        11.977564400638677,
+        57.71075868235164
+       ],
+       [
+        11.97750089024152,
+        57.710757599572354
+       ],
+       [
+        11.977459690953497,
+        57.71077417427829
+       ],
+       [
+        11.977415597213673,
+        57.71077353753383
+       ],
+       [
+        11.977391157248956,
+        57.71079051261499
+       ],
+       [
+        11.977330304112497,
+        57.710789475437025
+       ],
+       [
+        11.977325280793261,
+        57.71080689660281
+       ],
+       [
+        11.977261770322805,
+        57.71080581370279
+       ],
+       [
+        11.977253893831142,
+        57.710814374945905
+       ],
+       [
+        11.977210744017107,
+        57.71081358239614
+       ],
+       [
+        11.977203453027824,
+        57.71082341238026
+       ],
+       [
+        11.977159717690162,
+        57.71082135106871
+       ],
+       [
+        11.977155153733914,
+        57.710839078388375
+       ],
+       [
+        11.977091183765907,
+        57.71083768924069
+       ],
+       [
+        11.977083503011901,
+        57.710855064701825
+       ],
+       [
+        11.976954863952702,
+        57.71086139551125
+       ],
+       [
+        11.976817795713474,
+        57.710894071592186
+       ],
+       [
+        11.976793355389486,
+        57.71091104655416
+       ],
+       [
+        11.976750009772173,
+        57.71090143961759
+       ],
+       [
+        11.976744557109114,
+        57.71091082686985
+       ],
+       [
+        11.976681475517992,
+        57.71091777756428
+       ],
+       [
+        11.976674184364294,
+        57.71092760751617
+       ],
+       [
+        11.976613689506918,
+        57.71092514551595
+       ],
+       [
+        11.97657174131526,
+        57.710950689883866
+       ],
+       [
+        11.976511636276179,
+        57.71094068235306
+       ],
+       [
+        11.97647736906772,
+        57.71094885126567
+       ],
+       [
+        11.976469687995381,
+        57.71096622668624
+       ],
+       [
+        11.976408834605209,
+        57.71096518906255
+       ],
+       [
+        11.976401901854095,
+        57.71097359452311
+       ],
+       [
+        11.97635780790265,
+        57.71097295740788
+       ],
+       [
+        11.976289273342458,
+        57.71098929513903
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (144.6 m × 2.7 m)",
+    "top_median_m": 6.28,
+    "top_above_track_bed_m": 4.34,
+    "laser_points": 369,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.975222369151593,
+       57.71069415638487
+      ],
+      [
+       11.975236134935257,
+       57.710730424484304
+      ],
+      [
+       11.975320657034773,
+       57.710723457394224
+      ],
+      [
+       11.975396124438538,
+       57.71069871478291
+      ],
+      [
+       11.975491244528236,
+       57.71069158425252
+      ],
+      [
+       11.97554995245745,
+       57.71066644089307
+      ],
+      [
+       11.97562756460383,
+       57.71066787956132
+      ],
+      [
+       11.975633466030938,
+       57.71065095998317
+      ],
+      [
+       11.975696098837792,
+       57.71065154218491
+      ],
+      [
+       11.975719628582922,
+       57.710634771931296
+      ],
+      [
+       11.975764633010966,
+       57.71063520477078
+      ],
+      [
+       11.975789432125802,
+       57.710616805536745
+      ],
+      [
+       11.975883444955095,
+       57.71062006913276
+      ],
+      [
+       11.975891126228397,
+       57.710602693748925
+      ],
+      [
+       11.97596873825887,
+       57.71060413220673
+      ],
+      [
+       11.976043294078456,
+       57.71057959369804
+      ],
+      [
+       11.976173591569202,
+       57.710564089355856
+      ],
+      [
+       11.976214791189395,
+       57.71054751507153
+      ],
+      [
+       11.97630991074075,
+       57.71054038392026
+      ],
+      [
+       11.97631817396652,
+       57.71053040870628
+      ],
+      [
+       11.976360936840887,
+       57.710532615588065
+      ],
+      [
+       11.976401554836254,
+       57.71051481341978
+      ],
+      [
+       11.976463737306362,
+       57.71050810890464
+      ],
+      [
+       11.976481992157746,
+       57.71049058188736
+      ],
+      [
+       11.97645303042853,
+       57.7104889747066
+      ],
+      [
+       11.97643297637469,
+       57.710471428590104
+      ],
+      [
+       11.976374331644026,
+       57.710487770502326
+      ],
+      [
+       11.976314423024647,
+       57.71048657711391
+      ],
+      [
+       11.976153663704727,
+       57.71052725739543
+      ],
+      [
+       11.976092811065213,
+       57.71052621962681
+      ],
+      [
+       11.976068012165904,
+       57.71054461892257
+      ],
+      [
+       11.976024277241743,
+       57.71054255722232
+      ],
+      [
+       11.976017925978653,
+       57.710552190485586
+      ],
+      [
+       11.975938984106934,
+       57.71055849418752
+      ],
+      [
+       11.975933531289543,
+       57.710567881403776
+      ],
+      [
+       11.975881060735544,
+       57.71057733278757
+      ],
+      [
+       11.975785905378654,
+       57.71058179860753
+      ],
+      [
+       11.975780881351284,
+       57.710599219705685
+      ],
+      [
+       11.975717371316465,
+       57.71059813603439
+      ],
+      [
+       11.97569293068836,
+       57.71061511078149
+      ],
+      [
+       11.975581051560196,
+       57.710621840825645
+      ],
+      [
+       11.975556610852777,
+       57.71063881554561
+      ],
+      [
+       11.975461490913126,
+       57.71064594612662
+      ],
+      [
+       11.975420290843266,
+       57.710662520161065
+      ],
+      [
+       11.975376197298704,
+       57.71066188270754
+      ],
+      [
+       11.97535175646904,
+       57.710678857386675
+      ],
+      [
+       11.97529090361096,
+       57.710677819230206
+      ],
+      [
+       11.97528455212929,
+       57.710687452454394
+      ],
+      [
+       11.97523987709042,
+       57.71068558712661
+      ],
+      [
+       11.975222369151593,
+       57.71069415638487
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (77.9 m × 3.5 m)",
+    "top_median_m": 5.94,
+    "top_above_track_bed_m": 3.95,
+    "laser_points": 370,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        11.97372704551611,
+        57.709094510537135
+       ],
+       [
+        11.973742307167539,
+        57.70911283891493
+       ],
+       [
+        11.973792567008452,
+        57.70911404096896
+       ],
+       [
+        11.973807688874144,
+        57.70910454249373
+       ],
+       [
+        11.973808592420077,
+        57.70912341234624
+       ],
+       [
+        11.973885382790234,
+        57.70913465371635
+       ],
+       [
+        11.973890887347649,
+        57.70914335654005
+       ],
+       [
+        11.974049609942771,
+        57.70915625069413
+       ],
+       [
+        11.974072984946357,
+        57.70917467566658
+       ],
+       [
+        11.974214949160263,
+        57.709187168779316
+       ],
+       [
+        11.974271841467244,
+        57.70920639534343
+       ],
+       [
+        11.974348466749012,
+        57.709208466342275
+       ],
+       [
+        11.97435488565969,
+        57.709217369298905
+       ],
+       [
+        11.974430564489076,
+        57.709219289023444
+       ],
+       [
+        11.974503466805015,
+        57.709247886213205
+       ],
+       [
+        11.974622126464727,
+        57.70925895687703
+       ],
+       [
+        11.974606240653427,
+        57.70922339283237
+       ],
+       [
+        11.974530561802677,
+        57.70922147321273
+       ],
+       [
+        11.97449042793253,
+        57.70920264754406
+       ],
+       [
+        11.97434751707209,
+        57.709190003514045
+       ],
+       [
+        11.974258802897825,
+        57.70916115665303
+       ],
+       [
+        11.974198936299794,
+        57.709159486419864
+       ],
+       [
+        11.974142990584017,
+        57.70914041105034
+       ],
+       [
+        11.974082209800118,
+        57.709138540608805
+       ],
+       [
+        11.974076705197184,
+        57.709129837792986
+       ],
+       [
+        11.974000080102488,
+        57.709127766631276
+       ],
+       [
+        11.97394413454269,
+        57.70910869117521
+       ],
+       [
+        11.973867658962268,
+        57.70910804678028
+       ],
+       [
+        11.973845081123736,
+        57.70908834615318
+       ],
+       [
+        11.973778070089418,
+        57.709086743230856
+       ],
+       [
+        11.973768063239985,
+        57.70910578064643
+       ],
+       [
+        11.97372704551611,
+        57.709094510537135
+       ]
+      ],
+      [
+       [
+        11.973856441501555,
+        57.70912328160822
+       ],
+       [
+        11.973873940935356,
+        57.70911652171913
+       ],
+       [
+        11.973871769319553,
+        57.70912515242019
+       ],
+       [
+        11.973856441501555,
+        57.70912328160822
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.97463466486781,
+        57.70926077880077
+       ],
+       [
+        11.974636038311695,
+        57.709269032252536
+       ],
+       [
+        11.974711717269342,
+        57.70927095181007
+       ],
+       [
+        11.974768609977268,
+        57.70929017815435
+       ],
+       [
+        11.974845235474383,
+        57.709292248854304
+       ],
+       [
+        11.974884423143838,
+        57.70931092319198
+       ],
+       [
+        11.97494429003413,
+        57.709312593103476
+       ],
+       [
+        11.975000236446101,
+        57.70933166812482
+       ],
+       [
+        11.975110545000652,
+        57.70934371017959
+       ],
+       [
+        11.975116049884061,
+        57.709352412952846
+       ],
+       [
+        11.975342006554639,
+        57.709376029436875
+       ],
+       [
+        11.975364435870446,
+        57.70939430296024
+       ],
+       [
+        11.975440115142485,
+        57.70939622208497
+       ],
+       [
+        11.975447480846135,
+        57.70940527620559
+       ],
+       [
+        11.975573634260043,
+        57.70941751836867
+       ],
+       [
+        11.975596063718962,
+        57.70943579185223
+       ],
+       [
+        11.975755734762656,
+        57.709448835099224
+       ],
+       [
+        11.9757781643333,
+        57.70946710855151
+       ],
+       [
+        11.975821272791439,
+        57.709468377439535
+       ],
+       [
+        11.975877219915526,
+        57.709487452079394
+       ],
+       [
+        11.975911462743815,
+        57.709479282763205
+       ],
+       [
+        11.975913707016053,
+        57.7094523852759
+       ],
+       [
+        11.975853839835173,
+        57.70945071582048
+       ],
+       [
+        11.97579789277979,
+        57.709431641170866
+       ],
+       [
+        11.97572141644797,
+        57.7094309978896
+       ],
+       [
+        11.975714847630227,
+        57.70942066815396
+       ],
+       [
+        11.975654980513973,
+        57.70941899860504
+       ],
+       [
+        11.975615792324616,
+        57.70940032450139
+       ],
+       [
+        11.975556871739665,
+        57.709398806121875
+       ],
+       [
+        11.975549506009738,
+        57.70938975200736
+       ],
+       [
+        11.97545612155026,
+        57.70938728108021
+       ],
+       [
+        11.975433692191917,
+        57.70936900757268
+       ],
+       [
+        11.975340307796579,
+        57.70936653656063
+       ],
+       [
+        11.97531787850979,
+        57.7093482630332
+       ],
+       [
+        11.975258011537546,
+        57.70934659329774
+       ],
+       [
+        11.975218823633824,
+        57.70932791907366
+       ],
+       [
+        11.975159154572063,
+        57.709335370458085
+       ],
+       [
+        11.975135778908797,
+        57.70931694568047
+       ],
+       [
+        11.974976108693618,
+        57.709303901658565
+       ],
+       [
+        11.974969689614696,
+        57.70929499873197
+       ],
+       [
+        11.974826612668947,
+        57.709273185144895
+       ],
+       [
+        11.974821107866847,
+        57.70926448235973
+       ],
+       [
+        11.974777250987527,
+        57.70927218307799
+       ],
+       [
+        11.974754822044709,
+        57.70925390945378
+       ],
+       [
+        11.974695901746966,
+        57.709252390675935
+       ],
+       [
+        11.974688536262295,
+        57.709243336513445
+       ],
+       [
+        11.97463466486781,
+        57.70926077880077
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (136.5 m × 2.5 m)",
+    "top_median_m": 6.75,
+    "top_above_track_bed_m": 4.27,
+    "laser_points": 426,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976688824612568,
+       57.70921925135154
+      ],
+      [
+       11.97670408782386,
+       57.70923757938658
+      ],
+      [
+       11.97673685690405,
+       57.709247350316204
+      ],
+      [
+       11.976796723803941,
+       57.709249019351034
+      ],
+      [
+       11.97688544026979,
+       57.70927786445354
+      ],
+      [
+       11.976946736106363,
+       57.7092770865083
+      ],
+      [
+       11.976997386841804,
+       57.70928899759163
+      ],
+      [
+       11.977001254673162,
+       57.70929860756482
+      ],
+      [
+       11.977094639047657,
+       57.70930107735044
+      ],
+      [
+       11.977133827908515,
+       57.70931975100253
+      ],
+      [
+       11.977194443066118,
+       57.7093124498865
+      ],
+      [
+       11.97724964259462,
+       57.709340493888966
+      ],
+      [
+       11.977326268389696,
+       57.709342563088775
+      ],
+      [
+       11.977332688059425,
+       57.70935146590134
+      ],
+      [
+       11.977426238795193,
+       57.70936310554008
+      ],
+      [
+       11.977431744240711,
+       57.70937180821787
+      ],
+      [
+       11.977493705909332,
+       57.709345140182165
+      ],
+      [
+       11.977514789836038,
+       57.70938278011188
+      ],
+      [
+       11.977574657007457,
+       57.70938444878111
+      ],
+      [
+       11.977663374438373,
+       57.70941329334667
+      ],
+      [
+       11.977755812667661,
+       57.70941561144723
+      ],
+      [
+       11.977812707260192,
+       57.70943483643992
+      ],
+      [
+       11.977889333298005,
+       57.709436905300876
+      ],
+      [
+       11.97792852272096,
+       57.709455578711825
+      ],
+      [
+       11.977971631265033,
+       57.709456846867845
+      ],
+      [
+       11.978027579534706,
+       57.70947592056749
+      ],
+      [
+       11.97808744689149,
+       57.70947758899574
+      ],
+      [
+       11.97814339525546,
+       57.70949666264504
+      ],
+      [
+       11.978259935850234,
+       57.70950843409269
+      ],
+      [
+       11.978278190353794,
+       57.70949089442736
+      ],
+      [
+       11.978246915311376,
+       57.70946319631891
+      ],
+      [
+       11.97817123569521,
+       57.709461278870265
+      ],
+      [
+       11.978163869295036,
+       57.709452224901675
+      ],
+      [
+       11.978086293269778,
+       57.70944218131657
+      ],
+      [
+       11.978081571228499,
+       57.70943228345886
+      ],
+      [
+       11.978020275135448,
+       57.709433061951565
+      ],
+      [
+       11.977948996997917,
+       57.709411141005255
+      ],
+      [
+       11.977838687213678,
+       57.70939910141424
+      ],
+      [
+       11.977833181665941,
+       57.709390398753214
+      ],
+      [
+       11.977740743494069,
+       57.709388080709715
+      ],
+      [
+       11.977683849013342,
+       57.709368855685625
+      ],
+      [
+       11.977639826333652,
+       57.7093673873042
+      ],
+      [
+       11.977634320838511,
+       57.709358684634985
+      ],
+      [
+       11.977557694985594,
+       57.709356615621225
+      ],
+      [
+       11.977535264573882,
+       57.70933834247625
+      ],
+      [
+       11.977490727347778,
+       57.70933952108986
+      ],
+      [
+       11.977468977778454,
+       57.70932777098347
+      ],
+      [
+       11.97740819645597,
+       57.70932590213508
+      ],
+      [
+       11.977402691022744,
+       57.70931719945632
+      ],
+      [
+       11.977326065275333,
+       57.70931513030327
+      ],
+      [
+       11.977270117630475,
+       57.709296056298875
+      ],
+      [
+       11.977209336374546,
+       57.70929418735555
+      ],
+      [
+       11.977171061749694,
+       57.709275713858446
+      ],
+      [
+       11.977127205328843,
+       57.70928341539586
+      ],
+      [
+       11.977121533851822,
+       57.709265542609515
+      ],
+      [
+       11.976995380391005,
+       57.70925330198958
+      ],
+      [
+       11.976956191673597,
+       57.709234628295775
+      ],
+      [
+       11.976911385588386,
+       57.70923435486236
+      ],
+      [
+       11.976906663894567,
+       57.70922445696379
+      ],
+      [
+       11.976778090689916,
+       57.70922127019314
+      ],
+      [
+       11.976773856380083,
+       57.70920330148315
+      ],
+      [
+       11.976723838354133,
+       57.70920211240306
+      ],
+      [
+       11.976688824612568,
+       57.70921925135154
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (98.0 m × 3.5 m)",
+    "top_median_m": 6.04,
+    "top_above_track_bed_m": 3.64,
+    "laser_points": 467,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.975323214702001,
+       57.710894299985334
+      ],
+      [
+       11.975320221243583,
+       57.710930167398416
+      ],
+      [
+       11.975345221121808,
+       57.71092059237528
+      ],
+      [
+       11.975387984385526,
+       57.71092279958958
+      ],
+      [
+       11.975548746301474,
+       57.71088212030801
+      ],
+      [
+       11.97567813416588,
+       57.71086682098153
+      ],
+      [
+       11.975753601634471,
+       57.710842078158
+      ],
+      [
+       11.975814454788823,
+       57.71084311609466
+      ],
+      [
+       11.975873162747758,
+       57.71081797258597
+      ],
+      [
+       11.97598504243688,
+       57.71081124228898
+      ],
+      [
+       11.97600857215624,
+       57.71079447198169
+      ],
+      [
+       11.97605357678938,
+       57.71079490472032
+      ],
+      [
+       11.97612904385777,
+       57.71077016166873
+      ],
+      [
+       11.976224164009583,
+       57.71076303058788
+      ],
+      [
+       11.976232427311562,
+       57.7107530553805
+      ],
+      [
+       11.976275190441964,
+       57.710755262293674
+      ],
+      [
+       11.97643689461959,
+       57.71071442613999
+      ],
+      [
+       11.976496803621272,
+       57.710715619474
+      ],
+      [
+       11.9766074811388,
+       57.71068255148357
+      ],
+      [
+       11.97675268322358,
+       57.710667807280224
+      ],
+      [
+       11.976760946358677,
+       57.7106578320366
+      ],
+      [
+       11.976803709415055,
+       57.71066003877041
+      ],
+      [
+       11.976827238660222,
+       57.710643268306
+      ],
+      [
+       11.976872243125147,
+       57.71064370075176
+      ],
+      [
+       11.976880867896929,
+       57.71062616957278
+      ],
+      [
+       11.976957536072296,
+       57.71062776315566
+      ],
+      [
+       11.976999679380077,
+       57.71061103288188
+      ],
+      [
+       11.977059588238374,
+       57.71061222594803
+      ],
+      [
+       11.977067464730014,
+       57.71060366471677
+      ],
+      [
+       11.97716164031948,
+       57.7105966886572
+      ],
+      [
+       11.977187024219132,
+       57.71057955788664
+      ],
+      [
+       11.97722942561246,
+       57.710589320404736
+      ],
+      [
+       11.977305835430558,
+       57.7105644209055
+      ],
+      [
+       11.977433529423575,
+       57.710558245463254
+      ],
+      [
+       11.977440461854687,
+       57.710549839942665
+      ],
+      [
+       11.977552340469604,
+       57.71054310824896
+      ],
+      [
+       11.977561184765179,
+       57.710534441520984
+      ],
+      [
+       11.977620125589564,
+       57.710535739785406
+      ],
+      [
+       11.977645509231948,
+       57.71051860892027
+      ],
+      [
+       11.977738936489414,
+       57.7105206023944
+      ],
+      [
+       11.977762465215001,
+       57.7105038317508
+      ],
+      [
+       11.977841736026111,
+       57.710496094582204
+      ],
+      [
+       11.977843978955178,
+       57.71046919705135
+      ],
+      [
+       11.977742698638947,
+       57.710475765483984
+      ],
+      [
+       11.977733854401134,
+       57.71048443222526
+      ],
+      [
+       11.977658154412165,
+       57.710482733649826
+      ],
+      [
+       11.97761601155216,
+       57.71049946414754
+      ],
+      [
+       11.977556102853029,
+       57.710498271346445
+      ],
+      [
+       11.977533443092632,
+       57.71051479064204
+      ],
+      [
+       11.977487569716013,
+       57.71051460974139
+      ],
+      [
+       11.97747969334278,
+       57.710523171000006
+      ],
+      [
+       11.977318480963326,
+       57.7105285456726
+      ],
+      [
+       11.977242656743538,
+       57.71055471392453
+      ],
+      [
+       11.977131136497079,
+       57.71056002086631
+      ],
+      [
+       11.977123260030172,
+       57.7105685821018
+      ],
+      [
+       11.977080110512901,
+       57.71056778951026
+      ],
+      [
+       11.977072819540101,
+       57.710577619487296
+      ],
+      [
+       11.977029084507478,
+       57.710575558133435
+      ],
+      [
+       11.976986941254738,
+       57.71059228841761
+      ],
+      [
+       11.976910273152464,
+       57.71059069485325
+      ],
+      [
+       11.97674951401042,
+       57.71063137589321
+      ],
+      [
+       11.97660336810417,
+       57.71064627582303
+      ],
+      [
+       11.976600153605325,
+       57.71066322091909
+      ],
+      [
+       11.976534834272824,
+       57.710662613694815
+      ],
+      [
+       11.976476127017877,
+       57.710687757517825
+      ],
+      [
+       11.976432781753314,
+       57.71067815047562
+      ],
+      [
+       11.97642688069323,
+       57.7106950700945
+      ],
+      [
+       11.9763474884679,
+       57.71069408771455
+      ],
+      [
+       11.976305540364402,
+       57.71071963199577
+      ],
+      [
+       11.976193661008692,
+       57.710726362579514
+      ],
+      [
+       11.976170131419085,
+       57.71074313292259
+      ],
+      [
+       11.976108367509347,
+       57.710742299655074
+      ],
+      [
+       11.976031956513683,
+       57.71076719841916
+      ],
+      [
+       11.975972047449439,
+       57.71076600486439
+      ],
+      [
+       11.975964007676556,
+       57.71078480472618
+      ],
+      [
+       11.975920272470157,
+       57.71078274298733
+      ],
+      [
+       11.975912981139858,
+       57.71079257289385
+      ],
+      [
+       11.975852486571373,
+       57.71079011053228
+      ],
+      [
+       11.975811286509998,
+       57.71080668469385
+      ],
+      [
+       11.975767192778735,
+       57.71080604737485
+      ],
+      [
+       11.975744532016638,
+       57.71082256633977
+      ],
+      [
+       11.97569865828108,
+       57.710822384786916
+      ],
+      [
+       11.975674217489628,
+       57.71083935952837
+      ],
+      [
+       11.975579845599583,
+       57.71083752024395
+      ],
+      [
+       11.975557184733066,
+       57.71085403917427
+      ],
+      [
+       11.975511310960883,
+       57.7108538575531
+      ],
+      [
+       11.97540850888885,
+       57.710878363446064
+      ],
+      [
+       11.975384067924763,
+       57.71089533812968
+      ],
+      [
+       11.975323214702001,
+       57.710894299985334
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (156.8 m × 3.0 m)",
+    "top_median_m": 5.89,
+    "top_above_track_bed_m": 3.86,
+    "laser_points": 617,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.976478709354598,
+       57.71133536041732
+      ],
+      [
+       11.976476465338202,
+       57.711362257910594
+      ],
+      [
+       11.976491728275326,
+       57.71138059834682
+      ],
+      [
+       11.976508464795513,
+       57.71138099831733
+      ],
+      [
+       11.976548933529873,
+       57.711354472202686
+      ],
+      [
+       11.976594507961327,
+       57.7113560910296
+      ],
+      [
+       11.976617168682765,
+       57.71133957191317
+      ],
+      [
+       11.97664628346624,
+       57.71133935263691
+      ],
+      [
+       11.976653053620293,
+       57.71132218170687
+      ],
+      [
+       11.97674908605272,
+       57.711314845744354
+      ],
+      [
+       11.976789254554463,
+       57.71128975712658
+      ],
+      [
+       11.97683512890008,
+       57.7112899382897
+      ],
+      [
+       11.9768383433546,
+       57.71127299318861
+      ],
+      [
+       11.976886904201635,
+       57.71127319979646
+      ],
+      [
+       11.97689325536794,
+       57.711263566489514
+      ],
+      [
+       11.976921171630561,
+       57.71126503077534
+      ],
+      [
+       11.976924386042334,
+       57.711248085671585
+      ],
+      [
+       11.976990454662628,
+       57.71123972274489
+      ],
+      [
+       11.976996355557645,
+       57.711222803099325
+      ],
+      [
+       11.977042229822068,
+       57.711222984186584
+      ],
+      [
+       11.977065759332458,
+       57.71120621368156
+      ],
+      [
+       11.977179299120744,
+       57.71119030787391
+      ],
+      [
+       11.977201959472989,
+       57.711173788648814
+      ],
+      [
+       11.977231074124198,
+       57.71117356923673
+      ],
+      [
+       11.977236974895469,
+       57.711156649578626
+      ],
+      [
+       11.977317116312648,
+       57.711148661447496
+      ],
+      [
+       11.977338957712483,
+       57.71113243788574
+      ],
+      [
+       11.977368891194203,
+       57.71113192275264
+      ],
+      [
+       11.97742759857328,
+       57.711106778517916
+      ],
+      [
+       11.977471692718652,
+       57.71110741526205
+      ],
+      [
+       11.977473311231194,
+       57.71109112959988
+      ],
+      [
+       11.977540975071419,
+       57.71108210692305
+      ],
+      [
+       11.977582011838603,
+       57.71105676673642
+      ],
+      [
+       11.97766128389767,
+       57.71104902969335
+      ],
+      [
+       11.977647515568226,
+       57.711012761835086
+      ],
+      [
+       11.977562993187805,
+       57.71101973047702
+      ],
+      [
+       11.977557911452454,
+       57.711036354461925
+      ],
+      [
+       11.977459443875274,
+       57.71105320800918
+      ],
+      [
+       11.977435003737877,
+       57.71107018309659
+      ],
+      [
+       11.977390909638848,
+       57.7110695463401
+      ],
+      [
+       11.977387067593785,
+       57.71108689613758
+      ],
+      [
+       11.977339134857221,
+       57.71108628504504
+      ],
+      [
+       11.977332365074743,
+       57.71110345601589
+      ],
+      [
+       11.977287360028217,
+       57.71110302372832
+      ],
+      [
+       11.97719438532821,
+       57.71113633700356
+      ],
+      [
+       11.97715029115576,
+       57.71113570016251
+      ],
+      [
+       11.97712770148739,
+       57.71116089365209
+      ],
+      [
+       11.97706350068823,
+       57.71116957779823
+      ],
+      [
+       11.97697155738235,
+       57.71121140505748
+      ],
+      [
+       11.976925683133787,
+       57.711211223944744
+      ],
+      [
+       11.976822880958164,
+       57.711235730985074
+      ],
+      [
+       11.97680022039575,
+       57.71125225014009
+      ],
+      [
+       11.976771105682012,
+       57.71125246945244
+      ],
+      [
+       11.976763424680705,
+       57.71126984489084
+      ],
+      [
+       11.976719330358486,
+       57.711269207898155
+      ],
+      [
+       11.976676799579177,
+       57.71128735210038
+      ],
+      [
+       11.976634035793122,
+       57.711285145316886
+      ],
+      [
+       11.976631649991308,
+       57.711301782122305
+      ],
+      [
+       11.976547244492357,
+       57.7113190225898
+      ],
+      [
+       11.976523385271545,
+       57.711337225315816
+      ],
+      [
+       11.976478709354598,
+       57.71133536041732
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (78.0 m × 3.5 m)",
+    "top_median_m": 5.95,
+    "top_above_track_bed_m": 3.98,
+    "laser_points": 369,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.974426126686401,
+       57.70896742568687
+      ],
+      [
+       11.974424630142368,
+       57.70898535319737
+      ],
+      [
+       11.97445664958139,
+       57.709004094651824
+      ],
+      [
+       11.974501186458063,
+       57.70900291710318
+      ],
+      [
+       11.974572461651345,
+       57.70902483996539
+      ],
+      [
+       11.974685240850036,
+       57.70902778548351
+      ],
+      [
+       11.974688273856998,
+       57.70904558517414
+      ],
+      [
+       11.974715824152494,
+       57.70903726234152
+      ],
+      [
+       11.97473854945518,
+       57.70904678742199
+      ],
+      [
+       11.974798266404749,
+       57.70904703055252
+      ],
+      [
+       11.974837603286101,
+       57.70906713174842
+      ],
+      [
+       11.974913281837269,
+       57.70906905118153
+      ],
+      [
+       11.974970174341808,
+       57.70908827743369
+      ],
+      [
+       11.975013132807957,
+       57.70908811974688
+      ],
+      [
+       11.975019701367412,
+       57.70909844951692
+      ],
+      [
+       11.975063723584336,
+       57.7090999188059
+      ],
+      [
+       11.975101996931347,
+       57.709118392928865
+      ],
+      [
+       11.975165249365647,
+       57.70911116597051
+      ],
+      [
+       11.975168282614309,
+       57.70912896565174
+      ],
+      [
+       11.975311193551969,
+       57.7091416087553
+      ],
+      [
+       11.97535038130601,
+       57.709160282949775
+      ],
+      [
+       11.975393291449508,
+       57.709152430813184
+      ],
+      [
+       11.975416667141944,
+       57.70917085554388
+      ],
+      [
+       11.975459577284425,
+       57.709163003384816
+      ],
+      [
+       11.975549238932972,
+       57.70919200062901
+      ],
+      [
+       11.97562491779647,
+       57.7091939196393
+      ],
+      [
+       11.975681810882886,
+       57.709213145576626
+      ],
+      [
+       11.97582472234987,
+       57.709225788104874
+      ],
+      [
+       11.97587992066904,
+       57.70925383269387
+      ],
+      [
+       11.975921861192461,
+       57.709245879548405
+      ],
+      [
+       11.975979724144905,
+       57.70926520618328
+      ],
+      [
+       11.976056349682874,
+       57.70926727614993
+      ],
+      [
+       11.976078779297541,
+       57.70928554954975
+      ],
+      [
+       11.976155404886127,
+       57.70928761945688
+      ],
+      [
+       11.976194593239127,
+       57.70930629339518
+      ],
+      [
+       11.976255208548334,
+       57.70929899273064
+      ],
+      [
+       11.976277638283515,
+       57.70931726609628
+      ],
+      [
+       11.97633750527039,
+       57.7093189353493
+      ],
+      [
+       11.97639345244569,
+       57.70933800976166
+      ],
+      [
+       11.976470078169385,
+       57.70934007947944
+      ],
+      [
+       11.976509266743552,
+       57.70935875332223
+      ],
+      [
+       11.976602651227251,
+       57.70936122347211
+      ],
+      [
+       11.9766250811771,
+       57.709379496778
+      ],
+      [
+       11.97668541678224,
+       57.70937859144648
+      ],
+      [
+       11.976740895746328,
+       57.70940024012897
+      ],
+      [
+       11.976883808357954,
+       57.70941288147123
+      ],
+      [
+       11.976972525291838,
+       57.70944172651651
+      ],
+      [
+       11.97702352658696,
+       57.709433957347436
+      ],
+      [
+       11.977025770030739,
+       57.70940705983236
+      ],
+      [
+       11.97695009062059,
+       57.70940514165503
+      ],
+      [
+       11.976893196544559,
+       57.70938591627921
+      ],
+      [
+       11.976832535023728,
+       57.70938548306003
+      ],
+      [
+       11.976826909861044,
+       57.709375344451104
+      ],
+      [
+       11.976783801466839,
+       57.70937407590635
+      ],
+      [
+       11.976777381929026,
+       57.70936517306723
+      ],
+      [
+       11.976700756128595,
+       57.70936310353486
+      ],
+      [
+       11.976661567449177,
+       57.709344429750416
+      ],
+      [
+       11.976584027454727,
+       57.70934216001239
+      ],
+      [
+       11.976545753105011,
+       57.70932368632881
+      ],
+      [
+       11.976501896500142,
+       57.709331387647595
+      ],
+      [
+       11.976413180218874,
+       57.709302542278046
+      ],
+      [
+       11.976320742396211,
+       57.709300223200124
+      ],
+      [
+       11.976263848826218,
+       57.709280997545775
+      ],
+      [
+       11.97620318749849,
+       57.70928056402663
+      ],
+      [
+       11.976181552231715,
+       57.70926105488034
+      ],
+      [
+       11.976105873187624,
+       57.70925913620138
+      ],
+      [
+       11.976098507346723,
+       57.709250082117634
+      ],
+      [
+       11.975906068189422,
+       57.70922726817583
+      ],
+      [
+       11.97589964889347,
+       57.70921836529427
+      ],
+      [
+       11.975806099057491,
+       57.70920672453487
+      ],
+      [
+       11.975800594028373,
+       57.70919802179009
+      ],
+      [
+       11.97572396865643,
+       57.70919595167005
+      ],
+      [
+       11.975701539276658,
+       57.70917767820936
+      ],
+      [
+       11.975657682679856,
+       57.70918537923567
+      ],
+      [
+       11.975568967443575,
+       57.70915653328342
+      ],
+      [
+       11.975392539170766,
+       57.70914308915444
+      ],
+      [
+       11.97538686857128,
+       57.709125216298375
+      ],
+      [
+       11.975243957668814,
+       57.70911257328064
+      ],
+      [
+       11.975155242947682,
+       57.70908372704287
+      ],
+      [
+       11.975010903299385,
+       57.70907353065321
+      ],
+      [
+       11.974973144816307,
+       57.709052409468974
+      ],
+      [
+       11.974930234705663,
+       57.709060261463435
+      ],
+      [
+       11.97492286919945,
+       57.709051207314175
+      ],
+      [
+       11.974862088512252,
+       57.70904933724829
+      ],
+      [
+       11.974823815361667,
+       57.70903086305442
+      ],
+      [
+       11.974648136744477,
+       57.70900844795088
+      ],
+      [
+       11.974641717796565,
+       57.70899954500856
+      ],
+      [
+       11.974548168957922,
+       57.70898790332797
+      ],
+      [
+       11.974542664264114,
+       57.708979200531424
+      ],
+      [
+       11.974498957159936,
+       57.70898832800231
+      ],
+      [
+       11.974459620553944,
+       57.70896822670351
+      ],
+      [
+       11.974426126686401,
+       57.70896742568687
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (161.5 m × 2.4 m)",
+    "top_median_m": 6.1,
+    "top_above_track_bed_m": 3.82,
+    "laser_points": 519,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        11.974465919261775,
+        57.709094207229384
+       ],
+       [
+        11.97449644229982,
+        57.70913087618552
+       ],
+       [
+        11.974524489641341,
+        57.709130749699185
+       ],
+       [
+        11.974561979058796,
+        57.709150419167
+       ],
+       [
+        11.974622759895027,
+        57.70915228937849
+       ],
+       [
+        11.974661033067264,
+        57.709170763633125
+       ],
+       [
+        11.974837461169146,
+        57.70918420878078
+       ],
+       [
+        11.974909417260346,
+        57.70921265451793
+       ],
+       [
+        11.974952327556762,
+        57.709204802532426
+       ],
+       [
+        11.974958944436885,
+        57.7092228266262
+       ],
+       [
+        11.975034623321674,
+        57.70922474598987
+       ],
+       [
+        11.975041988889837,
+        57.70923380013303
+       ],
+       [
+        11.975058724397208,
+        57.7092342002858
+       ],
+       [
+        11.97509660868297,
+        57.709207387722785
+       ],
+       [
+        11.975095235135921,
+        57.70919913427496
+       ],
+       [
+        11.975051212796993,
+        57.70919766499585
+       ],
+       [
+        11.975012939394022,
+        57.70917919085714
+       ],
+       [
+        11.97493726060584,
+        57.7091772714814
+       ],
+       [
+        11.974929660309769,
+        57.70916820551984
+       ],
+       [
+        11.974886984817605,
+        57.709176069310736
+       ],
+       [
+        11.974880367981148,
+        57.70915804521349
+       ],
+       [
+        11.974787930662034,
+        57.709155725020175
+       ],
+       [
+        11.97476455530255,
+        57.70913730017641
+       ],
+       [
+        11.974721645047973,
+        57.70914515209867
+       ],
+       [
+        11.974714279577723,
+        57.709136097937694
+       ],
+       [
+        11.974587213229027,
+        57.709123654779155
+       ],
+       [
+        11.974582457259856,
+        57.70910598204111
+       ],
+       [
+        11.974540516620243,
+        57.7091139347415
+       ],
+       [
+        11.9744994132476,
+        57.70909500823662
+       ],
+       [
+        11.974465919261775,
+        57.709094207229384
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        11.975109147093717,
+        57.709209209599585
+       ],
+       [
+        11.975109023391305,
+        57.709235402941786
+       ],
+       [
+        11.975141043406515,
+        57.70925414422788
+       ],
+       [
+        11.975216722369902,
+        57.709256063483316
+       ],
+       [
+        11.97522432275603,
+        57.7092651294284
+       ],
+       [
+        11.975267944770955,
+        57.709257416742204
+       ],
+       [
+        11.97529037397759,
+        57.70927569027794
+       ],
+       [
+        11.975333482185695,
+        57.70927695932987
+       ],
+       [
+        11.975339901351536,
+        57.70928586223884
+       ],
+       [
+        11.975435072962764,
+        57.70928878053767
+       ],
+       [
+        11.975438956184469,
+        57.70930620610328
+       ],
+       [
+        11.975616179697372,
+        57.709318414410816
+       ],
+       [
+        11.97563781468985,
+        57.70933792365103
+       ],
+       [
+        11.975688067619817,
+        57.709339124973084
+       ],
+       [
+        11.975705574785547,
+        57.70933055564152
+       ],
+       [
+        11.975707070716503,
+        57.70931262811079
+       ],
+       [
+        11.97565829169142,
+        57.70929348634059
+       ],
+       [
+        11.975615381434334,
+        57.70930133856586
+       ],
+       [
+        11.975592005557738,
+        57.709282913870425
+       ],
+       [
+        11.97545004044392,
+        57.709270422294765
+       ],
+       [
+        11.975409906033185,
+        57.7092515969128
+       ],
+       [
+        11.975334227065037,
+        57.7092496777729
+       ],
+       [
+        11.975326861420218,
+        57.709240623646046
+       ],
+       [
+        11.975266080388437,
+        57.70923875377107
+       ],
+       [
+        11.975227806831109,
+        57.709220279695984
+       ],
+       [
+        11.975135547305461,
+        57.70921937490964
+       ],
+       [
+        11.975109147093717,
+        57.709209209599585
+       ]
+      ],
+      [
+       [
+        11.975458886925091,
+        57.70928967077922
+       ],
+       [
+        11.97547581912543,
+        57.70929683709802
+       ],
+       [
+        11.975460259486082,
+        57.70929795644061
+       ],
+       [
+        11.975458886925091,
+        57.70928967077922
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (77.0 m × 3.2 m)",
+    "top_median_m": 6.09,
+    "top_above_track_bed_m": 3.75,
+    "laser_points": 299,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.97334168764962,
+       57.709687477977745
+      ],
+      [
+       11.97332268263007,
+       57.709713974465046
+      ],
+      [
+       11.973355451195967,
+       57.709723746265155
+      ],
+      [
+       11.973398410404071,
+       57.70972358913382
+      ],
+      [
+       11.973404978609699,
+       57.70973391898352
+      ],
+      [
+       11.973463899615359,
+       57.70973543836933
+      ],
+      [
+       11.973471264887658,
+       57.70974449260055
+      ],
+      [
+       11.973502212738678,
+       57.7097351693811
+      ],
+      [
+       11.97350403352221,
+       57.70975426436277
+      ],
+      [
+       11.97354714221608,
+       57.70975553402806
+      ],
+      [
+       11.97355356102099,
+       57.709764437023715
+      ],
+      [
+       11.973645999782043,
+       57.709766758132716
+      ],
+      [
+       11.973702892678162,
+       57.709785984956895
+      ],
+      [
+       11.973746915660508,
+       57.70978745471132
+      ],
+      [
+       11.97375242027839,
+       57.70979615754088
+      ],
+      [
+       11.973862729790524,
+       57.7098082006923
+      ],
+      [
+       11.973868234439363,
+       57.709816903517094
+      ],
+      [
+       11.9740941931081,
+       57.709840522247866
+      ],
+      [
+       11.97415013986577,
+       57.70985959764719
+      ],
+      [
+       11.974326736506898,
+       57.70988221362833
+      ],
+      [
+       11.974348251361732,
+       57.709900287176325
+      ],
+      [
+       11.97452468287485,
+       57.70991373279155
+      ],
+      [
+       11.974547112097488,
+       57.709932006457706
+      ],
+      [
+       11.974675054450582,
+       57.70994469683152
+      ],
+      [
+       11.974695696321456,
+       57.709962523172784
+      ],
+      [
+       11.97475699332794,
+       57.70996174629991
+      ],
+      [
+       11.974828270546801,
+       57.709983669034635
+      ],
+      [
+       11.974937468949411,
+       57.709986389943246
+      ],
+      [
+       11.974977603910668,
+       57.710005215478574
+      ],
+      [
+       11.975036525447246,
+       57.71000673413686
+      ],
+      [
+       11.975043891168282,
+       57.71001578828047
+      ],
+      [
+       11.975104673486666,
+       57.710017658274325
+      ],
+      [
+       11.975110178465622,
+       57.71002636104798
+      ],
+      [
+       11.975302423402516,
+       57.71004005506774
+      ],
+      [
+       11.975309789196984,
+       57.71004910919651
+      ],
+      [
+       11.975351730765192,
+       57.710041156250874
+      ],
+      [
+       11.975360066214783,
+       57.71005031121076
+      ],
+      [
+       11.975437607620991,
+       57.71005258171233
+      ],
+      [
+       11.975443112685387,
+       57.71006128447231
+      ],
+      [
+       11.975569070401567,
+       57.7100644054945
+      ],
+      [
+       11.9755764362679,
+       57.7100734596084
+      ],
+      [
+       11.975734942446833,
+       57.71007728090878
+      ],
+      [
+       11.975743278002057,
+       57.71008643584435
+      ],
+      [
+       11.975793531973808,
+       57.71008763713432
+      ],
+      [
+       11.975811787959989,
+       57.71007009784041
+      ],
+      [
+       11.97579652486691,
+       57.71005176970082
+      ],
+      [
+       11.975671536810884,
+       57.71004874973671
+      ],
+      [
+       11.975663201282291,
+       57.71003959479661
+      ],
+      [
+       11.975569815139556,
+       57.71003712393755
+      ],
+      [
+       11.97556339578996,
+       57.710028221039344
+      ],
+      [
+       11.97532109487957,
+       57.7100223961884
+      ],
+      [
+       11.97527999007655,
+       57.710003469925745
+      ],
+      [
+       11.975187550567972,
+       57.710001150003805
+      ],
+      [
+       11.97513065652821,
+       57.709981923837006
+      ],
+      [
+       11.975054976056901,
+       57.70998000451585
+      ],
+      [
+       11.975047375569526,
+       57.709970938560446
+      ],
+      [
+       11.975004699150697,
+       57.709978802381414
+      ],
+      [
+       11.974964564203871,
+       57.70995997685474
+      ],
+      [
+       11.974921653010538,
+       57.70996782883506
+      ],
+      [
+       11.97488151811968,
+       57.709949003282546
+      ],
+      [
+       11.974705835033191,
+       57.70992658821916
+      ],
+      [
+       11.974666646802548,
+       57.70990791382228
+      ],
+      [
+       11.974621839929547,
+       57.70990763957034
+      ],
+      [
+       11.97461711878218,
+       57.709897741592386
+      ],
+      [
+       11.974555821883238,
+       57.70989851839851
+      ],
+      [
+       11.974501303913021,
+       57.70987699629532
+      ],
+      [
+       11.974442382617884,
+       57.709875477389986
+      ],
+      [
+       11.974435017075605,
+       57.709866423212915
+      ],
+      [
+       11.974374235055825,
+       57.70986455290008
+      ],
+      [
+       11.97436873027791,
+       57.70985585009615
+      ],
+      [
+       11.974292103627288,
+       57.709853779096655
+      ],
+      [
+       11.974269674581809,
+       57.709835505386785
+      ],
+      [
+       11.974176289093675,
+       57.709833033505106
+      ],
+      [
+       11.974153860119753,
+       57.70981475977534
+      ],
+      [
+       11.973974791957044,
+       57.70980124043976
+      ],
+      [
+       11.973971759250144,
+       57.70978344073658
+      ],
+      [
+       11.97387837392367,
+       57.70978096863647
+      ],
+      [
+       11.973839186282799,
+       57.709762293988504
+      ],
+      [
+       11.97371303231627,
+       57.70975005009085
+      ],
+      [
+       11.973706613474354,
+       57.70974114710294
+      ],
+      [
+       11.973613063053085,
+       57.70972950471677
+      ],
+      [
+       11.973607558478456,
+       57.70972080188147
+      ],
+      [
+       11.973546776758548,
+       57.709718931173875
+      ],
+      [
+       11.973541272201453,
+       57.70971022833584
+      ],
+      [
+       11.973507770366455,
+       57.709709427087155
+      ],
+      [
+       11.973493565556705,
+       57.709719150652624
+      ],
+      [
+       11.97349174477984,
+       57.70970005567076
+      ],
+      [
+       11.973458250266543,
+       57.70969925439174
+      ],
+      [
+       11.973446976685205,
+       57.709709345035435
+      ],
+      [
+       11.973391940957308,
+       57.7096886802156
+      ],
+      [
+       11.97334168764962,
+       57.709687477977745
+      ]
+     ],
+     [
+      [
+       11.975475781084903,
+       57.710043568093226
+      ],
+      [
+       11.975459496111059,
+       57.71003598746057
+      ],
+      [
+       11.975475056067992,
+       57.710034868121234
+      ],
+      [
+       11.975475781084903,
+       57.710043568093226
+      ]
+     ],
+     [
+      [
+       11.973363343942903,
+       57.70971472122619
+      ],
+      [
+       11.973368718545151,
+       57.70969485746001
+      ],
+      [
+       11.973389309602165,
+       57.70969999559971
+      ],
+      [
+       11.973389591833604,
+       57.70971175408516
+      ],
+      [
+       11.973363343942903,
+       57.70971472122619
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (153.0 m × 3.1 m)",
+    "top_median_m": 6.0,
+    "top_above_track_bed_m": 3.69,
+    "laser_points": 637,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020-03-21. Not a structure; these points are class 64 in the LAZ. Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0"
+   }
+  }
+ ]
+}

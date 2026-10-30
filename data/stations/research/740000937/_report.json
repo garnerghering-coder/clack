@@ -1,0 +1,99 @@
+{
+ "clack_id": "740000937",
+ "slug": "burlov",
+ "flags": [
+  "Platform BIS 2522 (track 64): laser gives 0.59 m above the track bed (≈0.41 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md.",
+  "Platform BIS 2601 (track 62): laser gives 0.63 m above the track bed (≈0.45 m above rail after −0.15…0.2 m), register class mellan = 0.58 m. Not decided; add to REVIEW.md."
+ ],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 1.72,
+  "median_m": 6.72,
+  "max_m": 13.32,
+  "nan_cells": 0,
+  "size_m": [
+   488,
+   486
+  ],
+  "box_sweref": [
+   378867,
+   6167490,
+   379355,
+   6167976
+  ],
+  "tiles": [
+   "616_37 (2025-09-28)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y25a003-61650_3775_25.copc.laz",
+   "y25a003-61675_3775_25.copc.laz"
+  ],
+  "scan_date": "2025-03-07",
+  "density_pts_m2_nominal": 1.8,
+  "flight_height_m": 2400,
+  "points_in_box": 1027689,
+  "density_in_box": 4.33,
+  "classes": {
+   "1": 421652,
+   "2": 601557,
+   "7": 189,
+   "17": 4015,
+   "18": 276
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "2522",
+   "track": "64",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 330.0,
+   "width_m": 11.6,
+   "roof": "Tak",
+   "track_bed_m": 6.83,
+   "track_bed_points": 1470,
+   "platform_surface_m": 7.42,
+   "platform_points": 8331,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "other_side_surface_m": 7.42,
+   "side_note": "raised ground on both sides of the track; BanInfo SIDE picked the side",
+   "surface_minus_bed_m": 0.59,
+   "laser_estimate_above_rail_m": 0.41
+  },
+  {
+   "bis_object": "2601",
+   "track": "62",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 330.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 6.88,
+   "track_bed_points": 1514,
+   "platform_surface_m": 7.51,
+   "platform_points": 4348,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.63,
+   "laser_estimate_above_rail_m": 0.45
+  }
+ ],
+ "platform_surface_m": 7.46,
+ "track_bed_m": 6.86,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 1,
+  "footbridge": 0,
+  "canopy_osm": 6,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 19,
+ "photos_station_related": 14
+}

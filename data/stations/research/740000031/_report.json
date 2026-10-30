@@ -1,0 +1,112 @@
+{
+ "clack_id": "740000031",
+ "slug": "flemingsberg",
+ "flags": [
+  "w102577789 Flemingsberg (station building): p95 52.2 m is 3.9 m above the median 48.3 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 28.79,
+  "median_m": 36.79,
+  "max_m": 69.18,
+  "nan_cells": 0,
+  "size_m": [
+   504,
+   570
+  ],
+  "box_sweref": [
+   667984,
+   6567899,
+   668488,
+   6568469
+  ],
+  "tiles": [
+   "656_66 (2022-10-10)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20c029-65675_6675_25.copc.laz"
+  ],
+  "scan_date": "2020-03-31",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 498586,
+  "density_in_box": 1.74,
+  "classes": {
+   "1": 137107,
+   "2": 349316,
+   "7": 366,
+   "9": 430,
+   "17": 11274,
+   "18": 93
+  },
+  "train_points_class64": 1063
+ },
+ "platforms": [
+  {
+   "bis_object": "1011",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 510.0,
+   "width_m": 13.0,
+   "roof": "Tak",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "1278",
+   "track": "7",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 395.0,
+   "width_m": 14.0,
+   "roof": "Tak",
+   "track_bed_m": 33.52,
+   "track_bed_points": 749,
+   "platform_surface_m": 34.23,
+   "platform_points": 2314,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.54
+  },
+  {
+   "bis_object": "1277",
+   "track": "5",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": 221.0,
+   "width_m": 14.0,
+   "roof": "Skydd",
+   "track_bed_m": 33.77,
+   "track_bed_points": 429,
+   "platform_surface_m": 34.57,
+   "platform_points": 2275,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.8,
+   "laser_estimate_above_rail_m": 0.62
+  }
+ ],
+ "platform_surface_m": 34.4,
+ "track_bed_m": 33.65,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 5,
+  "footbridge": 0,
+  "canopy_osm": 0,
+  "canopy_laser": 2,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 113,
+ "photos_station_related": 55
+}

@@ -1,0 +1,121 @@
+{
+ "clack_id": "740000556",
+ "slug": "arlanda_c",
+ "flags": [
+  "w4967023 Terminal 2 (International) (building): p95 54.5 m is 4.3 m above the median 50.2 m (a taller neighbour or a mast inside the outline?).",
+  "w24478711 Terminal 4 (building): p95 48.0 m is 3.7 m above the median 44.3 m (a taller neighbour or a mast inside the outline?).",
+  "w51990808 transportation: p95 41.3 m is 3.6 m above the median 37.7 m (a taller neighbour or a mast inside the outline?).",
+  "w104015759 building: p95 44.1 m is 4.1 m above the median 40.0 m (a taller neighbour or a mast inside the outline?).",
+  "w104015817 P22 (building): p95 47.8 m is 5.3 m above the median 42.5 m (a taller neighbour or a mast inside the outline?).",
+  "w227068741 building: p95 46.4 m is 4.2 m above the median 42.2 m (a taller neighbour or a mast inside the outline?).",
+  "w487787893 transportation: p95 43.3 m is 3.8 m above the median 39.5 m (a taller neighbour or a mast inside the outline?).",
+  "w727421425 Terminal 5 (International) (building): p95 50.2 m is 4.8 m above the median 45.5 m (a taller neighbour or a mast inside the outline?).",
+  "w727421426 building: p95 50.4 m is 3.5 m above the median 46.9 m (a taller neighbour or a mast inside the outline?).",
+  "w1415784760 transportation: p95 68.5 m is 24.8 m above the median 43.7 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 26.96,
+  "median_m": 31.34,
+  "max_m": 34.96,
+  "nan_cells": 0,
+  "size_m": [
+   330,
+   1013
+  ],
+  "box_sweref": [
+   664898,
+   6615396,
+   665228,
+   6616409
+  ],
+  "tiles": [
+   "661_66 (2023-05-16)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y21c038-66150_6625_25.copc.laz",
+   "y21c038-66150_6650_25.copc.laz"
+  ],
+  "scan_date": "2021-04-17",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 545984,
+  "density_in_box": 1.63,
+  "classes": {
+   "1": 196594,
+   "2": 320676,
+   "7": 377,
+   "17": 28337
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "2306",
+   "track": "7",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": null,
+   "width_m": null,
+   "roof": "?",
+   "baninfo_side": "1",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  },
+  {
+   "bis_object": "2307",
+   "track": "2",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": null,
+   "width_m": null,
+   "roof": "?",
+   "baninfo_side": "1",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  },
+  {
+   "bis_object": "2305",
+   "track": "5",
+   "height_class": "hög",
+   "class_height_m": 0.73,
+   "length_m": null,
+   "width_m": null,
+   "roof": "?",
+   "baninfo_side": "1",
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "underground": true,
+   "note": "underground platform: the airborne laser sees the surface above it, not the platform or the track bed"
+  }
+ ],
+ "platform_surface_m": null,
+ "track_bed_m": null,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 12,
+  "footbridge": 0,
+  "canopy_osm": 25,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 149,
+ "photos_station_related": 36
+}

@@ -1,0 +1,110 @@
+{
+ "clack_id": "740000060",
+ "slug": "falkoping_c",
+ "flags": [],
+ "notes": [],
+ "osm_source": "https://overpass-api.de/api/interpreter",
+ "ground": {
+  "min_m": 211.31,
+  "median_m": 216.38,
+  "max_m": 232.1,
+  "nan_cells": 0,
+  "size_m": [
+   519,
+   637
+  ],
+  "box_sweref": [
+   414581,
+   6448882,
+   415100,
+   6449519
+  ],
+  "tiles": [
+   "644_41 (2023-04-11)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y22b012-64475_4125_25.copc.laz",
+   "y22b012-64475_4150_25.copc.laz"
+  ],
+  "scan_date": "2022-03-07",
+  "density_pts_m2_nominal": 1.1,
+  "flight_height_m": 3200,
+  "points_in_box": 1016780,
+  "density_in_box": 3.08,
+  "classes": {
+   "1": 412386,
+   "2": 601351,
+   "7": 491,
+   "17": 2526,
+   "18": 26
+  },
+  "train_points_class64": 947
+ },
+ "platforms": [
+  {
+   "bis_object": "315",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 392.0,
+   "width_m": 8.4,
+   "roof": "Tak",
+   "track_bed_m": 216.46,
+   "track_bed_points": 1293,
+   "platform_surface_m": 217.31,
+   "platform_points": 5681,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.85,
+   "laser_estimate_above_rail_m": 0.67
+  },
+  {
+   "bis_object": "317",
+   "track": "2",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 395.0,
+   "width_m": 6.5,
+   "roof": "Tak",
+   "track_bed_m": 216.47,
+   "track_bed_points": 1420,
+   "platform_surface_m": 217.32,
+   "platform_points": 4377,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.85,
+   "laser_estimate_above_rail_m": 0.67
+  },
+  {
+   "bis_object": "1138",
+   "track": "21",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 40.0,
+   "width_m": 2.9,
+   "roof": "Saknas",
+   "track_bed_m": 216.18,
+   "track_bed_points": 134,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "1",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  }
+ ],
+ "platform_surface_m": 217.31,
+ "track_bed_m": 216.46,
+ "trains_in_scan": 3,
+ "structures": {
+  "building": 4,
+  "footbridge": 0,
+  "canopy_osm": 7,
+  "canopy_laser": 3,
+  "hall_roof_laser": 0,
+  "train_in_scan": 3
+ },
+ "photos": 109,
+ "photos_station_related": 40
+}

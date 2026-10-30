@@ -1,0 +1,108 @@
+{
+ "clack_id": "740000170",
+ "slug": "eskilstuna_c",
+ "flags": [],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=16.498676,59.366295,16.512070,59.372415",
+ "ground": {
+  "min_m": 11.99,
+  "median_m": 17.37,
+  "max_m": 28.61,
+  "nan_cells": 0,
+  "size_m": [
+   529,
+   426
+  ],
+  "box_sweref": [
+   585290,
+   6581935,
+   585819,
+   6582361
+  ],
+  "tiles": [
+   "658_58 (2023-03-23)"
+  ]
+ },
+ "laser": {
+  "tiles": [
+   "y20c026-65800_5850_25.copc.laz"
+  ],
+  "scan_date": "2020-02-27",
+  "density_pts_m2_nominal": 1.2,
+  "flight_height_m": 3000,
+  "points_in_box": 461806,
+  "density_in_box": 2.05,
+  "classes": {
+   "1": 209072,
+   "2": 252305,
+   "7": 100,
+   "17": 329
+  },
+  "train_points_class64": 110
+ },
+ "platforms": [
+  {
+   "bis_object": "686",
+   "track": "3",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 338.0,
+   "width_m": 9.0,
+   "roof": "Skydd",
+   "track_bed_m": 18.27,
+   "track_bed_points": 679,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": "2",
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "687",
+   "track": "1",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 326.0,
+   "width_m": 3.5,
+   "roof": "Skydd",
+   "track_bed_m": 17.42,
+   "track_bed_points": 855,
+   "platform_surface_m": 18.16,
+   "platform_points": 1656,
+   "platform_side": "right",
+   "baninfo_side": "2",
+   "surface_minus_bed_m": 0.74,
+   "laser_estimate_above_rail_m": 0.56
+  },
+  {
+   "bis_object": "1208",
+   "track": "4",
+   "height_class": "mellan",
+   "class_height_m": 0.58,
+   "length_m": 142.0,
+   "width_m": null,
+   "roof": "Tak",
+   "track_bed_m": 17.4,
+   "track_bed_points": 370,
+   "platform_surface_m": 18.23,
+   "platform_points": 965,
+   "platform_side": "left",
+   "baninfo_side": "1",
+   "surface_minus_bed_m": 0.83,
+   "laser_estimate_above_rail_m": 0.65
+  }
+ ],
+ "platform_surface_m": 18.2,
+ "track_bed_m": 17.42,
+ "trains_in_scan": 1,
+ "structures": {
+  "building": 1,
+  "footbridge": 0,
+  "canopy_osm": 15,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 1
+ },
+ "photos": 29,
+ "photos_station_related": 8
+}
