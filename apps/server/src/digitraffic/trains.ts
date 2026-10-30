@@ -177,10 +177,20 @@ export interface DayComposition {
   lengthM: number | null;
 }
 
+/**
+ * Cars in one "wagon" of a composition, by wagon type. For these multiple units Digitraffic lists the whole unit as one
+ * wagon (verified 2026-10-30 in /compositions/2026-10-30: train 1527 one Sm5 wagon 75.2 m long, 9704 three Sm4 wagons
+ * 54.4 m, 1760 one Sm2 wagon 53 m), so counting wagons drew a 4-car Flirt as one car. Sm3 (Pendolino) and Dm12 list
+ * each car (9: twelve Sm3 wagons 25.9–28.1 m; 428: two Dm12 of 25.2 m). Other types count one.
+ * Sources: en.wikipedia.org/wiki/JKOY_Class_Sm5 ("all the four cars"), /VR_Class_Sm4 ("two powered cars"),
+ * /VR_Class_Sm2 ("each Sm2 unit consists of two cars", as the Sm1), read 2026-10-30.
+ */
+const CARS_PER_WAGON: Record<string, number> = { Sm1: 2, Sm2: 2, Sm4: 2, Sm5: 4 };
+
 /** The first section's cars and length. Pure. */
 export function compositionOf(c: DtComposition | null | undefined): DayComposition {
   const s = c?.journeySections?.[0];
-  const cars = s?.wagons?.length ?? 0;
+  const cars = (s?.wagons ?? []).reduce((n, w) => n + (CARS_PER_WAGON[w.wagonType?.trim() ?? ''] ?? 1), 0);
   return { vehicle: vehicleOf(c), cars: cars > 0 ? cars : null, lengthM: s?.totalLength ?? null };
 }
 

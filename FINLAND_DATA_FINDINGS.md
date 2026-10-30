@@ -45,6 +45,10 @@ the Sources page and map attribution credit it as: `Source: Fintraffic / digitra
 - `/compositions/{date}/{number}` is cached 180 s and `/compositions/{date}` (0.8 MB) 900 s. `locomotiveType` is the
   locomotive (Sr3, Sr2) or, for a multiple unit, the unit type (Sm5, Sm4, Sm2, Sm3). An S (Pendolino-category) train
   can be hauled by an Sr3 (S 12 on 2026-10-24), so the type follows the composition, not the letter.
+- A `wagons` entry is not always one car (checked 2026-10-30): Sm5, Sm4 and Sm2 units are listed one wagon per unit
+  (1527: one Sm5 wagon, 75.2 m, a 4-car Flirt; 9704: three Sm4 wagons of 54.4 m, 2 cars each; 1760: one Sm2, 53 m, 2
+  cars). Sm3 (Pendolino) and Dm12 list each car (9: twelve Sm3 wagons of 25.9–28.1 m; 428: two Dm12 of 25.2 m).
+  Counting wagons drew 25 of 35 Sm5 trains as one car; `compositionOf` now counts cars per unit type.
 - `/live-trains/station/{code}?departing_trains=N&departed_trains=N&arriving_trains=N&arrived_trains=N&include_nonstopping=false`:
   N is a count (the next N departures, the last N departed), at most 999; Helsinki with 400+100 each is 11 MB, so Clack
   asks for 200+40. Cached 30 s. Rows carry `commercialStop`, `commercialTrack`, `cancelled` and `causes`.
