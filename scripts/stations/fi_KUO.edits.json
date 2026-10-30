@@ -1,0 +1,226 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_KUO).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Tunnel level: the passenger tunnel from the east end of the station building under the tracks",
+      "order": 0,
+      "name_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Platform level: island platform 1/2 and platform 3",
+      "order": 1,
+      "name_source": "Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KUO/_report.json and kuopio_platform_vayla.geojson, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_KUO)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 2 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_KUO)."
+    }
+  ],
+  "platform_heights": {
+    "3": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.4870729, read 2026-10-30, CC BY 4.0: tracks 3, class korkea = 0.55 m above rail, 320 m long; a recorded design class, not a survey"
+    },
+    "1–2": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.2584943, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 324 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_KUO/kuopio_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w87807952",
+      "kind": "building",
+      "name": "Kuopion rautatieasema (station building)",
+      "top_m": -0.71,
+      "base_m": -5.97,
+      "_source": "Outline OSM w87807952 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa); from data/stations/research/fi_KUO/kuopio_structures_heights.geojson (metres above the platform surface, 96.38 m RH 2000, laser 2021-07-05)"
+    },
+    {
+      "from": "w810700766",
+      "kind": "building",
+      "name": "Kuopion matkakeskus (transportation)",
+      "top_m": 7.96,
+      "base_m": -6.41,
+      "_source": "Outline OSM w810700766 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P5114D3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P5114D3 2021-07-05 (20210102_Swissphoto_Kuopio_kesa); from data/stations/research/fi_KUO/kuopio_structures_heights.geojson (metres above the platform surface, 96.38 m RH 2000, laser 2021-07-05)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_KUO/kuopio_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 96.38,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_KUO/kuopio_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (96.38 m N2000, laser 2021-07-05)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resb4e729d64c",
+      "category": "waiting",
+      "name": "Odotustila",
+      "level": "0",
+      "x": 22.6,
+      "y": -121.9,
+      "fee": null,
+      "opening_hours": "Mo-Sa 05:00-24:00; Su 06:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)",
+      "approximate": true,
+      "where": "station building / Matkakeskus"
+    },
+    {
+      "id": "res2a7866f7a0",
+      "category": "ticket",
+      "name": "VR ticket machines (2)",
+      "level": "0",
+      "x": 22.6,
+      "y": -121.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)",
+      "approximate": true,
+      "where": "one inside the station building, one on the Matkakeskus side"
+    },
+    {
+      "id": "resa5f08ebd8e",
+      "category": "toilet",
+      "name": "WC",
+      "level": "0",
+      "x": 58.7,
+      "y": 17.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n14200533424 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "res21664f287c",
+      "category": "kiosk",
+      "name": "R-kioski Kuopio Asema",
+      "level": "0",
+      "x": 65.2,
+      "y": 23.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:15-19:00; Sa,Su 10:00-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/kuopio-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n12379097310 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "res2badc6475d",
+      "category": "shop",
+      "name": "Europcar",
+      "level": "0",
+      "x": 69.9,
+      "y": 31.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n1831133756 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "res5581839722",
+      "category": "shop",
+      "name": "Hertz",
+      "level": "0",
+      "x": 88.4,
+      "y": 28.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n1831133767 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "resd475e7a408",
+      "category": "shop",
+      "name": "K-Supermarket Portti",
+      "level": "0",
+      "x": 96.9,
+      "y": -104.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 07:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "EuroPark, \"P-Matkakeskus, Kuopio\", https://www.europark.fi/en/?p=6808, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n9775872343 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "res83d215e800",
+      "category": "restaurant",
+      "name": "Barot's Kuopio",
+      "level": "0",
+      "x": 39.9,
+      "y": -63.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:30-21:00; Fr,Sa 10:30-22:00; Su 12:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed OSM node n8946375509 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    },
+    {
+      "id": "res4a69e3e08d",
+      "category": "bus",
+      "name": "Kuopion linja-autoasema (bus and train terminal)",
+      "level": "0",
+      "x": 6.5,
+      "y": -121.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/en/railway-stations-and-routes/kuopio, read 2026-10-30; Vilkku (Kuopio regional public transport), https://vilkku.kuopio.fi/en/tourist, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KUO.json), read 2026-10-30; placed representative point of the OSM area w892923014 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res1f1f2c130f",
+      "category": "shop",
+      "name": "K-Supermarket",
+      "level": "0",
+      "x": 96.9,
+      "y": -104.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 07:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9775872343 (ODbL), read 2026-10-30; placed OSM node n9775872343 (research pass 2026-10-30, data/stations/research/fi_KUO/station_facts.json)"
+    }
+  ]
+}

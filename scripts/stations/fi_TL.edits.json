@@ -1,0 +1,55 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_TL).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Level 0",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Level -1",
+      "order": -1
+    }
+  ],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the research pass: no entrance nodes: platforms cannot reach an exit"
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        -24.0,
+        55.3
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n13816771579 (already in OSM); position OSM n13816771579 (data/stations/research/fi_TL/station_facts.json)"
+    },
+    {
+      "at": [
+        -13.8,
+        35.6
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n13816771580 (already in OSM); position OSM n13816771580 (data/stations/research/fi_TL/station_facts.json)"
+    }
+  ]
+}

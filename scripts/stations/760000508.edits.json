@@ -3,13 +3,14 @@
   "radius": 400,
   "paths_by_layer": true,
   "path_radius": 60,
-  "default_level": "1",
+  "default_level": "0",
   "levels": [
     {
-      "osm": "1",
+      "osm": "0",
       "id": "L0",
       "name": "Level 0",
-      "order": 0
+      "order": 0,
+      "name_source": "OSM tags Ski's platforms (relations 11180736–11180738) and the station level 0, not Norway's usual 1"
     }
   ],
   "sources": [
@@ -22,7 +23,70 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the research pass: no entrance nodes: platforms cannot reach an exit"
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        -26.4,
+        -33.7
+      ],
+      "level": "0",
+      "name": "West door at the underpass",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30; position OSM n9941248953 (data/stations/research/NO-SKI/station_facts.json)"
+    },
+    {
+      "at": [
+        -26.4,
+        -33.7
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n9941248953 (already in OSM); position OSM n9941248953 (data/stations/research/NO-SKI/station_facts.json)"
+    },
+    {
+      "at": [
+        99.0,
+        -125.2
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbaneveien)",
+      "_source": "OSM n9941248969 (already in OSM); position OSM n9941248969 (data/stations/research/NO-SKI/station_facts.json)"
+    },
+    {
+      "at": [
+        97.7,
+        -132.4
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbaneveien)",
+      "_source": "OSM n9941248970 (already in OSM); position OSM n9941248970 (data/stations/research/NO-SKI/station_facts.json)"
+    },
+    {
+      "at": [
+        90.5,
+        -131.1
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbaneveien)",
+      "_source": "OSM n9941248971 (already in OSM); position OSM n9941248971 (data/stations/research/NO-SKI/station_facts.json)"
+    },
+    {
+      "at": [
+        91.8,
+        -123.9
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbaneveien)",
+      "_source": "OSM n9941248972 (already in OSM); position OSM n9941248972 (data/stations/research/NO-SKI/station_facts.json)"
+    }
+  ]
 }

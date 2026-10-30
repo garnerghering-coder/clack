@@ -1,0 +1,206 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_PM).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Ground level: station building (Asemakatu 2, built 1981) and the platforms: edge platform 1 (station side), island platform 3/4, platform 6 (east)",
+      "order": 0,
+      "name_source": "Väylävirasto, \"Ratapihaselvitykset: Pieksämäki\" (Väyläviraston julkaisuja 58/2026, published 2026-08-10, CC BY 4.0), pp. 17–18, 25–27, 35, https://www.doria.fi/bitstream/10024/195303/1/vj_2026-58_978-952-405-444-7.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-PM/_report.json and pieksamaki_platform_vayla.geojson, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; https://en.wikipedia.org/wiki/Pieks%C3%A4m%C3%A4ki_railway_station, read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Asematunneli (pedestrian tunnel under the tracks)",
+      "order": -1,
+      "name_source": "Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_PM)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 2 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_PM)."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        -62.8,
+        -10.5
+      ],
+      "level": "0",
+      "name": "Entrance (Asemakatu)",
+      "_source": "OSM n2326334305 (already in OSM); position OSM n2326334305 (data/stations/research/fi_PM/station_facts.json)"
+    },
+    {
+      "at": [
+        -40.8,
+        -9.9
+      ],
+      "level": "0",
+      "name": "Entrance (Asemakatu)",
+      "_source": "OSM n13736783178 (already in OSM); position OSM n13736783178 (data/stations/research/fi_PM/station_facts.json)"
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3182770, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 210 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_PM/pieksamaki_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w155336251",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.1,
+      "_source": "Outline OSM w155336251 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa); from data/stations/research/fi_PM/pieksamaki_structures_heights.geojson (metres above the platform surface, 122.32 m RH 2000, laser 2025-06-14); underside not measured"
+    },
+    {
+      "from": "w1230324174",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 6.94,
+      "base_m": 5.35,
+      "_source": "Outline OSM w1230324174 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5211C1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5211C1 2025-06-14 (20250002_MML_Pieksamaki_kesa); from data/stations/research/fi_PM/pieksamaki_structures_heights.geojson (metres above the platform surface, 122.32 m RH 2000, laser 2025-06-14); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_PM/pieksamaki_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 122.32,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_PM/pieksamaki_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (122.32 m N2000, laser 2025-06-14)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res6d5a41d5a5",
+      "category": "waiting",
+      "name": "Odotustila",
+      "level": "0",
+      "x": -47.4,
+      "y": -12.6,
+      "fee": null,
+      "opening_hours": "Mo-Sa 06:00-19:30; Su 08:15-19:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; https://www.vr.fi/en/railway-stations-and-routes/pieksamaki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)",
+      "approximate": true,
+      "where": "station building"
+    },
+    {
+      "id": "res184b1e2dfd",
+      "category": "ticket",
+      "name": "VR ticket machine",
+      "level": "0",
+      "x": -47.4,
+      "y": -12.6,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-22:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building's vestibule"
+    },
+    {
+      "id": "resfa40d12ac0",
+      "category": "toilet",
+      "name": "WC",
+      "level": "0",
+      "x": -47.4,
+      "y": -12.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)",
+      "approximate": true,
+      "where": "station building"
+    },
+    {
+      "id": "resd0666c2343",
+      "category": "restaurant",
+      "name": "HYvä Maku (Chinese restaurant)",
+      "level": "0",
+      "x": -47.4,
+      "y": -12.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Visit Pieksämäki, \"Cafes and restaurants\", https://visitpieksamaki.fi/?p=4640, read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)",
+      "approximate": true,
+      "where": "Asemakatu 2"
+    },
+    {
+      "id": "res3fd4b584b3",
+      "category": "bus",
+      "name": "Pieksämäki matkakeskus (bus stands)",
+      "level": "0",
+      "x": -49.6,
+      "y": -21.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/pieksamaki, read 2026-10-30; placed OSM node n413044727 (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)"
+    },
+    {
+      "id": "res9dcaf4bb8c",
+      "category": "taxi",
+      "name": "",
+      "level": "0",
+      "x": -96.5,
+      "y": -26.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; placed OSM node n413044858 (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)"
+    },
+    {
+      "id": "res256e9fd1d9",
+      "category": "restaurant",
+      "name": "JR Fast Food",
+      "level": "0",
+      "x": -153.7,
+      "y": 40,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-PM.json), read 2026-10-30; placed representative point of the OSM area w489048039 (research pass 2026-10-30, data/stations/research/fi_PM/station_facts.json)",
+      "approximate": true
+    }
+  ]
+}

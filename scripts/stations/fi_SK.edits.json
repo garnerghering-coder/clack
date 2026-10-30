@@ -1,0 +1,301 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_SK).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street and platform level (new station building / station hall, platforms)",
+      "order": 0,
+      "name_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; Wikipedia 'Seinäjoki railway station', https://en.wikipedia.org/wiki/Sein%C3%A4joki_railway_station, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Underpasses under the tracks",
+      "order": -1,
+      "name_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_SK)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 3 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_SK)."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        -103.8,
+        25.3
+      ],
+      "level": "0",
+      "name": "Entrance (Valtionkatu)",
+      "_source": "OSM n1789872491 (already in OSM); position OSM n1789872491 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        -16,
+        56.5
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n2063153959 (already in OSM); position OSM n2063153959 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        -0.5,
+        40.8
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n2157439198 (already in OSM); position OSM n2157439198 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        -170.5,
+        -0.1
+      ],
+      "level": "0",
+      "name": "Entrance (Valtionkatu)",
+      "_source": "OSM n8737084926 (already in OSM); position OSM n8737084926 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        38.5,
+        102.5
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12396780457 (already in OSM); position OSM n12396780457 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        54.6,
+        85.7
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12396780458 (already in OSM); position OSM n12396780458 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        50,
+        81.2
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12398289780 (already in OSM); position OSM n12398289780 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        45.5,
+        76.8
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12398289781 (already in OSM); position OSM n12398289781 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        55,
+        118.6
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12398310505 (already in OSM); position OSM n12398310505 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        71,
+        101.7
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12398310508 (already in OSM); position OSM n12398310508 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        30.4,
+        149.3
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12398310516 (already in OSM); position OSM n12398310516 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        43.2,
+        107
+      ],
+      "level": "0",
+      "name": "Pyöräparkki Asema B",
+      "_source": "OSM n12612770003 (already in OSM); position OSM n12612770003 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        50.4,
+        138.8
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n12777953042 (already in OSM); position OSM n12777953042 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        52.9,
+        83.4
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n13041604964 (already in OSM); position OSM n13041604964 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        134.5,
+        175.8
+      ],
+      "level": "0",
+      "name": "Pyöräparkki Asema A",
+      "_source": "OSM n13154978924 (already in OSM); position OSM n13154978924 (data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "at": [
+        -5.6,
+        108.9
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n14094707724 (already in OSM); position OSM n14094707724 (data/stations/research/fi_SK/station_facts.json)"
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3329958, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 451 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.265,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3329979, read 2026-10-30, CC BY 4.0: tracks 4, class matala = 0.265 m above rail, 396 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.265,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3329972, read 2026-10-30, CC BY 4.0: tracks 3, class matala = 0.265 m above rail, 459 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_SK/seinajoki_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w27744921",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 7.12,
+      "base_m": -1.36,
+      "_source": "Outline OSM w27744921 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3334A4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3334A4 2025-06-13 (20250105_Leica_Seinajoki_kesa); from data/stations/research/fi_SK/seinajoki_structures_heights.geojson (metres above the platform surface, 45.14 m RH 2000, laser 2025-06-13)"
+    },
+    {
+      "from": "w751304345",
+      "kind": "roof",
+      "name": "canopy",
+      "top_m": 4.72,
+      "_source": "Outline OSM w751304345 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3334A4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3334A4 2025-06-13 (20250105_Leica_Seinajoki_kesa); from data/stations/research/fi_SK/seinajoki_structures_heights.geojson (metres above the platform surface, 45.14 m RH 2000, laser 2025-06-13); underside not measured"
+    },
+    {
+      "from": "w751304346",
+      "kind": "roof",
+      "name": "canopy",
+      "top_m": 4.7,
+      "_source": "Outline OSM w751304346 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_P3334A4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned P3334A4 2025-06-13 (20250105_Leica_Seinajoki_kesa); from data/stations/research/fi_SK/seinajoki_structures_heights.geojson (metres above the platform surface, 45.14 m RH 2000, laser 2025-06-13); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_SK/seinajoki_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 45.14,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_SK/seinajoki_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (45.14 m N2000, laser 2025-06-13)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res6bcc02aca1",
+      "category": "waiting",
+      "name": "Odotustila (station hall)",
+      "level": "0",
+      "x": -57.8,
+      "y": 30.2,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_SK/station_facts.json)",
+      "approximate": true,
+      "where": "new station building"
+    },
+    {
+      "id": "resdcbaec7ba2",
+      "category": "cafe",
+      "name": "Café Picnic",
+      "level": "0",
+      "x": 57.2,
+      "y": 95.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; placed OSM node n12396780467 (research pass 2026-10-30, data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "id": "res41bf6ba184",
+      "category": "toilet",
+      "name": "WC",
+      "level": "0",
+      "x": 42.3,
+      "y": 77.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30; placed OSM node n2157465904 (research pass 2026-10-30, data/stations/research/fi_SK/station_facts.json)"
+    },
+    {
+      "id": "res803acdc8bf",
+      "category": "shop",
+      "name": "Alusasut Justihi Eikä Melekehen",
+      "level": "0",
+      "x": -108,
+      "y": 14.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30; placed OSM node n12431171260 (research pass 2026-10-30, data/stations/research/fi_SK/station_facts.json)"
+    }
+  ]
+}

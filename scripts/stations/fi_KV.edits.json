@@ -1,0 +1,223 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_KV).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Ground level: station building (Hallituskatu 3, waiting hall), platform 1 and the three island platforms",
+      "order": 0,
+      "name_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kouvola, read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-KV/_report.json and kouvola_platform_vayla.geojson, read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Asematunneli (passenger tunnel under the tracks)",
+      "order": -1,
+      "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Kouvola, Kuusankoski ja niiden välinen linjaosuus\" (Väyläviraston julkaisuja 57/2026, published 2026-08-10, CC BY 4.0), pp. 30–31 and 36, https://www.doria.fi/bitstream/10024/195302/1/vj_2026-57_978-952-405-443-0.pdf, read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Upper floor of the station building",
+      "order": 1,
+      "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_KV)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 1 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_KV)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3185925, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 350 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3185976, read 2026-10-30, CC BY 4.0: tracks 3, class korkea = 0.55 m above rail, 430 m long; a recorded design class, not a survey"
+    },
+    "6–7": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3186088, read 2026-10-30, CC BY 4.0: tracks 6, class korkea = 0.55 m above rail, 480 m long; a recorded design class, not a survey"
+    },
+    "9–10": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3186369, read 2026-10-30, CC BY 4.0: tracks 9, class korkea = 0.55 m above rail, 230 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_KV/kouvola_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w150348628",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.24,
+      "_source": "Outline OSM w150348628 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4443D2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4443D2 2025-08-02 (20250001_MML_Kouvola_kesa_LAATUPOIKKEAMIA); from data/stations/research/fi_KV/kouvola_structures_heights.geojson (metres above the platform surface, 72.36 m RH 2000, laser 2025-08-02); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_KV/kouvola_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 72.36,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_KV/kouvola_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (72.36 m N2000, laser 2025-08-02)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res75de558dc9",
+      "category": "waiting",
+      "name": "Odotustila (waiting hall)",
+      "level": "0",
+      "x": 28.4,
+      "y": -71.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 04:30-22:00; Su 07:15-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/kouvola, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)",
+      "approximate": true,
+      "where": "station building, ground level"
+    },
+    {
+      "id": "resb7513f0841",
+      "category": "ticket",
+      "name": "VR ticket vending machine",
+      "level": "0",
+      "x": 28.4,
+      "y": -71.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)",
+      "approximate": true,
+      "where": "inside the station building"
+    },
+    {
+      "id": "rese0286ae5d5",
+      "category": "toilet",
+      "name": "WC",
+      "level": "0",
+      "x": 28.4,
+      "y": -71.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)",
+      "approximate": true,
+      "where": "station building"
+    },
+    {
+      "id": "res7749155daa",
+      "category": "kiosk",
+      "name": "R-kioski Kouvola Asema",
+      "level": "0",
+      "x": 18.3,
+      "y": -58.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su 08:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/kouvola-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed OSM node n1498437293 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
+    },
+    {
+      "id": "res228fa1fc52",
+      "category": "shop",
+      "name": "Avis",
+      "level": "0",
+      "x": 7.2,
+      "y": -56.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed OSM node n2049440192 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
+    },
+    {
+      "id": "resed2bfe674c",
+      "category": "cafe",
+      "name": "Bar & Cafe Columbia",
+      "level": "0",
+      "x": -32.9,
+      "y": -91.3,
+      "fee": null,
+      "opening_hours": "Mo-Th 08:00-22:00; Fr 08:00-24:00; Sa 09:00-24:00; Su 12:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed representative point of the OSM area w42198834 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resb03d7e0fc9",
+      "category": "bus",
+      "name": "Kouvola Matkakeskus (bus terminal)",
+      "level": "0",
+      "x": -44.8,
+      "y": -90.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; https://en.wikipedia.org/wiki/Kouvola_railway_station, read 2026-10-30; placed OSM node n8242331720 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
+    },
+    {
+      "id": "res804ca94183",
+      "category": "bus",
+      "name": "Rail-replacement bus stop",
+      "level": "0",
+      "x": 28.4,
+      "y": -71.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)",
+      "approximate": true,
+      "where": "between the station building and track 1"
+    },
+    {
+      "id": "res6492ea773b",
+      "category": "taxi",
+      "name": "Kymenlaakson Taksi",
+      "level": "0",
+      "x": 28,
+      "y": -84.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed OSM node n367643609 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
+    }
+  ]
+}

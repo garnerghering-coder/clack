@@ -1,0 +1,277 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_RI).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Street / platform level (Asema-aukio, station building, platform 1)",
+      "order": 0,
+      "name_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Underpass (alikulkutunneli, to the island platforms and to Peltosaari)",
+      "order": -1,
+      "name_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_RI)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 5 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_RI)."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        -5.8,
+        156.6
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2286986195 (already in OSM); position OSM n2286986195 (data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "at": [
+        -6.3,
+        101.6
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2320185843 (already in OSM); position OSM n2320185843 (data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "at": [
+        -25.3,
+        105.6
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2320185844 (already in OSM); position OSM n2320185844 (data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "at": [
+        -14.9,
+        143.7
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2320185848 (already in OSM); position OSM n2320185848 (data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "at": [
+        -26,
+        161.9
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2320185849 (already in OSM); position OSM n2320185849 (data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "at": [
+        -10.2,
+        156.5
+      ],
+      "level": "0",
+      "name": "Entrance (Asema-aukio)",
+      "_source": "OSM n2320185850 (already in OSM); position OSM n2320185850 (data/stations/research/fi_RI/station_facts.json)"
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3331984, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 472 m long; a recorded design class, not a survey"
+    },
+    "4": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3331989, read 2026-10-30, CC BY 4.0: tracks 4, class korkea = 0.55 m above rail, 446 m long; a recorded design class, not a survey"
+    },
+    "5": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3331996, read 2026-10-30, CC BY 4.0: tracks 5, class korkea = 0.55 m above rail, 443 m long; a recorded design class, not a survey"
+    },
+    "7": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3332003, read 2026-10-30, CC BY 4.0: tracks 7, class korkea = 0.55 m above rail, 300 m long; a recorded design class, not a survey"
+    },
+    "8": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3332013, read 2026-10-30, CC BY 4.0: tracks 8, class korkea = 0.55 m above rail, 300 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_RI/riihimaki_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w100084332",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.13,
+      "_source": "Outline OSM w100084332 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_RI/riihimaki_structures_heights.geojson (metres above the platform surface, 92.09 m RH 2000, laser 2023-06-11); underside not measured"
+    },
+    {
+      "from": "w100420380",
+      "kind": "building",
+      "name": "Matkakeskus Liikerata (retail)",
+      "top_m": 8.03,
+      "base_m": -2.34,
+      "_source": "Outline OSM w100420380 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_RI/riihimaki_structures_heights.geojson (metres above the platform surface, 92.09 m RH 2000, laser 2023-06-11)"
+    },
+    {
+      "from": "w683559372",
+      "kind": "roof",
+      "name": "canopy",
+      "top_m": 3.48,
+      "_source": "Outline OSM w683559372 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_RI/riihimaki_structures_heights.geojson (metres above the platform surface, 92.09 m RH 2000, laser 2023-06-11); underside not measured"
+    },
+    {
+      "from": "w1420882453",
+      "kind": "bridge",
+      "name": "Peltosaaren ylikulkusilta (bridge)",
+      "top_m": 6.98,
+      "base_m": 5.35,
+      "_source": "Outline OSM w1420882453 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_RI/riihimaki_structures_heights.geojson (metres above the platform surface, 92.09 m RH 2000, laser 2023-06-11); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1563661661",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.48,
+      "_source": "Outline OSM w1563661661 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L4232H4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L4232H4 2023-06-11 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_RI/riihimaki_structures_heights.geojson (metres above the platform surface, 92.09 m RH 2000, laser 2023-06-11); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_RI/riihimaki_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 92.09,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_RI/riihimaki_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (92.09 m N2000, laser 2023-06-11)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resff4a822f06",
+      "category": "waiting",
+      "name": "Waiting room (odotustila)",
+      "level": "0",
+      "x": 24.6,
+      "y": 277.6,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:30-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)",
+      "approximate": true,
+      "where": "station building"
+    },
+    {
+      "id": "rese9ee867ce8",
+      "category": "kiosk",
+      "name": "R-kioski Riihimäki Asema",
+      "level": "0",
+      "x": -9.1,
+      "y": 113,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:45-19:30; Sa,Su 09:00-18:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/riihimaki-asema/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; placed OSM node n2418536875 (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "id": "res82e4153bf4",
+      "category": "toilet",
+      "name": "Toilet",
+      "level": "0",
+      "x": -8.4,
+      "y": 104.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; placed OSM node n7159961235 (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)"
+    },
+    {
+      "id": "resd5dee91f12",
+      "category": "atm",
+      "name": "Otto",
+      "level": "0",
+      "x": 24.6,
+      "y": 277.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)",
+      "approximate": true,
+      "where": "in the station hall waiting area"
+    },
+    {
+      "id": "res951e332254",
+      "category": "taxi",
+      "name": "Taksitolppa, Riihimäen rautatieasema",
+      "level": "0",
+      "x": -35.5,
+      "y": 125.9,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; placed representative point of the OSM area w1416699996 (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res83776959bb",
+      "category": "restaurant",
+      "name": "Eväspysäkki",
+      "level": "0",
+      "x": -48.4,
+      "y": 77.3,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-24:00; Fr 10:00-01:00; Sa 11:00-01:00; Su 11:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; placed representative point of the OSM area w37761026 (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resb67aacd44c",
+      "category": "restaurant",
+      "name": "Bulldog Bar",
+      "level": "0",
+      "x": -31.3,
+      "y": 168.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30; placed OSM node n1319193150 (research pass 2026-10-30, data/stations/research/fi_RI/station_facts.json)"
+    }
+  ]
+}

@@ -26,7 +26,68 @@
     {
       "date": "2026-10-29",
       "what": "Draft withheld (not in data/stations): OSM tags no entrance and the footway network has no loose end away from the platforms to stand in as one. Needs the operator's station plan or a walk for an entrance before it can ship."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the research pass: no entrance nodes: platforms cannot reach an exit"
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "entrances": [
+    {
+      "at": [
+        -6.2,
+        49.3
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n678464951 (already in OSM); position OSM n678464951 (data/stations/research/NO-LYS/station_facts.json)"
+    },
+    {
+      "at": [
+        -12.0,
+        44.3
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n13348622556 (already in OSM); position OSM n13348622556 (data/stations/research/NO-LYS/station_facts.json)"
+    },
+    {
+      "at": [
+        -9.1,
+        44.3
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n13348622557 (already in OSM); position OSM n13348622557 (data/stations/research/NO-LYS/station_facts.json)"
+    },
+    {
+      "at": [
+        -11.5,
+        49.3
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n13348622558 (already in OSM); position OSM n13348622558 (data/stations/research/NO-LYS/station_facts.json)"
+    },
+    {
+      "at": [
+        -8.4,
+        49.3
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n13348622559 (already in OSM); position OSM n13348622559 (data/stations/research/NO-LYS/station_facts.json)"
+    },
+    {
+      "at": [
+        -6.9,
+        44.2
+      ],
+      "level": "1",
+      "name": "Entrance (Lysaker torg)",
+      "_source": "OSM n13348622564 (already in OSM); position OSM n13348622564 (data/stations/research/NO-LYS/station_facts.json)"
+    }
+  ]
 }

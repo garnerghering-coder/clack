@@ -1,0 +1,264 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_JY).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platform level: platform 1 (edge platform by the Matkakeskus), island platform 2/4, island platform 3, bus terminal side",
+      "order": 0,
+      "name_source": "Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; Digitraffic infra-api laiturit (Väylävirasto / Fintraffic, CC BY 4.0) via /home/claude/packs_fi/FI-JY/_report.json and jyvaskyla_platform_vayla.geojson, read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Upper level: Matkakeskus hall with the shops and restaurants, and the overpass over the tracks to Lutakko (Messusilta)",
+      "order": 1,
+      "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; https://en.wikipedia.org/wiki/Jyv%C3%A4skyl%C3%A4_Central_Station, read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_JY)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 6 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_JY)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3230137, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 449 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w119294895",
+      "kind": "building",
+      "name": "Kauppakeskus Forum (building)",
+      "top_m": 16.08,
+      "base_m": 4.03,
+      "_source": "Outline OSM w119294895 (ODbL); roof = median of 19 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10)"
+    },
+    {
+      "from": "w121549519",
+      "kind": "building",
+      "name": "Jyväskylän rautatieasema (station building)",
+      "top_m": 5.25,
+      "base_m": -0.07,
+      "_source": "Outline OSM w121549519 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10)"
+    },
+    {
+      "from": "w121549524",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.23,
+      "base_m": -0.85,
+      "_source": "Outline OSM w121549524 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10)"
+    },
+    {
+      "from": "w439373188",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.66,
+      "_source": "Outline OSM w439373188 (ODbL); roof = median of 37 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10); underside not measured"
+    },
+    {
+      "from": "w439373190",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.69,
+      "_source": "Outline OSM w439373190 (ODbL); roof = median of 26 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10); underside not measured"
+    },
+    {
+      "from": "w1057626890",
+      "kind": "bridge",
+      "name": "Kilpisen silta (bridge)",
+      "top_m": 7.32,
+      "base_m": 5.35,
+      "_source": "Outline OSM w1057626890 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N4324D1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N4324D1 2023-06-10 (20230202_Swissphoto_Jyvaskyla_kesa); from data/stations/research/fi_JY/jyvaskyla_structures_heights.geojson (metres above the platform surface, 82.0 m RH 2000, laser 2023-06-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_JY/jyvaskyla_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 82,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_JY/jyvaskyla_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (82.0 m N2000, laser 2023-06-10)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "rese5b733523b",
+      "category": "locker",
+      "name": "Säilytyslokerot",
+      "level": "0",
+      "x": -8.6,
+      "y": -55.5,
+      "fee": null,
+      "opening_hours": "Mo-Sa 06:00-22:00; Su 08:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)",
+      "approximate": true,
+      "where": "main hall, between the bus-platform and train-platform doors"
+    },
+    {
+      "id": "res87ad059e29",
+      "category": "atm",
+      "name": "Nosto",
+      "level": "0",
+      "x": 3.5,
+      "y": -43.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n534798604 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res56459e0e5b",
+      "category": "kiosk",
+      "name": "R-kioski Jyväskylä Matkakeskus",
+      "level": "1",
+      "x": -24.8,
+      "y": -37.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:00-20:30; Fr 06:00-21:30; Sa,Su 08:30-21:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/jyvaskyla-matkakeskus-3/, read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n5813131391 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res634edc8a9b",
+      "category": "restaurant",
+      "name": "Pizza Hut Matkakeskus",
+      "level": "1",
+      "x": -24.5,
+      "y": -32.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-20:00; Sa 11:00-21:00; Su 10:30-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.pizzahut.fi/toimipisteet/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n8781433537 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res818effd419",
+      "category": "restaurant",
+      "name": "Shalimar (Indian restaurant)",
+      "level": "1",
+      "x": -19.5,
+      "y": -24.4,
+      "fee": null,
+      "opening_hours": "Mo 10:30-20:00; Tu-Th 10:30-18:00; Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; placed OSM node n2977344107 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res526c2b48d2",
+      "category": "restaurant",
+      "name": "Ozaki Sushi (Ozaki Matkakeskus)",
+      "level": "0",
+      "x": -8.8,
+      "y": -68.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:30-21:00; Sa 12:00-21:00; Su 12:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://ozakisushi.fi/ozaki-jyvaskyla/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n8781433538 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "resb7c054639c",
+      "category": "cafe",
+      "name": "CandyTown Jyväskylä Matkakeskus",
+      "level": "0",
+      "x": -6.3,
+      "y": -79.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-19:30; Fr 10:00-20:00; Sa 10:00-18:00; Su 12:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://candytown.fi/pages/jyvaskyla-matkakeskus, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n12147904321 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res63a55425b8",
+      "category": "restaurant",
+      "name": "Musta Kynnys",
+      "level": "1",
+      "x": -144.9,
+      "y": 106.5,
+      "fee": null,
+      "opening_hours": "Su-Tu 14:00-24:00; We,Th 14:00-02:00; Fr,Sa 14:00-03:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n2977344104 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "res62d27b1f2d",
+      "category": "restaurant",
+      "name": "Gastropub Jalo",
+      "level": "0",
+      "x": -165.3,
+      "y": 62.3,
+      "fee": null,
+      "opening_hours": "Mo-Th 15:00-02:00; Fr,Sa 15:00-03:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed OSM node n1360517424 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)"
+    },
+    {
+      "id": "resacdd45527b",
+      "category": "bus",
+      "name": "Jyväskylän matkakeskus (Matkahuolto bus terminal)",
+      "level": "0",
+      "x": -3.6,
+      "y": -46.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Visit Jyväskylä Region, \"Jyväskylä Travel Centre\", https://visitjyvaskyla.fi/en/arriving/travel-centre-jyvaskyla/ (modified 2026-10-12), read 2026-10-30; Visit Jyväskylä Region, \"Matkakeskus\", https://visitjyvaskyla.fi/saapuminen/matkakeskus/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed representative point of the OSM area w13235730 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res72685bd640",
+      "category": "taxi",
+      "name": "Taksitolppa",
+      "level": "0",
+      "x": -42.6,
+      "y": 16.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/jyvaskyla, read 2026-10-30; Väylävirasto, \"Ratapihaselvitykset: Jyväskylä\" (Väyläviraston julkaisuja 53/2026, published 2026-08-10, CC BY 4.0), pp. 28 and 31–32, https://www.doria.fi/bitstream/handle/10024/195297/vj_2026-53_978-952-405-430-0.pdf?sequence=5&isAllowed=y, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-JY.json), read 2026-10-30; placed representative point of the OSM area w42769965 (research pass 2026-10-30, data/stations/research/fi_JY/station_facts.json)",
+      "approximate": true
+    }
+  ]
+}

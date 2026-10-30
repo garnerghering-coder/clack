@@ -16,8 +16,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.a
 
 def main():
     sid = sys.argv[1]
-    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{sid}/station_facts.json")))
-    epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
+    pack = sys.argv[sys.argv.index("--pack") + 1] if "--pack" in sys.argv else sid.replace(":", "_")
+    facts = json.load(open(os.path.join(ROOT, f"data/stations/research/{pack}/station_facts.json")))
+    epath = os.path.join(ROOT, f"scripts/stations/{sid.replace(':', '_')}.edits.json")
     e = json.load(open(epath))
     if "origin" in e:
         lat0, lon0 = e["origin"]["lat"], e["origin"]["lon"]
@@ -34,7 +35,7 @@ def main():
             continue
         x, y = round((pos["lon"] - lon0) * k, 1), round(-(pos["lat"] - lat0) * 111320, 1)
         name = en.get("name") if en.get("name") not in (None, "None") else (f"Entrance ({en['street']})" if en.get("street") not in (None, "None") else "Entrance")
-        src = f"{en.get('_source') or 'research'}; position {pos.get('how', '')} (data/stations/research/{sid}/station_facts.json)".strip()
+        src = f"{en.get('_source') or 'research'}; position {pos.get('how', '')} (data/stations/research/{pack}/station_facts.json)".strip()
         added.append({"at": [x, y], "level": level, "name": name, "_source": src})
     e["entrances"] = kept + added
     json.dump(e, open(epath, "w"), ensure_ascii=False, indent=2)

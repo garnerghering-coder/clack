@@ -1,0 +1,199 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_HL).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platform / station building level",
+      "order": 0,
+      "name_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Underpass (alikulkutunneli, 1999)",
+      "order": -1,
+      "name_source": "https://en.wikipedia.org/wiki/H%C3%A4meenlinna_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Viipurintie bridge (Viipurintien ylikulkusilta)",
+      "order": 1,
+      "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; /home/claude/packs_fi/FI-HL/_report.json (flags: w786496613 Viipurintien ylikulkusilta), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_HL)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 5 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_HL)."
+    }
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3327209, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 257 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/fi_HL/hameenlinna_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w139083640",
+      "kind": "building",
+      "name": "industrial",
+      "top_m": 3.84,
+      "base_m": -0.94,
+      "_source": "Outline OSM w139083640 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09)"
+    },
+    {
+      "from": "w527219814",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 3.12,
+      "_source": "Outline OSM w527219814 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09); underside not measured"
+    },
+    {
+      "from": "w534256216",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.82,
+      "_source": "Outline OSM w534256216 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09); underside not measured"
+    },
+    {
+      "from": "w628981871",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.98,
+      "_source": "Outline OSM w628981871 (ODbL); roof = median of 55 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09); underside not measured"
+    },
+    {
+      "from": "#12",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.32,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_HL/hameenlinna_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 84.4,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_HL/hameenlinna_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (84.4 m N2000, laser 2023-06-09)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "res078124d714",
+      "category": "waiting",
+      "name": "Waiting room (odotustila)",
+      "level": "0",
+      "x": -34.8,
+      "y": 8.6,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:15-00:10",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)",
+      "approximate": true,
+      "where": "station building"
+    },
+    {
+      "id": "rese09ec3914c",
+      "category": "kiosk",
+      "name": "R-kioski Hämeenlinna Asema",
+      "level": "0",
+      "x": -34,
+      "y": 5.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-20:00; Sa,Su 08:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.r-kioski.fi/kioskit/hameenlinna-asema-2/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; placed OSM node n5935017088 (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)"
+    },
+    {
+      "id": "res18c077cd6e",
+      "category": "toilet",
+      "name": "Toilet",
+      "level": "0",
+      "x": -34.8,
+      "y": 8.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res6901c6f269",
+      "category": "atm",
+      "name": "TalletusOtto",
+      "level": "0",
+      "x": -34.8,
+      "y": 8.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)",
+      "approximate": true,
+      "where": "inside the station hall waiting area"
+    },
+    {
+      "id": "res92345a644d",
+      "category": "shop",
+      "name": "Scandia Rent",
+      "level": "0",
+      "x": -49,
+      "y": -0.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; placed OSM node n5894019063 (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)"
+    },
+    {
+      "id": "res3c12da9e8e",
+      "category": "taxi",
+      "name": "Hämeenlinna rautatieasema",
+      "level": "0",
+      "x": -44.3,
+      "y": 19.7,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://vr.fi/en/railway-stations-and-routes/hameenlinna, read 2026-10-30; placed OSM node n257395451 (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)"
+    }
+  ]
+}

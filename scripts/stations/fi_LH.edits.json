@@ -1,0 +1,123 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_LH).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Level 0",
+      "order": 0
+    },
+    {
+      "osm": "-1",
+      "id": "L-1",
+      "name": "Level -1",
+      "order": -1
+    }
+  ],
+  "sources": [],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the research pass: no entrance nodes: platforms cannot reach an exit"
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the research pass: no entrance nodes: platforms cannot reach an exit"
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        53.8,
+        -29.2
+      ],
+      "level": "0",
+      "name": "Entrance (Uudenmaankatu)",
+      "_source": "OSM n1035390980 (already in OSM); position OSM n1035390980 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        53.6,
+        -129.7
+      ],
+      "level": "0",
+      "name": "Entrance (Marskinaukio)",
+      "_source": "OSM n4034829097 (already in OSM); position OSM n4034829097 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        62.6,
+        -128.3
+      ],
+      "level": "0",
+      "name": "Entrance (Marskinaukio)",
+      "_source": "OSM n4034829099 (already in OSM); position OSM n4034829099 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        98.6,
+        -122.5
+      ],
+      "level": "0",
+      "name": "Entrance (Mannerheiminkatu)",
+      "_source": "OSM n4034829110 (already in OSM); position OSM n4034829110 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        105.5,
+        -69.0
+      ],
+      "level": "0",
+      "name": "Entrance (Uudenmaankatu)",
+      "_source": "OSM n5250877708 (already in OSM); position OSM n5250877708 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        105.1,
+        -120.7
+      ],
+      "level": "0",
+      "name": "Entrance (Mannerheiminkatu)",
+      "_source": "OSM n7410885048 (already in OSM); position OSM n7410885048 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        14.2,
+        -55.3
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n7608913752 (already in OSM); position OSM n7608913752 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        12.5,
+        -32.5
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n7608913753 (already in OSM); position OSM n7608913753 (data/stations/research/fi_LH/station_facts.json)"
+    },
+    {
+      "at": [
+        48.6,
+        -37.0
+      ],
+      "level": "0",
+      "name": "Entrance (Uudenmaankatu)",
+      "_source": "OSM n10138284581 (already in OSM); position OSM n10138284581 (data/stations/research/fi_LH/station_facts.json)"
+    }
+  ]
+}

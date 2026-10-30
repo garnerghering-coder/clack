@@ -1,0 +1,95 @@
+{
+  "_comment": "Hand edits on top of the OpenStreetMap draft (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/fi_TKU).",
+  "radius": 400,
+  "paths_by_layer": true,
+  "path_radius": 30,
+  "default_level": "0",
+  "multipolygons": true,
+  "levels": [
+    {
+      "osm": "0",
+      "id": "L0",
+      "name": "Platform level (the passenger yard between Logomonsilta and Aninkaistensilta) and street level",
+      "order": 0,
+      "name_source": "VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Logomonsilta (the Logomo bridge, deck level)",
+      "order": 1,
+      "name_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30"
+    }
+  ],
+  "sources": [
+    {
+      "type": "nls",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.maanmittauslaitos.fi/",
+      "note": "Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/fi_TKU)."
+    },
+    {
+      "type": "digitraffic",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://rata.digitraffic.fi/infra-api/",
+      "note": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0): platform heights (3D research pass; data/stations/research/vayla_platforms_FI.csv)."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 2 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_TKU)."
+    }
+  ],
+  "entrances": [],
+  "platform_heights": {},
+  "structures_file": "data/stations/research/fi_TKU/turku_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w912901301",
+      "kind": "bridge",
+      "name": "Logomonsilta (bridge)",
+      "top_m": 13.71,
+      "base_m": 5.35,
+      "_source": "Outline OSM w912901301 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa); from data/stations/research/fi_TKU/turku_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 9.64 m RH 2000, laser 2023-05-29); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1424898294",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.28,
+      "_source": "Outline OSM w1424898294 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_L3324B4), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned L3324B4 2023-05-29 (20230108_Leica_Turku_kesa); from data/stations/research/fi_TKU/turku_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 9.64 m RH 2000, laser 2023-05-29); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/fi_TKU/turku_ground_1m.tif",
+    "crs": 3067,
+    "reference_m": 9.64,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_TKU/turku_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the street (9.64 m N2000, laser 2023-05-29)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "rese72a490864",
+      "category": "ticket",
+      "name": "VR ticket machine",
+      "level": "0",
+      "x": -63.9,
+      "y": 80.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKU.json), read 2026-10-30; placed OSM node n13097333770 (research pass 2026-10-30, data/stations/research/fi_TKU/station_facts.json)"
+    }
+  ]
+}
