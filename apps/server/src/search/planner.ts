@@ -377,10 +377,14 @@ export function rank(found: PlannedJourney[]): PlannedJourney[] {
     (c) => !unique.some((d) => d !== c && (!night(c) || night(d)) && d.dep >= c.dep && d.arr <= c.arr && d.changes.length <= c.changes.length && (d.dep > c.dep || d.arr < c.arr || d.changes.length < c.changes.length)),
   );
   const half = 30 * 60_000;
+  // A detour is slower than a journey leaving at about the same time; measured against the whole day, a late evening
+  // journey was dropped for being slower than a midday one it could never catch (owner, 2026-10-30: Kolding 22:05 →
+  // Jönköping C via København, found from 21:30 but not over the whole day).
+  const around = 2 * 3600_000;
   const kept = dominated.filter((c) => {
     const peers = dominated.filter((d) => d !== c && (!night(c) || night(d)));
     if (!peers.length) return true;
-    const fastest = Math.min(c.durationMin, ...peers.map((j) => j.durationMin));
+    const fastest = Math.min(c.durationMin, ...peers.filter((j) => Math.abs(j.dep - c.dep) <= around).map((j) => j.durationMin));
     if (c.durationMin > Math.max(fastest * 1.5, fastest + 180)) return false;
     return !peers.some((d) => d.changes.length < c.changes.length && Math.abs(d.dep - c.dep) <= half && d.arr <= c.arr + half);
   });

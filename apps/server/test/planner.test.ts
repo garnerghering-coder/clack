@@ -85,4 +85,18 @@ describe('the journey planner', () => {
     expect(kept.map((x) => x.legs[0]!.trainNumber)).toEqual([String(base), String(base + 2 * H), String(base + 3 * H)]);
     expect(kept.find((x) => x.fastest)?.legs[0]!.trainNumber).toBe(String(base));
   });
+
+  it('judges a detour against journeys leaving about then, not the fastest of the day', () => {
+    const j = (dep: number, arr: number, changes: number): PlannedJourney => ({
+      legs: [{ key: `k${dep}`, trainNumber: String(dep), product: 'regional', from: { time: dep }, to: { time: arr } } as never],
+      legCountries: [null], changes: Array.from({ length: changes }, (_, i) => ({ stationId: `s${i}`, name: `S${i}`, gapMin: 20, minMin: 7, comfort: 'relaxed' as const, tier: 'default' as const })),
+      dep, arr, durationMin: (arr - dep) / 60_000,
+    });
+    const H = 3600_000;
+    const base = 1_000_000_000_000;
+    // Midday 6 h; at 22:05 the only way is 9 h 12 min overnight (more than 1.5 × 6 h), nine hours later.
+    const midday = j(base, base + 6 * H, 1);
+    const lateNight = j(base + 9 * H, base + 9 * H + 552 * 60_000, 4);
+    expect(rank([midday, lateNight]).map((x) => x.legs[0]!.trainNumber)).toEqual([String(base), String(base + 9 * H)]);
+  });
 });
