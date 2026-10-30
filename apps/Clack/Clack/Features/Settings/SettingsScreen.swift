@@ -75,6 +75,10 @@ struct SettingsScreen: View {
         let s = app.settings
         Page {
             if app.saveFailed { Banner(kind: .error) { Text(l10n.t("settings.saveError")) }.countsError("settings.save") }
+            #if DEBUG
+            // `-ridersSetting` puts the riders' card first, to look at it.
+            if CommandLine.arguments.contains("-ridersSetting") { RiderSharingCard() }
+            #endif
             Card {
                 HStack(spacing: 12) {
                     Text(l10n.t("settings.theme")).clack(.settingsRow).foregroundStyle(Ink.text)
@@ -138,6 +142,7 @@ struct SettingsScreen: View {
             }
             AlertsCard(change: change)
             OfflineMapsCard()
+            RiderSharingCard()
             Card {
                 LinkRow(label: l10n.t("settings.about"), route: .about)
                 ReportBugRow()
@@ -164,6 +169,22 @@ struct SettingsScreen: View {
 }
 
 /// The maps saved for when there is no signal (owner, 2026-10-24).
+/// "Help place trains for everyone" (RiderReporter, docs/POSITIONING.md): kept on this phone only, off by default.
+private struct RiderSharingCard: View {
+    @Environment(L10n.self) private var l10n
+    @State private var on = RiderReporter.shared.sharing
+
+    var body: some View {
+        Card {
+            SettingsToggle(label: l10n.t("riders.setting"), isOn: on, last: true) { value in
+                on = value
+                RiderReporter.shared.sharing = value
+            }
+            InfoNote(l10n.t("riders.settingNote"), more: l10n.t("riders.settingNoteMore"))
+        }
+    }
+}
+
 private struct OfflineMapsCard: View {
     @Environment(L10n.self) private var l10n
     @State private var count = OfflineMaps.savedCount
@@ -530,7 +551,7 @@ struct PrivacyScreen: View {
                     Text(l10n.t("privacy.contactTitle")).clack(.sectionHeader).foregroundStyle(Ink.text2)
                     (Text(l10n.t("privacy.contactBody") + " ") + Text(.init("[\(email)](mailto:\(email))"))).clack(.body).foregroundStyle(Ink.text)
                 }
-                Text(l10n.t("privacy.updated", ["date": "2026-10-26"])).clack(.caption).foregroundStyle(Ink.text2)
+                Text(l10n.t("privacy.updated", ["date": "2026-10-30"])).clack(.caption).foregroundStyle(Ink.text2)
             }
         }
         .screenTitle(l10n.t("privacy.title"))

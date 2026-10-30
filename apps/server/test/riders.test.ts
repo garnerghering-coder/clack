@@ -6,7 +6,7 @@ const NOW = 1_800_000_000_000;
 // A 10 km stretch due north from 57.0, 14.0.
 const north = stretchFrom(Array.from({ length: 11 }, (_, i): [number, number] => [57 + (i * 1000) / 111_195, 14]));
 const train = (over: Partial<LiveTrain> = {}): LiveTrain => ({
-  id: 'dk:8600032.1421|2026-10-30', number: '1127', date: '2026-10-30', lat: 57, lon: 14, bearing: null, speedKmh: null, at: NOW, estimated: true,
+  id: 'dk:634761@8600708.1201|2026-10-30', number: '1127', date: '2026-10-30', lat: 57, lon: 14, bearing: null, speedKmh: null, at: NOW, estimated: true,
   operatorId: 'dsb', productName: null, product: 'regional', trainType: null, origin: null, destination: null, next: null, nextEta: null, delayMin: null,
   mine: false, state: 'running', prevId: 'A', nextId: 'B', progress: 0.2, ...over,
 });
@@ -41,6 +41,9 @@ describe("riders' reports", () => {
     expect(t.riders).toBe(1);
     expect(t.fixAt).toBe(NOW - 10_000);
     expect(t.lat).toBeCloseTo(57 + 5250 / 111_195, 4);
+    // A second phone agreeing makes it two, on the train the riders already placed.
+    r.add(report({ progress: 0.51, session: 'bbbbbbbb-2' }), t, NOW);
+    expect(r.adjust(t, NOW).riders).toBe(2);
   });
 
   it("never replaces an operator's GPS, nor a train standing", () => {

@@ -43,7 +43,7 @@ export const MIN_INTERVAL_MS = 10_000;
 /** Below this the train is taken as standing, which the feeds place better (at the platform). */
 export const MOVING_KMH = 5;
 
-const ID = /^[\w:.|-]{1,96}$/;
+const ID = /^[\w:.|@-]{1,96}$/;
 const SESSION = /^[A-Za-z0-9-]{8,64}$/;
 
 type Kept = RiderReport & { receivedAt: number };
@@ -119,7 +119,8 @@ export class RiderFixes {
    * report (see the file's head). Carried forward from the reports' time at their speed, never past the next stop.
    */
   adjust(t: LiveTrain, now: number): LiveTrain {
-    if (!t.estimated) return t;
+    // Estimated, or already placed by riders (a newer report moves it on); never an operator's GPS.
+    if (!t.estimated && !t.riders) return t;
     const fresh = (this.byTrain.get(t.id) ?? []).filter((r) => now - r.at <= FRESH_MS && r.speedKmh !== null && r.speedKmh >= MOVING_KMH);
     if (!fresh.length) return t;
     const fix = pickFix(t, fresh, now, (a, b) => this.stretchOf(a, b));

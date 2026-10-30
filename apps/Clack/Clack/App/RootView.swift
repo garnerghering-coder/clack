@@ -109,11 +109,21 @@ struct RootView: View {
                let link = DeepLink.parse(url) {
                 router.open(link, app: app)
             }
+            // `-ridersAsk` shows the one-time "Help place trains for everyone?" ask.
+            if args.contains("-ridersAsk") { RiderReporter.shared.showAsk = true }
             // `-simulateJourney <seconds>` runs the Debug trip card journey (TestAlertsModel.launch).
             _ = TestAlertsModel.launch
             #endif
         }
         .onChange(of: app.notifications.openRequest) { _, _ in openAlert() }
+        // Your train placed by your phone, and (when you've said yes) helping place it for everyone (RiderReporter).
+        .onChange(of: scenePhase, initial: true) { _, phase in if phase == .active { RiderReporter.shared.resume(client: app.client) } }
+        .alert(app.l10n.t("riders.ask.title"), isPresented: Binding(get: { RiderReporter.shared.showAsk }, set: { RiderReporter.shared.showAsk = $0 })) {
+            Button(app.l10n.t("riders.ask.yes")) { RiderReporter.shared.sharing = true }
+            Button(app.l10n.t("riders.ask.no"), role: .cancel) { RiderReporter.shared.sharing = false }
+        } message: {
+            Text(app.l10n.t("riders.ask.body"))
+        }
         // Watches for a journey ending while the app is in front.
         .task(id: scenePhase) {
             guard scenePhase == .active else { return }

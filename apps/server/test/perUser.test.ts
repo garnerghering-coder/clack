@@ -69,6 +69,10 @@ describe('per-user live data', () => {
     const mine = async (u: string) => (await app.inject({ url: '/api/live/trains', headers: { 'x-clack-user': u } })).json().trains[0].mine;
     expect(await mine(A)).toBe(true);
     expect(await mine(B)).toBe(false);
+    // /live/mine: only the asking phone's own trains.
+    const own = async (u: string) => (await app.inject({ url: '/api/live/mine', headers: { 'x-clack-user': u } })).json().trains.map((t: { id: string }) => t.id);
+    expect(await own(A)).toEqual(['582|2026-10-21']);
+    expect(await own(B)).toEqual([]);
     // The shared train itself is untouched.
     expect(fake.trains.get('582|2026-10-21')!.mine).toBe(false);
   });

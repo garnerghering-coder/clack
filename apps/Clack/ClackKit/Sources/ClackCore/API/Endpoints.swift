@@ -164,6 +164,34 @@ extension APIClient {
     public func liveSegment(from: String, to: String) async throws -> LiveSegment {
         try await get(["live", "segment"], query: ["from": from, "to": to])
     }
+    /// The phone's own trains on the map now (its logged legs), for its rider reports and its own-train position.
+    public func liveMine() async throws -> [LiveTrain] {
+        let answer: LiveMineAnswer = try await get(["live", "mine"])
+        return answer.trains
+    }
+
+    /// Sends a rider's report (`POST /api/live/report`). On purpose without `X-Clack-User` and on a session with
+    /// no cookies or cache: a report must say nothing about who sent it (docs/POSITIONING.md "Riders' reports").
+    public func riderReport(_ report: RiderLogic.Report) async throws {
+        var request = URLRequest(url: url(["live", "report"]))
+        request.httpMethod = "POST"
+        request.httpBody = try JSONEncoder().encode(report)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 10
+        let (_, response) = try await Self.anonymous.data(for: request)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            throw APIError(status: (response as? HTTPURLResponse)?.statusCode ?? 0, message: "report refused", duplicateOf: nil)
+        }
+    }
+
+    private static let anonymous: URLSession = {
+        let c = URLSessionConfiguration.ephemeral
+        c.httpCookieStorage = nil
+        c.urlCache = nil
+        c.httpShouldSetCookies = false
+        return URLSession(configuration: c)
+    }()
+
     public func liveTrainStops(_ id: String) async throws -> [LiveTrainStop] {
         let answer: LiveStopsAnswer = try await get(["live", "trains", id, "stops"])
         return answer.stops
@@ -229,4 +257,8 @@ extension APIClient {
     public func followedJourneys() async throws -> [SharedJourney] {
         try await get(["following"])
     }
+}
+
+private nonisolated struct LiveMineAnswer: Decodable, Sendable {
+    let trains: [LiveTrain]
 }

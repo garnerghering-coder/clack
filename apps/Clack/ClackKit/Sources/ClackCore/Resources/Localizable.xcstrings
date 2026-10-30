@@ -12895,13 +12895,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only when you ask for it: your dot on the Explore map and on a station map while you walk it, worked out on your phone. When you tap \"Near you\" on the first screen, a rough position (about a kilometre) is sent once to our server to find the nearest stations, and is not kept."
+            "value" : "Only when you ask for it: your dot on the Explore map and on a station map while you walk it, worked out on your phone. When you tap \"Near you\" on the first screen, a rough position (about a kilometre) is sent once to our server to find the nearest stations, and is not kept. On a train you have logged, your own map shows the train where your phone is, worked out on your phone. If you turn on \"Help place trains for everyone\" (off unless you do), while Clack is open or the trip's Live Activity runs your phone sends only which train it is, how far along its stretch, its speed and the time, with a code made up new for each trip: no coordinates and no account id. It is held only in the server's memory for a few minutes."
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bara när du ber om det: din punkt på Utforska-kartan och på en stationskarta medan du går, beräknad i telefonen. När du trycker på \"Nära dig\" på första skärmen skickas en ungefärlig position (ungefär en kilometer) en gång till vår server för att hitta närmaste stationer, och den sparas inte."
+            "value" : "Bara när du ber om det: din punkt på Utforska-kartan och på en stationskarta medan du går, beräknad i telefonen. När du trycker på \"Nära dig\" på första skärmen skickas en ungefärlig position (ungefär en kilometer) en gång till vår server för att hitta närmaste stationer, och den sparas inte. På ett tåg du har loggat visar din egen karta tåget där telefonen är, beräknat i telefonen. Om du slår på \"Hjälp till att placera tågen för alla\" (av från början) skickar telefonen, medan Clack är öppen eller resans Live Activity visas, bara vilket tåg det är, hur långt längs sträckan, farten och tiden, med en kod som görs ny för varje resa: inga koordinater och inget konto-id. Det hålls bara i serverns minne i några minuter."
           }
         }
       }
@@ -13735,6 +13735,125 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, jag åkte"
+          }
+        }
+      }
+    },
+    "riders.ask.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your phone can tell Clack where along the track this train is, so everyone sees it where it really is. Not your position, not who you are: only the train, how far along, its speed and the time. You can change this in Settings."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telefonen kan berätta för Clack var längs spåret det här tåget är, så att alla ser det där det verkligen är. Inte din position och inte vem du är: bara tåget, hur långt, farten och tiden. Du kan ändra det i Inställningar."
+          }
+        }
+      }
+    },
+    "riders.ask.no" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not now"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inte nu"
+          }
+        }
+      }
+    },
+    "riders.ask.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help place trains for everyone?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjälpa till att placera tågen för alla?"
+          }
+        }
+      }
+    },
+    "riders.ask.yes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjälp till"
+          }
+        }
+      }
+    },
+    "riders.setting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help place trains for everyone"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjälp till att placera tågen för alla"
+          }
+        }
+      }
+    },
+    "riders.settingNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On your logged trains, your phone tells Clack where along the track your train is. Never your position or who you are."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "På dina loggade tåg berättar telefonen för Clack var längs spåret ditt tåg är. Aldrig din position eller vem du är."
+          }
+        }
+      }
+    },
+    "riders.settingNoteMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only while Clack is open or the trip's Live Activity runs, every 20 seconds: which train, the stretch it is on, how far along it, its speed and the time, with a code made up new for each trip. No coordinates and no account id leave the phone, and Clack keeps nothing once the train has moved on (a few minutes). A train is only moved when two phones agree or it fits the timetable. Your own map shows your train where your phone is either way; that part never leaves the phone."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara när Clack är öppen eller resans Live Activity visas, var 20:e sekund: vilket tåg, sträckan det är på, hur långt längs den, farten och tiden, med en kod som görs ny för varje resa. Inga koordinater och inget konto-id lämnar telefonen, och Clack sparar inget när tåget har kört vidare (några minuter). Ett tåg flyttas bara när två telefoner är överens eller det stämmer med tidtabellen. Din egen karta visar ditt tåg där din telefon är oavsett; den delen lämnar aldrig telefonen."
           }
         }
       }

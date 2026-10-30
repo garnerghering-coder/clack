@@ -352,6 +352,11 @@ final class ExploreModel {
                 if let b = step.bearing { bearing = b }
                 if step.done { glides[train.id] = nil } else { moving = true }
             }
+            // Your own train where your phone is on its track (RiderReporter; nothing leaves the phone for this).
+            if train.mine, let here = RiderReporter.shared.position(of: train) {
+                position = here.position
+                bearing = here.bearing
+            }
             if close, controller.contains(position.lat, position.lon) {
                 cars += carFeatures(train, at: position, bearing: bearing, color: ExploreLogic.color(of: train, by: controller.display.colorBy) ?? color(train.operatorId))
             }

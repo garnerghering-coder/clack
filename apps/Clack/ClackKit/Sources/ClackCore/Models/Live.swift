@@ -44,6 +44,8 @@ public nonisolated struct LiveTrain: Codable, Hashable, Sendable, Identifiable {
     public var progress: Double? = nil
     public var platform: String? = nil
     public var atStation: String? = nil
+    /// Placed by this many riders' phones instead of an estimate (docs/POSITIONING.md); nil otherwise.
+    public var riders: Int? = nil
 
     /// Standing or waiting at a station: drawn where it is, never carried on along a track.
     public var isStanding: Bool { state.map { $0 != "running" } ?? (atStation != nil) }

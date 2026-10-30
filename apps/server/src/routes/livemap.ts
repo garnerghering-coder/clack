@@ -122,6 +122,13 @@ export const liveMapRoutes =
     };
 
     // One train, with its timetable trip so the map can draw its route and "Add to my trips" works.
+    // The asking phone's own trains on the map now (its logged legs): what the app's rider reports and its own-train
+    // position follow, without fetching every train. Says nothing the server doesn't already have from the trips.
+    app.get('/live/mine', async (req) => {
+      const keys = myTrainKeys(req.userId);
+      return { trains: keys.size ? [...ingest.trains.values()].filter((t) => isMine(t, keys)).map((t) => ({ ...t, mine: true })) : [] };
+    });
+
     app.get<{ Params: { id: string } }>('/live/trains/:id', async (req, reply) => {
       const t = ingest.trains.get(req.params.id);
       if (!t) return reply.code(404).send({ error: 'train not on the map any more' });
