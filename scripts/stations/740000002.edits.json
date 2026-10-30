@@ -115,7 +115,7 @@
     {
       "date": "2026-10-30",
       "who": "the owner's assistant",
-      "what": "Platform heights from Trafikverket's register; 31 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000002)."
+      "what": "Platform heights from Trafikverket's register; 32 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740000002)."
     }
   ],
   "platform_heights": {
@@ -225,6 +225,14 @@
       "top_m": 3.17,
       "base_m": -0.26,
       "_source": "Outline OSM w490573739 (ODbL); roof = median of 144 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000002/goteborg_c_structures_heights.geojson (metres above the platform surface, 2.91 m RH 2000, laser 2020-03-21)"
+    },
+    {
+      "from": "w725288025",
+      "kind": "bridge",
+      "name": "Hisingsbron (bridge)",
+      "top_m": 8.25,
+      "base_m": 5.32,
+      "_source": "Outline OSM w725288025 (ODbL); roof = median of 1350 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000002/goteborg_c_structures_heights.geojson (metres above the platform surface, 2.91 m RH 2000, laser 2020-03-21); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
     },
     {
       "from": "w1013465729",
@@ -419,7 +427,7 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.72,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserdata Nedladdning, skog (20b008, scanned 2020-03-21), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740000002/goteborg_c_structures_heights.geojson (metres above the platform surface, 2.91 m RH 2000, laser 2020-03-21); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0
     }
   ],
   "terrain": {

@@ -8,8 +8,9 @@ and data/stations/research/trafikverket_platforms_SE.csv, and sets in scripts/st
   are named in the source. "ej norm" rows have no height and are skipped.
 - `structures_file` + `structures`: OSM buildings (top and lowest ground), OSM and laser-traced canopies (top; drawn as
   roofs), footbridges (from the minimum clear height over electrified track, 5.9 m above the rail, TRVR Bro 11, to the
-  measured roof). Left out, for a look first (the handoff's rule): `hall_roof_laser` (maybe a building), road bridges,
-  and the trains in the scan.
+  measured roof), road bridges the same way. Left out, for a look first: `hall_roof_laser` (maybe a building) and the
+  trains in the scan. `--surface` for a station whose platforms are in a tunnel: buildings, roofs and ground from the
+  street level, no platform heights.
 - `terrain`: the ground grid, heights above the station's platform surface.
 - `sources` and `changelog` entries for the pass (replaced, not duplicated, on a re-run).
 
@@ -38,12 +39,15 @@ def track_numbers(tracks):
 
 def main():
     sid = sys.argv[1]
+    # --surface: the platforms are in a tunnel the laser can't see (Varberg C, Triangeln): heights are measured from the
+    # street (the ground's median in the box), and the platforms get no height, so nothing raises them at the surface.
+    surface = "--surface" in sys.argv[2:]
     rdir = f"data/stations/research/{sid}"
     report = json.load(open(os.path.join(ROOT, rdir, "_report.json")))
     slug = report["slug"]
-    level = report.get("platform_surface_m")
+    level = report["ground"].get("median_m") if surface else report.get("platform_surface_m")
     if level is None:
-        raise SystemExit(f"{sid}: the pack has no platform surface level (underground?): nothing to write")
+        raise SystemExit(f"{sid}: the pack has no platform surface level (underground?): run with --surface for the buildings and ground only")
     scan = report["laser"].get("scan_date", "?")
     m = json.load(open(os.path.join(ROOT, f"data/stations/{sid}.json")))
     epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
@@ -52,7 +56,7 @@ def main():
 
     # Platform heights.
     heights, notes = {}, []
-    for p in m["platforms"]:
+    for p in ([] if surface else m["platforms"]):
         # The map's tracks as numbers: "2a" → 2, "spår 1" → 1, "2 & 3" → 2 and 3.
         want = {n for t in p["tracks"] for n in re.findall(r"\d+", t)}
         cands = [r for r in rows if r["height_m"] and track_numbers(r["tracks"]) & want]
@@ -76,11 +80,17 @@ def main():
     for i, f in enumerate(feats):
         pr = f["properties"]
         kind, top, base = pr.get("kind"), pr.get("top_above_platform_m"), pr.get("base_above_platform_m")
+        if surface or top is None:
+            # From the absolute (RH 2000) values against this pass's reference level.
+            rt = pr.get("roof_top_median_m") if pr.get("roof_top_median_m") is not None else pr.get("top_median_m")
+            top = round(rt - level, 2) if rt is not None else None
+            base = round(pr["ground_min_m"] - level, 2) if pr.get("ground_min_m") is not None else None
         if top is None:
             continue
         ref = pr.get("osm_id") or f"#{i}"
         name = pr.get("name") or kind
-        src = f"{pr.get('source', '')}; from {gpath} (metres above the platform surface, {level} m RH 2000, laser {scan})"
+        ref_name = "the street (the ground's median; the platforms are in a tunnel)" if surface else "the platform surface"
+        src = f"{pr.get('source', '')}; from {gpath} (metres above {ref_name}, {level} m RH 2000, laser {scan})"
         if kind == "building":
             structures.append({"from": ref, "kind": "building", "name": name, "top_m": round(top, 2), "base_m": round(base if base is not None else 0, 2), "_source": src})
         elif kind in ("canopy_osm", "canopy_laser"):
@@ -88,7 +98,9 @@ def main():
             if kind == "canopy_laser":
                 st["simplify_m"] = 2.0
             structures.append(st)
-        elif kind == "footbridge":
+        elif kind in ("footbridge", "bridge"):
+            # Road bridges too (owner, 2026-10-30); one whose deck is below the minimum clearance is the railway
+            # passing over a road, and stays out.
             under = round(MIN_CLEAR_ABOVE_RAIL - rail_below, 2)
             if top - under < 1.0:
                 skipped.append(f"{name}: roof {top} m is not above the minimum clearance")
@@ -102,7 +114,7 @@ def main():
     e["structures_file"] = gpath
     e["structures"] = structures
     e["terrain"] = {"geotiff": f"{rdir}/{slug}_ground_1m.tif", "reference_m": level, "step_m": 5,
-                    "_source": f"ground from Lantmäteriet's laser and terrain model, 1 m ({rdir}/{slug}_ground_1m.tif), sampled every 5 m; {LM}. Heights above the platform surface ({level} m RH 2000, laser {scan})"}
+                    "_source": f"ground from Lantmäteriet's laser and terrain model, 1 m ({rdir}/{slug}_ground_1m.tif), sampled every 5 m; {LM}. Heights above {'the street' if surface else 'the platform surface'} ({level} m RH 2000, laser {scan})"}
     e["sources"] = [s for s in e.get("sources", []) if TAG not in (s.get("note") or "")] + [
         {"type": "lantmateriet", "license": "CC BY 4.0", "retrieved": "2026-10-30", "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
          "note": f"{LM}: building and roof heights and the ground ({TAG}; pack in {rdir})."},

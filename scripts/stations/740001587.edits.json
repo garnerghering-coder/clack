@@ -16,12 +16,142 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/740001587)."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-30",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "JNB 2027 Bilaga 2A and BanInfo Plattform: platform height classes (3D research pass; data/stations/research/trafikverket_platforms_SE.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Trafikverket's register; 13 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/740001587)."
     }
-  ]
+  ],
+  "platform_heights": {},
+  "structures_file": "data/stations/research/740001587/triangeln_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w51459022",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.88,
+      "base_m": -1.28,
+      "_source": "Outline OSM w51459022 (ODbL); roof = median of 636 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w51459023",
+      "kind": "building",
+      "name": "office",
+      "top_m": 15.2,
+      "base_m": -1.08,
+      "_source": "Outline OSM w51459023 (ODbL); roof = median of 1036 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w53862960",
+      "kind": "building",
+      "name": "school",
+      "top_m": 18.42,
+      "base_m": -0.74,
+      "_source": "Outline OSM w53862960 (ODbL); roof = median of 4366 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w53862961",
+      "kind": "building",
+      "name": "school",
+      "top_m": 9.44,
+      "base_m": -0.13,
+      "_source": "Outline OSM w53862961 (ODbL); roof = median of 2090 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w53862964",
+      "kind": "building",
+      "name": "building",
+      "top_m": 15.69,
+      "base_m": -2.19,
+      "_source": "Outline OSM w53862964 (ODbL); roof = median of 3947 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w89370174",
+      "kind": "building",
+      "name": "school",
+      "top_m": 14.38,
+      "base_m": -0.77,
+      "_source": "Outline OSM w89370174 (ODbL); roof = median of 866 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w158755488",
+      "kind": "building",
+      "name": "Station Triangeln (station building)",
+      "top_m": 5.48,
+      "base_m": 0.93,
+      "_source": "Outline OSM w158755488 (ODbL); roof = median of 886 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w158755489",
+      "kind": "building",
+      "name": "Station Triangeln (station building)",
+      "top_m": 4.03,
+      "base_m": -0.73,
+      "_source": "Outline OSM w158755489 (ODbL); roof = median of 207 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w189510000",
+      "kind": "building",
+      "name": "Coffee Square (building)",
+      "top_m": 4.95,
+      "base_m": 0.9,
+      "_source": "Outline OSM w189510000 (ODbL); roof = median of 754 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w232462620",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.01,
+      "_source": "Outline OSM w232462620 (ODbL); roof = median of 4513 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w1032365215",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.23,
+      "base_m": -0.68,
+      "_source": "Outline OSM w1032365215 (ODbL); roof = median of 55 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07)"
+    },
+    {
+      "from": "w1032365223",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 1.18,
+      "_source": "Outline OSM w1032365223 (ODbL); roof = median of 46 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07); underside not measured"
+    },
+    {
+      "from": "w1032365224",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 1.36,
+      "_source": "Outline OSM w1032365224 (ODbL); roof = median of 48 unclassified laser points >2 m above the terrain model inside the outline; Laserdata Nedladdning, skog (25a003, scanned 2025-03-07), © Lantmäteriet, bearbetad, CC BY 4.0; from data/stations/research/740001587/triangeln_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 6.84 m RH 2000, laser 2025-03-07); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740001587/triangeln_ground_1m.tif",
+    "reference_m": 6.84,
+    "step_m": 5,
+    "_source": "ground from Lantmäteriet's laser and terrain model, 1 m (data/stations/research/740001587/triangeln_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the street (6.84 m RH 2000, laser 2025-03-07)"
+  }
 }
