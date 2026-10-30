@@ -22,6 +22,20 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Still withheld after the research pass: Platform numbers set from Trafikverket (61–62, 63–64), but the research located no entrance (two described, no positions)."
     }
-  ]
+  ],
+  "platform_refs_source": {
+    "r14746645": "Trafikverket BanInfo (CC0) platform objects BIS 2601 run alongside osm:way/r14746645; tracks 61, 62 from the register (JNB 2027 Bilaga 2A) run alongside osm:way/r14746645, read 2026-10-30 (data/stations/research/740000937); BanInfo's track numbers were being re-issued then: check on site",
+    "r14746646": "Trafikverket BanInfo (CC0) platform objects BIS 2522 run alongside osm:way/r14746646; tracks 63, 64 from the register (JNB 2027 Bilaga 2A) run alongside osm:way/r14746646, read 2026-10-30 (data/stations/research/740000937); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "r14746645": "61–62",
+    "r14746646": "63–64"
+  },
+  "multipolygons": true
 }

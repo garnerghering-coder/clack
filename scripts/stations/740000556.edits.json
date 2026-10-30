@@ -22,6 +22,40 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Still withheld after the research pass: Underground: OSM numbers none of the platforms and Trafikverket's lines don't run alongside an OSM platform outline; needs the platform numbers from Swedavia's or the operator's plan."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        13.7,
+        -1.8
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n4802014304 (already in OSM); position OSM n4802014304 (data/stations/research/740000556/station_facts.json)"
+    },
+    {
+      "at": [
+        4.1,
+        -3.5
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n4802014305 (already in OSM); position OSM n4802014305 (data/stations/research/740000556/station_facts.json)"
+    },
+    {
+      "at": [
+        126.4,
+        -194.3
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n4802017830 (already in OSM); position OSM n4802017830 (data/stations/research/740000556/station_facts.json)"
     }
   ]
 }

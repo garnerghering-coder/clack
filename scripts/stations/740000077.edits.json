@@ -26,6 +26,40 @@
     {
       "date": "2026-10-29",
       "what": "Draft withheld (not in data/stations): OSM joins no footway to the platforms and tags no entrance (3 nodes, 3 edges): the platforms cannot reach an exit. Needs the operator's station plan or a walk for a connection and an entrance before it can ship."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Still withheld after the research pass: OSM maps no footways to the platforms (3 nodes after the draft); the research's 3 entrances have nothing to attach to."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        6.5,
+        44.9
+      ],
+      "level": "0",
+      "name": "Entrance (Västra Storgatan)",
+      "_source": "OSM n9911660234 (already in OSM); position OSM n9911660234 (data/stations/research/740000077/station_facts.json)"
+    },
+    {
+      "at": [
+        -5.1,
+        49.2
+      ],
+      "level": "0",
+      "name": "Entrance (Västra Storgatan)",
+      "_source": "OSM n9911660254 (already in OSM); position OSM n9911660254 (data/stations/research/740000077/station_facts.json)"
+    },
+    {
+      "at": [
+        -22.2,
+        55.4
+      ],
+      "level": "0",
+      "name": "Entrance (Västra Storgatan)",
+      "_source": "OSM n9911660258 (already in OSM); position OSM n9911660258 (data/stations/research/740000077/station_facts.json)"
     }
   ]
 }

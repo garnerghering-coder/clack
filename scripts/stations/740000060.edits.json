@@ -22,6 +22,58 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Still withheld after the research pass: With the platform numbers from Trafikverket (1–2, 3–4) only one platform drafts, and OSM joins no footway to it; the research's 4 entrances have nothing to attach to. Needs the walkways from a plan or a walk."
+    }
+  ],
+  "platform_refs_source": {
+    "r7167193": "Trafikverket BanInfo (CC0) platform objects BIS 317 run alongside osm:way/r7167193; tracks 1, 2 from the register (JNB 2027 Bilaga 2A) run alongside osm:way/r7167193, read 2026-10-30 (data/stations/research/740000060); BanInfo's track numbers were being re-issued then: check on site",
+    "r7167194": "Trafikverket BanInfo (CC0) platform objects BIS 315 run alongside osm:way/r7167194; tracks 3, 4 from the register (JNB 2027 Bilaga 2A) run alongside osm:way/r7167194, read 2026-10-30 (data/stations/research/740000060); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "r7167193": "1–2",
+    "r7167194": "3–4"
+  },
+  "multipolygons": true,
+  "entrances": [
+    {
+      "at": [
+        -56.1,
+        49.6
+      ],
+      "level": "0",
+      "name": "Entrance (Järnvägsgatan)",
+      "_source": "OSM n765051038 (already in OSM); position OSM n765051038 (data/stations/research/740000060/station_facts.json)"
+    },
+    {
+      "at": [
+        4.4,
+        44.1
+      ],
+      "level": "0",
+      "name": "Entrance (Järnvägsgatan)",
+      "_source": "OSM n2645179173 (already in OSM); position OSM n2645179173 (data/stations/research/740000060/station_facts.json)"
+    },
+    {
+      "at": [
+        33.9,
+        7.2
+      ],
+      "level": "0",
+      "name": "Entrance (Järnvägsgatan)",
+      "_source": "OSM n2645179180 (already in OSM); position OSM n2645179180 (data/stations/research/740000060/station_facts.json)"
+    },
+    {
+      "at": [
+        50.6,
+        18.5
+      ],
+      "level": "0",
+      "name": "Entrance (Järnvägsgatan)",
+      "_source": "OSM n2645179182 (already in OSM); position OSM n2645179182 (data/stations/research/740000060/station_facts.json)"
     }
   ]
 }

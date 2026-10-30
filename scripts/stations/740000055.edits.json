@@ -26,6 +26,40 @@
     {
       "date": "2026-10-29",
       "what": "Draft withheld (not in data/stations): OSM has almost no walking network here (2 nodes, 1 edge) and no entrance: the platforms cannot reach an exit. Needs the operator's station plan or a walk for an entrance before it can ship."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Still withheld after the research pass: OSM maps no footways between the platforms and the street here (2 nodes after the draft); the research's 3 entrances (OSM positions) have nothing to attach to. Needs the walkways from a plan or a walk."
+    }
+  ],
+  "entrances": [
+    {
+      "at": [
+        76.0,
+        -103.0
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n2510987088 (already in OSM); position OSM n2510987088 (data/stations/research/740000055/station_facts.json)"
+    },
+    {
+      "at": [
+        91.5,
+        -89.9
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n13974035496 (already in OSM); position OSM n13974035496 (data/stations/research/740000055/station_facts.json)"
+    },
+    {
+      "at": [
+        95.9,
+        -35.8
+      ],
+      "level": "0",
+      "name": "Entrance (Sydgatan)",
+      "_source": "OSM n13974157810 (already in OSM); position OSM n13974157810 (data/stations/research/740000055/station_facts.json)"
     }
   ]
 }
