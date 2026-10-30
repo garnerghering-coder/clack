@@ -1,0 +1,1969 @@
+{
+ "station": {
+  "name": "Jönköping C",
+  "id": "740000090",
+  "bandel": 711,
+  "centre_lonlat": [
+   14.1641,
+   57.7843
+  ],
+  "vertical_datum": "RH 2000",
+  "horizontal_crs": "WGS84 lon/lat (source data SWEREF 99 TM)",
+  "compiled": "2026-10-30"
+ },
+ "levels": [
+  {
+   "name": "track bed (ballast/sleepers)",
+   "height_m": 90.88,
+   "source": "lm_laser",
+   "confidence": "measured, ±0.05"
+  },
+  {
+   "name": "platform surface",
+   "height_m": 91.67,
+   "source": "lm_laser",
+   "confidence": "measured, ±0.05"
+  },
+  {
+   "name": "street in front of station (north side of Juneporten block)",
+   "height_m": 90.7,
+   "source": "lm_laser",
+   "confidence": "measured"
+  },
+  {
+   "name": "town level at Juneporten south entrance",
+   "height_m": 95.3,
+   "source": "lm_laser",
+   "confidence": "measured ground outside; floor inside not measured"
+  },
+  {
+   "name": "lake (Vättern) surface at scan time",
+   "height_m": 88.8,
+   "source": "lm_laser",
+   "confidence": "measured"
+  }
+ ],
+ "platform": {
+  "bis_object": 1705,
+  "height_class": "mellan",
+  "height_above_rail_m": 0.58,
+  "height_source": "trafikverket_bis",
+  "measured_above_track_bed_m": 0.77,
+  "measured_note": "Laser: platform 91.67 minus ballast/sleeper surface 90.88; rail head ≈0.15–0.2 m above sleepers → ≈0.57–0.62 m above rail, consistent with 0.58.",
+  "width_m": 8,
+  "edge": "concrete",
+  "surface": "asphalt",
+  "roof": "Tak",
+  "safety": "protection zone and tactile path",
+  "recorded_length_m": 497.1,
+  "km": "69+131 to 69+590",
+  "faces": [
+   {
+    "track": "2a",
+    "length_m": 161.2
+   },
+   {
+    "track": "2a/2b transition",
+    "length_m": 62.9
+   },
+   {
+    "track": "2b",
+    "length_m": 233.2
+   },
+   {
+    "track": "1",
+    "length_m": 88.1,
+    "note": "east end only"
+   }
+  ],
+  "track_lines": [
+   {
+    "type": "Feature",
+    "properties": {
+     "bis_object": 1705,
+     "track": "2a",
+     "side": 2,
+     "reflink": "9475c745",
+     "length_m_computed": 161.2,
+     "height_m": 0.58,
+     "height_class": "mellan",
+     "width_m": 8,
+     "roof": "Tak"
+    },
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       14.159678965,
+       57.785067741
+      ],
+      [
+       14.159679439,
+       57.78506764
+      ],
+      [
+       14.159822884,
+       57.78503891
+      ],
+      [
+       14.159989034,
+       57.785007342
+      ],
+      [
+       14.160137114,
+       57.784980704
+      ],
+      [
+       14.16029067,
+       57.784954612
+      ],
+      [
+       14.160454383,
+       57.784928369
+      ],
+      [
+       14.160596349,
+       57.784906929
+      ],
+      [
+       14.160773979,
+       57.784881749
+      ],
+      [
+       14.160937502,
+       57.784859713
+      ],
+      [
+       14.161094884,
+       57.78483954
+      ],
+      [
+       14.161252452,
+       57.784820136
+      ],
+      [
+       14.161416518,
+       57.784800554
+      ],
+      [
+       14.161738273,
+       57.784763377
+      ],
+      [
+       14.162309214,
+       57.784707771
+      ]
+     ]
+    }
+   },
+   {
+    "type": "Feature",
+    "properties": {
+     "bis_object": 1705,
+     "track": "2a/2b (transition)",
+     "side": 2,
+     "reflink": "5c9e3244",
+     "length_m_computed": 62.9,
+     "height_m": 0.58,
+     "height_class": "mellan",
+     "width_m": 8,
+     "roof": "Tak"
+    },
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       14.162309214,
+       57.784707771
+      ],
+      [
+       14.163347268,
+       57.784588867
+      ]
+     ]
+    }
+   },
+   {
+    "type": "Feature",
+    "properties": {
+     "bis_object": 1705,
+     "track": "2b",
+     "side": 2,
+     "reflink": "25882b5e",
+     "length_m_computed": 233.2,
+     "height_m": 0.58,
+     "height_class": "mellan",
+     "width_m": 8,
+     "roof": "Tak"
+    },
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       14.163347268,
+       57.784588867
+      ],
+      [
+       14.165886245,
+       57.784289668
+      ],
+      [
+       14.166009232,
+       57.784275581
+      ],
+      [
+       14.166205672,
+       57.784252607
+      ],
+      [
+       14.166525004,
+       57.784214662
+      ],
+      [
+       14.166844084,
+       57.78417579
+      ],
+      [
+       14.167186746,
+       57.784133567
+      ]
+     ]
+    }
+   },
+   {
+    "type": "Feature",
+    "properties": {
+     "bis_object": 1705,
+     "track": "1",
+     "side": 1,
+     "reflink": "c6243846",
+     "length_m_computed": 88.1,
+     "height_m": 0.58,
+     "height_class": "mellan",
+     "width_m": 8,
+     "roof": "Tak"
+    },
+    "geometry": {
+     "type": "LineString",
+     "coordinates": [
+      [
+       14.16567195,
+       57.784240385
+      ],
+      [
+       14.166751215,
+       57.784112741
+      ],
+      [
+       14.167127894,
+       57.784082787
+      ]
+     ]
+    }
+   }
+  ],
+  "laser_ends_lonlat": [
+   [
+    14.159758,
+    57.785052
+   ],
+   [
+    14.167126,
+    57.784141
+   ]
+  ],
+  "edge_offset_from_track2_centre_m": 2.0
+ },
+ "roofs": [
+  {
+   "name": "platform canopy over 2a",
+   "top_m": 95.04,
+   "above_platform_m": 3.37,
+   "area_m2": 708,
+   "outline_lonlat": [
+    [
+     14.1604271,
+     57.7848705
+    ],
+    [
+     14.1603262,
+     57.7848698
+    ],
+    [
+     14.160326,
+     57.7848788
+    ],
+    [
+     14.1602923,
+     57.7848786
+    ],
+    [
+     14.1602921,
+     57.7848876
+    ],
+    [
+     14.1602417,
+     57.7848872
+    ],
+    [
+     14.1602408,
+     57.7849231
+    ],
+    [
+     14.1602577,
+     57.7849233
+    ],
+    [
+     14.1602741,
+     57.7849413
+    ],
+    [
+     14.1603581,
+     57.7849419
+    ],
+    [
+     14.1603585,
+     57.7849239
+    ],
+    [
+     14.1603922,
+     57.7849242
+    ],
+    [
+     14.1603924,
+     57.7849152
+    ],
+    [
+     14.1604428,
+     57.7849155
+    ],
+    [
+     14.160443,
+     57.7849065
+    ],
+    [
+     14.1604935,
+     57.7849069
+    ],
+    [
+     14.1604937,
+     57.7848979
+    ],
+    [
+     14.1605441,
+     57.7848982
+    ],
+    [
+     14.1605443,
+     57.7848892
+    ],
+    [
+     14.1605948,
+     57.7848896
+    ],
+    [
+     14.160595,
+     57.7848806
+    ],
+    [
+     14.1606623,
+     57.784881
+    ],
+    [
+     14.1606625,
+     57.784872
+    ],
+    [
+     14.1607465,
+     57.7848726
+    ],
+    [
+     14.1607468,
+     57.7848636
+    ],
+    [
+     14.1607972,
+     57.784864
+    ],
+    [
+     14.1607974,
+     57.784855
+    ],
+    [
+     14.1608479,
+     57.7848553
+    ],
+    [
+     14.1608481,
+     57.7848463
+    ],
+    [
+     14.1609153,
+     57.7848468
+    ],
+    [
+     14.1609155,
+     57.7848378
+    ],
+    [
+     14.1611007,
+     57.78483
+    ],
+    [
+     14.1611003,
+     57.784848
+    ],
+    [
+     14.1611171,
+     57.7848481
+    ],
+    [
+     14.1611177,
+     57.7848212
+    ],
+    [
+     14.1611345,
+     57.7848213
+    ],
+    [
+     14.1611518,
+     57.7848034
+    ],
+    [
+     14.1612863,
+     57.7848043
+    ],
+    [
+     14.1612865,
+     57.7847953
+    ],
+    [
+     14.1613201,
+     57.7847956
+    ],
+    [
+     14.1613204,
+     57.7847866
+    ],
+    [
+     14.1614044,
+     57.7847871
+    ],
+    [
+     14.1614046,
+     57.7847781
+    ],
+    [
+     14.1615394,
+     57.7847701
+    ],
+    [
+     14.1615396,
+     57.7847611
+    ],
+    [
+     14.16159,
+     57.7847614
+    ],
+    [
+     14.1615902,
+     57.7847524
+    ],
+    [
+     14.1617079,
+     57.7847532
+    ],
+    [
+     14.1617081,
+     57.7847442
+    ],
+    [
+     14.1617418,
+     57.7847444
+    ],
+    [
+     14.161742,
+     57.7847355
+    ],
+    [
+     14.1618429,
+     57.7847361
+    ],
+    [
+     14.1618425,
+     57.7847541
+    ],
+    [
+     14.1618593,
+     57.7847542
+    ],
+    [
+     14.1618599,
+     57.7847273
+    ],
+    [
+     14.1618767,
+     57.7847274
+    ],
+    [
+     14.1618769,
+     57.7847184
+    ],
+    [
+     14.1619946,
+     57.7847192
+    ],
+    [
+     14.1619948,
+     57.7847102
+    ],
+    [
+     14.1620453,
+     57.7847105
+    ],
+    [
+     14.1620455,
+     57.7847015
+    ],
+    [
+     14.1621802,
+     57.7846934
+    ],
+    [
+     14.1621806,
+     57.7846755
+    ],
+    [
+     14.1622313,
+     57.7846668
+    ],
+    [
+     14.1622826,
+     57.7846312
+    ],
+    [
+     14.1621815,
+     57.7846396
+    ],
+    [
+     14.1621813,
+     57.7846485
+    ],
+    [
+     14.1620636,
+     57.7846478
+    ],
+    [
+     14.1620633,
+     57.7846567
+    ],
+    [
+     14.1619961,
+     57.7846563
+    ],
+    [
+     14.1619959,
+     57.7846653
+    ],
+    [
+     14.161895,
+     57.7846646
+    ],
+    [
+     14.1618948,
+     57.7846736
+    ],
+    [
+     14.1618275,
+     57.7846731
+    ],
+    [
+     14.1618273,
+     57.7846821
+    ],
+    [
+     14.1617769,
+     57.7846818
+    ],
+    [
+     14.1617767,
+     57.7846908
+    ],
+    [
+     14.1616926,
+     57.7846902
+    ],
+    [
+     14.1616924,
+     57.7846992
+    ],
+    [
+     14.1616419,
+     57.7846989
+    ],
+    [
+     14.1616417,
+     57.7847079
+    ],
+    [
+     14.1615408,
+     57.7847072
+    ],
+    [
+     14.1615406,
+     57.7847162
+    ],
+    [
+     14.1614059,
+     57.7847243
+    ],
+    [
+     14.1614057,
+     57.7847332
+    ],
+    [
+     14.1613552,
+     57.7847329
+    ],
+    [
+     14.161355,
+     57.7847419
+    ],
+    [
+     14.1612541,
+     57.7847412
+    ],
+    [
+     14.1612539,
+     57.7847502
+    ],
+    [
+     14.1612035,
+     57.7847499
+    ],
+    [
+     14.1612033,
+     57.7847588
+    ],
+    [
+     14.1610687,
+     57.784758
+    ],
+    [
+     14.1610683,
+     57.7847759
+    ],
+    [
+     14.1609168,
+     57.7847839
+    ],
+    [
+     14.1609166,
+     57.7847929
+    ],
+    [
+     14.1608829,
+     57.7847927
+    ],
+    [
+     14.1608827,
+     57.7848016
+    ],
+    [
+     14.1607987,
+     57.7848011
+    ],
+    [
+     14.1607985,
+     57.7848101
+    ],
+    [
+     14.1607648,
+     57.7848098
+    ],
+    [
+     14.1607646,
+     57.7848188
+    ],
+    [
+     14.1606805,
+     57.7848183
+    ],
+    [
+     14.160681,
+     57.7848003
+    ],
+    [
+     14.1606641,
+     57.7848002
+    ],
+    [
+     14.1606639,
+     57.7848092
+    ],
+    [
+     14.1606303,
+     57.784809
+    ],
+    [
+     14.1606297,
+     57.7848359
+    ],
+    [
+     14.1605456,
+     57.7848353
+    ],
+    [
+     14.1605284,
+     57.7848532
+    ],
+    [
+     14.1604443,
+     57.7848526
+    ],
+    [
+     14.1604271,
+     57.7848705
+    ]
+   ],
+   "source": "lm_laser",
+   "osm_match": "w401108813 (building=roof)",
+   "note": "timber canopy, see photos 62888390, 192277611"
+  },
+  {
+   "name": "waiting hall roof (2001) incl. overhang over platform 2b",
+   "top_m": 97.77,
+   "above_platform_m": 6.1,
+   "area_m2": 761,
+   "outline_lonlat": [
+    [
+     14.163716,
+     57.784461
+    ],
+    [
+     14.1636151,
+     57.7844604
+    ],
+    [
+     14.1636149,
+     57.7844694
+    ],
+    [
+     14.1635308,
+     57.7844688
+    ],
+    [
+     14.1635298,
+     57.7845137
+    ],
+    [
+     14.1635466,
+     57.7845138
+    ],
+    [
+     14.1635464,
+     57.7845228
+    ],
+    [
+     14.1636473,
+     57.7845235
+    ],
+    [
+     14.1636475,
+     57.7845145
+    ],
+    [
+     14.1637148,
+     57.7845149
+    ],
+    [
+     14.163715,
+     57.784506
+    ],
+    [
+     14.163799,
+     57.7845065
+    ],
+    [
+     14.1637984,
+     57.7845335
+    ],
+    [
+     14.1638152,
+     57.7845336
+    ],
+    [
+     14.1638161,
+     57.7844976
+    ],
+    [
+     14.1638497,
+     57.7844979
+    ],
+    [
+     14.1638499,
+     57.7844889
+    ],
+    [
+     14.1639508,
+     57.7844895
+    ],
+    [
+     14.163951,
+     57.7844806
+    ],
+    [
+     14.1640015,
+     57.7844809
+    ],
+    [
+     14.1640017,
+     57.7844719
+    ],
+    [
+     14.1641025,
+     57.7844726
+    ],
+    [
+     14.1641028,
+     57.7844636
+    ],
+    [
+     14.1641364,
+     57.7844638
+    ],
+    [
+     14.1641366,
+     57.7844548
+    ],
+    [
+     14.1642375,
+     57.7844555
+    ],
+    [
+     14.1642377,
+     57.7844465
+    ],
+    [
+     14.1643892,
+     57.7844385
+    ],
+    [
+     14.1643894,
+     57.7844296
+    ],
+    [
+     14.1644399,
+     57.7844299
+    ],
+    [
+     14.1644401,
+     57.7844209
+    ],
+    [
+     14.164541,
+     57.7844216
+    ],
+    [
+     14.1645408,
+     57.7844306
+    ],
+    [
+     14.1645742,
+     57.7844398
+    ],
+    [
+     14.1645748,
+     57.7844128
+    ],
+    [
+     14.1646085,
+     57.784413
+    ],
+    [
+     14.1646087,
+     57.7844041
+    ],
+    [
+     14.1647602,
+     57.7843961
+    ],
+    [
+     14.1647604,
+     57.7843871
+    ],
+    [
+     14.164912,
+     57.7843791
+    ],
+    [
+     14.1649122,
+     57.7843701
+    ],
+    [
+     14.1650131,
+     57.7843708
+    ],
+    [
+     14.1650133,
+     57.7843618
+    ],
+    [
+     14.1650637,
+     57.7843621
+    ],
+    [
+     14.1650639,
+     57.7843532
+    ],
+    [
+     14.1653163,
+     57.7843458
+    ],
+    [
+     14.1653338,
+     57.784319
+    ],
+    [
+     14.1654853,
+     57.784311
+    ],
+    [
+     14.1654859,
+     57.7842841
+    ],
+    [
+     14.1654525,
+     57.7842749
+    ],
+    [
+     14.1654529,
+     57.7842569
+    ],
+    [
+     14.1653689,
+     57.7842564
+    ],
+    [
+     14.1653687,
+     57.7842653
+    ],
+    [
+     14.1652339,
+     57.7842734
+    ],
+    [
+     14.1652337,
+     57.7842824
+    ],
+    [
+     14.1651833,
+     57.7842821
+    ],
+    [
+     14.1651831,
+     57.7842911
+    ],
+    [
+     14.1650654,
+     57.7842903
+    ],
+    [
+     14.1650481,
+     57.7843081
+    ],
+    [
+     14.1649304,
+     57.7843074
+    ],
+    [
+     14.1649302,
+     57.7843163
+    ],
+    [
+     14.1648798,
+     57.784316
+    ],
+    [
+     14.1648796,
+     57.784325
+    ],
+    [
+     14.1647787,
+     57.7843243
+    ],
+    [
+     14.1647785,
+     57.7843333
+    ],
+    [
+     14.1647448,
+     57.7843331
+    ],
+    [
+     14.1647446,
+     57.7843421
+    ],
+    [
+     14.1646269,
+     57.7843413
+    ],
+    [
+     14.1646265,
+     57.7843593
+    ],
+    [
+     14.164492,
+     57.7843584
+    ],
+    [
+     14.1644918,
+     57.7843674
+    ],
+    [
+     14.1644245,
+     57.7843669
+    ],
+    [
+     14.1644243,
+     57.7843759
+    ],
+    [
+     14.1643739,
+     57.7843756
+    ],
+    [
+     14.1643737,
+     57.7843845
+    ],
+    [
+     14.164121,
+     57.7844008
+    ],
+    [
+     14.1641208,
+     57.7844098
+    ],
+    [
+     14.1640536,
+     57.7844094
+    ],
+    [
+     14.1640533,
+     57.7844184
+    ],
+    [
+     14.1640029,
+     57.784418
+    ],
+    [
+     14.1640027,
+     57.784427
+    ],
+    [
+     14.163885,
+     57.7844262
+    ],
+    [
+     14.1638848,
+     57.7844352
+    ],
+    [
+     14.1638512,
+     57.784435
+    ],
+    [
+     14.1638509,
+     57.784444
+    ],
+    [
+     14.1637501,
+     57.7844433
+    ],
+    [
+     14.1637498,
+     57.7844523
+    ],
+    [
+     14.1637162,
+     57.7844521
+    ],
+    [
+     14.163716,
+     57.784461
+    ]
+   ],
+   "source": "lm_laser",
+   "osm_match": "w133653929 (tagged Jönköpings bussterminal)",
+   "note": "Glass-walled hall along 2b (photos 62899901, 99563715). Roof falls from ≈98.1 m at the platform edge to ≈96.9 m on the town side."
+  }
+ ],
+ "no_roof": [
+  {
+   "section": "east part of platform, ≈14.1655–14.1671 E",
+   "source": "lm_laser + photo 80407395"
+  }
+ ],
+ "buildings": [
+  {
+   "name": "station building (1983)",
+   "osm": "w81576737",
+   "ground_min_m": 90.51,
+   "ground_median_m": 91.69,
+   "roof_median_m": 100.08,
+   "roof_p95_m": 100.89,
+   "height_above_ground_m": 8.51,
+   "outline_lonlat": [
+    [
+     14.162465,
+     57.784458
+    ],
+    [
+     14.162487,
+     57.784481
+    ],
+    [
+     14.16249,
+     57.784484
+    ],
+    [
+     14.162523,
+     57.784508
+    ],
+    [
+     14.162534,
+     57.784517
+    ],
+    [
+     14.162546,
+     57.784527
+    ],
+    [
+     14.162832,
+     57.784471
+    ],
+    [
+     14.162921,
+     57.784462
+    ],
+    [
+     14.163009,
+     57.784453
+    ],
+    [
+     14.163154,
+     57.784438
+    ],
+    [
+     14.163395,
+     57.784433
+    ],
+    [
+     14.163396,
+     57.784372
+    ],
+    [
+     14.163377,
+     57.784216
+    ],
+    [
+     14.163375,
+     57.784207
+    ],
+    [
+     14.163064,
+     57.784217
+    ],
+    [
+     14.162719,
+     57.784253
+    ],
+    [
+     14.162623,
+     57.784267
+    ],
+    [
+     14.162448,
+     57.784022
+    ],
+    [
+     14.162388,
+     57.784028
+    ],
+    [
+     14.162332,
+     57.784033
+    ],
+    [
+     14.162506,
+     57.784285
+    ],
+    [
+     14.162414,
+     57.784304
+    ],
+    [
+     14.162428,
+     57.784323
+    ],
+    [
+     14.162385,
+     57.784337
+    ],
+    [
+     14.162419,
+     57.784399
+    ],
+    [
+     14.162465,
+     57.784458
+    ]
+   ],
+   "source": [
+    "osm",
+    "lm_laser"
+   ]
+  },
+  {
+   "name": "footbridge",
+   "osm": "w81576735",
+   "ground_min_m": 90.73,
+   "ground_median_m": 90.95,
+   "roof_median_m": 100.74,
+   "roof_p95_m": 101.73,
+   "height_above_ground_m": 9.09,
+   "outline_lonlat": [
+    [
+     14.162487,
+     57.784481
+    ],
+    [
+     14.162465,
+     57.784458
+    ],
+    [
+     14.162366,
+     57.784495
+    ],
+    [
+     14.16236,
+     57.784493
+    ],
+    [
+     14.162342,
+     57.784492
+    ],
+    [
+     14.162324,
+     57.784494
+    ],
+    [
+     14.162308,
+     57.784499
+    ],
+    [
+     14.162296,
+     57.784507
+    ],
+    [
+     14.16229,
+     57.784516
+    ],
+    [
+     14.162289,
+     57.784526
+    ],
+    [
+     14.162295,
+     57.784536
+    ],
+    [
+     14.162306,
+     57.784543
+    ],
+    [
+     14.162321,
+     57.784549
+    ],
+    [
+     14.16233,
+     57.78455
+    ],
+    [
+     14.162422,
+     57.784857
+    ],
+    [
+     14.16278,
+     57.784817
+    ],
+    [
+     14.162771,
+     57.784792
+    ],
+    [
+     14.162471,
+     57.784825
+    ],
+    [
+     14.162379,
+     57.784545
+    ],
+    [
+     14.162389,
+     57.78454
+    ],
+    [
+     14.162397,
+     57.784532
+    ],
+    [
+     14.162401,
+     57.784523
+    ],
+    [
+     14.162399,
+     57.784517
+    ],
+    [
+     14.162487,
+     57.784481
+    ]
+   ],
+   "source": [
+    "osm",
+    "lm_laser"
+   ],
+   "note": "Underside not measured; model assumes 97.2 m."
+  },
+  {
+   "name": "waiting hall / bus terminal (2001)",
+   "osm": "w133653929",
+   "ground_min_m": 91.36,
+   "ground_median_m": 91.59,
+   "roof_median_m": 96.98,
+   "roof_p95_m": 97.97,
+   "height_above_ground_m": 5.49,
+   "outline_lonlat": [
+    [
+     14.163396,
+     57.784372
+    ],
+    [
+     14.163441,
+     57.784371
+    ],
+    [
+     14.163501,
+     57.784371
+    ],
+    [
+     14.163504,
+     57.784301
+    ],
+    [
+     14.163665,
+     57.784309
+    ],
+    [
+     14.164141,
+     57.784337
+    ],
+    [
+     14.164302,
+     57.784319
+    ],
+    [
+     14.165412,
+     57.784194
+    ],
+    [
+     14.165429,
+     57.784244
+    ],
+    [
+     14.165443,
+     57.784289
+    ],
+    [
+     14.163534,
+     57.78451
+    ],
+    [
+     14.163502,
+     57.784513
+    ],
+    [
+     14.163503,
+     57.784502
+    ],
+    [
+     14.163506,
+     57.784432
+    ],
+    [
+     14.163395,
+     57.784433
+    ],
+    [
+     14.163396,
+     57.784372
+    ]
+   ],
+   "source": [
+    "osm",
+    "lm_laser"
+   ]
+  },
+  {
+   "name": "Juneporten block",
+   "osm": "r13095414",
+   "ground_min_m": 90.69,
+   "ground_median_m": 93.86,
+   "roof_median_m": 104.79,
+   "roof_p95_m": 122.2,
+   "height_above_ground_m": 12.16,
+   "outline_lonlat": [
+    [
+     14.161124,
+     57.783944
+    ],
+    [
+     14.161001,
+     57.783647
+    ],
+    [
+     14.161952,
+     57.783551
+    ],
+    [
+     14.161944,
+     57.783527
+    ],
+    [
+     14.162183,
+     57.783502
+    ],
+    [
+     14.162353,
+     57.783485
+    ],
+    [
+     14.162356,
+     57.783506
+    ],
+    [
+     14.162458,
+     57.783783
+    ],
+    [
+     14.16243,
+     57.783788
+    ],
+    [
+     14.162517,
+     57.784014
+    ],
+    [
+     14.162448,
+     57.784022
+    ],
+    [
+     14.162388,
+     57.784028
+    ],
+    [
+     14.162332,
+     57.784033
+    ],
+    [
+     14.16172,
+     57.7841
+    ],
+    [
+     14.161676,
+     57.784104
+    ],
+    [
+     14.161492,
+     57.784079
+    ],
+    [
+     14.16134,
+     57.784057
+    ],
+    [
+     14.161124,
+     57.783944
+    ]
+   ],
+   "source": [
+    "osm",
+    "lm_laser"
+   ]
+  },
+  {
+   "name": "hotel (14 levels)",
+   "osm": "w986647231",
+   "ground_min_m": 91.84,
+   "ground_median_m": 95.09,
+   "roof_median_m": 154.87,
+   "roof_p95_m": 157.55,
+   "height_above_ground_m": 59.66,
+   "outline_lonlat": [
+    [
+     14.160824,
+     57.784115
+    ],
+    [
+     14.160581,
+     57.78417
+    ],
+    [
+     14.160798,
+     57.784439
+    ],
+    [
+     14.161041,
+     57.784383
+    ],
+    [
+     14.160824,
+     57.784115
+    ]
+   ],
+   "source": [
+    "osm",
+    "lm_laser"
+   ]
+  }
+ ],
+ "vertical_circulation": [
+  {
+   "type": "elevator",
+   "osm": "n950768989",
+   "levels": "0;1",
+   "lonlat": [
+    14.162422,
+    57.784857
+   ],
+   "note": "north (lake) end of footbridge"
+  },
+  {
+   "type": "steps",
+   "osm": "w1425083737",
+   "line_lonlat": [
+    [
+     14.162753,
+     57.784808
+    ],
+    [
+     14.162458,
+     57.784845
+    ]
+   ]
+  },
+  {
+   "type": "footway level 1",
+   "osm": "w1425083738",
+   "line_lonlat": [
+    [
+     14.162458,
+     57.784845
+    ],
+    [
+     14.162422,
+     57.784857
+    ]
+   ]
+  },
+  {
+   "type": "steps",
+   "osm": "w1524292832",
+   "line_lonlat": [
+    [
+     14.161229,
+     57.784347
+    ],
+    [
+     14.161085,
+     57.784216
+    ]
+   ]
+  },
+  {
+   "type": "steps",
+   "osm": "w1105535069",
+   "line_lonlat": [
+    [
+     14.160492,
+     57.784034
+    ],
+    [
+     14.16041,
+     57.784076
+    ]
+   ]
+  },
+  {
+   "type": "escalators",
+   "note": "Not mapped in OSM and not visible in laser or photos; needs the walk."
+  }
+ ],
+ "trains_in_laser_scan": [
+  {
+   "track": "2",
+   "lon_range": [
+    14.16457,
+    14.16549
+   ],
+   "length_m": 55,
+   "roof_m": 94.75,
+   "note": "parked during scan; not a structure"
+  },
+  {
+   "track": "1",
+   "lon_range": [
+    14.16585,
+    14.16677
+   ],
+   "length_m": 55,
+   "roof_m": 94.8,
+   "note": "parked during scan; not a structure"
+  }
+ ],
+ "terrain": {
+  "box": "500 × 200 m around centre",
+  "min_m": 88.73,
+  "median_m": 91.02,
+  "p95_m": 96.06,
+  "max_m": 96.92,
+  "slope": "falls 2.3 m per 100 m northward, 0.8 m per 100 m eastward",
+  "files": [
+   "jonkoping_c_ground_1m.tif",
+   "jonkoping_c_ground_1m_heightmap.png"
+  ]
+ },
+ "replaces_stand_ins": [
+  {
+   "item": "Platform height",
+   "was": "0.55 m standard",
+   "now": "0.58 m above rail (recorded); surface 91.67 m"
+  },
+  {
+   "item": "Platform outline and length",
+   "was": "OSM draft",
+   "now": "OSM outline confirmed by laser (ends, 2.0 m edge offset); Trafikverket per-track faces"
+  },
+  {
+   "item": "Building heights and shapes",
+   "was": "4 m box",
+   "now": "Laser roof heights per footprint (station 8.5 m, hall ≈5.4–6.4 m, footbridge roof 9.1 m)"
+  },
+  {
+   "item": "Platform roofs",
+   "was": "not drawn",
+   "now": "Canopy 2a (+3.4 m) and waiting hall roof (+6.1 m) outlines"
+  },
+  {
+   "item": "Upper level outline",
+   "was": "hull + 2 m",
+   "now": "Not replaced: town level 95.3 m measured outside Juneporten; floor and outline need the walk"
+  },
+  {
+   "item": "Escalator and stairs positions",
+   "was": "phone walk ±10 m",
+   "now": "Partly: OSM elevator and steps at footbridge; escalators still need the walk"
+  },
+  {
+   "item": "Ground",
+   "was": "flat",
+   "now": "1 m laser ground grid"
+  }
+ ],
+ "sources": {
+  "trafikverket_bis": "Trafikverket BIS via BanInfo WMS, layer Plattform/Sparnummer, read 2026-10-29. CC0.",
+  "trafikverket_jnb": "Trafikverket Järnvägsnätsbeskrivning 2027, Bilaga 2A (version 2026-09-24), row 386.",
+  "lm_laser": "Lantmäteriet Laserdata Nedladdning, skog, scan 2022-03-19/20, tiles 22b007-64050_4500_25 and 22b007-64025_4500_25. © Lantmäteriet, bearbetad, CC BY 4.0.",
+  "lm_dtm": "Lantmäteriet Markhöjdmodell Nedladdning, tile 640_45 (source scan 2022-03-20). © Lantmäteriet, CC BY 4.0.",
+  "osm": "OpenStreetMap, read 2026-10-29. © OpenStreetMap contributors, ODbL.",
+  "commons": "Wikimedia Commons photos, see photos[]."
+ },
+ "attribution_lines": [
+  "© OpenStreetMap contributors",
+  "Höjddata: Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0",
+  "Järnvägsdata: Trafikverket"
+ ],
+ "photos": [
+  {
+   "file": "photo_1620775.jpg",
+   "pageid": 1620775,
+   "title": "File:Jönköpings centralstation.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköpings_centralstation.jpg",
+   "author": "Moralist",
+   "licence": "CC BY 2.5",
+   "date": "2007-01-31",
+   "caption": "Platform 2a looking west towards the footbridge and its stair tower; canopy on the right.",
+   "group": "history",
+   "size": [
+    1100,
+    724
+   ]
+  },
+  {
+   "file": "photo_130733497.jpg",
+   "pageid": 130733497,
+   "title": "File:JvmKDAE04591 Jönköping Central.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:JvmKDAE04591_Jönköping_Central.jpg",
+   "author": "Seved Walther",
+   "licence": "CC BY-SA 4.0",
+   "date": "1980s",
+   "caption": "The 1864 Edelsvärd station building, demolished 1983.",
+   "group": "history",
+   "size": [
+    971,
+    742
+   ]
+  },
+  {
+   "file": "photo_37230708.jpg",
+   "pageid": 37230708,
+   "title": "File:Stationen Jönköping2.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Stationen_Jönköping2.JPG",
+   "author": "Moralist",
+   "licence": "CC BY-SA 4.0",
+   "date": "2008-02-28",
+   "caption": "Station area seen from Vättern: a train at the platform, arched roofs and offices behind.",
+   "group": "context",
+   "size": [
+    1100,
+    736
+   ]
+  },
+  {
+   "file": "photo_186826575.jpg",
+   "pageid": 186826575,
+   "title": "File:Jönköpings resecentrum 01.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköpings_resecentrum_01.jpg",
+   "author": "Bengt Oberger",
+   "licence": "CC BY 4.0",
+   "date": "2012-05-25",
+   "caption": "1983 station building by Carl Nyrén, clock tower, street side.",
+   "group": "station",
+   "size": [
+    1100,
+    727
+   ]
+  },
+  {
+   "file": "photo_10207028.jpg",
+   "pageid": 10207028,
+   "title": "File:Sweden. Jönköping 002.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Sweden._Jönköping_002.JPG",
+   "author": "Albert Jankowski",
+   "licence": "Public domain",
+   "date": "",
+   "caption": "Station building and clock tower from the street.",
+   "group": "station",
+   "size": [
+    973,
+    742
+   ]
+  },
+  {
+   "file": "photo_10206769.jpg",
+   "pageid": 10206769,
+   "title": "File:Sweden. Jönköping 001.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Sweden._Jönköping_001.JPG",
+   "author": "Albert Jankowski",
+   "licence": "Public domain",
+   "date": "",
+   "caption": "\"Resecentrum\" entrance, part of the 2001 waiting hall.",
+   "group": "station",
+   "size": [
+    981,
+    742
+   ]
+  },
+  {
+   "file": "photo_148691178.jpg",
+   "pageid": 148691178,
+   "title": "File:Juneportenexteriör.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Juneportenexteriör.jpg",
+   "author": "Berikande",
+   "licence": "CC BY-SA 4.0",
+   "date": "2024-05-24",
+   "caption": "Juneporten street entrance on the town side (≈95.3 m).",
+   "group": "juneporten",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_148691224.jpg",
+   "pageid": 148691224,
+   "title": "File:Juneporteninteriör.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Juneporteninteriör.jpg",
+   "author": "Berikande",
+   "licence": "CC BY-SA 4.0",
+   "date": "2024-05-24",
+   "caption": "Inside Juneporten: the glass-roofed passage between the town and the station.",
+   "group": "juneporten",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_62888390.jpg",
+   "pageid": 62888390,
+   "title": "File:Jönköping - KMB - 16001000304844.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_-_KMB_-_16001000304844.jpg",
+   "author": "Bengt A. Lundberg",
+   "licence": "CC BY 2.5",
+   "date": "2011-05-03",
+   "caption": "Platform 2a under the timber canopy, train on track 2a, Vättern behind.",
+   "group": "platform",
+   "size": [
+    1100,
+    731
+   ]
+  },
+  {
+   "file": "photo_62899901.jpg",
+   "pageid": 62899901,
+   "title": "File:Jönköping - KMB - 16001000304745.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_-_KMB_-_16001000304745.jpg",
+   "author": "Bengt A. Lundberg",
+   "licence": "CC BY 2.5",
+   "date": "2011-05-03",
+   "caption": "Glass wall of the waiting hall along platform 2b, roof overhang with louvres, footbridge in the distance.",
+   "group": "platform",
+   "size": [
+    1100,
+    731
+   ]
+  },
+  {
+   "file": "photo_99563715.jpg",
+   "pageid": 99563715,
+   "title": "File:Jönköping station 2019 5.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_station_2019_5.jpg",
+   "author": "Smiley.toerist",
+   "licence": "CC BY-SA 4.0",
+   "date": "2019-06-18",
+   "caption": "Platform 2b beside the waiting hall glass wall; Krösatåg train on track 2b.",
+   "group": "platform",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_192277611.jpg",
+   "pageid": 192277611,
+   "title": "File:2019-06-14 4627 Västtrafik X53 3265 i Jönköping.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:2019-06-14_4627_Västtrafik_X53_3265_i_Jönköping.jpg",
+   "author": "G och J",
+   "licence": "CC BY 4.0",
+   "date": "2019-06-14",
+   "caption": "Track 2a under the canopy, departure board, Västtåg X53.",
+   "group": "platform",
+   "size": [
+    1100,
+    732
+   ]
+  },
+  {
+   "file": "photo_119110324.jpg",
+   "pageid": 119110324,
+   "title": "File:10.05.22 Jönköping Centralstation X50 3289 (52094002443).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:10.05.22_Jönköping_Centralstation_X50_3289_(52094002443).jpg",
+   "author": "Phil Richards",
+   "licence": "CC BY-SA 2.0",
+   "date": "2022-05-10",
+   "caption": "Canopy over 2a, lake-side tracks and Vättern, seven weeks after the laser scan.",
+   "group": "platform",
+   "size": [
+    1063,
+    742
+   ]
+  },
+  {
+   "file": "photo_80407393.jpg",
+   "pageid": 80407393,
+   "title": "File:Jönköping station 2019 2.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_station_2019_2.jpg",
+   "author": "Smiley.toerist",
+   "licence": "CC BY-SA 4.0",
+   "date": "2019-06-18",
+   "caption": "From under the footbridge looking east along 2b: canopy, waiting hall, lake-side tracks.",
+   "group": "platform",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_80407395.jpg",
+   "pageid": 80407395,
+   "title": "File:Jönköping station 2019 3.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_station_2019_3.jpg",
+   "author": "Smiley.toerist",
+   "licence": "CC BY-SA 4.0",
+   "date": "2019-06-18",
+   "caption": "Along the platform beside the end of the waiting hall.",
+   "group": "platform",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_80407396.jpg",
+   "pageid": 80407396,
+   "title": "File:Jönköping station 2019 1.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_station_2019_1.jpg",
+   "author": "Smiley.toerist",
+   "licence": "CC BY-SA 4.0",
+   "date": "2019-06-17",
+   "caption": "Platform end with railing, looking along the station throat.",
+   "group": "platform",
+   "size": [
+    991,
+    742
+   ]
+  },
+  {
+   "file": "photo_59238338.jpg",
+   "pageid": 59238338,
+   "title": "File:Jönköping Central Station - panoramio.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Jönköping_Central_Station_-_panoramio.jpg",
+   "author": "Olof Lagerkvist",
+   "licence": "CC BY 3.0",
+   "date": "2010s",
+   "caption": "Night view from the footbridge looking west: canopy roof, platform, tracks, Vättern on the right.",
+   "group": "platform",
+   "size": [
+    1100,
+    618
+   ]
+  },
+  {
+   "file": "photo_57582206.jpg",
+   "pageid": 57582206,
+   "title": "File:Västtågen at Jönköping Centralstation - panoramio.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Västtågen_at_Jönköping_Centralstation_-_panoramio.jpg",
+   "author": "Olof Lagerkvist",
+   "licence": "CC BY 3.0",
+   "date": "2010s",
+   "caption": "Västtåg at the platform at night, seen through the waiting hall glass.",
+   "group": "platform",
+   "size": [
+    1100,
+    618
+   ]
+  }
+ ]
+}

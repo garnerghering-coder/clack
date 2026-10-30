@@ -1098,6 +1098,7 @@ def main():
         edges=out_edges,
         pois=sorted(pois, key=lambda p: (p["category"], p["name"])),
     )
+    apply_structures(out["shapes"], edits, xy, level_id[edits.get("default_level", "0")])
     for s in out["shapes"]:
         s["points"] = [[round(x, 1), round(y, 1)] for x, y in s["points"]]
     for p in out["platforms"]:
@@ -1105,12 +1106,103 @@ def main():
         if "height_m" in edits.get("platform_heights", {}).get(p["ref"], {}):
             p["height_m"] = edits["platform_heights"][p["ref"]]["height_m"]
             p["_source"] += f"; height from {edits['platform_heights'][p['ref']]['_source']}"
+    if "terrain" in edits:
+        out["terrain"] = terrain_grid(edits["terrain"], lat0, lon0, K, out)
     path = os.path.join(ROOT, f"data/stations/{safe}.json")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     json.dump(out, open(path, "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{name}: {len(out['platforms'])} platforms, {len(out_nodes)} nodes, {len(out_edges)} edges, {len(pois)} amenities, {os.path.getsize(path) // 1024} KB")
     for line in log:
         print("  !", line)
+
+
+def apply_structures(shapes, edits, xy, ground_level):
+    """`structures` in the edits: buildings and roofs with measured heights (docs/STATION_3D_RESEARCH.md). Each names
+    a feature of `structures_file` (a GeoJSON of outlines, e.g. the laser research's) by its OSM id ("w81576737",
+    "r13095414") or, for an outline traced from the laser alone, its `kind` ("hall_roof_laser"); the heights are given
+    in the edits, in metres above the platform surface (`top_m`, and `base_m` for the lowest ground at the outline).
+    A structure whose OSM way the draft already drew as a building replaces that shape."""
+    if not edits.get("structures"):
+        return
+    features = json.load(open(os.path.join(ROOT, edits["structures_file"])))["features"]
+    for i, st in enumerate(edits["structures"]):
+        f = next((f for f in features if f["properties"].get("osm_id") == st["from"] or (f["properties"].get("osm_id") is None and f["properties"].get("kind") == st["from"])), None)
+        if f is None:
+            raise SystemExit(f"structures[{i}]: no feature {st['from']} in {edits['structures_file']}")
+        ring = f["geometry"]["coordinates"][0]
+        pts = simplify([xy(la, lo) for lo, la in ring], 0.5)
+        osm = None
+        if st["from"][:1] in ("w", "r") and st["from"][1:].isdigit():
+            osm = f"osm:{'way' if st['from'][0] == 'w' else 'relation'}/{st['from'][1:]}"
+        shape = dict(level=st.get("level", ground_level), kind=st["kind"], points=pts, _source=st["_source"])
+        if st.get("name"):
+            shape["name"] = st["name"]
+        for k in ("top_m", "base_m"):
+            if k in st:
+                shape[k] = st[k]
+        at = next((j for j, s in enumerate(shapes) if osm and s.get("_source") == osm), None)
+        if at is None:
+            shapes.append(shape)
+        else:
+            shapes[at] = shape
+
+
+def sweref99tm(lat, lon):
+    """WGS84 → SWEREF 99 TM (EPSG:3006), Lantmäteriet's Gauss–Krüger formulas."""
+    a, f, lon0, k0, fe = 6378137.0, 1 / 298.257222101, 15.0, 0.9996, 500000.0
+    e2, n = f * (2 - f), f / (2 - f)
+    ah = a / (1 + n) * (1 + n * n / 4 + n ** 4 / 64)
+    A, B = e2, (5 * e2 * e2 - e2 ** 3) / 6
+    C, D = (104 * e2 ** 3 - 45 * e2 ** 4) / 120, 1237 * e2 ** 4 / 1260
+    b = [n / 2 - 2 * n * n / 3 + 5 * n ** 3 / 16 + 41 * n ** 4 / 180, 13 * n * n / 48 - 3 * n ** 3 / 5 + 557 * n ** 4 / 1440,
+         61 * n ** 3 / 240 - 103 * n ** 4 / 140, 49561 * n ** 4 / 161280]
+    ph, dl = math.radians(lat), math.radians(lon - lon0)
+    s = math.sin(ph)
+    ps = ph - s * math.cos(ph) * (A + B * s * s + C * s ** 4 + D * s ** 6)
+    xi, eta = math.atan(math.tan(ps) / math.cos(dl)), math.atanh(math.cos(ps) * math.sin(dl))
+    N = k0 * ah * (xi + sum(b[i] * math.sin(2 * (i + 1) * xi) * math.cosh(2 * (i + 1) * eta) for i in range(4)))
+    E = k0 * ah * (eta + sum(b[i] * math.cos(2 * (i + 1) * xi) * math.sinh(2 * (i + 1) * eta) for i in range(4))) + fe
+    return E, N
+
+
+def terrain_grid(spec, lat0, lon0, K, out):
+    """`terrain` in the edits: the ground under the station as a coarse grid in the map's frame, heights in metres
+    above the platform surface (`reference_m`, RH 2000), sampled bilinearly from a 1 m ground GeoTIFF in SWEREF 99 TM
+    every `step_m` metres over the extent of the map's shapes and platforms. Cells off the GeoTIFF are null."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from terrain_preview import read_tiff
+    w, h, grid, tags = read_tiff(os.path.join(ROOT, spec["geotiff"]), with_tags=True)
+    sx, sy = tags[33550][0], tags[33550][1]
+    tie = tags[33922]
+    e0, n0 = tie[3] - tie[0] * sx, tie[4] + tie[1] * sy
+    step = spec.get("step_m", 5)
+    pts = [q for s in out["shapes"] for q in s["points"]] + [q for p in out["platforms"] for g in p["geometry"] for q in g]
+    xs, ys = [q[0] for q in pts], [q[1] for q in pts]
+    pad = spec.get("pad_m", 20)
+    x0, y0 = math.floor((min(xs) - pad) / step) * step, math.floor((min(ys) - pad) / step) * step
+    cols, rows = int((max(xs) + pad - x0) // step) + 1, int((max(ys) + pad - y0) // step) + 1
+
+    def sample(E, N):
+        c, r = (E - e0) / sx - 0.5, (n0 - N) / sy - 0.5
+        c0, r0 = math.floor(c), math.floor(r)
+        if c0 < 0 or r0 < 0 or c0 + 1 >= w or r0 + 1 >= h:
+            return None
+        fc, fr = c - c0, r - r0
+        v = [grid[r0][c0], grid[r0][c0 + 1], grid[r0 + 1][c0], grid[r0 + 1][c0 + 1]]
+        if any(math.isnan(q) for q in v):
+            return None
+        return v[0] * (1 - fc) * (1 - fr) + v[1] * fc * (1 - fr) + v[2] * (1 - fc) * fr + v[3] * fc * fr
+
+    heights = []
+    for j in range(rows):
+        row = []
+        for i in range(cols):
+            x, y = x0 + i * step, y0 + j * step
+            # The map's frame back to WGS84 (the inverse of `xy` in main), then to SWEREF 99 TM.
+            z = sample(*sweref99tm(lat0 - y / 111320, lon0 + x / K))
+            row.append(None if z is None else round(z - spec["reference_m"], 2))
+        heights.append(row)
+    return dict(x0=x0, y0=y0, step=step, cols=cols, rows=rows, heights=heights, _source=spec["_source"])
 
 
 if __name__ == "__main__":

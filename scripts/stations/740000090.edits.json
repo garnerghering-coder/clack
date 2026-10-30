@@ -10,7 +10,7 @@
       "name": "Upper level (Juneporten)",
       "order": 1,
       "height_m": 3.3,
-      "height_source": "owner's AR walk 2026-10-28 (walk 85AA73B5): barometer +3.5 m and ARKit +3.1 m from the ground floor at the top of the escalators and the Juneporten entrance"
+      "height_source": "owner's AR walk 2026-10-28 (walk 85AA73B5): barometer +3.5 m and ARKit +3.1 m from the ground floor at the top of the escalators and the Juneporten entrance; cross-check: Lantmäteriet's laser puts the ground at Juneporten's town entrance at 95.3 m RH 2000, +3.6 m above the platform surface (outside ground, not the floor inside)"
     },
     {
       "osm": "0",
@@ -162,6 +162,20 @@
       "type": "trafikverket",
       "retrieved": "2026-10-22",
       "note": "Trafikverket TrainStation (Jö) PlatformLine 1, 2, 2a, 2b, and TrackAtLocation values of 2026-10-21 (1, 2a, 2b), matched to OSM's platform refs."
+    },
+    {
+      "type": "lantmateriet",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-29",
+      "url": "https://www.lantmateriet.se/sv/geodata/vara-produkter/produktlista/laserdata-nedladdning-skog/",
+      "note": "Laserdata Nedladdning, skog, © Lantmäteriet, bearbetad, CC BY 4.0: building and roof heights and the ground. Derived values and the clipped points in data/stations/research/740000090."
+    },
+    {
+      "type": "trafikverket",
+      "license": "CC0",
+      "retrieved": "2026-10-29",
+      "url": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo_1_5",
+      "note": "BanInfo layer Plattform: the platform's height class (BIS object 1705)."
     }
   ],
   "changelog": [
@@ -174,6 +188,11 @@
       "date": "2026-10-29",
       "who": "the owner's assistant",
       "what": "Upper level added (OSM level 1: the corridor and entrance at Juneporten); its height from the owner's AR walk."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform height 0.58 m from Trafikverket's register; station building, waiting hall, Juneporten and hotel with laser heights; roofs over 2a and 2b and the footbridge roof; the ground as a 5 m grid. From the 3D research pass (data/stations/research/740000090). Nine neighbouring buildings with their laser heights."
     }
   ],
   "pois": [
@@ -200,5 +219,149 @@
       "name": "Juneporten",
       "_source": "owner's AR walk 2026-10-28 (walk 85AA73B5), mark 'Now at another entrance into the station from juneporten' 12:48 (GPS ±10 m)"
     }
-  ]
+  ],
+  "platform_heights": {
+    "1": {
+      "height_m": 0.58,
+      "_source": "Trafikverket BanInfo (CC0), layer Plattform, BIS object 1705, read 2026-10-29: height class 'mellan' = 0.58 m above rail; JNB 2027 Bilaga 2A, tab 4 row 386 (report 2026-02-04). A recorded design class, not a survey; the laser cross-check gives ≈0.57–0.62 m"
+    },
+    "2": {
+      "height_m": 0.58,
+      "_source": "Trafikverket BanInfo (CC0), layer Plattform, BIS object 1705, read 2026-10-29: height class 'mellan' = 0.58 m above rail; JNB 2027 Bilaga 2A, tab 4 row 386 (report 2026-02-04). A recorded design class, not a survey; the laser cross-check gives ≈0.57–0.62 m"
+    }
+  },
+  "structures_file": "data/stations/research/740000090/jonkoping_c_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w81576737",
+      "kind": "building",
+      "name": "Station building (1983)",
+      "top_m": 8.41,
+      "base_m": -1.16,
+      "_source": "outline osm:way/81576737; roof top median of 2,569 laser points 100.08 m, lowest ground at the outline 90.51 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w133653929",
+      "kind": "building",
+      "name": "Waiting hall and bus terminal (2001)",
+      "top_m": 5.31,
+      "base_m": -0.31,
+      "_source": "outline osm:way/133653929 (tagged Jönköpings bussterminal; Commons photos 62899901, 99563715 show the glass hall along platform 2b); roof top median 96.98 m, lowest ground 91.36 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "hall_roof_laser",
+      "kind": "roof",
+      "name": "Waiting hall roof over platform 2b",
+      "top_m": 6.1,
+      "_source": "outline traced from the laser (761 m², sloping 98.1 → 96.9 m), top median 97.77 m; underside not measured; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w401108813",
+      "kind": "roof",
+      "name": "Platform canopy (2a)",
+      "top_m": 3.36,
+      "_source": "outline osm:way/401108813 (building=roof; the laser trace, 708 m², matches); top median 95.03 m; underside not measured; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w81576735",
+      "kind": "roof",
+      "name": "Footbridge",
+      "top_m": 9.07,
+      "_source": "outline osm:way/81576735 (building=bridge, layer 2); roof top median 100.74 m; the deck's height is not measured (airborne laser sees only the roof); heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "r13095414",
+      "kind": "building",
+      "name": "Juneporten block",
+      "top_m": 13.12,
+      "base_m": -0.98,
+      "_source": "outline osm:relation/13095414 (Commons photos 148691178/148691224 inside it); roof top median 104.79 m (p95 122.2 m: a tower), ground 90.69 m (street, north) to 95.3 m (town entrance, south); heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w986647231",
+      "kind": "building",
+      "name": "Hotel",
+      "top_m": 63.2,
+      "base_m": 0.17,
+      "_source": "outline osm:way/986647231 (height=61, which the laser agrees with); roof top median 154.87 m, lowest ground 91.84 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w986647229",
+      "kind": "building",
+      "name": "Neighbour: Building (levels 2)",
+      "top_m": 16.07,
+      "base_m": -0.47,
+      "_source": "outline osm:way/986647229; roof top median of 1710 laser points 107.74 m, lowest ground at the outline 91.2 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000); p95 157.59 m includes points from a taller neighbour, so the median is used"
+    },
+    {
+      "from": "w133411942",
+      "kind": "building",
+      "name": "Neighbour: Building (levels 1)",
+      "top_m": 4.78,
+      "base_m": -0.45,
+      "_source": "outline osm:way/133411942; roof top median of 2035 laser points 96.45 m, lowest ground at the outline 91.22 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w133411940",
+      "kind": "building",
+      "name": "Neighbour: Building",
+      "top_m": 3.26,
+      "base_m": -0.65,
+      "_source": "outline osm:way/133411940; roof top median of 297 laser points 94.93 m, lowest ground at the outline 91.02 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w133411925",
+      "kind": "building",
+      "name": "Neighbour: Magasin",
+      "top_m": 13.15,
+      "base_m": 0.21,
+      "_source": "outline osm:way/133411925; roof top median of 1245 laser points 104.82 m, lowest ground at the outline 91.88 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w133411939",
+      "kind": "building",
+      "name": "Neighbour: Building (hipped roof)",
+      "top_m": 15.02,
+      "base_m": 1.7,
+      "_source": "outline osm:way/133411939; roof top median of 1400 laser points 106.69 m, lowest ground at the outline 93.37 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w973531822",
+      "kind": "building",
+      "name": "Neighbour: Building (retail)",
+      "top_m": 26.81,
+      "base_m": -1.04,
+      "_source": "outline osm:way/973531822; roof top median of 1215 laser points 118.48 m, lowest ground at the outline 90.63 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w973531823",
+      "kind": "building",
+      "name": "Neighbour: Building",
+      "top_m": 12.83,
+      "base_m": -0.99,
+      "_source": "outline osm:way/973531823; roof top median of 2670 laser points 104.5 m, lowest ground at the outline 90.68 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w973531824",
+      "kind": "building",
+      "name": "Neighbour: Building (apartments)",
+      "top_m": 19.08,
+      "base_m": -0.9,
+      "_source": "outline osm:way/973531824; roof top median of 2481 laser points 110.75 m, lowest ground at the outline 90.77 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    },
+    {
+      "from": "w399013526",
+      "kind": "building",
+      "name": "Neighbour: Bicycle parking (building, levels 1)",
+      "top_m": 3.11,
+      "base_m": -0.51,
+      "_source": "outline osm:way/399013526; roof top median of 323 laser points 94.78 m, lowest ground at the outline 91.16 m; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/740000090/jonkoping_c_ground_1m.tif",
+    "reference_m": 91.67,
+    "step_m": 5,
+    "_source": "ground from the laser's ground and water points, 1 m grid (data/stations/research/740000090/jonkoping_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (91.67 m RH 2000, laser). Vättern is the flat −2.9 m"
+  }
 }

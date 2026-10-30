@@ -35,13 +35,18 @@ export interface StationLevel {
 export interface StationShape {
   level: string;
   /** "track" is an open line (rails between platforms); the others are polygons. */
-  kind: 'building' | 'hall' | 'room' | 'shop' | 'track';
+  /** "roof": a roof with open sides or an unknown underside (a platform canopy, a footbridge seen from above). */
+  kind: 'building' | 'hall' | 'room' | 'shop' | 'track' | 'roof';
   name?: string;
   points: Pt[];
   /** For "track": the track number, when the rails carry one (OSM railway:track_ref / ref). */
   ref?: string;
   /** For buildings: the height in metres when the source gives one (OSM height=). */
   height_m?: number;
+  /** For buildings and roofs: the top, in metres above the platform surface (the reference level), measured. */
+  top_m?: number;
+  /** For buildings: the lowest ground at the outline, metres above the platform surface (negative below it). */
+  base_m?: number;
   _source?: SourceRef;
 }
 /** One side of a platform where trains stop: the line along the rails, with the track it serves when known. */
@@ -114,7 +119,7 @@ export interface StationPoi {
   outline?: Pt[];
   _source?: SourceRef;
 }
-export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons';
+export type StationSourceType = 'osm' | 'manual' | 'website' | 'trafikverket' | 'lantmateriet' | 'plan' | 'video' | 'walk' | 'mapillary' | 'commons';
 export interface StationMap {
   /** 1 (or absent): the original format; 2: with sources on every element, heights and platform edges. */
   schema?: 1 | 2;
@@ -135,6 +140,9 @@ export interface StationMap {
   nodes: StationNode[];
   edges: StationEdge[];
   pois: StationPoi[];
+  /** The ground as a grid in the map's frame: heights in metres above the platform surface at x0 + i·step,
+   *  y0 + j·step (heights[j][i]); null where the source has no value. */
+  terrain?: { x0: number; y0: number; step: number; cols: number; rows: number; heights: (number | null)[][]; _source: SourceRef };
 }
 
 // ---------- Validation (the build fails on any of these) ----------
@@ -187,6 +195,15 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
   };
   for (const l of m.levels) need(`level ${l.id}`, l._source);
   m.shapes.forEach((s, i) => need(`shape ${i} (${s.kind}${s.name ? ` ${s.name}` : ''})`, s._source));
+  m.shapes.forEach((s, i) => {
+    if (s.kind === 'roof' && s.top_m === undefined) errors.push(`shape ${i} (roof${s.name ? ` ${s.name}` : ''}): a roof needs top_m`);
+    if (s.top_m !== undefined && s.base_m !== undefined && s.top_m <= s.base_m) errors.push(`shape ${i}: top_m is not above base_m`);
+  });
+  if (m.terrain) {
+    const t = m.terrain;
+    need('terrain', t._source);
+    if (t.heights.length !== t.rows || t.heights.some((r) => r.length !== t.cols)) errors.push('terrain: heights do not match cols × rows');
+  }
   for (const p of m.platforms) {
     need(`platform ${p.ref}`, p._source);
     for (const e of p.edges ?? []) {

@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "name": "Jönköping C platform 1705, Trafikverket BIS via BanInfo WMS (CC0), read 2026-10-29",
+  "license": "CC0 1.0 (Trafikverket BanInfo). Courtesy attribution: Järnvägsdata © Trafikverket",
+  "note": "Geometry is the track reference line along which the platform runs (BIS objects are referenced to track links), not the platform edge or outline. Attributes are identical for all parts: BisObjektNr 1705, km 69+131 to 69+590, height category mellan = 0.58 m above rail, recorded length 497.1 m, width 8 m, edge concrete, surface asphalt, weather protection Tak (roof), valid from 2026-10-13.",
+  "features": [
+    {"type": "Feature", "properties": {"bis_object": 1705, "track": "2a", "side": 2, "reflink": "9475c745", "length_m_computed": 161.2, "height_m": 0.58, "height_class": "mellan", "width_m": 8, "roof": "Tak"},
+     "geometry": {"type": "LineString", "coordinates": [[14.159678965,57.785067741],[14.159679439,57.78506764],[14.159822884,57.78503891],[14.159989034,57.785007342],[14.160137114,57.784980704],[14.16029067,57.784954612],[14.160454383,57.784928369],[14.160596349,57.784906929],[14.160773979,57.784881749],[14.160937502,57.784859713],[14.161094884,57.78483954],[14.161252452,57.784820136],[14.161416518,57.784800554],[14.161738273,57.784763377],[14.162309214,57.784707771]]}},
+    {"type": "Feature", "properties": {"bis_object": 1705, "track": "2a/2b (transition)", "side": 2, "reflink": "5c9e3244", "length_m_computed": 62.9, "height_m": 0.58, "height_class": "mellan", "width_m": 8, "roof": "Tak"},
+     "geometry": {"type": "LineString", "coordinates": [[14.162309214,57.784707771],[14.163347268,57.784588867]]}},
+    {"type": "Feature", "properties": {"bis_object": 1705, "track": "2b", "side": 2, "reflink": "25882b5e", "length_m_computed": 233.2, "height_m": 0.58, "height_class": "mellan", "width_m": 8, "roof": "Tak"},
+     "geometry": {"type": "LineString", "coordinates": [[14.163347268,57.784588867],[14.165886245,57.784289668],[14.166009232,57.784275581],[14.166205672,57.784252607],[14.166525004,57.784214662],[14.166844084,57.78417579],[14.167186746,57.784133567]]}},
+    {"type": "Feature", "properties": {"bis_object": 1705, "track": "1", "side": 1, "reflink": "c6243846", "length_m_computed": 88.1, "height_m": 0.58, "height_class": "mellan", "width_m": 8, "roof": "Tak"},
+     "geometry": {"type": "LineString", "coordinates": [[14.16567195,57.784240385],[14.166751215,57.784112741],[14.167127894,57.784082787]]}}
+  ]
+}

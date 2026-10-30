@@ -9,7 +9,7 @@ same way, about 30 per session, without judgement calls that aren't written down
 
 - The station map screen (levels, platforms, stairs, lifts, the walk between two platforms with its time).
 - Positioning: a train reported standing at a platform is drawn at that platform's point.
-- Later, the 3D station view.
+- The 3D station view: its measured heights (platforms, buildings, roofs, ground) come by `docs/STATION_3D_RESEARCH.md`.
 
 Every element carries `_source`. Unverified things are said to be unverified (the review queue). Nothing is drawn that
 no source gives.
