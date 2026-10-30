@@ -15,7 +15,57 @@
    "_source": "https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 2 (the train stops with the platform to its south-east)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 4",
+   "track": "4",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 4 (the train stops with the platform to its south-east)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 5",
+   "track": "5",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 5 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 4 / track 6",
+   "track": "6",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 6 (the train stops with the platform to its south-east)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 4 / track 6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 4 / track 7",
+   "track": "7",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 7 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-04-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 4 / track 7; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "underpass",
@@ -93,7 +143,17 @@
     "lat": 55.6384005,
     "how": "OSM n3882434172",
     "_source": "OpenStreetMap n3882434172 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3882434172 to platform outlines and register track lines",
+     "source": "OSM n3882434172 geometry (level None): 6.4 m from rail platform outline w331283210 (ref 1); next 17.5 m from r11627431 (ref 2;3); register lines: 11.9 m from 'perron 1 / track 1', 16.3 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "6.4 m from the platform 1 outline and 11.9 m NW of the track 1 line (perron 1 lies NW of track 1). It may be a street/tunnel lift beside perron 1. Not within 3 m."
   },
   {
    "kind": "lift",
@@ -111,7 +171,19 @@
     "lat": 55.6382381,
     "how": "OSM n3882419457",
     "_source": "OpenStreetMap n3882419457 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 2/3)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3882419457 to platform outlines and register track lines",
+     "source": "OSM n3882419457 geometry (level None): inside rail platform outline r11627431 (ref 2;3); next 11.7 m from w331283210 (ref 1); register lines: 5.7 m from 'perron 2 / track 2', 6.1 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "underpass",
@@ -256,7 +328,19 @@
     "lat": 55.6382381,
     "how": "OSM n3882419457",
     "_source": "OpenStreetMap n3882419457 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 2/3)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3882419457 to platform outlines and register track lines",
+     "source": "OSM n3882419457 geometry (level None): inside rail platform outline r11627431 (ref 2;3); next 11.7 m from w331283210 (ref 1); register lines: 5.7 m from 'perron 2 / track 2', 6.1 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -277,7 +361,17 @@
     "lat": 55.6384005,
     "how": "OSM n3882434172",
     "_source": "OpenStreetMap n3882434172 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3882434172 to platform outlines and register track lines",
+     "source": "OSM n3882434172 geometry (level None): 6.4 m from rail platform outline w331283210 (ref 1); next 17.5 m from r11627431 (ref 2;3); register lines: 11.9 m from 'perron 1 / track 1', 16.3 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "6.4 m from the platform 1 outline and 11.9 m NW of the track 1 line (perron 1 lies NW of track 1). It may be a street/tunnel lift beside perron 1. Not within 3 m."
   }
  ],
  "entrances": [
@@ -595,7 +689,6 @@
  ],
  "plans": [],
  "open": [
-  "Lifts to perron 3 (tracks 4/5) and perron 4 (tracks 6/7): DSB and Wikipedia confirm elevators exist but not how many or where; OSM has only two lifts (platform 1 side and perron 2, west tunnel).",
   "Signposted names of the two tunnels and of any level: no owner source found.",
   "No ticket office (DSB Salg & Service) mentioned by DSB; Wikipedia says the 7-Eleven is a combined ticket office/shop.",
   "Toilet hours: DSB says only 'locked in the evening and at night'.",
@@ -616,6 +709,22 @@
    "question": "(no station-specific open questions were listed for Roskilde; brief asks for levels, lifts and entrances)",
    "answer": "Street/platform level plus pedestrian tunnels under the tracks. DSB confirms stairs and elevator access; Wikipedia says elevators were installed 1998–2002. OSM maps two tunnels (middle, by the station building; and west) and only two lifts, both at the west tunnel (platform 1 side and perron 2).",
    "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
+  },
+  {
+   "question": "Lifts to perron 3 (tracks 4/5) and perron 4 (tracks 6/7): DSB and Wikipedia confirm elevators exist but not how many or where; OSM has only two lifts (platform 1 side and perron 2, west tunnel).",
+   "answer": "Lifts serve perron 3 (spor 4/5), perron 4 (spor 6/7) (The raw OSM extract has these lifts, which the facts extract missed: n3882425162 inside the 4;5 outline r11627430 and n3882425163 inside the 6;7 outline r11627432 (both wheelchair=yes). Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n3882425162 to platform outlines and register track lines",
+     "source": "OSM n3882425162 geometry (level None): inside rail platform outline r11627430 (ref 4;5); next 12.3 m from r11627431 (ref 2;3); register lines: 6.3 m from 'perron 3 / track 5', 6.7 m from 'perron 3 / track 4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n3882425163 to platform outlines and register track lines",
+     "source": "OSM n3882425163 geometry (level None): inside rail platform outline r11627432 (ref 6;7); next 12.8 m from r11627430 (ref 4;5); register lines: 5.9 m from 'perron 4 / track 7', 6.6 m from 'perron 4 / track 6'",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

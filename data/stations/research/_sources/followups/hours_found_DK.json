@@ -1,0 +1,722 @@
+{
+ "860000053": [
+  {
+   "name": "Dunkin'",
+   "osm_id": "n12541961098",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: dunkin.dk (robots-blocked, not readable); DSB Aarhus H page (no Dunkin' mention, only 7-Eleven); web search found only aggregators. Operated by SSP under franchise.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Café Stiften",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search for own website (only aggregator/tourism listings found); DSB Aarhus H page does not name it; not a Bruuns Galleri tenant. OSM n825060403.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Falafel King",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only aggregators/delivery platforms; OSM has only a Facebook link, not allowed); not on DSB page. OSM n9241685208, ~270 m from station.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Thiele",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/thiele) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "NAME IT",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/name-it) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "3 Butikken",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/3-butikken) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Rituals",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+   "hours_raw": "Mandag–Fredag 10:00 - 20:00; Lørdag 10:00 - 18:00; Søndag 10:00 - 18:00",
+   "hours_source": "website (Rituals)",
+   "source_url": "https://www.rituals.com/da-dk/store-detail?store=Aarhus-Bruuns-Galleri",
+   "note": "Branch page 'Aarhus Bruuns Galleri', M.P. Bruuns Gade 25, 8000 Aarhus C (Bruuns Galleri, connected to Aarhus H). OSM n10212824388.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "H&M",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+   "hours_raw": "Bruuns Galleri (DK0857), MP Bruuns Gade 25: Man–Fre 10:00–20:00; Lør 10:00–18:00; Søn 10:00–18:00",
+   "hours_source": "website (H&M store locator API)",
+   "source_url": "https://api.storelocator.hmgroup.tech/v2/brand/hm/stores/locale/da_DK/country/DK?_type=json&campaigns=false&departments=false&openinghours=true&maxnumberofstores=200",
+   "note": "H&M's own store-locator data, store 'Bruuns Galleri' DK0857 (other Aarhus stores are Storcenter Nord and Skt. Clemenstorv). OSM n10212824389.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Sport 24",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/sport-24) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Jack & Jones",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/jack-jones) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Vero Moda",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/vero-moda) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Change",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/change) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Samsøe Samsøe",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/samsoee-samsoee) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Quint",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/quint) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "SELECTED",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "source_url": "https://bruuns-galleri.steenstrom.dk/abningstider-find-vej",
+   "note": "CENTRE hours, not shop-specific: the shop is listed as a Bruuns Galleri tenant (https://bruuns-galleri.steenstrom.dk/butikker-restauranter/selected) but its page gives no own hours; the centre's 'Butikkernes åbningstider' section is empty. H&M and Rituals' own sites give exactly these hours. Brand store locator not readable (blocked/JS). Bruuns Galleri connects to Aarhus H (DSB). OSM node at ~110-130 m, outside station building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Ganesha",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: Bruuns Galleri shop list (not a tenant); web search (nothing). OSM n10807899985 (opening_hours:signed=no), north of the station, outside the building.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "House of Hair",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: Bruuns Galleri shop list (not a tenant); web search (nothing). OSM n12259255005.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Chicken East",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: Bruuns Galleri restaurant list (not a tenant); web search (only delivery platforms/aggregators). OSM n12838597022.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 06:00-23:00; Fr 06:00-24:00; Sa 08:00-24:00; Su 08:00-23:00",
+   "hours_raw": "Århus H IC, Banegårdspladsen 1: Man til Tor 06:00 til 23:00; Fre 06:00 til 23:59; Lør 08:00 til 23:59; Søn 08:00 til 23:00",
+   "hours_source": "website (7-Eleven)",
+   "source_url": "https://www.7-eleven.dk/find-butik",
+   "note": "OSM n12956562803 (fvst 'DSB 7-Eleven Butik 620'; already matched to 'Århus H IC' in station_facts). DSB page ('DSB 7-Eleven - IC') agrees except Sunday 06.00-23.00 (DSB) vs 08:00-23:00 (7-Eleven).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Børnenes kontor banegårdspladsen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only company registers/aggregators; no own website with hours). Hot-dog stand on Banegårdspladsen, OSM n13517873369.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Café Opera",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only aggregators/tourism listings); not on DSB page; not a Bruuns Galleri tenant. OSM w515037718.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000083": [
+  {
+   "name": "Pitstop til Fremtiden",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: own website http://pitstop6k.dk/ (robots-blocked, could not be read); DSB Kolding page lists only 7-Eleven. OSM n10825526371.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000215": [
+  {
+   "name": "krystakSkønhed",
+   "osm_id": "n13241526317",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no website found); DSB Esbjerg page names no such business. OSM n13241526317.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "krystakSkønhed",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no website found); DSB Esbjerg page names no such business. OSM n13241526317.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Pølsevognen Banegårdspladsen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website; only unrelated results); not on DSB Esbjerg page. OSM w463087806.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000275": [
+  {
+   "name": "Station's Pizza Kebap",
+   "osm_id": "n13983896221",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only a delivery platform listing, not allowed); DSB Herning page names only the 7-Eleven.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Scandic Regina Restaurant",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 06:30-09:30,17:00-21:30; Sa 07:00-10:30,17:00-21:30; Su 07:00-10:30",
+   "hours_raw": "Restaurant – Breakfast: Monday-Friday 06:30-09:30, Saturday-Sunday 07:00-10:30; Dinner: Monday-Saturday 17:00-21:30, Sunday: Closed",
+   "hours_source": "website (Scandic Hotels)",
+   "source_url": "https://www.scandichotels.com/en/hotels/scandic-regina",
+   "note": "Hotel page of Scandic Regina, Herning. Bar: Mo-Sa 17:00-22:00, Su closed. OSM n4122090542.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Scandic Lobby Shop",
+   "osm_id": null,
+   "opening_hours": "24/7",
+   "hours_raw": "Scandic Shop 24 hrs",
+   "hours_source": "website (Scandic Hotels)",
+   "source_url": "https://www.scandichotels.com/en/hotels/scandic-regina",
+   "note": "Listed only as an amenity 'Scandic Shop 24 hrs'; OSM n9231041674 is tagged access=private (hotel lobby shop).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "DSB 7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 07:30-23:00",
+   "hours_raw": "DSB 7-Eleven: Mandag - fredag 05.30-23.00; Lørdag 06.30-23.00; Søndag 07.30-23.00",
+   "hours_source": "website (DSB)",
+   "source_url": "https://www.dsb.dk/trafikinformation/stationer/herning/",
+   "note": "Station owner's page; not in the 7-Eleven store list (Herning only has Møllegade and Gødstrup). OSM n9593088619 (amenity=fast_food).",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000512": [
+  {
+   "name": "Joe & The Juice",
+   "osm_id": "n4039782461",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: joejuice.com store pages (robots-blocked); OBC site obc.dk lists the tenant but no hours; DSB Odense page does not name it.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "The Food Stall",
+   "osm_id": "n4447219893",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: thefoodstall.dk (placeholder WordPress page, no hours); OBC site lists tenant, no hours; DSB page does not name it.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Café Ordet",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-14:00",
+   "hours_raw": "Caféen holder åbent alle hverdage fra kl. 10.00-14.00.",
+   "hours_source": "website (Odense Bibliotekerne)",
+   "source_url": "https://www.odensebib.dk/hovedbiblioteket/cafe-ordet-cafeen-i-hjertet-af-borgernes-hus",
+   "note": "'På 2. sal i Borgernes Hus' (main library in OBC). 'Hverdage' presumably excludes public holidays. OSM n5952621080.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Dlet - Odense Banegård Center",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 11:00-19:00; Sa[1] 11:00-15:00; Su,PH off",
+   "hours_raw": "Mandag–Fredag 11:00 - 19:00; Lørdag: 1. lørdag hver md. 11:00 - 15:00; Søndag: Lukket; Lukket Helligdage; Køkkenet lukker 30 min. før",
+   "hours_source": "website (Dlet)",
+   "source_url": "https://www.dlet.dk/dlet-det-groenne-koekken-odense-banegard-center/",
+   "note": "Branch page 'Dlet Det grønne Køkken Odense Banegård Center', Østre Stationsvej 27 (linked from obc.dk). OSM n7206987840.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "McDonald's",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: mcdonalds.com DK restaurant locator (site error, not readable); OBC site lists the tenant without hours; DSB page does not name it. OSM n12037491698.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Mr. Fried Chicken",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: mrfriedchicken.dk (robots-blocked); OBC site lists tenant without hours. OSM n12528958825.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Odense Banegård Center",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: obc.dk (tenant directory only, no centre opening hours anywhere on the page); DSB Odense page gives forhal hours 05:00-01:15 only, not centre hours. OSM w27862489.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000605": [
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 08:00-22:00",
+   "hours_raw": "DSB 7-Eleven - Sdr. Stationsvej 28: Mandag - fredag 05.15-22.00; Lørdag - Søndag 08.00-22.00",
+   "hours_source": "website (DSB)",
+   "source_url": "https://www.dsb.dk/trafikinformation/stationer/slagelse/",
+   "note": "OSM n4119367070 (branch 'Slagelse Station', alt_name DSB 7-Eleven, in station building south side) = the Sdr. Stationsvej unit; not in the 7-Eleven store list (only 'Slagelse Baneby Station', the north-side unit).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Slik Safari",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (nothing); DSB Slagelse page only mentions 'Andre butikker' without names. OSM n4119371333.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Karas bagels",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only aggregators); not on DSB page. OSM n9422808958.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000626": [
+  {
+   "name": "7-Eleven",
+   "osm_id": "n13072511277",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: 7-Eleven store list (only one København H entry, 'Press, KBH, Banegårdspladsen', already assigned to another unit in station_facts); DSB København H page gives 'DSB 7-Eleven (uden billetsalg)' hours without saying which unit. OSM n13072511277 (north-east, by the Banegårdspladsen east door).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Kabul marked",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website). OSM n765066599, outside the station (~117 m).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Library Bar",
+   "osm_id": null,
+   "opening_hours": "Su-Th 16:00-24:00; Fr,Sa 16:00-01:00",
+   "hours_raw": "Sunday – Thursday: 16:00 – 00:00; Friday – Saturday: 16:00 – 01:00",
+   "hours_source": "website (Ligula Hospitality / ProfilHotels)",
+   "source_url": "https://ligula.se/en/the-library-bar/",
+   "note": "The Library Bar in ProfilHotels Copenhagen Plaza, Bernstorffsgade 4 (opposite the station). OSM n1439744394.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Afghan Market",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website). OSM n6761725714, outside the station.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Angelini",
+   "osm_id": null,
+   "opening_hours": "Tu-Th 17:00-22:30; Fr,Sa 17:00-23:00",
+   "hours_raw": "Tirsdag - torsdag: 17.00 - 22.30 (køkkenet lukker kl. 21.00); Fredag & lørdag: 17.00 - 23.00 (køkkenet lukker kl. 21.30)",
+   "hours_source": "website (Ligula Hospitality)",
+   "source_url": "https://ligula.se/da/angelini-kobenhavn",
+   "note": "Bernstorffsgade 4 (Copenhagen Plaza). Monday and Sunday not listed (presumably closed). OSM n6761916201.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Bangkok Trading",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website). OSM n9091818722 (level -1), outside the station.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "DSB København",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: DSB København H page names no such café; OSM n9152669137 is tagged access=private (likely not a public outlet), ~180 m from the station point.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Takuya restaurant",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only aggregator listings). OSM n9590509650.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: 7-Eleven store list (only one København H entry, 'Press, KBH, Banegårdspladsen', already assigned to another unit in station_facts); DSB København H page gives 'DSB 7-Eleven (uden billetsalg)' hours without saying which unit. OSM n13072511277 (north-east, by the Banegårdspladsen east door).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Esmas",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website; OSM has only a Facebook link, not allowed). OSM n13476696702.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000646": [
+  {
+   "name": "Guldkjær",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00; Su off",
+   "hours_raw": "Mandag–fredag 10.00–18.00; Lørdag 10.00–15.00; Søndag lukket",
+   "hours_source": "website (Guldkjær)",
+   "source_url": "https://www.guldkjaer.dk/",
+   "note": "'Guldsmed ved Nørreport siden 2009', Nørre Voldgade 92, 'To minutter fra Nørreport Station'; single shop. OSM n6698890253.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Matas",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 09:00-19:00; Sa 10:00-18:00; Su 11:00-17:00",
+   "hours_raw": "Matas Nørreport, Frederiksborggade 18: Mandag–Torsdag 09:00 - 19:00; (I dag/fredag) 09:00 - 19:00; Lørdag 10:00 - 18:00; Søndag 11:00 - 17:00",
+   "hours_source": "website (Matas)",
+   "source_url": "https://www.matas.dk/find-butik/koebenhavn---noerreport",
+   "note": "Branch page 'Matas Nørreport'. Friday shown only as 'today' (read on a Friday) 09:00-19:00. OSM n7674397299.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Level six Bar",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 11:30-23:30; Fr 11:30-01:00; Sa 12:00-01:00; Su 12:00-23:00",
+   "hours_raw": "Level Six – Bar: Monday-Thursday 11:30-23:30; Friday 11:30-01:00; Saturday 12:00-01:00; Sunday 12:00-23:00",
+   "hours_source": "website (Scandic Hotels)",
+   "source_url": "https://www.scandichotels.com/en/hotels/scandic-norreport",
+   "note": "Rooftop bar of Scandic Nørreport. The same page also shows an 'alternate opening hours' block (Mo-Th 12:00-00:00; Fr-Sa 12:00-01:00; Su 12:00-23:00) — inconsistent. OSM n10790595109.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Føtex City Nørreport",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: foetex.dk store finder (JS-rendered, no store data readable); /butikker URL errors. OSM n13473940354 (bakery counter of føtex City).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Summer Day",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (nothing). OSM n13922570419.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000650": [
+  {
+   "name": "Joe & The Juice",
+   "osm_id": "n7194411725",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: joejuice.com store pages (robots-blocked); DSB Østerport page names 'Joe and the Juice' without hours.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "H. J. Hansen Vinhandel",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 10:00-17:30; Fr 10:00-18:00; Sa 10:00-14:00; Su off",
+   "hours_raw": "Mandag–torsdag 10.00-17.30; Fredag 10.00-18.00; Lørdag 10.00-14.00; Søndag - Lukket",
+   "hours_source": "website (H. J. Hansen Vin)",
+   "source_url": "https://www.hjhansen-vin.dk/hj-hansen-vin-koebenhavn-oe",
+   "note": "Branch page 'København Ø', Østbanegade 3, 2100 København Ø; page says Østerport is two minutes away. OSM n9091818717.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000669": [
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-24:00; Sa 07:00-24:00; Su 07:00-22:30",
+   "hours_raw": "Mandag - torsdag 06.00-22.30; Fredag 06.00-24.00; Lørdag 07.00-24.00; Søndag 07.00-22.30",
+   "hours_source": "website (DSB)",
+   "source_url": "https://www.dsb.dk/trafikinformation/stationer/helsingor/",
+   "note": "Station owner's page (DSB 7-Eleven). The same page's prose calls it 'en døgnåben 7-Eleven' — contradicts the table. Not in the 7-Eleven store list. OSM n2270460296.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Sweet Ship",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (nothing); DSB Helsingør page names only the 7-Eleven. OSM n12819232620.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000683": [
+  {
+   "name": "You Sushi Hillerød Aps",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (only aggregators). OSM n4261837129.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Corner Sandwich og Kebab",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (nothing). OSM n4429455834 (fvst:fixme no_pos — position uncertain).",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Jernstangen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (nothing). OSM n8117602488.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000719": [
+  {
+   "name": "Stangen 1876",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website; OSM has only a Facebook link, not allowed). OSM n8109952179.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 05:00-22:00; Sa,Su 08:00-22:00",
+   "hours_raw": "DSB 7-Eleven: Mandag - fredag 05.00-22.00; Lørdag - Søndag 08.00-22.00",
+   "hours_source": "website (DSB)",
+   "source_url": "https://www.dsb.dk/trafikinformation/stationer/holbak/",
+   "note": "Station owner's page; not in the 7-Eleven store list. OSM n9622509134 (branch 'Holbæk Station').",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000783": [
+  {
+   "name": "Station Kebab",
+   "osm_id": "n4591487288",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website); DSB København Syd page names only the 7-Eleven.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000803": [
+  {
+   "name": "Lucky Star",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: web search (no own website; only partner/aggregator listings). OSM n5908116366.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "Lagkagehuset",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: lagkagehuset.dk/butikker and store URL (JS-rendered, no store data readable); DSB Køge page does not name it. OSM n8133042258.",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "7-Eleven",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+   "hours_raw": "DSB 7-Eleven: Mandag - fredag 05.00-00.00; Lørdag - Søndag Døgnåbent",
+   "hours_source": "website (DSB)",
+   "source_url": "https://www.dsb.dk/trafikinformation/stationer/koge/",
+   "note": "Station owner's page; not in the 7-Eleven store list. OSM n8363710420 (branch 'Køge Station').",
+   "read": "2026-10-30"
+  },
+  {
+   "name": "365discount",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: 365discount.coop.dk store page /find-butik/365discount-koege/24587/ (JS-rendered; no address or hours readable, so cannot even confirm it is this store). OSM n8363710421.",
+   "read": "2026-10-30"
+  }
+ ],
+ "860000810": [
+  {
+   "name": "Arbejdernes Landsbank",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "note": "Not found. Tried: al-bank.dk branch finder /kontakt/filialer (site error, not readable); web search (no branch page). OSM n12812285176.",
+   "read": "2026-10-30"
+  }
+ ]
+}

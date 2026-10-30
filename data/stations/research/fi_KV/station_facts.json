@@ -109,7 +109,17 @@
     "lat": 60.8661386,
     "how": "OSM n4064066689",
     "_source": "OpenStreetMap n4064066689 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4064066689 to platform outlines and register track lines",
+     "source": "OSM n4064066689 geometry (level -1;0): 9.1 m from rail platform outline r19645056 (ref 1); next 37.2 m from r12716172 (ref 3;4); register lines: 24.7 m from 'KV L1', 35.0 m from 'KV L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -127,7 +137,19 @@
     "lat": 60.8657737,
     "how": "OSM n367643690",
     "_source": "OpenStreetMap n367643690 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643690 to platform outlines and register track lines",
+     "source": "OSM n367643690 geometry (level -1;0): inside rail platform outline r12716172 (ref 3;4); next 18.8 m from r19645056 (ref 1); register lines: 6.3 m from 'KV L3', 8.7 m from 'KV L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -145,7 +167,19 @@
     "lat": 60.8655234,
     "how": "OSM n367643731",
     "_source": "OpenStreetMap n367643731 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6/7"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643731 to platform outlines and register track lines",
+     "source": "OSM n367643731 geometry (level -1;0): inside rail platform outline r12716171 (ref 6;7); next 18.8 m from r12716170 (ref 9;10); register lines: 6.5 m from 'KV L7', 9.3 m from 'KV L6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -163,7 +197,19 @@
     "lat": 60.8653126,
     "how": "OSM n367643743",
     "_source": "OpenStreetMap n367643743 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 9/10"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643743 to platform outlines and register track lines",
+     "source": "OSM n367643743 geometry (level -1;0): inside rail platform outline r12716170 (ref 9;10); next 19.4 m from r12716171 (ref 6;7); register lines: 6.1 m from 'KV L10', 7.5 m from 'KV L9'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "escalator",
@@ -301,7 +347,19 @@
     "lat": 60.8657737,
     "how": "OSM n367643690",
     "_source": "OpenStreetMap n367643690 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643690 to platform outlines and register track lines",
+     "source": "OSM n367643690 geometry (level -1;0): inside rail platform outline r12716172 (ref 3;4); next 18.8 m from r19645056 (ref 1); register lines: 6.3 m from 'KV L3', 8.7 m from 'KV L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -320,7 +378,19 @@
     "lat": 60.8655234,
     "how": "OSM n367643731",
     "_source": "OpenStreetMap n367643731 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6/7"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643731 to platform outlines and register track lines",
+     "source": "OSM n367643731 geometry (level -1;0): inside rail platform outline r12716171 (ref 6;7); next 18.8 m from r12716170 (ref 9;10); register lines: 6.5 m from 'KV L7', 9.3 m from 'KV L6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -339,7 +409,19 @@
     "lat": 60.8653126,
     "how": "OSM n367643743",
     "_source": "OpenStreetMap n367643743 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 9/10"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n367643743 to platform outlines and register track lines",
+     "source": "OSM n367643743 geometry (level -1;0): inside rail platform outline r12716170 (ref 9;10); next 19.4 m from r12716171 (ref 6;7); register lines: 6.1 m from 'KV L10', 7.5 m from 'KV L9'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -358,7 +440,17 @@
     "lat": 60.8661386,
     "how": "OSM n4064066689",
     "_source": "OpenStreetMap n4064066689 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4064066689 to platform outlines and register track lines",
+     "source": "OSM n4064066689 geometry (level -1;0): 9.1 m from rail platform outline r19645056 (ref 1); next 37.2 m from r12716172 (ref 3;4); register lines: 24.7 m from 'KV L1', 35.0 m from 'KV L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -744,7 +836,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n1498437291",
     "_source": "OpenStreetMap n1498437291 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "No own site; VR Kouvola station page lists no pub; existence unverified."
   },
   {
    "category": "hairdresser",
@@ -763,7 +856,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n1498437296",
     "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "No own site; VR station page silent."
   },
   {
    "category": "shop",
@@ -781,7 +875,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n5782712954",
     "_source": "OpenStreetMap n5782712954 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "No current source; probably outdated (Filmtown links redirect to CandyTown)."
   },
   {
    "category": "car_rental",
@@ -789,11 +884,11 @@
    "osm_id": "n2049440192",
    "where": "station building, level 0 (OSM); Avis calls the branch 'Kouvola Railway Station (KU9)'",
    "level_per_plan": "0",
-   "hours_raw": "Avis website: Sun-Sat 06:00 AM - 12:00 AM; OSM: Mo-Fr 08:00-17:00; Sa-Su off",
-   "hours_source": "website (shop)",
+   "hours_raw": null,
+   "hours_source": "website (Avis)",
    "hours_checked": "2026-10-30",
    "note": "The two sources disagree; the Avis figure may be key-return hours. Not settled.",
-   "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30",
+   "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30",
    "position": {
     "lon": 26.7047206,
     "lat": 60.8661226,
@@ -803,7 +898,9 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n2049440192",
     "_source": "OpenStreetMap n2049440192 (ODbL), read 2026-10-30"
-   }
+   },
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_published": "Sun-Sat 06:00 AM - 12:00 AM; 24 hour drop off"
   },
   {
    "category": "vending_machine",
@@ -982,7 +1079,8 @@
     "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n1498437296 (ODbL), read 2026-10-30",
+   "hours_note": "No own site; VR station page silent."
   }
  ],
  "plans": [
@@ -998,7 +1096,6 @@
  "open": [
   "Level heights: no source measures them.",
   "Signposted level names: none found (no owner station plan read).",
-  "Lift, stair and escalator positions are OSM only; no plan or photo checked (Wikimedia Commons and fi.wikipedia could not be fetched).",
   "Väylävirasto's station-area map (asemien lähialuekartat, https://vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat, linked by VR) could not be fetched (site error), so it is not listed as read.",
   "Escalator w32673329 direction (up or down) is not stated in OSM.",
   "South exit of Asematunneli: street name not given by any source.",
@@ -1035,6 +1132,37 @@
    "question": "Missing hours",
    "answer": "Waiting hall (VR) and R-kioski (own site) settled; Ranela, Aseman parturi and Filmtown have no source hours; Avis disagrees between sources.",
    "_source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola, read 2026-10-30; https://www.r-kioski.fi/kioskit/kouvola-asema/, read 2026-10-30"
+  },
+  {
+   "question": "Lift, stair and escalator positions are OSM only; no plan or photo checked (Wikimedia Commons and fi.wikipedia could not be fetched).",
+   "answer": "Lifts serve platform 3/4, platform 6/7, platform 9/10 (The three Asematunneli lifts (-1;0) lie inside the islands 3/4, 6/7 and 9/10. n4064066689 is 9.1 m from platform 1, at the tunnel end by the building, so it is not a platform lift; platform 1 is reached from the hall per VR. Positions are OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n367643690 to platform outlines and register track lines",
+     "source": "OSM n367643690 geometry (level -1;0): inside rail platform outline r12716172 (ref 3;4); next 18.8 m from r19645056 (ref 1); register lines: 6.3 m from 'KV L3', 8.7 m from 'KV L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n367643731 to platform outlines and register track lines",
+     "source": "OSM n367643731 geometry (level -1;0): inside rail platform outline r12716171 (ref 6;7); next 18.8 m from r12716170 (ref 9;10); register lines: 6.5 m from 'KV L7', 9.3 m from 'KV L6'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n367643743 to platform outlines and register track lines",
+     "source": "OSM n367643743 geometry (level -1;0): inside rail platform outline r12716170 (ref 9;10); next 19.4 m from r12716171 (ref 6;7); register lines: 6.1 m from 'KV L10', 7.5 m from 'KV L9'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n4064066689 to platform outlines and register track lines",
+     "source": "OSM n4064066689 geometry (level -1;0): 9.1 m from rail platform outline r19645056 (ref 1); next 37.2 m from r12716172 (ref 3;4); register lines: 24.7 m from 'KV L1', 35.0 m from 'KV L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Kouvola: no lifts named; 'The station hall offers accessible entry to platform 1.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/kouvola",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

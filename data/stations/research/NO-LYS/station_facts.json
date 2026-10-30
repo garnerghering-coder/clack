@@ -206,7 +206,19 @@
     "lat": 59.9135435,
     "how": "OSM n6445483854",
     "_source": "OpenStreetMap n6445483854 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n6445483854 to platform outlines and register track lines",
+     "source": "OSM n6445483854 geometry (level -1;0): inside rail platform outline r9539640 (ref 1;2, local_ref 1;2); next 12.5 m from r9539641 (ref 3;4); register lines: 5.5 m from 'track 2', 10.9 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -225,7 +237,19 @@
     "lat": 59.9133614,
     "how": "OSM n6445483855",
     "_source": "OpenStreetMap n6445483855 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n6445483855 to platform outlines and register track lines",
+     "source": "OSM n6445483855 geometry (level -1;0): inside rail platform outline r9539641 (ref 3;4); next 16.1 m from r9539640 (ref 1;2); register lines: 9.1 m from 'track 3', 14.5 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -244,7 +268,17 @@
     "lat": 59.9130268,
     "how": "OSM n13348402065",
     "_source": "OpenStreetMap n13348402065 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13348402065 to platform outlines and register track lines",
+     "source": "OSM n13348402065 geometry (level 0;3): 31.8 m from rail platform outline r9539641 (ref 3;4); next 53.2 m from r9539640 (ref 1;2); register lines: 46.3 m from 'track 3', 51.6 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -263,7 +297,17 @@
     "lat": 59.9130266,
     "how": "OSM n13348402066",
     "_source": "OpenStreetMap n13348402066 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13348402066 to platform outlines and register track lines",
+     "source": "OSM n13348402066 geometry (level 0;3): 31.7 m from rail platform outline r9539641 (ref 3;4); next 53.1 m from r9539640 (ref 1;2); register lines: 46.1 m from 'track 3', 51.5 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -431,7 +475,8 @@
     "to_nearest_platform_m": 127.9,
     "how": "OSM node n681304850",
     "_source": "OpenStreetMap n681304850 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (#080 'Lysaker jbst.', Drammensveien 325) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "cafe",
@@ -505,7 +550,8 @@
     "to_nearest_platform_m": 113.6,
     "how": "OSM node n681304680",
     "_source": "OpenStreetMap n681304680 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. No own website or station-owner page found by search."
   },
   {
    "category": "ticket_machine",

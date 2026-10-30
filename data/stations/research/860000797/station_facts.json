@@ -15,7 +15,52 @@
    "_source": "Dissing+Weitling, \"Køge Nord Station fact sheet\", https://dissingweitling.com/assets/press/KØGE-NORD-STATION-FACT-SHEET.pdf, read 2026-10-30; Dissing+Weitling press text https://dissingweitling.com/assets/press/Køge-Nord-Station-version_final_dk.pdf, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 3 / track 3",
+   "track": "3",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 3 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 4",
+   "track": "4",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 4 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 4 / track 6",
+   "track": "6",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 6 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 4 / track 6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 4 / track 7",
+   "track": "7",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 7 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 4 / track 7; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 1 (the train stops with the platform to its north-west)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 2 (the train stops with the platform to its north-west)",
+   "_source": "laser (2025-03-19, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  }
+ ],
  "connections": [
   {
    "kind": "footbridge",
@@ -308,8 +353,8 @@
  ],
  "plans": [],
  "open": [
-  "Positions of the five lifts and which platform each serves: not in any source read; OSM has none.",
-  "OSM maps no stairs/lifts to regional perrons 3 and 4; OSM platform refs 1/2 may not match Banedanmark's perron numbering.",
+  "Positions of the five lifts and which platform each serves: not in any source read; OSM has none. [Lift follow-up 2026-10-30: The count of five lifts is confirmed, but not which platform each serves. Not settled.]",
+  "OSM maps no stairs/lifts to regional perrons 3 and 4; OSM platform refs 1/2 may not match Banedanmark's perron numbering. [Lift follow-up 2026-10-30: Not settled.]",
   "Number of escalators: the fact sheet mentions escalators without a count; OSM has two.",
   "Toilet fee/hours: DSB says only 'Drives af Køge Kommune'.",
   "No shops at the station in any source.",

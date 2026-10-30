@@ -8,20 +8,372 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal (station hall) / street level, Jernbanegade",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; Wikipedia 'Fredericia station' https://en.wikipedia.org/wiki/Fredericia_station, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000079)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 19 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000079)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: OSM has one walkway point here: no route from the platform to an exit. The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        -0.7,
+        -3.6
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbanegade)",
+      "_source": "OSM n7191954019 (already in OSM); position OSM n7191954019 (data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "at": [
+        -0.5,
+        2.1
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbanegade)",
+      "_source": "OSM n7191954020 (already in OSM); position OSM n7191954020 (data/stations/research/860000079/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 2,1, class 55 cm = 0.55 m above rail, 299 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000079/fredericia_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w110588778",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.48,
+      "_source": "Outline OSM w110588778 (ODbL); roof = median of 2735 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w117677322",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.93,
+      "base_m": -4.28,
+      "_source": "Outline OSM w117677322 (ODbL); roof = median of 432 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w117683592",
+      "kind": "building",
+      "name": "building",
+      "top_m": -0.28,
+      "base_m": -4.31,
+      "_source": "Outline OSM w117683592 (ODbL); roof = median of 886 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w134938393",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 4.18,
+      "base_m": -4.53,
+      "_source": "Outline OSM w134938393 (ODbL); roof = median of 3180 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w136729443",
+      "kind": "building",
+      "name": "building",
+      "top_m": 7.05,
+      "base_m": -2.83,
+      "_source": "Outline OSM w136729443 (ODbL); roof = median of 3343 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w294854531",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": -1.78,
+      "_source": "Outline OSM w294854531 (ODbL); roof = median of 25 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w294854532",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": -1.92,
+      "_source": "Outline OSM w294854532 (ODbL); roof = median of 223 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w294854533",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 2.58,
+      "_source": "Outline OSM w294854533 (ODbL); roof = median of 184 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w294854536",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 1.36,
+      "_source": "Outline OSM w294854536 (ODbL); roof = median of 327 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w294854537",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": -1.9,
+      "_source": "Outline OSM w294854537 (ODbL); roof = median of 168 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w294854538",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": -1.79,
+      "_source": "Outline OSM w294854538 (ODbL); roof = median of 184 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w405817950",
+      "kind": "roof",
+      "name": "building",
+      "top_m": -5.4,
+      "_source": "Outline OSM w405817950 (ODbL); roof = median of 147 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w670251060",
+      "kind": "building",
+      "name": "building",
+      "top_m": -1.36,
+      "base_m": -3.63,
+      "_source": "Outline OSM w670251060 (ODbL); roof = median of 150 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w670251337",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -1.76,
+      "_source": "Outline OSM w670251337 (ODbL); roof = median of 188 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w752003503",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -5.48,
+      "_source": "Outline OSM w752003503 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w752003504",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -5.05,
+      "_source": "Outline OSM w752003504 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w1158782915",
+      "kind": "roof",
+      "name": "Madsbytoget (roof)",
+      "top_m": -3.64,
+      "_source": "Outline OSM w1158782915 (ODbL); roof = median of 112 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w1173705658",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.34,
+      "_source": "Outline OSM w1173705658 (ODbL); roof = median of 325 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w1394590514",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.98,
+      "base_m": -4.26,
+      "_source": "Outline OSM w1394590514 (ODbL); roof = median of 788 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546); from data/stations/research/860000079/fredericia_structures_heights.geojson (metres above the platform surface, 11.98 m RH 2000, laser 2025-02-20)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000079/fredericia_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 11.98,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000079/fredericia_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (11.98 m DVR90, laser 2025-02-20)"
+  },
+  "pois": [
+    {
+      "id": "res4af948fd24",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Fredericia Station)",
+      "level": "0",
+      "x": -17.9,
+      "y": 15.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-23:30; Sa,Su 07:00-23:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed OSM node n1618739862 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "res7d7a351199",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -12.1,
+      "y": -1.5,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "res9a0b3c5998",
+      "category": "toilet",
+      "name": "Betalingstoiletter",
+      "level": "0",
+      "x": -24.1,
+      "y": 1.0,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed OSM node n7773335578 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "res092b947f2d",
+      "category": "locker",
+      "name": "Bagagebokse",
+      "level": "0",
+      "x": -20.1,
+      "y": 5.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/fredericia/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed OSM node n13291535706 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "res594aa9921f",
+      "category": "waiting",
+      "name": "Knudepunktet",
+      "level": "0",
+      "x": -7.5,
+      "y": -17.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed OSM node n6372932904 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "res6ed6702b32",
+      "category": "bus",
+      "name": "Fredericia Banegård (Bybusser)",
+      "level": "0",
+      "x": 0.5,
+      "y": 66.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed representative point of the OSM area w148986518 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res186f5054bb",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -8.4,
+      "y": 29.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000079.json), read 2026-10-30; placed representative point of the OSM area w1173705657 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res8db3f0b510",
+      "category": "toilet",
+      "name": "DSB",
+      "level": "0",
+      "x": -24.1,
+      "y": 1.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n7773335578 (read 2026-10-30); placed OSM node n7773335578 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "rese89e3757e3",
+      "category": "locker",
+      "name": "DSB",
+      "level": "0",
+      "x": -20.1,
+      "y": 5.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n13291535706 (read 2026-10-30); placed OSM node n13291535706 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "resa203314883",
+      "category": "restaurant",
+      "name": "Gozas Pizza og Kebab",
+      "level": "0",
+      "x": 43.0,
+      "y": -7.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 16:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4022447682 (ODbL), read 2026-10-30; placed OSM node n4022447682 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
+    },
+    {
+      "id": "res220eac61b0",
+      "category": "shop",
+      "name": "Allan Frisør",
+      "level": "0",
+      "x": 46.7,
+      "y": -22.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:30-18:00; Sa 09:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13755826571 (ODbL), read 2026-10-30; placed OSM node n13755826571 (research pass 2026-10-30, data/stations/research/860000079/station_facts.json)"
     }
   ]
 }

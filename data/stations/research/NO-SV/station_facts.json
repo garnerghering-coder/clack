@@ -19,7 +19,8 @@
    "track": "1,2",
    "side": "south-east",
    "meaning": "the platform lies on the south-east side of track 1,2 (the train stops with the platform to its south-east)",
-   "_source": "laser (2013-04-27, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30"
+   "_source": "laser (2013-04-27, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
   },
   {
    "platform_bis": "track 4",
@@ -207,7 +208,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n2260304949",
     "_source": "OpenStreetMap n2260304949 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (#111 'Sandvika jbst.', Folangerveien) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "convenience",
@@ -385,7 +387,7 @@
  ],
  "plans": [],
  "open": [
-  "Lifts and ramps: Bane NOR confirms lifts to all platforms and ramps to both island platforms, but no source places them; none are in the OSM extract.",
+  "Lifts and ramps: Bane NOR confirms lifts to all platforms and ramps to both island platforms, but no source places them; none are in the OSM extract. [Lift follow-up 2026-10-30: Not settled. OSM has no lift at the platforms. Bane NOR's English page does not even list an elevator (the facts cite the Norwegian page). Missing: lift positions.]",
   "Signposted level names not found; no heights in any source.",
   "Narvesen hours: not in OSM; narvesen.no hours did not render. Joker's 24/7 comes only from OSM (joker.no store page unreadable).",
   "Waiting room weekend hours not stated (English Bane NOR page gives only Mo-Fr 06:30-18:00; the Norwegian page gives none).",

@@ -1,0 +1,138 @@
+{
+ "clack_id": "860000061",
+ "slug": "skanderborg",
+ "flags": [
+  "Perron 1 track 1: the outline FOR_PERRONER_OD Sd 171 runs 320 m along the track, Bilag says 220 m; line drawn to the outline",
+  "Perron 2 track 2: the outline FOR_PERRONER_OD Sd 172 runs 365 m along the track, Bilag says 266 m; line drawn to the outline",
+  "Perron 2 track 3: the outline FOR_PERRONER_OD Sd 172 runs 361 m along the track, Bilag says 266 m; line drawn to the outline",
+  "Platform BIS perron 2 / track 3 (track 3): laser gives 0.90 m above the track bed (≈0.72 m above rail after −0.15…0.2 m), register class 55 = 0.55 m. Not decided; add to REVIEW.md."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=9.91871,56.04079,9.93331,56.0471",
+ "profile": {
+  "brief": "the brief STATION_3D_RESEARCH_BRIEF_DK_FI.md (Denmark)",
+  "vdatum": "DVR90",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557)",
+  "scan_block": "DHM punktsky PUNKTSKY_1km_6211_557",
+  "box_note": ": the platforms' extent plus 120 m",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, DVR90, gridded here from the laser's ground points (class 2), median per 1 m cell; no-data where there is no ground point",
+  "dtm_licence": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Banedanmark",
+  "register_owner": "Banedanmark",
+  "register_file": "skanderborg_platform_banedanmark.geojson",
+  "register_what": "Bilag 3.6 platforms (perron, track, length, height in cm) on Banedanmark track centrelines, with the laser levels",
+  "register_licence": "Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0",
+  "register_text": "Register: Banedanmark Netredegørelse 2027 Bilag 3.6 (perron, track, length, height in cm above rail; table dated 1 August 2023), placed on Banedanmark Open Data (CC BY 4.0) track centrelines and platform outlines; widths are outline area / length.",
+  "id_label": "Perron / track",
+  "object_points": "non-ground (classes 3,4,5,6)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557). https://dataforsyningen.dk/data/3931 (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2).\n- Banedanmark Netredegørelse 2027, Bilag 3.6 (bane.dk), read 2026-10-30; Banedanmark Open Data (services1.arcgis.com/QcgJt0vVxSaqMKl7), CC BY 4.0, read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 24.17,
+  "median_m": 47.91,
+  "max_m": 69.55,
+  "nan_cells": 31627,
+  "size_m": [
+   580,
+   387
+  ],
+  "box_sweref": [
+   557401,
+   6211168,
+   557981,
+   6211555
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "PUNKTSKY_1km_6211_557.laz"
+  ],
+  "scan_date": "2025-03-22",
+  "density_pts_m2_nominal": 8,
+  "flight_height_m": null,
+  "points_in_box": 5323008,
+  "density_in_box": 23.71,
+  "classes": {
+   "2": 2415565,
+   "3": 264581,
+   "4": 203007,
+   "5": 1881359,
+   "6": 476235,
+   "7": 69659,
+   "14": 487,
+   "17": 3916,
+   "18": 8199
+  },
+  "train_points_class64": 2642
+ },
+ "platforms": [
+  {
+   "bis_object": "perron 1 / track 1",
+   "track": "1",
+   "height_class": "55",
+   "class_height_m": 0.55,
+   "length_m": 220.0,
+   "width_m": 4.3,
+   "roof": null,
+   "track_bed_m": 47.92,
+   "track_bed_points": 6874,
+   "platform_surface_m": 48.76,
+   "platform_points": 17727,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.84,
+   "laser_estimate_above_rail_m": 0.66
+  },
+  {
+   "bis_object": "perron 2 / track 2",
+   "track": "2",
+   "height_class": "55",
+   "class_height_m": 0.55,
+   "length_m": 266.0,
+   "width_m": 8.3,
+   "roof": null,
+   "track_bed_m": 48.0,
+   "track_bed_points": 8440,
+   "platform_surface_m": 48.84,
+   "platform_points": 31406,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.84,
+   "laser_estimate_above_rail_m": 0.67
+  },
+  {
+   "bis_object": "perron 2 / track 3",
+   "track": "3",
+   "height_class": "55",
+   "class_height_m": 0.55,
+   "length_m": 266.0,
+   "width_m": 8.4,
+   "roof": null,
+   "track_bed_m": 47.93,
+   "track_bed_points": 8265,
+   "platform_surface_m": 48.83,
+   "platform_points": 32591,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.9,
+   "laser_estimate_above_rail_m": 0.72
+  }
+ ],
+ "platform_surface_m": 48.83,
+ "track_bed_m": 47.93,
+ "trains_in_scan": 2,
+ "structures": {
+  "building": 5,
+  "footbridge": 0,
+  "canopy_osm": 3,
+  "canopy_laser": 0,
+  "hall_roof_laser": 0,
+  "train_in_scan": 2
+ },
+ "photos": 0,
+ "photos_station_related": 0
+}

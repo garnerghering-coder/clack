@@ -20,7 +20,23 @@
    "_source": "Wikipedia, \"Copenhagen South railway station\", https://en.wikipedia.org/wiki/Copenhagen_South_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 11",
+   "track": "11",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 11 (the train stops with the platform to its south-west)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 11; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 12",
+   "track": "12",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 12 (the train stops with the platform to its north-east)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 12; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  }
+ ],
  "connections": [
   {
    "kind": "lift",
@@ -37,7 +53,17 @@
     "lat": 55.652502,
     "how": "OSM n8223078110",
     "_source": "OpenStreetMap n8223078110 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n8223078110 to platform outlines and register track lines",
+     "source": "OSM n8223078110 geometry (level -1;0;1): 6.5 m from rail platform outline w87507515 (ref 2); next 22.2 m from w89585689 (ref 1); register lines: 10.8 m from 'perron 4 / track 2', 10.8 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 6.5 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -54,7 +80,17 @@
     "lat": 55.6524814,
     "how": "OSM n14094519456",
     "_source": "OpenStreetMap n14094519456 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n14094519456 to platform outlines and register track lines",
+     "source": "OSM n14094519456 geometry (level -1;0;1): 4.2 m from rail platform outline w87507515 (ref 2); next 19.9 m from w89585689 (ref 1); register lines: 9.0 m from 'perron 4 / track 2', 9.0 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 4.2 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -71,7 +107,17 @@
     "lat": 55.6525803,
     "how": "OSM n8223103858",
     "_source": "OpenStreetMap n8223103858 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n8223103858 to platform outlines and register track lines",
+     "source": "OSM n8223103858 geometry (level 1;0): 2.2 m from rail platform outline r15771341 (ref 23;24); next 15.2 m from w87507515 (ref 2); register lines: 5.9 m from 'perron 4 / track 1', 5.9 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "2.2 m from OSM platform r15771341 (ref 23;24, level 0), and register lines for 'perron 3/4 track 1' are 5.9 m away. Banedanmark's register repeats the same tracks 1/2 as perron 2, 3 and 4, and OSM refs (1, 2, 21, 22, 23;24) do not match it, so the perron label is not settled."
   },
   {
    "kind": "lift",
@@ -117,7 +163,17 @@
     "lat": 55.6527249,
     "how": "OSM n12863761184",
     "_source": "OpenStreetMap n12863761184 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12863761184 to platform outlines and register track lines",
+     "source": "OSM n12863761184 geometry (level 0;-1): 18.8 m from rail platform outline r21243581 (ref 1;2); next 19.4 m from r15771341 (ref 23;24); register lines: 12.8 m from 'perron 4 / track 2', 12.8 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -793,7 +849,17 @@
     "lat": 55.6523982,
     "how": "OSM n417138192",
     "_source": "OpenStreetMap n417138192 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n417138192 to platform outlines and register track lines",
+     "source": "OSM n417138192 geometry (level None): 3.0 m from rail platform outline w87507515 (ref 2); next 14.9 m from w1232648201 (ref 21); register lines: 42.5 m from 'perron 4 / track 1', 42.5 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "3.0 m from OSM platform w87507515 (ref 2, light_rail), 42 m from every register line. Not settled."
   },
   {
    "kind": "lift",
@@ -814,7 +880,17 @@
     "lat": 55.6521508,
     "how": "OSM n3474125762",
     "_source": "OpenStreetMap n3474125762 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3474125762 to platform outlines and register track lines",
+     "source": "OSM n3474125762 geometry (level None): 2.9 m from rail platform outline w89585689 (ref 1); next 17.7 m from w87507515 (ref 2); register lines: 59.4 m from 'perron 4 / track 1', 59.4 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "2.9 m from OSM platform w89585689 (ref 1, light_rail, 'København Syd'), but 59 m from every register line, so OSM ref 1 cannot be matched to a Banedanmark perron. Not settled."
   },
   {
    "kind": "lift",
@@ -835,7 +911,17 @@
     "lat": 55.652436,
     "how": "OSM n5504104504",
     "_source": "OpenStreetMap n5504104504 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5504104504 to platform outlines and register track lines",
+     "source": "OSM n5504104504 geometry (level None): inside rail platform outline w87507515 (ref 2); next 16.0 m from w89585689 (ref 1); register lines: 13.2 m from 'perron 4 / track 2', 13.2 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside OSM platform w87507515 (ref 2, tagged light_rail), 13.2 m from the register's track 2 line. The perron numbering here is ambiguous (register perron 2 and perron 4 both cover track 2), so this is not settled."
   },
   {
    "kind": "lift",
@@ -856,7 +942,17 @@
     "lat": 55.6521803,
     "how": "OSM n5504104525",
     "_source": "OpenStreetMap n5504104525 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5504104525 to platform outlines and register track lines",
+     "source": "OSM n5504104525 geometry (level None): 1.7 m from rail platform outline w89585689 (ref 1); next 11.3 m from w87507515 (ref 2); register lines: 66.3 m from 'perron 4 / track 2', 66.3 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "1.7 m from OSM platform w89585689 (ref 1, light_rail), 66 m from every register line. OSM ref 1 cannot be matched to a perron. Not settled."
   },
   {
    "kind": "lift",
@@ -877,7 +973,17 @@
     "lat": 55.652502,
     "how": "OSM n8223078110",
     "_source": "OpenStreetMap n8223078110 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n8223078110 to platform outlines and register track lines",
+     "source": "OSM n8223078110 geometry (level -1;0;1): 6.5 m from rail platform outline w87507515 (ref 2); next 22.2 m from w89585689 (ref 1); register lines: 10.8 m from 'perron 4 / track 2', 10.8 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 6.5 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -896,7 +1002,17 @@
     "lat": 55.6525803,
     "how": "OSM n8223103858",
     "_source": "OpenStreetMap n8223103858 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n8223103858 to platform outlines and register track lines",
+     "source": "OSM n8223103858 geometry (level 1;0): 2.2 m from rail platform outline r15771341 (ref 23;24); next 15.2 m from w87507515 (ref 2); register lines: 5.9 m from 'perron 4 / track 1', 5.9 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "2.2 m from OSM platform r15771341 (ref 23;24, level 0), and register lines for 'perron 3/4 track 1' are 5.9 m away. Banedanmark's register repeats the same tracks 1/2 as perron 2, 3 and 4, and OSM refs (1, 2, 21, 22, 23;24) do not match it, so the perron label is not settled."
   },
   {
    "kind": "lift",
@@ -915,7 +1031,17 @@
     "lat": 55.6528768,
     "how": "OSM n12164923511",
     "_source": "OpenStreetMap n12164923511 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12164923511 to platform outlines and register track lines",
+     "source": "OSM n12164923511 geometry (level 0;-1;-2): 2.0 m from rail platform outline r21243581 (ref 1;2); next 26.4 m from w672080220 (ref 11;12); register lines: 34.8 m from 'perron 4 / track 2', 34.8 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "2.0 m from the Metro platform r21243581 (subway, level -3), more than 34 m from the DSB register lines. This is a Metro transfer lift."
   },
   {
    "kind": "lift",
@@ -934,7 +1060,17 @@
     "lat": 55.6528925,
     "how": "OSM n12242775895",
     "_source": "OpenStreetMap n12242775895 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12242775895 to platform outlines and register track lines",
+     "source": "OSM n12242775895 geometry (level 0;-1;-2): 1.9 m from rail platform outline r21243581 (ref 1;2); next 28.0 m from w672080220 (ref 11;12); register lines: 37.1 m from 'perron 4 / track 2', 37.1 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "1.9 m from the Metro platform r21243581 (subway, level -3). This is a Metro transfer lift."
   },
   {
    "kind": "lift",
@@ -953,7 +1089,17 @@
     "lat": 55.6527249,
     "how": "OSM n12863761184",
     "_source": "OpenStreetMap n12863761184 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12863761184 to platform outlines and register track lines",
+     "source": "OSM n12863761184 geometry (level 0;-1): 18.8 m from rail platform outline r21243581 (ref 1;2); next 19.4 m from r15771341 (ref 23;24); register lines: 12.8 m from 'perron 4 / track 2', 12.8 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -975,7 +1121,17 @@
     "lat": 55.6524435,
     "how": "OSM n13375667975",
     "_source": "OpenStreetMap n13375667975 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13375667975 to platform outlines and register track lines",
+     "source": "OSM n13375667975 geometry (level 1;0;-1;-2): 5.3 m from rail platform outline w87507515 (ref 2); next 8.6 m from w1232648201 (ref 21); register lines: 30.8 m from 'perron 4 / track 1', 30.8 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 5.3 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -997,7 +1153,17 @@
     "lat": 55.6524427,
     "how": "OSM n13375667976",
     "_source": "OpenStreetMap n13375667976 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13375667976 to platform outlines and register track lines",
+     "source": "OSM n13375667976 geometry (level 1;0;-1;-2): 5.6 m from rail platform outline w87507515 (ref 2); next 8.5 m from w1232648201 (ref 21); register lines: 32.2 m from 'perron 4 / track 1', 32.2 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 5.6 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -1018,7 +1184,17 @@
     "lat": 55.6525616,
     "how": "OSM n13375679665",
     "_source": "OpenStreetMap n13375679665 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13375679665 to platform outlines and register track lines",
+     "source": "OSM n13375679665 geometry (level 1;-1;-2): 2.0 m from rail platform outline w1232648200 (ref 22); next 12.6 m from r15771341 (ref 23;24); register lines: 10.3 m from 'perron 4 / track 1', 10.3 m from 'perron 3 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "2.0 m from OSM platform w1232648200 (ref 22, level 0), 10.3 m from the register's track 1 line. OSM ref 22 does not map to any register perron, so this is not settled."
   },
   {
    "kind": "lift",
@@ -1039,7 +1215,17 @@
     "lat": 55.6524814,
     "how": "OSM n14094519456",
     "_source": "OpenStreetMap n14094519456 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n14094519456 to platform outlines and register track lines",
+     "source": "OSM n14094519456 geometry (level -1;0;1): 4.2 m from rail platform outline w87507515 (ref 2); next 19.9 m from w89585689 (ref 1); register lines: 9.0 m from 'perron 4 / track 2', 9.0 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 4.2 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   }
  ],
  "entrances": [
@@ -1124,7 +1310,8 @@
     "to_nearest_platform_m": 4.8,
     "how": "OSM node n4591487288",
     "_source": "OpenStreetMap n4591487288 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. Tried: web search (no own website); DSB København Syd page names only the 7-Eleven."
   },
   {
    "category": "toilets",
@@ -1189,7 +1376,7 @@
  ],
  "plans": [],
  "open": [
-  "Station renamed from Ny Ellebjerg (DSB). No owner plan; DSB lists only Elevator and Trapper. All positions OSM only; OSM has only one entrance (no street) — the street entrances (Carl Jacobsens Vej, bus p-plads) are missing.",
+  "Station renamed from Ny Ellebjerg (DSB). No owner plan; DSB lists only Elevator and Trapper. All positions OSM only; OSM has only one entrance (no street) — the street entrances (Carl Jacobsens Vej, bus p-plads) are missing. [Lift follow-up 2026-10-30: Not settled. Two lifts (n12164923511, n12242775895) are Metro transfer lifts. The others sit at OSM platforms refs 1, 2, 21, 22 and 23;24, which do not match Banedanmark's register: it repeats tracks 1/2 as perron 2, 3 and 4. Street entrances are not addressed here.]",
   "Which OSM level is which platform, and whether the Øresund-line platforms (Wikipedia: 'end of 2025') and OSM platforms 21/22 are open and how they are reached: unconfirmed; the platform register lists only perron 1–4.",
   "Toilets, waiting room, parking not on DSB's page; 7-Eleven not found in 7-Eleven's list (list possibly truncated); DSB and OSM hours conflict.",
   "No open-question list was supplied for Danish stations."

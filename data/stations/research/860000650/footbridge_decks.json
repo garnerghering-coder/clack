@@ -1,0 +1,291 @@
+{
+ "what": "footbridge deck and roof levels over the platform tracks",
+ "method": ", per bridge, on a 1.2 m-wide strip along the OSM line, over the part that lies above the tracks\n(within 8 m of a platform track line):\n  - deck_top_m: median of the bridge-deck class (Lantmäteriet/Helsinki class 17) points = the open deck's walking surface\n    (plus railings and anything lying on it; p10/p90 given);\n  - top_surface_m: median of non-ground object points (class 1, or 6 where buildings are classed) more than 2 m above\n    that deck, or above the platform when no deck points exist. Without deck-class points this surface is EITHER an open\n    deck that the classification left unclassified (railings included) OR the roof of an enclosed bridge: the laser alone\n    cannot tell which, so deck_top_m stays null and the bridge is flagged (OSM covered=*, photos or a drawing decide).\nHeights in the pack's vertical datum; *_above_platform_m = minus the pack's platform surface.",
+ "source": "laser kobenhavn_osterport_laser_station_2025.laz (scan 2025-03-10); bridge lines and tags: OpenStreetMap (ODbL), 860000650.osm; track lines: kobenhavn_osterport_platform_banedanmark.geojson",
+ "bridges": [
+  {
+   "osm_id": "w48770051",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 85,
+   "points_class17": 150,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 2.18,
+   "deck_p10_p90_m": [
+    1.46,
+    3.75
+   ],
+   "deck_above_platform_m": -0.12,
+   "deck_above_track_bed_m": 0.61,
+   "osm_covered": "no",
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w271610053",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 2,
+   "points_class17": 16,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.98,
+   "deck_p10_p90_m": [
+    7.96,
+    7.99
+   ],
+   "deck_above_platform_m": 5.68,
+   "deck_above_track_bed_m": 6.41,
+   "osm_covered": "no",
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w287678886",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 4,
+   "points_class17": 40,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.86,
+   "deck_p10_p90_m": [
+    7.85,
+    7.89
+   ],
+   "deck_above_platform_m": 5.56,
+   "deck_above_track_bed_m": 6.29,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w287678888",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes"
+   },
+   "crosses_register_tracks": [
+    "4",
+    "5"
+   ],
+   "strip_area_m2": 19,
+   "points_class17": 134,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.89,
+   "deck_p10_p90_m": [
+    7.85,
+    7.93
+   ],
+   "deck_above_platform_m": 5.59,
+   "deck_above_track_bed_m": 6.32,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w724683393",
+   "name": null,
+   "osm_tags": {
+    "highway": "steps",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 12,
+   "points_class17": 43,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.78,
+   "deck_p10_p90_m": [
+    7.76,
+    7.81
+   ],
+   "deck_above_platform_m": 5.48,
+   "deck_above_track_bed_m": 6.21,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w1002168437",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 1,
+   "points_class17": 13,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.79,
+   "deck_p10_p90_m": [
+    7.75,
+    7.81
+   ],
+   "deck_above_platform_m": 5.49,
+   "deck_above_track_bed_m": 6.22,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w1084566275",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 4,
+   "points_class17": 0,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": null,
+   "osm_covered": null,
+   "osm_start_date": null,
+   "note": "no deck-class or roof points on the strip (too few points, or the bridge is newer than the scan 2025-03-10)"
+  },
+  {
+   "osm_id": "w1084566277",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 7,
+   "points_class17": 0,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": null,
+   "osm_covered": "no",
+   "osm_start_date": null,
+   "note": "no deck-class or roof points on the strip (too few points, or the bridge is newer than the scan 2025-03-10)"
+  },
+  {
+   "osm_id": "w1084566278",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 6,
+   "points_class17": 0,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": null,
+   "osm_covered": "no",
+   "osm_start_date": null,
+   "note": "no deck-class or roof points on the strip (too few points, or the bridge is newer than the scan 2025-03-10)"
+  },
+  {
+   "osm_id": "w1144294263",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [
+    "3",
+    "4",
+    "5"
+   ],
+   "strip_area_m2": 54,
+   "points_class17": 411,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.85,
+   "deck_p10_p90_m": [
+    7.78,
+    7.92
+   ],
+   "deck_above_platform_m": 5.55,
+   "deck_above_track_bed_m": 6.28,
+   "osm_covered": "no",
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w1145432139",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "covered": "no"
+   },
+   "crosses_register_tracks": [
+    "12",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 63,
+   "points_class17": 495,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.97,
+   "deck_p10_p90_m": [
+    7.9,
+    8.04
+   ],
+   "deck_above_platform_m": 5.67,
+   "deck_above_track_bed_m": 6.4,
+   "osm_covered": "no",
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w1145447677",
+   "name": null,
+   "osm_tags": {
+    "layer": "1",
+    "man_made": "bridge"
+   },
+   "crosses_register_tracks": [
+    "12",
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 3165,
+   "points_class17": 24108,
+   "platform_surface_m": 2.3,
+   "track_bed_m": 1.57,
+   "deck_top_m": 7.96,
+   "deck_p10_p90_m": [
+    7.81,
+    8.16
+   ],
+   "deck_above_platform_m": 5.66,
+   "deck_above_track_bed_m": 6.39,
+   "osm_covered": null,
+   "osm_start_date": null
+  }
+ ]
+}

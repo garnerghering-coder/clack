@@ -8,20 +8,298 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal / street level, Banegårdspladsen",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000275)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 13 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000275)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: OSM has one walkway point here: no route from the platform to an exit. The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        15.0,
+        -9.7
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; position OSM n8700980092 (data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "at": [
+        28.6,
+        -32.7
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; position OSM n8700980102 (data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "at": [
+        15.0,
+        -9.7
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n8700980092 (already in OSM); position OSM n8700980092 (data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "at": [
+        28.6,
+        -32.7
+      ],
+      "level": "0",
+      "name": "Entrance (Sølvgade)",
+      "_source": "OSM n8700980102 (already in OSM); position OSM n8700980102 (data/stations/research/860000275/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 33: tracks 1,2,43a, class 55 cm = 0.55 m above rail, 277 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000275/herning_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w122292140",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 11.68,
+      "base_m": -1.38,
+      "_source": "Outline OSM w122292140 (ODbL); roof = median of 723 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w141500147",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.95,
+      "_source": "Outline OSM w141500147 (ODbL); roof = median of 3641 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w141500148",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 9.29,
+      "base_m": 1.54,
+      "_source": "Outline OSM w141500148 (ODbL); roof = median of 269 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w141500150",
+      "kind": "building",
+      "name": "bridge",
+      "top_m": 5.26,
+      "base_m": -0.73,
+      "_source": "Outline OSM w141500150 (ODbL); roof = median of 113 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w141500152",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.34,
+      "_source": "Outline OSM w141500152 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w141500155",
+      "kind": "building",
+      "name": "bridge",
+      "top_m": 8.33,
+      "base_m": -3.69,
+      "_source": "Outline OSM w141500155 (ODbL); roof = median of 294 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w141500157",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.95,
+      "_source": "Outline OSM w141500157 (ODbL); roof = median of 3275 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w141500158",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 4.63,
+      "base_m": -0.72,
+      "_source": "Outline OSM w141500158 (ODbL); roof = median of 788 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w141501367",
+      "kind": "building",
+      "name": "bridge",
+      "top_m": 5.28,
+      "base_m": -0.69,
+      "_source": "Outline OSM w141501367 (ODbL); roof = median of 85 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w450856195",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.78,
+      "_source": "Outline OSM w450856195 (ODbL); roof = median of 102 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w939278135",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 9.29,
+      "base_m": 1.56,
+      "_source": "Outline OSM w939278135 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w939278136",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.19,
+      "_source": "Outline OSM w939278136 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "#12",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.17,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6220_498, PUNKTSKY_1km_6220_499); from data/stations/research/860000275/herning_structures_heights.geojson (metres above the platform surface, 52.33 m RH 2000, laser 2025-03-06); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000275/herning_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 52.33,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000275/herning_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (52.33 m DVR90, laser 2025-03-06)"
+  },
+  "pois": [
+    {
+      "id": "res2acb28ba3c",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": 37.8,
+      "y": -31.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 07:30-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; placed OSM node n9593088619 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "id": "resb4a90b4b49",
+      "category": "restaurant",
+      "name": "Station's Pizza Kebap",
+      "level": "0",
+      "x": 3.3,
+      "y": 6.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; placed OSM node n13983896221 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "id": "res94de0bd0e7",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -92.8,
+      "y": -18.9,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:00-02:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "res988183b0f0",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -40.6,
+      "y": -12.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30; placed representative point of the OSM area w1426357381 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resafe99fa761",
+      "category": "restaurant",
+      "name": "Scandic Regina Restaurant",
+      "level": "0",
+      "x": 65.9,
+      "y": -15.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-09:30,17:00-21:30; Sa 07:00-10:30,17:00-21:30; Su 07:00-10:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30; https://www.scandichotels.com/en/hotels/scandic-regina, read 2026-10-30; placed OSM node n4122090542 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "id": "res0360495480",
+      "category": "kiosk",
+      "name": "Scandic Lobby Shop",
+      "level": "0",
+      "x": 69.8,
+      "y": -14.2,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30; https://www.scandichotels.com/en/hotels/scandic-regina, read 2026-10-30; placed OSM node n9231041674 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)"
+    },
+    {
+      "id": "resf441eb5b54",
+      "category": "restaurant",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": 37.8,
+      "y": -31.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 07:30-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30; placed OSM node n9593088619 (research pass 2026-10-30, data/stations/research/860000275/station_facts.json)"
     }
   ]
 }

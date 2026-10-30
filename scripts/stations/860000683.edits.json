@@ -8,20 +8,256 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: S-tog perron 1 (tracks 1/11) and perron 2 (tracks 3/4), 92 cm; Lokaltog tracks 11 and 12 (new platforms being built)",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000683)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 9 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000683)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {
+    "r15763360": "Banedanmark Open Data (CC BY 4.0) platform objects perron 1 / track 1, perron 1 / track 11, perron 2 / track 4 run alongside osm:way/r15763360; tracks 1, 3, 4, 11 from the register (banedanmark_platforms_DK.csv) run alongside osm:way/r15763360, read 2026-10-30 (data/stations/research/860000683); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "r15763360": "1, 3, 4, 11"
+  },
+  "entrances": [],
+  "poi_hours": {},
+  "platform_heights": {
+    "1, 3, 4, 11": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 82: tracks 3,4, class 92 cm = 0.92 m above rail, 218 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000683/hillerod_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w26380515",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 8.02,
+      "base_m": -0.79,
+      "_source": "Outline OSM w26380515 (ODbL); roof = median of 313 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w26380516",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.44,
+      "base_m": -3.74,
+      "_source": "Outline OSM w26380516 (ODbL); roof = median of 1446 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w167871729",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.85,
+      "base_m": -0.5,
+      "_source": "Outline OSM w167871729 (ODbL); roof = median of 64 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w167871731",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.84,
+      "_source": "Outline OSM w167871731 (ODbL); roof = median of 144 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w256612166",
+      "kind": "building",
+      "name": "service",
+      "top_m": 4.91,
+      "base_m": -0.76,
+      "_source": "Outline OSM w256612166 (ODbL); roof = median of 48 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w339442561",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.93,
+      "_source": "Outline OSM w339442561 (ODbL); roof = median of 420 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1165106318",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.27,
+      "base_m": -0.94,
+      "_source": "Outline OSM w1165106318 (ODbL); roof = median of 38 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w1165106320",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.33,
+      "_source": "Outline OSM w1165106320 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "#10",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.81,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707); from data/stations/research/860000683/hillerod_structures_heights.geojson (metres above the platform surface, 36.98 m RH 2000, laser 2024-04-28); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000683/hillerod_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 36.98,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000683/hillerod_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (36.98 m DVR90, laser 2024-04-28)"
+  },
+  "pois": [
+    {
+      "id": "res12050646a7",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Hillerød Station)",
+      "level": "0",
+      "x": -15.6,
+      "y": -18.9,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n1625939564 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "res9b18868147",
+      "category": "cafe",
+      "name": "Lagkagehuset (Hillerød Station)",
+      "level": "0",
+      "x": -20.6,
+      "y": 12.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-17:00; Sa,Su 07:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.visitnorthzealand.com/north-zealand/explore/information-point-lagkagehuset-hillerod-station-gdk1120583, read 2026-10-30; placed OSM node n7111588422 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "rese1ac390014",
+      "category": "waiting",
+      "name": "Ventesal/forhal",
+      "level": "0",
+      "x": -12.4,
+      "y": -98.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-23:00; Sa,Su 08:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "rese564823090",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": -21.8,
+      "y": -35.6,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n8949465164 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "resf93390598a",
+      "category": "bus",
+      "name": "Hillerød Station (bus terminal)",
+      "level": "0",
+      "x": -0.1,
+      "y": -108.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/hillerod/, read 2026-10-30; placed representative point of the OSM area w42466129 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resa64815224f",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -21.8,
+      "y": -35.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n8949465164 (read 2026-10-30); placed OSM node n8949465164 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "res89fbabf6b6",
+      "category": "restaurant",
+      "name": "You Sushi Hillerød Aps",
+      "level": "0",
+      "x": -55.9,
+      "y": -9.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30; placed OSM node n4261837129 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "resf69ecad943",
+      "category": "restaurant",
+      "name": "Corner Sandwich og Kebab",
+      "level": "0",
+      "x": -49.8,
+      "y": -49.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30; placed OSM node n4429455834 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
+    },
+    {
+      "id": "res25edf0d9a0",
+      "category": "restaurant",
+      "name": "Jernstangen",
+      "level": "0",
+      "x": -55.2,
+      "y": -8.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30; placed OSM node n8117602488 (research pass 2026-10-30, data/stations/research/860000683/station_facts.json)"
     }
   ]
 }

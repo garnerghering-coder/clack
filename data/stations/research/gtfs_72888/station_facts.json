@@ -19,7 +19,52 @@
    "_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30; Wikipedia, \"Høje Taastrup railway station\", https://en.wikipedia.org/wiki/H%C3%B8je_Taastrup_railway_station, read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 1 (the train stops with the platform to its north)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 2",
+   "track": "2",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2 (the train stops with the platform to its north)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 2; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 3 (the train stops with the platform to its north)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 4",
+   "track": "4",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 4 (the train stops with the platform to its south)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 11",
+   "track": "11",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 11 (the train stops with the platform to its north)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 11; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 12",
+   "track": "12",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 12 (the train stops with the platform to its south)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 12; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "escalator",
@@ -290,7 +335,7 @@
  ],
  "plans": [],
  "open": [
-  "OSM has almost nothing here (one footbridge, no lifts/stairs/escalators/entrances): per-platform lift and stair positions unknown; DSB gives only general text.",
+  "OSM has almost nothing here (one footbridge, no lifts/stairs/escalators/entrances): per-platform lift and stair positions unknown; DSB gives only general text. [Lift follow-up 2026-10-30: Not settled.]",
   "Whether toilets and the waiting room are usable while the forhal is closed (week 35 – end of 2026): not stated.",
   "7-Eleven hours: DSB table vs DSB body text conflict; not in the fetched 7-Eleven list.",
   "Whether the pharmacy and greengrocer are in the station building: OSM position only.",

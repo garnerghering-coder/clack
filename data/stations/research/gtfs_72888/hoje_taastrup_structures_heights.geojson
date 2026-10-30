@@ -1,0 +1,2660 @@
+{
+ "type": "FeatureCollection",
+ "name": "hoje_taastrup_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m DVR90",
+ "platform_surface_m": 26.12,
+ "track_bed_m": 25.35,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2691374,
+       55.64798100000001
+      ],
+      [
+       12.268880399999999,
+       55.647671
+      ],
+      [
+       12.2689036,
+       55.64764889999999
+      ],
+      [
+       12.2694857,
+       55.647714300000004
+      ],
+      [
+       12.269432799999999,
+       55.647872400000004
+      ],
+      [
+       12.269609500000001,
+       55.64789319999999
+      ],
+      [
+       12.269616,
+       55.6478826
+      ],
+      [
+       12.269779599999998,
+       55.6479022
+      ],
+      [
+       12.269773999999998,
+       55.647911399999984
+      ],
+      [
+       12.2698463,
+       55.6479185
+      ],
+      [
+       12.2698028,
+       55.64805459999999
+      ],
+      [
+       12.2697478,
+       55.6480509
+      ],
+      [
+       12.2695045,
+       55.648750799999995
+      ],
+      [
+       12.269740099999998,
+       55.64877739999999
+      ],
+      [
+       12.2698513,
+       55.648790399999996
+      ],
+      [
+       12.2697938,
+       55.648952799999996
+      ],
+      [
+       12.2696815,
+       55.6489415
+      ],
+      [
+       12.2696768,
+       55.64894089999999
+      ],
+      [
+       12.269673599999999,
+       55.64895159999998
+      ],
+      [
+       12.2694509,
+       55.64892679999999
+      ],
+      [
+       12.2694542,
+       55.6489191
+      ],
+      [
+       12.2694444,
+       55.648917799999985
+      ],
+      [
+       12.2692497,
+       55.649468199999994
+      ],
+      [
+       12.269305399999999,
+       55.64947509999999
+      ],
+      [
+       12.2692663,
+       55.649576399999994
+      ],
+      [
+       12.269198199999998,
+       55.649568699999996
+      ],
+      [
+       12.269194599999997,
+       55.6495785
+      ],
+      [
+       12.2690324,
+       55.649560499999986
+      ],
+      [
+       12.2690346,
+       55.6495507
+      ],
+      [
+       12.2688572,
+       55.6495315
+      ],
+      [
+       12.2687515,
+       55.649815399999994
+      ],
+      [
+       12.268590800000002,
+       55.6497983
+      ],
+      [
+       12.2685778,
+       55.64983539999999
+      ],
+      [
+       12.2685033,
+       55.6498279
+      ],
+      [
+       12.2685184,
+       55.649790499999995
+      ],
+      [
+       12.2683512,
+       55.649770499999995
+      ],
+      [
+       12.268358099999999,
+       55.649754399999985
+      ],
+      [
+       12.268298,
+       55.6497463
+      ],
+      [
+       12.2683403,
+       55.6496308
+      ],
+      [
+       12.268540799999998,
+       55.6496561
+      ],
+      [
+       12.2685481,
+       55.64962789999999
+      ],
+      [
+       12.2685285,
+       55.64962580000001
+      ],
+      [
+       12.2685517,
+       55.64955799999999
+      ],
+      [
+       12.268573399999998,
+       55.64955969999999
+      ],
+      [
+       12.2685792,
+       55.6495327
+      ],
+      [
+       12.2683844,
+       55.64951149999999
+      ],
+      [
+       12.268429800000002,
+       55.6493955
+      ],
+      [
+       12.2684776,
+       55.649402
+      ],
+      [
+       12.268483599999998,
+       55.649387299999994
+      ],
+      [
+       12.2689217,
+       55.6494334
+      ],
+      [
+       12.2690129,
+       55.6491552
+      ],
+      [
+       12.2689905,
+       55.649151899999985
+      ],
+      [
+       12.2690267,
+       55.64904249999999
+      ],
+      [
+       12.269044,
+       55.648995899999996
+      ],
+      [
+       12.2690527,
+       55.64897589999999
+      ],
+      [
+       12.269028800000001,
+       55.6489742
+      ],
+      [
+       12.2690846,
+       55.6488104
+      ],
+      [
+       12.2691027,
+       55.6487626
+      ],
+      [
+       12.269149,
+       55.648618
+      ],
+      [
+       12.2691729,
+       55.6486192
+      ],
+      [
+       12.269177299999999,
+       55.648609
+      ],
+      [
+       12.2691932,
+       55.6485587
+      ],
+      [
+       12.269234499999998,
+       55.6484435
+      ],
+      [
+       12.2692634,
+       55.648446400000005
+      ],
+      [
+       12.2694075,
+       55.64801289999999
+      ],
+      [
+       12.2691374,
+       55.64798100000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w26176704",
+    "name": "retail",
+    "osm_tags": {
+     "building": "retail",
+     "layer": "3"
+    },
+    "ground_min_m": 26.17,
+    "ground_median_m": 32.63,
+    "ground_max_m": 32.9,
+    "roof_top_median_m": 39.27,
+    "roof_top_p95_m": 44.14,
+    "laser_points": 13995,
+    "height_above_ground_median_m": 6.64,
+    "height_above_ground_p95_m": 11.51,
+    "top_above_platform_m": 13.15,
+    "base_above_platform_m": 0.05,
+    "source": "Outline OSM w26176704 (ODbL); roof = median of 13995 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2660444,
+       55.647840800000004
+      ],
+      [
+       12.266140599999998,
+       55.647839499999996
+      ],
+      [
+       12.2661932,
+       55.6490382
+      ],
+      [
+       12.266090699999998,
+       55.64903949999999
+      ],
+      [
+       12.2659948,
+       55.64904090000001
+      ],
+      [
+       12.2659422,
+       55.6478422
+      ],
+      [
+       12.2660444,
+       55.647840800000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w496715675",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 25.15,
+    "ground_median_m": 28.24,
+    "ground_max_m": 33.83,
+    "roof_top_median_m": 33.39,
+    "roof_top_p95_m": 36.43,
+    "laser_points": 80,
+    "height_above_ground_median_m": 5.15,
+    "height_above_ground_p95_m": 8.19,
+    "top_above_platform_m": 7.27,
+    "base_above_platform_m": -0.97,
+    "source": "Outline OSM w496715675 (ODbL); roof = median of 80 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2691027,
+       55.6487626
+      ],
+      [
+       12.2676985,
+       55.6485964
+      ],
+      [
+       12.2676816,
+       55.648644299999994
+      ],
+      [
+       12.2690846,
+       55.6488104
+      ],
+      [
+       12.2691027,
+       55.6487626
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w846252137",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 26.23,
+    "ground_median_m": 26.32,
+    "ground_max_m": 32.74,
+    "roof_top_median_m": 29.49,
+    "roof_top_p95_m": 32.83,
+    "laser_points": 985,
+    "height_above_ground_median_m": 3.17,
+    "height_above_ground_p95_m": 6.51,
+    "top_above_platform_m": 3.37,
+    "base_above_platform_m": 0.11,
+    "source": "Outline OSM w846252137 (ODbL); roof = median of 985 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2698911,
+       55.6488932
+      ],
+      [
+       12.270632199999998,
+       55.64897640000001
+      ],
+      [
+       12.2706491,
+       55.64892849999999
+      ],
+      [
+       12.2699084,
+       55.648844999999994
+      ],
+      [
+       12.2698911,
+       55.6488932
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w846252138",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 26.08,
+    "ground_median_m": 26.14,
+    "ground_max_m": 26.22,
+    "roof_top_median_m": 29.29,
+    "roof_top_p95_m": 29.35,
+    "laser_points": 661,
+    "height_above_ground_median_m": 3.15,
+    "height_above_ground_p95_m": 3.21,
+    "top_above_platform_m": 3.17,
+    "base_above_platform_m": -0.04,
+    "source": "Outline OSM w846252138 (ODbL); roof = median of 661 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.269958000000003,
+       55.64870739999999
+      ],
+      [
+       12.270695199999999,
+       55.6487893
+      ],
+      [
+       12.2707122,
+       55.6487406
+      ],
+      [
+       12.2699761,
+       55.6486571
+      ],
+      [
+       12.269958000000003,
+       55.64870739999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w846252139",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 26.05,
+    "ground_median_m": 26.12,
+    "ground_max_m": 26.21,
+    "roof_top_median_m": 29.3,
+    "roof_top_p95_m": 29.35,
+    "laser_points": 756,
+    "height_above_ground_median_m": 3.18,
+    "height_above_ground_p95_m": 3.23,
+    "top_above_platform_m": 3.18,
+    "base_above_platform_m": -0.07,
+    "source": "Outline OSM w846252139 (ODbL); roof = median of 756 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2691932,
+       55.6485587
+      ],
+      [
+       12.267760799999998,
+       55.64841199999999
+      ],
+      [
+       12.267743800000002,
+       55.64846060000001
+      ],
+      [
+       12.269177299999999,
+       55.648609
+      ],
+      [
+       12.2691932,
+       55.6485587
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w846252140",
+    "name": "roof",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "roof"
+    },
+    "ground_min_m": 26.24,
+    "ground_median_m": 26.32,
+    "ground_max_m": 32.73,
+    "roof_top_median_m": 29.46,
+    "roof_top_p95_m": 32.73,
+    "laser_points": 1062,
+    "height_above_ground_median_m": 3.14,
+    "height_above_ground_p95_m": 6.41,
+    "top_above_platform_m": 3.34,
+    "base_above_platform_m": 0.12,
+    "source": "Outline OSM w846252140 (ODbL); roof = median of 1062 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2690267,
+       55.64904249999999
+      ],
+      [
+       12.269044,
+       55.648995899999996
+      ],
+      [
+       12.267614,
+       55.6488349
+      ],
+      [
+       12.267596700000002,
+       55.6488844
+      ],
+      [
+       12.2690267,
+       55.64904249999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w846252141",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 26.25,
+    "ground_median_m": 26.32,
+    "ground_max_m": 32.75,
+    "roof_top_median_m": 29.54,
+    "roof_top_p95_m": 35.86,
+    "laser_points": 738,
+    "height_above_ground_median_m": 3.22,
+    "height_above_ground_p95_m": 9.54,
+    "top_above_platform_m": 3.42,
+    "base_above_platform_m": 0.13,
+    "source": "Outline OSM w846252141 (ODbL); roof = median of 738 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.269708199999998,
+       55.649454699999986
+      ],
+      [
+       12.269768199999998,
+       55.64946169999999
+      ],
+      [
+       12.2697823,
+       55.6494234
+      ],
+      [
+       12.269722299999998,
+       55.6494164
+      ],
+      [
+       12.269708199999998,
+       55.649454699999986
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142805",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "3"
+    },
+    "ground_min_m": 32.68,
+    "ground_median_m": 32.7,
+    "ground_max_m": 32.72,
+    "roof_top_median_m": 35.92,
+    "roof_top_p95_m": 36.54,
+    "laser_points": 176,
+    "height_above_ground_median_m": 3.22,
+    "height_above_ground_p95_m": 3.84,
+    "top_above_platform_m": 9.8,
+    "base_above_platform_m": 6.56,
+    "source": "Outline OSM w1123142805 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2703975,
+       55.64951979999999
+      ],
+      [
+       12.2704614,
+       55.649527799999994
+      ],
+      [
+       12.2704829,
+       55.6494729
+      ],
+      [
+       12.270419,
+       55.649464899999984
+      ],
+      [
+       12.2703975,
+       55.64951979999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142806",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.57,
+    "ground_median_m": 28.7,
+    "ground_max_m": 28.85,
+    "roof_top_median_m": 30.99,
+    "roof_top_p95_m": 31.53,
+    "laser_points": 118,
+    "height_above_ground_median_m": 2.29,
+    "height_above_ground_p95_m": 2.83,
+    "top_above_platform_m": 4.87,
+    "base_above_platform_m": 2.45,
+    "source": "Outline OSM w1123142806 (ODbL); roof = median of 118 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270494,
+       55.649530500000004
+      ],
+      [
+       12.2705579,
+       55.64953839999999
+      ],
+      [
+       12.270579499999998,
+       55.649483499999995
+      ],
+      [
+       12.2705156,
+       55.64947550000001
+      ],
+      [
+       12.270494,
+       55.649530500000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142807",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.4,
+    "ground_median_m": 28.57,
+    "ground_max_m": 28.7,
+    "roof_top_median_m": 30.87,
+    "roof_top_p95_m": 31.36,
+    "laser_points": 123,
+    "height_above_ground_median_m": 2.3,
+    "height_above_ground_p95_m": 2.79,
+    "top_above_platform_m": 4.75,
+    "base_above_platform_m": 2.28,
+    "source": "Outline OSM w1123142807 (ODbL); roof = median of 123 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270752999999997,
+       55.6496346
+      ],
+      [
+       12.270816899999998,
+       55.64964259999999
+      ],
+      [
+       12.270838399999999,
+       55.64958769999999
+      ],
+      [
+       12.2707745,
+       55.6495797
+      ],
+      [
+       12.270752999999997,
+       55.6496346
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142808",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.12,
+    "ground_median_m": 28.25,
+    "ground_max_m": 28.84,
+    "roof_top_median_m": 31.39,
+    "roof_top_p95_m": 35.32,
+    "laser_points": 174,
+    "height_above_ground_median_m": 3.14,
+    "height_above_ground_p95_m": 7.07,
+    "top_above_platform_m": 5.27,
+    "base_above_platform_m": 2.0,
+    "source": "Outline OSM w1123142808 (ODbL); roof = median of 174 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270847399999997,
+       55.64964609999999
+      ],
+      [
+       12.270911299999998,
+       55.649654000000005
+      ],
+      [
+       12.270932799999999,
+       55.64959909999999
+      ],
+      [
+       12.2708689,
+       55.64959109999999
+      ],
+      [
+       12.270847399999997,
+       55.64964609999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142809",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 27.98,
+    "ground_median_m": 28.12,
+    "ground_max_m": 28.28,
+    "roof_top_median_m": 30.52,
+    "roof_top_p95_m": 30.97,
+    "laser_points": 133,
+    "height_above_ground_median_m": 2.4,
+    "height_above_ground_p95_m": 2.85,
+    "top_above_platform_m": 4.4,
+    "base_above_platform_m": 1.86,
+    "source": "Outline OSM w1123142809 (ODbL); roof = median of 133 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270562599999998,
+       55.6496113
+      ],
+      [
+       12.2706264,
+       55.64961929999999
+      ],
+      [
+       12.270648,
+       55.64956439999999
+      ],
+      [
+       12.2705841,
+       55.6495564
+      ],
+      [
+       12.270562599999998,
+       55.6496113
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142810",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.4,
+    "ground_median_m": 28.56,
+    "ground_max_m": 28.91,
+    "roof_top_median_m": 30.98,
+    "roof_top_p95_m": 35.52,
+    "laser_points": 194,
+    "height_above_ground_median_m": 2.43,
+    "height_above_ground_p95_m": 6.96,
+    "top_above_platform_m": 4.86,
+    "base_above_platform_m": 2.28,
+    "source": "Outline OSM w1123142810 (ODbL); roof = median of 194 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2706591,
+       55.64962199999999
+      ],
+      [
+       12.270723,
+       55.649629899999994
+      ],
+      [
+       12.270744500000001,
+       55.649574999999984
+      ],
+      [
+       12.2706807,
+       55.649567
+      ],
+      [
+       12.2706591,
+       55.64962199999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142811",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.26,
+    "ground_median_m": 28.4,
+    "ground_max_m": 28.89,
+    "roof_top_median_m": 30.74,
+    "roof_top_p95_m": 32.96,
+    "laser_points": 125,
+    "height_above_ground_median_m": 2.34,
+    "height_above_ground_p95_m": 4.56,
+    "top_above_platform_m": 4.62,
+    "base_above_platform_m": 2.14,
+    "source": "Outline OSM w1123142811 (ODbL); roof = median of 125 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270470399999999,
+       55.6495987
+      ],
+      [
+       12.2705343,
+       55.6496067
+      ],
+      [
+       12.2705558,
+       55.64955170000001
+      ],
+      [
+       12.270491899999998,
+       55.6495437
+      ],
+      [
+       12.270470399999999,
+       55.6495987
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142812",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.57,
+    "ground_median_m": 28.7,
+    "ground_max_m": 29.04,
+    "roof_top_median_m": 31.04,
+    "roof_top_p95_m": 31.74,
+    "laser_points": 176,
+    "height_above_ground_median_m": 2.34,
+    "height_above_ground_p95_m": 3.04,
+    "top_above_platform_m": 4.92,
+    "base_above_platform_m": 2.45,
+    "source": "Outline OSM w1123142812 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.270373799999998,
+       55.6495881
+      ],
+      [
+       12.2704377,
+       55.649595999999995
+      ],
+      [
+       12.2704592,
+       55.64954109999999
+      ],
+      [
+       12.2703953,
+       55.64953309999999
+      ],
+      [
+       12.270373799999998,
+       55.6495881
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142813",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 28.7,
+    "ground_median_m": 28.87,
+    "ground_max_m": 29.91,
+    "roof_top_median_m": 31.17,
+    "roof_top_p95_m": 31.68,
+    "laser_points": 143,
+    "height_above_ground_median_m": 2.3,
+    "height_above_ground_p95_m": 2.81,
+    "top_above_platform_m": 5.05,
+    "base_above_platform_m": 2.58,
+    "source": "Outline OSM w1123142813 (ODbL); roof = median of 143 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2694943,
+       55.64949409999999
+      ],
+      [
+       12.2696815,
+       55.6489415
+      ],
+      [
+       12.2697938,
+       55.648952799999996
+      ],
+      [
+       12.269590699999998,
+       55.64950489999999
+      ],
+      [
+       12.2694943,
+       55.64949409999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142814",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "3"
+    },
+    "ground_min_m": 32.62,
+    "ground_median_m": 32.67,
+    "ground_max_m": 32.74,
+    "roof_top_median_m": 37.14,
+    "roof_top_p95_m": 37.2,
+    "laser_points": 657,
+    "height_above_ground_median_m": 4.47,
+    "height_above_ground_p95_m": 4.53,
+    "top_above_platform_m": 11.02,
+    "base_above_platform_m": 6.5,
+    "source": "Outline OSM w1123142814 (ODbL); roof = median of 657 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.269981599999998,
+       55.64807799999999
+      ],
+      [
+       12.269740099999998,
+       55.64877739999999
+      ],
+      [
+       12.2698513,
+       55.648790399999996
+      ],
+      [
+       12.2700805,
+       55.648089
+      ],
+      [
+       12.269981599999998,
+       55.64807799999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1123142815",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "3"
+    },
+    "ground_min_m": 26.18,
+    "ground_median_m": 32.66,
+    "ground_max_m": 32.74,
+    "roof_top_median_m": 37.14,
+    "roof_top_p95_m": 37.2,
+    "laser_points": 963,
+    "height_above_ground_median_m": 4.48,
+    "height_above_ground_p95_m": 4.54,
+    "top_above_platform_m": 11.02,
+    "base_above_platform_m": 0.06,
+    "source": "Outline OSM w1123142815 (ODbL); roof = median of 963 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.266527699999997,
+       55.648748
+      ],
+      [
+       12.2665367,
+       55.648720899999994
+      ],
+      [
+       12.2666246,
+       55.64873029999999
+      ],
+      [
+       12.2666156,
+       55.648757399999994
+      ],
+      [
+       12.266527699999997,
+       55.648748
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1524349680",
+    "name": "service",
+    "osm_tags": {
+     "building": "service"
+    },
+    "ground_min_m": 26.44,
+    "ground_median_m": 26.47,
+    "ground_max_m": 26.51,
+    "roof_top_median_m": 29.69,
+    "roof_top_p95_m": 29.72,
+    "laser_points": 29,
+    "height_above_ground_median_m": 3.22,
+    "height_above_ground_p95_m": 3.25,
+    "top_above_platform_m": 3.57,
+    "base_above_platform_m": 0.32,
+    "source": "Outline OSM w1524349680 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2666156,
+       55.64850249999999
+      ],
+      [
+       12.2666247,
+       55.64847540000001
+      ],
+      [
+       12.2667126,
+       55.6484848
+      ],
+      [
+       12.266703499999998,
+       55.648511899999995
+      ],
+      [
+       12.2666156,
+       55.64850249999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1524349681",
+    "name": "service",
+    "osm_tags": {
+     "building": "service"
+    },
+    "ground_min_m": 26.46,
+    "ground_median_m": 26.48,
+    "ground_max_m": 26.52,
+    "roof_top_median_m": 29.65,
+    "roof_top_p95_m": 29.7,
+    "laser_points": 53,
+    "height_above_ground_median_m": 3.17,
+    "height_above_ground_p95_m": 3.22,
+    "top_above_platform_m": 3.53,
+    "base_above_platform_m": 0.34,
+    "source": "Outline OSM w1524349681 (ODbL); roof = median of 53 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.266670299999998,
+       55.64833759999999
+      ],
+      [
+       12.266679399999997,
+       55.6483105
+      ],
+      [
+       12.266767199999999,
+       55.64831989999999
+      ],
+      [
+       12.2667582,
+       55.64834699999999
+      ],
+      [
+       12.266670299999998,
+       55.64833759999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1524349682",
+    "name": "service",
+    "osm_tags": {
+     "building": "service"
+    },
+    "ground_min_m": 26.43,
+    "ground_median_m": 26.46,
+    "ground_max_m": 26.5,
+    "roof_top_median_m": 29.62,
+    "roof_top_p95_m": 29.68,
+    "laser_points": 27,
+    "height_above_ground_median_m": 3.16,
+    "height_above_ground_p95_m": 3.22,
+    "top_above_platform_m": 3.5,
+    "base_above_platform_m": 0.31,
+    "source": "Outline OSM w1524349682 (ODbL); roof = median of 27 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.269458907173567,
+       55.64893555323936
+      ],
+      [
+       12.26944753203122,
+       55.64898980127634
+      ],
+      [
+       12.269431667718766,
+       55.64899022435735
+      ],
+      [
+       12.269432415907962,
+       55.64899919518321
+      ],
+      [
+       12.269464144539675,
+       55.64899834901886
+      ],
+      [
+       12.269465640933792,
+       55.64901629066997
+      ],
+      [
+       12.269481505256243,
+       55.64901586758444
+      ],
+      [
+       12.269480757055359,
+       55.64900689675905
+      ],
+      [
+       12.269544214326492,
+       55.649005204397014
+      ],
+      [
+       12.269547207190396,
+       55.64904108769624
+      ],
+      [
+       12.269515478526756,
+       55.649041933882486
+      ],
+      [
+       12.269516226736556,
+       55.64905090470752
+      ],
+      [
+       12.269579684076607,
+       55.64904921232628
+      ],
+      [
+       12.26958043230129,
+       55.649058183150736
+      ],
+      [
+       12.269612909208345,
+       55.64906630777169
+      ],
+      [
+       12.269607671590872,
+       55.64900351200222
+      ],
+      [
+       12.26963865198392,
+       55.6489936949685
+      ],
+      [
+       12.26965152333783,
+       55.64895738856505
+      ],
+      [
+       12.269588066150812,
+       55.648959080981626
+      ],
+      [
+       12.269587317927156,
+       55.648950110157095
+      ],
+      [
+       12.269555589338344,
+       55.64895095635279
+      ],
+      [
+       12.26955409290676,
+       55.64893301470311
+      ],
+      [
+       12.269522364330719,
+       55.64893386089006
+      ],
+      [
+       12.26952311253907,
+       55.64894283171519
+      ],
+      [
+       12.269475519660995,
+       55.648944100980664
+      ],
+      [
+       12.269474771463488,
+       55.6489351301551
+      ],
+      [
+       12.269458907173567,
+       55.64893555323936
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "hall_roof_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 32.67,
+    "top_p10_m": 32.62,
+    "top_p90_m": 34.04,
+    "laser_points": 89,
+    "top_above_platform_m": 6.55,
+    "area_m2": 104.0,
+    "underside_m": null,
+    "multi_return_share": 0.06,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "ground_min_m": 32.59,
+    "ground_median_m": 32.64,
+    "ground_max_m": 32.73
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.26885921119178,
+       55.64879870178772
+      ],
+      [
+       12.268906803922782,
+       55.648797432763416
+      ],
+      [
+       12.268909048115502,
+       55.64882434525588
+      ],
+      [
+       12.2688773196069,
+       55.648825191274994
+      ],
+      [
+       12.268896924172981,
+       55.648869622420904
+      ],
+      [
+       12.268849331353962,
+       55.648870891442456
+      ],
+      [
+       12.268851575513436,
+       55.648897803936165
+      ],
+      [
+       12.268803982658087,
+       55.648899072940544
+      ],
+      [
+       12.268805478744824,
+       55.64891701460376
+      ],
+      [
+       12.268789614451634,
+       55.64891743760142
+      ],
+      [
+       12.268790362492021,
+       55.64892640843313
+      ],
+      [
+       12.268806226788826,
+       55.64892598543534
+      ],
+      [
+       12.26879410270029,
+       55.648971262591424
+      ],
+      [
+       12.26888928858323,
+       55.64896872456972
+      ],
+      [
+       12.26888779245528,
+       55.64895078290815
+      ],
+      [
+       12.268935385369364,
+       55.64894951387049
+      ],
+      [
+       12.268937629594452,
+       55.648976426361536
+      ],
+      [
+       12.26896935822342,
+       55.64897558032534
+      ],
+      [
+       12.268970106306524,
+       55.64898455115537
+      ],
+      [
+       12.269018447352021,
+       55.64899225291486
+      ],
+      [
+       12.2690132107003,
+       55.64892945710738
+      ],
+      [
+       12.269029074994808,
+       55.648929034080766
+      ],
+      [
+       12.269026082617223,
+       55.648893150762326
+      ],
+      [
+       12.269041946896856,
+       55.648892727734236
+      ],
+      [
+       12.269038206416294,
+       55.648847873586455
+      ],
+      [
+       12.269054070677427,
+       55.648847450557014
+      ],
+      [
+       12.269051826383313,
+       55.64882053806852
+      ],
+      [
+       12.269083554882627,
+       55.64881969200436
+      ],
+      [
+       12.269082806778206,
+       55.64881072117512
+      ],
+      [
+       12.269003485544825,
+       55.64881283631946
+      ],
+      [
+       12.268986125132678,
+       55.64879531768193
+      ],
+      [
+       12.268938532408006,
+       55.64879658673697
+      ],
+      [
+       12.268937784337382,
+       55.64878761590637
+      ],
+      [
+       12.268858463139225,
+       55.64878973095642
+      ],
+      [
+       12.26885921119178,
+       55.64879870178772
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "hall_roof_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 32.67,
+    "top_p10_m": 32.48,
+    "top_p90_m": 33.41,
+    "laser_points": 2335,
+    "top_above_platform_m": 6.55,
+    "area_m2": 228.5,
+    "underside_m": null,
+    "multi_return_share": 0.17,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "ground_min_m": 24.97,
+    "ground_median_m": 32.6,
+    "ground_max_m": 32.75
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.2695467626085,
+       55.64865449603059
+      ],
+      [
+       12.269536884064937,
+       55.648726685725975
+      ],
+      [
+       12.269521019860262,
+       55.64872710881722
+      ],
+      [
+       12.269506652052872,
+       55.64874547355758
+      ],
+      [
+       12.269539128683814,
+       55.64875359820185
+      ],
+      [
+       12.269537632270806,
+       55.64873565655127
+      ],
+      [
+       12.269585224893138,
+       55.64873438726483
+      ],
+      [
+       12.269586721327835,
+       55.64875232891454
+      ],
+      [
+       12.269602585541664,
+       55.64875190581468
+      ],
+      [
+       12.269616205081974,
+       55.648724570239025
+      ],
+      [
+       12.269600340879409,
+       55.64872499334051
+      ],
+      [
+       12.269597348002314,
+       55.64868911004131
+      ],
+      [
+       12.26956561962484,
+       55.64868995623702
+      ],
+      [
+       12.269563374993137,
+       55.648663043761566
+      ],
+      [
+       12.269626831703027,
+       55.64866135136367
+      ],
+      [
+       12.269640451197322,
+       55.648634015785575
+      ],
+      [
+       12.2696721795272,
+       55.64863316957108
+      ],
+      [
+       12.269671431293443,
+       55.64862419874682
+      ],
+      [
+       12.269655567132327,
+       55.64862462185495
+      ],
+      [
+       12.269652574215975,
+       55.64858873855716
+      ],
+      [
+       12.26958911762513,
+       55.64859043096692
+      ],
+      [
+       12.269587621198403,
+       55.64857248931676
+      ],
+      [
+       12.269571757056864,
+       55.6485729124138
+      ],
+      [
+       12.269576246320426,
+       55.64862673736486
+      ],
+      [
+       12.26956038215678,
+       55.6486271604607
+      ],
+      [
+       12.269562626783415,
+       55.64865407293638
+      ],
+      [
+       12.2695467626085,
+       55.64865449603059
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "hall_roof_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 32.63,
+    "top_p10_m": 32.61,
+    "top_p90_m": 32.7,
+    "laser_points": 77,
+    "top_above_platform_m": 6.51,
+    "area_m2": 74.0,
+    "underside_m": null,
+    "multi_return_share": 0.03,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "ground_min_m": 32.58,
+    "ground_median_m": 32.64,
+    "ground_max_m": 32.66
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.268958291696515,
+       55.64865220741511
+      ],
+      [
+       12.26896053591235,
+       55.648679119906845
+      ],
+      [
+       12.26891369138933,
+       55.64868935978119
+      ],
+      [
+       12.2689144394517,
+       55.648698330612135
+      ],
+      [
+       12.268930303654338,
+       55.64869790759944
+      ],
+      [
+       12.268934043990585,
+       55.64874276175316
+      ],
+      [
+       12.269078318160528,
+       55.648756896199174
+      ],
+      [
+       12.26907757005906,
+       55.64874792536978
+      ],
+      [
+       12.269093434279169,
+       55.648747502335766
+      ],
+      [
+       12.26909118996645,
+       55.64872058984788
+      ],
+      [
+       12.26910705417529,
+       55.64872016681224
+      ],
+      [
+       12.269103313644463,
+       55.64867531266609
+      ],
+      [
+       12.26911917783481,
+       55.6486748896291
+      ],
+      [
+       12.269118429726296,
+       55.648665918799956
+      ],
+      [
+       12.269086701352409,
+       55.64866676487161
+      ],
+      [
+       12.269085205151105,
+       55.64864882321269
+      ],
+      [
+       12.26906934097076,
+       55.64864924624516
+      ],
+      [
+       12.269057217260269,
+       55.648694523424155
+      ],
+      [
+       12.269041353061006,
+       55.648694946453226
+      ],
+      [
+       12.26904210115271,
+       55.64870391728303
+      ],
+      [
+       12.268994508541544,
+       55.64870518635841
+      ],
+      [
+       12.269005136163207,
+       55.64864196752437
+      ],
+      [
+       12.269036864519624,
+       55.64864112147406
+      ],
+      [
+       12.269036116430872,
+       55.64863215064412
+      ],
+      [
+       12.269020252256489,
+       55.648632573670156
+      ],
+      [
+       12.269018008003608,
+       55.64860566117982
+      ],
+      [
+       12.269049736330265,
+       55.64860481512654
+      ],
+      [
+       12.269048988239586,
+       55.64859584429665
+      ],
+      [
+       12.268984783523242,
+       55.64858856556402
+      ],
+      [
+       12.268972659730805,
+       55.648633842736004
+      ],
+      [
+       12.26894093137824,
+       55.648634688769654
+      ],
+      [
+       12.26894242751279,
+       55.648652630431194
+      ],
+      [
+       12.268958291696515,
+       55.64865220741511
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "hall_roof_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 32.7,
+    "top_p10_m": 32.41,
+    "top_p90_m": 33.75,
+    "laser_points": 1034,
+    "top_above_platform_m": 6.58,
+    "area_m2": 113.0,
+    "underside_m": null,
+    "multi_return_share": 0.14,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "ground_min_m": 25.24,
+    "ground_median_m": 32.62,
+    "ground_max_m": 32.75
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.269639854396821,
+       55.64843623453797
+      ],
+      [
+       12.269627731403736,
+       55.648481511765674
+      ],
+      [
+       12.26961186729961,
+       55.64848193486743
+      ],
+      [
+       12.269614111949357,
+       55.648508847342384
+      ],
+      [
+       12.269629976064326,
+       55.64850842424019
+      ],
+      [
+       12.269629227843707,
+       55.64849945341536
+      ],
+      [
+       12.269676820175237,
+       55.648498184096916
+      ],
+      [
+       12.269680561336774,
+       55.6485430382187
+      ],
+      [
+       12.269712289591828,
+       55.64854219199475
+      ],
+      [
+       12.269713786073856,
+       55.648560133642754
+      ],
+      [
+       12.269729650207978,
+       55.64855971052742
+      ],
+      [
+       12.269728153718722,
+       55.648541768879696
+      ],
+      [
+       12.269791610222077,
+       55.64854007639901
+      ],
+      [
+       12.269790861963626,
+       55.64853110557568
+      ],
+      [
+       12.269742521350397,
+       55.64852340411508
+      ],
+      [
+       12.269739528365866,
+       55.6484875208198
+      ],
+      [
+       12.269786372421768,
+       55.64847728063531
+      ],
+      [
+       12.269799991745177,
+       55.64844994504099
+      ],
+      [
+       12.269752399477998,
+       55.64845121440647
+      ],
+      [
+       12.269751651230992,
+       55.64844224358266
+      ],
+      [
+       12.26970405897086,
+       55.64844351292929
+      ],
+      [
+       12.269703310735123,
+       55.648434542105036
+      ],
+      [
+       12.269639854396821,
+       55.64843623453797
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "hall_roof_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 32.63,
+    "top_p10_m": 32.6,
+    "top_p90_m": 32.66,
+    "laser_points": 53,
+    "top_above_platform_m": 6.51,
+    "area_m2": 87.0,
+    "underside_m": null,
+    "multi_return_share": 0.0,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)",
+    "ground_min_m": 32.59,
+    "ground_median_m": 32.62,
+    "ground_max_m": 32.66
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.272892200565526,
+       55.64911367274255
+      ],
+      [
+       12.272895195469756,
+       55.64914954354664
+      ],
+      [
+       12.27295098935795,
+       55.649148163863515
+      ],
+      [
+       12.272959401755129,
+       55.64915682021037
+      ],
+      [
+       12.27301519565027,
+       55.64915544049791
+      ],
+      [
+       12.27302360806308,
+       55.64916409684015
+      ],
+      [
+       12.27307940196517,
+       55.64916271709838
+      ],
+      [
+       12.273087814393607,
+       55.64917137343601
+      ],
+      [
+       12.273143608302647,
+       55.64916999366493
+      ],
+      [
+       12.273152020746718,
+       55.64917864999795
+      ],
+      [
+       12.273207814662703,
+       55.649177270197534
+      ],
+      [
+       12.273216227122402,
+       55.649185926525945
+      ],
+      [
+       12.273529763636716,
+       55.649213756501226
+      ],
+      [
+       12.273537259339498,
+       55.64922230865702
+      ],
+      [
+       12.273640646315334,
+       55.64921965781433
+      ],
+      [
+       12.273681536729478,
+       55.64923643764241
+      ],
+      [
+       12.273761585750574,
+       55.649243290835095
+      ],
+      [
+       12.273758590043897,
+       55.649207420062595
+      ],
+      [
+       12.273726112202432,
+       55.64919929655216
+      ],
+      [
+       12.273670318282562,
+       55.64920067658859
+      ],
+      [
+       12.273661905720513,
+       55.64919202029265
+      ],
+      [
+       12.273348369300003,
+       55.64916419065423
+      ],
+      [
+       12.273340873649586,
+       55.649155638486164
+      ],
+      [
+       12.273269215452121,
+       55.64915744192459
+      ],
+      [
+       12.27326080298722,
+       55.64914878559985
+      ],
+      [
+       12.273205009114541,
+       55.64915016542385
+      ],
+      [
+       12.273196596665272,
+       55.6491415090945
+      ],
+      [
+       12.273140802799539,
+       55.64914288888919
+      ],
+      [
+       12.273132390365898,
+       55.64913423255522
+      ],
+      [
+       12.272892200565526,
+       55.64911367274255
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (55.7 m × 2.5 m)",
+    "top_median_m": 29.07,
+    "top_above_track_bed_m": 3.96,
+    "laser_points": 1078,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-04-28. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        12.269970616827468,
+        55.64858925273379
+       ],
+       [
+        12.269957744845753,
+        55.648625546792786
+       ],
+       [
+        12.270013538144287,
+        55.64862416845434
+       ],
+       [
+        12.270021949783741,
+        55.64863282501284
+       ],
+       [
+        12.270142864870309,
+        55.6486388289771
+       ],
+       [
+        12.270150359727472,
+        55.648647381351196
+       ],
+       [
+        12.270229658652179,
+        55.64864526605346
+       ],
+       [
+        12.270244026082679,
+        55.648626901232774
+       ],
+       [
+        12.27024327875069,
+        55.648617942788235
+       ],
+       [
+        12.27021080209455,
+        55.64860981833077
+       ],
+       [
+        12.27015500882685,
+        55.648611196758644
+       ],
+       [
+        12.270146597163194,
+        55.64860254020954
+       ],
+       [
+        12.270025682188345,
+        55.64859653624756
+       ],
+       [
+        12.270018187368235,
+        55.64858798386532
+       ],
+       [
+        12.269970616827468,
+        55.64858925273379
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        12.269909382637833,
+        55.64861771974627
+       ],
+       [
+        12.269925246356012,
+        55.648617422842726
+       ],
+       [
+        12.269921578264926,
+        55.64858945650436
+       ],
+       [
+        12.26990716025593,
+        55.64859094530801
+       ],
+       [
+        12.269909382637833,
+        55.64861771974627
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        12.269923699328112,
+        55.64858260521769
+       ],
+       [
+        12.269938117333353,
+        55.648581116412146
+       ],
+       [
+        12.269937370072475,
+        55.64857215796479
+       ],
+       [
+        12.269921527820058,
+        55.64857258052335
+       ],
+       [
+        12.269923699328112,
+        55.64858260521769
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (20.8 m × 2.6 m)",
+    "top_median_m": 29.83,
+    "top_above_track_bed_m": 4.34,
+    "laser_points": 631,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-04-28. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.267417394330296,
+       55.64847751324744
+      ],
+      [
+       12.267434752872381,
+       55.648495019743706
+      ],
+      [
+       12.267475598779667,
+       55.648494169575464
+      ],
+      [
+       12.267483093032405,
+       55.64850272212036
+      ],
+      [
+       12.267538886287095,
+       55.64850134490918
+      ],
+      [
+       12.267547297359306,
+       55.64851000164474
+      ],
+      [
+       12.267604901754781,
+       55.64850888310647
+      ],
+      [
+       12.267611501708792,
+       55.64851728113518
+      ],
+      [
+       12.267683159126022,
+       55.648515481014776
+      ],
+      [
+       12.267739910475534,
+       55.648531840014286
+      ],
+      [
+       12.267811567910533,
+       55.64853003981857
+      ],
+      [
+       12.267819979048634,
+       55.64853869653456
+      ],
+      [
+       12.267925923766514,
+       55.64854528006802
+      ],
+      [
+       12.267932523795055,
+       55.648553678078464
+      ],
+      [
+       12.26800418125671,
+       55.6485518777698
+      ],
+      [
+       12.2680125924417,
+       55.64856053447196
+      ],
+      [
+       12.268124367555881,
+       55.648566545582504
+      ],
+      [
+       12.268122124954562,
+       55.64853964544247
+      ],
+      [
+       12.268057172621944,
+       55.648523395382234
+      ],
+      [
+       12.268001379363287,
+       55.64852477282944
+      ],
+      [
+       12.267992968188723,
+       55.64851611612635
+      ],
+      [
+       12.26787205372819,
+       55.64851011003283
+      ],
+      [
+       12.267864559390047,
+       55.6485015575128
+      ],
+      [
+       12.267792902010692,
+       55.648503357738804
+      ],
+      [
+       12.267736150681719,
+       55.64848699876353
+      ],
+      [
+       12.267664493320135,
+       55.64848879891423
+      ],
+      [
+       12.267656082227088,
+       55.64848014218695
+      ],
+      [
+       12.267535167916416,
+       55.64847413575914
+      ],
+      [
+       12.267479333536127,
+       55.64845788085788
+      ],
+      [
+       12.267447627162007,
+       55.648458725920456
+      ],
+      [
+       12.267446196281481,
+       55.648476606248735
+      ],
+      [
+       12.267417394330296,
+       55.64847751324744
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (43.6 m × 2.5 m)",
+    "top_median_m": 29.57,
+    "top_above_track_bed_m": 3.93,
+    "laser_points": 730,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-04-28. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.267014809789586,
+       55.64841631624757
+      ],
+      [
+       12.267017051621538,
+       55.648443216417874
+      ],
+      [
+       12.267033663376608,
+       55.64845176449984
+      ],
+      [
+       12.267089456582584,
+       55.64845038749387
+      ],
+      [
+       12.267097867545381,
+       55.6484590442617
+      ],
+      [
+       12.26715366075832,
+       55.64845766722641
+      ],
+      [
+       12.267162071736747,
+       55.648466323989624
+      ],
+      [
+       12.267217864956642,
+       55.648464946925024
+      ],
+      [
+       12.267226275950701,
+       55.648473603683634
+      ],
+      [
+       12.267282069177554,
+       55.6484722265897
+      ],
+      [
+       12.267290480187242,
+       55.6484808833437
+      ],
+      [
+       12.267370526705278,
+       55.648487740743064
+      ],
+      [
+       12.26735092509886,
+       55.64844332170149
+      ],
+      [
+       12.267279267790588,
+       55.64844512162627
+      ],
+      [
+       12.267222516751952,
+       55.6484287624094
+      ],
+      [
+       12.267101602649856,
+       55.648422755551124
+      ],
+      [
+       12.2670941084954,
+       55.64841420298159
+      ],
+      [
+       12.267014809789586,
+       55.64841631624757
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (21.9 m × 2.5 m)",
+    "top_median_m": 29.66,
+    "top_above_track_bed_m": 3.93,
+    "laser_points": 378,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-04-28. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.268270317586271,
+       55.64840982395425
+      ],
+      [
+       12.268289172297676,
+       55.6484452719994
+      ],
+      [
+       12.268330018123567,
+       55.648444421547346
+      ],
+      [
+       12.268337512550742,
+       55.64845297403789
+      ],
+      [
+       12.268409169800698,
+       55.648451173495005
+      ],
+      [
+       12.268465921345948,
+       55.64846753215596
+      ],
+      [
+       12.26853757861367,
+       55.648465731537776
+      ],
+      [
+       12.268545989895795,
+       55.648474388202224
+      ],
+      [
+       12.268603594192227,
+       55.64847326919571
+      ],
+      [
+       12.268610194351794,
+       55.648481667168106
+      ],
+      [
+       12.268777784362332,
+       55.648486299377865
+      ],
+      [
+       12.268834536106176,
+       55.64850265786556
+      ],
+      [
+       12.268897970719435,
+       55.648500966431214
+      ],
+      [
+       12.268913086785856,
+       55.648491572590395
+      ],
+      [
+       12.268894979541528,
+       55.64846509548019
+      ],
+      [
+       12.268823322299511,
+       55.64846689630706
+      ],
+      [
+       12.26881491095856,
+       55.64845823966238
+      ],
+      [
+       12.268693996582495,
+       55.648452234378816
+      ],
+      [
+       12.268686502078546,
+       55.64844368191105
+      ],
+      [
+       12.268614844861315,
+       55.6484454826157
+      ],
+      [
+       12.26860643357062,
+       55.648436825956054
+      ],
+      [
+       12.26842131493292,
+       55.6484235414331
+      ],
+      [
+       12.268413820493539,
+       55.648414988947806
+      ],
+      [
+       12.268270317586271,
+       55.64840982395425
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (39.7 m × 2.7 m)",
+    "top_median_m": 29.5,
+    "top_above_track_bed_m": 3.93,
+    "laser_points": 1587,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2024-04-28. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705)"
+   }
+  }
+ ]
+}

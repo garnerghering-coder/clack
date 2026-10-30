@@ -8,20 +8,287 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: station building (Jernbaneplads) and perron 1 (tracks 0/1); island perron 2 (tracks 2/3/2a)",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000719)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 15 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000719)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        -3.5,
+        -3.9
+      ],
+      "level": "0",
+      "name": "Entrance (OSM)",
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; position OSM n5987468127 (data/stations/research/860000719/station_facts.json)"
+    },
+    {
+      "at": [
+        -3.5,
+        -3.9
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbaneplads)",
+      "_source": "OSM n5987468127 (already in OSM); position OSM n5987468127 (data/stations/research/860000719/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 5: tracks 0,1, class 55 cm = 0.55 m above rail, 311 m long; a recorded design class, not a survey"
+    },
+    "2–2a–3": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 5: tracks 2,3,2a, class 55 cm = 0.55 m above rail, 423 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000719/holbaek_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w149908801",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.91,
+      "base_m": -4.95,
+      "_source": "Outline OSM w149908801 (ODbL); roof = median of 1372 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w157165577",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.81,
+      "base_m": -4.83,
+      "_source": "Outline OSM w157165577 (ODbL); roof = median of 1967 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w170988641",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -4.23,
+      "_source": "Outline OSM w170988641 (ODbL); roof = median of 411 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30); underside not measured"
+    },
+    {
+      "from": "w691610645",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.49,
+      "base_m": -2.21,
+      "_source": "Outline OSM w691610645 (ODbL); roof = median of 556 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691610868",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.06,
+      "base_m": -5.72,
+      "_source": "Outline OSM w691610868 (ODbL); roof = median of 110 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691610908",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.63,
+      "base_m": 0.03,
+      "_source": "Outline OSM w691610908 (ODbL); roof = median of 170 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691611007",
+      "kind": "building",
+      "name": "building",
+      "top_m": -2.7,
+      "base_m": -5.04,
+      "_source": "Outline OSM w691611007 (ODbL); roof = median of 77 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691611013",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.8,
+      "base_m": -0.86,
+      "_source": "Outline OSM w691611013 (ODbL); roof = median of 1017 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691611033",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.46,
+      "base_m": -0.92,
+      "_source": "Outline OSM w691611033 (ODbL); roof = median of 83 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691611094",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.15,
+      "base_m": -2.32,
+      "_source": "Outline OSM w691611094 (ODbL); roof = median of 235 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691909763",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.62,
+      "base_m": -3.64,
+      "_source": "Outline OSM w691909763 (ODbL); roof = median of 3479 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691910713",
+      "kind": "building",
+      "name": "detached",
+      "top_m": 4.27,
+      "base_m": -2.32,
+      "_source": "Outline OSM w691910713 (ODbL); roof = median of 90 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691910723",
+      "kind": "building",
+      "name": "building",
+      "top_m": 0.35,
+      "base_m": -5.87,
+      "_source": "Outline OSM w691910723 (ODbL); roof = median of 446 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691910781",
+      "kind": "building",
+      "name": "building",
+      "top_m": -0.25,
+      "base_m": -2.51,
+      "_source": "Outline OSM w691910781 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    },
+    {
+      "from": "w691910986",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.58,
+      "base_m": -3.19,
+      "_source": "Outline OSM w691910986 (ODbL); roof = median of 51 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_669, PUNKTSKY_1km_6177_670); from data/stations/research/860000719/holbaek_structures_heights.geojson (metres above the platform surface, 16.45 m RH 2000, laser 2024-04-30)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000719/holbaek_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 16.45,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000719/holbaek_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (16.45 m DVR90, laser 2024-04-30)"
+  },
+  "pois": [
+    {
+      "id": "res40971797a0",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": 2.5,
+      "y": 10.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-22:00; Sa,Su 08:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n9622509134 (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)"
+    },
+    {
+      "id": "resac3eb31256",
+      "category": "waiting",
+      "name": "Ventesal/forhal",
+      "level": "0",
+      "x": -56.8,
+      "y": -46.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-23:45; Sa 05:30-23:45; Su 07:30-23:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res19a95cfb51",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": -18.9,
+      "y": 15.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n9868454926 (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)"
+    },
+    {
+      "id": "resab906a5d67",
+      "category": "bus",
+      "name": "Holbæk St. (bus station)",
+      "level": "0",
+      "x": -58.5,
+      "y": -39.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed representative point of the OSM area w148969808 (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "resb241ea381c",
+      "category": "taxi",
+      "name": "Holbæk Taxa",
+      "level": "0",
+      "x": -56.8,
+      "y": -46.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)",
+      "approximate": true,
+      "where": "in front of the station building"
+    },
+    {
+      "id": "res6682cabca4",
+      "category": "restaurant",
+      "name": "Stangen 1876",
+      "level": "0",
+      "x": 33.3,
+      "y": -48.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30; placed OSM node n8109952179 (research pass 2026-10-30, data/stations/research/860000719/station_facts.json)"
     }
   ]
 }

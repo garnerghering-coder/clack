@@ -73,7 +73,19 @@
     "lat": 62.2415158,
     "how": "OSM n7977033074",
     "_source": "OpenStreetMap n7977033074 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7977033074 to platform outlines and register track lines",
+     "source": "OSM n7977033074 geometry (level 0;1): inside rail platform outline w439373175 (ref 1); next 15.0 m from w439373176 (ref 2); register lines: 8.2 m from 'JY L1', 14.1 m from 'JY L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -91,7 +103,19 @@
     "lat": 62.2413883,
     "how": "OSM n7977045407",
     "_source": "OpenStreetMap n7977045407 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7977045407 to platform outlines and register track lines",
+     "source": "OSM n7977045407 geometry (level 0;1): inside rail platform outline w90513814 (ref 4); next 2.1 m from w439373176 (ref 2); register lines: 6.7 m from 'JY L2', 8.6 m from 'JY L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside OSM platform ref 4 and 2.1 m from OSM platform ref 2. It lies between the JY L2 (6.7 m SE) and JY L4 (8.6 m NW) lines, so it is on the island serving tracks 2 and 4. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -108,7 +132,17 @@
     "lat": 62.2418838,
     "how": "OSM n9711790489",
     "_source": "OpenStreetMap n9711790489 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9711790489 to platform outlines and register track lines",
+     "source": "OSM n9711790489 geometry (level 0;1): 10.6 m from rail platform outline w439373175 (ref 1); next 32.5 m from w439373176 (ref 2); register lines: 25.7 m from 'JY L1', 31.2 m from 'JY L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "escalator",
@@ -689,7 +723,19 @@
     "lat": 62.2415158,
     "how": "OSM n7977033074",
     "_source": "OpenStreetMap n7977033074 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7977033074 to platform outlines and register track lines",
+     "source": "OSM n7977033074 geometry (level 0;1): inside rail platform outline w439373175 (ref 1); next 15.0 m from w439373176 (ref 2); register lines: 8.2 m from 'JY L1', 14.1 m from 'JY L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -711,7 +757,19 @@
     "lat": 62.2413883,
     "how": "OSM n7977045407",
     "_source": "OpenStreetMap n7977045407 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7977045407 to platform outlines and register track lines",
+     "source": "OSM n7977045407 geometry (level 0;1): inside rail platform outline w90513814 (ref 4); next 2.1 m from w439373176 (ref 2); register lines: 6.7 m from 'JY L2', 8.6 m from 'JY L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside OSM platform ref 4 and 2.1 m from OSM platform ref 2. It lies between the JY L2 (6.7 m SE) and JY L4 (8.6 m NW) lines, so it is on the island serving tracks 2 and 4. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -730,7 +788,17 @@
     "lat": 62.2418838,
     "how": "OSM n9711790489",
     "_source": "OpenStreetMap n9711790489 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9711790489 to platform outlines and register track lines",
+     "source": "OSM n9711790489 geometry (level 0;1): 10.6 m from rail platform outline w439373175 (ref 1); next 32.5 m from w439373176 (ref 2); register lines: 25.7 m from 'JY L1', 31.2 m from 'JY L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -1226,9 +1294,9 @@
    "name": "Candy Town",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 10:00-19:30; Fr 10:00-20:00; Sa 10:00-18:00; Su 12:00-18:00",
+   "hours_source": "website (CandyTown)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.7548634,
@@ -1241,7 +1309,9 @@
     "_source": "OpenStreetMap n12147904321 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12147904321 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12147904321 (ODbL), read 2026-10-30; https://candytown.fi/pages/jyvaskyla-matkakeskus, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-To 10:00-19:30, Pe 10:00-20:00, La 10:00-18:00, Su 12:00-18:00"
   }
  ],
  "plans": [
@@ -1259,7 +1329,7 @@
   "Visit Jyväskylä links an area map of the Matkakeskus (https://citynomadi.com/route/1dfd2d8ab5b2a662b58d9378f8afeac3, showing bus/train platforms, services, parking); not opened in this pass.",
   "Signposted floor names and how OSM level 1 relates to the main hall: not settled (the area map and any owner floor plan were not read).",
   "Whether Väylävirasto's 'Messusilta' and 'travel-centre overpass to Lutakko' are one structure.",
-  "Which way the Matkakeskus escalators run, and where lift n9711790489 opens: OSM only.",
+  "Which way the Matkakeskus escalators run, and where lift n9711790489 opens: OSM only. [Lift follow-up 2026-10-30: n9711790489 (0;1) is not a platform lift: it is 10.6 m from platform 1 and 25.7 m from the JY L1 line. It lands off the platform toward the Matkakeskus. All three OSM lifts lie in the north-east part (0.79–0.87 along the JY L1 line from its south-west end), but VR places a mid-platform lift at the Tampere end. Either that lift is missing from OSM or the 'Tampere end' means something else; this is unresolved. Escalator direction is not settled.]",
   "Platform 3 is shown in OSM with stairs from Kilpisen silta but Väylävirasto says it has no passenger signage and is not in passenger use; Digitraffic short platforms 23/24 not described by any owner text.",
   "Picnic, Shalimar, Musta Kynnys: no own-website hours could be read (store finder blank / robots block); OSM used.",
   "Toilet fee amount not given.",

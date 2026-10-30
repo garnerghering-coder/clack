@@ -22,6 +22,169 @@
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: no numbered platforms (underground; OSM and Banedanmark's lines don't number them). The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        -80.5,
+        91.3
+      ],
+      "level": "0",
+      "name": "Nørre Voldgade main entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; position OSM n6048840409 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -84.4,
+        34.1
+      ],
+      "level": "0",
+      "name": "Metro entrance (Frederiksborggade)",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; Wikipedia, \"Nørreport railway station\", https://en.wikipedia.org/wiki/N%C3%B8rreport_railway_station, read 2026-10-30; position OSM n2932351381 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -84.4,
+        34.1
+      ],
+      "level": "0",
+      "name": "Entrance (Frederiksborggade)",
+      "_source": "OSM n2932351381 (already in OSM); position OSM n2932351381 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -78.5,
+        38.3
+      ],
+      "level": "0",
+      "name": "Entrance (Frederiksborggade)",
+      "_source": "OSM n5703164345 (already in OSM); position OSM n5703164345 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -78.5,
+        38.3
+      ],
+      "level": "0",
+      "name": "Entrance (Frederiksborggade)",
+      "_source": "OSM n5703164347 (already in OSM); position OSM n5703164347 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -24.4,
+        29.9
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6048839935 (already in OSM); position OSM n6048839935 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -17.1,
+        21.1
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6048839936 (already in OSM); position OSM n6048839936 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -60.7,
+        83.1
+      ],
+      "level": "0",
+      "name": "Entrance (Frederiksborggade)",
+      "_source": "OSM n6048840265 (already in OSM); position OSM n6048840265 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -75.2,
+        99.7
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6048840390 (already in OSM); position OSM n6048840390 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -80.5,
+        91.3
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6048840409 (already in OSM); position OSM n6048840409 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -110.9,
+        132.9
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6048840412 (already in OSM); position OSM n6048840412 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -60.1,
+        83.6
+      ],
+      "level": "0",
+      "name": "Entrance (Frederiksborggade)",
+      "_source": "OSM n6050668415 (already in OSM); position OSM n6050668415 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -63.0,
+        59.5
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6050668471 (already in OSM); position OSM n6050668471 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -60.9,
+        57.2
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6050668472 (already in OSM); position OSM n6050668472 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -102.3,
+        105.4
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6050674868 (already in OSM); position OSM n6050674868 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        -99.9,
+        105.5
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6050674869 (already in OSM); position OSM n6050674869 (data/stations/research/860000646/station_facts.json)"
+    },
+    {
+      "at": [
+        9.3,
+        -16.6
+      ],
+      "level": "0",
+      "name": "Entrance (Nørre Voldgade)",
+      "_source": "OSM n6050700959 (already in OSM); position OSM n6050700959 (data/stations/research/860000646/station_facts.json)"
     }
   ]
 }

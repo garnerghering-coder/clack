@@ -107,7 +107,7 @@
   "terrain": {
     "geotiff": "data/stations/research/fi_JY/jyvaskyla_ground_1m.tif",
     "crs": 3067,
-    "reference_m": 82,
+    "reference_m": 82.0,
     "step_m": 5,
     "_source": "ground from the laser's ground points, 1 m (data/stations/research/fi_JY/jyvaskyla_ground_1m.tif), sampled every 5 m; Laserkeilausaineisto 0,5 p, © Maanmittauslaitos, CC BY 4.0. Heights above the platform surface (82.0 m N2000, laser 2023-06-10)"
   },
@@ -118,8 +118,8 @@
       "category": "locker",
       "name": "Säilytyslokerot",
       "level": "0",
-      "x": -8.6,
-      "y": -55.5,
+      "x": -378.0,
+      "y": -67.0,
       "fee": null,
       "opening_hours": "Mo-Sa 06:00-22:00; Su 08:00-22:00",
       "hours_source": "website",

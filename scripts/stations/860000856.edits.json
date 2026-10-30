@@ -8,21 +8,228 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Regional platforms: two side platforms in a trench (cutting)",
+      "order": 0,
+      "name_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; Wikipedia, \"Ørestad railway station\", https://en.wikipedia.org/wiki/%C3%98restad_railway_station, read 2026-10-30; Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000856)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 17 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000856)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: no entrance node: the elevated platforms reach no exit at street level. The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
     }
   ],
-  "entrances": []
+  "entrances": [],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 11: tracks 1, class 55 cm = 0.55 m above rail, 322 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 11: tracks 2, class 55 cm = 0.55 m above rail, 322 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000856/orestad_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w48821420",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.76,
+      "_source": "Outline OSM w48821420 (ODbL); roof = median of 1158 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w417678706",
+      "kind": "building",
+      "name": "pumping_station",
+      "top_m": 6.14,
+      "base_m": 1.98,
+      "_source": "Outline OSM w417678706 (ODbL); roof = median of 43 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w423455253",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.31,
+      "base_m": 5.35,
+      "_source": "Outline OSM w423455253 (ODbL); roof = median of 1371 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1050970810",
+      "kind": "building",
+      "name": "industrial",
+      "top_m": 2.9,
+      "base_m": 0.04,
+      "_source": "Outline OSM w1050970810 (ODbL); roof = median of 41 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1050970811",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 6.97,
+      "base_m": 5.35,
+      "_source": "Outline OSM w1050970811 (ODbL); roof = median of 706 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1165222447",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.26,
+      "_source": "Outline OSM w1165222447 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222448",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.24,
+      "_source": "Outline OSM w1165222448 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222449",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.38,
+      "_source": "Outline OSM w1165222449 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222450",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.4,
+      "_source": "Outline OSM w1165222450 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222451",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.53,
+      "_source": "Outline OSM w1165222451 (ODbL); roof = median of 27 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222452",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.37,
+      "_source": "Outline OSM w1165222452 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165222453",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.35,
+      "_source": "Outline OSM w1165222453 (ODbL); roof = median of 52 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "r20346573",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.11,
+      "base_m": 5.35,
+      "_source": "Outline OSM r20346573 (ODbL); roof = median of 1038 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "r20350078",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 10.23,
+      "base_m": 5.35,
+      "_source": "Outline OSM r20350078 (ODbL); roof = median of 43 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "r20350567",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.46,
+      "base_m": 5.35,
+      "_source": "Outline OSM r20350567 (ODbL); roof = median of 554 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "#18",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.46,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#20",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.46,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_725); from data/stations/research/860000856/orestad_structures_heights.geojson (metres above the platform surface, -2.23 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000856/orestad_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": -2.23,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000856/orestad_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (-2.23 m DVR90, laser 2025-03-10)"
+  },
+  "pois": [
+    {
+      "id": "res2d8f81f27b",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -43.4,
+      "y": 30.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed representative point of the OSM area w1490241856 (research pass 2026-10-30, data/stations/research/860000856/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res1d0bb778cb",
+      "category": "restaurant",
+      "name": "Ørestad Kebab",
+      "level": "0",
+      "x": -1.3,
+      "y": -73.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-20:00; Sa,Su 12:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5893123055 (ODbL), read 2026-10-30; placed OSM node n5893123055 (research pass 2026-10-30, data/stations/research/860000856/station_facts.json)"
+    }
+  ]
 }

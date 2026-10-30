@@ -1,0 +1,178 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.6554993,
+      59.433157399999985
+     ],
+     [
+      10.655555400000003,
+      59.4330899
+     ],
+     [
+      10.6556451,
+      59.432999899999984
+     ],
+     [
+      10.6557597,
+      59.432897699999984
+     ],
+     [
+      10.6558931,
+      59.43279449999997
+     ],
+     [
+      10.656085099999999,
+      59.4326554
+     ],
+     [
+      10.657002999999998,
+      59.4320347
+     ],
+     [
+      10.6577993,
+      59.43149620000001
+     ],
+     [
+      10.6579818,
+      59.431366
+     ],
+     [
+      10.6580816,
+      59.43128709999999
+     ],
+     [
+      10.658146999999998,
+      59.43122890000001
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1",
+    "height_class": "470",
+    "height_m": 0.47,
+    "height_text": "470 mm above top of rail (Bane NOR)",
+    "length_m": 254.0,
+    "width_m": 6.4,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "MOS-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.51,
+    "laser_track_bed_m": 3.91,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "470",
+    "x_platform_type": "Side platform",
+    "x_covers_tracks": [
+     "1"
+    ],
+    "x_track_type": "Main track",
+    "x_track_length_m": 2199.0,
+    "x_passing_loop_m": 470.0,
+    "x_comment": "Side platform.",
+    "x_geometry": "extent: OSM platform outline w228593415 (ref 1), 263 m along the track (Bane NOR: 254 m)",
+    "x_osm_platform": "w228593415",
+    "x_nsr_quays": [
+     "NSR:Quay:332"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/ (track table), read 2026-10-30; geometry: extent: OSM platform outline w228593415 (ref 1), 263 m along the track (Bane NOR: 254 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      10.6555439,
+      59.4330108
+     ],
+     [
+      10.6555737,
+      59.43298070000001
+     ],
+     [
+      10.6556943,
+      59.43287300000001
+     ],
+     [
+      10.6558217,
+      59.43277149999999
+     ],
+     [
+      10.6560227,
+      59.43262699999999
+     ],
+     [
+      10.6569318,
+      59.43201
+     ],
+     [
+      10.6577374,
+      59.43146800000001
+     ],
+     [
+      10.6579091,
+      59.43134080000001
+     ],
+     [
+      10.6580688,
+      59.4312074
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 2",
+    "track": "2,3",
+    "height_class": "600",
+    "height_m": 0.6,
+    "height_text": "600 mm above top of rail (Bane NOR)",
+    "length_m": 238.0,
+    "width_m": 5.4,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "MOS-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 4.59,
+    "laser_track_bed_m": 3.91,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "600",
+    "x_platform_type": "Island platform between tracks 2 and 3",
+    "x_covers_tracks": [
+     "2",
+     "3"
+    ],
+    "x_track_type": "Train track",
+    "x_track_length_m": 1283.0,
+    "x_passing_loop_m": 470.0,
+    "x_comment": "Island platform between tracks 2 and 3.",
+    "x_geometry": "extent: OSM platform outline r10173394 (ref 2;3), 247 m along the track (Bane NOR: 238 m)",
+    "x_osm_platform": "r10173394",
+    "x_nsr_quays": [
+     "NSR:Quay:331"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r10173394 (ref 2;3), 247 m along the track (Bane NOR: 238 m)"
+   }
+  }
+ ]
+}

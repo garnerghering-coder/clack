@@ -16,13 +16,149 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-MOS)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 8 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-MOS)."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.47,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/ (track table), read 2026-10-30: tracks 1, class 470 mm = 0.47 m above rail, 254.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-MOS/moss_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w437723021",
+      "kind": "building",
+      "name": "Moss (station building)",
+      "top_m": 7.88,
+      "base_m": -0.35,
+      "_source": "Outline OSM w437723021 (ODbL); roof = median of 7063 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020)"
+    },
+    {
+      "from": "w437723023",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 4.35,
+      "base_m": -1.53,
+      "_source": "Outline OSM w437723023 (ODbL); roof = median of 2909 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020)"
+    },
+    {
+      "from": "w975316217",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.82,
+      "base_m": -0.85,
+      "_source": "Outline OSM w975316217 (ODbL); roof = median of 1513 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020)"
+    },
+    {
+      "from": "w975317823",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 2.9,
+      "base_m": -2.18,
+      "_source": "Outline OSM w975317823 (ODbL); roof = median of 1425 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020)"
+    },
+    {
+      "from": "w1090144086",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.12,
+      "_source": "Outline OSM w1090144086 (ODbL); roof = median of 5051 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020); underside not measured"
+    },
+    {
+      "from": "w1207616096",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 13.46,
+      "_source": "Outline OSM w1207616096 (ODbL); roof = median of 1131 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020); underside not measured"
+    },
+    {
+      "from": "w1219631351",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 9.01,
+      "_source": "Outline OSM w1219631351 (ODbL); roof = median of 192 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020); underside not measured"
+    },
+    {
+      "from": "w1219890829",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.54,
+      "_source": "Outline OSM w1219890829 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-MOS/moss_structures_heights.geojson (metres above the platform surface, 4.55 m RH 2000, laser 2020); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-MOS/moss_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 4.55,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-MOS/moss_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (4.55 m NN2000, laser 2020)"
+  },
+  "pois": [
+    {
+      "id": "res80de3356c5",
+      "category": "kiosk",
+      "name": "Narvesen (Moss jbst., store 086)",
+      "level": "1",
+      "x": -2.7,
+      "y": -25.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:45-21:00; Sa 06:00-21:00; Su 07:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30; https://www.narvesen.no/finn-butikk, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; placed OSM node n215165510 (research pass 2026-10-30, data/stations/research/NO-MOS/station_facts.json)"
+    },
+    {
+      "id": "resd58f1eb7ee",
+      "category": "waiting",
+      "name": "Venterom",
+      "level": "1",
+      "x": 7.0,
+      "y": -9.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:45-21:00; Sa 06:00-21:00; Su 07:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30; placed OSM node n13783785543 (research pass 2026-10-30, data/stations/research/NO-MOS/station_facts.json)"
+    },
+    {
+      "id": "resd3a5f7ba26",
+      "category": "toilet",
+      "name": "",
+      "level": "1",
+      "x": -139.5,
+      "y": 142.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n11308648564 (read 2026-10-30); placed OSM node n11308648564 (research pass 2026-10-30, data/stations/research/NO-MOS/station_facts.json)"
+    }
+  ]
 }

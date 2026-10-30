@@ -10,7 +10,30 @@
    "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 0",
+   "track": "0",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 0 (the train stops with the platform to its west)",
+   "_source": "laser (2025-02-17, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 0; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2025-02-17, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 2 (the train stops with the platform to its east)",
+   "_source": "laser (2025-02-17, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30"
+  }
+ ],
  "connections": [],
  "entrances": [
   {
@@ -221,7 +244,8 @@
     "to_nearest_platform_m": 57.0,
     "how": "OSM node n13241526317",
     "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. Tried: web search (no website found); DSB Esbjerg page names no such business. OSM n13241526317."
   },
   {
    "category": "taxi",
@@ -396,7 +420,8 @@
     "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13241526317 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (no website found); DSB Esbjerg page names no such business. OSM n13241526317."
   },
   {
    "category": "hairdresser",
@@ -462,12 +487,13 @@
     "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (no own website; only unrelated results); not on DSB Esbjerg page. OSM w463087806."
   }
  ],
  "plans": [],
  "open": [
-  "Access to the platforms (tunnel, level crossing, stairs, lifts) is unknown: DSB lists no access lines for Esbjerg and OSM has no lifts, stairs or underpass in the extract; OSM platforms carry no refs.",
+  "Access to the platforms (tunnel, level crossing, stairs, lifts) is unknown: DSB lists no access lines for Esbjerg and OSM has no lifts, stairs or underpass in the extract; OSM platforms carry no refs. [Lift follow-up 2026-10-30: Not settled.]",
   "DSB lists 'Billetkontor' without hours; whether a staffed ticket office exists is not settled.",
   "Identical OSM hours on five salon nodes look copied; not checked on their own sites.",
   "Pølsevognen Banegårdspladsen (OSM, outside) not included.",

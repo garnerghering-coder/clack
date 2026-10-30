@@ -8,20 +8,248 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Terminal 3 (check-in and arrival hall, street level); the 'station terminal' above the platforms",
+      "order": 0,
+      "name_source": "Sund & Bælt, \"Stations on the Øresund line\", https://sundogbaelt.dk/en/road-and-rail-links/oresund/stations-on-the-oresund-line/, read 2026-10-30; Wikipedia, \"Copenhagen Airport railway station\", https://en.wikipedia.org/wiki/Copenhagen_Airport_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000858)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 18 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000858)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {},
+  "structures_file": "data/stations/research/860000858/cph_airport_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w25604962",
+      "kind": "building",
+      "name": "P4 (parking)",
+      "top_m": 11.26,
+      "base_m": -0.27,
+      "_source": "Outline OSM w25604962 (ODbL); roof = median of 1590 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w28134507",
+      "kind": "building",
+      "name": "P7 (building)",
+      "top_m": 7.19,
+      "base_m": -0.8,
+      "_source": "Outline OSM w28134507 (ODbL); roof = median of 3978 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1017579598",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.6,
+      "_source": "Outline OSM w1017579598 (ODbL); roof = median of 226 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1051058822",
+      "kind": "building",
+      "name": "building",
+      "top_m": 16.34,
+      "base_m": -0.26,
+      "_source": "Outline OSM w1051058822 (ODbL); roof = median of 1533 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1080247627",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.42,
+      "_source": "Outline OSM w1080247627 (ODbL); roof = median of 152 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610087",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.48,
+      "_source": "Outline OSM w1165610087 (ODbL); roof = median of 100 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610088",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.48,
+      "_source": "Outline OSM w1165610088 (ODbL); roof = median of 68 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610102",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.82,
+      "_source": "Outline OSM w1165610102 (ODbL); roof = median of 118 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610103",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.83,
+      "_source": "Outline OSM w1165610103 (ODbL); roof = median of 103 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610104",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.85,
+      "_source": "Outline OSM w1165610104 (ODbL); roof = median of 358 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610105",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.59,
+      "_source": "Outline OSM w1165610105 (ODbL); roof = median of 2000 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610106",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.55,
+      "_source": "Outline OSM w1165610106 (ODbL); roof = median of 1394 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610107",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.73,
+      "_source": "Outline OSM w1165610107 (ODbL); roof = median of 2610 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610108",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.66,
+      "_source": "Outline OSM w1165610108 (ODbL); roof = median of 5967 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610109",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 6.47,
+      "_source": "Outline OSM w1165610109 (ODbL); roof = median of 4109 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165610110",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.79,
+      "_source": "Outline OSM w1165610110 (ODbL); roof = median of 4258 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1479402771",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.29,
+      "_source": "Outline OSM w1479402771 (ODbL); roof = median of 58 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "r21036258",
+      "kind": "building",
+      "name": "Terminal 3 Københavns Lufthavn (building)",
+      "top_m": 8.98,
+      "base_m": -0.82,
+      "_source": "Outline OSM r21036258 (ODbL); roof = median of 4941 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6170_729, PUNKTSKY_1km_6170_730, PUNKTSKY_1km_6171_729, PUNKTSKY_1km_6171_730); from data/stations/research/860000858/cph_airport_structures_heights.geojson (metres above the street (the ground's median; the platforms are in a tunnel), 3.44 m RH 2000, laser 2025-03-10)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000858/cph_airport_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 3.44,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000858/cph_airport_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the street (3.44 m DVR90, laser 2025-03-10)"
+  },
+  "pois": [
+    {
+      "id": "resed013e8edb",
+      "category": "kiosk",
+      "name": "7-Eleven 'CPH Lufthavn, Terminal 3, Arrival, Landside'",
+      "level": "0",
+      "x": -34.1,
+      "y": -7.6,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n13145798930 (research pass 2026-10-30, data/stations/research/860000858/station_facts.json)"
+    },
+    {
+      "id": "res0071481b4a",
+      "category": "cafe",
+      "name": "Espresso House - Landside",
+      "level": "0",
+      "x": -32.9,
+      "y": -22.8,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:30-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n9044612600 (research pass 2026-10-30, data/stations/research/860000858/station_facts.json)"
+    },
+    {
+      "id": "rescaf3f4300b",
+      "category": "restaurant",
+      "name": "Burger King",
+      "level": "0",
+      "x": 2.8,
+      "y": 36.5,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n4434134245 (research pass 2026-10-30, data/stations/research/860000858/station_facts.json)"
+    },
+    {
+      "id": "res998ee74f82",
+      "category": "restaurant",
+      "name": "Steff's Place",
+      "level": "0",
+      "x": -2.6,
+      "y": 7.3,
+      "fee": null,
+      "opening_hours": "Su-Fr 10:00-21:00; Sa 10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n13149177590 (research pass 2026-10-30, data/stations/research/860000858/station_facts.json)"
+    },
+    {
+      "id": "res41b5c0ce10",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": -34.1,
+      "y": -7.6,
+      "fee": null,
+      "opening_hours": "Mo-Su,PH 06:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13145798930 (ODbL), read 2026-10-30; placed OSM node n13145798930 (research pass 2026-10-30, data/stations/research/860000858/station_facts.json)"
     }
   ]
 }

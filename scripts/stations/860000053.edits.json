@@ -8,20 +8,774 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Station hall (DSB: 'Forhal') at Banegårdspladsen",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station' https://en.wikipedia.org/wiki/Aarhus_Central_Station, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000053)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 17 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000053)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {
+    "515037672": "Banedanmark Open Data (CC BY 4.0) platform objects perron 1 / track 2, perron 1 / track 3 run alongside osm:way/515037672; tracks 2, 3 from the register (banedanmark_platforms_DK.csv) run alongside osm:way/515037672, read 2026-10-30 (data/stations/research/860000053); BanInfo's track numbers were being re-issued then: check on site",
+    "515037673": "Banedanmark Open Data (CC BY 4.0) platform objects perron 2 / track 4, perron 2 / track 5 run alongside osm:way/515037673; tracks 4, 5 from the register (banedanmark_platforms_DK.csv) run alongside osm:way/515037673, read 2026-10-30 (data/stations/research/860000053); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "515037672": "2–3",
+    "515037673": "4–5"
+  },
+  "entrances": [
+    {
+      "at": [
+        38.7,
+        -7.1
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; position OSM n5030711816 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -16.7,
+        8.0
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n2398266646 (already in OSM); position OSM n2398266646 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -3.7,
+        46.7
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n5030711334 (already in OSM); position OSM n5030711334 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -2.6,
+        50.6
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n5030711335 (already in OSM); position OSM n5030711335 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        1.5,
+        65.2
+      ],
+      "level": "0",
+      "name": "Entrance (Værkmestergade)",
+      "_source": "OSM n5030711336 (already in OSM); position OSM n5030711336 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        2.4,
+        68.2
+      ],
+      "level": "0",
+      "name": "Entrance (Værkmestergade)",
+      "_source": "OSM n5030711337 (already in OSM); position OSM n5030711337 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        7.0,
+        84.8
+      ],
+      "level": "0",
+      "name": "Entrance (Værkmestergade)",
+      "_source": "OSM n5030711338 (already in OSM); position OSM n5030711338 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        38.7,
+        -7.1
+      ],
+      "level": "0",
+      "name": "Entrance (Ny Banegårdsgade)",
+      "_source": "OSM n5030711816 (already in OSM); position OSM n5030711816 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -9.2,
+        5.9
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n5030711820 (already in OSM); position OSM n5030711820 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -16.8,
+        34.9
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n10692801356 (already in OSM); position OSM n10692801356 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -32.0,
+        35.2
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n10692801362 (already in OSM); position OSM n10692801362 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -4.3,
+        4.5
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n10692801408 (already in OSM); position OSM n10692801408 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -13.9,
+        7.2
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n10692801409 (already in OSM); position OSM n10692801409 (data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "at": [
+        -4.3,
+        4.5
+      ],
+      "level": "0",
+      "name": "Entrance (Banegårdspladsen)",
+      "_source": "OSM n11351531077 (already in OSM); position OSM n11351531077 (data/stations/research/860000053/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "2–3": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 2,3, class 50 cm = 0.5 m above rail, 257 m long; a recorded design class, not a survey; other rows for this track: 2,3 55 cm 0.55 m (257 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    },
+    "4–5": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 4,5, class 55 cm = 0.55 m above rail, 260 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000053/aarhus_h_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w147077550",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 19.93,
+      "base_m": -0.88,
+      "_source": "Outline OSM w147077550 (ODbL); roof = median of 32 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w231434891",
+      "kind": "building",
+      "name": "building",
+      "top_m": 35.62,
+      "base_m": -1.01,
+      "_source": "Outline OSM w231434891 (ODbL); roof = median of 129 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w231434903",
+      "kind": "building",
+      "name": "Bruuns Galleri (retail)",
+      "top_m": 14.21,
+      "base_m": -1.15,
+      "_source": "Outline OSM w231434903 (ODbL); roof = median of 3032 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w231436752",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 10.68,
+      "base_m": -1.15,
+      "_source": "Outline OSM w231436752 (ODbL); roof = median of 349 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w231436755",
+      "kind": "bridge",
+      "name": "building",
+      "top_m": 15.89,
+      "base_m": 5.35,
+      "_source": "Outline OSM w231436755 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w231436757",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 8.51,
+      "base_m": -1.12,
+      "_source": "Outline OSM w231436757 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w231436760",
+      "kind": "building",
+      "name": "building",
+      "top_m": 23.73,
+      "base_m": -0.88,
+      "_source": "Outline OSM w231436760 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w514519653",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.75,
+      "base_m": -0.14,
+      "_source": "Outline OSM w514519653 (ODbL); roof = median of 83 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w515037733",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.15,
+      "base_m": -1.07,
+      "_source": "Outline OSM w515037733 (ODbL); roof = median of 133 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w515037737",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 12.11,
+      "base_m": -0.9,
+      "_source": "Outline OSM w515037737 (ODbL); roof = median of 45 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23)"
+    },
+    {
+      "from": "w515368259",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 5.64,
+      "base_m": 5.35,
+      "_source": "Outline OSM w515368259 (ODbL); roof = median of 516 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); top = the deck the laser saw (class 17, footbridge_decks.json), 5.64 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w977481194",
+      "kind": "bridge",
+      "name": "Frederiksbroen (bridge)",
+      "top_m": 10.23,
+      "base_m": 5.35,
+      "_source": "Outline OSM w977481194 (ODbL); roof = median of 62 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1149384805",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.4,
+      "_source": "Outline OSM w1149384805 (ODbL); roof = median of 102 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside not measured"
+    },
+    {
+      "from": "w1149384806",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.4,
+      "_source": "Outline OSM w1149384806 (ODbL); roof = median of 112 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside not measured"
+    },
+    {
+      "from": "w1171449826",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.57,
+      "_source": "Outline OSM w1171449826 (ODbL); roof = median of 33 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside not measured"
+    },
+    {
+      "from": "w1171449827",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.46,
+      "_source": "Outline OSM w1171449827 (ODbL); roof = median of 69 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside not measured"
+    },
+    {
+      "from": "w1171449828",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.61,
+      "_source": "Outline OSM w1171449828 (ODbL); roof = median of 63 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6223_574, PUNKTSKY_1km_6223_575); from data/stations/research/860000053/aarhus_h_structures_heights.geojson (metres above the platform surface, 7.13 m RH 2000, laser 2025-03-23); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000053/aarhus_h_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 7.13,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000053/aarhus_h_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (7.13 m DVR90, laser 2025-03-23)"
+  },
+  "pois": [
+    {
+      "id": "res64e17f6ef8",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Århus H)",
+      "level": "0",
+      "x": 14.4,
+      "y": 33.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:00-24:00; Fr-Su 00:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n5030711339 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res26faccbf47",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Århus H IC)",
+      "level": "0",
+      "x": -15.0,
+      "y": 41.7,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:00-23:00; Fr 06:00-24:00; Sa 08:00-24:00; Su 08:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n12956562803 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resbfdbc2198b",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": 15.0,
+      "y": 51.7,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n13259943394 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res1a482fb5cd",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": 19.7,
+      "y": 41.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n7940746477 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res8541c3c8e8",
+      "category": "locker",
+      "name": "Bagagebokse",
+      "level": "0",
+      "x": -20.5,
+      "y": 28.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aarhus-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n9798726959 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resc4bc70b72e",
+      "category": "atm",
+      "name": "Nokas",
+      "level": "0",
+      "x": 38.0,
+      "y": -21.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; placed OSM node n8222276929 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resb5a563e668",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -51.5,
+      "y": 12.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station', read 2026-10-30; placed representative point of the OSM area w268546604 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res533e7e7e2e",
+      "category": "restaurant",
+      "name": "Dee Dee's sandwiches",
+      "level": "0",
+      "x": -37.7,
+      "y": -39.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:30; Sa 10:00-18:00; Su,PH 10:00-17:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n632467141 (ODbL), read 2026-10-30; placed OSM node n632467141 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res196e06b82a",
+      "category": "cafe",
+      "name": "Café Stiften",
+      "level": "0",
+      "x": -88.5,
+      "y": 36.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30; placed OSM node n825060403 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res004266ede5",
+      "category": "restaurant",
+      "name": "Pearl India",
+      "level": "0",
+      "x": 193.0,
+      "y": -173.6,
+      "fee": null,
+      "opening_hours": "Su-Th 17:00-22:00; Fr-Sa 17:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2273711692 (ODbL), read 2026-10-30; placed OSM node n2273711692 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res848565eb45",
+      "category": "cafe",
+      "name": "Milo",
+      "level": "0",
+      "x": -42.3,
+      "y": -38.2,
+      "fee": null,
+      "opening_hours": "Su-Th 11:00-23:00, Fr,Sa 11:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4441355682 (ODbL), read 2026-10-30; placed OSM node n4441355682 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res2d80e07a33",
+      "category": "shop",
+      "name": "GreenMind",
+      "level": "0",
+      "x": 37.8,
+      "y": -43.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-18:00; Fr 10:00-19:00; Sa 10:00-17:00; PH off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5691419329 (ODbL), read 2026-10-30; placed OSM node n5691419329 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res40b3bcbcdc",
+      "category": "restaurant",
+      "name": "Falafel King",
+      "level": "0",
+      "x": 218.4,
+      "y": -154.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30; placed OSM node n9241685208 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res36ba375910",
+      "category": "cafe",
+      "name": "Emmerys",
+      "level": "0",
+      "x": 28.4,
+      "y": 118.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-18:00; Sa-Su 07:00-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9279143970 (ODbL), read 2026-10-30; placed OSM node n9279143970 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res97912c59e9",
+      "category": "restaurant",
+      "name": "Nögen",
+      "level": "0",
+      "x": 25.1,
+      "y": -59.9,
+      "fee": null,
+      "opening_hours": "11:30-23:00, Fr-Sa 11:30-02:00, Su-Mo off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9621110017 (ODbL), read 2026-10-30; placed OSM node n9621110017 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resf10ee3bca7",
+      "category": "shop",
+      "name": "Boisen",
+      "level": "0",
+      "x": 73.9,
+      "y": -51.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-17:30; Sa 10:00-14:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9848266355 (ODbL), read 2026-10-30; placed OSM node n9848266355 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resf9a00c4d3a",
+      "category": "atm",
+      "name": "Forex",
+      "level": "0",
+      "x": -118.2,
+      "y": 31.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00; Su off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10201655673 (ODbL), read 2026-10-30; placed OSM node n10201655673 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res8ab5f5cde6",
+      "category": "shop",
+      "name": "Thiele",
+      "level": "0",
+      "x": 13.1,
+      "y": 126.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212824382 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res3c1ac13590",
+      "category": "shop",
+      "name": "NAME IT",
+      "level": "0",
+      "x": 7.0,
+      "y": 112.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212824384 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res24b7cb49ee",
+      "category": "pharmacy",
+      "name": "Bruuns Apotek",
+      "level": "0",
+      "x": 5.8,
+      "y": 105.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-19:00; Sa-Su 10:00-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10212824385 (ODbL), read 2026-10-30; placed OSM node n10212824385 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res4b4fe1aee9",
+      "category": "shop",
+      "name": "Rituals",
+      "level": "0",
+      "x": 26.0,
+      "y": 112.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30; https://www.rituals.com/da-dk/store-detail?store=Aarhus-Bruuns-Galleri, read 2026-10-30; placed OSM node n10212824388 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res5ddf32f209",
+      "category": "shop",
+      "name": "H&M",
+      "level": "0",
+      "x": 32.7,
+      "y": 125.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30; https://api.storelocator.hmgroup.tech/v2/brand/hm/stores/locale/da_DK/country/DK?_type=json&campaigns=false&departments=false&openinghours=true&maxnumberofstores=200, read 2026-10-30; placed OSM node n10212824389 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resd0669b1008",
+      "category": "shop",
+      "name": "Jack & Jones",
+      "level": "0",
+      "x": 34.4,
+      "y": 116.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212866840 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res65a9694980",
+      "category": "shop",
+      "name": "Vero Moda",
+      "level": "0",
+      "x": 14.4,
+      "y": 119.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212866841 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "rescd8252a820",
+      "category": "shop",
+      "name": "Change",
+      "level": "0",
+      "x": 10.0,
+      "y": 126.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212866842 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res3fff148c5e",
+      "category": "shop",
+      "name": "Samsøe Samsøe",
+      "level": "0",
+      "x": -5.8,
+      "y": 123.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212866843 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resfaad07999c",
+      "category": "shop",
+      "name": "Quint",
+      "level": "0",
+      "x": -14.0,
+      "y": 127.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212866844 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res9d30f1d808",
+      "category": "shop",
+      "name": "SELECTED",
+      "level": "0",
+      "x": -21.8,
+      "y": 124.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30; placed OSM node n10212907462 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res75813d25d5",
+      "category": "atm",
+      "name": "Nordea",
+      "level": "0",
+      "x": 10.4,
+      "y": 99.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10212980336 (ODbL), read 2026-10-30; placed OSM node n10212980336 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resa49bf1c57c",
+      "category": "shop",
+      "name": "Ganesha",
+      "level": "0",
+      "x": -15.7,
+      "y": -52.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30; placed OSM node n10807899985 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res01cbba80c1",
+      "category": "shop",
+      "name": "House of Hair",
+      "level": "0",
+      "x": -119.6,
+      "y": 21.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30; placed OSM node n12259255005 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "res02c0480856",
+      "category": "restaurant",
+      "name": "Chicken East",
+      "level": "0",
+      "x": -84.6,
+      "y": 82.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30; placed OSM node n12838597022 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resf36b422d18",
+      "category": "restaurant",
+      "name": "Børnenes kontor banegårdspladsen",
+      "level": "0",
+      "x": -73.7,
+      "y": 4.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30; placed OSM node n13517873369 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)"
+    },
+    {
+      "id": "resd515c96251",
+      "category": "restaurant",
+      "name": "Aarhus Street Food",
+      "level": "0",
+      "x": 288.8,
+      "y": -112.4,
+      "fee": null,
+      "opening_hours": "Mo-Su,PH 11:30-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap w998752616 (ODbL), read 2026-10-30; placed representative point of the OSM area w998752616 (research pass 2026-10-30, data/stations/research/860000053/station_facts.json)",
+      "approximate": true
     }
   ]
 }

@@ -1,0 +1,1472 @@
+{
+ "type": "FeatureCollection",
+ "name": "moss_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m NN2000",
+ "platform_surface_m": 4.55,
+ "track_bed_m": 3.91,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.657123,
+       59.4320739
+      ],
+      [
+       10.6571117,
+       59.43206959999999
+      ],
+      [
+       10.657480200000002,
+       59.43182349999998
+      ],
+      [
+       10.657488899999999,
+       59.43182689999999
+      ],
+      [
+       10.657529299999998,
+       59.431799999999996
+      ],
+      [
+       10.6575396,
+       59.431803999999985
+      ],
+      [
+       10.6575665,
+       59.43178600000001
+      ],
+      [
+       10.6576291,
+       59.43181020000001
+      ],
+      [
+       10.6576022,
+       59.43182819999998
+      ],
+      [
+       10.6576166,
+       59.4318338
+      ],
+      [
+       10.657620800000002,
+       59.43183090000002
+      ],
+      [
+       10.6577318,
+       59.4318739
+      ],
+      [
+       10.657688500000003,
+       59.4319029
+      ],
+      [
+       10.657704999999998,
+       59.4319093
+      ],
+      [
+       10.6576159,
+       59.43196879999997
+      ],
+      [
+       10.6575678,
+       59.4319501
+      ],
+      [
+       10.657529600000002,
+       59.4319756
+      ],
+      [
+       10.6575495,
+       59.4319834
+      ],
+      [
+       10.657529,
+       59.431997
+      ],
+      [
+       10.657533999999998,
+       59.431999
+      ],
+      [
+       10.657461899999998,
+       59.43204709999998
+      ],
+      [
+       10.657456,
+       59.43204480000001
+      ],
+      [
+       10.6574302,
+       59.43206209999999
+      ],
+      [
+       10.6574123,
+       59.4320551
+      ],
+      [
+       10.6573768,
+       59.4320788
+      ],
+      [
+       10.6574243,
+       59.4320972
+      ],
+      [
+       10.6573365,
+       59.432155899999984
+      ],
+      [
+       10.6573211,
+       59.4321499
+      ],
+      [
+       10.657257699999999,
+       59.43219219999999
+      ],
+      [
+       10.657060399999999,
+       59.432115800000005
+      ],
+      [
+       10.657123,
+       59.4320739
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w437723021",
+    "name": "Moss (station building)",
+    "osm_tags": {
+     "building": "train_station",
+     "name": "Moss"
+    },
+    "ground_min_m": 4.2,
+    "ground_median_m": 4.43,
+    "ground_max_m": 4.66,
+    "roof_top_median_m": 12.43,
+    "roof_top_p95_m": 16.71,
+    "laser_points": 7063,
+    "height_above_ground_median_m": 8.0,
+    "height_above_ground_p95_m": 12.28,
+    "top_above_platform_m": 7.88,
+    "base_above_platform_m": -0.35,
+    "source": "Outline OSM w437723021 (ODbL); roof = median of 7063 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.658047999999999,
+       59.43166699999998
+      ],
+      [
+       10.657886,
+       59.431775
+      ],
+      [
+       10.657731,
+       59.43171499999999
+      ],
+      [
+       10.657853000000001,
+       59.431634
+      ],
+      [
+       10.657861,
+       59.431637000000016
+      ],
+      [
+       10.658095,
+       59.43148000000001
+      ],
+      [
+       10.65819,
+       59.431515999999995
+      ],
+      [
+       10.658217,
+       59.431498
+      ],
+      [
+       10.658268999999999,
+       59.43151799999999
+      ],
+      [
+       10.658193,
+       59.431569
+      ],
+      [
+       10.658213,
+       59.43157699999998
+      ],
+      [
+       10.658068,
+       59.431675
+      ],
+      [
+       10.658047999999999,
+       59.43166699999998
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w437723023",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 3.02,
+    "ground_median_m": 4.27,
+    "ground_max_m": 4.89,
+    "roof_top_median_m": 8.9,
+    "roof_top_p95_m": 13.41,
+    "laser_points": 2909,
+    "height_above_ground_median_m": 4.63,
+    "height_above_ground_p95_m": 9.14,
+    "top_above_platform_m": 4.35,
+    "base_above_platform_m": -1.53,
+    "source": "Outline OSM w437723023 (ODbL); roof = median of 2909 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.652990899999999,
+       59.4338941
+      ],
+      [
+       10.6529926,
+       59.4338772
+      ],
+      [
+       10.652999,
+       59.4338453
+      ],
+      [
+       10.6530102,
+       59.4337708
+      ],
+      [
+       10.6530168,
+       59.433735999999996
+      ],
+      [
+       10.6530191,
+       59.4337183
+      ],
+      [
+       10.652833400000002,
+       59.433710100000006
+      ],
+      [
+       10.652251,
+       59.43368879999999
+      ],
+      [
+       10.6522125,
+       59.433686699999996
+      ],
+      [
+       10.652044400000001,
+       59.433679100000006
+      ],
+      [
+       10.6520412,
+       59.43369409999999
+      ],
+      [
+       10.6520332,
+       59.433738999999996
+      ],
+      [
+       10.6520238,
+       59.43379259999999
+      ],
+      [
+       10.6520182,
+       59.43383460000001
+      ],
+      [
+       10.652016599999998,
+       59.433848000000005
+      ],
+      [
+       10.652194500000002,
+       59.433856299999995
+      ],
+      [
+       10.6522219,
+       59.4338576
+      ],
+      [
+       10.652951700000001,
+       59.433892200000024
+      ],
+      [
+       10.652990899999999,
+       59.4338941
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w476289098",
+    "name": "Kanalbrua (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Kanalbrua"
+    },
+    "ground_min_m": -0.2,
+    "ground_median_m": 1.83,
+    "ground_max_m": 5.67,
+    "roof_top_median_m": 8.45,
+    "roof_top_p95_m": 12.84,
+    "laser_points": 1144,
+    "height_above_ground_median_m": 6.62,
+    "height_above_ground_p95_m": 11.01,
+    "top_above_platform_m": 3.9,
+    "base_above_platform_m": -4.75,
+    "source": "Outline OSM w476289098 (ODbL); roof = median of 1144 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.652117399999998,
+       59.43405199999999
+      ],
+      [
+       10.6521465,
+       59.434053
+      ],
+      [
+       10.6521741,
+       59.43405390000001
+      ],
+      [
+       10.652177599999998,
+       59.434026800000005
+      ],
+      [
+       10.6521495,
+       59.43402589999999
+      ],
+      [
+       10.6521302,
+       59.43402519999999
+      ],
+      [
+       10.6521209,
+       59.4340249
+      ],
+      [
+       10.652119200000001,
+       59.434037999999994
+      ],
+      [
+       10.652117399999998,
+       59.43405199999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w485824964",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "laser_points": 0,
+    "source": "Outline OSM w485824964 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.657748299999998,
+       59.431374700000006
+      ],
+      [
+       10.6577898,
+       59.431390500000006
+      ],
+      [
+       10.6580373,
+       59.43148510000001
+      ],
+      [
+       10.6581036,
+       59.4314402
+      ],
+      [
+       10.6580607,
+       59.43142390000001
+      ],
+      [
+       10.6580237,
+       59.431448899999985
+      ],
+      [
+       10.657819,
+       59.4313707
+      ],
+      [
+       10.657857100000001,
+       59.43134489999999
+      ],
+      [
+       10.6578335,
+       59.4313359
+      ],
+      [
+       10.657815600000001,
+       59.43132910000001
+      ],
+      [
+       10.657748299999998,
+       59.431374700000006
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w975316217",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "layer": "1"
+    },
+    "ground_min_m": 3.7,
+    "ground_median_m": 4.25,
+    "ground_max_m": 4.49,
+    "roof_top_median_m": 11.37,
+    "roof_top_p95_m": 15.68,
+    "laser_points": 1513,
+    "height_above_ground_median_m": 7.12,
+    "height_above_ground_p95_m": 11.43,
+    "top_above_platform_m": 6.82,
+    "base_above_platform_m": -0.85,
+    "source": "Outline OSM w975316217 (ODbL); roof = median of 1513 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.6548551,
+       59.430655099999996
+      ],
+      [
+       10.654843099999999,
+       59.4305211
+      ],
+      [
+       10.654918100000002,
+       59.4305194
+      ],
+      [
+       10.6549302,
+       59.4306534
+      ],
+      [
+       10.6548551,
+       59.430655099999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w975317823",
+    "name": "transportation",
+    "osm_tags": {
+     "building": "transportation"
+    },
+    "ground_min_m": 2.37,
+    "ground_median_m": 2.55,
+    "ground_max_m": 2.97,
+    "roof_top_median_m": 7.45,
+    "roof_top_p95_m": 9.38,
+    "laser_points": 1425,
+    "height_above_ground_median_m": 4.9,
+    "height_above_ground_p95_m": 6.83,
+    "top_above_platform_m": 2.9,
+    "base_above_platform_m": -2.18,
+    "source": "Outline OSM w975317823 (ODbL); roof = median of 1425 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.656058200000002,
+       59.43385159999999
+      ],
+      [
+       10.655739899999999,
+       59.43383689999999
+      ],
+      [
+       10.654202,
+       59.43377119999999
+      ],
+      [
+       10.6538357,
+       59.43375549999998
+      ],
+      [
+       10.6538339,
+       59.4337689
+      ],
+      [
+       10.6538275,
+       59.433814299999995
+      ],
+      [
+       10.6538195,
+       59.433873500000004
+      ],
+      [
+       10.6538124,
+       59.4339188
+      ],
+      [
+       10.653810799999999,
+       59.4339307
+      ],
+      [
+       10.654146699999998,
+       59.43394349999999
+      ],
+      [
+       10.6541697,
+       59.43394629999999
+      ],
+      [
+       10.654803,
+       59.4339714
+      ],
+      [
+       10.6562709,
+       59.43403369999999
+      ],
+      [
+       10.6562562,
+       59.43402050000001
+      ],
+      [
+       10.656168599999999,
+       59.43394639999999
+      ],
+      [
+       10.656079099999998,
+       59.43386940000001
+      ],
+      [
+       10.656058200000002,
+       59.43385159999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "bridge",
+    "osm_id": "w1058592682",
+    "name": "Rådhusbrua (bridge)",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge",
+     "name": "Rådhusbrua",
+     "start_date": "1961-11-04"
+    },
+    "ground_min_m": 3.22,
+    "ground_median_m": 4.38,
+    "ground_max_m": 12.93,
+    "roof_top_median_m": 10.21,
+    "roof_top_p95_m": 13.08,
+    "laser_points": 21510,
+    "height_above_ground_median_m": 5.83,
+    "height_above_ground_p95_m": 8.7,
+    "top_above_platform_m": 5.66,
+    "base_above_platform_m": -1.33,
+    "source": "Outline OSM w1058592682 (ODbL); roof = median of 21510 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.653777799999999,
+       59.43192649999999
+      ],
+      [
+       10.6538621,
+       59.43181920000002
+      ],
+      [
+       10.6537686,
+       59.4317995
+      ],
+      [
+       10.6536564,
+       59.43177659999999
+      ],
+      [
+       10.6536025,
+       59.43176419999999
+      ],
+      [
+       10.6535535,
+       59.43173389999999
+      ],
+      [
+       10.653478,
+       59.431688099999995
+      ],
+      [
+       10.653357500000002,
+       59.43183990000002
+      ],
+      [
+       10.6534581,
+       59.431860999999984
+      ],
+      [
+       10.6535748,
+       59.4318847
+      ],
+      [
+       10.6536777,
+       59.43190620000001
+      ],
+      [
+       10.6537114,
+       59.431913
+      ],
+      [
+       10.653777799999999,
+       59.43192649999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1090144086",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 2.44,
+    "ground_median_m": 2.96,
+    "ground_max_m": 3.55,
+    "roof_top_median_m": 8.67,
+    "roof_top_p95_m": 8.74,
+    "laser_points": 5051,
+    "height_above_ground_median_m": 5.71,
+    "height_above_ground_p95_m": 5.78,
+    "top_above_platform_m": 4.12,
+    "base_above_platform_m": -2.11,
+    "source": "Outline OSM w1090144086 (ODbL); roof = median of 5051 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.661730799999999,
+       59.43476859999999
+      ],
+      [
+       10.661727899999999,
+       59.43479649999999
+      ],
+      [
+       10.661005,
+       59.43479399999999
+      ],
+      [
+       10.661006999999998,
+       59.434765600000006
+      ],
+      [
+       10.661730799999999,
+       59.43476859999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1207616096",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 14.97,
+    "ground_median_m": 15.3,
+    "ground_max_m": 15.56,
+    "roof_top_median_m": 18.01,
+    "roof_top_p95_m": 18.29,
+    "laser_points": 1131,
+    "height_above_ground_median_m": 2.71,
+    "height_above_ground_p95_m": 2.99,
+    "top_above_platform_m": 13.46,
+    "base_above_platform_m": 10.42,
+    "source": "Outline OSM w1207616096 (ODbL); roof = median of 1131 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.6574557,
+       59.4322867
+      ],
+      [
+       10.657432499999999,
+       59.4322722
+      ],
+      [
+       10.6574909,
+       59.43224969999999
+      ],
+      [
+       10.6575116,
+       59.432263400000004
+      ],
+      [
+       10.6574557,
+       59.4322867
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1219631351",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 4.5,
+    "ground_median_m": 4.67,
+    "ground_max_m": 5.55,
+    "roof_top_median_m": 13.56,
+    "roof_top_p95_m": 20.85,
+    "laser_points": 192,
+    "height_above_ground_median_m": 8.89,
+    "height_above_ground_p95_m": 16.18,
+    "top_above_platform_m": 9.01,
+    "base_above_platform_m": -0.05,
+    "source": "Outline OSM w1219631351 (ODbL); roof = median of 192 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.6567947,
+       59.432347400000005
+      ],
+      [
+       10.6567746,
+       59.43233599999999
+      ],
+      [
+       10.6567234,
+       59.4323611
+      ],
+      [
+       10.6567434,
+       59.4323734
+      ],
+      [
+       10.6567947,
+       59.432347400000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1219890829",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 4.56,
+    "ground_median_m": 4.6,
+    "ground_max_m": 4.66,
+    "roof_top_median_m": 7.09,
+    "roof_top_p95_m": 13.81,
+    "laser_points": 176,
+    "height_above_ground_median_m": 2.49,
+    "height_above_ground_p95_m": 9.21,
+    "top_above_platform_m": 2.54,
+    "base_above_platform_m": 0.01,
+    "source": "Outline OSM w1219890829 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10.65554977629637,
+        59.431897088218996
+       ],
+       [
+        10.655569149273662,
+        59.431932757629355
+       ],
+       [
+        10.655639165041489,
+        59.43192288807413
+       ],
+       [
+        10.655764187944822,
+        59.43185934430974
+       ],
+       [
+        10.65582947260185,
+        59.43184862021611
+       ],
+       [
+        10.655867333391798,
+        59.43182242402618
+       ],
+       [
+        10.65595061684937,
+        59.43180217473566
+       ],
+       [
+        10.655989295406291,
+        59.431775653095634
+       ],
+       [
+        10.656019779326245,
+        59.43177435208362
+       ],
+       [
+        10.656094134843821,
+        59.431738124213126
+       ],
+       [
+        10.656123742144533,
+        59.43173710618382
+       ],
+       [
+        10.656179601369532,
+        59.43170138473281
+       ],
+       [
+        10.656210085214672,
+        59.43170008367669
+       ],
+       [
+        10.656336421487559,
+        59.43164523265514
+       ],
+       [
+        10.65636602869896,
+        59.43164421457128
+       ],
+       [
+        10.656421887515416,
+        59.43160849301796
+       ],
+       [
+        10.656452371266804,
+        59.43160719190568
+       ],
+       [
+        10.656526725954127,
+        59.43157096379166
+       ],
+       [
+        10.656556333094235,
+        59.43156994566493
+       ],
+       [
+        10.656595010912211,
+        59.43154342384789
+       ],
+       [
+        10.656677475344669,
+        59.43152349951711
+       ],
+       [
+        10.65673333363383,
+        59.43148777783229
+       ],
+       [
+        10.656798617262254,
+        59.431477053258064
+       ],
+       [
+        10.656853657451085,
+        59.43144165694287
+       ],
+       [
+        10.656936939376914,
+        59.43142140702893
+       ],
+       [
+        10.656976493292678,
+        59.43139460208798
+       ],
+       [
+        10.65700610026357,
+        59.43139358386
+       ],
+       [
+        10.657023286742158,
+        59.431384257813455
+       ],
+       [
+        10.657006107410538,
+        59.431349441209925
+       ],
+       [
+        10.656968692215905,
+        59.43134916164408
+       ],
+       [
+        10.65693001491131,
+        59.431375683570295
+       ],
+       [
+        10.656864731520288,
+        59.4313864082093
+       ],
+       [
+        10.656809691431835,
+        59.431421804529
+       ],
+       [
+        10.656726409427623,
+        59.43144205436215
+       ],
+       [
+        10.656635751169995,
+        59.43148719939972
+       ],
+       [
+        10.65660526753422,
+        59.431488500554345
+       ],
+       [
+        10.656567407686872,
+        59.43151469695529
+       ],
+       [
+        10.656536106122548,
+        59.4315163235129
+       ],
+       [
+        10.656444570838381,
+        59.431561751429015
+       ],
+       [
+        10.656414963701634,
+        59.43156276953038
+       ],
+       [
+        10.65630712391408,
+        59.43161711413339
+       ],
+       [
+        10.65627664014762,
+        59.431618415211815
+       ],
+       [
+        10.656185980817868,
+        59.43166355994072
+       ],
+       [
+        10.656155497004532,
+        59.431664860991084
+       ],
+       [
+        10.656081141712528,
+        59.43170108889592
+       ],
+       [
+        10.656051534441815,
+        59.43170210691543
+       ],
+       [
+        10.656013673927962,
+        59.43172830315798
+       ],
+       [
+        10.655982372137707,
+        59.43172992958382
+       ],
+       [
+        10.655874531123159,
+        59.43178427383366
+       ],
+       [
+        10.655844047188134,
+        59.43178557481182
+       ],
+       [
+        10.655769691297584,
+        59.431821802541315
+       ],
+       [
+        10.655740083910926,
+        59.4318228204907
+       ],
+       [
+        10.655684224021543,
+        59.431858541756014
+       ],
+       [
+        10.65565374001171,
+        59.43185984269008
+       ],
+       [
+        10.655579383754317,
+        59.43189607031242
+       ],
+       [
+        10.65554977629637,
+        59.431897088218996
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        10.657019348758967,
+        59.43134775211437
+       ],
+       [
+        10.657039607796559,
+        59.43135723123172
+       ],
+       [
+        10.657092441491237,
+        59.431356560775754
+       ],
+       [
+        10.65711393821546,
+        59.43133923868611
+       ],
+       [
+        10.657196401842535,
+        59.43131931403061
+       ],
+       [
+        10.657523266809228,
+        59.43115349193411
+       ],
+       [
+        10.657539569645968,
+        59.43112635180541
+       ],
+       [
+        10.657469995069091,
+        59.43114519865804
+       ],
+       [
+        10.657447622094118,
+        59.43116280382122
+       ],
+       [
+        10.65741801533967,
+        59.431163822148385
+       ],
+       [
+        10.657396518881427,
+        59.43118114428733
+       ],
+       [
+        10.657366035552949,
+        59.43118244561824
+       ],
+       [
+        10.657293815993894,
+        59.43122704205397
+       ],
+       [
+        10.657262514732823,
+        59.43122866878441
+       ],
+       [
+        10.657222961236139,
+        59.431255473810786
+       ],
+       [
+        10.657193354393172,
+        59.43125649208738
+       ],
+       [
+        10.657137496969199,
+        59.43129221396637
+       ],
+       [
+        10.657055033372522,
+        59.431312138584644
+       ],
+       [
+        10.65705272518884,
+        59.431328546960934
+       ],
+       [
+        10.657020672477763,
+        59.431330538330734
+       ],
+       [
+        10.657019348758967,
+        59.43134775211437
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (142.5 m × 2.9 m)",
+    "top_median_m": 7.91,
+    "top_above_track_bed_m": 4.04,
+    "laser_points": 12804,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       10.656444796393586,
+       59.432173157304454
+      ],
+      [
+       10.656445673239615,
+       59.43219109750287
+      ],
+      [
+       10.656498946989723,
+       59.43219940357151
+      ],
+      [
+       10.656567671058719,
+       59.43216260433936
+      ],
+      [
+       10.65656997952728,
+       59.43214619597237
+      ],
+      [
+       10.656602033037277,
+       59.432144204709914
+      ],
+      [
+       10.656619297626813,
+       59.432110913161104
+      ],
+      [
+       10.656653137155697,
+       59.43210762895954
+      ],
+      [
+       10.65667151015088,
+       59.43207344493424
+      ],
+      [
+       10.65672142207473,
+       59.432061853358114
+      ],
+      [
+       10.656756975855911,
+       59.43201846948749
+      ],
+      [
+       10.656891914147408,
+       59.431942926056266
+      ],
+      [
+       10.656893106032761,
+       59.43191794185387
+      ],
+      [
+       10.656925836879461,
+       59.43191555005419
+      ],
+      [
+       10.65696019841379,
+       59.43189715033178
+      ],
+      [
+       10.656960720644674,
+       59.431882034889426
+      ],
+      [
+       10.657011301775347,
+       59.43186057444327
+      ],
+      [
+       10.65701293244071,
+       59.43184456652806
+      ],
+      [
+       10.657096766394549,
+       59.431805598777196
+      ],
+      [
+       10.657097288563804,
+       59.431790483334375
+      ],
+      [
+       10.657130688824678,
+       59.43177822272269
+      ],
+      [
+       10.657128393145832,
+       59.43176325530761
+      ],
+      [
+       10.657164611200233,
+       59.43175084665951
+      ],
+      [
+       10.657166241788763,
+       59.43173483874248
+      ],
+      [
+       10.657216153043523,
+       59.431723246979615
+      ],
+      [
+       10.657217783606589,
+       59.431707239061964
+      ],
+      [
+       10.657267255868154,
+       59.43168667099238
+      ],
+      [
+       10.65731955014715,
+       59.431625110779486
+      ],
+      [
+       10.657369461187535,
+       59.431613518958805
+      ],
+      [
+       10.657370494422759,
+       59.43159794340628
+      ],
+      [
+       10.657403383206603,
+       59.43158614283452
+      ],
+      [
+       10.657402505874874,
+       59.431568202643085
+      ],
+      [
+       10.657384634906267,
+       59.43156303415847
+      ],
+      [
+       10.657401188971038,
+       59.43154127378262
+      ],
+      [
+       10.657349232904393,
+       59.431559896938865
+      ],
+      [
+       10.657352026666882,
+       59.43157695971417
+      ],
+      [
+       10.657314871921791,
+       59.43157829676211
+      ],
+      [
+       10.657313241409762,
+       59.43159430468104
+      ],
+      [
+       10.65724658877262,
+       59.43162407266924
+      ],
+      [
+       10.65722818599675,
+       59.43165969992378
+      ],
+      [
+       10.657195486018777,
+       59.431660648648396
+      ],
+      [
+       10.657161124850811,
+       59.43167904843173
+      ],
+      [
+       10.657160602710896,
+       59.43169416387491
+      ],
+      [
+       10.657110021922291,
+       59.43171562437793
+      ],
+      [
+       10.657074468905718,
+       59.43175900834319
+      ],
+      [
+       10.657041738221125,
+       59.43176140017945
+      ],
+      [
+       10.657040546448895,
+       59.43178638438329
+      ],
+      [
+       10.656990635040323,
+       59.43179797607961
+      ],
+      [
+       10.656990112823438,
+       59.4318130915222
+      ],
+      [
+       10.656939531749558,
+       59.431834551960044
+      ],
+      [
+       10.656937901049913,
+       59.43185055987452
+      ],
+      [
+       10.656871247579753,
+       59.43188032767374
+      ],
+      [
+       10.65686961684601,
+       59.43189633558738
+      ],
+      [
+       10.656802963225946,
+       59.43192610335221
+      ],
+      [
+       10.656801332458105,
+       59.43194211126505
+      ],
+      [
+       10.656666393966328,
+       59.43201765460355
+      ],
+      [
+       10.65666579917937,
+       59.432042206440556
+      ],
+      [
+       10.656632470922782,
+       59.4320450305392
+      ],
+      [
+       10.656631948544213,
+       59.432060145980536
+      ],
+      [
+       10.656581366875155,
+       59.43208160628151
+      ],
+      [
+       10.656545812803524,
+       59.43212499010523
+      ],
+      [
+       10.656513081726374,
+       59.43212738181058
+      ],
+      [
+       10.656444796393586,
+       59.432173157304454
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (88.3 m × 2.7 m)",
+    "top_median_m": 7.9,
+    "top_above_track_bed_m": 4.04,
+    "laser_points": 2646,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2020. Not a structure; these points are class 64 in the LAZ. Høydedata, project \"Moss Done FOU 2020\" (id 4249, FKB-Laser 3.0, nominal 5 points/m², supplier Statens Kartverk), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box"
+   }
+  }
+ ]
+}

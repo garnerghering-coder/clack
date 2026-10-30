@@ -1,0 +1,226 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0961299,
+      60.19124849999999
+     ],
+     [
+      11.0961445,
+      60.1912737
+     ],
+     [
+      11.0964344,
+      60.19177540000001
+     ],
+     [
+      11.0970739,
+      60.19287779999999
+     ],
+     [
+      11.097308100000001,
+      60.1932784
+     ],
+     [
+      11.0975866,
+      60.1937672
+     ],
+     [
+      11.097596999999999,
+      60.19378530000001
+     ],
+     [
+      11.097779900000003,
+      60.194084800000006
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 1",
+    "track": "1,2",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 360.0,
+    "width_m": 12.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "GAR-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 195.93,
+    "laser_track_bed_m": 194.95,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Mellomplattform Dekker spor 1 og 2",
+    "x_covers_tracks": [
+     "1",
+     "2"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": null,
+    "x_comment": "Mellomplattform Dekker spor 1 og 2",
+    "x_geometry": "extent: OSM platform outline r17848218 (ref 1;2), 329 m along the track (Bane NOR: 360 m)",
+    "x_osm_platform": "r17848218",
+    "x_nsr_quays": [
+     "NSR:Quay:451"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r17848218 (ref 1;2), 329 m along the track (Bane NOR: 360 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.096325999999998,
+      60.1921132
+     ],
+     [
+      11.0967803,
+      60.192919599999996
+     ],
+     [
+      11.097016100000001,
+      60.19332400000001
+     ],
+     [
+      11.097316099999999,
+      60.193823900000005
+     ],
+     [
+      11.097499300000003,
+      60.194129
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 2",
+    "track": "2,3",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 250.0,
+    "width_m": 8.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "GAR-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": null,
+    "laser_track_bed_m": null,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Mellomplattform Dekker spor 2 og 3",
+    "x_covers_tracks": [
+     "2",
+     "3"
+    ],
+    "x_track_type": "Buttspor",
+    "x_track_length_m": 1627.0,
+    "x_passing_loop_m": 317.0,
+    "x_comment": "Mellomplattform Dekker spor 2 og 3",
+    "x_geometry": "extent: OSM platform outline r17848217, 234 m along the track (Bane NOR: 250 m)",
+    "x_osm_platform": "r17848217",
+    "x_nsr_quays": [
+     "NSR:Quay:447"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r17848217, 234 m along the track (Bane NOR: 250 m)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      11.0969757,
+      60.19420319999998
+     ],
+     [
+      11.0967967,
+      60.193891699999995
+     ],
+     [
+      11.096517900000002,
+      60.1934066
+     ],
+     [
+      11.0962934,
+      60.192990499999986
+     ],
+     [
+      11.095797,
+      60.192120800000005
+     ],
+     [
+      11.095354499999997,
+      60.19135459999998
+     ],
+     [
+      11.0953525,
+      60.191351
+     ]
+    ]
+   },
+   "properties": {
+    "bis_object": "track 4",
+    "track": "3,4",
+    "height_class": "760",
+    "height_m": 0.76,
+    "height_text": "760 mm above top of rail (Bane NOR)",
+    "length_m": 360.0,
+    "width_m": 12.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "GAR-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 196.07,
+    "laser_track_bed_m": 194.95,
+    "geometry_note": "Bane NOR publishes no platform coordinates: the line is the OSM centreline of the platform track (railway:track_ref), cut to the OSM platform outline beside it, or to the Bane NOR length around the Entur NSR quay",
+    "x_height_mm_bane_nor": "760",
+    "x_platform_type": "Mellomplattform Dekker spor 4 og 3",
+    "x_covers_tracks": [
+     "4",
+     "3"
+    ],
+    "x_track_type": "Hovedtogspor",
+    "x_track_length_m": null,
+    "x_passing_loop_m": null,
+    "x_comment": "Mellomplattform Dekker spor 4 og 3",
+    "x_geometry": "extent: OSM platform outline r17848216 (ref 3;4), 330 m along the track (Bane NOR: 360 m)",
+    "x_osm_platform": "r17848216",
+    "x_nsr_quays": [
+     "NSR:Quay:452"
+    ],
+    "source": "Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/ (track table), read 2026-10-30; geometry: extent: OSM platform outline r17848216 (ref 3;4), 330 m along the track (Bane NOR: 360 m)"
+   }
+  }
+ ]
+}

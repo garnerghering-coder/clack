@@ -86,7 +86,19 @@
     "lat": 60.2918386,
     "how": "OSM n3288383072",
     "_source": "OpenStreetMap n3288383072 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383072 to platform outlines and register track lines",
+     "source": "OSM n3288383072 geometry (level None): inside rail platform outline w479885632 (ref 3); next 0.0 m from w479885635 (ref 3); register lines: 5.8 m from 'TKL L3', 8.1 m from 'TKL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -103,7 +115,19 @@
     "lat": 60.2918026,
     "how": "OSM n3288383071",
     "_source": "OpenStreetMap n3288383071 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383071 to platform outlines and register track lines",
+     "source": "OSM n3288383071 geometry (level None): inside rail platform outline w91325244 (ref 5); next 0.0 m from w479885611 (ref 5); register lines: 5.6 m from 'TKL L5', 7.2 m from 'TKL L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -148,7 +172,19 @@
     "lat": 60.2932033,
     "how": "OSM n3293095423",
     "_source": "OpenStreetMap n3293095423 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3293095423 to platform outlines and register track lines",
+     "source": "OSM n3293095423 geometry (level 1;3;4;5;6): 2.0 m from rail platform outline w395613886 (ref V0618, local_ref 1); next 14.7 m from w462157301 (ref None); register lines: 8.8 m from 'TKL L1', 13.0 m from 'TKL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 2.0 m from the platform 1 (V0618) outline, but it is tagged levels 1;3;4;5;6 (a Dixi building lift) with no platform level. Whether it opens onto platform 1 is not settled."
   },
   {
    "kind": "escalator",
@@ -1513,7 +1549,19 @@
     "lat": 60.2918026,
     "how": "OSM n3288383071",
     "_source": "OpenStreetMap n3288383071 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383071 to platform outlines and register track lines",
+     "source": "OSM n3288383071 geometry (level None): inside rail platform outline w91325244 (ref 5); next 0.0 m from w479885611 (ref 5); register lines: 5.6 m from 'TKL L5', 7.2 m from 'TKL L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1535,7 +1583,19 @@
     "lat": 60.2918386,
     "how": "OSM n3288383072",
     "_source": "OpenStreetMap n3288383072 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383072 to platform outlines and register track lines",
+     "source": "OSM n3288383072 geometry (level None): inside rail platform outline w479885632 (ref 3); next 0.0 m from w479885635 (ref 3); register lines: 5.8 m from 'TKL L3', 8.1 m from 'TKL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1557,7 +1617,19 @@
     "lat": 60.2929392,
     "how": "OSM n3288383088",
     "_source": "OpenStreetMap n3288383088 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383088 to platform outlines and register track lines",
+     "source": "OSM n3288383088 geometry (level 0;1): 4.0 m from rail platform outline w479885607 (ref 6); next 4.0 m from w479885608 (ref V0617); register lines: 8.3 m from 'TKL L6', 12.4 m from 'TKL L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 4.0 m from both OSM outlines of platform 6 (w479885607, w479885608 V0617) and 8.3 m E of the TKL L6 line. Platform 6 is probable but outside the 3 m rule."
   },
   {
    "kind": "lift",
@@ -1579,7 +1651,19 @@
     "lat": 60.2929776,
     "how": "OSM n3288383092",
     "_source": "OpenStreetMap n3288383092 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383092 to platform outlines and register track lines",
+     "source": "OSM n3288383092 geometry (level 0;1): inside rail platform outline w479885614 (ref 4); next 0.0 m from w479885616 (ref 4); register lines: 5.4 m from 'TKL L4', 7.6 m from 'TKL L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1601,7 +1685,19 @@
     "lat": 60.2930085,
     "how": "OSM n3288383095",
     "_source": "OpenStreetMap n3288383095 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3288383095 to platform outlines and register track lines",
+     "source": "OSM n3288383095 geometry (level 0;1): inside rail platform outline w91325243 (ref 3); next 0.0 m from w479885629 (ref 3); register lines: 6.3 m from 'TKL L3', 7.5 m from 'TKL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1622,7 +1718,19 @@
     "lat": 60.2932033,
     "how": "OSM n3293095423",
     "_source": "OpenStreetMap n3293095423 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3293095423 to platform outlines and register track lines",
+     "source": "OSM n3293095423 geometry (level 1;3;4;5;6): 2.0 m from rail platform outline w395613886 (ref V0618, local_ref 1); next 14.7 m from w462157301 (ref None); register lines: 8.8 m from 'TKL L1', 13.0 m from 'TKL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 2.0 m from the platform 1 (V0618) outline, but it is tagged levels 1;3;4;5;6 (a Dixi building lift) with no platform level. Whether it opens onto platform 1 is not settled."
   },
   {
    "kind": "lift",
@@ -1644,7 +1752,19 @@
     "lat": 60.2929086,
     "how": "OSM n12617590053",
     "_source": "OpenStreetMap n12617590053 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12617590053 to platform outlines and register track lines",
+     "source": "OSM n12617590053 geometry (level 0;1): 4.0 m from rail platform outline w479885608 (ref V0617, local_ref 6); next 5.3 m from w479885607 (ref 6); register lines: 8.3 m from 'TKL L6', 12.5 m from 'TKL L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 4.0 m from the platform 6 outline (w479885608 V0617) and 8.3 m E of the TKL L6 line. Platform 6 is probable but outside the 3 m rule."
   }
  ],
  "entrances": [
@@ -2351,7 +2471,7 @@
    "osm_id": "n13300261563",
    "where": "Dixi 3rd floor (OSM level 2), the station-bridge floor; whether it is inside the station part is not stated",
    "level_per_plan": "Dixi 3rd floor (OSM level 2)",
-   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; https://dixi.fi/en/shop/jk-shop/, read 2026-10-30",
    "position": {
     "lon": 25.0440324,
     "lat": 60.2933425,
@@ -2361,7 +2481,12 @@
     "to_nearest_platform_m": 19.0,
     "how": "OSM node n13300261563",
     "_source": "OpenStreetMap n13300261563 (ODbL), read 2026-10-30"
-   }
+   },
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 09 - 21, Sat 10 - 20, Sun 12 - 18",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30"
   },
   {
    "category": "atm",
@@ -2853,9 +2978,9 @@
    "name": "Hair Design 5",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su 12:00-18:00",
+   "hours_source": "website (Hair Design 5)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.hd5.fi/",
    "position": {
     "lon": 25.0439728,
@@ -2868,7 +2993,9 @@
     "_source": "OpenStreetMap n6139263861 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n6139263861 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n6139263861 (ODbL), read 2026-10-30; https://www.hd5.fi/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma – Pe 9.00 – 21.00, La 9.00 – 18.00, Su 12.00 – 18.00"
   },
   {
    "category": "photo",
@@ -2941,9 +3068,9 @@
    "name": "DNA",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-16:00; Su 12:00-16:00",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0438901,
@@ -2956,7 +3083,9 @@
     "_source": "OpenStreetMap n10560516692 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10560516692 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10560516692 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/dna/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 10 - 19, Sat 10 - 16, Sun 12 - 16"
   },
   {
    "category": "chemist",
@@ -3007,9 +3136,9 @@
    "name": "Kiva Korean Kitchen",
    "brand": null,
    "cuisine": "korean",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:30-20:00; Sa,Su 12:00-20:00",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0435626,
@@ -3022,16 +3151,18 @@
     "_source": "OpenStreetMap n13300261557 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261557 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261557 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/kiva-korean-kitchen/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 10.30 - 20, Sat - Su 12 - 20"
   },
   {
    "category": "optician",
    "name": "Specsavers",
    "brand": "Specsavers",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su off",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0436733,
@@ -3044,16 +3175,18 @@
     "_source": "OpenStreetMap n13300261560 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261560 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261560 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/specsavers/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 10 - 19, Sat 10 - 17, Sun Closed"
   },
   {
    "category": "mobile_phone",
    "name": "Elisa",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su 12:00-16:00",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0439946,
@@ -3066,16 +3199,18 @@
     "_source": "OpenStreetMap n13300261561 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261561 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261561 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/elisa/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 10 - 19, Sat 10 - 17, Sun 12 - 16"
   },
   {
    "category": "beauty",
    "name": "GloWe",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0440024,
@@ -3088,16 +3223,18 @@
     "_source": "OpenStreetMap n13300261562 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261562 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261562 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/glowe/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 10 - 20, Sat 10 - 18, Sun Closed"
   },
   {
    "category": "convenience",
    "name": "JK Shop",
    "brand": null,
    "cuisine": "asian",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.0440324,
@@ -3110,7 +3247,9 @@
     "_source": "OpenStreetMap n13300261563 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261563 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261563 (ODbL), read 2026-10-30; https://dixi.fi/en/shop/jk-shop/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mon - Fri 09 - 21, Sat 10 - 20, Sun 12 - 18"
   },
   {
    "category": "photo",
@@ -3154,7 +3293,8 @@
     "_source": "OpenStreetMap n13300261565 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261565 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261565 (ODbL), read 2026-10-30",
+   "hours_note": "Not in Dixi's current shop directory (dixi.fi/en/shops/) and no Dixi branch on prettyboy.fi's location list - probably closed, but no explicit closure notice found."
   },
   {
    "category": "car_rental",
@@ -3162,8 +3302,8 @@
    "brand": null,
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Paku kympillä)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.pakukympilla.fi/",
    "position": {
     "lon": 25.0442567,
@@ -3176,7 +3316,9 @@
     "_source": "OpenStreetMap n13300261570 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13300261570 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13300261570 (ODbL), read 2026-10-30; https://pakukympilla.fi/toimipisteet/, read 2026-10-30",
+   "hours_raw": "Kauppakeskuksen aukioloaikoina.",
+   "hours_published": "Kauppakeskuksen aukioloaikoina."
   },
   {
    "category": "atm",
@@ -3228,10 +3370,9 @@
   "dixi.fi could not be read (robots.txt blocks automated fetching), so tenant floors/hours are from OSM; the web-search budget ran out before the shops' own sites could be looked up.",
   "Which Dixi 3rd-floor shops count as the 'station part' is not stated by any source read; the list keeps the bridge-floor shops nearest the platforms and leaves out the rest of the mall (S-market and Picnic are kept as traveller-relevant).",
   "Position of the luggage lockers (VR: available) not found.",
-  "Lift/escalator positions are OSM only; VR confirms lifts and escalators exist.",
   "Bus terminal: VR says the Tikkurila terminal closes from 9 February (year not stated) and buses use temporary terminals; current stop positions not settled.",
   "R-kioski Tikkurila Piletti (Ratatie 16, Mo-Fr 06-20, Sa-Su 10-19 per r-kioski.fi) is outside Dixi; left out.",
-  "Platform 1 (V0618 in OSM) access: OSM shows an underpass and stairs; lift n3293095423 is a Dixi building lift. Not confirmed."
+  "Platform 1 (V0618 in OSM) access: OSM shows an underpass and stairs; lift n3293095423 is a Dixi building lift. Not confirmed. [Lift follow-up 2026-10-30: n3293095423 is 2.0 m from the V0618 (platform 1) outline but tagged levels 1;3;4;5;6 as a building lift. OSM has no other lift at platform 1. Platform 1 step-free access is not settled.]"
  ],
  "_sources": {
   "osm": {
@@ -3246,6 +3387,37 @@
    "question": "(no open-question list for Finland yet; brief: only the station-related part of Dixi and the routes to the platforms)",
    "answer": "The station hall is the bridge over the tracks on Dixi's 3rd floor (VR), open 05-02 as the waiting area. Platforms 1–6 (Digitraffic). VR says platforms are reached by lift or escalator; OSM maps from the bridge one lift, an escalator pair and stairs to each island (2/3, 4/5) and to 6, plus an underpass with more lifts. R-kioski hours from r-kioski.fi; other shop hours OSM only.",
    "_source": "https://vr.fi/en/railway-stations-and-routes/tikkurila, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TKL.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-TKL/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  },
+  {
+   "question": "Lift/escalator positions are OSM only; VR confirms lifts and escalators exist.",
+   "answer": "Lifts serve platform 2/3, platform 4/5 (Two lifts per island, settled by geometry: 2/3 and 4/5.)",
+   "evidence": [
+    {
+     "what": "distance of lift n3288383072 to platform outlines and register track lines",
+     "source": "OSM n3288383072 geometry (level None): inside rail platform outline w479885632 (ref 3); next 0.0 m from w479885635 (ref 3); register lines: 5.8 m from 'TKL L3', 8.1 m from 'TKL L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n3288383095 to platform outlines and register track lines",
+     "source": "OSM n3288383095 geometry (level 0;1): inside rail platform outline w91325243 (ref 3); next 0.0 m from w479885629 (ref 3); register lines: 6.3 m from 'TKL L3', 7.5 m from 'TKL L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n3288383071 to platform outlines and register track lines",
+     "source": "OSM n3288383071 geometry (level None): inside rail platform outline w91325244 (ref 5); next 0.0 m from w479885611 (ref 5); register lines: 5.6 m from 'TKL L5', 7.2 m from 'TKL L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n3288383092 to platform outlines and register track lines",
+     "source": "OSM n3288383092 geometry (level 0;1): inside rail platform outline w479885614 (ref 4); next 0.0 m from w479885616 (ref 4); register lines: 5.4 m from 'TKL L4', 7.6 m from 'TKL L5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Tikkurila: 'platforms are accessible by lift or escalator'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/tikkurila",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

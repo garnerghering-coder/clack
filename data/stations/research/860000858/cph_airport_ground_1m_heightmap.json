@@ -1,0 +1,18 @@
+{
+ "file": "cph_airport_ground_1m_heightmap.png",
+ "format": "PNG 16-bit grey, row 0 = north edge",
+ "height_m": "base_m + value / 1000",
+ "base_m": -7,
+ "scale": 1000,
+ "nodata_value": 0,
+ "crs": "EPSG:25832 (ETRS89 / UTM 32N)",
+ "vertical_datum": "DVR90",
+ "origin_top_left_EN": [
+  729439,
+  6171034
+ ],
+ "pixel_m": 1,
+ "width": 561,
+ "height": 265,
+ "source": "cph_airport_ground_1m.tif (gridded from the laser ground class, CC BY 4.0)"
+}

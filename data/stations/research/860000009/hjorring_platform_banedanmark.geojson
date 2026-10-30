@@ -8,11 +8,11 @@
     "coordinates": [
      [
       9.9835438,
-      57.4562477
+      57.456247700000006
      ],
      [
       9.9835755,
-      57.4562516
+      57.45625159999999
      ],
      [
       9.9836991,
@@ -20,14 +20,14 @@
      ],
      [
       9.9837839,
-      57.4562752
+      57.456275199999986
      ],
      [
-      9.9839519,
-      57.4562928
+      9.983951900000001,
+      57.45629280000001
      ],
      [
-      9.9840374,
+      9.984037399999998,
       57.4563012
      ],
      [
@@ -36,47 +36,47 @@
      ],
      [
       9.9843119,
-      57.456326
+      57.456326000000004
      ],
      [
       9.9844474,
-      57.456337
+      57.456336999999984
      ],
      [
       9.9845727,
-      57.4563464
+      57.45634639999999
      ],
      [
       9.9847656,
       57.4563594
      ],
      [
-      9.9848483,
-      57.4563645
+      9.984848299999998,
+      57.45636449999999
      ],
      [
       9.98497,
-      57.4563714
+      57.456371399999995
      ],
      [
       9.9850397,
-      57.456375
+      57.456374999999994
      ],
      [
       9.9851457,
-      57.4563801
+      57.45638009999998
      ],
      [
       9.9852697,
-      57.4563855
+      57.45638550000001
      ],
      [
       9.9853686,
-      57.4563893
+      57.456389300000005
      ],
      [
       9.9855486,
-      57.456395
+      57.45639499999999
      ],
      [
       9.9856758,
@@ -88,23 +88,23 @@
      ],
      [
       9.9858305,
-      57.4564011
+      57.456401099999994
      ],
      [
       9.9858929,
       57.456402
      ],
      [
-      9.9859554,
-      57.4564028
+      9.985955400000002,
+      57.456402800000006
      ],
      [
-      9.9860178,
-      57.4564034
+      9.986017799999999,
+      57.456403400000006
      ],
      [
-      9.9860803,
-      57.456404
+      9.986080299999998,
+      57.456404000000006
      ],
      [
       9.9861428,
@@ -112,7 +112,7 @@
      ],
      [
       9.9862052,
-      57.4564049
+      57.45640489999999
      ],
      [
       9.9862677,
@@ -132,43 +132,43 @@
      ],
      [
       9.9881801,
-      57.4564186
+      57.45641860000001
      ],
      [
       9.9882217,
-      57.4564188
+      57.45641880000001
      ],
      [
-      9.9882634,
-      57.456419
+      9.988263400000001,
+      57.456419000000004
      ],
      [
-      9.988305,
+      9.988305000000002,
       57.4564192
      ],
      [
       9.9883467,
-      57.4564194
+      57.456419399999994
      ],
      [
       9.9883883,
-      57.4564195
+      57.45641949999999
      ],
      [
-      9.988533,
-      57.4564193
+      9.988533000000002,
+      57.45641930000001
      ],
      [
-      9.9886779,
+      9.988677899999999,
       57.4564185
      ],
      [
       9.9888318,
-      57.4564169
+      57.456416899999994
      ],
      [
       9.9889734,
-      57.4564148
+      57.456414800000005
      ],
      [
       9.9891211,
@@ -176,11 +176,11 @@
      ],
      [
       9.9892751,
-      57.4564081
+      57.45640809999998
      ],
      [
       9.9893811,
-      57.456405
+      57.45640499999998
      ],
      [
       9.9894164,
@@ -191,20 +191,34 @@
    "properties": {
     "bis_object": "perron 1 / track 1",
     "track": "1",
-    "perron": "1",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 226.0,
+    "width_m": 6.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000009-25-1-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 34.5,
+    "laser_track_bed_m": 33.73,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "25",
+    "x_perron": "1",
+    "x_track": "1",
+    "x_perron_tracks": [
      "1"
     ],
-    "tib": "25",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 226,
-    "width_m": 6.5,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 1 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 171 beside the track (354 m along it; Bilag 226 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 1 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 171 beside the track (354 m along it; Bilag 226 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -213,24 +227,24 @@
     "type": "LineString",
     "coordinates": [
      [
-      9.9843574,
-      57.4562406
+      9.984357400000002,
+      57.45624060000001
      ],
      [
       9.9846087,
-      57.4562561
+      57.456256100000004
      ],
      [
       9.9849008,
-      57.4562696
+      57.456269600000006
      ],
      [
       9.9851935,
-      57.4562785
+      57.456278499999996
      ],
      [
       9.9854866,
-      57.4562828
+      57.45628279999999
      ],
      [
       9.9872992,
@@ -238,11 +252,11 @@
      ],
      [
       9.9877946,
-      57.4562983
+      57.456298299999986
      ],
      [
-      9.9879833,
-      57.4562998
+      9.987983300000002,
+      57.456299800000004
      ],
      [
       9.9886508,
@@ -254,15 +268,15 @@
      ],
      [
       9.9891679,
-      57.4563047
+      57.456304700000004
      ],
      [
       9.9891971,
-      57.4563045
+      57.45630450000001
      ],
      [
       9.9892674,
-      57.4563041
+      57.456304100000004
      ],
      [
       9.9894104,
@@ -273,20 +287,34 @@
    "properties": {
     "bis_object": "perron 2 / track 2",
     "track": "2",
-    "perron": "2",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 305.0,
+    "width_m": 4.9,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000009-25-2-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 34.54,
+    "laser_track_bed_m": 33.81,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "25",
+    "x_perron": "2",
+    "x_track": "2",
+    "x_perron_tracks": [
      "2"
     ],
-    "tib": "25",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 305,
-    "width_m": 4.9,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 2 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 172 beside the track (303 m along it; Bilag 305 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 2 (station Hj); extent: Banedanmark platform outline FOR_PERRONER_OD Hj 172 beside the track (303 m along it; Bilag 305 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 25; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   }
  ]

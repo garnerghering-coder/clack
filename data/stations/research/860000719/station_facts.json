@@ -15,7 +15,36 @@
    "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 1 (the train stops with the platform to its north-east)",
+   "_source": "laser (2024-04-30, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 2 (the train stops with the platform to its south-west)",
+   "_source": "laser (2024-04-30, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 3 (the train stops with the platform to its north-east)",
+   "_source": "laser (2024-04-30, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2a",
+   "track": "2a",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 2a (the train stops with the platform to its north-east)",
+   "_source": "laser (2024-04-30, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2a; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "underpass",
@@ -296,16 +325,17 @@
     "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n8109952179 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (no own website; OSM has only a Facebook link, not allowed). OSM n8109952179."
   },
   {
    "category": "convenience",
    "name": "7-Eleven",
    "brand": "7-Eleven",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 05:00-22:00; Sa,Su 08:00-22:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 11.7086374,
@@ -318,12 +348,14 @@
     "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9622509134 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/holbak/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "DSB 7-Eleven: Mandag - fredag 05.00-22.00; Lørdag - Søndag 08.00-22.00"
   }
  ],
  "plans": [],
  "open": [
-  "Lift(s): DSB lists 'Elevator' but gives no position; OSM has none. Not settled.",
+  "Lift(s): DSB lists 'Elevator' but gives no position; OSM has none. Not settled. [Lift follow-up 2026-10-30: Not settled.]",
   "OSM has no platform objects with refs for Holbæk; platform names come from the Banedanmark register.",
   "Second underpass w149004069 (with stairs w149004072, w1477015822): whether it is a public passage to the platforms is not settled.",
   "No owner plan found; level names not signposted in any source.",

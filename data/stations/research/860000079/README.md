@@ -1,16 +1,21 @@
-# Fredericia (`860000079`): platform register and station facts (3D pending)
+# Fredericia (`860000079`): measured 3D data
 
-Pass of 2026-10-30 following `STATION_3D_RESEARCH_BRIEF_DK_FI.md`. **The 3D files are not here yet**: Danmarks Højdemodel's
-point cloud needs a Dataforsyningen token (the owner's) or the 10 km block order; see `HANDOFF_STATION_3D.md`, Denmark.
-`make_dk_bundle.py` + `station_pack.py` build the 3D pack from the 1 km tiles once they exist.
+Research pack made 2026-10-30 following `STATION_3D_RESEARCH.md` (playbook, Part 1 steps 3–9) and the brief STATION_3D_RESEARCH_BRIEF_DK_FI.md (Denmark).
+Heights are metres in DVR90; coordinates WGS84 in the GeoJSON files and ETRS89 / UTM 32N (EPSG:25832) in the rasters and the LAZ.
+Station box (ETRS89 / UTM 32N): E 546417–546842, N 6157875–6158810
+(425 × 935 m: the platforms' extent plus 120 m).
 
 | File | What it is | Licence |
 |---|---|---|
-| `fredericia_platform_banedanmark.geojson` | One line per Bilag 3.6 row (perron, track, length, height in cm above rail) on Banedanmark's track centreline, cut to its platform outline; `geometry_how` says how each was placed; laser levels empty until the 3D pass | Bilag 3.6: Banedanmark's facts; geometry Banedanmark Open Data, CC BY 4.0 |
-| `station_facts.json` | Part 2: levels, ways between levels, entrances, amenities (shops, cafés, kiosks…) with hours and positions, open points; each with `_source` | owner pages (facts only), OSM (ODbL) |
+| `3D_SOURCES_FINDINGS.md` | Values, flags and sources | — |
+| `fredericia_structures_heights.geojson` (39 kB) | Outlines with measured roof heights: OSM buildings, roofs and bridges at the platforms, roofs traced from the laser, trains standing in the scan | outlines from OSM: ODbL; heights: Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546) |
+| `fredericia_ground_1m.tif` (696 kB) | Ground, 1 m, float32, EPSG:25832, DVR90, gridded here from the laser's ground points (class 2), median per 1 m cell; no-data where there is no ground point | Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546) |
+| `fredericia_ground_1m_heightmap.png` + `.json` | The same ground as a 16-bit PNG; the JSON says how to turn values into metres | as above |
+| `fredericia_ground_1m_preview.png` | 8-bit grey preview, for looking at only (dark = low) | as above |
+| `fredericia_laser_station_2025.laz` (67.5 MB) | Laser points clipped to the station box, original classes, **trains as class 64** (9960 points) | Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6157_546, PUNKTSKY_1km_6158_546) |
+| `fredericia_platform_banedanmark.geojson` | Bilag 3.6 platforms (perron, track, length, height in cm) on Banedanmark track centrelines, with the laser levels | Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 |
+| `photos.json` | Wikimedia Commons files near the station, with author, licence and link | each file's own licence (listed) |
+| `station_facts.json` | Part 2 of the brief: levels, platform sides, ways between levels, entrances, amenities (every shop, café, restaurant and kiosk) with opening hours and a `position` (lon/lat, OSM level, inside the station building or not) for the 2D map, plans, open points; every entry has its `_source`. Shops with several same-name places in OSM have `position_candidates` instead; shops not in OSM have `position: null` | facts from the owner's pages and plans (not open: facts only), OSM (ODbL), laser + Banedanmark |
+| `_report.json` | Machine-readable summary of this pass | — |
 
-Register flags (not decided):
-- Perron 1 track 1: the outline FOR_PERRONER_OD Fa 171 runs 305 m along the track, Bilag says 170 m; line drawn to the outline
-- Perron 3 track 6: the outline FOR_PERRONER_OD Fa 173 runs 458 m along the track, Bilag says 317 m; line drawn to the outline
-- Perron 5 track 31: the outline FOR_PERRONER_OD Fa 175 runs 209 m along the track, Bilag says 73 m; line drawn to the outline
-- Perron 5 track 7: the outline FOR_PERRONER_OD Fa 175 runs 164 m along the track, Bilag says 58 m; line drawn to the outline
+The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.

@@ -99,7 +99,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.32,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4131C2), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4131C2 2023-06-09 (20230207_Swissphoto_Riihimaki_kesa); from data/stations/research/fi_HL/hameenlinna_structures_heights.geojson (metres above the platform surface, 84.4 m RH 2000, laser 2023-06-09); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     }
   ],
   "terrain": {
@@ -131,7 +132,7 @@
       "category": "kiosk",
       "name": "R-kioski Hämeenlinna Asema",
       "level": "0",
-      "x": -34,
+      "x": -34.0,
       "y": 5.5,
       "fee": null,
       "opening_hours": "Mo-Fr 05:30-20:00; Sa,Su 08:00-18:00",
@@ -174,13 +175,13 @@
       "category": "shop",
       "name": "Scandia Rent",
       "level": "0",
-      "x": -49,
+      "x": -49.0,
       "y": -0.4,
       "fee": null,
       "opening_hours": null,
       "hours_source": null,
       "hours_verified": null,
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; placed OSM node n5894019063 (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)"
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://scandiarent.fi/toimipisteet/hameenlinna/, read 2026-10-30; placed OSM node n5894019063 (research pass 2026-10-30, data/stations/research/fi_HL/station_facts.json)"
     },
     {
       "id": "res3c12da9e8e",

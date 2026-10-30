@@ -44,6 +44,9 @@ def grid_laser():
         sub.write(f'{OUT}/{os.path.basename(f)}')
         for k, v in zip(*np.unique(np.asarray(las.classification[m]), return_counts=True)):
             cls_all[int(k)] = cls_all.get(int(k), 0) + int(v)
+        gt = np.asarray(las.gps_time[m])
+        if gt.size:
+            gts.append(float(np.median(gt)))
         g = m & (las.classification == 2)
         xs.append(np.asarray(las.x[g])); ys.append(np.asarray(las.y[g])); zs.append(np.asarray(las.z[g]))
     X, Y, Z = map(np.concatenate, (xs, ys, zs))
@@ -56,7 +59,7 @@ def grid_laser():
     dtm = np.full(W * H, np.nan, 'float32'); dtm[uk] = z[st + cnt // 2]
     dtm.reshape(H, W).astype('<f4').tofile(f'{OUT}/dtm_window.f32')
 
-tiles, cls_all = [], {}
+tiles, cls_all, gts = [], {}, []
 dtm = np.array([np.nan])
 if LAZ:
     grid_laser()
@@ -66,7 +69,10 @@ OC = json.load(open(f'{SRC}/clack_dk_osm_commons.json'))[SAFE]
 json.dump(OC['osm'], open(f'{OUT}/osm.json', 'w'))
 json.dump(OC['commons'], open(f'{OUT}/commons.json', 'w'))
 slug = re.sub(r'[^a-z0-9]+', '_', ST['name'].lower().replace('ø', 'o').replace('æ', 'ae').replace('å', 'a')).strip('_')
-SCAN = os.environ.get('DK_SCAN_DATE', 'unknown')   # from DHMOprindelse (flight date per area) when read
+import datetime
+# scan date: from the points' GPS time (adjusted standard GPS time = GPS seconds − 1e9), median over the box
+SCAN = os.environ.get('DK_SCAN_DATE') or (
+    (datetime.datetime(1980, 1, 6) + datetime.timedelta(seconds=float(np.median(gts)) + 1e9)).strftime('%Y-%m-%d') if gts else 'unknown')
 line = ('Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles ' + ', '.join(t.replace('.laz', '') for t in tiles) + ')')
 OBJ = [k for k in (1, 3, 4, 5, 6) if k in cls_all]
 meta = {

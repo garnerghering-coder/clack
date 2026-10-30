@@ -21,7 +21,50 @@
    "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 2",
+   "track": "2",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 2 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 3",
+   "track": "3",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 3 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 4",
+   "track": "4",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 4 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 4 / track 5",
+   "track": "5",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 5 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 4 / track 5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 6",
+   "track": "6",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 6 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 7",
+   "track": "7",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 7 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-10, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 7; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "footbridge",
@@ -103,7 +146,17 @@
     "lat": 55.45769,
     "how": "OSM w591100751 (point on the way)",
     "_source": "OpenStreetMap w591100751 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w591100751 to platform outlines and register track lines",
+     "source": "OSM w591100751 geometry (level None): 0.7 m from rail platform outline r11605726 (ref 4;6); next 0.7 m from w591100753 (ref None); register lines: 5.0 m from 'perron 3 / track 7', 10.8 m from 'perron 2 / track 6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Area lift at the south footbridge (w652260450): 0.7 m from both the OSM 4;6 outline (r11605726) and the Lokaltog platform outline w591100753, and 9.0 m beyond the end of the register's track 7 line. The station facts place it at the 'south end of perron 3, west side'. Geometry touches perron 2 (4;6) and the Lokaltog platform, but OSM has no outline for perron 3 (track 7) and the facts disagree, so this is not settled."
   },
   {
    "kind": "underpass",
@@ -139,7 +192,17 @@
     "lat": 55.45769,
     "how": "OSM w591100751 (point on the way)",
     "_source": "OpenStreetMap w591100751 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w591100751 to platform outlines and register track lines",
+     "source": "OSM w591100751 geometry (level None): 0.7 m from rail platform outline r11605726 (ref 4;6); next 0.7 m from w591100753 (ref None); register lines: 5.0 m from 'perron 3 / track 7', 10.8 m from 'perron 2 / track 6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Area lift at the south footbridge (w652260450): 0.7 m from both the OSM 4;6 outline (r11605726) and the Lokaltog platform outline w591100753, and 9.0 m beyond the end of the register's track 7 line. The station facts place it at the 'south end of perron 3, west side'. Geometry touches perron 2 (4;6) and the Lokaltog platform, but OSM has no outline for perron 3 (track 7) and the facts disagree, so this is not settled."
   },
   {
    "kind": "footbridge",
@@ -326,7 +389,8 @@
     "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (no own website; only partner/aggregator listings). OSM n5908116366."
   },
   {
    "category": "cafe",
@@ -348,16 +412,17 @@
     "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: lagkagehuset.dk/butikker and store URL (JS-rendered, no store data readable); DSB Køge page does not name it. OSM n8133042258."
   },
   {
    "category": "convenience",
    "name": "7-Eleven",
    "brand": "7-Eleven",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 12.1858951,
@@ -370,7 +435,9 @@
     "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "DSB 7-Eleven: Mandag - fredag 05.00-00.00; Lørdag - Søndag Døgnåbent"
   },
   {
    "category": "supermarket",
@@ -392,7 +459,8 @@
     "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: 365discount.coop.dk store page /find-butik/365discount-koege/24587/ (JS-rendered; no address or hours readable, so cannot even confirm it is this store). OSM n8363710421."
   },
   {
    "category": "pharmacy",
@@ -463,7 +531,7 @@
  ],
  "plans": [],
  "open": [
-  "Lifts: OSM maps only one (west side); DSB lists 'Elevator' with no number or position. Whether perron 1, perron 2 and the Lokaltog perron 4 have lifts is not settled.",
+  "Lifts: OSM maps only one (west side); DSB lists 'Elevator' with no number or position. Whether perron 1, perron 2 and the Lokaltog perron 4 have lifts is not settled. [Lift follow-up 2026-10-30: OSM has no lift on perron 1: n14084429591 is a street lift at the east end of the footbridge, 38 m from perron 1. w591100751 touches the perron 2 (4;6) and Lokaltog outlines (0.7 m), but the facts place it at perron 3. Not settled.]",
   "OSM platform refs ('2;3', '5', one without ref) don't cover perron 2 (tracks 4/6) and perron 3 (track 7).",
   "Which platform the Lokaltog Østbanen uses (track 5/perron 4 by its length and position, but no owner source says so).",
   "Shops near the station in OSM (Lagkagehuset n8133042258, 365discount n8363710421, Køge Stations Apotek n8363710422, Imerco, Lucky Star, Fri BikeShop) are 25–50 m from the platforms; no source says they are in the station, so they are left out.",

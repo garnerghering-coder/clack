@@ -933,7 +933,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n710551047",
     "_source": "OpenStreetMap n710551047 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (three Lillestrøm stores: #077 'Lillestrøm jbst.', Jonas Liesgate 4; #078 'Lillestrøm jbst., syd'; #107 'Rutebilst., Lillestrøm' — which one is OSM n710551047 is not established) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "cafe",
@@ -994,7 +995,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n6864709206",
     "_source": "OpenStreetMap n6864709206 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. No own website or station-owner page found by search; Bane NOR page names no outlets."
   },
   {
    "category": "cafe",
@@ -1032,7 +1034,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n10025607075",
     "_source": "OpenStreetMap n10025607075 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. bigbite.no/finn-oss/ restaurant finder loaded without listings in WebFetch; /restauranter returned an error. Only aggregator (Wolt) pages found, not used."
   },
   {
    "category": "sports",
@@ -1269,7 +1272,7 @@
  ],
  "plans": [],
  "open": [
-  "Lifts: Bane NOR says there is a lift to every platform, but the OSM extract has none, so positions and which passage exit serves which platform are unknown.",
+  "Lifts: Bane NOR says there is a lift to every platform, but the OSM extract has none, so positions and which passage exit serves which platform are unknown. [Lift follow-up 2026-10-30: Not settled. OSM has no lift at all, and Bane NOR's English page gives no positions. Missing: lift positions from a plan or photo.]",
   "Stairs w58198084–w58198087: OSM does not link them to platform refs, and the extract has no platform objects; which island platform each reaches is unknown.",
   "Signposted names for the levels and for the passage under the tracks not found; no heights in any source.",
   "Shop positions for the passage are inferred from OSM coordinates (distance to the middle of the underpass), not from a plan or owner text. No Bane NOR/Bane NOR Eiendom tenant list or station plan found.",

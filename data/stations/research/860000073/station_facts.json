@@ -19,7 +19,36 @@
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 3",
+   "track": "3",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 3 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 4",
+   "track": "4",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 4 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 4; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 5",
+   "track": "5",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 5 (the train stops with the platform to its east)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 6",
+   "track": "6",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 6 (the train stops with the platform to its west)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 6; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "underpass",
@@ -544,7 +573,7 @@
  ],
  "plans": [],
  "open": [
-  "DSB lists an elevator but OSM maps no lift; position and platforms served unknown.",
+  "DSB lists an elevator but OSM maps no lift; position and platforms served unknown. [Lift follow-up 2026-10-30: Not settled.]",
   "Toilet 'Lagkagehuset' node n11455177409 (OSM) is the bakery's customer toilet; not listed.",
   "Lagkagehuset hours are OSM only (own site not checked).",
   "Toscana and Piri Piri Chicken (OSM, outside the station building) not included.",

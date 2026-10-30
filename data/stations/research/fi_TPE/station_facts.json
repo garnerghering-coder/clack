@@ -91,7 +91,19 @@
     "lat": 61.497945,
     "how": "OSM n5056120093",
     "_source": "OpenStreetMap n5056120093 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5056120093 to platform outlines and register track lines",
+     "source": "OSM n5056120093 geometry (level 0;1): inside rail platform outline r19521519 (ref 1); next 15.8 m from r19521688 (ref 2;3); register lines: 9.5 m from 'TPE L1', 13.9 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "escalator",
@@ -122,7 +134,19 @@
     "lat": 61.4979481,
     "how": "OSM n5308748484",
     "_source": "OpenStreetMap n5308748484 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5308748484 to platform outlines and register track lines",
+     "source": "OSM n5308748484 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 13.1 m from r19521519 (ref 1); register lines: 6.7 m from 'TPE L2', 7.0 m from 'TPE L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "escalator",
@@ -153,7 +177,19 @@
     "lat": 61.4979509,
     "how": "OSM n5308748482",
     "_source": "OpenStreetMap n5308748482 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5308748482 to platform outlines and register track lines",
+     "source": "OSM n5308748482 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.0 m from r19521688 (ref 2;3); register lines: 6.5 m from 'TPE L4', 7.0 m from 'TPE L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "escalator",
@@ -200,7 +236,17 @@
     "lat": 61.5005337,
     "how": "OSM n5121962126",
     "_source": "OpenStreetMap n5121962126 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121962126 to platform outlines and register track lines",
+     "source": "OSM n5121962126 geometry (level 0;1): 7.5 m from rail platform outline r19521519 (ref 1); next 20.3 m from r19521688 (ref 2;3); register lines: 13.7 m from 'TPE L1', 17.8 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 7.5 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -217,7 +263,19 @@
     "lat": 61.5005661,
     "how": "OSM n5121961716",
     "_source": "OpenStreetMap n5121961716 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121961716 to platform outlines and register track lines",
+     "source": "OSM n5121961716 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 12.9 m from r19521717 (ref 4;5); register lines: 6.1 m from 'TPE L3', 7.5 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -234,7 +292,19 @@
     "lat": 61.5005841,
     "how": "OSM n5121961719",
     "_source": "OpenStreetMap n5121961719 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121961719 to platform outlines and register track lines",
+     "source": "OSM n5121961719 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.4 m from r19521688 (ref 2;3); register lines: 6.4 m from 'TPE L5', 7.3 m from 'TPE L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -409,7 +479,19 @@
     "lat": 61.497945,
     "how": "OSM n5056120093",
     "_source": "OpenStreetMap n5056120093 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5056120093 to platform outlines and register track lines",
+     "source": "OSM n5056120093 geometry (level 0;1): inside rail platform outline r19521519 (ref 1); next 15.8 m from r19521688 (ref 2;3); register lines: 9.5 m from 'TPE L1', 13.9 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -428,7 +510,19 @@
     "lat": 61.5005661,
     "how": "OSM n5121961716",
     "_source": "OpenStreetMap n5121961716 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121961716 to platform outlines and register track lines",
+     "source": "OSM n5121961716 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 12.9 m from r19521717 (ref 4;5); register lines: 6.1 m from 'TPE L3', 7.5 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -447,7 +541,19 @@
     "lat": 61.5005841,
     "how": "OSM n5121961719",
     "_source": "OpenStreetMap n5121961719 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121961719 to platform outlines and register track lines",
+     "source": "OSM n5121961719 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.4 m from r19521688 (ref 2;3); register lines: 6.4 m from 'TPE L5', 7.3 m from 'TPE L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -466,7 +572,17 @@
     "lat": 61.5005337,
     "how": "OSM n5121962126",
     "_source": "OpenStreetMap n5121962126 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5121962126 to platform outlines and register track lines",
+     "source": "OSM n5121962126 geometry (level 0;1): 7.5 m from rail platform outline r19521519 (ref 1); next 20.3 m from r19521688 (ref 2;3); register lines: 13.7 m from 'TPE L1', 17.8 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 7.5 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -485,7 +601,19 @@
     "lat": 61.4979509,
     "how": "OSM n5308748482",
     "_source": "OpenStreetMap n5308748482 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5308748482 to platform outlines and register track lines",
+     "source": "OSM n5308748482 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.0 m from r19521688 (ref 2;3); register lines: 6.5 m from 'TPE L4', 7.0 m from 'TPE L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -504,7 +632,19 @@
     "lat": 61.4979481,
     "how": "OSM n5308748484",
     "_source": "OpenStreetMap n5308748484 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5308748484 to platform outlines and register track lines",
+     "source": "OSM n5308748484 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 13.1 m from r19521519 (ref 1); register lines: 6.7 m from 'TPE L2', 7.0 m from 'TPE L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -523,7 +663,17 @@
     "lat": 61.4980175,
     "how": "OSM n13089158346",
     "_source": "OpenStreetMap n13089158346 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13089158346 to platform outlines and register track lines",
+     "source": "OSM n13089158346 geometry (level 0;-2): 22.1 m from rail platform outline r19521519 (ref 1); next 40.4 m from r19521688 (ref 2;3); register lines: 34.1 m from 'TPE L1', 38.5 m from 'TPE L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -1738,9 +1888,9 @@
    "name": "Pizzamestarit",
    "brand": null,
    "cuisine": "pizza",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 10:45-20:00; Fr 10:45-22:00; Sa 12:00-22:00; Su 12:00-20:00",
+   "hours_source": "website (Pizzamestarit)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.pizzamestarit.fi/tampereen-pizzamestarit/",
    "position": {
     "lon": 23.770751,
@@ -1753,7 +1903,9 @@
     "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30; https://www.pizzamestarit.fi/tampereen-pizzamestarit/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma–to 10.45–20.00, Pe 10.45–22.00, La 12.00–22.00, Su 12.00–20.00"
   },
   {
    "category": "hairdresser",
@@ -1775,7 +1927,8 @@
     "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n14001718622 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n14001718622. No own website or station/centre page with hours found; no web presence found."
   },
   {
    "category": "clothes",
@@ -1870,7 +2023,6 @@
  "open": [
   "Signposted level names: none found (no published station plan).",
   "Levels' heights: no source measures them.",
-  "Which platform each lift/escalator reaches is OSM only (the city and VR confirm lifts/escalators in the travel-centre tunnel and lifts via the Rongankatu underpass, not per platform).",
   "Signposted platform names (e.g. 'laituri 2' vs 'raide 2–3') not confirmed; sources speak of tracks 1–5.",
   "No published station plan from VR/Väylä/City of Tampere found; vayla.fi project pages (tampereen-henkiloratapiha/liikennejarjestelyt) would not load.",
   "Toilet fee unknown.",
@@ -1891,6 +2043,42 @@
    "question": "Current entrances, lifts and passages during the station-yard rebuild (City of Tampere / Nysse)",
    "answer": "Open: the main entrance from Hämeenkatu/Rautatienkatu; the Matkakeskustunneli (travel-centre tunnel, south end, open 24 h, with a lift and a pair of escalators up to each of the three platforms); the Rongankatu underpass (north end, accessible, lifts and stairs to all platforms); Sorinsilta and Lapintie (and Erkkilänsilta) for crossing the yard. Closed for the whole project: the Asematunneli (station tunnel) and the Itsenäisyydenkatu underpass for pedestrians/cyclists. From Tammela, Tulli and the Tulli tram stop, go through the travel-centre tunnel. There is no VR service point.",
    "_source": "https://www.vr.fi/en/on-track/railway-station-area-renovation, read 2026-10-30; City of Tampere, Asemakorttelit 'Connections', https://asemakorttelit.tampere.fi/en/connections/, read 2026-10-30; City of Tampere, 'Construction sites affecting traffic in the city centre', https://www.tampere.fi/en/transport-streets-and-maintenance/construction-sites-affecting-traffic-city-centre, read 2026-10-30; City of Tampere news 2025-08-08 'Tampereen henkilöratapiha -hanke: viikolla 33 rautatieaseman matkakeskustunnelin hissit ja liukuportaat poissa käytöstä yöaikaan', https://www.tampere.fi/ajankohtaista/2025/08/08/tampereen-henkiloratapiha-hanke-viikolla-33-rautatieaseman, read 2026-10-30; https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30"
+  },
+  {
+   "question": "Which platform each lift/escalator reaches is OSM only (the city and VR confirm lifts/escalators in the travel-centre tunnel and lifts via the Rongankatu underpass, not per platform).",
+   "answer": "Lifts serve platform 1, platform 2/3, platform 4/5 (Settled by geometry. The south row (refs 10945956/57/58) serves 1, 2/3 and 4/5. The north row at Rongantunneli (B1NE5084/5085) serves 2/3 and 4/5.)",
+   "evidence": [
+    {
+     "what": "distance of lift n5056120093 to platform outlines and register track lines",
+     "source": "OSM n5056120093 geometry (level 0;1): inside rail platform outline r19521519 (ref 1); next 15.8 m from r19521688 (ref 2;3); register lines: 9.5 m from 'TPE L1', 13.9 m from 'TPE L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5308748484 to platform outlines and register track lines",
+     "source": "OSM n5308748484 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 13.1 m from r19521519 (ref 1); register lines: 6.7 m from 'TPE L2', 7.0 m from 'TPE L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5308748482 to platform outlines and register track lines",
+     "source": "OSM n5308748482 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.0 m from r19521688 (ref 2;3); register lines: 6.5 m from 'TPE L4', 7.0 m from 'TPE L5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5121961716 to platform outlines and register track lines",
+     "source": "OSM n5121961716 geometry (level 0;1): inside rail platform outline r19521688 (ref 2;3); next 12.9 m from r19521717 (ref 4;5); register lines: 6.1 m from 'TPE L3', 7.5 m from 'TPE L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5121961719 to platform outlines and register track lines",
+     "source": "OSM n5121961719 geometry (level 0;1): inside rail platform outline r19521717 (ref 4;5); next 13.4 m from r19521688 (ref 2;3); register lines: 6.4 m from 'TPE L5', 7.3 m from 'TPE L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Tampere: 'Lifts are available to the station platforms.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/tampere",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

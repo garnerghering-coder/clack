@@ -19,7 +19,52 @@
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000053.json), read 2026-10-30; Wikipedia 'Aarhus Central Station' https://en.wikipedia.org/wiki/Aarhus_Central_Station, read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 2",
+   "track": "2",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 2 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 3",
+   "track": "3",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 3 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 4",
+   "track": "4",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 4 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 4; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 5",
+   "track": "5",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 5 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 5; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 6",
+   "track": "6",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 6 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 6; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 3 / track 7",
+   "track": "7",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 7 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-23, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 7; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "lift",
@@ -304,7 +349,17 @@
     "lat": 56.1501312,
     "how": "OSM n5030708505",
     "_source": "OpenStreetMap n5030708505 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5030708505 to platform outlines and register track lines",
+     "source": "OSM n5030708505 geometry (level None): 12.7 m from rail platform outline r15762677 (ref 2;3); next 13.1 m from r11644878 (ref 0;1); register lines: 10.8 m from 'perron 1 / track 2', 23.3 m from 'perron 1 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 12.7 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -323,7 +378,19 @@
     "lat": 56.1499956,
     "how": "OSM n5030711330",
     "_source": "OpenStreetMap n5030711330 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 1 (spor 2/3)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5030711330 to platform outlines and register track lines",
+     "source": "OSM n5030711330 geometry (level None): inside rail platform outline r15762677 (ref 2;3); next 1.5 m from w515037672 (ref None); register lines: 6.1 m from 'perron 1 / track 2', 6.4 m from 'perron 1 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -342,7 +409,19 @@
     "lat": 56.149833,
     "how": "OSM n5030711331",
     "_source": "OpenStreetMap n5030711331 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 4/5)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5030711331 to platform outlines and register track lines",
+     "source": "OSM n5030711331 geometry (level None): inside rail platform outline r15762676 (ref 4;5); next 1.6 m from w515037673 (ref None); register lines: 5.0 m from 'perron 2 / track 4', 5.4 m from 'perron 2 / track 5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -361,7 +440,19 @@
     "lat": 56.1496967,
     "how": "OSM n5030711332",
     "_source": "OpenStreetMap n5030711332 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 3 (spor 6/7)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5030711332 to platform outlines and register track lines",
+     "source": "OSM n5030711332 geometry (level None): inside rail platform outline r15762675 (ref 6;7); next 12.8 m from r15762676 (ref 4;5); register lines: 2.8 m from 'perron 3 / track 6', 9.4 m from 'perron 3 / track 7'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -752,7 +843,8 @@
     "to_nearest_platform_m": 30.0,
     "how": "OSM node n12541961098",
     "_source": "OpenStreetMap n12541961098 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. Tried: dunkin.dk (robots-blocked, not readable); DSB Aarhus H page (no Dunkin' mention, only 7-Eleven); web search found only aggregators. Operated by SSP under franchise."
   },
   {
    "category": "cafe",
@@ -1113,7 +1205,8 @@
     "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n825060403 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search for own website (only aggregator/tourism listings found); DSB Aarhus H page does not name it; not a Bruuns Galleri tenant. OSM n825060403."
   },
   {
    "category": "restaurant",
@@ -1245,7 +1338,8 @@
     "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9241685208 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (only aggregators/delivery platforms; OSM has only a Facebook link, not allowed); not on DSB page. OSM n9241685208, ~270 m from station."
   },
   {
    "category": "bakery",
@@ -1363,8 +1457,8 @@
    "brand": "Thiele",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2049717,
@@ -1377,7 +1471,9 @@
     "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212824382 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1385,8 +1481,8 @@
    "brand": "NAME IT",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2048727,
@@ -1399,7 +1495,9 @@
     "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212824384 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "pharmacy",
@@ -1429,8 +1527,8 @@
    "brand": null,
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2051614,
@@ -1443,16 +1541,18 @@
     "_source": "OpenStreetMap n10212824387 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212824387 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212824387 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "cosmetics",
    "name": "Rituals",
    "brand": "Rituals",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (Rituals)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.rituals.com/da-dk/store-detail?store=Aarhus-Bruuns-Galleri",
    "position": {
     "lon": 10.2051788,
@@ -1465,16 +1565,18 @@
     "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212824388 (ODbL), read 2026-10-30; https://www.rituals.com/da-dk/store-detail?store=Aarhus-Bruuns-Galleri, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag–Fredag 10:00 - 20:00; Lørdag 10:00 - 18:00; Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
    "name": "H&M",
    "brand": "H&M",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa,Su 10:00-18:00",
+   "hours_source": "website (H&M store locator API)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2052872,
@@ -1487,7 +1589,9 @@
     "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212824389 (ODbL), read 2026-10-30; https://api.storelocator.hmgroup.tech/v2/brand/hm/stores/locale/da_DK/country/DK?_type=json&campaigns=false&departments=false&openinghours=true&maxnumberofstores=200, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Bruuns Galleri (DK0857), MP Bruuns Gade 25: Man–Fre 10:00–20:00; Lør 10:00–18:00; Søn 10:00–18:00"
   },
   {
    "category": "sports",
@@ -1495,8 +1599,8 @@
    "brand": "Sport 24",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2054704,
@@ -1509,7 +1613,9 @@
     "_source": "OpenStreetMap n10212866839 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866839 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866839 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1517,8 +1623,8 @@
    "brand": "Jack & Jones",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2053147,
@@ -1531,7 +1637,9 @@
     "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866840 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1539,8 +1647,8 @@
    "brand": "Vero Moda",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2049928,
@@ -1553,7 +1661,9 @@
     "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866841 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1561,8 +1671,8 @@
    "brand": null,
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2049213,
@@ -1575,7 +1685,9 @@
     "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866842 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1583,8 +1695,8 @@
    "brand": "Samsøe Samsøe",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2046666,
@@ -1597,7 +1709,9 @@
     "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866843 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1605,8 +1719,8 @@
    "brand": null,
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2045337,
@@ -1619,7 +1733,9 @@
     "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212866844 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "clothes",
@@ -1627,8 +1743,8 @@
    "brand": "SELECTED",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Bruuns Galleri shopping centre, Steen & Strøm)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2044083,
@@ -1641,7 +1757,9 @@
     "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10212907462 (ODbL), read 2026-10-30; https://bruuns-galleri.steenstrom.dk/abningstider-find-vej, read 2026-10-30",
+   "hours_raw": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00",
+   "hours_published": "centre hours (the shop publishes none of its own): Bruuns Galleri åbningstider: Mandag–Fredag 10:00 - 20:00; Lørdag–Søndag 10:00 - 18:00"
   },
   {
    "category": "atm",
@@ -1707,7 +1825,8 @@
     "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10807899985 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: Bruuns Galleri shop list (not a tenant); web search (nothing). OSM n10807899985 (opening_hours:signed=no), north of the station, outside the building."
   },
   {
    "category": "convenience",
@@ -1751,7 +1870,8 @@
     "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12259255005 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: Bruuns Galleri shop list (not a tenant); web search (nothing). OSM n12259255005."
   },
   {
    "category": "fast_food",
@@ -1773,7 +1893,8 @@
     "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12838597022 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: Bruuns Galleri restaurant list (not a tenant); web search (only delivery platforms/aggregators). OSM n12838597022."
   },
   {
    "category": "second_hand",
@@ -1802,9 +1923,9 @@
    "name": "7-Eleven",
    "brand": "7-Eleven",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 06:00-23:00; Fr 06:00-24:00; Sa 08:00-24:00; Su 08:00-23:00",
+   "hours_source": "website (7-Eleven)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.2045179,
@@ -1817,7 +1938,9 @@
     "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12956562803 (ODbL), read 2026-10-30; https://www.7-eleven.dk/find-butik, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Århus H IC, Banegårdspladsen 1: Man til Tor 06:00 til 23:00; Fre 06:00 til 23:59; Lør 08:00 til 23:59; Søn 08:00 til 23:00"
   },
   {
    "category": "fast_food",
@@ -1839,7 +1962,8 @@
     "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13517873369 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (only company registers/aggregators; no own website with hours). Hot-dog stand on Banegårdspladsen, OSM n13517873369."
   },
   {
    "category": "doityourself",
@@ -1905,7 +2029,8 @@
     "_source": "OpenStreetMap w515037718 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap w515037718 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap w515037718 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (only aggregators/tourism listings); not on DSB page; not a Bruuns Galleri tenant. OSM w515037718."
   },
   {
    "category": "food_court",
@@ -1934,7 +2059,6 @@
  "open": [
   "Station vs mall: only units OSM puts in the station hall (level 0, near the platform passage) are included. Excluded as Bruun's Galleri or outside: H&M, Name It, Rituals, 3, Thiele, Bruuns Apotek, Silvan, Jack & Jones etc. (Bruun's Galleri), Café Opera and Café Stiften (west of the station on OSM, not confirmed in the station), the 7-Eleven at Banegårdspladsen 6 (separate 24 h store) and OSM 7-Eleven n10807944510 outside the building.",
   "Which OSM 7-Eleven node is 'Århus H' and which 'Århus H IC' is matched by hours/position only.",
-  "Lifts and escalators: OSM gives no levels or platform refs for the four lifts and six platform escalators; which lift serves which perron (1: spor 2/3, 2: spor 4/5, 3: spor 6/7) is not settled. Wikipedia says 4 platforms/8 tracks; the register has 3 perrons (tracks 2-7).",
   "OSM platforms (w515037672, w515037673) carry no refs.",
   "Hours missing for Dunkin'; McDonald's, Joe & The Juice and Smarteyes are OSM only. Toilet price not stated.",
   "Level names as signposted not found.",
@@ -1948,5 +2072,27 @@
   }
  },
  "_open_questions_in": [],
- "answers": []
+ "answers": [
+  {
+   "question": "Lifts and escalators: OSM gives no levels or platform refs for the four lifts and six platform escalators; which lift serves which perron (1: spor 2/3, 2: spor 4/5, 3: spor 6/7) is not settled. Wikipedia says 4 platforms/8 tracks; the register has 3 perrons (tracks 2-7).",
+   "answer": "Lifts serve perron 1 (spor 2/3), perron 2 (spor 4/5), perron 3 (spor 6/7) (One lift per perron, each inside the OSM outline (2;3, 4;5, 6;7) between the register track lines. n5030708505 (12.7 m from perron 1) is not settled. The escalators are not covered here. Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n5030711330 to platform outlines and register track lines",
+     "source": "OSM n5030711330 geometry (level None): inside rail platform outline r15762677 (ref 2;3); next 1.5 m from w515037672 (ref None); register lines: 6.1 m from 'perron 1 / track 2', 6.4 m from 'perron 1 / track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5030711331 to platform outlines and register track lines",
+     "source": "OSM n5030711331 geometry (level None): inside rail platform outline r15762676 (ref 4;5); next 1.6 m from w515037673 (ref None); register lines: 5.0 m from 'perron 2 / track 4', 5.4 m from 'perron 2 / track 5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5030711332 to platform outlines and register track lines",
+     "source": "OSM n5030711332 geometry (level None): inside rail platform outline r15762675 (ref 6;7); next 12.8 m from r15762676 (ref 4;5); register lines: 2.8 m from 'perron 3 / track 6', 9.4 m from 'perron 3 / track 7'",
+     "read": "2026-10-30"
+    }
+   ]
+  }
+ ]
 }

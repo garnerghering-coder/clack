@@ -167,7 +167,17 @@
     "lat": 59.7188465,
     "how": "OSM n9941248952",
     "_source": "OpenStreetMap n9941248952 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9941248952 to platform outlines and register track lines",
+     "source": "OSM n9941248952 geometry (level -1;0): 15.9 m from rail platform outline r11180738 (ref 1;2); next 36.7 m from r11180737 (ref 3;4); register lines: 30.4 m from 'track 2', 35.3 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -186,7 +196,19 @@
     "lat": 59.7187618,
     "how": "OSM n9941248966",
     "_source": "OpenStreetMap n9941248966 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9941248966 to platform outlines and register track lines",
+     "source": "OSM n9941248966 geometry (level -1;0): inside rail platform outline r11180738 (ref 1;2); next 14.4 m from r11180737 (ref 3;4); register lines: 8.1 m from 'track 2', 12.9 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -205,7 +227,19 @@
     "lat": 59.718798,
     "how": "OSM n9941248968",
     "_source": "OpenStreetMap n9941248968 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9941248968 to platform outlines and register track lines",
+     "source": "OSM n9941248968 geometry (level -1;0): inside rail platform outline r11180737 (ref 3;4); next 13.9 m from r11180738 (ref 1;2); register lines: 7.7 m from 'track 3', 12.5 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -358,7 +392,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n9941248974",
     "_source": "OpenStreetMap n9941248974 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (#115 'Ski Jernbanestasjon', Jernbaneveien 1A) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "cafe",
@@ -366,7 +401,8 @@
    "where": "Bane NOR (English) lists 'Kiosk and café' under refreshments; the Norwegian page says only 'Kiosk'",
    "_source": "Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30",
    "position": null,
-   "position_note": "not found in OSM near the station: position unknown"
+   "position_note": "not found in OSM near the station: position unknown",
+   "hours_note": "Not found. Bane NOR's English page lists only 'Refreshments' with no name or hours; the Norwegian page could not be fetched (client error). No café at the station identified by any owner page; may simply be the Narvesen kiosk."
   },
   {
    "category": "toilets",
@@ -627,7 +663,6 @@
   }
  ],
  "open": [
-  "Which lift/ramp/stair reaches which island platform (1/2, 3/4, 5/6): the OSM extract has no platforms; no owner plan read (banenor.no track plan image did not load).",
   "Physical signage of tracks 1-6 not seen (no photo or plan read); settled from Bane NOR's English track table, Entur public codes and S-sirkulære 124-2022.",
   "Narvesen Ski Jernbanestasjon hours: narvesen.no loads hours by script; not in OSM.",
   "The café Bane NOR's English page mentions is not named anywhere.",
@@ -654,6 +689,37 @@
    "question": "Which platforms have stairs/lifts?",
    "answer": "Bane NOR: stairs, ramp and lift to the platforms. OSM has three lifts, long ramps and short stairs from the underpass. The OSM extract has no platform geometry, so OSM does not say which lift serves which island platform. Three lifts for three island platforms fits, but no source confirms the pairing.",
    "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/ski/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-SKI.json), read 2026-10-30"
+  },
+  {
+   "question": "Which lift/ramp/stair reaches which island platform (1/2, 3/4, 5/6): the OSM extract has no platforms; no owner plan read (banenor.no track plan image did not load).",
+   "answer": "Lifts serve platform 1/2, platform 3/4, platform 5/6 (The raw OSM extract has the three islands (r11180738 1;2, r11180737 3;4, r11180736 5;6), all at level 0. The underpass lifts (-1;0) map one to each island: n9941248966 serves 1/2, n9941248968 serves 3/4, and n9941248945 serves 5/6. n9941248952 (west) and n11650716936 (east) are 15.9 m and 14.8 m from the nearest island, so they are underpass-to-street lifts. Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n9941248966 to platform outlines and register track lines",
+     "source": "OSM n9941248966 geometry (level -1;0): inside rail platform outline r11180738 (ref 1;2); next 14.4 m from r11180737 (ref 3;4); register lines: 8.1 m from 'track 2', 12.9 m from 'track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n9941248968 to platform outlines and register track lines",
+     "source": "OSM n9941248968 geometry (level -1;0): inside rail platform outline r11180737 (ref 3;4); next 13.9 m from r11180738 (ref 1;2); register lines: 7.7 m from 'track 3', 12.5 m from 'track 2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n9941248945 to platform outlines and register track lines",
+     "source": "OSM n9941248945 geometry (level -1;0): inside rail platform outline r11180736 (ref 5;6); next 13.9 m from r11180737 (ref 3;4); register lines: 7.8 m from 'track 6', 27.2 m from 'track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n9941248952 to platform outlines and register track lines",
+     "source": "OSM n9941248952 geometry (level -1;0): 15.9 m from rail platform outline r11180738 (ref 1;2); next 36.7 m from r11180737 (ref 3;4); register lines: 30.4 m from 'track 2', 35.3 m from 'track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n11650716936 to platform outlines and register track lines",
+     "source": "OSM n11650716936 geometry (level -1;0): 14.8 m from rail platform outline r11180736 (ref 5;6); next 34.8 m from r11180737 (ref 3;4); register lines: 13.2 m from 'track 6', 48.3 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

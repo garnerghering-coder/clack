@@ -104,7 +104,7 @@
       "from": "w134396701",
       "kind": "building",
       "name": "service",
-      "top_m": 6,
+      "top_m": 6.0,
       "base_m": 0.15,
       "_source": "Outline OSM w134396701 (ODbL); roof = median of 250 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07)"
     },
@@ -258,7 +258,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.7,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     },
     {
       "from": "#32",
@@ -266,15 +267,17 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.61,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     },
     {
       "from": "#33",
       "kind": "roof",
       "name": "roof over the platforms (traced from the laser)",
-      "top_m": 4,
+      "top_m": 4.0,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Drammen Eiker 2015\" (id 341, FKB-Laser 2.0, nominal 5 points/m², supplier Blom Geomatics), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-DRM/drammen_structures_heights.geojson (metres above the platform surface, 2.17 m RH 2000, laser 2015-07-07); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     }
   ],
   "terrain": {
@@ -291,7 +294,7 @@
       "category": "kiosk",
       "name": "Narvesen (Drammen jbst., store 030)",
       "level": "1",
-      "x": -99,
+      "x": -99.0,
       "y": -21.2,
       "fee": null,
       "opening_hours": null,
@@ -330,8 +333,8 @@
       "category": "waiting",
       "name": "Venterom / stasjonshall",
       "level": "1",
-      "x": -83.4,
-      "y": -8.5,
+      "x": -543.5,
+      "y": -48.9,
       "fee": null,
       "opening_hours": null,
       "hours_source": null,
@@ -345,8 +348,8 @@
       "category": "bus",
       "name": "Buss for tog (rail replacement)",
       "level": "1",
-      "x": -83.4,
-      "y": -8.5,
+      "x": -543.5,
+      "y": -48.9,
       "fee": null,
       "opening_hours": null,
       "hours_source": null,
@@ -373,7 +376,7 @@
       "category": "ticket",
       "name": "Brakar kundesenter",
       "level": "1",
-      "x": -301,
+      "x": -301.0,
       "y": -63.4,
       "fee": null,
       "opening_hours": "Mo-Fr 07:00-18:00; Sa 09:00-16:00",

@@ -552,7 +552,17 @@
     "lat": 60.9776287,
     "how": "OSM n4034829098",
     "_source": "OpenStreetMap n4034829098 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4034829098 to platform outlines and register track lines",
+     "source": "OSM n4034829098 geometry (level None): 129.3 m from rail platform outline w43021926 (ref 4, local_ref 4); next 135.3 m from w512079188 (ref 3); register lines: 126.7 m from 'LH L4', 141.6 m from 'LH L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -571,7 +581,17 @@
     "lat": 60.9775707,
     "how": "OSM n4034829109",
     "_source": "OpenStreetMap n4034829109 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4034829109 to platform outlines and register track lines",
+     "source": "OSM n4034829109 geometry (level None): 124.9 m from rail platform outline w43021926 (ref 4, local_ref 4); next 131.3 m from w512079188 (ref 3); register lines: 122.4 m from 'LH L4', 138.1 m from 'LH L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -590,7 +610,17 @@
     "lat": 60.9770967,
     "how": "OSM n4552144334",
     "_source": "OpenStreetMap n4552144334 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4552144334 to platform outlines and register track lines",
+     "source": "OSM n4552144334 geometry (level None): 72.5 m from rail platform outline w43021926 (ref 4, local_ref 4); next 78.9 m from w512079188 (ref 3); register lines: 70.1 m from 'LH L4', 85.8 m from 'LH L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -612,7 +642,19 @@
     "lat": 60.976256,
     "how": "OSM n5820135489",
     "_source": "OpenStreetMap n5820135489 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5820135489 to platform outlines and register track lines",
+     "source": "OSM n5820135489 geometry (level None): inside rail platform outline w43021927 (ref 2, local_ref 2); next 0.0 m from w512079187 (ref La0203); register lines: 6.8 m from 'LH L2', 7.2 m from 'LH L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -634,7 +676,19 @@
     "lat": 60.976419,
     "how": "OSM n5820135491",
     "_source": "OpenStreetMap n5820135491 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5820135491 to platform outlines and register track lines",
+     "source": "OSM n5820135491 geometry (level None): inside rail platform outline w43021926 (ref 4, local_ref 4); next 0.0 m from w512079188 (ref 3); register lines: 6.3 m from 'LH L3', 8.3 m from 'LH L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -656,7 +710,19 @@
     "lat": 60.9762226,
     "how": "OSM n7394212281",
     "_source": "OpenStreetMap n7394212281 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7394212281 to platform outlines and register track lines",
+     "source": "OSM n7394212281 geometry (level None): inside rail platform outline w43021927 (ref 2, local_ref 2); next 0.0 m from w512079187 (ref La0203); register lines: 6.8 m from 'LH L1', 7.0 m from 'LH L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -678,7 +744,19 @@
     "lat": 60.9763917,
     "how": "OSM n7394241289",
     "_source": "OpenStreetMap n7394241289 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7394241289 to platform outlines and register track lines",
+     "source": "OSM n7394241289 geometry (level None): inside rail platform outline w43021926 (ref 4, local_ref 4); next 0.0 m from w512079188 (ref 3); register lines: 6.8 m from 'LH L3', 8.8 m from 'LH L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -697,7 +775,17 @@
     "lat": 60.9767301,
     "how": "OSM n13278363780",
     "_source": "OpenStreetMap n13278363780 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13278363780 to platform outlines and register track lines",
+     "source": "OSM n13278363780 geometry (level None): 29.2 m from rail platform outline w43021926 (ref 4, local_ref 4); next 35.3 m from w512079188 (ref 3); register lines: 26.6 m from 'LH L4', 41.6 m from 'LH L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -1042,7 +1130,8 @@
    "where": "in the station building (OSM)",
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30",
    "position": null,
-   "position_note": "not found in OSM near the station: position unknown"
+   "position_note": "not found in OSM near the station: position unknown",
+   "hours_note": "Combined row; see the individual Avis/Hertz/Budget/Europcar/SIXT entries."
   },
   {
    "category": "assistance_point",
@@ -1121,9 +1210,9 @@
    "name": "Avis",
    "brand": "Avis",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_source": "website (Avis)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.657993,
@@ -1136,7 +1225,9 @@
     "_source": "OpenStreetMap n9828658377 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9828658377 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9828658377 (ODbL), read 2026-10-30; https://www.avis.com/en/locations/fi/lahti, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Sun-Sat 06:00 AM - 12:00 AM"
   },
   {
    "category": "car_rental",
@@ -1158,16 +1249,17 @@
     "_source": "OpenStreetMap n9828658378 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9828658378 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9828658378 (ODbL), read 2026-10-30",
+   "hours_note": "Europcar 'Lahti Railwaystation' page (europcar.co.uk) gives no hours; VR Lahti page lists no car rentals."
   },
   {
    "category": "car_rental",
    "name": "Hertz",
    "brand": "Hertz",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su 10:00-12:00",
+   "hours_source": "website (Hertz)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.6580622,
@@ -1180,7 +1272,9 @@
     "_source": "OpenStreetMap n9828658379 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9828658379 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9828658379 (ODbL), read 2026-10-30; https://www.hertz.co.uk/p/car-hire/finland/lahti/lahti-train-station, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mo-Fr 0800-1700, Sa-Su 1000-1200"
   },
   {
    "category": "car_rental",
@@ -1202,16 +1296,17 @@
     "_source": "OpenStreetMap n9828658380 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9828658380 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9828658380 (ODbL), read 2026-10-30",
+   "hours_note": "sixt.co.uk confirms a branch 'at the railway station in Mannerheiminkatu' but gives no hours; sixt.fi failed to load."
   },
   {
    "category": "car_rental",
    "name": "Budget",
    "brand": "Budget",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su 08:30-12:00",
+   "hours_source": "website (Budget)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 25.6580288,
@@ -1224,7 +1319,9 @@
     "_source": "OpenStreetMap n9828658381 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9828658381 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9828658381 (ODbL), read 2026-10-30; https://www.budget.fi/en/rental-locations/lahti, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Monday-Friday 08:00 - 17:00 Hrs; Saturday 08:30 - 12:00 Hrs; Sunday 08:30 - 12:00 Hrs"
   }
  ],
  "plans": [
@@ -1237,9 +1334,8 @@
   }
  ],
  "open": [
-  "Platform grouping: OSM tags platforms '2', 'La0203', '3', '4'; lifts reach '2'+'La0203' together and '3'+'4' together. Digitraffic gives tracks 1 and 4 at 451 m and 2 and 3 at 270 m, which suggests islands 1/2 and 3/4 (La0203 = track 1 face?), but no source states which tracks share a platform.",
   "Which underpass is which (west tunnel renovated 2006 vs. the 2016 travel-centre tunnel) and their signposted names: not found.",
-  "Lift renovation (VR: 28 Sep–18 Oct 2026) — VR did not say which lift; presumably finished by 2026-10-30, not confirmed.",
+  "Lift renovation (VR: 28 Sep–18 Oct 2026) — VR did not say which lift; presumably finished by 2026-10-30, not confirmed. [Lift follow-up 2026-10-30: VR still shows the notice on 2026-10-30, does not say which lift, and has posted no completion notice. Not settled.]",
   "Station hall opening: VR 05:00, Visit Lahti 05:30 (both close 23:15). VR used.",
   "Ravintola Asema and Cafe Express hours are OSM only; no own websites found.",
   "Toilet fee amount not stated by VR or the area map; fee=yes is OSM only.",
@@ -1258,6 +1354,32 @@
    "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
    "answer": "Platform tracks 1–4 (Digitraffic) on two platforms reached from underpasses along Vesijärvenkatu–Uudenmaankatu; levels linked by lifts or stairs (Visit Lahti). OSM has two lifts and several stairs to each platform. Station hall 05:00-23:15 (VR). In the building: R-kioski, Ravintola Asema, Cafe Express, toilets, Otto, KeyBoy lockers, car rental desks.",
    "_source": "https://vr.fi/en/railway-stations-and-routes/lahti, read 2026-10-30; Visit Lahti, 'Lahti Travel Centre', https://visitlahti.fi/en/lahti-travel-centre/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-LH.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-LH/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  },
+  {
+   "question": "Platform grouping: OSM tags platforms '2', 'La0203', '3', '4'; lifts reach '2'+'La0203' together and '3'+'4' together. Digitraffic gives tracks 1 and 4 at 451 m and 2 and 3 at 270 m, which suggests islands 1/2 and 3/4 (La0203 = track 1 face?), but no source states which tracks share a platform.",
+   "answer": "Lifts serve platform 1/2, platform 3/4 (Settled. OSM w512079187 'La0203' has local_ref=1 and name 'Lahti, laituri 1', so it is the track 1 face. Lifts n5820135489 and n7394212281 lie inside both outline '2' and outline 'La0203', between the LH L1 and LH L2 lines (about 7 m each). Lifts n5820135491 and n7394241289 lie inside '3' and '4', between LH L3 and LH L4. The islands are therefore 1/2 and 3/4.)",
+   "evidence": [
+    {
+     "what": "distance of lift n5820135489 to platform outlines and register track lines",
+     "source": "OSM n5820135489 geometry (level None): inside rail platform outline w43021927 (ref 2, local_ref 2); next 0.0 m from w512079187 (ref La0203); register lines: 6.8 m from 'LH L2', 7.2 m from 'LH L1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n7394212281 to platform outlines and register track lines",
+     "source": "OSM n7394212281 geometry (level None): inside rail platform outline w43021927 (ref 2, local_ref 2); next 0.0 m from w512079187 (ref La0203); register lines: 6.8 m from 'LH L1', 7.0 m from 'LH L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n5820135491 to platform outlines and register track lines",
+     "source": "OSM n5820135491 geometry (level None): inside rail platform outline w43021926 (ref 4, local_ref 4); next 0.0 m from w512079188 (ref 3); register lines: 6.3 m from 'LH L3', 8.3 m from 'LH L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n7394241289 to platform outlines and register track lines",
+     "source": "OSM n7394241289 geometry (level None): inside rail platform outline w43021926 (ref 4, local_ref 4); next 0.0 m from w512079188 (ref 3); register lines: 6.8 m from 'LH L3', 8.8 m from 'LH L4'",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

@@ -1,0 +1,488 @@
+{
+ "clack_id": "NO-MOS",
+ "compiled": "2026-10-30",
+ "levels": [
+  {
+   "osm_level": "0",
+   "name": "Platform / street level (station building, side platform 1, island platform 2/3)",
+   "note": "Signposted name not found. The station in service is the old (1879) station with a temporary track layout ('midlertidig anlegg'); the new Moss station of the Sandbukta-Moss-Såstad project is still under construction (tunnels 89-99% cast in Jan 2026, no opening date given; Wikipedia: 'severely delayed due to problems with unstable ground').",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Moss kommune, Bane NOR presentation 'SMS-prosjektet' (002-2026, 23 Jan 2026), https://www.moss.kommune.no/_f/p1/i6c122378-6992-4bc4-9088-3090b5744a27/002-2026-presentasjon-sms-prosjektet-bane-nor-23226.pdf, read 2026-10-30; https://en.wikipedia.org/wiki/Moss_Station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "osm_level": "2",
+   "name": "Overgangsbro (footbridge over the tracks)",
+   "other_names": [
+    "overgangsbru"
+   ],
+   "note": "Bane NOR's word; OSM tags the deck level 2, layer 1. Signposted name not found.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  }
+ ],
+ "platform_sides": [
+  {
+   "platform_bis": "track 1",
+   "track": "1",
+   "side": "north-east",
+   "meaning": "the platform lies on the north-east side of track 1 (the train stops with the platform to its north-east)",
+   "_source": "laser (2020, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "track 2",
+   "track": "2,3",
+   "side": "south-west",
+   "meaning": "the platform lies on the south-west side of track 2,3 (the train stops with the platform to its south-west)",
+   "_source": "laser (2020, raised ground beside the register's track line) + facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD platform track 2; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  }
+ ],
+ "connections": [
+  {
+   "kind": "footbridge",
+   "osm_ids": [
+    "w30417120",
+    "w1055395092",
+    "w1055395093"
+   ],
+   "between": [
+    "side platform 1 / station side",
+    "island platform 2/3 (and the sea side)"
+   ],
+   "where": "over the tracks; Bane NOR: 'overgangsbro med heis og trapp til midtplattform'",
+   "confirmed_by": "owner text + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "kind": "lift",
+   "osm_ids": [
+    "n9697729517",
+    "n9697729520"
+   ],
+   "between": [
+    "level 0",
+    "overgangsbro (level 2)"
+   ],
+   "where": "two lifts about 18 m apart, at the two ends of the footbridge per OSM (n9697729517 nearer the station building, n9697729520 farther east); OSM links both to 'platform 1' only because island 2/3 is not mapped",
+   "confirmed_by": "owner text (lift on the footbridge to the island platform) + OSM positions",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "kind": "stairs",
+   "osm_ids": [
+    "w736506015",
+    "w1055395088",
+    "w1055395094"
+   ],
+   "between": [
+    "level 0",
+    "overgangsbro (level 2)"
+   ],
+   "where": "at the footbridge ends (w1055395094 reaches platform 1 per OSM)",
+   "confirmed_by": "owner text (stairs to island platform) + OSM",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "kind": "level_access",
+   "between": [
+    "street / station building",
+    "side platform 1"
+   ],
+   "where": "step-free ('trinnfri adkomst til sideplattform')",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "kind": "walking_route",
+   "between": [
+    "station",
+    "Bastø ferry (to Horten)"
+   ],
+   "where": "5-10 min via stairs (OSM stairs w489041645 / w1219631356 are candidates, not confirmed). Step-free alternative per Bane NOR: along Jernbanegata to the level crossing at Jeløgata, left on Stengata, then down Værlesands bakgate.",
+   "confirmed_by": "owner text",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w30417120",
+   "name": null,
+   "osm_level": "2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 20.4,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w30417120 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6577449,
+    "lat": 59.4314077,
+    "how": "OSM w30417120 (point on the way)",
+    "_source": "OpenStreetMap w30417120 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "footbridge",
+   "osm_id": "w1055395093",
+   "name": null,
+   "osm_level": "2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 24.3,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1055395093 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6577943,
+    "lat": 59.4313786,
+    "how": "OSM w1055395093 (point on the way)",
+    "_source": "OpenStreetMap w1055395093 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "stairs",
+   "osm_id": "w1055395094",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": 14.8,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM w1055395094 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6580109,
+    "lat": 59.4315081,
+    "how": "OSM w1055395094 (point on the way)",
+    "_source": "OpenStreetMap w1055395094 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9697729517",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n9697729517 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.6578154,
+    "lat": 59.4313483,
+    "how": "OSM n9697729517",
+    "_source": "OpenStreetMap n9697729517 (ODbL), read 2026-10-30"
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9697729517 to platform outlines and register track lines",
+     "source": "OSM n9697729517 geometry (level 0;2): inside rail platform outline r10173394 (ref 2;3); next 10.0 m from w228593415 (ref 1); register lines: 3.9 m from 'track 2', 8.8 m from 'track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9697729520",
+   "name": null,
+   "osm_level": "0;2",
+   "between": [
+    "platform 1"
+   ],
+   "wheelchair": null,
+   "conveying": null,
+   "length_m": null,
+   "where": null,
+   "confirmed_by": "OSM only",
+   "_source": "OSM n9697729520 (read 2026-10-30); 'between' = OSM platforms within 6–10 m of it",
+   "position": {
+    "lon": 10.658063,
+    "lat": 59.431443,
+    "how": "OSM n9697729520",
+    "_source": "OpenStreetMap n9697729520 (ODbL), read 2026-10-30"
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9697729520 to platform outlines and register track lines",
+     "source": "OSM n9697729520 geometry (level 0;2): 1.8 m from rail platform outline w228593415 (ref 1); next 15.4 m from r10173394 (ref 2;3); register lines: 8.7 m from 'track 1', 13.6 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
+  }
+ ],
+ "entrances": [
+  {
+   "name": "Venterom, platform-side door",
+   "street": null,
+   "level": "0",
+   "where": "waiting room door on the platform side, step-free with automatic door opener",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "name": "Station address",
+   "street": "Jernbanegata",
+   "level": "0",
+   "where": "Bane NOR address 'Jernbanegt, 1531 Moss'; Narvesen gives Jernbanegt. 1. OSM has no entrance nodes for the building.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; https://www.narvesen.no/finn-butikk, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  }
+ ],
+ "amenities": [
+  {
+   "category": "kiosk",
+   "name": "Narvesen (Moss jbst., store 086)",
+   "osm_id": "n215165510",
+   "where": "in the station building, Jernbanegt. 1",
+   "level_per_plan": "0",
+   "opening_hours": "Mo-Fr 04:45-21:00; Sa 06:00-21:00; Su 07:00-21:00",
+   "hours_source": "OSM's opening_hours",
+   "hours_checked": "2026-10-30",
+   "note": "Same hours as Bane NOR gives for the waiting room (Norwegian page). narvesen.no loads hours by script.",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30; https://www.narvesen.no/finn-butikk, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30",
+   "position": {
+    "lon": 10.657286,
+    "lat": 59.4320743,
+    "osm_id": "n215165510",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 9.2,
+    "how": "OSM node n215165510",
+    "_source": "OpenStreetMap n215165510 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": "Venterom",
+   "osm_id": "n13783785543",
+   "where": "in the station building, door to the platform side",
+   "opening_hours": "Mo-Fr 04:45-21:00; Sa 06:00-21:00; Su 07:00-21:00",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "note": "English page says closing 00:00 every day (Mo-Fr 04:45-00:00, Sa 06:00-00:00, Su 07:00-00:00); Norwegian page used.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30",
+   "position": {
+    "lon": 10.6574578,
+    "lat": 59.4319321,
+    "osm_id": "n13783785543",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.2,
+    "how": "OSM node n13783785543",
+    "_source": "OpenStreetMap n13783785543 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": "Toalett (HC) with stellebord",
+   "fee": "yes (payment machine)",
+   "where": "at the station (position not given)",
+   "note": "OSM toilets n11308648564 (fee=no) is ~200 m away and is probably not the station toilet.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "category": "ticket_machine",
+   "name": "Billettautomat",
+   "where": "at the station (position not given)",
+   "note": "Card and cash (Norwegian page); English page says two machines.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "category": "bus_stop",
+   "name": "Moss stasjon (bus)",
+   "where": "NSR:StopPlace:3017, quays 01 and 02 (no public codes); rail-replacement stop NSR:StopPlace:204 (quays NSR:Quay:98502, NSR:Quay:334)",
+   "_source": "Entur NSR stop register, NSR:StopPlace:58796 children (rail NSR:StopPlace:203; buses NSR:StopPlace:204, 3017), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:58796/children, read 2026-10-30 (NLOD)"
+  },
+  {
+   "category": "ferry",
+   "name": "Bastø ferry Moss-Horten",
+   "where": "5-10 min walk from the station",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "category": "taxi",
+   "name": "Taxi",
+   "where": "listed under 'Til og fra stasjonen' without location",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "category": "parking",
+   "name": "Pendlerparkering",
+   "fee": "100 kr (period-ticket holders, Bane NOR app)",
+   "osm_id": "w29463727",
+   "note": "190 spaces (Norwegian page; English page says 250). Controlled Mo-Fr 05:00-17:00.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30",
+   "position": {
+    "lon": 10.6583725,
+    "lat": 59.4317211,
+    "osm_id": "w29463727",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 16.0,
+    "how": "representative point of the OSM area w29463727",
+    "_source": "OpenStreetMap w29463727 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "parking",
+   "name": "Dagparkering",
+   "fee": "40 kr per day, max 10 days",
+   "note": "26 spaces; HC-parkering 2 spaces.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30"
+  },
+  {
+   "category": "bicycle_parking",
+   "name": "Sykkelhotell stasjonssiden (100) and sykkelhotell sjøsiden (42)",
+   "osm_id": "n11420463743",
+   "opening_hours": "24/7",
+   "hours_source": "website (Bane NOR)",
+   "hours_checked": "2026-10-30",
+   "fee": "50 kr / 30 days (Bane NOR Parkering app)",
+   "note": "Plus 162 open and 9 covered rack spaces. OSM maps one bike hotel (n11420463743) east of the station building.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-m-/moss/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30",
+   "position": {
+    "lon": 10.6579902,
+    "lat": 59.4318551,
+    "osm_id": "n11420463743",
+    "osm_level": null,
+    "in_station_building": false,
+    "to_nearest_platform_m": 26.0,
+    "how": "OSM node n11420463743",
+    "_source": "OpenStreetMap n11420463743 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "toilets",
+   "name": null,
+   "osm_id": "n11308648564",
+   "osm_level": null,
+   "fee": "no",
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n11308648564 (read 2026-10-30)",
+   "position": {
+    "lon": 10.6548703,
+    "lat": 59.4305682,
+    "osm_id": "n11308648564",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 196.3,
+    "how": "OSM node n11308648564",
+    "_source": "OpenStreetMap n11308648564 (ODbL), read 2026-10-30"
+   }
+  },
+  {
+   "category": "waiting_room",
+   "name": null,
+   "osm_id": "n13783785543",
+   "osm_level": null,
+   "fee": null,
+   "opening_hours": null,
+   "hours_source": null,
+   "_source": "OSM n13783785543 (read 2026-10-30)",
+   "position": {
+    "lon": 10.6574578,
+    "lat": 59.4319321,
+    "osm_id": "n13783785543",
+    "osm_level": null,
+    "in_station_building": true,
+    "to_nearest_platform_m": 7.2,
+    "how": "OSM node n13783785543",
+    "_source": "OpenStreetMap n13783785543 (ODbL), read 2026-10-30"
+   }
+  }
+ ],
+ "plans": [
+  {
+   "title": "Sporplan Moss stasjon, midlertidig anlegg (SMS-20-X-33001, image on the station page)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/siteassets/bane-nor-sf/stasjonssider-felles-innhold/sporplan-stasjoner/-m-/moss-stasjon-midlertidig-anlegg_sms-20-x-33001_02c_001_moss_bane-nor.png",
+   "licence": "not open: facts only",
+   "read": "2026-10-30",
+   "note": "Not opened (banenor.no assets do not load via WebFetch)."
+  },
+  {
+   "title": "Moss stasjon: endelig situasjon, driftsfase 20 (PDF 145.2 KB, linked from the station page; URL not captured)",
+   "publisher": "Bane NOR",
+   "url": "https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/",
+   "licence": "not open: facts only",
+   "read": "2026-10-30"
+  }
+ ],
+ "open": [
+  "Exact position of the station toilet and ticket machine(s): not given.",
+  "Signposted level names and footbridge height: no source.",
+  "No station or terminal map from Østfold kollektivtrafikk or Moss kommune found.",
+  "Opening date of the new Moss station: not stated in the owner sources read."
+ ],
+ "_sources": {
+  "osm": {
+   "what": "OpenStreetMap, API 0.6 map call",
+   "read": "2026-10-30",
+   "licence": "ODbL"
+  }
+ },
+ "_open_questions_in": [],
+ "answers": [
+  {
+   "question": "Which platforms are in use, and how are they reached?",
+   "answer": "Side platform at track 1 (254 m, 470 mm high, 6.4 m wide) and island platform for tracks 2 and 3 (238 m, 600 mm, 5.4 m). Track 1 platform is step-free from the street; the island platform is reached by the footbridge (overgangsbro) with lift and stairs. Entur NSR lists rail quays 1, 2, 3. OSM maps only platform 1.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Entur NSR stop register, NSR:StopPlace:58796 children (rail NSR:StopPlace:203; buses NSR:StopPlace:204, 3017), https://api.entur.io/stop-places/v1/read/stop-places/NSR:StopPlace:58796/children, read 2026-10-30 (NLOD); OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-MOS.json), read 2026-10-30"
+  },
+  {
+   "question": "Old or new Moss station?",
+   "answer": "The old station is in service. Bane NOR's track plan is labelled 'midlertidig anlegg'; the Jan 2026 project presentation lists tunnels and civil works still in progress and gives no opening date for the new station.",
+   "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-m-/moss/, read 2026-10-30; Moss kommune, Bane NOR presentation 'SMS-prosjektet' (002-2026, 23 Jan 2026), https://www.moss.kommune.no/_f/p1/i6c122378-6992-4bc4-9088-3090b5744a27/002-2026-presentasjon-sms-prosjektet-bane-nor-23226.pdf, read 2026-10-30"
+  },
+  {
+   "question": "Bane NOR's English page is out of date: it says the station is 'not adapted for the disabled', with a level crossing with steps between the platforms and a mobile lifting platform on track 1. The Norwegian page describes the footbridge with lift and stairs. Norwegian page used.",
+   "answer": "Lifts serve platform 1, platform 2/3 (The geometry supports the Norwegian page's footbridge-with-lifts description. Two footbridge lifts (0;2): n9697729520 lies 1.8 m from the platform 1 outline, and n9697729517 lies inside the island 2/3 outline r10173394. The English page's 'not adapted' text is out of date. Lift positions are OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n9697729520 to platform outlines and register track lines",
+     "source": "OSM n9697729520 geometry (level 0;2): 1.8 m from rail platform outline w228593415 (ref 1); next 15.4 m from r10173394 (ref 2;3); register lines: 8.7 m from 'track 1', 13.6 m from 'track 2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n9697729517 to platform outlines and register track lines",
+     "source": "OSM n9697729517 geometry (level 0;2): inside rail platform outline r10173394 (ref 2;3); next 10.0 m from w228593415 (ref 1); register lines: 3.9 m from 'track 2', 8.8 m from 'track 1'",
+     "read": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "question": "Island platform 2/3 is missing in OSM; the footbridge, lifts and stairs are linked only to platform 1 there.",
+   "answer": "Lifts serve platform 1, platform 2/3 (Island 2/3 is in the raw OSM extract as relation r10173394 (ref 2;3). Lift n9697729517 lies inside it, so it serves platform 2/3. Lift n9697729520 (1.8 m) serves platform 1. Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n9697729517 to platform outlines and register track lines",
+     "source": "OSM n9697729517 geometry (level 0;2): inside rail platform outline r10173394 (ref 2;3); next 10.0 m from w228593415 (ref 1); register lines: 3.9 m from 'track 2', 8.8 m from 'track 1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n9697729520 to platform outlines and register track lines",
+     "source": "OSM n9697729520 geometry (level 0;2): 1.8 m from rail platform outline w228593415 (ref 1); next 15.4 m from r10173394 (ref 2;3); register lines: 8.7 m from 'track 1', 13.6 m from 'track 2'",
+     "read": "2026-10-30"
+    }
+   ]
+  }
+ ]
+}

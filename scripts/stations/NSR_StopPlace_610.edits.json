@@ -132,7 +132,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 3.43,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Bærum 2013\" (id 122, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-SV/sandvika_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2013-04-27); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     }
   ],
   "terrain": {
@@ -164,7 +165,7 @@
       "category": "kiosk",
       "name": "Narvesen",
       "level": "1",
-      "x": -72,
+      "x": -72.0,
       "y": 46.7,
       "fee": null,
       "opening_hours": null,
@@ -190,7 +191,7 @@
       "category": "cafe",
       "name": "Backstube Sandvika Stasjon",
       "level": "1",
-      "x": -69,
+      "x": -69.0,
       "y": 30.6,
       "fee": null,
       "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",
@@ -229,7 +230,7 @@
       "category": "cafe",
       "name": "Backstube",
       "level": "1",
-      "x": -69,
+      "x": -69.0,
       "y": 30.6,
       "fee": null,
       "opening_hours": "Mo-Fr 06:30-19:00; Sa 08:00-19:00; Su 09:00-18:00",

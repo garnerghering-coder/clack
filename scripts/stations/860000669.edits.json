@@ -8,20 +8,293 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platform level: terminus with 3 platforms and 5 tracks — perron 1 (tracks 1/13), perron 2 (tracks 2/3), perron 3 (tracks 3/4); the 1891 station building (forhal) at the buffer end",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000669)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 17 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000669)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [],
+  "poi_hours": {},
+  "platform_heights": {
+    "1–2–3–4–13": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 10: tracks 2,3, class 50 cm = 0.5 m above rail, 249 m long; a recorded design class, not a survey; other rows for this track: 1,13 55 cm 0.55 m (247 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30); 1,13 72 cm 0.72 m (165 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30); 2,3 55 cm 0.55 m (249 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30); 3,4 55 cm 0.55 m (248 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30); 3,4 55 cm 0.55 m (150 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    }
+  },
+  "structures_file": "data/stations/research/860000669/helsingor_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w88749480",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.39,
+      "base_m": -1.47,
+      "_source": "Outline OSM w88749480 (ODbL); roof = median of 383 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w88749481",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.79,
+      "base_m": -1.17,
+      "_source": "Outline OSM w88749481 (ODbL); roof = median of 64 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w88749485",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 6.17,
+      "base_m": -1.89,
+      "_source": "Outline OSM w88749485 (ODbL); roof = median of 529 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w88749486",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 8.32,
+      "base_m": -2.31,
+      "_source": "Outline OSM w88749486 (ODbL); roof = median of 948 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w113512834",
+      "kind": "building",
+      "name": "Toldkammeret (building)",
+      "top_m": 6.69,
+      "base_m": -2.3,
+      "_source": "Outline OSM w113512834 (ODbL); roof = median of 372 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w631960909",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.59,
+      "base_m": -1.66,
+      "_source": "Outline OSM w631960909 (ODbL); roof = median of 45 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w631961192",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.51,
+      "_source": "Outline OSM w631961192 (ODbL); roof = median of 48 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside not measured"
+    },
+    {
+      "from": "w631964005",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.59,
+      "_source": "Outline OSM w631964005 (ODbL); roof = median of 57 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside not measured"
+    },
+    {
+      "from": "w631965431",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.67,
+      "base_m": -1.63,
+      "_source": "Outline OSM w631965431 (ODbL); roof = median of 45 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w631966216",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.64,
+      "base_m": -1.66,
+      "_source": "Outline OSM w631966216 (ODbL); roof = median of 43 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w631966296",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.74,
+      "base_m": -1.6,
+      "_source": "Outline OSM w631966296 (ODbL); roof = median of 54 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "w1165076609",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 8.04,
+      "base_m": 5.4,
+      "_source": "Outline OSM w1165076609 (ODbL); roof = median of 2510 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "r8790430",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.47,
+      "base_m": -4.16,
+      "_source": "Outline OSM r8790430 (ODbL); roof = median of 1570 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27)"
+    },
+    {
+      "from": "r16691101",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.37,
+      "base_m": 5.4,
+      "_source": "Outline OSM r16691101 (ODbL); roof = median of 51 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "r16691102",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 8.04,
+      "base_m": 5.4,
+      "_source": "Outline OSM r16691102 (ODbL); roof = median of 344 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "#15",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.89,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#16",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.17,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6215_724, PUNKTSKY_1km_6215_725); from data/stations/research/860000669/helsingor_structures_heights.geojson (metres above the platform surface, 4.28 m RH 2000, laser 2024-03-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000669/helsingor_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 4.28,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000669/helsingor_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (4.28 m DVR90, laser 2024-03-27)"
+  },
+  "pois": [
+    {
+      "id": "res05224213ce",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": 3.1,
+      "y": 3.7,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-24:00; Sa 07:00-24:00; Su 07:00-22:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; https://en.wikipedia.org/wiki/Helsing%C3%B8r_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n2270460296 (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)"
+    },
+    {
+      "id": "res2009966442",
+      "category": "restaurant",
+      "name": "Restaurant Strejf",
+      "level": "0",
+      "x": 13.7,
+      "y": 15.0,
+      "fee": null,
+      "opening_hours": "Tu-Sa 11:30-15:00,17:30-21:30; Su,Mo off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.restaurant-strejf.dk/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)",
+      "approximate": true,
+      "where": "in the old station building, sea side — the former royal waiting room"
+    },
+    {
+      "id": "res7d4640f37e",
+      "category": "waiting",
+      "name": "Ventesal/forhal",
+      "level": "0",
+      "x": 13.7,
+      "y": 15.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "resd1aa10fcdc",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": -10.7,
+      "y": 17.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n12037149186 (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)"
+    },
+    {
+      "id": "res6dbecc9e66",
+      "category": "shop",
+      "name": "365discount",
+      "level": "0",
+      "x": -56.6,
+      "y": 56.4,
+      "fee": null,
+      "opening_hours": "Mo-Su 07:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2270460295 (ODbL), read 2026-10-30; placed OSM node n2270460295 (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)"
+    },
+    {
+      "id": "res448a6042aa",
+      "category": "restaurant",
+      "name": "HaiYi",
+      "level": "0",
+      "x": -37.9,
+      "y": -3.8,
+      "fee": null,
+      "opening_hours": "17:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3971433042 (ODbL), read 2026-10-30; placed OSM node n3971433042 (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)"
+    },
+    {
+      "id": "rese64b3ef965",
+      "category": "cafe",
+      "name": "Sweet Ship",
+      "level": "0",
+      "x": -59.6,
+      "y": 19.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12819232620 (ODbL), read 2026-10-30; placed OSM node n12819232620 (research pass 2026-10-30, data/stations/research/860000669/station_facts.json)"
     }
   ]
 }

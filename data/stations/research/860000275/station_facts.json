@@ -17,7 +17,45 @@
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000275.json), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 1 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 1 / track 2",
+   "track": "2",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 43a",
+   "track": "43a",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 43a (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 43a; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 3 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 4",
+   "track": "4",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 4 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-06, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 4; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "underpass",
@@ -164,7 +202,8 @@
     "to_nearest_platform_m": 294.9,
     "how": "OSM node n13983896221",
     "_source": "OpenStreetMap n13983896221 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. Tried: web search (only a delivery platform listing, not allowed); DSB Herning page names only the 7-Eleven."
   },
   {
    "category": "waiting_room",
@@ -226,9 +265,9 @@
    "name": "Scandic Regina Restaurant",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 06:30-09:30,17:00-21:30; Sa 07:00-10:30,17:00-21:30; Su 07:00-10:30",
+   "hours_source": "website (Scandic Hotels)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 8.9789228,
@@ -241,16 +280,18 @@
     "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4122090542 (ODbL), read 2026-10-30; https://www.scandichotels.com/en/hotels/scandic-regina, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Restaurant – Breakfast: Monday-Friday 06:30-09:30, Saturday-Sunday 07:00-10:30; Dinner: Monday-Saturday 17:00-21:30, Sunday: Closed"
   },
   {
    "category": "kiosk",
    "name": "Scandic Lobby Shop",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "24/7",
+   "hours_source": "website (Scandic Hotels)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 8.9789858,
@@ -263,16 +304,18 @@
     "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9231041674 (ODbL), read 2026-10-30; https://www.scandichotels.com/en/hotels/scandic-regina, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Scandic Shop 24 hrs"
   },
   {
    "category": "fast_food",
    "name": "DSB 7-Eleven",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 05:30-23:00; Sa 06:30-23:00; Su 07:30-23:00",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 8.9784711,
@@ -285,13 +328,15 @@
     "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9593088619 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/herning/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "DSB 7-Eleven: Mandag - fredag 05.30-23.00; Lørdag 06.30-23.00; Søndag 07.30-23.00"
   }
  ],
  "plans": [],
  "open": [
   "OSM platforms carry no refs and lie about 250-330 m from the station amenities in the extract (to_nearest_platform_m); platform geometry or the extract centre should be checked against the register (perron 1: spor 1/2/43a, 2: spor 3/4).",
-  "DSB lists an elevator but OSM maps no lift; position unknown.",
+  "DSB lists an elevator but OSM maps no lift; position unknown. [Lift follow-up 2026-10-30: Not settled.]",
   "Toilet price/hours not given (municipal).",
   "Station's Pizza Kebap hours missing.",
   "Scandic Regina restaurant/lobby shop next door: not part of the station, not included.",

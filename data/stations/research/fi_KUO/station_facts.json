@@ -65,7 +65,19 @@
     "lat": 62.8972984,
     "how": "OSM n13343111132",
     "_source": "OpenStreetMap n13343111132 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13343111132 to platform outlines and register track lines",
+     "source": "OSM n13343111132 geometry (level 0;1): inside rail platform outline r13952607 (ref 1;2); next 13.8 m from r13952608 (ref 3); register lines: 7.0 m from 'KUO L2', 7.3 m from 'KUO L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -83,7 +95,19 @@
     "lat": 62.8974965,
     "how": "OSM n13343111135",
     "_source": "OpenStreetMap n13343111135 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13343111135 to platform outlines and register track lines",
+     "source": "OSM n13343111135 geometry (level 0;1): inside rail platform outline r13952608 (ref 3); next 17.0 m from r13952607 (ref 1;2); register lines: 9.9 m from 'KUO L3', 15.1 m from 'KUO L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -174,7 +198,19 @@
     "lat": 62.8972984,
     "how": "OSM n13343111132",
     "_source": "OpenStreetMap n13343111132 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13343111132 to platform outlines and register track lines",
+     "source": "OSM n13343111132 geometry (level 0;1): inside rail platform outline r13952607 (ref 1;2); next 13.8 m from r13952608 (ref 3); register lines: 7.0 m from 'KUO L2', 7.3 m from 'KUO L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -193,7 +229,19 @@
     "lat": 62.8974965,
     "how": "OSM n13343111135",
     "_source": "OpenStreetMap n13343111135 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13343111135 to platform outlines and register track lines",
+     "source": "OSM n13343111135 geometry (level 0;1): inside rail platform outline r13952608 (ref 3); next 17.0 m from r13952607 (ref 1;2); register lines: 9.9 m from 'KUO L3', 15.1 m from 'KUO L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -515,7 +563,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n1831133792",
     "_source": "OpenStreetMap n1831133792 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "No name beyond 'Pubi' in OSM; no own site; VR Kuopio station page lists no pub."
   },
   {
    "category": "restaurant",
@@ -606,7 +655,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n1831133756",
     "_source": "OpenStreetMap n1831133756 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Europcar 'Kuopio Railway Station' pages (europcar.co.uk/.ch/.com) give no hours; europcar.fi failed to load; VR page silent."
   },
   {
    "category": "car_rental",
@@ -623,7 +673,8 @@
     "to_nearest_platform_m": null,
     "how": "OSM node n1831133767",
     "_source": "OpenStreetMap n1831133767 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Hertz 'Kuopio - Asemakatu 1' (hertz.com kuoc62) and hertz.co.uk pages give no branch hours (only booking-time 00:00-23:30); hertz.fi failed. (Budget, also Asemakatu 1, lists Mo-Fr 10-16 - different brand, not copied.)"
   },
   {
    "category": "supermarket",
@@ -803,8 +854,7 @@
  "open": [
   "Level heights: no source measures them; the laser pass flags platform 1 at 0.92 m above the track bed vs class 0.55 m (see REVIEW).",
   "Signposted level names: none found.",
-  "Whether platform 1 is the island between tracks 1 and 2 (as the OSM lift position suggests) or an edge platform at the station building: not confirmed by any owner text or plan.",
-  "Second lift (n13343111135, platform 3) is OSM only; VR mentions one lift.",
+  "Second lift (n13343111135, platform 3) is OSM only; VR mentions one lift. [Lift follow-up 2026-10-30: The lift lies inside platform 3 (r13952608), so if it exists it serves platform 3. VR names only one elevator, so the lift count remains a disagreement between OSM and the owner. Not settled.]",
   "Which floor the station building, the Matkakeskus hall and the street are on relative to the tunnel (OSM gives no level).",
   "Opening date of the new Matkakeskus (end of January 2021) is known only from a consultant (WSP) page, not an allowed source; not used.",
   "Bar & Cafe Asema, Ravintola Portti, Linjurin Kukka, Pubi, K-Supermarket Portti: own-website hours not checked (web search budget ran out during this pass).",
@@ -839,6 +889,22 @@
    "question": "Missing hours",
    "answer": "Waiting room (VR) and R-kioski (own site) settled; café/restaurant/florist from OSM only; Pubi, car rentals without hours.",
    "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/kuopio, read 2026-10-30; https://www.r-kioski.fi/kioskit/kuopio-asema/, read 2026-10-30"
+  },
+  {
+   "question": "Whether platform 1 is the island between tracks 1 and 2 (as the OSM lift position suggests) or an edge platform at the station building: not confirmed by any owner text or plan.",
+   "answer": "Lift n13343111132 serves platform 1/2 (Geometry settles it. The lift lies inside OSM platform 1;2 (r13952607), 7.3 m N of the Digitraffic KUO L1 track line and 7.0 m S of KUO L2, so it is between the two tracks. Platform 1 is therefore the island between tracks 1 and 2, not an edge platform at the building.)",
+   "evidence": [
+    {
+     "what": "distance of lift n13343111132 to platform outlines and register track lines",
+     "source": "OSM n13343111132 geometry (level 0;1): inside rail platform outline r13952607 (ref 1;2); next 13.8 m from r13952608 (ref 3); register lines: 7.0 m from 'KUO L2', 7.3 m from 'KUO L1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Kuopio: 'The platforms are accessible through a tunnel at the eastern end of the station building'; 'An elevator is available'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/kuopio",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

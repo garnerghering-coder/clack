@@ -8,20 +8,327 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: station building (forhal/ventesal, DSB 7-Eleven) on the town side by platform 1, and the island platforms 2, 3 and 4",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000617)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 17 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000617)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 1, class 55 cm = 0.55 m above rail, 322 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000617/roskilde_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w331283205",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.96,
+      "base_m": -0.82,
+      "_source": "Outline OSM w331283205 (ODbL); roof = median of 216 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w331283206",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.73,
+      "base_m": -2.69,
+      "_source": "Outline OSM w331283206 (ODbL); roof = median of 105 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w331283207",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.83,
+      "base_m": -1.14,
+      "_source": "Outline OSM w331283207 (ODbL); roof = median of 777 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w331283208",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.96,
+      "_source": "Outline OSM w331283208 (ODbL); roof = median of 293 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "w331283213",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.1,
+      "_source": "Outline OSM w331283213 (ODbL); roof = median of 196 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "w331284123",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.66,
+      "_source": "Outline OSM w331284123 (ODbL); roof = median of 52 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "w396597908",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.24,
+      "_source": "Outline OSM w396597908 (ODbL); roof = median of 49 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "w397668034",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 5.71,
+      "base_m": -0.95,
+      "_source": "Outline OSM w397668034 (ODbL); roof = median of 309 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w397795651",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.36,
+      "base_m": -0.88,
+      "_source": "Outline OSM w397795651 (ODbL); roof = median of 93 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w1164409900",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.0,
+      "base_m": -0.06,
+      "_source": "Outline OSM w1164409900 (ODbL); roof = median of 111 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27)"
+    },
+    {
+      "from": "w1442886797",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.56,
+      "_source": "Outline OSM w1442886797 (ODbL); roof = median of 31 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "w1443067560",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 1.69,
+      "_source": "Outline OSM w1443067560 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured"
+    },
+    {
+      "from": "#13",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.31,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#14",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.9,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#15",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.93,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#16",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.95,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#17",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.61,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6169_694, PUNKTSKY_1km_6170_694); from data/stations/research/860000617/roskilde_structures_heights.geojson (metres above the platform surface, 44.81 m RH 2000, laser 2024-04-27); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000617/roskilde_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 44.81,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000617/roskilde_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (44.81 m DVR90, laser 2024-04-27)"
+  },
+  "pois": [
+    {
+      "id": "res00d1843f0c",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Roskilde Station)",
+      "level": "0",
+      "x": 29.6,
+      "y": -17.1,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://en.wikipedia.org/wiki/Roskilde_station, read 2026-10-30; placed OSM node n4549004200 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "res28b8b8ac27",
+      "category": "waiting",
+      "name": "Ventesal/forhal",
+      "level": "0",
+      "x": 17.3,
+      "y": -16.4,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res4415dd7633",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": 17.3,
+      "y": -16.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/roskilde/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)",
+      "approximate": true,
+      "where": "OSM n8016370941 by platform 1 at the station building"
+    },
+    {
+      "id": "res772eccb732",
+      "category": "atm",
+      "name": "Danske Bank",
+      "level": "0",
+      "x": -21.6,
+      "y": 7.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n10680986254 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "res1688a624c4",
+      "category": "restaurant",
+      "name": "Roskilde Station Kebab",
+      "level": "0",
+      "x": -146.2,
+      "y": 94.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-24:00; Sa 00:00-06:00,10:00-24:00; Su 00:00-06:00,11:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n11810293614 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "res9bdc71e2d4",
+      "category": "cafe",
+      "name": "Lækkerland",
+      "level": "0",
+      "x": -157.4,
+      "y": 101.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:00-22:00; Fr 09:00-24:00; Sa 10:00-23:00; Su 10:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n12735368225 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "rescb5bf9cbc7",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -10.1,
+      "y": -27.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n775601840 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "res476b6c1941",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -11.7,
+      "y": 14.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n8016370941 (read 2026-10-30); placed OSM node n8016370941 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "res5454bbd3bc",
+      "category": "restaurant",
+      "name": "Torvet's Grill & Kebab",
+      "level": "0",
+      "x": 42.5,
+      "y": -58.2,
+      "fee": null,
+      "opening_hours": "Mo-Th, Su 11:00-22:00; Fr-Sa 11:00-06:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3933094357 (ODbL), read 2026-10-30; placed OSM node n3933094357 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
+    },
+    {
+      "id": "rescb2427707a",
+      "category": "shop",
+      "name": "Frisør Station",
+      "level": "0",
+      "x": -169.8,
+      "y": 108.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13341027104 (ODbL), read 2026-10-30; placed OSM node n13341027104 (research pass 2026-10-30, data/stations/research/860000617/station_facts.json)"
     }
   ]
 }

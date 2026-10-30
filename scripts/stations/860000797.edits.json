@@ -8,20 +8,128 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platform level: S-tog perron 1 (track 1) and perron 2 (track 2), 92 cm; regional perron 3 (tracks 3/4) and perron 4 (tracks 6/7) on the København–Ringsted line, 55 cm, 400 m",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000797)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 4 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000797)."
+    }
+  ],
+  "multipolygons": true,
+  "entrances": [],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 85: tracks 1, class 92 cm = 0.92 m above rail, 180 m long; a recorded design class, not a survey"
+    },
+    "2": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 85: tracks 2, class 92 cm = 0.92 m above rail, 180 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 6: tracks 3,4, class 55 cm = 0.55 m above rail, 400 m long; a recorded design class, not a survey"
+    },
+    "6–7": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 6: tracks 6,7, class 55 cm = 0.55 m above rail, 400 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000797/koge_nord_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w542437234",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 8.23,
+      "base_m": 4.98,
+      "_source": "Outline OSM w542437234 (ODbL); roof = median of 94 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700); from data/stations/research/860000797/koge_nord_structures_heights.geojson (metres above the platform surface, 7.69 m RH 2000, laser 2025-03-19); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w762353310",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 9.89,
+      "base_m": 4.98,
+      "_source": "Outline OSM w762353310 (ODbL); roof = median of 1034 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700); from data/stations/research/860000797/koge_nord_structures_heights.geojson (metres above the platform surface, 7.69 m RH 2000, laser 2025-03-19); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w1163116041",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.47,
+      "_source": "Outline OSM w1163116041 (ODbL); roof = median of 81 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700); from data/stations/research/860000797/koge_nord_structures_heights.geojson (metres above the platform surface, 7.69 m RH 2000, laser 2025-03-19); underside not measured"
+    },
+    {
+      "from": "w1163116042",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.45,
+      "_source": "Outline OSM w1163116042 (ODbL); roof = median of 47 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700); from data/stations/research/860000797/koge_nord_structures_heights.geojson (metres above the platform surface, 7.69 m RH 2000, laser 2025-03-19); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000797/koge_nord_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 7.69,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000797/koge_nord_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (7.69 m DVR90, laser 2025-03-19)"
+  },
+  "pois": [
+    {
+      "id": "res730337fc07",
+      "category": "toilet",
+      "name": "Toilet (drives af Køge Kommune)",
+      "level": "0",
+      "x": 73.6,
+      "y": -48.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/koge-nord/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n6982453442 (research pass 2026-10-30, data/stations/research/860000797/station_facts.json)"
+    },
+    {
+      "id": "res610a88bfc6",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 73.6,
+      "y": -48.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n6982453442 (read 2026-10-30); placed OSM node n6982453442 (research pass 2026-10-30, data/stations/research/860000797/station_facts.json)"
     }
   ]
 }

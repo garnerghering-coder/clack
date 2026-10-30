@@ -1,0 +1,1 @@
+Oslo lufthavn station lies in a cutting under the terminal buildings: the airborne laser (NDH Akershus 5pkt 2015) sees the terminal roofs and the open track ends, not the platforms under the terminal. Platform heights: Bane NOR's track table (760 mm).

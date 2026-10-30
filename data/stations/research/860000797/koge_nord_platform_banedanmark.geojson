@@ -8,104 +8,118 @@
     "coordinates": [
      [
       12.1737932,
-      55.5016234
+      55.501623399999986
      ],
      [
       12.1730278,
       55.4997943
      ],
      [
-      12.1730141,
+      12.173014099999998,
       55.4997615
      ],
      [
       12.1730004,
-      55.4997287
+      55.49972869999999
      ],
      [
-      12.1729867,
-      55.4996959
+      12.172986699999997,
+      55.499695899999985
      ],
      [
-      12.1729729,
-      55.4996632
+      12.172972900000001,
+      55.49966320000001
      ],
      [
       12.1729591,
-      55.4996304
+      55.499630399999994
      ],
      [
-      12.1729453,
-      55.4995977
+      12.172945299999999,
+      55.49959769999999
      ],
      [
       12.1729315,
-      55.4995649
+      55.499564899999996
      ],
      [
       12.1729176,
-      55.4995322
+      55.499532200000004
      ],
      [
       12.1727926,
       55.4992437
      ],
      [
-      12.1727782,
+      12.172778200000002,
       55.4992111
      ],
      [
       12.1727637,
-      55.4991784
+      55.499178400000005
      ],
      [
-      12.1727492,
+      12.172749199999998,
       55.4991457
      ],
      [
       12.1727346,
-      55.4991131
+      55.49911309999999
      ],
      [
-      12.1727201,
-      55.4990804
+      12.172720099999998,
+      55.49908039999999
      ],
      [
       12.1727055,
       55.4990478
      ],
      [
-      12.1726909,
+      12.172690900000001,
       55.4990151
      ],
      [
       12.1726762,
-      55.4989825
+      55.49898249999999
      ],
      [
-      12.1722879,
-      55.4981153
+      12.172287899999997,
+      55.498115299999995
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 3 / track 3",
     "track": "3",
-    "perron": "3",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 400.0,
+    "width_m": 14.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-6-3-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 7.69,
+    "laser_track_bed_m": 6.96,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "6",
+    "x_perron": "3",
+    "x_track": "3",
+    "x_perron_tracks": [
      "3",
      "4"
     ],
-    "tib": "6",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 400,
-    "width_m": 14.0,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 3 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn173 beside the track (402 m along it; Bilag 400 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn173 beside the track (402 m along it; Bilag 400 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -118,8 +132,8 @@
       55.5016484
      ],
      [
-      12.172233,
-      55.4985521
+      12.172232999999999,
+      55.49855209999999
      ],
      [
       12.1720526,
@@ -130,21 +144,35 @@
    "properties": {
     "bis_object": "perron 3 / track 4",
     "track": "4",
-    "perron": "3",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 400.0,
+    "width_m": 14.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-6-3-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 7.69,
+    "laser_track_bed_m": 6.95,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "6",
+    "x_perron": "3",
+    "x_track": "4",
+    "x_perron_tracks": [
      "3",
      "4"
     ],
-    "tib": "6",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 400,
-    "width_m": 14.0,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 4 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn173 beside the track (402 m along it; Bilag 400 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 4 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn173 beside the track (402 m along it; Bilag 400 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -153,33 +181,47 @@
     "type": "LineString",
     "coordinates": [
      [
-      12.1734565,
+      12.173456499999999,
       55.5016702
      ],
      [
       12.1718908,
-      55.4981744
+      55.498174399999996
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 4 / track 6",
     "track": "6",
-    "perron": "4",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 400.0,
+    "width_m": 12.6,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-6-4-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 7.7,
+    "laser_track_bed_m": 6.95,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "6",
+    "x_perron": "4",
+    "x_track": "6",
+    "x_perron_tracks": [
      "6",
      "7"
     ],
-    "tib": "6",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 400,
-    "width_m": 12.6,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 6 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn174 beside the track (402 m along it; Bilag 400 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 6 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn174 beside the track (402 m along it; Bilag 400 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -189,38 +231,38 @@
     "coordinates": [
      [
       12.1732835,
-      55.5016962
+      55.501696199999984
      ],
      [
-      12.1724172,
+      12.172417200000002,
       55.4998822
      ],
      [
       12.1724017,
-      55.4998497
+      55.499849699999984
      ],
      [
-      12.1723861,
-      55.4998172
+      12.172386099999999,
+      55.49981720000001
      ],
      [
-      12.1723706,
-      55.4997847
+      12.172370600000002,
+      55.49978469999999
      ],
      [
       12.1723552,
-      55.4997522
+      55.49975219999999
      ],
      [
-      12.1723397,
-      55.4997197
+      12.172339699999998,
+      55.49971969999999
      ],
      [
       12.1723243,
-      55.4996871
+      55.499687099999996
      ],
      [
-      12.1723089,
+      12.172308900000003,
       55.4996546
      ],
      [
@@ -228,65 +270,79 @@
       55.4996221
      ],
      [
-      12.1721607,
-      55.4993349
+      12.172160700000001,
+      55.499334899999994
      ],
      [
-      12.1721459,
-      55.4993023
+      12.172145899999999,
+      55.49930229999999
      ],
      [
-      12.1721311,
-      55.4992697
+      12.172131099999998,
+      55.499269699999985
      ],
      [
-      12.1721164,
-      55.499237
+      12.172116400000002,
+      55.49923699999999
      ],
      [
-      12.1721017,
-      55.4992044
+      12.172101699999999,
+      55.499204399999996
      ],
      [
       12.172087,
-      55.4991718
+      55.499171800000006
      ],
      [
-      12.1720724,
+      12.172072399999998,
       55.4991391
      ],
      [
-      12.1720578,
+      12.172057799999997,
       55.4991065
      ],
      [
       12.1720431,
-      55.4990738
+      55.499073800000005
      ],
      [
-      12.1716555,
-      55.4982083
+      12.171655499999996,
+      55.49820829999999
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 4 / track 7",
     "track": "7",
-    "perron": "4",
-    "perron_tracks": [
+    "height_class": "55",
+    "height_m": 0.55,
+    "height_text": "55 cm above top of rail (Bilag 3.6)",
+    "length_m": 400.0,
+    "width_m": 12.6,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-6-4-7",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 7.7,
+    "laser_track_bed_m": 6.96,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "6",
+    "x_perron": "4",
+    "x_track": "7",
+    "x_perron_tracks": [
      "6",
      "7"
     ],
-    "tib": "6",
-    "height_class": "55 cm",
-    "height_m": 0.55,
-    "length_m": 400,
-    "width_m": 12.6,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 7 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn174 beside the track (402 m along it; Bilag 400 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 7 (station Kjn); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn174 beside the track (402 m along it; Bilag 400 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 6; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -296,18 +352,18 @@
     "coordinates": [
      [
       12.1755298,
-      55.4995897
+      55.499589699999994
      ],
      [
-      12.175516,
-      55.4995777
+      12.175515999999998,
+      55.49957769999999
      ],
      [
-      12.1754057,
-      55.499479
+      12.175405699999999,
+      55.499478999999994
      ],
      [
-      12.1752542,
+      12.175254199999998,
       55.4993372
      ],
      [
@@ -315,28 +371,28 @@
       55.4992227
      ],
      [
-      12.1750377,
-      55.4991253
+      12.175037699999999,
+      55.499125299999996
      ],
      [
       12.1749341,
-      55.499019
+      55.49901899999999
      ],
      [
-      12.1748635,
-      55.4989446
+      12.174863499999999,
+      55.49894460000001
      ],
      [
       12.1747357,
-      55.4988053
+      55.498805299999994
      ],
      [
-      12.1746262,
-      55.498681
+      12.174626199999999,
+      55.49868099999998
      ],
      [
-      12.1744841,
-      55.4985119
+      12.174484099999999,
+      55.49851189999999
      ],
      [
       12.1744184,
@@ -344,35 +400,49 @@
      ],
      [
       12.1743231,
-      55.4983086
+      55.498308599999994
      ],
      [
       12.1742131,
-      55.4981614
+      55.498161399999994
      ],
      [
       12.1741926,
-      55.4981328
+      55.49813279999999
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 1 / track 1",
     "track": "1",
-    "perron": "1",
-    "perron_tracks": [
+    "height_class": "92",
+    "height_m": 0.92,
+    "height_text": "92 cm above top of rail (Bilag 3.6)",
+    "length_m": 180.0,
+    "width_m": 12.9,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-85-1-1",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.48,
+    "laser_track_bed_m": 4.24,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "85",
+    "x_perron": "1",
+    "x_track": "1",
+    "x_perron_tracks": [
      "1"
     ],
-    "tib": "85",
-    "height_class": "92 cm",
-    "height_m": 0.92,
-    "length_m": 180,
-    "width_m": 12.9,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 1.hsp (line main track; the station has no own track 1); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn171 beside the track (183 m along it; Bilag 180 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 85; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 1.hsp (line main track; the station has no own track 1); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn171 beside the track (183 m along it; Bilag 180 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 85; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -385,11 +455,11 @@
       55.4996002
      ],
      [
-      12.1754343,
+      12.175434299999997,
       55.4995758
      ],
      [
-      12.1752735,
+      12.175273499999998,
       55.4994296
      ],
      [
@@ -398,19 +468,19 @@
      ],
      [
       12.1750425,
-      55.499208
+      55.49920800000001
      ],
      [
-      12.1749106,
+      12.174910600000002,
       55.4990746
      ],
      [
       12.1748093,
-      55.4989684
+      55.49896840000001
      ],
      [
       12.1747015,
-      55.4988515
+      55.49885150000001
      ],
      [
       12.1745992,
@@ -418,19 +488,19 @@
      ],
      [
       12.1744689,
-      55.4985838
+      55.49858379999999
      ],
      [
-      12.1744058,
-      55.4985072
+      12.174405799999999,
+      55.49850719999999
      ],
      [
-      12.1742854,
-      55.4983555
+      12.174285399999999,
+      55.49835549999999
      ],
      [
       12.1741755,
-      55.49821
+      55.49821000000001
      ],
      [
       12.174144,
@@ -441,20 +511,34 @@
    "properties": {
     "bis_object": "perron 2 / track 2",
     "track": "2",
-    "perron": "2",
-    "perron_tracks": [
+    "height_class": "92",
+    "height_m": 0.92,
+    "height_text": "92 cm above top of rail (Bilag 3.6)",
+    "length_m": 180.0,
+    "width_m": 9.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000797-85-2-2",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.49,
+    "laser_track_bed_m": 4.3,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "85",
+    "x_perron": "2",
+    "x_track": "2",
+    "x_perron_tracks": [
      "2"
     ],
-    "tib": "85",
-    "height_class": "92 cm",
-    "height_m": 0.92,
-    "length_m": 180,
-    "width_m": 9.5,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 2.hsp (line main track; the station has no own track 2); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn172 beside the track (180 m along it; Bilag 180 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 85; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 2.hsp (line main track; the station has no own track 2); extent: Banedanmark platform outline FOR_PERRONER_OD Kjn172 beside the track (180 m along it; Bilag 180 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 85; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   }
  ]

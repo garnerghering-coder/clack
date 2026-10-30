@@ -17,7 +17,29 @@
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 1 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-22, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "north",
+   "meaning": "the platform lies on the north side of track 2 (the train stops with the platform to its north)",
+   "_source": "laser (2025-03-22, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "south",
+   "meaning": "the platform lies on the south side of track 3 (the train stops with the platform to its south)",
+   "_source": "laser (2025-03-22, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "lift",
@@ -34,7 +56,19 @@
     "lat": 56.04339,
     "how": "OSM n4322092394",
     "_source": "OpenStreetMap n4322092394 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 1 (spor 1)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4322092394 to platform outlines and register track lines",
+     "source": "OSM n4322092394 geometry (level None): 1.5 m from rail platform outline w49511361 (ref 1); next 15.4 m from w49511362 (ref 2;3); register lines: 9.4 m from 'perron 1 / track 1', 13.9 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -51,7 +85,19 @@
     "lat": 56.0435444,
     "how": "OSM w433516648 (point on the way)",
     "_source": "OpenStreetMap w433516648 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 2/3)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w433516648 to platform outlines and register track lines",
+     "source": "OSM w433516648 geometry (level None): inside rail platform outline w49511362 (ref 2;3); next 10.8 m from w49511361 (ref 1); register lines: 4.6 m from 'perron 2 / track 3', 4.6 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -229,7 +275,19 @@
     "lat": 56.0435444,
     "how": "OSM w433516648 (point on the way)",
     "_source": "OpenStreetMap w433516648 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 2/3)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w433516648 to platform outlines and register track lines",
+     "source": "OSM w433516648 geometry (level None): inside rail platform outline w49511362 (ref 2;3); next 10.8 m from w49511361 (ref 1); register lines: 4.6 m from 'perron 2 / track 3', 4.6 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -292,7 +350,19 @@
     "lat": 56.04339,
     "how": "OSM n4322092394",
     "_source": "OpenStreetMap n4322092394 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 1 (spor 1)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4322092394 to platform outlines and register track lines",
+     "source": "OSM n4322092394 geometry (level None): 1.5 m from rail platform outline w49511361 (ref 1); next 15.4 m from w49511362 (ref 2;3); register lines: 9.4 m from 'perron 1 / track 1', 13.9 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [

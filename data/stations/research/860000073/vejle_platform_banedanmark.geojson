@@ -8,27 +8,27 @@
     "coordinates": [
      [
       9.5364176,
-      55.7041355
+      55.70413549999999
      ],
      [
       9.5364131,
       55.7041687
      ],
      [
-      9.5363968,
-      55.7043564
+      9.536396799999999,
+      55.704356399999995
      ],
      [
       9.5363945,
-      55.7044179
+      55.704417899999996
      ],
      [
       9.5363889,
-      55.7045607
+      55.704560699999995
      ],
      [
       9.5363915,
-      55.7047127
+      55.70471270000001
      ],
      [
       9.5363973,
@@ -36,35 +36,35 @@
      ],
      [
       9.5364086,
-      55.7049676
+      55.704967599999996
      ],
      [
-      9.5364206,
-      55.7050695
+      9.536420599999998,
+      55.70506950000001
      ],
      [
       9.5364346,
-      55.705166
+      55.705166000000006
      ],
      [
       9.5364548,
-      55.705285
+      55.705284999999996
      ],
      [
       9.5364698,
-      55.7053565
+      55.70535649999999
      ],
      [
-      9.5364808,
+      9.536480799999998,
       55.7054067
      ],
      [
       9.5364899,
-      55.7054445
+      55.70544449999999
      ],
      [
-      9.5365101,
-      55.7055284
+      9.536510100000001,
+      55.70552839999999
      ],
      [
       9.5365323,
@@ -72,7 +72,7 @@
      ],
      [
       9.5365894,
-      55.7057955
+      55.70579550000001
      ],
      [
       9.5367516,
@@ -80,32 +80,46 @@
      ],
      [
       9.5370468,
-      55.7070412
+      55.70704119999999
      ],
      [
-      9.5371158,
-      55.7072266
+      9.537115800000002,
+      55.70722659999999
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 1 / track 3",
     "track": "3",
-    "perron": "1",
-    "perron_tracks": [
+    "height_class": "50",
+    "height_m": 0.5,
+    "height_text": "50 cm above top of rail (Bilag 3.6)",
+    "length_m": 338.0,
+    "width_m": 6.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000073-23-1-3",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.02,
+    "laser_track_bed_m": 4.24,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "23",
+    "x_perron": "1",
+    "x_track": "3",
+    "x_perron_tracks": [
      "3",
      "4"
     ],
-    "tib": "23",
-    "height_class": "50 cm",
-    "height_m": 0.5,
-    "length_m": 338,
-    "width_m": 6.5,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 3 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (348 m along it; Bilag 338 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 3 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (348 m along it; Bilag 338 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -115,47 +129,47 @@
     "coordinates": [
      [
       9.5365304,
-      55.7041404
+      55.70414040000001
      ],
      [
       9.536521,
-      55.7042101
+      55.70421009999999
      ],
      [
       9.5365119,
       55.7043
      ],
      [
-      9.5365093,
-      55.7043256
+      9.536509300000002,
+      55.70432559999998
      ],
      [
       9.5365054,
-      55.704399
+      55.70439900000001
      ],
      [
       9.5365033,
-      55.7044651
+      55.70446509999999
      ],
      [
       9.5365028,
-      55.7045186
+      55.70451859999999
      ],
      [
-      9.5365028,
+      9.536502799999997,
       55.7045237
      ],
      [
-      9.5365054,
-      55.704632
+      9.536505399999998,
+      55.70463199999998
      ],
      [
-      9.5365123,
-      55.704746
+      9.536512299999998,
+      55.70474599999999
      ],
      [
       9.5365126,
-      55.7047494
+      55.70474939999999
      ],
      [
       9.5365186,
@@ -166,28 +180,28 @@
       55.7048716
      ],
      [
-      9.5365417,
-      55.7049737
+      9.536541700000003,
+      55.70497369999998
      ],
      [
-      9.5365428,
-      55.7049806
+      9.536542800000001,
+      55.70498059999999
      ],
      [
       9.5365606,
-      55.7050752
+      55.70507519999999
      ],
      [
       9.5365831,
-      55.7051763
+      55.70517629999999
      ],
      [
-      9.536607,
+      9.536607000000002,
       55.7052691
      ],
      [
       9.5366331,
-      55.7053593
+      55.70535929999999
      ],
      [
       9.5366896,
@@ -195,7 +209,7 @@
      ],
      [
       9.5367115,
-      55.7055995
+      55.705599499999984
      ],
      [
       9.5367429,
@@ -203,15 +217,15 @@
      ],
      [
       9.5367906,
-      55.7058117
+      55.70581169999999
      ],
      [
       9.536841,
-      55.7059476
+      55.70594760000001
      ],
      [
       9.5369585,
-      55.7062647
+      55.706264700000006
      ],
      [
       9.5370191,
@@ -226,37 +240,51 @@
       55.7067622
      ],
      [
-      9.5371847,
+      9.537184699999997,
       55.7069112
      ],
      [
       9.537258,
-      55.7071403
+      55.707140300000006
      ],
      [
       9.5372789,
-      55.7072103
+      55.707210299999986
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 1 / track 4",
     "track": "4",
-    "perron": "1",
-    "perron_tracks": [
+    "height_class": "35",
+    "height_m": 0.35,
+    "height_text": "35 cm above top of rail (Bilag 3.6)",
+    "length_m": 338.0,
+    "width_m": 6.5,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000073-23-1-4",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.02,
+    "laser_track_bed_m": 4.34,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "23",
+    "x_perron": "1",
+    "x_track": "4",
+    "x_perron_tracks": [
      "3",
      "4"
     ],
-    "tib": "23",
-    "height_class": "35 cm",
-    "height_m": 0.35,
-    "length_m": 338,
-    "width_m": 6.5,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 4 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (346 m along it; Bilag 338 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 4 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 012 beside the track (346 m along it; Bilag 338 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -266,7 +294,7 @@
     "coordinates": [
      [
       9.5366111,
-      55.7041412
+      55.704141199999995
      ],
      [
       9.5366059,
@@ -274,35 +302,35 @@
      ],
      [
       9.5365992,
-      55.7042365
+      55.70423649999999
      ],
      [
       9.5365922,
       55.7043215
      ],
      [
-      9.5365857,
-      55.7044209
+      9.536585700000002,
+      55.704420899999995
      ],
      [
       9.5365831,
-      55.7045371
+      55.704537099999996
      ],
      [
       9.5365859,
-      55.704667
+      55.70466699999999
      ],
      [
       9.5365918,
-      55.7047767
+      55.704776700000004
      ],
      [
       9.5366007,
-      55.7048851
+      55.70488509999998
      ],
      [
       9.5366146,
-      55.7050077
+      55.70500770000001
      ],
      [
       9.5366377,
@@ -313,8 +341,8 @@
       55.7052522
      ],
      [
-      9.536707,
-      55.7053832
+      9.536706999999998,
+      55.70538319999999
      ],
      [
       9.5367276,
@@ -322,7 +350,7 @@
      ],
      [
       9.536771,
-      55.7055716
+      55.70557159999999
      ],
      [
       9.5368077,
@@ -334,18 +362,18 @@
      ],
      [
       9.5369849,
-      55.7061546
+      55.70615459999999
      ],
      [
       9.5370341,
-      55.7062879
+      55.70628789999999
      ],
      [
       9.5371256,
       55.7065364
      ],
      [
-      9.537133,
+      9.537132999999999,
       55.7065565
      ],
      [
@@ -354,7 +382,7 @@
      ],
      [
       9.5373065,
-      55.707073
+      55.70707300000001
      ],
      [
       9.5373249,
@@ -362,32 +390,46 @@
      ],
      [
       9.5373391,
-      55.7071799
+      55.70717989999999
      ],
      [
       9.5373454,
-      55.7072018
+      55.70720179999999
      ]
     ]
    },
    "properties": {
     "bis_object": "perron 2 / track 5",
     "track": "5",
-    "perron": "2",
-    "perron_tracks": [
+    "height_class": "50",
+    "height_m": 0.5,
+    "height_text": "50 cm above top of rail (Bilag 3.6)",
+    "length_m": 338.0,
+    "width_m": 6.9,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000073-23-2-5",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.01,
+    "laser_track_bed_m": 4.24,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "23",
+    "x_perron": "2",
+    "x_track": "5",
+    "x_perron_tracks": [
      "5",
      "6"
     ],
-    "tib": "23",
-    "height_class": "50 cm",
-    "height_m": 0.5,
-    "length_m": 338,
-    "width_m": 6.9,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 5 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (345 m along it; Bilag 338 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 5 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (345 m along it; Bilag 338 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   },
   {
@@ -405,23 +447,23 @@
      ],
      [
       9.5367099,
-      55.7042842
+      55.704284200000004
      ],
      [
       9.5367098,
-      55.7044023
+      55.70440229999999
      ],
      [
       9.5367118,
-      55.7045283
+      55.704528299999986
      ],
      [
-      9.5367188,
+      9.536718800000001,
       55.7046169
      ],
      [
       9.5367296,
-      55.7047224
+      55.70472239999999
      ],
      [
       9.5367411,
@@ -432,28 +474,28 @@
       55.704864
      ],
      [
-      9.5367598,
-      55.7049096
+      9.536759800000002,
+      55.70490960000001
      ],
      [
-      9.5367778,
-      55.7049906
+      9.536777799999998,
+      55.704990599999995
      ],
      [
       9.5368003,
       55.7050814
      ],
      [
-      9.5368448,
-      55.7052302
+      9.536844800000003,
+      55.705230199999995
      ],
      [
       9.5368599,
-      55.7052764
+      55.70527639999999
      ],
      [
       9.536903,
-      55.7053992
+      55.705399199999995
      ],
      [
       9.5369594,
@@ -465,47 +507,47 @@
      ],
      [
       9.5370249,
-      55.7057329
+      55.705732899999994
      ],
      [
-      9.5370665,
-      55.7058409
+      9.537066499999998,
+      55.705840899999984
      ],
      [
-      9.5371,
-      55.7059312
+      9.537100000000002,
+      55.70593120000001
      ],
      [
       9.5371897,
-      55.7061726
+      55.706172599999995
      ],
      [
       9.537217,
-      55.7062492
+      55.70624920000001
      ],
      [
       9.5372686,
-      55.7063863
+      55.70638629999999
      ],
      [
-      9.5373118,
-      55.7065105
+      9.537311800000001,
+      55.70651050000001
      ],
      [
       9.5373496,
-      55.7066319
+      55.706631900000005
      ],
      [
       9.5373733,
-      55.7067247
+      55.706724699999995
      ],
      [
       9.5373993,
-      55.7068463
+      55.706846299999995
      ],
      [
       9.5374162,
-      55.7069434
+      55.70694340000001
      ],
      [
       9.5374468,
@@ -520,21 +562,35 @@
    "properties": {
     "bis_object": "perron 2 / track 6",
     "track": "6",
-    "perron": "2",
-    "perron_tracks": [
+    "height_class": "35",
+    "height_m": 0.35,
+    "height_text": "35 cm above top of rail (Bilag 3.6)",
+    "length_m": 338.0,
+    "width_m": 7.0,
+    "roof": null,
+    "edge_material": null,
+    "surface": null,
+    "safety_zone": null,
+    "km_from": null,
+    "km_to": null,
+    "side": null,
+    "valid_from": null,
+    "reflink_oid": "860000073-23-2-6",
+    "measure_from": 0,
+    "measure_to": 1000000000.0,
+    "laser_platform_surface_m": 5.0,
+    "laser_track_bed_m": 4.29,
+    "geometry_note": "Bilag 3.6 rows placed on Banedanmark Open Data track centrelines (Sporforløb) cut to the Banedanmark platform outline (FOR_PERRONER_OD); see x_geometry",
+    "x_tib": "23",
+    "x_perron": "2",
+    "x_track": "6",
+    "x_perron_tracks": [
      "5",
      "6"
     ],
-    "tib": "23",
-    "height_class": "35 cm",
-    "height_m": 0.35,
-    "length_m": 338,
-    "width_m": 7.0,
-    "width_note": "outline area / length along the track (an island outline gives the full island width)",
-    "geometry_how": "track: Sporforløb SPORNUMMER 6 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (344 m along it; Bilag 338 m)",
-    "platform_surface_m": null,
-    "track_bed_m": null,
-    "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
+    "x_geometry": "track: Sporforløb SPORNUMMER 6 (station Vj); extent: Banedanmark platform outline FOR_PERRONER_OD Vj 013 beside the track (344 m along it; Bilag 338 m)",
+    "x_width_note": "outline area / length along the track (an island outline gives the full island width)",
+    "source": "Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30, TIB 23; geometry: Banedanmark Open Data (CC BY 4.0) read 2026-10-30"
    }
   }
  ]

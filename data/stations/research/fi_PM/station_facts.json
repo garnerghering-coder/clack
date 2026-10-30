@@ -84,7 +84,24 @@
     "lat": 62.3013711,
     "how": "OSM n10593886302",
     "_source": "OpenStreetMap n10593886302 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10593886302 to platform outlines and register track lines",
+     "source": "OSM n10593886302 geometry (level -1;0): inside rail platform outline w1434884410 (ref 4, local_ref 4); next 4.0 m from w1434884409 (ref 3); register lines: 5.7 m from 'PM L4', 13.7 m from 'PM L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Pieksämäki: 'Lifts to the platforms between tracks 3 and 4 and at the ends of tracks 1 and 6.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/pieksamaki",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The node is inside the platform 4 outline and 4.0 m from platform 3. Its building outline w1547012537 is 0.4 m from platform 3. VR names a lift to the platform between tracks 3 and 4, so this is the 3/4 island lift."
   },
   {
    "kind": "lift",
@@ -102,7 +119,24 @@
     "lat": 62.3013653,
     "how": "OSM n10593886269",
     "_source": "OpenStreetMap n10593886269 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10593886269 to platform outlines and register track lines",
+     "source": "OSM n10593886269 geometry (level -1;0): inside rail platform outline w155635672 (ref 6, local_ref 6); next 17.8 m from w1434884410 (ref 4); register lines: 5.7 m from 'PM L6', 15.9 m from 'PM L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Pieksämäki: 'Lifts to the platforms between tracks 3 and 4 and at the ends of tracks 1 and 6.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/pieksamaki",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the platform 6 outline. VR names a lift 'at the end of track 6'."
   },
   {
    "kind": "lift",
@@ -444,7 +478,24 @@
     "lat": 62.3013653,
     "how": "OSM n10593886269",
     "_source": "OpenStreetMap n10593886269 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10593886269 to platform outlines and register track lines",
+     "source": "OSM n10593886269 geometry (level -1;0): inside rail platform outline w155635672 (ref 6, local_ref 6); next 17.8 m from w1434884410 (ref 4); register lines: 5.7 m from 'PM L6', 15.9 m from 'PM L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Pieksämäki: 'Lifts to the platforms between tracks 3 and 4 and at the ends of tracks 1 and 6.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/pieksamaki",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the platform 6 outline. VR names a lift 'at the end of track 6'."
   },
   {
    "kind": "lift",
@@ -466,7 +517,24 @@
     "lat": 62.3013711,
     "how": "OSM n10593886302",
     "_source": "OpenStreetMap n10593886302 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10593886302 to platform outlines and register track lines",
+     "source": "OSM n10593886302 geometry (level -1;0): inside rail platform outline w1434884410 (ref 4, local_ref 4); next 4.0 m from w1434884409 (ref 3); register lines: 5.7 m from 'PM L4', 13.7 m from 'PM L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Pieksämäki: 'Lifts to the platforms between tracks 3 and 4 and at the ends of tracks 1 and 6.'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/pieksamaki",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The node is inside the platform 4 outline and 4.0 m from platform 3. Its building outline w1547012537 is 0.4 m from platform 3. VR names a lift to the platform between tracks 3 and 4, so this is the 3/4 island lift."
   }
  ],
  "entrances": [
@@ -557,7 +625,8 @@
    "note": "Not in OSM. The 2020 city plan names a station restaurant (asemaravintola) in the building; that it is HYvä Maku is inferred from the shared address only.",
    "_source": "Visit Pieksämäki, \"Cafes and restaurants\", https://visitpieksamaki.fi/?p=4640, read 2026-10-30; Pieksämäen kaupunki / WSP, \"Pieksämäen aseman alueen kehittämissuunnitelma\" (19.2.2020), https://www.pieksamaki.fi/wp-content/uploads/Pieks%C3%A4m%C3%A4en-aseman-alueen-kehitt%C3%A4missuunnitelma.pdf, read 2026-10-30",
    "position": null,
-   "position_note": "not found in OSM near the station: position unknown"
+   "position_note": "not found in OSM near the station: position unknown",
+   "hours_note": "No own website found. Only Visit Pieksämäki (tourism site, not owner/business) gives hours - already in station_facts hours_raw; not re-used under the rules."
   },
   {
    "category": "bus_station",
@@ -646,7 +715,8 @@
     "to_nearest_platform_m": 107.5,
     "how": "representative point of the OSM area w489048039",
     "_source": "OpenStreetMap w489048039 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "No own website or station/centre page with hours found; only Visit Pieksämäki/aggregators."
   }
  ],
  "plans": [
@@ -669,7 +739,7 @@
  ],
  "open": [
   "Level heights: no source measures them; platform 4 height class (Digitraffic matala) vs Väylävirasto's statement that low platforms were raised in 2023–2024 vs laser ~0.53 m above rail: not settled (see REVIEW).",
-  "Platform-1 lift: position and opening hours (inside the station building) not in OSM and not exactly described.",
+  "Platform-1 lift: position and opening hours (inside the station building) not in OSM and not exactly described. [Lift follow-up 2026-10-30: VR places the platform 1 lift 'at the end of track 1' but does not say which end. OSM has no lift within 15 m of the platform 1 outline. The position and opening hours are not settled.]",
   "Väylävirasto's platform table and structures list for Pieksämäki (pp. 39–49 of the 2026 study) could not be read through WebFetch.",
   "East exit of the tunnel: street name not given.",
   "Whether the café-kiosk space and Matkahuolto outlet described in 2020 still operate; whether HYvä Maku is inside the station building.",

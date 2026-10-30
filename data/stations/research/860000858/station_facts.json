@@ -831,7 +831,17 @@
     "lat": 55.6297245,
     "how": "OSM n7907706415",
     "_source": "OpenStreetMap n7907706415 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7907706415 to platform outlines and register track lines",
+     "source": "OSM n7907706415 geometry (level -1;0;1): 6.3 m from rail platform outline w1165610012 (ref 2); next 22.8 m from w1165610033 (ref 1); register lines: 16.0 m from 'perron 2 / track 2', 20.5 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 6.3 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -852,7 +862,17 @@
     "lat": 55.6297241,
     "how": "OSM n10841747161",
     "_source": "OpenStreetMap n10841747161 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10841747161 to platform outlines and register track lines",
+     "source": "OSM n10841747161 geometry (level -1;0;1): 6.2 m from rail platform outline w1165610012 (ref 2); next 22.7 m from w1165610033 (ref 1); register lines: 15.9 m from 'perron 2 / track 2', 20.4 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 6.2 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -873,7 +893,17 @@
     "lat": 55.6294096,
     "how": "OSM n10841755634",
     "_source": "OpenStreetMap n10841755634 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10841755634 to platform outlines and register track lines",
+     "source": "OSM n10841755634 geometry (level -1;0): 5.3 m from rail platform outline w1165610033 (ref 1); next 20.8 m from w1165610012 (ref 2); register lines: 14.6 m from 'perron 1 / track 1', 19.1 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 5.3 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -894,7 +924,17 @@
     "lat": 55.6294102,
     "how": "OSM n10841755636",
     "_source": "OpenStreetMap n10841755636 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10841755636 to platform outlines and register track lines",
+     "source": "OSM n10841755636 geometry (level -1;0): 5.3 m from rail platform outline w1165610033 (ref 1); next 20.7 m from w1165610012 (ref 2); register lines: 14.5 m from 'perron 1 / track 1', 19.0 m from 'perron 2 / track 2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 5.3 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -915,7 +955,24 @@
     "lat": 55.6309615,
     "how": "OSM n14325478051",
     "_source": "OpenStreetMap n14325478051 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "spor 11 platform (new, OSM ref 11)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n14325478051 to platform outlines and register track lines",
+     "source": "OSM n14325478051 geometry (level None): inside rail platform outline w1504851955 (ref 11); next 10.4 m from w1504851956 (ref 12); register lines: 153.8 m from 'perron 2 / track 2', 158.3 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "Sund & Bælt 27 Apr 2026: 'Udvidelsen omfatter de to nye perroner til spor 11 og 12' and 'direkte adgang fra lufthavnens Terminal 3 og Metro' (no lift text)",
+     "source": "https://sundogbaelt.dk/nyheder-presse/nyheder/2026/togtrafikken-far-flere-muskler-med-udvidelsen-af-kobenhavns-lufthavn-station/",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the spor 11 platform outline w1504851955 (opened 27 April 2026; not yet in the register). Source is OSM only."
   },
   {
    "kind": "lift",
@@ -936,7 +993,24 @@
     "lat": 55.6310808,
     "how": "OSM n14325527493",
     "_source": "OpenStreetMap n14325527493 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "spor 12 platform (new, OSM ref 12)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n14325527493 to platform outlines and register track lines",
+     "source": "OSM n14325527493 geometry (level None): inside rail platform outline w1504851956 (ref 12); next 12.0 m from w290049184 (ref 1;2); register lines: 167.1 m from 'perron 2 / track 2', 171.6 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "Sund & Bælt 27 Apr 2026: two new perrons for spor 11 and 12 (no lift text)",
+     "source": "https://sundogbaelt.dk/nyheder-presse/nyheder/2026/togtrafikken-far-flere-muskler-med-udvidelsen-af-kobenhavns-lufthavn-station/",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the spor 12 platform outline w1504851956. Source is OSM only."
   }
  ],
  "entrances": [
@@ -1390,10 +1464,9 @@
   }
  ],
  "open": [
-  "Access to the new platforms at spor 11/12 (opened 27 April 2026): only OSM lifts/stairs/footbridge; no owner description; not yet in the platform register (register has perron 1/2 only, as 'Kastrup').",
   "cph.dk outlet pages are client-side rendered (no hours or positions readable); Espresso House, Burger King and Steff's Place hours are OSM's.",
   "DSB toilet fee/hours not given. Taxi rank and bus stops not checked.",
-  "OSM tags the travelators as escalators with wheelchair=no; Sund & Bælt calls them travelators; step-free route is the middle lifts.",
+  "OSM tags the travelators as escalators with wheelchair=no; Sund & Bælt calls them travelators; step-free route is the middle lifts. [Lift follow-up 2026-10-30: Not settled. The middle lifts (-1;0;1 and -1;0) are 5.3–6.3 m from the perron outlines. The travelator tagging is not a lift question.]",
   "No open-question list was supplied for Danish stations."
  ],
  "_sources": {
@@ -1404,5 +1477,27 @@
   }
  },
  "_open_questions_in": [],
- "answers": []
+ "answers": [
+  {
+   "question": "Access to the new platforms at spor 11/12 (opened 27 April 2026): only OSM lifts/stairs/footbridge; no owner description; not yet in the platform register (register has perron 1/2 only, as 'Kastrup').",
+   "answer": "Lifts serve spor 11 platform (new, OSM ref 11), spor 12 platform (new, OSM ref 12) (One lift inside each new platform outline. Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n14325478051 to platform outlines and register track lines",
+     "source": "OSM n14325478051 geometry (level None): inside rail platform outline w1504851955 (ref 11); next 10.4 m from w1504851956 (ref 12); register lines: 153.8 m from 'perron 2 / track 2', 158.3 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n14325527493 to platform outlines and register track lines",
+     "source": "OSM n14325527493 geometry (level None): inside rail platform outline w1504851956 (ref 12); next 12.0 m from w290049184 (ref 1;2); register lines: 167.1 m from 'perron 2 / track 2', 171.6 m from 'perron 1 / track 1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "Sund & Bælt 27 Apr 2026: two new perrons for spor 11/12; 'direkte adgang fra lufthavnens Terminal 3 og Metro'; no lift text",
+     "source": "https://sundogbaelt.dk/nyheder-presse/nyheder/2026/togtrafikken-far-flere-muskler-med-udvidelsen-af-kobenhavns-lufthavn-station/",
+     "read": "2026-10-30"
+    }
+   ]
+  }
+ ]
 }

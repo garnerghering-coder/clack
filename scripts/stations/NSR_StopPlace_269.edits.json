@@ -1,12 +1,12 @@
 {
-  "_comment": "Hand edits on top of the OpenStreetMap draft of Oslo lufthavn (scripts/stations/draft_from_osm.py), BUILDOUT O5 batch 1 (2026-10-29). Drafted from OSM only so far; facts from the operator's station page, photos or a walk go here with their source. Level names are placeholders until a plan or signage names them.",
+  "_comment": "Hand edits on top of the OpenStreetMap draft of Oslo lufthavn (scripts/stations/draft_from_osm.py), from the research pass of 2026-10-30 (data/stations/research/NO-GAR). The station is under the terminal: the laser sees the surface only.",
   "radius": 400,
   "paths_by_layer": true,
-  "path_radius": 60,
-  "default_level": "1",
+  "path_radius": 30,
+  "default_level": "0",
   "levels": [
     {
-      "osm": "1",
+      "osm": "0",
       "id": "L0",
       "name": "Level 0",
       "order": 0
@@ -20,9 +20,22 @@
   ],
   "changelog": [
     {
-      "date": "2026-10-29",
-      "what": "First draft from OSM (BUILDOUT O5 batch 1)."
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "First draft from OSM with the research pass's platform numbers, entrances, heights and amenities."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: no numbered platforms (under the terminal; OSM and Bane NOR's table don't number them). The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
     }
   ],
-  "multipolygons": true
+  "multipolygons": true,
+  "platform_refs_source": {
+    "r17848217": "Bane NOR's track table platform objects track 2 run alongside osm:way/r17848217; tracks 2, 3, 23 from the register (banenor_platforms_NO.csv) run alongside osm:way/r17848217, read 2026-10-30 (data/stations/research/NSR:StopPlace:269); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "r17848217": "2, 3, 23"
+  },
+  "entrances": []
 }

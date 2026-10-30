@@ -172,37 +172,72 @@ published), Mapillary and photo checks.
   platforms postdate the scan.
 - Rebuild: `make_fi_bundle.py` → `station_pack.py` → `finish_fi.sh` (facts + docs). Facts hand-read in `facts_manual_fi/`.
 
-## Norway (11 stations): 5 of 11 packs built, 6 waiting for Kartverket's exports
+## Norway (11 stations): done
 
-- Folders `data/stations/research/NO-<CODE>/` (no Clack ids were given for Norway; the brief says Norway comes after DK/FI).
-  Built: NO-OSL_S, NO-NTH (underground: surface only), NO-SKØ, NO-LYS, NO-SV. Waiting: NO-ASR, NO-DRM, NO-LLS, NO-MOS,
-  NO-SKI (exports running), NO-GAR (queued; Kartverket allows 4 open exports per user).
-- Laser: Kartverket høydedata.no point-cloud exports (LAZ, EPSG:25832, NN2000, © Kartverket CC BY 4.0), one rectangle
-  per station (`_sources/NO/no_orders.json`), best open project per station (Oslo kommune tynnet 2019 for OSL_S/NTH/SKØ —
-  thinned, ~1 pt/m²; Bærum 2013, Asker 2012, Drammen Eiker 2015, Romerike 2013, Follo 2014, Moss Done FOU 2020, NDH
-  Akershus 2015). Exports are emailed as links (`leveranse.hoydedata.no`, valid 6 days). Bærum 2013 leaves platform decks
-  in class 1: `platform_from_unclassified` lets the pack take a flat class-1 band (marked `surface_from_class1`).
+- Folders `data/stations/research/NO-<CODE>/` (no Clack ids were given for Norway): NO-OSL_S, NO-NTH (underground: surface
+  only), NO-SKØ, NO-LYS, NO-SV, NO-ASR, NO-DRM, NO-LLS, NO-MOS, NO-SKI, NO-GAR (under the terminal). Country CSV
+  `banenor_platforms_NO.csv` (Swedish columns; `height_class` in mm), `REVIEW_platform_heights_NO.md` (11 of 38 platforms
+  flagged, with notes on stale scans).
+- Laser: Kartverket høydedata.no point-cloud exports (LAZ, EPSG:25832, NN2000, © Kartverket CC BY 4.0), one rectangle per
+  station (`_sources/NO/no_orders.json`), best open project per station: Oslo kommune tynnet 2019 (OSL_S, NTH, SKØ; thinned,
+  ~1 pt/m²), Bærum 2013 (LYS, SV), Asker 2012, Drammen Eiker 2015, Romerike 2013 (LLS), Follo 2014 (SKI), Moss Done FOU 2020
+  (drone, thinned here to 1/6 ≈ 25 pts/m²), NDH Akershus 5pkt 2015 (GAR). Raw exports: `~/Downloads/clack_station3d/raw_bundles/NO/punktsky/`.
+  Older scans leave platform decks in class 1: `platform_from_unclassified` takes a flat class-1 band (`surface_from_class1`).
+- **Stale scans:** Drammen (2015 vs rebuild 2025), Ski (2014 vs Follobanen 2022), Moss (2020 vs temporary layout): laser
+  platform levels are of the old layouts (README notes).
 - Register: Bane NOR's station pages, track table (per track: platform length, height mm above rail, width, which tracks the
   platform serves), read 2026-10-30 (`_sources/NO/banenor_station_pages.json`; facts only). The English page is used where
-  it is newer (Ski after Follobanen). No coordinates in Bane NOR's table: each platform is drawn on the OSM track centreline
+  it is newer (Ski). No coordinates in Bane NOR's table: each platform is drawn on the OSM track centreline
   (`railway:track_ref`), cut to the OSM platform outline beside it; every feature says how in `x_geometry`. Stabling and
   service platforms are listed in the README, not drawn.
 - Facts: `facts_manual_no/` (Oslo S has all 46 oslo-s.no outlets with hours and hall/level).
-- Rebuild: `run_no.sh <CODE> <export job id>` then `finish_no.sh <CODE>`.
+- Rebuild: `run_no.sh <CODE> <export job folder>` then `finish_no.sh <CODE>`; `country_review.py NO …`.
 
-## Denmark (27 stations): register, OSM and facts in progress; 3D needs the owner's laser decision
+## Denmark (27 stations): done
 
 - Ids from the brief (`860000626` …, `gtfs:72888` → folder `gtfs_72888`).
 - Register: `banedanmark_platforms_DK.csv` (Swedish columns, `height_class` = cm) from Banedanmark Netredegørelse 2027
   Bilag 3.6 (all 27 stations, 144 rows; København Syd = "Ny Ellebjerg", CPH Airport = "Kastrup") placed on Banedanmark Open
   Data (CC BY 4.0) track centrelines (`Sporforløb`, SPORNUMMER) and platform outlines (`FOR_PERRONER_OD`). Per-station lists
   in `_sources/DK/dk_register/`; flags there (e.g. København Syd's regional and S-tog tracks share numbers).
-- **Laser (Danmarks Højdemodel punktsky, CC BY 4.0) is not downloaded.** It needs either a Dataforsyningen token (the owner
-  creates it in their Dataforsyningen profile; never commit it) for 1 km tiles via the API, or the website's 10 km block
-  order (several GB per block). `make_dk_register.py` output is ready to feed a DK bundle once tiles exist (same shape as
-  `make_no_bundle.py`; EPSG:25832, DVR90).
-- OSM + Commons per station: `_sources/DK/clack_dk_osm_commons.json` (from the owner's Downloads) and `_sources/osm/<id>.json`.
+- Laser: Danmarks Højdemodel punktsky (Klimadatastyrelsen, CC BY 4.0), ordered free on dataforsyningen.dk/data/3931 as the
+  23 covering 10 km blocks (no token, no account). Only the 56 needed 1 km tiles (`_sources/DK/dk_tiles.json`) were read out
+  of the block zips (HTTP range requests in the browser; md5 of every tile checked against the `.md5` in the zip), then cut
+  to each station box + 10 m on the Mac (`raw_bundles/DK/clip.py`). Kept in `~/Downloads/clack_station3d/raw_bundles/DK/`:
+  `punktsky/` (full tiles, ~9 GB, can be deleted) and `punktsky_clip/<safe id>/` (the cut tiles the packs were built from).
+- Scan date: median GPS time of the points in the box (2022-03 … 2025-03; table in `REVIEW_platform_heights_DK.md`).
+  The `DK_SCAN_DATE` env var overrides it.
+- Rebuild one station: `scripts/stations/station3d/run_dk.sh <safe id> <folder with its tiles>` (bundle → pack → facts →
+  footbridge decks → docs), then `country_review.py DK …`. **No token is needed**; if one is ever used, keep it in an env
+  var only, never in the repo, a script, a URL or a log.
+- Results: 143 platforms; 29 differ from Bilag 3.6 by more than 0.125 m (`REVIEW_platform_heights_DK.md`); 15 not measured
+  (Nørreport and CPH Airport underground/covered, København Syd rows on the wrong lines, a few under roofs).
+  Hillerød (scan 2024-04, rebuild 2026–27) and CPH Airport tracks 11/12 (opened April 2026) are noted in their READMEs.
+- OSM + Commons per station: `_sources/DK/clack_dk_osm_commons.json` and `_sources/osm/<id>.json`.
 
 ## Accounts used
 - Sweden: Lantmäteriet Geotorget login (laser download). Finland: NLS free file-service order (owner's email). Norway:
-  høydedata.no exports to the owner's email. Denmark: none yet. No token or key is stored anywhere in the repo.
+  høydedata.no exports to the owner's email. Denmark: none in this pass (the owner's Dataforsyningen token is for Claude Code, from an environment variable). No token or key is stored anywhere in the repo.
+
+## Follow-ups of 2026-10-30 (shop hours, lift links, photo check): NO, FI, DK
+
+- **Shop hours**: 186 shops without hours were looked up on the shop's own site or the station/centre owner's page only
+  (no Google/Apple/aggregators). Found: NO 18/60, FI 24/57 (+1 closed), DK 18/69 + 10 Bruuns Galleri shops with only the
+  centre's hours (kept as `hours_raw` "centre hours …", not as `opening_hours`). Raw results with URLs:
+  `_sources/followups/hours_found_{NO,FI,DK}.json`; merged into `station_facts.json` by `facts.py` when
+  `FOLLOWUPS_DIR` points there (`hours_published`, `hours_source`, `hours_checked`, `_source`; `hours_note` says what was tried
+  when nothing was found). Chains whose sites load hours by script (Narvesen, 7-Eleven NO, Joe & The Juice, Lagkagehuset…)
+  stay empty. Some OSM shops near Oslo S are 280–510 m away (Svanen, Masala Politics, Himkok, Hub): candidates to drop.
+- **Lift links**: `_sources/followups/lifts_found.json` (69 open items, 181 lifts; geometry against the raw OSM extract +
+  owner text). Merged as `serves_platforms` / `serves_settled` / `serves_evidence` on each lift in `connections`
+  (`serves_platforms` supersedes `between` where they differ); settled open items moved to `answers`, the rest annotated.
+  Settled: NO 5 (+2 partly) of 13, FI 10 (+2) of 23, DK 9 (+3) of 33. OSM/facts corrections: Drammen n13110852328 is on
+  platform 4/5 (not the hall); Østerport n9938636547 and n10589932727 are on no perron; Nørreport w642818720 is on perron 2.
+  Hillerød: Banedanmark says lifts come end of 2026.
+- **Photo check**: `PHOTO_CHECK_flags.md` covers the 91 flagged platforms (SE 26, NO 11, FI 25, DK 29). Most rows rest on
+  Commons titles, descriptions and dates; 13 priority photos were then opened one by one in the owner's Chrome (section
+  "Photos viewed"). Seen: Stockholm C track 10, Pasila L10, Esbjerg and Herning 43a lean towards the laser; Drammen and Ski
+  towards the register (stations rebuilt after the 2014–15 scans). Values are not changed.
+- **Dropped from station facts** (`_sources/followups/drop_amenities.json`, listed under `dropped` in each file): Oslo S
+  Svanen, Masala Politics, Himkok and Hub bar (280–510 m away); Nationaltheatret Havsmak (own site: at the Opera house).
+- Full Danish 1 km tiles deleted from Downloads on the owner's OK; the cut copies in `punktsky_clip/` stay.

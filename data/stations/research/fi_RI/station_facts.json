@@ -95,7 +95,19 @@
     "lat": 60.7354961,
     "how": "OSM n2321371633",
     "_source": "OpenStreetMap n2321371633 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2321371633 to platform outlines and register track lines",
+     "source": "OSM n2321371633 geometry (level -1;0): inside rail platform outline w33189043 (ref Ri0106, local_ref 4); next 0.0 m from w511822918 (ref None); register lines: 6.2 m from 'RI L5', 6.8 m from 'RI L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -112,7 +124,19 @@
     "lat": 60.7355325,
     "how": "OSM n2321371629",
     "_source": "OpenStreetMap n2321371629 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 7/8"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2321371629 to platform outlines and register track lines",
+     "source": "OSM n2321371629 geometry (level -1;0): inside rail platform outline w33189045 (ref None, local_ref 7); next 0.0 m from w511822904 (ref None); register lines: 5.9 m from 'RI L8', 6.9 m from 'RI L7'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -365,7 +389,19 @@
     "lat": 60.7355325,
     "how": "OSM n2321371629",
     "_source": "OpenStreetMap n2321371629 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 7/8"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2321371629 to platform outlines and register track lines",
+     "source": "OSM n2321371629 geometry (level -1;0): inside rail platform outline w33189045 (ref None, local_ref 7); next 0.0 m from w511822904 (ref None); register lines: 5.9 m from 'RI L8', 6.9 m from 'RI L7'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -387,7 +423,19 @@
     "lat": 60.7354961,
     "how": "OSM n2321371633",
     "_source": "OpenStreetMap n2321371633 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2321371633 to platform outlines and register track lines",
+     "source": "OSM n2321371633 geometry (level -1;0): inside rail platform outline w33189043 (ref Ri0106, local_ref 4); next 0.0 m from w511822918 (ref None); register lines: 6.2 m from 'RI L5', 6.8 m from 'RI L4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -681,7 +729,8 @@
     "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n1319193150 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n1319193150. No own website or station/centre page with hours found; only aggregators."
   },
   {
    "category": "post_office",
@@ -703,14 +752,14 @@
     "_source": "OpenStreetMap n2426359019 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n2426359019 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n2426359019 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n2426359019. A Posti distribution centre (not a public counter); no posti.fi page with hours found."
   }
  ],
  "plans": [],
  "open": [
   "Level names: no owner source signposts names for the street level or the underpass.",
-  "Lift positions and whether track 1 / temporary track 11 platforms are step-free from the street: VR's page lists no lifts; positions are OSM only.",
-  "OSM platforms Ri0106 and Ri0156 carry internal refs, not track numbers. Ri0106 shares lift/stairs with platform 5, so it is probably the track 4 face of island 4/5; Ri0156 (reached by stairs w33189036 near the building) may be the track 1 platform. No source states this.",
+  "Lift positions and whether track 1 / temporary track 11 platforms are step-free from the street: VR's page lists no lifts; positions are OSM only. [Lift follow-up 2026-10-30: n2321371633 serves the 4/5 island and n2321371629 serves 7/8. No lift lies within 15 m of the track 1 platform (Ri0156) or OSM '11' (w1412558236). Whether those are step-free from the street is not settled.]",
   "Restaurant in the station building: a yrittajat.fi event page names 'Riihimäen rautatieaseman ravintola Taco 4 Wine' at Asema-aukio 2, and Commons has a 2019 photo of a restaurant entrance in the station interior, but no current website or hours were found, so it is left out of amenities.",
   "Toilet fee amount and hours not given by VR; fee=yes is OSM only.",
   "Väylävirasto's station area map page (vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat, linked from VR's station pages) could not be read (fetch error), so no plan is listed."
@@ -728,6 +777,22 @@
    "question": "(no open-question list for Finland yet; brief priority 1: levels, which platforms have stairs/lifts, entrances, hours)",
    "answer": "Two levels: street level (Asema-aukio, station building, track 1 platform side) and the Peltosaari underpass below the tracks. Platforms at tracks 1, 4, 5, 7, 8 and temporary 11 (Digitraffic, Wikipedia). OSM has one lift and one stair from the underpass to each island platform (4/5 and 7/8); Wikipedia confirms lifts renewed in 2018–2021. Waiting room 05:30-24:00 daily (VR). Only in-building shop: R-kioski.",
    "_source": "https://vr.fi/en/railway-stations-and-routes/riihimaki, read 2026-10-30; https://en.wikipedia.org/wiki/Riihim%C3%A4ki_railway_station, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-RI.json), read 2026-10-30; Digitraffic infra-api laiturit via /home/claude/packs_fi/FI-RI/_report.json (Väylävirasto/Fintraffic, CC BY 4.0), read 2026-10-30"
+  },
+  {
+   "question": "OSM platforms Ri0106 and Ri0156 carry internal refs, not track numbers. Ri0106 shares lift/stairs with platform 5, so it is probably the track 4 face of island 4/5; Ri0156 (reached by stairs w33189036 near the building) may be the track 1 platform. No source states this.",
+   "answer": "Lifts serve  (Settled from OSM tags and geometry. Ri0106 carries local_ref=4, and lift n2321371633 lies between the RI L4 (6.8 m) and RI L5 (6.2 m) lines, so Ri0106 is the track 4 face of island 4/5. Ri0156 carries local_ref=1, so it is the track 1 platform.)",
+   "evidence": [
+    {
+     "what": "distance of lift n2321371633 to platform outlines and register track lines",
+     "source": "OSM n2321371633 geometry (level -1;0): inside rail platform outline w33189043 (ref Ri0106, local_ref 4); next 0.0 m from w511822918 (ref None); register lines: 6.2 m from 'RI L5', 6.8 m from 'RI L4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "OSM platform tags",
+     "source": "OSM w33189043 ref=Ri0106 local_ref=4; OSM w37761032 ref=Ri0156 local_ref=1 (raw extract FI-RI.osm)",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

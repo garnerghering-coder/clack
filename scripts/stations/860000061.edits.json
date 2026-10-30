@@ -8,20 +8,167 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal / street level, Banegårdspladsen",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000061)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 7 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000061)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 1, class 55 cm = 0.55 m above rail, 220 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 2,3, class 55 cm = 0.55 m above rail, 266 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000061/skanderborg_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w49512202",
+      "kind": "building",
+      "name": "Museum Skanderborg (building)",
+      "top_m": 5.22,
+      "base_m": -1.1,
+      "_source": "Outline OSM w49512202 (ODbL); roof = median of 842 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22)"
+    },
+    {
+      "from": "w433455940",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.66,
+      "_source": "Outline OSM w433455940 (ODbL); roof = median of 1637 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22); underside not measured"
+    },
+    {
+      "from": "w433455941",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 2.41,
+      "base_m": -0.59,
+      "_source": "Outline OSM w433455941 (ODbL); roof = median of 72 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22)"
+    },
+    {
+      "from": "w433500353",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -2.08,
+      "_source": "Outline OSM w433500353 (ODbL); roof = median of 42 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22); underside not measured"
+    },
+    {
+      "from": "w433516648",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 2.7,
+      "base_m": -0.6,
+      "_source": "Outline OSM w433516648 (ODbL); roof = median of 40 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22)"
+    },
+    {
+      "from": "w648695442",
+      "kind": "building",
+      "name": "building",
+      "top_m": -1.35,
+      "base_m": -4.28,
+      "_source": "Outline OSM w648695442 (ODbL); roof = median of 75 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22)"
+    },
+    {
+      "from": "r6439812",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.36,
+      "_source": "Outline OSM r6439812 (ODbL); roof = median of 987 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6211_557); from data/stations/research/860000061/skanderborg_structures_heights.geojson (metres above the platform surface, 48.83 m RH 2000, laser 2025-03-22); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000061/skanderborg_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 48.83,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000061/skanderborg_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (48.83 m DVR90, laser 2025-03-22)"
+  },
+  "pois": [
+    {
+      "id": "res4daec9aecd",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": -49.0,
+      "y": 2.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:45-22:00; Sa 06:45-22:00; Su 08:45-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; placed OSM node n1241568977 (research pass 2026-10-30, data/stations/research/860000061/station_facts.json)"
+    },
+    {
+      "id": "res5c54281457",
+      "category": "toilet",
+      "name": "Toilet/Handicaptoilet",
+      "level": "0",
+      "x": -23.6,
+      "y": -8.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; placed OSM node n6900719958 (research pass 2026-10-30, data/stations/research/860000061/station_facts.json)"
+    },
+    {
+      "id": "res22f2fd4ee0",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -28.3,
+      "y": -2.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/skanderborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; placed OSM node n6900799658 (research pass 2026-10-30, data/stations/research/860000061/station_facts.json)"
+    },
+    {
+      "id": "resef548de803",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -28.4,
+      "y": 6.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000061.json), read 2026-10-30; placed OSM node n439766134 (research pass 2026-10-30, data/stations/research/860000061/station_facts.json)"
     }
   ]
 }

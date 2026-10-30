@@ -8,20 +8,470 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Stueplan (ground floor) / platform level",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; 7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000512)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 19 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000512)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "3": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 3,4, class 55 cm = 0.55 m above rail, 427 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000512/odense_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w27862489",
+      "kind": "building",
+      "name": "Odense Banegård Center (station building)",
+      "top_m": 12.76,
+      "base_m": -2.29,
+      "_source": "Outline OSM w27862489 (ODbL); roof = median of 5368 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w37135323",
+      "kind": "building",
+      "name": "Danmarks Jernbanemuseum (building)",
+      "top_m": 6.08,
+      "base_m": -0.91,
+      "_source": "Outline OSM w37135323 (ODbL); roof = median of 1916 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w99884016",
+      "kind": "building",
+      "name": "Dronning Louises Station (building)",
+      "top_m": 3.87,
+      "base_m": -1.06,
+      "_source": "Outline OSM w99884016 (ODbL); roof = median of 789 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w119578000",
+      "kind": "building",
+      "name": "Odenses Gamle Banegård (station building)",
+      "top_m": 6.37,
+      "base_m": -3.74,
+      "_source": "Outline OSM w119578000 (ODbL); roof = median of 1217 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w148133805",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 9.05,
+      "base_m": -1.81,
+      "_source": "Outline OSM w148133805 (ODbL); roof = median of 312 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w197567451",
+      "kind": "building",
+      "name": "upper level (building)",
+      "top_m": 15.31,
+      "base_m": -1.89,
+      "_source": "Outline OSM w197567451 (ODbL); roof = median of 1383 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w398018001",
+      "kind": "building",
+      "name": "Odense (building)",
+      "top_m": 8.9,
+      "base_m": -0.74,
+      "_source": "Outline OSM w398018001 (ODbL); roof = median of 343 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w432556983",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.4,
+      "_source": "Outline OSM w432556983 (ODbL); roof = median of 1495 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w432556987",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.35,
+      "_source": "Outline OSM w432556987 (ODbL); roof = median of 860 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w432556991",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.48,
+      "_source": "Outline OSM w432556991 (ODbL); roof = median of 446 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w454507019",
+      "kind": "building",
+      "name": "For Jernbanemuseet (warehouse)",
+      "top_m": 3.7,
+      "base_m": -0.7,
+      "_source": "Outline OSM w454507019 (ODbL); roof = median of 439 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w591537479",
+      "kind": "bridge",
+      "name": "Byens Bro (bridge)",
+      "top_m": 7.63,
+      "base_m": 5.35,
+      "_source": "Outline OSM w591537479 (ODbL); roof = median of 2957 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); top = the deck the laser saw (class 17, footbridge_decks.json), 7.63 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w592641356",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 5.44,
+      "base_m": -0.78,
+      "_source": "Outline OSM w592641356 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w592641357",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 5.78,
+      "base_m": 0.01,
+      "_source": "Outline OSM w592641357 (ODbL); roof = median of 79 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w592641358",
+      "kind": "building",
+      "name": "transportation",
+      "top_m": 5.87,
+      "base_m": -0.09,
+      "_source": "Outline OSM w592641358 (ODbL); roof = median of 92 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20)"
+    },
+    {
+      "from": "w963727699",
+      "kind": "roof",
+      "name": "Miniature train (roof)",
+      "top_m": 1.75,
+      "_source": "Outline OSM w963727699 (ODbL); roof = median of 77 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "w1346969859",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.1,
+      "_source": "Outline OSM w1346969859 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured"
+    },
+    {
+      "from": "#18",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.81,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#19",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.85,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6140_587); from data/stations/research/860000512/odense_structures_heights.geojson (metres above the platform surface, 14.9 m RH 2000, laser 2025-02-20); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000512/odense_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 14.9,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000512/odense_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (14.9 m DVR90, laser 2025-02-20)"
+  },
+  "pois": [
+    {
+      "id": "res5b3534695e",
+      "category": "ticket",
+      "name": "DSB Salg & Service",
+      "level": "0",
+      "x": 19.4,
+      "y": -20.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n317274330 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res5f9fa880cf",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Odense IC)",
+      "level": "0",
+      "x": 29.0,
+      "y": -26.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-22:00; Sa 07:00-22:00; Su 08:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n4570094288 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res7334a8b9f6",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Odense Station)",
+      "level": "0",
+      "x": 71.3,
+      "y": 46.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:00-24:00; Fr,Sa 05:00-00:30; Su 05:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n4565928737 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "resf670f34ce8",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": 54.3,
+      "y": 0.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-01:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)",
+      "approximate": true,
+      "where": "the station hall in OBC"
+    },
+    {
+      "id": "res95341479e1",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": 33.3,
+      "y": -36.0,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n3580277557 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res288d189c96",
+      "category": "locker",
+      "name": "Bagagebokse",
+      "level": "0",
+      "x": 27.6,
+      "y": -20.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/odense/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n13474548111 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res36c786fe05",
+      "category": "cafe",
+      "name": "Espresso House",
+      "level": "0",
+      "x": -2.4,
+      "y": 28.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-18:30; Sa 06:30-18:00; Su 07:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30; placed OSM node n2845525704 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res9b5639d58e",
+      "category": "cafe",
+      "name": "Joe & The Juice",
+      "level": "0",
+      "x": 0.5,
+      "y": 14.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30; placed OSM node n4039782461 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "resd3f368e685",
+      "category": "restaurant",
+      "name": "The Food Stall",
+      "level": "0",
+      "x": 32.1,
+      "y": 13.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30; placed OSM node n4447219893 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "resd49e0a8ded",
+      "category": "restaurant",
+      "name": "Giraffen",
+      "level": "0",
+      "x": 30.1,
+      "y": -13.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 10:00-23:00; Su 10:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Giraffen https://www.giraffen-odense.dk/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n940463203 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res53d7d9535b",
+      "category": "pharmacy",
+      "name": "Apoteket Odense Banegård",
+      "level": "0",
+      "x": 19.2,
+      "y": 9.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:30-14:00; Su off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; OBC tenant list https://www.obc.dk/, read 2026-10-30; placed OSM node n6238143253 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "resba150be49e",
+      "category": "atm",
+      "name": "Euronet",
+      "level": "0",
+      "x": -3.1,
+      "y": -31.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n11078069420 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res98b9c9380f",
+      "category": "atm",
+      "name": "Nokas",
+      "level": "0",
+      "x": 16.9,
+      "y": 45.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed OSM node n3580260110 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "resfadca43435",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -43.1,
+      "y": -51.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000512.json), read 2026-10-30; placed representative point of the OSM area w435954043 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res5d7973b80e",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 33.3,
+      "y": -36.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n3580277557 (read 2026-10-30); placed OSM node n3580277557 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res2817b69713",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": 71.3,
+      "y": 46.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:30-24:00; Fr 05:30-01:00; Sa 07:00-01:00; Su, PH 07:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4565928737 (ODbL), read 2026-10-30; placed OSM node n4565928737 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res077036c72b",
+      "category": "cafe",
+      "name": "Café Ordet",
+      "level": "0",
+      "x": 121.8,
+      "y": 49.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-14:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5952621080 (ODbL), read 2026-10-30; https://www.odensebib.dk/hovedbiblioteket/cafe-ordet-cafeen-i-hjertet-af-borgernes-hus, read 2026-10-30; placed OSM node n5952621080 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res7e3e2ee25a",
+      "category": "restaurant",
+      "name": "Dlet - Odense Banegård Center",
+      "level": "0",
+      "x": 30.8,
+      "y": 2.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-19:00; Sa[1] 11:00-15:00; Su,PH off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7206987840 (ODbL), read 2026-10-30; https://www.dlet.dk/dlet-det-groenne-koekken-odense-banegard-center/, read 2026-10-30; placed OSM node n7206987840 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res8038a23f00",
+      "category": "restaurant",
+      "name": "Hafla Burger",
+      "level": "0",
+      "x": 92.0,
+      "y": 94.8,
+      "fee": null,
+      "opening_hours": "Su,Mo,We,Th 11:00-23:59, Tu 11:00-22:00, Fr,Sa 11:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10753341649 (ODbL), read 2026-10-30; placed OSM node n10753341649 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
+    },
+    {
+      "id": "res56a6689e64",
+      "category": "restaurant",
+      "name": "Mr. Fried Chicken",
+      "level": "0",
+      "x": 71.4,
+      "y": 53.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12528958825 (ODbL), read 2026-10-30; placed OSM node n12528958825 (research pass 2026-10-30, data/stations/research/860000512/station_facts.json)"
     }
   ]
 }

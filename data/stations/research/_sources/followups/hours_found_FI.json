@@ -1,0 +1,603 @@
+{
+ "fi_HKI": [
+  {
+   "name": "Bröner (Berlin döner)",
+   "osm_id": "n1369465635",
+   "opening_hours": null,
+   "hours_raw": "Ravintola on tilapäisesti suljettu.",
+   "hours_source": "website (paarautatieasema.fi, station owner)",
+   "source_url": "https://paarautatieasema.fi/p/83/ravintolat/broner",
+   "read": "2026-10-30",
+   "note": "Station's own page still says temporarily closed (re-read 2026-10-30); no hours and no reopening date.",
+   "closed": true
+  },
+  {
+   "name": "Kultajousi",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n316412722, Kaivokatu side outside the station building. kultajousi.fi store pages would not load (/myymalat, /pages/myymalat errors); not in Citycenter's shop list; no branch page found."
+  },
+  {
+   "name": "Suomalainen Kirjakauppa",
+   "osm_id": null,
+   "opening_hours": "Mo-Sa 08:00-20:00; Su 09:00-17:00",
+   "hours_raw": "Avoinna maanantai–perjantai 8:00–20:00, lauantai 8:00-20:00, sunnuntai 9:00–17:00",
+   "hours_source": "website (paarautatieasema.fi, station owner)",
+   "source_url": "https://paarautatieasema.fi/p/100/palvelut/suomalainen-kirjakauppa",
+   "read": "2026-10-30",
+   "note": "OSM n1369465559, kioskihalli. Same shop as the hand-read entry that already has these hours (duplicate). Exceptions listed: 19.6. 8–14, 20.–21.6. closed."
+  },
+  {
+   "name": "Rautatieaseman grilli",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n1369465663, 87 m from platforms, outside the building. No own website or station/centre page with hours found; not in paarautatieasema.fi or Citycenter directories."
+  },
+  {
+   "name": "Brasserie Le Havre",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n1369465673 (Hotel Seurahuone, Kaivokatu 12). The hotel's Le Havre page gives address only, no hours; the hotel site now presents 'Ravintola Seurahuone' (Mo-Tu 11.30-22, We-Fr 11.30-23, Sa 13-23, Su closed) with no mention of Le Havre, so not copied. Le Havre may have been renamed/closed - unconfirmed."
+  },
+  {
+   "name": "Bierhaus München",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 15:00-24:00; Fr,Sa 13:00-02:00",
+   "hours_raw": "Ma–To 15:00–24:00 · Pe–La 13:00–02:00",
+   "hours_source": "website (Bierhaus)",
+   "source_url": "https://www.bierhaus.fi/munchen",
+   "read": "2026-10-30",
+   "note": "OSM n2917442967. Site: 'Rautatieasema, raiteen 19 ja keskustakirjasto Oodin välissä', Töölönlahdenkatu 3 B. Sunday not listed on the page (so off in this string) - unconfirmed whether closed."
+  },
+  {
+   "name": "Café Cook",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n4714489589 (Kaivokatu side). No own website or station/centre page with hours found; not in Citycenter's shop list."
+  },
+  {
+   "name": "Espresso House",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa 08:00-19:00; Su off",
+   "hours_raw": "Ma-Pe 07-19, La 08-19, Su Suljettu",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "source_url": "https://citycenter.fi/liikkeet/espresso-house-asematunneli/",
+   "read": "2026-10-30",
+   "note": "OSM n5012343136 is level -1 = 'Espresso House Asematunneli' (K1). The other Espresso House (n5566807323, Citycenter 1. krs) is listed separately: Ma-To 06.30-23, Pe-La 06.30-23.30, Su 07.30-23. espressohouse.com store finder did not load."
+  },
+  {
+   "name": "My Salad Bar",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n10559145548, Asematunneli level -1. Not in Citycenter's current shop list; no own site found - possibly gone."
+  },
+  {
+   "name": "Shin Café",
+   "osm_id": null,
+   "opening_hours": "Mo-Sa 09:30-20:30; Su 10:00-20:30",
+   "hours_raw": "Ma-La 09.30-20.30, Su 10-20.30",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "source_url": "https://citycenter.fi/liikkeet/shin-cafe/",
+   "read": "2026-10-30",
+   "note": "OSM n11771650439, Asematunneli level -1 (Citycenter K1)."
+  },
+  {
+   "name": "Lush",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_raw": "Ma-Pe 10-20, La 10-19, Su 12-18",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "source_url": "https://citycenter.fi/liikkeet/lush/",
+   "read": "2026-10-30",
+   "note": "OSM n11771745593, Asematunneli (K1). lush.com store page would not load."
+  },
+  {
+   "name": "Kukkamyynti Piilola Oy",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_raw": "Arkisin 8-20, Lauantaisin 10-19, Sunnuntaisin 12-18",
+   "hours_source": "website (Piilola, Citycenter branch)",
+   "source_url": "https://piilola.fi/pages/kukkakauppa-helsinki-citycenter",
+   "read": "2026-10-30",
+   "note": "OSM n11771777458, Kaivokatu 8 (Citycenter K1/Asematunneli). Citycenter page gives the same hours."
+  },
+  {
+   "name": "The Store",
+   "osm_id": null,
+   "opening_hours": "Mo-Sa 10:00-22:00; Su 12:00-18:00",
+   "hours_raw": "Ma-La 10-22, Su 12-18",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "source_url": "https://citycenter.fi/liikkeet/the-store/",
+   "read": "2026-10-30",
+   "note": "OSM n11772137558, Asematunneli (K1). K-18 shop."
+  },
+  {
+   "name": "Lan Venus Kynsistudio",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-18:00; Su \"sopimuksen mukaan\"",
+   "hours_raw": "Ma-Pe 10-20, La 10-18, Su Sop. mukaan",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "source_url": "https://citycenter.fi/liikkeet/lan-venus-kynsistudio/",
+   "read": "2026-10-30",
+   "note": "OSM n11772137563. Citycenter K1, Asematunneli side next to Chill. Sunday by appointment."
+  },
+  {
+   "name": "Ristorante Momento",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n13173771083 (north-west of station). No own website or station/centre page with hours found; only aggregator listings."
+  },
+  {
+   "name": "Helsingin Pystygrilli",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM w300626401. No own website or station/centre page with hours found; no web presence found."
+  }
+ ],
+ "fi_HL": [
+  {
+   "name": "Scandia Rent",
+   "osm_id": "n5894019063",
+   "opening_hours": null,
+   "hours_raw": "rautatieaseman toimipiste palvelee sopimuksen mukaan, autojen noutojen ja palautusten aikataulujen mukaan.",
+   "hours_source": "website (Scandia Rent / MABI Mobility)",
+   "source_url": "https://scandiarent.fi/toimipisteet/hameenlinna/",
+   "read": "2026-10-30",
+   "note": "No fixed hours: station desk serves by arrangement for pick-ups/returns (Tiiriö office weekdays 8-17). Scandia Rent now trades as MABI Mobility."
+  }
+ ],
+ "fi_JY": [
+  {
+   "name": "Candy Town",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 10:00-19:30; Fr 10:00-20:00; Sa 10:00-18:00; Su 12:00-18:00",
+   "hours_raw": "Ma-To 10:00-19:30, Pe 10:00-20:00, La 10:00-18:00, Su 12:00-18:00",
+   "hours_source": "website (CandyTown)",
+   "source_url": "https://candytown.fi/pages/jyvaskyla-matkakeskus",
+   "read": "2026-10-30",
+   "note": "OSM n12147904321 = 'CandyTown Jyväskylä Matkakeskus', Hannikaisenkatu 20; duplicate of the hand-read entry, hours unchanged."
+  }
+ ],
+ "fi_KUO": [
+  {
+   "name": "Pubi",
+   "osm_id": "n1831133792",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No name beyond 'Pubi' in OSM; no own site; VR Kuopio station page lists no pub."
+  },
+  {
+   "name": "Europcar",
+   "osm_id": "n1831133756",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Europcar 'Kuopio Railway Station' pages (europcar.co.uk/.ch/.com) give no hours; europcar.fi failed to load; VR page silent."
+  },
+  {
+   "name": "Hertz",
+   "osm_id": "n1831133767",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Hertz 'Kuopio - Asemakatu 1' (hertz.com kuoc62) and hertz.co.uk pages give no branch hours (only booking-time 00:00-23:30); hertz.fi failed. (Budget, also Asemakatu 1, lists Mo-Fr 10-16 - different brand, not copied.)"
+  }
+ ],
+ "fi_KV": [
+  {
+   "name": "Ranela",
+   "osm_id": "n1498437291",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No own site; VR Kouvola station page lists no pub; existence unverified."
+  },
+  {
+   "name": "Aseman parturi",
+   "osm_id": "n1498437296",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No own site; VR station page silent."
+  },
+  {
+   "name": "Filmtown",
+   "osm_id": "n5782712954",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No current source; probably outdated (Filmtown links redirect to CandyTown)."
+  },
+  {
+   "name": "Avis",
+   "osm_id": "n2049440192",
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_raw": "Sun-Sat 06:00 AM - 12:00 AM; 24 hour drop off",
+   "hours_source": "website (Avis)",
+   "source_url": "https://www.avis.com/en/locations/fi/kouvola/ku9",
+   "read": "2026-10-30",
+   "note": "CAUTION: Avis lists the identical 06-24 every-day pattern for its Lahti station desk, so this is likely a pick-up/return window for an unstaffed desk, not staffed hours. OSM had Mo-Fr 08-17. Treat as unsettled."
+  },
+  {
+   "name": "Aseman parturi",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No own site; VR station page silent."
+  }
+ ],
+ "fi_LH": [
+  {
+   "name": "Avis, Europcar, Hertz, SIXT, Budget",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Combined row; see the individual Avis/Hertz/Budget/Europcar/SIXT entries."
+  },
+  {
+   "name": "Avis",
+   "osm_id": null,
+   "opening_hours": "Mo-Su 06:00-24:00",
+   "hours_raw": "Sun-Sat 06:00 AM - 12:00 AM",
+   "hours_source": "website (Avis)",
+   "source_url": "https://www.avis.com/en/locations/fi/lahti",
+   "read": "2026-10-30",
+   "note": "Branch 'Lahti Railway Station' (BW7). Same 06-24 daily pattern as Avis Kouvola: likely pick-up window, not staffed hours."
+  },
+  {
+   "name": "Europcar",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Europcar 'Lahti Railwaystation' page (europcar.co.uk) gives no hours; VR Lahti page lists no car rentals."
+  },
+  {
+   "name": "Hertz",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su 10:00-12:00",
+   "hours_raw": "Mo-Fr 0800-1700, Sa-Su 1000-1200",
+   "hours_source": "website (Hertz)",
+   "source_url": "https://www.hertz.co.uk/p/car-hire/finland/lahti/lahti-train-station",
+   "read": "2026-10-30",
+   "note": "'Lahti Railway Station', Mannerheiminkatu 15."
+  },
+  {
+   "name": "SIXT",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "sixt.co.uk confirms a branch 'at the railway station in Mannerheiminkatu' but gives no hours; sixt.fi failed to load."
+  },
+  {
+   "name": "Budget",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-17:00; Sa,Su 08:30-12:00",
+   "hours_raw": "Monday-Friday 08:00 - 17:00 Hrs; Saturday 08:30 - 12:00 Hrs; Sunday 08:30 - 12:00 Hrs",
+   "hours_source": "website (Budget)",
+   "source_url": "https://www.budget.fi/en/rental-locations/lahti",
+   "read": "2026-10-30",
+   "note": "Only Lahti Budget location: 'Railway Station, Lahti 15100'."
+  }
+ ],
+ "fi_OL": [
+  {
+   "name": "Hius Plaza",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n13392578068, outside the station building. No own website or station/centre page with hours found; only aggregator hits."
+  }
+ ],
+ "fi_PM": [
+  {
+   "name": "HYvä Maku (Chinese restaurant)",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No own website found. Only Visit Pieksämäki (tourism site, not owner/business) gives hours - already in station_facts hours_raw; not re-used under the rules."
+  },
+  {
+   "name": "JR Fast Food",
+   "osm_id": "w489048039",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "No own website or station/centre page with hours found; only Visit Pieksämäki/aggregators."
+  }
+ ],
+ "fi_PSL": [
+  {
+   "name": "Scandia Rent",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n10578487664. Scandia Rent (MABI) Helsinki page lists only Herttoniemi, Kallio and Airport - no Pasila office; may be gone."
+  },
+  {
+   "name": "Aleksi 13",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n11966347720. aleksi13.fi store list blocked (robots); no Pasila branch page found."
+  }
+ ],
+ "fi_RI": [
+  {
+   "name": "Bulldog Bar",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n1319193150. No own website or station/centre page with hours found; only aggregators."
+  },
+  {
+   "name": "Postin jakelukeskus",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n2426359019. A Posti distribution centre (not a public counter); no posti.fi page with hours found."
+  }
+ ],
+ "fi_SK": [
+  {
+   "name": "Café Picnic",
+   "osm_id": "n12396780467",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "picnic.fi location finder shows placeholders only (JS); no Seinäjoki page found; VR page has no hours."
+  },
+  {
+   "name": "Food & Co Bistro Kaffeli",
+   "osm_id": "n12398310502",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "compass-group.fi Seinäjoki pages failed to load; no other owner page found."
+  },
+  {
+   "name": "Alusasut Justihi Eikä Melekehen",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-17:00; Sa 10:00-14:00",
+   "hours_raw": "arkisin klo 10 – 17 ja lauantaisin 10 – 14",
+   "hours_source": "website (shop)",
+   "source_url": "https://liivitliikkeessa.fi/",
+   "read": "2026-10-30",
+   "note": "OSM n12431171260 (in station building). Site address: Valtionkatu 1, Seinäjoki. Sunday not mentioned. Notice: closed Sat 31.10. (pyhäinpäivä)."
+  }
+ ],
+ "fi_TKL": [
+  {
+   "name": "JK Shop",
+   "osm_id": "n13300261563",
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_raw": "Mon - Fri 09 - 21, Sat 10 - 20, Sun 12 - 18",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/jk-shop/",
+   "read": "2026-10-30",
+   "note": "OSM n13300261563; Dixi 3rd floor."
+  },
+  {
+   "name": "Hair Design 5",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su 12:00-18:00",
+   "hours_raw": "Ma – Pe 9.00 – 21.00, La 9.00 – 18.00, Su 12.00 – 18.00",
+   "hours_source": "website (Hair Design 5)",
+   "source_url": "https://www.hd5.fi/",
+   "read": "2026-10-30",
+   "note": "Dixi 3. kerros, Ratatie 11. Dixi's 'Hair Design' page gives the same hours."
+  },
+  {
+   "name": "DNA",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-16:00; Su 12:00-16:00",
+   "hours_raw": "Mon - Fri 10 - 19, Sat 10 - 16, Sun 12 - 16",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/dna/",
+   "read": "2026-10-30",
+   "note": "Dixi 3rd floor."
+  },
+  {
+   "name": "Kiva Korean Kitchen",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:30-20:00; Sa,Su 12:00-20:00",
+   "hours_raw": "Mon - Fri 10.30 - 20, Sat - Su 12 - 20",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/kiva-korean-kitchen/",
+   "read": "2026-10-30",
+   "note": "Dixi 3rd floor."
+  },
+  {
+   "name": "Specsavers",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su off",
+   "hours_raw": "Mon - Fri 10 - 19, Sat 10 - 17, Sun Closed",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/specsavers/",
+   "read": "2026-10-30",
+   "note": "Dixi 3rd floor; specsavers.fi store list failed to load."
+  },
+  {
+   "name": "Elisa",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00; Su 12:00-16:00",
+   "hours_raw": "Mon - Fri 10 - 19, Sat 10 - 17, Sun 12 - 16",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/elisa/",
+   "read": "2026-10-30",
+   "note": "Dixi 3rd floor."
+  },
+  {
+   "name": "GloWe",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_raw": "Mon - Fri 10 - 20, Sat 10 - 18, Sun Closed",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/glowe/",
+   "read": "2026-10-30",
+   "note": "Dixi 3rd floor."
+  },
+  {
+   "name": "JK Shop",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_raw": "Mon - Fri 09 - 21, Sat 10 - 20, Sun 12 - 18",
+   "hours_source": "website (Kauppakeskus Dixi, station-linked centre)",
+   "source_url": "https://dixi.fi/en/shop/jk-shop/",
+   "read": "2026-10-30",
+   "note": "OSM n13300261563; Dixi 3rd floor."
+  },
+  {
+   "name": "Pretty Boy",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not in Dixi's current shop directory (dixi.fi/en/shops/) and no Dixi branch on prettyboy.fi's location list - probably closed, but no explicit closure notice found."
+  },
+  {
+   "name": "Paku kympillä",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Kauppakeskuksen aukioloaikoina.",
+   "hours_source": "website (Paku kympillä)",
+   "source_url": "https://pakukympilla.fi/toimipisteet/",
+   "read": "2026-10-30",
+   "note": "Dixi, Ratatie 11: 'follows the shopping centre's hours'. Dixi's site shows centre hours Mon–Fri 06–22, Sat 07–22, Sun 09–22, but those look like building hours, so not converted. Phone service daily 8-23."
+  }
+ ],
+ "fi_TKU": [
+  {
+   "name": "Teatro Bar & Café",
+   "osm_id": null,
+   "opening_hours": "We,Th 16:00-22:00; Fr,Sa 16:00-24:00",
+   "hours_raw": "Aukioloajat 2026: Teatro avoinna Logomon tapahtumailtoina. Ke 16-22, To 16-22, Pe-la 16-00. Keittiö menee kiinni 30 min ennen ravintolan sulkeutumista.",
+   "hours_source": "website (Logomo)",
+   "source_url": "https://logomo.fi/teatro",
+   "read": "2026-10-30",
+   "note": "Also open on Logomo event evenings; kitchen closes 30 min before closing."
+  }
+ ],
+ "fi_TPE": [
+  {
+   "name": "Pizzamestarit",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 10:45-20:00; Fr 10:45-22:00; Sa 12:00-22:00; Su 12:00-20:00",
+   "hours_raw": "Ma–to 10.45–20.00, Pe 10.45–22.00, La 12.00–22.00, Su 12.00–20.00",
+   "hours_source": "website (Pizzamestarit)",
+   "source_url": "https://www.pizzamestarit.fi/tampereen-pizzamestarit/",
+   "read": "2026-10-30",
+   "note": "OSM n12112370926. Address on site: Hämeenkatu 3 (at the station end of Hämeenkatu); not in the station building."
+  },
+  {
+   "name": "Parturi-kampaamo Prime",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n14001718622. No own website or station/centre page with hours found; no web presence found."
+  }
+ ],
+ "fi_VS": [
+  {
+   "name": "Scandia Rent",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n281223928 (tagged brand Avis). scandiarent.fi Vaasa pages failed to load; Avis's Vaasa city desk (V3K) is at Hotel Scandic, Rosteninkatu 6 - not the station, not copied."
+  },
+  {
+   "name": "Hair Company",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "OSM n13130512565. No own website or station/centre page with hours found; no web presence found."
+  }
+ ]
+}

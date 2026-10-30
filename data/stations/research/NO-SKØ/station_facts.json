@@ -62,7 +62,19 @@
     "lat": 59.9225143,
     "how": "OSM n7136796363",
     "_source": "OpenStreetMap n7136796363 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7136796363 to platform outlines and register track lines",
+     "source": "OSM n7136796363 geometry (level 0;1): inside rail platform outline r6656488 (ref 1;2, local_ref 1;2); next 13.7 m from r6656489 (ref 3;4); register lines: 9.3 m from 'track 1', 25.1 m from 'track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -79,7 +91,19 @@
     "lat": 59.9224103,
     "how": "OSM n7139023779",
     "_source": "OpenStreetMap n7139023779 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7139023779 to platform outlines and register track lines",
+     "source": "OSM n7139023779 geometry (level 0;1): inside rail platform outline r6656489 (ref 3;4); next 12.8 m from r6656488 (ref 1;2); register lines: 6.2 m from 'track 4', 28.3 m from 'track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "underpass",
@@ -131,7 +155,19 @@
     "lat": 59.9225143,
     "how": "OSM n7136796363",
     "_source": "OpenStreetMap n7136796363 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7136796363 to platform outlines and register track lines",
+     "source": "OSM n7136796363 geometry (level 0;1): inside rail platform outline r6656488 (ref 1;2, local_ref 1;2); next 13.7 m from r6656489 (ref 3;4); register lines: 9.3 m from 'track 1', 25.1 m from 'track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -150,7 +186,19 @@
     "lat": 59.9224103,
     "how": "OSM n7139023779",
     "_source": "OpenStreetMap n7139023779 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n7139023779 to platform outlines and register track lines",
+     "source": "OSM n7139023779 geometry (level 0;1): inside rail platform outline r6656489 (ref 3;4); next 12.8 m from r6656488 (ref 1;2); register lines: 6.2 m from 'track 4', 28.3 m from 'track 1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -372,7 +420,6 @@
   }
  ],
  "open": [
-  "Which lift and stair serves platform 1/2 and which serves 3/4: no owner plan found. OSM's lifts are not linked to platforms, and OSM's platform refs at Skøyen (11, 12) are tram/bus stops, not the rail platforms.",
   "Signposted level names: none found.",
   "Entrances: streets come from OSM only (Hoffsveien, Drammensveien); Bane NOR does not list the entrances.",
   "Mix Skøyen hours are from OSM only; no owner page was readable.",
@@ -391,6 +438,22 @@
    "question": "Which platforms have stairs/lifts",
    "answer": "Both platforms are reached by stairs and lift (Bane NOR: 'Trapper og heis til plattformer'). The 2023–24 modernisation is finished and all lifts and entrances are open. OSM has two lifts at the underpass but does not tag which platform each serves.",
    "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-s-/skoyen/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/skoyen/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-SKØ), read 2026-10-30"
+  },
+  {
+   "question": "Which lift and stair serves platform 1/2 and which serves 3/4: no owner plan found. OSM's lifts are not linked to platforms, and OSM's platform refs at Skøyen (11, 12) are tram/bus stops, not the rail platforms.",
+   "answer": "Lifts serve platform 1/2, platform 3/4 (The rail islands are in the raw OSM extract as relations r6656488 (1;2) and r6656489 (3;4); refs 11/12 are tram and bus stops. n7136796363 lies inside 1/2 and n7139023779 inside 3/4 (levels 0;1). Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n7136796363 to platform outlines and register track lines",
+     "source": "OSM n7136796363 geometry (level 0;1): inside rail platform outline r6656488 (ref 1;2, local_ref 1;2); next 13.7 m from r6656489 (ref 3;4); register lines: 9.3 m from 'track 1', 25.1 m from 'track 4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n7139023779 to platform outlines and register track lines",
+     "source": "OSM n7139023779 geometry (level 0;1): inside rail platform outline r6656489 (ref 3;4); next 12.8 m from r6656488 (ref 1;2); register lines: 6.2 m from 'track 4', 28.3 m from 'track 1'",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

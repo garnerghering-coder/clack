@@ -278,6 +278,58 @@ if os.path.exists(OSMF):
                 e['position'] = pos(m_)
 facts['answers'] = manual.get('answers', [])
 facts['open'] = manual.get('open', [])
+# ---------------------------------------------------------------- follow-up passes (hours from shops' own sites, lift links)
+FOLLOW = os.environ.get('FOLLOWUPS_DIR')
+if FOLLOW:
+    import glob as _g
+    for hf in sorted(_g.glob(f'{FOLLOW}/hours_found_*.json')):
+        for h in json.load(open(hf)).get(SAFE, []):
+            tgt = [a for a in facts['amenities'] if (h.get('osm_id') and a.get('osm_id') == h['osm_id']) or (not h.get('osm_id') and a.get('name') == h.get('name'))]
+            for a in tgt:
+                if a.get('opening_hours'):
+                    continue
+                if h.get('closed'):
+                    a['closed'] = True
+                    a['closed_source'] = f"{h.get('source_url')}, read {h.get('read')}"
+                if h.get('opening_hours') or h.get('hours_raw'):
+                    a['opening_hours'] = h.get('opening_hours')
+                    a['hours_raw'] = None if h.get('opening_hours') else h.get('hours_raw')
+                    a['hours_published'] = h.get('hours_raw')
+                    a['hours_source'] = h.get('hours_source')
+                    a['hours_checked'] = h.get('read')
+                    a['_source'] = '; '.join(x for x in (a.get('_source'), f"{h.get('source_url')}, read {h.get('read')}") if x)
+                elif h.get('note'):
+                    a['hours_note'] = h['note']
+    df = f'{FOLLOW}/drop_amenities.json'
+    if os.path.exists(df):
+        for d_ in json.load(open(df)).get(SAFE, []):
+            gone = [a for a in facts['amenities'] if a.get('name') == d_['name'] and (not d_.get('osm_id') or a.get('osm_id') == d_['osm_id'])]
+            for a in gone:
+                facts['amenities'].remove(a)
+            if gone:
+                facts.setdefault('dropped', []).append({'name': d_['name'], 'reason': d_['reason']})
+    lf = f'{FOLLOW}/lifts_found.json'
+    if os.path.exists(lf):
+        for q in json.load(open(lf)).get(SAFE, []):
+            ev = [dict(e) for e in q.get('evidence', [])]
+            hit = [c for c in facts['connections'] if q.get('lift_osm_id') and c.get('osm_id') == q['lift_osm_id']]
+            for c in hit:
+                c['serves_platforms'] = q.get('serves')
+                c['serves_settled'] = bool(q.get('settled'))
+                c['serves_evidence'] = ev
+                if q.get('note'):
+                    c['serves_note'] = q['note']
+            if not hit and q.get('settled') and q.get('lift_osm_id'):
+                facts['connections'].append({'kind': 'lift', 'osm_id': q['lift_osm_id'], 'between': q.get('levels') or q.get('serves'),
+                                             'serves_platforms': q.get('serves'), 'serves_settled': True, 'serves_evidence': ev,
+                                             'confirmed_by': 'lift follow-up pass', '_source': '; '.join(str(e.get('source')) for e in ev)})
+            if not q.get('settled') and q.get('note') and q.get('question') in facts['open']:
+                i = facts['open'].index(q['question'])
+                facts['open'][i] = q['question'] + ' [Lift follow-up 2026-10-30: ' + q['note'] + ']'
+            if q.get('settled') is True and q.get('question') in facts['open']:
+                facts['open'].remove(q['question'])
+                facts['answers'].append({'question': q['question'], 'answer': (f"Lift {q['lift_osm_id']} serves " if q.get('lift_osm_id') else 'Lifts serve ') + ', '.join(map(str, q.get('serves') or [])) + (f" ({q['note']})" if q.get('note') else ''),
+                                         'evidence': ev})
 # open questions about hours: settled if the POI now has hours
 for q in oq:
     m = re.match(r'^(\w+) (.+): no opening hours$', q)

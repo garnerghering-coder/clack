@@ -15,7 +15,45 @@
    "_source": "https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30; https://wikiwand.com/da/Helsing%C3%B8r_Station (Danish Wikipedia), read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "south-east",
+   "meaning": "the platform lies on the south-east side of track 1 (the train stops with the platform to its south-east)",
+   "_source": "laser (2024-03-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 13",
+   "track": "13",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 13 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-03-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 13; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 2",
+   "track": "2",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 2 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-03-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 2; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-03-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 3 / track 3",
+   "track": "3",
+   "side": "north-west",
+   "meaning": "the platform lies on the north-west side of track 3 (the train stops with the platform to its north-west)",
+   "_source": "laser (2024-03-27, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 3 / track 3; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  }
+ ],
  "connections": [
   {
    "kind": "lift",
@@ -266,9 +304,9 @@
    "name": "7-Eleven",
    "brand": "7-Eleven",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 06:00-22:30; Fr 06:00-24:00; Sa 07:00-24:00; Su 07:00-22:30",
+   "hours_source": "website (DSB)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 12.6142193,
@@ -281,7 +319,9 @@
     "_source": "OpenStreetMap n2270460296 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n2270460296 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n2270460296 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/helsingor/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag - torsdag 06.00-22.30; Fredag 06.00-24.00; Lørdag 07.00-24.00; Søndag 07.00-22.30"
   },
   {
    "category": "restaurant",
@@ -347,12 +387,13 @@
     "_source": "OpenStreetMap n12819232620 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12819232620 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12819232620 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (nothing); DSB Helsingør page names only the 7-Eleven. OSM n12819232620."
   }
  ],
  "plans": [],
  "open": [
-  "Position of the elevator and escalators (DSB lists them; OSM has none).",
+  "Position of the elevator and escalators (DSB lists them; OSM has none). [Lift follow-up 2026-10-30: Not settled.]",
   "Hornbæk Line (Lokaltog) halt: Wikipedia says it is on the street next to the station building; position and name not in OSM extract or owner text.",
   "Waiting room and toilet hours: DSB gives only 'closed/locked evenings and nights'.",
   "365discount (OSM n2270460295, Mo-Su 07:00-22:00), HaiYi and Sweet Ship are 10–20 m from the platforms in OSM, probably in the ferry terminal/harbour buildings; no source says they are in the station, so left out.",

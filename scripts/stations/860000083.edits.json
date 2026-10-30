@@ -8,20 +8,249 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal / street level, Banegårdspladsen",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000083)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 11 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000083)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 26: tracks 1, class 50 cm = 0.5 m above rail, 301 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000083/kolding_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w105967752",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.24,
+      "base_m": -0.6,
+      "_source": "Outline OSM w105967752 (ODbL); roof = median of 955 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w105995462",
+      "kind": "building",
+      "name": "building",
+      "top_m": 0.83,
+      "base_m": -1.36,
+      "_source": "Outline OSM w105995462 (ODbL); roof = median of 172 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w106001604",
+      "kind": "building",
+      "name": "elevator",
+      "top_m": 3.95,
+      "base_m": 0.01,
+      "_source": "Outline OSM w106001604 (ODbL); roof = median of 214 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w106026332",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.26,
+      "_source": "Outline OSM w106026332 (ODbL); roof = median of 2119 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05); underside not measured"
+    },
+    {
+      "from": "w106033436",
+      "kind": "building",
+      "name": "building",
+      "top_m": 10.65,
+      "base_m": -0.95,
+      "_source": "Outline OSM w106033436 (ODbL); roof = median of 653 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w106041802",
+      "kind": "building",
+      "name": "elevator",
+      "top_m": 4.04,
+      "base_m": 0.03,
+      "_source": "Outline OSM w106041802 (ODbL); roof = median of 251 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w369175437",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.7,
+      "base_m": -1.49,
+      "_source": "Outline OSM w369175437 (ODbL); roof = median of 177 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    },
+    {
+      "from": "w1474781946",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.2,
+      "_source": "Outline OSM w1474781946 (ODbL); roof = median of 268 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05); underside not measured"
+    },
+    {
+      "from": "w1474781947",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.03,
+      "_source": "Outline OSM w1474781947 (ODbL); roof = median of 165 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05); underside not measured"
+    },
+    {
+      "from": "w1493609150",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.56,
+      "base_m": 5.4,
+      "_source": "Outline OSM w1493609150 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "r1513288",
+      "kind": "building",
+      "name": "civic",
+      "top_m": 5.56,
+      "base_m": -2.63,
+      "_source": "Outline OSM r1513288 (ODbL); roof = median of 27456 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6149_530); from data/stations/research/860000083/kolding_structures_heights.geojson (metres above the platform surface, 3.39 m RH 2000, laser 2025-03-05)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000083/kolding_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 3.39,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000083/kolding_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (3.39 m DVR90, laser 2025-03-05)"
+  },
+  "pois": [
+    {
+      "id": "res7f41b93277",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Kolding Station)",
+      "level": "0",
+      "x": 16.3,
+      "y": -7.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30; placed OSM node n963244298 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "res36e019076c",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -43.8,
+      "y": 16.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-23:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "resc557c1efae",
+      "category": "toilet",
+      "name": "Toilet/Handicaptoilet",
+      "level": "0",
+      "x": 39.3,
+      "y": -22.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/kolding/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000083.json), read 2026-10-30; placed OSM node n2997124336 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "resebb55148a7",
+      "category": "toilet",
+      "name": "DSB",
+      "level": "0",
+      "x": 39.3,
+      "y": -22.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n2997124336 (read 2026-10-30); placed OSM node n2997124336 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "resac168d1128",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": 16.3,
+      "y": -7.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n963244298 (ODbL), read 2026-10-30; placed OSM node n963244298 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "rese5cfa03f4a",
+      "category": "restaurant",
+      "name": "Fratelli Kolding",
+      "level": "0",
+      "x": -13.7,
+      "y": 17.3,
+      "fee": null,
+      "opening_hours": "17:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7198236278 (ODbL), read 2026-10-30; placed OSM node n7198236278 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "resc4b57bf45e",
+      "category": "cafe",
+      "name": "Freddy's Cafe",
+      "level": "0",
+      "x": 53.3,
+      "y": -65.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:30-16:00; Sa 09:00-15:00; Su off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9624208704 (ODbL), read 2026-10-30; placed OSM node n9624208704 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
+    },
+    {
+      "id": "res3fee1dbcfb",
+      "category": "restaurant",
+      "name": "Pitstop til Fremtiden",
+      "level": "0",
+      "x": -52.1,
+      "y": 28.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10825526371 (ODbL), read 2026-10-30; placed OSM node n10825526371 (research pass 2026-10-30, data/stations/research/860000083/station_facts.json)"
     }
   ]
 }

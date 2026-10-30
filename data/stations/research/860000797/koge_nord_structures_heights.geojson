@@ -1,0 +1,371 @@
+{
+ "type": "FeatureCollection",
+ "name": "koge_nord_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m DVR90",
+ "platform_surface_m": 7.69,
+ "track_bed_m": 6.95,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.1707983,
+       55.497098
+      ],
+      [
+       12.1708115,
+       55.497117999999986
+      ],
+      [
+       12.1708211,
+       55.4971383
+      ],
+      [
+       12.1718216,
+       55.496887599999994
+      ],
+      [
+       12.171946300000002,
+       55.4968519
+      ],
+      [
+       12.1720753,
+       55.4968076
+      ],
+      [
+       12.172678400000002,
+       55.49660050000001
+      ],
+      [
+       12.172869,
+       55.49653509999999
+      ],
+      [
+       12.172890499999998,
+       55.49655179999999
+      ],
+      [
+       12.1731258,
+       55.496470299999984
+      ],
+      [
+       12.173555600000002,
+       55.496321599999995
+      ],
+      [
+       12.1735159,
+       55.496280399999996
+      ],
+      [
+       12.173473799999998,
+       55.4962495
+      ],
+      [
+       12.1728154,
+       55.49648189999999
+      ],
+      [
+       12.1728314,
+       55.49649709999999
+      ],
+      [
+       12.1718846,
+       55.49682529999999
+      ],
+      [
+       12.1717827,
+       55.4968549
+      ],
+      [
+       12.171570599999999,
+       55.4969073
+      ],
+      [
+       12.171291,
+       55.49697630000001
+      ],
+      [
+       12.171163700000001,
+       55.49700779999999
+      ],
+      [
+       12.1707983,
+       55.497098
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w542437234",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 2.3,
+    "ground_median_m": 6.3,
+    "ground_max_m": 15.42,
+    "roof_top_median_m": 15.92,
+    "roof_top_p95_m": 17.06,
+    "laser_points": 94,
+    "height_above_ground_median_m": 9.62,
+    "height_above_ground_p95_m": 10.76,
+    "top_above_platform_m": 8.23,
+    "base_above_platform_m": -5.39,
+    "source": "Outline OSM w542437234 (ODbL); roof = median of 94 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.171797199999999,
+       55.499375499999985
+      ],
+      [
+       12.171763399999998,
+       55.4993055
+      ],
+      [
+       12.1720566,
+       55.49926349999999
+      ],
+      [
+       12.1728253,
+       55.49915349999999
+      ],
+      [
+       12.1729036,
+       55.49914439999999
+      ],
+      [
+       12.173005700000001,
+       55.49914040000001
+      ],
+      [
+       12.1731044,
+       55.4991409
+      ],
+      [
+       12.1742748,
+       55.499179199999986
+      ],
+      [
+       12.174358299999998,
+       55.49917919999999
+      ],
+      [
+       12.1744569,
+       55.49917719999999
+      ],
+      [
+       12.174573399999998,
+       55.4991681
+      ],
+      [
+       12.1746889,
+       55.499151
+      ],
+      [
+       12.1752399,
+       55.49904680000001
+      ],
+      [
+       12.1752843,
+       55.49911829999999
+      ],
+      [
+       12.1751734,
+       55.49913920000001
+      ],
+      [
+       12.174721799999999,
+       55.4992245
+      ],
+      [
+       12.1746533,
+       55.499235999999996
+      ],
+      [
+       12.1745973,
+       55.4992426
+      ],
+      [
+       12.1745289,
+       55.4992471
+      ],
+      [
+       12.174430299999997,
+       55.499252199999994
+      ],
+      [
+       12.174345000000002,
+       55.49925420000001
+      ],
+      [
+       12.174224999999998,
+       55.499252199999994
+      ],
+      [
+       12.1738617,
+       55.49924119999999
+      ],
+      [
+       12.173094599999999,
+       55.49921789999999
+      ],
+      [
+       12.173002199999999,
+       55.4992169
+      ],
+      [
+       12.1729169,
+       55.49922089999999
+      ],
+      [
+       12.1728218,
+       55.4992315
+      ],
+      [
+       12.171797199999999,
+       55.499375499999985
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w762353310",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 4.27,
+    "ground_median_m": 6.23,
+    "ground_max_m": 8.96,
+    "roof_top_median_m": 17.58,
+    "roof_top_p95_m": 19.25,
+    "laser_points": 1034,
+    "height_above_ground_median_m": 11.35,
+    "height_above_ground_p95_m": 13.02,
+    "top_above_platform_m": 9.89,
+    "base_above_platform_m": -3.42,
+    "source": "Outline OSM w762353310 (ODbL); roof = median of 1034 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.172970299999998,
+       55.49993969999999
+      ],
+      [
+       12.173004900000002,
+       55.4999353
+      ],
+      [
+       12.1729836,
+       55.499886399999994
+      ],
+      [
+       12.172948999999997,
+       55.49989119999999
+      ],
+      [
+       12.172970299999998,
+       55.49993969999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1163116041",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 7.63,
+    "ground_median_m": 7.68,
+    "ground_max_m": 7.72,
+    "roof_top_median_m": 10.16,
+    "roof_top_p95_m": 10.18,
+    "laser_points": 81,
+    "height_above_ground_median_m": 2.48,
+    "height_above_ground_p95_m": 2.5,
+    "top_above_platform_m": 2.47,
+    "base_above_platform_m": -0.06,
+    "source": "Outline OSM w1163116041 (ODbL); roof = median of 81 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.172574099999999,
+       55.499997199999996
+      ],
+      [
+       12.172608699999998,
+       55.49999269999999
+      ],
+      [
+       12.1725874,
+       55.499943900000005
+      ],
+      [
+       12.1725528,
+       55.4999487
+      ],
+      [
+       12.172574099999999,
+       55.499997199999996
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w1163116042",
+    "name": "building",
+    "osm_tags": {
+     "amenity": "shelter",
+     "building": "yes"
+    },
+    "ground_min_m": 7.6,
+    "ground_median_m": 7.67,
+    "ground_max_m": 7.76,
+    "roof_top_median_m": 10.14,
+    "roof_top_p95_m": 10.17,
+    "laser_points": 47,
+    "height_above_ground_median_m": 2.47,
+    "height_above_ground_p95_m": 2.5,
+    "top_above_platform_m": 2.45,
+    "base_above_platform_m": -0.09,
+    "source": "Outline OSM w1163116042 (ODbL); roof = median of 47 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6154_700, PUNKTSKY_1km_6155_700)",
+    "underside_m": null
+   }
+  }
+ ]
+}

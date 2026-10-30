@@ -107,7 +107,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.47,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     },
     {
       "from": "#41",
@@ -115,7 +116,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.52,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     },
     {
       "from": "#42",
@@ -123,7 +125,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.58,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_M4212G1), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned M4212G1 2023-06-08 (20230107_Leica_Tampere_kesa); from data/stations/research/fi_TPE/tampere_structures_heights.geojson (metres above the platform surface, 96.14 m RH 2000, laser 2023-06-08); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     }
   ],
   "terrain": {
@@ -211,7 +214,7 @@
       "category": "cafe",
       "name": "Aitoleipä",
       "level": "0",
-      "x": -14,
+      "x": -14.0,
       "y": 30.5,
       "fee": null,
       "opening_hours": "Mo-Fr 06:00-18:30",
@@ -279,7 +282,7 @@
       "name": "Ålandsbanken",
       "level": "0",
       "x": -148.5,
-      "y": -43,
+      "y": -43.0,
       "fee": null,
       "opening_hours": "Mo-Fr 10:00-16:30",
       "hours_source": "manual",
@@ -330,7 +333,7 @@
       "category": "cafe",
       "name": "Relove Stockmann Tampere 1. krs",
       "level": "0",
-      "x": -143,
+      "x": -143.0,
       "y": -45.2,
       "fee": null,
       "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
@@ -346,10 +349,10 @@
       "x": -143.6,
       "y": -4.1,
       "fee": null,
-      "opening_hours": null,
-      "hours_source": null,
-      "hours_verified": null,
-      "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30; placed OSM node n12112370926 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
+      "opening_hours": "Mo-Th 10:45-20:00; Fr 10:45-22:00; Sa 12:00-22:00; Su 12:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12112370926 (ODbL), read 2026-10-30; https://www.pizzamestarit.fi/tampereen-pizzamestarit/, read 2026-10-30; placed OSM node n12112370926 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
     },
     {
       "id": "res8d1ae2e967",

@@ -1,0 +1,4705 @@
+{
+ "type": "FeatureCollection",
+ "name": "kobenhavn_osterport_structures_heights",
+ "crs_note": "WGS84 lon/lat; heights m DVR90",
+ "platform_surface_m": 2.3,
+ "track_bed_m": 1.57,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.585108999999997,
+       55.6907437
+      ],
+      [
+       12.585167799999999,
+       55.690712
+      ],
+      [
+       12.585135699999999,
+       55.6906954
+      ],
+      [
+       12.5852302,
+       55.6906481
+      ],
+      [
+       12.585257100000002,
+       55.69066370000001
+      ],
+      [
+       12.58574,
+       55.69095049999999
+      ],
+      [
+       12.5857043,
+       55.690969599999995
+      ],
+      [
+       12.5857748,
+       55.6910114
+      ],
+      [
+       12.585812700000002,
+       55.69099219999999
+      ],
+      [
+       12.5862886,
+       55.69127499999999
+      ],
+      [
+       12.586242000000002,
+       55.69130079999999
+      ],
+      [
+       12.5863546,
+       55.691369
+      ],
+      [
+       12.586371600000001,
+       55.691359799999994
+      ],
+      [
+       12.5867934,
+       55.691611
+      ],
+      [
+       12.5870266,
+       55.691752
+      ],
+      [
+       12.5870699,
+       55.691778199999995
+      ],
+      [
+       12.5870369,
+       55.691795699999986
+      ],
+      [
+       12.586915300000001,
+       55.6918604
+      ],
+      [
+       12.5868694,
+       55.69183219999999
+      ],
+      [
+       12.586743900000002,
+       55.691755199999996
+      ],
+      [
+       12.5867639,
+       55.69174229999999
+      ],
+      [
+       12.5866617,
+       55.691677899999995
+      ],
+      [
+       12.586653099999998,
+       55.691682199999995
+      ],
+      [
+       12.586238699999997,
+       55.6914308
+      ],
+      [
+       12.5862563,
+       55.691421399999996
+      ],
+      [
+       12.5861443,
+       55.691355
+      ],
+      [
+       12.586126499999999,
+       55.6913634
+      ],
+      [
+       12.585653199999998,
+       55.691075
+      ],
+      [
+       12.585670799999999,
+       55.69106599999999
+      ],
+      [
+       12.5856039,
+       55.69102109999999
+      ],
+      [
+       12.5855803,
+       55.6910318
+      ],
+      [
+       12.585108999999997,
+       55.6907437
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w113974100",
+    "name": "Go Hotel Østerport (building)",
+    "osm_tags": {
+     "building": "yes",
+     "height": "5.5",
+     "name": "Go Hotel Østerport",
+     "roof:shape": "flat"
+    },
+    "ground_min_m": 1.69,
+    "ground_median_m": 3.58,
+    "ground_max_m": 7.81,
+    "roof_top_median_m": 11.11,
+    "roof_top_p95_m": 11.94,
+    "laser_points": 592,
+    "height_above_ground_median_m": 7.53,
+    "height_above_ground_p95_m": 8.36,
+    "top_above_platform_m": 8.81,
+    "base_above_platform_m": -0.61,
+    "source": "Outline OSM w113974100 (ODbL); roof = median of 592 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.584535199999998,
+       55.6904074
+      ],
+      [
+       12.5842336,
+       55.69022109999999
+      ],
+      [
+       12.584367200000003,
+       55.6901523
+      ],
+      [
+       12.5846688,
+       55.6903387
+      ],
+      [
+       12.584535199999998,
+       55.6904074
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w134472040",
+    "name": "Østerport omformerstation (service)",
+    "osm_tags": {
+     "building": "service",
+     "name": "Østerport omformerstation"
+    },
+    "ground_min_m": 1.31,
+    "ground_median_m": 2.44,
+    "ground_max_m": 6.06,
+    "roof_top_median_m": 9.87,
+    "roof_top_p95_m": 17.82,
+    "laser_points": 253,
+    "height_above_ground_median_m": 7.43,
+    "height_above_ground_p95_m": 15.38,
+    "top_above_platform_m": 7.57,
+    "base_above_platform_m": -0.99,
+    "source": "Outline OSM w134472040 (ODbL); roof = median of 253 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.590322999999998,
+       55.69573669999999
+      ],
+      [
+       12.5901958,
+       55.6955982
+      ],
+      [
+       12.5901163,
+       55.69562140000001
+      ],
+      [
+       12.5902434,
+       55.69575989999999
+      ],
+      [
+       12.590322999999998,
+       55.69573669999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w590686154",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 6.76,
+    "ground_median_m": 6.85,
+    "ground_max_m": 7.04,
+    "roof_top_median_m": 17.94,
+    "roof_top_p95_m": 20.11,
+    "laser_points": 57,
+    "height_above_ground_median_m": 11.09,
+    "height_above_ground_p95_m": 13.26,
+    "top_above_platform_m": 15.64,
+    "base_above_platform_m": 4.46,
+    "source": "Outline OSM w590686154 (ODbL); roof = median of 57 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5895294,
+       55.6941901
+      ],
+      [
+       12.5895005,
+       55.69420559999999
+      ],
+      [
+       12.5895768,
+       55.6942508
+      ],
+      [
+       12.589605599999999,
+       55.6942354
+      ],
+      [
+       12.5895294,
+       55.6941901
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653269136",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 1.86,
+    "ground_median_m": 2.06,
+    "ground_max_m": 4.16,
+    "roof_top_median_m": 5.42,
+    "roof_top_p95_m": 5.47,
+    "laser_points": 34,
+    "height_above_ground_median_m": 3.35,
+    "height_above_ground_p95_m": 3.41,
+    "top_above_platform_m": 3.12,
+    "base_above_platform_m": -0.44,
+    "source": "Outline OSM w653269136 (ODbL); roof = median of 34 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.587517099999998,
+       55.69510559999999
+      ],
+      [
+       12.587485199999996,
+       55.69510689999999
+      ],
+      [
+       12.587405199999997,
+       55.6951457
+      ],
+      [
+       12.5875669,
+       55.69513830000001
+      ],
+      [
+       12.587517099999998,
+       55.69510559999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w653269140",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 4.12,
+    "ground_median_m": 4.44,
+    "ground_max_m": 4.94,
+    "roof_top_median_m": 6.8,
+    "roof_top_p95_m": 6.88,
+    "laser_points": 41,
+    "height_above_ground_median_m": 2.36,
+    "height_above_ground_p95_m": 2.44,
+    "top_above_platform_m": 4.5,
+    "base_above_platform_m": 1.82,
+    "source": "Outline OSM w653269140 (ODbL); roof = median of 41 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5876297,
+       55.6950443
+      ],
+      [
+       12.587600399999998,
+       55.69505839999999
+      ],
+      [
+       12.5876642,
+       55.695100399999994
+      ],
+      [
+       12.5876935,
+       55.69508629999999
+      ],
+      [
+       12.5876297,
+       55.6950443
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w653269143",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 4.86,
+    "ground_median_m": 5.04,
+    "ground_max_m": 5.37,
+    "roof_top_median_m": 7.06,
+    "roof_top_p95_m": 7.14,
+    "laser_points": 17,
+    "height_above_ground_median_m": 2.02,
+    "height_above_ground_p95_m": 2.1,
+    "top_above_platform_m": 4.76,
+    "base_above_platform_m": 2.56,
+    "source": "Outline OSM w653269143 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.589204699999998,
+       55.694004699999994
+      ],
+      [
+       12.5891354,
+       55.6940373
+      ],
+      [
+       12.589132399999999,
+       55.694048599999995
+      ],
+      [
+       12.5893566,
+       55.69418640000001
+      ],
+      [
+       12.589368599999998,
+       55.69418979999999
+      ],
+      [
+       12.589382600000002,
+       55.69418859999999
+      ],
+      [
+       12.589440699999999,
+       55.6941589
+      ],
+      [
+       12.589446499999998,
+       55.6941512
+      ],
+      [
+       12.589440300000001,
+       55.6941425
+      ],
+      [
+       12.5892206,
+       55.694008399999994
+      ],
+      [
+       12.589204699999998,
+       55.694004699999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653269144",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 2.24,
+    "ground_median_m": 4.26,
+    "ground_max_m": 6.39,
+    "roof_top_median_m": 6.7,
+    "roof_top_p95_m": 15.02,
+    "laser_points": 71,
+    "height_above_ground_median_m": 2.44,
+    "height_above_ground_p95_m": 10.76,
+    "top_above_platform_m": 4.4,
+    "base_above_platform_m": -0.06,
+    "source": "Outline OSM w653269144 (ODbL); roof = median of 71 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5861033,
+       55.695824200000004
+      ],
+      [
+       12.586155,
+       55.695828
+      ],
+      [
+       12.586158399999999,
+       55.69581289999999
+      ],
+      [
+       12.5861795,
+       55.69581469999999
+      ],
+      [
+       12.5861881,
+       55.695782900000005
+      ],
+      [
+       12.586097299999999,
+       55.6957754
+      ],
+      [
+       12.5860889,
+       55.695807
+      ],
+      [
+       12.586106999999998,
+       55.695808599999985
+      ],
+      [
+       12.5861033,
+       55.695824200000004
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w653269145",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 4.46,
+    "ground_median_m": 4.66,
+    "ground_max_m": 4.87,
+    "roof_top_median_m": 6.98,
+    "roof_top_p95_m": 7.25,
+    "laser_points": 16,
+    "height_above_ground_median_m": 2.32,
+    "height_above_ground_p95_m": 2.58,
+    "top_above_platform_m": 4.68,
+    "base_above_platform_m": 2.16,
+    "source": "Outline OSM w653269145 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5862113,
+       55.695485999999995
+      ],
+      [
+       12.5862053,
+       55.695527899999995
+      ],
+      [
+       12.586275800000001,
+       55.695531100000004
+      ],
+      [
+       12.586281799999998,
+       55.6954893
+      ],
+      [
+       12.5862113,
+       55.695485999999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w653269151",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 4.48,
+    "ground_median_m": 4.56,
+    "ground_max_m": 4.71,
+    "roof_top_median_m": 12.43,
+    "roof_top_p95_m": 17.38,
+    "laser_points": 36,
+    "height_above_ground_median_m": 7.87,
+    "height_above_ground_p95_m": 12.82,
+    "top_above_platform_m": 10.13,
+    "base_above_platform_m": 2.18,
+    "source": "Outline OSM w653269151 (ODbL); roof = median of 36 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.588198499999997,
+       55.69552
+      ],
+      [
+       12.588231299999999,
+       55.695507299999996
+      ],
+      [
+       12.5881868,
+       55.695471
+      ],
+      [
+       12.588153999999998,
+       55.69548369999998
+      ],
+      [
+       12.588198499999997,
+       55.69552
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_osm",
+    "osm_id": "w653269152",
+    "name": "roof",
+    "osm_tags": {
+     "building": "roof",
+     "layer": "1"
+    },
+    "ground_min_m": 3.49,
+    "ground_median_m": 3.52,
+    "ground_max_m": 4.6,
+    "roof_top_median_m": 7.63,
+    "roof_top_p95_m": 9.1,
+    "laser_points": 13,
+    "height_above_ground_median_m": 4.11,
+    "height_above_ground_p95_m": 5.58,
+    "top_above_platform_m": 5.33,
+    "base_above_platform_m": 1.19,
+    "source": "Outline OSM w653269152 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "underside_m": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.589630699999997,
+       55.69425119999999
+      ],
+      [
+       12.589601899999998,
+       55.69426649999998
+      ],
+      [
+       12.5897442,
+       55.69435190000001
+      ],
+      [
+       12.5897731,
+       55.694336599999986
+      ],
+      [
+       12.589630699999997,
+       55.69425119999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653269153",
+    "name": "industrial",
+    "osm_tags": {
+     "building": "industrial"
+    },
+    "ground_min_m": 1.91,
+    "ground_median_m": 2.07,
+    "ground_max_m": 3.98,
+    "roof_top_median_m": 5.41,
+    "roof_top_p95_m": 5.54,
+    "laser_points": 46,
+    "height_above_ground_median_m": 3.34,
+    "height_above_ground_p95_m": 3.47,
+    "top_above_platform_m": 3.11,
+    "base_above_platform_m": -0.39,
+    "source": "Outline OSM w653269153 (ODbL); roof = median of 46 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5863407,
+       55.692157599999994
+      ],
+      [
+       12.5864355,
+       55.69210830000001
+      ],
+      [
+       12.586417399999998,
+       55.6920973
+      ],
+      [
+       12.5863226,
+       55.6921466
+      ],
+      [
+       12.5863407,
+       55.692157599999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653270349",
+    "name": "shed",
+    "osm_tags": {
+     "building": "shed"
+    },
+    "ground_min_m": 1.55,
+    "ground_median_m": 1.61,
+    "ground_max_m": 7.67,
+    "roof_top_median_m": 8.39,
+    "roof_top_p95_m": 9.19,
+    "laser_points": 6,
+    "height_above_ground_median_m": 6.78,
+    "height_above_ground_p95_m": 7.58,
+    "top_above_platform_m": 6.09,
+    "base_above_platform_m": -0.75,
+    "source": "Outline OSM w653270349 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.585125900000001,
+       55.691455999999995
+      ],
+      [
+       12.585173899999997,
+       55.691485099999994
+      ],
+      [
+       12.5851914,
+       55.6914759
+      ],
+      [
+       12.585143299999999,
+       55.691446799999994
+      ],
+      [
+       12.585125900000001,
+       55.691455999999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653270350",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 1.86,
+    "ground_median_m": 2.28,
+    "ground_max_m": 3.03,
+    "laser_points": 0,
+    "source": "Outline OSM w653270350 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.586105599999998,
+       55.69205060000001
+      ],
+      [
+       12.5861598,
+       55.6920843
+      ],
+      [
+       12.5861794,
+       55.6920743
+      ],
+      [
+       12.586125200000001,
+       55.692040600000006
+      ],
+      [
+       12.586105599999998,
+       55.69205060000001
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653270352",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 1.69,
+    "ground_median_m": 2.91,
+    "ground_max_m": 2.98,
+    "roof_top_median_m": 5.32,
+    "roof_top_p95_m": 5.5,
+    "laser_points": 32,
+    "height_above_ground_median_m": 2.41,
+    "height_above_ground_p95_m": 2.59,
+    "top_above_platform_m": 3.02,
+    "base_above_platform_m": -0.61,
+    "source": "Outline OSM w653270352 (ODbL); roof = median of 32 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.586068499999998,
+       55.69216169999999
+      ],
+      [
+       12.586081,
+       55.6921507
+      ],
+      [
+       12.586077999999999,
+       55.6921378
+      ],
+      [
+       12.5860609,
+       55.69212900000001
+      ],
+      [
+       12.5860378,
+       55.6921284
+      ],
+      [
+       12.5860194,
+       55.6921363
+      ],
+      [
+       12.586014400000002,
+       55.69214910000001
+      ],
+      [
+       12.5860251,
+       55.692160699999995
+      ],
+      [
+       12.5860465,
+       55.69216559999999
+      ],
+      [
+       12.586068499999998,
+       55.69216169999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653270353",
+    "name": "shed",
+    "osm_tags": {
+     "building": "shed"
+    },
+    "ground_min_m": 1.77,
+    "ground_median_m": 2.0,
+    "ground_max_m": 2.7,
+    "roof_top_median_m": 4.5,
+    "roof_top_p95_m": 11.3,
+    "laser_points": 22,
+    "height_above_ground_median_m": 2.5,
+    "height_above_ground_p95_m": 9.3,
+    "top_above_platform_m": 2.2,
+    "base_above_platform_m": -0.53,
+    "source": "Outline OSM w653270353 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.585776500000001,
+       55.6918521
+      ],
+      [
+       12.585823899999998,
+       55.69188019999999
+      ],
+      [
+       12.585843599999999,
+       55.6918696
+      ],
+      [
+       12.585796299999998,
+       55.6918415
+      ],
+      [
+       12.585776500000001,
+       55.6918521
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w653270370",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 1.74,
+    "ground_median_m": 2.51,
+    "ground_max_m": 3.07,
+    "laser_points": 0,
+    "source": "Outline OSM w653270370 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.586820900000001,
+       55.692624599999995
+      ],
+      [
+       12.5869698,
+       55.6927146
+      ],
+      [
+       12.5870492,
+       55.6927625
+      ],
+      [
+       12.5871381,
+       55.69271570000001
+      ],
+      [
+       12.587153699999998,
+       55.6927076
+      ],
+      [
+       12.5871735,
+       55.69269709999998
+      ],
+      [
+       12.587202099999999,
+       55.69268209999999
+      ],
+      [
+       12.587398100000001,
+       55.6928005
+      ],
+      [
+       12.5874346,
+       55.69278129999999
+      ],
+      [
+       12.5874699,
+       55.692762699999996
+      ],
+      [
+       12.5873428,
+       55.692685899999994
+      ],
+      [
+       12.5873844,
+       55.69266399999999
+      ],
+      [
+       12.5874012,
+       55.6926552
+      ],
+      [
+       12.5874516,
+       55.6926287
+      ],
+      [
+       12.5875028,
+       55.6926018
+      ],
+      [
+       12.5875253,
+       55.6925899
+      ],
+      [
+       12.587652499999999,
+       55.692666599999995
+      ],
+      [
+       12.587693400000001,
+       55.69264510000001
+      ],
+      [
+       12.587712299999998,
+       55.6926351
+      ],
+      [
+       12.5877325,
+       55.692624499999994
+      ],
+      [
+       12.5875365,
+       55.69250619999999
+      ],
+      [
+       12.5875614,
+       55.69249309999999
+      ],
+      [
+       12.587622699999999,
+       55.6924608
+      ],
+      [
+       12.587645500000002,
+       55.692448799999994
+      ],
+      [
+       12.587695799999999,
+       55.692422399999984
+      ],
+      [
+       12.5876197,
+       55.69237639999999
+      ],
+      [
+       12.587467499999999,
+       55.6922845
+      ],
+      [
+       12.5872874,
+       55.6923792
+      ],
+      [
+       12.587269,
+       55.6923889
+      ],
+      [
+       12.587028200000002,
+       55.6925156
+      ],
+      [
+       12.586820900000001,
+       55.692624599999995
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w724683394",
+    "name": "station building",
+    "osm_tags": {
+     "building": "train_station",
+     "building:levels": "1"
+    },
+    "ground_min_m": 1.37,
+    "ground_median_m": 7.87,
+    "ground_max_m": 7.92,
+    "roof_top_median_m": 12.0,
+    "roof_top_p95_m": 12.47,
+    "laser_points": 125,
+    "height_above_ground_median_m": 4.13,
+    "height_above_ground_p95_m": 4.6,
+    "top_above_platform_m": 9.7,
+    "base_above_platform_m": -0.93,
+    "source": "Outline OSM w724683394 (ODbL); roof = median of 125 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.585875,
+       55.69293099999999
+      ],
+      [
+       12.5857837,
+       55.692978399999994
+      ],
+      [
+       12.585716999999997,
+       55.69295749999998
+      ],
+      [
+       12.585769,
+       55.692929799999995
+      ],
+      [
+       12.585875,
+       55.69293099999999
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1144536983",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "level": "0",
+     "man_made": "lightwell"
+    },
+    "ground_min_m": 6.48,
+    "ground_median_m": 6.57,
+    "ground_max_m": 6.66,
+    "laser_points": 3,
+    "source": "Outline OSM w1144536983 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5858843,
+       55.6929144
+      ],
+      [
+       12.5859723,
+       55.69286769999999
+      ],
+      [
+       12.5859461,
+       55.69282799999999
+      ],
+      [
+       12.585891499999999,
+       55.69285489999999
+      ],
+      [
+       12.5858843,
+       55.6929144
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1144536984",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "level": "0",
+     "man_made": "lightwell"
+    },
+    "ground_min_m": 6.66,
+    "ground_median_m": 6.77,
+    "ground_max_m": 6.87,
+    "laser_points": 0,
+    "source": "Outline OSM w1144536984 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5861461,
+       55.6927893
+      ],
+      [
+       12.5860567,
+       55.69283689999999
+      ],
+      [
+       12.585989899999998,
+       55.692816500000006
+      ],
+      [
+       12.5860426,
+       55.69278849999999
+      ],
+      [
+       12.5861461,
+       55.6927893
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1144536985",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes",
+     "level": "0",
+     "man_made": "lightwell"
+    },
+    "ground_min_m": 6.88,
+    "ground_median_m": 6.98,
+    "ground_max_m": 7.06,
+    "laser_points": 0,
+    "source": "Outline OSM w1144536985 (ODbL); fewer than 5 laser roof points inside the outline (roof not measured); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5862105,
+       55.6922182
+      ],
+      [
+       12.586303,
+       55.6921709
+      ],
+      [
+       12.586903000000001,
+       55.6918661
+      ],
+      [
+       12.587577099999999,
+       55.6921843
+      ],
+      [
+       12.587467499999999,
+       55.6922845
+      ],
+      [
+       12.586820900000001,
+       55.692624599999995
+      ],
+      [
+       12.586738799999997,
+       55.69256829999999
+      ],
+      [
+       12.5862105,
+       55.6922182
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1145447677",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 1.36,
+    "ground_median_m": 7.7,
+    "ground_max_m": 8.16,
+    "roof_top_median_m": 8.05,
+    "roof_top_p95_m": 9.31,
+    "laser_points": 61,
+    "height_above_ground_median_m": 0.35,
+    "height_above_ground_p95_m": 1.61,
+    "top_above_platform_m": 5.75,
+    "base_above_platform_m": -0.94,
+    "source": "Outline OSM w1145447677 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.586915300000001,
+       55.6918604
+      ],
+      [
+       12.5870369,
+       55.691795699999986
+      ],
+      [
+       12.5870699,
+       55.691778199999995
+      ],
+      [
+       12.5870266,
+       55.691752
+      ],
+      [
+       12.5868694,
+       55.69183219999999
+      ],
+      [
+       12.586915300000001,
+       55.6918604
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "w1173399938",
+    "name": "building",
+    "osm_tags": {
+     "building:part": "yes",
+     "roof:shape": "gabled"
+    },
+    "ground_min_m": 4.05,
+    "ground_median_m": 7.59,
+    "ground_max_m": 7.81,
+    "roof_top_median_m": 14.06,
+    "roof_top_p95_m": 14.52,
+    "laser_points": 25,
+    "height_above_ground_median_m": 6.47,
+    "height_above_ground_p95_m": 6.93,
+    "top_above_platform_m": 11.76,
+    "base_above_platform_m": 1.75,
+    "source": "Outline OSM w1173399938 (ODbL); roof = median of 25 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5886778,
+       55.691386900000005
+      ],
+      [
+       12.5886962,
+       55.6913637
+      ],
+      [
+       12.5889418,
+       55.69138010000001
+      ],
+      [
+       12.588925199999998,
+       55.69140389999999
+      ],
+      [
+       12.5886778,
+       55.691386900000005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "footbridge",
+    "osm_id": "w1341496014",
+    "name": "bridge",
+    "osm_tags": {
+     "layer": "1",
+     "man_made": "bridge"
+    },
+    "ground_min_m": 0.58,
+    "ground_median_m": 2.7,
+    "ground_max_m": 3.62,
+    "roof_top_median_m": 5.74,
+    "roof_top_p95_m": 6.56,
+    "laser_points": 29,
+    "height_above_ground_median_m": 3.04,
+    "height_above_ground_p95_m": 3.86,
+    "top_above_platform_m": 3.44,
+    "base_above_platform_m": -1.72,
+    "source": "Outline OSM w1341496014 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "deck_m": null,
+    "note": "airborne laser sees the top only; deck and underside unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.589053999999999,
+       55.69220699999999
+      ],
+      [
+       12.5890097,
+       55.6921813
+      ],
+      [
+       12.588999000000001,
+       55.69218659999999
+      ],
+      [
+       12.588946699999996,
+       55.692157099999996
+      ],
+      [
+       12.5889359,
+       55.692161599999984
+      ],
+      [
+       12.588411599999999,
+       55.69184039999999
+      ],
+      [
+       12.5882895,
+       55.6919039
+      ],
+      [
+       12.588299299999997,
+       55.69190859999999
+      ],
+      [
+       12.588195,
+       55.6919634
+      ],
+      [
+       12.588203399999998,
+       55.69196919999999
+      ],
+      [
+       12.5880998,
+       55.6920233
+      ],
+      [
+       12.5881088,
+       55.6920286
+      ],
+      [
+       12.588004899999998,
+       55.6920836
+      ],
+      [
+       12.588013299999998,
+       55.692089
+      ],
+      [
+       12.587908,
+       55.69214439999998
+      ],
+      [
+       12.587916999999997,
+       55.6921497
+      ],
+      [
+       12.587810799999996,
+       55.69220469999999
+      ],
+      [
+       12.587816099999998,
+       55.69221149999999
+      ],
+      [
+       12.587716499999999,
+       55.692265199999994
+      ],
+      [
+       12.587724899999998,
+       55.69226909999999
+      ],
+      [
+       12.5876632,
+       55.6923015
+      ],
+      [
+       12.587765199999998,
+       55.6923632
+      ],
+      [
+       12.587769900000001,
+       55.69236080000001
+      ],
+      [
+       12.587825799999997,
+       55.6923946
+      ],
+      [
+       12.587777100000002,
+       55.6924171
+      ],
+      [
+       12.5877729,
+       55.69241900000001
+      ],
+      [
+       12.588001499999999,
+       55.692558299999995
+      ],
+      [
+       12.588046800000003,
+       55.69253560000001
+      ],
+      [
+       12.588056499999999,
+       55.692542399999994
+      ],
+      [
+       12.5881819,
+       55.69247609999999
+      ],
+      [
+       12.5881718,
+       55.69246999999999
+      ],
+      [
+       12.588211699999999,
+       55.69244849999999
+      ],
+      [
+       12.5883328,
+       55.6925377
+      ],
+      [
+       12.588342500000001,
+       55.692533499999996
+      ],
+      [
+       12.588429199999998,
+       55.69259559999999
+      ],
+      [
+       12.588439400000002,
+       55.69259199999999
+      ],
+      [
+       12.588525899999999,
+       55.6926546
+      ],
+      [
+       12.588535299999998,
+       55.692650500000006
+      ],
+      [
+       12.5886277,
+       55.6927162
+      ],
+      [
+       12.5886367,
+       55.692711599999996
+      ],
+      [
+       12.5886419,
+       55.6927151
+      ],
+      [
+       12.588754200000002,
+       55.692665399999996
+      ],
+      [
+       12.5887448,
+       55.69265969999999
+      ],
+      [
+       12.5888585,
+       55.6926104
+      ],
+      [
+       12.588850399999998,
+       55.6926049
+      ],
+      [
+       12.5889624,
+       55.692556
+      ],
+      [
+       12.5889557,
+       55.692551699999996
+      ],
+      [
+       12.5890513,
+       55.692509699999995
+      ],
+      [
+       12.589077099999999,
+       55.692525599999996
+      ],
+      [
+       12.589357699999999,
+       55.6923786
+      ],
+      [
+       12.589064699999998,
+       55.6922017
+      ],
+      [
+       12.589053999999999,
+       55.69220699999999
+      ]
+     ],
+     [
+      [
+       12.5887109,
+       55.692260299999994
+      ],
+      [
+       12.588749300000002,
+       55.69225540000001
+      ],
+      [
+       12.5887883,
+       55.69225809999998
+      ],
+      [
+       12.588823399999999,
+       55.6922683
+      ],
+      [
+       12.5888502,
+       55.6922846
+      ],
+      [
+       12.588865499999999,
+       55.692305
+      ],
+      [
+       12.588867399999998,
+       55.69232719999999
+      ],
+      [
+       12.588855799999997,
+       55.6923484
+      ],
+      [
+       12.588832,
+       55.6923661
+      ],
+      [
+       12.5888655,
+       55.692386499999984
+      ],
+      [
+       12.5886496,
+       55.6924791
+      ],
+      [
+       12.5885732,
+       55.6924235
+      ],
+      [
+       12.5885618,
+       55.69242810000001
+      ],
+      [
+       12.5884592,
+       55.692357
+      ],
+      [
+       12.5886147,
+       55.6922769
+      ],
+      [
+       12.588413199999998,
+       55.69215679999999
+      ],
+      [
+       12.588442299999999,
+       55.692142499999996
+      ],
+      [
+       12.5886778,
+       55.692272399999986
+      ],
+      [
+       12.5887109,
+       55.692260299999994
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "building",
+    "osm_id": "r10998289",
+    "name": "building",
+    "osm_tags": {
+     "building": "yes"
+    },
+    "ground_min_m": 1.29,
+    "ground_median_m": 2.02,
+    "ground_max_m": 7.97,
+    "roof_top_median_m": 14.78,
+    "roof_top_p95_m": 23.25,
+    "laser_points": 1159,
+    "height_above_ground_median_m": 12.76,
+    "height_above_ground_p95_m": 21.23,
+    "top_above_platform_m": 12.48,
+    "base_above_platform_m": -1.01,
+    "source": "Outline OSM r10998289 (ODbL); roof = median of 1159 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.589752205377545,
+       55.694158671458005
+      ],
+      [
+       12.589721273611568,
+       55.694168568658405
+      ],
+      [
+       12.589722919179856,
+       55.6941865041636
+      ],
+      [
+       12.58977219662775,
+       55.6942030454917
+      ],
+      [
+       12.589773842221476,
+       55.694220980995794
+      ],
+      [
+       12.589789719520368,
+       55.69422051626571
+      ],
+      [
+       12.589823942543418,
+       55.69424649005397
+      ],
+      [
+       12.589870751646892,
+       55.69423612808665
+      ],
+      [
+       12.589884160481535,
+       55.69420876009114
+      ],
+      [
+       12.589834882980925,
+       55.6941922188088
+      ],
+      [
+       12.589833237361027,
+       55.694174283305806
+      ],
+      [
+       12.589817360081627,
+       55.69417474804128
+      ],
+      [
+       12.58978313712765,
+       55.69414877425001
+      ],
+      [
+       12.589751382587322,
+       55.694149703705655
+      ],
+      [
+       12.589752205377545,
+       55.694158671458005
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 5.91,
+    "top_p10_m": 5.81,
+    "top_p90_m": 5.95,
+    "laser_points": 330,
+    "top_above_platform_m": 3.61,
+    "area_m2": 55.0,
+    "underside_m": null,
+    "multi_return_share": 0.17,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "ground_min_m": 2.78,
+    "ground_median_m": 2.87,
+    "ground_max_m": 3.16
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.588156046529214,
+       55.6925508836388
+      ],
+      [
+       12.587964704358507,
+       55.69254748984843
+      ],
+      [
+       12.587965526690427,
+       55.692556457620675
+      ],
+      [
+       12.588046554666144,
+       55.69257207070699
+      ],
+      [
+       12.588065720749759,
+       55.69260747729412
+      ],
+      [
+       12.588131694561346,
+       55.692632522591616
+      ],
+      [
+       12.58813333930733,
+       55.69265045813257
+      ],
+      [
+       12.588182614148382,
+       55.69266700013808
+      ],
+      [
+       12.5881842589198,
+       55.69268493567793
+      ],
+      [
+       12.58823353382554,
+       55.692701477662034
+      ],
+      [
+       12.588235178622392,
+       55.69271941320078
+      ],
+      [
+       12.588251055339525,
+       55.692718948677815
+      ],
+      [
+       12.588251877742266,
+       55.692727916447005
+      ],
+      [
+       12.588301152730335,
+       55.692744458402714
+      ],
+      [
+       12.588302797560788,
+       55.69276239394001
+      ],
+      [
+       12.5883687717841,
+       55.69278743910386
+      ],
+      [
+       12.588370416648155,
+       55.692805374639704
+      ],
+      [
+       12.588402992586886,
+       55.692813413323385
+      ],
+      [
+       12.588404637468205,
+       55.692831348858476
+      ],
+      [
+       12.588504010338543,
+       55.69287340038751
+      ],
+      [
+       12.588505655269802,
+       55.692891335920436
+      ],
+      [
+       12.588538231307103,
+       55.692899374566764
+      ],
+      [
+       12.588539876255627,
+       55.69291731009895
+      ],
+      [
+       12.588605850890668,
+       55.69294235512914
+      ],
+      [
+       12.588607495872793,
+       55.692960290659855
+      ],
+      [
+       12.588656771301919,
+       55.69297683246617
+      ],
+      [
+       12.58865841630948,
+       55.6929947679958
+      ],
+      [
+       12.58872439115039,
+       55.69301981295916
+      ],
+      [
+       12.58872603619155,
+       55.693037748487335
+      ],
+      [
+       12.58874191302915,
+       55.693037283899166
+      ],
+      [
+       12.58874273555405,
+       55.693046251663056
+      ],
+      [
+       12.588792011147829,
+       55.6930627934126
+      ],
+      [
+       12.588793656222595,
+       55.69308072893932
+      ],
+      [
+       12.588859631294245,
+       55.693105773826495
+      ],
+      [
+       12.588861276402612,
+       55.69312370935176
+      ],
+      [
+       12.588893852704436,
+       55.69313174789976
+      ],
+      [
+       12.588895497830071,
+       55.693149683424274
+      ],
+      [
+       12.588911374710085,
+       55.693149218813595
+      ],
+      [
+       12.588912197277219,
+       55.69315818657566
+      ],
+      [
+       12.588961473082714,
+       55.69317472825397
+      ],
+      [
+       12.588963118241951,
+       55.69319266377703
+      ],
+      [
+       12.589045793115035,
+       55.69322621170099
+      ],
+      [
+       12.589047438316042,
+       55.69324414722223
+      ],
+      [
+       12.589063315231694,
+       55.69324368259138
+      ],
+      [
+       12.589081659973601,
+       55.69327012123927
+      ],
+      [
+       12.589130935990811,
+       55.69328666284637
+      ],
+      [
+       12.589132581234521,
+       55.69330459836576
+      ],
+      [
+       12.589198556898905,
+       55.693329643061816
+      ],
+      [
+       12.589200202176217,
+       55.69334757857976
+      ],
+      [
+       12.589231956085579,
+       55.693346649275384
+      ],
+      [
+       12.589251123643201,
+       55.6933820556539
+      ],
+      [
+       12.5892670006112,
+       55.69338159099596
+      ],
+      [
+       12.589267823266892,
+       55.6933905587542
+      ],
+      [
+       12.589300399872128,
+       55.69339859718977
+      ],
+      [
+       12.589302045200316,
+       55.69341653270553
+      ],
+      [
+       12.589384720835437,
+       55.693450080389624
+      ],
+      [
+       12.589386366205392,
+       55.693468015903555
+      ],
+      [
+       12.589402243205873,
+       55.69346755122767
+      ],
+      [
+       12.58945316500794,
+       55.69350202821284
+      ],
+      [
+       12.589499973333448,
+       55.693491666396774
+      ],
+      [
+       12.589499150621506,
+       55.69348269864097
+      ],
+      [
+       12.589530904629981,
+       55.693481769257836
+      ],
+      [
+       12.589544313467895,
+       55.69345440129704
+      ],
+      [
+       12.589528436475216,
+       55.69345486599122
+      ],
+      [
+       12.589526791041026,
+       55.69343693048003
+      ],
+      [
+       12.589494214359595,
+       55.6934288921057
+      ],
+      [
+       12.58949256894267,
+       55.693410956593766
+      ],
+      [
+       12.589476691966697,
+       55.69341142128102
+      ],
+      [
+       12.589475869262552,
+       55.693402453524875
+      ],
+      [
+       12.589426592957526,
+       55.69338591206058
+      ],
+      [
+       12.589424947574209,
+       55.69336797654719
+      ],
+      [
+       12.589358971704435,
+       55.6933429319759
+      ],
+      [
+       12.589357326354722,
+       55.693324996461065
+      ],
+      [
+       12.589324749800355,
+       55.69331695803985
+      ],
+      [
+       12.589323104467908,
+       55.69329902252427
+      ],
+      [
+       12.589290527942037,
+       55.69329098409355
+      ],
+      [
+       12.589288882626857,
+       55.69327304857722
+      ],
+      [
+       12.589239606562968,
+       55.69325650703422
+      ],
+      [
+       12.589237961273225,
+       55.69323857151679
+      ],
+      [
+       12.589206207451673,
+       55.693239500821534
+      ],
+      [
+       12.589203739542258,
+       55.693212597544274
+      ],
+      [
+       12.589171985740567,
+       55.693213526839884
+      ],
+      [
+       12.589170340484424,
+       55.69319559132099
+      ],
+      [
+       12.58913776407522,
+       55.693187552847995
+      ],
+      [
+       12.589136118836345,
+       55.69316961732835
+      ],
+      [
+       12.58908684296654,
+       55.6931530757211
+      ],
+      [
+       12.5890851977531,
+       55.69313514020037
+      ],
+      [
+       12.589035921947985,
+       55.693118598571694
+      ],
+      [
+       12.58903427675998,
+       55.693100663049854
+      ],
+      [
+       12.58896830158931,
+       55.693075618258
+      ],
+      [
+       12.588966656434907,
+       55.693057682734704
+      ],
+      [
+       12.588934080181264,
+       55.69304964420533
+      ],
+      [
+       12.588932435044125,
+       55.693031708681275
+      ],
+      [
+       12.588883159433092,
+       55.69301516698837
+      ],
+      [
+       12.58888151432139,
+       55.69299723146322
+      ],
+      [
+       12.58883223877505,
+       55.692980689748886
+      ],
+      [
+       12.58883059368878,
+       55.692962754222634
+      ],
+      [
+       12.588764618880093,
+       55.692937709315814
+      ],
+      [
+       12.588762973827428,
+       55.69291977378813
+      ],
+      [
+       12.588747097037814,
+       55.69292023837836
+      ],
+      [
+       12.588746274515799,
+       55.69291127061432
+      ],
+      [
+       12.588713698428107,
+       55.69290323202399
+      ],
+      [
+       12.588712053400874,
+       55.69288529649517
+      ],
+      [
+       12.588662778066245,
+       55.69286875470963
+      ],
+      [
+       12.588661133064447,
+       55.69285081917971
+      ],
+      [
+       12.588628557044139,
+       55.69284278056577
+      ],
+      [
+       12.588626912059606,
+       55.69282484503512
+      ],
+      [
+       12.588544238396315,
+       55.692791296810626
+      ],
+      [
+       12.588542593453552,
+       55.69277336127815
+      ],
+      [
+       12.588510839984862,
+       55.69277429039802
+      ],
+      [
+       12.588509195058437,
+       55.69275635486485
+      ],
+      [
+       12.588459919970788,
+       55.69273981299414
+      ],
+      [
+       12.588458275069797,
+       55.69272187745987
+      ],
+      [
+       12.58840900004684,
+       55.692705335567744
+      ],
+      [
+       12.58840735517128,
+       55.692687400032376
+      ],
+      [
+       12.588358902638774,
+       55.69267982588704
+      ],
+      [
+       12.58835725778772,
+       55.69266189035061
+      ],
+      [
+       12.588274584698116,
+       55.692628341935794
+      ],
+      [
+       12.588272939888833,
+       55.69261040639757
+      ],
+      [
+       12.588257063216066,
+       55.69261087092277
+      ],
+      [
+       12.588156046529214,
+       55.6925508836388
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 5.99,
+    "top_p10_m": 5.8,
+    "top_p90_m": 6.09,
+    "laser_points": 8612,
+    "top_above_platform_m": 3.69,
+    "area_m2": 1195.0,
+    "underside_m": null,
+    "multi_return_share": 0.07,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "ground_min_m": 1.48,
+    "ground_median_m": 2.15,
+    "ground_max_m": 2.2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.586862380442708,
+       55.69267864446111
+      ],
+      [
+       12.586851436204865,
+       55.69273291550222
+      ],
+      [
+       12.586803805962097,
+       55.69273430852233
+      ],
+      [
+       12.586804628034043,
+       55.692743276305706
+      ],
+      [
+       12.58682050478572,
+       55.69274281196756
+      ],
+      [
+       12.586838847777276,
+       55.69276925097645
+      ],
+      [
+       12.58685472453888,
+       55.69276878663373
+      ],
+      [
+       12.58685390245468,
+       55.69275981885088
+      ],
+      [
+       12.586901532725847,
+       55.692758425810915
+      ],
+      [
+       12.58690317691643,
+       55.69277636137566
+      ],
+      [
+       12.5869349304427,
+       55.69277543267148
+      ],
+      [
+       12.586937396753774,
+       55.69280233601751
+      ],
+      [
+       12.586953273527072,
+       55.69280187166187
+      ],
+      [
+       12.586955739853183,
+       55.69282877500724
+      ],
+      [
+       12.586971616636877,
+       55.69282831064909
+      ],
+      [
+       12.586969972411765,
+       55.69281037508584
+      ],
+      [
+       12.587017602738344,
+       55.692808982000045
+      ],
+      [
+       12.586999259607378,
+       55.69278254301993
+      ],
+      [
+       12.586951629311987,
+       55.69278393609819
+      ],
+      [
+       12.586948340887385,
+       55.692748064970566
+      ],
+      [
+       12.58697927227692,
+       55.692738168473376
+      ],
+      [
+       12.586977628053855,
+       55.69272023291002
+      ],
+      [
+       12.586945874573805,
+       55.69272116162464
+      ],
+      [
+       12.58692670943596,
+       55.69268575485004
+      ],
+      [
+       12.586894955982084,
+       55.69268668355111
+      ],
+      [
+       12.586894133891201,
+       55.69267771576853
+      ],
+      [
+       12.586862380442708,
+       55.69267864446111
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "canopy_laser",
+    "osm_id": null,
+    "name": "roof over the platforms (traced from the laser)",
+    "top_median_m": 7.95,
+    "top_p10_m": 7.8,
+    "top_p90_m": 8.96,
+    "laser_points": 60,
+    "top_above_platform_m": 5.65,
+    "area_m2": 80.0,
+    "underside_m": null,
+    "multi_return_share": 0.22,
+    "source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)",
+    "ground_min_m": 6.96,
+    "ground_median_m": 7.85,
+    "ground_max_m": 7.94
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.59127288681314,
+       55.69546293406272
+      ],
+      [
+       12.591275355215929,
+       55.69548982489871
+      ],
+      [
+       12.591344198079865,
+       55.6955540886042
+      ],
+      [
+       12.591365445762692,
+       55.695604080770906
+      ],
+      [
+       12.591428935184602,
+       55.69560222162627
+      ],
+      [
+       12.591425643448877,
+       55.6955663630615
+      ],
+      [
+       12.591409835684182,
+       55.69556299076937
+      ],
+      [
+       12.591388948567081,
+       55.695513486552166
+      ],
+      [
+       12.59135680043066,
+       55.69550209940394
+      ],
+      [
+       12.59133637601274,
+       55.69546107496903
+      ],
+      [
+       12.591319451565449,
+       55.69545257251312
+      ],
+      [
+       12.59127288681314,
+       55.69546293406272
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (16.6 m × 2.9 m)",
+    "top_median_m": 5.88,
+    "top_above_track_bed_m": 3.99,
+    "laser_points": 228,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.590562616972315,
+       55.69483617903542
+      ],
+      [
+       12.590594343313281,
+       55.69484722635249
+      ],
+      [
+       12.590614387124308,
+       55.69487974881894
+      ],
+      [
+       12.590662269390679,
+       55.69489873459969
+      ],
+      [
+       12.59066531186396,
+       55.69491422525488
+      ],
+      [
+       12.590696493594988,
+       55.6949247081262
+      ],
+      [
+       12.59073458339054,
+       55.69497514003694
+      ],
+      [
+       12.590782465831948,
+       55.69499412576813
+      ],
+      [
+       12.590803032077208,
+       55.69502708703573
+      ],
+      [
+       12.590834213934876,
+       55.69503756987015
+      ],
+      [
+       12.590976623899662,
+       55.69518385756968
+      ],
+      [
+       12.591025028917832,
+       55.695203282035465
+      ],
+      [
+       12.591028372474602,
+       55.695227301582364
+      ],
+      [
+       12.591063420338667,
+       55.69526224273622
+      ],
+      [
+       12.591095124658708,
+       55.695273164334964
+      ],
+      [
+       12.59109846826623,
+       55.69529718387907
+      ],
+      [
+       12.591186088362967,
+       55.69538453668791
+      ],
+      [
+       12.591248754270854,
+       55.69537370990498
+      ],
+      [
+       12.591229585001809,
+       55.69533831625618
+      ],
+      [
+       12.591179913026897,
+       55.69530945850829
+      ],
+      [
+       12.591159488902369,
+       55.69526843403898
+      ],
+      [
+       12.591127341034555,
+       55.6952570468266
+      ],
+      [
+       12.591106916994478,
+       55.695216022347125
+      ],
+      [
+       12.591057245267026,
+       55.69518716454574
+      ],
+      [
+       12.591054345229473,
+       55.69516361063047
+      ],
+      [
+       12.591023759058068,
+       55.6951535356666
+      ],
+      [
+       12.591002596713412,
+       55.695120166627646
+      ],
+      [
+       12.590970892543972,
+       55.69510924500273
+      ],
+      [
+       12.590915800721742,
+       55.695041781410644
+      ],
+      [
+       12.59084987221755,
+       55.69500488629114
+      ],
+      [
+       12.590846528794984,
+       55.69498086673692
+      ],
+      [
+       12.590815346979987,
+       55.69497038390498
+      ],
+      [
+       12.590794780756285,
+       55.69493742263894
+      ],
+      [
+       12.590753898292467,
+       55.69493838107944
+      ],
+      [
+       12.590731843852744,
+       55.69492786951079
+      ],
+      [
+       12.590676230511816,
+       55.69485996696437
+      ],
+      [
+       12.590645048838333,
+       55.69484948408703
+      ],
+      [
+       12.590607782292306,
+       55.6948080198874
+      ],
+      [
+       12.590560994620217,
+       55.69481838150068
+      ],
+      [
+       12.590562616972315,
+       55.69483617903542
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (73.5 m × 2.9 m)",
+    "top_median_m": 5.84,
+    "top_above_track_bed_m": 4.02,
+    "laser_points": 865,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.5892817131143,
+       55.69302135459403
+      ],
+      [
+       12.589379940315943,
+       55.6930745357261
+      ],
+      [
+       12.589383577905947,
+       55.693090434246656
+      ],
+      [
+       12.589431457368972,
+       55.69310942055027
+      ],
+      [
+       12.589468720989188,
+       55.693150885155575
+      ],
+      [
+       12.589532704356083,
+       55.69317796666884
+      ],
+      [
+       12.58953634201937,
+       55.693193865183694
+      ],
+      [
+       12.589583625883053,
+       55.69321244360473
+      ],
+      [
+       12.589621485565969,
+       55.693254315979445
+      ],
+      [
+       12.589720287117009,
+       55.693307779060866
+      ],
+      [
+       12.5897233290678,
+       55.69332326974944
+      ],
+      [
+       12.589787908696088,
+       55.69335075894197
+      ],
+      [
+       12.589808473187853,
+       55.69338372040661
+      ],
+      [
+       12.589872457169935,
+       55.69341080173344
+      ],
+      [
+       12.589910317359111,
+       55.6934526740111
+      ],
+      [
+       12.589974897332015,
+       55.69348016309999
+      ],
+      [
+       12.589977939399645,
+       55.693495653780346
+      ],
+      [
+       12.590060042185009,
+       55.693540613571315
+      ],
+      [
+       12.590097306893309,
+       55.69358207796863
+      ],
+      [
+       12.590127664542578,
+       55.693583593253216
+      ],
+      [
+       12.590148229448856,
+       55.693616554654334
+      ],
+      [
+       12.590212809858944,
+       55.69364404361141
+      ],
+      [
+       12.590233374870278,
+       55.69367700499658
+      ],
+      [
+       12.590348878332556,
+       55.69373897050369
+      ],
+      [
+       12.590351920572338,
+       55.69375446117197
+      ],
+      [
+       12.590417846461223,
+       55.69379135660027
+      ],
+      [
+       12.590420366555565,
+       55.69380640842862
+      ],
+      [
+       12.590467424451466,
+       55.69381642656114
+      ],
+      [
+       12.590471289690422,
+       55.69384088497133
+      ],
+      [
+       12.590519170596947,
+       55.69385987082878
+      ],
+      [
+       12.59052221291541,
+       55.69387536149152
+      ],
+      [
+       12.59058813916953,
+       55.693912256822756
+      ],
+      [
+       12.590590659339002,
+       55.69392730864638
+      ],
+      [
+       12.590621017270585,
+       55.693928823804875
+      ],
+      [
+       12.590624882619444,
+       55.69395328220842
+      ],
+      [
+       12.590723687312675,
+       55.694006744433935
+      ],
+      [
+       12.59072672972579,
+       55.69402223509005
+      ],
+      [
+       12.590808834480901,
+       55.69406719434992
+      ],
+      [
+       12.59084610049831,
+       55.69410865849922
+      ],
+      [
+       12.590894533349948,
+       55.69411623227117
+      ],
+      [
+       12.590909587532867,
+       55.694106799655735
+      ],
+      [
+       12.590907119508932,
+       55.694079908802884
+      ],
+      [
+       12.590875938406652,
+       55.69406942597554
+      ],
+      [
+       12.590872895930158,
+       55.69405393532408
+      ],
+      [
+       12.590774090916266,
+       55.69400047322349
+      ],
+      [
+       12.59075352527167,
+       55.69396751193891
+      ],
+      [
+       12.590688943950278,
+       55.693940023280156
+      ],
+      [
+       12.590634155143684,
+       55.69388108842939
+      ],
+      [
+       12.590536173854087,
+       55.69383659387001
+      ],
+      [
+       12.590481385426155,
+       55.69377765894511
+      ],
+      [
+       12.590415459502443,
+       55.69374076355139
+      ],
+      [
+       12.590412939415287,
+       55.69372571172271
+      ],
+      [
+       12.590348954546908,
+       55.693698630691046
+      ],
+      [
+       12.590345316498802,
+       55.69368273220651
+      ],
+      [
+       12.590298031708159,
+       55.69366415409293
+      ],
+      [
+       12.590294393684482,
+       55.69364825560647
+      ],
+      [
+       12.59024710895954,
+       55.69362967747227
+      ],
+      [
+       12.59024347096029,
+       55.6936137789839
+      ],
+      [
+       12.590144667921885,
+       55.693560316346336
+      ],
+      [
+       12.590107403185714,
+       55.69351885196371
+      ],
+      [
+       12.589992496568408,
+       55.69345729403119
+      ],
+      [
+       12.589954636287695,
+       55.69341542178019
+      ],
+      [
+       12.589922933800795,
+       55.69340449985916
+      ],
+      [
+       12.589920413929846,
+       55.69338944801683
+      ],
+      [
+       12.589856429951181,
+       55.69336236671492
+      ],
+      [
+       12.589852792139665,
+       55.69334646821191
+      ],
+      [
+       12.589804390020038,
+       55.6933270432396
+      ],
+      [
+       12.58980187020084,
+       55.69331199139399
+      ],
+      [
+       12.589754813076617,
+       55.69330197299487
+      ],
+      [
+       12.58973424867557,
+       55.69326901151968
+      ],
+      [
+       12.589686368872078,
+       55.69325002533932
+      ],
+      [
+       12.589683326942811,
+       55.69323453464939
+      ],
+      [
+       12.58961740269023,
+       55.69319763880139
+      ],
+      [
+       12.589614882953256,
+       55.693182586950584
+      ],
+      [
+       12.589584525630212,
+       55.69318107153448
+      ],
+      [
+       12.589563961439273,
+       55.693148110027394
+      ],
+      [
+       12.589465160508924,
+       55.69309464681053
+      ],
+      [
+       12.589427896948532,
+       55.693053182203066
+      ],
+      [
+       12.589398135526574,
+       55.69305207456012
+      ],
+      [
+       12.589394497934904,
+       55.693036176039946
+      ],
+      [
+       12.589363913859573,
+       55.69302610063092
+      ],
+      [
+       12.58934357680724,
+       55.69300169901936
+      ],
+      [
+       12.589295968268637,
+       55.69300309236952
+      ],
+      [
+       12.5892817131143,
+       55.69302135459403
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (157.8 m × 2.6 m)",
+    "top_median_m": 5.92,
+    "top_above_track_bed_m": 4.28,
+    "laser_points": 3307,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.590963826799026,
+       55.69417715867363
+      ],
+      [
+       12.59099887249021,
+       55.69421208749401
+      ],
+      [
+       12.591030575929521,
+       55.694223009122766
+      ],
+      [
+       12.591033096293916,
+       55.69423806093409
+      ],
+      [
+       12.591115201855773,
+       55.69428301997663
+      ],
+      [
+       12.59111824444962,
+       55.69429851062007
+      ],
+      [
+       12.591166126228767,
+       55.694317496211916
+      ],
+      [
+       12.591203392869883,
+       55.69435896024289
+      ],
+      [
+       12.591251274764154,
+       55.69437794579977
+      ],
+      [
+       12.59127184105497,
+       55.69441090699046
+      ],
+      [
+       12.591387348336164,
+       55.69447287146177
+      ],
+      [
+       12.591442139129569,
+       55.69453180594474
+      ],
+      [
+       12.591508067362499,
+       55.69456870075144
+      ],
+      [
+       12.591528111774087,
+       55.694601223061355
+      ],
+      [
+       12.591576516323627,
+       55.69462064731706
+      ],
+      [
+       12.591579860153264,
+       55.69464466684684
+      ],
+      [
+       12.591610446058562,
+       55.69465474167616
+      ],
+      [
+       12.591665833294535,
+       55.69471408385919
+      ],
+      [
+       12.59169753732539,
+       55.69472500530675
+      ],
+      [
+       12.591735105987048,
+       55.69477499806139
+      ],
+      [
+       12.591783510854524,
+       55.694794422230636
+      ],
+      [
+       12.591786854830396,
+       55.69481844175229
+      ],
+      [
+       12.591852783874982,
+       55.69485533636131
+      ],
+      [
+       12.591873652026287,
+       55.694896826338166
+      ],
+      [
+       12.591941671457327,
+       55.69495212198406
+      ],
+      [
+       12.591944572007048,
+       55.69497567587196
+      ],
+      [
+       12.591976719868885,
+       55.69498706287047
+      ],
+      [
+       12.591979620443155,
+       55.69501061675711
+      ],
+      [
+       12.592048000827468,
+       55.69506640027832
+      ],
+      [
+       12.592050540850895,
+       55.69508946622271
+      ],
+      [
+       12.592082688837294,
+       55.6951008531916
+      ],
+      [
+       12.59208558948661,
+       55.69512440707439
+      ],
+      [
+       12.59214825471242,
+       55.695113579840545
+      ],
+      [
+       12.592129084773168,
+       55.695078186340474
+      ],
+      [
+       12.59207858913841,
+       55.69504036123224
+      ],
+      [
+       12.592075688501689,
+       55.69501680734888
+      ],
+      [
+       12.592005591512173,
+       55.69494692562499
+      ],
+      [
+       12.591973887216263,
+       55.694936004260995
+      ],
+      [
+       12.591970543112666,
+       55.69491198474652
+      ],
+      [
+       12.591868298784572,
+       55.694830715935794
+      ],
+      [
+       12.591865398295157,
+       55.69480716204488
+      ],
+      [
+       12.591833250614524,
+       55.69479577501446
+      ],
+      [
+       12.591830350149658,
+       55.69477222112228
+      ],
+      [
+       12.591799168250414,
+       55.6947617385415
+      ],
+      [
+       12.591761077316262,
+       55.69471130697579
+      ],
+      [
+       12.591695670808223,
+       55.69467485114413
+      ],
+      [
+       12.591640879428274,
+       55.69461591678345
+      ],
+      [
+       12.591609697704087,
+       55.69460543415188
+      ],
+      [
+       12.591571607172396,
+       55.69455500252091
+      ],
+      [
+       12.591523724907688,
+       55.6945360170946
+      ],
+      [
+       12.591503158336224,
+       55.694503055950456
+      ],
+      [
+       12.59147197673867,
+       55.694492573282005
+      ],
+      [
+       12.591434709683114,
+       55.69445110933898
+      ],
+      [
+       12.591387423449003,
+       55.69443253166695
+      ],
+      [
+       12.591349560705725,
+       55.69439065988508
+      ],
+      [
+       12.59130227458492,
+       55.69437208217853
+      ],
+      [
+       12.591264411992896,
+       55.694330210368015
+      ],
+      [
+       12.591182306162514,
+       55.69428525142931
+      ],
+      [
+       12.591179263544628,
+       55.69426976078776
+      ],
+      [
+       12.591080457565075,
+       55.69421629894861
+      ],
+      [
+       12.591043191194968,
+       55.69417483487588
+      ],
+      [
+       12.591026267377941,
+       55.69416633236964
+      ],
+      [
+       12.590978880987695,
+       55.69416772604967
+      ],
+      [
+       12.590963826799026,
+       55.69417715867363
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (127.2 m × 2.6 m)",
+    "top_median_m": 6.21,
+    "top_above_track_bed_m": 4.1,
+    "laser_points": 2877,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.592154041340171,
+       55.69517636566055
+      ],
+      [
+       12.592156510321328,
+       55.695203256471814
+      ],
+      [
+       12.592189481813248,
+       55.6952236111379
+      ],
+      [
+       12.592192382538997,
+       55.69524716501677
+      ],
+      [
+       12.592243239163079,
+       55.69528547801101
+      ],
+      [
+       12.59226495062278,
+       55.69534394979707
+      ],
+      [
+       12.592299176273979,
+       55.69536992285508
+      ],
+      [
+       12.5923467875322,
+       55.69536852830185
+      ],
+      [
+       12.592343494985117,
+       55.69533266977179
+      ],
+      [
+       12.592310966869471,
+       55.695312780775744
+      ],
+      [
+       12.59227175013158,
+       55.695244852766166
+      ],
+      [
+       12.59223877857943,
+       55.6952244981231
+      ],
+      [
+       12.592217530014013,
+       55.695174506117574
+      ],
+      [
+       12.59220060550704,
+       55.69516600378385
+      ],
+      [
+       12.592154041340171,
+       55.69517636566055
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (22.9 m × 2.6 m)",
+    "top_median_m": 6.39,
+    "top_above_track_bed_m": 3.91,
+    "laser_points": 496,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.585343064594786,
+       55.69121245042195
+      ],
+      [
+       12.585345528535054,
+       55.69123934145129
+      ],
+      [
+       12.585392808076572,
+       55.69125792155189
+      ],
+      [
+       12.58539644385138,
+       55.6912738202188
+      ],
+      [
+       12.585425540217926,
+       55.69127455595848
+      ],
+      [
+       12.585429839637008,
+       55.69129082751865
+      ],
+      [
+       12.585578724398422,
+       55.69136980502523
+      ],
+      [
+       12.585581764530742,
+       55.6913852958448
+      ],
+      [
+       12.585662440357265,
+       55.69142088308337
+      ],
+      [
+       12.58566607625924,
+       55.69143678174025
+      ],
+      [
+       12.585695836383643,
+       55.69143789030718
+      ],
+      [
+       12.58569947230102,
+       55.691453788962825
+      ],
+      [
+       12.585798263977127,
+       55.69150725535092
+      ],
+      [
+       12.585801304209122,
+       55.69152274616346
+      ],
+      [
+       12.58588131687981,
+       55.69155796035852
+      ],
+      [
+       12.585885616523887,
+       55.691574231899104
+      ],
+      [
+       12.585966888752628,
+       55.691610226766315
+      ],
+      [
+       12.585969929060933,
+       55.69162571757343
+      ],
+      [
+       12.586050605734565,
+       55.691661304544
+      ],
+      [
+       12.586054241820255,
+       55.69167720318644
+      ],
+      [
+       12.586118220446814,
+       55.69170428655109
+      ],
+      [
+       12.58612185656463,
+       55.691720185191
+      ],
+      [
+       12.586237347772846,
+       55.691782154753
+      ],
+      [
+       12.586240388204187,
+       55.69179764555143
+      ],
+      [
+       12.586389276531468,
+       55.69187662202033
+      ],
+      [
+       12.586392317031727,
+       55.691892112813875
+      ],
+      [
+       12.586422077516035,
+       55.691893221199514
+      ],
+      [
+       12.586459932520903,
+       55.691935094620746
+      ],
+      [
+       12.586524507597264,
+       55.69196258559888
+      ],
+      [
+       12.586527548159042,
+       55.69197807638807
+      ],
+      [
+       12.586556645059645,
+       55.69197881185194
+      ],
+      [
+       12.586577643487175,
+       55.69200358684761
+      ],
+      [
+       12.586609374498018,
+       55.692002658876525
+      ],
+      [
+       12.586621964057302,
+       55.691966335793055
+      ],
+      [
+       12.586557984657118,
+       55.69193925270268
+      ],
+      [
+       12.586554348338511,
+       55.691923354078845
+      ],
+      [
+       12.586505949591269,
+       55.69190392775502
+      ],
+      [
+       12.586503431152922,
+       55.69188887582035
+      ],
+      [
+       12.586473670670461,
+       55.69188776745443
+      ],
+      [
+       12.586435815699012,
+       55.69184589403675
+      ],
+      [
+       12.586338439979517,
+       55.691801803813945
+      ],
+      [
+       12.586334803764982,
+       55.69178590518193
+      ],
+      [
+       12.586286405295947,
+       55.691766478767335
+      ],
+      [
+       12.586283886952957,
+       55.6917514268266
+      ],
+      [
+       12.586219312395022,
+       55.69172393571398
+      ],
+      [
+       12.586216271978968,
+       55.69170844491469
+      ],
+      [
+       12.586135595060306,
+       55.691672858056684
+      ],
+      [
+       12.586131958942142,
+       55.6916569594171
+      ],
+      [
+       12.586050686467333,
+       55.69162096466287
+      ],
+      [
+       12.586047646127595,
+       55.69160547385818
+      ],
+      [
+       12.58599862473168,
+       55.69159585602275
+      ],
+      [
+       12.58599755165647,
+       55.69157996316919
+      ],
+      [
+       12.585950271442137,
+       55.69156138331171
+      ],
+      [
+       12.585946635411322,
+       55.691545484665234
+      ],
+      [
+       12.58578164692534,
+       55.69145841186936
+      ],
+      [
+       12.585778010974172,
+       55.69144251321661
+      ],
+      [
+       12.585729613204162,
+       55.69142308657188
+      ],
+      [
+       12.585727095102579,
+       55.691408034615826
+      ],
+      [
+       12.585561511956168,
+       55.691320553667964
+      ],
+      [
+       12.585558471837963,
+       55.691305062847576
+      ],
+      [
+       12.585461098449077,
+       55.691260971893335
+      ],
+      [
+       12.585457462649499,
+       55.69124507322866
+      ],
+      [
+       12.5854090652816,
+       55.69122564645144
+      ],
+      [
+       12.585406547318973,
+       55.69121059448657
+      ],
+      [
+       12.585389626003044,
+       55.69120209116518
+      ],
+      [
+       12.585343064594786,
+       55.69121245042195
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (116.9 m × 2.8 m)",
+    "top_median_m": 5.43,
+    "top_above_track_bed_m": 3.86,
+    "laser_points": 2575,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.590591926671456,
+       55.69480848408526
+      ],
+      [
+       12.590641975927161,
+       55.69484583182757
+      ],
+      [
+       12.590731291232329,
+       55.69493926907084
+      ],
+      [
+       12.5907797250987,
+       55.69494684287362
+      ],
+      [
+       12.590760556476416,
+       55.69491144914092
+      ],
+      [
+       12.590712674148167,
+       55.694892463399434
+      ],
+      [
+       12.590640360350223,
+       55.69481605794577
+      ],
+      [
+       12.590623436335068,
+       55.69480755538724
+      ],
+      [
+       12.590591926671456,
+       55.69480848408526
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (17.7 m × 1.5 m)",
+    "top_median_m": 5.84,
+    "top_above_track_bed_m": 4.04,
+    "laser_points": 83,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.587842612837319,
+       55.69260488022384
+      ],
+      [
+       12.587924733812821,
+       55.692649967090595
+      ],
+      [
+       12.587927774992448,
+       55.69266545783541
+      ],
+      [
+       12.587958131867929,
+       55.69266697366799
+      ],
+      [
+       12.587979516787327,
+       55.69270890324014
+      ],
+      [
+       12.588007109341195,
+       55.69270901142978
+      ],
+      [
+       12.588012914917003,
+       55.69272590980148
+      ],
+      [
+       12.588058711469353,
+       55.692735148177974
+      ],
+      [
+       12.588063012165815,
+       55.69275141962562
+      ],
+      [
+       12.588161810341896,
+       55.69280488401224
+      ],
+      [
+       12.588164851629779,
+       55.69282037474941
+      ],
+      [
+       12.588198249935063,
+       55.69283738125765
+      ],
+      [
+       12.58822801117191,
+       55.69283848919446
+      ],
+      [
+       12.588231648269305,
+       55.69285438775635
+      ],
+      [
+       12.588280049039957,
+       55.692873813369104
+      ],
+      [
+       12.588300089862742,
+       55.69290633626209
+      ],
+      [
+       12.58841499223024,
+       55.69296789584284
+      ],
+      [
+       12.588418629417637,
+       55.69298379439771
+      ],
+      [
+       12.58848261180295,
+       55.693010876473
+      ],
+      [
+       12.588486249022479,
+       55.69302677502536
+      ],
+      [
+       12.588534650132127,
+       55.69304620053258
+      ],
+      [
+       12.588537169443494,
+       55.693061252411596
+      ],
+      [
+       12.58866936781276,
+       55.69313172276771
+      ],
+      [
+       12.588672409331958,
+       55.69314721348856
+      ],
+      [
+       12.58870580813697,
+       55.69316421985105
+      ],
+      [
+       12.588737540013875,
+       55.69316329131739
+      ],
+      [
+       12.588750950445368,
+       55.6931359358065
+      ],
+      [
+       12.588719770660397,
+       55.693125452411635
+      ],
+      [
+       12.588716729124554,
+       55.693109961692144
+      ],
+      [
+       12.588669445784141,
+       55.69309138292936
+      ],
+      [
+       12.58866580848329,
+       55.693075484383684
+      ],
+      [
+       12.588617407273896,
+       55.693056058929685
+      ],
+      [
+       12.58861488793215,
+       55.693041007052706
+      ],
+      [
+       12.58855090540807,
+       55.69301392504844
+      ],
+      [
+       12.588547268163772,
+       55.69299802649833
+      ],
+      [
+       12.588498867108681,
+       55.69297860099524
+      ],
+      [
+       12.58849634781869,
+       55.692963549114985
+      ],
+      [
+       12.588466586481747,
+       55.6929624412447
+      ],
+      [
+       12.588428728315213,
+       55.69292056849122
+      ],
+      [
+       12.588364150334158,
+       55.692893078558846
+      ],
+      [
+       12.588361108960708,
+       55.6928775878279
+      ],
+      [
+       12.588332736569628,
+       55.6928771871403
+      ],
+      [
+       12.588327710551471,
+       55.69286058136556
+      ],
+      [
+       12.58826372852011,
+       55.69283349920412
+      ],
+      [
+       12.588242569848008,
+       55.692800129629674
+      ],
+      [
+       12.5881952871056,
+       55.69278155067519
+      ],
+      [
+       12.588191650030964,
+       55.692765652111795
+      ],
+      [
+       12.588143249438787,
+       55.69274622646145
+      ],
+      [
+       12.58814073030405,
+       55.69273117457138
+      ],
+      [
+       12.588110969150518,
+       55.69273006661222
+      ],
+      [
+       12.588107332115712,
+       55.69271416804568
+      ],
+      [
+       12.588008534246526,
+       55.6926607036104
+      ],
+      [
+       12.588005493035466,
+       55.692645212868015
+      ],
+      [
+       12.587924812572092,
+       55.69260962723974
+      ],
+      [
+       12.587921175625969,
+       55.69259372866624
+      ],
+      [
+       12.587887777650364,
+       55.69257672207755
+      ],
+      [
+       12.587871922885283,
+       55.692577185912064
+      ],
+      [
+       12.587842612837319,
+       55.69260488022384
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (83.4 m × 2.6 m)",
+    "top_median_m": 5.3,
+    "top_above_track_bed_m": 3.76,
+    "laser_points": 1872,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.58872086363709,
+       55.69315479987126
+      ],
+      [
+       12.588740029499652,
+       55.693190193967716
+      ],
+      [
+       12.588787312993821,
+       55.69320877270097
+      ],
+      [
+       12.58879095035859,
+       55.69322467124193
+      ],
+      [
+       12.588839351863353,
+       55.69324409662301
+      ],
+      [
+       12.58884187130765,
+       55.69325914849362
+      ],
+      [
+       12.58890585443486,
+       55.69328623033702
+      ],
+      [
+       12.588909491856183,
+       55.69330212887355
+      ],
+      [
+       12.588973475100241,
+       55.693329210679934
+      ],
+      [
+       12.589011334256563,
+       55.693371083249694
+      ],
+      [
+       12.589038927270412,
+       55.69337119120081
+      ],
+      [
+       12.589061432982845,
+       55.693396592643765
+      ],
+      [
+       12.589091194661213,
+       55.69339770036492
+      ],
+      [
+       12.58914657626429,
+       55.69345704377157
+      ],
+      [
+       12.589178278586234,
+       55.69346796589555
+      ],
+      [
+       12.589180798178699,
+       55.69348301775679
+      ],
+      [
+       12.589261481583808,
+       55.693518602514715
+      ],
+      [
+       12.589265119174803,
+       55.69353450103795
+      ],
+      [
+       12.589313521296802,
+       55.6935539262227
+      ],
+      [
+       12.589316040948116,
+       55.69356897808021
+      ],
+      [
+       12.589345802762384,
+       55.693570085737676
+      ],
+      [
+       12.589349440393212,
+       55.69358598425778
+      ],
+      [
+       12.589448242438685,
+       55.693639447549664
+      ],
+      [
+       12.589451284313448,
+       55.69365493824544
+      ],
+      [
+       12.58948468389072,
+       55.693671944384185
+      ],
+      [
+       12.589516416151783,
+       55.693671015643716
+      ],
+      [
+       12.589529826193997,
+       55.693643660054555
+      ],
+      [
+       12.589498645798411,
+       55.69363317686673
+      ],
+      [
+       12.58947808142536,
+       55.693600215349456
+      ],
+      [
+       12.589448319585765,
+       55.69359910772444
+      ],
+      [
+       12.589444681913436,
+       55.693583209207866
+      ],
+      [
+       12.589312480623441,
+       55.69351273973136
+      ],
+      [
+       12.589275216805817,
+       55.693471275083034
+      ],
+      [
+       12.589211233123134,
+       55.69344419344056
+      ],
+      [
+       12.589207595563924,
+       55.69342829491512
+      ],
+      [
+       12.589177833860159,
+       55.69342718722257
+      ],
+      [
+       12.58913997447101,
+       55.69338531470767
+      ],
+      [
+       12.589075991022025,
+       55.693358232991166
+      ],
+      [
+       12.589072353527074,
+       55.69334233446068
+      ],
+      [
+       12.588973552749813,
+       55.69328887084671
+      ],
+      [
+       12.58897051109831,
+       55.693273380135395
+      ],
+      [
+       12.588889828464811,
+       55.69323779517444
+      ],
+      [
+       12.588851969571957,
+       55.6931959225629
+      ],
+      [
+       12.588787390840375,
+       55.69316843286461
+      ],
+      [
+       12.58878434927377,
+       55.69315294214729
+      ],
+      [
+       12.588767426385749,
+       55.69314443931554
+      ],
+      [
+       12.58872086363709,
+       55.69315479987126
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (74.3 m × 2.5 m)",
+    "top_median_m": 5.31,
+    "top_above_track_bed_m": 3.76,
+    "laser_points": 1659,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.587403844745952,
+       55.69268079699231
+      ],
+      [
+       12.587422186962897,
+       55.69270722353879
+      ],
+      [
+       12.587486763991032,
+       55.69273471398097
+      ],
+      [
+       12.587489805005754,
+       55.69275020473874
+      ],
+      [
+       12.587620582427416,
+       55.69281130066147
+      ],
+      [
+       12.587658439629081,
+       55.6928531736782
+      ],
+      [
+       12.587688200868259,
+       55.69285428174605
+      ],
+      [
+       12.587691837748746,
+       55.69287018032688
+      ],
+      [
+       12.587789217657377,
+       55.692914269412036
+      ],
+      [
+       12.587792854585397,
+       55.692930167989104
+      ],
+      [
+       12.587874131384092,
+       55.69296616152389
+      ],
+      [
+       12.587877172573648,
+       55.692981652269246
+      ],
+      [
+       12.587906933914631,
+       55.692982760282575
+      ],
+      [
+       12.587910570897881,
+       55.69299865885527
+      ],
+      [
+       12.587975148747864,
+       55.69302614902805
+      ],
+      [
+       12.587978189982978,
+       55.69304163977017
+      ],
+      [
+       12.588092269885344,
+       55.69309423188268
+      ],
+      [
+       12.588095906955957,
+       55.69311013044849
+      ],
+      [
+       12.58822810471968,
+       55.693180601288326
+      ],
+      [
+       12.588231146069278,
+       55.69319609202234
+      ],
+      [
+       12.588260243891368,
+       55.693196827069166
+      ],
+      [
+       12.588264544730254,
+       55.693213098506924
+      ],
+      [
+       12.588413442545763,
+       55.693292072375016
+      ],
+      [
+       12.588416483979083,
+       55.693307563103076
+      ],
+      [
+       12.588497166341945,
+       55.69334314837899
+      ],
+      [
+       12.588500803604008,
+       55.69335904692971
+      ],
+      [
+       12.588565382460983,
+       55.693386536776686
+      ],
+      [
+       12.588568423963231,
+       55.69340202749987
+      ],
+      [
+       12.58859679673519,
+       55.693402428127726
+      ],
+      [
+       12.588601822946476,
+       55.69341903388776
+      ],
+      [
+       12.588667776578186,
+       55.69344407951179
+      ],
+      [
+       12.588619075682733,
+       55.693416137517254
+      ],
+      [
+       12.588616034159148,
+       55.693400646795624
+      ],
+      [
+       12.588567189082424,
+       55.6933807556874
+      ],
+      [
+       12.588578522697379,
+       55.693338801586364
+      ],
+      [
+       12.588514539701926,
+       55.69331171957046
+      ],
+      [
+       12.588510902439522,
+       55.693295821020065
+      ],
+      [
+       12.588481140849192,
+       55.69329471315682
+      ],
+      [
+       12.588443282330639,
+       55.69325284041424
+      ],
+      [
+       12.588211483849282,
+       55.69313175819767
+      ],
+      [
+       12.588207846729471,
+       55.69311585963601
+      ],
+      [
+       12.588075649224999,
+       55.69304538877026
+      ],
+      [
+       12.588072607951052,
+       55.6930298980311
+      ],
+      [
+       12.58802614736433,
+       55.6930202867853
+      ],
+      [
+       12.58802251033188,
+       55.69300438821676
+      ],
+      [
+       12.587974109520474,
+       55.69298496250314
+      ],
+      [
+       12.587971590431366,
+       55.69296991060939
+      ],
+      [
+       12.58794182909901,
+       55.69296880261164
+      ],
+      [
+       12.58793819210639,
+       55.692952904039934
+      ],
+      [
+       12.587839393845819,
+       55.69289943947516
+      ],
+      [
+       12.587836352678956,
+       55.6928839487284
+      ],
+      [
+       12.58780725509346,
+       55.692883213577694
+      ],
+      [
+       12.58780295448615,
+       55.69286694212013
+      ],
+      [
+       12.587704978908237,
+       55.69282244521475
+      ],
+      [
+       12.587701937801727,
+       55.692806954463705
+      ],
+      [
+       12.587672840274715,
+       55.6928062192803
+      ],
+      [
+       12.587668539732924,
+       55.69278994781697
+      ],
+      [
+       12.587587263490459,
+       55.69275395413756
+      ],
+      [
+       12.587584222436904,
+       55.69273846338275
+      ],
+      [
+       12.587486843198274,
+       55.69269437412471
+      ],
+      [
+       12.587481561970112,
+       55.69266053998245
+      ],
+      [
+       12.587449830456753,
+       55.69266146818608
+      ],
+      [
+       12.587403844745952,
+       55.69268079699231
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (115.3 m × 2.9 m)",
+    "top_median_m": 5.77,
+    "top_above_track_bed_m": 4.07,
+    "laser_points": 1726,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.587712879144837,
+       55.69275254476952
+      ],
+      [
+       12.587844501720308,
+       55.692822733804924
+      ],
+      [
+       12.587848138660629,
+       55.69283863238036
+      ],
+      [
+       12.587928819537478,
+       55.692874218052516
+      ],
+      [
+       12.587932456517626,
+       55.69289011662482
+      ],
+      [
+       12.58801313757694,
+       55.692925702238774
+      ],
+      [
+       12.588016774596916,
+       55.69294160080793
+      ],
+      [
+       12.588114155041842,
+       55.692985689627285
+      ],
+      [
+       12.588117792109351,
+       55.69300158819268
+      ],
+      [
+       12.588249989536443,
+       55.693072059014405
+      ],
+      [
+       12.588253030884413,
+       55.693087549748086
+      ],
+      [
+       12.588334308426484,
+       55.693123542966966
+      ],
+      [
+       12.58833734981262,
+       55.69313903369796
+      ],
+      [
+       12.588365722393679,
+       55.693139434381905
+      ],
+      [
+       12.588370748468764,
+       55.693156040153774
+      ],
+      [
+       12.588451430473008,
+       55.693191625465296
+      ],
+      [
+       12.588455067699835,
+       55.693207524018135
+      ],
+      [
+       12.588519646271093,
+       55.69323501389358
+      ],
+      [
+       12.588522687740952,
+       55.69325050461862
+      ],
+      [
+       12.58857111911267,
+       55.69325807932945
+      ],
+      [
+       12.58860040660921,
+       55.69323025926418
+      ],
+      [
+       12.588553123174314,
+       55.69321168045808
+      ],
+      [
+       12.588532786520487,
+       55.69318727870712
+      ],
+      [
+       12.588503025012454,
+       55.69318617084804
+      ],
+      [
+       12.588499387768557,
+       55.69317027229681
+      ],
+      [
+       12.588450986519726,
+       55.69315084677785
+      ],
+      [
+       12.588448467234198,
+       55.69313579489686
+      ],
+      [
+       12.5884187057669,
+       55.69313468701673
+      ],
+      [
+       12.588415068562833,
+       55.69311878846237
+      ],
+      [
+       12.588299569957934,
+       55.69305682106253
+      ],
+      [
+       12.588296528594494,
+       55.69304133033014
+      ],
+      [
+       12.588182448582954,
+       55.6929887384089
+      ],
+      [
+       12.588178811490675,
+       55.69297283984574
+      ],
+      [
+       12.588130410643991,
+       55.69295341419426
+      ],
+      [
+       12.588127891497445,
+       55.692938362304446
+      ],
+      [
+       12.58808143100768,
+       55.69292875107818
+      ],
+      [
+       12.588077793962931,
+       55.69291285251127
+      ],
+      [
+       12.588029393240172,
+       55.69289342681808
+      ],
+      [
+       12.588026874137238,
+       55.69287837492549
+      ],
+      [
+       12.587962296500383,
+       55.6928508847766
+      ],
+      [
+       12.587959255289586,
+       55.692835394033395
+      ],
+      [
+       12.587913458640799,
+       55.69282615562116
+      ],
+      [
+       12.587909157996767,
+       55.6928098841677
+      ],
+      [
+       12.58782847727239,
+       55.69277429848026
+      ],
+      [
+       12.587824840347128,
+       55.692758399903916
+      ],
+      [
+       12.587758044219187,
+       55.692724386667976
+      ],
+      [
+       12.587711258214096,
+       55.69273474717339
+      ],
+      [
+       12.587712879144837,
+       55.69275254476952
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "train_in_scan",
+    "osm_id": null,
+    "name": "train standing during the scan (77.7 m × 2.7 m)",
+    "top_median_m": 5.39,
+    "top_above_track_bed_m": 3.84,
+    "laser_points": 1818,
+    "source": "Traced from the laser: unclassified points 2.6–5.0 m above the terrain model within 1.8 m of a track centreline, strip ≤4.5 m wide and ≥15 m long, scan 2025-03-10. Not a structure; these points are class 64 in the LAZ. Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6177_725, PUNKTSKY_1km_6178_725)"
+   }
+  }
+ ]
+}

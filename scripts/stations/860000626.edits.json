@@ -26,12 +26,1160 @@
       "order": -2
     }
   ],
-  "sources": [],
+  "sources": [
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000626)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
+    }
+  ],
   "changelog": [
     {
       "date": "2026-10-29",
       "who": "the owner's assistant",
       "what": "First draft from OpenStreetMap (Overpass, cached 2026-10-28), schema 2."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 95 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000626)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "26": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 10: tracks 26, class 55 cm = 0.55 m above rail, 178 m long; a recorded design class, not a survey"
+    },
+    "1–2": {
+      "height_m": 0.72,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 10: tracks 1,2, class 72 cm = 0.72 m above rail, 311 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 10: tracks 3,4, class 55 cm = 0.55 m above rail, 273 m long; a recorded design class, not a survey"
+    },
+    "5–6": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 5,6, class 55 cm = 0.55 m above rail, 310 m long; a recorded design class, not a survey"
+    },
+    "7–8": {
+      "height_m": 0.72,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 7,8, class 72 cm = 0.72 m above rail, 347 m long; a recorded design class, not a survey"
+    },
+    "9–10": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 81: tracks 9,10, class 92 cm = 0.92 m above rail, 201 m long; a recorded design class, not a survey"
+    },
+    "11–12": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 81: tracks 11,12, class 92 cm = 0.92 m above rail, 201 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000626/kobenhavn_h_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w25616602",
+      "kind": "building",
+      "name": "Tivolis Koncertsal (building)",
+      "top_m": 10.91,
+      "base_m": -1.78,
+      "_source": "Outline OSM w25616602 (ODbL); roof = median of 7578 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w25678722",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 8.24,
+      "base_m": -1.21,
+      "_source": "Outline OSM w25678722 (ODbL); roof = median of 5452 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w26659863",
+      "kind": "building",
+      "name": "DGI Byen (sports_centre)",
+      "top_m": 8.87,
+      "base_m": 0.83,
+      "_source": "Outline OSM w26659863 (ODbL); roof = median of 29541 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w71407970",
+      "kind": "building",
+      "name": "office",
+      "top_m": 14.02,
+      "base_m": 1.81,
+      "_source": "Outline OSM w71407970 (ODbL); roof = median of 2570 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w71407972",
+      "kind": "building",
+      "name": "building",
+      "top_m": 21.46,
+      "base_m": 1.55,
+      "_source": "Outline OSM w71407972 (ODbL); roof = median of 457 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w71407973",
+      "kind": "building",
+      "name": "Tietgensgade transformerstation (industrial)",
+      "top_m": 11.24,
+      "base_m": 3.15,
+      "_source": "Outline OSM w71407973 (ODbL); roof = median of 1384 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w71407974",
+      "kind": "building",
+      "name": "government",
+      "top_m": 12.46,
+      "base_m": 3.04,
+      "_source": "Outline OSM w71407974 (ODbL); roof = median of 375 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w89694228",
+      "kind": "building",
+      "name": "Den flyvende Kuffert (building)",
+      "top_m": 6.6,
+      "base_m": 0.76,
+      "_source": "Outline OSM w89694228 (ODbL); roof = median of 1605 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w89694238",
+      "kind": "building",
+      "name": "building",
+      "top_m": 7.41,
+      "base_m": 2.0,
+      "_source": "Outline OSM w89694238 (ODbL); roof = median of 4427 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w91260821",
+      "kind": "building",
+      "name": "Københavns Hovedbanegård (station building)",
+      "top_m": 13.38,
+      "base_m": -1.26,
+      "_source": "Outline OSM w91260821 (ODbL); roof = median of 5777 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w91275428",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 11.87,
+      "base_m": -0.26,
+      "_source": "Outline OSM w91275428 (ODbL); roof = median of 72 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w100293735",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.85,
+      "base_m": 0.36,
+      "_source": "Outline OSM w100293735 (ODbL); roof = median of 3277 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w100293746",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 13.13,
+      "base_m": 0.27,
+      "_source": "Outline OSM w100293746 (ODbL); roof = median of 5454 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115857527",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.73,
+      "base_m": 1.31,
+      "_source": "Outline OSM w115857527 (ODbL); roof = median of 1342 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115857578",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 5.52,
+      "base_m": 1.24,
+      "_source": "Outline OSM w115857578 (ODbL); roof = median of 733 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858115",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 15.51,
+      "base_m": 0.97,
+      "_source": "Outline OSM w115858115 (ODbL); roof = median of 643 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858116",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 15.43,
+      "base_m": 1.45,
+      "_source": "Outline OSM w115858116 (ODbL); roof = median of 1083 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858117",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 15.23,
+      "base_m": 0.94,
+      "_source": "Outline OSM w115858117 (ODbL); roof = median of 632 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858118",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.49,
+      "base_m": 1.7,
+      "_source": "Outline OSM w115858118 (ODbL); roof = median of 338 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858119",
+      "kind": "building",
+      "name": "university",
+      "top_m": 10.83,
+      "base_m": 0.41,
+      "_source": "Outline OSM w115858119 (ODbL); roof = median of 6925 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858120",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 12.75,
+      "base_m": 1.12,
+      "_source": "Outline OSM w115858120 (ODbL); roof = median of 7218 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858121",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 11.69,
+      "base_m": 0.1,
+      "_source": "Outline OSM w115858121 (ODbL); roof = median of 1914 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858122",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 17.02,
+      "base_m": 1.68,
+      "_source": "Outline OSM w115858122 (ODbL); roof = median of 462 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858123",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.2,
+      "base_m": 1.23,
+      "_source": "Outline OSM w115858123 (ODbL); roof = median of 1296 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858124",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.36,
+      "base_m": 1.6,
+      "_source": "Outline OSM w115858124 (ODbL); roof = median of 947 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858125",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.42,
+      "base_m": 1.78,
+      "_source": "Outline OSM w115858125 (ODbL); roof = median of 1162 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858126",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.59,
+      "base_m": 0.38,
+      "_source": "Outline OSM w115858126 (ODbL); roof = median of 858 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858127",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 13.48,
+      "base_m": 0.09,
+      "_source": "Outline OSM w115858127 (ODbL); roof = median of 3638 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858128",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 11.93,
+      "base_m": -0.35,
+      "_source": "Outline OSM w115858128 (ODbL); roof = median of 2203 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858156",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.4,
+      "base_m": 1.59,
+      "_source": "Outline OSM w115858156 (ODbL); roof = median of 1537 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858157",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 14.39,
+      "base_m": 0.24,
+      "_source": "Outline OSM w115858157 (ODbL); roof = median of 3545 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115858158",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 16.47,
+      "base_m": 0.06,
+      "_source": "Outline OSM w115858158 (ODbL); roof = median of 1259 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w115859478",
+      "kind": "building",
+      "name": "university",
+      "top_m": 4.91,
+      "base_m": 1.13,
+      "_source": "Outline OSM w115859478 (ODbL); roof = median of 608 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w128033567",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.23,
+      "base_m": 1.26,
+      "_source": "Outline OSM w128033567 (ODbL); roof = median of 2654 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w132682512",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.75,
+      "base_m": 1.81,
+      "_source": "Outline OSM w132682512 (ODbL); roof = median of 2155 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w132682515",
+      "kind": "building",
+      "name": "office",
+      "top_m": 8.85,
+      "base_m": -1.21,
+      "_source": "Outline OSM w132682515 (ODbL); roof = median of 2004 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w205605176",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.89,
+      "base_m": 0.77,
+      "_source": "Outline OSM w205605176 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w205605180",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.43,
+      "base_m": 1.08,
+      "_source": "Outline OSM w205605180 (ODbL); roof = median of 5057 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w314828169",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.3,
+      "base_m": 1.75,
+      "_source": "Outline OSM w314828169 (ODbL); roof = median of 144 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w314828171",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.22,
+      "base_m": 1.91,
+      "_source": "Outline OSM w314828171 (ODbL); roof = median of 1074 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w314828173",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.72,
+      "base_m": 2.2,
+      "_source": "Outline OSM w314828173 (ODbL); roof = median of 296 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w413851030",
+      "kind": "bridge",
+      "name": "Tietgensbro (bridge)",
+      "top_m": 5.52,
+      "base_m": 5.18,
+      "_source": "Outline OSM w413851030 (ODbL); roof = median of 11186 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); top = the deck the laser saw (class 17, footbridge_decks.json), 5.52 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w554997660",
+      "kind": "building",
+      "name": "building",
+      "top_m": 7.06,
+      "base_m": 0,
+      "_source": "Outline OSM w554997660 (ODbL); roof = median of 1911 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975859",
+      "kind": "building",
+      "name": "service",
+      "top_m": 6.55,
+      "base_m": -0.4,
+      "_source": "Outline OSM w652975859 (ODbL); roof = median of 243 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975861",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.26,
+      "base_m": -0.26,
+      "_source": "Outline OSM w652975861 (ODbL); roof = median of 352 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975862",
+      "kind": "building",
+      "name": "service",
+      "top_m": 4.36,
+      "base_m": -0.5,
+      "_source": "Outline OSM w652975862 (ODbL); roof = median of 225 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975863",
+      "kind": "building",
+      "name": "service",
+      "top_m": 4.24,
+      "base_m": -1.06,
+      "_source": "Outline OSM w652975863 (ODbL); roof = median of 226 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975865",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.27,
+      "base_m": -0.27,
+      "_source": "Outline OSM w652975865 (ODbL); roof = median of 238 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975868",
+      "kind": "building",
+      "name": "service",
+      "top_m": 5.88,
+      "base_m": -1.01,
+      "_source": "Outline OSM w652975868 (ODbL); roof = median of 379 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975870",
+      "kind": "building",
+      "name": "service",
+      "top_m": 6.33,
+      "base_m": -0.36,
+      "_source": "Outline OSM w652975870 (ODbL); roof = median of 348 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975874",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.34,
+      "base_m": -0.73,
+      "_source": "Outline OSM w652975874 (ODbL); roof = median of 213 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975875",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.97,
+      "base_m": -0.93,
+      "_source": "Outline OSM w652975875 (ODbL); roof = median of 252 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652975876",
+      "kind": "building",
+      "name": "3064 (service)",
+      "top_m": 2.71,
+      "base_m": -0.29,
+      "_source": "Outline OSM w652975876 (ODbL); roof = median of 183 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652976342",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.27,
+      "base_m": 1.69,
+      "_source": "Outline OSM w652976342 (ODbL); roof = median of 91 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652976351",
+      "kind": "building",
+      "name": "shed",
+      "top_m": 4.31,
+      "base_m": 1.63,
+      "_source": "Outline OSM w652976351 (ODbL); roof = median of 61 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653186018",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.04,
+      "base_m": 2.04,
+      "_source": "Outline OSM w653186018 (ODbL); roof = median of 214 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653186026",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.9,
+      "base_m": 2.12,
+      "_source": "Outline OSM w653186026 (ODbL); roof = median of 330 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653186035",
+      "kind": "building",
+      "name": "Tik Tak (building)",
+      "top_m": 6.68,
+      "base_m": 1.59,
+      "_source": "Outline OSM w653186035 (ODbL); roof = median of 3047 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653186039",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.19,
+      "base_m": 2.38,
+      "_source": "Outline OSM w653186039 (ODbL); roof = median of 184 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653186048",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 10.13,
+      "_source": "Outline OSM w653186048 (ODbL); roof = median of 57 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w653186050",
+      "kind": "building",
+      "name": "building",
+      "top_m": 10.95,
+      "base_m": 1.13,
+      "_source": "Outline OSM w653186050 (ODbL); roof = median of 1495 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653216228",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.49,
+      "base_m": 3.13,
+      "_source": "Outline OSM w653216228 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w653247246",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.96,
+      "_source": "Outline OSM w653247246 (ODbL); roof = median of 1161 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w653247268",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.95,
+      "_source": "Outline OSM w653247268 (ODbL); roof = median of 34 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w679148877",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 7.98,
+      "_source": "Outline OSM w679148877 (ODbL); roof = median of 741 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1013387413",
+      "kind": "building",
+      "name": "building",
+      "top_m": 16.62,
+      "base_m": 4.71,
+      "_source": "Outline OSM w1013387413 (ODbL); roof = median of 300 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1013387429",
+      "kind": "building",
+      "name": "building",
+      "top_m": 13.15,
+      "base_m": 0.84,
+      "_source": "Outline OSM w1013387429 (ODbL); roof = median of 7106 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1013387433",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.36,
+      "base_m": -0.42,
+      "_source": "Outline OSM w1013387433 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1013387434",
+      "kind": "building",
+      "name": "building",
+      "top_m": 9.29,
+      "base_m": 2.42,
+      "_source": "Outline OSM w1013387434 (ODbL); roof = median of 3081 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1013387439",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.77,
+      "base_m": 3.26,
+      "_source": "Outline OSM w1013387439 (ODbL); roof = median of 3577 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1013387440",
+      "kind": "building",
+      "name": "building",
+      "top_m": 14.47,
+      "base_m": 4.13,
+      "_source": "Outline OSM w1013387440 (ODbL); roof = median of 2459 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1017475760",
+      "kind": "building",
+      "name": "Danske Bank (office)",
+      "top_m": 20.04,
+      "base_m": 1.9,
+      "_source": "Outline OSM w1017475760 (ODbL); roof = median of 6353 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1046559581",
+      "kind": "building",
+      "name": "De fire tårne bliver ca. 59.000 m2, fordelt på ca. 33.000 m2 til lejligheder,  hotellejligheder og erhverv samt ca. 26.000 m2 til parkering, teknik og depot. I tårnene bliver der bygget 162 lejligheder og 236 hotellejligheder. (building)",
+      "top_m": 25.65,
+      "base_m": 6.71,
+      "_source": "Outline OSM w1046559581 (ODbL); roof = median of 13956 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1046562415",
+      "kind": "building",
+      "name": "De fire tårne bliver ca. 59.000 m2, fordelt på ca. 33.000 m2 til lejligheder,  hotellejligheder og erhverv samt ca. 26.000 m2 til parkering, teknik og depot. I tårnene bliver der bygget 162 lejligheder og 236 hotellejligheder. (building)",
+      "top_m": 72.8,
+      "base_m": 6.16,
+      "_source": "Outline OSM w1046562415 (ODbL); roof = median of 17828 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1046744401",
+      "kind": "building",
+      "name": "The Stamp (office)",
+      "top_m": 44.72,
+      "base_m": 0.47,
+      "_source": "Outline OSM w1046744401 (ODbL); roof = median of 9974 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1084266890",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.04,
+      "base_m": -1.14,
+      "_source": "Outline OSM w1084266890 (ODbL); roof = median of 614 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1087551733",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.19,
+      "base_m": 0.96,
+      "_source": "Outline OSM w1087551733 (ODbL); roof = median of 316 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1103097512",
+      "kind": "building",
+      "name": "Locke Aparthotel (hotel)",
+      "top_m": 50.02,
+      "base_m": 6.69,
+      "_source": "Outline OSM w1103097512 (ODbL); roof = median of 18091 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1186079812",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.08,
+      "base_m": 1.31,
+      "_source": "Outline OSM w1186079812 (ODbL); roof = median of 199 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1186079813",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 10.31,
+      "base_m": 3.94,
+      "_source": "Outline OSM w1186079813 (ODbL); roof = median of 306 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1186079814",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 9.33,
+      "base_m": 1.95,
+      "_source": "Outline OSM w1186079814 (ODbL); roof = median of 4288 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1293517617",
+      "kind": "building",
+      "name": "building",
+      "top_m": 19.57,
+      "base_m": 5.89,
+      "_source": "Outline OSM w1293517617 (ODbL); roof = median of 292 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1294739600",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.43,
+      "base_m": 1.71,
+      "_source": "Outline OSM w1294739600 (ODbL); roof = median of 25 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1319644669",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 5.8,
+      "_source": "Outline OSM w1319644669 (ODbL); roof = median of 73 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1516535905",
+      "kind": "building",
+      "name": "Radiobilerne (building)",
+      "top_m": 7.9,
+      "base_m": 2.11,
+      "_source": "Outline OSM w1516535905 (ODbL); roof = median of 778 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1516936503",
+      "kind": "building",
+      "name": "Galejen (building)",
+      "top_m": 7.19,
+      "base_m": 1.93,
+      "_source": "Outline OSM w1516936503 (ODbL); roof = median of 2332 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1517166922",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 8.98,
+      "_source": "Outline OSM w1517166922 (ODbL); roof = median of 117 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1525679798",
+      "kind": "building",
+      "name": "Stairway to parking basement (utility)",
+      "top_m": 7.24,
+      "base_m": 3.21,
+      "_source": "Outline OSM w1525679798 (ODbL); roof = median of 203 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "r1433982",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 13.74,
+      "base_m": 0.17,
+      "_source": "Outline OSM r1433982 (ODbL); roof = median of 8569 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "r1627113",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 13.81,
+      "base_m": 1.96,
+      "_source": "Outline OSM r1627113 (ODbL); roof = median of 10647 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "r7926899",
+      "kind": "building",
+      "name": "Centralpostbygningen (commercial)",
+      "top_m": 11.35,
+      "base_m": 0.88,
+      "_source": "Outline OSM r7926899 (ODbL); roof = median of 18136 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "#103",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.25,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#104",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.65,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#105",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.76,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#106",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.88,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6174_724, PUNKTSKY_1km_6175_724); from data/stations/research/860000626/kobenhavn_h_structures_heights.geojson (metres above the platform surface, 1.33 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000626/kobenhavn_h_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 1.33,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000626/kobenhavn_h_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (1.33 m DVR90, laser 2025-03-10)"
+  },
+  "pois": [
+    {
+      "id": "resda7fd7b0e9",
+      "category": "ticket",
+      "name": "DSB Salg & Service (indland & udland) / DSB Billetsalg",
+      "level": "0",
+      "x": -48.6,
+      "y": 25.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa,Su 08:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n7194194957 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res2ee85b8223",
+      "category": "locker",
+      "name": "DSB Bagagecenter & GLS pakkeshop (also bagagebokse / lockers)",
+      "level": "0",
+      "x": -32.0,
+      "y": 36.0,
+      "fee": null,
+      "opening_hours": "Mo-Sa 05:30-01:00; Su 06:00-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n6761862166 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "rese1cbdf76c9",
+      "category": "toilet",
+      "name": "Toiletter / Handicaptoilet (betalingstoilet), puslerum",
+      "level": "0",
+      "x": -50.7,
+      "y": -11.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n732619324 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resc1225ab7a8",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (no ticket sales)",
+      "level": "0",
+      "x": 26.2,
+      "y": -17.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-01:00; Sa,Su 00:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page København H, https://www.dsb.dk/trafikinformation/stationer/kobenhavn-h/, read 2026-10-30; 7-Eleven Danmark store list, https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)",
+      "approximate": true,
+      "where": "in the hall"
+    },
+    {
+      "id": "res719e0ba97b",
+      "category": "kiosk",
+      "name": "7-Eleven Express (hall, centre)",
+      "level": "0",
+      "x": -7.6,
+      "y": 15.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n5041276742 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "rese675be2e07",
+      "category": "kiosk",
+      "name": "7-Eleven Express (hall, east)",
+      "level": "0",
+      "x": 43.3,
+      "y": -13.4,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:00-01:00; Fr 05:00-24:00; Sa 00:00-24:00; Su 00:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n10744459623 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "rese3001b3d84",
+      "category": "kiosk",
+      "name": "7-Eleven (platform kiosk)",
+      "level": "0",
+      "x": 31.4,
+      "y": 57.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa,Su,PH 08:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n10744463990 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resd2e9f02767",
+      "category": "cafe",
+      "name": "Lagkagehuset (Reventlowsgade side)",
+      "level": "0",
+      "x": -41.1,
+      "y": 38.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-21:00; Sa,Su,PH 10:00-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; placed OSM node n6372248726 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res4dbf83e797",
+      "category": "cafe",
+      "name": "Lagkagehuset (Bernstorffsgade side)",
+      "level": "0",
+      "x": 65.5,
+      "y": -40.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-19:00; Sa 05:00-17:00; Su 06:00-17:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; placed OSM node n9425571712 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res3c50efea0e",
+      "category": "restaurant",
+      "name": "Dunkin' (Dunkin' Donuts)",
+      "level": "0",
+      "x": 50.8,
+      "y": -1.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 08:00-21:00; Fr,Sa 08:00-22:00; Su 08:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; DSB, \"En moderniseret Københavns Hovedbanegård\" (modernisation page), https://www.dsb.dk/om-dsb/baredygtighed/virksomheden/modernisering-af-kbh-h/, read 2026-10-30; placed OSM node n4341887285 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res94fddf24b4",
+      "category": "atm",
+      "name": "ATM",
+      "level": "0",
+      "x": -41.4,
+      "y": 28.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n7298216059 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res82fac06b2a",
+      "category": "taxi",
+      "name": "Taxi rank 'Københavns Hovedbanegård'",
+      "level": "0",
+      "x": 56.8,
+      "y": -85.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed representative point of the OSM area w244360863 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res5e9696f08d",
+      "category": "restaurant",
+      "name": "Jernbanecafeen",
+      "level": "0",
+      "x": -60.3,
+      "y": 58.8,
+      "fee": null,
+      "opening_hours": "Mo-Su,PH 07:00-02:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n727436488 (ODbL), read 2026-10-30; placed OSM node n727436488 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resa655869fce",
+      "category": "kiosk",
+      "name": "Kabul marked",
+      "level": "0",
+      "x": -39.4,
+      "y": 110.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n765066599 (ODbL), read 2026-10-30; placed OSM node n765066599 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res6975a3faa3",
+      "category": "restaurant",
+      "name": "Library Bar",
+      "level": "0",
+      "x": 4.3,
+      "y": -130.0,
+      "fee": null,
+      "opening_hours": "Su-Th 16:00-24:00; Fr,Sa 16:00-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1439744394 (ODbL), read 2026-10-30; https://ligula.se/en/the-library-bar/, read 2026-10-30; placed OSM node n1439744394 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res98d020b1df",
+      "category": "restaurant",
+      "name": "Poonchai",
+      "level": "0",
+      "x": -82.7,
+      "y": 51.5,
+      "fee": null,
+      "opening_hours": "Tu-Su 12:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4012790860 (ODbL), read 2026-10-30; placed OSM node n4012790860 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res3dd96d372c",
+      "category": "kiosk",
+      "name": "Afghan Market",
+      "level": "0",
+      "x": -46.5,
+      "y": 95.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n6761725714 (ODbL), read 2026-10-30; placed OSM node n6761725714 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resac2a8213cd",
+      "category": "atm",
+      "name": "Lån & Spar",
+      "level": "0",
+      "x": -99.2,
+      "y": -17.7,
+      "fee": null,
+      "opening_hours": "Mo-We,Fr 10:00-16:00; Th 10:00-18:00; Sa,Su,PH off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6761728465 (ODbL), read 2026-10-30; placed OSM node n6761728465 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res2ac5cbe0fe",
+      "category": "shop",
+      "name": "City Hair Salon",
+      "level": "0",
+      "x": -62.5,
+      "y": 79.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:30-17:30; Sa 09:00-14:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6761758937 (ODbL), read 2026-10-30; placed OSM node n6761758937 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res19f9e66287",
+      "category": "restaurant",
+      "name": "Angelini",
+      "level": "0",
+      "x": -3.6,
+      "y": -121.0,
+      "fee": null,
+      "opening_hours": "Tu-Th 17:00-22:30; Fr,Sa 17:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6761916201 (ODbL), read 2026-10-30; https://ligula.se/da/angelini-kobenhavn, read 2026-10-30; placed OSM node n6761916201 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res1a69b45d92",
+      "category": "kiosk",
+      "name": "Bangkok Trading",
+      "level": "-1",
+      "x": -55.5,
+      "y": 73.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9091818722 (ODbL), read 2026-10-30; placed OSM node n9091818722 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res90f26ec11a",
+      "category": "cafe",
+      "name": "DSB København",
+      "level": "0",
+      "x": 147.0,
+      "y": 100.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9152669137 (ODbL), read 2026-10-30; placed OSM node n9152669137 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resa12f363f22",
+      "category": "restaurant",
+      "name": "Takuya restaurant",
+      "level": "0",
+      "x": -66.6,
+      "y": 53.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9590509650 (ODbL), read 2026-10-30; placed OSM node n9590509650 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "resd3ff66a924",
+      "category": "atm",
+      "name": "Lån & Spar Bank",
+      "level": "0",
+      "x": -95.7,
+      "y": -18.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13157507930 (ODbL), read 2026-10-30; placed OSM node n13157507930 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
+    },
+    {
+      "id": "res41c864ef1a",
+      "category": "restaurant",
+      "name": "Esmas",
+      "level": "0",
+      "x": 76.2,
+      "y": -49.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13476696702 (ODbL), read 2026-10-30; placed OSM node n13476696702 (research pass 2026-10-30, data/stations/research/860000626/station_facts.json)"
     }
   ]
 }

@@ -8,20 +8,248 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Platforms: perron 1 (spor 1/2) and perron 2 (spor 3/4) regional 55 cm; perron 3 (spor 11/12) S-tog 92 cm",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register /home/claude/dk/out/dk_register), read 2026-10-30; Wikipedia, \"Høje Taastrup railway station\", https://en.wikipedia.org/wiki/H%C3%B8je_Taastrup_railway_station, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/gtfs_72888)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 21 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/gtfs_72888)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [],
+  "poi_hours": {},
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 1,2, class 55 cm = 0.55 m above rail, 339 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 3,4, class 55 cm = 0.55 m above rail, 339 m long; a recorded design class, not a survey"
+    },
+    "11–12": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 81: tracks 11,12, class 92 cm = 0.92 m above rail, 223 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w26176704",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 13.15,
+      "base_m": 0.05,
+      "_source": "Outline OSM w26176704 (ODbL); roof = median of 13995 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w496715675",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.27,
+      "base_m": 5.35,
+      "_source": "Outline OSM w496715675 (ODbL); roof = median of 80 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w846252137",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.37,
+      "_source": "Outline OSM w846252137 (ODbL); roof = median of 985 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w846252138",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.17,
+      "_source": "Outline OSM w846252138 (ODbL); roof = median of 661 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w846252139",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.18,
+      "_source": "Outline OSM w846252139 (ODbL); roof = median of 756 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w846252140",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.34,
+      "_source": "Outline OSM w846252140 (ODbL); roof = median of 1062 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w846252141",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.42,
+      "_source": "Outline OSM w846252141 (ODbL); roof = median of 738 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142805",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 9.8,
+      "_source": "Outline OSM w1123142805 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142806",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.87,
+      "_source": "Outline OSM w1123142806 (ODbL); roof = median of 118 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142807",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.75,
+      "_source": "Outline OSM w1123142807 (ODbL); roof = median of 123 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142808",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.27,
+      "_source": "Outline OSM w1123142808 (ODbL); roof = median of 174 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142809",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.4,
+      "_source": "Outline OSM w1123142809 (ODbL); roof = median of 133 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142810",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.86,
+      "_source": "Outline OSM w1123142810 (ODbL); roof = median of 194 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142811",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.62,
+      "_source": "Outline OSM w1123142811 (ODbL); roof = median of 125 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142812",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.92,
+      "_source": "Outline OSM w1123142812 (ODbL); roof = median of 176 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142813",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 5.05,
+      "_source": "Outline OSM w1123142813 (ODbL); roof = median of 143 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142814",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.02,
+      "_source": "Outline OSM w1123142814 (ODbL); roof = median of 657 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1123142815",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.02,
+      "_source": "Outline OSM w1123142815 (ODbL); roof = median of 963 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28); underside not measured"
+    },
+    {
+      "from": "w1524349680",
+      "kind": "building",
+      "name": "service",
+      "top_m": 3.57,
+      "base_m": 0.32,
+      "_source": "Outline OSM w1524349680 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w1524349681",
+      "kind": "building",
+      "name": "service",
+      "top_m": 3.53,
+      "base_m": 0.34,
+      "_source": "Outline OSM w1524349681 (ODbL); roof = median of 53 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28)"
+    },
+    {
+      "from": "w1524349682",
+      "kind": "building",
+      "name": "service",
+      "top_m": 3.5,
+      "base_m": 0.31,
+      "_source": "Outline OSM w1524349682 (ODbL); roof = median of 27 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6171_705, PUNKTSKY_1km_6172_705); from data/stations/research/gtfs_72888/hoje_taastrup_structures_heights.geojson (metres above the platform surface, 26.12 m RH 2000, laser 2024-04-28)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/gtfs_72888/hoje_taastrup_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 26.12,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/gtfs_72888/hoje_taastrup_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (26.12 m DVR90, laser 2024-04-28)"
+  },
+  "pois": [
+    {
+      "id": "res3a76227b4b",
+      "category": "pharmacy",
+      "name": "Høje Taastrup Apotek",
+      "level": "0",
+      "x": 8.2,
+      "y": 41.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-17:00; PH off",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n9644122361 (research pass 2026-10-30, data/stations/research/gtfs_72888/station_facts.json)"
+    },
+    {
+      "id": "rese36654481a",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": -30.2,
+      "y": 41.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n5681624491 (read 2026-10-30); placed OSM node n5681624491 (research pass 2026-10-30, data/stations/research/gtfs_72888/station_facts.json)"
     }
   ]
 }

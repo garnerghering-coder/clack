@@ -222,7 +222,19 @@
     "lat": 60.1729133,
     "how": "OSM n4642563750",
     "_source": "OpenStreetMap n4642563750 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 5/6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563750 to platform outlines and register track lines",
+     "source": "OSM n4642563750 geometry (level None): inside rail platform outline w8137144 (ref 6); next 0.0 m from w465367038 (ref 5); register lines: 4.9 m from 'HKI L5', 6.4 m from 'HKI L6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -239,7 +251,19 @@
     "lat": 60.172875,
     "how": "OSM n4642563748",
     "_source": "OpenStreetMap n4642563748 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 7/8"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563748 to platform outlines and register track lines",
+     "source": "OSM n4642563748 geometry (level None): inside rail platform outline w479866825 (ref 7); next 0.0 m from w479866826 (ref 8); register lines: 4.6 m from 'HKI L7', 6.1 m from 'HKI L8'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -256,7 +280,19 @@
     "lat": 60.1728398,
     "how": "OSM n4642563760",
     "_source": "OpenStreetMap n4642563760 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 9/10"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563760 to platform outlines and register track lines",
+     "source": "OSM n4642563760 geometry (level None): inside rail platform outline w479866828 (ref 10); next 0.0 m from w1213305786 (ref 9); register lines: 4.7 m from 'HKI L9', 6.5 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -287,7 +323,17 @@
     "lat": 60.1713216,
     "how": "OSM n4642563726",
     "_source": "OpenStreetMap n4642563726 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563726 to platform outlines and register track lines",
+     "source": "OSM n4642563726 geometry (level -1;0): 5.3 m from rail platform outline w465367044 (ref 11); next 18.4 m from w479866828 (ref 10); register lines: 26.2 m from 'HKI L11', 28.5 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "In the underpass corridor w470004873 (level -1), 5.3 m from the platform 11 outline and 26 m beyond the end of the HKI L11 line. Not within 3 m of a platform, so not settled."
   },
   {
    "kind": "stairs",
@@ -340,7 +386,17 @@
     "lat": 60.1706044,
     "how": "OSM n2039713549",
     "_source": "OpenStreetMap n2039713549 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2039713549 to platform outlines and register track lines",
+     "source": "OSM n2039713549 geometry (level None): 12.8 m from rail platform outline w18378772 (ref H0018); next 34.4 m from w300319781 (ref H0019); register lines: 109.6 m from 'HKI L11', 111.3 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "underpass",
@@ -1643,7 +1699,19 @@
     "lat": 60.172898,
     "how": "OSM w1570456565 (point on the way)",
     "_source": "OpenStreetMap w1570456565 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 19"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w1570456565 to platform outlines and register track lines",
+     "source": "OSM w1570456565 geometry (level 0;-1): inside rail platform outline w479866837 (ref 19); next 15.6 m from w1257427219 (ref 18); register lines: 8.9 m from 'HKI L19', 13.8 m from 'HKI L18'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1662,7 +1730,17 @@
     "lat": 60.1723483,
     "how": "OSM n173248867",
     "_source": "OpenStreetMap n173248867 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n173248867 to platform outlines and register track lines",
+     "source": "OSM n173248867 geometry (level None): 13.1 m from rail platform outline w465367044 (ref 11); next 24.9 m from w8137137 (ref 13); register lines: 20.8 m from 'HKI L11', 25.7 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1681,7 +1759,17 @@
     "lat": 60.1706044,
     "how": "OSM n2039713549",
     "_source": "OpenStreetMap n2039713549 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2039713549 to platform outlines and register track lines",
+     "source": "OSM n2039713549 geometry (level None): 12.8 m from rail platform outline w18378772 (ref H0018); next 34.4 m from w300319781 (ref H0019); register lines: 109.6 m from 'HKI L11', 111.3 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1700,7 +1788,17 @@
     "lat": 60.1701333,
     "how": "OSM n2261292460",
     "_source": "OpenStreetMap n2261292460 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n2261292460 to platform outlines and register track lines",
+     "source": "OSM n2261292460 geometry (level -1;0): 18.0 m from rail platform outline w300319781 (ref H0019); next 39.6 m from w18378772 (ref H0018); register lines: 160.6 m from 'HKI L11', 161.9 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1721,7 +1819,17 @@
     "lat": 60.1703818,
     "how": "OSM n3044084674",
     "_source": "OpenStreetMap n3044084674 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n3044084674 to platform outlines and register track lines",
+     "source": "OSM n3044084674 geometry (level None): 9.6 m from rail platform outline w300319781 (ref H0019); next 12.3 m from w18378772 (ref H0018); register lines: 131.5 m from 'HKI L11', 132.7 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1742,7 +1850,17 @@
     "lat": 60.1713216,
     "how": "OSM n4642563726",
     "_source": "OpenStreetMap n4642563726 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563726 to platform outlines and register track lines",
+     "source": "OSM n4642563726 geometry (level -1;0): 5.3 m from rail platform outline w465367044 (ref 11); next 18.4 m from w479866828 (ref 10); register lines: 26.2 m from 'HKI L11', 28.5 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "In the underpass corridor w470004873 (level -1), 5.3 m from the platform 11 outline and 26 m beyond the end of the HKI L11 line. Not within 3 m of a platform, so not settled."
   },
   {
    "kind": "lift",
@@ -1764,7 +1882,19 @@
     "lat": 60.172875,
     "how": "OSM n4642563748",
     "_source": "OpenStreetMap n4642563748 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 7/8"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563748 to platform outlines and register track lines",
+     "source": "OSM n4642563748 geometry (level None): inside rail platform outline w479866825 (ref 7); next 0.0 m from w479866826 (ref 8); register lines: 4.6 m from 'HKI L7', 6.1 m from 'HKI L8'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1786,7 +1916,19 @@
     "lat": 60.1729133,
     "how": "OSM n4642563750",
     "_source": "OpenStreetMap n4642563750 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 5/6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563750 to platform outlines and register track lines",
+     "source": "OSM n4642563750 geometry (level None): inside rail platform outline w8137144 (ref 6); next 0.0 m from w465367038 (ref 5); register lines: 4.9 m from 'HKI L5', 6.4 m from 'HKI L6'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1808,7 +1950,19 @@
     "lat": 60.1728398,
     "how": "OSM n4642563760",
     "_source": "OpenStreetMap n4642563760 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 9/10"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n4642563760 to platform outlines and register track lines",
+     "source": "OSM n4642563760 geometry (level None): inside rail platform outline w479866828 (ref 10); next 0.0 m from w1213305786 (ref 9); register lines: 4.7 m from 'HKI L9', 6.5 m from 'HKI L10'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -1829,7 +1983,19 @@
     "lat": 60.172898,
     "how": "OSM n11792578113",
     "_source": "OpenStreetMap n11792578113 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 19"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n11792578113 to platform outlines and register track lines",
+     "source": "OSM n11792578113 geometry (level 0;-1): 2.5 m from rail platform outline w479866837 (ref 19); next 18.4 m from w1257427219 (ref 18); register lines: 11.7 m from 'HKI L19', 16.7 m from 'HKI L18'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -3315,7 +3481,7 @@
    "where": "in the station, Kaivokatu 1 (position from OSM)",
    "level_per_plan": "0",
    "note": "paarautatieasema.fi: 'Ravintola on tilapäisesti suljettu' (temporarily closed); no hours given.",
-   "_source": "https://paarautatieasema.fi/p/83/ravintolat/broner, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30",
+   "_source": "https://paarautatieasema.fi/p/83/ravintolat/broner, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HKI.json), read 2026-10-30; https://paarautatieasema.fi/p/83/ravintolat/broner, read 2026-10-30",
    "position": {
     "lon": 24.9404267,
     "lat": 60.172044,
@@ -3325,7 +3491,14 @@
     "to_nearest_platform_m": 17.4,
     "how": "OSM node n1369465635",
     "_source": "OpenStreetMap n1369465635 (ODbL), read 2026-10-30"
-   }
+   },
+   "closed": true,
+   "closed_source": "https://paarautatieasema.fi/p/83/ravintolat/broner, read 2026-10-30",
+   "opening_hours": null,
+   "hours_raw": "Ravintola on tilapäisesti suljettu.",
+   "hours_published": "Ravintola on tilapäisesti suljettu.",
+   "hours_source": "website (paarautatieasema.fi, station owner)",
+   "hours_checked": "2026-10-30"
   },
   {
    "category": "cafe",
@@ -4344,7 +4517,8 @@
     "_source": "OpenStreetMap n316412722 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n316412722 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n316412722 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n316412722, Kaivokatu side outside the station building. kultajousi.fi store pages would not load (/myymalat, /pages/myymalat errors); not in Citycenter's shop list; no branch page found."
   },
   {
    "category": "tattoo",
@@ -4373,9 +4547,9 @@
    "name": "Suomalainen Kirjakauppa",
    "brand": "Suomalainen Kirjakauppa",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Sa 08:00-20:00; Su 09:00-17:00",
+   "hours_source": "website (paarautatieasema.fi, station owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9413546,
@@ -4388,7 +4562,9 @@
     "_source": "OpenStreetMap n1369465559 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1369465559 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n1369465559 (ODbL), read 2026-10-30; https://paarautatieasema.fi/p/100/palvelut/suomalainen-kirjakauppa, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Avoinna maanantai–perjantai 8:00–20:00, lauantai 8:00-20:00, sunnuntai 9:00–17:00"
   },
   {
    "category": "restaurant",
@@ -4476,7 +4652,8 @@
     "_source": "OpenStreetMap n1369465663 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1369465663 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n1369465663 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n1369465663, 87 m from platforms, outside the building. No own website or station/centre page with hours found; not in paarautatieasema.fi or Citycenter directories."
   },
   {
    "category": "restaurant",
@@ -4498,7 +4675,8 @@
     "_source": "OpenStreetMap n1369465673 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1369465673 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n1369465673 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n1369465673 (Hotel Seurahuone, Kaivokatu 12). The hotel's Le Havre page gives address only, no hours; the hotel site now presents 'Ravintola Seurahuone' (Mo-Tu 11.30-22, We-Fr 11.30-23, Sa 13-23, Su closed) with no mention of Le Havre, so not copied. Le Havre may have been renamed/closed - unconfirmed."
   },
   {
    "category": "convenience",
@@ -4549,9 +4727,9 @@
    "name": "Bierhaus München",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 15:00-24:00; Fr,Sa 13:00-02:00",
+   "hours_source": "website (Bierhaus)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.bierhaus.fi/",
    "position": {
     "lon": 24.9393613,
@@ -4564,7 +4742,9 @@
     "_source": "OpenStreetMap n2917442967 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n2917442967 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n2917442967 (ODbL), read 2026-10-30; https://www.bierhaus.fi/munchen, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma–To 15:00–24:00 · Pe–La 13:00–02:00"
   },
   {
    "category": "hairdresser",
@@ -4696,16 +4876,17 @@
     "_source": "OpenStreetMap n4714489589 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4714489589 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4714489589 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n4714489589 (Kaivokatu side). No own website or station/centre page with hours found; not in Citycenter's shop list."
   },
   {
    "category": "cafe",
    "name": "Espresso House",
    "brand": "Espresso House",
    "cuisine": "coffee_shop",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 07:00-19:00; Sa 08:00-19:00; Su off",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9410324,
@@ -4718,7 +4899,9 @@
     "_source": "OpenStreetMap n5012343136 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n5012343136 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n5012343136 (ODbL), read 2026-10-30; https://citycenter.fi/liikkeet/espresso-house-asematunneli/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-Pe 07-19, La 08-19, Su Suljettu"
   },
   {
    "category": "department_store",
@@ -4872,7 +5055,8 @@
     "_source": "OpenStreetMap n10559145548 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10559145548 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10559145548 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n10559145548, Asematunneli level -1. Not in Citycenter's current shop list; no own site found - possibly gone."
   },
   {
    "category": "cafe",
@@ -4923,9 +5107,9 @@
    "name": "Shin Café",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Sa 09:30-20:30; Su 10:00-20:30",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9413614,
@@ -4938,16 +5122,18 @@
     "_source": "OpenStreetMap n11771650439 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11771650439 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11771650439 (ODbL), read 2026-10-30; https://citycenter.fi/liikkeet/shin-cafe/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-La 09.30-20.30, Su 10-20.30"
   },
   {
    "category": "cosmetics",
    "name": "Lush",
    "brand": "Lush",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9415383,
@@ -4960,16 +5146,18 @@
     "_source": "OpenStreetMap n11771745593 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11771745593 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11771745593 (ODbL), read 2026-10-30; https://citycenter.fi/liikkeet/lush/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-Pe 10-20, La 10-19, Su 12-18"
   },
   {
    "category": "florist",
    "name": "Kukkamyynti Piilola Oy",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-20:00; Sa 10:00-19:00; Su 12:00-18:00",
+   "hours_source": "website (Piilola, Citycenter branch)",
+   "hours_checked": "2026-10-30",
    "website": "https://piilola.fi/",
    "position": {
     "lon": 24.941608,
@@ -4982,7 +5170,9 @@
     "_source": "OpenStreetMap n11771777458 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11771777458 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11771777458 (ODbL), read 2026-10-30; https://piilola.fi/pages/kukkakauppa-helsinki-citycenter, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Arkisin 8-20, Lauantaisin 10-19, Sunnuntaisin 12-18"
   },
   {
    "category": "confectionery",
@@ -5121,9 +5311,9 @@
    "name": "The Store",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Sa 10:00-22:00; Su 12:00-18:00",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9418608,
@@ -5136,16 +5326,18 @@
     "_source": "OpenStreetMap n11772137558 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11772137558 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11772137558 (ODbL), read 2026-10-30; https://citycenter.fi/liikkeet/the-store/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-La 10-22, Su 12-18"
   },
   {
    "category": "beauty",
    "name": "Lan Venus Kynsistudio",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-20:00; Sa 10:00-18:00; Su \"sopimuksen mukaan\"",
+   "hours_source": "website (Citycenter, shopping centre over Asematunneli)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 24.9418413,
@@ -5158,7 +5350,9 @@
     "_source": "OpenStreetMap n11772137563 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11772137563 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11772137563 (ODbL), read 2026-10-30; https://citycenter.fi/liikkeet/lan-venus-kynsistudio/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Ma-Pe 10-20, La 10-18, Su Sop. mukaan"
   },
   {
    "category": "clothes",
@@ -5312,7 +5506,8 @@
     "_source": "OpenStreetMap n13173771083 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13173771083 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13173771083 (ODbL), read 2026-10-30",
+   "hours_note": "OSM n13173771083 (north-west of station). No own website or station/centre page with hours found; only aggregator listings."
   },
   {
    "category": "department_store",
@@ -5378,7 +5573,8 @@
     "_source": "OpenStreetMap w300626401 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap w300626401 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap w300626401 (ODbL), read 2026-10-30",
+   "hours_note": "OSM w300626401. No own website or station/centre page with hours found; no web presence found."
   }
  ],
  "plans": [
@@ -5398,7 +5594,7 @@
   }
  ],
  "open": [
-  "Lifts to platforms 1–4 and 11–18: Wikipedia says the Eliel underpass has lifts to all tracks, but OSM maps platform lifts only for 5/6, 7/8, 9/10 and 19, and no owner page lists them.",
+  "Lifts to platforms 1–4 and 11–18: Wikipedia says the Eliel underpass has lifts to all tracks, but OSM maps platform lifts only for 5/6, 7/8, 9/10 and 19, and no owner page lists them. [Lift follow-up 2026-10-30: Geometry settles the mapped lifts: 5/6, 7/8, 9/10 and 19 (two nodes). For platforms 1–4 and 11–18, OSM has no lift within 3 m. n4642563726 (-1;0) is in the underpass corridor 5.3 m from platform 11. Lifts to 1–4 and 11–18 are not settled. Missing: owner text or a plan.]",
   "Which underpass VR's 'northern underpass' (closed 22:30 Fri–Sun and before holidays, opens 05:30) is — the Eliel underpass is assumed but not stated.",
   "Exact positions inside the station for most restaurants/services: paarautatieasema.fi gives only Kaivokatu 1 / Elielinaukio 3; positions come from OSM. Picnic, MFix, SIXT, PostNord machine and the VR Customer Point are not in OSM (no position).",
   "R-kioski Asema-aukio and Kioskihalli were matched to OSM n317551811 / n317551808 by position (15–20 m off); check.",

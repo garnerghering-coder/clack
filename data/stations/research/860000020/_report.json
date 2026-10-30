@@ -1,0 +1,159 @@
+{
+ "clack_id": "860000020",
+ "slug": "aalborg",
+ "flags": [
+  "Platform BIS perron 2 / track 3 (track 3): laser gives 0.86 m above the track bed (≈0.69 m above rail after −0.15…0.2 m), register class 50 = 0.5 m. Not decided; add to REVIEW.md.",
+  "Platform BIS perron 2 / track 4 (track 4): laser gives 0.81 m above the track bed (≈0.64 m above rail after −0.15…0.2 m), register class 50 = 0.5 m. Not decided; add to REVIEW.md.",
+  "w89752311 station building: p95 22.6 m is 11.6 m above the median 11.0 m (a taller neighbour or a mast inside the outline?).",
+  "w1312400857 Kennedy Arkaden (retail): p95 33.0 m is 13.1 m above the median 19.9 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w369146365 (service); w369148898 (busway); w369148899 (busway, cycleway); w402575915 (busway, cycleway, footway, service, tertiary).",
+  "Laser-traced roof (47 m², top 3.1 m above the platform, 3.9 m above the track bed) lies partly over a track: it may be a train (a double-deck X40 is ~4.6 m tall), check in a cross-section.",
+  "Laser-traced roof (94 m², top 7.5 m above the platform) could be a building or hall roof, not a canopy: check OSM and a platform photo."
+ ],
+ "notes": [
+  "terrain model is exactly flat over large areas (a water surface, not ground): 4.00 m over 1534 m², 4.01 m over 1674 m², 4.02 m over 1924 m², 4.03 m over 2235 m², 4.04 m over 2502 m², 4.05 m over 2563 m², 4.06 m over 2546 m², 4.07 m over 2590 m², 4.08 m over 2594 m², 4.09 m over 2755 m², 4.10 m over 2676 m², 4.11 m over 2558 m², 4.12 m over 2386 m², 4.13 m over 2300 m², 4.14 m over 2255 m², 4.15 m over 2104 m², 4.16 m over 1936 m², 4.17 m over 1867 m², 4.18 m over 1690 m², 4.19 m over 1591 m², 4.20 m over 1575 m²"
+ ],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=9.90954,57.03231,9.92256,57.04716",
+ "profile": {
+  "brief": "the brief STATION_3D_RESEARCH_BRIEF_DK_FI.md (Denmark)",
+  "vdatum": "DVR90",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555)",
+  "scan_block": "DHM punktsky PUNKTSKY_1km_6322_555",
+  "box_note": ": the platforms' extent plus 120 m",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, DVR90, gridded here from the laser's ground points (class 2), median per 1 m cell; no-data where there is no ground point",
+  "dtm_licence": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Banedanmark",
+  "register_owner": "Banedanmark",
+  "register_file": "aalborg_platform_banedanmark.geojson",
+  "register_what": "Bilag 3.6 platforms (perron, track, length, height in cm) on Banedanmark track centrelines, with the laser levels",
+  "register_licence": "Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0",
+  "register_text": "Register: Banedanmark Netredegørelse 2027 Bilag 3.6 (perron, track, length, height in cm above rail; table dated 1 August 2023), placed on Banedanmark Open Data (CC BY 4.0) track centrelines and platform outlines; widths are outline area / length.",
+  "id_label": "Perron / track",
+  "object_points": "non-ground (classes 3,4,5,6)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555). https://dataforsyningen.dk/data/3931 (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2).\n- Banedanmark Netredegørelse 2027, Bilag 3.6 (bane.dk), read 2026-10-30; Banedanmark Open Data (services1.arcgis.com/QcgJt0vVxSaqMKl7), CC BY 4.0, read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 0.76,
+  "median_m": 3.95,
+  "max_m": 11.19,
+  "nan_cells": 47156,
+  "size_m": [
+   382,
+   589
+  ],
+  "box_sweref": [
+   555441,
+   6322199,
+   555823,
+   6322788
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "PUNKTSKY_1km_6322_555.laz"
+  ],
+  "scan_date": "2022-03-06",
+  "density_pts_m2_nominal": 8,
+  "flight_height_m": null,
+  "points_in_box": 5999280,
+  "density_in_box": 26.66,
+  "classes": {
+   "2": 2814134,
+   "3": 425575,
+   "4": 231395,
+   "5": 1457869,
+   "6": 1014404,
+   "7": 1695,
+   "8": 31589,
+   "17": 21864,
+   "18": 755
+  },
+  "train_points_class64": 17871
+ },
+ "platforms": [
+  {
+   "bis_object": "perron 1 / track 0",
+   "track": "0",
+   "height_class": "50",
+   "class_height_m": 0.5,
+   "length_m": 109.0,
+   "width_m": 23.1,
+   "roof": null,
+   "track_bed_m": 4.08,
+   "track_bed_points": 3020,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "perron 1 / track 1",
+   "track": "1",
+   "height_class": "50",
+   "class_height_m": 0.5,
+   "length_m": 367.0,
+   "width_m": 7.4,
+   "roof": null,
+   "track_bed_m": 4.07,
+   "track_bed_points": 8859,
+   "platform_surface_m": 4.78,
+   "platform_points": 24209,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.71,
+   "laser_estimate_above_rail_m": 0.53
+  },
+  {
+   "bis_object": "perron 2 / track 3",
+   "track": "3",
+   "height_class": "50",
+   "class_height_m": 0.5,
+   "length_m": 367.0,
+   "width_m": 8.5,
+   "roof": null,
+   "track_bed_m": 3.92,
+   "track_bed_points": 7114,
+   "platform_surface_m": 4.78,
+   "platform_points": 34354,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.86,
+   "laser_estimate_above_rail_m": 0.69
+  },
+  {
+   "bis_object": "perron 2 / track 4",
+   "track": "4",
+   "height_class": "50",
+   "class_height_m": 0.5,
+   "length_m": 367.0,
+   "width_m": 8.6,
+   "roof": null,
+   "track_bed_m": 3.97,
+   "track_bed_points": 7988,
+   "platform_surface_m": 4.78,
+   "platform_points": 35835,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.81,
+   "laser_estimate_above_rail_m": 0.64
+  }
+ ],
+ "platform_surface_m": 4.78,
+ "track_bed_m": 4.02,
+ "trains_in_scan": 6,
+ "structures": {
+  "building": 13,
+  "footbridge": 0,
+  "canopy_osm": 3,
+  "canopy_laser": 2,
+  "hall_roof_laser": 1,
+  "train_in_scan": 6
+ },
+ "photos": 100,
+ "photos_station_related": 25
+}

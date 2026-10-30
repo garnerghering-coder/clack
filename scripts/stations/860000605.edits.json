@@ -8,20 +8,274 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: station building (Sdr. Stationsvej 28A) and platform 1 (track 1) on the south side; island perron 2 (tracks 2/3) and short perron 3 (tracks 4/5, 160 m, east part) to the north; north side exit to Nordre Stationsvej (Baneby)",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; https://en.wikipedia.org/wiki/Slagelse_station, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000605)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 17 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000605)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 1, class 55 cm = 0.55 m above rail, 268 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 2,3, class 55 cm = 0.55 m above rail, 357 m long; a recorded design class, not a survey"
+    },
+    "4–5": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 4,5, class 55 cm = 0.55 m above rail, 160 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000605/slagelse_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w290146554",
+      "kind": "building",
+      "name": "Slagelse Station (station building)",
+      "top_m": 5.54,
+      "base_m": -0.83,
+      "_source": "Outline OSM w290146554 (ODbL); roof = median of 1911 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w290146558",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.21,
+      "_source": "Outline OSM w290146558 (ODbL); roof = median of 544 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w290146559",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.16,
+      "_source": "Outline OSM w290146559 (ODbL); roof = median of 539 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w290146560",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.44,
+      "_source": "Outline OSM w290146560 (ODbL); roof = median of 480 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w290146561",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.46,
+      "_source": "Outline OSM w290146561 (ODbL); roof = median of 560 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w290146562",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 5.14,
+      "base_m": -1.49,
+      "_source": "Outline OSM w290146562 (ODbL); roof = median of 1838 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w290146563",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.8,
+      "_source": "Outline OSM w290146563 (ODbL); roof = median of 309 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w290146564",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.82,
+      "_source": "Outline OSM w290146564 (ODbL); roof = median of 385 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w560394230",
+      "kind": "building",
+      "name": "Posthuset (building)",
+      "top_m": 4.23,
+      "base_m": -0.77,
+      "_source": "Outline OSM w560394230 (ODbL); roof = median of 1927 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w560394253",
+      "kind": "building",
+      "name": "SDU Slagelse (university)",
+      "top_m": 5.57,
+      "base_m": -2.97,
+      "_source": "Outline OSM w560394253 (ODbL); roof = median of 2653 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w625086240",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.74,
+      "_source": "Outline OSM w625086240 (ODbL); roof = median of 179 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w962214809",
+      "kind": "building",
+      "name": "school",
+      "top_m": 13.18,
+      "base_m": -2.78,
+      "_source": "Outline OSM w962214809 (ODbL); roof = median of 492 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w1125506818",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.77,
+      "_source": "Outline OSM w1125506818 (ODbL); roof = median of 452 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w1125506819",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.76,
+      "_source": "Outline OSM w1125506819 (ODbL); roof = median of 366 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w1125506820",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.76,
+      "_source": "Outline OSM w1125506820 (ODbL); roof = median of 380 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); underside not measured"
+    },
+    {
+      "from": "w1156885774",
+      "kind": "building",
+      "name": "service",
+      "top_m": 4.01,
+      "base_m": 0.03,
+      "_source": "Outline OSM w1156885774 (ODbL); roof = median of 23 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30)"
+    },
+    {
+      "from": "w1238405938",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.32,
+      "base_m": 5.35,
+      "_source": "Outline OSM w1238405938 (ODbL); roof = median of 618 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6142_648); from data/stations/research/860000605/slagelse_structures_heights.geojson (metres above the platform surface, 34.53 m RH 2000, laser 2024-03-30); top = the deck the laser saw (class 17, footbridge_decks.json), 7.32 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000605/slagelse_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 34.53,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000605/slagelse_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (34.53 m DVR90, laser 2024-03-30)"
+  },
+  "pois": [
+    {
+      "id": "res38b9d319b9",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Sdr. Stationsvej 28)",
+      "level": "0",
+      "x": -26.2,
+      "y": 6.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:15-22:00; Sa,Su 08:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n4119367070 (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)"
+    },
+    {
+      "id": "res8c56405ea4",
+      "category": "waiting",
+      "name": "Forhal/ventesal",
+      "level": "0",
+      "x": -2.8,
+      "y": 7.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-15:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/slagelse/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "resa4cd4ffddf",
+      "category": "pharmacy",
+      "name": "Jernbaneapoteket",
+      "level": "0",
+      "x": -52.2,
+      "y": 11.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:30-13:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n9603043161 (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)"
+    },
+    {
+      "id": "rese736cc6ba1",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -2.8,
+      "y": 7.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)",
+      "approximate": true,
+      "where": "south side by the station building, and north side by perron 3's east end"
+    },
+    {
+      "id": "resd73dda91ef",
+      "category": "kiosk",
+      "name": "Slik Safari",
+      "level": "0",
+      "x": -14.3,
+      "y": 49.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4119371333 (ODbL), read 2026-10-30; placed OSM node n4119371333 (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)"
+    },
+    {
+      "id": "res102a87da63",
+      "category": "restaurant",
+      "name": "Karas bagels",
+      "level": "0",
+      "x": -19.0,
+      "y": 48.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9422808958 (ODbL), read 2026-10-30; placed OSM node n9422808958 (research pass 2026-10-30, data/stations/research/860000605/station_facts.json)"
     }
   ]
 }

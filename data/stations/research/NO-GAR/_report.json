@@ -1,0 +1,135 @@
+{
+ "clack_id": "NO-GAR",
+ "slug": "oslo_lufthavn",
+ "flags": [
+  "Platform BIS track 4 (track 3,4): laser gives 1.12 m above the track bed (≈0.94 m above rail after −0.15…0.2 m), register class 760 = 0.76 m. Not decided; add to REVIEW.md.",
+  "w173527308 Oslo Airport (building): p95 230.8 m is 5.2 m above the median 225.5 m (a taller neighbour or a mast inside the outline?).",
+  "w173693809 transportation: p95 209.5 m is 4.1 m above the median 205.4 m (a taller neighbour or a mast inside the outline?).",
+  "w173693810 Gardermoen kontrolltårn (transportation): p95 293.2 m is 5.9 m above the median 287.3 m (a taller neighbour or a mast inside the outline?).",
+  "OSM bridge outlines at the platforms that carry roads, tram or service ways, kept as kind 'bridge' (not footbridges): w661039573 (cycleway, service); w661039574 (footway, service, trunk, trunk_link); w661039577 (trunk)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=11.088735,60.188981,11.104735,60.196981",
+ "profile": {
+  "brief": "the Sweden brief, applied to Norway (sources swapped for the Norwegian equivalents)",
+  "vdatum": "NN2000",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Høydedata, project \"NDH Akershus 5pkt 2015\" (id 417, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "scan_block": "hoydedata.no project NDH Akershus 5pkt 2015",
+  "box_note": ": the hoydedata.no export rectangle (platforms plus a margin)",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, NN2000, gridded here from the laser's ground points (class 2), median per 1 m cell; cells with no ground point (under buildings, trains, roofs) are no-data",
+  "dtm_licence": "Høydedata, project \"NDH Akershus 5pkt 2015\" (id 417, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Bane NOR",
+  "register_owner": "Bane NOR",
+  "register_file": "oslo_lufthavn_platform_banenor.geojson",
+  "register_what": "Bane NOR Sportabell platforms (track, length, height in mm, width, type) placed on the OSM track centreline, with the laser levels",
+  "register_licence": "facts from Bane NOR's station page (not open: facts only); line geometry © OpenStreetMap contributors, ODbL; NSR quays © Entur, NLOD",
+  "register_text": "Register: Bane NOR station page, track table (https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/, read 2026-10-30): per track the platform length, height (mm above top of rail), width and type; no coordinates, so each platform is drawn on the OSM track centreline (see `x_geometry` per feature). Heights are Bane NOR's per-platform values, not classes.",
+  "id_label": "Platform",
+  "object_points": "non-ground (classes 1)",
+  "osm_warning": "The laser data is © Kartverket, CC BY 4.0: do not upload values derived from it to OpenStreetMap without Kartverket's permission for OSM.",
+  "sources_md": "- Høydedata, project \"NDH Akershus 5pkt 2015\" (id 417, FKB-Laser 2.0, nominal 5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box. https://hoydedata.no/LaserInnsyn2/ (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2), see `README.md`.\n- Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-airport/ (track table, facts om stasjonen), read 2026-10-30: facts only.\n- Entur National Stop Register quays via journey-planner v3 (NLOD), read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 194.39,
+  "median_m": 202.36,
+  "max_m": 209.71,
+  "nan_cells": 580326,
+  "size_m": [
+   778,
+   959
+  ],
+  "box_sweref": [
+   615867,
+   6674270,
+   616645,
+   6675229
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "eksport_1797514_417.laz"
+  ],
+  "scan_date": "2015-11-15",
+  "density_pts_m2_nominal": 5,
+  "flight_height_m": null,
+  "points_in_box": 4664174,
+  "density_in_box": 6.25,
+  "classes": {
+   "1": 3393470,
+   "2": 852108,
+   "7": 1573,
+   "10": 417023
+  },
+  "train_points_class64": 0
+ },
+ "platforms": [
+  {
+   "bis_object": "track 1",
+   "track": "1,2",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 360.0,
+   "width_m": 12.0,
+   "roof": null,
+   "track_bed_m": 194.95,
+   "track_bed_points": 437,
+   "platform_surface_m": 195.93,
+   "platform_points": 633,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.98,
+   "laser_estimate_above_rail_m": 0.8
+  },
+  {
+   "bis_object": "track 2",
+   "track": "2,3",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 250.0,
+   "width_m": 8.0,
+   "roof": null,
+   "track_bed_m": null,
+   "track_bed_points": 0,
+   "platform_surface_m": null,
+   "platform_points": 0,
+   "platform_side": null,
+   "baninfo_side": null,
+   "note": "no platform surface or track bed found in the laser here (covered by a roof, underground, or too few ground points)"
+  },
+  {
+   "bis_object": "track 4",
+   "track": "3,4",
+   "height_class": "760",
+   "class_height_m": 0.76,
+   "length_m": 360.0,
+   "width_m": 12.0,
+   "roof": null,
+   "track_bed_m": 194.95,
+   "track_bed_points": 1311,
+   "platform_surface_m": 196.07,
+   "platform_points": 105,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "other_side_surface_m": 195.85,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 1.12,
+   "laser_estimate_above_rail_m": 0.94
+  }
+ ],
+ "platform_surface_m": 196.0,
+ "track_bed_m": 194.95,
+ "trains_in_scan": 0,
+ "structures": {
+  "building": 8,
+  "footbridge": 0,
+  "canopy_osm": 8,
+  "canopy_laser": 2,
+  "hall_roof_laser": 0,
+  "train_in_scan": 0
+ },
+ "photos": 100,
+ "photos_station_related": 7
+}

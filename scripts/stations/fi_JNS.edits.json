@@ -67,7 +67,8 @@
       "name": "roof over the platforms (traced from the laser)",
       "top_m": 4.63,
       "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Laserkeilausaineisto 0,5 p, newest per sheet (clack_fi_mml05_N5424G3), Maanmittauslaitos (National Land Survey of Finland), CC BY 4.0; scanned N5424G3 2024-08-06 (20240203_Swissphoto_Joensuu_kesa); from data/stations/research/fi_JNS/joensuu_structures_heights.geojson (metres above the platform surface, 81.26 m RH 2000, laser 2024-08-06); underside not measured",
-      "simplify_m": 2
+      "simplify_m": 2.0,
+      "align_to": "nearest"
     }
   ],
   "terrain": {

@@ -16,12 +16,181 @@
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000783)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 8 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000783)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 6: tracks 2,1, class 55 cm = 0.55 m above rail, 332 m long; a recorded design class, not a survey; other rows for this track: 1 92 cm 0.92 m (180 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    },
+    "2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 6: tracks 2,1, class 55 cm = 0.55 m above rail, 332 m long; a recorded design class, not a survey; other rows for this track: 2 92 cm 0.92 m (180 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    },
+    "11–12": {
+      "height_m": 0.92,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 88: tracks 11,12, class 92 cm = 0.92 m above rail, 115 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w572933169",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.4,
+      "_source": "Outline OSM w572933169 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w572933170",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 11.47,
+      "_source": "Outline OSM w572933170 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w572933171",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 10.21,
+      "_source": "Outline OSM w572933171 (ODbL); roof = median of 142 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w572933175",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 10.27,
+      "_source": "Outline OSM w572933175 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w572934355",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 8.57,
+      "base_m": 5.35,
+      "_source": "Outline OSM w572934355 (ODbL); roof = median of 888 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); top = the deck the laser saw (class 17, footbridge_decks.json), 8.57 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w644299880",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.12,
+      "_source": "Outline OSM w644299880 (ODbL); roof = median of 28 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w1165945577",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.97,
+      "_source": "Outline OSM w1165945577 (ODbL); roof = median of 233 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "#8",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.52,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6172_720, PUNKTSKY_1km_6172_721, PUNKTSKY_1km_6173_720, PUNKTSKY_1km_6173_721); from data/stations/research/860000783/kobenhavn_syd_structures_heights.geojson (metres above the platform surface, 5.47 m RH 2000, laser 2025-03-10); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000783/kobenhavn_syd_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 5.47,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000783/kobenhavn_syd_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (5.47 m DVR90, laser 2025-03-10)"
+  },
+  "pois": [
+    {
+      "id": "resc45b563e42",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": -19.0,
+      "y": -29.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:00-24:00; Fr,Sa 00:00-24:00; Su 06:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page København Syd (slug ny-ellebjerg), https://www.dsb.dk/trafikinformation/stationer/ny-ellebjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n13800668323 (research pass 2026-10-30, data/stations/research/860000783/station_facts.json)"
+    },
+    {
+      "id": "res71e55e3c51",
+      "category": "restaurant",
+      "name": "Station Kebab",
+      "level": "0",
+      "x": 7.7,
+      "y": 3.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n4591487288 (research pass 2026-10-30, data/stations/research/860000783/station_facts.json)"
+    },
+    {
+      "id": "res32c2c3cfd4",
+      "category": "toilet",
+      "name": "Toilet (OSM, fee=no)",
+      "level": "0",
+      "x": 39.6,
+      "y": 5.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk, ODbL), read 2026-10-30; placed OSM node n12303892267 (research pass 2026-10-30, data/stations/research/860000783/station_facts.json)"
+    },
+    {
+      "id": "res2d74dd77b6",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 39.6,
+      "y": 5.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM n12303892267 (read 2026-10-30); placed OSM node n12303892267 (research pass 2026-10-30, data/stations/research/860000783/station_facts.json)"
+    },
+    {
+      "id": "rescb7e650489",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": -19.0,
+      "y": -29.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:30-24:00; Sa,Su 00:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13800668323 (ODbL), read 2026-10-30; placed OSM node n13800668323 (research pass 2026-10-30, data/stations/research/860000783/station_facts.json)"
     }
   ]
 }

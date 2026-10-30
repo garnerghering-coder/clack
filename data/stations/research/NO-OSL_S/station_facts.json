@@ -213,7 +213,17 @@
     "lat": 59.9115903,
     "how": "OSM n5039388335",
     "_source": "OpenStreetMap n5039388335 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388335 to platform outlines and register track lines",
+     "source": "OSM n5039388335 geometry (level 0;1;2): 65.3 m from rail platform outline w312968479 (ref 1); next 77.4 m from w312968480 (ref 2); register lines: 92.2 m from 'track OS1', 92.9 m from 'track OS3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -230,7 +240,17 @@
     "lat": 59.910709,
     "how": "OSM n5039385793",
     "_source": "OpenStreetMap n5039385793 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039385793 to platform outlines and register track lines",
+     "source": "OSM n5039385793 geometry (level 0;1): 113.0 m from rail platform outline r4121517 (ref 15;16, local_ref 15;16); next 113.5 m from r4121519 (ref 17;18); register lines: 113.3 m from 'track OS15', 113.4 m from 'track OS17'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -597,7 +617,17 @@
     "lat": 59.912252,
     "how": "OSM w462147501 (point on the way)",
     "_source": "OpenStreetMap w462147501 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w462147501 to platform outlines and register track lines",
+     "source": "OSM w462147501 geometry (level None): 4.7 m from rail platform outline w312968480 (ref 2); next 14.9 m from w312968479 (ref 1); register lines: 158.3 m from 'track OS1', 164.3 m from 'track OS3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Metro lift at Jernbanetorget: 4.7 m from OSM subway platform ref 2 and more than 140 m from every main-line register track. Not a railway platform lift."
   },
   {
    "kind": "lift",
@@ -618,7 +648,17 @@
     "lat": 59.9120496,
     "how": "OSM w462147502 (point on the way)",
     "_source": "OpenStreetMap w462147502 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w462147502 to platform outlines and register track lines",
+     "source": "OSM w462147502 geometry (level None): 4.4 m from rail platform outline w312968479 (ref 1); next 14.8 m from w312968480 (ref 2); register lines: 146.1 m from 'track OS1', 150.1 m from 'track OS3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Metro lift at Jernbanetorget: 4.4 m from OSM subway platform ref 1 and more than 140 m from every main-line register track. Not a railway platform lift."
   },
   {
    "kind": "underpass",
@@ -1594,7 +1634,17 @@
     "lat": 59.910709,
     "how": "OSM n5039385793",
     "_source": "OpenStreetMap n5039385793 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039385793 to platform outlines and register track lines",
+     "source": "OSM n5039385793 geometry (level 0;1): 113.0 m from rail platform outline r4121517 (ref 15;16, local_ref 15;16); next 113.5 m from r4121519 (ref 17;18); register lines: 113.3 m from 'track OS15', 113.4 m from 'track OS17'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1613,7 +1663,17 @@
     "lat": 59.91031,
     "how": "OSM n5039388333",
     "_source": "OpenStreetMap n5039388333 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388333 to platform outlines and register track lines",
+     "source": "OSM n5039388333 geometry (level 1;2): 27.5 m from rail platform outline r4121519 (ref 17;18, local_ref 17;18); next 28.1 m from r4121517 (ref 15;16); register lines: 27.4 m from 'track OS17', 32.1 m from 'track OS19'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1632,7 +1692,17 @@
     "lat": 59.9115903,
     "how": "OSM n5039388335",
     "_source": "OpenStreetMap n5039388335 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388335 to platform outlines and register track lines",
+     "source": "OSM n5039388335 geometry (level 0;1;2): 65.3 m from rail platform outline w312968479 (ref 1); next 77.4 m from w312968480 (ref 2); register lines: 92.2 m from 'track OS1', 92.9 m from 'track OS3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1651,7 +1721,17 @@
     "lat": 59.9106272,
     "how": "OSM n5039388375",
     "_source": "OpenStreetMap n5039388375 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388375 to platform outlines and register track lines",
+     "source": "OSM n5039388375 geometry (level 1;2): 54.5 m from rail platform outline r4121517 (ref 15;16, local_ref 15;16); next 60.5 m from r4121519 (ref 17;18); register lines: 54.1 m from 'track OS15', 59.9 m from 'track OS17'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1670,7 +1750,17 @@
     "lat": 59.911859,
     "how": "OSM n5039388389",
     "_source": "OpenStreetMap n5039388389 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388389 to platform outlines and register track lines",
+     "source": "OSM n5039388389 geometry (level 1;2): 25.6 m from rail platform outline w312968479 (ref 1); next 41.3 m from w312968480 (ref 2); register lines: 181.1 m from 'track OS3', 181.5 m from 'track OS1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1689,7 +1779,17 @@
     "lat": 59.9114042,
     "how": "OSM n5039388871",
     "_source": "OpenStreetMap n5039388871 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388871 to platform outlines and register track lines",
+     "source": "OSM n5039388871 geometry (level 1;2): 78.8 m from rail platform outline w312968479 (ref 1); next 94.4 m from w312968480 (ref 2); register lines: 182.6 m from 'track OS15', 183.7 m from 'track OS9'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -1708,7 +1808,17 @@
     "lat": 59.9107445,
     "how": "OSM n5039388901",
     "_source": "OpenStreetMap n5039388901 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5039388901 to platform outlines and register track lines",
+     "source": "OSM n5039388901 geometry (level 1;2): 87.9 m from rail platform outline r4121517 (ref 15;16, local_ref 15;16); next 91.4 m from r4121519 (ref 17;18); register lines: 87.6 m from 'track OS15', 91.0 m from 'track OS17'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   }
  ],
  "entrances": [
@@ -4565,28 +4675,6 @@
    }
   },
   {
-   "category": "bar",
-   "name": "Svanen Cocktailbar",
-   "brand": null,
-   "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
-   "website": "https://www.svanenoslo.no",
-   "position": {
-    "lon": 10.7447916,
-    "lat": 59.9123665,
-    "osm_id": "n288416026",
-    "osm_level": null,
-    "in_station_building": false,
-    "to_nearest_platform_m": 19.4,
-    "how": "OSM node n288416026",
-    "_source": "OpenStreetMap n288416026 (ODbL), read 2026-10-30"
-   },
-   "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n288416026 (ODbL), read 2026-10-30"
-  },
-  {
    "category": "restaurant",
    "name": "Egon Byporten",
    "brand": "Egon",
@@ -4789,9 +4877,9 @@
    "name": "Dressmann XL",
    "brand": "Dressmann",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7515472,
@@ -4804,16 +4892,18 @@
     "_source": "OpenStreetMap n3132157591 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n3132157591 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n3132157591 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/dressmann-xl/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 9:00–20:00; Lørdag 10:00–18:00; Søndag Stengt"
   },
   {
    "category": "pharmacy",
    "name": "Vita",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 10:00-19:00; Su off",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7533324,
@@ -4826,7 +4916,9 @@
     "_source": "OpenStreetMap n3132157596 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n3132157596 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n3132157596 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/vita/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 07:00–21:00; Lørdag 10:00–19:00; Søndag Stengt"
   },
   {
    "category": "supermarket",
@@ -4892,7 +4984,8 @@
     "_source": "OpenStreetMap n3566985693 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n3566985693 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n3566985693 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Not on oslo-s.no's current eatery list (25 places); gladkokken.no shows no hours or address. Station facts already flag it as possibly closed; no owner statement of closure found. OSM nodes n3566985693 / n12968899187."
   },
   {
    "category": "pharmacy",
@@ -4980,7 +5073,8 @@
     "_source": "OpenStreetMap n4354447593 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4354447593 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4354447593 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. tavex.no/besok-oss-i-norge/ lists no Oslo branch at all (only Lillestrøm, Hønefoss, Stavanger, each marked 'Foreløpig stengt'). The Oslo outlet (OSM n4354447593, ~221 m from station) is probably gone, but the site does not say so explicitly."
   },
   {
    "category": "restaurant",
@@ -5032,8 +5126,8 @@
    "brand": "Vero Moda",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Oslo City / Steen & Strøm, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7452384,
@@ -5046,7 +5140,10 @@
     "_source": "OpenStreetMap n4736654312 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4736654312 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4736654312 (ODbL), read 2026-10-30; https://oslo-city.steenstrom.no/butikker-restauranter/vero-moda, read 2026-10-30",
+   "hours_note": "Not found. This is OSM n4736654312 on Karl Johans gate (~484 m from the station, not at the station); no branch page with hours found on veromoda.com via search.",
+   "hours_raw": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt",
+   "hours_published": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt"
   },
   {
    "category": "pub",
@@ -5068,7 +5165,8 @@
     "_source": "OpenStreetMap n4743369019 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4743369019 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4743369019 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website found (only aggregator/guide listings). OSM n4743369019 ~337 m away, not at the station."
   },
   {
    "category": "sports",
@@ -5185,9 +5283,9 @@
    "name": "BIT",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Su 07:00-20:00",
+   "hours_source": "website (BIT / Bit Union)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7572685,
@@ -5200,7 +5298,9 @@
     "_source": "OpenStreetMap n5235692723 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n5235692723 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n5235692723 (ODbL), read 2026-10-30; https://www.bit.no/home/stores, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Bussterminalen, 10 Schweigaards gate: Monday - Friday: 07.00 - 20.00 / Saturday: 07.00 - 20.00 / Sunday: 07.00 - 20.00"
   },
   {
    "category": "atm",
@@ -5266,7 +5366,8 @@
     "_source": "OpenStreetMap n5865823435 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n5865823435 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n5865823435 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. OSM n5865823435 is on Karl Johans gate (~522 m away, not at the station); no owner branch page found."
   },
   {
    "category": "optician",
@@ -5361,9 +5462,9 @@
    "name": "Mester Grønn",
    "brand": "Mester grønn",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-19:00; Su,PH 10:30-18:00",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7537214,
@@ -5376,7 +5477,9 @@
     "_source": "OpenStreetMap n6453911563 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n6453911563 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n6453911563 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/mester-gronn/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 06:00–21:00; Lørdag 08:00–19:00; Søndag og helligdager 10:30–18:00"
   },
   {
    "category": "bar",
@@ -5405,9 +5508,9 @@
    "name": "Vita",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 10:00-19:00; Su off",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.752992,
@@ -5420,7 +5523,9 @@
     "_source": "OpenStreetMap n7118275588 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7118275588 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7118275588 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/vita/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 07:00–21:00; Lørdag 10:00–19:00; Søndag Stengt"
   },
   {
    "category": "books",
@@ -5442,16 +5547,17 @@
     "_source": "OpenStreetMap n7118275589 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7118275589 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7118275589 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No Tanum on Byporten's (or Oslo City's) current shop list; Byporten lists a Norli bookshop on 1. etasje (08:00 - 21:00, Lør 10:00 - 20:00, Søn stengt), but that it replaced this Tanum (OSM n7118275589) is not stated, so not applied."
   },
   {
    "category": "electronics",
    "name": "Kjell & Company",
    "brand": "Kjell & Company",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-20:00; Su off",
+   "hours_source": "website (Byporten, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7527238,
@@ -5464,16 +5570,18 @@
     "_source": "OpenStreetMap n7118275590 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7118275590 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7118275590 (ODbL), read 2026-10-30; https://byporten.no/butikker/kjell-company/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "09:00 - 21:00, Lør: 09:00 - 20:00, Søn: Stengt (1. etasje)"
   },
   {
    "category": "books",
    "name": "Ark Pocket",
    "brand": "Ark bokhandel",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-20:00; Su off",
+   "hours_source": "website (Byporten, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7524502,
@@ -5486,7 +5594,9 @@
     "_source": "OpenStreetMap n7118275592 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7118275592 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7118275592 (ODbL), read 2026-10-30; https://byporten.no/butikker/ark/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "08:00 - 21:00, Lør: 09:00 - 20:00, Søn: Stengt (ARK, 1. etasje)"
   },
   {
    "category": "perfumery",
@@ -5559,9 +5669,9 @@
    "name": "b.young",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": "https://www.byoung.com/nb-no/shop-finder/oslo-s",
    "position": {
     "lon": 10.7528418,
@@ -5574,7 +5684,9 @@
     "_source": "OpenStreetMap n7118275598 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7118275598 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7118275598 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/b-young/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 08:00–21:00; Lørdag 09:00–18:00; Søndag Stengt"
   },
   {
    "category": "books",
@@ -5640,7 +5752,8 @@
     "_source": "OpenStreetMap n7904813107 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7904813107 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7904813107 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website (only aggregators). OSM n7904813107 is outside the station near Byporten/Jernbanetorget."
   },
   {
    "category": "photo",
@@ -5750,7 +5863,8 @@
     "_source": "OpenStreetMap n9804669059 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9804669059 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9804669059 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website (only directory listings, not used). OSM n9804669059 ~471 m away, not at the station."
   },
   {
    "category": "collector",
@@ -5794,29 +5908,8 @@
     "_source": "OpenStreetMap n10681396795 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10681396795 (ODbL), read 2026-10-30"
-  },
-  {
-   "category": "restaurant",
-   "name": "Masala politics",
-   "brand": null,
-   "cuisine": "indian",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
-   "website": "https://www.masalapolitics.no",
-   "position": {
-    "lon": 10.744913,
-    "lat": 59.9124134,
-    "osm_id": "n10858331890",
-    "osm_level": null,
-    "in_station_building": false,
-    "to_nearest_platform_m": 11.9,
-    "how": "OSM node n10858331890",
-    "_source": "OpenStreetMap n10858331890 (ODbL), read 2026-10-30"
-   },
-   "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10858331890 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10681396795 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. blockbridge.no is robots-disallowed for WebFetch. OSM n10681396795 is in the bus terminal building, not Oslo S."
   },
   {
    "category": "dry_cleaning",
@@ -5860,7 +5953,8 @@
     "_source": "OpenStreetMap n10911462667 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10911462667 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10911462667 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website (only directory/gulesider results, not used). OSM n10911462667 ~348 m away, not at the station."
   },
   {
    "category": "convenience",
@@ -5882,7 +5976,8 @@
     "_source": "OpenStreetMap n10947974230 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10947974230 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10947974230 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. 7-eleven.no/butikker lists 'Karl Johansgt. 13' but hours are behind the script-filled toggle. Not at the station (OSM n10947974230 ~533 m away)."
   },
   {
    "category": "ice_cream",
@@ -5926,7 +6021,8 @@
     "_source": "OpenStreetMap n10947974232 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10947974232 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10947974232 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website (only aggregator). OSM n10947974232 ~504 m away, not at the station."
   },
   {
    "category": "clothes",
@@ -5949,28 +6045,6 @@
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
    "_source": "OpenStreetMap n11244164210 (ODbL), read 2026-10-30"
-  },
-  {
-   "category": "bar",
-   "name": "Hub bar",
-   "brand": null,
-   "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
-   "website": null,
-   "position": {
-    "lon": 10.7495461,
-    "lat": 59.9124779,
-    "osm_id": "n12085970032",
-    "osm_level": null,
-    "in_station_building": false,
-    "to_nearest_platform_m": 13.8,
-    "how": "OSM node n12085970032",
-    "_source": "OpenStreetMap n12085970032 (ODbL), read 2026-10-30"
-   },
-   "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12085970032 (ODbL), read 2026-10-30"
   },
   {
    "category": "cafe",
@@ -6039,28 +6113,6 @@
    "_source": "OpenStreetMap n12841457601 (ODbL), read 2026-10-30"
   },
   {
-   "category": "bar",
-   "name": "Himkok",
-   "brand": null,
-   "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
-   "website": null,
-   "position": {
-    "lon": 10.751524,
-    "lat": 59.914271,
-    "osm_id": "n12967020097",
-    "osm_level": null,
-    "in_station_building": false,
-    "to_nearest_platform_m": 21.9,
-    "how": "OSM node n12967020097",
-    "_source": "OpenStreetMap n12967020097 (ODbL), read 2026-10-30"
-   },
-   "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12967020097 (ODbL), read 2026-10-30"
-  },
-  {
    "category": "restaurant",
    "name": "Gladkokken Restaurant",
    "brand": null,
@@ -6080,7 +6132,8 @@
     "_source": "OpenStreetMap n12968899187 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12968899187 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12968899187 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Same business as 'Gladkokken' above: not on oslo-s.no's eatery list; gladkokken.no shows no hours/address. OSM n12968899187."
   },
   {
    "category": "restaurant",
@@ -6176,8 +6229,8 @@
    "brand": null,
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Oslo City / Steen & Strøm, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7523189,
@@ -6190,7 +6243,9 @@
     "_source": "OpenStreetMap n13469011558 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13469011558 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13469011558 (ODbL), read 2026-10-30; https://oslo-city.steenstrom.no/butikker-restauranter/bik-bok, read 2026-10-30",
+   "hours_raw": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt",
+   "hours_published": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt"
   },
   {
    "category": "clothes",
@@ -6198,8 +6253,8 @@
    "brand": "Vero Moda",
    "cuisine": null,
    "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "hours_source": "website (Oslo City / Steen & Strøm, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7527097,
@@ -6212,16 +6267,19 @@
     "_source": "OpenStreetMap n13469011560 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13469011560 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13469011560 (ODbL), read 2026-10-30; https://oslo-city.steenstrom.no/butikker-restauranter/vero-moda, read 2026-10-30",
+   "hours_note": "Not found. This is OSM n4736654312 on Karl Johans gate (~484 m from the station, not at the station); no branch page with hours found on veromoda.com via search.",
+   "hours_raw": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt",
+   "hours_published": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt"
   },
   {
    "category": "clothes",
    "name": "Ichi",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7525373,
@@ -6234,7 +6292,9 @@
     "_source": "OpenStreetMap n13469894267 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13469894267 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13469894267 (ODbL), read 2026-10-30; https://oslo-s.no/butikker/ichi/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag – fredag 08:00–21:00; Lørdag 09:00–18:00; Søndag Stengt"
   },
   {
    "category": "chemist",
@@ -6307,9 +6367,9 @@
    "name": "BAKE ME UP",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa,Su 07:00-22:00",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.752409,
@@ -6322,7 +6382,9 @@
     "_source": "OpenStreetMap n14131837922 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n14131837922 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n14131837922 (ODbL), read 2026-10-30; https://oslo-s.no/spisesteder/bake-me-up/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag - fredag 05:30–22:00; Lørdag - søndag 07:00–22:00"
   },
   {
    "category": "hairdresser",
@@ -6344,16 +6406,17 @@
     "_source": "OpenStreetMap n14132607194 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n14132607194 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n14132607194 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website found by search. OSM n14132607194 ~362 m away (Bjørvika side), not in the station."
   },
   {
    "category": "florist",
    "name": "Floriss Byporten",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_source": "website (Byporten, centre owner)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7516,
@@ -6366,7 +6429,9 @@
     "_source": "OpenStreetMap n14132647987 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n14132647987 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n14132647987 (ODbL), read 2026-10-30; https://byporten.no/butikker/floriss/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "08:00 - 21:00, Lør: 10:00 - 20:00, Søn: 12:00 - 18:00 (Gateplan m/inngang fra senteret)"
   },
   {
    "category": "bar",
@@ -6410,7 +6475,8 @@
     "_source": "OpenStreetMap n14279078225 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n14279078225 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n14279078225 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. No own website (only company-register results). OSM n14279078225 ~371 m away, not at the station."
   },
   {
    "category": "tailor",
@@ -6572,7 +6638,7 @@
  "open": [
   "Floor heights: no open source measures them.",
   "The station-map image (Kart-Oslo-S-2025_mars-1.jpg) could not be read, so positions within each hall are mostly OSM's. Only some places have a 'where' in words: ticket office between tracks 8 and 9, toilets opposite La Baguette by the escalator to Flytogterminalen, lockers via the escalator by Deli de Luca, Starbucks on the second floor, Narvesen by inngang nord, Flytoget machines at track 10.",
-  "Lifts to tracks 13–19 (Bane NOR) are not in the OSM extract. The extract also lacks the main-line platforms 1–19: its platform list holds only metro, tram and bus stops. Lift positions on those platforms are still open.",
+  "Lifts to tracks 13–19 (Bane NOR) are not in the OSM extract. The extract also lacks the main-line platforms 1–19: its platform list holds only metro, tram and bus stops. Lift positions on those platforms are still open. [Lift follow-up 2026-10-30: The raw OSM extract does have the main-line platforms as relations: 13;14 r4121520, 15;16 r4121517, 17;18 r4121519, 19 r6825728. No lift lies within 3 m of any of them. The nearest, hall lift n5039388333 (1;2), is 27 m from 17;18. The only main-line platform lift in OSM is n4291296610, from footbridge w429931729 to platform 3/4. Bane NOR's June 2026 tender plans lifts from the underpass to all platforms. Lifts to tracks 13–19 are not settled.]",
   "oslo-s.no and the magazine disagree on where some places are. La Baguette and Pronto di Olivia: plan 1 (web) vs Flytogterminalen (magazine). Oslo Visitor Centre: plan U (web) vs Østbanehallen (magazine). Magazine entries 19–23 (Deli de Luca, Upper Crust, Entur, Bake Me Up, Smoothie Xchange) have no clear section heading. Burger King appears on both plan 1 and plan 2.",
   "Several shop pages print a second location line, 'Hovedhallen plan U', which may just be the map label. It was ignored where the page also gives another level.",
   "Joker Oslo S hours on oslo-s.no ('Hver dag 08:00–18:00') look unusually short for a station grocery, and OSM says 05:00/06:00–24:00. This needs checking.",
@@ -6604,6 +6670,24 @@
    "question": "Missing hours",
    "answer": "Every shop and eatery on oslo-s.no's lists (46) has hours from oslo-s.no. Sporet (Kirkens Bymisjon) and the toilets have none published.",
    "_source": "oslo-s.no shop and eatery pages, read 2026-10-30"
+  }
+ ],
+ "dropped": [
+  {
+   "name": "Svanen Cocktailbar",
+   "reason": "own site address is about 280–510 m from Oslo S, not in the station (hours follow-up 2026-10-30)"
+  },
+  {
+   "name": "Masala politics",
+   "reason": "own site address is about 280–510 m from Oslo S, not in the station (hours follow-up 2026-10-30)"
+  },
+  {
+   "name": "Hub bar",
+   "reason": "own site address is about 280–510 m from Oslo S, not in the station (hours follow-up 2026-10-30)"
+  },
+  {
+   "name": "Himkok",
+   "reason": "own site address is about 280–510 m from Oslo S, not in the station (hours follow-up 2026-10-30)"
   }
  ]
 }

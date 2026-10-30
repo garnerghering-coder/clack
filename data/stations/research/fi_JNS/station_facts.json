@@ -61,7 +61,19 @@
     "lat": 62.6010463,
     "how": "OSM n11162525854",
     "_source": "OpenStreetMap n11162525854 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n11162525854 to platform outlines and register track lines",
+     "source": "OSM n11162525854 geometry (level 0;1): inside rail platform outline r16527225 (ref 1); next 16.6 m from r16527226 (ref 2;3); register lines: 4.9 m from 'JNS L1', 12.3 m from 'JNS L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -79,7 +91,19 @@
     "lat": 62.6009689,
     "how": "OSM n11162525855",
     "_source": "OpenStreetMap n11162525855 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n11162525855 to platform outlines and register track lines",
+     "source": "OSM n11162525855 geometry (level 0;1): inside rail platform outline r16527226 (ref 2;3); next 17.3 m from r16527225 (ref 1); register lines: 4.4 m from 'JNS L3', 7.5 m from 'JNS L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -153,7 +177,19 @@
     "lat": 62.6010463,
     "how": "OSM n11162525854",
     "_source": "OpenStreetMap n11162525854 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n11162525854 to platform outlines and register track lines",
+     "source": "OSM n11162525854 geometry (level 0;1): inside rail platform outline r16527225 (ref 1); next 16.6 m from r16527226 (ref 2;3); register lines: 4.9 m from 'JNS L1', 12.3 m from 'JNS L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -172,7 +208,19 @@
     "lat": 62.6009689,
     "how": "OSM n11162525855",
     "_source": "OpenStreetMap n11162525855 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n11162525855 to platform outlines and register track lines",
+     "source": "OSM n11162525855 geometry (level 0;1): inside rail platform outline r16527226 (ref 2;3); next 17.3 m from r16527225 (ref 1); register lines: 4.4 m from 'JNS L3', 7.5 m from 'JNS L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -309,7 +357,6 @@
  "plans": [],
  "open": [
   "Level heights: no source measures them; the laser pass flags platform 1 at only 0.58 m above the track bed vs class korkea (see REVIEW).",
-  "Lifts and overpass stairs are OSM only; no owner text names lifts. The overpass way itself is not among the OSM connections extracted (only its stairs/lifts).",
   "Whether platform 1 is an edge platform at the Asemaparkki side and which face of the 2/3 island is platform 2: not confirmed by a plan.",
   "Old station building: what remains open there (VR still says rail-replacement buses leave from beside the station building) is not described by any source read.",
   "R-kioski, waiting area, WC and taxi are not in OSM: positions only as text ('ground floor of Asemaparkki').",
@@ -345,6 +392,27 @@
    "question": "Missing hours",
    "answer": "Waiting area (VR/city/JOJO) and R-kioski (own site) settled.",
    "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/joensuu, read 2026-10-30; https://www.r-kioski.fi/kioskit/joensuu-asema/, read 2026-10-30"
+  },
+  {
+   "question": "Lifts and overpass stairs are OSM only; no owner text names lifts. The overpass way itself is not among the OSM connections extracted (only its stairs/lifts).",
+   "answer": "Lifts serve platform 1, platform 2/3 (Which platform each lift serves is settled by geometry: n11162525854 serves platform 1 and n11162525855 serves the 2/3 island (both inside the outlines, levels 0;1). Owner confirmation of the lifts is still missing.)",
+   "evidence": [
+    {
+     "what": "distance of lift n11162525854 to platform outlines and register track lines",
+     "source": "OSM n11162525854 geometry (level 0;1): inside rail platform outline r16527225 (ref 1); next 16.6 m from r16527226 (ref 2;3); register lines: 4.9 m from 'JNS L1', 12.3 m from 'JNS L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n11162525855 to platform outlines and register track lines",
+     "source": "OSM n11162525855 geometry (level 0;1): inside rail platform outline r16527226 (ref 2;3); next 17.3 m from r16527225 (ref 1); register lines: 4.4 m from 'JNS L3', 7.5 m from 'JNS L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Joensuu: no lifts named; 'direct, barrier-free connection to the train platform areas'",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/joensuu",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

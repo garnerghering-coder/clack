@@ -97,7 +97,19 @@
     "lat": 61.1703745,
     "how": "OSM n10598809640",
     "_source": "OpenStreetMap n10598809640 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10598809640 to platform outlines and register track lines",
+     "source": "OSM n10598809640 geometry (level -1;0): inside rail platform outline r19532712 (ref 1;2); next 13.5 m from r19532711 (ref 3;4); register lines: 5.3 m from 'TL L2', 8.1 m from 'TL L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -131,7 +143,19 @@
     "lat": 61.1705307,
     "how": "OSM n10598809638",
     "_source": "OpenStreetMap n10598809638 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10598809638 to platform outlines and register track lines",
+     "source": "OSM n10598809638 geometry (level -1;0): inside rail platform outline r19532711 (ref 3;4); next 16.3 m from r19532712 (ref 1;2); register lines: 6.4 m from 'TL L4', 8.9 m from 'TL L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -167,7 +191,19 @@
     "lat": 61.1705307,
     "how": "OSM n10598809638",
     "_source": "OpenStreetMap n10598809638 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10598809638 to platform outlines and register track lines",
+     "source": "OSM n10598809638 geometry (level -1;0): inside rail platform outline r19532711 (ref 3;4); next 16.3 m from r19532712 (ref 1;2); register lines: 6.4 m from 'TL L4', 8.9 m from 'TL L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -186,7 +222,19 @@
     "lat": 61.1703745,
     "how": "OSM n10598809640",
     "_source": "OpenStreetMap n10598809640 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10598809640 to platform outlines and register track lines",
+     "source": "OSM n10598809640 geometry (level -1;0): inside rail platform outline r19532712 (ref 1;2); next 13.5 m from r19532711 (ref 3;4); register lines: 5.3 m from 'TL L2', 8.1 m from 'TL L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -318,8 +366,7 @@
  ],
  "plans": [],
  "open": [
-  "Lifts and stairs are OSM only: no VR text, plan or photo checked. Which tracks each platform serves (1–2 / 3–4) is inferred from Digitraffic track spacing and OSM positions.",
-  "Whether the east end of the underpass has stairs/lift to street level is not in the extract.",
+  "Whether the east end of the underpass has stairs/lift to street level is not in the extract. [Lift follow-up 2026-10-30: Not settled. Missing: any source on the east end of the underpass.]",
   "No signposted names; no heights (laser ≈0.68–0.72 m above rail vs class 0.55 m).",
   "Ticket machine: not mentioned by VR, none in OSM.",
   "Chinese wave hours OSM only."
@@ -337,6 +384,27 @@
    "question": "Which platforms have stairs/lifts?",
    "answer": "Per OSM, one underpass with a lift and stairs up to each of the two platforms (the one nearest the station, tracks 1–2, and the far one, tracks 3–4), plus stairs to street level on the station side. No owner source describes them; VR only says the platforms are high with step-free boarding of low-floor trains.",
    "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TL.json), read 2026-10-30; VR 'Toijala (Akaa)' station page, https://www.vr.fi/rautatieasemat-ja-reitit/toijala, read 2026-10-30; Wikipedia 'Toijala railway station', https://en.wikipedia.org/wiki/Toijala_railway_station, read 2026-10-30"
+  },
+  {
+   "question": "Lifts and stairs are OSM only: no VR text, plan or photo checked. Which tracks each platform serves (1–2 / 3–4) is inferred from Digitraffic track spacing and OSM positions.",
+   "answer": "Lifts serve platform 1/2, platform 3/4 (Settled by geometry against Digitraffic lines. n10598809640 lies between TL L2 (5.3 m) and TL L1 (8.1 m), inside '1;2', so it serves island 1/2. n10598809638 lies between TL L4 (6.4 m) and TL L3 (8.9 m), inside '3;4', so it serves island 3/4. Lift existence is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n10598809640 to platform outlines and register track lines",
+     "source": "OSM n10598809640 geometry (level -1;0): inside rail platform outline r19532712 (ref 1;2); next 13.5 m from r19532711 (ref 3;4); register lines: 5.3 m from 'TL L2', 8.1 m from 'TL L1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n10598809638 to platform outlines and register track lines",
+     "source": "OSM n10598809638 geometry (level -1;0): inside rail platform outline r19532711 (ref 3;4); next 16.3 m from r19532712 (ref 1;2); register lines: 6.4 m from 'TL L4', 8.9 m from 'TL L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Toijala: no lifts mentioned",
+     "source": "https://www.vr.fi/en/railway-stations-and-routes/toijala",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

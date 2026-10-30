@@ -21,7 +21,37 @@
    "_source": "Banedanmark/Niras screening application \"NFSP0576/NA 0074 Hillerød Station - opgradering og fornyelse\", https://www.trafikstyrelsen.dk/Media/638930050665056206/Ans%c3%b8gning.PDF, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30"
   }
  ],
- "platform_sides": [],
+ "platform_sides": [
+  {
+   "platform_bis": "perron 1 / track 1",
+   "track": "1",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 1 (the train stops with the platform to its west)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 1; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 1 / track 11",
+   "track": "11",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 11 (the train stops with the platform to its east)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 1 / track 11; read 2026-10-30",
+   "note": "raised ground on both sides of the track; the higher side was taken"
+  },
+  {
+   "platform_bis": "perron 2 / track 3",
+   "track": "3",
+   "side": "east",
+   "meaning": "the platform lies on the east side of track 3 (the train stops with the platform to its east)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 3; read 2026-10-30"
+  },
+  {
+   "platform_bis": "perron 2 / track 4",
+   "track": "4",
+   "side": "west",
+   "meaning": "the platform lies on the west side of track 4 (the train stops with the platform to its west)",
+   "_source": "laser (2024-04-28, raised ground beside the register's track line) + Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0 platform perron 2 / track 4; read 2026-10-30"
+  }
+ ],
  "connections": [
   {
    "kind": "footbridge",
@@ -279,7 +309,8 @@
     "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4261837129 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (only aggregators). OSM n4261837129."
   },
   {
    "category": "fast_food",
@@ -301,7 +332,8 @@
     "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n4429455834 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (nothing). OSM n4429455834 (fvst:fixme no_pos — position uncertain)."
   },
   {
    "category": "bar",
@@ -323,15 +355,16 @@
     "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n8117602488 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (nothing). OSM n8117602488."
   }
  ],
  "plans": [],
  "open": [
-  "Exact position of the new footbridge, its stairs and lift towers, and which platforms each lift serves: not in owner text.",
+  "Exact position of the new footbridge, its stairs and lift towers, and which platforms each lift serves: not in owner text. [Lift follow-up 2026-10-30: Not settled. As of 12 Oct 2026 the lifts were not yet installed (expected by year end), and no per-platform positions are published.]",
   "Whether the old tunnel (w150549083) and old footbridge (w26380520) are still usable on 2026-10-30: not stated.",
   "Lokaltog platforms (tracks 11/12, new) and their numbering: not in Bilag 3.6 or any source read.",
-  "DSB's page gives no lift/stairs info; it predates the rebuild in places.",
+  "DSB's page gives no lift/stairs info; it predates the rebuild in places. [Lift follow-up 2026-10-30: DSB having no lift text is consistent with the lifts not yet being installed (Banedanmark, 12 Oct 2026). Positions are still unknown.]",
   "Lagkagehuset hours from OSM only.",
   "No owner plan found (Trafikstyrelsen's 'Stadieplanen' PDF not read)."
  ],

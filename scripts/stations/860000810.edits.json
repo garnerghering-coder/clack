@@ -8,20 +8,311 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: station building and platform 1 (track 1, 72 cm) on the Banegårdspladsen side; island perron 2 (tracks 2/3) and perron 3 (tracks 4/5), 55 cm",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000810)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 27 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000810)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.72,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 2: tracks 1, class 72 cm = 0.72 m above rail, 286 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000810/naestved_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w115776625",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 7.16,
+      "base_m": -2.12,
+      "_source": "Outline OSM w115776625 (ODbL); roof = median of 1367 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w115776679",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.07,
+      "base_m": -2.44,
+      "_source": "Outline OSM w115776679 (ODbL); roof = median of 275 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w115776683",
+      "kind": "building",
+      "name": "building",
+      "top_m": 12.49,
+      "base_m": -0.48,
+      "_source": "Outline OSM w115776683 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w115776738",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.07,
+      "base_m": -0.67,
+      "_source": "Outline OSM w115776738 (ODbL); roof = median of 616 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w115776743",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.65,
+      "base_m": -0.82,
+      "_source": "Outline OSM w115776743 (ODbL); roof = median of 195 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w115776772",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.68,
+      "_source": "Outline OSM w115776772 (ODbL); roof = median of 91 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "w609181738",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.63,
+      "base_m": -0.68,
+      "_source": "Outline OSM w609181738 (ODbL); roof = median of 224 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609181924",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.63,
+      "base_m": -0.67,
+      "_source": "Outline OSM w609181924 (ODbL); roof = median of 279 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609183947",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.64,
+      "base_m": -0.67,
+      "_source": "Outline OSM w609183947 (ODbL); roof = median of 251 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609184328",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.64,
+      "base_m": -0.68,
+      "_source": "Outline OSM w609184328 (ODbL); roof = median of 228 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609185774",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.64,
+      "base_m": -0.68,
+      "_source": "Outline OSM w609185774 (ODbL); roof = median of 275 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609185800",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.86,
+      "base_m": -0.53,
+      "_source": "Outline OSM w609185800 (ODbL); roof = median of 108 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609188897",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.63,
+      "base_m": -0.67,
+      "_source": "Outline OSM w609188897 (ODbL); roof = median of 137 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609189534",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.63,
+      "base_m": -0.68,
+      "_source": "Outline OSM w609189534 (ODbL); roof = median of 173 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609189983",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.91,
+      "base_m": -0.48,
+      "_source": "Outline OSM w609189983 (ODbL); roof = median of 26 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609190760",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.85,
+      "base_m": -0.49,
+      "_source": "Outline OSM w609190760 (ODbL); roof = median of 84 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609192049",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.41,
+      "base_m": -0.44,
+      "_source": "Outline OSM w609192049 (ODbL); roof = median of 80 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w609192532",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.64,
+      "base_m": -0.68,
+      "_source": "Outline OSM w609192532 (ODbL); roof = median of 260 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w641161976",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 6.8,
+      "base_m": 5.18,
+      "_source": "Outline OSM w641161976 (ODbL); roof = median of 1532 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); top = the deck the laser saw (class 17, footbridge_decks.json), 6.8 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w1164158599",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.54,
+      "_source": "Outline OSM w1164158599 (ODbL); roof = median of 74 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "w1164158600",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.31,
+      "_source": "Outline OSM w1164158600 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "w1164158602",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.35,
+      "_source": "Outline OSM w1164158602 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "w1164158603",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.33,
+      "_source": "Outline OSM w1164158603 (ODbL); roof = median of 18 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "w1164158604",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.81,
+      "base_m": -0.51,
+      "_source": "Outline OSM w1164158604 (ODbL); roof = median of 1305 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29)"
+    },
+    {
+      "from": "w1164158629",
+      "kind": "roof",
+      "name": "building",
+      "top_m": 2.51,
+      "_source": "Outline OSM w1164158629 (ODbL); roof = median of 74 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured"
+    },
+    {
+      "from": "#28",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.68,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#29",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.63,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6123_675, PUNKTSKY_1km_6123_676, PUNKTSKY_1km_6124_675, PUNKTSKY_1km_6124_676); from data/stations/research/860000810/naestved_structures_heights.geojson (metres above the platform surface, 14.38 m RH 2000, laser 2024-03-29); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000810/naestved_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 14.38,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000810/naestved_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (14.38 m DVR90, laser 2024-03-29)"
+  },
+  "pois": [
+    {
+      "id": "res7380ff2f8a",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Næstved Station)",
+      "level": "0",
+      "x": -0.3,
+      "y": 11.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-22:45; Sa,Su 06:15-22:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n9595163049 (research pass 2026-10-30, data/stations/research/860000810/station_facts.json)"
+    },
+    {
+      "id": "res4b84a430cc",
+      "category": "waiting",
+      "name": "Ventesal/forhal",
+      "level": "0",
+      "x": -1.5,
+      "y": 7.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 04:30-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/nastved/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000810/station_facts.json)",
+      "approximate": true,
+      "where": "in the station building"
+    },
+    {
+      "id": "res92750a6cc7",
+      "category": "atm",
+      "name": "Arbejdernes Landsbank",
+      "level": "0",
+      "x": -23.8,
+      "y": 45.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12812285176 (ODbL), read 2026-10-30; placed OSM node n12812285176 (research pass 2026-10-30, data/stations/research/860000810/station_facts.json)"
     }
   ]
 }

@@ -39,7 +39,19 @@
     "lat": 55.6832542,
     "how": "OSM w642816830 (point on the way)",
     "_source": "OpenStreetMap w642816830 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 1 (spor 1/2)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642816830 to platform outlines and register track lines",
+     "source": "OSM w642816830 geometry (level -1;0): inside rail platform outline r8907087 (ref 1;2); next 10.7 m from r8907381 (ref 3;4); register lines: 9.5 m from 'perron 2 / track 3', 22.1 m from 'perron 2 / track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the OSM 1;2 outline r8907087 (levels -1;0). Banedanmark's register has only the perron 2 line here, so the label comes from the OSM ref and the station facts. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -56,7 +68,19 @@
     "lat": 55.6830582,
     "how": "OSM w642818720 (point on the way)",
     "_source": "OpenStreetMap w642818720 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 3/4)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642818720 to platform outlines and register track lines",
+     "source": "OSM w642818720 geometry (level -1;0): inside rail platform outline r8907381 (ref 3;4); next 29.8 m from r8907087 (ref 1;2); register lines: 15.0 m from 'perron 2 / track 3', 15.1 m from 'perron 2 / track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the OSM 3;4 outline r8907381 (tagged light_rail = S-tog), 17 m beyond the end of the register's perron 2 line. The station facts call it 'about 47 m beyond the end of perron 1, perron 1 side'; geometry contradicts that and puts it on perron 2. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -74,7 +98,19 @@
     "lat": 55.6834916,
     "how": "OSM w642816846 (point on the way)",
     "_source": "OpenStreetMap w642816846 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 3/4)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642816846 to platform outlines and register track lines",
+     "source": "OSM w642816846 geometry (level -2;-1): inside rail platform outline r8907381 (ref 3;4); next 14.3 m from r8907087 (ref 1;2); register lines: 3.8 m from 'perron 2 / track 4', 6.7 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -91,7 +127,17 @@
     "lat": 55.6836669,
     "how": "OSM n5703164369",
     "_source": "OpenStreetMap n5703164369 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5703164369 to platform outlines and register track lines",
+     "source": "OSM n5703164369 geometry (level -2;-1;0): 20.4 m from rail platform outline r8395268 (ref None); next 21.9 m from r8907381 (ref 3;4); register lines: 19.8 m from 'perron 2 / track 4', 32.6 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Street to metro transfer lift (-2;-1;0): 20.4 m from the metro platform outline and 19.8 m from the track 4 line. Not a DSB perron lift."
   },
   {
    "kind": "escalator",
@@ -356,7 +402,19 @@
     "lat": 55.6832542,
     "how": "OSM w642816830 (point on the way)",
     "_source": "OpenStreetMap w642816830 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 1 (spor 1/2)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642816830 to platform outlines and register track lines",
+     "source": "OSM w642816830 geometry (level -1;0): inside rail platform outline r8907087 (ref 1;2); next 10.7 m from r8907381 (ref 3;4); register lines: 9.5 m from 'perron 2 / track 3', 22.1 m from 'perron 2 / track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the OSM 1;2 outline r8907087 (levels -1;0). Banedanmark's register has only the perron 2 line here, so the label comes from the OSM ref and the station facts. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -375,7 +433,19 @@
     "lat": 55.6834916,
     "how": "OSM w642816846 (point on the way)",
     "_source": "OpenStreetMap w642816846 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 3/4)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642816846 to platform outlines and register track lines",
+     "source": "OSM w642816846 geometry (level -2;-1): inside rail platform outline r8907381 (ref 3;4); next 14.3 m from r8907087 (ref 1;2); register lines: 3.8 m from 'perron 2 / track 4', 6.7 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -394,7 +464,19 @@
     "lat": 55.6830582,
     "how": "OSM w642818720 (point on the way)",
     "_source": "OpenStreetMap w642818720 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "perron 2 (spor 3/4)"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift w642818720 to platform outlines and register track lines",
+     "source": "OSM w642818720 geometry (level -1;0): inside rail platform outline r8907381 (ref 3;4); next 29.8 m from r8907087 (ref 1;2); register lines: 15.0 m from 'perron 2 / track 3', 15.1 m from 'perron 2 / track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Inside the OSM 3;4 outline r8907381 (tagged light_rail = S-tog), 17 m beyond the end of the register's perron 2 line. The station facts call it 'about 47 m beyond the end of perron 1, perron 1 side'; geometry contradicts that and puts it on perron 2. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -413,7 +495,17 @@
     "lat": 55.6836669,
     "how": "OSM n5703164369",
     "_source": "OpenStreetMap n5703164369 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5703164369 to platform outlines and register track lines",
+     "source": "OSM n5703164369 geometry (level -2;-1;0): 20.4 m from rail platform outline r8395268 (ref None); next 21.9 m from r8907381 (ref 3;4); register lines: 19.8 m from 'perron 2 / track 4', 32.6 m from 'perron 2 / track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Street to metro transfer lift (-2;-1;0): 20.4 m from the metro platform outline and 19.8 m from the track 4 line. Not a DSB perron lift."
   }
  ],
  "entrances": [
@@ -1230,9 +1322,9 @@
    "name": "Guldkjær",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-18:00; Sa 10:00-15:00; Su off",
+   "hours_source": "website (Guldkjær)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 12.5729044,
@@ -1245,16 +1337,18 @@
     "_source": "OpenStreetMap n6698890253 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n6698890253 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n6698890253 (ODbL), read 2026-10-30; https://www.guldkjaer.dk/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag–fredag 10.00–18.00; Lørdag 10.00–15.00; Søndag lukket"
   },
   {
    "category": "chemist",
    "name": "Matas",
    "brand": "Matas",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 09:00-19:00; Sa 10:00-18:00; Su 11:00-17:00",
+   "hours_source": "website (Matas)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 12.5718143,
@@ -1267,7 +1361,9 @@
     "_source": "OpenStreetMap n7674397299 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n7674397299 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n7674397299 (ODbL), read 2026-10-30; https://www.matas.dk/find-butik/koebenhavn---noerreport, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Matas Nørreport, Frederiksborggade 18: Mandag–Torsdag 09:00 - 19:00; (I dag/fredag) 09:00 - 19:00; Lørdag 10:00 - 18:00; Søndag 11:00 - 17:00"
   },
   {
    "category": "stationery",
@@ -1406,9 +1502,9 @@
    "name": "Level six Bar",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Th 11:30-23:30; Fr 11:30-01:00; Sa 12:00-01:00; Su 12:00-23:00",
+   "hours_source": "website (Scandic Hotels)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 12.571729,
@@ -1421,7 +1517,9 @@
     "_source": "OpenStreetMap n10790595109 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10790595109 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10790595109 (ODbL), read 2026-10-30; https://www.scandichotels.com/en/hotels/scandic-norreport, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Level Six – Bar: Monday-Thursday 11:30-23:30; Friday 11:30-01:00; Saturday 12:00-01:00; Sunday 12:00-23:00"
   },
   {
    "category": "restaurant",
@@ -1531,7 +1629,8 @@
     "_source": "OpenStreetMap n13473940354 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13473940354 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13473940354 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: foetex.dk store finder (JS-rendered, no store data readable); /butikker URL errors. OSM n13473940354 (bakery counter of føtex City)."
   },
   {
    "category": "cafe",
@@ -1553,12 +1652,13 @@
     "_source": "OpenStreetMap n13922570419 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n13922570419 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n13922570419 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. Tried: web search (nothing). OSM n13922570419."
   }
  ],
  "plans": [],
  "open": [
-  "No owner plan; DSB lists only 'Elevator' and 'Trapper' (no escalators) while OSM maps several escalators. Platform-to-level assignment (-1 vs -2) and real level names not confirmed.",
+  "No owner plan; DSB lists only 'Elevator' and 'Trapper' (no escalators) while OSM maps several escalators. Platform-to-level assignment (-1 vs -2) and real level names not confirmed. [Lift follow-up 2026-10-30: Geometry: w642816830 (-1;0) serves perron 1, and w642816846 (-2;-1) and w642818720 (-1;0) serve perron 2 (OSM 3;4, tagged light_rail). w642818720 sits inside the perron 2 outline, not beyond perron 1 as the facts say. Both platforms are tagged level -1. The real level names and the escalators are not settled.]",
   "Toilets, lockers, waiting room, parking not on the DSB page; OSM toilet w1571069920 owner/fee unconfirmed.",
   "7-Eleven hours conflict between DSB (perron 05.30-24.00; street shops 24h with a contradicting prose note), 7-Eleven's list and OSM.",
   "Shops around Nørreport (Føtex, McDonald's, Netto, Matas, bars) are street shops outside the station and were left out.",

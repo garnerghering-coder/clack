@@ -1,0 +1,172 @@
+{
+ "what": "footbridge deck and roof levels over the platform tracks",
+ "method": ", per bridge, on a 1.2 m-wide strip along the OSM line, over the part that lies above the tracks\n(within 8 m of a platform track line):\n  - deck_top_m: median of the bridge-deck class (Lantmäteriet/Helsinki class 17) points = the open deck's walking surface\n    (plus railings and anything lying on it; p10/p90 given);\n  - top_surface_m: median of non-ground object points (class 1, or 6 where buildings are classed) more than 2 m above\n    that deck, or above the platform when no deck points exist. Without deck-class points this surface is EITHER an open\n    deck that the classification left unclassified (railings included) OR the roof of an enclosed bridge: the laser alone\n    cannot tell which, so deck_top_m stays null and the bridge is flagged (OSM covered=*, photos or a drawing decide).\nHeights in the pack's vertical datum; *_above_platform_m = minus the pack's platform surface.",
+ "source": "laser odense_laser_station_2025.laz (scan 2025-02-20); bridge lines and tags: OpenStreetMap (ODbL), 860000512.osm; track lines: odense_platform_banedanmark.geojson",
+ "bridges": [
+  {
+   "osm_id": "w263719741",
+   "name": "Byens Bro",
+   "osm_tags": {
+    "highway": "cycleway",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 54,
+   "points_class17": 78,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": 22.3,
+   "deck_p10_p90_m": [
+    14.0,
+    22.61
+   ],
+   "deck_above_platform_m": 7.4,
+   "deck_above_track_bed_m": 8.21,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w376969681",
+   "name": "Byens Bro",
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 53,
+   "points_class17": 1124,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": 22.55,
+   "deck_p10_p90_m": [
+    22.34,
+    22.64
+   ],
+   "deck_above_platform_m": 7.65,
+   "deck_above_track_bed_m": 8.46,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w432556980",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 15,
+   "points_class17": 124,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": 22.54,
+   "deck_p10_p90_m": [
+    22.51,
+    22.58
+   ],
+   "deck_above_platform_m": 7.64,
+   "deck_above_track_bed_m": 8.45,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w432556981",
+   "name": null,
+   "osm_tags": {
+    "highway": "steps",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 24,
+   "points_class17": 3,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": null,
+   "osm_covered": null,
+   "osm_start_date": null,
+   "note": "no deck-class or roof points on the strip (too few points, or the bridge is newer than the scan 2025-02-20)"
+  },
+  {
+   "osm_id": "w432556982",
+   "name": null,
+   "osm_tags": {
+    "highway": "footway",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 15,
+   "points_class17": 116,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": 22.61,
+   "deck_p10_p90_m": [
+    22.57,
+    22.65
+   ],
+   "deck_above_platform_m": 7.71,
+   "deck_above_track_bed_m": 8.52,
+   "osm_covered": null,
+   "osm_start_date": null
+  },
+  {
+   "osm_id": "w432556989",
+   "name": null,
+   "osm_tags": {
+    "highway": "steps",
+    "bridge": "yes",
+    "layer": "1"
+   },
+   "crosses_register_tracks": [],
+   "strip_area_m2": 21,
+   "points_class17": 0,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": null,
+   "osm_covered": null,
+   "osm_start_date": null,
+   "note": "no deck-class or roof points on the strip (too few points, or the bridge is newer than the scan 2025-02-20)"
+  },
+  {
+   "osm_id": "w591537479",
+   "name": "Byens Bro",
+   "osm_tags": {
+    "layer": "1",
+    "man_made": "bridge"
+   },
+   "crosses_register_tracks": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "strip_area_m2": 272,
+   "points_class17": 5439,
+   "platform_surface_m": 14.9,
+   "track_bed_m": 14.09,
+   "deck_top_m": 22.53,
+   "deck_p10_p90_m": [
+    14.26,
+    22.64
+   ],
+   "deck_above_platform_m": 7.63,
+   "deck_above_track_bed_m": 8.44,
+   "osm_covered": null,
+   "osm_start_date": null
+  }
+ ]
+}

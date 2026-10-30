@@ -8,20 +8,223 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal / street level",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000501)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 12 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000501)."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [],
+  "poi_hours": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 1: tracks 1,3, class 55 cm = 0.55 m above rail, 331 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000501/middelfart_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w220749281",
+      "kind": "building",
+      "name": "Middelfart Midtpunkt (retail)",
+      "top_m": 3.74,
+      "base_m": -3.89,
+      "_source": "Outline OSM w220749281 (ODbL); roof = median of 6453 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w327668260",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 2.12,
+      "base_m": -6.0,
+      "_source": "Outline OSM w327668260 (ODbL); roof = median of 5249 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w409833300",
+      "kind": "building",
+      "name": "building",
+      "top_m": 0.74,
+      "base_m": -2.84,
+      "_source": "Outline OSM w409833300 (ODbL); roof = median of 230 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w409833308",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.61,
+      "base_m": -2.45,
+      "_source": "Outline OSM w409833308 (ODbL); roof = median of 578 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w454743378",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.95,
+      "_source": "Outline OSM w454743378 (ODbL); roof = median of 2500 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08); underside not measured"
+    },
+    {
+      "from": "w454743379",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.96,
+      "_source": "Outline OSM w454743379 (ODbL); roof = median of 42 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08); underside not measured"
+    },
+    {
+      "from": "w669672924",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -2.01,
+      "_source": "Outline OSM w669672924 (ODbL); roof = median of 150 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08); underside not measured"
+    },
+    {
+      "from": "w669673054",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.95,
+      "base_m": -0.49,
+      "_source": "Outline OSM w669673054 (ODbL); roof = median of 219 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w669673087",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.54,
+      "base_m": -0.82,
+      "_source": "Outline OSM w669673087 (ODbL); roof = median of 359 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w669673403",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.59,
+      "base_m": -0.91,
+      "_source": "Outline OSM w669673403 (ODbL); roof = median of 202 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w669674337",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.41,
+      "base_m": -0.35,
+      "_source": "Outline OSM w669674337 (ODbL); roof = median of 144 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    },
+    {
+      "from": "w1083298807",
+      "kind": "building",
+      "name": "The Platform (building)",
+      "top_m": 7.12,
+      "base_m": -0.86,
+      "_source": "Outline OSM w1083298807 (ODbL); roof = median of 4182 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_546); from data/stations/research/860000501/middelfart_structures_heights.geojson (metres above the platform surface, 12.87 m RH 2000, laser 2023-03-08)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000501/middelfart_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 12.87,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000501/middelfart_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (12.87 m DVR90, laser 2023-03-08)"
+  },
+  "pois": [
+    {
+      "id": "res57a3f8364d",
+      "category": "toilet",
+      "name": "Toiletter/Handicaptoilet",
+      "level": "0",
+      "x": 5.6,
+      "y": 13.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30; placed OSM node n275963877 (research pass 2026-10-30, data/stations/research/860000501/station_facts.json)"
+    },
+    {
+      "id": "res769c3a749d",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -13.3,
+      "y": 2.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/middelfart/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000501/station_facts.json)",
+      "approximate": true,
+      "where": "station hall with toilets and ticket machine"
+    },
+    {
+      "id": "resf6af5d262d",
+      "category": "bus",
+      "name": "Middelfart Busstation",
+      "level": "0",
+      "x": 36.0,
+      "y": -22.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30; placed representative point of the OSM area w178125657 (research pass 2026-10-30, data/stations/research/860000501/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res47b254c46f",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": 17.4,
+      "y": -3.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000501.json), read 2026-10-30; placed OSM node n3344711055 (research pass 2026-10-30, data/stations/research/860000501/station_facts.json)"
+    },
+    {
+      "id": "res30efb92198",
+      "category": "shop",
+      "name": "FM Elektronik & Hvidevare",
+      "level": "0",
+      "x": 38.1,
+      "y": 9.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-17:00; Sa 10:00-13:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13752928001 (ODbL), read 2026-10-30; placed OSM node n13752928001 (research pass 2026-10-30, data/stations/research/860000501/station_facts.json)"
     }
   ]
 }

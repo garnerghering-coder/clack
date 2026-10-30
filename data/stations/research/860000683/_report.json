@@ -1,0 +1,162 @@
+{
+ "clack_id": "860000683",
+ "slug": "hillerod",
+ "flags": [
+  "Station rebuilt Feb 2026–Sep 2027 (new footbridge opened 12 Oct 2026, Banedanmark): platform outlines may change",
+  "Platform BIS perron 1 / track 11 (track 11): laser gives 0.78 m above the track bed (≈0.61 m above rail after −0.15…0.2 m), register class 92 = 0.92 m. Not decided; add to REVIEW.md.",
+  "Platform BIS perron 2 / track 3 (track 3): laser gives 1.27 m above the track bed (≈1.09 m above rail after −0.15…0.2 m), register class 92 = 0.92 m. Not decided; add to REVIEW.md.",
+  "w26380515 station building: p95 50.4 m is 5.4 m above the median 45.0 m (a taller neighbour or a mast inside the outline?).",
+  "w598442302 bridge: p95 42.7 m is 7.2 m above the median 35.5 m (a taller neighbour or a mast inside the outline?)."
+ ],
+ "notes": [],
+ "osm_source": "https://api.openstreetmap.org/api/0.6/map?bbox=12.30562,55.92288,12.31647,55.93289",
+ "profile": {
+  "brief": "the brief STATION_3D_RESEARCH_BRIEF_DK_FI.md (Denmark)",
+  "vdatum": "DVR90",
+  "crs": "ETRS89 / UTM 32N (EPSG:25832)",
+  "laser_line": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707)",
+  "scan_block": "DHM punktsky PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707",
+  "box_note": ": the platforms' extent plus 120 m",
+  "dtm_what": "Ground, 1 m, float32, EPSG:25832, DVR90, gridded here from the laser's ground points (class 2), median per 1 m cell; no-data where there is no ground point",
+  "dtm_licence": "Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707)",
+  "ground_how": "ground grid from the laser class 2 (see the GeoTIFF tags)",
+  "register_short": "Banedanmark",
+  "register_owner": "Banedanmark",
+  "register_file": "hillerod_platform_banedanmark.geojson",
+  "register_what": "Bilag 3.6 platforms (perron, track, length, height in cm) on Banedanmark track centrelines, with the laser levels",
+  "register_licence": "Bilag 3.6: facts from Banedanmark's network statement; geometry Banedanmark Open Data, CC BY 4.0",
+  "register_text": "Register: Banedanmark Netredegørelse 2027 Bilag 3.6 (perron, track, length, height in cm above rail; table dated 1 August 2023), placed on Banedanmark Open Data (CC BY 4.0) track centrelines and platform outlines; widths are outline area / length.",
+  "id_label": "Perron / track",
+  "object_points": "non-ground (classes 3,4,5,6)",
+  "osm_warning": "The laser data is CC BY 4.0: do not upload values derived from it to OpenStreetMap without the licensor's permission for OSM.",
+  "sources_md": "- Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6202_706, PUNKTSKY_1km_6202_707, PUNKTSKY_1km_6203_706, PUNKTSKY_1km_6203_707). https://dataforsyningen.dk/data/3931 (scan {scan}; {points} points in the box, {density} per m²; classes {classes}).\n- Ground grid: made here from the same laser (class 2).\n- Banedanmark Netredegørelse 2027, Bilag 3.6 (bane.dk), read 2026-10-30; Banedanmark Open Data (services1.arcgis.com/QcgJt0vVxSaqMKl7), CC BY 4.0, read 2026-10-30."
+ },
+ "ground": {
+  "min_m": 26.92,
+  "median_m": 35.45,
+  "max_m": 39.35,
+  "nan_cells": 35261,
+  "size_m": [
+   310,
+   464
+  ],
+  "box_sweref": [
+   706692,
+   6202605,
+   707002,
+   6203069
+  ],
+  "tiles": []
+ },
+ "laser": {
+  "tiles": [
+   "PUNKTSKY_1km_6202_706.laz",
+   "PUNKTSKY_1km_6202_707.laz",
+   "PUNKTSKY_1km_6203_706.laz",
+   "PUNKTSKY_1km_6203_707.laz"
+  ],
+  "scan_date": "2024-04-28",
+  "density_pts_m2_nominal": 8,
+  "flight_height_m": null,
+  "points_in_box": 2394028,
+  "density_in_box": 16.64,
+  "classes": {
+   "2": 1168951,
+   "3": 94439,
+   "4": 80190,
+   "5": 542945,
+   "6": 429922,
+   "7": 39122,
+   "9": 13193,
+   "14": 3892,
+   "17": 17705,
+   "18": 3669
+  },
+  "train_points_class64": 14652
+ },
+ "platforms": [
+  {
+   "bis_object": "perron 1 / track 1",
+   "track": "1",
+   "height_class": "92",
+   "class_height_m": 0.92,
+   "length_m": 187.0,
+   "width_m": 8.4,
+   "roof": null,
+   "track_bed_m": 35.9,
+   "track_bed_points": 2634,
+   "platform_surface_m": 36.88,
+   "platform_points": 6303,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 0.98,
+   "laser_estimate_above_rail_m": 0.81
+  },
+  {
+   "bis_object": "perron 1 / track 11",
+   "track": "11",
+   "height_class": "92",
+   "class_height_m": 0.92,
+   "length_m": 144.0,
+   "width_m": 10.6,
+   "roof": null,
+   "track_bed_m": 36.08,
+   "track_bed_points": 2219,
+   "platform_surface_m": 36.86,
+   "platform_points": 6315,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "other_side_surface_m": 36.73,
+   "side_note": "raised ground on both sides of the track; the higher side was taken",
+   "surface_minus_bed_m": 0.78,
+   "laser_estimate_above_rail_m": 0.61
+  },
+  {
+   "bis_object": "perron 2 / track 3",
+   "track": "3",
+   "height_class": "92",
+   "class_height_m": 0.92,
+   "length_m": 199.0,
+   "width_m": 7.8,
+   "roof": null,
+   "track_bed_m": 35.81,
+   "track_bed_points": 1812,
+   "platform_surface_m": 37.08,
+   "platform_points": 9571,
+   "platform_side": "right",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 1.27,
+   "laser_estimate_above_rail_m": 1.09
+  },
+  {
+   "bis_object": "perron 2 / track 4",
+   "track": "4",
+   "height_class": "92",
+   "class_height_m": 0.92,
+   "length_m": 218.0,
+   "width_m": 7.7,
+   "roof": null,
+   "track_bed_m": 35.94,
+   "track_bed_points": 3173,
+   "platform_surface_m": 37.08,
+   "platform_points": 9704,
+   "platform_side": "left",
+   "baninfo_side": null,
+   "surface_minus_bed_m": 1.14,
+   "laser_estimate_above_rail_m": 0.97
+  }
+ ],
+ "platform_surface_m": 36.98,
+ "track_bed_m": 35.92,
+ "trains_in_scan": 5,
+ "structures": {
+  "building": 6,
+  "footbridge": 1,
+  "canopy_osm": 3,
+  "canopy_laser": 1,
+  "hall_roof_laser": 0,
+  "train_in_scan": 5
+ },
+ "photos": 100,
+ "photos_station_related": 81
+}

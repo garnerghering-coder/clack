@@ -1,0 +1,620 @@
+{
+ "NO-ASR": [
+  {
+   "name": "Narvesen",
+   "osm_id": "n6122924656",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#008 'Asker jbst.', Torvvn. 4) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "Sparebanken Øst Asker",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-15:00",
+   "hours_raw": "Mandag–fredag kl. 10:00–15:00 (Bankveien 1, 1383 Asker)",
+   "hours_source": "website (Sparebanken Øst)",
+   "source_url": "https://www.oest.no/kontor/asker/",
+   "read": "2026-10-30",
+   "note": "Office page live, no closure notice; oest.no/kontakt-oss/ body text lists only Drammen, Hokksund and Oslo. Outside the station building (OSM n9253807110, ~104 m from station centre)."
+  },
+  {
+   "name": "Danske bank Asker og Bærum",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. danskebank.no shows no office list (only 'Finn oss' search widget, no data); Danske Bank's Norwegian personal customers were transferred to Nordea in Nov 2024, so this branch (OSM n9264747033, ~187 m away, outside station) may no longer serve the public. Not confirmed by an owner page."
+  }
+ ],
+ "NO-DRM": [
+  {
+   "name": "Narvesen (Drammen jbst., store 030)",
+   "osm_id": "n1262634963",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#030 'Drammen jbst.', Strømsø Torg 1) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "Palmen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website found by search; OSM n4194763830 is ~249 m from the station, outside the station building."
+  }
+ ],
+ "NO-GAR": [
+  {
+   "name": "Narvesen (Gardermoen jbst.)",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#039 'Gardermoen jbst.') but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found. Avinor has no 'Gardermoen jbst.' entry; whether it is one of the 'Narvesen ankomst' units is not established."
+  },
+  {
+   "name": "Narvesen (ankomst innland)",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/Narvesen-ankomst-innland/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours."
+  },
+  {
+   "name": "Narvesen (ankomst utland)",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/narvesen-ankomst-utland/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours."
+  },
+  {
+   "name": "Burger King",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/burger-king/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours. burgerking.no restaurant list returned no data to WebFetch."
+  },
+  {
+   "name": "Joe & The Juice",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/joe-and-the-juice/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours. joejuice.com store finder is robots-disallowed for WebFetch."
+  },
+  {
+   "name": "Oslo Food Hub",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/oslo-food-hub/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours."
+  },
+  {
+   "name": "Asia Street Cooking",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/asia-street-cooking/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours."
+  },
+  {
+   "name": "Peppes Pizza",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/peppes-pizza/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours. peppes.no restaurant pages are robots-disallowed for WebFetch."
+  },
+  {
+   "name": "Ritazza",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Åpent når det er flygninger",
+   "hours_source": "website (Avinor, airport owner)",
+   "source_url": "https://www.avinor.no/flyplass/oslo/shopping-og-mat/ritazza-ankomst/",
+   "read": "2026-10-30",
+   "note": "Avinor shop page gives no clock hours, only 'Åpent når det er flygninger'; not convertible to opening_hours."
+  }
+ ],
+ "NO-LLS": [
+  {
+   "name": "Narvesen",
+   "osm_id": "n710551047",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (three Lillestrøm stores: #077 'Lillestrøm jbst.', Jonas Liesgate 4; #078 'Lillestrøm jbst., syd'; #107 'Rutebilst., Lillestrøm' — which one is OSM n710551047 is not established) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "Go' Bento",
+   "osm_id": "n6864709206",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website or station-owner page found by search; Bane NOR page names no outlets."
+  },
+  {
+   "name": "Big Bite",
+   "osm_id": "n10025607075",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. bigbite.no/finn-oss/ restaurant finder loaded without listings in WebFetch; /restauranter returned an error. Only aggregator (Wolt) pages found, not used."
+  }
+ ],
+ "NO-LYS": [
+  {
+   "name": "Narvesen Lysaker jbst.",
+   "osm_id": "n681304850",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#080 'Lysaker jbst.', Drammensveien 325) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "Tintin",
+   "osm_id": "n681304680",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website or station-owner page found by search."
+  }
+ ],
+ "NO-NTH": [
+  {
+   "name": "Narvesen Nationaltheatret jbst., Abelhaugen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#091 'Nationaltheatret jbst., Abelhaugen', Johanne Dybwads plass 1) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "7-Eleven Nationaltheatret jbst. Abelhaugen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. 7-eleven.no/butikker lists 'Nationaltheatret jbst. Abelhaugen', Johanne Dybwads plass 1, but hours sit behind the same script-filled 'Vis/skjul åpningstider' toggle; no per-store page."
+  },
+  {
+   "name": "Havsmak",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Havsmak)",
+   "source_url": "https://www.havsmak.no/",
+   "read": "2026-10-30",
+   "note": "Not at this location per the business's own site: havsmak.no gives a single restaurant 'i selve Operahuset', Kirsten Flagstads plass 1, 0150 Oslo (hours there: 'Tir-fre: kl 16.00 - 23.00; Lør: kl 15.00 - 23.00'). The OSM node near Nationaltheatret (n1053666516) looks outdated or moved; hours deliberately not applied."
+  },
+  {
+   "name": "Halvbroren",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. halvbroren.no is robots-disallowed for WebFetch; no other owner page. OSM n5865106568 ~268 m from station, outside."
+  },
+  {
+   "name": "Bar Bardot",
+   "osm_id": null,
+   "opening_hours": "Th 20:00-01:00; Fr,Sa 20:00-03:00; Su-We off",
+   "hours_raw": "Tor.: 20.00 - 01.00; Fre - Lør.: 20.00 - 03.00; Søn - ons: Stengt (Henrik Ibsens gate 4)",
+   "hours_source": "website (Bar Bardot)",
+   "source_url": "https://www.barbardot.no/",
+   "read": "2026-10-30",
+   "note": "Outside the station (street address Henrik Ibsens gate 4; OSM ~49 m)."
+  },
+  {
+   "name": "Ruffino",
+   "osm_id": null,
+   "opening_hours": "Tu-Sa 16:00-22:00; Su,Mo off",
+   "hours_raw": "Kjøkkenet er åpent 16.00 - 22.00. Søndager og mandager holder vi stengt. (Arbinsgate 1)",
+   "hours_source": "website (Ruffino)",
+   "source_url": "https://ruffino.no/",
+   "read": "2026-10-30",
+   "note": "Published hours are kitchen hours; days Tu-Sa derived from the Sun/Mon closure sentence. Outside the station (Arbins gate 1; OSM ~60 m)."
+  }
+ ],
+ "NO-OSL_S": [
+  {
+   "name": "Svanen Cocktailbar",
+   "osm_id": null,
+   "opening_hours": "Mo-Th 16:00-00:30; Fr,Sa 15:00-02:00; Su 17:00-00:30",
+   "hours_raw": "MONDAY - THURSDAY 16.00 - 00.30 FRIDAY - SATURDAY 15.00 - 02.00 SUNDAY 17.00 - 00.30 (Karl Johans gate 13)",
+   "hours_source": "website (Svanen)",
+   "source_url": "https://www.svanenoslo.no",
+   "read": "2026-10-30",
+   "note": "Not at the station: Karl Johans gate 13, OSM n288416026 ~510 m away."
+  },
+  {
+   "name": "Dressmann XL",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 09:00-20:00; Sa 10:00-18:00; Su off",
+   "hours_raw": "Mandag – fredag 9:00–20:00; Lørdag 10:00–18:00; Søndag Stengt",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/butikker/dressmann-xl/",
+   "read": "2026-10-30",
+   "note": "OSM n3132157591, Hovedhallen plan 1 ('Main Hall, Level 1')."
+  },
+  {
+   "name": "Vita",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 07:00-21:00; Sa 10:00-19:00; Su off",
+   "hours_raw": "Mandag – fredag 07:00–21:00; Lørdag 10:00–19:00; Søndag Stengt",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/butikker/vita/",
+   "read": "2026-10-30",
+   "note": "Matched to OSM n3132157596 (Vita in the Oslo S main hall, Hovedhallen plan 1). The second 'Vita' entry is the Byporten shop. Vita is a beauty/health shop, not a pharmacy."
+  },
+  {
+   "name": "Gladkokken",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. Not on oslo-s.no's current eatery list (25 places); gladkokken.no shows no hours or address. Station facts already flag it as possibly closed; no owner statement of closure found. OSM nodes n3566985693 / n12968899187."
+  },
+  {
+   "name": "Tavex",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Tavex)",
+   "source_url": "https://tavex.no/besok-oss-i-norge/",
+   "read": "2026-10-30",
+   "note": "Not found. tavex.no/besok-oss-i-norge/ lists no Oslo branch at all (only Lillestrøm, Hønefoss, Stavanger, each marked 'Foreløpig stengt'). The Oslo outlet (OSM n4354447593, ~221 m from station) is probably gone, but the site does not say so explicitly."
+  },
+  {
+   "name": "Vero Moda",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. This is OSM n4736654312 on Karl Johans gate (~484 m from the station, not at the station); no branch page with hours found on veromoda.com via search."
+  },
+  {
+   "name": "Den Glade Munk",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website found (only aggregator/guide listings). OSM n4743369019 ~337 m away, not at the station."
+  },
+  {
+   "name": "BIT",
+   "osm_id": null,
+   "opening_hours": "Mo-Su 07:00-20:00",
+   "hours_raw": "Bussterminalen, 10 Schweigaards gate: Monday - Friday: 07.00 - 20.00 / Saturday: 07.00 - 20.00 / Sunday: 07.00 - 20.00",
+   "hours_source": "website (BIT / Bit Union)",
+   "source_url": "https://www.bit.no/home/stores",
+   "read": "2026-10-30",
+   "note": "OSM n5235692723 is in Oslo Bussterminal (Galleri Oslo), not in Oslo S itself; matched to BIT 'Bussterminalen'. Page text as served in English."
+  },
+  {
+   "name": "Victoria's Secret",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. OSM n5865823435 is on Karl Johans gate (~522 m away, not at the station); no owner branch page found."
+  },
+  {
+   "name": "Mester Grønn",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 06:00-21:00; Sa 08:00-19:00; Su,PH 10:30-18:00",
+   "hours_raw": "Mandag – fredag 06:00–21:00; Lørdag 08:00–19:00; Søndag og helligdager 10:30–18:00",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/butikker/mester-gronn/",
+   "read": "2026-10-30",
+   "note": "OSM n6453911563; 'Butikken ligger mellom spor 4 og 5', Hovedhallen plan 1."
+  },
+  {
+   "name": "Vita",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 10:00-21:00; Sa 10:00-20:00; Su off",
+   "hours_raw": "10:00 - 21:00, Lør: 10:00 - 20:00, Søn: Stengt (1. etasje)",
+   "hours_source": "website (Byporten, centre owner)",
+   "source_url": "https://byporten.no/butikker/vita/",
+   "read": "2026-10-30",
+   "note": "Matched to OSM n7118275588, which sits among Byporten nodes (Kiwi/Telenor/Black Cat Byporten), not in the station hall. First range has no day label on the page; read as Mon–Fri."
+  },
+  {
+   "name": "Tanum",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Byporten, centre owner)",
+   "source_url": "https://byporten.no/butikker/",
+   "read": "2026-10-30",
+   "note": "Not found. No Tanum on Byporten's (or Oslo City's) current shop list; Byporten lists a Norli bookshop on 1. etasje (08:00 - 21:00, Lør 10:00 - 20:00, Søn stengt), but that it replaced this Tanum (OSM n7118275589) is not stated, so not applied."
+  },
+  {
+   "name": "Kjell & Company",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-20:00; Su off",
+   "hours_raw": "09:00 - 21:00, Lør: 09:00 - 20:00, Søn: Stengt (1. etasje)",
+   "hours_source": "website (Byporten, centre owner)",
+   "source_url": "https://byporten.no/butikker/kjell-company/",
+   "read": "2026-10-30",
+   "note": "OSM n7118275590 in Byporten. Page banner also shows centre 'Åpent i dag: 10:00 - 21:00'; shop's own line used."
+  },
+  {
+   "name": "Ark Pocket",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-20:00; Su off",
+   "hours_raw": "08:00 - 21:00, Lør: 09:00 - 20:00, Søn: Stengt (ARK, 1. etasje)",
+   "hours_source": "website (Byporten, centre owner)",
+   "source_url": "https://byporten.no/butikker/ark/",
+   "read": "2026-10-30",
+   "note": "OSM n7118275592 'Ark Pocket' sits in Byporten, so matched to Byporten's ARK (page does not use the word 'Pocket'). oslo-s.no's 'Ark Pocket ved flytogterminalen' (Mo-Fr 07:00-22:00; Sa 08:00-20:00) is a different shop = OSM n7118275602."
+  },
+  {
+   "name": "b.young",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_raw": "Mandag – fredag 08:00–21:00; Lørdag 09:00–18:00; Søndag Stengt",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/butikker/b-young/",
+   "read": "2026-10-30",
+   "note": "OSM n7118275598 in the station hall (Hovedhallen plan 1). Byporten has a separate 'b.young Flagship Store'. byoung.com shop-finder page showed no hours."
+  },
+  {
+   "name": "Lett og God",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website (only aggregators). OSM n7904813107 is outside the station near Byporten/Jernbanetorget."
+  },
+  {
+   "name": "The Golden Frisør",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website (only directory listings, not used). OSM n9804669059 ~471 m away, not at the station."
+  },
+  {
+   "name": "NBX Bitcoin ATM",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. blockbridge.no is robots-disallowed for WebFetch. OSM n10681396795 is in the bus terminal building, not Oslo S."
+  },
+  {
+   "name": "Masala politics",
+   "osm_id": null,
+   "opening_hours": "Mo-Sa 15:00-23:00; Su 14:00-22:00",
+   "hours_raw": "Mandag – Lørdag 15:00 – 23:00; Søndag 14:00 - 22:00; Kjøkkenet stenger 22:00 (Karl Johans gt. 13)",
+   "hours_source": "website (Masala Politics)",
+   "source_url": "https://www.masalapolitics.no",
+   "read": "2026-10-30",
+   "note": "Not at the station: Karl Johans gate 13, OSM ~506 m away."
+  },
+  {
+   "name": "Gullborgen",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website (only directory/gulesider results, not used). OSM n10911462667 ~348 m away, not at the station."
+  },
+  {
+   "name": "7-Eleven Karl Johans gate",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. 7-eleven.no/butikker lists 'Karl Johansgt. 13' but hours are behind the script-filled toggle. Not at the station (OSM n10947974230 ~533 m away)."
+  },
+  {
+   "name": "Stortorvet Kebab",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website (only aggregator). OSM n10947974232 ~504 m away, not at the station."
+  },
+  {
+   "name": "Hub bar",
+   "osm_id": null,
+   "opening_hours": "Mo,Tu 11:00-24:00; We,Th 11:00-01:00; Fr,Sa 11:00-02:00; Su 11:00-24:00",
+   "hours_raw": "Bar: Monday - Tuesday 11:00 - 00:00; Wednesday - Thursday 11:00 - 01:00; Friday - Saturday 11:00 - 02:00; Sunday 11:00 - 00:00 (Biskop Gunnerus gate 3)",
+   "hours_source": "website (Strawberry, hotel operator)",
+   "source_url": "https://www.strawberryhotels.com/restaurant/norway/oslo/hub-bar/",
+   "read": "2026-10-30",
+   "note": "Bar in Clarion Hotel The Hub, outside the station near inngang nord (OSM n12085970032 ~276 m)."
+  },
+  {
+   "name": "Himkok",
+   "osm_id": null,
+   "opening_hours": "Mo-We 17:00-24:00; Th-Su 17:00-02:00",
+   "hours_raw": "Mon to Wed: 17:00 - 00:00; Thu to Sat: 17:00 - 02:00; Sunday: 17:00 - 02:00 (Storgata 27)",
+   "hours_source": "website (Himkok)",
+   "source_url": "https://himkok.no/",
+   "read": "2026-10-30",
+   "note": "Day/time pairing taken from page order (labels and times are separate elements). Not at the station: Storgata 27, OSM ~382 m."
+  },
+  {
+   "name": "Gladkokken Restaurant",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. Same business as 'Gladkokken' above: not on oslo-s.no's eatery list; gladkokken.no shows no hours/address. OSM n12968899187."
+  },
+  {
+   "name": "BikBok",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt",
+   "hours_source": "website (Oslo City / Steen & Strøm, centre owner)",
+   "source_url": "https://oslo-city.steenstrom.no/butikker-restauranter/bik-bok",
+   "read": "2026-10-30",
+   "note": "Not found. OSM n13469011558 lies inside Oslo City (centroid of w10568050), not Byporten. Oslo City's shop page confirms 'Bik Bok i 1. etasje' but gives no shop hours; the centre page gives only centre hours (Man–fre 10:00 - 22:00, Lør 10:00 - 20:00, Søn stengt) with the 'Butikkenes åpningstid' section empty, so not applied."
+  },
+  {
+   "name": "Vero Moda",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": "Senter: Mandag–fredag 10:00 - 22:00; Lørdag 10:00 - 20:00; Søndag Stengt",
+   "hours_source": "website (Oslo City / Steen & Strøm, centre owner)",
+   "source_url": "https://oslo-city.steenstrom.no/butikker-restauranter/vero-moda",
+   "read": "2026-10-30",
+   "note": "Not found. OSM n13469011560 lies inside Oslo City. Oslo City's Vero Moda page ('1. etasje') gives no shop hours; only centre hours (Man–fre 10:00 - 22:00, Lør 10:00 - 20:00, Søn stengt) with the shop-hours section empty, so not applied. (Byporten's Vero Moda, 2. etasje, Mo-Fr 10-21, Sa 10-20, is a different shop.)"
+  },
+  {
+   "name": "Ichi",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-18:00; Su off",
+   "hours_raw": "Mandag – fredag 08:00–21:00; Lørdag 09:00–18:00; Søndag Stengt",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/butikker/ichi/",
+   "read": "2026-10-30",
+   "note": "OSM n13469894267, Hovedhallen plan 1."
+  },
+  {
+   "name": "BAKE ME UP",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 05:30-22:00; Sa,Su 07:00-22:00",
+   "hours_raw": "Mandag - fredag 05:30–22:00; Lørdag - søndag 07:00–22:00",
+   "hours_source": "website (oslo-s.no, Bane NOR Eiendom)",
+   "source_url": "https://oslo-s.no/spisesteder/bake-me-up/",
+   "read": "2026-10-30",
+   "note": "OSM n14131837922, Hovedhallen plan 1."
+  },
+  {
+   "name": "GRIT OSLO",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website found by search. OSM n14132607194 ~362 m away (Bjørvika side), not in the station."
+  },
+  {
+   "name": "Floriss Byporten",
+   "osm_id": null,
+   "opening_hours": "Mo-Fr 08:00-21:00; Sa 10:00-20:00; Su 12:00-18:00",
+   "hours_raw": "08:00 - 21:00, Lør: 10:00 - 20:00, Søn: 12:00 - 18:00 (Gateplan m/inngang fra senteret)",
+   "hours_source": "website (Byporten, centre owner)",
+   "source_url": "https://byporten.no/butikker/floriss/",
+   "read": "2026-10-30",
+   "note": "OSM n14132647987 in Byporten. First range has no day label on the page; read as Mon–Fri."
+  },
+  {
+   "name": "Dezhin frisør",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. No own website (only company-register results). OSM n14279078225 ~371 m away, not at the station."
+  }
+ ],
+ "NO-SKI": [
+  {
+   "name": "Narvesen (Ski Jernbanestasjon, store 115)",
+   "osm_id": "n9941248974",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#115 'Ski Jernbanestasjon', Jernbaneveien 1A) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  },
+  {
+   "name": "Café (name not given)",
+   "osm_id": null,
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": "website (Bane NOR)",
+   "source_url": "https://www.banenor.no/en/traffic-and-travel/railway-stations/-s-/ski/",
+   "read": "2026-10-30",
+   "note": "Not found. Bane NOR's English page lists only 'Refreshments' with no name or hours; the Norwegian page could not be fetched (client error). No café at the station identified by any owner page; may simply be the Narvesen kiosk."
+  }
+ ],
+ "NO-SV": [
+  {
+   "name": "Narvesen",
+   "osm_id": "n2260304949",
+   "opening_hours": null,
+   "hours_raw": null,
+   "hours_source": null,
+   "source_url": null,
+   "read": "2026-10-30",
+   "note": "Not found. narvesen.no/finn-butikk lists the store (#111 'Sandvika jbst.', Folangerveien) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
+  }
+ ]
+}

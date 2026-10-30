@@ -8,20 +8,317 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal (Vejle Trafikcenter hall) / street level",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000073)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 19 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000073)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "3–4": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 3,4, class 50 cm = 0.5 m above rail, 338 m long; a recorded design class, not a survey; other rows for this track: 3,4 35 cm 0.35 m (338 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    },
+    "5–6": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 23: tracks 5,6, class 50 cm = 0.5 m above rail, 338 m long; a recorded design class, not a survey; other rows for this track: 5,6 35 cm 0.35 m (338 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    }
+  },
+  "structures_file": "data/stations/research/860000073/vejle_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w88288481",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 5.07,
+      "base_m": -4.07,
+      "_source": "Outline OSM w88288481 (ODbL); roof = median of 1323 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w88288498",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 1.94,
+      "base_m": -2.93,
+      "_source": "Outline OSM w88288498 (ODbL); roof = median of 2645 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w156178919",
+      "kind": "building",
+      "name": "house",
+      "top_m": 2.86,
+      "base_m": -3.78,
+      "_source": "Outline OSM w156178919 (ODbL); roof = median of 88 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w324299746",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 1.71,
+      "base_m": -4.02,
+      "_source": "Outline OSM w324299746 (ODbL); roof = median of 460 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w752166641",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.25,
+      "_source": "Outline OSM w752166641 (ODbL); roof = median of 16 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w752338057",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": -1.16,
+      "_source": "Outline OSM w752338057 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w759073080",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.03,
+      "base_m": -1.86,
+      "_source": "Outline OSM w759073080 (ODbL); roof = median of 241 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w854269472",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 0.91,
+      "_source": "Outline OSM w854269472 (ODbL); roof = median of 331 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w1033416994",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.92,
+      "base_m": -0.75,
+      "_source": "Outline OSM w1033416994 (ODbL); roof = median of 2033 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033416996",
+      "kind": "building",
+      "name": "building",
+      "top_m": 0.25,
+      "base_m": -4.09,
+      "_source": "Outline OSM w1033416996 (ODbL); roof = median of 519 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033416997",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.95,
+      "base_m": -3.92,
+      "_source": "Outline OSM w1033416997 (ODbL); roof = median of 974 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033416998",
+      "kind": "building",
+      "name": "house",
+      "top_m": 2.95,
+      "base_m": -3.78,
+      "_source": "Outline OSM w1033416998 (ODbL); roof = median of 375 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033417008",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 2.92,
+      "base_m": 0.27,
+      "_source": "Outline OSM w1033417008 (ODbL); roof = median of 147 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033417014",
+      "kind": "building",
+      "name": "service",
+      "top_m": -0.62,
+      "base_m": -3.95,
+      "_source": "Outline OSM w1033417014 (ODbL); roof = median of 93 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033417027",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.56,
+      "_source": "Outline OSM w1033417027 (ODbL); roof = median of 168 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w1033417029",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 3.95,
+      "base_m": -0.75,
+      "_source": "Outline OSM w1033417029 (ODbL); roof = median of 1189 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "w1033417032",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.62,
+      "_source": "Outline OSM w1033417032 (ODbL); roof = median of 124 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured"
+    },
+    {
+      "from": "w1033417034",
+      "kind": "building",
+      "name": "service",
+      "top_m": 2.64,
+      "base_m": -0.14,
+      "_source": "Outline OSM w1033417034 (ODbL); roof = median of 122 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06)"
+    },
+    {
+      "from": "#23",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.54,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6173_533); from data/stations/research/860000073/vejle_structures_heights.geojson (metres above the platform surface, 5.01 m RH 2000, laser 2025-03-06); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000073/vejle_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 5.01,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000073/vejle_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (5.01 m DVR90, laser 2025-03-06)"
+  },
+  "pois": [
+    {
+      "id": "res19918b7d5d",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Vejle Station)",
+      "level": "0",
+      "x": 2.1,
+      "y": 13.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:45-23:00; Sa,Su 07:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; placed OSM node n1517761505 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
+    },
+    {
+      "id": "res0568394226",
+      "category": "atm",
+      "name": "Euronet",
+      "level": "0",
+      "x": -6.6,
+      "y": 23.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; placed OSM node n13456582430 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
+    },
+    {
+      "id": "resf6bba62ac5",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -31.2,
+      "y": 113.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:45-24:00; Sa,Su,PH 06:45-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "resf479d24ced",
+      "category": "toilet",
+      "name": "Toilet og handicaptoilet",
+      "level": "0",
+      "x": 0.8,
+      "y": 38.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 06:00-22:00; Su 07:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; placed OSM node n8982974376 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
+    },
+    {
+      "id": "res943d4a1a35",
+      "category": "bus",
+      "name": "Vejle Trafikcenter",
+      "level": "0",
+      "x": -27.9,
+      "y": 118.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/vejle/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; placed representative point of the OSM area w300214936 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res0fc5306a02",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": -10.2,
+      "y": -21.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000073.json), read 2026-10-30; placed OSM node n3530340467 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
+    },
+    {
+      "id": "resc4a402e2a2",
+      "category": "restaurant",
+      "name": "Toscana",
+      "level": "0",
+      "x": 10.4,
+      "y": -54.0,
+      "fee": null,
+      "opening_hours": "17:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4036360417 (ODbL), read 2026-10-30; placed OSM node n4036360417 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
+    },
+    {
+      "id": "res2f712cb3fb",
+      "category": "restaurant",
+      "name": "Piri Piri Chicken",
+      "level": "0",
+      "x": 9.3,
+      "y": -43.9,
+      "fee": null,
+      "opening_hours": "Mo-Th 12:00-22:00; Fr-Sa 12:00-24:00; Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13509405089 (ODbL), read 2026-10-30; placed OSM node n13509405089 (research pass 2026-10-30, data/stations/research/860000073/station_facts.json)"
     }
   ]
 }

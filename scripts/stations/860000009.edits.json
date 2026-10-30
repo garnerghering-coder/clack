@@ -8,20 +8,203 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal / street level",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/hjorring/, read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000009)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 14 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000009)."
+    }
+  ],
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        34.0,
+        -16.5
+      ],
+      "level": "0",
+      "name": "Main entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000009.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/hjorring/, read 2026-10-30; position OSM n1520147709 (data/stations/research/860000009/station_facts.json)"
+    },
+    {
+      "at": [
+        34.0,
+        -16.5
+      ],
+      "level": "0",
+      "name": "Entrance (Parallelvej)",
+      "_source": "OSM n1520147709 (already in OSM); position OSM n1520147709 (data/stations/research/860000009/station_facts.json)"
+    }
+  ],
+  "multipolygons": true,
+  "poi_hours": {},
+  "platform_heights": {
+    "2": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 25: tracks 2, class 55 cm = 0.55 m above rail, 305 m long; a recorded design class, not a survey"
+    },
+    "1–13–15": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 25: tracks 1, class 55 cm = 0.55 m above rail, 226 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000009/hjorring_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w121981333",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 7.45,
+      "base_m": -0.44,
+      "_source": "Outline OSM w121981333 (ODbL); roof = median of 493 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19)"
+    },
+    {
+      "from": "w238985005",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 4.64,
+      "base_m": -0.26,
+      "_source": "Outline OSM w238985005 (ODbL); roof = median of 209 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19)"
+    },
+    {
+      "from": "w302380925",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.69,
+      "base_m": -0.56,
+      "_source": "Outline OSM w302380925 (ODbL); roof = median of 594 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19)"
+    },
+    {
+      "from": "w511352529",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.75,
+      "_source": "Outline OSM w511352529 (ODbL); roof = median of 1308 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003246",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.53,
+      "_source": "Outline OSM w578003246 (ODbL); roof = median of 75 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003281",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.64,
+      "_source": "Outline OSM w578003281 (ODbL); roof = median of 304 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003464",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.63,
+      "_source": "Outline OSM w578003464 (ODbL); roof = median of 329 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003621",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.52,
+      "_source": "Outline OSM w578003621 (ODbL); roof = median of 67 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003664",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.62,
+      "_source": "Outline OSM w578003664 (ODbL); roof = median of 335 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003696",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.64,
+      "_source": "Outline OSM w578003696 (ODbL); roof = median of 104 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003699",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.4,
+      "_source": "Outline OSM w578003699 (ODbL); roof = median of 78 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003773",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.65,
+      "_source": "Outline OSM w578003773 (ODbL); roof = median of 119 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "w578003937",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.36,
+      "_source": "Outline OSM w578003937 (ODbL); roof = median of 146 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured"
+    },
+    {
+      "from": "#13",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.68,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6368_558, PUNKTSKY_1km_6368_559); from data/stations/research/860000009/hjorring_structures_heights.geojson (metres above the platform surface, 34.52 m RH 2000, laser 2022-03-19); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000009/hjorring_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 34.52,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000009/hjorring_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (34.52 m DVR90, laser 2022-03-19)"
+  },
+  "pois": [
+    {
+      "id": "res9c3a18c88b",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": -34.3,
+      "y": -15.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:30-20:15; Sa,Su 06:00-20:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/hjorring/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000009/station_facts.json)",
+      "approximate": true,
+      "where": "station hall with toilets"
     }
   ]
 }

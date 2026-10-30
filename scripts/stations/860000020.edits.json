@@ -8,20 +8,337 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal (station hall) at John F. Kennedys Plads",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000020)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 18 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000020)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: platform 0–1's middle node isn't on the walking graph and two amenities are unreachable. The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {},
+  "platform_refs": {},
+  "entrances": [
+    {
+      "at": [
+        16.8,
+        22.2
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; position OSM n7717453180 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        -7.2,
+        -15.1
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n3393871805 (already in OSM); position OSM n3393871805 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        -11.1,
+        -13.7
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n7717453152 (already in OSM); position OSM n7717453152 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        22.5,
+        30.8
+      ],
+      "level": "0",
+      "name": "Entrance (John F. Kennedys Plads)",
+      "_source": "OSM n7717453178 (already in OSM); position OSM n7717453178 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        16.8,
+        22.2
+      ],
+      "level": "0",
+      "name": "Entrance (John F. Kennedys Plads)",
+      "_source": "OSM n7717453180 (already in OSM); position OSM n7717453180 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        7.0,
+        -24.4
+      ],
+      "level": "0",
+      "name": "Entrance (John F. Kennedys Plads)",
+      "_source": "OSM n7717453202 (already in OSM); position OSM n7717453202 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        9.6,
+        -16.9
+      ],
+      "level": "0",
+      "name": "Entrance (John F. Kennedys Plads)",
+      "_source": "OSM n7717453203 (already in OSM); position OSM n7717453203 (data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "at": [
+        -21.6,
+        23.2
+      ],
+      "level": "0",
+      "name": "Entrance",
+      "_source": "OSM n11220225473 (already in OSM); position OSM n11220225473 (data/stations/research/860000020/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "0–1": {
+      "height_m": 0.5,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 24: tracks 0,1, class 50 cm = 0.5 m above rail, 367 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000020/aalborg_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w7975017",
+      "kind": "building",
+      "name": "Kennedy Arkaden (parking)",
+      "top_m": 11.24,
+      "base_m": -0.94,
+      "_source": "Outline OSM w7975017 (ODbL); roof = median of 607 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w89752311",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 6.22,
+      "base_m": -2.37,
+      "_source": "Outline OSM w89752311 (ODbL); roof = median of 374 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w91641394",
+      "kind": "building",
+      "name": "commercial",
+      "top_m": 17.27,
+      "base_m": -2.41,
+      "_source": "Outline OSM w91641394 (ODbL); roof = median of 4992 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w285634242",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.4,
+      "base_m": -0.52,
+      "_source": "Outline OSM w285634242 (ODbL); roof = median of 397 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w285634245",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 4.24,
+      "base_m": -0.43,
+      "_source": "Outline OSM w285634245 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w308132562",
+      "kind": "building",
+      "name": "building",
+      "top_m": 21.51,
+      "base_m": -0.82,
+      "_source": "Outline OSM w308132562 (ODbL); roof = median of 4774 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w334830152",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.45,
+      "_source": "Outline OSM w334830152 (ODbL); roof = median of 3002 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside not measured"
+    },
+    {
+      "from": "w334830155",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.53,
+      "_source": "Outline OSM w334830155 (ODbL); roof = median of 2879 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside not measured"
+    },
+    {
+      "from": "w369146365",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.29,
+      "base_m": 5.4,
+      "_source": "Outline OSM w369146365 (ODbL); roof = median of 8213 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w369148898",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.31,
+      "base_m": 5.4,
+      "_source": "Outline OSM w369148898 (ODbL); roof = median of 1277 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w402575915",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 7.68,
+      "base_m": 5.4,
+      "_source": "Outline OSM w402575915 (ODbL); roof = median of 492 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w826572004",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 3.32,
+      "base_m": -0.59,
+      "_source": "Outline OSM w826572004 (ODbL); roof = median of 157 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w826572015",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.07,
+      "base_m": -0.54,
+      "_source": "Outline OSM w826572015 (ODbL); roof = median of 185 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w844491854",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.44,
+      "_source": "Outline OSM w844491854 (ODbL); roof = median of 2085 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside not measured"
+    },
+    {
+      "from": "w1312400857",
+      "kind": "building",
+      "name": "Kennedy Arkaden (retail)",
+      "top_m": 15.16,
+      "base_m": -4.01,
+      "_source": "Outline OSM w1312400857 (ODbL); roof = median of 17402 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "w1312400866",
+      "kind": "building",
+      "name": "roof",
+      "top_m": 3.44,
+      "base_m": -0.82,
+      "_source": "Outline OSM w1312400866 (ODbL); roof = median of 2478 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06)"
+    },
+    {
+      "from": "#20",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 3.13,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    },
+    {
+      "from": "#21",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 2.52,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6322_555); from data/stations/research/860000020/aalborg_structures_heights.geojson (metres above the platform surface, 4.78 m RH 2000, laser 2022-03-06); underside not measured",
+      "simplify_m": 2.0,
+      "align_to": "nearest"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000020/aalborg_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 4.78,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000020/aalborg_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (4.78 m DVR90, laser 2022-03-06)"
+  },
+  "pois": [
+    {
+      "id": "resf470dc62ad",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Aalborg Station)",
+      "level": "0",
+      "x": 2.6,
+      "y": -4.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 05:30-23:00; Fr 05:30-24:00; Sa 07:30-24:00; Su 07:30-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; placed OSM node n1685082063 (research pass 2026-10-30, data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "id": "res570355a02e",
+      "category": "toilet",
+      "name": "Toilet/Handicaptoilet",
+      "level": "0",
+      "x": -13.5,
+      "y": -40.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 06:00-22:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; placed OSM node n11047567800 (research pass 2026-10-30, data/stations/research/860000020/station_facts.json)"
+    },
+    {
+      "id": "res3dd7e378c8",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": 93.5,
+      "y": 212.0,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:45-00:15; Sa,Su 05:45-00:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/aalborg/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000020/station_facts.json)",
+      "approximate": true,
+      "where": "station hall"
+    },
+    {
+      "id": "res01178705f6",
+      "category": "taxi",
+      "name": "Taxi",
+      "level": "0",
+      "x": 4.2,
+      "y": -40.0,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000020.json), read 2026-10-30; placed OSM node n836626413 (research pass 2026-10-30, data/stations/research/860000020/station_facts.json)"
     }
   ]
 }

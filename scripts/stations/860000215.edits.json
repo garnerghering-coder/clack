@@ -8,20 +8,259 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Forhal (station hall) / street level",
+      "order": 0,
+      "name_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000215)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 8 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000215)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Withheld after the final research pass: OSM has three walkway points here: no route from the platform to an exit. The edits keep the research (platform heights, structures, entrances, amenities) for when OSM or a walk adds what's missing."
+    }
+  ],
+  "multipolygons": true,
+  "platform_refs_source": {
+    "r19021504": "Banedanmark Open Data (CC BY 4.0) platform objects perron 1 / track 1 run alongside osm:way/r19021504; tracks 0, 1 from the register (banedanmark_platforms_DK.csv) run alongside osm:way/r19021504, read 2026-10-30 (data/stations/research/860000215); BanInfo's track numbers were being re-issued then: check on site"
+  },
+  "platform_refs": {
+    "r19021504": "0–1"
+  },
+  "entrances": [
+    {
+      "at": [
+        -4.2,
+        11.4
+      ],
+      "level": "0",
+      "name": "Main entrance",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; Wikipedia 'Esbjerg station' https://en.wikipedia.org/wiki/Esbjerg_station, read 2026-10-30; position OSM n5508357680 (data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "at": [
+        -4.2,
+        11.4
+      ],
+      "level": "0",
+      "name": "Entrance (Jernbanegade)",
+      "_source": "OSM n5508357680 (already in OSM); position OSM n5508357680 (data/stations/research/860000215/station_facts.json)"
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "0–1": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 29: tracks 0,1, class 55 cm = 0.55 m above rail, 195 m long; a recorded design class, not a survey; other rows for this track: 0,1 26 cm 0.26 m (117 m, Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30)"
+    }
+  },
+  "structures_file": "data/stations/research/860000215/esbjerg_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w87806407",
+      "kind": "building",
+      "name": "station building",
+      "top_m": 5.55,
+      "base_m": -2.31,
+      "_source": "Outline OSM w87806407 (ODbL); roof = median of 287 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17)"
+    },
+    {
+      "from": "w95632178",
+      "kind": "building",
+      "name": "parking",
+      "top_m": 4.81,
+      "base_m": -0.49,
+      "_source": "Outline OSM w95632178 (ODbL); roof = median of 1609 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17)"
+    },
+    {
+      "from": "w95632189",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.77,
+      "base_m": -1.65,
+      "_source": "Outline OSM w95632189 (ODbL); roof = median of 1537 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17)"
+    },
+    {
+      "from": "w184020984",
+      "kind": "building",
+      "name": "Esbjerg Rutebilstation (building)",
+      "top_m": 7.93,
+      "base_m": -0.66,
+      "_source": "Outline OSM w184020984 (ODbL); roof = median of 53 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17)"
+    },
+    {
+      "from": "w184020986",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.61,
+      "base_m": -0.61,
+      "_source": "Outline OSM w184020986 (ODbL); roof = median of 182 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17)"
+    },
+    {
+      "from": "w335432974",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.84,
+      "_source": "Outline OSM w335432974 (ODbL); roof = median of 178 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17); underside not measured"
+    },
+    {
+      "from": "w510362121",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 4.06,
+      "_source": "Outline OSM w510362121 (ODbL); roof = median of 588 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17); underside not measured"
+    },
+    {
+      "from": "w546896414",
+      "kind": "roof",
+      "name": "shelter",
+      "top_m": 2.54,
+      "_source": "Outline OSM w546896414 (ODbL); roof = median of 95 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6146_465, PUNKTSKY_1km_6146_466, PUNKTSKY_1km_6147_465, PUNKTSKY_1km_6147_466); from data/stations/research/860000215/esbjerg_structures_heights.geojson (metres above the platform surface, 12.78 m RH 2000, laser 2025-02-17); underside not measured"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000215/esbjerg_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 12.78,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000215/esbjerg_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (12.78 m DVR90, laser 2025-02-17)"
+  },
+  "pois": [
+    {
+      "id": "resc0c2c48aba",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven (Esbjerg Station)",
+      "level": "0",
+      "x": 3.4,
+      "y": 19.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-23:00; Sa,Su 07:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "7-Eleven store list https://www.7-eleven.dk/find-butik, read 2026-10-30; DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; placed OSM node n5284602780 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "id": "res4981481824",
+      "category": "waiting",
+      "name": "Forhal",
+      "level": "0",
+      "x": 51.7,
+      "y": -208.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-23:15",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "DSB station page https://www.dsb.dk/trafikinformation/stationer/esbjerg/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)",
+      "approximate": true,
+      "where": "station hall, with toilets, ticket machine and lockers"
+    },
+    {
+      "id": "res9f3f792b61",
+      "category": "shop",
+      "name": "Hair Lounge",
+      "level": "0",
+      "x": 2.1,
+      "y": -0.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; placed OSM node n13241526307 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "id": "res74c42da58c",
+      "category": "shop",
+      "name": "Hair by COA",
+      "level": "0",
+      "x": 7.0,
+      "y": 0.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; placed OSM node n9472475327 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "id": "res685c2ea099",
+      "category": "shop",
+      "name": "Hair by Lisa",
+      "level": "0",
+      "x": 9.5,
+      "y": 0.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; placed OSM node n13011672203 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "id": "res0ff7025781",
+      "category": "shop",
+      "name": "Smuuuk",
+      "level": "0",
+      "x": 4.5,
+      "y": -0.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 09:30-17:00; Fr 09:30-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_dk/860000215.json), read 2026-10-30; placed OSM node n13241526321 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)"
+    },
+    {
+      "id": "rese7c87b26eb",
+      "category": "toilet",
+      "name": "",
+      "level": "0",
+      "x": 49.9,
+      "y": 195.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OSM w1002396657 (read 2026-10-30); placed representative point of the OSM area w1002396657 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res3af0ebd78d",
+      "category": "restaurant",
+      "name": "Pølsevognen Banegårdspladsen",
+      "level": "0",
+      "x": -34.9,
+      "y": -7.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap w463087806 (ODbL), read 2026-10-30; placed representative point of the OSM area w463087806 (research pass 2026-10-30, data/stations/research/860000215/station_facts.json)",
+      "approximate": true
     }
   ]
 }

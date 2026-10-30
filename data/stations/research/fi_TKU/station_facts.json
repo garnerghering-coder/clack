@@ -54,7 +54,22 @@
     "lat": 60.4556822,
     "how": "OSM n9226878657",
     "_source": "OpenStreetMap n9226878657 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9226878657 to platform outlines and register track lines",
+     "source": "OSM n9226878657 geometry (level 0;1): 25.9 m from rail platform outline r19525666 (ref 1;2); next 42.5 m from r19525665 (ref 3;4); register lines: 25.9 m from 'TKU L1', 35.5 m from 'TKU L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Turku: 'accessible access to the tracks is via the Logomo bridge, which can be reached by elevator from Ratapihankatu and Vaunukatu'",
+     "source": "https://vr.fi/en/railway-stations-and-routes/turku",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Ratapihankatu-side street lift (ref B1N0A206) up to Logomonsilta: 10.3 m from Ratapihankatu and 25.9 m from the TKU L1 line end. VR says the Logomo bridge is reached by elevator from Ratapihankatu and Vaunukatu."
   },
   {
    "kind": "stairs",
@@ -88,7 +103,19 @@
     "lat": 60.4559645,
     "how": "OSM n12400350419",
     "_source": "OpenStreetMap n12400350419 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12400350419 to platform outlines and register track lines",
+     "source": "OSM n12400350419 geometry (level 0;1): inside rail platform outline r19525666 (ref 1;2); next 11.7 m from r19525665 (ref 3;4); register lines: 4.8 m from 'TKU L2', 6.7 m from 'TKU L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -122,7 +149,19 @@
     "lat": 60.4561072,
     "how": "OSM n12423294383",
     "_source": "OpenStreetMap n12423294383 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12423294383 to platform outlines and register track lines",
+     "source": "OSM n12423294383 geometry (level 0;1): inside rail platform outline r19525665 (ref 3;4); next 14.8 m from r19525664 (ref 5;6); register lines: 4.7 m from 'TKU L4', 7.8 m from 'TKU L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -156,7 +195,19 @@
     "lat": 60.4562875,
     "how": "OSM n13097329531",
     "_source": "OpenStreetMap n13097329531 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 5/6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13097329531 to platform outlines and register track lines",
+     "source": "OSM n13097329531 geometry (level 0;1): inside rail platform outline r19525664 (ref 5;6); next 18.4 m from r19525665 (ref 3;4); register lines: 4.7 m from 'TKU L6', 7.8 m from 'TKU L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -192,7 +243,22 @@
     "lat": 60.4556822,
     "how": "OSM n9226878657",
     "_source": "OpenStreetMap n9226878657 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9226878657 to platform outlines and register track lines",
+     "source": "OSM n9226878657 geometry (level 0;1): 25.9 m from rail platform outline r19525666 (ref 1;2); next 42.5 m from r19525665 (ref 3;4); register lines: 25.9 m from 'TKU L1', 35.5 m from 'TKU L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Turku: 'accessible access to the tracks is via the Logomo bridge, which can be reached by elevator from Ratapihankatu and Vaunukatu'",
+     "source": "https://vr.fi/en/railway-stations-and-routes/turku",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Ratapihankatu-side street lift (ref B1N0A206) up to Logomonsilta: 10.3 m from Ratapihankatu and 25.9 m from the TKU L1 line end. VR says the Logomo bridge is reached by elevator from Ratapihankatu and Vaunukatu."
   },
   {
    "kind": "lift",
@@ -211,7 +277,19 @@
     "lat": 60.4559645,
     "how": "OSM n12400350419",
     "_source": "OpenStreetMap n12400350419 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1/2"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12400350419 to platform outlines and register track lines",
+     "source": "OSM n12400350419 geometry (level 0;1): inside rail platform outline r19525666 (ref 1;2); next 11.7 m from r19525665 (ref 3;4); register lines: 4.8 m from 'TKU L2', 6.7 m from 'TKU L1'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -230,7 +308,19 @@
     "lat": 60.4561072,
     "how": "OSM n12423294383",
     "_source": "OpenStreetMap n12423294383 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 3/4"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12423294383 to platform outlines and register track lines",
+     "source": "OSM n12423294383 geometry (level 0;1): inside rail platform outline r19525665 (ref 3;4); next 14.8 m from r19525664 (ref 5;6); register lines: 4.7 m from 'TKU L4', 7.8 m from 'TKU L3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -249,7 +339,43 @@
     "lat": 60.4562875,
     "how": "OSM n13097329531",
     "_source": "OpenStreetMap n13097329531 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 5/6"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13097329531 to platform outlines and register track lines",
+     "source": "OSM n13097329531 geometry (level 0;1): inside rail platform outline r19525664 (ref 5;6); next 18.4 m from r19525665 (ref 3;4); register lines: 4.7 m from 'TKU L6', 7.8 m from 'TKU L5'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
+  },
+  {
+   "kind": "lift",
+   "osm_id": "n9223657386",
+   "between": [
+    "0",
+    "1"
+   ],
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n9223657386 to platform outlines and register track lines",
+     "source": "OSM n9223657386 geometry (level 0;1): 43.9 m from rail platform outline r19525664 (ref 5;6); next 65.1 m from r19525665 (ref 3;4); register lines: 41.9 m from 'TKU L6', 54.5 m from 'TKU L5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Turku: elevator from Ratapihankatu and Vaunukatu",
+     "source": "https://vr.fi/en/railway-stations-and-routes/turku",
+     "read": "2026-10-30"
+    }
+   ],
+   "confirmed_by": "lift follow-up pass",
+   "_source": "OSM n9223657386 geometry (level 0;1): 43.9 m from rail platform outline r19525664 (ref 5;6); next 65.1 m from r19525665 (ref 3;4); register lines: 41.9 m from 'TKU L6', 54.5 m from 'TKU L5'; https://vr.fi/en/railway-stations-and-routes/turku"
   }
  ],
  "entrances": [
@@ -302,9 +428,14 @@
    "name": "Teatro Bar & Café",
    "where": "in Logomo",
    "note": "No hours found.",
-   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30",
+   "_source": "Logomo 'Saapuminen', https://logomo.fi/info/saapuminen, read 2026-10-30; https://logomo.fi/teatro, read 2026-10-30",
    "position": null,
-   "position_note": "not found in OSM near the station: position unknown"
+   "position_note": "not found in OSM near the station: position unknown",
+   "opening_hours": "We,Th 16:00-22:00; Fr,Sa 16:00-24:00",
+   "hours_raw": null,
+   "hours_published": "Aukioloajat 2026: Teatro avoinna Logomon tapahtumailtoina. Ke 16-22, To 16-22, Pe-la 16-00. Keittiö menee kiinni 30 min ennen ravintolan sulkeutumista.",
+   "hours_source": "website (Logomo)",
+   "hours_checked": "2026-10-30"
   },
   {
    "category": "ticket_machine",
@@ -374,8 +505,6 @@
  "plans": [],
  "open": [
   "Signposted platform numbers: Digitraffic has tracks 1–6; Wikipedia (2024) says platforms 1–3. Whether signs say 'laituri 1–3' (three island platforms) or tracks 1–6 is not confirmed.",
-  "Which platform each lift/stair reaches is OSM only (owner texts confirm lifts and stairs from the bridge, not per platform).",
-  "The Vaunukatu-side lift named by VR is not in the OSM extract; its position is unknown.",
   "No signposted level names, no heights (laser found no platform surface).",
   "No published station plan found (vayla.fi project pages would not load).",
   "Teatro Bar & Café hours not found; toilet fee unknown.",
@@ -394,6 +523,48 @@
    "question": "Do trains use a temporary station or platforms during the Turku travel-centre works (the register's platforms sit ~400 m NE of the old station building)? Where do passengers board now?",
    "answer": "Passengers board at the Logomo platforms under Logomonsilta (VR address Logomon Silta 1), between Logomonsilta and Aninkaistensilta, about 10–15 min walk from the old station building. Tampere-direction trains moved there on 5 Aug 2024 and all trains (incl. Helsinki–Turku and night trains) on 15 Dec 2024. These are the new permanent passenger-yard platforms, not temporary ones: the yard was completed with tracks 4–6 on 8 Oct 2025, matching the Digitraffic register (L1–L3 valid from 2024-08-05, L4–L6 from 2025-09-29). The old platforms by the station building (2–7) were dismantled in 2022–24 and the old building closed; only car-carrier loading stays there. What is temporary is the station services (waiting area, toilets, café) in Logomo / Logomo Kitchen, until LogoHub opens (est. spring 2027).",
    "_source": "VR 'Turku' station page, https://www.vr.fi/en/railway-stations-and-routes/turku, read 2026-10-30; VR news 2024-07-26 'Turku railway station to move to Logomo on 5 August 2024', https://www.vr.fi/en/news/2024/07/26/turku-railway-station-to-move-to-logomo-on-5-august-2024, read 2026-10-30; VR news 2024-11-07 'All train traffic will return to Turku railway station on 15 December', https://vr.fi/en/news/2024/11/07/all-train-traffic-will-return-to-turku-railway-station-on-15-december, read 2026-10-30; VR press release 2024-08-02 (STT Info) 'Turun asemapalvelut ja Tampereen suuntaan kulkevien junien lähtölaiturit muuttavat Logomoon 5.8.', https://www.sttinfo.fi/tiedote/70398924/turun-asemapalvelut-ja-tampereen-suuntaan-kulkevien-junien-lahtolaiturit-muuttavat-logomoon-58?lang=fi, read 2026-10-30; Turun Seutusanomat 2025-10-15 'Kupittaa–Turku-ratahanke on valmistunut', https://turunseutusanomat.fi/2025/10/kupittaa-turku-ratahanke-on-valmistunut/, read 2026-10-30; Wikipedia 'Turku Central Station', https://en.wikipedia.org/wiki/Turku_Central_Station, read 2026-10-30; LogoHub, https://logohub.fi, read 2026-10-30; Digitraffic infra-api laiturit TKU L1–L6 (Väylävirasto / Fintraffic, CC BY 4.0; L1–L3 valid from 2024-08-05, L4–L6 from 2025-09-29), read 2026-10-30"
+  },
+  {
+   "question": "Which platform each lift/stair reaches is OSM only (owner texts confirm lifts and stairs from the bridge, not per platform).",
+   "answer": "Lifts serve platform 1/2, platform 3/4, platform 5/6 (One bridge lift per island (0;1), each inside its outline: 1/2, 3/4 and 5/6. Positions are OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n12400350419 to platform outlines and register track lines",
+     "source": "OSM n12400350419 geometry (level 0;1): inside rail platform outline r19525666 (ref 1;2); next 11.7 m from r19525665 (ref 3;4); register lines: 4.8 m from 'TKU L2', 6.7 m from 'TKU L1'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n12423294383 to platform outlines and register track lines",
+     "source": "OSM n12423294383 geometry (level 0;1): inside rail platform outline r19525665 (ref 3;4); next 14.8 m from r19525664 (ref 5;6); register lines: 4.7 m from 'TKU L4', 7.8 m from 'TKU L3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n13097329531 to platform outlines and register track lines",
+     "source": "OSM n13097329531 geometry (level 0;1): inside rail platform outline r19525664 (ref 5;6); next 18.4 m from r19525665 (ref 3;4); register lines: 4.7 m from 'TKU L6', 7.8 m from 'TKU L5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Turku: 'accessible access to the tracks is via the Logomo bridge, which can be reached by elevator from Ratapihankatu and Vaunukatu.'",
+     "source": "https://vr.fi/en/railway-stations-and-routes/turku",
+     "read": "2026-10-30"
+    }
+   ]
+  },
+  {
+   "question": "The Vaunukatu-side lift named by VR is not in the OSM extract; its position is unknown.",
+   "answer": "Lift n9223657386 serves  (The Vaunukatu-side lift is in the raw OSM extract: n9223657386 (ref B1N0A207, level 0;1, 24/7, wheelchair=yes) at the north end of Logomonsilta, 4.5 m from Vaunukatu and 41.9 m from the TKU L6 line. It links street and bridge, not a platform.)",
+   "evidence": [
+    {
+     "what": "distance of lift n9223657386 to platform outlines and register track lines",
+     "source": "OSM n9223657386 geometry (level 0;1): 43.9 m from rail platform outline r19525664 (ref 5;6); next 65.1 m from r19525665 (ref 3;4); register lines: 41.9 m from 'TKU L6', 54.5 m from 'TKU L5'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "VR Turku: elevator from Ratapihankatu and Vaunukatu",
+     "source": "https://vr.fi/en/railway-stations-and-routes/turku",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

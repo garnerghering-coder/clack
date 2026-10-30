@@ -81,7 +81,19 @@
     "lat": 62.791327,
     "how": "OSM n13041561427",
     "_source": "OpenStreetMap n13041561427 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13041561427 to platform outlines and register track lines",
+     "source": "OSM n13041561427 geometry (level -1;0): 0.9 m from rail platform outline w151099480 (ref 1); next 14.6 m from r10357340 (ref 2;3); register lines: 7.9 m from 'SK L1', 12.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -98,7 +110,19 @@
     "lat": 62.791464,
     "how": "OSM n13041561419",
     "_source": "OpenStreetMap n13041561419 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13041561419 to platform outlines and register track lines",
+     "source": "OSM n13041561419 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.8 m from r19531254 (ref 4); register lines: 5.6 m from 'SK L3', 8.6 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -129,7 +153,17 @@
     "lat": 62.791251,
     "how": "OSM n12398310523",
     "_source": "OpenStreetMap n12398310523 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12398310523 to platform outlines and register track lines",
+     "source": "OSM n12398310523 geometry (level None): 9.6 m from rail platform outline w151099480 (ref 1); next 28.1 m from r10357340 (ref 2;3); register lines: 21.3 m from 'SK L1', 26.2 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "underpass",
@@ -162,7 +196,17 @@
     "lat": 62.7920111,
     "how": "OSM n1639400621",
     "_source": "OpenStreetMap n1639400621 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n1639400621 to platform outlines and register track lines",
+     "source": "OSM n1639400621 geometry (level -1;0): 2.2 m from rail platform outline w151099480 (ref 1); next 22.8 m from r10357340 (ref 2;3); register lines: 16.0 m from 'SK L1', 20.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 2.2 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -179,7 +223,19 @@
     "lat": 62.7922026,
     "how": "OSM n1639400624",
     "_source": "OpenStreetMap n1639400624 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n1639400624 to platform outlines and register track lines",
+     "source": "OSM n1639400624 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.1 m from r19531254 (ref 4); register lines: 5.0 m from 'SK L3', 9.4 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -403,7 +459,17 @@
     "lat": 62.7920111,
     "how": "OSM n1639400621",
     "_source": "OpenStreetMap n1639400621 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n1639400621 to platform outlines and register track lines",
+     "source": "OSM n1639400621 geometry (level -1;0): 2.2 m from rail platform outline w151099480 (ref 1); next 22.8 m from r10357340 (ref 2;3); register lines: 16.0 m from 'SK L1', 20.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not settled: nearest rail platform outline is 2.2 m away (more than 3 m), so geometry alone does not show that the lift opens onto it."
   },
   {
    "kind": "lift",
@@ -422,7 +488,19 @@
     "lat": 62.7922026,
     "how": "OSM n1639400624",
     "_source": "OpenStreetMap n1639400624 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n1639400624 to platform outlines and register track lines",
+     "source": "OSM n1639400624 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.1 m from r19531254 (ref 4); register lines: 5.0 m from 'SK L3', 9.4 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -443,7 +521,17 @@
     "lat": 62.791251,
     "how": "OSM n12398310523",
     "_source": "OpenStreetMap n12398310523 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n12398310523 to platform outlines and register track lines",
+     "source": "OSM n12398310523 geometry (level None): 9.6 m from rail platform outline w151099480 (ref 1); next 28.1 m from r10357340 (ref 2;3); register lines: 21.3 m from 'SK L1', 26.2 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Not a platform lift: more than 8 m from every rail platform outline and more than 12 m from every register track line, so it links non-platform levels (street, hall, bridge or tunnel)."
   },
   {
    "kind": "lift",
@@ -462,7 +550,19 @@
     "lat": 62.791464,
     "how": "OSM n13041561419",
     "_source": "OpenStreetMap n13041561419 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13041561419 to platform outlines and register track lines",
+     "source": "OSM n13041561419 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.8 m from r19531254 (ref 4); register lines: 5.6 m from 'SK L3', 8.6 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -483,7 +583,19 @@
     "lat": 62.791327,
     "how": "OSM n13041561427",
     "_source": "OpenStreetMap n13041561427 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n13041561427 to platform outlines and register track lines",
+     "source": "OSM n13041561427 geometry (level -1;0): 0.9 m from rail platform outline w151099480 (ref 1); next 14.6 m from r10357340 (ref 2;3); register lines: 7.9 m from 'SK L1', 12.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -807,7 +919,8 @@
     "to_nearest_platform_m": 11.0,
     "how": "OSM node n12396780467",
     "_source": "OpenStreetMap n12396780467 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "picnic.fi location finder shows placeholders only (JS); no Seinäjoki page found; VR page has no hours."
   },
   {
    "category": "kiosk",
@@ -845,7 +958,8 @@
     "to_nearest_platform_m": 22.7,
     "how": "OSM node n12398310502",
     "_source": "OpenStreetMap n12398310502 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "compass-group.fi Seinäjoki pages failed to load; no other owner page found."
   },
   {
    "category": "toilets",
@@ -980,9 +1094,9 @@
    "name": "Alusasut Justihi Eikä Melekehen",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-17:00; Sa 10:00-14:00",
+   "hours_source": "website (shop)",
+   "hours_checked": "2026-10-30",
    "website": "https://liivitliikkeessa.fi/",
    "position": {
     "lon": 22.8420945,
@@ -995,13 +1109,14 @@
     "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n12431171260 (ODbL), read 2026-10-30; https://liivitliikkeessa.fi/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "arkisin klo 10 – 17 ja lauantaisin 10 – 14"
   }
  ],
  "plans": [],
  "open": [
   "Platform numbering: VR names platforms 1–3 (1 and 2 raised); Digitraffic has tracks 1–4 with only L1 'korkea' (L2–L4 'matala'), and the laser gives L2 ≈0.52 m above rail. How tracks 2–4 map onto platforms 2 and 3, and where track 4's platform is, is unsettled.",
-  "Lifts per platform are OSM only; no published plan read (Väylävirasto 'asemien lähialuekartat' at vayla.fi would not load).",
   "Café Picnic and Food & Co Bistro Kaffeli hours not found; R-Kioski hours are OSM only.",
   "Bus links: VR ('no public transport connections') vs OOPEAA (local buses on Valtionkatu, long-distance buses north of the old station).",
   "No signposted level names; no heights.",
@@ -1020,6 +1135,37 @@
    "question": "Which platforms have stairs/lifts?",
    "answer": "Per OSM: two underpasses, each with a lift and stairs to platform 1 (track 1) and to the island platform for tracks 2–3. The newest (by the new station building, finished Feb 2025) is confirmed by the architect's text; per-platform lifts are OSM only. VR: platforms 1 and 2 are raised, platforms 1–3 have canopies.",
    "_source": "OOPEAA 'The New Seinäjoki Station is Inaugurated', https://oopeaa.com/?p=14694, read 2026-10-30; VR 'Seinäjoki' station page, https://www.vr.fi/rautatieasemat-ja-reitit/seinajoki, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-SK.json), read 2026-10-30"
+  },
+  {
+   "question": "Lifts per platform are OSM only; no published plan read (Väylävirasto 'asemien lähialuekartat' at vayla.fi would not load).",
+   "answer": "Lifts serve platform 1, platform 2/3 (Settled by geometry. n13041561427 (0.9 m) and n1639400621 (2.2 m) serve platform 1; n1639400624 and n13041561419 serve the 2/3 island. n12398310523 (9.6 m) is not a platform lift.)",
+   "evidence": [
+    {
+     "what": "distance of lift n13041561427 to platform outlines and register track lines",
+     "source": "OSM n13041561427 geometry (level -1;0): 0.9 m from rail platform outline w151099480 (ref 1); next 14.6 m from r10357340 (ref 2;3); register lines: 7.9 m from 'SK L1', 12.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n1639400621 to platform outlines and register track lines",
+     "source": "OSM n1639400621 geometry (level -1;0): 2.2 m from rail platform outline w151099480 (ref 1); next 22.8 m from r10357340 (ref 2;3); register lines: 16.0 m from 'SK L1', 20.7 m from 'SK L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n1639400624 to platform outlines and register track lines",
+     "source": "OSM n1639400624 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.1 m from r19531254 (ref 4); register lines: 5.0 m from 'SK L3', 9.4 m from 'SK L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n13041561419 to platform outlines and register track lines",
+     "source": "OSM n13041561419 geometry (level -1;0): inside rail platform outline r10357340 (ref 2;3); next 7.8 m from r19531254 (ref 4); register lines: 5.6 m from 'SK L3', 8.6 m from 'SK L2'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n12398310523 to platform outlines and register track lines",
+     "source": "OSM n12398310523 geometry (level None): 9.6 m from rail platform outline w151099480 (ref 1); next 28.1 m from r10357340 (ref 2;3); register lines: 21.3 m from 'SK L1', 26.2 m from 'SK L2'",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

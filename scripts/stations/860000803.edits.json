@@ -8,20 +8,223 @@
     {
       "osm": "0",
       "id": "L0",
-      "name": "Level 0",
-      "order": 0
+      "name": "Street/platform level: perron 1 (tracks 2/3), perron 2 (tracks 4 and 6), perron 3 (track 7), and perron 4 (track 5, short 129 m, south of the others)",
+      "order": 0,
+      "name_source": "Banedanmark Netredegørelse 2027 Bilag 3.6 + Banedanmark Open Data (platform register dk_register), read 2026-10-30; https://www.wikiwand.com/da/K%C3%B8ge_Station (Danish Wikipedia), read 2026-10-30"
     }
   ],
   "sources": [
     {
       "name": "OpenStreetMap contributors, via Overpass (ODbL)",
       "read": "2026-10-29"
+    },
+    {
+      "type": "sdfi",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://dataforsyningen.dk/",
+      "note": "Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/860000803)."
+    },
+    {
+      "type": "banedanmark",
+      "retrieved": "2026-10-30",
+      "url": "https://www.bane.dk/",
+      "note": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts): platform heights (3D research pass; data/stations/research/banedanmark_platforms_DK.csv)."
     }
   ],
   "changelog": [
     {
       "date": "2026-10-29",
       "what": "First draft from OSM (BUILDOUT O5 batch 2)."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Banedanmark Netredegørelse 2027, Bilag 3.6 (facts); 11 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/860000803)."
+    }
+  ],
+  "poi_hours": {},
+  "platform_heights": {
+    "5": {
+      "height_m": 0.55,
+      "_source": "Banedanmark Netredegørelse 2027, Bilag 3.6 (facts), Banedanmark Netredegørelse 2027, Bilag 3.6 \"Perronlængder og -højder\" (table dated 1 August 2023), read 2026-10-30; TIB 4: tracks 5, class 55 cm = 0.55 m above rail, 129 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/860000803/koge_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w554088122",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 1.74,
+      "_source": "Outline OSM w554088122 (ODbL); roof = median of 126 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10); underside not measured"
+    },
+    {
+      "from": "w591100751",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.96,
+      "base_m": 0.05,
+      "_source": "Outline OSM w591100751 (ODbL); roof = median of 50 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260438",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.62,
+      "base_m": -0.85,
+      "_source": "Outline OSM w652260438 (ODbL); roof = median of 262 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260439",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.17,
+      "base_m": -0.65,
+      "_source": "Outline OSM w652260439 (ODbL); roof = median of 30 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260440",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.23,
+      "base_m": -0.66,
+      "_source": "Outline OSM w652260440 (ODbL); roof = median of 84 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260441",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.24,
+      "base_m": -0.67,
+      "_source": "Outline OSM w652260441 (ODbL); roof = median of 50 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260445",
+      "kind": "building",
+      "name": "building",
+      "top_m": 1.86,
+      "base_m": -1.04,
+      "_source": "Outline OSM w652260445 (ODbL); roof = median of 272 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260447",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.71,
+      "base_m": -0.82,
+      "_source": "Outline OSM w652260447 (ODbL); roof = median of 388 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w652260450",
+      "kind": "bridge",
+      "name": "bridge",
+      "top_m": 6.61,
+      "base_m": 5.35,
+      "_source": "Outline OSM w652260450 (ODbL); roof = median of 7819 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured"
+    },
+    {
+      "from": "w652261257",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.0,
+      "base_m": -4.32,
+      "_source": "Outline OSM w652261257 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    },
+    {
+      "from": "w1163103520",
+      "kind": "building",
+      "name": "building",
+      "top_m": 2.8,
+      "base_m": -0.2,
+      "_source": "Outline OSM w1163103520 (ODbL); roof = median of 254 unclassified laser points >2 m above the terrain model inside the outline; Danmarks Højdemodel – Punktsky, Klimadatastyrelsen, CC BY 4.0 (tiles PUNKTSKY_1km_6150_701); from data/stations/research/860000803/koge_structures_heights.geojson (metres above the platform surface, 3.08 m RH 2000, laser 2025-03-10)"
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/860000803/koge_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 3.08,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/860000803/koge_ground_1m.tif), sampled every 5 m; Danmarks Højdemodel, © Klimadatastyrelsen, CC BY 4.0. Heights above the platform surface (3.08 m DVR90, laser 2025-03-10)"
+  },
+  "pois": [
+    {
+      "id": "rese43aa07606",
+      "category": "kiosk",
+      "name": "DSB 7-Eleven",
+      "level": "0",
+      "x": -27.6,
+      "y": -7.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30; OpenStreetMap (osmfacts extract), read 2026-10-30; placed OSM node n8363710420 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
+    },
+    {
+      "id": "resabfbb00b9c",
+      "category": "restaurant",
+      "name": "Lucky Star",
+      "level": "0",
+      "x": -31.6,
+      "y": 19.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n5908116366 (ODbL), read 2026-10-30; placed OSM node n5908116366 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
+    },
+    {
+      "id": "resafcdbc309f",
+      "category": "cafe",
+      "name": "Lagkagehuset",
+      "level": "0",
+      "x": -46.3,
+      "y": 20.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n8133042258 (ODbL), read 2026-10-30; placed OSM node n8133042258 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
+    },
+    {
+      "id": "resf3a5ef8ba3",
+      "category": "kiosk",
+      "name": "7-Eleven",
+      "level": "0",
+      "x": -27.6,
+      "y": -7.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-24:00; Sa,Su 00:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n8363710420 (ODbL), read 2026-10-30; https://www.dsb.dk/trafikinformation/stationer/koge/, read 2026-10-30; placed OSM node n8363710420 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
+    },
+    {
+      "id": "res64251cb09b",
+      "category": "shop",
+      "name": "365discount",
+      "level": "0",
+      "x": -32.6,
+      "y": -31.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n8363710421 (ODbL), read 2026-10-30; placed OSM node n8363710421 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
+    },
+    {
+      "id": "res4a214d67f2",
+      "category": "pharmacy",
+      "name": "Køge Stations Apotek",
+      "level": "0",
+      "x": -9.2,
+      "y": -114.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-19:00; Sa 08:00-18:00; Su 10:00-13:00; PH 10:00-13:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n8363710422 (ODbL), read 2026-10-30; placed OSM node n8363710422 (research pass 2026-10-30, data/stations/research/860000803/station_facts.json)"
     }
   ]
 }

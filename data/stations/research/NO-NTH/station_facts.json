@@ -498,14 +498,16 @@
     "to_nearest_platform_m": 16.7,
     "how": "OSM node n1174966217",
     "_source": "OpenStreetMap n1174966217 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (#091 'Nationaltheatret jbst., Abelhaugen', Johanne Dybwads plass 1) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "convenience",
    "name": "7-Eleven Nationaltheatret jbst. Abelhaugen",
    "where": "at the Abelhaugen / Johanne Dybwads plass side (store address Johanne Dybwads plass 1)",
    "note": "In the 7-eleven.no store list; hours hidden there. It may be the same unit as the Narvesen entry (both Reitan, same address).",
-   "_source": "https://www.7-eleven.no/butikker/, read 2026-10-30"
+   "_source": "https://www.7-eleven.no/butikker/, read 2026-10-30",
+   "hours_note": "Not found. 7-eleven.no/butikker lists 'Nationaltheatret jbst. Abelhaugen', Johanne Dybwads plass 1, but hours sit behind the same script-filled 'Vis/skjul åpningstider' toggle; no per-store page."
   },
   {
    "category": "bicycle_parking",
@@ -543,28 +545,6 @@
   },
   {
    "category": "restaurant",
-   "name": "Havsmak",
-   "brand": null,
-   "cuisine": "seafood",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
-   "website": "https://www.havsmak.no/",
-   "position": {
-    "lon": 10.728644,
-    "lat": 59.915057,
-    "osm_id": "n1053666516",
-    "osm_level": null,
-    "in_station_building": false,
-    "to_nearest_platform_m": 10.5,
-    "how": "OSM node n1053666516",
-    "_source": "OpenStreetMap n1053666516 (ODbL), read 2026-10-30"
-   },
-   "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n1053666516 (ODbL), read 2026-10-30"
-  },
-  {
-   "category": "restaurant",
    "name": "Halvbroren",
    "brand": null,
    "cuisine": null,
@@ -583,16 +563,17 @@
     "_source": "OpenStreetMap n5865106568 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n5865106568 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n5865106568 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. halvbroren.no is robots-disallowed for WebFetch; no other owner page. OSM n5865106568 ~268 m from station, outside."
   },
   {
    "category": "bar",
    "name": "Bar Bardot",
    "brand": null,
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Th 20:00-01:00; Fr,Sa 20:00-03:00; Su-We off",
+   "hours_source": "website (Bar Bardot)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.7287249,
@@ -605,16 +586,18 @@
     "_source": "OpenStreetMap n10895594423 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n10895594423 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n10895594423 (ODbL), read 2026-10-30; https://www.barbardot.no/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Tor.: 20.00 - 01.00; Fre - Lør.: 20.00 - 03.00; Søn - ons: Stengt (Henrik Ibsens gate 4)"
   },
   {
    "category": "restaurant",
    "name": "Ruffino",
    "brand": null,
    "cuisine": "italian",
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Tu-Sa 16:00-22:00; Su,Mo off",
+   "hours_source": "website (Ruffino)",
+   "hours_checked": "2026-10-30",
    "website": "https://ruffino.no/",
    "position": {
     "lon": 10.7271869,
@@ -627,7 +610,9 @@
     "_source": "OpenStreetMap n11148587905 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n11148587905 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n11148587905 (ODbL), read 2026-10-30; https://ruffino.no/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Kjøkkenet er åpent 16.00 - 22.00. Søndager og mandager holder vi stengt. (Arbinsgate 1)"
   },
   {
    "category": "bakery",
@@ -706,7 +691,7 @@
   }
  ],
  "open": [
-  "No lifts or escalators for the railway in the OSM extract; their positions are unknown. Bane NOR and Wikipedia confirm they exist in the main vestibule.",
+  "No lifts or escalators for the railway in the OSM extract; their positions are unknown. Bane NOR and Wikipedia confirm they exist in the main vestibule. [Lift follow-up 2026-10-30: Not settled. Missing: lift positions from a plan or photo.]",
   "Signposted level names are unknown. Bane NOR uses 'gamle stasjonshallen' (tracks 1–2) and 'nye stasjonshallen' (tracks 3–4) for the platform halls. Depth is about 30 m (Wikipedia, unmeasured by an owner source).",
   "Shops: Bane NOR says 'Flere caféer og kiosker'. Only the Narvesen and 7-Eleven at Abelhaugen were found, in the chains' store lists, with no readable hours. OSM's Narvesen (n1174966217) has no hours. Other cafés were not identified.",
   "Lockers: none at Nationaltheatret (Bane NOR: nearest at Oslo S). Wikipedia still mentions lockers; that is out of date.",
@@ -730,6 +715,12 @@
    "question": "Missing entrances",
    "answer": "Three entrances: Johanne Dybwads plass (Studenterlunden/Nationaltheatret), Ruseløkkveien (main, Vika), and west at Parkveien × Henrik Ibsens gate. OSM has only the Johanne Dybwads plass / Stortingsgata side.",
    "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-n-/nationaltheatret/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-NTH), read 2026-10-30"
+  }
+ ],
+ "dropped": [
+  {
+   "name": "Havsmak",
+   "reason": "its own site puts it in the Opera house (Bjørvika), not at Nationaltheatret; the OSM node looks outdated (hours follow-up 2026-10-30)"
   }
  ]
 }

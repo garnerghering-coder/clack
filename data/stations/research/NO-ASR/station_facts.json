@@ -500,7 +500,19 @@
     "lat": 59.8328374,
     "how": "OSM n10128519311",
     "_source": "OpenStreetMap n10128519311 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 4/5"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10128519311 to platform outlines and register track lines",
+     "source": "OSM n10128519311 geometry (level 0;1): inside rail platform outline r7592986 (ref 4;5); next 11.1 m from r7592987 (ref 2;3); register lines: 4.6 m from 'track 4', 9.8 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -519,7 +531,19 @@
     "lat": 59.8329288,
     "how": "OSM n10128519312",
     "_source": "OpenStreetMap n10128519312 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10128519312 to platform outlines and register track lines",
+     "source": "OSM n10128519312 geometry (level 0;1): inside rail platform outline r7592987 (ref 2;3, local_ref 2;3); next 13.1 m from r7592986 (ref 4;5); register lines: 6.0 m from 'track 3', 11.1 m from 'track 4'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "lift",
@@ -540,7 +564,19 @@
     "lat": 59.8330457,
     "how": "OSM n10128519313",
     "_source": "OpenStreetMap n10128519313 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n10128519313 to platform outlines and register track lines",
+     "source": "OSM n10128519313 geometry (level 0;1): inside rail platform outline w133645355 (ref 1, local_ref 1); next 17.3 m from r7592987 (ref 2;3); register lines: 7.7 m from 'track 1', 27.1 m from 'track 3'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -644,7 +680,8 @@
     "to_nearest_platform_m": 32.3,
     "how": "OSM node n6122924656",
     "_source": "OpenStreetMap n6122924656 (ODbL), read 2026-10-30"
-   }
+   },
+   "hours_note": "Not found. narvesen.no/finn-butikk lists the store (#008 'Asker jbst.', Torvvn. 4) but the hours sit behind a 'Vis/skjul åpningstider' toggle that is filled by script; WebFetch returns only the toggle, no per-store page or data endpoint was reachable (direct curl to narvesen.no is blocked by the proxy). Bane NOR station page gives no shop hours. No other owner page found."
   },
   {
    "category": "cafe",
@@ -836,9 +873,9 @@
    "name": "Sparebanken Øst Asker",
    "brand": "Sparebanken Øst",
    "cuisine": null,
-   "opening_hours": null,
-   "hours_source": null,
-   "hours_checked": null,
+   "opening_hours": "Mo-Fr 10:00-15:00",
+   "hours_source": "website (Sparebanken Øst)",
+   "hours_checked": "2026-10-30",
    "website": null,
    "position": {
     "lon": 10.4344441,
@@ -851,7 +888,9 @@
     "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9253807110 (ODbL), read 2026-10-30; https://www.oest.no/kontor/asker/, read 2026-10-30",
+   "hours_raw": null,
+   "hours_published": "Mandag–fredag kl. 10:00–15:00 (Bankveien 1, 1383 Asker)"
   },
   {
    "category": "bank",
@@ -873,7 +912,8 @@
     "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30"
    },
    "note": "from OSM; compare with the owner list in the hand-read facts",
-   "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30"
+   "_source": "OpenStreetMap n9264747033 (ODbL), read 2026-10-30",
+   "hours_note": "Not found. danskebank.no shows no office list (only 'Finn oss' search widget, no data); Danske Bank's Norwegian personal customers were transferred to Nordea in Nov 2024, so this branch (OSM n9264747033, ~187 m away, outside station) may no longer serve the public. Not confirmed by an owner page."
   },
   {
    "category": "cafe",
@@ -922,8 +962,7 @@
  ],
  "plans": [],
  "open": [
-  "Island platforms 2/3 and 4/5 are not in the OSM extract, so how they are reached (which stairs/lifts from the footbridge or underpass) is not established. OSM has only 3 lifts at the footbridge, while a lift per platform would need 4; Bane NOR only says 'heis i tilknytning til overgangsbroen'.",
-  "Whether the station-building underpass reaches the island platforms (and has lifts) is unknown; Bane NOR mentions lifts only at the west-end footbridge. Wikipedia says the underpass was replaced by an overpass in the 1990s upgrade, but Bane NOR's current text and the artwork describe a working underpass at the station building.",
+  "Whether the station-building underpass reaches the island platforms (and has lifts) is unknown; Bane NOR mentions lifts only at the west-end footbridge. Wikipedia says the underpass was replaced by an overpass in the 1990s upgrade, but Bane NOR's current text and the artwork describe a working underpass at the station building. [Lift follow-up 2026-10-30: Not settled. OSM's underpass at the station building reaches only the track 6 side and has no lifts. No owner plan or photo shows whether it continues to the islands. Missing: a Bane NOR station plan or a dated photo of the underpass.]",
   "Signposted names for the levels, the underpass and the footbridge not found; no heights in any source.",
   "Narvesen hours missing (not in OSM; narvesen.no unreadable). Espresso House and Peppes hours are from OSM only; Glorioso's published hours are labelled July 2026.",
   "Rema 1000 is mentioned by Bane NOR as a landmark ('Glasshuset' between Rema 1000 and the parking garage) but is not in the OSM extract and rema.no's page did not render, so it is not listed.",
@@ -944,6 +983,32 @@
    "question": "(no open-question list for Norway; levels, ways to the platforms, entrances and shops requested)",
    "answer": "Six tracks: side platform 1 (town side, bus and taxi), island platforms 2/3 and 4/5, side platform 6. Two crossings: an underpass at the station building (ticket machine inside; OSM w306981125 reaching platforms 1 and 6, with a ramp and stairs to platform 6 via w1120605495) and a footbridge at the west end with lifts (Bane NOR; OSM has 3 lifts, w67300743). Shops in the station building: Narvesen, Espresso House, Glorioso; Peppes Pizza next door.",
    "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-a-/asker/, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_no/NO-ASR.json), read 2026-10-30; Glorioso https://glorioso.no/, read 2026-10-30"
+  },
+  {
+   "question": "Island platforms 2/3 and 4/5 are not in the OSM extract, so how they are reached (which stairs/lifts from the footbridge or underpass) is not established. OSM has only 3 lifts at the footbridge, while a lift per platform would need 4; Bane NOR only says 'heis i tilknytning til overgangsbroen'.",
+   "answer": "Lifts serve platform 1, platform 2/3, platform 4/5 (The raw OSM extract does contain both island platforms, as relations r7592987 (ref 2;3) and r7592986 (ref 4;5); the earlier facts extract missed relations. Each of the three footbridge lifts (levels 0;1) lies inside one outline: n10128519313 serves platform 1, n10128519312 serves platform 2/3, and n10128519311 serves platform 4/5. Platform 6 (w133645357) has no lift in OSM; the nearest is 16.8 m away. That is consistent with OSM having 3 lifts, not 4. Source is OSM only.)",
+   "evidence": [
+    {
+     "what": "distance of lift n10128519313 to platform outlines and register track lines",
+     "source": "OSM n10128519313 geometry (level 0;1): inside rail platform outline w133645355 (ref 1, local_ref 1); next 17.3 m from r7592987 (ref 2;3); register lines: 7.7 m from 'track 1', 27.1 m from 'track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n10128519312 to platform outlines and register track lines",
+     "source": "OSM n10128519312 geometry (level 0;1): inside rail platform outline r7592987 (ref 2;3, local_ref 2;3); next 13.1 m from r7592986 (ref 4;5); register lines: 6.0 m from 'track 3', 11.1 m from 'track 4'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "distance of lift n10128519311 to platform outlines and register track lines",
+     "source": "OSM n10128519311 geometry (level 0;1): inside rail platform outline r7592986 (ref 4;5); next 11.1 m from r7592987 (ref 2;3); register lines: 4.6 m from 'track 4', 9.8 m from 'track 3'",
+     "read": "2026-10-30"
+    },
+    {
+     "what": "Bane NOR Asker (EN): lists only 'Elevator (HC)', 'Elevator', 'Wheelchair ramps to platform'; no per-platform text",
+     "source": "https://www.banenor.no/en/traffic-and-travel/railway-stations/-a-/asker/",
+     "read": "2026-10-30"
+    }
+   ]
   }
  ]
 }

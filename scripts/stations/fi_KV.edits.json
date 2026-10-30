@@ -159,10 +159,10 @@
       "x": 7.2,
       "y": -56.7,
       "fee": null,
-      "opening_hours": null,
-      "hours_source": null,
-      "hours_verified": null,
-      "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; placed OSM node n2049440192 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
+      "opening_hours": "Mo-Su 06:00-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-KV.json), read 2026-10-30; https://www.avis.com/en/locations/fi/kouvola/ku9, read 2026-10-30; placed OSM node n2049440192 (research pass 2026-10-30, data/stations/research/fi_KV/station_facts.json)"
     },
     {
       "id": "resed2bfe674c",
@@ -211,7 +211,7 @@
       "category": "taxi",
       "name": "Kymenlaakson Taksi",
       "level": "0",
-      "x": 28,
+      "x": 28.0,
       "y": -84.3,
       "fee": null,
       "opening_hours": null,

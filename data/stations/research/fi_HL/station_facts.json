@@ -80,7 +80,19 @@
     "lat": 61.0026977,
     "how": "OSM n5181724177",
     "_source": "OpenStreetMap n5181724177 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5181724177 to platform outlines and register track lines",
+     "source": "OSM n5181724177 geometry (level -1;0): 3.1 m from rail platform outline w61899397 (ref 1); next 16.0 m from w1124153295 (ref 2); register lines: 7.9 m from 'HL L1', 14.4 m from 'HL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 3.1 m from the platform 1 outline, just outside the 3 m rule. It lies 7.9 m SW of the HL L1 line, on platform 1's side (south-west per the facts), and no other platform is within 16 m. Platform 1 is the probable answer but is not settled. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -97,7 +109,19 @@
     "lat": 61.0028467,
     "how": "OSM n5181724185",
     "_source": "OpenStreetMap n5181724185 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5181724185 to platform outlines and register track lines",
+     "source": "OSM n5181724185 geometry (level -1;0): 1.2 m from rail platform outline w389810790 (ref 3); next 1.2 m from w1124153295 (ref 2); register lines: 7.1 m from 'HL L3', 8.4 m from 'HL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   },
   {
    "kind": "stairs",
@@ -392,7 +416,19 @@
     "lat": 61.0026977,
     "how": "OSM n5181724177",
     "_source": "OpenStreetMap n5181724177 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 1"
+   ],
+   "serves_settled": false,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5181724177 to platform outlines and register track lines",
+     "source": "OSM n5181724177 geometry (level -1;0): 3.1 m from rail platform outline w61899397 (ref 1); next 16.0 m from w1124153295 (ref 2); register lines: 7.9 m from 'HL L1', 14.4 m from 'HL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "The lift is 3.1 m from the platform 1 outline, just outside the 3 m rule. It lies 7.9 m SW of the HL L1 line, on platform 1's side (south-west per the facts), and no other platform is within 16 m. Platform 1 is the probable answer but is not settled. Source is OSM only."
   },
   {
    "kind": "lift",
@@ -414,7 +450,19 @@
     "lat": 61.0028467,
     "how": "OSM n5181724185",
     "_source": "OpenStreetMap n5181724185 (ODbL), read 2026-10-30"
-   }
+   },
+   "serves_platforms": [
+    "platform 2/3"
+   ],
+   "serves_settled": true,
+   "serves_evidence": [
+    {
+     "what": "distance of lift n5181724185 to platform outlines and register track lines",
+     "source": "OSM n5181724185 geometry (level -1;0): 1.2 m from rail platform outline w389810790 (ref 3); next 1.2 m from w1124153295 (ref 2); register lines: 7.1 m from 'HL L3', 8.4 m from 'HL L2'",
+     "read": "2026-10-30"
+    }
+   ],
+   "serves_note": "Lift lies inside or within 3 m of the OSM platform outline; register track lines on both sides confirm which tracks the platform serves. Source is OSM only (no owner text places it)."
   }
  ],
  "entrances": [
@@ -610,7 +658,7 @@
    "name": "Scandia Rent",
    "osm_id": "n5894019063",
    "where": "in the station building (OSM)",
-   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30",
+   "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-HL.json), read 2026-10-30; https://scandiarent.fi/toimipisteet/hameenlinna/, read 2026-10-30",
    "position": {
     "lon": 24.4779429,
     "lat": 61.0023714,
@@ -620,7 +668,12 @@
     "to_nearest_platform_m": 11.3,
     "how": "OSM node n5894019063",
     "_source": "OpenStreetMap n5894019063 (ODbL), read 2026-10-30"
-   }
+   },
+   "opening_hours": null,
+   "hours_raw": "rautatieaseman toimipiste palvelee sopimuksen mukaan, autojen noutojen ja palautusten aikataulujen mukaan.",
+   "hours_published": "rautatieaseman toimipiste palvelee sopimuksen mukaan, autojen noutojen ja palautusten aikataulujen mukaan.",
+   "hours_source": "website (Scandia Rent / MABI Mobility)",
+   "hours_checked": "2026-10-30"
   },
   {
    "category": "parcel_locker",
@@ -745,7 +798,7 @@
  "plans": [],
  "open": [
   "Level names: no owner source signposts names for the underpass or bridge level.",
-  "Exact position of the lifts and whether the Viipurintie bridge stairs exist as mapped: OSM only.",
+  "Exact position of the lifts and whether the Viipurintie bridge stairs exist as mapped: OSM only. [Lift follow-up 2026-10-30: n5181724185 serves the 2/3 island (1.2 m from both outlines). n5181724177 is 3.1 m from platform 1 on its south-west side, so platform 1 is probable but just outside the 3 m rule. Exact positions remain OSM only. The Viipurintie stairs are not checked by any non-OSM source.]",
   "Asemaravintola hours are OSM's only; no restaurant website found.",
   "Toilet fee amount not given by VR; fee=yes is OSM only.",
   "Väylävirasto's station area map PDF (linked from VR's page: vayla.fi/vaylista/aineistot/kartat/asemien-lahialuekartat) could not be read (fetch error), so no plan is listed."
