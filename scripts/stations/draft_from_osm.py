@@ -1103,6 +1103,15 @@ def main():
         s["points"] = [[round(x, 1), round(y, 1)] for x, y in s["points"]]
     for p in out["platforms"]:
         p["geometry"] = [[[round(x, 1), round(y, 1)] for x, y in g] for g in p["geometry"]]
+        # Sectors ("2a", "2b") along one platform, from a line file (Trafikverket's BanInfo track lines): extra edges
+        # with the sector's track, so a train announced at "2a" stands in that part (docs/STATION_3D_RESEARCH.md).
+        for sec in edits.get("sector_edges", {}).get(p["ref"], []):
+            feats = json.load(open(os.path.join(ROOT, sec["file"])))["features"]
+            f = next((f for f in feats if f["properties"].get("track") == sec["feature_track"]), None)
+            if f is None:
+                raise SystemExit(f"sector_edges {p['ref']}: no track {sec['feature_track']} in {sec['file']}")
+            pts = [[round(x, 1), round(y, 1)] for x, y in (xy(la, lo) for lo, la in f["geometry"]["coordinates"])]
+            p.setdefault("edges", []).append(dict(track=sec["track"].lower(), points=pts, _source=sec["_source"], note="the sector's track line, not the platform edge itself"))
         if "height_m" in edits.get("platform_heights", {}).get(p["ref"], {}):
             p["height_m"] = edits["platform_heights"][p["ref"]]["height_m"]
             p["_source"] += f"; height from {edits['platform_heights'][p['ref']]['_source']}"
@@ -1130,7 +1139,8 @@ def apply_structures(shapes, edits, xy, ground_level):
         if f is None:
             raise SystemExit(f"structures[{i}]: no feature {st['from']} in {edits['structures_file']}")
         ring = f["geometry"]["coordinates"][0]
-        pts = simplify([xy(la, lo) for lo, la in ring], 0.5)
+        # Outlines traced from 1 m laser cells come out stair-stepped: `simplify_m` smooths them (2 m keeps the shape).
+        pts = simplify([xy(la, lo) for lo, la in ring], st.get("simplify_m", 0.5))
         osm = None
         if st["from"][:1] in ("w", "r") and st["from"][1:].isdigit():
             osm = f"osm:{'way' if st['from'][0] == 'w' else 'relation'}/{st['from'][1:]}"

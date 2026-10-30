@@ -35,8 +35,9 @@ export interface StationLevel {
 export interface StationShape {
   level: string;
   /** "track" is an open line (rails between platforms); the others are polygons. */
-  /** "roof": a roof with open sides or an unknown underside (a platform canopy, a footbridge seen from above). */
-  kind: 'building' | 'hall' | 'room' | 'shop' | 'track' | 'roof';
+  /** "roof": a roof with open sides or an unknown underside (a platform canopy). "bridge": an enclosed footbridge
+   *  between `base_m` (its underside) and `top_m`. */
+  kind: 'building' | 'hall' | 'room' | 'shop' | 'track' | 'roof' | 'bridge';
   name?: string;
   points: Pt[];
   /** For "track": the track number, when the rails carry one (OSM railway:track_ref / ref). */
@@ -45,7 +46,7 @@ export interface StationShape {
   height_m?: number;
   /** For buildings and roofs: the top, in metres above the platform surface (the reference level), measured. */
   top_m?: number;
-  /** For buildings: the lowest ground at the outline, metres above the platform surface (negative below it). */
+  /** For buildings: the lowest ground at the outline; for bridges: the underside. Metres above the platform surface. */
   base_m?: number;
   _source?: SourceRef;
 }
@@ -197,6 +198,7 @@ function validateSchema2(m: StationMap, nodes: Map<string, StationNode>, adj: Ma
   m.shapes.forEach((s, i) => need(`shape ${i} (${s.kind}${s.name ? ` ${s.name}` : ''})`, s._source));
   m.shapes.forEach((s, i) => {
     if (s.kind === 'roof' && s.top_m === undefined) errors.push(`shape ${i} (roof${s.name ? ` ${s.name}` : ''}): a roof needs top_m`);
+    if (s.kind === 'bridge' && (s.top_m === undefined || s.base_m === undefined)) errors.push(`shape ${i} (bridge${s.name ? ` ${s.name}` : ''}): a bridge needs top_m and base_m`);
     if (s.top_m !== undefined && s.base_m !== undefined && s.top_m <= s.base_m) errors.push(`shape ${i}: top_m is not above base_m`);
   });
   if (m.terrain) {
@@ -452,13 +454,36 @@ export function fromLocal(m: StationMap, x: number, y: number): [number, number]
 }
 
 /**
- * Where a train standing at a track is drawn: the platform's node (the middle of the platform) in WGS84, for the
- * platform that serves the track; null when the map doesn't know the track.
+ * Where a train standing at a track is drawn, in WGS84: for a sector ("2a") the middle of that sector's edge when the
+ * map has one (owner, 2026-10-30: trains wait at their part of the platform), else the platform's node (its middle);
+ * null when the map doesn't know the track.
  */
 export function platformPoint(m: StationMap, track: string | null | undefined): [number, number] | null {
   const p = platformForTrack(m, track);
-  const n = p && m.nodes.find((x) => x.id === p.node);
+  if (!p) return null;
+  const sector = (track ?? '').trim().toLowerCase();
+  const edge = /[a-z]$/.test(sector) ? p.edges?.find((e) => e.track === sector && e.points.length >= 2) : undefined;
+  if (edge) {
+    const [x, y] = midpointAlong(edge.points);
+    return fromLocal(m, x, y);
+  }
+  const n = m.nodes.find((x) => x.id === p.node);
   return n ? fromLocal(m, n.x, n.y) : null;
+}
+
+/** The point halfway along a polyline, by length. */
+export function midpointAlong(pts: Pt[]): Pt {
+  const seg = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i]![0], q[1] - pts[i]![1]));
+  let left = seg.reduce((a, b) => a + b, 0) / 2;
+  for (let i = 0; i < seg.length; i++) {
+    if (left <= seg[i]!) {
+      const f = seg[i]! > 0 ? left / seg[i]! : 0;
+      const a = pts[i]!, b = pts[i + 1]!;
+      return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
+    }
+    left -= seg[i]!;
+  }
+  return pts[pts.length - 1]!;
 }
 
 /** The walking-graph node closest to a point on a level, if one is within `maxMeters`. */

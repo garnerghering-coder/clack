@@ -253,7 +253,8 @@
       "kind": "roof",
       "name": "Waiting hall roof over platform 2b",
       "top_m": 6.1,
-      "_source": "outline traced from the laser (761 m², sloping 98.1 → 96.9 m), top median 97.77 m; underside not measured; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+      "_source": "outline traced from the laser (761 m², sloping 98.1 → 96.9 m), top median 97.77 m; underside not measured; heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)",
+      "simplify_m": 2.0
     },
     {
       "from": "w401108813",
@@ -264,10 +265,11 @@
     },
     {
       "from": "w81576735",
-      "kind": "roof",
+      "kind": "bridge",
       "name": "Footbridge",
       "top_m": 9.07,
-      "_source": "outline osm:way/81576735 (building=bridge, layer 2); roof top median 100.74 m; the deck's height is not measured (airborne laser sees only the roof); heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000)"
+      "_source": "outline osm:way/81576735 (building=bridge, layer 2); roof top median 100.74 m; the deck's height is not measured (airborne laser sees only the roof); heights: Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0, from data/stations/research/740000090 (metres above the platform surface, 91.67 m RH 2000); underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11, Trafikverket publ. 2011:086): a lower bound, not measured",
+      "base_m": 5.32
     },
     {
       "from": "r13095414",
@@ -363,5 +365,21 @@
     "reference_m": 91.67,
     "step_m": 5,
     "_source": "ground from the laser's ground and water points, 1 m grid (data/stations/research/740000090/jonkoping_c_ground_1m.tif), sampled every 5 m; Laserdata Nedladdning, skog (scanned 2022-03-19/20), © Lantmäteriet, bearbetad, CC BY 4.0. Heights above the platform surface (91.67 m RH 2000, laser). Vättern is the flat −2.9 m"
+  },
+  "sector_edges": {
+    "2": [
+      {
+        "track": "2a",
+        "file": "data/stations/research/740000090/jonkoping_c_platform_trafikverket.geojson",
+        "feature_track": "2a",
+        "_source": "Trafikverket BanInfo (CC0), layers Plattform and Sparnummer, BIS object 1705, read 2026-10-29: the 2a part of platform 2 as its track line (data/stations/research/740000090/jonkoping_c_platform_trafikverket.geojson); the station's PlatformLine values 2a and 2b agree (Trafikverket TrainStation Jö)"
+      },
+      {
+        "track": "2b",
+        "file": "data/stations/research/740000090/jonkoping_c_platform_trafikverket.geojson",
+        "feature_track": "2b",
+        "_source": "Trafikverket BanInfo (CC0), layers Plattform and Sparnummer, BIS object 1705, read 2026-10-29: the 2b part of platform 2 as its track line (data/stations/research/740000090/jonkoping_c_platform_trafikverket.geojson); the station's PlatformLine values 2a and 2b agree (Trafikverket TrainStation Jö)"
+      }
+    ]
   }
 }

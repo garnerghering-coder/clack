@@ -90,9 +90,11 @@ export function structureFeatures(m: StationMap, stationId: string) {
   const lantmateriet = m.sources.some((s) => s.type === 'lantmateriet');
   const r2 = (v: number) => Math.round(v * 100) / 100;
   return m.shapes
-    .filter((s) => (s.kind === 'building' || s.kind === 'roof') && s.top_m !== undefined && s.points.length >= 3)
+    .filter((s) => (s.kind === 'building' || s.kind === 'roof' || s.kind === 'bridge') && s.top_m !== undefined && s.points.length >= 3)
     .map((s) => {
       const top = s.top_m! + rail;
+      // A building stands on the flat ground; a roof is a sheet under its top; a bridge spans from its underside.
+      const base = s.kind === 'roof' ? Math.max(0, top - ROOF_SHEET_M) : s.kind === 'bridge' ? Math.max(0, (s.base_m ?? 0) + rail) : 0;
       const ring = s.points.map(([x, y]) => {
         const [lat, lon] = fromLocal(m, x, y);
         return [r6(lon), r6(lat)];
@@ -100,7 +102,7 @@ export function structureFeatures(m: StationMap, stationId: string) {
       ring.push(ring[0]!);
       return {
         type: 'Feature' as const,
-        properties: { kind: 'structure', cls: s.kind, stationId, name: s.name ?? '', base: s.kind === 'roof' ? r2(Math.max(0, top - ROOF_SHEET_M)) : 0, height: r2(top), lantmateriet },
+        properties: { kind: 'structure', cls: s.kind === 'bridge' ? 'building' : s.kind, stationId, name: s.name ?? '', base: r2(base), height: r2(top), lantmateriet },
         geometry: { type: 'Polygon' as const, coordinates: [ring] },
       };
     });

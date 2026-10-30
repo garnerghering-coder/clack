@@ -278,6 +278,17 @@ describe('the Swedish ingest places trains (§A)', () => {
     expect(haversineM(train()!.lat, train()!.lon, alvesta.origin.lat, alvesta.origin.lon)).toBeGreaterThan(10);
   });
 
+  it('stands a train announced at a sector in that part of the platform (Jönköping C 2a west of 2b)', () => {
+    const jkpg = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/stations/740000090.json'), 'utf8')) as StationMap;
+    const a = platformPoint(jkpg, '2a')!, b = platformPoint(jkpg, '2b')!, whole = platformPoint(jkpg, '2')!;
+    // [lat, lon]: 2a is the western part (Trafikverket's lines end at 14.1623 E and start at 14.1633 E).
+    expect(a[1]).toBeLessThan(14.1623);
+    expect(b[1]).toBeGreaterThan(14.1633);
+    expect(haversineM(a[0], a[1], whole[0], whole[1])).toBeGreaterThan(50);
+    // A sector the map doesn't have falls back to the platform's middle.
+    expect(platformPoint(jkpg, '2c')).toEqual(whole);
+  });
+
   it('moves an overdue train to the approach at Jönköping C, then onto platform 2 there', async () => {
     const { train, jonkoping, tick } = await setup(
       [ann('Av', 'Avgang', '13:43', { TimeAtLocation: T('13:44'), TrackAtLocation: '3a' }), ann('Jö', 'Ankomst', '14:40', { TrackAtLocation: '2' })],
