@@ -11,6 +11,13 @@
       "name": "Street / station-hall level (Rautatienkatu side, station hall, the tunnels under the tracks)",
       "order": 0,
       "name_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30"
+    },
+    {
+      "osm": "1",
+      "id": "L1",
+      "name": "Platforms",
+      "order": 1,
+      "name_source": "OSM: the railway platforms (relations 19521519, 19521688, 19521717, refs 1, 2;3, 4;5 as signposted) are tagged level 1, above the street-level hall and the tunnels under the tracks"
     }
   ],
   "sources": [
@@ -41,10 +48,28 @@
     {
       "date": "2026-10-30",
       "who": "the owner's assistant",
+      "what": "Corrected: the draft had taken the tram stops Koskipuisto A/B and Rautatieasema A/B (refs 0807–0810) as the station's platforms; now the railway platforms 1, 2–3 and 4–5 (OSM level 1, numbered as signposted and in Digitraffic) on a platform level above the hall."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
       "what": "Platform heights from Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0); 7 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/fi_TPE)."
     }
   ],
-  "platform_heights": {},
+  "platform_heights": {
+    "1": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3322417, read 2026-10-30, CC BY 4.0: tracks 1, class korkea = 0.55 m above rail, 500 m long; a recorded design class, not a survey"
+    },
+    "2–3": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3322497, read 2026-10-30, CC BY 4.0: tracks 2, class korkea = 0.55 m above rail, 500 m long; a recorded design class, not a survey"
+    },
+    "4–5": {
+      "height_m": 0.55,
+      "_source": "Digitraffic infra-api platforms (Fintraffic/Väylävirasto, CC BY 4.0), Digitraffic infra-api laiturit 1.2.246.586.1.37.3322775, read 2026-10-30, CC BY 4.0: tracks 4, class korkea = 0.55 m above rail, 500 m long; a recorded design class, not a survey"
+    }
+  },
   "structures_file": "data/stations/research/fi_TPE/tampere_structures_heights.geojson",
   "structures": [
     {
@@ -182,90 +207,6 @@
       "_source": "https://www.vr.fi/rautatieasemat-ja-reitit/tampere and https://www.vr.fi/en/railway-stations-and-routes/tampere, read 2026-10-30; OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed OSM node n13091349705 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
     },
     {
-      "id": "resc881b44ff6",
-      "category": "kiosk",
-      "name": "R-Kioski",
-      "level": "0",
-      "x": -16.3,
-      "y": -23.7,
-      "fee": null,
-      "opening_hours": "Mo-Fr 05:00-24:00; Sa 06:00-24:00; Su 07:00-24:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287107 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
-      "id": "res9d48e94b37",
-      "category": "restaurant",
-      "name": "Subway",
-      "level": "0",
-      "x": -15.4,
-      "y": -11.6,
-      "fee": null,
-      "opening_hours": "Mo-Th 09:00-23:30; Fr-Sa 08:30-01:00; Su 08:30-24:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287109 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
-      "id": "res8a745996cf",
-      "category": "cafe",
-      "name": "Brander",
-      "level": "0",
-      "x": -15.2,
-      "y": -4.2,
-      "fee": null,
-      "opening_hours": "Mo-Fr 06:30-19:00; Sa 06:30-17:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287110 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
-      "id": "res6bcb5e0ebf",
-      "category": "restaurant",
-      "name": "Asemamestari",
-      "level": "0",
-      "x": -15.1,
-      "y": 3.4,
-      "fee": null,
-      "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 10:00-24:00; Su 11:00-22:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287111 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
-      "id": "res5a4f1d0606",
-      "category": "kiosk",
-      "name": "Punnitse ja Säästä",
-      "level": "0",
-      "x": -14.8,
-      "y": 18.7,
-      "fee": null,
-      "opening_hours": "Mo-Fr 07:00-20:00; Sa 09:00-19:00; Su 10:00-19:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287112 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
-      "id": "resbd37a53903",
-      "category": "restaurant",
-      "name": "Bento Ya!",
-      "level": "0",
-      "x": -16.6,
-      "y": -42.3,
-      "fee": null,
-      "opening_hours": "11:00-21:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287116 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
-      "approximate": true
-    },
-    {
       "id": "res98a29e34f2",
       "category": "cafe",
       "name": "Aitoleipä",
@@ -292,19 +233,6 @@
       "hours_verified": "2026-10-30",
       "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed representative point of the OSM area w1424287114 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)",
       "approximate": true
-    },
-    {
-      "id": "res9ae4fa5421",
-      "category": "restaurant",
-      "name": "Semafori",
-      "level": "0",
-      "x": -18.8,
-      "y": -72.2,
-      "fee": null,
-      "opening_hours": "We-Sa 10:00-03:00; Su-Tu 10:00-24:00",
-      "hours_source": "manual",
-      "hours_verified": "2026-10-30",
-      "_source": "OpenStreetMap (osmfacts extract /home/claude/osmfacts_fi/FI-TPE.json), read 2026-10-30; placed OSM node n139581997 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
     },
     {
       "id": "res9271fed95b",
@@ -449,5 +377,14 @@
       "hours_verified": "2026-10-30",
       "_source": "OpenStreetMap n14107110258 (ODbL), read 2026-10-30; placed OSM node n14107110258 (research pass 2026-10-30, data/stations/research/fi_TPE/station_facts.json)"
     }
+  ],
+  "multipolygons": true,
+  "drop_platforms": [],
+  "drop_platforms_note": "The tram stops Koskipuisto A/B and Rautatieasema A/B (OSM railway=platform, refs 0807–0810) were drafted as the station's platforms; the railway platforms are the OSM relations numbered from Digitraffic (owner, 2026-10-30).",
+  "drop_platform_ways": [
+    "849209692",
+    "849209691",
+    "849209694",
+    "849209693"
   ]
 }

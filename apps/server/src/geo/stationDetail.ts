@@ -41,6 +41,9 @@ export function cacheKey(b: Bbox): string {
 /** The platform polygons of one map, each ring in WGS84 (lon, lat), with the platform's number and tracks. */
 export function platformFeatures(m: StationMap, stationId: string) {
   const r6 = (v: number) => Math.round(v * 1e6) / 1e6;
+  const counts = new Map<string, number>();
+  for (const p of m.platforms) counts.set(p.level, (counts.get(p.level) ?? 0) + 1);
+  const mainLevel = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
   return m.platforms.map((p) => {
     const rings = (p.geometry ?? []).map((ring) => ring.map(([x, y]) => {
       const [lat, lon] = fromLocal(m, x, y);
@@ -60,9 +63,10 @@ export function platformFeatures(m: StationMap, stationId: string) {
         node: node ? [r6(node[1]), r6(node[0])] : null,
         draft: m.quality === 'osm_draft',
         // Above the rails, the map's flat ground; the standard when the map has none. `measured` (what the 3D raises)
-        // also needs the platform on the main level: a tunnel platform (Malmö C's City Tunnel) isn't on the surface.
+        // also needs the platform on the main platform level (the one most platforms are on): a tunnel platform
+        // (Malmö C's City Tunnel) isn't on the surface; Tampere's platforms are all a level above its hall.
         height: p.height_m ?? STANDARD_PLATFORM_HEIGHT_M,
-        measured: p.height_m !== undefined && (m.levels.find((l) => l.id === p.level)?.order ?? 0) === 0,
+        measured: p.height_m !== undefined && p.level === mainLevel,
       },
       geometry: { type: 'Polygon' as const, coordinates: rings },
     };

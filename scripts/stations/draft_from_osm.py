@@ -425,7 +425,8 @@ def main():
             p = left + right[::-1] + [left[0]]
         # Tracks without their sector letter ("2a" → "2"): the app and the validator match tracks that way; the
         # platform's ref keeps the letter, and so does an edge's track from the rail's own number.
-        tracks = list(dict.fromkeys(re.sub(r"[a-z]+$", "", x.strip().lower()) for x in re.split(r"[;,]", ref) if x.strip()))
+        # A track that is only a letter (Oslo S's "B") keeps it: stripping would leave nothing to match.
+        tracks = list(dict.fromkeys((re.sub(r"[a-z]+$", "", x.strip().lower()) or x.strip().lower()) for x in re.split(r"[;,]", ref) if x.strip()))
         platforms.append(dict(ref=ref.replace(";", "–"), tracks=tracks, level=level_id[lv[0]], poly=p, wid=wid))
     # Merge pieces with the same ref.
     by_ref = defaultdict(list)

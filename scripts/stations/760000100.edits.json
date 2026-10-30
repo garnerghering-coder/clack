@@ -29,7 +29,21 @@
     }
   ],
   "rotation": 0,
-  "sources": [],
+  "sources": [
+    {
+      "type": "kartverket",
+      "license": "CC BY 4.0",
+      "retrieved": "2026-10-30",
+      "url": "https://hoydedata.no/",
+      "note": "Høydedata, © Kartverket, CC BY 4.0: building and roof heights and the ground (3D research pass; pack in data/stations/research/NO-OSL_S)."
+    },
+    {
+      "type": "banenor",
+      "retrieved": "2026-10-30",
+      "url": "https://www.banenor.no/",
+      "note": "Bane NOR's station page, track table (facts): platform heights (3D research pass; data/stations/research/banenor_platforms_NO.csv)."
+    }
+  ],
   "changelog": [
     {
       "date": "2026-10-28",
@@ -40,9 +54,1742 @@
       "date": "2026-10-29",
       "who": "the owner's assistant",
       "what": "Levels renumbered to OSM's Norwegian floors (1 = ground with the platforms); default_level 1; untagged paths within 60 m of platforms kept."
+    },
+    {
+      "date": "2026-10-30",
+      "who": "the owner's assistant",
+      "what": "Platform heights from Bane NOR's station page, track table (facts); 84 buildings, roofs and footbridges with laser heights; the ground as a 5 m grid (3D research pass, data/stations/research/NO-OSL_S)."
     }
   ],
   "default_level": "1",
   "path_radius": 60,
-  "paths_by_layer": true
+  "paths_by_layer": true,
+  "platform_heights": {
+    "1–2": {
+      "height_m": 0.57,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS1,2, class 570 mm = 0.57 m above rail, 252.0 m long; a recorded design class, not a survey"
+    },
+    "3–4": {
+      "height_m": 0.57,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS3,4, class 570 mm = 0.57 m above rail, 252.0 m long; a recorded design class, not a survey"
+    },
+    "9–10": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS9,10, class 700 mm = 0.7 m above rail, 238.0 m long; a recorded design class, not a survey"
+    },
+    "13–14": {
+      "height_m": 0.7,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS13,14, class 700 mm = 0.7 m above rail, 234.0 m long; a recorded design class, not a survey"
+    },
+    "15–16": {
+      "height_m": 0.57,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS15,16, class 570 mm = 0.57 m above rail, 234.0 m long; a recorded design class, not a survey"
+    },
+    "17–18": {
+      "height_m": 0.57,
+      "_source": "Bane NOR's station page, track table (facts), Bane NOR station page https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/ (track table), read 2026-10-30: tracks OS17,18, class 570 mm = 0.57 m above rail, 234.0 m long; a recorded design class, not a survey"
+    }
+  },
+  "structures_file": "data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson",
+  "structures": [
+    {
+      "from": "w4390874",
+      "kind": "building",
+      "name": "Posthuset (commercial)",
+      "top_m": 88.84,
+      "base_m": -0.18,
+      "_source": "Outline OSM w4390874 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w4390875",
+      "kind": "building",
+      "name": "Oslo sentralstasjon (Oslo S) (station building)",
+      "top_m": 5.43,
+      "base_m": -3.01,
+      "_source": "Outline OSM w4390875 (ODbL); roof = median of 70 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w4757710",
+      "kind": "building",
+      "name": "Galleri Oslo (transportation)",
+      "top_m": 15.55,
+      "base_m": -2.1,
+      "_source": "Outline OSM w4757710 (ODbL); roof = median of 115 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w10568050",
+      "kind": "building",
+      "name": "Oslo City (office)",
+      "top_m": 25.57,
+      "base_m": -3.36,
+      "_source": "Outline OSM w10568050 (ODbL); roof = median of 35 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w85472890",
+      "kind": "building",
+      "name": "office",
+      "top_m": 17.84,
+      "base_m": -2.24,
+      "_source": "Outline OSM w85472890 (ODbL); roof = median of 55 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w111284507",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 11.93,
+      "base_m": -1.17,
+      "_source": "Outline OSM w111284507 (ODbL); roof = median of 24 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w111308373",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 13.51,
+      "base_m": -1.28,
+      "_source": "Outline OSM w111308373 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w111308379",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 11.63,
+      "base_m": -1.46,
+      "_source": "Outline OSM w111308379 (ODbL); roof = median of 31 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112087254",
+      "kind": "building",
+      "name": "office",
+      "top_m": 14.89,
+      "base_m": 6.49,
+      "_source": "Outline OSM w112087254 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112089111",
+      "kind": "building",
+      "name": "office",
+      "top_m": 24.88,
+      "base_m": 8.54,
+      "_source": "Outline OSM w112089111 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112089123",
+      "kind": "building",
+      "name": "office",
+      "top_m": 17.55,
+      "base_m": 9.44,
+      "_source": "Outline OSM w112089123 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112089436",
+      "kind": "building",
+      "name": "office",
+      "top_m": 18.85,
+      "base_m": -2.18,
+      "_source": "Outline OSM w112089436 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112089439",
+      "kind": "building",
+      "name": "office",
+      "top_m": 18.39,
+      "base_m": -1.59,
+      "_source": "Outline OSM w112089439 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112195497",
+      "kind": "building",
+      "name": "office",
+      "top_m": 14.07,
+      "base_m": -1.38,
+      "_source": "Outline OSM w112195497 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112195502",
+      "kind": "building",
+      "name": "Tollboden (office)",
+      "top_m": 16.95,
+      "base_m": -3,
+      "_source": "Outline OSM w112195502 (ODbL); roof = median of 31 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112195503",
+      "kind": "building",
+      "name": "Stenpakkhuset (office)",
+      "top_m": 8.29,
+      "base_m": -2.29,
+      "_source": "Outline OSM w112195503 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112491968",
+      "kind": "building",
+      "name": "hotel",
+      "top_m": 19.42,
+      "base_m": -0.22,
+      "_source": "Outline OSM w112491968 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112491981",
+      "kind": "building",
+      "name": "office",
+      "top_m": 20.65,
+      "base_m": -1.17,
+      "_source": "Outline OSM w112491981 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112491996",
+      "kind": "building",
+      "name": "office",
+      "top_m": 20.38,
+      "base_m": -1.36,
+      "_source": "Outline OSM w112491996 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112495409",
+      "kind": "building",
+      "name": "hotel",
+      "top_m": 17.27,
+      "base_m": -1.68,
+      "_source": "Outline OSM w112495409 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112502904",
+      "kind": "building",
+      "name": "tower",
+      "top_m": 33.83,
+      "base_m": 0.62,
+      "_source": "Outline OSM w112502904 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112504966",
+      "kind": "building",
+      "name": "Bragegården (office)",
+      "top_m": 25.75,
+      "base_m": 5.54,
+      "_source": "Outline OSM w112504966 (ODbL); roof = median of 21 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112506360",
+      "kind": "building",
+      "name": "office",
+      "top_m": 8.77,
+      "base_m": 0.6,
+      "_source": "Outline OSM w112506360 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w112509668",
+      "kind": "building",
+      "name": "warehouse",
+      "top_m": 25.92,
+      "base_m": 6.48,
+      "_source": "Outline OSM w112509668 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w131419741",
+      "kind": "building",
+      "name": "Østbanehallen (station building)",
+      "top_m": 7.98,
+      "base_m": -2.46,
+      "_source": "Outline OSM w131419741 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w135175595",
+      "kind": "building",
+      "name": "KLP (commercial)",
+      "top_m": 33.44,
+      "base_m": -0.31,
+      "_source": "Outline OSM w135175595 (ODbL); roof = median of 28 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134984",
+      "kind": "building",
+      "name": "Byporten Shopping (retail)",
+      "top_m": 24.08,
+      "base_m": -0.42,
+      "_source": "Outline OSM w266134984 (ODbL); roof = median of 39 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134988",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.44,
+      "base_m": -2.1,
+      "_source": "Outline OSM w266134988 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134989",
+      "kind": "building",
+      "name": "building",
+      "top_m": 6.11,
+      "base_m": -2.08,
+      "_source": "Outline OSM w266134989 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134991",
+      "kind": "building",
+      "name": "building",
+      "top_m": 3.68,
+      "base_m": -2.09,
+      "_source": "Outline OSM w266134991 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134992",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.36,
+      "base_m": -2.32,
+      "_source": "Outline OSM w266134992 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w266134993",
+      "kind": "building",
+      "name": "building",
+      "top_m": 4.68,
+      "base_m": -2.05,
+      "_source": "Outline OSM w266134993 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w308634305",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.43,
+      "_source": "Outline OSM w308634305 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634307",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.56,
+      "_source": "Outline OSM w308634307 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634308",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.42,
+      "_source": "Outline OSM w308634308 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634309",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.25,
+      "_source": "Outline OSM w308634309 (ODbL); roof = median of 15 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634310",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.71,
+      "_source": "Outline OSM w308634310 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634311",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.81,
+      "_source": "Outline OSM w308634311 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634312",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.72,
+      "_source": "Outline OSM w308634312 (ODbL); roof = median of 11 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634313",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 2.62,
+      "_source": "Outline OSM w308634313 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634314",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.2,
+      "_source": "Outline OSM w308634314 (ODbL); roof = median of 13 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634315",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.52,
+      "_source": "Outline OSM w308634315 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w308634317",
+      "kind": "roof",
+      "name": "roof",
+      "top_m": 3.69,
+      "_source": "Outline OSM w308634317 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured"
+    },
+    {
+      "from": "w352083938",
+      "kind": "building",
+      "name": "Oslo Østbanestasjon (Oslo Ø) (station building)",
+      "top_m": 6.55,
+      "base_m": -2.22,
+      "_source": "Outline OSM w352083938 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w435653432",
+      "kind": "building",
+      "name": "Oslo bussterminal (building)",
+      "top_m": 5.29,
+      "base_m": -1.08,
+      "_source": "Outline OSM w435653432 (ODbL); roof = median of 12 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w468892289",
+      "kind": "bridge",
+      "name": "Akrobaten (bridge)",
+      "top_m": 8.24,
+      "base_m": 5.33,
+      "_source": "Outline OSM w468892289 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); top = the deck the laser saw (class 17, footbridge_decks.json), 8.24 m above the platform; underside drawn at the minimum clear height over an electrified railway, 5.9 m above the rail (TRVR Bro 11): a lower bound"
+    },
+    {
+      "from": "w617659009",
+      "kind": "building",
+      "name": "building",
+      "top_m": 30.68,
+      "base_m": -0.2,
+      "_source": "Outline OSM w617659009 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w669476271",
+      "kind": "building",
+      "name": "office",
+      "top_m": 3.68,
+      "base_m": -1.61,
+      "_source": "Outline OSM w669476271 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w669513094",
+      "kind": "building",
+      "name": "office",
+      "top_m": 22.51,
+      "base_m": 9.26,
+      "_source": "Outline OSM w669513094 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w669529743",
+      "kind": "building",
+      "name": "Glasmagasinet (retail)",
+      "top_m": 25.51,
+      "base_m": 6.01,
+      "_source": "Outline OSM w669529743 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w909071280",
+      "kind": "building",
+      "name": "roof",
+      "top_m": 5.81,
+      "base_m": -2.93,
+      "_source": "Outline OSM w909071280 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w909071284",
+      "kind": "building",
+      "name": "roof",
+      "top_m": 1.54,
+      "base_m": -1.45,
+      "_source": "Outline OSM w909071284 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w909140835",
+      "kind": "building",
+      "name": "building",
+      "top_m": 26.93,
+      "base_m": -0.42,
+      "_source": "Outline OSM w909140835 (ODbL); roof = median of 26 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w910115080",
+      "kind": "building",
+      "name": "building",
+      "top_m": 11.23,
+      "base_m": -3.01,
+      "_source": "Outline OSM w910115080 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1030902609",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 22.37,
+      "base_m": -1.06,
+      "_source": "Outline OSM w1030902609 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1030902610",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 20.37,
+      "base_m": -0.6,
+      "_source": "Outline OSM w1030902610 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1030903707",
+      "kind": "building",
+      "name": "industrial",
+      "top_m": 5.13,
+      "base_m": -1.01,
+      "_source": "Outline OSM w1030903707 (ODbL); roof = median of 6 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1030903710",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 4.3,
+      "base_m": -1.74,
+      "_source": "Outline OSM w1030903710 (ODbL); roof = median of 8 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1040907133",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.02,
+      "base_m": 0.9,
+      "_source": "Outline OSM w1040907133 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1040907134",
+      "kind": "building",
+      "name": "building",
+      "top_m": 26.26,
+      "base_m": 0.3,
+      "_source": "Outline OSM w1040907134 (ODbL); roof = median of 20 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1040907135",
+      "kind": "building",
+      "name": "building",
+      "top_m": 36.84,
+      "base_m": 0.67,
+      "_source": "Outline OSM w1040907135 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1040907170",
+      "kind": "building",
+      "name": "office",
+      "top_m": 25.61,
+      "base_m": 10.98,
+      "_source": "Outline OSM w1040907170 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1504440156",
+      "kind": "building",
+      "name": "building",
+      "top_m": 5.5,
+      "base_m": -1.82,
+      "_source": "Outline OSM w1504440156 (ODbL); roof = median of 29 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1504440157",
+      "kind": "building",
+      "name": "building",
+      "top_m": 18.8,
+      "base_m": -2.04,
+      "_source": "Outline OSM w1504440157 (ODbL); roof = median of 34 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1504440163",
+      "kind": "building",
+      "name": "building",
+      "top_m": 8.58,
+      "base_m": -1.01,
+      "_source": "Outline OSM w1504440163 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "w1504440164",
+      "kind": "building",
+      "name": "building",
+      "top_m": 15.61,
+      "base_m": -0.93,
+      "_source": "Outline OSM w1504440164 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r7008087",
+      "kind": "building",
+      "name": "apartments",
+      "top_m": 17.9,
+      "base_m": -0.7,
+      "_source": "Outline OSM r7008087 (ODbL); roof = median of 5 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r7076467",
+      "kind": "building",
+      "name": "Stortorvets Gjæstgiveri (commercial)",
+      "top_m": 16,
+      "base_m": 7.49,
+      "_source": "Outline OSM r7076467 (ODbL); roof = median of 17 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r8596225",
+      "kind": "building",
+      "name": "office",
+      "top_m": 8.6,
+      "base_m": -1.29,
+      "_source": "Outline OSM r8596225 (ODbL); roof = median of 7 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r8596226",
+      "kind": "building",
+      "name": "hotel",
+      "top_m": 17.61,
+      "base_m": -0.63,
+      "_source": "Outline OSM r8596226 (ODbL); roof = median of 22 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r8596230",
+      "kind": "building",
+      "name": "hotel",
+      "top_m": 20.33,
+      "base_m": -1.33,
+      "_source": "Outline OSM r8596230 (ODbL); roof = median of 9 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r9312412",
+      "kind": "building",
+      "name": "retail",
+      "top_m": 23.97,
+      "base_m": 6.22,
+      "_source": "Outline OSM r9312412 (ODbL); roof = median of 14 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r9312419",
+      "kind": "building",
+      "name": "Oslo postgård (civic)",
+      "top_m": 18.17,
+      "base_m": 0.3,
+      "_source": "Outline OSM r9312419 (ODbL); roof = median of 50 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "r9313003",
+      "kind": "building",
+      "name": "warehouse",
+      "top_m": 24.78,
+      "base_m": 6.42,
+      "_source": "Outline OSM r9313003 (ODbL); roof = median of 10 unclassified laser points >2 m above the terrain model inside the outline; Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14)"
+    },
+    {
+      "from": "#184",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.78,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#185",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.47,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#186",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.46,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#187",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.48,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#188",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.46,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#189",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.41,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#190",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.4,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#191",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.4,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#192",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.34,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    },
+    {
+      "from": "#193",
+      "kind": "roof",
+      "name": "roof over the platforms (traced from the laser)",
+      "top_m": 4.18,
+      "_source": "Outline traced from the laser alone (1 m cells holding unclassified points 2.4–14 m above the platform surface over the BanInfo platforms, outside OSM outlines, closed 3×3, simplified 0.7 m); Høydedata, project \"Oslo kommune tynnet laserskanning 2019\" (id 1175, FKB-Laser 3.0, nominal 0.5 points/m², supplier Terratec AS), © Kartverket, CC BY 4.0, exported from hoydedata.no as LAZ (EPSG:25832, NN2000) clipped to the station box; from data/stations/research/NO-OSL_S/oslo_s_structures_heights.geojson (metres above the platform surface, 4.27 m RH 2000, laser 2019-09-14); underside not measured",
+      "simplify_m": 2
+    }
+  ],
+  "terrain": {
+    "geotiff": "data/stations/research/NO-OSL_S/oslo_s_ground_1m.tif",
+    "crs": 25832,
+    "reference_m": 4.27,
+    "step_m": 5,
+    "_source": "ground from the laser's ground points, 1 m (data/stations/research/NO-OSL_S/oslo_s_ground_1m.tif), sampled every 5 m; Høydedata, © Kartverket, CC BY 4.0. Heights above the platform surface (4.27 m NN2000, laser 2019-09-14)"
+  },
+  "poi_hours": {},
+  "pois": [
+    {
+      "id": "resfa3321ea4e",
+      "category": "kiosk",
+      "name": "7-Eleven Hovedhallen",
+      "level": "2",
+      "x": -55,
+      "y": -8.9,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:30-01:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/7-eleven-hovedhallen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n5039385768 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res0bd7c50ef6",
+      "category": "restaurant",
+      "name": "Bella Bambina Ristorante",
+      "level": "0",
+      "x": -144.4,
+      "y": 24,
+      "fee": null,
+      "opening_hours": "Mo-Sa 12:00-21:00; Su 13:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/bella-bambina-ristorante/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed representative point of the OSM area w506513936 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true
+    },
+    {
+      "id": "res73b057ba02",
+      "category": "restaurant",
+      "name": "Döner Bros",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-24:00; Fr,Sa 11:00-01:00; Su 11:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/doner-bros/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "in the main hall"
+    },
+    {
+      "id": "resabaf9349ff",
+      "category": "cafe",
+      "name": "Espresso House Flytogterminalen",
+      "level": "0",
+      "x": -14.5,
+      "y": 82.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 04:30-23:00; Sa,Su 05:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/espresso-house-flytogterminalen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n7118275603 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res6c8bfe737c",
+      "category": "cafe",
+      "name": "Espresso House Hovedhallen",
+      "level": "1",
+      "x": -67.8,
+      "y": -14,
+      "fee": null,
+      "opening_hours": "Mo-Th 06:30-21:00; Fr 06:30-21:30; Sa,Su 07:30-21:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/espresso-house-hovedhallen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n7118275595 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res3adb44eda2",
+      "category": "restaurant",
+      "name": "KOK – Kjøkken og kaffe",
+      "level": "1",
+      "x": -35.6,
+      "y": 5.1,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-21:00; Sa 09:00-19:00; Su 10:00-19:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/kok-kjokken-og-kaffe/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n3132157590 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "rese0afdf1f44",
+      "category": "restaurant",
+      "name": "O'Learys",
+      "level": "1",
+      "x": -60.6,
+      "y": -8.6,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-24:00; Fr 11:00-01:00; Sa 12:00-01:00; Su 12:00-23:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/olearys/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n7118275596 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res16f06a9f1c",
+      "category": "restaurant",
+      "name": "Sentralpuben",
+      "level": "1",
+      "x": -45.6,
+      "y": -39.8,
+      "fee": null,
+      "opening_hours": "Mo-Su 14:30-24:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/sentralpuben/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n3132157594 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "rese64092e3f5",
+      "category": "cafe",
+      "name": "Starbucks",
+      "level": "1",
+      "x": -27.5,
+      "y": -32.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:30-21:00; Sa 07:30-21:00; Su 09:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/spisesteder/starbucks/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n3132098801 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9d9bea7fc5",
+      "category": "shop",
+      "name": "Ark (Ark Pocket / Ark Bokhandel)",
+      "level": "1",
+      "x": -16.8,
+      "y": 52.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-22:00; Sa 08:00-20:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/ark/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n7118275602 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res46c32288c7",
+      "category": "pharmacy",
+      "name": "Boots apotek",
+      "level": "2",
+      "x": -98.8,
+      "y": -51.2,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-21:00; Sa 09:00-18:00; Su off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/boots-apotek/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n3132099332 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res33dc2fab11",
+      "category": "atm",
+      "name": "FOREX Bank",
+      "level": "1",
+      "x": -71.2,
+      "y": 43.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-19:00; Su off",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/forex/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n7118275605 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res98cc4cd7b8",
+      "category": "shop",
+      "name": "Hertz (Hertz CarPool)",
+      "level": "1",
+      "x": -59.4,
+      "y": 35.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-23:00; Sa 07:00-18:00; Su 08:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/hertz-car-rental/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; placed OSM node n7118275604 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resa3e1693b97",
+      "category": "kiosk",
+      "name": "Narvesen Flytogterminalen",
+      "level": "1",
+      "x": -39.4,
+      "y": 62.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-23:30; Sa 07:00-22:00; Su 08:00-23:45",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/narvesen-flytogterminalen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed OSM node n6122924670 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res591bbab835",
+      "category": "kiosk",
+      "name": "Narvesen (Hovedhallen, 2 units)",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 05:00-21:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/butikker/narvesen/, read 2026-10-30; Oslo S magasinet 03/2026 (https://oslo-s.no/wp-content/uploads/sites/4/2026/08/OsloSmag_03_2026_web.pdf), p. 6 map legend 'Slik finner du frem hos oss', read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "'2 steder i Hovedhallen Plan 1 og i Flytogterminalen'"
+    },
+    {
+      "id": "resde9c2731cf",
+      "category": "ticket",
+      "name": "Entur billettsalg og informasjon",
+      "level": "1",
+      "x": -3.8,
+      "y": -0.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:30-20:00; Sa,Su 10:00-18:00",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30; placed OSM node n5039388941 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res4be2d54ce4",
+      "category": "ticket",
+      "name": "Entur ticket machines",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "in the station"
+    },
+    {
+      "id": "res5fb6209298",
+      "category": "ticket",
+      "name": "Flytoget ticket machines",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://oslo-s.no/praktisk-info/til-og-fra/, read 2026-10-30; https://oslo-s.no/praktisk-info/kjop-billett/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "at track 10 in the main hall, where Flytoget leaves for Oslo Lufthavn"
+    },
+    {
+      "id": "res176aa3a9e1",
+      "category": "toilet",
+      "name": "Toaletter og stellerom",
+      "level": "2",
+      "x": -52.5,
+      "y": 37.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://oslo-s.no/praktisk-info/toaletter-og-stellerom/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; Bane NOR station page (English) https://www.banenor.no/en/traffic-and-travel/railway-stations/-o-/oslo-central/, read 2026-10-30; placed OSM node n6550145908 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res83fe167c10",
+      "category": "locker",
+      "name": "Oppbevaringsbokser (Speed / Speedbox)",
+      "level": "1",
+      "x": -61.8,
+      "y": 23.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "https://oslo-s.no/praktisk-info/bagasjeoppbevaring/, read 2026-10-30; https://oslo-s.no/praktisk-info/hittegods/, read 2026-10-30; Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; placed OSM node n5039388949 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resce8c52c336",
+      "category": "waiting",
+      "name": "Venterom / stasjonshall",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 03:45-01:30",
+      "hours_source": "website",
+      "hours_verified": "2026-10-30",
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "the station hall"
+    },
+    {
+      "id": "resb4102cbd8a",
+      "category": "atm",
+      "name": "Minibanker",
+      "level": "1",
+      "x": 3.9,
+      "y": 20.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "Bane NOR station page https://www.banenor.no/reise-og-trafikk/stasjoner/-o-/oslo-s/, read 2026-10-30; OpenStreetMap (osmfacts extract NO-OSL_S), read 2026-10-30; placed at the middle of the station building the description names (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true,
+      "where": "'mange minibanker på stasjonen med både norsk og utenlandsk valuta'"
+    },
+    {
+      "id": "res9cce8d7fa8",
+      "category": "restaurant",
+      "name": "Svanen Cocktailbar",
+      "level": "1",
+      "x": -485.5,
+      "y": -153.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n288416026 (ODbL), read 2026-10-30; placed OSM node n288416026 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res87c5e384cb",
+      "category": "restaurant",
+      "name": "Egon Byporten",
+      "level": "1",
+      "x": -133.2,
+      "y": -96.1,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-23:00; Fr-Sa 11:00-23:30; Su 11:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n311268456 (ODbL), read 2026-10-30; placed OSM node n311268456 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res712284c0fa",
+      "category": "cafe",
+      "name": "Stockfleths",
+      "level": "0",
+      "x": -387.1,
+      "y": 55.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-18:00; Sa 10:00-17:00; PH closed",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n500193198 (ODbL), read 2026-10-30; placed OSM node n500193198 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res43f8a6cf2a",
+      "category": "restaurant",
+      "name": "Café Fiasco",
+      "level": "1",
+      "x": 104.9,
+      "y": -127.2,
+      "fee": null,
+      "opening_hours": "Mo-Th 11:00-24:00; Fr-Sa 11:00-02:00; Su 12:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1401891309 (ODbL), read 2026-10-30; placed OSM node n1401891309 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res87d1134d8b",
+      "category": "cafe",
+      "name": "Backstube",
+      "level": "-1",
+      "x": -25,
+      "y": -149.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-22:00; Sa 08:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1886462775 (ODbL), read 2026-10-30; placed OSM node n1886462775 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res262372ecb5",
+      "category": "shop",
+      "name": "Joker Plaza",
+      "level": "1",
+      "x": 88.7,
+      "y": -126,
+      "fee": null,
+      "opening_hours": "24/7",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n1886471289 (ODbL), read 2026-10-30; placed OSM node n1886471289 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res41534d7446",
+      "category": "cafe",
+      "name": "Orient Kaffehus",
+      "level": "1",
+      "x": -84.3,
+      "y": -364.2,
+      "fee": null,
+      "opening_hours": "Mo-Sa 08:00-23:00; Su 10:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n2725126143 (ODbL), read 2026-10-30; placed OSM node n2725126143 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res2cce1a5b72",
+      "category": "shop",
+      "name": "Scanasia Asian Supermarket",
+      "level": "1",
+      "x": -107.7,
+      "y": -350.4,
+      "fee": null,
+      "opening_hours": "10:00-19:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3373623956 (ODbL), read 2026-10-30; placed OSM node n3373623956 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res6cd4a72f71",
+      "category": "restaurant",
+      "name": "Beirut Kebab",
+      "level": "1",
+      "x": 423.4,
+      "y": -173.3,
+      "fee": null,
+      "opening_hours": "Mo-Th 10:00-01:00, Fr,Sa 10:00-04:00, Su 10:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3397094877 (ODbL), read 2026-10-30; placed OSM node n3397094877 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resdf6c892b91",
+      "category": "pharmacy",
+      "name": "Apotek 1 Grønland",
+      "level": "1",
+      "x": 435.9,
+      "y": -204.4,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-19:00, Sa 10:00-16:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3664306372 (ODbL), read 2026-10-30; placed OSM node n3664306372 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res45a9f84cfc",
+      "category": "restaurant",
+      "name": "Dovrehallen",
+      "level": "1",
+      "x": -108.9,
+      "y": -316.9,
+      "fee": null,
+      "opening_hours": "Mo-We 10:00-24:00; Th,Fr 00:00-01:30,10:00-24:00; Sa 00:00-03:30,10:00-24:00; Su 00:00-03:30,12:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3721223064 (ODbL), read 2026-10-30; placed OSM node n3721223064 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9b03ed609d",
+      "category": "shop",
+      "name": "Brilleland Grønland",
+      "level": "1",
+      "x": 378.8,
+      "y": -224.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-17:00; Th 09:00-18:00; Sa 10:00-15:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n3938654770 (ODbL), read 2026-10-30; placed OSM node n3938654770 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resd5bdf86d6a",
+      "category": "atm",
+      "name": "Tavex",
+      "level": "1",
+      "x": -212,
+      "y": -62.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4354447593 (ODbL), read 2026-10-30; placed OSM node n4354447593 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resa4a55a5bea",
+      "category": "restaurant",
+      "name": "TGI Fridays",
+      "level": "1",
+      "x": -171.5,
+      "y": -163.9,
+      "fee": null,
+      "opening_hours": "Mo,Tu 11:00-21:00, We,Th 11:00-22:00, Fr,Sa 11:00-23:00, Su 12:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4394334136 (ODbL), read 2026-10-30; placed OSM node n4394334136 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res863997b816",
+      "category": "shop",
+      "name": "Alle Tiders!",
+      "level": "1",
+      "x": -444.7,
+      "y": -152.1,
+      "fee": null,
+      "opening_hours": "Mo-Su 09:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4736654310 (ODbL), read 2026-10-30; placed OSM node n4736654310 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res3983f87416",
+      "category": "shop",
+      "name": "Vero Moda",
+      "level": "1",
+      "x": -460.5,
+      "y": -143.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4736654312 (ODbL), read 2026-10-30; placed OSM node n4736654312 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9cfecf54b2",
+      "category": "restaurant",
+      "name": "Den Glade Munk",
+      "level": "1",
+      "x": -94.8,
+      "y": -322.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n4743369019 (ODbL), read 2026-10-30; placed OSM node n4743369019 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res92d7dfe1ac",
+      "category": "kiosk",
+      "name": "Mix Oslo Bussterminal",
+      "level": "1",
+      "x": 291.4,
+      "y": -76.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-21:00; Sa 07:00-20:00; Su 07:00-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n4949050416 (ODbL), read 2026-10-30; placed OSM node n4949050416 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res1514fe5dd4",
+      "category": "shop",
+      "name": "Coop Prix Postgirobygget",
+      "level": "1",
+      "x": 31.8,
+      "y": -73.5,
+      "fee": null,
+      "opening_hours": "Mo-Fr 05:00-01:00, Sa 07:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5039385767 (ODbL), read 2026-10-30; placed OSM node n5039385767 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res4e51730f54",
+      "category": "restaurant",
+      "name": "BIT",
+      "level": "1",
+      "x": 210.9,
+      "y": -104.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n5235692723 (ODbL), read 2026-10-30; placed OSM node n5235692723 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resd6e76dd9f6",
+      "category": "atm",
+      "name": "DNB",
+      "level": "1",
+      "x": 318,
+      "y": -101,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n5303604722 (ODbL), read 2026-10-30; placed OSM node n5303604722 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res05ad67557e",
+      "category": "restaurant",
+      "name": "Mamma Pizza",
+      "level": "0",
+      "x": -369.9,
+      "y": 20.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 11:00-22:00; Sa,Su 12:00-22:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n5856905820 (ODbL), read 2026-10-30; placed OSM node n5856905820 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res93f81916b2",
+      "category": "shop",
+      "name": "Victoria's Secret",
+      "level": "1",
+      "x": -494.9,
+      "y": -161.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n5865823435 (ODbL), read 2026-10-30; placed OSM node n5865823435 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res8556cd9176",
+      "category": "shop",
+      "name": "Kiwi Byporten",
+      "level": "2",
+      "x": -49.9,
+      "y": -75.7,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-22:00, Sa 07:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n6055882864 (ODbL), read 2026-10-30; placed OSM node n6055882864 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res6d6a2922c4",
+      "category": "restaurant",
+      "name": "Pier 42",
+      "level": "1",
+      "x": -206.9,
+      "y": 33.1,
+      "fee": null,
+      "opening_hours": "Mo-Th 16:00-24:00, Fr 16:00-00:30, Sa 14:00-00:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n7118275587 (ODbL), read 2026-10-30; placed OSM node n7118275587 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res0ebb5f9878",
+      "category": "shop",
+      "name": "Tanum",
+      "level": "1",
+      "x": -35,
+      "y": -68.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n7118275589 (ODbL), read 2026-10-30; placed OSM node n7118275589 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res956db98f4f",
+      "category": "shop",
+      "name": "Kjell & Company",
+      "level": "2",
+      "x": -42.8,
+      "y": -71.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n7118275590 (ODbL), read 2026-10-30; placed OSM node n7118275590 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res909047ff9e",
+      "category": "shop",
+      "name": "Ark Pocket",
+      "level": "2",
+      "x": -58,
+      "y": -79.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n7118275592 (ODbL), read 2026-10-30; placed OSM node n7118275592 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res90dd27e21b",
+      "category": "restaurant",
+      "name": "Lett og God",
+      "level": "1",
+      "x": -82,
+      "y": -120.8,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n7904813107 (ODbL), read 2026-10-30; placed OSM node n7904813107 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "rese14a562be5",
+      "category": "shop",
+      "name": "Joker Oslo bussterminal",
+      "level": "1",
+      "x": 155.1,
+      "y": -111.8,
+      "fee": null,
+      "opening_hours": "Mo-Fr 06:00-24:00, Sa-Su 07:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9426334997 (ODbL), read 2026-10-30; placed OSM node n9426334997 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9396ff0fb5",
+      "category": "shop",
+      "name": "Rema 1000 Storgata",
+      "level": "1",
+      "x": -108.2,
+      "y": -311.1,
+      "fee": null,
+      "opening_hours": "Mo-Sa 07:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9608107580 (ODbL), read 2026-10-30; placed OSM node n9608107580 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resfd3c98683d",
+      "category": "restaurant",
+      "name": "Rent mel",
+      "level": "1",
+      "x": -352.9,
+      "y": 67.7,
+      "fee": null,
+      "opening_hours": "Tu-Sa 07:30-22:00; Su,Mo 07:30-21:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n9720937317 (ODbL), read 2026-10-30; placed OSM node n9720937317 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resd319c51612",
+      "category": "shop",
+      "name": "The Golden Frisør",
+      "level": "1",
+      "x": 433.8,
+      "y": -181.3,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n9804669059 (ODbL), read 2026-10-30; placed OSM node n9804669059 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res28a5e97371",
+      "category": "atm",
+      "name": "NBX Bitcoin ATM",
+      "level": "1",
+      "x": 208.3,
+      "y": -105.1,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10681396795 (ODbL), read 2026-10-30; placed OSM node n10681396795 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res379b09616e",
+      "category": "restaurant",
+      "name": "Masala politics",
+      "level": "1",
+      "x": -478.7,
+      "y": -158.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10858331890 (ODbL), read 2026-10-30; placed OSM node n10858331890 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res5545e18440",
+      "category": "shop",
+      "name": "Gullborgen",
+      "level": "1",
+      "x": -67,
+      "y": -341.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10911462667 (ODbL), read 2026-10-30; placed OSM node n10911462667 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resd07fdf271c",
+      "category": "kiosk",
+      "name": "7-Eleven Karl Johans gate",
+      "level": "1",
+      "x": -505.7,
+      "y": -163.7,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10947974230 (ODbL), read 2026-10-30; placed OSM node n10947974230 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res1d7cc95a18",
+      "category": "restaurant",
+      "name": "PARADIS Gelateria Karl Johans gate",
+      "level": "1",
+      "x": -481.7,
+      "y": -152.5,
+      "fee": null,
+      "opening_hours": "Mo-Su 11:00-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n10947974231 (ODbL), read 2026-10-30; placed OSM node n10947974231 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res2292c9ee7b",
+      "category": "restaurant",
+      "name": "Stortorvet Kebab",
+      "level": "1",
+      "x": -474.9,
+      "y": -165.5,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n10947974232 (ODbL), read 2026-10-30; placed OSM node n10947974232 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resba00731a24",
+      "category": "shop",
+      "name": "Livid",
+      "level": "1",
+      "x": -343.9,
+      "y": 48.7,
+      "fee": null,
+      "opening_hours": "Mo-Sa 10:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n11244164210 (ODbL), read 2026-10-30; placed OSM node n11244164210 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res4835eb9cc3",
+      "category": "restaurant",
+      "name": "Hub bar",
+      "level": "1",
+      "x": -220.1,
+      "y": -165.6,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12085970032 (ODbL), read 2026-10-30; placed OSM node n12085970032 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "rese25c4d8e94",
+      "category": "cafe",
+      "name": "Hakone Coffee",
+      "level": "1",
+      "x": -150.2,
+      "y": -320.3,
+      "fee": null,
+      "opening_hours": "Mo-Fr 07:00-20:00; Sa-Su 09:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12647510401 (ODbL), read 2026-10-30; placed OSM node n12647510401 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res6644365062",
+      "category": "restaurant",
+      "name": "The fox and loaf",
+      "level": "1",
+      "x": -145.9,
+      "y": -323.5,
+      "fee": null,
+      "opening_hours": "Tu-Sa 11:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12841457601 (ODbL), read 2026-10-30; placed OSM node n12841457601 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resdca196f222",
+      "category": "restaurant",
+      "name": "Himkok",
+      "level": "1",
+      "x": -109.7,
+      "y": -365.2,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n12967020097 (ODbL), read 2026-10-30; placed OSM node n12967020097 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res2d62e6fcd7",
+      "category": "restaurant",
+      "name": "Nils Bar & Cafe",
+      "level": "1",
+      "x": -375.1,
+      "y": 33.4,
+      "fee": null,
+      "opening_hours": "Mo-Su 13:00-03:30",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n12974818630 (ODbL), read 2026-10-30; placed OSM node n12974818630 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resb93adf80aa",
+      "category": "shop",
+      "name": "Clean Hair - Grooming studio",
+      "level": "1",
+      "x": -118.6,
+      "y": -87.6,
+      "fee": null,
+      "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-18:00; Su 12:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13003529501 (ODbL), read 2026-10-30; placed OSM node n13003529501 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res3f1bbfc658",
+      "category": "cafe",
+      "name": "Black Cat Kaffe og Tehus Byporten",
+      "level": "1",
+      "x": -34.2,
+      "y": -75.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13369757823 (ODbL), read 2026-10-30; placed OSM node n13369757823 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9de9b3fac6",
+      "category": "shop",
+      "name": "BikBok",
+      "level": "0",
+      "x": -65.4,
+      "y": -157.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n13469011558 (ODbL), read 2026-10-30; placed OSM node n13469011558 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res9aea96a056",
+      "category": "pharmacy",
+      "name": "Normal",
+      "level": "2",
+      "x": -100.2,
+      "y": -93.9,
+      "fee": null,
+      "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-20:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13682002840 (ODbL), read 2026-10-30; placed OSM node n13682002840 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res1925bd7cb9",
+      "category": "restaurant",
+      "name": "Chicago Pizza and Brew",
+      "level": "0",
+      "x": 116.2,
+      "y": -153.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 16:00-24:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13780303682 (ODbL), read 2026-10-30; placed OSM node n13780303682 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res07e539140c",
+      "category": "restaurant",
+      "name": "The Top",
+      "level": "1",
+      "x": 141.7,
+      "y": -153.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 17:30-23:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n13780303683 (ODbL), read 2026-10-30; placed OSM node n13780303683 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resb23be01943",
+      "category": "shop",
+      "name": "GRIT OSLO",
+      "level": "1",
+      "x": -354.4,
+      "y": 67,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n14132607194 (ODbL), read 2026-10-30; placed OSM node n14132607194 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resbb914af96c",
+      "category": "shop",
+      "name": "Floriss Byporten",
+      "level": "1",
+      "x": -105.5,
+      "y": -115.4,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n14132647987 (ODbL), read 2026-10-30; placed OSM node n14132647987 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res58c675e118",
+      "category": "restaurant",
+      "name": "Buddha Sportsbar",
+      "level": "1",
+      "x": -128.6,
+      "y": -336.7,
+      "fee": null,
+      "opening_hours": "Mo-Su 17:00-01:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap n14203397401 (ODbL), read 2026-10-30; placed OSM node n14203397401 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "res35959f4830",
+      "category": "shop",
+      "name": "Dezhin frisør",
+      "level": "1",
+      "x": -156.7,
+      "y": -335.9,
+      "fee": null,
+      "opening_hours": null,
+      "hours_source": null,
+      "hours_verified": null,
+      "_source": "OpenStreetMap n14279078225 (ODbL), read 2026-10-30; placed OSM node n14279078225 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)"
+    },
+    {
+      "id": "resda93707c4c",
+      "category": "shop",
+      "name": "Stortorvet blomster",
+      "level": "1",
+      "x": -481.1,
+      "y": -186.9,
+      "fee": null,
+      "opening_hours": "Mo-Sa 08:00-18:00",
+      "hours_source": "manual",
+      "hours_verified": "2026-10-30",
+      "_source": "OpenStreetMap w545738677 (ODbL), read 2026-10-30; placed representative point of the OSM area w545738677 (research pass 2026-10-30, data/stations/research/NO-OSL_S/station_facts.json)",
+      "approximate": true
+    }
+  ]
 }

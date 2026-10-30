@@ -21,10 +21,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.a
 def main():
     sid = sys.argv[1]
     dry = "--dry" in sys.argv
-    rdir = os.path.join(ROOT, f"data/stations/research/{sid}")
+    # --override: also renumber platforms OSM numbers with something else than their track (Tampere: 0807–0810).
+    override = "--override" in sys.argv
+    pack = sys.argv[sys.argv.index("--pack") + 1] if "--pack" in sys.argv else sid.replace(":", "_")
+    safe = sid.replace(":", "_")
+    rdir = os.path.join(ROOT, f"data/stations/research/{pack}")
     slug = json.load(open(os.path.join(rdir, "_report.json")))["slug"]
-    lines = json.load(open(os.path.join(rdir, f"{slug}_platform_trafikverket.geojson")))["features"]
-    osm = json.load(open(os.path.join(ROOT, f"data/cache/stations/{sid}-osm.json")))
+    # The register's platform lines: Trafikverket, Digitraffic (vayla) or Bane NOR, whichever the pack has.
+    lfile = next(f for f in (f"{slug}_platform_trafikverket.geojson", f"{slug}_platform_vayla.geojson", f"{slug}_platform_banenor.geojson", f"{slug}_platform_banedanmark.geojson") if os.path.exists(os.path.join(rdir, f)))
+    register_name = {"trafikverket": "Trafikverket BanInfo (CC0)", "vayla": "Digitraffic infra-api platforms (CC BY 4.0)", "banenor": "Bane NOR's track table", "banedanmark": "Banedanmark Open Data (CC BY 4.0)"}[lfile.rsplit("_", 1)[1].split(".")[0]]
+    lines = json.load(open(os.path.join(rdir, lfile)))["features"]
+    osm = json.load(open(os.path.join(ROOT, f"data/cache/stations/{safe}-osm.json")))
     ways = {**osm["ways"], **osm.get("relation_ways", {})}
     lat0 = sum(c[1] for f in lines for c in f["geometry"]["coordinates"]) / sum(len(f["geometry"]["coordinates"]) for f in lines)
     kx, ky = 111320 * math.cos(math.radians(lat0)), 110574
@@ -66,15 +73,17 @@ def main():
             side = (-dy, dx) if f["properties"]["side"] == "1" else (dy, -dx)
         track_lines.append((t, bis, pts, side))
 
-    register = [r for r in csv.DictReader(open(os.path.join(ROOT, "data/stations/research/trafikverket_platforms_SE.csv"))) if r["clack_id"] == sid]
-    epath = os.path.join(ROOT, f"scripts/stations/{sid}.edits.json")
+    csv_file = {"trafikverket": "trafikverket_platforms_SE.csv", "vayla": "vayla_platforms_FI.csv", "banenor": "banenor_platforms_NO.csv", "banedanmark": "banedanmark_platforms_DK.csv"}[lfile.rsplit("_", 1)[1].split(".")[0]]
+    pack_id = json.load(open(os.path.join(rdir, "_report.json"))).get("clack_id") or sid
+    register = [r for r in csv.DictReader(open(os.path.join(ROOT, "data/stations/research", csv_file))) if r["clack_id"] in (sid, pack_id, pack)]
+    epath = os.path.join(ROOT, f"scripts/stations/{safe}.edits.json")
     e = json.load(open(epath))
     refs = e.get("platform_refs", {})
     src = e.setdefault("platform_refs_source", {})
     out = []
     for wid, w in ways.items():
         t = w["t"]
-        if t.get("railway") != "platform" or t.get("ref") or str(wid) in refs:
+        if t.get("railway") != "platform" or (t.get("ref") and not override) or (str(wid) in refs and not override):
             continue
         poly = [xy(p[1], p[2]) for p in w["nd"]]
         if len(poly) < 3:
@@ -110,7 +119,7 @@ def main():
         nums = [int(t) for t in tracks]
         ref = tracks[0] if len(tracks) == 1 else (f"{tracks[0]}–{tracks[-1]}" if nums == list(range(nums[0], nums[-1] + 1)) else ", ".join(tracks))
         refs[str(wid)] = ref
-        src[str(wid)] = (f"Trafikverket BanInfo (CC0) platform objects BIS {', '.join(sorted(bis_all))} run alongside osm:way/{wid}; tracks {', '.join(tracks)} from the register (JNB 2027 Bilaga 2A) "
+        src[str(wid)] = (f"{register_name} platform objects {', '.join(sorted(bis_all))} run alongside osm:way/{wid}; tracks {', '.join(tracks)} from the register ({csv_file}) "
                          f"run alongside osm:way/{wid}, read 2026-10-30 (data/stations/research/{sid}); BanInfo's track numbers were being re-issued then: check on site")
         out.append(f"way {wid} → {ref}")
     if not dry:
